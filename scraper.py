@@ -319,8 +319,8 @@ class ZumiezScraper(Scraper):
                     logging.info(f"Deck {name}: {percent_off} off")
                     try:
                         percent_off_value = float(percent_off.strip("%"))
-                        if percent_off_value < 30:
-                            logging.info(f"Skipping deck with less than 30% off: {name} ({percent_off})")
+                        if percent_off_value < 10:
+                            logging.info(f"Skipping deck with less than 10% off: {name} ({percent_off})")
                             continue
                     except (ValueError, TypeError):
                         logging.info(f"Skipping deck with invalid % off: {name} ({percent_off})")
@@ -405,8 +405,8 @@ class SkateWarehouseScraper(Scraper):
                 logging.info(f"Deck {name}: {percent_off} off")
                 try:
                     percent_off_value = float(percent_off.strip("%"))
-                    if percent_off_value < 30:
-                        logging.info(f"Skipping deck with less than 30% off: {name} ({percent_off})")
+                    if percent_off_value < 10:
+                        logging.info(f"Skipping deck with less than 10% off: {name} ({percent_off})")
                         continue
                 except (ValueError, TypeError):
                     logging.info(f"Skipping deck with invalid % off: {name} ({percent_off})")
@@ -537,8 +537,8 @@ class CCSScraper(Scraper):
                     percent_off = calculate_percent_off(price_new, price_old)
                     try:
                         percent_off_value = float(percent_off.strip("%"))
-                        if percent_off_value < 30:
-                            logging.info(f"Skipping deck with less than 30% off: {name} ({percent_off})")
+                        if percent_off_value < 10:
+                            logging.info(f"Skipping deck with less than 10% off: {name} ({percent_off})")
                             continue
                     except (ValueError, TypeError):
                         continue
@@ -645,8 +645,8 @@ class TacticsScraper(Scraper):
                     percent_off = calculate_percent_off(price_new, price_old)
                     try:
                         percent_off_value = float(percent_off.strip("%"))
-                        if percent_off_value < 30:
-                            logging.info(f"Skipping deck with less than 30% off: {name} ({percent_off})")
+                        if percent_off_value < 10:
+                            logging.info(f"Skipping deck with less than 10% off: {name} ({percent_off})")
                             continue
                     except (ValueError, TypeError):
                         continue
