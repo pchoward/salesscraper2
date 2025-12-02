@@ -441,8 +441,8 @@ class CCSScraper(Scraper):
 
         save_debug_file(f"ccs_debug_{self.part.lower()}.html", html)
 
-        product_containers = soup.select(".product-grid__item, .product-card, .product-item, [data-product-card]")
-        logging.info(f"Found {len(product_containers)} product containers")
+        product_containers = soup.select(".product-item, [class*='product-item']")
+        logging.info(f"Found {len(product_containers)} CCS product containers")
 
         if len(product_containers) == 0:
             product_containers = soup.select("a[href*='/products/']")
@@ -465,7 +465,7 @@ class CCSScraper(Scraper):
                     continue
                 seen.add(href)
 
-                name_el = container.select_one(".product-card__title, .product-title, .product-card__name, h3, h2")
+                name_el = container.select_one(".product-item__title")
                 if name_el:
                     name = name_el.get_text(strip=True)
                 else:
@@ -501,14 +501,15 @@ class CCSScraper(Scraper):
                     if "bearing" not in name_lower and "bearing" not in href_lower:
                         continue
 
-                price_sale_el = container.select_one(".product-card__price--sale, .price--sale, .sale-price, [class*='sale']")
-                price_compare_el = container.select_one(".product-card__price--compare, .price--compare, .compare-at-price, [class*='compare']")
+                price_current_el = container.select_one(".product-item__price-current")
+                price_compare_el = container.select_one(".product-item__price-compare")
+                price_discount_el = container.select_one(".product-item__price-discount")
                 
                 price_new = None
                 price_old = None
                 
-                if price_sale_el:
-                    price_text = price_sale_el.get_text(strip=True)
+                if price_current_el:
+                    price_text = price_current_el.get_text(strip=True)
                     price_matches = re.findall(r"\$?(\d+\.?\d*)", price_text)
                     if price_matches:
                         price_new = price_matches[0]
@@ -520,12 +521,14 @@ class CCSScraper(Scraper):
                         price_old = compare_matches[0]
                 
                 if not price_new:
-                    all_text = container.get_text(strip=True)
-                    all_prices = re.findall(r"\$(\d+\.?\d*)", all_text)
-                    if all_prices:
-                        price_new = all_prices[0]
-                        if len(all_prices) > 1:
-                            price_old = all_prices[1]
+                    price_el = container.select_one(".product-item__price")
+                    if price_el:
+                        all_text = price_el.get_text(strip=True)
+                        all_prices = re.findall(r"\$(\d+\.?\d*)", all_text)
+                        if all_prices:
+                            price_new = all_prices[0]
+                            if len(all_prices) > 1:
+                                price_old = all_prices[1]
 
                 if not price_new:
                     continue
@@ -1300,7 +1303,9 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
                             <th>Type</th>
                             <th>Store</th>
                             <th>Product</th>
-                            <th>Details</th>
+                            <th>Sale Price</th>
+                            <th>Original</th>
+                            <th>Discount</th>
                             <th>Date</th>
                         </tr>
                     </thead>
@@ -1310,33 +1315,63 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
             for change in site_changes:
                 if change["type"] == "new":
                     item = change["item"]
+                    price_old_display = f"${item['price_old']}" if item.get('price_old') else "N/A"
+                    percent_off = calculate_percent_off(item.get("price_new"), item.get("price_old"))
+                    try:
+                        pct_value = float(percent_off.strip("%"))
+                        if pct_value >= 40:
+                            discount_class = "high"
+                        elif pct_value >= 25:
+                            discount_class = "medium"
+                        else:
+                            discount_class = "low"
+                    except:
+                        discount_class = "low"
                     html_content += f"""
                         <tr class="change-row new">
                             <td><span class="discount high">New</span></td>
                             <td>{item.get('store', site.split('_')[0])}</td>
                             <td class="product-name"><a href="{item['url']}" target="_blank">{item['name']}</a></td>
                             <td class="price price-new">${item['price_new']}</td>
+                            <td class="price price-old">{price_old_display}</td>
+                            <td><span class="discount {discount_class}">{percent_off}</span></td>
                             <td>{current_date}</td>
                         </tr>
 """
                 elif change["type"] == "price_change":
+                    percent_off = calculate_percent_off(change['new'], change['old'])
+                    try:
+                        pct_value = float(percent_off.strip("%"))
+                        if pct_value >= 40:
+                            discount_class = "high"
+                        elif pct_value >= 25:
+                            discount_class = "medium"
+                        else:
+                            discount_class = "low"
+                    except:
+                        discount_class = "low"
                     html_content += f"""
                         <tr class="change-row price-change">
                             <td><span class="discount medium">Price Drop</span></td>
                             <td>{site.split('_')[0]}</td>
                             <td class="product-name"><a href="{change['url']}" target="_blank">{change['name']}</a></td>
-                            <td><span class="price-old">${change['old']}</span> → <span class="price-new">${change['new']}</span></td>
+                            <td class="price price-new">${change['new']}</td>
+                            <td class="price price-old">${change['old']}</td>
+                            <td><span class="discount {discount_class}">{percent_off}</span></td>
                             <td>{current_date}</td>
                         </tr>
 """
                 elif change["type"] == "removed":
                     item = change["item"]
+                    price_old_display = f"${item['price_old']}" if item.get('price_old') else "N/A"
                     html_content += f"""
                         <tr class="change-row removed">
                             <td><span class="discount low">Removed</span></td>
                             <td>{item.get('store', site.split('_')[0])}</td>
                             <td class="product-name">{item['name']}</td>
-                            <td>No longer on sale</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">{price_old_display}</td>
+                            <td>-</td>
                             <td>{current_date}</td>
                         </tr>
 """
