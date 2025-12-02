@@ -425,18 +425,23 @@
     <div class="container">
         <header>
             <h1>Skateboard Sale Tracker</h1>
-            <p>Last updated: 2025-12-02 20:45:24</p>
+            <p>Last updated: 2025-12-02 21:19:12</p>
         </header>
 
         <div class="stats-grid">
 
             <div class="stat-card">
-                <div class="number">114</div>
+                <div class="number">148</div>
                 <div class="label">Total Deals</div>
             </div>
 
             <div class="stat-card">
-                <div class="number">5</div>
+                <div class="number">17</div>
+                <div class="label">CCS</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="number">14</div>
                 <div class="label">SkateWarehouse</div>
             </div>
 
@@ -446,7 +451,7 @@
             </div>
 
             <div class="stat-card">
-                <div class="number">11</div>
+                <div class="number">19</div>
                 <div class="label">Zumiez</div>
             </div>
 
@@ -458,6 +463,8 @@
             </div>
             <div class="filter-group" id="storeFilters">
                 <button class="filter-btn active" data-store="all" onclick="filterByStore('all')">All Stores</button>
+
+                <button class="filter-btn" data-store="ccs" onclick="filterByStore('CCS')">CCS</button>
 
                 <button class="filter-btn" data-store="skatewarehouse" onclick="filterByStore('SkateWarehouse')">SkateWarehouse</button>
 
@@ -482,7 +489,7 @@
 
         <div class="section">
             <div class="section-header" onclick="toggleSection(this)">
-                <h2>All Deals <span class="badge">114</span></h2>
+                <h2>All Deals <span class="badge">148</span></h2>
                 <span class="toggle-icon">▼</span>
             </div>
             <div class="section-content">
@@ -498,6 +505,15 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        <tr data-store="Zumiez" data-part="Decks">
+                            <td><span class="store-badge store-zumiez">Zumiez</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/real-classic-oval-8-5-skateboard-deck.html" target="_blank" rel="noopener">Real Classic Oval 8.5" Skateboard Deck</a></td>
+                            <td class="price price-new">$59.99</td>
+                            <td class="price price-old">$74.95</td>
+                            <td><span class="discount low">20%</span></td>
+                        </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
@@ -520,10 +536,28 @@
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/girl-pacheco-modernica-twin-8-5-skateboard-deck.html" target="_blank" rel="noopener">Girl Pacheco Modernica Twin 8.5" Skateboard Deck</a></td>
+                            <td class="price price-new">$64.99</td>
+                            <td class="price price-old">$82.95</td>
+                            <td><span class="discount low">22%</span></td>
+                        </tr>
+
+                        <tr data-store="Zumiez" data-part="Decks">
+                            <td><span class="store-badge store-zumiez">Zumiez</span></td>
+                            <td><span class="part-badge">Decks</span></td>
                             <td class="product-name"><a href="https://www.zumiez.com/anti-hero-anderson-some-legs-8-5-skateboard-deck.html" target="_blank" rel="noopener">Anti-Hero Anderson Some Legs 8.5 Skateboard Deck</a></td>
                             <td class="price price-new">$51.99</td>
                             <td class="price price-old">$78.95</td>
                             <td><span class="discount medium">34%</span></td>
+                        </tr>
+
+                        <tr data-store="Zumiez" data-part="Decks">
+                            <td><span class="store-badge store-zumiez">Zumiez</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/pizza-homies-forever-8-5-skateboard-deck.html" target="_blank" rel="noopener">Pizza x Homies Forever 8.5" Skateboard Deck</a></td>
+                            <td class="price price-new">$54.99</td>
+                            <td class="price price-old">$65.95</td>
+                            <td><span class="discount low">17%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
@@ -538,10 +572,46 @@
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/girl-pacheco-modernica-8-375-skateboard-deck.html" target="_blank" rel="noopener">Girl Pacheco Modernica 8.375" Skateboard Deck</a></td>
+                            <td class="price price-new">$64.99</td>
+                            <td class="price price-old">$82.95</td>
+                            <td><span class="discount low">22%</span></td>
+                        </tr>
+
+                        <tr data-store="Zumiez" data-part="Decks">
+                            <td><span class="store-badge store-zumiez">Zumiez</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/girl-davis-the-suzuki-method-8-125-skateboard-deck.html" target="_blank" rel="noopener">Girl Davis The Suzuki Method 8.125" Skateboard Deck</a></td>
+                            <td class="price price-new">$64.99</td>
+                            <td class="price price-old">$82.95</td>
+                            <td><span class="discount low">22%</span></td>
+                        </tr>
+
+                        <tr data-store="Zumiez" data-part="Decks">
+                            <td><span class="store-badge store-zumiez">Zumiez</span></td>
+                            <td><span class="part-badge">Decks</span></td>
                             <td class="product-name"><a href="https://www.zumiez.com/lzmfg-pursuit-of-perfection-8-25-skateboard-deck.html" target="_blank" rel="noopener">LZMFG Pursuit Of Perfection 8.25" Skateboard Deck</a></td>
                             <td class="price price-new">$39.99</td>
                             <td class="price price-old">$64.95</td>
                             <td><span class="discount medium">38%</span></td>
+                        </tr>
+
+                        <tr data-store="Zumiez" data-part="Decks">
+                            <td><span class="store-badge store-zumiez">Zumiez</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/girl-malto-suzuki-7-75-skateboard-deck.html" target="_blank" rel="noopener">Girl Malto Suzuki 7.75" Skateboard Deck</a></td>
+                            <td class="price price-new">$59.99</td>
+                            <td class="price price-old">$74.95</td>
+                            <td><span class="discount low">20%</span></td>
+                        </tr>
+
+                        <tr data-store="Zumiez" data-part="Decks">
+                            <td><span class="store-badge store-zumiez">Zumiez</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/jart-stay-high-no-smoking-8-125-skateboard-deck.html" target="_blank" rel="noopener">Jart Stay High No Smoking 8.125" Skateboard Deck</a></td>
+                            <td class="price price-new">$49.99</td>
+                            <td class="price price-old">$59.95</td>
+                            <td><span class="discount low">17%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
@@ -574,6 +644,15 @@
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/sk8mafia-surrey-great-white-buffalo-8-25-skateboard-deck.html" target="_blank" rel="noopener">Sk8mafia Surrey Great White Buffalo 8.25" Skateboard Deck</a></td>
+                            <td class="price price-new">$49.99</td>
+                            <td class="price price-old">$64.95</td>
+                            <td><span class="discount low">23%</span></td>
+                        </tr>
+
+                        <tr data-store="Zumiez" data-part="Decks">
+                            <td><span class="store-badge store-zumiez">Zumiez</span></td>
+                            <td><span class="part-badge">Decks</span></td>
                             <td class="product-name"><a href="https://www.zumiez.com/poeticcollective-flames-8-25-skateboard-deck.html" target="_blank" rel="noopener">POETICCOLLECTIVE Flames 8.25" Skateboard Deck</a></td>
                             <td class="price price-new">$49.99</td>
                             <td class="price price-old">$72.95</td>
@@ -596,6 +675,105 @@
                             <td class="price price-new">$49.99</td>
                             <td class="price price-old">$71.95</td>
                             <td><span class="discount medium">31%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/King_Nak_Free_Pops_Deck/descpage-KGNFPDK.html
+" target="_blank" rel="noopener">Clearance -17%King Nak Free Pops Deck 8.18 x 31.732</a></td>
+                            <td class="price price-new">$64.98</td>
+                            <td class="price price-old">$78.99</td>
+                            <td><span class="discount low">18%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Real_Nicole_Viking_Deck/descpage-RLNHVKDK.html
+" target="_blank" rel="noopener">Clearance -18%Real Nicole Viking Deck 8.38 x 32.25</a></td>
+                            <td class="price price-new">$64.98</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">19%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Real_Wilkins_Astronaut_Deck/descpage-RLJWANDK.html
+" target="_blank" rel="noopener">Clearance -15%Real Wilkins Astronaut Deck 8.5 x 32.18</a></td>
+                            <td class="price price-new">$67.98</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Arrival_Deck/descpage-WCHPARDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Arrival Deck 9.5 x 32.4</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Dementor_Deck/descpage-WCHPDMDK.html
+" target="_blank" rel="noopener">Clearance -15%Welcome x Harry Potter Dementor Deck 10.125 x 30.25</a></td>
+                            <td class="price price-new">$79.98</td>
+                            <td class="price price-old">$94.99</td>
+                            <td><span class="discount low">16%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Finale_Deck/descpage-WCHPFNDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Finale Deck 9.5 x 33</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Seeker_Deck/descpage-WCHPSKDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Seeker Deck 8.75 x 32.25</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Thestral_Deck/descpage-WCHPTHDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Thestral Deck 10 x 31</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Voldemort_Deck/descpage-WCHPVMDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Voldemort Deck 9.75 x 31.75</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
                         </tr>
 
                         <tr data-store="SkateWarehouse" data-part="Wheels">
@@ -651,6 +829,159 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                             <td class="price price-new">$29.98</td>
                             <td class="price price-old">$35.00</td>
                             <td><span class="discount low">14%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-aaron-herrington-cowboy-cop-skateboard-deck-8-625" target="_blank" rel="noopener">Aaron Herrington Cowboy Cop Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-aaron-herrington-cowboy-cop-skateboard-deck-8-25" target="_blank" rel="noopener">Aaron Herrington Cowboy Cop Skateboard Deck</a></td>
+                            <td class="price price-new">$65.45</td>
+                            <td class="price price-old">$77.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-paul-grund-kid-in-japan-on-a-p9-skateboard-deck-8-625" target="_blank" rel="noopener">Paul Grund Kid In Japan On A P9 Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/real-mason-by-marbie-skateboard-deck-yellow-8-50" target="_blank" rel="noopener">Mason By Marbie Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/welcome-x-bauhaus-mask-on-an-early-grab-skateboard-deck-black-dip-10-00" target="_blank" rel="noopener">Welcome x Bauhaus Mask On An Early Grab Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/color-bars-x-harry-potter-boy-who-lived-skateboard-deck-black-holo-foil-8-25" target="_blank" rel="noopener">Color Bars x Harry Potter Boy Who Lived Skateboard Deck</a></td>
+                            <td class="price price-new">$71.40</td>
+                            <td class="price price-old">$84.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/foundation-f-3d-skateboard-deck-8-38" target="_blank" rel="noopener">F 3D Skateboard Deck</a></td>
+                            <td class="price price-new">$62.90</td>
+                            <td class="price price-old">$74.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/color-bars-x-harry-potter-boy-who-lived-skateboard-deck-black-silver-foil-8-50" target="_blank" rel="noopener">Color Bars x Harry Potter Boy Who Lived Skateboard Deck</a></td>
+                            <td class="price price-new">$71.40</td>
+                            <td class="price price-old">$84.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/frog-comic-book-frankieer-skateboard-deck-8-25" target="_blank" rel="noopener">Comic Book Frankieer Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/hoddle-simon-zuzic-screen-protector-skateboard-deck-8-25" target="_blank" rel="noopener">Simon Zuzic Screen Protector Skateboard Deck</a></td>
+                            <td class="price price-new">$64.60</td>
+                            <td class="price price-old">$76.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/welcome-x-bauhaus-portrait-on-a-dark-lord-skateboard-deck-bone-9-85" target="_blank" rel="noopener">Welcome x Bauhaus Portrait On A Dark Lord Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/there-james-pretty-skateboard-deck-black-8-38" target="_blank" rel="noopener">James Pretty Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/theories-lovett-its-happening-skateboard-deck-8-25" target="_blank" rel="noopener">Lovett It's Happening Skateboard Deck</a></td>
+                            <td class="price price-new">$67.15</td>
+                            <td class="price price-old">$79.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/rout-flash-cruiser-skateboard-deck" target="_blank" rel="noopener">Rout Flash Cruiser Skateboard Deck</a></td>
+                            <td class="price price-new">$23.95</td>
+                            <td class="price price-old">$31.95</td>
+                            <td><span class="discount medium">25%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/daddies-trip-on-this-cruiser-skateboard-deck" target="_blank" rel="noopener">Daddies Trip On This Cruiser Skateboard Deck</a></td>
+                            <td class="price price-new">$22.95</td>
+                            <td class="price price-old">$29.95</td>
+                            <td><span class="discount low">23%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/there-chandler-starlight-skateboard-deck-8-50" target="_blank" rel="noopener">Chandler Starlight Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/passport-patch-skateboard-deck-josh-8-125" target="_blank" rel="noopener">Patch Skateboard Deck</a></td>
+                            <td class="price price-new">$62.90</td>
+                            <td class="price price-old">$74.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
                         <tr data-store="Tactics" data-part="Wheels">
@@ -1533,6 +1864,389 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                             <td class="price price-new">$99.95</td>
                             <td class="price price-old">$111.06</td>
                             <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section changes-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Recent Changes <span class="badge">34</span></h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <table id="changesTable">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Store</th>
+                            <th>Product</th>
+                            <th>Sale Price</th>
+                            <th>Original</th>
+                            <th>Discount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/real-classic-oval-8-5-skateboard-deck.html" target="_blank">Real Classic Oval 8.5" Skateboard Deck</a></td>
+                            <td class="price price-new">$59.99</td>
+                            <td class="price price-old">$74.95</td>
+                            <td><span class="discount low">20%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/girl-pacheco-modernica-twin-8-5-skateboard-deck.html" target="_blank">Girl Pacheco Modernica Twin 8.5" Skateboard Deck</a></td>
+                            <td class="price price-new">$64.99</td>
+                            <td class="price price-old">$82.95</td>
+                            <td><span class="discount low">22%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/pizza-homies-forever-8-5-skateboard-deck.html" target="_blank">Pizza x Homies Forever 8.5" Skateboard Deck</a></td>
+                            <td class="price price-new">$54.99</td>
+                            <td class="price price-old">$65.95</td>
+                            <td><span class="discount low">17%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/girl-pacheco-modernica-8-375-skateboard-deck.html" target="_blank">Girl Pacheco Modernica 8.375" Skateboard Deck</a></td>
+                            <td class="price price-new">$64.99</td>
+                            <td class="price price-old">$82.95</td>
+                            <td><span class="discount low">22%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/girl-davis-the-suzuki-method-8-125-skateboard-deck.html" target="_blank">Girl Davis The Suzuki Method 8.125" Skateboard Deck</a></td>
+                            <td class="price price-new">$64.99</td>
+                            <td class="price price-old">$82.95</td>
+                            <td><span class="discount low">22%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/girl-malto-suzuki-7-75-skateboard-deck.html" target="_blank">Girl Malto Suzuki 7.75" Skateboard Deck</a></td>
+                            <td class="price price-new">$59.99</td>
+                            <td class="price price-old">$74.95</td>
+                            <td><span class="discount low">20%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/jart-stay-high-no-smoking-8-125-skateboard-deck.html" target="_blank">Jart Stay High No Smoking 8.125" Skateboard Deck</a></td>
+                            <td class="price price-new">$49.99</td>
+                            <td class="price price-old">$59.95</td>
+                            <td><span class="discount low">17%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/sk8mafia-surrey-great-white-buffalo-8-25-skateboard-deck.html" target="_blank">Sk8mafia Surrey Great White Buffalo 8.25" Skateboard Deck</a></td>
+                            <td class="price price-new">$49.99</td>
+                            <td class="price price-old">$64.95</td>
+                            <td><span class="discount low">23%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/King_Nak_Free_Pops_Deck/descpage-KGNFPDK.html
+" target="_blank">Clearance -17%King Nak Free Pops Deck 8.18 x 31.732</a></td>
+                            <td class="price price-new">$64.98</td>
+                            <td class="price price-old">$78.99</td>
+                            <td><span class="discount low">18%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Real_Nicole_Viking_Deck/descpage-RLNHVKDK.html
+" target="_blank">Clearance -18%Real Nicole Viking Deck 8.38 x 32.25</a></td>
+                            <td class="price price-new">$64.98</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">19%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Real_Wilkins_Astronaut_Deck/descpage-RLJWANDK.html
+" target="_blank">Clearance -15%Real Wilkins Astronaut Deck 8.5 x 32.18</a></td>
+                            <td class="price price-new">$67.98</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Arrival_Deck/descpage-WCHPARDK.html
+" target="_blank">Clearance -16%Welcome x Harry Potter Arrival Deck 9.5 x 32.4</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Dementor_Deck/descpage-WCHPDMDK.html
+" target="_blank">Clearance -15%Welcome x Harry Potter Dementor Deck 10.125 x 30.25</a></td>
+                            <td class="price price-new">$79.98</td>
+                            <td class="price price-old">$94.99</td>
+                            <td><span class="discount low">16%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Finale_Deck/descpage-WCHPFNDK.html
+" target="_blank">Clearance -16%Welcome x Harry Potter Finale Deck 9.5 x 33</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Seeker_Deck/descpage-WCHPSKDK.html
+" target="_blank">Clearance -16%Welcome x Harry Potter Seeker Deck 8.75 x 32.25</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Thestral_Deck/descpage-WCHPTHDK.html
+" target="_blank">Clearance -16%Welcome x Harry Potter Thestral Deck 10 x 31</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>SkateWarehouse</td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Voldemort_Deck/descpage-WCHPVMDK.html
+" target="_blank">Clearance -16%Welcome x Harry Potter Voldemort Deck 9.75 x 31.75</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-aaron-herrington-cowboy-cop-skateboard-deck-8-625" target="_blank">Aaron Herrington Cowboy Cop Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-aaron-herrington-cowboy-cop-skateboard-deck-8-25" target="_blank">Aaron Herrington Cowboy Cop Skateboard Deck</a></td>
+                            <td class="price price-new">$65.45</td>
+                            <td class="price price-old">$77.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-paul-grund-kid-in-japan-on-a-p9-skateboard-deck-8-625" target="_blank">Paul Grund Kid In Japan On A P9 Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/real-mason-by-marbie-skateboard-deck-yellow-8-50" target="_blank">Mason By Marbie Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/welcome-x-bauhaus-mask-on-an-early-grab-skateboard-deck-black-dip-10-00" target="_blank">Welcome x Bauhaus Mask On An Early Grab Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/color-bars-x-harry-potter-boy-who-lived-skateboard-deck-black-holo-foil-8-25" target="_blank">Color Bars x Harry Potter Boy Who Lived Skateboard Deck</a></td>
+                            <td class="price price-new">$71.40</td>
+                            <td class="price price-old">$84.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/foundation-f-3d-skateboard-deck-8-38" target="_blank">F 3D Skateboard Deck</a></td>
+                            <td class="price price-new">$62.90</td>
+                            <td class="price price-old">$74.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/color-bars-x-harry-potter-boy-who-lived-skateboard-deck-black-silver-foil-8-50" target="_blank">Color Bars x Harry Potter Boy Who Lived Skateboard Deck</a></td>
+                            <td class="price price-new">$71.40</td>
+                            <td class="price price-old">$84.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/frog-comic-book-frankieer-skateboard-deck-8-25" target="_blank">Comic Book Frankieer Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/hoddle-simon-zuzic-screen-protector-skateboard-deck-8-25" target="_blank">Simon Zuzic Screen Protector Skateboard Deck</a></td>
+                            <td class="price price-new">$64.60</td>
+                            <td class="price price-old">$76.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/welcome-x-bauhaus-portrait-on-a-dark-lord-skateboard-deck-bone-9-85" target="_blank">Welcome x Bauhaus Portrait On A Dark Lord Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/there-james-pretty-skateboard-deck-black-8-38" target="_blank">James Pretty Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/theories-lovett-its-happening-skateboard-deck-8-25" target="_blank">Lovett It's Happening Skateboard Deck</a></td>
+                            <td class="price price-new">$67.15</td>
+                            <td class="price price-old">$79.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/rout-flash-cruiser-skateboard-deck" target="_blank">Rout Flash Cruiser Skateboard Deck</a></td>
+                            <td class="price price-new">$23.95</td>
+                            <td class="price price-old">$31.95</td>
+                            <td><span class="discount medium">25%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/daddies-trip-on-this-cruiser-skateboard-deck" target="_blank">Daddies Trip On This Cruiser Skateboard Deck</a></td>
+                            <td class="price price-new">$22.95</td>
+                            <td class="price price-old">$29.95</td>
+                            <td><span class="discount low">23%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/there-chandler-starlight-skateboard-deck-8-50" target="_blank">Chandler Starlight Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>CCS</td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/passport-patch-skateboard-deck-josh-8-125" target="_blank">Patch Skateboard Deck</a></td>
+                            <td class="price price-new">$62.90</td>
+                            <td class="price price-old">$74.00</td>
+                            <td><span class="discount low">15%</span></td>
+                            <td>2025-12-02</td>
                         </tr>
 
                     </tbody>
