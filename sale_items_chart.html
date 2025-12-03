@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skateboard Sale Tracker | 2025-12-02</title>
+    <title>Skateboard Sale Tracker | 2025-12-03</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -425,23 +425,28 @@
     <div class="container">
         <header>
             <h1>Skateboard Sale Tracker</h1>
-            <p>Last updated: 2025-12-02 20:45:24</p>
+            <p>Last updated: 2025-12-03 08:41:43</p>
         </header>
 
         <div class="stats-grid">
 
             <div class="stat-card">
-                <div class="number">114</div>
+                <div class="number">124</div>
                 <div class="label">Total Deals</div>
             </div>
 
             <div class="stat-card">
-                <div class="number">5</div>
+                <div class="number">17</div>
+                <div class="label">CCS</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="number">14</div>
                 <div class="label">SkateWarehouse</div>
             </div>
 
             <div class="stat-card">
-                <div class="number">98</div>
+                <div class="number">82</div>
                 <div class="label">Tactics</div>
             </div>
 
@@ -458,6 +463,8 @@
             </div>
             <div class="filter-group" id="storeFilters">
                 <button class="filter-btn active" data-store="all" onclick="filterByStore('all')">All Stores</button>
+
+                <button class="filter-btn" data-store="ccs" onclick="filterByStore('CCS')">CCS</button>
 
                 <button class="filter-btn" data-store="skatewarehouse" onclick="filterByStore('SkateWarehouse')">SkateWarehouse</button>
 
@@ -482,7 +489,7 @@
 
         <div class="section">
             <div class="section-header" onclick="toggleSection(this)">
-                <h2>All Deals <span class="badge">114</span></h2>
+                <h2>All Deals <span class="badge">124</span></h2>
                 <span class="toggle-icon">▼</span>
             </div>
             <div class="section-content">
@@ -502,100 +509,199 @@
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/welcome-x-beetlejuice-showtime-8-5-skateboard-deck.html" target="_blank" rel="noopener">Welcome x Beetlejuice Showtime 8.5" Skateboard Deck</a></td>
-                            <td class="price price-new">$51.99</td>
-                            <td class="price price-old">$84.95</td>
-                            <td><span class="discount medium">39%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-samba-adv-white-grey-and-green-skate-shoes.html" target="_blank" rel="noopener">adidas Samba ADV White, Grey, & Green Skate Shoes</a></td>
+                            <td class="price price-new">$49.96</td>
+                            <td class="price price-old">$99.95</td>
+                            <td><span class="discount high">50%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/welcome-x-beetlejuice-lydia-9-6-skateboard-deck.html" target="_blank" rel="noopener">Welcome x Beetlejuice Lydia 9.6" Skateboard Deck</a></td>
-                            <td class="price price-new">$54.99</td>
-                            <td class="price price-old">$84.95</td>
-                            <td><span class="discount medium">35%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-samba-adv-bluebird-white-and-gum-skate-shoes.html" target="_blank" rel="noopener">adidas Samba ADV Bluebird, White & Gum Skate Shoes</a></td>
+                            <td class="price price-new">$49.96</td>
+                            <td class="price price-old">$99.95</td>
+                            <td><span class="discount high">50%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/anti-hero-anderson-some-legs-8-5-skateboard-deck.html" target="_blank" rel="noopener">Anti-Hero Anderson Some Legs 8.5 Skateboard Deck</a></td>
-                            <td class="price price-new">$51.99</td>
-                            <td class="price price-old">$78.95</td>
-                            <td><span class="discount medium">34%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-originals-campus-00s-off-white-and-white-shoes.html" target="_blank" rel="noopener">adidas Originals Campus 00s Off-White & White Shoes</a></td>
+                            <td class="price price-new">$54.96</td>
+                            <td class="price price-old">$109.95</td>
+                            <td><span class="discount high">50%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/monet-skateboards-skullew-8-25-skateboard-deck.html" target="_blank" rel="noopener">Monet Skateboards Skullew 8.25" Skateboard Deck</a></td>
-                            <td class="price price-new">$39.99</td>
-                            <td class="price price-old">$59.95</td>
-                            <td><span class="discount medium">33%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-gazelle-adv-pink-black-and-gum-skate-shoes.html" target="_blank" rel="noopener">adidas Gazelle ADV Pink, Black, & Gum Skate Shoes</a></td>
+                            <td class="price price-new">$49.96</td>
+                            <td class="price price-old">$99.95</td>
+                            <td><span class="discount high">50%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/lzmfg-pursuit-of-perfection-8-25-skateboard-deck.html" target="_blank" rel="noopener">LZMFG Pursuit Of Perfection 8.25" Skateboard Deck</a></td>
-                            <td class="price price-new">$39.99</td>
-                            <td class="price price-old">$64.95</td>
-                            <td><span class="discount medium">38%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-originals-campus-00s-crystal-white-and-core-black-skate-shoes.html" target="_blank" rel="noopener">adidas Originals Campus 00s Crystal White & Core Black Skate Shoes</a></td>
+                            <td class="price price-new">$69.96</td>
+                            <td class="price price-old">$109.95</td>
+                            <td><span class="discount medium">36%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/theories-power-of-the-mind-8-0-skateboard-deck.html" target="_blank" rel="noopener">Theories Power Of The Mind 8.0" Skateboard Deck</a></td>
-                            <td class="price price-new">$49.99</td>
-                            <td class="price price-old">$73.95</td>
-                            <td><span class="discount medium">32%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-originals-campus-00s-wonder-quartz-and-wonder-mauve-skate-shoes.html" target="_blank" rel="noopener">adidas Originals Campus 00s Wonder Quartz & Wonder Mauve Skate Shoes</a></td>
+                            <td class="price price-new">$69.96</td>
+                            <td class="price price-old">$109.95</td>
+                            <td><span class="discount medium">36%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/primitive-x-wwe-hamilton-hitman-8-125-skateboard-deck.html" target="_blank" rel="noopener">Primitive x WWE Hamilton Hitman 8.125" Skateboard Deck</a></td>
-                            <td class="price price-new">$49.99</td>
-                            <td class="price price-old">$74.95</td>
-                            <td><span class="discount medium">33%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/ninth-hall-global-camo-t-shirt.html" target="_blank" rel="noopener">Ninth Hall Global Camo T-Shirt</a></td>
+                            <td class="price price-new">$29.99</td>
+                            <td class="price price-old">$37.95</td>
+                            <td><span class="discount low">21%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/wknd-look-out-8-0-skateboard-deck.html" target="_blank" rel="noopener">WKND Look Out 8.0" Skateboard Deck</a></td>
-                            <td class="price price-new">$49.99</td>
-                            <td class="price price-old">$71.95</td>
-                            <td><span class="discount medium">31%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/osiris-d3-og-white-red-grey-skate-shoes-d3.html" target="_blank" rel="noopener">Osiris D3 OG White, Red & Grey Skate Shoes D3</a></td>
+                            <td class="price price-new">$46.96</td>
+                            <td class="price price-old">$93.95</td>
+                            <td><span class="discount high">50%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/poeticcollective-flames-8-25-skateboard-deck.html" target="_blank" rel="noopener">POETICCOLLECTIVE Flames 8.25" Skateboard Deck</a></td>
-                            <td class="price price-new">$49.99</td>
-                            <td class="price price-old">$72.95</td>
-                            <td><span class="discount medium">31%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/skullcandy-crusher-evo-matte-black-headphones.html" target="_blank" rel="noopener">Skullcandy Crusher Evo Matte Black Headphones</a></td>
+                            <td class="price price-new">$109.96</td>
+                            <td class="price price-old">$209.95</td>
+                            <td><span class="discount high">48%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/wknd-maalouf-fire-in-the-pipe-8-0-skateboard-deck.html" target="_blank" rel="noopener">WKND Maalouf Fire In The Pipe 8.0" Skateboard Deck</a></td>
-                            <td class="price price-new">$49.99</td>
-                            <td class="price price-old">$71.95</td>
-                            <td><span class="discount medium">31%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/skullcandy-crusher-540-active-soft-pink-headphones.html" target="_blank" rel="noopener">Skullcandy Crusher 540 Active Soft Pink Headphones</a></td>
+                            <td class="price price-new">$109.96</td>
+                            <td class="price price-old">$209.95</td>
+                            <td><span class="discount high">48%</span></td>
                         </tr>
 
                         <tr data-store="Zumiez" data-part="Decks">
                             <td><span class="store-badge store-zumiez">Zumiez</span></td>
                             <td><span class="part-badge">Decks</span></td>
-                            <td class="product-name"><a href="https://www.zumiez.com/wknd-taylor-cake-boss-8-0-skateboard-deck.html" target="_blank" rel="noopener">WKND Taylor Cake Boss 8.0" Skateboard Deck</a></td>
-                            <td class="price price-new">$49.99</td>
-                            <td class="price price-old">$71.95</td>
-                            <td><span class="discount medium">31%</span></td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-originals-campus-00s-wonder-beige-and-white-skate-shoes.html" target="_blank" rel="noopener">adidas Originals Campus 00s Wonder Beige & White Skate Shoes</a></td>
+                            <td class="price price-new">$44.96</td>
+                            <td class="price price-old">$89.95</td>
+                            <td><span class="discount high">50%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/King_Nak_Free_Pops_Deck/descpage-KGNFPDK.html
+" target="_blank" rel="noopener">Clearance -17%King Nak Free Pops Deck 8.18 x 31.732</a></td>
+                            <td class="price price-new">$64.98</td>
+                            <td class="price price-old">$78.99</td>
+                            <td><span class="discount low">18%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Real_Nicole_Viking_Deck/descpage-RLNHVKDK.html
+" target="_blank" rel="noopener">Clearance -18%Real Nicole Viking Deck 8.38 x 32.25</a></td>
+                            <td class="price price-new">$64.98</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">19%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Real_Wilkins_Astronaut_Deck/descpage-RLJWANDK.html
+" target="_blank" rel="noopener">Clearance -15%Real Wilkins Astronaut Deck 8.5 x 32.18</a></td>
+                            <td class="price price-new">$67.98</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Arrival_Deck/descpage-WCHPARDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Arrival Deck 9.5 x 32.4</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Dementor_Deck/descpage-WCHPDMDK.html
+" target="_blank" rel="noopener">Clearance -15%Welcome x Harry Potter Dementor Deck 10.125 x 30.25</a></td>
+                            <td class="price price-new">$79.98</td>
+                            <td class="price price-old">$94.99</td>
+                            <td><span class="discount low">16%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Finale_Deck/descpage-WCHPFNDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Finale Deck 9.5 x 33</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Seeker_Deck/descpage-WCHPSKDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Seeker Deck 8.75 x 32.25</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Thestral_Deck/descpage-WCHPTHDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Thestral Deck 10 x 31</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
+                        </tr>
+
+                        <tr data-store="SkateWarehouse" data-part="Decks">
+                            <td><span class="store-badge store-skatewarehouse">SkateWarehouse</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="
+https://www.skatewarehouse.com/Welcome_x_Harry_Potter_Voldemort_Deck/descpage-WCHPVMDK.html
+" target="_blank" rel="noopener">Clearance -16%Welcome x Harry Potter Voldemort Deck 9.75 x 31.75</a></td>
+                            <td class="price price-new">$74.98</td>
+                            <td class="price price-old">$89.99</td>
+                            <td><span class="discount low">17%</span></td>
                         </tr>
 
                         <tr data-store="SkateWarehouse" data-part="Wheels">
@@ -653,156 +759,165 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                             <td><span class="discount low">14%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/powell-peralta/snakes-cruiser-skateboard-wheels/purple-75a" target="_blank" rel="noopener">Powell Peralta Snakes Cruiser Skateboard Wheels - purple (75a)</a></td>
-                            <td class="price price-new">$67.95</td>
-                            <td class="price price-old">$75.5</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-aaron-herrington-cowboy-cop-skateboard-deck-8-625" target="_blank" rel="noopener">Aaron Herrington Cowboy Cop Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/oj/plain-jane-keyframe-cruiser-skateboard-wheels/white-orange-87a" target="_blank" rel="noopener">OJ Plain Jane Keyframe Cruiser Skateboard Wheels - white/orange (87a)</a></td>
-                            <td class="price price-new">$42.95</td>
-                            <td class="price price-old">$47.72</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-aaron-herrington-cowboy-cop-skateboard-deck-8-25" target="_blank" rel="noopener">Aaron Herrington Cowboy Cop Skateboard Deck</a></td>
+                            <td class="price price-new">$65.45</td>
+                            <td class="price price-old">$77.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/spitfire/formula-four-conical-full-skateboard-wheels/natural-teal-97d" target="_blank" rel="noopener">Spitfire Formula Four Conical Full Skateboard Wheels - natural/teal (97d)</a></td>
-                            <td class="price price-new">$48.95</td>
-                            <td class="price price-old">$54.39</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/polar-paul-grund-kid-in-japan-on-a-p9-skateboard-deck-8-625" target="_blank" rel="noopener">Paul Grund Kid In Japan On A P9 Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bones/x-formula-v7-double-lock-skateboard-wheels/gold-chain-99a" target="_blank" rel="noopener">Bones X-Formula V7 Double Lock Skateboard Wheels - gold chain (99a)</a></td>
-                            <td class="price price-new">$49.95</td>
-                            <td class="price price-old">$55.5</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/real-mason-by-marbie-skateboard-deck-yellow-8-50" target="_blank" rel="noopener">Mason By Marbie Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/powell-peralta/nano-cubic-dragon-formula-skateboard-wheels/off-white-54-97a" target="_blank" rel="noopener">Powell Peralta Nano Cubic Dragon Formula Skateboard Wheels - off white 54 (97a)</a></td>
-                            <td class="price price-new">$49.95</td>
-                            <td class="price price-old">$55.5</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/welcome-x-bauhaus-mask-on-an-early-grab-skateboard-deck-black-dip-10-00" target="_blank" rel="noopener">Welcome x Bauhaus Mask On An Early Grab Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/spitfire/formula-four-tablets-skateboard-wheels/natural-99d" target="_blank" rel="noopener">Spitfire Formula Four Tablets Skateboard Wheels - natural (99d)</a></td>
-                            <td class="price price-new">$48.95</td>
-                            <td class="price price-old">$54.39</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/color-bars-x-harry-potter-boy-who-lived-skateboard-deck-black-holo-foil-8-25" target="_blank" rel="noopener">Color Bars x Harry Potter Boy Who Lived Skateboard Deck</a></td>
+                            <td class="price price-new">$71.40</td>
+                            <td class="price price-old">$84.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bones/x-formula-v5-sidecut-skateboard-wheels/white-orange-95a" target="_blank" rel="noopener">Bones X-Formula V5 Sidecut Skateboard Wheels - white/orange (95a)</a></td>
-                            <td class="price price-new">$49.95</td>
-                            <td class="price price-old">$55.5</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/foundation-f-3d-skateboard-deck-8-38" target="_blank" rel="noopener">F 3D Skateboard Deck</a></td>
+                            <td class="price price-new">$62.90</td>
+                            <td class="price price-old">$74.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/oj/super-juice-cruiser-skateboard-wheels/cru-zen-78a" target="_blank" rel="noopener">OJ Super Juice Cruiser Skateboard Wheels - cru-zen (78a)</a></td>
-                            <td class="price price-new">$44.95</td>
-                            <td class="price price-old">$49.94</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/color-bars-x-harry-potter-boy-who-lived-skateboard-deck-black-silver-foil-8-50" target="_blank" rel="noopener">Color Bars x Harry Potter Boy Who Lived Skateboard Deck</a></td>
+                            <td class="price price-new">$71.40</td>
+                            <td class="price price-old">$84.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/powell-peralta/andy-anderson-nano-cubic-dragon-formula-skateboard-wheels/off-white-97a" target="_blank" rel="noopener">Powell Peralta Andy Anderson Nano Cubic Dragon Formula Skateboard Wheels - off white (97a)</a></td>
-                            <td class="price price-new">$47.95</td>
-                            <td class="price price-old">$53.28</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/frog-comic-book-frankieer-skateboard-deck-8-25" target="_blank" rel="noopener">Comic Book Frankieer Skateboard Deck</a></td>
+                            <td class="price price-new">$68.00</td>
+                            <td class="price price-old">$80.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/spitfire/formula-four-og-classic-skateboard-wheels/white-blue-99d" target="_blank" rel="noopener">Spitfire Formula Four OG Classic Skateboard Wheels - white/blue (99d)</a></td>
-                            <td class="price price-new">$48.95</td>
-                            <td class="price price-old">$54.39</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/hoddle-simon-zuzic-screen-protector-skateboard-deck-8-25" target="_blank" rel="noopener">Simon Zuzic Screen Protector Skateboard Deck</a></td>
+                            <td class="price price-new">$64.60</td>
+                            <td class="price price-old">$76.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/oj/screaming-hand-original-chubbies-skateboard-wheels/black-101a" target="_blank" rel="noopener">OJ Screaming Hand Original Chubbies Skateboard Wheels - black (101a)</a></td>
-                            <td class="price price-new">$45.95</td>
-                            <td class="price price-old">$51.06</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/welcome-x-bauhaus-portrait-on-a-dark-lord-skateboard-deck-bone-9-85" target="_blank" rel="noopener">Welcome x Bauhaus Portrait On A Dark Lord Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bones/100s-og-formula-v4-wide-skateboard-wheels/black-yellow-100a" target="_blank" rel="noopener">Bones 100's OG Formula V4 Wide Skateboard Wheels - black/yellow (100a)</a></td>
-                            <td class="price price-new">$31.95</td>
-                            <td class="price price-old">$35.5</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/there-james-pretty-skateboard-deck-black-8-38" target="_blank" rel="noopener">James Pretty Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/powell-peralta/dragon-formula-v6-skateboard-wheels/off-white-93a" target="_blank" rel="noopener">Powell Peralta Dragon Formula V6 Skateboard Wheels - off white (93a)</a></td>
-                            <td class="price price-new">$49.95</td>
-                            <td class="price price-old">$55.5</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/theories-lovett-its-happening-skateboard-deck-8-25" target="_blank" rel="noopener">Lovett It's Happening Skateboard Deck</a></td>
+                            <td class="price price-new">$67.15</td>
+                            <td class="price price-old">$79.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/spitfire/bighead-skateboard-wheels/white-royal-blue-51-99d" target="_blank" rel="noopener">Spitfire Bighead Skateboard Wheels - white/royal blue 51 (99d)</a></td>
-                            <td class="price price-new">$40.95</td>
-                            <td class="price price-old">$45.5</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/rout-flash-cruiser-skateboard-deck" target="_blank" rel="noopener">Rout Flash Cruiser Skateboard Deck</a></td>
+                            <td class="price price-new">$23.95</td>
+                            <td class="price price-old">$31.95</td>
+                            <td><span class="discount medium">25%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/oj/double-duro-hardline-skateboard-wheels/white-gum-99a-95a" target="_blank" rel="noopener">OJ Double Duro Hardline Skateboard Wheels - white/gum (99a/95a)</a></td>
-                            <td class="price price-new">$64.95</td>
-                            <td class="price price-old">$72.17</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/daddies-trip-on-this-cruiser-skateboard-deck" target="_blank" rel="noopener">Daddies Trip On This Cruiser Skateboard Deck</a></td>
+                            <td class="price price-new">$22.95</td>
+                            <td class="price price-old">$29.95</td>
+                            <td><span class="discount low">23%</span></td>
                         </tr>
 
-                        <tr data-store="Tactics" data-part="Wheels">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Wheels</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bones/100s-og-formula-v5-sidecut-skateboard-wheels/white-yellow-100a" target="_blank" rel="noopener">Bones 100's OG Formula V5 Sidecut Skateboard Wheels - white/yellow (100a)</a></td>
-                            <td class="price price-new">$31.95</td>
-                            <td class="price price-old">$35.5</td>
-                            <td><span class="discount low">10%</span></td>
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/there-chandler-starlight-skateboard-deck-8-50" target="_blank" rel="noopener">Chandler Starlight Skateboard Deck</a></td>
+                            <td class="price price-new">$72.25</td>
+                            <td class="price price-old">$85.00</td>
+                            <td><span class="discount low">15%</span></td>
+                        </tr>
+
+                        <tr data-store="CCS" data-part="Decks">
+                            <td><span class="store-badge store-ccs">CCS</span></td>
+                            <td><span class="part-badge">Decks</span></td>
+                            <td class="product-name"><a href="https://shop.ccs.com/collections/clearance/products/passport-patch-skateboard-deck-josh-8-125" target="_blank" rel="noopener">Patch Skateboard Deck</a></td>
+                            <td class="price price-new">$62.90</td>
+                            <td class="price price-old">$74.00</td>
+                            <td><span class="discount low">15%</span></td>
                         </tr>
 
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-144" target="_blank" rel="noopener">Independent Silver Stage 11 Skateboard Trucks - silver 144</a></td>
-                            <td class="price price-new">$57.95</td>
-                            <td class="price price-old">$64.39</td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-215-wide" target="_blank" rel="noopener">Independent Silver Stage 11 Skateboard Trucks - silver 215 wide</a></td>
+                            <td class="price price-new">$67.95</td>
+                            <td class="price price-old">$75.5</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -818,16 +933,7 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-inverted-hollow-skateboard-trucks/polished-silver-55" target="_blank" rel="noopener">Ace AF-1 Inverted Hollow Skateboard Trucks - polished silver 55</a></td>
-                            <td class="price price-new">$89.95</td>
-                            <td class="price price-old">$99.94</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/venture/polished-skateboard-trucks/polished-56-hi" target="_blank" rel="noopener">Venture Polished Skateboard Trucks - polished (5.6 hi)</a></td>
+                            <td class="product-name"><a href="https://www.tactics.com/venture/v8-polished-skateboard-trucks/polished-56" target="_blank" rel="noopener">Venture V8 Polished Skateboard Trucks - polished (5.6)</a></td>
                             <td class="price price-new">$46.95</td>
                             <td class="price price-old">$52.17</td>
                             <td><span class="discount low">10%</span></td>
@@ -836,27 +942,18 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-215-wide" target="_blank" rel="noopener">Independent Silver Stage 11 Skateboard Trucks - silver 215 wide</a></td>
-                            <td class="price price-new">$67.95</td>
-                            <td class="price price-old">$75.5</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bullet/standard-skate-trucks/silver-130mm" target="_blank" rel="noopener">Bullet Standard Skate Trucks - silver 130mm</a></td>
-                            <td class="price price-new">$26.95</td>
-                            <td class="price price-old">$29.94</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/classic-skateboard-trucks/polished-silver-44" target="_blank" rel="noopener">Ace Classic Skateboard Trucks - polished silver 44</a></td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/classic-skateboard-trucks/polished-silver-55" target="_blank" rel="noopener">Ace Classic Skateboard Trucks - polished silver 55</a></td>
                             <td class="price price-new">$49.95</td>
                             <td class="price price-old">$55.5</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-149" target="_blank" rel="noopener">Independent Silver Stage 11 Skateboard Trucks - silver 149</a></td>
+                            <td class="price price-new">$59.95</td>
+                            <td class="price price-old">$66.61</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -899,9 +996,27 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-hollow-skateboard-trucks/polished-silver-44" target="_blank" rel="noopener">Ace AF-1 Hollow Skateboard Trucks - polished silver 44</a></td>
+                            <td class="price price-new">$69.95</td>
+                            <td class="price price-old">$77.72</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
                             <td class="product-name"><a href="https://www.tactics.com/slappy/curb-killer-st1-inverted-skateboard-trucks/black-100" target="_blank" rel="noopener">Slappy Curb Killer ST1 Inverted Skateboard Trucks - black 10.0</a></td>
                             <td class="price price-new">$69.95</td>
                             <td class="price price-old">$77.72</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-titanium-stage-11-skateboard-trucks/silver-144" target="_blank" rel="noopener">Independent Forged Titanium Stage 11 Skateboard Trucks - silver 144</a></td>
+                            <td class="price price-new">$103.95</td>
+                            <td class="price price-old">$115.5</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -917,43 +1032,16 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-low-hollow-kingpin-skateboard-trucks/polished-silver-33" target="_blank" rel="noopener">Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 33</a></td>
-                            <td class="price price-new">$67.95</td>
-                            <td class="price price-old">$75.5</td>
+                            <td class="product-name"><a href="https://www.tactics.com/venture/polished-skateboard-trucks/polished-50-hi" target="_blank" rel="noopener">Venture Polished Skateboard Trucks - polished (5.0 hi)</a></td>
+                            <td class="price price-new">$41.95</td>
+                            <td class="price price-old">$46.61</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/venture/polished-skateboard-trucks/polished-52-lo" target="_blank" rel="noopener">Venture Polished Skateboard Trucks - polished (5.2 lo)</a></td>
-                            <td class="price price-new">$46.95</td>
-                            <td class="price price-old">$52.17</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/venture/v8-polished-skateboard-trucks/polished-56" target="_blank" rel="noopener">Venture V8 Polished Skateboard Trucks - polished (5.6)</a></td>
-                            <td class="price price-new">$46.95</td>
-                            <td class="price price-old">$52.17</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/thunder/polished-inverted-skateboard-trucks/polished-148" target="_blank" rel="noopener">Thunder Polished Inverted Skateboard Trucks - polished (148)</a></td>
-                            <td class="price price-new">$52.95</td>
-                            <td class="price price-old">$58.83</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bullet/standard-skate-trucks/silver-120mm" target="_blank" rel="noopener">Bullet Standard Skate Trucks - silver 120mm</a></td>
+                            <td class="product-name"><a href="https://www.tactics.com/bullet/standard-skate-trucks/silver-130mm" target="_blank" rel="noopener">Bullet Standard Skate Trucks - silver 130mm</a></td>
                             <td class="price price-new">$26.95</td>
                             <td class="price price-old">$29.94</td>
                             <td><span class="discount low">10%</span></td>
@@ -962,27 +1050,27 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-149" target="_blank" rel="noopener">Independent Silver Stage 11 Skateboard Trucks - silver 149</a></td>
-                            <td class="price price-new">$59.95</td>
-                            <td class="price price-old">$66.61</td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/polished-skateboard-trucks/polished-147" target="_blank" rel="noopener">Thunder Polished Skateboard Trucks - polished (147)</a></td>
+                            <td class="price price-new">$47.95</td>
+                            <td class="price price-old">$53.28</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/deedz-af-1-hollow-ltd-skateboard-trucks/black-60" target="_blank" rel="noopener">Ace Deedz AF-1 Hollow LTD Skateboard Trucks - black 60</a></td>
-                            <td class="price price-new">$76.95</td>
-                            <td class="price price-old">$85.5</td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-hollow-stage-11-skateboard-trucks/silver-149" target="_blank" rel="noopener">Independent Forged Hollow Stage 11 Skateboard Trucks - silver 149</a></td>
+                            <td class="price price-new">$75.95</td>
+                            <td class="price price-old">$84.39</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-titanium-stage-11-skateboard-trucks/silver-149" target="_blank" rel="noopener">Independent Forged Titanium Stage 11 Skateboard Trucks - silver 149</a></td>
-                            <td class="price price-new">$103.95</td>
-                            <td class="price price-old">$115.5</td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-skateboard-trucks/polished-silver-33" target="_blank" rel="noopener">Ace AF-1 Skateboard Trucks - polished silver 33</a></td>
+                            <td class="price price-new">$65.95</td>
+                            <td class="price price-old">$73.28</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -992,15 +1080,6 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                             <td class="product-name"><a href="https://www.tactics.com/krux/standard-k5-skateboard-trucks/polished-silver-90" target="_blank" rel="noopener">Krux Standard K5 Skateboard Trucks - polished silver 9.0</a></td>
                             <td class="price price-new">$47.95</td>
                             <td class="price price-old">$53.28</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/thunder/hollow-lights-skateboard-trucks/polished-hollow-lights-ii-147" target="_blank" rel="noopener">Thunder Hollow Lights Skateboard Trucks - polished hollow lights ii (147)</a></td>
-                            <td class="price price-new">$65.95</td>
-                            <td class="price price-old">$73.28</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1025,117 +1104,9 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/thunder/polished-skateboard-trucks/polished-161" target="_blank" rel="noopener">Thunder Polished Skateboard Trucks - polished (161)</a></td>
-                            <td class="price price-new">$47.95</td>
-                            <td class="price price-old">$53.28</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/krux/dlk-k5-skateboard-trucks/rainbow-2" target="_blank" rel="noopener">Krux DLK K5 Skateboard Trucks - rainbow 2</a></td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/polished-inverted-skateboard-trucks/polished-149" target="_blank" rel="noopener">Thunder Polished Inverted Skateboard Trucks - polished (149)</a></td>
                             <td class="price price-new">$52.95</td>
                             <td class="price price-old">$58.83</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/mini-logo/minilogo-713-skateboard-trucks/raw" target="_blank" rel="noopener">Mini Logo MiniLogo 7.13</a></td>
-                            <td class="price price-new">$32.95</td>
-                            <td class="price price-old">$36.61</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-159" target="_blank" rel="noopener">Independent Silver Stage 11 Skateboard Trucks - silver 159</a></td>
-                            <td class="price price-new">$59.95</td>
-                            <td class="price price-old">$66.61</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-low-hollow-kingpin-skateboard-trucks/polished-silver-55" target="_blank" rel="noopener">Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 55</a></td>
-                            <td class="price price-new">$67.95</td>
-                            <td class="price price-old">$75.5</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-titanium-stage-11-skateboard-trucks/silver-169" target="_blank" rel="noopener">Independent Forged Titanium Stage 11 Skateboard Trucks - silver 169</a></td>
-                            <td class="price price-new">$105.95</td>
-                            <td class="price price-old">$117.72</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/passport-af-1-hollow-skateboard-trucks/hammertone-44" target="_blank" rel="noopener">Ace Passport AF-1 Hollow Skateboard Trucks - hammertone 44</a></td>
-                            <td class="price price-new">$75.95</td>
-                            <td class="price price-old">$84.39</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/venture/polished-skateboard-trucks/polished-50-hi" target="_blank" rel="noopener">Venture Polished Skateboard Trucks - polished (5.0 hi)</a></td>
-                            <td class="price price-new">$41.95</td>
-                            <td class="price price-old">$46.61</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/thunder/tyshawn-endgame-pro-skateboard-trucks/black-gold" target="_blank" rel="noopener">Thunder Tyshawn Endgame Pro Skateboard Trucks - black/gold</a></td>
-                            <td class="price price-new">$55.95</td>
-                            <td class="price price-old">$62.17</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/krux/dlk-k5-skateboard-trucks/grind-out-racism" target="_blank" rel="noopener">Krux DLK K5 Skateboard Trucks - grind out racism</a></td>
-                            <td class="price price-new">$49.95</td>
-                            <td class="price price-old">$55.5</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bullet/standard-skate-trucks/black-130mm" target="_blank" rel="noopener">Bullet Standard Skate Trucks - black 130mm</a></td>
-                            <td class="price price-new">$28.95</td>
-                            <td class="price price-old">$32.17</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-hollow-stage-11-skateboard-trucks/silver-149" target="_blank" rel="noopener">Independent Forged Hollow Stage 11 Skateboard Trucks - silver 149</a></td>
-                            <td class="price price-new">$75.95</td>
-                            <td class="price price-old">$84.39</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/classic-skateboard-trucks/polished-silver-55" target="_blank" rel="noopener">Ace Classic Skateboard Trucks - polished silver 55</a></td>
-                            <td class="price price-new">$49.95</td>
-                            <td class="price price-old">$55.5</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1151,36 +1122,72 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-titanium-stage-11-skateboard-trucks/silver-144" target="_blank" rel="noopener">Independent Forged Titanium Stage 11 Skateboard Trucks - silver 144</a></td>
-                            <td class="price price-new">$103.95</td>
-                            <td class="price price-old">$115.5</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/thunder/polished-t-ii-skateboard-trucks/polished-149" target="_blank" rel="noopener">Thunder Polished T-II Skateboard Trucks - polished (149)</a></td>
-                            <td class="price price-new">$52.95</td>
-                            <td class="price price-old">$58.83</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/thunder/hollow-lights-skateboard-trucks/polished-hollow-lights-ii-151" target="_blank" rel="noopener">Thunder Hollow Lights Skateboard Trucks - polished hollow lights ii (151)</a></td>
-                            <td class="price price-new">$65.95</td>
-                            <td class="price price-old">$73.28</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Trucks">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-skateboard-trucks/gold-33" target="_blank" rel="noopener">Ace AF-1 Skateboard Trucks - gold 33</a></td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-low-hollow-kingpin-skateboard-trucks/polished-silver-60" target="_blank" rel="noopener">Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 60</a></td>
                             <td class="price price-new">$67.95</td>
                             <td class="price price-old">$75.5</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/mini-logo/minilogo-713-skateboard-trucks/raw" target="_blank" rel="noopener">Mini Logo MiniLogo 7.13</a></td>
+                            <td class="price price-new">$32.95</td>
+                            <td class="price price-old">$36.61</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/bullet/standard-skate-trucks/silver-120mm" target="_blank" rel="noopener">Bullet Standard Skate Trucks - silver 120mm</a></td>
+                            <td class="price price-new">$26.95</td>
+                            <td class="price price-old">$29.94</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-hollow-stage-11-skateboard-trucks/silver-144" target="_blank" rel="noopener">Independent Forged Hollow Stage 11 Skateboard Trucks - silver 144</a></td>
+                            <td class="price price-new">$75.95</td>
+                            <td class="price price-old">$84.39</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/krux/dlk-k5-skateboard-trucks/grind-out-racism" target="_blank" rel="noopener">Krux DLK K5 Skateboard Trucks - grind out racism</a></td>
+                            <td class="price price-new">$49.95</td>
+                            <td class="price price-old">$55.5</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/meurle-emulsion-pro-hollow-lights-skateboard-trucks/polished-black" target="_blank" rel="noopener">Thunder Meurle Emulsion Pro Hollow Lights Skateboard Trucks - polished/black</a></td>
+                            <td class="price price-new">$67.95</td>
+                            <td class="price price-old">$75.5</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/venture/polished-skateboard-trucks/polished-52-hi" target="_blank" rel="noopener">Venture Polished Skateboard Trucks - polished (5.2 hi)</a></td>
+                            <td class="price price-new">$46.95</td>
+                            <td class="price price-old">$52.17</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-skateboard-trucks/polished-silver-77" target="_blank" rel="noopener">Ace AF-1 Skateboard Trucks - polished silver 77</a></td>
+                            <td class="price price-new">$65.95</td>
+                            <td class="price price-old">$73.28</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1196,9 +1203,117 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/lights-skateboard-trucks/polished-lights-ii-147" target="_blank" rel="noopener">Thunder Lights Skateboard Trucks - polished lights ii (147)</a></td>
+                            <td class="price price-new">$55.95</td>
+                            <td class="price price-old">$62.17</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/classic-00-hi-skateboard-trucks/polished-silver" target="_blank" rel="noopener">Ace Classic 00 Hi Skateboard Trucks - polished silver</a></td>
+                            <td class="price price-new">$49.95</td>
+                            <td class="price price-old">$55.5</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-144" target="_blank" rel="noopener">Independent Silver Stage 11 Skateboard Trucks - silver 144</a></td>
+                            <td class="price price-new">$57.95</td>
+                            <td class="price price-old">$64.39</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
                             <td class="product-name"><a href="https://www.tactics.com/krux/dlk-k5-skateboard-trucks/polished-silver-76" target="_blank" rel="noopener">Krux DLK K5 Skateboard Trucks - polished silver 7.6</a></td>
                             <td class="price price-new">$41.95</td>
                             <td class="price price-old">$46.61</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/bullet/standard-skate-trucks/black-130mm" target="_blank" rel="noopener">Bullet Standard Skate Trucks - black 130mm</a></td>
+                            <td class="price price-new">$28.95</td>
+                            <td class="price price-old">$32.17</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/lights-skateboard-trucks/polished-lights-ii-148" target="_blank" rel="noopener">Thunder Lights Skateboard Trucks - polished lights ii (148)</a></td>
+                            <td class="price price-new">$55.95</td>
+                            <td class="price price-old">$62.17</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-low-hollow-kingpin-skateboard-trucks/polished-silver-44" target="_blank" rel="noopener">Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 44</a></td>
+                            <td class="price price-new">$67.95</td>
+                            <td class="price price-old">$75.5</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/suciu-pro-inverted-skateboard-trucks/nightwatch-149" target="_blank" rel="noopener">Thunder Suciu Pro Inverted Skateboard Trucks - nightwatch (149)</a></td>
+                            <td class="price price-new">$59.95</td>
+                            <td class="price price-old">$66.61</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-inverted-hollow-skateboard-trucks/polished-silver-44" target="_blank" rel="noopener">Ace AF-1 Inverted Hollow Skateboard Trucks - polished silver 44</a></td>
+                            <td class="price price-new">$89.95</td>
+                            <td class="price price-old">$99.94</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-titanium-stage-11-skateboard-trucks/silver-159" target="_blank" rel="noopener">Independent Forged Titanium Stage 11 Skateboard Trucks - silver 159</a></td>
+                            <td class="price price-new">$105.95</td>
+                            <td class="price price-old">$117.72</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/venture/polished-skateboard-trucks/polished-58-hi" target="_blank" rel="noopener">Venture Polished Skateboard Trucks - polished (5.8 hi)</a></td>
+                            <td class="price price-new">$46.95</td>
+                            <td class="price price-old">$52.17</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-169" target="_blank" rel="noopener">Independent Silver Stage 11 Skateboard Trucks - silver 169</a></td>
+                            <td class="price price-new">$61.95</td>
+                            <td class="price price-old">$68.83</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Trucks">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Trucks</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/krux/standard-k5-skateboard-trucks/polished-silver-76" target="_blank" rel="noopener">Krux Standard K5 Skateboard Trucks - polished silver 7.6</a></td>
+                            <td class="price price-new">$44.95</td>
+                            <td class="price price-old">$49.94</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1214,16 +1329,16 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-hollow-skateboard-trucks/polished-silver-44" target="_blank" rel="noopener">Ace AF-1 Hollow Skateboard Trucks - polished silver 44</a></td>
-                            <td class="price price-new">$69.95</td>
-                            <td class="price price-old">$77.72</td>
+                            <td class="product-name"><a href="https://www.tactics.com/venture/v8-polished-skateboard-trucks/polished-52-hi" target="_blank" rel="noopener">Venture V8 Polished Skateboard Trucks - polished (5.2 hi)</a></td>
+                            <td class="price price-new">$46.95</td>
+                            <td class="price price-old">$52.17</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
                         <tr data-store="Tactics" data-part="Trucks">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Trucks</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-hollow-stage-11-skateboard-trucks/silver-144" target="_blank" rel="noopener">Independent Forged Hollow Stage 11 Skateboard Trucks - silver 144</a></td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/passport-af-1-hollow-skateboard-trucks/hammertone-55" target="_blank" rel="noopener">Ace Passport AF-1 Hollow Skateboard Trucks - hammertone 55</a></td>
                             <td class="price price-new">$75.95</td>
                             <td class="price price-old">$84.39</td>
                             <td><span class="discount low">10%</span></td>
@@ -1277,42 +1392,6 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Bearings">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bones-bearings/super-reds-skateboard-bearings/black" target="_blank" rel="noopener">Bones Bearings Super Reds Skateboard Bearings - black</a></td>
-                            <td class="price price-new">$37.95</td>
-                            <td class="price price-old">$42.17</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/sector-9/platinum-skateboard-bearings" target="_blank" rel="noopener">Sector 9 Platinum Skateboard Bearings</a></td>
-                            <td class="price price-new">$29.95</td>
-                            <td class="price price-old">$33.28</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/modus-bearings/abec-7-skateboard-bearings/blue" target="_blank" rel="noopener">Modus ABEC 7 Skateboard Bearings - blue</a></td>
-                            <td class="price price-new">$22.95</td>
-                            <td class="price price-old">$25.5</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/quantum/fusions-skateboard-bearings" target="_blank" rel="noopener">Quantum Fusions Skateboard Bearings</a></td>
-                            <td class="price price-new">$119.95</td>
-                            <td class="price price-old">$133.28</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
                             <td class="product-name"><a href="https://www.tactics.com/shake-junt/sj-abec-7-skateboard-bearings/green-gold" target="_blank" rel="noopener">Shake Junt SJ Abec 7 Skateboard Bearings - green/gold</a></td>
                             <td class="price price-new">$19.95</td>
                             <td class="price price-old">$22.17</td>
@@ -1340,25 +1419,16 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Bearings">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bronson-speed-co-bearings/ceramic-skateboard-bearings" target="_blank" rel="noopener">Bronson Speed Co. Ceramic Skateboard Bearings</a></td>
-                            <td class="price price-new">$92.95</td>
-                            <td class="price price-old">$103.28</td>
+                            <td class="product-name"><a href="https://www.tactics.com/quantum/diamonds-skateboard-bearings" target="_blank" rel="noopener">Quantum Diamonds Skateboard Bearings</a></td>
+                            <td class="price price-new">$119.95</td>
+                            <td class="price price-old">$133.28</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
                         <tr data-store="Tactics" data-part="Bearings">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/modus-bearings/ceramic-skateboard-bearings/white" target="_blank" rel="noopener">Modus Ceramic Skateboard Bearings - white</a></td>
-                            <td class="price price-new">$69.95</td>
-                            <td class="price price-old">$77.72</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bones-bearings/big-balls-reds-skateboard-bearings" target="_blank" rel="noopener">Bones Bearings Big Balls Reds Skateboard Bearings</a></td>
+                            <td class="product-name"><a href="https://www.tactics.com/modus-bearings/titanium-skateboard-bearings/white" target="_blank" rel="noopener">Modus Titanium Skateboard Bearings - white</a></td>
                             <td class="price price-new">$29.95</td>
                             <td class="price price-old">$33.28</td>
                             <td><span class="discount low">10%</span></td>
@@ -1367,9 +1437,9 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Bearings">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/quantum/isotopes-skateboard-bearings" target="_blank" rel="noopener">Quantum Isotopes Skateboard Bearings</a></td>
-                            <td class="price price-new">$59.95</td>
-                            <td class="price price-old">$66.61</td>
+                            <td class="product-name"><a href="https://www.tactics.com/bronson-speed-co-bearings/raw-skateboard-bearings/black" target="_blank" rel="noopener">Bronson Speed Co. Raw Skateboard Bearings - black</a></td>
+                            <td class="price price-new">$49.95</td>
+                            <td class="price price-old">$55.5</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1379,6 +1449,15 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                             <td class="product-name"><a href="https://www.tactics.com/shake-junt/night-train-skateboard-bearings" target="_blank" rel="noopener">Shake Junt Night Train Skateboard Bearings</a></td>
                             <td class="price price-new">$14.95</td>
                             <td class="price price-old">$16.61</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/bones-bearings/swiss-ceramic-skateboard-bearings/grey" target="_blank" rel="noopener">Bones Bearings Swiss Ceramic Skateboard Bearings - grey</a></td>
+                            <td class="price price-new">$135.95</td>
+                            <td class="price price-old">$151.06</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1403,54 +1482,9 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Bearings">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bronson-speed-co-bearings/raw-skateboard-bearings/black" target="_blank" rel="noopener">Bronson Speed Co. Raw Skateboard Bearings - black</a></td>
-                            <td class="price price-new">$49.95</td>
-                            <td class="price price-old">$55.5</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/quantum/diamonds-skateboard-bearings" target="_blank" rel="noopener">Quantum Diamonds Skateboard Bearings</a></td>
-                            <td class="price price-new">$119.95</td>
-                            <td class="price price-old">$133.28</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/nothing-special/diego-najera-pro-bearings/red" target="_blank" rel="noopener">Nothing Special Diego Najera Pro Bearings - red</a></td>
-                            <td class="price price-new">$24.95</td>
-                            <td class="price price-old">$27.72</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/modus-bearings/titanium-skateboard-bearings/white" target="_blank" rel="noopener">Modus Titanium Skateboard Bearings - white</a></td>
+                            <td class="product-name"><a href="https://www.tactics.com/sector-9/platinum-skateboard-bearings" target="_blank" rel="noopener">Sector 9 Platinum Skateboard Bearings</a></td>
                             <td class="price price-new">$29.95</td>
                             <td class="price price-old">$33.28</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bones-bearings/swiss-ceramic-skateboard-bearings/grey" target="_blank" rel="noopener">Bones Bearings Swiss Ceramic Skateboard Bearings - grey</a></td>
-                            <td class="price price-new">$135.95</td>
-                            <td class="price price-old">$151.06</td>
-                            <td><span class="discount low">10%</span></td>
-                        </tr>
-
-                        <tr data-store="Tactics" data-part="Bearings">
-                            <td><span class="store-badge store-tactics">Tactics</span></td>
-                            <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bronson-speed-co-bearings/6-ball-raw-skateboard-bearings" target="_blank" rel="noopener">Bronson Speed Co. 6-Ball Raw Skateboard Bearings</a></td>
-                            <td class="price price-new">$45.95</td>
-                            <td class="price price-old">$51.06</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1475,18 +1509,27 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Bearings">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/nothing-special/trevor-colden-pro-skateboard-bearings/olive" target="_blank" rel="noopener">Nothing Special Trevor Colden Pro Skateboard Bearings - olive</a></td>
-                            <td class="price price-new">$24.95</td>
-                            <td class="price price-old">$27.72</td>
+                            <td class="product-name"><a href="https://www.tactics.com/bronson-speed-co-bearings/6-ball-raw-skateboard-bearings" target="_blank" rel="noopener">Bronson Speed Co. 6-Ball Raw Skateboard Bearings</a></td>
+                            <td class="price price-new">$45.95</td>
+                            <td class="price price-old">$51.06</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
                         <tr data-store="Tactics" data-part="Bearings">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Bearings</span></td>
-                            <td class="product-name"><a href="https://www.tactics.com/bronson-speed-co-bearings/t-funk-pro-raw-skateboard-bearings" target="_blank" rel="noopener">Bronson Speed Co. T-Funk Pro Raw Skateboard Bearings</a></td>
-                            <td class="price price-new">$44.95</td>
-                            <td class="price price-old">$49.94</td>
+                            <td class="product-name"><a href="https://www.tactics.com/bones-bearings/super-reds-skateboard-bearings/black" target="_blank" rel="noopener">Bones Bearings Super Reds Skateboard Bearings - black</a></td>
+                            <td class="price price-new">$37.95</td>
+                            <td class="price price-old">$42.17</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/nothing-special/diego-najera-pro-bearings/red" target="_blank" rel="noopener">Nothing Special Diego Najera Pro Bearings - red</a></td>
+                            <td class="price price-new">$24.95</td>
+                            <td class="price price-old">$27.72</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1496,6 +1539,60 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                             <td class="product-name"><a href="https://www.tactics.com/quantum/atoms-skateboard-bearings" target="_blank" rel="noopener">Quantum Atoms Skateboard Bearings</a></td>
                             <td class="price price-new">$59.95</td>
                             <td class="price price-old">$66.61</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/modus-bearings/abec-7-skateboard-bearings/blue" target="_blank" rel="noopener">Modus ABEC 7 Skateboard Bearings - blue</a></td>
+                            <td class="price price-new">$22.95</td>
+                            <td class="price price-old">$25.5</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/bones-bearings/big-balls-reds-skateboard-bearings" target="_blank" rel="noopener">Bones Bearings Big Balls Reds Skateboard Bearings</a></td>
+                            <td class="price price-new">$29.95</td>
+                            <td class="price price-old">$33.28</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/nothing-special/trevor-colden-pro-skateboard-bearings/olive" target="_blank" rel="noopener">Nothing Special Trevor Colden Pro Skateboard Bearings - olive</a></td>
+                            <td class="price price-new">$24.95</td>
+                            <td class="price price-old">$27.72</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/bronson-speed-co-bearings/ceramic-skateboard-bearings" target="_blank" rel="noopener">Bronson Speed Co. Ceramic Skateboard Bearings</a></td>
+                            <td class="price price-new">$92.95</td>
+                            <td class="price price-old">$103.28</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/modus-bearings/ceramic-skateboard-bearings/white" target="_blank" rel="noopener">Modus Ceramic Skateboard Bearings - white</a></td>
+                            <td class="price price-new">$69.95</td>
+                            <td class="price price-old">$77.72</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/quantum/fusions-skateboard-bearings" target="_blank" rel="noopener">Quantum Fusions Skateboard Bearings</a></td>
+                            <td class="price price-new">$119.95</td>
+                            <td class="price price-old">$133.28</td>
                             <td><span class="discount low">10%</span></td>
                         </tr>
 
@@ -1529,10 +1626,893 @@ https://www.skatewarehouse.com/Spitfire_Flashpoint_Classic_99a_Wheels/descpage-S
                         <tr data-store="Tactics" data-part="Bearings">
                             <td><span class="store-badge store-tactics">Tactics</span></td>
                             <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/quantum/isotopes-skateboard-bearings" target="_blank" rel="noopener">Quantum Isotopes Skateboard Bearings</a></td>
+                            <td class="price price-new">$59.95</td>
+                            <td class="price price-old">$66.61</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
                             <td class="product-name"><a href="https://www.tactics.com/bones-bearings/ceramic-super-reds-skateboard-bearings/white" target="_blank" rel="noopener">Bones Bearings Ceramic Super Reds Skateboard Bearings - white</a></td>
                             <td class="price price-new">$99.95</td>
                             <td class="price price-old">$111.06</td>
                             <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                        <tr data-store="Tactics" data-part="Bearings">
+                            <td><span class="store-badge store-tactics">Tactics</span></td>
+                            <td><span class="part-badge">Bearings</span></td>
+                            <td class="product-name"><a href="https://www.tactics.com/bronson-speed-co-bearings/t-funk-pro-raw-skateboard-bearings" target="_blank" rel="noopener">Bronson Speed Co. T-Funk Pro Raw Skateboard Bearings</a></td>
+                            <td class="price price-new">$44.95</td>
+                            <td class="price price-old">$49.94</td>
+                            <td><span class="discount low">10%</span></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section changes-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2>Recent Changes <span class="badge">84</span></h2>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <table id="changesTable">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Store</th>
+                            <th>Product</th>
+                            <th>Sale Price</th>
+                            <th>Original</th>
+                            <th>Discount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-samba-adv-white-grey-and-green-skate-shoes.html" target="_blank">adidas Samba ADV White, Grey, & Green Skate Shoes</a></td>
+                            <td class="price price-new">$49.96</td>
+                            <td class="price price-old">$99.95</td>
+                            <td><span class="discount high">50%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-samba-adv-bluebird-white-and-gum-skate-shoes.html" target="_blank">adidas Samba ADV Bluebird, White & Gum Skate Shoes</a></td>
+                            <td class="price price-new">$49.96</td>
+                            <td class="price price-old">$99.95</td>
+                            <td><span class="discount high">50%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-originals-campus-00s-off-white-and-white-shoes.html" target="_blank">adidas Originals Campus 00s Off-White & White Shoes</a></td>
+                            <td class="price price-new">$54.96</td>
+                            <td class="price price-old">$109.95</td>
+                            <td><span class="discount high">50%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-gazelle-adv-pink-black-and-gum-skate-shoes.html" target="_blank">adidas Gazelle ADV Pink, Black, & Gum Skate Shoes</a></td>
+                            <td class="price price-new">$49.96</td>
+                            <td class="price price-old">$99.95</td>
+                            <td><span class="discount high">50%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-originals-campus-00s-crystal-white-and-core-black-skate-shoes.html" target="_blank">adidas Originals Campus 00s Crystal White & Core Black Skate Shoes</a></td>
+                            <td class="price price-new">$69.96</td>
+                            <td class="price price-old">$109.95</td>
+                            <td><span class="discount medium">36%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-originals-campus-00s-wonder-quartz-and-wonder-mauve-skate-shoes.html" target="_blank">adidas Originals Campus 00s Wonder Quartz & Wonder Mauve Skate Shoes</a></td>
+                            <td class="price price-new">$69.96</td>
+                            <td class="price price-old">$109.95</td>
+                            <td><span class="discount medium">36%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/ninth-hall-global-camo-t-shirt.html" target="_blank">Ninth Hall Global Camo T-Shirt</a></td>
+                            <td class="price price-new">$29.99</td>
+                            <td class="price price-old">$37.95</td>
+                            <td><span class="discount low">21%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/osiris-d3-og-white-red-grey-skate-shoes-d3.html" target="_blank">Osiris D3 OG White, Red & Grey Skate Shoes D3</a></td>
+                            <td class="price price-new">$46.96</td>
+                            <td class="price price-old">$93.95</td>
+                            <td><span class="discount high">50%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/skullcandy-crusher-evo-matte-black-headphones.html" target="_blank">Skullcandy Crusher Evo Matte Black Headphones</a></td>
+                            <td class="price price-new">$109.96</td>
+                            <td class="price price-old">$209.95</td>
+                            <td><span class="discount high">48%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/skullcandy-crusher-540-active-soft-pink-headphones.html" target="_blank">Skullcandy Crusher 540 Active Soft Pink Headphones</a></td>
+                            <td class="price price-new">$109.96</td>
+                            <td class="price price-old">$209.95</td>
+                            <td><span class="discount high">48%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name"><a href="https://www.zumiez.com/adidas-originals-campus-00s-wonder-beige-and-white-skate-shoes.html" target="_blank">adidas Originals Campus 00s Wonder Beige & White Skate Shoes</a></td>
+                            <td class="price price-new">$44.96</td>
+                            <td class="price price-old">$89.95</td>
+                            <td><span class="discount high">50%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Real Classic Oval 8.5" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$74.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Welcome x Beetlejuice Showtime 8.5" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$84.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Welcome x Beetlejuice Lydia 9.6" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$84.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Girl Pacheco Modernica Twin 8.5" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$82.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Anti-Hero Anderson Some Legs 8.5 Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$78.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Pizza x Homies Forever 8.5" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$65.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Monet Skateboards Skullew 8.25" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$59.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Girl Pacheco Modernica 8.375" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$82.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Girl Davis The Suzuki Method 8.125" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$82.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">LZMFG Pursuit Of Perfection 8.25" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$64.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Girl Malto Suzuki 7.75" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$74.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Jart Stay High No Smoking 8.125" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$59.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Theories Power Of The Mind 8.0" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$73.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Primitive x WWE Hamilton Hitman 8.125" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$74.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">WKND Look Out 8.0" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$71.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">Sk8mafia Surrey Great White Buffalo 8.25" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$64.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">POETICCOLLECTIVE Flames 8.25" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$72.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">WKND Maalouf Fire In The Pipe 8.0" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$71.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Zumiez</td>
+                            <td class="product-name">WKND Taylor Cake Boss 8.0" Skateboard Deck</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$71.95</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Powell Peralta Snakes Cruiser Skateboard Wheels - purple (75a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$75.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">OJ Plain Jane Keyframe Cruiser Skateboard Wheels - white/orange (87a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$47.72</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Spitfire Formula Four Conical Full Skateboard Wheels - natural/teal (97d)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$54.39</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Bones X-Formula V7 Double Lock Skateboard Wheels - gold chain (99a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$55.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Powell Peralta Nano Cubic Dragon Formula Skateboard Wheels - off white 54 (97a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$55.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Spitfire Formula Four Tablets Skateboard Wheels - natural (99d)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$54.39</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Bones X-Formula V5 Sidecut Skateboard Wheels - white/orange (95a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$55.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">OJ Super Juice Cruiser Skateboard Wheels - cru-zen (78a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$49.94</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Powell Peralta Andy Anderson Nano Cubic Dragon Formula Skateboard Wheels - off white (97a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$53.28</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Spitfire Formula Four OG Classic Skateboard Wheels - white/blue (99d)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$54.39</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">OJ Screaming Hand Original Chubbies Skateboard Wheels - black (101a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$51.06</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Bones 100's OG Formula V4 Wide Skateboard Wheels - black/yellow (100a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$35.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Powell Peralta Dragon Formula V6 Skateboard Wheels - off white (93a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$55.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Spitfire Bighead Skateboard Wheels - white/royal blue 51 (99d)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$45.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">OJ Double Duro Hardline Skateboard Wheels - white/gum (99a/95a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$72.17</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Bones 100's OG Formula V5 Sidecut Skateboard Wheels - white/yellow (100a)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$35.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/polished-skateboard-trucks/polished-147" target="_blank">Thunder Polished Skateboard Trucks - polished (147)</a></td>
+                            <td class="price price-new">$47.95</td>
+                            <td class="price price-old">$53.28</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-skateboard-trucks/polished-silver-33" target="_blank">Ace AF-1 Skateboard Trucks - polished silver 33</a></td>
+                            <td class="price price-new">$65.95</td>
+                            <td class="price price-old">$73.28</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/polished-inverted-skateboard-trucks/polished-149" target="_blank">Thunder Polished Inverted Skateboard Trucks - polished (149)</a></td>
+                            <td class="price price-new">$52.95</td>
+                            <td class="price price-old">$58.83</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-low-hollow-kingpin-skateboard-trucks/polished-silver-60" target="_blank">Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 60</a></td>
+                            <td class="price price-new">$67.95</td>
+                            <td class="price price-old">$75.5</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/meurle-emulsion-pro-hollow-lights-skateboard-trucks/polished-black" target="_blank">Thunder Meurle Emulsion Pro Hollow Lights Skateboard Trucks - polished/black</a></td>
+                            <td class="price price-new">$67.95</td>
+                            <td class="price price-old">$75.5</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/venture/polished-skateboard-trucks/polished-52-hi" target="_blank">Venture Polished Skateboard Trucks - polished (5.2 hi)</a></td>
+                            <td class="price price-new">$46.95</td>
+                            <td class="price price-old">$52.17</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-skateboard-trucks/polished-silver-77" target="_blank">Ace AF-1 Skateboard Trucks - polished silver 77</a></td>
+                            <td class="price price-new">$65.95</td>
+                            <td class="price price-old">$73.28</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/lights-skateboard-trucks/polished-lights-ii-147" target="_blank">Thunder Lights Skateboard Trucks - polished lights ii (147)</a></td>
+                            <td class="price price-new">$55.95</td>
+                            <td class="price price-old">$62.17</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/classic-00-hi-skateboard-trucks/polished-silver" target="_blank">Ace Classic 00 Hi Skateboard Trucks - polished silver</a></td>
+                            <td class="price price-new">$49.95</td>
+                            <td class="price price-old">$55.5</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/lights-skateboard-trucks/polished-lights-ii-148" target="_blank">Thunder Lights Skateboard Trucks - polished lights ii (148)</a></td>
+                            <td class="price price-new">$55.95</td>
+                            <td class="price price-old">$62.17</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-low-hollow-kingpin-skateboard-trucks/polished-silver-44" target="_blank">Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 44</a></td>
+                            <td class="price price-new">$67.95</td>
+                            <td class="price price-old">$75.5</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/thunder/suciu-pro-inverted-skateboard-trucks/nightwatch-149" target="_blank">Thunder Suciu Pro Inverted Skateboard Trucks - nightwatch (149)</a></td>
+                            <td class="price price-new">$59.95</td>
+                            <td class="price price-old">$66.61</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/af-1-inverted-hollow-skateboard-trucks/polished-silver-44" target="_blank">Ace AF-1 Inverted Hollow Skateboard Trucks - polished silver 44</a></td>
+                            <td class="price price-new">$89.95</td>
+                            <td class="price price-old">$99.94</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/forged-titanium-stage-11-skateboard-trucks/silver-159" target="_blank">Independent Forged Titanium Stage 11 Skateboard Trucks - silver 159</a></td>
+                            <td class="price price-new">$105.95</td>
+                            <td class="price price-old">$117.72</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/venture/polished-skateboard-trucks/polished-58-hi" target="_blank">Venture Polished Skateboard Trucks - polished (5.8 hi)</a></td>
+                            <td class="price price-new">$46.95</td>
+                            <td class="price price-old">$52.17</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/independent/silver-stage-11-skateboard-trucks/silver-169" target="_blank">Independent Silver Stage 11 Skateboard Trucks - silver 169</a></td>
+                            <td class="price price-new">$61.95</td>
+                            <td class="price price-old">$68.83</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/krux/standard-k5-skateboard-trucks/polished-silver-76" target="_blank">Krux Standard K5 Skateboard Trucks - polished silver 7.6</a></td>
+                            <td class="price price-new">$44.95</td>
+                            <td class="price price-old">$49.94</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/venture/v8-polished-skateboard-trucks/polished-52-hi" target="_blank">Venture V8 Polished Skateboard Trucks - polished (5.2 hi)</a></td>
+                            <td class="price price-new">$46.95</td>
+                            <td class="price price-old">$52.17</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row new">
+                            <td><span class="discount high">New</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name"><a href="https://www.tactics.com/ace/passport-af-1-hollow-skateboard-trucks/hammertone-55" target="_blank">Ace Passport AF-1 Hollow Skateboard Trucks - hammertone 55</a></td>
+                            <td class="price price-new">$75.95</td>
+                            <td class="price price-old">$84.39</td>
+                            <td><span class="discount low">10%</span></td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Ace AF-1 Inverted Hollow Skateboard Trucks - polished silver 55</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$99.94</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Venture Polished Skateboard Trucks - polished (5.6 hi)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$52.17</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Ace Classic Skateboard Trucks - polished silver 44</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$55.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 33</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$75.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Venture Polished Skateboard Trucks - polished (5.2 lo)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$52.17</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Thunder Polished Inverted Skateboard Trucks - polished (148)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$58.83</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Ace Deedz AF-1 Hollow LTD Skateboard Trucks - black 60</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$85.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Independent Forged Titanium Stage 11 Skateboard Trucks - silver 149</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$115.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Thunder Hollow Lights Skateboard Trucks - polished hollow lights ii (147)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$73.28</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Thunder Polished Skateboard Trucks - polished (161)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$53.28</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Krux DLK K5 Skateboard Trucks - rainbow 2</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$58.83</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Independent Silver Stage 11 Skateboard Trucks - silver 159</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$66.61</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 55</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$75.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Independent Forged Titanium Stage 11 Skateboard Trucks - silver 169</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$117.72</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Ace Passport AF-1 Hollow Skateboard Trucks - hammertone 44</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$84.39</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Thunder Tyshawn Endgame Pro Skateboard Trucks - black/gold</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$62.17</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Thunder Polished T-II Skateboard Trucks - polished (149)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$58.83</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Thunder Hollow Lights Skateboard Trucks - polished hollow lights ii (151)</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$73.28</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
+                        </tr>
+
+                        <tr class="change-row removed">
+                            <td><span class="discount low">Removed</span></td>
+                            <td>Tactics</td>
+                            <td class="product-name">Ace AF-1 Skateboard Trucks - gold 33</td>
+                            <td class="price">-</td>
+                            <td class="price price-old">$75.5</td>
+                            <td>-</td>
+                            <td>2025-12-03</td>
                         </tr>
 
                     </tbody>
