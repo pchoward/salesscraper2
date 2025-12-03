@@ -1509,9 +1509,8 @@ def generate_html_chart(data, changes, price_history=None, output_file="sale_ite
         </div>
 """
 
-    if changes:
-        total_changes = sum(len(c) for c in changes.values())
-        html_content += f"""
+    total_changes = sum(len(c) for c in changes.values()) if changes else 0
+    html_content += f"""
         <div class="section changes-section">
             <div class="section-header" onclick="toggleSection(this)">
                 <h2>Recent Changes <span class="badge">{total_changes}</span></h2>
@@ -1532,6 +1531,7 @@ def generate_html_chart(data, changes, price_history=None, output_file="sale_ite
                     </thead>
                     <tbody>
 """
+    if changes:
         for site, site_changes in changes.items():
             for change in site_changes:
                 if change["type"] == "new":
@@ -1596,7 +1596,15 @@ def generate_html_chart(data, changes, price_history=None, output_file="sale_ite
                             <td>{current_date}</td>
                         </tr>
 """
-        html_content += """
+    else:
+        html_content += f"""
+                        <tr>
+                            <td colspan="7" style="text-align: center; padding: 2rem; color: #6b7280;">
+                                No changes detected since last update ({current_date})
+                            </td>
+                        </tr>
+"""
+    html_content += """
                     </tbody>
                 </table>
             </div>
