@@ -709,6 +709,7 @@ def save_current(data, path="previous_data.json"):
 
 
 def compare(prev, curr):
+    valid_parts = {"Decks", "Wheels", "Trucks", "Bearings"}
     changes = {}
     for site, items in curr.items():
         prev_map = {i["url"]: i for i in prev.get(site, [])}
@@ -728,7 +729,11 @@ def compare(prev, curr):
         curr_urls = {i["url"] for i in items}
         for url, pi in prev_map.items():
             if url not in curr_urls:
-                diffs.append({"type": "removed", "item": pi})
+                item_part = pi.get("part", "")
+                if item_part in valid_parts:
+                    diffs.append({"type": "removed", "item": pi})
+                else:
+                    logging.info(f"Skipping out-of-scope removed item: {pi.get('name', 'Unknown')} (part: {item_part})")
         if diffs:
             changes[site] = diffs
     return changes
