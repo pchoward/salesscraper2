@@ -136,7 +136,7 @@ def fetch_page(url, max_retries=3, timeout=30):
                 except TimeoutException as e:
                     logging.error(f"TimeoutException during WebDriver init: {e}")
                     if driver_attempt < driver_attempts - 1:
-                        time.sleep(5)
+                        time.sleep(2)
                         continue
                     else:
                         raise
@@ -147,7 +147,7 @@ def fetch_page(url, max_retries=3, timeout=30):
                         logging.error("Ensure Chrome is correctly installed and in the system's PATH")
                         
                     if driver_attempt < driver_attempts - 1:
-                        time.sleep(5)
+                        time.sleep(2)
                         continue
                     else:
                         raise
@@ -157,14 +157,14 @@ def fetch_page(url, max_retries=3, timeout=30):
                 continue
 
             driver.set_page_load_timeout(timeout)
-            time.sleep(random.uniform(1, 3))
+            time.sleep(random.uniform(0.5, 1))
             driver.get(url)
             
             WebDriverWait(driver, timeout).until(
                 lambda d: d.execute_script("return document.readyState") == "complete"
             )
 
-            time.sleep(random.uniform(3, 5))
+            time.sleep(random.uniform(1, 2))
             logging.info("Initial wait for dynamic content")
 
             current_url = driver.current_url
@@ -174,7 +174,7 @@ def fetch_page(url, max_retries=3, timeout=30):
                 continue
 
             try:
-                WebDriverWait(driver, 15).until(
+                WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, "li.ProductCard, .product-card, .product-item, a[href*='deck'], a[href*='wheels'], a[href*='truck'], a[href*='bearings'], .product-grid__item"))
                 )
                 logging.info("Product listings detected")
@@ -182,13 +182,13 @@ def fetch_page(url, max_retries=3, timeout=30):
                 logging.warning(f"Could not detect product listings: {e}")
 
             logging.info("Attempting infinite scroll")
-            max_scroll_attempts = 8
+            max_scroll_attempts = 3
             scroll_attempts = 0
             previous_item_count = 0
 
             while scroll_attempts < max_scroll_attempts:
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                time.sleep(random.uniform(2, 4))
+                time.sleep(random.uniform(1, 2))
                 
                 current_items = len(driver.find_elements(By.CSS_SELECTOR, "li.ProductCard, .product-card, .product-item, a[href*='deck'], a[href*='wheels'], a[href*='truck'], a[href*='bearings'], .product-grid__item"))
                 logging.info(f"Scroll attempt {scroll_attempts + 1}: found {current_items} items")
@@ -206,11 +206,11 @@ def fetch_page(url, max_retries=3, timeout=30):
                 previous_item_count = current_items
                 scroll_attempts += 1
 
-            time.sleep(random.uniform(2, 4))
+            time.sleep(random.uniform(1, 2))
             logging.info("Final wait for AJAX content")
 
             driver.execute_script("window.scrollTo(0, 0);")
-            time.sleep(random.uniform(1, 2))
+            time.sleep(random.uniform(0.5, 1))
 
             html = driver.page_source
             logging.info(f"Successfully fetched {url}")
@@ -219,7 +219,7 @@ def fetch_page(url, max_retries=3, timeout=30):
         except Exception as e:
             logging.error(f"Failed to fetch {url}: {e}")
             if attempt < max_retries - 1:
-                time.sleep(2 ** attempt + random.uniform(2, 5))
+                time.sleep(2 ** attempt + random.uniform(1, 2))
             else:
                 logging.error(f"Max retries reached for {url}")
                 return None
@@ -1393,17 +1393,17 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
         let currentPartFilter = 'all';
 
         function filterProducts() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
             const rows = document.querySelectorAll('#mainTable tbody tr');
             
             rows.forEach(row => {
                 const text = row.textContent.toLowerCase();
-                const store = row.dataset.store;
-                const part = row.dataset.part;
+                const store = (row.dataset.store || '').toLowerCase();
+                const part = (row.dataset.part || '').toLowerCase();
                 
-                const matchesSearch = text.includes(searchTerm);
-                const matchesStore = currentStoreFilter === 'all' || store === currentStoreFilter;
-                const matchesPart = currentPartFilter === 'all' || part === currentPartFilter;
+                const matchesSearch = searchTerm === '' || text.includes(searchTerm);
+                const matchesStore = currentStoreFilter === 'all' || store === currentStoreFilter.toLowerCase();
+                const matchesPart = currentPartFilter === 'all' || part === currentPartFilter.toLowerCase();
                 
                 row.style.display = matchesSearch && matchesStore && matchesPart ? '' : 'none';
             });
@@ -1415,7 +1415,8 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
             currentStoreFilter = store;
             
             document.querySelectorAll('#storeFilters .filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.store === store.toLowerCase() || (store === 'all' && btn.dataset.store === 'all'));
+                const btnStore = btn.dataset.store || '';
+                btn.classList.toggle('active', btnStore === store.toLowerCase() || (store === 'all' && btnStore === 'all'));
             });
             
             filterProducts();
@@ -1425,7 +1426,8 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
             currentPartFilter = part;
             
             document.querySelectorAll('#partFilters .filter-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.part === part.toLowerCase() || (part === 'all' && btn.dataset.part === 'all'));
+                const btnPart = btn.dataset.part || '';
+                btn.classList.toggle('active', btnPart === part.toLowerCase() || (part === 'all' && btnPart === 'all'));
             });
             
             filterProducts();
