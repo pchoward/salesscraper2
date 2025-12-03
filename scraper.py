@@ -305,6 +305,11 @@ class ZumiezScraper(Scraper):
                         logging.info(f"Skipping product not from Bones, Powell, Spitfire, or OJ: {name}")
                         continue
 
+                if self.part == "Trucks":
+                    if not any(brand in name for brand in ["Independent", "Indy", "Ace", "Slappy"]):
+                        logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
+                        continue
+
                 sale_price_el = product.select_one(".ProductPrice-PriceValue")
                 original_price_el = product.select_one(".ProductCardPrice-HighPrice")
                 sale_price = sale_price_el.get_text(strip=True).replace("$", "") if sale_price_el else None
@@ -395,8 +400,8 @@ class SkateWarehouseScraper(Scraper):
                     logging.info(f"Skipping product not from Bones, Powell, Spitfire, or OJ: {name}")
                     continue
             elif self.part == "Trucks":
-                if not any(brand in name for brand in ["Independent", "Indy", "Ace"]):
-                    logging.info(f"Skipping product not from Independent or Ace Trucks: {name}")
+                if not any(brand in name for brand in ["Independent", "Indy", "Ace", "Slappy"]):
+                    logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
                     continue
             elif self.part == "Decks":
                 price_new = prices[0]
@@ -547,6 +552,11 @@ class CCSScraper(Scraper):
                     if not any(brand in name for brand in ["Bones", "Powell", "Spitfire", "OJ"]):
                         continue
 
+                if self.part == "Trucks":
+                    if not any(brand in name for brand in ["Independent", "Indy", "Ace", "Slappy"]):
+                        logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
+                        continue
+
                 products.append({
                     "name": name,
                     "url": href,
@@ -612,14 +622,14 @@ class TacticsScraper(Scraper):
                 price_new = None
                 price_old = None
                 
-                price_el = container.select_one(".browse-grid-item-price, .sale-price, [class*='price']")
+                price_el = container.select_one(".browse-grid-item-sale-price, .browse-grid-item-price, .sale-price, [class*='price']")
                 if price_el:
                     price_text = price_el.get_text(strip=True)
                     price_match = re.search(r"\$(\d+\.?\d*)", price_text)
                     if price_match:
                         price_new = price_match.group(1)
                 
-                promo_el = container.select_one(".browse-grid-item-promo-bug, .discount, [class*='promo']")
+                promo_el = container.select_one(".browse-grid-item-discount, .browse-grid-item-promo-bug, .discount, [class*='promo']")
                 if promo_el:
                     promo_text = promo_el.get_text(strip=True)
                     discount_match = re.search(r"(\d+)%", promo_text)
@@ -653,6 +663,11 @@ class TacticsScraper(Scraper):
 
                 if self.part == "Wheels":
                     if not any(brand in name for brand in ["Bones", "Powell", "Spitfire", "OJ"]):
+                        continue
+
+                if self.part == "Trucks":
+                    if not any(brand in name for brand in ["Independent", "Indy", "Ace", "Slappy"]):
+                        logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
                         continue
 
                 products.append({
@@ -1509,9 +1524,9 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
 def main():
     scrapers = [
         ZumiezDecksScraper(),
-        ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/skateboard-wheels.html?customFilters=promotion_flag:Sale", "Wheels"),
-        ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/skateboard-trucks.html?customFilters=promotion_flag:Sale", "Trucks"),
-        ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/skateboard-bearings.html?customFilters=promotion_flag:Sale", "Bearings"),
+        ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/wheels.html?customFilters=promotion_flag:Sale", "Wheels"),
+        ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/trucks.html?customFilters=promotion_flag:Sale", "Trucks"),
+        ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/bearings.html?customFilters=promotion_flag:Sale", "Bearings"),
         
         SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Decks/catpage-SALEDECK.html", "Decks"),
         SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Wheels/catpage-SALEWHEELS.html", "Wheels"),

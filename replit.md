@@ -32,7 +32,7 @@ A Python web scraper that tracks skateboard sale items from multiple online stor
 ### Filtering Logic
 - Decks: Only shows items with 10%+ discount
 - Wheels: Only shows Bones, Powell, Spitfire, OJ brands
-- Trucks: Only shows Independent, Indy, Ace brands (Skate Warehouse)
+- Trucks: Only shows Independent, Indy, Ace, Slappy brands (all stores)
 
 ## Project Structure
 
@@ -64,6 +64,10 @@ The scraper is designed to run in CI environments with headless Chrome. Set `CI=
 
 ## Recent Changes
 
+- **2024-12-03**: Added truck brand filter (Independent, Indy, Ace, Slappy) to all 4 stores
+- **2024-12-03**: Fixed Tactics decks scraping - updated price/promo selectors to match current site structure
+- **2024-12-03**: Fixed Zumiez URLs - wheels/trucks/bearings moved to /skate/components/*.html, decks still uses /skate/skateboard-decks.html
+- **2024-12-03**: Filtered out-of-scope items (shoes, etc.) from Recent Changes section
 - **2024-12-03**: Fixed search functionality - now case-insensitive for store/part/text
 - **2024-12-03**: Performance optimization - reduced scroll attempts (8→3) and wait times by 50%+
 - **2024-12-03**: Fixed workflow git push conflict with pull --rebase
