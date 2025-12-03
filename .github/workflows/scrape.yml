@@ -43,7 +43,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add sale_items_chart.html previous_data.json
+          git add sale_items_chart.html previous_data.json price_history.json
           git diff --quiet --cached || git commit -m "Update sale items $(date +'%Y-%m-%d %H:%M')"
           git pull --rebase origin main
           git push

@@ -248,6 +248,109 @@ def calculate_percent_off(price_new, price_old):
         return "N/A"
 
 
+def extract_deck_size(name):
+    """Extract deck width from product name (e.g., '8.25"' from 'Element 8.25" Deck')"""
+    if not name:
+        return None
+    
+    patterns = [
+        r'(\d+\.?\d*)\s*["\u201d\u2033]',
+        r'(\d+\.?\d*)\s*(?:inch|in\b)',
+        r'\b(\d\.\d{1,3})\b',
+        r'\b([789])\b(?!\d)',
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, name, re.IGNORECASE)
+        if match:
+            try:
+                size = float(match.group(1))
+                if 7.0 <= size <= 10.5:
+                    return f'{size:.2f}'.rstrip('0').rstrip('.')
+            except ValueError:
+                continue
+    return None
+
+
+def load_price_history():
+    """Load price history from JSON file"""
+    try:
+        with open("price_history.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+
+
+def save_price_history(history):
+    """Save price history to JSON file"""
+    safe_write_file("price_history.json", json.dumps(history, indent=2))
+
+
+def update_price_history(current_data, history):
+    """Update price history with current prices"""
+    today = datetime.datetime.now().strftime("%Y-%m-%d")
+    
+    for site_key, items in current_data.items():
+        for item in items:
+            url = item.get("url", "")
+            if not url:
+                continue
+            
+            price_new = item.get("price_new")
+            if not price_new:
+                continue
+            
+            try:
+                price = float(price_new)
+            except (ValueError, TypeError):
+                continue
+            
+            if url not in history:
+                history[url] = {
+                    "name": item.get("name", ""),
+                    "store": item.get("store", ""),
+                    "part": item.get("part", ""),
+                    "prices": {}
+                }
+            
+            history[url]["prices"][today] = price
+            history[url]["name"] = item.get("name", history[url].get("name", ""))
+    
+    return history
+
+
+def get_price_stats(url, history):
+    """Get price statistics for an item from history"""
+    if url not in history:
+        return {"lowest": None, "is_lowest": False, "trend": "stable", "history_days": 0}
+    
+    prices = history[url].get("prices", {})
+    if not prices:
+        return {"lowest": None, "is_lowest": False, "trend": "stable", "history_days": 0}
+    
+    price_values = list(prices.values())
+    lowest = min(price_values)
+    current = price_values[-1] if price_values else None
+    
+    is_lowest = current is not None and current <= lowest
+    
+    trend = "stable"
+    if len(price_values) >= 2:
+        recent = price_values[-1]
+        previous = price_values[-2]
+        if recent < previous:
+            trend = "down"
+        elif recent > previous:
+            trend = "up"
+    
+    return {
+        "lowest": lowest,
+        "is_lowest": is_lowest,
+        "trend": trend,
+        "history_days": len(prices)
+    }
+
+
 class Scraper:
     def __init__(self, name, url, part):
         self.name = name
@@ -332,7 +435,7 @@ class ZumiezScraper(Scraper):
                         continue
 
                 availability = "Check store"
-                products.append({
+                item = {
                     "name": name,
                     "url": href,
                     "price_new": sale_price,
@@ -340,7 +443,10 @@ class ZumiezScraper(Scraper):
                     "availability": availability,
                     "part": self.part,
                     "store": "Zumiez"
-                })
+                }
+                if self.part == "Decks":
+                    item["size"] = extract_deck_size(name)
+                products.append(item)
                 logging.info(f"Parsed product: {name}")
 
             except Exception as e:
@@ -419,7 +525,7 @@ class SkateWarehouseScraper(Scraper):
 
             seen.add(href)
             price_old = prices[1] if len(prices) > 1 else None
-            products.append({
+            item = {
                 "name": name,
                 "url": href,
                 "price_new": prices[0],
@@ -427,7 +533,10 @@ class SkateWarehouseScraper(Scraper):
                 "availability": "Check store",
                 "part": self.part,
                 "store": "SkateWarehouse"
-            })
+            }
+            if self.part == "Decks":
+                item["size"] = extract_deck_size(name)
+            products.append(item)
             logging.info(f"Parsed product: {name}")
 
         logging.info(f"Parsed {len(products)} products")
@@ -557,7 +666,7 @@ class CCSScraper(Scraper):
                         logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
                         continue
 
-                products.append({
+                item = {
                     "name": name,
                     "url": href,
                     "price_new": price_new,
@@ -565,7 +674,10 @@ class CCSScraper(Scraper):
                     "availability": "Check store",
                     "part": self.part,
                     "store": "CCS"
-                })
+                }
+                if self.part == "Decks":
+                    item["size"] = extract_deck_size(name)
+                products.append(item)
                 logging.info(f"Parsed product: {name}")
 
             except Exception as e:
@@ -670,7 +782,7 @@ class TacticsScraper(Scraper):
                         logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
                         continue
 
-                products.append({
+                item = {
                     "name": name,
                     "url": href,
                     "price_new": price_new,
@@ -678,7 +790,10 @@ class TacticsScraper(Scraper):
                     "availability": "Check store",
                     "part": self.part,
                     "store": "Tactics"
-                })
+                }
+                if self.part == "Decks":
+                    item["size"] = extract_deck_size(name)
+                products.append(item)
                 logging.info(f"Parsed Tactics product: {name}")
 
             except Exception as e:
@@ -754,13 +869,22 @@ def compare(prev, curr):
     return changes
 
 
-def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
+def generate_html_chart(data, changes, price_history=None, output_file="sale_items_chart.html"):
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
     current_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    if price_history is None:
+        price_history = {}
 
     all_products = []
     for site_key, items in data.items():
         all_products.extend(items)
+    
+    all_sizes = set()
+    for item in all_products:
+        if item.get("part") == "Decks" and item.get("size"):
+            all_sizes.add(item.get("size"))
+    all_sizes = sorted(all_sizes, key=lambda x: float(x) if x else 0)
 
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -1116,6 +1240,51 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
             color: var(--text-secondary);
         }}
 
+        .size-badge {{
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background: #e0e7ff;
+            color: #3730a3;
+        }}
+
+        .lowest-badge {{
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: #fef08a;
+            color: #854d0e;
+            margin-left: 0.25rem;
+            animation: pulse 2s infinite;
+        }}
+
+        @keyframes pulse {{
+            0%, 100% {{ opacity: 1; }}
+            50% {{ opacity: 0.7; }}
+        }}
+
+        .trend-up {{
+            color: #dc2626;
+            font-size: 0.75rem;
+            margin-left: 0.25rem;
+        }}
+
+        .trend-down {{
+            color: #16a34a;
+            font-size: 0.75rem;
+            margin-left: 0.25rem;
+        }}
+
+        .price-history {{
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }}
+
         .changes-section {{
             margin-top: 2rem;
         }}
@@ -1250,6 +1419,17 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
     
     html_content += """
             </div>
+            <div class="filter-group" id="sizeFilters">
+                <button class="filter-btn active" data-size="all" onclick="filterBySize('all')">All Sizes</button>
+"""
+    
+    for size in all_sizes:
+        html_content += f"""
+                <button class="filter-btn" data-size="{size}" onclick="filterBySize('{size}')">{size}"</button>
+"""
+    
+    html_content += """
+            </div>
         </div>
 
         <div class="section">
@@ -1263,10 +1443,11 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
                         <tr>
                             <th onclick="sortTable('mainTable', 0)">Store <span class="sort-icon">↕</span></th>
                             <th onclick="sortTable('mainTable', 1)">Part <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 2)">Product <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 3, true)">Sale Price <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 4, true)">Original <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 5, true)">Discount <span class="sort-icon">↕</span></th>
+                            <th onclick="sortTable('mainTable', 2, true)">Size <span class="sort-icon">↕</span></th>
+                            <th onclick="sortTable('mainTable', 3)">Product <span class="sort-icon">↕</span></th>
+                            <th onclick="sortTable('mainTable', 4, true)">Sale Price <span class="sort-icon">↕</span></th>
+                            <th onclick="sortTable('mainTable', 5, true)">Original <span class="sort-icon">↕</span></th>
+                            <th onclick="sortTable('mainTable', 6, true)">Discount <span class="sort-icon">↕</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1290,12 +1471,32 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
         
         price_old_display = f"${item['price_old']}" if item.get('price_old') else "N/A"
         
+        size = item.get("size", "")
+        size_display = f'<span class="size-badge">{size}"</span>' if size else "-"
+        
+        price_stats = get_price_stats(item.get("url", ""), price_history)
+        lowest_badge = ""
+        trend_indicator = ""
+        history_info = ""
+        
+        if price_stats["is_lowest"] and price_stats["history_days"] > 1:
+            lowest_badge = '<span class="lowest-badge">LOWEST</span>'
+        
+        if price_stats["trend"] == "down":
+            trend_indicator = '<span class="trend-down">↓</span>'
+        elif price_stats["trend"] == "up":
+            trend_indicator = '<span class="trend-up">↑</span>'
+        
+        if price_stats["history_days"] > 1:
+            history_info = f'<div class="price-history">Tracked {price_stats["history_days"]} days</div>'
+        
         html_content += f"""
-                        <tr data-store="{store}" data-part="{item.get('part', '')}">
+                        <tr data-store="{store}" data-part="{item.get('part', '')}" data-size="{size}">
                             <td><span class="store-badge {store_class}">{store}</span></td>
                             <td><span class="part-badge">{item.get('part', 'N/A')}</span></td>
+                            <td>{size_display}</td>
                             <td class="product-name"><a href="{item['url']}" target="_blank" rel="noopener">{item['name']}</a></td>
-                            <td class="price price-new">${item['price_new']}</td>
+                            <td class="price price-new">${item['price_new']}{lowest_badge}{trend_indicator}{history_info}</td>
                             <td class="price price-old">{price_old_display}</td>
                             <td><span class="discount {discount_class}">{percent_off}</span></td>
                         </tr>
@@ -1411,6 +1612,7 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
     <script>
         let currentStoreFilter = 'all';
         let currentPartFilter = 'all';
+        let currentSizeFilter = 'all';
 
         function filterProducts() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -1420,12 +1622,14 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
                 const text = row.textContent.toLowerCase();
                 const store = (row.dataset.store || '').toLowerCase();
                 const part = (row.dataset.part || '').toLowerCase();
+                const size = row.dataset.size || '';
                 
                 const matchesSearch = searchTerm === '' || text.includes(searchTerm);
                 const matchesStore = currentStoreFilter === 'all' || store === currentStoreFilter.toLowerCase();
                 const matchesPart = currentPartFilter === 'all' || part === currentPartFilter.toLowerCase();
+                const matchesSize = currentSizeFilter === 'all' || size === currentSizeFilter;
                 
-                row.style.display = matchesSearch && matchesStore && matchesPart ? '' : 'none';
+                row.style.display = matchesSearch && matchesStore && matchesPart && matchesSize ? '' : 'none';
             });
             
             updateNoResults();
@@ -1448,6 +1652,17 @@ def generate_html_chart(data, changes, output_file="sale_items_chart.html"):
             document.querySelectorAll('#partFilters .filter-btn').forEach(btn => {
                 const btnPart = btn.dataset.part || '';
                 btn.classList.toggle('active', btnPart === part.toLowerCase() || (part === 'all' && btnPart === 'all'));
+            });
+            
+            filterProducts();
+        }
+
+        function filterBySize(size) {
+            currentSizeFilter = size;
+            
+            document.querySelectorAll('#sizeFilters .filter-btn').forEach(btn => {
+                const btnSize = btn.dataset.size || '';
+                btn.classList.toggle('active', btnSize === size || (size === 'all' && btnSize === 'all'));
             });
             
             filterProducts();
@@ -1567,8 +1782,13 @@ def main():
     else:
         logging.info("No changes detected")
 
+    price_history = load_price_history()
+    price_history = update_price_history(curr_data, price_history)
+    save_price_history(price_history)
+    logging.info(f"Updated price history for {len(price_history)} items")
+
     save_current(curr_data)
-    generate_html_chart(curr_data, changes)
+    generate_html_chart(curr_data, changes, price_history)
     
     logging.info("Scraping complete!")
 
