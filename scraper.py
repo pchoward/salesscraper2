@@ -5,10 +5,7 @@ import json
 import time
 import logging
 import random
-import requests
 import datetime
-import string
-import uuid
 import shutil
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -20,6 +17,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from fake_useragent import UserAgent
 from selenium.common.exceptions import TimeoutException, WebDriverException
+
+from filters import extract_deck_size, filter_reason, normalize_product_name, normalize_url
+from report import build_report_html, compare_catalogs
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -49,29 +49,6 @@ def safe_write_file(filename, content, mode='w'):
             return False
 
 
-def create_chrome_temp_dir():
-    system_tmpdir = os.environ.get('TMPDIR', '/tmp')
-    unique_id = str(uuid.uuid4())
-    temp_dir = os.path.join(system_tmpdir, f'chrome_data_{unique_id}')
-    
-    try:
-        os.makedirs(temp_dir, mode=0o777, exist_ok=True)
-        os.chmod(temp_dir, 0o777)
-        logging.info(f"Created Chrome temp dir: {temp_dir}")
-        return temp_dir
-    except Exception as e:
-        logging.error(f"Failed to create Chrome temp dir: {e}")
-        try:
-            import tempfile
-            alt_temp_dir = tempfile.mkdtemp(prefix='chrome_data_')
-            os.chmod(alt_temp_dir, 0o777)
-            logging.info(f"Created alternate temp dir: {alt_temp_dir}")
-            return alt_temp_dir
-        except Exception as alt_e:
-            logging.error(f"Failed to create alternate temp dir: {alt_e}")
-            return None
-
-
 def fetch_page(url, max_retries=3, timeout=30):
     ua = UserAgent()
     
@@ -93,8 +70,6 @@ def fetch_page(url, max_retries=3, timeout=30):
         options.add_argument(f"--user-agent={user_agent}")
         options.add_argument("--disable-extensions")
         options.add_argument("--disable-notifications")
-        options.add_argument("--disable-web-security")
-        options.add_argument("--allow-running-insecure-content")
         options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--disable-infobars")
         options.add_argument("--window-size=1920,1080")
@@ -103,7 +78,7 @@ def fetch_page(url, max_retries=3, timeout=30):
         options.add_argument("--disable-popup-blocking")
         options.add_experimental_option("excludeSwitches", ["enable-automation"])
         options.add_experimental_option("useAutomationExtension", False)
-        logging.info("Running in headless mode with CI-friendly options")
+        logging.info("Running in headless mode")
 
         try:
             chromedriver_path = shutil.which("chromedriver")
@@ -236,42 +211,6 @@ def save_debug_file(filename, content):
     safe_write_file(filename, content)
 
 
-def calculate_percent_off(price_new, price_old):
-    try:
-        new = float(price_new)
-        old = float(price_old)
-        if old <= 0:
-            return "N/A"
-        percent_off = ((old - new) / old) * 100
-        return f"{percent_off:.0f}%"
-    except (ValueError, TypeError):
-        return "N/A"
-
-
-def extract_deck_size(name):
-    """Extract deck width from product name (e.g., '8.25"' from 'Element 8.25" Deck')"""
-    if not name:
-        return None
-    
-    patterns = [
-        r'(\d+\.?\d*)\s*["\u201d\u2033]',
-        r'(\d+\.?\d*)\s*(?:inch|in\b)',
-        r'\b(\d\.\d{1,3})\b',
-        r'\b([789])\b(?!\d)',
-    ]
-    
-    for pattern in patterns:
-        match = re.search(pattern, name, re.IGNORECASE)
-        if match:
-            try:
-                size = float(match.group(1))
-                if 7.0 <= size <= 10.5:
-                    return f'{size:.2f}'.rstrip('0').rstrip('.')
-            except ValueError:
-                continue
-    return None
-
-
 def load_price_history():
     """Load price history from JSON file"""
     try:
@@ -319,38 +258,6 @@ def update_price_history(current_data, history):
     return history
 
 
-def get_price_stats(url, history):
-    """Get price statistics for an item from history"""
-    if url not in history:
-        return {"lowest": None, "is_lowest": False, "trend": "stable", "history_days": 0}
-    
-    prices = history[url].get("prices", {})
-    if not prices:
-        return {"lowest": None, "is_lowest": False, "trend": "stable", "history_days": 0}
-    
-    price_values = list(prices.values())
-    lowest = min(price_values)
-    current = price_values[-1] if price_values else None
-    
-    is_lowest = current is not None and current <= lowest
-    
-    trend = "stable"
-    if len(price_values) >= 2:
-        recent = price_values[-1]
-        previous = price_values[-2]
-        if recent < previous:
-            trend = "down"
-        elif recent > previous:
-            trend = "up"
-    
-    return {
-        "lowest": lowest,
-        "is_lowest": is_lowest,
-        "trend": trend,
-        "history_days": len(prices)
-    }
-
-
 class Scraper:
     def __init__(self, name, url, part):
         self.name = name
@@ -359,7 +266,16 @@ class Scraper:
 
     def scrape(self):
         html = fetch_page(self.url)
+        if not html:
+            return None
         return self.parse(html)
+
+    def _keep(self, name, url, price_new, price_old):
+        reason = filter_reason(name, self.part, url, price_new, price_old)
+        if reason:
+            logging.info(f"Filtered out ({self.part}): {name} ({reason})")
+            return False
+        return True
 
     def parse(self, html):
         raise NotImplementedError
@@ -385,7 +301,7 @@ class ZumiezScraper(Scraper):
                 if not link:
                     logging.warning("No link found for product")
                     continue
-                href = str(link.get("href", ""))
+                href = normalize_url(link.get("href", ""))
                 if href.startswith("/"):
                     href = "https://www.zumiez.com" + href
                 if href in seen:
@@ -399,19 +315,10 @@ class ZumiezScraper(Scraper):
                 else:
                     img = link.find("img", alt=True)
                     name = str(img.get("alt", "")).strip() if img else ""
+                name = normalize_product_name(name)
                 if not name:
                     logging.warning(f"No name found for {href}")
                     continue
-
-                if self.part == "Wheels":
-                    if not any(brand in name for brand in ["Bones", "Powell", "Spitfire", "OJ"]):
-                        logging.info(f"Skipping product not from Bones, Powell, Spitfire, or OJ: {name}")
-                        continue
-
-                if self.part == "Trucks":
-                    if not any(brand in name for brand in ["Independent", "Indy", "Ace", "Slappy"]):
-                        logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
-                        continue
 
                 sale_price_el = product.select_one(".ProductPrice-PriceValue")
                 original_price_el = product.select_one(".ProductCardPrice-HighPrice")
@@ -422,17 +329,8 @@ class ZumiezScraper(Scraper):
                     logging.warning(f"No sale price found for {href}")
                     continue
 
-                if self.part == "Decks":
-                    percent_off = calculate_percent_off(sale_price, original_price)
-                    logging.info(f"Deck {name}: {percent_off} off")
-                    try:
-                        percent_off_value = float(percent_off.strip("%"))
-                        if percent_off_value < 10:
-                            logging.info(f"Skipping deck with less than 10% off: {name} ({percent_off})")
-                            continue
-                    except (ValueError, TypeError):
-                        logging.info(f"Skipping deck with invalid % off: {name} ({percent_off})")
-                        continue
+                if not self._keep(name, href, sale_price, original_price):
+                    continue
 
                 availability = "Check store"
                 item = {
@@ -488,6 +386,7 @@ class SkateWarehouseScraper(Scraper):
 
             if href.startswith("/"):
                 href = "https://www.skatewarehouse.com" + href
+            href = normalize_url(href)
             if href in seen:
                 logging.info(f"Duplicate URL skipped: {href}")
                 continue
@@ -496,32 +395,14 @@ class SkateWarehouseScraper(Scraper):
             if not prices:
                 continue
 
-            name = text.split(f"${prices[0]}")[0].strip()
+            name = normalize_product_name(text.split(f"${prices[0]}")[0].strip())
             if not name:
                 logging.warning(f"No name found for {href}")
                 continue
 
-            if self.part == "Wheels":
-                if not any(brand in name for brand in ["Bones", "Powell", "Spitfire", "OJ"]):
-                    logging.info(f"Skipping product not from Bones, Powell, Spitfire, or OJ: {name}")
-                    continue
-            elif self.part == "Trucks":
-                if not any(brand in name for brand in ["Independent", "Indy", "Ace", "Slappy"]):
-                    logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
-                    continue
-            elif self.part == "Decks":
-                price_new = prices[0]
-                price_old = prices[1] if len(prices) > 1 else None
-                percent_off = calculate_percent_off(price_new, price_old)
-                logging.info(f"Deck {name}: {percent_off} off")
-                try:
-                    percent_off_value = float(percent_off.strip("%"))
-                    if percent_off_value < 10:
-                        logging.info(f"Skipping deck with less than 10% off: {name} ({percent_off})")
-                        continue
-                except (ValueError, TypeError):
-                    logging.info(f"Skipping deck with invalid % off: {name} ({percent_off})")
-                    continue
+            price_old = prices[1] if len(prices) > 1 else None
+            if not self._keep(name, href, prices[0], price_old):
+                continue
 
             seen.add(href)
             price_old = prices[1] if len(prices) > 1 else None
@@ -572,7 +453,7 @@ class CCSScraper(Scraper):
                 if not link_el:
                     continue
                     
-                href = str(link_el.get("href", ""))
+                href = normalize_url(link_el.get("href", ""))
                 if href.startswith("/"):
                     href = "https://shop.ccs.com" + href
                 if href in seen or not href:
@@ -591,17 +472,13 @@ class CCSScraper(Scraper):
                     aria_label = str(link_el.get("aria-label", ""))
                     name = title_attr or aria_label
                     
+                name = normalize_product_name(name)
                 if not name:
                     continue
 
                 name_lower = name.lower()
                 href_lower = href.lower()
-                
-                non_skate_keywords = ["hat", "cap", "shirt", "tee", "hoodie", "jacket", "pant", "short", "shoe", "sneaker", "sock", "backpack", "bag", "beanie", "glove"]
-                if any(keyword in name_lower for keyword in non_skate_keywords):
-                    logging.info(f"Skipping non-skate product: {name}")
-                    continue
-                
+
                 if self.part == "Decks":
                     if "deck" not in name_lower and "deck" not in href_lower:
                         continue
@@ -617,7 +494,6 @@ class CCSScraper(Scraper):
 
                 price_current_el = container.select_one(".product-item__price-current")
                 price_compare_el = container.select_one(".product-item__price-compare")
-                price_discount_el = container.select_one(".product-item__price-discount")
                 
                 price_new = None
                 price_old = None
@@ -647,24 +523,8 @@ class CCSScraper(Scraper):
                 if not price_new:
                     continue
 
-                if self.part == "Decks":
-                    percent_off = calculate_percent_off(price_new, price_old)
-                    try:
-                        percent_off_value = float(percent_off.strip("%"))
-                        if percent_off_value < 10:
-                            logging.info(f"Skipping deck with less than 10% off: {name} ({percent_off})")
-                            continue
-                    except (ValueError, TypeError):
-                        continue
-
-                if self.part == "Wheels":
-                    if not any(brand in name for brand in ["Bones", "Powell", "Spitfire", "OJ"]):
-                        continue
-
-                if self.part == "Trucks":
-                    if not any(brand in name for brand in ["Independent", "Indy", "Ace", "Slappy"]):
-                        logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
-                        continue
+                if not self._keep(name, href, price_new, price_old):
+                    continue
 
                 item = {
                     "name": name,
@@ -712,7 +572,7 @@ class TacticsScraper(Scraper):
                 if not link_el:
                     continue
                     
-                href = str(link_el.get("href", ""))
+                href = normalize_url(link_el.get("href", ""))
                 if href.startswith("/"):
                     href = "https://www.tactics.com" + href
                 if href in seen or not href:
@@ -728,6 +588,7 @@ class TacticsScraper(Scraper):
                     if brand_el:
                         name = brand_el.get_text(strip=True)
                 
+                name = normalize_product_name(name)
                 if not name:
                     continue
 
@@ -749,7 +610,7 @@ class TacticsScraper(Scraper):
                         percent_off_value = int(discount_match.group(1))
                         try:
                             price_old = str(round(float(price_new) / (1 - percent_off_value / 100), 2))
-                        except:
+                        except (ValueError, ZeroDivisionError, TypeError):
                             pass
                 
                 if not price_new:
@@ -763,24 +624,8 @@ class TacticsScraper(Scraper):
                 if not price_new:
                     continue
 
-                if self.part == "Decks":
-                    percent_off = calculate_percent_off(price_new, price_old)
-                    try:
-                        percent_off_value = float(percent_off.strip("%"))
-                        if percent_off_value < 10:
-                            logging.info(f"Skipping deck with less than 10% off: {name} ({percent_off})")
-                            continue
-                    except (ValueError, TypeError):
-                        continue
-
-                if self.part == "Wheels":
-                    if not any(brand in name for brand in ["Bones", "Powell", "Spitfire", "OJ"]):
-                        continue
-
-                if self.part == "Trucks":
-                    if not any(brand in name for brand in ["Independent", "Indy", "Ace", "Slappy"]):
-                        logging.info(f"Skipping product not from Independent, Ace, or Slappy Trucks: {name}")
-                        continue
+                if not self._keep(name, href, price_new, price_old):
+                    continue
 
                 item = {
                     "name": name,
@@ -838,912 +683,6 @@ def save_current(data, path="previous_data.json"):
         return False
 
 
-def compare(prev, curr):
-    valid_parts = {"Decks", "Wheels", "Trucks", "Bearings"}
-    changes = {}
-    for site, items in curr.items():
-        prev_map = {i["url"]: i for i in prev.get(site, [])}
-        diffs = []
-        for it in items:
-            pi = prev_map.get(it["url"])
-            if not pi:
-                diffs.append({"type": "new", "item": it})
-            elif it["price_new"] != pi.get("price_new"):
-                diffs.append({
-                    "type": "price_change",
-                    "url": it["url"],
-                    "old": pi.get("price_new"),
-                    "new": it["price_new"],
-                    "name": it["name"]
-                })
-        curr_urls = {i["url"] for i in items}
-        for url, pi in prev_map.items():
-            if url not in curr_urls:
-                item_part = pi.get("part", "")
-                if item_part in valid_parts:
-                    diffs.append({"type": "removed", "item": pi})
-                else:
-                    logging.info(f"Skipping out-of-scope removed item: {pi.get('name', 'Unknown')} (part: {item_part})")
-        if diffs:
-            changes[site] = diffs
-    return changes
-
-
-def generate_html_chart(data, changes, price_history=None, output_file="sale_items_chart.html"):
-    current_date = datetime.datetime.now().strftime("%Y-%m-%d")
-    current_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-    if price_history is None:
-        price_history = {}
-
-    all_products = []
-    for site_key, items in data.items():
-        all_products.extend(items)
-    
-    all_sizes = set()
-    for item in all_products:
-        if item.get("part") == "Decks" and item.get("size"):
-            all_sizes.add(item.get("size"))
-    all_sizes = sorted(all_sizes, key=lambda x: float(x) if x else 0)
-
-    html_content = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skateboard Sale Tracker | {current_date}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {{
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #64748b;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --bg-primary: #f8fafc;
-            --bg-card: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-        }}
-
-        * {{
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }}
-
-        body {{
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }}
-
-        .container {{
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }}
-
-        header {{
-            text-align: center;
-            margin-bottom: 2rem;
-            padding: 2rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            border-radius: 16px;
-            color: white;
-            box-shadow: var(--shadow-lg);
-        }}
-
-        header h1 {{
-            font-size: 2.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }}
-
-        header p {{
-            opacity: 0.9;
-            font-size: 1rem;
-        }}
-
-        .stats-grid {{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }}
-
-        .stat-card {{
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }}
-
-        .stat-card:hover {{
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }}
-
-        .stat-card .number {{
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }}
-
-        .stat-card .label {{
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }}
-
-        .controls {{
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-        }}
-
-        .search-box {{
-            flex: 1;
-            min-width: 250px;
-            position: relative;
-        }}
-
-        .search-box input {{
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.75rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }}
-
-        .search-box input:focus {{
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }}
-
-        .search-box::before {{
-            content: "🔍";
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1rem;
-        }}
-
-        .filter-group {{
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }}
-
-        .filter-btn {{
-            padding: 0.5rem 1rem;
-            border: 2px solid var(--border);
-            background: var(--bg-card);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }}
-
-        .filter-btn:hover {{
-            border-color: var(--primary);
-            color: var(--primary);
-        }}
-
-        .filter-btn.active {{
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }}
-
-        .section {{
-            margin-bottom: 2rem;
-        }}
-
-        .section-header {{
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 1.5rem;
-            background: var(--bg-card);
-            border-radius: 12px 12px 0 0;
-            border-bottom: 2px solid var(--border);
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.2s;
-        }}
-
-        .section-header:hover {{
-            background: #f1f5f9;
-        }}
-
-        .section-header h2 {{
-            font-size: 1.25rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }}
-
-        .section-header .badge {{
-            background: var(--primary);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-size: 0.875rem;
-            font-weight: 500;
-        }}
-
-        .section-header .toggle-icon {{
-            font-size: 1.5rem;
-            color: var(--secondary);
-            transition: transform 0.3s;
-        }}
-
-        .section-header.collapsed .toggle-icon {{
-            transform: rotate(-90deg);
-        }}
-
-        .section-content {{
-            background: var(--bg-card);
-            border-radius: 0 0 12px 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }}
-
-        .section-content.collapsed {{
-            display: none;
-        }}
-
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-        }}
-
-        th {{
-            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            white-space: nowrap;
-        }}
-
-        th:hover {{
-            background: linear-gradient(135deg, #475569 0%, #334155 100%);
-        }}
-
-        th .sort-icon {{
-            margin-left: 0.5rem;
-            opacity: 0.5;
-        }}
-
-        th.sorted .sort-icon {{
-            opacity: 1;
-        }}
-
-        td {{
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            vertical-align: middle;
-        }}
-
-        tr:hover td {{
-            background: #f8fafc;
-        }}
-
-        tr:last-child td {{
-            border-bottom: none;
-        }}
-
-        .product-name {{
-            font-weight: 500;
-            max-width: 400px;
-        }}
-
-        .product-name a {{
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }}
-
-        .product-name a:hover {{
-            color: var(--primary);
-        }}
-
-        .price {{
-            font-weight: 600;
-            font-family: 'SF Mono', 'Consolas', monospace;
-        }}
-
-        .price-new {{
-            color: var(--success);
-            font-size: 1.1rem;
-        }}
-
-        .price-old {{
-            color: var(--text-secondary);
-            text-decoration: line-through;
-            font-size: 0.9rem;
-        }}
-
-        .discount {{
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 999px;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }}
-
-        .discount.high {{
-            background: #dcfce7;
-            color: #166534;
-        }}
-
-        .discount.medium {{
-            background: #fef3c7;
-            color: #92400e;
-        }}
-
-        .discount.low {{
-            background: #fee2e2;
-            color: #991b1b;
-        }}
-
-        .store-badge {{
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }}
-
-        .store-zumiez {{ background: #fce7f3; color: #be185d; }}
-        .store-skatewarehouse {{ background: #dbeafe; color: #1d4ed8; }}
-        .store-ccs {{ background: #d1fae5; color: #059669; }}
-        .store-tactics {{ background: #fef3c7; color: #d97706; }}
-
-        .part-badge {{
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            background: #f1f5f9;
-            color: var(--text-secondary);
-        }}
-
-        .size-badge {{
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            background: #e0e7ff;
-            color: #3730a3;
-        }}
-
-        .lowest-badge {{
-            display: inline-block;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            background: #fef08a;
-            color: #854d0e;
-            margin-left: 0.25rem;
-            animation: pulse 2s infinite;
-        }}
-
-        @keyframes pulse {{
-            0%, 100% {{ opacity: 1; }}
-            50% {{ opacity: 0.7; }}
-        }}
-
-        .trend-up {{
-            color: #dc2626;
-            font-size: 0.75rem;
-            margin-left: 0.25rem;
-        }}
-
-        .trend-down {{
-            color: #16a34a;
-            font-size: 0.75rem;
-            margin-left: 0.25rem;
-        }}
-
-        .price-history {{
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
-        }}
-
-        .changes-section {{
-            margin-top: 2rem;
-        }}
-
-        .change-row.new td {{
-            background: #f0fdf4;
-        }}
-
-        .change-row.price-change td {{
-            background: #fffbeb;
-        }}
-
-        .change-row.removed td {{
-            background: #fef2f2;
-            text-decoration: line-through;
-            opacity: 0.7;
-        }}
-
-        .no-results {{
-            text-align: center;
-            padding: 3rem;
-            color: var(--text-secondary);
-        }}
-
-        .no-results-icon {{
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }}
-
-        footer {{
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }}
-
-        @media (max-width: 768px) {{
-            .container {{
-                padding: 1rem;
-            }}
-
-            header h1 {{
-                font-size: 1.5rem;
-            }}
-
-            .controls {{
-                flex-direction: column;
-            }}
-
-            .search-box {{
-                min-width: 100%;
-            }}
-
-            table {{
-                display: block;
-                overflow-x: auto;
-            }}
-
-            th, td {{
-                padding: 0.75rem;
-                font-size: 0.875rem;
-            }}
-
-            .product-name {{
-                max-width: 200px;
-            }}
-        }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Skateboard Sale Tracker</h1>
-            <p>Last updated: {current_datetime}</p>
-        </header>
-"""
-
-    store_counts = {}
-    part_counts = {}
-    total_products = len(all_products)
-    
-    for item in all_products:
-        store = item.get("store", "Unknown")
-        part = item.get("part", "Unknown")
-        store_counts[store] = store_counts.get(store, 0) + 1
-        part_counts[part] = part_counts.get(part, 0) + 1
-
-    html_content += """
-        <div class="stats-grid">
-"""
-    html_content += f"""
-            <div class="stat-card">
-                <div class="number">{total_products}</div>
-                <div class="label">Total Deals</div>
-            </div>
-"""
-    
-    for store, count in sorted(store_counts.items()):
-        html_content += f"""
-            <div class="stat-card">
-                <div class="number">{count}</div>
-                <div class="label">{store}</div>
-            </div>
-"""
-    
-    html_content += """
-        </div>
-
-        <div class="controls">
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search products..." onkeyup="filterProducts()">
-            </div>
-            <div class="filter-group" id="storeFilters">
-                <button class="filter-btn active" data-store="all" onclick="filterByStore('all')">All Stores</button>
-"""
-    
-    for store in sorted(store_counts.keys()):
-        html_content += f"""
-                <button class="filter-btn" data-store="{store.lower()}" onclick="filterByStore('{store}')">{store}</button>
-"""
-    
-    html_content += """
-            </div>
-            <div class="filter-group" id="partFilters">
-                <button class="filter-btn active" data-part="all" onclick="filterByPart('all')">All Parts</button>
-"""
-    
-    for part in sorted(part_counts.keys()):
-        html_content += f"""
-                <button class="filter-btn" data-part="{part.lower()}" onclick="filterByPart('{part}')">{part}</button>
-"""
-    
-    html_content += """
-            </div>
-            <div class="filter-group" id="sizeFilters">
-                <button class="filter-btn active" data-size="all" onclick="filterBySize('all')">All Sizes</button>
-"""
-    
-    for size in all_sizes:
-        html_content += f"""
-                <button class="filter-btn" data-size="{size}" onclick="filterBySize('{size}')">{size}"</button>
-"""
-    
-    html_content += """
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header" onclick="toggleSection(this)">
-                <h2>All Deals <span class="badge">{}</span></h2>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="section-content">
-                <table id="mainTable">
-                    <thead>
-                        <tr>
-                            <th onclick="sortTable('mainTable', 0)">Store <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 1)">Part <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 2, true)">Size <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 3)">Product <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 4, true)">Sale Price <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 5, true)">Original <span class="sort-icon">↕</span></th>
-                            <th onclick="sortTable('mainTable', 6, true)">Discount <span class="sort-icon">↕</span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-""".format(total_products)
-
-    for item in all_products:
-        percent_off = calculate_percent_off(item.get("price_new"), item.get("price_old"))
-        try:
-            pct_value = float(percent_off.strip("%"))
-            if pct_value >= 40:
-                discount_class = "high"
-            elif pct_value >= 25:
-                discount_class = "medium"
-            else:
-                discount_class = "low"
-        except:
-            discount_class = "low"
-            
-        store = item.get("store", "Unknown")
-        store_class = f"store-{store.lower().replace(' ', '')}"
-        
-        price_old_display = f"${item['price_old']}" if item.get('price_old') else "N/A"
-        
-        size = item.get("size", "")
-        size_display = f'<span class="size-badge">{size}"</span>' if size else "-"
-        
-        price_stats = get_price_stats(item.get("url", ""), price_history)
-        lowest_badge = ""
-        trend_indicator = ""
-        history_info = ""
-        
-        if price_stats["is_lowest"] and price_stats["history_days"] > 1:
-            lowest_badge = '<span class="lowest-badge">LOWEST</span>'
-        
-        if price_stats["trend"] == "down":
-            trend_indicator = '<span class="trend-down">↓</span>'
-        elif price_stats["trend"] == "up":
-            trend_indicator = '<span class="trend-up">↑</span>'
-        
-        if price_stats["history_days"] > 1:
-            history_info = f'<div class="price-history">Tracked {price_stats["history_days"]} days</div>'
-        
-        html_content += f"""
-                        <tr data-store="{store}" data-part="{item.get('part', '')}" data-size="{size}">
-                            <td><span class="store-badge {store_class}">{store}</span></td>
-                            <td><span class="part-badge">{item.get('part', 'N/A')}</span></td>
-                            <td>{size_display}</td>
-                            <td class="product-name"><a href="{item['url']}" target="_blank" rel="noopener">{item['name']}</a></td>
-                            <td class="price price-new">${item['price_new']}{lowest_badge}{trend_indicator}{history_info}</td>
-                            <td class="price price-old">{price_old_display}</td>
-                            <td><span class="discount {discount_class}">{percent_off}</span></td>
-                        </tr>
-"""
-
-    html_content += """
-                    </tbody>
-                </table>
-            </div>
-        </div>
-"""
-
-    total_changes = sum(len(c) for c in changes.values()) if changes else 0
-    html_content += f"""
-        <div class="section changes-section">
-            <div class="section-header" onclick="toggleSection(this)">
-                <h2>Recent Changes <span class="badge">{total_changes}</span></h2>
-                <span class="toggle-icon">▼</span>
-            </div>
-            <div class="section-content">
-                <table id="changesTable">
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Store</th>
-                            <th>Product</th>
-                            <th>Sale Price</th>
-                            <th>Original</th>
-                            <th>Discount</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-"""
-    if changes:
-        for site, site_changes in changes.items():
-            for change in site_changes:
-                if change["type"] == "new":
-                    item = change["item"]
-                    price_old_display = f"${item['price_old']}" if item.get('price_old') else "N/A"
-                    percent_off = calculate_percent_off(item.get("price_new"), item.get("price_old"))
-                    try:
-                        pct_value = float(percent_off.strip("%"))
-                        if pct_value >= 40:
-                            discount_class = "high"
-                        elif pct_value >= 25:
-                            discount_class = "medium"
-                        else:
-                            discount_class = "low"
-                    except:
-                        discount_class = "low"
-                    html_content += f"""
-                        <tr class="change-row new">
-                            <td><span class="discount high">New</span></td>
-                            <td>{item.get('store', site.split('_')[0])}</td>
-                            <td class="product-name"><a href="{item['url']}" target="_blank">{item['name']}</a></td>
-                            <td class="price price-new">${item['price_new']}</td>
-                            <td class="price price-old">{price_old_display}</td>
-                            <td><span class="discount {discount_class}">{percent_off}</span></td>
-                            <td>{current_date}</td>
-                        </tr>
-"""
-                elif change["type"] == "price_change":
-                    percent_off = calculate_percent_off(change['new'], change['old'])
-                    try:
-                        pct_value = float(percent_off.strip("%"))
-                        if pct_value >= 40:
-                            discount_class = "high"
-                        elif pct_value >= 25:
-                            discount_class = "medium"
-                        else:
-                            discount_class = "low"
-                    except:
-                        discount_class = "low"
-                    html_content += f"""
-                        <tr class="change-row price-change">
-                            <td><span class="discount medium">Price Drop</span></td>
-                            <td>{site.split('_')[0]}</td>
-                            <td class="product-name"><a href="{change['url']}" target="_blank">{change['name']}</a></td>
-                            <td class="price price-new">${change['new']}</td>
-                            <td class="price price-old">${change['old']}</td>
-                            <td><span class="discount {discount_class}">{percent_off}</span></td>
-                            <td>{current_date}</td>
-                        </tr>
-"""
-                elif change["type"] == "removed":
-                    item = change["item"]
-                    price_old_display = f"${item['price_old']}" if item.get('price_old') else "N/A"
-                    html_content += f"""
-                        <tr class="change-row removed">
-                            <td><span class="discount low">Removed</span></td>
-                            <td>{item.get('store', site.split('_')[0])}</td>
-                            <td class="product-name">{item['name']}</td>
-                            <td class="price">-</td>
-                            <td class="price price-old">{price_old_display}</td>
-                            <td>-</td>
-                            <td>{current_date}</td>
-                        </tr>
-"""
-    else:
-        html_content += f"""
-                        <tr>
-                            <td colspan="7" style="text-align: center; padding: 2rem; color: #6b7280;">
-                                No changes detected since last update ({current_date})
-                            </td>
-                        </tr>
-"""
-    html_content += """
-                    </tbody>
-                </table>
-            </div>
-        </div>
-"""
-
-    html_content += """
-        <footer>
-            <p>Data scraped from Zumiez, Skate Warehouse, CCS, and Tactics</p>
-        </footer>
-    </div>
-
-    <script>
-        let currentStoreFilter = 'all';
-        let currentPartFilter = 'all';
-        let currentSizeFilter = 'all';
-
-        function filterProducts() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            const rows = document.querySelectorAll('#mainTable tbody tr');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                const store = (row.dataset.store || '').toLowerCase();
-                const part = (row.dataset.part || '').toLowerCase();
-                const size = row.dataset.size || '';
-                
-                const matchesSearch = searchTerm === '' || text.includes(searchTerm);
-                const matchesStore = currentStoreFilter === 'all' || store === currentStoreFilter.toLowerCase();
-                const matchesPart = currentPartFilter === 'all' || part === currentPartFilter.toLowerCase();
-                const matchesSize = currentSizeFilter === 'all' || size === currentSizeFilter;
-                
-                row.style.display = matchesSearch && matchesStore && matchesPart && matchesSize ? '' : 'none';
-            });
-            
-            updateNoResults();
-        }
-
-        function filterByStore(store) {
-            currentStoreFilter = store;
-            
-            document.querySelectorAll('#storeFilters .filter-btn').forEach(btn => {
-                const btnStore = btn.dataset.store || '';
-                btn.classList.toggle('active', btnStore === store.toLowerCase() || (store === 'all' && btnStore === 'all'));
-            });
-            
-            filterProducts();
-        }
-
-        function filterByPart(part) {
-            currentPartFilter = part;
-            
-            document.querySelectorAll('#partFilters .filter-btn').forEach(btn => {
-                const btnPart = btn.dataset.part || '';
-                btn.classList.toggle('active', btnPart === part.toLowerCase() || (part === 'all' && btnPart === 'all'));
-            });
-            
-            filterProducts();
-        }
-
-        function filterBySize(size) {
-            currentSizeFilter = size;
-            
-            document.querySelectorAll('#sizeFilters .filter-btn').forEach(btn => {
-                const btnSize = btn.dataset.size || '';
-                btn.classList.toggle('active', btnSize === size || (size === 'all' && btnSize === 'all'));
-            });
-            
-            filterProducts();
-        }
-
-        function sortTable(tableId, colIndex, isNumeric = false) {
-            const table = document.getElementById(tableId);
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            const header = table.querySelectorAll('th')[colIndex];
-            
-            const isAsc = header.dataset.sort !== 'asc';
-            
-            table.querySelectorAll('th').forEach(th => {
-                th.classList.remove('sorted');
-                delete th.dataset.sort;
-            });
-            
-            header.classList.add('sorted');
-            header.dataset.sort = isAsc ? 'asc' : 'desc';
-            
-            rows.sort((a, b) => {
-                let aVal = a.cells[colIndex].textContent.trim();
-                let bVal = b.cells[colIndex].textContent.trim();
-                
-                if (isNumeric) {
-                    aVal = parseFloat(aVal.replace(/[$%,]/g, '')) || 0;
-                    bVal = parseFloat(bVal.replace(/[$%,]/g, '')) || 0;
-                    return isAsc ? aVal - bVal : bVal - aVal;
-                } else {
-                    return isAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
-                }
-            });
-            
-            tbody.innerHTML = '';
-            rows.forEach(row => tbody.appendChild(row));
-        }
-
-        function toggleSection(header) {
-            header.classList.toggle('collapsed');
-            header.nextElementSibling.classList.toggle('collapsed');
-        }
-
-        function updateNoResults() {
-            const table = document.getElementById('mainTable');
-            const tbody = table.querySelector('tbody');
-            const visibleRows = tbody.querySelectorAll('tr:not([style*="display: none"])');
-            
-            let noResultsEl = document.querySelector('.no-results');
-            
-            if (visibleRows.length === 0) {
-                if (!noResultsEl) {
-                    noResultsEl = document.createElement('div');
-                    noResultsEl.className = 'no-results';
-                    noResultsEl.innerHTML = '<div class="no-results-icon">🔍</div><p>No products match your filters</p>';
-                    table.parentNode.appendChild(noResultsEl);
-                }
-                noResultsEl.style.display = 'block';
-            } else if (noResultsEl) {
-                noResultsEl.style.display = 'none';
-            }
-        }
-    </script>
-</body>
-</html>
-"""
-
-    success = safe_write_file(output_file, html_content)
-    if success:
-        logging.info(f"HTML chart saved to {output_file}")
-    return success
-
-
 def main():
     scrapers = [
         ZumiezDecksScraper(),
@@ -1769,20 +708,27 @@ def main():
 
     prev_data = load_previous()
     curr_data = {}
+    failed_keys = set()
 
     for scraper in scrapers:
         key = f"{scraper.name}_{scraper.part}"
         logging.info(f"Scraping {key}...")
         try:
             items = scraper.scrape()
-            curr_data[key] = items
-            logging.info(f"Got {len(items)} items from {key}")
         except Exception as e:
             logging.error(f"Failed to scrape {key}: {e}")
-            curr_data[key] = []
+            items = None
+        if items is None:
+            failed_keys.add(key)
+            retained = prev_data.get(key, [])
+            curr_data[key] = retained
+            logging.warning(f"Scrape failed for {key}; retaining {len(retained)} previous items")
+        else:
+            curr_data[key] = items
+            logging.info(f"Got {len(items)} items from {key}")
 
-    changes = compare(prev_data, curr_data)
-    
+    changes = compare_catalogs(prev_data, curr_data, failed_keys)
+
     if changes:
         logging.info("Changes detected:")
         for site, site_changes in changes.items():
@@ -1796,8 +742,9 @@ def main():
     logging.info(f"Updated price history for {len(price_history)} items")
 
     save_current(curr_data)
-    generate_html_chart(curr_data, changes, price_history)
-    
+    html = build_report_html(curr_data, changes, price_history, failed_keys)
+    safe_write_file("sale_items_chart.html", html)
+
     logging.info("Scraping complete!")
 
 
