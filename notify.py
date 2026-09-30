@@ -1,9 +1,11 @@
 """Email the skate sale digest over SMTP.
 
-Sends only when the digest has at least one new item or meaningful price
-drop. Removals alone do not send mail. Settings come from the environment.
-Missing settings are logged and skipped. SMTP errors are logged and do not
-propagate, so a mail failure cannot fail the scrape.
+Sends when the digest has at least one new item, a meaningful price drop,
+or a broken-store warning (a store/part empty or failed two runs in a row).
+Removals alone do not send mail. A warning sends even when there are no deals.
+Settings come from the environment. Missing settings are logged and skipped.
+SMTP errors are logged and do not propagate, so a mail failure cannot fail
+the scrape.
 
 Dry run (EMAIL_DRY_RUN=1, or --dry-run / --email-dry-run) writes the HTML
 message to a local file instead of connecting.
@@ -20,6 +22,7 @@ from email.message import EmailMessage
 from html import escape
 
 from filters import calculate_percent_off, item_passes_filters, normalize_product_name, normalize_url
+from health import warning_text
 from report import Digest
 
 logger = logging.getLogger("notify")
@@ -58,10 +61,15 @@ class SmtpConfig:
 
 
 def should_send(digest):
-    """True when the email has something to say. Removals do not count."""
+    """True when the email has something to say.
+
+    Removals do not count. A broken-store warning does, even with no deals.
+    """
     if digest is None:
         return False
-    return bool(digest.new_items or digest.drops)
+    if digest.new_items or digest.drops:
+        return True
+    return bool(getattr(digest, "warnings", None))
 
 
 def _truthy(value):
@@ -137,11 +145,22 @@ def _long_date(when):
     return f"{day.strftime('%B')} {day.day}, {day.year}"
 
 
+def _warnings(digest):
+    return list(getattr(digest, "warnings", None) or [])
+
+
 def summary_counts(digest):
     new_count = len(digest.new_items)
     drop_count = len(digest.drops)
     drop_word = "price drop" if drop_count == 1 else "price drops"
-    return f"{new_count} new, {drop_count} {drop_word}"
+    base = f"{new_count} new, {drop_count} {drop_word}"
+    warnings = _warnings(digest)
+    if not warnings:
+        return base
+    word = "store warning" if len(warnings) == 1 else "store warnings"
+    if new_count == 0 and drop_count == 0:
+        return f"{len(warnings)} {word}"
+    return f"{base}, {len(warnings)} {word}"
 
 
 def subject_line(digest, when=None):
@@ -224,6 +243,138 @@ def _section_summary(new_items, drops):
     return " · ".join(bits)
 
 
+def _is_atl(item, change=None):
+    if isinstance(change, dict) and change.get("at_all_time_low"):
+        return True
+    return bool(isinstance(item, dict) and item.get("at_all_time_low"))
+
+
+def _all_time_low_line(digest):
+    lows = list(getattr(digest, "all_time_lows", None) or [])
+    count = len(lows)
+    if count <= 0:
+        return ""
+    if count == 1:
+        return "1 tracked deal is at an all-time low. It is marked on the full report."
+    return f"{count} tracked deals are at an all-time low. They are marked on the full report."
+
+
+def _email_cross_store(digest):
+    """Groups where the cheapest store is at least $2 or 5% under the highest."""
+    picked = []
+    for group in getattr(digest, "cross_store", None) or []:
+        prices = []
+        for offer in group.get("offers") or []:
+            try:
+                prices.append(float(offer.get("price")))
+            except (TypeError, ValueError):
+                continue
+        if len(prices) < 2:
+            continue
+        low = min(prices)
+        high = max(prices)
+        gap = high - low
+        if high <= 0 or (gap < 2 and gap / high < 0.05):
+            continue
+        picked.append((gap, group))
+    picked.sort(key=lambda pair: pair[0], reverse=True)
+    return [group for _gap, group in picked[:8]]
+
+
+def _plain_cross_store(group):
+    lines = [group.get("label") or "Same product"]
+    cheapest = group.get("cheapest_price")
+    for offer in group.get("offers") or []:
+        price = offer.get("price")
+        mark = ""
+        try:
+            if cheapest is not None and abs(float(price) - float(cheapest)) < 0.001:
+                mark = " (lowest)"
+        except (TypeError, ValueError):
+            mark = ""
+        lines.append(f"- {offer.get('store') or 'Unknown'}: {_money(price)}{mark}")
+        if offer.get("url"):
+            lines.append(f"  {offer['url']}")
+    lines.append("")
+    return lines
+
+
+def _html_warnings(digest):
+    warnings = _warnings(digest)
+    if not warnings:
+        return ""
+    items = []
+    for warning in warnings:
+        text = warning_text(warning) if isinstance(warning, dict) else str(warning)
+        items.append(f"<li>{escape(text)}</li>")
+    return (
+        '<tr><td bgcolor="#fef2f2" style="background:#fef2f2;padding:16px 24px;'
+        'font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid #fca5a5;">'
+        '<p style="margin:0;font-size:15px;font-weight:700;color:#991b1b;">Store check failed</p>'
+        '<p style="margin:6px 0 0;font-size:13px;line-height:1.5;color:#7f1d1d;">'
+        "These categories usually have sale items. The last two runs came back empty or failed. "
+        "A single empty run does not send this warning.</p>"
+        '<ul style="margin:8px 0 0;padding-left:18px;color:#7f1d1d;font-size:13px;line-height:1.5;">'
+        f"{''.join(items)}</ul></td></tr>"
+    )
+
+
+def _html_low_note(digest):
+    text = _all_time_low_line(digest)
+    if not text:
+        return ""
+    return (
+        '<tr><td style="padding:4px 24px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;'
+        'line-height:1.5;color:#854d0e;">'
+        f"{escape(text)}</td></tr>"
+    )
+
+
+def _html_cross_store(digest):
+    groups = _email_cross_store(digest)
+    if not groups:
+        return ""
+    rows = [
+        '<tr><td bgcolor="#0f172a" style="background:#0f172a;padding:10px 20px;'
+        'font-family:Arial,Helvetica,sans-serif;">'
+        '<span data-section="across-stores" style="color:#ffffff;font-size:14px;font-weight:700;'
+        'letter-spacing:0.04em;">Across stores</span>'
+        '<span style="color:#94a3b8;font-size:12px;">&nbsp;&nbsp;Same product, lower price</span>'
+        "</td></tr>",
+        '<tr><td style="padding:8px 20px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;'
+        'line-height:1.4;color:#64748b;">Shown when the cheapest store is at least $2 or 5% under '
+        "the highest. The lowest price is marked.</td></tr>",
+    ]
+    for group in groups:
+        offers = []
+        cheapest = group.get("cheapest_price")
+        for offer in group.get("offers") or []:
+            price = offer.get("price")
+            try:
+                is_low = cheapest is not None and abs(float(price) - float(cheapest)) < 0.001
+            except (TypeError, ValueError):
+                is_low = False
+            weight = "700" if is_low else "400"
+            color = "#166534" if is_low else "#0f172a"
+            mark = " · lowest" if is_low else ""
+            url = offer.get("url") or ""
+            store = escape(offer.get("store") or "Unknown")
+            amount = escape(_money(price) + mark)
+            if url:
+                amount = f'<a href="{escape(url, quote=True)}" style="color:{color};text-decoration:underline;">{amount}</a>'
+            offers.append(
+                f'<span style="display:inline-block;margin:0 10px 6px 0;font-size:13px;font-weight:{weight};color:{color};">'
+                f"{store} {amount}</span>"
+            )
+        rows.append(
+            '<tr><td style="padding:8px 20px 0;font-family:Arial,Helvetica,sans-serif;">'
+            f'<div style="font-size:14px;font-weight:700;color:#0f172a;">{escape(group.get("label") or "")}</div>'
+            f'<div style="margin-top:4px;">{"".join(offers)}</div></td></tr>'
+        )
+    rows.append('<tr><td style="height:16px;font-size:0;line-height:0;">&nbsp;</td></tr>')
+    return "\n".join(rows)
+
+
 def render_plain(digest, report_url, when=None, banner=None):
     lines = [
         f"Skate deals — {_long_date(when)}",
@@ -232,7 +383,20 @@ def render_plain(digest, report_url, when=None, banner=None):
     ]
     if banner:
         lines.extend([banner, ""])
+    warnings = _warnings(digest)
+    if warnings:
+        lines.append("STORE CHECK FAILED")
+        lines.append(
+            "These categories usually have sale items. The last two runs came back empty or failed."
+        )
+        for warning in warnings:
+            text = warning_text(warning) if isinstance(warning, dict) else str(warning)
+            lines.append(f"- {text}")
+        lines.append("")
     lines.extend([f"Full report: {report_url}", ""])
+    low_line = _all_time_low_line(digest)
+    if low_line:
+        lines.extend([low_line, ""])
     for part, new_items, drops in iter_sections(digest):
         lines.append(part.upper())
         if new_items:
@@ -243,6 +407,13 @@ def render_plain(digest, report_url, when=None, banner=None):
             lines.append("Price drops")
             for change in drops:
                 lines.extend(_plain_drop(change))
+        lines.append("")
+    cross_store = _email_cross_store(digest)
+    if cross_store:
+        lines.append("ACROSS STORES")
+        lines.append("Same product, lower price at another store.")
+        for group in cross_store:
+            lines.extend(_plain_cross_store(group))
         lines.append("")
     lines.append(
         "Price drops are at least $2 or 5% versus the previous tracked sale price, not versus the original price."
@@ -267,7 +438,8 @@ def _plain_new(item):
     ]
     if url:
         rows.append(f"  {url}")
-    rows.append(f"  Sale {_money(item.get('price_new'))} · Original {original} · {_off_label(percent)}")
+    low = " · all-time low" if _is_atl(item) else ""
+    rows.append(f"  Sale {_money(item.get('price_new'))} · Original {original} · {_off_label(percent)}{low}")
     return rows
 
 
@@ -282,7 +454,8 @@ def _plain_drop(change):
     rows = [f"- {_store_name(item)}: {name}"]
     if url:
         rows.append(f"  {url}")
-    rows.append(f"  Sale {_money(sale)} · Prior sale {prior} · {change_label}")
+    low = " · all-time low" if _is_atl(item, change) else ""
+    rows.append(f"  Sale {_money(sale)} · Prior sale {prior} · {change_label}{low}")
     rows.append(f"  Original {_money(original) if original else 'N/A'} · {_off_label(percent)}")
     return rows
 
@@ -312,9 +485,18 @@ def render_html(digest, report_url, when=None, banner=None):
             'font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;border-bottom:1px solid #fdba74;">'
             f"{escape(banner)}</td></tr>"
         )
+    warning_row = _html_warnings(digest)
+    if warning_row:
+        chunks.append(warning_row)
     chunks.append(_html_report_link(safe_report))
+    low_note = _html_low_note(digest)
+    if low_note:
+        chunks.append(low_note)
     for part, new_items, drops in iter_sections(digest):
         chunks.append(_html_part(part, new_items, drops))
+    cross_row = _html_cross_store(digest)
+    if cross_row:
+        chunks.append(cross_row)
     chunks.append(_html_footer(safe_report))
     chunks.extend(["</table>", "</td></tr>", "</table>", "</body>", "</html>"])
     return "\n".join(chunks)
@@ -413,6 +595,7 @@ def _html_new_row(item):
         _product_link(name, url),
         _price_line(item.get("price_new"), original, percent),
         "",
+        atl=_is_atl(item),
     )
 
 
@@ -437,6 +620,7 @@ def _html_drop_row(change):
         _product_link(name, url),
         _price_line(sale, original, percent),
         extra,
+        atl=_is_atl(item, change),
     )
 
 
@@ -458,13 +642,21 @@ def _price_line(sale, original, percent):
     return sale_html + original_html + badge
 
 
-def _html_card(store, kind, kind_bg, kind_fg, link_html, price_html, extra_html):
+def _atl_email_badge():
+    return (
+        '&nbsp;<span style="display:inline-block;background:#fef08a;color:#854d0e;font-size:11px;'
+        'font-weight:700;letter-spacing:0.04em;padding:3px 8px;border-radius:4px;">ALL-TIME LOW</span>'
+    )
+
+
+def _html_card(store, kind, kind_bg, kind_fg, link_html, price_html, extra_html, atl=False):
+    atl_html = _atl_email_badge() if atl else ""
     return (
         '<tr><td style="padding:8px 20px 0;font-family:Arial,Helvetica,sans-serif;">'
         '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
         'style="border:1px solid #e2e8f0;border-radius:8px;">'
         '<tr><td style="padding:12px 14px;">'
-        f"{_store_badge(store)}&nbsp;{_kind_badge(kind, kind_bg, kind_fg)}"
+        f"{_store_badge(store)}&nbsp;{_kind_badge(kind, kind_bg, kind_fg)}{atl_html}"
         '<div style="margin-top:8px;font-size:15px;line-height:1.4;font-weight:700;color:#0f172a;">'
         f"{link_html}</div>"
         f'<p style="margin:8px 0 0;font-size:14px;line-height:1.4;">{price_html}</p>'

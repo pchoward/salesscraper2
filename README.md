@@ -8,12 +8,21 @@ Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publi
 ├── scraper.py                 # Selenium fetch + per-store parsers
 ├── filters.py                 # Shared allowlists and passes_filters()
 ├── report.py                  # Catalog diff + HTML report
-├── notify.py                  # SMTP email for new deals and price drops
+├── notify.py                  # SMTP email for deals and store warnings
+├── history.py                 # Bounded price history and all-time lows
+├── health.py                  # Per-store scrape counts and warnings
+├── matching.py                # Conservative cross-store product match
+├── pipeline.py                # Post-scrape bookkeeping (never fails the run)
 ├── test_filters.py            # Dry-check the filters without scraping
 ├── test_notify.py             # Dry-check the email digest without SMTP
+├── test_history.py            # Pruning and all-time-low rules
+├── test_health.py             # Two-bad-runs warning and recovery
+├── test_matching.py           # Cross-store match and report sections
+├── test_pipeline.py           # Bookkeeping stays non-fatal
 ├── sale_items_chart.html      # Generated report
 ├── previous_data.json         # Last catalog, for the diff
-├── price_history.json         # Daily sale prices
+├── price_history.json         # Bounded daily sale prices
+├── scrape_health.json         # Recent per-store, per-part counts
 └── .github/workflows/scrape.yml
 ```
 
@@ -53,18 +62,48 @@ Whole-word hat, cap, shirt, tee, hoodie, jacket, pant, short, shoe, sneaker, soc
 
 ## Report
 
-- **Digest** (open): new listings, plus sale-price drops of at least **$2 or 5%** versus the previous tracked sale price. The change is labeled as dollars and percent versus that prior sale, not versus MSRP.
-- **All Deals** (collapsed): the filtered catalog, still searchable.
+- **Store check** (only when needed, at the top): a store and part that normally has items came back empty, or the scrape failed, two runs in a row. One empty or failed run does not warn. The next run that returns items clears it.
+- **Digest** (open): new listings, plus sale-price drops of at least **$2 or 5%** versus the previous tracked sale price. The change is labeled as dollars and percent versus that prior sale, not versus MSRP. Rows at an all-time low are badged.
+- **All-time lows** (collapsed): listings whose current sale price is the lowest tracked price. A listing needs at least 3 observations spanning 7 days, so a brand-new item is not flagged just because its first price is the only price. The low can be older than the 90-day daily window.
+- **Across stores** (open when there is something to show): the same product at two or more stores, with the cheapest price highlighted. Matching requires the same part, brand, and size, plus the same distinctive model words. Deck widths that are just rounding differences snap together (8.12 and 8.125, 8.38 and 8.375). 8.475 does not snap to 8.5. Colors and extra words keep two listings apart. A name that is only a brand and a size (or only generic words like "team") is not grouped. Wheel matches also require a diameter. Truck matches require a hanger or axle size, so hollow and standard stay apart.
+- **All Deals** (collapsed): the filtered catalog, still searchable, with the all-time-low badge and a short trend arrow.
 - **Removed** (collapsed, only when there is something to show): hidden unless that store/part scrape succeeded. A failed fetch keeps the previous items for that key instead of writing `[]`, so a blocked page does not look like everything sold out.
 - Rows that fail `passes_filters()` are not listed as new, dropped, or removed.
 
+On the 2026-09-30 catalog, 114 of 173 filtered listings were at an all-time low. None of them were the same product at two stores, so Across stores is empty until a real pair shows up.
+
+## Price history
+
+`price_history.json` is committed every day, so it has to stay bounded. Each listing keeps:
+
+- daily sale prices for the last **90 days** (`date >= today - 90 days`)
+- a summary that is not trimmed with that window: first seen, last seen, observation count, and the all-time low price with the date it was first hit
+
+Listings the current filters reject are dropped (cruiser, mini, off-brand, apparel, and so on). A deck with no original price in this file is kept, because the history never stored MSRP and the discount rule cannot be applied. Size and keyword rejections still apply. A URL in the current passing catalog is always kept. Listings not seen for more than **180 days**, and not in the current catalog, are dropped.
+
+The prune runs at the end of every scrape. A problem in pruning, store health, or the new report sections is logged and does not stop the scrape or the commit.
+
+Cleanup of the file already in the repo, on 2026-09-30, without rewriting git history:
+
+| | Before | After |
+| --- | ---: | ---: |
+| File size | 2,003,420 bytes | 1,015,967 bytes |
+| Listings | 2,726 | 1,574 |
+| Daily price points | 51,233 | 15,400 |
+
+About 1 MB is the steady size: roughly the current catalog, one point a day, for 90 days. It no longer grows by every past day.
+
+## Store health
+
+`scrape_health.json` keeps the last 30 runs of per-store, per-part item counts, plus the last time each key actually had items. A failed fetch counts as a bad run even though the report still shows the previous rows. The same calendar day replaces that day's row, so a manual re-run is not a second failure. Keys that have never had items (bearings are often empty) do not warn.
+
 ## Email alerts
 
-After each scrape, `notify.py` emails that same digest. Mail goes out only when there is at least one new listing or a meaningful price drop ($2 or 5% versus the previous tracked sale price). Removals alone do not send mail. An empty digest does not send mail.
+After each scrape, `notify.py` emails that same digest. Mail goes out when there is at least one new listing, a meaningful price drop ($2 or 5% versus the previous tracked sale price), or a broken-store warning. A warning sends even on a day with no deals. Removals alone do not send mail. An empty digest with no store warning does not send mail.
 
-The message is HTML plus a plain-text fallback, grouped by part (Decks, Wheels, Trucks, Bearings). Each row has the store, the product name linked to the store page, the sale price, and the original price with percent off. Price drops also show the previous sale price and the dollar and percent change. The message links to the full report on GitHub Pages.
+The message is HTML plus a plain-text fallback, grouped by part (Decks, Wheels, Trucks, Bearings). Each row has the store, the product name linked to the store page, the sale price, and the original price with percent off. Price drops also show the previous sale price and the dollar and percent change. Rows at an all-time low are badged, and the message says how many tracked deals are at an all-time low. When the cheapest store is at least $2 or 5% under the highest for the same product, that comparison is included. A store warning is a block at the top. The message links to the full report on GitHub Pages.
 
-The scraper uses the Python standard library (`smtplib` and `email.message`). There is no new dependency. If a required setting is missing, the run logs one line and continues. If SMTP fails, the error is logged and the scrape still exits successfully, so the workflow can commit `sale_items_chart.html`, `previous_data.json`, and `price_history.json`.
+The scraper uses the Python standard library (`smtplib` and `email.message`). There is no new dependency. If a required setting is missing, the run logs one line and continues. If SMTP fails, the error is logged and the scrape still exits successfully, so the workflow can commit `sale_items_chart.html`, `previous_data.json`, `price_history.json`, and `scrape_health.json`.
 
 Add each value as its own secret. In the GitHub repo: **Settings → Secrets and variables → Actions → New repository secret**.
 
@@ -114,11 +153,15 @@ python scraper.py
 
 Chrome or Chromium is required. The browser runs headless.
 
-Dry-check the filters and the email digest (no network):
+Dry-check the filters, email, history prune, store warnings, and cross-store match (no network):
 
 ```bash
 python test_filters.py
 python test_notify.py
+python test_history.py
+python test_health.py
+python test_matching.py
+python test_pipeline.py
 ```
 
 ## Before / after
@@ -138,4 +181,4 @@ From the catalog already in `previous_data.json` (190 listings → 163 kept):
 | Baker 8.125 at ~14% off | Kept at the old 10% floor | Kept (known brand, still ≥10%) |
 | Vinyl decks at 12% off | Kept | Dropped (unknown brand under 15%) |
 
-`price_history.json` is left as-is. A later cleanup can trim entries for listings the filters now reject.
+`price_history.json` was pruned under the rules above. Listings those filters reject are no longer kept in the history.

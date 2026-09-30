@@ -373,6 +373,80 @@ class SamplePreviewTests(unittest.TestCase):
         self.assertIn("Subject: Skate deals:", text)
 
 
+class StoreWarningTests(unittest.TestCase):
+    def _warning(self, kind="empty"):
+        return {
+            "key": "Zumiez_Decks",
+            "store": "Zumiez",
+            "part": "Decks",
+            "kind": kind,
+            "dates": ["2026-09-29", "2026-09-30"],
+            "last_positive_date": "2026-09-28",
+            "last_positive_count": 12,
+        }
+
+    def test_warning_alone_sends_mail(self):
+        digest = Digest(warnings=[self._warning()])
+        self.assertTrue(should_send(digest))
+        self.assertEqual(subject_line(digest, WHEN), "Skate deals: 1 store warning (Sep 28)")
+        with patch("notify.smtplib.SMTP") as smtp:
+            server = smtp.return_value.__enter__.return_value
+            self.assertTrue(send_digest(digest, env=_full_env(), when=WHEN))
+        smtp.assert_called_once()
+        message = server.send_message.call_args[0][0]
+        self.assertEqual(message["Subject"], "Skate deals: 1 store warning (Sep 28)")
+        html = message.get_payload()[1].get_content()
+        plain = message.get_payload()[0].get_content()
+        self.assertIn("Store check failed", html)
+        self.assertIn("came back with no items two runs in a row", html)
+        self.assertIn("STORE CHECK FAILED", plain)
+        self.assertIn("Zumiez Decks", plain)
+
+    def test_warning_with_a_deal_is_included_in_the_subject(self):
+        digest = Digest(new_items=[_deck()], warnings=[self._warning()])
+        self.assertEqual(
+            subject_line(digest, WHEN),
+            "Skate deals: 1 new, 0 price drops, 1 store warning (Sep 28)",
+        )
+
+    def test_all_time_low_and_cross_store_render_when_present(self):
+        item = _deck()
+        item["at_all_time_low"] = True
+        digest = Digest(new_items=[item], all_time_lows=[item])
+        digest.cross_store = [
+            {
+                "label": "Baker Figgy Divine Evil 8.25\"",
+                "part": "Decks",
+                "cheapest_price": 50.0,
+                "offers": [
+                    {"store": "SkateWarehouse", "price": 50.0, "url": "https://example.com/cheap", "name": "Baker Figgy"},
+                    {"store": "Zumiez", "price": 64.99, "url": "https://example.com/pricey", "name": "Baker Figgy"},
+                ],
+            },
+            {
+                "label": "Almost the same",
+                "part": "Decks",
+                "cheapest_price": 40.0,
+                "offers": [
+                    {"store": "CCS", "price": 40.0, "url": "https://example.com/a", "name": "Close"},
+                    {"store": "Tactics", "price": 40.5, "url": "https://example.com/b", "name": "Close"},
+                ],
+            },
+        ]
+        html = render_html(digest, DEFAULT_REPORT_URL, WHEN)
+        plain = render_plain(digest, DEFAULT_REPORT_URL, WHEN)
+        self.assertIn("ALL-TIME LOW", html)
+        self.assertIn("1 tracked deal is at an all-time low", html)
+        self.assertIn('data-section="across-stores"', html)
+        self.assertIn("SkateWarehouse", html)
+        self.assertIn("$50.00", html)
+        self.assertNotIn("Almost the same", html)
+        self.assertIn("all-time low", plain)
+        self.assertIn("ACROSS STORES", plain)
+        self.assertIn("(lowest)", plain)
+        self.assertNotIn("Almost the same", plain)
+
+
 class WiringTests(unittest.TestCase):
     def test_workflow_passes_secrets_and_keeps_cron(self):
         with open(".github/workflows/scrape.yml", encoding="utf-8") as handle:

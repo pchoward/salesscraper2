@@ -4,12 +4,22 @@ The digest is the page: new listings and real drops in the sale price.
 All Deals stays available, collapsed. Removed rows are omitted when that
 store/part scrape failed, and anything rejected by filters.py is left out.
 
+Broken-store warnings (two bad runs in a row) sit at the top. All-time lows
+and a conservative cross-store comparison follow the digest.
+
 ``build_digest`` is the same split the HTML uses. ``notify.py`` sends email
 from that object and does not re-decide what counts as new or a drop.
 """
 
 import datetime
+import logging
 from html import escape
+
+from health import warning_text
+from history import all_time_low_status, price_trend, summarize_entry
+from matching import cross_store_groups
+
+logger = logging.getLogger("report")
 
 from filters import (
     calculate_percent_off,
@@ -93,26 +103,24 @@ def compare_catalogs(prev, curr, failed_keys=None):
 
 def get_price_stats(url, history):
     history = history or {}
-    entry = history.get(url) or history.get(normalize_url(url))
+    entry = None
+    if isinstance(history, dict):
+        entry = history.get(url) or history.get(normalize_url(url))
     empty = {"lowest": None, "is_lowest": False, "trend": "stable", "history_days": 0}
-    if not entry:
+    if not isinstance(entry, dict):
         return empty
-    prices = list((entry.get("prices") or {}).values())
-    if not prices:
+    summary = summarize_entry(entry)
+    prices = summary["prices"]
+    if not prices and summary.get("all_time_low") is None:
         return empty
-    lowest = min(prices)
-    current = prices[-1]
-    trend = "stable"
-    if len(prices) >= 2:
-        if prices[-1] < prices[-2]:
-            trend = "down"
-        elif prices[-1] > prices[-2]:
-            trend = "up"
+    current = prices[max(prices)] if prices else None
+    lowest = summary.get("all_time_low")
+    is_lowest = current is not None and lowest is not None and current <= lowest
     return {
         "lowest": lowest,
-        "is_lowest": current is not None and current <= lowest,
-        "trend": trend,
-        "history_days": len(prices),
+        "is_lowest": is_lowest,
+        "trend": price_trend(entry),
+        "history_days": summary["observation_count"],
     }
 
 
@@ -222,11 +230,17 @@ def _size_cell(item):
     return f'<span class="size-badge">{shown}"</span>', size
 
 
+def _atl_badge(item, price_history):
+    status = all_time_low_status(item, price_history)
+    if not status.get("flagged"):
+        return ""
+    title = escape(status.get("title") or "All-time low", quote=True)
+    return f'<span class="atl-badge" title="{title}">ALL-TIME LOW</span>'
+
+
 def _price_extras(item, price_history):
     stats = get_price_stats(item.get("url", ""), price_history)
-    bits = []
-    if stats["is_lowest"] and stats["history_days"] > 1:
-        bits.append('<span class="lowest-badge">LOWEST</span>')
+    bits = [_atl_badge(item, price_history)]
     if stats["trend"] == "down":
         bits.append('<span class="trend-down">↓</span>')
     elif stats["trend"] == "up":
@@ -234,7 +248,7 @@ def _price_extras(item, price_history):
     history = ""
     if stats["history_days"] > 1:
         history = f'<div class="price-history">Tracked {stats["history_days"]} days</div>'
-    return "".join(bits) + history
+    return "".join(bit for bit in bits if bit) + history
 
 
 CSS = """
@@ -419,7 +433,18 @@ tr:hover td { background: #f8fafc; }
 .store-tactics { background: #fef3c7; color: #d97706; }
 .part-badge { background: #f1f5f9; color: var(--text-secondary); font-weight: 500; }
 .size-badge { background: #e0e7ff; color: #3730a3; font-size: 0.875rem; }
-.lowest-badge {
+.alert {
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    color: #991b1b;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+.alert strong { display: block; font-size: 1.05rem; margin-bottom: 0.35rem; }
+.alert p { margin: 0; }
+.alert ul { margin: 0.5rem 0 0 1.2rem; }
+.atl-badge, .lowest-badge {
     display: inline-block;
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
@@ -427,8 +452,20 @@ tr:hover td { background: #f8fafc; }
     font-weight: 600;
     background: #fef08a;
     color: #854d0e;
-    margin-left: 0.25rem;
+    margin-left: 0.35rem;
+    vertical-align: middle;
 }
+.compare-grid { display: flex; flex-direction: column; gap: 0.75rem; padding: 1rem 1.25rem 1.25rem; }
+.compare-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1rem; }
+.compare-label { font-weight: 600; margin-bottom: 0.55rem; }
+.compare-offers { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.5rem; }
+.offer { border: 1px solid var(--border); border-radius: 8px; padding: 0.55rem 0.75rem; background: #fff; }
+.offer.cheapest { background: #dcfce7; border-color: #86efac; }
+.offer .who { font-size: 0.75rem; font-weight: 700; }
+.offer .amt { font-family: 'SF Mono', Consolas, monospace; font-size: 1.05rem; font-weight: 700; }
+.offer.cheapest .amt { color: #166534; }
+.offer .nm { font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.15rem; }
+.offer .nm a { color: inherit; }
 .trend-up { color: #dc2626; font-size: 0.75rem; margin-left: 0.25rem; }
 .trend-down { color: #16a34a; font-size: 0.75rem; margin-left: 0.25rem; }
 .price-history { font-size: 0.7rem; color: var(--text-secondary); margin-top: 0.25rem; }
@@ -535,12 +572,148 @@ def _filter_buttons(group_id, attr, onclick, values):
 
 
 class Digest:
-    """New listings, meaningful sale-price drops, and successful-scrape removals."""
+    """New listings, meaningful sale-price drops, and successful-scrape removals.
 
-    def __init__(self, new_items=None, drops=None, removed=None):
+    ``warnings`` are broken-store alerts. They are not part of the catalog
+    diff; ``pipeline.decorate_digest`` attaches them, along with all-time
+    lows and cross-store groups for the email.
+    """
+
+    def __init__(
+        self,
+        new_items=None,
+        drops=None,
+        removed=None,
+        warnings=None,
+        all_time_lows=None,
+        cross_store=None,
+    ):
         self.new_items = list(new_items or [])
         self.drops = list(drops or [])
         self.removed = list(removed or [])
+        self.warnings = list(warnings or [])
+        self.all_time_lows = list(all_time_lows or [])
+        self.cross_store = list(cross_store or [])
+
+
+def _collect_warnings(digest):
+    try:
+        return [warning for warning in (getattr(digest, "warnings", None) or []) if warning]
+    except Exception:
+        logger.exception("Store warnings could not be read")
+        return []
+
+
+def _collect_lows(products, price_history):
+    try:
+        lows = [item for item in products if all_time_low_status(item, price_history).get("flagged")]
+    except Exception:
+        logger.exception("All-time low list failed")
+        return []
+    order = {"Decks": 0, "Wheels": 1, "Trucks": 2, "Bearings": 3}
+    lows.sort(key=lambda item: (order.get(item.get("part"), 9), _display_name(item)))
+    return lows
+
+
+def _collect_groups(products):
+    try:
+        return cross_store_groups(products)
+    except Exception:
+        logger.exception("Cross-store comparison failed")
+        return []
+
+
+def _alert_html(warnings):
+    if not warnings:
+        return ""
+    items = []
+    for warning in warnings:
+        text = warning_text(warning) if isinstance(warning, dict) else str(warning)
+        items.append(f"<li>{escape(text)}</li>")
+    return (
+        '<div class="alert" id="storeAlerts" role="status">'
+        "<strong>Store check failed</strong>"
+        "<p>These categories usually have sale items. The last two runs came back empty or failed. "
+        "A single empty run does not raise this warning.</p>"
+        f"<ul>{''.join(items)}</ul></div>"
+    )
+
+
+def _atl_section(low_items, price_history):
+    if not low_items:
+        return []
+    rows = [
+        '<div class="section" id="atlSection">',
+        '<div class="section-header collapsed" onclick="toggleSection(this)">'
+        f'<h2>All-time lows <span class="badge">{len(low_items)}</span></h2>'
+        '<span class="toggle-icon">▼</span></div>',
+        '<div class="section-content collapsed">',
+        '<p class="lede">Current sale price equals the lowest price tracked for that listing. '
+        "A listing needs at least 3 observations spanning 7 days, so a brand-new deal is not "
+        "flagged just because its first price is the only price.</p>",
+        '<table id="atlTable"><thead><tr>'
+        "<th>Store</th><th>Part</th><th>Product</th><th>Sale price</th><th>Low since</th><th>Observations</th>"
+        "</tr></thead><tbody>",
+    ]
+    for item in low_items:
+        status = all_time_low_status(item, price_history)
+        store = item.get("store") or "Unknown"
+        rows.append(
+            "<tr>"
+            f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
+            f'<td><span class="part-badge">{escape(item.get("part") or "")}</span></td>'
+            f'<td class="product-name">{_product_link(item)} {_atl_badge(item, price_history)}</td>'
+            f'<td class="price price-new">{_money(item.get("price_new"))}</td>'
+            f'<td>{escape(status.get("low_date") or "")}</td>'
+            f'<td>{status.get("observations") or ""}</td>'
+            "</tr>"
+        )
+    rows.append("</tbody></table></div></div>")
+    return rows
+
+
+def _compare_section(groups):
+    if not groups:
+        return []
+    rows = [
+        '<div class="section" id="compareSection">',
+        '<div class="section-header" onclick="toggleSection(this)">'
+        f'<h2>Across stores <span class="badge">{len(groups)}</span></h2>'
+        '<span class="toggle-icon">▼</span></div>',
+        '<div class="section-content">',
+        '<p class="lede">Same brand, model, and size at two or more stores. '
+        "The lowest price is highlighted. Matching is conservative, so some real duplicates stay separate.</p>",
+        '<div class="compare-grid">',
+    ]
+    for group in groups:
+        offers = []
+        for offer in group.get("offers") or []:
+            price = offer.get("price")
+            cheapest = price is not None and abs(price - group.get("cheapest_price", price)) < 0.001
+            klass = "offer cheapest" if cheapest else "offer"
+            store = offer.get("store") or ""
+            name = escape(offer.get("name") or "")
+            url = offer.get("url") or ""
+            if url:
+                name_html = f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{name}</a>'
+            else:
+                name_html = name
+            offers.append(
+                f'<div class="{klass}" data-store="{escape(store, quote=True)}">'
+                f'<div class="who"><span class="store-badge {_store_class(store)}">{escape(store)}</span></div>'
+                f'<div class="amt">{_money(price)}</div>'
+                f'<div class="nm">{name_html}</div>'
+                "</div>"
+            )
+        rows.append(
+            '<div class="compare-card">'
+            f'<div class="compare-label">{escape(group.get("label") or "")} '
+            f'<span class="part-badge">{escape(group.get("part") or "")}</span></div>'
+            f'<div class="compare-offers">{"".join(offers)}</div>'
+            "</div>"
+        )
+    rows.append("</div></div></div>")
+    return rows
 
 
 def build_digest(changes, failed_keys=None):
@@ -581,6 +754,9 @@ def build_report_html(data, changes, price_history=None, failed_keys=None, gener
             if size:
                 sizes.add(size)
     all_sizes = sorted(sizes, key=lambda value: float(value))
+    warnings = _collect_warnings(digest)
+    low_items = _collect_lows(products, price_history)
+    groups = _collect_groups(products)
 
     chunks = [
         "<!DOCTYPE html>",
@@ -598,11 +774,24 @@ def build_report_html(data, changes, price_history=None, failed_keys=None, gener
         "<h1>Skateboard Sale Tracker</h1>",
         f"<p>Last updated: {escape(generated_at)}</p>",
         "</header>",
-        '<div class="stats-grid">',
-        f'<div class="stat-card emphasis"><div class="number">{len(new_items)}</div><div class="label">New deals</div></div>',
-        f'<div class="stat-card emphasis"><div class="number">{len(drops)}</div><div class="label">Price drops</div></div>',
-        f'<div class="stat-card"><div class="number">{len(products)}</div><div class="label">Tracked deals</div></div>',
     ]
+    alert = _alert_html(warnings)
+    if alert:
+        chunks.append(alert)
+    chunks.append('<div class="stats-grid">')
+    chunks.append(
+        f'<div class="stat-card emphasis"><div class="number">{len(new_items)}</div><div class="label">New deals</div></div>'
+    )
+    chunks.append(
+        f'<div class="stat-card emphasis"><div class="number">{len(drops)}</div><div class="label">Price drops</div></div>'
+    )
+    if low_items:
+        chunks.append(
+            f'<div class="stat-card"><div class="number">{len(low_items)}</div><div class="label">All-time lows</div></div>'
+        )
+    chunks.append(
+        f'<div class="stat-card"><div class="number">{len(products)}</div><div class="label">Tracked deals</div></div>'
+    )
     for store, count in sorted(store_counts.items()):
         chunks.append(
             f'<div class="stat-card"><div class="number">{count}</div><div class="label">{escape(store)}</div></div>'
@@ -646,7 +835,7 @@ def build_report_html(data, changes, price_history=None, failed_keys=None, gener
                 f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
                 f'<td><span class="part-badge">{escape(item.get("part") or "")}</span></td>'
                 f"<td>{size_html}</td>"
-                f'<td class="product-name">{_product_link(item)}</td>'
+                f'<td class="product-name">{_product_link(item)} {_atl_badge(item, price_history)}</td>'
                 f'<td class="price price-new">{_money(item.get("price_new"))}</td>'
                 f'<td class="price price-old">{_money(item.get("price_old")) if item.get("price_old") else "N/A"}</td>'
                 f'<td><span class="discount {discount_class}">{escape(percent)}</span></td>'
@@ -672,12 +861,13 @@ def build_report_html(data, changes, price_history=None, failed_keys=None, gener
             link_item = {
                 "name": item.get("name") or change.get("name"),
                 "url": item.get("url") or change.get("url"),
+                "price_new": item.get("price_new", change.get("new")),
             }
             chunks.append(
                 "<tr>"
                 f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
                 f'<td><span class="part-badge">{escape(part)}</span></td>'
-                f'<td class="product-name">{_product_link(link_item)}</td>'
+                f'<td class="product-name">{_product_link(link_item)} {_atl_badge(link_item, price_history)}</td>'
                 f'<td class="price price-old">{_money(change.get("old"))}</td>'
                 f'<td class="price price-new">{_money(change.get("new"))}</td>'
                 f'<td class="delta">{escape(_drop_label(change))}</td>'
@@ -687,6 +877,9 @@ def build_report_html(data, changes, price_history=None, failed_keys=None, gener
     else:
         chunks.append('<p class="empty">No meaningful price drops.</p>')
     chunks.append("</div></div></div>")
+
+    chunks.extend(_atl_section(low_items, price_history))
+    chunks.extend(_compare_section(groups))
 
     chunks.append(
         '<div class="controls">'
@@ -763,7 +956,9 @@ def build_report_html(data, changes, price_history=None, failed_keys=None, gener
     chunks.append(
         "<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. "
         "Decks are kept at ≥10% off for known street brands and ≥15% off otherwise, "
-        "widths about 7.5–9.5\". Wheels, trucks, and bearings use brand allowlists.</p></footer>"
+        "widths about 7.5–9.5\". Wheels, trucks, and bearings use brand allowlists. "
+        "All-time low is the lowest tracked sale price after at least 3 observations spanning 7 days. "
+        "Across stores matches brand, model, and size.</p></footer>"
     )
     chunks.append("</div>")
     chunks.append(f"<script>{JS}</script>")

@@ -6,7 +6,6 @@ import sys
 import time
 import logging
 import random
-import datetime
 import shutil
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -20,7 +19,9 @@ from fake_useragent import UserAgent
 from selenium.common.exceptions import TimeoutException, WebDriverException
 
 from filters import extract_deck_size, filter_reason, normalize_product_name, normalize_url
+from health import HEALTH_PATH, load_state, state_json
 from notify import send_digest
+from pipeline import apply_run_updates, decorate_digest
 from report import build_digest, build_report_html, compare_catalogs
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -214,50 +215,32 @@ def save_debug_file(filename, content):
 
 
 def load_price_history():
-    """Load price history from JSON file"""
+    """Load price history from JSON file.
+
+    A missing file starts empty. A corrupt file is left untouched: the caller
+    skips saving so a bad read cannot wipe the committed history.
+    """
     try:
         with open("price_history.json", "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+            data = json.load(f)
+    except FileNotFoundError:
         return {}
+    except (json.JSONDecodeError, OSError) as exc:
+        logging.error("Could not load price history (leaving the file unchanged): %s", exc)
+        return None
+    if not isinstance(data, dict):
+        logging.error("Price history was not an object; leaving the file unchanged")
+        return None
+    return data
 
 
 def save_price_history(history):
     """Save price history to JSON file"""
-    safe_write_file("price_history.json", json.dumps(history, indent=2))
+    safe_write_file("price_history.json", json.dumps(history, indent=2) + "\n")
 
 
-def update_price_history(current_data, history):
-    """Update price history with current prices"""
-    today = datetime.datetime.now().strftime("%Y-%m-%d")
-    
-    for site_key, items in current_data.items():
-        for item in items:
-            url = item.get("url", "")
-            if not url:
-                continue
-            
-            price_new = item.get("price_new")
-            if not price_new:
-                continue
-            
-            try:
-                price = float(price_new)
-            except (ValueError, TypeError):
-                continue
-            
-            if url not in history:
-                history[url] = {
-                    "name": item.get("name", ""),
-                    "store": item.get("store", ""),
-                    "part": item.get("part", ""),
-                    "prices": {}
-                }
-            
-            history[url]["prices"][today] = price
-            history[url]["name"] = item.get("name", history[url].get("name", ""))
-    
-    return history
+def save_health(health):
+    safe_write_file(HEALTH_PATH, state_json(health))
 
 
 class Scraper:
@@ -740,16 +723,34 @@ def main():
         logging.info("No changes detected")
 
     price_history = load_price_history()
-    price_history = update_price_history(curr_data, price_history)
-    save_price_history(price_history)
-    logging.info(f"Updated price history for {len(price_history)} items")
+    health = load_state()
+    if price_history is None:
+        updates = apply_run_updates(curr_data, failed_keys, {}, health)
+        updates["save_history"] = False
+        updates["history"] = {}
+    else:
+        updates = apply_run_updates(curr_data, failed_keys, price_history, health)
+    if updates.get("save_history"):
+        save_price_history(updates["history"])
+        logging.info("Price history has %s listings", len(updates["history"]))
+    try:
+        save_health(updates["health"])
+    except Exception as exc:
+        logging.error("Could not save scrape health (continuing): %s", exc)
 
     save_current(curr_data)
-    html = build_report_html(curr_data, changes, price_history, failed_keys, digest=digest)
-    safe_write_file("sale_items_chart.html", html)
+    try:
+        decorate_digest(digest, curr_data, updates["history"], updates["warnings"])
+    except Exception as exc:
+        logging.error("Digest extras failed (continuing): %s", exc)
+    try:
+        html = build_report_html(curr_data, changes, updates["history"], failed_keys, digest=digest)
+        safe_write_file("sale_items_chart.html", html)
+    except Exception as exc:
+        logging.error("Report build failed (continuing): %s", exc)
 
-    # Mail only for new items or meaningful drops. Logged SMTP problems stay here
-    # so the report is still written and the workflow can commit.
+    # Mail for new items, meaningful drops, or a broken-store warning.
+    # Logged SMTP problems stay here so the workflow can still commit.
     dry_run = True if "--email-dry-run" in sys.argv[1:] else None
     send_digest(digest, dry_run=dry_run)
 
