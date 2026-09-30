@@ -3,6 +3,9 @@
 The digest is the page: new listings and real drops in the sale price.
 All Deals stays available, collapsed. Removed rows are omitted when that
 store/part scrape failed, and anything rejected by filters.py is left out.
+
+``build_digest`` is the same split the HTML uses. ``notify.py`` sends email
+from that object and does not re-decide what counts as new or a drop.
 """
 
 import datetime
@@ -531,11 +534,35 @@ def _filter_buttons(group_id, attr, onclick, values):
     return f'<div class="filter-group" id="{group_id}">{"".join(rows)}</div>'
 
 
-def build_report_html(data, changes, price_history=None, failed_keys=None, generated_at=None):
+class Digest:
+    """New listings, meaningful sale-price drops, and successful-scrape removals."""
+
+    def __init__(self, new_items=None, drops=None, removed=None):
+        self.new_items = list(new_items or [])
+        self.drops = list(drops or [])
+        self.removed = list(removed or [])
+
+
+def build_digest(changes, failed_keys=None):
+    """Split a catalog diff the same way the HTML report does.
+
+    New rows and price drops already passed ``passes_filters`` and the
+    meaningful-drop rule inside ``compare_catalogs`` / ``_split_changes``.
+    Removals are included only for keys that scraped successfully.
+    """
+    new_items, drops, removed = _split_changes(changes, failed_keys)
+    return Digest(new_items, drops, removed)
+
+
+def build_report_html(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None):
     price_history = price_history or {}
     failed_keys = list(failed_keys or [])
     products = _visible_products(data)
-    new_items, drops, removed = _split_changes(changes, failed_keys)
+    if digest is None:
+        digest = build_digest(changes, failed_keys)
+    new_items = digest.new_items
+    drops = digest.drops
+    removed = digest.removed
 
     if generated_at is None:
         generated_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

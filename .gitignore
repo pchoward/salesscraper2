@@ -30,6 +30,9 @@ ENV/
 # Debug files
 *_debug_*.html
 
+# Local email dry-run. Not a live alert.
+email_preview.html
+
 # IDE
 .idea/
 .vscode/

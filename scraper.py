@@ -2,6 +2,7 @@
 import os
 import re
 import json
+import sys
 import time
 import logging
 import random
@@ -19,7 +20,8 @@ from fake_useragent import UserAgent
 from selenium.common.exceptions import TimeoutException, WebDriverException
 
 from filters import extract_deck_size, filter_reason, normalize_product_name, normalize_url
-from report import build_report_html, compare_catalogs
+from notify import send_digest
+from report import build_digest, build_report_html, compare_catalogs
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -728,6 +730,7 @@ def main():
             logging.info(f"Got {len(items)} items from {key}")
 
     changes = compare_catalogs(prev_data, curr_data, failed_keys)
+    digest = build_digest(changes, failed_keys)
 
     if changes:
         logging.info("Changes detected:")
@@ -742,8 +745,13 @@ def main():
     logging.info(f"Updated price history for {len(price_history)} items")
 
     save_current(curr_data)
-    html = build_report_html(curr_data, changes, price_history, failed_keys)
+    html = build_report_html(curr_data, changes, price_history, failed_keys, digest=digest)
     safe_write_file("sale_items_chart.html", html)
+
+    # Mail only for new items or meaningful drops. Logged SMTP problems stay here
+    # so the report is still written and the workflow can commit.
+    dry_run = True if "--email-dry-run" in sys.argv[1:] else None
+    send_digest(digest, dry_run=dry_run)
 
     logging.info("Scraping complete!")
 
