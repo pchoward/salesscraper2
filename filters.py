@@ -197,6 +197,26 @@ def normalize_url(url):
     return re.sub(r"\s+", "", str(url or "")).strip()
 
 
+def find_brand(name, brands):
+    """Return the longest listed brand in ``name``, or None.
+
+    Longer phrases win, so "Bones Swiss" beats "Bones" and "Santa Cruz"
+    is not shortened to a smaller token inside it.
+    """
+    text = _fold(normalize_product_name(name))
+    if not text:
+        return None
+    best = None
+    best_len = -1
+    for brand in brands:
+        if not brand:
+            continue
+        if _phrase_pattern(brand).search(text) and len(_fold(brand)) > best_len:
+            best = brand
+            best_len = len(_fold(brand))
+    return best
+
+
 def _matches_any(text, patterns):
     folded = _fold(text)
     return any(pattern.search(folded) for pattern in patterns)

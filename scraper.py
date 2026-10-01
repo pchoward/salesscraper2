@@ -6,7 +6,6 @@ import sys
 import time
 import logging
 import random
-import datetime
 import shutil
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -20,8 +19,13 @@ from fake_useragent import UserAgent
 from selenium.common.exceptions import TimeoutException, WebDriverException
 
 from filters import extract_deck_size, filter_reason, normalize_product_name, normalize_url
+from health import HEALTH_PATH, load_state, state_json
+from media import attach_listing_media
 from notify import send_digest
+from pipeline import apply_run_updates, decorate_digest
 from report import build_digest, build_report_html, compare_catalogs
+from site_sales import SITE_SALES_PATH, load_state as load_site_sales
+from site_sales import state_json as site_sales_json
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -214,50 +218,38 @@ def save_debug_file(filename, content):
 
 
 def load_price_history():
-    """Load price history from JSON file"""
+    """Load price history from JSON file.
+
+    A missing file starts empty. A corrupt file is left untouched: the caller
+    skips saving so a bad read cannot wipe the committed history.
+    """
     try:
         with open("price_history.json", "r", encoding="utf-8") as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+            data = json.load(f)
+    except FileNotFoundError:
         return {}
+    except (json.JSONDecodeError, OSError) as exc:
+        logging.error("Could not load price history (leaving the file unchanged): %s", exc)
+        return None
+    if not isinstance(data, dict):
+        logging.error("Price history was not an object; leaving the file unchanged")
+        return None
+    return data
 
 
 def save_price_history(history):
     """Save price history to JSON file"""
-    safe_write_file("price_history.json", json.dumps(history, indent=2))
+    safe_write_file("price_history.json", json.dumps(history, indent=2) + "\n")
 
 
-def update_price_history(current_data, history):
-    """Update price history with current prices"""
-    today = datetime.datetime.now().strftime("%Y-%m-%d")
-    
-    for site_key, items in current_data.items():
-        for item in items:
-            url = item.get("url", "")
-            if not url:
-                continue
-            
-            price_new = item.get("price_new")
-            if not price_new:
-                continue
-            
-            try:
-                price = float(price_new)
-            except (ValueError, TypeError):
-                continue
-            
-            if url not in history:
-                history[url] = {
-                    "name": item.get("name", ""),
-                    "store": item.get("store", ""),
-                    "part": item.get("part", ""),
-                    "prices": {}
-                }
-            
-            history[url]["prices"][today] = price
-            history[url]["name"] = item.get("name", history[url].get("name", ""))
-    
-    return history
+def save_health(health):
+    safe_write_file(HEALTH_PATH, state_json(health))
+
+
+def save_site_sales(state):
+    if not isinstance(state, dict):
+        return False
+    return safe_write_file(SITE_SALES_PATH, site_sales_json(state))
 
 
 class Scraper:
@@ -278,6 +270,13 @@ class Scraper:
             logging.info(f"Filtered out ({self.part}): {name} ({reason})")
             return False
         return True
+
+    def _finish(self, item, node, base):
+        try:
+            attach_listing_media(item, node, base)
+        except Exception as exc:
+            logging.error("Listing media failed for %s: %s", item.get("url"), exc)
+        return item
 
     def parse(self, html):
         raise NotImplementedError
@@ -346,6 +345,7 @@ class ZumiezScraper(Scraper):
                 }
                 if self.part == "Decks":
                     item["size"] = extract_deck_size(name)
+                self._finish(item, product, "https://www.zumiez.com")
                 products.append(item)
                 logging.info(f"Parsed product: {name}")
 
@@ -419,6 +419,7 @@ class SkateWarehouseScraper(Scraper):
             }
             if self.part == "Decks":
                 item["size"] = extract_deck_size(name)
+            self._finish(item, a, "https://www.skatewarehouse.com")
             products.append(item)
             logging.info(f"Parsed product: {name}")
 
@@ -539,6 +540,7 @@ class CCSScraper(Scraper):
                 }
                 if self.part == "Decks":
                     item["size"] = extract_deck_size(name)
+                self._finish(item, container, "https://shop.ccs.com")
                 products.append(item)
                 logging.info(f"Parsed product: {name}")
 
@@ -640,6 +642,7 @@ class TacticsScraper(Scraper):
                 }
                 if self.part == "Decks":
                     item["size"] = extract_deck_size(name)
+                self._finish(item, container, "https://www.tactics.com")
                 products.append(item)
                 logging.info(f"Parsed Tactics product: {name}")
 
@@ -740,16 +743,57 @@ def main():
         logging.info("No changes detected")
 
     price_history = load_price_history()
-    price_history = update_price_history(curr_data, price_history)
-    save_price_history(price_history)
-    logging.info(f"Updated price history for {len(price_history)} items")
+    health = load_state()
+    try:
+        site_sales = load_site_sales()
+    except Exception as exc:
+        logging.error("Could not load site sales (continuing): %s", exc)
+        site_sales = None
+    if price_history is None:
+        updates = apply_run_updates(curr_data, failed_keys, {}, health, site_sales=site_sales)
+        updates["save_history"] = False
+        updates["history"] = {}
+    else:
+        updates = apply_run_updates(
+            curr_data,
+            failed_keys,
+            price_history,
+            health,
+            site_sales=site_sales,
+        )
+    if updates.get("save_history"):
+        save_price_history(updates["history"])
+        logging.info("Price history has %s listings", len(updates["history"]))
+    try:
+        save_health(updates["health"])
+    except Exception as exc:
+        logging.error("Could not save scrape health (continuing): %s", exc)
+    try:
+        if updates.get("site_sales"):
+            save_site_sales(updates["site_sales"])
+    except Exception as exc:
+        logging.error("Could not save site sales (continuing): %s", exc)
 
     save_current(curr_data)
-    html = build_report_html(curr_data, changes, price_history, failed_keys, digest=digest)
-    safe_write_file("sale_items_chart.html", html)
+    try:
+        decorate_digest(
+            digest,
+            curr_data,
+            updates["history"],
+            updates["warnings"],
+            previous_data=prev_data,
+            site_sales=updates.get("site_sales"),
+        )
+    except Exception as exc:
+        logging.error("Digest extras failed (continuing): %s", exc)
+    try:
+        html = build_report_html(curr_data, changes, updates["history"], failed_keys, digest=digest)
+        safe_write_file("sale_items_chart.html", html)
+    except Exception as exc:
+        logging.error("Report build failed (continuing): %s", exc)
 
-    # Mail only for new items or meaningful drops. Logged SMTP problems stay here
-    # so the report is still written and the workflow can commit.
+    # Mail for new items, meaningful drops, or a broken-store warning.
+    # Logged SMTP problems stay here so the workflow can still commit.
     dry_run = True if "--email-dry-run" in sys.argv[1:] else None
     send_digest(digest, dry_run=dry_run)
 

@@ -1,0 +1,119 @@
+{
+  "runs": [
+    {
+      "date": "2026-09-30",
+      "results": {
+        "Zumiez_Decks": {
+          "count": 12,
+          "failed": false
+        },
+        "Zumiez_Wheels": {
+          "count": 4,
+          "failed": false
+        },
+        "Zumiez_Trucks": {
+          "count": 11,
+          "failed": false
+        },
+        "Zumiez_Bearings": {
+          "count": 0,
+          "failed": false
+        },
+        "SkateWarehouse_Decks": {
+          "count": 69,
+          "failed": false
+        },
+        "SkateWarehouse_Wheels": {
+          "count": 4,
+          "failed": false
+        },
+        "SkateWarehouse_Trucks": {
+          "count": 10,
+          "failed": false
+        },
+        "SkateWarehouse_Bearings": {
+          "count": 0,
+          "failed": false
+        },
+        "CCS_Decks": {
+          "count": 2,
+          "failed": false
+        },
+        "CCS_Wheels": {
+          "count": 0,
+          "failed": false
+        },
+        "CCS_Trucks": {
+          "count": 1,
+          "failed": false
+        },
+        "CCS_Bearings": {
+          "count": 0,
+          "failed": false
+        },
+        "Tactics_Decks": {
+          "count": 44,
+          "failed": false
+        },
+        "Tactics_Wheels": {
+          "count": 10,
+          "failed": false
+        },
+        "Tactics_Trucks": {
+          "count": 6,
+          "failed": false
+        },
+        "Tactics_Bearings": {
+          "count": 0,
+          "failed": false
+        }
+      }
+    }
+  ],
+  "baseline": {
+    "Zumiez_Decks": {
+      "date": "2026-09-30",
+      "count": 12
+    },
+    "Zumiez_Wheels": {
+      "date": "2026-09-30",
+      "count": 4
+    },
+    "Zumiez_Trucks": {
+      "date": "2026-09-30",
+      "count": 11
+    },
+    "SkateWarehouse_Decks": {
+      "date": "2026-09-30",
+      "count": 69
+    },
+    "SkateWarehouse_Wheels": {
+      "date": "2026-09-30",
+      "count": 4
+    },
+    "SkateWarehouse_Trucks": {
+      "date": "2026-09-30",
+      "count": 10
+    },
+    "CCS_Decks": {
+      "date": "2026-09-30",
+      "count": 2
+    },
+    "CCS_Trucks": {
+      "date": "2026-09-30",
+      "count": 1
+    },
+    "Tactics_Decks": {
+      "date": "2026-09-30",
+      "count": 44
+    },
+    "Tactics_Wheels": {
+      "date": "2026-09-30",
+      "count": 10
+    },
+    "Tactics_Trucks": {
+      "date": "2026-09-30",
+      "count": 6
+    }
+  }
+}
