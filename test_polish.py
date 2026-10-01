@@ -14,7 +14,14 @@ from history import (
 from notify import render_html, render_plain
 from page import format_scan_et
 from pipeline import apply_run_updates
-from query_state import STARTER_VIEWS, decode_query, encode_state
+from query_state import (
+    STARTER_VIEWS,
+    WIDTH_RANGES,
+    bucket_contains,
+    bucket_for_width,
+    decode_query,
+    encode_state,
+)
 from report import Digest, build_report_html
 from score import deal_score
 from site_sales import activity_line, describe_sales, empty_state, sale_banners
@@ -173,35 +180,85 @@ class QueryStateTests(unittest.TestCase):
         state = decode_query(query)
         self.assertEqual(state["store"], "Zumiez")
         self.assertEqual(state["part"], "Decks")
-        self.assertEqual(state["width"], "8.25")
-        self.assertIsNone(state["wmin"])
+        self.assertEqual(state["widths"], ["8.25-8.375"])
         self.assertEqual(state["discount"], 40)
         self.assertEqual(state["sort"], "score")
-        self.assertEqual(encode_state(state), query)
+        encoded = "store=zumiez&type=deck&width=8.25-8.375&discount=40&sort=score"
+        self.assertEqual(encode_state(state), encoded)
         self.assertEqual(decode_query(encode_state(state)), state)
 
     def test_width_range_and_starter_views(self):
         state = decode_query("type=deck&width=8.25-8.5&discount=35")
         self.assertEqual(state["part"], "Decks")
-        self.assertEqual(state["width"], "all")
-        self.assertEqual(state["wmin"], 8.25)
-        self.assertEqual(state["wmax"], 8.5)
-        self.assertEqual(encode_state(state), "type=deck&width=8.25-8.5&discount=35")
+        self.assertEqual(
+            state["widths"],
+            ["8.25-8.375", "8.375-8.5", "8.5-8.75"],
+        )
+        encoded = "type=deck&width=8.25-8.375%2C8.375-8.5%2C8.5-8.75&discount=35"
+        self.assertEqual(encode_state(state), encoded)
+        self.assertEqual(decode_query(encoded)["widths"], state["widths"])
         queries = {view["query"] for view in STARTER_VIEWS}
         self.assertIn("type=deck&width=8.25-8.5&discount=35", queries)
         self.assertIn("type=deck&width=8.5&max=50", queries)
+        self.assertEqual(decode_query("type=deck&width=8.5&max=50")["widths"], ["8.5-8.75"])
         self.assertIn("store=skatewarehouse&change=new", queries)
         self.assertIn("watching=1&low=1", queries)
         watched = decode_query("watching=1&low=1")
         self.assertTrue(watched["watching"])
         self.assertTrue(watched["low"])
         self.assertEqual(watched["store"], "all")
+        self.assertEqual(watched["widths"], [])
+
+    def test_legacy_and_multi_width_params(self):
+        self.assertEqual(decode_query("width=10")["widths"], ["10up"])
+        self.assertEqual(decode_query("width=10.0")["widths"], ["10up"])
+        self.assertEqual(decode_query("width=10.25")["widths"], ["10up"])
+        self.assertEqual(decode_query("width=10.0+")["widths"], ["10up"])
+        self.assertEqual(decode_query("width=9.5-10.0")["widths"], ["9.5-10.0"])
+        self.assertEqual(decode_query("width=8.5-8.75")["widths"], ["8.5-8.75"])
+        self.assertEqual(decode_query("width=lt7,10up")["widths"], ["lt7", "10up"])
+        flipped = decode_query("width=10up,8.5-8.75")
+        self.assertEqual(flipped["widths"], ["8.5-8.75", "10up"])
+        self.assertEqual(decode_query(encode_state(flipped))["widths"], flipped["widths"])
+        self.assertEqual(decode_query("width=abc")["widths"], [])
+
+    def test_width_buckets_are_a_partition(self):
+        samples = [
+            (6.99, "lt7"),
+            (7.0, "7.0-7.25"),
+            (7.249, "7.0-7.25"),
+            (7.25, "7.25-7.5"),
+            (7.5, "7.5-7.75"),
+            (7.75, "7.75-8.0"),
+            (8.0, "8.0-8.125"),
+            (8.124, "8.0-8.125"),
+            (8.125, "8.125-8.25"),
+            (8.25, "8.25-8.375"),
+            (8.375, "8.375-8.5"),
+            (8.499, "8.375-8.5"),
+            (8.5, "8.5-8.75"),
+            (8.749, "8.5-8.75"),
+            (8.75, "8.75-9.0"),
+            (9.0, "9.0-9.25"),
+            (9.25, "9.25-9.5"),
+            (9.5, "9.5-10.0"),
+            (9.75, "9.5-10.0"),
+            (9.999, "9.5-10.0"),
+            (10.0, "10up"),
+            (10.25, "10up"),
+            (12.0, "10up"),
+        ]
+        for width, expected in samples:
+            hits = [bucket.id for bucket in WIDTH_RANGES if bucket_contains(bucket, width)]
+            self.assertEqual(hits, [expected], width)
+            self.assertEqual(bucket_for_width(width).id, expected)
 
     def test_unknown_values_are_ignored(self):
         state = decode_query("store=nope&type=skate&sort=nope&width=abc")
         self.assertEqual(state["store"], "all")
         self.assertEqual(state["part"], "all")
         self.assertEqual(state["sort"], "rank")
+        self.assertEqual(state["widths"], [])
         self.assertEqual(encode_state(state), "")
 
 
@@ -240,12 +297,44 @@ class ReportPolishTests(unittest.TestCase):
         self.assertIn("d @ $", html)
         self.assertIn("Why ", html)
         self.assertIn("More filters", html)
+        self.assertIn("Width range", html)
+        self.assertIn("10.0+", html)
+        self.assertNotIn('id="widthSelect"', html)
         self.assertIn("Save view", html)
         self.assertIn("Recently gone", html)
         self.assertIn("Retailer activity", html)
         self.assertIn("Oct 1, 2026 8:56:14 AM ET".replace("Oct 1", "Sep 30"), html)
         self.assertIn('id="morePanel"', html)
         self.assertIn("data-daysat=", html)
+
+    def test_width_range_chips_count_decks_and_keep_zeros(self):
+        wide = _deck(
+            "55.00",
+            url="https://example.com/wide",
+            name="Powell Peralta Caballero Mask Deck 9.75x31.12",
+        )
+        wheel = {
+            "name": "Bones STF 53mm Skateboard Wheels",
+            "url": "https://example.com/bones",
+            "price_new": "30.00",
+            "price_old": "40.00",
+            "part": "Wheels",
+            "store": "Zumiez",
+        }
+        html = build_report_html(
+            {"Zumiez_Decks": [wide], "Zumiez_Wheels": [wheel]},
+            {},
+            generated_at="2026-10-01T15:03:16+00:00",
+        )
+        self.assertIn("9.5 - 10.0 (1)", html)
+        self.assertIn("10.0+ (0)", html)
+        self.assertIn('data-range="9.5-10.0"', html)
+        self.assertIn('class="chip is-zero" data-range="10up"', html)
+        self.assertIn('data-range="all"', html)
+        self.assertIn(">All</button>", html)
+        self.assertNotIn("All widths", html)
+        self.assertNotIn("Width min", html)
+        self.assertIn("const WIDTH_RANGES = ", html)
 
     def test_sale_banner_and_email(self):
         state = empty_state()

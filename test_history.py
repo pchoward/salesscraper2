@@ -135,6 +135,11 @@ class PruneTests(unittest.TestCase):
                 "Decks",
                 {_day(0): 40.0},
             ),
+            "https://example.com/mini": _entry(
+                "Mini Logo Peacock 7.4 Deck",
+                "Decks",
+                {_day(0): 20.0},
+            ),
             "https://example.com/keeper": _entry(
                 "Baker Figgy Divine Evil 8.25 Deck",
                 "Decks",
@@ -144,7 +149,8 @@ class PruneTests(unittest.TestCase):
         pruned, stats = prune_price_history(history, today=TODAY)
         self.assertNotIn("https://example.com/skf", pruned)
         self.assertNotIn("https://example.com/cruiser", pruned)
-        self.assertNotIn("https://example.com/wide", pruned)
+        self.assertNotIn("https://example.com/mini", pruned)
+        self.assertIn("https://example.com/wide", pruned)
         self.assertIn("https://example.com/keeper", pruned)
         self.assertEqual(stats["dropped_filter"], 3)
         self.assertGreaterEqual(stats["listings_before"], stats["listings_after"])

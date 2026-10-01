@@ -16,7 +16,8 @@ Retention policy:
 * Listings the current filters reject are dropped. A deck with no original
   price stored here is kept, because this file never recorded MSRP and the
   discount rule cannot be applied. Size, keyword, and brand rejections still
-  apply. A URL in the current passing catalog is always kept.
+  apply. A deck is not dropped for being wider than 9.5"; there is no maximum
+  width. A URL in the current passing catalog is always kept.
 * Listings not seen for more than 180 days, and not in the current catalog,
   are dropped. Half a year is long enough to hold a seasonal return; after
   that the summary is not worth committing forever.
