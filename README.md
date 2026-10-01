@@ -16,7 +16,8 @@ Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publi
 ├── health.py                  # Per-store scrape counts and warnings
 ├── matching.py                # Conservative cross-store product match
 ├── dimensions.py              # Width, length, and wheelbase normalization
-├── score.py                   # Deal score
+├── score.py                   # Deal score and the plain-language breakdown
+├── query_state.py             # Filter URL encode and decode, starter views
 ├── badges.py                  # NEW, down today, lowest ever, back in stock
 ├── media.py                   # Product image URLs from each store
 ├── watchlist.py               # watchlist.yaml matching for the page and email
@@ -69,18 +70,19 @@ Whole-word hat, cap, shirt, tee, hoodie, jacket, pant, short, shoe, sneaker, soc
 
 The report is one static file. CSS and JavaScript are inlined from `page.css` and `page.js`. There is no server. New-feature failures are logged and do not stop the scrape or the commit.
 
-- **Header**: a short blue bar with the active-deal count, new deals, price drops, and how long ago the last scan ran.
+- **Header**: a short blue bar with the active-deal count, new deals, price drops, and how long ago the last scan ran. Hover the relative time for the exact scan timestamp in US Eastern, such as `Oct 1, 2026 8:21:37 AM ET`. The scraper records that timestamp on the health run and in the page.
 - **What changed**: "Since yesterday: N new deals, N price drops, N hit lowest tracked price, N deals disappeared." Each count is a button that filters the table to just those rows. **Since your last visit** uses `localStorage` (`salesscraper2.snapshot`) and compares prices to the previous time this browser opened the page.
 - **Summary cards** are filters. New deals shows items that were not in yesterday's catalog. Price drops shows reduced items. Each store card filters to that store. Press again to turn the filter off. Cards combine with the filter bar.
 - **Store check** (only when needed): a store and part that normally has items came back empty, or the scrape failed, two runs in a row. One empty or failed run does not warn. The next run that returns items clears it.
-- **Site-wide sales**: one line per store with days since the last site-wide sale. See below.
+- **Retailer activity**: one line per store, `last site-wide sale N days ago` or `no recorded site-wide sale`. When the latest scan itself trips the spike rule, a banner names the store, how much higher the sale count is than the recent median, and how many hours ago the scan ran. The same banner and lines are in the email. Skate Warehouse's seed does not raise the banner.
 - **All-time lows** (collapsed): listings whose current sale price is the lowest tracked price. A listing needs at least 3 observations spanning 7 days, so a brand-new item is not flagged just because its first price is the only price. The low can be older than the 90-day daily window.
-- **Across stores** (open when there is something to show): the same product at two or more stores, with the cheapest price highlighted. Matching requires the same part, brand, and size, plus the same distinctive model words. Deck widths that are just rounding differences snap together (8.12 and 8.125, 8.38 and 8.375). 8.475 does not snap to 8.5. Colors and extra words keep two listings apart. A name that is only a brand and a size (or only generic words like "team") is not grouped. Wheel matches also require a diameter. Truck matches require a hanger or axle size, so hollow and standard stay apart. **Group across stores** collapses those same matches into one card, cheapest price highlighted. Matching stays conservative; the toggle does nothing when no pair exists.
-- **Filter bar** (sticky): search, store, type, width, brand, min/max price, minimum discount, and sort. Width chips under the bar show counts, such as `8.25 (23)`. `8.5` and `8.50` are the same width. Brand options come from the rows. Length and wheelbase dropdowns appear only when a listing has that measurement. Store and part buttons stay, and they stay in sync with the dropdowns.
-- **All Deals**: sortable columns for sale price, original price, percent off, size (numeric), store, brand, days tracked, and deal score. The default order is newest deals and the biggest recent drop. Headers stick under the filter bar. Each row has a 68px thumbnail (lazy-loaded; a placeholder when the store did not provide an image), a star, badges, and a sparkline beside the sale price. The product name links to the store page in a new tab.
+- **Across stores** (open when there is something to show): the same product at two or more stores, with the cheapest price highlighted. Matching requires the same part, brand, and size, plus the same distinctive model words. Deck widths that are just rounding differences snap together (8.12 and 8.125, 8.38 and 8.375). 8.475 does not snap to 8.5. Colors and extra words keep two listings apart. A name that is only a brand and a size (or only generic words like "team") is not grouped. Wheel matches also require a diameter. Truck matches require a hanger or axle size, so hollow and standard stay apart. **Group across stores** collapses those same matches into one card that reads `Product - from $44.99 - 3 stores`. Expanding it shows `Best price:` at the cheapest store, then the other stores sorted by price, each linked to its product page. Matching stays conservative; the toggle does nothing when no pair exists.
+- **Filter bar** (sticky and compact): search, store, type, width, brand, and sort stay visible. Min and max price, minimum discount, a width range, length, and wheelbase sit behind **More filters**, which shows a count when any of those are set. Width chips under the bar show counts, such as `8.25 (23)`. `8.5` and `8.50` are the same width. Brand options come from the rows. Length and wheelbase dropdowns appear only when a listing has that measurement. Store and part buttons stay, and they stay in sync with the dropdowns. Filters are stored in the URL and restored on load. **Save view** keeps a named bookmark in this browser, with rename and delete. Four starter views stay on the page: Decks 8.25–8.5 at 35% off or more, 8.5 decks under $50, new Skate Warehouse drops, and watched items at an all-time low.
+- **All Deals**: sortable columns for sale price, original price, percent off, size (numeric), store, brand, days tracked, days at the current price, and deal score. The days cell reads `194d tracked · 1d @ $39.99`. The default order is newest deals and the biggest recent drop. Headers stick under the filter bar. Each row has a 68px thumbnail (lazy-loaded; a placeholder when the store did not provide an image), a star, a quieter badge row, the lifecycle stage, and a sparkline beside the sale price. The product title is the loudest text in the row and links to the store page in a new tab. Hover a sparkline for the date and price at that point. Click it for the price-change chain, such as `Jul 20 $74.95 → Aug 14 $59.95 → Sep 28 $39.99`.
 - **Row details**: click a row for a larger image, width, length, and wheelbase when the store exposed them, the retailer link, the price series, first seen, last seen, days tracked, and other stores carrying the same product.
 - **Price drawer**: click the sale price. The drawer lists the tracked series, for example `$84.99 → $74.95 → $69.95 → $63.95`, with a date on each step.
-- **Removed** (collapsed, only when there is something to show): hidden unless that store/part scrape succeeded. A failed fetch keeps the previous items for that key instead of writing `[]`, so a blocked page does not look like everything sold out. The "deals disappeared" count opens this section.
+- **Lifecycle**, stored on each history row: NEW, then PRICE DROP once the sale price is below an earlier tracked price, then ALL-TIME LOW when that rule qualifies, then SOLD OUT when a successful scrape no longer lists it, then GONE after 7 days. A failed scrape does not move a listing to SOLD OUT. The row shows the current stage.
+- **Recently gone** (muted, collapsed): SOLD OUT listings from the last 7 days, with the last price and the last seen date. The "deals disappeared" count opens this view. A failed fetch keeps the previous items for that key instead of writing `[]`, so a blocked page does not look like everything sold out.
 - **Stats** (closed until you press Stats): average discount by retailer, deals by width, brands with the most markdowns, lowest average deck prices by brand (brands with at least two decks), and weekly deck sale-price trend from history.
 - Rows that fail `passes_filters()` are not listed as new, dropped, or removed.
 - The footer links to [Run scraper now](https://github.com/pchoward/salesscraper2/actions/workflows/scrape.yml).
@@ -107,7 +109,7 @@ Deal score (0-100) = discount + lowest + recent drop + popular size
 - A meaningful drop versus the previous sale price ($2 or 5%) adds 8 points plus 1 point per 5% of that drop, up to 15. A smaller day-to-day dip adds 4.
 - A deck from 8.25" to 8.75" adds 10.
 
-Hot means 70 or above. The score button's tooltip is this formula. The column sorts.
+Hot means 70 or above. The score button opens a plain-language breakdown, for example `47% off`, `$35 below original`, `Lowest tracked price`, `Tracked 194 days`, and `Freshly reduced` or `Recently reduced`, with the points on each scoring factor. A price that changed today or yesterday is labeled Freshly reduced. The column sorts. The numeric formula is unchanged.
 
 ### Stars
 
@@ -146,7 +148,7 @@ Matching watchlist alerts are a block at the top of the email. Quiet matches are
 - the count is at least **30** items above that median
 - at least **7** earlier days are on record
 
-Skate Warehouse is seeded at **2026-07-04**. A detected day replaces that date only when it is later. The date never moves backward. Other stores stay "not recorded" until a day clears the threshold. Daily counts are kept about 120 days. The last-sale date is stored on its own, so trimming the counts does not forget it. The same line is on the report and in the email.
+Skate Warehouse is seeded at **2026-07-04**. A detected day replaces that date only when it is later. The date never moves backward. Other stores stay "no recorded site-wide sale" until a day clears the threshold. Daily counts are kept about 120 days. The last-sale date is stored on its own, so trimming the counts does not forget it. The retailer activity panel and the email use the same lines. A sale detected on the latest scan also adds a banner; the seed date does not.
 
 ## Price history
 

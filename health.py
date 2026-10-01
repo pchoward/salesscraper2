@@ -51,11 +51,12 @@ def split_key(key):
     return store, part
 
 
-def record_run(state, day, results):
+def record_run(state, day, results, scanned_at=None):
     """Append or replace the run for ``day``. Update baselines on good keys.
 
     Replacing the same day means a manual re-run does not count as a second
-    failure. Raises TypeError when ``state`` is not usable; callers that must
+    failure. ``scanned_at`` is the real scan timestamp when the caller has
+    one. Raises TypeError when ``state`` is not usable; callers that must
     not stop the scrape catch that.
     """
     if not isinstance(state, dict):
@@ -76,8 +77,14 @@ def record_run(state, day, results):
     runs = []
     for run in raw_runs:
         if isinstance(run, dict) and run.get("date") != day:
-            runs.append({"date": run.get("date"), "results": run.get("results") or {}})
-    runs.append({"date": day, "results": clean})
+            kept = {"date": run.get("date"), "results": run.get("results") or {}}
+            if run.get("scanned_at"):
+                kept["scanned_at"] = run.get("scanned_at")
+            runs.append(kept)
+    current = {"date": day, "results": clean}
+    if scanned_at:
+        current["scanned_at"] = str(scanned_at)
+    runs.append(current)
     runs.sort(key=lambda run: run.get("date") or "")
     runs = runs[-MAX_RUNS:]
 

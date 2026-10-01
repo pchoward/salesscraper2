@@ -24,7 +24,7 @@ from html import escape
 from filters import calculate_percent_off, item_passes_filters, normalize_product_name, normalize_url
 from health import warning_text
 from report import Digest
-from site_sales import format_sale_line
+from site_sales import activity_line
 
 logger = logging.getLogger("notify")
 
@@ -445,13 +445,21 @@ def _plain_watch(digest):
     return lines
 
 
+def _sale_banners(digest):
+    banners = getattr(digest, "sale_banners", None) or []
+    return [str(banner) for banner in banners if banner]
+
+
 def _plain_sales(digest):
     rows = _sale_rows(digest)
-    if not rows:
+    banners = _sale_banners(digest)
+    if not rows and not banners:
         return []
-    lines = ["DAYS SINCE THE LAST SITE-WIDE SALE"]
+    lines = ["RETAILER ACTIVITY"]
+    for banner in banners:
+        lines.append(banner)
     for row in rows:
-        lines.append(f"- {format_sale_line(row)}")
+        lines.append(f"- {activity_line(row)}")
     lines.append("")
     return lines
 
@@ -529,15 +537,27 @@ def _html_watch(digest):
 
 def _html_sales(digest):
     rows = _sale_rows(digest)
-    if not rows:
+    banners = _sale_banners(digest)
+    if not rows and not banners:
         return ""
-    items = "".join(f"<li>{escape(format_sale_line(row))}</li>" for row in rows)
+    blocks = []
+    for banner in banners:
+        blocks.append(
+            '<p style="margin:0 0 8px;padding:10px 12px;background:#fff7ed;border:1px solid #fdba74;'
+            'border-radius:8px;color:#9a3412;font-size:14px;font-weight:700;line-height:1.4;">'
+            f"{escape(banner)}</p>"
+        )
+    if rows:
+        items = "".join(f"<li>{escape(activity_line(row))}</li>" for row in rows)
+        blocks.append(
+            '<p style="margin:0;font-size:13px;font-weight:700;color:#0f172a;">Retailer activity</p>'
+            '<ul style="margin:6px 0 0;padding-left:18px;color:#334155;font-size:13px;line-height:1.5;">'
+            f"{items}</ul>"
+        )
     return (
         '<tr><td style="padding:4px 24px 8px;font-family:Arial,Helvetica,sans-serif;">'
-        '<p style="margin:0;font-size:13px;font-weight:700;color:#0f172a;">'
-        "Days since the last site-wide sale</p>"
-        '<ul style="margin:6px 0 0;padding-left:18px;color:#334155;font-size:13px;line-height:1.5;">'
-        f"{items}</ul></td></tr>"
+        + "".join(blocks)
+        + "</td></tr>"
     )
 
 

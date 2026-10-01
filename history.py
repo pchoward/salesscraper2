@@ -35,6 +35,15 @@ DETAIL_WINDOW_DAYS = 90
 STALE_AFTER_DAYS = 180
 MIN_ATL_OBSERVATIONS = 3
 MIN_ATL_SPAN_DAYS = 7
+RECENTLY_GONE_DAYS = 7
+STAGES = ("new", "price_drop", "all_time_low", "sold_out", "gone")
+STAGE_LABEL = {
+    "new": "NEW",
+    "price_drop": "PRICE DROP",
+    "all_time_low": "ALL-TIME LOW",
+    "sold_out": "SOLD OUT",
+    "gone": "GONE",
+}
 
 # Missing MSRP is not evidence a deck is off-policy. History never stored it.
 _KEEP_WITHOUT_MSRP = "deck discount unknown"
@@ -48,6 +57,7 @@ _ENTRY_FIELDS = (
     "observation_count",
     "all_time_low",
     "all_time_low_date",
+    "stage",
 )
 
 
@@ -203,6 +213,8 @@ def _ordered_entry(entry):
             continue
         value = entry.get(field)
         if value is None or value == "":
+            continue
+        if field == "stage" and value not in STAGES:
             continue
         ordered[field] = value
     ordered.update(_media_fields(entry))
@@ -470,6 +482,191 @@ def all_time_low_status(item, history):
         "span_days": summary["span_days"],
         "title": title,
     }
+
+
+def days_at_price(entry, today=None):
+    """How long the latest sale price has held.
+
+    ``days`` is the number of days from the first day of the current price
+    run through ``today`` (0 when the price changed today). ``price`` is that
+    sale price. ``since`` is the date the run started.
+    """
+    empty = {"days": 0, "price": None, "since": None}
+    if not isinstance(entry, dict):
+        return empty
+    prices = _clean_prices(entry.get("prices"))
+    if not prices:
+        return {
+            "days": 0,
+            "price": _round_price(entry.get("all_time_low")),
+            "since": entry.get("last_seen") or None,
+        }
+    ordered = list(prices)
+    latest = ordered[-1]
+    price = prices[latest]
+    since = latest
+    cents = _cents(price)
+    for day in reversed(ordered):
+        if _cents(prices[day]) == cents:
+            since = day
+        else:
+            break
+    today_day = _as_date(today) or _as_date(latest)
+    since_day = _as_date(since)
+    days = 0
+    if today_day and since_day:
+        days = (today_day - since_day).days
+        if days < 0:
+            days = 0
+    return {"days": days, "price": price, "since": since}
+
+
+def price_is_reduced(entry):
+    """True when the latest price is below some earlier daily price."""
+    if not isinstance(entry, dict):
+        return False
+    prices = _clean_prices(entry.get("prices"))
+    if len(prices) < 2:
+        return False
+    latest = prices[max(prices)]
+    cents = _cents(latest)
+    return any(_cents(price) > cents for price in prices.values())
+
+
+def freshly_reduced(entry, today=None):
+    """True when the current price started today or yesterday and is a drop."""
+    info = days_at_price(entry, today)
+    if info.get("price") is None or info.get("days", 99) > 1 or not info.get("since"):
+        return False
+    if not isinstance(entry, dict):
+        return False
+    prices = _clean_prices(entry.get("prices"))
+    prior = None
+    since = info["since"]
+    for day in prices:
+        if day < since:
+            prior = prices[day]
+    if prior is None:
+        return False
+    return _cents(prior) > _cents(info["price"])
+
+
+def listing_stage(entry, present, today=None, at_low=False):
+    """Current lifecycle stage for one listing.
+
+    Present listings are NEW, PRICE DROP, or ALL-TIME LOW. A listing missing
+    from a successful scrape is SOLD OUT for 7 days, then GONE.
+    """
+    if not isinstance(entry, dict):
+        entry = {}
+    if not present:
+        last = _as_date(entry.get("last_seen"))
+        today_day = _as_date(today) or datetime.date.today()
+        if last is None or today_day is None:
+            return "gone"
+        age = (today_day - last).days
+        if age < 0:
+            age = 0
+        if age <= RECENTLY_GONE_DAYS:
+            return "sold_out"
+        return "gone"
+    if at_low:
+        return "all_time_low"
+    if price_is_reduced(entry):
+        return "price_drop"
+    return "new"
+
+
+def _store_key(entry):
+    store = str((entry or {}).get("store") or "")
+    part = str((entry or {}).get("part") or "")
+    if not store or not part:
+        return ""
+    return f"{store}_{part}"
+
+
+def apply_lifecycle(history, current_data, today=None, skip_keys=None):
+    """Persist ``stage`` on each history row. Never marks a failed scrape gone.
+
+    Raises TypeError when ``history`` is not a dict. A bad row is logged and
+    skipped so one listing cannot stop the run.
+    """
+    if not isinstance(history, dict):
+        raise TypeError("price history must be a dict")
+    day = _date_str(today or datetime.date.today())
+    skip = {str(key) for key in (skip_keys or [])}
+    active = _active_items(current_data)
+    for url, entry in list(history.items()):
+        if not isinstance(entry, dict):
+            continue
+        try:
+            present = url in active
+            key = _store_key(entry)
+            if not present and key and key in skip:
+                continue
+            at_low = False
+            if present:
+                at_low = bool(all_time_low_status(active[url], history).get("flagged"))
+            stage = listing_stage(entry, present, today=day, at_low=at_low)
+            if stage in STAGES:
+                entry["stage"] = stage
+        except Exception as exc:
+            logger.error("Lifecycle update failed for %s: %s", url, exc)
+    return history
+
+
+def recently_gone(history, current_data=None, today=None, skip_keys=None):
+    """Disappeared listings kept for ``RECENTLY_GONE_DAYS`` days.
+
+    Each row has the last sale price and last seen date. Failed store/part
+    scrapes are left out. Listings the filters reject are left out.
+    """
+    if not isinstance(history, dict):
+        return []
+    today_day = _as_date(today) or datetime.date.today()
+    skip = {str(key) for key in (skip_keys or [])}
+    active = set(_active_items(current_data))
+    rows = []
+    seen = set()
+    for raw_url, entry in history.items():
+        if not isinstance(entry, dict):
+            continue
+        url = normalize_url(raw_url)
+        if not url or url in seen or url in active:
+            continue
+        seen.add(url)
+        try:
+            key = _store_key(entry)
+            if key and key in skip:
+                continue
+            if not _filters_allow(entry, url):
+                continue
+            last = _as_date(entry.get("last_seen"))
+            if last is None or today_day is None:
+                continue
+            age = (today_day - last).days
+            if age < 0 or age > RECENTLY_GONE_DAYS:
+                continue
+            prices = _clean_prices(entry.get("prices"))
+            price = _latest_price(prices)
+            if price is None:
+                price = _round_price(entry.get("all_time_low"))
+            rows.append(
+                {
+                    "url": url,
+                    "name": normalize_product_name(entry.get("name") or ""),
+                    "store": entry.get("store") or "",
+                    "part": entry.get("part") or "",
+                    "price": price,
+                    "last_seen": last.isoformat(),
+                    "days_gone": age,
+                    "stage": "sold_out",
+                }
+            )
+        except Exception as exc:
+            logger.error("Recently gone row failed for %s: %s", raw_url, exc)
+    rows.sort(key=lambda row: (row["days_gone"], (row["name"] or "").casefold(), row["store"]))
+    return rows
 
 
 def price_trend(entry):

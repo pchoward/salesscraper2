@@ -13,20 +13,27 @@ let state = {
     grouped: false,
     visitMode: "yesterday",
     sortKey: "rank",
-    sortDir: "asc"
+    sortDir: "asc",
+    search: "",
+    wmin: null,
+    wmax: null
 };
 
 const STAR_KEY = "salesscraper2.stars";
 const SNAP_KEY = "salesscraper2.snapshot";
+const VIEWS_KEY = "salesscraper2.views";
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let visitGone = [];
+let sparkTip = null;
+let renamingId = "";
 
 function catalog() {
     const node = document.getElementById("catalogJson");
-    if (!node) return { items: {} };
+    if (!node) return { items: {}, views: [] };
     try {
         return JSON.parse(node.textContent);
     } catch (err) {
-        return { items: {} };
+        return { items: {}, views: [] };
     }
 }
 
@@ -64,12 +71,21 @@ function numOrNull(id) {
     return Number.isFinite(value) ? value : null;
 }
 
+function numText(value) {
+    const number = Number(value);
+    if (!Number.isFinite(number)) return "";
+    if (Math.abs(number - Math.round(number)) < 1e-9) return String(Math.round(number));
+    return number.toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
+}
+
 function readControls() {
     const search = document.getElementById("searchInput");
     state.search = search ? search.value.toLowerCase().trim() : "";
     state.priceMin = numOrNull("priceMin");
     state.priceMax = numOrNull("priceMax");
     state.discountMin = numOrNull("discountMin");
+    state.wmin = numOrNull("widthMin");
+    state.wmax = numOrNull("widthMax");
     const brand = document.getElementById("brandSelect");
     const width = document.getElementById("widthSelect");
     const length = document.getElementById("lengthSelect");
@@ -110,6 +126,12 @@ function rowMatches(row) {
     if (state.store !== "all" && (row.dataset.store || "") !== state.store) return false;
     if (state.part !== "all" && (row.dataset.part || "") !== state.part) return false;
     if (state.size !== "all" && (row.dataset.size || "") !== state.size) return false;
+    if (state.size === "all" && (state.wmin != null || state.wmax != null)) {
+        const size = parseFloat(row.dataset.size);
+        if (!Number.isFinite(size)) return false;
+        if (state.wmin != null && size < state.wmin - 1e-6) return false;
+        if (state.wmax != null && size > state.wmax + 1e-6) return false;
+    }
     if (state.brand !== "all" && (row.dataset.brand || "") !== state.brand) return false;
     if (state.length !== "all" && (row.dataset.length || "") !== state.length) return false;
     if (state.wheelbase !== "all" && (row.dataset.wheelbase || "") !== state.wheelbase) return false;
@@ -168,6 +190,17 @@ function applyGroupVisibility() {
     if (empty) empty.hidden = visible.size !== 0;
 }
 
+function showGone(on) {
+    const gone = document.getElementById("goneSection");
+    if (!gone) return;
+    const content = gone.querySelector(".section-content");
+    const header = gone.querySelector(".section-header");
+    if (on) {
+        if (content) content.classList.remove("collapsed");
+        if (header) header.classList.remove("collapsed");
+    }
+}
+
 function applyFilters() {
     readControls();
     dealRows().forEach(row => {
@@ -175,18 +208,14 @@ function applyFilters() {
     });
     const removedOn = state.change === "removed";
     const deals = document.getElementById("dealsSection");
-    const removed = document.getElementById("removedSection");
     if (deals) deals.hidden = removedOn;
-    if (removed && removedOn) {
-        removed.hidden = false;
-        const content = removed.querySelector(".section-content");
-        if (content) content.classList.remove("collapsed");
-        const header = removed.querySelector(".section-header");
-        if (header) header.classList.remove("collapsed");
-    }
+    showGone(removedOn);
     applyGroupVisibility();
     syncDetails();
     paintCards();
+    updateMoreCount();
+    syncUrl();
+    paintViews();
 }
 
 function filterProducts() {
@@ -213,6 +242,14 @@ function filterBySize(size) {
     state.size = size || "all";
     const select = document.getElementById("widthSelect");
     if (select) select.value = state.size;
+    if (state.size !== "all") {
+        const wmin = document.getElementById("widthMin");
+        const wmax = document.getElementById("widthMax");
+        if (wmin) wmin.value = "";
+        if (wmax) wmax.value = "";
+        state.wmin = null;
+        state.wmax = null;
+    }
     setPressed("#sizeFilters .chip", "data-size", state.size);
     applyFilters();
 }
@@ -246,18 +283,18 @@ function setChange(kind) {
     if (kind === "lowest") state.cardLow = state.change === "lowest";
     applyFilters();
     if (state.change === "removed") {
-        const removed = document.getElementById("removedSection");
-        if (removed) removed.scrollIntoView({ behavior: "smooth", block: "start" });
+        const gone = document.getElementById("goneSection");
+        if (gone) gone.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 }
 
 function sortBy(key, direction) {
     const tbody = document.querySelector("#mainTable tbody");
     if (!tbody) return;
-    const numeric = { price: 1, original: 1, discount: 1, size: 1, days: 1, score: 1, rank: 1 };
+    const numeric = { price: 1, original: 1, discount: 1, size: 1, days: 1, daysat: 1, score: 1, rank: 1 };
     if (!direction) {
         if (state.sortKey === key) direction = state.sortDir === "asc" ? "desc" : "asc";
-        else direction = key === "price" || key === "rank" || key === "store" || key === "brand" || key === "size" ? "asc" : "desc";
+        else direction = key === "price" || key === "rank" || key === "store" || key === "brand" || key === "size" || key === "daysat" ? "asc" : "desc";
     }
     state.sortKey = key;
     state.sortDir = direction;
@@ -283,13 +320,25 @@ function sortBy(key, direction) {
         tbody.appendChild(row);
         if (detail) tbody.appendChild(detail);
     });
-    document.querySelectorAll("#mainTable th").forEach(th => th.classList.remove("sorted"));
-    const header = document.querySelector('#mainTable th[data-sort="' + key + '"]');
+    document.querySelectorAll("#mainTable [data-sort]").forEach(node => node.classList.remove("sorted"));
+    const header = document.querySelector('#mainTable [data-sort="' + key + '"]');
     if (header) header.classList.add("sorted");
+    mirrorSort(key, direction);
+    syncUrl();
 }
 
 function sortTable() {
     sortBy("price");
+}
+
+function mirrorSort(key, direction) {
+    const select = document.getElementById("sortSelect");
+    if (!select) return;
+    let value = "";
+    if (key === "price" && direction === "desc") value = "price-desc";
+    else if (key === "price" && direction === "asc") value = "price";
+    else if (select.querySelector('option[value="' + key + '"]')) value = key;
+    if (value) select.value = value;
 }
 
 function applySortChoice() {
@@ -306,6 +355,7 @@ function applySortChoice() {
     else if (value === "store") sortBy("store", "asc");
     else if (value === "brand") sortBy("brand", "asc");
     else if (value === "days") sortBy("days", "desc");
+    else if (value === "daysat") sortBy("daysat", "asc");
 }
 
 function toggleSection(header) {
@@ -524,11 +574,13 @@ function clearFilters() {
         visitMode: state.visitMode,
         sortKey: "rank",
         sortDir: "asc",
-        search: ""
+        search: "",
+        wmin: null,
+        wmax: null
     };
     const search = document.getElementById("searchInput");
     if (search) search.value = "";
-    ["priceMin", "priceMax", "discountMin"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin", "widthMin", "widthMax"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.value = "";
     });
@@ -548,16 +600,52 @@ function clearFilters() {
 }
 
 function measureBar() {
-    const bar = document.querySelector(".sticky-bar");
+    const bar = document.getElementById("stickyBar") || document.querySelector(".sticky-bar");
     if (!bar) return;
-    document.documentElement.style.setProperty("--stick-top", bar.offsetHeight + "px");
+    document.documentElement.style.setProperty("--stick-top", Math.ceil(bar.offsetHeight) + "px");
+}
+
+function parseScan(raw) {
+    if (!raw) return NaN;
+    if (raw.indexOf("T") >= 0) return Date.parse(raw);
+    return Date.parse(raw.replace(" ", "T") + "Z");
+}
+
+function formatEt(date) {
+    try {
+        const parts = new Intl.DateTimeFormat("en-US", {
+            timeZone: "America/New_York",
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true
+        }).formatToParts(date);
+        const get = type => {
+            const found = parts.find(part => part.type === type);
+            return found ? found.value : "";
+        };
+        return get("month") + " " + get("day") + ", " + get("year") + " " + get("hour") + ":" + get("minute") + ":" + get("second") + " " + get("dayPeriod") + " ET";
+    } catch (err) {
+        return "";
+    }
 }
 
 function updateAgo() {
     const node = document.getElementById("lastScan");
     if (!node) return;
     const raw = node.getAttribute("datetime") || "";
-    const parsed = Date.parse(raw.replace(" ", "T") + "Z");
+    const parsed = parseScan(raw);
+    const exact = document.getElementById("scanExact");
+    if (Number.isFinite(parsed)) {
+        const label = formatEt(new Date(parsed));
+        if (label) {
+            node.title = label;
+            if (exact) exact.textContent = label;
+        }
+    }
     if (!Number.isFinite(parsed)) return;
     const seconds = Math.max(0, (Date.now() - parsed) / 1000);
     let label = raw;
@@ -568,15 +656,454 @@ function updateAgo() {
     node.textContent = label;
 }
 
+function updateBanners() {
+    document.querySelectorAll(".sale-banner").forEach(node => {
+        const parsed = parseScan(node.getAttribute("data-at") || "");
+        const slot = node.querySelector(".ago");
+        if (!slot || !Number.isFinite(parsed)) return;
+        const hours = Math.max(0, (Date.now() - parsed) / 3600000);
+        if (hours < 1) slot.textContent = "under an hour ago";
+        else {
+            const whole = Math.floor(hours);
+            slot.textContent = whole + (whole === 1 ? " hour ago" : " hours ago");
+        }
+    });
+}
+
+function slugStore(value) {
+    const key = String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+    return { zumiez: "Zumiez", skatewarehouse: "SkateWarehouse", ccs: "CCS", tactics: "Tactics" }[key] || "";
+}
+
+function slugType(value) {
+    const key = String(value || "").trim().toLowerCase();
+    return {
+        deck: "Decks",
+        decks: "Decks",
+        wheel: "Wheels",
+        wheels: "Wheels",
+        truck: "Trucks",
+        trucks: "Trucks",
+        bearing: "Bearings",
+        bearings: "Bearings"
+    }[key] || "";
+}
+
+function storeSlug(name) {
+    return { Zumiez: "zumiez", SkateWarehouse: "skatewarehouse", CCS: "ccs", Tactics: "tactics" }[name] || "";
+}
+
+function typeSlug(name) {
+    return { Decks: "deck", Wheels: "wheel", Trucks: "truck", Bearings: "bearing" }[name] || "";
+}
+
+function flagOn(value) {
+    return ["1", "true", "yes", "on"].indexOf(String(value || "").toLowerCase()) >= 0;
+}
+
+function decodeQuery(query) {
+    const stateOut = {
+        q: "",
+        store: "all",
+        part: "all",
+        width: "all",
+        wmin: null,
+        wmax: null,
+        brand: "all",
+        min: null,
+        max: null,
+        discount: null,
+        length: "all",
+        wheelbase: "all",
+        sort: "rank",
+        change: "all",
+        watching: false,
+        low: false,
+        added: false,
+        dropped: false,
+        grouped: false
+    };
+    const text = String(query || "").replace(/^\?/, "");
+    if (!text) return stateOut;
+    const params = new URLSearchParams(text);
+    params.forEach((value, key) => {
+        key = String(key || "").toLowerCase();
+        if (key === "q") stateOut.q = value.trim();
+        else if (key === "store") {
+            const store = slugStore(value);
+            if (store) stateOut.store = store;
+        } else if (key === "type") {
+            const part = slugType(value);
+            if (part) stateOut.part = part;
+        } else if (key === "width") {
+            if (value.indexOf("-") >= 0) {
+                const bits = value.split("-");
+                stateOut.width = "all";
+                stateOut.wmin = bits[0] === "" ? null : Number(bits[0]);
+                stateOut.wmax = bits[1] === "" ? null : Number(bits[1]);
+                if (stateOut.wmin != null && !Number.isFinite(stateOut.wmin)) stateOut.wmin = null;
+                if (stateOut.wmax != null && !Number.isFinite(stateOut.wmax)) stateOut.wmax = null;
+            } else if (value && value !== "all") {
+                const number = Number(value);
+                stateOut.width = Number.isFinite(number) ? numText(number) : "all";
+            }
+        } else if (key === "brand" && value.trim()) stateOut.brand = value.trim();
+        else if (key === "min") stateOut.min = Number(value);
+        else if (key === "max") stateOut.max = Number(value);
+        else if (key === "discount") stateOut.discount = Number(value);
+        else if (key === "length" && value && value !== "all") stateOut.length = value;
+        else if (key === "wheelbase" && value && value !== "all") stateOut.wheelbase = value;
+        else if (key === "sort" && ["rank", "score", "price", "price-desc", "original", "discount", "size", "store", "brand", "days", "daysat"].indexOf(value) >= 0) {
+            stateOut.sort = value;
+        } else if (key === "change" && ["new", "drop", "lowest", "removed"].indexOf(value) >= 0) {
+            stateOut.change = value;
+        } else if (key === "watching") stateOut.watching = flagOn(value);
+        else if (key === "low") stateOut.low = flagOn(value);
+        else if (key === "added") stateOut.added = flagOn(value);
+        else if (key === "dropped") stateOut.dropped = flagOn(value);
+        else if (key === "group") stateOut.grouped = flagOn(value);
+    });
+    ["min", "max", "discount"].forEach(key => {
+        if (!Number.isFinite(stateOut[key])) stateOut[key] = null;
+    });
+    return stateOut;
+}
+
+function encodeState(snapshot) {
+    const params = new URLSearchParams();
+    function add(key, value) {
+        if (value == null) return;
+        const text = String(value).trim();
+        if (!text || text === "all") return;
+        params.set(key, text);
+    }
+    add("q", snapshot.q || "");
+    if (snapshot.store && snapshot.store !== "all") add("store", storeSlug(snapshot.store));
+    if (snapshot.part && snapshot.part !== "all") add("type", typeSlug(snapshot.part));
+    if (snapshot.width && snapshot.width !== "all") add("width", snapshot.width);
+    else if (snapshot.wmin != null || snapshot.wmax != null) {
+        const left = snapshot.wmin != null ? numText(snapshot.wmin) : "";
+        const right = snapshot.wmax != null ? numText(snapshot.wmax) : "";
+        add("width", left + "-" + right);
+    }
+    add("brand", snapshot.brand || "");
+    if (snapshot.min != null) add("min", numText(snapshot.min));
+    if (snapshot.max != null) add("max", numText(snapshot.max));
+    if (snapshot.discount != null) add("discount", numText(snapshot.discount));
+    add("length", snapshot.length || "");
+    add("wheelbase", snapshot.wheelbase || "");
+    if (snapshot.sort && snapshot.sort !== "rank") add("sort", snapshot.sort);
+    if (["new", "drop", "lowest", "removed"].indexOf(snapshot.change) >= 0) add("change", snapshot.change);
+    if (snapshot.watching) add("watching", "1");
+    if (snapshot.low && snapshot.change !== "lowest") add("low", "1");
+    if (snapshot.added && snapshot.change !== "new") add("added", "1");
+    if (snapshot.dropped && snapshot.change !== "drop") add("dropped", "1");
+    if (snapshot.grouped) add("group", "1");
+    return params.toString();
+}
+
+function captureState() {
+    readControls();
+    const sort = document.getElementById("sortSelect");
+    return {
+        q: (document.getElementById("searchInput") || {}).value || "",
+        store: state.store,
+        part: state.part,
+        width: state.size,
+        wmin: state.wmin,
+        wmax: state.wmax,
+        brand: state.brand,
+        min: state.priceMin,
+        max: state.priceMax,
+        discount: state.discountMin,
+        length: state.length,
+        wheelbase: state.wheelbase,
+        sort: sort ? sort.value : "rank",
+        change: state.change,
+        watching: state.watching,
+        low: state.cardLow,
+        added: state.cardNew,
+        dropped: state.cardDrop,
+        grouped: state.grouped
+    };
+}
+
+function setSelect(id, value) {
+    const node = document.getElementById(id);
+    if (!node) return;
+    const has = Array.from(node.options || []).some(option => option.value === value);
+    node.value = has ? value : (value === "all" || !value ? "all" : node.value);
+    if (!has && value && value !== "all") node.value = "all";
+}
+
+function writeControls(snapshot) {
+    const search = document.getElementById("searchInput");
+    if (search) search.value = snapshot.q || "";
+    setSelect("storeSelect", snapshot.store || "all");
+    setSelect("partSelect", snapshot.part || "all");
+    setSelect("widthSelect", snapshot.width || "all");
+    setSelect("brandSelect", snapshot.brand || "all");
+    setSelect("lengthSelect", snapshot.length || "all");
+    setSelect("wheelbaseSelect", snapshot.wheelbase || "all");
+    setSelect("sortSelect", snapshot.sort || "rank");
+    const fill = (id, value) => {
+        const node = document.getElementById(id);
+        if (node) node.value = value == null || !Number.isFinite(Number(value)) ? "" : numText(value);
+    };
+    fill("priceMin", snapshot.min);
+    fill("priceMax", snapshot.max);
+    fill("discountMin", snapshot.discount);
+    fill("widthMin", snapshot.width !== "all" ? null : snapshot.wmin);
+    fill("widthMax", snapshot.width !== "all" ? null : snapshot.wmax);
+    state.store = snapshot.store || "all";
+    state.part = snapshot.part || "all";
+    state.size = snapshot.width || "all";
+    state.brand = snapshot.brand || "all";
+    state.length = snapshot.length || "all";
+    state.wheelbase = snapshot.wheelbase || "all";
+    state.change = snapshot.change || "all";
+    state.watching = !!snapshot.watching;
+    state.grouped = !!snapshot.grouped;
+    state.cardLow = !!snapshot.low || snapshot.change === "lowest";
+    state.cardNew = !!snapshot.added || snapshot.change === "new";
+    state.cardDrop = !!snapshot.dropped || snapshot.change === "drop";
+    const watching = document.getElementById("watchingToggle");
+    if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
+    const grouped = document.getElementById("groupToggle");
+    if (grouped) grouped.setAttribute("aria-pressed", state.grouped ? "true" : "false");
+    setPressed("#storeFilters .filter-btn", "data-store", state.store);
+    setPressed("#partFilters .filter-btn", "data-part", state.part);
+    setPressed("#sizeFilters .chip", "data-size", state.size);
+}
+
+function syncUrl() {
+    try {
+        const query = encodeState(captureState());
+        const next = query ? "?" + query : location.pathname;
+        const current = location.pathname + location.search;
+        const target = query ? location.pathname + "?" + query : location.pathname;
+        if (current !== target) history.replaceState(null, "", next);
+    } catch (err) {
+        /* a bad URL must not break filtering */
+    }
+}
+
+function applySnapshot(snapshot) {
+    writeControls(snapshot);
+    applySortChoice();
+    applyFilters();
+}
+
+function loadFromUrl() {
+    const snapshot = decodeQuery(location.search);
+    const empty = !location.search || location.search === "?";
+    if (empty) return;
+    applySnapshot(snapshot, false);
+}
+
+function customViews() {
+    const stored = readJson(VIEWS_KEY, []);
+    return Array.isArray(stored) ? stored.filter(view => view && view.name && view.query) : [];
+}
+
+function currentQuery() {
+    return encodeState(captureState());
+}
+
+function paintViews() {
+    const row = document.getElementById("viewRow");
+    if (!row) return;
+    const current = currentQuery();
+    const builtins = (catalog().views || []).map(view => Object.assign({ builtin: true }, view));
+    const views = builtins.concat(customViews().map(view => Object.assign({ builtin: false }, view)));
+    row.innerHTML = "";
+    views.forEach(view => {
+        const tab = document.createElement("span");
+        tab.className = "view-tab" + (view.query === current ? " on" : "");
+        tab.dataset.view = view.id || "";
+        if (renamingId && renamingId === view.id) {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.value = view.name;
+            input.className = "view-rename-input";
+            input.setAttribute("aria-label", "Rename view");
+            input.addEventListener("keydown", event => {
+                if (event.key === "Enter") commitRename(view.id, input.value);
+                if (event.key === "Escape") {
+                    renamingId = "";
+                    paintViews();
+                }
+            });
+            input.addEventListener("blur", () => commitRename(view.id, input.value));
+            tab.appendChild(input);
+            row.appendChild(tab);
+            input.focus();
+            return;
+        }
+        const apply = document.createElement("button");
+        apply.type = "button";
+        apply.className = "view-apply";
+        apply.textContent = view.name;
+        apply.addEventListener("click", () => applySnapshot(decodeQuery(view.query)));
+        tab.appendChild(apply);
+        if (!view.builtin) {
+            const rename = document.createElement("button");
+            rename.type = "button";
+            rename.className = "view-icon";
+            rename.textContent = "✎";
+            rename.setAttribute("aria-label", "Rename " + view.name);
+            rename.addEventListener("click", () => {
+                renamingId = view.id;
+                paintViews();
+            });
+            const remove = document.createElement("button");
+            remove.type = "button";
+            remove.className = "view-icon";
+            remove.textContent = "×";
+            remove.setAttribute("aria-label", "Delete " + view.name);
+            remove.addEventListener("click", () => deleteView(view.id));
+            tab.appendChild(rename);
+            tab.appendChild(remove);
+        }
+        row.appendChild(tab);
+    });
+}
+
+function commitRename(id, name) {
+    const text = String(name || "").trim();
+    renamingId = "";
+    if (!text) {
+        paintViews();
+        return;
+    }
+    const views = customViews().map(view => view.id === id ? Object.assign({}, view, { name: text }) : view);
+    writeJson(VIEWS_KEY, views);
+    paintViews();
+}
+
+function deleteView(id) {
+    writeJson(VIEWS_KEY, customViews().filter(view => view.id !== id));
+    paintViews();
+}
+
+function saveCurrentView(name) {
+    const text = String(name || "").trim();
+    if (!text) return;
+    const views = customViews();
+    views.push({
+        id: "view-" + Date.now().toString(36),
+        name: text,
+        query: currentQuery()
+    });
+    writeJson(VIEWS_KEY, views);
+    paintViews();
+}
+
+function updateMoreCount() {
+    let count = 0;
+    ["priceMin", "priceMax", "discountMin", "widthMin", "widthMax"].forEach(id => {
+        if (numOrNull(id) != null) count += 1;
+    });
+    const length = document.getElementById("lengthSelect");
+    const wheel = document.getElementById("wheelbaseSelect");
+    if (length && length.value && length.value !== "all") count += 1;
+    if (wheel && wheel.value && wheel.value !== "all") count += 1;
+    const badge = document.getElementById("moreCount");
+    const button = document.getElementById("moreFilters");
+    if (badge) {
+        badge.hidden = count === 0;
+        badge.textContent = count ? "(" + count + ")" : "";
+    }
+    if (button) button.classList.toggle("has-more", count > 0);
+}
+
+function toggleMore() {
+    const panel = document.getElementById("morePanel");
+    const button = document.getElementById("moreFilters");
+    if (!panel) return;
+    panel.hidden = !panel.hidden;
+    if (button) button.setAttribute("aria-expanded", panel.hidden ? "false" : "true");
+    measureBar();
+}
+
+function shortDate(iso) {
+    const bits = String(iso || "").split("-");
+    if (bits.length < 3) return iso;
+    const month = MONTHS[Number(bits[1]) - 1] || bits[1];
+    return month + " " + Number(bits[2]);
+}
+
+function changeChain(series) {
+    return (series || []).map(point => shortDate(point[0]) + " $" + Number(point[1]).toFixed(2)).join(" → ");
+}
+
+function ensureSparkTip() {
+    if (sparkTip) return sparkTip;
+    sparkTip = document.getElementById("sparkTip");
+    return sparkTip;
+}
+
+function showSparkTip(event, point) {
+    const tip = ensureSparkTip();
+    if (!tip || !point) return;
+    tip.hidden = false;
+    tip.textContent = shortDate(point[0]) + " · $" + Number(point[1]).toFixed(2);
+    tip.style.left = Math.min(window.innerWidth - 140, event.clientX + 12) + "px";
+    tip.style.top = (event.clientY + 14) + "px";
+}
+
+function hideSparkTip() {
+    const tip = ensureSparkTip();
+    if (tip) tip.hidden = true;
+}
+
+function nearestPoint(id, event, svg) {
+    const item = (catalog().items || {})[id];
+    const points = item && Array.isArray(item.daily) && item.daily.length ? item.daily : (item && item.series) || [];
+    if (!points.length) return null;
+    const rect = svg.getBoundingClientRect();
+    if (!rect.width) return points[points.length - 1];
+    const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    const index = Math.round(ratio * (points.length - 1));
+    return points[Math.max(0, Math.min(points.length - 1, index))];
+}
+
+function openSparkPanel(id, anchor) {
+    const item = (catalog().items || {})[id];
+    const panel = document.getElementById("sparkPanel");
+    if (!panel || !item) return;
+    const title = document.getElementById("sparkPanelTitle");
+    const text = document.getElementById("sparkPanelText");
+    if (title) title.textContent = item.name || "Price history";
+    if (text) {
+        const chain = changeChain(item.series || []);
+        text.textContent = chain || "No price changes tracked yet.";
+    }
+    panel.hidden = false;
+    const rect = anchor.getBoundingClientRect();
+    const width = 300;
+    const left = Math.min(window.scrollX + rect.left, window.scrollX + document.documentElement.clientWidth - width - 12);
+    panel.style.top = (window.scrollY + rect.bottom + 6) + "px";
+    panel.style.left = Math.max(8, left) + "px";
+}
+
+function closeSparkPanel() {
+    const panel = document.getElementById("sparkPanel");
+    if (panel) panel.hidden = true;
+}
+
 function init() {
     prepareVisit();
     applyStars();
     updateAgo();
+    updateBanners();
     measureBar();
     window.addEventListener("resize", measureBar);
+    const bar = document.getElementById("stickyBar");
+    if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
     const search = document.getElementById("searchInput");
     if (search) search.addEventListener("input", applyFilters);
-    ["priceMin", "priceMax", "discountMin"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin", "widthMin", "widthMax"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.addEventListener("input", applyFilters);
     });
@@ -594,6 +1121,32 @@ function init() {
     if (wheelbase) wheelbase.addEventListener("change", applyFilters);
     const sort = document.getElementById("sortSelect");
     if (sort) sort.addEventListener("change", applySortChoice);
+    const more = document.getElementById("moreFilters");
+    if (more) more.addEventListener("click", toggleMore);
+    const save = document.getElementById("saveView");
+    const form = document.getElementById("saveViewForm");
+    if (save && form) {
+        save.addEventListener("click", () => {
+            form.hidden = false;
+            const input = document.getElementById("viewNameInput");
+            if (input) input.focus();
+        });
+    }
+    if (form) {
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+            const input = document.getElementById("viewNameInput");
+            saveCurrentView(input ? input.value : "");
+            if (input) input.value = "";
+            form.hidden = true;
+        });
+    }
+    const cancel = document.getElementById("viewCancel");
+    if (cancel && form) {
+        cancel.addEventListener("click", () => {
+            form.hidden = true;
+        });
+    }
     dealRows().forEach(row => {
         row.addEventListener("click", event => {
             if (event.target.closest("a, button, input, select, label")) return;
@@ -612,13 +1165,54 @@ function init() {
     document.querySelectorAll(".price-btn").forEach(button => {
         button.addEventListener("click", () => openDrawer(button.dataset.id));
     });
+    document.querySelectorAll(".score-btn").forEach(button => {
+        button.addEventListener("click", () => {
+            const cell = button.closest(".score-cell");
+            if (!cell) return;
+            const pinned = cell.classList.toggle("pinned");
+            button.setAttribute("aria-expanded", pinned ? "true" : "false");
+        });
+    });
+    document.querySelectorAll(".spark-hit").forEach(button => {
+        const svg = button.querySelector("svg");
+        button.addEventListener("mousemove", event => {
+            if (!svg) return;
+            showSparkTip(event, nearestPoint(button.dataset.id, event, svg));
+        });
+        button.addEventListener("mouseleave", hideSparkTip);
+        button.addEventListener("click", event => {
+            event.stopPropagation();
+            openSparkPanel(button.dataset.id, button);
+        });
+    });
+    document.querySelectorAll(".group-summary").forEach(button => {
+        button.addEventListener("click", () => {
+            const card = button.closest(".group-card");
+            const detail = card ? card.querySelector(".group-detail") : null;
+            if (!detail) return;
+            const willOpen = detail.hidden;
+            detail.hidden = !willOpen;
+            button.setAttribute("aria-expanded", willOpen ? "true" : "false");
+        });
+    });
     const close = document.getElementById("drawerClose");
     if (close) close.addEventListener("click", closeDrawer);
     document.addEventListener("keydown", event => {
-        if (event.key === "Escape") closeDrawer();
+        if (event.key === "Escape") {
+            closeDrawer();
+            closeSparkPanel();
+        }
+    });
+    document.addEventListener("click", event => {
+        const panel = document.getElementById("sparkPanel");
+        if (!panel || panel.hidden) return;
+        if (event.target.closest("#sparkPanel, .spark-hit")) return;
+        closeSparkPanel();
     });
     updateChangeLine();
-    applyFilters();
+    paintViews();
+    if (location.search && location.search.length > 1) loadFromUrl();
+    else applyFilters();
 }
 
 document.addEventListener("DOMContentLoaded", init);
