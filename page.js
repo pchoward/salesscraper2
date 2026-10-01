@@ -1,7 +1,7 @@
 let state = {
     store: "all",
     part: "all",
-    size: "all",
+    widths: [],
     brand: "all",
     length: "all",
     wheelbase: "all",
@@ -14,9 +14,7 @@ let state = {
     visitMode: "yesterday",
     sortKey: "rank",
     sortDir: "asc",
-    search: "",
-    wmin: null,
-    wmax: null
+    search: ""
 };
 
 const STAR_KEY = "salesscraper2.stars";
@@ -78,22 +76,125 @@ function numText(value) {
     return number.toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
 }
 
+function widthRanges() {
+    return (typeof WIDTH_RANGES === "undefined") ? [] : WIDTH_RANGES;
+}
+
 function readControls() {
     const search = document.getElementById("searchInput");
     state.search = search ? search.value.toLowerCase().trim() : "";
     state.priceMin = numOrNull("priceMin");
     state.priceMax = numOrNull("priceMax");
     state.discountMin = numOrNull("discountMin");
-    state.wmin = numOrNull("widthMin");
-    state.wmax = numOrNull("widthMax");
     const brand = document.getElementById("brandSelect");
-    const width = document.getElementById("widthSelect");
     const length = document.getElementById("lengthSelect");
     const wheelbase = document.getElementById("wheelbaseSelect");
-    if (width) state.size = width.value || "all";
     if (brand) state.brand = brand.value || "all";
     if (length) state.length = length.value || "all";
     if (wheelbase) state.wheelbase = wheelbase.value || "all";
+}
+
+// Keep in sync with query_state.bucket_contains / parse_width_param.
+// Width ranges filter deck rows only. Wheels, trucks, and bearings stay
+// visible when a range is selected; they disappear only when Type is Decks.
+// A deck with no parsed width matches no bucket, so it hides while any
+// range is selected.
+function bucketContains(range, width) {
+    if (!range || !Number.isFinite(width)) return false;
+    const lo = range.min == null ? null : Number(range.min);
+    const hi = range.max == null ? null : Number(range.max);
+    if (lo != null && width < lo - 1e-9) return false;
+    if (hi != null && width >= hi - 1e-9) return false;
+    return true;
+}
+
+function bucketForWidth(width) {
+    const ranges = widthRanges();
+    for (let i = 0; i < ranges.length; i++) {
+        if (bucketContains(ranges[i], width)) return ranges[i].id;
+    }
+    return "";
+}
+
+function bucketsOverlapping(low, high) {
+    const left = low == null ? -Infinity : low;
+    const right = high == null ? Infinity : high;
+    const ids = [];
+    widthRanges().forEach(range => {
+        const lo = range.min == null ? -Infinity : Number(range.min);
+        const hi = range.max == null ? Infinity : Number(range.max);
+        if (left < hi - 1e-12 && right >= lo - 1e-12) ids.push(range.id);
+    });
+    return ids;
+}
+
+function orderedWidths(ids) {
+    const chosen = {};
+    (ids || []).forEach(id => { chosen[id] = true; });
+    return widthRanges().map(range => range.id).filter(id => chosen[id]);
+}
+
+function parseWidthParam(value) {
+    const text = String(value || "").trim();
+    if (!text || text.toLowerCase() === "all") return [];
+    const known = {};
+    widthRanges().forEach(range => { known[range.id] = true; });
+    const aliases = { "<7": "lt7", "<7.0": "lt7", "10+": "10up", "10.0+": "10up" };
+    const chosen = [];
+    text.split(",").forEach(raw => {
+        const token = String(raw || "").replace(/\s+/g, "");
+        if (!token) return;
+        if (aliases[token]) {
+            chosen.push(aliases[token]);
+            return;
+        }
+        if (known[token]) {
+            chosen.push(token);
+            return;
+        }
+        const dash = token.indexOf("-");
+        if (dash >= 0) {
+            const left = token.slice(0, dash);
+            const right = token.slice(dash + 1);
+            const low = left === "" ? null : Number(left);
+            const high = right === "" ? null : Number(right);
+            if ((left && !Number.isFinite(low)) || (right && !Number.isFinite(high))) return;
+            if (low == null && high == null) return;
+            bucketsOverlapping(low, high).forEach(id => chosen.push(id));
+            return;
+        }
+        const number = Number(token);
+        if (Number.isFinite(number)) {
+            const id = bucketForWidth(number);
+            if (id) chosen.push(id);
+        }
+    });
+    return orderedWidths(chosen);
+}
+
+function deckWidthAllowed(row) {
+    const selected = state.widths || [];
+    if (!selected.length) return true;
+    if ((row.dataset.part || "") !== "Decks") return true;
+    const size = parseFloat(row.dataset.size);
+    if (!Number.isFinite(size)) return false;
+    const ranges = widthRanges();
+    return selected.some(id => {
+        const range = ranges.find(item => item.id === id);
+        return bucketContains(range, size);
+    });
+}
+
+function paintWidthChips() {
+    const selected = {};
+    (state.widths || []).forEach(id => { selected[id] = true; });
+    const allOn = !(state.widths || []).length;
+    document.querySelectorAll("#sizeFilters .chip").forEach(node => {
+        const id = node.getAttribute("data-range") || "";
+        const on = id === "all" ? allOn : !!selected[id];
+        node.classList.toggle("active", on);
+        if (node.hasAttribute("aria-pressed")) node.setAttribute("aria-pressed", on ? "true" : "false");
+    });
 }
 
 function setPressed(selector, attr, value) {
@@ -125,13 +226,7 @@ function rowMatches(row) {
     if (state.search && !hay.includes(state.search)) return false;
     if (state.store !== "all" && (row.dataset.store || "") !== state.store) return false;
     if (state.part !== "all" && (row.dataset.part || "") !== state.part) return false;
-    if (state.size !== "all" && (row.dataset.size || "") !== state.size) return false;
-    if (state.size === "all" && (state.wmin != null || state.wmax != null)) {
-        const size = parseFloat(row.dataset.size);
-        if (!Number.isFinite(size)) return false;
-        if (state.wmin != null && size < state.wmin - 1e-6) return false;
-        if (state.wmax != null && size > state.wmax + 1e-6) return false;
-    }
+    if (!deckWidthAllowed(row)) return false;
     if (state.brand !== "all" && (row.dataset.brand || "") !== state.brand) return false;
     if (state.length !== "all" && (row.dataset.length || "") !== state.length) return false;
     if (state.wheelbase !== "all" && (row.dataset.wheelbase || "") !== state.wheelbase) return false;
@@ -213,6 +308,7 @@ function applyFilters() {
     applyGroupVisibility();
     syncDetails();
     paintCards();
+    paintWidthChips();
     updateMoreCount();
     syncUrl();
     paintViews();
@@ -238,19 +334,17 @@ function filterByPart(part) {
     applyFilters();
 }
 
-function filterBySize(size) {
-    state.size = size || "all";
-    const select = document.getElementById("widthSelect");
-    if (select) select.value = state.size;
-    if (state.size !== "all") {
-        const wmin = document.getElementById("widthMin");
-        const wmax = document.getElementById("widthMax");
-        if (wmin) wmin.value = "";
-        if (wmax) wmax.value = "";
-        state.wmin = null;
-        state.wmax = null;
+function toggleWidthRange(id) {
+    if (!id || id === "all") {
+        state.widths = [];
+    } else {
+        const selected = {};
+        (state.widths || []).forEach(item => { selected[item] = true; });
+        if (selected[id]) delete selected[id];
+        else selected[id] = true;
+        state.widths = orderedWidths(Object.keys(selected));
     }
-    setPressed("#sizeFilters .chip", "data-size", state.size);
+    paintWidthChips();
     applyFilters();
 }
 
@@ -561,7 +655,6 @@ function clearFilters() {
     state = {
         store: "all",
         part: "all",
-        size: "all",
         brand: "all",
         length: "all",
         wheelbase: "all",
@@ -575,16 +668,15 @@ function clearFilters() {
         sortKey: "rank",
         sortDir: "asc",
         search: "",
-        wmin: null,
-        wmax: null
+        widths: []
     };
     const search = document.getElementById("searchInput");
     if (search) search.value = "";
-    ["priceMin", "priceMax", "discountMin", "widthMin", "widthMax"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.value = "";
     });
-    ["storeSelect", "partSelect", "widthSelect", "brandSelect", "lengthSelect", "wheelbaseSelect"].forEach(id => {
+    ["storeSelect", "partSelect", "brandSelect", "lengthSelect", "wheelbaseSelect"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.value = "all";
     });
@@ -594,7 +686,7 @@ function clearFilters() {
     if (watching) watching.setAttribute("aria-pressed", "false");
     setPressed("#storeFilters .filter-btn", "data-store", "all");
     setPressed("#partFilters .filter-btn", "data-part", "all");
-    setPressed("#sizeFilters .chip", "data-size", "all");
+    paintWidthChips();
     sortBy("rank", "asc");
     applyFilters();
 }
@@ -706,9 +798,7 @@ function decodeQuery(query) {
         q: "",
         store: "all",
         part: "all",
-        width: "all",
-        wmin: null,
-        wmax: null,
+        widths: [],
         brand: "all",
         min: null,
         max: null,
@@ -736,17 +826,7 @@ function decodeQuery(query) {
             const part = slugType(value);
             if (part) stateOut.part = part;
         } else if (key === "width") {
-            if (value.indexOf("-") >= 0) {
-                const bits = value.split("-");
-                stateOut.width = "all";
-                stateOut.wmin = bits[0] === "" ? null : Number(bits[0]);
-                stateOut.wmax = bits[1] === "" ? null : Number(bits[1]);
-                if (stateOut.wmin != null && !Number.isFinite(stateOut.wmin)) stateOut.wmin = null;
-                if (stateOut.wmax != null && !Number.isFinite(stateOut.wmax)) stateOut.wmax = null;
-            } else if (value && value !== "all") {
-                const number = Number(value);
-                stateOut.width = Number.isFinite(number) ? numText(number) : "all";
-            }
+            stateOut.widths = parseWidthParam(value);
         } else if (key === "brand" && value.trim()) stateOut.brand = value.trim();
         else if (key === "min") stateOut.min = Number(value);
         else if (key === "max") stateOut.max = Number(value);
@@ -780,12 +860,8 @@ function encodeState(snapshot) {
     add("q", snapshot.q || "");
     if (snapshot.store && snapshot.store !== "all") add("store", storeSlug(snapshot.store));
     if (snapshot.part && snapshot.part !== "all") add("type", typeSlug(snapshot.part));
-    if (snapshot.width && snapshot.width !== "all") add("width", snapshot.width);
-    else if (snapshot.wmin != null || snapshot.wmax != null) {
-        const left = snapshot.wmin != null ? numText(snapshot.wmin) : "";
-        const right = snapshot.wmax != null ? numText(snapshot.wmax) : "";
-        add("width", left + "-" + right);
-    }
+    const widths = orderedWidths(snapshot.widths || []);
+    if (widths.length) add("width", widths.join(","));
     add("brand", snapshot.brand || "");
     if (snapshot.min != null) add("min", numText(snapshot.min));
     if (snapshot.max != null) add("max", numText(snapshot.max));
@@ -809,9 +885,7 @@ function captureState() {
         q: (document.getElementById("searchInput") || {}).value || "",
         store: state.store,
         part: state.part,
-        width: state.size,
-        wmin: state.wmin,
-        wmax: state.wmax,
+        widths: (state.widths || []).slice(),
         brand: state.brand,
         min: state.priceMin,
         max: state.priceMax,
@@ -841,7 +915,6 @@ function writeControls(snapshot) {
     if (search) search.value = snapshot.q || "";
     setSelect("storeSelect", snapshot.store || "all");
     setSelect("partSelect", snapshot.part || "all");
-    setSelect("widthSelect", snapshot.width || "all");
     setSelect("brandSelect", snapshot.brand || "all");
     setSelect("lengthSelect", snapshot.length || "all");
     setSelect("wheelbaseSelect", snapshot.wheelbase || "all");
@@ -853,11 +926,9 @@ function writeControls(snapshot) {
     fill("priceMin", snapshot.min);
     fill("priceMax", snapshot.max);
     fill("discountMin", snapshot.discount);
-    fill("widthMin", snapshot.width !== "all" ? null : snapshot.wmin);
-    fill("widthMax", snapshot.width !== "all" ? null : snapshot.wmax);
     state.store = snapshot.store || "all";
     state.part = snapshot.part || "all";
-    state.size = snapshot.width || "all";
+    state.widths = orderedWidths(snapshot.widths || []);
     state.brand = snapshot.brand || "all";
     state.length = snapshot.length || "all";
     state.wheelbase = snapshot.wheelbase || "all";
@@ -873,7 +944,7 @@ function writeControls(snapshot) {
     if (grouped) grouped.setAttribute("aria-pressed", state.grouped ? "true" : "false");
     setPressed("#storeFilters .filter-btn", "data-store", state.store);
     setPressed("#partFilters .filter-btn", "data-part", state.part);
-    setPressed("#sizeFilters .chip", "data-size", state.size);
+    paintWidthChips();
 }
 
 function syncUrl() {
@@ -919,7 +990,8 @@ function paintViews() {
     row.innerHTML = "";
     views.forEach(view => {
         const tab = document.createElement("span");
-        tab.className = "view-tab" + (view.query === current ? " on" : "");
+        const viewQuery = encodeState(decodeQuery(view.query));
+        tab.className = "view-tab" + (viewQuery === current ? " on" : "");
         tab.dataset.view = view.id || "";
         if (renamingId && renamingId === view.id) {
             const input = document.createElement("input");
@@ -1001,7 +1073,7 @@ function saveCurrentView(name) {
 
 function updateMoreCount() {
     let count = 0;
-    ["priceMin", "priceMax", "discountMin", "widthMin", "widthMax"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin"].forEach(id => {
         if (numOrNull(id) != null) count += 1;
     });
     const length = document.getElementById("lengthSelect");
@@ -1103,7 +1175,7 @@ function init() {
     if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
     const search = document.getElementById("searchInput");
     if (search) search.addEventListener("input", applyFilters);
-    ["priceMin", "priceMax", "discountMin", "widthMin", "widthMax"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.addEventListener("input", applyFilters);
     });
@@ -1111,8 +1183,6 @@ function init() {
     if (storeSelect) storeSelect.addEventListener("change", () => filterByStore(storeSelect.value));
     const partSelect = document.getElementById("partSelect");
     if (partSelect) partSelect.addEventListener("change", () => filterByPart(partSelect.value));
-    const widthSelect = document.getElementById("widthSelect");
-    if (widthSelect) widthSelect.addEventListener("change", () => filterBySize(widthSelect.value));
     const brand = document.getElementById("brandSelect");
     if (brand) brand.addEventListener("change", applyFilters);
     const length = document.getElementById("lengthSelect");

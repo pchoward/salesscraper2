@@ -155,13 +155,65 @@ class FilterTests(unittest.TestCase):
             )
         )
 
-    def test_deck_width_window_and_discount_floors(self):
-        self.assertFalse(
+    def test_deck_min_width_and_discount_floors(self):
+        self.assertTrue(
             passes_filters(
                 "Santa Cruz Malba Crash Test Reissue Deck 10.03 x 29.35",
                 "Decks",
                 price_new="79.98",
                 price_old="108.95",
+            )
+        )
+        self.assertTrue(
+            passes_filters(
+                "Powell Peralta Caballero Mask Deck 9.75x31.12",
+                "Decks",
+                price_new="50",
+                price_old="80",
+            )
+        )
+        self.assertTrue(
+            passes_filters(
+                "Heroin Nolan Knock Off 10.0 Skateboard Deck",
+                "Decks",
+                price_new="40",
+                price_old="70",
+            )
+        )
+        self.assertTrue(
+            passes_filters(
+                "Heroin Nolan Knock Off 10.25 Skateboard Deck",
+                "Decks",
+                price_new="40",
+                price_old="70",
+            )
+        )
+        self.assertEqual(
+            extract_deck_dimensions("Heroin Nolan Knock Off 10.0 Skateboard Deck")[0],
+            10.0,
+        )
+        self.assertEqual(
+            extract_deck_size("Heroin Nolan Knock Off 10.25 Skateboard Deck"),
+            "10.25",
+        )
+        self.assertFalse(
+            passes_filters(
+                "Loaded Tan Tien 10 x 39",
+                "Decks",
+                price_new="80",
+                price_old="160",
+            )
+        )
+        self.assertIn(
+            "longboard",
+            filter_reason("Loaded Tan Tien 10 x 39", "Decks", price_new="80", price_old="160"),
+        )
+        self.assertFalse(
+            passes_filters(
+                "Daddies 10.25 Cruiser Deck",
+                "Decks",
+                price_new="40",
+                price_old="80",
             )
         )
         self.assertFalse(

@@ -35,7 +35,7 @@ from history import (
     summarize_entry,
 )
 from matching import cross_store_groups
-from query_state import STARTER_VIEWS
+from query_state import STARTER_VIEWS, WIDTH_RANGES, bucket_for_width
 from score import FORMULA, deal_score
 from site_sales import activity_line, describe_sales, display_name, load_state
 from watchlist import load_watchlist, rule_matches
@@ -666,15 +666,17 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
 
     store_counts = {}
     part_counts = {}
-    width_counts = {}
+    range_counts = {bucket.id: 0 for bucket in WIDTH_RANGES}
     brands = set()
     lengths = set()
     wheels = set()
     for record in records:
         store_counts[record["store"]] = store_counts.get(record["store"], 0) + 1
         part_counts[record["part"]] = part_counts.get(record["part"], 0) + 1
-        if record["width_key"]:
-            width_counts[record["width_key"]] = width_counts.get(record["width_key"], 0) + 1
+        if record["part"] == "Decks" and record["width_key"]:
+            bucket = bucket_for_width(record["width_key"])
+            if bucket is not None:
+                range_counts[bucket.id] += 1
         if record["brand"]:
             brands.add(record["brand"])
         if record["length_key"]:
@@ -802,9 +804,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     for part in ("Decks", "Wheels", "Trucks", "Bearings"):
         if part in part_counts:
             part_options.append(_option(part, part))
-    width_options = ['<option value="all">All widths</option>']
-    for width in sorted(width_counts, key=float):
-        width_options.append(_option(width, f"{width} ({width_counts[width]})"))
     brand_options = ['<option value="all">All brands</option>']
     for brand in sorted(brands, key=str.casefold):
         brand_options.append(_option(brand, brand))
@@ -827,13 +826,19 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f'<select id="wheelbaseSelect">{"".join(options)}</select></label>'
         )
     chips = [
-        '<button type="button" class="chip active" data-size="all" onclick="filterBySize(\'all\')">All widths</button>'
+        '<button type="button" class="chip active" data-range="all" aria-pressed="true" '
+        "onclick=\"toggleWidthRange('all')\">All</button>"
     ]
-    for width in sorted(width_counts, key=float):
+    for bucket in WIDTH_RANGES:
+        count = range_counts[bucket.id]
+        zero = " is-zero" if count == 0 else ""
+        low = "" if bucket.min is None else bucket.min
+        high = "" if bucket.max is None else bucket.max
         chips.append(
-            f'<button type="button" class="chip" data-size="{escape(width, quote=True)}" '
-            f"onclick=\"filterBySize('{escape(width, quote=True)}')\">"
-            f"{escape(width)} ({width_counts[width]})</button>"
+            f'<button type="button" class="chip{zero}" data-range="{escape(bucket.id, quote=True)}" '
+            f'data-min="{low}" data-max="{high}" data-count="{count}" aria-pressed="false" '
+            f"onclick=\"toggleWidthRange('{escape(bucket.id, quote=True)}')\">"
+            f"{escape(bucket.label)} ({count})</button>"
         )
 
     chunks.append('<div class="sticky-bar" id="stickyBar">')
@@ -844,8 +849,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<select id="storeSelect">{"".join(store_options)}</select></label>'
         '<label class="field"><span>Type</span>'
         f'<select id="partSelect">{"".join(part_options)}</select></label>'
-        '<label class="field"><span>Width</span>'
-        f'<select id="widthSelect">{"".join(width_options)}</select></label>'
         '<label class="field"><span>Brand</span>'
         f'<select id="brandSelect">{"".join(brand_options)}</select></label>'
         '<label class="field"><span>Sort</span><select id="sortSelect">'
@@ -870,8 +873,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<label class="field"><span>Min price</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
         '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
         '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
-        '<label class="field"><span>Width min</span><input id="widthMin" type="number" min="0" step="0.01" inputmode="decimal"></label>'
-        '<label class="field"><span>Width max</span><input id="widthMax" type="number" min="0" step="0.01" inputmode="decimal"></label>'
         f"{length_select}{wheel_select}"
         "</div>"
     )
@@ -879,7 +880,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="chip-row">'
         + _buttons("storeFilters", "store", "filterByStore", sorted(store_counts))
         + _buttons("partFilters", "part", "filterByPart", [part for part in ("Decks", "Wheels", "Trucks", "Bearings") if part in part_counts])
-        + f'<div class="filter-group" id="sizeFilters">{"".join(chips)}</div>'
+        + f'<div class="filter-group width-ranges" id="sizeFilters">'
+        '<span class="range-label">Width range</span>'
+        + f'{"".join(chips)}</div>'
         + "</div>"
     )
     chunks.append(
@@ -961,7 +964,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append(
         "<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. "
         "Decks stay at 10% off or more for known street brands and 15% otherwise, "
-        "about 7.5–9.5 inches wide. "
+        "7.5 inches and wider. Named cruiser and longboard listings are still excluded. "
         f"{escape(FORMULA)} "
         "Stars are saved in this browser. Email alerts use watchlist.yaml. "
         "A site-wide sale is a day when a store's sale count is at least 2.5× its recent median and 30 items higher, "
@@ -993,7 +996,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div id="sparkTip" hidden></div>'
     )
     chunks.append(f'<script type="application/json" id="catalogJson">{payload}</script>')
-    chunks.append(f"<script>{_read_asset('page.js')}</script>")
+    ranges_literal = json.dumps(
+        [
+            {"id": bucket.id, "label": bucket.label, "min": bucket.min, "max": bucket.max}
+            for bucket in WIDTH_RANGES
+        ]
+    )
+    chunks.append(f"<script>const WIDTH_RANGES = {ranges_literal};\n{_read_asset('page.js')}</script>")
     chunks.append("</body></html>")
     return "\n".join(chunk for chunk in chunks if chunk)
 

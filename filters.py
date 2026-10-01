@@ -108,12 +108,12 @@ APPAREL_PATTERNS = (
 KNOWN_DECK_MIN_PERCENT = 10.0
 UNKNOWN_DECK_MIN_PERCENT = 15.0
 
-# Street deck widths we keep. "Roughly 7.5–9.0": minis under 7.5" are out,
-# and widths above 9.5" are treated as old-school / cruiser widths.
-# 10.x must parse correctly so those listings are excluded rather than
-# slipping through with no size.
+# Minis under 7.5" are out. There is no maximum width: 9.75", 10.0", and
+# 10.25" are street decks the rider uses and must stay. Two-digit widths
+# have to parse as widths so they are kept on purpose, not dropped by
+# accident and not mistaken for a missing size. Cruisers and longboards
+# are rejected by keyword and by MAX_STREET_LENGTH, not for being wide.
 MIN_DECK_WIDTH = 7.5
-MAX_DECK_WIDTH = 9.5
 
 # A "W x L" length at or above this is a longboard, not a street deck.
 # Common street lengths in the catalog are about 31–32.5".
@@ -344,8 +344,6 @@ def _deck_size_reason(name):
         return None
     if width < MIN_DECK_WIDTH:
         return f"mini width {width:g}\" (< {MIN_DECK_WIDTH:g}\")"
-    if width > MAX_DECK_WIDTH:
-        return f"width {width:g}\" above {MAX_DECK_WIDTH:g}\""
     return None
 
 

@@ -127,6 +127,17 @@ button.stat-card:hover, .stat-card.emphasis { outline: none; }
     font-size: 0.78rem;
     font-weight: 600;
 }
+.width-ranges { flex: 1 1 100%; align-items: center; }
+.range-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    margin-right: 0.15rem;
+}
+.chip.is-zero { opacity: 0.45; }
+.chip.is-zero.active { opacity: 1; }
 .section { margin-bottom: 1rem; }
 .section-header {
     display: flex;

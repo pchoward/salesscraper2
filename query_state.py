@@ -4,11 +4,68 @@ The page reads and writes this query string with ``history.replaceState``.
 Saved views store the same string. Defaults are omitted so an unfiltered
 page has no query.
 
-``width=8.25`` is one width. ``width=8.25-8.5`` is an inclusive range.
 ``type=deck`` is the part. ``discount=40`` is the minimum percent off.
+
+Width is a list of range-chip ids in ``width``, comma-separated. An empty
+list means All. Each chip is one bucket: the lower bound is inclusive and
+the upper bound is exclusive, so 8.5" is ``8.5-8.75`` and 10.0" is ``10up``
+(the chip labeled ``10.0+``).
+
+Older links still resolve:
+
+* ``width=8.25`` selects the one bucket that contains 8.25".
+* ``width=8.25-8.5`` is the old inclusive min/max window. When that text is
+  not itself a bucket id, every bucket that overlaps the closed interval is
+  selected, so the bucket that holds the upper endpoint is included.
+* A token that equals a bucket id selects that chip only. ``width=8.5-8.75``
+  is the half-open chip, not an inclusive window through 8.75".
+
+On the page, width ranges filter deck rows only. Wheels, trucks, and
+bearings stay visible when a range is selected. They drop out only when
+the type filter is also Decks. A deck with no parsed width does not fall
+in any bucket, so it is hidden while any range is selected.
 """
 
 from urllib.parse import parse_qsl, urlencode
+
+
+class WidthRange(object):
+    """One deck-width bucket. ``max`` is exclusive; ``None`` means unbounded."""
+
+    def __init__(self, id, label, low, high):
+        self.id = id
+        self.label = label
+        self.min = low
+        self.max = high
+
+
+# Lower bound inclusive, upper bound exclusive. 8.5 is "8.5 - 8.75".
+# 10.0 is "10.0+". Ids that use ".0" do not collide with the old encoder,
+# which wrote 8 and 10 rather than 8.0 and 10.0.
+WIDTH_RANGES = (
+    WidthRange("lt7", "< 7.0", None, 7.0),
+    WidthRange("7.0-7.25", "7.0 - 7.25", 7.0, 7.25),
+    WidthRange("7.25-7.5", "7.25 - 7.5", 7.25, 7.5),
+    WidthRange("7.5-7.75", "7.5 - 7.75", 7.5, 7.75),
+    WidthRange("7.75-8.0", "7.75 - 8.0", 7.75, 8.0),
+    WidthRange("8.0-8.125", "8.0 - 8.125", 8.0, 8.125),
+    WidthRange("8.125-8.25", "8.125 - 8.25", 8.125, 8.25),
+    WidthRange("8.25-8.375", "8.25 - 8.375", 8.25, 8.375),
+    WidthRange("8.375-8.5", "8.375 - 8.5", 8.375, 8.5),
+    WidthRange("8.5-8.75", "8.5 - 8.75", 8.5, 8.75),
+    WidthRange("8.75-9.0", "8.75 - 9.0", 8.75, 9.0),
+    WidthRange("9.0-9.25", "9.0 - 9.25", 9.0, 9.25),
+    WidthRange("9.25-9.5", "9.25 - 9.5", 9.25, 9.5),
+    WidthRange("9.5-10.0", "9.5 - 10.0", 9.5, 10.0),
+    WidthRange("10up", "10.0+", 10.0, None),
+)
+_WIDTH_IDS = {bucket.id: bucket for bucket in WIDTH_RANGES}
+_WIDTH_ALIASES = {
+    "<7": "lt7",
+    "<7.0": "lt7",
+    "10+": "10up",
+    "10.0+": "10up",
+}
 
 STORE_SLUGS = {
     "zumiez": "Zumiez",
@@ -79,9 +136,7 @@ def empty_state():
         "q": "",
         "store": "all",
         "part": "all",
-        "width": "all",
-        "wmin": None,
-        "wmax": None,
+        "widths": [],
         "brand": "all",
         "min": None,
         "max": None,
@@ -128,17 +183,74 @@ def _flag(value):
     return str(value or "").strip().lower() in {"1", "true", "yes", "on"}
 
 
-def _parse_width(value):
+def bucket_contains(bucket, width):
+    """True when ``width`` falls in this bucket (low inclusive, high exclusive)."""
+    try:
+        width = float(width)
+    except (TypeError, ValueError):
+        return False
+    if bucket.min is not None and width < bucket.min - 1e-9:
+        return False
+    if bucket.max is not None and width >= bucket.max - 1e-9:
+        return False
+    return True
+
+
+def bucket_for_width(value):
+    """The one bucket that contains ``value``, or None."""
+    for bucket in WIDTH_RANGES:
+        if bucket_contains(bucket, value):
+            return bucket
+    return None
+
+
+def _overlaps_inclusive(bucket, low, high):
+    """True when the closed interval overlaps the half-open bucket."""
+    left = float("-inf") if low is None else low
+    right = float("inf") if high is None else high
+    lo = float("-inf") if bucket.min is None else bucket.min
+    hi = float("inf") if bucket.max is None else bucket.max
+    return left < hi - 1e-12 and right >= lo - 1e-12
+
+
+def _ordered_widths(ids):
+    chosen = set(ids or [])
+    return [bucket.id for bucket in WIDTH_RANGES if bucket.id in chosen]
+
+
+def parse_width_param(value):
+    """Bucket ids for a ``width`` query value. Empty means All."""
     text = str(value or "").strip()
     if not text or text.lower() == "all":
-        return "all", None, None
-    if "-" in text:
-        left, right = text.split("-", 1)
-        return "all", _float(left), _float(right)
-    number = _float(text)
-    if number is None:
-        return "all", None, None
-    return _num_text(number), None, None
+        return []
+    chosen = []
+    for token in text.split(","):
+        token = "".join(token.split())
+        if not token:
+            continue
+        alias = _WIDTH_ALIASES.get(token)
+        if alias:
+            chosen.append(alias)
+            continue
+        if token in _WIDTH_IDS:
+            chosen.append(token)
+            continue
+        if "-" in token:
+            left, right = token.split("-", 1)
+            low = _float(left) if left else None
+            high = _float(right) if right else None
+            if (left and low is None) or (right and high is None):
+                continue
+            if low is None and high is None:
+                continue
+            chosen.extend(
+                bucket.id for bucket in WIDTH_RANGES if _overlaps_inclusive(bucket, low, high)
+            )
+            continue
+        bucket = bucket_for_width(token)
+        if bucket is not None:
+            chosen.append(bucket.id)
+    return _ordered_widths(chosen)
 
 
 def decode_query(query):
@@ -162,10 +274,7 @@ def decode_query(query):
             if part:
                 state["part"] = part
         elif key == "width":
-            width, wmin, wmax = _parse_width(value)
-            state["width"] = width
-            state["wmin"] = wmin
-            state["wmax"] = wmax
+            state["widths"] = parse_width_param(value)
         elif key == "brand" and value.strip():
             state["brand"] = value.strip()
         elif key == "min":
@@ -215,16 +324,9 @@ def encode_state(state):
     part = state.get("part") or "all"
     if part != "all":
         add("type", TYPE_TO_SLUG.get(part, ""))
-    width = state.get("width") or "all"
-    if width != "all":
-        add("width", width)
-    else:
-        wmin = state.get("wmin")
-        wmax = state.get("wmax")
-        if wmin is not None or wmax is not None:
-            left = _num_text(wmin) if wmin is not None else ""
-            right = _num_text(wmax) if wmax is not None else ""
-            add("width", f"{left}-{right}")
+    widths = _ordered_widths(state.get("widths"))
+    if widths:
+        add("width", ",".join(widths))
     add("brand", state.get("brand") or "")
     if state.get("min") is not None:
         add("min", _num_text(state["min"]))
