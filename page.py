@@ -9,6 +9,7 @@ import json
 import logging
 import os
 from html import escape
+from zoneinfo import ZoneInfo
 
 from badges import classify_badges
 from dimensions import dimension_key, extract_specs
@@ -25,10 +26,18 @@ from filters import (
     percent_off_value,
 )
 from health import warning_text
-from history import all_time_low_status, summarize_entry
+from history import (
+    STAGE_LABEL,
+    all_time_low_status,
+    days_at_price,
+    listing_stage,
+    recently_gone,
+    summarize_entry,
+)
 from matching import cross_store_groups
+from query_state import STARTER_VIEWS
 from score import FORMULA, deal_score
-from site_sales import describe_sales, format_sale_line, load_state
+from site_sales import activity_line, describe_sales, display_name, load_state
 from watchlist import load_watchlist, rule_matches
 
 logger = logging.getLogger("page")
@@ -153,6 +162,45 @@ def _chain(prices):
             points.append([day, round(price, 2)])
             last = price
     return points
+
+
+def _daily_points(prices):
+    return [[day, round(float(prices[day]), 2)] for day in sorted(prices or {})]
+
+
+def _parse_generated(value):
+    if isinstance(value, datetime.datetime):
+        return value
+    text = str(value or "").strip()
+    if not text:
+        return None
+    try:
+        return datetime.datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        pass
+    try:
+        return datetime.datetime.strptime(text[:19], "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        return None
+
+
+def format_scan_et(value):
+    """Exact scan time for the hover label, in US Eastern."""
+    moment = _parse_generated(value)
+    if moment is None:
+        return str(value or "")
+    if moment.tzinfo is None:
+        moment = moment.replace(tzinfo=datetime.timezone.utc)
+    local = moment.astimezone(ZoneInfo("America/New_York"))
+    hour = local.strftime("%I").lstrip("0") or "12"
+    return f"{local.strftime('%b')} {local.day}, {local.year} {hour}:{local.strftime('%M:%S %p')} ET"
+
+
+def _held_label(days, at_days, price):
+    label = f"{days}d tracked"
+    if price is None:
+        return label
+    return f"{label} · {at_days}d @ ${float(price):.2f}"
 
 
 def sparkline_svg(prices, width=72, height=22, css="spark"):
@@ -512,7 +560,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 today=today,
             )
             status = all_time_low_status(item, price_history)
-            score = deal_score(item, price_history, drop=drop, width=specs.get("width"))
+            score = deal_score(
+                item,
+                price_history,
+                drop=drop,
+                width=specs.get("width"),
+                today=today,
+            )
             first = str(entry.get("first_seen") or "")[:10]
             last = str(entry.get("last_seen") or "")[:10] or today
             first_day = _as_date(first)
@@ -520,6 +574,20 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             days = (today_day - first_day).days if first_day and today_day else 0
             if days < 0:
                 days = 0
+            held = days_at_price(entry, today)
+            at_days = held.get("days") or 0
+            at_price = held.get("price")
+            if at_price is None:
+                at_price = _price(item.get("price_new"))
+            try:
+                stage = listing_stage(
+                    entry,
+                    True,
+                    today=today,
+                    at_low=bool(status.get("flagged")),
+                )
+            except Exception:
+                stage = "new"
             listed = any(rule_matches(rule, item) for rule in rules)
             brand = listing_brand(item.get("name") or "", item.get("part"))
             hit_low = bool(status.get("flagged")) and (
@@ -547,6 +615,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "badges": badges,
                 "score": score,
                 "days": days,
+                "at_days": at_days,
+                "at_price": at_price,
+                "held": _held_label(days, at_days, at_price),
+                "stage": stage,
                 "first": first,
                 "last": last,
                 "listed": listed,
@@ -589,6 +661,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "name": record["name"],
             "url": record["url"],
             "series": record["chain"],
+            "daily": _daily_points(record["prices"]),
         }
 
     store_counts = {}
@@ -642,8 +715,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "<h1>Skateboard Sale Tracker</h1>",
         "<p>"
         f'<span id="statusCounts">{len(records)} active deals, {new_count} new, {drop_count} drops</span>'
-        ', last scan <time id="lastScan" datetime="'
-        f'{escape(str(generated_at), quote=True)}">{escape(str(generated_at))}</time></p>',
+        ', last scan <span class="scan-wrap"><time id="lastScan" datetime="'
+        f'{escape(str(generated_at), quote=True)}">{escape(str(generated_at))}</time>'
+        f'<span class="scan-exact" id="scanExact">{escape(format_scan_et(generated_at))}</span></span></p>',
         "</header>",
     ]
     alert = _alert_html(warnings)
@@ -701,9 +775,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
     chunks.append("</div>")
 
-    if sales:
-        bits = " ".join(escape(format_sale_line(row)) for row in sales)
-        chunks.append(f'<p class="sale-ages" id="siteSales"><strong>Site-wide sales.</strong> {bits}</p>')
+    try:
+        chunks.append(_activity_html(sales, generated_at))
+    except Exception as exc:
+        logger.error("Retailer activity panel failed: %s", exc)
     if failed_keys:
         listed = ", ".join(escape(key) for key in failed_keys)
         chunks.append(
@@ -761,10 +836,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f"{escape(width)} ({width_counts[width]})</button>"
         )
 
-    chunks.append('<div class="sticky-bar">')
+    chunks.append('<div class="sticky-bar" id="stickyBar">')
     chunks.append(
-        '<div class="controls">'
-        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals" onkeyup="filterProducts()"></div>'
+        '<div class="controls" id="basicFilters">'
+        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals"></div>'
         '<label class="field"><span>Store</span>'
         f'<select id="storeSelect">{"".join(store_options)}</select></label>'
         '<label class="field"><span>Type</span>'
@@ -773,9 +848,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<select id="widthSelect">{"".join(width_options)}</select></label>'
         '<label class="field"><span>Brand</span>'
         f'<select id="brandSelect">{"".join(brand_options)}</select></label>'
-        '<label class="field"><span>Min price</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
-        '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
-        '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
         '<label class="field"><span>Sort</span><select id="sortSelect">'
         '<option value="rank">Newest / biggest drop</option>'
         '<option value="score">Deal score</option>'
@@ -787,7 +859,19 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<option value="store">Store</option>'
         '<option value="brand">Brand</option>'
         '<option value="days">Days tracked</option>'
+        '<option value="daysat">Days at this price</option>'
         "</select></label>"
+        '<button type="button" class="text-btn" id="moreFilters" aria-expanded="false" aria-controls="morePanel">'
+        'More filters <span id="moreCount" hidden></span></button>'
+        "</div>"
+    )
+    chunks.append(
+        '<div class="more-filters" id="morePanel" hidden>'
+        '<label class="field"><span>Min price</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
+        '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
+        '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
+        '<label class="field"><span>Width min</span><input id="widthMin" type="number" min="0" step="0.01" inputmode="decimal"></label>'
+        '<label class="field"><span>Width max</span><input id="widthMax" type="number" min="0" step="0.01" inputmode="decimal"></label>'
         f"{length_select}{wheel_select}"
         "</div>"
     )
@@ -803,8 +887,17 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
         '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
         '<button type="button" class="text-btn" id="statsToggle" aria-pressed="false" onclick="toggleStats()">Stats</button>'
+        '<button type="button" class="text-btn" id="saveView">Save view</button>'
         '<button type="button" class="text-btn" onclick="clearFilters()">Clear</button>'
         "</div></div>"
+    )
+    chunks.append(
+        '<form class="save-view" id="saveViewForm" hidden>'
+        '<input id="viewNameInput" type="text" maxlength="80" placeholder="Name this view" aria-label="View name">'
+        '<button type="submit" class="text-btn">Save</button>'
+        '<button type="button" class="text-btn" id="viewCancel">Cancel</button>'
+        "</form>"
+        '<div class="view-row" id="viewRow"></div>'
     )
 
     header_cells = [
@@ -825,6 +918,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     for label, key in header_cells:
         if not key:
             head.append("<th></th>")
+        elif key == "days":
+            head.append(
+                '<th class="days-head">'
+                '<button type="button" data-sort="days" onclick="sortBy(\'days\')">Tracked</button>'
+                '<button type="button" data-sort="daysat" onclick="sortBy(\'daysat\')">At price</button>'
+                "</th>"
+            )
         else:
             title = f' title="{escape(FORMULA, quote=True)}"' if key == "score" else ""
             head.append(
@@ -848,28 +948,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append(_group_board(records))
     chunks.append("</div></div>")
 
-    removed = digest.removed or []
-    if removed:
-        body = []
-        for _site, item in removed:
-            store = item.get("store") or "Unknown"
-            body.append(
-                '<tr class="change-row removed">'
-                f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
-                f'<td><span class="part-badge">{escape(item.get("part") or "")}</span></td>'
-                f'<td class="product-name">{escape(_display_name(item))}</td>'
-                f'<td class="price">{_money(item.get("price_new"))}</td></tr>'
-            )
-        chunks.append(
-            '<div class="section" id="removedSection">'
-            '<div class="section-header collapsed" onclick="toggleSection(this)">'
-            f'<h2>Removed <span class="badge">{len(removed)}</span></h2>'
-            '<span class="toggle-icon">▼</span></div>'
-            '<div class="section-content collapsed">'
-            '<p class="lede">Only shown when that store and part scraped successfully.</p>'
-            '<table id="removedTable"><thead><tr><th>Store</th><th>Part</th><th>Product</th><th>Last sale price</th></tr></thead>'
-            f'<tbody>{"".join(body)}</tbody></table></div></div>'
-        )
+    try:
+        chunks.append(_gone_section(price_history, data, today, failed_keys))
+    except Exception as exc:
+        logger.error("Recently gone section failed: %s", exc)
 
     try:
         chunks.append(_stats_html(products, price_history))
@@ -895,7 +977,21 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<ul class="drawer-list" id="drawerList"></ul>'
         '<p><a id="drawerLink" target="_blank" rel="noopener"></a></p></div>'
     )
-    payload = json.dumps({"generated": str(generated_at), "items": catalog_json}).replace("<", "\\u003c")
+    payload = json.dumps(
+        {
+            "generated": str(generated_at),
+            "scanLabel": format_scan_et(generated_at),
+            "views": list(STARTER_VIEWS),
+            "items": catalog_json,
+        }
+    ).replace("<", "\\u003c")
+    chunks.append(
+        '<div id="sparkPanel" hidden>'
+        '<p class="spark-title" id="sparkPanelTitle"></p>'
+        '<p class="spark-chain" id="sparkPanelText"></p>'
+        "</div>"
+        '<div id="sparkTip" hidden></div>'
+    )
     chunks.append(f'<script type="application/json" id="catalogJson">{payload}</script>')
     chunks.append(f"<script>{_read_asset('page.js')}</script>")
     chunks.append("</body></html>")
@@ -935,7 +1031,9 @@ def _row_html(record):
         f'data-search="{_attr(record["search"])}" data-price="{_attr(_price(item.get("price_new")))}" '
         f'data-original="{_attr(original if original is not None else "")}" '
         f'data-discount="{_attr(round(record["percent"], 1) if record["percent"] is not None else "")}" '
-        f'data-days="{record["days"]}" data-score="{record["score"]["score"]}" data-rank="{record["rank"]}" '
+        f'data-days="{record["days"]}" data-daysat="{record["at_days"]}" '
+        f'data-score="{record["score"]["score"]}" data-rank="{record["rank"]}" '
+        f'data-stage="{_attr(record.get("stage") or "")}" '
         f'data-length="{_attr(record["length_key"])}" data-wheelbase="{_attr(record["wheel_key"])}" '
         f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
@@ -946,17 +1044,19 @@ def _row_html(record):
         f'<td>{escape(record["brand"])}</td>'
         f'<td><span class="part-badge">{escape(record["part"])}</span></td>'
         f"<td>{size_html}</td>"
-        f'<td class="product-name">{_badge_html(record["badges"], record["listed"])}{_product_link(item)}</td>'
-        f'<td><button type="button" class="price-btn" data-id="{record["id"]}">'
-        f'<span class="price price-new">{_money(item.get("price_new"))}</span>'
-        f'{sparkline_svg(record["prices"])}{drop_html}</button></td>'
+        f'<td class="product-name">{_product_link(item)}'
+        f'<div class="row-meta">{_badge_html(record["badges"], record["listed"])}'
+        f'{_stage_html(record.get("stage"))}</div></td>'
+        f'<td class="price-cell"><button type="button" class="price-btn" data-id="{record["id"]}">'
+        f'<span class="price price-new">{_money(item.get("price_new"))}</span></button>'
+        f'{_spark_html(record)}{drop_html}</td>'
         f'<td class="price price-old">{_money(item.get("price_old")) if item.get("price_old") else "N/A"}</td>'
         f'<td><span class="discount {discount}">{escape(percent)}</span></td>'
-        f'<td>{record["days"]}</td>'
-        f'<td><button type="button" class="score-btn" title="{_attr(record["score"]["tooltip"])}">'
+        f'<td class="days-cell">{escape(record["held"])}</td>'
+        f'<td class="score-cell"><button type="button" class="score-btn" aria-expanded="false">'
         f'{record["score"]["score"]}'
         + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")
-        + "</button></td></tr>"
+        + f'</button>{_why_html(record)}</td></tr>'
     )
 
 
@@ -1008,13 +1108,24 @@ def _detail_html(record):
         f'{_spec_box("Wheelbase", specs.get("wheelbase"))}'
         f'<div><span>First seen</span>{escape(record["first"] or "—")}</div>'
         f'<div><span>Last seen</span>{escape(record["last"] or "—")}</div>'
-        f'<div><span>Days tracked</span>{record["days"]}</div></div>'
+        f'<div><span>Days tracked</span>{escape(record["held"])}</div>'
+        f'<div><span>Stage</span>{escape(STAGE_LABEL.get(record.get("stage"), ""))}</div></div>'
         f"{retailer}"
         f'<div class="chart-box">{sparkline_svg(record["prices"], width=280, height=64)}'
         f'<p class="chain">{escape(chain)}</p></div>'
         f'<div class="offers">{"".join(offers)}</div>'
         "</div></div></td></tr>"
     )
+
+
+def _offer_link(offer):
+    price = _money(offer.get("price"))
+    store = escape(offer.get("store") or "")
+    label = f"{store} {price}"
+    url = offer.get("url") or ""
+    if not url:
+        return label
+    return f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
 
 
 def _group_board(records):
@@ -1037,25 +1148,123 @@ def _group_board(records):
         return "\n".join(blocks)
     for key in order:
         group = cards[key]
-        offers = []
-        cheapest = group.get("cheapest_price")
-        for offer in group.get("offers") or []:
-            price = offer.get("price")
-            cheap = price is not None and cheapest is not None and abs(float(price) - float(cheapest)) < 0.001
-            klass = "g-offer g-cheap" if cheap else "g-offer"
-            url = offer.get("url") or ""
-            label = f'{escape(offer.get("store") or "")} {_money(price)}'
-            if url:
-                inner = f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
-            else:
-                inner = label
-            mark = " · lowest" if cheap else ""
-            offers.append(f'<div class="{klass}">{inner}{escape(mark)}</div>')
+        offers = sorted(
+            group.get("offers") or [],
+            key=lambda offer: (float(offer.get("price") or 0), offer.get("store") or ""),
+        )
+        if not offers:
+            continue
+        best = offers[0]
+        rest = offers[1:]
+        count = len(offers)
+        store_word = "store" if count == 1 else "stores"
+        summary = (
+            f'{escape(group.get("label") or "Product")} - from {_money(best.get("price"))} - '
+            f"{count} {store_word}"
+        )
+        others = "".join(f"<li>{_offer_link(offer)}</li>" for offer in rest)
         blocks.append(
             f'<article class="group-card" data-key="{escape(key, quote=True)}">'
-            f'<strong>{escape(group.get("label") or "")}</strong> '
-            f'<span class="part-badge">{escape(group.get("part") or "")}</span>'
-            f'<div class="offers">{"".join(offers)}</div></article>'
+            f'<button type="button" class="group-summary" aria-expanded="false">{summary}</button>'
+            '<div class="group-detail" hidden>'
+            f'<p class="best">Best price: {_offer_link(best)}</p>'
+            f"<ul>{others}</ul></div></article>"
         )
     blocks.append("</div>")
     return "\n".join(blocks)
+
+
+def _stage_html(stage):
+    label = STAGE_LABEL.get(stage or "")
+    if not label:
+        return ""
+    return f'<span class="stage stage-{escape(stage or "")}">{escape(label)}</span>'
+
+
+def _why_html(record):
+    score = record["score"]
+    rows = []
+    for factor in score.get("breakdown") or []:
+        label = escape(factor.get("label") or "")
+        points = factor.get("points")
+        if points:
+            rows.append(f"<li><span>{label}</span><b>+{int(points)}</b></li>")
+        elif label:
+            rows.append(f'<li class="why-note"><span>{label}</span></li>')
+    return (
+        f'<div class="why" id="why-{record["id"]}" role="tooltip">'
+        f'<strong>Why {score["score"]}?</strong><ul>{"".join(rows)}</ul></div>'
+    )
+
+
+def _spark_html(record):
+    spark = sparkline_svg(record["prices"])
+    if not spark:
+        return ""
+    return (
+        f'<button type="button" class="spark-hit" data-id="{record["id"]}" '
+        'aria-label="Price history">'
+        f"{spark}</button>"
+    )
+
+
+def _activity_html(sales, generated_at):
+    if not sales:
+        return ""
+    banners = []
+    for row in sales:
+        if not row.get("detected_today") or row.get("extra_percent") is None:
+            continue
+        try:
+            percent = int(row["extra_percent"])
+        except (TypeError, ValueError):
+            continue
+        prefix = (
+            f"🔥 {display_name(row.get('store'))} - site-wide sale detected "
+            f"({percent}% more items on sale)"
+        )
+        banners.append(
+            f'<p class="sale-banner" data-at="{escape(str(generated_at), quote=True)}">'
+            f"{escape(prefix)} <span class=\"ago\">under an hour ago</span></p>"
+        )
+    items = "".join(f"<li>{escape(activity_line(row))}</li>" for row in sales)
+    return (
+        '<section class="activity" id="retailerActivity">'
+        "<h2>Retailer activity</h2>"
+        + "".join(banners)
+        + f'<ul class="activity-list">{items}</ul></section>'
+    )
+
+
+def _gone_section(history, current_data, today, failed_keys):
+    rows = recently_gone(history, current_data, today=today, skip_keys=failed_keys)
+    body = []
+    for row in rows:
+        store = row.get("store") or "Unknown"
+        body.append(
+            "<tr>"
+            f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
+            f'<td><span class="part-badge">{escape(row.get("part") or "")}</span></td>'
+            f'<td class="product-name">{escape(row.get("name") or "")}</td>'
+            f'<td class="price">{_money(row.get("price"))}</td>'
+            f'<td>{escape(row.get("last_seen") or "")}</td>'
+            f'<td><span class="stage stage-sold_out">SOLD OUT</span></td>'
+            "</tr>"
+        )
+    note = (
+        "Kept for 7 days after a listing leaves the sale catalog, with the last price and the last day it was seen. "
+        "A failed scrape does not land here."
+    )
+    if not rows:
+        note = "Nothing has disappeared in the last 7 days. " + note
+    return (
+        '<div class="section gone-section" id="goneSection">'
+        '<div class="section-header collapsed" onclick="toggleSection(this)">'
+        f'<h2>Recently gone <span class="badge">{len(rows)}</span></h2>'
+        '<span class="toggle-icon">▼</span></div>'
+        '<div class="section-content collapsed">'
+        f'<p class="lede">{escape(note)}</p>'
+        '<table id="goneTable"><thead><tr>'
+        "<th>Store</th><th>Part</th><th>Product</th><th>Last price</th><th>Last seen</th><th>Stage</th>"
+        f"</tr></thead><tbody>{''.join(body)}</tbody></table></div></div>"
+    )

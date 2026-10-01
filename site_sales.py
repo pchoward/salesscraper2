@@ -217,30 +217,6 @@ def record_catalog(state, current_data, today=None, failed_keys=None, history=No
     return state
 
 
-def describe_sales(state, today=None):
-    """One row per store: last sale date, days since, and source."""
-    state = _coerce(state)
-    today_day = _as_date(today) or datetime.date.today()
-    rows = []
-    for store in STORES:
-        entry = state["stores"][store]
-        last = entry.get("last_sale")
-        days = None
-        if last:
-            last_day = _as_date(last)
-            if last_day is not None:
-                days = (today_day - last_day).days
-        rows.append(
-            {
-                "store": store,
-                "last_sale": last,
-                "days": days,
-                "source": entry.get("source"),
-            }
-        )
-    return rows
-
-
 def format_sale_line(row):
     store = row.get("store") or "Unknown"
     if row.get("days") is None or not row.get("last_sale"):
@@ -250,3 +226,160 @@ def format_sale_line(row):
         f"{store}: {row['days']} {day_word} since the last site-wide sale "
         f"({row['last_sale']})."
     )
+
+
+DISPLAY_NAMES = {
+    "Zumiez": "Zumiez",
+    "SkateWarehouse": "Skate Warehouse",
+    "CCS": "CCS",
+    "Tactics": "Tactics",
+}
+
+
+def display_name(store):
+    return DISPLAY_NAMES.get(store or "", store or "Unknown")
+
+
+def activity_line(row):
+    """One retailer-activity line. Seeded stores still report their age."""
+    name = display_name((row or {}).get("store"))
+    if not row or row.get("days") is None or not row.get("last_sale"):
+        return f"{name}: no recorded site-wide sale"
+    days = row["days"]
+    if days <= 0:
+        return f"{name}: last site-wide sale today"
+    if days == 1:
+        return f"{name}: last site-wide sale 1 day ago"
+    return f"{name}: last site-wide sale {days} days ago"
+
+
+def _extra_percent(state, store, day):
+    """Percent above the prior median. None when the baseline is too short."""
+    days = sorted(state.get("daily") or {})
+    if day not in days:
+        return None
+    index = days.index(day)
+    window = days[max(0, index - SPIKE_BASELINE_DAYS) : index]
+    prior = []
+    for prev in window:
+        counts = state["daily"].get(prev) or {}
+        if store in counts:
+            prior.append(counts[store])
+    prior = prior[-SPIKE_BASELINE_DAYS:]
+    if len(prior) < SPIKE_MIN_BASELINE:
+        return None
+    median = statistics.median(prior)
+    if median <= 0:
+        return None
+    count = (state["daily"].get(day) or {}).get(store)
+    if count is None:
+        return None
+    return int(round((count - median) / median * 100))
+
+
+def describe_sales(state, today=None):
+    """One row per store: last sale date, days since, source, and today's spike."""
+    state = _coerce(state)
+    today_day = _as_date(today) or datetime.date.today()
+    today_text = today_day.isoformat()
+    rows = []
+    for store in STORES:
+        entry = state["stores"][store]
+        last = entry.get("last_sale")
+        days = None
+        if last:
+            last_day = _as_date(last)
+            if last_day is not None:
+                days = (today_day - last_day).days
+        source = entry.get("source")
+        detected_today = bool(source == "detected" and last == today_text)
+        extra = _extra_percent(state, store, last) if detected_today and last else None
+        rows.append(
+            {
+                "store": store,
+                "last_sale": last,
+                "days": days,
+                "source": source,
+                "detected_today": detected_today,
+                "extra_percent": extra,
+            }
+        )
+    return rows
+
+
+def _parse_dt(value):
+    if isinstance(value, datetime.datetime):
+        return value
+    if isinstance(value, datetime.date):
+        return datetime.datetime(value.year, value.month, value.day)
+    if not value:
+        return None
+    text = str(value).strip().replace("Z", "+00:00")
+    try:
+        return datetime.datetime.fromisoformat(text)
+    except ValueError:
+        pass
+    try:
+        return datetime.datetime.strptime(text[:19], "%Y-%m-%d %H:%M:%S")
+    except ValueError:
+        return None
+
+
+def hours_since(scanned_at, now=None):
+    """Hours from the scan timestamp to ``now``. Missing times count as zero."""
+    start = _parse_dt(scanned_at)
+    if start is None:
+        return 0.0
+    end = _parse_dt(now) if now is not None else datetime.datetime.now(datetime.timezone.utc)
+    if end is None:
+        return 0.0
+    if start.tzinfo is None:
+        start = start.replace(tzinfo=datetime.timezone.utc)
+    if end.tzinfo is None:
+        end = end.replace(tzinfo=datetime.timezone.utc)
+    seconds = (end - start).total_seconds()
+    if seconds < 0:
+        seconds = 0
+    return seconds / 3600.0
+
+
+def hours_phrase(hours):
+    try:
+        hours = float(hours)
+    except (TypeError, ValueError):
+        hours = 0.0
+    if hours < 1:
+        return "under an hour ago"
+    whole = int(hours)
+    if whole < 1:
+        whole = 1
+    unit = "hour" if whole == 1 else "hours"
+    return f"{whole} {unit} ago"
+
+
+def format_sale_banner(store, percent, hours):
+    name = display_name(store)
+    try:
+        shown = int(round(float(percent)))
+    except (TypeError, ValueError):
+        shown = 0
+    return (
+        f"🔥 {name} - site-wide sale detected ({shown}% more items on sale) "
+        f"{hours_phrase(hours)}"
+    )
+
+
+def sale_banners(state, today=None, scanned_at=None, now=None):
+    """Banners for sales detected on this scan. A seed date does not qualify."""
+    try:
+        rows = describe_sales(state, today)
+    except Exception as exc:
+        logger.error("Sale banner failed (continuing): %s", exc)
+        return []
+    hours = hours_since(scanned_at, now) if scanned_at else 0
+    banners = []
+    for row in rows:
+        if not row.get("detected_today") or row.get("extra_percent") is None:
+            continue
+        banners.append(format_sale_banner(row["store"], row["extra_percent"], hours))
+    return banners

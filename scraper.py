@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import datetime
 import os
 import re
 import json
@@ -689,6 +690,7 @@ def save_current(data, path="previous_data.json"):
 
 
 def main():
+    scanned_at = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat()
     scrapers = [
         ZumiezDecksScraper(),
         ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/wheels.html?customFilters=promotion_flag:Sale", "Wheels"),
@@ -750,7 +752,14 @@ def main():
         logging.error("Could not load site sales (continuing): %s", exc)
         site_sales = None
     if price_history is None:
-        updates = apply_run_updates(curr_data, failed_keys, {}, health, site_sales=site_sales)
+        updates = apply_run_updates(
+            curr_data,
+            failed_keys,
+            {},
+            health,
+            site_sales=site_sales,
+            scanned_at=scanned_at,
+        )
         updates["save_history"] = False
         updates["history"] = {}
     else:
@@ -760,6 +769,7 @@ def main():
             price_history,
             health,
             site_sales=site_sales,
+            scanned_at=scanned_at,
         )
     if updates.get("save_history"):
         save_price_history(updates["history"])
@@ -783,11 +793,19 @@ def main():
             updates["warnings"],
             previous_data=prev_data,
             site_sales=updates.get("site_sales"),
+            scanned_at=scanned_at,
         )
     except Exception as exc:
         logging.error("Digest extras failed (continuing): %s", exc)
     try:
-        html = build_report_html(curr_data, changes, updates["history"], failed_keys, digest=digest)
+        html = build_report_html(
+            curr_data,
+            changes,
+            updates["history"],
+            failed_keys,
+            generated_at=scanned_at,
+            digest=digest,
+        )
         safe_write_file("sale_items_chart.html", html)
     except Exception as exc:
         logging.error("Report build failed (continuing): %s", exc)

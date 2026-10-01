@@ -16,8 +16,10 @@ Deal score (0-100) = discount + lowest + recent drop + popular size.
 Hot means 70 or above.
 """
 
-from filters import is_meaningful_drop, percent_off_value
-from history import all_time_low_status, price_trend
+import datetime
+
+from filters import is_meaningful_drop, normalize_url, percent_off_value
+from history import all_time_low_status, freshly_reduced, price_trend, summarize_entry
 
 DISCOUNT_CAP = 50
 LOW_AT = 25
@@ -130,13 +132,91 @@ def _tooltip(parts, score, hot):
     )
 
 
-def deal_score(item, history=None, drop=None, width=None):
-    """Return score, hot flag, part points, and a tooltip. Never raises."""
+def _history_entry(item, history):
+    if not isinstance(item, dict) or not isinstance(history, dict):
+        return {}
+    url = normalize_url(item.get("url"))
+    entry = history.get(url) if url else None
+    if not isinstance(entry, dict):
+        entry = history.get(item.get("url"))
+    return entry if isinstance(entry, dict) else {}
+
+
+def _plain_money(amount):
+    if abs(amount - round(amount)) < 0.001:
+        return f"${amount:.0f}"
+    return f"${amount:.2f}"
+
+
+def _tracked_days(entry, today):
+    if not entry:
+        return None
+    summary = summarize_entry(entry)
+    try:
+        first = datetime.date.fromisoformat(str(summary.get("first_seen"))[:10])
+    except (TypeError, ValueError):
+        return None
+    try:
+        today_day = datetime.date.fromisoformat(str(today)[:10]) if today else None
+    except (TypeError, ValueError):
+        today_day = None
+    if today_day is None:
+        try:
+            today_day = datetime.date.fromisoformat(str(summary.get("last_seen"))[:10])
+        except (TypeError, ValueError):
+            return None
+    days = (today_day - first).days
+    return days if days >= 0 else 0
+
+
+def _breakdown(item, history, parts, today):
+    """Plain-language factors. Notes carry no points and are not added in."""
+    factors = []
+    percent = percent_off_value(item.get("price_new"), item.get("price_old"))
+    if parts["discount"] > 0:
+        shown = int(percent + 0.5) if percent and percent > 0 else parts["discount"]
+        factors.append({"label": f"{shown}% off", "points": parts["discount"]})
+    try:
+        new = float(item.get("price_new"))
+        old = float(item.get("price_old"))
+    except (TypeError, ValueError):
+        new = old = None
+    if new is not None and old is not None and old - new > 0.001:
+        factors.append({"label": f"{_plain_money(old - new)} below original", "points": None})
+    if parts["lowest"] == LOW_AT:
+        factors.append({"label": "Lowest tracked price", "points": parts["lowest"]})
+    elif parts["lowest"] == LOW_NEAR:
+        factors.append({"label": "Near the lowest tracked price", "points": parts["lowest"]})
+    elif parts["lowest"] == LOW_CLOSE:
+        factors.append({"label": "Close to the lowest tracked price", "points": parts["lowest"]})
+    entry = _history_entry(item, history)
+    tracked = _tracked_days(entry, today)
+    if tracked is not None:
+        factors.append({"label": f"Tracked {tracked} days", "points": None})
+    fresh = freshly_reduced(entry, today) if entry else False
+    if parts["drop"] > 0:
+        label = "Freshly reduced" if fresh else "Recently reduced"
+        factors.append({"label": label, "points": parts["drop"]})
+    elif fresh:
+        factors.append({"label": "Freshly reduced", "points": None})
+    if parts["size"] > 0:
+        factors.append({"label": "Popular size", "points": parts["size"]})
+    return factors
+
+
+def deal_score(item, history=None, drop=None, width=None, today=None):
+    """Return score, hot flag, part points, a tooltip, and a plain breakdown.
+
+    The numeric formula does not change. The breakdown explains those points
+    in plain language. ``Freshly reduced`` is the recent-drop line when the
+    current price is at most a day old. Never raises.
+    """
     empty = {
         "score": 0,
         "hot": False,
         "parts": {"discount": 0, "lowest": 0, "drop": 0, "size": 0},
         "tooltip": FORMULA,
+        "breakdown": [],
     }
     if not isinstance(item, dict):
         return empty
@@ -149,11 +229,16 @@ def deal_score(item, history=None, drop=None, width=None):
         }
         score = min(100, parts["discount"] + parts["lowest"] + parts["drop"] + parts["size"])
         hot = score >= HOT_AT
+        try:
+            breakdown = _breakdown(item, history, parts, today)
+        except Exception:
+            breakdown = []
         return {
             "score": score,
             "hot": hot,
             "parts": parts,
             "tooltip": _tooltip(parts, score, hot),
+            "breakdown": breakdown,
         }
     except Exception:
         return empty

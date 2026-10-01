@@ -5,9 +5,9 @@ import logging
 
 from filters import item_passes_filters
 from health import broken_store_warnings, record_run, results_from_run
-from history import all_time_low_status, prune_price_history, update_price_history
+from history import all_time_low_status, apply_lifecycle, prune_price_history, update_price_history
 from matching import cross_store_groups
-from site_sales import describe_sales, record_catalog
+from site_sales import describe_sales, record_catalog, sale_banners
 from watchlist import match_watchlist
 
 logger = logging.getLogger("pipeline")
@@ -23,7 +23,15 @@ def _day(today):
     return str(today)
 
 
-def apply_run_updates(current_data, failed_keys, history, health, today=None, site_sales=None):
+def apply_run_updates(
+    current_data,
+    failed_keys,
+    history,
+    health,
+    today=None,
+    site_sales=None,
+    scanned_at=None,
+):
     """Update price history and store health. Never raises.
 
     Failed store/part keys are recorded as failures and are not written into
@@ -56,11 +64,21 @@ def apply_run_updates(current_data, failed_keys, history, health, today=None, si
             if not isinstance(history, dict):
                 history = {}
             stats = None
+        try:
+            if isinstance(history, dict):
+                history = apply_lifecycle(
+                    history,
+                    current_data,
+                    today=day,
+                    skip_keys=failed_keys,
+                )
+        except Exception as exc:
+            logger.error("Lifecycle update failed (continuing): %s", exc)
 
     warnings = []
     try:
         results = results_from_run(current_data, failed_keys)
-        health = record_run(health, day, results)
+        health = record_run(health, day, results, scanned_at=scanned_at)
         warnings = broken_store_warnings(health)
     except Exception as exc:
         logger.error("Store health update failed (continuing): %s", exc)
@@ -107,6 +125,7 @@ def decorate_digest(
     previous_data=None,
     today=None,
     site_sales=None,
+    scanned_at=None,
 ):
     """Attach warnings, all-time lows, and cross-store groups. Never raises.
 
@@ -165,7 +184,13 @@ def decorate_digest(
         digest.watch_alerts = []
     try:
         digest.site_sales = describe_sales(site_sales, today or _day(None))
+        digest.sale_banners = sale_banners(
+            site_sales,
+            today or _day(None),
+            scanned_at=scanned_at,
+        )
     except Exception as exc:
         logger.error("Site-sale summary failed (continuing): %s", exc)
         digest.site_sales = []
+        digest.sale_banners = []
     return digest
