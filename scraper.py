@@ -20,9 +20,12 @@ from selenium.common.exceptions import TimeoutException, WebDriverException
 
 from filters import extract_deck_size, filter_reason, normalize_product_name, normalize_url
 from health import HEALTH_PATH, load_state, state_json
+from media import attach_listing_media
 from notify import send_digest
 from pipeline import apply_run_updates, decorate_digest
 from report import build_digest, build_report_html, compare_catalogs
+from site_sales import SITE_SALES_PATH, load_state as load_site_sales
+from site_sales import state_json as site_sales_json
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -243,6 +246,12 @@ def save_health(health):
     safe_write_file(HEALTH_PATH, state_json(health))
 
 
+def save_site_sales(state):
+    if not isinstance(state, dict):
+        return False
+    return safe_write_file(SITE_SALES_PATH, site_sales_json(state))
+
+
 class Scraper:
     def __init__(self, name, url, part):
         self.name = name
@@ -261,6 +270,13 @@ class Scraper:
             logging.info(f"Filtered out ({self.part}): {name} ({reason})")
             return False
         return True
+
+    def _finish(self, item, node, base):
+        try:
+            attach_listing_media(item, node, base)
+        except Exception as exc:
+            logging.error("Listing media failed for %s: %s", item.get("url"), exc)
+        return item
 
     def parse(self, html):
         raise NotImplementedError
@@ -329,6 +345,7 @@ class ZumiezScraper(Scraper):
                 }
                 if self.part == "Decks":
                     item["size"] = extract_deck_size(name)
+                self._finish(item, product, "https://www.zumiez.com")
                 products.append(item)
                 logging.info(f"Parsed product: {name}")
 
@@ -402,6 +419,7 @@ class SkateWarehouseScraper(Scraper):
             }
             if self.part == "Decks":
                 item["size"] = extract_deck_size(name)
+            self._finish(item, a, "https://www.skatewarehouse.com")
             products.append(item)
             logging.info(f"Parsed product: {name}")
 
@@ -522,6 +540,7 @@ class CCSScraper(Scraper):
                 }
                 if self.part == "Decks":
                     item["size"] = extract_deck_size(name)
+                self._finish(item, container, "https://shop.ccs.com")
                 products.append(item)
                 logging.info(f"Parsed product: {name}")
 
@@ -623,6 +642,7 @@ class TacticsScraper(Scraper):
                 }
                 if self.part == "Decks":
                     item["size"] = extract_deck_size(name)
+                self._finish(item, container, "https://www.tactics.com")
                 products.append(item)
                 logging.info(f"Parsed Tactics product: {name}")
 
@@ -724,12 +744,23 @@ def main():
 
     price_history = load_price_history()
     health = load_state()
+    try:
+        site_sales = load_site_sales()
+    except Exception as exc:
+        logging.error("Could not load site sales (continuing): %s", exc)
+        site_sales = None
     if price_history is None:
-        updates = apply_run_updates(curr_data, failed_keys, {}, health)
+        updates = apply_run_updates(curr_data, failed_keys, {}, health, site_sales=site_sales)
         updates["save_history"] = False
         updates["history"] = {}
     else:
-        updates = apply_run_updates(curr_data, failed_keys, price_history, health)
+        updates = apply_run_updates(
+            curr_data,
+            failed_keys,
+            price_history,
+            health,
+            site_sales=site_sales,
+        )
     if updates.get("save_history"):
         save_price_history(updates["history"])
         logging.info("Price history has %s listings", len(updates["history"]))
@@ -737,10 +768,22 @@ def main():
         save_health(updates["health"])
     except Exception as exc:
         logging.error("Could not save scrape health (continuing): %s", exc)
+    try:
+        if updates.get("site_sales"):
+            save_site_sales(updates["site_sales"])
+    except Exception as exc:
+        logging.error("Could not save site sales (continuing): %s", exc)
 
     save_current(curr_data)
     try:
-        decorate_digest(digest, curr_data, updates["history"], updates["warnings"])
+        decorate_digest(
+            digest,
+            curr_data,
+            updates["history"],
+            updates["warnings"],
+            previous_data=prev_data,
+            site_sales=updates.get("site_sales"),
+        )
     except Exception as exc:
         logging.error("Digest extras failed (continuing): %s", exc)
     try:

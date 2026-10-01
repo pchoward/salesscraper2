@@ -24,6 +24,7 @@ from html import escape
 from filters import calculate_percent_off, item_passes_filters, normalize_product_name, normalize_url
 from health import warning_text
 from report import Digest
+from site_sales import format_sale_line
 
 logger = logging.getLogger("notify")
 
@@ -69,7 +70,9 @@ def should_send(digest):
         return False
     if digest.new_items or digest.drops:
         return True
-    return bool(getattr(digest, "warnings", None))
+    if getattr(digest, "warnings", None):
+        return True
+    return bool(getattr(digest, "watch_alerts", None))
 
 
 def _truthy(value):
@@ -149,18 +152,35 @@ def _warnings(digest):
     return list(getattr(digest, "warnings", None) or [])
 
 
+def _watch_alerts(digest):
+    alerts = getattr(digest, "watch_alerts", None)
+    if not alerts:
+        return []
+    return list(alerts)
+
+
 def summary_counts(digest):
     new_count = len(digest.new_items)
     drop_count = len(digest.drops)
     drop_word = "price drop" if drop_count == 1 else "price drops"
     base = f"{new_count} new, {drop_count} {drop_word}"
     warnings = _warnings(digest)
-    if not warnings:
+    alerts = _watch_alerts(digest)
+    if not warnings and not alerts:
         return base
-    word = "store warning" if len(warnings) == 1 else "store warnings"
-    if new_count == 0 and drop_count == 0:
-        return f"{len(warnings)} {word}"
-    return f"{base}, {len(warnings)} {word}"
+    if warnings:
+        word = "store warning" if len(warnings) == 1 else "store warnings"
+        if new_count == 0 and drop_count == 0:
+            base = f"{len(warnings)} {word}"
+        else:
+            base = f"{base}, {len(warnings)} {word}"
+    elif new_count == 0 and drop_count == 0 and alerts:
+        word = "watchlist alert" if len(alerts) == 1 else "watchlist alerts"
+        return f"{len(alerts)} {word}"
+    if alerts and not (new_count == 0 and drop_count == 0 and not warnings):
+        word = "watchlist alert" if len(alerts) == 1 else "watchlist alerts"
+        base = f"{base}, {len(alerts)} {word}"
+    return base
 
 
 def subject_line(digest, when=None):
@@ -375,6 +395,152 @@ def _html_cross_store(digest):
     return "\n".join(rows)
 
 
+def _sale_rows(digest):
+    rows = getattr(digest, "site_sales", None)
+    if not rows:
+        return []
+    return [row for row in rows if isinstance(row, dict)]
+
+
+def _hit_item(hit):
+    if not isinstance(hit, dict):
+        return {}
+    item = hit.get("item")
+    return item if isinstance(item, dict) else {}
+
+
+def _plain_watch(digest):
+    hits = getattr(digest, "watch_hits", None)
+    alerts = _watch_alerts(digest)
+    if hits is None and not alerts:
+        return []
+    lines = ["WATCHING"]
+    if alerts:
+        lines.append("Watchlist alerts are listed first.")
+        for hit in alerts:
+            item = _hit_item(hit)
+            reasons = ", ".join(hit.get("reasons") or [])
+            note = hit.get("note") or ""
+            lines.append(f"- {_store_name(item)}: {_display_name(item)}")
+            url = _product_url(item)
+            if url:
+                lines.append(f"  {url}")
+            bits = [reasons]
+            if note:
+                bits.append(note)
+            lines.append("  " + " · ".join(bit for bit in bits if bit))
+    else:
+        lines.append("No watchlist alerts today.")
+    quiet = [hit for hit in (hits or []) if not hit.get("reasons")]
+    if quiet:
+        lines.append("Still on sale")
+        for hit in quiet:
+            item = _hit_item(hit)
+            note = hit.get("note") or ""
+            extra = f" · {note}" if note else ""
+            lines.append(
+                f"- {_store_name(item)}: {_display_name(item)} · {_money(item.get('price_new'))}{extra}"
+            )
+    lines.append("")
+    return lines
+
+
+def _plain_sales(digest):
+    rows = _sale_rows(digest)
+    if not rows:
+        return []
+    lines = ["DAYS SINCE THE LAST SITE-WIDE SALE"]
+    for row in rows:
+        lines.append(f"- {format_sale_line(row)}")
+    lines.append("")
+    return lines
+
+
+def _html_watch(digest):
+    hits = getattr(digest, "watch_hits", None)
+    alerts = _watch_alerts(digest)
+    if hits is None and not alerts:
+        return ""
+    rows = [
+        '<tr><td bgcolor="#451a03" style="background:#451a03;padding:10px 20px;'
+        'font-family:Arial,Helvetica,sans-serif;">'
+        '<span data-section="watching" style="color:#ffffff;font-size:14px;font-weight:700;'
+        'letter-spacing:0.04em;">Watching</span>'
+        '<span style="color:#fdba74;font-size:12px;">&nbsp;&nbsp;From watchlist.yaml</span>'
+        "</td></tr>"
+    ]
+    if not alerts and not hits:
+        rows.append(
+            '<tr><td style="padding:12px 20px 0;font-family:Arial,Helvetica,sans-serif;'
+            'font-size:13px;color:#78350f;">No watchlist alerts today.</td></tr>'
+        )
+    for hit in alerts:
+        item = _hit_item(hit)
+        reasons = ", ".join(hit.get("reasons") or [])
+        note = hit.get("note") or ""
+        extra = (
+            '<p style="margin:6px 0 0;font-size:13px;line-height:1.4;color:#9a3412;">'
+            f"{escape(reasons)}"
+            + (f" · {escape(note)}" if note else "")
+            + "</p>"
+        )
+        rows.append(
+            _html_card(
+                _store_name(item),
+                "Watch",
+                "#ffedd5",
+                "#9a3412",
+                _product_link(_display_name(item), _product_url(item)),
+                _price_line(
+                    item.get("price_new"),
+                    _money(item.get("price_old")) if item.get("price_old") else "N/A",
+                    calculate_percent_off(item.get("price_new"), item.get("price_old")),
+                ),
+                extra,
+            )
+        )
+    for hit in hits or []:
+        if hit.get("reasons"):
+            continue
+        item = _hit_item(hit)
+        note = hit.get("note") or "On sale"
+        extra = (
+            '<p style="margin:6px 0 0;font-size:13px;line-height:1.4;color:#78350f;">'
+            f"On sale · {escape(note)}</p>"
+        )
+        rows.append(
+            _html_card(
+                _store_name(item),
+                "Watch",
+                "#ffedd5",
+                "#9a3412",
+                _product_link(_display_name(item), _product_url(item)),
+                _price_line(
+                    item.get("price_new"),
+                    _money(item.get("price_old")) if item.get("price_old") else "N/A",
+                    calculate_percent_off(item.get("price_new"), item.get("price_old")),
+                ),
+                extra,
+            )
+        )
+    rows.append('<tr><td style="height:16px;font-size:0;line-height:0;">&nbsp;</td></tr>')
+    return "\n".join(rows)
+
+
+def _html_sales(digest):
+    rows = _sale_rows(digest)
+    if not rows:
+        return ""
+    items = "".join(f"<li>{escape(format_sale_line(row))}</li>" for row in rows)
+    return (
+        '<tr><td style="padding:4px 24px 8px;font-family:Arial,Helvetica,sans-serif;">'
+        '<p style="margin:0;font-size:13px;font-weight:700;color:#0f172a;">'
+        "Days since the last site-wide sale</p>"
+        '<ul style="margin:6px 0 0;padding-left:18px;color:#334155;font-size:13px;line-height:1.5;">'
+        f"{items}</ul></td></tr>"
+    )
+
+
 def render_plain(digest, report_url, when=None, banner=None):
     lines = [
         f"Skate deals — {_long_date(when)}",
@@ -394,6 +560,8 @@ def render_plain(digest, report_url, when=None, banner=None):
             lines.append(f"- {text}")
         lines.append("")
     lines.extend([f"Full report: {report_url}", ""])
+    lines.extend(_plain_watch(digest))
+    lines.extend(_plain_sales(digest))
     low_line = _all_time_low_line(digest)
     if low_line:
         lines.extend([low_line, ""])
@@ -489,6 +657,12 @@ def render_html(digest, report_url, when=None, banner=None):
     if warning_row:
         chunks.append(warning_row)
     chunks.append(_html_report_link(safe_report))
+    watch_row = _html_watch(digest)
+    if watch_row:
+        chunks.append(watch_row)
+    sales_row = _html_sales(digest)
+    if sales_row:
+        chunks.append(sales_row)
     low_note = _html_low_note(digest)
     if low_note:
         chunks.append(low_note)

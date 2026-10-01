@@ -1,0 +1,58 @@
+# Email watchlist for the skate sale digest.
+#
+# A listing is highlighted on the report when it matches a rule. It is an
+# email alert when something below is also true. Rules with none of the
+# trigger fields alert when the product is new, back in stock, or the sale
+# price drops by any amount. A match that stays at the same price stays
+# highlighted on the page and does not send another email by itself.
+#
+# Fields:
+#   id          Short name used in the email. Optional.
+#   brand       Brand-wide match. Every word must appear in the product name
+#               (Powell Peralta does not match a Powell deck that is not Peralta).
+#   name        Individual product. Same word matching. Antihero matches
+#               Anti-Hero and Anti Hero. Use this instead of brand for one deck.
+#   part        Decks, Wheels, Trucks, or Bearings. Defaults to Decks.
+#   min_width   Inches, inclusive. 8.6 matches 8.60 and anything wider.
+#               Omitted means no width minimum. A deck with no parseable width
+#               does not match a rule that sets min_width.
+#   max_price   Alert when the sale price is under this amount and yesterday
+#               it was missing or not under it.
+#   alert_on_drop
+#               true: alert on any sale-price drop, including under $2 / 5%.
+#   back_in_stock_width
+#               Alert only when this width comes back in stock.
+#   note        Shown in the email.
+#
+# Example (not active):
+#   - id: caster-under-50
+#     name: Antihero Caster
+#     part: Decks
+#     max_price: 50
+#     alert_on_drop: true
+#     back_in_stock_width: 8.75
+#     note: Caster under $50, on any drop, or when 8.75 is back
+
+rules:
+  - id: black-label-decks
+    brand: Black Label
+    part: Decks
+    min_width: 8.6
+    note: Black Label decks 8.6 inches and wider
+
+  - id: powell-peralta-decks
+    brand: Powell Peralta
+    part: Decks
+    min_width: 8.6
+    note: Powell Peralta decks 8.6 inches and wider
+
+  - id: heroin-decks
+    brand: Heroin
+    part: Decks
+    min_width: 8.6
+    note: Heroin decks 8.6 inches and wider
+
+  - id: antihero-caster
+    name: Antihero Caster
+    part: Decks
+    note: Antihero Caster deck, any width

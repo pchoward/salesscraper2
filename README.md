@@ -1,28 +1,33 @@
 # Skateboard Sale Scraper
 
-Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publishes an HTML report. GitHub Actions runs the scraper daily. The page leads with a short digest of new deals and real sale-price drops.
+Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publishes a static HTML report. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
 
 ## Layout
 
 ```
 ├── scraper.py                 # Selenium fetch + per-store parsers
 ├── filters.py                 # Shared allowlists and passes_filters()
-├── report.py                  # Catalog diff + HTML report
-├── notify.py                  # SMTP email for deals and store warnings
-├── history.py                 # Bounded price history and all-time lows
+├── report.py                  # Catalog diff and digest
+├── page.py                    # Static report (inlines page.css and page.js)
+├── page.css                   # Report styles
+├── page.js                    # Filters, sort, stars, drawer, stats
+├── notify.py                  # SMTP email for deals, watch alerts, store warnings
+├── history.py                 # Bounded price history, images, and all-time lows
 ├── health.py                  # Per-store scrape counts and warnings
 ├── matching.py                # Conservative cross-store product match
+├── dimensions.py              # Width, length, and wheelbase normalization
+├── score.py                   # Deal score
+├── badges.py                  # NEW, down today, lowest ever, back in stock
+├── media.py                   # Product image URLs from each store
+├── watchlist.py               # watchlist.yaml matching for the page and email
+├── watchlist.yaml             # Email alert rules
+├── site_sales.py              # Days since each store's last site-wide sale
 ├── pipeline.py                # Post-scrape bookkeeping (never fails the run)
-├── test_filters.py            # Dry-check the filters without scraping
-├── test_notify.py             # Dry-check the email digest without SMTP
-├── test_history.py            # Pruning and all-time-low rules
-├── test_health.py             # Two-bad-runs warning and recovery
-├── test_matching.py           # Cross-store match and report sections
-├── test_pipeline.py           # Bookkeeping stays non-fatal
 ├── sale_items_chart.html      # Generated report
 ├── previous_data.json         # Last catalog, for the diff
 ├── price_history.json         # Bounded daily sale prices
 ├── scrape_health.json         # Recent per-store, per-part counts
+├── site_sales.json            # Per-store sale counts and last site-wide sale
 └── .github/workflows/scrape.yml
 ```
 
@@ -62,15 +67,86 @@ Whole-word hat, cap, shirt, tee, hoodie, jacket, pant, short, shoe, sneaker, soc
 
 ## Report
 
-- **Store check** (only when needed, at the top): a store and part that normally has items came back empty, or the scrape failed, two runs in a row. One empty or failed run does not warn. The next run that returns items clears it.
-- **Digest** (open): new listings, plus sale-price drops of at least **$2 or 5%** versus the previous tracked sale price. The change is labeled as dollars and percent versus that prior sale, not versus MSRP. Rows at an all-time low are badged.
-- **All-time lows** (collapsed): listings whose current sale price is the lowest tracked price. A listing needs at least 3 observations spanning 7 days, so a brand-new item is not flagged just because its first price is the only price. The low can be older than the 90-day daily window.
-- **Across stores** (open when there is something to show): the same product at two or more stores, with the cheapest price highlighted. Matching requires the same part, brand, and size, plus the same distinctive model words. Deck widths that are just rounding differences snap together (8.12 and 8.125, 8.38 and 8.375). 8.475 does not snap to 8.5. Colors and extra words keep two listings apart. A name that is only a brand and a size (or only generic words like "team") is not grouped. Wheel matches also require a diameter. Truck matches require a hanger or axle size, so hollow and standard stay apart.
-- **All Deals** (collapsed): the filtered catalog, still searchable, with the all-time-low badge and a short trend arrow.
-- **Removed** (collapsed, only when there is something to show): hidden unless that store/part scrape succeeded. A failed fetch keeps the previous items for that key instead of writing `[]`, so a blocked page does not look like everything sold out.
-- Rows that fail `passes_filters()` are not listed as new, dropped, or removed.
+The report is one static file. CSS and JavaScript are inlined from `page.css` and `page.js`. There is no server. New-feature failures are logged and do not stop the scrape or the commit.
 
-On the 2026-09-30 catalog, 114 of 173 filtered listings were at an all-time low. None of them were the same product at two stores, so Across stores is empty until a real pair shows up.
+- **Header**: a short blue bar with the active-deal count, new deals, price drops, and how long ago the last scan ran.
+- **What changed**: "Since yesterday: N new deals, N price drops, N hit lowest tracked price, N deals disappeared." Each count is a button that filters the table to just those rows. **Since your last visit** uses `localStorage` (`salesscraper2.snapshot`) and compares prices to the previous time this browser opened the page.
+- **Summary cards** are filters. New deals shows items that were not in yesterday's catalog. Price drops shows reduced items. Each store card filters to that store. Press again to turn the filter off. Cards combine with the filter bar.
+- **Store check** (only when needed): a store and part that normally has items came back empty, or the scrape failed, two runs in a row. One empty or failed run does not warn. The next run that returns items clears it.
+- **Site-wide sales**: one line per store with days since the last site-wide sale. See below.
+- **All-time lows** (collapsed): listings whose current sale price is the lowest tracked price. A listing needs at least 3 observations spanning 7 days, so a brand-new item is not flagged just because its first price is the only price. The low can be older than the 90-day daily window.
+- **Across stores** (open when there is something to show): the same product at two or more stores, with the cheapest price highlighted. Matching requires the same part, brand, and size, plus the same distinctive model words. Deck widths that are just rounding differences snap together (8.12 and 8.125, 8.38 and 8.375). 8.475 does not snap to 8.5. Colors and extra words keep two listings apart. A name that is only a brand and a size (or only generic words like "team") is not grouped. Wheel matches also require a diameter. Truck matches require a hanger or axle size, so hollow and standard stay apart. **Group across stores** collapses those same matches into one card, cheapest price highlighted. Matching stays conservative; the toggle does nothing when no pair exists.
+- **Filter bar** (sticky): search, store, type, width, brand, min/max price, minimum discount, and sort. Width chips under the bar show counts, such as `8.25 (23)`. `8.5` and `8.50` are the same width. Brand options come from the rows. Length and wheelbase dropdowns appear only when a listing has that measurement. Store and part buttons stay, and they stay in sync with the dropdowns.
+- **All Deals**: sortable columns for sale price, original price, percent off, size (numeric), store, brand, days tracked, and deal score. The default order is newest deals and the biggest recent drop. Headers stick under the filter bar. Each row has a 68px thumbnail (lazy-loaded; a placeholder when the store did not provide an image), a star, badges, and a sparkline beside the sale price. The product name links to the store page in a new tab.
+- **Row details**: click a row for a larger image, width, length, and wheelbase when the store exposed them, the retailer link, the price series, first seen, last seen, days tracked, and other stores carrying the same product.
+- **Price drawer**: click the sale price. The drawer lists the tracked series, for example `$84.99 → $74.95 → $69.95 → $63.95`, with a date on each step.
+- **Removed** (collapsed, only when there is something to show): hidden unless that store/part scrape succeeded. A failed fetch keeps the previous items for that key instead of writing `[]`, so a blocked page does not look like everything sold out. The "deals disappeared" count opens this section.
+- **Stats** (closed until you press Stats): average discount by retailer, deals by width, brands with the most markdowns, lowest average deck prices by brand (brands with at least two decks), and weekly deck sale-price trend from history.
+- Rows that fail `passes_filters()` are not listed as new, dropped, or removed.
+- The footer links to [Run scraper now](https://github.com/pchoward/salesscraper2/actions/workflows/scrape.yml).
+
+On the 2026-09-30 catalog, 114 of 173 filtered listings were at an all-time low. None of them were the same product at two stores, so Across stores stays empty until a real pair shows up. Image URLs are stored on the next scrape; rows scraped before that show the placeholder.
+
+### Badges
+
+- **NEW**: not in yesterday's catalog and not seen on an earlier day.
+- **BACK IN STOCK**: first seen before today, missing from yesterday, present again. This replaces NEW.
+- **down $X TODAY**: the sale price fell by at least $2 or 5% versus the previous tracked sale price.
+- **LOWEST EVER**: the current sale price is the all-time low under the 3-observation / 7-day rule. A plain price drop does not get this badge.
+
+A row can show a drop and LOWEST EVER together. Watchlist matches get a Watchlist pill.
+
+### Deal score
+
+```
+Deal score (0-100) = discount + lowest + recent drop + popular size
+```
+
+- Discount is the percent off the original price, capped at 50. A missing original price adds 0.
+- Lowest tracked price adds 25 at the all-time low, 18 within $1 or 3% above it, and 10 within $2 or 5%. This part stays 0 until the listing has at least 3 observations spanning 7 days.
+- A meaningful drop versus the previous sale price ($2 or 5%) adds 8 points plus 1 point per 5% of that drop, up to 15. A smaller day-to-day dip adds 4.
+- A deck from 8.25" to 8.75" adds 10.
+
+Hot means 70 or above. The score button's tooltip is this formula. The column sorts.
+
+### Stars
+
+The star on each row is saved in this browser under `salesscraper2.stars`. **Watching** shows only starred rows. That list is separate from `watchlist.yaml`, which drives the email.
+
+## Watchlist
+
+`watchlist.yaml` is a short list of rules. A match is highlighted on the report. It is an email alert only when a trigger fires. Rules with none of the trigger fields alert when the product is new, back in stock, or the sale price drops by any amount. A match that stays at the same price stays highlighted and does not send another email by itself.
+
+| Field | Meaning |
+| --- | --- |
+| `id` | Short name used in the email. Optional. |
+| `brand` | Brand-wide. Every word must appear in the name. Powell Peralta does not match a Powell deck that is not Peralta. |
+| `name` | One product. Antihero matches Anti-Hero and Anti Hero. |
+| `part` | Decks, Wheels, Trucks, or Bearings. Defaults to Decks. |
+| `min_width` | Inches, inclusive. 8.6 matches 8.60 and anything wider. A deck with no parseable width does not match. |
+| `max_price` | Alert when the sale price is under this amount and yesterday it was missing or not under it. |
+| `alert_on_drop` | `true` alerts on any sale-price drop, including under $2 / 5%. |
+| `back_in_stock_width` | Alert only when this width comes back in stock. |
+| `note` | Shown in the email. |
+
+Seeded rules, with no target prices:
+
+- Black Label, Powell Peralta, and Heroin decks at 8.6 inches and wider.
+- The Antihero Caster deck, any width (the one at Skate Warehouse).
+
+Add another rule by appending a `- id:` block. The commented example in the file shows `max_price`, `alert_on_drop`, and `back_in_stock_width` together. A broken or missing file is logged and treated as no rules.
+
+Matching watchlist alerts are a block at the top of the email. Quiet matches are listed under that as still on sale.
+
+## Site-wide sales
+
+`site_sales.json` records filtered sale counts per store and the last day that looked like a site-wide sale. The scraper only sees sale listings, not the whole catalog. A day counts when all of these are true:
+
+- the count is at least **2.5×** the median of the previous 14 recorded days
+- the count is at least **30** items above that median
+- at least **7** earlier days are on record
+
+Skate Warehouse is seeded at **2026-07-04**. A detected day replaces that date only when it is later. The date never moves backward. Other stores stay "not recorded" until a day clears the threshold. Daily counts are kept about 120 days. The last-sale date is stored on its own, so trimming the counts does not forget it. The same line is on the report and in the email.
 
 ## Price history
 
@@ -81,7 +157,7 @@ On the 2026-09-30 catalog, 114 of 173 filtered listings were at an all-time low.
 
 Listings the current filters reject are dropped (cruiser, mini, off-brand, apparel, and so on). A deck with no original price in this file is kept, because the history never stored MSRP and the discount rule cannot be applied. Size and keyword rejections still apply. A URL in the current passing catalog is always kept. Listings not seen for more than **180 days**, and not in the current catalog, are dropped.
 
-The prune runs at the end of every scrape. A problem in pruning, store health, or the new report sections is logged and does not stop the scrape or the commit.
+Each listing can also keep the last image URL and parsed width, length, and wheelbase. Those fields are filled when the scraper sees them. A problem in pruning, store health, images, the watchlist, site-wide sales, or the report is logged and does not stop the scrape or the commit.
 
 Cleanup of the file already in the repo, on 2026-09-30, without rewriting git history:
 
@@ -99,11 +175,11 @@ About 1 MB is the steady size: roughly the current catalog, one point a day, for
 
 ## Email alerts
 
-After each scrape, `notify.py` emails that same digest. Mail goes out when there is at least one new listing, a meaningful price drop ($2 or 5% versus the previous tracked sale price), or a broken-store warning. A warning sends even on a day with no deals. Removals alone do not send mail. An empty digest with no store warning does not send mail.
+After each scrape, `notify.py` emails that same digest. Mail goes out when there is at least one new listing, a meaningful price drop ($2 or 5% versus the previous tracked sale price), a broken-store warning, or a watchlist alert. A warning or a watchlist alert sends even on a day with no other deals. Removals alone do not send mail. An empty digest with no store warning and no watchlist alert does not send mail.
 
-The message is HTML plus a plain-text fallback, grouped by part (Decks, Wheels, Trucks, Bearings). Each row has the store, the product name linked to the store page, the sale price, and the original price with percent off. Price drops also show the previous sale price and the dollar and percent change. Rows at an all-time low are badged, and the message says how many tracked deals are at an all-time low. When the cheapest store is at least $2 or 5% under the highest for the same product, that comparison is included. A store warning is a block at the top. The message links to the full report on GitHub Pages.
+The message is HTML plus a plain-text fallback, grouped by part (Decks, Wheels, Trucks, Bearings). Each row has the store, the product name linked to the store page, the sale price, and the original price with percent off. Price drops also show the previous sale price and the dollar and percent change. Rows at an all-time low are badged, and the message says how many tracked deals are at an all-time low. When the cheapest store is at least $2 or 5% under the highest for the same product, that comparison is included. A store warning is a block at the top. Watchlist alerts sit above the parts, and each store's days-since-last-site-wide-sale line follows. The message links to the full report on GitHub Pages.
 
-The scraper uses the Python standard library (`smtplib` and `email.message`). There is no new dependency. If a required setting is missing, the run logs one line and continues. If SMTP fails, the error is logged and the scrape still exits successfully, so the workflow can commit `sale_items_chart.html`, `previous_data.json`, `price_history.json`, and `scrape_health.json`.
+The scraper uses the Python standard library (`smtplib` and `email.message`). There is no new dependency. If a required setting is missing, the run logs one line and continues. If SMTP fails, the error is logged and the scrape still exits successfully, so the workflow can commit `sale_items_chart.html`, `previous_data.json`, `price_history.json`, `scrape_health.json`, and `site_sales.json`.
 
 Add each value as its own secret. In the GitHub repo: **Settings → Secrets and variables → Actions → New repository secret**.
 
@@ -153,7 +229,7 @@ python scraper.py
 
 Chrome or Chromium is required. The browser runs headless.
 
-Dry-check the filters, email, history prune, store warnings, and cross-store match (no network):
+Dry-check the filters, email, history prune, store warnings, cross-store match, deal score, badges, watchlist, site-wide sales, dimensions, and image extraction (no network):
 
 ```bash
 python test_filters.py
@@ -162,6 +238,12 @@ python test_history.py
 python test_health.py
 python test_matching.py
 python test_pipeline.py
+python test_score.py
+python test_badges.py
+python test_watchlist.py
+python test_site_sales.py
+python test_dimensions.py
+python test_media.py
 ```
 
 ## Before / after

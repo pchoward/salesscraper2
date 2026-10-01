@@ -7,6 +7,8 @@ from filters import item_passes_filters
 from health import broken_store_warnings, record_run, results_from_run
 from history import all_time_low_status, prune_price_history, update_price_history
 from matching import cross_store_groups
+from site_sales import describe_sales, record_catalog
+from watchlist import match_watchlist
 
 logger = logging.getLogger("pipeline")
 
@@ -21,7 +23,7 @@ def _day(today):
     return str(today)
 
 
-def apply_run_updates(current_data, failed_keys, history, health, today=None):
+def apply_run_updates(current_data, failed_keys, history, health, today=None, site_sales=None):
     """Update price history and store health. Never raises.
 
     Failed store/part keys are recorded as failures and are not written into
@@ -65,12 +67,26 @@ def apply_run_updates(current_data, failed_keys, history, health, today=None):
         warnings = []
         if not isinstance(health, dict) or not isinstance(health.get("runs"), list):
             health = {"runs": [], "baseline": {}}
+
+    try:
+        site_sales = record_catalog(
+            site_sales,
+            current_data,
+            today=day,
+            failed_keys=failed_keys,
+            history=history if isinstance(history, dict) else None,
+        )
+    except Exception as exc:
+        logger.error("Site-wide sale update failed (continuing): %s", exc)
+        if not isinstance(site_sales, dict):
+            site_sales = None
     return {
         "history": history if isinstance(history, dict) else {},
         "health": health if isinstance(health, dict) else {"runs": [], "baseline": {}},
         "warnings": warnings,
         "stats": stats,
         "save_history": save_history,
+        "site_sales": site_sales if isinstance(site_sales, dict) else None,
     }
 
 
@@ -83,7 +99,15 @@ def _visible(current_data):
     return products
 
 
-def decorate_digest(digest, current_data, history, warnings):
+def decorate_digest(
+    digest,
+    current_data,
+    history,
+    warnings,
+    previous_data=None,
+    today=None,
+    site_sales=None,
+):
     """Attach warnings, all-time lows, and cross-store groups. Never raises.
 
     Sets ``at_all_time_low`` on digest items so the email can badge them.
@@ -126,4 +150,22 @@ def decorate_digest(digest, current_data, history, warnings):
             digest.all_time_lows = []
         if not getattr(digest, "cross_store", None):
             digest.cross_store = []
+    try:
+        hits, alerts = match_watchlist(
+            _visible(current_data),
+            previous=previous_data,
+            history=history,
+            today=today or _day(None),
+        )
+        digest.watch_hits = hits
+        digest.watch_alerts = alerts
+    except Exception as exc:
+        logger.error("Watchlist match failed (continuing): %s", exc)
+        digest.watch_hits = []
+        digest.watch_alerts = []
+    try:
+        digest.site_sales = describe_sales(site_sales, today or _day(None))
+    except Exception as exc:
+        logger.error("Site-sale summary failed (continuing): %s", exc)
+        digest.site_sales = []
     return digest

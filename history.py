@@ -165,6 +165,33 @@ def _write_summary(entry, summary):
     return entry
 
 
+def _media_fields(entry):
+    """Image and specs, kept only when the listing actually has them."""
+    media = {}
+    image = str((entry or {}).get("image") or "").strip()
+    if image.startswith("http"):
+        media["image"] = image
+    for field in ("width", "length", "wheelbase"):
+        value = (entry or {}).get(field)
+        try:
+            if value is None or value == "":
+                continue
+            media[field] = float(value)
+        except (TypeError, ValueError):
+            continue
+    return media
+
+
+def _copy_media(target, source):
+    """Copy a new image, and fill specs that are still empty."""
+    media = _media_fields(source)
+    if media.get("image"):
+        target["image"] = media["image"]
+    for field in ("width", "length", "wheelbase"):
+        if field in media and target.get(field) in (None, ""):
+            target[field] = media[field]
+
+
 def _ordered_entry(entry):
     ordered = {}
     name = normalize_product_name(entry.get("name") or "")
@@ -178,6 +205,7 @@ def _ordered_entry(entry):
         if value is None or value == "":
             continue
         ordered[field] = value
+    ordered.update(_media_fields(entry))
     ordered["prices"] = _clean_prices(entry.get("prices"))
     return ordered
 
@@ -235,6 +263,7 @@ def update_price_history(current_data, history, today=None, skip_keys=None):
             entry["name"] = item.get("name") or entry.get("name") or ""
             entry["store"] = item.get("store") or entry.get("store") or ""
             entry["part"] = item.get("part") or entry.get("part") or ""
+            _copy_media(entry, item)
             _note_price(entry, day, price)
     return history
 
@@ -263,6 +292,8 @@ def _merge_entries(left, right):
         merged["first_seen"] = min(firsts)
     if lasts:
         merged["last_seen"] = max(lasts)
+    _copy_media(merged, left)
+    _copy_media(merged, right)
     lows = []
     for summary in (left_summary, right_summary):
         if summary.get("all_time_low") is not None:
@@ -347,6 +378,7 @@ def prune_price_history(history, today=None, current_data=None):
                 entry["name"] = item.get("name") or entry.get("name") or ""
                 entry["store"] = item.get("store") or entry.get("store") or ""
                 entry["part"] = item.get("part") or entry.get("part") or ""
+                _copy_media(entry, item)
             elif not _filters_allow(entry, url):
                 stats["dropped_filter"] += 1
                 continue
