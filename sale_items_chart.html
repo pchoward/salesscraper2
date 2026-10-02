@@ -86,13 +86,56 @@ button.stat-card:hover, .stat-card.emphasis { outline: none; }
     font-weight: 600;
     color: var(--primary-dark);
 }
-.change-btn[aria-pressed="true"], .mode-btn[aria-pressed="true"], .text-btn[aria-pressed="true"],
-.filter-btn.active, .chip.active {
+.change-btn {
+    color: var(--text-primary);
+    background: #f8fafc;
+}
+.change-btn:hover { border-color: #93c5fd; color: var(--primary-dark); }
+.text-btn[aria-pressed="true"],
+.filter-btn.active, .chip.active,
+.change-btn[aria-pressed="true"], .change-btn.active {
     background: var(--primary);
     border-color: var(--primary);
     color: white;
 }
-.mode { display: flex; gap: 0.4rem; margin-bottom: 0.75rem; }
+.change-btn[aria-pressed="true"], .change-btn.active {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.28);
+}
+.lede.digest {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+}
+.digest-label { margin-right: 0.15rem; }
+.mode {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin: 0 0 0.75rem;
+    padding: 0.2rem 0.35rem 0.2rem 0.7rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+}
+.mode-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+.mode-btn {
+    border-color: transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    box-shadow: none;
+}
+.mode-btn[aria-pressed="true"] {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+    color: var(--primary-dark);
+}
 .sticky-bar {
     position: sticky;
     top: 0;
@@ -576,8 +619,8 @@ thead th { z-index: 25; }
 <h1>Skateboard Sale Tracker</h1>
 <p><span id="statusCounts">152 active deals, 36 new, 0 drops</span>, last scan <span class="scan-wrap"><time id="lastScan" datetime="2026-10-02T11:38:37+00:00">2026-10-02T11:38:37+00:00</time><span class="scan-exact" id="scanExact">Oct 2, 2026 7:38:37 AM ET</span></span></p>
 </header>
-<p class="lede" id="changeLine" data-new="36" data-drops="0" data-lows="0" data-gone="67">Digest of what changed. <span id="changePrefix">Since yesterday:</span> <button type="button" class="change-btn" id="btnNew" data-change="new" onclick="setChange('new')">36 new deals</button> <button type="button" class="change-btn" id="btnDrop" data-change="drop" onclick="setChange('drop')">0 price drops</button> <button type="button" class="change-btn" id="btnLow" data-change="lowest" onclick="setChange('lowest')">0 hit lowest tracked price</button> <button type="button" class="change-btn" id="btnGone" data-change="removed" onclick="setChange('removed')">67 deals disappeared</button></p>
-<div class="mode"><button type="button" class="mode-btn" id="modeYesterday" aria-pressed="true" onclick="setVisitMode('yesterday')">Since yesterday</button><button type="button" class="mode-btn" id="modeVisit" aria-pressed="false" onclick="setVisitMode('visit')">Since your last visit</button></div><p class="lede" id="visitNote" hidden></p>
+<p class="lede digest" id="changeLine" data-new="36" data-drops="0" data-lows="0" data-gone="67"><span class="digest-label">Digest of what changed. <span id="changePrefix">Since yesterday:</span></span> <button type="button" class="change-btn active" id="btnAll" data-change="all" aria-pressed="true" onclick="setChange('all')">All deals</button> <button type="button" class="change-btn" id="btnNew" data-change="new" aria-pressed="false" onclick="setChange('new')">36 new deals</button> <button type="button" class="change-btn" id="btnDrop" data-change="drop" aria-pressed="false" onclick="setChange('drop')">0 price drops</button> <button type="button" class="change-btn" id="btnLow" data-change="lowest" aria-pressed="false" onclick="setChange('lowest')">0 hit lowest tracked price</button> <button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" onclick="setChange('removed')">67 deals disappeared</button></p>
+<div class="mode" role="group" aria-label="Digest baseline"><span class="mode-label">Baseline</span><button type="button" class="mode-btn" id="modeYesterday" aria-pressed="true" onclick="setVisitMode('yesterday')">Since yesterday</button><button type="button" class="mode-btn" id="modeVisit" aria-pressed="false" onclick="setVisitMode('visit')">Since your last visit</button></div><p class="lede" id="visitNote" hidden></p>
 <div class="stats-grid">
 <button type="button" class="stat-card emphasis" data-card="new" aria-pressed="false" onclick="toggleCard('new')"><div class="number">36</div><div class="label">New deals</div></button>
 <button type="button" class="stat-card emphasis" data-card="drop" aria-pressed="false" onclick="toggleCard('drop')"><div class="number">0</div><div class="label">Price drops</div></button>
@@ -1024,6 +1067,8 @@ let state = {
     cardNew: false,
     cardDrop: false,
     cardLow: false,
+    // Digest chip. "all" is the default and is not a table filter.
+    // visitMode only chooses which baseline those counts use.
     change: "all",
     grouped: false,
     visitMode: "yesterday",
@@ -1232,7 +1277,9 @@ function paintCards() {
         card.setAttribute("aria-pressed", on ? "true" : "false");
     });
     document.querySelectorAll("[data-change]").forEach(button => {
-        button.setAttribute("aria-pressed", button.getAttribute("data-change") === state.change ? "true" : "false");
+        const on = button.getAttribute("data-change") === state.change;
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+        button.classList.toggle("active", on);
     });
 }
 
@@ -1262,7 +1309,7 @@ function rowMatches(row) {
     if (state.change === "new" && added !== "1") return false;
     if (state.change === "drop" && drop !== "1") return false;
     if (state.change === "lowest" && low !== "1") return false;
-    if (state.change === "removed") return false;
+    // "removed" opens Recently gone. It does not hide current deals.
     return true;
 }
 
@@ -1316,10 +1363,7 @@ function applyFilters() {
     dealRows().forEach(row => {
         row.classList.toggle("filtered-out", !rowMatches(row));
     });
-    const removedOn = state.change === "removed";
-    const deals = document.getElementById("dealsSection");
-    if (deals) deals.hidden = removedOn;
-    showGone(removedOn);
+    showGone(state.change === "removed");
     applyGroupVisibility();
     syncDetails();
     paintCards();
@@ -1386,10 +1430,9 @@ function toggleCard(kind, store) {
 }
 
 function setChange(kind) {
-    state.change = state.change === kind ? "all" : kind;
-    if (kind === "new") state.cardNew = state.change === "new";
-    if (kind === "drop") state.cardDrop = state.change === "drop";
-    if (kind === "lowest") state.cardLow = state.change === "lowest";
+    // Summary cards stay independent. Choosing a digest chip does not press them.
+    if (!kind || kind === "all" || state.change === kind) state.change = "all";
+    else state.change = kind;
     applyFilters();
     if (state.change === "removed") {
         const gone = document.getElementById("goneSection");
@@ -1553,6 +1596,8 @@ function setVisitMode(mode) {
 }
 
 function prepareVisit() {
+    // The saved snapshot is only the last-visit baseline for digest counts.
+    // It is not a filter, and it is not restored into state.change.
     const data = catalog();
     const previous = readJson(SNAP_KEY, null);
     const current = {};
@@ -1950,9 +1995,11 @@ function writeControls(snapshot) {
     state.change = snapshot.change || "all";
     state.watching = !!snapshot.watching;
     state.grouped = !!snapshot.grouped;
-    state.cardLow = !!snapshot.low || snapshot.change === "lowest";
-    state.cardNew = !!snapshot.added || snapshot.change === "new";
-    state.cardDrop = !!snapshot.dropped || snapshot.change === "drop";
+    // Card flags come only from added/dropped/low. A change= param must not
+    // also turn a summary card on, and a card param must not select a digest chip.
+    state.cardLow = !!snapshot.low;
+    state.cardNew = !!snapshot.added;
+    state.cardDrop = !!snapshot.dropped;
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
     const grouped = document.getElementById("groupToggle");
@@ -2297,7 +2344,13 @@ function init() {
     updateChangeLine();
     paintViews();
     if (location.search && location.search.length > 1) loadFromUrl();
-    else applyFilters();
+    else {
+        state.change = "all";
+        state.cardNew = false;
+        state.cardDrop = false;
+        state.cardLow = false;
+        applyFilters();
+    }
 }
 
 document.addEventListener("DOMContentLoaded", init);
