@@ -301,5 +301,90 @@ class RetailerActivityTests(unittest.TestCase):
         self.assertEqual(rows["SkateWarehouse"]["last_sale"], "2026-07-04")
 
 
+class SalePageTests(unittest.TestCase):
+    """The three decks the owner found still on sale, past page 1."""
+
+    LUCKY = "https://www.tactics.com/5boro/lucky-candle-brooklyn-825-skateboard-deck"
+    SANTA = "https://www.tactics.com/santa-monica-airlines/skater-hall-of-fame-110-ltd-skateboard-deck"
+    WELCOME = "https://www.zumiez.com/welcome-opps-8-5-skateboard-deck.html"
+
+    def test_tactics_reads_past_the_first_sale_page(self):
+        from stores.tactics import TacticsDecksScraper, collect_sale_pages
+
+        page1 = '<a class="pagination-next" href="/skateboard-decks/sale/page-2"></a>'
+        page2 = (
+            '<div class="browse-grid-item">'
+            f'<a href="/5boro/lucky-candle-brooklyn-825-skateboard-deck">'
+            '<img alt="5boro Lucky Candle Brooklyn 8.25 Skateboard Deck"></a>'
+            '<span class="browse-grid-item-sale-price">$47.95</span>'
+            '<span class="browse-grid-item-discount">29% off</span></div>'
+            '<div class="browse-grid-item">'
+            '<a href="/santa-monica-airlines/skater-hall-of-fame-110-ltd-skateboard-deck">'
+            '<img alt="Santa Monica Airlines Skater Hall Of Fame 11.0 LTD Skateboard Deck"></a>'
+            '<span class="browse-grid-item-sale-price">$99.95</span>'
+            '<span class="browse-grid-item-discount">20% off</span></div>'
+        )
+
+        def fetch(url):
+            if url.rstrip("/").endswith("/sale"):
+                return url, page1
+            if url.rstrip("/").endswith("/page-2"):
+                return url, page2
+            return "https://www.tactics.com/skateboard-decks/sale", page1
+
+        pages = collect_sale_pages("https://www.tactics.com/skateboard-decks/sale", fetch=fetch)
+        self.assertEqual(len(pages), 2)
+        scraper = TacticsDecksScraper()
+        urls = [item["url"] for html in pages for item in scraper.parse(html)]
+        self.assertIn(self.LUCKY, urls)
+        self.assertIn(self.SANTA, urls)
+        # A request that lands back on page 1 does not walk forever.
+        self.assertEqual(
+            len(collect_sale_pages("https://www.tactics.com/skateboard-decks/sale", fetch=lambda url: (
+                "https://www.tactics.com/skateboard-decks/sale",
+                page1,
+            ))),
+            1,
+        )
+
+    def test_zumiez_page_links_include_a_later_card(self):
+        from stores.zumiez import ZumiezDecksScraper, has_page_link, listing_urls, page_url
+
+        html = (
+            '<li class="ProductCard"><a class="ProductCard-Link" href="/welcome-opps-8-5-skateboard-deck.html">'
+            '<span class="ProductCard-Name">Welcome Opps 8.5&quot; Skateboard Deck</span></a>'
+            '<span class="ProductPrice-PriceValue">$64.99</span>'
+            '<span class="ProductCardPrice-HighPrice">$79.95</span></li>'
+            '<a class="PaginationLink" href="/skate/skateboard-decks.html?customFilters=promotion_flag:Sale&amp;page=2">2</a>'
+        )
+        base = "https://www.zumiez.com/skate/skateboard-decks.html?customFilters=promotion_flag:Sale"
+        self.assertEqual(page_url(base, 1), base)
+        self.assertIn("page=2", page_url(base, 2))
+        self.assertTrue(has_page_link(html, 2))
+        self.assertIn(self.WELCOME, listing_urls(html))
+        kept = ZumiezDecksScraper().parse(html)
+        self.assertEqual([item["url"] for item in kept], [self.WELCOME])
+
+    def test_sold_out_requires_the_product_status_node(self):
+        from stores.stock import stock_from_html
+
+        self.assertEqual(
+            stock_from_html("Tactics", '<div class="product-head-orderable-status">Out of stock</div>'),
+            "out_of_stock",
+        )
+        self.assertIsNone(stock_from_html("Tactics", "<button>Add to Cart</button>"))
+        self.assertIsNone(
+            stock_from_html(
+                "Zumiez",
+                '<div class="GetItNowBopis-Availability_isOutOfStock">out of stock</div>'
+                '<div class="ProductActions-Stock">In stock</div>',
+            )
+        )
+        self.assertEqual(
+            stock_from_html("Zumiez", '<div class="ProductActions-Stock">Out of stock</div>'),
+            "out_of_stock",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

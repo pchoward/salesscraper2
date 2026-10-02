@@ -1292,14 +1292,16 @@ def _gone_section(history, current_data, today, failed_keys):
             "<tr>"
             f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
             f'<td><span class="part-badge">{escape(row.get("part") or "")}</span></td>'
-            f'<td class="product-name">{escape(row.get("name") or "")}</td>'
+            f'<td class="product-name">{_product_link(row)}</td>'
             f'<td class="price">{_money(row.get("price"))}</td>'
             f'<td>{escape(row.get("last_seen") or "")}</td>'
-            f'<td><span class="stage stage-sold_out">SOLD OUT</span></td>'
+            f'<td>{_stage_html(row.get("stage"))}</td>'
             "</tr>"
         )
     note = (
-        "Kept for 7 days after a listing leaves the sale catalog, with the last price and the last day it was seen. "
+        "Kept for 7 days after a listing is missing from two successful scans in a row, "
+        "with the last price and the last day it was seen. "
+        "Sold out means the product page says out of stock. Otherwise the listing is no longer on the sale page. "
         "A failed scrape does not land here."
     )
     if not rows:

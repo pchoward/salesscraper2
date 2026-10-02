@@ -13,9 +13,11 @@ import os
 import sys
 
 from health import HEALTH_PATH, empty_store_keys, load_state, state_json
+from history import record_misses
 from notify import send_digest
 from pipeline import apply_run_updates, decorate_digest
 from report import build_digest, build_report_html, compare_catalogs
+from stores.stock import confirm_stock
 from site_sales import SITE_SALES_PATH, load_state as load_site_sales
 from site_sales import state_json as site_sales_json
 from stores.files import safe_write_file
@@ -123,6 +125,17 @@ def main():
             curr_data[key] = retained
             logging.warning("Scrape failed for %s; retaining %s previous items", key, len(retained))
 
+    price_history = load_price_history()
+    carried = set()
+    if isinstance(price_history, dict):
+        try:
+            carried = record_misses(prev_data, curr_data, price_history, failed_keys)
+            logging.info("Carried %s listings after a single miss", len(carried))
+            confirm_stock(price_history, curr_data, failed_keys)
+        except Exception as exc:
+            logging.error("Miss tracking failed (continuing): %s", exc)
+            carried = set()
+
     changes = compare_catalogs(prev_data, curr_data, failed_keys)
     digest = build_digest(changes, failed_keys)
 
@@ -133,7 +146,6 @@ def main():
     else:
         logging.info("No changes detected")
 
-    price_history = load_price_history()
     health = load_state()
     try:
         site_sales = load_site_sales()
@@ -149,6 +161,7 @@ def main():
             site_sales=site_sales,
             scanned_at=scanned_at,
             suspect_keys=suspect_keys,
+            skip_urls=carried,
         )
         updates["save_history"] = False
         updates["history"] = {}
@@ -161,6 +174,7 @@ def main():
             site_sales=site_sales,
             scanned_at=scanned_at,
             suspect_keys=suspect_keys,
+            skip_urls=carried,
         )
     if updates.get("save_history"):
         save_price_history(updates["history"])

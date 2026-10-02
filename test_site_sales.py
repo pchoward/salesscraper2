@@ -63,6 +63,16 @@ class SiteSaleTests(unittest.TestCase):
         state = record_catalog(state, quiet, today="2026-08-13")
         self.assertEqual(state["stores"]["SkateWarehouse"]["last_sale"], "2026-07-04")
 
+    def test_full_catalog_cutoff_is_not_a_site_wide_sale(self):
+        state = empty_state()
+        for offset in range(20):
+            day = (datetime.date(2026, 9, 12) + datetime.timedelta(days=offset)).isoformat()
+            state["daily"][day] = {"Zumiez": 27, "Tactics": 62}
+        state["daily"]["2026-10-02"] = {"Zumiez": 281, "Tactics": 157}
+        state = record_catalog(state, {}, today="2026-10-03")
+        self.assertIsNone(state["stores"]["Zumiez"]["last_sale"])
+        self.assertIsNone(state["stores"]["Tactics"]["last_sale"])
+
     def test_flat_history_does_not_invent_a_sale(self):
         state = empty_state()
         for offset in range(20):
