@@ -1,0 +1,140 @@
+{
+  "products": [
+    {
+      "id": 101,
+      "title": "Brand Logo 8.25\" Skateboard Deck",
+      "handle": "baker-brand-logo-825",
+      "vendor": "Baker",
+      "product_type": "Skateboard Deck",
+      "images": [{"src": "https://cdn.shopify.com/s/files/baker-deck.jpg"}],
+      "variants": [
+        {
+          "id": 1001,
+          "title": "Default Title",
+          "price": "44.99",
+          "compare_at_price": "64.95",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "title": "Quest Longboard Skateboard Deck",
+      "handle": "pantheon-quest-longboard",
+      "vendor": "Pantheon",
+      "product_type": "Longboard Deck",
+      "images": [{"src": "https://cdn.shopify.com/s/files/quest.jpg"}],
+      "variants": [
+        {
+          "id": 1002,
+          "title": "Default Title",
+          "price": "148.75",
+          "compare_at_price": "189.00",
+          "available": false
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "title": "Dinghy Cruiser Deck 28.5\"",
+      "handle": "landyachtz-dinghy-cruiser",
+      "vendor": "Landyachtz",
+      "product_type": "Cruiser",
+      "images": [{"src": "https://cdn.shopify.com/s/files/dinghy.jpg"}],
+      "variants": [
+        {
+          "id": 1003,
+          "title": "Default Title",
+          "price": "89.00",
+          "compare_at_price": "129.00",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "title": "Team Model 8.0\" Skateboard Deck",
+      "handle": "real-team-full-price",
+      "vendor": "Real",
+      "product_type": "Skateboard Deck",
+      "images": [{"src": "https://cdn.shopify.com/s/files/real.jpg"}],
+      "variants": [
+        {
+          "id": 1004,
+          "title": "Default Title",
+          "price": "64.95",
+          "compare_at_price": null,
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "title": "Reds Bearings",
+      "handle": "bones-reds-bearings",
+      "vendor": "Bones",
+      "product_type": "Bearings",
+      "images": [{"src": "https://cdn.shopify.com/s/files/reds.jpg"}],
+      "variants": [
+        {
+          "id": 1005,
+          "title": "Default Title",
+          "price": "19.95",
+          "compare_at_price": "27.00",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "title": "Formula Four 54mm Wheels",
+      "handle": "spitfire-formula-four-54",
+      "vendor": "Spitfire",
+      "product_type": "Wheels",
+      "images": [{"src": "https://cdn.shopify.com/s/files/formula.jpg"}],
+      "variants": [
+        {
+          "id": 1006,
+          "title": "Default Title",
+          "price": "32.00",
+          "compare_at_price": "42.00",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": 107,
+      "title": "Stage 11 144 Truck",
+      "handle": "independent-stage-11-144",
+      "vendor": "Independent",
+      "product_type": "Trucks",
+      "images": [{"src": "https://cdn.shopify.com/s/files/stage.jpg"}],
+      "variants": [
+        {
+          "id": 1007,
+          "title": "Default Title",
+          "price": "22.00",
+          "compare_at_price": "32.00",
+          "available": true
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "title": "Mini Logo 7.25\" Skateboard Deck",
+      "handle": "mini-logo-725",
+      "vendor": "Mini Logo",
+      "product_type": "Deck",
+      "images": [{"src": "https://cdn.shopify.com/s/files/mini.jpg"}],
+      "variants": [
+        {
+          "id": 1008,
+          "title": "Default Title",
+          "price": "24.00",
+          "compare_at_price": "39.95",
+          "available": true
+        }
+      ]
+    }
+  ]
+}

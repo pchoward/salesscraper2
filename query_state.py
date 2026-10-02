@@ -72,6 +72,8 @@ STORE_SLUGS = {
     "skatewarehouse": "SkateWarehouse",
     "ccs": "CCS",
     "tactics": "Tactics",
+    "skatedeluxe": "Skate Deluxe",
+    "muirskate": "Muir Skate",
 }
 STORE_TO_SLUG = {name: slug for slug, name in STORE_SLUGS.items()}
 

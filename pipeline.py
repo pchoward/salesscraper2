@@ -4,7 +4,7 @@ import datetime
 import logging
 
 from filters import item_passes_filters
-from health import broken_store_warnings, record_run, results_from_run
+from health import broken_store_warnings, record_run, results_from_run, suspect_store_warnings
 from history import all_time_low_status, apply_lifecycle, prune_price_history, update_price_history
 from matching import cross_store_groups
 from site_sales import describe_sales, record_catalog, sale_banners
@@ -31,6 +31,7 @@ def apply_run_updates(
     today=None,
     site_sales=None,
     scanned_at=None,
+    suspect_keys=None,
 ):
     """Update price history and store health. Never raises.
 
@@ -77,9 +78,10 @@ def apply_run_updates(
 
     warnings = []
     try:
-        results = results_from_run(current_data, failed_keys)
+        results = results_from_run(current_data, failed_keys, suspect_keys)
         health = record_run(health, day, results, scanned_at=scanned_at)
         warnings = broken_store_warnings(health)
+        warnings.extend(suspect_store_warnings(suspect_keys, health, day))
     except Exception as exc:
         logger.error("Store health update failed (continuing): %s", exc)
         warnings = []

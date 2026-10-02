@@ -57,6 +57,23 @@ button.stat-card:hover, .stat-card.emphasis { outline: none; }
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
+.stat-card.is-warn {
+    border-color: #fdba74;
+    background: #fff7ed;
+}
+.stat-card.is-warn .number { color: #c2410c; }
+.warn-badge {
+    display: inline-block;
+    margin-top: 0.25rem;
+    background: #ea580c;
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 0.08rem 0.4rem;
+}
 .notice, .sale-ages {
     background: #fff7ed;
     border: 1px solid #fdba74;
@@ -282,6 +299,8 @@ tr.on-list td:first-child { box-shadow: inset 3px 0 0 #d97706; }
 .store-skatewarehouse { background: #dbeafe; color: #1d4ed8; }
 .store-ccs { background: #d1fae5; color: #059669; }
 .store-tactics { background: #fef3c7; color: #d97706; }
+.store-skatedeluxe { background: #ede9fe; color: #6d28d9; }
+.store-muirskate { background: #ccfbf1; color: #0f766e; }
 .part-badge { background: #f1f5f9; color: var(--text-secondary); font-weight: 600; }
 .size-badge { background: #e0e7ff; color: #3730a3; }
 .star {

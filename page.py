@@ -25,7 +25,7 @@ from filters import (
     normalize_url,
     percent_off_value,
 )
-from health import warning_text
+from health import warning_text, warnings_blurb
 from history import (
     STAGE_LABEL,
     all_time_low_status,
@@ -75,11 +75,12 @@ def _price(value):
         return None
 
 
-def _money(value):
+def _money(value, currency=None):
     amount = _price(value)
     if amount is None:
         return "N/A"
-    return f"${amount:.2f}"
+    symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
+    return f"{symbol}{amount:.2f}"
 
 
 def _store_class(store):
@@ -293,8 +294,7 @@ def _alert_html(warnings):
     return (
         '<div class="alert" id="storeAlerts" role="status">'
         "<strong>Store check failed</strong>"
-        "<p>These categories usually have sale items. The last two runs came back empty or failed. "
-        "A single empty run does not raise this warning.</p>"
+        f"<p>{escape(warnings_blurb(warnings))}</p>"
         f"<ul>{''.join(items)}</ul></div>"
     )
 
@@ -335,6 +335,14 @@ def _atl_section(low_items, history):
     return "\n".join(rows)
 
 
+def _euro_note(groups):
+    for group in groups or []:
+        for offer in group.get("offers") or []:
+            if offer.get("store") == "Skate Deluxe":
+                return " Skate Deluxe prices are euros (no US dollar storefront) and are not converted."
+    return ""
+
+
 def _compare_section(groups):
     if not groups:
         return ""
@@ -345,7 +353,8 @@ def _compare_section(groups):
         '<span class="toggle-icon">▼</span></div>',
         '<div class="section-content">',
         '<p class="lede">Same brand, model, and size at two or more stores. '
-        "The lowest price is highlighted. Matching is conservative, so some real duplicates stay separate.</p>",
+        "The lowest price is highlighted. Matching is conservative, so some real duplicates stay separate."
+        f"{_euro_note(groups)}</p>",
         '<div class="compare-grid">',
     ]
     for group in groups:
@@ -366,7 +375,7 @@ def _compare_section(groups):
             offers.append(
                 f'<div class="{klass}" data-store="{escape(store, quote=True)}">'
                 f'<div class="who"><span class="store-badge {_store_class(store)}">{escape(store)}</span></div>'
-                f'<div class="amt">{_money(price)}</div>'
+                f'<div class="amt">{_money(price, offer.get("currency"))}</div>'
                 f'<div class="nm">{name_html}</div></div>'
             )
         rows.append(
@@ -416,7 +425,7 @@ def _stats_html(products, history):
             by_brand_count[brand] = by_brand_count.get(brand, 0) + 1
             if percent is not None:
                 by_brand_off.setdefault(brand, []).append(percent)
-        if item.get("part") == "Decks" and brand:
+        if item.get("part") == "Decks" and brand and str(item.get("currency") or "USD").upper() != "EUR":
             price = _price(item.get("price_new"))
             if price is not None:
                 deck_prices.setdefault(brand, []).append(price)
@@ -443,6 +452,8 @@ def _stats_html(products, history):
     if isinstance(history, dict):
         for entry in history.values():
             if not isinstance(entry, dict) or entry.get("part") != "Decks":
+                continue
+            if entry.get("store") == "Skate Deluxe":
                 continue
             for day, price in (entry.get("prices") or {}).items():
                 parsed = _as_date(day)
@@ -775,12 +786,28 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="stat-card" data-card="clear" onclick="toggleCard(\'clear\')">'
         f'<div class="number">{len(records)}</div><div class="label">Tracked deals</div></button>'
     )
-    for store, count in sorted(store_counts.items()):
+    suspect_stores = set()
+    for warning in warnings:
+        if isinstance(warning, dict) and warning.get("kind") == "suspect" and warning.get("store"):
+            suspect_stores.add(warning["store"])
+    store_names = []
+    for key in data or {}:
+        store_name = str(key).rsplit("_", 1)[0]
+        if store_name and store_name not in store_names:
+            store_names.append(store_name)
+    for store_name in store_counts:
+        if store_name not in store_names:
+            store_names.append(store_name)
+    for store in sorted(store_names):
+        count = store_counts.get(store, 0)
+        warn = store in suspect_stores or count == 0
+        card_class = "stat-card is-warn" if warn else "stat-card"
+        badge = '<span class="warn-badge">Warning</span>' if warn else ""
         chunks.append(
-            '<button type="button" class="stat-card" data-card="store" '
+            f'<button type="button" class="{card_class}" data-card="store" '
             f'data-store="{escape(store, quote=True)}" aria-pressed="false" '
             f"onclick=\"toggleCard('store', '{escape(store, quote=True)}')\">"
-            f'<div class="number">{count}</div><div class="label">{escape(store)}</div></button>'
+            f'<div class="number">{count}</div><div class="label">{escape(store)}</div>{badge}</button>'
         )
     chunks.append("</div>")
 
@@ -970,6 +997,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
 
     chunks.append(
         "<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. "
+        "Skate Deluxe is EUR-only and ships from Europe, so it stays out of the scrape. "
+        "Muir Skate stays out while its Shopify storefront is unavailable. "
+        "Both still appear under retailer activity with no recorded site-wide sale. "
         "Decks stay at 10% off or more for known street brands and 15% otherwise, "
         "7.5 inches and wider. Named cruiser and longboard listings are still excluded. "
         f"{escape(FORMULA)} "
@@ -1024,6 +1054,13 @@ def _row_html(record):
     discount = _discount_class(item.get("price_new"), item.get("price_old"))
     size_html = f'<span class="size-badge">{escape(record["width_key"])}</span>' if record["width_key"] else "—"
     drop_html = ""
+    group_key = ""
+    if record["group"]:
+        group_key = record["group"].get("key") or ""
+    listed = " on-list" if record["listed"] else ""
+    original = _price(item.get("price_old"))
+    currency = item.get("currency")
+    symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
     if record["drop"] is not None and record["drop_amount"]:
         prior_percent = record["drop"].get("percent_vs_prior")
         try:
@@ -1031,14 +1068,9 @@ def _row_html(record):
         except (TypeError, ValueError):
             percent_text = "0.0"
         drop_html = (
-            f'<div class="delta">\u2212${record["drop_amount"]:.2f} '
+            f'<div class="delta">\u2212{symbol}{record["drop_amount"]:.2f} '
             f'(\u2212{percent_text}% vs prior sale)</div>'
         )
-    group_key = ""
-    if record["group"]:
-        group_key = record["group"].get("key") or ""
-    listed = " on-list" if record["listed"] else ""
-    original = _price(item.get("price_old"))
     return (
         f'<tr class="deal-row{listed}" tabindex="0" data-id="{record["id"]}" '
         f'data-url="{_attr(record["url"])}" data-store="{_attr(record["store"])}" '
@@ -1064,9 +1096,9 @@ def _row_html(record):
         f'<div class="row-meta">{_badge_html(record["badges"], record["listed"])}'
         f'{_stage_html(record.get("stage"))}</div></td>'
         f'<td class="price-cell"><button type="button" class="price-btn" data-id="{record["id"]}">'
-        f'<span class="price price-new">{_money(item.get("price_new"))}</span></button>'
+        f'<span class="price price-new">{_money(item.get("price_new"), currency)}</span></button>'
         f'{_spark_html(record)}{drop_html}</td>'
-        f'<td class="price price-old">{_money(item.get("price_old")) if item.get("price_old") else "N/A"}</td>'
+        f'<td class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else "N/A"}</td>'
         f'<td><span class="discount {discount}">{escape(percent)}</span></td>'
         f'<td class="days-cell">{escape(record["held"])}</td>'
         f'<td class="score-cell"><button type="button" class="score-btn" aria-expanded="false">'
@@ -1088,7 +1120,8 @@ def _spec_box(label, value):
 def _detail_html(record):
     item = record["item"]
     specs = record["specs"]
-    chain = " → ".join(f"${price:.2f}" for _day, price in record["chain"]) or "No price history yet."
+    symbol = "€" if str(item.get("currency") or "USD").upper() == "EUR" else "$"
+    chain = " → ".join(f"{symbol}{price:.2f}" for _day, price in record["chain"]) or "No price history yet."
     offers = []
     group = record["group"]
     if group:
@@ -1098,7 +1131,7 @@ def _detail_html(record):
             cheap = price is not None and cheapest is not None and abs(float(price) - float(cheapest)) < 0.001
             klass = "mini-offer g-cheap" if cheap else "mini-offer"
             url = offer.get("url") or ""
-            label = f'{escape(offer.get("store") or "")} {_money(price)}'
+            label = f'{escape(offer.get("store") or "")} {_money(price, offer.get("currency"))}'
             if url:
                 inner = f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
             else:
@@ -1135,7 +1168,7 @@ def _detail_html(record):
 
 
 def _offer_link(offer):
-    price = _money(offer.get("price"))
+    price = _money(offer.get("price"), offer.get("currency"))
     store = escape(offer.get("store") or "")
     label = f"{store} {price}"
     url = offer.get("url") or ""

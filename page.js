@@ -766,7 +766,14 @@ function updateBanners() {
 
 function slugStore(value) {
     const key = String(value || "").toLowerCase().replace(/[^a-z0-9]/g, "");
-    return { zumiez: "Zumiez", skatewarehouse: "SkateWarehouse", ccs: "CCS", tactics: "Tactics" }[key] || "";
+    return {
+        zumiez: "Zumiez",
+        skatewarehouse: "SkateWarehouse",
+        ccs: "CCS",
+        tactics: "Tactics",
+        skatedeluxe: "Skate Deluxe",
+        muirskate: "Muir Skate"
+    }[key] || "";
 }
 
 function slugType(value) {
@@ -784,7 +791,14 @@ function slugType(value) {
 }
 
 function storeSlug(name) {
-    return { Zumiez: "zumiez", SkateWarehouse: "skatewarehouse", CCS: "ccs", Tactics: "tactics" }[name] || "";
+    return {
+        Zumiez: "zumiez",
+        SkateWarehouse: "skatewarehouse",
+        CCS: "ccs",
+        Tactics: "tactics",
+        "Skate Deluxe": "skatedeluxe",
+        "Muir Skate": "muirskate"
+    }[name] || "";
 }
 
 function typeSlug(name) {

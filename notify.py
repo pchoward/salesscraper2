@@ -22,7 +22,7 @@ from email.message import EmailMessage
 from html import escape
 
 from filters import calculate_percent_off, item_passes_filters, normalize_product_name, normalize_url
-from health import warning_text
+from health import warning_text, warnings_blurb
 from report import Digest
 from site_sales import activity_line
 
@@ -44,6 +44,8 @@ _STORE_COLORS = {
     "skatewarehouse": ("#dbeafe", "#1e40af"),
     "ccs": ("#d1fae5", "#047857"),
     "tactics": ("#fef3c7", "#b45309"),
+    "skatedeluxe": ("#ede9fe", "#6d28d9"),
+    "muirskate": ("#ccfbf1", "#0f766e"),
 }
 
 
@@ -187,12 +189,13 @@ def subject_line(digest, when=None):
     return f"Skate deals: {summary_counts(digest)} ({_short_date(when)})"
 
 
-def _money(value):
+def _money(value, currency=None):
     try:
         amount = float(value)
     except (TypeError, ValueError):
         return "N/A"
-    return f"${amount:.2f}"
+    symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
+    return f"{symbol}{amount:.2f}"
 
 
 def _display_name(item):
@@ -217,18 +220,20 @@ def _drop_bits(change):
     percent = change.get("percent_vs_prior")
     old_price = change.get("old")
     new_price = change.get("new")
+    currency = ((change or {}).get("item") or {}).get("currency")
+    symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
     if delta is None or percent is None:
         try:
             old_amount = float(old_price)
             new_amount = float(new_price)
         except (TypeError, ValueError):
-            return _money(old_price), "N/A"
+            return _money(old_price, currency), "N/A"
         if old_amount <= 0:
-            return _money(old_price), "N/A"
+            return _money(old_price, currency), "N/A"
         delta = old_amount - new_amount
         percent = (delta / old_amount) * 100
-    change_label = f"−${float(delta):.2f} (−{float(percent):.1f}% vs prior sale)"
-    return _money(old_price), change_label
+    change_label = f"−{symbol}{float(delta):.2f} (−{float(percent):.1f}% vs prior sale)"
+    return _money(old_price, currency), change_label
 
 
 def _drop_part(change):
@@ -312,7 +317,7 @@ def _plain_cross_store(group):
                 mark = " (lowest)"
         except (TypeError, ValueError):
             mark = ""
-        lines.append(f"- {offer.get('store') or 'Unknown'}: {_money(price)}{mark}")
+        lines.append(f"- {offer.get('store') or 'Unknown'}: {_money(price, offer.get('currency'))}{mark}")
         if offer.get("url"):
             lines.append(f"  {offer['url']}")
     lines.append("")
@@ -332,8 +337,7 @@ def _html_warnings(digest):
         'font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid #fca5a5;">'
         '<p style="margin:0;font-size:15px;font-weight:700;color:#991b1b;">Store check failed</p>'
         '<p style="margin:6px 0 0;font-size:13px;line-height:1.5;color:#7f1d1d;">'
-        "These categories usually have sale items. The last two runs came back empty or failed. "
-        "A single empty run does not send this warning.</p>"
+        f"{escape(warnings_blurb(warnings, email=True))}</p>"
         '<ul style="margin:8px 0 0;padding-left:18px;color:#7f1d1d;font-size:13px;line-height:1.5;">'
         f"{''.join(items)}</ul></td></tr>"
     )
@@ -379,7 +383,7 @@ def _html_cross_store(digest):
             mark = " · lowest" if is_low else ""
             url = offer.get("url") or ""
             store = escape(offer.get("store") or "Unknown")
-            amount = escape(_money(price) + mark)
+            amount = escape(_money(price, offer.get("currency")) + mark)
             if url:
                 amount = f'<a href="{escape(url, quote=True)}" style="color:{color};text-decoration:underline;">{amount}</a>'
             offers.append(
@@ -439,7 +443,7 @@ def _plain_watch(digest):
             note = hit.get("note") or ""
             extra = f" · {note}" if note else ""
             lines.append(
-                f"- {_store_name(item)}: {_display_name(item)} · {_money(item.get('price_new'))}{extra}"
+                f"- {_store_name(item)}: {_display_name(item)} · {_money(item.get('price_new'), item.get('currency'))}{extra}"
             )
     lines.append("")
     return lines
@@ -501,8 +505,9 @@ def _html_watch(digest):
                 _product_link(_display_name(item), _product_url(item)),
                 _price_line(
                     item.get("price_new"),
-                    _money(item.get("price_old")) if item.get("price_old") else "N/A",
+                    _money(item.get("price_old"), item.get("currency")) if item.get("price_old") else "N/A",
                     calculate_percent_off(item.get("price_new"), item.get("price_old")),
+                    item.get("currency"),
                 ),
                 extra,
             )
@@ -525,8 +530,9 @@ def _html_watch(digest):
                 _product_link(_display_name(item), _product_url(item)),
                 _price_line(
                     item.get("price_new"),
-                    _money(item.get("price_old")) if item.get("price_old") else "N/A",
+                    _money(item.get("price_old"), item.get("currency")) if item.get("price_old") else "N/A",
                     calculate_percent_off(item.get("price_new"), item.get("price_old")),
+                    item.get("currency"),
                 ),
                 extra,
             )
@@ -572,9 +578,7 @@ def render_plain(digest, report_url, when=None, banner=None):
     warnings = _warnings(digest)
     if warnings:
         lines.append("STORE CHECK FAILED")
-        lines.append(
-            "These categories usually have sale items. The last two runs came back empty or failed."
-        )
+        lines.append(warnings_blurb(warnings, email=True))
         for warning in warnings:
             text = warning_text(warning) if isinstance(warning, dict) else str(warning)
             lines.append(f"- {text}")
@@ -620,14 +624,15 @@ def _plain_new(item):
     name = _display_name(item)
     url = _product_url(item)
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
-    original = _money(item.get("price_old")) if item.get("price_old") else "N/A"
+    currency = item.get("currency")
+    original = _money(item.get("price_old"), currency) if item.get("price_old") else "N/A"
     rows = [
         f"- {_store_name(item)}: {name}",
     ]
     if url:
         rows.append(f"  {url}")
     low = " · all-time low" if _is_atl(item) else ""
-    rows.append(f"  Sale {_money(item.get('price_new'))} · Original {original} · {_off_label(percent)}{low}")
+    rows.append(f"  Sale {_money(item.get('price_new'), currency)} · Original {original} · {_off_label(percent)}{low}")
     return rows
 
 
@@ -637,14 +642,15 @@ def _plain_drop(change):
     url = _product_url(item) or normalize_url(change.get("url", ""))
     sale = item.get("price_new", change.get("new"))
     original = item.get("price_old")
+    currency = item.get("currency")
     percent = calculate_percent_off(sale, original)
     prior, change_label = _drop_bits(change)
     rows = [f"- {_store_name(item)}: {name}"]
     if url:
         rows.append(f"  {url}")
     low = " · all-time low" if _is_atl(item, change) else ""
-    rows.append(f"  Sale {_money(sale)} · Prior sale {prior} · {change_label}{low}")
-    rows.append(f"  Original {_money(original) if original else 'N/A'} · {_off_label(percent)}")
+    rows.append(f"  Sale {_money(sale, currency)} · Prior sale {prior} · {change_label}{low}")
+    rows.append(f"  Original {_money(original, currency) if original else 'N/A'} · {_off_label(percent)}")
     return rows
 
 
@@ -779,15 +785,16 @@ def _product_link(name, url):
 def _html_new_row(item):
     name = _display_name(item)
     url = _product_url(item)
+    currency = item.get("currency")
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
-    original = _money(item.get("price_old")) if item.get("price_old") else "N/A"
+    original = _money(item.get("price_old"), currency) if item.get("price_old") else "N/A"
     return _html_card(
         _store_name(item),
         "New",
         "#dbeafe",
         "#1d4ed8",
         _product_link(name, url),
-        _price_line(item.get("price_new"), original, percent),
+        _price_line(item.get("price_new"), original, percent, currency),
         "",
         atl=_is_atl(item),
     )
@@ -799,8 +806,9 @@ def _html_drop_row(change):
     url = _product_url(item) or normalize_url(change.get("url", ""))
     sale = item.get("price_new", change.get("new"))
     original_raw = item.get("price_old")
+    currency = item.get("currency")
     percent = calculate_percent_off(sale, original_raw)
-    original = _money(original_raw) if original_raw else "N/A"
+    original = _money(original_raw, currency) if original_raw else "N/A"
     prior, change_label = _drop_bits(change)
     extra = (
         '<p style="margin:6px 0 0;font-size:13px;line-height:1.4;color:#166534;">'
@@ -812,14 +820,14 @@ def _html_drop_row(change):
         "#dcfce7",
         "#166534",
         _product_link(name, url),
-        _price_line(sale, original, percent),
+        _price_line(sale, original, percent, currency),
         extra,
         atl=_is_atl(item, change),
     )
 
 
-def _price_line(sale, original, percent):
-    sale_html = f'<strong style="color:#15803d;font-size:18px;">{escape(_money(sale))}</strong>'
+def _price_line(sale, original, percent, currency=None):
+    sale_html = f'<strong style="color:#15803d;font-size:18px;">{escape(_money(sale, currency))}</strong>'
     if original and original != "N/A":
         original_html = (
             '<span style="color:#64748b;font-size:14px;text-decoration:line-through;">'
