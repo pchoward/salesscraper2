@@ -811,25 +811,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
     chunks.append("</div>")
 
-    try:
-        chunks.append(_activity_html(sales, generated_at))
-    except Exception as exc:
-        logger.error("Retailer activity panel failed: %s", exc)
     if failed_keys:
         listed = ", ".join(escape(key) for key in failed_keys)
         chunks.append(
             f'<div class="notice">Scrape failed for {listed}. '
             "Previous listings for those categories were kept, and removals are hidden.</div>"
         )
-
-    try:
-        chunks.append(_atl_section(low_items, price_history))
-    except Exception as exc:
-        logger.error("All-time low section failed: %s", exc)
-    try:
-        chunks.append(_compare_section(groups))
-    except Exception as exc:
-        logger.error("Across-stores section failed: %s", exc)
 
     store_options = ['<option value="all">All stores</option>']
     for store in sorted(store_counts):
@@ -986,14 +973,25 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append("</div></div>")
 
     try:
+        chunks.append(_atl_section(low_items, price_history))
+    except Exception as exc:
+        logger.error("All-time low section failed: %s", exc)
+    try:
         chunks.append(_gone_section(price_history, data, today, failed_keys))
     except Exception as exc:
         logger.error("Recently gone section failed: %s", exc)
-
+    try:
+        chunks.append(_compare_section(groups))
+    except Exception as exc:
+        logger.error("Across-stores section failed: %s", exc)
     try:
         chunks.append(_stats_html(products, price_history))
     except Exception as exc:
         logger.error("Stats section failed: %s", exc)
+    try:
+        chunks.append(_activity_html(sales, generated_at))
+    except Exception as exc:
+        logger.error("Retailer activity panel failed: %s", exc)
 
     chunks.append(
         "<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. "

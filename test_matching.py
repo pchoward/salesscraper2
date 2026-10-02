@@ -226,7 +226,7 @@ class ReportSectionTests(unittest.TestCase):
         self.assertIn('id="compareSection"', html)
         self.assertIn('class="offer cheapest"', html)
         self.assertIn('data-store="SkateWarehouse"', html)
-        compare = html.split('id="compareSection"', 1)[1].split('id="searchInput"', 1)[0]
+        compare = html.split('id="compareSection"', 1)[1].split('id="retailerActivity"', 1)[0]
         self.assertIn("$50.00", compare)
         self.assertIn("$64.99", compare)
         self.assertNotIn("Real EMB", compare)
@@ -234,7 +234,7 @@ class ReportSectionTests(unittest.TestCase):
         self.assertEqual(compare.count('class="offer cheapest"'), 1)
         self.assertIn("ALL-TIME LOW", html)
         self.assertIn('id="atlSection"', html)
-        atl = html.split('id="atlSection"', 1)[1].split('id="compareSection"', 1)[0]
+        atl = html.split('id="atlSection"', 1)[1].split('id="goneSection"', 1)[0]
         self.assertIn("Baker Figgy Divine Evil", atl)
         self.assertNotIn("Brand New", atl)
         self.assertTrue(all_time_low_status(cheap, history)["flagged"])
