@@ -1,11 +1,13 @@
 # Skateboard Sale Scraper
 
-Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publishes a static HTML report. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
+Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, Tactics, and Skate Deluxe, then publishes a static HTML report. Muir Skate is wired into retailer activity but its scraper stays off while the Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
 
 ## Layout
 
 ```
-├── scraper.py                 # Selenium fetch + per-store parsers
+├── scraper.py                 # Runner: isolated stores, report, email
+├── schedule.py                # Backup cron no-op when today already succeeded
+├── stores/                    # One module per store, shared Scraper interface
 ├── filters.py                 # Shared allowlists and passes_filters()
 ├── report.py                  # Catalog diff and digest
 ├── page.py                    # Static report (inlines page.css and page.js)
@@ -33,6 +35,12 @@ Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publi
 ```
 
 The only workflow is `.github/workflows/scrape.yml`. It checks out the repo, installs Chrome, and runs `python scraper.py`.
+
+The morning cron is `17 7 * * *` (3:17 AM EDT), off the top of the hour. A backup cron at `43 9 * * *` runs only when that morning scrape did not already succeed for the US Eastern date. `schedule.py` reads `scrape_health.json` after checkout and sets `scrape=false` when today's Eastern date already has a run with at least one store/part that did not fail. Chrome, the scrape, and the commit are skipped. `workflow_dispatch` always scrapes. A failed or skipped morning run leaves no successful health row, so the backup scrapes.
+
+Each store runs on its own. An exception or a timeout (12 minutes) is logged, that store's parts are recorded as failed in `scrape_health.json`, and the other stores still finish. The report and the commit still happen. A failed part keeps the previous rows for that key.
+
+Skate Deluxe (`skatedeluxe.com`) has no US or USD storefront. Prices on the public shop are euros, shown with a euro sign, and are not converted. The scraper reads `/en/c/sale` over HTTP (the sale grid; the `/sale/skateboards/...` paths are the full-price categories). Decks, wheels, trucks, and bearings go through the same filters as the other stores. Muir Skate is implemented against Shopify `products.json` and covered by a fixture, but `ENABLED` is false: on 2026-10-02 `muirskate.com` returned "This store is unavailable" in headless Chrome, and the collection JSON endpoints 404. Retailer activity still lists both stores as no recorded site-wide sale.
 
 ## Filter rules
 
@@ -246,6 +254,7 @@ python test_watchlist.py
 python test_site_sales.py
 python test_dimensions.py
 python test_media.py
+python test_stores.py
 ```
 
 ## Before / after

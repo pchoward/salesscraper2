@@ -29,7 +29,7 @@ from filters import (
 )
 
 PART_ORDER = ("Decks", "Wheels", "Trucks", "Bearings")
-STORE_ORDER = ("Zumiez", "SkateWarehouse", "CCS", "Tactics")
+STORE_ORDER = ("Zumiez", "SkateWarehouse", "CCS", "Tactics", "Skate Deluxe", "Muir Skate")
 
 # Words that describe a line, a color, or a category. They are kept when a
 # real model word is present (so colorways stay apart) but a key made only
@@ -344,6 +344,9 @@ def cross_store_groups(items):
             "url": item.get("url") or "",
             "name": normalize_product_name(item.get("name") or ""),
         }
+        currency = item.get("currency")
+        if currency and str(currency).upper() != "USD":
+            offer["currency"] = currency
         current = buckets.setdefault(key, {}).get(store)
         if current is None or price < current["price"]:
             buckets[key][store] = offer

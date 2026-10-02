@@ -9,8 +9,9 @@ store's recent baseline:
 * at least 7 earlier days on record (so the first week cannot trip it).
 
 Skate Warehouse is seeded at 2026-07-04. A detected day replaces the seed
-only when it is later. The date never moves backward. Other stores stay
-"not recorded" until a day clears the threshold.
+only when it is later. The date never moves backward. Other stores, including
+Skate Deluxe and Muir Skate, stay "not recorded" until a day clears the
+threshold.
 
 Daily counts are kept about 120 days. The last-sale date is stored on its
 own, so it survives after those counts age out.
@@ -26,7 +27,7 @@ from filters import item_passes_filters
 logger = logging.getLogger("site_sales")
 
 SITE_SALES_PATH = "site_sales.json"
-STORES = ("Zumiez", "SkateWarehouse", "CCS", "Tactics")
+STORES = ("Zumiez", "SkateWarehouse", "CCS", "Tactics", "Skate Deluxe", "Muir Skate")
 SEEDS = {"SkateWarehouse": "2026-07-04"}
 
 SPIKE_MULTIPLIER = 2.5
@@ -233,6 +234,8 @@ DISPLAY_NAMES = {
     "SkateWarehouse": "Skate Warehouse",
     "CCS": "CCS",
     "Tactics": "Tactics",
+    "Skate Deluxe": "Skate Deluxe",
+    "Muir Skate": "Muir Skate",
 }
 
 

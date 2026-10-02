@@ -451,7 +451,11 @@ class WiringTests(unittest.TestCase):
     def test_workflow_passes_secrets_and_keeps_cron(self):
         with open(".github/workflows/scrape.yml", encoding="utf-8") as handle:
             text = handle.read()
-        self.assertIn("cron: '0 8 * * *'", text)
+        self.assertIn("cron: '17 7 * * *'", text)
+        self.assertIn("cron: '43 9 * * *'", text)
+        self.assertIn("workflow_dispatch:", text)
+        self.assertIn("python3 schedule.py", text)
+        self.assertNotIn("cron: '0 8 * * *'", text)
         for name in (
             "SMTP_HOST",
             "SMTP_PORT",
