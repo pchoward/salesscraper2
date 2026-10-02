@@ -335,6 +335,14 @@ def _atl_section(low_items, history):
     return "\n".join(rows)
 
 
+def _euro_note(groups):
+    for group in groups or []:
+        for offer in group.get("offers") or []:
+            if offer.get("store") == "Skate Deluxe":
+                return " Skate Deluxe prices are euros (no US dollar storefront) and are not converted."
+    return ""
+
+
 def _compare_section(groups):
     if not groups:
         return ""
@@ -345,8 +353,8 @@ def _compare_section(groups):
         '<span class="toggle-icon">▼</span></div>',
         '<div class="section-content">',
         '<p class="lede">Same brand, model, and size at two or more stores. '
-        "The lowest price is highlighted. Matching is conservative, so some real duplicates stay separate. "
-        "Skate Deluxe prices are euros (no US dollar storefront) and are not converted.</p>",
+        "The lowest price is highlighted. Matching is conservative, so some real duplicates stay separate."
+        f"{_euro_note(groups)}</p>",
         '<div class="compare-grid">',
     ]
     for group in groups:
@@ -988,8 +996,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         logger.error("Stats section failed: %s", exc)
 
     chunks.append(
-        "<footer><p>Zumiez, Skate Warehouse, CCS, Tactics, and Skate Deluxe (euros; no US storefront). "
-        "Muir Skate is listed under retailer activity and stays out of the scrape while its Shopify storefront is unavailable. "
+        "<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. "
+        "Skate Deluxe is EUR-only and ships from Europe, so it stays out of the scrape. "
+        "Muir Skate stays out while its Shopify storefront is unavailable. "
+        "Both still appear under retailer activity with no recorded site-wide sale. "
         "Decks stay at 10% off or more for known street brands and 15% otherwise, "
         "7.5 inches and wider. Named cruiser and longboard listings are still excluded. "
         f"{escape(FORMULA)} "

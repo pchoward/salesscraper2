@@ -12,6 +12,8 @@ from report import Digest, build_report_html
 from schedule import BACKUP_CRON, already_succeeded_today, gate_should_scrape
 from site_sales import activity_line, describe_sales, empty_state
 from stores.muirskate import DISABLED_REASON, ENABLED, MuirSkateScraper
+from stores.skatedeluxe import DISABLED_REASON as DELUXE_REASON
+from stores.skatedeluxe import ENABLED as DELUXE_ENABLED
 from stores.registry import build_scrapers
 from stores.zumiez import ZumiezScraper, grid_loaded
 from stores.runner import run_stores
@@ -118,12 +120,15 @@ class MuirParserTests(unittest.TestCase):
         self.assertEqual([item["name"] for item in self.by_part["Trucks"]], ["Independent Stage 11 144 Truck"])
         self.assertEqual([item["name"] for item in self.by_part["Bearings"]], ["Bones Reds Bearings"])
 
-    def test_muir_is_disabled_until_the_storefront_answers(self):
+    def test_muir_and_skate_deluxe_stay_out_of_the_live_run(self):
         self.assertFalse(ENABLED)
         self.assertIn("unavailable", DISABLED_REASON.lower())
+        self.assertFalse(DELUXE_ENABLED)
+        self.assertIn("EUR-only European store", DELUXE_REASON)
+        self.assertIn("2026-10-02", DELUXE_REASON)
         names = {scraper.name for scraper in build_scrapers()}
-        self.assertIn("Skate Deluxe", names)
         self.assertIn("Zumiez", names)
+        self.assertNotIn("Skate Deluxe", names)
         self.assertNotIn("Muir Skate", names)
 
 

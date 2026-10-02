@@ -1,6 +1,6 @@
 # Skateboard Sale Scraper
 
-Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, Tactics, and Skate Deluxe, then publishes a static HTML report. Muir Skate is wired into retailer activity but its scraper stays off while the Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
+Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publishes a static HTML report. Skate Deluxe and Muir Skate stay in retailer activity, but both scrapers are off: Skate Deluxe is EUR-only and ships from Europe, and Muir Skate's Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
 
 ## Layout
 
@@ -40,7 +40,7 @@ The morning cron is `17 7 * * *` (3:17 AM EDT), off the top of the hour. A backu
 
 Each store runs on its own. An exception or a timeout (12 minutes) is logged, that store's parts are recorded as failed in `scrape_health.json`, and the other stores still finish. The report and the commit still happen. A failed part keeps the previous rows for that key.
 
-Skate Deluxe (`skatedeluxe.com`) has no US or USD storefront. Prices on the public shop are euros, shown with a euro sign, and are not converted. The scraper reads `/en/c/sale` over HTTP (the sale grid; the `/sale/skateboards/...` paths are the full-price categories). Decks, wheels, trucks, and bearings go through the same filters as the other stores. Muir Skate is implemented against Shopify `products.json` and covered by a fixture, but `ENABLED` is false: on 2026-10-02 `muirskate.com` returned "This store is unavailable" in headless Chrome, and the collection JSON endpoints 404. Retailer activity still lists both stores as no recorded site-wide sale.
+Skate Deluxe (`skatedeluxe.com`) has no US or USD storefront. Prices on the public shop are euros and the site ships from Europe. `ENABLED` is false (`EUR-only European store; disabled by owner 2026-10-02`). The parser still reads `/en/c/sale` and is covered by a fixture, but the live run does not call it. Muir Skate is implemented against Shopify `products.json` and covered by a fixture, but `ENABLED` is false: on 2026-10-02 `muirskate.com` returned "This store is unavailable" in headless Chrome, and the collection JSON endpoints 404. Retailer activity still lists both stores as no recorded site-wide sale.
 
 ## Filter rules
 

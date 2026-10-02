@@ -1,9 +1,9 @@
 """Skate Deluxe sale listings.
 
-skatedeluxe.com has no US storefront and no USD prices. The public shop is
-euros (the page reports country DE / currency EUR) and the site says it does
-not ship to the United States. Sale prices are stored as euro amounts with
-``currency`` set to ``EUR`` so the report can show a euro sign.
+Disabled. The public shop is euros and ships from Europe, so the owner turned
+it off on 2026-10-02. Set ``ENABLED`` to true to scrape again. The parser
+still reads ``/en/c/sale`` and stores euro amounts with ``currency`` set to
+``EUR``.
 
 The real sale catalog is ``/en/c/sale`` (every card on that listing has a
 previous price). The ``/en/c/sale/skateboards/...`` paths canonicalize to the
@@ -32,6 +32,8 @@ STORE = "Skate Deluxe"
 SALE_URL = "https://www.skatedeluxe.com/en/c/sale"
 BASE = "https://www.skatedeluxe.com"
 CURRENCY = "EUR"
+ENABLED = False
+DISABLED_REASON = "EUR-only European store; disabled by owner 2026-10-02"
 MAX_PAGES = 120
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -254,6 +256,9 @@ class SkateDeluxeScraper(Scraper):
         self.catalog = catalog
 
     def scrape(self):
+        if not ENABLED:
+            logger.error("Skate Deluxe is disabled: %s", DISABLED_REASON)
+            return None
         cards = self.catalog.cards()
         return self._from_cards(cards)
 
