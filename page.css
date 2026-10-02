@@ -57,6 +57,23 @@ button.stat-card:hover, .stat-card.emphasis { outline: none; }
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
+.stat-card.is-warn {
+    border-color: #fdba74;
+    background: #fff7ed;
+}
+.stat-card.is-warn .number { color: #c2410c; }
+.warn-badge {
+    display: inline-block;
+    margin-top: 0.25rem;
+    background: #ea580c;
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 0.08rem 0.4rem;
+}
 .notice, .sale-ages {
     background: #fff7ed;
     border: 1px solid #fdba74;

@@ -8,10 +8,12 @@ import time
 import unittest
 from zoneinfo import ZoneInfo
 
+from report import Digest, build_report_html
 from schedule import BACKUP_CRON, already_succeeded_today, gate_should_scrape
 from site_sales import activity_line, describe_sales, empty_state
 from stores.muirskate import DISABLED_REASON, ENABLED, MuirSkateScraper
 from stores.registry import build_scrapers
+from stores.zumiez import ZumiezScraper, grid_loaded
 from stores.runner import run_stores
 from stores.skatedeluxe import (
     SkateDeluxeScraper,
@@ -221,6 +223,67 @@ class BackupGateTests(unittest.TestCase):
         self.assertTrue(gate_should_scrape("schedule", "43 9 * * *", failed, now=now))
         missing = self._health({"Zumiez_Decks": {"count": 4, "failed": False}}, "2026-10-01T07:20:00+00:00")
         self.assertTrue(gate_should_scrape("schedule", BACKUP_CRON, missing, now=now))
+
+
+class ZumiezEmptyPageTests(unittest.TestCase):
+    def test_shell_page_is_not_a_real_empty_catalog(self):
+        shell = "<html><a href='/skate/skateboard-decks.html'>Decks</a><p>You need to enable JavaScript</p></html>"
+        self.assertFalse(grid_loaded(shell))
+        self.assertFalse(grid_loaded(""))
+        self.assertTrue(grid_loaded("<html><p class='CategoryPage-ItemsCount'>0 items found</p></html>"))
+        card = (
+            "<html><ul><li class='ProductCard ProductCard_layout_grid'>"
+            "<a class='ProductCard-Link' href='/skate/deck.html'>"
+            "<span class='ProductCard-Name'>Baker Figgy 8.25 Deck</span></a>"
+            "<span class='ProductPrice-PriceValue'>$29.99</span>"
+            "<span class='ProductCardPrice-HighPrice'>$64.99</span>"
+            "</li></ul></html>"
+        )
+        self.assertTrue(grid_loaded(card))
+        scraper = ZumiezScraper("Zumiez", "https://www.zumiez.com/example", "Decks")
+        parsed = scraper.parse(card)
+        self.assertEqual(len(parsed), 1)
+        self.assertEqual(parsed[0]["store"], "Zumiez")
+        self.assertEqual(parsed[0]["price_new"], "29.99")
+
+    def test_zero_deal_store_card_stays_visible_with_a_warning(self):
+        deck = {
+            "name": "Baker Figgy Divine Evil Deck 8.25",
+            "url": "https://example.com/ccs",
+            "price_new": "40.00",
+            "price_old": "60.00",
+            "part": "Decks",
+            "store": "CCS",
+        }
+        warning = {
+            "store": "Zumiez",
+            "part": "all categories",
+            "kind": "suspect",
+            "dates": ["2026-10-02"],
+            "last_positive_date": "2026-10-01",
+            "last_positive_count": 27,
+        }
+        html = build_report_html(
+            {
+                "Zumiez_Decks": [],
+                "Zumiez_Wheels": [],
+                "Zumiez_Trucks": [],
+                "CCS_Decks": [deck],
+            },
+            {},
+            generated_at="2026-10-02T11:38:00+00:00",
+            digest=Digest(warnings=[warning]),
+        )
+        grid = html.split('class="stats-grid"', 1)[1].split('class="activity"', 1)[0]
+        self.assertIn('data-store="Zumiez"', grid)
+        zumiez = grid.split('data-store="Zumiez"', 1)[1].split("</button>", 1)[0]
+        self.assertIn(">0<", zumiez)
+        self.assertIn("warn-badge", zumiez)
+        self.assertIn("Warning", zumiez)
+        ccs = grid.split('data-store="CCS"', 1)[1].split("</button>", 1)[0]
+        self.assertNotIn("warn-badge", ccs)
+        self.assertIn("returned no items in any category", html)
+        self.assertIn("marked suspect", html)
 
 
 class RetailerActivityTests(unittest.TestCase):

@@ -22,7 +22,7 @@ from email.message import EmailMessage
 from html import escape
 
 from filters import calculate_percent_off, item_passes_filters, normalize_product_name, normalize_url
-from health import warning_text
+from health import warning_text, warnings_blurb
 from report import Digest
 from site_sales import activity_line
 
@@ -337,8 +337,7 @@ def _html_warnings(digest):
         'font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid #fca5a5;">'
         '<p style="margin:0;font-size:15px;font-weight:700;color:#991b1b;">Store check failed</p>'
         '<p style="margin:6px 0 0;font-size:13px;line-height:1.5;color:#7f1d1d;">'
-        "These categories usually have sale items. The last two runs came back empty or failed. "
-        "A single empty run does not send this warning.</p>"
+        f"{escape(warnings_blurb(warnings, email=True))}</p>"
         '<ul style="margin:8px 0 0;padding-left:18px;color:#7f1d1d;font-size:13px;line-height:1.5;">'
         f"{''.join(items)}</ul></td></tr>"
     )
@@ -579,9 +578,7 @@ def render_plain(digest, report_url, when=None, banner=None):
     warnings = _warnings(digest)
     if warnings:
         lines.append("STORE CHECK FAILED")
-        lines.append(
-            "These categories usually have sale items. The last two runs came back empty or failed."
-        )
+        lines.append(warnings_blurb(warnings, email=True))
         for warning in warnings:
             text = warning_text(warning) if isinstance(warning, dict) else str(warning)
             lines.append(f"- {text}")

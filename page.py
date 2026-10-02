@@ -25,7 +25,7 @@ from filters import (
     normalize_url,
     percent_off_value,
 )
-from health import warning_text
+from health import warning_text, warnings_blurb
 from history import (
     STAGE_LABEL,
     all_time_low_status,
@@ -294,8 +294,7 @@ def _alert_html(warnings):
     return (
         '<div class="alert" id="storeAlerts" role="status">'
         "<strong>Store check failed</strong>"
-        "<p>These categories usually have sale items. The last two runs came back empty or failed. "
-        "A single empty run does not raise this warning.</p>"
+        f"<p>{escape(warnings_blurb(warnings))}</p>"
         f"<ul>{''.join(items)}</ul></div>"
     )
 
@@ -779,12 +778,28 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="stat-card" data-card="clear" onclick="toggleCard(\'clear\')">'
         f'<div class="number">{len(records)}</div><div class="label">Tracked deals</div></button>'
     )
-    for store, count in sorted(store_counts.items()):
+    suspect_stores = set()
+    for warning in warnings:
+        if isinstance(warning, dict) and warning.get("kind") == "suspect" and warning.get("store"):
+            suspect_stores.add(warning["store"])
+    store_names = []
+    for key in data or {}:
+        store_name = str(key).rsplit("_", 1)[0]
+        if store_name and store_name not in store_names:
+            store_names.append(store_name)
+    for store_name in store_counts:
+        if store_name not in store_names:
+            store_names.append(store_name)
+    for store in sorted(store_names):
+        count = store_counts.get(store, 0)
+        warn = store in suspect_stores or count == 0
+        card_class = "stat-card is-warn" if warn else "stat-card"
+        badge = '<span class="warn-badge">Warning</span>' if warn else ""
         chunks.append(
-            '<button type="button" class="stat-card" data-card="store" '
+            f'<button type="button" class="{card_class}" data-card="store" '
             f'data-store="{escape(store, quote=True)}" aria-pressed="false" '
             f"onclick=\"toggleCard('store', '{escape(store, quote=True)}')\">"
-            f'<div class="number">{count}</div><div class="label">{escape(store)}</div></button>'
+            f'<div class="number">{count}</div><div class="label">{escape(store)}</div>{badge}</button>'
         )
     chunks.append("</div>")
 

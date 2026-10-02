@@ -12,7 +12,7 @@ import logging
 import os
 import sys
 
-from health import HEALTH_PATH, load_state, state_json
+from health import HEALTH_PATH, empty_store_keys, load_state, state_json
 from notify import send_digest
 from pipeline import apply_run_updates, decorate_digest
 from report import build_digest, build_report_html, compare_catalogs
@@ -105,10 +105,21 @@ def main():
     curr_data, failed_keys = run_stores(scrapers)
     _log_filter_counts(scrapers, curr_data)
 
+    health_before = load_state()
+    suspect_keys = empty_store_keys(curr_data, failed_keys, health_before)
+    if suspect_keys:
+        logging.error(
+            "Store returned no items in any category that normally has sales; marking suspect: %s",
+            ", ".join(sorted(suspect_keys)),
+        )
+        failed_keys.update(suspect_keys)
+
     for key, items in list(curr_data.items()):
-        if items is None:
+        if items is None or key in suspect_keys:
             failed_keys.add(key)
             retained = prev_data.get(key, [])
+            if not isinstance(retained, list):
+                retained = []
             curr_data[key] = retained
             logging.warning("Scrape failed for %s; retaining %s previous items", key, len(retained))
 
@@ -137,6 +148,7 @@ def main():
             health,
             site_sales=site_sales,
             scanned_at=scanned_at,
+            suspect_keys=suspect_keys,
         )
         updates["save_history"] = False
         updates["history"] = {}
@@ -148,6 +160,7 @@ def main():
             health,
             site_sales=site_sales,
             scanned_at=scanned_at,
+            suspect_keys=suspect_keys,
         )
     if updates.get("save_history"):
         save_price_history(updates["history"])

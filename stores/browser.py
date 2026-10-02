@@ -18,7 +18,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from stores.errors import StoreTimeout
 from stores.files import safe_write_file
 
-def fetch_page(url, max_retries=3, timeout=30):
+def fetch_page(url, max_retries=3, timeout=30, ready_selector=None):
     ua = UserAgent()
     
     for attempt in range(max_retries):
@@ -119,15 +119,27 @@ def fetch_page(url, max_retries=3, timeout=30):
                 driver.quit()
                 continue
 
+            listing_selector = "li.ProductCard, .product-card, .product-item, a[href*='deck'], a[href*='wheels'], a[href*='truck'], a[href*='bearings'], .product-grid__item"
             try:
                 WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, "li.ProductCard, .product-card, .product-item, a[href*='deck'], a[href*='wheels'], a[href*='truck'], a[href*='bearings'], .product-grid__item"))
+                    EC.presence_of_element_located((By.CSS_SELECTOR, listing_selector))
                 )
                 logging.info("Product listings detected")
             except StoreTimeout:
                 raise
             except Exception as e:
                 logging.warning(f"Could not detect product listings: {e}")
+
+            if ready_selector:
+                try:
+                    WebDriverWait(driver, 20).until(
+                        EC.presence_of_element_located((By.CSS_SELECTOR, ready_selector))
+                    )
+                    logging.info("Ready selector matched: %s", ready_selector)
+                except StoreTimeout:
+                    raise
+                except Exception as e:
+                    logging.warning("Ready selector not found (%s): %s", ready_selector, e)
 
             logging.info("Attempting infinite scroll")
             max_scroll_attempts = 3
@@ -138,7 +150,7 @@ def fetch_page(url, max_retries=3, timeout=30):
                 driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
                 time.sleep(random.uniform(1, 2))
                 
-                current_items = len(driver.find_elements(By.CSS_SELECTOR, "li.ProductCard, .product-card, .product-item, a[href*='deck'], a[href*='wheels'], a[href*='truck'], a[href*='bearings'], .product-grid__item"))
+                current_items = len(driver.find_elements(By.CSS_SELECTOR, listing_selector))
                 logging.info(f"Scroll attempt {scroll_attempts + 1}: found {current_items} items")
 
                 current_url = driver.current_url

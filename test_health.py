@@ -6,7 +6,10 @@ import unittest
 from health import (
     MAX_RUNS,
     broken_store_warnings,
+    empty_store_keys,
     record_run,
+    results_from_run,
+    suspect_store_warnings,
     warning_text,
 )
 
@@ -102,6 +105,56 @@ class BrokenStoreTests(unittest.TestCase):
         warnings = broken_store_warnings(state)
         self.assertEqual(len(warnings), 1)
         self.assertEqual(warnings[0]["last_positive_count"], 5)
+
+    def test_whole_store_empty_is_suspect_on_the_first_run(self):
+        health = {
+            "runs": [],
+            "baseline": {
+                "Zumiez_Decks": {"date": "2026-10-01", "count": 11},
+                "Zumiez_Wheels": {"date": "2026-10-01", "count": 5},
+                "Zumiez_Trucks": {"date": "2026-10-01", "count": 11},
+            },
+        }
+        current = {
+            "Zumiez_Decks": [],
+            "Zumiez_Wheels": [],
+            "Zumiez_Trucks": [],
+            "Zumiez_Bearings": [],
+            "CCS_Decks": [{"name": "kept"}],
+            "CCS_Wheels": [],
+        }
+        flagged = empty_store_keys(current, set(), health)
+        self.assertEqual(
+            set(flagged),
+            {"Zumiez_Decks", "Zumiez_Wheels", "Zumiez_Trucks", "Zumiez_Bearings"},
+        )
+        self.assertNotIn("CCS_Decks", flagged)
+        self.assertNotIn("CCS_Wheels", flagged)
+        warnings = suspect_store_warnings(flagged, health, "2026-10-02")
+        self.assertEqual(len(warnings), 1)
+        self.assertEqual(warnings[0]["kind"], "suspect")
+        self.assertEqual(warnings[0]["store"], "Zumiez")
+        self.assertEqual(warnings[0]["last_positive_count"], 27)
+        text = warning_text(warnings[0])
+        self.assertIn("no items in any category", text)
+        self.assertIn("2026-10-01", text)
+        self.assertIn("27", text)
+        results = results_from_run(current, set(), flagged)
+        state = record_run(health, "2026-10-02", results)
+        self.assertTrue(state["runs"][-1]["results"]["Zumiez_Decks"]["suspect"])
+        self.assertTrue(state["runs"][-1]["results"]["Zumiez_Decks"]["failed"])
+        self.assertEqual(state["runs"][-1]["results"]["Zumiez_Decks"]["count"], 0)
+        self.assertFalse(state["runs"][-1]["results"]["CCS_Decks"]["failed"])
+        self.assertEqual(state["baseline"]["Zumiez_Decks"]["count"], 11)
+
+    def test_one_empty_category_does_not_flag_the_store(self):
+        health = {"runs": [], "baseline": {"Zumiez_Decks": {"date": "2026-10-01", "count": 11}}}
+        current = {"Zumiez_Decks": [{"name": "kept"}], "Zumiez_Bearings": []}
+        self.assertEqual(empty_store_keys(current, set(), health), [])
+
+    def test_new_store_with_no_baseline_is_not_suspect(self):
+        current = {"Skate Deluxe_Decks": [], "Skate Deluxe_Wheels": []}
+        self.assertEqual(empty_store_keys(current, set(), {"runs": [], "baseline": {}}), [])
 
     def test_workflow_commits_health_file(self):
         with open(".github/workflows/scrape.yml", encoding="utf-8") as handle:
