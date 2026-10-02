@@ -371,5 +371,53 @@ class ReportPolishTests(unittest.TestCase):
         self.assertIn("Retailer activity", html)
 
 
+class DigestDefaultTests(unittest.TestCase):
+    def test_fresh_page_selects_all_deals_and_not_a_digest_chip(self):
+        html = build_report_html(
+            {"Zumiez_Decks": [_deck()]},
+            {},
+            generated_at="2026-10-02T00:39:32+00:00",
+        )
+        line = html.split('id="changeLine"', 1)[1].split("</p>", 1)[0]
+        self.assertLess(line.find('id="btnAll"'), line.find('id="btnNew"'))
+        self.assertLess(line.find('id="btnNew"'), line.find('id="btnDrop"'))
+        self.assertLess(line.find('id="btnDrop"'), line.find('id="btnLow"'))
+        self.assertLess(line.find('id="btnLow"'), line.find('id="btnGone"'))
+        self.assertIn('data-change="all"', line)
+        self.assertIn(">All deals</button>", line)
+        all_tag = line[line.find("<button"):line.find("</button>")]
+        self.assertIn('id="btnAll"', all_tag)
+        self.assertIn('aria-pressed="true"', all_tag)
+        for chip in ("btnNew", "btnDrop", "btnLow", "btnGone"):
+            start = line.find(f'id="{chip}"')
+            tag = line[line.rfind("<button", 0, start):line.find(">", start)]
+            self.assertIn('aria-pressed="false"', tag, chip)
+            self.assertNotIn('aria-pressed="true"', tag, chip)
+        self.assertIn('aria-label="Digest baseline"', html)
+        self.assertNotIn(
+            '.change-btn[aria-pressed="true"], .mode-btn[aria-pressed="true"]',
+            html,
+        )
+        self.assertNotIn('if (state.change === "removed") return false', html)
+        self.assertNotIn("deals.hidden", html)
+        self.assertNotIn('snapshot.change === "new"', html)
+        self.assertNotIn("state.cardNew = state.change", html)
+        self.assertIn('kind === "all" || state.change === kind', html)
+        blank = decode_query("")
+        self.assertEqual(blank["change"], "all")
+        self.assertFalse(blank["added"])
+        self.assertFalse(blank["dropped"])
+        self.assertFalse(blank["low"])
+        self.assertEqual(encode_state(blank), "")
+        cards = decode_query("added=1&dropped=1&low=1")
+        self.assertEqual(cards["change"], "all")
+        self.assertTrue(cards["added"] and cards["dropped"] and cards["low"])
+        self.assertEqual(encode_state({"change": "new"}), "change=new")
+        self.assertEqual(encode_state({"added": True, "change": "all"}), "added=1")
+        watched = decode_query("watching=1&low=1")
+        self.assertEqual(watched["change"], "all")
+        self.assertTrue(watched["low"])
+
+
 if __name__ == "__main__":
     unittest.main()

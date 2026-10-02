@@ -727,21 +727,28 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         chunks.append(alert)
 
     chunks.append(
-        '<p class="lede" id="changeLine" '
+        '<p class="lede digest" id="changeLine" '
         f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}">'
-        "Digest of what changed. "
-        '<span id="changePrefix">Since yesterday:</span> '
-        f'<button type="button" class="change-btn" id="btnNew" data-change="new" onclick="setChange(\'new\')">'
+        '<span class="digest-label">Digest of what changed. '
+        '<span id="changePrefix">Since yesterday:</span></span> '
+        '<button type="button" class="change-btn active" id="btnAll" data-change="all" '
+        'aria-pressed="true" onclick="setChange(\'all\')">All deals</button> '
+        f'<button type="button" class="change-btn" id="btnNew" data-change="new" aria-pressed="false" '
+        f"onclick=\"setChange('new')\">"
         f"{escape(_plural(new_count, 'new deal', 'new deals'))}</button> "
-        f'<button type="button" class="change-btn" id="btnDrop" data-change="drop" onclick="setChange(\'drop\')">'
+        f'<button type="button" class="change-btn" id="btnDrop" data-change="drop" aria-pressed="false" '
+        f"onclick=\"setChange('drop')\">"
         f"{escape(_plural(drop_count, 'price drop', 'price drops'))}</button> "
-        f'<button type="button" class="change-btn" id="btnLow" data-change="lowest" onclick="setChange(\'lowest\')">'
+        f'<button type="button" class="change-btn" id="btnLow" data-change="lowest" aria-pressed="false" '
+        f"onclick=\"setChange('lowest')\">"
         f"{hit_count} hit lowest tracked price</button> "
-        f'<button type="button" class="change-btn" id="btnGone" data-change="removed" onclick="setChange(\'removed\')">'
+        f'<button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" '
+        f"onclick=\"setChange('removed')\">"
         f"{escape(_plural(gone_count, 'deal disappeared', 'deals disappeared'))}</button></p>"
     )
     chunks.append(
-        '<div class="mode">'
+        '<div class="mode" role="group" aria-label="Digest baseline">'
+        '<span class="mode-label">Baseline</span>'
         '<button type="button" class="mode-btn" id="modeYesterday" aria-pressed="true" '
         'onclick="setVisitMode(\'yesterday\')">Since yesterday</button>'
         '<button type="button" class="mode-btn" id="modeVisit" aria-pressed="false" '

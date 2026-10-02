@@ -9,6 +9,8 @@ let state = {
     cardNew: false,
     cardDrop: false,
     cardLow: false,
+    // Digest chip. "all" is the default and is not a table filter.
+    // visitMode only chooses which baseline those counts use.
     change: "all",
     grouped: false,
     visitMode: "yesterday",
@@ -217,7 +219,9 @@ function paintCards() {
         card.setAttribute("aria-pressed", on ? "true" : "false");
     });
     document.querySelectorAll("[data-change]").forEach(button => {
-        button.setAttribute("aria-pressed", button.getAttribute("data-change") === state.change ? "true" : "false");
+        const on = button.getAttribute("data-change") === state.change;
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+        button.classList.toggle("active", on);
     });
 }
 
@@ -247,7 +251,7 @@ function rowMatches(row) {
     if (state.change === "new" && added !== "1") return false;
     if (state.change === "drop" && drop !== "1") return false;
     if (state.change === "lowest" && low !== "1") return false;
-    if (state.change === "removed") return false;
+    // "removed" opens Recently gone. It does not hide current deals.
     return true;
 }
 
@@ -301,10 +305,7 @@ function applyFilters() {
     dealRows().forEach(row => {
         row.classList.toggle("filtered-out", !rowMatches(row));
     });
-    const removedOn = state.change === "removed";
-    const deals = document.getElementById("dealsSection");
-    if (deals) deals.hidden = removedOn;
-    showGone(removedOn);
+    showGone(state.change === "removed");
     applyGroupVisibility();
     syncDetails();
     paintCards();
@@ -371,10 +372,9 @@ function toggleCard(kind, store) {
 }
 
 function setChange(kind) {
-    state.change = state.change === kind ? "all" : kind;
-    if (kind === "new") state.cardNew = state.change === "new";
-    if (kind === "drop") state.cardDrop = state.change === "drop";
-    if (kind === "lowest") state.cardLow = state.change === "lowest";
+    // Summary cards stay independent. Choosing a digest chip does not press them.
+    if (!kind || kind === "all" || state.change === kind) state.change = "all";
+    else state.change = kind;
     applyFilters();
     if (state.change === "removed") {
         const gone = document.getElementById("goneSection");
@@ -538,6 +538,8 @@ function setVisitMode(mode) {
 }
 
 function prepareVisit() {
+    // The saved snapshot is only the last-visit baseline for digest counts.
+    // It is not a filter, and it is not restored into state.change.
     const data = catalog();
     const previous = readJson(SNAP_KEY, null);
     const current = {};
@@ -935,9 +937,11 @@ function writeControls(snapshot) {
     state.change = snapshot.change || "all";
     state.watching = !!snapshot.watching;
     state.grouped = !!snapshot.grouped;
-    state.cardLow = !!snapshot.low || snapshot.change === "lowest";
-    state.cardNew = !!snapshot.added || snapshot.change === "new";
-    state.cardDrop = !!snapshot.dropped || snapshot.change === "drop";
+    // Card flags come only from added/dropped/low. A change= param must not
+    // also turn a summary card on, and a card param must not select a digest chip.
+    state.cardLow = !!snapshot.low;
+    state.cardNew = !!snapshot.added;
+    state.cardDrop = !!snapshot.dropped;
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
     const grouped = document.getElementById("groupToggle");
@@ -1282,7 +1286,13 @@ function init() {
     updateChangeLine();
     paintViews();
     if (location.search && location.search.length > 1) loadFromUrl();
-    else applyFilters();
+    else {
+        state.change = "all";
+        state.cardNew = false;
+        state.cardDrop = false;
+        state.cardLow = false;
+        applyFilters();
+    }
 }
 
 document.addEventListener("DOMContentLoaded", init);
