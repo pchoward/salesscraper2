@@ -37,12 +37,16 @@ STALE_AFTER_DAYS = 180
 MIN_ATL_OBSERVATIONS = 3
 MIN_ATL_SPAN_DAYS = 7
 RECENTLY_GONE_DAYS = 7
-STAGES = ("new", "price_drop", "all_time_low", "sold_out", "gone")
+# One empty scan is not a disappearance. The next successful scan of that
+# same store and category has to miss the listing too.
+GONE_AFTER_MISSES = 2
+STAGES = ("new", "price_drop", "all_time_low", "sold_out", "unlisted", "gone")
 STAGE_LABEL = {
     "new": "NEW",
     "price_drop": "PRICE DROP",
     "all_time_low": "ALL-TIME LOW",
     "sold_out": "SOLD OUT",
+    "unlisted": "NO LONGER LISTED",
     "gone": "GONE",
 }
 
@@ -59,6 +63,8 @@ _ENTRY_FIELDS = (
     "all_time_low",
     "all_time_low_date",
     "stage",
+    "miss_streak",
+    "stock",
 )
 
 
@@ -217,6 +223,15 @@ def _ordered_entry(entry):
             continue
         if field == "stage" and value not in STAGES:
             continue
+        if field == "miss_streak":
+            try:
+                value = int(value)
+            except (TypeError, ValueError):
+                continue
+            if value < 1:
+                continue
+        if field == "stock" and value != "out_of_stock":
+            continue
         ordered[field] = value
     ordered.update(_media_fields(entry))
     ordered["prices"] = _clean_prices(entry.get("prices"))
@@ -249,16 +264,17 @@ def _note_price(entry, day, price):
     return entry
 
 
-def update_price_history(current_data, history, today=None, skip_keys=None):
+def update_price_history(current_data, history, today=None, skip_keys=None, skip_urls=None):
     """Add today's sale price for listings that were actually scraped.
 
-    ``skip_keys`` are store/part scrapes that failed. Retained previous rows
-    are not treated as a new observation.
+    ``skip_keys`` are store/part scrapes that failed. ``skip_urls`` were kept
+    in the catalog after a single miss and are not a new observation.
     """
     if not isinstance(history, dict):
         raise TypeError("price history must be a dict")
     day = _date_str(today or datetime.date.today())
     skip = set(skip_keys or [])
+    carried = {normalize_url(url) for url in (skip_urls or []) if normalize_url(url)}
     for site_key, items in (current_data or {}).items():
         if site_key in skip:
             continue
@@ -267,7 +283,7 @@ def update_price_history(current_data, history, today=None, skip_keys=None):
                 continue
             url = normalize_url(item.get("url"))
             price = _round_price(item.get("price_new"))
-            if not url or price is None:
+            if not url or price is None or url in carried:
                 continue
             entry = history.get(url)
             if not isinstance(entry, dict):
@@ -552,15 +568,29 @@ def freshly_reduced(entry, today=None):
     return _cents(prior) > _cents(info["price"])
 
 
+def _miss_streak(entry):
+    try:
+        return int((entry or {}).get("miss_streak") or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
 def listing_stage(entry, present, today=None, at_low=False):
     """Current lifecycle stage for one listing.
 
     Present listings are NEW, PRICE DROP, or ALL-TIME LOW. A listing missing
-    from a successful scrape is SOLD OUT for 7 days, then GONE.
+    from one successful scrape keeps its last active stage. After a second
+    consecutive miss it is SOLD OUT only when the product page says out of
+    stock. Otherwise it is NO LONGER LISTED for 7 days, then GONE.
     """
     if not isinstance(entry, dict):
         entry = {}
     if not present:
+        if _miss_streak(entry) < GONE_AFTER_MISSES:
+            previous = entry.get("stage")
+            if previous in ("new", "price_drop", "all_time_low"):
+                return previous
+            return "new"
         last = _as_date(entry.get("last_seen"))
         today_day = _as_date(today) or datetime.date.today()
         if last is None or today_day is None:
@@ -568,9 +598,11 @@ def listing_stage(entry, present, today=None, at_low=False):
         age = (today_day - last).days
         if age < 0:
             age = 0
-        if age <= RECENTLY_GONE_DAYS:
+        if age > RECENTLY_GONE_DAYS:
+            return "gone"
+        if entry.get("stock") == "out_of_stock":
             return "sold_out"
-        return "gone"
+        return "unlisted"
     if at_low:
         return "all_time_low"
     if price_is_reduced(entry):
@@ -584,6 +616,73 @@ def _store_key(entry):
     if not store or not part:
         return ""
     return f"{store}_{part}"
+
+
+def record_misses(previous_data, current_data, history, skip_keys=None):
+    """Count misses on this successful scan and keep a first miss in the catalog.
+
+    Returns URLs carried forward. Those rows stay in ``current_data`` so they
+    are not gone and are not a new price observation. A failed or suspect key
+    is skipped: it does not add a miss and does not drop listings. A listing
+    already absent from the previous catalog that this scan also misses counts
+    as the second miss (the saved catalog was the first).
+    """
+    if not isinstance(history, dict):
+        raise TypeError("price history must be a dict")
+    skip = {str(key) for key in (skip_keys or [])}
+    carried = set()
+    for key, items in list((current_data or {}).items()):
+        if key in skip or not isinstance(items, list):
+            continue
+        current_urls = set()
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            url = normalize_url(item.get("url"))
+            if not url:
+                continue
+            current_urls.add(url)
+            entry = history.get(url)
+            if isinstance(entry, dict):
+                entry.pop("miss_streak", None)
+                entry.pop("stock", None)
+        prev_items = (previous_data or {}).get(key) or []
+        if not isinstance(prev_items, list):
+            prev_items = []
+        prev_urls = set()
+        for item in prev_items:
+            if not isinstance(item, dict):
+                continue
+            url = normalize_url(item.get("url"))
+            if not url:
+                continue
+            prev_urls.add(url)
+            if url in current_urls:
+                continue
+            entry = history.get(url)
+            if not isinstance(entry, dict):
+                entry = {
+                    "name": item.get("name") or "",
+                    "store": item.get("store") or "",
+                    "part": item.get("part") or "",
+                    "prices": {},
+                }
+                history[url] = entry
+            streak = _miss_streak(entry) + 1
+            entry["miss_streak"] = streak
+            if streak < GONE_AFTER_MISSES:
+                items.append(item)
+                carried.add(url)
+        for url, entry in list(history.items()):
+            if not isinstance(entry, dict) or _store_key(entry) != key:
+                continue
+            if url in current_urls or url in prev_urls:
+                continue
+            prior = _miss_streak(entry)
+            if prior >= GONE_AFTER_MISSES:
+                continue
+            entry["miss_streak"] = GONE_AFTER_MISSES if prior == 0 else prior + 1
+    return carried
 
 
 def apply_lifecycle(history, current_data, today=None, skip_keys=None):
@@ -619,8 +718,11 @@ def apply_lifecycle(history, current_data, today=None, skip_keys=None):
 def recently_gone(history, current_data=None, today=None, skip_keys=None):
     """Disappeared listings kept for ``RECENTLY_GONE_DAYS`` days.
 
-    Each row has the last sale price and last seen date. Failed store/part
-    scrapes are left out. Listings the filters reject are left out.
+    Each row has the last sale price and last seen date. A listing needs two
+    consecutive misses on successful scans. Failed store/part scrapes are left
+    out. The stage is sold out only when ``stock`` is ``out_of_stock``;
+    otherwise the row is no longer listed. Listings the filters reject are
+    left out.
     """
     if not isinstance(history, dict):
         return []
@@ -648,6 +750,8 @@ def recently_gone(history, current_data=None, today=None, skip_keys=None):
             age = (today_day - last).days
             if age < 0 or age > RECENTLY_GONE_DAYS:
                 continue
+            if _miss_streak(entry) < GONE_AFTER_MISSES:
+                continue
             prices = _clean_prices(entry.get("prices"))
             price = _latest_price(prices)
             if price is None:
@@ -661,7 +765,7 @@ def recently_gone(history, current_data=None, today=None, skip_keys=None):
                     "price": price,
                     "last_seen": last.isoformat(),
                     "days_gone": age,
-                    "stage": "sold_out",
+                    "stage": "sold_out" if entry.get("stock") == "out_of_stock" else "unlisted",
                 }
             )
         except Exception as exc:

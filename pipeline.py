@@ -32,6 +32,7 @@ def apply_run_updates(
     site_sales=None,
     scanned_at=None,
     suspect_keys=None,
+    skip_urls=None,
 ):
     """Update price history and store health. Never raises.
 
@@ -53,6 +54,7 @@ def apply_run_updates(
                 history,
                 today=day,
                 skip_keys=failed_keys,
+                skip_urls=skip_urls,
             )
         except Exception as exc:
             logger.error("Price history update failed (continuing): %s", exc)

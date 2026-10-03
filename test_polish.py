@@ -9,10 +9,11 @@ from history import (
     listing_stage,
     prune_price_history,
     recently_gone,
+    record_misses,
     update_price_history,
 )
 from notify import render_html, render_plain
-from page import format_scan_et
+from page import _gone_section, format_scan_et
 from pipeline import apply_run_updates
 from query_state import (
     STARTER_VIEWS,
@@ -73,43 +74,99 @@ class LifecycleTests(unittest.TestCase):
         apply_lifecycle(history, catalog, today="2026-09-20")
         self.assertEqual(history[url]["stage"], "all_time_low")
 
-        apply_lifecycle(history, {}, today="2026-09-22")
-        self.assertEqual(history[url]["stage"], "sold_out")
-        gone = recently_gone(history, {}, today="2026-09-22")
+        # One miss stays in the catalog and is not sold out.
+        first = {"Zumiez_Decks": []}
+        carried = record_misses(catalog, first, history)
+        self.assertEqual(carried, {url})
+        self.assertEqual(first["Zumiez_Decks"][0]["url"], url)
+        apply_lifecycle(history, first, today="2026-09-22")
+        self.assertEqual(history[url]["stage"], "all_time_low")
+        self.assertEqual(recently_gone(history, first, today="2026-09-22"), [])
+
+        # The next successful scan misses it again: no longer listed, not sold out.
+        second = {"Zumiez_Decks": []}
+        record_misses(first, second, history)
+        self.assertEqual(second["Zumiez_Decks"], [])
+        apply_lifecycle(history, second, today="2026-09-22")
+        self.assertEqual(history[url]["stage"], "unlisted")
+        gone = recently_gone(history, second, today="2026-09-22")
         self.assertEqual(len(gone), 1)
         self.assertEqual(gone[0]["price"], 40.0)
         self.assertEqual(gone[0]["last_seen"], "2026-09-20")
-        self.assertEqual(gone[0]["stage"], "sold_out")
+        self.assertEqual(gone[0]["stage"], "unlisted")
 
-        self.assertEqual(len(recently_gone(history, {}, today="2026-09-27")), 1)
-        apply_lifecycle(history, {}, today="2026-09-28")
+        history[url]["stock"] = "out_of_stock"
+        apply_lifecycle(history, second, today="2026-09-22")
+        self.assertEqual(recently_gone(history, second, today="2026-09-22")[0]["stage"], "sold_out")
+
+        self.assertEqual(len(recently_gone(history, second, today="2026-09-27")), 1)
+        apply_lifecycle(history, second, today="2026-09-28")
         self.assertEqual(history[url]["stage"], "gone")
-        self.assertEqual(recently_gone(history, {}, today="2026-09-28"), [])
+        self.assertEqual(recently_gone(history, second, today="2026-09-28"), [])
 
     def test_failed_scrape_does_not_mark_sold_out(self):
         url = "https://example.com/baker"
         history = {url: _entry({"2026-09-01": 55.0, "2026-09-08": 50.0})}
         history[url]["stage"] = "price_drop"
-        apply_lifecycle(history, {}, today="2026-09-20", skip_keys={"Zumiez_Decks"})
+        previous = {"Zumiez_Decks": [_deck("50.00")]}
+        current = {"Zumiez_Decks": []}
+        record_misses(previous, current, history, skip_keys={"Zumiez_Decks"})
+        apply_lifecycle(history, current, today="2026-09-20", skip_keys={"Zumiez_Decks"})
         self.assertEqual(history[url]["stage"], "price_drop")
+        self.assertNotIn("miss_streak", history[url])
         self.assertEqual(recently_gone(history, {}, today="2026-09-20", skip_keys={"Zumiez_Decks"}), [])
 
     def test_return_from_sold_out_is_active_again(self):
         url = "https://example.com/baker"
         history = {url: _entry({"2026-09-01": 55.0, "2026-09-10": 40.0})}
+        history[url]["miss_streak"] = 2
+        history[url]["stock"] = "out_of_stock"
         apply_lifecycle(history, {}, today="2026-09-12")
         self.assertEqual(history[url]["stage"], "sold_out")
         catalog = {"Zumiez_Decks": [_deck("40.00")]}
+        record_misses({}, catalog, history)
         update_price_history(catalog, history, today="2026-09-12")
         apply_lifecycle(history, catalog, today="2026-09-12")
         self.assertIn(history[url]["stage"], ("price_drop", "all_time_low"))
+        self.assertNotIn("stock", history[url])
+        self.assertNotIn("miss_streak", history[url])
 
     def test_prune_keeps_stage(self):
         url = "https://example.com/baker"
         history = {url: _entry({"2026-09-01": 55.0, "2026-09-10": 40.0})}
         history[url]["stage"] = "sold_out"
+        history[url]["miss_streak"] = 2
+        history[url]["stock"] = "out_of_stock"
         pruned, _stats = prune_price_history(history, today="2026-09-12", current_data={})
         self.assertEqual(pruned[url]["stage"], "sold_out")
+        self.assertEqual(pruned[url]["miss_streak"], 2)
+        self.assertEqual(pruned[url]["stock"], "out_of_stock")
+
+    def test_recently_gone_links_last_url_and_labels_stock(self):
+        url = "https://www.tactics.com/5boro/lucky-candle-brooklyn-825-skateboard-deck"
+        history = {url: _entry({"2026-09-20": 47.95}, store="Tactics")}
+        history[url]["name"] = "5boro Lucky Candle Brooklyn 8.25 Skateboard Deck"
+        history[url]["store"] = "Tactics"
+        history[url]["miss_streak"] = 2
+        html = _gone_section(history, {}, "2026-09-22", [])
+        self.assertIn(f'href="{url}"', html)
+        self.assertIn('target="_blank"', html)
+        self.assertIn("NO LONGER LISTED", html)
+        self.assertNotIn("SOLD OUT", html)
+        history[url]["stock"] = "out_of_stock"
+        html = _gone_section(history, {}, "2026-09-22", [])
+        self.assertIn("SOLD OUT", html)
+
+    def test_carried_miss_is_not_a_new_price(self):
+        url = "https://example.com/baker"
+        history = {}
+        previous = {"Zumiez_Decks": [_deck("40.00")]}
+        update_price_history(previous, history, today="2026-09-20")
+        current = {"Zumiez_Decks": []}
+        carried = record_misses(previous, current, history)
+        update_price_history(current, history, today="2026-09-22", skip_urls=carried)
+        self.assertNotIn("2026-09-22", history[url]["prices"])
+        self.assertEqual(history[url]["miss_streak"], 1)
 
     def test_pipeline_records_stage_without_raising(self):
         result = apply_run_updates(

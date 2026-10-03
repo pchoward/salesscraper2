@@ -18,7 +18,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from stores.errors import StoreTimeout
 from stores.files import safe_write_file
 
-def fetch_page(url, max_retries=3, timeout=30, ready_selector=None):
+def fetch_page(url, max_retries=3, timeout=30, ready_selector=None, item_selector=None, max_scroll_attempts=3, incremental_scroll=False):
     ua = UserAgent()
     
     for attempt in range(max_retries):
@@ -142,15 +142,23 @@ def fetch_page(url, max_retries=3, timeout=30, ready_selector=None):
                     logging.warning("Ready selector not found (%s): %s", ready_selector, e)
 
             logging.info("Attempting infinite scroll")
-            max_scroll_attempts = 3
             scroll_attempts = 0
             previous_item_count = 0
+            stable_rounds = 0
+            count_selector = item_selector or listing_selector
+            # Zumiez virtualizes the grid: jumping to the bottom stops at the
+            # first screen. Step down the page and count real product cards.
+            stable_limit = 2 if incremental_scroll else 1
 
             while scroll_attempts < max_scroll_attempts:
-                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-                time.sleep(random.uniform(1, 2))
+                if incremental_scroll:
+                    driver.execute_script("window.scrollBy(0, 900);")
+                    time.sleep(0.8)
+                else:
+                    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                    time.sleep(random.uniform(1, 2))
                 
-                current_items = len(driver.find_elements(By.CSS_SELECTOR, listing_selector))
+                current_items = len(driver.find_elements(By.CSS_SELECTOR, count_selector))
                 logging.info(f"Scroll attempt {scroll_attempts + 1}: found {current_items} items")
 
                 current_url = driver.current_url
@@ -160,8 +168,12 @@ def fetch_page(url, max_retries=3, timeout=30, ready_selector=None):
                     return None
 
                 if current_items == previous_item_count and current_items > 0:
-                    logging.info("No more items to load")
-                    break
+                    stable_rounds += 1
+                    if stable_rounds >= stable_limit:
+                        logging.info("No more items to load")
+                        break
+                else:
+                    stable_rounds = 0
 
                 previous_item_count = current_items
                 scroll_attempts += 1

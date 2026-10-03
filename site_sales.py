@@ -29,6 +29,10 @@ logger = logging.getLogger("site_sales")
 SITE_SALES_PATH = "site_sales.json"
 STORES = ("Zumiez", "SkateWarehouse", "CCS", "Tactics", "Skate Deluxe", "Muir Skate")
 SEEDS = {"SkateWarehouse": "2026-07-04"}
+# Earlier daily counts for these stores are first-page scrapes. They are not
+# a baseline for days on or after the full sale-page scrape, or a one-day
+# jump in the count would look like a site-wide sale.
+FULL_CATALOG_FROM = {"Zumiez": "2026-10-02", "Tactics": "2026-10-02"}
 
 SPIKE_MULTIPLIER = 2.5
 SPIKE_MIN_EXTRA = 30
@@ -184,7 +188,10 @@ def _apply_spikes(state):
         window = days[max(0, index - SPIKE_BASELINE_DAYS) : index]
         for store, count in state["daily"][day].items():
             prior = []
+            start = FULL_CATALOG_FROM.get(store)
             for prev in window:
+                if start and day >= start and prev < start:
+                    continue
                 if store in state["daily"][prev]:
                     prior.append(state["daily"][prev][store])
             if is_spike(count, prior):

@@ -1,7 +1,13 @@
-"""Tactics sale listings."""
+"""Tactics sale listings.
+
+Sale decks are server-rendered, 48 to a page, with a ``pagination-next`` link
+(``/skateboard-decks/sale/page-2`` and so on). Reading only the first page
+dropped anything further down and the report called those decks sold out.
+"""
 
 import logging
 import re
+import urllib.request
 
 from bs4 import BeautifulSoup
 
@@ -9,7 +15,95 @@ from filters import extract_deck_size, normalize_product_name, normalize_url
 from stores.base import Scraper
 from stores.browser import save_debug_file
 
+MAX_SALE_PAGES = 20
+USER_AGENT = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+)
+
+
+def fetch_html(url, timeout=30):
+    """Return ``(final_url, html)`` or ``(None, None)`` when the fetch fails."""
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": USER_AGENT, "Accept": "text/html"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            final = response.geturl()
+            body = response.read()
+    except Exception as exc:
+        logging.error("Tactics fetch failed for %s: %s", url, exc)
+        return None, None
+    return final, body.decode("utf-8", "replace")
+
+
+def next_page_url(html, current_url):
+    """Absolute URL of the next sale page, or None when this page is the last."""
+    if not html:
+        return None
+    soup = BeautifulSoup(html, "html.parser")
+    link = soup.select_one("a.pagination-next")
+    if link is None:
+        return None
+    href = normalize_url(link.get("href") or "")
+    if not href:
+        return None
+    if href.startswith("/"):
+        href = "https://www.tactics.com" + href
+    if href.rstrip("/") == str(current_url or "").rstrip("/"):
+        return None
+    return href
+
+
+def collect_sale_pages(start_url, fetch=fetch_html, max_pages=MAX_SALE_PAGES):
+    """Every sale page, in order. None when any page fails to load.
+
+    A later page that redirects back to one we already fetched (Tactics sends
+    ``/page-4`` to page 1) ends the walk. A partial catalog is not returned:
+    missing a page would look like those products had left the sale.
+    """
+    pages = []
+    seen = set()
+    url = start_url
+    while url and len(pages) < max_pages:
+        key = url.rstrip("/")
+        if key in seen:
+            break
+        seen.add(key)
+        final, html = fetch(url)
+        if not html:
+            logging.error("Tactics sale page failed: %s", url)
+            return None
+        final_key = (final or url).rstrip("/")
+        if final_key in seen and final_key != key:
+            logging.info("Tactics pagination looped back to %s", final)
+            break
+        seen.add(final_key)
+        pages.append(html)
+        nxt = next_page_url(html, final or url)
+        if not nxt or nxt.rstrip("/") in seen:
+            break
+        url = nxt
+    return pages
+
 class TacticsScraper(Scraper):
+    def scrape(self):
+        pages = collect_sale_pages(self.url)
+        if not pages:
+            return None
+        products = []
+        seen = set()
+        for html in pages:
+            for item in self.parse(html):
+                url = item.get("url")
+                if not url or url in seen:
+                    continue
+                seen.add(url)
+                products.append(item)
+        logging.info("Tactics %s: %s items across %s sale pages", self.part, len(products), len(pages))
+        return products
+
     def parse(self, html):
         if not html:
             logging.error("No HTML to parse")
