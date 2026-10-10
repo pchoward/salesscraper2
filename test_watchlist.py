@@ -28,7 +28,13 @@ class WatchlistTests(unittest.TestCase):
     def test_seed_file_has_the_real_prefs(self):
         self.assertEqual(
             self.ids,
-            ["black-label-decks", "powell-peralta-decks", "heroin-decks", "antihero-caster"],
+            [
+                "black-label-decks",
+                "powell-peralta-decks",
+                "heroin-decks",
+                "antihero-caster",
+                "powell-wheels",
+            ],
         )
         widths = {rule["id"]: rule.get("min_width") for rule in self.rules}
         self.assertEqual(widths["black-label-decks"], 8.6)
@@ -65,6 +71,77 @@ class WatchlistTests(unittest.TestCase):
             self.assertEqual(matched, ["antihero-caster"])
         other = _deck("Anti-Hero Doobie Expressions Deck 8.75")
         self.assertFalse(any(rule_matches(rule, other) for rule in self.rules))
+
+    def test_powell_wheels_any_size_without_min_width(self):
+        rule = next(rule for rule in self.rules if rule["id"] == "powell-wheels")
+        self.assertEqual(rule.get("brand"), "Powell")
+        self.assertEqual(rule.get("part"), "Wheels")
+        self.assertNotIn("min_width", rule)
+
+        def wheel(name, **extra):
+            item = {
+                "name": name,
+                "url": "https://www.tactics.com/powell-peralta/semien-pro-nano-rats-av5-medium-ride-patch-skateboard-wheels/off-white-93a",
+                "price_new": "40.95",
+                "price_old": "51.19",
+                "part": "Wheels",
+                "store": "Tactics",
+            }
+            item.update(extra)
+            return item
+
+        tactics = wheel(
+            "Powell Peralta Semien Pro Nano Rats AV5 Medium Ride Patch Skateboard Wheels - off white (93a)"
+        )
+        self.assertNotIn("width", tactics)
+        self.assertTrue(rule_matches(rule, tactics))
+        self.assertTrue(
+            rule_matches(
+                rule,
+                wheel(
+                    "Powell Peralta Nano Cubic Dragon Formula Skateboard Wheels - off white 52 (93a)",
+                    url="https://example.com/powell-52",
+                ),
+            )
+        )
+        self.assertTrue(
+            rule_matches(
+                rule,
+                wheel(
+                    "Powell-Peralta Dragon Formula 60mm Skateboard Wheels",
+                    url="https://example.com/powell-60",
+                ),
+            )
+        )
+        self.assertFalse(rule_matches(rule, _deck("Powell Peralta Skeleton 8.75 Flight Deck", width=8.75)))
+        self.assertFalse(
+            rule_matches(rule, wheel("Spitfire Formula Four 54mm Wheels", url="https://example.com/spitfire"))
+        )
+
+        hits, alerts = match_watchlist(
+            [tactics], rules=self.rules, previous={}, history={}, today="2026-10-06"
+        )
+        self.assertEqual([hit["rule_id"] for hit in hits], ["powell-wheels"])
+        self.assertEqual(alerts[0]["reasons"], ["New"])
+
+        previous = {"Tactics_Wheels": [dict(tactics, price_new="44.95")]}
+        _hits, alerts = match_watchlist(
+            [tactics], rules=self.rules, previous=previous, history={}, today="2026-10-06"
+        )
+        self.assertEqual(alerts[0]["rule_id"], "powell-wheels")
+        self.assertEqual(alerts[0]["reasons"], ["Price dropped $4.00"])
+
+        history = {
+            tactics["url"]: {
+                "first_seen": "2026-04-24",
+                "last_seen": "2026-09-01",
+                "prices": {"2026-04-24": 40.95},
+            }
+        }
+        _hits, alerts = match_watchlist(
+            [tactics], rules=self.rules, previous={}, history=history, today="2026-10-06"
+        )
+        self.assertEqual(alerts[0]["reasons"], ["Back in stock"])
 
     def test_default_rules_alert_on_new_back_and_any_drop(self):
         item = _deck("Heroin Egg 9.0 Deck", price="42.00", url="https://example.com/heroin", width=9.0)
