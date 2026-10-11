@@ -208,30 +208,83 @@ def _held_label(days, at_days, price):
     return f"{label} · {at_days}d @ ${float(price):.2f}"
 
 
-def sparkline_svg(prices, width=72, height=22, css="spark"):
-    ordered = [float(prices[day]) for day in sorted(prices or {})]
-    if len(ordered) > 48:
-        step = len(ordered) / 48
-        sampled = [ordered[int(index * step)] for index in range(48)]
-        sampled[-1] = ordered[-1]
-        ordered = sampled
-    if len(ordered) < 2:
+# Same window as the chart buttons: a point is visible when its date is on or
+# after (end - days). Color is the latest change inside that window, not the
+# oldest price in the file.
+SPARK_COLOR = {"down": "#15803d", "up": "#b91c1c", "flat": "#94a3b8"}
+
+
+def clip_daily_prices(prices, days=90, end=None):
+    """Daily ``(date, price)`` pairs inside the inclusive chart window."""
+    cleaned = []
+    for day, price in (prices or {}).items():
+        text = str(day)[:10]
+        if len(text) != 10:
+            continue
+        try:
+            amount = round(float(price), 2)
+            datetime.date.fromisoformat(text)
+        except (TypeError, ValueError):
+            continue
+        cleaned.append((text, amount))
+    cleaned.sort()
+    if not cleaned:
+        return []
+    end_text = str(end)[:10] if end else cleaned[-1][0]
+    try:
+        end_day = datetime.date.fromisoformat(end_text)
+    except ValueError:
+        return cleaned
+    start_text = (end_day - datetime.timedelta(days=int(days))).isoformat()
+    return [(day, price) for day, price in cleaned if start_text <= day <= end_text]
+
+
+def sparkline_direction(prices, days=90, end=None):
+    """``down``, ``up``, or ``flat`` from the latest change in the window.
+
+    Prices outside the window are ignored. A window whose prices never move,
+    or that has fewer than two prices, is flat. A drop then a flat tail is
+    still ``down``, because the last change inside the window was a drop.
+    """
+    points = clip_daily_prices(prices, days=days, end=end)
+    if len(points) < 2:
+        return "flat"
+    last = points[-1][1]
+    for _day, price in reversed(points[:-1]):
+        if abs(price - last) > 0.001:
+            return "down" if last < price else "up"
+    return "flat"
+
+
+def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None):
+    ordered = clip_daily_prices(prices, days=days, end=end)
+    if not ordered:
         return ""
-    low = min(ordered)
-    high = max(ordered)
+    direction = sparkline_direction(prices, days=days, end=end)
+    color = SPARK_COLOR[direction]
+    values = [price for _day, price in ordered]
+    low = min(values)
+    high = max(values)
     span = high - low or 1
-    last = len(ordered) - 1
-    points = []
-    for index, value in enumerate(ordered):
+    last = max(len(ordered) - 1, 1)
+    coords = []
+    for index, value in enumerate(values):
         x_pos = 1 + (index / last) * (width - 2)
         y_pos = 1 + (height - 4) * (1 - (value - low) / span)
-        points.append(f"{x_pos:.1f},{y_pos:.1f}")
-    color = "#15803d" if ordered[-1] <= ordered[0] else "#b91c1c"
-    return (
-        f'<svg class="{css}" viewBox="0 0 {width} {height}" width="{width}" height="{height}" aria-hidden="true">'
-        f'<polyline fill="none" stroke="{color}" stroke-width="1.6" points="{" ".join(points)}"/>'
-        "</svg>"
-    )
+        coords.append((x_pos, y_pos))
+    parts = [
+        f'<svg class="{css}" data-direction="{direction}" viewBox="0 0 {width} {height}" '
+        f'width="{width}" height="{height}" aria-hidden="true">'
+    ]
+    if len(coords) >= 2:
+        drawn = " ".join(f"{x_pos:.1f},{y_pos:.1f}" for x_pos, y_pos in coords)
+        parts.append(
+            f'<polyline fill="none" stroke="{color}" stroke-width="1.6" points="{drawn}"/>'
+        )
+    x_pos, y_pos = coords[-1]
+    parts.append(f'<circle cx="{x_pos:.1f}" cy="{y_pos:.1f}" r="2.2" fill="{color}"/>')
+    parts.append("</svg>")
+    return "".join(parts)
 
 
 def _availability_label(entry, present=True):
@@ -745,6 +798,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "trend": trend,
                 "availability": _availability_label(entry, present=True),
                 "prices": prices,
+                "spark_end": today,
                 "chain": _chain(prices),
                 "group": group_by_url.get(url),
                 "width_key": width_key,
@@ -1016,6 +1070,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="facet brand-facet" id="brandFacet" data-cap="7">'
         '<span class="range-label">Brand</span>'
         f'<select id="brandSelect" class="sr-only" aria-label="Brand">{"".join(brand_options)}</select>'
+        '<input id="brandSearch" class="brand-search" type="search" placeholder="Find a brand" '
+        'aria-label="Find a brand" autocomplete="off">'
         f'<div class="facet-list" id="brandList">{"".join(brand_buttons)}</div>'
         f'<button type="button" class="text-btn" id="brandMore" aria-expanded="false"{more_hidden}>'
         "Show more</button></div>"
@@ -1027,6 +1083,11 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button>'
         '<button type="button" class="text-btn" id="filtersClose">Close</button></div>'
         '<button type="button" class="text-btn clear-all" id="clearAll" onclick="clearFilters()">Clear all</button>'
+        '<p class="count-note">Counts match the other filters '
+        '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
+        '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
+        "if you pick that store, type, brand, or width. It is not a total of everything tracked."
+        "</span></p>"
         '<label class="field"><span>Store</span>'
         f'<select id="storeSelect">{"".join(store_options)}</select></label>'
         '<label class="field"><span>Type</span>'
@@ -1381,14 +1442,18 @@ def _card_html(record):
         f'{_thumb(record["image"], record["name"], large=True)}'
         '<div class="card-face">'
         f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
-        f'<span class="discount card-off {discount}">{escape(percent)}</span>'
         "</div>"
-        f'<h3 class="product-name">{_product_link(item)}</h3>'
-        f'<div class="card-price"><span class="price price-new">{_money(item.get("price_new"), currency)}</span>'
-        f'<span class="card-spark">{_spark_html(record)}</span></div>'
+        f'<div class="card-title"><h3 class="product-name" title="{escape(record["name"], quote=True)}">'
+        f"{_product_link(item)}</h3></div>"
+        '<div class="card-metrics">'
+        f'<span class="discount card-off {discount}">{escape(percent)}</span>'
+        f'<span class="price price-new">{_money(item.get("price_new"), currency)}</span>'
+        f'<span class="card-spark">{_spark_html(record)}</span>'
+        "</div>"
         f'<div class="card-badge">{face}</div>'
         '<button type="button" class="card-more" aria-expanded="false">Details</button>'
         '<div class="card-hover">'
+        f'<p class="card-hover-title">{escape(record["name"])}</p>'
         f'<div class="card-extra">{escape(size)} {escape(record["held"])} '
         f'<span class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else ""}</span></div>'
         f'<div class="row-meta">{_badge_html(record["badges"], record["listed"])}'
@@ -1453,7 +1518,7 @@ def _detail_html(record):
         f'<div><span>Days tracked</span>{escape(record["held"])}</div>'
         f'<div><span>Stage</span>{escape(STAGE_LABEL.get(record.get("stage"), ""))}</div></div>'
         f"{retailer}"
-        f'<div class="chart-box">{sparkline_svg(record["prices"], width=280, height=64)}'
+        f'<div class="chart-box">{sparkline_svg(record["prices"], width=280, height=64, days=90, end=record.get("spark_end"))}'
         f'<p class="chain">{escape(chain)}</p></div>'
         f'<div class="offers">{"".join(offers)}</div>'
         "</div></div></td></tr>"
@@ -1599,7 +1664,7 @@ def _why_html(record, dom_id=None):
 
 
 def _spark_html(record):
-    spark = sparkline_svg(record["prices"])
+    spark = sparkline_svg(record["prices"], days=90, end=record.get("spark_end"))
     if not spark:
         return ""
     return (

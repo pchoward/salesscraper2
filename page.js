@@ -25,6 +25,7 @@ const VIEWS_KEY = "salesscraper2.views";
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let visitGone = [];
 let sparkTip = null;
+let sparkPinned = false;
 let renamingId = "";
 
 function catalog() {
@@ -198,6 +199,18 @@ function paintWidthChips() {
         const on = id === "all" ? allOn : !!selected[id];
         node.classList.toggle("active", on);
         if (node.hasAttribute("aria-pressed")) node.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+}
+
+function filterBrandList(query) {
+    const facet = document.getElementById("brandFacet");
+    const text = String(query || "").trim().toLowerCase();
+    if (facet) facet.classList.toggle("is-searching", text.length > 0);
+    document.querySelectorAll("#brandList .facet-value").forEach(node => {
+        const brand = (node.getAttribute("data-brand") || "").toLowerCase();
+        const label = (node.textContent || "").toLowerCase();
+        const match = !text || (brand !== "all" && (brand.includes(text) || label.includes(text)));
+        node.classList.toggle("is-search-hide", !match);
     });
 }
 
@@ -818,6 +831,9 @@ function clearFilters() {
     if (sort) sort.value = "rank";
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", "false");
+    const brandSearch = document.getElementById("brandSearch");
+    if (brandSearch) brandSearch.value = "";
+    filterBrandList("");
     setPressed("#storeFilters .filter-btn", "data-store", "all");
     setPressed("#partFilters .filter-btn", "data-part", "all");
     paintWidthChips();
@@ -1277,23 +1293,38 @@ function ensureSparkTip() {
     return sparkTip;
 }
 
+function pointLabel(point) {
+    const iso = String(point[0] || "");
+    const year = iso.slice(0, 4);
+    const price = Number(point[1]);
+    const amount = Number.isFinite(price) ? "$" + price.toFixed(2) : "";
+    return shortDate(iso) + (year ? ", " + year : "") + (amount ? " · " + amount : "");
+}
+
 function showSparkTip(event, point) {
     const tip = ensureSparkTip();
     if (!tip || !point) return;
     tip.hidden = false;
-    tip.textContent = shortDate(point[0]) + " · $" + Number(point[1]).toFixed(2);
-    tip.style.left = Math.min(window.innerWidth - 140, event.clientX + 12) + "px";
-    tip.style.top = (event.clientY + 14) + "px";
+    tip.textContent = pointLabel(point);
+    const x = event && Number.isFinite(event.clientX) ? event.clientX : 24;
+    const y = event && Number.isFinite(event.clientY) ? event.clientY : 24;
+    tip.style.left = Math.min(window.innerWidth - 180, x + 12) + "px";
+    tip.style.top = (y + 14) + "px";
 }
 
 function hideSparkTip() {
+    sparkPinned = false;
     const tip = ensureSparkTip();
     if (tip) tip.hidden = true;
 }
 
 function nearestPoint(id, event, svg) {
-    const item = (catalog().items || {})[id];
-    const points = item && Array.isArray(item.daily) && item.daily.length ? item.daily : (item && item.series) || [];
+    let points = svg ? sparkPoints.get(svg) : null;
+    if (!points || !points.length) {
+        const item = (catalog().items || {})[id];
+        const daily = item && Array.isArray(item.daily) && item.daily.length ? item.daily : (item && item.series) || [];
+        points = clipDailyPrices(daily, chartWindow);
+    }
     if (!points.length) return null;
     const rect = svg.getBoundingClientRect();
     if (!rect.width) return points[points.length - 1];
@@ -1488,6 +1519,87 @@ function markerColor(kind) {
     return "#334155";
 }
 
+function clipDailyPrices(points, days) {
+    const end = String((catalog().generated || "")).slice(0, 10);
+    const start = end ? addDays(end, -Number(days || 90)) : "";
+    return (points || []).filter(point => {
+        const day = String(point[0] || "").slice(0, 10);
+        if (!day) return false;
+        if (start && day < start) return false;
+        if (end && day > end) return false;
+        return true;
+    });
+}
+
+function sparkDirection(points) {
+    if (!points || points.length < 2) return "flat";
+    const last = Number(points[points.length - 1][1]);
+    if (!Number.isFinite(last)) return "flat";
+    for (let i = points.length - 2; i >= 0; i--) {
+        const price = Number(points[i][1]);
+        if (Number.isFinite(price) && Math.abs(price - last) > 0.001) return last < price ? "down" : "up";
+    }
+    return "flat";
+}
+
+const SPARK_COLOR = { down: "#15803d", up: "#b91c1c", flat: "#94a3b8" };
+const sparkPoints = new WeakMap();
+
+function buildSparkSvg(points, width, height) {
+    width = width || 72;
+    height = height || 22;
+    const direction = sparkDirection(points);
+    const color = SPARK_COLOR[direction] || SPARK_COLOR.flat;
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "spark");
+    svg.setAttribute("data-direction", direction);
+    svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+    svg.setAttribute("width", String(width));
+    svg.setAttribute("height", String(height));
+    svg.setAttribute("aria-hidden", "true");
+    const values = (points || []).map(point => Number(point[1])).filter(value => Number.isFinite(value));
+    if (!values.length) {
+        sparkPoints.set(svg, points || []);
+        return svg;
+    }
+    const low = Math.min.apply(null, values);
+    const high = Math.max.apply(null, values);
+    const span = high - low || 1;
+    const lastIndex = Math.max(values.length - 1, 1);
+    const coords = values.map((value, index) => [
+        1 + (index / lastIndex) * (width - 2),
+        1 + (height - 4) * (1 - (value - low) / span)
+    ]);
+    if (coords.length >= 2) {
+        const poly = document.createElementNS(svg.namespaceURI, "polyline");
+        poly.setAttribute("fill", "none");
+        poly.setAttribute("stroke", color);
+        poly.setAttribute("stroke-width", "1.6");
+        poly.setAttribute("points", coords.map(pair => pair[0].toFixed(1) + "," + pair[1].toFixed(1)).join(" "));
+        svg.appendChild(poly);
+    }
+    const dot = document.createElementNS(svg.namespaceURI, "circle");
+    const endPoint = coords[coords.length - 1];
+    dot.setAttribute("cx", endPoint[0].toFixed(1));
+    dot.setAttribute("cy", endPoint[1].toFixed(1));
+    dot.setAttribute("r", "2.2");
+    dot.setAttribute("fill", color);
+    svg.appendChild(dot);
+    sparkPoints.set(svg, points || []);
+    return svg;
+}
+
+function paintSparklines() {
+    document.querySelectorAll(".spark-hit").forEach(button => {
+        const item = (catalog().items || {})[button.dataset.id];
+        const daily = item && Array.isArray(item.daily) ? item.daily : [];
+        const svg = buildSparkSvg(clipDailyPrices(daily, chartWindow));
+        const existing = button.querySelector("svg");
+        if (existing) existing.replaceWith(svg);
+        else button.appendChild(svg);
+    });
+}
+
 function clipSeries(series, days) {
     const end = String((catalog().generated || "")).slice(0, 10);
     const start = end ? addDays(end, -Number(days || 90)) : "";
@@ -1620,6 +1732,7 @@ function setChartWindow(days) {
         const on = String(button.getAttribute("data-window")) === String(chartWindow);
         button.setAttribute("aria-pressed", on ? "true" : "false");
     });
+    paintSparklines();
     if (chartId) drawChart(chartId);
 }
 
@@ -1733,6 +1846,10 @@ function init() {
             applyFilters();
         });
     }
+    const brandSearch = document.getElementById("brandSearch");
+    if (brandSearch) {
+        brandSearch.addEventListener("input", () => filterBrandList(brandSearch.value));
+    }
     const brandMore = document.getElementById("brandMore");
     if (brandMore) {
         brandMore.addEventListener("click", () => {
@@ -1802,15 +1919,21 @@ function init() {
         });
     });
     document.querySelectorAll(".spark-hit").forEach(button => {
-        const svg = button.querySelector("svg");
         button.addEventListener("mousemove", event => {
-            if (!svg) return;
-            showSparkTip(event, nearestPoint(button.dataset.id, event, svg));
+            const current = button.querySelector("svg");
+            if (!current) return;
+            sparkPinned = false;
+            showSparkTip(event, nearestPoint(button.dataset.id, event, current));
         });
-        button.addEventListener("mouseleave", hideSparkTip);
+        button.addEventListener("mouseleave", () => {
+            if (!sparkPinned) hideSparkTip();
+        });
         button.addEventListener("click", event => {
             event.stopPropagation();
-            openProduct(button.dataset.id);
+            event.preventDefault();
+            const current = button.querySelector("svg");
+            sparkPinned = true;
+            showSparkTip(event, nearestPoint(button.dataset.id, event, current));
         });
     });
     document.querySelectorAll(".card-more").forEach(button => {
@@ -1865,6 +1988,7 @@ function init() {
         }
     });
     document.addEventListener("click", event => {
+        if (sparkPinned && !event.target.closest(".spark-hit")) hideSparkTip();
         const panel = document.getElementById("sparkPanel");
         if (!panel || panel.hidden) return;
         if (event.target.closest("#sparkPanel, .spark-hit")) return;
@@ -1872,6 +1996,7 @@ function init() {
     });
     updateChangeLine();
     paintViews();
+    paintSparklines();
     if (location.search && location.search.length > 1) loadFromUrl();
     else {
         state.change = "all";
