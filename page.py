@@ -293,9 +293,15 @@ def _badge_html(badges, listed, limit=None):
     return f'<div class="pills">{"".join(pills)}</div>'
 
 
-def _option(value, label, selected=False):
+def _option(value, label, selected=False, data_label=None):
     mark = " selected" if selected else ""
-    return f'<option value="{escape(str(value), quote=True)}"{mark}>{escape(str(label))}</option>'
+    extra = ""
+    if data_label is not None:
+        extra = f' data-label="{escape(str(data_label), quote=True)}"'
+    return (
+        f'<option value="{escape(str(value), quote=True)}"{mark}{extra}>'
+        f"{escape(str(label))}</option>"
+    )
 
 
 def _buttons(group_id, attr, onclick, values, active="all"):
@@ -833,6 +839,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     part_counts = {}
     range_counts = {bucket.id: 0 for bucket in WIDTH_RANGES}
     brands = set()
+    brand_counts = {}
     lengths = set()
     wheels = set()
     for record in records:
@@ -844,6 +851,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 range_counts[bucket.id] += 1
         if record["brand"]:
             brands.add(record["brand"])
+            brand_counts[record["brand"]] = brand_counts.get(record["brand"], 0) + 1
         if record["length_key"]:
             lengths.add(record["length_key"])
         if record["wheel_key"]:
@@ -925,19 +933,24 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
 
     store_options = ['<option value="all">All stores</option>']
     for store in sorted(store_counts):
-        store_options.append(_option(store, f"{store} ({store_counts[store]})"))
+        store_options.append(
+            _option(store, f"{store} ({store_counts[store]})", data_label=store)
+        )
     part_options = ['<option value="all">All types</option>']
     for part in ("Decks", "Wheels", "Trucks", "Bearings"):
         if part in part_counts:
-            part_options.append(_option(part, part))
-    brand_options = ['<option value="all">All brands</option>']
-    for brand in sorted(brands, key=str.casefold):
-        brand_options.append(_option(brand, brand))
+            part_options.append(
+                _option(part, f"{part} ({part_counts[part]})", data_label=part)
+            )
+    sorted_brands = sorted(brands, key=str.casefold)
+    brand_options = ['<option value="all" data-label="All brands">All brands</option>']
+    for brand in sorted_brands:
+        brand_options.append(_option(brand, brand, data_label=brand))
     length_select = ""
     if lengths:
         options = ['<option value="all">All lengths</option>']
         for value in sorted(lengths, key=float):
-            options.append(_option(value, value))
+            options.append(_option(value, value, data_label=value))
         length_select = (
             '<label class="field"><span>Length</span>'
             f'<select id="lengthSelect">{"".join(options)}</select></label>'
@@ -946,7 +959,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     if wheels:
         options = ['<option value="all">All wheelbases</option>']
         for value in sorted(wheels, key=float):
-            options.append(_option(value, value))
+            options.append(_option(value, value, data_label=value))
         wheel_select = (
             '<label class="field"><span>Wheelbase</span>'
             f'<select id="wheelbaseSelect">{"".join(options)}</select></label>'
@@ -981,17 +994,44 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<option value="daysat">Days at this price</option>'
         "</select></label>"
     )
+    brand_cap = 7
+    brand_buttons = [
+        '<button type="button" class="facet-value active" data-brand="all" '
+        'aria-pressed="true">All brands</button>'
+    ]
+    for index, brand in enumerate(sorted_brands):
+        count = brand_counts.get(brand, 0)
+        classes = "facet-value"
+        if index >= brand_cap:
+            classes += " is-extra"
+        if count == 0:
+            classes += " is-zero"
+        brand_buttons.append(
+            f'<button type="button" class="{classes}" '
+            f'data-brand="{escape(brand, quote=True)}" data-count="{count}" aria-pressed="false">'
+            f'{escape(brand)} <span class="facet-count">({count})</span></button>'
+        )
+    more_hidden = "" if len(sorted_brands) > brand_cap else " hidden"
+    brand_facet = (
+        '<div class="facet brand-facet" id="brandFacet" data-cap="7">'
+        '<span class="range-label">Brand</span>'
+        f'<select id="brandSelect" class="sr-only" aria-label="Brand">{"".join(brand_options)}</select>'
+        f'<div class="facet-list" id="brandList">{"".join(brand_buttons)}</div>'
+        f'<button type="button" class="text-btn" id="brandMore" aria-expanded="false"{more_hidden}>'
+        "Show more</button></div>"
+    )
 
     chunks.append(
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
+        '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button>'
         '<button type="button" class="text-btn" id="filtersClose">Close</button></div>'
+        '<button type="button" class="text-btn clear-all" id="clearAll" onclick="clearFilters()">Clear all</button>'
         '<label class="field"><span>Store</span>'
         f'<select id="storeSelect">{"".join(store_options)}</select></label>'
         '<label class="field"><span>Type</span>'
         f'<select id="partSelect">{"".join(part_options)}</select></label>'
-        '<label class="field"><span>Brand</span>'
-        f'<select id="brandSelect">{"".join(brand_options)}</select></label>'
+        f"{brand_facet}"
         '<button type="button" class="text-btn" id="moreFilters" aria-expanded="true" aria-controls="morePanel">'
         'More filters <span id="moreCount" hidden></span></button>'
         '<div class="more-filters" id="morePanel">'
@@ -1009,7 +1049,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
         '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
         '<button type="button" class="text-btn" id="saveView">Save view</button>'
-        '<button type="button" class="text-btn" onclick="clearFilters()">Clear</button>'
+        '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button>'
         "</div>"
         '<form class="save-view" id="saveViewForm" hidden>'
         '<input id="viewNameInput" type="text" maxlength="80" placeholder="Name this view" aria-label="View name">'

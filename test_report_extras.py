@@ -89,6 +89,51 @@ class ReportExtraTests(unittest.TestCase):
         self.assertTrue(any(marker["kind"] == "drop" for row in series for marker in row["markers"]))
         self.assertNotIn("Shipping", html)
 
+    def test_filtered_cards_hide_and_brand_list_caps_at_seven(self):
+        brands = [
+            "Anti-Hero",
+            "Baker",
+            "Chocolate",
+            "Creature",
+            "Deathwish",
+            "Element",
+            "Girl",
+            "Habitat",
+        ]
+        decks = [
+            _deck("50.00", "https://example.com/%s" % index, "Zumiez", "%s Team Deck 8.0" % brand)
+            for index, brand in enumerate(brands)
+        ]
+        html = build_report_html(
+            {"Zumiez_Decks": decks},
+            {},
+            generated_at="2026-10-11T17:32:48+00:00",
+        )
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        self.assertRegex(
+            style,
+            r"\.deal-card\.filtered-out\s*,\s*\.deal-card\.grouped-hide\s*,\s*"
+            r"tr\.deal-row\.filtered-out\s*,\s*tr\.deal-row\.grouped-hide\s*"
+            r"\{[^}]*display:\s*none\s*!important",
+        )
+        self.assertRegex(style, r"#visitNote\[hidden\]\s*\{[^}]*display:\s*none\s*!important")
+        self.assertGreater(style.rfind(".deal-card.filtered-out"), style.find(".deal-card {"))
+        tail = style[style.rfind(".deal-card.filtered-out"):]
+        self.assertNotRegex(tail, r"\.deal-card\s*\{[^}]*display:\s*flex")
+        self.assertIn('id="visitNote" hidden', html)
+        self.assertIn('id="brandFacet"', html)
+        self.assertIn('id="brandSelect"', html)
+        self.assertIn('data-cap="7"', html)
+        self.assertIn('id="clearAll"', html)
+        self.assertIn(">Clear all</button>", html)
+        self.assertIn('id="brandMore" aria-expanded="false">Show more</button>', html)
+        self.assertIn('class="facet-value" data-brand="Anti-Hero"', html)
+        self.assertIn('class="facet-value is-extra" data-brand="Habitat"', html)
+        self.assertIn("function rowMatches(row, overrides)", html)
+        self.assertIn("function paintFacetCounts()", html)
+        self.assertIn('class="chip is-zero" data-range="10up"', html)
+        self.assertIn("10.0+ (0)", html)
+
 
 if __name__ == "__main__":
     unittest.main()
