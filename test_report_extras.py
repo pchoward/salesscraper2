@@ -65,6 +65,13 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("at least 30%", html)
         self.assertIn("Deals intelligence", html)
         self.assertIn('id="freshness"', html)
+        self.assertIn('id="filterDrawer"', html)
+        self.assertIn('id="filtersOpen"', html)
+        self.assertIn('id="baselineSelect"', html)
+        self.assertIn('id="scoreMin"', html)
+        self.assertIn("Today's highlights", html)
+        self.assertIn("Zumiez (", html)
+        self.assertNotIn('class="store-strip"', html)
         more = html.split('id="morePanel"', 1)[1]
         self.assertIn("Width range", more.split("</div>", 1)[0] + more)
         self.assertLess(html.find('id="morePanel"'), html.find('id="sizeFilters"'))

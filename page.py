@@ -279,13 +279,15 @@ def _product_link(item):
     return f'<a class="product-link" href="{url}" target="_blank" rel="noopener">{name}</a>'
 
 
-def _badge_html(badges, listed):
+def _badge_html(badges, listed, limit=None):
     pills = []
     for badge in badges:
         kind = escape(badge.get("kind") or "new")
         pills.append(f'<span class="pill pill-{kind}">{escape(badge.get("label") or "")}</span>')
     if listed:
         pills.append('<span class="pill pill-list">Watchlist</span>')
+    if limit is not None:
+        pills = pills[:limit]
     if not pills:
         return ""
     return f'<div class="pills">{"".join(pills)}</div>'
@@ -457,8 +459,9 @@ def _intel_strip(summary):
         '<div class="intel-strip" id="intelStrip">'
         f'<div><span>Biggest drop</span><strong>{escape(drop_text)}</strong></div>'
         f'<div><span>Highest average discount</span><strong>{escape(avg_text)}</strong></div>'
-        f'<div><span>Most good discounts</span><strong>{escape(good_text)}</strong>'
-        f'<p class="intel-def">{escape(summary.get("definition") or "")}</p></div>'
+        f'<div><span>Most good discounts <button type="button" class="info-dot" aria-describedby="goodDef">?</button></span>'
+        f'<strong>{escape(good_text)}</strong>'
+        f'<span class="tip" id="goodDef" role="tooltip">{escape(summary.get("definition") or "")}</span></div>'
         "</div>"
     )
 
@@ -552,8 +555,9 @@ def _stats_html(products, history, intel=None):
     return (
         '<section id="statsPanel" hidden>'
         '<div class="section"><div class="section-header"><h2>Deals intelligence</h2></div><div class="section-content">'
-        f'<p class="lede">{definition} Stores are ranked by how many of those deals they have, '
-        "then by how deep those discounts are.</p>"
+        '<p class="lede">Stores are ranked by how many good discounts they have, '
+        "then by how deep those discounts are. "
+        f'<span class="tip-inline">{definition}</span></p>'
         '<div class="stat-block"><h3>New deals today</h3>'
         f'<ul class="intel-list">{"".join(new_rows) or "<li>No new deals in this scan.</li>"}</ul></div>'
         '<div class="stat-block"><h3>Biggest price drops</h3>'
@@ -907,110 +911,21 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">',
         f"<style>{_read_asset('page.css')}</style>",
         "<script>try{if(localStorage.getItem('salesscraper2.layout')==='cards')document.documentElement.classList.add('layout-cards')}catch(e){}</script>",
-        "</head><body><div class=\"container\">",
-        f'<header class="{header_class}" data-stale-hours="36">',
-        "<h1>Skateboard Sale Tracker</h1>",
-        "<p>"
-        f'<span id="statusCounts">{len(records)} active deals, {new_count} new, {drop_count} drops</span>'
-        ' · <span class="scan-wrap">last scan <time id="lastScan" datetime="'
-        f'{escape(str(generated_at), quote=True)}">{escape(str(generated_at))}</time>'
-        f'<span class="scan-exact" id="scanExact">{escape(format_scan_et(generated_at))}</span></span>'
-        f' <span class="fresh-note" id="freshness">{escape(fresh_text)}</span></p>',
-        "</header>",
+        "</head><body><div class=\"shell\">",
+        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals" aria-label="Search deals"></div>',
     ]
     alert = _alert_html(warnings)
-    if alert:
-        chunks.append(alert)
-
-    chunks.append(
-        '<p class="lede digest" id="changeLine" '
-        f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}">'
-        '<span class="digest-label">Digest of what changed. '
-        '<span id="changePrefix">Since yesterday:</span></span> '
-        '<span class="segment" role="group" aria-label="What changed">'
-        '<button type="button" class="change-btn active" id="btnAll" data-change="all" '
-        'aria-pressed="true" onclick="setChange(\'all\')">All deals</button> '
-        f'<button type="button" class="change-btn" id="btnNew" data-change="new" aria-pressed="false" '
-        f"onclick=\"setChange('new')\">"
-        f"{escape(_plural(new_count, 'new deal', 'new deals'))}</button> "
-        f'<button type="button" class="change-btn" id="btnDrop" data-change="drop" aria-pressed="false" '
-        f"onclick=\"setChange('drop')\">"
-        f"{escape(_plural(drop_count, 'price drop', 'price drops'))}</button> "
-        f'<button type="button" class="change-btn" id="btnLow" data-change="lowest" aria-pressed="false" '
-        f"onclick=\"setChange('lowest')\">"
-        f"{hit_count} hit lowest tracked price</button> "
-        f'<button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" '
-        f"onclick=\"setChange('removed')\">"
-        f"{escape(_plural(gone_count, 'deal disappeared', 'deals disappeared'))}</button>"
-        "</span></p>"
-    )
-    chunks.append(
-        '<div class="mode" role="group" aria-label="Digest baseline">'
-        '<span class="mode-label">Baseline</span>'
-        '<button type="button" class="mode-btn" id="modeYesterday" aria-pressed="true" '
-        'onclick="setVisitMode(\'yesterday\')">Since yesterday</button>'
-        '<button type="button" class="mode-btn" id="modeVisit" aria-pressed="false" '
-        'onclick="setVisitMode(\'visit\')">Since your last visit</button></div>'
-        '<p class="lede" id="visitNote" hidden></p>'
-    )
-
-    chunks.append('<div class="stats-grid">')
-    chunks.append(
-        '<button type="button" class="stat-card emphasis" data-card="new" aria-pressed="false" '
-        f'onclick="toggleCard(\'new\')"><div class="number">{new_count}</div><div class="label">New deals</div></button>'
-    )
-    chunks.append(
-        '<button type="button" class="stat-card emphasis" data-card="drop" aria-pressed="false" '
-        f'onclick="toggleCard(\'drop\')"><div class="number">{drop_count}</div><div class="label">Price drops</div></button>'
-    )
-    if low_items:
-        chunks.append(
-            '<button type="button" class="stat-card" data-card="lowest" aria-pressed="false" '
-            f'onclick="toggleCard(\'lowest\')"><div class="number">{len(low_items)}</div>'
-            '<div class="label">All-time lows</div></button>'
-        )
-    chunks.append(
-        '<button type="button" class="stat-card" data-card="clear" onclick="toggleCard(\'clear\')">'
-        f'<div class="number">{len(records)}</div><div class="label">Tracked deals</div></button>'
-    )
-    suspect_stores = set()
-    for warning in warnings:
-        if isinstance(warning, dict) and warning.get("kind") == "suspect" and warning.get("store"):
-            suspect_stores.add(warning["store"])
-    store_names = []
-    for key in data or {}:
-        store_name = str(key).rsplit("_", 1)[0]
-        if store_name and store_name not in store_names:
-            store_names.append(store_name)
-    for store_name in store_counts:
-        if store_name not in store_names:
-            store_names.append(store_name)
-    chunks.append("</div>")
-    chunks.append(_intel_strip(intel))
-    chunks.append('<div class="store-strip" aria-label="Deals by store">')
-    for store in sorted(store_names):
-        count = store_counts.get(store, 0)
-        warn = store in suspect_stores or count == 0
-        card_class = "stat-card is-warn" if warn else "stat-card"
-        badge = '<span class="warn-badge">Warning</span>' if warn else ""
-        chunks.append(
-            f'<button type="button" class="{card_class}" data-card="store" '
-            f'data-store="{escape(store, quote=True)}" aria-pressed="false" '
-            f"onclick=\"toggleCard('store', '{escape(store, quote=True)}')\">"
-            f'<span class="number">{count}</span><span class="label">{escape(store)}</span>{badge}</button>'
-        )
-    chunks.append("</div>")
-
+    notice = ""
     if failed_keys:
         listed = ", ".join(escape(key) for key in failed_keys)
-        chunks.append(
+        notice = (
             f'<div class="notice">Scrape failed for {listed}. '
             "Previous listings for those categories were kept, and removals are hidden.</div>"
         )
 
     store_options = ['<option value="all">All stores</option>']
     for store in sorted(store_counts):
-        store_options.append(_option(store, store))
+        store_options.append(_option(store, f"{store} ({store_counts[store]})"))
     part_options = ['<option value="all">All types</option>']
     for part in ("Decks", "Wheels", "Trucks", "Bearings"):
         if part in part_counts:
@@ -1051,18 +966,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f"onclick=\"toggleWidthRange('{escape(bucket.id, quote=True)}')\">"
             f"{escape(bucket.label)} ({count})</button>"
         )
-
-    chunks.append('<div class="sticky-bar" id="stickyBar">')
-    chunks.append(
-        '<div class="controls" id="basicFilters">'
-        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals"></div>'
-        '<label class="field"><span>Store</span>'
-        f'<select id="storeSelect">{"".join(store_options)}</select></label>'
-        '<label class="field"><span>Type</span>'
-        f'<select id="partSelect">{"".join(part_options)}</select></label>'
-        '<label class="field"><span>Brand</span>'
-        f'<select id="brandSelect">{"".join(brand_options)}</select></label>'
-        '<label class="field"><span>Sort</span><select id="sortSelect">'
+    sort_select = (
+        '<label class="field sort-field"><span>Sort</span><select id="sortSelect">'
         '<option value="rank">Newest / biggest drop</option>'
         '<option value="score">Deal score</option>'
         '<option value="price">Sale price, low to high</option>'
@@ -1075,38 +980,138 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<option value="days">Days tracked</option>'
         '<option value="daysat">Days at this price</option>'
         "</select></label>"
-        '<button type="button" class="text-btn" id="moreFilters" aria-expanded="false" aria-controls="morePanel">'
-        'More filters <span id="moreCount" hidden></span></button>'
-        "</div>"
     )
+
     chunks.append(
-        '<div class="more-filters" id="morePanel" hidden>'
+        '<aside class="sidebar" id="filterDrawer">'
+        '<div class="drawer-head"><strong>Filters</strong>'
+        '<button type="button" class="text-btn" id="filtersClose">Close</button></div>'
+        '<label class="field"><span>Store</span>'
+        f'<select id="storeSelect">{"".join(store_options)}</select></label>'
+        '<label class="field"><span>Type</span>'
+        f'<select id="partSelect">{"".join(part_options)}</select></label>'
+        '<label class="field"><span>Brand</span>'
+        f'<select id="brandSelect">{"".join(brand_options)}</select></label>'
+        '<button type="button" class="text-btn" id="moreFilters" aria-expanded="true" aria-controls="morePanel">'
+        'More filters <span id="moreCount" hidden></span></button>'
+        '<div class="more-filters" id="morePanel">'
         '<label class="field"><span>Min price</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
         '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
         '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
+        '<label class="field"><span>Score min</span><input id="scoreMin" type="number" min="0" max="100" step="1"></label>'
+        '<label class="field"><span>Score max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label>'
         f"{length_select}{wheel_select}"
         f'<div class="filter-group width-ranges" id="sizeFilters">'
         '<span class="range-label">Width range</span>'
         f'{"".join(chips)}</div>'
         "</div>"
-    )
-    chunks.append('<div class="active-row" id="activeChips" hidden></div>')
-    chunks.append(
         '<div class="tool-row">'
         '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
         '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
-        '<button type="button" class="text-btn" id="statsToggle" aria-pressed="false" onclick="toggleStats()">Deals intelligence</button>'
         '<button type="button" class="text-btn" id="saveView">Save view</button>'
         '<button type="button" class="text-btn" onclick="clearFilters()">Clear</button>'
-        "</div></div>"
-    )
-    chunks.append(
+        "</div>"
         '<form class="save-view" id="saveViewForm" hidden>'
         '<input id="viewNameInput" type="text" maxlength="80" placeholder="Name this view" aria-label="View name">'
         '<button type="submit" class="text-btn">Save</button>'
         '<button type="button" class="text-btn" id="viewCancel">Cancel</button>'
         "</form>"
         '<div class="view-row" id="viewRow"></div>'
+        "</aside>"
+    )
+    suspect_stores = set()
+    for warning in warnings:
+        if isinstance(warning, dict) and warning.get("kind") == "suspect" and warning.get("store"):
+            suspect_stores.add(warning["store"])
+    store_names = []
+    for key in data or {}:
+        store_name = str(key).rsplit("_", 1)[0]
+        if store_name and store_name not in store_names:
+            store_names.append(store_name)
+    for store_name in store_counts:
+        if store_name not in store_names:
+            store_names.append(store_name)
+    store_cards = ['<div class="stats-grid" hidden>']
+    for store in sorted(store_names):
+        count = store_counts.get(store, 0)
+        warn = store in suspect_stores or count == 0
+        card_class = "stat-card is-warn" if warn else "stat-card"
+        badge = '<span class="warn-badge">Warning</span>' if warn else ""
+        store_cards.append(
+            f'<button type="button" class="{card_class}" data-card="store" '
+            f'data-store="{escape(store, quote=True)}" aria-pressed="false" '
+            f"onclick=\"toggleCard('store', '{escape(store, quote=True)}')\">"
+            f'<span class="number">{count}</span><span class="label">{escape(store)}</span>{badge}</button>'
+        )
+    store_cards.append("</div>")
+    chunks.append("".join(store_cards))
+    chunks.append(
+        f'<header class="{header_class}" id="stickyBar" data-stale-hours="36">'
+        f"{alert or ''}"
+        '<div class="title-line">'
+        "<h1>Skateboard Sale Tracker</h1>"
+        f'<span id="statusCounts">{len(records)} active deals</span>'
+        '<span class="scan-wrap">last scan <time id="lastScan" datetime="'
+        f'{escape(str(generated_at), quote=True)}">{escape(str(generated_at))}</time>'
+        f'<span class="scan-exact" id="scanExact">{escape(format_scan_et(generated_at))}</span></span>'
+        f'<span class="fresh-note" id="freshness">{escape(fresh_text)}</span>'
+        '<button type="button" class="text-btn filters-open" id="filtersOpen">Filters</button>'
+        "</div>"
+        '<div class="tool-line">'
+        '<p class="lede digest" id="changeLine" '
+        f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}">'
+        '<span class="digest-label">Digest of what changed. '
+        '<span id="changePrefix">Since yesterday:</span></span> '
+        '<span class="segment" role="group" aria-label="What changed">'
+        '<button type="button" class="change-btn active" id="btnAll" data-change="all" '
+        'aria-pressed="true" onclick="setChange(\'all\')">All deals</button> '
+        f'<button type="button" class="change-btn" id="btnNew" data-change="new" aria-pressed="false" '
+        f"onclick=\"setChange('new')\">"
+        f"{escape(_plural(new_count, 'new deal', 'new deals'))}</button> "
+        f'<button type="button" class="change-btn" id="btnDrop" data-change="drop" aria-pressed="false" '
+        f"onclick=\"setChange('drop')\">"
+        f"{escape(_plural(drop_count, 'price drop', 'price drops'))}</button> "
+        f'<button type="button" class="change-btn" id="btnLow" data-change="lowest" aria-pressed="false" '
+        f"onclick=\"setChange('lowest')\">"
+        f"{hit_count} hit lowest tracked price</button> "
+        f'<button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" '
+        f"onclick=\"setChange('removed')\">"
+        f"{escape(_plural(gone_count, 'deal disappeared', 'deals disappeared'))}</button>"
+        "</span></p>"
+        '<div class="mode" role="group" aria-label="Digest baseline">'
+        '<span class="mode-label">Baseline</span>'
+        '<button type="button" class="mode-btn" id="modeYesterday" aria-pressed="true" '
+        'onclick="setVisitMode(\'yesterday\')">Since yesterday</button>'
+        '<button type="button" class="mode-btn" id="modeVisit" aria-pressed="false" '
+        'onclick="setVisitMode(\'visit\')">Since your last visit</button>'
+        '<select id="baselineSelect" aria-label="Baseline">'
+        '<option value="yesterday">Since yesterday</option>'
+        '<option value="visit">Since your last visit</option>'
+        "</select></div>"
+        f"{sort_select}"
+        '<div class="layout-toggle" role="group" aria-label="Layout">'
+        '<button type="button" id="layoutTable" aria-pressed="true">Table</button>'
+        '<button type="button" id="layoutCards" aria-pressed="false">Cards</button>'
+        "</div></div>"
+        '<p class="lede" id="visitNote" hidden></p>'
+        "</header>"
+    )
+    chunks.append('<div class="board">')
+    if notice:
+        chunks.append(notice)
+    chunks.append('<div class="active-row" id="activeChips" hidden></div>')
+    try:
+        stats_html = _stats_html(products, price_history, intel)
+    except Exception as exc:
+        logger.error("Stats section failed: %s", exc)
+        stats_html = ""
+    chunks.append(
+        '<details class="highlights" id="highlights">'
+        "<summary>Today's highlights</summary>"
+        f"{_intel_strip(intel)}"
+        '<button type="button" class="text-btn" id="statsToggle" aria-pressed="false" onclick="toggleStats()">Deals intelligence</button>'
+        f"{stats_html}"
+        "</details>"
     )
 
     header_cells = [
@@ -1134,24 +1139,22 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 '<button type="button" data-sort="daysat" onclick="sortBy(\'daysat\')">At price</button>'
                 "</th>"
             )
-        else:
-            title = f' title="{escape(FORMULA, quote=True)}"' if key == "score" else ""
+        elif key == "score":
             head.append(
-                f'<th data-sort="{key}"{title} onclick="sortBy(\'{key}\')">{escape(label)}</th>'
+                '<th data-sort="score" onclick="sortBy(\'score\')">Score '
+                f'<button type="button" class="info-dot" id="scoreInfo">?</button>'
+                f'<span class="tip" id="scoreTip" role="tooltip">{escape(SCORE_LEGEND)}</span></th>'
+            )
+        else:
+            head.append(
+                f'<th data-sort="{key}" onclick="sortBy(\'{key}\')">{escape(label)}</th>'
             )
     chunks.append(
         '<div class="section" id="dealsSection">'
-        '<div class="section-header deals-head"><h2>All Deals '
-        f'<span class="badge">{len(records)}</span></h2>'
-        '<div class="layout-toggle" role="group" aria-label="Layout">'
-        '<button type="button" id="layoutTable" aria-pressed="true">Table</button>'
-        '<button type="button" id="layoutCards" aria-pressed="false">Cards</button>'
-        "</div></div>"
+        '<h2 class="sr-only">All Deals</h2>'
         '<div class="section-content">'
     )
-    chunks.append(f'<p class="score-legend">{escape(SCORE_LEGEND)}</p>')
     chunks.append(f'<div class="table-wrap"><table id="mainTable"><thead><tr>{"".join(head)}</tr></thead><tbody>')
-
     card_chunks = ['<div class="card-grid" id="cardGrid">']
     for record in records:
         try:
@@ -1178,10 +1181,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     except Exception as exc:
         logger.error("Across-stores section failed: %s", exc)
     try:
-        chunks.append(_stats_html(products, price_history, intel))
-    except Exception as exc:
-        logger.error("Stats section failed: %s", exc)
-    try:
         chunks.append(_activity_html(sales, generated_at))
     except Exception as exc:
         logger.error("Retailer activity panel failed: %s", exc)
@@ -1198,7 +1197,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "A site-wide sale is a day when a store's sale count is at least 2.5× its recent median and 30 items higher, "
         "after 7 quieter days. Skate Warehouse is seeded at 2026-07-04 until a later day clears that bar.</p>"
         '<p><a href="https://github.com/pchoward/salesscraper2/actions/workflows/scrape.yml">Run scraper now</a></p>'
-        "</footer></div>"
+        "</footer></div></div>"
     )
     chunks.append(
         '<div id="productModal" hidden>'
@@ -1332,19 +1331,33 @@ def _card_html(record):
     discount = _discount_class(item.get("price_new"), item.get("price_old"))
     listed = " on-list" if record["listed"] else ""
     currency = item.get("currency")
+    band = score_band(record["score"]["score"])
+    face = _badge_html(record["badges"], record["listed"], limit=1) or _stage_html(record.get("stage"))
+    size = f'{escape(record["width_key"])}"' if record["width_key"] else ""
+    why = _why_html(record, dom_id="why-card-" + str(record["id"]))
     return (
         f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
-        '<div class="card-top">'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
-        f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
-        "</div>"
         f'{_thumb(record["image"], record["name"], large=True)}'
+        '<div class="card-face">'
+        f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
+        f'<span class="discount card-off {discount}">{escape(percent)}</span>'
+        "</div>"
         f'<h3 class="product-name">{_product_link(item)}</h3>'
         f'<div class="card-price"><span class="price price-new">{_money(item.get("price_new"), currency)}</span>'
-        f'<span class="discount {discount}">{escape(percent)}</span></div>'
-        f'<div class="card-spark">{_trend_html(record.get("trend"))}{_spark_html(record)}</div>'
+        f'<span class="card-spark">{_spark_html(record)}</span></div>'
+        f'<div class="card-badge">{face}</div>'
+        '<button type="button" class="card-more" aria-expanded="false">Details</button>'
+        '<div class="card-hover">'
+        f'<div class="card-extra">{escape(size)} {escape(record["held"])} '
+        f'<span class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else ""}</span></div>'
         f'<div class="row-meta">{_badge_html(record["badges"], record["listed"])}'
-        f'{_stage_html(record.get("stage"))}</div></article>'
+        f'{_stage_html(record.get("stage"))}</div>'
+        f'<div class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false">'
+        f'{record["score"]["score"]}'
+        + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")
+        + f"</button>{why}</div>"
+        "</div></article>"
     )
 
 
@@ -1492,7 +1505,7 @@ def _stage_html(stage):
     return f'<span class="stage stage-{escape(stage or "")}">{escape(label)}</span>'
 
 
-def _why_html(record):
+def _why_html(record, dom_id=None):
     score = record["score"]
     parts = score.get("parts") or {}
     specific = {"discount": "", "lowest": "", "drop": "", "size": ""}
@@ -1538,7 +1551,7 @@ def _why_html(record):
     for label in notes:
         rows.append(f'<li class="why-note"><span>{escape(label)}</span><b>not scored</b></li>')
     return (
-        f'<div class="why" id="why-{record["id"]}" role="tooltip">'
+        f'<div class="why" id="{escape(dom_id or "why-" + str(record["id"]), quote=True)}" role="tooltip">'
         f'<strong>Why {score["score"]}?</strong><ul>{"".join(rows)}</ul>'
         "<p class=\"why-legend\">These four lines are the whole score. "
         "Days tracked are not added. 70 or above is hot.</p></div>"

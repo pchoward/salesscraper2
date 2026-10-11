@@ -143,6 +143,8 @@ def empty_state():
         "min": None,
         "max": None,
         "discount": None,
+        "scoremin": None,
+        "scoremax": None,
         "length": "all",
         "wheelbase": "all",
         "sort": "rank",
@@ -285,6 +287,10 @@ def decode_query(query):
             state["max"] = _float(value)
         elif key == "discount":
             state["discount"] = _float(value)
+        elif key == "scoremin":
+            state["scoremin"] = _float(value)
+        elif key == "scoremax":
+            state["scoremax"] = _float(value)
         elif key == "length" and value.strip() and value.strip().lower() != "all":
             state["length"] = value.strip()
         elif key == "wheelbase" and value.strip() and value.strip().lower() != "all":
@@ -336,6 +342,10 @@ def encode_state(state):
         add("max", _num_text(state["max"]))
     if state.get("discount") is not None:
         add("discount", _num_text(state["discount"]))
+    if state.get("scoremin") is not None:
+        add("scoremin", _num_text(state["scoremin"]))
+    if state.get("scoremax") is not None:
+        add("scoremax", _num_text(state["scoremax"]))
     add("length", state.get("length") or "")
     add("wheelbase", state.get("wheelbase") or "")
     sort = state.get("sort") or "rank"
