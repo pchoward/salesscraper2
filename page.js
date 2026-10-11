@@ -624,9 +624,15 @@ function paintCardStats() {
             return;
         }
         const sum = points.reduce((total, point) => total + Number(point[1]), 0);
+        const average = sum / points.length;
+        const now = parseFloat(card.dataset.price);
         const symbol = node.dataset.symbol || "$";
+        if (Number.isFinite(now) && Math.abs(average - now) < 0.005) {
+            node.hidden = true;
+            return;
+        }
         node.hidden = false;
-        node.textContent = "Average: " + symbol + (sum / points.length).toFixed(2);
+        node.textContent = "Average: " + symbol + average.toFixed(2);
     });
 }
 
@@ -1905,7 +1911,7 @@ function buildSparkSvg(points, width, height, stroke) {
     const endPoint = coords[coords.length - 1];
     dot.setAttribute("cx", endPoint[0].toFixed(1));
     dot.setAttribute("cy", endPoint[1].toFixed(1));
-    dot.setAttribute("r", width > 80 ? "3.2" : "2.2");
+    dot.setAttribute("r", height <= 14 ? "1.5" : (width > 80 ? "2.4" : "2.2"));
     dot.setAttribute("fill", color);
     svg.appendChild(dot);
     sparkPoints.set(svg, points || []);
@@ -1917,11 +1923,13 @@ function paintSparklines() {
         const item = (catalog().items || {})[button.dataset.id];
         const daily = item && Array.isArray(item.daily) ? item.daily : [];
         const card = button.classList.contains("spark-card");
+        const points = clipDailyPrices(daily, chartWindow);
+        const flat = card && sparkDirection(points) === "flat";
         const svg = buildSparkSvg(
-            clipDailyPrices(daily, chartWindow),
+            points,
             card ? 156 : 72,
-            card ? 44 : 22,
-            card ? 2.2 : 1.6
+            card ? (flat ? 12 : 30) : 22,
+            card ? (flat ? 1.5 : 2) : 1.6
         );
         const existing = button.querySelector("svg");
         if (existing) existing.replaceWith(svg);

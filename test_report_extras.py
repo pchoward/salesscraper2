@@ -300,7 +300,15 @@ class ReportExtraTests(unittest.TestCase):
                     "2026-10-04": 40.0,
                     "2026-10-11": 40.0,
                 },
-            }
+            },
+            wheel["url"]: {
+                "name": wheel["name"],
+                "store": "Zumiez",
+                "part": "Wheels",
+                "first_seen": "2026-10-02",
+                "last_seen": "2026-10-11",
+                "prices": {"2026-10-02": 30.0, "2026-10-11": 30.0},
+            },
         }
         html = build_report_html(
             {"Zumiez_Decks": [deck], "Zumiez_Wheels": [wheel]},
@@ -311,9 +319,22 @@ class ReportExtraTests(unittest.TestCase):
         card = html.split("https://example.com/drop", 1)[1].split("</article>", 1)[0]
         self.assertIn("Now: $40.00", card)
         self.assertIn("Average: $47.50", card)
-        self.assertIn("Price since Oct 4", card)
+        self.assertIn("Dropped from $50.00 on Oct 4", card)
+        self.assertNotIn("Price since Oct 4", card)
         self.assertIn('data-dropday="2026-10-04"', card)
         self.assertIn("spark-card", card)
+        self.assertIn('height="30"', card)
+        face = card.split('class="card-badge"', 1)[1].split('class="card-sparkline"', 1)[0]
+        self.assertIn("quiet-low", face)
+        self.assertNotIn("LOWEST EVER", face)
+        self.assertNotIn("pill-lowest", face)
+        flat = next(
+            part for part in html.split('<article class="deal-card')[1:] if "example.com/bones" in part
+        )
+        self.assertIn("Price unchanged since Oct 2", flat)
+        self.assertIn("Now: $30.00", flat)
+        self.assertIn('class="avg-price" data-symbol="$" hidden', flat)
+        self.assertIn('height="12"', flat)
         self.assertIn('id="categoryStrip"', html)
         self.assertIn('data-part="Decks"', html)
         self.assertIn('data-part="Wheels"', html)

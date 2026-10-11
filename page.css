@@ -931,7 +931,7 @@ th:hover .tip, th:focus-within .tip { display: block; }
     clip: rect(0, 0, 0, 0);
 }
 .card-grid { grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 0.45rem; }
-.deal-card { position: relative; padding: 0.4rem; gap: 0.25rem; }
+.deal-card { position: relative; padding: 0.4rem; gap: 0.12rem; }
 .deal-card .star { position: absolute; top: 0.35rem; right: 0.35rem; z-index: 2; background: white; }
 .deal-card .hero-wrap, .deal-card .hero, .deal-card .hero.ph { width: 100%; height: 158px; }
 .card-face, .card-price { display: flex; align-items: center; justify-content: space-between; gap: 0.35rem; }
@@ -952,7 +952,7 @@ th:hover .tip, th:focus-within .tip { display: block; }
 .card-metrics .price-new { font-size: 1rem; font-weight: 700; }
 .card-spark { width: 72px; height: 22px; justify-self: end; }
 .card-spark svg { width: 72px; height: 22px; display: block; }
-.card-badge { min-height: 1.15rem; }
+.card-badge { display: flex; flex-wrap: wrap; align-items: center; gap: 0.28rem; min-height: 0; }
 .deal-card .product-name { font-size: 0.82rem; font-weight: 650; max-width: none; margin: 0; line-height: 1.25; }
 /* Exactly three lines. The link is the text box, so the clamp has to be on
    the link; a fixed flex basis keeps the price row below it at every width. */
@@ -1234,13 +1234,13 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 128px;
+    height: 72px;
     background: #f4f6f8;
     border-radius: 2px;
 }
 .deal-card .hero, .deal-card .hero.ph {
     width: 100%;
-    height: 128px;
+    height: 72px;
     object-fit: contain;
     background: transparent;
     border-radius: 2px;
@@ -1362,20 +1362,33 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
     justify-content: space-between;
     align-items: baseline;
     gap: 0.35rem;
+    min-height: 0;
 }
-.now-price { color: var(--price); font-weight: 800; font-size: 0.92rem; }
-.avg-price { color: #64748b; font-size: 0.72rem; font-weight: 650; text-align: right; }
-.price-since { margin: 0; color: #64748b; font-size: 0.68rem; }
-.card-sparkline { margin-top: auto; display: flex; justify-content: flex-start; min-height: 44px; }
+.now-price { color: var(--price); font-weight: 800; font-size: 0.92rem; white-space: nowrap; }
+.avg-price { color: #64748b; font-size: 0.72rem; font-weight: 650; text-align: right; white-space: nowrap; flex: 0 0 auto; }
+.avg-price[hidden] { display: none !important; }
+.price-since { margin: 0; color: #64748b; font-size: 0.68rem; line-height: 1.3; }
+.quiet-low {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: 0.01em;
+}
+.pill-hot { background: #fef2f2; color: #b91c1c; font-weight: 800; }
+.card-sparkline { margin-top: auto; display: flex; justify-content: flex-start; min-height: 0; line-height: 0; }
 .card-sparkline .spark-hit {
     width: 156px;
-    height: 44px;
+    height: auto;
     padding: 0;
     border: 0;
     background: transparent;
     cursor: crosshair;
 }
-.card-sparkline svg { width: 156px; height: 44px; display: block; }
+.card-sparkline svg { width: 156px; height: auto; display: block; }
+.card-sparkline svg[data-direction="flat"] { height: 12px; }
+.card-sparkline svg[data-direction="down"],
+.card-sparkline svg[data-direction="up"] { height: 30px; }
 .category-strip {
     display: flex;
     gap: 0.35rem;
