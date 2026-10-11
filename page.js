@@ -88,6 +88,8 @@ function readControls() {
     state.priceMin = numOrNull("priceMin");
     state.priceMax = numOrNull("priceMax");
     state.discountMin = numOrNull("discountMin");
+    state.scoreMin = numOrNull("scoreMin");
+    state.scoreMax = numOrNull("scoreMax");
     const brand = document.getElementById("brandSelect");
     const length = document.getElementById("lengthSelect");
     const wheelbase = document.getElementById("wheelbaseSelect");
@@ -241,6 +243,9 @@ function rowMatches(row) {
         if (row.dataset.discount === "") return false;
         if (parseFloat(row.dataset.discount) < state.discountMin) return false;
     }
+    const score = parseFloat(row.dataset.score);
+    if (state.scoreMin != null && !(score >= state.scoreMin)) return false;
+    if (state.scoreMax != null && !(score <= state.scoreMax)) return false;
     if (state.watching && row.dataset.starred !== "1") return false;
     if (state.cardNew && row.dataset.added !== "1") return false;
     if (state.cardDrop && row.dataset.drop !== "1") return false;
@@ -557,6 +562,8 @@ function setVisitMode(mode) {
     const visit = document.getElementById("modeVisit");
     if (yesterday) yesterday.setAttribute("aria-pressed", state.visitMode === "yesterday" ? "true" : "false");
     if (visit) visit.setAttribute("aria-pressed", state.visitMode === "visit" ? "true" : "false");
+    const baseline = document.getElementById("baselineSelect");
+    if (baseline) baseline.value = state.visitMode;
     updateChangeLine();
     applyFilters();
 }
@@ -671,8 +678,10 @@ function toggleWatching() {
 function toggleStats() {
     const panel = document.getElementById("statsPanel");
     const button = document.getElementById("statsToggle");
+    const highlights = document.getElementById("highlights");
     if (!panel) return;
     panel.hidden = !panel.hidden;
+    if (!panel.hidden && highlights) highlights.open = true;
     if (button) button.setAttribute("aria-pressed", panel.hidden ? "false" : "true");
     if (!panel.hidden) panel.scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -698,7 +707,7 @@ function clearFilters() {
     };
     const search = document.getElementById("searchInput");
     if (search) search.value = "";
-    ["priceMin", "priceMax", "discountMin"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin", "scoreMin", "scoreMax"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.value = "";
     });
@@ -844,6 +853,8 @@ function decodeQuery(query) {
         min: null,
         max: null,
         discount: null,
+        scoremin: null,
+        scoremax: null,
         length: "all",
         wheelbase: "all",
         sort: "rank",
@@ -872,6 +883,8 @@ function decodeQuery(query) {
         else if (key === "min") stateOut.min = Number(value);
         else if (key === "max") stateOut.max = Number(value);
         else if (key === "discount") stateOut.discount = Number(value);
+        else if (key === "scoremin") stateOut.scoremin = Number(value);
+        else if (key === "scoremax") stateOut.scoremax = Number(value);
         else if (key === "length" && value && value !== "all") stateOut.length = value;
         else if (key === "wheelbase" && value && value !== "all") stateOut.wheelbase = value;
         else if (key === "sort" && ["rank", "score", "price", "price-desc", "original", "discount", "size", "store", "brand", "days", "daysat"].indexOf(value) >= 0) {
@@ -884,7 +897,7 @@ function decodeQuery(query) {
         else if (key === "dropped") stateOut.dropped = flagOn(value);
         else if (key === "group") stateOut.grouped = flagOn(value);
     });
-    ["min", "max", "discount"].forEach(key => {
+    ["min", "max", "discount", "scoremin", "scoremax"].forEach(key => {
         if (!Number.isFinite(stateOut[key])) stateOut[key] = null;
     });
     return stateOut;
@@ -907,6 +920,8 @@ function encodeState(snapshot) {
     if (snapshot.min != null) add("min", numText(snapshot.min));
     if (snapshot.max != null) add("max", numText(snapshot.max));
     if (snapshot.discount != null) add("discount", numText(snapshot.discount));
+    if (snapshot.scoremin != null) add("scoremin", numText(snapshot.scoremin));
+    if (snapshot.scoremax != null) add("scoremax", numText(snapshot.scoremax));
     add("length", snapshot.length || "");
     add("wheelbase", snapshot.wheelbase || "");
     if (snapshot.sort && snapshot.sort !== "rank") add("sort", snapshot.sort);
@@ -931,6 +946,8 @@ function captureState() {
         min: state.priceMin,
         max: state.priceMax,
         discount: state.discountMin,
+        scoremin: state.scoreMin,
+        scoremax: state.scoreMax,
         length: state.length,
         wheelbase: state.wheelbase,
         sort: sort ? sort.value : "rank",
@@ -967,6 +984,8 @@ function writeControls(snapshot) {
     fill("priceMin", snapshot.min);
     fill("priceMax", snapshot.max);
     fill("discountMin", snapshot.discount);
+    fill("scoreMin", snapshot.scoremin);
+    fill("scoreMax", snapshot.scoremax);
     state.store = snapshot.store || "all";
     state.part = snapshot.part || "all";
     state.widths = orderedWidths(snapshot.widths || []);
@@ -1116,7 +1135,7 @@ function saveCurrentView(name) {
 
 function updateMoreCount() {
     let count = 0;
-    ["priceMin", "priceMax", "discountMin"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin", "scoreMin", "scoreMax"].forEach(id => {
         if (numOrNull(id) != null) count += 1;
     });
     const length = document.getElementById("lengthSelect");
@@ -1279,6 +1298,20 @@ function paintActiveChips() {
     if (state.discountMin != null) {
         add(numText(state.discountMin) + "% off or more", () => {
             const node = document.getElementById("discountMin");
+            if (node) node.value = "";
+            applyFilters();
+        });
+    }
+    if (state.scoreMin != null) {
+        add("Score " + numText(state.scoreMin) + "+", () => {
+            const node = document.getElementById("scoreMin");
+            if (node) node.value = "";
+            applyFilters();
+        });
+    }
+    if (state.scoreMax != null) {
+        add("Score ≤ " + numText(state.scoreMax), () => {
+            const node = document.getElementById("scoreMax");
             if (node) node.value = "";
             applyFilters();
         });
@@ -1568,10 +1601,24 @@ function init() {
     if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
     const search = document.getElementById("searchInput");
     if (search) search.addEventListener("input", applyFilters);
-    ["priceMin", "priceMax", "discountMin"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin", "scoreMin", "scoreMax"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.addEventListener("input", applyFilters);
     });
+    const baseline = document.getElementById("baselineSelect");
+    if (baseline) baseline.addEventListener("change", () => setVisitMode(baseline.value));
+    const filtersOpen = document.getElementById("filtersOpen");
+    const filtersClose = document.getElementById("filtersClose");
+    const filterDrawer = document.getElementById("filterDrawer");
+    function setFilters(open) {
+        if (!filterDrawer) return;
+        filterDrawer.classList.toggle("is-open", open);
+        document.body.classList.toggle("filters-open", open);
+    }
+    if (filtersOpen) filtersOpen.addEventListener("click", () => setFilters(true));
+    if (filtersClose) filtersClose.addEventListener("click", () => setFilters(false));
+    const scoreInfo = document.getElementById("scoreInfo");
+    if (scoreInfo) scoreInfo.addEventListener("click", event => event.stopPropagation());
     const storeSelect = document.getElementById("storeSelect");
     if (storeSelect) storeSelect.addEventListener("change", () => filterByStore(storeSelect.value));
     const partSelect = document.getElementById("partSelect");
@@ -1648,6 +1695,14 @@ function init() {
             openProduct(button.dataset.id);
         });
     });
+    document.querySelectorAll(".card-more").forEach(button => {
+        button.addEventListener("click", () => {
+            const card = button.closest(".deal-card");
+            if (!card) return;
+            const on = card.classList.toggle("show-detail");
+            button.setAttribute("aria-expanded", on ? "true" : "false");
+        });
+    });
     document.querySelectorAll(".group-chart").forEach(button => {
         button.addEventListener("click", event => {
             event.stopPropagation();
@@ -1686,6 +1741,9 @@ function init() {
             closeDrawer();
             closeSparkPanel();
             closeProduct();
+            const drawer = document.getElementById("filterDrawer");
+            if (drawer) drawer.classList.remove("is-open");
+            document.body.classList.remove("filters-open");
         }
     });
     document.addEventListener("click", event => {
