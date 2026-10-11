@@ -317,6 +317,23 @@ class QueryStateTests(unittest.TestCase):
         self.assertEqual(state["sort"], "rank")
         self.assertEqual(state["widths"], [])
         self.assertEqual(encode_state(state), "")
+        self.assertEqual(state["interval"], "all")
+        self.assertEqual(state["kinds"], [])
+        self.assertIsNone(state["discountmax"])
+
+    def test_drop_interval_and_deal_kinds_round_trip(self):
+        state = decode_query("interval=week&kinds=hot,new&discountmax=40")
+        self.assertEqual(state["interval"], "week")
+        self.assertEqual(state["kinds"], ["new", "hot"])
+        self.assertEqual(state["discountmax"], 40.0)
+        encoded = encode_state(state)
+        self.assertIn("interval=week", encoded)
+        self.assertIn("kinds=new%2Chot", encoded)
+        self.assertIn("discountmax=40", encoded)
+        self.assertEqual(decode_query(encoded), state)
+        self.assertEqual(decode_query("interval=nope&kinds=nope")["interval"], "all")
+        self.assertEqual(decode_query("interval=nope&kinds=nope")["kinds"], [])
+        self.assertEqual(encode_state({}), "")
 
 
 class ReportPolishTests(unittest.TestCase):

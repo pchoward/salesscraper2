@@ -7,6 +7,7 @@ from history import (
     DETAIL_WINDOW_DAYS,
     STALE_AFTER_DAYS,
     all_time_low_status,
+    last_drop_date,
     prune_price_history,
     update_price_history,
 )
@@ -227,6 +228,22 @@ class PruneTests(unittest.TestCase):
         self.assertEqual(entry["observation_count"], 1)
         update_price_history(current, history, today=TODAY, skip_keys=set())
         self.assertEqual(entry["observation_count"], 1)
+
+
+class LastDropDateTests(unittest.TestCase):
+    def test_latest_meaningful_drop_ignores_a_small_dip(self):
+        entry = {
+            "prices": {
+                "2026-09-01": 60.0,
+                "2026-10-01": 50.0,
+                "2026-10-02": 49.5,
+                "2026-10-04": 40.0,
+                "2026-10-11": 40.0,
+            }
+        }
+        self.assertEqual(last_drop_date(entry), "2026-10-04")
+        self.assertIsNone(last_drop_date({"prices": {"2026-10-11": 40.0}}))
+        self.assertIsNone(last_drop_date(None))
 
 
 if __name__ == "__main__":

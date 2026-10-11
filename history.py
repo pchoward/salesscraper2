@@ -28,6 +28,8 @@ Pruning is safe to run every day. It does not rewrite git history.
 import datetime
 import logging
 
+from filters import is_meaningful_drop
+
 from filters import filter_reason, item_passes_filters, normalize_product_name, normalize_url
 
 logger = logging.getLogger("history")
@@ -548,6 +550,26 @@ def price_is_reduced(entry):
     latest = prices[max(prices)]
     cents = _cents(latest)
     return any(_cents(price) > cents for price in prices.values())
+
+
+def last_drop_date(entry):
+    """Date of the latest meaningful day-to-day sale-price drop, or None.
+
+    Meaningful is the catalog rule: at least $2 or 5% below the previous
+    daily observation. The date is the day the lower price was recorded.
+    A smaller dip is not a drop, and a price with no earlier day is not one.
+    """
+    if not isinstance(entry, dict):
+        return None
+    prices = _clean_prices(entry.get("prices"))
+    last = None
+    previous = None
+    for day in prices:
+        price = prices[day]
+        if previous is not None and is_meaningful_drop(previous, price):
+            last = day
+        previous = price
+    return last
 
 
 def freshly_reduced(entry, today=None):

@@ -1327,6 +1327,180 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
     .deal-card .hero-wrap, .deal-card .hero, .deal-card .hero.ph { height: 112px; }
     .tool-line { margin-left: 0; margin-right: 0; }
 }
+.media { position: relative; }
+.media .drop-badge,
+.media > .card-off {
+    position: absolute;
+    z-index: 2;
+    top: 0.35rem;
+    left: 0.35rem;
+}
+.drop-badge,
+.media > .card-off {
+    background: #15803d;
+    color: white;
+    font-weight: 800;
+    font-size: 0.95rem;
+    line-height: 1.1;
+    padding: 0.18rem 0.42rem;
+    border-radius: 4px;
+}
+.media > .card-off { background: #1d4ed8; }
+.deal-card .card-off.none {
+    display: inline-block;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.62rem;
+    font-weight: 650;
+    line-height: 1.15;
+    padding: 0.12rem 0.28rem;
+    border-radius: 4px;
+    max-width: 6.5rem;
+}
+.card-prices {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.35rem;
+}
+.now-price { color: var(--price); font-weight: 800; font-size: 0.92rem; }
+.avg-price { color: #64748b; font-size: 0.72rem; font-weight: 650; text-align: right; }
+.price-since { margin: 0; color: #64748b; font-size: 0.68rem; }
+.card-sparkline { margin-top: auto; display: flex; justify-content: flex-start; min-height: 44px; }
+.card-sparkline .spark-hit {
+    width: 156px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: crosshair;
+}
+.card-sparkline svg { width: 156px; height: 44px; display: block; }
+.category-strip {
+    display: flex;
+    gap: 0.35rem;
+    overflow-x: auto;
+    padding: 0.15rem 0 0.45rem;
+}
+.category-strip button {
+    border: 1px solid #d5dbe3;
+    background: white;
+    color: #1c2430;
+    border-radius: 999px;
+    padding: 0.28rem 0.7rem;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.category-strip button[aria-pressed="true"] {
+    background: #1c2430;
+    color: white;
+    border-color: #1c2430;
+}
+.category-strip .cat-count { font-weight: 650; opacity: 0.8; }
+.interval-list, .kind-list { display: flex; flex-direction: column; gap: 0.15rem; }
+.interval-btn, .kind-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    background: transparent;
+    color: #1c2430;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 650;
+    padding: 0.28rem 0.35rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.interval-btn[aria-pressed="true"],
+.kind-btn[aria-pressed="true"] { background: #dbeafe; color: #1d4ed8; }
+.interval-btn.is-zero, .kind-btn.is-zero { color: #64748b; }
+.interval-btn .facet-count, .kind-btn .facet-count { margin-left: auto; font-weight: 650; }
+.kind-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    flex: 0 0 auto;
+}
+.kind-new { background: #2563eb; }
+.kind-drop { background: #15803d; }
+.kind-low { background: #ca8a04; }
+.kind-back { background: #7c3aed; }
+.kind-watch { background: #d97706; }
+.kind-hot { background: #b91c1c; }
+.section-note { margin: 0.35rem 0 0; color: #64748b; font-size: 0.68rem; line-height: 1.35; }
+.dual { position: relative; height: 2.6rem; margin: 0.45rem 0 0.2rem; }
+.dual input[type="range"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    pointer-events: none;
+    appearance: none;
+    height: 1.4rem;
+}
+.dual-min { z-index: 3; }
+.dual-max { z-index: 2; }
+.dual input[type="range"]::-webkit-slider-runnable-track {
+    height: 4px;
+    background: #d5dbe3;
+    border-radius: 999px;
+}
+.dual input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    margin-top: -6px;
+    border-radius: 50%;
+    background: #2563eb;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px #2563eb;
+    cursor: pointer;
+}
+.dual input[type="range"]::-moz-range-track {
+    height: 4px;
+    background: #d5dbe3;
+    border-radius: 999px;
+}
+.dual input[type="range"]::-moz-range-thumb {
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #2563eb;
+    border: 2px solid white;
+    cursor: pointer;
+}
+.dual-readout {
+    position: absolute;
+    left: 0;
+    top: 1.45rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #334155;
+}
+.saved-views { margin-top: 0.7rem; }
+.sidebar .saved-views .view-row {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+}
+.sidebar .saved-views .view-tab { width: 100%; }
+.sidebar .saved-views .view-apply { flex: 1; text-align: left; }
+.modal-label { margin: 0.6rem 0 0.2rem; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #64748b; }
+.interval-btn:focus-visible, .kind-btn:focus-visible, .category-strip button:focus-visible,
+.dual input:focus-visible, #bookmarkView:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
 /* .deal-card { display: flex } comes later than .filtered-out { display: none }
    and has the same specificity, so a filtered card stayed on screen. The
    card selector below wins, including over a later flex rule. */
