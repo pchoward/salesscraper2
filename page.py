@@ -236,11 +236,37 @@ def _window_average(prices, days=90, end=None):
     return round(sum(price for _day, price in points) / len(points), 2)
 
 
-def _since_label(since, first):
-    """Honest date for the current price. Hours are not known, so they are not shown."""
+def _prior_price(prices, since):
+    """Last tracked price before the current run started, or None."""
+    prior = None
+    for day in sorted(prices or {}):
+        if since and str(day) < str(since):
+            prior = prices[day]
+        else:
+            break
+    return prior
+
+
+def _since_label(since, first, prices=None, current=None, symbol="$"):
+    """Say whether this price is unchanged or a real move, with the date.
+
+    Hours are not known. A drop uses the previous tracked price, not a guess.
+    """
     since_text = _month_day(since)
     if since_text:
-        return f"Price since {since_text}"
+        prior = _prior_price(prices, since)
+        try:
+            current_value = float(current) if current is not None else None
+            prior_value = float(prior) if prior is not None else None
+        except (TypeError, ValueError):
+            current_value = None
+            prior_value = None
+        if prior_value is not None and current_value is not None and abs(prior_value - current_value) > 0.001:
+            shown = f"{symbol}{prior_value:.2f}"
+            if prior_value > current_value:
+                return f"Dropped from {shown} on {since_text}"
+            return f"Up from {shown} on {since_text}"
+        return f"Price unchanged since {since_text}"
     first_text = _month_day(first)
     if first_text:
         return f"First seen {first_text}"
@@ -330,7 +356,7 @@ def sparkline_direction(prices, days=90, end=None):
     return "flat"
 
 
-def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None, stroke=1.6):
+def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None, stroke=1.6, radius=2.2):
     ordered = clip_daily_prices(prices, days=days, end=end)
     if not ordered:
         return ""
@@ -356,7 +382,7 @@ def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None, s
             f'<polyline fill="none" stroke="{color}" stroke-width="{stroke}" points="{drawn}"/>'
         )
     x_pos, y_pos = coords[-1]
-    parts.append(f'<circle cx="{x_pos:.1f}" cy="{y_pos:.1f}" r="2.2" fill="{color}"/>')
+    parts.append(f'<circle cx="{x_pos:.1f}" cy="{y_pos:.1f}" r="{radius}" fill="{color}"/>')
     parts.append("</svg>")
     return "".join(parts)
 
@@ -866,7 +892,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "first": first,
                 "last": last,
                 "since": since,
-                "since_label": _since_label(since, first),
+                "since_label": _since_label(
+                    since,
+                    first,
+                    prices,
+                    _price(item.get("price_new")),
+                    "€" if str(item.get("currency") or "USD").upper() == "EUR" else "$",
+                ),
                 "average": average,
                 "drop_day": drop_day,
                 "fresh": any(badge.get("kind") == "new" for badge in badges),
@@ -1646,6 +1678,42 @@ def _drop_badge(record):
     return f'<span class="drop-badge" title="{escape(title, quote=True)}">{escape(text)}</span>'
 
 
+def _card_status(record):
+    """Loud marks only for a recent change or a hot score. All-time low stays quiet."""
+    parts = []
+    kinds = set()
+    for badge in record.get("badges") or []:
+        kind = badge.get("kind") or ""
+        if kind not in {"new", "back", "drop"}:
+            continue
+        kinds.add(kind)
+        parts.append(
+            f'<span class="pill pill-{escape(kind)}">{escape(badge.get("label") or "")}</span>'
+        )
+    age = None
+    try:
+        end = datetime.date.fromisoformat(str(record.get("spark_end") or "")[:10])
+        drop_day = datetime.date.fromisoformat(str(record.get("drop_day") or "")[:10])
+        age = (end - drop_day).days
+    except ValueError:
+        age = None
+    if age is not None and 0 <= age <= 3 and "drop" not in kinds:
+        parts.append(
+            '<span class="pill pill-drop" title="Tracked price dropped in the last 3 days">Price drop</span>'
+        )
+    if record.get("hot"):
+        parts.append('<span class="pill pill-hot">HOT</span>')
+    if record.get("listed"):
+        parts.append('<span class="pill pill-list">Watchlist</span>')
+    if any(badge.get("kind") == "lowest" for badge in record.get("badges") or []):
+        parts.append('<span class="quiet-low" title="Lowest tracked price">Lowest ever</span>')
+    if not parts:
+        stage = _stage_html(record.get("stage"))
+        if stage:
+            parts.append(stage)
+    return "".join(parts)
+
+
 def _card_html(record):
     item = record["item"]
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
@@ -1654,7 +1722,7 @@ def _card_html(record):
     currency = item.get("currency")
     symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
     band = score_band(record["score"]["score"])
-    face = _badge_html(record["badges"], record["listed"], limit=1) or _stage_html(record.get("stage"))
+    face = _card_status(record)
     size = f'{escape(record["width_key"])}"' if record["width_key"] else ""
     why = _why_html(record, dom_id="why-card-" + str(record["id"]))
     if percent == "N/A":
@@ -1674,8 +1742,12 @@ def _card_html(record):
     average = record.get("average")
     avg_html = ""
     if average is not None:
+        now_amount = _price(item.get("price_new"))
+        same = now_amount is not None and abs(float(average) - float(now_amount)) < 0.005
+        hidden = " hidden" if same else ""
         avg_html = (
-            f'<span class="avg-price" data-symbol="{symbol}">Average: {symbol}{float(average):.2f}</span>'
+            f'<span class="avg-price" data-symbol="{symbol}"{hidden}>'
+            f"Average: {symbol}{float(average):.2f}</span>"
         )
     since = record.get("since_label") or ""
     since_html = f'<p class="price-since">{escape(since)}</p>' if since else ""
@@ -1693,9 +1765,8 @@ def _card_html(record):
         f'<span class="now-price">Now: {_money(item.get("price_new"), currency)}</span>'
         f"{avg_html}</div>"
         f"{since_html}"
-        f"{extra_off}"
-        f'<div class="card-badge">{face}</div>'
-        f'<div class="card-sparkline">{_spark_html(record, width=156, height=44, stroke=2.2)}</div>'
+        f'<div class="card-badge">{extra_off}{face}</div>'
+        f'<div class="card-sparkline">{_spark_html(record, width=156)}</div>'
         '<button type="button" class="card-more" aria-expanded="false">Details</button>'
         '<div class="card-hover">'
         f'<p class="card-hover-title">{escape(record["name"])}</p>'
@@ -1946,6 +2017,13 @@ def _dual_html(min_id, max_id, floor, ceil, prefix, any_label, min_label, max_la
 
 
 def _spark_html(record, width=72, height=22, stroke=1.6):
+    radius = 2.2
+    if width > 80:
+        direction = sparkline_direction(record["prices"], days=90, end=record.get("spark_end"))
+        if direction == "flat":
+            height, stroke, radius = 12, 1.5, 1.5
+        else:
+            height, stroke, radius = 30, 2, 2.2
     spark = sparkline_svg(
         record["prices"],
         width=width,
@@ -1953,6 +2031,7 @@ def _spark_html(record, width=72, height=22, stroke=1.6):
         days=90,
         end=record.get("spark_end"),
         stroke=stroke,
+        radius=radius,
     )
     if not spark:
         return ""
