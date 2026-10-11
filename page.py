@@ -1495,26 +1495,48 @@ def _stage_html(stage):
 def _why_html(record):
     score = record["score"]
     parts = score.get("parts") or {}
-    factors = (
-        ("Discount depth", parts.get("discount") or 0, "Percent off, max 50"),
-        ("Lowest tracked price", parts.get("lowest") or 0, "25 at the low, 18 within $1 or 3%, 10 within $2 or 5%"),
-        ("Recent drop", parts.get("drop") or 0, "Up to 15, or 4 for a smaller dip"),
-        ("Popular size", parts.get("size") or 0, "10 when the deck is 8.25–8.75"),
-    )
-    rows = []
-    for label, points, hint in factors:
-        rows.append(
-            f'<li><span>{escape(label)} <em>{escape(hint)}</em></span><b>+{int(points)}</b></li>'
-        )
+    specific = {"discount": "", "lowest": "", "drop": "", "size": ""}
+    notes = []
     for factor in score.get("breakdown") or []:
         label = factor.get("label") or ""
         if not label:
             continue
-        points = factor.get("points")
-        if points:
-            rows.append(f"<li><span>{escape(label)}</span><b>+{int(points)}</b></li>")
+        if factor.get("points"):
+            lowered = label.lower()
+            if label.endswith("% off"):
+                specific["discount"] = label
+            elif "lowest" in lowered:
+                specific["lowest"] = label
+            elif "reduced" in lowered:
+                specific["drop"] = label
+            elif label == "Popular size":
+                specific["size"] = label
         else:
-            rows.append(f'<li class="why-note"><span>{escape(label)}</span><b>not scored</b></li>')
+            notes.append(label)
+
+    def hint(title, key, generic):
+        chosen = specific.get(key) or ""
+        if chosen and chosen.casefold() != title.casefold():
+            return chosen
+        return generic
+
+    factors = (
+        ("Discount depth", parts.get("discount") or 0, hint("Discount depth", "discount", "Percent off, max 50")),
+        (
+            "Lowest tracked price",
+            parts.get("lowest") or 0,
+            hint("Lowest tracked price", "lowest", "25 at the low, 18 within $1 or 3%, 10 within $2 or 5%"),
+        ),
+        ("Recent drop", parts.get("drop") or 0, hint("Recent drop", "drop", "Up to 15, or 4 for a smaller dip")),
+        ("Popular size", parts.get("size") or 0, hint("Popular size", "size", "10 when the deck is 8.25–8.75")),
+    )
+    rows = []
+    for label, points, detail in factors:
+        rows.append(
+            f'<li><span>{escape(label)} <em>{escape(detail)}</em></span><b>+{int(points)}</b></li>'
+        )
+    for label in notes:
+        rows.append(f'<li class="why-note"><span>{escape(label)}</span><b>not scored</b></li>')
     return (
         f'<div class="why" id="why-{record["id"]}" role="tooltip">'
         f'<strong>Why {score["score"]}?</strong><ul>{"".join(rows)}</ul>'
