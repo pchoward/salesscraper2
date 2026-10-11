@@ -131,7 +131,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('class="facet-value is-extra" data-brand="Habitat"', html)
         self.assertIn("function rowMatches(row, overrides)", html)
         self.assertIn("function paintFacetCounts()", html)
-        self.assertIn("minmax(200px, 1fr)", html)
+        self.assertIn("minmax(176px, 1fr)", html)
         self.assertIn("-webkit-line-clamp: 3", html)
         self.assertIn('id="brandSearch"', html)
         self.assertIn("Counts match the other filters", html)
@@ -181,6 +181,38 @@ class ReportExtraTests(unittest.TestCase):
         deck_card = next(part for part in cards if "Disney x HUF" in part)
         self.assertIn("card-off high", deck_card)
         self.assertNotIn("No discount info", deck_card)
+
+    def test_nav_scan_label_and_brand_case_merge(self):
+        low = _deck("50.00", "https://example.com/low", "Tactics", "5boro Lucky Candle Brooklyn 8.25 Skateboard Deck")
+        high = _deck(
+            "50.00",
+            "https://example.com/high",
+            "Zumiez",
+            '5Boro Herrick 5Ball Video Series 8.25" Skateboard Deck',
+        )
+        html = build_report_html(
+            {"Tactics_Decks": [low], "Zumiez_Decks": [high]},
+            {},
+            generated_at="2026-10-11T20:22:15+00:00",
+        )
+        self.assertIn("SkateDeals", html)
+        self.assertIn('id="navDeals"', html)
+        self.assertIn('id="navTrack"', html)
+        self.assertIn('id="navInsights"', html)
+        self.assertIn(">Deals</button>", html)
+        self.assertIn(">Track</button>", html)
+        self.assertIn(">Insights</button>", html)
+        self.assertIn('id="lastScan" datetime="2026-10-11T20:22:15+00:00">', html)
+        self.assertNotIn('id="lastScan" datetime="2026-10-11T20:22:15+00:00">2026-10-11T20:22:15+00:00<', html)
+        self.assertIn(" ET</time>", html)
+        self.assertNotIn('data-brand="5boro"', html)
+        self.assertNotIn('value="5boro"', html)
+        self.assertIn('data-brand="5Boro"', html)
+        # Two table rows, two cards, and one brand facet button.
+        self.assertEqual(html.count('data-brand="5Boro"'), 5)
+        self.assertEqual(html.count('value="5Boro"'), 1)
+        self.assertIn("const HISTORY_COLOR", html)
+        self.assertIn("function brandSame(", html)
 
 
 if __name__ == "__main__":
