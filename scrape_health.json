@@ -768,55 +768,125 @@
         }
       },
       "scanned_at": "2026-10-10T13:38:10+00:00"
+    },
+    {
+      "date": "2026-10-11",
+      "results": {
+        "Zumiez_Decks": {
+          "count": 225,
+          "failed": false
+        },
+        "Zumiez_Wheels": {
+          "count": 13,
+          "failed": false
+        },
+        "Zumiez_Trucks": {
+          "count": 35,
+          "failed": false
+        },
+        "Zumiez_Bearings": {
+          "count": 0,
+          "failed": false
+        },
+        "SkateWarehouse_Decks": {
+          "count": 74,
+          "failed": false
+        },
+        "SkateWarehouse_Wheels": {
+          "count": 4,
+          "failed": false
+        },
+        "SkateWarehouse_Trucks": {
+          "count": 9,
+          "failed": false
+        },
+        "SkateWarehouse_Bearings": {
+          "count": 0,
+          "failed": false
+        },
+        "CCS_Decks": {
+          "count": 6,
+          "failed": false
+        },
+        "CCS_Wheels": {
+          "count": 9,
+          "failed": false
+        },
+        "CCS_Trucks": {
+          "count": 7,
+          "failed": false
+        },
+        "CCS_Bearings": {
+          "count": 0,
+          "failed": false
+        },
+        "Tactics_Decks": {
+          "count": 136,
+          "failed": false
+        },
+        "Tactics_Wheels": {
+          "count": 9,
+          "failed": false
+        },
+        "Tactics_Trucks": {
+          "count": 4,
+          "failed": false
+        },
+        "Tactics_Bearings": {
+          "count": 0,
+          "failed": false
+        }
+      },
+      "scanned_at": "2026-10-11T14:00:48+00:00"
     }
   ],
   "baseline": {
     "Zumiez_Decks": {
-      "date": "2026-10-10",
-      "count": 230
+      "date": "2026-10-11",
+      "count": 225
     },
     "Zumiez_Wheels": {
-      "date": "2026-10-10",
-      "count": 14
+      "date": "2026-10-11",
+      "count": 13
     },
     "Zumiez_Trucks": {
-      "date": "2026-10-10",
-      "count": 36
+      "date": "2026-10-11",
+      "count": 35
     },
     "SkateWarehouse_Decks": {
-      "date": "2026-10-10",
-      "count": 93
+      "date": "2026-10-11",
+      "count": 74
     },
     "SkateWarehouse_Wheels": {
-      "date": "2026-10-10",
+      "date": "2026-10-11",
       "count": 4
     },
     "SkateWarehouse_Trucks": {
-      "date": "2026-10-10",
+      "date": "2026-10-11",
       "count": 9
     },
     "CCS_Decks": {
-      "date": "2026-10-10",
+      "date": "2026-10-11",
       "count": 6
     },
     "CCS_Trucks": {
-      "date": "2026-10-10",
+      "date": "2026-10-11",
       "count": 7
     },
     "Tactics_Decks": {
-      "date": "2026-10-10",
-      "count": 137
+      "date": "2026-10-11",
+      "count": 136
     },
     "Tactics_Wheels": {
-      "date": "2026-10-10",
-      "count": 10
+      "date": "2026-10-11",
+      "count": 9
     },
     "Tactics_Trucks": {
-      "date": "2026-10-10",
+      "date": "2026-10-11",
       "count": 4
     },
     "CCS_Wheels": {
-      "date": "2026-10-10",
+      "date": "2026-10-11",
       "count": 9
     }
   }
