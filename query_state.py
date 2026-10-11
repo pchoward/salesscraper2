@@ -108,6 +108,8 @@ SORTS = (
     "daysat",
 )
 CHANGES = ("new", "drop", "lowest", "removed")
+INTERVALS = ("day", "week", "month", "quarter")
+DEAL_KINDS = ("new", "drop", "low", "back", "hot")
 
 STARTER_VIEWS = (
     {
@@ -143,6 +145,7 @@ def empty_state():
         "min": None,
         "max": None,
         "discount": None,
+        "discountmax": None,
         "scoremin": None,
         "scoremax": None,
         "length": "all",
@@ -154,6 +157,8 @@ def empty_state():
         "added": False,
         "dropped": False,
         "grouped": False,
+        "interval": "all",
+        "kinds": [],
     }
 
 
@@ -257,6 +262,11 @@ def parse_width_param(value):
     return _ordered_widths(chosen)
 
 
+def _ordered_kinds(kinds):
+    chosen = {str(kind or "").strip().lower() for kind in (kinds or [])}
+    return [kind for kind in DEAL_KINDS if kind in chosen]
+
+
 def decode_query(query):
     """Return a full filter state. Unknown values are ignored."""
     state = empty_state()
@@ -287,6 +297,8 @@ def decode_query(query):
             state["max"] = _float(value)
         elif key == "discount":
             state["discount"] = _float(value)
+        elif key == "discountmax":
+            state["discountmax"] = _float(value)
         elif key == "scoremin":
             state["scoremin"] = _float(value)
         elif key == "scoremax":
@@ -309,6 +321,10 @@ def decode_query(query):
             state["dropped"] = _flag(value)
         elif key == "group":
             state["grouped"] = _flag(value)
+        elif key == "interval" and str(value or "").strip().lower() in INTERVALS:
+            state["interval"] = str(value).strip().lower()
+        elif key == "kinds":
+            state["kinds"] = _ordered_kinds(str(value or "").split(","))
     return state
 
 
@@ -342,6 +358,8 @@ def encode_state(state):
         add("max", _num_text(state["max"]))
     if state.get("discount") is not None:
         add("discount", _num_text(state["discount"]))
+    if state.get("discountmax") is not None:
+        add("discountmax", _num_text(state["discountmax"]))
     if state.get("scoremin") is not None:
         add("scoremin", _num_text(state["scoremin"]))
     if state.get("scoremax") is not None:
@@ -364,4 +382,10 @@ def encode_state(state):
         add("dropped", "1")
     if state.get("grouped"):
         add("group", "1")
+    interval = state.get("interval") or "all"
+    if interval in INTERVALS:
+        add("interval", interval)
+    kinds = _ordered_kinds(state.get("kinds"))
+    if kinds:
+        add("kinds", ",".join(kinds))
     return urlencode(pairs)

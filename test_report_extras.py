@@ -272,6 +272,64 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("Price reduction · ", html)
         self.assertIn("function paintResultCount(", html)
 
+    def test_keepa_card_uses_tracked_prices_and_drop_interval(self):
+        deck = _deck(
+            "40.00",
+            "https://example.com/drop",
+            "Zumiez",
+            "Powell Peralta Ripper 8.5 Skateboard Deck",
+        )
+        wheel = {
+            "name": "Bones STF 53mm Skateboard Wheels",
+            "url": "https://example.com/bones",
+            "price_new": "30.00",
+            "price_old": "40.00",
+            "part": "Wheels",
+            "store": "Zumiez",
+        }
+        history = {
+            deck["url"]: {
+                "name": deck["name"],
+                "store": "Zumiez",
+                "part": "Decks",
+                "first_seen": "2026-09-01",
+                "last_seen": "2026-10-11",
+                "prices": {
+                    "2026-09-01": 60.0,
+                    "2026-10-01": 50.0,
+                    "2026-10-04": 40.0,
+                    "2026-10-11": 40.0,
+                },
+            }
+        }
+        html = build_report_html(
+            {"Zumiez_Decks": [deck], "Zumiez_Wheels": [wheel]},
+            {},
+            price_history=history,
+            generated_at="2026-10-11T21:46:35+00:00",
+        )
+        card = html.split("https://example.com/drop", 1)[1].split("</article>", 1)[0]
+        self.assertIn("Now: $40.00", card)
+        self.assertIn("Average: $47.50", card)
+        self.assertIn("Price since Oct 4", card)
+        self.assertIn('data-dropday="2026-10-04"', card)
+        self.assertIn("spark-card", card)
+        self.assertIn('id="categoryStrip"', html)
+        self.assertIn('data-part="Decks"', html)
+        self.assertIn('data-part="Wheels"', html)
+        self.assertNotIn('data-part="Trucks"', html)
+        self.assertIn('id="dropInterval"', html)
+        self.assertIn(">Day <", html)
+        self.assertIn(">3 Months <", html)
+        self.assertIn('data-kind="new"', html)
+        self.assertIn('data-kind="hot"', html)
+        self.assertIn("kind-drop", html)
+        self.assertIn("Bookmark this selection", html)
+        self.assertIn('id="discountMax"', html)
+        self.assertIn("Any price", html)
+        self.assertIn("function dropInInterval(", html)
+        self.assertIn("function syncDuals(", html)
+
 
 if __name__ == "__main__":
     unittest.main()

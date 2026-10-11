@@ -13,6 +13,8 @@ let state = {
     // visitMode only chooses which baseline those counts use.
     change: "all",
     grouped: false,
+    dropInterval: "all",
+    kinds: [],
     visitMode: "yesterday",
     sortKey: "rank",
     sortDir: "asc",
@@ -89,6 +91,7 @@ function readControls() {
     state.priceMin = numOrNull("priceMin");
     state.priceMax = numOrNull("priceMax");
     state.discountMin = numOrNull("discountMin");
+    state.discountMax = numOrNull("discountMax");
     state.scoreMin = numOrNull("scoreMin");
     state.scoreMax = numOrNull("scoreMax");
     const brand = document.getElementById("brandSelect");
@@ -292,6 +295,7 @@ function paintFacetCounts() {
     paintSelectCounts("partSelect", partCounts);
     paintSelectCounts("lengthSelect", lengthCounts);
     paintSelectCounts("wheelbaseSelect", wheelCounts);
+    paintKeepaCounts();
 }
 
 function setPressed(selector, attr, value) {
@@ -320,6 +324,33 @@ function paintCards() {
     });
 }
 
+const DEAL_KINDS = ["new", "drop", "low", "back", "hot"];
+const DROP_INTERVALS = { day: 1, week: 7, month: 30, quarter: 90 };
+
+function kindMatch(row, kinds) {
+    const selected = kinds || [];
+    if (!selected.length) return true;
+    return selected.some(kind => {
+        if (kind === "new") return row.dataset.fresh === "1";
+        if (kind === "drop") return row.dataset.drop === "1";
+        if (kind === "low") return row.dataset.lowest === "1";
+        if (kind === "back") return row.dataset.back === "1";
+        if (kind === "hot") return row.dataset.hot === "1";
+        return false;
+    });
+}
+
+function dropInInterval(row, key) {
+    if (!key || key === "all") return true;
+    const limit = DROP_INTERVALS[key];
+    if (!limit) return true;
+    const day = row.dataset.dropday || "";
+    if (!day) return false;
+    const end = String((catalog().generated || "")).slice(0, 10);
+    if (!end) return false;
+    return day >= addDays(end, -limit) && day <= end;
+}
+
 function rowMatches(row, overrides) {
     const over = overrides || {};
     const store = over.store != null ? over.store : state.store;
@@ -339,14 +370,22 @@ function rowMatches(row, overrides) {
     const price = parseFloat(row.dataset.price);
     if (state.priceMin != null && !(price >= state.priceMin)) return false;
     if (state.priceMax != null && !(price <= state.priceMax)) return false;
-    if (state.discountMin != null) {
+    const discountMax = Object.prototype.hasOwnProperty.call(over, "discountMax") ? over.discountMax : state.discountMax;
+    if (state.discountMin != null || discountMax != null) {
         if (row.dataset.discount === "") return false;
-        if (parseFloat(row.dataset.discount) < state.discountMin) return false;
+        const discount = parseFloat(row.dataset.discount);
+        if (state.discountMin != null && discount < state.discountMin) return false;
+        if (discountMax != null && discount > discountMax) return false;
     }
     const score = parseFloat(row.dataset.score);
     if (state.scoreMin != null && !(score >= state.scoreMin)) return false;
     if (state.scoreMax != null && !(score <= state.scoreMax)) return false;
-    if (state.watching && row.dataset.starred !== "1") return false;
+    const watching = Object.prototype.hasOwnProperty.call(over, "watching") ? over.watching : state.watching;
+    if (watching && row.dataset.starred !== "1") return false;
+    const kinds = Object.prototype.hasOwnProperty.call(over, "kinds") ? over.kinds : state.kinds;
+    if (!kindMatch(row, kinds)) return false;
+    const interval = over.interval != null ? over.interval : state.dropInterval;
+    if (!dropInInterval(row, interval)) return false;
     if (state.cardNew && row.dataset.added !== "1") return false;
     if (state.cardDrop && row.dataset.drop !== "1") return false;
     if (state.cardLow && row.dataset.lowest !== "1") return false;
@@ -436,6 +475,159 @@ function applyFilters() {
     syncUrl();
     paintViews();
     paintNav();
+    syncDuals();
+}
+
+function paintKeepaCounts() {
+    const intervalCounts = { all: 0, day: 0, week: 0, month: 0, quarter: 0 };
+    const kindCounts = { new: 0, drop: 0, low: 0, back: 0, hot: 0, watch: 0 };
+    let categoryAll = 0;
+    const categoryCounts = {};
+    dealRows().forEach(row => {
+        if (rowMatches(row, { interval: "all" })) {
+            intervalCounts.all += 1;
+            ["day", "week", "month", "quarter"].forEach(key => {
+                if (dropInInterval(row, key)) intervalCounts[key] += 1;
+            });
+        }
+        if (rowMatches(row, { kinds: [] })) {
+            if (row.dataset.fresh === "1") kindCounts.new += 1;
+            if (row.dataset.drop === "1") kindCounts.drop += 1;
+            if (row.dataset.lowest === "1") kindCounts.low += 1;
+            if (row.dataset.back === "1") kindCounts.back += 1;
+            if (row.dataset.hot === "1") kindCounts.hot += 1;
+        }
+        if (row.dataset.starred === "1" && rowMatches(row, { watching: false })) kindCounts.watch += 1;
+        if (rowMatches(row, { part: "all" })) {
+            categoryAll += 1;
+            const part = row.dataset.part || "";
+            if (part) categoryCounts[part] = (categoryCounts[part] || 0) + 1;
+        }
+    });
+    document.querySelectorAll("#dropInterval [data-interval]").forEach(button => {
+        const key = button.getAttribute("data-interval") || "all";
+        const slot = button.querySelector(".facet-count");
+        if (slot) slot.textContent = "(" + (intervalCounts[key] || 0) + ")";
+        const on = (state.dropInterval || "all") === key;
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+        button.classList.toggle("is-zero", key !== "all" && !(intervalCounts[key]));
+    });
+    document.querySelectorAll("#dealTypes [data-kind]").forEach(button => {
+        const key = button.getAttribute("data-kind") || "";
+        const slot = button.querySelector(".facet-count");
+        if (slot) slot.textContent = "(" + (kindCounts[key] || 0) + ")";
+        const on = key === "watch" ? !!state.watching : (state.kinds || []).indexOf(key) >= 0;
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+        button.classList.toggle("is-zero", !(kindCounts[key]));
+    });
+    document.querySelectorAll("#categoryStrip [data-part]").forEach(button => {
+        const part = button.getAttribute("data-part") || "all";
+        const count = part === "all" ? categoryAll : (categoryCounts[part] || 0);
+        const slot = button.querySelector(".cat-count");
+        if (slot) slot.textContent = String(count);
+        button.setAttribute("aria-pressed", (state.part || "all") === part ? "true" : "false");
+    });
+}
+
+function setDropInterval(key) {
+    state.dropInterval = key === "all" || DROP_INTERVALS[key] ? key : "all";
+    applyFilters();
+}
+
+function toggleDealType(kind) {
+    if (kind === "watch") {
+        toggleWatching();
+        return;
+    }
+    if (DEAL_KINDS.indexOf(kind) < 0) return;
+    const selected = {};
+    (state.kinds || []).forEach(item => { selected[item] = true; });
+    if (selected[kind]) delete selected[kind];
+    else selected[kind] = true;
+    state.kinds = DEAL_KINDS.filter(item => selected[item]);
+    applyFilters();
+}
+
+function syncDuals() {
+    document.querySelectorAll(".dual").forEach(box => {
+        const floor = Number(box.dataset.floor);
+        const ceil = Number(box.dataset.ceil);
+        const minInput = document.getElementById(box.dataset.minInput);
+        const maxInput = document.getElementById(box.dataset.maxInput);
+        const minRange = box.querySelector(".dual-min");
+        const maxRange = box.querySelector(".dual-max");
+        const readout = box.querySelector(".dual-readout");
+        if (!minRange || !maxRange || !Number.isFinite(floor) || !Number.isFinite(ceil)) return;
+        let lo = minInput && minInput.value !== "" ? Number(minInput.value) : floor;
+        let hi = maxInput && maxInput.value !== "" ? Number(maxInput.value) : ceil;
+        if (!Number.isFinite(lo)) lo = floor;
+        if (!Number.isFinite(hi)) hi = ceil;
+        lo = Math.min(ceil, Math.max(floor, lo));
+        hi = Math.min(ceil, Math.max(floor, hi));
+        if (lo > hi) lo = hi;
+        minRange.value = String(lo);
+        maxRange.value = String(hi);
+        const prefix = box.dataset.prefix || "";
+        const suffix = box.dataset.suffix || "";
+        const minEmpty = !minInput || minInput.value === "";
+        const maxEmpty = !maxInput || maxInput.value === "";
+        const format = value => prefix + numText(value) + suffix;
+        let text = box.dataset.any || "Any";
+        if (!minEmpty || !maxEmpty) {
+            text = (minEmpty ? "Any" : format(minInput.value)) + " – " + (maxEmpty ? "Any" : format(maxInput.value));
+        }
+        if (readout) readout.textContent = text;
+        minRange.setAttribute("aria-valuetext", minEmpty ? "Any" : format(minInput.value));
+        maxRange.setAttribute("aria-valuetext", maxEmpty ? "Any" : format(maxInput.value));
+    });
+}
+
+function wireDuals() {
+    document.querySelectorAll(".dual").forEach(box => {
+        const minRange = box.querySelector(".dual-min");
+        const maxRange = box.querySelector(".dual-max");
+        if (!minRange || !maxRange) return;
+        const applyRange = () => {
+            const floor = Number(box.dataset.floor);
+            const ceil = Number(box.dataset.ceil);
+            const minInput = document.getElementById(box.dataset.minInput);
+            const maxInput = document.getElementById(box.dataset.maxInput);
+            let lo = Number(minRange.value);
+            let hi = Number(maxRange.value);
+            if (lo > hi) {
+                if (document.activeElement === minRange) {
+                    hi = lo;
+                    maxRange.value = String(hi);
+                } else {
+                    lo = hi;
+                    minRange.value = String(lo);
+                }
+            }
+            if (minInput) minInput.value = lo <= floor ? "" : numText(lo);
+            if (maxInput) maxInput.value = hi >= ceil ? "" : numText(hi);
+            applyFilters();
+        };
+        minRange.addEventListener("input", applyRange);
+        maxRange.addEventListener("input", applyRange);
+    });
+}
+
+function paintCardStats() {
+    const days = typeof chartWindow === "number" ? chartWindow : 90;
+    document.querySelectorAll(".deal-card .avg-price").forEach(node => {
+        const card = node.closest(".deal-card");
+        const item = card ? (catalog().items || {})[card.dataset.id] : null;
+        const daily = item && Array.isArray(item.daily) ? item.daily : [];
+        const points = clipDailyPrices(daily, days);
+        if (!points.length) {
+            node.hidden = true;
+            return;
+        }
+        const sum = points.reduce((total, point) => total + Number(point[1]), 0);
+        const symbol = node.dataset.symbol || "$";
+        node.hidden = false;
+        node.textContent = "Average: " + symbol + (sum / points.length).toFixed(2);
+    });
 }
 
 function paintResultCount() {
@@ -823,6 +1015,8 @@ function clearFilters() {
         cardLow: false,
         change: "all",
         grouped: state.grouped,
+        dropInterval: "all",
+        kinds: [],
         visitMode: state.visitMode,
         sortKey: "rank",
         sortDir: "asc",
@@ -831,7 +1025,7 @@ function clearFilters() {
     };
     const search = document.getElementById("searchInput");
     if (search) search.value = "";
-    ["priceMin", "priceMax", "discountMin", "scoreMin", "scoreMax"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.value = "";
     });
@@ -980,6 +1174,7 @@ function decodeQuery(query) {
         min: null,
         max: null,
         discount: null,
+        discountmax: null,
         scoremin: null,
         scoremax: null,
         length: "all",
@@ -990,7 +1185,9 @@ function decodeQuery(query) {
         low: false,
         added: false,
         dropped: false,
-        grouped: false
+        grouped: false,
+        interval: "all",
+        kinds: []
     };
     const text = String(query || "").replace(/^\?/, "");
     if (!text) return stateOut;
@@ -1010,6 +1207,7 @@ function decodeQuery(query) {
         else if (key === "min") stateOut.min = Number(value);
         else if (key === "max") stateOut.max = Number(value);
         else if (key === "discount") stateOut.discount = Number(value);
+        else if (key === "discountmax") stateOut.discountmax = Number(value);
         else if (key === "scoremin") stateOut.scoremin = Number(value);
         else if (key === "scoremax") stateOut.scoremax = Number(value);
         else if (key === "length" && value && value !== "all") stateOut.length = value;
@@ -1023,8 +1221,17 @@ function decodeQuery(query) {
         else if (key === "added") stateOut.added = flagOn(value);
         else if (key === "dropped") stateOut.dropped = flagOn(value);
         else if (key === "group") stateOut.grouped = flagOn(value);
+        else if (key === "interval" && DROP_INTERVALS[String(value || "").toLowerCase()]) stateOut.interval = String(value).toLowerCase();
+        else if (key === "kinds") {
+            const chosen = {};
+            String(value || "").split(",").forEach(token => {
+                const kind = token.trim().toLowerCase();
+                if (DEAL_KINDS.indexOf(kind) >= 0) chosen[kind] = true;
+            });
+            stateOut.kinds = DEAL_KINDS.filter(kind => chosen[kind]);
+        }
     });
-    ["min", "max", "discount", "scoremin", "scoremax"].forEach(key => {
+    ["min", "max", "discount", "discountmax", "scoremin", "scoremax"].forEach(key => {
         if (!Number.isFinite(stateOut[key])) stateOut[key] = null;
     });
     return stateOut;
@@ -1047,6 +1254,7 @@ function encodeState(snapshot) {
     if (snapshot.min != null) add("min", numText(snapshot.min));
     if (snapshot.max != null) add("max", numText(snapshot.max));
     if (snapshot.discount != null) add("discount", numText(snapshot.discount));
+    if (snapshot.discountmax != null) add("discountmax", numText(snapshot.discountmax));
     if (snapshot.scoremin != null) add("scoremin", numText(snapshot.scoremin));
     if (snapshot.scoremax != null) add("scoremax", numText(snapshot.scoremax));
     add("length", snapshot.length || "");
@@ -1058,6 +1266,9 @@ function encodeState(snapshot) {
     if (snapshot.added && snapshot.change !== "new") add("added", "1");
     if (snapshot.dropped && snapshot.change !== "drop") add("dropped", "1");
     if (snapshot.grouped) add("group", "1");
+    if (snapshot.interval && DROP_INTERVALS[snapshot.interval]) add("interval", snapshot.interval);
+    const kinds = DEAL_KINDS.filter(kind => (snapshot.kinds || []).indexOf(kind) >= 0);
+    if (kinds.length) add("kinds", kinds.join(","));
     return params.toString();
 }
 
@@ -1073,6 +1284,7 @@ function captureState() {
         min: state.priceMin,
         max: state.priceMax,
         discount: state.discountMin,
+        discountmax: state.discountMax,
         scoremin: state.scoreMin,
         scoremax: state.scoreMax,
         length: state.length,
@@ -1083,7 +1295,9 @@ function captureState() {
         low: state.cardLow,
         added: state.cardNew,
         dropped: state.cardDrop,
-        grouped: state.grouped
+        grouped: state.grouped,
+        interval: state.dropInterval || "all",
+        kinds: (state.kinds || []).slice()
     };
 }
 
@@ -1120,6 +1334,7 @@ function writeControls(snapshot) {
     fill("priceMin", snapshot.min);
     fill("priceMax", snapshot.max);
     fill("discountMin", snapshot.discount);
+    fill("discountMax", snapshot.discountmax);
     fill("scoreMin", snapshot.scoremin);
     fill("scoreMax", snapshot.scoremax);
     state.store = snapshot.store || "all";
@@ -1136,6 +1351,8 @@ function writeControls(snapshot) {
     state.cardLow = !!snapshot.low;
     state.cardNew = !!snapshot.added;
     state.cardDrop = !!snapshot.dropped;
+    state.dropInterval = snapshot.interval && DROP_INTERVALS[snapshot.interval] ? snapshot.interval : "all";
+    state.kinds = DEAL_KINDS.filter(kind => (snapshot.kinds || []).indexOf(kind) >= 0);
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
     const grouped = document.getElementById("groupToggle");
@@ -1271,7 +1488,7 @@ function saveCurrentView(name) {
 
 function updateMoreCount() {
     let count = 0;
-    ["priceMin", "priceMax", "discountMin", "scoreMin", "scoreMax"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
         if (numOrNull(id) != null) count += 1;
     });
     const length = document.getElementById("lengthSelect");
@@ -1521,6 +1738,21 @@ function paintActiveChips() {
             applyFilters();
         });
     }
+    if (state.discountMax != null) {
+        add(numText(state.discountMax) + "% off or less", () => {
+            const node = document.getElementById("discountMax");
+            if (node) node.value = "";
+            applyFilters();
+        });
+    }
+    if (state.dropInterval && state.dropInterval !== "all") {
+        const labels = { day: "Day", week: "Week", month: "Month", quarter: "3 Months" };
+        add("Drop: " + (labels[state.dropInterval] || state.dropInterval), () => setDropInterval("all"));
+    }
+    (state.kinds || []).forEach(kind => {
+        const labels = { new: "New", drop: "Price drop", low: "All-time low", back: "Back in stock", hot: "Hot" };
+        add(labels[kind] || kind, () => toggleDealType(kind));
+    });
     if (state.scoreMin != null) {
         add("Score " + numText(state.scoreMin) + "+", () => {
             const node = document.getElementById("scoreMin");
@@ -1635,9 +1867,10 @@ const SPARK_COLOR = { down: "#15803d", up: "#b91c1c", flat: "#94a3b8" };
 const HISTORY_COLOR = "#4f46e5";
 const sparkPoints = new WeakMap();
 
-function buildSparkSvg(points, width, height) {
+function buildSparkSvg(points, width, height, stroke) {
     width = width || 72;
     height = height || 22;
+    stroke = stroke || 1.6;
     const direction = sparkDirection(points);
     const color = SPARK_COLOR[direction] || SPARK_COLOR.flat;
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -1664,7 +1897,7 @@ function buildSparkSvg(points, width, height) {
         const poly = document.createElementNS(svg.namespaceURI, "polyline");
         poly.setAttribute("fill", "none");
         poly.setAttribute("stroke", color);
-        poly.setAttribute("stroke-width", "1.6");
+        poly.setAttribute("stroke-width", String(stroke));
         poly.setAttribute("points", coords.map(pair => pair[0].toFixed(1) + "," + pair[1].toFixed(1)).join(" "));
         svg.appendChild(poly);
     }
@@ -1672,7 +1905,7 @@ function buildSparkSvg(points, width, height) {
     const endPoint = coords[coords.length - 1];
     dot.setAttribute("cx", endPoint[0].toFixed(1));
     dot.setAttribute("cy", endPoint[1].toFixed(1));
-    dot.setAttribute("r", "2.2");
+    dot.setAttribute("r", width > 80 ? "3.2" : "2.2");
     dot.setAttribute("fill", color);
     svg.appendChild(dot);
     sparkPoints.set(svg, points || []);
@@ -1683,7 +1916,13 @@ function paintSparklines() {
     document.querySelectorAll(".spark-hit").forEach(button => {
         const item = (catalog().items || {})[button.dataset.id];
         const daily = item && Array.isArray(item.daily) ? item.daily : [];
-        const svg = buildSparkSvg(clipDailyPrices(daily, chartWindow));
+        const card = button.classList.contains("spark-card");
+        const svg = buildSparkSvg(
+            clipDailyPrices(daily, chartWindow),
+            card ? 156 : 72,
+            card ? 44 : 22,
+            card ? 2.2 : 1.6
+        );
         const existing = button.querySelector("svg");
         if (existing) existing.replaceWith(svg);
         else button.appendChild(svg);
@@ -1872,6 +2111,7 @@ function setChartWindow(days) {
         button.setAttribute("aria-pressed", on ? "true" : "false");
     });
     paintSparklines();
+    paintCardStats();
     if (chartId) drawChart(chartId);
 }
 
@@ -1999,7 +2239,7 @@ function init() {
     if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
     const search = document.getElementById("searchInput");
     if (search) search.addEventListener("input", applyFilters);
-    ["priceMin", "priceMax", "discountMin", "scoreMin", "scoreMax"].forEach(id => {
+    ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.addEventListener("input", applyFilters);
     });
@@ -2065,14 +2305,16 @@ function init() {
     const more = document.getElementById("moreFilters");
     if (more) more.addEventListener("click", toggleMore);
     const save = document.getElementById("saveView");
+    const bookmark = document.getElementById("bookmarkView");
     const form = document.getElementById("saveViewForm");
-    if (save && form) {
-        save.addEventListener("click", () => {
-            form.hidden = false;
-            const input = document.getElementById("viewNameInput");
-            if (input) input.focus();
-        });
-    }
+    const openSaveForm = () => {
+        if (!form) return;
+        form.hidden = false;
+        const input = document.getElementById("viewNameInput");
+        if (input) input.focus();
+    };
+    if (save) save.addEventListener("click", openSaveForm);
+    if (bookmark) bookmark.addEventListener("click", openSaveForm);
     if (form) {
         form.addEventListener("submit", event => {
             event.preventDefault();
@@ -2174,6 +2416,31 @@ function init() {
     if (navDeals) navDeals.addEventListener("click", showDeals);
     if (navTrack) navTrack.addEventListener("click", showTrack);
     if (navInsights) navInsights.addEventListener("click", showInsights);
+    const strip = document.getElementById("categoryStrip");
+    if (strip) {
+        strip.addEventListener("click", event => {
+            const button = event.target.closest("[data-part]");
+            if (!button) return;
+            filterByPart(button.getAttribute("data-part") || "all");
+        });
+    }
+    const intervals = document.getElementById("dropInterval");
+    if (intervals) {
+        intervals.addEventListener("click", event => {
+            const button = event.target.closest("[data-interval]");
+            if (!button) return;
+            setDropInterval(button.getAttribute("data-interval") || "all");
+        });
+    }
+    const kinds = document.getElementById("dealTypes");
+    if (kinds) {
+        kinds.addEventListener("click", event => {
+            const button = event.target.closest("[data-kind]");
+            if (!button) return;
+            toggleDealType(button.getAttribute("data-kind") || "");
+        });
+    }
+    wireDuals();
     const layoutTable = document.getElementById("layoutTable");
     const layoutCards = document.getElementById("layoutCards");
     if (layoutTable) layoutTable.addEventListener("click", () => applyLayout("table"));
@@ -2211,6 +2478,7 @@ function init() {
     updateChangeLine();
     paintViews();
     paintSparklines();
+    paintCardStats();
     if (location.search && location.search.length > 1) loadFromUrl();
     else {
         state.change = "all";

@@ -7,6 +7,7 @@ drawer run in the browser. A problem in one section is logged and skipped.
 import datetime
 import json
 import logging
+import math
 import os
 from html import escape
 from zoneinfo import ZoneInfo
@@ -32,6 +33,7 @@ from history import (
     STAGE_LABEL,
     all_time_low_status,
     days_at_price,
+    last_drop_date,
     listing_stage,
     price_trend,
     recently_gone,
@@ -215,6 +217,36 @@ def _daily_points(prices):
     return [[day, round(float(prices[day]), 2)] for day in sorted(prices or {})]
 
 
+_MONTHS = ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+
+def _month_day(iso):
+    try:
+        day = datetime.date.fromisoformat(str(iso or "")[:10])
+    except ValueError:
+        return ""
+    return f"{_MONTHS[day.month - 1]} {day.day}"
+
+
+def _window_average(prices, days=90, end=None):
+    """Mean of the daily prices inside the chart window, or None when there are none."""
+    points = clip_daily_prices(prices, days=days, end=end)
+    if not points:
+        return None
+    return round(sum(price for _day, price in points) / len(points), 2)
+
+
+def _since_label(since, first):
+    """Honest date for the current price. Hours are not known, so they are not shown."""
+    since_text = _month_day(since)
+    if since_text:
+        return f"Price since {since_text}"
+    first_text = _month_day(first)
+    if first_text:
+        return f"First seen {first_text}"
+    return ""
+
+
 def _parse_generated(value):
     if isinstance(value, datetime.datetime):
         return value
@@ -298,7 +330,7 @@ def sparkline_direction(prices, days=90, end=None):
     return "flat"
 
 
-def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None):
+def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None, stroke=1.6):
     ordered = clip_daily_prices(prices, days=days, end=end)
     if not ordered:
         return ""
@@ -321,7 +353,7 @@ def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None):
     if len(coords) >= 2:
         drawn = " ".join(f"{x_pos:.1f},{y_pos:.1f}" for x_pos, y_pos in coords)
         parts.append(
-            f'<polyline fill="none" stroke="{color}" stroke-width="1.6" points="{drawn}"/>'
+            f'<polyline fill="none" stroke="{color}" stroke-width="{stroke}" points="{drawn}"/>'
         )
     x_pos, y_pos = coords[-1]
     parts.append(f'<circle cx="{x_pos:.1f}" cy="{y_pos:.1f}" r="2.2" fill="{color}"/>')
@@ -782,6 +814,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             held = days_at_price(entry, today)
             at_days = held.get("days") or 0
             at_price = held.get("price")
+            since = str(held.get("since") or "")[:10]
+            drop_day = last_drop_date(entry) or ""
+            average = _window_average(prices, 90, today)
             if at_price is None:
                 at_price = _price(item.get("price_new"))
             try:
@@ -830,6 +865,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "stage": stage,
                 "first": first,
                 "last": last,
+                "since": since,
+                "since_label": _since_label(since, first),
+                "average": average,
+                "drop_day": drop_day,
+                "fresh": any(badge.get("kind") == "new" for badge in badges),
+                "back": any(badge.get("kind") == "back" for badge in badges),
+                "hot": bool(score.get("hot")),
                 "listed": listed,
                 "added": added,
                 "drop": drop,
@@ -1130,6 +1172,41 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "Show more</button></div>"
     )
 
+    sale_prices = [
+        amount
+        for record in records
+        if (amount := _price(record["item"].get("price_new"))) is not None
+    ]
+    price_cap = int(math.ceil(max(sale_prices))) if sale_prices else 1
+    if price_cap < 1:
+        price_cap = 1
+    interval_buttons = []
+    for key, label in (
+        ("all", "All"),
+        ("day", "Day"),
+        ("week", "Week"),
+        ("month", "Month"),
+        ("quarter", "3 Months"),
+    ):
+        pressed = "true" if key == "all" else "false"
+        interval_buttons.append(
+            f'<button type="button" class="interval-btn" data-interval="{key}" aria-pressed="{pressed}">'
+            f'{label} <span class="facet-count"></span></button>'
+        )
+    kind_buttons = []
+    for key, label, dot in (
+        ("new", "New", "kind-new"),
+        ("drop", "Price drop", "kind-drop"),
+        ("low", "All-time low", "kind-low"),
+        ("back", "Back in stock", "kind-back"),
+        ("watch", "Watching", "kind-watch"),
+        ("hot", "Hot", "kind-hot"),
+    ):
+        kind_buttons.append(
+            f'<button type="button" class="kind-btn" data-kind="{key}" aria-pressed="false">'
+            f'<span class="kind-dot {dot}" aria-hidden="true"></span>{label} '
+            f'<span class="facet-count"></span></button>'
+        )
     sidebar_html = (
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
@@ -1141,6 +1218,24 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
         "if you pick that store, type, brand, or width. It is not a total of everything tracked."
         "</span></p>"
+        + _section(
+            "interval",
+            "Drop interval",
+            '<div class="interval-list" id="dropInterval" role="group" aria-label="Drop interval">'
+            + "".join(interval_buttons)
+            + "</div>"
+            '<p class="section-note">A drop is at least $2 or 5% below the previous tracked price. '
+            "Day is today or yesterday.</p>",
+            open_default=True,
+        )
+        + _section(
+            "deals",
+            "Deal type",
+            '<div class="kind-list" id="dealTypes" role="group" aria-label="Deal type">'
+            + "".join(kind_buttons)
+            + "</div>",
+            open_default=True,
+        )
         + _section(
             "store",
             "Store",
@@ -1169,18 +1264,25 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "price",
             "Price",
             '<label class="field"><span>Min price</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
-            '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>',
+            '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
+            + _dual_html("priceMin", "priceMax", 0, price_cap, "$", "Any price", "Minimum price", "Maximum price"),
         )
         + _section(
             "discount",
             "Discount",
-            '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>',
+            '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
+            '<label class="field"><span>Discount max</span><input id="discountMax" type="number" min="0" max="100" step="1"></label>'
+            + _dual_html(
+                "discountMin", "discountMax", 0, 100, "", "Any discount",
+                "Minimum percent off", "Maximum percent off", suffix="%",
+            ),
         )
         + _section(
             "score",
             "Score",
             '<label class="field"><span>Score min</span><input id="scoreMin" type="number" min="0" max="100" step="1"></label>'
-            '<label class="field"><span>Score max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label>',
+            '<label class="field"><span>Score max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label>'
+            + _dual_html("scoreMin", "scoreMax", 0, 100, "", "Any score", "Minimum score", "Maximum score"),
         )
         + _section("length", "Length", length_select)
         + _section("wheelbase", "Wheelbase", wheel_select)
@@ -1189,15 +1291,18 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
         '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
         '<button type="button" class="text-btn" id="saveView">Save view</button>'
+        '<button type="button" class="text-btn" id="bookmarkView">Bookmark this selection</button>'
         '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button>'
         "</div>"
+        '<div class="saved-views">'
+        '<p class="range-label">Saved views</p>'
         '<form class="save-view" id="saveViewForm" hidden>'
         '<input id="viewNameInput" type="text" maxlength="80" placeholder="Name this view" aria-label="View name">'
         '<button type="submit" class="text-btn">Save</button>'
         '<button type="button" class="text-btn" id="viewCancel">Cancel</button>'
         "</form>"
         '<div class="view-row" id="viewRow"></div>'
-        "</aside>"
+        "</div></aside>"
     )
     suspect_stores = set()
     for warning in warnings:
@@ -1349,7 +1454,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append(
         '<div class="section" id="dealsSection">'
         '<h2 class="sr-only">All Deals</h2>'
-        '<div class="section-content">'
+        + _category_strip(part_counts)
+        + '<div class="section-content">'
     )
     chunks.append(f'<div class="table-wrap"><table id="mainTable"><thead><tr>{"".join(head)}</tr></thead><tbody>')
     card_chunks = ['<div class="card-grid" id="cardGrid">']
@@ -1409,6 +1515,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "</div>"
         '<div id="modalChart"></div>'
         '<p class="chart-note" id="modalNote"></p>'
+        '<p class="modal-label">Stores</p>'
         '<ul class="modal-offers" id="modalOffers"></ul>'
         '<p><a id="modalLink" target="_blank" rel="noopener"></a></p>'
         "</div></div>"
@@ -1474,6 +1581,8 @@ def _deal_attrs(record):
         f'data-length="{_attr(record["length_key"])}" data-wheelbase="{_attr(record["wheel_key"])}" '
         f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
+        f'data-fresh="{1 if record.get("fresh") else 0}" data-back="{1 if record.get("back") else 0}" '
+        f'data-hot="{1 if record.get("hot") else 0}" data-dropday="{_attr(record.get("drop_day") or "")}" '
         f'data-group="{_attr(group_key)}"'
     )
 
@@ -1522,12 +1631,28 @@ def _row_html(record):
     )
 
 
+def _drop_badge(record):
+    drop = record.get("drop")
+    amount = record.get("drop_amount") or 0
+    if not isinstance(drop, dict) or not amount:
+        return ""
+    symbol = "€" if str(record["item"].get("currency") or "USD").upper() == "EUR" else "$"
+    try:
+        percent = float(drop.get("percent_vs_prior"))
+        text = f"\u2212{percent:.0f}%"
+    except (TypeError, ValueError):
+        text = f"\u2212{symbol}{amount:.2f}"
+    title = f"\u2212{symbol}{amount:.2f} vs prior sale"
+    return f'<span class="drop-badge" title="{escape(title, quote=True)}">{escape(text)}</span>'
+
+
 def _card_html(record):
     item = record["item"]
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
     discount = _discount_class(item.get("price_new"), item.get("price_old"))
     listed = " on-list" if record["listed"] else ""
     currency = item.get("currency")
+    symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
     band = score_band(record["score"]["score"])
     face = _badge_html(record["badges"], record["listed"], limit=1) or _stage_html(record.get("stage"))
     size = f'{escape(record["width_key"])}"' if record["width_key"] else ""
@@ -1536,22 +1661,41 @@ def _card_html(record):
         off_html = '<span class="discount card-off none">No discount info</span>'
     else:
         off_html = f'<span class="discount card-off {discount}">{escape(percent)}</span>'
+    drop_badge = _drop_badge(record)
+    if drop_badge:
+        overlay = drop_badge
+        extra_off = off_html if percent != "N/A" else ""
+    elif percent == "N/A":
+        overlay = ""
+        extra_off = off_html
+    else:
+        overlay = off_html
+        extra_off = ""
+    average = record.get("average")
+    avg_html = ""
+    if average is not None:
+        avg_html = (
+            f'<span class="avg-price" data-symbol="{symbol}">Average: {symbol}{float(average):.2f}</span>'
+        )
+    since = record.get("since_label") or ""
+    since_html = f'<p class="price-since">{escape(since)}</p>' if since else ""
     return (
         f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
-        f'{_thumb(record["image"], record["name"], large=True)}'
+        f'<div class="media">{_thumb(record["image"], record["name"], large=True)}{overlay}</div>'
         '<div class="card-face">'
         f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
         "</div>"
         f'<div class="title-slot"><div class="card-title"><h3 class="product-name" title="{escape(record["name"], quote=True)}">'
         f"{_product_link(item)}</h3></div>"
         f'<p class="title-pop">{escape(record["name"])}</p></div>'
-        '<div class="card-metrics">'
-        f"{off_html}"
-        f'<span class="price price-new">{_money(item.get("price_new"), currency)}</span>'
-        f'<span class="card-spark">{_spark_html(record)}</span>'
-        "</div>"
+        '<div class="card-prices">'
+        f'<span class="now-price">Now: {_money(item.get("price_new"), currency)}</span>'
+        f"{avg_html}</div>"
+        f"{since_html}"
+        f"{extra_off}"
         f'<div class="card-badge">{face}</div>'
+        f'<div class="card-sparkline">{_spark_html(record, width=156, height=44, stroke=2.2)}</div>'
         '<button type="button" class="card-more" aria-expanded="false">Details</button>'
         '<div class="card-hover">'
         f'<p class="card-hover-title">{escape(record["name"])}</p>'
@@ -1764,12 +1908,57 @@ def _why_html(record, dom_id=None):
     )
 
 
-def _spark_html(record):
-    spark = sparkline_svg(record["prices"], days=90, end=record.get("spark_end"))
+def _category_strip(part_counts):
+    order = ["Decks", "Trucks", "Wheels", "Bearings"]
+    names = [name for name in order if part_counts.get(name)]
+    for name in part_counts:
+        if name and name not in names:
+            names.append(name)
+    if not names:
+        return ""
+    buttons = [
+        '<button type="button" data-part="all" aria-pressed="true">All '
+        f'<span class="cat-count">{sum(part_counts.values())}</span></button>'
+    ]
+    for name in names:
+        buttons.append(
+            f'<button type="button" data-part="{escape(name, quote=True)}" aria-pressed="false">'
+            f'{escape(name)} <span class="cat-count">{part_counts.get(name, 0)}</span></button>'
+        )
+    return (
+        '<div class="category-strip" id="categoryStrip" role="group" aria-label="Category">'
+        + "".join(buttons)
+        + "</div>"
+    )
+
+
+def _dual_html(min_id, max_id, floor, ceil, prefix, any_label, min_label, max_label, suffix=""):
+    return (
+        f'<div class="dual" data-min-input="{min_id}" data-max-input="{max_id}" '
+        f'data-floor="{floor}" data-ceil="{ceil}" data-prefix="{escape(prefix, quote=True)}" '
+        f'data-suffix="{escape(suffix, quote=True)}" data-any="{escape(any_label, quote=True)}">'
+        f'<input type="range" class="dual-min" min="{floor}" max="{ceil}" step="1" value="{floor}" '
+        f'aria-label="{escape(min_label, quote=True)}" aria-valuemin="{floor}" aria-valuemax="{ceil}">'
+        f'<input type="range" class="dual-max" min="{floor}" max="{ceil}" step="1" value="{ceil}" '
+        f'aria-label="{escape(max_label, quote=True)}" aria-valuemin="{floor}" aria-valuemax="{ceil}">'
+        f'<span class="dual-readout">{escape(any_label)}</span></div>'
+    )
+
+
+def _spark_html(record, width=72, height=22, stroke=1.6):
+    spark = sparkline_svg(
+        record["prices"],
+        width=width,
+        height=height,
+        days=90,
+        end=record.get("spark_end"),
+        stroke=stroke,
+    )
     if not spark:
         return ""
+    card = " spark-card" if width > 80 else ""
     return (
-        f'<button type="button" class="spark-hit" data-id="{record["id"]}" '
+        f'<button type="button" class="spark-hit{card}" data-id="{record["id"]}" '
         'aria-label="Price history">'
         f"{spark}</button>"
     )
