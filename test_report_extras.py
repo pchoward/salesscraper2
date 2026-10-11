@@ -72,9 +72,9 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("Today's highlights", html)
         self.assertIn("Zumiez (", html)
         self.assertNotIn('class="store-strip"', html)
-        more = html.split('id="morePanel"', 1)[1]
-        self.assertIn("Width range", more.split("</div>", 1)[0] + more)
-        self.assertLess(html.find('id="morePanel"'), html.find('id="sizeFilters"'))
+        self.assertIn('id="morePanel"', html)
+        self.assertIn("Width range", html)
+        self.assertLess(html.find('id="sizeFilters"'), html.find('id="morePanel"'))
         payload = html.split('id="catalogJson">', 1)[1].split("</script>", 1)[0]
         data = json.loads(payload)
         series = None
@@ -232,16 +232,45 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('id="searchInput"', rail)
         self.assertIn('id="filterDrawer"', rail)
         self.assertLess(html.find('<div class="rail">'), html.find('<div class="board">'))
-        self.assertIn('"rail board"', style)
-        self.assertNotIn('"search board"', style)
-        self.assertNotIn('"sidebar board"', style)
+        self.assertIn("width: 100%", style)
+        self.assertIn("min-height: 100vh", style)
+        self.assertNotIn("max-width: 1540px", style)
+        self.assertIn("flex: 0 0 220px", style)
+        self.assertIn("flex: 1 1 auto", style)
+        self.assertIn("min-width: 0", style)
         self.assertIn(".rail .sidebar", style)
         self.assertLess(style.find(".rail {"), style.find(".rail .sidebar"))
         rail_css = style[style.find(".rail {"):style.find(".rail .sidebar")]
         self.assertIn("position: sticky", rail_css)
-        sidebar_css = style[style.find(".rail .sidebar"):style.find(".rail .sidebar") + 400]
+        sidebar_css = style[style.find(".rail .sidebar"):style.find(".rail .sidebar") + 500]
         self.assertIn("position: static", sidebar_css)
         self.assertIn("overflow: auto", sidebar_css)
+
+    def test_filter_sections_remember_and_chart_points_are_labeled(self):
+        deck = _deck("50.00", "https://example.com/deck", "Zumiez", "Powell Peralta Ripper 8.5 Skateboard Deck")
+        html = build_report_html(
+            {"Zumiez_Decks": [deck]},
+            {},
+            generated_at="2026-10-11T20:22:15+00:00",
+        )
+        self.assertIn('class="filter-section is-open" data-section="brand"', html)
+        self.assertIn('class="filter-section is-open" data-section="width"', html)
+        self.assertIn('class="filter-section" data-section="store"', html)
+        self.assertIn('class="filter-section" data-section="type"', html)
+        self.assertIn('class="filter-section" data-section="price"', html)
+        self.assertIn('class="filter-section" data-section="discount"', html)
+        self.assertIn('class="filter-section" data-section="score"', html)
+        self.assertNotIn('class="filter-section is-open" data-section="store"', html)
+        self.assertIn("salesscraper2.filterSections", html)
+        self.assertIn("function restoreFilterSections(", html)
+        self.assertIn("function rememberFilterSections(", html)
+        self.assertIn("function chartHitLabel(", html)
+        self.assertIn("function nearestChartHit(", html)
+        nearest = html.split("function nearestChartHit(", 1)[1].split("function paintFilterSection(", 1)[0]
+        self.assertIn("hit.y", nearest)
+        self.assertIn("Math.hypot", nearest)
+        self.assertIn("Price reduction · ", html)
+        self.assertIn("function paintResultCount(", html)
 
 
 if __name__ == "__main__":
