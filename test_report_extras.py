@@ -140,6 +140,48 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('class="chip is-zero" data-range="10up"', html)
         self.assertIn("10.0+ (0)", html)
 
+    def test_card_title_is_fixed_at_three_lines_and_missing_discount_is_neutral(self):
+        deck = _deck(
+            "39.99",
+            "https://example.com/disney",
+            "Zumiez",
+            'Disney x HUF Mickey Mouse Worldwide Tour 8.25" Skateboard Deck',
+        )
+        hardware = {
+            "name": 'Independent Black Crossbolts 1" Skateboard Hardware',
+            "url": "https://example.com/bolts",
+            "price_new": "3.95",
+            "price_old": None,
+            "part": "Bearings",
+            "store": "Zumiez",
+        }
+        html = build_report_html(
+            {"Zumiez_Decks": [deck], "Zumiez_Bearings": [hardware]},
+            {},
+            generated_at="2026-10-11T20:22:15+00:00",
+        )
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        self.assertIn("flex: 0 0 calc(1.25em * 3)", style)
+        self.assertIn("line-clamp: 3", style)
+        self.assertIn(".deal-card .card-title .product-link", style)
+        self.assertNotIn(".card-title:hover .product-name", style)
+        self.assertLess(
+            style.find(".deal-card .product-name {"),
+            style.find(".deal-card .card-title .product-link"),
+        )
+        cards = [
+            part.split("</article>", 1)[0]
+            for part in html.split('<article class="deal-card')[1:]
+        ]
+        card = next(part for part in cards if "Independent Black Crossbolts" in part)
+        self.assertIn('class="discount card-off none"', card)
+        self.assertIn("No discount info", card)
+        self.assertNotIn(">N/A<", card)
+        self.assertNotIn("card-off low", card)
+        deck_card = next(part for part in cards if "Disney x HUF" in part)
+        self.assertIn("card-off high", deck_card)
+        self.assertNotIn("No discount info", deck_card)
+
 
 if __name__ == "__main__":
     unittest.main()

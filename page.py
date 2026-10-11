@@ -1436,6 +1436,10 @@ def _card_html(record):
     face = _badge_html(record["badges"], record["listed"], limit=1) or _stage_html(record.get("stage"))
     size = f'{escape(record["width_key"])}"' if record["width_key"] else ""
     why = _why_html(record, dom_id="why-card-" + str(record["id"]))
+    if percent == "N/A":
+        off_html = '<span class="discount card-off none">No discount info</span>'
+    else:
+        off_html = f'<span class="discount card-off {discount}">{escape(percent)}</span>'
     return (
         f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
@@ -1446,7 +1450,7 @@ def _card_html(record):
         f'<div class="card-title"><h3 class="product-name" title="{escape(record["name"], quote=True)}">'
         f"{_product_link(item)}</h3></div>"
         '<div class="card-metrics">'
-        f'<span class="discount card-off {discount}">{escape(percent)}</span>'
+        f"{off_html}"
         f'<span class="price price-new">{_money(item.get("price_new"), currency)}</span>'
         f'<span class="card-spark">{_spark_html(record)}</span>'
         "</div>"
