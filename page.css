@@ -766,17 +766,28 @@ html.layout-cards .table-wrap { display: none; }
 .shell {
     display: grid;
     grid-template-columns: 232px minmax(0, 1fr);
-    grid-template-areas:
-        "search board"
-        "sidebar board";
+    /* One row. A board that spans two auto rows inflates the first row and
+       shoves the sidebar down beside the table instead of under the toolbar. */
+    grid-template-areas: "rail board";
     gap: 0.35rem 0.75rem;
     max-width: 1540px;
     margin: 0 auto;
     padding: 0.45rem 0.7rem 2rem;
     align-items: start;
 }
-.search-box { grid-area: search; position: sticky; top: var(--stick-top, 92px); z-index: 24; background: #e4e9ef; }
-.sidebar { grid-area: sidebar; }
+.rail {
+    grid-area: rail;
+    position: sticky;
+    top: var(--stick-top, 92px);
+    align-self: start;
+    z-index: 24;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-height: calc(100vh - var(--stick-top, 92px) - 12px);
+    min-height: 0;
+}
+.search-box { grid-area: search; position: static; flex: 0 0 auto; background: #e4e9ef; }
 .board { grid-area: board; min-width: 0; }
 header, header.is-stale, header.is-failed {
     margin: 0;
@@ -1122,10 +1133,12 @@ header, header.is-stale, header.is-failed { background: transparent; color: inhe
     font-weight: 650;
     color: var(--text-primary);
 }
-.sidebar {
-    position: sticky;
-    top: var(--stick-top, 92px);
-    max-height: calc(100vh - var(--stick-top, 92px) - 12px);
+.rail .sidebar {
+    position: static;
+    top: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: none;
     overflow: auto;
     background: #e4e9ef;
     border-radius: 4px;
@@ -1262,9 +1275,12 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
         margin-left: 0;
         font-size: 0.68rem;
     }
-    .sidebar {
+    .rail { display: contents; }
+    .rail .search-box { position: sticky; top: var(--stick-top, 88px); }
+    .rail .sidebar {
         position: fixed;
         top: 0;
+        flex: none;
         max-height: 100vh;
         border-radius: 0;
     }

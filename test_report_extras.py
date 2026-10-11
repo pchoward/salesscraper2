@@ -214,6 +214,35 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("const HISTORY_COLOR", html)
         self.assertIn("function brandSame(", html)
 
+    def test_sidebar_rail_starts_with_the_board(self):
+        """Search and filters share one grid row with the board.
+
+        Two auto rows, with the board spanning both, grow the first row as the
+        table gets taller and leave a blank gap above the sidebar.
+        """
+        deck = _deck("50.00", "https://example.com/deck", "Zumiez", "Powell Peralta Ripper 8.5 Skateboard Deck")
+        html = build_report_html(
+            {"Zumiez_Decks": [deck]},
+            {},
+            generated_at="2026-10-11T20:22:15+00:00",
+        )
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        self.assertIn('class="rail"', html)
+        rail = html.split('<div class="rail">', 1)[1].split('<div class="board">', 1)[0]
+        self.assertIn('id="searchInput"', rail)
+        self.assertIn('id="filterDrawer"', rail)
+        self.assertLess(html.find('<div class="rail">'), html.find('<div class="board">'))
+        self.assertIn('"rail board"', style)
+        self.assertNotIn('"search board"', style)
+        self.assertNotIn('"sidebar board"', style)
+        self.assertIn(".rail .sidebar", style)
+        self.assertLess(style.find(".rail {"), style.find(".rail .sidebar"))
+        rail_css = style[style.find(".rail {"):style.find(".rail .sidebar")]
+        self.assertIn("position: sticky", rail_css)
+        sidebar_css = style[style.find(".rail .sidebar"):style.find(".rail .sidebar") + 400]
+        self.assertIn("position: static", sidebar_css)
+        self.assertIn("overflow: auto", sidebar_css)
+
 
 if __name__ == "__main__":
     unittest.main()
