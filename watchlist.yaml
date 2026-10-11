@@ -16,22 +16,52 @@
 #   min_width   Inches, inclusive. 8.6 matches 8.60 and anything wider.
 #               Omitted means no width minimum. A deck with no parseable width
 #               does not match a rule that sets min_width.
+#   max_width   Inches, inclusive upper bound. Use with min_width for a range
+#               (9.5 through 10.0). A deck with no parseable width does not match.
+#   width       Exact inches. 8.5 matches 8.50 and does not match 8.25 or 8.75.
+#               Combine with brand, part, and max_price for a rule such as
+#               any 8.5 inch Anti Hero deck under $50.
 #   max_price   Alert when the sale price is under this amount and yesterday
-#               it was missing or not under it.
+#               it was missing or not under it. The row stays highlighted
+#               whenever brand, part, and width match, even above this price.
 #   alert_on_drop
 #               true: alert on any sale-price drop, including under $2 / 5%.
+#   alert_on_low
+#               true: also email when a matching product newly hits its
+#               all-time low (the same 3-observation / 7-day rule as the page).
+#               A product that was already at that low yesterday does not
+#               send another email. This does not turn off the other alerts.
 #   back_in_stock_width
 #               Alert only when this width comes back in stock.
 #   note        Shown in the email.
 #
-# Example (not active):
+# Example (not active): any 8.5 inch Anti Hero deck under $50.
+#   - id: antihero-85-under-50
+#     brand: Anti Hero
+#     part: Decks
+#     width: 8.5
+#     max_price: 50
+#     note: Any 8.5 inch Anti Hero deck under $50
+#
+# Example (not active): email when a watched deck hits a new all-time low.
+#   - id: watched-new-low
+#     brand: Heroin
+#     part: Decks
+#     min_width: 8.6
+#     alert_on_low: true
+#     note: Email when a watched Heroin deck hits a new all-time low
+#
+# Example (not active): width range plus the older trigger fields.
 #   - id: caster-under-50
 #     name: Antihero Caster
 #     part: Decks
+#     min_width: 8.25
+#     max_width: 8.75
 #     max_price: 50
 #     alert_on_drop: true
+#     alert_on_low: true
 #     back_in_stock_width: 8.75
-#     note: Caster under $50, on any drop, or when 8.75 is back
+#     note: Caster from 8.25 to 8.75 under $50, on any drop, at a new low, or when 8.75 is back
 
 rules:
   - id: black-label-decks

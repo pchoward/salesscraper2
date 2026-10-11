@@ -45,6 +45,31 @@ FORMULA = (
     "Hot means 70 or above."
 )
 
+# Short legend for the report. Same four factors as FORMULA. Days tracked
+# are shown beside a deal and are not part of the sum.
+SCORE_LEGEND = (
+    "Score = discount depth (percent off, max 50) + closeness to the lowest tracked price "
+    "(25 at the low, 18 within $1 or 3%, 10 within $2 or 5%, else 0 until 3 observations span 7 days) "
+    "+ recent drop (8 plus 1 per 5% of a $2 or 5% drop, max 15; a smaller dip is 4) "
+    "+ width fit (10 when the deck is 8.25–8.75 inches). "
+    "70 or above is hot. Days tracked are shown for context and are not added."
+)
+
+
+def score_band(score):
+    """Color band for the score column. Hot matches the 70-point rule."""
+    try:
+        score = int(score)
+    except (TypeError, ValueError):
+        return "low"
+    if score >= HOT_AT:
+        return "hot"
+    if score >= 45:
+        return "high"
+    if score >= 25:
+        return "mid"
+    return "low"
+
 
 def _half_up(value):
     if value <= 0:

@@ -146,6 +146,89 @@ class WatchlistTests(unittest.TestCase):
         )
         self.assertEqual(alerts, [])
 
+    def test_exact_width_range_and_new_all_time_low(self):
+        rules = parse_watchlist(
+            """
+            rules:
+              - id: antihero-85
+                brand: Anti Hero
+                part: Decks
+                width: 8.5
+                max_price: 50
+                note: Any 8.5 inch Anti Hero deck under $50
+              - id: wide-band
+                brand: Heroin
+                part: Decks
+                min_width: 9.5
+                max_width: 10.0
+              - id: low-watch
+                brand: Baker
+                part: Decks
+                alert_on_low: true
+            """
+        )
+        exact = _deck("Anti-Hero Eagle 8.50 Deck", price="49.00", url="https://example.com/ah", width=8.50)
+        off_size = _deck("Anti-Hero Eagle 8.25 Deck", price="40.00", url="https://example.com/ah2", width=8.25)
+        self.assertEqual(
+            [rule["id"] for rule in rules if rule_matches(rule, exact)],
+            ["antihero-85"],
+        )
+        self.assertFalse(any(rule_matches(rule, off_size) for rule in rules))
+
+        wide = _deck("Heroin Wide Boy 9.75 Deck", price="60.00", url="https://example.com/w", width=9.75)
+        too_wide = _deck("Heroin Wide Boy 10.25 Deck", price="60.00", url="https://example.com/w2", width=10.25)
+        self.assertEqual(
+            [rule["id"] for rule in rules if rule_matches(rule, wide)],
+            ["wide-band"],
+        )
+        self.assertFalse(any(rule_matches(rule, too_wide) for rule in rules))
+
+        prior = {"SkateWarehouse_Decks": [dict(exact, price_new="55.00")]}
+        hits, alerts = match_watchlist([exact], rules=rules, previous=prior, today="2026-09-30")
+        self.assertEqual(hits[0]["rule_id"], "antihero-85")
+        self.assertEqual(alerts[0]["reasons"], ["Under $50.00"])
+        still_high = dict(exact, price_new="60.00")
+        hits, alerts = match_watchlist([still_high], rules=rules, previous=prior, today="2026-09-30")
+        self.assertEqual(len(hits), 1)
+        self.assertEqual(alerts, [])
+
+        baker = _deck("Baker Figgy 8.5 Deck", price="40.00", url="https://example.com/baker", width=8.5)
+        history = {
+            baker["url"]: {
+                "first_seen": "2026-09-01",
+                "last_seen": "2026-09-30",
+                "observation_count": 4,
+                "all_time_low": 40.0,
+                "all_time_low_date": "2026-09-30",
+                "prices": {
+                    "2026-09-01": 55.0,
+                    "2026-09-10": 50.0,
+                    "2026-09-20": 48.0,
+                    "2026-09-30": 40.0,
+                },
+            }
+        }
+        previous = {"Zumiez_Decks": [dict(baker, price_new="48.00")]}
+        _hits, alerts = match_watchlist(
+            [baker],
+            rules=rules,
+            previous=previous,
+            history=history,
+            today="2026-09-30",
+        )
+        self.assertIn("New all-time low", alerts[0]["reasons"])
+        self.assertIn("Price dropped $8.00", alerts[0]["reasons"])
+
+        already = match_watchlist(
+            [baker],
+            rules=rules,
+            previous={"Zumiez_Decks": [dict(baker, price_new="40.00")]},
+            history=history,
+            today="2026-09-30",
+        )
+        self.assertEqual(already[1], [])
+        self.assertEqual(already[0][0]["reasons"], [])
+
     def test_missing_file_logs_and_matches_nothing(self):
         with self.assertLogs("watchlist", level="ERROR") as logs:
             hits, alerts = match_watchlist([_deck("Heroin Egg 9 Deck", width=9)], path="missing-watchlist.yaml")

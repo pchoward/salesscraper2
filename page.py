@@ -12,6 +12,7 @@ from html import escape
 from zoneinfo import ZoneInfo
 
 from badges import classify_badges
+from charts import CHART_NOTE, listing_series
 from dimensions import dimension_key, extract_specs
 from filters import (
     BEARING_BRANDS,
@@ -25,18 +26,21 @@ from filters import (
     normalize_url,
     percent_off_value,
 )
-from health import warning_text, warnings_blurb
+from health import failed_keys_on, scan_freshness, warning_text, warnings_blurb
+from health import load_state as load_health
 from history import (
     STAGE_LABEL,
     all_time_low_status,
     days_at_price,
     listing_stage,
+    price_trend,
     recently_gone,
     summarize_entry,
 )
+from intel import intelligence_summary
 from matching import cross_store_groups
 from query_state import STARTER_VIEWS, WIDTH_RANGES, bucket_for_width
-from score import FORMULA, deal_score
+from score import FORMULA, SCORE_LEGEND, deal_score, score_band
 from site_sales import activity_line, describe_sales, display_name, load_state
 from watchlist import load_watchlist, rule_matches
 
@@ -55,7 +59,7 @@ _BRAND_ALIAS = {
     "anti-hero": "Anti-Hero",
 }
 _PLACEHOLDER = (
-    '<svg viewBox="0 0 64 64" width="68" height="68" aria-hidden="true">'
+    '<svg viewBox="0 0 64 64" width="84" height="84" aria-hidden="true">'
     '<rect width="64" height="64" fill="#e2e8f0"/>'
     '<rect x="8" y="28" width="48" height="8" rx="2" fill="#94a3b8"/>'
     "</svg>"
@@ -230,6 +234,27 @@ def sparkline_svg(prices, width=72, height=22, css="spark"):
     )
 
 
+def _availability_label(entry, present=True):
+    """On sale, sold out, or gone. Stock comes from the product page, not shipping."""
+    entry = entry if isinstance(entry, dict) else {}
+    if not present:
+        if entry.get("stock") == "out_of_stock":
+            return "Sold out"
+        if entry.get("stage") == "gone":
+            return "Gone"
+        return "No longer listed"
+    if entry.get("stock") == "out_of_stock":
+        return "Sold out"
+    return "On sale"
+
+
+def _trend_html(trend):
+    trend = trend if trend in {"down", "up", "stable"} else "stable"
+    symbol = {"down": "↓", "up": "↑", "stable": "→"}[trend]
+    title = {"down": "Price down", "up": "Price up", "stable": "Price steady"}[trend]
+    return f'<span class="trend trend-{trend}" title="{title}">{symbol}</span>'
+
+
 def _thumb(image, alt, large=False):
     css = "hero" if large else "thumb"
     icon = _PLACEHOLDER
@@ -237,7 +262,7 @@ def _thumb(image, alt, large=False):
         return f'<span class="thumb-wrap{" hero-wrap" if large else ""}"><span class="{css} ph">{icon}</span></span>'
     safe = escape(image, quote=True)
     label = escape(alt or "", quote=True)
-    size = 160 if large else 68
+    size = 200 if large else 84
     return (
         f'<span class="thumb-wrap{" hero-wrap" if large else ""}">'
         f'<img class="{css}" src="{safe}" alt="{label}" width="{size}" height="{size}" loading="lazy" '
@@ -404,7 +429,41 @@ def _bar_rows(pairs, label_key="label"):
     return "".join(rows)
 
 
-def _stats_html(products, history):
+def _money_delta(amount):
+    value = _price(amount)
+    if value is None:
+        return ""
+    return f"−${value:.2f}"
+
+
+def _intel_strip(summary):
+    summary = summary or {}
+    biggest = (summary.get("biggest_drops") or [None])[0]
+    if biggest:
+        drop_text = f'{_money_delta(biggest.get("delta"))} {biggest.get("name") or ""}'.strip()
+    else:
+        drop_text = "None today"
+    leader = summary.get("discount_leader")
+    if leader:
+        avg_text = f'{leader.get("store")} {leader.get("average"):.0f}%'
+    else:
+        avg_text = "No discounts"
+    good = summary.get("good_leader")
+    if good:
+        good_text = f'{good.get("store")} · {good.get("count")}'
+    else:
+        good_text = "None right now"
+    return (
+        '<div class="intel-strip" id="intelStrip">'
+        f'<div><span>Biggest drop</span><strong>{escape(drop_text)}</strong></div>'
+        f'<div><span>Highest average discount</span><strong>{escape(avg_text)}</strong></div>'
+        f'<div><span>Most good discounts</span><strong>{escape(good_text)}</strong>'
+        f'<p class="intel-def">{escape(summary.get("definition") or "")}</p></div>'
+        "</div>"
+    )
+
+
+def _stats_html(products, history, intel=None):
     by_store = {}
     by_width = {}
     by_brand_count = {}
@@ -469,9 +528,39 @@ def _stats_html(products, history):
             f"<tr><td>{escape(week)}</td><td>{_money(sum(values) / len(values))}</td><td>{len(values)}</td></tr>"
         )
     store_table = "".join(f"<tr><td>{escape(store)}</td><td>{escape(avg)}</td></tr>" for store, avg in store_avg)
+    intel = intel or {}
+    new_rows = []
+    for deal in intel.get("new_deals") or []:
+        price = _money(deal.get("price"))
+        new_rows.append(
+            f"<li>{escape(deal.get('store') or '')}: {escape(deal.get('name') or '')} {price}</li>"
+        )
+    drop_rows = []
+    for deal in intel.get("biggest_drops") or []:
+        drop_rows.append(
+            "<li>"
+            f"{escape(_money_delta(deal.get('delta')))} · {escape(deal.get('store') or '')}: "
+            f"{escape(deal.get('name') or '')}</li>"
+        )
+    good_rows = []
+    for row in intel.get("good_by_store") or []:
+        good_rows.append(
+            f"<tr><td>{escape(row.get('store') or '')}</td><td>{row.get('count')}</td>"
+            f"<td>{row.get('average'):.0f}%</td></tr>"
+        )
+    definition = escape(intel.get("definition") or "")
     return (
         '<section id="statsPanel" hidden>'
-        '<div class="section"><div class="section-header"><h2>Stats</h2></div><div class="section-content">'
+        '<div class="section"><div class="section-header"><h2>Deals intelligence</h2></div><div class="section-content">'
+        f'<p class="lede">{definition} Stores are ranked by how many of those deals they have, '
+        "then by how deep those discounts are.</p>"
+        '<div class="stat-block"><h3>New deals today</h3>'
+        f'<ul class="intel-list">{"".join(new_rows) or "<li>No new deals in this scan.</li>"}</ul></div>'
+        '<div class="stat-block"><h3>Biggest price drops</h3>'
+        f'<ul class="intel-list">{"".join(drop_rows) or "<li>No price drops in this scan.</li>"}</ul></div>'
+        '<div class="stat-block"><h3>Stores with the most good discounts</h3>'
+        '<table><thead><tr><th>Store</th><th>Good deals</th><th>Avg discount</th></tr></thead>'
+        f'<tbody>{"".join(good_rows) or "<tr><td colspan=3>No good discounts in this scan.</td></tr>"}</tbody></table></div>'
         '<div class="stat-block"><h3>Average discount by retailer</h3>'
         f'<table><tbody>{store_table or "<tr><td>No discounts</td></tr>"}</tbody></table></div>'
         '<div class="stat-block"><h3>Deals by width</h3>'
@@ -611,6 +700,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 except (TypeError, ValueError):
                     drop_amount = 0.0
             image = _image_of(item, entry)
+            try:
+                trend = price_trend(entry)
+            except Exception:
+                trend = "stable"
             width_key = dimension_key(specs.get("width")) if item.get("part") == "Decks" else ""
             length_key = dimension_key(specs.get("length")) or ""
             wheel_key = dimension_key(specs.get("wheelbase")) or ""
@@ -639,6 +732,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "lowest": bool(status.get("flagged")),
                 "hit_low": hit_low,
                 "image": image,
+                "trend": trend,
+                "availability": _availability_label(entry, present=True),
                 "prices": prices,
                 "chain": _chain(prices),
                 "group": group_by_url.get(url),
@@ -671,9 +766,64 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         catalog_json[record["id"]] = {
             "name": record["name"],
             "url": record["url"],
+            "store": record["store"],
+            "part": record["part"],
+            "size": record["width_key"],
+            "length": record["length_key"],
+            "wheelbase": record["wheel_key"],
+            "held": record["held"],
+            "first": record["first"],
+            "last": record["last"],
+            "stage": STAGE_LABEL.get(record.get("stage") or "", ""),
             "series": record["chain"],
             "daily": _daily_points(record["prices"]),
+            "chartNote": CHART_NOTE,
         }
+
+    by_group = {}
+    for record in records:
+        group = record.get("group") or {}
+        key = group.get("key") or ""
+        if key:
+            by_group.setdefault(key, []).append(record)
+    for record in records:
+        members = by_group.get((record.get("group") or {}).get("key") or "") or [record]
+        series = []
+        offers = []
+        priced = []
+        for member in members:
+            amount = _price(member["item"].get("price_new"))
+            if amount is not None:
+                priced.append(amount)
+            series.append(
+                listing_series(
+                    _entry(price_history, member["url"]),
+                    member["url"],
+                    member["store"],
+                    member.get("availability") or "On sale",
+                    member["item"].get("currency"),
+                )
+            )
+        cheapest = min(priced) if priced else None
+        for member in members:
+            amount = _price(member["item"].get("price_new"))
+            offers.append(
+                {
+                    "store": member["store"],
+                    "url": member["url"],
+                    "price": amount,
+                    "availability": member.get("availability") or "On sale",
+                    "currency": str(member["item"].get("currency") or "USD").upper(),
+                    "cheapest": bool(
+                        cheapest is not None
+                        and amount is not None
+                        and abs(amount - cheapest) < 0.001
+                        and len(members) > 1
+                    ),
+                }
+            )
+        catalog_json[record["id"]]["seriesList"] = series
+        catalog_json[record["id"]]["offers"] = offers
 
     store_counts = {}
     part_counts = {}
@@ -714,6 +864,39 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     except Exception as exc:
         logger.error("Store warnings could not be read: %s", exc)
 
+    fresh = {"stale": False, "hours": None, "failed": list(failed_keys)}
+    try:
+        health_failed = failed_keys_on(load_health(), today)
+        merged_failed = list(failed_keys)
+        for key in health_failed:
+            if key not in merged_failed:
+                merged_failed.append(key)
+        fresh = scan_freshness(generated_at, failed_keys=merged_failed)
+    except Exception as exc:
+        logger.error("Scan freshness failed: %s", exc)
+    try:
+        intel = intelligence_summary(
+            products,
+            price_history,
+            new_items=digest.new_items,
+            drops=digest.drops,
+        )
+    except Exception as exc:
+        logger.error("Deals intelligence failed: %s", exc)
+        intel = intelligence_summary([], {})
+
+    header_class = "is-stale" if fresh.get("stale") else ""
+    if fresh.get("failed"):
+        header_class = (header_class + " is-failed").strip()
+    fresh_bits = []
+    if fresh.get("failed"):
+        fresh_bits.append("Scan failed for " + ", ".join(fresh["failed"]))
+    if fresh.get("stale"):
+        fresh_bits.append("Last scan is stale (older than 36 hours)")
+    elif not fresh.get("failed"):
+        fresh_bits.append("Scan is current")
+    fresh_text = ". ".join(fresh_bits)
+
     chunks = [
         "<!DOCTYPE html>",
         '<html lang="en">',
@@ -723,14 +906,16 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"<title>Skateboard Sale Tracker | {escape(today)}</title>",
         '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">',
         f"<style>{_read_asset('page.css')}</style>",
+        "<script>try{if(localStorage.getItem('salesscraper2.layout')==='cards')document.documentElement.classList.add('layout-cards')}catch(e){}</script>",
         "</head><body><div class=\"container\">",
-        "<header>",
+        f'<header class="{header_class}" data-stale-hours="36">',
         "<h1>Skateboard Sale Tracker</h1>",
         "<p>"
         f'<span id="statusCounts">{len(records)} active deals, {new_count} new, {drop_count} drops</span>'
-        ', last scan <span class="scan-wrap"><time id="lastScan" datetime="'
+        ' · <span class="scan-wrap">last scan <time id="lastScan" datetime="'
         f'{escape(str(generated_at), quote=True)}">{escape(str(generated_at))}</time>'
-        f'<span class="scan-exact" id="scanExact">{escape(format_scan_et(generated_at))}</span></span></p>',
+        f'<span class="scan-exact" id="scanExact">{escape(format_scan_et(generated_at))}</span></span>'
+        f' <span class="fresh-note" id="freshness">{escape(fresh_text)}</span></p>',
         "</header>",
     ]
     alert = _alert_html(warnings)
@@ -742,6 +927,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}">'
         '<span class="digest-label">Digest of what changed. '
         '<span id="changePrefix">Since yesterday:</span></span> '
+        '<span class="segment" role="group" aria-label="What changed">'
         '<button type="button" class="change-btn active" id="btnAll" data-change="all" '
         'aria-pressed="true" onclick="setChange(\'all\')">All deals</button> '
         f'<button type="button" class="change-btn" id="btnNew" data-change="new" aria-pressed="false" '
@@ -755,7 +941,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"{hit_count} hit lowest tracked price</button> "
         f'<button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" '
         f"onclick=\"setChange('removed')\">"
-        f"{escape(_plural(gone_count, 'deal disappeared', 'deals disappeared'))}</button></p>"
+        f"{escape(_plural(gone_count, 'deal disappeared', 'deals disappeared'))}</button>"
+        "</span></p>"
     )
     chunks.append(
         '<div class="mode" role="group" aria-label="Digest baseline">'
@@ -798,6 +985,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     for store_name in store_counts:
         if store_name not in store_names:
             store_names.append(store_name)
+    chunks.append("</div>")
+    chunks.append(_intel_strip(intel))
+    chunks.append('<div class="store-strip" aria-label="Deals by store">')
     for store in sorted(store_names):
         count = store_counts.get(store, 0)
         warn = store in suspect_stores or count == 0
@@ -807,7 +997,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f'<button type="button" class="{card_class}" data-card="store" '
             f'data-store="{escape(store, quote=True)}" aria-pressed="false" '
             f"onclick=\"toggleCard('store', '{escape(store, quote=True)}')\">"
-            f'<div class="number">{count}</div><div class="label">{escape(store)}</div>{badge}</button>'
+            f'<span class="number">{count}</span><span class="label">{escape(store)}</span>{badge}</button>'
         )
     chunks.append("</div>")
 
@@ -895,22 +1085,17 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
         '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
         f"{length_select}{wheel_select}"
+        f'<div class="filter-group width-ranges" id="sizeFilters">'
+        '<span class="range-label">Width range</span>'
+        f'{"".join(chips)}</div>'
         "</div>"
     )
-    chunks.append(
-        '<div class="chip-row">'
-        + _buttons("storeFilters", "store", "filterByStore", sorted(store_counts))
-        + _buttons("partFilters", "part", "filterByPart", [part for part in ("Decks", "Wheels", "Trucks", "Bearings") if part in part_counts])
-        + f'<div class="filter-group width-ranges" id="sizeFilters">'
-        '<span class="range-label">Width range</span>'
-        + f'{"".join(chips)}</div>'
-        + "</div>"
-    )
+    chunks.append('<div class="active-row" id="activeChips" hidden></div>')
     chunks.append(
         '<div class="tool-row">'
         '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
         '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
-        '<button type="button" class="text-btn" id="statsToggle" aria-pressed="false" onclick="toggleStats()">Stats</button>'
+        '<button type="button" class="text-btn" id="statsToggle" aria-pressed="false" onclick="toggleStats()">Deals intelligence</button>'
         '<button type="button" class="text-btn" id="saveView">Save view</button>'
         '<button type="button" class="text-btn" onclick="clearFilters()">Clear</button>'
         "</div></div>"
@@ -956,19 +1141,27 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             )
     chunks.append(
         '<div class="section" id="dealsSection">'
-        '<div class="section-header"><h2>All Deals '
-        f'<span class="badge">{len(records)}</span></h2></div>'
+        '<div class="section-header deals-head"><h2>All Deals '
+        f'<span class="badge">{len(records)}</span></h2>'
+        '<div class="layout-toggle" role="group" aria-label="Layout">'
+        '<button type="button" id="layoutTable" aria-pressed="true">Table</button>'
+        '<button type="button" id="layoutCards" aria-pressed="false">Cards</button>'
+        "</div></div>"
         '<div class="section-content">'
     )
+    chunks.append(f'<p class="score-legend">{escape(SCORE_LEGEND)}</p>')
     chunks.append(f'<div class="table-wrap"><table id="mainTable"><thead><tr>{"".join(head)}</tr></thead><tbody>')
 
+    card_chunks = ['<div class="card-grid" id="cardGrid">']
     for record in records:
         try:
             chunks.append(_row_html(record))
-            chunks.append(_detail_html(record))
+            card_chunks.append(_card_html(record))
         except Exception as exc:
             logger.error("Row render failed for %s: %s", record.get("url"), exc)
     chunks.append("</tbody></table></div>")
+    card_chunks.append("</div>")
+    chunks.append("".join(card_chunks))
     chunks.append(_group_board(records))
     chunks.append("</div></div>")
 
@@ -985,7 +1178,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     except Exception as exc:
         logger.error("Across-stores section failed: %s", exc)
     try:
-        chunks.append(_stats_html(products, price_history))
+        chunks.append(_stats_html(products, price_history, intel))
     except Exception as exc:
         logger.error("Stats section failed: %s", exc)
     try:
@@ -1008,6 +1201,23 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "</footer></div>"
     )
     chunks.append(
+        '<div id="productModal" hidden>'
+        '<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">'
+        '<button type="button" id="modalClose">Close</button>'
+        '<h3 id="modalTitle"></h3>'
+        '<p id="modalMeta"></p>'
+        '<div class="window-toggle" role="group" aria-label="Price history window">'
+        '<button type="button" data-window="30" aria-pressed="false">30 days</button>'
+        '<button type="button" data-window="90" aria-pressed="true">90 days</button>'
+        '<button type="button" data-window="180" aria-pressed="false">180 days</button>'
+        "</div>"
+        '<div id="modalChart"></div>'
+        '<p class="chart-note" id="modalNote"></p>'
+        '<ul class="modal-offers" id="modalOffers"></ul>'
+        '<p><a id="modalLink" target="_blank" rel="noopener"></a></p>'
+        "</div></div>"
+    )
+    chunks.append(
         '<div id="priceDrawer" hidden>'
         '<button type="button" id="drawerClose">Close</button>'
         '<h3 id="drawerTitle"></h3>'
@@ -1019,6 +1229,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         {
             "generated": str(generated_at),
             "scanLabel": format_scan_et(generated_at),
+            "chartNote": CHART_NOTE,
+            "failed": list(fresh.get("failed") or []),
             "views": list(STARTER_VIEWS),
             "items": catalog_json,
         }
@@ -1046,17 +1258,37 @@ def _attr(value):
     return escape("" if value is None else str(value), quote=True)
 
 
+def _deal_attrs(record):
+    item = record["item"]
+    original = _price(item.get("price_old"))
+    group_key = ""
+    if record["group"]:
+        group_key = record["group"].get("key") or ""
+    return (
+        f'data-id="{record["id"]}" data-url="{_attr(record["url"])}" '
+        f'data-store="{_attr(record["store"])}" data-part="{_attr(record["part"])}" '
+        f'data-size="{_attr(record["width_key"])}" data-brand="{_attr(record["brand"])}" '
+        f'data-name="{_attr(record["name"])}" data-search="{_attr(record["search"])}" '
+        f'data-price="{_attr(_price(item.get("price_new")))}" '
+        f'data-original="{_attr(original if original is not None else "")}" '
+        f'data-discount="{_attr(round(record["percent"], 1) if record["percent"] is not None else "")}" '
+        f'data-days="{record["days"]}" data-daysat="{record["at_days"]}" '
+        f'data-score="{record["score"]["score"]}" data-rank="{record["rank"]}" '
+        f'data-stage="{_attr(record.get("stage") or "")}" '
+        f'data-length="{_attr(record["length_key"])}" data-wheelbase="{_attr(record["wheel_key"])}" '
+        f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
+        f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
+        f'data-group="{_attr(group_key)}"'
+    )
+
+
 def _row_html(record):
     item = record["item"]
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
     discount = _discount_class(item.get("price_new"), item.get("price_old"))
     size_html = f'<span class="size-badge">{escape(record["width_key"])}</span>' if record["width_key"] else "—"
     drop_html = ""
-    group_key = ""
-    if record["group"]:
-        group_key = record["group"].get("key") or ""
     listed = " on-list" if record["listed"] else ""
-    original = _price(item.get("price_old"))
     currency = item.get("currency")
     symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
     if record["drop"] is not None and record["drop_amount"]:
@@ -1069,21 +1301,9 @@ def _row_html(record):
             f'<div class="delta">\u2212{symbol}{record["drop_amount"]:.2f} '
             f'(\u2212{percent_text}% vs prior sale)</div>'
         )
+    band = score_band(record["score"]["score"])
     return (
-        f'<tr class="deal-row{listed}" tabindex="0" data-id="{record["id"]}" '
-        f'data-url="{_attr(record["url"])}" data-store="{_attr(record["store"])}" '
-        f'data-part="{_attr(record["part"])}" data-size="{_attr(record["width_key"])}" '
-        f'data-brand="{_attr(record["brand"])}" data-name="{_attr(record["name"])}" '
-        f'data-search="{_attr(record["search"])}" data-price="{_attr(_price(item.get("price_new")))}" '
-        f'data-original="{_attr(original if original is not None else "")}" '
-        f'data-discount="{_attr(round(record["percent"], 1) if record["percent"] is not None else "")}" '
-        f'data-days="{record["days"]}" data-daysat="{record["at_days"]}" '
-        f'data-score="{record["score"]["score"]}" data-rank="{record["rank"]}" '
-        f'data-stage="{_attr(record.get("stage") or "")}" '
-        f'data-length="{_attr(record["length_key"])}" data-wheelbase="{_attr(record["wheel_key"])}" '
-        f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
-        f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
-        f'data-group="{_attr(group_key)}">'
+        f'<tr class="deal-row{listed}" tabindex="0" {_deal_attrs(record)}>'
         f'<td>{_thumb(record["image"], record["name"])}</td>'
         '<td><button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button></td>'
         f'<td><span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span></td>'
@@ -1098,11 +1318,33 @@ def _row_html(record):
         f'{_spark_html(record)}{drop_html}</td>'
         f'<td class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else "N/A"}</td>'
         f'<td><span class="discount {discount}">{escape(percent)}</span></td>'
-        f'<td class="days-cell">{escape(record["held"])}</td>'
-        f'<td class="score-cell"><button type="button" class="score-btn" aria-expanded="false">'
+        f'<td class="days-cell">{_trend_html(record.get("trend"))}{escape(record["held"])}</td>'
+        f'<td class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false">'
         f'{record["score"]["score"]}'
         + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")
         + f'</button>{_why_html(record)}</td></tr>'
+    )
+
+
+def _card_html(record):
+    item = record["item"]
+    percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
+    discount = _discount_class(item.get("price_new"), item.get("price_old"))
+    listed = " on-list" if record["listed"] else ""
+    currency = item.get("currency")
+    return (
+        f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
+        '<div class="card-top">'
+        '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
+        f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
+        "</div>"
+        f'{_thumb(record["image"], record["name"], large=True)}'
+        f'<h3 class="product-name">{_product_link(item)}</h3>'
+        f'<div class="card-price"><span class="price price-new">{_money(item.get("price_new"), currency)}</span>'
+        f'<span class="discount {discount}">{escape(percent)}</span></div>'
+        f'<div class="card-spark">{_trend_html(record.get("trend"))}{_spark_html(record)}</div>'
+        f'<div class="row-meta">{_badge_html(record["badges"], record["listed"])}'
+        f'{_stage_html(record.get("stage"))}</div></article>'
     )
 
 
@@ -1175,8 +1417,21 @@ def _offer_link(offer):
     return f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
 
 
+def _member_line(record):
+    item = record["item"]
+    avail = escape(record.get("availability") or "On sale")
+    price = _money(item.get("price_new"), item.get("currency"))
+    store = escape(record["store"])
+    label = f"{store} {price} · {avail}"
+    url = record["url"]
+    if not url:
+        return label
+    return f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
+
+
 def _group_board(records):
     cards = {}
+    members = {}
     order = []
     for record in records:
         group = record["group"]
@@ -1185,7 +1440,9 @@ def _group_board(records):
         key = group.get("key") or ""
         if key not in cards:
             cards[key] = group
+            members[key] = []
             order.append(key)
+        members[key].append(record)
     blocks = ['<div class="group-board" id="groupBoard" hidden>']
     if not order:
         blocks.append(
@@ -1195,27 +1452,34 @@ def _group_board(records):
         return "\n".join(blocks)
     for key in order:
         group = cards[key]
-        offers = sorted(
-            group.get("offers") or [],
-            key=lambda offer: (float(offer.get("price") or 0), offer.get("store") or ""),
+        rows = sorted(
+            members.get(key) or [],
+            key=lambda record: (
+                _price(record["item"].get("price_new")) if _price(record["item"].get("price_new")) is not None else 10**9,
+                record["store"],
+            ),
         )
-        if not offers:
+        if not rows:
             continue
-        best = offers[0]
-        rest = offers[1:]
-        count = len(offers)
+        best = rows[0]
+        rest = rows[1:]
+        count = len(rows)
         store_word = "store" if count == 1 else "stores"
         summary = (
-            f'{escape(group.get("label") or "Product")} - from {_money(best.get("price"))} - '
+            f'{escape(group.get("label") or "Product")} - from {_money(best["item"].get("price_new"))} - '
             f"{count} {store_word}"
         )
-        others = "".join(f"<li>{_offer_link(offer)}</li>" for offer in rest)
+        others = "".join(
+            f'<li class="offer-line">{_member_line(record)}</li>' for record in rest
+        )
         blocks.append(
             f'<article class="group-card" data-key="{escape(key, quote=True)}">'
             f'<button type="button" class="group-summary" aria-expanded="false">{summary}</button>'
             '<div class="group-detail" hidden>'
-            f'<p class="best">Best price: {_offer_link(best)}</p>'
-            f"<ul>{others}</ul></div></article>"
+            f'<p class="best">Best price: {_member_line(best)}</p>'
+            f"<ul>{others}</ul>"
+            f'<button type="button" class="text-btn group-chart" data-id="{escape(best["id"], quote=True)}">'
+            "Price history</button></div></article>"
         )
     blocks.append("</div>")
     return "\n".join(blocks)
@@ -1230,17 +1494,54 @@ def _stage_html(stage):
 
 def _why_html(record):
     score = record["score"]
-    rows = []
+    parts = score.get("parts") or {}
+    specific = {"discount": "", "lowest": "", "drop": "", "size": ""}
+    notes = []
     for factor in score.get("breakdown") or []:
-        label = escape(factor.get("label") or "")
-        points = factor.get("points")
-        if points:
-            rows.append(f"<li><span>{label}</span><b>+{int(points)}</b></li>")
-        elif label:
-            rows.append(f'<li class="why-note"><span>{label}</span></li>')
+        label = factor.get("label") or ""
+        if not label:
+            continue
+        if factor.get("points"):
+            lowered = label.lower()
+            if label.endswith("% off"):
+                specific["discount"] = label
+            elif "lowest" in lowered:
+                specific["lowest"] = label
+            elif "reduced" in lowered:
+                specific["drop"] = label
+            elif label == "Popular size":
+                specific["size"] = label
+        else:
+            notes.append(label)
+
+    def hint(title, key, generic):
+        chosen = specific.get(key) or ""
+        if chosen and chosen.casefold() != title.casefold():
+            return chosen
+        return generic
+
+    factors = (
+        ("Discount depth", parts.get("discount") or 0, hint("Discount depth", "discount", "Percent off, max 50")),
+        (
+            "Lowest tracked price",
+            parts.get("lowest") or 0,
+            hint("Lowest tracked price", "lowest", "25 at the low, 18 within $1 or 3%, 10 within $2 or 5%"),
+        ),
+        ("Recent drop", parts.get("drop") or 0, hint("Recent drop", "drop", "Up to 15, or 4 for a smaller dip")),
+        ("Popular size", parts.get("size") or 0, hint("Popular size", "size", "10 when the deck is 8.25–8.75")),
+    )
+    rows = []
+    for label, points, detail in factors:
+        rows.append(
+            f'<li><span>{escape(label)} <em>{escape(detail)}</em></span><b>+{int(points)}</b></li>'
+        )
+    for label in notes:
+        rows.append(f'<li class="why-note"><span>{escape(label)}</span><b>not scored</b></li>')
     return (
         f'<div class="why" id="why-{record["id"]}" role="tooltip">'
-        f'<strong>Why {score["score"]}?</strong><ul>{"".join(rows)}</ul></div>'
+        f'<strong>Why {score["score"]}?</strong><ul>{"".join(rows)}</ul>'
+        "<p class=\"why-legend\">These four lines are the whole score. "
+        "Days tracked are not added. 70 or above is hot.</p></div>"
     )
 
 

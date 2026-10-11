@@ -5,10 +5,13 @@ import unittest
 
 from health import (
     MAX_RUNS,
+    STALE_AFTER_HOURS,
     broken_store_warnings,
     empty_store_keys,
+    failed_keys_on,
     record_run,
     results_from_run,
+    scan_freshness,
     suspect_store_warnings,
     warning_text,
 )
@@ -155,6 +158,25 @@ class BrokenStoreTests(unittest.TestCase):
     def test_new_store_with_no_baseline_is_not_suspect(self):
         current = {"Skate Deluxe_Decks": [], "Skate Deluxe_Wheels": []}
         self.assertEqual(empty_store_keys(current, set(), {"runs": [], "baseline": {}}), [])
+
+    def test_scan_is_stale_after_36_hours_and_names_failed_keys(self):
+        now = datetime.datetime(2026, 10, 2, 12, 0, tzinfo=datetime.timezone.utc)
+        fresh = scan_freshness("2026-10-02T10:00:00+00:00", now=now)
+        self.assertFalse(fresh["stale"])
+        stale = scan_freshness("2026-09-30T12:00:00+00:00", now=now, failed_keys=["Zumiez_Decks"])
+        self.assertTrue(stale["stale"])
+        self.assertGreater(stale["hours"], STALE_AFTER_HOURS)
+        self.assertEqual(stale["failed"], ["Zumiez_Decks"])
+        state = {
+            "runs": [
+                {
+                    "date": "2026-10-02",
+                    "results": {"Zumiez_Decks": {"count": 0, "failed": True}, "CCS_Decks": {"count": 2, "failed": False}},
+                }
+            ]
+        }
+        self.assertEqual(failed_keys_on(state, "2026-10-02"), ["Zumiez_Decks"])
+        self.assertEqual(failed_keys_on(state, "2026-10-01"), [])
 
     def test_workflow_commits_health_file(self):
         with open(".github/workflows/scrape.yml", encoding="utf-8") as handle:

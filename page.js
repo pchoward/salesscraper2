@@ -270,6 +270,7 @@ function applyGroupVisibility() {
     if (!state.grouped) {
         board.hidden = true;
         dealRows().forEach(row => row.classList.remove("grouped-hide"));
+        mirrorCardFlags();
         return;
     }
     board.hidden = false;
@@ -287,6 +288,18 @@ function applyGroupVisibility() {
     });
     const empty = board.querySelector(".group-empty");
     if (empty) empty.hidden = visible.size !== 0;
+    mirrorCardFlags();
+}
+
+function mirrorCardFlags() {
+    const grid = document.getElementById("cardGrid");
+    if (!grid) return;
+    dealRows().forEach(row => {
+        const card = grid.querySelector('.deal-card[data-id="' + row.dataset.id + '"]');
+        if (!card) return;
+        card.classList.toggle("filtered-out", row.classList.contains("filtered-out"));
+        card.classList.toggle("grouped-hide", row.classList.contains("grouped-hide"));
+    });
 }
 
 function showGone(on) {
@@ -311,6 +324,7 @@ function applyFilters() {
     paintCards();
     paintWidthChips();
     updateMoreCount();
+    paintActiveChips();
     syncUrl();
     paintViews();
 }
@@ -418,7 +432,17 @@ function sortBy(key, direction) {
     const header = document.querySelector('#mainTable [data-sort="' + key + '"]');
     if (header) header.classList.add("sorted");
     mirrorSort(key, direction);
+    syncCardOrder();
     syncUrl();
+}
+
+function syncCardOrder() {
+    const grid = document.getElementById("cardGrid");
+    if (!grid) return;
+    dealRows().forEach(row => {
+        const card = grid.querySelector('.deal-card[data-id="' + row.dataset.id + '"]');
+        if (card) grid.appendChild(card);
+    });
 }
 
 function sortTable() {
@@ -465,7 +489,7 @@ function toggleDetail(row) {
 
 function applyStars() {
     const stars = starSet();
-    dealRows().forEach(row => {
+    document.querySelectorAll(".deal-row, .deal-card").forEach(row => {
         const on = stars.has(row.dataset.url);
         row.dataset.starred = on ? "1" : "0";
         const button = row.querySelector(".star");
@@ -477,7 +501,7 @@ function applyStars() {
 }
 
 function toggleStar(button) {
-    const row = button.closest(".deal-row");
+    const row = button.closest(".deal-row, .deal-card");
     if (!row) return;
     const stars = starSet();
     if (stars.has(row.dataset.url)) stars.delete(row.dataset.url);
@@ -748,6 +772,7 @@ function updateAgo() {
     else if (seconds < 129600) label = Math.round(seconds / 3600) + " hours ago";
     else label = Math.round(seconds / 86400) + " days ago";
     node.textContent = label;
+    updateFreshness();
 }
 
 function updateBanners() {
@@ -1098,6 +1123,7 @@ function updateMoreCount() {
     const wheel = document.getElementById("wheelbaseSelect");
     if (length && length.value && length.value !== "all") count += 1;
     if (wheel && wheel.value && wheel.value !== "all") count += 1;
+    count += (state.widths || []).length;
     const badge = document.getElementById("moreCount");
     const button = document.getElementById("moreFilters");
     if (badge) {
@@ -1182,7 +1208,356 @@ function closeSparkPanel() {
     if (panel) panel.hidden = true;
 }
 
+const LAYOUT_KEY = "salesscraper2.layout";
+const STORE_COLOR = {
+    Zumiez: "#be185d",
+    SkateWarehouse: "#1d4ed8",
+    CCS: "#059669",
+    Tactics: "#d97706",
+    "Skate Deluxe": "#6d28d9",
+    "Muir Skate": "#0f766e"
+};
+let chartWindow = 90;
+let chartId = "";
+
+function readLayout() {
+    try {
+        return localStorage.getItem(LAYOUT_KEY) === "cards" ? "cards" : "table";
+    } catch (err) {
+        return "table";
+    }
+}
+
+function applyLayout(mode) {
+    const cards = mode === "cards";
+    document.documentElement.classList.toggle("layout-cards", cards);
+    const tableBtn = document.getElementById("layoutTable");
+    const cardBtn = document.getElementById("layoutCards");
+    if (tableBtn) tableBtn.setAttribute("aria-pressed", cards ? "false" : "true");
+    if (cardBtn) cardBtn.setAttribute("aria-pressed", cards ? "true" : "false");
+    try {
+        localStorage.setItem(LAYOUT_KEY, cards ? "cards" : "table");
+    } catch (err) {
+        /* private mode should not break the page */
+    }
+}
+
+function paintActiveChips() {
+    const host = document.getElementById("activeChips");
+    if (!host) return;
+    const chips = [];
+    function add(label, clear) {
+        chips.push({ label: label, clear: clear });
+    }
+    if (state.store !== "all") add("Store: " + state.store, () => filterByStore("all"));
+    if (state.part !== "all") add("Type: " + state.part, () => filterByPart("all"));
+    if (state.brand !== "all") {
+        add(state.brand, () => {
+            setSelect("brandSelect", "all");
+            state.brand = "all";
+            applyFilters();
+        });
+    }
+    (state.widths || []).forEach(id => {
+        const range = widthRanges().find(item => item.id === id);
+        add(range ? range.label : id, () => toggleWidthRange(id));
+    });
+    if (state.priceMin != null) {
+        add("Min $" + numText(state.priceMin), () => {
+            const node = document.getElementById("priceMin");
+            if (node) node.value = "";
+            applyFilters();
+        });
+    }
+    if (state.priceMax != null) {
+        add("Max $" + numText(state.priceMax), () => {
+            const node = document.getElementById("priceMax");
+            if (node) node.value = "";
+            applyFilters();
+        });
+    }
+    if (state.discountMin != null) {
+        add(numText(state.discountMin) + "% off or more", () => {
+            const node = document.getElementById("discountMin");
+            if (node) node.value = "";
+            applyFilters();
+        });
+    }
+    if (state.length !== "all") {
+        add("Length " + state.length, () => {
+            setSelect("lengthSelect", "all");
+            state.length = "all";
+            applyFilters();
+        });
+    }
+    if (state.wheelbase !== "all") {
+        add("Wheelbase " + state.wheelbase, () => {
+            setSelect("wheelbaseSelect", "all");
+            state.wheelbase = "all";
+            applyFilters();
+        });
+    }
+    if (state.watching) add("Watching", () => toggleWatching());
+    if (state.cardNew) add("New deals", () => toggleCard("new"));
+    if (state.cardDrop) add("Price drops", () => toggleCard("drop"));
+    if (state.cardLow) add("All-time lows", () => toggleCard("lowest"));
+    if (state.change === "new") add("New since baseline", () => setChange("all"));
+    if (state.change === "drop") add("Price drops since baseline", () => setChange("all"));
+    if (state.change === "lowest") add("New lows", () => setChange("all"));
+    if (state.change === "removed") add("Deals disappeared", () => setChange("all"));
+    host.innerHTML = "";
+    if (!chips.length) {
+        host.hidden = true;
+        return;
+    }
+    host.hidden = false;
+    chips.forEach(chip => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "active-chip";
+        button.textContent = chip.label + " ×";
+        button.setAttribute("aria-label", "Remove " + chip.label);
+        button.addEventListener("click", chip.clear);
+        host.appendChild(button);
+    });
+}
+
+function updateFreshness() {
+    const header = document.querySelector("header");
+    const note = document.getElementById("freshness");
+    const node = document.getElementById("lastScan");
+    if (!header || !node) return;
+    const parsed = parseScan(node.getAttribute("datetime") || "");
+    const limit = parseFloat(header.getAttribute("data-stale-hours") || "36");
+    const stale = Number.isFinite(parsed) && (Date.now() - parsed) / 3600000 > limit;
+    const failed = catalog().failed || [];
+    header.classList.toggle("is-stale", stale);
+    header.classList.toggle("is-failed", failed.length > 0);
+    if (!note) return;
+    const parts = [];
+    if (failed.length) parts.push("Scan failed for " + failed.join(", "));
+    if (stale) parts.push("Last scan is stale (older than " + limit + " hours)");
+    else if (!failed.length) parts.push("Scan is current");
+    if (parts.length) note.textContent = parts.join(". ");
+}
+
+function addDays(iso, delta) {
+    const date = new Date(String(iso).slice(0, 10) + "T00:00:00Z");
+    if (!Number.isFinite(date.getTime())) return iso;
+    date.setUTCDate(date.getUTCDate() + delta);
+    return date.toISOString().slice(0, 10);
+}
+
+function markerColor(kind) {
+    if (kind === "drop") return "#15803d";
+    if (kind === "back") return "#7c3aed";
+    if (kind === "gone") return "#64748b";
+    if (kind === "low") return "#ca8a04";
+    return "#334155";
+}
+
+function clipSeries(series, days) {
+    const end = String((catalog().generated || "")).slice(0, 10);
+    const start = end ? addDays(end, -Number(days || 90)) : "";
+    const points = (series.points || []).filter(point => !start || point[0] >= start);
+    const markers = (series.markers || []).filter(marker => !start || marker.date >= start).map(marker => Object.assign({}, marker));
+    if (series.low && series.low.date && (!start || series.low.date >= start)) {
+        markers.push({
+            date: series.low.date,
+            kind: "low",
+            label: "All-time low",
+            price: series.low.price
+        });
+    }
+    const clipped = {
+        store: series.store || "",
+        url: series.url || "",
+        availability: series.availability || "",
+        points: points,
+        markers: markers
+    };
+    if (series.currency) clipped.currency = series.currency;
+    if (series.low) clipped.low = series.low;
+    return clipped;
+}
+
+function drawChart(id) {
+    const item = (catalog().items || {})[id];
+    const host = document.getElementById("modalChart");
+    if (!host || !item) return;
+    const series = (item.seriesList || []).map(row => clipSeries(row, chartWindow));
+    host.innerHTML = "";
+    const width = 640;
+    const height = 220;
+    const pad = { l: 46, r: 14, t: 16, b: 28 };
+    const prices = [];
+    series.forEach(row => {
+        (row.points || []).forEach(point => prices.push(Number(point[1])));
+        (row.markers || []).forEach(marker => {
+            if (marker.price != null && Number.isFinite(Number(marker.price))) prices.push(Number(marker.price));
+        });
+    });
+    if (!prices.length) {
+        const empty = document.createElement("p");
+        empty.className = "chart-empty";
+        empty.textContent = "No tracked prices in this window.";
+        host.appendChild(empty);
+        return;
+    }
+    const low = Math.min.apply(null, prices);
+    const high = Math.max.apply(null, prices);
+    const span = high - low || 1;
+    const end = String((catalog().generated || "")).slice(0, 10);
+    const start = end ? addDays(end, -chartWindow) : end;
+    function xOf(iso) {
+        const t0 = Date.parse(start + "T00:00:00Z");
+        const t1 = Date.parse(end + "T00:00:00Z");
+        const t = Date.parse(String(iso).slice(0, 10) + "T00:00:00Z");
+        if (!Number.isFinite(t0) || !Number.isFinite(t1) || t1 === t0) return pad.l;
+        const ratio = (t - t0) / (t1 - t0);
+        return pad.l + Math.min(1, Math.max(0, ratio)) * (width - pad.l - pad.r);
+    }
+    function yOf(price) {
+        return pad.t + (height - pad.t - pad.b) * (1 - (price - low) / span);
+    }
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+    svg.setAttribute("class", "history-chart");
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", "Price history, " + chartWindow + " days");
+    [low, high].forEach(price => {
+        const label = document.createElementNS(svg.namespaceURI, "text");
+        label.setAttribute("x", "4");
+        label.setAttribute("y", yOf(price) + 4);
+        label.setAttribute("class", "chart-axis");
+        label.textContent = "$" + Number(price).toFixed(0);
+        svg.appendChild(label);
+    });
+    series.forEach(row => {
+        const color = STORE_COLOR[row.store] || "#334155";
+        const points = row.points || [];
+        if (points.length >= 2) {
+            const poly = document.createElementNS(svg.namespaceURI, "polyline");
+            poly.setAttribute("fill", "none");
+            poly.setAttribute("stroke", color);
+            poly.setAttribute("stroke-width", "2");
+            poly.setAttribute("points", points.map(point => xOf(point[0]).toFixed(1) + "," + yOf(Number(point[1])).toFixed(1)).join(" "));
+            svg.appendChild(poly);
+        } else if (points.length === 1) {
+            const dot = document.createElementNS(svg.namespaceURI, "circle");
+            dot.setAttribute("cx", xOf(points[0][0]));
+            dot.setAttribute("cy", yOf(Number(points[0][1])));
+            dot.setAttribute("r", "3.5");
+            dot.setAttribute("fill", color);
+            svg.appendChild(dot);
+        }
+        (row.markers || []).forEach(marker => {
+            let price = marker.price;
+            if (price == null) {
+                const found = points.find(point => point[0] === marker.date);
+                price = found ? found[1] : null;
+            }
+            if (price == null || !Number.isFinite(Number(price))) return;
+            const mark = document.createElementNS(svg.namespaceURI, "circle");
+            mark.setAttribute("cx", xOf(marker.date));
+            mark.setAttribute("cy", yOf(Number(price)));
+            mark.setAttribute("r", marker.kind === "low" ? "5.5" : "4.5");
+            mark.setAttribute("fill", markerColor(marker.kind));
+            mark.setAttribute("stroke", "#ffffff");
+            mark.setAttribute("stroke-width", "1.2");
+            const title = document.createElementNS(svg.namespaceURI, "title");
+            title.textContent = (marker.label || marker.kind) + " · " + marker.date;
+            mark.appendChild(title);
+            svg.appendChild(mark);
+        });
+    });
+    host.appendChild(svg);
+    const legend = document.createElement("p");
+    legend.className = "chart-legend";
+    legend.textContent = "Green: price reduction. Purple: back in stock. Gray: gone. Gold: all-time low.";
+    host.appendChild(legend);
+    const stores = document.createElement("p");
+    stores.className = "chart-stores";
+    stores.textContent = series.map(row => row.store + (row.availability ? " · " + row.availability : "")).join("   ");
+    host.appendChild(stores);
+}
+
+function setChartWindow(days) {
+    chartWindow = Number(days) || 90;
+    document.querySelectorAll("[data-window]").forEach(button => {
+        const on = String(button.getAttribute("data-window")) === String(chartWindow);
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    if (chartId) drawChart(chartId);
+}
+
+function openProduct(id) {
+    const item = (catalog().items || {})[id];
+    const modal = document.getElementById("productModal");
+    if (!modal || !item) return;
+    chartId = id;
+    const title = document.getElementById("modalTitle");
+    if (title) title.textContent = item.name || "Price history";
+    const meta = document.getElementById("modalMeta");
+    if (meta) {
+        const bits = [item.store, item.part];
+        if (item.size) bits.push(item.size + '"');
+        if (item.length) bits.push(item.length + '" long');
+        if (item.wheelbase) bits.push(item.wheelbase + '" wheelbase');
+        if (item.held) bits.push(item.held);
+        if (item.stage) bits.push(item.stage);
+        meta.textContent = bits.filter(Boolean).join(" · ");
+    }
+    const note = document.getElementById("modalNote");
+    if (note) note.textContent = item.chartNote || catalog().chartNote || "";
+    const list = document.getElementById("modalOffers");
+    if (list) {
+        list.innerHTML = "";
+        (item.offers || []).forEach(offer => {
+            const li = document.createElement("li");
+            if (offer.cheapest) li.className = "cheapest";
+            if (offer.cheapest) {
+                const tag = document.createElement("strong");
+                tag.textContent = "Cheapest ";
+                li.appendChild(tag);
+            }
+            const symbol = String(offer.currency || "USD").toUpperCase() === "EUR" ? "€" : "$";
+            const label = (offer.store || "Store") + " " + symbol + Number(offer.price).toFixed(2) + " · " + (offer.availability || "On sale");
+            if (offer.url) {
+                const link = document.createElement("a");
+                link.href = offer.url;
+                link.target = "_blank";
+                link.rel = "noopener";
+                link.textContent = label;
+                li.appendChild(link);
+            } else {
+                li.appendChild(document.createTextNode(label));
+            }
+            list.appendChild(li);
+        });
+    }
+    const link = document.getElementById("modalLink");
+    if (link) {
+        if (item.url) {
+            link.hidden = false;
+            link.href = item.url;
+            link.textContent = "View at " + (item.store || "the store");
+        } else {
+            link.hidden = true;
+        }
+    }
+    modal.hidden = false;
+    setChartWindow(chartWindow || 90);
+}
+
+function closeProduct() {
+    const modal = document.getElementById("productModal");
+    if (modal) modal.hidden = true;
+    chartId = "";
+}
+
 function init() {
+    applyLayout(readLayout());
     prepareVisit();
     applyStars();
     updateAgo();
@@ -1235,15 +1610,15 @@ function init() {
             form.hidden = true;
         });
     }
-    dealRows().forEach(row => {
+    document.querySelectorAll(".deal-row, .deal-card").forEach(row => {
         row.addEventListener("click", event => {
             if (event.target.closest("a, button, input, select, label")) return;
-            toggleDetail(row);
+            openProduct(row.dataset.id);
         });
         row.addEventListener("keydown", event => {
             if (event.key === "Enter" || event.key === " ") {
                 event.preventDefault();
-                toggleDetail(row);
+                openProduct(row.dataset.id);
             }
         });
     });
@@ -1251,7 +1626,7 @@ function init() {
         button.addEventListener("click", () => toggleStar(button));
     });
     document.querySelectorAll(".price-btn").forEach(button => {
-        button.addEventListener("click", () => openDrawer(button.dataset.id));
+        button.addEventListener("click", () => openProduct(button.dataset.id));
     });
     document.querySelectorAll(".score-btn").forEach(button => {
         button.addEventListener("click", () => {
@@ -1270,9 +1645,30 @@ function init() {
         button.addEventListener("mouseleave", hideSparkTip);
         button.addEventListener("click", event => {
             event.stopPropagation();
-            openSparkPanel(button.dataset.id, button);
+            openProduct(button.dataset.id);
         });
     });
+    document.querySelectorAll(".group-chart").forEach(button => {
+        button.addEventListener("click", event => {
+            event.stopPropagation();
+            openProduct(button.dataset.id);
+        });
+    });
+    document.querySelectorAll("[data-window]").forEach(button => {
+        button.addEventListener("click", () => setChartWindow(button.getAttribute("data-window")));
+    });
+    const modalClose = document.getElementById("modalClose");
+    if (modalClose) modalClose.addEventListener("click", closeProduct);
+    const modal = document.getElementById("productModal");
+    if (modal) {
+        modal.addEventListener("click", event => {
+            if (event.target === modal) closeProduct();
+        });
+    }
+    const layoutTable = document.getElementById("layoutTable");
+    const layoutCards = document.getElementById("layoutCards");
+    if (layoutTable) layoutTable.addEventListener("click", () => applyLayout("table"));
+    if (layoutCards) layoutCards.addEventListener("click", () => applyLayout("cards"));
     document.querySelectorAll(".group-summary").forEach(button => {
         button.addEventListener("click", () => {
             const card = button.closest(".group-card");
@@ -1289,6 +1685,7 @@ function init() {
         if (event.key === "Escape") {
             closeDrawer();
             closeSparkPanel();
+            closeProduct();
         }
     });
     document.addEventListener("click", event => {
