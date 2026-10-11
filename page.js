@@ -217,7 +217,7 @@ function filterBrandList(query) {
 function paintBrandFacet() {
     const current = state.brand || "all";
     document.querySelectorAll("#brandList .facet-value").forEach(node => {
-        const on = (node.getAttribute("data-brand") || "") === current;
+        const on = brandSame(node.getAttribute("data-brand") || "", current);
         node.classList.toggle("active", on);
         node.setAttribute("aria-pressed", on ? "true" : "false");
     });
@@ -333,7 +333,7 @@ function rowMatches(row, overrides) {
     if (store !== "all" && (row.dataset.store || "") !== store) return false;
     if (part !== "all" && (row.dataset.part || "") !== part) return false;
     if (!deckWidthAllowed(row, widths)) return false;
-    if (brand !== "all" && (row.dataset.brand || "") !== brand) return false;
+    if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
     if (length !== "all" && (row.dataset.length || "") !== length) return false;
     if (wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
     const price = parseFloat(row.dataset.price);
@@ -434,6 +434,7 @@ function applyFilters() {
     paintActiveChips();
     syncUrl();
     paintViews();
+    paintNav();
 }
 
 function filterProducts() {
@@ -1075,12 +1076,20 @@ function captureState() {
     };
 }
 
+function brandSame(a, b) {
+    return String(a || "").toLowerCase() === String(b || "").toLowerCase();
+}
+
 function setSelect(id, value) {
     const node = document.getElementById(id);
     if (!node) return;
-    const has = Array.from(node.options || []).some(option => option.value === value);
-    node.value = has ? value : (value === "all" || !value ? "all" : node.value);
-    if (!has && value && value !== "all") node.value = "all";
+    const options = Array.from(node.options || []);
+    let match = options.find(option => option.value === value);
+    if (!match && id === "brandSelect" && value) {
+        match = options.find(option => brandSame(option.value, value));
+    }
+    if (match) node.value = match.value;
+    else node.value = "all";
 }
 
 function writeControls(snapshot) {
@@ -1089,6 +1098,7 @@ function writeControls(snapshot) {
     setSelect("storeSelect", snapshot.store || "all");
     setSelect("partSelect", snapshot.part || "all");
     setSelect("brandSelect", snapshot.brand || "all");
+    const chosenBrand = document.getElementById("brandSelect");
     setSelect("lengthSelect", snapshot.length || "all");
     setSelect("wheelbaseSelect", snapshot.wheelbase || "all");
     setSelect("sortSelect", snapshot.sort || "rank");
@@ -1104,7 +1114,7 @@ function writeControls(snapshot) {
     state.store = snapshot.store || "all";
     state.part = snapshot.part || "all";
     state.widths = orderedWidths(snapshot.widths || []);
-    state.brand = snapshot.brand || "all";
+    state.brand = chosenBrand ? (chosenBrand.value || "all") : (snapshot.brand || "all");
     state.length = snapshot.length || "all";
     state.wheelbase = snapshot.wheelbase || "all";
     state.change = snapshot.change || "all";
@@ -1543,6 +1553,7 @@ function sparkDirection(points) {
 }
 
 const SPARK_COLOR = { down: "#15803d", up: "#b91c1c", flat: "#94a3b8" };
+const HISTORY_COLOR = "#4f46e5";
 const sparkPoints = new WeakMap();
 
 function buildSparkSvg(points, width, height) {
@@ -1678,7 +1689,7 @@ function drawChart(id) {
         svg.appendChild(label);
     });
     series.forEach(row => {
-        const color = STORE_COLOR[row.store] || "#334155";
+        const color = HISTORY_COLOR;
         const points = row.points || [];
         if (points.length >= 2) {
             const poly = document.createElementNS(svg.namespaceURI, "polyline");
@@ -1799,6 +1810,52 @@ function closeProduct() {
     const modal = document.getElementById("productModal");
     if (modal) modal.hidden = true;
     chartId = "";
+}
+
+let navMode = "deals";
+
+function paintNav() {
+    const mode = navMode === "insights" ? "insights" : (state.watching ? "track" : "deals");
+    [
+        ["navDeals", "deals"],
+        ["navTrack", "track"],
+        ["navInsights", "insights"]
+    ].forEach(pair => {
+        const node = document.getElementById(pair[0]);
+        if (!node) return;
+        const on = mode === pair[1];
+        node.classList.toggle("is-active", on);
+        node.setAttribute("aria-pressed", on ? "true" : "false");
+        if (on) node.setAttribute("aria-current", "page");
+        else node.removeAttribute("aria-current");
+    });
+}
+
+function showDeals() {
+    navMode = "deals";
+    if (state.watching) toggleWatching();
+    else paintNav();
+    const section = document.getElementById("dealsSection");
+    if (section) section.scrollIntoView({ block: "start" });
+}
+
+function showTrack() {
+    navMode = "deals";
+    if (!state.watching) toggleWatching();
+    else paintNav();
+    const section = document.getElementById("dealsSection");
+    if (section) section.scrollIntoView({ block: "start" });
+}
+
+function showInsights() {
+    navMode = "insights";
+    const box = document.getElementById("highlights");
+    if (box) box.open = true;
+    const panel = document.getElementById("statsPanel");
+    const toggle = document.getElementById("statsToggle");
+    if (panel && panel.hidden && toggle) toggle.click();
+    else if (box) box.scrollIntoView({ block: "start" });
+    paintNav();
 }
 
 function init() {
@@ -1961,6 +2018,12 @@ function init() {
             if (event.target === modal) closeProduct();
         });
     }
+    const navDeals = document.getElementById("navDeals");
+    const navTrack = document.getElementById("navTrack");
+    const navInsights = document.getElementById("navInsights");
+    if (navDeals) navDeals.addEventListener("click", showDeals);
+    if (navTrack) navTrack.addEventListener("click", showTrack);
+    if (navInsights) navInsights.addEventListener("click", showInsights);
     const layoutTable = document.getElementById("layoutTable");
     const layoutCards = document.getElementById("layoutCards");
     if (layoutTable) layoutTable.addEventListener("click", () => applyLayout("table"));
@@ -2007,4 +2070,5 @@ function init() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", updateAgo);
 document.addEventListener("DOMContentLoaded", init);

@@ -3,18 +3,21 @@
     --primary-dark: #1d4ed8;
     --secondary: #64748b;
     --success: #16a34a;
-    --bg-primary: #f8fafc;
+    --bg-primary: #e7ebf0;
     --bg-card: #ffffff;
     --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --border: #e2e8f0;
+    --text-secondary: #526074;
+    --border: #d5dbe3;
+    --nav: #1c2430;
+    --price: #166534;
+    --history: #4f46e5;
     --shadow: 0 1px 2px rgb(15 23 42 / 0.05);
     --stick-top: 0px;
 }
 * { box-sizing: border-box; }
 body {
     margin: 0;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.45;
@@ -700,7 +703,7 @@ thead th { z-index: 25; }
 .trend-stable { color: #94a3b8; }
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
     gap: 0.9rem;
     padding: 0.2rem 0 0.6rem;
 }
@@ -762,19 +765,18 @@ html.layout-cards .table-wrap { display: none; }
 
 .shell {
     display: grid;
-    grid-template-columns: 248px minmax(0, 1fr);
+    grid-template-columns: 232px minmax(0, 1fr);
     grid-template-areas:
-        "search topbar"
+        "search board"
         "sidebar board";
-    gap: 0.35rem 0.85rem;
+    gap: 0.35rem 0.75rem;
     max-width: 1540px;
     margin: 0 auto;
-    padding: 0.4rem 0.7rem 2rem;
+    padding: 0.45rem 0.7rem 2rem;
     align-items: start;
 }
-.search-box { grid-area: search; position: sticky; top: 0.4rem; z-index: 24; background: var(--bg-primary); }
+.search-box { grid-area: search; position: sticky; top: var(--stick-top, 92px); z-index: 24; background: #e4e9ef; }
 .sidebar { grid-area: sidebar; }
-header, #stickyBar { grid-area: topbar; }
 .board { grid-area: board; min-width: 0; }
 header, header.is-stale, header.is-failed {
     margin: 0;
@@ -915,7 +917,7 @@ th:hover .tip, th:focus-within .tip { display: block; }
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
 }
-.card-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.55rem; }
+.card-grid { grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 0.45rem; }
 .deal-card { position: relative; padding: 0.4rem; gap: 0.25rem; }
 .deal-card .star { position: absolute; top: 0.35rem; right: 0.35rem; z-index: 2; background: white; }
 .deal-card .hero-wrap, .deal-card .hero, .deal-card .hero.ph { width: 100%; height: 158px; }
@@ -924,7 +926,9 @@ th:hover .tip, th:focus-within .tip { display: block; }
 .card-off { font-size: 1.05rem; font-weight: 800; }
 .card-price .price-new { font-size: 1rem; }
 .card-title:hover ~ .card-hover,
-.card-title:focus-within ~ .card-hover { display: none !important; }
+.card-title:focus-within ~ .card-hover,
+.title-slot:hover ~ .card-hover,
+.title-slot:focus-within ~ .card-hover { display: none !important; }
 .card-metrics {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) 72px;
@@ -1014,12 +1018,11 @@ th:hover .tip, th:focus-within .tip { display: block; }
         grid-template-columns: 1fr;
         grid-template-areas:
             "search"
-            "topbar"
             "board";
         padding: 0;
         gap: 0.25rem;
     }
-    .search-box { position: sticky; top: 0; padding: 0.35rem 0.55rem 0.2rem; }
+    .search-box { position: sticky; top: var(--stick-top, 88px); padding: 0.35rem 0.55rem 0.2rem; background: var(--bg-primary); }
     .title-line, .tool-line { margin-left: 0.55rem; margin-right: 0.55rem; }
     .title-line { flex-wrap: nowrap; min-height: 32px; overflow-x: auto; }
     .tool-line { flex-wrap: nowrap; overflow-x: auto; }
@@ -1044,6 +1047,229 @@ th:hover .tip, th:focus-within .tip { display: block; }
     .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .deal-card .hero-wrap, .deal-card .hero, .deal-card .hero.ph { height: 132px; }
     .clear-all { display: none; }
+}
+/* Visual foundation: charcoal nav, muted sidebar, white tiles, tighter controls. */
+.topnav {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 48px;
+    padding: 0 0.9rem;
+    background: var(--nav);
+    color: #f8fafc;
+    position: sticky;
+    top: 0;
+    z-index: 45;
+}
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: white;
+}
+.brand-mark { display: block; flex: 0 0 auto; }
+.topnav-links { display: flex; align-items: center; gap: 0.15rem; }
+.nav-link {
+    border: 0;
+    background: transparent;
+    color: #cbd5e1;
+    font: inherit;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.85rem 0.7rem 0.7rem;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+}
+.nav-link:hover { color: white; }
+.nav-link.is-active, .nav-link[aria-pressed="true"] {
+    color: white;
+    border-bottom-color: #60a5fa;
+}
+.topnav .scan-wrap, .topnav .fresh-note {
+    margin-left: auto;
+    font-size: 0.75rem;
+    color: #e2e8f0;
+    white-space: nowrap;
+}
+.topnav .fresh-note { margin-left: 0.45rem; }
+.topnav .scan-exact { background: #0f172a; }
+header.is-stale .fresh-note, header.is-failed .fresh-note { color: #fdba74; }
+header, header.is-stale, header.is-failed { background: transparent; color: inherit; }
+#stickyBar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: var(--bg-primary);
+}
+.tool-line {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+    padding: 0.28rem 0.7rem;
+    min-height: 40px;
+}
+.result-line {
+    margin: 0 0 0.4rem;
+    font-size: 0.84rem;
+    font-weight: 650;
+    color: var(--text-primary);
+}
+.sidebar {
+    position: sticky;
+    top: var(--stick-top, 92px);
+    max-height: calc(100vh - var(--stick-top, 92px) - 12px);
+    overflow: auto;
+    background: #e4e9ef;
+    border-radius: 4px;
+    padding: 0.55rem 0.55rem 0.8rem;
+}
+.search-box input, .sidebar select, .sidebar input, #baselineSelect, .sort-field select, .brand-search {
+    appearance: none;
+    border: 1px solid #c5ced8;
+    border-radius: 4px;
+    background: white;
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 0.78rem;
+    padding: 0.32rem 0.45rem;
+    width: 100%;
+}
+.sidebar select, #baselineSelect, .sort-field select {
+    background-image: linear-gradient(45deg, transparent 50%, #526074 50%), linear-gradient(135deg, #526074 50%, transparent 50%);
+    background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 1.4rem;
+}
+#baselineSelect, .sort-field select { width: auto; }
+.search-box input:focus, .sidebar select:focus, .sidebar input:focus, #baselineSelect:focus, .sort-field select:focus,
+.nav-link:focus-visible, .deal-card:focus-visible, .chip:focus-visible, .change-btn:focus-visible, .facet-value:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
+    color: #94a3b8;
+    background: #f1f5f9;
+    cursor: not-allowed;
+}
+.change-btn, .mode-btn, .text-btn, .filter-btn, .chip, .layout-toggle button, .window-toggle button {
+    border-radius: 4px;
+}
+.chip { background: white; color: #334155; border: 1px solid #d5dbe3; }
+.chip.active, .chip[aria-pressed="true"] { background: var(--primary); color: white; border-color: var(--primary); }
+.chip.is-zero { color: #64748b; background: #f8fafc; border-color: #e2e8f0; opacity: 1; }
+.chip.is-zero[aria-pressed="true"] { color: white; background: var(--primary); opacity: 1; }
+.facet-value[aria-pressed="true"] { background: #dbeafe; color: #1d4ed8; border-radius: 4px; }
+.facet-value.is-zero { color: #526074; }
+.deal-card {
+    background: white;
+    border: 1px solid #e6ebf1;
+    border-radius: 4px;
+    box-shadow: none;
+    height: 100%;
+}
+.deal-card:hover { border-color: #cbd5e1; box-shadow: 0 4px 14px rgb(28 36 48 / 0.08); }
+.deal-card .hero-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 128px;
+    background: #f4f6f8;
+    border-radius: 2px;
+}
+.deal-card .hero, .deal-card .hero.ph {
+    width: 100%;
+    height: 128px;
+    object-fit: contain;
+    background: transparent;
+    border-radius: 2px;
+}
+.deal-card .store-badge {
+    background: transparent;
+    color: #64748b;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0;
+}
+.card-metrics .price-new { color: var(--price); font-size: 1.05rem; font-weight: 800; }
+.card-off { font-size: 0.92rem; }
+.card-metrics .card-off.none {
+    font-size: 0.62rem;
+    max-width: 4.8rem;
+    line-height: 1.15;
+}
+.deal-card .title-slot {
+    position: relative;
+    flex: 0 0 calc(1.25em * 3);
+    height: calc(1.25em * 3);
+    min-height: calc(1.25em * 3);
+    max-height: calc(1.25em * 3);
+    font-size: 0.82rem;
+    line-height: 1.25;
+}
+.deal-card .title-slot .card-title {
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+}
+.title-pop {
+    display: none;
+    position: absolute;
+    z-index: 8;
+    left: 0;
+    right: 0;
+    bottom: calc(100% + 4px);
+    margin: 0;
+    padding: 0.35rem 0.45rem;
+    background: #1c2430;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 650;
+    line-height: 1.35;
+    border-radius: 4px;
+}
+.title-slot:hover .title-pop, .title-slot:focus-within .title-pop { display: block; }
+.card-badge .pill, .card-badge .stage {
+    font-size: 0.62rem;
+    font-weight: 650;
+    background: #f1f5f9;
+    color: #526074;
+}
+.card-grid { align-items: stretch; }
+@media (max-width: 800px) {
+    .topnav {
+        flex-wrap: wrap;
+        gap: 0.1rem 0.35rem;
+        padding: 0.15rem 0.45rem 0.25rem;
+        overflow: visible;
+    }
+    .brand { font-size: 0.92rem; }
+    .nav-link { padding: 0.7rem 0.4rem 0.55rem; }
+    .filters-open { order: 2; margin-left: auto; }
+    .topnav .scan-wrap, .topnav .fresh-note {
+        order: 3;
+        margin-left: 0;
+        font-size: 0.68rem;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    .deal-card .hero-wrap, .deal-card .hero, .deal-card .hero.ph { height: 112px; }
+    .tool-line { margin-left: 0; margin-right: 0; }
 }
 /* .deal-card { display: flex } comes later than .filtered-out { display: none }
    and has the same specificity, so a filtered card stayed on screen. The

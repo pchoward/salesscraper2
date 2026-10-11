@@ -109,6 +109,48 @@ def _entry(history, url):
     return found if isinstance(found, dict) else {}
 
 
+def _prefer_brand_label(labels):
+    """One display spelling for labels that differ only by case.
+
+    A mixed-case spelling wins over an all-lowercase one (``5Boro`` over
+    ``5boro``). More capitals win next, then a stable casefold order.
+    """
+
+    def rank(label):
+        uppers = sum(1 for char in label if char.isupper())
+        return (uppers == 0, -uppers, label.casefold())
+
+    return sorted(labels, key=rank)[0]
+
+
+def _canonicalize_brands(records):
+    """Merge brand labels that are the same ignoring case.
+
+    Filtering stays an exact match on the chosen spelling. Only the case
+    of the label changes.
+    """
+    groups = {}
+    for record in records:
+        brand = record.get("brand") or ""
+        if brand:
+            groups.setdefault(brand.casefold(), set()).add(brand)
+    chosen = {key: _prefer_brand_label(labels) for key, labels in groups.items()}
+    for record in records:
+        brand = record.get("brand") or ""
+        if not brand:
+            continue
+        canon = chosen.get(brand.casefold(), brand)
+        if canon == brand:
+            continue
+        record["brand"] = canon
+        item = record.get("item")
+        if isinstance(item, dict):
+            item["_brand"] = canon
+        search = record.get("search") or ""
+        if canon not in search:
+            record["search"] = (search + " " + canon).strip()
+
+
 def listing_brand(name, part):
     brands = _BRANDS.get((part or "").strip().casefold(), ())
     found = find_brand(name, brands) if brands else None
@@ -823,6 +865,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         except Exception as exc:
             logger.error("Skipping report row %s: %s", (item or {}).get("url"), exc)
 
+    _canonicalize_brands(records)
     records.sort(key=_default_rank)
     for index, record in enumerate(records):
         record["id"] = str(index)
@@ -969,12 +1012,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "<head>",
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-        f"<title>Skateboard Sale Tracker | {escape(today)}</title>",
-        '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">',
+        f"<title>SkateDeals | {escape(today)}</title>",
         f"<style>{_read_asset('page.css')}</style>",
         "<script>try{if(localStorage.getItem('salesscraper2.layout')==='cards')document.documentElement.classList.add('layout-cards')}catch(e){}</script>",
-        "</head><body><div class=\"shell\">",
-        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals" aria-label="Search deals"></div>',
+        "</head><body>",
     ]
     alert = _alert_html(warnings)
     notice = ""
@@ -1077,7 +1118,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "Show more</button></div>"
     )
 
-    chunks.append(
+    sidebar_html = (
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
         '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button>'
@@ -1145,15 +1186,22 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f'<span class="number">{count}</span><span class="label">{escape(store)}</span>{badge}</button>'
         )
     store_cards.append("</div>")
-    chunks.append("".join(store_cards))
     chunks.append(
         f'<header class="{header_class}" id="stickyBar" data-stale-hours="36">'
         f"{alert or ''}"
-        '<div class="title-line">'
-        "<h1>Skateboard Sale Tracker</h1>"
-        f'<span id="statusCounts">{len(records)} active deals</span>'
+        '<div class="topnav">'
+        '<h1 class="brand"><svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">'
+        '<rect x="2" y="8" width="20" height="5.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/>'
+        '<circle cx="7.2" cy="17.2" r="1.7" fill="currentColor"/>'
+        '<circle cx="16.8" cy="17.2" r="1.7" fill="currentColor"/>'
+        "</svg>SkateDeals</h1>"
+        '<div class="topnav-links" role="group" aria-label="Sections">'
+        '<button type="button" class="nav-link" id="navDeals" aria-pressed="true">Deals</button>'
+        '<button type="button" class="nav-link" id="navTrack" aria-pressed="false">Track</button>'
+        '<button type="button" class="nav-link" id="navInsights" aria-pressed="false">Insights</button>'
+        "</div>"
         '<span class="scan-wrap">last scan <time id="lastScan" datetime="'
-        f'{escape(str(generated_at), quote=True)}">{escape(str(generated_at))}</time>'
+        f'{escape(str(generated_at), quote=True)}">{escape(format_scan_et(generated_at))}</time>'
         f'<span class="scan-exact" id="scanExact">{escape(format_scan_et(generated_at))}</span></span>'
         f'<span class="fresh-note" id="freshness">{escape(fresh_text)}</span>'
         '<button type="button" class="text-btn filters-open" id="filtersOpen">Filters</button>'
@@ -1196,8 +1244,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "</div></div>"
         '<p class="lede" id="visitNote" hidden></p>'
         "</header>"
+        '<div class="shell">'
+        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals" aria-label="Search deals"></div>'
     )
-    chunks.append('<div class="board">')
+    chunks.append(sidebar_html)
+    chunks.append(
+        '<div class="board">'
+        + "".join(store_cards)
+        + f'<p class="result-line"><span id="statusCounts">{len(records)} active deals</span></p>'
+    )
     if notice:
         chunks.append(notice)
     chunks.append('<div class="active-row" id="activeChips" hidden></div>')
@@ -1447,8 +1502,9 @@ def _card_html(record):
         '<div class="card-face">'
         f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
         "</div>"
-        f'<div class="card-title"><h3 class="product-name" title="{escape(record["name"], quote=True)}">'
+        f'<div class="title-slot"><div class="card-title"><h3 class="product-name" title="{escape(record["name"], quote=True)}">'
         f"{_product_link(item)}</h3></div>"
+        f'<p class="title-pop">{escape(record["name"])}</p></div>'
         '<div class="card-metrics">'
         f"{off_html}"
         f'<span class="price price-new">{_money(item.get("price_new"), currency)}</span>'
