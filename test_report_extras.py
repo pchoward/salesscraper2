@@ -131,6 +131,12 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('class="facet-value is-extra" data-brand="Habitat"', html)
         self.assertIn("function rowMatches(row, overrides)", html)
         self.assertIn("function paintFacetCounts()", html)
+        self.assertIn("minmax(200px, 1fr)", html)
+        self.assertIn("-webkit-line-clamp: 3", html)
+        self.assertIn('id="brandSearch"', html)
+        self.assertIn("Counts match the other filters", html)
+        self.assertIn("function paintSparklines()", html)
+        self.assertIn("function sparkDirection(", html)
         self.assertIn('class="chip is-zero" data-range="10up"', html)
         self.assertIn("10.0+ (0)", html)
 
