@@ -176,8 +176,8 @@ function parseWidthParam(value) {
     return orderedWidths(chosen);
 }
 
-function deckWidthAllowed(row) {
-    const selected = state.widths || [];
+function deckWidthAllowed(row, widths) {
+    const selected = widths != null ? widths : (state.widths || []);
     if (!selected.length) return true;
     if ((row.dataset.part || "") !== "Decks") return true;
     const size = parseFloat(row.dataset.size);
@@ -199,6 +199,86 @@ function paintWidthChips() {
         node.classList.toggle("active", on);
         if (node.hasAttribute("aria-pressed")) node.setAttribute("aria-pressed", on ? "true" : "false");
     });
+}
+
+function paintBrandFacet() {
+    const current = state.brand || "all";
+    document.querySelectorAll("#brandList .facet-value").forEach(node => {
+        const on = (node.getAttribute("data-brand") || "") === current;
+        node.classList.toggle("active", on);
+        node.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+}
+
+function paintSelectCounts(id, counts) {
+    const select = document.getElementById(id);
+    if (!select) return;
+    Array.from(select.options).forEach(option => {
+        if (!option.value || option.value === "all") return;
+        const count = counts[option.value] || 0;
+        const label = option.getAttribute("data-label") || option.textContent.replace(/\s*\(\d+\)\s*$/, "");
+        option.textContent = label + " (" + count + ")";
+        option.disabled = count === 0 && option.value !== select.value;
+    });
+}
+
+function paintFacetCounts() {
+    const brandCounts = Object.create(null);
+    const storeCounts = Object.create(null);
+    const partCounts = Object.create(null);
+    const lengthCounts = Object.create(null);
+    const wheelCounts = Object.create(null);
+    const widthCounts = Object.create(null);
+    widthRanges().forEach(range => { widthCounts[range.id] = 0; });
+    dealRows().forEach(row => {
+        if (rowMatches(row, { brand: "all" })) {
+            const brand = row.dataset.brand || "";
+            if (brand) brandCounts[brand] = (brandCounts[brand] || 0) + 1;
+        }
+        if (rowMatches(row, { store: "all" })) {
+            const store = row.dataset.store || "";
+            if (store) storeCounts[store] = (storeCounts[store] || 0) + 1;
+        }
+        if (rowMatches(row, { part: "all" })) {
+            const part = row.dataset.part || "";
+            if (part) partCounts[part] = (partCounts[part] || 0) + 1;
+        }
+        if (rowMatches(row, { length: "all" })) {
+            const length = row.dataset.length || "";
+            if (length) lengthCounts[length] = (lengthCounts[length] || 0) + 1;
+        }
+        if (rowMatches(row, { wheelbase: "all" })) {
+            const wheel = row.dataset.wheelbase || "";
+            if (wheel) wheelCounts[wheel] = (wheelCounts[wheel] || 0) + 1;
+        }
+        if ((row.dataset.part || "") === "Decks" && rowMatches(row, { widths: [] })) {
+            const id = bucketForWidth(parseFloat(row.dataset.size));
+            if (id && Object.prototype.hasOwnProperty.call(widthCounts, id)) widthCounts[id] += 1;
+        }
+    });
+    document.querySelectorAll("#brandList .facet-value").forEach(node => {
+        const brand = node.getAttribute("data-brand") || "";
+        if (!brand || brand === "all") return;
+        const count = brandCounts[brand] || 0;
+        const slot = node.querySelector(".facet-count");
+        if (slot) slot.textContent = "(" + count + ")";
+        node.classList.toggle("is-zero", count === 0);
+        node.setAttribute("data-count", String(count));
+    });
+    document.querySelectorAll("#sizeFilters .chip").forEach(node => {
+        const id = node.getAttribute("data-range") || "";
+        if (!id || id === "all") return;
+        const count = widthCounts[id] || 0;
+        const range = widthRanges().find(item => item.id === id);
+        const label = range ? range.label : id;
+        node.textContent = label + " (" + count + ")";
+        node.classList.toggle("is-zero", count === 0);
+        node.setAttribute("data-count", String(count));
+    });
+    paintSelectCounts("storeSelect", storeCounts);
+    paintSelectCounts("partSelect", partCounts);
+    paintSelectCounts("lengthSelect", lengthCounts);
+    paintSelectCounts("wheelbaseSelect", wheelCounts);
 }
 
 function setPressed(selector, attr, value) {
@@ -227,15 +307,22 @@ function paintCards() {
     });
 }
 
-function rowMatches(row) {
+function rowMatches(row, overrides) {
+    const over = overrides || {};
+    const store = over.store != null ? over.store : state.store;
+    const part = over.part != null ? over.part : state.part;
+    const brand = over.brand != null ? over.brand : state.brand;
+    const length = over.length != null ? over.length : state.length;
+    const wheelbase = over.wheelbase != null ? over.wheelbase : state.wheelbase;
+    const widths = Object.prototype.hasOwnProperty.call(over, "widths") ? over.widths : null;
     const hay = (row.dataset.search || "").toLowerCase();
     if (state.search && !hay.includes(state.search)) return false;
-    if (state.store !== "all" && (row.dataset.store || "") !== state.store) return false;
-    if (state.part !== "all" && (row.dataset.part || "") !== state.part) return false;
-    if (!deckWidthAllowed(row)) return false;
-    if (state.brand !== "all" && (row.dataset.brand || "") !== state.brand) return false;
-    if (state.length !== "all" && (row.dataset.length || "") !== state.length) return false;
-    if (state.wheelbase !== "all" && (row.dataset.wheelbase || "") !== state.wheelbase) return false;
+    if (store !== "all" && (row.dataset.store || "") !== store) return false;
+    if (part !== "all" && (row.dataset.part || "") !== part) return false;
+    if (!deckWidthAllowed(row, widths)) return false;
+    if (brand !== "all" && (row.dataset.brand || "") !== brand) return false;
+    if (length !== "all" && (row.dataset.length || "") !== length) return false;
+    if (wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
     const price = parseFloat(row.dataset.price);
     if (state.priceMin != null && !(price >= state.priceMin)) return false;
     if (state.priceMax != null && !(price <= state.priceMax)) return false;
@@ -328,6 +415,8 @@ function applyFilters() {
     syncDetails();
     paintCards();
     paintWidthChips();
+    paintBrandFacet();
+    paintFacetCounts();
     updateMoreCount();
     paintActiveChips();
     syncUrl();
@@ -610,15 +699,25 @@ function prepareVisit() {
                 row.dataset.visitLow = row.dataset.lowest === "1" && price < prior.price - 0.001 ? "1" : "0";
             }
         });
+        const liveNames = {};
+        dealRows().forEach(row => {
+            const name = (row.dataset.name || "").trim().toLowerCase();
+            if (name) liveNames[name] = true;
+        });
         Object.keys(previous.items).forEach(url => {
             if (!current[url]) gone.push(previous.items[url]);
         });
         visitGone = gone;
         if (note) {
             note.dataset.message = "1";
+            note.hidden = true;
             const when = previous.at ? " Last visit " + previous.at + "." : "";
-            note.textContent = gone.length
-                ? "Left since that visit: " + gone.map(item => item.name).slice(0, 8).join(", ") + when
+            const missing = gone.filter(item => {
+                const name = (item.name || "").trim().toLowerCase();
+                return name && !liveNames[name];
+            });
+            note.textContent = missing.length
+                ? "Left since that visit: " + missing.map(item => item.name).slice(0, 8).join(", ") + when
                 : "Nothing in the saved visit is missing from this scan." + when;
         }
     }
@@ -1625,6 +1724,25 @@ function init() {
     if (partSelect) partSelect.addEventListener("change", () => filterByPart(partSelect.value));
     const brand = document.getElementById("brandSelect");
     if (brand) brand.addEventListener("change", applyFilters);
+    const brandList = document.getElementById("brandList");
+    if (brandList) {
+        brandList.addEventListener("click", event => {
+            const button = event.target.closest(".facet-value");
+            if (!button || !brandList.contains(button)) return;
+            setSelect("brandSelect", button.getAttribute("data-brand") || "all");
+            applyFilters();
+        });
+    }
+    const brandMore = document.getElementById("brandMore");
+    if (brandMore) {
+        brandMore.addEventListener("click", () => {
+            const facet = document.getElementById("brandFacet");
+            if (!facet) return;
+            const open = facet.classList.toggle("is-open");
+            brandMore.setAttribute("aria-expanded", open ? "true" : "false");
+            brandMore.textContent = open ? "Show less" : "Show more";
+        });
+    }
     const length = document.getElementById("lengthSelect");
     if (length) length.addEventListener("change", applyFilters);
     const wheelbase = document.getElementById("wheelbaseSelect");

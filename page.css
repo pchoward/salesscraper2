@@ -983,4 +983,61 @@ th:hover .tip, th:focus-within .tip { display: block; }
     .drawer-head { display: flex; justify-content: space-between; align-items: center; }
     .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .deal-card .hero-wrap, .deal-card .hero, .deal-card .hero.ph { height: 132px; }
+    .clear-all { display: none; }
 }
+/* .deal-card { display: flex } comes later than .filtered-out { display: none }
+   and has the same specificity, so a filtered card stayed on screen. The
+   card selector below wins, including over a later flex rule. */
+.deal-card.filtered-out,
+.deal-card.grouped-hide,
+tr.deal-row.filtered-out,
+tr.deal-row.grouped-hide {
+    display: none !important;
+}
+#visitNote {
+    display: block;
+    margin: 0.2rem 0 0;
+}
+/* header p { display: inline } beats the user-agent [hidden] rule, so the
+   visit line stayed visible after the snapshot was replaced. */
+#visitNote[hidden] {
+    display: none !important;
+}
+.brand-facet { display: flex; flex-direction: column; gap: 0.15rem; }
+.brand-facet .facet-list { display: flex; flex-direction: column; gap: 0.05rem; }
+.brand-facet.is-open .facet-list { max-height: 14rem; overflow: auto; }
+.facet-value {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.45rem;
+    width: 100%;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.78rem;
+    text-align: left;
+    padding: 0.16rem 0.35rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.facet-value[aria-pressed="true"] {
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-weight: 700;
+}
+.brand-facet .facet-value.is-extra { display: none; }
+.brand-facet.is-open .facet-value.is-extra { display: flex; }
+.brand-facet .facet-value.is-extra[aria-pressed="true"] { display: flex; }
+.facet-value.is-zero { opacity: 0.45; }
+.facet-value.is-zero[aria-pressed="true"] { opacity: 1; }
+.facet-count {
+    margin-left: auto;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+    font-weight: 650;
+    flex: 0 0 auto;
+}
+select option:disabled { color: #94a3b8; }
+.clear-all { align-self: flex-start; font-weight: 700; }
