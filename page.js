@@ -432,9 +432,20 @@ function applyFilters() {
     paintFacetCounts();
     updateMoreCount();
     paintActiveChips();
+    paintResultCount();
     syncUrl();
     paintViews();
     paintNav();
+}
+
+function paintResultCount() {
+    const node = document.getElementById("statusCounts");
+    if (!node) return;
+    let count = 0;
+    dealRows().forEach(row => {
+        if (!row.classList.contains("filtered-out") && !row.classList.contains("grouped-hide")) count += 1;
+    });
+    node.textContent = count + (count === 1 ? " deal" : " deals");
 }
 
 function filterProducts() {
@@ -1311,15 +1322,83 @@ function pointLabel(point) {
     return shortDate(iso) + (year ? ", " + year : "") + (amount ? " · " + amount : "");
 }
 
-function showSparkTip(event, point) {
+function showTip(event, text) {
     const tip = ensureSparkTip();
-    if (!tip || !point) return;
+    if (!tip || !text) return;
     tip.hidden = false;
-    tip.textContent = pointLabel(point);
+    tip.textContent = text;
     const x = event && Number.isFinite(event.clientX) ? event.clientX : 24;
     const y = event && Number.isFinite(event.clientY) ? event.clientY : 24;
-    tip.style.left = Math.min(window.innerWidth - 180, x + 12) + "px";
-    tip.style.top = (y + 14) + "px";
+    const width = Math.min(280, tip.offsetWidth || 160);
+    tip.style.left = Math.max(8, Math.min(window.innerWidth - width - 8, x + 12)) + "px";
+    tip.style.top = Math.max(8, y + 14) + "px";
+}
+
+function showSparkTip(event, point) {
+    if (!point) return;
+    showTip(event, pointLabel(point));
+}
+
+function chartHitLabel(hit) {
+    if (!hit) return "";
+    const when = pointLabel([hit.date, hit.price]);
+    if (hit.kind === "drop") return "Price reduction · " + when;
+    if (hit.label) return hit.label + " · " + when;
+    return when;
+}
+
+function nearestChartHit(hits, x, y) {
+    let best = null;
+    let bestD = Infinity;
+    (hits || []).forEach(hit => {
+        const dx = hit.x - x;
+        const dy = y == null || hit.y == null ? 0 : hit.y - y;
+        // A reduction marker is drawn larger, so a pointer on that circle
+        // still wins when another marker sits a few pixels away.
+        const bias = hit.kind === "drop" ? 8 : (hit.kind ? 5 : 0);
+        const d = Math.hypot(dx, dy) - bias;
+        if (d < bestD || (d === bestD && hit.kind && !(best && best.kind))) {
+            best = hit;
+            bestD = d;
+        }
+    });
+    return best;
+}
+
+const FILTER_SECTION_KEY = "salesscraper2.filterSections";
+
+function paintFilterSection(section, open) {
+    section.classList.toggle("is-open", open);
+    const button = section.querySelector(".section-toggle");
+    if (button) button.setAttribute("aria-expanded", open ? "true" : "false");
+}
+
+function restoreFilterSections() {
+    let saved = {};
+    try {
+        const raw = JSON.parse(localStorage.getItem(FILTER_SECTION_KEY) || "{}");
+        if (raw && typeof raw === "object") saved = raw;
+    } catch (err) {
+        saved = {};
+    }
+    document.querySelectorAll(".filter-section").forEach(section => {
+        const id = section.getAttribute("data-section") || "";
+        const open = Object.prototype.hasOwnProperty.call(saved, id) ? !!saved[id] : section.classList.contains("is-open");
+        paintFilterSection(section, open);
+    });
+}
+
+function rememberFilterSections() {
+    const saved = {};
+    document.querySelectorAll(".filter-section").forEach(section => {
+        const id = section.getAttribute("data-section");
+        if (id) saved[id] = section.classList.contains("is-open");
+    });
+    try {
+        localStorage.setItem(FILTER_SECTION_KEY, JSON.stringify(saved));
+    } catch (err) {
+        /* private mode should not break the page */
+    }
 }
 
 function hideSparkTip() {
@@ -1679,7 +1758,16 @@ function drawChart(id) {
     svg.setAttribute("viewBox", "0 0 " + width + " " + height);
     svg.setAttribute("class", "history-chart");
     svg.setAttribute("role", "img");
-    svg.setAttribute("aria-label", "Price history, " + chartWindow + " days");
+    svg.setAttribute("tabindex", "0");
+    svg.setAttribute("aria-label", "Price history, " + chartWindow + " days. Hover or tap a point for the date and price.");
+    const plate = document.createElementNS(svg.namespaceURI, "rect");
+    plate.setAttribute("x", "0");
+    plate.setAttribute("y", "0");
+    plate.setAttribute("width", String(width));
+    plate.setAttribute("height", String(height));
+    plate.setAttribute("fill", "transparent");
+    svg.appendChild(plate);
+    const hits = [];
     [low, high].forEach(price => {
         const label = document.createElementNS(svg.namespaceURI, "text");
         label.setAttribute("x", "4");
@@ -1691,6 +1779,9 @@ function drawChart(id) {
     series.forEach(row => {
         const color = HISTORY_COLOR;
         const points = row.points || [];
+        points.forEach(point => {
+            hits.push({ x: xOf(point[0]), y: yOf(Number(point[1])), date: point[0], price: point[1] });
+        });
         if (points.length >= 2) {
             const poly = document.createElementNS(svg.namespaceURI, "polyline");
             poly.setAttribute("fill", "none");
@@ -1714,17 +1805,54 @@ function drawChart(id) {
             }
             if (price == null || !Number.isFinite(Number(price))) return;
             const mark = document.createElementNS(svg.namespaceURI, "circle");
-            mark.setAttribute("cx", xOf(marker.date));
-            mark.setAttribute("cy", yOf(Number(price)));
-            mark.setAttribute("r", marker.kind === "low" ? "5.5" : "4.5");
+            const mx = xOf(marker.date);
+            const my = yOf(Number(price));
+            mark.setAttribute("cx", mx);
+            mark.setAttribute("cy", my);
+            mark.setAttribute("r", marker.kind === "drop" ? "6.5" : (marker.kind === "low" ? "5.5" : "4.5"));
             mark.setAttribute("fill", markerColor(marker.kind));
-            mark.setAttribute("stroke", "#ffffff");
-            mark.setAttribute("stroke-width", "1.2");
+            mark.setAttribute("stroke", marker.kind === "drop" ? "#14532d" : "#ffffff");
+            mark.setAttribute("stroke-width", marker.kind === "drop" ? "2" : "1.2");
+            if (marker.kind === "drop") mark.setAttribute("class", "marker-drop");
             const title = document.createElementNS(svg.namespaceURI, "title");
-            title.textContent = (marker.label || marker.kind) + " · " + marker.date;
+            title.textContent = chartHitLabel({ date: marker.date, price: price, kind: marker.kind, label: marker.label });
             mark.appendChild(title);
+            hits.push({ x: mx, y: my, date: marker.date, price: price, kind: marker.kind, label: marker.label || "" });
             svg.appendChild(mark);
         });
+    });
+    function tipAt(event) {
+        const rect = svg.getBoundingClientRect();
+        if (!rect.width) return;
+        const x = (event.clientX - rect.left) * (width / rect.width);
+        const y = (event.clientY - rect.top) * (height / rect.height);
+        const hit = nearestChartHit(hits, x, y);
+        if (!hit) {
+            if (!sparkPinned) hideSparkTip();
+            return;
+        }
+        showTip(event, chartHitLabel(hit));
+    }
+    svg.addEventListener("mousemove", event => {
+        sparkPinned = false;
+        tipAt(event);
+    });
+    svg.addEventListener("mouseleave", () => {
+        if (!sparkPinned) hideSparkTip();
+    });
+    svg.addEventListener("click", event => {
+        event.stopPropagation();
+        sparkPinned = true;
+        tipAt(event);
+    });
+    svg.addEventListener("focus", () => {
+        const last = hits.length ? hits[hits.length - 1] : null;
+        if (!last) return;
+        const rect = svg.getBoundingClientRect();
+        showTip({ clientX: rect.left + 24, clientY: rect.top + 24 }, chartHitLabel(last));
+    });
+    svg.addEventListener("blur", () => {
+        if (!sparkPinned) hideSparkTip();
     });
     host.appendChild(svg);
     const legend = document.createElement("p");
@@ -1859,6 +1987,7 @@ function showInsights() {
 }
 
 function init() {
+    restoreFilterSections();
     applyLayout(readLayout());
     prepareVisit();
     applyStars();
@@ -1886,6 +2015,16 @@ function init() {
     }
     if (filtersOpen) filtersOpen.addEventListener("click", () => setFilters(true));
     if (filtersClose) filtersClose.addEventListener("click", () => setFilters(false));
+    if (filterDrawer) {
+        filterDrawer.addEventListener("click", event => {
+            const button = event.target.closest(".section-toggle");
+            if (!button || !filterDrawer.contains(button)) return;
+            const section = button.closest(".filter-section");
+            if (!section) return;
+            paintFilterSection(section, !section.classList.contains("is-open"));
+            rememberFilterSections();
+        });
+    }
     const scoreInfo = document.getElementById("scoreInfo");
     if (scoreInfo) scoreInfo.addEventListener("click", event => event.stopPropagation());
     const storeSelect = document.getElementById("storeSelect");
@@ -1992,6 +2131,17 @@ function init() {
             sparkPinned = true;
             showSparkTip(event, nearestPoint(button.dataset.id, event, current));
         });
+        button.addEventListener("focus", () => {
+            const current = button.querySelector("svg");
+            const points = current ? sparkPoints.get(current) : null;
+            const point = points && points.length ? points[points.length - 1] : null;
+            if (!point) return;
+            const rect = button.getBoundingClientRect();
+            showSparkTip({ clientX: rect.left, clientY: rect.bottom }, point);
+        });
+        button.addEventListener("blur", () => {
+            if (!sparkPinned) hideSparkTip();
+        });
     });
     document.querySelectorAll(".card-more").forEach(button => {
         button.addEventListener("click", () => {
@@ -2042,6 +2192,7 @@ function init() {
     if (close) close.addEventListener("click", closeDrawer);
     document.addEventListener("keydown", event => {
         if (event.key === "Escape") {
+            hideSparkTip();
             closeDrawer();
             closeSparkPanel();
             closeProduct();

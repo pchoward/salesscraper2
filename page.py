@@ -1107,9 +1107,21 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f'{escape(brand)} <span class="facet-count">({count})</span></button>'
         )
     more_hidden = "" if len(sorted_brands) > brand_cap else " hidden"
+    def _section(section_id, label, body, open_default=False):
+        if not body:
+            return ""
+        state_cls = " is-open" if open_default else ""
+        expanded = "true" if open_default else "false"
+        return (
+            f'<section class="filter-section{state_cls}" data-section="{section_id}">'
+            f'<button type="button" class="section-toggle" aria-expanded="{expanded}" '
+            f'aria-controls="section-{section_id}">{escape(label)}</button>'
+            f'<div class="section-body" id="section-{section_id}">{body}</div>'
+            "</section>"
+        )
+
     brand_facet = (
         '<div class="facet brand-facet" id="brandFacet" data-cap="7">'
-        '<span class="range-label">Brand</span>'
         f'<select id="brandSelect" class="sr-only" aria-label="Brand">{"".join(brand_options)}</select>'
         '<input id="brandSearch" class="brand-search" type="search" placeholder="Find a brand" '
         'aria-label="Find a brand" autocomplete="off">'
@@ -1129,24 +1141,50 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
         "if you pick that store, type, brand, or width. It is not a total of everything tracked."
         "</span></p>"
-        '<label class="field"><span>Store</span>'
-        f'<select id="storeSelect">{"".join(store_options)}</select></label>'
-        '<label class="field"><span>Type</span>'
-        f'<select id="partSelect">{"".join(part_options)}</select></label>'
-        f"{brand_facet}"
-        '<button type="button" class="text-btn" id="moreFilters" aria-expanded="true" aria-controls="morePanel">'
+        + _section(
+            "store",
+            "Store",
+            '<label class="field"><span>Store</span>'
+            f'<select id="storeSelect">{"".join(store_options)}</select></label>',
+        )
+        + _section(
+            "type",
+            "Type",
+            '<label class="field"><span>Type</span>'
+            f'<select id="partSelect">{"".join(part_options)}</select></label>',
+        )
+        + _section("brand", "Brand", brand_facet, open_default=True)
+        + _section(
+            "width",
+            "Width",
+            '<div class="filter-group width-ranges" id="sizeFilters">'
+            '<span class="range-label">Width range</span>'
+            f'{"".join(chips)}</div>',
+            open_default=True,
+        )
+        + '<button type="button" class="text-btn" id="moreFilters" aria-expanded="true" aria-controls="morePanel">'
         'More filters <span id="moreCount" hidden></span></button>'
         '<div class="more-filters" id="morePanel">'
-        '<label class="field"><span>Min price</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
-        '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
-        '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
-        '<label class="field"><span>Score min</span><input id="scoreMin" type="number" min="0" max="100" step="1"></label>'
-        '<label class="field"><span>Score max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label>'
-        f"{length_select}{wheel_select}"
-        f'<div class="filter-group width-ranges" id="sizeFilters">'
-        '<span class="range-label">Width range</span>'
-        f'{"".join(chips)}</div>'
-        "</div>"
+        + _section(
+            "price",
+            "Price",
+            '<label class="field"><span>Min price</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
+            '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>',
+        )
+        + _section(
+            "discount",
+            "Discount",
+            '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>',
+        )
+        + _section(
+            "score",
+            "Score",
+            '<label class="field"><span>Score min</span><input id="scoreMin" type="number" min="0" max="100" step="1"></label>'
+            '<label class="field"><span>Score max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label>',
+        )
+        + _section("length", "Length", length_select)
+        + _section("wheelbase", "Wheelbase", wheel_select)
+        + "</div>"
         '<div class="tool-row">'
         '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
         '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
@@ -1207,6 +1245,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn filters-open" id="filtersOpen">Filters</button>'
         "</div>"
         '<div class="tool-line">'
+        f'<p class="result-count"><span id="statusCounts">{len(records)} deals</span></p>'
         '<p class="lede digest" id="changeLine" '
         f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}">'
         '<span class="digest-label">Digest of what changed. '
@@ -1241,7 +1280,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="layout-toggle" role="group" aria-label="Layout">'
         '<button type="button" id="layoutTable" aria-pressed="true">Table</button>'
         '<button type="button" id="layoutCards" aria-pressed="false">Cards</button>'
-        "</div></div>"
+        "</div>"
+        '<div class="active-row" id="activeChips" hidden></div>'
+        "</div>"
         '<p class="lede" id="visitNote" hidden></p>'
         "</header>"
         '<div class="shell">'
@@ -1253,11 +1294,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '</div>'
         '<div class="board">'
         + "".join(store_cards)
-        + f'<p class="result-line"><span id="statusCounts">{len(records)} active deals</span></p>'
     )
     if notice:
         chunks.append(notice)
-    chunks.append('<div class="active-row" id="activeChips" hidden></div>')
     try:
         stats_html = _stats_html(products, price_history, intel)
     except Exception as exc:
