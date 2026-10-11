@@ -8295,8 +8295,8 @@
     "observation_count": 39,
     "all_time_low": 59.98,
     "all_time_low_date": "2026-09-30",
-    "stage": "all_time_low",
-    "miss_streak": 1,
+    "stage": "unlisted",
+    "miss_streak": 2,
     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=OPJDBDK-1.jpg&nw=210",
     "width": 8.25,
     "length": 32.0,
@@ -36300,13 +36300,16 @@
     "store": "Zumiez",
     "part": "Bearings",
     "first_seen": "2026-05-16",
-    "last_seen": "2026-07-07",
-    "observation_count": 21,
+    "last_seen": "2026-10-11",
+    "observation_count": 22,
     "all_time_low": 3.95,
     "all_time_low_date": "2026-05-16",
-    "stage": "gone",
-    "miss_streak": 2,
-    "prices": {}
+    "stage": "all_time_low",
+    "image": "https://scene7.zumiez.com/is/image/zumiez/288594-US",
+    "width": 1.0,
+    "prices": {
+      "2026-10-11": 3.95
+    }
   },
   "https://www.zumiez.com/independent-blackout-144-stage-11-skateboard-truck-1.html": {
     "name": "Independent Blackout 144 Stage 11 Skateboard Truck",
@@ -41547,8 +41550,9 @@
     "observation_count": 13,
     "all_time_low": 14.99,
     "all_time_low_date": "2026-09-28",
-    "stage": "unlisted",
+    "stage": "sold_out",
     "miss_streak": 2,
+    "stock": "out_of_stock",
     "image": "https://scene7.zumiez.com/is/image/zumiez/376180-US",
     "width": 14.99,
     "length": 24.95,

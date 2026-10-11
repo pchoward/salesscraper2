@@ -785,11 +785,11 @@
           "failed": false
         },
         "Zumiez_Bearings": {
-          "count": 0,
+          "count": 1,
           "failed": false
         },
         "SkateWarehouse_Decks": {
-          "count": 70,
+          "count": 69,
           "failed": false
         },
         "SkateWarehouse_Wheels": {
@@ -837,7 +837,7 @@
           "failed": false
         }
       },
-      "scanned_at": "2026-10-11T17:32:48+00:00"
+      "scanned_at": "2026-10-11T18:38:53+00:00"
     }
   ],
   "baseline": {
@@ -855,7 +855,7 @@
     },
     "SkateWarehouse_Decks": {
       "date": "2026-10-11",
-      "count": 70
+      "count": 69
     },
     "SkateWarehouse_Wheels": {
       "date": "2026-10-11",
@@ -888,6 +888,10 @@
     "CCS_Wheels": {
       "date": "2026-10-11",
       "count": 9
+    },
+    "Zumiez_Bearings": {
+      "date": "2026-10-11",
+      "count": 1
     }
   }
 }
