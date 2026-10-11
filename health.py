@@ -23,6 +23,8 @@ logger = logging.getLogger("health")
 HEALTH_PATH = "scrape_health.json"
 MAX_RUNS = 30
 ALERT_STREAK = 2
+# The morning scrape is daily. A page older than a day and a half is stale.
+STALE_AFTER_HOURS = 36
 
 
 def empty_state():
@@ -305,6 +307,73 @@ def results_from_run(current_data, failed_keys, suspect_keys=None):
             entry["suspect"] = True
         results.setdefault(key, entry)
     return results
+
+
+def _parse_moment(value):
+    if isinstance(value, datetime.datetime):
+        moment = value
+    else:
+        text = str(value or "").strip()
+        if not text:
+            return None
+        try:
+            moment = datetime.datetime.fromisoformat(text.replace("Z", "+00:00"))
+        except ValueError:
+            try:
+                moment = datetime.datetime.strptime(text[:19], "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                return None
+    if moment.tzinfo is None:
+        moment = moment.replace(tzinfo=datetime.timezone.utc)
+    return moment
+
+
+def failed_keys_on(state, day):
+    """Store/part keys marked failed on ``day`` in ``scrape_health.json``."""
+    day = str(day or "")[:10]
+    if not day or not isinstance(state, dict):
+        return []
+    found = []
+    for run in state.get("runs") or []:
+        if not isinstance(run, dict) or str(run.get("date") or "")[:10] != day:
+            continue
+        results = run.get("results") or {}
+        if not isinstance(results, dict):
+            continue
+        for key, result in results.items():
+            if isinstance(result, dict) and result.get("failed") and str(key) not in found:
+                found.append(str(key))
+    return found
+
+
+def scan_freshness(generated_at, now=None, failed_keys=None):
+    """Whether the published scan is stale or recorded a failed store/part.
+
+    Stale means the scan timestamp is more than ``STALE_AFTER_HOURS`` before
+    ``now``. An unparseable timestamp is not called stale.
+    """
+    moment = _parse_moment(generated_at)
+    if now is None:
+        now = datetime.datetime.now(datetime.timezone.utc)
+    elif not isinstance(now, datetime.datetime):
+        now = _parse_moment(now) or datetime.datetime.now(datetime.timezone.utc)
+    elif now.tzinfo is None:
+        now = now.replace(tzinfo=datetime.timezone.utc)
+    hours = None
+    stale = False
+    if moment is not None:
+        hours = (now - moment).total_seconds() / 3600.0
+        stale = hours > STALE_AFTER_HOURS
+    failed = []
+    for key in failed_keys or []:
+        text = str(key)
+        if text and text not in failed:
+            failed.append(text)
+    return {
+        "stale": stale,
+        "hours": None if hours is None else round(hours, 1),
+        "failed": failed,
+    }
 
 
 def load_state(path=HEALTH_PATH):

@@ -13,6 +13,7 @@ import re
 
 from dimensions import dimension_key, dimensions_match, extract_specs, parse_dimension
 from filters import normalize_product_name, normalize_url
+from history import all_time_low_status
 
 logger = logging.getLogger("watchlist")
 
@@ -164,7 +165,12 @@ def _has_trigger(rule):
 
 
 def rule_matches(rule, item):
-    """True when brand/name, part, and min_width match. Ignores alert triggers."""
+    """True when brand/name, part, and width match. Ignores alert triggers.
+
+    ``width`` is an exact size (``8.5`` matches ``8.50``). ``min_width`` and
+    ``max_width`` are inclusive bounds. ``max_price`` and ``alert_on_low``
+    do not change whether the row is highlighted.
+    """
     if not isinstance(rule, dict) or not isinstance(item, dict):
         return False
     part = str(rule.get("part") or "Decks").strip().casefold()
@@ -177,10 +183,17 @@ def rule_matches(rule, item):
         return False
     if not rule.get("name") and not rule.get("brand"):
         return False
+    width = _width_of(item)
     if rule.get("min_width") not in (None, ""):
-        width = _width_of(item)
         minimum = parse_dimension(rule.get("min_width"))
         if width is None or minimum is None or width < minimum - 1e-9:
+            return False
+    if rule.get("max_width") not in (None, ""):
+        maximum = parse_dimension(rule.get("max_width"))
+        if width is None or maximum is None or width > maximum + 1e-9:
+            return False
+    if rule.get("width") not in (None, ""):
+        if not dimensions_match(width, rule.get("width")):
             return False
     return True
 
@@ -201,6 +214,25 @@ def _index_items(catalog):
     return indexed
 
 
+def _new_low_reason(rule, item, history, prior):
+    """Alert when a watched product newly lands on its all-time low.
+
+    Already sitting on that low yesterday does not send another email.
+    """
+    if not isinstance(rule, dict) or rule.get("alert_on_low") is not True:
+        return None
+    status = all_time_low_status(item, history if isinstance(history, dict) else {})
+    if not status.get("flagged"):
+        return None
+    try:
+        low_value = float(status.get("low"))
+    except (TypeError, ValueError):
+        return None
+    if prior is not None and prior <= low_value + 0.001:
+        return None
+    return "New all-time low"
+
+
 def _reasons(rule, item, previous, history, today):
     url = normalize_url(item.get("url"))
     prev = previous.get(url) if url else None
@@ -217,6 +249,9 @@ def _reasons(rule, item, previous, history, today):
     delta = (prior - current) if dropped else None
     width = _width_of(item)
     reasons = []
+    low_reason = _new_low_reason(rule, item, history, prior)
+    if low_reason:
+        reasons.append(low_reason)
 
     if _has_trigger(rule):
         if rule.get("max_price") not in (None, ""):
