@@ -923,41 +923,6 @@ th:hover .tip, th:focus-within .tip { display: block; }
 .card-face { min-height: 1.35rem; }
 .card-off { font-size: 1.05rem; font-weight: 800; }
 .card-price .price-new { font-size: 1rem; }
-.card-title {
-    position: relative;
-    height: 3.75em;
-    font-size: 0.82rem;
-    line-height: 1.25;
-}
-.card-title .product-name {
-    margin: 0;
-    max-width: none;
-    font-size: inherit;
-    font-weight: 650;
-    line-height: inherit;
-    height: 3.75em;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-}
-.card-title:hover .product-name,
-.card-title:focus-within .product-name {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 5;
-    height: auto;
-    max-height: none;
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
-    background: white;
-    border-radius: 6px;
-    box-shadow: 0 8px 20px rgb(15 23 42 / 0.16);
-    padding: 0.15rem 0.3rem;
-}
 .card-title:hover ~ .card-hover,
 .card-title:focus-within ~ .card-hover { display: none !important; }
 .card-metrics {
@@ -972,6 +937,49 @@ th:hover .tip, th:focus-within .tip { display: block; }
 .card-spark svg { width: 72px; height: 22px; display: block; }
 .card-badge { min-height: 1.15rem; }
 .deal-card .product-name { font-size: 0.82rem; font-weight: 650; max-width: none; margin: 0; line-height: 1.25; }
+/* Exactly three lines. The link is the text box, so the clamp has to be on
+   the link; a fixed flex basis keeps the price row below it at every width. */
+.deal-card .card-title {
+    position: relative;
+    flex: 0 0 calc(1.25em * 3);
+    height: calc(1.25em * 3);
+    min-height: calc(1.25em * 3);
+    max-height: calc(1.25em * 3);
+    overflow: hidden;
+    font-size: 0.82rem;
+    line-height: 1.25;
+}
+.deal-card .card-title .product-name {
+    margin: 0;
+    max-width: none;
+    height: auto;
+    font-size: inherit;
+    font-weight: 650;
+    line-height: inherit;
+    overflow: hidden;
+}
+.deal-card .card-title .product-link,
+.deal-card .card-title .product-name:not(:has(.product-link)) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    max-height: calc(1.25em * 3);
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+.card-metrics .card-off.none {
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 0.62rem;
+    font-weight: 650;
+    line-height: 1.15;
+    white-space: normal;
+    max-width: 4.6rem;
+    padding: 0.12rem 0.28rem;
+}
 .card-badge .pills { margin: 0; }
 .card-more {
     border: 0;
