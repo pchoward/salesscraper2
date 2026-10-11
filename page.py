@@ -1245,10 +1245,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<p class="lede" id="visitNote" hidden></p>'
         "</header>"
         '<div class="shell">'
+        '<div class="rail">'
         '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals" aria-label="Search deals"></div>'
     )
     chunks.append(sidebar_html)
     chunks.append(
+        '</div>'
         '<div class="board">'
         + "".join(store_cards)
         + f'<p class="result-line"><span id="statusCounts">{len(records)} active deals</span></p>'
