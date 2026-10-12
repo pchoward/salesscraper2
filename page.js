@@ -16,6 +16,12 @@ let state = {
     dropInterval: "all",
     kinds: [],
     highlights: false,
+    diameters: [],
+    duros: [],
+    shapes: [],
+    truckSizes: [],
+    truckHeights: [],
+    abecs: [],
     visitMode: "yesterday",
     sortKey: "rank",
     sortDir: "asc",
@@ -225,11 +231,109 @@ function toggleWidthGroup(node) {
     applyFilters();
 }
 
-function syncDeckWidthSection() {
-    const section = document.querySelector('.filter-section[data-section="width"]');
-    if (!section) return;
-    paintFilterSection(section, state.part === "Decks");
+// Keep in sync with part_specs.DIAMETER_ORDER / SHAPES / HEIGHTS.
+const DIAMETER_ORDER = ["50-51", "52-53", "54-55", "56+"];
+const SHAPE_ORDER = ["conical", "radial", "sidecut"];
+const HEIGHT_ORDER = ["low", "mid", "high"];
+const SPEC_FACETS = [
+    { stateKey: "diameters", part: "Wheels", attr: "diameter", section: "diameterFilters" },
+    { stateKey: "duros", part: "Wheels", attr: "duros", section: "duroFilters" },
+    { stateKey: "shapes", part: "Wheels", attr: "shape", section: "shapeFilters" },
+    { stateKey: "truckSizes", part: "Trucks", attr: "trucksize", section: "trucksizeFilters" },
+    { stateKey: "truckHeights", part: "Trucks", attr: "truckheight", section: "truckheightFilters" },
+    { stateKey: "abecs", part: "Bearings", attr: "abec", section: "abecFilters" }
+];
+const SPEC_OPEN = { width: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, abec: 1 };
+
+function normalizeDuroToken(value) {
+    const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
+    if (!match) return "";
+    return String(parseInt(match[1], 10)) + match[2];
+}
+
+function normalizeSizeToken(value) {
+    const text = String(value || "").trim();
+    if (!/^(?:\d{2,3}|\d{1,2}\.\d+)$/.test(text)) return "";
+    if (text.indexOf(".") < 0) {
+        const token = String(parseInt(text, 10));
+        const mm = { "109": 1, "129": 1, "136": 1, "139": 1, "144": 1, "145": 1, "147": 1, "148": 1, "149": 1, "151": 1, "159": 1, "169": 1, "215": 1 };
+        const ace = { "22": 1, "33": 1, "44": 1, "55": 1, "60": 1, "66": 1, "77": 1 };
+        return (mm[token] || ace[token]) ? token : "";
+    }
+    const number = parseFloat(text);
+    if (!Number.isFinite(number)) return "";
+    const token = Math.abs(number - Math.round(number)) < 1e-9
+        ? number.toFixed(1)
+        : number.toFixed(4).replace(/0+$/, "").replace(/\.$/, "");
+    const axle = { "5.0": 1, "5.2": 1, "5.6": 1, "5.8": 1, "6.1": 1 };
+    if (axle[token] || (number >= 7 && number <= 12)) return token;
+    return "";
+}
+
+function orderSpecValues(stateKey, values) {
+    const chosen = {};
+    (values || []).forEach(value => {
+        let token = String(value || "").trim();
+        if (stateKey === "duros") token = normalizeDuroToken(token);
+        else if (stateKey === "truckSizes") token = normalizeSizeToken(token);
+        else if (stateKey === "abecs") {
+            if (!/^\d{1,2}$/.test(token)) token = "";
+            else token = String(parseInt(token, 10));
+        } else token = token.toLowerCase();
+        if (token) chosen[token] = true;
+    });
+    const keys = Object.keys(chosen);
+    if (stateKey === "diameters") return DIAMETER_ORDER.filter(id => chosen[id]);
+    if (stateKey === "shapes") return SHAPE_ORDER.filter(id => chosen[id]);
+    if (stateKey === "truckHeights") return HEIGHT_ORDER.filter(id => chosen[id]);
+    if (stateKey === "duros") {
+        return keys.sort((a, b) => {
+            const delta = parseInt(a, 10) - parseInt(b, 10);
+            if (delta) return delta;
+            return a.slice(-1) < b.slice(-1) ? -1 : a.slice(-1) > b.slice(-1) ? 1 : 0;
+        });
+    }
+    if (stateKey === "truckSizes") return keys.sort((a, b) => parseFloat(a) - parseFloat(b));
+    if (stateKey === "abecs") return keys.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+    return keys;
+}
+
+function specTokens(row, attr) {
+    return String((row.dataset && row.dataset[attr]) || "").split(",").map(token => token.trim()).filter(Boolean);
+}
+
+// A wheel, truck, or bearing spec filters only that part. Other parts stay
+// visible, the same way a deck width does. A row of that part with no parsed
+// value is hidden while the spec is selected.
+function specAllowed(row, facet, selected) {
+    const chosen = selected || [];
+    if (!chosen.length) return true;
+    if ((row.dataset.part || "") !== facet.part) return true;
+    const tokens = specTokens(row, facet.attr);
+    if (!tokens.length) return false;
+    return chosen.some(value => tokens.indexOf(value) >= 0);
+}
+
+function syncTypeSections(expandSpec) {
+    const part = state.part || "all";
+    document.querySelectorAll(".filter-section[data-for]").forEach(section => {
+        const owner = section.getAttribute("data-for") || "";
+        const show = part !== "all" && owner === part;
+        section.classList.toggle("is-type-hidden", !show);
+        const id = section.getAttribute("data-section") || "";
+        if (show && expandSpec && SPEC_OPEN[id]) paintFilterSection(section, true);
+    });
     rememberFilterSections();
+}
+
+function toggleSpec(stateKey, value) {
+    if (!value) return;
+    const selected = {};
+    (state[stateKey] || []).forEach(item => { selected[item] = true; });
+    if (selected[value]) delete selected[value];
+    else selected[value] = true;
+    state[stateKey] = orderSpecValues(stateKey, Object.keys(selected));
+    applyFilters();
 }
 
 function filterBrandList(query) {
@@ -320,6 +424,32 @@ function paintFacetCounts() {
     paintSelectCounts("partSelect", partCounts);
     paintSelectCounts("lengthSelect", lengthCounts);
     paintSelectCounts("wheelbaseSelect", wheelCounts);
+    SPEC_FACETS.forEach(facet => {
+        const counts = Object.create(null);
+        document.querySelectorAll("#" + facet.section + " .spec-chip").forEach(node => {
+            counts[node.getAttribute("data-value") || ""] = 0;
+        });
+        const override = {};
+        override[facet.stateKey] = [];
+        dealRows().forEach(row => {
+            if ((row.dataset.part || "") !== facet.part) return;
+            if (!rowMatches(row, override)) return;
+            specTokens(row, facet.attr).forEach(token => {
+                if (Object.prototype.hasOwnProperty.call(counts, token)) counts[token] += 1;
+            });
+        });
+        document.querySelectorAll("#" + facet.section + " .spec-chip").forEach(node => {
+            const value = node.getAttribute("data-value") || "";
+            const count = counts[value] || 0;
+            const slot = node.querySelector(".spec-count");
+            if (slot) slot.textContent = String(count);
+            node.classList.toggle("is-zero", count === 0);
+            node.setAttribute("data-count", String(count));
+            const on = (state[facet.stateKey] || []).indexOf(value) >= 0;
+            node.classList.toggle("active", on);
+            node.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+    });
     paintKeepaCounts();
 }
 
@@ -389,6 +519,11 @@ function rowMatches(row, overrides) {
     if (store !== "all" && (row.dataset.store || "") !== store) return false;
     if (part !== "all" && (row.dataset.part || "") !== part) return false;
     if (!deckWidthAllowed(row, widths)) return false;
+    for (let specIndex = 0; specIndex < SPEC_FACETS.length; specIndex++) {
+        const facet = SPEC_FACETS[specIndex];
+        const selected = Object.prototype.hasOwnProperty.call(over, facet.stateKey) ? over[facet.stateKey] : state[facet.stateKey];
+        if (!specAllowed(row, facet, selected)) return false;
+    }
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
     if (length !== "all" && (row.dataset.length || "") !== length) return false;
     if (wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
@@ -692,11 +827,13 @@ function filterByStore(store) {
 }
 
 function filterByPart(part) {
-    state.part = part || "all";
+    const next = part || "all";
+    const changed = next !== (state.part || "all");
+    state.part = next;
     const select = document.getElementById("partSelect");
     if (select) select.value = state.part;
     setPressed("#partFilters .filter-btn", "data-part", state.part);
-    syncDeckWidthSection();
+    syncTypeSections(changed);
     applyFilters();
 }
 
@@ -1056,6 +1193,12 @@ function clearFilters() {
         dropInterval: "all",
         kinds: [],
         highlights: false,
+        diameters: [],
+        duros: [],
+        shapes: [],
+        truckSizes: [],
+        truckHeights: [],
+        abecs: [],
         visitMode: state.visitMode,
         sortKey: "rank",
         sortDir: "asc",
@@ -1082,7 +1225,7 @@ function clearFilters() {
     setPressed("#storeFilters .filter-btn", "data-store", "all");
     setPressed("#partFilters .filter-btn", "data-part", "all");
     paintWidthChips();
-    syncDeckWidthSection();
+    syncTypeSections(false);
     sortBy("rank", "asc");
     applyFilters();
 }
@@ -1228,7 +1371,13 @@ function decodeQuery(query) {
         grouped: false,
         interval: "all",
         kinds: [],
-        highlights: false
+        highlights: false,
+        diameters: [],
+        duros: [],
+        shapes: [],
+        truckSizes: [],
+        truckHeights: [],
+        abecs: []
     };
     const text = String(query || "").replace(/^\?/, "");
     if (!text) return stateOut;
@@ -1271,6 +1420,12 @@ function decodeQuery(query) {
             });
             stateOut.kinds = DEAL_KINDS.filter(kind => chosen[kind]);
         } else if (key === "highlights") stateOut.highlights = flagOn(value);
+        else if (key === "diameter") stateOut.diameters = orderSpecValues("diameters", String(value || "").split(","));
+        else if (key === "duro") stateOut.duros = orderSpecValues("duros", String(value || "").split(","));
+        else if (key === "shape") stateOut.shapes = orderSpecValues("shapes", String(value || "").split(","));
+        else if (key === "trucksize") stateOut.truckSizes = orderSpecValues("truckSizes", String(value || "").split(","));
+        else if (key === "truckheight") stateOut.truckHeights = orderSpecValues("truckHeights", String(value || "").split(","));
+        else if (key === "abec") stateOut.abecs = orderSpecValues("abecs", String(value || "").split(","));
     });
     ["min", "max", "discount", "discountmax", "scoremin", "scoremax"].forEach(key => {
         if (!Number.isFinite(stateOut[key])) stateOut[key] = null;
@@ -1311,6 +1466,18 @@ function encodeState(snapshot) {
     const kinds = DEAL_KINDS.filter(kind => (snapshot.kinds || []).indexOf(kind) >= 0);
     if (kinds.length) add("kinds", kinds.join(","));
     if (snapshot.highlights) add("highlights", "1");
+    const diameters = orderSpecValues("diameters", snapshot.diameters || []);
+    if (diameters.length) add("diameter", diameters.join(","));
+    const duros = orderSpecValues("duros", snapshot.duros || []);
+    if (duros.length) add("duro", duros.join(","));
+    const shapes = orderSpecValues("shapes", snapshot.shapes || []);
+    if (shapes.length) add("shape", shapes.join(","));
+    const truckSizes = orderSpecValues("truckSizes", snapshot.truckSizes || []);
+    if (truckSizes.length) add("trucksize", truckSizes.join(","));
+    const truckHeights = orderSpecValues("truckHeights", snapshot.truckHeights || []);
+    if (truckHeights.length) add("truckheight", truckHeights.join(","));
+    const abecs = orderSpecValues("abecs", snapshot.abecs || []);
+    if (abecs.length) add("abec", abecs.join(","));
     return params.toString();
 }
 
@@ -1340,7 +1507,13 @@ function captureState() {
         grouped: state.grouped,
         interval: state.dropInterval || "all",
         kinds: (state.kinds || []).slice(),
-        highlights: !!state.highlights
+        highlights: !!state.highlights,
+        diameters: (state.diameters || []).slice(),
+        duros: (state.duros || []).slice(),
+        shapes: (state.shapes || []).slice(),
+        truckSizes: (state.truckSizes || []).slice(),
+        truckHeights: (state.truckHeights || []).slice(),
+        abecs: (state.abecs || []).slice()
     };
 }
 
@@ -1398,7 +1571,13 @@ function writeControls(snapshot) {
     state.dropInterval = snapshot.interval && DROP_INTERVALS[snapshot.interval] ? snapshot.interval : "all";
     state.kinds = DEAL_KINDS.filter(kind => (snapshot.kinds || []).indexOf(kind) >= 0);
     state.highlights = !!snapshot.highlights;
-    if (partChanged) syncDeckWidthSection();
+    state.diameters = orderSpecValues("diameters", snapshot.diameters || []);
+    state.duros = orderSpecValues("duros", snapshot.duros || []);
+    state.shapes = orderSpecValues("shapes", snapshot.shapes || []);
+    state.truckSizes = orderSpecValues("truckSizes", snapshot.truckSizes || []);
+    state.truckHeights = orderSpecValues("truckHeights", snapshot.truckHeights || []);
+    state.abecs = orderSpecValues("abecs", snapshot.abecs || []);
+    if (partChanged) syncTypeSections(true);
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
     const grouped = document.getElementById("groupToggle");
@@ -1837,6 +2016,19 @@ function paintActiveChips() {
             applyFilters();
         });
     }
+    const specLabels = {
+        diameters: value => "Diameter " + value,
+        duros: value => value,
+        shapes: value => "Shape: " + value.charAt(0).toUpperCase() + value.slice(1),
+        truckSizes: value => "Size " + value,
+        truckHeights: value => "Height: " + value.charAt(0).toUpperCase() + value.slice(1),
+        abecs: value => "ABEC " + value
+    };
+    SPEC_FACETS.forEach(facet => {
+        (state[facet.stateKey] || []).forEach(value => {
+            add(specLabels[facet.stateKey](value), () => toggleSpec(facet.stateKey, value));
+        });
+    });
     if (state.highlights) add("Highlights", () => toggleDealType("highlights"));
     if (state.watching) add("Watching", () => toggleWatching());
     if (state.cardNew) add("New deals", () => toggleCard("new"));
@@ -2288,6 +2480,7 @@ function showInsights() {
 
 function init() {
     restoreFilterSections();
+    syncTypeSections(false);
     applyLayout(readLayout());
     prepareVisit();
     applyStars();
@@ -2498,6 +2691,15 @@ function init() {
             toggleWidthGroup(button);
         });
     }
+    document.querySelectorAll(".spec-ranges").forEach(group => {
+        group.addEventListener("click", event => {
+            const button = event.target.closest(".spec-chip");
+            if (!button || !group.contains(button)) return;
+            const facet = SPEC_FACETS.find(item => item.section === group.id);
+            if (!facet) return;
+            toggleSpec(facet.stateKey, button.getAttribute("data-value") || "");
+        });
+    });
     document.querySelectorAll(".filters-done").forEach(button => {
         if (button.id === "filtersClose") return;
         button.addEventListener("click", () => setFilters(false));
