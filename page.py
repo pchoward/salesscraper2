@@ -41,6 +41,20 @@ from history import (
 )
 from intel import intelligence_summary
 from matching import cross_store_groups
+from part_specs import (
+    DIAMETER_BANDS,
+    HEIGHT_LABELS,
+    HEIGHTS,
+    SHAPE_LABELS,
+    SHAPES,
+    bearing_specs,
+    diameter_band,
+    diameter_tip,
+    section_ready,
+    size_tip,
+    truck_specs,
+    wheel_specs,
+)
 from query_state import STARTER_VIEWS, WIDTH_RANGES, bucket_for_width
 from score import FORMULA, SCORE_LEGEND, deal_score, score_band
 from site_sales import activity_line, describe_sales, display_name, load_state
@@ -873,6 +887,24 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             width_key = dimension_key(specs.get("width")) if item.get("part") == "Decks" else ""
             length_key = dimension_key(specs.get("length")) or ""
             wheel_key = dimension_key(specs.get("wheelbase")) or ""
+            diameter = ""
+            duros = []
+            shape = ""
+            truck_size = ""
+            truck_height = ""
+            abec = ""
+            raw_name = item.get("name") or ""
+            if item.get("part") == "Wheels":
+                parsed = wheel_specs(raw_name)
+                diameter = diameter_band(parsed.get("diameter_mm"))
+                duros = list(parsed.get("durometers") or [])
+                shape = parsed.get("shape") or ""
+            elif item.get("part") == "Trucks":
+                parsed = truck_specs(raw_name)
+                truck_size = parsed.get("size") or ""
+                truck_height = parsed.get("height") or ""
+            elif item.get("part") == "Bearings":
+                abec = bearing_specs(raw_name).get("abec") or ""
             percent = percent_off_value(item.get("price_new"), item.get("price_old"))
             record = {
                 "item": item,
@@ -920,6 +952,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "width_key": width_key,
                 "length_key": length_key,
                 "wheel_key": wheel_key,
+                "diameter": diameter,
+                "duros": duros,
+                "shape": shape,
+                "truck_size": truck_size,
+                "truck_height": truck_height,
+                "abec": abec,
                 "percent": percent,
                 "search": " ".join(
                     bit
@@ -1013,6 +1051,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     brand_counts = {}
     lengths = set()
     wheels = set()
+    length_hits = 0
+    wheel_hits = 0
+    diameter_counts = {}
+    duro_counts = {}
+    shape_counts = {}
+    truck_size_counts = {}
+    truck_height_counts = {}
+    abec_counts = {}
+    wheels_with_duro = 0
     for record in records:
         store_counts[record["store"]] = store_counts.get(record["store"], 0) + 1
         part_counts[record["part"]] = part_counts.get(record["part"], 0) + 1
@@ -1025,8 +1072,26 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             brand_counts[record["brand"]] = brand_counts.get(record["brand"], 0) + 1
         if record["length_key"]:
             lengths.add(record["length_key"])
+            length_hits += 1
         if record["wheel_key"]:
             wheels.add(record["wheel_key"])
+            wheel_hits += 1
+        if record["part"] == "Wheels":
+            if record["diameter"]:
+                diameter_counts[record["diameter"]] = diameter_counts.get(record["diameter"], 0) + 1
+            if record["duros"]:
+                wheels_with_duro += 1
+                for token in record["duros"]:
+                    duro_counts[token] = duro_counts.get(token, 0) + 1
+            if record["shape"]:
+                shape_counts[record["shape"]] = shape_counts.get(record["shape"], 0) + 1
+        elif record["part"] == "Trucks":
+            if record["truck_size"]:
+                truck_size_counts[record["truck_size"]] = truck_size_counts.get(record["truck_size"], 0) + 1
+            if record["truck_height"]:
+                truck_height_counts[record["truck_height"]] = truck_height_counts.get(record["truck_height"], 0) + 1
+        elif record["part"] == "Bearings" and record["abec"]:
+            abec_counts[record["abec"]] = abec_counts.get(record["abec"], 0) + 1
 
     low_items = []
     try:
@@ -1124,7 +1189,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     for brand in sorted_brands:
         brand_options.append(_option(brand, brand, data_label=brand))
     length_select = ""
-    if lengths:
+    if section_ready(length_hits):
         options = ['<option value="all">All lengths</option>']
         for value in sorted(lengths, key=float):
             options.append(_option(value, value, data_label=value))
@@ -1133,7 +1198,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f'<select id="lengthSelect">{"".join(options)}</select></label>'
         )
     wheel_select = ""
-    if wheels:
+    if section_ready(wheel_hits):
         options = ['<option value="all">All wheelbases</option>']
         for value in sorted(wheels, key=float):
             options.append(_option(value, value, data_label=value))
@@ -1193,17 +1258,41 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f'<span class="facet-name">{escape(brand)}</span>'
             f'<span class="facet-count">({count})</span></button>'
         )
-    def _section(section_id, label, body, open_default=False):
+    def _section(section_id, label, body, open_default=False, for_part=""):
         if not body:
             return ""
-        state_cls = " is-open" if open_default else ""
+        classes = ["filter-section"]
+        if open_default:
+            classes.append("is-open")
+        if for_part:
+            classes.append("is-type-hidden")
         expanded = "true" if open_default else "false"
+        for_attr = f' data-for="{escape(for_part, quote=True)}"' if for_part else ""
         return (
-            f'<section class="filter-section{state_cls}" data-section="{section_id}">'
+            f'<section class="{" ".join(classes)}" data-section="{section_id}"{for_attr}>'
             f'<button type="button" class="section-toggle" aria-expanded="{expanded}" '
             f'aria-controls="section-{section_id}">{escape(label)}</button>'
             f'<div class="section-body" id="section-{section_id}">{body}</div>'
             "</section>"
+        )
+
+    def _spec_button(value, label, count, tip):
+        zero = " is-zero" if count == 0 else ""
+        return (
+            f'<button type="button" class="chip spec-chip{zero}" '
+            f'data-value="{escape(str(value), quote=True)}" data-count="{count}" '
+            f'title="{escape(tip, quote=True)}" aria-pressed="false">'
+            f'<span class="spec-label">{escape(str(label))}</span>'
+            f'<span class="spec-count">{count}</span></button>'
+        )
+
+    def _spec_body(group_id, label, buttons, note):
+        if not buttons:
+            return ""
+        note_html = f'<p class="section-note">{escape(note)}</p>' if note else ""
+        return (
+            f'<div class="filter-group spec-ranges" id="{group_id}" role="group" '
+            f'aria-label="{escape(label, quote=True)}">{"".join(buttons)}</div>{note_html}'
         )
 
     brand_facet = (
@@ -1251,6 +1340,103 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f'<span class="kind-dot {dot}" aria-hidden="true"></span>{label} '
             f'<span class="facet-count"></span></button>'
         )
+
+    def _gated(section_id, label, part, buttons, note, hits):
+        if not section_ready(hits) or not buttons:
+            return ""
+        return _section(
+            section_id,
+            label,
+            _spec_body(section_id + "Filters", label, buttons, note),
+            open_default=True,
+            for_part=part,
+        )
+
+    diameter_buttons = [
+        _spec_button(band_id, band_id, diameter_counts[band_id], diameter_tip(band_id))
+        for band_id, _low, _high in DIAMETER_BANDS
+        if diameter_counts.get(band_id)
+    ]
+    duro_buttons = [
+        _spec_button(token, token, duro_counts[token], f"Durometer {token} printed in the name")
+        for token in sorted(duro_counts, key=lambda token: (int(token[:-1]), token[-1]))
+    ]
+    shape_buttons = [
+        _spec_button(
+            token,
+            SHAPE_LABELS[token],
+            shape_counts[token],
+            f"{SHAPE_LABELS[token]} is named in the listing",
+        )
+        for token in SHAPES
+        if shape_counts.get(token)
+    ]
+    size_buttons = [
+        _spec_button(token, token, truck_size_counts[token], size_tip(token))
+        for token in sorted(truck_size_counts, key=float)
+    ]
+    height_buttons = [
+        _spec_button(
+            token,
+            HEIGHT_LABELS[token],
+            truck_height_counts[token],
+            f"The name says {token}",
+        )
+        for token in HEIGHTS
+        if truck_height_counts.get(token)
+    ]
+    abec_buttons = [
+        _spec_button(token, f"ABEC {token}", abec_counts[token], f"ABEC {token} printed in the name")
+        for token in sorted(abec_counts, key=int)
+    ]
+    diameter_section = _gated(
+        "diameter",
+        "Wheel Diameter",
+        "Wheels",
+        diameter_buttons,
+        "Taken from mm in the name.",
+        sum(diameter_counts.values()),
+    )
+    duro_section = _gated(
+        "duro",
+        "Durometer",
+        "Wheels",
+        duro_buttons,
+        "Hardness printed in the name. A wheel with two ratings matches either.",
+        wheels_with_duro,
+    )
+    shape_section = _gated(
+        "shape",
+        "Wheel Shape",
+        "Wheels",
+        shape_buttons,
+        "Only a shape word printed in the name.",
+        sum(shape_counts.values()),
+    )
+    truck_size_section = _gated(
+        "trucksize",
+        "Truck Size",
+        "Trucks",
+        size_buttons,
+        "Hanger size, Ace size, inch width, or axle width printed in the name.",
+        sum(truck_size_counts.values()),
+    )
+    truck_height_section = _gated(
+        "truckheight",
+        "Truck Height",
+        "Trucks",
+        height_buttons,
+        "Only when the name says low, mid, or high.",
+        sum(truck_height_counts.values()),
+    )
+    abec_section = _gated(
+        "abec",
+        "ABEC",
+        "Bearings",
+        abec_buttons,
+        "ABEC rating printed in the name.",
+        sum(abec_counts.values()),
+    )
     sidebar_html = (
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
@@ -1262,8 +1448,22 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<p class="count-note">Counts match the other filters '
         '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
         '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
-        "if you pick that store, type, brand, or width. It is not a total of everything tracked."
+        "if you pick that store, type, brand, width, or size. It is not a total of everything tracked."
         "</span></p>"
+        + _section(
+            "store",
+            "Store",
+            '<label class="field"><span class="sr-only">Store</span>'
+            f'<select id="storeSelect">{"".join(store_options)}</select></label>',
+            open_default=True,
+        )
+        + _section(
+            "type",
+            "Product Type",
+            '<label class="field"><span class="sr-only">Product type</span>'
+            f'<select id="partSelect">{"".join(part_options)}</select></label>',
+            open_default=True,
+        )
         + _section(
             "deals",
             "Deal Type",
@@ -1282,27 +1482,21 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "Day is today or yesterday.</p>",
             open_default=True,
         )
-        + _section(
-            "store",
-            "Store",
-            '<label class="field"><span class="sr-only">Store</span>'
-            f'<select id="storeSelect">{"".join(store_options)}</select></label>',
-            open_default=True,
-        )
-        + _section(
-            "type",
-            "Product Type",
-            '<label class="field"><span class="sr-only">Product type</span>'
-            f'<select id="partSelect">{"".join(part_options)}</select></label>',
-            open_default=True,
-        )
         + _section("brand", "Brand", brand_facet, open_default=True)
         + _section(
             "width",
             "Deck Width",
             '<div class="filter-group width-ranges" id="sizeFilters" role="group" aria-label="Deck width">'
             f'{"".join(chips)}</div>',
+            open_default=True,
+            for_part="Decks",
         )
+        + diameter_section
+        + duro_section
+        + shape_section
+        + truck_size_section
+        + truck_height_section
+        + abec_section
         + '<div class="more-filters" id="morePanel">'
         '<span class="sr-only">More filters</span>'
         + _section(
@@ -1335,8 +1529,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "</div>"
             + _dual_html("scoreMin", "scoreMax", 0, 100, "", "Any score", "Minimum score", "Maximum score"),
         )
-        + _section("length", "Length", length_select)
-        + _section("wheelbase", "Wheelbase", wheel_select)
+        + _section("length", "Length", length_select, for_part="Decks")
+        + _section("wheelbase", "Wheelbase", wheel_select, for_part="Decks")
         + "</div>"
         + _section(
             "views",
@@ -1637,6 +1831,12 @@ def _deal_attrs(record):
         f'data-score="{record["score"]["score"]}" data-rank="{record["rank"]}" '
         f'data-stage="{_attr(record.get("stage") or "")}" '
         f'data-length="{_attr(record["length_key"])}" data-wheelbase="{_attr(record["wheel_key"])}" '
+        f'data-diameter="{_attr(record.get("diameter") or "")}" '
+        f'data-duros="{_attr(",".join(record.get("duros") or []))}" '
+        f'data-shape="{_attr(record.get("shape") or "")}" '
+        f'data-trucksize="{_attr(record.get("truck_size") or "")}" '
+        f'data-truckheight="{_attr(record.get("truck_height") or "")}" '
+        f'data-abec="{_attr(record.get("abec") or "")}" '
         f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
         f'data-fresh="{1 if record.get("fresh") else 0}" data-back="{1 if record.get("back") else 0}" '

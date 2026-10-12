@@ -24,9 +24,25 @@ On the page, width ranges filter deck rows only. Wheels, trucks, and
 bearings stay visible when a range is selected. They drop out only when
 the type filter is also Decks. A deck with no parsed width does not fall
 in any bucket, so it is hidden while any range is selected.
+
+Wheel, truck, and bearing specs are the same kind of list. They are omitted
+when empty. ``diameter`` is a band id (``50-51``, ``52-53``, ``54-55``,
+``56+``). ``duro`` is a hardness token such as ``99a``. ``shape`` is
+``conical``, ``radial``, or ``sidecut``. ``trucksize`` is the size printed
+in the name. ``truckheight`` is ``low``, ``mid``, or ``high``. ``abec`` is
+the rating digits. Those filters apply only to their own part.
 """
 
 from urllib.parse import parse_qsl, urlencode
+
+from part_specs import (
+    ordered_abecs,
+    ordered_diameters,
+    ordered_duros,
+    ordered_heights,
+    ordered_shapes,
+    ordered_sizes,
+)
 
 
 class WidthRange(object):
@@ -160,6 +176,12 @@ def empty_state():
         "interval": "all",
         "kinds": [],
         "highlights": False,
+        "diameters": [],
+        "duros": [],
+        "shapes": [],
+        "truck_sizes": [],
+        "truck_heights": [],
+        "abecs": [],
     }
 
 
@@ -328,6 +350,18 @@ def decode_query(query):
             state["kinds"] = _ordered_kinds(str(value or "").split(","))
         elif key == "highlights":
             state["highlights"] = _flag(value)
+        elif key == "diameter":
+            state["diameters"] = ordered_diameters(str(value or "").split(","))
+        elif key == "duro":
+            state["duros"] = ordered_duros(str(value or "").split(","))
+        elif key == "shape":
+            state["shapes"] = ordered_shapes(str(value or "").split(","))
+        elif key == "trucksize":
+            state["truck_sizes"] = ordered_sizes(str(value or "").split(","))
+        elif key == "truckheight":
+            state["truck_heights"] = ordered_heights(str(value or "").split(","))
+        elif key == "abec":
+            state["abecs"] = ordered_abecs(str(value or "").split(","))
     return state
 
 
@@ -393,4 +427,22 @@ def encode_state(state):
         add("kinds", ",".join(kinds))
     if state.get("highlights"):
         add("highlights", "1")
+    diameters = ordered_diameters(state.get("diameters"))
+    if diameters:
+        add("diameter", ",".join(diameters))
+    duros = ordered_duros(state.get("duros"))
+    if duros:
+        add("duro", ",".join(duros))
+    shapes = ordered_shapes(state.get("shapes"))
+    if shapes:
+        add("shape", ",".join(shapes))
+    sizes = ordered_sizes(state.get("truck_sizes"))
+    if sizes:
+        add("trucksize", ",".join(sizes))
+    heights = ordered_heights(state.get("truck_heights"))
+    if heights:
+        add("truckheight", ",".join(heights))
+    abecs = ordered_abecs(state.get("abecs"))
+    if abecs:
+        add("abec", ",".join(abecs))
     return urlencode(pairs)
