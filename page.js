@@ -2900,8 +2900,18 @@ function init() {
             if (hover) placeFloat(hover, card, price);
             if (title) placeFloat(title, titleAnchor, price);
         };
-        card.addEventListener("mouseenter", place);
-        card.addEventListener("focusin", place);
+        card.addEventListener("mouseenter", () => {
+            card.classList.add("is-preview");
+            place();
+        });
+        card.addEventListener("mouseleave", () => card.classList.remove("is-preview"));
+        card.addEventListener("focusin", () => {
+            card.classList.add("is-preview");
+            place();
+        });
+        card.addEventListener("focusout", event => {
+            if (!card.contains(event.relatedTarget)) card.classList.remove("is-preview");
+        });
     });
     document.querySelectorAll(".spark-hit").forEach(button => {
         button.addEventListener("mousemove", event => {

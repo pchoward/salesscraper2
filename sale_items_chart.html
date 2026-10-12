@@ -1039,7 +1039,8 @@ th:hover .tip, th:focus-within .tip { display: block; }
     font-size: 0.75rem;
     line-height: 1.35;
 }
-.deal-card:hover .card-hover, .deal-card:focus-within .card-hover, .deal-card.show-detail .card-hover { display: block; }
+.deal-card:hover .card-hover, .deal-card:focus-within .card-hover,
+.deal-card.is-preview .card-hover, .deal-card.show-detail .card-hover { display: block; }
 .card-extra { font-size: 0.75rem; color: var(--text-secondary); }
 @media (max-width: 800px) {
     .shell {
@@ -1826,6 +1827,9 @@ select option:disabled { color: #94a3b8; }
 header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 .pill-newlow { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; font-weight: 800; }
 @media (max-width: 800px) {
+    html, body { overflow-x: hidden; }
+    .shell, .board { max-width: 100%; min-width: 0; }
+    .board { overflow-x: auto; }
     .nav-row { flex-wrap: nowrap; overflow: visible; gap: 0.45rem; padding: 0.08rem 0.4rem; }
     .nav-cluster, .nav-row .quick-row, .nav-row .quick-filters { flex-wrap: nowrap; }
     .tool-line { flex-wrap: nowrap; overflow-x: auto; }
@@ -5728,8 +5732,18 @@ function init() {
             if (hover) placeFloat(hover, card, price);
             if (title) placeFloat(title, titleAnchor, price);
         };
-        card.addEventListener("mouseenter", place);
-        card.addEventListener("focusin", place);
+        card.addEventListener("mouseenter", () => {
+            card.classList.add("is-preview");
+            place();
+        });
+        card.addEventListener("mouseleave", () => card.classList.remove("is-preview"));
+        card.addEventListener("focusin", () => {
+            card.classList.add("is-preview");
+            place();
+        });
+        card.addEventListener("focusout", event => {
+            if (!card.contains(event.relatedTarget)) card.classList.remove("is-preview");
+        });
     });
     document.querySelectorAll(".spark-hit").forEach(button => {
         button.addEventListener("mousemove", event => {
