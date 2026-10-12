@@ -220,6 +220,13 @@ function paintWidthChips() {
 function toggleWidthGroup(node) {
     const ids = widthGroupIds(node);
     if (!ids.length) return;
+    if ((state.part || "Decks") === "all") {
+        state.part = "Decks";
+        const select = document.getElementById("partSelect");
+        if (select) select.value = "Decks";
+        setPressed("#partFilters [data-part]", "data-part", "Decks");
+        syncTypeSections(true);
+    }
     const selected = {};
     (state.widths || []).forEach(id => { selected[id] = true; });
     const allOn = ids.every(id => selected[id]);
@@ -302,6 +309,20 @@ function orderSpecValues(stateKey, values) {
     return keys;
 }
 
+function activeSpecKeys(part) {
+    const current = part || "Decks";
+    if (current === "Decks") return ["widths", "length", "wheelbase"];
+    if (current === "Wheels") return ["diameters", "duros", "shapes"];
+    if (current === "Trucks") return ["truckSizes", "truckHeights", "constructions"];
+    if (current === "Bearings") return ["abecs"];
+    return [];
+}
+
+function specKeyActive(key, part) {
+    const current = part != null ? part : (state.part || "Decks");
+    return activeSpecKeys(current).indexOf(key) >= 0;
+}
+
 function specTokens(row, attr) {
     return String((row.dataset && row.dataset[attr]) || "").split(",").map(token => token.trim()).filter(Boolean);
 }
@@ -324,11 +345,13 @@ function syncTypeSections(expandSpec) {
     const specs = document.getElementById("productSpecs");
     const specsBody = document.getElementById("productSpecsBody");
     const brand = document.querySelector('[data-section="brand"]');
+    const specGroup = document.getElementById("specGroup");
     if (part === "all") {
         if (specs && specsBody && context) specsBody.appendChild(context);
         if (specs) specs.hidden = false;
     } else {
-        if (context && brand && brand.parentElement) brand.parentElement.insertBefore(context, brand);
+        if (context && specGroup) specGroup.insertBefore(context, specGroup.firstChild);
+        else if (context && brand && brand.parentElement) brand.parentElement.insertBefore(context, brand);
         if (specs) specs.hidden = true;
     }
     document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
@@ -548,15 +571,17 @@ function rowMatches(row, overrides) {
     if (state.search && !hay.includes(state.search)) return false;
     if (store !== "all" && (row.dataset.store || "") !== store) return false;
     if (part !== "all" && (row.dataset.part || "") !== part) return false;
-    if (!deckWidthAllowed(row, widths)) return false;
+    const viewPart = part || "Decks";
+    if (specKeyActive("widths", viewPart) && !deckWidthAllowed(row, widths)) return false;
     for (let specIndex = 0; specIndex < SPEC_FACETS.length; specIndex++) {
         const facet = SPEC_FACETS[specIndex];
+        if (!specKeyActive(facet.stateKey, viewPart)) continue;
         const selected = Object.prototype.hasOwnProperty.call(over, facet.stateKey) ? over[facet.stateKey] : state[facet.stateKey];
         if (!specAllowed(row, facet, selected)) return false;
     }
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
-    if (length !== "all" && (row.dataset.length || "") !== length) return false;
-    if (wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
+    if (specKeyActive("length", viewPart) && length !== "all" && (row.dataset.length || "") !== length) return false;
+    if (specKeyActive("wheelbase", viewPart) && wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
     const price = parseFloat(row.dataset.price);
     if (state.priceMin != null && !(price >= state.priceMin)) return false;
     if (state.priceMax != null && !(price <= state.priceMax)) return false;
@@ -2058,6 +2083,35 @@ const STORE_COLOR = {
 let chartWindow = 90;
 let chartId = "";
 
+function placeFloat(pop, anchor, avoid) {
+    if (!pop || !anchor) return;
+    const wasHidden = getComputedStyle(pop).display === "none";
+    if (wasHidden) pop.style.display = "block";
+    const popRect = pop.getBoundingClientRect();
+    const box = anchor.getBoundingClientRect();
+    const avoidBox = avoid ? avoid.getBoundingClientRect() : null;
+    const margin = 8;
+    let top = box.top - popRect.height - 6;
+    let left = Math.min(box.left, window.innerWidth - margin - popRect.width);
+    if (top < margin) top = box.bottom + 6;
+    if (left < margin) left = margin;
+    if (top + popRect.height > window.innerHeight - margin) {
+        top = Math.max(margin, window.innerHeight - margin - popRect.height);
+    }
+    if (avoidBox && top < avoidBox.bottom && (top + popRect.height) > avoidBox.top &&
+        left < avoidBox.right && (left + popRect.width) > avoidBox.left) {
+        const below = avoidBox.bottom + 6;
+        if (below + popRect.height <= window.innerHeight - margin) top = below;
+        else top = Math.max(margin, avoidBox.top - popRect.height - 6);
+    }
+    pop.style.position = "fixed";
+    pop.style.top = Math.round(top) + "px";
+    pop.style.left = Math.round(left) + "px";
+    pop.style.right = "auto";
+    pop.style.bottom = "auto";
+    if (wasHidden) pop.style.display = "";
+}
+
 function readLayout() {
     try {
         return localStorage.getItem(LAYOUT_KEY) === "cards" ? "cards" : "table";
@@ -2100,19 +2154,21 @@ function paintActiveChips() {
         });
     }
     const covered = {};
-    document.querySelectorAll("#sizeFilters .width-chip").forEach(node => {
-        const ids = widthGroupIds(node);
-        if (!ids.length || !ids.every(id => (state.widths || []).indexOf(id) >= 0)) return;
-        ids.forEach(id => { covered[id] = true; });
-        const labelNode = node.querySelector(".width-label");
-        const label = labelNode ? labelNode.textContent : ids.join(", ");
-        add(label, () => toggleWidthGroup(node));
-    });
-    (state.widths || []).forEach(id => {
-        if (covered[id]) return;
-        const range = widthRanges().find(item => item.id === id);
-        add(range ? range.label : id, () => toggleWidthRange(id));
-    });
+    if (specKeyActive("widths")) {
+        document.querySelectorAll("#sizeFilters .width-chip").forEach(node => {
+            const ids = widthGroupIds(node);
+            if (!ids.length || !ids.every(id => (state.widths || []).indexOf(id) >= 0)) return;
+            ids.forEach(id => { covered[id] = true; });
+            const labelNode = node.querySelector(".width-label");
+            const label = labelNode ? labelNode.textContent : ids.join(", ");
+            add(label, () => toggleWidthGroup(node));
+        });
+        (state.widths || []).forEach(id => {
+            if (covered[id]) return;
+            const range = widthRanges().find(item => item.id === id);
+            add(range ? range.label : id, () => toggleWidthRange(id));
+        });
+    }
     if (state.priceMin != null) {
         add("Min $" + numText(state.priceMin), () => {
             const node = document.getElementById("priceMin");
@@ -2163,14 +2219,14 @@ function paintActiveChips() {
             applyFilters();
         });
     }
-    if (state.length !== "all") {
+    if (specKeyActive("length") && state.length !== "all") {
         add("Length " + state.length, () => {
             setSelect("lengthSelect", "all");
             state.length = "all";
             applyFilters();
         });
     }
-    if (state.wheelbase !== "all") {
+    if (specKeyActive("wheelbase") && state.wheelbase !== "all") {
         add("Wheelbase " + state.wheelbase, () => {
             setSelect("wheelbaseSelect", "all");
             state.wheelbase = "all";
@@ -2187,6 +2243,7 @@ function paintActiveChips() {
         abecs: value => "ABEC " + value
     };
     SPEC_FACETS.forEach(facet => {
+        if (!specKeyActive(facet.stateKey)) return;
         (state[facet.stateKey] || []).forEach(value => {
             add(specLabels[facet.stateKey](value), () => toggleSpec(facet.stateKey, value));
         });
@@ -2812,13 +2869,39 @@ function init() {
     document.querySelectorAll(".price-btn").forEach(button => {
         button.addEventListener("click", () => openProduct(button.dataset.id));
     });
-    document.querySelectorAll(".score-btn").forEach(button => {
-        button.addEventListener("click", () => {
+    document.querySelectorAll(".score-btn, .score-info").forEach(button => {
+        button.addEventListener("click", event => {
+            event.stopPropagation();
             const cell = button.closest(".score-cell");
             if (!cell) return;
             const pinned = cell.classList.toggle("pinned");
-            button.setAttribute("aria-expanded", pinned ? "true" : "false");
+            cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
+                control.setAttribute("aria-expanded", pinned ? "true" : "false");
+            });
+            const why = cell.querySelector(".why");
+            if (pinned && why) placeFloat(why, button, null);
         });
+    });
+    document.querySelectorAll(".score-cell").forEach(cell => {
+        const place = () => {
+            const why = cell.querySelector(".why");
+            const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
+            if (why) placeFloat(why, anchor, null);
+        };
+        cell.addEventListener("mouseenter", place);
+        cell.addEventListener("focusin", place);
+    });
+    document.querySelectorAll(".deal-card").forEach(card => {
+        const place = () => {
+            const price = card.querySelector(".card-prices");
+            const hover = card.querySelector(".card-hover");
+            const title = card.querySelector(".title-pop");
+            const titleAnchor = card.querySelector(".title-slot") || card;
+            if (hover) placeFloat(hover, card, price);
+            if (title) placeFloat(title, titleAnchor, price);
+        };
+        card.addEventListener("mouseenter", place);
+        card.addEventListener("focusin", place);
     });
     document.querySelectorAll(".spark-hit").forEach(button => {
         button.addEventListener("mousemove", event => {

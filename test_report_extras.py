@@ -318,11 +318,18 @@ class ReportExtraTests(unittest.TestCase):
         self.assertLess(html.find('id="changeLine"'), html.find('<div class="rail">'))
         self.assertLess(html.find('id="storeFilters"'), html.find('id="partFilters"'))
         self.assertLess(html.find('id="partFilters"'), html.find('id="contextSpecs"'))
-        self.assertLess(html.find('data-section="width"'), html.find('data-section="brand"'))
+        self.assertLess(html.find('data-section="width"'), html.find('id="productSpecs"'))
+        self.assertLess(html.find('id="productSpecs"'), html.find('data-section="brand"'))
         self.assertLess(html.find('data-section="brand"'), html.find('data-section="price"'))
         self.assertLess(html.find('data-section="price"'), html.find('data-section="score"'))
-        self.assertLess(html.find('data-section="score"'), html.find('id="productSpecs"'))
-        self.assertLess(html.find('id="productSpecs"'), html.find('data-section="deals"'))
+        self.assertLess(html.find('data-section="score"'), html.find('data-section="deals"'))
+        self.assertIn('id="specGroup"', html)
+        self.assertIn('aria-label="Shopping filters"', html)
+        self.assertIn('aria-label="Deal intelligence"', html)
+        self.assertIn('aria-label="Personal tools"', html)
+        self.assertIn("function activeSpecKeys(", html)
+        self.assertIn("Historical low", html)
+        self.assertIn('aria-label="Score breakdown"', html)
         self.assertLess(html.find('data-section="deals"'), html.find('data-section="interval"'))
         self.assertIn("function syncTypeSections(", html)
         self.assertIn(".filter-section.is-type-hidden", html)
@@ -509,10 +516,35 @@ if (!pick || pick.cluster !== 0 || stores.chips[pick.index].value !== "CCS") {
 }
 stores.chips = [chip("all", true)];
 products.chips = [chip("all", false), chip("Decks", true)];
-if (nextNavOverflow([stores, products]) !== null) {
+        if (nextNavOverflow([stores, products]) !== null) {
     throw new Error("All and the selected chip stay on the row");
 }
 """
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_hidden_category_specs_do_not_apply(self):
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        start = source.find("function activeSpecKeys(")
+        end = source.find("function specKeyActive(")
+        self.assertGreater(start, 0)
+        self.assertGreater(end, start)
+        script = source[start:end] + """
+function same(left, right) {
+  if (left.length !== right.length) return false;
+  return left.every((value, index) => value === right[index]);
+}
+if (!same(activeSpecKeys("Decks"), ["widths", "length", "wheelbase"])) throw new Error("decks");
+if (!same(activeSpecKeys(), ["widths", "length", "wheelbase"])) throw new Error("default decks");
+if (!same(activeSpecKeys("Wheels"), ["diameters", "duros", "shapes"])) throw new Error("wheels");
+if (!same(activeSpecKeys("Trucks"), ["truckSizes", "truckHeights", "constructions"])) throw new Error("trucks");
+if (!same(activeSpecKeys("Bearings"), ["abecs"])) throw new Error("bearings");
+if (activeSpecKeys("all").length) throw new Error("all types hide category specs");
+const body = `%s`;
+if (body.indexOf("specKeyActive(\\"widths\\", viewPart)") < 0) throw new Error("width gate");
+if (body.indexOf("specKeyActive(\\"length\\", viewPart)") < 0) throw new Error("length gate");
+if (body.indexOf("if (!specKeyActive(facet.stateKey, viewPart)) continue;") < 0) throw new Error("spec gate");
+""" % source[source.find("function rowMatches("):source.find("function syncDetails(")]
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
 

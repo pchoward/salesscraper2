@@ -1593,12 +1593,20 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn filters-done" id="filtersClose">Show results</button></div>'
         '<div class="filter-head"><span>Filter deals</span>'
         '<button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div>'
+        + '<div class="side-group" id="specGroup" aria-label="Product specifications">'
         + context_specs
+        + '<section class="filter-section" id="productSpecs" data-section="specs" hidden>'
+        '<button type="button" class="section-toggle" aria-expanded="false" '
+        'aria-controls="productSpecsBody">Product specifications</button>'
+        '<div class="section-body" id="productSpecsBody">'
+        '<p class="section-note">Pick a spec to switch to that product type.</p>'
+        "</div></section>"
         + '<p class="count-note">Counts match current results '
         '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
         '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
         "if you pick that store, type, brand, width, or size. It is not a total of everything tracked."
-        "</span></p>"
+        "</span></p></div>"
+        + '<div class="side-group" aria-label="Shopping filters">'
         + _section("brand", "Brand", brand_facet, open_default=True)
         + '<div class="more-filters" id="morePanel">'
         '<span class="sr-only">More filters</span>'
@@ -1623,6 +1631,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "Minimum percent off", "Maximum percent off", suffix="%",
             ),
         )
+        + "</div></div>"
+        + '<div class="side-group" aria-label="Deal intelligence">'
         + _section(
             "score",
             "Deal quality",
@@ -1632,13 +1642,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "</div>"
             + _dual_html("scoreMin", "scoreMax", 0, 100, "", "Any score", "Minimum score", "Maximum score"),
         )
-        + "</div>"
-        + '<section class="filter-section" id="productSpecs" data-section="specs" hidden>'
-        '<button type="button" class="section-toggle" aria-expanded="false" '
-        'aria-controls="productSpecsBody">Product specifications</button>'
-        '<div class="section-body" id="productSpecsBody">'
-        '<p class="section-note">Pick a spec to switch to that product type.</p>'
-        "</div></section>"
         + _section(
             "deals",
             "Deal Type",
@@ -1655,6 +1658,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             '<p class="section-note">A drop is at least $2 or 5% below the previous tracked price. '
             "Day is today or yesterday.</p>",
         )
+        + "</div>"
+        + '<div class="side-group" aria-label="Personal tools">'
         + _section(
             "views",
             "Saved Views",
@@ -1681,6 +1686,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             '<button type="button" class="text-btn" id="bookmarkView">Bookmark this selection</button>'
             "</div>",
         )
+        + "</div>"
         + '<button type="button" class="text-btn show-results filters-done">Show results</button>'
         "</aside>"
     )
@@ -2016,10 +2022,13 @@ def _row_html(record):
         f'<td class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else "N/A"}</td>'
         f'<td><span class="discount {discount}">{escape(percent)}</span></td>'
         f'<td class="days-cell">{_trend_html(record.get("trend"))}{escape(record["held"])}</td>'
-        f'<td class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false">'
+        f'<td class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false" '
+        f'aria-controls="why-{record["id"]}">'
         f'{record["score"]["score"]}'
         + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")
-        + f'</button>{_why_html(record)}</td></tr>'
+        + '</button><button type="button" class="info-dot score-info" aria-expanded="false" '
+        f'aria-controls="why-{record["id"]}" aria-label="Score breakdown">i</button>'
+        f'{_why_html(record)}</td></tr>'
     )
 
 
@@ -2058,13 +2067,14 @@ def _low_mark(record):
     if record.get("lowest"):
         return (
             '<span class="quiet-low" '
-            'title="All-time low: at least 3 observations spanning 7 days">Verified low</span>'
+            'title="Lowest price since tracking began: at least 3 observations spanning 7 days. '
+            'This is not a price from before tracking.">Verified low</span>'
         )
     if record.get("at_tracked_low"):
         return (
             '<span class="quiet-low" '
-            'title="Current price equals the lowest price tracked so far. '
-            'It does not yet meet the 3-observation, 7-day rule.">'
+            'title="Matches the lowest price tracked so far. '
+            'It does not yet meet the 3-observation, 7-day rule, and says nothing about prices from before tracking.">'
             "At lowest tracked price</span>"
         )
     return ""
@@ -2143,7 +2153,7 @@ def _card_html(record):
             f"Average: {symbol}{float(average):.2f}</span>"
         )
     since = record.get("since_label") or ""
-    since_html = f'<p class="price-since">{escape(since)}</p>' if since else ""
+    since_html = f'<p class="price-since">{escape(since)}</p>'
     return (
         f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
@@ -2167,10 +2177,12 @@ def _card_html(record):
         f'<span class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else ""}</span></div>'
         f'<div class="row-meta">{_badge_html(_shown_badges(record), record["listed"])}'
         f'{_low_mark(record)}{_stage_html(record.get("stage"))}</div>'
-        f'<div class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false">'
+        f'<div class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false" '
+        f'aria-controls="why-card-{record["id"]}">'
         f'{record["score"]["score"]}'
         + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")
-        + f"</button>{why}</div>"
+        + '</button><button type="button" class="info-dot score-info" aria-expanded="false" '
+        f'aria-controls="why-card-{record["id"]}" aria-label="Score breakdown">i</button>{why}</div>'
         "</div></article>"
     )
 
@@ -2348,11 +2360,15 @@ def _why_html(record, dom_id=None):
         return generic
 
     factors = (
-        ("Discount depth", parts.get("discount") or 0, hint("Discount depth", "discount", "Percent off, max 50")),
+        ("Discount", parts.get("discount") or 0, hint("Discount", "discount", "Percent off, max 50")),
         (
-            "Lowest tracked price",
+            "Historical low",
             parts.get("lowest") or 0,
-            hint("Lowest tracked price", "lowest", "25 at the low, 18 within $1 or 3%, 10 within $2 or 5%"),
+            hint(
+                "Historical low",
+                "lowest",
+                "Points from the lowest price since tracking began. Not a price from before tracking.",
+            ),
         ),
         ("Recent drop", parts.get("drop") or 0, hint("Recent drop", "drop", "Up to 15, or 4 for a smaller dip")),
         ("Popular size", parts.get("size") or 0, hint("Popular size", "size", "10 when the deck is 8.25–8.75")),
@@ -2367,8 +2383,8 @@ def _why_html(record, dom_id=None):
     return (
         f'<div class="why" id="{escape(dom_id or "why-" + str(record["id"]), quote=True)}" role="tooltip">'
         f'<strong>Why {score["score"]}?</strong><ul>{"".join(rows)}</ul>'
-        "<p class=\"why-legend\">These four lines are the whole score. "
-        "Days tracked are not added. 70 or above is hot.</p></div>"
+        "<p class=\"why-legend\">Discount, historical low, recent drop, and popular size are the whole score. "
+        "Historical low uses only prices tracked here. Days tracked are not added. 70 or above is hot.</p></div>"
     )
 
 
