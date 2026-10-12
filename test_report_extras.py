@@ -1,7 +1,9 @@
 """Report wiring for charts, cards, filters, scores, and deals intelligence."""
 
 import json
+import subprocess
 import unittest
+from pathlib import Path
 
 from report import build_report_html
 
@@ -280,6 +282,20 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('class="sr-only" aria-label="Product type"', html)
         self.assertIn('id="moreStores" hidden', html)
         self.assertIn('id="moreParts" hidden', html)
+        self.assertIn('data-order="0" data-home="row" data-store="all"', html)
+        self.assertIn('data-order="0" data-home="row" data-part="all"', html)
+        rail = html.split('<div class="rail">', 1)[1].split('<div class="board">', 1)[0]
+        self.assertNotIn('id="storeFilters"', rail)
+        self.assertNotIn('id="partFilters"', rail)
+        self.assertNotIn("quick-chip", rail)
+        self.assertNotIn(">All stores<", rail)
+        self.assertNotIn(">Stores<", rail)
+        self.assertNotIn(">Products<", rail)
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        nav_css = style.split(".nav-row {", 1)[1].split("}", 1)[0]
+        self.assertIn("flex-wrap: nowrap", nav_css)
+        self.assertIn("function nextNavOverflow(", html)
+        self.assertIn("function fitNavPills(", html)
         self.assertIn('id="productSpecs"', html)
         self.assertIn("Pick a spec to switch to that product type.", html)
         self.assertIn('class="filter-section is-open" data-section="brand"', html)
@@ -463,6 +479,39 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn(">New low<", card)
         self.assertNotIn("Verified low", card)
         self.assertIn('data-kind="highlights"', html)
+
+    def test_nav_overflow_keeps_all_and_the_selected_chip(self):
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        start = source.find("function nextNavOverflow(")
+        end = source.find("function navClusters(")
+        self.assertGreater(start, 0)
+        self.assertGreater(end, start)
+        script = source[start:end] + """
+const chip = (value, pressed) => ({value: value, pressed: !!pressed});
+const stores = {chips: ["all","Zumiez","Tactics","SkateWarehouse","CCS"].map(value => chip(value, value === "all"))};
+const products = {chips: ["all","Decks","Trucks","Wheels"].map(value => chip(value, value === "Decks"))};
+let pick = nextNavOverflow([stores, products]);
+if (!pick || pick.cluster !== 1 || products.chips[pick.index].value !== "Wheels") {
+    throw new Error("expected Wheels first, got " + JSON.stringify(pick));
+}
+products.chips = ["all","Decks","Trucks","Wheels"].map(value => chip(value, value === "Wheels"));
+pick = nextNavOverflow([stores, products]);
+if (!pick || products.chips[pick.index].value !== "Trucks") {
+    throw new Error("expected Trucks before a pressed Wheels chip");
+}
+products.chips = ["all","Decks"].map(value => chip(value, value === "Decks"));
+pick = nextNavOverflow([stores, products]);
+if (!pick || pick.cluster !== 0 || stores.chips[pick.index].value !== "CCS") {
+    throw new Error("expected CCS once products cannot shrink");
+}
+stores.chips = [chip("all", true)];
+products.chips = [chip("all", false), chip("Decks", true)];
+if (nextNavOverflow([stores, products]) !== null) {
+    throw new Error("All and the selected chip stay on the row");
+}
+"""
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
 
 
 if __name__ == "__main__":

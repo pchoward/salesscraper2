@@ -450,6 +450,7 @@ function paintFacetCounts() {
     paintSelectCounts("partSelect", partCounts);
     paintQuickRow("storeFilters", "data-store", storeCounts, state.store || "all");
     paintQuickRow("partFilters", "data-part", partCounts, state.part || "Decks");
+    fitNavPills();
     paintTypeHint();
     paintSelectCounts("lengthSelect", lengthCounts);
     paintSelectCounts("wheelbaseSelect", wheelCounts);
@@ -861,6 +862,96 @@ function paintQuickRow(groupId, attr, counts, current) {
         node.classList.toggle("is-zero", count === 0);
         node.setAttribute("data-count", String(count));
     });
+}
+
+function nextNavOverflow(clusters) {
+    const groups = clusters || [];
+    for (let i = groups.length - 1; i >= 0; i -= 1) {
+        const chips = groups[i].chips || [];
+        if (chips.length <= 1) continue;
+        for (let j = chips.length - 1; j >= 0; j -= 1) {
+            const chip = chips[j];
+            if (!chip || chip.pressed || chip.value === "all") continue;
+            return { cluster: i, index: j };
+        }
+    }
+    return null;
+}
+
+function navClusters() {
+    return ["storeFilters", "partFilters"].map(id => {
+        const root = document.getElementById(id);
+        if (!root) return null;
+        const row = root.querySelector(".quick-row");
+        const menu = root.querySelector(".more-menu");
+        const list = root.querySelector(".more-list");
+        if (!row || !menu || !list) return null;
+        return { root: root, row: row, menu: menu, list: list };
+    }).filter(Boolean);
+}
+
+function restoreNavHomes(cluster) {
+    const chips = Array.from(cluster.root.querySelectorAll(".quick-chip"));
+    chips.sort((a, b) => Number(a.getAttribute("data-order") || 0) - Number(b.getAttribute("data-order") || 0));
+    chips.forEach(chip => {
+        if (chip.getAttribute("data-home") === "more") cluster.list.appendChild(chip);
+        else cluster.row.insertBefore(chip, cluster.menu);
+    });
+}
+
+function syncNavMore(cluster) {
+    const count = cluster.list.querySelectorAll(":scope > .quick-chip").length;
+    const toggle = cluster.menu.querySelector(".more-toggle");
+    if (!count) {
+        cluster.menu.hidden = true;
+        cluster.list.hidden = true;
+        if (toggle) toggle.setAttribute("aria-expanded", "false");
+        return;
+    }
+    cluster.menu.hidden = false;
+}
+
+function pullPressedNavChip(cluster) {
+    const pressed = cluster.list.querySelector('.quick-chip[aria-pressed="true"]');
+    if (pressed) cluster.row.insertBefore(pressed, cluster.menu);
+}
+
+let navFitLock = false;
+
+function fitNavPills() {
+    const bar = document.getElementById("navPills");
+    if (!bar || navFitLock) return;
+    const clusters = navClusters();
+    if (!clusters.length) return;
+    navFitLock = true;
+    try {
+        clusters.forEach(restoreNavHomes);
+        clusters.forEach(syncNavMore);
+        const settle = () => {
+            let guard = 0;
+            while (bar.clientWidth > 0 && bar.scrollWidth > bar.clientWidth + 1 && guard < 40) {
+                guard += 1;
+                const choice = nextNavOverflow(clusters.map(cluster => ({
+                    chips: Array.from(cluster.row.querySelectorAll(":scope > .quick-chip")).map(chip => ({
+                        value: chip.getAttribute("data-store") || chip.getAttribute("data-part") || "",
+                        pressed: chip.getAttribute("aria-pressed") === "true",
+                    })),
+                })));
+                if (!choice) return;
+                const cluster = clusters[choice.cluster];
+                const chip = cluster.row.querySelectorAll(":scope > .quick-chip")[choice.index];
+                if (!chip) return;
+                cluster.list.appendChild(chip);
+                syncNavMore(cluster);
+            }
+        };
+        settle();
+        clusters.forEach(pullPressedNavChip);
+        clusters.forEach(syncNavMore);
+        settle();
+    } finally {
+        navFitLock = false;
+    }
 }
 
 function paintTypeHint() {
@@ -2613,10 +2704,25 @@ function init() {
             const list = document.getElementById(button.getAttribute("aria-controls") || "");
             if (!list) return;
             const open = list.hidden;
+            document.querySelectorAll(".more-list").forEach(other => { other.hidden = true; });
+            document.querySelectorAll(".more-toggle").forEach(other => {
+                other.setAttribute("aria-expanded", "false");
+            });
             list.hidden = !open;
             button.setAttribute("aria-expanded", open ? "true" : "false");
         });
     });
+    document.addEventListener("click", event => {
+        if (event.target.closest(".more-menu")) return;
+        document.querySelectorAll(".more-list").forEach(list => { list.hidden = true; });
+        document.querySelectorAll(".more-toggle").forEach(button => {
+            button.setAttribute("aria-expanded", "false");
+        });
+    });
+    const navPills = document.getElementById("navPills");
+    if (navPills && window.ResizeObserver) new ResizeObserver(fitNavPills).observe(navPills);
+    else window.addEventListener("resize", fitNavPills);
+    fitNavPills();
     const brand = document.getElementById("brandSelect");
     if (brand) brand.addEventListener("change", applyFilters);
     const brandList = document.getElementById("brandList");

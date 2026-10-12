@@ -1480,12 +1480,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         sum(construction_counts.values()),
     )
 
-    def _quick_chip(attr, value, label, count, pressed=False):
+    def _quick_chip(attr, value, label, count, pressed=False, order=0, home="row"):
         on = "true" if pressed else "false"
         active = " active" if pressed else ""
         zero = " is-zero" if count == 0 else ""
         return (
             f'<button type="button" class="chip quick-chip{active}{zero}" '
+            f'data-order="{order}" data-home="{home}" '
             f'data-{attr}="{escape(str(value), quote=True)}" data-count="{count}" '
             f'aria-pressed="{on}">'
             f'<span class="quick-name">{escape(str(label))}</span>'
@@ -1505,12 +1506,20 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
 
     primary_stores = ("Zumiez", "Tactics", "SkateWarehouse", "CCS")
     store_total = sum(store_counts.values())
-    store_buttons = [_quick_chip("store", "all", "All stores", store_total, pressed=True)]
+    store_buttons = [_quick_chip("store", "all", "All stores", store_total, pressed=True, order=0)]
     for store in primary_stores:
         if store in store_counts:
-            store_buttons.append(_quick_chip("store", store, store, store_counts[store]))
+            store_buttons.append(
+                _quick_chip("store", store, store, store_counts[store], order=len(store_buttons))
+            )
     extra_stores = [store for store in sorted(store_counts) if store not in primary_stores]
-    store_more = [_quick_chip("store", store, store, store_counts[store]) for store in extra_stores]
+    store_more = [
+        _quick_chip(
+            "store", store, store, store_counts[store],
+            order=len(store_buttons) + index, home="more",
+        )
+        for index, store in enumerate(extra_stores)
+    ]
     store_row = (
         '<div class="nav-cluster quick-filters" id="storeFilters">'
         '<span class="quick-label">Stores</span>'
@@ -1523,14 +1532,17 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     )
     part_order = ("Decks", "Trucks", "Wheels", "Bearings", "Completes")
     part_total = sum(part_counts.values())
-    part_buttons = [_quick_chip("part", "all", "All", part_total)]
+    part_buttons = [_quick_chip("part", "all", "All", part_total, order=0)]
     shown_parts = []
     for part in part_order:
         if part not in part_counts and part != "Decks":
             continue
         shown_parts.append(part)
         part_buttons.append(
-            _quick_chip("part", part, part, part_counts.get(part, 0), pressed=(part == "Decks"))
+            _quick_chip(
+                "part", part, part, part_counts.get(part, 0),
+                pressed=(part == "Decks"), order=len(part_buttons),
+            )
         )
     extra_parts = [part for part in sorted(part_counts) if part not in shown_parts]
     for part in extra_parts:
@@ -1538,7 +1550,11 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             _option(part, f"{part} ({part_counts.get(part, 0)})", data_label=part)
         )
     part_more = [
-        _quick_chip("part", part, part, part_counts.get(part, 0)) for part in extra_parts
+        _quick_chip(
+            "part", part, part, part_counts.get(part, 0),
+            order=len(part_buttons) + index, home="more",
+        )
+        for index, part in enumerate(extra_parts)
     ]
     part_row = (
         '<div class="nav-cluster quick-filters" id="partFilters">'
