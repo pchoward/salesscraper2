@@ -15,6 +15,7 @@ let state = {
     grouped: false,
     dropInterval: "all",
     kinds: [],
+    highlights: false,
     visitMode: "yesterday",
     sortKey: "rank",
     sortDir: "asc",
@@ -193,16 +194,42 @@ function deckWidthAllowed(row, widths) {
     });
 }
 
+function widthGroupIds(node) {
+    return String((node && node.getAttribute("data-buckets")) || "").split(",").filter(Boolean);
+}
+
 function paintWidthChips() {
     const selected = {};
     (state.widths || []).forEach(id => { selected[id] = true; });
-    const allOn = !(state.widths || []).length;
-    document.querySelectorAll("#sizeFilters .chip").forEach(node => {
-        const id = node.getAttribute("data-range") || "";
-        const on = id === "all" ? allOn : !!selected[id];
+    document.querySelectorAll("#sizeFilters .width-chip").forEach(node => {
+        const ids = widthGroupIds(node);
+        const on = ids.length > 0 && ids.every(id => selected[id]);
         node.classList.toggle("active", on);
-        if (node.hasAttribute("aria-pressed")) node.setAttribute("aria-pressed", on ? "true" : "false");
+        node.classList.toggle("is-partial", !on && ids.some(id => selected[id]));
+        node.setAttribute("aria-pressed", on ? "true" : "false");
     });
+}
+
+function toggleWidthGroup(node) {
+    const ids = widthGroupIds(node);
+    if (!ids.length) return;
+    const selected = {};
+    (state.widths || []).forEach(id => { selected[id] = true; });
+    const allOn = ids.every(id => selected[id]);
+    ids.forEach(id => {
+        if (allOn) delete selected[id];
+        else selected[id] = true;
+    });
+    state.widths = orderedWidths(Object.keys(selected));
+    paintWidthChips();
+    applyFilters();
+}
+
+function syncDeckWidthSection() {
+    const section = document.querySelector('.filter-section[data-section="width"]');
+    if (!section) return;
+    paintFilterSection(section, state.part === "Decks");
+    rememberFilterSections();
 }
 
 function filterBrandList(query) {
@@ -281,13 +308,11 @@ function paintFacetCounts() {
         node.classList.toggle("is-zero", count === 0);
         node.setAttribute("data-count", String(count));
     });
-    document.querySelectorAll("#sizeFilters .chip").forEach(node => {
-        const id = node.getAttribute("data-range") || "";
-        if (!id || id === "all") return;
-        const count = widthCounts[id] || 0;
-        const range = widthRanges().find(item => item.id === id);
-        const label = range ? range.label : id;
-        node.textContent = label + " (" + count + ")";
+    document.querySelectorAll("#sizeFilters .width-chip").forEach(node => {
+        let count = 0;
+        widthGroupIds(node).forEach(id => { count += widthCounts[id] || 0; });
+        const slot = node.querySelector(".width-count");
+        if (slot) slot.textContent = String(count);
         node.classList.toggle("is-zero", count === 0);
         node.setAttribute("data-count", String(count));
     });
@@ -384,6 +409,8 @@ function rowMatches(row, overrides) {
     if (watching && row.dataset.starred !== "1") return false;
     const kinds = Object.prototype.hasOwnProperty.call(over, "kinds") ? over.kinds : state.kinds;
     if (!kindMatch(row, kinds)) return false;
+    const highlights = Object.prototype.hasOwnProperty.call(over, "highlights") ? over.highlights : state.highlights;
+    if (highlights && row.dataset.highlight !== "1") return false;
     const interval = over.interval != null ? over.interval : state.dropInterval;
     if (!dropInInterval(row, interval)) return false;
     if (state.cardNew && row.dataset.added !== "1") return false;
@@ -480,7 +507,7 @@ function applyFilters() {
 
 function paintKeepaCounts() {
     const intervalCounts = { all: 0, day: 0, week: 0, month: 0, quarter: 0 };
-    const kindCounts = { new: 0, drop: 0, low: 0, back: 0, hot: 0, watch: 0 };
+    const kindCounts = { new: 0, drop: 0, low: 0, back: 0, hot: 0, watch: 0, highlights: 0 };
     let categoryAll = 0;
     const categoryCounts = {};
     dealRows().forEach(row => {
@@ -498,6 +525,7 @@ function paintKeepaCounts() {
             if (row.dataset.hot === "1") kindCounts.hot += 1;
         }
         if (row.dataset.starred === "1" && rowMatches(row, { watching: false })) kindCounts.watch += 1;
+        if (row.dataset.highlight === "1" && rowMatches(row, { highlights: false })) kindCounts.highlights += 1;
         if (rowMatches(row, { part: "all" })) {
             categoryAll += 1;
             const part = row.dataset.part || "";
@@ -516,7 +544,7 @@ function paintKeepaCounts() {
         const key = button.getAttribute("data-kind") || "";
         const slot = button.querySelector(".facet-count");
         if (slot) slot.textContent = "(" + (kindCounts[key] || 0) + ")";
-        const on = key === "watch" ? !!state.watching : (state.kinds || []).indexOf(key) >= 0;
+        const on = key === "watch" ? !!state.watching : key === "highlights" ? !!state.highlights : (state.kinds || []).indexOf(key) >= 0;
         button.setAttribute("aria-pressed", on ? "true" : "false");
         button.classList.toggle("is-zero", !(kindCounts[key]));
     });
@@ -537,6 +565,11 @@ function setDropInterval(key) {
 function toggleDealType(kind) {
     if (kind === "watch") {
         toggleWatching();
+        return;
+    }
+    if (kind === "highlights") {
+        state.highlights = !state.highlights;
+        applyFilters();
         return;
     }
     if (DEAL_KINDS.indexOf(kind) < 0) return;
@@ -663,6 +696,7 @@ function filterByPart(part) {
     const select = document.getElementById("partSelect");
     if (select) select.value = state.part;
     setPressed("#partFilters .filter-btn", "data-part", state.part);
+    syncDeckWidthSection();
     applyFilters();
 }
 
@@ -1000,10 +1034,8 @@ function toggleWatching() {
 function toggleStats() {
     const panel = document.getElementById("statsPanel");
     const button = document.getElementById("statsToggle");
-    const highlights = document.getElementById("highlights");
     if (!panel) return;
     panel.hidden = !panel.hidden;
-    if (!panel.hidden && highlights) highlights.open = true;
     if (button) button.setAttribute("aria-pressed", panel.hidden ? "false" : "true");
     if (!panel.hidden) panel.scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -1023,6 +1055,7 @@ function clearFilters() {
         grouped: state.grouped,
         dropInterval: "all",
         kinds: [],
+        highlights: false,
         visitMode: state.visitMode,
         sortKey: "rank",
         sortDir: "asc",
@@ -1049,6 +1082,7 @@ function clearFilters() {
     setPressed("#storeFilters .filter-btn", "data-store", "all");
     setPressed("#partFilters .filter-btn", "data-part", "all");
     paintWidthChips();
+    syncDeckWidthSection();
     sortBy("rank", "asc");
     applyFilters();
 }
@@ -1193,7 +1227,8 @@ function decodeQuery(query) {
         dropped: false,
         grouped: false,
         interval: "all",
-        kinds: []
+        kinds: [],
+        highlights: false
     };
     const text = String(query || "").replace(/^\?/, "");
     if (!text) return stateOut;
@@ -1235,7 +1270,7 @@ function decodeQuery(query) {
                 if (DEAL_KINDS.indexOf(kind) >= 0) chosen[kind] = true;
             });
             stateOut.kinds = DEAL_KINDS.filter(kind => chosen[kind]);
-        }
+        } else if (key === "highlights") stateOut.highlights = flagOn(value);
     });
     ["min", "max", "discount", "discountmax", "scoremin", "scoremax"].forEach(key => {
         if (!Number.isFinite(stateOut[key])) stateOut[key] = null;
@@ -1275,6 +1310,7 @@ function encodeState(snapshot) {
     if (snapshot.interval && DROP_INTERVALS[snapshot.interval]) add("interval", snapshot.interval);
     const kinds = DEAL_KINDS.filter(kind => (snapshot.kinds || []).indexOf(kind) >= 0);
     if (kinds.length) add("kinds", kinds.join(","));
+    if (snapshot.highlights) add("highlights", "1");
     return params.toString();
 }
 
@@ -1303,7 +1339,8 @@ function captureState() {
         dropped: state.cardDrop,
         grouped: state.grouped,
         interval: state.dropInterval || "all",
-        kinds: (state.kinds || []).slice()
+        kinds: (state.kinds || []).slice(),
+        highlights: !!state.highlights
     };
 }
 
@@ -1343,6 +1380,7 @@ function writeControls(snapshot) {
     fill("discountMax", snapshot.discountmax);
     fill("scoreMin", snapshot.scoremin);
     fill("scoreMax", snapshot.scoremax);
+    const partChanged = (snapshot.part || "all") !== (state.part || "all");
     state.store = snapshot.store || "all";
     state.part = snapshot.part || "all";
     state.widths = orderedWidths(snapshot.widths || []);
@@ -1359,6 +1397,8 @@ function writeControls(snapshot) {
     state.cardDrop = !!snapshot.dropped;
     state.dropInterval = snapshot.interval && DROP_INTERVALS[snapshot.interval] ? snapshot.interval : "all";
     state.kinds = DEAL_KINDS.filter(kind => (snapshot.kinds || []).indexOf(kind) >= 0);
+    state.highlights = !!snapshot.highlights;
+    if (partChanged) syncDeckWidthSection();
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
     const grouped = document.getElementById("groupToggle");
@@ -1719,7 +1759,17 @@ function paintActiveChips() {
             applyFilters();
         });
     }
+    const covered = {};
+    document.querySelectorAll("#sizeFilters .width-chip").forEach(node => {
+        const ids = widthGroupIds(node);
+        if (!ids.length || !ids.every(id => (state.widths || []).indexOf(id) >= 0)) return;
+        ids.forEach(id => { covered[id] = true; });
+        const labelNode = node.querySelector(".width-label");
+        const label = labelNode ? labelNode.textContent : ids.join(", ");
+        add(label, () => toggleWidthGroup(node));
+    });
     (state.widths || []).forEach(id => {
+        if (covered[id]) return;
         const range = widthRanges().find(item => item.id === id);
         add(range ? range.label : id, () => toggleWidthRange(id));
     });
@@ -1787,6 +1837,7 @@ function paintActiveChips() {
             applyFilters();
         });
     }
+    if (state.highlights) add("Highlights", () => toggleDealType("highlights"));
     if (state.watching) add("Watching", () => toggleWatching());
     if (state.cardNew) add("New deals", () => toggleCard("new"));
     if (state.cardDrop) add("Price drops", () => toggleCard("drop"));
@@ -1796,11 +1847,14 @@ function paintActiveChips() {
     if (state.change === "lowest") add("New lows", () => setChange("all"));
     if (state.change === "removed") add("Deals disappeared", () => setChange("all"));
     host.innerHTML = "";
+    const wrap = document.getElementById("activeFilters");
     if (!chips.length) {
         host.hidden = true;
+        if (wrap) wrap.hidden = true;
         return;
     }
     host.hidden = false;
+    if (wrap) wrap.hidden = false;
     chips.forEach(chip => {
         const button = document.createElement("button");
         button.type = "button";
@@ -2225,12 +2279,10 @@ function showTrack() {
 
 function showInsights() {
     navMode = "insights";
-    const box = document.getElementById("highlights");
-    if (box) box.open = true;
     const panel = document.getElementById("statsPanel");
     const toggle = document.getElementById("statsToggle");
     if (panel && panel.hidden && toggle) toggle.click();
-    else if (box) box.scrollIntoView({ block: "start" });
+    else if (panel) panel.scrollIntoView({ block: "start" });
     paintNav();
 }
 
@@ -2293,16 +2345,6 @@ function init() {
     const brandSearch = document.getElementById("brandSearch");
     if (brandSearch) {
         brandSearch.addEventListener("input", () => filterBrandList(brandSearch.value));
-    }
-    const brandMore = document.getElementById("brandMore");
-    if (brandMore) {
-        brandMore.addEventListener("click", () => {
-            const facet = document.getElementById("brandFacet");
-            if (!facet) return;
-            const open = facet.classList.toggle("is-open");
-            brandMore.setAttribute("aria-expanded", open ? "true" : "false");
-            brandMore.textContent = open ? "Show less" : "Show more";
-        });
     }
     const length = document.getElementById("lengthSelect");
     if (length) length.addEventListener("change", applyFilters);
@@ -2448,6 +2490,23 @@ function init() {
             toggleDealType(button.getAttribute("data-kind") || "");
         });
     }
+    const sizeFilters = document.getElementById("sizeFilters");
+    if (sizeFilters) {
+        sizeFilters.addEventListener("click", event => {
+            const button = event.target.closest(".width-chip");
+            if (!button || !sizeFilters.contains(button)) return;
+            toggleWidthGroup(button);
+        });
+    }
+    document.querySelectorAll(".filters-done").forEach(button => {
+        if (button.id === "filtersClose") return;
+        button.addEventListener("click", () => setFilters(false));
+    });
+    document.addEventListener("click", event => {
+        if (!filterDrawer || !filterDrawer.classList.contains("is-open")) return;
+        if (event.target.closest("#filterDrawer, #filtersOpen")) return;
+        setFilters(false);
+    });
     wireDuals();
     const layoutTable = document.getElementById("layoutTable");
     const layoutCards = document.getElementById("layoutCards");
