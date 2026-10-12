@@ -37,6 +37,10 @@ AXLE_SIZES = frozenset({"5.0", "5.2", "5.6", "5.8", "6.1"})
 
 HEIGHTS = ("low", "mid", "high")
 HEIGHT_LABELS = {"low": "Low", "mid": "Mid", "high": "High"}
+# Only words the name prints. Hollow and Standard are construction. Lights,
+# titanium, and forged are product lines or too rare to treat as one.
+CONSTRUCTIONS = ("hollow", "standard")
+CONSTRUCTION_LABELS = {"hollow": "Hollow", "standard": "Standard"}
 
 _MM_RE = re.compile(r"\b(\d{2}(?:\.\d)?)\s*mm\b", re.IGNORECASE)
 # "51 (99d)" prints the diameter beside the durometer, without "mm".
@@ -56,6 +60,7 @@ _INCH_RE = re.compile(
 )
 _AXLE_RE = re.compile(r"\b(5\.0|5\.2|5\.6|5\.8|6\.1)\b")
 _HEIGHT_RE = re.compile(r"\b(low|mid|high)\b", re.IGNORECASE)
+_CONSTRUCTION_RE = re.compile(r"\b(hollows?|standard)\b", re.IGNORECASE)
 _ABEC_RE = re.compile(r"\babec[\s\-]?(\d{1,2})\b", re.IGNORECASE)
 _SIZE_TOKEN = re.compile(r"^(?:\d{2,3}|\d{1,2}\.\d+)$")
 _ABEC_TOKEN = re.compile(r"^\d{1,2}$")
@@ -161,6 +166,9 @@ def truck_specs(name):
     Ace size code when the name says Ace, then a known axle decimal such as
     5.6. Stage 11, a percent, and the word Hollow are not sizes or heights.
     Two different sizes of the same kind leave the size blank.
+
+    Construction is Hollow or Standard only when that word is printed. A name
+    that says both stays blank. Lights, titanium, and forged are not construction.
     """
     text = str(name or "")
     size = ""
@@ -184,7 +192,14 @@ def truck_specs(name):
                 size = format_decimal_size(axles[0])
     found = _HEIGHT_RE.search(text)
     height = found.group(1).lower() if found else ""
-    return {"size": size, "height": height}
+    kinds = []
+    for match in _CONSTRUCTION_RE.finditer(text):
+        word = match.group(1).lower()
+        token = "hollow" if word.startswith("hollow") else "standard"
+        if token not in kinds:
+            kinds.append(token)
+    construction = kinds[0] if len(kinds) == 1 else ""
+    return {"size": size, "height": height, "construction": construction}
 
 
 def bearing_specs(name):
@@ -239,6 +254,11 @@ def ordered_shapes(values):
 def ordered_heights(values):
     chosen = {str(value or "").strip().lower() for value in (values or [])}
     return [height for height in HEIGHTS if height in chosen]
+
+
+def ordered_constructions(values):
+    chosen = {str(value or "").strip().lower() for value in (values or [])}
+    return [kind for kind in CONSTRUCTIONS if kind in chosen]
 
 
 def ordered_duros(values):
