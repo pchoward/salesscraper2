@@ -334,6 +334,10 @@ class QueryStateTests(unittest.TestCase):
         self.assertEqual(decode_query("interval=nope&kinds=nope")["interval"], "all")
         self.assertEqual(decode_query("interval=nope&kinds=nope")["kinds"], [])
         self.assertEqual(encode_state({}), "")
+        highlighted = decode_query("highlights=1")
+        self.assertTrue(highlighted["highlights"])
+        self.assertIn("highlights=1", encode_state(highlighted))
+        self.assertFalse(decode_query("")["highlights"])
 
 
 class ReportPolishTests(unittest.TestCase):
@@ -371,8 +375,9 @@ class ReportPolishTests(unittest.TestCase):
         self.assertIn("d @ $", html)
         self.assertIn("Why ", html)
         self.assertIn("More filters", html)
-        self.assertIn("Width range", html)
-        self.assertIn("10.0+", html)
+        self.assertIn("Deck Width", html)
+        self.assertIn('data-buckets="10up"', html)
+        self.assertIn("10.0&quot; and wider", html)
         self.assertNotIn('id="widthSelect"', html)
         self.assertIn("Save view", html)
         self.assertIn("Recently gone", html)
@@ -400,12 +405,18 @@ class ReportPolishTests(unittest.TestCase):
             {},
             generated_at="2026-10-01T15:03:16+00:00",
         )
-        self.assertIn("9.5 - 10.0 (1)", html)
-        self.assertIn("10.0+ (0)", html)
-        self.assertIn('data-range="9.5-10.0"', html)
-        self.assertIn('class="chip is-zero" data-range="10up"', html)
-        self.assertIn('data-range="all"', html)
-        self.assertIn(">All</button>", html)
+        self.assertIn('data-buckets="9.0-9.25,9.25-9.5,9.5-10.0"', html)
+        self.assertIn('title="9.0&quot; up to but not including 10.0&quot;"', html)
+        nine = html.split('data-buckets="9.0-9.25,9.25-9.5,9.5-10.0"', 1)[1].split("</button>", 1)[0]
+        self.assertIn(">1</span>", nine)
+        ten = html.split('data-buckets="10up"', 1)[1].split("</button>", 1)[0]
+        self.assertIn('class="chip width-chip is-zero"', html.split('data-buckets="10up"', 1)[0][-80:])
+        self.assertIn(">0</span>", ten)
+        self.assertIn('title="7.5&quot; up to but not including 7.75&quot;"', html)
+        self.assertIn('title="8.0&quot; up to but not including 8.25&quot;"', html)
+        self.assertNotIn('data-buckets="lt7"', html)
+        self.assertNotIn('data-buckets="7.0-7.25"', html)
+        self.assertIn("const WIDTH_RANGES = ", html)
         self.assertNotIn("All widths", html)
         self.assertNotIn("Width min", html)
         self.assertIn("const WIDTH_RANGES = ", html)

@@ -1067,6 +1067,14 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     except Exception as exc:
         logger.error("Deals intelligence failed: %s", exc)
         intel = intelligence_summary([], {})
+    highlight_urls = set()
+    for deal in list(intel.get("new_deals") or []) + list(intel.get("biggest_drops") or []):
+        if isinstance(deal, dict):
+            url = normalize_url(deal.get("url") or "")
+            if url:
+                highlight_urls.add(url)
+    for record in records:
+        record["highlight"] = record.get("url") in highlight_urls
 
     header_class = "is-stale" if fresh.get("stale") else ""
     if fresh.get("failed"):
@@ -1133,20 +1141,29 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             '<label class="field"><span>Wheelbase</span>'
             f'<select id="wheelbaseSelect">{"".join(options)}</select></label>'
         )
-    chips = [
-        '<button type="button" class="chip active" data-range="all" aria-pressed="true" '
-        "onclick=\"toggleWidthRange('all')\">All</button>"
-    ]
-    for bucket in WIDTH_RANGES:
-        count = range_counts[bucket.id]
+    # Compact labels over the existing half-open buckets. Low is inclusive
+    # and high is exclusive. Buckets under 7.5" stay in WIDTH_RANGES for
+    # older links, and they are not shown as buttons.
+    width_groups = (
+        ("7.5", '7.5" up to but not including 7.75"', ("7.5-7.75",)),
+        ("7.75", '7.75" up to but not including 8.0"', ("7.75-8.0",)),
+        ("8.0", '8.0" up to but not including 8.25"', ("8.0-8.125", "8.125-8.25")),
+        ("8.25", '8.25" up to but not including 8.5"', ("8.25-8.375", "8.375-8.5")),
+        ("8.5", '8.5" up to but not including 8.75"', ("8.5-8.75",)),
+        ("8.75", '8.75" up to but not including 9.0"', ("8.75-9.0",)),
+        ("9.0", '9.0" up to but not including 10.0"', ("9.0-9.25", "9.25-9.5", "9.5-10.0")),
+        ("10+", '10.0" and wider', ("10up",)),
+    )
+    chips = []
+    for label, tip, bucket_ids in width_groups:
+        count = sum(range_counts.get(bucket_id, 0) for bucket_id in bucket_ids)
         zero = " is-zero" if count == 0 else ""
-        low = "" if bucket.min is None else bucket.min
-        high = "" if bucket.max is None else bucket.max
         chips.append(
-            f'<button type="button" class="chip{zero}" data-range="{escape(bucket.id, quote=True)}" '
-            f'data-min="{low}" data-max="{high}" data-count="{count}" aria-pressed="false" '
-            f"onclick=\"toggleWidthRange('{escape(bucket.id, quote=True)}')\">"
-            f"{escape(bucket.label)} ({count})</button>"
+            f'<button type="button" class="chip width-chip{zero}" '
+            f'data-buckets="{escape(",".join(bucket_ids), quote=True)}" '
+            f'data-count="{count}" title="{escape(tip, quote=True)}" aria-pressed="false">'
+            f'<span class="width-label">{escape(label)}</span>'
+            f'<span class="width-count">{count}</span></button>'
         )
     sort_select = (
         '<label class="field sort-field"><span>Sort</span><select id="sortSelect">'
@@ -1163,24 +1180,19 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<option value="daysat">Days at this price</option>'
         "</select></label>"
     )
-    brand_cap = 7
     brand_buttons = [
         '<button type="button" class="facet-value active" data-brand="all" '
-        'aria-pressed="true">All brands</button>'
+        'aria-pressed="true"><span class="facet-name">All brands</span></button>'
     ]
-    for index, brand in enumerate(sorted_brands):
+    for brand in sorted_brands:
         count = brand_counts.get(brand, 0)
-        classes = "facet-value"
-        if index >= brand_cap:
-            classes += " is-extra"
-        if count == 0:
-            classes += " is-zero"
+        classes = "facet-value is-zero" if count == 0 else "facet-value"
         brand_buttons.append(
             f'<button type="button" class="{classes}" '
             f'data-brand="{escape(brand, quote=True)}" data-count="{count}" aria-pressed="false">'
-            f'{escape(brand)} <span class="facet-count">({count})</span></button>'
+            f'<span class="facet-name">{escape(brand)}</span>'
+            f'<span class="facet-count">({count})</span></button>'
         )
-    more_hidden = "" if len(sorted_brands) > brand_cap else " hidden"
     def _section(section_id, label, body, open_default=False):
         if not body:
             return ""
@@ -1195,13 +1207,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
 
     brand_facet = (
-        '<div class="facet brand-facet" id="brandFacet" data-cap="7">'
+        '<div class="facet brand-facet" id="brandFacet">'
         f'<select id="brandSelect" class="sr-only" aria-label="Brand">{"".join(brand_options)}</select>'
         '<input id="brandSearch" class="brand-search" type="search" placeholder="Find a brand" '
         'aria-label="Find a brand" autocomplete="off">'
-        f'<div class="facet-list" id="brandList">{"".join(brand_buttons)}</div>'
-        f'<button type="button" class="text-btn" id="brandMore" aria-expanded="false"{more_hidden}>'
-        "Show more</button></div>"
+        f'<div class="facet-list" id="brandList" tabindex="0" aria-label="Brands">'
+        f'{"".join(brand_buttons)}</div></div>'
     )
 
     sale_prices = [
@@ -1227,6 +1238,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
     kind_buttons = []
     for key, label, dot in (
+        ("highlights", "Highlights", "kind-highlights"),
         ("new", "New", "kind-new"),
         ("drop", "Price drop", "kind-drop"),
         ("low", "All-time low", "kind-low"),
@@ -1242,17 +1254,27 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     sidebar_html = (
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
-        '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button>'
-        '<button type="button" class="text-btn" id="filtersClose">Close</button></div>'
-        '<button type="button" class="text-btn clear-all" id="clearAll" onclick="clearFilters()">Clear all</button>'
+        '<button type="button" class="text-btn filters-done" id="filtersClose">Show results</button></div>'
+        '<div class="active-filters" id="activeFilters" hidden>'
+        '<div class="active-head"><span>Active filters</span>'
+        '<button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div>'
+        '<div class="active-row" id="activeChips"></div></div>'
         '<p class="count-note">Counts match the other filters '
         '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
         '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
         "if you pick that store, type, brand, or width. It is not a total of everything tracked."
         "</span></p>"
         + _section(
+            "deals",
+            "Deal Type",
+            '<div class="kind-list" id="dealTypes" role="group" aria-label="Deal type">'
+            + "".join(kind_buttons)
+            + "</div>",
+            open_default=True,
+        )
+        + _section(
             "interval",
-            "Drop interval",
+            "Drop Interval",
             '<div class="interval-list" id="dropInterval" role="group" aria-label="Drop interval">'
             + "".join(interval_buttons)
             + "</div>"
@@ -1261,49 +1283,44 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             open_default=True,
         )
         + _section(
-            "deals",
-            "Deal type",
-            '<div class="kind-list" id="dealTypes" role="group" aria-label="Deal type">'
-            + "".join(kind_buttons)
-            + "</div>",
+            "store",
+            "Store",
+            '<label class="field"><span class="sr-only">Store</span>'
+            f'<select id="storeSelect">{"".join(store_options)}</select></label>',
             open_default=True,
         )
         + _section(
-            "store",
-            "Store",
-            '<label class="field"><span>Store</span>'
-            f'<select id="storeSelect">{"".join(store_options)}</select></label>',
-        )
-        + _section(
             "type",
-            "Type",
-            '<label class="field"><span>Type</span>'
+            "Product Type",
+            '<label class="field"><span class="sr-only">Product type</span>'
             f'<select id="partSelect">{"".join(part_options)}</select></label>',
+            open_default=True,
         )
         + _section("brand", "Brand", brand_facet, open_default=True)
         + _section(
             "width",
-            "Width",
-            '<div class="filter-group width-ranges" id="sizeFilters">'
-            '<span class="range-label">Width range</span>'
+            "Deck Width",
+            '<div class="filter-group width-ranges" id="sizeFilters" role="group" aria-label="Deck width">'
             f'{"".join(chips)}</div>',
-            open_default=True,
         )
-        + '<button type="button" class="text-btn" id="moreFilters" aria-expanded="true" aria-controls="morePanel">'
-        'More filters <span id="moreCount" hidden></span></button>'
-        '<div class="more-filters" id="morePanel">'
+        + '<div class="more-filters" id="morePanel">'
+        '<span class="sr-only">More filters</span>'
         + _section(
             "price",
             "Price",
-            '<label class="field"><span>Min price</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
-            '<label class="field"><span>Max price</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
+            '<div class="field-pair">'
+            '<label class="field"><span>Min</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
+            '<label class="field"><span>Max</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
+            "</div>"
             + _dual_html("priceMin", "priceMax", 0, price_cap, "$", "Any price", "Minimum price", "Maximum price"),
         )
         + _section(
             "discount",
             "Discount",
-            '<label class="field"><span>Discount min</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
-            '<label class="field"><span>Discount max</span><input id="discountMax" type="number" min="0" max="100" step="1"></label>'
+            '<div class="field-pair">'
+            '<label class="field"><span>Min %</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
+            '<label class="field"><span>Max %</span><input id="discountMax" type="number" min="0" max="100" step="1"></label>'
+            "</div>"
             + _dual_html(
                 "discountMin", "discountMax", 0, 100, "", "Any discount",
                 "Minimum percent off", "Maximum percent off", suffix="%",
@@ -1312,29 +1329,38 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + _section(
             "score",
             "Score",
-            '<label class="field"><span>Score min</span><input id="scoreMin" type="number" min="0" max="100" step="1"></label>'
-            '<label class="field"><span>Score max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label>'
+            '<div class="field-pair">'
+            '<label class="field"><span>Min</span><input id="scoreMin" type="number" min="0" max="100" step="1"></label>'
+            '<label class="field"><span>Max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label>'
+            "</div>"
             + _dual_html("scoreMin", "scoreMax", 0, 100, "", "Any score", "Minimum score", "Maximum score"),
         )
         + _section("length", "Length", length_select)
         + _section("wheelbase", "Wheelbase", wheel_select)
         + "</div>"
-        '<div class="tool-row">'
-        '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
-        '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
-        '<button type="button" class="text-btn" id="saveView">Save view</button>'
-        '<button type="button" class="text-btn" id="bookmarkView">Bookmark this selection</button>'
-        '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button>'
-        "</div>"
-        '<div class="saved-views">'
-        '<p class="range-label">Saved views</p>'
-        '<form class="save-view" id="saveViewForm" hidden>'
-        '<input id="viewNameInput" type="text" maxlength="80" placeholder="Name this view" aria-label="View name">'
-        '<button type="submit" class="text-btn">Save</button>'
-        '<button type="button" class="text-btn" id="viewCancel">Cancel</button>'
-        "</form>"
-        '<div class="view-row" id="viewRow"></div>'
-        "</div></aside>"
+        + _section(
+            "views",
+            "Saved Views",
+            '<div class="saved-views">'
+            '<form class="save-view" id="saveViewForm" hidden>'
+            '<input id="viewNameInput" type="text" maxlength="80" placeholder="Name this view" aria-label="View name">'
+            '<button type="submit" class="text-btn">Save</button>'
+            '<button type="button" class="text-btn" id="viewCancel">Cancel</button>'
+            "</form>"
+            '<div class="view-row" id="viewRow"></div></div>',
+        )
+        + _section(
+            "actions",
+            "Actions",
+            '<div class="tool-row">'
+            '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
+            '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
+            '<button type="button" class="text-btn" id="saveView">Save view</button>'
+            '<button type="button" class="text-btn" id="bookmarkView">Bookmark this selection</button>'
+            "</div>",
+        )
+        + '<button type="button" class="text-btn show-results filters-done">Show results</button>'
+        "</aside>"
     )
     suspect_stores = set()
     for warning in warnings:
@@ -1418,7 +1444,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" id="layoutTable" aria-pressed="true">Table</button>'
         '<button type="button" id="layoutCards" aria-pressed="false">Cards</button>'
         "</div>"
-        '<div class="active-row" id="activeChips" hidden></div>'
         "</div>"
         '<p class="lede" id="visitNote" hidden></p>'
         "</header>"
@@ -1439,13 +1464,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     except Exception as exc:
         logger.error("Stats section failed: %s", exc)
         stats_html = ""
-    chunks.append(
-        '<details class="highlights" id="highlights">'
-        "<summary>Today's highlights</summary>"
-        f"{_intel_strip(intel)}"
-        '<button type="button" class="text-btn" id="statsToggle" aria-pressed="false" onclick="toggleStats()">Deals intelligence</button>'
-        f"{stats_html}"
-        "</details>"
+    stats_html = stats_html.replace(
+        '<section id="statsPanel" hidden>',
+        '<section id="statsPanel" hidden>'
+        + _intel_strip(intel)
+        + '<button type="button" class="text-btn" id="statsToggle" aria-pressed="false" '
+        + 'onclick="toggleStats()">Deals intelligence</button>',
+        1,
     )
 
     header_cells = [
@@ -1502,6 +1527,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append("".join(card_chunks))
     chunks.append(_group_board(records))
     chunks.append("</div></div>")
+    chunks.append(stats_html)
 
     try:
         chunks.append(_atl_section(low_items, price_history))
@@ -1615,6 +1641,7 @@ def _deal_attrs(record):
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
         f'data-fresh="{1 if record.get("fresh") else 0}" data-back="{1 if record.get("back") else 0}" '
         f'data-hot="{1 if record.get("hot") else 0}" data-dropday="{_attr(record.get("drop_day") or "")}" '
+        f'data-highlight="{1 if record.get("highlight") else 0}" '
         f'data-group="{_attr(group_key)}"'
     )
 

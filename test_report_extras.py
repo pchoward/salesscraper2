@@ -69,11 +69,14 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('id="filtersOpen"', html)
         self.assertIn('id="baselineSelect"', html)
         self.assertIn('id="scoreMin"', html)
-        self.assertIn("Today's highlights", html)
+        self.assertNotIn("Today's highlights", html)
+        self.assertIn('data-kind="highlights"', html)
+        self.assertIn(">Highlights", html)
         self.assertIn("Zumiez (", html)
         self.assertNotIn('class="store-strip"', html)
         self.assertIn('id="morePanel"', html)
-        self.assertIn("Width range", html)
+        self.assertIn("Deck Width", html)
+        self.assertIn('id="sizeFilters"', html)
         self.assertLess(html.find('id="sizeFilters"'), html.find('id="morePanel"'))
         payload = html.split('id="catalogJson">', 1)[1].split("</script>", 1)[0]
         data = json.loads(payload)
@@ -123,12 +126,15 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('id="visitNote" hidden', html)
         self.assertIn('id="brandFacet"', html)
         self.assertIn('id="brandSelect"', html)
-        self.assertIn('data-cap="7"', html)
         self.assertIn('id="clearAll"', html)
         self.assertIn(">Clear all</button>", html)
-        self.assertIn('id="brandMore" aria-expanded="false">Show more</button>', html)
+        self.assertNotIn("Show more", html)
+        self.assertNotIn('id="brandMore"', html)
+        self.assertIn('id="brandList" tabindex="0"', html)
+        self.assertIn("max-height: 200px", html)
         self.assertIn('class="facet-value" data-brand="Anti-Hero"', html)
-        self.assertIn('class="facet-value is-extra" data-brand="Habitat"', html)
+        self.assertIn('class="facet-value" data-brand="Habitat"', html)
+        self.assertNotIn("is-extra", html)
         self.assertIn("function rowMatches(row, overrides)", html)
         self.assertIn("function paintFacetCounts()", html)
         self.assertIn("minmax(176px, 1fr)", html)
@@ -137,8 +143,9 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("Counts match the other filters", html)
         self.assertIn("function paintSparklines()", html)
         self.assertIn("function sparkDirection(", html)
-        self.assertIn('class="chip is-zero" data-range="10up"', html)
-        self.assertIn("10.0+ (0)", html)
+        self.assertIn('data-buckets="10up"', html)
+        self.assertIn('class="chip width-chip is-zero"', html)
+        self.assertIn(">10+</span>", html)
 
     def test_card_title_is_fixed_at_three_lines_and_missing_discount_is_neutral(self):
         deck = _deck(
@@ -235,7 +242,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("width: 100%", style)
         self.assertIn("min-height: 100vh", style)
         self.assertNotIn("max-width: 1540px", style)
-        self.assertIn("flex: 0 0 220px", style)
+        self.assertIn("flex: 0 0 200px", style)
         self.assertIn("flex: 1 1 auto", style)
         self.assertIn("min-width: 0", style)
         self.assertIn(".rail .sidebar", style)
@@ -253,14 +260,21 @@ class ReportExtraTests(unittest.TestCase):
             {},
             generated_at="2026-10-11T20:22:15+00:00",
         )
+        self.assertIn('class="filter-section is-open" data-section="deals"', html)
+        self.assertIn('class="filter-section is-open" data-section="interval"', html)
+        self.assertIn('class="filter-section is-open" data-section="store"', html)
+        self.assertIn('class="filter-section is-open" data-section="type"', html)
         self.assertIn('class="filter-section is-open" data-section="brand"', html)
-        self.assertIn('class="filter-section is-open" data-section="width"', html)
-        self.assertIn('class="filter-section" data-section="store"', html)
-        self.assertIn('class="filter-section" data-section="type"', html)
+        self.assertIn('class="filter-section" data-section="width"', html)
+        self.assertNotIn('class="filter-section is-open" data-section="width"', html)
         self.assertIn('class="filter-section" data-section="price"', html)
         self.assertIn('class="filter-section" data-section="discount"', html)
         self.assertIn('class="filter-section" data-section="score"', html)
-        self.assertNotIn('class="filter-section is-open" data-section="store"', html)
+        self.assertIn('class="filter-section" data-section="views"', html)
+        self.assertIn('class="filter-section" data-section="actions"', html)
+        self.assertLess(html.find('data-section="deals"'), html.find('data-section="interval"'))
+        self.assertLess(html.find('data-section="brand"'), html.find('data-section="width"'))
+        self.assertLess(html.find('data-section="width"'), html.find('data-section="price"'))
         self.assertIn("salesscraper2.filterSections", html)
         self.assertIn("function restoreFilterSections(", html)
         self.assertIn("function rememberFilterSections(", html)
@@ -350,6 +364,27 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("Any price", html)
         self.assertIn("function dropInInterval(", html)
         self.assertIn("function syncDuals(", html)
+
+    def test_highlights_view_uses_digest_lists_and_width_groups_are_truthful(self):
+        fresh = _deck("40.00", "https://example.com/fresh", "Zumiez", "Baker Brand Logo 8.5 Skateboard Deck")
+        older = _deck("50.00", "https://example.com/older", "Zumiez", "Girl Gass 8.0 Skateboard Deck")
+        html = build_report_html(
+            {"Zumiez_Decks": [fresh, older]},
+            {"Zumiez_Decks": [{"type": "new", "item": fresh}]},
+            generated_at="2026-10-11T21:46:35+00:00",
+        )
+        self.assertIn('data-kind="highlights"', html)
+        self.assertLess(html.find('id="dealTypes"'), html.find('data-kind="highlights"'))
+        def row_for(url):
+            return next(part for part in html.split("<tr ") if url in part)
+        self.assertIn('data-highlight="1"', row_for("https://example.com/fresh"))
+        self.assertIn('data-highlight="0"', row_for("https://example.com/older"))
+        self.assertIn("if (highlights && row.dataset.highlight !== \"1\") return false;", html)
+        self.assertNotIn("<summary>Today's highlights</summary>", html)
+        self.assertIn("Deal Type", html)
+        self.assertIn("Product Type", html)
+        self.assertIn("Saved Views", html)
+        self.assertIn(">Show results</button>", html)
 
 
 if __name__ == "__main__":

@@ -159,6 +159,7 @@ def empty_state():
         "grouped": False,
         "interval": "all",
         "kinds": [],
+        "highlights": False,
     }
 
 
@@ -325,6 +326,8 @@ def decode_query(query):
             state["interval"] = str(value).strip().lower()
         elif key == "kinds":
             state["kinds"] = _ordered_kinds(str(value or "").split(","))
+        elif key == "highlights":
+            state["highlights"] = _flag(value)
     return state
 
 
@@ -388,4 +391,6 @@ def encode_state(state):
     kinds = _ordered_kinds(state.get("kinds"))
     if kinds:
         add("kinds", ",".join(kinds))
+    if state.get("highlights"):
+        add("highlights", "1")
     return urlencode(pairs)
