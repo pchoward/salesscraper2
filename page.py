@@ -501,6 +501,32 @@ def _alert_html(warnings):
     )
 
 
+def _data_attrs(pairs):
+    chunks = []
+    for key, value in pairs:
+        text = "" if value is None else str(value)
+        chunks.append(f'data-{key}="{escape(text, quote=True)}"')
+    return " ".join(chunks)
+
+
+def _price_attr(value):
+    amount = _price(value)
+    if amount is None:
+        return ""
+    return f"{amount:.2f}"
+
+
+def _sort_headers(table_id, columns):
+    cells = []
+    for label, key in columns:
+        cells.append(
+            '<th><button type="button" data-sort="'
+            + escape(key, quote=True)
+            + f"\" onclick=\"sortSection('{table_id}','{key}')\">{escape(label)}</button></th>"
+        )
+    return "".join(cells)
+
+
 def _atl_section(low_items, history):
     rows = [
         '<div class="section" id="atlSection">',
@@ -510,25 +536,49 @@ def _atl_section(low_items, history):
         '<div class="section-content collapsed">',
         '<p class="lede">Current sale price equals the lowest price tracked for that listing. '
         "A listing needs at least 3 observations spanning 7 days, so a brand-new deal is not "
-        "flagged just because its first price is the only price.</p>",
+        "flagged just because its first price is the only price. "
+        "Column headers sort this table. Search, price, store, type, and brand use the same choices as All Deals.</p>",
         '<table id="atlTable"><thead><tr>',
-        "<th>Store</th><th>Part</th><th>Product</th><th>Sale price</th><th>Low since</th><th>Observations</th>",
+        _sort_headers("atlTable", (
+            ("Store", "store"),
+            ("Part", "part"),
+            ("Product", "name"),
+            ("Sale price", "price"),
+            ("Low since", "lowdate"),
+            ("Observations", "observations"),
+        )),
         "</tr></thead><tbody>",
     ]
     for item in low_items:
         try:
             status = all_time_low_status(item, history)
             store = item.get("store") or "Unknown"
+            part = item.get("part") or ""
+            name = item.get("name") or ""
+            brand = item.get("_brand") or listing_brand(name, part)
+            observations = status.get("observations")
             title = escape(status.get("title") or "All-time low", quote=True)
+            search = " ".join(bit for bit in (name, store, part, brand, "all-time low") if bit)
             rows.append(
-                "<tr>"
+                "<tr "
+                + _data_attrs((
+                    ("store", store),
+                    ("part", part),
+                    ("brand", brand),
+                    ("name", name),
+                    ("price", _price_attr(item.get("price_new"))),
+                    ("lowdate", status.get("low_date") or ""),
+                    ("observations", "" if observations in (None, "") else observations),
+                    ("search", search),
+                ))
+                + ">"
                 f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
-                f'<td><span class="part-badge">{escape(item.get("part") or "")}</span></td>'
+                f'<td><span class="part-badge">{escape(part)}</span></td>'
                 f'<td class="product-name">{_product_link(item)} '
                 f'<span class="atl-badge" title="{title}">ALL-TIME LOW</span></td>'
                 f'<td class="price price-new">{_money(item.get("price_new"))}</td>'
                 f'<td>{escape(status.get("low_date") or "")}</td>'
-                f'<td>{escape(str(status.get("observations") or ""))}</td>'
+                f'<td>{escape("" if observations in (None, "") else str(observations))}</td>'
                 "</tr>"
             )
         except Exception as exc:
@@ -2486,10 +2536,26 @@ def _gone_section(history, current_data, today, failed_keys):
     body = []
     for row in rows:
         store = row.get("store") or "Unknown"
+        part = row.get("part") or ""
+        name = row.get("name") or ""
+        brand = listing_brand(name, part)
+        stage = STAGE_LABEL.get(row.get("stage") or "", "")
+        search = " ".join(bit for bit in (name, store, part, brand, stage) if bit)
         body.append(
-            "<tr>"
+            "<tr "
+            + _data_attrs((
+                ("store", store),
+                ("part", part),
+                ("brand", brand),
+                ("name", name),
+                ("price", _price_attr(row.get("price"))),
+                ("seen", row.get("last_seen") or ""),
+                ("stage", stage),
+                ("search", search),
+            ))
+            + ">"
             f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
-            f'<td><span class="part-badge">{escape(row.get("part") or "")}</span></td>'
+            f'<td><span class="part-badge">{escape(part)}</span></td>'
             f'<td class="product-name">{_product_link(row)}</td>'
             f'<td class="price">{_money(row.get("price"))}</td>'
             f'<td>{escape(row.get("last_seen") or "")}</td>'
@@ -2500,7 +2566,8 @@ def _gone_section(history, current_data, today, failed_keys):
         "Kept for 7 days after a listing is missing from two successful scans in a row, "
         "with the last price and the last day it was seen. "
         "Sold out means the product page says out of stock. Otherwise the listing is no longer on the sale page. "
-        "A failed scrape does not land here."
+        "A failed scrape does not land here. "
+        "Column headers sort this table. Search, price, store, type, and brand use the same choices as All Deals."
     )
     if not rows:
         note = "Nothing has disappeared in the last 7 days. " + note
@@ -2512,6 +2579,13 @@ def _gone_section(history, current_data, today, failed_keys):
         '<div class="section-content collapsed">'
         f'<p class="lede">{escape(note)}</p>'
         '<table id="goneTable"><thead><tr>'
-        "<th>Store</th><th>Part</th><th>Product</th><th>Last price</th><th>Last seen</th><th>Stage</th>"
-        f"</tr></thead><tbody>{''.join(body)}</tbody></table></div></div>"
+        + _sort_headers("goneTable", (
+            ("Store", "store"),
+            ("Part", "part"),
+            ("Product", "name"),
+            ("Last price", "price"),
+            ("Last seen", "seen"),
+            ("Stage", "stage"),
+        ))
+        + f"</tr></thead><tbody>{''.join(body)}</tbody></table></div></div>"
     )

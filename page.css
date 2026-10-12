@@ -510,7 +510,8 @@ img[hidden],
 td:nth-child(4), .days-cell { color: #64748b; font-size: 0.78rem; }
 .days-cell { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .days-head { white-space: nowrap; }
-.days-head button {
+.days-head button,
+thead th button[data-sort] {
     border: 0;
     background: transparent;
     color: inherit;
@@ -1212,7 +1213,8 @@ header, header.is-stale, header.is-failed { background: transparent; color: inhe
 .search-box input:focus, .sidebar select:focus, .sidebar input:focus, #baselineSelect:focus, .sort-field select:focus,
 .nav-link:focus-visible, .deal-card:focus-visible, .chip:focus-visible, .change-btn:focus-visible,
 .facet-value:focus-visible, .section-toggle:focus-visible, .layout-toggle button:focus-visible,
-.spark-hit:focus-visible, .history-chart:focus-visible, .active-chip:focus-visible {
+.spark-hit:focus-visible, .history-chart:focus-visible, .active-chip:focus-visible,
+thead th button[data-sort]:focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 1px;
 }

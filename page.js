@@ -680,6 +680,7 @@ function applyFilters() {
         row.classList.toggle("filtered-out", !rowMatches(row));
     });
     showGone(state.change === "removed");
+    applySectionFilters();
     applyGroupVisibility();
     syncDetails();
     paintCards();
@@ -1054,33 +1055,43 @@ function setChange(kind) {
     }
 }
 
+const SORT_NUMERIC = { price: 1, original: 1, discount: 1, size: 1, days: 1, daysat: 1, score: 1, rank: 1, observations: 1 };
+
+function defaultSortDir(key) {
+    if (key === "price" || key === "rank" || key === "store" || key === "brand" || key === "size" || key === "daysat" || key === "name" || key === "part" || key === "stage") {
+        return "asc";
+    }
+    return "desc";
+}
+
+function compareSort(a, b, key, direction) {
+    if (key === "rank") return (parseFloat(a.dataset.rank) || 0) - (parseFloat(b.dataset.rank) || 0);
+    const av = a.dataset[key];
+    const bv = b.dataset[key];
+    const aMissing = av === undefined || av === "";
+    const bMissing = bv === undefined || bv === "";
+    if (aMissing && bMissing) return 0;
+    if (aMissing) return 1;
+    if (bMissing) return -1;
+    if (SORT_NUMERIC[key]) {
+        const diff = parseFloat(av) - parseFloat(bv);
+        return direction === "asc" ? diff : -diff;
+    }
+    const diff = String(av).localeCompare(String(bv));
+    return direction === "asc" ? diff : -diff;
+}
+
 function sortBy(key, direction) {
     const tbody = document.querySelector("#mainTable tbody");
     if (!tbody) return;
-    const numeric = { price: 1, original: 1, discount: 1, size: 1, days: 1, daysat: 1, score: 1, rank: 1 };
     if (!direction) {
         if (state.sortKey === key) direction = state.sortDir === "asc" ? "desc" : "asc";
-        else direction = key === "price" || key === "rank" || key === "store" || key === "brand" || key === "size" || key === "daysat" ? "asc" : "desc";
+        else direction = defaultSortDir(key);
     }
     state.sortKey = key;
     state.sortDir = direction;
     const rows = Array.from(tbody.querySelectorAll(".deal-row"));
-    rows.sort((a, b) => {
-        if (key === "rank") return (parseFloat(a.dataset.rank) || 0) - (parseFloat(b.dataset.rank) || 0);
-        const av = a.dataset[key];
-        const bv = b.dataset[key];
-        const aMissing = av === undefined || av === "";
-        const bMissing = bv === undefined || bv === "";
-        if (aMissing && bMissing) return 0;
-        if (aMissing) return 1;
-        if (bMissing) return -1;
-        if (numeric[key]) {
-            const diff = parseFloat(av) - parseFloat(bv);
-            return direction === "asc" ? diff : -diff;
-        }
-        const diff = String(av).localeCompare(String(bv));
-        return direction === "asc" ? diff : -diff;
-    });
+    rows.sort((a, b) => compareSort(a, b, key, direction));
     rows.forEach(row => {
         const detail = document.querySelector('.detail-row[data-for="' + row.dataset.id + '"]');
         tbody.appendChild(row);
@@ -1105,6 +1116,56 @@ function syncCardOrder() {
 
 function sortTable() {
     sortBy("price");
+}
+
+function sortSection(tableId, key, direction) {
+    const table = document.getElementById(tableId);
+    const tbody = table ? table.querySelector("tbody") : null;
+    if (!tbody) return;
+    const currentKey = table.getAttribute("data-sort-key") || "";
+    const currentDir = table.getAttribute("data-sort-dir") || "asc";
+    if (!direction) {
+        direction = currentKey === key ? (currentDir === "asc" ? "desc" : "asc") : defaultSortDir(key);
+    }
+    table.setAttribute("data-sort-key", key);
+    table.setAttribute("data-sort-dir", direction);
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    rows.sort((a, b) => compareSort(a, b, key, direction));
+    rows.forEach(row => tbody.appendChild(row));
+    table.querySelectorAll("[data-sort]").forEach(node => {
+        const on = node.getAttribute("data-sort") === key;
+        node.classList.toggle("sorted", on);
+        if (on) node.setAttribute("aria-sort", direction === "asc" ? "ascending" : "descending");
+        else node.removeAttribute("aria-sort");
+    });
+}
+
+function sectionMatches(row) {
+    const hay = (row.dataset.search || "").toLowerCase();
+    if (state.search && !hay.includes(state.search)) return false;
+    if (state.store !== "all" && (row.dataset.store || "") !== state.store) return false;
+    if (state.part !== "all" && (row.dataset.part || "") !== state.part) return false;
+    if (state.brand !== "all" && !brandSame(row.dataset.brand, state.brand)) return false;
+    const price = parseFloat(row.dataset.price);
+    if (state.priceMin != null && !(price >= state.priceMin)) return false;
+    if (state.priceMax != null && !(price <= state.priceMax)) return false;
+    return true;
+}
+
+function applySectionFilters() {
+    ["goneSection", "atlSection"].forEach(id => {
+        const section = document.getElementById(id);
+        if (!section) return;
+        const rows = Array.from(section.querySelectorAll("tbody tr"));
+        let shown = 0;
+        rows.forEach(row => {
+            const hide = !sectionMatches(row);
+            row.classList.toggle("filtered-out", hide);
+            if (!hide) shown += 1;
+        });
+        const badge = section.querySelector("h2 .badge");
+        if (badge) badge.textContent = String(shown);
+    });
 }
 
 function mirrorSort(key, direction) {
