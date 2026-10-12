@@ -929,7 +929,11 @@ function fitNavPills() {
         clusters.forEach(syncNavMore);
         const settle = () => {
             let guard = 0;
-            while (bar.clientWidth > 0 && bar.scrollWidth > bar.clientWidth + 1 && guard < 40) {
+            const limit = () => {
+                const viewport = document.documentElement.clientWidth || bar.clientWidth;
+                return Math.min(bar.clientWidth || viewport, viewport);
+            };
+            while (limit() > 0 && bar.scrollWidth > limit() + 1 && guard < 40) {
                 guard += 1;
                 const choice = nextNavOverflow(clusters.map(cluster => ({
                     chips: Array.from(cluster.row.querySelectorAll(":scope > .quick-chip")).map(chip => ({

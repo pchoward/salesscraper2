@@ -851,7 +851,7 @@ header.is-stale .title-line, header.is-failed .title-line { background: #c2410c;
 .sort-field { flex-direction: row; align-items: center; gap: 0.3rem; min-width: 0; }
 .sort-field span { white-space: nowrap; }
 .layout-toggle { flex: 0 0 auto; }
-.filters-open, .drawer-head { display: none; }
+#filtersOpen, .drawer-head { display: none; }
 .stats-grid[hidden] { display: none !important; }
 .sr-only {
     position: absolute;
@@ -1047,7 +1047,7 @@ th:hover .tip, th:focus-within .tip { display: block; }
     .tool-line { flex-wrap: nowrap; overflow-x: auto; }
     .lede.digest, .segment { flex-wrap: nowrap; width: auto; }
     .board { padding: 0 0.55rem; }
-    .filters-open { display: inline-flex; margin-left: auto; background: white; color: #1d4ed8; }
+    #filtersOpen { display: inline-flex; margin-left: auto; background: white; color: #1d4ed8; }
     .sidebar {
         position: fixed;
         z-index: 70;
@@ -1316,7 +1316,7 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
     }
     .brand { font-size: 0.92rem; }
     .nav-link { padding: 0.7rem 0.4rem 0.55rem; }
-    .filters-open { order: 2; margin-left: auto; }
+    #filtersOpen { order: 2; margin-left: auto; }
     .topnav .scan-wrap, .topnav .fresh-note {
         order: 3;
         margin-left: 0;
@@ -1808,6 +1808,7 @@ header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 @media (max-width: 800px) {
     .nav-row { flex-wrap: nowrap; overflow: visible; gap: 0.45rem; padding: 0.08rem 0.4rem; }
     .nav-cluster, .nav-row .quick-row, .nav-row .quick-filters { flex-wrap: nowrap; }
+    .tool-line { flex-wrap: nowrap; overflow-x: auto; }
     .tool-line .search-box { min-width: 160px; max-width: none; }
 }
 </style>
@@ -3736,7 +3737,11 @@ function fitNavPills() {
         clusters.forEach(syncNavMore);
         const settle = () => {
             let guard = 0;
-            while (bar.clientWidth > 0 && bar.scrollWidth > bar.clientWidth + 1 && guard < 40) {
+            const limit = () => {
+                const viewport = document.documentElement.clientWidth || bar.clientWidth;
+                return Math.min(bar.clientWidth || viewport, viewport);
+            };
+            while (limit() > 0 && bar.scrollWidth > limit() + 1 && guard < 40) {
                 guard += 1;
                 const choice = nextNavOverflow(clusters.map(cluster => ({
                     chips: Array.from(cluster.row.querySelectorAll(":scope > .quick-chip")).map(chip => ({
