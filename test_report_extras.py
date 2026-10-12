@@ -262,20 +262,33 @@ class ReportExtraTests(unittest.TestCase):
         )
         self.assertIn('class="filter-section is-open" data-section="deals"', html)
         self.assertIn('class="filter-section is-open" data-section="interval"', html)
-        self.assertIn('class="filter-section is-open" data-section="store"', html)
-        self.assertIn('class="filter-section is-open" data-section="type"', html)
-        self.assertIn('class="filter-section is-open" data-section="brand"', html)
+        self.assertNotIn('data-section="store"', html)
+        self.assertNotIn('data-section="type"', html)
+        self.assertIn('id="storeFilters"', html)
+        self.assertIn('id="partFilters"', html)
+        self.assertIn('data-store="all"', html)
+        self.assertIn(">All stores<", html)
         self.assertIn(
-            'class="filter-section is-open is-type-hidden" data-section="width" data-for="Decks"',
+            'data-part="Decks" data-count="1" aria-pressed="true"',
             html,
         )
+        self.assertIn('class="sr-only" aria-label="Store"', html)
+        self.assertIn('class="sr-only" aria-label="Product type"', html)
+        self.assertIn('id="typeHint"', html)
+        self.assertIn("Pick a type to see width and size filters", html)
+        self.assertIn('class="filter-section is-open" data-section="brand"', html)
+        self.assertIn(
+            'class="filter-section is-open" data-section="width" data-for="Decks"',
+            html,
+        )
+        self.assertNotIn('is-type-hidden" data-section="width"', html)
         self.assertIn('class="filter-section" data-section="price"', html)
         self.assertIn('class="filter-section" data-section="discount"', html)
         self.assertIn('class="filter-section" data-section="score"', html)
         self.assertIn('class="filter-section" data-section="views"', html)
         self.assertIn('class="filter-section" data-section="actions"', html)
-        self.assertLess(html.find('data-section="store"'), html.find('data-section="type"'))
-        self.assertLess(html.find('data-section="type"'), html.find('data-section="deals"'))
+        self.assertLess(html.find('id="storeFilters"'), html.find('id="partFilters"'))
+        self.assertLess(html.find('id="partFilters"'), html.find('data-section="deals"'))
         self.assertLess(html.find('data-section="deals"'), html.find('data-section="interval"'))
         self.assertLess(html.find('data-section="interval"'), html.find('data-section="brand"'))
         self.assertLess(html.find('data-section="brand"'), html.find('data-section="width"'))

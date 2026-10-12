@@ -1,6 +1,6 @@
 let state = {
     store: "all",
-    part: "all",
+    part: "Decks",
     widths: [],
     brand: "all",
     length: "all",
@@ -315,7 +315,7 @@ function specAllowed(row, facet, selected) {
 }
 
 function syncTypeSections(expandSpec) {
-    const part = state.part || "all";
+    const part = state.part || "Decks";
     document.querySelectorAll(".filter-section[data-for]").forEach(section => {
         const owner = section.getAttribute("data-for") || "";
         const show = part !== "all" && owner === part;
@@ -422,6 +422,9 @@ function paintFacetCounts() {
     });
     paintSelectCounts("storeSelect", storeCounts);
     paintSelectCounts("partSelect", partCounts);
+    paintQuickRow("storeFilters", "data-store", storeCounts, state.store || "all");
+    paintQuickRow("partFilters", "data-part", partCounts, state.part || "Decks");
+    paintTypeHint();
     paintSelectCounts("lengthSelect", lengthCounts);
     paintSelectCounts("wheelbaseSelect", wheelCounts);
     SPEC_FACETS.forEach(facet => {
@@ -688,7 +691,7 @@ function paintKeepaCounts() {
         const count = part === "all" ? categoryAll : (categoryCounts[part] || 0);
         const slot = button.querySelector(".cat-count");
         if (slot) slot.textContent = String(count);
-        button.setAttribute("aria-pressed", (state.part || "all") === part ? "true" : "false");
+        button.setAttribute("aria-pressed", (state.part || "Decks") === part ? "true" : "false");
     });
 }
 
@@ -818,11 +821,32 @@ function filterProducts() {
     applyFilters();
 }
 
+function paintQuickRow(groupId, attr, counts, current) {
+    let total = 0;
+    Object.keys(counts).forEach(key => { total += counts[key] || 0; });
+    document.querySelectorAll("#" + groupId + " .quick-chip").forEach(node => {
+        const value = node.getAttribute(attr) || "";
+        const count = value === "all" ? total : (counts[value] || 0);
+        const slot = node.querySelector(".quick-count");
+        if (slot) slot.textContent = String(count);
+        const on = value === current;
+        node.classList.toggle("active", on);
+        node.setAttribute("aria-pressed", on ? "true" : "false");
+        node.classList.toggle("is-zero", count === 0);
+        node.setAttribute("data-count", String(count));
+    });
+}
+
+function paintTypeHint() {
+    const hint = document.getElementById("typeHint");
+    if (hint) hint.hidden = state.part !== "all";
+}
+
 function filterByStore(store) {
     state.store = store || "all";
     const select = document.getElementById("storeSelect");
     if (select) select.value = state.store;
-    setPressed("#storeFilters .filter-btn", "data-store", state.store);
+    setPressed("#storeFilters [data-store]", "data-store", state.store);
     applyFilters();
 }
 
@@ -832,7 +856,7 @@ function filterByPart(part) {
     state.part = next;
     const select = document.getElementById("partSelect");
     if (select) select.value = state.part;
-    setPressed("#partFilters .filter-btn", "data-part", state.part);
+    setPressed("#partFilters [data-part]", "data-part", state.part);
     syncTypeSections(changed);
     applyFilters();
 }
@@ -859,7 +883,7 @@ function toggleCard(kind, store) {
         state.store = state.store === store ? "all" : store;
         const select = document.getElementById("storeSelect");
         if (select) select.value = state.store;
-        setPressed("#storeFilters .filter-btn", "data-store", state.store);
+        setPressed("#storeFilters [data-store]", "data-store", state.store);
     } else if (kind === "clear") {
         state.cardNew = false;
         state.cardDrop = false;
@@ -868,7 +892,7 @@ function toggleCard(kind, store) {
         state.change = "all";
         const select = document.getElementById("storeSelect");
         if (select) select.value = "all";
-        setPressed("#storeFilters .filter-btn", "data-store", "all");
+        setPressed("#storeFilters [data-store]", "data-store", "all");
     }
     applyFilters();
 }
@@ -1180,7 +1204,7 @@ function toggleStats() {
 function clearFilters() {
     state = {
         store: "all",
-        part: "all",
+        part: "Decks",
         brand: "all",
         length: "all",
         wheelbase: "all",
@@ -1211,10 +1235,12 @@ function clearFilters() {
         const node = document.getElementById(id);
         if (node) node.value = "";
     });
-    ["storeSelect", "partSelect", "brandSelect", "lengthSelect", "wheelbaseSelect"].forEach(id => {
+    ["storeSelect", "brandSelect", "lengthSelect", "wheelbaseSelect"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.value = "all";
     });
+    const partSelect = document.getElementById("partSelect");
+    if (partSelect) partSelect.value = "Decks";
     const sort = document.getElementById("sortSelect");
     if (sort) sort.value = "rank";
     const watching = document.getElementById("watchingToggle");
@@ -1222,8 +1248,8 @@ function clearFilters() {
     const brandSearch = document.getElementById("brandSearch");
     if (brandSearch) brandSearch.value = "";
     filterBrandList("");
-    setPressed("#storeFilters .filter-btn", "data-store", "all");
-    setPressed("#partFilters .filter-btn", "data-part", "all");
+    setPressed("#storeFilters [data-store]", "data-store", "all");
+    setPressed("#partFilters [data-part]", "data-part", "Decks");
     paintWidthChips();
     syncTypeSections(false);
     sortBy("rank", "asc");
@@ -1316,6 +1342,7 @@ function slugStore(value) {
 
 function slugType(value) {
     const key = String(value || "").trim().toLowerCase();
+    if (key === "all") return "all";
     return {
         deck: "Decks",
         decks: "Decks",
@@ -1351,7 +1378,7 @@ function decodeQuery(query) {
     const stateOut = {
         q: "",
         store: "all",
-        part: "all",
+        part: "Decks",
         widths: [],
         brand: "all",
         min: null,
@@ -1443,7 +1470,10 @@ function encodeState(snapshot) {
     }
     add("q", snapshot.q || "");
     if (snapshot.store && snapshot.store !== "all") add("store", storeSlug(snapshot.store));
-    if (snapshot.part && snapshot.part !== "all") add("type", typeSlug(snapshot.part));
+    // Missing type is Decks and stays out of the URL. All has to be written
+    // with set(), because add() drops a bare "all".
+    if (snapshot.part === "all") params.set("type", "all");
+    else if (snapshot.part && snapshot.part !== "Decks") add("type", typeSlug(snapshot.part));
     const widths = orderedWidths(snapshot.widths || []);
     if (widths.length) add("width", widths.join(","));
     add("brand", snapshot.brand || "");
@@ -1537,7 +1567,7 @@ function writeControls(snapshot) {
     const search = document.getElementById("searchInput");
     if (search) search.value = snapshot.q || "";
     setSelect("storeSelect", snapshot.store || "all");
-    setSelect("partSelect", snapshot.part || "all");
+    setSelect("partSelect", snapshot.part || "Decks");
     setSelect("brandSelect", snapshot.brand || "all");
     const chosenBrand = document.getElementById("brandSelect");
     setSelect("lengthSelect", snapshot.length || "all");
@@ -1553,9 +1583,9 @@ function writeControls(snapshot) {
     fill("discountMax", snapshot.discountmax);
     fill("scoreMin", snapshot.scoremin);
     fill("scoreMax", snapshot.scoremax);
-    const partChanged = (snapshot.part || "all") !== (state.part || "all");
+    const partChanged = (snapshot.part || "Decks") !== (state.part || "Decks");
     state.store = snapshot.store || "all";
-    state.part = snapshot.part || "all";
+    state.part = snapshot.part || "Decks";
     state.widths = orderedWidths(snapshot.widths || []);
     state.brand = chosenBrand ? (chosenBrand.value || "all") : (snapshot.brand || "all");
     state.length = snapshot.length || "all";
@@ -1582,8 +1612,8 @@ function writeControls(snapshot) {
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
     const grouped = document.getElementById("groupToggle");
     if (grouped) grouped.setAttribute("aria-pressed", state.grouped ? "true" : "false");
-    setPressed("#storeFilters .filter-btn", "data-store", state.store);
-    setPressed("#partFilters .filter-btn", "data-part", state.part);
+    setPressed("#storeFilters [data-store]", "data-store", state.store);
+    setPressed("#partFilters [data-part]", "data-part", state.part);
     paintWidthChips();
 }
 
@@ -1930,7 +1960,10 @@ function paintActiveChips() {
         chips.push({ label: label, clear: clear });
     }
     if (state.store !== "all") add("Store: " + state.store, () => filterByStore("all"));
-    if (state.part !== "all") add("Type: " + state.part, () => filterByPart("all"));
+    if (state.part && state.part !== "Decks") {
+        const typeLabel = state.part === "all" ? "Type: All types" : "Type: " + state.part;
+        add(typeLabel, () => filterByPart("Decks"));
+    }
     if (state.brand !== "all") {
         add(state.brand, () => {
             setSelect("brandSelect", "all");
@@ -2524,6 +2557,22 @@ function init() {
     if (storeSelect) storeSelect.addEventListener("change", () => filterByStore(storeSelect.value));
     const partSelect = document.getElementById("partSelect");
     if (partSelect) partSelect.addEventListener("change", () => filterByPart(partSelect.value));
+    const storeFilters = document.getElementById("storeFilters");
+    if (storeFilters) {
+        storeFilters.addEventListener("click", event => {
+            const button = event.target.closest(".quick-chip[data-store]");
+            if (!button || !storeFilters.contains(button)) return;
+            filterByStore(button.getAttribute("data-store") || "all");
+        });
+    }
+    const partFilters = document.getElementById("partFilters");
+    if (partFilters) {
+        partFilters.addEventListener("click", event => {
+            const button = event.target.closest(".quick-chip[data-part]");
+            if (!button || !partFilters.contains(button)) return;
+            filterByPart(button.getAttribute("data-part") || "Decks");
+        });
+    }
     const brand = document.getElementById("brandSelect");
     if (brand) brand.addEventListener("change", applyFilters);
     const brandList = document.getElementById("brandList");

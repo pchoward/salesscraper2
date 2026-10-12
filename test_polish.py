@@ -240,7 +240,7 @@ class QueryStateTests(unittest.TestCase):
         self.assertEqual(state["widths"], ["8.25-8.375"])
         self.assertEqual(state["discount"], 40)
         self.assertEqual(state["sort"], "score")
-        encoded = "store=zumiez&type=deck&width=8.25-8.375&discount=40&sort=score"
+        encoded = "store=zumiez&width=8.25-8.375&discount=40&sort=score"
         self.assertEqual(encode_state(state), encoded)
         self.assertEqual(decode_query(encode_state(state)), state)
 
@@ -251,15 +251,15 @@ class QueryStateTests(unittest.TestCase):
             state["widths"],
             ["8.25-8.375", "8.375-8.5", "8.5-8.75"],
         )
-        encoded = "type=deck&width=8.25-8.375%2C8.375-8.5%2C8.5-8.75&discount=35"
+        encoded = "width=8.25-8.375%2C8.375-8.5%2C8.5-8.75&discount=35"
         self.assertEqual(encode_state(state), encoded)
         self.assertEqual(decode_query(encoded)["widths"], state["widths"])
         queries = {view["query"] for view in STARTER_VIEWS}
         self.assertIn("type=deck&width=8.25-8.5&discount=35", queries)
         self.assertIn("type=deck&width=8.5&max=50", queries)
         self.assertEqual(decode_query("type=deck&width=8.5&max=50")["widths"], ["8.5-8.75"])
-        self.assertIn("store=skatewarehouse&change=new", queries)
-        self.assertIn("watching=1&low=1", queries)
+        self.assertIn("store=skatewarehouse&change=new&type=all", queries)
+        self.assertIn("watching=1&low=1&type=all", queries)
         watched = decode_query("watching=1&low=1")
         self.assertTrue(watched["watching"])
         self.assertTrue(watched["low"])
@@ -313,7 +313,7 @@ class QueryStateTests(unittest.TestCase):
     def test_unknown_values_are_ignored(self):
         state = decode_query("store=nope&type=skate&sort=nope&width=abc")
         self.assertEqual(state["store"], "all")
-        self.assertEqual(state["part"], "all")
+        self.assertEqual(state["part"], "Decks")
         self.assertEqual(state["sort"], "rank")
         self.assertEqual(state["widths"], [])
         self.assertEqual(encode_state(state), "")
@@ -338,6 +338,17 @@ class QueryStateTests(unittest.TestCase):
         self.assertTrue(highlighted["highlights"])
         self.assertIn("highlights=1", encode_state(highlighted))
         self.assertFalse(decode_query("")["highlights"])
+
+    def test_missing_type_is_decks_and_all_is_explicit(self):
+        self.assertEqual(decode_query("")["part"], "Decks")
+        self.assertEqual(decode_query("type=deck")["part"], "Decks")
+        self.assertEqual(decode_query("type=all")["part"], "all")
+        self.assertEqual(encode_state({"part": "Decks"}), "")
+        self.assertEqual(encode_state({"part": "all"}), "type=all")
+        self.assertEqual(encode_state({}), "")
+        wheels = decode_query("type=wheel")
+        self.assertEqual(wheels["part"], "Wheels")
+        self.assertEqual(encode_state(wheels), "type=wheel")
 
 
 class ReportPolishTests(unittest.TestCase):
