@@ -2655,6 +2655,13 @@ function openProduct(id) {
             link.hidden = true;
         }
     }
+    document.querySelectorAll(".deal-card.is-preview").forEach(card => card.classList.remove("is-preview"));
+    document.querySelectorAll(".score-cell.pinned").forEach(cell => {
+        cell.classList.remove("pinned");
+        cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
+            control.setAttribute("aria-expanded", "false");
+        });
+    });
     modal.hidden = false;
     setChartWindow(chartWindow || 90);
 }
