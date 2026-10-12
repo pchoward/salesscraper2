@@ -2891,14 +2891,18 @@ function init() {
                 control.setAttribute("aria-expanded", pinned ? "true" : "false");
             });
             const why = cell.querySelector(".why");
-            if (pinned && why) placeFloat(why, button, null);
+            const card = button.closest(".deal-card");
+            const price = card ? card.querySelector(".card-prices") : null;
+            if (pinned && why) placeFloat(why, button, price);
         });
     });
     document.querySelectorAll(".score-cell").forEach(cell => {
         const place = () => {
             const why = cell.querySelector(".why");
             const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
-            if (why) placeFloat(why, anchor, null);
+            const card = cell.closest(".deal-card");
+            const price = card ? card.querySelector(".card-prices") : null;
+            if (why) placeFloat(why, anchor, price);
         };
         cell.addEventListener("mouseenter", place);
         cell.addEventListener("focusin", place);
