@@ -42,6 +42,8 @@ from history import (
 from intel import intelligence_summary
 from matching import cross_store_groups
 from part_specs import (
+    CONSTRUCTION_LABELS,
+    CONSTRUCTIONS,
     DIAMETER_BANDS,
     HEIGHT_LABELS,
     HEIGHTS,
@@ -892,6 +894,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             shape = ""
             truck_size = ""
             truck_height = ""
+            construction = ""
             abec = ""
             raw_name = item.get("name") or ""
             if item.get("part") == "Wheels":
@@ -903,8 +906,17 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 parsed = truck_specs(raw_name)
                 truck_size = parsed.get("size") or ""
                 truck_height = parsed.get("height") or ""
+                construction = parsed.get("construction") or ""
             elif item.get("part") == "Bearings":
                 abec = bearing_specs(raw_name).get("abec") or ""
+            current_price = _price(item.get("price_new"))
+            tracked_low = status.get("low")
+            at_tracked_low = False
+            if current_price is not None and tracked_low is not None:
+                try:
+                    at_tracked_low = float(current_price) <= float(tracked_low) + 0.001
+                except (TypeError, ValueError):
+                    at_tracked_low = False
             percent = percent_off_value(item.get("price_new"), item.get("price_old"))
             record = {
                 "item": item,
@@ -941,6 +953,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "drop": drop,
                 "drop_amount": drop_amount,
                 "lowest": bool(status.get("flagged")),
+                "at_tracked_low": at_tracked_low,
                 "hit_low": hit_low,
                 "image": image,
                 "trend": trend,
@@ -957,6 +970,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "shape": shape,
                 "truck_size": truck_size,
                 "truck_height": truck_height,
+                "construction": construction,
                 "abec": abec,
                 "percent": percent,
                 "search": " ".join(
@@ -1058,6 +1072,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     shape_counts = {}
     truck_size_counts = {}
     truck_height_counts = {}
+    construction_counts = {}
     abec_counts = {}
     wheels_with_duro = 0
     for record in records:
@@ -1090,6 +1105,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 truck_size_counts[record["truck_size"]] = truck_size_counts.get(record["truck_size"], 0) + 1
             if record["truck_height"]:
                 truck_height_counts[record["truck_height"]] = truck_height_counts.get(record["truck_height"], 0) + 1
+            if record.get("construction"):
+                token = record["construction"]
+                construction_counts[token] = construction_counts.get(token, 0) + 1
         elif record["part"] == "Bearings" and record["abec"]:
             abec_counts[record["abec"]] = abec_counts.get(record["abec"], 0) + 1
 
@@ -1179,7 +1197,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             _option(store, f"{store} ({store_counts[store]})", data_label=store)
         )
     part_options = ['<option value="all">All types</option>']
-    for part in ("Decks", "Wheels", "Trucks", "Bearings"):
+    for part in ("Decks", "Trucks", "Wheels", "Bearings", "Completes"):
         if part in part_counts or part == "Decks":
             part_options.append(
                 _option(
@@ -1443,84 +1461,113 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "ABEC rating printed in the name.",
         sum(abec_counts.values()),
     )
+    construction_buttons = [
+        _spec_button(
+            token,
+            CONSTRUCTION_LABELS[token],
+            construction_counts[token],
+            f"{CONSTRUCTION_LABELS[token]} printed in the name",
+        )
+        for token in CONSTRUCTIONS
+        if construction_counts.get(token)
+    ]
+    construction_section = _gated(
+        "construction",
+        "Construction",
+        "Trucks",
+        construction_buttons,
+        "Only when the name says hollow or standard.",
+        sum(construction_counts.values()),
+    )
 
-    def _quick_chip(attr, value, label, count, pressed=False):
+    def _quick_chip(attr, value, label, count, pressed=False, order=0, home="row"):
         on = "true" if pressed else "false"
         active = " active" if pressed else ""
         zero = " is-zero" if count == 0 else ""
         return (
             f'<button type="button" class="chip quick-chip{active}{zero}" '
+            f'data-order="{order}" data-home="{home}" '
             f'data-{attr}="{escape(str(value), quote=True)}" data-count="{count}" '
             f'aria-pressed="{on}">'
             f'<span class="quick-name">{escape(str(label))}</span>'
             f'<span class="quick-count">{count}</span></button>'
         )
 
+    def _more_menu(menu_id, label, buttons):
+        hidden = "" if buttons else " hidden"
+        return (
+            f'<div class="more-menu" id="{menu_id}"{hidden}>'
+            f'<button type="button" class="chip more-toggle" aria-expanded="false" '
+            f'aria-controls="{menu_id}List">{escape(label)}</button>'
+            f'<div class="more-list" id="{menu_id}List" hidden>'
+            + "".join(buttons)
+            + "</div></div>"
+        )
+
+    primary_stores = ("Zumiez", "Tactics", "SkateWarehouse", "CCS")
     store_total = sum(store_counts.values())
-    store_buttons = [_quick_chip("store", "all", "All stores", store_total, pressed=True)]
-    for store in sorted(store_counts):
-        store_buttons.append(_quick_chip("store", store, store, store_counts[store]))
+    store_buttons = [_quick_chip("store", "all", "All stores", store_total, pressed=True, order=0)]
+    for store in primary_stores:
+        if store in store_counts:
+            store_buttons.append(
+                _quick_chip("store", store, store, store_counts[store], order=len(store_buttons))
+            )
+    extra_stores = [store for store in sorted(store_counts) if store not in primary_stores]
+    store_more = [
+        _quick_chip(
+            "store", store, store, store_counts[store],
+            order=len(store_buttons) + index, home="more",
+        )
+        for index, store in enumerate(extra_stores)
+    ]
     store_row = (
-        '<div class="quick-filters" id="storeFilters">'
-        '<span class="quick-label">Store</span>'
+        '<div class="nav-cluster quick-filters" id="storeFilters">'
+        '<span class="quick-label">Stores</span>'
         '<div class="quick-row" role="group" aria-label="Store">'
         + "".join(store_buttons)
+        + _more_menu("moreStores", "+ More stores", store_more)
         + "</div>"
         f'<select id="storeSelect" class="sr-only" aria-label="Store">{"".join(store_options)}</select>'
         "</div>"
     )
+    part_order = ("Decks", "Trucks", "Wheels", "Bearings", "Completes")
     part_total = sum(part_counts.values())
-    part_buttons = [_quick_chip("part", "all", "All", part_total)]
-    for part in ("Decks", "Wheels", "Trucks", "Bearings"):
+    part_buttons = [_quick_chip("part", "all", "All", part_total, order=0)]
+    shown_parts = []
+    for part in part_order:
         if part not in part_counts and part != "Decks":
             continue
+        shown_parts.append(part)
         part_buttons.append(
-            _quick_chip("part", part, part, part_counts.get(part, 0), pressed=(part == "Decks"))
+            _quick_chip(
+                "part", part, part, part_counts.get(part, 0),
+                pressed=(part == "Decks"), order=len(part_buttons),
+            )
         )
+    extra_parts = [part for part in sorted(part_counts) if part not in shown_parts]
+    for part in extra_parts:
+        part_options.append(
+            _option(part, f"{part} ({part_counts.get(part, 0)})", data_label=part)
+        )
+    part_more = [
+        _quick_chip(
+            "part", part, part, part_counts.get(part, 0),
+            order=len(part_buttons) + index, home="more",
+        )
+        for index, part in enumerate(extra_parts)
+    ]
     part_row = (
-        '<div class="quick-filters" id="partFilters">'
-        '<span class="quick-label">Product Type</span>'
+        '<div class="nav-cluster quick-filters" id="partFilters">'
+        '<span class="quick-label">Products</span>'
         '<div class="quick-row" role="group" aria-label="Product type">'
         + "".join(part_buttons)
+        + _more_menu("moreParts", "+ More", part_more)
         + "</div>"
         f'<select id="partSelect" class="sr-only" aria-label="Product type">{"".join(part_options)}</select>'
-        '<p class="type-hint" id="typeHint" hidden>Pick a type to see width and size filters</p>'
         "</div>"
     )
-    sidebar_html = (
-        '<aside class="sidebar" id="filterDrawer">'
-        '<div class="drawer-head"><strong>Filters</strong>'
-        '<button type="button" class="text-btn filters-done" id="filtersClose">Show results</button></div>'
-        '<div class="active-filters" id="activeFilters" hidden>'
-        '<div class="active-head"><span>Active filters</span>'
-        '<button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div>'
-        '<div class="active-row" id="activeChips"></div></div>'
-        + store_row
-        + part_row
-        + '<p class="count-note">Counts match the other filters '
-        '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
-        '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
-        "if you pick that store, type, brand, width, or size. It is not a total of everything tracked."
-        "</span></p>"
-        + _section(
-            "deals",
-            "Deal Type",
-            '<div class="kind-list" id="dealTypes" role="group" aria-label="Deal type">'
-            + "".join(kind_buttons)
-            + "</div>",
-            open_default=True,
-        )
-        + _section(
-            "interval",
-            "Drop Interval",
-            '<div class="interval-list" id="dropInterval" role="group" aria-label="Drop interval">'
-            + "".join(interval_buttons)
-            + "</div>"
-            '<p class="section-note">A drop is at least $2 or 5% below the previous tracked price. '
-            "Day is today or yesterday.</p>",
-            open_default=True,
-        )
-        + _section("brand", "Brand", brand_facet, open_default=True)
+    context_specs = (
+        '<div id="contextSpecs">'
         + _section(
             "width",
             "Deck Width",
@@ -1529,12 +1576,30 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             open_default=True,
             for_part="Decks",
         )
+        + _section("length", "Length", length_select, open_default=True, for_part="Decks")
+        + _section("wheelbase", "Wheelbase", wheel_select, for_part="Decks")
         + diameter_section
         + duro_section
         + shape_section
         + truck_size_section
         + truck_height_section
+        + construction_section
         + abec_section
+        + "</div>"
+    )
+    sidebar_html = (
+        '<aside class="sidebar" id="filterDrawer">'
+        '<div class="drawer-head"><strong>Filters</strong>'
+        '<button type="button" class="text-btn filters-done" id="filtersClose">Show results</button></div>'
+        '<div class="filter-head"><span>Filter deals</span>'
+        '<button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div>'
+        + context_specs
+        + '<p class="count-note">Counts match current results '
+        '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
+        '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
+        "if you pick that store, type, brand, width, or size. It is not a total of everything tracked."
+        "</span></p>"
+        + _section("brand", "Brand", brand_facet, open_default=True)
         + '<div class="more-filters" id="morePanel">'
         '<span class="sr-only">More filters</span>'
         + _section(
@@ -1560,16 +1625,36 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
         + _section(
             "score",
-            "Score",
+            "Deal quality",
             '<div class="field-pair">'
             '<label class="field"><span>Min</span><input id="scoreMin" type="number" min="0" max="100" step="1"></label>'
             '<label class="field"><span>Max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label>'
             "</div>"
             + _dual_html("scoreMin", "scoreMax", 0, 100, "", "Any score", "Minimum score", "Maximum score"),
         )
-        + _section("length", "Length", length_select, for_part="Decks")
-        + _section("wheelbase", "Wheelbase", wheel_select, for_part="Decks")
         + "</div>"
+        + '<section class="filter-section" id="productSpecs" data-section="specs" hidden>'
+        '<button type="button" class="section-toggle" aria-expanded="false" '
+        'aria-controls="productSpecsBody">Product specifications</button>'
+        '<div class="section-body" id="productSpecsBody">'
+        '<p class="section-note">Pick a spec to switch to that product type.</p>'
+        "</div></section>"
+        + _section(
+            "deals",
+            "Deal Type",
+            '<div class="kind-list" id="dealTypes" role="group" aria-label="Deal type">'
+            + "".join(kind_buttons)
+            + "</div>",
+        )
+        + _section(
+            "interval",
+            "Drop Interval",
+            '<div class="interval-list" id="dropInterval" role="group" aria-label="Drop interval">'
+            + "".join(interval_buttons)
+            + "</div>"
+            '<p class="section-note">A drop is at least $2 or 5% below the previous tracked price. '
+            "Day is today or yesterday.</p>",
+        )
         + _section(
             "views",
             "Saved Views",
@@ -1582,11 +1667,16 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             '<div class="view-row" id="viewRow"></div></div>',
         )
         + _section(
-            "actions",
-            "Actions",
+            "watching",
+            "Watching",
             '<div class="tool-row">'
-            '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button>'
-            '<button type="button" class="text-btn" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button>'
+            '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" '
+            'onclick="toggleWatching()">Watching</button></div>',
+        )
+        + _section(
+            "bookmarks",
+            "Bookmarks",
+            '<div class="tool-row">'
             '<button type="button" class="text-btn" id="saveView">Save view</button>'
             '<button type="button" class="text-btn" id="bookmarkView">Bookmark this selection</button>'
             "</div>",
@@ -1636,30 +1726,34 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<span class="scan-wrap">last scan <time id="lastScan" datetime="'
         f'{escape(str(generated_at), quote=True)}">{escape(format_scan_et(generated_at))}</time>'
         f'<span class="scan-exact" id="scanExact">{escape(format_scan_et(generated_at))}</span></span>'
-        f'<span class="fresh-note" id="freshness">{escape(fresh_text)}</span>'
+        f'<span class="fresh-note" id="freshness"><span class="fresh-dot" aria-hidden="true"></span>{escape(fresh_text)}</span>'
         '<button type="button" class="text-btn filters-open" id="filtersOpen">Filters</button>'
         "</div>"
+        '<div class="nav-row" id="navPills">'
+        + store_row
+        + part_row
+        + "</div>"
         '<div class="tool-line">'
+        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals"></div>'
+        '<div class="active-filters" id="activeFilters" hidden>'
+        '<div class="active-row" id="activeChips"></div>'
+        '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button></div>'
         f'<p class="result-count"><span id="statusCounts">{len(records)} deals</span></p>'
         '<p class="lede digest" id="changeLine" '
         f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}">'
-        '<span class="digest-label">Digest of what changed. '
+        '<span class="digest-label sr-only">Digest of what changed. '
         '<span id="changePrefix">Since yesterday:</span></span> '
         '<span class="segment" role="group" aria-label="What changed">'
         '<button type="button" class="change-btn active" id="btnAll" data-change="all" '
         'aria-pressed="true" onclick="setChange(\'all\')">All deals</button> '
         f'<button type="button" class="change-btn" id="btnNew" data-change="new" aria-pressed="false" '
-        f"onclick=\"setChange('new')\">"
-        f"{escape(_plural(new_count, 'new deal', 'new deals'))}</button> "
+        f"onclick=\"setChange('new')\">New {new_count}</button> "
         f'<button type="button" class="change-btn" id="btnDrop" data-change="drop" aria-pressed="false" '
-        f"onclick=\"setChange('drop')\">"
-        f"{escape(_plural(drop_count, 'price drop', 'price drops'))}</button> "
+        f"onclick=\"setChange('drop')\">Price drops {drop_count}</button> "
         f'<button type="button" class="change-btn" id="btnLow" data-change="lowest" aria-pressed="false" '
-        f"onclick=\"setChange('lowest')\">"
-        f"{hit_count} hit lowest tracked price</button> "
+        f"onclick=\"setChange('lowest')\">Hit lowest {hit_count}</button> "
         f'<button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" '
-        f"onclick=\"setChange('removed')\">"
-        f"{escape(_plural(gone_count, 'deal disappeared', 'deals disappeared'))}</button>"
+        f"onclick=\"setChange('removed')\">Disappeared {gone_count}</button>"
         "</span></p>"
         '<div class="mode" role="group" aria-label="Digest baseline">'
         '<span class="mode-label">Baseline</span>'
@@ -1676,12 +1770,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" id="layoutTable" aria-pressed="true">Table</button>'
         '<button type="button" id="layoutCards" aria-pressed="false">Cards</button>'
         "</div>"
+        '<button type="button" class="text-btn group-toggle" id="groupToggle" aria-pressed="false" '
+        'onclick="toggleGrouped()">Group across stores</button>'
         "</div>"
         '<p class="lede" id="visitNote" hidden></p>'
         "</header>"
         '<div class="shell">'
         '<div class="rail">'
-        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals" aria-label="Search deals"></div>'
     )
     chunks.append(sidebar_html)
     chunks.append(
@@ -1743,7 +1838,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append(
         '<div class="section" id="dealsSection">'
         '<h2 class="sr-only">All Deals</h2>'
-        + _category_strip(part_counts)
         + '<div class="section-content">'
     )
     chunks.append(f'<div class="table-wrap"><table id="mainTable"><thead><tr>{"".join(head)}</tr></thead><tbody>')
@@ -1874,6 +1968,7 @@ def _deal_attrs(record):
         f'data-shape="{_attr(record.get("shape") or "")}" '
         f'data-trucksize="{_attr(record.get("truck_size") or "")}" '
         f'data-truckheight="{_attr(record.get("truck_height") or "")}" '
+        f'data-construction="{_attr(record.get("construction") or "")}" '
         f'data-abec="{_attr(record.get("abec") or "")}" '
         f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
@@ -1913,8 +2008,8 @@ def _row_html(record):
         f'<td><span class="part-badge">{escape(record["part"])}</span></td>'
         f"<td>{size_html}</td>"
         f'<td class="product-name">{_product_link(item)}'
-        f'<div class="row-meta">{_badge_html(record["badges"], record["listed"])}'
-        f'{_stage_html(record.get("stage"))}</div></td>'
+        f'<div class="row-meta">{_badge_html(_shown_badges(record), record["listed"])}'
+        f'{_low_mark(record)}{_stage_html(record.get("stage"))}</div></td>'
         f'<td class="price-cell"><button type="button" class="price-btn" data-id="{record["id"]}">'
         f'<span class="price price-new">{_money(item.get("price_new"), currency)}</span></button>'
         f'{_spark_html(record)}{drop_html}</td>'
@@ -1943,8 +2038,40 @@ def _drop_badge(record):
     return f'<span class="drop-badge" title="{escape(title, quote=True)}">{escape(text)}</span>'
 
 
+def _shown_badges(record):
+    return [badge for badge in (record.get("badges") or []) if badge.get("kind") != "lowest"]
+
+
+def _low_mark(record):
+    """Three labels from the existing low rules. Only a new low is loud.
+
+    New low: the qualified all-time low was reached in this scan (``hit_low``).
+    Verified low: the 3-observation, 7-day all-time-low rule, and it is not new.
+    At lowest tracked price: the sale price equals the tracked low, but the
+    listing does not yet meet that rule.
+    """
+    if record.get("hit_low"):
+        return (
+            '<span class="pill pill-newlow" '
+            'title="Reached the lowest tracked price in this scan">New low</span>'
+        )
+    if record.get("lowest"):
+        return (
+            '<span class="quiet-low" '
+            'title="All-time low: at least 3 observations spanning 7 days">Verified low</span>'
+        )
+    if record.get("at_tracked_low"):
+        return (
+            '<span class="quiet-low" '
+            'title="Current price equals the lowest price tracked so far. '
+            'It does not yet meet the 3-observation, 7-day rule.">'
+            "At lowest tracked price</span>"
+        )
+    return ""
+
+
 def _card_status(record):
-    """Loud marks only for a recent change or a hot score. All-time low stays quiet."""
+    """Loud marks only for a recent change, a hot score, or a new low."""
     parts = []
     kinds = set()
     for badge in record.get("badges") or []:
@@ -1970,8 +2097,9 @@ def _card_status(record):
         parts.append('<span class="pill pill-hot">HOT</span>')
     if record.get("listed"):
         parts.append('<span class="pill pill-list">Watchlist</span>')
-    if any(badge.get("kind") == "lowest" for badge in record.get("badges") or []):
-        parts.append('<span class="quiet-low" title="Lowest tracked price">Lowest ever</span>')
+    low = _low_mark(record)
+    if low:
+        parts.append(low)
     if not parts:
         stage = _stage_html(record.get("stage"))
         if stage:
@@ -2037,8 +2165,8 @@ def _card_html(record):
         f'<p class="card-hover-title">{escape(record["name"])}</p>'
         f'<div class="card-extra">{escape(size)} {escape(record["held"])} '
         f'<span class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else ""}</span></div>'
-        f'<div class="row-meta">{_badge_html(record["badges"], record["listed"])}'
-        f'{_stage_html(record.get("stage"))}</div>'
+        f'<div class="row-meta">{_badge_html(_shown_badges(record), record["listed"])}'
+        f'{_low_mark(record)}{_stage_html(record.get("stage"))}</div>'
         f'<div class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false">'
         f'{record["score"]["score"]}'
         + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")

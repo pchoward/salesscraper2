@@ -1,7 +1,9 @@
 """Report wiring for charts, cards, filters, scores, and deals intelligence."""
 
 import json
+import subprocess
 import unittest
+from pathlib import Path
 
 from report import build_report_html
 
@@ -140,7 +142,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("minmax(176px, 1fr)", html)
         self.assertIn("-webkit-line-clamp: 3", html)
         self.assertIn('id="brandSearch"', html)
-        self.assertIn("Counts match the other filters", html)
+        self.assertIn("Counts match current results", html)
         self.assertIn("function paintSparklines()", html)
         self.assertIn("function sparkDirection(", html)
         self.assertIn('data-buckets="10up"', html)
@@ -236,7 +238,9 @@ class ReportExtraTests(unittest.TestCase):
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
         self.assertIn('class="rail"', html)
         rail = html.split('<div class="rail">', 1)[1].split('<div class="board">', 1)[0]
-        self.assertIn('id="searchInput"', rail)
+        self.assertIn('id="searchInput"', html)
+        self.assertLess(html.find('id="searchInput"'), html.find('<div class="rail">'))
+        self.assertNotIn('id="searchInput"', rail)
         self.assertIn('id="filterDrawer"', rail)
         self.assertLess(html.find('<div class="rail">'), html.find('<div class="board">'))
         self.assertIn("width: 100%", style)
@@ -260,12 +264,14 @@ class ReportExtraTests(unittest.TestCase):
             {},
             generated_at="2026-10-11T20:22:15+00:00",
         )
-        self.assertIn('class="filter-section is-open" data-section="deals"', html)
-        self.assertIn('class="filter-section is-open" data-section="interval"', html)
+        self.assertIn('class="filter-section" data-section="deals"', html)
+        self.assertNotIn('class="filter-section is-open" data-section="deals"', html)
+        self.assertIn('class="filter-section" data-section="interval"', html)
         self.assertNotIn('data-section="store"', html)
         self.assertNotIn('data-section="type"', html)
         self.assertIn('id="storeFilters"', html)
         self.assertIn('id="partFilters"', html)
+        self.assertIn('id="navPills"', html)
         self.assertIn('data-store="all"', html)
         self.assertIn(">All stores<", html)
         self.assertIn(
@@ -274,8 +280,27 @@ class ReportExtraTests(unittest.TestCase):
         )
         self.assertIn('class="sr-only" aria-label="Store"', html)
         self.assertIn('class="sr-only" aria-label="Product type"', html)
-        self.assertIn('id="typeHint"', html)
-        self.assertIn("Pick a type to see width and size filters", html)
+        self.assertIn('id="moreStores" hidden', html)
+        self.assertIn('id="moreParts" hidden', html)
+        self.assertIn('data-order="0" data-home="row" data-store="all"', html)
+        self.assertIn('data-order="0" data-home="row" data-part="all"', html)
+        rail = html.split('<div class="rail">', 1)[1].split('<div class="board">', 1)[0]
+        self.assertNotIn('id="storeFilters"', rail)
+        self.assertNotIn('id="partFilters"', rail)
+        self.assertNotIn("quick-chip", rail)
+        self.assertNotIn(">All stores<", rail)
+        self.assertNotIn(">Stores<", rail)
+        self.assertNotIn(">Products<", rail)
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        nav_css = style.split(".nav-row {", 1)[1].split("}", 1)[0]
+        self.assertIn("flex-wrap: nowrap", nav_css)
+        self.assertIn("function nextNavOverflow(", html)
+        self.assertIn("function fitNavPills(", html)
+        self.assertIn("#filtersOpen { display: inline-flex", style)
+        self.assertNotIn(".filters-open { display: inline-flex", style)
+        self.assertIn("body.filters-open", style)
+        self.assertIn('id="productSpecs"', html)
+        self.assertIn("Pick a spec to switch to that product type.", html)
         self.assertIn('class="filter-section is-open" data-section="brand"', html)
         self.assertIn(
             'class="filter-section is-open" data-section="width" data-for="Decks"',
@@ -284,15 +309,21 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn('is-type-hidden" data-section="width"', html)
         self.assertIn('class="filter-section" data-section="price"', html)
         self.assertIn('class="filter-section" data-section="discount"', html)
-        self.assertIn('class="filter-section" data-section="score"', html)
+        self.assertIn('data-section="score"', html)
+        self.assertIn(">Deal quality<", html)
         self.assertIn('class="filter-section" data-section="views"', html)
-        self.assertIn('class="filter-section" data-section="actions"', html)
+        self.assertIn('data-section="watching"', html)
+        self.assertIn('data-section="bookmarks"', html)
+        self.assertLess(html.find('id="navPills"'), html.find('id="changeLine"'))
+        self.assertLess(html.find('id="changeLine"'), html.find('<div class="rail">'))
         self.assertLess(html.find('id="storeFilters"'), html.find('id="partFilters"'))
-        self.assertLess(html.find('id="partFilters"'), html.find('data-section="deals"'))
+        self.assertLess(html.find('id="partFilters"'), html.find('id="contextSpecs"'))
+        self.assertLess(html.find('data-section="width"'), html.find('data-section="brand"'))
+        self.assertLess(html.find('data-section="brand"'), html.find('data-section="price"'))
+        self.assertLess(html.find('data-section="price"'), html.find('data-section="score"'))
+        self.assertLess(html.find('data-section="score"'), html.find('id="productSpecs"'))
+        self.assertLess(html.find('id="productSpecs"'), html.find('data-section="deals"'))
         self.assertLess(html.find('data-section="deals"'), html.find('data-section="interval"'))
-        self.assertLess(html.find('data-section="interval"'), html.find('data-section="brand"'))
-        self.assertLess(html.find('data-section="brand"'), html.find('data-section="width"'))
-        self.assertLess(html.find('data-section="width"'), html.find('data-section="price"'))
         self.assertIn("function syncTypeSections(", html)
         self.assertIn(".filter-section.is-type-hidden", html)
         self.assertIn("salesscraper2.filterSections", html)
@@ -360,16 +391,22 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('height="30"', card)
         face = card.split('class="card-badge"', 1)[1].split('class="card-sparkline"', 1)[0]
         self.assertIn("quiet-low", face)
+        self.assertIn("Verified low", face)
         self.assertNotIn("LOWEST EVER", face)
+        self.assertNotIn("New low", face)
         self.assertNotIn("pill-lowest", face)
         flat = next(
             part for part in html.split('<article class="deal-card')[1:] if "example.com/bones" in part
-        )
+        ).split("</article>", 1)[0]
         self.assertIn("Price unchanged since Oct 2", flat)
         self.assertIn("Now: $30.00", flat)
+        self.assertIn("At lowest tracked price", flat)
+        self.assertNotIn("Verified low", flat)
+        self.assertNotIn("New low", flat)
         self.assertIn('class="avg-price" data-symbol="$" hidden', flat)
         self.assertIn('height="12"', flat)
-        self.assertIn('id="categoryStrip"', html)
+        self.assertNotIn('id="categoryStrip"', html)
+        self.assertIn('id="partFilters"', html)
         self.assertIn('data-part="Decks"', html)
         self.assertIn('data-part="Wheels"', html)
         self.assertNotIn('data-part="Trucks"', html)
@@ -402,9 +439,82 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("if (highlights && row.dataset.highlight !== \"1\") return false;", html)
         self.assertNotIn("<summary>Today's highlights</summary>", html)
         self.assertIn("Deal Type", html)
-        self.assertIn("Product Type", html)
+        self.assertIn(">Products<", html)
         self.assertIn("Saved Views", html)
         self.assertIn(">Show results</button>", html)
+        self.assertIn("function adoptSpecPart(", html)
+        self.assertIn('id="groupToggle"', html)
+        self.assertLess(html.find('id="groupToggle"'), html.find('<div class="rail">'))
+
+    def test_new_low_is_loud_and_verified_low_stays_quiet(self):
+        deck = _deck("40.00", "https://example.com/newlow", "Zumiez", "Powell Peralta Ripper 8.5 Skateboard Deck")
+        history = {
+            deck["url"]: {
+                "name": deck["name"],
+                "store": "Zumiez",
+                "part": "Decks",
+                "first_seen": "2026-09-01",
+                "last_seen": "2026-10-11",
+                "prices": {
+                    "2026-09-01": 60.0,
+                    "2026-10-01": 50.0,
+                    "2026-10-11": 40.0,
+                },
+            }
+        }
+        html = build_report_html(
+            {"Zumiez_Decks": [deck]},
+            {
+                "Zumiez_Decks": [{
+                    "type": "price_drop",
+                    "item": deck,
+                    "old": "50.00",
+                    "new": "40.00",
+                    "delta": 10,
+                    "percent_vs_prior": 20,
+                }]
+            },
+            price_history=history,
+            generated_at="2026-10-11T21:46:35+00:00",
+        )
+        card = html.split("https://example.com/newlow", 1)[1].split("</article>", 1)[0]
+        self.assertIn("pill-newlow", card)
+        self.assertIn(">New low<", card)
+        self.assertNotIn("Verified low", card)
+        self.assertIn('data-kind="highlights"', html)
+
+    def test_nav_overflow_keeps_all_and_the_selected_chip(self):
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        start = source.find("function nextNavOverflow(")
+        end = source.find("function navClusters(")
+        self.assertGreater(start, 0)
+        self.assertGreater(end, start)
+        script = source[start:end] + """
+const chip = (value, pressed) => ({value: value, pressed: !!pressed});
+const stores = {chips: ["all","Zumiez","Tactics","SkateWarehouse","CCS"].map(value => chip(value, value === "all"))};
+const products = {chips: ["all","Decks","Trucks","Wheels"].map(value => chip(value, value === "Decks"))};
+let pick = nextNavOverflow([stores, products]);
+if (!pick || pick.cluster !== 1 || products.chips[pick.index].value !== "Wheels") {
+    throw new Error("expected Wheels first, got " + JSON.stringify(pick));
+}
+products.chips = ["all","Decks","Trucks","Wheels"].map(value => chip(value, value === "Wheels"));
+pick = nextNavOverflow([stores, products]);
+if (!pick || products.chips[pick.index].value !== "Trucks") {
+    throw new Error("expected Trucks before a pressed Wheels chip");
+}
+products.chips = ["all","Decks"].map(value => chip(value, value === "Decks"));
+pick = nextNavOverflow([stores, products]);
+if (!pick || pick.cluster !== 0 || stores.chips[pick.index].value !== "CCS") {
+    throw new Error("expected CCS once products cannot shrink");
+}
+stores.chips = [chip("all", true)];
+products.chips = [chip("all", false), chip("Decks", true)];
+if (nextNavOverflow([stores, products]) !== null) {
+    throw new Error("All and the selected chip stay on the row");
+}
+"""
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
 
 
 if __name__ == "__main__":

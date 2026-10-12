@@ -21,6 +21,7 @@ let state = {
     shapes: [],
     truckSizes: [],
     truckHeights: [],
+    constructions: [],
     abecs: [],
     visitMode: "yesterday",
     sortKey: "rank",
@@ -235,15 +236,17 @@ function toggleWidthGroup(node) {
 const DIAMETER_ORDER = ["50-51", "52-53", "54-55", "56+"];
 const SHAPE_ORDER = ["conical", "radial", "sidecut"];
 const HEIGHT_ORDER = ["low", "mid", "high"];
+const CONSTRUCTION_ORDER = ["hollow", "standard"];
 const SPEC_FACETS = [
     { stateKey: "diameters", part: "Wheels", attr: "diameter", section: "diameterFilters" },
     { stateKey: "duros", part: "Wheels", attr: "duros", section: "duroFilters" },
     { stateKey: "shapes", part: "Wheels", attr: "shape", section: "shapeFilters" },
     { stateKey: "truckSizes", part: "Trucks", attr: "trucksize", section: "trucksizeFilters" },
     { stateKey: "truckHeights", part: "Trucks", attr: "truckheight", section: "truckheightFilters" },
+    { stateKey: "constructions", part: "Trucks", attr: "construction", section: "constructionFilters" },
     { stateKey: "abecs", part: "Bearings", attr: "abec", section: "abecFilters" }
 ];
-const SPEC_OPEN = { width: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, abec: 1 };
+const SPEC_OPEN = { width: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1 };
 
 function normalizeDuroToken(value) {
     const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
@@ -286,6 +289,7 @@ function orderSpecValues(stateKey, values) {
     if (stateKey === "diameters") return DIAMETER_ORDER.filter(id => chosen[id]);
     if (stateKey === "shapes") return SHAPE_ORDER.filter(id => chosen[id]);
     if (stateKey === "truckHeights") return HEIGHT_ORDER.filter(id => chosen[id]);
+    if (stateKey === "constructions") return CONSTRUCTION_ORDER.filter(id => chosen[id]);
     if (stateKey === "duros") {
         return keys.sort((a, b) => {
             const delta = parseInt(a, 10) - parseInt(b, 10);
@@ -316,18 +320,40 @@ function specAllowed(row, facet, selected) {
 
 function syncTypeSections(expandSpec) {
     const part = state.part || "Decks";
-    document.querySelectorAll(".filter-section[data-for]").forEach(section => {
+    const context = document.getElementById("contextSpecs");
+    const specs = document.getElementById("productSpecs");
+    const specsBody = document.getElementById("productSpecsBody");
+    const brand = document.querySelector('[data-section="brand"]');
+    if (part === "all") {
+        if (specs && specsBody && context) specsBody.appendChild(context);
+        if (specs) specs.hidden = false;
+    } else {
+        if (context && brand && brand.parentElement) brand.parentElement.insertBefore(context, brand);
+        if (specs) specs.hidden = true;
+    }
+    document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
         const owner = section.getAttribute("data-for") || "";
-        const show = part !== "all" && owner === part;
+        const show = part === "all" || owner === part;
         section.classList.toggle("is-type-hidden", !show);
         const id = section.getAttribute("data-section") || "";
-        if (show && expandSpec && SPEC_OPEN[id]) paintFilterSection(section, true);
+        if (show && part !== "all" && expandSpec && SPEC_OPEN[id]) paintFilterSection(section, true);
     });
     rememberFilterSections();
 }
 
+function adoptSpecPart(stateKey) {
+    const facet = SPEC_FACETS.find(item => item.stateKey === stateKey);
+    if (!facet || (state.part || "Decks") !== "all") return;
+    state.part = facet.part;
+    const select = document.getElementById("partSelect");
+    if (select) select.value = state.part;
+    setPressed("#partFilters [data-part]", "data-part", state.part);
+    syncTypeSections(true);
+}
+
 function toggleSpec(stateKey, value) {
     if (!value) return;
+    adoptSpecPart(stateKey);
     const selected = {};
     (state[stateKey] || []).forEach(item => { selected[item] = true; });
     if (selected[value]) delete selected[value];
@@ -424,6 +450,7 @@ function paintFacetCounts() {
     paintSelectCounts("partSelect", partCounts);
     paintQuickRow("storeFilters", "data-store", storeCounts, state.store || "all");
     paintQuickRow("partFilters", "data-part", partCounts, state.part || "Decks");
+    fitNavPills();
     paintTypeHint();
     paintSelectCounts("lengthSelect", lengthCounts);
     paintSelectCounts("wheelbaseSelect", wheelCounts);
@@ -837,6 +864,100 @@ function paintQuickRow(groupId, attr, counts, current) {
     });
 }
 
+function nextNavOverflow(clusters) {
+    const groups = clusters || [];
+    for (let i = groups.length - 1; i >= 0; i -= 1) {
+        const chips = groups[i].chips || [];
+        if (chips.length <= 1) continue;
+        for (let j = chips.length - 1; j >= 0; j -= 1) {
+            const chip = chips[j];
+            if (!chip || chip.pressed || chip.value === "all") continue;
+            return { cluster: i, index: j };
+        }
+    }
+    return null;
+}
+
+function navClusters() {
+    return ["storeFilters", "partFilters"].map(id => {
+        const root = document.getElementById(id);
+        if (!root) return null;
+        const row = root.querySelector(".quick-row");
+        const menu = root.querySelector(".more-menu");
+        const list = root.querySelector(".more-list");
+        if (!row || !menu || !list) return null;
+        return { root: root, row: row, menu: menu, list: list };
+    }).filter(Boolean);
+}
+
+function restoreNavHomes(cluster) {
+    const chips = Array.from(cluster.root.querySelectorAll(".quick-chip"));
+    chips.sort((a, b) => Number(a.getAttribute("data-order") || 0) - Number(b.getAttribute("data-order") || 0));
+    chips.forEach(chip => {
+        if (chip.getAttribute("data-home") === "more") cluster.list.appendChild(chip);
+        else cluster.row.insertBefore(chip, cluster.menu);
+    });
+}
+
+function syncNavMore(cluster) {
+    const count = cluster.list.querySelectorAll(":scope > .quick-chip").length;
+    const toggle = cluster.menu.querySelector(".more-toggle");
+    if (!count) {
+        cluster.menu.hidden = true;
+        cluster.list.hidden = true;
+        if (toggle) toggle.setAttribute("aria-expanded", "false");
+        return;
+    }
+    cluster.menu.hidden = false;
+}
+
+function pullPressedNavChip(cluster) {
+    const pressed = cluster.list.querySelector('.quick-chip[aria-pressed="true"]');
+    if (pressed) cluster.row.insertBefore(pressed, cluster.menu);
+}
+
+let navFitLock = false;
+
+function fitNavPills() {
+    const bar = document.getElementById("navPills");
+    if (!bar || navFitLock) return;
+    const clusters = navClusters();
+    if (!clusters.length) return;
+    navFitLock = true;
+    try {
+        clusters.forEach(restoreNavHomes);
+        clusters.forEach(syncNavMore);
+        const settle = () => {
+            let guard = 0;
+            const limit = () => {
+                const viewport = document.documentElement.clientWidth || bar.clientWidth;
+                return Math.min(bar.clientWidth || viewport, viewport);
+            };
+            while (limit() > 0 && bar.scrollWidth > limit() + 1 && guard < 40) {
+                guard += 1;
+                const choice = nextNavOverflow(clusters.map(cluster => ({
+                    chips: Array.from(cluster.row.querySelectorAll(":scope > .quick-chip")).map(chip => ({
+                        value: chip.getAttribute("data-store") || chip.getAttribute("data-part") || "",
+                        pressed: chip.getAttribute("aria-pressed") === "true",
+                    })),
+                })));
+                if (!choice) return;
+                const cluster = clusters[choice.cluster];
+                const chip = cluster.row.querySelectorAll(":scope > .quick-chip")[choice.index];
+                if (!chip) return;
+                cluster.list.appendChild(chip);
+                syncNavMore(cluster);
+            }
+        };
+        settle();
+        clusters.forEach(pullPressedNavChip);
+        clusters.forEach(syncNavMore);
+        settle();
+    } finally {
+        navFitLock = false;
+    }
+}
+
 function paintTypeHint() {
     const hint = document.getElementById("typeHint");
     if (hint) hint.hidden = state.part !== "all";
@@ -1051,10 +1172,10 @@ function updateChangeLine() {
         if (prefix) prefix.textContent = "Since yesterday:";
     }
     const map = {
-        btnNew: plural(added, "new deal", "new deals"),
-        btnDrop: plural(drop, "price drop", "price drops"),
-        btnLow: low + " hit lowest tracked price",
-        btnGone: plural(gone, "deal disappeared", "deals disappeared")
+        btnNew: "New " + added,
+        btnDrop: "Price drops " + drop,
+        btnLow: "Hit lowest " + low,
+        btnGone: "Disappeared " + gone
     };
     Object.keys(map).forEach(id => {
         const node = document.getElementById(id);
@@ -1222,6 +1343,7 @@ function clearFilters() {
         shapes: [],
         truckSizes: [],
         truckHeights: [],
+        constructions: [],
         abecs: [],
         visitMode: state.visitMode,
         sortKey: "rank",
@@ -1404,6 +1526,7 @@ function decodeQuery(query) {
         shapes: [],
         truckSizes: [],
         truckHeights: [],
+        constructions: [],
         abecs: []
     };
     const text = String(query || "").replace(/^\?/, "");
@@ -1452,6 +1575,7 @@ function decodeQuery(query) {
         else if (key === "shape") stateOut.shapes = orderSpecValues("shapes", String(value || "").split(","));
         else if (key === "trucksize") stateOut.truckSizes = orderSpecValues("truckSizes", String(value || "").split(","));
         else if (key === "truckheight") stateOut.truckHeights = orderSpecValues("truckHeights", String(value || "").split(","));
+        else if (key === "construction") stateOut.constructions = orderSpecValues("constructions", String(value || "").split(","));
         else if (key === "abec") stateOut.abecs = orderSpecValues("abecs", String(value || "").split(","));
     });
     ["min", "max", "discount", "discountmax", "scoremin", "scoremax"].forEach(key => {
@@ -1506,6 +1630,8 @@ function encodeState(snapshot) {
     if (truckSizes.length) add("trucksize", truckSizes.join(","));
     const truckHeights = orderSpecValues("truckHeights", snapshot.truckHeights || []);
     if (truckHeights.length) add("truckheight", truckHeights.join(","));
+    const constructions = orderSpecValues("constructions", snapshot.constructions || []);
+    if (constructions.length) add("construction", constructions.join(","));
     const abecs = orderSpecValues("abecs", snapshot.abecs || []);
     if (abecs.length) add("abec", abecs.join(","));
     return params.toString();
@@ -1543,6 +1669,7 @@ function captureState() {
         shapes: (state.shapes || []).slice(),
         truckSizes: (state.truckSizes || []).slice(),
         truckHeights: (state.truckHeights || []).slice(),
+        constructions: (state.constructions || []).slice(),
         abecs: (state.abecs || []).slice()
     };
 }
@@ -1606,6 +1733,7 @@ function writeControls(snapshot) {
     state.shapes = orderSpecValues("shapes", snapshot.shapes || []);
     state.truckSizes = orderSpecValues("truckSizes", snapshot.truckSizes || []);
     state.truckHeights = orderSpecValues("truckHeights", snapshot.truckHeights || []);
+    state.constructions = orderSpecValues("constructions", snapshot.constructions || []);
     state.abecs = orderSpecValues("abecs", snapshot.abecs || []);
     if (partChanged) syncTypeSections(true);
     const watching = document.getElementById("watchingToggle");
@@ -2055,6 +2183,7 @@ function paintActiveChips() {
         shapes: value => "Shape: " + value.charAt(0).toUpperCase() + value.slice(1),
         truckSizes: value => "Size " + value,
         truckHeights: value => "Height: " + value.charAt(0).toUpperCase() + value.slice(1),
+        constructions: value => "Construction: " + value.charAt(0).toUpperCase() + value.slice(1),
         abecs: value => "ABEC " + value
     };
     SPEC_FACETS.forEach(facet => {
@@ -2573,6 +2702,31 @@ function init() {
             filterByPart(button.getAttribute("data-part") || "Decks");
         });
     }
+    document.querySelectorAll(".more-toggle").forEach(button => {
+        button.addEventListener("click", event => {
+            event.stopPropagation();
+            const list = document.getElementById(button.getAttribute("aria-controls") || "");
+            if (!list) return;
+            const open = list.hidden;
+            document.querySelectorAll(".more-list").forEach(other => { other.hidden = true; });
+            document.querySelectorAll(".more-toggle").forEach(other => {
+                other.setAttribute("aria-expanded", "false");
+            });
+            list.hidden = !open;
+            button.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+    });
+    document.addEventListener("click", event => {
+        if (event.target.closest(".more-menu")) return;
+        document.querySelectorAll(".more-list").forEach(list => { list.hidden = true; });
+        document.querySelectorAll(".more-toggle").forEach(button => {
+            button.setAttribute("aria-expanded", "false");
+        });
+    });
+    const navPills = document.getElementById("navPills");
+    if (navPills && window.ResizeObserver) new ResizeObserver(fitNavPills).observe(navPills);
+    else window.addEventListener("resize", fitNavPills);
+    fitNavPills();
     const brand = document.getElementById("brandSelect");
     if (brand) brand.addEventListener("change", applyFilters);
     const brandList = document.getElementById("brandList");
@@ -2589,9 +2743,27 @@ function init() {
         brandSearch.addEventListener("input", () => filterBrandList(brandSearch.value));
     }
     const length = document.getElementById("lengthSelect");
-    if (length) length.addEventListener("change", applyFilters);
+    if (length) length.addEventListener("change", () => {
+        if ((state.part || "Decks") === "all" && length.value && length.value !== "all") {
+            state.part = "Decks";
+            const select = document.getElementById("partSelect");
+            if (select) select.value = "Decks";
+            setPressed("#partFilters [data-part]", "data-part", "Decks");
+            syncTypeSections(true);
+        }
+        applyFilters();
+    });
     const wheelbase = document.getElementById("wheelbaseSelect");
-    if (wheelbase) wheelbase.addEventListener("change", applyFilters);
+    if (wheelbase) wheelbase.addEventListener("change", () => {
+        if ((state.part || "Decks") === "all" && wheelbase.value && wheelbase.value !== "all") {
+            state.part = "Decks";
+            const select = document.getElementById("partSelect");
+            if (select) select.value = "Decks";
+            setPressed("#partFilters [data-part]", "data-part", "Decks");
+            syncTypeSections(true);
+        }
+        applyFilters();
+    });
     const sort = document.getElementById("sortSelect");
     if (sort) sort.addEventListener("change", applySortChoice);
     const more = document.getElementById("moreFilters");

@@ -31,7 +31,8 @@ Wheel, truck, and bearing specs are the same kind of list. They are omitted
 when empty. ``diameter`` is a band id (``50-51``, ``52-53``, ``54-55``,
 ``56+``). ``duro`` is a hardness token such as ``99a``. ``shape`` is
 ``conical``, ``radial``, or ``sidecut``. ``trucksize`` is the size printed
-in the name. ``truckheight`` is ``low``, ``mid``, or ``high``. ``abec`` is
+in the name. ``truckheight`` is ``low``, ``mid``, or ``high``. ``construction`` is
+``hollow`` or ``standard`` when that word is printed in the name. ``abec`` is
 the rating digits. Those filters apply only to their own part.
 """
 
@@ -39,6 +40,7 @@ from urllib.parse import parse_qsl, urlencode
 
 from part_specs import (
     ordered_abecs,
+    ordered_constructions,
     ordered_diameters,
     ordered_duros,
     ordered_heights,
@@ -183,6 +185,7 @@ def empty_state():
         "shapes": [],
         "truck_sizes": [],
         "truck_heights": [],
+        "constructions": [],
         "abecs": [],
     }
 
@@ -365,6 +368,8 @@ def decode_query(query):
             state["truck_sizes"] = ordered_sizes(str(value or "").split(","))
         elif key == "truckheight":
             state["truck_heights"] = ordered_heights(str(value or "").split(","))
+        elif key == "construction":
+            state["constructions"] = ordered_constructions(str(value or "").split(","))
         elif key == "abec":
             state["abecs"] = ordered_abecs(str(value or "").split(","))
     return state
@@ -451,6 +456,9 @@ def encode_state(state):
     heights = ordered_heights(state.get("truck_heights"))
     if heights:
         add("truckheight", ",".join(heights))
+    constructions = ordered_constructions(state.get("constructions"))
+    if constructions:
+        add("construction", ",".join(constructions))
     abecs = ordered_abecs(state.get("abecs"))
     if abecs:
         add("abec", ",".join(abecs))
