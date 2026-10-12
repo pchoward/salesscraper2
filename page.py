@@ -1180,9 +1180,14 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
     part_options = ['<option value="all">All types</option>']
     for part in ("Decks", "Wheels", "Trucks", "Bearings"):
-        if part in part_counts:
+        if part in part_counts or part == "Decks":
             part_options.append(
-                _option(part, f"{part} ({part_counts[part]})", data_label=part)
+                _option(
+                    part,
+                    f"{part} ({part_counts.get(part, 0)})",
+                    selected=(part == "Decks"),
+                    data_label=part,
+                )
             )
     sorted_brands = sorted(brands, key=str.casefold)
     brand_options = ['<option value="all" data-label="All brands">All brands</option>']
@@ -1264,7 +1269,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         classes = ["filter-section"]
         if open_default:
             classes.append("is-open")
-        if for_part:
+        # Decks is the fresh-visit default, so those sections start visible.
+        if for_part and for_part != "Decks":
             classes.append("is-type-hidden")
         expanded = "true" if open_default else "false"
         for_attr = f' data-for="{escape(for_part, quote=True)}"' if for_part else ""
@@ -1437,6 +1443,50 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "ABEC rating printed in the name.",
         sum(abec_counts.values()),
     )
+
+    def _quick_chip(attr, value, label, count, pressed=False):
+        on = "true" if pressed else "false"
+        active = " active" if pressed else ""
+        zero = " is-zero" if count == 0 else ""
+        return (
+            f'<button type="button" class="chip quick-chip{active}{zero}" '
+            f'data-{attr}="{escape(str(value), quote=True)}" data-count="{count}" '
+            f'aria-pressed="{on}">'
+            f'<span class="quick-name">{escape(str(label))}</span>'
+            f'<span class="quick-count">{count}</span></button>'
+        )
+
+    store_total = sum(store_counts.values())
+    store_buttons = [_quick_chip("store", "all", "All stores", store_total, pressed=True)]
+    for store in sorted(store_counts):
+        store_buttons.append(_quick_chip("store", store, store, store_counts[store]))
+    store_row = (
+        '<div class="quick-filters" id="storeFilters">'
+        '<span class="quick-label">Store</span>'
+        '<div class="quick-row" role="group" aria-label="Store">'
+        + "".join(store_buttons)
+        + "</div>"
+        f'<select id="storeSelect" class="sr-only" aria-label="Store">{"".join(store_options)}</select>'
+        "</div>"
+    )
+    part_total = sum(part_counts.values())
+    part_buttons = [_quick_chip("part", "all", "All", part_total)]
+    for part in ("Decks", "Wheels", "Trucks", "Bearings"):
+        if part not in part_counts and part != "Decks":
+            continue
+        part_buttons.append(
+            _quick_chip("part", part, part, part_counts.get(part, 0), pressed=(part == "Decks"))
+        )
+    part_row = (
+        '<div class="quick-filters" id="partFilters">'
+        '<span class="quick-label">Product Type</span>'
+        '<div class="quick-row" role="group" aria-label="Product type">'
+        + "".join(part_buttons)
+        + "</div>"
+        f'<select id="partSelect" class="sr-only" aria-label="Product type">{"".join(part_options)}</select>'
+        '<p class="type-hint" id="typeHint" hidden>Pick a type to see width and size filters</p>'
+        "</div>"
+    )
     sidebar_html = (
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
@@ -1445,25 +1495,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="active-head"><span>Active filters</span>'
         '<button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div>'
         '<div class="active-row" id="activeChips"></div></div>'
-        '<p class="count-note">Counts match the other filters '
+        + store_row
+        + part_row
+        + '<p class="count-note">Counts match the other filters '
         '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
         '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
         "if you pick that store, type, brand, width, or size. It is not a total of everything tracked."
         "</span></p>"
-        + _section(
-            "store",
-            "Store",
-            '<label class="field"><span class="sr-only">Store</span>'
-            f'<select id="storeSelect">{"".join(store_options)}</select></label>',
-            open_default=True,
-        )
-        + _section(
-            "type",
-            "Product Type",
-            '<label class="field"><span class="sr-only">Product type</span>'
-            f'<select id="partSelect">{"".join(part_options)}</select></label>',
-            open_default=True,
-        )
         + _section(
             "deals",
             "Deal Type",
@@ -2215,12 +2253,13 @@ def _category_strip(part_counts):
     if not names:
         return ""
     buttons = [
-        '<button type="button" data-part="all" aria-pressed="true">All '
+        '<button type="button" data-part="all" aria-pressed="false">All '
         f'<span class="cat-count">{sum(part_counts.values())}</span></button>'
     ]
     for name in names:
+        pressed = "true" if name == "Decks" else "false"
         buttons.append(
-            f'<button type="button" data-part="{escape(name, quote=True)}" aria-pressed="false">'
+            f'<button type="button" data-part="{escape(name, quote=True)}" aria-pressed="{pressed}">'
             f'{escape(name)} <span class="cat-count">{part_counts.get(name, 0)}</span></button>'
         )
     return (

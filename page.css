@@ -1574,6 +1574,35 @@ tr.deal-row.grouped-hide {
 .brand-search { width: 100%; }
 .brand-facet .facet-value.is-search-hide { display: none !important; }
 .facet-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.quick-filters { display: flex; flex-direction: column; gap: 0.22rem; }
+.quick-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #334155;
+}
+.quick-row { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+.quick-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.28rem;
+    max-width: 100%;
+    min-height: 1.55rem;
+    margin: 0;
+    padding: 0.16rem 0.38rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: normal;
+    text-align: left;
+}
+.quick-name { min-width: 0; overflow-wrap: anywhere; }
+.quick-count { font-size: 0.64rem; font-weight: 650; color: #64748b; }
+.quick-chip[aria-pressed="true"] .quick-count { color: #dbeafe; }
+.type-hint { margin: 0.15rem 0 0; color: #64748b; font-size: 0.68rem; line-height: 1.35; }
+.type-hint[hidden] { display: none !important; }
 .count-note {
     position: relative;
     margin: 0;

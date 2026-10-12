@@ -4,7 +4,9 @@ The page reads and writes this query string with ``history.replaceState``.
 Saved views store the same string. Defaults are omitted so an unfiltered
 page has no query.
 
-``type=deck`` is the part. ``discount=40`` is the minimum percent off.
+A fresh visit has no ``type`` and shows Decks. ``type=deck`` still means
+Decks, and ``type=all`` means every product type. ``discount=40`` is the
+minimum percent off.
 
 Width is a list of range-chip ids in ``width``, comma-separated. An empty
 list means All. Each chip is one bucket: the lower bound is inclusive and
@@ -141,12 +143,12 @@ STARTER_VIEWS = (
     {
         "id": "sw-new",
         "name": "New Skate Warehouse drops",
-        "query": "store=skatewarehouse&change=new",
+        "query": "store=skatewarehouse&change=new&type=all",
     },
     {
         "id": "watched-lows",
         "name": "Watched items at all-time low",
-        "query": "watching=1&low=1",
+        "query": "watching=1&low=1&type=all",
     },
 )
 
@@ -155,7 +157,7 @@ def empty_state():
     return {
         "q": "",
         "store": "all",
-        "part": "all",
+        "part": "Decks",
         "widths": [],
         "brand": "all",
         "min": None,
@@ -208,7 +210,10 @@ def _store(value):
 
 
 def _part(value):
-    return TYPE_SLUGS.get(str(value or "").strip().lower(), "")
+    text = str(value or "").strip().lower()
+    if text == "all":
+        return "all"
+    return TYPE_SLUGS.get(text, "")
 
 
 def _flag(value):
@@ -382,8 +387,12 @@ def encode_state(state):
     store = state.get("store") or "all"
     if store != "all":
         add("store", STORE_TO_SLUG.get(store, ""))
-    part = state.get("part") or "all"
-    if part != "all":
+    # Missing type is Decks. All has to be written out, because the helper
+    # below drops a bare "all" as "leave this at the default".
+    part = state.get("part") or "Decks"
+    if part == "all":
+        pairs.append(("type", "all"))
+    elif part != "Decks":
         add("type", TYPE_TO_SLUG.get(part, ""))
     widths = _ordered_widths(state.get("widths"))
     if widths:

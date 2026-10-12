@@ -219,7 +219,7 @@ class SpecSectionTests(unittest.TestCase):
         ]
         deck_html = build_report_html({"Zumiez_Decks": decks}, {}, generated_at="2026-10-11T21:46:35+00:00")
         self.assertIn('data-section="length" data-for="Decks"', deck_html)
-        self.assertIn('class="filter-section is-open is-type-hidden" data-section="width" data-for="Decks"', deck_html)
+        self.assertIn('class="filter-section is-open" data-section="width" data-for="Decks"', deck_html)
         self.assertNotIn('data-section="wheelbase"', deck_html)
         based = decks + [
             _item(
