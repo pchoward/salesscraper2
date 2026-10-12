@@ -2091,19 +2091,31 @@ function placeFloat(pop, anchor, avoid) {
     const box = anchor.getBoundingClientRect();
     const avoidBox = avoid ? avoid.getBoundingClientRect() : null;
     const margin = 8;
-    let top = box.top - popRect.height - 6;
-    let left = Math.min(box.left, window.innerWidth - margin - popRect.width);
-    if (top < margin) top = box.bottom + 6;
-    if (left < margin) left = margin;
-    if (top + popRect.height > window.innerHeight - margin) {
-        top = Math.max(margin, window.innerHeight - margin - popRect.height);
-    }
-    if (avoidBox && top < avoidBox.bottom && (top + popRect.height) > avoidBox.top &&
-        left < avoidBox.right && (left + popRect.width) > avoidBox.left) {
-        const below = avoidBox.bottom + 6;
-        if (below + popRect.height <= window.innerHeight - margin) top = below;
-        else top = Math.max(margin, avoidBox.top - popRect.height - 6);
-    }
+    const width = popRect.width;
+    const height = popRect.height;
+    let left = Math.min(Math.max(margin, box.left), Math.max(margin, window.innerWidth - margin - width));
+    const candidates = [box.top - height - 6];
+    if (avoidBox && avoidBox.height) candidates.push(avoidBox.bottom + 6);
+    candidates.push(box.bottom + 6);
+    let top = candidates[0];
+    let placed = false;
+    candidates.forEach(candidate => {
+        if (placed) return;
+        const rect = {
+            top: candidate,
+            bottom: candidate + height,
+            left: left,
+            right: left + width,
+        };
+        const hitsPrice = avoidBox && avoidBox.height &&
+            rect.top < avoidBox.bottom && rect.bottom > avoidBox.top &&
+            rect.left < avoidBox.right && rect.right > avoidBox.left;
+        if (candidate >= margin && rect.bottom <= window.innerHeight - margin && !hitsPrice) {
+            top = candidate;
+            placed = true;
+        }
+    });
+    if (!placed) top = Math.max(margin, Math.min(top, window.innerHeight - margin - height));
     pop.style.position = "fixed";
     pop.style.top = Math.round(top) + "px";
     pop.style.left = Math.round(left) + "px";
@@ -2912,6 +2924,16 @@ function init() {
         card.addEventListener("focusout", event => {
             if (!card.contains(event.relatedTarget)) card.classList.remove("is-preview");
         });
+        const titleSlot = card.querySelector(".title-slot");
+        if (titleSlot) {
+            const placeTitle = () => {
+                const title = card.querySelector(".title-pop");
+                const price = card.querySelector(".card-prices");
+                if (title) placeFloat(title, titleSlot, price);
+            };
+            titleSlot.addEventListener("mouseenter", placeTitle);
+            titleSlot.addEventListener("focusin", placeTitle);
+        }
     });
     document.querySelectorAll(".spark-hit").forEach(button => {
         button.addEventListener("mousemove", event => {
