@@ -220,6 +220,13 @@ function paintWidthChips() {
 function toggleWidthGroup(node) {
     const ids = widthGroupIds(node);
     if (!ids.length) return;
+    if ((state.part || "Decks") === "all") {
+        state.part = "Decks";
+        const select = document.getElementById("partSelect");
+        if (select) select.value = "Decks";
+        setPressed("#partFilters [data-part]", "data-part", "Decks");
+        syncTypeSections(true);
+    }
     const selected = {};
     (state.widths || []).forEach(id => { selected[id] = true; });
     const allOn = ids.every(id => selected[id]);
@@ -302,6 +309,20 @@ function orderSpecValues(stateKey, values) {
     return keys;
 }
 
+function activeSpecKeys(part) {
+    const current = part || "Decks";
+    if (current === "Decks") return ["widths", "length", "wheelbase"];
+    if (current === "Wheels") return ["diameters", "duros", "shapes"];
+    if (current === "Trucks") return ["truckSizes", "truckHeights", "constructions"];
+    if (current === "Bearings") return ["abecs"];
+    return [];
+}
+
+function specKeyActive(key, part) {
+    const current = part != null ? part : (state.part || "Decks");
+    return activeSpecKeys(current).indexOf(key) >= 0;
+}
+
 function specTokens(row, attr) {
     return String((row.dataset && row.dataset[attr]) || "").split(",").map(token => token.trim()).filter(Boolean);
 }
@@ -324,11 +345,13 @@ function syncTypeSections(expandSpec) {
     const specs = document.getElementById("productSpecs");
     const specsBody = document.getElementById("productSpecsBody");
     const brand = document.querySelector('[data-section="brand"]');
+    const specGroup = document.getElementById("specGroup");
     if (part === "all") {
         if (specs && specsBody && context) specsBody.appendChild(context);
         if (specs) specs.hidden = false;
     } else {
-        if (context && brand && brand.parentElement) brand.parentElement.insertBefore(context, brand);
+        if (context && specGroup) specGroup.insertBefore(context, specGroup.firstChild);
+        else if (context && brand && brand.parentElement) brand.parentElement.insertBefore(context, brand);
         if (specs) specs.hidden = true;
     }
     document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
@@ -548,15 +571,17 @@ function rowMatches(row, overrides) {
     if (state.search && !hay.includes(state.search)) return false;
     if (store !== "all" && (row.dataset.store || "") !== store) return false;
     if (part !== "all" && (row.dataset.part || "") !== part) return false;
-    if (!deckWidthAllowed(row, widths)) return false;
+    const viewPart = part || "Decks";
+    if (specKeyActive("widths", viewPart) && !deckWidthAllowed(row, widths)) return false;
     for (let specIndex = 0; specIndex < SPEC_FACETS.length; specIndex++) {
         const facet = SPEC_FACETS[specIndex];
+        if (!specKeyActive(facet.stateKey, viewPart)) continue;
         const selected = Object.prototype.hasOwnProperty.call(over, facet.stateKey) ? over[facet.stateKey] : state[facet.stateKey];
         if (!specAllowed(row, facet, selected)) return false;
     }
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
-    if (length !== "all" && (row.dataset.length || "") !== length) return false;
-    if (wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
+    if (specKeyActive("length", viewPart) && length !== "all" && (row.dataset.length || "") !== length) return false;
+    if (specKeyActive("wheelbase", viewPart) && wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
     const price = parseFloat(row.dataset.price);
     if (state.priceMin != null && !(price >= state.priceMin)) return false;
     if (state.priceMax != null && !(price <= state.priceMax)) return false;
@@ -655,6 +680,7 @@ function applyFilters() {
         row.classList.toggle("filtered-out", !rowMatches(row));
     });
     showGone(state.change === "removed");
+    applySectionFilters();
     applyGroupVisibility();
     syncDetails();
     paintCards();
@@ -1029,33 +1055,43 @@ function setChange(kind) {
     }
 }
 
+const SORT_NUMERIC = { price: 1, original: 1, discount: 1, size: 1, days: 1, daysat: 1, score: 1, rank: 1, observations: 1 };
+
+function defaultSortDir(key) {
+    if (key === "price" || key === "rank" || key === "store" || key === "brand" || key === "size" || key === "daysat" || key === "name" || key === "part" || key === "stage") {
+        return "asc";
+    }
+    return "desc";
+}
+
+function compareSort(a, b, key, direction) {
+    if (key === "rank") return (parseFloat(a.dataset.rank) || 0) - (parseFloat(b.dataset.rank) || 0);
+    const av = a.dataset[key];
+    const bv = b.dataset[key];
+    const aMissing = av === undefined || av === "";
+    const bMissing = bv === undefined || bv === "";
+    if (aMissing && bMissing) return 0;
+    if (aMissing) return 1;
+    if (bMissing) return -1;
+    if (SORT_NUMERIC[key]) {
+        const diff = parseFloat(av) - parseFloat(bv);
+        return direction === "asc" ? diff : -diff;
+    }
+    const diff = String(av).localeCompare(String(bv));
+    return direction === "asc" ? diff : -diff;
+}
+
 function sortBy(key, direction) {
     const tbody = document.querySelector("#mainTable tbody");
     if (!tbody) return;
-    const numeric = { price: 1, original: 1, discount: 1, size: 1, days: 1, daysat: 1, score: 1, rank: 1 };
     if (!direction) {
         if (state.sortKey === key) direction = state.sortDir === "asc" ? "desc" : "asc";
-        else direction = key === "price" || key === "rank" || key === "store" || key === "brand" || key === "size" || key === "daysat" ? "asc" : "desc";
+        else direction = defaultSortDir(key);
     }
     state.sortKey = key;
     state.sortDir = direction;
     const rows = Array.from(tbody.querySelectorAll(".deal-row"));
-    rows.sort((a, b) => {
-        if (key === "rank") return (parseFloat(a.dataset.rank) || 0) - (parseFloat(b.dataset.rank) || 0);
-        const av = a.dataset[key];
-        const bv = b.dataset[key];
-        const aMissing = av === undefined || av === "";
-        const bMissing = bv === undefined || bv === "";
-        if (aMissing && bMissing) return 0;
-        if (aMissing) return 1;
-        if (bMissing) return -1;
-        if (numeric[key]) {
-            const diff = parseFloat(av) - parseFloat(bv);
-            return direction === "asc" ? diff : -diff;
-        }
-        const diff = String(av).localeCompare(String(bv));
-        return direction === "asc" ? diff : -diff;
-    });
+    rows.sort((a, b) => compareSort(a, b, key, direction));
     rows.forEach(row => {
         const detail = document.querySelector('.detail-row[data-for="' + row.dataset.id + '"]');
         tbody.appendChild(row);
@@ -1080,6 +1116,56 @@ function syncCardOrder() {
 
 function sortTable() {
     sortBy("price");
+}
+
+function sortSection(tableId, key, direction) {
+    const table = document.getElementById(tableId);
+    const tbody = table ? table.querySelector("tbody") : null;
+    if (!tbody) return;
+    const currentKey = table.getAttribute("data-sort-key") || "";
+    const currentDir = table.getAttribute("data-sort-dir") || "asc";
+    if (!direction) {
+        direction = currentKey === key ? (currentDir === "asc" ? "desc" : "asc") : defaultSortDir(key);
+    }
+    table.setAttribute("data-sort-key", key);
+    table.setAttribute("data-sort-dir", direction);
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    rows.sort((a, b) => compareSort(a, b, key, direction));
+    rows.forEach(row => tbody.appendChild(row));
+    table.querySelectorAll("[data-sort]").forEach(node => {
+        const on = node.getAttribute("data-sort") === key;
+        node.classList.toggle("sorted", on);
+        if (on) node.setAttribute("aria-sort", direction === "asc" ? "ascending" : "descending");
+        else node.removeAttribute("aria-sort");
+    });
+}
+
+function sectionMatches(row) {
+    const hay = (row.dataset.search || "").toLowerCase();
+    if (state.search && !hay.includes(state.search)) return false;
+    if (state.store !== "all" && (row.dataset.store || "") !== state.store) return false;
+    if (state.part !== "all" && (row.dataset.part || "") !== state.part) return false;
+    if (state.brand !== "all" && !brandSame(row.dataset.brand, state.brand)) return false;
+    const price = parseFloat(row.dataset.price);
+    if (state.priceMin != null && !(price >= state.priceMin)) return false;
+    if (state.priceMax != null && !(price <= state.priceMax)) return false;
+    return true;
+}
+
+function applySectionFilters() {
+    ["goneSection", "atlSection"].forEach(id => {
+        const section = document.getElementById(id);
+        if (!section) return;
+        const rows = Array.from(section.querySelectorAll("tbody tr"));
+        let shown = 0;
+        rows.forEach(row => {
+            const hide = !sectionMatches(row);
+            row.classList.toggle("filtered-out", hide);
+            if (!hide) shown += 1;
+        });
+        const badge = section.querySelector("h2 .badge");
+        if (badge) badge.textContent = String(shown);
+    });
 }
 
 function mirrorSort(key, direction) {
@@ -2058,6 +2144,47 @@ const STORE_COLOR = {
 let chartWindow = 90;
 let chartId = "";
 
+function placeFloat(pop, anchor, avoid) {
+    if (!pop || !anchor) return;
+    const wasHidden = getComputedStyle(pop).display === "none";
+    if (wasHidden) pop.style.display = "block";
+    const popRect = pop.getBoundingClientRect();
+    const box = anchor.getBoundingClientRect();
+    const avoidBox = avoid ? avoid.getBoundingClientRect() : null;
+    const margin = 8;
+    const width = popRect.width;
+    const height = popRect.height;
+    let left = Math.min(Math.max(margin, box.left), Math.max(margin, window.innerWidth - margin - width));
+    const candidates = [box.top - height - 6];
+    if (avoidBox && avoidBox.height) candidates.push(avoidBox.bottom + 6);
+    candidates.push(box.bottom + 6);
+    let top = candidates[0];
+    let placed = false;
+    candidates.forEach(candidate => {
+        if (placed) return;
+        const rect = {
+            top: candidate,
+            bottom: candidate + height,
+            left: left,
+            right: left + width,
+        };
+        const hitsPrice = avoidBox && avoidBox.height &&
+            rect.top < avoidBox.bottom && rect.bottom > avoidBox.top &&
+            rect.left < avoidBox.right && rect.right > avoidBox.left;
+        if (candidate >= margin && rect.bottom <= window.innerHeight - margin && !hitsPrice) {
+            top = candidate;
+            placed = true;
+        }
+    });
+    if (!placed) top = Math.max(margin, Math.min(top, window.innerHeight - margin - height));
+    pop.style.position = "fixed";
+    pop.style.top = Math.round(top) + "px";
+    pop.style.left = Math.round(left) + "px";
+    pop.style.right = "auto";
+    pop.style.bottom = "auto";
+    if (wasHidden) pop.style.display = "";
+}
+
 function readLayout() {
     try {
         return localStorage.getItem(LAYOUT_KEY) === "cards" ? "cards" : "table";
@@ -2100,19 +2227,21 @@ function paintActiveChips() {
         });
     }
     const covered = {};
-    document.querySelectorAll("#sizeFilters .width-chip").forEach(node => {
-        const ids = widthGroupIds(node);
-        if (!ids.length || !ids.every(id => (state.widths || []).indexOf(id) >= 0)) return;
-        ids.forEach(id => { covered[id] = true; });
-        const labelNode = node.querySelector(".width-label");
-        const label = labelNode ? labelNode.textContent : ids.join(", ");
-        add(label, () => toggleWidthGroup(node));
-    });
-    (state.widths || []).forEach(id => {
-        if (covered[id]) return;
-        const range = widthRanges().find(item => item.id === id);
-        add(range ? range.label : id, () => toggleWidthRange(id));
-    });
+    if (specKeyActive("widths")) {
+        document.querySelectorAll("#sizeFilters .width-chip").forEach(node => {
+            const ids = widthGroupIds(node);
+            if (!ids.length || !ids.every(id => (state.widths || []).indexOf(id) >= 0)) return;
+            ids.forEach(id => { covered[id] = true; });
+            const labelNode = node.querySelector(".width-label");
+            const label = labelNode ? labelNode.textContent : ids.join(", ");
+            add(label, () => toggleWidthGroup(node));
+        });
+        (state.widths || []).forEach(id => {
+            if (covered[id]) return;
+            const range = widthRanges().find(item => item.id === id);
+            add(range ? range.label : id, () => toggleWidthRange(id));
+        });
+    }
     if (state.priceMin != null) {
         add("Min $" + numText(state.priceMin), () => {
             const node = document.getElementById("priceMin");
@@ -2163,14 +2292,14 @@ function paintActiveChips() {
             applyFilters();
         });
     }
-    if (state.length !== "all") {
+    if (specKeyActive("length") && state.length !== "all") {
         add("Length " + state.length, () => {
             setSelect("lengthSelect", "all");
             state.length = "all";
             applyFilters();
         });
     }
-    if (state.wheelbase !== "all") {
+    if (specKeyActive("wheelbase") && state.wheelbase !== "all") {
         add("Wheelbase " + state.wheelbase, () => {
             setSelect("wheelbaseSelect", "all");
             state.wheelbase = "all";
@@ -2187,6 +2316,7 @@ function paintActiveChips() {
         abecs: value => "ABEC " + value
     };
     SPEC_FACETS.forEach(facet => {
+        if (!specKeyActive(facet.stateKey)) return;
         (state[facet.stateKey] || []).forEach(value => {
             add(specLabels[facet.stateKey](value), () => toggleSpec(facet.stateKey, value));
         });
@@ -2586,6 +2716,13 @@ function openProduct(id) {
             link.hidden = true;
         }
     }
+    document.querySelectorAll(".deal-card.is-preview").forEach(card => card.classList.remove("is-preview"));
+    document.querySelectorAll(".score-cell.pinned").forEach(cell => {
+        cell.classList.remove("pinned");
+        cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
+            control.setAttribute("aria-expanded", "false");
+        });
+    });
     modal.hidden = false;
     setChartWindow(chartWindow || 90);
 }
@@ -2812,13 +2949,63 @@ function init() {
     document.querySelectorAll(".price-btn").forEach(button => {
         button.addEventListener("click", () => openProduct(button.dataset.id));
     });
-    document.querySelectorAll(".score-btn").forEach(button => {
-        button.addEventListener("click", () => {
+    document.querySelectorAll(".score-btn, .score-info").forEach(button => {
+        button.addEventListener("click", event => {
+            event.stopPropagation();
             const cell = button.closest(".score-cell");
             if (!cell) return;
             const pinned = cell.classList.toggle("pinned");
-            button.setAttribute("aria-expanded", pinned ? "true" : "false");
+            cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
+                control.setAttribute("aria-expanded", pinned ? "true" : "false");
+            });
+            const why = cell.querySelector(".why");
+            const card = button.closest(".deal-card");
+            const price = card ? card.querySelector(".card-prices") : null;
+            if (pinned && why) placeFloat(why, button, price);
         });
+    });
+    document.querySelectorAll(".score-cell").forEach(cell => {
+        const place = () => {
+            const why = cell.querySelector(".why");
+            const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
+            const card = cell.closest(".deal-card");
+            const price = card ? card.querySelector(".card-prices") : null;
+            if (why) placeFloat(why, anchor, price);
+        };
+        cell.addEventListener("mouseenter", place);
+        cell.addEventListener("focusin", place);
+    });
+    document.querySelectorAll(".deal-card").forEach(card => {
+        const place = () => {
+            const price = card.querySelector(".card-prices");
+            const hover = card.querySelector(".card-hover");
+            const title = card.querySelector(".title-pop");
+            const titleAnchor = card.querySelector(".title-slot") || card;
+            if (hover) placeFloat(hover, card, price);
+            if (title) placeFloat(title, titleAnchor, price);
+        };
+        card.addEventListener("mouseenter", () => {
+            card.classList.add("is-preview");
+            place();
+        });
+        card.addEventListener("mouseleave", () => card.classList.remove("is-preview"));
+        card.addEventListener("focusin", () => {
+            card.classList.add("is-preview");
+            place();
+        });
+        card.addEventListener("focusout", event => {
+            if (!card.contains(event.relatedTarget)) card.classList.remove("is-preview");
+        });
+        const titleSlot = card.querySelector(".title-slot");
+        if (titleSlot) {
+            const placeTitle = () => {
+                const title = card.querySelector(".title-pop");
+                const price = card.querySelector(".card-prices");
+                if (title) placeFloat(title, titleSlot, price);
+            };
+            titleSlot.addEventListener("mouseenter", placeTitle);
+            titleSlot.addEventListener("focusin", placeTitle);
+        }
     });
     document.querySelectorAll(".spark-hit").forEach(button => {
         button.addEventListener("mousemove", event => {

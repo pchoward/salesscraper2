@@ -501,6 +501,32 @@ def _alert_html(warnings):
     )
 
 
+def _data_attrs(pairs):
+    chunks = []
+    for key, value in pairs:
+        text = "" if value is None else str(value)
+        chunks.append(f'data-{key}="{escape(text, quote=True)}"')
+    return " ".join(chunks)
+
+
+def _price_attr(value):
+    amount = _price(value)
+    if amount is None:
+        return ""
+    return f"{amount:.2f}"
+
+
+def _sort_headers(table_id, columns):
+    cells = []
+    for label, key in columns:
+        cells.append(
+            '<th><button type="button" data-sort="'
+            + escape(key, quote=True)
+            + f"\" onclick=\"sortSection('{table_id}','{key}')\">{escape(label)}</button></th>"
+        )
+    return "".join(cells)
+
+
 def _atl_section(low_items, history):
     rows = [
         '<div class="section" id="atlSection">',
@@ -510,25 +536,49 @@ def _atl_section(low_items, history):
         '<div class="section-content collapsed">',
         '<p class="lede">Current sale price equals the lowest price tracked for that listing. '
         "A listing needs at least 3 observations spanning 7 days, so a brand-new deal is not "
-        "flagged just because its first price is the only price.</p>",
+        "flagged just because its first price is the only price. "
+        "Column headers sort this table. Search, price, store, type, and brand use the same choices as All Deals.</p>",
         '<table id="atlTable"><thead><tr>',
-        "<th>Store</th><th>Part</th><th>Product</th><th>Sale price</th><th>Low since</th><th>Observations</th>",
+        _sort_headers("atlTable", (
+            ("Store", "store"),
+            ("Part", "part"),
+            ("Product", "name"),
+            ("Sale price", "price"),
+            ("Low since", "lowdate"),
+            ("Observations", "observations"),
+        )),
         "</tr></thead><tbody>",
     ]
     for item in low_items:
         try:
             status = all_time_low_status(item, history)
             store = item.get("store") or "Unknown"
+            part = item.get("part") or ""
+            name = item.get("name") or ""
+            brand = item.get("_brand") or listing_brand(name, part)
+            observations = status.get("observations")
             title = escape(status.get("title") or "All-time low", quote=True)
+            search = " ".join(bit for bit in (name, store, part, brand, "all-time low") if bit)
             rows.append(
-                "<tr>"
+                "<tr "
+                + _data_attrs((
+                    ("store", store),
+                    ("part", part),
+                    ("brand", brand),
+                    ("name", name),
+                    ("price", _price_attr(item.get("price_new"))),
+                    ("lowdate", status.get("low_date") or ""),
+                    ("observations", "" if observations in (None, "") else observations),
+                    ("search", search),
+                ))
+                + ">"
                 f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
-                f'<td><span class="part-badge">{escape(item.get("part") or "")}</span></td>'
+                f'<td><span class="part-badge">{escape(part)}</span></td>'
                 f'<td class="product-name">{_product_link(item)} '
                 f'<span class="atl-badge" title="{title}">ALL-TIME LOW</span></td>'
                 f'<td class="price price-new">{_money(item.get("price_new"))}</td>'
                 f'<td>{escape(status.get("low_date") or "")}</td>'
-                f'<td>{escape(str(status.get("observations") or ""))}</td>'
+                f'<td>{escape("" if observations in (None, "") else str(observations))}</td>'
                 "</tr>"
             )
         except Exception as exc:
@@ -1593,12 +1643,20 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn filters-done" id="filtersClose">Show results</button></div>'
         '<div class="filter-head"><span>Filter deals</span>'
         '<button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div>'
+        + '<div class="side-group" id="specGroup" aria-label="Product specifications">'
         + context_specs
+        + '<section class="filter-section" id="productSpecs" data-section="specs" hidden>'
+        '<button type="button" class="section-toggle" aria-expanded="false" '
+        'aria-controls="productSpecsBody">Product specifications</button>'
+        '<div class="section-body" id="productSpecsBody">'
+        '<p class="section-note">Pick a spec to switch to that product type.</p>'
+        "</div></section>"
         + '<p class="count-note">Counts match current results '
         '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
         '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
         "if you pick that store, type, brand, width, or size. It is not a total of everything tracked."
-        "</span></p>"
+        "</span></p></div>"
+        + '<div class="side-group" aria-label="Shopping filters">'
         + _section("brand", "Brand", brand_facet, open_default=True)
         + '<div class="more-filters" id="morePanel">'
         '<span class="sr-only">More filters</span>'
@@ -1623,6 +1681,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "Minimum percent off", "Maximum percent off", suffix="%",
             ),
         )
+        + "</div></div>"
+        + '<div class="side-group" aria-label="Deal intelligence">'
         + _section(
             "score",
             "Deal quality",
@@ -1632,13 +1692,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "</div>"
             + _dual_html("scoreMin", "scoreMax", 0, 100, "", "Any score", "Minimum score", "Maximum score"),
         )
-        + "</div>"
-        + '<section class="filter-section" id="productSpecs" data-section="specs" hidden>'
-        '<button type="button" class="section-toggle" aria-expanded="false" '
-        'aria-controls="productSpecsBody">Product specifications</button>'
-        '<div class="section-body" id="productSpecsBody">'
-        '<p class="section-note">Pick a spec to switch to that product type.</p>'
-        "</div></section>"
         + _section(
             "deals",
             "Deal Type",
@@ -1655,6 +1708,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             '<p class="section-note">A drop is at least $2 or 5% below the previous tracked price. '
             "Day is today or yesterday.</p>",
         )
+        + "</div>"
+        + '<div class="side-group" aria-label="Personal tools">'
         + _section(
             "views",
             "Saved Views",
@@ -1681,6 +1736,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             '<button type="button" class="text-btn" id="bookmarkView">Bookmark this selection</button>'
             "</div>",
         )
+        + "</div>"
         + '<button type="button" class="text-btn show-results filters-done">Show results</button>'
         "</aside>"
     )
@@ -2016,10 +2072,13 @@ def _row_html(record):
         f'<td class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else "N/A"}</td>'
         f'<td><span class="discount {discount}">{escape(percent)}</span></td>'
         f'<td class="days-cell">{_trend_html(record.get("trend"))}{escape(record["held"])}</td>'
-        f'<td class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false">'
+        f'<td class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false" '
+        f'aria-controls="why-{record["id"]}">'
         f'{record["score"]["score"]}'
         + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")
-        + f'</button>{_why_html(record)}</td></tr>'
+        + '</button><button type="button" class="info-dot score-info" aria-expanded="false" '
+        f'aria-controls="why-{record["id"]}" aria-label="Score breakdown">i</button>'
+        f'{_why_html(record)}</td></tr>'
     )
 
 
@@ -2058,13 +2117,14 @@ def _low_mark(record):
     if record.get("lowest"):
         return (
             '<span class="quiet-low" '
-            'title="All-time low: at least 3 observations spanning 7 days">Verified low</span>'
+            'title="Lowest price since tracking began: at least 3 observations spanning 7 days. '
+            'This is not a price from before tracking.">Verified low</span>'
         )
     if record.get("at_tracked_low"):
         return (
             '<span class="quiet-low" '
-            'title="Current price equals the lowest price tracked so far. '
-            'It does not yet meet the 3-observation, 7-day rule.">'
+            'title="Matches the lowest price tracked so far. '
+            'It does not yet meet the 3-observation, 7-day rule, and says nothing about prices from before tracking.">'
             "At lowest tracked price</span>"
         )
     return ""
@@ -2143,7 +2203,7 @@ def _card_html(record):
             f"Average: {symbol}{float(average):.2f}</span>"
         )
     since = record.get("since_label") or ""
-    since_html = f'<p class="price-since">{escape(since)}</p>' if since else ""
+    since_html = f'<p class="price-since">{escape(since)}</p>'
     return (
         f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
@@ -2167,10 +2227,12 @@ def _card_html(record):
         f'<span class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else ""}</span></div>'
         f'<div class="row-meta">{_badge_html(_shown_badges(record), record["listed"])}'
         f'{_low_mark(record)}{_stage_html(record.get("stage"))}</div>'
-        f'<div class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false">'
+        f'<div class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false" '
+        f'aria-controls="why-card-{record["id"]}">'
         f'{record["score"]["score"]}'
         + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")
-        + f"</button>{why}</div>"
+        + '</button><button type="button" class="info-dot score-info" aria-expanded="false" '
+        f'aria-controls="why-card-{record["id"]}" aria-label="Score breakdown">i</button>{why}</div>'
         "</div></article>"
     )
 
@@ -2348,11 +2410,15 @@ def _why_html(record, dom_id=None):
         return generic
 
     factors = (
-        ("Discount depth", parts.get("discount") or 0, hint("Discount depth", "discount", "Percent off, max 50")),
+        ("Discount", parts.get("discount") or 0, hint("Discount", "discount", "Percent off, max 50")),
         (
-            "Lowest tracked price",
+            "Historical low",
             parts.get("lowest") or 0,
-            hint("Lowest tracked price", "lowest", "25 at the low, 18 within $1 or 3%, 10 within $2 or 5%"),
+            hint(
+                "Historical low",
+                "lowest",
+                "Points from the lowest price since tracking began. Not a price from before tracking.",
+            ),
         ),
         ("Recent drop", parts.get("drop") or 0, hint("Recent drop", "drop", "Up to 15, or 4 for a smaller dip")),
         ("Popular size", parts.get("size") or 0, hint("Popular size", "size", "10 when the deck is 8.25–8.75")),
@@ -2367,8 +2433,8 @@ def _why_html(record, dom_id=None):
     return (
         f'<div class="why" id="{escape(dom_id or "why-" + str(record["id"]), quote=True)}" role="tooltip">'
         f'<strong>Why {score["score"]}?</strong><ul>{"".join(rows)}</ul>'
-        "<p class=\"why-legend\">These four lines are the whole score. "
-        "Days tracked are not added. 70 or above is hot.</p></div>"
+        "<p class=\"why-legend\">Discount, historical low, recent drop, and popular size are the whole score. "
+        "Historical low uses only prices tracked here. Days tracked are not added. 70 or above is hot.</p></div>"
     )
 
 
@@ -2470,10 +2536,26 @@ def _gone_section(history, current_data, today, failed_keys):
     body = []
     for row in rows:
         store = row.get("store") or "Unknown"
+        part = row.get("part") or ""
+        name = row.get("name") or ""
+        brand = listing_brand(name, part)
+        stage = STAGE_LABEL.get(row.get("stage") or "", "")
+        search = " ".join(bit for bit in (name, store, part, brand, stage) if bit)
         body.append(
-            "<tr>"
+            "<tr "
+            + _data_attrs((
+                ("store", store),
+                ("part", part),
+                ("brand", brand),
+                ("name", name),
+                ("price", _price_attr(row.get("price"))),
+                ("seen", row.get("last_seen") or ""),
+                ("stage", stage),
+                ("search", search),
+            ))
+            + ">"
             f'<td><span class="store-badge {_store_class(store)}">{escape(store)}</span></td>'
-            f'<td><span class="part-badge">{escape(row.get("part") or "")}</span></td>'
+            f'<td><span class="part-badge">{escape(part)}</span></td>'
             f'<td class="product-name">{_product_link(row)}</td>'
             f'<td class="price">{_money(row.get("price"))}</td>'
             f'<td>{escape(row.get("last_seen") or "")}</td>'
@@ -2484,7 +2566,8 @@ def _gone_section(history, current_data, today, failed_keys):
         "Kept for 7 days after a listing is missing from two successful scans in a row, "
         "with the last price and the last day it was seen. "
         "Sold out means the product page says out of stock. Otherwise the listing is no longer on the sale page. "
-        "A failed scrape does not land here."
+        "A failed scrape does not land here. "
+        "Column headers sort this table. Search, price, store, type, and brand use the same choices as All Deals."
     )
     if not rows:
         note = "Nothing has disappeared in the last 7 days. " + note
@@ -2496,6 +2579,13 @@ def _gone_section(history, current_data, today, failed_keys):
         '<div class="section-content collapsed">'
         f'<p class="lede">{escape(note)}</p>'
         '<table id="goneTable"><thead><tr>'
-        "<th>Store</th><th>Part</th><th>Product</th><th>Last price</th><th>Last seen</th><th>Stage</th>"
-        f"</tr></thead><tbody>{''.join(body)}</tbody></table></div></div>"
+        + _sort_headers("goneTable", (
+            ("Store", "store"),
+            ("Part", "part"),
+            ("Product", "name"),
+            ("Last price", "price"),
+            ("Last seen", "seen"),
+            ("Stage", "stage"),
+        ))
+        + f"</tr></thead><tbody>{''.join(body)}</tbody></table></div></div>"
     )

@@ -5,6 +5,7 @@ import subprocess
 import unittest
 from pathlib import Path
 
+from page import _atl_section, _gone_section
 from report import build_report_html
 
 
@@ -318,11 +319,18 @@ class ReportExtraTests(unittest.TestCase):
         self.assertLess(html.find('id="changeLine"'), html.find('<div class="rail">'))
         self.assertLess(html.find('id="storeFilters"'), html.find('id="partFilters"'))
         self.assertLess(html.find('id="partFilters"'), html.find('id="contextSpecs"'))
-        self.assertLess(html.find('data-section="width"'), html.find('data-section="brand"'))
+        self.assertLess(html.find('data-section="width"'), html.find('id="productSpecs"'))
+        self.assertLess(html.find('id="productSpecs"'), html.find('data-section="brand"'))
         self.assertLess(html.find('data-section="brand"'), html.find('data-section="price"'))
         self.assertLess(html.find('data-section="price"'), html.find('data-section="score"'))
-        self.assertLess(html.find('data-section="score"'), html.find('id="productSpecs"'))
-        self.assertLess(html.find('id="productSpecs"'), html.find('data-section="deals"'))
+        self.assertLess(html.find('data-section="score"'), html.find('data-section="deals"'))
+        self.assertIn('id="specGroup"', html)
+        self.assertIn('aria-label="Shopping filters"', html)
+        self.assertIn('aria-label="Deal intelligence"', html)
+        self.assertIn('aria-label="Personal tools"', html)
+        self.assertIn("function activeSpecKeys(", html)
+        self.assertIn("Historical low", html)
+        self.assertIn('aria-label="Score breakdown"', html)
         self.assertLess(html.find('data-section="deals"'), html.find('data-section="interval"'))
         self.assertIn("function syncTypeSections(", html)
         self.assertIn(".filter-section.is-type-hidden", html)
@@ -509,9 +517,126 @@ if (!pick || pick.cluster !== 0 || stores.chips[pick.index].value !== "CCS") {
 }
 stores.chips = [chip("all", true)];
 products.chips = [chip("all", false), chip("Decks", true)];
-if (nextNavOverflow([stores, products]) !== null) {
+        if (nextNavOverflow([stores, products]) !== null) {
     throw new Error("All and the selected chip stay on the row");
 }
+"""
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_hidden_category_specs_do_not_apply(self):
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        start = source.find("function activeSpecKeys(")
+        end = source.find("function specKeyActive(")
+        self.assertGreater(start, 0)
+        self.assertGreater(end, start)
+        script = source[start:end] + """
+function same(left, right) {
+  if (left.length !== right.length) return false;
+  return left.every((value, index) => value === right[index]);
+}
+if (!same(activeSpecKeys("Decks"), ["widths", "length", "wheelbase"])) throw new Error("decks");
+if (!same(activeSpecKeys(), ["widths", "length", "wheelbase"])) throw new Error("default decks");
+if (!same(activeSpecKeys("Wheels"), ["diameters", "duros", "shapes"])) throw new Error("wheels");
+if (!same(activeSpecKeys("Trucks"), ["truckSizes", "truckHeights", "constructions"])) throw new Error("trucks");
+if (!same(activeSpecKeys("Bearings"), ["abecs"])) throw new Error("bearings");
+if (activeSpecKeys("all").length) throw new Error("all types hide category specs");
+const body = `%s`;
+if (body.indexOf("specKeyActive(\\"widths\\", viewPart)") < 0) throw new Error("width gate");
+if (body.indexOf("specKeyActive(\\"length\\", viewPart)") < 0) throw new Error("length gate");
+if (body.indexOf("if (!specKeyActive(facet.stateKey, viewPart)) continue;") < 0) throw new Error("spec gate");
+""" % source[source.find("function rowMatches("):source.find("function syncDetails(")]
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_gone_and_atl_tables_sort_and_filter(self):
+        dear = {
+            "name": "Independent Stage 11 Truck",
+            "url": "https://example.com/truck",
+            "price_new": "48.00",
+            "part": "Trucks",
+            "store": "Tactics",
+            "_brand": "Independent",
+        }
+        cheap = {
+            "name": "Baker Logo 8.0 Deck",
+            "url": "https://example.com/cheap",
+            "price_new": "19.00",
+            "part": "Decks",
+            "store": "CCS",
+            "_brand": "Baker",
+        }
+        atl = _atl_section([dear, cheap], {})
+        self.assertIn("sortSection('atlTable','price')", atl)
+        self.assertLess(atl.index('data-price="48.00"'), atl.index('data-price="19.00"'))
+        self.assertIn('data-store="CCS"', atl)
+        self.assertIn('data-part="Trucks"', atl)
+        self.assertIn('data-brand="Independent"', atl)
+        history = {
+            "https://example.com/gone-deck": {
+                "name": "Chocolate Anderson Jazz Lovers 8.5 Skateboard Deck",
+                "store": "Zumiez",
+                "part": "Decks",
+                "last_seen": "2026-09-20",
+                "miss_streak": 2,
+                "prices": {"2026-09-20": 49.99},
+                "stock": "out_of_stock",
+            },
+            "https://example.com/gone-wheel": {
+                "name": "Spitfire Formula Four 54mm Wheels",
+                "store": "Tactics",
+                "part": "Wheels",
+                "last_seen": "2026-09-21",
+                "miss_streak": 2,
+                "prices": {"2026-09-21": 24},
+            },
+        }
+        gone = _gone_section(history, {}, "2026-09-22", [])
+        self.assertIn("sortSection('goneTable','price')", gone)
+        self.assertIn('data-price="49.99"', gone)
+        self.assertIn('data-price="24.00"', gone)
+        self.assertIn('data-brand="Chocolate"', gone)
+        self.assertIn('data-store="Tactics"', gone)
+        self.assertIn("SOLD OUT", gone)
+        self.assertIn("NO LONGER LISTED", gone)
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        compare = source[source.find("const SORT_NUMERIC"):source.find("function sortBy(")]
+        matches = source[source.find("function sectionMatches("):source.find("function applySectionFilters(")]
+        self.assertIn("compareSort(a, b, key, direction)", source[source.find("function sortBy("):source.find("function syncCardOrder(")])
+        self.assertIn("compareSort(a, b, key, direction)", source[source.find("function sortSection("):source.find("function sectionMatches(")])
+        script = """
+function brandSame(a, b) {
+  return String(a || "").toLowerCase() === String(b || "").toLowerCase();
+}
+let state = {search: "", store: "all", part: "all", brand: "all", priceMin: null, priceMax: null, widths: ["8.5"]};
+""" + compare + matches + """
+function row(data) { return {dataset: data}; }
+const rows = [
+  row({price: "40.00", store: "Zumiez", part: "Decks", brand: "Baker", search: "Baker deck"}),
+  row({price: "12.50", store: "CCS", part: "Wheels", brand: "Spitfire", search: "Spitfire wheel"}),
+  row({price: "", store: "Tactics", part: "Trucks", brand: "Independent", search: "Independent truck"}),
+  row({price: "19.00", store: "Zumiez", part: "Decks", brand: "Chocolate", search: "Chocolate deck"}),
+];
+function prices(list) { return list.map(item => item.dataset.price).join(","); }
+const asc = rows.slice().sort((a, b) => compareSort(a, b, "price", "asc"));
+if (prices(asc) !== "12.50,19.00,40.00,") throw new Error("asc " + prices(asc));
+const desc = rows.slice().sort((a, b) => compareSort(a, b, "price", "desc"));
+if (prices(desc) !== "40.00,19.00,12.50,") throw new Error("desc " + prices(desc));
+state.store = "Zumiez";
+if (rows.filter(sectionMatches).length !== 2) throw new Error("store");
+state.store = "all";
+state.part = "Wheels";
+if (rows.filter(sectionMatches).map(item => item.dataset.part).join() !== "Wheels") throw new Error("part");
+state.part = "all";
+state.brand = "baker";
+if (rows.filter(sectionMatches).length !== 1) throw new Error("brand");
+state.brand = "all";
+state.search = "spit";
+if (rows.filter(sectionMatches).length !== 1) throw new Error("search");
+state.search = "";
+state.priceMax = 20;
+if (prices(rows.filter(sectionMatches)) !== "12.50,19.00") throw new Error("price");
+if (state.widths[0] !== "8.5") throw new Error("width must not be part of this filter");
 """
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
