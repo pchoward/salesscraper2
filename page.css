@@ -360,14 +360,46 @@ tr.on-list td:first-child { box-shadow: inset 3px 0 0 #d97706; }
 .g-offer.g-cheap, .mini-offer.g-cheap { background: #dcfce7; border-color: #86efac; }
 .group-board { display: grid; gap: 0.6rem; padding: 0.75rem; }
 .group-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 0.8rem; }
-.alert {
-    background: #fef2f2;
-    border: 1px solid #fca5a5;
-    color: #991b1b;
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
-    margin-bottom: 0.75rem;
+.diag-link {
+    border: 0;
+    background: none;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 0.82rem;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 0.75rem;
 }
+.diagnostics {
+    margin: 0.4rem auto 0.2rem;
+    max-width: 40rem;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    text-align: left;
+}
+.diagnostics h2 {
+    margin: 0 0 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 650;
+    color: var(--text-primary);
+}
+.diagnostics p, .diagnostics li { margin: 0.25rem 0; }
+.diagnostics table { margin-top: 0.35rem; }
+.diagnostics thead th {
+    position: static;
+    top: auto;
+    z-index: auto;
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 0.25rem 0.45rem;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+    text-transform: none;
+    cursor: default;
+}
+.diagnostics td { padding: 0.2rem 0.45rem; font-size: 0.75rem; }
+#diagnostics[hidden] { display: none !important; }
 .atl-badge, .lowest-badge {
     display: inline-block;
     padding: 0.12rem 0.4rem;

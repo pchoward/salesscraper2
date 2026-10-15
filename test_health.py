@@ -6,7 +6,9 @@ import unittest
 from health import (
     MAX_RUNS,
     STALE_AFTER_HOURS,
+    baseline_conflicts,
     broken_store_warnings,
+    conflict_text,
     empty_store_keys,
     failed_keys_on,
     record_run,
@@ -106,8 +108,69 @@ class BrokenStoreTests(unittest.TestCase):
         self.assertEqual(len(state["runs"]), MAX_RUNS)
         self.assertEqual(state["baseline"][DECK]["date"], "2026-01-01")
         warnings = broken_store_warnings(state)
+        self.assertEqual(warnings, [])
+        self.assertEqual(state["baseline"][DECK]["count"], 5)
+
+    def test_low_median_and_mostly_empty_do_not_warn(self):
+        state = {"runs": [], "baseline": {}}
+        for offset in range(6):
+            day = (datetime.date(2026, 10, 1) + datetime.timedelta(days=offset)).isoformat()
+            state = _run(state, day, **{BEARINGS: _ok(1), DECK: _ok(40)})
+        state = _run(state, "2026-10-07", **{BEARINGS: _empty(), DECK: _empty()})
+        state = _run(state, "2026-10-08", **{BEARINGS: _empty(), DECK: _empty()})
+        keys = {warning["key"] for warning in broken_store_warnings(state)}
+        self.assertNotIn(BEARINGS, keys)
+        self.assertIn(DECK, keys)
+
+        quiet = {"runs": [], "baseline": {}}
+        for offset in range(8):
+            day = (datetime.date(2026, 10, 1) + datetime.timedelta(days=offset)).isoformat()
+            quiet = _run(quiet, day, **{BEARINGS: _empty()})
+        quiet = _run(quiet, "2026-10-09", **{BEARINGS: _ok(20)})
+        quiet = _run(quiet, "2026-10-10", **{BEARINGS: _empty()})
+        quiet = _run(quiet, "2026-10-11", **{BEARINGS: _empty()})
+        self.assertEqual(broken_store_warnings(quiet), [])
+
+    def test_failed_fetch_on_a_quiet_category_still_warns(self):
+        state = {"runs": [], "baseline": {}}
+        state = _run(state, "2026-10-01", **{BEARINGS: _empty()})
+        state = _run(state, "2026-10-02", **{BEARINGS: _failed()})
+        state = _run(state, "2026-10-03", **{BEARINGS: _failed()})
+        warnings = broken_store_warnings(state)
         self.assertEqual(len(warnings), 1)
-        self.assertEqual(warnings[0]["last_positive_count"], 5)
+        self.assertEqual(warnings[0]["key"], BEARINGS)
+        self.assertEqual(warnings[0]["kind"], "error")
+        self.assertIn("failed to scrape", warning_text(warnings[0]))
+
+    def test_same_day_rerun_drops_a_replaced_baseline(self):
+        state = {"runs": [], "baseline": {}}
+        state = _run(state, "2026-10-11", **{BEARINGS: _ok(1)})
+        self.assertEqual(state["baseline"][BEARINGS]["count"], 1)
+        state = _run(state, "2026-10-11", **{BEARINGS: _empty()})
+        self.assertNotIn(BEARINGS, state["baseline"])
+        self.assertEqual(state["runs"][-1]["results"][BEARINGS]["count"], 0)
+        self.assertEqual(len(state["runs"]), 1)
+
+    def test_stale_baseline_is_not_a_last_good_run(self):
+        state = {
+            "runs": [
+                {"date": "2026-10-11", "results": {BEARINGS: _empty()}},
+                {"date": "2026-10-13", "results": {BEARINGS: _empty()}},
+                {"date": "2026-10-14", "results": {BEARINGS: _empty()}},
+            ],
+            "baseline": {BEARINGS: {"date": "2026-10-11", "count": 1}},
+        }
+        self.assertEqual(broken_store_warnings(state), [])
+        conflicts = baseline_conflicts(state)
+        self.assertEqual(len(conflicts), 1)
+        self.assertEqual(conflicts[0]["baseline_count"], 1)
+        self.assertEqual(conflicts[0]["recorded_count"], 0)
+        text = conflict_text(conflicts[0])
+        self.assertIn("Zumiez Bearings", text)
+        self.assertIn("2026-10-11", text)
+        self.assertIn("1 item", text)
+        self.assertIn("recorded 0", text)
+        self.assertNotIn("1 items", text)
 
     def test_whole_store_empty_is_suspect_on_the_first_run(self):
         health = {

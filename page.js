@@ -3156,6 +3156,17 @@ function init() {
     paintViews();
     paintSparklines();
     paintCardStats();
+    const diagToggle = document.getElementById("diagToggle");
+    const diagnostics = document.getElementById("diagnostics");
+    if (diagToggle && diagnostics) {
+        diagToggle.addEventListener("click", () => {
+            const open = diagnostics.hasAttribute("hidden");
+            if (open) diagnostics.removeAttribute("hidden");
+            else diagnostics.setAttribute("hidden", "");
+            diagToggle.setAttribute("aria-expanded", open ? "true" : "false");
+            if (open) diagnostics.scrollIntoView({ block: "nearest" });
+        });
+    }
     if (location.search && location.search.length > 1) loadFromUrl();
     else {
         state.change = "all";
