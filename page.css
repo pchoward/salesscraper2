@@ -1751,6 +1751,11 @@ select option:disabled { color: #94a3b8; }
     .shell { height: calc(100vh - var(--stick-top, 92px)); overflow: hidden; align-items: stretch; }
     .rail { height: 100%; max-height: none; overflow: hidden; }
     .board { height: 100%; overflow-y: auto; overflow-x: hidden; }
+    /* The nav is outside this scrollport. top: var(--stick-top) shoved the
+       header down by the whole nav and across the first rows. top: 0 still
+       left the board's 0.4rem padding as a gap under the bar, so pull the
+       header up by that padding and sit it on the nav. */
+    thead th { top: -0.4rem; }
 }
 @media (max-width: 800px) {
     .show-results {
