@@ -27,8 +27,16 @@ from filters import (
     normalize_url,
     percent_off_value,
 )
-from health import failed_keys_on, scan_freshness, warning_text, warnings_blurb
-from health import load_state as load_health
+from health import (
+    baseline_conflicts,
+    conflict_text,
+    failed_keys_on,
+    load_state as load_health,
+    scan_freshness,
+    split_key,
+    warning_text,
+    warnings_blurb,
+)
 from history import (
     STAGE_LABEL,
     all_time_low_status,
@@ -486,19 +494,75 @@ def _buttons(group_id, attr, onclick, values, active="all"):
     return f'<div class="filter-group" id="{group_id}">{"".join(rows)}</div>'
 
 
-def _alert_html(warnings):
-    if not warnings:
-        return ""
-    items = []
-    for warning in warnings:
-        text = warning_text(warning) if isinstance(warning, dict) else str(warning)
-        items.append(f"<li>{escape(text)}</li>")
-    return (
-        '<div class="alert" id="storeAlerts" role="status">'
-        "<strong>Store check failed</strong>"
-        f"<p>{escape(warnings_blurb(warnings))}</p>"
-        f"<ul>{''.join(items)}</ul></div>"
-    )
+def _diagnostics_html(warnings, failed_keys, health):
+    """Quiet store-health panel. Hidden until the footer link opens it."""
+    bits = [
+        '<section id="diagnostics" class="diagnostics" hidden>',
+        "<h2>Diagnostics</h2>",
+        "<p>A category that is usually empty, or whose typical count is low, is not a warning. "
+        "A failed fetch still is.</p>",
+    ]
+    if failed_keys:
+        listed = ", ".join(escape(str(key)) for key in failed_keys)
+        bits.append(
+            f"<p>Scrape failed for {listed}. "
+            "Previous listings for those categories were kept, and removals are hidden.</p>"
+        )
+    if warnings:
+        bits.append(f"<p>{escape(warnings_blurb(warnings))}</p>")
+        items = []
+        for warning in warnings:
+            text = warning_text(warning) if isinstance(warning, dict) else str(warning)
+            items.append(f"<li>{escape(text)}</li>")
+        bits.append(f"<ul>{''.join(items)}</ul>")
+    else:
+        bits.append("<p>No store warnings.</p>")
+    conflicts = []
+    try:
+        conflicts = baseline_conflicts(health)
+    except Exception as exc:
+        logger.error("Baseline check failed: %s", exc)
+    if conflicts:
+        lines = "".join(f"<li>{escape(conflict_text(item))}</li>" for item in conflicts)
+        bits.append(f"<ul>{lines}</ul>")
+    runs = [
+        run for run in (health or {}).get("runs") or []
+        if isinstance(run, dict) and run.get("date")
+    ]
+    runs.sort(key=lambda run: run.get("date") or "")
+    if runs:
+        latest = runs[-1]
+        results = latest.get("results") or {}
+        rows = []
+        if isinstance(results, dict):
+            for key in sorted(results):
+                result = results[key]
+                if not isinstance(result, dict):
+                    continue
+                try:
+                    store, part = split_key(key)
+                except ValueError:
+                    store, part = str(key), ""
+                count = int(result.get("count") or 0)
+                if result.get("failed"):
+                    status = "failed"
+                elif count <= 0:
+                    status = "empty"
+                else:
+                    status = "ok"
+                rows.append(
+                    "<tr>"
+                    f"<td>{escape(store)}</td><td>{escape(part)}</td>"
+                    f"<td>{count}</td><td>{escape(status)}</td></tr>"
+                )
+        if rows:
+            bits.append(
+                f"<p>Latest saved run, {escape(str(latest.get('date')))}.</p>"
+                "<table><thead><tr><th>Store</th><th>Part</th><th>Items</th><th>Status</th></tr></thead>"
+                f"<tbody>{''.join(rows)}</tbody></table>"
+            )
+    bits.append("</section>")
+    return "".join(bits)
 
 
 def _data_attrs(pairs):
@@ -1232,14 +1296,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "<script>try{if(localStorage.getItem('salesscraper2.layout')==='cards')document.documentElement.classList.add('layout-cards')}catch(e){}</script>",
         "</head><body>",
     ]
-    alert = _alert_html(warnings)
-    notice = ""
-    if failed_keys:
-        listed = ", ".join(escape(key) for key in failed_keys)
-        notice = (
-            f'<div class="notice">Scrape failed for {listed}. '
-            "Previous listings for those categories were kept, and removals are hidden.</div>"
-        )
+    try:
+        health_state = load_health()
+    except Exception as exc:
+        logger.error("Could not read scrape health for diagnostics: %s", exc)
+        health_state = {}
+    diagnostics = _diagnostics_html(warnings, failed_keys, health_state)
 
     store_options = ['<option value="all">All stores</option>']
     for store in sorted(store_counts):
@@ -1767,7 +1829,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     store_cards.append("</div>")
     chunks.append(
         f'<header class="{header_class}" id="stickyBar" data-stale-hours="36">'
-        f"{alert or ''}"
         '<div class="topnav">'
         '<h1 class="brand"><svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">'
         '<rect x="2" y="8" width="20" height="5.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/>'
@@ -1840,8 +1901,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="board">'
         + "".join(store_cards)
     )
-    if notice:
-        chunks.append(notice)
     try:
         stats_html = _stats_html(products, price_history, intel)
     except Exception as exc:
@@ -1928,6 +1987,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     except Exception as exc:
         logger.error("Retailer activity panel failed: %s", exc)
 
+    chunks.append(diagnostics)
     chunks.append(
         "<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. "
         "Skate Deluxe is EUR-only and ships from Europe, so it stays out of the scrape. "
@@ -1939,7 +1999,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "Stars are saved in this browser. Email alerts use watchlist.yaml. "
         "A site-wide sale is a day when a store's sale count is at least 2.5× its recent median and 30 items higher, "
         "after 7 quieter days. Skate Warehouse is seeded at 2026-07-04 until a later day clears that bar.</p>"
-        '<p><a href="https://github.com/pchoward/salesscraper2/actions/workflows/scrape.yml">Run scraper now</a></p>'
+        '<p><a href="https://github.com/pchoward/salesscraper2/actions/workflows/scrape.yml">Run scraper now</a> '
+        '<button type="button" class="diag-link" id="diagToggle" aria-expanded="false" '
+        'aria-controls="diagnostics">Diagnostics</button></p>'
         "</footer></div></div>"
     )
     chunks.append(

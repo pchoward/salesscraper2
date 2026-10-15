@@ -366,14 +366,46 @@ tr.on-list td:first-child { box-shadow: inset 3px 0 0 #d97706; }
 .g-offer.g-cheap, .mini-offer.g-cheap { background: #dcfce7; border-color: #86efac; }
 .group-board { display: grid; gap: 0.6rem; padding: 0.75rem; }
 .group-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 0.8rem; }
-.alert {
-    background: #fef2f2;
-    border: 1px solid #fca5a5;
-    color: #991b1b;
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
-    margin-bottom: 0.75rem;
+.diag-link {
+    border: 0;
+    background: none;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 0.82rem;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 0.75rem;
 }
+.diagnostics {
+    margin: 0.4rem auto 0.2rem;
+    max-width: 40rem;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    text-align: left;
+}
+.diagnostics h2 {
+    margin: 0 0 0.35rem;
+    font-size: 0.85rem;
+    font-weight: 650;
+    color: var(--text-primary);
+}
+.diagnostics p, .diagnostics li { margin: 0.25rem 0; }
+.diagnostics table { margin-top: 0.35rem; }
+.diagnostics thead th {
+    position: static;
+    top: auto;
+    z-index: auto;
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 0.25rem 0.45rem;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+    text-transform: none;
+    cursor: default;
+}
+.diagnostics td { padding: 0.2rem 0.45rem; font-size: 0.75rem; }
+#diagnostics[hidden] { display: none !important; }
 .atl-badge, .lowest-badge {
     display: inline-block;
     padding: 0.12rem 0.4rem;
@@ -714,7 +746,7 @@ thead th { z-index: 25; }
 .trend-stable { color: #94a3b8; }
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 0.9rem;
     padding: 0.2rem 0 0.6rem;
 }
@@ -941,7 +973,7 @@ th:hover .tip, th:focus-within .tip { display: block; }
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
 }
-.card-grid { grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 0.45rem; }
+.card-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.45rem; }
 .deal-card { position: relative; padding: 0.4rem; gap: 0.12rem; }
 .deal-card .star { position: absolute; top: 0.35rem; right: 0.35rem; z-index: 2; background: white; }
 .deal-card .hero-wrap, .deal-card .hero, .deal-card .hero.ph { width: 100%; height: 158px; }
@@ -1380,13 +1412,33 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
 }
 .card-prices {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
-    gap: 0.35rem;
+    column-gap: 0.4rem;
+    row-gap: 0;
+    min-width: 0;
     min-height: 0;
 }
-.now-price { color: var(--price); font-weight: 800; font-size: 0.92rem; white-space: nowrap; }
-.avg-price { color: #64748b; font-size: 0.72rem; font-weight: 650; text-align: right; white-space: nowrap; flex: 0 0 auto; }
+.now-price {
+    color: var(--price);
+    font-weight: 800;
+    font-size: 0.92rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+.avg-price {
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 650;
+    line-height: 1.2;
+    text-align: right;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    margin-left: auto;
+    max-width: 100%;
+}
 .avg-price[hidden] { display: none !important; }
 .price-since { margin: 0; color: #64748b; font-size: 0.68rem; line-height: 1.3; min-height: 1.3em; }
 .card-badge { min-height: 1.2rem; }
@@ -1828,6 +1880,53 @@ select option:disabled { color: #94a3b8; }
 }
 header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 .pill-newlow { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; font-weight: 800; }
+/* Two fewer cards than the old 176px auto-fill at the same content width.
+   The steps are the widths where that grid gained a column. */
+@media (min-width: 801px) {
+    .board { container-type: inline-size; container-name: deals; }
+    @container deals (min-width: 542px) {
+        .card-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 725px) {
+        .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 908px) {
+        .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1092px) {
+        .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1275px) {
+        .card-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1458px) {
+        .card-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1641px) {
+        .card-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1824px) {
+        .card-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2008px) {
+        .card-grid { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2191px) {
+        .card-grid { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2374px) {
+        .card-grid { grid-template-columns: repeat(11, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2557px) {
+        .card-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2740px) {
+        .card-grid { grid-template-columns: repeat(13, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2924px) {
+        .card-grid { grid-template-columns: repeat(14, minmax(0, 1fr)); }
+    }
+}
 @media (max-width: 800px) {
     html, body { overflow-x: hidden; }
     .shell, .board { max-width: 100%; min-width: 0; }
@@ -1840,7 +1939,7 @@ header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 </style>
 <script>try{if(localStorage.getItem('salesscraper2.layout')==='cards')document.documentElement.classList.add('layout-cards')}catch(e){}</script>
 </head><body>
-<header class="" id="stickyBar" data-stale-hours="36"><div class="alert" id="storeAlerts" role="status"><strong>Store check failed</strong><p>These categories usually have sale items. The last two runs came back empty or failed. A single empty run does not raise this warning.</p><ul><li>Zumiez Bearings came back with no items two runs in a row (2026-10-13 and 2026-10-14). Last good run on 2026-10-11 had 1 items.</li></ul></div><div class="topnav"><h1 class="brand"><svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="2" y="8" width="20" height="5.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="7.2" cy="17.2" r="1.7" fill="currentColor"/><circle cx="16.8" cy="17.2" r="1.7" fill="currentColor"/></svg>SkateDeals</h1><div class="topnav-links" role="group" aria-label="Sections"><button type="button" class="nav-link" id="navDeals" aria-pressed="true">Deals</button><button type="button" class="nav-link" id="navTrack" aria-pressed="false">Track</button><button type="button" class="nav-link" id="navInsights" aria-pressed="false">Insights</button></div><span class="scan-wrap">last scan <time id="lastScan" datetime="2026-10-14T12:51:28+00:00">Oct 14, 2026 8:51:28 AM ET</time><span class="scan-exact" id="scanExact">Oct 14, 2026 8:51:28 AM ET</span></span><span class="fresh-note" id="freshness"><span class="fresh-dot" aria-hidden="true"></span>Scan is current</span><button type="button" class="text-btn filters-open" id="filtersOpen">Filters</button></div><div class="nav-row" id="navPills"><div class="nav-cluster quick-filters" id="storeFilters"><span class="quick-label">Stores</span><div class="quick-row" role="group" aria-label="Store"><button type="button" class="chip quick-chip active" data-order="0" data-home="row" data-store="all" data-count="517" aria-pressed="true"><span class="quick-name">All stores</span><span class="quick-count">517</span></button><button type="button" class="chip quick-chip" data-order="1" data-home="row" data-store="Zumiez" data-count="273" aria-pressed="false"><span class="quick-name">Zumiez</span><span class="quick-count">273</span></button><button type="button" class="chip quick-chip" data-order="2" data-home="row" data-store="Tactics" data-count="148" aria-pressed="false"><span class="quick-name">Tactics</span><span class="quick-count">148</span></button><button type="button" class="chip quick-chip" data-order="3" data-home="row" data-store="SkateWarehouse" data-count="74" aria-pressed="false"><span class="quick-name">SkateWarehouse</span><span class="quick-count">74</span></button><button type="button" class="chip quick-chip" data-order="4" data-home="row" data-store="CCS" data-count="22" aria-pressed="false"><span class="quick-name">CCS</span><span class="quick-count">22</span></button><div class="more-menu" id="moreStores" hidden><button type="button" class="chip more-toggle" aria-expanded="false" aria-controls="moreStoresList">+ More stores</button><div class="more-list" id="moreStoresList" hidden></div></div></div><select id="storeSelect" class="sr-only" aria-label="Store"><option value="all">All stores</option><option value="CCS" data-label="CCS">CCS (22)</option><option value="SkateWarehouse" data-label="SkateWarehouse">SkateWarehouse (74)</option><option value="Tactics" data-label="Tactics">Tactics (148)</option><option value="Zumiez" data-label="Zumiez">Zumiez (273)</option></select></div><div class="nav-cluster quick-filters" id="partFilters"><span class="quick-label">Products</span><div class="quick-row" role="group" aria-label="Product type"><button type="button" class="chip quick-chip" data-order="0" data-home="row" data-part="all" data-count="517" aria-pressed="false"><span class="quick-name">All</span><span class="quick-count">517</span></button><button type="button" class="chip quick-chip active" data-order="1" data-home="row" data-part="Decks" data-count="426" aria-pressed="true"><span class="quick-name">Decks</span><span class="quick-count">426</span></button><button type="button" class="chip quick-chip" data-order="2" data-home="row" data-part="Trucks" data-count="56" aria-pressed="false"><span class="quick-name">Trucks</span><span class="quick-count">56</span></button><button type="button" class="chip quick-chip" data-order="3" data-home="row" data-part="Wheels" data-count="35" aria-pressed="false"><span class="quick-name">Wheels</span><span class="quick-count">35</span></button><div class="more-menu" id="moreParts" hidden><button type="button" class="chip more-toggle" aria-expanded="false" aria-controls="morePartsList">+ More</button><div class="more-list" id="morePartsList" hidden></div></div></div><select id="partSelect" class="sr-only" aria-label="Product type"><option value="all">All types</option><option value="Decks" selected data-label="Decks">Decks (426)</option><option value="Trucks" data-label="Trucks">Trucks (56)</option><option value="Wheels" data-label="Wheels">Wheels (35)</option></select></div></div><div class="tool-line"><div class="search-box"><input type="text" id="searchInput" placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals"></div><div class="active-filters" id="activeFilters" hidden><div class="active-row" id="activeChips"></div><button type="button" class="text-btn" onclick="clearFilters()">Clear all</button></div><p class="result-count"><span id="statusCounts">517 deals</span></p><p class="lede digest" id="changeLine" data-new="0" data-drops="2" data-lows="2" data-gone="6"><span class="digest-label sr-only">Digest of what changed. <span id="changePrefix">Since yesterday:</span></span> <span class="segment" role="group" aria-label="What changed"><button type="button" class="change-btn active" id="btnAll" data-change="all" aria-pressed="true" onclick="setChange('all')">All deals</button> <button type="button" class="change-btn" id="btnNew" data-change="new" aria-pressed="false" onclick="setChange('new')">New 0</button> <button type="button" class="change-btn" id="btnDrop" data-change="drop" aria-pressed="false" onclick="setChange('drop')">Price drops 2</button> <button type="button" class="change-btn" id="btnLow" data-change="lowest" aria-pressed="false" onclick="setChange('lowest')">Hit lowest 2</button> <button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" onclick="setChange('removed')">Disappeared 6</button></span></p><div class="mode" role="group" aria-label="Digest baseline"><span class="mode-label">Baseline</span><button type="button" class="mode-btn" id="modeYesterday" aria-pressed="true" onclick="setVisitMode('yesterday')">Since yesterday</button><button type="button" class="mode-btn" id="modeVisit" aria-pressed="false" onclick="setVisitMode('visit')">Since your last visit</button><select id="baselineSelect" aria-label="Baseline"><option value="yesterday">Since yesterday</option><option value="visit">Since your last visit</option></select></div><label class="field sort-field"><span>Sort</span><select id="sortSelect"><option value="rank">Newest / biggest drop</option><option value="score">Deal score</option><option value="price">Sale price, low to high</option><option value="price-desc">Sale price, high to low</option><option value="original">Original price</option><option value="discount">% off</option><option value="size">Size</option><option value="store">Store</option><option value="brand">Brand</option><option value="days">Days tracked</option><option value="daysat">Days at this price</option></select></label><div class="layout-toggle" role="group" aria-label="Layout"><button type="button" id="layoutTable" aria-pressed="true">Table</button><button type="button" id="layoutCards" aria-pressed="false">Cards</button></div><button type="button" class="text-btn group-toggle" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button></div><p class="lede" id="visitNote" hidden></p></header><div class="shell"><div class="rail">
+<header class="" id="stickyBar" data-stale-hours="36"><div class="topnav"><h1 class="brand"><svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="2" y="8" width="20" height="5.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="7.2" cy="17.2" r="1.7" fill="currentColor"/><circle cx="16.8" cy="17.2" r="1.7" fill="currentColor"/></svg>SkateDeals</h1><div class="topnav-links" role="group" aria-label="Sections"><button type="button" class="nav-link" id="navDeals" aria-pressed="true">Deals</button><button type="button" class="nav-link" id="navTrack" aria-pressed="false">Track</button><button type="button" class="nav-link" id="navInsights" aria-pressed="false">Insights</button></div><span class="scan-wrap">last scan <time id="lastScan" datetime="2026-10-14T12:51:28+00:00">Oct 14, 2026 8:51:28 AM ET</time><span class="scan-exact" id="scanExact">Oct 14, 2026 8:51:28 AM ET</span></span><span class="fresh-note" id="freshness"><span class="fresh-dot" aria-hidden="true"></span>Scan is current</span><button type="button" class="text-btn filters-open" id="filtersOpen">Filters</button></div><div class="nav-row" id="navPills"><div class="nav-cluster quick-filters" id="storeFilters"><span class="quick-label">Stores</span><div class="quick-row" role="group" aria-label="Store"><button type="button" class="chip quick-chip active" data-order="0" data-home="row" data-store="all" data-count="517" aria-pressed="true"><span class="quick-name">All stores</span><span class="quick-count">517</span></button><button type="button" class="chip quick-chip" data-order="1" data-home="row" data-store="Zumiez" data-count="273" aria-pressed="false"><span class="quick-name">Zumiez</span><span class="quick-count">273</span></button><button type="button" class="chip quick-chip" data-order="2" data-home="row" data-store="Tactics" data-count="148" aria-pressed="false"><span class="quick-name">Tactics</span><span class="quick-count">148</span></button><button type="button" class="chip quick-chip" data-order="3" data-home="row" data-store="SkateWarehouse" data-count="74" aria-pressed="false"><span class="quick-name">SkateWarehouse</span><span class="quick-count">74</span></button><button type="button" class="chip quick-chip" data-order="4" data-home="row" data-store="CCS" data-count="22" aria-pressed="false"><span class="quick-name">CCS</span><span class="quick-count">22</span></button><div class="more-menu" id="moreStores" hidden><button type="button" class="chip more-toggle" aria-expanded="false" aria-controls="moreStoresList">+ More stores</button><div class="more-list" id="moreStoresList" hidden></div></div></div><select id="storeSelect" class="sr-only" aria-label="Store"><option value="all">All stores</option><option value="CCS" data-label="CCS">CCS (22)</option><option value="SkateWarehouse" data-label="SkateWarehouse">SkateWarehouse (74)</option><option value="Tactics" data-label="Tactics">Tactics (148)</option><option value="Zumiez" data-label="Zumiez">Zumiez (273)</option></select></div><div class="nav-cluster quick-filters" id="partFilters"><span class="quick-label">Products</span><div class="quick-row" role="group" aria-label="Product type"><button type="button" class="chip quick-chip" data-order="0" data-home="row" data-part="all" data-count="517" aria-pressed="false"><span class="quick-name">All</span><span class="quick-count">517</span></button><button type="button" class="chip quick-chip active" data-order="1" data-home="row" data-part="Decks" data-count="426" aria-pressed="true"><span class="quick-name">Decks</span><span class="quick-count">426</span></button><button type="button" class="chip quick-chip" data-order="2" data-home="row" data-part="Trucks" data-count="56" aria-pressed="false"><span class="quick-name">Trucks</span><span class="quick-count">56</span></button><button type="button" class="chip quick-chip" data-order="3" data-home="row" data-part="Wheels" data-count="35" aria-pressed="false"><span class="quick-name">Wheels</span><span class="quick-count">35</span></button><div class="more-menu" id="moreParts" hidden><button type="button" class="chip more-toggle" aria-expanded="false" aria-controls="morePartsList">+ More</button><div class="more-list" id="morePartsList" hidden></div></div></div><select id="partSelect" class="sr-only" aria-label="Product type"><option value="all">All types</option><option value="Decks" selected data-label="Decks">Decks (426)</option><option value="Trucks" data-label="Trucks">Trucks (56)</option><option value="Wheels" data-label="Wheels">Wheels (35)</option></select></div></div><div class="tool-line"><div class="search-box"><input type="text" id="searchInput" placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals"></div><div class="active-filters" id="activeFilters" hidden><div class="active-row" id="activeChips"></div><button type="button" class="text-btn" onclick="clearFilters()">Clear all</button></div><p class="result-count"><span id="statusCounts">517 deals</span></p><p class="lede digest" id="changeLine" data-new="0" data-drops="2" data-lows="2" data-gone="6"><span class="digest-label sr-only">Digest of what changed. <span id="changePrefix">Since yesterday:</span></span> <span class="segment" role="group" aria-label="What changed"><button type="button" class="change-btn active" id="btnAll" data-change="all" aria-pressed="true" onclick="setChange('all')">All deals</button> <button type="button" class="change-btn" id="btnNew" data-change="new" aria-pressed="false" onclick="setChange('new')">New 0</button> <button type="button" class="change-btn" id="btnDrop" data-change="drop" aria-pressed="false" onclick="setChange('drop')">Price drops 2</button> <button type="button" class="change-btn" id="btnLow" data-change="lowest" aria-pressed="false" onclick="setChange('lowest')">Hit lowest 2</button> <button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" onclick="setChange('removed')">Disappeared 6</button></span></p><div class="mode" role="group" aria-label="Digest baseline"><span class="mode-label">Baseline</span><button type="button" class="mode-btn" id="modeYesterday" aria-pressed="true" onclick="setVisitMode('yesterday')">Since yesterday</button><button type="button" class="mode-btn" id="modeVisit" aria-pressed="false" onclick="setVisitMode('visit')">Since your last visit</button><select id="baselineSelect" aria-label="Baseline"><option value="yesterday">Since yesterday</option><option value="visit">Since your last visit</option></select></div><label class="field sort-field"><span>Sort</span><select id="sortSelect"><option value="rank">Newest / biggest drop</option><option value="score">Deal score</option><option value="price">Sale price, low to high</option><option value="price-desc">Sale price, high to low</option><option value="original">Original price</option><option value="discount">% off</option><option value="size">Size</option><option value="store">Store</option><option value="brand">Brand</option><option value="days">Days tracked</option><option value="daysat">Days at this price</option></select></label><div class="layout-toggle" role="group" aria-label="Layout"><button type="button" id="layoutTable" aria-pressed="true">Table</button><button type="button" id="layoutCards" aria-pressed="false">Cards</button></div><button type="button" class="text-btn group-toggle" id="groupToggle" aria-pressed="false" onclick="toggleGrouped()">Group across stores</button></div><p class="lede" id="visitNote" hidden></p></header><div class="shell"><div class="rail">
 <aside class="sidebar" id="filterDrawer"><div class="drawer-head"><strong>Filters</strong><button type="button" class="text-btn filters-done" id="filtersClose">Show results</button></div><div class="filter-head"><span>Filter deals</span><button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div><div class="side-group" id="specGroup" aria-label="Product specifications"><div id="contextSpecs"><section class="filter-section is-open" data-section="width" data-for="Decks"><button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-width">Deck Width</button><div class="section-body" id="section-width"><div class="filter-group width-ranges" id="sizeFilters" role="group" aria-label="Deck width"><button type="button" class="chip width-chip" data-buckets="7.5-7.75" data-count="6" title="7.5&quot; up to but not including 7.75&quot;" aria-pressed="false"><span class="width-label">7.5</span><span class="width-count">6</span></button><button type="button" class="chip width-chip" data-buckets="7.75-8.0" data-count="8" title="7.75&quot; up to but not including 8.0&quot;" aria-pressed="false"><span class="width-label">7.75</span><span class="width-count">8</span></button><button type="button" class="chip width-chip" data-buckets="8.0-8.125,8.125-8.25" data-count="94" title="8.0&quot; up to but not including 8.25&quot;" aria-pressed="false"><span class="width-label">8.0</span><span class="width-count">94</span></button><button type="button" class="chip width-chip" data-buckets="8.25-8.375,8.375-8.5" data-count="150" title="8.25&quot; up to but not including 8.5&quot;" aria-pressed="false"><span class="width-label">8.25</span><span class="width-count">150</span></button><button type="button" class="chip width-chip" data-buckets="8.5-8.75" data-count="106" title="8.5&quot; up to but not including 8.75&quot;" aria-pressed="false"><span class="width-label">8.5</span><span class="width-count">106</span></button><button type="button" class="chip width-chip" data-buckets="8.75-9.0" data-count="12" title="8.75&quot; up to but not including 9.0&quot;" aria-pressed="false"><span class="width-label">8.75</span><span class="width-count">12</span></button><button type="button" class="chip width-chip" data-buckets="9.0-9.25,9.25-9.5,9.5-10.0" data-count="28" title="9.0&quot; up to but not including 10.0&quot;" aria-pressed="false"><span class="width-label">9.0</span><span class="width-count">28</span></button><button type="button" class="chip width-chip" data-buckets="10up" data-count="16" title="10.0&quot; and wider" aria-pressed="false"><span class="width-label">10+</span><span class="width-count">16</span></button></div></div></section><section class="filter-section is-open" data-section="length" data-for="Decks"><button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-length">Length</button><div class="section-body" id="section-length"><label class="field"><span>Length</span><select id="lengthSelect"><option value="all">All lengths</option><option value="19.99" data-label="19.99">19.99</option><option value="21.99" data-label="21.99">21.99</option><option value="24.98" data-label="24.98">24.98</option><option value="24.99" data-label="24.99">24.99</option><option value="25.95" data-label="25.95">25.95</option><option value="26.98" data-label="26.98">26.98</option><option value="27.95" data-label="27.95">27.95</option><option value="28.95" data-label="28.95">28.95</option><option value="29.35" data-label="29.35">29.35</option><option value="29.7" data-label="29.7">29.7</option><option value="29.98" data-label="29.98">29.98</option><option value="29.99" data-label="29.99">29.99</option><option value="30.54" data-label="30.54">30.54</option><option value="30.95" data-label="30.95">30.95</option><option value="31.1" data-label="31.1">31.1</option><option value="31.275" data-label="31.275">31.275</option><option value="31.4" data-label="31.4">31.4</option><option value="31.5" data-label="31.5">31.5</option><option value="31.6" data-label="31.6">31.6</option><option value="31.7" data-label="31.7">31.7</option><option value="31.75" data-label="31.75">31.75</option><option value="31.8" data-label="31.8">31.8</option><option value="31.85" data-label="31.85">31.85</option><option value="31.875" data-label="31.875">31.875</option><option value="31.9" data-label="31.9">31.9</option><option value="31.912" data-label="31.912">31.912</option><option value="31.95" data-label="31.95">31.95</option><option value="31.99" data-label="31.99">31.99</option><option value="32" data-label="32">32</option><option value="32.1" data-label="32.1">32.1</option><option value="32.25" data-label="32.25">32.25</option><option value="32.3" data-label="32.3">32.3</option><option value="32.34" data-label="32.34">32.34</option><option value="32.5" data-label="32.5">32.5</option><option value="32.95" data-label="32.95">32.95</option><option value="32.98" data-label="32.98">32.98</option><option value="33" data-label="33">33</option><option value="33.95" data-label="33.95">33.95</option><option value="34.95" data-label="34.95">34.95</option><option value="34.98" data-label="34.98">34.98</option><option value="34.99" data-label="34.99">34.99</option><option value="35.95" data-label="35.95">35.95</option><option value="36.98" data-label="36.98">36.98</option><option value="39.38" data-label="39.38">39.38</option><option value="39.95" data-label="39.95">39.95</option><option value="39.99" data-label="39.99">39.99</option></select></label></div></section><section class="filter-section is-open is-type-hidden" data-section="diameter" data-for="Wheels"><button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-diameter">Wheel Diameter</button><div class="section-body" id="section-diameter"><div class="filter-group spec-ranges" id="diameterFilters" role="group" aria-label="Wheel Diameter"><button type="button" class="chip spec-chip" data-value="50-51" data-count="1" title="50mm up to but not including 52mm, printed in the name" aria-pressed="false"><span class="spec-label">50-51</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="52-53" data-count="3" title="52mm up to but not including 54mm, printed in the name" aria-pressed="false"><span class="spec-label">52-53</span><span class="spec-count">3</span></button><button type="button" class="chip spec-chip" data-value="54-55" data-count="4" title="54mm up to but not including 56mm, printed in the name" aria-pressed="false"><span class="spec-label">54-55</span><span class="spec-count">4</span></button><button type="button" class="chip spec-chip" data-value="56+" data-count="8" title="56mm and wider, printed in the name" aria-pressed="false"><span class="spec-label">56+</span><span class="spec-count">8</span></button></div><p class="section-note">Taken from mm in the name.</p></div></section><section class="filter-section is-open is-type-hidden" data-section="duro" data-for="Wheels"><button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-duro">Durometer</button><div class="section-body" id="section-duro"><div class="filter-group spec-ranges" id="duroFilters" role="group" aria-label="Durometer"><button type="button" class="chip spec-chip" data-value="84b" data-count="1" title="Durometer 84b printed in the name" aria-pressed="false"><span class="spec-label">84b</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="93a" data-count="1" title="Durometer 93a printed in the name" aria-pressed="false"><span class="spec-label">93a</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="95a" data-count="9" title="Durometer 95a printed in the name" aria-pressed="false"><span class="spec-label">95a</span><span class="spec-count">9</span></button><button type="button" class="chip spec-chip" data-value="97a" data-count="3" title="Durometer 97a printed in the name" aria-pressed="false"><span class="spec-label">97a</span><span class="spec-count">3</span></button><button type="button" class="chip spec-chip" data-value="99a" data-count="14" title="Durometer 99a printed in the name" aria-pressed="false"><span class="spec-label">99a</span><span class="spec-count">14</span></button><button type="button" class="chip spec-chip" data-value="99d" data-count="4" title="Durometer 99d printed in the name" aria-pressed="false"><span class="spec-label">99d</span><span class="spec-count">4</span></button><button type="button" class="chip spec-chip" data-value="100a" data-count="2" title="Durometer 100a printed in the name" aria-pressed="false"><span class="spec-label">100a</span><span class="spec-count">2</span></button><button type="button" class="chip spec-chip" data-value="101a" data-count="10" title="Durometer 101a printed in the name" aria-pressed="false"><span class="spec-label">101a</span><span class="spec-count">10</span></button></div><p class="section-note">Hardness printed in the name. A wheel with two ratings matches either.</p></div></section><section class="filter-section is-open is-type-hidden" data-section="trucksize" data-for="Trucks"><button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-trucksize">Truck Size</button><div class="section-body" id="section-trucksize"><div class="filter-group spec-ranges" id="trucksizeFilters" role="group" aria-label="Truck Size"><button type="button" class="chip spec-chip" data-value="5.6" data-count="5" title="Axle width 5.6 printed in the name" aria-pressed="false"><span class="spec-label">5.6</span><span class="spec-count">5</span></button><button type="button" class="chip spec-chip" data-value="8.0" data-count="1" title="Hanger width 8.0&quot; printed in the name" aria-pressed="false"><span class="spec-label">8.0</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="10.5" data-count="1" title="Hanger width 10.5&quot; printed in the name" aria-pressed="false"><span class="spec-label">10.5</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="11.0" data-count="1" title="Hanger width 11.0&quot; printed in the name" aria-pressed="false"><span class="spec-label">11.0</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="33" data-count="1" title="Ace size 33 printed in the name" aria-pressed="false"><span class="spec-label">33</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="44" data-count="1" title="Ace size 44 printed in the name" aria-pressed="false"><span class="spec-label">44</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="55" data-count="3" title="Ace size 55 printed in the name" aria-pressed="false"><span class="spec-label">55</span><span class="spec-count">3</span></button><button type="button" class="chip spec-chip" data-value="60" data-count="3" title="Ace size 60 printed in the name" aria-pressed="false"><span class="spec-label">60</span><span class="spec-count">3</span></button><button type="button" class="chip spec-chip" data-value="66" data-count="3" title="Ace size 66 printed in the name" aria-pressed="false"><span class="spec-label">66</span><span class="spec-count">3</span></button><button type="button" class="chip spec-chip" data-value="77" data-count="1" title="Ace size 77 printed in the name" aria-pressed="false"><span class="spec-label">77</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="129" data-count="2" title="Hanger size 129 printed in the name" aria-pressed="false"><span class="spec-label">129</span><span class="spec-count">2</span></button><button type="button" class="chip spec-chip" data-value="139" data-count="1" title="Hanger size 139 printed in the name" aria-pressed="false"><span class="spec-label">139</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="144" data-count="1" title="Hanger size 144 printed in the name" aria-pressed="false"><span class="spec-label">144</span><span class="spec-count">1</span></button><button type="button" class="chip spec-chip" data-value="147" data-count="5" title="Hanger size 147 printed in the name" aria-pressed="false"><span class="spec-label">147</span><span class="spec-count">5</span></button><button type="button" class="chip spec-chip" data-value="148" data-count="3" title="Hanger size 148 printed in the name" aria-pressed="false"><span class="spec-label">148</span><span class="spec-count">3</span></button><button type="button" class="chip spec-chip" data-value="149" data-count="7" title="Hanger size 149 printed in the name" aria-pressed="false"><span class="spec-label">149</span><span class="spec-count">7</span></button><button type="button" class="chip spec-chip" data-value="151" data-count="1" title="Hanger size 151 printed in the name" aria-pressed="false"><span class="spec-label">151</span><span class="spec-count">1</span></button></div><p class="section-note">Hanger size, Ace size, inch width, or axle width printed in the name.</p></div></section><section class="filter-section is-open is-type-hidden" data-section="truckheight" data-for="Trucks"><button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-truckheight">Truck Height</button><div class="section-body" id="section-truckheight"><div class="filter-group spec-ranges" id="truckheightFilters" role="group" aria-label="Truck Height"><button type="button" class="chip spec-chip" data-value="low" data-count="4" title="The name says low" aria-pressed="false"><span class="spec-label">Low</span><span class="spec-count">4</span></button><button type="button" class="chip spec-chip" data-value="mid" data-count="3" title="The name says mid" aria-pressed="false"><span class="spec-label">Mid</span><span class="spec-count">3</span></button></div><p class="section-note">Only when the name says low, mid, or high.</p></div></section><section class="filter-section is-open is-type-hidden" data-section="construction" data-for="Trucks"><button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-construction">Construction</button><div class="section-body" id="section-construction"><div class="filter-group spec-ranges" id="constructionFilters" role="group" aria-label="Construction"><button type="button" class="chip spec-chip" data-value="hollow" data-count="15" title="Hollow printed in the name" aria-pressed="false"><span class="spec-label">Hollow</span><span class="spec-count">15</span></button><button type="button" class="chip spec-chip" data-value="standard" data-count="8" title="Standard printed in the name" aria-pressed="false"><span class="spec-label">Standard</span><span class="spec-count">8</span></button></div><p class="section-note">Only when the name says hollow or standard.</p></div></section></div><section class="filter-section" id="productSpecs" data-section="specs" hidden><button type="button" class="section-toggle" aria-expanded="false" aria-controls="productSpecsBody">Product specifications</button><div class="section-body" id="productSpecsBody"><p class="section-note">Pick a spec to switch to that product type.</p></div></section><p class="count-note">Counts match current results <button type="button" class="info-dot" aria-label="What filter counts mean">?</button><span class="tip" role="tooltip">Each number is how many deals match the other filters if you pick that store, type, brand, width, or size. It is not a total of everything tracked.</span></p></div><div class="side-group" aria-label="Shopping filters"><section class="filter-section is-open" data-section="brand"><button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-brand">Brand</button><div class="section-body" id="section-brand"><div class="facet brand-facet" id="brandFacet"><select id="brandSelect" class="sr-only" aria-label="Brand"><option value="all" data-label="All brands">All brands</option><option value="5Boro" data-label="5Boro">5Boro</option><option value="Ace" data-label="Ace">Ace</option><option value="Anti-Hero" data-label="Anti-Hero">Anti-Hero</option><option value="Arbor" data-label="Arbor">Arbor</option><option value="Art" data-label="Art">Art</option><option value="Artisan" data-label="Artisan">Artisan</option><option value="ATM" data-label="ATM">ATM</option><option value="Bacon" data-label="Bacon">Bacon</option><option value="Baker" data-label="Baker">Baker</option><option value="Birdhouse" data-label="Birdhouse">Birdhouse</option><option value="Blood Wizard" data-label="Blood Wizard">Blood Wizard</option><option value="Blueprint" data-label="Blueprint">Blueprint</option><option value="Bones" data-label="Bones">Bones</option><option value="Chocolate" data-label="Chocolate">Chocolate</option><option value="Cliche" data-label="Cliche">Cliche</option><option value="Color" data-label="Color">Color</option><option value="Crailtap" data-label="Crailtap">Crailtap</option><option value="Creature" data-label="Creature">Creature</option><option value="Death Wish" data-label="Death Wish">Death Wish</option><option value="DGK" data-label="DGK">DGK</option><option value="Disney" data-label="Disney">Disney</option><option value="Disorder" data-label="Disorder">Disorder</option><option value="Doom Sayers" data-label="Doom Sayers">Doom Sayers</option><option value="EDGLRD" data-label="EDGLRD">EDGLRD</option><option value="Element" data-label="Element">Element</option><option value="Enjoi" data-label="Enjoi">Enjoi</option><option value="Fancy Lad" data-label="Fancy Lad">Fancy Lad</option><option value="Finesse" data-label="Finesse">Finesse</option><option value="Flip" data-label="Flip">Flip</option><option value="Foundation" data-label="Foundation">Foundation</option><option value="Frog" data-label="Frog">Frog</option><option value="Fucking Awesome" data-label="Fucking Awesome">Fucking Awesome</option><option value="Girl" data-label="Girl">Girl</option><option value="Glass" data-label="Glass">Glass</option><option value="Goodwood" data-label="Goodwood">Goodwood</option><option value="Habitat" data-label="Habitat">Habitat</option><option value="Heroin" data-label="Heroin">Heroin</option><option value="Hockey" data-label="Hockey">Hockey</option><option value="Hoddle" data-label="Hoddle">Hoddle</option><option value="Independent" data-label="Independent">Independent</option><option value="Jacuzzi" data-label="Jacuzzi">Jacuzzi</option><option value="Jart" data-label="Jart">Jart</option><option value="Krooked" data-label="Krooked">Krooked</option><option value="Lamebrain" data-label="Lamebrain">Lamebrain</option><option value="Less" data-label="Less">Less</option><option value="Limosine" data-label="Limosine">Limosine</option><option value="Lovesick" data-label="Lovesick">Lovesick</option><option value="LZMFG" data-label="LZMFG">LZMFG</option><option value="Madness" data-label="Madness">Madness</option><option value="Masters" data-label="Masters">Masters</option><option value="Mini Logo" data-label="Mini Logo">Mini Logo</option><option value="Misc" data-label="Misc">Misc</option><option value="Monet" data-label="Monet">Monet</option><option value="OJ" data-label="OJ">OJ</option><option value="Opera" data-label="Opera">Opera</option><option value="Passport" data-label="Passport">Passport</option><option value="Pizza" data-label="Pizza">Pizza</option><option value="Plan B" data-label="Plan B">Plan B</option><option value="Polar" data-label="Polar">Polar</option><option value="Popson" data-label="Popson">Popson</option><option value="Powell" data-label="Powell">Powell</option><option value="Powell Peralta" data-label="Powell Peralta">Powell Peralta</option><option value="Primitive" data-label="Primitive">Primitive</option><option value="Pylon" data-label="Pylon">Pylon</option><option value="Quasi" data-label="Quasi">Quasi</option><option value="Real" data-label="Real">Real</option><option value="RIPNDIP" data-label="RIPNDIP">RIPNDIP</option><option value="Santa" data-label="Santa">Santa</option><option value="Santa Cruz" data-label="Santa Cruz">Santa Cruz</option><option value="Sci-Fi Fantasy" data-label="Sci-Fi Fantasy">Sci-Fi Fantasy</option><option value="Sk8mafia" data-label="Sk8mafia">Sk8mafia</option><option value="Slappy" data-label="Slappy">Slappy</option><option value="Snack" data-label="Snack">Snack</option><option value="Spitfire" data-label="Spitfire">Spitfire</option><option value="StrangeLove" data-label="StrangeLove">StrangeLove</option><option value="Swim" data-label="Swim">Swim</option><option value="The" data-label="The">The</option><option value="Theories" data-label="Theories">Theories</option><option value="There" data-label="There">There</option><option value="Thunder" data-label="Thunder">Thunder</option><option value="Toy Machine" data-label="Toy Machine">Toy Machine</option><option value="Trade." data-label="Trade.">Trade.</option><option value="Unity" data-label="Unity">Unity</option><option value="Venture" data-label="Venture">Venture</option><option value="Welcome" data-label="Welcome">Welcome</option><option value="WKND" data-label="WKND">WKND</option><option value="Zero" data-label="Zero">Zero</option></select><input id="brandSearch" class="brand-search" type="search" placeholder="Find a brand" aria-label="Find a brand" autocomplete="off"><div class="facet-list" id="brandList" tabindex="0" aria-label="Brands"><button type="button" class="facet-value active" data-brand="all" aria-pressed="true"><span class="facet-name">All brands</span></button><button type="button" class="facet-value" data-brand="5Boro" data-count="2" aria-pressed="false"><span class="facet-name">5Boro</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="Ace" data-count="15" aria-pressed="false"><span class="facet-name">Ace</span><span class="facet-count">(15)</span></button><button type="button" class="facet-value" data-brand="Anti-Hero" data-count="14" aria-pressed="false"><span class="facet-name">Anti-Hero</span><span class="facet-count">(14)</span></button><button type="button" class="facet-value" data-brand="Arbor" data-count="4" aria-pressed="false"><span class="facet-name">Arbor</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Art" data-count="2" aria-pressed="false"><span class="facet-name">Art</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="Artisan" data-count="1" aria-pressed="false"><span class="facet-name">Artisan</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="ATM" data-count="1" aria-pressed="false"><span class="facet-name">ATM</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Bacon" data-count="5" aria-pressed="false"><span class="facet-name">Bacon</span><span class="facet-count">(5)</span></button><button type="button" class="facet-value" data-brand="Baker" data-count="26" aria-pressed="false"><span class="facet-name">Baker</span><span class="facet-count">(26)</span></button><button type="button" class="facet-value" data-brand="Birdhouse" data-count="5" aria-pressed="false"><span class="facet-name">Birdhouse</span><span class="facet-count">(5)</span></button><button type="button" class="facet-value" data-brand="Blood Wizard" data-count="7" aria-pressed="false"><span class="facet-name">Blood Wizard</span><span class="facet-count">(7)</span></button><button type="button" class="facet-value" data-brand="Blueprint" data-count="3" aria-pressed="false"><span class="facet-name">Blueprint</span><span class="facet-count">(3)</span></button><button type="button" class="facet-value" data-brand="Bones" data-count="4" aria-pressed="false"><span class="facet-name">Bones</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Chocolate" data-count="15" aria-pressed="false"><span class="facet-name">Chocolate</span><span class="facet-count">(15)</span></button><button type="button" class="facet-value" data-brand="Cliche" data-count="3" aria-pressed="false"><span class="facet-name">Cliche</span><span class="facet-count">(3)</span></button><button type="button" class="facet-value" data-brand="Color" data-count="1" aria-pressed="false"><span class="facet-name">Color</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Crailtap" data-count="1" aria-pressed="false"><span class="facet-name">Crailtap</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Creature" data-count="6" aria-pressed="false"><span class="facet-name">Creature</span><span class="facet-count">(6)</span></button><button type="button" class="facet-value" data-brand="Death Wish" data-count="17" aria-pressed="false"><span class="facet-name">Death Wish</span><span class="facet-count">(17)</span></button><button type="button" class="facet-value" data-brand="DGK" data-count="7" aria-pressed="false"><span class="facet-name">DGK</span><span class="facet-count">(7)</span></button><button type="button" class="facet-value" data-brand="Disney" data-count="1" aria-pressed="false"><span class="facet-name">Disney</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Disorder" data-count="3" aria-pressed="false"><span class="facet-name">Disorder</span><span class="facet-count">(3)</span></button><button type="button" class="facet-value" data-brand="Doom Sayers" data-count="4" aria-pressed="false"><span class="facet-name">Doom Sayers</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="EDGLRD" data-count="11" aria-pressed="false"><span class="facet-name">EDGLRD</span><span class="facet-count">(11)</span></button><button type="button" class="facet-value" data-brand="Element" data-count="3" aria-pressed="false"><span class="facet-name">Element</span><span class="facet-count">(3)</span></button><button type="button" class="facet-value" data-brand="Enjoi" data-count="4" aria-pressed="false"><span class="facet-name">Enjoi</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Fancy Lad" data-count="15" aria-pressed="false"><span class="facet-name">Fancy Lad</span><span class="facet-count">(15)</span></button><button type="button" class="facet-value" data-brand="Finesse" data-count="4" aria-pressed="false"><span class="facet-name">Finesse</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Flip" data-count="4" aria-pressed="false"><span class="facet-name">Flip</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Foundation" data-count="8" aria-pressed="false"><span class="facet-name">Foundation</span><span class="facet-count">(8)</span></button><button type="button" class="facet-value" data-brand="Frog" data-count="2" aria-pressed="false"><span class="facet-name">Frog</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="Fucking Awesome" data-count="1" aria-pressed="false"><span class="facet-name">Fucking Awesome</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Girl" data-count="8" aria-pressed="false"><span class="facet-name">Girl</span><span class="facet-count">(8)</span></button><button type="button" class="facet-value" data-brand="Glass" data-count="1" aria-pressed="false"><span class="facet-name">Glass</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Goodwood" data-count="2" aria-pressed="false"><span class="facet-name">Goodwood</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="Habitat" data-count="3" aria-pressed="false"><span class="facet-name">Habitat</span><span class="facet-count">(3)</span></button><button type="button" class="facet-value" data-brand="Heroin" data-count="4" aria-pressed="false"><span class="facet-name">Heroin</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Hockey" data-count="4" aria-pressed="false"><span class="facet-name">Hockey</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Hoddle" data-count="3" aria-pressed="false"><span class="facet-name">Hoddle</span><span class="facet-count">(3)</span></button><button type="button" class="facet-value" data-brand="Independent" data-count="17" aria-pressed="false"><span class="facet-name">Independent</span><span class="facet-count">(17)</span></button><button type="button" class="facet-value" data-brand="Jacuzzi" data-count="11" aria-pressed="false"><span class="facet-name">Jacuzzi</span><span class="facet-count">(11)</span></button><button type="button" class="facet-value" data-brand="Jart" data-count="4" aria-pressed="false"><span class="facet-name">Jart</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Krooked" data-count="9" aria-pressed="false"><span class="facet-name">Krooked</span><span class="facet-count">(9)</span></button><button type="button" class="facet-value" data-brand="Lamebrain" data-count="1" aria-pressed="false"><span class="facet-name">Lamebrain</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Less" data-count="1" aria-pressed="false"><span class="facet-name">Less</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Limosine" data-count="6" aria-pressed="false"><span class="facet-name">Limosine</span><span class="facet-count">(6)</span></button><button type="button" class="facet-value" data-brand="Lovesick" data-count="2" aria-pressed="false"><span class="facet-name">Lovesick</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="LZMFG" data-count="1" aria-pressed="false"><span class="facet-name">LZMFG</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Madness" data-count="4" aria-pressed="false"><span class="facet-name">Madness</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Masters" data-count="1" aria-pressed="false"><span class="facet-name">Masters</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Mini Logo" data-count="3" aria-pressed="false"><span class="facet-name">Mini Logo</span><span class="facet-count">(3)</span></button><button type="button" class="facet-value" data-brand="Misc" data-count="2" aria-pressed="false"><span class="facet-name">Misc</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="Monet" data-count="1" aria-pressed="false"><span class="facet-name">Monet</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="OJ" data-count="19" aria-pressed="false"><span class="facet-name">OJ</span><span class="facet-count">(19)</span></button><button type="button" class="facet-value" data-brand="Opera" data-count="9" aria-pressed="false"><span class="facet-name">Opera</span><span class="facet-count">(9)</span></button><button type="button" class="facet-value" data-brand="Passport" data-count="2" aria-pressed="false"><span class="facet-name">Passport</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="Pizza" data-count="1" aria-pressed="false"><span class="facet-name">Pizza</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Plan B" data-count="7" aria-pressed="false"><span class="facet-name">Plan B</span><span class="facet-count">(7)</span></button><button type="button" class="facet-value" data-brand="Polar" data-count="1" aria-pressed="false"><span class="facet-name">Polar</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Popson" data-count="1" aria-pressed="false"><span class="facet-name">Popson</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Powell" data-count="1" aria-pressed="false"><span class="facet-name">Powell</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Powell Peralta" data-count="13" aria-pressed="false"><span class="facet-name">Powell Peralta</span><span class="facet-count">(13)</span></button><button type="button" class="facet-value" data-brand="Primitive" data-count="27" aria-pressed="false"><span class="facet-name">Primitive</span><span class="facet-count">(27)</span></button><button type="button" class="facet-value" data-brand="Pylon" data-count="2" aria-pressed="false"><span class="facet-name">Pylon</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="Quasi" data-count="2" aria-pressed="false"><span class="facet-name">Quasi</span><span class="facet-count">(2)</span></button><button type="button" class="facet-value" data-brand="Real" data-count="16" aria-pressed="false"><span class="facet-name">Real</span><span class="facet-count">(16)</span></button><button type="button" class="facet-value" data-brand="RIPNDIP" data-count="1" aria-pressed="false"><span class="facet-name">RIPNDIP</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Santa" data-count="1" aria-pressed="false"><span class="facet-name">Santa</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Santa Cruz" data-count="13" aria-pressed="false"><span class="facet-name">Santa Cruz</span><span class="facet-count">(13)</span></button><button type="button" class="facet-value" data-brand="Sci-Fi Fantasy" data-count="1" aria-pressed="false"><span class="facet-name">Sci-Fi Fantasy</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Sk8mafia" data-count="3" aria-pressed="false"><span class="facet-name">Sk8mafia</span><span class="facet-count">(3)</span></button><button type="button" class="facet-value" data-brand="Slappy" data-count="4" aria-pressed="false"><span class="facet-name">Slappy</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Snack" data-count="4" aria-pressed="false"><span class="facet-name">Snack</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Spitfire" data-count="10" aria-pressed="false"><span class="facet-name">Spitfire</span><span class="facet-count">(10)</span></button><button type="button" class="facet-value" data-brand="StrangeLove" data-count="1" aria-pressed="false"><span class="facet-name">StrangeLove</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Swim" data-count="5" aria-pressed="false"><span class="facet-name">Swim</span><span class="facet-count">(5)</span></button><button type="button" class="facet-value" data-brand="The" data-count="4" aria-pressed="false"><span class="facet-name">The</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Theories" data-count="4" aria-pressed="false"><span class="facet-name">Theories</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="There" data-count="10" aria-pressed="false"><span class="facet-name">There</span><span class="facet-count">(10)</span></button><button type="button" class="facet-value" data-brand="Thunder" data-count="15" aria-pressed="false"><span class="facet-name">Thunder</span><span class="facet-count">(15)</span></button><button type="button" class="facet-value" data-brand="Toy Machine" data-count="4" aria-pressed="false"><span class="facet-name">Toy Machine</span><span class="facet-count">(4)</span></button><button type="button" class="facet-value" data-brand="Trade." data-count="1" aria-pressed="false"><span class="facet-name">Trade.</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Unity" data-count="1" aria-pressed="false"><span class="facet-name">Unity</span><span class="facet-count">(1)</span></button><button type="button" class="facet-value" data-brand="Venture" data-count="5" aria-pressed="false"><span class="facet-name">Venture</span><span class="facet-count">(5)</span></button><button type="button" class="facet-value" data-brand="Welcome" data-count="18" aria-pressed="false"><span class="facet-name">Welcome</span><span class="facet-count">(18)</span></button><button type="button" class="facet-value" data-brand="WKND" data-count="6" aria-pressed="false"><span class="facet-name">WKND</span><span class="facet-count">(6)</span></button><button type="button" class="facet-value" data-brand="Zero" data-count="18" aria-pressed="false"><span class="facet-name">Zero</span><span class="facet-count">(18)</span></button></div></div></div></section><div class="more-filters" id="morePanel"><span class="sr-only">More filters</span><section class="filter-section" data-section="price"><button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-price">Price</button><div class="section-body" id="section-price"><div class="field-pair"><label class="field"><span>Min</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label><label class="field"><span>Max</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label></div><div class="dual" data-min-input="priceMin" data-max-input="priceMax" data-floor="0" data-ceil="120" data-prefix="$" data-suffix="" data-any="Any price"><input type="range" class="dual-min" min="0" max="120" step="1" value="0" aria-label="Minimum price" aria-valuemin="0" aria-valuemax="120"><input type="range" class="dual-max" min="0" max="120" step="1" value="120" aria-label="Maximum price" aria-valuemin="0" aria-valuemax="120"><span class="dual-readout">Any price</span></div></div></section><section class="filter-section" data-section="discount"><button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-discount">Discount</button><div class="section-body" id="section-discount"><div class="field-pair"><label class="field"><span>Min %</span><input id="discountMin" type="number" min="0" max="100" step="1"></label><label class="field"><span>Max %</span><input id="discountMax" type="number" min="0" max="100" step="1"></label></div><div class="dual" data-min-input="discountMin" data-max-input="discountMax" data-floor="0" data-ceil="100" data-prefix="" data-suffix="%" data-any="Any discount"><input type="range" class="dual-min" min="0" max="100" step="1" value="0" aria-label="Minimum percent off" aria-valuemin="0" aria-valuemax="100"><input type="range" class="dual-max" min="0" max="100" step="1" value="100" aria-label="Maximum percent off" aria-valuemin="0" aria-valuemax="100"><span class="dual-readout">Any discount</span></div></div></section></div></div><div class="side-group" aria-label="Deal intelligence"><section class="filter-section" data-section="score"><button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-score">Deal quality</button><div class="section-body" id="section-score"><div class="field-pair"><label class="field"><span>Min</span><input id="scoreMin" type="number" min="0" max="100" step="1"></label><label class="field"><span>Max</span><input id="scoreMax" type="number" min="0" max="100" step="1"></label></div><div class="dual" data-min-input="scoreMin" data-max-input="scoreMax" data-floor="0" data-ceil="100" data-prefix="" data-suffix="" data-any="Any score"><input type="range" class="dual-min" min="0" max="100" step="1" value="0" aria-label="Minimum score" aria-valuemin="0" aria-valuemax="100"><input type="range" class="dual-max" min="0" max="100" step="1" value="100" aria-label="Maximum score" aria-valuemin="0" aria-valuemax="100"><span class="dual-readout">Any score</span></div></div></section><section class="filter-section" data-section="deals"><button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-deals">Deal Type</button><div class="section-body" id="section-deals"><div class="kind-list" id="dealTypes" role="group" aria-label="Deal type"><button type="button" class="kind-btn" data-kind="highlights" aria-pressed="false"><span class="kind-dot kind-highlights" aria-hidden="true"></span>Highlights <span class="facet-count"></span></button><button type="button" class="kind-btn" data-kind="new" aria-pressed="false"><span class="kind-dot kind-new" aria-hidden="true"></span>New <span class="facet-count"></span></button><button type="button" class="kind-btn" data-kind="drop" aria-pressed="false"><span class="kind-dot kind-drop" aria-hidden="true"></span>Price drop <span class="facet-count"></span></button><button type="button" class="kind-btn" data-kind="low" aria-pressed="false"><span class="kind-dot kind-low" aria-hidden="true"></span>All-time low <span class="facet-count"></span></button><button type="button" class="kind-btn" data-kind="back" aria-pressed="false"><span class="kind-dot kind-back" aria-hidden="true"></span>Back in stock <span class="facet-count"></span></button><button type="button" class="kind-btn" data-kind="watch" aria-pressed="false"><span class="kind-dot kind-watch" aria-hidden="true"></span>Watching <span class="facet-count"></span></button><button type="button" class="kind-btn" data-kind="hot" aria-pressed="false"><span class="kind-dot kind-hot" aria-hidden="true"></span>Hot <span class="facet-count"></span></button></div></div></section><section class="filter-section" data-section="interval"><button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-interval">Drop Interval</button><div class="section-body" id="section-interval"><div class="interval-list" id="dropInterval" role="group" aria-label="Drop interval"><button type="button" class="interval-btn" data-interval="all" aria-pressed="true">All <span class="facet-count"></span></button><button type="button" class="interval-btn" data-interval="day" aria-pressed="false">Day <span class="facet-count"></span></button><button type="button" class="interval-btn" data-interval="week" aria-pressed="false">Week <span class="facet-count"></span></button><button type="button" class="interval-btn" data-interval="month" aria-pressed="false">Month <span class="facet-count"></span></button><button type="button" class="interval-btn" data-interval="quarter" aria-pressed="false">3 Months <span class="facet-count"></span></button></div><p class="section-note">A drop is at least $2 or 5% below the previous tracked price. Day is today or yesterday.</p></div></section></div><div class="side-group" aria-label="Personal tools"><section class="filter-section" data-section="views"><button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-views">Saved Views</button><div class="section-body" id="section-views"><div class="saved-views"><form class="save-view" id="saveViewForm" hidden><input id="viewNameInput" type="text" maxlength="80" placeholder="Name this view" aria-label="View name"><button type="submit" class="text-btn">Save</button><button type="button" class="text-btn" id="viewCancel">Cancel</button></form><div class="view-row" id="viewRow"></div></div></div></section><section class="filter-section" data-section="watching"><button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-watching">Watching</button><div class="section-body" id="section-watching"><div class="tool-row"><button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" onclick="toggleWatching()">Watching</button></div></div></section><section class="filter-section" data-section="bookmarks"><button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-bookmarks">Bookmarks</button><div class="section-body" id="section-bookmarks"><div class="tool-row"><button type="button" class="text-btn" id="saveView">Save view</button><button type="button" class="text-btn" id="bookmarkView">Bookmark this selection</button></div></div></section></div><button type="button" class="text-btn show-results filters-done">Show results</button></aside>
 </div><div class="board"><div class="stats-grid" hidden><button type="button" class="stat-card" data-card="store" data-store="CCS" aria-pressed="false" onclick="toggleCard('store', 'CCS')"><span class="number">22</span><span class="label">CCS</span></button><button type="button" class="stat-card" data-card="store" data-store="SkateWarehouse" aria-pressed="false" onclick="toggleCard('store', 'SkateWarehouse')"><span class="number">74</span><span class="label">SkateWarehouse</span></button><button type="button" class="stat-card" data-card="store" data-store="Tactics" aria-pressed="false" onclick="toggleCard('store', 'Tactics')"><span class="number">148</span><span class="label">Tactics</span></button><button type="button" class="stat-card" data-card="store" data-store="Zumiez" aria-pressed="false" onclick="toggleCard('store', 'Zumiez')"><span class="number">273</span><span class="label">Zumiez</span></button></div>
 <div class="section" id="dealsSection"><h2 class="sr-only">All Deals</h2><div class="section-content">
@@ -2823,7 +2922,8 @@ header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 <div class="compare-card"><div class="compare-label">Enjoi Big Box Plastic Spectrum 8.25&quot; <span class="part-badge">Decks</span></div><div class="compare-offers"><div class="offer cheapest" data-store="Zumiez"><div class="who"><span class="store-badge store-zumiez">Zumiez</span></div><div class="amt">$49.99</div><div class="nm"><a href="https://www.zumiez.com/enjoi-big-box-plastic-spectrum-8-25-skateboard-deck.html" target="_blank" rel="noopener">enjoi Big Box Plastic Spectrum 8.25&quot; Skateboard Deck</a></div></div><div class="offer" data-store="SkateWarehouse"><div class="who"><span class="store-badge store-skatewarehouse">SkateWarehouse</span></div><div class="amt">$64.98</div><div class="nm"><a href="https://www.skatewarehouse.com/Enjoi_Big_Box_Plastic_Spectrum_Deck/descpage-ENBSPDK.html" target="_blank" rel="noopener">Enjoi Big Box Plastic Spectrum Deck 8.25 x 32</a></div></div></div></div>
 </div></div></div>
 <section class="activity" id="retailerActivity"><h2>Retailer activity</h2><ul class="activity-list"><li>Zumiez: no recorded site-wide sale</li><li>Skate Warehouse: last site-wide sale 102 days ago</li><li>CCS: no recorded site-wide sale</li><li>Tactics: no recorded site-wide sale</li><li>Skate Deluxe: no recorded site-wide sale</li><li>Muir Skate: no recorded site-wide sale</li></ul></section>
-<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. Skate Deluxe is EUR-only and ships from Europe, so it stays out of the scrape. Muir Skate stays out while its Shopify storefront is unavailable. Both still appear under retailer activity with no recorded site-wide sale. Decks stay at 10% off or more for known street brands and 15% otherwise, 7.5 inches and wider. Named cruiser and longboard listings are still excluded. Deal score (0-100) = discount + lowest + recent drop + popular size. Discount is the percent off the original price, capped at 50. Lowest tracked price adds 25 when the sale price is at the all-time low, 18 when it is within $1 or 3% above that low, and 10 when it is within $2 or 5%. That part stays 0 until the listing has at least 3 observations spanning 7 days. A meaningful drop versus the previous sale price ($2 or 5%) adds 8 points plus 1 point per 5% of that drop, up to 15. A smaller day-to-day dip adds 4. A deck from 8.25&quot; to 8.75&quot; adds 10. Hot means 70 or above. Stars are saved in this browser. Email alerts use watchlist.yaml. A site-wide sale is a day when a store's sale count is at least 2.5× its recent median and 30 items higher, after 7 quieter days. Skate Warehouse is seeded at 2026-07-04 until a later day clears that bar.</p><p><a href="https://github.com/pchoward/salesscraper2/actions/workflows/scrape.yml">Run scraper now</a></p></footer></div></div>
+<section id="diagnostics" class="diagnostics" hidden><h2>Diagnostics</h2><p>A category that is usually empty, or whose typical count is low, is not a warning. A failed fetch still is.</p><p>No store warnings.</p><ul><li>Zumiez Bearings is saved as 1 item on 2026-10-11, but that day&#x27;s run recorded 0. That saved count is not a last good run.</li></ul><p>Latest saved run, 2026-10-14.</p><table><thead><tr><th>Store</th><th>Part</th><th>Items</th><th>Status</th></tr></thead><tbody><tr><td>CCS</td><td>Bearings</td><td>0</td><td>empty</td></tr><tr><td>CCS</td><td>Decks</td><td>6</td><td>ok</td></tr><tr><td>CCS</td><td>Trucks</td><td>7</td><td>ok</td></tr><tr><td>CCS</td><td>Wheels</td><td>9</td><td>ok</td></tr><tr><td>SkateWarehouse</td><td>Bearings</td><td>0</td><td>empty</td></tr><tr><td>SkateWarehouse</td><td>Decks</td><td>60</td><td>ok</td></tr><tr><td>SkateWarehouse</td><td>Trucks</td><td>9</td><td>ok</td></tr><tr><td>SkateWarehouse</td><td>Wheels</td><td>5</td><td>ok</td></tr><tr><td>Tactics</td><td>Bearings</td><td>0</td><td>empty</td></tr><tr><td>Tactics</td><td>Decks</td><td>135</td><td>ok</td></tr><tr><td>Tactics</td><td>Trucks</td><td>4</td><td>ok</td></tr><tr><td>Tactics</td><td>Wheels</td><td>9</td><td>ok</td></tr><tr><td>Zumiez</td><td>Bearings</td><td>0</td><td>empty</td></tr><tr><td>Zumiez</td><td>Decks</td><td>225</td><td>ok</td></tr><tr><td>Zumiez</td><td>Trucks</td><td>36</td><td>ok</td></tr><tr><td>Zumiez</td><td>Wheels</td><td>12</td><td>ok</td></tr></tbody></table></section>
+<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. Skate Deluxe is EUR-only and ships from Europe, so it stays out of the scrape. Muir Skate stays out while its Shopify storefront is unavailable. Both still appear under retailer activity with no recorded site-wide sale. Decks stay at 10% off or more for known street brands and 15% otherwise, 7.5 inches and wider. Named cruiser and longboard listings are still excluded. Deal score (0-100) = discount + lowest + recent drop + popular size. Discount is the percent off the original price, capped at 50. Lowest tracked price adds 25 when the sale price is at the all-time low, 18 when it is within $1 or 3% above that low, and 10 when it is within $2 or 5%. That part stays 0 until the listing has at least 3 observations spanning 7 days. A meaningful drop versus the previous sale price ($2 or 5%) adds 8 points plus 1 point per 5% of that drop, up to 15. A smaller day-to-day dip adds 4. A deck from 8.25&quot; to 8.75&quot; adds 10. Hot means 70 or above. Stars are saved in this browser. Email alerts use watchlist.yaml. A site-wide sale is a day when a store's sale count is at least 2.5× its recent median and 30 items higher, after 7 quieter days. Skate Warehouse is seeded at 2026-07-04 until a later day clears that bar.</p><p><a href="https://github.com/pchoward/salesscraper2/actions/workflows/scrape.yml">Run scraper now</a> <button type="button" class="diag-link" id="diagToggle" aria-expanded="false" aria-controls="diagnostics">Diagnostics</button></p></footer></div></div>
 <div id="productModal" hidden><div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button type="button" id="modalClose">Close</button><h3 id="modalTitle"></h3><p id="modalMeta"></p><div class="window-toggle" role="group" aria-label="Price history window"><button type="button" data-window="30" aria-pressed="false">30 days</button><button type="button" data-window="90" aria-pressed="true">90 days</button><button type="button" data-window="180" aria-pressed="false">180 days</button></div><div id="modalChart"></div><p class="chart-note" id="modalNote"></p><p class="modal-label">Stores</p><ul class="modal-offers" id="modalOffers"></ul><p><a id="modalLink" target="_blank" rel="noopener"></a></p></div></div>
 <div id="priceDrawer" hidden><button type="button" id="drawerClose">Close</button><h3 id="drawerTitle"></h3><p class="drawer-chain" id="drawerChain"></p><ul class="drawer-list" id="drawerList"></ul><p><a id="drawerLink" target="_blank" rel="noopener"></a></p></div>
 <div id="sparkPanel" hidden><p class="spark-title" id="sparkPanelTitle"></p><p class="spark-chain" id="sparkPanelText"></p></div><div id="sparkTip" hidden></div>
@@ -2869,14 +2969,54 @@ let sparkTip = null;
 let sparkPinned = false;
 let renamingId = "";
 
+let catalogData = null;
+let rowList = null;
+let rowById = null;
+let cardById = null;
+let detailById = null;
+let matchMemo = null;
+let scanDayValue = null;
+
 function catalog() {
+    if (catalogData) return catalogData;
     const node = document.getElementById("catalogJson");
     if (!node) return { items: {}, views: [] };
     try {
-        return JSON.parse(node.textContent);
+        catalogData = JSON.parse(node.textContent);
     } catch (err) {
-        return { items: {}, views: [] };
+        catalogData = { items: {}, views: [] };
     }
+    return catalogData;
+}
+
+function scanDay() {
+    if (scanDayValue == null) scanDayValue = String((catalog().generated || "")).slice(0, 10);
+    return scanDayValue;
+}
+
+function indexDeals() {
+    if (rowList) return;
+    rowList = Array.from(document.querySelectorAll("#mainTable .deal-row"));
+    rowById = new Map();
+    rowList.forEach(row => rowById.set(row.dataset.id, row));
+    cardById = new Map();
+    document.querySelectorAll("#cardGrid .deal-card").forEach(card => {
+        cardById.set(card.dataset.id, card);
+    });
+    detailById = new Map();
+    document.querySelectorAll("#mainTable .detail-row").forEach(detail => {
+        detailById.set(detail.dataset.for, detail);
+    });
+}
+
+function dealRows() {
+    indexDeals();
+    return rowList;
+}
+
+function cardFor(id) {
+    indexDeals();
+    return cardById.get(id) || null;
 }
 
 function readJson(key, fallback) {
@@ -2900,10 +3040,6 @@ function writeJson(key, value) {
 function starSet() {
     const stored = readJson(STAR_KEY, []);
     return new Set(Array.isArray(stored) ? stored : []);
-}
-
-function dealRows() {
-    return Array.from(document.querySelectorAll("#mainTable .deal-row"));
 }
 
 function numOrNull(id) {
@@ -3304,10 +3440,10 @@ function paintFacetCounts() {
     paintSelectCounts("partSelect", partCounts);
     paintQuickRow("storeFilters", "data-store", storeCounts, state.store || "all");
     paintQuickRow("partFilters", "data-part", partCounts, state.part || "Decks");
-    fitNavPills();
     paintTypeHint();
     paintSelectCounts("lengthSelect", lengthCounts);
     paintSelectCounts("wheelbaseSelect", wheelCounts);
+    scheduleNavFit();
     SPEC_FACETS.forEach(facet => {
         const counts = Object.create(null);
         document.querySelectorAll("#" + facet.section + " .spec-chip").forEach(node => {
@@ -3385,12 +3521,22 @@ function dropInInterval(row, key) {
     if (!limit) return true;
     const day = row.dataset.dropday || "";
     if (!day) return false;
-    const end = String((catalog().generated || "")).slice(0, 10);
+    const end = scanDay();
     if (!end) return false;
     return day >= addDays(end, -limit) && day <= end;
 }
 
 function rowMatches(row, overrides) {
+    const memoKey = matchMemo
+        ? (row.dataset.id || "") + "\u0000" + (overrides ? JSON.stringify(overrides) : "")
+        : "";
+    if (matchMemo && matchMemo.has(memoKey)) return matchMemo.get(memoKey);
+    const value = rowMatchesNow(row, overrides);
+    if (matchMemo) matchMemo.set(memoKey, value);
+    return value;
+}
+
+function rowMatchesNow(row, overrides) {
     const over = overrides || {};
     const store = over.store != null ? over.store : state.store;
     const part = over.part != null ? over.part : state.part;
@@ -3448,8 +3594,9 @@ function rowMatches(row, overrides) {
 }
 
 function syncDetails() {
-    document.querySelectorAll(".detail-row").forEach(detail => {
-        const row = document.querySelector('.deal-row[data-id="' + detail.dataset.for + '"]');
+    indexDeals();
+    detailById.forEach((detail, id) => {
+        const row = rowById.get(id);
         const parentHidden = !row || row.classList.contains("filtered-out") || row.classList.contains("grouped-hide");
         const open = row && row.classList.contains("open");
         detail.hidden = parentHidden || !open;
@@ -3484,10 +3631,8 @@ function applyGroupVisibility() {
 }
 
 function mirrorCardFlags() {
-    const grid = document.getElementById("cardGrid");
-    if (!grid) return;
     dealRows().forEach(row => {
-        const card = grid.querySelector('.deal-card[data-id="' + row.dataset.id + '"]');
+        const card = cardFor(row.dataset.id);
         if (!card) return;
         card.classList.toggle("filtered-out", row.classList.contains("filtered-out"));
         card.classList.toggle("grouped-hide", row.classList.contains("grouped-hide"));
@@ -3505,7 +3650,15 @@ function showGone(on) {
     }
 }
 
+let filterTimer = 0;
+
+function queueFilters() {
+    clearTimeout(filterTimer);
+    filterTimer = setTimeout(applyFilters, 80);
+}
+
 function applyFilters() {
+    matchMemo = new Map();
     readControls();
     dealRows().forEach(row => {
         row.classList.toggle("filtered-out", !rowMatches(row));
@@ -3525,6 +3678,7 @@ function applyFilters() {
     paintViews();
     paintNav();
     syncDuals();
+    matchMemo = null;
 }
 
 function paintKeepaCounts() {
@@ -3667,28 +3821,32 @@ function wireDuals() {
     });
 }
 
-function paintCardStats() {
+function paintOneCardStat(card) {
+    const node = card ? card.querySelector(".avg-price") : null;
+    if (!node) return;
     const days = typeof chartWindow === "number" ? chartWindow : 90;
-    document.querySelectorAll(".deal-card .avg-price").forEach(node => {
-        const card = node.closest(".deal-card");
-        const item = card ? (catalog().items || {})[card.dataset.id] : null;
-        const daily = item && Array.isArray(item.daily) ? item.daily : [];
-        const points = clipDailyPrices(daily, days);
-        if (!points.length) {
-            node.hidden = true;
-            return;
-        }
-        const sum = points.reduce((total, point) => total + Number(point[1]), 0);
-        const average = sum / points.length;
-        const now = parseFloat(card.dataset.price);
-        const symbol = node.dataset.symbol || "$";
-        if (Number.isFinite(now) && Math.abs(average - now) < 0.005) {
-            node.hidden = true;
-            return;
-        }
-        node.hidden = false;
-        node.textContent = "Average: " + symbol + average.toFixed(2);
-    });
+    const item = (catalog().items || {})[card.dataset.id];
+    const daily = item && Array.isArray(item.daily) ? item.daily : [];
+    const points = clipDailyPrices(daily, days);
+    if (!points.length) {
+        node.hidden = true;
+        return;
+    }
+    const sum = points.reduce((total, point) => total + Number(point[1]), 0);
+    const average = sum / points.length;
+    const now = parseFloat(card.dataset.price);
+    const symbol = node.dataset.symbol || "$";
+    if (Number.isFinite(now) && Math.abs(average - now) < 0.005) {
+        node.hidden = true;
+        return;
+    }
+    node.hidden = false;
+    node.textContent = "Average: " + symbol + average.toFixed(2);
+    node.dataset.statWindow = String(chartWindow);
+}
+
+function paintCardStats() {
+    document.querySelectorAll("#cardGrid .deal-card").forEach(paintOneCardStat);
 }
 
 function paintResultCount() {
@@ -3774,6 +3932,16 @@ function pullPressedNavChip(cluster) {
 }
 
 let navFitLock = false;
+let navFitQueued = false;
+
+function scheduleNavFit() {
+    if (navFitQueued) return;
+    navFitQueued = true;
+    requestAnimationFrame(() => {
+        navFitQueued = false;
+        fitNavPills();
+    });
+}
 
 function fitNavPills() {
     const bar = document.getElementById("navPills");
@@ -3940,7 +4108,7 @@ function syncCardOrder() {
     const grid = document.getElementById("cardGrid");
     if (!grid) return;
     dealRows().forEach(row => {
-        const card = grid.querySelector('.deal-card[data-id="' + row.dataset.id + '"]');
+        const card = cardFor(row.dataset.id);
         if (card) grid.appendChild(card);
     });
 }
@@ -5287,22 +5455,79 @@ function buildSparkSvg(points, width, height, stroke) {
     return svg;
 }
 
+function paintOneSpark(button) {
+    const item = (catalog().items || {})[button.dataset.id];
+    const daily = item && Array.isArray(item.daily) ? item.daily : [];
+    const card = button.classList.contains("spark-card");
+    const points = clipDailyPrices(daily, chartWindow);
+    const flat = card && sparkDirection(points) === "flat";
+    const svg = buildSparkSvg(
+        points,
+        card ? 156 : 72,
+        card ? (flat ? 12 : 30) : 22,
+        card ? (flat ? 1.5 : 2) : 1.6
+    );
+    const existing = button.querySelector("svg");
+    if (existing) existing.replaceWith(svg);
+    else button.appendChild(svg);
+    button.dataset.sparkWindow = String(chartWindow);
+}
+
 function paintSparklines() {
-    document.querySelectorAll(".spark-hit").forEach(button => {
-        const item = (catalog().items || {})[button.dataset.id];
-        const daily = item && Array.isArray(item.daily) ? item.daily : [];
-        const card = button.classList.contains("spark-card");
-        const points = clipDailyPrices(daily, chartWindow);
-        const flat = card && sparkDirection(points) === "flat";
-        const svg = buildSparkSvg(
-            points,
-            card ? 156 : 72,
-            card ? (flat ? 12 : 30) : 22,
-            card ? (flat ? 1.5 : 2) : 1.6
-        );
-        const existing = button.querySelector("svg");
-        if (existing) existing.replaceWith(svg);
-        else button.appendChild(svg);
+    document.querySelectorAll(".spark-hit").forEach(paintOneSpark);
+}
+
+let chartObserver = null;
+let chartGeneration = 0;
+
+function chartNodeFresh(node) {
+    if (!chartGeneration) return true;
+    if (node.classList.contains("deal-card")) {
+        const button = node.querySelector(".spark-hit");
+        const stat = node.querySelector(".avg-price");
+        const sparkOk = !button || button.dataset.sparkWindow === String(chartGeneration);
+        const statOk = !stat || stat.dataset.statWindow === String(chartGeneration);
+        return sparkOk && statOk;
+    }
+    return node.dataset.sparkWindow === String(chartGeneration);
+}
+
+function paintChartTarget(node) {
+    if (node.classList.contains("deal-card")) {
+        const button = node.querySelector(".spark-hit");
+        if (button) {
+            paintOneSpark(button);
+            button.dataset.sparkWindow = String(chartGeneration);
+        }
+        paintOneCardStat(node);
+        const stat = node.querySelector(".avg-price");
+        if (stat) stat.dataset.statWindow = String(chartGeneration);
+        return;
+    }
+    paintOneSpark(node);
+    node.dataset.sparkWindow = String(chartGeneration);
+}
+
+function refreshCharts() {
+    chartGeneration += 1;
+    const targets = [];
+    document.querySelectorAll("#mainTable .spark-hit").forEach(node => targets.push(node));
+    document.querySelectorAll("#cardGrid .deal-card").forEach(node => targets.push(node));
+    if (!window.IntersectionObserver) {
+        targets.forEach(paintChartTarget);
+        return;
+    }
+    if (!chartObserver) {
+        chartObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting || chartNodeFresh(entry.target)) return;
+                paintChartTarget(entry.target);
+            });
+        }, { root: null, rootMargin: "160px" });
+    }
+    targets.forEach(node => {
+        chartObserver.unobserve(node);
+        chartObserver.observe(node);
     });
 }
 
@@ -5482,13 +5707,14 @@ function drawChart(id) {
 }
 
 function setChartWindow(days) {
-    chartWindow = Number(days) || 90;
+    const next = Number(days) || 90;
+    const changed = next !== chartWindow;
+    chartWindow = next;
     document.querySelectorAll("[data-window]").forEach(button => {
         const on = String(button.getAttribute("data-window")) === String(chartWindow);
         button.setAttribute("aria-pressed", on ? "true" : "false");
     });
-    paintSparklines();
-    paintCardStats();
+    if (changed) refreshCharts();
     if (chartId) drawChart(chartId);
 }
 
@@ -5608,6 +5834,133 @@ function showInsights() {
     paintNav();
 }
 
+function placeCardFloats(card) {
+    const price = card.querySelector(".card-prices");
+    const hover = card.querySelector(".card-hover");
+    const title = card.querySelector(".title-pop");
+    const titleAnchor = card.querySelector(".title-slot") || card;
+    if (hover) placeFloat(hover, card, price);
+    if (title) placeFloat(title, titleAnchor, price);
+}
+
+function placeScoreFloat(cell, anchor) {
+    const why = cell.querySelector(".why");
+    const priceCard = cell.closest(".deal-card");
+    const price = priceCard ? priceCard.querySelector(".card-prices") : null;
+    if (why) placeFloat(why, anchor || cell, price);
+}
+
+function wireDealEvents() {
+    document.addEventListener("click", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (spark) {
+            event.preventDefault();
+            event.stopPropagation();
+            const current = spark.querySelector("svg");
+            sparkPinned = true;
+            showSparkTip(event, nearestPoint(spark.dataset.id, event, current));
+            return;
+        }
+        const score = event.target.closest(".score-btn, .score-info");
+        if (score) {
+            event.stopPropagation();
+            const cell = score.closest(".score-cell");
+            if (!cell) return;
+            const pinned = cell.classList.toggle("pinned");
+            cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
+                control.setAttribute("aria-expanded", pinned ? "true" : "false");
+            });
+            if (pinned) placeScoreFloat(cell, score);
+            return;
+        }
+        const more = event.target.closest(".card-more");
+        if (more) {
+            const card = more.closest(".deal-card");
+            if (!card) return;
+            const on = card.classList.toggle("show-detail");
+            more.setAttribute("aria-expanded", on ? "true" : "false");
+            return;
+        }
+        const star = event.target.closest(".star");
+        if (star) {
+            toggleStar(star);
+            return;
+        }
+        const priceBtn = event.target.closest(".price-btn");
+        if (priceBtn) {
+            openProduct(priceBtn.dataset.id);
+            return;
+        }
+        const groupChart = event.target.closest(".group-chart");
+        if (groupChart) {
+            event.stopPropagation();
+            openProduct(groupChart.dataset.id);
+            return;
+        }
+        const row = event.target.closest(".deal-row, .deal-card");
+        if (!row || event.target.closest("a, button, input, select, label")) return;
+        openProduct(row.dataset.id);
+    }, true);
+    document.addEventListener("keydown", event => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const row = event.target.closest(".deal-row, .deal-card");
+        if (!row) return;
+        event.preventDefault();
+        openProduct(row.dataset.id);
+    });
+    document.addEventListener("mousemove", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (!spark) return;
+        const current = spark.querySelector("svg");
+        if (!current) return;
+        sparkPinned = false;
+        showSparkTip(event, nearestPoint(spark.dataset.id, event, current));
+    });
+    document.addEventListener("mouseover", event => {
+        const cell = event.target.closest(".score-cell");
+        if (cell && !(event.relatedTarget && cell.contains(event.relatedTarget))) {
+            const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
+            placeScoreFloat(cell, anchor);
+        }
+        const card = event.target.closest(".deal-card");
+        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
+        card.classList.add("is-preview");
+        placeCardFloats(card);
+    });
+    document.addEventListener("mouseout", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
+        const card = event.target.closest(".deal-card");
+        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
+        card.classList.remove("is-preview");
+    });
+    document.addEventListener("focusin", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (spark) {
+            const current = spark.querySelector("svg");
+            const rect = spark.getBoundingClientRect();
+            const point = nearestPoint(spark.dataset.id, { clientX: rect.left, clientY: rect.bottom }, current);
+            if (point) showSparkTip({ clientX: rect.left, clientY: rect.bottom }, point);
+        }
+        const cell = event.target.closest(".score-cell");
+        if (cell) {
+            const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
+            placeScoreFloat(cell, anchor);
+        }
+        const card = event.target.closest(".deal-card");
+        if (!card) return;
+        card.classList.add("is-preview");
+        placeCardFloats(card);
+    });
+    document.addEventListener("focusout", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
+        const card = event.target.closest(".deal-card");
+        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
+        card.classList.remove("is-preview");
+    });
+}
+
 function init() {
     restoreFilterSections();
     syncTypeSections(false);
@@ -5621,10 +5974,10 @@ function init() {
     const bar = document.getElementById("stickyBar");
     if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
     const search = document.getElementById("searchInput");
-    if (search) search.addEventListener("input", applyFilters);
+    if (search) search.addEventListener("input", queueFilters);
     ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
         const node = document.getElementById(id);
-        if (node) node.addEventListener("input", applyFilters);
+        if (node) node.addEventListener("input", queueFilters);
     });
     const baseline = document.getElementById("baselineSelect");
     if (baseline) baseline.addEventListener("change", () => setVisitMode(baseline.value));
@@ -5692,9 +6045,8 @@ function init() {
         });
     });
     const navPills = document.getElementById("navPills");
-    if (navPills && window.ResizeObserver) new ResizeObserver(fitNavPills).observe(navPills);
-    else window.addEventListener("resize", fitNavPills);
-    fitNavPills();
+    if (navPills && window.ResizeObserver) new ResizeObserver(scheduleNavFit).observe(navPills);
+    else window.addEventListener("resize", scheduleNavFit);
     const brand = document.getElementById("brandSelect");
     if (brand) brand.addEventListener("change", applyFilters);
     const brandList = document.getElementById("brandList");
@@ -5762,125 +6114,7 @@ function init() {
             form.hidden = true;
         });
     }
-    document.querySelectorAll(".deal-row, .deal-card").forEach(row => {
-        row.addEventListener("click", event => {
-            if (event.target.closest("a, button, input, select, label")) return;
-            openProduct(row.dataset.id);
-        });
-        row.addEventListener("keydown", event => {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openProduct(row.dataset.id);
-            }
-        });
-    });
-    document.querySelectorAll(".star").forEach(button => {
-        button.addEventListener("click", () => toggleStar(button));
-    });
-    document.querySelectorAll(".price-btn").forEach(button => {
-        button.addEventListener("click", () => openProduct(button.dataset.id));
-    });
-    document.querySelectorAll(".score-btn, .score-info").forEach(button => {
-        button.addEventListener("click", event => {
-            event.stopPropagation();
-            const cell = button.closest(".score-cell");
-            if (!cell) return;
-            const pinned = cell.classList.toggle("pinned");
-            cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
-                control.setAttribute("aria-expanded", pinned ? "true" : "false");
-            });
-            const why = cell.querySelector(".why");
-            const card = button.closest(".deal-card");
-            const price = card ? card.querySelector(".card-prices") : null;
-            if (pinned && why) placeFloat(why, button, price);
-        });
-    });
-    document.querySelectorAll(".score-cell").forEach(cell => {
-        const place = () => {
-            const why = cell.querySelector(".why");
-            const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
-            const card = cell.closest(".deal-card");
-            const price = card ? card.querySelector(".card-prices") : null;
-            if (why) placeFloat(why, anchor, price);
-        };
-        cell.addEventListener("mouseenter", place);
-        cell.addEventListener("focusin", place);
-    });
-    document.querySelectorAll(".deal-card").forEach(card => {
-        const place = () => {
-            const price = card.querySelector(".card-prices");
-            const hover = card.querySelector(".card-hover");
-            const title = card.querySelector(".title-pop");
-            const titleAnchor = card.querySelector(".title-slot") || card;
-            if (hover) placeFloat(hover, card, price);
-            if (title) placeFloat(title, titleAnchor, price);
-        };
-        card.addEventListener("mouseenter", () => {
-            card.classList.add("is-preview");
-            place();
-        });
-        card.addEventListener("mouseleave", () => card.classList.remove("is-preview"));
-        card.addEventListener("focusin", () => {
-            card.classList.add("is-preview");
-            place();
-        });
-        card.addEventListener("focusout", event => {
-            if (!card.contains(event.relatedTarget)) card.classList.remove("is-preview");
-        });
-        const titleSlot = card.querySelector(".title-slot");
-        if (titleSlot) {
-            const placeTitle = () => {
-                const title = card.querySelector(".title-pop");
-                const price = card.querySelector(".card-prices");
-                if (title) placeFloat(title, titleSlot, price);
-            };
-            titleSlot.addEventListener("mouseenter", placeTitle);
-            titleSlot.addEventListener("focusin", placeTitle);
-        }
-    });
-    document.querySelectorAll(".spark-hit").forEach(button => {
-        button.addEventListener("mousemove", event => {
-            const current = button.querySelector("svg");
-            if (!current) return;
-            sparkPinned = false;
-            showSparkTip(event, nearestPoint(button.dataset.id, event, current));
-        });
-        button.addEventListener("mouseleave", () => {
-            if (!sparkPinned) hideSparkTip();
-        });
-        button.addEventListener("click", event => {
-            event.stopPropagation();
-            event.preventDefault();
-            const current = button.querySelector("svg");
-            sparkPinned = true;
-            showSparkTip(event, nearestPoint(button.dataset.id, event, current));
-        });
-        button.addEventListener("focus", () => {
-            const current = button.querySelector("svg");
-            const points = current ? sparkPoints.get(current) : null;
-            const point = points && points.length ? points[points.length - 1] : null;
-            if (!point) return;
-            const rect = button.getBoundingClientRect();
-            showSparkTip({ clientX: rect.left, clientY: rect.bottom }, point);
-        });
-        button.addEventListener("blur", () => {
-            if (!sparkPinned) hideSparkTip();
-        });
-    });
-    document.querySelectorAll(".card-more").forEach(button => {
-        button.addEventListener("click", () => {
-            const card = button.closest(".deal-card");
-            if (!card) return;
-            const on = card.classList.toggle("show-detail");
-            button.setAttribute("aria-expanded", on ? "true" : "false");
-        });
-    });
-    document.querySelectorAll(".group-chart").forEach(button => {
-        button.addEventListener("click", event => {
-            event.stopPropagation();
-            openProduct(button.dataset.id);
-        });
-    });
+    wireDealEvents();
     document.querySelectorAll("[data-window]").forEach(button => {
         button.addEventListener("click", () => setChartWindow(button.getAttribute("data-window")));
     });
@@ -5985,8 +6219,17 @@ function init() {
     });
     updateChangeLine();
     paintViews();
-    paintSparklines();
-    paintCardStats();
+    const diagToggle = document.getElementById("diagToggle");
+    const diagnostics = document.getElementById("diagnostics");
+    if (diagToggle && diagnostics) {
+        diagToggle.addEventListener("click", () => {
+            const open = diagnostics.hasAttribute("hidden");
+            if (open) diagnostics.removeAttribute("hidden");
+            else diagnostics.setAttribute("hidden", "");
+            diagToggle.setAttribute("aria-expanded", open ? "true" : "false");
+            if (open) diagnostics.scrollIntoView({ block: "nearest" });
+        });
+    }
     if (location.search && location.search.length > 1) loadFromUrl();
     else {
         state.change = "all";

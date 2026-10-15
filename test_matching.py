@@ -220,7 +220,11 @@ class ReportSectionTests(unittest.TestCase):
             generated_at="2026-09-30 08:00:00",
             digest=digest,
         )
-        self.assertLess(html.index('id="storeAlerts"'), html.index("Digest"))
+        self.assertNotIn('id="storeAlerts"', html)
+        self.assertNotIn("Store check failed", html)
+        self.assertGreater(html.index('id="diagnostics"'), html.index("Digest"))
+        self.assertIn('id="diagnostics" class="diagnostics" hidden', html)
+        self.assertIn('id="diagToggle"', html)
         self.assertIn("came back with no items two runs in a row", html)
         self.assertIn("Last good run on 2026-09-28 had 12 items", html)
         self.assertIn('id="compareSection"', html)

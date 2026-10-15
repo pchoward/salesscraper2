@@ -38,14 +38,54 @@ let sparkTip = null;
 let sparkPinned = false;
 let renamingId = "";
 
+let catalogData = null;
+let rowList = null;
+let rowById = null;
+let cardById = null;
+let detailById = null;
+let matchMemo = null;
+let scanDayValue = null;
+
 function catalog() {
+    if (catalogData) return catalogData;
     const node = document.getElementById("catalogJson");
     if (!node) return { items: {}, views: [] };
     try {
-        return JSON.parse(node.textContent);
+        catalogData = JSON.parse(node.textContent);
     } catch (err) {
-        return { items: {}, views: [] };
+        catalogData = { items: {}, views: [] };
     }
+    return catalogData;
+}
+
+function scanDay() {
+    if (scanDayValue == null) scanDayValue = String((catalog().generated || "")).slice(0, 10);
+    return scanDayValue;
+}
+
+function indexDeals() {
+    if (rowList) return;
+    rowList = Array.from(document.querySelectorAll("#mainTable .deal-row"));
+    rowById = new Map();
+    rowList.forEach(row => rowById.set(row.dataset.id, row));
+    cardById = new Map();
+    document.querySelectorAll("#cardGrid .deal-card").forEach(card => {
+        cardById.set(card.dataset.id, card);
+    });
+    detailById = new Map();
+    document.querySelectorAll("#mainTable .detail-row").forEach(detail => {
+        detailById.set(detail.dataset.for, detail);
+    });
+}
+
+function dealRows() {
+    indexDeals();
+    return rowList;
+}
+
+function cardFor(id) {
+    indexDeals();
+    return cardById.get(id) || null;
 }
 
 function readJson(key, fallback) {
@@ -69,10 +109,6 @@ function writeJson(key, value) {
 function starSet() {
     const stored = readJson(STAR_KEY, []);
     return new Set(Array.isArray(stored) ? stored : []);
-}
-
-function dealRows() {
-    return Array.from(document.querySelectorAll("#mainTable .deal-row"));
 }
 
 function numOrNull(id) {
@@ -473,10 +509,10 @@ function paintFacetCounts() {
     paintSelectCounts("partSelect", partCounts);
     paintQuickRow("storeFilters", "data-store", storeCounts, state.store || "all");
     paintQuickRow("partFilters", "data-part", partCounts, state.part || "Decks");
-    fitNavPills();
     paintTypeHint();
     paintSelectCounts("lengthSelect", lengthCounts);
     paintSelectCounts("wheelbaseSelect", wheelCounts);
+    scheduleNavFit();
     SPEC_FACETS.forEach(facet => {
         const counts = Object.create(null);
         document.querySelectorAll("#" + facet.section + " .spec-chip").forEach(node => {
@@ -554,12 +590,22 @@ function dropInInterval(row, key) {
     if (!limit) return true;
     const day = row.dataset.dropday || "";
     if (!day) return false;
-    const end = String((catalog().generated || "")).slice(0, 10);
+    const end = scanDay();
     if (!end) return false;
     return day >= addDays(end, -limit) && day <= end;
 }
 
 function rowMatches(row, overrides) {
+    const memoKey = matchMemo
+        ? (row.dataset.id || "") + "\u0000" + (overrides ? JSON.stringify(overrides) : "")
+        : "";
+    if (matchMemo && matchMemo.has(memoKey)) return matchMemo.get(memoKey);
+    const value = rowMatchesNow(row, overrides);
+    if (matchMemo) matchMemo.set(memoKey, value);
+    return value;
+}
+
+function rowMatchesNow(row, overrides) {
     const over = overrides || {};
     const store = over.store != null ? over.store : state.store;
     const part = over.part != null ? over.part : state.part;
@@ -617,8 +663,9 @@ function rowMatches(row, overrides) {
 }
 
 function syncDetails() {
-    document.querySelectorAll(".detail-row").forEach(detail => {
-        const row = document.querySelector('.deal-row[data-id="' + detail.dataset.for + '"]');
+    indexDeals();
+    detailById.forEach((detail, id) => {
+        const row = rowById.get(id);
         const parentHidden = !row || row.classList.contains("filtered-out") || row.classList.contains("grouped-hide");
         const open = row && row.classList.contains("open");
         detail.hidden = parentHidden || !open;
@@ -653,10 +700,8 @@ function applyGroupVisibility() {
 }
 
 function mirrorCardFlags() {
-    const grid = document.getElementById("cardGrid");
-    if (!grid) return;
     dealRows().forEach(row => {
-        const card = grid.querySelector('.deal-card[data-id="' + row.dataset.id + '"]');
+        const card = cardFor(row.dataset.id);
         if (!card) return;
         card.classList.toggle("filtered-out", row.classList.contains("filtered-out"));
         card.classList.toggle("grouped-hide", row.classList.contains("grouped-hide"));
@@ -674,7 +719,15 @@ function showGone(on) {
     }
 }
 
+let filterTimer = 0;
+
+function queueFilters() {
+    clearTimeout(filterTimer);
+    filterTimer = setTimeout(applyFilters, 80);
+}
+
 function applyFilters() {
+    matchMemo = new Map();
     readControls();
     dealRows().forEach(row => {
         row.classList.toggle("filtered-out", !rowMatches(row));
@@ -694,6 +747,7 @@ function applyFilters() {
     paintViews();
     paintNav();
     syncDuals();
+    matchMemo = null;
 }
 
 function paintKeepaCounts() {
@@ -836,28 +890,32 @@ function wireDuals() {
     });
 }
 
-function paintCardStats() {
+function paintOneCardStat(card) {
+    const node = card ? card.querySelector(".avg-price") : null;
+    if (!node) return;
     const days = typeof chartWindow === "number" ? chartWindow : 90;
-    document.querySelectorAll(".deal-card .avg-price").forEach(node => {
-        const card = node.closest(".deal-card");
-        const item = card ? (catalog().items || {})[card.dataset.id] : null;
-        const daily = item && Array.isArray(item.daily) ? item.daily : [];
-        const points = clipDailyPrices(daily, days);
-        if (!points.length) {
-            node.hidden = true;
-            return;
-        }
-        const sum = points.reduce((total, point) => total + Number(point[1]), 0);
-        const average = sum / points.length;
-        const now = parseFloat(card.dataset.price);
-        const symbol = node.dataset.symbol || "$";
-        if (Number.isFinite(now) && Math.abs(average - now) < 0.005) {
-            node.hidden = true;
-            return;
-        }
-        node.hidden = false;
-        node.textContent = "Average: " + symbol + average.toFixed(2);
-    });
+    const item = (catalog().items || {})[card.dataset.id];
+    const daily = item && Array.isArray(item.daily) ? item.daily : [];
+    const points = clipDailyPrices(daily, days);
+    if (!points.length) {
+        node.hidden = true;
+        return;
+    }
+    const sum = points.reduce((total, point) => total + Number(point[1]), 0);
+    const average = sum / points.length;
+    const now = parseFloat(card.dataset.price);
+    const symbol = node.dataset.symbol || "$";
+    if (Number.isFinite(now) && Math.abs(average - now) < 0.005) {
+        node.hidden = true;
+        return;
+    }
+    node.hidden = false;
+    node.textContent = "Average: " + symbol + average.toFixed(2);
+    node.dataset.statWindow = String(chartWindow);
+}
+
+function paintCardStats() {
+    document.querySelectorAll("#cardGrid .deal-card").forEach(paintOneCardStat);
 }
 
 function paintResultCount() {
@@ -943,6 +1001,16 @@ function pullPressedNavChip(cluster) {
 }
 
 let navFitLock = false;
+let navFitQueued = false;
+
+function scheduleNavFit() {
+    if (navFitQueued) return;
+    navFitQueued = true;
+    requestAnimationFrame(() => {
+        navFitQueued = false;
+        fitNavPills();
+    });
+}
 
 function fitNavPills() {
     const bar = document.getElementById("navPills");
@@ -1109,7 +1177,7 @@ function syncCardOrder() {
     const grid = document.getElementById("cardGrid");
     if (!grid) return;
     dealRows().forEach(row => {
-        const card = grid.querySelector('.deal-card[data-id="' + row.dataset.id + '"]');
+        const card = cardFor(row.dataset.id);
         if (card) grid.appendChild(card);
     });
 }
@@ -2456,22 +2524,79 @@ function buildSparkSvg(points, width, height, stroke) {
     return svg;
 }
 
+function paintOneSpark(button) {
+    const item = (catalog().items || {})[button.dataset.id];
+    const daily = item && Array.isArray(item.daily) ? item.daily : [];
+    const card = button.classList.contains("spark-card");
+    const points = clipDailyPrices(daily, chartWindow);
+    const flat = card && sparkDirection(points) === "flat";
+    const svg = buildSparkSvg(
+        points,
+        card ? 156 : 72,
+        card ? (flat ? 12 : 30) : 22,
+        card ? (flat ? 1.5 : 2) : 1.6
+    );
+    const existing = button.querySelector("svg");
+    if (existing) existing.replaceWith(svg);
+    else button.appendChild(svg);
+    button.dataset.sparkWindow = String(chartWindow);
+}
+
 function paintSparklines() {
-    document.querySelectorAll(".spark-hit").forEach(button => {
-        const item = (catalog().items || {})[button.dataset.id];
-        const daily = item && Array.isArray(item.daily) ? item.daily : [];
-        const card = button.classList.contains("spark-card");
-        const points = clipDailyPrices(daily, chartWindow);
-        const flat = card && sparkDirection(points) === "flat";
-        const svg = buildSparkSvg(
-            points,
-            card ? 156 : 72,
-            card ? (flat ? 12 : 30) : 22,
-            card ? (flat ? 1.5 : 2) : 1.6
-        );
-        const existing = button.querySelector("svg");
-        if (existing) existing.replaceWith(svg);
-        else button.appendChild(svg);
+    document.querySelectorAll(".spark-hit").forEach(paintOneSpark);
+}
+
+let chartObserver = null;
+let chartGeneration = 0;
+
+function chartNodeFresh(node) {
+    if (!chartGeneration) return true;
+    if (node.classList.contains("deal-card")) {
+        const button = node.querySelector(".spark-hit");
+        const stat = node.querySelector(".avg-price");
+        const sparkOk = !button || button.dataset.sparkWindow === String(chartGeneration);
+        const statOk = !stat || stat.dataset.statWindow === String(chartGeneration);
+        return sparkOk && statOk;
+    }
+    return node.dataset.sparkWindow === String(chartGeneration);
+}
+
+function paintChartTarget(node) {
+    if (node.classList.contains("deal-card")) {
+        const button = node.querySelector(".spark-hit");
+        if (button) {
+            paintOneSpark(button);
+            button.dataset.sparkWindow = String(chartGeneration);
+        }
+        paintOneCardStat(node);
+        const stat = node.querySelector(".avg-price");
+        if (stat) stat.dataset.statWindow = String(chartGeneration);
+        return;
+    }
+    paintOneSpark(node);
+    node.dataset.sparkWindow = String(chartGeneration);
+}
+
+function refreshCharts() {
+    chartGeneration += 1;
+    const targets = [];
+    document.querySelectorAll("#mainTable .spark-hit").forEach(node => targets.push(node));
+    document.querySelectorAll("#cardGrid .deal-card").forEach(node => targets.push(node));
+    if (!window.IntersectionObserver) {
+        targets.forEach(paintChartTarget);
+        return;
+    }
+    if (!chartObserver) {
+        chartObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting || chartNodeFresh(entry.target)) return;
+                paintChartTarget(entry.target);
+            });
+        }, { root: null, rootMargin: "160px" });
+    }
+    targets.forEach(node => {
+        chartObserver.unobserve(node);
+        chartObserver.observe(node);
     });
 }
 
@@ -2651,13 +2776,14 @@ function drawChart(id) {
 }
 
 function setChartWindow(days) {
-    chartWindow = Number(days) || 90;
+    const next = Number(days) || 90;
+    const changed = next !== chartWindow;
+    chartWindow = next;
     document.querySelectorAll("[data-window]").forEach(button => {
         const on = String(button.getAttribute("data-window")) === String(chartWindow);
         button.setAttribute("aria-pressed", on ? "true" : "false");
     });
-    paintSparklines();
-    paintCardStats();
+    if (changed) refreshCharts();
     if (chartId) drawChart(chartId);
 }
 
@@ -2777,6 +2903,133 @@ function showInsights() {
     paintNav();
 }
 
+function placeCardFloats(card) {
+    const price = card.querySelector(".card-prices");
+    const hover = card.querySelector(".card-hover");
+    const title = card.querySelector(".title-pop");
+    const titleAnchor = card.querySelector(".title-slot") || card;
+    if (hover) placeFloat(hover, card, price);
+    if (title) placeFloat(title, titleAnchor, price);
+}
+
+function placeScoreFloat(cell, anchor) {
+    const why = cell.querySelector(".why");
+    const priceCard = cell.closest(".deal-card");
+    const price = priceCard ? priceCard.querySelector(".card-prices") : null;
+    if (why) placeFloat(why, anchor || cell, price);
+}
+
+function wireDealEvents() {
+    document.addEventListener("click", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (spark) {
+            event.preventDefault();
+            event.stopPropagation();
+            const current = spark.querySelector("svg");
+            sparkPinned = true;
+            showSparkTip(event, nearestPoint(spark.dataset.id, event, current));
+            return;
+        }
+        const score = event.target.closest(".score-btn, .score-info");
+        if (score) {
+            event.stopPropagation();
+            const cell = score.closest(".score-cell");
+            if (!cell) return;
+            const pinned = cell.classList.toggle("pinned");
+            cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
+                control.setAttribute("aria-expanded", pinned ? "true" : "false");
+            });
+            if (pinned) placeScoreFloat(cell, score);
+            return;
+        }
+        const more = event.target.closest(".card-more");
+        if (more) {
+            const card = more.closest(".deal-card");
+            if (!card) return;
+            const on = card.classList.toggle("show-detail");
+            more.setAttribute("aria-expanded", on ? "true" : "false");
+            return;
+        }
+        const star = event.target.closest(".star");
+        if (star) {
+            toggleStar(star);
+            return;
+        }
+        const priceBtn = event.target.closest(".price-btn");
+        if (priceBtn) {
+            openProduct(priceBtn.dataset.id);
+            return;
+        }
+        const groupChart = event.target.closest(".group-chart");
+        if (groupChart) {
+            event.stopPropagation();
+            openProduct(groupChart.dataset.id);
+            return;
+        }
+        const row = event.target.closest(".deal-row, .deal-card");
+        if (!row || event.target.closest("a, button, input, select, label")) return;
+        openProduct(row.dataset.id);
+    }, true);
+    document.addEventListener("keydown", event => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const row = event.target.closest(".deal-row, .deal-card");
+        if (!row) return;
+        event.preventDefault();
+        openProduct(row.dataset.id);
+    });
+    document.addEventListener("mousemove", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (!spark) return;
+        const current = spark.querySelector("svg");
+        if (!current) return;
+        sparkPinned = false;
+        showSparkTip(event, nearestPoint(spark.dataset.id, event, current));
+    });
+    document.addEventListener("mouseover", event => {
+        const cell = event.target.closest(".score-cell");
+        if (cell && !(event.relatedTarget && cell.contains(event.relatedTarget))) {
+            const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
+            placeScoreFloat(cell, anchor);
+        }
+        const card = event.target.closest(".deal-card");
+        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
+        card.classList.add("is-preview");
+        placeCardFloats(card);
+    });
+    document.addEventListener("mouseout", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
+        const card = event.target.closest(".deal-card");
+        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
+        card.classList.remove("is-preview");
+    });
+    document.addEventListener("focusin", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (spark) {
+            const current = spark.querySelector("svg");
+            const rect = spark.getBoundingClientRect();
+            const point = nearestPoint(spark.dataset.id, { clientX: rect.left, clientY: rect.bottom }, current);
+            if (point) showSparkTip({ clientX: rect.left, clientY: rect.bottom }, point);
+        }
+        const cell = event.target.closest(".score-cell");
+        if (cell) {
+            const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
+            placeScoreFloat(cell, anchor);
+        }
+        const card = event.target.closest(".deal-card");
+        if (!card) return;
+        card.classList.add("is-preview");
+        placeCardFloats(card);
+    });
+    document.addEventListener("focusout", event => {
+        const spark = event.target.closest(".spark-hit");
+        if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
+        const card = event.target.closest(".deal-card");
+        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
+        card.classList.remove("is-preview");
+    });
+}
+
 function init() {
     restoreFilterSections();
     syncTypeSections(false);
@@ -2790,10 +3043,10 @@ function init() {
     const bar = document.getElementById("stickyBar");
     if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
     const search = document.getElementById("searchInput");
-    if (search) search.addEventListener("input", applyFilters);
+    if (search) search.addEventListener("input", queueFilters);
     ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
         const node = document.getElementById(id);
-        if (node) node.addEventListener("input", applyFilters);
+        if (node) node.addEventListener("input", queueFilters);
     });
     const baseline = document.getElementById("baselineSelect");
     if (baseline) baseline.addEventListener("change", () => setVisitMode(baseline.value));
@@ -2861,9 +3114,8 @@ function init() {
         });
     });
     const navPills = document.getElementById("navPills");
-    if (navPills && window.ResizeObserver) new ResizeObserver(fitNavPills).observe(navPills);
-    else window.addEventListener("resize", fitNavPills);
-    fitNavPills();
+    if (navPills && window.ResizeObserver) new ResizeObserver(scheduleNavFit).observe(navPills);
+    else window.addEventListener("resize", scheduleNavFit);
     const brand = document.getElementById("brandSelect");
     if (brand) brand.addEventListener("change", applyFilters);
     const brandList = document.getElementById("brandList");
@@ -2931,125 +3183,7 @@ function init() {
             form.hidden = true;
         });
     }
-    document.querySelectorAll(".deal-row, .deal-card").forEach(row => {
-        row.addEventListener("click", event => {
-            if (event.target.closest("a, button, input, select, label")) return;
-            openProduct(row.dataset.id);
-        });
-        row.addEventListener("keydown", event => {
-            if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                openProduct(row.dataset.id);
-            }
-        });
-    });
-    document.querySelectorAll(".star").forEach(button => {
-        button.addEventListener("click", () => toggleStar(button));
-    });
-    document.querySelectorAll(".price-btn").forEach(button => {
-        button.addEventListener("click", () => openProduct(button.dataset.id));
-    });
-    document.querySelectorAll(".score-btn, .score-info").forEach(button => {
-        button.addEventListener("click", event => {
-            event.stopPropagation();
-            const cell = button.closest(".score-cell");
-            if (!cell) return;
-            const pinned = cell.classList.toggle("pinned");
-            cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
-                control.setAttribute("aria-expanded", pinned ? "true" : "false");
-            });
-            const why = cell.querySelector(".why");
-            const card = button.closest(".deal-card");
-            const price = card ? card.querySelector(".card-prices") : null;
-            if (pinned && why) placeFloat(why, button, price);
-        });
-    });
-    document.querySelectorAll(".score-cell").forEach(cell => {
-        const place = () => {
-            const why = cell.querySelector(".why");
-            const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
-            const card = cell.closest(".deal-card");
-            const price = card ? card.querySelector(".card-prices") : null;
-            if (why) placeFloat(why, anchor, price);
-        };
-        cell.addEventListener("mouseenter", place);
-        cell.addEventListener("focusin", place);
-    });
-    document.querySelectorAll(".deal-card").forEach(card => {
-        const place = () => {
-            const price = card.querySelector(".card-prices");
-            const hover = card.querySelector(".card-hover");
-            const title = card.querySelector(".title-pop");
-            const titleAnchor = card.querySelector(".title-slot") || card;
-            if (hover) placeFloat(hover, card, price);
-            if (title) placeFloat(title, titleAnchor, price);
-        };
-        card.addEventListener("mouseenter", () => {
-            card.classList.add("is-preview");
-            place();
-        });
-        card.addEventListener("mouseleave", () => card.classList.remove("is-preview"));
-        card.addEventListener("focusin", () => {
-            card.classList.add("is-preview");
-            place();
-        });
-        card.addEventListener("focusout", event => {
-            if (!card.contains(event.relatedTarget)) card.classList.remove("is-preview");
-        });
-        const titleSlot = card.querySelector(".title-slot");
-        if (titleSlot) {
-            const placeTitle = () => {
-                const title = card.querySelector(".title-pop");
-                const price = card.querySelector(".card-prices");
-                if (title) placeFloat(title, titleSlot, price);
-            };
-            titleSlot.addEventListener("mouseenter", placeTitle);
-            titleSlot.addEventListener("focusin", placeTitle);
-        }
-    });
-    document.querySelectorAll(".spark-hit").forEach(button => {
-        button.addEventListener("mousemove", event => {
-            const current = button.querySelector("svg");
-            if (!current) return;
-            sparkPinned = false;
-            showSparkTip(event, nearestPoint(button.dataset.id, event, current));
-        });
-        button.addEventListener("mouseleave", () => {
-            if (!sparkPinned) hideSparkTip();
-        });
-        button.addEventListener("click", event => {
-            event.stopPropagation();
-            event.preventDefault();
-            const current = button.querySelector("svg");
-            sparkPinned = true;
-            showSparkTip(event, nearestPoint(button.dataset.id, event, current));
-        });
-        button.addEventListener("focus", () => {
-            const current = button.querySelector("svg");
-            const points = current ? sparkPoints.get(current) : null;
-            const point = points && points.length ? points[points.length - 1] : null;
-            if (!point) return;
-            const rect = button.getBoundingClientRect();
-            showSparkTip({ clientX: rect.left, clientY: rect.bottom }, point);
-        });
-        button.addEventListener("blur", () => {
-            if (!sparkPinned) hideSparkTip();
-        });
-    });
-    document.querySelectorAll(".card-more").forEach(button => {
-        button.addEventListener("click", () => {
-            const card = button.closest(".deal-card");
-            if (!card) return;
-            const on = card.classList.toggle("show-detail");
-            button.setAttribute("aria-expanded", on ? "true" : "false");
-        });
-    });
-    document.querySelectorAll(".group-chart").forEach(button => {
-        button.addEventListener("click", event => {
-            event.stopPropagation();
-            openProduct(button.dataset.id);
-        });
-    });
+    wireDealEvents();
     document.querySelectorAll("[data-window]").forEach(button => {
         button.addEventListener("click", () => setChartWindow(button.getAttribute("data-window")));
     });
@@ -3154,8 +3288,17 @@ function init() {
     });
     updateChangeLine();
     paintViews();
-    paintSparklines();
-    paintCardStats();
+    const diagToggle = document.getElementById("diagToggle");
+    const diagnostics = document.getElementById("diagnostics");
+    if (diagToggle && diagnostics) {
+        diagToggle.addEventListener("click", () => {
+            const open = diagnostics.hasAttribute("hidden");
+            if (open) diagnostics.removeAttribute("hidden");
+            else diagnostics.setAttribute("hidden", "");
+            diagToggle.setAttribute("aria-expanded", open ? "true" : "false");
+            if (open) diagnostics.scrollIntoView({ block: "nearest" });
+        });
+    }
     if (location.search && location.search.length > 1) loadFromUrl();
     else {
         state.change = "all";

@@ -4,10 +4,16 @@ Each run records how many items came back for every store/part key, and
 whether the fetch failed. The file stays small: the last 30 runs, plus a
 baseline of the last time each key actually had items.
 
-A warning fires only when the last two recorded runs for a key are both bad
-(empty or failed) and that key has a baseline with items. One empty category
-does not warn. A later run that returns items clears the warning. Keys that
-have never had items (for example bearings that are always empty) stay quiet.
+A warning fires only when the last two recorded runs for a key are both bad.
+An empty streak warns only when that category usually has items: not empty
+on most recent runs, and not a low median. A failed fetch still warns.
+One empty category does not warn. A later run that returns items clears the
+warning. Keys that have never had items stay quiet.
+
+A same-day re-run replaces that day's count. A baseline is dropped when the
+saved run on its own date is empty or failed, including when a later day is
+recorded. Otherwise a one-item scrape that was corrected to zero still looks
+like the last good run.
 
 A whole store is different. When every category comes back empty and that
 store's baseline still has items, the run is suspect: each of those keys is
@@ -23,6 +29,9 @@ logger = logging.getLogger("health")
 HEALTH_PATH = "scrape_health.json"
 MAX_RUNS = 30
 ALERT_STREAK = 2
+# Median item count below this is a normally small category. An empty streak
+# there is not a drop. Failed fetches still warn.
+MIN_TYPICAL_COUNT = 5
 # The morning scrape is daily. A page older than a day and a half is stale.
 STALE_AFTER_HOURS = 36
 
@@ -105,7 +114,66 @@ def record_run(state, day, results, scanned_at=None):
     for key, result in clean.items():
         if _good(result):
             baseline[key] = {"date": day, "count": result["count"]}
+    recorded = {}
+    for run in runs:
+        for key, result in (run.get("results") or {}).items():
+            if isinstance(result, dict):
+                recorded.setdefault(key, {})[str(run.get("date") or "")] = result
+    for key, info in list(baseline.items()):
+        # A same-day re-run can replace a count of 1 with 0 and leave the old
+        # baseline behind. If that day's saved run is not good, drop it.
+        result = (recorded.get(key) or {}).get(str((info or {}).get("date") or ""))
+        if isinstance(result, dict) and not _good(result):
+            baseline.pop(key, None)
     return {"runs": runs, "baseline": baseline}
+
+
+def _observed_counts(series):
+    counts = []
+    for _day, result in series:
+        if result.get("failed"):
+            continue
+        counts.append(int(result.get("count") or 0))
+    return counts
+
+
+def _median(values):
+    ordered = sorted(values)
+    mid = len(ordered) // 2
+    if len(ordered) % 2:
+        return ordered[mid]
+    return (ordered[mid - 1] + ordered[mid]) / 2
+
+
+def normally_populated(series):
+    """Whether the runs before a two-run streak usually had items.
+
+    Empty on most of those runs, or a low median, is a normally quiet
+    category. A later empty scrape is not a drop.
+    """
+    prior = list(series or [])[:-ALERT_STREAK]
+    counts = _observed_counts(prior)
+    if not counts:
+        return False
+    empties = sum(1 for count in counts if count <= 0)
+    if empties * 2 > len(counts):
+        return False
+    return _median(counts) >= MIN_TYPICAL_COUNT
+
+
+def _agreed_positive(series, baseline, key):
+    """Last recorded good run, ignoring a baseline that disagrees with that day."""
+    for day, result in reversed(series or []):
+        if _good(result):
+            return {"date": day, "count": int(result.get("count") or 0)}
+    base = baseline.get(key) if isinstance(baseline, dict) else None
+    if not isinstance(base, dict) or int(base.get("count") or 0) <= 0:
+        return None
+    day = str(base.get("date") or "")
+    recorded = {run_day: result for run_day, result in series or []}
+    if day in recorded and not _good(recorded[day]):
+        return None
+    return {"date": day, "count": int(base.get("count") or 0)}
 
 
 def broken_store_warnings(state):
@@ -132,15 +200,16 @@ def broken_store_warnings(state):
         (older_day, older), (newer_day, newer) = series[-2], series[-1]
         if not (_bad(older) and _bad(newer)):
             continue
-        base = baseline.get(key)
-        if not (isinstance(base, dict) and int(base.get("count") or 0) > 0):
-            positives = [(day, result) for day, result in series[:-2] if _good(result)]
-            if not positives:
-                continue
-            day, result = positives[-1]
-            base = {"date": day, "count": int(result.get("count") or 0)}
-        if str(base.get("date") or "") >= older_day:
+        failed_streak = bool(older.get("failed") or newer.get("failed"))
+        if not failed_streak and not normally_populated(series):
             continue
+        base = _agreed_positive(series, baseline, key)
+        if base and str(base.get("date") or "") >= older_day:
+            base = None
+        if not failed_streak and not base:
+            continue
+        if not base:
+            base = {"date": "", "count": 0}
         try:
             store, part = split_key(key)
         except ValueError:
@@ -186,8 +255,67 @@ def warning_text(warning):
     last = warning.get("last_positive_date")
     count = warning.get("last_positive_count")
     if last and count:
-        sentence += f" Last good run on {last} had {count} items."
+        noun = "item" if int(count) == 1 else "items"
+        sentence += f" Last good run on {last} had {count} {noun}."
     return sentence
+
+
+def baseline_conflicts(state):
+    """Baselines whose own day was saved as empty or failed.
+
+    A same-day re-run can replace a count of 1 with 0 and leave the old
+    baseline behind. That leftover is not a last good run.
+    """
+    if not isinstance(state, dict):
+        return []
+    by_key = {}
+    for run in state.get("runs") or []:
+        if not isinstance(run, dict):
+            continue
+        day = str(run.get("date") or "")
+        results = run.get("results") or {}
+        if not isinstance(results, dict):
+            continue
+        for key, result in results.items():
+            if isinstance(result, dict):
+                by_key.setdefault(str(key), {})[day] = result
+    conflicts = []
+    for key, info in sorted((state.get("baseline") or {}).items()):
+        if not isinstance(info, dict):
+            continue
+        day = str(info.get("date") or "")
+        count = int(info.get("count") or 0)
+        recorded = (by_key.get(str(key)) or {}).get(day)
+        if count <= 0 or not isinstance(recorded, dict) or _good(recorded):
+            continue
+        try:
+            store, part = split_key(key)
+        except ValueError:
+            continue
+        conflicts.append(
+            {
+                "key": str(key),
+                "store": store,
+                "part": part,
+                "date": day,
+                "baseline_count": count,
+                "recorded_count": int(recorded.get("count") or 0),
+            }
+        )
+    return conflicts
+
+
+def conflict_text(conflict):
+    """One sentence for a baseline that disagrees with the saved run."""
+    store = conflict.get("store") or "Unknown"
+    part = conflict.get("part") or "items"
+    saved = int(conflict.get("baseline_count") or 0)
+    recorded = int(conflict.get("recorded_count") or 0)
+    saved_noun = "item" if saved == 1 else "items"
+    return (
+        f"{store} {part} is saved as {saved} {saved_noun} on {conflict.get('date')}, "
+        f"but that day's run recorded {recorded}. That saved count is not a last good run."
+    )
 
 
 TWO_RUN_BLURB = (
