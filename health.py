@@ -10,9 +10,10 @@ on most recent runs, and not a low median. A failed fetch still warns.
 One empty category does not warn. A later run that returns items clears the
 warning. Keys that have never had items stay quiet.
 
-A same-day re-run replaces that day's count. If the new count is empty, a
-baseline written earlier that day is dropped. Otherwise a one-item scrape
-that was corrected to zero still looks like the last good run.
+A same-day re-run replaces that day's count. A baseline is dropped when the
+saved run on its own date is empty or failed, including when a later day is
+recorded. Otherwise a one-item scrape that was corrected to zero still looks
+like the last good run.
 
 A whole store is different. When every category comes back empty and that
 store's baseline still has items, the run is suspect: each of those keys is
@@ -113,8 +114,16 @@ def record_run(state, day, results, scanned_at=None):
     for key, result in clean.items():
         if _good(result):
             baseline[key] = {"date": day, "count": result["count"]}
-        elif str((baseline.get(key) or {}).get("date") or "") == day:
-            # This day's earlier good count was replaced by an empty or failed re-run.
+    recorded = {}
+    for run in runs:
+        for key, result in (run.get("results") or {}).items():
+            if isinstance(result, dict):
+                recorded.setdefault(key, {})[str(run.get("date") or "")] = result
+    for key, info in list(baseline.items()):
+        # A same-day re-run can replace a count of 1 with 0 and leave the old
+        # baseline behind. If that day's saved run is not good, drop it.
+        result = (recorded.get(key) or {}).get(str((info or {}).get("date") or ""))
+        if isinstance(result, dict) and not _good(result):
             baseline.pop(key, None)
     return {"runs": runs, "baseline": baseline}
 

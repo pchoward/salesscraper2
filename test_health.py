@@ -150,6 +150,13 @@ class BrokenStoreTests(unittest.TestCase):
         self.assertNotIn(BEARINGS, state["baseline"])
         self.assertEqual(state["runs"][-1]["results"][BEARINGS]["count"], 0)
         self.assertEqual(len(state["runs"]), 1)
+        stale = {
+            "runs": [{"date": "2026-10-11", "results": {BEARINGS: _empty()}}],
+            "baseline": {BEARINGS: {"date": "2026-10-11", "count": 1}},
+        }
+        stale = _run(stale, "2026-10-14", **{BEARINGS: _empty(), DECK: _ok(10)})
+        self.assertNotIn(BEARINGS, stale["baseline"])
+        self.assertEqual(stale["baseline"][DECK]["count"], 10)
 
     def test_stale_baseline_is_not_a_last_good_run(self):
         state = {
