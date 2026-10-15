@@ -740,7 +740,7 @@ thead th { z-index: 25; }
 .trend-stable { color: #94a3b8; }
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(176px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 0.9rem;
     padding: 0.2rem 0 0.6rem;
 }
@@ -967,7 +967,7 @@ th:hover .tip, th:focus-within .tip { display: block; }
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
 }
-.card-grid { grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 0.45rem; }
+.card-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.45rem; }
 .deal-card { position: relative; padding: 0.4rem; gap: 0.12rem; }
 .deal-card .star { position: absolute; top: 0.35rem; right: 0.35rem; z-index: 2; background: white; }
 .deal-card .hero-wrap, .deal-card .hero, .deal-card .hero.ph { width: 100%; height: 158px; }
@@ -1406,13 +1406,33 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
 }
 .card-prices {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: baseline;
-    gap: 0.35rem;
+    column-gap: 0.4rem;
+    row-gap: 0;
+    min-width: 0;
     min-height: 0;
 }
-.now-price { color: var(--price); font-weight: 800; font-size: 0.92rem; white-space: nowrap; }
-.avg-price { color: #64748b; font-size: 0.72rem; font-weight: 650; text-align: right; white-space: nowrap; flex: 0 0 auto; }
+.now-price {
+    color: var(--price);
+    font-weight: 800;
+    font-size: 0.92rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+.avg-price {
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 650;
+    line-height: 1.2;
+    text-align: right;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    margin-left: auto;
+    max-width: 100%;
+}
 .avg-price[hidden] { display: none !important; }
 .price-since { margin: 0; color: #64748b; font-size: 0.68rem; line-height: 1.3; min-height: 1.3em; }
 .card-badge { min-height: 1.2rem; }
@@ -1854,6 +1874,53 @@ select option:disabled { color: #94a3b8; }
 }
 header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 .pill-newlow { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; font-weight: 800; }
+/* Two fewer cards than the old 176px auto-fill at the same content width.
+   The steps are the widths where that grid gained a column. */
+@media (min-width: 801px) {
+    .board { container-type: inline-size; container-name: deals; }
+    @container deals (min-width: 542px) {
+        .card-grid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 725px) {
+        .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 908px) {
+        .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1092px) {
+        .card-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1275px) {
+        .card-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1458px) {
+        .card-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1641px) {
+        .card-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 1824px) {
+        .card-grid { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2008px) {
+        .card-grid { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2191px) {
+        .card-grid { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2374px) {
+        .card-grid { grid-template-columns: repeat(11, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2557px) {
+        .card-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2740px) {
+        .card-grid { grid-template-columns: repeat(13, minmax(0, 1fr)); }
+    }
+    @container deals (min-width: 2924px) {
+        .card-grid { grid-template-columns: repeat(14, minmax(0, 1fr)); }
+    }
+}
 @media (max-width: 800px) {
     html, body { overflow-x: hidden; }
     .shell, .board { max-width: 100%; min-width: 0; }
