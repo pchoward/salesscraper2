@@ -656,6 +656,20 @@ if (state.widths[0] !== "8.5") throw new Error("width must not be part of this f
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_desktop_table_header_sticks_under_the_nav(self):
+        html = build_report_html(
+            {"Zumiez_Decks": [_deck("40.00", "https://example.com/d", "Zumiez", "Baker Team Deck 8.0")]},
+            {},
+            generated_at="2026-10-15T12:00:00+00:00",
+        )
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        base = style.split("@media (min-width: 801px)", 1)[0]
+        self.assertIn("top: var(--stick-top);", base)
+        desktop = style.split("@media (min-width: 801px)", 1)[1].split("@media", 1)[0]
+        self.assertIn("thead th { top: -0.4rem; }", desktop)
+        self.assertIn(".diagnostics thead th", style)
+        self.assertIn("position: static;", style.split(".diagnostics thead th", 1)[1].split("}", 1)[0])
+
 
 if __name__ == "__main__":
     unittest.main()
