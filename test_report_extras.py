@@ -656,6 +656,21 @@ if (state.widths[0] !== "8.5") throw new Error("width must not be part of this f
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_desktop_shell_fits_under_the_nav(self):
+        html = build_report_html(
+            {"Zumiez_Decks": [_deck("40.00", "https://example.com/d", "Zumiez", "Baker Team Deck 8.0")]},
+            {},
+            generated_at="2026-10-15T12:00:00+00:00",
+        )
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        base = style.split("@media (min-width: 801px)", 1)[0]
+        self.assertIn("min-height: 100vh;", base)
+        desktop = style.split("@media (min-width: 801px)", 1)[1].split("@media", 1)[0]
+        shell = desktop.split(".shell", 1)[1].split("}", 1)[0]
+        self.assertIn("height: calc(100vh - var(--stick-top, 92px));", shell)
+        self.assertIn("min-height: 0;", shell)
+        self.assertIn("overflow: hidden;", shell)
+
     def test_desktop_table_header_sticks_under_the_nav(self):
         html = build_report_html(
             {"Zumiez_Decks": [_deck("40.00", "https://example.com/d", "Zumiez", "Baker Team Deck 8.0")]},

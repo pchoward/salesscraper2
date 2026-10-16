@@ -1752,9 +1752,17 @@ select option:disabled { color: #94a3b8; }
 .show-results { display: none; }
 .facet-value[aria-pressed="true"] .facet-count { color: #1d4ed8; }
 @media (min-width: 801px) {
-    html, body { height: 100%; }
-    body { overflow: hidden; }
-    .shell { height: calc(100vh - var(--stick-top, 92px)); overflow: hidden; align-items: stretch; }
+    html, body { height: 100%; overflow: hidden; }
+    /* The base min-height: 100vh is taller than the viewport minus the nav, so
+       it wins over height and the page stays scrollable by exactly the bar.
+       That slide hides the first row under the sticky nav and cannot be
+       wheeled back. Zero the minimum so the shell stops at the bar. */
+    .shell {
+        height: calc(100vh - var(--stick-top, 92px));
+        min-height: 0;
+        overflow: hidden;
+        align-items: stretch;
+    }
     .rail { height: 100%; max-height: none; overflow: hidden; }
     .board { height: 100%; overflow-y: auto; overflow-x: hidden; }
     /* The nav is outside this scrollport. top: var(--stick-top) shoved the
