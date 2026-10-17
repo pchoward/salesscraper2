@@ -6,11 +6,15 @@
 # Clothing, bags, and hats are still rejected by the shared filters.
 
 sneakers:
+  # brand is the Zumiez shoe facet, used for the sale brand query.
+  # Nike SB shoes are filed under Nike. brand:Nike SB is not a facet.
   - id: vans-wafflecup
+    brand: Vans
     any:
       - Wafflecup
       - Waffle Cup
   - id: nike-sb-dunk
+    brand: Nike
     all:
       - SB
     any:

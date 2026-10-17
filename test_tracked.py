@@ -24,6 +24,7 @@ class TrackedCatalogTests(unittest.TestCase):
         catalog = load_tracked()
         ids = [rule["id"] for rule in catalog["sneakers"]]
         self.assertEqual(ids, ["vans-wafflecup", "nike-sb-dunk"])
+        self.assertEqual([rule["brand"] for rule in catalog["sneakers"]], ["Vans", "Nike"])
         self.assertIn("grip tape", catalog["phrases"])
         self.assertIn("Hardware", catalog["types"])
 
