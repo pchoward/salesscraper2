@@ -5,6 +5,7 @@ import logging
 import re
 import urllib.request
 from html import unescape
+from urllib.parse import quote
 
 from bs4 import BeautifulSoup
 
@@ -246,6 +247,115 @@ def _on_sale(variant):
     return compare > price
 
 
+def _stock_known(variants):
+    """True when a feed included Shopify's ``available`` flag."""
+    return any(isinstance(variant, dict) and "available" in variant for variant in variants or [])
+
+
+def _in_stock(variant):
+    """True only for ``variant.available == true``. A missing flag is not stock."""
+    return bool(variant) and variant.get("available") is True
+
+
+def _sale_variants(product):
+    """On-sale variants that can be bought.
+
+    Collection ``products.json`` lists every variant the product has had and
+    omits ``available``. Callers attach that flag from the product ``.js``
+    document first. Until then, the sale price still comes from the on-sale
+    variants, and no size is treated as in stock.
+    """
+    variants = _variants_of(product)
+    sale = [variant for variant in variants if _on_sale(variant)]
+    if _stock_known(variants):
+        return [variant for variant in sale if _in_stock(variant)]
+    return sale
+
+
+def _variant_id(variant):
+    value = (variant or {}).get("id")
+    if value is None or value is False:
+        return ""
+    return str(value).strip()
+
+
+def apply_stock(product, live):
+    """Copy ``available`` onto catalog variants, matched by variant id."""
+    flags = {}
+    for variant in (live or {}).get("variants") or []:
+        if not isinstance(variant, dict):
+            continue
+        key = _variant_id(variant)
+        if key:
+            flags[key] = variant.get("available") is True
+    for variant in _variants_of(product):
+        key = _variant_id(variant)
+        if key and key in flags:
+            variant["available"] = flags[key]
+    return product
+
+
+_JS_CACHE = {}
+
+
+def product_js_url(handle):
+    """Public product document. This is the feed that includes ``available``."""
+    token = quote(str(handle or "").strip(), safe="")
+    return f"https://shop.ccs.com/products/{token}.js"
+
+
+def load_product_js(handle, fetch=None):
+    """The product ``.js`` body, or None when it cannot be read."""
+    handle = str(handle or "").strip()
+    if not handle:
+        return None
+    if fetch is None and handle in _JS_CACHE:
+        return _JS_CACHE[handle]
+    payload = (fetch or _fetch_json)(product_js_url(handle))
+    live = payload if isinstance(payload, dict) and isinstance(payload.get("variants"), list) else None
+    if fetch is None:
+        _JS_CACHE[handle] = live
+    return live
+
+
+def enrich_stock(products, part, fetch=None):
+    """Attach in-stock flags for this part. A failed read leaves sizes unset."""
+    for product in products or []:
+        if not isinstance(product, dict) or not _catalog_match(product, part):
+            continue
+        if _stock_known(_variants_of(product)):
+            continue
+        handle = str(product.get("handle") or "").strip()
+        if not handle:
+            continue
+        live = load_product_js(handle, fetch)
+        if live:
+            apply_stock(product, live)
+        else:
+            logging.warning("CCS stock unknown for %s; in-stock sizes will not be listed", handle)
+    return products
+
+
+def _shoe_offers(variants):
+    """In-stock sale sizes and the price of each. Sold-out sizes are omitted."""
+    offers = {}
+    for variant in variants or []:
+        if not _in_stock(variant):
+            continue
+        token = _variant_size(variant)
+        price = _amount(variant.get("price"))
+        if not token or price is None:
+            continue
+        current = offers.get(token)
+        if current is None or price < current["amount"]:
+            offers[token] = {
+                "amount": price,
+                "price": _money(price),
+                "compare": _money(variant.get("compare_at_price")),
+            }
+    return offers
+
+
 def _variant_size(variant):
     for field in ("option1", "option2", "option3", "title"):
         raw = variant.get(field) or ""
@@ -316,10 +426,11 @@ class CCSCatalogScraper(Scraper):
     def __init__(self, part):
         super().__init__("CCS", CLEARANCE_JSON, part)
 
-    def scrape(self):
+    def scrape(self, stock_fetch=None):
         products = load_clearance_products()
         if products is None:
             return None
+        enrich_stock(products, self.part, stock_fetch)
         return self.products_from(products)
 
     def parse(self, html):
@@ -339,7 +450,8 @@ class CCSCatalogScraper(Scraper):
             href = normalize_url(f"https://shop.ccs.com/products/{handle}")
             if href in seen:
                 continue
-            sale = [variant for variant in _variants_of(product) if _on_sale(variant)]
+            variants = _variants_of(product)
+            sale = _sale_variants(product)
             if not sale:
                 continue
             cheapest = min(sale, key=lambda variant: _amount(variant.get("price")))
@@ -364,14 +476,16 @@ class CCSCatalogScraper(Scraper):
             images = product.get("images") or []
             if images and isinstance(images[0], dict) and images[0].get("src"):
                 item["image"] = images[0]["src"]
-            if self.part == "Sneakers":
-                sizes = []
-                for variant in sale:
-                    token = _variant_size(variant)
-                    if token and token not in sizes:
-                        sizes.append(token)
-                if sizes:
-                    item["shoe_sizes"] = ordered_shoe_sizes(sizes)
+            if self.part == "Sneakers" and _stock_known(variants):
+                offers = _shoe_offers(sale)
+                sizes = ordered_shoe_sizes(offers)
+                item["shoe_sizes"] = sizes
+                prices = {size: offers[size]["price"] for size in sizes}
+                compares = {size: offers[size]["compare"] for size in sizes}
+                if len(set(prices.values())) > 1:
+                    item["shoe_prices"] = prices
+                if len(set(compares.values())) > 1:
+                    item["shoe_compares"] = compares
             kept.append(item)
             logging.info("Parsed CCS %s: %s", self.part, title)
         logging.info("Parsed %s CCS %s products", len(kept), self.part)
