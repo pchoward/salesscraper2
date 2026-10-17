@@ -3662,6 +3662,7 @@ function applyFilters() {
     showGone(state.change === "removed");
     applySectionFilters();
     applyGroupVisibility();
+    syncGroupOrder();
     syncDetails();
     paintCards();
     paintWidthChips();
@@ -4102,11 +4103,50 @@ function sortBy(key, direction) {
 
 function syncCardOrder() {
     const grid = document.getElementById("cardGrid");
-    if (!grid) return;
-    dealRows().forEach(row => {
+    const tbody = document.querySelector("#mainTable tbody");
+    if (!grid || !tbody) return;
+    // dealRows() is cached the first time it runs, which is the rank order
+    // (new items, then score). Reading that cache put the cards back and
+    // left a % off sort looking unsorted. The table body is the live order.
+    tbody.querySelectorAll(".deal-row").forEach(row => {
         const card = cardFor(row.dataset.id);
         if (card) grid.appendChild(card);
     });
+    syncGroupOrder();
+}
+
+function syncGroupOrder() {
+    const board = document.getElementById("groupBoard");
+    if (!board) return;
+    const cards = Array.from(board.querySelectorAll(".group-card"));
+    if (cards.length < 2) return;
+    const key = state.sortKey || "rank";
+    const direction = state.sortDir || "asc";
+    const members = new Map();
+    document.querySelectorAll("#mainTable tbody .deal-row").forEach(row => {
+        const group = row.dataset.group || "";
+        if (!group || row.classList.contains("filtered-out")) return;
+        if (!members.has(group)) members.set(group, []);
+        members.get(group).push(row);
+    });
+    function winner(group) {
+        const list = members.get(group);
+        if (!list || !list.length) return null;
+        let best = list[0];
+        for (let i = 1; i < list.length; i++) {
+            if (compareSort(list[i], best, key, direction) < 0) best = list[i];
+        }
+        return best;
+    }
+    cards.sort((a, b) => {
+        const left = winner(a.dataset.key || "");
+        const right = winner(b.dataset.key || "");
+        if (!left && !right) return 0;
+        if (!left) return 1;
+        if (!right) return -1;
+        return compareSort(left, right, key, direction);
+    });
+    cards.forEach(card => board.appendChild(card));
 }
 
 function sortTable() {

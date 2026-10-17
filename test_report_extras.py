@@ -656,6 +656,162 @@ if (state.widths[0] !== "8.5") throw new Error("width must not be part of this f
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
 
+    def test_cards_follow_every_sort_including_percent_off(self):
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        index = source[source.find("function indexDeals("):source.find("function readJson(")]
+        sort = source[source.find("const SORT_NUMERIC"):source.find("function sortTable(")]
+        self.assertIn('tbody.querySelectorAll(".deal-row")', sort)
+        self.assertNotIn("dealRows().forEach", sort[sort.find("function syncCardOrder("):])
+        self.assertIn('sortBy("discount", "desc")', source[source.find("function applySortChoice("):source.find("function toggleSection(")])
+        script = r"""
+let state = { sortKey: "rank", sortDir: "asc" };
+let rowList = null;
+let rowById = null;
+let cardById = null;
+let detailById = null;
+function mirrorSort() {}
+function syncUrl() {}
+""" + index + sort + r"""
+function el(tag, opts) {
+  opts = opts || {};
+  const node = {
+    tag: tag,
+    id: opts.id || "",
+    className: opts.className || "",
+    dataset: Object.assign({}, opts.dataset),
+    attrs: Object.assign({}, opts.attrs),
+    children: [],
+    parent: null
+  };
+  node.classList = {
+    contains(name) { return node.className.split(/\s+/).indexOf(name) >= 0; },
+    add(name) { if (!node.classList.contains(name)) node.className = (node.className + " " + name).trim(); },
+    remove(name) { node.className = node.className.split(/\s+/).filter(part => part && part !== name).join(" "); }
+  };
+  node.appendChild = function(child) {
+    if (child.parent) child.parent.children = child.parent.children.filter(item => item !== child);
+    child.parent = node;
+    node.children.push(child);
+    return child;
+  };
+  node.querySelectorAll = function(selector) { return queryAll(node, selector); };
+  node.querySelector = function(selector) { return queryAll(node, selector)[0] || null; };
+  return node;
+}
+function compound(part) {
+  const preds = [];
+  let i = 0;
+  while (i < part.length) {
+    if (part[i] === "#") {
+      const m = /^[\w-]+/.exec(part.slice(i + 1));
+      preds.push(node => node.id === m[0]);
+      i += 1 + m[0].length;
+    } else if (part[i] === ".") {
+      const m = /^[\w-]+/.exec(part.slice(i + 1));
+      preds.push(node => node.classList.contains(m[0]));
+      i += 1 + m[0].length;
+    } else if (part[i] === "[") {
+      const end = part.indexOf("]", i);
+      const body = part.slice(i + 1, end);
+      const eq = /^([\w-]+)="([^"]*)"$/.exec(body);
+      if (eq) preds.push(node => (node.attrs[eq[1]] || "") === eq[2]);
+      else preds.push(node => Object.prototype.hasOwnProperty.call(node.attrs, body));
+      i = end + 1;
+    } else {
+      const m = /^[\w-]+/.exec(part.slice(i));
+      preds.push(node => node.tag === m[0]);
+      i += m[0].length;
+    }
+  }
+  return node => preds.every(pred => pred(node));
+}
+function queryAll(root, selector) {
+  const preds = selector.trim().split(/\s+/).map(compound);
+  let nodes = [root];
+  preds.forEach(pred => {
+    const next = [];
+    nodes.forEach(start => {
+      const walk = node => {
+        node.children.forEach(child => {
+          if (pred(child)) next.push(child);
+          walk(child);
+        });
+      };
+      walk(start);
+    });
+    nodes = next;
+  });
+  return nodes;
+}
+const doc = el("doc");
+doc.getElementById = id => queryAll(doc, "#" + id)[0] || null;
+doc.querySelector = selector => queryAll(doc, selector)[0] || null;
+doc.querySelectorAll = selector => queryAll(doc, selector);
+global.document = doc;
+const tbody = el("tbody");
+const table = el("table", { id: "mainTable" });
+table.appendChild(tbody);
+const grid = el("div", { id: "cardGrid" });
+const board = el("div", { id: "groupBoard" });
+doc.appendChild(table);
+doc.appendChild(grid);
+doc.appendChild(board);
+function addDeal(data) {
+  const row = el("tr", { className: "deal-row", dataset: data, attrs: { "data-group": data.group || "" } });
+  const card = el("article", { className: "deal-card", dataset: Object.assign({}, data) });
+  tbody.appendChild(row);
+  grid.appendChild(card);
+  return { row, card };
+}
+// Rank order pins the new 12% decks first. % off must not.
+addDeal({ id: "new", discount: "12.5", price: "92.75", original: "106.00", score: "40", rank: "0", size: "10.0", store: "CCS", brand: "Powell-Peralta", days: "1", daysat: "1", added: "1", group: "" });
+addDeal({ id: "hot", discount: "51.7", price: "69.99", original: "144.95", score: "80", rank: "1", size: "13.5", store: "Zumiez", brand: "Heroin", days: "40", daysat: "9", added: "0", group: "g-hot" });
+addDeal({ id: "mid", discount: "20.0", price: "79.95", original: "99.95", score: "55", rank: "2", size: "10.0", store: "Tactics", brand: "Welcome", days: "20", daysat: "4", added: "0", group: "g-mid" });
+addDeal({ id: "low", discount: "", price: "30.00", original: "", score: "10", rank: "3", size: "", store: "SkateWarehouse", brand: "ATM", days: "5", daysat: "12", added: "0", group: "g-mid" });
+addDeal({ id: "other", discount: "40.0", price: "50.00", original: "83.33", score: "70", rank: "4", size: "8.5", store: "CCS", brand: "Baker", days: "15", daysat: "2", added: "0", group: "g-hot" });
+const groupHot = el("article", { className: "group-card", dataset: { key: "g-hot" } });
+const groupMid = el("article", { className: "group-card", dataset: { key: "g-mid" } });
+board.appendChild(groupMid);
+board.appendChild(groupHot);
+dealRows();
+function ids(nodes) { return nodes.map(node => node.dataset.id).join(","); }
+function groups() { return board.querySelectorAll(".group-card").map(node => node.dataset.key).join(","); }
+function cards() { return grid.querySelectorAll(".deal-card"); }
+function rows() { return tbody.querySelectorAll(".deal-row"); }
+sortBy("discount", "desc");
+if (ids(cards()) !== "hot,other,mid,new,low") throw new Error("discount cards " + ids(cards()));
+if (ids(rows()) !== ids(cards())) throw new Error("discount rows " + ids(rows()));
+if (groups() !== "g-hot,g-mid") throw new Error("discount groups " + groups());
+const checks = [
+  ["price", "asc", "low,other,hot,mid,new"],
+  ["price", "desc", "new,mid,hot,other,low"],
+  ["score", "desc", "hot,other,mid,new,low"],
+  ["original", "asc", "other,mid,new,hot,low"],
+  ["size", "asc", "other,mid,new,hot,low"],
+  ["store", "asc", "other,new,low,mid,hot"],
+  ["brand", "asc", "low,other,hot,new,mid"],
+  ["days", "desc", "hot,mid,other,low,new"],
+  ["daysat", "asc", "new,other,mid,hot,low"],
+  ["rank", "asc", "new,hot,mid,low,other"]
+];
+checks.forEach(spec => {
+  sortBy(spec[0], spec[1]);
+  if (ids(cards()) !== spec[2]) throw new Error(spec[0] + " " + spec[1] + " cards " + ids(cards()));
+  if (ids(rows()) !== ids(cards())) throw new Error(spec[0] + " rows diverged");
+});
+sortBy("discount", "desc");
+rows().forEach(row => { if (row.dataset.id === "other") row.classList.add("filtered-out"); });
+syncGroupOrder();
+if (groups() !== "g-hot,g-mid") throw new Error("filtered group still led by 51.7 " + groups());
+rows().forEach(row => { if (row.dataset.id === "hot") row.classList.add("filtered-out"); });
+syncGroupOrder();
+if (groups() !== "g-mid,g-hot") throw new Error("group follows the deals still showing " + groups());
+const visible = cards().filter(card => card.dataset.id !== "hot" && card.dataset.id !== "other").map(card => card.dataset.discount);
+if (visible.join(",") !== "20.0,12.5,") throw new Error("visible discounts " + visible.join(","));
+"""
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+
     def test_desktop_shell_fits_under_the_nav(self):
         html = build_report_html(
             {"Zumiez_Decks": [_deck("40.00", "https://example.com/d", "Zumiez", "Baker Team Deck 8.0")]},
