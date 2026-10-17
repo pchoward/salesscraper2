@@ -1528,7 +1528,7 @@ function clearFilters() {
         cardDrop: false,
         cardLow: false,
         change: "all",
-        grouped: state.grouped,
+        grouped: false,
         dropInterval: "all",
         kinds: [],
         highlights: false,
@@ -1539,12 +1539,13 @@ function clearFilters() {
         truckHeights: [],
         constructions: [],
         abecs: [],
-        visitMode: state.visitMode,
+        visitMode: "yesterday",
         sortKey: "rank",
         sortDir: "asc",
         search: "",
         widths: []
     };
+    navMode = "deals";
     const search = document.getElementById("searchInput");
     if (search) search.value = "";
     ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
@@ -1561,6 +1562,18 @@ function clearFilters() {
     if (sort) sort.value = "rank";
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", "false");
+    const grouped = document.getElementById("groupToggle");
+    if (grouped) grouped.setAttribute("aria-pressed", "false");
+    const baseline = document.getElementById("baselineSelect");
+    if (baseline) baseline.value = "yesterday";
+    const yesterday = document.getElementById("modeYesterday");
+    const visit = document.getElementById("modeVisit");
+    if (yesterday) yesterday.setAttribute("aria-pressed", "true");
+    if (visit) visit.setAttribute("aria-pressed", "false");
+    const panel = document.getElementById("statsPanel");
+    const statsToggle = document.getElementById("statsToggle");
+    if (panel) panel.hidden = true;
+    if (statsToggle) statsToggle.setAttribute("aria-pressed", "false");
     const brandSearch = document.getElementById("brandSearch");
     if (brandSearch) brandSearch.value = "";
     filterBrandList("");
@@ -1570,6 +1583,16 @@ function clearFilters() {
     syncTypeSections(false);
     sortBy("rank", "asc");
     applyFilters();
+    updateChangeLine();
+    scrollResultsToTop();
+}
+
+function scrollResultsToTop() {
+    window.scrollTo(0, 0);
+    const board = document.querySelector(".board");
+    if (board) board.scrollTop = 0;
+    const side = document.querySelector(".rail .sidebar");
+    if (side) side.scrollTop = 0;
 }
 
 function measureBar() {
@@ -1939,15 +1962,85 @@ function writeControls(snapshot) {
     paintWidthChips();
 }
 
+const SEARCH_HISTORY_MS = 400;
+let lastHistoryQuery = null;
+let ignoreHistory = false;
+let searchHistoryTimer = 0;
+
+function onlySearchChanged(previous, next) {
+    const before = new URLSearchParams(previous || "");
+    const after = new URLSearchParams(next || "");
+    const keys = {};
+    before.forEach((value, key) => { keys[key] = true; });
+    after.forEach((value, key) => { keys[key] = true; });
+    let searchDiffered = false;
+    const names = Object.keys(keys);
+    for (let i = 0; i < names.length; i++) {
+        const key = names[i];
+        if ((before.get(key) || "") === (after.get(key) || "")) continue;
+        if (key !== "q") return false;
+        searchDiffered = true;
+    }
+    return searchDiffered;
+}
+
+function historyAction(previous, next) {
+    if (previous == null) return "replace";
+    if (previous === next) return "none";
+    if (onlySearchChanged(previous, next)) return "search";
+    return "push";
+}
+
+function historyUrl(query) {
+    return query ? location.pathname + "?" + query : location.pathname;
+}
+
+function commitHistory(query, mode) {
+    const target = historyUrl(query);
+    const current = location.pathname + location.search;
+    if (current !== target) {
+        const data = { view: query };
+        if (mode === "push") history.pushState(data, "", target);
+        else history.replaceState(data, "", target);
+    }
+    lastHistoryQuery = query;
+}
+
 function syncUrl() {
     try {
         const query = encodeState(captureState());
-        const next = query ? "?" + query : location.pathname;
-        const current = location.pathname + location.search;
-        const target = query ? location.pathname + "?" + query : location.pathname;
-        if (current !== target) history.replaceState(null, "", next);
+        if (ignoreHistory) {
+            lastHistoryQuery = query;
+            return;
+        }
+        const action = historyAction(lastHistoryQuery, query);
+        if (action === "none") return;
+        if (action === "search") {
+            clearTimeout(searchHistoryTimer);
+            searchHistoryTimer = setTimeout(() => {
+                const latest = encodeState(captureState());
+                const follow = historyAction(lastHistoryQuery, latest);
+                if (follow === "none") return;
+                commitHistory(latest, follow === "replace" ? "replace" : "push");
+            }, SEARCH_HISTORY_MS);
+            return;
+        }
+        clearTimeout(searchHistoryTimer);
+        commitHistory(query, action === "replace" ? "replace" : "push");
     } catch (err) {
         /* a bad URL must not break filtering */
+    }
+}
+
+function restoreFromUrl() {
+    clearTimeout(searchHistoryTimer);
+    ignoreHistory = true;
+    try {
+        applySnapshot(decodeQuery(location.search));
+        scrollResultsToTop();
+    } finally {
+        ignoreHistory = false;
+        lastHistoryQuery = encodeState(captureState());
     }
 }
 
@@ -3339,6 +3432,9 @@ function init() {
             if (open) diagnostics.scrollIntoView({ block: "nearest" });
         });
     }
+    const home = document.getElementById("homeReset");
+    if (home) home.addEventListener("click", clearFilters);
+    window.addEventListener("popstate", restoreFromUrl);
     if (location.search && location.search.length > 1) loadFromUrl();
     else {
         state.change = "all";

@@ -1830,11 +1830,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append(
         f'<header class="{header_class}" id="stickyBar" data-stale-hours="36">'
         '<div class="topnav">'
-        '<h1 class="brand"><svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">'
+        '<h1 class="brand"><button type="button" class="brand-home" id="homeReset" title="Back to default view">'
+        '<svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">'
         '<rect x="2" y="8" width="20" height="5.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/>'
         '<circle cx="7.2" cy="17.2" r="1.7" fill="currentColor"/>'
         '<circle cx="16.8" cy="17.2" r="1.7" fill="currentColor"/>'
-        "</svg>SkateDeals</h1>"
+        "</svg>SkateDeals</button></h1>"
         '<div class="topnav-links" role="group" aria-label="Sections">'
         '<button type="button" class="nav-link" id="navDeals" aria-pressed="true">Deals</button>'
         '<button type="button" class="nav-link" id="navTrack" aria-pressed="false">Track</button>'

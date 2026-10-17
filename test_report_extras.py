@@ -841,6 +841,70 @@ if (visible.join(",") !== "20.0,12.5,") throw new Error("visible discounts " + v
         self.assertIn(".diagnostics thead th", style)
         self.assertIn("position: static;", style.split(".diagnostics thead th", 1)[1].split("}", 1)[0])
 
+    def test_logo_and_clear_all_return_to_the_default_view(self):
+        html = build_report_html(
+            {"Zumiez_Decks": [_deck("40.00", "https://example.com/d", "Zumiez", "Baker Team Deck 8.0")]},
+            {},
+            generated_at="2026-10-15T12:00:00+00:00",
+        )
+        self.assertIn('id="homeReset"', html)
+        self.assertIn('title="Back to default view"', html)
+        self.assertIn('class="brand-home"', html)
+        self.assertEqual(html.count('onclick="clearFilters()"'), 2)
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        home = style.split(".brand-home", 1)[1].split("}", 1)[0]
+        self.assertIn("cursor: pointer;", home)
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        reset = source[source.find("function clearFilters("):source.find("function scrollResultsToTop(")]
+        self.assertIn('visitMode: "yesterday"', reset)
+        self.assertIn("grouped: false", reset)
+        self.assertIn('part: "Decks"', reset)
+        self.assertIn('sortKey: "rank"', reset)
+        self.assertIn("scrollResultsToTop()", reset)
+        self.assertNotIn("applyLayout(", reset)
+        self.assertNotIn("LAYOUT_KEY", reset)
+        history = source[source.find("const SEARCH_HISTORY_MS"):source.find("function applySnapshot(")]
+        self.assertIn("SEARCH_HISTORY_MS", source)
+        self.assertIn('window.addEventListener("popstate", restoreFromUrl)', source)
+        script = history + r"""
+if (historyAction(null, "") !== "replace") throw new Error("first load");
+if (historyAction("", "") !== "none") throw new Error("same");
+if (historyAction("", "sort=discount") !== "push") throw new Error("sort");
+if (historyAction("sort=discount", "sort=price") !== "push") throw new Error("sort change");
+if (historyAction("", "type=wheel") !== "push") throw new Error("type");
+if (historyAction("type=wheel", "store=zumiez&type=wheel") !== "push") throw new Error("store");
+if (historyAction("", "change=new") !== "push") throw new Error("deal tab");
+if (historyAction("change=new", "change=drop") !== "push") throw new Error("deal tab change");
+if (historyAction("sort=discount&type=wheel", "") !== "push") throw new Error("reset");
+if (historyAction("", "q=b") !== "search") throw new Error("first letter");
+if (historyAction("q=b", "q=ba") !== "search") throw new Error("next letter");
+if (historyAction("q=baker", "q=baker&sort=discount") !== "push") throw new Error("search plus sort");
+if (historyAction("sort=discount", "q=a&sort=discount") !== "search") throw new Error("search on a sorted view");
+if (SEARCH_HISTORY_MS < 200) throw new Error("search history is not debounced");
+let last = "";
+let pushes = 0;
+function step(next, commitSearch) {
+  const action = historyAction(last, next);
+  if (action === "none") return action;
+  if (action === "search" && !commitSearch) return "wait";
+  if (action !== "replace") pushes += 1;
+  last = next;
+  return action;
+}
+if (step("type=wheel", true) !== "push") throw new Error("type step");
+if (step("q=b&type=wheel", false) !== "wait") throw new Error("letter");
+if (step("q=ba&type=wheel", false) !== "wait") throw new Error("letters");
+if (step("q=baker&type=wheel", true) !== "search") throw new Error("commit");
+if (pushes !== 2) throw new Error("search burst pushed " + pushes);
+last = "";
+pushes = 0;
+step("q=b", false);
+step("q=baker", true);
+if (pushes !== 1) throw new Error("default search pushed " + pushes);
+"""
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()
