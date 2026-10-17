@@ -126,7 +126,7 @@ LONE_LENGTH_THRESHOLD = 15.0
 MIN_DROP_DOLLARS = 2.0
 MIN_DROP_PERCENT = 5.0
 
-_PREFIX_WORDS = re.compile(r"^(?:(?:clearance|sale)\s+)+", re.IGNORECASE)
+_PREFIX_WORDS = re.compile(r"^(?:(?:clearance|sale|super deal)\s+)+", re.IGNORECASE)
 _PREFIX_PERCENT = re.compile(r"^-?\s*\d{1,3}%\s*", re.IGNORECASE)
 _WIDTH_BY_LENGTH = re.compile(
     r"\b(\d{1,2}(?:\.\d+)?)\s*x\s*(\d{1,2}(?:\.\d+)?)\b",
@@ -158,6 +158,13 @@ _TRUCK_RES = tuple(_phrase_pattern(brand) for brand in TRUCK_BRANDS)
 _BEARING_RES = tuple(_phrase_pattern(brand) for brand in BEARING_BRANDS)
 _DECK_RES = tuple(_phrase_pattern(brand) for brand in DECK_BRANDS)
 _APPAREL_RES = tuple(re.compile(pattern, re.IGNORECASE) for pattern in APPAREL_PATTERNS)
+# Sneaker listings say "shoe". That word still rejects every other part.
+_FOOTWEAR_APPAREL = tuple(
+    re.compile(pattern, re.IGNORECASE) for pattern in (r"\bshoes?\b", r"\bsneakers?\b")
+)
+_APPAREL_RES_NOT_FOOTWEAR = tuple(
+    pattern for pattern in _APPAREL_RES if pattern.pattern not in {item.pattern for item in _FOOTWEAR_APPAREL}
+)
 
 _CRUISER_RE = re.compile(r"\bcruisers?\b", re.IGNORECASE)
 _LONGBOARD_RE = re.compile(r"\blongboards?\b", re.IGNORECASE)
@@ -360,29 +367,40 @@ def _deck_discount_reason(name, price_new, price_old):
     return None
 
 
-def filter_reason(name, part, url="", price_new=None, price_old=None):
+def filter_reason(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     """Return None if the listing should be kept, else a short reason."""
+    from tracked import accessory_rule, sneaker_rule
+
     name = normalize_product_name(name)
     url = normalize_url(url)
     if not name:
         return "missing name"
 
-    text = f"{name} {url}"
+    text = f"{name} {url} {product_type}"
     part_key = (part or "").strip().casefold()
+    apparel = _APPAREL_RES_NOT_FOOTWEAR if part_key == "sneakers" else _APPAREL_RES
 
-    if _matches_any(text, _APPAREL_RES):
+    if _matches_any(text, apparel):
         return "apparel"
 
-    if _CRUISER_RE.search(text):
-        return "cruiser"
-    if _LONGBOARD_RE.search(text):
-        return "longboard"
-    if _MINI_DECK_RE.search(text):
-        return "mini deck"
-    if _is_penny_board(text, name):
-        return "penny board"
+    if part_key != "accessories":
+        if _CRUISER_RE.search(text):
+            return "cruiser"
+        if _LONGBOARD_RE.search(text):
+            return "longboard"
+        if _MINI_DECK_RE.search(text):
+            return "mini deck"
+        if _is_penny_board(text, name):
+            return "penny board"
     if part_key == "decks" and _is_complete_board(name, url):
         return "complete"
+    if part_key == "accessories" and (
+        _DECK_WORD_RE.search(name)
+        or _is_complete_board(name, url)
+        or re.search(r"\bwheels?\b", name, re.IGNORECASE)
+        or re.search(r"\btrucks?\b", name, re.IGNORECASE)
+    ):
+        return "not an accessory"
 
     if part_key == "wheels":
         if not _matches_any(name, _WHEEL_RES):
@@ -399,6 +417,16 @@ def filter_reason(name, part, url="", price_new=None, price_old=None):
             return "bearing brand not allowed"
         return None
 
+    if part_key == "sneakers":
+        if not sneaker_rule(name, description):
+            return "not a tracked sneaker"
+        return None
+
+    if part_key == "accessories":
+        if not accessory_rule(name, product_type):
+            return "not a tracked accessory"
+        return None
+
     if part_key == "decks":
         size_reason = _deck_size_reason(name)
         if size_reason:
@@ -408,9 +436,9 @@ def filter_reason(name, part, url="", price_new=None, price_old=None):
     return "unknown part"
 
 
-def passes_filters(name, part, url="", price_new=None, price_old=None):
+def passes_filters(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     """True when this listing belongs in the catalog and the report."""
-    return filter_reason(name, part, url, price_new, price_old) is None
+    return filter_reason(name, part, url, price_new, price_old, description, product_type) is None
 
 
 def item_passes_filters(item):
@@ -422,4 +450,6 @@ def item_passes_filters(item):
         item.get("url", ""),
         item.get("price_new"),
         item.get("price_old"),
+        item.get("description", ""),
+        item.get("product_type", ""),
     )

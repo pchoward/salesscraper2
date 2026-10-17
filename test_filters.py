@@ -29,6 +29,10 @@ class NormalizeTests(unittest.TestCase):
         raw = "Sale\xa0-24%Madness Son Deck 9.0 x 32"
         self.assertEqual(normalize_product_name(raw), "Madness Son Deck 9.0 x 32")
 
+    def test_strips_super_deal_prefix(self):
+        raw = "SUPER DEAL -32%Olympia Supply Standard Tool Blue"
+        self.assertEqual(normalize_product_name(raw), "Olympia Supply Standard Tool Blue")
+
     def test_leaves_real_names_alone(self):
         name = "OJ Dressen Spider 56mm 101a White Skateboard Wheels"
         self.assertEqual(normalize_product_name(name), name)

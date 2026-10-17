@@ -31,9 +31,11 @@ class Scraper:
             return None
         return self.parse(html)
 
-    def _keep(self, name, url, price_new, price_old):
+    def _keep(self, name, url, price_new, price_old, description="", product_type=""):
         self.candidates += 1
-        reason = filter_reason(name, self.part, url, price_new, price_old)
+        reason = filter_reason(
+            name, self.part, url, price_new, price_old, description, product_type
+        )
         if reason:
             logger.info("Filtered out (%s): %s (%s)", self.part, name, reason)
             return False

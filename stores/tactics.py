@@ -211,9 +211,12 @@ class TacticsDecksScraper(TacticsScraper):
 
 
 def scrapers():
+    # Sale paths are allowed. robots.txt only blocks account, cart, checkout, and search.
     return [
         TacticsDecksScraper(),
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-wheels/sale", "Wheels"),
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-trucks/sale", "Trucks"),
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-bearings/sale", "Bearings"),
+        TacticsScraper("Tactics", "https://www.tactics.com/shoes/sale", "Sneakers"),
+        TacticsScraper("Tactics", "https://www.tactics.com/skateboard-accessories/sale", "Accessories"),
     ]

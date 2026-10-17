@@ -118,6 +118,19 @@ class ZumiezScraper(Scraper):
                 )
                 return None
             raw = listing_urls(html)
+            if page > 1 and not raw:
+                # The grid sometimes paints card shells before the product links.
+                # One empty page is not the end of a sale that still has a pager.
+                logging.warning("Zumiez %s page %s had no product links; retrying once", self.part, page)
+                html = self._fetch_grid(url)
+                if not html or not grid_loaded(html):
+                    logging.error(
+                        "Zumiez %s did not render sale products on page %s. Marking the fetch failed.",
+                        self.part,
+                        page,
+                    )
+                    return None
+                raw = listing_urls(html)
             new_raw = [item_url for item_url in raw if item_url not in seen_raw]
             seen_raw.update(raw)
             logging.info(
@@ -221,10 +234,45 @@ class ZumiezDecksScraper(ZumiezScraper):
         super().__init__("Zumiez", "https://www.zumiez.com/skate/skateboard-decks.html?customFilters=promotion_flag:Sale", "Decks")
 
 
+class ZumiezMultiScraper(ZumiezScraper):
+    """One part spread across several sale categories. A failed page fails the part."""
+
+    def __init__(self, part, urls):
+        super().__init__("Zumiez", urls[0], part)
+        self.urls = list(urls)
+
+    def scrape(self):
+        merged = []
+        seen = set()
+        for url in self.urls:
+            self.url = url
+            batch = super().scrape()
+            if batch is None:
+                return None
+            for item in batch:
+                item_url = item.get("url")
+                if not item_url or item_url in seen:
+                    continue
+                seen.add(item_url)
+                merged.append(item)
+        return merged
+
+
 def scrapers():
+    # robots.txt allows ``?customFilters=promotion_flag*Sale`` and disallows
+    # ``/graphql``. These are the sale category pages, not the GraphQL API.
     return [
         ZumiezDecksScraper(),
         ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/wheels.html?customFilters=promotion_flag:Sale", "Wheels"),
         ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/trucks.html?customFilters=promotion_flag:Sale", "Trucks"),
         ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/bearings.html?customFilters=promotion_flag:Sale", "Bearings"),
+        ZumiezScraper("Zumiez", "https://www.zumiez.com/shoes.html?customFilters=promotion_flag:Sale", "Sneakers"),
+        ZumiezMultiScraper(
+            "Accessories",
+            [
+                "https://www.zumiez.com/skate/components/hardware.html?customFilters=promotion_flag:Sale",
+                "https://www.zumiez.com/skate/components/griptape.html?customFilters=promotion_flag:Sale",
+                "https://www.zumiez.com/skate/components.html?customFilters=promotion_flag:Sale",
+            ],
+        ),
     ]
