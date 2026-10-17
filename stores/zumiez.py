@@ -2,12 +2,22 @@
 
 import logging
 import re
+import urllib.request
+from urllib.parse import quote, urlsplit
 
 from bs4 import BeautifulSoup
 
 from filters import extract_deck_size, normalize_product_name, normalize_url
 from stores.base import Scraper
 from stores.browser import fetch_page, save_debug_file
+from tracked import load_tracked
+
+ROBOTS_URL = "https://www.zumiez.com/robots.txt"
+SHOE_SALE = "https://www.zumiez.com/shoes.html?customFilters=promotion_flag:Sale"
+_ROBOTS_UA = (
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+)
 
 CARD_SELECTOR = "li.ProductCard, .ProductCard"
 # The category query uses pageSize 60. The grid only paints cards as they
@@ -34,6 +44,127 @@ def grid_loaded(html):
     count = soup.select_one(".CategoryPage-ItemsCount")
     text = count.get_text(" ", strip=True) if count else ""
     return bool(re.match(r"^0\b", text))
+
+
+def fetch_zumiez_robots(timeout=20):
+    """Return robots.txt, or ``""`` when the fetch fails.
+
+    A failed read falls back to the full shoe sale. It does not invent a
+    targeted URL.
+    """
+    request = urllib.request.Request(ROBOTS_URL, headers={"User-Agent": _ROBOTS_UA})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return response.read().decode("utf-8", "replace")
+    except Exception as exc:
+        logging.error("Zumiez robots.txt fetch failed: %s", exc)
+        return ""
+
+
+def star_rules(text):
+    """Allow and Disallow rules from the ``User-agent: *`` group."""
+    groups = []
+    current = None
+    for raw in str(text or "").splitlines():
+        line = raw.split("#", 1)[0].strip()
+        if not line or ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        key = key.strip().lower()
+        value = value.strip()
+        if key == "user-agent":
+            agent = value.lower()
+            if current is None or current["rules"]:
+                current = {"agents": [agent], "rules": []}
+                groups.append(current)
+            else:
+                current["agents"].append(agent)
+            continue
+        if current is not None and key in ("allow", "disallow"):
+            current["rules"].append((key, value))
+    for group in groups:
+        if "*" in group["agents"]:
+            return group["rules"]
+    return []
+
+
+def _rule_regex(pattern):
+    """Google-style robots path: ``*`` is a wildcard and ``$`` is the end."""
+    anchored = pattern.endswith("$")
+    body = pattern[:-1] if anchored else pattern
+    parts = [".*" if char == "*" else re.escape(char) for char in body]
+    regex = "^" + "".join(parts)
+    if anchored:
+        regex += "$"
+    return re.compile(regex)
+
+
+def _url_path(url):
+    parsed = urlsplit(url)
+    path = parsed.path or "/"
+    if parsed.query:
+        path += "?" + parsed.query
+    return path
+
+
+def explicitly_allowed(rules, url):
+    """True when an Allow rule matches and beats every matching Disallow.
+
+    Default-allow (no matching rule) is not explicit. A longer rule wins.
+    An equal-length Allow beats a Disallow.
+    """
+    path = _url_path(url)
+    best_kind = ""
+    best_len = -1
+    for kind, pattern in rules or []:
+        if not pattern or _rule_regex(pattern).match(path) is None:
+            continue
+        length = len(pattern)
+        if length > best_len or (length == best_len and kind == "allow"):
+            best_kind = kind
+            best_len = length
+    return best_kind == "allow"
+
+
+def brand_sale_url(brand):
+    """Sale shoes for one Zumiez brand facet.
+
+    The site's own filters use ``brand:Name;promotion_flag:Sale``. That
+    query matches ``Allow: /*?customFilters=brand*``.
+    """
+    token = quote(str(brand).strip(), safe="")
+    return f"https://www.zumiez.com/shoes.html?customFilters=brand:{token};promotion_flag:Sale"
+
+
+def sneaker_sale_urls(catalog, rules):
+    """Brand sale URLs for every tracked sneaker, or ``[]`` when one is uncovered.
+
+    An empty result means the caller should keep the full shoe-sale crawl.
+    Rules that share a brand share one URL. A rule with no brand, or a URL
+    robots.txt does not explicitly allow, drops the whole targeted set.
+    """
+    brands = []
+    seen = set()
+    for rule in (catalog or {}).get("sneakers") or []:
+        brand = str(rule.get("brand") or "").strip()
+        if not brand or brand in seen:
+            if not brand:
+                return []
+            continue
+        seen.add(brand)
+        brands.append(brand)
+    if not brands:
+        return []
+    urls = [brand_sale_url(brand) for brand in brands]
+    if any(not explicitly_allowed(rules, url) for url in urls):
+        return []
+    return urls
+
+
+def choose_sneaker_urls(catalog, robots_text):
+    """Targeted brand sales when robots.txt explicitly allows them."""
+    targeted = sneaker_sale_urls(catalog, star_rules(robots_text))
+    return targeted or [SHOE_SALE]
 
 
 def page_url(url, page):
@@ -258,15 +389,37 @@ class ZumiezMultiScraper(ZumiezScraper):
         return merged
 
 
+class ZumiezSneakersScraper(ZumiezMultiScraper):
+    """Sale shoes for the brands in ``tracked.yaml``.
+
+    robots.txt explicitly allows ``customFilters=brand*``. Each tracked
+    sneaker brand becomes one sale query. If a brand is missing, or the
+    live robots.txt does not allow the query, this keeps the full shoe sale.
+    """
+
+    def __init__(self):
+        super().__init__("Sneakers", [SHOE_SALE])
+
+    def scrape(self, robots_text=None, catalog=None):
+        if robots_text is None:
+            robots_text = fetch_zumiez_robots()
+        if catalog is None:
+            catalog = load_tracked()
+        self.urls = choose_sneaker_urls(catalog, robots_text)
+        logging.info("Zumiez sneakers queries: %s", self.urls)
+        return super().scrape()
+
+
 def scrapers():
-    # robots.txt allows ``?customFilters=promotion_flag*Sale`` and disallows
-    # ``/graphql``. These are the sale category pages, not the GraphQL API.
+    # robots.txt allows ``?customFilters=promotion_flag*Sale`` and
+    # ``?customFilters=brand*``, and disallows ``/graphql``. Sneaker queries
+    # are built from tracked.yaml and checked against robots.txt at scrape time.
     return [
         ZumiezDecksScraper(),
         ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/wheels.html?customFilters=promotion_flag:Sale", "Wheels"),
         ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/trucks.html?customFilters=promotion_flag:Sale", "Trucks"),
         ZumiezScraper("Zumiez", "https://www.zumiez.com/skate/components/bearings.html?customFilters=promotion_flag:Sale", "Bearings"),
-        ZumiezScraper("Zumiez", "https://www.zumiez.com/shoes.html?customFilters=promotion_flag:Sale", "Sneakers"),
+        ZumiezSneakersScraper(),
         ZumiezMultiScraper(
             "Accessories",
             [

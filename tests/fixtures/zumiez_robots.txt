@@ -1,0 +1,51 @@
+# zumiez.com robots.txt file
+
+# Disallow
+User-agent: *
+Disallow: /lib/
+Disallow: /*.php$
+Disallow: /pkginfo/
+Disallow: /errors/
+Disallow: /report/
+Disallow: /var/
+Disallow: /catalog/
+Disallow: /checkout/
+Disallow: /customer/
+Disallow: /sendfriend/
+Disallow: /review/
+Disallow: /*SID=
+Disallow: /graphql
+
+Allow: /*?customFilters=promotion_flag*Sale
+Allow: /*?customFilters=en.att_lifestage*
+Allow: /*?customFilters=brand*
+Allow: /*?customFilters=promo_text*
+Disallow: /*?*customFilters=
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: Sogou web spider
+Disallow: /
+
+User-agent: SleepBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: SERankingBacklinksBot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://www.zumiez.com/sitemap.xml
+Sitemap: https://www.zumiez.com/media/sitemap/image-sitemap.xml

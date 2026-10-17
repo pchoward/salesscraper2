@@ -60,7 +60,11 @@ def parse_tracked(text):
         if section == "sneakers" and stripped.startswith("- id:"):
             if current:
                 sneakers.append(current)
-            current = {"id": _clean(stripped.split(":", 1)[1]), "all": [], "any": []}
+            current = {"id": _clean(stripped.split(":", 1)[1]), "all": [], "any": [], "brand": ""}
+            mode = None
+            continue
+        if section == "sneakers" and current is not None and stripped.startswith("brand:"):
+            current["brand"] = _clean(stripped.split(":", 1)[1])
             mode = None
             continue
         if section == "sneakers" and current is not None and stripped in ("all:", "any:"):
