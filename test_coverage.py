@@ -6,7 +6,7 @@ import unittest
 from health import broken_store_warnings, record_run
 from query_state import decode_query, encode_state
 from report import build_report_html
-from stores.ccs import CCSCatalogScraper, load_clearance_products
+from stores.ccs import CCSCatalogScraper, apply_stock, enrich_stock, load_clearance_products, product_js_url
 from stores.skatewarehouse import SkateWarehouseScraper
 from stores.tactics import TacticsScraper
 from stores.zumiez import ZumiezScraper
@@ -83,15 +83,16 @@ class StoreFixtureTests(unittest.TestCase):
                 "product_type": "Shoes",
                 "body_html": "<p>The Wafflecup sole.</p>",
                 "variants": [
-                    {"title": "US 11", "price": "60.00", "compare_at_price": "85.00"},
-                    {"title": "10.0", "option1": "10.0", "price": "60.00", "compare_at_price": "85.00"},
+                    {"title": "US 11", "price": "60.00", "compare_at_price": "85.00", "available": True},
+                    {"title": "10.0", "option1": "10.0", "price": "60.00", "compare_at_price": "85.00", "available": True},
+                    {"title": "9.5", "option1": "9.5", "price": "20.00", "compare_at_price": "85.00", "available": False},
                 ],
             },
             {
                 "title": "Nike SB Zoom Blazer",
                 "handle": "blazer",
                 "product_type": "Shoes",
-                "variants": [{"title": "10", "price": "70.00", "compare_at_price": "90.00"}],
+                "variants": [{"title": "10", "price": "70.00", "compare_at_price": "90.00", "available": True}],
             },
         ])
         self.assertEqual([item["name"] for item in described], ["Vans Skate Old Skool"])
@@ -110,6 +111,135 @@ class StoreFixtureTests(unittest.TestCase):
         products = load_clearance_products(fetch)
         self.assertEqual(len(products), 1)
         self.assertEqual(len(calls), 1)
+
+
+class InStockVariantTests(unittest.TestCase):
+    def test_sold_out_sizes_are_omitted_and_do_not_set_the_price(self):
+        items = CCSCatalogScraper("Sneakers").products_from([
+            {
+                "title": "Vans BMX Proof Wafflecup Shoes - Black/Black",
+                "handle": "vans-bmx-proof-wafflecup-shoes-black-black",
+                "product_type": "Shoes",
+                "body_html": "<p>Available in men's size 9.5.</p>",
+                "variants": [
+                    {"id": 1, "title": "9.5", "option1": "9.5", "price": "40.00", "compare_at_price": "90.00", "available": False},
+                    {"id": 2, "title": "8.0", "option1": "8.0", "price": "63.00", "compare_at_price": "90.00", "available": True},
+                    {"id": 3, "title": "7.5", "option1": "7.5", "price": "70.00", "compare_at_price": "100.00", "available": True},
+                ],
+            }
+        ])
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0]["shoe_sizes"], ["7.5", "8"])
+        self.assertEqual(items[0]["price_new"], "63.00")
+        self.assertEqual(items[0]["price_old"], "90.00")
+        self.assertEqual(items[0]["shoe_prices"], {"7.5": "70.00", "8": "63.00"})
+        self.assertEqual(items[0]["shoe_compares"], {"7.5": "100.00", "8": "90.00"})
+
+    def test_products_json_without_available_does_not_invent_sizes(self):
+        items = CCSCatalogScraper("Sneakers").products_from([
+            {
+                "title": "Vans BMX Proof Wafflecup Shoes - Black/Black",
+                "handle": "proof",
+                "product_type": "Shoes",
+                "variants": [
+                    {"id": 1, "title": "9.5", "option1": "9.5", "price": "63.00", "compare_at_price": "90.00"},
+                    {"id": 2, "title": "8.0", "option1": "8.0", "price": "63.00", "compare_at_price": "90.00"},
+                ],
+            }
+        ])
+        self.assertEqual(len(items), 1)
+        self.assertNotIn("shoe_sizes", items[0])
+        self.assertEqual(items[0]["price_new"], "63.00")
+
+    def test_js_available_flag_is_joined_by_variant_id(self):
+        product = {
+            "title": "Vans BMX Proof Wafflecup Shoes - Black/Black",
+            "handle": "vans-bmx-proof-wafflecup-shoes-black-black",
+            "product_type": "Shoes",
+            "variants": [
+                {"id": 11, "title": "9.5", "option1": "9.5", "price": "40.00", "compare_at_price": "90.00"},
+                {"id": 12, "title": "8", "option1": "8", "price": "63.00", "compare_at_price": "90.00"},
+            ],
+        }
+        seen = []
+
+        def fetch(url):
+            seen.append(url)
+            return {"variants": [{"id": 11, "available": False}, {"id": 12, "available": True}]}
+
+        enrich_stock([product], "Sneakers", fetch)
+        self.assertEqual(seen, [product_js_url(product["handle"])])
+        self.assertNotIn("graphql", seen[0])
+        items = CCSCatalogScraper("Sneakers").products_from([product])
+        self.assertEqual(items[0]["shoe_sizes"], ["8"])
+        self.assertEqual(items[0]["price_new"], "63.00")
+        self.assertNotIn("shoe_prices", items[0])
+
+    def test_a_sold_out_variant_does_not_set_another_parts_price(self):
+        items = CCSCatalogScraper("Bearings").products_from([
+            {
+                "title": "Bones Reds Bearings",
+                "handle": "bones-reds",
+                "product_type": "Bearings",
+                "variants": [
+                    {"id": 1, "title": "Default Title", "price": "10.00", "compare_at_price": "30.00", "available": False},
+                    {"id": 2, "title": "Default Title", "price": "24.00", "compare_at_price": "30.00", "available": True},
+                ],
+            },
+            {
+                "title": "Bronson G3 Bearings",
+                "handle": "bronson-gone",
+                "product_type": "Bearings",
+                "variants": [
+                    {"id": 3, "title": "Default Title", "price": "20.00", "compare_at_price": "40.00", "available": False},
+                ],
+            },
+        ])
+        self.assertEqual([item["name"] for item in items], ["Bones Reds Bearings"])
+        self.assertEqual(items[0]["price_new"], "24.00")
+
+    def test_apply_stock_matches_string_and_int_ids(self):
+        product = {"variants": [{"id": 5, "title": "9.5"}, {"id": "6", "title": "8"}]}
+        apply_stock(product, {"variants": [{"id": "5", "available": False}, {"id": 6, "available": True}]})
+        self.assertIs(product["variants"][0]["available"], False)
+        self.assertIs(product["variants"][1]["available"], True)
+
+    def test_report_size_filter_uses_in_stock_sizes_and_their_prices(self):
+        proof = {
+            "name": "Vans BMX Proof Wafflecup Shoes - Black/Black",
+            "url": "https://shop.ccs.com/products/proof",
+            "price_new": "63.00",
+            "price_old": "90.00",
+            "part": "Sneakers",
+            "store": "CCS",
+            "description": "men's size 9.5",
+            "shoe_sizes": ["7.5", "8"],
+        }
+        priced = {
+            "name": "Vans Skate Half Cab Wafflecup Shoes",
+            "url": "https://shop.ccs.com/products/half-cab",
+            "price_new": "50.00",
+            "price_old": "80.00",
+            "part": "Sneakers",
+            "store": "CCS",
+            "shoe_sizes": ["8", "9.5"],
+            "shoe_prices": {"8": "50.00", "9.5": "70.00"},
+            "shoe_compares": {"8": "80.00", "9.5": "100.00"},
+        }
+        html = build_report_html(
+            {"CCS_Sneakers": [proof, priced]},
+            {},
+            generated_at="2026-10-17T12:00:00+00:00",
+        )
+        proof_row = html.split("data-url=\"https://shop.ccs.com/products/proof\"", 1)[1].split(">", 1)[0]
+        priced_row = html.split("data-url=\"https://shop.ccs.com/products/half-cab\"", 1)[1].split(">", 1)[0]
+        self.assertIn('data-shoesize="7.5,8"', proof_row)
+        self.assertNotIn("9.5", proof_row)
+        self.assertIn('data-shoesize="8,9.5"', priced_row)
+        self.assertIn('data-shoeprices="8:50.00,9.5:70.00"', priced_row)
+        self.assertIn('data-shoecompares="8:80.00,9.5:100.00"', priced_row)
+        self.assertIn(">Now: $50.00<", html)
+        self.assertIn(">$50.00<", html)
 
 
 class ReportCoverageTests(unittest.TestCase):

@@ -1029,10 +1029,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 abec = bearing_specs(raw_name).get("abec") or ""
             shoe_sizes = []
             if item.get("part") == "Sneakers":
-                found = list(item.get("shoe_sizes") or [])
-                found.extend(shoe_sizes_in(raw_name))
-                found.extend(shoe_sizes_in(item.get("description") or ""))
-                shoe_sizes = ordered_shoe_sizes(found)
+                # A scraper size list is the in-stock sizes. Name and description
+                # text must not add a size the store cannot sell.
+                if "shoe_sizes" in item:
+                    shoe_sizes = ordered_shoe_sizes(item.get("shoe_sizes") or [])
+                else:
+                    found = []
+                    found.extend(shoe_sizes_in(raw_name))
+                    found.extend(shoe_sizes_in(item.get("description") or ""))
+                    shoe_sizes = ordered_shoe_sizes(found)
             current_price = _price(item.get("price_new"))
             tracked_low = status.get("low")
             at_tracked_low = False
@@ -1599,7 +1604,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "Size",
         "Sneakers",
         shoe_buttons,
-        "US men's size only when the name or the size option actually prints one.",
+        "US men's size only when that size is in stock.",
         shoe_hits,
     )
     construction_buttons = [
@@ -2094,6 +2099,29 @@ def _attr(value):
     return escape("" if value is None else str(value), quote=True)
 
 
+def _shoe_offer_attrs(record):
+    """Per-size sale prices, included only when those prices are not all the same."""
+    sizes = record.get("shoe_sizes") or []
+    item = record.get("item") or {}
+    parts = []
+    for key, attr in (("shoe_prices", "shoeprices"), ("shoe_compares", "shoecompares")):
+        mapping = item.get(key) or {}
+        encoded = []
+        for size in sizes:
+            raw = mapping.get(size)
+            if raw in (None, ""):
+                continue
+            encoded.append(f"{size}:{raw}")
+        if encoded:
+            parts.append(f'data-{attr}="{_attr(",".join(encoded))}"')
+    return " ".join(parts)
+
+
+def _offer_gap(record):
+    offers = _shoe_offer_attrs(record)
+    return f" {offers}" if offers else ""
+
+
 def _deal_attrs(record):
     item = record["item"]
     original = _price(item.get("price_old"))
@@ -2119,7 +2147,7 @@ def _deal_attrs(record):
         f'data-truckheight="{_attr(record.get("truck_height") or "")}" '
         f'data-construction="{_attr(record.get("construction") or "")}" '
         f'data-abec="{_attr(record.get("abec") or "")}" '
-        f'data-shoesize="{_attr(",".join(record.get("shoe_sizes") or []))}" '
+        f'data-shoesize="{_attr(",".join(record.get("shoe_sizes") or []))}"{_offer_gap(record)} '
         f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
         f'data-fresh="{1 if record.get("fresh") else 0}" data-back="{1 if record.get("back") else 0}" '

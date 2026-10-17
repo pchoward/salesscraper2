@@ -373,6 +373,108 @@ function specTokens(row, attr) {
     return String((row.dataset && row.dataset[attr]) || "").split(",").map(token => token.trim()).filter(Boolean);
 }
 
+function shoeOfferMap(raw) {
+    const map = Object.create(null);
+    String(raw || "").split(",").forEach(part => {
+        const bits = part.split(":");
+        if (bits.length < 2) return;
+        const price = parseFloat(bits[1]);
+        if (!bits[0] || !Number.isFinite(price)) return;
+        map[bits[0]] = price;
+    });
+    return map;
+}
+
+// The selected size's price, when the in-stock variants do not all cost the same.
+function selectedShoePrice(row) {
+    const selected = state.shoeSizes || [];
+    if (!selected.length || (row.dataset.part || "") !== "Sneakers") return null;
+    const prices = shoeOfferMap(row.dataset.shoeprices);
+    if (!Object.keys(prices).length) return null;
+    const compares = shoeOfferMap(row.dataset.shoecompares);
+    const have = specTokens(row, "shoesize").filter(token => selected.indexOf(token) >= 0);
+    let best = null;
+    have.forEach(token => {
+        if (!Object.prototype.hasOwnProperty.call(prices, token)) return;
+        const price = prices[token];
+        if (!best || price < best.price) best = { price: price, compare: compares[token] };
+    });
+    return best;
+}
+
+function rowPrice(row) {
+    const offer = selectedShoePrice(row);
+    if (offer) return offer.price;
+    const raw = row.dataset.price;
+    if (raw === undefined || raw === "") return null;
+    const price = parseFloat(raw);
+    return Number.isFinite(price) ? price : null;
+}
+
+function rowDiscount(row) {
+    const offer = selectedShoePrice(row);
+    if (!offer) {
+        if (row.dataset.discount === "") return null;
+        const parsed = parseFloat(row.dataset.discount);
+        return Number.isFinite(parsed) ? parsed : null;
+    }
+    const compare = Number.isFinite(offer.compare) ? offer.compare : parseFloat(row.dataset.original);
+    if (!Number.isFinite(compare) || compare <= 0) return null;
+    return ((compare - offer.price) / compare) * 100;
+}
+
+function paintOfferPrices() {
+    document.querySelectorAll(".deal-row, .deal-card").forEach(node => {
+        const priceNode = node.querySelector(".price-new, .now-price");
+        if (!priceNode) return;
+        if (!node.dataset.priceSaved) {
+            node.dataset.basePrice = node.dataset.price || "";
+            node.dataset.baseDiscount = node.dataset.discount || "";
+            node.dataset.priceSaved = "1";
+        }
+        if (!priceNode.dataset.baseText) priceNode.dataset.baseText = priceNode.textContent;
+        const offer = selectedShoePrice(node);
+        if (!offer) {
+            node.dataset.price = node.dataset.basePrice;
+            node.dataset.discount = node.dataset.baseDiscount;
+            priceNode.textContent = priceNode.dataset.baseText;
+        } else {
+            node.dataset.price = offer.price.toFixed(2);
+            const percent = rowDiscount(node);
+            node.dataset.discount = percent == null ? "" : String(Math.round(percent * 10) / 10);
+            const base = priceNode.dataset.baseText;
+            const symbol = base.indexOf("€") >= 0 ? "€" : "$";
+            const formatted = symbol + offer.price.toFixed(2);
+            priceNode.textContent = base.trim().indexOf("Now:") === 0 ? "Now: " + formatted : formatted;
+        }
+        node.querySelectorAll(".price-old").forEach(oldNode => {
+            if (!oldNode.dataset.baseText) oldNode.dataset.baseText = oldNode.textContent;
+            if (!offer || !Number.isFinite(offer.compare)) {
+                oldNode.textContent = oldNode.dataset.baseText;
+                return;
+            }
+            const symbol = (oldNode.dataset.baseText || "").indexOf("€") >= 0 ? "€" : "$";
+            oldNode.textContent = symbol + offer.compare.toFixed(2);
+        });
+        node.querySelectorAll(".discount").forEach(discountNode => {
+            if (!discountNode.dataset.baseText) discountNode.dataset.baseText = discountNode.textContent;
+            if (!discountNode.dataset.baseClass) {
+                discountNode.dataset.baseClass = ["high", "medium", "low", "none"].filter(name => discountNode.classList.contains(name)).join(" ");
+            }
+            ["high", "medium", "low", "none"].forEach(name => discountNode.classList.remove(name));
+            if (!offer) {
+                discountNode.textContent = discountNode.dataset.baseText;
+                String(discountNode.dataset.baseClass || "").split(/\s+/).filter(Boolean).forEach(name => discountNode.classList.add(name));
+                return;
+            }
+            const percent = rowDiscount(node);
+            const klass = percent == null ? "none" : percent >= 40 ? "high" : percent >= 25 ? "medium" : "low";
+            discountNode.classList.add(klass);
+            discountNode.textContent = percent == null ? "N/A" : Math.round(percent) + "%";
+        });
+    });
+}
+
 // A wheel, truck, or bearing spec filters only that part. Other parts stay
 // visible, the same way a deck width does. A row of that part with no parsed
 // value is hidden while the spec is selected.
@@ -638,13 +740,13 @@ function rowMatchesNow(row, overrides) {
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
     if (specKeyActive("length", viewPart) && length !== "all" && (row.dataset.length || "") !== length) return false;
     if (specKeyActive("wheelbase", viewPart) && wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
-    const price = parseFloat(row.dataset.price);
+    const price = rowPrice(row);
     if (state.priceMin != null && !(price >= state.priceMin)) return false;
     if (state.priceMax != null && !(price <= state.priceMax)) return false;
     const discountMax = Object.prototype.hasOwnProperty.call(over, "discountMax") ? over.discountMax : state.discountMax;
     if (state.discountMin != null || discountMax != null) {
-        if (row.dataset.discount === "") return false;
-        const discount = parseFloat(row.dataset.discount);
+        const discount = rowDiscount(row);
+        if (discount == null) return false;
         if (state.discountMin != null && discount < state.discountMin) return false;
         if (discountMax != null && discount > discountMax) return false;
     }
@@ -743,6 +845,7 @@ function applyFilters() {
         row.classList.toggle("filtered-out", !rowMatches(row));
     });
     showGone(state.change === "removed");
+    paintOfferPrices();
     applySectionFilters();
     applyGroupVisibility();
     syncGroupOrder();
