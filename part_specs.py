@@ -292,3 +292,65 @@ def ordered_abecs(values):
             seen.add(token)
             chosen.append(token)
     return sorted(chosen, key=int)
+
+
+# US men's skate-shoe sizes. A bare number is not a size: model numbers
+# (Force 58, 933) and deck widths must not land here. The token has to be
+# the whole value, or sit next to "size", "US", or "men's".
+_SHOE_SIZE_MARKED = re.compile(
+    r"\b(?:men(?:'s|\u2019s)?|mens|us)\s*(?:size\s*)?(\d{1,2}(?:\.5)?)\b"
+    r"|\bsize\s*(\d{1,2}(?:\.5)?)\b",
+    re.IGNORECASE,
+)
+_SHOE_SIZE_EXACT = re.compile(r"^\s*(\d{1,2}(?:\.\d+)?)\s*(?:us)?\s*$", re.IGNORECASE)
+
+
+def format_shoe_size(value):
+    """``10`` or ``10.5``. Empty when the number is not a men's US size."""
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return ""
+    if number < 4 or number > 15:
+        return ""
+    doubled = number * 2
+    if abs(doubled - round(doubled)) > 1e-6:
+        return ""
+    if abs(number - round(number)) < 1e-6:
+        return str(int(round(number)))
+    return f"{number:.1f}"
+
+
+def shoe_size_token(text, exact=False):
+    """One US men's size from a marked phrase, or from a variant title when ``exact``."""
+    raw = str(text or "").strip()
+    if not raw:
+        return ""
+    if exact:
+        match = _SHOE_SIZE_EXACT.match(raw)
+        return format_shoe_size(match.group(1)) if match else ""
+    match = _SHOE_SIZE_MARKED.search(raw)
+    if not match:
+        return ""
+    return format_shoe_size(match.group(1) or match.group(2))
+
+
+def shoe_sizes_in(text):
+    """Every marked US men's size in a name or description, in order."""
+    found = []
+    for match in _SHOE_SIZE_MARKED.finditer(str(text or "")):
+        token = format_shoe_size(match.group(1) or match.group(2))
+        if token and token not in found:
+            found.append(token)
+    return found
+
+
+def ordered_shoe_sizes(values):
+    chosen = []
+    seen = set()
+    for raw in values or []:
+        token = format_shoe_size(raw) or shoe_size_token(raw, exact=True)
+        if token and token not in seen:
+            seen.add(token)
+            chosen.append(token)
+    return sorted(chosen, key=float)

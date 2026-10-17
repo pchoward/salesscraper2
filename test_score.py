@@ -72,6 +72,10 @@ class DealScoreTests(unittest.TestCase):
         truck = _deck()
         truck["part"] = "Trucks"
         self.assertEqual(deal_score(truck, {}, width=8.5)["parts"]["size"], 0)
+        sneaker = _deck()
+        sneaker["part"] = "Sneakers"
+        sneaker["name"] = "Vans Skate Half Cab Wafflecup Shoes"
+        self.assertEqual(deal_score(sneaker, {}, width=8.5)["parts"]["size"], 0)
 
         fresh = _deck(price="40.00", old="80.00")
         history = _history(fresh["url"], {"2026-09-30": 40.0})

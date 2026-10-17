@@ -60,7 +60,9 @@ from part_specs import (
     bearing_specs,
     diameter_band,
     diameter_tip,
+    ordered_shoe_sizes,
     section_ready,
+    shoe_sizes_in,
     size_tip,
     truck_specs,
     wheel_specs,
@@ -78,7 +80,9 @@ _BRANDS = {
     "wheels": WHEEL_BRANDS + ("Powell Peralta",),
     "trucks": TRUCK_BRANDS,
     "bearings": BEARING_BRANDS,
+    "sneakers": ("Nike SB", "Nike", "Vans"),
 }
+PART_ORDER = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes")
 _BRAND_ALIAS = {
     "anti hero": "Anti-Hero",
     "antihero": "Anti-Hero",
@@ -1023,6 +1027,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 construction = parsed.get("construction") or ""
             elif item.get("part") == "Bearings":
                 abec = bearing_specs(raw_name).get("abec") or ""
+            shoe_sizes = []
+            if item.get("part") == "Sneakers":
+                found = list(item.get("shoe_sizes") or [])
+                found.extend(shoe_sizes_in(raw_name))
+                found.extend(shoe_sizes_in(item.get("description") or ""))
+                shoe_sizes = ordered_shoe_sizes(found)
             current_price = _price(item.get("price_new"))
             tracked_low = status.get("low")
             at_tracked_low = False
@@ -1086,6 +1096,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "truck_height": truck_height,
                 "construction": construction,
                 "abec": abec,
+                "shoe_sizes": shoe_sizes,
                 "percent": percent,
                 "search": " ".join(
                     bit
@@ -1188,6 +1199,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     truck_height_counts = {}
     construction_counts = {}
     abec_counts = {}
+    shoe_size_counts = {}
+    shoe_hits = 0
     wheels_with_duro = 0
     for record in records:
         store_counts[record["store"]] = store_counts.get(record["store"], 0) + 1
@@ -1224,11 +1237,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 construction_counts[token] = construction_counts.get(token, 0) + 1
         elif record["part"] == "Bearings" and record["abec"]:
             abec_counts[record["abec"]] = abec_counts.get(record["abec"], 0) + 1
+        elif record["part"] == "Sneakers" and record.get("shoe_sizes"):
+            shoe_hits += 1
+            for token in record["shoe_sizes"]:
+                shoe_size_counts[token] = shoe_size_counts.get(token, 0) + 1
 
     low_items = []
     try:
         low_items = [record["item"] for record in records if record["lowest"]]
-        order = {"Decks": 0, "Wheels": 1, "Trucks": 2, "Bearings": 3}
+        order = {"Decks": 0, "Wheels": 1, "Trucks": 2, "Bearings": 3, "Sneakers": 4, "Accessories": 5}
         low_items.sort(key=lambda item: (order.get(item.get("part"), 9), _display_name(item)))
     except Exception as exc:
         logger.error("All-time low list failed: %s", exc)
@@ -1309,7 +1326,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             _option(store, f"{store} ({store_counts[store]})", data_label=store)
         )
     part_options = ['<option value="all">All types</option>']
-    for part in ("Decks", "Trucks", "Wheels", "Bearings", "Completes"):
+    for part in PART_ORDER:
         if part in part_counts or part == "Decks":
             part_options.append(
                 _option(
@@ -1573,6 +1590,18 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "ABEC rating printed in the name.",
         sum(abec_counts.values()),
     )
+    shoe_buttons = [
+        _spec_button(token, token, shoe_size_counts[token], f"US men's {token}")
+        for token in sorted(shoe_size_counts, key=float)
+    ]
+    shoe_section = _gated(
+        "shoesize",
+        "Size",
+        "Sneakers",
+        shoe_buttons,
+        "US men's size only when the name or the size option actually prints one.",
+        shoe_hits,
+    )
     construction_buttons = [
         _spec_button(
             token,
@@ -1642,7 +1671,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<select id="storeSelect" class="sr-only" aria-label="Store">{"".join(store_options)}</select>'
         "</div>"
     )
-    part_order = ("Decks", "Trucks", "Wheels", "Bearings", "Completes")
+    part_order = PART_ORDER
     part_total = sum(part_counts.values())
     part_buttons = [_quick_chip("part", "all", "All", part_total, order=0)]
     shown_parts = []
@@ -1697,6 +1726,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + truck_height_section
         + construction_section
         + abec_section
+        + shoe_section
         + "</div>"
     )
     sidebar_html = (
@@ -2089,6 +2119,7 @@ def _deal_attrs(record):
         f'data-truckheight="{_attr(record.get("truck_height") or "")}" '
         f'data-construction="{_attr(record.get("construction") or "")}" '
         f'data-abec="{_attr(record.get("abec") or "")}" '
+        f'data-shoesize="{_attr(",".join(record.get("shoe_sizes") or []))}" '
         f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
         f'data-fresh="{1 if record.get("fresh") else 0}" data-back="{1 if record.get("back") else 0}" '
@@ -2502,7 +2533,7 @@ def _why_html(record, dom_id=None):
 
 
 def _category_strip(part_counts):
-    order = ["Decks", "Trucks", "Wheels", "Bearings"]
+    order = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories"]
     names = [name for name in order if part_counts.get(name)]
     for name in part_counts:
         if name and name not in names:

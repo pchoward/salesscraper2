@@ -1,0 +1,52 @@
+# Models and accessory kinds the sale tracker keeps.
+# Add a sneaker block to follow another model. Matching is case-insensitive.
+# A sneaker matches when every phrase under "all" is present and at least one
+# phrase under "any" is present, in the name or the description.
+# An accessory matches a phrase in the name, or a product type listed here.
+# Clothing, bags, and hats are still rejected by the shared filters.
+
+sneakers:
+  - id: vans-wafflecup
+    any:
+      - Wafflecup
+      - Waffle Cup
+  - id: nike-sb-dunk
+    all:
+      - SB
+    any:
+      - Dunk Low
+      - Dunk High
+      - SB Dunk
+
+accessories:
+  phrases:
+    - grip tape
+    - griptape
+    - hardware
+    - bolts
+    - bolt
+    - skate wax
+    - wax
+    - rethreader
+    - skate tool
+    - tool
+    - risers
+    - riser
+    - bushings
+    - bushing
+  types:
+    - Hardware
+    - Grip tape
+    - Skate Wax
+    - Tool
+    - Bushings
+    - Risers
+  # CCS files truck hangers and baseplates under Hardware. Those are truck
+  # parts, not mounting hardware, grip, wax, tools, risers, or bushings.
+  exclude:
+    - hanger
+    - hangers
+    - baseplate
+    - baseplates
+    - kingpin
+    - kingpins

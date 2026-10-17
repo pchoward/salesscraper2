@@ -33,7 +33,8 @@ when empty. ``diameter`` is a band id (``50-51``, ``52-53``, ``54-55``,
 ``conical``, ``radial``, or ``sidecut``. ``trucksize`` is the size printed
 in the name. ``truckheight`` is ``low``, ``mid``, or ``high``. ``construction`` is
 ``hollow`` or ``standard`` when that word is printed in the name. ``abec`` is
-the rating digits. Those filters apply only to their own part.
+the rating digits. ``shoesize`` is a US men's size such as ``10`` or ``10.5``.
+Those filters apply only to their own part.
 """
 
 from urllib.parse import parse_qsl, urlencode
@@ -41,6 +42,7 @@ from urllib.parse import parse_qsl, urlencode
 from part_specs import (
     ordered_abecs,
     ordered_constructions,
+    ordered_shoe_sizes,
     ordered_diameters,
     ordered_duros,
     ordered_heights,
@@ -106,12 +108,18 @@ TYPE_SLUGS = {
     "trucks": "Trucks",
     "bearing": "Bearings",
     "bearings": "Bearings",
+    "sneaker": "Sneakers",
+    "sneakers": "Sneakers",
+    "accessory": "Accessories",
+    "accessories": "Accessories",
 }
 TYPE_TO_SLUG = {
     "Decks": "deck",
     "Wheels": "wheel",
     "Trucks": "truck",
     "Bearings": "bearing",
+    "Sneakers": "sneaker",
+    "Accessories": "accessory",
 }
 
 SORTS = (
@@ -187,6 +195,7 @@ def empty_state():
         "truck_heights": [],
         "constructions": [],
         "abecs": [],
+        "shoe_sizes": [],
     }
 
 
@@ -372,6 +381,8 @@ def decode_query(query):
             state["constructions"] = ordered_constructions(str(value or "").split(","))
         elif key == "abec":
             state["abecs"] = ordered_abecs(str(value or "").split(","))
+        elif key == "shoesize":
+            state["shoe_sizes"] = ordered_shoe_sizes(str(value or "").split(","))
     return state
 
 
@@ -462,4 +473,7 @@ def encode_state(state):
     abecs = ordered_abecs(state.get("abecs"))
     if abecs:
         add("abec", ",".join(abecs))
+    shoe_sizes = ordered_shoe_sizes(state.get("shoe_sizes"))
+    if shoe_sizes:
+        add("shoesize", ",".join(shoe_sizes))
     return urlencode(pairs)

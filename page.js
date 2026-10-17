@@ -23,6 +23,7 @@ let state = {
     truckHeights: [],
     constructions: [],
     abecs: [],
+    shoeSizes: [],
     visitMode: "yesterday",
     sortKey: "rank",
     sortDir: "asc",
@@ -287,9 +288,10 @@ const SPEC_FACETS = [
     { stateKey: "truckSizes", part: "Trucks", attr: "trucksize", section: "trucksizeFilters" },
     { stateKey: "truckHeights", part: "Trucks", attr: "truckheight", section: "truckheightFilters" },
     { stateKey: "constructions", part: "Trucks", attr: "construction", section: "constructionFilters" },
-    { stateKey: "abecs", part: "Bearings", attr: "abec", section: "abecFilters" }
+    { stateKey: "abecs", part: "Bearings", attr: "abec", section: "abecFilters" },
+    { stateKey: "shoeSizes", part: "Sneakers", attr: "shoesize", section: "shoesizeFilters" }
 ];
-const SPEC_OPEN = { width: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1 };
+const SPEC_OPEN = { width: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1 };
 
 function normalizeDuroToken(value) {
     const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
@@ -325,6 +327,12 @@ function orderSpecValues(stateKey, values) {
         else if (stateKey === "abecs") {
             if (!/^\d{1,2}$/.test(token)) token = "";
             else token = String(parseInt(token, 10));
+        } else if (stateKey === "shoeSizes") {
+            const number = parseFloat(token);
+            if (!Number.isFinite(number) || number < 4 || number > 15) token = "";
+            else if (Math.abs(number * 2 - Math.round(number * 2)) > 1e-6) token = "";
+            else if (Math.abs(number - Math.round(number)) < 1e-6) token = String(Math.round(number));
+            else token = number.toFixed(1);
         } else token = token.toLowerCase();
         if (token) chosen[token] = true;
     });
@@ -342,6 +350,7 @@ function orderSpecValues(stateKey, values) {
     }
     if (stateKey === "truckSizes") return keys.sort((a, b) => parseFloat(a) - parseFloat(b));
     if (stateKey === "abecs") return keys.sort((a, b) => parseInt(a, 10) - parseInt(b, 10));
+    if (stateKey === "shoeSizes") return keys.sort((a, b) => parseFloat(a) - parseFloat(b));
     return keys;
 }
 
@@ -351,6 +360,7 @@ function activeSpecKeys(part) {
     if (current === "Wheels") return ["diameters", "duros", "shapes"];
     if (current === "Trucks") return ["truckSizes", "truckHeights", "constructions"];
     if (current === "Bearings") return ["abecs"];
+    if (current === "Sneakers") return ["shoeSizes"];
     return [];
 }
 
@@ -1539,6 +1549,7 @@ function clearFilters() {
         truckHeights: [],
         constructions: [],
         abecs: [],
+        shoeSizes: [],
         visitMode: "yesterday",
         sortKey: "rank",
         sortDir: "asc",
@@ -1690,7 +1701,11 @@ function slugType(value) {
         truck: "Trucks",
         trucks: "Trucks",
         bearing: "Bearings",
-        bearings: "Bearings"
+        bearings: "Bearings",
+        sneaker: "Sneakers",
+        sneakers: "Sneakers",
+        accessory: "Accessories",
+        accessories: "Accessories"
     }[key] || "";
 }
 
@@ -1706,7 +1721,14 @@ function storeSlug(name) {
 }
 
 function typeSlug(name) {
-    return { Decks: "deck", Wheels: "wheel", Trucks: "truck", Bearings: "bearing" }[name] || "";
+    return {
+        Decks: "deck",
+        Wheels: "wheel",
+        Trucks: "truck",
+        Bearings: "bearing",
+        Sneakers: "sneaker",
+        Accessories: "accessory"
+    }[name] || "";
 }
 
 function flagOn(value) {
@@ -1744,7 +1766,8 @@ function decodeQuery(query) {
         truckSizes: [],
         truckHeights: [],
         constructions: [],
-        abecs: []
+        abecs: [],
+        shoeSizes: []
     };
     const text = String(query || "").replace(/^\?/, "");
     if (!text) return stateOut;
@@ -1794,6 +1817,7 @@ function decodeQuery(query) {
         else if (key === "truckheight") stateOut.truckHeights = orderSpecValues("truckHeights", String(value || "").split(","));
         else if (key === "construction") stateOut.constructions = orderSpecValues("constructions", String(value || "").split(","));
         else if (key === "abec") stateOut.abecs = orderSpecValues("abecs", String(value || "").split(","));
+        else if (key === "shoesize") stateOut.shoeSizes = orderSpecValues("shoeSizes", String(value || "").split(","));
     });
     ["min", "max", "discount", "discountmax", "scoremin", "scoremax"].forEach(key => {
         if (!Number.isFinite(stateOut[key])) stateOut[key] = null;
@@ -1851,6 +1875,8 @@ function encodeState(snapshot) {
     if (constructions.length) add("construction", constructions.join(","));
     const abecs = orderSpecValues("abecs", snapshot.abecs || []);
     if (abecs.length) add("abec", abecs.join(","));
+    const shoeSizes = orderSpecValues("shoeSizes", snapshot.shoeSizes || []);
+    if (shoeSizes.length) add("shoesize", shoeSizes.join(","));
     return params.toString();
 }
 
@@ -1887,7 +1913,8 @@ function captureState() {
         truckSizes: (state.truckSizes || []).slice(),
         truckHeights: (state.truckHeights || []).slice(),
         constructions: (state.constructions || []).slice(),
-        abecs: (state.abecs || []).slice()
+        abecs: (state.abecs || []).slice(),
+        shoeSizes: (state.shoeSizes || []).slice()
     };
 }
 
@@ -1952,6 +1979,7 @@ function writeControls(snapshot) {
     state.truckHeights = orderSpecValues("truckHeights", snapshot.truckHeights || []);
     state.constructions = orderSpecValues("constructions", snapshot.constructions || []);
     state.abecs = orderSpecValues("abecs", snapshot.abecs || []);
+    state.shoeSizes = orderSpecValues("shoeSizes", snapshot.shoeSizes || []);
     if (partChanged) syncTypeSections(true);
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
@@ -2514,7 +2542,8 @@ function paintActiveChips() {
         truckSizes: value => "Size " + value,
         truckHeights: value => "Height: " + value.charAt(0).toUpperCase() + value.slice(1),
         constructions: value => "Construction: " + value.charAt(0).toUpperCase() + value.slice(1),
-        abecs: value => "ABEC " + value
+        abecs: value => "ABEC " + value,
+        shoeSizes: value => "Size " + value
     };
     SPEC_FACETS.forEach(facet => {
         if (!specKeyActive(facet.stateKey)) return;

@@ -555,6 +555,8 @@ if (!same(activeSpecKeys(), ["widths", "length", "wheelbase"])) throw new Error(
 if (!same(activeSpecKeys("Wheels"), ["diameters", "duros", "shapes"])) throw new Error("wheels");
 if (!same(activeSpecKeys("Trucks"), ["truckSizes", "truckHeights", "constructions"])) throw new Error("trucks");
 if (!same(activeSpecKeys("Bearings"), ["abecs"])) throw new Error("bearings");
+if (!same(activeSpecKeys("Sneakers"), ["shoeSizes"])) throw new Error("sneakers");
+if (activeSpecKeys("Accessories").length) throw new Error("accessories hide specs");
 if (activeSpecKeys("all").length) throw new Error("all types hide category specs");
 const body = `%s`;
 if (body.indexOf("specKeyActive(\\"widths\\", viewPart)") < 0) throw new Error("width gate");
