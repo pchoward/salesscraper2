@@ -340,4 +340,15 @@
         font-weight: 700;
         border-radius: 4px;
     }
+
+    /* Cross-store comparison stays a single column with thumb-sized targets. */
+    .group-board { padding: 0.25rem 0 0.75rem; }
+    .group-offer,
+    .group-actions .text-btn,
+    .group-store-link { min-height: 2.75rem; }
+    .group-store-link { display: inline-flex; align-items: center; }
+    .group-selected { align-items: flex-start; }
+    .group-offer.is-featured .amt,
+    .group-offer.is-only .amt { font-size: 1.4rem; }
+    .group-title { font-size: 1rem; }
 }

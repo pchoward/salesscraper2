@@ -784,6 +784,418 @@ function syncDetails() {
     });
 }
 
+const GROUP_PRICE_NOTE = "Listed sale price only. Delivery charges and tax are not included.";
+const GROUP_CHEAPEST_LABEL = "Cheapest available · price only";
+const GROUP_LOWEST_LABEL = "Lowest listed price · price only";
+let groupSelection = new Map();
+let groupReturnFocus = null;
+let groupNoteSeq = 0;
+
+function offerAvailable(availability) {
+    const label = String(availability || "On sale").trim().toLowerCase();
+    return label !== "sold out" && label !== "gone" && label !== "no longer listed";
+}
+
+function groupMoney(currency, price) {
+    const symbol = String(currency || "USD").toUpperCase() === "EUR" ? "€" : "$";
+    const amount = Number(price);
+    if (!Number.isFinite(amount)) return "";
+    return symbol + amount.toFixed(2);
+}
+
+// Rank offers that already share a match key. Availability comes from the
+// catalog; a sold-out listing is never the featured cheapest.
+function rankGroupOffers(offers) {
+    const cleaned = [];
+    (offers || []).forEach((offer, index) => {
+        if (!offer) return;
+        const price = Number(offer.price);
+        if (!Number.isFinite(price)) return;
+        cleaned.push({
+            id: String(offer.id || ""),
+            store: offer.store || "Store",
+            price: price,
+            url: offer.url || "",
+            name: offer.name || "",
+            part: offer.part || "",
+            availability: offer.availability || "On sale",
+            currency: String(offer.currency || "USD").toUpperCase(),
+            storeClass: offer.storeClass || "",
+            available: offerAvailable(offer.availability),
+            index: index
+        });
+    });
+    cleaned.sort((a, b) => {
+        if (a.available !== b.available) return a.available ? -1 : 1;
+        if (a.price !== b.price) return a.price - b.price;
+        const store = String(a.store).localeCompare(String(b.store));
+        if (store) return store;
+        return a.index - b.index;
+    });
+    if (!cleaned.length) {
+        return { mode: "empty", offers: [], featured: null, anyAvailable: false, soldOutCheaper: false };
+    }
+    const available = cleaned.filter(row => row.available);
+    const pool = available.length ? available : cleaned;
+    const best = pool[0].price;
+    cleaned.forEach(row => {
+        row.cheapest = Math.abs(row.price - best) < 0.001 && row.available === (available.length > 0);
+        row.featured = false;
+    });
+    const featured = cleaned.find(row => row.cheapest) || cleaned[0];
+    featured.featured = true;
+    return {
+        mode: cleaned.length === 1 ? "single" : "compare",
+        offers: cleaned,
+        featured: featured,
+        anyAvailable: available.length > 0,
+        soldOutCheaper: available.length > 0 && cleaned.some(row => !row.available && row.price + 0.001 < featured.price)
+    };
+}
+
+function groupOfferStep(index, count, key) {
+    if (!count) return 0;
+    if (key === "ArrowDown" || key === "ArrowRight") return (index + 1) % count;
+    if (key === "ArrowUp" || key === "ArrowLeft") return (index - 1 + count) % count;
+    if (key === "Home") return 0;
+    if (key === "End") return count - 1;
+    return index;
+}
+
+function groupKicker(ranked) {
+    if (!ranked || !ranked.featured) return "";
+    if (ranked.mode === "single") return "One store in this view";
+    if (ranked.mode !== "compare") return "";
+    return ranked.featured.available ? GROUP_CHEAPEST_LABEL : GROUP_LOWEST_LABEL;
+}
+
+function groupNote(ranked) {
+    if (!ranked || ranked.mode === "empty") return "";
+    if (ranked.mode === "single") return "Only one matching store is in this view. " + GROUP_PRICE_NOTE;
+    let note = GROUP_PRICE_NOTE;
+    if (ranked.soldOutCheaper) note += " A lower listed price is sold out.";
+    return note;
+}
+
+function groupGapText(offer, featured) {
+    if (!offer || !featured || offer.featured) return "";
+    if (String(offer.currency || "USD").toUpperCase() !== String(featured.currency || "USD").toUpperCase()) return "";
+    const delta = offer.price - featured.price;
+    if (Math.abs(delta) < 0.001) return "Same price";
+    const symbol = String(featured.currency || "USD").toUpperCase() === "EUR" ? "€" : "$";
+    const sign = delta > 0 ? "+" : "−";
+    return sign + symbol + Math.abs(delta).toFixed(2);
+}
+
+function rowGroupOffer(row) {
+    const item = (catalog().items || {})[row.dataset.id] || {};
+    const url = row.dataset.url || item.url || "";
+    let availability = "On sale";
+    let currency = "USD";
+    (item.offers || []).forEach(offer => {
+        if (!offer || !url || offer.url !== url) return;
+        if (offer.availability) availability = offer.availability;
+        if (offer.currency) currency = offer.currency;
+    });
+    const badge = row.querySelector ? row.querySelector(".store-badge") : null;
+    const price = rowPrice(row);
+    return {
+        id: row.dataset.id || "",
+        store: row.dataset.store || item.store || "Store",
+        price: price,
+        url: url,
+        name: row.dataset.name || item.name || "",
+        part: row.dataset.part || item.part || "",
+        availability: availability,
+        currency: currency,
+        storeClass: badge ? String(badge.className || "") : ""
+    };
+}
+
+function chosenGroupOffer(key, ranked) {
+    const saved = groupSelection.get(key);
+    if (saved) {
+        const found = ranked.offers.find(offer => offer.id === saved);
+        if (found) return found;
+    }
+    return ranked.featured;
+}
+
+function groupOfferButton(card, id) {
+    if (!card || !card.querySelectorAll) return null;
+    const buttons = card.querySelectorAll(".group-offer");
+    for (let i = 0; i < buttons.length; i++) {
+        if (buttons[i].dataset && buttons[i].dataset.id === id) return buttons[i];
+    }
+    return null;
+}
+
+function groupOfferLabel(offer, ranked) {
+    const bits = [offer.store, groupMoney(offer.currency, offer.price), offer.availability || "On sale"];
+    if (offer.featured) {
+        const kicker = groupKicker(ranked);
+        if (kicker) bits.push(kicker);
+    }
+    const gap = groupGapText(offer, ranked.featured);
+    if (gap) bits.push(gap);
+    return bits.filter(Boolean).join(", ");
+}
+
+function renderOfferFace(offer, ranked) {
+    const face = document.createElement("span");
+    face.className = "group-offer-face";
+    const kickerText = offer.featured ? groupKicker(ranked) : "";
+    if (kickerText) {
+        const kicker = document.createElement("span");
+        kicker.className = "group-kicker";
+        kicker.textContent = kickerText;
+        face.appendChild(kicker);
+    }
+    const line = document.createElement("span");
+    line.className = "group-offer-line";
+    const store = document.createElement("span");
+    store.className = offer.storeClass && offer.storeClass.indexOf("store-badge") >= 0
+        ? offer.storeClass
+        : ("store-badge" + (offer.storeClass ? " " + offer.storeClass : ""));
+    store.textContent = offer.store;
+    const amt = document.createElement("span");
+    amt.className = "amt";
+    amt.textContent = groupMoney(offer.currency, offer.price);
+    const stock = document.createElement("span");
+    stock.className = "stock " + (offer.available ? "is-in" : "is-out");
+    stock.textContent = offer.availability || "On sale";
+    line.append(store, amt, stock);
+    const gap = groupGapText(offer, ranked.featured);
+    if (gap) {
+        const gapNode = document.createElement("span");
+        gapNode.className = "group-gap";
+        gapNode.textContent = gap;
+        line.appendChild(gapNode);
+    }
+    face.appendChild(line);
+    return face;
+}
+
+function renderGroupOffer(offer, ranked, selected, noteId, panelId, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "group-offer" + (offer.featured ? " is-featured" : "");
+    button.dataset.id = offer.id;
+    button.dataset.url = offer.url;
+    button.dataset.store = offer.store;
+    button.dataset.name = offer.name;
+    button.dataset.price = String(offer.price);
+    button.dataset.currency = offer.currency;
+    button.dataset.availability = offer.availability;
+    button.id = "group-tab-" + index + "-" + String(offer.id).replace(/[^A-Za-z0-9_-]/g, "");
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-controls", panelId);
+    const on = offer.id === selected.id;
+    button.setAttribute("aria-selected", on ? "true" : "false");
+    button.tabIndex = on ? 0 : -1;
+    button.setAttribute("aria-label", groupOfferLabel(offer, ranked));
+    if (offer.featured && noteId) button.setAttribute("aria-describedby", noteId);
+    button.appendChild(renderOfferFace(offer, ranked));
+    return button;
+}
+
+function fillGroupPanel(panel, offer) {
+    if (!panel) return;
+    panel.replaceChildren();
+    if (!offer) return;
+    const label = document.createElement("p");
+    label.className = "group-panel-label";
+    label.textContent = "Product details";
+    const row = document.createElement("div");
+    row.className = "group-selected";
+    const card = cardFor(offer.id);
+    const thumb = card && card.querySelector ? card.querySelector("img") : null;
+    if (thumb && thumb.cloneNode) {
+        const media = document.createElement("span");
+        media.className = "group-selected-media";
+        const copy = thumb.cloneNode(true);
+        if (copy.removeAttribute) copy.removeAttribute("id");
+        media.appendChild(copy);
+        row.appendChild(media);
+    }
+    const text = document.createElement("div");
+    const name = document.createElement("p");
+    name.className = "group-selected-name";
+    name.textContent = offer.name || "";
+    const meta = document.createElement("p");
+    meta.className = "group-selected-meta";
+    meta.textContent = [offer.store, groupMoney(offer.currency, offer.price), offer.availability || "On sale"].filter(Boolean).join(" · ");
+    text.append(name, meta);
+    row.appendChild(text);
+    const actions = document.createElement("div");
+    actions.className = "group-actions";
+    const quick = document.createElement("button");
+    quick.type = "button";
+    quick.className = "text-btn group-quick";
+    quick.dataset.id = offer.id;
+    quick.textContent = "Quick view";
+    const history = document.createElement("button");
+    history.type = "button";
+    history.className = "text-btn group-chart";
+    history.dataset.id = offer.id;
+    history.textContent = "Price history";
+    actions.append(quick, history);
+    if (offer.url) {
+        const link = document.createElement("a");
+        link.className = "group-store-link";
+        link.href = offer.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = "View at " + offer.store;
+        actions.appendChild(link);
+    }
+    panel.append(label, row, actions);
+}
+
+function offerFromButton(button, card) {
+    const title = card && card.querySelector ? card.querySelector(".group-title") : null;
+    return {
+        id: button.dataset.id || "",
+        store: button.dataset.store || "",
+        price: Number(button.dataset.price),
+        url: button.dataset.url || "",
+        name: button.dataset.name || (title ? title.textContent : ""),
+        availability: button.dataset.availability || "On sale",
+        currency: button.dataset.currency || "USD"
+    };
+}
+
+function selectGroupOffer(button, focus) {
+    if (!button) return;
+    const card = button.closest(".group-card");
+    const list = button.closest(".group-offers");
+    if (!card || !list) return;
+    groupSelection.set(card.dataset.key || "", button.dataset.id || "");
+    list.querySelectorAll(".group-offer").forEach(tab => {
+        const on = tab === button;
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+        tab.tabIndex = on ? 0 : -1;
+    });
+    const panel = card.querySelector(".group-panel");
+    if (panel) {
+        if (button.id) panel.setAttribute("aria-labelledby", button.id);
+        fillGroupPanel(panel, offerFromButton(button, card));
+    }
+    if (focus && button.focus) button.focus();
+}
+
+function moveGroupOffer(event) {
+    if (!event.target || !event.target.closest || !event.target.closest("#groupBoard")) return;
+    if (["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End"].indexOf(event.key) < 0) return;
+    let button = event.target.closest(".group-offer");
+    if (button && String(button.tagName || "").toUpperCase() !== "BUTTON") button = null;
+    const card = event.target.closest(".group-card");
+    if (!button && card) button = card.querySelector('.group-offer[aria-selected="true"]');
+    const list = button ? button.closest(".group-offers") : null;
+    if (!button || !list) return;
+    const tabs = Array.from(list.querySelectorAll(".group-offer"));
+    const index = tabs.indexOf(button);
+    if (index < 0) return;
+    event.preventDefault();
+    const next = tabs[groupOfferStep(index, tabs.length, event.key)];
+    if (next) selectGroupOffer(next, true);
+}
+
+function renderGroupCard(key, offers) {
+    const ranked = rankGroupOffers(offers);
+    const card = document.createElement("article");
+    card.className = "group-card";
+    card.dataset.key = key;
+    if (ranked.mode === "empty") {
+        card.hidden = true;
+        return card;
+    }
+    groupNoteSeq += 1;
+    const noteId = "group-note-" + groupNoteSeq;
+    const panelId = "group-panel-" + groupNoteSeq;
+    const selected = chosenGroupOffer(key, ranked) || ranked.featured;
+    groupSelection.set(key, selected.id);
+    const title = document.createElement("h3");
+    title.className = "group-title";
+    title.textContent = (ranked.featured && ranked.featured.name) || "Matched product";
+    const note = document.createElement("p");
+    note.className = "group-note";
+    note.id = noteId;
+    note.textContent = groupNote(ranked);
+    card.append(title, note);
+    if (ranked.mode === "compare") {
+        const list = document.createElement("div");
+        list.className = "group-offers";
+        list.setAttribute("role", "tablist");
+        list.setAttribute("aria-orientation", "vertical");
+        list.setAttribute("aria-label", "Equivalent offers for " + title.textContent);
+        ranked.offers.forEach((offer, index) => {
+            list.appendChild(renderGroupOffer(offer, ranked, selected, noteId, panelId, index));
+        });
+        card.appendChild(list);
+    } else {
+        const only = document.createElement("div");
+        only.className = "group-offer is-only";
+        only.appendChild(renderOfferFace(ranked.featured, ranked));
+        card.appendChild(only);
+    }
+    const panel = document.createElement("div");
+    panel.className = "group-panel";
+    panel.id = panelId;
+    panel.setAttribute("role", "tabpanel");
+    panel.tabIndex = 0;
+    const selectedButton = groupOfferButton(card, selected.id);
+    if (selectedButton && selectedButton.id) panel.setAttribute("aria-labelledby", selectedButton.id);
+    else panel.setAttribute("aria-label", "Product details");
+    fillGroupPanel(panel, selected);
+    card.appendChild(panel);
+    return card;
+}
+
+function paintGroupBoard(visibleKeys) {
+    const board = document.getElementById("groupBoard");
+    if (!board) return;
+    const active = document.activeElement;
+    const focusInBoard = !!(active && board.contains && board.contains(active));
+    const activeId = focusInBoard && active.dataset ? active.dataset.id || "" : "";
+    const activeCard = focusInBoard && active.closest ? active.closest(".group-card") : null;
+    const activeKey = activeCard ? activeCard.dataset.key || "" : "";
+    const byKey = new Map();
+    dealRows().forEach(row => {
+        const key = row.dataset.group || "";
+        if (!key || !visibleKeys.has(key) || row.classList.contains("filtered-out")) return;
+        if (!byKey.has(key)) byKey.set(key, []);
+        byKey.get(key).push(rowGroupOffer(row));
+    });
+    board.querySelectorAll(".group-card").forEach(card => card.remove());
+    let empty = board.querySelector(".group-empty");
+    if (!empty) {
+        empty = document.createElement("p");
+        empty.className = "group-empty lede";
+        empty.textContent = "No products are at more than one store under the conservative match. Rows stay separate.";
+        board.appendChild(empty);
+    }
+    empty.hidden = byKey.size !== 0;
+    byKey.forEach((offers, key) => {
+        const card = renderGroupCard(key, offers);
+        if (!card.hidden) board.appendChild(card);
+    });
+    board.appendChild(empty);
+    if (!focusInBoard || !activeKey) return;
+    let card = null;
+    board.querySelectorAll(".group-card").forEach(node => {
+        if (node.dataset.key === activeKey) card = node;
+    });
+    const button = card ? groupOfferButton(card, activeId) : null;
+    if (button && button.focus) button.focus();
+}
+
+function restoreGroupFocus() {
+    const node = groupReturnFocus;
+    groupReturnFocus = null;
+    if (node && node.isConnected && node.focus) node.focus({ preventScroll: true });
+}
+
 function applyGroupVisibility() {
     const board = document.getElementById("groupBoard");
     if (!board) return;
@@ -795,19 +1207,19 @@ function applyGroupVisibility() {
     }
     board.hidden = false;
     const visible = new Set();
+    dealRows().forEach(row => row.classList.remove("grouped-hide"));
     dealRows().forEach(row => {
-        if (row.dataset.group && !row.classList.contains("filtered-out")) {
-            visible.add(row.dataset.group);
-            row.classList.add("grouped-hide");
-        } else {
-            row.classList.remove("grouped-hide");
-        }
+        const key = row.dataset.group || "";
+        if (!key || row.classList.contains("filtered-out")) return;
+        const offer = rowGroupOffer(row);
+        if (offer.price == null || !Number.isFinite(Number(offer.price))) return;
+        visible.add(key);
     });
-    board.querySelectorAll(".group-card").forEach(card => {
-        card.hidden = !visible.has(card.dataset.key);
+    dealRows().forEach(row => {
+        const key = row.dataset.group || "";
+        if (key && visible.has(key) && !row.classList.contains("filtered-out")) row.classList.add("grouped-hide");
     });
-    const empty = board.querySelector(".group-empty");
-    if (empty) empty.hidden = visible.size !== 0;
+    paintGroupBoard(visible);
     mirrorCardFlags();
 }
 
@@ -3098,7 +3510,8 @@ function setChartWindow(days) {
     if (chartId) drawChart(chartId);
 }
 
-function openProduct(id) {
+function openProduct(id, fromGroup) {
+    if (!fromGroup) groupReturnFocus = null;
     const item = (catalog().items || {})[id];
     const modal = document.getElementById("productModal");
     if (!modal || !item) return;
@@ -3120,12 +3533,22 @@ function openProduct(id) {
     const list = document.getElementById("modalOffers");
     if (list) {
         list.innerHTML = "";
+        const rankedOffers = rankGroupOffers((item.offers || []).map((offer, index) => ({
+            id: (offer && offer.url) || String(index),
+            store: offer && offer.store,
+            price: offer && offer.price,
+            url: offer && offer.url,
+            availability: (offer && offer.availability) || "On sale",
+            currency: (offer && offer.currency) || "USD"
+        })));
+        const featuredOffer = rankedOffers.mode === "compare" ? rankedOffers.featured : null;
         (item.offers || []).forEach(offer => {
             const li = document.createElement("li");
-            if (offer.cheapest) li.className = "cheapest";
-            if (offer.cheapest) {
+            const isFeatured = !!(featuredOffer && offer && offer.url && offer.url === featuredOffer.url);
+            if (isFeatured) li.className = "cheapest";
+            if (isFeatured) {
                 const tag = document.createElement("strong");
-                tag.textContent = "Cheapest ";
+                tag.textContent = featuredOffer.available ? "Cheapest available · price only " : "Lowest listed price · price only ";
                 li.appendChild(tag);
             }
             const symbol = String(offer.currency || "USD").toUpperCase() === "EUR" ? "€" : "$";
@@ -3142,6 +3565,18 @@ function openProduct(id) {
             }
             list.appendChild(li);
         });
+        let priceNote = document.getElementById("modalPriceNote");
+        if (!priceNote && list.parentNode) {
+            priceNote = document.createElement("p");
+            priceNote.id = "modalPriceNote";
+            priceNote.className = "group-note";
+            list.parentNode.insertBefore(priceNote, list);
+        }
+        if (priceNote) {
+            const many = (item.offers || []).filter(offer => offer && offer.url).length > 1;
+            priceNote.hidden = !many;
+            priceNote.textContent = many ? "Cheapest available is the lowest price still on sale. Delivery charges and tax are not included." : "";
+        }
     }
     const link = document.getElementById("modalLink");
     if (link) {
@@ -3165,8 +3600,10 @@ function openProduct(id) {
 
 function closeProduct() {
     const modal = document.getElementById("productModal");
+    const wasOpen = !!(modal && !modal.hidden);
     if (modal) modal.hidden = true;
     chartId = "";
+    if (wasOpen) restoreGroupFocus();
 }
 
 let navMode = "deals";
@@ -3219,6 +3656,7 @@ let quickTimer = 0;
 let quickCloseTimer = 0;
 let quickCard = null;
 let quickPinned = false;
+let quickForceSheet = false;
 
 function quickIsSheet() {
     if (window.innerWidth <= 800) return true;
@@ -4045,19 +4483,25 @@ function closeQuickView() {
     hideSparkTip();
     quickPinned = false;
     quickCard = null;
+    quickForceSheet = false;
     setQuickExpanded(false);
-    if (returnFocus && returnFocus.isConnected) returnFocus.focus({ preventScroll: true });
+    const back = groupReturnFocus;
+    groupReturnFocus = null;
+    if (back && back.isConnected && back.focus) back.focus({ preventScroll: true });
+    else if (returnFocus && returnFocus.isConnected) returnFocus.focus({ preventScroll: true });
 }
 
-function openQuickView(card, pinned) {
+function openQuickView(card, pinned, forceSheet) {
     if (!card) return;
+    quickForceSheet = !!forceSheet;
+    if (!quickForceSheet) groupReturnFocus = null;
     clearTimeout(quickTimer);
     clearTimeout(quickCloseTimer);
     quickCard = card;
     quickPinned = !!pinned;
     const panel = document.getElementById("quickView");
     if (!panel) return;
-    const sheet = quickIsSheet();
+    const sheet = quickForceSheet || quickIsSheet();
     panel.classList.toggle("is-sheet", sheet);
     const dialog = panel.querySelector(".quick-panel");
     if (dialog) dialog.setAttribute("aria-modal", sheet ? "true" : "false");
@@ -4131,16 +4575,16 @@ function wireQuickView() {
     }, true);
     window.addEventListener("resize", () => {
         if (!quickCard || !isQuickOpen()) return;
-        const sheet = quickIsSheet();
+        const sheet = quickForceSheet || quickIsSheet();
         if (panel.classList.contains("is-sheet") !== sheet) {
-            openQuickView(quickCard, quickPinned);
+            openQuickView(quickCard, quickPinned, quickForceSheet);
             return;
         }
         if (!sheet) placeQuickView(quickCard);
     });
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
-        if (event.target.closest("#quickView, .card-more")) return;
+        if (event.target.closest("#quickView, .card-more, .group-quick")) return;
         closeQuickView();
     });
 }
@@ -4205,10 +4649,27 @@ function wireDealEvents() {
             openProduct(priceBtn.dataset.id);
             return;
         }
+        const groupQuick = event.target.closest(".group-quick");
+        if (groupQuick) {
+            event.preventDefault();
+            event.stopPropagation();
+            const card = cardFor(groupQuick.dataset.id);
+            if (!card) return;
+            groupReturnFocus = groupQuick;
+            if (isQuickOpen() && quickCard === card) closeQuickView();
+            else openQuickView(card, true, true);
+            return;
+        }
         const groupChart = event.target.closest(".group-chart");
         if (groupChart) {
             event.stopPropagation();
-            openProduct(groupChart.dataset.id);
+            groupReturnFocus = groupChart;
+            openProduct(groupChart.dataset.id, true);
+            return;
+        }
+        const groupOffer = event.target.closest(".group-offer");
+        if (groupOffer && String(groupOffer.tagName || "").toUpperCase() === "BUTTON") {
+            selectGroupOffer(groupOffer, false);
             return;
         }
         const row = event.target.closest(".deal-row, .deal-card");
@@ -4216,6 +4677,9 @@ function wireDealEvents() {
         openProduct(row.dataset.id);
     }, true);
     document.addEventListener("keydown", event => {
+        if (event.target && event.target.closest && event.target.closest("#groupBoard")) {
+            moveGroupOffer(event);
+        }
         if (event.key !== "Enter" && event.key !== " ") return;
         const row = event.target.closest(".deal-row, .deal-card");
         if (!row || event.target.closest("a, button, input, select, label")) return;
