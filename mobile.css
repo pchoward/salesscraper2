@@ -159,14 +159,11 @@
     .deal-card .spark-hit { min-height: 1.75rem; }
     .deal-card .card-title .product-link { text-decoration: none; }
 
-    /* The sheet's chart is width: 100% with a fixed aspect, which fills a
-       landscape screen. Cap it so the facts stay in view. */
-    #quickView.is-sheet .quick-chart .history-chart { max-height: 9rem; }
-
     /* Details sheet buttons sized for a thumb. */
     #quickView.is-sheet .quick-star, #quickView.is-sheet .quick-close { min-height: 2.5rem; }
     #quickView.is-sheet .quick-star { min-width: 2.5rem; font-size: 1.3rem; }
-    #quickView.is-sheet .quick-close { padding: 0 0.25rem 0 1rem; font-size: 0.85rem; }
+    #quickView.is-sheet .quick-gallery-controls button { min-width: 2.75rem; min-height: 2.75rem; }
+    #quickView.is-sheet .quick-close { min-width: 2.5rem; padding: 0; font-size: 1.4rem; }
     /* Going to the store is the point of the sheet, so it is a full-width
        button instead of a text link. */
     #quickView.is-sheet .quick-view-link {

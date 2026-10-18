@@ -3385,120 +3385,84 @@ function quickFacts(dataset, item, generated) {
     };
 }
 
-function drawQuickChart(host, facts) {
-    const points = (facts && facts.points) || [];
-    host.replaceChildren();
-    if (!points.length) return;
-    const prices = points.map(point => Number(point[1])).filter(value => Number.isFinite(value));
-    if (!prices.length) return;
-    const width = 500;
-    const height = window.innerWidth > 800 && window.innerHeight <= 850 ? 118 : 144;
-    const pad = { l: 60, r: 12, t: 14, b: 24 };
-    const low = Math.min.apply(null, prices);
-    const high = Math.max.apply(null, prices);
-    const span = high - low || 1;
-    const symbol = facts.symbol || "$";
-    function axisPrice(price) {
-        const digits = span < 10 ? 2 : 0;
-        return symbol + Number(price).toFixed(digits);
+function quickGalleryImages(item, card) {
+    const source = card.querySelector(".hero-wrap img, .thumb-wrap img");
+    const urls = [item.image, source && source.getAttribute("src"), ...(Array.isArray(item.images) ? item.images : [])];
+    return [...new Set(urls.filter(url => typeof url === "string" && /^https?:\/\//i.test(url)))];
+}
+
+function appendQuickGallery(product, item, card) {
+    const gallery = document.createElement("div");
+    gallery.className = "quick-gallery";
+    const frame = document.createElement("div");
+    frame.className = "quick-image-frame";
+    const image = document.createElement("img");
+    image.alt = item.name || "Product photo";
+    image.decoding = "async";
+    const fallback = document.createElement("span");
+    fallback.className = "quick-image-missing";
+    fallback.textContent = "Photo unavailable";
+    fallback.hidden = true;
+    frame.append(image, fallback);
+    gallery.appendChild(frame);
+    const images = quickGalleryImages(item, card);
+    let index = 0;
+    let counter;
+    function show(next) {
+        index = (next + images.length) % images.length;
+        image.hidden = false;
+        fallback.hidden = true;
+        image.alt = (item.name || "Product photo") + (images.length > 1 ? " — photo " + (index + 1) + " of " + images.length : "");
+        image.src = images[index];
+        if (counter) counter.textContent = (index + 1) + " / " + images.length;
     }
-    function xOf(iso) {
-        const start = Date.parse(String(facts.start || points[0][0]).slice(0, 10) + "T00:00:00Z");
-        const end = Date.parse(String(facts.end || points[points.length - 1][0]).slice(0, 10) + "T00:00:00Z");
-        const time = Date.parse(String(iso).slice(0, 10) + "T00:00:00Z");
-        const plot = width - pad.l - pad.r;
-        if (!Number.isFinite(start) || !Number.isFinite(end) || end === start) return pad.l + plot / 2;
-        return pad.l + Math.min(1, Math.max(0, (time - start) / (end - start))) * plot;
-    }
-    function yOf(price) {
-        if (high === low) return pad.t + (height - pad.t - pad.b) / 2;
-        return pad.t + (height - pad.t - pad.b) * (1 - (price - low) / span);
-    }
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "0 0 " + width + " " + height);
-    svg.setAttribute("class", "history-chart");
-    svg.setAttribute("role", "img");
-    const avgText = facts.average == null ? "" : " Average " + symbol + Number(facts.average).toFixed(2) + ".";
-    svg.setAttribute(
-        "aria-label",
-        "90-day price history. High " + symbol + high.toFixed(2) + ", low " + symbol + low.toFixed(2) + "." + avgText
-    );
-    const color = SPARK_COLOR[sparkDirection(points)] || SPARK_COLOR.flat;
-    if (points.length >= 2) {
-        const poly = document.createElementNS(svg.namespaceURI, "polyline");
-        poly.setAttribute("fill", "none");
-        poly.setAttribute("stroke", color);
-        poly.setAttribute("stroke-width", "2.4");
-        poly.setAttribute("points", points.map(point => xOf(point[0]).toFixed(1) + "," + yOf(Number(point[1])).toFixed(1)).join(" "));
-        svg.appendChild(poly);
-    }
-    if (points.length >= 2 && facts.average != null && high !== low) {
-        const y = yOf(Number(facts.average));
-        const avg = document.createElementNS(svg.namespaceURI, "line");
-        avg.setAttribute("x1", String(pad.l));
-        avg.setAttribute("x2", String(width - pad.r));
-        avg.setAttribute("y1", y.toFixed(1));
-        avg.setAttribute("y2", y.toFixed(1));
-        avg.setAttribute("stroke", "#64748b");
-        avg.setAttribute("stroke-dasharray", "4 3");
-        avg.setAttribute("stroke-width", "1.2");
-        svg.appendChild(avg);
-        const tag = document.createElementNS(svg.namespaceURI, "text");
-        tag.setAttribute("x", String(width - pad.r));
-        tag.setAttribute("y", Math.max(11, y - 3).toFixed(1));
-        tag.setAttribute("text-anchor", "end");
-        tag.setAttribute("class", "chart-axis");
-        tag.textContent = "avg " + axisPrice(facts.average);
-        svg.appendChild(tag);
-    }
-    const seen = {};
-    [low, high].forEach(price => {
-        const key = price.toFixed(2);
-        if (seen[key]) return;
-        seen[key] = true;
-        const label = document.createElementNS(svg.namespaceURI, "text");
-        label.setAttribute("x", "2");
-        label.setAttribute("y", (yOf(price) + 4).toFixed(1));
-        label.setAttribute("class", "chart-axis");
-        label.textContent = axisPrice(price);
-        svg.appendChild(label);
+    image.addEventListener("error", () => {
+        image.hidden = true;
+        fallback.hidden = false;
     });
-    let highIndex = 0;
-    let lowIndex = 0;
-    prices.forEach((price, index) => {
-        if (price >= prices[highIndex]) highIndex = index;
-        if (price <= prices[lowIndex]) lowIndex = index;
-    });
-    const atlDay = facts.atl && facts.atl.date;
-    const markIndexes = highIndex === lowIndex ? [lowIndex] : [lowIndex, highIndex];
-    markIndexes.forEach(index => {
-        const point = points[index];
-        const mark = document.createElementNS(svg.namespaceURI, "circle");
-        mark.setAttribute("cx", xOf(point[0]).toFixed(1));
-        mark.setAttribute("cy", yOf(Number(point[1])).toFixed(1));
-        mark.setAttribute("r", "3.5");
-        const isLow = atlDay && String(point[0]).slice(0, 10) === atlDay;
-        mark.setAttribute("fill", isLow ? "#ca8a04" : color);
-        mark.setAttribute("stroke", "#ffffff");
-        mark.setAttribute("stroke-width", "1.2");
-        svg.appendChild(mark);
-    });
-    const startLabel = document.createElementNS(svg.namespaceURI, "text");
-    startLabel.setAttribute("x", String(pad.l));
-    startLabel.setAttribute("y", String(height - 6));
-    startLabel.setAttribute("class", "chart-axis");
-    startLabel.textContent = facts.startText || "";
-    svg.appendChild(startLabel);
-    if (facts.endText && facts.endText !== facts.startText) {
-        const endLabel = document.createElementNS(svg.namespaceURI, "text");
-        endLabel.setAttribute("x", String(width - pad.r));
-        endLabel.setAttribute("y", String(height - 6));
-        endLabel.setAttribute("text-anchor", "end");
-        endLabel.setAttribute("class", "chart-axis");
-        endLabel.textContent = facts.endText;
-        svg.appendChild(endLabel);
+    if (images.length > 1) {
+        const controls = document.createElement("div");
+        controls.className = "quick-gallery-controls";
+        const previous = document.createElement("button");
+        previous.type = "button";
+        previous.textContent = "‹";
+        previous.setAttribute("aria-label", "Previous photo");
+        const next = document.createElement("button");
+        next.type = "button";
+        next.textContent = "›";
+        next.setAttribute("aria-label", "Next photo");
+        counter = document.createElement("span");
+        counter.setAttribute("role", "status");
+        counter.setAttribute("aria-live", "polite");
+        previous.addEventListener("click", () => show(index - 1));
+        next.addEventListener("click", () => show(index + 1));
+        controls.append(previous, counter, next);
+        gallery.appendChild(controls);
+        gallery.tabIndex = 0;
+        gallery.setAttribute("role", "region");
+        gallery.setAttribute("aria-label", "Product photos");
+        gallery.addEventListener("keydown", event => {
+            if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+            event.preventDefault();
+            show(index + (event.key === "ArrowRight" ? 1 : -1));
+        });
+        let startX = null;
+        let startY = null;
+        frame.addEventListener("touchstart", event => {
+            startX = event.touches[0].clientX;
+            startY = event.touches[0].clientY;
+        }, { passive: true });
+        frame.addEventListener("touchend", event => {
+            if (startX == null || !event.changedTouches.length) return;
+            const dx = event.changedTouches[0].clientX - startX;
+            const dy = event.changedTouches[0].clientY - startY;
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(index + (dx < 0 ? 1 : -1));
+            startX = startY = null;
+        }, { passive: true });
     }
-    host.appendChild(svg);
+    if (images.length) show(0);
+    else { image.hidden = true; fallback.hidden = false; }
+    product.appendChild(gallery);
 }
 
 function syncQuickStar(card) {
@@ -3553,15 +3517,7 @@ function fillQuickView(card) {
     body.appendChild(head);
     const product = document.createElement("div");
     product.className = "quick-product";
-    const sourceImage = card.querySelector(".hero-wrap, .thumb-wrap");
-    if (sourceImage) {
-        // Preserve the card's image and its existing missing-image fallback.
-        const image = sourceImage.cloneNode(true);
-        image.className = "quick-image-frame";
-        const img = image.querySelector("img");
-        if (img) img.loading = "eager";
-        product.appendChild(image);
-    }
+    appendQuickGallery(product, item, card);
     const identity = document.createElement("div");
     identity.className = "quick-identity";
     const store = document.createElement("p");
@@ -3583,33 +3539,9 @@ function fillQuickView(card) {
     product.appendChild(identity);
     body.appendChild(product);
     syncQuickStar(card);
-    if (facts.points.length >= 5) {
-        const chart = document.createElement("div");
-        chart.className = "quick-chart";
-        body.appendChild(chart);
-        drawQuickChart(chart, facts);
-    } else {
-        const note = document.createElement("p");
-        note.className = "quick-tracking";
-        const since = quickShortDate(item.first) || facts.startText;
-        note.textContent = since ? "Tracking since " + since : "Price history is building";
-        body.appendChild(note);
-    }
     const details = document.createElement("div");
     details.className = "quick-details";
-    body.appendChild(details);
-    if (facts.rows.length) {
-        const list = document.createElement("dl");
-        list.className = "quick-facts";
-        facts.rows.forEach(row => {
-            const term = document.createElement("dt");
-            term.textContent = row.label;
-            const value = document.createElement("dd");
-            value.textContent = row.value;
-            list.append(term, value);
-        });
-        details.appendChild(list);
-    }
+    identity.appendChild(details);
     if (facts.specs.length) {
         const block = document.createElement("div");
         block.className = "quick-specs";
@@ -3630,25 +3562,6 @@ function fillQuickView(card) {
         });
         details.appendChild(block);
     }
-    if (facts.stores.length) {
-        const block = document.createElement("div");
-        block.className = "quick-stores";
-        const kicker = document.createElement("p");
-        kicker.className = "quick-kicker";
-        kicker.textContent = "Also at";
-        block.appendChild(kicker);
-        facts.stores.forEach(store => {
-            const line = document.createElement("p");
-            const link = document.createElement("a");
-            link.href = store.url;
-            link.target = "_blank";
-            link.rel = "noopener";
-            link.textContent = store.label;
-            line.appendChild(link);
-            block.appendChild(line);
-        });
-        body.appendChild(block);
-    }
     if (facts.viewUrl) {
         const link = document.createElement("a");
         link.className = "quick-view-link";
@@ -3656,35 +3569,8 @@ function fillQuickView(card) {
         link.target = "_blank";
         link.rel = "noopener";
         link.textContent = facts.viewLabel;
-        body.appendChild(link);
+        identity.appendChild(link);
     }
-    appendQuickScore(body, card);
-}
-
-function appendQuickScore(body, card) {
-    const why = card.querySelector(".card-score .why");
-    const score = card.dataset.score;
-    if (!why && !score) return;
-    const block = document.createElement("div");
-    block.className = "quick-score";
-    const heading = document.createElement("p");
-    heading.className = "quick-kicker";
-    heading.textContent = "Score " + (score || "") + (card.dataset.hot === "1" ? " · HOT" : "");
-    block.appendChild(heading);
-    if (why) {
-        why.querySelectorAll("li").forEach(item => {
-            const points = item.querySelector("b");
-            const earned = points ? points.textContent.trim() : "";
-            if (!earned || earned === "+0" || earned === "not scored") return;
-            const span = item.querySelector("span");
-            const label = span && span.childNodes[0] ? span.childNodes[0].textContent.trim() : "";
-            if (!label) return;
-            const line = document.createElement("p");
-            line.textContent = label + " " + earned;
-            block.appendChild(line);
-        });
-    }
-    body.appendChild(block);
 }
 
 function quickTopLimit() {
@@ -3703,7 +3589,7 @@ function placeQuickView(card) {
     }
     const margin = 8;
     const topLimit = quickTopLimit();
-    const width = Math.min(560, window.innerWidth - margin * 2);
+    const width = Math.min(720, window.innerWidth - margin * 2);
     panel.style.width = width + "px";
     panel.style.height = "auto";
     const height = panel.getBoundingClientRect().height;

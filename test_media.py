@@ -1,11 +1,13 @@
 """Listing images and the fields stored on price history."""
 
 import unittest
+import json
 
 from bs4 import BeautifulSoup
 
 from history import prune_price_history, update_price_history
-from media import attach_listing_media, extract_image_url
+from media import attach_listing_media, extract_image_url, product_image_urls
+from report import build_report_html
 
 
 class MediaTests(unittest.TestCase):
@@ -47,6 +49,26 @@ class MediaTests(unittest.TestCase):
         self.assertEqual(item["image"], "https://www.skatewarehouse.com/images/caster.jpg")
         self.assertEqual(item["width"], 8.62)
         self.assertEqual(item["wheelbase"], 14.25)
+
+    def test_gallery_keeps_alternate_photos_not_srcset_variants(self):
+        node = BeautifulSoup('''<div class="product-card">
+            <img src="/placeholder.gif" data-src="/front.jpg" srcset="/front-small.jpg 100w, /front-big.jpg 800w">
+            <img src="/back.jpg"><img src="/front.jpg"><img src="/pixel.gif">
+        </div>''', "html.parser").div
+        item = {"name": "Baker Team Deck 8.25", "part": "Decks"}
+        attach_listing_media(item, node, "https://example.com")
+        self.assertEqual(item["images"], ["https://example.com/front.jpg", "https://example.com/back.jpg"])
+        self.assertEqual(product_image_urls({"images": [None, {}, "javascript:bad", "//example.com/relative", {"src": "https://example.com/back.jpg"}]}), ["https://example.com/back.jpg"])
+        self.assertEqual(product_image_urls({"images": "not a list"}), [])
+
+    def test_gallery_reaches_the_static_report_catalog(self):
+        item = {"name": "Baker Team Deck 8.25", "url": "https://example.com/deck", "price_new": "40", "price_old": "80", "part": "Decks", "store": "Zumiez", "image": "https://example.com/front.jpg", "images": ["https://example.com/front.jpg", "https://example.com/back.jpg", "javascript:bad"]}
+        html = build_report_html({"Zumiez_Decks": [item]}, {}, generated_at="2026-10-18")
+        data = json.loads(BeautifulSoup(html, "html.parser").find(id="catalogJson").string)
+        product = next(iter(data["items"].values()))
+        self.assertNotIn("images", data)
+        self.assertEqual(product["image"], item["image"])
+        self.assertEqual(product["images"], [item["image"], "https://example.com/back.jpg"])
 
     def test_history_keeps_the_image(self):
         item = {

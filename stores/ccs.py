@@ -476,6 +476,7 @@ class CCSCatalogScraper(Scraper):
             images = product.get("images") or []
             if images and isinstance(images[0], dict) and images[0].get("src"):
                 item["image"] = images[0]["src"]
+                item["images"] = [photo["src"] for photo in images if isinstance(photo, dict) and photo.get("src")]
             if self.part == "Sneakers" and _stock_known(variants):
                 offers = _shoe_offers(sale)
                 sizes = ordered_shoe_sizes(offers)

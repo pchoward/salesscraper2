@@ -952,7 +952,7 @@ if (pushes !== 1) throw new Error("default search pushed " + pushes);
         self.assertNotIn("fillQuickView", refresh)
         self.assertIn("closeProduct();\n            closeQuickView();", source)
         add_days = source[source.find("function addDays("):source.find("function markerColor(")]
-        facts = source[source.find("function quickClip("):source.find("function drawQuickChart(")]
+        facts = source[source.find("function quickClip("):source.find("function quickGalleryImages(")]
         script = "const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];\n" + add_days + facts + r"""
 const shoe = quickFacts(
   {price: "59.50", original: "85", discount: "30", days: "18", daysat: "4", shoesize: "7.5,8", size: "", length: "", wheelbase: "", diameter: "", duros: "", shape: "", trucksize: "", truckheight: "", construction: "", abec: "", store: "CCS"},
