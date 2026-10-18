@@ -141,6 +141,7 @@ class InStockVariantTests(unittest.TestCase):
                 "title": "Vans BMX Proof Wafflecup Shoes - Black/Black",
                 "handle": "proof",
                 "product_type": "Shoes",
+                "images": [{"src": "https://example.com/front.jpg"}, {"src": "https://example.com/back.jpg"}],
                 "variants": [
                     {"id": 1, "title": "9.5", "option1": "9.5", "price": "63.00", "compare_at_price": "90.00"},
                     {"id": 2, "title": "8.0", "option1": "8.0", "price": "63.00", "compare_at_price": "90.00"},
@@ -150,6 +151,8 @@ class InStockVariantTests(unittest.TestCase):
         self.assertEqual(len(items), 1)
         self.assertNotIn("shoe_sizes", items[0])
         self.assertEqual(items[0]["price_new"], "63.00")
+
+        self.assertEqual(items[0]["images"], ["https://example.com/front.jpg", "https://example.com/back.jpg"])
 
     def test_js_available_flag_is_joined_by_variant_id(self):
         product = {

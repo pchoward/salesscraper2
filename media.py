@@ -5,7 +5,7 @@ instead of raising on odd markup.
 """
 
 import logging
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from dimensions import extract_specs
 
@@ -102,6 +102,42 @@ def extract_image_url(node, base=""):
     return ""
 
 
+def product_image_urls(item, primary=""):
+    """Usable, distinct photos for one product, keeping the primary photo first."""
+    images = item.get("images") or []
+    if not isinstance(images, list):
+        images = []
+    result = []
+    for value in [primary, item.get("image"), *images]:
+        if isinstance(value, dict):
+            value = value.get("src") or value.get("url")
+        if not isinstance(value, str):
+            continue
+        value = value.strip()
+        try:
+            parsed = urlsplit(value)
+            if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+                continue
+        except ValueError:
+            continue
+        if value not in result:
+            result.append(value)
+    return result
+
+
+def extract_image_urls(node, base=""):
+    """One preferred URL per image in a listing, never srcset size variants."""
+    result = []
+    try:
+        for img in _images(node):
+            image = extract_image_url(img, base)
+            if image and image not in result:
+                result.append(image)
+    except Exception as exc:
+        logger.error("Gallery extract failed: %s", exc)
+    return result
+
+
 def _nearby_image(node, base):
     image = extract_image_url(node, base)
     if image or node is None:
@@ -126,7 +162,7 @@ def _node_text(node):
 
 
 def attach_listing_media(item, node, base):
-    """Set ``image``, ``width``, ``length``, and ``wheelbase`` when found.
+    """Set primary/gallery images and product dimensions when found.
 
     Leaves the item unchanged when nothing is there. Does not raise.
     """
@@ -136,6 +172,15 @@ def attach_listing_media(item, node, base):
         image = _nearby_image(node, base)
         if image:
             item["image"] = image
+        # Follow the same single-listing scope as the primary-image extractor.
+        gallery = extract_image_urls(node, base)
+        if not gallery and node is not None:
+            parent = getattr(node, "parent", None)
+            if getattr(parent, "name", None) not in {None, "[document]", "html", "body"}:
+                gallery = extract_image_urls(parent, base)
+        gallery = product_image_urls({"images": gallery}, image)
+        if len(gallery) > 1:
+            item["images"] = gallery
         specs = extract_specs(item.get("name") or "", _node_text(node))
         for field in ("width", "length", "wheelbase"):
             if specs.get(field) is not None:

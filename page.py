@@ -12,6 +12,7 @@ import os
 from html import escape
 from zoneinfo import ZoneInfo
 
+from media import product_image_urls
 from badges import classify_badges
 from charts import CHART_NOTE, listing_series
 from dimensions import dimension_key, extract_specs
@@ -1141,6 +1142,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "series": record["chain"],
             "daily": _daily_points(record["prices"]),
             "chartNote": CHART_NOTE,
+            "image": record["image"],
+            "images": product_image_urls(record["item"], record["image"]),
         }
 
     by_group = {}
