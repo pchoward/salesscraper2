@@ -1,10 +1,15 @@
 """Broken-store detection: two bad runs, then recovery. No network."""
 
 import datetime
+import json
 import unittest
 
 from health import (
     MAX_RUNS,
+    COMPLETENESS_WINDOW,
+    assess_run,
+    rolling_baseline,
+    state_json,
     STALE_AFTER_HOURS,
     baseline_conflicts,
     broken_store_warnings,
@@ -212,6 +217,7 @@ class BrokenStoreTests(unittest.TestCase):
         self.assertIn("no items in any category", text)
         self.assertIn("2026-10-01", text)
         self.assertIn("27", text)
+        self.assertIn("retry the affected categories", text)
         results = results_from_run(current, set(), flagged)
         state = record_run(health, "2026-10-02", results)
         self.assertTrue(state["runs"][-1]["results"]["Zumiez_Decks"]["suspect"])
@@ -253,6 +259,138 @@ class BrokenStoreTests(unittest.TestCase):
             text = handle.read()
         self.assertIn("scrape_health.json", text)
         self.assertIn("price_history.json", text)
+
+
+class CompletenessTests(unittest.TestCase):
+    def history(self, counts, key=DECK):
+        state = {"runs": [], "baseline": {}}
+        for offset, count in enumerate(counts):
+            day = (datetime.date(2026, 9, 1) + datetime.timedelta(days=offset)).isoformat()
+            state = record_run(state, day, {key: _ok(count)})
+        return state
+
+    def assess(self, state, count, key=DECK, day="2026-10-01", failed=()):
+        items = [{} for _ in range(count)] if count is not None else None
+        return assess_run({key: items}, failed, state, day)[key]
+
+    def test_normal_fluctuations_trends_growth_and_variable_inventory(self):
+        for counts, actual in [([100, 95, 105, 98], 85), ([100, 95, 90, 85, 80, 75], 70),
+                               ([100, 100, 100, 500], 100), ([30, 100, 170, 25, 110], 40),
+                               ([0, 0, 8, 0], 0), ([2, 3, 2, 3], 0)]:
+            with self.subTest(counts=counts, actual=actual):
+                result = self.assess(self.history(counts), actual)
+                self.assertFalse(result["failed"])
+                self.assertEqual(result["diagnostics"]["reason"], "normal_variation")
+
+    def test_partial_and_empty_category_drops_have_diagnostics_and_immediate_warnings(self):
+        state = self.history([100, 98, 102, 100])
+        for actual, reason in [(20, "partial_catalog_drop"), (0, "empty_catalog_drop")]:
+            with self.subTest(actual=actual):
+                result = self.assess(state, actual)
+                self.assertTrue(result["suspect"])
+                self.assertTrue(result["failed"])
+                self.assertEqual(result["count"], 0)  # legacy safety flag/count
+                diagnostic = result["diagnostics"]
+                self.assertEqual(diagnostic["expected_count"], 100)
+                self.assertEqual(diagnostic["actual_count"], actual)
+                self.assertEqual(diagnostic["percentage_change"], actual - 100)
+                self.assertEqual(diagnostic["reason"], reason)
+                saved = record_run(state, "2026-10-01", {DECK: result})
+                warning, = broken_store_warnings(saved)
+                self.assertEqual(warning["kind"], "incomplete")
+                self.assertEqual(warning["part"], "Decks")
+                text = warning_text(warning)
+                for expected in ["Zumiez Decks", "expected about 100", str(actual), "pagination", "retry", "Previous listings were kept"]:
+                    self.assertIn(expected, text)
+                self.assertEqual(saved["baseline"][DECK]["count"], 100)
+
+    def test_relative_and_absolute_thresholds_and_warmup(self):
+        self.assertFalse(self.assess(self.history([100, 100]), 1)["failed"])
+        self.assertTrue(self.assess(self.history([10, 10, 10]), 5)["failed"])
+        self.assertFalse(self.assess(self.history([8, 8, 8]), 4)["failed"])
+        self.assertFalse(self.assess(self.history([100, 100, 100]), 51)["failed"])
+        self.assertTrue(self.assess(self.history([100, 100, 100]), 50)["failed"])
+
+    def test_explicit_failure_records_received_count_without_learning_from_it(self):
+        state = self.history([100, 100, 100])
+        for actual in [None, 10]:
+            result = self.assess(state, actual, failed={DECK})
+            self.assertTrue(result["failed"])
+            self.assertEqual(result["diagnostics"]["actual_count"], actual or 0)
+            self.assertEqual(result["diagnostics"]["reason"], "scrape_failed")
+            recorded = record_run(state, "2026-10-01", {DECK: result})
+            warning, = broken_store_warnings(recorded)
+            self.assertEqual(warning["kind"], "scan_failed")
+            self.assertIn("retry the category", warning_text(warning))
+            self.assertEqual(rolling_baseline(recorded, DECK, "2026-10-02")["expected_count"], 100)
+
+    def test_baselines_are_independent_per_store_and_category(self):
+        state = self.history([100, 100, 100])
+        for offset in range(3):
+            day = f"2026-09-{offset + 4:02}"
+            state = record_run(state, day, {"CCS_Decks": _ok(20), "Zumiez_Wheels": _ok(10)})
+        results = assess_run({DECK: [{}] * 20, "CCS_Decks": [{}] * 20, "Zumiez_Wheels": [{}] * 10}, set(), state, "2026-10-01")
+        self.assertTrue(results[DECK]["failed"])
+        self.assertFalse(results["CCS_Decks"]["failed"])
+        self.assertFalse(results["Zumiez_Wheels"]["failed"])
+
+    def test_historical_files_migrate_and_failed_or_suspect_rows_are_excluded(self):
+        state = self.history([100, 100, 100])
+        state.pop("completeness_baseline")
+        state["runs"].extend([
+            {"date": "2026-09-04", "results": {DECK: {"count": 2, "failed": True}}},
+            {"date": "2026-09-05", "results": {DECK: {"count": 1, "suspect": True, "failed": False}}},
+        ])
+        original = json.loads(state_json(state))
+        baseline = rolling_baseline(state, DECK, "2026-10-01")
+        self.assertEqual(baseline["expected_count"], 100)
+        self.assertEqual(baseline["baseline_samples"], 3)
+        self.assertEqual(state, original)  # read-only assessment
+        result = self.assess(state, 20)
+        saved = record_run(state, "2026-10-01", {DECK: result})
+        restored = json.loads(state_json(saved))
+        self.assertEqual(restored["runs"][-1]["results"][DECK]["diagnostics"], result["diagnostics"])
+        self.assertEqual(len(restored["completeness_baseline"][DECK]), 3)
+
+    def test_same_day_and_future_runs_cannot_contaminate_the_baseline(self):
+        state = self.history([100, 100, 100])
+        state = record_run(state, "2026-10-01", {DECK: _ok(1000)})
+        state = record_run(state, "2026-10-02", {DECK: _ok(2000)})
+        result = self.assess(state, 20)
+        self.assertEqual(result["diagnostics"]["expected_count"], 100)
+        self.assertEqual(result["diagnostics"]["baseline_samples"], 3)
+        self.assertTrue(result["failed"])
+
+    def test_repeated_failures_do_not_erase_baseline_and_recovery_clears_warning(self):
+        state = self.history([100] * 20)
+        self.assertEqual(len(state["completeness_baseline"][DECK]), COMPLETENESS_WINDOW)
+        for offset in range(MAX_RUNS + 3):
+            day = (datetime.date(2026, 10, 1) + datetime.timedelta(days=offset)).isoformat()
+            result = self.assess(state, 20, day=day)
+            self.assertTrue(result["failed"])
+            state = record_run(state, day, {DECK: result})
+        self.assertEqual(rolling_baseline(state, DECK, "2026-12-01")["expected_count"], 100)
+        recovered = self.assess(state, 98, day="2026-12-01")
+        self.assertFalse(recovered["failed"])
+        state = record_run(state, "2026-12-01", {DECK: recovered})
+        self.assertEqual(broken_store_warnings(state), [])
+        self.assertEqual(state["baseline"][DECK]["count"], 98)
+
+    def test_same_day_recovery_replaces_the_failure_and_clears_warning(self):
+        state = self.history([100, 100, 100])
+        state = record_run(state, "2026-10-01", {DECK: self.assess(state, 20)})
+        self.assertEqual(len(broken_store_warnings(state)), 1)
+        state = record_run(state, "2026-10-01", {DECK: self.assess(state, 99)})
+        self.assertEqual(len(state["runs"]), 4)
+        self.assertEqual(broken_store_warnings(state), [])
+        self.assertEqual(state["completeness_baseline"][DECK][-1], {"date": "2026-10-01", "count": 99})
+
+    def test_same_day_failed_replacement_invalidates_a_saved_success(self):
+        state = self.history([100, 100, 100])
+        state = record_run(state, "2026-10-01", {DECK: _ok(200)})
+        state = record_run(state, "2026-10-01", {DECK: _failed()})
+        self.assertNotIn("2026-10-01", [s["date"] for s in state["completeness_baseline"][DECK]])
+        self.assertEqual(rolling_baseline(state, DECK, "2026-10-02")["baseline_samples"], 3)
 
 
 if __name__ == "__main__":

@@ -4,7 +4,8 @@ Each run records how many items came back for every store/part key, and
 whether the fetch failed. The file stays small: the last 30 runs, plus a
 baseline of the last time each key actually had items.
 
-A warning fires only when the last two recorded runs for a key are both bad.
+For historical rows without completeness diagnostics, a warning fires when
+both of the last two recorded runs for a key are bad.
 An empty streak warns only when that category usually has items: not empty
 on most recent runs, and not a low median. A failed fetch still warns.
 One empty category does not warn. A later run that returns items clears the
@@ -14,6 +15,13 @@ A same-day re-run replaces that day's count. A baseline is dropped when the
 saved run on its own date is empty or failed, including when a later day is
 recorded. Otherwise a one-item scrape that was corrected to zero still looks
 like the last good run.
+
+Completeness checks additionally compare raw counts with the last 14 successful
+observations per category. At least three prior dates are required; a drop must
+be at least half the median, at least five items, and outside normal variability.
+New incomplete and failed scans warn immediately, and normal recovery clears
+those warnings. Optional diagnostics and completeness_baseline fields extend historical files
+without changing the existing count/failed or last-positive baseline fields.
 
 A whole store is different. When every category comes back empty and that
 store's baseline still has items, the run is suspect: each of those keys is
@@ -28,6 +36,13 @@ logger = logging.getLogger("health")
 
 HEALTH_PATH = "scrape_health.json"
 MAX_RUNS = 30
+# Successful observations are retained separately so repeated failures cannot
+# roll the last healthy counts out of the baseline. Historical runs seed it.
+COMPLETENESS_WINDOW = 14
+COMPLETENESS_MIN_RUNS = 3
+COMPLETENESS_MIN_DROP = 5
+COMPLETENESS_DROP_FRACTION = 0.5
+COMPLETENESS_MAD_MULTIPLIER = 3
 ALERT_STREAK = 2
 # Median item count below this is a normally small category. An empty streak
 # there is not a drop. Failed fetches still warn.
@@ -41,13 +56,13 @@ def empty_state():
 
 
 def _good(result):
-    return bool(result) and not result.get("failed") and int(result.get("count") or 0) > 0
+    return bool(result) and not result.get("failed") and not result.get("suspect") and int(result.get("count") or 0) > 0
 
 
 def _bad(result):
     if not isinstance(result, dict):
         return True
-    if result.get("failed"):
+    if result.get("failed") or result.get("suspect"):
         return True
     return int(result.get("count") or 0) <= 0
 
@@ -91,6 +106,8 @@ def record_run(state, day, results, scanned_at=None):
         if result.get("suspect"):
             entry["suspect"] = True
             entry["failed"] = True
+        if isinstance(result.get("diagnostics"), dict):
+            entry["diagnostics"] = dict(result["diagnostics"])
         clean[str(key)] = entry
 
     runs = []
@@ -125,13 +142,24 @@ def record_run(state, day, results, scanned_at=None):
         result = (recorded.get(key) or {}).get(str((info or {}).get("date") or ""))
         if isinstance(result, dict) and not _good(result):
             baseline.pop(key, None)
-    return {"runs": runs, "baseline": baseline}
+    sample_state = {"runs": runs, "completeness_baseline": state.get("completeness_baseline") or {}}
+    sample_keys = set(clean) | set(baseline)
+    if isinstance(sample_state["completeness_baseline"], dict):
+        sample_keys.update(sample_state["completeness_baseline"])
+    for run in runs:
+        sample_keys.update(run.get("results") or {})
+    completeness = {}
+    for key in sorted(sample_keys):
+        samples = _successful_samples(sample_state, key)
+        if samples:
+            completeness[key] = samples
+    return {"runs": runs, "baseline": baseline, "completeness_baseline": completeness}
 
 
 def _observed_counts(series):
     counts = []
     for _day, result in series:
-        if result.get("failed"):
+        if result.get("failed") or result.get("suspect"):
             continue
         counts.append(int(result.get("count") or 0))
     return counts
@@ -143,6 +171,118 @@ def _median(values):
     if len(ordered) % 2:
         return ordered[mid]
     return (ordered[mid - 1] + ordered[mid]) / 2
+
+
+def _successful_samples(state, key, before=None):
+    """Merge additive saved samples with historical runs, one count per date.
+
+    Runs take precedence, including a failed same-day replacement invalidating
+    a saved success. Unknown/malformed observations are never baseline samples.
+    """
+    if not isinstance(state, dict):
+        return []
+    saved = state.get("completeness_baseline") or {}
+    samples = saved.get(key, []) if isinstance(saved, dict) else []
+    by_day = {}
+    if isinstance(samples, list):
+        for sample in samples:
+            if not isinstance(sample, dict):
+                continue
+            try:
+                day = datetime.date.fromisoformat(str(sample.get("date") or "")).isoformat()
+                count = int(sample["count"])
+            except (ValueError, TypeError, KeyError):
+                continue
+            if count >= 0:
+                by_day[day] = count
+    runs = state.get("runs") or []
+    for run in runs if isinstance(runs, list) else []:
+        if not isinstance(run, dict) or not isinstance(run.get("results"), dict):
+            continue
+        result = run["results"].get(key)
+        if not isinstance(result, dict):
+            continue
+        try:
+            day = datetime.date.fromisoformat(str(run.get("date") or "")).isoformat()
+        except (ValueError, TypeError):
+            continue
+        by_day.pop(day, None)
+        try:
+            count = int(result["count"])
+        except (ValueError, TypeError, KeyError):
+            continue
+        if count >= 0 and not result.get("failed") and not result.get("suspect"):
+            by_day[day] = count
+    return [
+        {"date": day, "count": by_day[day]}
+        for day in sorted(by_day) if before is None or day < str(before)
+    ][-COMPLETENESS_WINDOW:]
+
+
+def rolling_baseline(state, key, day):
+    """Median and variability of successful scans strictly before this date."""
+    samples = _successful_samples(state, key, before=day)
+    counts = [sample["count"] for sample in samples]
+    expected = _median(counts) if counts else None
+    mad = _median([abs(count - expected) for count in counts]) if counts else None
+    return {"expected_count": expected, "baseline_samples": len(counts),
+            "median_absolute_deviation": mad}
+
+
+def assess_run(current_data, failed_keys, health, day, suspect_keys=None):
+    """Assess raw results before retention or first-miss rows inflate counts.
+
+    A drop must be at least 50%, at least five items, and exceed three median
+    absolute deviations. Small/variable categories and insufficient histories
+    are left alone. Suspect scans use the existing failed-key safety path.
+    """
+    failed = set(failed_keys or [])
+    whole_store = set(suspect_keys or [])
+    results = {}
+    for key in sorted(set(current_data or {}) | failed | whole_store):
+        items = (current_data or {}).get(key)
+        actual = len(items) if isinstance(items, list) else 0
+        baseline = rolling_baseline(health, key, day)
+        expected = baseline["expected_count"]
+        change = round(100 * (actual - expected) / expected, 1) if expected else None
+        suspect = key in whole_store
+        is_failed = key in failed or not isinstance(items, list)
+        reason = "normal_variation"
+        if is_failed:
+            reason = "scrape_failed"
+        elif suspect:
+            reason = "whole_store_empty"
+        elif baseline["baseline_samples"] < COMPLETENESS_MIN_RUNS:
+            reason = "insufficient_history"
+        elif expected is not None and expected >= MIN_TYPICAL_COUNT:
+            drop = expected - actual
+            suspect = (drop >= COMPLETENESS_MIN_DROP
+                       and drop >= expected * COMPLETENESS_DROP_FRACTION
+                       and drop > COMPLETENESS_MAD_MULTIPLIER * baseline["median_absolute_deviation"])
+            if suspect:
+                reason = "partial_catalog_drop" if actual else "empty_catalog_drop"
+        diagnostics = dict(baseline, actual_count=actual, percentage_change=change, reason=reason)
+        entry = {"count": 0 if is_failed or suspect else actual,
+                 "failed": bool(is_failed or suspect), "diagnostics": diagnostics}
+        if suspect:
+            entry["suspect"] = True
+        results[key] = entry
+    return results
+
+
+def _completeness_warning(key, day, result):
+    diagnostics = result.get("diagnostics")
+    if not isinstance(diagnostics, dict):
+        return None
+    reason = diagnostics.get("reason")
+    if reason not in {"partial_catalog_drop", "empty_catalog_drop", "scrape_failed"}:
+        return None
+    try:
+        store, part = split_key(key)
+    except ValueError:
+        return None
+    return dict(diagnostics, key=key, store=store, part=part, dates=[day],
+                kind="scan_failed" if reason == "scrape_failed" else "incomplete")
 
 
 def normally_populated(series):
@@ -177,7 +317,7 @@ def _agreed_positive(series, baseline, key):
 
 
 def broken_store_warnings(state):
-    """Warnings for keys that are bad two runs in a row after a real baseline."""
+    """Immediate diagnosed failures/drops, plus legacy two-run warnings."""
     if not isinstance(state, dict):
         return []
     runs = [run for run in (state.get("runs") or []) if isinstance(run, dict) and run.get("date")]
@@ -195,6 +335,11 @@ def broken_store_warnings(state):
             results = run.get("results") or {}
             if isinstance(results, dict) and key in results and isinstance(results[key], dict):
                 series.append((run["date"], results[key]))
+        if series:
+            immediate = _completeness_warning(key, series[-1][0], series[-1][1])
+            if immediate:
+                warnings.append(immediate)
+                continue
         if len(series) < ALERT_STREAK:
             continue
         (older_day, older), (newer_day, newer) = series[-2], series[-1]
@@ -234,6 +379,23 @@ def warning_text(warning):
     part = warning.get("part") or "items"
     dates = " and ".join(warning.get("dates") or [])
     kind = warning.get("kind")
+    if kind in {"incomplete", "scan_failed"}:
+        actual = warning.get("actual_count", 0)
+        expected = warning.get("expected_count")
+        sentence = f"{store} {part}: "
+        sentence += "scrape failed" if kind == "scan_failed" else "likely incomplete scrape"
+        if dates:
+            sentence += f" on {dates}"
+        sentence += f"; received {actual} items"
+        if expected is not None:
+            sentence += f", expected about {expected:g}"
+        change = warning.get("percentage_change")
+        if change is not None:
+            sentence += f" ({change:+g}%)"
+        sentence += f". Reason: {warning.get('reason')}."
+        sentence += " Previous listings were kept; missing-product tracking was skipped."
+        sentence += " Check retailer availability, pagination, and fetch logs, then retry the category."
+        return sentence
     if kind == "suspect":
         sentence = f"{store} returned no items in any category"
         if dates:
@@ -244,6 +406,7 @@ def warning_text(warning):
         if last and count:
             sentence += f" Last good run on {last} had {count} items."
         sentence += " Previous listings were kept."
+        sentence += " Check retailer availability, pagination, and fetch logs, then retry the affected categories."
         return sentence
     if kind == "error":
         problem = "failed to scrape"
@@ -334,6 +497,11 @@ def warnings_blurb(warnings, email=False):
     for warning in warnings or []:
         if isinstance(warning, dict) and warning.get("kind"):
             kinds.add(warning["kind"])
+    if kinds & {"incomplete", "scan_failed"}:
+        return (
+            "Some retailer categories failed or returned unusually low counts compared with successful scans. "
+            "Those scans are not evidence of discontinued products; review the affected categories and retry."
+        )
     if kinds and kinds <= {"suspect"}:
         return SUSPECT_BLURB
     text = TWO_RUN_BLURB
