@@ -3391,9 +3391,9 @@ function drawQuickChart(host, facts) {
     if (!points.length) return;
     const prices = points.map(point => Number(point[1])).filter(value => Number.isFinite(value));
     if (!prices.length) return;
-    const width = 320;
-    const height = 118;
-    const pad = { l: 46, r: 12, t: 14, b: 24 };
+    const width = 500;
+    const height = window.innerWidth > 800 && window.innerHeight <= 850 ? 118 : 144;
+    const pad = { l: 60, r: 12, t: 14, b: 24 };
     const low = Math.min.apply(null, prices);
     const high = Math.max.apply(null, prices);
     const span = high - low || 1;
@@ -3411,6 +3411,7 @@ function drawQuickChart(host, facts) {
         return pad.l + Math.min(1, Math.max(0, (time - start) / (end - start))) * plot;
     }
     function yOf(price) {
+        if (high === low) return pad.t + (height - pad.t - pad.b) / 2;
         return pad.t + (height - pad.t - pad.b) * (1 - (price - low) / span);
     }
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -3530,9 +3531,8 @@ function fillQuickView(card) {
     body.replaceChildren();
     const heading = document.createElement("h2");
     heading.id = "quickLabel";
-    heading.className = "sr-only";
+    heading.className = "quick-title";
     heading.textContent = item.name || "Deal quick view";
-    body.appendChild(heading);
     if (dialog) dialog.setAttribute("aria-labelledby", "quickLabel");
     const head = document.createElement("div");
     head.className = "quick-head";
@@ -3542,7 +3542,8 @@ function fillQuickView(card) {
     const close = document.createElement("button");
     close.type = "button";
     close.className = "quick-close";
-    close.textContent = "Close";
+    close.textContent = "×";
+    close.setAttribute("aria-label", "Close quick view");
     close.addEventListener("click", event => {
         event.preventDefault();
         event.stopPropagation();
@@ -3550,13 +3551,53 @@ function fillQuickView(card) {
     });
     head.append(star, close);
     body.appendChild(head);
+    const product = document.createElement("div");
+    product.className = "quick-product";
+    const sourceImage = card.querySelector(".hero-wrap, .thumb-wrap");
+    if (sourceImage) {
+        // Preserve the card's image and its existing missing-image fallback.
+        const image = sourceImage.cloneNode(true);
+        image.className = "quick-image-frame";
+        const img = image.querySelector("img");
+        if (img) img.loading = "eager";
+        product.appendChild(image);
+    }
+    const identity = document.createElement("div");
+    identity.className = "quick-identity";
+    const store = document.createElement("p");
+    store.className = "quick-kicker";
+    store.textContent = item.store || card.dataset.store || "";
+    const price = document.createElement("div");
+    price.className = "quick-price";
+    const amount = document.createElement("strong");
+    amount.textContent = quickMoney(facts.symbol, card.dataset.price);
+    price.appendChild(amount);
+    const discount = quickPercent(card.dataset.discount);
+    if (discount) {
+        const badge = document.createElement("span");
+        badge.className = "quick-discount";
+        badge.textContent = discount;
+        price.appendChild(badge);
+    }
+    identity.append(store, heading, price);
+    product.appendChild(identity);
+    body.appendChild(product);
     syncQuickStar(card);
-    if (facts.points.length) {
+    if (facts.points.length >= 5) {
         const chart = document.createElement("div");
         chart.className = "quick-chart";
         body.appendChild(chart);
         drawQuickChart(chart, facts);
+    } else {
+        const note = document.createElement("p");
+        note.className = "quick-tracking";
+        const since = quickShortDate(item.first) || facts.startText;
+        note.textContent = since ? "Tracking since " + since : "Price history is building";
+        body.appendChild(note);
     }
+    const details = document.createElement("div");
+    details.className = "quick-details";
+    body.appendChild(details);
     if (facts.rows.length) {
         const list = document.createElement("dl");
         list.className = "quick-facts";
@@ -3567,7 +3608,7 @@ function fillQuickView(card) {
             value.textContent = row.value;
             list.append(term, value);
         });
-        body.appendChild(list);
+        details.appendChild(list);
     }
     if (facts.specs.length) {
         const block = document.createElement("div");
@@ -3576,10 +3617,18 @@ function fillQuickView(card) {
             const line = document.createElement("p");
             const label = document.createElement("span");
             label.textContent = row.label;
-            line.append(label, document.createTextNode(" " + row.value));
+            const chips = document.createElement("span");
+            chips.className = "quick-chips";
+            row.value.split(",").forEach(value => {
+                const chip = document.createElement("span");
+                chip.className = "quick-spec-chip";
+                chip.textContent = value.trim();
+                chips.appendChild(chip);
+            });
+            line.append(label, chips);
             block.appendChild(line);
         });
-        body.appendChild(block);
+        details.appendChild(block);
     }
     if (facts.stores.length) {
         const block = document.createElement("div");
@@ -3652,28 +3701,35 @@ function placeQuickView(card) {
         closeQuickView();
         return;
     }
-    const margin = 4;
+    const margin = 8;
     const topLimit = quickTopLimit();
-    const left = Math.max(margin, rect.left);
-    const top = Math.max(topLimit, rect.top);
-    const right = Math.min(window.innerWidth - margin, rect.right);
-    const bottom = Math.min(window.innerHeight - margin, rect.bottom);
-    const width = right - left;
-    const height = bottom - top;
-    if (width < 80 || height < 80) {
-        closeQuickView();
+    const width = Math.min(560, window.innerWidth - margin * 2);
+    panel.style.width = width + "px";
+    panel.style.height = "auto";
+    const height = panel.getBoundingClientRect().height;
+    // Overlap the anchor slightly so there is no dead gap on the pointer path.
+    let left = rect.left;
+    if (left + width > window.innerWidth - margin) left = rect.right - width;
+    left = Math.max(margin, Math.min(left, window.innerWidth - width - margin));
+    const top = Math.max(topLimit, Math.min(rect.top, window.innerHeight - height - margin));
+    if (height > window.innerHeight - topLimit - margin) {
+        // A short viewport needs the accessible, scrollable sheet rather than clipped facts.
+        panel.classList.add("is-sheet");
+        panel.querySelector(".quick-panel").setAttribute("aria-modal", "true");
+        panel.style.left = panel.style.top = panel.style.width = panel.style.height = "";
+        document.body.classList.add("quick-sheet");
         return;
     }
     panel.style.left = left + "px";
     panel.style.top = top + "px";
-    panel.style.width = width + "px";
-    panel.style.height = height + "px";
 }
 
 function closeQuickView() {
     clearTimeout(quickTimer);
     clearTimeout(quickCloseTimer);
     const panel = document.getElementById("quickView");
+    const returnFocus = quickPinned && panel && panel.contains(document.activeElement)
+        && quickCard && quickCard.querySelector(".card-more");
     if (panel) {
         panel.hidden = true;
         panel.classList.remove("is-sheet");
@@ -3688,6 +3744,7 @@ function closeQuickView() {
     quickPinned = false;
     quickCard = null;
     setQuickExpanded(false);
+    if (returnFocus && returnFocus.isConnected) returnFocus.focus({ preventScroll: true });
 }
 
 function openQuickView(card, pinned) {
