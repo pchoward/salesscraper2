@@ -100,6 +100,207 @@ assert.ok(panel.classList.contains('is-sheet'));
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
 
+    def test_price_context_score_chart_and_offers(self):
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        add_days = source[source.index("function addDays("):source.index("function markerColor(")]
+        facts = source[source.index("function quickClip("):source.index("function quickGalleryImages(")]
+        gallery = source[source.index("function quickGalleryImages("):source.index("function syncQuickStar(")]
+        nearest = source[source.index("function nearestChartHit("):source.index("const FILTER_SECTION_KEY")]
+        rendering = source[source.index("function fillQuickView("):source.index("function quickTopLimit(")]
+        script = r'''
+const assert = require('node:assert/strict');
+const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+class Element {
+    constructor(tag = 'div') {
+        this.tag = tag; this.children = []; this.style = {}; this.attrs = {}; this.className = '';
+        this.events = {}; this.dataset = {}; this._text = '';
+    }
+    append(...nodes) { this.children.push(...nodes); }
+    appendChild(node) { this.append(node); }
+    replaceChildren(...nodes) { this.children = nodes; }
+    setAttribute(name, value) { this.attrs[name] = String(value); if (name === 'class') this.className = String(value); }
+    getAttribute(name) { return this.attrs[name] || null; }
+    removeAttribute(name) { delete this.attrs[name]; }
+    addEventListener(name, callback) { this.events[name] = callback; }
+    cloneNode(deep) {
+        const copy = new Element(this.tag);
+        copy.className = this.className; copy.attrs = Object.assign({}, this.attrs); copy._text = this._text;
+        if (deep) copy.children = this.children.map(child => child.cloneNode(true));
+        return copy;
+    }
+    matches(selector) {
+        if (selector.includes(',')) return selector.split(',').some(part => this.matches(part.trim()));
+        const steps = selector.split(/\s+/).filter(Boolean);
+        if (steps.length !== 1) return false;
+        const step = steps[0];
+        if (step.startsWith('.')) return step.split('.').filter(Boolean).every(name => this.className.split(/\s+/).includes(name));
+        return this.tag === step;
+    }
+    querySelector(selector) {
+        if (selector.includes(',')) {
+            for (const part of selector.split(',')) {
+                const found = this.querySelector(part.trim());
+                if (found) return found;
+            }
+            return null;
+        }
+        return this.querySelectorAll(selector)[0] || null;
+    }
+    querySelectorAll(selector) {
+        const steps = selector.split(/\s+/).filter(Boolean);
+        let nodes = this.children.flatMap(child => [child, ...child.querySelectorAll('*')]);
+        if (selector === '*') return nodes;
+        steps.forEach((step, index) => {
+            if (index === 0) nodes = nodes.filter(node => node.matches(step));
+            else nodes = nodes.flatMap(node => node.querySelectorAll(step));
+        });
+        return nodes;
+    }
+    get textContent() { return this.children.length ? this.children.map(child => child.textContent).join('') : this._text; }
+    set textContent(value) { this._text = String(value); this.children = []; }
+    get classList() { return {contains: name => this.className.split(/\s+/).includes(name)}; }
+    getBoundingClientRect() { return {left: 0, top: 0, width: 500, height: 144, right: 500, bottom: 144}; }
+}
+const body = new Element();
+const panel = new Element();
+panel.append(Object.assign(new Element(), {className: 'quick-panel'}));
+const document = {
+    getElementById: id => ({quickView: panel, quickBody: body}[id]),
+    createElement: tag => new Element(tag),
+    createElementNS: (ns, tag) => new Element(tag)
+};
+const window = {innerWidth: 1200, innerHeight: 900};
+function syncQuickStar() {}
+function closeQuickView() {}
+'''
+        script += add_days + facts + gallery + nearest + rendering + r'''
+function factor(label, points, note) {
+    const li = document.createElement('li');
+    if (note) li.className = 'why-note';
+    const span = document.createElement('span');
+    span.textContent = label;
+    const score = document.createElement('b');
+    score.textContent = points;
+    li.append(span, score);
+    return li;
+}
+function whyBlock() {
+    const why = document.createElement('div');
+    why.className = 'why';
+    why.attrs.id = 'why-card-shoe';
+    const strong = document.createElement('strong');
+    strong.textContent = 'Why 65?';
+    const list = document.createElement('ul');
+    list.append(
+        factor('Discount', '+40'),
+        factor('Historical low', '+25'),
+        factor('Recent drop', '+0'),
+        factor('Popular size', '+0'),
+        factor('Tracked 40 days', 'not scored', true)
+    );
+    const legend = document.createElement('p');
+    legend.className = 'why-legend';
+    legend.textContent = 'Days tracked are not added.';
+    why.append(strong, list, legend);
+    const wrap = document.createElement('div');
+    wrap.className = 'card-score';
+    wrap.appendChild(why);
+    return wrap;
+}
+function cardFor(id, dataset, since, lowClass, lowText) {
+    const card = document.createElement('article');
+    card.dataset = Object.assign({id: id, store: 'CCS'}, dataset);
+    const line = document.createElement('p');
+    line.className = 'price-since';
+    line.textContent = since;
+    card.appendChild(line);
+    if (lowClass) {
+        const low = document.createElement('span');
+        low.className = lowClass;
+        low.textContent = lowText;
+        card.appendChild(low);
+    }
+    card.appendChild(whyBlock());
+    const wrap = document.createElement('div');
+    wrap.className = 'hero-wrap';
+    const image = document.createElement('img');
+    image.attrs.src = 'https://example.com/front.jpg';
+    wrap.appendChild(image);
+    card.appendChild(wrap);
+    return card;
+}
+const shoe = {
+    name: 'Nike SB Dunk', store: 'CCS', url: 'https://example.com/shoe', first: '2026-09-01',
+    image: 'https://example.com/front.jpg', images: ['https://example.com/front.jpg', 'https://example.com/side.jpg'],
+    daily: [['2026-09-01', 70], ['2026-10-01', 55], ['2026-10-17', 59.5]],
+    seriesList: [{
+        url: 'https://example.com/shoe',
+        low: {date: '2026-10-01', price: 55},
+        markers: [{date: '2026-10-17', kind: 'drop', price: 59.5, label: 'Price reduction'}]
+    }],
+    offers: [
+        {store: 'CCS', url: 'https://example.com/shoe', price: 59.5, currency: 'USD', cheapest: true, availability: 'On sale'},
+        {store: 'Tactics', url: 'https://example.com/tactics', price: 64, currency: 'USD', cheapest: false, availability: 'On sale'}
+    ]
+};
+const heldItem = {
+    name: 'Held deck', store: 'Zumiez', url: 'https://example.com/held', first: '2026-09-01',
+    image: 'https://example.com/held.jpg', images: [],
+    daily: [['2026-10-17', 40]],
+    offers: [{store: 'Zumiez', url: 'https://example.com/held', price: 40, availability: 'On sale'}]
+};
+const catalog = () => ({items: {shoe: shoe, held: heldItem}, generated: '2026-10-17'});
+const dropCard = cardFor('shoe', {
+    price: '59.50', original: '85', discount: '30', days: '40', daysat: '1', score: '65', hot: '1',
+    drop: '1', lowest: '1', hitlow: '1', fresh: '0'
+}, 'Dropped from $70.00 on Oct 17', 'pill-newlow', 'New low');
+fillQuickView(dropCard);
+assert.equal(body.querySelector('.quick-title').textContent, 'Nike SB Dunk');
+assert.equal(body.querySelector('.quick-gallery-controls').children[1].textContent, '1 / 2');
+assert.deepEqual(body.querySelectorAll('.quick-compare span').map(node => node.textContent), ['Now','Original','Average','Lowest','Tracked']);
+assert.deepEqual(body.querySelectorAll('.quick-compare strong').map(node => node.textContent), ['$59.50','$85.00','$61.50','$55.00','40 days']);
+const signal = body.querySelector('.quick-signal');
+assert.ok(signal.matches('.is-drop'));
+assert.equal(signal.querySelector('strong').textContent, 'New price reduction');
+assert.match(signal.textContent, /New low/);
+assert.equal(body.querySelector('.is-held'), null);
+const score = body.querySelector('.quick-score');
+assert.equal(score.tag, 'details');
+assert.ok(score.matches('.is-hot'));
+assert.equal(score.querySelector('summary').textContent, 'Deal score 65 of 100, hot');
+assert.ok(!score.attrs.open);
+assert.deepEqual(score.querySelectorAll('b').map(node => node.textContent), ['+40','+25','+0','+0','not scored']);
+const offers = body.querySelectorAll('.quick-stores li');
+assert.equal(offers.length, 2);
+assert.equal(offers[0].textContent, 'CCS $59.50On sale · lowest');
+assert.ok(offers[0].matches('.cheapest'));
+assert.equal(offers[1].querySelector('a').href, 'https://example.com/tactics');
+const chart = body.querySelector('.history-chart');
+assert.match(chart.attrs['aria-label'], /Hover or tap/);
+assert.equal(body.querySelector('.quick-readout').textContent, 'Oct 17, 2026 · $59.50');
+chart.events.mousemove({clientX: 488, clientY: 70});
+assert.match(body.querySelector('.quick-readout').textContent, /^Price reduction/);
+chart.events.touchstart({touches: [{clientX: 40, clientY: 40}]});
+assert.match(body.querySelector('.quick-readout').textContent, /Sep 1, 2026 · \$70\.00/);
+assert.equal(body.querySelector('.quick-view-link').textContent, 'View at CCS');
+const heldCard = cardFor('held', {
+    price: '40', original: '80', discount: '50', days: '40', daysat: '40', score: '50', hot: '0',
+    drop: '0', lowest: '1', hitlow: '0', fresh: '0', store: 'Zumiez'
+}, 'Price unchanged since Sep 1', 'quiet-low', 'Verified low');
+fillQuickView(heldCard);
+const heldSignal = body.querySelector('.quick-signal');
+assert.ok(heldSignal.matches('.is-held'));
+assert.equal(heldSignal.querySelector('strong').textContent, 'Unchanged price, already low');
+assert.match(heldSignal.textContent, /Verified low/);
+assert.equal(body.querySelector('.is-drop'), null);
+assert.equal(body.querySelector('.quick-chart'), null);
+assert.equal(body.querySelector('.quick-stores'), null);
+assert.equal(body.querySelector('.quick-tracking').textContent, 'Tracking since Sep 1');
+assert.equal(body.querySelector('.quick-gallery').tag, 'div');
+'''
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

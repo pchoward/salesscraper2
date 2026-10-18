@@ -961,7 +961,10 @@ const shoe = quickFacts(
     store: "CCS",
     first: "2026-09-01",
     daily: [["2026-07-18", 90], ["2026-09-01", 70], ["2026-10-17", 59.5]],
-    seriesList: [{url: "https://example.com/shoe", low: {date: "2026-10-01", price: 55}, points: []}],
+    seriesList: [{url: "https://example.com/shoe", low: {date: "2026-10-01", price: 55}, points: [], markers: [
+      {date: "2026-07-01", kind: "drop", price: 80, label: "old"},
+      {date: "2026-10-17", kind: "drop", price: 59.5, label: "Price reduction −$10.50"}
+    ]}],
     offers: [
       {store: "CCS", url: "https://example.com/shoe", price: 59.5, currency: "USD", cheapest: false},
       {store: "Tactics", url: "https://example.com/tactics", price: 64, currency: "USD", cheapest: false}
@@ -982,6 +985,8 @@ if (shoe.points.some(point => point[0] === "2026-07-18")) throw new Error("old p
 if (shoe.specs.map(row => row.label + " " + row.value).join() !== "In stock 7.5, 8") throw new Error(JSON.stringify(shoe.specs));
 if (shoe.stores.length !== 1 || shoe.stores[0].label !== "Tactics $64.00") throw new Error(JSON.stringify(shoe.stores));
 if (shoe.viewLabel !== "View at CCS") throw new Error(shoe.viewLabel);
+if (shoe.firstText !== "Sep 1") throw new Error(shoe.firstText);
+if (shoe.markers.length !== 1 || shoe.markers[0].date !== "2026-10-17") throw new Error(JSON.stringify(shoe.markers));
 const deck = quickFacts(
   {price: "49.99", original: "", discount: "", days: "0", daysat: "0", shoesize: "", size: "8.25", length: "31.875", wheelbase: "", diameter: "", duros: "", shape: "", trucksize: "", truckheight: "", construction: "", abec: ""},
   {url: "https://example.com/deck", store: "Zumiez", first: "", daily: [], seriesList: [], offers: [{store: "Zumiez", url: "https://example.com/deck", price: 49.99}]},
