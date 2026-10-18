@@ -3107,7 +3107,6 @@ function openProduct(id) {
             link.hidden = true;
         }
     }
-    document.querySelectorAll(".deal-card.is-preview").forEach(card => card.classList.remove("is-preview"));
     document.querySelectorAll(".score-cell.pinned").forEach(cell => {
         cell.classList.remove("pinned");
         cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
@@ -3168,13 +3167,577 @@ function showInsights() {
     paintNav();
 }
 
-function placeCardFloats(card) {
-    const price = card.querySelector(".card-prices");
-    const hover = card.querySelector(".card-hover");
-    const title = card.querySelector(".title-pop");
-    const titleAnchor = card.querySelector(".title-slot") || card;
-    if (hover) placeFloat(hover, card, price);
-    if (title) placeFloat(title, titleAnchor, price);
+const QUICK_OPEN_MS = 300;
+const QUICK_CLOSE_MS = 180;
+let quickTimer = 0;
+let quickCloseTimer = 0;
+let quickCard = null;
+let quickPinned = false;
+
+function quickIsSheet() {
+    if (window.innerWidth <= 800) return true;
+    return window.matchMedia("(pointer: coarse)").matches;
+}
+
+function isQuickOpen() {
+    const panel = document.getElementById("quickView");
+    return !!(panel && !panel.hidden);
+}
+
+function quickClip(points, days, end) {
+    const endDay = String(end || "").slice(0, 10);
+    const start = endDay ? addDays(endDay, -Number(days || 90)) : "";
+    return (points || []).filter(point => {
+        const day = String(point[0] || "").slice(0, 10);
+        if (!day) return false;
+        if (start && day < start) return false;
+        if (endDay && day > endDay) return false;
+        const price = Number(point[1]);
+        return Number.isFinite(price);
+    });
+}
+
+function quickMoney(symbol, amount) {
+    const value = Number(amount);
+    if (!Number.isFinite(value)) return "";
+    return (symbol || "$") + value.toFixed(2);
+}
+
+function quickShortDate(iso) {
+    const parts = String(iso || "").slice(0, 10).split("-");
+    if (parts.length < 3) return "";
+    const month = MONTHS[Number(parts[1]) - 1];
+    const day = Number(parts[2]);
+    if (!month || !day) return "";
+    return month + " " + day;
+}
+
+function quickOwnSeries(item) {
+    const list = (item && item.seriesList) || [];
+    const url = item && item.url;
+    for (let i = 0; i < list.length; i++) {
+        if (url && list[i].url === url) return list[i];
+    }
+    return list[0] || null;
+}
+
+function quickSymbol(item) {
+    const offers = (item && item.offers) || [];
+    for (let i = 0; i < offers.length; i++) {
+        if (item.url && offers[i].url === item.url) {
+            return String(offers[i].currency || "USD").toUpperCase() === "EUR" ? "€" : "$";
+        }
+    }
+    return "$";
+}
+
+function quickPercent(discount) {
+    const value = Number(discount);
+    if (!Number.isFinite(value) || value <= 0) return "";
+    const rounded = Math.round(value * 10) / 10;
+    const text = Math.abs(rounded - Math.round(rounded)) < 0.05
+        ? String(Math.round(rounded))
+        : rounded.toFixed(1);
+    return text + "% off";
+}
+
+function quickDayLabel(count) {
+    const days = Number(count);
+    if (!Number.isFinite(days) || days <= 0) return "";
+    return days + (days === 1 ? " day" : " days");
+}
+
+function quickFacts(dataset, item, generated) {
+    dataset = dataset || {};
+    item = item || {};
+    const symbol = quickSymbol(item);
+    const series = quickOwnSeries(item);
+    let points = quickClip(item.daily || [], 90, generated);
+    if (!points.length && series) points = quickClip(series.points || [], 90, generated);
+    const prices = points.map(point => Number(point[1]));
+    let average = null;
+    if (prices.length) {
+        const sum = prices.reduce((total, price) => total + price, 0);
+        average = Math.round((sum / prices.length) * 100) / 100;
+    }
+    const lowInfo = series && series.low;
+    let atl = null;
+    if (lowInfo && Number.isFinite(Number(lowInfo.price))) {
+        atl = { price: Number(lowInfo.price), date: String(lowInfo.date || "").slice(0, 10) };
+    }
+    const rows = [];
+    const list = Number(dataset.original);
+    const now = Number(dataset.price);
+    if (Number.isFinite(list) && list > 0) rows.push({ label: "List price", value: quickMoney(symbol, list) });
+    if (Number.isFinite(list) && Number.isFinite(now) && list - now > 0.009) {
+        rows.push({ label: "You save", value: quickMoney(symbol, list - now) });
+    }
+    const percent = quickPercent(dataset.discount);
+    if (percent) rows.push({ label: "Off", value: percent });
+    if (atl) {
+        const when = quickShortDate(atl.date);
+        rows.push({
+            label: "All-time low",
+            value: quickMoney(symbol, atl.price) + (when ? " on " + when : "")
+        });
+    }
+    if (average != null) rows.push({ label: "90-day average", value: quickMoney(symbol, average) });
+    const first = quickShortDate(item.first);
+    if (first) rows.push({ label: "First seen", value: first });
+    const tracked = quickDayLabel(dataset.days);
+    if (tracked) rows.push({ label: "Tracked", value: tracked });
+    const atPrice = quickDayLabel(dataset.daysat);
+    if (atPrice && String(dataset.daysat) !== String(dataset.days)) {
+        rows.push({ label: "At this price", value: atPrice });
+    }
+    const specs = [];
+    function addSpec(label, value, suffix) {
+        const text = String(value == null ? "" : value).trim();
+        if (!text) return;
+        specs.push({ label: label, value: suffix ? text + suffix : text });
+    }
+    if (String(dataset.shoesize || "").trim()) {
+        addSpec("In stock", String(dataset.shoesize).split(",").map(size => size.trim()).filter(Boolean).join(", "));
+    }
+    addSpec("Width", dataset.size, '"');
+    addSpec("Length", dataset.length, '"');
+    addSpec("Wheelbase", dataset.wheelbase, '"');
+    addSpec("Diameter", dataset.diameter);
+    if (String(dataset.duros || "").trim()) {
+        addSpec("Durometer", String(dataset.duros).split(",").map(bit => bit.trim()).filter(Boolean).join(", "));
+    }
+    addSpec("Shape", dataset.shape);
+    addSpec("Truck size", dataset.trucksize);
+    addSpec("Truck height", dataset.truckheight);
+    addSpec("Construction", dataset.construction);
+    addSpec("ABEC", dataset.abec);
+    const stores = [];
+    (item.offers || []).forEach(offer => {
+        if (!offer || !offer.url || offer.url === item.url) return;
+        const price = quickMoney(String(offer.currency || "USD").toUpperCase() === "EUR" ? "€" : symbol, offer.price);
+        let label = offer.store || "Store";
+        if (price) label += " " + price;
+        if (offer.cheapest) label += " · lowest";
+        stores.push({ url: offer.url, label: label });
+    });
+    const viewUrl = item.url || "";
+    const storeName = item.store || dataset.store || "the store";
+    return {
+        symbol: symbol,
+        points: points,
+        average: average,
+        atl: atl,
+        start: points.length ? String(points[0][0]).slice(0, 10) : "",
+        end: points.length ? String(points[points.length - 1][0]).slice(0, 10) : "",
+        startText: points.length ? quickShortDate(points[0][0]) : "",
+        endText: points.length ? quickShortDate(points[points.length - 1][0]) : "",
+        rows: rows,
+        specs: specs,
+        stores: stores,
+        viewUrl: viewUrl,
+        viewLabel: viewUrl ? "View at " + storeName : ""
+    };
+}
+
+function drawQuickChart(host, facts) {
+    const points = (facts && facts.points) || [];
+    host.replaceChildren();
+    if (!points.length) return;
+    const prices = points.map(point => Number(point[1])).filter(value => Number.isFinite(value));
+    if (!prices.length) return;
+    const width = 320;
+    const height = 118;
+    const pad = { l: 46, r: 12, t: 14, b: 24 };
+    const low = Math.min.apply(null, prices);
+    const high = Math.max.apply(null, prices);
+    const span = high - low || 1;
+    const symbol = facts.symbol || "$";
+    function axisPrice(price) {
+        const digits = span < 10 ? 2 : 0;
+        return symbol + Number(price).toFixed(digits);
+    }
+    function xOf(iso) {
+        const start = Date.parse(String(facts.start || points[0][0]).slice(0, 10) + "T00:00:00Z");
+        const end = Date.parse(String(facts.end || points[points.length - 1][0]).slice(0, 10) + "T00:00:00Z");
+        const time = Date.parse(String(iso).slice(0, 10) + "T00:00:00Z");
+        const plot = width - pad.l - pad.r;
+        if (!Number.isFinite(start) || !Number.isFinite(end) || end === start) return pad.l + plot / 2;
+        return pad.l + Math.min(1, Math.max(0, (time - start) / (end - start))) * plot;
+    }
+    function yOf(price) {
+        return pad.t + (height - pad.t - pad.b) * (1 - (price - low) / span);
+    }
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+    svg.setAttribute("class", "history-chart");
+    svg.setAttribute("role", "img");
+    const avgText = facts.average == null ? "" : " Average " + symbol + Number(facts.average).toFixed(2) + ".";
+    svg.setAttribute(
+        "aria-label",
+        "90-day price history. High " + symbol + high.toFixed(2) + ", low " + symbol + low.toFixed(2) + "." + avgText
+    );
+    const color = SPARK_COLOR[sparkDirection(points)] || SPARK_COLOR.flat;
+    if (points.length >= 2) {
+        const poly = document.createElementNS(svg.namespaceURI, "polyline");
+        poly.setAttribute("fill", "none");
+        poly.setAttribute("stroke", color);
+        poly.setAttribute("stroke-width", "2.4");
+        poly.setAttribute("points", points.map(point => xOf(point[0]).toFixed(1) + "," + yOf(Number(point[1])).toFixed(1)).join(" "));
+        svg.appendChild(poly);
+    }
+    if (points.length >= 2 && facts.average != null && high !== low) {
+        const y = yOf(Number(facts.average));
+        const avg = document.createElementNS(svg.namespaceURI, "line");
+        avg.setAttribute("x1", String(pad.l));
+        avg.setAttribute("x2", String(width - pad.r));
+        avg.setAttribute("y1", y.toFixed(1));
+        avg.setAttribute("y2", y.toFixed(1));
+        avg.setAttribute("stroke", "#64748b");
+        avg.setAttribute("stroke-dasharray", "4 3");
+        avg.setAttribute("stroke-width", "1.2");
+        svg.appendChild(avg);
+        const tag = document.createElementNS(svg.namespaceURI, "text");
+        tag.setAttribute("x", String(width - pad.r));
+        tag.setAttribute("y", Math.max(11, y - 3).toFixed(1));
+        tag.setAttribute("text-anchor", "end");
+        tag.setAttribute("class", "chart-axis");
+        tag.textContent = "avg " + axisPrice(facts.average);
+        svg.appendChild(tag);
+    }
+    const seen = {};
+    [low, high].forEach(price => {
+        const key = price.toFixed(2);
+        if (seen[key]) return;
+        seen[key] = true;
+        const label = document.createElementNS(svg.namespaceURI, "text");
+        label.setAttribute("x", "2");
+        label.setAttribute("y", (yOf(price) + 4).toFixed(1));
+        label.setAttribute("class", "chart-axis");
+        label.textContent = axisPrice(price);
+        svg.appendChild(label);
+    });
+    let highIndex = 0;
+    let lowIndex = 0;
+    prices.forEach((price, index) => {
+        if (price >= prices[highIndex]) highIndex = index;
+        if (price <= prices[lowIndex]) lowIndex = index;
+    });
+    const atlDay = facts.atl && facts.atl.date;
+    const markIndexes = highIndex === lowIndex ? [lowIndex] : [lowIndex, highIndex];
+    markIndexes.forEach(index => {
+        const point = points[index];
+        const mark = document.createElementNS(svg.namespaceURI, "circle");
+        mark.setAttribute("cx", xOf(point[0]).toFixed(1));
+        mark.setAttribute("cy", yOf(Number(point[1])).toFixed(1));
+        mark.setAttribute("r", "3.5");
+        const isLow = atlDay && String(point[0]).slice(0, 10) === atlDay;
+        mark.setAttribute("fill", isLow ? "#ca8a04" : color);
+        mark.setAttribute("stroke", "#ffffff");
+        mark.setAttribute("stroke-width", "1.2");
+        svg.appendChild(mark);
+    });
+    const startLabel = document.createElementNS(svg.namespaceURI, "text");
+    startLabel.setAttribute("x", String(pad.l));
+    startLabel.setAttribute("y", String(height - 6));
+    startLabel.setAttribute("class", "chart-axis");
+    startLabel.textContent = facts.startText || "";
+    svg.appendChild(startLabel);
+    if (facts.endText && facts.endText !== facts.startText) {
+        const endLabel = document.createElementNS(svg.namespaceURI, "text");
+        endLabel.setAttribute("x", String(width - pad.r));
+        endLabel.setAttribute("y", String(height - 6));
+        endLabel.setAttribute("text-anchor", "end");
+        endLabel.setAttribute("class", "chart-axis");
+        endLabel.textContent = facts.endText;
+        svg.appendChild(endLabel);
+    }
+    host.appendChild(svg);
+}
+
+function syncQuickStar(card) {
+    const button = document.querySelector("#quickView .quick-star");
+    const source = card && card.querySelector(".star");
+    if (!button || !source) return;
+    const on = source.getAttribute("aria-pressed") === "true" || source.classList.contains("on");
+    button.classList.toggle("on", on);
+    button.setAttribute("aria-pressed", on ? "true" : "false");
+    button.setAttribute("aria-label", "Watch this item");
+    button.textContent = on ? "★" : "☆";
+}
+
+function setQuickExpanded(on) {
+    document.querySelectorAll(".card-more[aria-expanded='true']").forEach(button => {
+        button.setAttribute("aria-expanded", "false");
+    });
+    if (!on || !quickCard) return;
+    const more = quickCard.querySelector(".card-more");
+    if (more) more.setAttribute("aria-expanded", "true");
+}
+
+function fillQuickView(card) {
+    const panel = document.getElementById("quickView");
+    const body = document.getElementById("quickBody");
+    if (!panel || !body || !card) return;
+    const item = (catalog().items || {})[card.dataset.id] || {};
+    const facts = quickFacts(card.dataset, item, catalog().generated || "");
+    const dialog = panel.querySelector(".quick-panel");
+    body.replaceChildren();
+    const heading = document.createElement("h2");
+    heading.id = "quickLabel";
+    heading.className = "sr-only";
+    heading.textContent = item.name || "Deal quick view";
+    body.appendChild(heading);
+    if (dialog) dialog.setAttribute("aria-labelledby", "quickLabel");
+    const head = document.createElement("div");
+    head.className = "quick-head";
+    const star = document.createElement("button");
+    star.type = "button";
+    star.className = "star quick-star";
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "quick-close";
+    close.textContent = "Close";
+    close.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopPropagation();
+        closeQuickView();
+    });
+    head.append(star, close);
+    body.appendChild(head);
+    syncQuickStar(card);
+    if (facts.points.length) {
+        const chart = document.createElement("div");
+        chart.className = "quick-chart";
+        body.appendChild(chart);
+        drawQuickChart(chart, facts);
+    }
+    if (facts.rows.length) {
+        const list = document.createElement("dl");
+        list.className = "quick-facts";
+        facts.rows.forEach(row => {
+            const term = document.createElement("dt");
+            term.textContent = row.label;
+            const value = document.createElement("dd");
+            value.textContent = row.value;
+            list.append(term, value);
+        });
+        body.appendChild(list);
+    }
+    if (facts.specs.length) {
+        const block = document.createElement("div");
+        block.className = "quick-specs";
+        facts.specs.forEach(row => {
+            const line = document.createElement("p");
+            const label = document.createElement("span");
+            label.textContent = row.label;
+            line.append(label, document.createTextNode(" " + row.value));
+            block.appendChild(line);
+        });
+        body.appendChild(block);
+    }
+    if (facts.stores.length) {
+        const block = document.createElement("div");
+        block.className = "quick-stores";
+        const kicker = document.createElement("p");
+        kicker.className = "quick-kicker";
+        kicker.textContent = "Also at";
+        block.appendChild(kicker);
+        facts.stores.forEach(store => {
+            const line = document.createElement("p");
+            const link = document.createElement("a");
+            link.href = store.url;
+            link.target = "_blank";
+            link.rel = "noopener";
+            link.textContent = store.label;
+            line.appendChild(link);
+            block.appendChild(line);
+        });
+        body.appendChild(block);
+    }
+    if (facts.viewUrl) {
+        const link = document.createElement("a");
+        link.className = "quick-view-link";
+        link.href = facts.viewUrl;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = facts.viewLabel;
+        body.appendChild(link);
+    }
+    appendQuickScore(body, card);
+}
+
+function appendQuickScore(body, card) {
+    const why = card.querySelector(".card-score .why");
+    const score = card.dataset.score;
+    if (!why && !score) return;
+    const block = document.createElement("div");
+    block.className = "quick-score";
+    const heading = document.createElement("p");
+    heading.className = "quick-kicker";
+    heading.textContent = "Score " + (score || "") + (card.dataset.hot === "1" ? " · HOT" : "");
+    block.appendChild(heading);
+    if (why) {
+        why.querySelectorAll("li").forEach(item => {
+            const points = item.querySelector("b");
+            const earned = points ? points.textContent.trim() : "";
+            if (!earned || earned === "+0" || earned === "not scored") return;
+            const span = item.querySelector("span");
+            const label = span && span.childNodes[0] ? span.childNodes[0].textContent.trim() : "";
+            if (!label) return;
+            const line = document.createElement("p");
+            line.textContent = label + " " + earned;
+            block.appendChild(line);
+        });
+    }
+    body.appendChild(block);
+}
+
+function quickTopLimit() {
+    const bar = document.getElementById("stickyBar");
+    if (!bar) return 4;
+    return Math.max(4, bar.getBoundingClientRect().bottom + 4);
+}
+
+function placeQuickView(card) {
+    const panel = document.getElementById("quickView");
+    if (!panel || panel.classList.contains("is-sheet") || !card) return;
+    const rect = card.getBoundingClientRect();
+    if (rect.width < 40 || rect.height < 40) {
+        closeQuickView();
+        return;
+    }
+    const margin = 4;
+    const topLimit = quickTopLimit();
+    const left = Math.max(margin, rect.left);
+    const top = Math.max(topLimit, rect.top);
+    const right = Math.min(window.innerWidth - margin, rect.right);
+    const bottom = Math.min(window.innerHeight - margin, rect.bottom);
+    const width = right - left;
+    const height = bottom - top;
+    if (width < 80 || height < 80) {
+        closeQuickView();
+        return;
+    }
+    panel.style.left = left + "px";
+    panel.style.top = top + "px";
+    panel.style.width = width + "px";
+    panel.style.height = height + "px";
+}
+
+function closeQuickView() {
+    clearTimeout(quickTimer);
+    clearTimeout(quickCloseTimer);
+    const panel = document.getElementById("quickView");
+    if (panel) {
+        panel.hidden = true;
+        panel.classList.remove("is-sheet");
+        panel.style.left = "";
+        panel.style.top = "";
+        panel.style.width = "";
+        panel.style.height = "";
+        const body = document.getElementById("quickBody");
+        if (body) body.replaceChildren();
+    }
+    document.body.classList.remove("quick-sheet");
+    quickPinned = false;
+    quickCard = null;
+    setQuickExpanded(false);
+}
+
+function openQuickView(card, pinned) {
+    if (!card) return;
+    clearTimeout(quickTimer);
+    clearTimeout(quickCloseTimer);
+    quickCard = card;
+    quickPinned = !!pinned;
+    const panel = document.getElementById("quickView");
+    if (!panel) return;
+    const sheet = quickIsSheet();
+    panel.classList.toggle("is-sheet", sheet);
+    const dialog = panel.querySelector(".quick-panel");
+    if (dialog) dialog.setAttribute("aria-modal", sheet ? "true" : "false");
+    fillQuickView(card);
+    panel.hidden = false;
+    document.body.classList.toggle("quick-sheet", sheet);
+    if (sheet) {
+        panel.style.left = "";
+        panel.style.top = "";
+        panel.style.width = "";
+        panel.style.height = "";
+    } else {
+        placeQuickView(card);
+    }
+    setQuickExpanded(true);
+    if (pinned) {
+        const close = panel.querySelector(".quick-close");
+        if (close) close.focus();
+    }
+}
+
+function onQuickEnter(card) {
+    if (!card || quickIsSheet() || quickPinned) return;
+    clearTimeout(quickCloseTimer);
+    if (quickCard === card && isQuickOpen()) {
+        clearTimeout(quickTimer);
+        return;
+    }
+    if (quickCard && quickCard !== card) closeQuickView();
+    clearTimeout(quickTimer);
+    quickTimer = setTimeout(() => openQuickView(card, false), QUICK_OPEN_MS);
+}
+
+function onQuickLeave(card) {
+    if (quickPinned) return;
+    clearTimeout(quickTimer);
+    if (!isQuickOpen() || quickCard !== card) return;
+    clearTimeout(quickCloseTimer);
+    quickCloseTimer = setTimeout(() => {
+        if (!quickPinned) closeQuickView();
+    }, QUICK_CLOSE_MS);
+}
+
+function wireQuickView() {
+    const panel = document.getElementById("quickView");
+    if (!panel) return;
+    panel.addEventListener("mouseenter", () => {
+        if (!quickPinned) clearTimeout(quickCloseTimer);
+    });
+    panel.addEventListener("mouseleave", event => {
+        if (quickPinned) return;
+        const next = event.relatedTarget;
+        if (next && quickCard && quickCard.contains(next)) return;
+        onQuickLeave(quickCard);
+    });
+    panel.addEventListener("click", event => {
+        if (!panel.classList.contains("is-sheet")) return;
+        if (event.target.closest(".quick-panel")) return;
+        closeQuickView();
+    });
+    document.addEventListener("scroll", event => {
+        if (!quickCard || !isQuickOpen()) return;
+        if (panel.classList.contains("is-sheet")) return;
+        const target = event.target;
+        if (target && target.closest && target.closest("#quickView")) return;
+        if (!quickCard.isConnected) {
+            closeQuickView();
+            return;
+        }
+        placeQuickView(quickCard);
+    }, true);
+    window.addEventListener("resize", () => {
+        if (!quickCard || !isQuickOpen()) return;
+        const sheet = quickIsSheet();
+        if (panel.classList.contains("is-sheet") !== sheet) {
+            openQuickView(quickCard, quickPinned);
+            return;
+        }
+        if (!sheet) placeQuickView(quickCard);
+    });
+    document.addEventListener("click", event => {
+        if (!isQuickOpen()) return;
+        if (event.target.closest("#quickView, .card-more")) return;
+        closeQuickView();
+    });
 }
 
 function placeScoreFloat(cell, anchor) {
@@ -3209,14 +3772,26 @@ function wireDealEvents() {
         }
         const more = event.target.closest(".card-more");
         if (more) {
+            event.preventDefault();
+            event.stopPropagation();
             const card = more.closest(".deal-card");
             if (!card) return;
-            const on = card.classList.toggle("show-detail");
-            more.setAttribute("aria-expanded", on ? "true" : "false");
+            if (isQuickOpen() && quickCard === card) closeQuickView();
+            else openQuickView(card, true);
             return;
         }
         const star = event.target.closest(".star");
         if (star) {
+            if (star.closest("#quickView")) {
+                event.preventDefault();
+                event.stopPropagation();
+                if (quickCard) {
+                    const cardStar = quickCard.querySelector(".star");
+                    if (cardStar) toggleStar(cardStar);
+                    syncQuickStar(quickCard);
+                }
+                return;
+            }
             toggleStar(star);
             return;
         }
@@ -3238,7 +3813,7 @@ function wireDealEvents() {
     document.addEventListener("keydown", event => {
         if (event.key !== "Enter" && event.key !== " ") return;
         const row = event.target.closest(".deal-row, .deal-card");
-        if (!row) return;
+        if (!row || event.target.closest("a, button, input, select, label")) return;
         event.preventDefault();
         openProduct(row.dataset.id);
     });
@@ -3258,15 +3833,17 @@ function wireDealEvents() {
         }
         const card = event.target.closest(".deal-card");
         if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
-        card.classList.add("is-preview");
-        placeCardFloats(card);
+        if (event.relatedTarget && event.relatedTarget.closest && event.relatedTarget.closest("#quickView")) return;
+        onQuickEnter(card);
     });
     document.addEventListener("mouseout", event => {
         const spark = event.target.closest(".spark-hit");
         if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
         const card = event.target.closest(".deal-card");
         if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
-        card.classList.remove("is-preview");
+        const next = event.relatedTarget;
+        if (next && next.closest && next.closest("#quickView")) return;
+        onQuickLeave(card);
     });
     document.addEventListener("focusin", event => {
         const spark = event.target.closest(".spark-hit");
@@ -3281,18 +3858,12 @@ function wireDealEvents() {
             const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
             placeScoreFloat(cell, anchor);
         }
-        const card = event.target.closest(".deal-card");
-        if (!card) return;
-        card.classList.add("is-preview");
-        placeCardFloats(card);
     });
     document.addEventListener("focusout", event => {
         const spark = event.target.closest(".spark-hit");
         if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
-        const card = event.target.closest(".deal-card");
-        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
-        card.classList.remove("is-preview");
     });
+    wireQuickView();
 }
 
 function init() {
@@ -3539,6 +4110,7 @@ function init() {
             closeDrawer();
             closeSparkPanel();
             closeProduct();
+            closeQuickView();
             const drawer = document.getElementById("filterDrawer");
             if (drawer) drawer.classList.remove("is-open");
             document.body.classList.remove("filters-open");
