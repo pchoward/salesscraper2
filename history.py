@@ -23,6 +23,18 @@ Retention policy:
   that the summary is not worth committing forever.
 
 Pruning is safe to run every day. It does not rewrite git history.
+
+Identity (see ``history_identity.py`` for the evidence and the audit):
+
+* A row is keyed by its listing URL.
+* When the name on a URL starts stating a different size (deck width, wheel
+  diameter or durometer, truck size), it is a different product. The earlier
+  product's summary moves to ``earlier_products`` and the price series and
+  all-time low restart, so two sizes never share a low.
+* When a Shopify store (CCS) lists the same product handle under a new path
+  and the old URL is gone from that scan, the row moves to the new URL and
+  the old URL is kept in ``previous_urls``. Nothing else joins two URLs:
+  retailer codes, similar names, and equal names are not proof.
 """
 
 import datetime
@@ -31,6 +43,7 @@ import logging
 from filters import is_meaningful_drop
 
 from filters import filter_reason, item_passes_filters, normalize_product_name, normalize_url
+from history_identity import listing_identity, size_signature, sizes_conflict
 
 logger = logging.getLogger("history")
 
@@ -67,7 +80,11 @@ _ENTRY_FIELDS = (
     "stage",
     "miss_streak",
     "stock",
+    "previous_urls",
+    "earlier_products",
 )
+# Bounded so a URL that keeps changing cannot grow its row forever.
+MAX_IDENTITY_NOTES = 5
 
 
 def _as_date(value):
@@ -234,6 +251,10 @@ def _ordered_entry(entry):
                 continue
         if field == "stock" and value != "out_of_stock":
             continue
+        if field in ("previous_urls", "earlier_products"):
+            if not isinstance(value, list) or not value:
+                continue
+            value = value[-MAX_IDENTITY_NOTES:]
         ordered[field] = value
     ordered.update(_media_fields(entry))
     ordered["prices"] = _clean_prices(entry.get("prices"))
@@ -266,17 +287,137 @@ def _note_price(entry, day, price):
     return entry
 
 
+def _fresh_items(current_data, skip_keys=None, skip_urls=None):
+    """URL -> item scraped in this run: passing filters, not carried, not failed."""
+    skip = {str(key) for key in (skip_keys or [])}
+    carried = {normalize_url(url) for url in (skip_urls or []) if normalize_url(url)}
+    fresh = {}
+    for site_key, items in (current_data or {}).items():
+        if site_key in skip or not isinstance(items, list):
+            continue
+        for item in items:
+            if not isinstance(item, dict) or not item_passes_filters(item):
+                continue
+            url = normalize_url(item.get("url"))
+            if url and url not in carried:
+                fresh.setdefault(url, item)
+    return fresh
+
+
+def reconcile_moved_urls(history, current_data, skip_keys=None, skip_urls=None):
+    """Move a row to its new URL when a Shopify handle changed path.
+
+    Only a Shopify product handle counts as evidence (see
+    ``history_identity``). The new URL must have no row yet, the old URL must
+    be missing from this scan, and exactly one old row may match on store,
+    part, and handle. Returns ``[(old_url, new_url)]``, each logged.
+    """
+    if not isinstance(history, dict):
+        raise TypeError("price history must be a dict")
+    fresh = _fresh_items(current_data, skip_keys, skip_urls)
+    by_handle = {}
+    for url, entry in history.items():
+        if not isinstance(entry, dict):
+            continue
+        identity = listing_identity(url)
+        if identity["basis"] == "shopify-handle":
+            by_handle.setdefault(identity["key"], []).append(url)
+    moves = []
+    for url in sorted(fresh):
+        if url in history:
+            continue
+        identity = listing_identity(url)
+        if identity["basis"] != "shopify-handle":
+            continue
+        item = fresh[url]
+        candidates = [
+            old
+            for old in by_handle.get(identity["key"], [])
+            if old != url
+            and old not in fresh
+            and isinstance(history.get(old), dict)
+            and history[old].get("store") == item.get("store")
+            and history[old].get("part") == item.get("part")
+        ]
+        if len(candidates) != 1:
+            if len(candidates) > 1:
+                logger.warning("Not moving history to %s: %s rows share its Shopify handle", url, len(candidates))
+            continue
+        old = candidates[0]
+        entry = history.pop(old)
+        previous = [value for value in (entry.get("previous_urls") or []) if value not in (old, url)]
+        entry["previous_urls"] = (previous + [old])[-MAX_IDENTITY_NOTES:]
+        entry.pop("miss_streak", None)
+        entry.pop("stock", None)
+        history[url] = entry
+        by_handle[identity["key"]] = [value for value in by_handle[identity["key"]] if value != old] + [url]
+        moves.append((old, url))
+        logger.warning("Price history moved with its Shopify handle: %s -> %s", old, url)
+    return moves
+
+
+def _moved_urls(history):
+    moved = set()
+    for entry in history.values():
+        if isinstance(entry, dict):
+            moved.update(entry.get("previous_urls") or [])
+    return moved
+
+
+def _split_if_new_product(entry, item, day):
+    """Restart the series when the name on this URL now states another size.
+
+    Returns True when it split. The earlier product's summary is kept in
+    ``earlier_products``; its daily points and all-time low leave the series.
+    """
+    old_name = entry.get("name") or ""
+    new_name = item.get("name") or ""
+    part = item.get("part") or entry.get("part") or ""
+    if not old_name or not new_name or (not entry.get("prices") and not entry.get("observation_count")):
+        return False
+    conflict = sizes_conflict(size_signature(old_name, part), size_signature(new_name, part))
+    if not conflict:
+        return False
+    summary = summarize_entry(entry)
+    record = {
+        "name": normalize_product_name(old_name),
+        "first_seen": summary.get("first_seen"),
+        "last_seen": summary.get("last_seen"),
+        "observation_count": summary.get("observation_count"),
+        "all_time_low": summary.get("all_time_low"),
+        "all_time_low_date": summary.get("all_time_low_date"),
+        "replaced_on": day,
+        "reason": "; ".join(f"{attribute} {a} -> {b}" for attribute, (a, b) in conflict.items()),
+    }
+    earlier = list(entry.get("earlier_products") or []) + [{k: v for k, v in record.items() if v is not None}]
+    previous_urls = entry.get("previous_urls")
+    entry.clear()
+    entry["prices"] = {}
+    entry["earlier_products"] = earlier[-MAX_IDENTITY_NOTES:]
+    if previous_urls:
+        entry["previous_urls"] = previous_urls
+    logger.warning(
+        "Price history restarted: %s now names a different size (%s). Earlier product kept in earlier_products.",
+        normalize_url(item.get("url")),
+        record["reason"],
+    )
+    return True
+
+
 def update_price_history(current_data, history, today=None, skip_keys=None, skip_urls=None):
     """Add today's sale price for listings that were actually scraped.
 
     ``skip_keys`` are store/part scrapes that failed. ``skip_urls`` were kept
-    in the catalog after a single miss and are not a new observation.
+    in the catalog after a single miss and are not a new observation. A
+    Shopify listing whose handle moved keeps its history; a URL whose name
+    now states another size starts a new series. See the module docstring.
     """
     if not isinstance(history, dict):
         raise TypeError("price history must be a dict")
     day = _date_str(today or datetime.date.today())
     skip = set(skip_keys or [])
     carried = {normalize_url(url) for url in (skip_urls or []) if normalize_url(url)}
+    reconcile_moved_urls(history, current_data, skip_keys, skip_urls)
     for site_key, items in (current_data or {}).items():
         if site_key in skip:
             continue
@@ -291,6 +432,8 @@ def update_price_history(current_data, history, today=None, skip_keys=None, skip
             if not isinstance(entry, dict):
                 entry = {"prices": {}}
                 history[url] = entry
+            else:
+                _split_if_new_product(entry, item, day)
             entry["name"] = item.get("name") or entry.get("name") or ""
             entry["store"] = item.get("store") or entry.get("store") or ""
             entry["part"] = item.get("part") or entry.get("part") or ""
@@ -325,6 +468,14 @@ def _merge_entries(left, right):
         merged["last_seen"] = max(lasts)
     _copy_media(merged, left)
     _copy_media(merged, right)
+    for field in ("previous_urls", "earlier_products"):
+        notes = []
+        for row in (left, right):
+            for value in row.get(field) or []:
+                if value not in notes:
+                    notes.append(value)
+        if notes:
+            merged[field] = notes[-MAX_IDENTITY_NOTES:]
     lows = []
     for summary in (left_summary, right_summary):
         if summary.get("all_time_low") is not None:
@@ -652,6 +803,9 @@ def record_misses(previous_data, current_data, history, skip_keys=None):
     if not isinstance(history, dict):
         raise TypeError("price history must be a dict")
     skip = {str(key) for key in (skip_keys or [])}
+    # A Shopify listing that moved paths is not a miss; its row follows it.
+    reconcile_moved_urls(history, current_data, skip_keys)
+    moved = _moved_urls(history)
     carried = set()
     for key, items in list((current_data or {}).items()):
         if key in skip or not isinstance(items, list):
@@ -679,7 +833,7 @@ def record_misses(previous_data, current_data, history, skip_keys=None):
             if not url:
                 continue
             prev_urls.add(url)
-            if url in current_urls:
+            if url in current_urls or url in moved:
                 continue
             entry = history.get(url)
             if not isinstance(entry, dict):
