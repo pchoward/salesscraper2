@@ -3366,6 +3366,15 @@ function quickFacts(dataset, item, generated) {
         if (offer.cheapest) label += " · lowest";
         stores.push({ url: offer.url, label: label });
     });
+    const windowEnd = String(generated || "").slice(0, 10);
+    const windowStart = windowEnd ? addDays(windowEnd, -90) : "";
+    const markers = ((series && series.markers) || []).filter(marker => {
+        const day = String((marker && marker.date) || "").slice(0, 10);
+        if (!day) return false;
+        if (windowStart && day < windowStart) return false;
+        if (windowEnd && day > windowEnd) return false;
+        return Number.isFinite(Number(marker.price));
+    });
     const viewUrl = item.url || "";
     const storeName = item.store || dataset.store || "the store";
     return {
@@ -3373,10 +3382,12 @@ function quickFacts(dataset, item, generated) {
         points: points,
         average: average,
         atl: atl,
+        markers: markers,
         start: points.length ? String(points[0][0]).slice(0, 10) : "",
         end: points.length ? String(points[points.length - 1][0]).slice(0, 10) : "",
         startText: points.length ? quickShortDate(points[0][0]) : "",
         endText: points.length ? quickShortDate(points[points.length - 1][0]) : "",
+        firstText: quickShortDate(item.first),
         rows: rows,
         specs: specs,
         stores: stores,
@@ -3536,6 +3547,8 @@ function fillQuickView(card) {
         price.appendChild(badge);
     }
     identity.append(store, heading, price);
+    const signal = quickPriceSignal(card.dataset, card);
+    if (signal) identity.appendChild(quickSignal(signal));
     product.appendChild(identity);
     body.appendChild(product);
     syncQuickStar(card);
@@ -3562,6 +3575,20 @@ function fillQuickView(card) {
         });
         details.appendChild(block);
     }
+    body.appendChild(quickCompareBlock(card.dataset, facts));
+    if ((facts.points || []).length >= 2) {
+        const chart = document.createElement("div");
+        chart.className = "quick-chart";
+        body.appendChild(chart);
+        drawQuickChart(chart, facts);
+    } else if (facts.firstText || facts.startText) {
+        const note = document.createElement("p");
+        note.className = "quick-tracking";
+        note.textContent = "Tracking since " + (facts.firstText || facts.startText);
+        body.appendChild(note);
+    }
+    appendQuickScore(body, card);
+    appendQuickOffers(body, item);
     if (facts.viewUrl) {
         const link = document.createElement("a");
         link.className = "quick-view-link";
@@ -3569,8 +3596,396 @@ function fillQuickView(card) {
         link.target = "_blank";
         link.rel = "noopener";
         link.textContent = facts.viewLabel;
-        identity.appendChild(link);
+        body.appendChild(link);
     }
+}
+
+function quickNodeText(card, selector) {
+    if (!card || !card.querySelector) return "";
+    const node = card.querySelector(selector);
+    if (!node) return "";
+    const wanted = String(selector || "").split(".").filter(Boolean);
+    const classes = String(node.className || "").split(/\s+/);
+    if (wanted.length && !wanted.every(name => classes.indexOf(name) >= 0)) return "";
+    return String(node.textContent || "").trim();
+}
+
+function quickPriceSignal(dataset, card) {
+    dataset = dataset || {};
+    const since = quickNodeText(card, ".price-since");
+    const lowText = quickNodeText(card, ".pill-newlow") || quickNodeText(card, ".quiet-low");
+    const dropped = dataset.drop === "1" || since.indexOf("Dropped from") === 0;
+    const unchanged = since.indexOf("Price unchanged") === 0;
+    const atLow = dataset.lowest === "1" || dataset.hitlow === "1" || !!lowText;
+    if (dropped) {
+        let detail = since || "The sale price fell in the latest scan.";
+        if (atLow && lowText && detail.indexOf(lowText) < 0) detail += " · " + lowText;
+        else if (atLow && !lowText) detail += " · now the lowest tracked price";
+        return { kind: "drop", title: "New price reduction", detail: detail };
+    }
+    if (unchanged && atLow) {
+        let detail = since;
+        if (lowText && detail.indexOf(lowText) < 0) detail += " · " + lowText;
+        return { kind: "held", title: "Unchanged price, already low", detail: detail };
+    }
+    if (since) return { kind: "note", title: since, detail: lowText && since.indexOf(lowText) < 0 ? lowText : "" };
+    return null;
+}
+
+function quickSignal(signal) {
+    const note = document.createElement("p");
+    note.className = "quick-signal is-" + signal.kind;
+    const title = document.createElement("strong");
+    title.textContent = signal.title;
+    note.appendChild(title);
+    if (signal.detail) {
+        const detail = document.createElement("span");
+        detail.textContent = signal.detail;
+        note.appendChild(detail);
+    }
+    return note;
+}
+
+function quickCompare(dataset, facts) {
+    dataset = dataset || {};
+    facts = facts || {};
+    const symbol = facts.symbol || "$";
+    const now = Number(dataset.price);
+    const list = Number(dataset.original);
+    const days = Number(dataset.days);
+    let tracked = "—";
+    if (Number.isFinite(days) && days > 0) tracked = days + (days === 1 ? " day" : " days");
+    else if (dataset.fresh === "1") tracked = "New";
+    const average = facts.average == null ? null : Number(facts.average);
+    const low = facts.atl ? Number(facts.atl.price) : null;
+    return [
+        { label: "Now", value: Number.isFinite(now) ? quickMoney(symbol, now) : "—", hint: "Current sale price" },
+        {
+            label: "Original",
+            value: Number.isFinite(list) && list > 0 ? quickMoney(symbol, list) : "—",
+            hint: "Original price",
+            original: Number.isFinite(list) && list > 0
+        },
+        {
+            label: "Average",
+            value: Number.isFinite(average) ? quickMoney(symbol, average) : "—",
+            hint: "90-day average sale price"
+        },
+        {
+            label: "Lowest",
+            value: Number.isFinite(low) ? quickMoney(symbol, low) : "—",
+            hint: "Lowest tracked price"
+        },
+        { label: "Tracked", value: tracked, hint: "How long this listing has been tracked" }
+    ];
+}
+
+function quickCompareBlock(dataset, facts) {
+    const compare = document.createElement("div");
+    compare.className = "quick-compare";
+    compare.setAttribute("role", "group");
+    compare.setAttribute("aria-label", "Price comparison");
+    quickCompare(dataset, facts).forEach(cell => {
+        const item = document.createElement("div");
+        if (cell.original) item.className = "is-original";
+        const label = document.createElement("span");
+        label.textContent = cell.label;
+        if (cell.hint) label.title = cell.hint;
+        const value = document.createElement("strong");
+        value.textContent = cell.value;
+        item.append(label, value);
+        compare.appendChild(item);
+    });
+    return compare;
+}
+
+function quickHitText(hit, symbol) {
+    const iso = String((hit && hit.date) || "").slice(0, 10);
+    const parts = iso.split("-");
+    let when = iso;
+    if (typeof MONTHS !== "undefined" && parts.length >= 3) {
+        const month = MONTHS[Number(parts[1]) - 1];
+        if (month) when = month + " " + Number(parts[2]) + ", " + parts[0];
+    }
+    const price = Number(hit && hit.price);
+    if (Number.isFinite(price)) when += " · " + (symbol || "$") + price.toFixed(2);
+    if (hit && hit.kind === "drop") return "Price reduction · " + when;
+    if (hit && hit.kind === "low") return "Lowest tracked price · " + when;
+    if (hit && hit.label && hit.kind) return hit.label + " · " + when;
+    return when;
+}
+
+function drawQuickChart(host, facts) {
+    const points = (facts && facts.points) || [];
+    host.replaceChildren();
+    if (points.length < 2) return;
+    const prices = points.map(point => Number(point[1])).filter(value => Number.isFinite(value));
+    if (prices.length < 2) return;
+    const width = 500;
+    const height = window.innerWidth > 800 && window.innerHeight <= 850 ? 118 : 144;
+    const pad = { l: 58, r: 12, t: 14, b: 24 };
+    const low = Math.min.apply(null, prices);
+    const high = Math.max.apply(null, prices);
+    const span = high - low || 1;
+    const symbol = facts.symbol || "$";
+    function axisPrice(price) {
+        return symbol + Number(price).toFixed(span < 10 ? 2 : 0);
+    }
+    function xOf(iso) {
+        const start = Date.parse(String(facts.start || points[0][0]).slice(0, 10) + "T00:00:00Z");
+        const end = Date.parse(String(facts.end || points[points.length - 1][0]).slice(0, 10) + "T00:00:00Z");
+        const time = Date.parse(String(iso).slice(0, 10) + "T00:00:00Z");
+        const plot = width - pad.l - pad.r;
+        if (!Number.isFinite(start) || !Number.isFinite(end) || end === start) return pad.l + plot / 2;
+        return pad.l + Math.min(1, Math.max(0, (time - start) / (end - start))) * plot;
+    }
+    function yOf(price) {
+        if (high === low) return pad.t + (height - pad.t - pad.b) / 2;
+        return pad.t + (height - pad.t - pad.b) * (1 - (price - low) / span);
+    }
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 " + width + " " + height);
+    svg.setAttribute("class", "history-chart");
+    svg.setAttribute("role", "img");
+    svg.setAttribute("tabindex", "0");
+    const avgText = facts.average == null ? "" : " Average " + symbol + Number(facts.average).toFixed(2) + ".";
+    svg.setAttribute(
+        "aria-label",
+        "90-day price history. High " + symbol + high.toFixed(2) + ", low " + symbol + low.toFixed(2) + "." +
+        avgText + " Hover or tap for a date and price."
+    );
+    const color = (typeof SPARK_COLOR !== "undefined" && typeof sparkDirection === "function")
+        ? (SPARK_COLOR[sparkDirection(points)] || SPARK_COLOR.flat)
+        : "#334155";
+    const poly = document.createElementNS(ns, "polyline");
+    poly.setAttribute("fill", "none");
+    poly.setAttribute("stroke", color);
+    poly.setAttribute("stroke-width", "2.4");
+    poly.setAttribute("points", points.map(point => xOf(point[0]).toFixed(1) + "," + yOf(Number(point[1])).toFixed(1)).join(" "));
+    svg.appendChild(poly);
+    if (facts.average != null && high !== low) {
+        const avgPrice = Number(facts.average);
+        if (avgPrice >= low - 0.001 && avgPrice <= high + 0.001) {
+            const y = yOf(avgPrice);
+            const avg = document.createElementNS(ns, "line");
+            avg.setAttribute("x1", String(pad.l));
+            avg.setAttribute("x2", String(width - pad.r));
+            avg.setAttribute("y1", y.toFixed(1));
+            avg.setAttribute("y2", y.toFixed(1));
+            avg.setAttribute("stroke", "#64748b");
+            avg.setAttribute("stroke-dasharray", "4 3");
+            avg.setAttribute("stroke-width", "1.2");
+            svg.appendChild(avg);
+        }
+    }
+    const seen = {};
+    [low, high].forEach(price => {
+        const key = Number(price).toFixed(2);
+        if (seen[key]) return;
+        seen[key] = true;
+        const label = document.createElementNS(ns, "text");
+        label.setAttribute("x", "2");
+        label.setAttribute("y", (yOf(price) + 4).toFixed(1));
+        label.setAttribute("class", "chart-axis");
+        label.textContent = axisPrice(price);
+        svg.appendChild(label);
+    });
+    const startLabel = document.createElementNS(ns, "text");
+    startLabel.setAttribute("x", String(pad.l));
+    startLabel.setAttribute("y", String(height - 6));
+    startLabel.setAttribute("class", "chart-axis");
+    startLabel.textContent = facts.startText || "";
+    svg.appendChild(startLabel);
+    if (facts.endText && facts.endText !== facts.startText) {
+        const endLabel = document.createElementNS(ns, "text");
+        endLabel.setAttribute("x", String(width - pad.r));
+        endLabel.setAttribute("y", String(height - 6));
+        endLabel.setAttribute("text-anchor", "end");
+        endLabel.setAttribute("class", "chart-axis");
+        endLabel.textContent = facts.endText;
+        svg.appendChild(endLabel);
+    }
+    const last = points[points.length - 1];
+    const endDot = document.createElementNS(ns, "circle");
+    endDot.setAttribute("cx", xOf(last[0]).toFixed(1));
+    endDot.setAttribute("cy", yOf(Number(last[1])).toFixed(1));
+    endDot.setAttribute("r", "3.6");
+    endDot.setAttribute("fill", color);
+    endDot.setAttribute("stroke", "#ffffff");
+    endDot.setAttribute("stroke-width", "1.2");
+    svg.appendChild(endDot);
+    const hits = points.map(point => ({
+        x: xOf(point[0]),
+        y: yOf(Number(point[1])),
+        date: point[0],
+        price: point[1]
+    }));
+    const currentHit = hits[hits.length - 1];
+    (facts.markers || []).forEach(marker => {
+        const price = Number(marker.price);
+        if (!Number.isFinite(price)) return;
+        const mx = xOf(marker.date);
+        const my = yOf(price);
+        const mark = document.createElementNS(ns, "circle");
+        mark.setAttribute("cx", mx.toFixed(1));
+        mark.setAttribute("cy", my.toFixed(1));
+        mark.setAttribute("r", marker.kind === "drop" ? "6" : "4.5");
+        const fill = typeof markerColor === "function"
+            ? markerColor(marker.kind)
+            : (marker.kind === "drop" ? "#15803d" : "#334155");
+        mark.setAttribute("fill", fill);
+        mark.setAttribute("stroke", marker.kind === "drop" ? "#14532d" : "#ffffff");
+        mark.setAttribute("stroke-width", marker.kind === "drop" ? "2" : "1.2");
+        svg.appendChild(mark);
+        hits.push({
+            x: mx,
+            y: my,
+            date: marker.date,
+            price: price,
+            kind: marker.kind,
+            label: marker.label || ""
+        });
+    });
+    if (facts.atl && facts.atl.date) {
+        const atlPrice = Number(facts.atl.price);
+        const day = String(facts.atl.date).slice(0, 10);
+        const inWindow = (!facts.start || day >= facts.start) && (!facts.end || day <= facts.end);
+        if (inWindow && Number.isFinite(atlPrice)) {
+            const mx = xOf(day);
+            const my = yOf(atlPrice);
+            const mark = document.createElementNS(ns, "circle");
+            mark.setAttribute("cx", mx.toFixed(1));
+            mark.setAttribute("cy", my.toFixed(1));
+            mark.setAttribute("r", "5");
+            mark.setAttribute("fill", "#ca8a04");
+            mark.setAttribute("stroke", "#ffffff");
+            mark.setAttribute("stroke-width", "1.2");
+            svg.appendChild(mark);
+            hits.push({ x: mx, y: my, date: day, price: atlPrice, kind: "low", label: "Lowest tracked price" });
+        }
+    }
+    const readout = document.createElement("p");
+    readout.className = "quick-readout";
+    readout.textContent = currentHit ? quickHitText(currentHit, symbol) : "";
+    function pick(x, y) {
+        if (typeof nearestChartHit === "function") return nearestChartHit(hits, x, y);
+        let best = hits[0];
+        let bestD = Infinity;
+        hits.forEach(hit => {
+            const d = Math.abs(hit.x - x);
+            if (d < bestD) {
+                best = hit;
+                bestD = d;
+            }
+        });
+        return best;
+    }
+    function showAt(clientX, clientY) {
+        const rect = svg.getBoundingClientRect();
+        if (!rect.width || !Number.isFinite(clientX)) return;
+        const x = (clientX - rect.left) * (width / rect.width);
+        const y = rect.height ? (clientY - rect.top) * (height / rect.height) : 0;
+        const hit = pick(x, y);
+        if (!hit) return;
+        readout.textContent = quickHitText(hit, symbol);
+        if (typeof showTip === "function") {
+            showTip({ clientX: clientX, clientY: clientY }, readout.textContent);
+            if (typeof ensureSparkTip === "function") {
+                const tip = ensureSparkTip();
+                if (tip && tip.style) tip.style.zIndex = "120";
+            }
+        }
+    }
+    svg.addEventListener("mousemove", event => {
+        if (typeof sparkPinned !== "undefined") sparkPinned = false;
+        showAt(event.clientX, event.clientY);
+    });
+    svg.addEventListener("mouseleave", () => {
+        if (typeof sparkPinned !== "undefined" && sparkPinned) return;
+        if (typeof hideSparkTip === "function") hideSparkTip();
+    });
+    function touchAt(event) {
+        const touch = (event.touches && event.touches[0]) || (event.changedTouches && event.changedTouches[0]);
+        if (!touch) return;
+        if (typeof sparkPinned !== "undefined") sparkPinned = true;
+        showAt(touch.clientX, touch.clientY);
+    }
+    svg.addEventListener("touchstart", touchAt, { passive: true });
+    svg.addEventListener("touchmove", touchAt, { passive: true });
+    svg.addEventListener("click", event => {
+        if (event.stopPropagation) event.stopPropagation();
+        if (typeof sparkPinned !== "undefined") sparkPinned = true;
+        showAt(event.clientX, event.clientY);
+    });
+    host.appendChild(svg);
+    host.appendChild(readout);
+    const legend = document.createElement("p");
+    legend.className = "chart-legend";
+    legend.textContent = "Green: price reduction. Gold: lowest tracked price. Dashed: 90-day average.";
+    host.appendChild(legend);
+}
+
+function appendQuickScore(parent, card) {
+    const score = card.dataset && card.dataset.score;
+    let why = null;
+    if (card.querySelector) {
+        const node = card.querySelector(".card-score .why");
+        if (node && String(node.className || "").split(/\s+/).indexOf("why") >= 0) why = node;
+    }
+    if (!why && (score == null || score === "")) return;
+    const block = document.createElement("details");
+    block.className = "quick-score" + (card.dataset && card.dataset.hot === "1" ? " is-hot" : "");
+    const summary = document.createElement("summary");
+    summary.textContent = "Deal score " + (score || "—") + " of 100" + (card.dataset && card.dataset.hot === "1" ? ", hot" : "");
+    block.appendChild(summary);
+    if (why && why.cloneNode) {
+        const copy = why.cloneNode(true);
+        if (copy.removeAttribute) {
+            copy.removeAttribute("id");
+            copy.removeAttribute("role");
+        }
+        block.appendChild(copy);
+    }
+    parent.appendChild(block);
+}
+
+function appendQuickOffers(parent, item) {
+    const rows = [];
+    ((item && item.offers) || []).forEach(offer => {
+        if (!offer || !offer.url) return;
+        const symbol = String(offer.currency || "USD").toUpperCase() === "EUR" ? "€" : "$";
+        const price = Number(offer.price);
+        rows.push({
+            url: offer.url,
+            store: offer.store || "Store",
+            price: Number.isFinite(price) ? quickMoney(symbol, price) : "",
+            availability: offer.availability || "On sale",
+            cheapest: !!offer.cheapest
+        });
+    });
+    if (rows.length < 2) return;
+    const block = document.createElement("div");
+    block.className = "quick-stores";
+    const kicker = document.createElement("p");
+    kicker.className = "quick-kicker";
+    kicker.textContent = "Across stores";
+    const list = document.createElement("ul");
+    rows.forEach(row => {
+        const li = document.createElement("li");
+        if (row.cheapest) li.className = "cheapest";
+        const link = document.createElement("a");
+        link.href = row.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = row.store + (row.price ? " " + row.price : "");
+        const meta = document.createElement("span");
+        meta.textContent = row.availability + (row.cheapest ? " · lowest" : "");
+        li.append(link, meta);
+        list.appendChild(li);
+    });
+    block.append(kicker, list);
+    parent.appendChild(block);
 }
 
 function quickTopLimit() {
@@ -3627,6 +4042,7 @@ function closeQuickView() {
         if (body) body.replaceChildren();
     }
     document.body.classList.remove("quick-sheet");
+    hideSparkTip();
     quickPinned = false;
     quickCard = null;
     setQuickExpanded(false);

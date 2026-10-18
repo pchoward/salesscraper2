@@ -178,6 +178,17 @@
         font-size: 0.95rem;
         text-decoration: none;
     }
+    #quickView .quick-compare { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem 0.35rem; }
+    #quickView .quick-compare strong { font-size: 0.9rem; }
+    #quickView .quick-score summary {
+        display: flex;
+        align-items: center;
+        min-height: 2.75rem;
+        font-size: 0.9rem;
+    }
+    #quickView .quick-signal { font-size: 0.85rem; }
+    #quickView .quick-stores a { font-size: 0.85rem; }
+    #quickView .quick-readout { font-size: 0.85rem; }
 
     /* How many filters are on, next to the Filters label. */
     #filtersOpen[data-count]::after {
