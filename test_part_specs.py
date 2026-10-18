@@ -292,7 +292,7 @@ class SpecSectionTests(unittest.TestCase):
         self.assertLess(wheelbase, MIN_SPEC_COUNT)
         self.assertGreater(wheels, 0)
         self.assertGreater(trucks, 0)
-        self.assertEqual(bearings, 0)
+        self.assertGreaterEqual(bearings, abec)  # Inventory count can change across scrapes.
         self.assertGreater(decks, 0)
 
 
