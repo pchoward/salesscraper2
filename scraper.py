@@ -12,10 +12,10 @@ import logging
 import os
 import sys
 
-from health import HEALTH_PATH, empty_store_keys, load_state, state_json
+from health import HEALTH_PATH, load_state, state_json
 from history import record_misses
 from notify import send_digest
-from pipeline import apply_run_updates, decorate_digest
+from pipeline import apply_run_updates, decorate_digest, prepare_run
 from report import build_digest, build_report_html, compare_catalogs
 from stores.stock import confirm_stock
 from site_sales import SITE_SALES_PATH, load_state as load_site_sales
@@ -108,22 +108,10 @@ def main():
     _log_filter_counts(scrapers, curr_data)
 
     health_before = load_state()
-    suspect_keys = empty_store_keys(curr_data, failed_keys, health_before)
-    if suspect_keys:
-        logging.error(
-            "Store returned no items in any category that normally has sales; marking suspect: %s",
-            ", ".join(sorted(suspect_keys)),
-        )
-        failed_keys.update(suspect_keys)
-
-    for key, items in list(curr_data.items()):
-        if items is None or key in suspect_keys:
-            failed_keys.add(key)
-            retained = prev_data.get(key, [])
-            if not isinstance(retained, list):
-                retained = []
-            curr_data[key] = retained
-            logging.warning("Scrape failed for %s; retaining %s previous items", key, len(retained))
+    prepared = prepare_run(curr_data, failed_keys, prev_data, health_before, today=scanned_at[:10])
+    curr_data = prepared["current_data"]
+    failed_keys = prepared["failed_keys"]
+    suspect_keys = prepared["suspect_keys"]
 
     price_history = load_price_history()
     carried = set()
@@ -146,7 +134,7 @@ def main():
     else:
         logging.info("No changes detected")
 
-    health = load_state()
+    health = health_before
     try:
         site_sales = load_site_sales()
     except Exception as exc:
@@ -162,6 +150,7 @@ def main():
             scanned_at=scanned_at,
             suspect_keys=suspect_keys,
             skip_urls=carried,
+            health_results=prepared["health_results"],
         )
         updates["save_history"] = False
         updates["history"] = {}
@@ -175,6 +164,7 @@ def main():
             scanned_at=scanned_at,
             suspect_keys=suspect_keys,
             skip_urls=carried,
+            health_results=prepared["health_results"],
         )
     if updates.get("save_history"):
         save_price_history(updates["history"])

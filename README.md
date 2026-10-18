@@ -186,7 +186,13 @@ About 1 MB is the steady size: roughly the current catalog, one point a day, for
 
 ## Store health
 
-`scrape_health.json` keeps the last 30 runs of per-store, per-part item counts, plus the last time each key actually had items. A failed fetch counts as a bad run even though the report still shows the previous rows. The same calendar day replaces that day's row, so a manual re-run is not a second failure. Keys that have never had items (bearings are often empty) do not warn.
+`scrape_health.json` keeps the last 30 runs of per-store, per-category counts and the existing last-positive `baseline`. Same-day reruns replace that day's result. Historical files remain readable; no migration command is needed.
+
+Completeness monitoring uses the last **14 successful daily observations** for each retailer/category, with at least **3 earlier dates** required. It compares the raw count against their median. A category is suspicious only when the drop is at least **50%**, at least **5 items**, and greater than **3 times the median absolute deviation** of those observations. This allows ordinary fluctuations and historically variable or small categories to remain quiet. Successful zero counts are included; failed and suspect scans are excluded. The additive `completeness_baseline` preserves those bounded samples even when repeated failures roll good runs out of the 30-run log.
+
+Each new result includes `diagnostics`: `expected_count`, raw `actual_count`, signed `percentage_change`, `baseline_samples`, `median_absolute_deviation`, and `reason`. The existing `count`/`failed` fields keep their meaning: unsafe scans are failed with count zero, while diagnostics preserve any partial products actually received. Explicit fetch failures warn immediately, even without a baseline. Diagnosed partial drops warn immediately too; legacy rows without diagnostics retain the existing two-run warnings. Whole-store empty scans retain their existing aggregate warning.
+
+Before miss tracking, stock confirmation, and catalog comparisons, unsafe categories keep their previous listings and join the existing failed-key path. They do not advance missing-product counters, supply new price observations, or mark absent products gone. An accepted recovery clears the warning and resumes normal tracking. Counts are a warning signal, not proof of discontinuation: a genuine large inventory contraction may also need investigation. Warnings name the retailer/category, show expected versus actual counts, and recommend checking availability, pagination, and fetch logs before retrying.
 
 ## Email alerts
 

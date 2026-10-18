@@ -4,7 +4,10 @@ import datetime
 import logging
 
 from filters import item_passes_filters
-from health import broken_store_warnings, record_run, results_from_run, suspect_store_warnings
+from health import (
+    assess_run, broken_store_warnings, empty_store_keys, record_run,
+    suspect_store_warnings,
+)
 from history import all_time_low_status, apply_lifecycle, prune_price_history, update_price_history
 from matching import cross_store_groups
 from site_sales import describe_sales, record_catalog, sale_banners
@@ -23,6 +26,33 @@ def _day(today):
     return str(today)
 
 
+def prepare_run(current_data, failed_keys, previous_data, health, today=None):
+    """Classify raw fetches and retain unsafe categories before any catalog diff.
+
+    Health results are captured before previous rows or first misses are carried
+    forward. The returned failed keys must be used by miss tracking, stock
+    confirmation, diffs, and bookkeeping alike.
+    """
+    day = _day(today)
+    failed_keys = set(failed_keys or [])
+    suspect_keys = {key for key in empty_store_keys(current_data, failed_keys, health)
+                    if key not in failed_keys and isinstance(current_data.get(key), list)}
+    results = assess_run(current_data, failed_keys, health, day, suspect_keys)
+    failed = {key for key, result in results.items() if result["failed"]}
+    prepared = {key: list(items) if isinstance(items, list) else items
+                for key, items in (current_data or {}).items()}
+    for key in sorted(failed):
+        previous = (previous_data or {}).get(key)
+        prepared[key] = list(previous) if isinstance(previous, list) else []
+        logger.warning("%s: %s; expected=%s actual=%s change_pct=%s; retained %s previous items",
+                       key, results[key]["diagnostics"]["reason"],
+                       results[key]["diagnostics"]["expected_count"],
+                       results[key]["diagnostics"]["actual_count"],
+                       results[key]["diagnostics"]["percentage_change"], len(prepared[key]))
+    return {"current_data": prepared, "failed_keys": failed,
+            "suspect_keys": suspect_keys, "health_results": results}
+
+
 def apply_run_updates(
     current_data,
     failed_keys,
@@ -33,6 +63,7 @@ def apply_run_updates(
     scanned_at=None,
     suspect_keys=None,
     skip_urls=None,
+    health_results=None,
 ):
     """Update price history and store health. Never raises.
 
@@ -40,6 +71,17 @@ def apply_run_updates(
     price history (retained rows are not a new observation).
     """
     day = _day(today)
+    # Direct callers are protected too. The runner passes its raw assessment
+    # because current_data may already include retained rows and first misses.
+    failed_keys = set(failed_keys or [])
+    suspect_keys = set(suspect_keys or [])
+    if health_results is None:
+        suspect_keys.update(key for key in empty_store_keys(current_data, failed_keys, health)
+                            if key not in failed_keys and isinstance(current_data.get(key), list))
+        health_results = assess_run(current_data, failed_keys, health, day, suspect_keys)
+    failed_keys = set(failed_keys or []) | suspect_keys | {
+        key for key, result in health_results.items() if result.get("failed")
+    }
     stats = None
     # A non-dict (for example a corrupt JSON list) must not be saved back as {}.
     save_history = isinstance(history, dict)
@@ -80,9 +122,9 @@ def apply_run_updates(
 
     warnings = []
     try:
-        results = results_from_run(current_data, failed_keys, suspect_keys)
-        health = record_run(health, day, results, scanned_at=scanned_at)
-        warnings = broken_store_warnings(health)
+        health = record_run(health, day, health_results, scanned_at=scanned_at)
+        warnings = [warning for warning in broken_store_warnings(health)
+                    if warning["key"] not in suspect_keys]
         warnings.extend(suspect_store_warnings(suspect_keys, health, day))
     except Exception as exc:
         logger.error("Store health update failed (continuing): %s", exc)
@@ -106,6 +148,7 @@ def apply_run_updates(
         "history": history if isinstance(history, dict) else {},
         "health": health if isinstance(health, dict) else {"runs": [], "baseline": {}},
         "warnings": warnings,
+        "failed_keys": failed_keys,
         "stats": stats,
         "save_history": save_history,
         "site_sales": site_sales if isinstance(site_sales, dict) else None,
