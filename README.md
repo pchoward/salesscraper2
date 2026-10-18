@@ -16,6 +16,7 @@ Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publi
 ├── page.js                    # Filters, cards, charts, sort, stars, drawer, stats
 ├── notify.py                  # SMTP email for deals, watch alerts, store warnings
 ├── history.py                 # Bounded price history, images, and all-time lows
+├── history_identity.py        # Which history rows are one product, and an audit
 ├── health.py                  # Per-store scrape counts and warnings
 ├── matching.py                # Conservative cross-store product match
 ├── dimensions.py              # Width, length, and wheelbase normalization
@@ -270,6 +271,8 @@ python test_charts.py
 python test_intel.py
 python test_report_extras.py
 ```
+
+To audit price-history identity, `python history_identity.py` checks the stored `price_history.json`, and `python history_identity.py --git` replays every committed `previous_data.json`. It reports URLs whose name changed size (two products in one history), retailer codes shared by different products, same-name variants listed at once, Shopify products that moved paths, possible URL churn, duplicates within one scan, and gaps. It changes nothing. History stays keyed by URL. Only a Shopify handle (CCS) carries a row to a new URL, and a URL whose name starts stating another size restarts its series; the earlier product's summary is kept in `earlier_products`.
 
 To review matching on real data, `python matching.py` prints the cross-store groups, why listings have no match identity (no width, no durometer, unknown brand), and near misses: same-brand pairs from two stores that differ in exactly one attribute. It reads `previous_data.json` and every name in `price_history.json`. `explain_match(a, b)` in `matching.py` gives the same breakdown for one pair.
 
