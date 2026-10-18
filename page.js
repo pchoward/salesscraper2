@@ -1136,7 +1136,7 @@ function fitNavPills() {
         clusters.forEach(restoreNavHomes);
         clusters.forEach(syncNavMore);
         // Phones swipe each chip row (mobile.css), so every chip stays inline.
-        if (window.matchMedia("(max-width: 800px)").matches) {
+        if (window.matchMedia(PHONE_QUERY).matches) {
             clusters.forEach(cluster => {
                 cluster.list.querySelectorAll(":scope > .quick-chip").forEach(chip => cluster.row.insertBefore(chip, cluster.menu));
                 syncNavMore(cluster);
@@ -2473,6 +2473,8 @@ function closeSparkPanel() {
 }
 
 const LAYOUT_KEY = "salesscraper2.layout";
+// Keep in step with the media query at the top of mobile.css.
+const PHONE_QUERY = "(max-width: 800px), (max-height: 500px) and (pointer: coarse)";
 const STORE_COLOR = {
     Zumiez: "#be185d",
     SkateWarehouse: "#1d4ed8",
@@ -2673,6 +2675,7 @@ function paintActiveChips() {
     if (state.change === "removed") add("Deals disappeared", () => setChange("all"));
     host.innerHTML = "";
     const wrap = document.getElementById("activeFilters");
+    paintFiltersCount(chips.length);
     if (!chips.length) {
         host.hidden = true;
         if (wrap) wrap.hidden = true;
@@ -2689,6 +2692,41 @@ function paintActiveChips() {
         button.addEventListener("click", chip.clear);
         host.appendChild(button);
     });
+}
+
+// The phone Filters button shows how many filters are on (mobile.css).
+function paintFiltersCount(count) {
+    const button = document.getElementById("filtersOpen");
+    if (!button) return;
+    if (count) {
+        button.setAttribute("data-count", String(count));
+        button.setAttribute("aria-label", "Filters, " + count + " active");
+    } else {
+        button.removeAttribute("data-count");
+        button.removeAttribute("aria-label");
+    }
+}
+
+// Phones scroll the whole page through hundreds of cards, so a button
+// appears after a few screens to jump back up. Desktop scrolls inside
+// .board, so the window never moves and the button stays hidden.
+function initToTop() {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "to-top";
+    button.textContent = "↑ Top";
+    button.setAttribute("aria-label", "Back to top");
+    button.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    document.body.appendChild(button);
+    let queued = false;
+    window.addEventListener("scroll", () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(() => {
+            queued = false;
+            button.classList.toggle("is-shown", window.scrollY > window.innerHeight * 2);
+        });
+    }, { passive: true });
 }
 
 function updateFreshness() {
@@ -3883,6 +3921,7 @@ function init() {
     updateAgo();
     updateBanners();
     measureBar();
+    initToTop();
     window.addEventListener("resize", measureBar);
     const bar = document.getElementById("stickyBar");
     if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
