@@ -12,6 +12,7 @@ Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publi
 ├── report.py                  # Catalog diff and digest
 ├── page.py                    # Static report (inlines page.css and page.js)
 ├── page.css                   # Report styles
+├── mobile.css                 # Phone layout (≤800px), inlined after page.css
 ├── page.js                    # Filters, cards, charts, sort, stars, drawer, stats
 ├── notify.py                  # SMTP email for deals, watch alerts, store warnings
 ├── history.py                 # Bounded price history, images, and all-time lows
@@ -76,7 +77,7 @@ Whole-word hat, cap, shirt, tee, hoodie, jacket, pant, short, shoe, sneaker, soc
 
 ## Report
 
-The report is one static file. CSS and JavaScript are inlined from `page.css` and `page.js`. There is no server. New-feature failures are logged and do not stop the scrape or the commit.
+The report is one static file. CSS and JavaScript are inlined from `page.css`, `mobile.css`, and `page.js`. There is no server. New-feature failures are logged and do not stop the scrape or the commit.
 
 - **Header**: a dark bar named SkateDeals, with Deals, Track, and Insights. Deals is the list, Track is the Watching filter, and Insights opens deals intelligence. The bar shows how long ago the last scan ran, and whether that scan is current. The visible time is relative (`14 minutes ago`); the exact Eastern timestamp is on hover. The freshness note turns amber when the last scan is older than 36 hours or a store/part failed that day. Hover the relative time for the exact scan timestamp in US Eastern, such as `Oct 1, 2026 8:21:37 AM ET`. Digest counts (all deals, new, price drops, hit lowest, disappeared) sit in the strip under that bar as compact chips. The baseline is a small dropdown, Since yesterday or Since your last visit. Sort and the table/cards switch are on that bar too.
 - **What changed**: the digest row opens on **All deals**, so the All Deals table lists every current deal. **Since yesterday** and **Since your last visit** are a baseline switch for those counts. Neither one filters the table, and neither digest chip starts selected. New deals, price drops, and hit lowest tracked price filter the table; click the same chip again or **All deals** to show everything. **Deals disappeared** opens Recently gone and leaves the All Deals table alone. **Clear all** turns the digest chip off along with the other filters. Summary cards stay their own filters and do not select a digest chip. A URL or saved view selects a digest chip only when the query includes `change`. **Since your last visit** compares prices with the last time this browser opened the page (`localStorage` key `salesscraper2.snapshot`). That snapshot is not applied as a table filter.
