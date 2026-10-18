@@ -163,23 +163,7 @@
        landscape screen. Cap it so the facts stay in view. */
     #quickView.is-sheet .quick-chart .history-chart { max-height: 9rem; }
 
-    /* Details sheet: show the product name (screen-reader only on desktop,
-       where the card stays beside the popover) under the star / Close row,
-       and size both buttons for a thumb. */
-    #quickView.is-sheet .quick-panel > div { display: flex; flex-direction: column; }
-    #quickView.is-sheet .quick-head { order: -2; margin: -0.3rem 0 0; }
-    #quickView.is-sheet .quick-panel > div > h2.sr-only {
-        order: -1;
-        position: static;
-        width: auto;
-        height: auto;
-        margin: 0 0 0.4rem;
-        overflow: visible;
-        clip: auto;
-        white-space: normal;
-        font-size: 1rem;
-        line-height: 1.3;
-    }
+    /* Details sheet buttons sized for a thumb. */
     #quickView.is-sheet .quick-star, #quickView.is-sheet .quick-close { min-height: 2.5rem; }
     #quickView.is-sheet .quick-star { min-width: 2.5rem; font-size: 1.3rem; }
     #quickView.is-sheet .quick-close { padding: 0 0.25rem 0 1rem; font-size: 0.85rem; }
