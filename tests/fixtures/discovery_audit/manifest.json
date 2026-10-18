@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "label": "Synthetic offline examples; not measured live inventory",
+  "observations": [
+    {"store":"Tactics","category":"Bearings","kind":"html","file":"tactics-page1.html","source_url":"https://www.tactics.com/skateboard-bearings/sale"},
+    {"store":"Tactics","category":"Bearings","kind":"html","file":"tactics-page2.html","source_url":"https://www.tactics.com/skateboard-bearings/sale/page-2"},
+    {"store":"CCS","category":"Bearings","kind":"json","file":"ccs-feed.json","source_url":"https://shop.ccs.com/collections/clearance/products.json?limit=250&page=1"},
+    {"store":"Tactics","category":"Wheels","kind":"html","file":"structured.html","source_url":"https://www.tactics.com/skateboard-wheels/sale"},
+    {"store":"SkateWarehouse","category":"Decks","kind":"sitemap","file":"sitemap.xml","source_url":"https://www.skatewarehouse.com/sitemap.xml"}
+  ]
+}
