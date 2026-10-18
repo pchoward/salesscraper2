@@ -2041,6 +2041,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "</footer></div></div>"
     )
     chunks.append(
+        '<div id="quickView" hidden>'
+        '<div class="quick-panel" role="dialog" aria-labelledby="quickLabel">'
+        '<div id="quickBody"></div>'
+        "</div></div>"
+    )
+    chunks.append(
         '<div id="productModal" hidden>'
         '<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">'
         '<button type="button" id="modalClose">Close</button>'
@@ -2296,10 +2302,7 @@ def _card_html(record):
     listed = " on-list" if record["listed"] else ""
     currency = item.get("currency")
     symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
-    band = score_band(record["score"]["score"])
     face = _card_status(record)
-    size = f'{escape(record["width_key"])}"' if record["width_key"] else ""
-    why = _why_html(record, dom_id="why-card-" + str(record["id"]))
     if percent == "N/A":
         off_html = '<span class="discount card-off none">No discount info</span>'
     else:
@@ -2333,9 +2336,8 @@ def _card_html(record):
         '<div class="card-face">'
         f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
         "</div>"
-        f'<div class="title-slot"><div class="card-title"><h3 class="product-name" title="{escape(record["name"], quote=True)}">'
-        f"{_product_link(item)}</h3></div>"
-        f'<p class="title-pop">{escape(record["name"])}</p></div>'
+        f'<div class="title-slot"><div class="card-title"><h3 class="product-name">'
+        f"{_product_link(item)}</h3></div></div>"
         '<div class="card-prices">'
         f'<span class="now-price">Now: {_money(item.get("price_new"), currency)}</span>'
         f"{avg_html}</div>"
@@ -2343,19 +2345,8 @@ def _card_html(record):
         f'<div class="card-badge">{extra_off}{face}</div>'
         f'<div class="card-sparkline">{_spark_html(record, width=156)}</div>'
         '<button type="button" class="card-more" aria-expanded="false">Details</button>'
-        '<div class="card-hover">'
-        f'<p class="card-hover-title">{escape(record["name"])}</p>'
-        f'<div class="card-extra">{escape(size)} {escape(record["held"])} '
-        f'<span class="price price-old">{_money(item.get("price_old"), currency) if item.get("price_old") else ""}</span></div>'
-        f'<div class="row-meta">{_badge_html(_shown_badges(record), record["listed"])}'
-        f'{_low_mark(record)}{_stage_html(record.get("stage"))}</div>'
-        f'<div class="score-cell"><button type="button" class="score-btn score-{band}" aria-expanded="false" '
-        f'aria-controls="why-card-{record["id"]}">'
-        f'{record["score"]["score"]}'
-        + ('<span class="hot">HOT</span>' if record["score"]["hot"] else "")
-        + '</button><button type="button" class="info-dot score-info" aria-expanded="false" '
-        f'aria-controls="why-card-{record["id"]}" aria-label="Score breakdown">i</button>{why}</div>'
-        "</div></article>"
+        f'<div class="card-score" hidden>{_why_html(record, dom_id="why-card-" + str(record["id"]))}</div>'
+        "</article>"
     )
 
 

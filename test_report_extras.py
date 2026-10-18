@@ -908,5 +908,111 @@ if (pushes !== 1) throw new Error("default search pushed " + pushes);
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
 
 
+    def test_card_quick_view_replaces_title_tooltips(self):
+        deck = _deck(
+            "49.99",
+            "https://example.com/deck",
+            "Zumiez",
+            'Baker Kevin Spanky Deck 8.25"',
+        )
+        shoe = {
+            "name": "Vans Skate Old Skool Wafflecup Shoes - Willow Green/Black",
+            "url": "https://example.com/shoe",
+            "price_new": "59.50",
+            "price_old": "85.00",
+            "part": "Sneakers",
+            "store": "CCS",
+            "shoe_sizes": ["7.5", "8"],
+        }
+        html = build_report_html(
+            {"Zumiez_Decks": [deck], "CCS_Sneakers": [shoe]},
+            {},
+            generated_at="2026-10-17T20:22:15+00:00",
+        )
+        self.assertNotIn('class="title-pop"', html)
+        self.assertNotIn('class="card-hover"', html)
+        self.assertNotIn(".title-slot:hover .title-pop", html)
+        self.assertIn('id="quickView"', html)
+        self.assertIn("const QUICK_OPEN_MS = 300;", html)
+        cards = [
+            part.split("</article>", 1)[0]
+            for part in html.split('<article class="deal-card')[1:]
+        ]
+        self.assertGreaterEqual(len(cards), 2)
+        for card in cards:
+            self.assertIn('<h3 class="product-name">', card)
+            self.assertNotIn('class="product-name" title=', card)
+            self.assertIn(">Details</button>", card)
+            self.assertIn('class="card-score" hidden', card)
+        shoe_card = next(card for card in cards if "Willow Green" in card)
+        self.assertIn('data-shoesize="7.5,8"', shoe_card)
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        refresh = source[source.find("function refreshCharts("):source.find("function clipSeries(")]
+        self.assertNotIn("drawQuickChart", refresh)
+        self.assertNotIn("fillQuickView", refresh)
+        self.assertIn("closeProduct();\n            closeQuickView();", source)
+        add_days = source[source.find("function addDays("):source.find("function markerColor(")]
+        facts = source[source.find("function quickClip("):source.find("function drawQuickChart(")]
+        script = "const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];\n" + add_days + facts + r"""
+const shoe = quickFacts(
+  {price: "59.50", original: "85", discount: "30", days: "18", daysat: "4", shoesize: "7.5,8", size: "", length: "", wheelbase: "", diameter: "", duros: "", shape: "", trucksize: "", truckheight: "", construction: "", abec: "", store: "CCS"},
+  {
+    url: "https://example.com/shoe",
+    store: "CCS",
+    first: "2026-09-01",
+    daily: [["2026-07-18", 90], ["2026-09-01", 70], ["2026-10-17", 59.5]],
+    seriesList: [{url: "https://example.com/shoe", low: {date: "2026-10-01", price: 55}, points: []}],
+    offers: [
+      {store: "CCS", url: "https://example.com/shoe", price: 59.5, currency: "USD", cheapest: false},
+      {store: "Tactics", url: "https://example.com/tactics", price: 64, currency: "USD", cheapest: false}
+    ]
+  },
+  "2026-10-17"
+);
+const labels = shoe.rows.map(row => row.label + "=" + row.value).join(" | ");
+if (!labels.includes("List price=$85.00")) throw new Error(labels);
+if (!labels.includes("You save=$25.50")) throw new Error(labels);
+if (!labels.includes("Off=30% off")) throw new Error(labels);
+if (!labels.includes("All-time low=$55.00 on Oct 1")) throw new Error(labels);
+if (!labels.includes("90-day average=$64.75")) throw new Error(labels);
+if (!labels.includes("First seen=Sep 1")) throw new Error(labels);
+if (!labels.includes("Tracked=18 days")) throw new Error(labels);
+if (!labels.includes("At this price=4 days")) throw new Error(labels);
+if (shoe.points.some(point => point[0] === "2026-07-18")) throw new Error("old point stayed in the 90-day window");
+if (shoe.specs.map(row => row.label + " " + row.value).join() !== "In stock 7.5, 8") throw new Error(JSON.stringify(shoe.specs));
+if (shoe.stores.length !== 1 || shoe.stores[0].label !== "Tactics $64.00") throw new Error(JSON.stringify(shoe.stores));
+if (shoe.viewLabel !== "View at CCS") throw new Error(shoe.viewLabel);
+const deck = quickFacts(
+  {price: "49.99", original: "", discount: "", days: "0", daysat: "0", shoesize: "", size: "8.25", length: "31.875", wheelbase: "", diameter: "", duros: "", shape: "", trucksize: "", truckheight: "", construction: "", abec: ""},
+  {url: "https://example.com/deck", store: "Zumiez", first: "", daily: [], seriesList: [], offers: [{store: "Zumiez", url: "https://example.com/deck", price: 49.99}]},
+  "2026-10-17"
+);
+if (deck.rows.length) throw new Error("empty deck facts " + JSON.stringify(deck.rows));
+if (deck.points.length) throw new Error("deck chart");
+if (deck.stores.length) throw new Error("deck stores");
+const specText = deck.specs.map(row => row.label + " " + row.value).join(" | ");
+if (specText !== 'Width 8.25" | Length 31.875"') throw new Error(specText);
+const wheel = quickFacts(
+  {diameter: "54-55", duros: "99a,95a", shape: "Conical", shoesize: "", size: ""},
+  {url: "https://example.com/wheel", offers: []},
+  "2026-10-17"
+);
+if (wheel.specs.map(row => row.value).join() !== "54-55,99a, 95a,Conical") throw new Error(JSON.stringify(wheel.specs));
+const same = quickFacts(
+  {price: "40", original: "40", discount: "0", days: "1", daysat: "1"},
+  {url: "https://example.com/same", store: "CCS", first: "2026-10-16", offers: [{url: "https://example.com/same", currency: "EUR", price: 40}]},
+  "2026-10-17"
+);
+const sameText = same.rows.map(row => row.label + "=" + row.value).join(" | ");
+if (!sameText.includes("List price=€40.00")) throw new Error(sameText);
+if (sameText.includes("You save")) throw new Error(sameText);
+if (sameText.includes("Off=")) throw new Error(sameText);
+if (!sameText.includes("Tracked=1 day")) throw new Error(sameText);
+if (sameText.includes("At this price")) throw new Error(sameText);
+"""
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()
