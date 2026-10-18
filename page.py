@@ -1315,6 +1315,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         f"<title>SkateDeals | {escape(today)}</title>",
         f"<style>{_read_asset('page.css')}</style>",
+        f"<style>{_read_asset('mobile.css')}</style>",
         "<script>try{if(localStorage.getItem('salesscraper2.layout')==='cards')document.documentElement.classList.add('layout-cards')}catch(e){}</script>",
         "</head><body>",
     ]

@@ -1135,6 +1135,14 @@ function fitNavPills() {
     try {
         clusters.forEach(restoreNavHomes);
         clusters.forEach(syncNavMore);
+        // Phones swipe each chip row (mobile.css), so every chip stays inline.
+        if (window.matchMedia("(max-width: 800px)").matches) {
+            clusters.forEach(cluster => {
+                cluster.list.querySelectorAll(":scope > .quick-chip").forEach(chip => cluster.row.insertBefore(chip, cluster.menu));
+                syncNavMore(cluster);
+            });
+            return;
+        }
         const settle = () => {
             let guard = 0;
             const limit = () => {

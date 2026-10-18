@@ -1,0 +1,188 @@
+/* Phone layout. page.py inlines this after page.css, so these rules win over
+   the earlier max-width: 800px blocks without editing them. Keep phone-only
+   rules here so desktop work in page.css does not collide with them. */
+@media (max-width: 800px) {
+    /* overflow-x: hidden on body makes body the scroll container, and sticky
+       children then stick to a box that never scrolls. clip trims the same
+       overflow without that side effect. */
+    html, body { overflow-x: clip; }
+    /* scrollIntoView (Track, Insights, Recently gone) lands below the
+       pinned nav bar instead of under it. */
+    html { scroll-padding-top: 4.5rem; }
+
+    /* Only the dark nav bar stays pinned. The chip rows and tools scroll away
+       so a phone keeps most of the screen for deals. */
+    #stickyBar { display: contents; }
+    .topnav {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+            "brand links filters"
+            "scan scan scan";
+        align-items: center;
+        gap: 0 0.4rem;
+        padding: 0.3rem 0.6rem 0.35rem;
+    }
+    .topnav .brand { grid-area: brand; font-size: 0.95rem; }
+    .topnav-links { grid-area: links; justify-content: center; gap: 0; min-width: 0; }
+    .nav-link { padding: 0.55rem 0.4rem; font-size: 0.74rem; }
+    #filtersOpen {
+        grid-area: filters;
+        order: 0;
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.25rem;
+        padding: 0 0.85rem;
+        line-height: 1;
+        border-radius: 999px;
+        font-weight: 800;
+    }
+    .topnav .scan-wrap, .topnav .fresh-note {
+        order: 0;
+        font-size: 0.68rem;
+        line-height: 1.3;
+    }
+    .topnav .scan-wrap { grid-area: scan; justify-self: start; }
+    .topnav .fresh-note { grid-area: scan; justify-self: end; }
+
+    /* Store and product chips: one swipeable row each, no "More" menu. */
+    .nav-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0;
+        overflow: visible;
+    }
+    .nav-row .nav-cluster {
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        padding: 0.3rem 0.6rem;
+        gap: 0.35rem;
+    }
+    .nav-row .nav-cluster::-webkit-scrollbar { display: none; }
+    .nav-row .nav-cluster + .nav-cluster { border-top: 1px solid var(--border); }
+    .nav-row .quick-label { min-width: 3.9rem; font-size: 0.6rem; }
+    .nav-row .quick-row { gap: 0.3rem; }
+    .nav-row .quick-chip {
+        min-height: 2.1rem;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+    }
+    .nav-row .more-menu { display: none !important; }
+
+    /* Tools wrap into rows: search, then count / sort, then what changed. */
+    .tool-line {
+        flex-wrap: wrap;
+        overflow: visible;
+        gap: 0.45rem;
+        margin: 0;
+        padding: 0.5rem 0.6rem;
+        min-height: 0;
+        border-bottom: 1px solid var(--border);
+    }
+    .tool-line .search-box { order: 1; flex: 1 1 100%; min-width: 0; max-width: none; }
+    /* 16px keeps iOS Safari from zooming the page when a field gets focus. */
+    .tool-line input, .tool-line select { font-size: 16px; }
+    .tool-line .search-box input { min-height: 2.6rem; border-radius: 8px; }
+    .tool-line .result-count { order: 2; }
+    .tool-line .sort-field { order: 3; margin-left: auto; flex: 0 1 auto; min-width: 0; }
+    .tool-line .sort-field span { font-size: 0.75rem; }
+    .tool-line .sort-field select { max-width: 11.5rem; min-height: 2.25rem; }
+    .tool-line .group-toggle {
+        order: 7;
+        flex: 0 0 auto;
+        min-height: 2rem;
+        padding: 0.2rem 0.6rem;
+        font-size: 0.78rem;
+    }
+    .tool-line .mode { order: 5; flex: 0 0 auto; padding: 0; border: 0; background: transparent; box-shadow: none; }
+    .tool-line .mode select { min-height: 2.25rem; }
+    /* A 50% basis keeps the change buttons beside the baseline select and
+       pushes "Group across stores" to its own line. */
+    .tool-line .lede.digest {
+        order: 6;
+        flex: 1 1 50%;
+        min-width: 0;
+        width: auto;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+    .tool-line .lede.digest::-webkit-scrollbar { display: none; }
+    .tool-line .segment { width: max-content; flex-wrap: nowrap; }
+    .tool-line .change-btn { white-space: nowrap; min-height: 2.25rem; }
+    .tool-line .active-filters { order: 8; flex: 1 1 100%; }
+    .tool-line .active-filters .text-btn { min-height: 2rem; }
+    /* The table needs a desktop width, so phones always get cards. */
+    .tool-line .layout-toggle { display: none; }
+    html:root .table-wrap { display: none; }
+    html:root #cardGrid { display: grid; }
+
+    .board { padding: 0.5rem 0.5rem 5rem; overflow-x: visible; }
+    .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+
+    /* Filter drawer: solid sheet over a dimmed page. Tapping the dimmed
+       area lands on body, which the existing outside-tap handler closes. */
+    .rail .sidebar#filterDrawer {
+        background: #fff;
+        width: min(360px, 90vw);
+        height: 100vh;
+        height: 100dvh;
+        max-height: none;
+        z-index: 70;
+        overscroll-behavior: contain;
+        padding-bottom: calc(1.2rem + env(safe-area-inset-bottom));
+    }
+    /* Hover tips anchored to a tile run off the right edge of a phone, so a
+       tapped tip shows as a banner along the bottom of the screen instead. */
+    .tip, .intel-strip span.tip {
+        position: fixed;
+        z-index: 80;
+        top: auto;
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: calc(0.75rem + env(safe-area-inset-bottom));
+        width: auto;
+        color: white;
+        font-size: 0.82rem;
+        font-weight: 500;
+        line-height: 1.4;
+        text-transform: none;
+        letter-spacing: 0;
+        padding: 0.65rem 0.8rem;
+        box-shadow: 0 8px 24px rgb(15 23 42 / 0.3);
+    }
+
+    body.filters-open::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 65;
+        background: rgb(15 23 42 / 0.45);
+    }
+}
+
+/* Small phones: the section links get their own row under the logo, and
+   the baseline select and change buttons each take a full line. */
+@media (max-width: 385px) {
+    html { scroll-padding-top: 6.25rem; }
+    .topnav {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "brand filters"
+            "links links"
+            "scan scan";
+    }
+    .topnav-links { justify-content: flex-start; }
+    .nav-link { padding: 0.4rem 0.6rem 0.45rem 0; }
+    .tool-line .mode, .tool-line .mode select { flex: 1 1 100%; width: 100%; }
+    .tool-line .lede.digest { flex: 1 1 100%; }
+}
+@media (max-width: 359px) {
+    .card-grid { grid-template-columns: 1fr; }
+}
