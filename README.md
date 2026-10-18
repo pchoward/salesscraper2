@@ -154,6 +154,8 @@ Add another rule by appending a `- id:` block. The commented example in the file
 
 Matching watchlist alerts are a block at the top of the email. Quiet matches are listed under that as still on sale.
 
+Plans for alert deduplication and optional opt-in subscriptions (no code yet) are in [docs/notifications-architecture.md](docs/notifications-architecture.md).
+
 ## Site-wide sales
 
 `site_sales.json` records filtered sale counts per store and the last day that looked like a site-wide sale. The scraper only sees sale listings, not the whole catalog. A day counts when all of these are true:
