@@ -157,6 +157,13 @@
         font-size: 0.8rem;
     }
     .deal-card .spark-hit { min-height: 1.75rem; }
+    /* A square photo slot stays near half the card once the thumb-sized
+       Details control is counted, and still fits a tall deck or a wide shoe. */
+    .deal-card .media {
+        aspect-ratio: 1 / 1;
+        min-height: 150px;
+        max-height: none;
+    }
     .deal-card .card-title .product-link { text-decoration: none; }
 
     /* Details sheet buttons sized for a thumb. */

@@ -872,6 +872,7 @@ body.quick-sheet { overflow: hidden; }
 .quick-signal.is-drop { background: #dcfce7; color: #166534; }
 .quick-signal.is-held { background: #f1f5f9; color: #475569; }
 .quick-signal.is-note { background: #f8fafc; color: #64748b; }
+.quick-stage { margin: 0.35rem 0 0; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.04em; color: #9a3412; }
 .quick-compare {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -2164,4 +2165,145 @@ header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
     .nav-cluster, .nav-row .quick-row, .nav-row .quick-filters { flex-wrap: nowrap; }
     .tool-line { flex-wrap: nowrap; overflow-x: auto; }
     .tool-line .search-box { min-width: 160px; max-width: none; }
+}
+
+/* Hero cards. Retailer deck shots are tall and narrow, but CCS and
+   Skate Warehouse pad them inside square or portrait frames (Zumiez is a
+   ~650×770 frame with the same side padding; Tactics is already cropped).
+   Shoes and trucks are often the opposite: a wide product in a tall frame.
+   The slot is ~64% of the card width, which lands near 50–60% of card height
+   next to the fixed name, price, and sparkline. The photo is then trimmed to
+   its content and fitted inside that slot without cropping the product. */
+.deal-card .media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 100 / 64;
+    min-height: 140px;
+    max-height: 210px;
+    background: transparent;
+}
+.deal-card .media .hero-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    background: transparent;
+    border-radius: 2px;
+}
+.deal-card .media .hero {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    background: transparent;
+    border-radius: 2px;
+}
+.deal-card .hero-wrap.is-fit {
+    position: relative;
+    overflow: hidden;
+    flex: 0 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+    background: transparent;
+}
+.deal-card .hero-wrap.is-fit .hero {
+    position: absolute;
+    margin: 0;
+    max-width: none;
+    max-height: none;
+    object-fit: fill;
+    background: transparent;
+}
+.deal-card .card-face,
+.deal-card .price-since,
+.deal-card .avg-price,
+.deal-card .media > .drop-badge {
+    display: none;
+}
+.deal-card .card-badge .pill,
+.deal-card .card-badge .stage,
+.deal-card .card-badge .quiet-low {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+.deal-card .card-badge {
+    min-height: 0;
+}
+.deal-card .card-badge:not(:has(.card-off)) {
+    display: none;
+}
+.deal-card .card-prices .card-off {
+    position: static;
+    margin-left: auto;
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+.deal-card .card-sparkline {
+    height: auto;
+    min-height: 0;
+    margin-top: 0;
+}
+.deal-card .card-sparkline svg,
+.deal-card .card-sparkline svg[data-direction] {
+    width: 112px;
+    height: 18px;
+}
+.deal-card .card-sparkline .spark-hit {
+    width: 112px;
+    height: auto;
+}
+.deal-card .hero-wrap.is-missing,
+.deal-card .hero-wrap:has(> .hero.ph:not([hidden])) {
+    position: relative;
+    width: auto;
+    height: 82%;
+    aspect-ratio: 0.78 / 1;
+    max-width: 76%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 7%;
+    background: #f3f5f8;
+    border-radius: 12px;
+    box-shadow: inset 0 0 0 1px #e6ebf1;
+}
+.deal-card .hero-wrap.is-missing::before,
+.deal-card .hero-wrap:has(> .hero.ph:not([hidden]))::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 12%;
+    width: 32%;
+    height: 62%;
+    transform: translateX(-50%);
+    border-radius: 42% 42% 48% 48% / 8% 8% 11% 11%;
+    background: #e2e8f0;
+    box-shadow: inset 0 0 0 1.5px #cbd5e1;
+}
+.deal-card .hero.ph {
+    position: relative;
+    z-index: 1;
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background: transparent;
+}
+.deal-card .hero.ph svg { display: none; }
+.deal-card .hero.ph::after {
+    content: "No photo";
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #64748b;
 }

@@ -1274,6 +1274,7 @@ function applyFilters() {
     paintNav();
     syncDuals();
     matchMemo = null;
+    fitCardPhotos();
 }
 
 function paintKeepaCounts() {
@@ -2959,6 +2960,7 @@ function applyLayout(mode) {
     } catch (err) {
         /* private mode should not break the page */
     }
+    fitCardPhotos();
 }
 
 function paintActiveChips() {
@@ -3987,6 +3989,12 @@ function fillQuickView(card) {
     identity.append(store, heading, price);
     const signal = quickPriceSignal(card.dataset, card);
     if (signal) identity.appendChild(quickSignal(signal));
+    if (item.stage) {
+        const stage = document.createElement("p");
+        stage.className = "quick-stage";
+        stage.textContent = item.stage;
+        identity.appendChild(stage);
+    }
     product.appendChild(identity);
     body.appendChild(product);
     syncQuickStar(card);
@@ -4733,6 +4741,287 @@ function wireDealEvents() {
         if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
     });
     wireQuickView();
+}
+
+function backdropPixel(r, g, b, a) {
+    if (a < 16) return true;
+    const max = r > g ? (r > b ? r : b) : (g > b ? g : b);
+    const min = r < g ? (r < b ? r : b) : (g < b ? g : b);
+    return r >= 236 && g >= 236 && b >= 236 && (max - min) < 22;
+}
+
+function contentBox(pixels, sampleWidth, sampleHeight, imageWidth, imageHeight) {
+    const width = sampleWidth | 0;
+    const height = sampleHeight | 0;
+    const imageW = Number(imageWidth) || width;
+    const imageH = Number(imageHeight) || height;
+    const full = { x: 0, y: 0, w: imageW, h: imageH };
+    if (!pixels || width < 1 || height < 1 || !imageW || !imageH) return full;
+    let minX = width;
+    let minY = height;
+    let maxX = -1;
+    let maxY = -1;
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const i = (y * width + x) * 4;
+            if (backdropPixel(pixels[i], pixels[i + 1], pixels[i + 2], pixels[i + 3])) continue;
+            if (x < minX) minX = x;
+            if (y < minY) minY = y;
+            if (x > maxX) maxX = x;
+            if (y > maxY) maxY = y;
+        }
+    }
+    if (maxX < 0) return full;
+    const x = minX / width * imageW;
+    const y = minY / height * imageH;
+    const w = (maxX - minX + 1) / width * imageW;
+    const h = (maxY - minY + 1) / height * imageH;
+    if (w * h < imageW * imageH * 0.08) return full;
+    if (w > imageW * 0.92 && h > imageH * 0.92) return full;
+    return { x: x, y: y, w: w, h: h };
+}
+
+function paddedBox(box, imageWidth, imageHeight) {
+    const imageW = Number(imageWidth) || 0;
+    const imageH = Number(imageHeight) || 0;
+    const full = { x: 0, y: 0, w: imageW, h: imageH, iw: imageW, ih: imageH };
+    if (!box || !imageW || !imageH) return full;
+    const roomX = Math.max(0, imageW - box.x - box.w);
+    const roomY = Math.max(0, imageH - box.y - box.h);
+    const padX = Math.min(box.x, roomX, Math.max(1, box.w * 0.025));
+    const padY = Math.min(box.y, roomY, Math.max(1, box.h * 0.025));
+    const x = Math.max(0, box.x - padX);
+    const y = Math.max(0, box.y - padY);
+    return {
+        x: x,
+        y: y,
+        w: Math.min(imageW - x, box.w + padX * 2),
+        h: Math.min(imageH - y, box.h + padY * 2),
+        iw: imageW,
+        ih: imageH
+    };
+}
+
+function heroFitSize(ar, slotWidth, slotHeight) {
+    if (!(ar > 0) || slotWidth < 8 || slotHeight < 8) return null;
+    const slotAR = slotWidth / slotHeight;
+    if (ar >= slotAR) return { width: slotWidth, height: slotWidth / ar };
+    return { width: slotHeight * ar, height: slotHeight };
+}
+
+function measureContent(img) {
+    const iw = img.naturalWidth;
+    const ih = img.naturalHeight;
+    const full = { x: 0, y: 0, w: iw, h: ih, iw: iw, ih: ih };
+    if (!iw || !ih || typeof document === "undefined") return full;
+    const sampleWidth = 72;
+    const sampleHeight = Math.max(1, Math.round(ih * sampleWidth / iw));
+    const canvas = document.createElement("canvas");
+    canvas.width = sampleWidth;
+    canvas.height = sampleHeight;
+    const ctx = canvas.getContext && canvas.getContext("2d", { willReadFrequently: true });
+    if (!ctx) return full;
+    let pixels;
+    try {
+        ctx.drawImage(img, 0, 0, sampleWidth, sampleHeight);
+        pixels = ctx.getImageData(0, 0, sampleWidth, sampleHeight).data;
+    } catch (err) {
+        return full;
+    }
+    const box = contentBox(pixels, sampleWidth, sampleHeight, iw, ih);
+    return paddedBox(box, iw, ih);
+}
+
+function layoutHeroWrap(wrap, ar) {
+    const media = wrap.parentElement;
+    const slot = media && media.getBoundingClientRect ? media.getBoundingClientRect() : null;
+    if (!slot) return false;
+    const size = heroFitSize(ar, slot.width, slot.height);
+    if (!size) return false;
+    wrap.style.width = Math.max(1, size.width) + "px";
+    wrap.style.height = Math.max(1, size.height) + "px";
+    return true;
+}
+
+function relayoutHeroes() {
+    if (typeof document === "undefined" || !document.querySelectorAll) return;
+    document.querySelectorAll("#cardGrid .hero-wrap.is-fit").forEach(wrap => {
+        const ar = Number(wrap.dataset.ar);
+        if (ar > 0) layoutHeroWrap(wrap, ar);
+    });
+}
+
+function applyHero(img, box) {
+    const wrap = img.closest ? img.closest(".hero-wrap") : null;
+    if (!wrap || !box) return;
+    const iw = box.iw || img.naturalWidth;
+    const ih = box.ih || img.naturalHeight;
+    const w = box.w;
+    const h = box.h;
+    if (!iw || !ih || !w || !h) return;
+    const ar = w / h;
+    wrap.dataset.ar = String(ar);
+    wrap.classList.add("is-fit");
+    wrap.classList.remove("is-missing");
+    img.hidden = false;
+    img.style.position = "absolute";
+    img.style.left = (-box.x / w * 100) + "%";
+    img.style.top = (-box.y / h * 100) + "%";
+    img.style.width = (iw / w * 100) + "%";
+    img.style.height = (ih / h * 100) + "%";
+    img.style.maxWidth = "none";
+    img.style.maxHeight = "none";
+    img.style.objectFit = "fill";
+    img.style.margin = "0";
+    const ph = img.nextElementSibling;
+    if (ph && ph.classList && ph.classList.contains("ph")) ph.hidden = true;
+    layoutHeroWrap(wrap, ar);
+}
+
+function markMissing(img) {
+    if (!img) return;
+    img.dataset.fitState = "missing";
+    img.hidden = true;
+    const ph = img.nextElementSibling;
+    if (ph) {
+        ph.hidden = false;
+        ph.setAttribute("role", "img");
+        ph.setAttribute("aria-label", "No photo");
+    }
+    const wrap = img.closest ? img.closest(".hero-wrap") : null;
+    if (wrap) {
+        wrap.classList.add("is-missing");
+        wrap.classList.remove("is-fit");
+        wrap.style.width = "";
+        wrap.style.height = "";
+    }
+}
+
+function markMissingWrap(card) {
+    const wrap = card.querySelector(".media .hero-wrap");
+    if (!wrap) return;
+    wrap.classList.add("is-missing");
+    const ph = wrap.querySelector(".ph");
+    if (ph) {
+        ph.hidden = false;
+        ph.setAttribute("role", "img");
+        ph.setAttribute("aria-label", "No photo");
+    }
+}
+
+function settleCardCopy(card) {
+    if (!card || card.dataset.copySettled) return;
+    const prices = card.querySelector(".card-prices");
+    if (!prices) return;
+    card.querySelectorAll(".card-off").forEach(node => {
+        if (node.parentElement !== prices) prices.appendChild(node);
+    });
+    card.dataset.copySettled = "1";
+}
+
+function primeHero(img) {
+    if (!img || img.dataset.fitState) return;
+    const src = img.getAttribute("src");
+    if (!src) {
+        markMissing(img);
+        return;
+    }
+    img.dataset.fitState = "pending";
+    const apply = box => {
+        img.dataset.fitState = "done";
+        applyHero(img, box);
+    };
+    const natural = () => {
+        const paint = () => apply({ x: 0, y: 0, w: img.naturalWidth, h: img.naturalHeight, iw: img.naturalWidth, ih: img.naturalHeight });
+        if (img.naturalWidth) paint();
+        else img.addEventListener("load", paint, { once: true });
+    };
+    const start = () => {
+        if (typeof Image !== "function") {
+            natural();
+            return;
+        }
+        const probe = new Image();
+        probe.crossOrigin = "anonymous";
+        probe.onload = () => {
+            try {
+                apply(measureContent(probe));
+            } catch (err) {
+                apply({ x: 0, y: 0, w: probe.naturalWidth, h: probe.naturalHeight, iw: probe.naturalWidth, ih: probe.naturalHeight });
+            }
+        };
+        probe.onerror = () => natural();
+        probe.src = src;
+    };
+    if (img.complete && img.naturalWidth) start();
+    else if (img.complete) markMissing(img);
+    else {
+        img.addEventListener("load", start, { once: true });
+        img.addEventListener("error", () => markMissing(img), { once: true });
+    }
+}
+
+function primeCard(card) {
+    const img = card.querySelector(".media img.hero");
+    if (!img) {
+        markMissingWrap(card);
+        return;
+    }
+    primeHero(img);
+}
+
+let heroObserver = null;
+let heroResize = false;
+
+function fitCardPhotos() {
+    if (typeof document === "undefined" || !document.querySelectorAll) return;
+    const cards = document.querySelectorAll("#cardGrid .deal-card");
+    if (!cards || !cards.forEach) return;
+    cards.forEach(card => settleCardCopy(card));
+    relayoutHeroes();
+    const view = (typeof window !== "undefined" && window.innerHeight) || 800;
+    const primeIfShown = card => {
+        if (!card || card.dataset.heroFit === "1") return false;
+        const rect = card.getBoundingClientRect ? card.getBoundingClientRect() : { width: 1, top: 0, bottom: 1 };
+        if (!(rect.width > 0 && rect.bottom > -240 && rect.top < view + 240)) return false;
+        card.dataset.heroFit = "1";
+        primeCard(card);
+        return true;
+    };
+    if (typeof IntersectionObserver === "function") {
+        if (!heroObserver) {
+            heroObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    const card = entry.target;
+                    heroObserver.unobserve(card);
+                    if (card.dataset.heroFit === "1") return;
+                    card.dataset.heroFit = "1";
+                    primeCard(card);
+                });
+            }, { rootMargin: "240px 0px" });
+        }
+        cards.forEach(card => {
+            if (card.dataset.heroFit === "1") return;
+            if (primeIfShown(card)) {
+                if (heroObserver) heroObserver.unobserve(card);
+                return;
+            }
+            if (card.dataset.heroWatch === "1") return;
+            card.dataset.heroWatch = "1";
+            heroObserver.observe(card);
+        });
+    } else {
+        cards.forEach(card => {
+            if (card.dataset.heroFit === "1") return;
+            card.dataset.heroFit = "1";
+            primeCard(card);
+        });
+    }
+    if (!heroResize && typeof window !== "undefined" && window.addEventListener) {
+        heroResize = true;
+        window.addEventListener("resize", relayoutHeroes);
+    }
 }
 
 function init() {
