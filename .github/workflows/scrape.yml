@@ -9,6 +9,26 @@ on:
     - cron: '17 7 * * *'
     - cron: '43 9 * * *'
   workflow_dispatch:
+    inputs:
+      notification_checkpoint_key:
+        description: 'Optional reviewed notification cache key for recovery; normally leave blank'
+        required: false
+        type: string
+      notification_event_id:
+        description: 'Optional event hash to resolve after verifying SMTP acceptance externally'
+        required: false
+        type: string
+      notification_resolution:
+        description: 'Manual delivery resolution; retry may duplicate an accepted message'
+        required: false
+        type: choice
+        default: none
+        options: [none, delivered, retry]
+
+# Serialize state checkpoints and existing catalog commits for this branch.
+concurrency:
+  group: scrape-${{ github.ref }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -50,6 +70,28 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Restore notification checkpoint (not published)
+        id: notification_checkpoint
+        if: steps.gate.outputs.scrape == 'true' && (vars.NOTIFICATION_ENGINE_ENABLED == '1' || vars.NOTIFICATION_ENGINE_ENABLED == 'true')
+        uses: actions/cache/restore@v4
+        with:
+          path: notification_state.json
+          key: ${{ inputs.notification_checkpoint_key || format('notification-v1-{0}-{1}-{2}', github.ref_name, github.run_id, github.run_attempt) }}
+          restore-keys: ${{ inputs.notification_checkpoint_key == '' && format('notification-v1-{0}-', github.ref_name) || '' }}
+
+      - name: Reject unavailable explicit recovery checkpoint
+        if: steps.gate.outputs.scrape == 'true' && inputs.notification_checkpoint_key != '' && (vars.NOTIFICATION_ENGINE_ENABLED == '1' || vars.NOTIFICATION_ENGINE_ENABLED == 'true') && steps.notification_checkpoint.outputs.cache-hit != 'true'
+        run: |
+          echo 'Requested notification checkpoint was not found; refusing to initialize or send.'
+          exit 1
+
+      - name: Resolve a reviewed notification event
+        if: steps.gate.outputs.scrape == 'true' && inputs.notification_resolution != '' && inputs.notification_resolution != 'none' && (vars.NOTIFICATION_ENGINE_ENABLED == '1' || vars.NOTIFICATION_ENGINE_ENABLED == 'true')
+        env:
+          NOTIFICATION_EVENT_ID: ${{ inputs.notification_event_id }}
+          NOTIFICATION_RESOLUTION: ${{ inputs.notification_resolution }}
+        run: python -m notification_engine --resolve "$NOTIFICATION_EVENT_ID" --outcome "$NOTIFICATION_RESOLUTION"
+
       - name: Run scraper
         if: steps.gate.outputs.scrape == 'true'
         env:
@@ -61,7 +103,18 @@ jobs:
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
           SMTP_SECURITY: ${{ secrets.SMTP_SECURITY }}
           REPORT_URL: ${{ secrets.REPORT_URL }}
+          NOTIFICATION_ENGINE_ENABLED: ${{ vars.NOTIFICATION_ENGINE_ENABLED }}
+          NOTIFICATION_ALLOW_BOOTSTRAP: ${{ vars.NOTIFICATION_ALLOW_BOOTSTRAP }}
+          NOTIFICATION_OWNER_ID: ${{ vars.NOTIFICATION_OWNER_ID }}
+          NOTIFICATION_RECIPIENT_ID: ${{ vars.NOTIFICATION_RECIPIENT_ID }}
         run: python scraper.py
+
+      - name: Save notification checkpoint (not published)
+        if: always() && steps.gate.outputs.scrape == 'true' && (vars.NOTIFICATION_ENGINE_ENABLED == '1' || vars.NOTIFICATION_ENGINE_ENABLED == 'true') && hashFiles('notification_state.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: notification_state.json
+          key: notification-v1-${{ github.ref_name }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Commit and push changes
         if: steps.gate.outputs.scrape == 'true'

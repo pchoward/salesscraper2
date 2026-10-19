@@ -50,3 +50,7 @@ Thumbs.db
 
 # Chrome data directories
 chrome_data_*/
+
+# Local/private notification event checkpoints (restored via Actions cache).
+notification_state.json
+notification_state.json.lock

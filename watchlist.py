@@ -176,13 +176,24 @@ def rule_matches(rule, item):
     part = str(rule.get("part") or "Decks").strip().casefold()
     if str(item.get("part") or "").strip().casefold() != part:
         return False
+    watched_url = rule.get("product_url") or rule.get("url")
+    if watched_url and normalize_url(watched_url) != normalize_url(item.get("url")):
+        return False
     name = item.get("name") or ""
     if rule.get("name") and not phrase_in_name(rule.get("name"), name):
         return False
     if rule.get("brand") and not phrase_in_name(rule.get("brand"), name):
         return False
-    if not rule.get("name") and not rule.get("brand"):
+    if not rule.get("name") and not rule.get("brand") and not watched_url:
         return False
+    if rule.get("size") not in (None, ""):
+        if str(item.get("part") or "").casefold() == "sneakers":
+            from part_specs import shoe_size_token
+            target = shoe_size_token(rule["size"], exact=True)
+            if not target or target not in {shoe_size_token(size, exact=True) for size in item.get("shoe_sizes", [])}:
+                return False
+        elif not dimensions_match(_width_of(item), rule["size"]):
+            return False
     width = _width_of(item)
     if rule.get("min_width") not in (None, ""):
         minimum = parse_dimension(rule.get("min_width"))

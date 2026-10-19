@@ -173,6 +173,7 @@ def decorate_digest(
     today=None,
     site_sales=None,
     scanned_at=None,
+    failed_keys=None,
 ):
     """Attach warnings, all-time lows, and cross-store groups. Never raises.
 
@@ -218,7 +219,8 @@ def decorate_digest(
             digest.cross_store = []
     try:
         hits, alerts = match_watchlist(
-            _visible(current_data),
+            [item for item in _visible(current_data)
+             if f"{item.get('store')}_{item.get('part')}" not in set(failed_keys or [])],
             previous=previous_data,
             history=history,
             today=today or _day(None),

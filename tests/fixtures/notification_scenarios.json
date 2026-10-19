@@ -1,0 +1,5 @@
+{
+  "item": {"name":"Baker Team Deck 8.5", "url":"https://example.com/baker", "store":"Zumiez", "part":"Decks", "price_old":"80.00", "price_new":"40.00"},
+  "threshold_rule": {"id":"baker-under-50", "brand":"Baker", "width":8.5, "max_price":50, "owner_id":"personal", "recipient_id":"primary"},
+  "prices": [{"price":"55.00","qualifies":false},{"price":"50.00","qualifies":false},{"price":"49.99","qualifies":true},{"price":"49.99","qualifies":false},{"price":"51.00","qualifies":false},{"price":"48.00","qualifies":true}]
+}
