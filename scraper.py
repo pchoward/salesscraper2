@@ -15,6 +15,7 @@ import sys
 from health import HEALTH_PATH, load_state, state_json
 from history import record_misses
 from notify import send_digest
+from notification_engine import send_notifications
 from pipeline import apply_run_updates, decorate_digest, prepare_run
 from report import build_digest, build_report_html, compare_catalogs
 from stores.stock import confirm_stock
@@ -115,6 +116,8 @@ def main():
 
     price_history = load_price_history()
     carried = set()
+    stock_before = {url: entry["stock"] for url, entry in (price_history or {}).items()
+                    if isinstance(entry, dict) and entry.get("stock") == "out_of_stock"}
     if isinstance(price_history, dict):
         try:
             carried = record_misses(prev_data, curr_data, price_history, failed_keys)
@@ -189,6 +192,7 @@ def main():
             previous_data=prev_data,
             site_sales=updates.get("site_sales"),
             scanned_at=scanned_at,
+            failed_keys=failed_keys,
         )
     except Exception as exc:
         logging.error("Digest extras failed (continuing): %s", exc)
@@ -208,7 +212,14 @@ def main():
     # Mail for new items, meaningful drops, or a broken-store warning.
     # Logged SMTP problems stay here so the workflow can still commit.
     dry_run = True if "--email-dry-run" in sys.argv[1:] else None
-    send_digest(digest, dry_run=dry_run)
+    if os.environ.get("NOTIFICATION_ENGINE_ENABLED", "").lower() in {"1", "true"}:
+        stock_before.update({url: entry["stock"] for url, entry in updates["history"].items()
+                             if isinstance(entry, dict) and entry.get("stock") == "out_of_stock"})
+        send_notifications(digest, curr_data, updates["history"], failed_keys,
+                           previous=prev_data, stock_evidence=stock_before,
+                           skip_urls=carried, dry_run=dry_run, day=scanned_at[:10])
+    else:
+        send_digest(digest, dry_run=dry_run)
 
     logging.info("Scraping complete!")
 

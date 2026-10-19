@@ -906,14 +906,13 @@ def _smtp_send(config, message):
     if config.security == "ssl":
         with smtplib.SMTP_SSL(config.host, config.port, timeout=30, context=context) as smtp:
             smtp.login(config.user, config.password)
-            smtp.send_message(message)
-        return
+            return smtp.send_message(message)
     with smtplib.SMTP(config.host, config.port, timeout=30) as smtp:
         smtp.ehlo()
         smtp.starttls(context=context)
         smtp.ehlo()
         smtp.login(config.user, config.password)
-        smtp.send_message(message)
+        return smtp.send_message(message)
 
 
 def send_digest(digest, env=None, dry_run=None, preview_path=PREVIEW_PATH, when=None, banner=None):
@@ -950,6 +949,37 @@ def _send_digest(digest, env, dry_run, preview_path, when, banner):
     _smtp_send(config, message)
     logger.info("Email sent to %s", ", ".join(config.recipients))
     return True
+
+
+def deliver_digest_result(digest, env=None, dry_run=None, delivery_id=None):
+    """Detailed outcome for the opt-in watch journal; never raises.
+
+    Unknown disconnects/timeouts and partial recipient acceptance are ambiguous,
+    not safe automatic retries. The legacy send_digest boolean API is unchanged.
+    """
+    try:
+        if not should_send(digest):
+            return "empty"
+        config = load_smtp_config(env)
+        preview = config.dry_run if dry_run is None else dry_run
+        if preview:
+            write_preview(PREVIEW_PATH, subject_line(digest), render_html(digest, config.report_url), config.recipients)
+            return "preview"
+        if config.missing:
+            logger.warning("Watch delivery skipped: missing %s", ", ".join(config.missing))
+            return "skipped"
+        message = build_message(digest, config)
+        if delivery_id:
+            message["Message-ID"] = f"<{delivery_id}@skatedeals.invalid>"
+        refused = _smtp_send(config, message)
+        return "uncertain" if isinstance(refused, dict) and refused else "sent"
+    except (smtplib.SMTPAuthenticationError, smtplib.SMTPRecipientsRefused,
+            smtplib.SMTPSenderRefused, smtplib.SMTPDataError, ConnectionRefusedError):
+        logger.warning("Watch email rejected; queued events remain retryable")
+        return "failed"
+    except Exception as exc:
+        logger.warning("Watch delivery outcome uncertain (%s); automatic retry held", type(exc).__name__)
+        return "uncertain"
 
 
 def _sample_label(item):

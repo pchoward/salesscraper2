@@ -199,6 +199,8 @@ Before miss tracking, stock confirmation, and catalog comparisons, unsafe catego
 
 ## Email alerts
 
+An optional stateful personal-trial engine is documented in [Notification engine phase 1](docs/notifications-phase1.md). It is off by default; existing email/watchlist behavior remains the default.
+
 After each scrape, `notify.py` emails that same digest. Mail goes out when there is at least one new listing, a meaningful price drop ($2 or 5% versus the previous tracked sale price), a broken-store warning, or a watchlist alert. A warning or a watchlist alert sends even on a day with no other deals. Removals alone do not send mail. An empty digest with no store warning and no watchlist alert does not send mail.
 
 The message is HTML plus a plain-text fallback, grouped by part (Decks, Wheels, Trucks, Bearings). Each row has the store, the product name linked to the store page, the sale price, and the original price with percent off. Price drops also show the previous sale price and the dollar and percent change. Rows at an all-time low are badged, and the message says how many tracked deals are at an all-time low. When the cheapest store is at least $2 or 5% under the highest for the same product, that comparison is included. A store warning is a block at the top. Watchlist alerts sit above the parts, and each store's days-since-last-site-wide-sale line follows. The message links to the full report on GitHub Pages.

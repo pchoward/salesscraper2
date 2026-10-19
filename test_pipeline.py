@@ -88,6 +88,16 @@ class PipelineTests(unittest.TestCase):
         decorate_digest(None, {}, {}, [])
 
 
+class FailedWatchTests(unittest.TestCase):
+    def test_suspect_retained_items_are_not_watch_alerts(self):
+        from unittest.mock import patch
+        item = _deck()
+        digest = Digest(new_items=[])
+        with patch('pipeline.match_watchlist', return_value=([], [])) as matcher:
+            decorate_digest(digest, {'Zumiez_Decks':[item]}, {}, [], failed_keys={'Zumiez_Decks'})
+        self.assertEqual(matcher.call_args.args[0], [])
+
+
 class CompletenessPipelineTests(unittest.TestCase):
     key = "Zumiez_Decks"
 
@@ -213,6 +223,7 @@ class CompletenessPipelineTests(unittest.TestCase):
         url = previous[self.key][-1]["url"]
         history[url].update(miss_streak=1, stage="new")
         with ExitStack() as stack:
+            stack.enter_context(patch.dict('os.environ', {'NOTIFICATION_ENGINE_ENABLED': ''}))
             for name, value in {"build_scrapers": [], "run_stores": (raw, set()), "load_previous": previous,
                                 "load_state": health, "load_price_history": history, "load_site_sales": {},
                                 "build_report_html": "report"}.items():
