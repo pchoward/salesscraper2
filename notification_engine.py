@@ -20,6 +20,7 @@ logger = logging.getLogger('notification_engine')
 STATE_PATH = 'notification_state.json'
 MAX_RECORDS = 4096
 MAX_EVENTS = 1024
+MAX_DIGEST_WATCHES = 25
 EVENT_DAYS = 30
 LABELS = {'match': 'New watch match', 'price': 'Maximum price reached',
           'drop': 'Meaningful price drop', 'low': 'Verified historical low', 'stock': 'Back in stock (verified)'}
@@ -199,6 +200,13 @@ def evaluate(state, rules, catalog, history, failed_keys=(), previous=None,
                         record['stock'] = False
                         record['conditions'] = {k: False for k in record['conditions']}
                     continue
+                if stock is False:
+                    # Never learn another size's price (or an unavailable offer's
+                    # price) while the watched variant is definitely out of stock.
+                    record.update(stock=False, conditions={k: False for k in ['price', 'low', 'match']}, touched=day)
+                    for eid in [eid for eid, event in events.items() if event['record'] == key and event['status'] == 'pending']:
+                        del events[eid]
+                    continue
                 current = _price(item.get('price_new'))
                 if item.get('part') == 'Sneakers' and rule.get('size') not in (None, ''):
                     prices = item.get('shoe_prices')
@@ -232,8 +240,6 @@ def evaluate(state, rules, catalog, history, failed_keys=(), previous=None,
                         reasons.append('stock')
                     if not explicit and not record['conditions'].get('match'):
                         reasons.append('match')
-                else:
-                    conditions = {k: False for k in conditions}
                 record.update(conditions=conditions, last_price=current, touched=day)
                 if stock is not None:
                     record['stock'] = stock
@@ -316,6 +322,9 @@ def send_notifications(digest, catalog, history, failed_keys=(), previous=None,
             state, hits = evaluate(state, rules if rules is not None else load_watchlist(), catalog, history,
                                    failed_keys, previous, stock_evidence, skip_urls, day,
                                    env.get('NOTIFICATION_OWNER_ID') or 'personal', env.get('NOTIFICATION_RECIPIENT_ID') or 'primary')
+            # Keep watch digests concise; unselected pending events stay queued.
+            hits.sort(key=lambda hit: (min(state['events'][eid]['date'] for eid in hit['event_ids']), min(hit['event_ids'])))
+            hits = hits[:MAX_DIGEST_WATCHES]
             outgoing = copy.copy(digest)
             outgoing.watch_alerts = hits
             outgoing.watch_hits = hits  # never include another route's quiet matches/notes

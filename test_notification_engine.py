@@ -201,6 +201,21 @@ class NotificationEngineTests(unittest.TestCase):
             engine.send_notifications(Digest(),{'Zumiez_Decks':[self.item]}, {},env=self.env,rules=[self.rule],path=path,sender=sender,dry_run=True)
             self.assertEqual(path.read_bytes(),before)
 
+    def test_concise_batches_leave_other_events_pending_for_next_run(self):
+        with tempfile.TemporaryDirectory() as tmp,patch.object(engine,'MAX_DIGEST_WATCHES',1):
+            path=Path(tmp)/'state.json';sender=Mock(return_value='sent')
+            catalog={'Zumiez_Decks':[self.item,dict(self.item,url='https://example.com/second')]}
+            kwargs=dict(env=self.env,rules=[self.rule],path=path,sender=sender)
+            engine.send_notifications(Digest(),catalog,{},**kwargs)
+            self.assertEqual(len(sender.call_args.args[0].watch_alerts),1)
+            first_id=sender.call_args.args[0].watch_alerts[0]['event_ids']
+            state=engine.load_state(path)
+            self.assertEqual(sum(e['status']=='pending' for e in state['events'].values()),1)
+            engine.send_notifications(Digest(),catalog,{},**kwargs)
+            self.assertNotEqual(sender.call_args.args[0].watch_alerts[0]['event_ids'],first_id)
+            engine.send_notifications(Digest(),catalog,{},**kwargs)
+            self.assertFalse(sender.call_args.args[0].watch_alerts)
+
     def test_unknown_size_stock_cannot_signal_a_price_or_stock_event(self):
         shoe=dict(self.item,part='Sneakers',stock='in_stock')
         rule={'product_url':shoe['url'],'part':'Sneakers','size':8,'max_price':50,'alert_on_stock':True}
@@ -215,6 +230,17 @@ class NotificationEngineTests(unittest.TestCase):
         shoe['shoe_sizes']=['8']
         state,hits=engine.evaluate(state,[rule],{'CCS_Sneakers':[shoe]},{},day='2026-10-21')
         self.assertIn('Back in stock (verified)',hits[0]['reasons'])
+
+    def test_other_size_price_during_stockout_does_not_create_a_false_drop(self):
+        rule={'product_url':self.item['url'],'part':'Sneakers','size':8,'alert_on_drop':True,'alert_on_stock':True}
+        shoe=dict(self.item,part='Sneakers',price_new='45',shoe_sizes=['8','9'],shoe_prices={'8':'45','9':'100'})
+        state,_=engine.evaluate(engine.empty_state(),[rule],{'CCS_Sneakers':[shoe]}, {},day='2026-10-18')
+        shoe.update(price_new='100',shoe_sizes=['9'],shoe_prices={'9':'100'})
+        state,hits=engine.evaluate(state,[rule],{'CCS_Sneakers':[shoe]}, {},day='2026-10-19')
+        self.assertFalse(hits)
+        shoe.update(price_new='45',shoe_sizes=['8','9'],shoe_prices={'8':'45','9':'100'})
+        state,hits=engine.evaluate(state,[rule],{'CCS_Sneakers':[shoe]}, {},day='2026-10-20')
+        self.assertEqual(hits[0]['reasons'],['Back in stock (verified)'])
 
     def test_first_checkpoint_failure_prevents_email_and_other_route_notes_do_not_leak(self):
         with tempfile.TemporaryDirectory() as tmp:
