@@ -185,6 +185,18 @@
         font-size: 0.95rem;
         text-decoration: none;
     }
+    /* Photo stays beside the name and price so the sheet can be about half
+       as tall as the old stacked layout without shrinking the deck. */
+    #quickView .quick-product {
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.15fr);
+        gap: 10px;
+        align-items: start;
+    }
+    #quickView .quick-image-frame { height: 200px; min-height: 0; }
+    #quickView .quick-more > summary {
+        min-height: 2.75rem;
+        font-size: 0.95rem;
+    }
     #quickView .quick-compare { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.45rem 0.35rem; }
     #quickView .quick-compare strong { font-size: 0.9rem; }
     #quickView .quick-score summary {
