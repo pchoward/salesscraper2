@@ -6,6 +6,20 @@ from pathlib import Path
 
 
 class QuickViewTests(unittest.TestCase):
+    def test_compact_quick_view_styles(self):
+        css = Path(__file__).with_name("page.css").read_text(encoding="utf-8")
+        mobile = Path(__file__).with_name("mobile.css").read_text(encoding="utf-8")
+        frame = css.split(".quick-image-frame {", 1)[1].split("}", 1)[0]
+        self.assertIn("height: 200px", frame)
+        self.assertNotIn("340px", frame)
+        self.assertIn(".quick-more > summary", css)
+        self.assertIn(".quick-keyfacts", css)
+        self.assertIn(".quick-spec-line", css)
+        self.assertIn("#quickView .quick-image-frame { height: 200px; min-height: 0; }", mobile)
+        self.assertIn("#quickView .quick-product", mobile)
+        self.assertIn("#quickView .quick-more > summary", mobile)
+        self.assertIn("min-height: 2.75rem", mobile[mobile.index("#quickView .quick-more > summary"):])
+
     def test_gallery_content_navigation_and_viewport_placement(self):
         source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
         gallery = source[source.index("function quickGalleryImages("):source.index("function syncQuickStar(")]
@@ -59,6 +73,15 @@ assert.equal(body.querySelector('.quick-price').children[0].textContent, '$70.00
 assert.equal(body.querySelector('.quick-close').attrs['aria-label'], 'Close quick view');
 assert.equal(body.querySelectorAll('.quick-spec-chip').length, 10);
 assert.equal(body.querySelectorAll('.quick-spec-chip').at(-1).textContent, '11');
+const more = body.querySelector('.quick-more');
+assert.equal(more.tag, 'details');
+assert.ok(!more.attrs.open, 'more details starts collapsed');
+assert.equal(more.querySelector('summary').textContent, 'More details');
+assert.equal(more.querySelectorAll('.quick-spec-chip').length, 10, 'full sizes sit behind more details');
+assert.match(body.querySelector('.quick-spec-line').textContent, /In stock/);
+assert.equal(body.querySelector('.quick-spec-line').querySelector('.quick-spec-chip'), null);
+assert.equal(more.querySelector('.quick-view-link'), null);
+assert.equal(body.querySelector('.quick-view-link').textContent, 'View at CCS');
 for (const c of ['quick-chart','quick-tracking','quick-facts','quick-score','quick-stores']) assert.equal(body.querySelector('.'+c), null);
 const controls = body.querySelector('.quick-gallery-controls');
 const photo = body.querySelector('.quick-gallery').querySelector('img');
@@ -283,6 +306,33 @@ assert.match(body.querySelector('.quick-readout').textContent, /^Price reduction
 chart.events.touchstart({touches: [{clientX: 40, clientY: 40}]});
 assert.match(body.querySelector('.quick-readout').textContent, /Sep 1, 2026 · \$70\.00/);
 assert.equal(body.querySelector('.quick-view-link').textContent, 'View at CCS');
+const more = body.querySelector('.quick-more');
+assert.equal(more.tag, 'details');
+assert.ok(!more.attrs.open, 'more details starts collapsed');
+assert.equal(more.querySelector('summary').textContent, 'More details');
+assert.ok(more.querySelector('.quick-compare'), 'price comparison stays behind more details');
+assert.ok(more.querySelector('.history-chart'));
+assert.ok(more.querySelector('.quick-score'));
+assert.ok(more.querySelector('.quick-stores'));
+assert.equal(more.querySelector('.quick-keyfacts'), null);
+assert.equal(more.querySelector('.quick-signal'), null);
+assert.equal(more.querySelector('.quick-gallery'), null);
+assert.equal(more.querySelector('.quick-view-link'), null);
+assert.equal(more.querySelector('.quick-star'), null);
+const keys = body.querySelector('.quick-keyfacts');
+assert.match(keys.textContent, /Original/);
+assert.match(keys.textContent, /\$85\.00/);
+assert.match(keys.textContent, /All-time low/);
+assert.match(keys.textContent, /\$55\.00/);
+assert.match(keys.textContent, /Oct 1/);
+assert.match(keys.textContent, /90-day average/);
+assert.match(keys.textContent, /\$61\.50/);
+assert.ok(keys.querySelector('.is-original'));
+const meta = more.querySelector('.quick-history-meta');
+assert.match(meta.textContent, /First seen/);
+assert.match(meta.textContent, /Sep 1/);
+assert.match(meta.textContent, /At this price/);
+assert.match(meta.textContent, /1 day/);
 const heldCard = cardFor('held', {
     price: '40', original: '80', discount: '50', days: '40', daysat: '40', score: '50', hot: '0',
     drop: '0', lowest: '1', hitlow: '0', fresh: '0', store: 'Zumiez'
@@ -295,7 +345,10 @@ assert.match(heldSignal.textContent, /Verified low/);
 assert.equal(body.querySelector('.is-drop'), null);
 assert.equal(body.querySelector('.quick-chart'), null);
 assert.equal(body.querySelector('.quick-stores'), null);
-assert.equal(body.querySelector('.quick-tracking').textContent, 'Tracking since Sep 1');
+const heldMore = body.querySelector('.quick-more');
+assert.equal(heldMore.querySelector('.quick-tracking').textContent, 'Tracking since Sep 1');
+assert.equal(heldMore.querySelector('.quick-signal'), null);
+assert.match(body.querySelector('.quick-keyfacts').textContent, /90-day average/);
 assert.equal(body.querySelector('.quick-gallery').tag, 'div');
 '''
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)

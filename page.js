@@ -3987,6 +3987,7 @@ function fillQuickView(card) {
         price.appendChild(badge);
     }
     identity.append(store, heading, price);
+    appendQuickKeyFacts(identity, card.dataset, facts);
     const signal = quickPriceSignal(card.dataset, card);
     if (signal) identity.appendChild(quickSignal(signal));
     if (item.stage) {
@@ -3995,46 +3996,7 @@ function fillQuickView(card) {
         stage.textContent = item.stage;
         identity.appendChild(stage);
     }
-    product.appendChild(identity);
-    body.appendChild(product);
-    syncQuickStar(card);
-    const details = document.createElement("div");
-    details.className = "quick-details";
-    identity.appendChild(details);
-    if (facts.specs.length) {
-        const block = document.createElement("div");
-        block.className = "quick-specs";
-        facts.specs.forEach(row => {
-            const line = document.createElement("p");
-            const label = document.createElement("span");
-            label.textContent = row.label;
-            const chips = document.createElement("span");
-            chips.className = "quick-chips";
-            row.value.split(",").forEach(value => {
-                const chip = document.createElement("span");
-                chip.className = "quick-spec-chip";
-                chip.textContent = value.trim();
-                chips.appendChild(chip);
-            });
-            line.append(label, chips);
-            block.appendChild(line);
-        });
-        details.appendChild(block);
-    }
-    body.appendChild(quickCompareBlock(card.dataset, facts));
-    if ((facts.points || []).length >= 2) {
-        const chart = document.createElement("div");
-        chart.className = "quick-chart";
-        body.appendChild(chart);
-        drawQuickChart(chart, facts);
-    } else if (facts.firstText || facts.startText) {
-        const note = document.createElement("p");
-        note.className = "quick-tracking";
-        note.textContent = "Tracking since " + (facts.firstText || facts.startText);
-        body.appendChild(note);
-    }
-    appendQuickScore(body, card);
-    appendQuickOffers(body, item);
+    appendQuickSpecLine(identity, facts.specs);
     if (facts.viewUrl) {
         const link = document.createElement("a");
         link.className = "quick-view-link";
@@ -4042,8 +4004,146 @@ function fillQuickView(card) {
         link.target = "_blank";
         link.rel = "noopener";
         link.textContent = facts.viewLabel;
-        body.appendChild(link);
+        identity.appendChild(link);
     }
+    product.appendChild(identity);
+    body.appendChild(product);
+    syncQuickStar(card);
+    appendQuickMore(body, card, item, facts);
+}
+
+function appendQuickKeyFacts(parent, dataset, facts) {
+    dataset = dataset || {};
+    facts = facts || {};
+    const symbol = facts.symbol || "$";
+    const bits = [];
+    const list = Number(dataset.original);
+    if (Number.isFinite(list) && list > 0) {
+        bits.push({ label: "Original", value: quickMoney(symbol, list), original: true });
+    }
+    if (facts.atl && Number.isFinite(Number(facts.atl.price))) {
+        const when = typeof quickShortDate === "function" ? quickShortDate(facts.atl.date) : "";
+        bits.push({
+            label: "All-time low",
+            value: quickMoney(symbol, facts.atl.price) + (when ? " " + when : "")
+        });
+    }
+    if (facts.average != null && Number.isFinite(Number(facts.average))) {
+        bits.push({ label: "90-day average", value: quickMoney(symbol, facts.average) });
+    }
+    if (!bits.length) return;
+    const line = document.createElement("p");
+    line.className = "quick-keyfacts";
+    bits.forEach((bit, index) => {
+        if (index) {
+            const sep = document.createElement("span");
+            sep.className = "quick-key-sep";
+            sep.setAttribute("aria-hidden", "true");
+            sep.textContent = "·";
+            line.appendChild(sep);
+        }
+        const item = document.createElement("span");
+        item.className = bit.original ? "quick-key is-original" : "quick-key";
+        const label = document.createElement("span");
+        label.className = "quick-key-label";
+        label.textContent = bit.label;
+        const value = document.createElement("strong");
+        value.textContent = bit.value;
+        item.append(label, value);
+        line.appendChild(item);
+    });
+    parent.appendChild(line);
+}
+
+function appendQuickSpecLine(parent, specs) {
+    if (!specs || !specs.length) return;
+    const line = document.createElement("p");
+    line.className = "quick-spec-line";
+    line.textContent = specs.map(row => row.label + " " + row.value).join(" · ");
+    parent.appendChild(line);
+}
+
+function appendQuickSpecChips(parent, specs) {
+    if (!specs || !specs.length) return;
+    const details = document.createElement("div");
+    details.className = "quick-details";
+    const block = document.createElement("div");
+    block.className = "quick-specs";
+    specs.forEach(row => {
+        const line = document.createElement("p");
+        const label = document.createElement("span");
+        label.textContent = row.label;
+        const chips = document.createElement("span");
+        chips.className = "quick-chips";
+        row.value.split(",").forEach(value => {
+            const chip = document.createElement("span");
+            chip.className = "quick-spec-chip";
+            chip.textContent = value.trim();
+            chips.appendChild(chip);
+        });
+        line.append(label, chips);
+        block.appendChild(line);
+    });
+    details.appendChild(block);
+    parent.appendChild(details);
+}
+
+function appendQuickHistoryMeta(parent, facts) {
+    const rows = ((facts && facts.rows) || []).filter(row => {
+        return row.label === "First seen" || row.label === "At this price";
+    });
+    if (!rows.length) return;
+    const line = document.createElement("p");
+    line.className = "quick-history-meta";
+    rows.forEach((row, index) => {
+        if (index) {
+            const sep = document.createElement("span");
+            sep.className = "quick-key-sep";
+            sep.setAttribute("aria-hidden", "true");
+            sep.textContent = "·";
+            line.appendChild(sep);
+        }
+        const item = document.createElement("span");
+        const label = document.createElement("span");
+        label.className = "quick-key-label";
+        label.textContent = row.label;
+        const value = document.createElement("strong");
+        value.textContent = row.value;
+        item.append(label, value);
+        line.appendChild(item);
+    });
+    parent.appendChild(line);
+}
+
+function appendQuickMore(body, card, item, facts) {
+    facts = facts || {};
+    const more = document.createElement("details");
+    more.className = "quick-more";
+    const summary = document.createElement("summary");
+    summary.textContent = "More details";
+    more.appendChild(summary);
+    appendQuickHistoryMeta(more, facts);
+    more.appendChild(quickCompareBlock(card.dataset, facts));
+    if ((facts.points || []).length >= 2) {
+        const chart = document.createElement("div");
+        chart.className = "quick-chart";
+        more.appendChild(chart);
+        drawQuickChart(chart, facts);
+    } else if (facts.firstText || facts.startText) {
+        const note = document.createElement("p");
+        note.className = "quick-tracking";
+        note.textContent = "Tracking since " + (facts.firstText || facts.startText);
+        more.appendChild(note);
+    }
+    appendQuickScore(more, card);
+    appendQuickSpecChips(more, facts.specs);
+    appendQuickOffers(more, item);
+    const panel = document.getElementById("quickView");
+    more.addEventListener("toggle", () => {
+        if (!panel || panel.classList.contains("is-sheet")) return;
+        if (typeof placeQuickView === "function") placeQuickView(card);
+    });
+    body.appendChild(more);
 }
 
 function quickNodeText(card, selector) {
