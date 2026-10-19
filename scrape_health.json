@@ -1709,14 +1709,14 @@
           }
         },
         "SkateWarehouse_Trucks": {
-          "count": 9,
+          "count": 8,
           "failed": false,
           "diagnostics": {
             "expected_count": 9.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 9,
-            "percentage_change": 0.0,
+            "actual_count": 8,
+            "percentage_change": -11.1,
             "reason": "normal_variation"
           }
         },
@@ -1805,14 +1805,14 @@
           }
         },
         "Zumiez_Accessories": {
-          "count": 12,
+          "count": 11,
           "failed": false,
           "diagnostics": {
             "expected_count": 12.5,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.5,
-            "actual_count": 12,
-            "percentage_change": -4.0,
+            "actual_count": 11,
+            "percentage_change": -12.0,
             "reason": "insufficient_history"
           }
         },
@@ -1877,7 +1877,7 @@
           }
         }
       },
-      "scanned_at": "2026-10-19T01:38:08+00:00"
+      "scanned_at": "2026-10-19T14:39:05+00:00"
     }
   ],
   "baseline": {
@@ -1903,7 +1903,7 @@
     },
     "SkateWarehouse_Trucks": {
       "date": "2026-10-19",
-      "count": 9
+      "count": 8
     },
     "CCS_Decks": {
       "date": "2026-10-19",
@@ -1931,7 +1931,7 @@
     },
     "Zumiez_Accessories": {
       "date": "2026-10-19",
-      "count": 12
+      "count": 11
     },
     "SkateWarehouse_Bearings": {
       "date": "2026-10-19",
@@ -2422,7 +2422,7 @@
       },
       {
         "date": "2026-10-19",
-        "count": 9
+        "count": 8
       }
     ],
     "SkateWarehouse_Wheels": [
@@ -2754,7 +2754,7 @@
       },
       {
         "date": "2026-10-19",
-        "count": 12
+        "count": 11
       }
     ],
     "Zumiez_Bearings": [
