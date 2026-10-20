@@ -54,3 +54,9 @@ chrome_data_*/
 # Local/private notification event checkpoints (restored via Actions cache).
 notification_state.json
 notification_state.json.lock
+
+# Alerts backend: local Worker config and subscriber delivery state (never committed)
+worker/wrangler.toml
+worker/.wrangler/
+worker/.dev.vars
+alerts_state/

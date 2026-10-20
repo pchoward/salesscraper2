@@ -15,6 +15,8 @@ Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publi
 ├── mobile.css                 # Phone layout (≤800px), inlined after page.css
 ├── page.js                    # Filters, cards, charts, sort, stars, drawer, stats
 ├── notify.py                  # SMTP email for deals, watch alerts, store warnings
+├── alerts_delivery.py         # Opt-in subscriber alerts via the alerts Worker (off by default)
+├── worker/                    # Alerts Worker: subscriber API, D1 schema, mock server, tests
 ├── history.py                 # Bounded price history, images, and all-time lows
 ├── history_identity.py        # Which history rows are one product, and an audit
 ├── health.py                  # Per-store scrape counts and warnings
@@ -154,7 +156,7 @@ Add another rule by appending a `- id:` block. The commented example in the file
 
 Matching watchlist alerts are a block at the top of the email. Quiet matches are listed under that as still on sale.
 
-Plans for alert deduplication and optional opt-in subscriptions (no code yet) are in [docs/notifications-architecture.md](docs/notifications-architecture.md).
+Plans for alert deduplication and optional opt-in subscriptions are in [docs/notifications-architecture.md](docs/notifications-architecture.md). The subscriber backend (not deployed, off by default) is documented in [docs/alerts-backend.md](docs/alerts-backend.md), and its API contract in [docs/alerts-api.md](docs/alerts-api.md).
 
 ## Site-wide sales
 

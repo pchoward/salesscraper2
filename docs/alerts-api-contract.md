@@ -42,9 +42,9 @@ Email links use `#verify=` and `#manage=`. The page reads the fragment and remov
 
 The page reads `{"error":"<code>"}`, optional `fields`, and `retry_after` (or the `Retry-After` header). A 503, or health `{"ok":false}`, is shown as "Alerts are unavailable right now."
 
-## Known gap in PR #60
+## Health and CORS (fixed in PR #60)
 
-`GET /v1/health` returns before the worker adds CORS headers. A page on another origin cannot read `mode`, even though the spec says localhost and `127.0.0.1` are allowed. The page does not treat that network failure as the documented 503. It still shows the form and sends the signup. It sends `mock-turnstile-pass` only when a readable health body says `mode` is `mock`. Until health sends `Access-Control-Allow-Origin`, a browser on another origin cannot learn that it is talking to the mock.
+`GET /v1/health` used to return before the worker added CORS headers, so a page on another origin could not read `mode`. PR #60 now sends `Access-Control-Allow-Origin` on health, for the site origin, and for `localhost`/`127.0.0.1` in mock mode only. It does so on the fail-closed 503s too, so the page can read `mode`. A browser on another origin can now tell it is talking to the mock, and can see "unavailable" as a real 503. That was checked in Chromium against the mock server. The page logic above did not need to change. It still sends `mock-turnstile-pass` only when a readable health body says `mode` is `mock`, and it does not treat a network failure as the documented 503.
 
 ## Not in the API, so not in the UI
 

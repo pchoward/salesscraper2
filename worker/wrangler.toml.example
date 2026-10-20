@@ -1,0 +1,40 @@
+# Copy to wrangler.toml (gitignored) and fill in the owner's own values.
+# Nothing in this repository deploys the Worker. See docs/alerts-backend.md.
+#
+# Secrets are never written here. Set them with:
+#   wrangler secret put HMAC_SECRET            # 32+ random characters; same value as the
+#                                              # GitHub secret ALERTS_HMAC_SECRET
+#   wrangler secret put TOKEN_PEPPER           # 32+ random characters; never rotate casually
+#                                              # (rotating invalidates every link and hash)
+#   wrangler secret put RESEND_API_KEY         # a "sending access" key for one domain
+#   wrangler secret put TURNSTILE_SECRET
+#   wrangler secret put RESEND_WEBHOOK_SECRET  # optional; enables bounce/complaint handling
+#   wrangler secret put STAGING_ALLOWED_EMAILS # staging only: comma-separated test inboxes
+
+name = "skatedeals-alerts"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+MODE = "staging"                                   # staging | production (mock is local only)
+PUBLIC_ORIGIN = "https://pchoward.github.io"
+PUBLIC_API_URL = "https://skatedeals-alerts.<your-subdomain>.workers.dev"
+MANAGE_PAGE_URL = "https://pchoward.github.io/salesscraper2/alerts.html"
+CONSENT_VERSION = "2026-10"
+EMAIL_FROM = "SkateDeals <alerts@your-verified-domain.example>"   # staging may use onboarding@resend.dev
+MAX_ACTIVE_SUBSCRIBERS = "200"
+MAX_RULES_PER_SUBSCRIBER = "10"
+DAILY_EMAILS_PER_SUBSCRIBER = "3"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "skatedeals-alerts"
+database_id = "<from: wrangler d1 create skatedeals-alerts>"
+migrations_dir = "migrations"
+
+[triggers]
+crons = ["37 4 * * *"]                             # daily retention cleanup (UTC)
+
+[observability]
+enabled = true

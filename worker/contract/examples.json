@@ -1,0 +1,128 @@
+{
+  "description": "API contract v1, as one mock-mode session. test/contract.test.js replays every step against the Worker and requires these exact status codes and bodies. Placeholders: {{name}} is a value captured earlier; \"<token>\", \"<rule-id>\", and \"<iso-time>\" match any value of that shape.",
+  "steps": [
+    {
+      "name": "health",
+      "request": { "method": "GET", "path": "/v1/health" },
+      "response": { "status": 200, "body": { "ok": true, "api_version": "1", "mode": "mock" } }
+    },
+    {
+      "name": "subscribe",
+      "request": {
+        "method": "POST",
+        "path": "/v1/subscribe",
+        "body": {
+          "email": "rider@example.com",
+          "rules": [
+            { "brand": "Heroin", "part": "Decks", "min_width": 8.6, "max_price": 60, "note": "Wide Heroin decks" },
+            { "name": "Antihero Caster", "alert_on_low": true }
+          ],
+          "consent": true,
+          "consent_version": "2026-10",
+          "turnstile_token": "mock-turnstile-pass"
+        }
+      },
+      "response": { "status": 202, "body": { "status": "check_email" } },
+      "capture_from_email": { "verify_token": "#verify=" }
+    },
+    {
+      "name": "verify",
+      "request": { "method": "POST", "path": "/v1/verify", "body": { "token": "{{verify_token}}" } },
+      "response": {
+        "status": 200,
+        "body": {
+          "status": "active",
+          "manage_token": "<token>",
+          "preferences": {
+            "status": "active",
+            "email_masked": "r***@example.com",
+            "consent_version": "2026-10",
+            "verified_at": "<iso-time>",
+            "max_rules": 10,
+            "rules": [
+              { "id": "<rule-id>", "brand": "Heroin", "max_price": 60, "min_width": 8.6, "note": "Wide Heroin decks", "part": "Decks" },
+              { "id": "<rule-id>", "alert_on_low": true, "name": "Antihero Caster", "part": "Decks" }
+            ]
+          }
+        }
+      },
+      "capture": { "manage_token": "manage_token" }
+    },
+    {
+      "name": "verify again (single use)",
+      "request": { "method": "POST", "path": "/v1/verify", "body": { "token": "{{verify_token}}" } },
+      "response": { "status": 400, "body": { "error": "invalid_token" } }
+    },
+    {
+      "name": "read preferences",
+      "request": { "method": "GET", "path": "/v1/preferences", "headers": { "Authorization": "Bearer {{manage_token}}" } },
+      "response": {
+        "status": 200,
+        "body": {
+          "status": "active",
+          "email_masked": "r***@example.com",
+          "consent_version": "2026-10",
+          "verified_at": "<iso-time>",
+          "max_rules": 10,
+          "rules": [
+            { "id": "<rule-id>", "brand": "Heroin", "max_price": 60, "min_width": 8.6, "note": "Wide Heroin decks", "part": "Decks" },
+            { "id": "<rule-id>", "alert_on_low": true, "name": "Antihero Caster", "part": "Decks" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "replace preferences",
+      "request": {
+        "method": "PUT",
+        "path": "/v1/preferences",
+        "headers": { "Authorization": "Bearer {{manage_token}}" },
+        "body": { "rules": [{ "brand": "Powell Peralta", "part": "Decks", "width": 9, "alert_on_drop": true }] }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "status": "active",
+          "email_masked": "r***@example.com",
+          "consent_version": "2026-10",
+          "verified_at": "<iso-time>",
+          "max_rules": 10,
+          "rules": [{ "id": "<rule-id>", "alert_on_drop": true, "brand": "Powell Peralta", "part": "Decks", "width": 9 }]
+        }
+      }
+    },
+    {
+      "name": "invalid preferences",
+      "request": {
+        "method": "PUT",
+        "path": "/v1/preferences",
+        "headers": { "Authorization": "Bearer {{manage_token}}" },
+        "body": { "rules": [{ "brand": "Bones", "part": "Wheels", "max_price": -5, "width": 8.5 }] }
+      },
+      "response": {
+        "status": 400,
+        "body": { "error": "invalid_rules", "fields": { "rules[0].width": "decks_only", "rules[0].max_price": "price_out_of_range" } }
+      }
+    },
+    {
+      "name": "request a manage link",
+      "request": { "method": "POST", "path": "/v1/link", "body": { "email": "rider@example.com", "turnstile_token": "mock-turnstile-pass" } },
+      "response": { "status": 202, "body": { "status": "check_email" } }
+    },
+    {
+      "name": "bad captcha",
+      "request": { "method": "POST", "path": "/v1/link", "body": { "email": "rider@example.com", "turnstile_token": "wrong" } },
+      "response": { "status": 400, "body": { "error": "captcha_failed" } }
+    },
+    {
+      "name": "unsubscribe with the manage token",
+      "request": { "method": "POST", "path": "/v1/unsubscribe", "headers": { "Authorization": "Bearer {{manage_token}}" } },
+      "response": { "status": 200, "body": { "status": "unsubscribed" } }
+    },
+    {
+      "name": "the manage token stops working",
+      "request": { "method": "GET", "path": "/v1/preferences", "headers": { "Authorization": "Bearer {{manage_token}}" } },
+      "response": { "status": 401, "body": { "error": "invalid_token" } }
+    }
+  ]
+}
