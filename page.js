@@ -3997,6 +3997,8 @@ function fillQuickView(card) {
         identity.appendChild(stage);
     }
     appendQuickSpecLine(identity, facts.specs);
+    const actions = document.createElement("div");
+    actions.className = "quick-actions";
     if (facts.viewUrl) {
         const link = document.createElement("a");
         link.className = "quick-view-link";
@@ -4004,8 +4006,10 @@ function fillQuickView(card) {
         link.target = "_blank";
         link.rel = "noopener";
         link.textContent = facts.viewLabel;
-        identity.appendChild(link);
+        actions.appendChild(link);
     }
+    if (typeof appendQuickAlert === "function") appendQuickAlert(actions, card);
+    if (actions.children.length) identity.appendChild(actions);
     product.appendChild(identity);
     body.appendChild(product);
     syncQuickStar(card);
@@ -4692,7 +4696,7 @@ function wireQuickView() {
     });
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
-        if (event.target.closest("#quickView, .card-more, .group-quick")) return;
+        if (event.target.closest("#quickView, .card-more, .group-quick, #alertsRoot, #navAlerts")) return;
         closeQuickView();
     });
 }
@@ -5365,6 +5369,11 @@ function init() {
     if (close) close.addEventListener("click", closeDrawer);
     document.addEventListener("keydown", event => {
         if (event.key === "Escape") {
+            if (typeof isAlertsOpen === "function" && isAlertsOpen()) {
+                event.preventDefault();
+                closeAlerts();
+                return;
+            }
             hideSparkTip();
             closeDrawer();
             closeSparkPanel();
@@ -5406,7 +5415,1539 @@ function init() {
         state.cardLow = false;
         applyFilters();
     }
+    wireAlerts();
 }
 
 document.addEventListener("DOMContentLoaded", updateAgo);
 document.addEventListener("DOMContentLoaded", init);
+
+/* ALERTS_UI_START
+   Email alerts for the static page. Contract: docs/alerts-api-contract.md.
+   Tokens stay in the URL fragment. This file has no API secrets. */
+
+const ALERTS_API_BASE = "";
+const ALERTS_CONSENT_VERSION = "2026-10-20";
+const ALERTS_ACCEPTED_MESSAGE = "If this address can receive mail, we sent a verification link. Alerts stay off until you confirm.";
+const ALERTS_LINK_MESSAGE = "If an account exists for this address, we sent a new manage link.";
+const ALERTS_RULE_FIELDS = [
+    "rule_id", "brand", "name", "part", "width", "min_width", "max_width", "size",
+    "max_price", "alert_on_drop", "alert_on_low", "alert_on_stock", "alert_on_new",
+    "back_in_stock_width", "product_url", "note", "paused"
+];
+const ALERTS_PARTS = ["", "Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes"];
+
+const alertsUi = {
+    wired: false,
+    open: false,
+    config: null,
+    client: null,
+    view: "signup",
+    draft: null,
+    editingId: "",
+    prefs: null,
+    token: "",
+    busy: false,
+    message: "",
+    error: "",
+    previewToken: "",
+    previewKind: "",
+    confirmId: "",
+    turnstileToken: "",
+    returnFocus: null,
+    writingHash: false
+};
+
+function alertsResolveConfig(env) {
+    env = env || {};
+    const cfg = env.config || {};
+    const host = String(env.host || "");
+    const production = /(^|\.)github\.io$/i.test(host);
+    const requested = String(cfg.apiBase || cfg.baseUrl || env.metaContent || env.fallbackBase || "").trim();
+    const consentVersion = String(cfg.consentVersion || ALERTS_CONSENT_VERSION);
+    const turnstileSiteKey = String(cfg.turnstileSiteKey || "").trim();
+    const mock = cfg.mock === true || cfg.mode === "mock";
+    if (requested && alertsBaseAllowed(requested, production)) {
+        return {
+            mode: "live",
+            apiBase: alertsNormalizeBase(requested),
+            consentVersion: consentVersion,
+            turnstileSiteKey: turnstileSiteKey,
+            production: production
+        };
+    }
+    if (mock && !production) {
+        return {
+            mode: "mock",
+            apiBase: "",
+            consentVersion: consentVersion,
+            turnstileSiteKey: "",
+            production: false
+        };
+    }
+    return {
+        mode: "soon",
+        apiBase: "",
+        consentVersion: consentVersion,
+        turnstileSiteKey: "",
+        production: production
+    };
+}
+
+function alertsBaseAllowed(apiBase, production) {
+    let url;
+    try {
+        url = new URL(apiBase);
+    } catch (err) {
+        return false;
+    }
+    if (url.username || url.password || url.search || url.hash) return false;
+    if (url.protocol === "https:") return true;
+    if (!production && url.protocol === "http:" && (url.hostname === "localhost" || url.hostname === "127.0.0.1")) return true;
+    return false;
+}
+
+function alertsNormalizeBase(apiBase) {
+    const url = new URL(apiBase);
+    const path = url.pathname.replace(/\/+$/, "");
+    return url.origin + path;
+}
+
+function alertsPageConfig() {
+    let meta = "";
+    if (typeof document !== "undefined" && document.querySelector) {
+        const node = document.querySelector('meta[name="skatedeals-alerts-api"]');
+        if (node) meta = node.getAttribute("content") || "";
+    }
+    const cfg = (typeof window !== "undefined" && window.SKATEDEALS_ALERTS) || {};
+    const host = (typeof location !== "undefined" && location.hostname) || "";
+    return alertsResolveConfig({
+        config: cfg,
+        host: host,
+        metaContent: meta,
+        fallbackBase: ALERTS_API_BASE
+    });
+}
+
+function readAlertsFragment(hash) {
+    const text = String(hash || "").trim();
+    if (!text || text.charAt(0) === "?") return null;
+    const raw = text.replace(/^#/, "");
+    if (!raw || raw.indexOf("=") < 0) return null;
+    const params = new URLSearchParams(raw);
+    const verify = params.get("verify");
+    if (verify) return { purpose: "verify", token: verify };
+    const manage = params.get("manage");
+    if (manage) return { purpose: "manage", token: manage };
+    const token = params.get("token");
+    if (!token) return null;
+    let purpose = "auto";
+    if (params.get("purpose") === "manage") purpose = "manage";
+    else if (params.get("purpose") === "verify") purpose = "verify";
+    return { purpose: purpose, token: token };
+}
+
+function manageTokenFromVerify(body) {
+    body = body || {};
+    if (body.manage_token) return String(body.manage_token);
+    const link = String(body.manage_link || body.manage_url || "");
+    const hash = link.indexOf("#") >= 0 ? link.slice(link.indexOf("#") + 1) : "";
+    if (!hash) return "";
+    const parsed = readAlertsFragment(hash);
+    return parsed && parsed.purpose !== "verify" ? parsed.token : "";
+}
+
+function validEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+}
+
+function normalizeEmail(email) {
+    return String(email || "").trim().toLowerCase();
+}
+
+function maskEmail(email) {
+    const parts = String(email || "").split("@");
+    if (parts.length !== 2 || !parts[0] || !parts[1]) return "hidden";
+    return parts[0].slice(0, 1) + "***@" + parts[1];
+}
+
+function safeProductUrl(value) {
+    const text = String(value || "").trim();
+    if (/^https:\/\//i.test(text) && text.length <= 500) return text;
+    return "";
+}
+
+function cleanRule(rule) {
+    const copy = {};
+    const source = rule || {};
+    ALERTS_RULE_FIELDS.forEach(key => {
+        if (source[key] != null && source[key] !== "") copy[key] = source[key];
+    });
+    ["alert_on_drop", "alert_on_low", "alert_on_stock", "alert_on_new", "paused"].forEach(key => {
+        if (copy[key] !== true) delete copy[key];
+    });
+    if (copy.note != null) copy.note = String(copy.note);
+    return copy;
+}
+
+function blankAlertDraft() {
+    return {
+        form: "fields",
+        match: "brand",
+        rule_id: "",
+        brand: "",
+        name: "",
+        part: "Decks",
+        size: "",
+        product_url: "",
+        max_price: "",
+        alert_on_drop: true,
+        alert_on_low: false,
+        alert_on_stock: false,
+        alert_on_new: false,
+        note: "",
+        paused: false,
+        store: ""
+    };
+}
+
+function alertDraftFromDataset(dataset, card) {
+    dataset = dataset || {};
+    let item = {};
+    if (typeof catalog === "function") {
+        const data = catalog() || {};
+        item = (data.items || {})[dataset.id] || {};
+    }
+    const part = dataset.part || item.part || "";
+    let size = dataset.size || "";
+    if (!size && part === "Sneakers") {
+        const shoes = String(dataset.shoesize || dataset.shoeSize || "").split(",").map(bit => bit.trim()).filter(Boolean);
+        if (shoes.length === 1) size = shoes[0];
+    }
+    const price = Number(dataset.price);
+    const name = dataset.name || item.name || "";
+    const brand = dataset.brand || "";
+    return {
+        form: "card",
+        match: name ? "name" : "brand",
+        rule_id: "",
+        brand: brand,
+        name: name,
+        part: part,
+        size: size,
+        product_url: dataset.url || item.url || "",
+        max_price: Number.isFinite(price) && price > 0 ? String(Math.round(price * 100) / 100) : "",
+        alert_on_drop: true,
+        alert_on_low: false,
+        alert_on_stock: false,
+        alert_on_new: false,
+        note: "",
+        paused: false,
+        store: dataset.store || item.store || ""
+    };
+}
+
+function draftFromRule(rule) {
+    rule = rule || {};
+    const draft = blankAlertDraft();
+    draft.form = "fields";
+    draft.rule_id = rule.rule_id || "";
+    draft.brand = rule.brand || "";
+    draft.name = rule.name || "";
+    draft.match = rule.name && !rule.brand ? "name" : (rule.brand && !rule.name ? "brand" : (rule.name ? "name" : "brand"));
+    draft.part = rule.part || "";
+    draft.size = rule.size != null && rule.size !== "" ? String(rule.size) : (rule.width != null ? String(rule.width) : "");
+    draft.product_url = rule.product_url || "";
+    draft.max_price = rule.max_price != null && rule.max_price !== "" ? String(rule.max_price) : "";
+    draft.alert_on_drop = !!rule.alert_on_drop;
+    draft.alert_on_low = !!rule.alert_on_low;
+    draft.alert_on_stock = !!rule.alert_on_stock;
+    draft.alert_on_new = !!rule.alert_on_new;
+    draft.note = rule.note || "";
+    draft.paused = !!rule.paused || rule.status === "paused";
+    return draft;
+}
+
+function ruleFromDraft(draft) {
+    draft = draft || {};
+    const rule = {};
+    if (draft.rule_id) rule.rule_id = String(draft.rule_id);
+    const brand = String(draft.brand || "").trim();
+    const name = String(draft.name || "").trim();
+    const match = draft.match === "brand" || (!name && brand) ? "brand" : "name";
+    if (match === "brand") {
+        if (brand) rule.brand = brand;
+    } else {
+        if (name) rule.name = name;
+        if (brand) rule.brand = brand;
+        const url = safeProductUrl(draft.product_url);
+        if (url) rule.product_url = url;
+    }
+    const part = String(draft.part || "").trim();
+    if (part) rule.part = part;
+    const size = String(draft.size || "").trim().replace(/["”″]/g, "");
+    if (size) {
+        rule.size = size;
+        const width = Number(size);
+        if (part === "Decks" && Number.isFinite(width) && width > 0 && width < 20) rule.width = width;
+    }
+    if (String(draft.max_price == null ? "" : draft.max_price).trim() !== "") {
+        const price = Number(draft.max_price);
+        if (Number.isFinite(price)) rule.max_price = Math.round(price * 100) / 100;
+    }
+    if (draft.alert_on_drop) rule.alert_on_drop = true;
+    if (draft.alert_on_low) rule.alert_on_low = true;
+    if (draft.alert_on_stock) {
+        rule.alert_on_stock = true;
+        if (rule.width != null) rule.back_in_stock_width = rule.width;
+    }
+    if (draft.alert_on_new) rule.alert_on_new = true;
+    const note = String(draft.note || "").trim();
+    if (note) rule.note = note;
+    if (draft.paused) rule.paused = true;
+    return cleanRule(rule);
+}
+
+function validateRules(rules, options) {
+    options = options || {};
+    if (!Array.isArray(rules)) return "Add at least one alert. Nothing was saved.";
+    if (options.requireOne && rules.length < 1) return "Add a product or a brand to watch. Nothing was saved.";
+    if (rules.length > 10) return "You can save up to 10 alerts. Nothing was saved.";
+    for (let i = 0; i < rules.length; i++) {
+        const rule = rules[i] || {};
+        if (!rule.brand && !rule.name && !rule.product_url) return "Add a product or a brand. Nothing was saved.";
+        if (rule.max_price != null && rule.max_price !== "" && !(Number(rule.max_price) > 0)) {
+            return "Target price has to be greater than zero. Nothing was saved.";
+        }
+        if (rule.note && String(rule.note).length > 80) return "Notes have to be 80 characters or fewer. Nothing was saved.";
+        if (rule.brand && String(rule.brand).length > 120) return "Brand is too long. Nothing was saved.";
+        if (rule.name && String(rule.name).length > 160) return "Product name is too long. Nothing was saved.";
+    }
+    return "";
+}
+
+function validateSignup(email, consent, rules) {
+    if (!validEmail(email)) return "Enter the email address that should get the digest. Nothing was saved.";
+    if (consent !== true) return "Check the box to agree to the daily digest. Nothing was saved.";
+    return validateRules(rules, { requireOne: true });
+}
+
+function ruleBadge(subscriberStatus, rule) {
+    rule = rule || {};
+    const paused = !!rule.paused || rule.status === "paused";
+    if (subscriberStatus === "active" && paused) return { key: "paused", label: "Paused" };
+    if (subscriberStatus === "active" && rule.status === "active" && !rule.paused) {
+        return { key: "active", label: "Active" };
+    }
+    return { key: "pending", label: "Pending verification" };
+}
+
+function ruleTitle(rule) {
+    return (rule && (rule.name || rule.brand)) || "Alert";
+}
+
+function ruleMeta(rule) {
+    const bits = [];
+    if (rule.part) bits.push(rule.part);
+    if (rule.size || rule.width != null) bits.push(String(rule.size || rule.width));
+    if (rule.max_price != null && rule.max_price !== "") bits.push("under $" + Number(rule.max_price).toFixed(2));
+    return bits.join(" · ");
+}
+
+function ruleTriggers(rule) {
+    const bits = [];
+    if (rule.alert_on_drop) bits.push("Meaningful drop");
+    if (rule.alert_on_low) bits.push("Historical low");
+    if (rule.alert_on_stock) bits.push("Verified restock");
+    if (rule.alert_on_new) bits.push("Newly listed");
+    if (!bits.length) bits.push("New, meaningful drop, or verified restock");
+    return bits.join(", ");
+}
+
+function describeWatch(draft) {
+    draft = draft || {};
+    const bits = [];
+    if (draft.match === "brand" && draft.brand) bits.push(draft.brand);
+    else bits.push(draft.name || draft.brand || "this product");
+    if (draft.part) bits.push(draft.part);
+    if (draft.size) bits.push(String(draft.size));
+    if (String(draft.max_price == null ? "" : draft.max_price).trim() !== "" && Number(draft.max_price) > 0) {
+        bits.push("under $" + Number(draft.max_price).toFixed(2));
+    }
+    return bits.join(" · ");
+}
+
+function alertsFailureMessage(result) {
+    result = result || {};
+    if (result.error === "rate_limited" || result.status === 429) {
+        return "Too many requests. Wait a while and try again. Nothing was changed.";
+    }
+    if (result.error === "turnstile_required") {
+        return "The alerts service needs a human check that isn't available on this page. Nothing was saved.";
+    }
+    if (result.error === "unavailable") return "Email alerts coming soon. Nothing was saved.";
+    if (result.error === "network" || result.status === 0) {
+        return result.message || "The alerts service could not be reached. Nothing was saved.";
+    }
+    if (result.status === 401 || result.error === "token_expired") {
+        return result.message || "This manage link has expired. Request a new one.";
+    }
+    return result.message || "Something went wrong. Nothing was saved.";
+}
+
+function alertsResult(status, body, extra) {
+    const payload = body || {};
+    const result = {
+        ok: status >= 200 && status < 300,
+        status: status,
+        error: payload.error || "",
+        message: payload.message || "",
+        body: payload
+    };
+    if (extra) {
+        Object.keys(extra).forEach(key => { result[key] = extra[key]; });
+    }
+    return result;
+}
+
+function createAlertsMock() {
+    const byEmail = new Map();
+    const api = { lastPreviewToken: "", lastPreviewKind: "", seq: 1 };
+
+    function findByToken(token, field) {
+        if (!token) return null;
+        for (const sub of byEmail.values()) {
+            if (sub[field] && sub[field] === token) return sub;
+        }
+        return null;
+    }
+
+    function withId(rule) {
+        const copy = cleanRule(rule);
+        if (!copy.rule_id) copy.rule_id = "r_" + api.seq++;
+        return copy;
+    }
+
+    function decorate(rule, status) {
+        const copy = cleanRule(rule);
+        if (status !== "active") copy.status = "pending";
+        else if (copy.paused) copy.status = "paused";
+        else copy.status = "active";
+        return copy;
+    }
+
+    function payload(sub) {
+        return {
+            status: sub.status,
+            verified: sub.status === "active",
+            email_masked: maskEmail(sub.email),
+            consent_version: sub.consentVersion || "",
+            rules: (sub.rules || []).map(rule => decorate(rule, sub.status)),
+            limits: { max_rules: 10, note_max: 80 }
+        };
+    }
+
+    function accepted(message) {
+        return { status: "accepted", message: message };
+    }
+
+    api.peek = function (email) {
+        const sub = byEmail.get(normalizeEmail(email));
+        if (!sub) return null;
+        return {
+            status: sub.status,
+            verifyToken: sub.verifyToken || "",
+            manageToken: sub.manageToken || "",
+            rules: payload(sub).rules
+        };
+    };
+
+    api.handle = function (method, path, options) {
+        options = options || {};
+        const body = options.body || {};
+        const token = options.token || "";
+        if (method === "POST" && path === "/subscribe") {
+            const email = normalizeEmail(body.email);
+            if (body.consent !== true || !validEmail(email)) {
+                return alertsResult(400, {
+                    error: "invalid_request",
+                    message: "Enter an email address and check the consent box. Nothing was saved."
+                });
+            }
+            const rules = Array.isArray(body.rules) ? body.rules.map(cleanRule) : [];
+            const problem = validateRules(rules, { requireOne: true });
+            if (problem) return alertsResult(400, { error: "invalid_rules", message: problem });
+            let sub = byEmail.get(email);
+            const verifyToken = "verify_" + api.seq++;
+            if (!sub) {
+                sub = {
+                    email: email,
+                    status: "pending",
+                    manageToken: "manage_" + api.seq++,
+                    verifyToken: verifyToken,
+                    consentVersion: body.consent_version || "",
+                    rules: rules.map(withId)
+                };
+                byEmail.set(email, sub);
+                api.lastPreviewToken = verifyToken;
+                api.lastPreviewKind = "verify";
+            } else if (sub.status !== "active") {
+                sub.status = "pending";
+                sub.verifyToken = verifyToken;
+                sub.consentVersion = body.consent_version || sub.consentVersion;
+                sub.rules = rules.map(withId);
+                api.lastPreviewToken = verifyToken;
+                api.lastPreviewKind = "verify";
+            } else {
+                api.lastPreviewToken = "";
+                api.lastPreviewKind = "";
+            }
+            return alertsResult(202, accepted(ALERTS_ACCEPTED_MESSAGE), {
+                previewToken: api.lastPreviewToken,
+                previewKind: api.lastPreviewKind
+            });
+        }
+        if (method === "POST" && path === "/verify") {
+            const sub = findByToken(body.token, "verifyToken");
+            if (!sub) {
+                return alertsResult(400, {
+                    error: "invalid_token",
+                    message: "This confirmation link is invalid or already used."
+                });
+            }
+            sub.status = "active";
+            sub.verifyToken = "";
+            api.lastPreviewToken = "";
+            api.lastPreviewKind = "";
+            return alertsResult(200, {
+                status: "active",
+                manage_token: sub.manageToken,
+                email_masked: maskEmail(sub.email)
+            });
+        }
+        if (method === "POST" && path === "/link") {
+            const email = normalizeEmail(body.email);
+            if (!validEmail(email)) {
+                return alertsResult(400, {
+                    error: "invalid_request",
+                    message: "Enter an email address. Nothing was sent."
+                });
+            }
+            const sub = byEmail.get(email);
+            if (sub) {
+                sub.manageToken = "manage_" + api.seq++;
+                api.lastPreviewToken = sub.manageToken;
+                api.lastPreviewKind = "manage";
+            } else {
+                api.lastPreviewToken = "";
+                api.lastPreviewKind = "";
+            }
+            return alertsResult(202, accepted(ALERTS_LINK_MESSAGE), {
+                previewToken: api.lastPreviewToken,
+                previewKind: api.lastPreviewKind
+            });
+        }
+        if (path === "/preferences" && (method === "GET" || method === "PUT")) {
+            const sub = findByToken(token, "manageToken");
+            if (!sub) {
+                return alertsResult(401, {
+                    error: "token_expired",
+                    message: "This manage link has expired. Request a new one."
+                });
+            }
+            if (method === "PUT") {
+                const rules = Array.isArray(body.rules) ? body.rules.map(cleanRule) : null;
+                const problem = validateRules(rules || [], {});
+                if (!rules || problem) {
+                    return alertsResult(400, { error: "invalid_rules", message: problem || "Those rules could not be saved." });
+                }
+                sub.rules = rules.map(withId);
+            }
+            return alertsResult(200, payload(sub));
+        }
+        if ((method === "POST" && path === "/unsubscribe") || (method === "DELETE" && path === "/subscriber")) {
+            const bearer = findByToken(token, "manageToken");
+            const posted = findByToken(body.token, "manageToken");
+            const sub = bearer || posted;
+            if (!sub) {
+                return alertsResult(401, {
+                    error: "token_expired",
+                    message: "This manage link has expired. Request a new one."
+                });
+            }
+            byEmail.delete(sub.email);
+            const message = method === "DELETE"
+                ? "Your address and rules were deleted."
+                : "You are unsubscribed. We deleted your address and rules.";
+            return alertsResult(200, { status: method === "DELETE" ? "deleted" : "unsubscribed", message: message });
+        }
+        return alertsResult(404, { error: "not_found", message: "That alerts request is not available." });
+    };
+    return api;
+}
+
+async function liveAlertsRequest(config, fetchImpl, method, path, options) {
+    options = options || {};
+    const headers = { Accept: "application/json" };
+    if (options.body) headers["Content-Type"] = "application/json";
+    if (options.token) headers.Authorization = "Bearer " + options.token;
+    let response;
+    try {
+        response = await fetchImpl(config.apiBase + path, {
+            method: method,
+            headers: headers,
+            body: options.body ? JSON.stringify(options.body) : undefined,
+            credentials: "omit",
+            mode: "cors"
+        });
+    } catch (err) {
+        return alertsResult(0, {
+            error: "network",
+            message: "The alerts service could not be reached. Nothing was saved."
+        });
+    }
+    let body = {};
+    try {
+        body = await response.json();
+    } catch (err) {
+        body = {};
+    }
+    if (response.status === 202) {
+        const message = body.message || (path === "/link" ? ALERTS_LINK_MESSAGE : ALERTS_ACCEPTED_MESSAGE);
+        return alertsResult(202, Object.assign({ status: "accepted", message: message }, body));
+    }
+    if (response.ok) return alertsResult(response.status, body);
+    return alertsResult(response.status, {
+        error: body.error || "error",
+        message: body.message || "Something went wrong. Nothing was saved."
+    });
+}
+
+function createAlertsClient(config, fetchImpl) {
+    config = config || { mode: "soon" };
+    const mock = config.mode === "mock" ? createAlertsMock() : null;
+    const net = fetchImpl || (typeof fetch === "function" ? fetch : null);
+    async function request(method, path, options) {
+        if (config.mode === "soon") {
+            return alertsResult(0, { error: "unavailable", message: "Email alerts coming soon. Nothing was saved." });
+        }
+        if (config.mode === "mock") return mock.handle(method, path, options || {});
+        return liveAlertsRequest(config, net, method, path, options || {});
+    }
+    return {
+        mode: config.mode,
+        subscribe(payload) { return request("POST", "/subscribe", { body: payload }); },
+        verify(token) { return request("POST", "/verify", { body: { token: token } }); },
+        requestLink(payload) { return request("POST", "/link", { body: payload }); },
+        getPreferences(token) { return request("GET", "/preferences", { token: token }); },
+        putPreferences(token, rules) { return request("PUT", "/preferences", { token: token, body: { rules: (rules || []).map(cleanRule) } }); },
+        unsubscribe(token) { return request("POST", "/unsubscribe", { token: token, body: { token: token } }); },
+        deleteSubscriber(token) { return request("DELETE", "/subscriber", { token: token }); },
+        peek(email) { return mock ? mock.peek(email) : null; },
+        lastPreview() {
+            if (!mock) return { token: "", kind: "" };
+            return { token: mock.lastPreviewToken || "", kind: mock.lastPreviewKind || "" };
+        }
+    };
+}
+
+function alertsEl(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+}
+
+function alertsId(node, id) {
+    node.id = id;
+    node.setAttribute("id", id);
+    return node;
+}
+
+function isAlertsOpen() {
+    const root = document.getElementById("alertsRoot");
+    return !!(alertsUi.open && root && !root.hidden);
+}
+
+function setAlertsHash(fragment) {
+    alertsUi.writingHash = true;
+    const base = (location.pathname || "") + (location.search || "");
+    const next = fragment ? base + fragment : base;
+    if (typeof history !== "undefined" && history.replaceState) history.replaceState(null, "", next);
+    else location.hash = fragment || "";
+    alertsUi.writingHash = false;
+}
+
+function appendQuickAlert(parent, card) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "quick-alert";
+    button.textContent = "Alert me";
+    button.addEventListener("click", event => {
+        if (event.preventDefault) event.preventDefault();
+        if (event.stopPropagation) event.stopPropagation();
+        const dataset = (card && card.dataset) || {};
+        openAlerts({
+            draft: alertDraftFromDataset(dataset, card),
+            returnFocus: button
+        });
+    });
+    parent.appendChild(button);
+}
+
+function mountAlertsNav() {
+    if (document.getElementById("navAlerts")) return;
+    const group = document.querySelector ? document.querySelector(".topnav-links") : null;
+    if (!group) return;
+    const button = alertsEl("button", "nav-link", "Alerts");
+    button.type = "button";
+    alertsId(button, "navAlerts");
+    button.setAttribute("aria-haspopup", "dialog");
+    button.setAttribute("aria-controls", "alertsRoot");
+    button.setAttribute("aria-expanded", "false");
+    button.addEventListener("click", () => openAlerts({ returnFocus: button }));
+    group.appendChild(button);
+}
+
+function ensureAlertsShell() {
+    if (document.getElementById("alertsRoot")) return;
+    const root = alertsEl("div");
+    alertsId(root, "alertsRoot");
+    root.hidden = true;
+    const panel = alertsEl("div", "alerts-panel");
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
+    panel.setAttribute("aria-labelledby", "alertsTitle");
+    panel.tabIndex = -1;
+    const head = alertsEl("div", "alerts-head");
+    const title = alertsEl("h2", "alerts-title", "Email alerts");
+    alertsId(title, "alertsTitle");
+    const close = alertsEl("button", "alerts-close", "×");
+    close.type = "button";
+    alertsId(close, "alertsClose");
+    close.setAttribute("aria-label", "Close alerts");
+    close.addEventListener("click", event => {
+        if (event.preventDefault) event.preventDefault();
+        closeAlerts();
+    });
+    head.append(title, close);
+    const error = alertsEl("div", "alerts-error");
+    alertsId(error, "alertsError");
+    error.setAttribute("role", "alert");
+    error.tabIndex = -1;
+    const live = alertsEl("div", "alerts-live");
+    alertsId(live, "alertsLive");
+    live.setAttribute("aria-live", "polite");
+    const body = alertsEl("div", "alerts-body");
+    alertsId(body, "alertsBody");
+    panel.append(head, error, live, body);
+    root.appendChild(panel);
+    root.addEventListener("click", event => {
+        if (event.target === root) closeAlerts();
+        else onAlertsClick(event);
+    });
+    document.body.appendChild(root);
+    document.addEventListener("keydown", alertsKeydown);
+}
+
+function alertsKeydown(event) {
+    if (!isAlertsOpen() || !event || event.key !== "Tab") return;
+    const panel = document.querySelector(".alerts-panel");
+    if (!panel || !panel.querySelectorAll) return;
+    const nodes = panel.querySelectorAll("button, a, input, select, textarea");
+    const items = [];
+    for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        if (node.disabled || node.hidden) continue;
+        items.push(node);
+    }
+    if (!items.length || !panel.contains) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const active = document.activeElement;
+    if (event.shiftKey && (active === first || !panel.contains(active))) {
+        if (event.preventDefault) event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && active === last) {
+        if (event.preventDefault) event.preventDefault();
+        first.focus();
+    }
+}
+
+function focusAlerts(id) {
+    const node = (id && document.getElementById(id)) || document.querySelector(".alerts-panel");
+    if (node && node.focus) node.focus();
+}
+
+function syncAlertsNav() {
+    const nav = document.getElementById("navAlerts");
+    if (!nav) return;
+    nav.setAttribute("aria-expanded", alertsUi.open ? "true" : "false");
+}
+
+function closeAlerts() {
+    const root = document.getElementById("alertsRoot");
+    if (root) root.hidden = true;
+    if (document.body && document.body.classList) document.body.classList.remove("alerts-open");
+    alertsUi.open = false;
+    syncAlertsNav();
+    const back = alertsUi.returnFocus;
+    alertsUi.returnFocus = null;
+    if (back && back.focus) back.focus();
+}
+
+function checkedBox(id) {
+    const node = document.getElementById(id);
+    return !!(node && node.checked);
+}
+
+function readRuleForm() {
+    const draft = Object.assign({}, alertsUi.draft || blankAlertDraft());
+    const brandRadio = document.getElementById("alertsMatchBrand");
+    const nameRadio = document.getElementById("alertsMatchName");
+    if (brandRadio || nameRadio) draft.match = brandRadio && brandRadio.checked ? "brand" : "name";
+    const brand = document.getElementById("alertsBrand");
+    if (brand) draft.brand = brand.value;
+    const name = document.getElementById("alertsName");
+    if (name) draft.name = name.value;
+    const part = document.getElementById("alertsPart");
+    if (part) draft.part = part.value;
+    const size = document.getElementById("alertsSize");
+    if (size) draft.size = size.value;
+    const price = document.getElementById("alertsPrice");
+    if (price) draft.max_price = String(price.value || "").trim();
+    if (document.getElementById("alertsDrop")) draft.alert_on_drop = checkedBox("alertsDrop");
+    if (document.getElementById("alertsLow")) draft.alert_on_low = checkedBox("alertsLow");
+    if (document.getElementById("alertsStock")) draft.alert_on_stock = checkedBox("alertsStock");
+    if (document.getElementById("alertsNew")) draft.alert_on_new = checkedBox("alertsNew");
+    const note = document.getElementById("alertsNote");
+    if (note) draft.note = note.value;
+    return draft;
+}
+
+function fieldWrap(labelText, input, hint) {
+    const wrap = alertsEl("label", "alerts-field");
+    wrap.appendChild(alertsEl("span", "", labelText));
+    if (input) wrap.appendChild(input);
+    if (hint) wrap.appendChild(alertsEl("small", "alerts-hint", hint));
+    return wrap;
+}
+
+function actionButton(text, className, action, ruleId) {
+    const button = alertsEl("button", className, text);
+    button.type = "button";
+    button.setAttribute("data-action", action);
+    if (ruleId) button.setAttribute("data-rule-id", ruleId);
+    if (alertsUi.busy) button.disabled = true;
+    return button;
+}
+
+function textInput(id, value, type) {
+    const input = alertsEl("input");
+    input.type = type || "text";
+    alertsId(input, id);
+    input.value = value == null ? "" : String(value);
+    return input;
+}
+
+function appendMatchFields(form, draft) {
+    if (draft.form === "card" && (draft.name || draft.brand)) {
+        const group = alertsEl("div", "alerts-match");
+        group.setAttribute("role", "radiogroup");
+        group.setAttribute("aria-label", "What to watch");
+        if (draft.name) {
+            const label = alertsEl("label", "alerts-check");
+            const input = textInput("alertsMatchName", "", "radio");
+            input.name = "alertsMatch";
+            input.checked = draft.match !== "brand";
+            label.append(input, alertsEl("span", "", " This product: " + draft.name));
+            group.appendChild(label);
+        }
+        if (draft.brand) {
+            const label = alertsEl("label", "alerts-check");
+            const input = textInput("alertsMatchBrand", "", "radio");
+            input.name = "alertsMatch";
+            input.checked = draft.match === "brand" || !draft.name;
+            const noun = draft.part ? draft.part.toLowerCase() : "products";
+            label.append(input, alertsEl("span", "", " Any " + draft.brand + " " + noun));
+            group.appendChild(label);
+        }
+        form.appendChild(group);
+        if (draft.store) {
+            form.appendChild(alertsEl("p", "alerts-hint", "Opened from the " + draft.store + " listing. A brand watch can match the same product at other stores."));
+        }
+        return;
+    }
+    const brand = textInput("alertsBrand", draft.brand || "");
+    brand.maxLength = 120;
+    form.appendChild(fieldWrap("Brand", brand, "Every word must match. Leave blank if you name one product."));
+    const name = textInput("alertsName", draft.name || "");
+    name.maxLength = 160;
+    form.appendChild(fieldWrap("Product", name, "Optional. Names one product instead of a whole brand."));
+}
+
+function appendRuleFields(form, draft) {
+    appendMatchFields(form, draft);
+    const part = alertsEl("select");
+    alertsId(part, "alertsPart");
+    ALERTS_PARTS.forEach(value => {
+        const option = alertsEl("option", "", value || "Any type");
+        option.value = value;
+        option.setAttribute("value", value);
+        if (value === (draft.part || "")) option.selected = true;
+        part.appendChild(option);
+    });
+    part.value = draft.part || "";
+    form.appendChild(fieldWrap("Type", part, ""));
+    const size = textInput("alertsSize", draft.size || "");
+    size.setAttribute("inputmode", "decimal");
+    form.appendChild(fieldWrap("Size", size, "Deck width in inches, or a US shoe size. Leave blank for any size."));
+    const price = textInput("alertsPrice", draft.max_price == null ? "" : draft.max_price, "number");
+    price.setAttribute("min", "0");
+    price.setAttribute("step", "0.01");
+    price.setAttribute("inputmode", "decimal");
+    const priceHint = draft.form === "card" && draft.max_price !== ""
+        ? "Suggested from the current sale price. A match is strictly under this amount. Leave blank to skip the price check."
+        : "A match is strictly under this amount. Leave blank to skip the price check.";
+    form.appendChild(fieldWrap("Target price", price, priceHint));
+    const triggers = alertsEl("fieldset", "alerts-triggers");
+    triggers.appendChild(alertsEl("legend", "alerts-legend", "Email me when"));
+    [
+        ["alertsDrop", "Meaningful drop", "At least $2 or 5% off the previous sale price.", draft.alert_on_drop],
+        ["alertsLow", "Historical low", "A qualified all-time low: 3 observations over 7 days.", draft.alert_on_low],
+        ["alertsStock", "Verified restock", "Back in stock on reliable evidence, not a missed scan.", draft.alert_on_stock],
+        ["alertsNew", "Newly listed", "The product shows up as a new listing.", draft.alert_on_new]
+    ].forEach(row => {
+        const label = alertsEl("label", "alerts-check");
+        const box = textInput(row[0], "", "checkbox");
+        box.checked = !!row[3];
+        label.append(box, alertsEl("span", "", " " + row[1]));
+        triggers.appendChild(label);
+        triggers.appendChild(alertsEl("p", "alerts-hint", row[2]));
+    });
+    triggers.appendChild(alertsEl("p", "alerts-hint", "If none are checked, a match is included when it is newly listed, drops by at least $2 or 5%, or is verified back in stock."));
+    form.appendChild(triggers);
+    const note = alertsEl("textarea");
+    alertsId(note, "alertsNote");
+    note.maxLength = 80;
+    note.value = draft.note || "";
+    note.rows = 2;
+    form.appendChild(fieldWrap("Note", note, "Optional. 80 characters. Shown on the digest, not used for matching."));
+}
+
+function appendPrivacy(parent) {
+    const details = alertsEl("details", "alerts-privacy");
+    details.appendChild(alertsEl("summary", "", "Email, confirmation, and unsubscribe"));
+    details.appendChild(alertsEl("p", "alerts-hint", "We store the address and these rules until you unsubscribe. Unconfirmed signups are deleted after 7 days. The digest is at most one email a day, and only when a rule matches. The manage link stays in the page address after the # so it is not sent to this site's server. Don't share that link. Stars on this page stay in this browser and never send email."));
+    parent.appendChild(details);
+}
+
+function mountTurnstile(parent) {
+    const config = alertsUi.config || {};
+    if (!config.turnstileSiteKey || config.mode !== "live") return;
+    const slot = alertsEl("div", "alerts-turnstile");
+    alertsId(slot, "alertsTurnstile");
+    parent.appendChild(slot);
+    if (document.getElementById("alertsTurnstileScript") || !document.head) return;
+    const script = document.createElement("script");
+    alertsId(script, "alertsTurnstileScript");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.addEventListener("load", () => {
+        const host = document.getElementById("alertsTurnstile");
+        if (!host || !window.turnstile || !window.turnstile.render) return;
+        window.turnstile.render(host, {
+            sitekey: config.turnstileSiteKey,
+            callback: token => { alertsUi.turnstileToken = token || ""; }
+        });
+    });
+    document.head.appendChild(script);
+}
+
+function paintSoon(body) {
+    body.appendChild(alertsEl("p", "alerts-copy", "Nothing here subscribes you, and nothing is saved. Stars stay in this browser and do not send email. When email alerts are ready, a rule stays off until you confirm your address, and you can unsubscribe in one step."));
+    const draft = alertsUi.draft;
+    if (draft && (draft.name || draft.brand)) {
+        body.appendChild(alertsEl("p", "alerts-copy", "You'd be able to watch: " + describeWatch(draft) + "."));
+    }
+    appendPrivacy(body);
+}
+
+function paintCheck(body) {
+    body.appendChild(alertsEl("p", "alerts-hint", "The same reply is shown whether or not this address is already signed up. This page will not turn an alert on until a confirmation link comes back from the alerts service."));
+    if (alertsUi.config.mode === "mock" && alertsUi.previewToken) {
+        body.appendChild(actionButton("Open preview confirmation", "alerts-secondary", "preview", ""));
+        body.appendChild(alertsEl("p", "alerts-hint", "Preview mode did not send email. This opens the confirmation that preview would have emailed."));
+    }
+    body.appendChild(actionButton("Use a different address", "alerts-secondary", "reset-signup", ""));
+}
+
+function paintRelink(body) {
+    body.appendChild(alertsEl("p", "alerts-copy", "Request a new manage link. If an account exists, the message arrives shortly. The link belongs in the address bar, after the #."));
+    const form = alertsEl("form", "alerts-form");
+    alertsId(form, "alertsLinkForm");
+    form.noValidate = true;
+    form.setAttribute("novalidate", "");
+    form.addEventListener("submit", submitLink);
+    const email = textInput("alertsLinkEmail", "", "email");
+    email.setAttribute("autocomplete", "email");
+    email.setAttribute("aria-label", "Email");
+    form.appendChild(fieldWrap("Email", email, ""));
+    const submit = alertsEl("button", "alerts-primary", alertsUi.busy ? "Sending…" : "Email me a new link");
+    submit.type = "submit";
+    alertsId(submit, "alertsLinkSubmit");
+    if (alertsUi.busy) submit.disabled = true;
+    form.appendChild(submit);
+    body.appendChild(form);
+}
+
+function paintSignup(body) {
+    const draft = alertsUi.draft || blankAlertDraft();
+    const form = alertsEl("form", "alerts-form");
+    alertsId(form, "alertsForm");
+    form.noValidate = true;
+    form.setAttribute("novalidate", "");
+    form.addEventListener("submit", submitSignup);
+    form.appendChild(alertsEl("p", "alerts-copy", "At most one email a day, only when a rule matches. It stays off until you confirm the address."));
+    appendRuleFields(form, draft);
+    const email = textInput("alertsEmail", alertsUi.email || "", "email");
+    email.setAttribute("autocomplete", "email");
+    email.setAttribute("aria-label", "Email");
+    form.appendChild(fieldWrap("Email", email, ""));
+    const consent = alertsEl("label", "alerts-check");
+    const box = textInput("alertsConsent", "", "checkbox");
+    box.checked = !!alertsUi.consent;
+    consent.append(box, alertsEl("span", "", " Email me at most one digest a day, only when a rule matches. I can unsubscribe in one step. Nothing is sent until I confirm this address."));
+    form.appendChild(consent);
+    appendPrivacy(form);
+    const actions = alertsEl("div", "alerts-actions");
+    const submit = alertsEl("button", "alerts-primary", alertsUi.busy ? "Sending…" : "Email me a confirmation");
+    submit.type = "submit";
+    alertsId(submit, "alertsSubmit");
+    if (alertsUi.busy) submit.disabled = true;
+    actions.appendChild(submit);
+    actions.appendChild(actionButton("I already confirmed — email me a manage link", "alerts-secondary", "relink", ""));
+    form.appendChild(actions);
+    mountTurnstile(form);
+    body.appendChild(form);
+}
+
+function paintEdit(body) {
+    const draft = alertsUi.draft || blankAlertDraft();
+    const form = alertsEl("form", "alerts-form");
+    alertsId(form, "alertsEditForm");
+    form.noValidate = true;
+    form.setAttribute("novalidate", "");
+    form.addEventListener("submit", saveEdit);
+    form.appendChild(alertsEl("h3", "alerts-subtitle", draft.rule_id ? "Edit alert" : "Add an alert"));
+    appendRuleFields(form, draft);
+    const actions = alertsEl("div", "alerts-actions");
+    const submit = alertsEl("button", "alerts-primary", alertsUi.busy ? "Saving…" : "Save alert");
+    submit.type = "submit";
+    alertsId(submit, "alertsSave");
+    if (alertsUi.busy) submit.disabled = true;
+    actions.appendChild(submit);
+    actions.appendChild(actionButton("Cancel", "alerts-secondary", "cancel-edit", ""));
+    form.appendChild(actions);
+    body.appendChild(form);
+}
+
+function paintManage(body) {
+    const prefs = alertsUi.prefs || {};
+    const active = prefs.status === "active";
+    body.appendChild(alertsEl("p", "alerts-copy", active
+        ? "This address is confirmed. A rule is on only when it says Active. The digest is at most once a day."
+        : "Pending email verification. These rules are saved and are not active. Open the confirmation link before any of them can send mail."));
+    if (prefs.email_masked) body.appendChild(alertsEl("p", "alerts-meta", "Address " + prefs.email_masked));
+    const rules = prefs.rules || [];
+    if (!rules.length) body.appendChild(alertsEl("p", "alerts-copy", "You have no alerts yet."));
+    rules.forEach(rule => {
+        const card = alertsEl("article", "alerts-rule");
+        const badge = ruleBadge(prefs.status, rule);
+        card.appendChild(alertsEl("h3", "", ruleTitle(rule)));
+        card.appendChild(alertsEl("span", "alerts-status is-" + badge.key, badge.label));
+        const meta = [ruleMeta(rule), ruleTriggers(rule)].filter(Boolean).join(" · ");
+        if (meta) card.appendChild(alertsEl("p", "alerts-meta", meta));
+        if (rule.note) card.appendChild(alertsEl("p", "alerts-meta", rule.note));
+        const actions = alertsEl("div", "alerts-actions");
+        if (alertsUi.confirmId === rule.rule_id) {
+            actions.appendChild(alertsEl("span", "alerts-meta", "Remove this alert?"));
+            actions.appendChild(actionButton("Remove", "alerts-danger", "confirm-remove", rule.rule_id));
+            actions.appendChild(actionButton("Keep", "alerts-secondary", "cancel-remove", ""));
+        } else {
+            actions.appendChild(actionButton("Edit", "alerts-secondary", "edit", rule.rule_id));
+            const paused = !!rule.paused || rule.status === "paused";
+            actions.appendChild(actionButton(paused ? "Resume" : "Pause", "alerts-secondary", "pause", rule.rule_id));
+            actions.appendChild(actionButton("Remove", "alerts-danger", "remove", rule.rule_id));
+        }
+        card.appendChild(actions);
+        body.appendChild(card);
+    });
+    const bar = alertsEl("div", "alerts-actions");
+    if (rules.length < 10) bar.appendChild(actionButton("Add an alert", "alerts-primary", "add", ""));
+    body.appendChild(bar);
+    appendPrivacy(body);
+    const danger = alertsEl("div", "alerts-actions");
+    if (alertsUi.confirmId === "unsubscribe") {
+        danger.appendChild(alertsEl("span", "alerts-meta", "Unsubscribe and delete this address?"));
+        danger.appendChild(actionButton("Unsubscribe", "alerts-danger", "confirm-unsubscribe", ""));
+        danger.appendChild(actionButton("Keep alerts", "alerts-secondary", "cancel-remove", ""));
+    } else {
+        danger.appendChild(actionButton("Unsubscribe", "alerts-danger", "unsubscribe", ""));
+    }
+    body.appendChild(danger);
+    body.appendChild(alertsEl("p", "alerts-hint", "Unsubscribing deletes your address and rules right away. Every digest also has a one-click unsubscribe link that does not need this page."));
+}
+
+function paintAlerts(focusId) {
+    const title = document.getElementById("alertsTitle");
+    const live = document.getElementById("alertsLive");
+    const error = document.getElementById("alertsError");
+    const body = document.getElementById("alertsBody");
+    if (!body) return;
+    const config = alertsUi.config || { mode: "soon" };
+    const managing = config.mode !== "soon" && alertsUi.prefs && alertsUi.token && (alertsUi.view === "manage" || alertsUi.view === "edit");
+    if (title) title.textContent = managing ? "Manage alerts" : "Email alerts";
+    if (error) error.textContent = alertsUi.error || "";
+    if (live) live.textContent = alertsUi.message || "";
+    body.replaceChildren();
+    if (config.mode === "soon") {
+        paintSoon(body);
+    } else {
+        if (config.mode === "mock") {
+            body.appendChild(alertsEl("p", "alerts-banner", "Preview mode. No email is sent."));
+        }
+        if (alertsUi.view === "check") paintCheck(body);
+        else if (alertsUi.view === "relink") paintRelink(body);
+        else if (alertsUi.view === "edit" && alertsUi.prefs && alertsUi.token) paintEdit(body);
+        else if (alertsUi.view === "manage" && alertsUi.prefs && alertsUi.token) paintManage(body);
+        else paintSignup(body);
+    }
+    if (focusId) focusAlerts(focusId);
+}
+
+function ensureClient() {
+    const config = alertsPageConfig();
+    alertsUi.config = config;
+    if (!alertsUi.client || alertsUi.client.mode !== config.mode) alertsUi.client = createAlertsClient(config);
+    return config;
+}
+
+async function openAlerts(options) {
+    options = options || {};
+    ensureAlertsShell();
+    mountAlertsNav();
+    const config = ensureClient();
+    const root = document.getElementById("alertsRoot");
+    if (options.returnFocus) alertsUi.returnFocus = options.returnFocus;
+    else if (!alertsUi.returnFocus && document.activeElement && document.activeElement.focus) {
+        alertsUi.returnFocus = document.activeElement;
+    }
+    if (typeof isQuickOpen === "function" && isQuickOpen() && typeof closeQuickView === "function") {
+        let back = null;
+        if (typeof quickCard !== "undefined" && quickCard && quickCard.querySelector) back = quickCard.querySelector(".card-more");
+        closeQuickView();
+        if (back) alertsUi.returnFocus = back;
+    }
+    alertsUi.open = true;
+    if (root) root.hidden = false;
+    if (document.body && document.body.classList) document.body.classList.add("alerts-open");
+    syncAlertsNav();
+    if (config.mode === "soon") {
+        alertsUi.view = "signup";
+        alertsUi.message = "Email alerts coming soon.";
+        alertsUi.error = "";
+        if (options.draft) alertsUi.draft = options.draft;
+        paintAlerts("alertsClose");
+        return;
+    }
+    if (options.fragment) {
+        await openAlertsFragment(options.fragment);
+        return;
+    }
+    alertsUi.error = "";
+    if (options.draft && alertsUi.token && alertsUi.prefs) {
+        alertsUi.draft = Object.assign(blankAlertDraft(), options.draft, { rule_id: "", paused: false });
+        alertsUi.editingId = "";
+        alertsUi.view = "edit";
+        alertsUi.message = "";
+        paintAlerts("alertsSize");
+        return;
+    }
+    if (options.draft) {
+        alertsUi.draft = options.draft;
+        alertsUi.view = "signup";
+        alertsUi.message = "";
+        paintAlerts("alertsEmail");
+        return;
+    }
+    if (alertsUi.token && alertsUi.prefs) {
+        alertsUi.view = "manage";
+        paintAlerts("alertsClose");
+        return;
+    }
+    if (alertsUi.token && !alertsUi.prefs) {
+        await loadPreferences();
+        return;
+    }
+    alertsUi.draft = alertsUi.draft || blankAlertDraft();
+    alertsUi.view = "signup";
+    alertsUi.message = "";
+    paintAlerts("alertsEmail");
+}
+
+async function openAlertsFragment(fragment) {
+    alertsUi.error = "";
+    alertsUi.message = "Checking this link…";
+    alertsUi.view = "manage";
+    paintAlerts();
+    if (fragment.purpose === "verify" || fragment.purpose === "auto") {
+        const result = await alertsUi.client.verify(fragment.token);
+        if (result.ok) {
+            const manage = manageTokenFromVerify(result.body);
+            if (!manage) {
+                alertsUi.error = "The confirmation response did not include a manage token. Nothing is marked active.";
+                alertsUi.message = "";
+                alertsUi.view = "relink";
+                paintAlerts("alertsError");
+                return;
+            }
+            alertsUi.token = manage;
+            setAlertsHash("#manage=" + encodeURIComponent(manage));
+            await loadPreferences();
+            return;
+        }
+        if (fragment.purpose === "verify") {
+            alertsUi.token = "";
+            alertsUi.prefs = null;
+            alertsUi.error = alertsFailureMessage(result);
+            alertsUi.message = "";
+            alertsUi.view = "relink";
+            paintAlerts("alertsError");
+            return;
+        }
+    }
+    alertsUi.token = fragment.token;
+    const loaded = await loadPreferences();
+    if (!loaded && fragment.purpose === "auto") {
+        alertsUi.view = "relink";
+        paintAlerts("alertsLinkEmail");
+    }
+}
+
+async function loadPreferences() {
+    const result = await alertsUi.client.getPreferences(alertsUi.token);
+    if (!result.ok) {
+        alertsUi.prefs = null;
+        alertsUi.view = "relink";
+        alertsUi.error = alertsFailureMessage(result);
+        alertsUi.message = "";
+        paintAlerts("alertsError");
+        return false;
+    }
+    alertsUi.prefs = result.body || {};
+    alertsUi.view = "manage";
+    alertsUi.error = "";
+    alertsUi.confirmId = "";
+    alertsUi.message = alertsUi.prefs.status === "active"
+        ? "Email confirmed. A rule is on only when it says Active."
+        : "Pending email verification. Nothing is active until you confirm.";
+    paintAlerts("alertsTitle");
+    return true;
+}
+
+async function submitSignup(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (alertsUi.busy || !alertsUi.client || alertsUi.config.mode === "soon") return;
+    const draft = readRuleForm();
+    alertsUi.draft = draft;
+    const emailNode = document.getElementById("alertsEmail");
+    const email = emailNode ? String(emailNode.value || "").trim() : "";
+    alertsUi.email = email;
+    alertsUi.consent = checkedBox("alertsConsent");
+    const rule = ruleFromDraft(draft);
+    const problem = validateSignup(email, checkedBox("alertsConsent"), [rule]);
+    if (problem) {
+        alertsUi.error = problem;
+        alertsUi.message = "";
+        paintAlerts("alertsError");
+        return;
+    }
+    alertsUi.busy = true;
+    alertsUi.error = "";
+    const button = document.getElementById("alertsSubmit");
+    if (button) {
+        button.disabled = true;
+        button.textContent = "Sending…";
+    }
+    let result;
+    try {
+        result = await alertsUi.client.subscribe({
+            email: email,
+            rules: [rule],
+            consent: true,
+            consent_version: alertsUi.config.consentVersion,
+            turnstile_token: alertsUi.turnstileToken || ""
+        });
+    } catch (err) {
+        result = alertsResult(0, { error: "network", message: "The alerts service could not be reached. Nothing was saved." });
+    }
+    alertsUi.busy = false;
+    if (result.status === 202) {
+        alertsUi.view = "check";
+        alertsUi.message = (result.body && result.body.message) || ALERTS_ACCEPTED_MESSAGE;
+        alertsUi.error = "";
+        alertsUi.previewToken = result.previewToken || "";
+        alertsUi.previewKind = result.previewKind || "";
+        paintAlerts("alertsLive");
+        return;
+    }
+    alertsUi.error = alertsFailureMessage(result);
+    alertsUi.message = "";
+    paintAlerts("alertsError");
+}
+
+async function submitLink(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (alertsUi.busy || !alertsUi.client) return;
+    const emailNode = document.getElementById("alertsLinkEmail");
+    const email = emailNode ? String(emailNode.value || "").trim() : "";
+    if (!validEmail(email)) {
+        alertsUi.error = "Enter the email address that should get the digest. Nothing was sent.";
+        alertsUi.message = "";
+        paintAlerts("alertsError");
+        return;
+    }
+    alertsUi.busy = true;
+    alertsUi.error = "";
+    let result;
+    try {
+        result = await alertsUi.client.requestLink({
+            email: email,
+            turnstile_token: alertsUi.turnstileToken || ""
+        });
+    } catch (err) {
+        result = alertsResult(0, { error: "network", message: "The alerts service could not be reached. Nothing was sent." });
+    }
+    alertsUi.busy = false;
+    if (result.status === 202) {
+        alertsUi.view = "check";
+        alertsUi.message = (result.body && result.body.message) || ALERTS_LINK_MESSAGE;
+        alertsUi.error = "";
+        alertsUi.previewToken = result.previewToken || "";
+        alertsUi.previewKind = result.previewKind || "";
+        paintAlerts("alertsLive");
+        return;
+    }
+    alertsUi.error = alertsFailureMessage(result);
+    paintAlerts("alertsError");
+}
+
+async function saveEdit(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (alertsUi.busy || !alertsUi.prefs) return;
+    const draft = readRuleForm();
+    const rule = ruleFromDraft(draft);
+    const existing = (alertsUi.prefs.rules || []).map(cleanRule);
+    let rules;
+    if (draft.rule_id) {
+        rules = existing.map(item => item.rule_id === draft.rule_id ? rule : item);
+    } else {
+        rules = existing.concat([rule]);
+    }
+    const problem = validateRules(rules, {});
+    if (problem) {
+        alertsUi.error = problem;
+        paintAlerts("alertsError");
+        return;
+    }
+    await putRules(rules);
+}
+
+async function putRules(rules) {
+    alertsUi.busy = true;
+    alertsUi.error = "";
+    let result;
+    try {
+        result = await alertsUi.client.putPreferences(alertsUi.token, rules);
+    } catch (err) {
+        result = alertsResult(0, { error: "network", message: "The alerts service could not be reached. Nothing was changed." });
+    }
+    alertsUi.busy = false;
+    if (!result.ok) {
+        alertsUi.error = alertsFailureMessage(result);
+        if (result.status === 401) {
+            alertsUi.prefs = null;
+            alertsUi.view = "relink";
+        }
+        paintAlerts("alertsError");
+        return;
+    }
+    alertsUi.prefs = result.body || {};
+    alertsUi.view = "manage";
+    alertsUi.confirmId = "";
+    alertsUi.message = alertsUi.prefs.status === "active"
+        ? "Saved. A rule is on only when it says Active."
+        : "Saved. Pending email verification — nothing is active yet.";
+    alertsUi.error = "";
+    paintAlerts("alertsLive");
+}
+
+function ruleById(id) {
+    const rules = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    for (let i = 0; i < rules.length; i++) {
+        if (rules[i].rule_id === id) return rules[i];
+    }
+    return null;
+}
+
+async function togglePause(id) {
+    const current = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    const rules = current.map(rule => {
+        const copy = cleanRule(rule);
+        if (copy.rule_id === id) {
+            if (copy.paused) delete copy.paused;
+            else copy.paused = true;
+        }
+        return copy;
+    });
+    await putRules(rules);
+}
+
+async function removeRule(id) {
+    const current = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    await putRules(current.filter(rule => rule.rule_id !== id).map(cleanRule));
+}
+
+async function unsubscribeAlerts() {
+    if (!alertsUi.client || alertsUi.busy) return;
+    alertsUi.busy = true;
+    alertsUi.error = "";
+    let result;
+    try {
+        result = await alertsUi.client.unsubscribe(alertsUi.token);
+    } catch (err) {
+        result = alertsResult(0, { error: "network", message: "The alerts service could not be reached. Nothing was changed." });
+    }
+    alertsUi.busy = false;
+    if (!result.ok) {
+        alertsUi.error = alertsFailureMessage(result);
+        paintAlerts("alertsError");
+        return;
+    }
+    alertsUi.token = "";
+    alertsUi.prefs = null;
+    alertsUi.confirmId = "";
+    alertsUi.previewToken = "";
+    alertsUi.draft = blankAlertDraft();
+    alertsUi.view = "signup";
+    setAlertsHash("");
+    alertsUi.message = (result.body && result.body.message) || "You are unsubscribed. We deleted your address and rules.";
+    alertsUi.error = "";
+    paintAlerts("alertsLive");
+}
+
+async function confirmPreview() {
+    if (!alertsUi.config || alertsUi.config.mode !== "mock" || !alertsUi.previewToken) return;
+    if (alertsUi.previewKind === "manage") {
+        alertsUi.token = alertsUi.previewToken;
+        alertsUi.previewToken = "";
+        setAlertsHash("#manage=" + encodeURIComponent(alertsUi.token));
+        await loadPreferences();
+        return;
+    }
+    const result = await alertsUi.client.verify(alertsUi.previewToken);
+    alertsUi.previewToken = "";
+    if (!result.ok) {
+        alertsUi.error = alertsFailureMessage(result);
+        alertsUi.view = "check";
+        paintAlerts("alertsError");
+        return;
+    }
+    const manage = manageTokenFromVerify(result.body);
+    if (!manage) {
+        alertsUi.error = "The confirmation response did not include a manage token. Nothing is marked active.";
+        paintAlerts("alertsError");
+        return;
+    }
+    alertsUi.token = manage;
+    setAlertsHash("#manage=" + encodeURIComponent(manage));
+    await loadPreferences();
+}
+
+function onAlertsClick(event) {
+    const target = event && event.target;
+    if (!target || !target.closest) return;
+    const button = target.closest("[data-action]");
+    if (!button) return;
+    const root = document.getElementById("alertsRoot");
+    if (!root || (root.contains && !root.contains(button))) return;
+    if (event.preventDefault) event.preventDefault();
+    const action = button.getAttribute("data-action");
+    const id = button.getAttribute("data-rule-id") || "";
+    if (action === "relink") {
+        alertsUi.view = "relink";
+        alertsUi.error = "";
+        alertsUi.message = "";
+        paintAlerts("alertsLinkEmail");
+    } else if (action === "reset-signup") {
+        alertsUi.view = "signup";
+        alertsUi.previewToken = "";
+        alertsUi.error = "";
+        alertsUi.message = "";
+        paintAlerts("alertsEmail");
+    } else if (action === "preview") {
+        confirmPreview();
+    } else if (action === "add") {
+        alertsUi.draft = blankAlertDraft();
+        alertsUi.editingId = "";
+        alertsUi.view = "edit";
+        alertsUi.error = "";
+        alertsUi.message = "";
+        paintAlerts("alertsBrand");
+    } else if (action === "edit") {
+        const rule = ruleById(id);
+        if (!rule) return;
+        alertsUi.draft = draftFromRule(rule);
+        alertsUi.editingId = id;
+        alertsUi.view = "edit";
+        alertsUi.error = "";
+        alertsUi.message = "";
+        paintAlerts("alertsBrand");
+    } else if (action === "pause") {
+        togglePause(id);
+    } else if (action === "remove") {
+        alertsUi.confirmId = id;
+        paintAlerts();
+    } else if (action === "cancel-remove" || action === "cancel-edit") {
+        alertsUi.confirmId = "";
+        alertsUi.view = "manage";
+        alertsUi.error = "";
+        paintAlerts();
+    } else if (action === "confirm-remove") {
+        removeRule(id);
+    } else if (action === "unsubscribe") {
+        alertsUi.confirmId = "unsubscribe";
+        paintAlerts();
+    } else if (action === "confirm-unsubscribe") {
+        unsubscribeAlerts();
+    }
+}
+
+function wireAlerts() {
+    if (alertsUi.wired) return;
+    alertsUi.wired = true;
+    mountAlertsNav();
+    ensureAlertsShell();
+    if (typeof window !== "undefined" && window.addEventListener) {
+        window.addEventListener("hashchange", () => {
+            if (alertsUi.writingHash) return;
+            const parsed = readAlertsFragment(location.hash || "");
+            if (parsed) openAlerts({ fragment: parsed });
+        });
+    }
+    const parsed = readAlertsFragment((typeof location !== "undefined" && location.hash) || "");
+    if (parsed) openAlerts({ fragment: parsed });
+}
+
+/* ALERTS_UI_END */
