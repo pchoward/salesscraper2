@@ -5422,19 +5422,38 @@ document.addEventListener("DOMContentLoaded", updateAgo);
 document.addEventListener("DOMContentLoaded", init);
 
 /* ALERTS_UI_START
-   Email alerts for the static page. Contract: docs/alerts-api-contract.md.
-   Tokens stay in the URL fragment. This file has no API secrets. */
+   Email alerts for the static page.
+   The API is docs/alerts-api.md on the alerts backend (PR #60).
+   This file has no API secrets. Tokens stay in the fragment, then leave it. */
 
 const ALERTS_API_BASE = "";
-const ALERTS_CONSENT_VERSION = "2026-10-20";
-const ALERTS_ACCEPTED_MESSAGE = "If this address can receive mail, we sent a verification link. Alerts stay off until you confirm.";
-const ALERTS_LINK_MESSAGE = "If an account exists for this address, we sent a new manage link.";
+const ALERTS_CONSENT_VERSION = "2026-10";
+const ALERTS_SESSION_KEY = "skatedeals.alerts.manage";
+const ALERTS_PARTS = ["Decks", "Wheels", "Trucks", "Bearings"];
 const ALERTS_RULE_FIELDS = [
-    "rule_id", "brand", "name", "part", "width", "min_width", "max_width", "size",
-    "max_price", "alert_on_drop", "alert_on_low", "alert_on_stock", "alert_on_new",
-    "back_in_stock_width", "product_url", "note", "paused"
+    "brand", "name", "part", "width", "min_width", "max_width", "back_in_stock_width",
+    "max_price", "alert_on_drop", "alert_on_low", "alert_on_stock", "note"
 ];
-const ALERTS_PARTS = ["", "Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes"];
+const ALERTS_NUMBER_FIELDS = ["width", "min_width", "max_width", "back_in_stock_width", "max_price"];
+const ALERTS_FLAG_FIELDS = ["alert_on_drop", "alert_on_low", "alert_on_stock"];
+const ALERTS_ERRORS = {
+    invalid_email: "That email address is not valid.",
+    consent_required: "Check the box to agree before subscribing.",
+    consent_outdated: "This page is out of date. Refresh and try again.",
+    captcha_failed: "The captcha check failed. Try again.",
+    invalid_rules: "Those alert details were rejected.",
+    staging_recipient_not_allowed: "That address is not allowed on this server.",
+    json_required: "The request was not accepted.",
+    rate_limited: "Too many attempts. Nothing was changed.",
+    signups_closed: "New signups are closed right now.",
+    email_unavailable: "Email is unavailable right now.",
+    service_unavailable: "Alerts are unavailable right now.",
+    invalid_token: "That link is invalid or already used.",
+    unavailable: "Email alerts coming soon.",
+    body_too_large: "That request is too large.",
+    origin_not_allowed: "This page is not allowed to call the alerts service.",
+    internal_error: "Alerts are unavailable right now."
+};
 
 const alertsUi = {
     wired: false,
@@ -5446,15 +5465,15 @@ const alertsUi = {
     editingId: "",
     prefs: null,
     token: "",
+    active: false,
     busy: false,
     message: "",
     error: "",
-    previewToken: "",
-    previewKind: "",
-    confirmId: "",
-    turnstileToken: "",
-    returnFocus: null,
-    writingHash: false
+    email: "",
+    consent: false,
+    health: null,
+    confirm: "",
+    returnFocus: null
 };
 
 function alertsResolveConfig(env) {
@@ -5465,7 +5484,6 @@ function alertsResolveConfig(env) {
     const requested = String(cfg.apiBase || cfg.baseUrl || env.metaContent || env.fallbackBase || "").trim();
     const consentVersion = String(cfg.consentVersion || ALERTS_CONSENT_VERSION);
     const turnstileSiteKey = String(cfg.turnstileSiteKey || "").trim();
-    const mock = cfg.mock === true || cfg.mode === "mock";
     if (requested && alertsBaseAllowed(requested, production)) {
         return {
             mode: "live",
@@ -5473,15 +5491,6 @@ function alertsResolveConfig(env) {
             consentVersion: consentVersion,
             turnstileSiteKey: turnstileSiteKey,
             production: production
-        };
-    }
-    if (mock && !production) {
-        return {
-            mode: "mock",
-            apiBase: "",
-            consentVersion: consentVersion,
-            turnstileSiteKey: "",
-            production: false
         };
     }
     return {
@@ -5538,12 +5547,15 @@ function readAlertsFragment(hash) {
     if (verify) return { purpose: "verify", token: verify };
     const manage = params.get("manage");
     if (manage) return { purpose: "manage", token: manage };
-    const token = params.get("token");
-    if (!token) return null;
-    let purpose = "auto";
-    if (params.get("purpose") === "manage") purpose = "manage";
-    else if (params.get("purpose") === "verify") purpose = "verify";
-    return { purpose: purpose, token: token };
+    return null;
+}
+
+function consumeAlertsFragment() {
+    if (typeof location === "undefined") return null;
+    const parsed = readAlertsFragment(location.hash || "");
+    if (!parsed || typeof history === "undefined" || !history.replaceState) return parsed;
+    history.replaceState(null, "", (location.pathname || "/") + (location.search || ""));
+    return parsed;
 }
 
 function manageTokenFromVerify(body) {
@@ -5553,7 +5565,49 @@ function manageTokenFromVerify(body) {
     const hash = link.indexOf("#") >= 0 ? link.slice(link.indexOf("#") + 1) : "";
     if (!hash) return "";
     const parsed = readAlertsFragment(hash);
-    return parsed && parsed.purpose !== "verify" ? parsed.token : "";
+    return parsed && parsed.purpose === "manage" ? parsed.token : "";
+}
+
+function alertsStorage() {
+    try {
+        if (typeof sessionStorage === "undefined" || !sessionStorage) return null;
+        return sessionStorage;
+    } catch (err) {
+        return null;
+    }
+}
+
+function readManageToken() {
+    if (alertsUi.token) return alertsUi.token;
+    const store = alertsStorage();
+    if (!store) return "";
+    try {
+        return store.getItem(ALERTS_SESSION_KEY) || "";
+    } catch (err) {
+        return "";
+    }
+}
+
+function storeManageToken(token) {
+    alertsUi.token = token || "";
+    const store = alertsStorage();
+    if (!store || !token) return;
+    try {
+        store.setItem(ALERTS_SESSION_KEY, token);
+    } catch (err) {
+        /* the in-memory copy still works for this page view */
+    }
+}
+
+function clearManageToken() {
+    alertsUi.token = "";
+    const store = alertsStorage();
+    if (!store) return;
+    try {
+        store.removeItem(ALERTS_SESSION_KEY);
+    } catch (err) {
+        /* nothing else holds the token */
+    }
 }
 
 function validEmail(email) {
@@ -5564,489 +5618,287 @@ function normalizeEmail(email) {
     return String(email || "").trim().toLowerCase();
 }
 
-function maskEmail(email) {
-    const parts = String(email || "").split("@");
-    if (parts.length !== 2 || !parts[0] || !parts[1]) return "hidden";
-    return parts[0].slice(0, 1) + "***@" + parts[1];
+function cleanText(value, max) {
+    let text = String(value == null ? "" : value);
+    if (text.normalize) text = text.normalize("NFKC");
+    text = text.replace(/\s+/g, " ").trim();
+    if (!text) return { ok: true, value: "" };
+    if (/[\u0000-\u001f\u007f<>]/.test(text)) return { ok: false, error: "Remove <, >, and line breaks." };
+    if (text.length > max) return { ok: false, error: "Keep that text to " + max + " characters." };
+    return { ok: true, value: text };
 }
 
-function safeProductUrl(value) {
-    const text = String(value || "").trim();
-    if (/^https:\/\//i.test(text) && text.length <= 500) return text;
-    return "";
+function finiteNumber(value) {
+    if (typeof value === "number") return Number.isFinite(value) ? value : null;
+    const text = String(value == null ? "" : value).replace(/[$,]/g, "").trim();
+    if (!text || !/^-?\d+(\.\d+)?$/.test(text)) return null;
+    const num = Number(text);
+    return Number.isFinite(num) ? num : null;
+}
+
+function deckWidth(value) {
+    const num = finiteNumber(value);
+    if (num == null || num < 5 || num > 12) return null;
+    return num;
 }
 
 function cleanRule(rule) {
-    const copy = {};
+    const out = {};
     const source = rule || {};
     ALERTS_RULE_FIELDS.forEach(key => {
-        if (source[key] != null && source[key] !== "") copy[key] = source[key];
+        if (source[key] == null || source[key] === "") return;
+        if (ALERTS_FLAG_FIELDS.indexOf(key) >= 0) {
+            if (source[key] === true) out[key] = true;
+            return;
+        }
+        if (ALERTS_NUMBER_FIELDS.indexOf(key) >= 0) {
+            if (typeof source[key] === "number" && Number.isFinite(source[key])) out[key] = source[key];
+            return;
+        }
+        if (key === "part") {
+            if (ALERTS_PARTS.indexOf(source[key]) >= 0) out[key] = source[key];
+            return;
+        }
+        out[key] = source[key];
     });
-    ["alert_on_drop", "alert_on_low", "alert_on_stock", "alert_on_new", "paused"].forEach(key => {
-        if (copy[key] !== true) delete copy[key];
-    });
-    if (copy.note != null) copy.note = String(copy.note);
-    return copy;
+    return out;
+}
+
+function buildRule(draft) {
+    draft = draft || {};
+    const brand = cleanText(draft.brand, 60);
+    if (!brand.ok) return { ok: false, error: brand.error };
+    const name = cleanText(draft.name, 80);
+    if (!name.ok) return { ok: false, error: name.error };
+    const note = cleanText(draft.note, 80);
+    if (!note.ok) return { ok: false, error: note.error };
+    if (!brand.value && !name.value) return { ok: false, error: "Enter a brand or a product name." };
+    const part = ALERTS_PARTS.indexOf(draft.part) >= 0 ? draft.part : "";
+    if (!part) return { ok: false, error: "Choose Decks, Wheels, Trucks, or Bearings." };
+    const rule = { part: part };
+    if (brand.value) rule.brand = brand.value;
+    if (name.value) rule.name = name.value;
+    if (part === "Decks" && draft.width != null && String(draft.width).trim() !== "") {
+        const width = deckWidth(draft.width);
+        if (width == null) return { ok: false, error: "Deck width must be a number from 5 to 12." };
+        rule.width = width;
+    }
+    if (draft.max_price != null && String(draft.max_price).trim() !== "") {
+        const price = finiteNumber(draft.max_price);
+        if (price == null || price <= 0 || price > 2000) return { ok: false, error: "Max price must be greater than 0 and at most 2000." };
+        rule.max_price = price;
+    }
+    if (draft.alert_on_drop === true) rule.alert_on_drop = true;
+    if (draft.alert_on_low === true) rule.alert_on_low = true;
+    if (draft.alert_on_stock === true) {
+        rule.alert_on_stock = true;
+        if (rule.width != null) rule.back_in_stock_width = rule.width;
+    }
+    if (note.value) rule.note = note.value;
+    return { ok: true, rule: rule };
+}
+
+function ruleFromDraft(draft) {
+    const built = buildRule(draft || {});
+    return built.ok ? built.rule : {};
 }
 
 function blankAlertDraft() {
     return {
-        form: "fields",
-        match: "brand",
-        rule_id: "",
         brand: "",
         name: "",
-        part: "Decks",
-        size: "",
-        product_url: "",
+        part: "",
+        width: "",
         max_price: "",
-        alert_on_drop: true,
+        alert_on_drop: false,
         alert_on_low: false,
         alert_on_stock: false,
-        alert_on_new: false,
         note: "",
-        paused: false,
         store: ""
     };
 }
 
-function alertDraftFromDataset(dataset, card) {
+function alertDraftFromDataset(dataset) {
     dataset = dataset || {};
-    let item = {};
-    if (typeof catalog === "function") {
-        const data = catalog() || {};
-        item = (data.items || {})[dataset.id] || {};
-    }
-    const part = dataset.part || item.part || "";
-    let size = dataset.size || "";
-    if (!size && part === "Sneakers") {
-        const shoes = String(dataset.shoesize || dataset.shoeSize || "").split(",").map(bit => bit.trim()).filter(Boolean);
-        if (shoes.length === 1) size = shoes[0];
-    }
-    const price = Number(dataset.price);
-    const name = dataset.name || item.name || "";
-    const brand = dataset.brand || "";
+    const part = ALERTS_PARTS.indexOf(dataset.part) >= 0 ? dataset.part : "";
+    const width = part === "Decks" ? deckWidth(dataset.size) : null;
+    let price = finiteNumber(dataset.price);
+    if (price == null || price <= 0 || price > 2000) price = null;
     return {
-        form: "card",
-        match: name ? "name" : "brand",
-        rule_id: "",
-        brand: brand,
-        name: name,
+        brand: dataset.brand || "",
+        name: dataset.name || "",
         part: part,
-        size: size,
-        product_url: dataset.url || item.url || "",
-        max_price: Number.isFinite(price) && price > 0 ? String(Math.round(price * 100) / 100) : "",
-        alert_on_drop: true,
+        width: width == null ? "" : String(width),
+        max_price: price == null ? "" : String(price),
+        alert_on_drop: false,
         alert_on_low: false,
         alert_on_stock: false,
-        alert_on_new: false,
         note: "",
-        paused: false,
-        store: dataset.store || item.store || ""
+        store: dataset.store || ""
     };
 }
 
 function draftFromRule(rule) {
     rule = rule || {};
-    const draft = blankAlertDraft();
-    draft.form = "fields";
-    draft.rule_id = rule.rule_id || "";
-    draft.brand = rule.brand || "";
-    draft.name = rule.name || "";
-    draft.match = rule.name && !rule.brand ? "name" : (rule.brand && !rule.name ? "brand" : (rule.name ? "name" : "brand"));
-    draft.part = rule.part || "";
-    draft.size = rule.size != null && rule.size !== "" ? String(rule.size) : (rule.width != null ? String(rule.width) : "");
-    draft.product_url = rule.product_url || "";
-    draft.max_price = rule.max_price != null && rule.max_price !== "" ? String(rule.max_price) : "";
-    draft.alert_on_drop = !!rule.alert_on_drop;
-    draft.alert_on_low = !!rule.alert_on_low;
-    draft.alert_on_stock = !!rule.alert_on_stock;
-    draft.alert_on_new = !!rule.alert_on_new;
-    draft.note = rule.note || "";
-    draft.paused = !!rule.paused || rule.status === "paused";
-    return draft;
-}
-
-function ruleFromDraft(draft) {
-    draft = draft || {};
-    const rule = {};
-    if (draft.rule_id) rule.rule_id = String(draft.rule_id);
-    const brand = String(draft.brand || "").trim();
-    const name = String(draft.name || "").trim();
-    const match = draft.match === "brand" || (!name && brand) ? "brand" : "name";
-    if (match === "brand") {
-        if (brand) rule.brand = brand;
-    } else {
-        if (name) rule.name = name;
-        if (brand) rule.brand = brand;
-        const url = safeProductUrl(draft.product_url);
-        if (url) rule.product_url = url;
-    }
-    const part = String(draft.part || "").trim();
-    if (part) rule.part = part;
-    const size = String(draft.size || "").trim().replace(/["”″]/g, "");
-    if (size) {
-        rule.size = size;
-        const width = Number(size);
-        if (part === "Decks" && Number.isFinite(width) && width > 0 && width < 20) rule.width = width;
-    }
-    if (String(draft.max_price == null ? "" : draft.max_price).trim() !== "") {
-        const price = Number(draft.max_price);
-        if (Number.isFinite(price)) rule.max_price = Math.round(price * 100) / 100;
-    }
-    if (draft.alert_on_drop) rule.alert_on_drop = true;
-    if (draft.alert_on_low) rule.alert_on_low = true;
-    if (draft.alert_on_stock) {
-        rule.alert_on_stock = true;
-        if (rule.width != null) rule.back_in_stock_width = rule.width;
-    }
-    if (draft.alert_on_new) rule.alert_on_new = true;
-    const note = String(draft.note || "").trim();
-    if (note) rule.note = note;
-    if (draft.paused) rule.paused = true;
-    return cleanRule(rule);
-}
-
-function validateRules(rules, options) {
-    options = options || {};
-    if (!Array.isArray(rules)) return "Add at least one alert. Nothing was saved.";
-    if (options.requireOne && rules.length < 1) return "Add a product or a brand to watch. Nothing was saved.";
-    if (rules.length > 10) return "You can save up to 10 alerts. Nothing was saved.";
-    for (let i = 0; i < rules.length; i++) {
-        const rule = rules[i] || {};
-        if (!rule.brand && !rule.name && !rule.product_url) return "Add a product or a brand. Nothing was saved.";
-        if (rule.max_price != null && rule.max_price !== "" && !(Number(rule.max_price) > 0)) {
-            return "Target price has to be greater than zero. Nothing was saved.";
-        }
-        if (rule.note && String(rule.note).length > 80) return "Notes have to be 80 characters or fewer. Nothing was saved.";
-        if (rule.brand && String(rule.brand).length > 120) return "Brand is too long. Nothing was saved.";
-        if (rule.name && String(rule.name).length > 160) return "Product name is too long. Nothing was saved.";
-    }
-    return "";
-}
-
-function validateSignup(email, consent, rules) {
-    if (!validEmail(email)) return "Enter the email address that should get the digest. Nothing was saved.";
-    if (consent !== true) return "Check the box to agree to the daily digest. Nothing was saved.";
-    return validateRules(rules, { requireOne: true });
-}
-
-function ruleBadge(subscriberStatus, rule) {
-    rule = rule || {};
-    const paused = !!rule.paused || rule.status === "paused";
-    if (subscriberStatus === "active" && paused) return { key: "paused", label: "Paused" };
-    if (subscriberStatus === "active" && rule.status === "active" && !rule.paused) {
-        return { key: "active", label: "Active" };
-    }
-    return { key: "pending", label: "Pending verification" };
-}
-
-function ruleTitle(rule) {
-    return (rule && (rule.name || rule.brand)) || "Alert";
-}
-
-function ruleMeta(rule) {
-    const bits = [];
-    if (rule.part) bits.push(rule.part);
-    if (rule.size || rule.width != null) bits.push(String(rule.size || rule.width));
-    if (rule.max_price != null && rule.max_price !== "") bits.push("under $" + Number(rule.max_price).toFixed(2));
-    return bits.join(" · ");
-}
-
-function ruleTriggers(rule) {
-    const bits = [];
-    if (rule.alert_on_drop) bits.push("Meaningful drop");
-    if (rule.alert_on_low) bits.push("Historical low");
-    if (rule.alert_on_stock) bits.push("Verified restock");
-    if (rule.alert_on_new) bits.push("Newly listed");
-    if (!bits.length) bits.push("New, meaningful drop, or verified restock");
-    return bits.join(", ");
-}
-
-function describeWatch(draft) {
-    draft = draft || {};
-    const bits = [];
-    if (draft.match === "brand" && draft.brand) bits.push(draft.brand);
-    else bits.push(draft.name || draft.brand || "this product");
-    if (draft.part) bits.push(draft.part);
-    if (draft.size) bits.push(String(draft.size));
-    if (String(draft.max_price == null ? "" : draft.max_price).trim() !== "" && Number(draft.max_price) > 0) {
-        bits.push("under $" + Number(draft.max_price).toFixed(2));
-    }
-    return bits.join(" · ");
+    return {
+        brand: rule.brand || "",
+        name: rule.name || "",
+        part: rule.part || "",
+        width: rule.width == null ? "" : String(rule.width),
+        max_price: rule.max_price == null ? "" : String(rule.max_price),
+        alert_on_drop: rule.alert_on_drop === true,
+        alert_on_low: rule.alert_on_low === true,
+        alert_on_stock: rule.alert_on_stock === true,
+        note: rule.note || "",
+        store: ""
+    };
 }
 
 function alertsFailureMessage(result) {
     result = result || {};
-    if (result.error === "rate_limited" || result.status === 429) {
-        return "Too many requests. Wait a while and try again. Nothing was changed.";
+    const body = result.body || {};
+    const code = result.error || body.error || "";
+    if (result.status === 503 || code === "service_unavailable" || body.ok === false) return "Alerts are unavailable right now.";
+    let text = ALERTS_ERRORS[code] || "Something went wrong. Nothing was changed.";
+    if (code === "rate_limited") {
+        const wait = result.retryAfter || body.retry_after;
+        text = "Too many attempts. Nothing was changed.";
+        if (wait) text += " Retry after " + wait + " seconds.";
     }
-    if (result.error === "turnstile_required") {
-        return "The alerts service needs a human check that isn't available on this page. Nothing was saved.";
+    if (code === "captcha_failed" && alertsUi.health && alertsUi.health.mode !== "mock" && !(alertsUi.config && alertsUi.config.turnstileSiteKey)) {
+        text = "The captcha check failed. This page has no Turnstile site key.";
     }
-    if (result.error === "unavailable") return "Email alerts coming soon. Nothing was saved.";
-    if (result.error === "network" || result.status === 0) {
-        return result.message || "The alerts service could not be reached. Nothing was saved.";
+    const fields = body.fields;
+    if (fields && typeof fields === "object") {
+        const extra = Object.keys(fields).map(key => key + " (" + fields[key] + ")").join(", ");
+        if (extra) text += " " + extra;
     }
-    if (result.status === 401 || result.error === "token_expired") {
-        return result.message || "This manage link has expired. Request a new one.";
-    }
-    return result.message || "Something went wrong. Nothing was saved.";
+    return text;
 }
 
-function alertsResult(status, body, extra) {
-    const payload = body || {};
-    const result = {
-        ok: status >= 200 && status < 300,
-        status: status,
-        error: payload.error || "",
-        message: payload.message || "",
-        body: payload
-    };
-    if (extra) {
-        Object.keys(extra).forEach(key => { result[key] = extra[key]; });
-    }
-    return result;
-}
-
-function createAlertsMock() {
-    const byEmail = new Map();
-    const api = { lastPreviewToken: "", lastPreviewKind: "", seq: 1 };
-
-    function findByToken(token, field) {
-        if (!token) return null;
-        for (const sub of byEmail.values()) {
-            if (sub[field] && sub[field] === token) return sub;
+function alertsApplyResult(state, kind, result) {
+    state = state || {};
+    result = result || {};
+    const body = result.body || {};
+    state.error = "";
+    if (kind === "health") {
+        if (result.status === 200 && body.ok === true) {
+            state.health = body;
+            state.mockApi = body.mode === "mock";
+            return state;
         }
-        return null;
+        state.view = "down";
+        state.active = false;
+        state.health = null;
+        state.error = "Alerts are unavailable right now.";
+        return state;
     }
-
-    function withId(rule) {
-        const copy = cleanRule(rule);
-        if (!copy.rule_id) copy.rule_id = "r_" + api.seq++;
-        return copy;
+    if ((kind === "subscribe" || kind === "link") && result.status === 202 && body.status === "check_email") {
+        state.view = "check";
+        state.active = false;
+        state.prefs = null;
+        state.message = "Check your email to confirm.";
+        return state;
     }
-
-    function decorate(rule, status) {
-        const copy = cleanRule(rule);
-        if (status !== "active") copy.status = "pending";
-        else if (copy.paused) copy.status = "paused";
-        else copy.status = "active";
-        return copy;
+    if (kind === "verify" && result.status === 200 && body.status === "active" && body.manage_token && body.preferences && body.preferences.status === "active") {
+        state.view = "manage";
+        state.active = true;
+        state.token = String(body.manage_token);
+        state.prefs = body.preferences;
+        state.message = "";
+        return state;
     }
-
-    function payload(sub) {
-        return {
-            status: sub.status,
-            verified: sub.status === "active",
-            email_masked: maskEmail(sub.email),
-            consent_version: sub.consentVersion || "",
-            rules: (sub.rules || []).map(rule => decorate(rule, sub.status)),
-            limits: { max_rules: 10, note_max: 80 }
-        };
+    if (kind === "preferences" && result.status === 200 && body.status === "active" && Array.isArray(body.rules)) {
+        state.view = "manage";
+        state.active = true;
+        state.prefs = body;
+        state.message = "";
+        return state;
     }
-
-    function accepted(message) {
-        return { status: "accepted", message: message };
+    if (kind === "unsubscribe" && result.status === 200 && body.status === "unsubscribed") {
+        state.view = "done";
+        state.active = false;
+        state.token = "";
+        state.prefs = null;
+        state.message = "You are unsubscribed. No alerts will be sent.";
+        return state;
     }
-
-    api.peek = function (email) {
-        const sub = byEmail.get(normalizeEmail(email));
-        if (!sub) return null;
-        return {
-            status: sub.status,
-            verifyToken: sub.verifyToken || "",
-            manageToken: sub.manageToken || "",
-            rules: payload(sub).rules
-        };
-    };
-
-    api.handle = function (method, path, options) {
-        options = options || {};
-        const body = options.body || {};
-        const token = options.token || "";
-        if (method === "POST" && path === "/subscribe") {
-            const email = normalizeEmail(body.email);
-            if (body.consent !== true || !validEmail(email)) {
-                return alertsResult(400, {
-                    error: "invalid_request",
-                    message: "Enter an email address and check the consent box. Nothing was saved."
-                });
-            }
-            const rules = Array.isArray(body.rules) ? body.rules.map(cleanRule) : [];
-            const problem = validateRules(rules, { requireOne: true });
-            if (problem) return alertsResult(400, { error: "invalid_rules", message: problem });
-            let sub = byEmail.get(email);
-            const verifyToken = "verify_" + api.seq++;
-            if (!sub) {
-                sub = {
-                    email: email,
-                    status: "pending",
-                    manageToken: "manage_" + api.seq++,
-                    verifyToken: verifyToken,
-                    consentVersion: body.consent_version || "",
-                    rules: rules.map(withId)
-                };
-                byEmail.set(email, sub);
-                api.lastPreviewToken = verifyToken;
-                api.lastPreviewKind = "verify";
-            } else if (sub.status !== "active") {
-                sub.status = "pending";
-                sub.verifyToken = verifyToken;
-                sub.consentVersion = body.consent_version || sub.consentVersion;
-                sub.rules = rules.map(withId);
-                api.lastPreviewToken = verifyToken;
-                api.lastPreviewKind = "verify";
-            } else {
-                api.lastPreviewToken = "";
-                api.lastPreviewKind = "";
-            }
-            return alertsResult(202, accepted(ALERTS_ACCEPTED_MESSAGE), {
-                previewToken: api.lastPreviewToken,
-                previewKind: api.lastPreviewKind
-            });
-        }
-        if (method === "POST" && path === "/verify") {
-            const sub = findByToken(body.token, "verifyToken");
-            if (!sub) {
-                return alertsResult(400, {
-                    error: "invalid_token",
-                    message: "This confirmation link is invalid or already used."
-                });
-            }
-            sub.status = "active";
-            sub.verifyToken = "";
-            api.lastPreviewToken = "";
-            api.lastPreviewKind = "";
-            return alertsResult(200, {
-                status: "active",
-                manage_token: sub.manageToken,
-                email_masked: maskEmail(sub.email)
-            });
-        }
-        if (method === "POST" && path === "/link") {
-            const email = normalizeEmail(body.email);
-            if (!validEmail(email)) {
-                return alertsResult(400, {
-                    error: "invalid_request",
-                    message: "Enter an email address. Nothing was sent."
-                });
-            }
-            const sub = byEmail.get(email);
-            if (sub) {
-                sub.manageToken = "manage_" + api.seq++;
-                api.lastPreviewToken = sub.manageToken;
-                api.lastPreviewKind = "manage";
-            } else {
-                api.lastPreviewToken = "";
-                api.lastPreviewKind = "";
-            }
-            return alertsResult(202, accepted(ALERTS_LINK_MESSAGE), {
-                previewToken: api.lastPreviewToken,
-                previewKind: api.lastPreviewKind
-            });
-        }
-        if (path === "/preferences" && (method === "GET" || method === "PUT")) {
-            const sub = findByToken(token, "manageToken");
-            if (!sub) {
-                return alertsResult(401, {
-                    error: "token_expired",
-                    message: "This manage link has expired. Request a new one."
-                });
-            }
-            if (method === "PUT") {
-                const rules = Array.isArray(body.rules) ? body.rules.map(cleanRule) : null;
-                const problem = validateRules(rules || [], {});
-                if (!rules || problem) {
-                    return alertsResult(400, { error: "invalid_rules", message: problem || "Those rules could not be saved." });
-                }
-                sub.rules = rules.map(withId);
-            }
-            return alertsResult(200, payload(sub));
-        }
-        if ((method === "POST" && path === "/unsubscribe") || (method === "DELETE" && path === "/subscriber")) {
-            const bearer = findByToken(token, "manageToken");
-            const posted = findByToken(body.token, "manageToken");
-            const sub = bearer || posted;
-            if (!sub) {
-                return alertsResult(401, {
-                    error: "token_expired",
-                    message: "This manage link has expired. Request a new one."
-                });
-            }
-            byEmail.delete(sub.email);
-            const message = method === "DELETE"
-                ? "Your address and rules were deleted."
-                : "You are unsubscribed. We deleted your address and rules.";
-            return alertsResult(200, { status: method === "DELETE" ? "deleted" : "unsubscribed", message: message });
-        }
-        return alertsResult(404, { error: "not_found", message: "That alerts request is not available." });
-    };
-    return api;
-}
-
-async function liveAlertsRequest(config, fetchImpl, method, path, options) {
-    options = options || {};
-    const headers = { Accept: "application/json" };
-    if (options.body) headers["Content-Type"] = "application/json";
-    if (options.token) headers.Authorization = "Bearer " + options.token;
-    let response;
-    try {
-        response = await fetchImpl(config.apiBase + path, {
-            method: method,
-            headers: headers,
-            body: options.body ? JSON.stringify(options.body) : undefined,
-            credentials: "omit",
-            mode: "cors"
-        });
-    } catch (err) {
-        return alertsResult(0, {
-            error: "network",
-            message: "The alerts service could not be reached. Nothing was saved."
-        });
+    if (kind === "delete" && result.status === 200 && body.status === "deleted") {
+        state.view = "done";
+        state.active = false;
+        state.token = "";
+        state.prefs = null;
+        state.message = "Your alerts data was deleted.";
+        return state;
     }
-    let body = {};
-    try {
-        body = await response.json();
-    } catch (err) {
-        body = {};
+    state.active = false;
+    state.error = alertsFailureMessage(result);
+    if (body.error === "invalid_token" || result.status === 401) {
+        state.view = "relink";
+        state.token = "";
+        state.prefs = null;
+    } else if (result.status === 503 || body.error === "service_unavailable" || body.ok === false) {
+        state.view = "down";
     }
-    if (response.status === 202) {
-        const message = body.message || (path === "/link" ? ALERTS_LINK_MESSAGE : ALERTS_ACCEPTED_MESSAGE);
-        return alertsResult(202, Object.assign({ status: "accepted", message: message }, body));
-    }
-    if (response.ok) return alertsResult(response.status, body);
-    return alertsResult(response.status, {
-        error: body.error || "error",
-        message: body.message || "Something went wrong. Nothing was saved."
-    });
+    return state;
 }
 
 function createAlertsClient(config, fetchImpl) {
-    config = config || { mode: "soon" };
-    const mock = config.mode === "mock" ? createAlertsMock() : null;
-    const net = fetchImpl || (typeof fetch === "function" ? fetch : null);
+    const fetchFn = fetchImpl || (typeof fetch === "function" ? fetch : null);
+    const live = !!(config && config.mode === "live" && config.apiBase);
+
     async function request(method, path, options) {
-        if (config.mode === "soon") {
-            return alertsResult(0, { error: "unavailable", message: "Email alerts coming soon. Nothing was saved." });
+        options = options || {};
+        if (!live || !fetchFn) return { ok: false, status: 0, error: "unavailable", body: null };
+        const headers = { Accept: "application/json" };
+        let body;
+        if (options.body != null) {
+            headers["Content-Type"] = "application/json";
+            body = JSON.stringify(options.body);
+            if (body.length > 16 * 1024) return { ok: false, status: 413, error: "body_too_large", body: { error: "body_too_large" } };
         }
-        if (config.mode === "mock") return mock.handle(method, path, options || {});
-        return liveAlertsRequest(config, net, method, path, options || {});
+        if (options.token) headers.Authorization = "Bearer " + options.token;
+        let response;
+        try {
+            response = await fetchFn(config.apiBase + path, {
+                method: method,
+                credentials: "omit",
+                headers: headers,
+                body: body
+            });
+        } catch (err) {
+            return { ok: false, status: 0, error: "network", body: null };
+        }
+        let payload = null;
+        if (response && typeof response.json === "function") {
+            try {
+                payload = await response.json();
+            } catch (err) {
+                payload = null;
+            }
+        }
+        let retry = "";
+        if (response && response.headers && typeof response.headers.get === "function") retry = response.headers.get("Retry-After") || "";
+        return {
+            ok: !!(response && response.ok),
+            status: response ? response.status : 0,
+            body: payload,
+            error: payload && payload.error,
+            retryAfter: (payload && payload.retry_after) || retry || ""
+        };
     }
+
     return {
-        mode: config.mode,
-        subscribe(payload) { return request("POST", "/subscribe", { body: payload }); },
-        verify(token) { return request("POST", "/verify", { body: { token: token } }); },
-        requestLink(payload) { return request("POST", "/link", { body: payload }); },
-        getPreferences(token) { return request("GET", "/preferences", { token: token }); },
-        putPreferences(token, rules) { return request("PUT", "/preferences", { token: token, body: { rules: (rules || []).map(cleanRule) } }); },
-        unsubscribe(token) { return request("POST", "/unsubscribe", { token: token, body: { token: token } }); },
-        deleteSubscriber(token) { return request("DELETE", "/subscriber", { token: token }); },
-        peek(email) { return mock ? mock.peek(email) : null; },
-        lastPreview() {
-            if (!mock) return { token: "", kind: "" };
-            return { token: mock.lastPreviewToken || "", kind: mock.lastPreviewKind || "" };
-        }
+        health() { return request("GET", "/v1/health"); },
+        subscribe(payload) { return request("POST", "/v1/subscribe", { body: payload }); },
+        verify(token) { return request("POST", "/v1/verify", { body: { token: token } }); },
+        link(payload) { return request("POST", "/v1/link", { body: payload }); },
+        getPreferences(token) { return request("GET", "/v1/preferences", { token: token }); },
+        putPreferences(token, rules) {
+            return request("PUT", "/v1/preferences", { token: token, body: { rules: (rules || []).map(cleanRule) } });
+        },
+        unsubscribe(token) { return request("POST", "/v1/unsubscribe", { token: token }); },
+        deleteSubscriber(token) { return request("DELETE", "/v1/subscriber", { token: token }); }
     };
 }
 
@@ -6057,446 +5909,276 @@ function alertsEl(tag, className, text) {
     return node;
 }
 
-function alertsId(node, id) {
-    node.id = id;
-    node.setAttribute("id", id);
-    return node;
+function setHidden(node, hidden) {
+    if (!node) return;
+    node.hidden = !!hidden;
+    if (hidden) node.setAttribute("hidden", "");
+    else node.removeAttribute("hidden");
 }
 
-function isAlertsOpen() {
-    const root = document.getElementById("alertsRoot");
-    return !!(alertsUi.open && root && !root.hidden);
+function ruleTitle(rule) {
+    const bits = [];
+    if (rule.brand) bits.push(rule.brand);
+    if (rule.name) bits.push(rule.name);
+    return bits.join(" · ") || "Alert";
 }
 
-function setAlertsHash(fragment) {
-    alertsUi.writingHash = true;
-    const base = (location.pathname || "") + (location.search || "");
-    const next = fragment ? base + fragment : base;
-    if (typeof history !== "undefined" && history.replaceState) history.replaceState(null, "", next);
-    else location.hash = fragment || "";
-    alertsUi.writingHash = false;
+function ruleDetail(rule) {
+    const bits = [];
+    if (rule.part) bits.push(rule.part);
+    if (rule.width != null) bits.push(rule.width + "\"");
+    if (rule.min_width != null || rule.max_width != null) bits.push((rule.min_width || "any") + "–" + (rule.max_width || "any"));
+    if (rule.max_price != null) bits.push("under $" + rule.max_price);
+    if (rule.alert_on_drop) bits.push("Meaningful drop");
+    if (rule.alert_on_low) bits.push("Historical low");
+    if (rule.alert_on_stock) bits.push("Verified restock");
+    if (!rule.alert_on_drop && !rule.alert_on_low && !rule.alert_on_stock) bits.push("Default: first match, then a drop or restock");
+    if (rule.note) bits.push(rule.note);
+    return bits.join(" · ");
 }
 
-function appendQuickAlert(parent, card) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "quick-alert";
-    button.textContent = "Alert me";
-    button.addEventListener("click", event => {
-        if (event.preventDefault) event.preventDefault();
-        if (event.stopPropagation) event.stopPropagation();
-        const dataset = (card && card.dataset) || {};
-        openAlerts({
-            draft: alertDraftFromDataset(dataset, card),
-            returnFocus: button
-        });
-    });
-    parent.appendChild(button);
-}
-
-function mountAlertsNav() {
-    if (document.getElementById("navAlerts")) return;
-    const group = document.querySelector ? document.querySelector(".topnav-links") : null;
-    if (!group) return;
-    const button = alertsEl("button", "nav-link", "Alerts");
-    button.type = "button";
-    alertsId(button, "navAlerts");
-    button.setAttribute("aria-haspopup", "dialog");
-    button.setAttribute("aria-controls", "alertsRoot");
-    button.setAttribute("aria-expanded", "false");
-    button.addEventListener("click", () => openAlerts({ returnFocus: button }));
-    group.appendChild(button);
-}
-
-function ensureAlertsShell() {
-    if (document.getElementById("alertsRoot")) return;
-    const root = alertsEl("div");
-    alertsId(root, "alertsRoot");
-    root.hidden = true;
-    const panel = alertsEl("div", "alerts-panel");
-    panel.setAttribute("role", "dialog");
-    panel.setAttribute("aria-modal", "true");
-    panel.setAttribute("aria-labelledby", "alertsTitle");
-    panel.tabIndex = -1;
-    const head = alertsEl("div", "alerts-head");
-    const title = alertsEl("h2", "alerts-title", "Email alerts");
-    alertsId(title, "alertsTitle");
-    const close = alertsEl("button", "alerts-close", "×");
-    close.type = "button";
-    alertsId(close, "alertsClose");
-    close.setAttribute("aria-label", "Close alerts");
-    close.addEventListener("click", event => {
-        if (event.preventDefault) event.preventDefault();
-        closeAlerts();
-    });
-    head.append(title, close);
-    const error = alertsEl("div", "alerts-error");
-    alertsId(error, "alertsError");
-    error.setAttribute("role", "alert");
-    error.tabIndex = -1;
-    const live = alertsEl("div", "alerts-live");
-    alertsId(live, "alertsLive");
-    live.setAttribute("aria-live", "polite");
-    const body = alertsEl("div", "alerts-body");
-    alertsId(body, "alertsBody");
-    panel.append(head, error, live, body);
-    root.appendChild(panel);
-    root.addEventListener("click", event => {
-        if (event.target === root) closeAlerts();
-        else onAlertsClick(event);
-    });
-    document.body.appendChild(root);
-    document.addEventListener("keydown", alertsKeydown);
-}
-
-function alertsKeydown(event) {
-    if (!isAlertsOpen() || !event || event.key !== "Tab") return;
-    const panel = document.querySelector(".alerts-panel");
-    if (!panel || !panel.querySelectorAll) return;
-    const nodes = panel.querySelectorAll("button, a, input, select, textarea");
-    const items = [];
-    for (let i = 0; i < nodes.length; i++) {
-        const node = nodes[i];
-        if (node.disabled || node.hidden) continue;
-        items.push(node);
-    }
-    if (!items.length || !panel.contains) return;
-    const first = items[0];
-    const last = items[items.length - 1];
-    const active = document.activeElement;
-    if (event.shiftKey && (active === first || !panel.contains(active))) {
-        if (event.preventDefault) event.preventDefault();
-        last.focus();
-    } else if (!event.shiftKey && active === last) {
-        if (event.preventDefault) event.preventDefault();
-        first.focus();
-    }
-}
-
-function focusAlerts(id) {
-    const node = (id && document.getElementById(id)) || document.querySelector(".alerts-panel");
-    if (node && node.focus) node.focus();
-}
-
-function syncAlertsNav() {
-    const nav = document.getElementById("navAlerts");
-    if (!nav) return;
-    nav.setAttribute("aria-expanded", alertsUi.open ? "true" : "false");
-}
-
-function closeAlerts() {
-    const root = document.getElementById("alertsRoot");
-    if (root) root.hidden = true;
-    if (document.body && document.body.classList) document.body.classList.remove("alerts-open");
-    alertsUi.open = false;
-    syncAlertsNav();
-    const back = alertsUi.returnFocus;
-    alertsUi.returnFocus = null;
-    if (back && back.focus) back.focus();
-}
-
-function checkedBox(id) {
-    const node = document.getElementById(id);
-    return !!(node && node.checked);
-}
-
-function readRuleForm() {
-    const draft = Object.assign({}, alertsUi.draft || blankAlertDraft());
-    const brandRadio = document.getElementById("alertsMatchBrand");
-    const nameRadio = document.getElementById("alertsMatchName");
-    if (brandRadio || nameRadio) draft.match = brandRadio && brandRadio.checked ? "brand" : "name";
-    const brand = document.getElementById("alertsBrand");
-    if (brand) draft.brand = brand.value;
-    const name = document.getElementById("alertsName");
-    if (name) draft.name = name.value;
-    const part = document.getElementById("alertsPart");
-    if (part) draft.part = part.value;
-    const size = document.getElementById("alertsSize");
-    if (size) draft.size = size.value;
-    const price = document.getElementById("alertsPrice");
-    if (price) draft.max_price = String(price.value || "").trim();
-    if (document.getElementById("alertsDrop")) draft.alert_on_drop = checkedBox("alertsDrop");
-    if (document.getElementById("alertsLow")) draft.alert_on_low = checkedBox("alertsLow");
-    if (document.getElementById("alertsStock")) draft.alert_on_stock = checkedBox("alertsStock");
-    if (document.getElementById("alertsNew")) draft.alert_on_new = checkedBox("alertsNew");
-    const note = document.getElementById("alertsNote");
-    if (note) draft.note = note.value;
-    return draft;
-}
-
-function fieldWrap(labelText, input, hint) {
+function fieldWrap(id, label, control) {
     const wrap = alertsEl("label", "alerts-field");
-    wrap.appendChild(alertsEl("span", "", labelText));
-    if (input) wrap.appendChild(input);
-    if (hint) wrap.appendChild(alertsEl("small", "alerts-hint", hint));
+    wrap.append(alertsEl("span", "", label), control);
+    control.id = id;
     return wrap;
 }
 
-function actionButton(text, className, action, ruleId) {
-    const button = alertsEl("button", className, text);
+function checkWrap(id, label, checked) {
+    const wrap = alertsEl("label", "alerts-check");
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.id = id;
+    input.checked = !!checked;
+    wrap.append(input, alertsEl("span", "", label));
+    return wrap;
+}
+
+function buttonEl(label, className, action, ruleId) {
+    const button = alertsEl("button", className, label);
     button.type = "button";
     button.setAttribute("data-action", action);
     if (ruleId) button.setAttribute("data-rule-id", ruleId);
-    if (alertsUi.busy) button.disabled = true;
     return button;
 }
 
-function textInput(id, value, type) {
-    const input = alertsEl("input");
-    input.type = type || "text";
-    alertsId(input, id);
+function inputEl(type, value) {
+    const input = document.createElement("input");
+    input.type = type;
     input.value = value == null ? "" : String(value);
     return input;
 }
 
-function appendMatchFields(form, draft) {
-    if (draft.form === "card" && (draft.name || draft.brand)) {
-        const group = alertsEl("div", "alerts-match");
-        group.setAttribute("role", "radiogroup");
-        group.setAttribute("aria-label", "What to watch");
-        if (draft.name) {
-            const label = alertsEl("label", "alerts-check");
-            const input = textInput("alertsMatchName", "", "radio");
-            input.name = "alertsMatch";
-            input.checked = draft.match !== "brand";
-            label.append(input, alertsEl("span", "", " This product: " + draft.name));
-            group.appendChild(label);
-        }
-        if (draft.brand) {
-            const label = alertsEl("label", "alerts-check");
-            const input = textInput("alertsMatchBrand", "", "radio");
-            input.name = "alertsMatch";
-            input.checked = draft.match === "brand" || !draft.name;
-            const noun = draft.part ? draft.part.toLowerCase() : "products";
-            label.append(input, alertsEl("span", "", " Any " + draft.brand + " " + noun));
-            group.appendChild(label);
-        }
-        form.appendChild(group);
-        if (draft.store) {
-            form.appendChild(alertsEl("p", "alerts-hint", "Opened from the " + draft.store + " listing. A brand watch can match the same product at other stores."));
-        }
-        return;
-    }
-    const brand = textInput("alertsBrand", draft.brand || "");
-    brand.maxLength = 120;
-    form.appendChild(fieldWrap("Brand", brand, "Every word must match. Leave blank if you name one product."));
-    const name = textInput("alertsName", draft.name || "");
-    name.maxLength = 160;
-    form.appendChild(fieldWrap("Product", name, "Optional. Names one product instead of a whole brand."));
-}
-
-function appendRuleFields(form, draft) {
-    appendMatchFields(form, draft);
-    const part = alertsEl("select");
-    alertsId(part, "alertsPart");
-    ALERTS_PARTS.forEach(value => {
-        const option = alertsEl("option", "", value || "Any type");
-        option.value = value;
-        option.setAttribute("value", value);
-        if (value === (draft.part || "")) option.selected = true;
+function paintRuleFields(parent, draft) {
+    const brand = inputEl("text", draft.brand);
+    brand.maxLength = 60;
+    brand.autocomplete = "off";
+    parent.appendChild(fieldWrap("alertsBrand", "Brand", brand));
+    const name = inputEl("text", draft.name);
+    name.maxLength = 80;
+    parent.appendChild(fieldWrap("alertsName", "Product name", name));
+    const part = document.createElement("select");
+    [["", "Choose a part"], ["Decks", "Decks"], ["Wheels", "Wheels"], ["Trucks", "Trucks"], ["Bearings", "Bearings"]].forEach(pair => {
+        const option = alertsEl("option", "", pair[1]);
+        option.value = pair[0];
         part.appendChild(option);
     });
     part.value = draft.part || "";
-    form.appendChild(fieldWrap("Type", part, ""));
-    const size = textInput("alertsSize", draft.size || "");
-    size.setAttribute("inputmode", "decimal");
-    form.appendChild(fieldWrap("Size", size, "Deck width in inches, or a US shoe size. Leave blank for any size."));
-    const price = textInput("alertsPrice", draft.max_price == null ? "" : draft.max_price, "number");
-    price.setAttribute("min", "0");
-    price.setAttribute("step", "0.01");
-    price.setAttribute("inputmode", "decimal");
-    const priceHint = draft.form === "card" && draft.max_price !== ""
-        ? "Suggested from the current sale price. A match is strictly under this amount. Leave blank to skip the price check."
-        : "A match is strictly under this amount. Leave blank to skip the price check.";
-    form.appendChild(fieldWrap("Target price", price, priceHint));
+    parent.appendChild(fieldWrap("alertsPart", "Part", part));
+    const width = inputEl("text", draft.width);
+    width.inputMode = "decimal";
+    parent.appendChild(fieldWrap("alertsWidth", "Deck width (5–12, optional)", width));
+    const price = inputEl("text", draft.max_price);
+    price.inputMode = "decimal";
+    parent.appendChild(fieldWrap("alertsPrice", "Max price (optional)", price));
     const triggers = alertsEl("fieldset", "alerts-triggers");
-    triggers.appendChild(alertsEl("legend", "alerts-legend", "Email me when"));
-    [
-        ["alertsDrop", "Meaningful drop", "At least $2 or 5% off the previous sale price.", draft.alert_on_drop],
-        ["alertsLow", "Historical low", "A qualified all-time low: 3 observations over 7 days.", draft.alert_on_low],
-        ["alertsStock", "Verified restock", "Back in stock on reliable evidence, not a missed scan.", draft.alert_on_stock],
-        ["alertsNew", "Newly listed", "The product shows up as a new listing.", draft.alert_on_new]
-    ].forEach(row => {
-        const label = alertsEl("label", "alerts-check");
-        const box = textInput(row[0], "", "checkbox");
-        box.checked = !!row[3];
-        label.append(box, alertsEl("span", "", " " + row[1]));
-        triggers.appendChild(label);
-        triggers.appendChild(alertsEl("p", "alerts-hint", row[2]));
-    });
-    triggers.appendChild(alertsEl("p", "alerts-hint", "If none are checked, a match is included when it is newly listed, drops by at least $2 or 5%, or is verified back in stock."));
-    form.appendChild(triggers);
-    const note = alertsEl("textarea");
-    alertsId(note, "alertsNote");
+    triggers.appendChild(alertsEl("legend", "alerts-legend", "Only alert on"));
+    triggers.appendChild(checkWrap("alertsDrop", "Meaningful drop", draft.alert_on_drop));
+    triggers.appendChild(checkWrap("alertsLow", "Historical low", draft.alert_on_low));
+    triggers.appendChild(checkWrap("alertsStock", "Verified restock", draft.alert_on_stock));
+    parent.appendChild(triggers);
+    parent.appendChild(alertsEl("p", "alerts-hint", "Leave these off to be alerted once when a listing first matches, then on a meaningful drop or a verified restock."));
+    const note = inputEl("text", draft.note);
     note.maxLength = 80;
-    note.value = draft.note || "";
-    note.rows = 2;
-    form.appendChild(fieldWrap("Note", note, "Optional. 80 characters. Shown on the digest, not used for matching."));
+    parent.appendChild(fieldWrap("alertsNote", "Note (optional)", note));
 }
 
-function appendPrivacy(parent) {
-    const details = alertsEl("details", "alerts-privacy");
-    details.appendChild(alertsEl("summary", "", "Email, confirmation, and unsubscribe"));
-    details.appendChild(alertsEl("p", "alerts-hint", "We store the address and these rules until you unsubscribe. Unconfirmed signups are deleted after 7 days. The digest is at most one email a day, and only when a rule matches. The manage link stays in the page address after the # so it is not sent to this site's server. Don't share that link. Stars on this page stay in this browser and never send email."));
-    parent.appendChild(details);
+function draftFromForm(base) {
+    const draft = Object.assign({}, base || blankAlertDraft());
+    const value = id => {
+        const node = document.getElementById(id);
+        return node ? node.value : "";
+    };
+    const checked = id => {
+        const node = document.getElementById(id);
+        return !!(node && node.checked);
+    };
+    if (document.getElementById("alertsBrand")) {
+        draft.brand = value("alertsBrand");
+        draft.name = value("alertsName");
+        draft.part = value("alertsPart");
+        draft.width = value("alertsWidth");
+        draft.max_price = value("alertsPrice");
+        draft.note = value("alertsNote");
+        draft.alert_on_drop = checked("alertsDrop");
+        draft.alert_on_low = checked("alertsLow");
+        draft.alert_on_stock = checked("alertsStock");
+    }
+    return draft;
 }
 
-function mountTurnstile(parent) {
-    const config = alertsUi.config || {};
-    if (!config.turnstileSiteKey || config.mode !== "live") return;
+function turnstileToken() {
+    if (alertsUi.health && alertsUi.health.mode === "mock") return "mock-turnstile-pass";
+    if (typeof turnstile !== "undefined" && turnstile && typeof turnstile.getResponse === "function") {
+        return turnstile.getResponse() || "";
+    }
+    return "";
+}
+
+function ensureTurnstile(parent) {
+    const key = alertsUi.config && alertsUi.config.turnstileSiteKey;
+    if (!key || (alertsUi.health && alertsUi.health.mode === "mock")) return;
     const slot = alertsEl("div", "alerts-turnstile");
-    alertsId(slot, "alertsTurnstile");
+    slot.setAttribute("data-sitekey", key);
     parent.appendChild(slot);
-    if (document.getElementById("alertsTurnstileScript") || !document.head) return;
+    if (document.getElementById("alertsTurnstileScript")) return;
     const script = document.createElement("script");
-    alertsId(script, "alertsTurnstileScript");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.id = "alertsTurnstileScript";
     script.async = true;
     script.defer = true;
-    script.addEventListener("load", () => {
-        const host = document.getElementById("alertsTurnstile");
-        if (!host || !window.turnstile || !window.turnstile.render) return;
-        window.turnstile.render(host, {
-            sitekey: config.turnstileSiteKey,
-            callback: token => { alertsUi.turnstileToken = token || ""; }
-        });
-    });
-    document.head.appendChild(script);
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    if (document.body) document.body.appendChild(script);
 }
 
 function paintSoon(body) {
-    body.appendChild(alertsEl("p", "alerts-copy", "Nothing here subscribes you, and nothing is saved. Stars stay in this browser and do not send email. When email alerts are ready, a rule stays off until you confirm your address, and you can unsubscribe in one step."));
-    const draft = alertsUi.draft;
-    if (draft && (draft.name || draft.brand)) {
-        body.appendChild(alertsEl("p", "alerts-copy", "You'd be able to watch: " + describeWatch(draft) + "."));
-    }
-    appendPrivacy(body);
+    body.appendChild(alertsEl("p", "alerts-copy", "Email alerts coming soon."));
+    body.appendChild(alertsEl("p", "alerts-copy", "Nothing here subscribes you."));
+    body.appendChild(alertsEl("p", "alerts-hint", "You'd be able to watch a brand, a deck, or a price from the cards on this page."));
+}
+
+function paintDown(body) {
+    body.appendChild(alertsEl("p", "alerts-copy", "Alerts are unavailable right now."));
 }
 
 function paintCheck(body) {
-    body.appendChild(alertsEl("p", "alerts-hint", "The same reply is shown whether or not this address is already signed up. This page will not turn an alert on until a confirmation link comes back from the alerts service."));
-    if (alertsUi.config.mode === "mock" && alertsUi.previewToken) {
-        body.appendChild(actionButton("Open preview confirmation", "alerts-secondary", "preview", ""));
-        body.appendChild(alertsEl("p", "alerts-hint", "Preview mode did not send email. This opens the confirmation that preview would have emailed."));
-    }
-    body.appendChild(actionButton("Use a different address", "alerts-secondary", "reset-signup", ""));
+    body.appendChild(alertsEl("p", "alerts-copy", alertsUi.message || "Check your email to confirm."));
+    body.appendChild(alertsEl("p", "alerts-hint", "If this address is already active, that email is a manage link and these rules were not saved."));
+    const actions = alertsEl("div", "alerts-actions");
+    actions.appendChild(buttonEl("Email me a link", "alerts-secondary", "relink"));
+    actions.appendChild(buttonEl("Use a different address", "alerts-secondary", "reset-signup"));
+    body.appendChild(actions);
 }
 
-function paintRelink(body) {
-    body.appendChild(alertsEl("p", "alerts-copy", "Request a new manage link. If an account exists, the message arrives shortly. The link belongs in the address bar, after the #."));
-    const form = alertsEl("form", "alerts-form");
-    alertsId(form, "alertsLinkForm");
-    form.noValidate = true;
-    form.setAttribute("novalidate", "");
-    form.addEventListener("submit", submitLink);
-    const email = textInput("alertsLinkEmail", "", "email");
-    email.setAttribute("autocomplete", "email");
-    email.setAttribute("aria-label", "Email");
-    form.appendChild(fieldWrap("Email", email, ""));
-    const submit = alertsEl("button", "alerts-primary", alertsUi.busy ? "Sending…" : "Email me a new link");
-    submit.type = "submit";
-    alertsId(submit, "alertsLinkSubmit");
-    if (alertsUi.busy) submit.disabled = true;
-    form.appendChild(submit);
-    body.appendChild(form);
+function paintDone(body) {
+    body.appendChild(alertsEl("p", "alerts-copy", alertsUi.message || "You are unsubscribed. No alerts will be sent."));
+    body.appendChild(buttonEl("Create an alert", "alerts-secondary", "reset-signup"));
 }
 
 function paintSignup(body) {
+    if (alertsUi.health && alertsUi.health.mode === "mock") {
+        body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
+    } else if (alertsUi.healthUnread) {
+        body.appendChild(alertsEl("p", "alerts-banner", "The alerts status check could not be read from this page."));
+    }
     const draft = alertsUi.draft || blankAlertDraft();
+    if (draft.store || draft.name) {
+        body.appendChild(alertsEl("p", "alerts-subtitle", ruleTitle({ brand: draft.brand, name: draft.name })));
+    }
     const form = alertsEl("form", "alerts-form");
-    alertsId(form, "alertsForm");
+    form.id = "alertsForm";
     form.noValidate = true;
-    form.setAttribute("novalidate", "");
     form.addEventListener("submit", submitSignup);
-    form.appendChild(alertsEl("p", "alerts-copy", "At most one email a day, only when a rule matches. It stays off until you confirm the address."));
-    appendRuleFields(form, draft);
-    const email = textInput("alertsEmail", alertsUi.email || "", "email");
-    email.setAttribute("autocomplete", "email");
-    email.setAttribute("aria-label", "Email");
-    form.appendChild(fieldWrap("Email", email, ""));
-    const consent = alertsEl("label", "alerts-check");
-    const box = textInput("alertsConsent", "", "checkbox");
-    box.checked = !!alertsUi.consent;
-    consent.append(box, alertsEl("span", "", " Email me at most one digest a day, only when a rule matches. I can unsubscribe in one step. Nothing is sent until I confirm this address."));
-    form.appendChild(consent);
-    appendPrivacy(form);
+    const email = inputEl("email", alertsUi.email);
+    email.autocomplete = "email";
+    email.required = true;
+    form.appendChild(fieldWrap("alertsEmail", "Email", email));
+    paintRuleFields(form, draft);
+    form.appendChild(checkWrap("alertsConsent", "I agree to receive email about these alerts. I can unsubscribe at any time.", alertsUi.consent));
+    ensureTurnstile(form);
     const actions = alertsEl("div", "alerts-actions");
-    const submit = alertsEl("button", "alerts-primary", alertsUi.busy ? "Sending…" : "Email me a confirmation");
+    const submit = alertsEl("button", "alerts-primary", "Create alert");
+    submit.id = "alertsSubmit";
     submit.type = "submit";
-    alertsId(submit, "alertsSubmit");
-    if (alertsUi.busy) submit.disabled = true;
     actions.appendChild(submit);
-    actions.appendChild(actionButton("I already confirmed — email me a manage link", "alerts-secondary", "relink", ""));
+    actions.appendChild(buttonEl("I already confirmed", "alerts-secondary", "relink"));
     form.appendChild(actions);
-    mountTurnstile(form);
     body.appendChild(form);
 }
 
-function paintEdit(body) {
-    const draft = alertsUi.draft || blankAlertDraft();
+function paintRelink(body) {
+    if (alertsUi.health && alertsUi.health.mode === "mock") {
+        body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
+    }
+    body.appendChild(alertsEl("p", "alerts-copy", "Email me a link"));
     const form = alertsEl("form", "alerts-form");
-    alertsId(form, "alertsEditForm");
+    form.id = "alertsLinkForm";
     form.noValidate = true;
-    form.setAttribute("novalidate", "");
-    form.addEventListener("submit", saveEdit);
-    form.appendChild(alertsEl("h3", "alerts-subtitle", draft.rule_id ? "Edit alert" : "Add an alert"));
-    appendRuleFields(form, draft);
+    form.addEventListener("submit", submitLink);
+    const email = inputEl("email", alertsUi.email);
+    email.autocomplete = "email";
+    form.appendChild(fieldWrap("alertsLinkEmail", "Email", email));
+    ensureTurnstile(form);
     const actions = alertsEl("div", "alerts-actions");
-    const submit = alertsEl("button", "alerts-primary", alertsUi.busy ? "Saving…" : "Save alert");
+    const submit = alertsEl("button", "alerts-primary", "Email me a link");
     submit.type = "submit";
-    alertsId(submit, "alertsSave");
-    if (alertsUi.busy) submit.disabled = true;
     actions.appendChild(submit);
-    actions.appendChild(actionButton("Cancel", "alerts-secondary", "cancel-edit", ""));
+    actions.appendChild(buttonEl("Create an alert", "alerts-secondary", "reset-signup"));
     form.appendChild(actions);
     body.appendChild(form);
 }
 
 function paintManage(body) {
     const prefs = alertsUi.prefs || {};
-    const active = prefs.status === "active";
-    body.appendChild(alertsEl("p", "alerts-copy", active
-        ? "This address is confirmed. A rule is on only when it says Active. The digest is at most once a day."
-        : "Pending email verification. These rules are saved and are not active. Open the confirmation link before any of them can send mail."));
-    if (prefs.email_masked) body.appendChild(alertsEl("p", "alerts-meta", "Address " + prefs.email_masked));
+    if (alertsUi.active && prefs.status === "active") {
+        const badge = alertsEl("p", "alerts-status is-active", "Active");
+        body.appendChild(badge);
+    }
+    const who = prefs.email_masked ? "Alerts for " + prefs.email_masked + "." : "Your confirmed alerts.";
+    body.appendChild(alertsEl("p", "alerts-copy", who));
     const rules = prefs.rules || [];
-    if (!rules.length) body.appendChild(alertsEl("p", "alerts-copy", "You have no alerts yet."));
+    const max = prefs.max_rules || 10;
     rules.forEach(rule => {
         const card = alertsEl("article", "alerts-rule");
-        const badge = ruleBadge(prefs.status, rule);
         card.appendChild(alertsEl("h3", "", ruleTitle(rule)));
-        card.appendChild(alertsEl("span", "alerts-status is-" + badge.key, badge.label));
-        const meta = [ruleMeta(rule), ruleTriggers(rule)].filter(Boolean).join(" · ");
-        if (meta) card.appendChild(alertsEl("p", "alerts-meta", meta));
-        if (rule.note) card.appendChild(alertsEl("p", "alerts-meta", rule.note));
+        card.appendChild(alertsEl("p", "alerts-hint", ruleDetail(rule)));
         const actions = alertsEl("div", "alerts-actions");
-        if (alertsUi.confirmId === rule.rule_id) {
-            actions.appendChild(alertsEl("span", "alerts-meta", "Remove this alert?"));
-            actions.appendChild(actionButton("Remove", "alerts-danger", "confirm-remove", rule.rule_id));
-            actions.appendChild(actionButton("Keep", "alerts-secondary", "cancel-remove", ""));
-        } else {
-            actions.appendChild(actionButton("Edit", "alerts-secondary", "edit", rule.rule_id));
-            const paused = !!rule.paused || rule.status === "paused";
-            actions.appendChild(actionButton(paused ? "Resume" : "Pause", "alerts-secondary", "pause", rule.rule_id));
-            actions.appendChild(actionButton("Remove", "alerts-danger", "remove", rule.rule_id));
-        }
+        actions.appendChild(buttonEl("Edit", "alerts-secondary", "edit", rule.id || ""));
+        actions.appendChild(buttonEl("Remove", "alerts-secondary", "remove", rule.id || ""));
         card.appendChild(actions);
         body.appendChild(card);
     });
-    const bar = alertsEl("div", "alerts-actions");
-    if (rules.length < 10) bar.appendChild(actionButton("Add an alert", "alerts-primary", "add", ""));
-    body.appendChild(bar);
-    appendPrivacy(body);
-    const danger = alertsEl("div", "alerts-actions");
-    if (alertsUi.confirmId === "unsubscribe") {
-        danger.appendChild(alertsEl("span", "alerts-meta", "Unsubscribe and delete this address?"));
-        danger.appendChild(actionButton("Unsubscribe", "alerts-danger", "confirm-unsubscribe", ""));
-        danger.appendChild(actionButton("Keep alerts", "alerts-secondary", "cancel-remove", ""));
-    } else {
-        danger.appendChild(actionButton("Unsubscribe", "alerts-danger", "unsubscribe", ""));
+    if (!rules.length) body.appendChild(alertsEl("p", "alerts-hint", "You have no alerts yet."));
+    const actions = alertsEl("div", "alerts-actions");
+    if (rules.length < max) actions.appendChild(buttonEl("Add alert", "alerts-primary", "add"));
+    else actions.appendChild(alertsEl("p", "alerts-hint", "This account is at its " + max + " alert limit."));
+    actions.appendChild(buttonEl("Unsubscribe", "alerts-danger", "unsubscribe"));
+    actions.appendChild(buttonEl("Delete my data", "alerts-danger", "delete"));
+    body.appendChild(actions);
+    if (alertsUi.confirm === "unsubscribe" || alertsUi.confirm === "delete") {
+        const note = alertsUi.confirm === "delete" ? "Delete the address and every alert?" : "Unsubscribe this address?";
+        body.appendChild(alertsEl("p", "alerts-copy", note));
+        const row = alertsEl("div", "alerts-actions");
+        row.appendChild(buttonEl(alertsUi.confirm === "delete" ? "Delete" : "Confirm unsubscribe", "alerts-danger", "confirm-" + alertsUi.confirm));
+        row.appendChild(buttonEl("Cancel", "alerts-secondary", "cancel-confirm"));
+        body.appendChild(row);
     }
-    body.appendChild(danger);
-    body.appendChild(alertsEl("p", "alerts-hint", "Unsubscribing deletes your address and rules right away. Every digest also has a one-click unsubscribe link that does not need this page."));
+}
+
+function paintEdit(body) {
+    const draft = alertsUi.draft || blankAlertDraft();
+    const form = alertsEl("form", "alerts-form");
+    form.id = "alertsEditForm";
+    form.noValidate = true;
+    form.addEventListener("submit", submitEdit);
+    paintRuleFields(form, draft);
+    const actions = alertsEl("div", "alerts-actions");
+    const submit = alertsEl("button", "alerts-primary", alertsUi.editingId ? "Save alert" : "Add alert");
+    submit.id = "alertsSubmit";
+    submit.type = "submit";
+    actions.appendChild(submit);
+    actions.appendChild(buttonEl("Cancel", "alerts-secondary", "cancel-edit"));
+    form.appendChild(actions);
+    body.appendChild(form);
 }
 
 function paintAlerts(focusId) {
@@ -6505,378 +6187,228 @@ function paintAlerts(focusId) {
     const error = document.getElementById("alertsError");
     const body = document.getElementById("alertsBody");
     if (!body) return;
-    const config = alertsUi.config || { mode: "soon" };
-    const managing = config.mode !== "soon" && alertsUi.prefs && alertsUi.token && (alertsUi.view === "manage" || alertsUi.view === "edit");
-    if (title) title.textContent = managing ? "Manage alerts" : "Email alerts";
+    const titles = {
+        soon: "Alerts",
+        down: "Alerts",
+        signup: "Email alerts",
+        check: "Check your email",
+        manage: "Manage alerts",
+        edit: alertsUi.editingId ? "Edit alert" : "Add alert",
+        relink: "Email me a link",
+        done: "Alerts"
+    };
+    if (title) title.textContent = titles[alertsUi.view] || "Alerts";
+    if (live) live.textContent = alertsUi.view === "check" ? "" : (alertsUi.message || "");
     if (error) error.textContent = alertsUi.error || "";
-    if (live) live.textContent = alertsUi.message || "";
     body.replaceChildren();
-    if (config.mode === "soon") {
-        paintSoon(body);
-    } else {
-        if (config.mode === "mock") {
-            body.appendChild(alertsEl("p", "alerts-banner", "Preview mode. No email is sent."));
-        }
-        if (alertsUi.view === "check") paintCheck(body);
-        else if (alertsUi.view === "relink") paintRelink(body);
-        else if (alertsUi.view === "edit" && alertsUi.prefs && alertsUi.token) paintEdit(body);
-        else if (alertsUi.view === "manage" && alertsUi.prefs && alertsUi.token) paintManage(body);
-        else paintSignup(body);
-    }
-    if (focusId) focusAlerts(focusId);
+    if (alertsUi.view === "soon") paintSoon(body);
+    else if (alertsUi.view === "down") paintDown(body);
+    else if (alertsUi.view === "check") paintCheck(body);
+    else if (alertsUi.view === "done") paintDone(body);
+    else if (alertsUi.view === "manage") paintManage(body);
+    else if (alertsUi.view === "edit") paintEdit(body);
+    else if (alertsUi.view === "relink") paintRelink(body);
+    else paintSignup(body);
+    const focus = focusId ? document.getElementById(focusId) : null;
+    if (focus && focus.focus) focus.focus();
 }
 
-function ensureClient() {
-    const config = alertsPageConfig();
-    alertsUi.config = config;
-    if (!alertsUi.client || alertsUi.client.mode !== config.mode) alertsUi.client = createAlertsClient(config);
-    return config;
+function adoptAlerts(state) {
+    if (state.view) alertsUi.view = state.view;
+    alertsUi.message = state.message || "";
+    alertsUi.error = state.error || "";
+    alertsUi.active = !!state.active;
+    alertsUi.prefs = state.prefs || null;
+    if (state.health) alertsUi.health = state.health;
+    if (state.token) storeManageToken(state.token);
+    if (state.active === false && (state.view === "relink" || state.view === "done" || state.view === "down" || state.view === "check")) {
+        if (state.view !== "check") clearManageToken();
+    }
 }
 
-async function openAlerts(options) {
-    options = options || {};
-    ensureAlertsShell();
-    mountAlertsNav();
-    const config = ensureClient();
-    const root = document.getElementById("alertsRoot");
-    if (options.returnFocus) alertsUi.returnFocus = options.returnFocus;
-    else if (!alertsUi.returnFocus && document.activeElement && document.activeElement.focus) {
-        alertsUi.returnFocus = document.activeElement;
-    }
-    if (typeof isQuickOpen === "function" && isQuickOpen() && typeof closeQuickView === "function") {
-        let back = null;
-        if (typeof quickCard !== "undefined" && quickCard && quickCard.querySelector) back = quickCard.querySelector(".card-more");
-        closeQuickView();
-        if (back) alertsUi.returnFocus = back;
-    }
-    alertsUi.open = true;
-    if (root) root.hidden = false;
-    if (document.body && document.body.classList) document.body.classList.add("alerts-open");
-    syncAlertsNav();
-    if (config.mode === "soon") {
-        alertsUi.view = "signup";
-        alertsUi.message = "Email alerts coming soon.";
-        alertsUi.error = "";
-        if (options.draft) alertsUi.draft = options.draft;
-        paintAlerts("alertsClose");
+async function refreshHealth() {
+    alertsUi.health = null;
+    alertsUi.healthUnread = false;
+    const result = await alertsUi.client.health();
+    if (!result || result.status === 0) {
+        alertsUi.healthUnread = true;
         return;
     }
-    if (options.fragment) {
-        await openAlertsFragment(options.fragment);
-        return;
-    }
-    alertsUi.error = "";
-    if (options.draft && alertsUi.token && alertsUi.prefs) {
-        alertsUi.draft = Object.assign(blankAlertDraft(), options.draft, { rule_id: "", paused: false });
-        alertsUi.editingId = "";
-        alertsUi.view = "edit";
-        alertsUi.message = "";
-        paintAlerts("alertsSize");
-        return;
-    }
-    if (options.draft) {
-        alertsUi.draft = options.draft;
-        alertsUi.view = "signup";
-        alertsUi.message = "";
-        paintAlerts("alertsEmail");
-        return;
-    }
-    if (alertsUi.token && alertsUi.prefs) {
-        alertsUi.view = "manage";
-        paintAlerts("alertsClose");
-        return;
-    }
-    if (alertsUi.token && !alertsUi.prefs) {
-        await loadPreferences();
-        return;
-    }
-    alertsUi.draft = alertsUi.draft || blankAlertDraft();
-    alertsUi.view = "signup";
-    alertsUi.message = "";
-    paintAlerts("alertsEmail");
+    const state = alertsApplyResult({}, "health", result);
+    if (state.health) alertsUi.health = state.health;
+    if (state.view === "down") adoptAlerts(state);
 }
 
-async function openAlertsFragment(fragment) {
-    alertsUi.error = "";
-    alertsUi.message = "Checking this link…";
-    alertsUi.view = "manage";
+async function verifyAlertsToken(token) {
+    alertsUi.busy = true;
+    alertsUi.view = "check";
+    alertsUi.message = "Confirming your email…";
+    alertsUi.active = false;
     paintAlerts();
-    if (fragment.purpose === "verify" || fragment.purpose === "auto") {
-        const result = await alertsUi.client.verify(fragment.token);
-        if (result.ok) {
-            const manage = manageTokenFromVerify(result.body);
-            if (!manage) {
-                alertsUi.error = "The confirmation response did not include a manage token. Nothing is marked active.";
-                alertsUi.message = "";
-                alertsUi.view = "relink";
-                paintAlerts("alertsError");
-                return;
-            }
-            alertsUi.token = manage;
-            setAlertsHash("#manage=" + encodeURIComponent(manage));
-            await loadPreferences();
-            return;
-        }
-        if (fragment.purpose === "verify") {
-            alertsUi.token = "";
-            alertsUi.prefs = null;
-            alertsUi.error = alertsFailureMessage(result);
-            alertsUi.message = "";
-            alertsUi.view = "relink";
-            paintAlerts("alertsError");
-            return;
-        }
-    }
-    alertsUi.token = fragment.token;
-    const loaded = await loadPreferences();
-    if (!loaded && fragment.purpose === "auto") {
-        alertsUi.view = "relink";
-        paintAlerts("alertsLinkEmail");
-    }
+    const result = await alertsUi.client.verify(token);
+    alertsUi.busy = false;
+    adoptAlerts(alertsApplyResult({ active: false }, "verify", result));
+    paintAlerts();
 }
 
-async function loadPreferences() {
-    const result = await alertsUi.client.getPreferences(alertsUi.token);
-    if (!result.ok) {
-        alertsUi.prefs = null;
-        alertsUi.view = "relink";
-        alertsUi.error = alertsFailureMessage(result);
-        alertsUi.message = "";
-        paintAlerts("alertsError");
-        return false;
-    }
-    alertsUi.prefs = result.body || {};
-    alertsUi.view = "manage";
-    alertsUi.error = "";
-    alertsUi.confirmId = "";
-    alertsUi.message = alertsUi.prefs.status === "active"
-        ? "Email confirmed. A rule is on only when it says Active."
-        : "Pending email verification. Nothing is active until you confirm.";
-    paintAlerts("alertsTitle");
-    return true;
+async function loadAlertsPreferences(token) {
+    alertsUi.busy = true;
+    const result = await alertsUi.client.getPreferences(token);
+    alertsUi.busy = false;
+    const state = alertsApplyResult({ active: false }, "preferences", result);
+    if (state.active) state.token = token;
+    adoptAlerts(state);
+    paintAlerts();
 }
 
 async function submitSignup(event) {
     if (event && event.preventDefault) event.preventDefault();
-    if (alertsUi.busy || !alertsUi.client || alertsUi.config.mode === "soon") return;
-    const draft = readRuleForm();
-    alertsUi.draft = draft;
+    if (alertsUi.busy || !alertsUi.client) return;
     const emailNode = document.getElementById("alertsEmail");
-    const email = emailNode ? String(emailNode.value || "").trim() : "";
-    alertsUi.email = email;
-    alertsUi.consent = checkedBox("alertsConsent");
-    const rule = ruleFromDraft(draft);
-    const problem = validateSignup(email, checkedBox("alertsConsent"), [rule]);
-    if (problem) {
-        alertsUi.error = problem;
-        alertsUi.message = "";
-        paintAlerts("alertsError");
+    const consentNode = document.getElementById("alertsConsent");
+    alertsUi.email = emailNode ? emailNode.value : "";
+    alertsUi.consent = !!(consentNode && consentNode.checked);
+    alertsUi.draft = draftFromForm(alertsUi.draft);
+    if (!validEmail(alertsUi.email)) {
+        alertsUi.error = "Enter an email address.";
+        alertsUi.active = false;
+        paintAlerts("alertsEmail");
         return;
     }
+    if (!alertsUi.consent) {
+        alertsUi.error = "Check the box to agree before subscribing.";
+        alertsUi.active = false;
+        paintAlerts("alertsConsent");
+        return;
+    }
+    const built = buildRule(alertsUi.draft);
+    if (!built.ok) {
+        alertsUi.error = built.error;
+        alertsUi.active = false;
+        paintAlerts();
+        return;
+    }
+    const token = turnstileToken();
     alertsUi.busy = true;
     alertsUi.error = "";
-    const button = document.getElementById("alertsSubmit");
-    if (button) {
-        button.disabled = true;
-        button.textContent = "Sending…";
-    }
-    let result;
-    try {
-        result = await alertsUi.client.subscribe({
-            email: email,
-            rules: [rule],
-            consent: true,
-            consent_version: alertsUi.config.consentVersion,
-            turnstile_token: alertsUi.turnstileToken || ""
-        });
-    } catch (err) {
-        result = alertsResult(0, { error: "network", message: "The alerts service could not be reached. Nothing was saved." });
-    }
+    const result = await alertsUi.client.subscribe({
+        email: normalizeEmail(alertsUi.email),
+        rules: [built.rule],
+        consent: true,
+        consent_version: alertsUi.config.consentVersion,
+        turnstile_token: token
+    });
     alertsUi.busy = false;
-    if (result.status === 202) {
-        alertsUi.view = "check";
-        alertsUi.message = (result.body && result.body.message) || ALERTS_ACCEPTED_MESSAGE;
-        alertsUi.error = "";
-        alertsUi.previewToken = result.previewToken || "";
-        alertsUi.previewKind = result.previewKind || "";
-        paintAlerts("alertsLive");
-        return;
-    }
-    alertsUi.error = alertsFailureMessage(result);
-    alertsUi.message = "";
-    paintAlerts("alertsError");
+    adoptAlerts(alertsApplyResult({ active: false, view: "signup" }, "subscribe", result));
+    if (alertsUi.view !== "check") alertsUi.view = alertsUi.view === "down" ? "down" : "signup";
+    paintAlerts();
 }
 
 async function submitLink(event) {
     if (event && event.preventDefault) event.preventDefault();
     if (alertsUi.busy || !alertsUi.client) return;
     const emailNode = document.getElementById("alertsLinkEmail");
-    const email = emailNode ? String(emailNode.value || "").trim() : "";
-    if (!validEmail(email)) {
-        alertsUi.error = "Enter the email address that should get the digest. Nothing was sent.";
-        alertsUi.message = "";
-        paintAlerts("alertsError");
+    alertsUi.email = emailNode ? emailNode.value : "";
+    if (!validEmail(alertsUi.email)) {
+        alertsUi.error = "Enter an email address.";
+        paintAlerts("alertsLinkEmail");
         return;
     }
+    if (!alertsUi.health) await refreshHealth();
     alertsUi.busy = true;
-    alertsUi.error = "";
-    let result;
-    try {
-        result = await alertsUi.client.requestLink({
-            email: email,
-            turnstile_token: alertsUi.turnstileToken || ""
-        });
-    } catch (err) {
-        result = alertsResult(0, { error: "network", message: "The alerts service could not be reached. Nothing was sent." });
-    }
-    alertsUi.busy = false;
-    if (result.status === 202) {
-        alertsUi.view = "check";
-        alertsUi.message = (result.body && result.body.message) || ALERTS_LINK_MESSAGE;
-        alertsUi.error = "";
-        alertsUi.previewToken = result.previewToken || "";
-        alertsUi.previewKind = result.previewKind || "";
-        paintAlerts("alertsLive");
-        return;
-    }
-    alertsUi.error = alertsFailureMessage(result);
-    paintAlerts("alertsError");
-}
-
-async function saveEdit(event) {
-    if (event && event.preventDefault) event.preventDefault();
-    if (alertsUi.busy || !alertsUi.prefs) return;
-    const draft = readRuleForm();
-    const rule = ruleFromDraft(draft);
-    const existing = (alertsUi.prefs.rules || []).map(cleanRule);
-    let rules;
-    if (draft.rule_id) {
-        rules = existing.map(item => item.rule_id === draft.rule_id ? rule : item);
-    } else {
-        rules = existing.concat([rule]);
-    }
-    const problem = validateRules(rules, {});
-    if (problem) {
-        alertsUi.error = problem;
-        paintAlerts("alertsError");
-        return;
-    }
-    await putRules(rules);
-}
-
-async function putRules(rules) {
-    alertsUi.busy = true;
-    alertsUi.error = "";
-    let result;
-    try {
-        result = await alertsUi.client.putPreferences(alertsUi.token, rules);
-    } catch (err) {
-        result = alertsResult(0, { error: "network", message: "The alerts service could not be reached. Nothing was changed." });
-    }
-    alertsUi.busy = false;
-    if (!result.ok) {
-        alertsUi.error = alertsFailureMessage(result);
-        if (result.status === 401) {
-            alertsUi.prefs = null;
-            alertsUi.view = "relink";
-        }
-        paintAlerts("alertsError");
-        return;
-    }
-    alertsUi.prefs = result.body || {};
-    alertsUi.view = "manage";
-    alertsUi.confirmId = "";
-    alertsUi.message = alertsUi.prefs.status === "active"
-        ? "Saved. A rule is on only when it says Active."
-        : "Saved. Pending email verification — nothing is active yet.";
-    alertsUi.error = "";
-    paintAlerts("alertsLive");
-}
-
-function ruleById(id) {
-    const rules = (alertsUi.prefs && alertsUi.prefs.rules) || [];
-    for (let i = 0; i < rules.length; i++) {
-        if (rules[i].rule_id === id) return rules[i];
-    }
-    return null;
-}
-
-async function togglePause(id) {
-    const current = (alertsUi.prefs && alertsUi.prefs.rules) || [];
-    const rules = current.map(rule => {
-        const copy = cleanRule(rule);
-        if (copy.rule_id === id) {
-            if (copy.paused) delete copy.paused;
-            else copy.paused = true;
-        }
-        return copy;
+    const result = await alertsUi.client.link({
+        email: normalizeEmail(alertsUi.email),
+        turnstile_token: turnstileToken()
     });
-    await putRules(rules);
-}
-
-async function removeRule(id) {
-    const current = (alertsUi.prefs && alertsUi.prefs.rules) || [];
-    await putRules(current.filter(rule => rule.rule_id !== id).map(cleanRule));
-}
-
-async function unsubscribeAlerts() {
-    if (!alertsUi.client || alertsUi.busy) return;
-    alertsUi.busy = true;
-    alertsUi.error = "";
-    let result;
-    try {
-        result = await alertsUi.client.unsubscribe(alertsUi.token);
-    } catch (err) {
-        result = alertsResult(0, { error: "network", message: "The alerts service could not be reached. Nothing was changed." });
-    }
     alertsUi.busy = false;
-    if (!result.ok) {
-        alertsUi.error = alertsFailureMessage(result);
-        paintAlerts("alertsError");
-        return;
-    }
-    alertsUi.token = "";
-    alertsUi.prefs = null;
-    alertsUi.confirmId = "";
-    alertsUi.previewToken = "";
-    alertsUi.draft = blankAlertDraft();
-    alertsUi.view = "signup";
-    setAlertsHash("");
-    alertsUi.message = (result.body && result.body.message) || "You are unsubscribed. We deleted your address and rules.";
-    alertsUi.error = "";
-    paintAlerts("alertsLive");
+    adoptAlerts(alertsApplyResult({ active: false }, "link", result));
+    paintAlerts();
 }
 
-async function confirmPreview() {
-    if (!alertsUi.config || alertsUi.config.mode !== "mock" || !alertsUi.previewToken) return;
-    if (alertsUi.previewKind === "manage") {
-        alertsUi.token = alertsUi.previewToken;
-        alertsUi.previewToken = "";
-        setAlertsHash("#manage=" + encodeURIComponent(alertsUi.token));
-        await loadPreferences();
+function rulesAfterEdit(nextRule) {
+    const current = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    const rules = current.map(cleanRule);
+    if (alertsUi.editingId) {
+        const index = current.findIndex(rule => rule && rule.id === alertsUi.editingId);
+        if (index >= 0) rules[index] = nextRule;
+        else rules.push(nextRule);
+    } else {
+        rules.push(nextRule);
+    }
+    return rules;
+}
+
+async function submitEdit(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (alertsUi.busy || !alertsUi.client) return;
+    alertsUi.draft = draftFromForm(alertsUi.draft);
+    const built = buildRule(alertsUi.draft);
+    if (!built.ok) {
+        alertsUi.error = built.error;
+        paintAlerts();
         return;
     }
-    const result = await alertsUi.client.verify(alertsUi.previewToken);
-    alertsUi.previewToken = "";
-    if (!result.ok) {
+    const max = (alertsUi.prefs && alertsUi.prefs.max_rules) || 10;
+    const rules = rulesAfterEdit(built.rule);
+    const existing = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    if (!alertsUi.editingId && existing.length >= max) {
+        alertsUi.error = "This account is at its " + max + " alert limit.";
+        paintAlerts();
+        return;
+    }
+    const token = readManageToken();
+    alertsUi.busy = true;
+    const result = await alertsUi.client.putPreferences(token, rules);
+    alertsUi.busy = false;
+    const previous = alertsUi.view;
+    const state = alertsApplyResult({ active: alertsUi.active, prefs: alertsUi.prefs, view: previous }, "preferences", result);
+    if (!(result.status === 200 && result.body && result.body.status === "active")) {
         alertsUi.error = alertsFailureMessage(result);
-        alertsUi.view = "check";
-        paintAlerts("alertsError");
+        alertsUi.view = "edit";
+        paintAlerts();
         return;
     }
-    const manage = manageTokenFromVerify(result.body);
-    if (!manage) {
-        alertsUi.error = "The confirmation response did not include a manage token. Nothing is marked active.";
-        paintAlerts("alertsError");
+    adoptAlerts(state);
+    alertsUi.editingId = "";
+    alertsUi.confirm = "";
+    paintAlerts();
+}
+
+async function removeAlert(id) {
+    const rules = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    if (rules.length <= 1) {
+        alertsUi.error = "Unsubscribe to remove the last alert.";
+        alertsUi.view = "manage";
+        paintAlerts();
         return;
     }
-    alertsUi.token = manage;
-    setAlertsHash("#manage=" + encodeURIComponent(manage));
-    await loadPreferences();
+    const next = rules.filter(rule => rule.id !== id).map(cleanRule);
+    const token = readManageToken();
+    alertsUi.busy = true;
+    const result = await alertsUi.client.putPreferences(token, next);
+    alertsUi.busy = false;
+    if (!(result.status === 200 && result.body && result.body.status === "active")) {
+        alertsUi.error = alertsFailureMessage(result);
+        alertsUi.view = "manage";
+        paintAlerts();
+        return;
+    }
+    adoptAlerts(alertsApplyResult({ active: false }, "preferences", result));
+    paintAlerts();
+}
+
+async function finishSubscription(kind) {
+    const token = readManageToken();
+    alertsUi.busy = true;
+    const result = kind === "delete" ? await alertsUi.client.deleteSubscriber(token) : await alertsUi.client.unsubscribe(token);
+    alertsUi.busy = false;
+    adoptAlerts(alertsApplyResult({ active: false }, kind, result));
+    alertsUi.confirm = "";
+    paintAlerts();
 }
 
 function onAlertsClick(event) {
-    const target = event && event.target;
+    const target = event.target;
     if (!target || !target.closest) return;
     const button = target.closest("[data-action]");
     if (!button) return;
@@ -6889,49 +6421,169 @@ function onAlertsClick(event) {
         alertsUi.view = "relink";
         alertsUi.error = "";
         alertsUi.message = "";
+        alertsUi.active = false;
         paintAlerts("alertsLinkEmail");
     } else if (action === "reset-signup") {
         alertsUi.view = "signup";
-        alertsUi.previewToken = "";
         alertsUi.error = "";
         alertsUi.message = "";
+        alertsUi.active = false;
+        alertsUi.prefs = null;
+        alertsUi.draft = alertsUi.draft || blankAlertDraft();
         paintAlerts("alertsEmail");
-    } else if (action === "preview") {
-        confirmPreview();
     } else if (action === "add") {
         alertsUi.draft = blankAlertDraft();
         alertsUi.editingId = "";
         alertsUi.view = "edit";
         alertsUi.error = "";
-        alertsUi.message = "";
         paintAlerts("alertsBrand");
     } else if (action === "edit") {
-        const rule = ruleById(id);
+        const rule = ((alertsUi.prefs && alertsUi.prefs.rules) || []).find(item => item.id === id);
         if (!rule) return;
         alertsUi.draft = draftFromRule(rule);
         alertsUi.editingId = id;
         alertsUi.view = "edit";
         alertsUi.error = "";
-        alertsUi.message = "";
         paintAlerts("alertsBrand");
-    } else if (action === "pause") {
-        togglePause(id);
     } else if (action === "remove") {
-        alertsUi.confirmId = id;
-        paintAlerts();
-    } else if (action === "cancel-remove" || action === "cancel-edit") {
-        alertsUi.confirmId = "";
+        return removeAlert(id);
+    } else if (action === "cancel-edit") {
         alertsUi.view = "manage";
         alertsUi.error = "";
+        alertsUi.editingId = "";
         paintAlerts();
-    } else if (action === "confirm-remove") {
-        removeRule(id);
-    } else if (action === "unsubscribe") {
-        alertsUi.confirmId = "unsubscribe";
+    } else if (action === "unsubscribe" || action === "delete") {
+        alertsUi.confirm = action;
+        alertsUi.view = "manage";
+        paintAlerts();
+    } else if (action === "cancel-confirm") {
+        alertsUi.confirm = "";
         paintAlerts();
     } else if (action === "confirm-unsubscribe") {
-        unsubscribeAlerts();
+        return finishSubscription("unsubscribe");
+    } else if (action === "confirm-delete") {
+        return finishSubscription("delete");
     }
+}
+
+function ensureAlertsShell() {
+    if (document.getElementById("alertsRoot")) return;
+    const root = alertsEl("div", "");
+    root.id = "alertsRoot";
+    setHidden(root, true);
+    const panel = alertsEl("div", "alerts-panel");
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
+    panel.setAttribute("aria-labelledby", "alertsTitle");
+    const head = alertsEl("div", "alerts-head");
+    const title = alertsEl("h2", "alerts-title", "Alerts");
+    title.id = "alertsTitle";
+    const close = alertsEl("button", "alerts-close", "Close");
+    close.type = "button";
+    close.setAttribute("aria-label", "Close alerts");
+    close.addEventListener("click", closeAlerts);
+    head.append(title, close);
+    const live = alertsEl("p", "alerts-live", "");
+    live.id = "alertsLive";
+    live.setAttribute("role", "status");
+    const error = alertsEl("p", "alerts-error", "");
+    error.id = "alertsError";
+    error.setAttribute("role", "alert");
+    const body = alertsEl("div", "alerts-body");
+    body.id = "alertsBody";
+    panel.append(head, live, error, body);
+    root.appendChild(panel);
+    root.addEventListener("click", event => {
+        if (event.target === root) closeAlerts();
+    });
+    body.addEventListener("click", onAlertsClick);
+    if (document.body) document.body.appendChild(root);
+}
+
+function mountAlertsNav() {
+    if (document.getElementById("navAlerts")) return;
+    const nav = document.querySelector ? document.querySelector(".topnav-links") : null;
+    if (!nav) return;
+    const button = alertsEl("button", "nav-alerts", "Alerts");
+    button.id = "navAlerts";
+    button.type = "button";
+    button.addEventListener("click", () => openAlerts());
+    nav.appendChild(button);
+}
+
+function isAlertsOpen() {
+    const root = document.getElementById("alertsRoot");
+    return !!(alertsUi.open && root && !root.hidden);
+}
+
+function closeAlerts() {
+    alertsUi.open = false;
+    setHidden(document.getElementById("alertsRoot"), true);
+    if (alertsUi.returnFocus && alertsUi.returnFocus.focus) alertsUi.returnFocus.focus();
+}
+
+async function openAlerts(options) {
+    options = options || {};
+    ensureAlertsShell();
+    alertsUi.returnFocus = (typeof document !== "undefined" && document.activeElement) || null;
+    alertsUi.config = alertsPageConfig();
+    alertsUi.client = createAlertsClient(alertsUi.config);
+    alertsUi.open = true;
+    alertsUi.error = "";
+    alertsUi.message = "";
+    alertsUi.confirm = "";
+    alertsUi.active = false;
+    alertsUi.health = null;
+    alertsUi.healthUnread = false;
+    setHidden(document.getElementById("alertsRoot"), false);
+    if (options.draft) alertsUi.draft = options.draft;
+    if (!alertsUi.draft) alertsUi.draft = blankAlertDraft();
+    if (alertsUi.config.mode !== "live") {
+        alertsUi.view = "soon";
+        alertsUi.prefs = null;
+        paintAlerts();
+        return;
+    }
+    if (options.fragment && options.fragment.purpose === "verify") {
+        await verifyAlertsToken(options.fragment.token);
+        return;
+    }
+    if (options.fragment && options.fragment.purpose === "manage") {
+        await loadAlertsPreferences(options.fragment.token);
+        return;
+    }
+    const saved = readManageToken();
+    if (saved && options.adding) {
+        await loadAlertsPreferences(saved);
+        if (alertsUi.view === "manage") {
+            alertsUi.editingId = "";
+            alertsUi.view = "edit";
+            alertsUi.error = "";
+            paintAlerts("alertsBrand");
+        }
+        return;
+    }
+    if (saved && !options.draft) {
+        await loadAlertsPreferences(saved);
+        return;
+    }
+    alertsUi.view = "signup";
+    alertsUi.prefs = null;
+    await refreshHealth();
+    paintAlerts(alertsUi.view === "down" ? "" : "alertsEmail");
+}
+
+function appendQuickAlert(parent, card) {
+    const button = alertsEl("button", "quick-alert", "Alert me");
+    button.type = "button";
+    button.addEventListener("click", event => {
+        if (event.stopPropagation) event.stopPropagation();
+        if (event.preventDefault) event.preventDefault();
+        if (typeof closeQuickView === "function") closeQuickView();
+        const dataset = (card && card.dataset) || {};
+        openAlerts({ draft: alertDraftFromDataset(dataset), adding: true });
+    });
+    parent.appendChild(button);
 }
 
 function wireAlerts() {
@@ -6941,13 +6593,18 @@ function wireAlerts() {
     ensureAlertsShell();
     if (typeof window !== "undefined" && window.addEventListener) {
         window.addEventListener("hashchange", () => {
-            if (alertsUi.writingHash) return;
-            const parsed = readAlertsFragment(location.hash || "");
+            const parsed = consumeAlertsFragment();
             if (parsed) openAlerts({ fragment: parsed });
         });
     }
-    const parsed = readAlertsFragment((typeof location !== "undefined" && location.hash) || "");
+    const parsed = consumeAlertsFragment();
     if (parsed) openAlerts({ fragment: parsed });
 }
 
+if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded", wireAlerts);
+
 /* ALERTS_UI_END */
+
+
+
+
