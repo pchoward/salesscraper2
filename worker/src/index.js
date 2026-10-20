@@ -54,19 +54,51 @@ async function mockOutbox(ctx, request) {
 }
 
 /**
+ * CORS headers from settings that passed validation only: a rejected
+ * PUBLIC_ORIGIN is never trusted, and localhost is allowed only when the
+ * mode really is mock. Used even while the service is misconfigured, so the
+ * page can read the 503 and say alerts are unavailable.
+ */
+function trustedCors(request, config) {
+  const settings = {
+    ...config.settings,
+    publicOrigin: config.problems.includes("PUBLIC_ORIGIN") ? "" : config.settings.publicOrigin,
+    mode: config.problems.includes("MODE") ? "" : config.settings.mode,
+  };
+  return corsHeaders(request, settings);
+}
+
+function preflight(cors) {
+  return cors["Access-Control-Allow-Origin"]
+    ? new Response(null, { status: 204, headers: cors })
+    : json(403, { error: "origin_not_allowed" });
+}
+
+function health(request, config) {
+  const cors = trustedCors(request, config);
+  if (request.method === "OPTIONS") return preflight(cors);
+  if (request.method !== "GET") return withHeaders(json(405, { error: "method_not_allowed" }), cors);
+  const response = config.ok
+    ? json(200, { ok: true, api_version: API_VERSION, mode: config.settings.mode })
+    : json(503, { ok: false, problems: config.problems });
+  return withHeaders(response, cors);
+}
+
+/**
  * Handles one request. `deps` lets tests replace outbound fetch (Resend and
  * Turnstile) and the clock; production uses the defaults.
  */
 export async function handle(request, env, deps = {}) {
   const url = new URL(request.url);
   const config = loadConfig(env);
-  if (url.pathname === "/v1/health" && request.method === "GET") {
-    return config.ok
-      ? json(200, { ok: true, api_version: API_VERSION, mode: config.settings.mode })
-      : json(503, { ok: false, problems: config.problems });
-  }
+  if (url.pathname === "/v1/health") return health(request, config);
   // Fail closed: no endpoint does anything while settings are incomplete.
-  if (!config.ok) return json(503, { error: "service_unavailable" });
+  if (!config.ok) {
+    const browserFacing = Boolean(PUBLIC[url.pathname]) || url.pathname === "/v1/mock/outbox";
+    const cors = browserFacing ? trustedCors(request, config) : {};
+    if (browserFacing && request.method === "OPTIONS") return preflight(cors);
+    return withHeaders(json(503, { error: "service_unavailable" }), cors);
+  }
 
   const settings = config.settings;
   const ctx = {
@@ -81,9 +113,7 @@ export async function handle(request, env, deps = {}) {
   const isMock = settings.mode === "mock" && url.pathname === "/v1/mock/outbox";
   if (publicRoute || isMock) {
     const cors = corsHeaders(request, settings);
-    if (request.method === "OPTIONS") {
-      return cors["Access-Control-Allow-Origin"] ? new Response(null, { status: 204, headers: cors }) : json(403, { error: "origin_not_allowed" });
-    }
+    if (request.method === "OPTIONS") return preflight(cors);
     let response;
     try {
       if (isMock) {

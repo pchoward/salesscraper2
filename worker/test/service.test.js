@@ -111,3 +111,42 @@ test("retention removes stale pending signups, tokens, deliveries, and counters"
   assert.ok(removed.tokens >= 1);
   assert.ok(removed.rate_limits >= 1);
 });
+
+test("/v1/health is readable from the site, including when misconfigured (CORS regression)", async () => {
+  const ACAO = "Access-Control-Allow-Origin";
+  const prod = client(makeEnv("production"));
+  const ok = await prod.call("GET", "/v1/health");
+  assert.equal(ok.status, 200);
+  assert.equal(ok.headers.get(ACAO), "https://pchoward.github.io");
+  assert.equal(ok.headers.get("Vary"), "Origin");
+  assert.equal(ok.headers.get("Cache-Control"), "no-store");
+  const preflight = await prod.call("OPTIONS", "/v1/health");
+  assert.equal(preflight.status, 204);
+  assert.equal(preflight.headers.get(ACAO), "https://pchoward.github.io");
+  assert.equal((await prod.call("POST", "/v1/health", { raw: "" })).status, 405);
+
+  // Other origins and localhost outside mock mode get no CORS grant.
+  assert.equal((await prod.call("GET", "/v1/health", { origin: "https://evil.example" })).headers.get(ACAO), null);
+  assert.equal((await prod.call("OPTIONS", "/v1/health", { origin: "https://evil.example" })).status, 403);
+  assert.equal((await prod.call("GET", "/v1/health", { origin: "http://localhost:8000" })).headers.get(ACAO), null);
+  const mock = client(makeEnv("mock"));
+  assert.equal((await mock.call("GET", "/v1/health", { origin: "http://localhost:8000" })).headers.get(ACAO), "http://localhost:8000");
+
+  // Misconfigured: the page can still read the 503s and show "unavailable".
+  const broken = client(makeEnv("production", { HMAC_SECRET: "short" }));
+  const down = await broken.call("GET", "/v1/health");
+  assert.equal(down.status, 503);
+  assert.equal(down.headers.get(ACAO), "https://pchoward.github.io");
+  const subscribe = await broken.call("POST", "/v1/subscribe", { body: subscribeBody() });
+  assert.deepEqual([subscribe.status, subscribe.data], [503, { error: "service_unavailable" }]);
+  assert.equal(subscribe.headers.get(ACAO), "https://pchoward.github.io");
+  assert.equal((await broken.call("OPTIONS", "/v1/subscribe")).status, 204);
+  // Internal endpoints never get CORS, configured or not.
+  assert.equal((await broken.call("GET", "/v1/internal/routes")).headers.get(ACAO), null);
+
+  // A rejected setting is never used to grant CORS.
+  const badOrigin = client(makeEnv("production", { PUBLIC_ORIGIN: "http://pchoward.github.io" }));
+  assert.equal((await badOrigin.call("GET", "/v1/health", { origin: "http://pchoward.github.io" })).headers.get(ACAO), null);
+  const badMode = client(makeEnv("mock", { MODE: "mock-ish" }));
+  assert.equal((await badMode.call("GET", "/v1/health", { origin: "http://localhost:8000" })).headers.get(ACAO), null);
+});

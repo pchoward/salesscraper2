@@ -68,6 +68,8 @@ Validation errors use `fields` keyed `rules[<index>].<field>`:
 
 `200 {"ok": true, "api_version": "1", "mode": "mock" | "staging" | "production"}`. When the service is misconfigured it returns `503 {"ok": false, "problems": [setting names]}`. Every other endpoint then answers `503 {"error": "service_unavailable"}`. Show "Alerts are unavailable right now."
 
+Call this from the page before showing the form. Responses carry CORS headers for the site origin, including the 503s, so the page can always read whether alerts are available. The same holds for the other public endpoints' 503 while the service is misconfigured. `OPTIONS /v1/health` answers a preflight. Other origins get no CORS grant. Neither does an origin that only matches a rejected `PUBLIC_ORIGIN` setting.
+
 ### `POST /v1/subscribe`
 
 ```json

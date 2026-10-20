@@ -165,7 +165,7 @@ These things never contain an address, token, or subscriber rule:
 ## Tests
 
 ```bash
-cd worker && node --test test/*.test.js          # 30 tests, real SQLite, network mocked
+cd worker && node --test test/*.test.js          # 31 tests, real SQLite, network mocked
 python -m unittest test_alerts_delivery          # includes an end-to-end run against the mock Worker
 ```
 
