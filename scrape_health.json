@@ -1895,15 +1895,15 @@
           }
         },
         "CCS_Bearings": {
-          "count": 1,
-          "failed": false,
+          "count": 0,
+          "failed": true,
           "diagnostics": {
             "expected_count": 0.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 1,
+            "actual_count": 0,
             "percentage_change": null,
-            "reason": "normal_variation"
+            "reason": "scrape_failed"
           }
         },
         "CCS_Decks": {
@@ -1979,14 +1979,14 @@
           }
         },
         "SkateWarehouse_Decks": {
-          "count": 71,
+          "count": 69,
           "failed": false,
           "diagnostics": {
             "expected_count": 71.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 9.5,
-            "actual_count": 71,
-            "percentage_change": 0.0,
+            "actual_count": 69,
+            "percentage_change": -2.8,
             "reason": "normal_variation"
           }
         },
@@ -2099,14 +2099,14 @@
           }
         },
         "Zumiez_Accessories": {
-          "count": 11,
+          "count": 13,
           "failed": false,
           "diagnostics": {
             "expected_count": 12,
             "baseline_samples": 3,
             "median_absolute_deviation": 1,
-            "actual_count": 11,
-            "percentage_change": -8.3,
+            "actual_count": 13,
+            "percentage_change": 8.3,
             "reason": "normal_variation"
           }
         },
@@ -2123,14 +2123,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 214,
+          "count": 212,
           "failed": false,
           "diagnostics": {
             "expected_count": 225.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 4.0,
-            "actual_count": 214,
-            "percentage_change": -4.9,
+            "actual_count": 212,
+            "percentage_change": -5.8,
             "reason": "normal_variation"
           }
         },
@@ -2159,29 +2159,29 @@
           }
         },
         "Zumiez_Wheels": {
-          "count": 10,
+          "count": 11,
           "failed": false,
           "diagnostics": {
             "expected_count": 13.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 10,
-            "percentage_change": -23.1,
+            "actual_count": 11,
+            "percentage_change": -15.4,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-10-20T12:42:21+00:00"
+      "scanned_at": "2026-10-20T17:34:14+00:00"
     }
   ],
   "baseline": {
     "Zumiez_Decks": {
       "date": "2026-10-20",
-      "count": 214
+      "count": 212
     },
     "Zumiez_Wheels": {
       "date": "2026-10-20",
-      "count": 10
+      "count": 11
     },
     "Zumiez_Trucks": {
       "date": "2026-10-20",
@@ -2189,7 +2189,7 @@
     },
     "SkateWarehouse_Decks": {
       "date": "2026-10-20",
-      "count": 71
+      "count": 69
     },
     "SkateWarehouse_Wheels": {
       "date": "2026-10-20",
@@ -2225,7 +2225,7 @@
     },
     "Zumiez_Accessories": {
       "date": "2026-10-20",
-      "count": 11
+      "count": 13
     },
     "SkateWarehouse_Bearings": {
       "date": "2026-10-20",
@@ -2238,10 +2238,6 @@
     "SkateWarehouse_Accessories": {
       "date": "2026-10-20",
       "count": 6
-    },
-    "CCS_Bearings": {
-      "date": "2026-10-20",
-      "count": 1
     },
     "CCS_Sneakers": {
       "date": "2026-10-20",
@@ -2276,6 +2272,10 @@
       }
     ],
     "CCS_Bearings": [
+      {
+        "date": "2026-10-06",
+        "count": 0
+      },
       {
         "date": "2026-10-07",
         "count": 0
@@ -2326,10 +2326,6 @@
       },
       {
         "date": "2026-10-19",
-        "count": 1
-      },
-      {
-        "date": "2026-10-20",
         "count": 1
       }
     ],
@@ -2656,7 +2652,7 @@
       },
       {
         "date": "2026-10-20",
-        "count": 71
+        "count": 69
       }
     ],
     "SkateWarehouse_Sneakers": [
@@ -3076,7 +3072,7 @@
       },
       {
         "date": "2026-10-20",
-        "count": 11
+        "count": 13
       }
     ],
     "Zumiez_Bearings": [
@@ -3192,7 +3188,7 @@
       },
       {
         "date": "2026-10-20",
-        "count": 214
+        "count": 212
       }
     ],
     "Zumiez_Sneakers": [
@@ -3326,7 +3322,7 @@
       },
       {
         "date": "2026-10-20",
-        "count": 10
+        "count": 11
       }
     ]
   }

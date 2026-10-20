@@ -147,8 +147,8 @@
     "observation_count": 76,
     "all_time_low": 43.2,
     "all_time_low_date": "2026-10-16",
-    "stage": "all_time_low",
-    "miss_streak": 1,
+    "stage": "unlisted",
+    "miss_streak": 2,
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/810131858087-1_600x600.jpg?v=1761091970&width=600",
     "width": 8.175,
     "prices": {
@@ -703,8 +703,8 @@
     "observation_count": 11,
     "all_time_low": 40.25,
     "all_time_low_date": "2026-10-09",
-    "stage": "all_time_low",
-    "miss_streak": 1,
+    "stage": "unlisted",
+    "miss_streak": 2,
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/193172631193-1_600x600.jpg?v=1773469385&width=600",
     "length": 40.25,
     "prices": {
@@ -1193,8 +1193,8 @@
     "observation_count": 3,
     "all_time_low": 10.5,
     "all_time_low_date": "2026-10-17",
-    "stage": "new",
-    "miss_streak": 1,
+    "stage": "unlisted",
+    "miss_streak": 2,
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/BQ7ECA2-1.jpg?v=1720743023",
     "prices": {
       "2026-10-17": 10.5,
@@ -2781,8 +2781,8 @@
     "first_seen": "2026-07-18",
     "last_seen": "2026-10-20",
     "observation_count": 95,
-    "all_time_low": 74.98,
-    "all_time_low_date": "2026-07-18",
+    "all_time_low": 69.98,
+    "all_time_low_date": "2026-10-20",
     "stage": "all_time_low",
     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=BKPFDDK-1.jpg&nw=210",
     "width": 8.475,
@@ -2878,7 +2878,7 @@
       "2026-10-17": 74.98,
       "2026-10-18": 74.98,
       "2026-10-19": 74.98,
-      "2026-10-20": 74.98
+      "2026-10-20": 69.98
     }
   },
   "https://www.skatewarehouse.com/Baker_Zach_Allen_Comfy_Cozy_Deck/descpage-BKAZCDK.html": {
@@ -5050,6 +5050,7 @@
     "all_time_low": 60.98,
     "all_time_low_date": "2026-10-03",
     "stage": "all_time_low",
+    "miss_streak": 1,
     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=DOSH85DK-1.jpg&nw=210",
     "width": 8.5,
     "length": 31.8,
@@ -9369,6 +9370,7 @@
     "all_time_low": 69.98,
     "all_time_low_date": "2026-06-09",
     "stage": "all_time_low",
+    "miss_streak": 1,
     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=OPBCODK-1.jpg&nw=210",
     "width": 8.75,
     "length": 32.5,
@@ -10587,6 +10589,21 @@
       "2026-10-20": 69.98
     }
   },
+  "https://www.skatewarehouse.com/Powell_Bones_Brigade_Mountain_17_White_Deck/descpage-PLM17DK.html": {
+    "name": "Powell Bones Brigade Mountain 17 White Deck",
+    "store": "SkateWarehouse",
+    "part": "Decks",
+    "first_seen": "2026-10-20",
+    "last_seen": "2026-10-20",
+    "observation_count": 1,
+    "all_time_low": 114.98,
+    "all_time_low_date": "2026-10-20",
+    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=PLM17DK-1.jpg&nw=210",
+    "prices": {
+      "2026-10-20": 114.98
+    },
+    "stage": "new"
+  },
   "https://www.skatewarehouse.com/Powell_Bones_Brigade_Mullen_17_White_Deck/descpage-PLRM17DK.html": {
     "name": "Powell Bones Brigade Mullen 17 White Deck",
     "store": "SkateWarehouse",
@@ -10594,8 +10611,8 @@
     "first_seen": "2026-09-16",
     "last_seen": "2026-10-20",
     "observation_count": 35,
-    "all_time_low": 114.98,
-    "all_time_low_date": "2026-09-16",
+    "all_time_low": 109.98,
+    "all_time_low_date": "2026-10-20",
     "stage": "all_time_low",
     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=PLRM17DK-1.jpg&nw=210",
     "prices": {
@@ -10633,7 +10650,7 @@
       "2026-10-17": 114.98,
       "2026-10-18": 114.98,
       "2026-10-19": 114.98,
-      "2026-10-20": 114.98
+      "2026-10-20": 109.98
     }
   },
   "https://www.skatewarehouse.com/Powell_Peralta_Hill_Bulldog_15_Green_Gold_Deck/descpage-PLHLGGDK.html": {
@@ -10875,6 +10892,7 @@
     "all_time_low": 59.98,
     "all_time_low_date": "2026-07-09",
     "stage": "all_time_low",
+    "miss_streak": 1,
     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=PRWSTMDK-1.jpg&nw=210",
     "width": 8.5,
     "length": 32.0,
@@ -12053,6 +12071,7 @@
     "all_time_low": 74.98,
     "all_time_low_date": "2026-10-07",
     "stage": "all_time_low",
+    "miss_streak": 1,
     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=SCWCPDK-1.jpg&nw=210",
     "width": 10.35,
     "length": 30.54,
@@ -14390,6 +14409,23 @@
       "2026-08-06": 59.98,
       "2026-08-07": 54.66
     }
+  },
+  "https://www.skatewarehouse.com/World_Industries_Campbell_Fudgesicle_Deck/descpage-WICFDK.html": {
+    "name": "World Industries Campbell Fudgesicle Deck 7.7 x 31.3",
+    "store": "SkateWarehouse",
+    "part": "Decks",
+    "first_seen": "2026-10-20",
+    "last_seen": "2026-10-20",
+    "observation_count": 1,
+    "all_time_low": 79.98,
+    "all_time_low_date": "2026-10-20",
+    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=WICFDK-1.jpg&nw=500",
+    "width": 7.7,
+    "length": 31.3,
+    "prices": {
+      "2026-10-20": 79.98
+    },
+    "stage": "new"
   },
   "https://www.tactics.com/5boro/lucky-candle-brooklyn-825-skateboard-deck": {
     "name": "5boro Lucky Candle Brooklyn 8.25 Skateboard Deck",
@@ -24636,8 +24672,8 @@
     "observation_count": 40,
     "all_time_low": 71.95,
     "all_time_low_date": "2026-08-19",
-    "stage": "all_time_low",
-    "miss_streak": 1,
+    "stage": "unlisted",
+    "miss_streak": 2,
     "image": "https://www.tactics.com/a/fp0s/1a/limosine-sharpie-86-skateboard-deck-yellow.jpg",
     "width": 8.6,
     "length": 71.95,
@@ -33154,13 +33190,11 @@
     "store": "Zumiez",
     "part": "Trucks",
     "first_seen": "2026-02-20",
-    "last_seen": "2026-10-13",
-    "observation_count": 158,
+    "last_seen": "2026-10-20",
+    "observation_count": 159,
     "all_time_low": 14.99,
     "all_time_low_date": "2026-07-24",
-    "stage": "sold_out",
-    "miss_streak": 2,
-    "stock": "out_of_stock",
+    "stage": "all_time_low",
     "image": "https://scene7.zumiez.com/is/image/zumiez/409205-US",
     "width": 14.99,
     "length": 33.95,
@@ -33207,7 +33241,8 @@
       "2026-08-30": 14.99,
       "2026-08-31": 14.99,
       "2026-09-01": 14.99,
-      "2026-10-13": 14.99
+      "2026-10-13": 14.99,
+      "2026-10-20": 14.99
     }
   },
   "https://www.zumiez.com/ace-60-af1-matte-black-skateboard-truck.html": {
@@ -33893,6 +33928,7 @@
     "all_time_low": 69.99,
     "all_time_low_date": "2026-08-14",
     "stage": "all_time_low",
+    "miss_streak": 1,
     "image": "https://scene7.zumiez.com/is/image/zumiez/405921-US",
     "width": 8.5,
     "prices": {
@@ -35822,8 +35858,9 @@
     "observation_count": 17,
     "all_time_low": 49.99,
     "all_time_low_date": "2026-09-06",
-    "stage": "all_time_low",
-    "miss_streak": 1,
+    "stage": "sold_out",
+    "miss_streak": 2,
+    "stock": "out_of_stock",
     "image": "https://scene7.zumiez.com/is/image/zumiez/402948-US",
     "width": 9.0,
     "prices": {
@@ -38873,6 +38910,7 @@
     "all_time_low": 29.99,
     "all_time_low_date": "2026-07-24",
     "stage": "all_time_low",
+    "miss_streak": 1,
     "image": "https://scene7.zumiez.com/is/image/zumiez/400215-US",
     "length": 29.99,
     "prices": {
@@ -40513,13 +40551,11 @@
     "store": "Zumiez",
     "part": "Wheels",
     "first_seen": "2026-10-02",
-    "last_seen": "2026-10-09",
-    "observation_count": 8,
+    "last_seen": "2026-10-20",
+    "observation_count": 9,
     "all_time_low": 19.99,
     "all_time_low_date": "2026-10-02",
-    "stage": "gone",
-    "miss_streak": 2,
-    "stock": "out_of_stock",
+    "stage": "all_time_low",
     "image": "https://scene7.zumiez.com/is/image/zumiez/407046-US",
     "length": 19.99,
     "prices": {
@@ -40530,7 +40566,8 @@
       "2026-10-06": 19.99,
       "2026-10-07": 19.99,
       "2026-10-08": 19.99,
-      "2026-10-09": 19.99
+      "2026-10-09": 19.99,
+      "2026-10-20": 19.99
     }
   },
   "https://www.zumiez.com/oj-elite-mini-combo-54mm-101a-white-skateboard-wheels.html": {
@@ -40862,6 +40899,22 @@
     "stage": "gone",
     "miss_streak": 2,
     "prices": {}
+  },
+  "https://www.zumiez.com/opera-black-and-blue-1-skateboard-hardware.html": {
+    "name": "Opera Black & Blue 1\" Skateboard Hardware",
+    "store": "Zumiez",
+    "part": "Accessories",
+    "first_seen": "2026-10-20",
+    "last_seen": "2026-10-20",
+    "observation_count": 1,
+    "all_time_low": 4.99,
+    "all_time_low_date": "2026-10-20",
+    "image": "https://scene7.zumiez.com/is/image/zumiez/404193-US",
+    "width": 1.0,
+    "prices": {
+      "2026-10-20": 4.99
+    },
+    "stage": "new"
   },
   "https://www.zumiez.com/opera-blood-rose-grip-tape.html": {
     "name": "Opera Blood Rose Grip Tape",
@@ -42446,6 +42499,7 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-10-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
     "image": "https://scene7.zumiez.com/is/image/zumiez/404824-US",
     "width": 8.0,
     "prices": {
@@ -43378,18 +43432,18 @@
     "store": "Zumiez",
     "part": "Accessories",
     "first_seen": "2026-10-17",
-    "last_seen": "2026-10-19",
-    "observation_count": 3,
+    "last_seen": "2026-10-20",
+    "observation_count": 4,
     "all_time_low": 9.99,
     "all_time_low_date": "2026-10-17",
-    "stage": "unlisted",
-    "miss_streak": 2,
+    "stage": "new",
     "image": "https://scene7.zumiez.com/is/image/zumiez/200379-US",
     "width": 9.99,
     "prices": {
       "2026-10-17": 9.99,
       "2026-10-18": 9.99,
-      "2026-10-19": 9.99
+      "2026-10-19": 9.99,
+      "2026-10-20": 9.99
     }
   },
   "https://www.zumiez.com/sk8mafia-kremer-sprayers-8-3-skateboard-deck.html": {
@@ -45491,8 +45545,9 @@
     "observation_count": 19,
     "all_time_low": 19.99,
     "all_time_low_date": "2026-09-30",
-    "stage": "all_time_low",
-    "miss_streak": 1,
+    "stage": "sold_out",
+    "miss_streak": 2,
+    "stock": "out_of_stock",
     "image": "https://scene7.zumiez.com/is/image/zumiez/396473-US",
     "width": 5.6,
     "length": 19.99,
