@@ -3997,6 +3997,8 @@ function fillQuickView(card) {
         identity.appendChild(stage);
     }
     appendQuickSpecLine(identity, facts.specs);
+    const actions = document.createElement("div");
+    actions.className = "quick-actions";
     if (facts.viewUrl) {
         const link = document.createElement("a");
         link.className = "quick-view-link";
@@ -4004,8 +4006,10 @@ function fillQuickView(card) {
         link.target = "_blank";
         link.rel = "noopener";
         link.textContent = facts.viewLabel;
-        identity.appendChild(link);
+        actions.appendChild(link);
     }
+    if (typeof appendQuickAlert === "function") appendQuickAlert(actions, card);
+    if (actions.children.length) identity.appendChild(actions);
     product.appendChild(identity);
     body.appendChild(product);
     syncQuickStar(card);
@@ -4692,7 +4696,7 @@ function wireQuickView() {
     });
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
-        if (event.target.closest("#quickView, .card-more, .group-quick")) return;
+        if (event.target.closest("#quickView, .card-more, .group-quick, #alertsRoot, #navAlerts")) return;
         closeQuickView();
     });
 }
@@ -5365,6 +5369,11 @@ function init() {
     if (close) close.addEventListener("click", closeDrawer);
     document.addEventListener("keydown", event => {
         if (event.key === "Escape") {
+            if (typeof isAlertsOpen === "function" && isAlertsOpen()) {
+                event.preventDefault();
+                closeAlerts();
+                return;
+            }
             hideSparkTip();
             closeDrawer();
             closeSparkPanel();
@@ -5406,7 +5415,1196 @@ function init() {
         state.cardLow = false;
         applyFilters();
     }
+    wireAlerts();
 }
 
 document.addEventListener("DOMContentLoaded", updateAgo);
 document.addEventListener("DOMContentLoaded", init);
+
+/* ALERTS_UI_START
+   Email alerts for the static page.
+   The API is docs/alerts-api.md on the alerts backend (PR #60).
+   This file has no API secrets. Tokens stay in the fragment, then leave it. */
+
+const ALERTS_API_BASE = "";
+const ALERTS_CONSENT_VERSION = "2026-10";
+const ALERTS_SESSION_KEY = "skatedeals.alerts.manage";
+const ALERTS_PARTS = ["Decks", "Wheels", "Trucks", "Bearings"];
+const ALERTS_RULE_FIELDS = [
+    "brand", "name", "part", "width", "min_width", "max_width", "back_in_stock_width",
+    "max_price", "alert_on_drop", "alert_on_low", "alert_on_stock", "note"
+];
+const ALERTS_NUMBER_FIELDS = ["width", "min_width", "max_width", "back_in_stock_width", "max_price"];
+const ALERTS_FLAG_FIELDS = ["alert_on_drop", "alert_on_low", "alert_on_stock"];
+const ALERTS_ERRORS = {
+    invalid_email: "That email address is not valid.",
+    consent_required: "Check the box to agree before subscribing.",
+    consent_outdated: "This page is out of date. Refresh and try again.",
+    captcha_failed: "The captcha check failed. Try again.",
+    invalid_rules: "Those alert details were rejected.",
+    staging_recipient_not_allowed: "That address is not allowed on this server.",
+    json_required: "The request was not accepted.",
+    rate_limited: "Too many attempts. Nothing was changed.",
+    signups_closed: "New signups are closed right now.",
+    email_unavailable: "Email is unavailable right now.",
+    service_unavailable: "Alerts are unavailable right now.",
+    invalid_token: "That link is invalid or already used.",
+    unavailable: "Email alerts coming soon.",
+    body_too_large: "That request is too large.",
+    origin_not_allowed: "This page is not allowed to call the alerts service.",
+    internal_error: "Alerts are unavailable right now."
+};
+
+const alertsUi = {
+    wired: false,
+    open: false,
+    config: null,
+    client: null,
+    view: "signup",
+    draft: null,
+    editingId: "",
+    prefs: null,
+    token: "",
+    active: false,
+    busy: false,
+    message: "",
+    error: "",
+    email: "",
+    consent: false,
+    health: null,
+    confirm: "",
+    returnFocus: null
+};
+
+function alertsResolveConfig(env) {
+    env = env || {};
+    const cfg = env.config || {};
+    const host = String(env.host || "");
+    const production = /(^|\.)github\.io$/i.test(host);
+    const requested = String(cfg.apiBase || cfg.baseUrl || env.metaContent || env.fallbackBase || "").trim();
+    const consentVersion = String(cfg.consentVersion || ALERTS_CONSENT_VERSION);
+    const turnstileSiteKey = String(cfg.turnstileSiteKey || "").trim();
+    if (requested && alertsBaseAllowed(requested, production)) {
+        return {
+            mode: "live",
+            apiBase: alertsNormalizeBase(requested),
+            consentVersion: consentVersion,
+            turnstileSiteKey: turnstileSiteKey,
+            production: production
+        };
+    }
+    return {
+        mode: "soon",
+        apiBase: "",
+        consentVersion: consentVersion,
+        turnstileSiteKey: "",
+        production: production
+    };
+}
+
+function alertsBaseAllowed(apiBase, production) {
+    let url;
+    try {
+        url = new URL(apiBase);
+    } catch (err) {
+        return false;
+    }
+    if (url.username || url.password || url.search || url.hash) return false;
+    if (url.protocol === "https:") return true;
+    if (!production && url.protocol === "http:" && (url.hostname === "localhost" || url.hostname === "127.0.0.1")) return true;
+    return false;
+}
+
+function alertsNormalizeBase(apiBase) {
+    const url = new URL(apiBase);
+    const path = url.pathname.replace(/\/+$/, "");
+    return url.origin + path;
+}
+
+function alertsPageConfig() {
+    let meta = "";
+    if (typeof document !== "undefined" && document.querySelector) {
+        const node = document.querySelector('meta[name="skatedeals-alerts-api"]');
+        if (node) meta = node.getAttribute("content") || "";
+    }
+    const cfg = (typeof window !== "undefined" && window.SKATEDEALS_ALERTS) || {};
+    const host = (typeof location !== "undefined" && location.hostname) || "";
+    return alertsResolveConfig({
+        config: cfg,
+        host: host,
+        metaContent: meta,
+        fallbackBase: ALERTS_API_BASE
+    });
+}
+
+function readAlertsFragment(hash) {
+    const text = String(hash || "").trim();
+    if (!text || text.charAt(0) === "?") return null;
+    const raw = text.replace(/^#/, "");
+    if (!raw || raw.indexOf("=") < 0) return null;
+    const params = new URLSearchParams(raw);
+    const verify = params.get("verify");
+    if (verify) return { purpose: "verify", token: verify };
+    const manage = params.get("manage");
+    if (manage) return { purpose: "manage", token: manage };
+    return null;
+}
+
+function consumeAlertsFragment() {
+    if (typeof location === "undefined") return null;
+    const parsed = readAlertsFragment(location.hash || "");
+    if (!parsed || typeof history === "undefined" || !history.replaceState) return parsed;
+    history.replaceState(null, "", (location.pathname || "/") + (location.search || ""));
+    return parsed;
+}
+
+function manageTokenFromVerify(body) {
+    body = body || {};
+    if (body.manage_token) return String(body.manage_token);
+    const link = String(body.manage_link || body.manage_url || "");
+    const hash = link.indexOf("#") >= 0 ? link.slice(link.indexOf("#") + 1) : "";
+    if (!hash) return "";
+    const parsed = readAlertsFragment(hash);
+    return parsed && parsed.purpose === "manage" ? parsed.token : "";
+}
+
+function alertsStorage() {
+    try {
+        if (typeof sessionStorage === "undefined" || !sessionStorage) return null;
+        return sessionStorage;
+    } catch (err) {
+        return null;
+    }
+}
+
+function readManageToken() {
+    if (alertsUi.token) return alertsUi.token;
+    const store = alertsStorage();
+    if (!store) return "";
+    try {
+        return store.getItem(ALERTS_SESSION_KEY) || "";
+    } catch (err) {
+        return "";
+    }
+}
+
+function storeManageToken(token) {
+    alertsUi.token = token || "";
+    const store = alertsStorage();
+    if (!store || !token) return;
+    try {
+        store.setItem(ALERTS_SESSION_KEY, token);
+    } catch (err) {
+        /* the in-memory copy still works for this page view */
+    }
+}
+
+function clearManageToken() {
+    alertsUi.token = "";
+    const store = alertsStorage();
+    if (!store) return;
+    try {
+        store.removeItem(ALERTS_SESSION_KEY);
+    } catch (err) {
+        /* nothing else holds the token */
+    }
+}
+
+function validEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || "").trim());
+}
+
+function normalizeEmail(email) {
+    return String(email || "").trim().toLowerCase();
+}
+
+function cleanText(value, max) {
+    let text = String(value == null ? "" : value);
+    if (text.normalize) text = text.normalize("NFKC");
+    text = text.replace(/\s+/g, " ").trim();
+    if (!text) return { ok: true, value: "" };
+    if (/[\u0000-\u001f\u007f<>]/.test(text)) return { ok: false, error: "Remove <, >, and line breaks." };
+    if (text.length > max) return { ok: false, error: "Keep that text to " + max + " characters." };
+    return { ok: true, value: text };
+}
+
+function finiteNumber(value) {
+    if (typeof value === "number") return Number.isFinite(value) ? value : null;
+    const text = String(value == null ? "" : value).replace(/[$,]/g, "").trim();
+    if (!text || !/^-?\d+(\.\d+)?$/.test(text)) return null;
+    const num = Number(text);
+    return Number.isFinite(num) ? num : null;
+}
+
+function deckWidth(value) {
+    const num = finiteNumber(value);
+    if (num == null || num < 5 || num > 12) return null;
+    return num;
+}
+
+function cleanRule(rule) {
+    const out = {};
+    const source = rule || {};
+    ALERTS_RULE_FIELDS.forEach(key => {
+        if (source[key] == null || source[key] === "") return;
+        if (ALERTS_FLAG_FIELDS.indexOf(key) >= 0) {
+            if (source[key] === true) out[key] = true;
+            return;
+        }
+        if (ALERTS_NUMBER_FIELDS.indexOf(key) >= 0) {
+            if (typeof source[key] === "number" && Number.isFinite(source[key])) out[key] = source[key];
+            return;
+        }
+        if (key === "part") {
+            if (ALERTS_PARTS.indexOf(source[key]) >= 0) out[key] = source[key];
+            return;
+        }
+        out[key] = source[key];
+    });
+    return out;
+}
+
+function buildRule(draft) {
+    draft = draft || {};
+    const brand = cleanText(draft.brand, 60);
+    if (!brand.ok) return { ok: false, error: brand.error };
+    const name = cleanText(draft.name, 80);
+    if (!name.ok) return { ok: false, error: name.error };
+    const note = cleanText(draft.note, 80);
+    if (!note.ok) return { ok: false, error: note.error };
+    if (!brand.value && !name.value) return { ok: false, error: "Enter a brand or a product name." };
+    const part = ALERTS_PARTS.indexOf(draft.part) >= 0 ? draft.part : "";
+    if (!part) return { ok: false, error: "Choose Decks, Wheels, Trucks, or Bearings." };
+    const rule = { part: part };
+    if (brand.value) rule.brand = brand.value;
+    if (name.value) rule.name = name.value;
+    if (part === "Decks" && draft.width != null && String(draft.width).trim() !== "") {
+        const width = deckWidth(draft.width);
+        if (width == null) return { ok: false, error: "Deck width must be a number from 5 to 12." };
+        rule.width = width;
+    }
+    if (draft.max_price != null && String(draft.max_price).trim() !== "") {
+        const price = finiteNumber(draft.max_price);
+        if (price == null || price <= 0 || price > 2000) return { ok: false, error: "Max price must be greater than 0 and at most 2000." };
+        rule.max_price = price;
+    }
+    if (draft.alert_on_drop === true) rule.alert_on_drop = true;
+    if (draft.alert_on_low === true) rule.alert_on_low = true;
+    if (draft.alert_on_stock === true) {
+        rule.alert_on_stock = true;
+        if (rule.width != null) rule.back_in_stock_width = rule.width;
+    }
+    if (note.value) rule.note = note.value;
+    return { ok: true, rule: rule };
+}
+
+function ruleFromDraft(draft) {
+    const built = buildRule(draft || {});
+    return built.ok ? built.rule : {};
+}
+
+function blankAlertDraft() {
+    return {
+        brand: "",
+        name: "",
+        part: "",
+        width: "",
+        max_price: "",
+        alert_on_drop: false,
+        alert_on_low: false,
+        alert_on_stock: false,
+        note: "",
+        store: ""
+    };
+}
+
+function alertDraftFromDataset(dataset) {
+    dataset = dataset || {};
+    const part = ALERTS_PARTS.indexOf(dataset.part) >= 0 ? dataset.part : "";
+    const width = part === "Decks" ? deckWidth(dataset.size) : null;
+    let price = finiteNumber(dataset.price);
+    if (price == null || price <= 0 || price > 2000) price = null;
+    return {
+        brand: dataset.brand || "",
+        name: dataset.name || "",
+        part: part,
+        width: width == null ? "" : String(width),
+        max_price: price == null ? "" : String(price),
+        alert_on_drop: false,
+        alert_on_low: false,
+        alert_on_stock: false,
+        note: "",
+        store: dataset.store || ""
+    };
+}
+
+function draftFromRule(rule) {
+    rule = rule || {};
+    return {
+        brand: rule.brand || "",
+        name: rule.name || "",
+        part: rule.part || "",
+        width: rule.width == null ? "" : String(rule.width),
+        max_price: rule.max_price == null ? "" : String(rule.max_price),
+        alert_on_drop: rule.alert_on_drop === true,
+        alert_on_low: rule.alert_on_low === true,
+        alert_on_stock: rule.alert_on_stock === true,
+        note: rule.note || "",
+        store: ""
+    };
+}
+
+function alertsFailureMessage(result) {
+    result = result || {};
+    const body = result.body || {};
+    const code = result.error || body.error || "";
+    if (result.status === 503 || code === "service_unavailable" || body.ok === false) return "Alerts are unavailable right now.";
+    let text = ALERTS_ERRORS[code] || "Something went wrong. Nothing was changed.";
+    if (code === "rate_limited") {
+        const wait = result.retryAfter || body.retry_after;
+        text = "Too many attempts. Nothing was changed.";
+        if (wait) text += " Retry after " + wait + " seconds.";
+    }
+    if (code === "captcha_failed" && alertsUi.health && alertsUi.health.mode !== "mock" && !(alertsUi.config && alertsUi.config.turnstileSiteKey)) {
+        text = "The captcha check failed. This page has no Turnstile site key.";
+    }
+    const fields = body.fields;
+    if (fields && typeof fields === "object") {
+        const extra = Object.keys(fields).map(key => key + " (" + fields[key] + ")").join(", ");
+        if (extra) text += " " + extra;
+    }
+    return text;
+}
+
+function alertsApplyResult(state, kind, result) {
+    state = state || {};
+    result = result || {};
+    const body = result.body || {};
+    state.error = "";
+    if (kind === "health") {
+        if (result.status === 200 && body.ok === true) {
+            state.health = body;
+            state.mockApi = body.mode === "mock";
+            return state;
+        }
+        state.view = "down";
+        state.active = false;
+        state.health = null;
+        state.error = "Alerts are unavailable right now.";
+        return state;
+    }
+    if ((kind === "subscribe" || kind === "link") && result.status === 202 && body.status === "check_email") {
+        state.view = "check";
+        state.active = false;
+        state.prefs = null;
+        state.message = "Check your email to confirm.";
+        return state;
+    }
+    if (kind === "verify" && result.status === 200 && body.status === "active" && body.manage_token && body.preferences && body.preferences.status === "active") {
+        state.view = "manage";
+        state.active = true;
+        state.token = String(body.manage_token);
+        state.prefs = body.preferences;
+        state.message = "";
+        return state;
+    }
+    if (kind === "preferences" && result.status === 200 && body.status === "active" && Array.isArray(body.rules)) {
+        state.view = "manage";
+        state.active = true;
+        state.prefs = body;
+        state.message = "";
+        return state;
+    }
+    if (kind === "unsubscribe" && result.status === 200 && body.status === "unsubscribed") {
+        state.view = "done";
+        state.active = false;
+        state.token = "";
+        state.prefs = null;
+        state.message = "You are unsubscribed. No alerts will be sent.";
+        return state;
+    }
+    if (kind === "delete" && result.status === 200 && body.status === "deleted") {
+        state.view = "done";
+        state.active = false;
+        state.token = "";
+        state.prefs = null;
+        state.message = "Your alerts data was deleted.";
+        return state;
+    }
+    state.active = false;
+    state.error = alertsFailureMessage(result);
+    if (body.error === "invalid_token" || result.status === 401) {
+        state.view = "relink";
+        state.token = "";
+        state.prefs = null;
+    } else if (result.status === 503 || body.error === "service_unavailable" || body.ok === false) {
+        state.view = "down";
+    }
+    return state;
+}
+
+function createAlertsClient(config, fetchImpl) {
+    const fetchFn = fetchImpl || (typeof fetch === "function" ? fetch : null);
+    const live = !!(config && config.mode === "live" && config.apiBase);
+
+    async function request(method, path, options) {
+        options = options || {};
+        if (!live || !fetchFn) return { ok: false, status: 0, error: "unavailable", body: null };
+        const headers = { Accept: "application/json" };
+        let body;
+        if (options.body != null) {
+            headers["Content-Type"] = "application/json";
+            body = JSON.stringify(options.body);
+            if (body.length > 16 * 1024) return { ok: false, status: 413, error: "body_too_large", body: { error: "body_too_large" } };
+        }
+        if (options.token) headers.Authorization = "Bearer " + options.token;
+        let response;
+        try {
+            response = await fetchFn(config.apiBase + path, {
+                method: method,
+                credentials: "omit",
+                headers: headers,
+                body: body
+            });
+        } catch (err) {
+            return { ok: false, status: 0, error: "network", body: null };
+        }
+        let payload = null;
+        if (response && typeof response.json === "function") {
+            try {
+                payload = await response.json();
+            } catch (err) {
+                payload = null;
+            }
+        }
+        let retry = "";
+        if (response && response.headers && typeof response.headers.get === "function") retry = response.headers.get("Retry-After") || "";
+        return {
+            ok: !!(response && response.ok),
+            status: response ? response.status : 0,
+            body: payload,
+            error: payload && payload.error,
+            retryAfter: (payload && payload.retry_after) || retry || ""
+        };
+    }
+
+    return {
+        health() { return request("GET", "/v1/health"); },
+        subscribe(payload) { return request("POST", "/v1/subscribe", { body: payload }); },
+        verify(token) { return request("POST", "/v1/verify", { body: { token: token } }); },
+        link(payload) { return request("POST", "/v1/link", { body: payload }); },
+        getPreferences(token) { return request("GET", "/v1/preferences", { token: token }); },
+        putPreferences(token, rules) {
+            return request("PUT", "/v1/preferences", { token: token, body: { rules: (rules || []).map(cleanRule) } });
+        },
+        unsubscribe(token) { return request("POST", "/v1/unsubscribe", { token: token }); },
+        deleteSubscriber(token) { return request("DELETE", "/v1/subscriber", { token: token }); }
+    };
+}
+
+function alertsEl(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+}
+
+function setHidden(node, hidden) {
+    if (!node) return;
+    node.hidden = !!hidden;
+    if (hidden) node.setAttribute("hidden", "");
+    else node.removeAttribute("hidden");
+}
+
+function ruleTitle(rule) {
+    const bits = [];
+    if (rule.brand) bits.push(rule.brand);
+    if (rule.name) bits.push(rule.name);
+    return bits.join(" · ") || "Alert";
+}
+
+function ruleDetail(rule) {
+    const bits = [];
+    if (rule.part) bits.push(rule.part);
+    if (rule.width != null) bits.push(rule.width + "\"");
+    if (rule.min_width != null || rule.max_width != null) bits.push((rule.min_width || "any") + "–" + (rule.max_width || "any"));
+    if (rule.max_price != null) bits.push("under $" + rule.max_price);
+    if (rule.alert_on_drop) bits.push("Meaningful drop");
+    if (rule.alert_on_low) bits.push("Historical low");
+    if (rule.alert_on_stock) bits.push("Verified restock");
+    if (!rule.alert_on_drop && !rule.alert_on_low && !rule.alert_on_stock) bits.push("Default: first match, then a drop or restock");
+    if (rule.note) bits.push(rule.note);
+    return bits.join(" · ");
+}
+
+function fieldWrap(id, label, control) {
+    const wrap = alertsEl("label", "alerts-field");
+    wrap.append(alertsEl("span", "", label), control);
+    control.id = id;
+    return wrap;
+}
+
+function checkWrap(id, label, checked) {
+    const wrap = alertsEl("label", "alerts-check");
+    const input = document.createElement("input");
+    input.type = "checkbox";
+    input.id = id;
+    input.checked = !!checked;
+    wrap.append(input, alertsEl("span", "", label));
+    return wrap;
+}
+
+function buttonEl(label, className, action, ruleId) {
+    const button = alertsEl("button", className, label);
+    button.type = "button";
+    button.setAttribute("data-action", action);
+    if (ruleId) button.setAttribute("data-rule-id", ruleId);
+    return button;
+}
+
+function inputEl(type, value) {
+    const input = document.createElement("input");
+    input.type = type;
+    input.value = value == null ? "" : String(value);
+    return input;
+}
+
+function paintRuleFields(parent, draft) {
+    const brand = inputEl("text", draft.brand);
+    brand.maxLength = 60;
+    brand.autocomplete = "off";
+    parent.appendChild(fieldWrap("alertsBrand", "Brand", brand));
+    const name = inputEl("text", draft.name);
+    name.maxLength = 80;
+    parent.appendChild(fieldWrap("alertsName", "Product name", name));
+    const part = document.createElement("select");
+    [["", "Choose a part"], ["Decks", "Decks"], ["Wheels", "Wheels"], ["Trucks", "Trucks"], ["Bearings", "Bearings"]].forEach(pair => {
+        const option = alertsEl("option", "", pair[1]);
+        option.value = pair[0];
+        part.appendChild(option);
+    });
+    part.value = draft.part || "";
+    parent.appendChild(fieldWrap("alertsPart", "Part", part));
+    const width = inputEl("text", draft.width);
+    width.inputMode = "decimal";
+    parent.appendChild(fieldWrap("alertsWidth", "Deck width (5–12, optional)", width));
+    const price = inputEl("text", draft.max_price);
+    price.inputMode = "decimal";
+    parent.appendChild(fieldWrap("alertsPrice", "Max price (optional)", price));
+    const triggers = alertsEl("fieldset", "alerts-triggers");
+    triggers.appendChild(alertsEl("legend", "alerts-legend", "Only alert on"));
+    triggers.appendChild(checkWrap("alertsDrop", "Meaningful drop", draft.alert_on_drop));
+    triggers.appendChild(checkWrap("alertsLow", "Historical low", draft.alert_on_low));
+    triggers.appendChild(checkWrap("alertsStock", "Verified restock", draft.alert_on_stock));
+    parent.appendChild(triggers);
+    parent.appendChild(alertsEl("p", "alerts-hint", "Leave these off to be alerted once when a listing first matches, then on a meaningful drop or a verified restock."));
+    const note = inputEl("text", draft.note);
+    note.maxLength = 80;
+    parent.appendChild(fieldWrap("alertsNote", "Note (optional)", note));
+}
+
+function draftFromForm(base) {
+    const draft = Object.assign({}, base || blankAlertDraft());
+    const value = id => {
+        const node = document.getElementById(id);
+        return node ? node.value : "";
+    };
+    const checked = id => {
+        const node = document.getElementById(id);
+        return !!(node && node.checked);
+    };
+    if (document.getElementById("alertsBrand")) {
+        draft.brand = value("alertsBrand");
+        draft.name = value("alertsName");
+        draft.part = value("alertsPart");
+        draft.width = value("alertsWidth");
+        draft.max_price = value("alertsPrice");
+        draft.note = value("alertsNote");
+        draft.alert_on_drop = checked("alertsDrop");
+        draft.alert_on_low = checked("alertsLow");
+        draft.alert_on_stock = checked("alertsStock");
+    }
+    return draft;
+}
+
+function turnstileToken() {
+    if (alertsUi.health && alertsUi.health.mode === "mock") return "mock-turnstile-pass";
+    if (typeof turnstile !== "undefined" && turnstile && typeof turnstile.getResponse === "function") {
+        return turnstile.getResponse() || "";
+    }
+    return "";
+}
+
+function ensureTurnstile(parent) {
+    const key = alertsUi.config && alertsUi.config.turnstileSiteKey;
+    if (!key || (alertsUi.health && alertsUi.health.mode === "mock")) return;
+    const slot = alertsEl("div", "alerts-turnstile");
+    slot.setAttribute("data-sitekey", key);
+    parent.appendChild(slot);
+    if (document.getElementById("alertsTurnstileScript")) return;
+    const script = document.createElement("script");
+    script.id = "alertsTurnstileScript";
+    script.async = true;
+    script.defer = true;
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    if (document.body) document.body.appendChild(script);
+}
+
+function paintSoon(body) {
+    body.appendChild(alertsEl("p", "alerts-copy", "Email alerts coming soon."));
+    body.appendChild(alertsEl("p", "alerts-copy", "Nothing here subscribes you."));
+    body.appendChild(alertsEl("p", "alerts-hint", "You'd be able to watch a brand, a deck, or a price from the cards on this page."));
+}
+
+function paintDown(body) {
+    body.appendChild(alertsEl("p", "alerts-copy", "Alerts are unavailable right now."));
+}
+
+function paintCheck(body) {
+    body.appendChild(alertsEl("p", "alerts-copy", alertsUi.message || "Check your email to confirm."));
+    body.appendChild(alertsEl("p", "alerts-hint", "If this address is already active, that email is a manage link and these rules were not saved."));
+    const actions = alertsEl("div", "alerts-actions");
+    actions.appendChild(buttonEl("Email me a link", "alerts-secondary", "relink"));
+    actions.appendChild(buttonEl("Use a different address", "alerts-secondary", "reset-signup"));
+    body.appendChild(actions);
+}
+
+function paintDone(body) {
+    body.appendChild(alertsEl("p", "alerts-copy", alertsUi.message || "You are unsubscribed. No alerts will be sent."));
+    body.appendChild(buttonEl("Create an alert", "alerts-secondary", "reset-signup"));
+}
+
+function paintSignup(body) {
+    if (alertsUi.health && alertsUi.health.mode === "mock") {
+        body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
+    } else if (alertsUi.healthUnread) {
+        body.appendChild(alertsEl("p", "alerts-banner", "The alerts status check could not be read from this page."));
+    }
+    const draft = alertsUi.draft || blankAlertDraft();
+    if (draft.store || draft.name) {
+        body.appendChild(alertsEl("p", "alerts-subtitle", ruleTitle({ brand: draft.brand, name: draft.name })));
+    }
+    const form = alertsEl("form", "alerts-form");
+    form.id = "alertsForm";
+    form.noValidate = true;
+    form.addEventListener("submit", submitSignup);
+    const email = inputEl("email", alertsUi.email);
+    email.autocomplete = "email";
+    email.required = true;
+    form.appendChild(fieldWrap("alertsEmail", "Email", email));
+    paintRuleFields(form, draft);
+    form.appendChild(checkWrap("alertsConsent", "I agree to receive email about these alerts. I can unsubscribe at any time.", alertsUi.consent));
+    ensureTurnstile(form);
+    const actions = alertsEl("div", "alerts-actions");
+    const submit = alertsEl("button", "alerts-primary", "Create alert");
+    submit.id = "alertsSubmit";
+    submit.type = "submit";
+    actions.appendChild(submit);
+    actions.appendChild(buttonEl("I already confirmed", "alerts-secondary", "relink"));
+    form.appendChild(actions);
+    body.appendChild(form);
+}
+
+function paintRelink(body) {
+    if (alertsUi.health && alertsUi.health.mode === "mock") {
+        body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
+    }
+    body.appendChild(alertsEl("p", "alerts-copy", "Email me a link"));
+    const form = alertsEl("form", "alerts-form");
+    form.id = "alertsLinkForm";
+    form.noValidate = true;
+    form.addEventListener("submit", submitLink);
+    const email = inputEl("email", alertsUi.email);
+    email.autocomplete = "email";
+    form.appendChild(fieldWrap("alertsLinkEmail", "Email", email));
+    ensureTurnstile(form);
+    const actions = alertsEl("div", "alerts-actions");
+    const submit = alertsEl("button", "alerts-primary", "Email me a link");
+    submit.type = "submit";
+    actions.appendChild(submit);
+    actions.appendChild(buttonEl("Create an alert", "alerts-secondary", "reset-signup"));
+    form.appendChild(actions);
+    body.appendChild(form);
+}
+
+function paintManage(body) {
+    const prefs = alertsUi.prefs || {};
+    if (alertsUi.active && prefs.status === "active") {
+        const badge = alertsEl("p", "alerts-status is-active", "Active");
+        body.appendChild(badge);
+    }
+    const who = prefs.email_masked ? "Alerts for " + prefs.email_masked + "." : "Your confirmed alerts.";
+    body.appendChild(alertsEl("p", "alerts-copy", who));
+    const rules = prefs.rules || [];
+    const max = prefs.max_rules || 10;
+    rules.forEach(rule => {
+        const card = alertsEl("article", "alerts-rule");
+        card.appendChild(alertsEl("h3", "", ruleTitle(rule)));
+        card.appendChild(alertsEl("p", "alerts-hint", ruleDetail(rule)));
+        const actions = alertsEl("div", "alerts-actions");
+        actions.appendChild(buttonEl("Edit", "alerts-secondary", "edit", rule.id || ""));
+        actions.appendChild(buttonEl("Remove", "alerts-secondary", "remove", rule.id || ""));
+        card.appendChild(actions);
+        body.appendChild(card);
+    });
+    if (!rules.length) body.appendChild(alertsEl("p", "alerts-hint", "You have no alerts yet."));
+    const actions = alertsEl("div", "alerts-actions");
+    if (rules.length < max) actions.appendChild(buttonEl("Add alert", "alerts-primary", "add"));
+    else actions.appendChild(alertsEl("p", "alerts-hint", "This account is at its " + max + " alert limit."));
+    actions.appendChild(buttonEl("Unsubscribe", "alerts-danger", "unsubscribe"));
+    actions.appendChild(buttonEl("Delete my data", "alerts-danger", "delete"));
+    body.appendChild(actions);
+    if (alertsUi.confirm === "unsubscribe" || alertsUi.confirm === "delete") {
+        const note = alertsUi.confirm === "delete" ? "Delete the address and every alert?" : "Unsubscribe this address?";
+        body.appendChild(alertsEl("p", "alerts-copy", note));
+        const row = alertsEl("div", "alerts-actions");
+        row.appendChild(buttonEl(alertsUi.confirm === "delete" ? "Delete" : "Confirm unsubscribe", "alerts-danger", "confirm-" + alertsUi.confirm));
+        row.appendChild(buttonEl("Cancel", "alerts-secondary", "cancel-confirm"));
+        body.appendChild(row);
+    }
+}
+
+function paintEdit(body) {
+    const draft = alertsUi.draft || blankAlertDraft();
+    const form = alertsEl("form", "alerts-form");
+    form.id = "alertsEditForm";
+    form.noValidate = true;
+    form.addEventListener("submit", submitEdit);
+    paintRuleFields(form, draft);
+    const actions = alertsEl("div", "alerts-actions");
+    const submit = alertsEl("button", "alerts-primary", alertsUi.editingId ? "Save alert" : "Add alert");
+    submit.id = "alertsSubmit";
+    submit.type = "submit";
+    actions.appendChild(submit);
+    actions.appendChild(buttonEl("Cancel", "alerts-secondary", "cancel-edit"));
+    form.appendChild(actions);
+    body.appendChild(form);
+}
+
+function paintAlerts(focusId) {
+    const title = document.getElementById("alertsTitle");
+    const live = document.getElementById("alertsLive");
+    const error = document.getElementById("alertsError");
+    const body = document.getElementById("alertsBody");
+    if (!body) return;
+    const titles = {
+        soon: "Alerts",
+        down: "Alerts",
+        signup: "Email alerts",
+        check: "Check your email",
+        manage: "Manage alerts",
+        edit: alertsUi.editingId ? "Edit alert" : "Add alert",
+        relink: "Email me a link",
+        done: "Alerts"
+    };
+    if (title) title.textContent = titles[alertsUi.view] || "Alerts";
+    if (live) live.textContent = alertsUi.view === "check" ? "" : (alertsUi.message || "");
+    if (error) error.textContent = alertsUi.error || "";
+    body.replaceChildren();
+    if (alertsUi.view === "soon") paintSoon(body);
+    else if (alertsUi.view === "down") paintDown(body);
+    else if (alertsUi.view === "check") paintCheck(body);
+    else if (alertsUi.view === "done") paintDone(body);
+    else if (alertsUi.view === "manage") paintManage(body);
+    else if (alertsUi.view === "edit") paintEdit(body);
+    else if (alertsUi.view === "relink") paintRelink(body);
+    else paintSignup(body);
+    const focus = focusId ? document.getElementById(focusId) : null;
+    if (focus && focus.focus) focus.focus();
+}
+
+function adoptAlerts(state) {
+    if (state.view) alertsUi.view = state.view;
+    alertsUi.message = state.message || "";
+    alertsUi.error = state.error || "";
+    alertsUi.active = !!state.active;
+    alertsUi.prefs = state.prefs || null;
+    if (state.health) alertsUi.health = state.health;
+    if (state.token) storeManageToken(state.token);
+    if (state.active === false && (state.view === "relink" || state.view === "done" || state.view === "down" || state.view === "check")) {
+        if (state.view !== "check") clearManageToken();
+    }
+}
+
+async function refreshHealth() {
+    alertsUi.health = null;
+    alertsUi.healthUnread = false;
+    const result = await alertsUi.client.health();
+    if (!result || result.status === 0) {
+        alertsUi.healthUnread = true;
+        return;
+    }
+    const state = alertsApplyResult({}, "health", result);
+    if (state.health) alertsUi.health = state.health;
+    if (state.view === "down") adoptAlerts(state);
+}
+
+async function verifyAlertsToken(token) {
+    alertsUi.busy = true;
+    alertsUi.view = "check";
+    alertsUi.message = "Confirming your email…";
+    alertsUi.active = false;
+    paintAlerts();
+    const result = await alertsUi.client.verify(token);
+    alertsUi.busy = false;
+    adoptAlerts(alertsApplyResult({ active: false }, "verify", result));
+    paintAlerts();
+}
+
+async function loadAlertsPreferences(token) {
+    alertsUi.busy = true;
+    const result = await alertsUi.client.getPreferences(token);
+    alertsUi.busy = false;
+    const state = alertsApplyResult({ active: false }, "preferences", result);
+    if (state.active) state.token = token;
+    adoptAlerts(state);
+    paintAlerts();
+}
+
+async function submitSignup(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (alertsUi.busy || !alertsUi.client) return;
+    const emailNode = document.getElementById("alertsEmail");
+    const consentNode = document.getElementById("alertsConsent");
+    alertsUi.email = emailNode ? emailNode.value : "";
+    alertsUi.consent = !!(consentNode && consentNode.checked);
+    alertsUi.draft = draftFromForm(alertsUi.draft);
+    if (!validEmail(alertsUi.email)) {
+        alertsUi.error = "Enter an email address.";
+        alertsUi.active = false;
+        paintAlerts("alertsEmail");
+        return;
+    }
+    if (!alertsUi.consent) {
+        alertsUi.error = "Check the box to agree before subscribing.";
+        alertsUi.active = false;
+        paintAlerts("alertsConsent");
+        return;
+    }
+    const built = buildRule(alertsUi.draft);
+    if (!built.ok) {
+        alertsUi.error = built.error;
+        alertsUi.active = false;
+        paintAlerts();
+        return;
+    }
+    const token = turnstileToken();
+    alertsUi.busy = true;
+    alertsUi.error = "";
+    const result = await alertsUi.client.subscribe({
+        email: normalizeEmail(alertsUi.email),
+        rules: [built.rule],
+        consent: true,
+        consent_version: alertsUi.config.consentVersion,
+        turnstile_token: token
+    });
+    alertsUi.busy = false;
+    adoptAlerts(alertsApplyResult({ active: false, view: "signup" }, "subscribe", result));
+    if (alertsUi.view !== "check") alertsUi.view = alertsUi.view === "down" ? "down" : "signup";
+    paintAlerts();
+}
+
+async function submitLink(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (alertsUi.busy || !alertsUi.client) return;
+    const emailNode = document.getElementById("alertsLinkEmail");
+    alertsUi.email = emailNode ? emailNode.value : "";
+    if (!validEmail(alertsUi.email)) {
+        alertsUi.error = "Enter an email address.";
+        paintAlerts("alertsLinkEmail");
+        return;
+    }
+    if (!alertsUi.health) await refreshHealth();
+    alertsUi.busy = true;
+    const result = await alertsUi.client.link({
+        email: normalizeEmail(alertsUi.email),
+        turnstile_token: turnstileToken()
+    });
+    alertsUi.busy = false;
+    adoptAlerts(alertsApplyResult({ active: false }, "link", result));
+    paintAlerts();
+}
+
+function rulesAfterEdit(nextRule) {
+    const current = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    const rules = current.map(cleanRule);
+    if (alertsUi.editingId) {
+        const index = current.findIndex(rule => rule && rule.id === alertsUi.editingId);
+        if (index >= 0) rules[index] = nextRule;
+        else rules.push(nextRule);
+    } else {
+        rules.push(nextRule);
+    }
+    return rules;
+}
+
+async function submitEdit(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (alertsUi.busy || !alertsUi.client) return;
+    alertsUi.draft = draftFromForm(alertsUi.draft);
+    const built = buildRule(alertsUi.draft);
+    if (!built.ok) {
+        alertsUi.error = built.error;
+        paintAlerts();
+        return;
+    }
+    const max = (alertsUi.prefs && alertsUi.prefs.max_rules) || 10;
+    const rules = rulesAfterEdit(built.rule);
+    const existing = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    if (!alertsUi.editingId && existing.length >= max) {
+        alertsUi.error = "This account is at its " + max + " alert limit.";
+        paintAlerts();
+        return;
+    }
+    const token = readManageToken();
+    alertsUi.busy = true;
+    const result = await alertsUi.client.putPreferences(token, rules);
+    alertsUi.busy = false;
+    const previous = alertsUi.view;
+    const state = alertsApplyResult({ active: alertsUi.active, prefs: alertsUi.prefs, view: previous }, "preferences", result);
+    if (!(result.status === 200 && result.body && result.body.status === "active")) {
+        alertsUi.error = alertsFailureMessage(result);
+        alertsUi.view = "edit";
+        paintAlerts();
+        return;
+    }
+    adoptAlerts(state);
+    alertsUi.editingId = "";
+    alertsUi.confirm = "";
+    paintAlerts();
+}
+
+async function removeAlert(id) {
+    const rules = (alertsUi.prefs && alertsUi.prefs.rules) || [];
+    if (rules.length <= 1) {
+        alertsUi.error = "Unsubscribe to remove the last alert.";
+        alertsUi.view = "manage";
+        paintAlerts();
+        return;
+    }
+    const next = rules.filter(rule => rule.id !== id).map(cleanRule);
+    const token = readManageToken();
+    alertsUi.busy = true;
+    const result = await alertsUi.client.putPreferences(token, next);
+    alertsUi.busy = false;
+    if (!(result.status === 200 && result.body && result.body.status === "active")) {
+        alertsUi.error = alertsFailureMessage(result);
+        alertsUi.view = "manage";
+        paintAlerts();
+        return;
+    }
+    adoptAlerts(alertsApplyResult({ active: false }, "preferences", result));
+    paintAlerts();
+}
+
+async function finishSubscription(kind) {
+    const token = readManageToken();
+    alertsUi.busy = true;
+    const result = kind === "delete" ? await alertsUi.client.deleteSubscriber(token) : await alertsUi.client.unsubscribe(token);
+    alertsUi.busy = false;
+    adoptAlerts(alertsApplyResult({ active: false }, kind, result));
+    alertsUi.confirm = "";
+    paintAlerts();
+}
+
+function onAlertsClick(event) {
+    const target = event.target;
+    if (!target || !target.closest) return;
+    const button = target.closest("[data-action]");
+    if (!button) return;
+    const root = document.getElementById("alertsRoot");
+    if (!root || (root.contains && !root.contains(button))) return;
+    if (event.preventDefault) event.preventDefault();
+    const action = button.getAttribute("data-action");
+    const id = button.getAttribute("data-rule-id") || "";
+    if (action === "relink") {
+        alertsUi.view = "relink";
+        alertsUi.error = "";
+        alertsUi.message = "";
+        alertsUi.active = false;
+        paintAlerts("alertsLinkEmail");
+    } else if (action === "reset-signup") {
+        alertsUi.view = "signup";
+        alertsUi.error = "";
+        alertsUi.message = "";
+        alertsUi.active = false;
+        alertsUi.prefs = null;
+        alertsUi.draft = alertsUi.draft || blankAlertDraft();
+        paintAlerts("alertsEmail");
+    } else if (action === "add") {
+        alertsUi.draft = blankAlertDraft();
+        alertsUi.editingId = "";
+        alertsUi.view = "edit";
+        alertsUi.error = "";
+        paintAlerts("alertsBrand");
+    } else if (action === "edit") {
+        const rule = ((alertsUi.prefs && alertsUi.prefs.rules) || []).find(item => item.id === id);
+        if (!rule) return;
+        alertsUi.draft = draftFromRule(rule);
+        alertsUi.editingId = id;
+        alertsUi.view = "edit";
+        alertsUi.error = "";
+        paintAlerts("alertsBrand");
+    } else if (action === "remove") {
+        return removeAlert(id);
+    } else if (action === "cancel-edit") {
+        alertsUi.view = "manage";
+        alertsUi.error = "";
+        alertsUi.editingId = "";
+        paintAlerts();
+    } else if (action === "unsubscribe" || action === "delete") {
+        alertsUi.confirm = action;
+        alertsUi.view = "manage";
+        paintAlerts();
+    } else if (action === "cancel-confirm") {
+        alertsUi.confirm = "";
+        paintAlerts();
+    } else if (action === "confirm-unsubscribe") {
+        return finishSubscription("unsubscribe");
+    } else if (action === "confirm-delete") {
+        return finishSubscription("delete");
+    }
+}
+
+function ensureAlertsShell() {
+    if (document.getElementById("alertsRoot")) return;
+    const root = alertsEl("div", "");
+    root.id = "alertsRoot";
+    setHidden(root, true);
+    const panel = alertsEl("div", "alerts-panel");
+    panel.setAttribute("role", "dialog");
+    panel.setAttribute("aria-modal", "true");
+    panel.setAttribute("aria-labelledby", "alertsTitle");
+    const head = alertsEl("div", "alerts-head");
+    const title = alertsEl("h2", "alerts-title", "Alerts");
+    title.id = "alertsTitle";
+    const close = alertsEl("button", "alerts-close", "Close");
+    close.type = "button";
+    close.setAttribute("aria-label", "Close alerts");
+    close.addEventListener("click", closeAlerts);
+    head.append(title, close);
+    const live = alertsEl("p", "alerts-live", "");
+    live.id = "alertsLive";
+    live.setAttribute("role", "status");
+    const error = alertsEl("p", "alerts-error", "");
+    error.id = "alertsError";
+    error.setAttribute("role", "alert");
+    const body = alertsEl("div", "alerts-body");
+    body.id = "alertsBody";
+    panel.append(head, live, error, body);
+    root.appendChild(panel);
+    root.addEventListener("click", event => {
+        if (event.target === root) closeAlerts();
+    });
+    body.addEventListener("click", onAlertsClick);
+    if (document.body) document.body.appendChild(root);
+}
+
+function mountAlertsNav() {
+    if (document.getElementById("navAlerts")) return;
+    const nav = document.querySelector ? document.querySelector(".topnav-links") : null;
+    if (!nav) return;
+    const button = alertsEl("button", "nav-alerts", "Alerts");
+    button.id = "navAlerts";
+    button.type = "button";
+    button.addEventListener("click", () => openAlerts());
+    nav.appendChild(button);
+}
+
+function isAlertsOpen() {
+    const root = document.getElementById("alertsRoot");
+    return !!(alertsUi.open && root && !root.hidden);
+}
+
+function closeAlerts() {
+    alertsUi.open = false;
+    setHidden(document.getElementById("alertsRoot"), true);
+    if (alertsUi.returnFocus && alertsUi.returnFocus.focus) alertsUi.returnFocus.focus();
+}
+
+async function openAlerts(options) {
+    options = options || {};
+    ensureAlertsShell();
+    alertsUi.returnFocus = (typeof document !== "undefined" && document.activeElement) || null;
+    alertsUi.config = alertsPageConfig();
+    alertsUi.client = createAlertsClient(alertsUi.config);
+    alertsUi.open = true;
+    alertsUi.error = "";
+    alertsUi.message = "";
+    alertsUi.confirm = "";
+    alertsUi.active = false;
+    alertsUi.health = null;
+    alertsUi.healthUnread = false;
+    setHidden(document.getElementById("alertsRoot"), false);
+    if (options.draft) alertsUi.draft = options.draft;
+    if (!alertsUi.draft) alertsUi.draft = blankAlertDraft();
+    if (alertsUi.config.mode !== "live") {
+        alertsUi.view = "soon";
+        alertsUi.prefs = null;
+        paintAlerts();
+        return;
+    }
+    if (options.fragment && options.fragment.purpose === "verify") {
+        await verifyAlertsToken(options.fragment.token);
+        return;
+    }
+    if (options.fragment && options.fragment.purpose === "manage") {
+        await loadAlertsPreferences(options.fragment.token);
+        return;
+    }
+    const saved = readManageToken();
+    if (saved && options.adding) {
+        await loadAlertsPreferences(saved);
+        if (alertsUi.view === "manage") {
+            alertsUi.editingId = "";
+            alertsUi.view = "edit";
+            alertsUi.error = "";
+            paintAlerts("alertsBrand");
+        }
+        return;
+    }
+    if (saved && !options.draft) {
+        await loadAlertsPreferences(saved);
+        return;
+    }
+    alertsUi.view = "signup";
+    alertsUi.prefs = null;
+    await refreshHealth();
+    paintAlerts(alertsUi.view === "down" ? "" : "alertsEmail");
+}
+
+function appendQuickAlert(parent, card) {
+    const button = alertsEl("button", "quick-alert", "Alert me");
+    button.type = "button";
+    button.addEventListener("click", event => {
+        if (event.stopPropagation) event.stopPropagation();
+        if (event.preventDefault) event.preventDefault();
+        if (typeof closeQuickView === "function") closeQuickView();
+        const dataset = (card && card.dataset) || {};
+        openAlerts({ draft: alertDraftFromDataset(dataset), adding: true });
+    });
+    parent.appendChild(button);
+}
+
+function wireAlerts() {
+    if (alertsUi.wired) return;
+    alertsUi.wired = true;
+    mountAlertsNav();
+    ensureAlertsShell();
+    if (typeof window !== "undefined" && window.addEventListener) {
+        window.addEventListener("hashchange", () => {
+            const parsed = consumeAlertsFragment();
+            if (parsed) openAlerts({ fragment: parsed });
+        });
+    }
+    const parsed = consumeAlertsFragment();
+    if (parsed) openAlerts({ fragment: parsed });
+}
+
+if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded", wireAlerts);
+
+/* ALERTS_UI_END */
+
+
+
+
