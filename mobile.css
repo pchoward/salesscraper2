@@ -371,3 +371,24 @@
     .group-offer.is-only .amt { font-size: 1.4rem; }
     .group-title { font-size: 1rem; }
 }
+
+@media (max-width: 800px), (max-height: 500px) and (pointer: coarse) {
+    .topnav-links { flex-wrap: wrap; }
+    #alertsRoot { align-items: flex-end; padding: 0; }
+    .alerts-panel {
+        width: 100%;
+        max-height: 92dvh;
+        border-radius: 14px 14px 0 0;
+        padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
+    .alerts-panel input[type="email"],
+    .alerts-panel input[type="text"],
+    .alerts-panel input[type="number"],
+    .alerts-panel select,
+    .alerts-panel textarea { font-size: 16px; }
+    .alerts-primary, .alerts-secondary, .alerts-danger, .alerts-close, .quick-alert {
+        min-height: 2.75rem;
+    }
+    .alerts-close { width: 2.75rem; height: 2.75rem; }
+    .quick-actions { width: 100%; }
+}
