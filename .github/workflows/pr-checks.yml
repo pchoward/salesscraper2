@@ -41,5 +41,9 @@ jobs:
       - name: Validate JavaScript syntax
         run: node --check page.js
 
+      - name: Run alerts Worker tests (local SQLite, mocked network)
+        working-directory: worker
+        run: node --test test/*.test.js
+
       - name: Run Python and embedded JavaScript regression tests
         run: python -m unittest discover -s . -p 'test_*.py' -v

@@ -2,6 +2,14 @@
 
 Status: proposal (issue #52). Documentation only. Nothing here changes the scraper, `notify.py`, `watchlist.py`, the workflow, or the page. Prices and limits were checked in October 2026 and are listed under [Sources](#sources); confirm them before signing up for anything.
 
+## Implementation status
+
+Phase 2 (Option B) is implemented in `worker/` and `alerts_delivery.py` (issue #58), and is not deployed. See [alerts-backend.md](alerts-backend.md) for setup and [alerts-api.md](alerts-api.md) for the UI contract. Where the build differs from this proposal:
+
+- **Matching:** subscriber matching reuses the existing engine (`notification_engine.evaluate`, issue #51) with one journal per subscriber. Its event ids and delivery journal replace the `ListingEvent` id format sketched below. The guarantees are the same: no repeats, no alerts from failed scans, and explicit re-arming.
+- **Unsubscribe deletes the subscriber row** rather than keeping a suppression entry. Only bounces and complaints keep a suppression hash.
+- **Digests carry an unsubscribe link but no manage token,** so a forwarded email cannot edit preferences. People get a manage link on request.
+
 ## Summary
 
 - **Phase 1 (Codex, issue #51)** stays exactly where SkateDeals runs today: a static site on GitHub Pages, a daily GitHub Actions scrape, and SMTP to one owner. This document gives it an event, rule, and delivery contract that does not need to change when more people subscribe.

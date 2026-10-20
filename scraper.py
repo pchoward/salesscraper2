@@ -221,6 +221,20 @@ def main():
     else:
         send_digest(digest, dry_run=dry_run)
 
+    # Opt-in subscriber alerts through the alerts Worker. Off unless
+    # ALERTS_DELIVERY_ENABLED is set; never affects the owner's digest above.
+    if os.environ.get("ALERTS_DELIVERY_ENABLED", "").lower() in {"1", "true"} and not dry_run:
+        try:
+            from alerts_delivery import deliver_subscriber_alerts
+
+            evidence = dict(stock_before)
+            evidence.update({url: entry["stock"] for url, entry in updates["history"].items()
+                             if isinstance(entry, dict) and entry.get("stock") == "out_of_stock"})
+            deliver_subscriber_alerts(curr_data, updates["history"], failed_keys, previous=prev_data,
+                                      stock_evidence=evidence, skip_urls=carried, day=scanned_at[:10])
+        except Exception as exc:
+            logging.error("Subscriber alerts failed (continuing): %s", type(exc).__name__)
+
     logging.info("Scraping complete!")
 
 

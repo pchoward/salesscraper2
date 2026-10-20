@@ -1,0 +1,13 @@
+{
+  "name": "skatedeals-alerts",
+  "private": true,
+  "description": "Opt-in subscriber backend for SkateDeals alerts (Cloudflare Worker + D1). No runtime dependencies.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "mock": "node dev/mock-server.js"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}

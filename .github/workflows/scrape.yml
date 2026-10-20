@@ -92,6 +92,14 @@ jobs:
           NOTIFICATION_RESOLUTION: ${{ inputs.notification_resolution }}
         run: python -m notification_engine --resolve "$NOTIFICATION_EVENT_ID" --outcome "$NOTIFICATION_RESOLUTION"
 
+      - name: Restore subscriber alert journal (not published)
+        if: steps.gate.outputs.scrape == 'true' && (vars.ALERTS_DELIVERY_ENABLED == '1' || vars.ALERTS_DELIVERY_ENABLED == 'true')
+        uses: actions/cache/restore@v4
+        with:
+          path: alerts_state
+          key: alerts-v1-${{ github.ref_name }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: alerts-v1-${{ github.ref_name }}-
+
       - name: Run scraper
         if: steps.gate.outputs.scrape == 'true'
         env:
@@ -107,7 +115,19 @@ jobs:
           NOTIFICATION_ALLOW_BOOTSTRAP: ${{ vars.NOTIFICATION_ALLOW_BOOTSTRAP }}
           NOTIFICATION_OWNER_ID: ${{ vars.NOTIFICATION_OWNER_ID }}
           NOTIFICATION_RECIPIENT_ID: ${{ vars.NOTIFICATION_RECIPIENT_ID }}
+          # Subscriber alerts (docs/alerts-backend.md). Off unless the variable is set.
+          ALERTS_DELIVERY_ENABLED: ${{ vars.ALERTS_DELIVERY_ENABLED }}
+          ALERTS_ALLOW_BOOTSTRAP: ${{ vars.ALERTS_ALLOW_BOOTSTRAP }}
+          ALERTS_API_URL: ${{ vars.ALERTS_API_URL }}
+          ALERTS_HMAC_SECRET: ${{ secrets.ALERTS_HMAC_SECRET }}
         run: python scraper.py
+
+      - name: Save subscriber alert journal (not published)
+        if: always() && steps.gate.outputs.scrape == 'true' && (vars.ALERTS_DELIVERY_ENABLED == '1' || vars.ALERTS_DELIVERY_ENABLED == 'true') && hashFiles('alerts_state/manifest.json') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: alerts_state
+          key: alerts-v1-${{ github.ref_name }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Save notification checkpoint (not published)
         if: always() && steps.gate.outputs.scrape == 'true' && (vars.NOTIFICATION_ENGINE_ENABLED == '1' || vars.NOTIFICATION_ENGINE_ENABLED == 'true') && hashFiles('notification_state.json') != ''
