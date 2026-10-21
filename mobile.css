@@ -392,3 +392,13 @@
     .alerts-close { width: 2.75rem; height: 2.75rem; }
     .quick-actions { width: 100%; }
 }
+
+/* Filter drawer scrollbar must not cover counts. Same gutter and end
+   padding as the desktop brand list, after the drawer padding shorthand. */
+.brand-facet .facet-list,
+.sidebar,
+.rail .sidebar,
+.rail .sidebar#filterDrawer {
+    scrollbar-gutter: stable;
+    padding-inline-end: 12px;
+}

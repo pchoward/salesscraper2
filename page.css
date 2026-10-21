@@ -1874,6 +1874,10 @@ tr.deal-row.grouped-hide {
     max-height: 200px;
     overflow-x: hidden;
     overflow-y: auto;
+    /* The scrollbar sits on the count. A stable gutter covers Firefox overlay
+       scrollbars; the end padding is the fallback when the gutter is ignored. */
+    scrollbar-gutter: stable;
+    padding-inline-end: 12px;
 }
 .facet-value {
     display: flex;
@@ -1898,6 +1902,21 @@ tr.deal-row.grouped-hide {
 }
 .facet-value.is-zero { opacity: 0.45; }
 .facet-value.is-zero[aria-pressed="true"] { opacity: 1; }
+.is-unavailable,
+.chip.is-zero:not([aria-pressed="true"]):not(.is-partial),
+.facet-value.is-zero:not([aria-pressed="true"]),
+.kind-btn.is-zero:not([aria-pressed="true"]),
+.interval-btn.is-zero:not([aria-pressed="true"]),
+.category-strip button.is-zero:not([aria-pressed="true"]) {
+    display: none !important;
+}
+.filter-empty {
+    margin: 0.15rem 0.2rem 0.25rem;
+    color: #64748b;
+    font-size: 0.68rem;
+    line-height: 1.35;
+}
+.filter-empty[hidden] { display: none !important; }
 .facet-count {
     margin-left: auto;
     color: var(--text-secondary);
@@ -2486,3 +2505,11 @@ header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 .alerts-privacy { margin-top: 0.35rem; font-size: 0.8rem; }
 .alerts-privacy summary { cursor: pointer; font-weight: 750; }
 body.alerts-open { overflow: hidden; }
+/* Sidebar and the mobile drawer scroll too. Reserve the gutter so chip
+   counts are not under that scrollbar, including in Firefox. */
+.sidebar,
+.rail .sidebar,
+.rail .sidebar#filterDrawer {
+    scrollbar-gutter: stable;
+    padding-inline-end: 12px;
+}
