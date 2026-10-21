@@ -533,16 +533,55 @@ function toggleSpec(stateKey, value) {
     applyFilters();
 }
 
+// A zero count is hidden. The option stays when it is selected, or it is the
+// group's "all" choice, so it can still be cleared. Search-hidden brands stay
+// out of the empty check too.
+function facetShown(node) {
+    if (!node) return false;
+    if (node.hidden) return false;
+    if (node.hasAttribute && node.hasAttribute("hidden")) return false;
+    if (node.classList && (node.classList.contains("is-unavailable") || node.classList.contains("is-search-hide"))) return false;
+    return true;
+}
+
+function markFacetOption(node, count, keep) {
+    const show = count > 0 || !!keep;
+    node.classList.toggle("is-zero", count === 0);
+    node.classList.toggle("is-unavailable", !show);
+    setHidden(node, !show);
+    return show;
+}
+
+function syncFacetEmpty(container, selector, message) {
+    if (!container || !container.querySelector) return;
+    const items = Array.from(container.querySelectorAll(selector));
+    const note = container.querySelector(".filter-empty");
+    if (!items.length || items.some(facetShown)) {
+        if (note) setHidden(note, true);
+        return;
+    }
+    let empty = note;
+    if (!empty) {
+        empty = document.createElement("p");
+        empty.className = "filter-empty";
+        container.appendChild(empty);
+    }
+    empty.textContent = message;
+    setHidden(empty, false);
+}
+
 function filterBrandList(query) {
     const facet = document.getElementById("brandFacet");
     const text = String(query || "").trim().toLowerCase();
     if (facet) facet.classList.toggle("is-searching", text.length > 0);
     document.querySelectorAll("#brandList .facet-value").forEach(node => {
         const brand = (node.getAttribute("data-brand") || "").toLowerCase();
-        const label = (node.textContent || "").toLowerCase();
+        const name = node.querySelector(".facet-name");
+        const label = ((name && name.textContent) || node.textContent || "").toLowerCase();
         const match = !text || (brand !== "all" && (brand.includes(text) || label.includes(text)));
         node.classList.toggle("is-search-hide", !match);
     });
+    syncFacetEmpty(document.getElementById("brandList"), ".facet-value", "No matching brands");
 }
 
 function paintBrandFacet() {
@@ -556,14 +595,33 @@ function paintBrandFacet() {
 
 function paintSelectCounts(id, counts) {
     const select = document.getElementById(id);
-    if (!select) return;
-    Array.from(select.options).forEach(option => {
+    if (!select || !select.options) return;
+    // Firefox ignores hidden and display on <option>, so a zero choice is
+    // taken out of the list. The pool keeps it so a later filter can put it back.
+    if (!select._facetPool) select._facetPool = Array.from(select.options);
+    const pool = select._facetPool;
+    const current = select.value || "";
+    pool.forEach(option => {
         if (!option.value || option.value === "all") return;
         const count = counts[option.value] || 0;
-        const label = option.getAttribute("data-label") || option.textContent.replace(/\s*\(\d+\)\s*$/, "");
+        let label = option.getAttribute("data-label");
+        if (!label) {
+            label = String(option.textContent || "").replace(/\s*\(\d+\)\s*$/, "");
+            option.setAttribute("data-label", label);
+        }
         option.textContent = label + " (" + count + ")";
-        option.disabled = count === 0 && option.value !== select.value;
+        const keep = count > 0 || option.value === current;
+        option.disabled = false;
+        if (!keep) {
+            if (option.parentNode === select) select.removeChild(option);
+        } else if (option.parentNode !== select) {
+            select.appendChild(option);
+        }
     });
+    pool.forEach(option => {
+        if (option.parentNode === select) select.appendChild(option);
+    });
+    if (current && pool.some(option => option.value === current)) select.value = current;
 }
 
 function paintFacetCounts() {
@@ -606,16 +664,18 @@ function paintFacetCounts() {
         const count = brandCounts[brand] || 0;
         const slot = node.querySelector(".facet-count");
         if (slot) slot.textContent = "(" + count + ")";
-        node.classList.toggle("is-zero", count === 0);
         node.setAttribute("data-count", String(count));
+        const on = node.getAttribute("aria-pressed") === "true";
+        markFacetOption(node, count, on);
     });
     document.querySelectorAll("#sizeFilters .width-chip").forEach(node => {
         let count = 0;
         widthGroupIds(node).forEach(id => { count += widthCounts[id] || 0; });
         const slot = node.querySelector(".width-count");
         if (slot) slot.textContent = String(count);
-        node.classList.toggle("is-zero", count === 0);
         node.setAttribute("data-count", String(count));
+        const on = node.getAttribute("aria-pressed") === "true" || node.classList.contains("is-partial");
+        markFacetOption(node, count, on);
     });
     paintSelectCounts("storeSelect", storeCounts);
     paintSelectCounts("partSelect", partCounts);
@@ -644,13 +704,19 @@ function paintFacetCounts() {
             const count = counts[value] || 0;
             const slot = node.querySelector(".spec-count");
             if (slot) slot.textContent = String(count);
-            node.classList.toggle("is-zero", count === 0);
             node.setAttribute("data-count", String(count));
             const on = (state[facet.stateKey] || []).indexOf(value) >= 0;
             node.classList.toggle("active", on);
             node.setAttribute("aria-pressed", on ? "true" : "false");
+            // Shoe and deck sizes only count tokens already stored on the row.
+            // Those are the in-stock sizes; a size named in the title is not added.
+            markFacetOption(node, count, on);
         });
+        syncFacetEmpty(document.getElementById(facet.section), ".spec-chip", "No options match");
     });
+    syncFacetEmpty(document.getElementById("sizeFilters"), ".width-chip", "No sizes match");
+    syncFacetEmpty(document.getElementById("brandList"), ".facet-value", "No matching brands");
+    syncFacetEmpty(document.getElementById("dealTypes"), ".kind-btn", "No deal types match");
     paintKeepaCounts();
 }
 
@@ -1310,7 +1376,7 @@ function paintKeepaCounts() {
         if (slot) slot.textContent = "(" + (intervalCounts[key] || 0) + ")";
         const on = (state.dropInterval || "all") === key;
         button.setAttribute("aria-pressed", on ? "true" : "false");
-        button.classList.toggle("is-zero", key !== "all" && !(intervalCounts[key]));
+        markFacetOption(button, intervalCounts[key] || 0, key === "all" || on);
     });
     document.querySelectorAll("#dealTypes [data-kind]").forEach(button => {
         const key = button.getAttribute("data-kind") || "";
@@ -1318,14 +1384,16 @@ function paintKeepaCounts() {
         if (slot) slot.textContent = "(" + (kindCounts[key] || 0) + ")";
         const on = key === "watch" ? !!state.watching : key === "highlights" ? !!state.highlights : (state.kinds || []).indexOf(key) >= 0;
         button.setAttribute("aria-pressed", on ? "true" : "false");
-        button.classList.toggle("is-zero", !(kindCounts[key]));
+        markFacetOption(button, kindCounts[key] || 0, on);
     });
     document.querySelectorAll("#categoryStrip [data-part]").forEach(button => {
         const part = button.getAttribute("data-part") || "all";
         const count = part === "all" ? categoryAll : (categoryCounts[part] || 0);
         const slot = button.querySelector(".cat-count");
         if (slot) slot.textContent = String(count);
-        button.setAttribute("aria-pressed", (state.part || "Decks") === part ? "true" : "false");
+        const on = (state.part || "Decks") === part;
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+        markFacetOption(button, count, part === "all" || on);
     });
 }
 
@@ -1470,8 +1538,8 @@ function paintQuickRow(groupId, attr, counts, current) {
         const on = value === current;
         node.classList.toggle("active", on);
         node.setAttribute("aria-pressed", on ? "true" : "false");
-        node.classList.toggle("is-zero", count === 0);
         node.setAttribute("data-count", String(count));
+        markFacetOption(node, count, value === "all" || on);
     });
 }
 
@@ -1510,8 +1578,12 @@ function restoreNavHomes(cluster) {
     });
 }
 
+function shownQuickChips(root) {
+    return Array.from(root.querySelectorAll(":scope > .quick-chip")).filter(facetShown);
+}
+
 function syncNavMore(cluster) {
-    const count = cluster.list.querySelectorAll(":scope > .quick-chip").length;
+    const count = shownQuickChips(cluster.list).length;
     const toggle = cluster.menu.querySelector(".more-toggle");
     if (!count) {
         cluster.menu.hidden = true;
@@ -1565,14 +1637,14 @@ function fitNavPills() {
             while (limit() > 0 && bar.scrollWidth > limit() + 1 && guard < 40) {
                 guard += 1;
                 const choice = nextNavOverflow(clusters.map(cluster => ({
-                    chips: Array.from(cluster.row.querySelectorAll(":scope > .quick-chip")).map(chip => ({
+                    chips: shownQuickChips(cluster.row).map(chip => ({
                         value: chip.getAttribute("data-store") || chip.getAttribute("data-part") || "",
                         pressed: chip.getAttribute("aria-pressed") === "true",
                     })),
                 })));
                 if (!choice) return;
                 const cluster = clusters[choice.cluster];
-                const chip = cluster.row.querySelectorAll(":scope > .quick-chip")[choice.index];
+                const chip = shownQuickChips(cluster.row)[choice.index];
                 if (!chip) return;
                 cluster.list.appendChild(chip);
                 syncNavMore(cluster);
@@ -2449,13 +2521,15 @@ function brandSame(a, b) {
 function setSelect(id, value) {
     const node = document.getElementById(id);
     if (!node) return;
-    const options = Array.from(node.options || []);
+    const options = node._facetPool || Array.from(node.options || []);
     let match = options.find(option => option.value === value);
     if (!match && id === "brandSelect" && value) {
         match = options.find(option => brandSame(option.value, value));
     }
-    if (match) node.value = match.value;
-    else node.value = "all";
+    if (match) {
+        if (match.parentNode !== node) node.appendChild(match);
+        node.value = match.value;
+    } else node.value = "all";
 }
 
 function writeControls(snapshot) {
