@@ -1,8 +1,7 @@
 """Email the skate sale digest over SMTP.
 
-Sends when the digest has at least one new item, a meaningful price drop,
-or a broken-store warning (a store/part empty or failed two runs in a row).
-Removals alone do not send mail. A warning sends even when there are no deals.
+Subscriber digests contain deals and watch alerts only. Operational warnings
+are delivered separately through send_admin_warnings.
 Settings come from the environment. Missing settings are logged and skipped.
 SMTP errors are logged and do not propagate, so a mail failure cannot fail
 the scrape.
@@ -22,7 +21,7 @@ from email.message import EmailMessage
 from html import escape
 
 from filters import calculate_percent_off, item_passes_filters, normalize_product_name, normalize_url
-from health import warning_text, warnings_blurb
+from health import warning_text
 from report import Digest
 from site_sales import activity_line
 
@@ -66,13 +65,11 @@ class SmtpConfig:
 def should_send(digest):
     """True when the email has something to say.
 
-    Removals do not count. A broken-store warning does, even with no deals.
+    Removals and operational warnings do not count.
     """
     if digest is None:
         return False
     if digest.new_items or digest.drops:
-        return True
-    if getattr(digest, "warnings", None):
         return True
     return bool(getattr(digest, "watch_alerts", None))
 
@@ -150,10 +147,6 @@ def _long_date(when):
     return f"{day.strftime('%B')} {day.day}, {day.year}"
 
 
-def _warnings(digest):
-    return list(getattr(digest, "warnings", None) or [])
-
-
 def _watch_alerts(digest):
     alerts = getattr(digest, "watch_alerts", None)
     if not alerts:
@@ -166,21 +159,11 @@ def summary_counts(digest):
     drop_count = len(digest.drops)
     drop_word = "price drop" if drop_count == 1 else "price drops"
     base = f"{new_count} new, {drop_count} {drop_word}"
-    warnings = _warnings(digest)
     alerts = _watch_alerts(digest)
-    if not warnings and not alerts:
-        return base
-    if warnings:
-        word = "store warning" if len(warnings) == 1 else "store warnings"
+    if alerts:
+        word = "watchlist alert" if len(alerts) == 1 else "watchlist alerts"
         if new_count == 0 and drop_count == 0:
-            base = f"{len(warnings)} {word}"
-        else:
-            base = f"{base}, {len(warnings)} {word}"
-    elif new_count == 0 and drop_count == 0 and alerts:
-        word = "watchlist alert" if len(alerts) == 1 else "watchlist alerts"
-        return f"{len(alerts)} {word}"
-    if alerts and not (new_count == 0 and drop_count == 0 and not warnings):
-        word = "watchlist alert" if len(alerts) == 1 else "watchlist alerts"
+            return f"{len(alerts)} {word}"
         base = f"{base}, {len(alerts)} {word}"
     return base
 
@@ -322,25 +305,6 @@ def _plain_cross_store(group):
             lines.append(f"  {offer['url']}")
     lines.append("")
     return lines
-
-
-def _html_warnings(digest):
-    warnings = _warnings(digest)
-    if not warnings:
-        return ""
-    items = []
-    for warning in warnings:
-        text = warning_text(warning) if isinstance(warning, dict) else str(warning)
-        items.append(f"<li>{escape(text)}</li>")
-    return (
-        '<tr><td bgcolor="#fef2f2" style="background:#fef2f2;padding:16px 24px;'
-        'font-family:Arial,Helvetica,sans-serif;border-bottom:1px solid #fca5a5;">'
-        '<p style="margin:0;font-size:15px;font-weight:700;color:#991b1b;">Store check failed</p>'
-        '<p style="margin:6px 0 0;font-size:13px;line-height:1.5;color:#7f1d1d;">'
-        f"{escape(warnings_blurb(warnings, email=True))}</p>"
-        '<ul style="margin:8px 0 0;padding-left:18px;color:#7f1d1d;font-size:13px;line-height:1.5;">'
-        f"{''.join(items)}</ul></td></tr>"
-    )
 
 
 def _html_low_note(digest):
@@ -575,14 +539,6 @@ def render_plain(digest, report_url, when=None, banner=None):
     ]
     if banner:
         lines.extend([banner, ""])
-    warnings = _warnings(digest)
-    if warnings:
-        lines.append("STORE CHECK FAILED")
-        lines.append(warnings_blurb(warnings, email=True))
-        for warning in warnings:
-            text = warning_text(warning) if isinstance(warning, dict) else str(warning)
-            lines.append(f"- {text}")
-        lines.append("")
     lines.extend([f"Full report: {report_url}", ""])
     lines.extend(_plain_watch(digest))
     lines.extend(_plain_sales(digest))
@@ -679,9 +635,6 @@ def render_html(digest, report_url, when=None, banner=None):
             'font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;border-bottom:1px solid #fdba74;">'
             f"{escape(banner)}</td></tr>"
         )
-    warning_row = _html_warnings(digest)
-    if warning_row:
-        chunks.append(warning_row)
     chunks.append(_html_report_link(safe_report))
     watch_row = _html_watch(digest)
     if watch_row:
@@ -893,8 +846,6 @@ def build_message(digest, config, when=None, banner=None):
 
 def write_preview(path, subject, html, recipients=None):
     header = [f"<!-- Subject: {subject} -->"]
-    if recipients:
-        header.append(f"<!-- To: {', '.join(recipients)} -->")
     text = "\n".join(header) + "\n" + html
     with open(path, "w", encoding="utf-8") as handle:
         handle.write(text)
@@ -923,7 +874,7 @@ def send_digest(digest, env=None, dry_run=None, preview_path=PREVIEW_PATH, when=
     try:
         return _send_digest(digest, env, dry_run, preview_path, when, banner)
     except Exception as exc:
-        logger.error("Email failed: %s", exc)
+        logger.error("Email failed (%s)", type(exc).__name__)
         return False
 
 
@@ -947,8 +898,52 @@ def _send_digest(digest, env, dry_run, preview_path, when, banner):
 
     message = build_message(digest, config, when, banner=banner)
     _smtp_send(config, message)
-    logger.info("Email sent to %s", ", ".join(config.recipients))
+    logger.info("Deal email sent")
     return True
+
+
+def send_admin_warnings(warnings, env=None, dry_run=None):
+    """Deliver operations only to ADMIN_EMAIL_TO; never fall back to subscribers.
+
+    Dry runs log that delivery was suppressed and do not create a public preview.
+    SMTP failures cannot prevent catalog persistence or the deal digest.
+    """
+    if not warnings:
+        return False
+    try:
+        for warning in warnings:
+            logger.warning("Scraper operations: %s", warning_text(warning) if isinstance(warning, dict) else str(warning))
+        source = dict(os.environ if env is None else env)
+        source["EMAIL_TO"] = _clean(source.get("ADMIN_EMAIL_TO"))
+        if not source["EMAIL_TO"]:
+            logger.warning("Administrator email skipped: ADMIN_EMAIL_TO is unset; see scraper logs")
+            return False
+        config = load_smtp_config(source)
+        preview = config.dry_run if dry_run is None else dry_run
+        if preview:
+            logger.info("Administrator email suppressed in dry run")
+            return False
+        if config.missing:
+            logger.warning("Administrator email skipped: missing %s", ", ".join(config.missing))
+            return False
+        message = EmailMessage()
+        message["Subject"] = f"[SkateDeals ADMIN] {len(warnings)} scraper warning(s)"
+        message["From"] = config.sender
+        message["To"] = ", ".join(config.recipients)
+        lines = ["SkateDeals administrator scraper report", ""]
+        for warning in warnings:
+            lines.append(warning_text(warning) if isinstance(warning, dict) else str(warning))
+        lines.append("Inspect the scrape workflow logs and scrape_health.json; retry affected categories.")
+        message.set_content("\n".join(lines))
+        refused = _smtp_send(config, message)
+        if refused:
+            logger.warning("Administrator email rejected for one or more recipients")
+            return False
+        logger.info("Administrator email sent")
+        return True
+    except Exception as exc:
+        logger.error("Administrator email failed (%s)", type(exc).__name__)
+        return False
 
 
 def deliver_digest_result(digest, env=None, dry_run=None, delivery_id=None):

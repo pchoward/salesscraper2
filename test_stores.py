@@ -251,7 +251,7 @@ class ZumiezEmptyPageTests(unittest.TestCase):
         self.assertEqual(parsed[0]["store"], "Zumiez")
         self.assertEqual(parsed[0]["price_new"], "29.99")
 
-    def test_zero_deal_store_card_stays_visible_with_a_warning(self):
+    def test_zero_deal_store_card_stays_visible_without_a_warning(self):
         deck = {
             "name": "Baker Figgy Divine Evil Deck 8.25",
             "url": "https://example.com/ccs",
@@ -283,12 +283,12 @@ class ZumiezEmptyPageTests(unittest.TestCase):
         self.assertIn('data-store="Zumiez"', grid)
         zumiez = grid.split('data-store="Zumiez"', 1)[1].split("</button>", 1)[0]
         self.assertIn(">0<", zumiez)
-        self.assertIn("warn-badge", zumiez)
-        self.assertIn("Warning", zumiez)
+        self.assertNotIn("warn-badge", zumiez)
+        self.assertNotIn("Warning", zumiez)
         ccs = grid.split('data-store="CCS"', 1)[1].split("</button>", 1)[0]
         self.assertNotIn("warn-badge", ccs)
-        self.assertIn("returned no items in any category", html)
-        self.assertIn("marked suspect", html)
+        self.assertNotIn("returned no items in any category", html)
+        self.assertNotIn("marked suspect", html)
 
 
 class RetailerActivityTests(unittest.TestCase):

@@ -14,7 +14,7 @@ import sys
 
 from health import HEALTH_PATH, load_state, state_json
 from history import record_misses
-from notify import send_digest
+from notify import send_digest, send_admin_warnings
 from notification_engine import send_notifications
 from pipeline import apply_run_updates, decorate_digest, prepare_run
 from report import build_digest, build_report_html, compare_catalogs
@@ -209,9 +209,10 @@ def main():
     except Exception as exc:
         logging.error("Report build failed (continuing): %s", exc)
 
-    # Mail for new items, meaningful drops, or a broken-store warning.
+    # Operational warnings have a separate administrator-only delivery route.
     # Logged SMTP problems stay here so the workflow can still commit.
     dry_run = True if "--email-dry-run" in sys.argv[1:] else None
+    send_admin_warnings(updates["warnings"], dry_run=dry_run)
     if os.environ.get("NOTIFICATION_ENGINE_ENABLED", "").lower() in {"1", "true"}:
         stock_before.update({url: entry["stock"] for url, entry in updates["history"].items()
                              if isinstance(entry, dict) and entry.get("stock") == "out_of_stock"})
