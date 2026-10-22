@@ -489,7 +489,9 @@ class DigestDefaultTests(unittest.TestCase):
             tag = line[line.rfind("<button", 0, start):line.find(">", start)]
             self.assertIn('aria-pressed="false"', tag, chip)
             self.assertNotIn('aria-pressed="true"', tag, chip)
-        self.assertIn('aria-label="Digest baseline"', html)
+        self.assertIn('data-baseline="previous-scrape"', html)
+        self.assertNotIn('id="baselineSelect"', html)
+        self.assertNotIn("Since your last visit", html)
         self.assertNotIn(
             '.change-btn[aria-pressed="true"], .mode-btn[aria-pressed="true"]',
             html,

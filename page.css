@@ -128,34 +128,6 @@ button.stat-card:hover, .stat-card.emphasis { outline: none; }
     align-items: center;
 }
 .digest-label { margin-right: 0.15rem; }
-.mode {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    margin: 0 0 0.75rem;
-    padding: 0.2rem 0.35rem 0.2rem 0.7rem;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-}
-.mode-label {
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-}
-.mode-btn {
-    border-color: transparent;
-    background: transparent;
-    color: var(--text-secondary);
-    box-shadow: none;
-}
-.mode-btn[aria-pressed="true"] {
-    background: #eef2ff;
-    border-color: #c7d2fe;
-    color: var(--primary-dark);
-}
 .sticky-bar {
     position: sticky;
     top: 0;
@@ -1147,7 +1119,7 @@ header.is-stale .title-line, header.is-failed .title-line { background: #c2410c;
     overflow-x: auto;
 }
 .lede.digest { margin: 0; flex: 0 0 auto; }
-.digest-label, .mode-btn, .mode-label {
+.digest-label {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -1158,8 +1130,7 @@ header.is-stale .title-line, header.is-failed .title-line { background: #c2410c;
     white-space: nowrap;
     border: 0;
 }
-.mode { position: relative; display: flex; align-items: center; }
-#baselineSelect, .sort-field select, .sidebar select, .sidebar input, .search-box input {
+.sort-field select, .sidebar select, .sidebar input, .search-box input {
     border: 1px solid var(--border);
     border-radius: 8px;
     background: white;
@@ -1167,7 +1138,6 @@ header.is-stale .title-line, header.is-failed .title-line { background: #c2410c;
     font-size: 0.78rem;
     padding: 0.28rem 0.4rem;
 }
-#baselineSelect { max-width: 11rem; }
 .sort-field { flex-direction: row; align-items: center; gap: 0.3rem; min-width: 0; }
 .sort-field span { white-space: nowrap; }
 .layout-toggle { flex: 0 0 auto; }
@@ -1462,9 +1432,42 @@ header, header.is-stale, header.is-failed { background: transparent; color: inhe
     overflow: visible;
 }
 .result-count { margin: 0; font-size: 0.84rem; font-weight: 700; white-space: nowrap; }
-.tool-line .sort-field { margin-left: auto; }
-.tool-line .active-row { flex: 1 1 100%; margin: 0; padding: 0; }
-.tool-line .lede.digest { flex: 1 1 auto; min-width: 0; }
+.tool-line .sort-field { margin-left: 0; flex: 0 1 auto; }
+.tool-line .active-row { flex: 1 1 auto; margin: 0; padding: 0; }
+.tool-line .lede.digest { flex: 1 1 auto; min-width: 0; margin: 0; }
+.tool-deals {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.baseline-note {
+    flex: 0 0 auto;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    white-space: nowrap;
+}
+.tool-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    margin-left: auto;
+}
+.tool-display .layout-toggle button,
+.tool-display .group-toggle {
+    background: transparent;
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+.tool-display .layout-toggle button[aria-pressed="true"] {
+    background: #eef2f6;
+    color: #334155;
+}
 .result-line {
     margin: 0 0 0.4rem;
     font-size: 0.84rem;
@@ -1505,7 +1508,7 @@ header, header.is-stale, header.is-failed { background: transparent; color: inhe
 .section-toggle:hover { color: var(--primary-dark); }
 .section-body { display: none; padding: 0 0.05rem 0.45rem; }
 .filter-section.is-open > .section-body { display: block; }
-.search-box input, .sidebar select, .sidebar input, #baselineSelect, .sort-field select, .brand-search {
+.search-box input, .sidebar select, .sidebar input, .sort-field select, .brand-search {
     appearance: none;
     border: 1px solid #c5ced8;
     border-radius: 4px;
@@ -1516,15 +1519,15 @@ header, header.is-stale, header.is-failed { background: transparent; color: inhe
     padding: 0.32rem 0.45rem;
     width: 100%;
 }
-.sidebar select, #baselineSelect, .sort-field select {
+.sidebar select, .sort-field select {
     background-image: linear-gradient(45deg, transparent 50%, #526074 50%), linear-gradient(135deg, #526074 50%, transparent 50%);
     background-position: calc(100% - 14px) 55%, calc(100% - 9px) 55%;
     background-size: 5px 5px, 5px 5px;
     background-repeat: no-repeat;
     padding-right: 1.4rem;
 }
-#baselineSelect, .sort-field select { width: auto; }
-.search-box input:focus, .sidebar select:focus, .sidebar input:focus, #baselineSelect:focus, .sort-field select:focus,
+.sort-field select { width: auto; }
+.search-box input:focus, .sidebar select:focus, .sidebar input:focus, .sort-field select:focus,
 .nav-link:focus-visible, .deal-card:focus-visible, .chip:focus-visible, .change-btn:focus-visible,
 .facet-value:focus-visible, .section-toggle:focus-visible, .layout-toggle button:focus-visible,
 .spark-hit:focus-visible, .history-chart:focus-visible, .active-chip:focus-visible,
@@ -1857,15 +1860,22 @@ tr.deal-row.filtered-out,
 tr.deal-row.grouped-hide {
     display: none !important;
 }
-#visitNote {
-    display: block;
-    margin: 0.2rem 0 0;
+.empty-state {
+    margin: 0.2rem 0 0.8rem;
+    padding: 0.9rem 1rem;
+    background: white;
+    border: 1px dashed #cbd5e1;
+    border-radius: 10px;
 }
-/* header p { display: inline } beats the user-agent [hidden] rule, so the
-   visit line stayed visible after the snapshot was replaced. */
-#visitNote[hidden] {
-    display: none !important;
-}
+.empty-state h3 { margin: 0 0 0.3rem; font-size: 1rem; }
+.empty-state p { margin: 0 0 0.7rem; color: #475569; font-size: 0.88rem; }
+.empty-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.empty-actions .text-btn { border: 1px solid #d5dbe3; background: white; }
+.empty-actions .empty-clear { background: #1d4ed8; color: white; border-color: #1d4ed8; }
+.empty-state[hidden] { display: none !important; }
+#dealsSection.is-empty .table-wrap,
+#dealsSection.is-empty #cardGrid,
+#dealsSection.is-empty #groupBoard { display: none !important; }
 .brand-facet { display: flex; flex-direction: column; gap: 0.15rem; min-height: 0; }
 .brand-facet .facet-list {
     display: flex;
@@ -2144,11 +2154,12 @@ select option:disabled { color: #94a3b8; }
     color: #334155;
     padding: 0.15rem 0.15rem 0;
 }
-.tool-line .search-box { width: auto; flex: 1 1 180px; min-width: 140px; max-width: 280px; padding: 0; background: transparent; }
-.tool-line .search-box input { width: 100%; }
+.tool-line .search-box { width: auto; flex: 1.4 1 220px; min-width: 180px; max-width: 420px; padding: 0; background: transparent; }
+.tool-line .search-box input { width: 100%; min-height: 2.15rem; font-size: 0.92rem; border-radius: 8px; }
 .tool-line .active-filters {
     position: static;
     display: flex;
+    flex: 1 1 100%;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.25rem;

@@ -138,6 +138,10 @@ SORTS = (
 CHANGES = ("new", "drop", "lowest", "removed")
 INTERVALS = ("day", "week", "month", "quarter")
 DEAL_KINDS = ("new", "drop", "low", "back", "hot")
+# Retired last-visit comparison. Old links may still carry these. They are
+# ignored so the rest of the query keeps working, and they are never written
+# back out. The digest always uses the previous daily scrape.
+RETIRED_VISIT_PARAMS = ("baseline", "visit", "visitmode", "since")
 
 STARTER_VIEWS = (
     {
@@ -317,6 +321,8 @@ def decode_query(query):
         return state
     for key, value in parse_qsl(text, keep_blank_values=False):
         key = key.strip().lower()
+        if key in RETIRED_VISIT_PARAMS:
+            continue
         if key == "q":
             state["q"] = value.strip()
         elif key == "store":

@@ -70,7 +70,8 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('id="freshness"', html)
         self.assertIn('id="filterDrawer"', html)
         self.assertIn('id="filtersOpen"', html)
-        self.assertIn('id="baselineSelect"', html)
+        self.assertIn('id="emptyState"', html)
+        self.assertNotIn('id="baselineSelect"', html)
         self.assertIn('id="scoreMin"', html)
         self.assertNotIn("Today's highlights", html)
         self.assertIn('data-kind="highlights"', html)
@@ -122,11 +123,12 @@ class ReportExtraTests(unittest.TestCase):
             r"tr\.deal-row\.filtered-out\s*,\s*tr\.deal-row\.grouped-hide\s*"
             r"\{[^}]*display:\s*none\s*!important",
         )
-        self.assertRegex(style, r"#visitNote\[hidden\]\s*\{[^}]*display:\s*none\s*!important")
+        self.assertRegex(style, r"\.empty-state\[hidden\]\s*\{[^}]*display:\s*none\s*!important")
         self.assertGreater(style.rfind(".deal-card.filtered-out"), style.find(".deal-card {"))
         tail = style[style.rfind(".deal-card.filtered-out"):]
         self.assertNotRegex(tail, r"\.deal-card\s*\{[^}]*display:\s*flex")
-        self.assertIn('id="visitNote" hidden', html)
+        self.assertIn('id="emptyState" class="empty-state" hidden', html)
+        self.assertNotIn('id="visitNote"', html)
         self.assertIn('id="brandFacet"', html)
         self.assertIn('id="brandSelect"', html)
         self.assertIn('id="clearAll"', html)
@@ -858,7 +860,7 @@ if (visible.join(",") !== "20.0,12.5,") throw new Error("visible discounts " + v
         self.assertIn("cursor: pointer;", home)
         source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
         reset = source[source.find("function clearFilters("):source.find("function scrollResultsToTop(")]
-        self.assertIn('visitMode: "yesterday"', reset)
+        self.assertNotIn("visitMode", reset)
         self.assertIn("grouped: false", reset)
         self.assertIn('part: "Decks"', reset)
         self.assertIn('sortKey: "rank"', reset)
