@@ -82,7 +82,7 @@
     }
     .nav-row .more-menu { display: none !important; }
 
-    /* Tools wrap into rows: search, then count / sort, then what changed. */
+    /* Search, then deal filters, then sort, then quieter display options. */
     .tool-line {
         flex-wrap: wrap;
         overflow: visible;
@@ -95,25 +95,21 @@
     .tool-line .search-box { order: 1; flex: 1 1 100%; min-width: 0; max-width: none; }
     /* 16px keeps iOS Safari from zooming the page when a field gets focus. */
     .tool-line input, .tool-line select { font-size: 16px; }
-    .tool-line .search-box input { min-height: 2.6rem; border-radius: 8px; }
-    .tool-line .result-count { order: 2; }
-    .tool-line .sort-field { order: 3; margin-left: auto; flex: 0 1 auto; min-width: 0; }
+    .tool-line .search-box input { min-height: 2.75rem; border-radius: 8px; font-size: 16px; }
+    .tool-line .tool-deals { order: 2; flex: 1 1 100%; }
+    .tool-line .sort-field { order: 3; margin-left: 0; flex: 1 1 auto; min-width: 0; }
     .tool-line .sort-field span { font-size: 0.75rem; }
-    .tool-line .sort-field select { max-width: 11.5rem; min-height: 2.25rem; }
+    .tool-line .sort-field select { max-width: none; min-height: 2.25rem; }
+    .tool-line .tool-display { order: 4; margin-left: 0; }
     .tool-line .group-toggle {
-        order: 7;
         flex: 0 0 auto;
         min-height: 2rem;
         padding: 0.2rem 0.6rem;
-        font-size: 0.78rem;
+        font-size: 0.75rem;
+        color: #64748b;
     }
-    .tool-line .mode { order: 5; flex: 0 0 auto; padding: 0; border: 0; background: transparent; box-shadow: none; }
-    .tool-line .mode select { min-height: 2.25rem; }
-    /* A 50% basis keeps the change buttons beside the baseline select and
-       pushes "Group across stores" to its own line. */
     .tool-line .lede.digest {
-        order: 6;
-        flex: 1 1 50%;
+        flex: 1 1 auto;
         min-width: 0;
         width: auto;
         overflow-x: auto;
@@ -122,8 +118,9 @@
     .tool-line .lede.digest::-webkit-scrollbar { display: none; }
     .tool-line .segment { width: max-content; flex-wrap: nowrap; }
     .tool-line .change-btn { white-space: nowrap; min-height: 2.25rem; }
+    .tool-line .result-count { color: #64748b; font-size: 0.78rem; }
     /* Active filter chips and "Clear all" share one wrapping line. */
-    .tool-line .active-filters { order: 8; flex: 1 1 100%; gap: 0.35rem; }
+    .tool-line .active-filters { order: 5; flex: 1 1 100%; gap: 0.35rem; }
     .tool-line .active-filters .active-row { display: contents; }
     .tool-line .active-chip, .tool-line .active-filters .text-btn { min-height: 2rem; }
     /* The table needs a desktop width, so phones always get cards. */
@@ -285,7 +282,7 @@
 }
 
 /* Small phones: the section links get their own row under the logo, and
-   the baseline select and change buttons each take a full line. */
+   the deal filters take a full line under search. */
 @media (max-width: 385px) {
     html { scroll-padding-top: 6.25rem; }
     .topnav {
@@ -297,8 +294,7 @@
     }
     .topnav-links { justify-content: flex-start; }
     .nav-link { padding: 0.4rem 0.6rem 0.45rem 0; }
-    .tool-line .mode, .tool-line .mode select { flex: 1 1 100%; width: 100%; }
-    .tool-line .lede.digest { flex: 1 1 100%; }
+    .tool-line .tool-deals, .tool-line .lede.digest, .tool-line .sort-field { flex: 1 1 100%; width: 100%; }
 }
 
 /* Landscape phones are wider than 800px, so page.css gives them the desktop

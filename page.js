@@ -10,7 +10,8 @@ let state = {
     cardDrop: false,
     cardLow: false,
     // Digest chip. "all" is the default and is not a table filter.
-    // visitMode only chooses which baseline those counts use.
+    // New, price drops, hit lowest, and disappeared always use the previous
+    // daily scrape (data-added, data-drop, data-hitlow, and the gone count).
     change: "all",
     grouped: false,
     dropInterval: "all",
@@ -24,17 +25,22 @@ let state = {
     constructions: [],
     abecs: [],
     shoeSizes: [],
-    visitMode: "yesterday",
     sortKey: "rank",
     sortDir: "asc",
     search: ""
 };
 
 const STAR_KEY = "salesscraper2.stars";
-const SNAP_KEY = "salesscraper2.snapshot";
 const VIEWS_KEY = "salesscraper2.views";
+const LAST_VISIT_KEYS = [
+    "salesscraper2.snapshot",
+    "salesscraper2.lastVisit",
+    "salesscraper2.last-visit",
+    "salesscraper2.visit",
+    "salesscraper2.visitMode"
+];
+const RETIRED_VISIT_PARAMS = { baseline: 1, visit: 1, visitmode: 1, since: 1 };
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-let visitGone = [];
 let sparkTip = null;
 let sparkPinned = false;
 let renamingId = "";
@@ -105,6 +111,26 @@ function writeJson(key, value) {
     } catch (err) {
         /* private mode and full storage should not break the page */
     }
+}
+
+// Drop leftover last-visit snapshots. Stars, saved views, layout, and open
+// filter sections live under other keys and are left alone.
+function forgetLastVisit() {
+    try {
+        LAST_VISIT_KEYS.forEach(key => localStorage.removeItem(key));
+    } catch (err) {
+        /* private mode should not break the page */
+    }
+}
+
+// Previous daily scrape. Visit snapshots are not a baseline.
+function scrapeBaseline(row) {
+    const data = (row && row.dataset) || {};
+    return {
+        added: data.added === "1",
+        drop: data.drop === "1",
+        low: data.hitlow === "1"
+    };
 }
 
 function starSet() {
@@ -792,7 +818,8 @@ function rowMatchesNow(row, overrides) {
     const wheelbase = over.wheelbase != null ? over.wheelbase : state.wheelbase;
     const widths = Object.prototype.hasOwnProperty.call(over, "widths") ? over.widths : null;
     const hay = (row.dataset.search || "").toLowerCase();
-    if (state.search && !hay.includes(state.search)) return false;
+    const search = Object.prototype.hasOwnProperty.call(over, "search") ? over.search : state.search;
+    if (search && !hay.includes(String(search).toLowerCase())) return false;
     if (store !== "all" && (row.dataset.store || "") !== store) return false;
     if (part !== "all" && (row.dataset.part || "") !== part) return false;
     const viewPart = part || "Decks";
@@ -807,18 +834,23 @@ function rowMatchesNow(row, overrides) {
     if (specKeyActive("length", viewPart) && length !== "all" && (row.dataset.length || "") !== length) return false;
     if (specKeyActive("wheelbase", viewPart) && wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
     const price = rowPrice(row);
-    if (state.priceMin != null && !(price >= state.priceMin)) return false;
-    if (state.priceMax != null && !(price <= state.priceMax)) return false;
+    const priceMin = Object.prototype.hasOwnProperty.call(over, "priceMin") ? over.priceMin : state.priceMin;
+    const priceMax = Object.prototype.hasOwnProperty.call(over, "priceMax") ? over.priceMax : state.priceMax;
+    if (priceMin != null && !(price >= priceMin)) return false;
+    if (priceMax != null && !(price <= priceMax)) return false;
+    const discountMin = Object.prototype.hasOwnProperty.call(over, "discountMin") ? over.discountMin : state.discountMin;
     const discountMax = Object.prototype.hasOwnProperty.call(over, "discountMax") ? over.discountMax : state.discountMax;
-    if (state.discountMin != null || discountMax != null) {
+    if (discountMin != null || discountMax != null) {
         const discount = rowDiscount(row);
         if (discount == null) return false;
-        if (state.discountMin != null && discount < state.discountMin) return false;
+        if (discountMin != null && discount < discountMin) return false;
         if (discountMax != null && discount > discountMax) return false;
     }
     const score = parseFloat(row.dataset.score);
-    if (state.scoreMin != null && !(score >= state.scoreMin)) return false;
-    if (state.scoreMax != null && !(score <= state.scoreMax)) return false;
+    const scoreMin = Object.prototype.hasOwnProperty.call(over, "scoreMin") ? over.scoreMin : state.scoreMin;
+    const scoreMax = Object.prototype.hasOwnProperty.call(over, "scoreMax") ? over.scoreMax : state.scoreMax;
+    if (scoreMin != null && !(score >= scoreMin)) return false;
+    if (scoreMax != null && !(score <= scoreMax)) return false;
     const watching = Object.prototype.hasOwnProperty.call(over, "watching") ? over.watching : state.watching;
     if (watching && row.dataset.starred !== "1") return false;
     const kinds = Object.prototype.hasOwnProperty.call(over, "kinds") ? over.kinds : state.kinds;
@@ -827,15 +859,17 @@ function rowMatchesNow(row, overrides) {
     if (highlights && row.dataset.highlight !== "1") return false;
     const interval = over.interval != null ? over.interval : state.dropInterval;
     if (!dropInInterval(row, interval)) return false;
-    if (state.cardNew && row.dataset.added !== "1") return false;
-    if (state.cardDrop && row.dataset.drop !== "1") return false;
-    if (state.cardLow && row.dataset.lowest !== "1") return false;
-    const added = state.visitMode === "visit" ? row.dataset.visitNew : row.dataset.added;
-    const drop = state.visitMode === "visit" ? row.dataset.visitDrop : row.dataset.drop;
-    const low = state.visitMode === "visit" ? row.dataset.visitLow : row.dataset.hitlow;
-    if (state.change === "new" && added !== "1") return false;
-    if (state.change === "drop" && drop !== "1") return false;
-    if (state.change === "lowest" && low !== "1") return false;
+    const cardNew = Object.prototype.hasOwnProperty.call(over, "cardNew") ? over.cardNew : state.cardNew;
+    const cardDrop = Object.prototype.hasOwnProperty.call(over, "cardDrop") ? over.cardDrop : state.cardDrop;
+    const cardLow = Object.prototype.hasOwnProperty.call(over, "cardLow") ? over.cardLow : state.cardLow;
+    if (cardNew && row.dataset.added !== "1") return false;
+    if (cardDrop && row.dataset.drop !== "1") return false;
+    if (cardLow && row.dataset.lowest !== "1") return false;
+    const baseline = scrapeBaseline(row);
+    const change = over.change != null ? over.change : state.change;
+    if (change === "new" && !baseline.added) return false;
+    if (change === "drop" && !baseline.drop) return false;
+    if (change === "lowest" && !baseline.low) return false;
     // "removed" opens Recently gone. It does not hide current deals.
     return true;
 }
@@ -1335,6 +1369,7 @@ function applyFilters() {
     updateMoreCount();
     paintActiveChips();
     paintResultCount();
+    paintEmptyState();
     syncUrl();
     paintViews();
     paintNav();
@@ -1949,28 +1984,13 @@ function plural(count, singular, pluralText) {
 }
 
 function updateChangeLine() {
+    const line = document.getElementById("changeLine");
     const prefix = document.getElementById("changePrefix");
-    const note = document.getElementById("visitNote");
-    let added = 0;
-    let drop = 0;
-    let low = 0;
-    let gone = 0;
-    if (state.visitMode === "visit") {
-        dealRows().forEach(row => {
-            if (row.dataset.visitNew === "1") added += 1;
-            if (row.dataset.visitDrop === "1") drop += 1;
-            if (row.dataset.visitLow === "1") low += 1;
-        });
-        gone = visitGone.length;
-        if (prefix) prefix.textContent = "Since your last visit:";
-    } else {
-        const line = document.getElementById("changeLine");
-        added = line ? parseInt(line.dataset.new || "0", 10) : 0;
-        drop = line ? parseInt(line.dataset.drops || "0", 10) : 0;
-        low = line ? parseInt(line.dataset.lows || "0", 10) : 0;
-        gone = line ? parseInt(line.dataset.gone || "0", 10) : 0;
-        if (prefix) prefix.textContent = "Since yesterday:";
-    }
+    const added = line ? parseInt(line.dataset.new || "0", 10) : 0;
+    const drop = line ? parseInt(line.dataset.drops || "0", 10) : 0;
+    const low = line ? parseInt(line.dataset.lows || "0", 10) : 0;
+    const gone = line ? parseInt(line.dataset.gone || "0", 10) : 0;
+    if (prefix) prefix.textContent = "vs previous scrape";
     const map = {
         btnNew: "New " + added,
         btnDrop: "Price drops " + drop,
@@ -1981,86 +2001,6 @@ function updateChangeLine() {
         const node = document.getElementById(id);
         if (node) node.textContent = map[id];
     });
-    if (note) note.hidden = state.visitMode !== "visit" || !note.dataset.message;
-}
-
-function setVisitMode(mode) {
-    state.visitMode = mode === "visit" ? "visit" : "yesterday";
-    const yesterday = document.getElementById("modeYesterday");
-    const visit = document.getElementById("modeVisit");
-    if (yesterday) yesterday.setAttribute("aria-pressed", state.visitMode === "yesterday" ? "true" : "false");
-    if (visit) visit.setAttribute("aria-pressed", state.visitMode === "visit" ? "true" : "false");
-    const baseline = document.getElementById("baselineSelect");
-    if (baseline) baseline.value = state.visitMode;
-    updateChangeLine();
-    applyFilters();
-}
-
-function prepareVisit() {
-    // The saved snapshot is only the last-visit baseline for digest counts.
-    // It is not a filter, and it is not restored into state.change.
-    const data = catalog();
-    const previous = readJson(SNAP_KEY, null);
-    const current = {};
-    const gone = [];
-    dealRows().forEach(row => {
-        current[row.dataset.url] = {
-            price: parseFloat(row.dataset.price),
-            name: row.dataset.name || "",
-            store: row.dataset.store || "",
-            lowest: row.dataset.lowest || "0"
-        };
-    });
-    const note = document.getElementById("visitNote");
-    if (!previous || !previous.items) {
-        dealRows().forEach(row => {
-            row.dataset.visitNew = row.dataset.added || "0";
-            row.dataset.visitDrop = row.dataset.drop || "0";
-            row.dataset.visitLow = row.dataset.hitlow || "0";
-        });
-        visitGone = [];
-        if (note) {
-            note.dataset.message = "1";
-            note.hidden = true;
-            note.textContent = "First visit on this browser. This comparison matches since yesterday. The next visit compares against this scan.";
-        }
-    } else {
-        dealRows().forEach(row => {
-            const prior = previous.items[row.dataset.url];
-            const price = parseFloat(row.dataset.price);
-            if (!prior) {
-                row.dataset.visitNew = "1";
-                row.dataset.visitDrop = "0";
-                row.dataset.visitLow = row.dataset.lowest === "1" ? "1" : "0";
-            } else {
-                row.dataset.visitNew = "0";
-                row.dataset.visitDrop = price < prior.price - 0.001 ? "1" : "0";
-                row.dataset.visitLow = row.dataset.lowest === "1" && price < prior.price - 0.001 ? "1" : "0";
-            }
-        });
-        const liveNames = {};
-        dealRows().forEach(row => {
-            const name = (row.dataset.name || "").trim().toLowerCase();
-            if (name) liveNames[name] = true;
-        });
-        Object.keys(previous.items).forEach(url => {
-            if (!current[url]) gone.push(previous.items[url]);
-        });
-        visitGone = gone;
-        if (note) {
-            note.dataset.message = "1";
-            note.hidden = true;
-            const when = previous.at ? " Last visit " + previous.at + "." : "";
-            const missing = gone.filter(item => {
-                const name = (item.name || "").trim().toLowerCase();
-                return name && !liveNames[name];
-            });
-            note.textContent = missing.length
-                ? "Left since that visit: " + missing.map(item => item.name).slice(0, 8).join(", ") + when
-                : "Nothing in the saved visit is missing from this scan." + when;
-        }
-    }
-    writeJson(SNAP_KEY, { at: data.generated || "", items: current });
 }
 
 function openDrawer(id) {
@@ -2146,7 +2086,6 @@ function clearFilters() {
         constructions: [],
         abecs: [],
         shoeSizes: [],
-        visitMode: "yesterday",
         sortKey: "rank",
         sortDir: "asc",
         search: "",
@@ -2171,12 +2110,6 @@ function clearFilters() {
     if (watching) watching.setAttribute("aria-pressed", "false");
     const grouped = document.getElementById("groupToggle");
     if (grouped) grouped.setAttribute("aria-pressed", "false");
-    const baseline = document.getElementById("baselineSelect");
-    if (baseline) baseline.value = "yesterday";
-    const yesterday = document.getElementById("modeYesterday");
-    const visit = document.getElementById("modeVisit");
-    if (yesterday) yesterday.setAttribute("aria-pressed", "true");
-    if (visit) visit.setAttribute("aria-pressed", "false");
     const panel = document.getElementById("statsPanel");
     const statsToggle = document.getElementById("statsToggle");
     if (panel) panel.hidden = true;
@@ -2414,6 +2347,9 @@ function decodeQuery(query) {
         else if (key === "construction") stateOut.constructions = orderSpecValues("constructions", String(value || "").split(","));
         else if (key === "abec") stateOut.abecs = orderSpecValues("abecs", String(value || "").split(","));
         else if (key === "shoesize") stateOut.shoeSizes = orderSpecValues("shoeSizes", String(value || "").split(","));
+        else if (RETIRED_VISIT_PARAMS[key]) {
+            /* Old last-visit links. Ignore the param and keep the rest. */
+        }
     });
     ["min", "max", "discount", "discountmax", "scoremin", "scoremax"].forEach(key => {
         if (!Number.isFinite(stateOut[key])) stateOut[key] = null;
@@ -3037,24 +2973,53 @@ function applyLayout(mode) {
     fitCardPhotos();
 }
 
-function paintActiveChips() {
-    const host = document.getElementById("activeChips");
-    if (!host) return;
-    const chips = [];
-    function add(label, clear) {
-        chips.push({ label: label, clear: clear });
+let filterOrder = [];
+let filterLabels = {};
+
+function withoutIds(list, drop) {
+    const gone = {};
+    (drop || []).forEach(id => { gone[id] = true; });
+    return (list || []).filter(id => !gone[id]);
+}
+
+function clearField(id) {
+    const node = document.getElementById(id);
+    if (node) node.value = "";
+    applyFilters();
+}
+
+function collectFilterActions() {
+    const entries = [];
+    function add(key, label, clear, lift, chip) {
+        entries.push({
+            key: key,
+            label: label,
+            clear: clear,
+            lift: lift || {},
+            chip: chip !== false
+        });
     }
-    if (state.store !== "all") add("Store: " + state.store, () => filterByStore("all"));
-    if (state.part && state.part !== "Decks") {
+    if (state.search) {
+        add("search", "Search: " + state.search, () => {
+            const node = document.getElementById("searchInput");
+            if (node) node.value = "";
+            state.search = "";
+            applyFilters();
+        }, { search: "" }, false);
+    }
+    if (state.store !== "all") add("store", "Store: " + state.store, () => filterByStore("all"), { store: "all" });
+    if (state.part === "Decks") {
+        add("part", "Decks", () => filterByPart("all"), { part: "all" }, false);
+    } else if (state.part) {
         const typeLabel = state.part === "all" ? "Type: All types" : "Type: " + state.part;
-        add(typeLabel, () => filterByPart("Decks"));
+        add("part", typeLabel, () => filterByPart("Decks"), { part: "Decks" });
     }
     if (state.brand !== "all") {
-        add(state.brand, () => {
+        add("brand", state.brand, () => {
             setSelect("brandSelect", "all");
             state.brand = "all";
             applyFilters();
-        });
+        }, { brand: "all" });
     }
     const covered = {};
     if (specKeyActive("widths")) {
@@ -3064,77 +3029,47 @@ function paintActiveChips() {
             ids.forEach(id => { covered[id] = true; });
             const labelNode = node.querySelector(".width-label");
             const label = labelNode ? labelNode.textContent : ids.join(", ");
-            add(label, () => toggleWidthGroup(node));
+            add("width:" + ids.join(","), label, () => toggleWidthGroup(node), { widths: withoutIds(state.widths, ids) });
         });
         (state.widths || []).forEach(id => {
             if (covered[id]) return;
             const range = widthRanges().find(item => item.id === id);
-            add(range ? range.label : id, () => toggleWidthRange(id));
+            add("width:" + id, range ? range.label : id, () => toggleWidthRange(id), { widths: withoutIds(state.widths, [id]) });
         });
     }
-    if (state.priceMin != null) {
-        add("Min $" + numText(state.priceMin), () => {
-            const node = document.getElementById("priceMin");
-            if (node) node.value = "";
-            applyFilters();
-        });
-    }
-    if (state.priceMax != null) {
-        add("Max $" + numText(state.priceMax), () => {
-            const node = document.getElementById("priceMax");
-            if (node) node.value = "";
-            applyFilters();
-        });
-    }
+    if (state.priceMin != null) add("min", "Min $" + numText(state.priceMin), () => clearField("priceMin"), { priceMin: null });
+    if (state.priceMax != null) add("max", "Max $" + numText(state.priceMax), () => clearField("priceMax"), { priceMax: null });
     if (state.discountMin != null) {
-        add(numText(state.discountMin) + "% off or more", () => {
-            const node = document.getElementById("discountMin");
-            if (node) node.value = "";
-            applyFilters();
-        });
+        add("discount", numText(state.discountMin) + "% off or more", () => clearField("discountMin"), { discountMin: null });
     }
     if (state.discountMax != null) {
-        add(numText(state.discountMax) + "% off or less", () => {
-            const node = document.getElementById("discountMax");
-            if (node) node.value = "";
-            applyFilters();
-        });
+        add("discountmax", numText(state.discountMax) + "% off or less", () => clearField("discountMax"), { discountMax: null });
     }
     if (state.dropInterval && state.dropInterval !== "all") {
         const labels = { day: "Day", week: "Week", month: "Month", quarter: "3 Months" };
-        add("Drop: " + (labels[state.dropInterval] || state.dropInterval), () => setDropInterval("all"));
+        add("interval", "Drop: " + (labels[state.dropInterval] || state.dropInterval), () => setDropInterval("all"), { interval: "all" });
     }
     (state.kinds || []).forEach(kind => {
         const labels = { new: "New", drop: "Price drop", low: "All-time low", back: "Back in stock", hot: "Hot" };
-        add(labels[kind] || kind, () => toggleDealType(kind));
+        add("kind:" + kind, labels[kind] || kind, () => toggleDealType(kind), {
+            kinds: (state.kinds || []).filter(item => item !== kind)
+        });
     });
-    if (state.scoreMin != null) {
-        add("Score " + numText(state.scoreMin) + "+", () => {
-            const node = document.getElementById("scoreMin");
-            if (node) node.value = "";
-            applyFilters();
-        });
-    }
-    if (state.scoreMax != null) {
-        add("Score ≤ " + numText(state.scoreMax), () => {
-            const node = document.getElementById("scoreMax");
-            if (node) node.value = "";
-            applyFilters();
-        });
-    }
+    if (state.scoreMin != null) add("scoremin", "Score " + numText(state.scoreMin) + "+", () => clearField("scoreMin"), { scoreMin: null });
+    if (state.scoreMax != null) add("scoremax", "Score ≤ " + numText(state.scoreMax), () => clearField("scoreMax"), { scoreMax: null });
     if (specKeyActive("length") && state.length !== "all") {
-        add("Length " + state.length, () => {
+        add("length", "Length " + state.length, () => {
             setSelect("lengthSelect", "all");
             state.length = "all";
             applyFilters();
-        });
+        }, { length: "all" });
     }
     if (specKeyActive("wheelbase") && state.wheelbase !== "all") {
-        add("Wheelbase " + state.wheelbase, () => {
+        add("wheelbase", "Wheelbase " + state.wheelbase, () => {
             setSelect("wheelbaseSelect", "all");
             state.wheelbase = "all";
             applyFilters();
-        });
+        }, { wheelbase: "all" });
     }
     const specLabels = {
         diameters: value => "Diameter " + value,
@@ -3149,18 +3084,194 @@ function paintActiveChips() {
     SPEC_FACETS.forEach(facet => {
         if (!specKeyActive(facet.stateKey)) return;
         (state[facet.stateKey] || []).forEach(value => {
-            add(specLabels[facet.stateKey](value), () => toggleSpec(facet.stateKey, value));
+            const lift = {};
+            lift[facet.stateKey] = (state[facet.stateKey] || []).filter(item => item !== value);
+            add("spec:" + facet.stateKey + ":" + value, specLabels[facet.stateKey](value), () => toggleSpec(facet.stateKey, value), lift);
         });
     });
-    if (state.highlights) add("Highlights", () => toggleDealType("highlights"));
-    if (state.watching) add("Watching", () => toggleWatching());
-    if (state.cardNew) add("New deals", () => toggleCard("new"));
-    if (state.cardDrop) add("Price drops", () => toggleCard("drop"));
-    if (state.cardLow) add("All-time lows", () => toggleCard("lowest"));
-    if (state.change === "new") add("New since baseline", () => setChange("all"));
-    if (state.change === "drop") add("Price drops since baseline", () => setChange("all"));
-    if (state.change === "lowest") add("New lows", () => setChange("all"));
-    if (state.change === "removed") add("Deals disappeared", () => setChange("all"));
+    if (state.highlights) add("highlights", "Highlights", () => toggleDealType("highlights"), { highlights: false });
+    if (state.watching) add("watching", "Watching", () => toggleWatching(), { watching: false });
+    if (state.cardNew) add("added", "New deals", () => toggleCard("new"), { cardNew: false });
+    if (state.cardDrop) add("dropped", "Price drops", () => toggleCard("drop"), { cardDrop: false });
+    if (state.cardLow) add("low", "All-time lows", () => toggleCard("lowest"), { cardLow: false });
+    if (state.change === "new") add("change", "New since the previous scrape", () => setChange("all"), { change: "all" });
+    if (state.change === "drop") add("change", "Price drops since the previous scrape", () => setChange("all"), { change: "all" });
+    if (state.change === "lowest") add("change", "Hit lowest since the previous scrape", () => setChange("all"), { change: "all" });
+    if (state.change === "removed") add("change", "Deals disappeared", () => setChange("all"), { change: "all" });
+    return entries;
+}
+
+function rememberFilterOrder(entries) {
+    const live = {};
+    (entries || []).forEach(entry => { live[entry.key] = entry.label; });
+    filterOrder = filterOrder.filter(key => Object.prototype.hasOwnProperty.call(live, key));
+    (entries || []).forEach(entry => {
+        const known = filterOrder.indexOf(entry.key);
+        const changed = filterLabels[entry.key] !== entry.label;
+        if (known < 0 || changed) {
+            if (known >= 0) filterOrder.splice(known, 1);
+            filterOrder.push(entry.key);
+        }
+        filterLabels[entry.key] = entry.label;
+    });
+    Object.keys(filterLabels).forEach(key => {
+        if (!Object.prototype.hasOwnProperty.call(live, key)) delete filterLabels[key];
+    });
+    return filterOrder.slice();
+}
+
+function chooseEmptyResets(entries, revealed, order) {
+    const list = entries || [];
+    const scores = revealed || {};
+    if (!list.length) return { last: null, tight: null, same: true };
+    const byKey = {};
+    list.forEach(entry => { byKey[entry.key] = entry; });
+    const ordered = (order || []).filter(key => byKey[key]);
+    list.forEach(entry => {
+        if (ordered.indexOf(entry.key) < 0) ordered.push(entry.key);
+    });
+    const last = byKey[ordered[ordered.length - 1]] || list[list.length - 1];
+    let tight = list[0];
+    list.forEach(entry => {
+        if ((scores[entry.key] || 0) > (scores[tight.key] || 0)) tight = entry;
+    });
+    if (last && tight && tight.key === last.key && list.length > 1) {
+        const alt = list.filter(entry => entry.key !== last.key)
+            .sort((a, b) => (scores[b.key] || 0) - (scores[a.key] || 0))[0];
+        if (alt && (scores[alt.key] || 0) === (scores[tight.key] || 0)) tight = alt;
+    }
+    return { last: last, tight: tight, same: !last || !tight || last.key === tight.key };
+}
+
+function emptyResetPlan(entries, revealed, order) {
+    const list = entries || [];
+    if (!list.length) {
+        return { summary: "", buttons: [{ action: "clear", label: "Clear all" }] };
+    }
+    const choice = chooseEmptyResets(list, revealed, order);
+    const buttons = [];
+    if (!choice.last || choice.same) {
+        const target = choice.last || choice.tight;
+        if (target) buttons.push({ action: "remove", key: target.key, label: "Remove " + target.label });
+    } else {
+        buttons.push({ action: "remove", key: choice.last.key, label: "Remove last: " + choice.last.label });
+        if (choice.tight) buttons.push({ action: "remove", key: choice.tight.key, label: "Remove tightest: " + choice.tight.label });
+    }
+    buttons.push({ action: "clear", label: "Clear all" });
+    return { summary: list.map(entry => entry.label).join(", "), buttons: buttons };
+}
+
+function goneRows() {
+    return Array.from(document.querySelectorAll("#goneTable tbody tr"));
+}
+
+function goneRowMatches(row, over) {
+    const lift = over || {};
+    const search = Object.prototype.hasOwnProperty.call(lift, "search") ? lift.search : state.search;
+    const store = lift.store != null ? lift.store : state.store;
+    const part = lift.part != null ? lift.part : state.part;
+    const brand = lift.brand != null ? lift.brand : state.brand;
+    const priceMin = Object.prototype.hasOwnProperty.call(lift, "priceMin") ? lift.priceMin : state.priceMin;
+    const priceMax = Object.prototype.hasOwnProperty.call(lift, "priceMax") ? lift.priceMax : state.priceMax;
+    const hay = (row.dataset.search || "").toLowerCase();
+    if (search && !hay.includes(String(search).toLowerCase())) return false;
+    if (store !== "all" && (row.dataset.store || "") !== store) return false;
+    if (part !== "all" && (row.dataset.part || "") !== part) return false;
+    if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
+    const price = parseFloat(row.dataset.price);
+    if (priceMin != null && !(price >= priceMin)) return false;
+    if (priceMax != null && !(price <= priceMax)) return false;
+    return true;
+}
+
+function revealCount(entry, mode) {
+    let count = 0;
+    if (mode === "gone") {
+        goneRows().forEach(row => {
+            if (goneRowMatches(row, entry.lift)) count += 1;
+        });
+        return count;
+    }
+    dealRows().forEach(row => {
+        if (rowMatches(row, entry.lift)) count += 1;
+    });
+    return count;
+}
+
+function visibleDealCount() {
+    let count = 0;
+    dealRows().forEach(row => {
+        if (!row.classList.contains("filtered-out")) count += 1;
+    });
+    return count;
+}
+
+function fillEmpty(node, plan, entries, title) {
+    node.hidden = false;
+    node.replaceChildren();
+    node.setAttribute("role", "status");
+    const heading = document.createElement("h3");
+    heading.textContent = title;
+    const summary = document.createElement("p");
+    summary.textContent = plan.summary
+        ? "Active filters: " + plan.summary + "."
+        : "Nothing else is narrowing this list.";
+    const actions = document.createElement("div");
+    actions.className = "empty-actions";
+    (plan.buttons || []).forEach(item => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = item.action === "clear" ? "text-btn empty-clear" : "text-btn empty-remove";
+        button.textContent = item.label;
+        if (item.action === "clear") button.addEventListener("click", clearFilters);
+        else {
+            button.addEventListener("click", () => {
+                const entry = (entries || []).find(candidate => candidate.key === item.key);
+                if (entry) entry.clear();
+            });
+        }
+        actions.appendChild(button);
+    });
+    node.append(heading, summary, actions);
+}
+
+function paintEmptyState() {
+    const entries = collectFilterActions();
+    const order = rememberFilterOrder(entries);
+    const section = document.getElementById("dealsSection");
+    const emptyDeals = document.getElementById("emptyState");
+    if (emptyDeals) {
+        if (visibleDealCount() === 0) {
+            const revealed = {};
+            entries.forEach(entry => { revealed[entry.key] = revealCount(entry, "deals"); });
+            const title = entries.length ? "No deals match these filters" : "No deals in this scan";
+            fillEmpty(emptyDeals, emptyResetPlan(entries, revealed, order), entries, title);
+            if (section) section.classList.add("is-empty");
+        } else {
+            emptyDeals.hidden = true;
+            emptyDeals.replaceChildren();
+            if (section) section.classList.remove("is-empty");
+        }
+    }
+    const gone = document.getElementById("goneEmpty");
+    if (!gone) return;
+    const rows = goneRows();
+    let shown = 0;
+    rows.forEach(row => { if (goneRowMatches(row)) shown += 1; });
+    if (rows.length && shown === 0 && entries.length) {
+        const revealed = {};
+        entries.forEach(entry => { revealed[entry.key] = revealCount(entry, "gone"); });
+        fillEmpty(gone, emptyResetPlan(entries, revealed, order), entries, "No disappeared deals match these filters");
+    } else {
+        gone.hidden = true;
+        gone.replaceChildren();
+    }
+}
+
+function paintActiveChips() {
+    const host = document.getElementById("activeChips");
+    if (!host) return;
+    const chips = collectFilterActions().filter(entry => entry.chip);
     host.innerHTML = "";
     const wrap = document.getElementById("activeFilters");
     paintFiltersCount(chips.length);
@@ -5191,7 +5302,7 @@ function init() {
     restoreFilterSections();
     syncTypeSections(false);
     applyLayout(readLayout());
-    prepareVisit();
+    forgetLastVisit();
     applyStars();
     updateAgo();
     updateBanners();
@@ -5206,8 +5317,6 @@ function init() {
         const node = document.getElementById(id);
         if (node) node.addEventListener("input", queueFilters);
     });
-    const baseline = document.getElementById("baselineSelect");
-    if (baseline) baseline.addEventListener("change", () => setVisitMode(baseline.value));
     const filtersOpen = document.getElementById("filtersOpen");
     const filtersClose = document.getElementById("filtersClose");
     const filterDrawer = document.getElementById("filterDrawer");
@@ -6624,6 +6733,7 @@ async function openAlerts(options) {
 function appendQuickAlert(parent, card) {
     const button = alertsEl("button", "quick-alert", "Alert me");
     button.type = "button";
+    button.setAttribute("aria-label", "Alert me about this deal");
     button.addEventListener("click", event => {
         if (event.stopPropagation) event.stopPropagation();
         if (event.preventDefault) event.preventDefault();

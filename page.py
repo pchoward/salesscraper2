@@ -1772,15 +1772,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + part_row
         + "</div>"
         '<div class="tool-line">'
-        '<div class="search-box"><input type="text" id="searchInput" placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals"></div>'
-        '<div class="active-filters" id="activeFilters" hidden>'
-        '<div class="active-row" id="activeChips"></div>'
-        '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button></div>'
-        f'<p class="result-count"><span id="statusCounts">{len(records)} deals</span></p>'
+        '<div class="search-box tool-search"><input type="text" id="searchInput" '
+        'placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals"></div>'
+        '<div class="tool-deals">'
         '<p class="lede digest" id="changeLine" '
-        f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}">'
-        '<span class="digest-label sr-only">Digest of what changed. '
-        '<span id="changePrefix">Since yesterday:</span></span> '
+        f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}" '
+        'data-baseline="previous-scrape">'
+        '<span class="digest-label sr-only">Digest of what changed since the previous daily scrape. '
+        'New, price drops, hit lowest, and disappeared use that fixed baseline.</span> '
+        '<span class="baseline-note" id="changePrefix">vs previous scrape</span>'
         '<span class="segment" role="group" aria-label="What changed">'
         '<button type="button" class="change-btn active" id="btnAll" data-change="all" '
         'aria-pressed="true" onclick="setChange(\'all\')">All deals</button> '
@@ -1793,17 +1793,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" '
         f"onclick=\"setChange('removed')\">Disappeared {gone_count}</button>"
         "</span></p>"
-        '<div class="mode" role="group" aria-label="Digest baseline">'
-        '<span class="mode-label">Baseline</span>'
-        '<button type="button" class="mode-btn" id="modeYesterday" aria-pressed="true" '
-        'onclick="setVisitMode(\'yesterday\')">Since yesterday</button>'
-        '<button type="button" class="mode-btn" id="modeVisit" aria-pressed="false" '
-        'onclick="setVisitMode(\'visit\')">Since your last visit</button>'
-        '<select id="baselineSelect" aria-label="Baseline">'
-        '<option value="yesterday">Since yesterday</option>'
-        '<option value="visit">Since your last visit</option>'
-        "</select></div>"
+        f'<p class="result-count"><span id="statusCounts">{len(records)} deals</span></p>'
+        "</div>"
         f"{sort_select}"
+        '<div class="tool-display">'
         '<div class="layout-toggle" role="group" aria-label="Layout">'
         '<button type="button" id="layoutTable" aria-pressed="true">Table</button>'
         '<button type="button" id="layoutCards" aria-pressed="false">Cards</button>'
@@ -1811,7 +1804,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn group-toggle" id="groupToggle" aria-pressed="false" '
         'onclick="toggleGrouped()">Group across stores</button>'
         "</div>"
-        '<p class="lede" id="visitNote" hidden></p>'
+        '<div class="active-filters" id="activeFilters" hidden>'
+        '<div class="active-row" id="activeChips"></div>'
+        '<button type="button" class="text-btn" onclick="clearFilters()">Clear all</button></div>'
+        "</div>"
         "</header>"
         '<div class="shell">'
         '<div class="rail">'
@@ -1875,6 +1871,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="section" id="dealsSection">'
         '<h2 class="sr-only">All Deals</h2>'
         + '<div class="section-content">'
+        '<div id="emptyState" class="empty-state" hidden></div>'
     )
     chunks.append(f'<div class="table-wrap"><table id="mainTable"><thead><tr>{"".join(head)}</tr></thead><tbody>')
     card_chunks = ['<div class="card-grid" id="cardGrid">']
@@ -2567,6 +2564,7 @@ def _gone_section(history, current_data, today, failed_keys):
         '<span class="toggle-icon">▼</span></div>'
         '<div class="section-content collapsed">'
         f'<p class="lede">{escape(note)}</p>'
+        '<div id="goneEmpty" class="empty-state" hidden></div>'
         '<table id="goneTable"><thead><tr>'
         + _sort_headers("goneTable", (
             ("Store", "store"),
