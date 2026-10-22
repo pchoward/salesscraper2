@@ -20,11 +20,11 @@ CATALOG = {
 
 
 class TrackedCatalogTests(unittest.TestCase):
-    def test_yaml_file_loads_the_two_sneaker_rules(self):
+    def test_yaml_file_loads_the_sneaker_rules(self):
         catalog = load_tracked()
         ids = [rule["id"] for rule in catalog["sneakers"]]
-        self.assertEqual(ids, ["vans-wafflecup", "nike-sb-dunk"])
-        self.assertEqual([rule["brand"] for rule in catalog["sneakers"]], ["Vans", "Nike"])
+        self.assertEqual(ids, ["vans-wafflecup", "vans-popcush", "nike-sb-dunk"])
+        self.assertEqual([rule["brand"] for rule in catalog["sneakers"]], ["Vans", "Vans", "Nike"])
         self.assertIn("grip tape", catalog["phrases"])
         self.assertIn("Hardware", catalog["types"])
 
@@ -80,6 +80,23 @@ sneakers:
         self.assertIsNone(filter_reason("Bones Reds Bearings", "Bearings", price_new="24", price_old="32"))
         self.assertIsNone(
             filter_reason("Vans Skate Half Cab Wafflecup Shoes", "Sneakers", price_new="59", price_old="85")
+        )
+        self.assertIsNone(
+            filter_reason("Vans Skate Old Skool PopCush Shoes", "Sneakers", price_new="59", price_old="85")
+        )
+        self.assertIsNone(
+            filter_reason("Vans Skate Old Skool Pop Cush Shoes", "Sneakers", price_new="59", price_old="85")
+        )
+        self.assertIsNone(
+            filter_reason("Vans Skate Old Skool popcush Shoes", "Sneakers", price_new="59", price_old="85")
+        )
+        self.assertEqual(
+            filter_reason("Vans Skate Old Skool Shoes", "Sneakers", price_new="59", price_old="85"),
+            "not a tracked sneaker",
+        )
+        self.assertEqual(
+            filter_reason("Vans Skate Old Skool ComfyCush Shoes", "Sneakers", price_new="59", price_old="85"),
+            "not a tracked sneaker",
         )
         self.assertEqual(filter_reason("Nike Dunk Low", "Sneakers", price_new="70", price_old="90"), "not a tracked sneaker")
         self.assertEqual(filter_reason("Vans Hat", "Sneakers", price_new="14", price_old="22"), "apparel")
