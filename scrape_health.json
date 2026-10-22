@@ -2509,14 +2509,14 @@
           }
         },
         "CCS_Sneakers": {
-          "count": 12,
+          "count": 39,
           "failed": false,
           "diagnostics": {
             "expected_count": 12,
             "baseline_samples": 5,
             "median_absolute_deviation": 0,
-            "actual_count": 12,
-            "percentage_change": 0.0,
+            "actual_count": 39,
+            "percentage_change": 225.0,
             "reason": "normal_variation"
           }
         },
@@ -2763,7 +2763,7 @@
           }
         }
       },
-      "scanned_at": "2026-10-22T14:52:35+00:00"
+      "scanned_at": "2026-10-22T15:16:20+00:00"
     }
   ],
   "baseline": {
@@ -2833,7 +2833,7 @@
     },
     "CCS_Sneakers": {
       "date": "2026-10-22",
-      "count": 12
+      "count": 39
     },
     "CCS_Accessories": {
       "date": "2026-10-22",
@@ -3018,7 +3018,7 @@
       },
       {
         "date": "2026-10-22",
-        "count": 12
+        "count": 39
       }
     ],
     "CCS_Trucks": [
