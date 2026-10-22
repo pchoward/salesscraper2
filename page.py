@@ -2177,20 +2177,21 @@ def _card_html(record):
     currency = item.get("currency")
     symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
     face = _card_status(record)
+    # The percent is the store's own markdown versus its list price. It stays
+    # beside the sale price, not on the photo, and it is not a tracked-market saving.
     if percent == "N/A":
-        off_html = '<span class="discount card-off none">No discount info</span>'
+        off_html = (
+            '<span class="discount card-off none" '
+            'title="This store did not publish a list price, so there is no claimed discount.">'
+            "No discount info</span>"
+        )
     else:
-        off_html = f'<span class="discount card-off {discount}">{escape(percent)}</span>'
+        off_html = (
+            f'<span class="discount card-off {discount}" '
+            'title="Store\'s claimed discount versus its list price, not a tracked market price.">'
+            f"{escape(percent)} vs list</span>"
+        )
     drop_badge = _drop_badge(record)
-    if drop_badge:
-        overlay = drop_badge
-        extra_off = off_html if percent != "N/A" else ""
-    elif percent == "N/A":
-        overlay = ""
-        extra_off = off_html
-    else:
-        overlay = off_html
-        extra_off = ""
     average = record.get("average")
     avg_html = ""
     if average is not None:
@@ -2206,7 +2207,7 @@ def _card_html(record):
     return (
         f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
-        f'<div class="media">{_thumb(record["image"], record["name"], large=True)}{overlay}</div>'
+        f'<div class="media">{_thumb(record["image"], record["name"], large=True)}{drop_badge}</div>'
         '<div class="card-face">'
         f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
         "</div>"
@@ -2214,9 +2215,9 @@ def _card_html(record):
         f"{_product_link(item)}</h3></div></div>"
         '<div class="card-prices">'
         f'<span class="now-price">Now: {_money(item.get("price_new"), currency)}</span>'
-        f"{avg_html}</div>"
+        f"{off_html}{avg_html}</div>"
         f"{since_html}"
-        f'<div class="card-badge">{extra_off}{face}</div>'
+        f'<div class="card-badge">{face}</div>'
         f'<div class="card-sparkline">{_spark_html(record, width=156)}</div>'
         '<button type="button" class="card-more" aria-expanded="false">Details</button>'
         f'<div class="card-score" hidden>{_why_html(record, dom_id="why-card-" + str(record["id"]))}</div>'

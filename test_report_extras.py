@@ -976,8 +976,8 @@ const shoe = quickFacts(
 );
 const labels = shoe.rows.map(row => row.label + "=" + row.value).join(" | ");
 if (!labels.includes("List price=$85.00")) throw new Error(labels);
-if (!labels.includes("You save=$25.50")) throw new Error(labels);
-if (!labels.includes("Off=30% off")) throw new Error(labels);
+if (labels.includes("You save")) throw new Error(labels);
+if (!labels.includes("Claimed discount=30% vs list")) throw new Error(labels);
 if (!labels.includes("All-time low=$55.00 on Oct 1")) throw new Error(labels);
 if (!labels.includes("90-day average=$64.75")) throw new Error(labels);
 if (!labels.includes("First seen=Sep 1")) throw new Error(labels);
