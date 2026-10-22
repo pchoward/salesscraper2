@@ -202,6 +202,12 @@
         min-height: 2.75rem;
         font-size: 0.9rem;
     }
+    #quickView .quick-history,
+    #quickView .quick-also,
+    #quickView .quick-price-note {
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
     #quickView .quick-signal { font-size: 0.85rem; }
     #quickView .quick-stores a { font-size: 0.85rem; }
     #quickView .quick-readout { font-size: 0.85rem; }

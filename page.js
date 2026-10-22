@@ -484,19 +484,29 @@ function paintOfferPrices() {
         });
         node.querySelectorAll(".discount").forEach(discountNode => {
             if (!discountNode.dataset.baseText) discountNode.dataset.baseText = discountNode.textContent;
+            if (!discountNode.dataset.baseTitle) discountNode.dataset.baseTitle = discountNode.title || "";
             if (!discountNode.dataset.baseClass) {
                 discountNode.dataset.baseClass = ["high", "medium", "low", "none"].filter(name => discountNode.classList.contains(name)).join(" ");
             }
             ["high", "medium", "low", "none"].forEach(name => discountNode.classList.remove(name));
             if (!offer) {
                 discountNode.textContent = discountNode.dataset.baseText;
+                if (discountNode.dataset.baseTitle) discountNode.title = discountNode.dataset.baseTitle;
                 String(discountNode.dataset.baseClass || "").split(/\s+/).filter(Boolean).forEach(name => discountNode.classList.add(name));
                 return;
             }
             const percent = rowDiscount(node);
             const klass = percent == null ? "none" : percent >= 40 ? "high" : percent >= 25 ? "medium" : "low";
             discountNode.classList.add(klass);
-            discountNode.textContent = percent == null ? "N/A" : Math.round(percent) + "%";
+            const claimed = discountNode.classList.contains("card-off");
+            if (claimed) {
+                discountNode.title = percent == null
+                    ? "This store did not publish a list price, so there is no claimed discount."
+                    : "Store's claimed discount versus its list price, not a tracked market price.";
+                discountNode.textContent = percent == null ? "No discount info" : Math.round(percent) + "% vs list";
+            } else {
+                discountNode.textContent = percent == null ? "N/A" : Math.round(percent) + "%";
+            }
         });
     });
 }
@@ -3894,7 +3904,7 @@ function quickPercent(discount) {
     const text = Math.abs(rounded - Math.round(rounded)) < 0.05
         ? String(Math.round(rounded))
         : rounded.toFixed(1);
-    return text + "% off";
+    return text + "% vs list";
 }
 
 function quickDayLabel(count) {
@@ -3923,13 +3933,9 @@ function quickFacts(dataset, item, generated) {
     }
     const rows = [];
     const list = Number(dataset.original);
-    const now = Number(dataset.price);
     if (Number.isFinite(list) && list > 0) rows.push({ label: "List price", value: quickMoney(symbol, list) });
-    if (Number.isFinite(list) && Number.isFinite(now) && list - now > 0.009) {
-        rows.push({ label: "You save", value: quickMoney(symbol, list - now) });
-    }
     const percent = quickPercent(dataset.discount);
-    if (percent) rows.push({ label: "Off", value: percent });
+    if (percent) rows.push({ label: "Claimed discount", value: percent });
     if (atl) {
         const when = quickShortDate(atl.date);
         rows.push({
@@ -3973,7 +3979,7 @@ function quickFacts(dataset, item, generated) {
         const price = quickMoney(String(offer.currency || "USD").toUpperCase() === "EUR" ? "€" : symbol, offer.price);
         let label = offer.store || "Store";
         if (price) label += " " + price;
-        if (offer.cheapest) label += " · lowest";
+        if (offer.cheapest) label += " · cheapest listed";
         stores.push({ url: offer.url, label: label });
     });
     const windowEnd = String(generated || "").slice(0, 10);
@@ -4154,10 +4160,25 @@ function fillQuickView(card) {
         const badge = document.createElement("span");
         badge.className = "quick-discount";
         badge.textContent = discount;
+        badge.title = "Store's claimed discount versus its list price. Not compared with tracked prices.";
         price.appendChild(badge);
     }
     identity.append(store, heading, price);
     appendQuickKeyFacts(identity, card.dataset, facts);
+    const historyText = quickHistoryNote(facts);
+    if (historyText) {
+        const history = document.createElement("p");
+        history.className = "quick-history";
+        history.textContent = historyText;
+        identity.appendChild(history);
+    }
+    const alsoText = quickAlsoLine(item);
+    if (alsoText) {
+        const also = document.createElement("p");
+        also.className = "quick-also";
+        also.textContent = alsoText;
+        identity.appendChild(also);
+    }
     const signal = quickPriceSignal(card.dataset, card);
     if (signal) identity.appendChild(quickSignal(signal));
     if (item.stage) {
@@ -4186,6 +4207,59 @@ function fillQuickView(card) {
     appendQuickMore(body, card, item, facts);
 }
 
+function quickHistoryNote(facts) {
+    facts = facts || {};
+    const points = facts.points || [];
+    const symbol = facts.symbol || "$";
+    if (!points.length) return "No tracked price history yet.";
+    const only = points[0];
+    if (points.length === 1) {
+        const price = quickMoney(symbol, only[1]);
+        const when = typeof quickShortDate === "function" ? quickShortDate(only[0]) : "";
+        const shown = price ? " (" + price + (when ? " on " + when : "") + ")" : "";
+        return "Only one tracked price" + shown + ". Not enough history to compare.";
+    }
+    const bits = [];
+    const low = facts.atl && Number.isFinite(Number(facts.atl.price)) ? facts.atl : null;
+    if (low) {
+        const when = typeof quickShortDate === "function" ? quickShortDate(low.date) : "";
+        bits.push("Tracked low " + quickMoney(symbol, low.price) + (when ? " on " + when : ""));
+    }
+    const last = points[points.length - 1];
+    let prior = null;
+    for (let i = points.length - 2; i >= 0; i--) {
+        if (Math.abs(Number(points[i][1]) - Number(last[1])) > 0.001) {
+            prior = points[i];
+            break;
+        }
+    }
+    const priorIsLow = !!(prior && low
+        && String(prior[0]).slice(0, 10) === String(low.date || "").slice(0, 10)
+        && Math.abs(Number(prior[1]) - Number(low.price)) < 0.001);
+    if (prior && !priorIsLow) {
+        const when = typeof quickShortDate === "function" ? quickShortDate(prior[0]) : "";
+        bits.push("Previous tracked price " + quickMoney(symbol, prior[1]) + (when ? " on " + when : ""));
+    }
+    bits.push(points.length + " tracked prices");
+    return bits.join(" · ") + ".";
+}
+
+function quickAlsoLine(item) {
+    const offers = ((item && item.offers) || []).filter(offer => offer && offer.url && offer.url !== item.url);
+    if (!offers.length) return "";
+    const own = ((item && item.offers) || []).find(offer => offer && offer.url === item.url);
+    const ownPrice = own ? Number(own.price) : NaN;
+    return offers.map(offer => {
+        const symbol = String(offer.currency || "USD").toUpperCase() === "EUR" ? "€" : "$";
+        const price = Number(offer.price);
+        const money = Number.isFinite(price) ? quickMoney(symbol, price) : "";
+        const name = offer.store || "Store";
+        const cheaper = Number.isFinite(ownPrice) && Number.isFinite(price) && price + 0.001 < ownPrice;
+        const label = (cheaper ? "Cheaper at " : "Also at ") + name;
+        return money ? label + " " + money : label;
+    }).join(" · ");
+}
+
 function appendQuickKeyFacts(parent, dataset, facts) {
     dataset = dataset || {};
     facts = facts || {};
@@ -4193,7 +4267,12 @@ function appendQuickKeyFacts(parent, dataset, facts) {
     const bits = [];
     const list = Number(dataset.original);
     if (Number.isFinite(list) && list > 0) {
-        bits.push({ label: "Original", value: quickMoney(symbol, list), original: true });
+        bits.push({
+            label: "List price",
+            value: quickMoney(symbol, list),
+            original: true,
+            title: "Store's list price. The percent beside the sale price is this store's claimed discount, not a tracked market price."
+        });
     }
     if (facts.atl && Number.isFinite(Number(facts.atl.price))) {
         const when = typeof quickShortDate === "function" ? quickShortDate(facts.atl.date) : "";
@@ -4218,6 +4297,7 @@ function appendQuickKeyFacts(parent, dataset, facts) {
         }
         const item = document.createElement("span");
         item.className = bit.original ? "quick-key is-original" : "quick-key";
+        if (bit.title) item.title = bit.title;
         const label = document.createElement("span");
         label.className = "quick-key-label";
         label.textContent = bit.label;
@@ -4296,6 +4376,10 @@ function appendQuickMore(body, card, item, facts) {
     const summary = document.createElement("summary");
     summary.textContent = "More details";
     more.appendChild(summary);
+    const priceNote = document.createElement("p");
+    priceNote.className = "quick-price-note";
+    priceNote.textContent = "List price is the store's claimed original, not a tracked market price. Average and lowest use prices tracked here.";
+    more.appendChild(priceNote);
     appendQuickHistoryMeta(more, facts);
     more.appendChild(quickCompareBlock(card.dataset, facts));
     if ((facts.points || []).length >= 2) {
@@ -4378,23 +4462,29 @@ function quickCompare(dataset, facts) {
     else if (dataset.fresh === "1") tracked = "New";
     const average = facts.average == null ? null : Number(facts.average);
     const low = facts.atl ? Number(facts.atl.price) : null;
+    const samples = ((facts && facts.points) || []).length;
+    const averageHint = !Number.isFinite(average)
+        ? "No tracked prices in the last 90 days"
+        : samples < 2
+            ? "Only one tracked price in the last 90 days, so this is that price"
+            : "Mean of tracked sale prices in the last 90 days";
     return [
         { label: "Now", value: Number.isFinite(now) ? quickMoney(symbol, now) : "—", hint: "Current sale price" },
         {
-            label: "Original",
+            label: "List price",
             value: Number.isFinite(list) && list > 0 ? quickMoney(symbol, list) : "—",
-            hint: "Original price",
+            hint: "Store list price, not a tracked market price",
             original: Number.isFinite(list) && list > 0
         },
         {
             label: "Average",
-            value: Number.isFinite(average) ? quickMoney(symbol, average) : "—",
-            hint: "90-day average sale price"
+            value: Number.isFinite(average) ? quickMoney(symbol, average) : "No history",
+            hint: averageHint
         },
         {
             label: "Lowest",
-            value: Number.isFinite(low) ? quickMoney(symbol, low) : "—",
-            hint: "Lowest tracked price"
+            value: Number.isFinite(low) ? quickMoney(symbol, low) : "No history",
+            hint: Number.isFinite(low) ? "Lowest price tracked for this listing" : "No tracked low yet"
         },
         { label: "Tracked", value: tracked, hint: "How long this listing has been tracked" }
     ];
@@ -4700,7 +4790,7 @@ function appendQuickOffers(parent, item) {
         link.rel = "noopener";
         link.textContent = row.store + (row.price ? " " + row.price : "");
         const meta = document.createElement("span");
-        meta.textContent = row.availability + (row.cheapest ? " · lowest" : "");
+        meta.textContent = row.availability + (row.cheapest ? " · cheapest listed" : "");
         li.append(link, meta);
         list.appendChild(li);
     });
