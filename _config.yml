@@ -1,6 +1,8 @@
 # Only the deal page and its assets belong on GitHub Pages.
 # Keep new internal roots excluded; regression tests enforce this boundary.
 exclude:
+  - "devtools.py"
+  - "test_devtools.py"
   - ".github"
   - ".gitignore"
   - "README.md"
