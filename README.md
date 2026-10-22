@@ -429,3 +429,93 @@ For real retailer validation, manually run **ShredDeals - Preview Site** with
 **scrape `mtb`** and **ref `codex/mtb-catalog`** before merging this branch.
 
 Sport-specific sidebar field definitions and the BMX/Ski `technical_offers` integration contract are documented in [docs/sport-spec-filters.md](docs/sport-spec-filters.md).
+
+## Fast development previews
+
+Use the current source code with saved data; a full scrape is not needed to test
+HTML, CSS, JavaScript, filters, or most parser changes. Activate the environment:
+
+```bash
+source .venv/bin/activate
+```
+
+Rebuild the page **without any retailer requests or browser startup**:
+
+```bash
+python -m devtools rebuild
+```
+
+The command prints `Preview HTML: /tmp/skatedeals-dev-<run-id>/preview.html` with
+the exact absolute path. Open that file locally or use the workspace file viewer.
+The page embeds the normal CSS/JavaScript, so no development server is required.
+Product images still use their normal remote URLs when you open the HTML.
+The preview displays the original saved production scan timestamp, never the
+rebuild time. Historical health files with only a scan date retain that date.
+No daily new-item/price-drop events are invented from a single saved snapshot.
+The usual catalog, price charts, watch matches, and sale metadata remain available.
+
+Run one retailer/category with the existing parser and pagination:
+
+```bash
+python -m devtools scrape --retailer Tactics --category Sneakers
+python -m devtools scrape --retailer SkateWarehouse --category Decks
+```
+
+Retailers: `Zumiez`, `SkateWarehouse`, `CCS`, `Tactics` (case-insensitive).
+Categories: `Decks`, `Wheels`, `Trucks`, `Bearings`, `Sneakers`, `Accessories`.
+Disabled retailers and unknown pairs are rejected before network requests.
+The normal retailer timeout and fetch-error handling still apply.
+
+Optionally restrict the development results to a brand:
+
+```bash
+python -m devtools scrape --retailer Zumiez --category Sneakers --brand Vans
+python -m devtools scrape --retailer CCS --category Sneakers --brand "New Balance"
+```
+
+For Zumiez sneakers, this reuses the brand sale-query logic and requires live
+robots.txt to explicitly allow the query. An unavailable/disallowed query fails
+without falling back to the whole shoe sale. You must still use a valid retailer
+brand facet. Other combinations fetch the normal category pages/shared feed and
+then filter the returned names/descriptions for that brand. The command prints
+which strategy applies; **post-filtering does not reduce discovery requests**.
+Existing product-selection rules still apply, so an untracked model may return
+no products. No tracked.yaml changes are made by `--brand`.
+
+Targeted previews are prominently labeled **PARTIAL** and show only selected
+results. `targeted-result.json` records scope, failure status, candidate/kept counts,
+elapsed time, HTTP calls, browser starts, and navigations. These counters exclude
+browser subresources and are not total wire-request counts. A failed fetch exits
+nonzero and produces a clearly failed partial preview, rather than an empty
+production scan. Saved inputs that cannot be read/validated fail before fetching.
+
+To choose saved inputs or a predictable preview directory:
+
+```bash
+python -m devtools rebuild --source-dir /path/to/saved-snapshot --output-dir /tmp/skatedeals-preview
+```
+
+The source directory must contain `previous_data.json`, `price_history.json`,
+`scrape_health.json`, `site_sales.json`, `tracked.yaml`, and `watchlist.yaml`.
+The default is this checkout's latest local saved files; the tool never pulls Git
+or refreshes production data automatically. Output must be a **new** directory
+outside both the checkout and input directory. Existing directories and symlink
+outputs are rejected. Each run copies read-only input snapshots and executes in
+a separate process/directory, containing all parser debug files and outputs.
+`manifest.json` records input hashes and `complete_production_scan: false`.
+
+Development commands never run production persistence, stock confirmation, miss
+tracking, lifecycle updates, health recording, or notification delivery. They do
+not copy notification checkpoints. SMTP/subscriber delivery settings are removed
+from the child environment; SMTP connections are also blocked. Rebuild blocks
+outbound connections, and preview HTML blocks API connections/forms/frames so
+opening its alerts UI cannot contact a live subscriber service. Targeted results
+are never merged into production data or passed through the production lifecycle
+pipeline. Omitted categories/brands cannot be interpreted as discontinued products.
+The production schedule and command remain unchanged.
+
+For still faster parser iteration, use the existing offline fixtures:
+
+```bash
+python -m unittest test_devtools test_coverage test_tracked test_zumiez_speed
+```

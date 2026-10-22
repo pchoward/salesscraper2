@@ -10,6 +10,8 @@ exclude:
   - "design"
   - "previews"
   - "test_shreddeals.py"
+  - "devtools.py"
+  - "test_devtools.py"
   - ".github"
   - ".gitignore"
   - "README.md"
