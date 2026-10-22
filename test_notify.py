@@ -385,29 +385,20 @@ class StoreWarningTests(unittest.TestCase):
             "last_positive_count": 12,
         }
 
-    def test_warning_alone_sends_mail(self):
+    def test_warning_alone_does_not_send_subscriber_mail(self):
         digest = Digest(warnings=[self._warning()])
-        self.assertTrue(should_send(digest))
-        self.assertEqual(subject_line(digest, WHEN), "Skate deals: 1 store warning (Sep 28)")
+        self.assertFalse(should_send(digest))
         with patch("notify.smtplib.SMTP") as smtp:
-            server = smtp.return_value.__enter__.return_value
-            self.assertTrue(send_digest(digest, env=_full_env(), when=WHEN))
-        smtp.assert_called_once()
-        message = server.send_message.call_args[0][0]
-        self.assertEqual(message["Subject"], "Skate deals: 1 store warning (Sep 28)")
-        html = message.get_payload()[1].get_content()
-        plain = message.get_payload()[0].get_content()
-        self.assertIn("Store check failed", html)
-        self.assertIn("came back with no items two runs in a row", html)
-        self.assertIn("STORE CHECK FAILED", plain)
-        self.assertIn("Zumiez Decks", plain)
+            self.assertFalse(send_digest(digest, env=_full_env(), when=WHEN))
+        smtp.assert_not_called()
 
-    def test_warning_with_a_deal_is_included_in_the_subject(self):
+    def test_warning_with_deal_stays_out_of_subject_and_bodies(self):
         digest = Digest(new_items=[_deck()], warnings=[self._warning()])
-        self.assertEqual(
-            subject_line(digest, WHEN),
-            "Skate deals: 1 new, 0 price drops, 1 store warning (Sep 28)",
-        )
+        self.assertEqual(subject_line(digest, WHEN), "Skate deals: 1 new, 0 price drops (Sep 28)")
+        for body in (render_plain(digest, DEFAULT_REPORT_URL), render_html(digest, DEFAULT_REPORT_URL)):
+            self.assertNotIn("Store check failed", body)
+            self.assertNotIn("STORE CHECK FAILED", body)
+            self.assertNotIn("two runs in a row", body)
 
     def test_all_time_low_and_cross_store_render_when_present(self):
         item = _deck()

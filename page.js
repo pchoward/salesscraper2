@@ -3218,22 +3218,7 @@ function initToTop() {
 }
 
 function updateFreshness() {
-    const header = document.querySelector("header");
-    const note = document.getElementById("freshness");
-    const node = document.getElementById("lastScan");
-    if (!header || !node) return;
-    const parsed = parseScan(node.getAttribute("datetime") || "");
-    const limit = parseFloat(header.getAttribute("data-stale-hours") || "36");
-    const stale = Number.isFinite(parsed) && (Date.now() - parsed) / 3600000 > limit;
-    const failed = catalog().failed || [];
-    header.classList.toggle("is-stale", stale);
-    header.classList.toggle("is-failed", failed.length > 0);
-    if (!note) return;
-    const parts = [];
-    if (failed.length) parts.push("Scan failed for " + failed.join(", "));
-    if (stale) parts.push("Last scan is stale (older than " + limit + " hours)");
-    else if (!failed.length) parts.push("Scan is current");
-    if (parts.length) note.textContent = parts.join(". ");
+    // The last-update timestamp is public; scraper health stays internal.
 }
 
 function addDays(iso, delta) {
@@ -5467,17 +5452,6 @@ function init() {
     });
     updateChangeLine();
     paintViews();
-    const diagToggle = document.getElementById("diagToggle");
-    const diagnostics = document.getElementById("diagnostics");
-    if (diagToggle && diagnostics) {
-        diagToggle.addEventListener("click", () => {
-            const open = diagnostics.hasAttribute("hidden");
-            if (open) diagnostics.removeAttribute("hidden");
-            else diagnostics.setAttribute("hidden", "");
-            diagToggle.setAttribute("aria-expanded", open ? "true" : "false");
-            if (open) diagnostics.scrollIntoView({ block: "nearest" });
-        });
-    }
     const home = document.getElementById("homeReset");
     if (home) home.addEventListener("click", clearFilters);
     window.addEventListener("popstate", restoreFromUrl);

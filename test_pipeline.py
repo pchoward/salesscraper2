@@ -229,7 +229,7 @@ class CompletenessPipelineTests(unittest.TestCase):
                                 "build_report_html": "report"}.items():
                 stack.enter_context(patch.object(scraper, name, return_value=value))
             mocks = {name: stack.enter_context(patch.object(scraper, name)) for name in
-                     ["confirm_stock", "save_current", "save_price_history", "save_health", "save_site_sales", "safe_write_file", "send_digest"]}
+                     ["confirm_stock", "save_current", "save_price_history", "save_health", "save_site_sales", "safe_write_file", "send_digest", "send_admin_warnings"]}
             scraper.main()
         self.assertEqual(mocks["confirm_stock"].call_args.args[2], {self.key})
         self.assertEqual(len(mocks["save_current"].call_args.args[0][self.key]), 100)
@@ -240,6 +240,7 @@ class CompletenessPipelineTests(unittest.TestCase):
         digest = mocks["send_digest"].call_args.args[0]
         self.assertFalse(digest.removed)
         self.assertTrue(digest.warnings)
+        self.assertEqual(mocks["send_admin_warnings"].call_args.args[0], digest.warnings)
         saved_history = mocks["save_price_history"].call_args.args[0]
         self.assertEqual(saved_history[url]["miss_streak"], 1)
         self.assertEqual(saved_history[url]["observation_count"], 1)
