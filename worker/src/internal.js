@@ -2,7 +2,8 @@
 // HMAC_SECRET (see crypto.internalSignature) and can be used once.
 //
 // GET  /v1/internal/routes      verified subscribers' rules, no addresses
-// POST /v1/internal/deliveries  engine hits to email, idempotent per event
+// POST /v1/internal/deliveries  engine hits and the daily digest to email,
+//                               idempotent per event
 
 import { internalSignature, safeEqual } from "./crypto.js";
 import { digestEmail, sendEmail, STORE_HOSTS } from "./email.js";
@@ -24,6 +25,10 @@ export const REASONS = new Set([
 const MAX_DELIVERIES = 500;
 const MAX_HITS = 25;
 const MAX_EVENTS_PER_HIT = 20;
+// The general digest: one email section a day, at most this many listings.
+// `total` says how many qualified before the cap.
+export const MAX_DIGEST_ITEMS = 30;
+export const DIGEST_KINDS = new Set(["new", "drop", "low"]);
 
 export async function authenticate(ctx, request, rawBody) {
   const timestamp = request.headers.get("X-SkateDeals-Timestamp") || "";
@@ -84,16 +89,8 @@ function price(value) {
   return Number.isFinite(number) && number >= 0 && number < 100000 ? number.toFixed(2) : undefined;
 }
 
-function cleanHit(input) {
-  if (!input || typeof input !== "object") return null;
-  const eventIds = input.event_ids;
-  if (!Array.isArray(eventIds) || eventIds.length < 1 || eventIds.length > MAX_EVENTS_PER_HIT) return null;
-  if (!eventIds.every((id) => typeof id === "string" && HEX64.test(id))) return null;
-  const reasons = input.reasons;
-  if (!Array.isArray(reasons) || reasons.length < 1 || !reasons.every((reason) => REASONS.has(reason))) return null;
-  const note = input.note === undefined || input.note === "" ? "" : shortText(input.note, 160);
-  if (note === null) return null;
-  const item = input.item || {};
+function cleanItem(item) {
+  if (!item || typeof item !== "object") return null;
   const name = shortText(item.name, 200);
   const store = shortText(item.store, 40);
   const part = shortText(item.part, 20);
@@ -108,12 +105,38 @@ function cleanHit(input) {
   const priceNew = price(item.price_new);
   const priceOld = price(item.price_old);
   if (!name || !store || !part || !priceNew || priceOld === undefined) return null;
-  return {
-    event_ids: [...new Set(eventIds)],
-    reasons: [...new Set(reasons)],
-    note,
-    item: { name, store, part, url: url.href, price_new: priceNew, ...(priceOld ? { price_old: priceOld } : {}) },
-  };
+  return { name, store, part, url: url.href, price_new: priceNew, ...(priceOld ? { price_old: priceOld } : {}) };
+}
+
+function cleanHit(input) {
+  if (!input || typeof input !== "object") return null;
+  const eventIds = input.event_ids;
+  if (!Array.isArray(eventIds) || eventIds.length < 1 || eventIds.length > MAX_EVENTS_PER_HIT) return null;
+  if (!eventIds.every((id) => typeof id === "string" && HEX64.test(id))) return null;
+  const reasons = input.reasons;
+  if (!Array.isArray(reasons) || reasons.length < 1 || !reasons.every((reason) => REASONS.has(reason))) return null;
+  const note = input.note === undefined || input.note === "" ? "" : shortText(input.note, 160);
+  if (note === null) return null;
+  const item = cleanItem(input.item);
+  if (!item) return null;
+  return { event_ids: [...new Set(eventIds)], reasons: [...new Set(reasons)], note, item };
+}
+
+/** The digest section: one event id for the whole section, so it goes out once. */
+function cleanDigest(input) {
+  if (!input || typeof input !== "object" || !HEX64.test(input.event_id || "")) return null;
+  const items = input.items;
+  if (!Array.isArray(items) || items.length < 1 || items.length > MAX_DIGEST_ITEMS) return null;
+  if (!Number.isInteger(input.total) || input.total < items.length || input.total > 100000) return null;
+  const clean = [];
+  for (const entry of items) {
+    if (!entry || !DIGEST_KINDS.has(entry.kind)) return null;
+    const item = cleanItem(entry.item);
+    const before = price(entry.price_before);
+    if (!item || before === undefined || (entry.kind === "drop" && !before)) return null;
+    clean.push({ kind: entry.kind, item, ...(before ? { price_before: before } : {}) });
+  }
+  return { event_id: input.event_id, total: input.total, items: clean };
 }
 
 function parseDeliveries(raw) {
@@ -133,12 +156,14 @@ function parseDeliveries(raw) {
     }
     if (seen.has(delivery.delivery_id)) throw new HttpError(400, "invalid_request");
     seen.add(delivery.delivery_id);
-    if (!Array.isArray(delivery.hits) || delivery.hits.length < 1 || delivery.hits.length > MAX_HITS) {
-      throw new HttpError(400, "invalid_request");
-    }
-    const hits = delivery.hits.map(cleanHit);
+    const rawHits = delivery.hits === undefined ? [] : delivery.hits;
+    if (!Array.isArray(rawHits) || rawHits.length > MAX_HITS) throw new HttpError(400, "invalid_request");
+    const hits = rawHits.map(cleanHit);
     if (hits.includes(null)) throw new HttpError(400, "invalid_request");
-    return { route_id: delivery.route_id, delivery_id: delivery.delivery_id, hits };
+    const digest = delivery.digest === undefined ? null : cleanDigest(delivery.digest);
+    if (delivery.digest !== undefined && !digest) throw new HttpError(400, "invalid_request");
+    if (hits.length === 0 && !digest) throw new HttpError(400, "invalid_request");
+    return { route_id: delivery.route_id, delivery_id: delivery.delivery_id, hits, digest };
   });
 }
 
@@ -158,7 +183,8 @@ async function deliverOne(ctx, delivery) {
     .first();
   if (!subscriber) return "inactive";
 
-  const eventIds = [...new Set(delivery.hits.flatMap((hit) => hit.event_ids))];
+  const digestIds = delivery.digest ? [delivery.digest.event_id] : [];
+  const eventIds = [...new Set([...delivery.hits.flatMap((hit) => hit.event_ids), ...digestIds])];
   const placeholders = eventIds.map(() => "?").join(", ");
   const { results } = await ctx.db
     .prepare(`SELECT event_id, status FROM deliveries WHERE subscriber_id = ? AND event_id IN (${placeholders})`)
@@ -167,12 +193,15 @@ async function deliverOne(ctx, delivery) {
   if (results.some((row) => row.status !== "sent")) return "uncertain";
   const done = new Set(results.map((row) => row.event_id));
   const fresh = delivery.hits.filter((hit) => hit.event_ids.some((id) => !done.has(id)));
-  if (fresh.length === 0) return "duplicate";
+  const digest = delivery.digest && !done.has(delivery.digest.event_id) ? delivery.digest : null;
+  if (fresh.length === 0 && !digest) return "duplicate";
 
   const cap = await hit(ctx.db, ctx.settings.pepper, "subscriberDaily", subscriber.id, ctx.now, ctx.settings.dailyEmailsPerSubscriber);
   if (!cap.allowed) return "deferred";
 
-  const pending = [...new Set(fresh.flatMap((hit) => hit.event_ids))].filter((id) => !done.has(id));
+  const pending = [...new Set([...fresh.flatMap((hit) => hit.event_ids), ...(digest ? [digest.event_id] : [])])].filter(
+    (id) => !done.has(id),
+  );
   await ctx.db.batch(
     pending.map((id) =>
       ctx.db
@@ -184,7 +213,7 @@ async function deliverOne(ctx, delivery) {
   );
 
   const urls = await links(ctx, subscriber.id);
-  const message = digestEmail(fresh, urls);
+  const message = digestEmail(fresh, urls, digest);
   const outcome = await sendEmail(
     ctx.env,
     ctx.settings,

@@ -1,8 +1,13 @@
 # Alerts API v1 (contract for the UI)
 
-This is the contract between a future SkateDeals alerts page and the alerts Worker (`worker/`). It is checked by tests: `worker/contract/examples.json` is one complete session, and `worker/test/contract.test.js` replays it against the Worker and requires the exact status codes and bodies shown there. If this page and that file ever disagree, the file is right; please report the difference.
+This is the contract between the SkateDeals alerts page and the alerts Worker (`worker/`). It is checked by tests. Two complete sessions are replayed against the Worker by `worker/test/contract.test.js`, which requires the exact status codes and bodies shown:
 
-**Status:** backend only. Nothing is deployed, and no page uses this yet. Stars and browser-only settings never send email; only a subscription confirmed by email does.
+- `worker/contract/examples.json`: the original flow with brand/name rules;
+- `worker/contract/examples-digest-watch.json`: the general digest and product watches (issue #70).
+
+If this page and those files ever disagree, the files are right; please report the difference.
+
+**Status:** deployed to staging only (allowlisted addresses). Stars and browser-only settings never send email; only a subscription confirmed by email does.
 
 ## Build against the mock
 
@@ -28,10 +33,71 @@ In mock mode:
 - **Tokens arrive in the URL fragment**, `#verify=<token>` or `#manage=<token>`, so they never reach a server log or a `Referer` header. Read them with `location.hash`, then remove them with `history.replaceState`. Keep the manage token in memory, or at most in `sessionStorage`, never in `localStorage`.
 - **Uniform answers:** `/v1/subscribe` and `/v1/link` answer the same way whether or not an address is subscribed. Show "Check your email" for every `202`.
 
-## Rule object (schema v1)
+## Rules (schema v1)
+
+A subscription holds up to `max_rules` rules (10 by default) of three kinds. One subscription can mix them, and one confirmation covers all of them. `kind` picks the kind; leaving it out means `"search"`, so rules written before kinds existed keep working unchanged.
+
+| Kind | Made by | Emails about |
+| --- | --- | --- |
+| `digest` | the main page's **Subscribe** | today's deals in general: no product chosen |
+| `watch` | a product card's **Alert me** | one store listing, by its URL |
+| `search` | (advanced) words in product names | any listing whose name has those words |
+
+Every response adds `"id"` (`r_` + 24 hex characters) and returns keys sorted. Editing only display text (`note`, or a watch's `label`) keeps the id.
+
+### `digest`: the general daily deals email
 
 | Field | Type | Rules |
 | --- | --- | --- |
+| `kind` | `"digest"` | required |
+| `parts` | list of `"Decks"`, `"Trucks"`, `"Wheels"`, `"Bearings"`, `"Sneakers"`, `"Accessories"`, `"Completes"` | Optional; omitted means every part. Returned in that order. |
+| `events` | list of `"new"`, `"drop"`, `"low"` | Optional; omitted means all three. Returned in that order. |
+| `min_width`, `max_width` | number 5–12 | Optional, inclusive. They narrow decks only, so `parts` must include `Decks` (or be omitted). |
+| `max_price` | number, more than 0 and up to 2000 | Optional. Only listings at or under this price. |
+| `note` | string ≤ 80 | Optional. |
+
+- **Simple mode** is just `{"kind": "digest"}`.
+- **Events:**
+  - `new`: a listing that first went on sale today;
+  - `drop`: a sale price at least $2 or 5% under the previous scrape's price;
+  - `low`: a listing that newly reached its lowest tracked price (at least 3 observations over 7 days).
+
+  These follow the same rules as the owner's own daily digest.
+- **Frequency and size:** at most **one digest email a day**, after the daily scrape, and only when something qualifies. It shows the best 30 listings (new lows first, then the biggest drops, then new listings by discount) and links to the site for the rest. When the subscriber's watches or searches also fire that day, everything arrives in **one email**.
+- **One per subscriber.** A second digest rule is `one_digest_only`.
+
+### `watch`: one product
+
+| Field | Type | Rules |
+| --- | --- | --- |
+| `kind` | `"watch"` | required |
+| `product_url` | string | Required. The listing URL exactly as the catalog has it (the card's link), on a tracked store: https, no fragment, at most 500 characters. |
+| `label` | string ≤ 120 | Optional display text, normally the product name from the card. Never used for matching. |
+| `max_price` | number, more than 0 and up to 2000 | Alert when the price goes under this. |
+| `alert_on_drop` | boolean | Alert on a meaningful price drop ($2 or 5%). |
+| `alert_on_low` | boolean | Alert on a verified historical low. |
+| `alert_on_stock` | boolean | Alert when it comes back in stock (verified). |
+| `note` | string ≤ 80 | Shown in the email. |
+
+- **Simple mode:**
+  - **Alert when below $X** is `{"kind": "watch", "product_url": ..., "max_price": X}`.
+  - **Any meaningful price drop** is `{"kind": "watch", "product_url": ...}`. With no trigger, the Worker stores `alert_on_drop: true` and returns it.
+
+  A watch never sends a "new match" email just for existing.
+- **`product_key`** is added by the Worker in responses. Do not send it back (`unknown_field`). It names the product a watch follows:
+  - **Shopify stores (CCS, Muir Skate):** the key is `shopify:<host>:<handle>`, so `/collections/<any>/products/<handle>` and `/products/<handle>` are one product. The watch follows the product when the store moves it between those URLs, and its price memory goes with it.
+  - **Every other store:** the URL is the key. The rules are the same as `history_identity.py`'s. A retailer code, a variant path, or a similar name never joins two listings.
+- **Cross-store:** a watch follows **one store's listing**. The same deck at another store is a different watch. The site's cross-store groups are name-based and can be wrong, so they never decide who gets an email. To watch two stores, add two watches.
+- **Exact listings only.** Brand and name words are never used. Sending `brand`, `name`, `part`, or a width with `"kind": "watch"` is `not_for_kind`.
+- **Duplicates:** the same product twice (even under two Shopify URLs) with the same triggers is `duplicate`.
+- **Sizes:** a listing URL already pins the deck width the card showed. Sneaker sizes are not supported yet.
+- **A listing that leaves the sale** sends nothing. If it returns, its watch picks up where it left off.
+
+### `search`: words in the product name (the original v1 rule)
+
+| Field | Type | Rules |
+| --- | --- | --- |
+| `kind` | `"search"` or omitted | Stored and returned without `kind`. |
 | `brand` | string ≤ 60 | Every word must be in the product name. `brand` or `name` is required. |
 | `name` | string ≤ 80 | One product, same word matching. |
 | `part` | `"Decks"` \| `"Wheels"` \| `"Trucks"` \| `"Bearings"` | Default `"Decks"`. |
@@ -45,21 +111,27 @@ In mock mode:
 | `note` | string ≤ 80 | Shown in the email. Plain text; `<` and `>` are rejected. |
 
 - **Defaults:** a rule with none of the trigger fields alerts once when a listing first matches, then again on a meaningful drop or a verified restock. That's the same as `watchlist.yaml` with no triggers.
-- **Limits:** at most `max_rules` per subscriber (10 by default). Two rules that differ only in `note` are a duplicate.
-- **Responses** add `"id"` (`r_` + 24 hex characters) and return keys sorted. Editing only `note` keeps the id.
+- **Matching is by words**, so it can match more than one product. That is intended here; for one exact product, use a `watch`.
+- **Duplicates:** two rules that differ only in `note` are a duplicate.
 
-Validation errors use `fields` keyed `rules[<index>].<field>`:
+### Validation errors
+
+Errors use `fields` keyed `rules[<index>].<field>`:
 
 | Code | Meaning |
 | --- | --- |
-| `unknown_field` | a field not in the table |
-| `invalid` | `part` is not one of the four |
-| `brand_or_name_required` | neither was given |
+| `unknown_field` | a field no kind has (including the response-only `id` and `product_key`) |
+| `not_for_kind` | a field that belongs to a different kind, such as `brand` on a watch |
+| `invalid` | `kind`, `part`, or a `parts`/`events` entry is not an allowed value |
+| `brand_or_name_required` | a search rule without either |
+| `required`, `invalid_url`, `store_not_tracked` | a watch's `product_url` |
 | `must_be_text`, `too_long`, `invalid_characters` | text fields |
 | `width_out_of_range`, `decks_only`, `below_min_width`, `width_or_range_not_both` | widths |
 | `price_out_of_range` | `max_price` |
 | `must_be_boolean` | flags |
+| `must_be_list`, `at_least_one`, `duplicate`, `invalid` (on `parts`, `events`) | a digest's lists |
 | `duplicate` | same as an earlier rule |
+| `one_digest_only` | a second digest rule |
 | `rules: must_be_list`, `at_least_one`, `too_many` | the list itself |
 
 ## Endpoints
@@ -159,15 +231,11 @@ Bearer manage token. `200 {"status": "deleted"}`. This removes the same data as 
 
 ## What the page should do
 
-- **Subscribe form:**
-  - email;
-  - one or more rules, built from the parts and deck widths the filters already offer;
-  - trigger checkboxes;
-  - an optional note;
-  - an unchecked consent checkbox, with the consent text and a link to the privacy note;
-  - the Turnstile widget.
+- **Main page Subscribe:** `{"kind": "digest"}`, with optional `parts`, `events`, deck widths, and `max_price` under Advanced. Also: email, an unchecked consent checkbox (with the consent text and a link to the privacy note), and the Turnstile widget.
+- **Card Alert me:** `{"kind": "watch", "product_url": <the card's link>, "label": <its name>}` plus `max_price` ("below $X") or nothing ("any meaningful drop"). Advanced adds `alert_on_low` and `alert_on_stock`. Never substitute brand/name words for an exact product.
+- **Search rules** (brand/name words, parts, deck widths) remain available for "anything matching" alerts.
 - **States:** idle, submitting, "check your email", field errors, rate-limited, and unavailable.
-- **"Alert me" from a card** may prefill `part`, `brand` or `name`, and `width`, with `max_price` set to the current price. Starring stays local and never subscribes anyone.
+- **An already-subscribed address** that submits Subscribe or Alert me again gets `202` and a manage link, and its rules are **not** changed. To add a watch or the digest, the page uses `PUT /v1/preferences` with the manage token, sending the whole list. Starring stays local and never subscribes anyone.
 - **Manage page**:
   - reads `#verify=` or `#manage=`;
   - edits up to `max_rules` rules;
@@ -180,8 +248,18 @@ Bearer manage token. `200 {"status": "deleted"}`. This removes the same data as 
 
 The daily GitHub Actions job (`alerts_delivery.py`) calls the following. The page must never call them.
 
-- `GET /v1/internal/routes`
-- `POST /v1/internal/deliveries`
+- `GET /v1/internal/routes`: verified subscribers' rules of every kind, by opaque route id, never with addresses.
+- `POST /v1/internal/deliveries`: one entry per route. It carries `hits` (watch and search alerts, up to 25) and/or a `digest` section, and the Worker sends at most one email for it:
+
+  ```json
+  {"event_id": "<64 hex: one id per route and day>", "total": 41,
+   "items": [{"kind": "drop", "price_before": "54.99", "item": {"name": "...", "store": "Zumiez", "part": "Decks", "url": "https://www.zumiez.com/...", "price_new": "44.99", "price_old": "79.95"}}]}
+  ```
+
+  - `items` holds 1–30 entries of kind `new`, `drop`, or `low`. A `drop` must carry `price_before`.
+  - `total` is how many qualified, at least `items.length`.
+  - Item links must go to tracked store hosts.
+  - The Worker records `event_id` like any alert event, so a day's digest is emailed once even if the job runs again.
 - `POST /v1/webhooks/resend`, called by Resend
 
 Each request is signed with `HMAC_SECRET`:

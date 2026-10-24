@@ -40,7 +40,8 @@ function fragmentLink(base, key, token) {
 
 async function links(ctx, subscriberId) {
   const unsubscribe = `${ctx.settings.apiUrl}/v1/unsubscribe?token=${await unsubscribeToken(ctx.settings.pepper, subscriberId)}`;
-  return { manage: ctx.settings.manageUrl, unsubscribe };
+  // The manage page is the report page, so it is also the "see every deal" link.
+  return { manage: ctx.settings.manageUrl, site: ctx.settings.manageUrl, unsubscribe };
 }
 
 async function issueToken(ctx, subscriberId, purpose, ttl) {

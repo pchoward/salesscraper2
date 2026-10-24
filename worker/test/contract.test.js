@@ -3,7 +3,8 @@ import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { client, makeEnv, outbox } from "./helpers.js";
 
-const contract = JSON.parse(readFileSync(new URL("../contract/examples.json", import.meta.url), "utf8"));
+const SESSIONS = ["examples.json", "examples-digest-watch.json"];
+const load = (name) => JSON.parse(readFileSync(new URL(`../contract/${name}`, import.meta.url), "utf8"));
 
 const SHAPES = {
   "<token>": /^[A-Za-z0-9_-]{43}$/,
@@ -37,7 +38,8 @@ function matches(actual, expected, path = "body") {
   assert.deepEqual(actual, expected, path);
 }
 
-test("contract/examples.json is exactly what the API does", async () => {
+for (const name of SESSIONS) test(`contract/${name} is exactly what the API does`, async () => {
+  const contract = load(name);
   const env = makeEnv("mock");
   const api = client(env);
   const captured = {};

@@ -62,6 +62,8 @@ class FakeWorker:
         results = []
         for delivery in json.loads(body)["deliveries"]:
             ids = {eid for hit in delivery["hits"] for eid in hit["event_ids"]}
+            if "digest" in delivery:
+                ids.add(delivery["digest"]["event_id"])
             status = self.outcome
             if status == "sent":
                 status = "duplicate" if ids <= self.sent_events else "sent"
@@ -215,6 +217,182 @@ class DeliveryTests(Base):
         self.assertNotIn("image", sent)
 
 
+CCS_COLLECTION = "https://shop.ccs.com/collections/sale/products/baker-brand-logo-deck-8-25"
+CCS_PRODUCT = "https://shop.ccs.com/products/baker-brand-logo-deck-8-25"
+WATCH = {"id": "r_" + "2" * 24, "kind": "watch", "product_url": ITEM["url"], "product_key": ITEM["url"], "max_price": 60}
+DIGEST = {"id": "r_" + "3" * 24, "kind": "digest"}
+
+
+def _deck(name, url, price, store="Zumiez", old="79.95", width=None):
+    return {"name": name, "url": url, "price_new": price, "price_old": old, "part": "Decks", "store": store,
+            **({"width": width} if width is not None else {})}
+
+
+def _filler(store, count):
+    return [_deck(f"Filler Brand Logo {n} 8.0 Skateboard Deck", f"https://www.zumiez.com/filler-{store}-{n}.html", "49.99", width=8.0)
+            for n in range(count)]
+
+
+class KindsTests(Base):
+    """Issue #70: product watches by identity, and the general daily digest."""
+
+    def run_day(self, worker, catalog, previous, day, history=None, failed=()):
+        return ad.deliver_subscriber_alerts(catalog, history or {}, failed, previous=previous, day=day, env=self.env, transport=worker)
+
+    def deliveries(self, worker):
+        return [call[2]["deliveries"] for call in worker.calls if call[1] == "/v1/internal/deliveries"]
+
+    def test_product_keys_match_the_worker_vectors(self):
+        vectors = json.loads((Path(__file__).resolve().parent / "worker" / "contract" / "product-keys.json").read_text())
+        for row in vectors["keys"]:
+            self.assertEqual(ad.watch_key(row["url"]), row["key"], row["why"])
+        email_js = (Path(__file__).resolve().parent / "worker" / "src" / "email.js").read_text()
+        block = email_js[email_js.index("STORE_HOSTS = new Set(["):email_js.index("]);")]
+        self.assertEqual(set(re.findall(r'"([^"]+)"', block)), set(ad.STORE_HOSTS))
+
+    def test_routes_validate_each_kind(self):
+        good = [RULE, WATCH, DIGEST, {"kind": "digest", "parts": ["Wheels"], "events": ["drop"], "max_price": 40}]
+        bad = [
+            dict(WATCH, product_key="https://www.zumiez.com/other.html"),  # the two sides disagree
+            dict(WATCH, product_url="https://example.com/deck", product_key="https://example.com/deck"),
+            dict(WATCH, brand="Heroin"),
+            {"kind": "digest", "events": ["restock"]},
+            {"kind": "digest", "parts": ["Wheels"], "min_width": 8.5},
+            {"kind": "telepathy"},
+        ]
+        routes = ad.parse_routes({"version": 1, "routes": [{"route_id": "route_a", "rules": good + bad}]})
+        self.assertEqual([rule.get("kind", "search") for rule in routes["route_a"]], ["search", "watch", "digest", "digest"])
+
+    def test_a_watch_alerts_on_its_listing_only(self):
+        catalog = {
+            "Zumiez_Decks": [ITEM, _deck('Heroin Egg 8.75" Skateboard Deck', "https://www.zumiez.com/heroin-egg-8-75-skateboard-deck-1.html", "39.99")],
+            "Tactics_Decks": [_deck('Heroin Egg 8.75" Skateboard Deck', "https://www.tactics.com/heroin/egg-skateboard-deck/8-75", "39.99", "Tactics")],
+        }
+        worker = FakeWorker([{"route_id": "route_a", "rules": [WATCH]}])
+        summary = self.run_day(worker, catalog, {}, DAY)
+        self.assertEqual(summary["results"], {"sent": 1})
+        [[delivery]] = self.deliveries(worker)
+        [hit] = delivery["hits"]
+        self.assertEqual(hit["item"]["url"], ITEM["url"], "same-named listings elsewhere never match")
+        self.assertEqual(hit["item"]["part"], "Decks", "the email shows the real part")
+        self.assertEqual(hit["reasons"], ["Maximum price reached"])
+
+    def test_a_default_watch_waits_for_a_real_drop(self):
+        watch = {"id": WATCH["id"], "kind": "watch", "product_url": ITEM["url"], "product_key": ITEM["url"], "alert_on_drop": True}
+        worker = FakeWorker([{"route_id": "route_a", "rules": [watch]}])
+        self.assertEqual(self.run_day(worker, CATALOG, {}, DAY)["deliveries"], 0, "no 'new match' email for a watch")
+        self.assertEqual(self.run_day(worker, {"Zumiez_Decks": [dict(ITEM, price_new="53.99")]}, CATALOG, "2026-10-21")["deliveries"], 0,
+                         "a $1 move is not meaningful")
+        drop = {"Zumiez_Decks": [dict(ITEM, price_new="44.99")]}
+        self.assertEqual(self.run_day(worker, drop, CATALOG, "2026-10-22")["results"], {"sent": 1})
+        self.assertEqual(self.deliveries(worker)[-1][0]["hits"][0]["reasons"], ["Meaningful price drop"])
+
+    def test_a_watch_follows_its_product_across_shopify_url_churn(self):
+        watch = {"id": WATCH["id"], "kind": "watch", "product_url": CCS_COLLECTION,
+                 "product_key": "shopify:shop.ccs.com:baker-brand-logo-deck-8-25", "alert_on_drop": True, "max_price": 55}
+        worker = FakeWorker([{"route_id": "route_a", "rules": [watch]}])
+        day1 = {"CCS_Decks": [_deck("Baker Brand Logo Deck 8.25", CCS_COLLECTION, "54.99", "CCS")]}
+        self.assertEqual(self.run_day(worker, day1, {}, DAY)["results"], {"sent": 1})
+        # Same product, new URL, same price: no repeat of the price alert.
+        day2 = {"CCS_Decks": [_deck("Baker Brand Logo Deck 8.25", CCS_PRODUCT, "54.99", "CCS")]}
+        self.assertEqual(self.run_day(worker, day2, day1, "2026-10-21")["deliveries"], 0)
+        # A real drop under the new URL is measured against the old URL's price.
+        day3 = {"CCS_Decks": [_deck("Baker Brand Logo Deck 8.25", CCS_PRODUCT, "44.99", "CCS")]}
+        self.assertEqual(self.run_day(worker, day3, day2, "2026-10-22")["results"], {"sent": 1})
+        hit = self.deliveries(worker)[-1][0]["hits"][0]
+        self.assertEqual(hit["reasons"], ["Meaningful price drop"])
+        self.assertEqual(hit["item"]["url"], CCS_PRODUCT, "the email links today's real listing")
+
+    def test_watch_and_search_state_are_independent(self):
+        worker = FakeWorker([{"route_id": "route_a", "rules": [RULE, WATCH]}])
+        self.run_day(worker, CATALOG, {}, DAY)
+        records = len(self.route_state("route_a")["records"])
+        self.assertEqual(records, 2)
+        worker.routes = [{"route_id": "route_a", "rules": [RULE]}]
+        self.run_day(worker, CATALOG, CATALOG, "2026-10-21")
+        self.assertEqual(len(self.route_state("route_a")["records"]), 1, "a removed watch is forgotten")
+        worker.routes = [{"route_id": "route_a", "rules": [WATCH]}]
+        self.run_day(worker, CATALOG, CATALOG, "2026-10-22")
+        self.assertEqual(len(self.route_state("route_a")["records"]), 1)
+
+    def test_digest_picks_real_news_from_clean_scrapes(self):
+        previous = {
+            "Zumiez_Decks": [ITEM, _deck("Baker Brand Logo 8.25 Skateboard Deck", "https://www.zumiez.com/baker.html", "59.99", width=8.25)]
+            + _filler("z", 5),
+            "Tactics_Decks": _filler("t", 5),
+            "CCS_Decks": [],
+        }
+        catalog = {
+            "Zumiez_Decks": [
+                dict(ITEM, price_new="44.99"),  # drop
+                _deck("Baker Brand Logo 8.25 Skateboard Deck", "https://www.zumiez.com/baker.html", "58.99", width=8.25),  # $1: not news
+                _deck("Real Ripper 8.5 Skateboard Deck", "https://www.zumiez.com/ripper.html", "39.99", width=8.5),  # new
+                _deck("Carried Over 8.0 Skateboard Deck", "https://www.zumiez.com/carried.html", "39.99"),  # new but carried
+            ] + _filler("z", 5),
+            "Tactics_Decks": [_deck("Failed Store 8.0 Skateboard Deck", "https://www.tactics.com/failed/8", "19.99", "Tactics")] + _filler("t", 5),
+            # A category with no earlier rows is a first listing, not news.
+            "CCS_Decks": [_deck(f"Fresh CCS Deck {n} 8.0", f"https://shop.ccs.com/products/fresh-{n}", "39.99", "CCS") for n in range(3)],
+        }
+        entries = ad.digest_candidates(catalog, previous, {}, failed_keys=("Tactics_Decks",),
+                                       skip_urls=("https://www.zumiez.com/carried.html",))
+        self.assertEqual([(e["kind"], e["item"]["url"]) for e in entries],
+                         [("drop", ITEM["url"]), ("new", "https://www.zumiez.com/ripper.html")])
+        self.assertEqual(entries[0]["price_before"], "54.99")
+        self.assertEqual(ad.digest_candidates(catalog, {}, {}), [], "no baseline, no news")
+
+    def test_digest_skips_mass_relistings_and_flags_new_lows(self):
+        previous = {"Zumiez_Decks": _filler("z", 10)}
+        relisted = _filler("z", 10) + [_deck(f"Relisted {n} 8.0 Skateboard Deck", f"https://www.zumiez.com/re-{n}.html", "39.99") for n in range(30)]
+        self.assertEqual(ad.digest_candidates({"Zumiez_Decks": relisted}, previous, {}), [])
+        url = "https://www.zumiez.com/filler-z-0.html"
+        history = {url: {"prices": {"2026-10-01": 49.99, "2026-10-10": 49.99, "2026-10-19": 49.99}}}
+        lowered = [dict(_filler("z", 1)[0], price_new="47.99")] + _filler("z", 10)[1:]
+        history[url]["prices"][DAY] = 47.99
+        [entry] = ad.digest_candidates({"Zumiez_Decks": lowered}, previous, history)
+        self.assertEqual((entry["kind"], entry["item"]["url"], entry["price_before"]), ("low", url, 49.99))
+
+    def test_digest_filters_cap_and_once_a_day(self):
+        previous = {"Zumiez_Decks": _filler("z", 60), "Zumiez_Wheels": [{"name": "Spitfire Formula Four 54mm 99a Wheels", "url": "https://www.zumiez.com/sf.html",
+                                                                         "price_new": "44.99", "price_old": "44.99", "part": "Wheels", "store": "Zumiez"}]}
+        news = [_deck(f"New Deck {n} 8.{n % 10} Skateboard Deck", f"https://www.zumiez.com/new-{n}.html", f"{30 + n // 2}.99", width=8 + (n % 10) / 10)
+                for n in range(40)]
+        catalog = {"Zumiez_Decks": _filler("z", 60) + news, "Zumiez_Wheels": [dict(previous["Zumiez_Wheels"][0], price_new="34.99")]}
+        routes = [
+            {"route_id": "route_all", "rules": [DIGEST]},
+            {"route_id": "route_wheels", "rules": [dict(DIGEST, parts=["Wheels"])]},
+            {"route_id": "route_wide_cheap", "rules": [dict(DIGEST, events=["new"], min_width=8.5, max_price=50)]},
+            {"route_id": "route_drops", "rules": [dict(DIGEST, parts=["Decks"], events=["drop"])]},
+        ]
+        worker = FakeWorker(routes)
+        summary = self.run_day(worker, catalog, previous, DAY)
+        self.assertEqual(summary["deliveries"], 3, "route_drops has nothing today and gets no email")
+        by_route = {d["route_id"]: d for d in self.deliveries(worker)[-1]}
+        everything = by_route["route_all"]["digest"]
+        self.assertEqual((everything["total"], len(everything["items"])), (41, ad.MAX_DIGEST_ITEMS))
+        self.assertEqual(everything["items"][0]["kind"], "drop", "drops lead")
+        self.assertEqual(by_route["route_all"]["hits"], [])
+        self.assertEqual([i["item"]["part"] for i in by_route["route_wheels"]["digest"]["items"]], ["Wheels"])
+        wide = by_route["route_wide_cheap"]["digest"]["items"]
+        self.assertTrue(wide and all(float(i["item"]["price_new"]) <= 50 and i["kind"] == "new" for i in wide))
+        self.assertEqual(len(wide), 20, "8.5 to 8.9 wide, $50 and under")
+        self.assertEqual(by_route["route_all"]["digest"]["event_id"], _hash(["digest", "route_all", DAY]))
+
+        # A second run the same day sends no second digest.
+        again = self.run_day(worker, catalog, previous, DAY)
+        self.assertEqual(again["results"], {"duplicate": 3})
+
+    def test_watch_hits_and_digest_share_one_email(self):
+        worker = FakeWorker([{"route_id": "route_a", "rules": [WATCH, DIGEST]}])
+        previous = {"Zumiez_Decks": [dict(ITEM, price_new="64.99")] + _filler("z", 5)}
+        catalog = {"Zumiez_Decks": [ITEM] + _filler("z", 5)}
+        self.assertEqual(self.run_day(worker, catalog, previous, DAY)["results"], {"sent": 1})
+        [[delivery]] = self.deliveries(worker)
+        self.assertEqual(len(delivery["hits"]), 1)
+        self.assertEqual([i["kind"] for i in delivery["digest"]["items"]], ["drop"])
+        ids = sorted(delivery["hits"][0]["event_ids"] + [delivery["digest"]["event_id"]])
+        self.assertEqual(delivery["delivery_id"], _hash(ids))
+
+
 def _node_ok():
     node = shutil.which("node")
     if not node:
@@ -284,6 +462,31 @@ class EndToEndWithWorkerMockTests(Base):
         again = ad.deliver_subscriber_alerts(CATALOG, {}, previous={}, day="2026-10-21", env=self.env, transport=self.transport)
         self.assertEqual(again["deliveries"], 0)
         self.assertEqual(len(self.http("GET", "/v1/mock/outbox")[1]["messages"]), 1, "no second email")
+
+    def test_digest_and_watch_subscriber_gets_one_combined_email(self):
+        status, _ = self.http("POST", "/v1/subscribe", {
+            "email": "rider@example.com", "consent": True, "consent_version": "2026-10",
+            "turnstile_token": "mock-turnstile-pass",
+            "rules": [{"kind": "digest"}, {"kind": "watch", "product_url": ITEM["url"], "max_price": 60, "label": ITEM["name"]}],
+        })
+        self.assertEqual(status, 202)
+        _, outbox = self.http("GET", "/v1/mock/outbox")
+        token = re.search(r"#verify=([\w-]+)", outbox["messages"][0]["text"]).group(1)
+        self.assertEqual(self.http("POST", "/v1/verify", {"token": token})[0], 200)
+        self.http("DELETE", "/v1/mock/outbox")
+
+        previous = {"Zumiez_Decks": [dict(ITEM, price_new="64.99")]}
+        summary = ad.deliver_subscriber_alerts(CATALOG, {}, previous=previous, day=DAY, env=self.env, transport=self.transport)
+        self.assertEqual(summary["results"], {"sent": 1})
+        [mail] = self.http("GET", "/v1/mock/outbox")[1]["messages"]
+        self.assertEqual(mail["subject"], "SkateDeals: 1 alert and 1 deal today")
+        self.assertIn("Maximum price reached", mail["text"])
+        self.assertIn("Today's deals", mail["text"])
+        self.assertIn("Price drop", mail["text"])
+
+        rerun = ad.deliver_subscriber_alerts(CATALOG, {}, previous=previous, day=DAY, env=self.env, transport=self.transport)
+        self.assertEqual(rerun["results"], {"duplicate": 1})
+        self.assertEqual(len(self.http("GET", "/v1/mock/outbox")[1]["messages"]), 1, "no second email the same day")
 
 
 if __name__ == "__main__":

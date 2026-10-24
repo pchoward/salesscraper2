@@ -1,0 +1,277 @@
+{
+  "description": "Issue #70 additions to API v1, as one mock-mode session: the general digest (kind \"digest\") and product watches (kind \"watch\"), next to the original brand/name rules. test/contract.test.js replays it exactly like examples.json, with the same placeholders.",
+  "steps": [
+    {
+      "name": "subscribe: main-page Subscribe (simple digest)",
+      "request": {
+        "method": "POST",
+        "path": "/v1/subscribe",
+        "body": {
+          "email": "rider@example.com",
+          "rules": [
+            {
+              "kind": "digest"
+            }
+          ],
+          "consent": true,
+          "consent_version": "2026-10",
+          "turnstile_token": "mock-turnstile-pass"
+        }
+      },
+      "response": {
+        "status": 202,
+        "body": {
+          "status": "check_email"
+        }
+      },
+      "capture_from_email": {
+        "verify_token": "#verify="
+      }
+    },
+    {
+      "name": "verify",
+      "request": {
+        "method": "POST",
+        "path": "/v1/verify",
+        "body": {
+          "token": "{{verify_token}}"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "status": "active",
+          "manage_token": "<token>",
+          "preferences": {
+            "status": "active",
+            "email_masked": "r***@example.com",
+            "consent_version": "2026-10",
+            "verified_at": "<iso-time>",
+            "max_rules": 10,
+            "rules": [
+              {
+                "id": "<rule-id>",
+                "kind": "digest"
+              }
+            ]
+          }
+        }
+      },
+      "capture": {
+        "manage_token": "manage_token"
+      }
+    },
+    {
+      "name": "add a card's Alert Me (simple watch: any meaningful drop)",
+      "request": {
+        "method": "PUT",
+        "path": "/v1/preferences",
+        "headers": {
+          "Authorization": "Bearer {{manage_token}}"
+        },
+        "body": {
+          "rules": [
+            {
+              "kind": "digest"
+            },
+            {
+              "kind": "watch",
+              "product_url": "https://www.zumiez.com/heroin-egg-8-75-skateboard-deck.html",
+              "label": "Heroin Egg 8.75\" Skateboard Deck"
+            }
+          ]
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "status": "active",
+          "email_masked": "r***@example.com",
+          "consent_version": "2026-10",
+          "verified_at": "<iso-time>",
+          "max_rules": 10,
+          "rules": [
+            {
+              "id": "<rule-id>",
+              "kind": "digest"
+            },
+            {
+              "id": "<rule-id>",
+              "kind": "watch",
+              "product_url": "https://www.zumiez.com/heroin-egg-8-75-skateboard-deck.html",
+              "product_key": "https://www.zumiez.com/heroin-egg-8-75-skateboard-deck.html",
+              "label": "Heroin Egg 8.75\" Skateboard Deck",
+              "alert_on_drop": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "advanced options: filtered digest, price-threshold watch, a Shopify listing",
+      "request": {
+        "method": "PUT",
+        "path": "/v1/preferences",
+        "headers": {
+          "Authorization": "Bearer {{manage_token}}"
+        },
+        "body": {
+          "rules": [
+            {
+              "kind": "digest",
+              "parts": [
+                "Wheels",
+                "Decks"
+              ],
+              "events": [
+                "drop",
+                "low"
+              ],
+              "min_width": 8.5,
+              "max_price": 80
+            },
+            {
+              "kind": "watch",
+              "product_url": "https://www.zumiez.com/heroin-egg-8-75-skateboard-deck.html",
+              "max_price": 45,
+              "alert_on_low": true,
+              "alert_on_stock": true
+            },
+            {
+              "kind": "watch",
+              "product_url": "https://shop.ccs.com/collections/sale/products/baker-brand-logo-deck-8-25",
+              "label": "Baker Brand Logo Deck 8.25"
+            },
+            {
+              "brand": "Heroin",
+              "part": "Decks",
+              "min_width": 8.6
+            }
+          ]
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "status": "active",
+          "email_masked": "r***@example.com",
+          "consent_version": "2026-10",
+          "verified_at": "<iso-time>",
+          "max_rules": 10,
+          "rules": [
+            {
+              "id": "<rule-id>",
+              "kind": "digest",
+              "parts": [
+                "Decks",
+                "Wheels"
+              ],
+              "events": [
+                "drop",
+                "low"
+              ],
+              "min_width": 8.5,
+              "max_price": 80
+            },
+            {
+              "id": "<rule-id>",
+              "kind": "watch",
+              "product_url": "https://www.zumiez.com/heroin-egg-8-75-skateboard-deck.html",
+              "product_key": "https://www.zumiez.com/heroin-egg-8-75-skateboard-deck.html",
+              "max_price": 45,
+              "alert_on_low": true,
+              "alert_on_stock": true
+            },
+            {
+              "id": "<rule-id>",
+              "kind": "watch",
+              "product_url": "https://shop.ccs.com/collections/sale/products/baker-brand-logo-deck-8-25",
+              "product_key": "shopify:shop.ccs.com:baker-brand-logo-deck-8-25",
+              "label": "Baker Brand Logo Deck 8.25",
+              "alert_on_drop": true
+            },
+            {
+              "id": "<rule-id>",
+              "brand": "Heroin",
+              "part": "Decks",
+              "min_width": 8.6
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "invalid: kind mix-ups, a second digest, an untracked store, the same product twice",
+      "request": {
+        "method": "PUT",
+        "path": "/v1/preferences",
+        "headers": {
+          "Authorization": "Bearer {{manage_token}}"
+        },
+        "body": {
+          "rules": [
+            {
+              "kind": "digest"
+            },
+            {
+              "kind": "digest",
+              "events": [
+                "new"
+              ]
+            },
+            {
+              "kind": "watch",
+              "product_url": "https://www.zumiez.com/heroin-egg-8-75-skateboard-deck.html",
+              "brand": "Heroin"
+            },
+            {
+              "kind": "watch",
+              "product_url": "https://example.com/deck"
+            },
+            {
+              "kind": "watch",
+              "product_url": "https://shop.ccs.com/collections/sale/products/baker-brand-logo-deck-8-25"
+            },
+            {
+              "kind": "watch",
+              "product_url": "https://shop.ccs.com/products/baker-brand-logo-deck-8-25"
+            },
+            {
+              "kind": "digest",
+              "parts": [
+                "Wheels"
+              ],
+              "min_width": 8
+            }
+          ]
+        }
+      },
+      "response": {
+        "status": 400,
+        "body": {
+          "error": "invalid_rules",
+          "fields": {
+            "rules[1]": "one_digest_only",
+            "rules[2].brand": "not_for_kind",
+            "rules[3].product_url": "store_not_tracked",
+            "rules[5]": "duplicate",
+            "rules[6].min_width": "decks_only"
+          }
+        }
+      }
+    },
+    {
+      "name": "the routes the delivery job sees are not public",
+      "request": {
+        "method": "GET",
+        "path": "/v1/internal/routes"
+      },
+      "response": {
+        "status": 401,
+        "body": {
+          "error": "unauthorized"
+        }
+      }
+    }
+  ]
+}
