@@ -48,6 +48,21 @@ class AlertsUiTests(unittest.TestCase):
         self.assertIn("docs/alerts-api.md", contract)
         self.assertNotIn("POST /subscribe", contract)
 
+    def test_report_points_the_panel_at_the_staging_worker(self):
+        import page
+        from report import build_report_html
+
+        html = build_report_html({}, {}, generated_at="2026-10-24T12:00:00+00:00")
+        config = '<script>window.SKATEDEALS_ALERTS = {"apiBase": "https://skatedeals-alerts.pchoward.workers.dev"'
+        self.assertEqual(html.count("window.SKATEDEALS_ALERTS ="), 1)
+        self.assertLess(html.index(config), html.index("const ALERTS_API_BASE"), "config must load before page.js")
+        # Public values only, and markup in a value cannot close the script.
+        self.assertEqual(set(page.ALERTS_UI_CONFIG), {"apiBase", "turnstileSiteKey"})
+        self.assertTrue(page.ALERTS_UI_CONFIG["apiBase"].startswith("https://"))
+        self.assertEqual(page._alerts_config_script({"apiBase": " "}), "")
+        hostile = page._alerts_config_script({"apiBase": "https://x.example", "turnstileSiteKey": "</script>"})
+        self.assertEqual(hostile.count("</script>"), 1)
+
     def test_client_fragment_and_panel(self):
         source = (ROOT / "page.js").read_text(encoding="utf-8")
         block = source[source.index("/* ALERTS_UI_START"):source.index("/* ALERTS_UI_END */")]
