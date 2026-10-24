@@ -75,6 +75,15 @@ _BRANDS = {
     "sneakers": ("Nike SB", "Nike", "Vans"),
 }
 PART_ORDER = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes")
+
+# Email alerts (docs/alerts-api.md). Both values are public by design: the
+# browser calls the Worker URL, and Turnstile site keys are meant to be seen.
+# Secrets never go here. The Worker is in staging mode, so it only accepts
+# its allowlisted address. An empty apiBase shows "Email alerts coming soon".
+ALERTS_UI_CONFIG = {
+    "apiBase": "https://skatedeals-alerts.pchoward.workers.dev",
+    "turnstileSiteKey": "",
+}
 _BRAND_ALIAS = {
     "anti hero": "Anti-Hero",
     "antihero": "Anti-Hero",
@@ -86,6 +95,16 @@ _PLACEHOLDER = (
     '<rect x="8" y="28" width="48" height="8" rx="2" fill="#94a3b8"/>'
     "</svg>"
 )
+
+
+def _alerts_config_script(config=None):
+    """``window.SKATEDEALS_ALERTS`` for page.js, or "" when alerts are off."""
+    config = ALERTS_UI_CONFIG if config is None else config
+    public = {key: str(config.get(key) or "").strip() for key in ("apiBase", "turnstileSiteKey")}
+    if not public["apiBase"]:
+        return ""
+    literal = json.dumps({key: value for key, value in public.items() if value}, sort_keys=True)
+    return "<script>window.SKATEDEALS_ALERTS = " + literal.replace("</", "<\\/") + ";</script>"
 
 
 def _read_asset(name):
@@ -1970,6 +1989,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             for bucket in WIDTH_RANGES
         ]
     )
+    chunks.append(_alerts_config_script())
     chunks.append(f"<script>const WIDTH_RANGES = {ranges_literal};\n{_read_asset('page.js')}</script>")
     chunks.append("</body></html>")
     return "\n".join(chunk for chunk in chunks if chunk)
