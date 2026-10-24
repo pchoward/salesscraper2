@@ -5677,6 +5677,17 @@ const ALERTS_API_BASE = "";
 const ALERTS_CONSENT_VERSION = "2026-10";
 const ALERTS_SESSION_KEY = "skatedeals.alerts.manage";
 const ALERTS_PARTS = ["Decks", "Wheels", "Trucks", "Bearings"];
+const ALERTS_CATALOG_PARTS = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes"];
+const ALERTS_DIGEST_EVENTS = ["new", "drop", "low"];
+const ALERTS_STORE_HOSTS = [
+    "www.zumiez.com",
+    "www.skatewarehouse.com",
+    "shop.ccs.com",
+    "www.tactics.com",
+    "www.skatedeluxe.com",
+    "muirskate.com",
+    "www.muirskate.com"
+];
 const ALERTS_RULE_FIELDS = [
     "brand", "name", "part", "width", "min_width", "max_width", "back_in_stock_width",
     "max_price", "alert_on_drop", "alert_on_low", "alert_on_stock", "note"
@@ -5699,7 +5710,12 @@ const ALERTS_ERRORS = {
     unavailable: "Email alerts coming soon.",
     body_too_large: "That request is too large.",
     origin_not_allowed: "This page is not allowed to call the alerts service.",
-    internal_error: "Alerts are unavailable right now."
+    internal_error: "Alerts are unavailable right now.",
+    not_for_kind: "Those details don't belong on this alert.",
+    one_digest_only: "This address already has a general deals email.",
+    store_not_tracked: "That store is not tracked for alerts.",
+    invalid_url: "That listing link cannot be used for an exact watch.",
+    required: "A required detail is missing."
 };
 
 const alertsUi = {
@@ -5708,6 +5724,8 @@ const alertsUi = {
     config: null,
     client: null,
     view: "signup",
+    entry: "digest",
+    trigger: "below",
     draft: null,
     editingId: "",
     prefs: null,
@@ -5889,9 +5907,40 @@ function deckWidth(value) {
     return num;
 }
 
+function copyFinite(source, out, key) {
+    if (typeof source[key] === "number" && Number.isFinite(source[key])) out[key] = source[key];
+}
+
 function cleanRule(rule) {
-    const out = {};
     const source = rule || {};
+    if (source.kind === "digest") {
+        const out = { kind: "digest" };
+        if (Array.isArray(source.parts)) {
+            const parts = ALERTS_CATALOG_PARTS.filter(part => source.parts.indexOf(part) >= 0);
+            if (parts.length) out.parts = parts;
+        }
+        if (Array.isArray(source.events)) {
+            const events = ALERTS_DIGEST_EVENTS.filter(event => source.events.indexOf(event) >= 0);
+            if (events.length) out.events = events;
+        }
+        copyFinite(source, out, "min_width");
+        copyFinite(source, out, "max_width");
+        copyFinite(source, out, "max_price");
+        if (typeof source.note === "string" && source.note.trim()) out.note = source.note;
+        return out;
+    }
+    if (source.kind === "watch") {
+        const out = { kind: "watch" };
+        if (typeof source.product_url === "string" && source.product_url) out.product_url = source.product_url;
+        if (typeof source.label === "string" && source.label.trim()) out.label = source.label;
+        copyFinite(source, out, "max_price");
+        ALERTS_FLAG_FIELDS.forEach(key => {
+            if (source[key] === true) out[key] = true;
+        });
+        if (typeof source.note === "string" && source.note.trim()) out.note = source.note;
+        return out;
+    }
+    const out = {};
     ALERTS_RULE_FIELDS.forEach(key => {
         if (source[key] == null || source[key] === "") return;
         if (ALERTS_FLAG_FIELDS.indexOf(key) >= 0) {
@@ -5952,16 +6001,26 @@ function ruleFromDraft(draft) {
 
 function blankAlertDraft() {
     return {
+        kind: "",
         brand: "",
         name: "",
+        label: "",
         part: "",
+        parts: [],
+        events: null,
         width: "",
+        min_width: "",
+        max_width: "",
+        price: "",
         max_price: "",
+        product_url: "",
         alert_on_drop: false,
         alert_on_low: false,
         alert_on_stock: false,
         note: "",
-        store: ""
+        store: "",
+        image: "",
+        shoesize: ""
     };
 }
 
@@ -5971,33 +6030,151 @@ function alertDraftFromDataset(dataset) {
     const width = part === "Decks" ? deckWidth(dataset.size) : null;
     let price = finiteNumber(dataset.price);
     if (price == null || price <= 0 || price > 2000) price = null;
+    const shown = price == null ? "" : String(price);
     return {
+        kind: "product",
         brand: dataset.brand || "",
         name: dataset.name || "",
+        label: "",
         part: part,
+        parts: [],
+        events: null,
         width: width == null ? "" : String(width),
-        max_price: price == null ? "" : String(price),
+        min_width: "",
+        max_width: "",
+        price: shown,
+        max_price: shown,
+        product_url: dataset.url || "",
         alert_on_drop: false,
         alert_on_low: false,
         alert_on_stock: false,
         note: "",
-        store: dataset.store || ""
+        store: dataset.store || "",
+        image: "",
+        shoesize: dataset.shoesize || ""
     };
+}
+
+function alertsEntryFromDraft(draft) {
+    return draft && draft.kind === "product" ? "product" : "digest";
+}
+
+function alertsMoney(value) {
+    const num = finiteNumber(value);
+    if (num == null) return "";
+    return "$" + num.toFixed(2);
+}
+
+function optionalPrice(value) {
+    if (value == null || String(value).trim() === "") return { ok: true, value: null };
+    const price = finiteNumber(value);
+    if (price == null || price <= 0 || price > 2000) return { ok: false, error: "Max price must be greater than 0 and at most 2000." };
+    return { ok: true, value: price };
+}
+
+function optionalWidth(value) {
+    if (value == null || String(value).trim() === "") return { ok: true, value: null };
+    const width = deckWidth(value);
+    if (width == null) return { ok: false, error: "Deck width must be a number from 5 to 12." };
+    return { ok: true, value: width };
+}
+
+function buildDigestRule(draft) {
+    draft = draft || {};
+    const rule = { kind: "digest" };
+    const parts = Array.isArray(draft.parts) ? ALERTS_CATALOG_PARTS.filter(part => draft.parts.indexOf(part) >= 0) : [];
+    if (parts.length && parts.length < ALERTS_CATALOG_PARTS.length) rule.parts = parts;
+    if (Array.isArray(draft.events)) {
+        const events = ALERTS_DIGEST_EVENTS.filter(event => draft.events.indexOf(event) >= 0);
+        if (!events.length) return { ok: false, error: "Choose at least one: new deals, price drops, or tracked lows." };
+        if (events.length < ALERTS_DIGEST_EVENTS.length) rule.events = events;
+    }
+    const minWidth = optionalWidth(draft.min_width);
+    if (!minWidth.ok) return minWidth;
+    const maxWidth = optionalWidth(draft.max_width);
+    if (!maxWidth.ok) return maxWidth;
+    if (minWidth.value != null && maxWidth.value != null && minWidth.value > maxWidth.value) {
+        return { ok: false, error: "Minimum width cannot be above the maximum." };
+    }
+    if ((minWidth.value != null || maxWidth.value != null) && rule.parts && rule.parts.indexOf("Decks") < 0) {
+        return { ok: false, error: "Deck widths only apply when Decks are included." };
+    }
+    if (minWidth.value != null) rule.min_width = minWidth.value;
+    if (maxWidth.value != null) rule.max_width = maxWidth.value;
+    const price = optionalPrice(draft.max_price);
+    if (!price.ok) return price;
+    if (price.value != null) rule.max_price = price.value;
+    return { ok: true, rule: rule };
+}
+
+function watchUrlError(raw) {
+    const url = String(raw == null ? "" : raw);
+    if (!url) return "This product has no listing link.";
+    if (url.length > 500) return "That listing link cannot be used for an exact watch.";
+    let parsed;
+    try {
+        parsed = new URL(url);
+    } catch (err) {
+        return "That listing link cannot be used for an exact watch.";
+    }
+    if (parsed.href !== url || parsed.protocol !== "https:" || parsed.username || parsed.password || parsed.hash) {
+        return "That listing link cannot be used for an exact watch.";
+    }
+    if (ALERTS_STORE_HOSTS.indexOf(parsed.hostname) < 0) return "That store is not tracked for alerts.";
+    return "";
+}
+
+function buildWatchRule(draft, trigger) {
+    draft = draft || {};
+    const urlError = watchUrlError(draft.product_url);
+    if (urlError) return { ok: false, error: urlError };
+    const label = cleanText(draft.label || draft.name, 120);
+    if (!label.ok) return { ok: false, error: label.error };
+    const rule = { kind: "watch", product_url: String(draft.product_url) };
+    if (label.value) rule.label = label.value;
+    const low = draft.alert_on_low === true;
+    const stock = draft.alert_on_stock === true;
+    if (trigger === "below") {
+        const price = optionalPrice(draft.max_price);
+        if (!price.ok) return { ok: false, error: "Enter a price greater than 0 and at most 2000." };
+        if (price.value == null) return { ok: false, error: "Enter a price greater than 0 and at most 2000." };
+        rule.max_price = price.value;
+        if (low) rule.alert_on_low = true;
+        if (stock) rule.alert_on_stock = true;
+    } else if (trigger === "drop") {
+        if (low) rule.alert_on_low = true;
+        if (stock) rule.alert_on_stock = true;
+        if (low || stock) rule.alert_on_drop = true;
+    } else {
+        return { ok: false, error: "Choose a price or a meaningful drop." };
+    }
+    return { ok: true, rule: rule };
 }
 
 function draftFromRule(rule) {
     rule = rule || {};
+    const kind = rule.kind === "digest" || rule.kind === "watch" ? rule.kind : "";
     return {
+        kind: kind,
         brand: rule.brand || "",
-        name: rule.name || "",
+        name: rule.label || rule.name || "",
+        label: rule.label || "",
         part: rule.part || "",
+        parts: Array.isArray(rule.parts) ? rule.parts.slice() : [],
+        events: Array.isArray(rule.events) ? rule.events.slice() : null,
         width: rule.width == null ? "" : String(rule.width),
+        min_width: rule.min_width == null ? "" : String(rule.min_width),
+        max_width: rule.max_width == null ? "" : String(rule.max_width),
+        price: rule.max_price == null ? "" : String(rule.max_price),
         max_price: rule.max_price == null ? "" : String(rule.max_price),
+        product_url: rule.product_url || "",
         alert_on_drop: rule.alert_on_drop === true,
         alert_on_low: rule.alert_on_low === true,
         alert_on_stock: rule.alert_on_stock === true,
         note: rule.note || "",
-        store: ""
+        store: "",
+        image: "",
+        shoesize: ""
     };
 }
 
@@ -6164,6 +6341,9 @@ function setHidden(node, hidden) {
 }
 
 function ruleTitle(rule) {
+    rule = rule || {};
+    if (rule.kind === "digest") return "General deal emails";
+    if (rule.kind === "watch") return rule.label || "This listing";
     const bits = [];
     if (rule.brand) bits.push(rule.brand);
     if (rule.name) bits.push(rule.name);
@@ -6171,6 +6351,27 @@ function ruleTitle(rule) {
 }
 
 function ruleDetail(rule) {
+    rule = rule || {};
+    if (rule.kind === "digest") {
+        const bits = [];
+        bits.push(Array.isArray(rule.parts) && rule.parts.length ? rule.parts.join(", ") : "Every part");
+        const eventNames = { new: "New deals", drop: "Price drops", low: "Tracked lows" };
+        if (Array.isArray(rule.events) && rule.events.length) bits.push(rule.events.map(event => eventNames[event] || event).join(", "));
+        else bits.push("New deals, price drops, and tracked lows");
+        if (rule.min_width != null || rule.max_width != null) bits.push((rule.min_width == null ? "any" : rule.min_width) + "–" + (rule.max_width == null ? "any" : rule.max_width));
+        if (rule.max_price != null) bits.push("at or under $" + rule.max_price);
+        if (rule.note) bits.push(rule.note);
+        return bits.join(" · ");
+    }
+    if (rule.kind === "watch") {
+        const bits = ["This listing"];
+        if (rule.max_price != null) bits.push("under $" + rule.max_price);
+        if (rule.alert_on_drop) bits.push("Meaningful drop");
+        if (rule.alert_on_low) bits.push("Historical low");
+        if (rule.alert_on_stock) bits.push("Verified restock");
+        if (rule.note) bits.push(rule.note);
+        return bits.join(" · ");
+    }
     const bits = [];
     if (rule.part) bits.push(rule.part);
     if (rule.width != null) bits.push(rule.width + "\"");
@@ -6261,6 +6462,7 @@ function draftFromForm(base) {
         return !!(node && node.checked);
     };
     if (document.getElementById("alertsBrand")) {
+        draft.kind = "";
         draft.brand = value("alertsBrand");
         draft.name = value("alertsName");
         draft.part = value("alertsPart");
@@ -6268,6 +6470,21 @@ function draftFromForm(base) {
         draft.max_price = value("alertsPrice");
         draft.note = value("alertsNote");
         draft.alert_on_drop = checked("alertsDrop");
+        draft.alert_on_low = checked("alertsLow");
+        draft.alert_on_stock = checked("alertsStock");
+        return draft;
+    }
+    if (document.getElementById("alertsEventnew") || document.getElementById("alertsDigestPrice")) {
+        draft.kind = "digest";
+        draft.parts = ALERTS_CATALOG_PARTS.filter(part => checked("alertsDigestPart" + part));
+        draft.events = ALERTS_DIGEST_EVENTS.filter(event => checked("alertsEvent" + event));
+        draft.min_width = value("alertsMinWidth");
+        draft.max_width = value("alertsMaxWidth");
+        draft.max_price = value("alertsDigestPrice");
+        return draft;
+    }
+    if (document.getElementById("alertsPrice")) {
+        draft.max_price = value("alertsPrice");
         draft.alert_on_low = checked("alertsLow");
         draft.alert_on_stock = checked("alertsStock");
     }
@@ -6310,6 +6527,9 @@ function paintDown(body) {
 function paintCheck(body) {
     body.appendChild(alertsEl("p", "alerts-copy", alertsUi.message || "Check your email to confirm."));
     body.appendChild(alertsEl("p", "alerts-hint", "If this address is already active, that email is a manage link and these rules were not saved."));
+    if (alertsUi.entry === "product") {
+        body.appendChild(alertsEl("p", "alerts-hint", "This watch follows that one listing. It is not active until the email is verified."));
+    }
     const actions = alertsEl("div", "alerts-actions");
     actions.appendChild(buttonEl("Email me a link", "alerts-secondary", "relink"));
     actions.appendChild(buttonEl("Use a different address", "alerts-secondary", "reset-signup"));
@@ -6321,16 +6541,64 @@ function paintDone(body) {
     body.appendChild(buttonEl("Create an alert", "alerts-secondary", "reset-signup"));
 }
 
-function paintSignup(body) {
+function paintVerifyNote(parent) {
+    parent.appendChild(alertsEl("p", "alerts-verify", "We'll email you a link to confirm. Nothing is active until you verify that link."));
+}
+
+function paintAdvancedShell() {
+    const advanced = document.createElement("details");
+    advanced.className = "alerts-advanced";
+    advanced.id = "alertsAdvanced";
+    advanced.open = false;
+    const summary = document.createElement("summary");
+    summary.textContent = "Advanced options";
+    advanced.appendChild(summary);
+    return advanced;
+}
+
+function paintDigestFields(parent, draft) {
+    draft = draft || {};
+    parent.appendChild(alertsEl("p", "alerts-section", "Parts"));
+    parent.appendChild(alertsEl("p", "alerts-hint", "Leave every part off to include all of them."));
+    const parts = alertsEl("div", "alerts-choices");
+    const selectedParts = Array.isArray(draft.parts) ? draft.parts : [];
+    ALERTS_CATALOG_PARTS.forEach(part => {
+        parts.appendChild(checkWrap("alertsDigestPart" + part, part, selectedParts.indexOf(part) >= 0));
+    });
+    parent.appendChild(parts);
+    parent.appendChild(alertsEl("p", "alerts-section", "Notify me about"));
+    const events = alertsEl("div", "alerts-choices");
+    const eventLabels = { new: "New deals", drop: "Price drops", low: "Tracked lows" };
+    const selectedEvents = Array.isArray(draft.events) ? draft.events : ALERTS_DIGEST_EVENTS;
+    ALERTS_DIGEST_EVENTS.forEach(event => {
+        events.appendChild(checkWrap("alertsEvent" + event, eventLabels[event], selectedEvents.indexOf(event) >= 0));
+    });
+    parent.appendChild(events);
+    const minWidth = inputEl("text", draft.min_width);
+    minWidth.inputMode = "decimal";
+    parent.appendChild(fieldWrap("alertsMinWidth", "Minimum deck width (5–12, optional)", minWidth));
+    const maxWidth = inputEl("text", draft.max_width);
+    maxWidth.inputMode = "decimal";
+    parent.appendChild(fieldWrap("alertsMaxWidth", "Maximum deck width (5–12, optional)", maxWidth));
+    parent.appendChild(alertsEl("p", "alerts-hint", "Widths apply to decks. Include Decks, or leave every part off."));
+    const price = inputEl("text", draft.max_price);
+    price.inputMode = "decimal";
+    parent.appendChild(fieldWrap("alertsDigestPrice", "Max price (optional)", price));
+}
+
+function paintDigestAdvanced(parent, draft) {
+    const advanced = paintAdvancedShell();
+    paintDigestFields(advanced, draft);
+    parent.appendChild(advanced);
+}
+
+function paintDigestSignup(body) {
     if (alertsUi.health && alertsUi.health.mode === "mock") {
         body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
     } else if (alertsUi.healthUnread) {
         body.appendChild(alertsEl("p", "alerts-banner", "The alerts status check could not be read from this page."));
     }
-    const draft = alertsUi.draft || blankAlertDraft();
-    if (draft.store || draft.name) {
-        body.appendChild(alertsEl("p", "alerts-subtitle", ruleTitle({ brand: draft.brand, name: draft.name })));
-    }
+    body.appendChild(alertsEl("p", "alerts-copy", "Get general SkateDeals deal emails. This is not a watch on one product."));
     const form = alertsEl("form", "alerts-form");
     form.id = "alertsForm";
     form.noValidate = true;
@@ -6338,9 +6606,116 @@ function paintSignup(body) {
     const email = inputEl("email", alertsUi.email);
     email.autocomplete = "email";
     email.required = true;
+    email.setAttribute("aria-required", "true");
     form.appendChild(fieldWrap("alertsEmail", "Email", email));
-    paintRuleFields(form, draft);
-    form.appendChild(checkWrap("alertsConsent", "I agree to receive email about these alerts. I can unsubscribe at any time.", alertsUi.consent));
+    form.appendChild(checkWrap("alertsConsent", "I agree to receive SkateDeals deal emails. I can unsubscribe at any time.", alertsUi.consent));
+    ensureTurnstile(form);
+    const actions = alertsEl("div", "alerts-actions");
+    const submit = alertsEl("button", "alerts-primary", "Subscribe");
+    submit.id = "alertsSubmit";
+    submit.type = "submit";
+    actions.appendChild(submit);
+    if (readManageToken()) actions.appendChild(buttonEl("Manage alerts", "alerts-secondary", "manage-saved"));
+    actions.appendChild(buttonEl("I already confirmed", "alerts-secondary", "relink"));
+    form.appendChild(actions);
+    paintVerifyNote(form);
+    paintDigestAdvanced(form, alertsUi.draft || blankAlertDraft());
+    body.appendChild(form);
+}
+
+function alertsProductImage(card) {
+    if (!card || typeof card.querySelector !== "function") return "";
+    const img = card.querySelector("img");
+    if (!img) return "";
+    const src = img.getAttribute ? (img.getAttribute("src") || "") : "";
+    return /^https?:\/\//i.test(src) ? src : "";
+}
+
+function paintProductSummary(body, draft) {
+    const row = alertsEl("div", "alerts-product");
+    const src = String(draft.image || "");
+    if (/^https?:\/\//i.test(src)) {
+        const img = document.createElement("img");
+        img.className = "alerts-product-photo";
+        img.alt = draft.name || "Product photo";
+        img.src = src;
+        img.setAttribute("src", src);
+        img.addEventListener("error", () => { img.hidden = true; });
+        row.appendChild(img);
+    }
+    const text = alertsEl("div", "alerts-product-copy");
+    text.appendChild(alertsEl("p", "alerts-product-name", draft.name || "This product"));
+    const price = alertsMoney(draft.price);
+    text.appendChild(alertsEl("p", "alerts-product-price", price ? "Current price " + price : "Current price unavailable"));
+    row.appendChild(text);
+    body.appendChild(row);
+}
+
+function paintWatchAdvanced(form, draft) {
+    const advanced = paintAdvancedShell();
+    advanced.appendChild(alertsEl("p", "alerts-section", "Also alert on"));
+    advanced.appendChild(checkWrap("alertsLow", "Verified historical low", draft.alert_on_low));
+    advanced.appendChild(checkWrap("alertsStock", "Verified restock", draft.alert_on_stock));
+    advanced.appendChild(alertsEl("p", "alerts-soon", "Specific sneaker sizes are coming soon and are not sent."));
+    if (draft.shoesize) {
+        advanced.appendChild(alertsEl("p", "alerts-soon", "Sizes on this product (" + draft.shoesize + ") are coming soon and are not sent."));
+    }
+    form.appendChild(advanced);
+}
+
+function paintProductChoices(form, draft) {
+    const group = alertsEl("fieldset", "alerts-choices");
+    const legend = alertsEl("legend", "alerts-legend", "Notify me");
+    group.appendChild(legend);
+    const belowLabel = alertsEl("label", "alerts-choice");
+    const below = document.createElement("input");
+    below.type = "radio";
+    below.name = "alertsTrigger";
+    below.id = "alertsTriggerBelow";
+    below.checked = alertsUi.trigger !== "drop";
+    belowLabel.append(below, alertsEl("span", "", "Alert when below $"));
+    const price = inputEl("text", draft.max_price);
+    price.id = "alertsPrice";
+    price.inputMode = "decimal";
+    price.autocomplete = "off";
+    price.setAttribute("aria-label", "Price threshold in dollars");
+    belowLabel.appendChild(price);
+    group.appendChild(belowLabel);
+    const dropLabel = alertsEl("label", "alerts-choice");
+    const drop = document.createElement("input");
+    drop.type = "radio";
+    drop.name = "alertsTrigger";
+    drop.id = "alertsTriggerDrop";
+    drop.checked = alertsUi.trigger === "drop";
+    dropLabel.append(drop, alertsEl("span", "", "Any meaningful price drop"));
+    group.appendChild(dropLabel);
+    form.appendChild(group);
+    price.addEventListener("focus", () => {
+        below.checked = true;
+        drop.checked = false;
+    });
+}
+
+function paintProductSignup(body) {
+    if (alertsUi.health && alertsUi.health.mode === "mock") {
+        body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
+    } else if (alertsUi.healthUnread) {
+        body.appendChild(alertsEl("p", "alerts-banner", "The alerts status check could not be read from this page."));
+    }
+    const draft = alertsUi.draft || blankAlertDraft();
+    paintProductSummary(body, draft);
+    body.appendChild(alertsEl("p", "alerts-copy", "Email you about this product."));
+    const form = alertsEl("form", "alerts-form");
+    form.id = "alertsForm";
+    form.noValidate = true;
+    form.addEventListener("submit", submitSignup);
+    paintProductChoices(form, draft);
+    const email = inputEl("email", alertsUi.email);
+    email.autocomplete = "email";
+    email.required = true;
+    email.setAttribute("aria-required", "true");
+    form.appendChild(fieldWrap("alertsEmail", "Email", email));
+    form.appendChild(checkWrap("alertsConsent", "I agree to receive email about this alert. I can unsubscribe at any time.", alertsUi.consent));
     ensureTurnstile(form);
     const actions = alertsEl("div", "alerts-actions");
     const submit = alertsEl("button", "alerts-primary", "Create alert");
@@ -6349,7 +6724,14 @@ function paintSignup(body) {
     actions.appendChild(submit);
     actions.appendChild(buttonEl("I already confirmed", "alerts-secondary", "relink"));
     form.appendChild(actions);
+    paintVerifyNote(form);
+    paintWatchAdvanced(form, draft);
     body.appendChild(form);
+}
+
+function paintSignup(body) {
+    if (alertsUi.entry === "product") paintProductSignup(body);
+    else paintDigestSignup(body);
 }
 
 function paintRelink(body) {
@@ -6417,7 +6799,17 @@ function paintEdit(body) {
     form.id = "alertsEditForm";
     form.noValidate = true;
     form.addEventListener("submit", submitEdit);
-    paintRuleFields(form, draft);
+    if (draft.kind === "digest") {
+        body.appendChild(alertsEl("p", "alerts-copy", "General deal emails. This is not a watch on one product."));
+        paintDigestFields(form, draft);
+    } else if (draft.kind === "watch") {
+        body.appendChild(alertsEl("p", "alerts-copy", "This watch follows one listing."));
+        paintProductChoices(form, draft);
+        paintWatchAdvanced(form, draft);
+    } else {
+        body.appendChild(alertsEl("p", "alerts-hint", "This matches listings by brand and name words. It is not a general deal email and not one exact product."));
+        paintRuleFields(form, draft);
+    }
     const actions = alertsEl("div", "alerts-actions");
     const submit = alertsEl("button", "alerts-primary", alertsUi.editingId ? "Save alert" : "Add alert");
     submit.id = "alertsSubmit";
@@ -6437,7 +6829,7 @@ function paintAlerts(focusId) {
     const titles = {
         soon: "Alerts",
         down: "Alerts",
-        signup: "Email alerts",
+        signup: alertsUi.entry === "product" ? "Alert me" : "Subscribe",
         check: "Check your email",
         manage: "Manage alerts",
         edit: alertsUi.editingId ? "Edit alert" : "Add alert",
@@ -6456,7 +6848,7 @@ function paintAlerts(focusId) {
     else if (alertsUi.view === "edit") paintEdit(body);
     else if (alertsUi.view === "relink") paintRelink(body);
     else paintSignup(body);
-    const focus = focusId ? document.getElementById(focusId) : null;
+    const focus = document.getElementById(focusId || "");
     if (focus && focus.focus) focus.focus();
 }
 
@@ -6508,6 +6900,48 @@ async function loadAlertsPreferences(token) {
     paintAlerts();
 }
 
+function readProductTrigger() {
+    const drop = document.getElementById("alertsTriggerDrop");
+    const below = document.getElementById("alertsTriggerBelow");
+    if (drop && drop.checked) return "drop";
+    if (below && below.checked) return "below";
+    return alertsUi.trigger === "drop" ? "drop" : "below";
+}
+
+async function saveSignupRule(rule) {
+    const token = readManageToken();
+    if (token) {
+        const got = await alertsUi.client.getPreferences(token);
+        const active = got.status === 200 && got.body && got.body.status === "active" && Array.isArray(got.body.rules);
+        if (active) {
+            const max = got.body.max_rules || 10;
+            const current = got.body.rules;
+            const next = current.map(cleanRule);
+            if (rule.kind === "digest") {
+                const index = current.findIndex(item => item && item.kind === "digest");
+                if (index >= 0) next[index] = rule;
+                else if (current.length >= max) return { localError: "This account is at its " + max + " alert limit." };
+                else next.push(rule);
+            } else if (current.length >= max) {
+                return { localError: "This account is at its " + max + " alert limit." };
+            } else {
+                next.push(rule);
+            }
+            return { put: await alertsUi.client.putPreferences(token, next) };
+        }
+        if (got.status === 401 || (got.body && got.body.error === "invalid_token")) clearManageToken();
+    }
+    return {
+        subscribe: await alertsUi.client.subscribe({
+            email: normalizeEmail(alertsUi.email),
+            rules: [rule],
+            consent: true,
+            consent_version: alertsUi.config.consentVersion,
+            turnstile_token: turnstileToken()
+        })
+    };
+}
+
 async function submitSignup(event) {
     if (event && event.preventDefault) event.preventDefault();
     if (alertsUi.busy || !alertsUi.client) return;
@@ -6516,36 +6950,53 @@ async function submitSignup(event) {
     alertsUi.email = emailNode ? emailNode.value : "";
     alertsUi.consent = !!(consentNode && consentNode.checked);
     alertsUi.draft = draftFromForm(alertsUi.draft);
+    alertsUi.active = false;
+    if (alertsUi.entry === "product") alertsUi.trigger = readProductTrigger();
     if (!validEmail(alertsUi.email)) {
-        alertsUi.error = "Enter an email address.";
-        alertsUi.active = false;
+        alertsUi.error = "Enter an email address. Nothing was saved.";
         paintAlerts("alertsEmail");
         return;
     }
     if (!alertsUi.consent) {
-        alertsUi.error = "Check the box to agree before subscribing.";
-        alertsUi.active = false;
+        alertsUi.error = "Check the box to agree before subscribing. Nothing was saved.";
         paintAlerts("alertsConsent");
         return;
     }
-    const built = buildRule(alertsUi.draft);
+    const built = alertsUi.entry === "product"
+        ? buildWatchRule(alertsUi.draft, alertsUi.trigger)
+        : buildDigestRule(alertsUi.draft);
     if (!built.ok) {
-        alertsUi.error = built.error;
+        alertsUi.error = built.error + " Nothing was saved.";
         alertsUi.active = false;
+        alertsUi.view = "signup";
         paintAlerts();
         return;
     }
-    const token = turnstileToken();
     alertsUi.busy = true;
     alertsUi.error = "";
-    const result = await alertsUi.client.subscribe({
-        email: normalizeEmail(alertsUi.email),
-        rules: [built.rule],
-        consent: true,
-        consent_version: alertsUi.config.consentVersion,
-        turnstile_token: token
-    });
+    const saved = await saveSignupRule(built.rule);
     alertsUi.busy = false;
+    if (saved.localError) {
+        alertsUi.error = saved.localError;
+        alertsUi.active = false;
+        alertsUi.view = "signup";
+        paintAlerts();
+        return;
+    }
+    if (saved.put) {
+        const result = saved.put;
+        if (result.status === 200 && result.body && result.body.status === "active") {
+            adoptAlerts(alertsApplyResult({ active: false }, "preferences", result));
+            paintAlerts();
+            return;
+        }
+        alertsUi.error = alertsFailureMessage(result);
+        alertsUi.active = false;
+        alertsUi.view = "signup";
+        paintAlerts();
+        return;
+    }
+    const result = saved.subscribe;
     adoptAlerts(alertsApplyResult({ active: false, view: "signup" }, "subscribe", result));
     if (alertsUi.view !== "check") alertsUi.view = alertsUi.view === "down" ? "down" : "signup";
     paintAlerts();
@@ -6589,7 +7040,12 @@ async function submitEdit(event) {
     if (event && event.preventDefault) event.preventDefault();
     if (alertsUi.busy || !alertsUi.client) return;
     alertsUi.draft = draftFromForm(alertsUi.draft);
-    const built = buildRule(alertsUi.draft);
+    let built;
+    if (alertsUi.draft.kind === "digest") built = buildDigestRule(alertsUi.draft);
+    else if (alertsUi.draft.kind === "watch") {
+        alertsUi.trigger = readProductTrigger();
+        built = buildWatchRule(alertsUi.draft, alertsUi.trigger);
+    } else built = buildRule(alertsUi.draft);
     if (!built.ok) {
         alertsUi.error = built.error;
         paintAlerts();
@@ -6677,7 +7133,19 @@ function onAlertsClick(event) {
         alertsUi.active = false;
         alertsUi.prefs = null;
         alertsUi.draft = alertsUi.draft || blankAlertDraft();
+        alertsUi.entry = alertsEntryFromDraft(alertsUi.draft);
         paintAlerts("alertsEmail");
+    } else if (action === "manage-saved") {
+        const saved = readManageToken();
+        alertsUi.error = "";
+        alertsUi.message = "";
+        alertsUi.active = false;
+        if (!saved) {
+            alertsUi.view = "relink";
+            paintAlerts("alertsLinkEmail");
+            return;
+        }
+        return loadAlertsPreferences(saved);
     } else if (action === "add") {
         alertsUi.draft = blankAlertDraft();
         alertsUi.editingId = "";
@@ -6688,10 +7156,11 @@ function onAlertsClick(event) {
         const rule = ((alertsUi.prefs && alertsUi.prefs.rules) || []).find(item => item.id === id);
         if (!rule) return;
         alertsUi.draft = draftFromRule(rule);
+        if (rule.kind === "watch") alertsUi.trigger = rule.max_price != null ? "below" : "drop";
         alertsUi.editingId = id;
         alertsUi.view = "edit";
         alertsUi.error = "";
-        paintAlerts("alertsBrand");
+        paintAlerts(rule.kind === "digest" ? "alertsDigestPrice" : (rule.kind === "watch" ? "alertsPrice" : "alertsBrand"));
     } else if (action === "remove") {
         return removeAlert(id);
     } else if (action === "cancel-edit") {
@@ -6751,9 +7220,10 @@ function mountAlertsNav() {
     if (document.getElementById("navAlerts")) return;
     const nav = document.querySelector ? document.querySelector(".topnav-links") : null;
     if (!nav) return;
-    const button = alertsEl("button", "nav-alerts", "Alerts");
+    const button = alertsEl("button", "nav-link nav-alerts", "Subscribe");
     button.id = "navAlerts";
     button.type = "button";
+    button.setAttribute("aria-label", "Subscribe to SkateDeals deal emails");
     button.addEventListener("click", () => openAlerts());
     nav.appendChild(button);
 }
@@ -6766,13 +7236,89 @@ function isAlertsOpen() {
 function closeAlerts() {
     alertsUi.open = false;
     setHidden(document.getElementById("alertsRoot"), true);
+    if (document.body && document.body.classList) document.body.classList.remove("alerts-open");
     if (alertsUi.returnFocus && alertsUi.returnFocus.focus) alertsUi.returnFocus.focus();
+}
+
+function alertsPanel() {
+    const root = document.getElementById("alertsRoot");
+    if (!root || !root.querySelector) return null;
+    return root.querySelector(".alerts-panel");
+}
+
+function alertsHiddenByClosedDetails(node) {
+    let parent = node.parentElement || node.parent || null;
+    while (parent) {
+        const tag = String(parent.tagName || parent.tag || "").toLowerCase();
+        if (tag === "details" && !parent.open) {
+            const nodeTag = String(node.tagName || node.tag || "").toLowerCase();
+            const nodeParent = node.parentElement || node.parent || null;
+            if (nodeTag === "summary" && nodeParent === parent) return false;
+            return true;
+        }
+        parent = parent.parentElement || parent.parent || null;
+    }
+    return false;
+}
+
+function alertsIsTabStop(node) {
+    const tag = String(node.tagName || node.tag || "").toLowerCase();
+    if (["a", "button", "input", "select", "textarea", "summary"].indexOf(tag) < 0) return false;
+    if (node.disabled) return false;
+    if (node.hidden) return false;
+    if (node.tabIndex < 0) return false;
+    if (alertsHiddenByClosedDetails(node)) return false;
+    return true;
+}
+
+function alertsTabStops(panel) {
+    const stops = [];
+    const visit = node => {
+        const kids = (node && node.children) || [];
+        for (let i = 0; i < kids.length; i++) {
+            const child = kids[i];
+            if (!child) continue;
+            if (alertsIsTabStop(child)) stops.push(child);
+            visit(child);
+        }
+    };
+    visit(panel);
+    return stops;
+}
+
+function onAlertsKeydown(event) {
+    if (!isAlertsOpen() || !event) return;
+    if (event.key === "Escape") {
+        if (event.preventDefault) event.preventDefault();
+        closeAlerts();
+        return;
+    }
+    if (event.key !== "Tab") return;
+    const panel = alertsPanel();
+    if (!panel) return;
+    const stops = alertsTabStops(panel);
+    if (!stops.length) return;
+    const active = document.activeElement;
+    const first = stops[0];
+    const last = stops[stops.length - 1];
+    const inside = panel.contains ? panel.contains(active) : false;
+    if (event.shiftKey) {
+        if (!inside || active === first) {
+            if (event.preventDefault) event.preventDefault();
+            if (last.focus) last.focus();
+        }
+        return;
+    }
+    if (!inside || active === last) {
+        if (event.preventDefault) event.preventDefault();
+        if (first.focus) first.focus();
+    }
 }
 
 async function openAlerts(options) {
     options = options || {};
     ensureAlertsShell();
-    alertsUi.returnFocus = (typeof document !== "undefined" && document.activeElement) || null;
+    alertsUi.returnFocus = options.returnFocus || (typeof document !== "undefined" && document.activeElement) || null;
     alertsUi.config = alertsPageConfig();
     alertsUi.client = createAlertsClient(alertsUi.config);
     alertsUi.open = true;
@@ -6782,9 +7328,14 @@ async function openAlerts(options) {
     alertsUi.active = false;
     alertsUi.health = null;
     alertsUi.healthUnread = false;
+    alertsUi.consent = false;
+    alertsUi.trigger = "below";
+    if (document.body && document.body.classList) document.body.classList.add("alerts-open");
     setHidden(document.getElementById("alertsRoot"), false);
     if (options.draft) alertsUi.draft = options.draft;
-    if (!alertsUi.draft) alertsUi.draft = blankAlertDraft();
+    else if (!options.fragment && !options.manage) alertsUi.draft = blankAlertDraft();
+    else if (!alertsUi.draft) alertsUi.draft = blankAlertDraft();
+    alertsUi.entry = alertsEntryFromDraft(alertsUi.draft);
     if (alertsUi.config.mode !== "live") {
         alertsUi.view = "soon";
         alertsUi.prefs = null;
@@ -6799,20 +7350,12 @@ async function openAlerts(options) {
         await loadAlertsPreferences(options.fragment.token);
         return;
     }
-    const saved = readManageToken();
-    if (saved && options.adding) {
-        await loadAlertsPreferences(saved);
-        if (alertsUi.view === "manage") {
-            alertsUi.editingId = "";
-            alertsUi.view = "edit";
-            alertsUi.error = "";
-            paintAlerts("alertsBrand");
+    if (options.manage) {
+        const saved = readManageToken();
+        if (saved) {
+            await loadAlertsPreferences(saved);
+            return;
         }
-        return;
-    }
-    if (saved && !options.draft) {
-        await loadAlertsPreferences(saved);
-        return;
     }
     alertsUi.view = "signup";
     alertsUi.prefs = null;
@@ -6827,9 +7370,12 @@ function appendQuickAlert(parent, card) {
     button.addEventListener("click", event => {
         if (event.stopPropagation) event.stopPropagation();
         if (event.preventDefault) event.preventDefault();
-        if (typeof closeQuickView === "function") closeQuickView();
         const dataset = (card && card.dataset) || {};
-        openAlerts({ draft: alertDraftFromDataset(dataset), adding: true });
+        const draft = alertDraftFromDataset(dataset);
+        draft.image = alertsProductImage(card);
+        const returnFocus = card && typeof card.querySelector === "function" ? card.querySelector(".card-more") : button;
+        if (typeof closeQuickView === "function") closeQuickView();
+        openAlerts({ draft: draft, returnFocus: returnFocus });
     });
     parent.appendChild(button);
 }
@@ -6839,6 +7385,9 @@ function wireAlerts() {
     alertsUi.wired = true;
     mountAlertsNav();
     ensureAlertsShell();
+    if (typeof document !== "undefined" && document.addEventListener) {
+        document.addEventListener("keydown", onAlertsKeydown);
+    }
     if (typeof window !== "undefined" && window.addEventListener) {
         window.addEventListener("hashchange", () => {
             const parsed = consumeAlertsFragment();
