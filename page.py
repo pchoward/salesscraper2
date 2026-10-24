@@ -82,7 +82,7 @@ PART_ORDER = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories"
 # its allowlisted address. An empty apiBase shows "Email alerts coming soon".
 ALERTS_UI_CONFIG = {
     "apiBase": "https://skatedeals-alerts.pchoward.workers.dev",
-    "turnstileSiteKey": "",
+    "turnstileSiteKey": "0x4AAAAAAFjwOIPFNNUHi29X",
 }
 _BRAND_ALIAS = {
     "anti hero": "Anti-Hero",
