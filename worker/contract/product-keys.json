@@ -1,0 +1,55 @@
+{
+  "about": "Product keys for watches. worker/src/rules.js productKey and alerts_delivery.watch_key must agree with every row (history_identity.listing_identity).",
+  "keys": [
+    {
+      "url": "https://shop.ccs.com/collections/sale/products/baker-brand-logo-deck-8-25",
+      "key": "shopify:shop.ccs.com:baker-brand-logo-deck-8-25",
+      "why": "Shopify handle under a collection"
+    },
+    {
+      "url": "https://shop.ccs.com/products/baker-brand-logo-deck-8-25",
+      "key": "shopify:shop.ccs.com:baker-brand-logo-deck-8-25",
+      "why": "The same CCS product under /products/"
+    },
+    {
+      "url": "https://shop.ccs.com/products/Baker-Brand-Logo-Deck-8-25/",
+      "key": "shopify:shop.ccs.com:baker-brand-logo-deck-8-25",
+      "why": "Handles are case-insensitive; trailing slash allowed"
+    },
+    {
+      "url": "https://shop.ccs.com/products/baker-brand-logo-deck-8-25?variant=123",
+      "key": "https://shop.ccs.com/products/baker-brand-logo-deck-8-25?variant=123",
+      "why": "A query string keeps the URL as its own key"
+    },
+    {
+      "url": "https://www.muirskate.com/products/spitfire-formula-four-54mm",
+      "key": "shopify:muirskate.com:spitfire-formula-four-54mm",
+      "why": "Muir drops www. in the key"
+    },
+    {
+      "url": "https://muirskate.com/collections/wheels/products/spitfire-formula-four-54mm",
+      "key": "shopify:muirskate.com:spitfire-formula-four-54mm",
+      "why": "So both Muir hosts give one key"
+    },
+    {
+      "url": "https://www.zumiez.com/baker-brand-logo-8-25-skateboard-deck.html",
+      "key": "https://www.zumiez.com/baker-brand-logo-8-25-skateboard-deck.html",
+      "why": "Every other store: the URL is the key"
+    },
+    {
+      "url": "https://www.zumiez.com/baker-brand-logo-8-25-skateboard-deck-1.html",
+      "key": "https://www.zumiez.com/baker-brand-logo-8-25-skateboard-deck-1.html",
+      "why": "Zumiez -1 twins are different listings"
+    },
+    {
+      "url": "https://www.skatewarehouse.com/Baker_Brand_Logo_Deck/descpage-BAKBL.html",
+      "key": "https://www.skatewarehouse.com/Baker_Brand_Logo_Deck/descpage-BAKBL.html",
+      "why": "Skate Warehouse codes never join"
+    },
+    {
+      "url": "https://www.tactics.com/baker/brand-logo-skateboard-deck/white-8-25",
+      "key": "https://www.tactics.com/baker/brand-logo-skateboard-deck/white-8-25",
+      "why": "Tactics variant paths stay separate"
+    }
+  ]
+}

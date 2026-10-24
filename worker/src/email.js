@@ -80,27 +80,64 @@ function money(value) {
   return Number.isFinite(number) ? `$${number.toFixed(2)}` : "";
 }
 
-export function digestEmail(hits, links) {
-  const count = hits.length;
-  const subject = count === 1 ? `SkateDeals alert: ${hits[0].item.name}`.slice(0, 120) : `SkateDeals alerts: ${count} matches`;
-  const lines = [];
-  const rows = [];
-  for (const hit of hits) {
-    const item = hit.item;
-    const price = money(item.price_new);
-    const was = item.price_old ? ` (was ${money(item.price_old)})` : "";
-    const why = hit.reasons.join(", ");
-    lines.push(`${item.name} at ${item.store}: ${price}${was}`, `  ${why}${hit.note ? ` · ${hit.note}` : ""}`, `  ${item.url}`, "");
-    rows.push(`<tr><td style="padding:10px 0;border-bottom:1px solid #e2e8f0">
+const DIGEST_LABELS = { drop: "Price drop", low: "Lowest price we've tracked", new: "New on sale" };
+
+function itemRow(item, why, was) {
+  const price = money(item.price_new);
+  return {
+    text: [`${item.name} at ${item.store}: ${price}${was}`, `  ${why}`, `  ${item.url}`, ""],
+    html: `<tr><td style="padding:10px 0;border-bottom:1px solid #e2e8f0">
 <a href="${escapeHtml(item.url)}" style="color:#1d4ed8;font-weight:bold">${escapeHtml(item.name)}</a><br>
 <span>${escapeHtml(item.store)} · <strong>${escapeHtml(price)}</strong>${escapeHtml(was)}</span><br>
-<span style="color:#475569">${escapeHtml(why)}${hit.note ? ` · ${escapeHtml(hit.note)}` : ""}</span></td></tr>`);
+<span style="color:#475569">${escapeHtml(why)}</span></td></tr>`,
+  };
+}
+
+function section(title, rows) {
+  return {
+    text: [title, "", ...rows.flatMap((row) => row.text)],
+    html: `<h2 style="font-size:16px;margin:20px 0 4px">${escapeHtml(title)}</h2><table style="width:100%;border-collapse:collapse">${rows
+      .map((row) => row.html)
+      .join("")}</table>`,
+  };
+}
+
+/**
+ * One email per delivery: the person's own alerts first, then the general
+ * digest (if they have one and it is due). Either part may be empty.
+ */
+export function digestEmail(hits, links, digest = null) {
+  const parts = [];
+  if (hits.length) {
+    const rows = hits.map((hit) => {
+      const was = hit.item.price_old ? ` (was ${money(hit.item.price_old)})` : "";
+      return itemRow(hit.item, `${hit.reasons.join(", ")}${hit.note ? ` · ${hit.note}` : ""}`, was);
+    });
+    parts.push(section("Your SkateDeals alerts matched", rows));
   }
+  if (digest) {
+    const rows = digest.items.map((entry) => {
+      const before = entry.price_before || entry.item.price_old;
+      return itemRow(entry.item, DIGEST_LABELS[entry.kind], before ? ` (was ${money(before)})` : "");
+    });
+    const more = digest.total - digest.items.length;
+    const done = section("Today's deals", rows);
+    if (more > 0) {
+      done.text.push(`${more} more today: ${links.site}`, "");
+      done.html += `<p><a href="${escapeHtml(links.site)}">See ${more} more on SkateDeals</a></p>`;
+    }
+    parts.push(done);
+  }
+  const plural = (count, word) => `${count} ${word}${count === 1 ? "" : "s"}`;
+  let subject;
+  if (hits.length && digest) subject = `SkateDeals: ${plural(hits.length, "alert")} and ${plural(digest.total, "deal")} today`;
+  else if (digest) subject = `SkateDeals daily deals: ${digest.total} today`;
+  else subject = hits.length === 1 ? `SkateDeals alert: ${hits[0].item.name}`.slice(0, 120) : `SkateDeals alerts: ${hits.length} matches`;
   const end = footer(links);
   return {
     subject,
-    text: `Your SkateDeals alerts matched:\n\n${lines.join("\n")}${end.text}`,
-    html: wrap("Your SkateDeals alerts matched", `<table style="width:100%;border-collapse:collapse">${rows.join("")}</table>${end.html}`),
+    text: `${parts.map((part) => part.text.join("\n")).join("\n")}${end.text}`,
+    html: wrap(hits.length ? "Your SkateDeals alerts" : "Today's SkateDeals deals", parts.map((part) => part.html).join("") + end.html),
   };
 }
 
