@@ -2529,6 +2529,49 @@ header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 .alerts-meta { margin: 0.25rem 0 0; font-size: 0.8rem; color: var(--text-secondary); }
 .alerts-privacy { margin-top: 0.35rem; font-size: 0.8rem; }
 .alerts-privacy summary { cursor: pointer; font-weight: 750; }
+.alerts-soon {
+    margin: 0;
+    padding: 0.45rem 0.6rem;
+    background: #f8fafc;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    font-weight: 650;
+}
+.alerts-verify { margin: 0; color: var(--text-secondary); font-size: 0.78rem; }
+.alerts-section {
+    margin: 0.55rem 0 0;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+.alerts-choices { margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.alerts-choice { display: flex; align-items: center; gap: 0.45rem; font-size: 0.9rem; }
+.alerts-choice input[type="radio"] { width: 1.1rem; height: 1.1rem; margin: 0; flex: 0 0 auto; }
+.alerts-choice input[type="text"] { flex: 1 1 6rem; min-width: 0; }
+.alerts-advanced { margin-top: 0.15rem; }
+.alerts-advanced > summary {
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 0.86rem;
+    padding: 0.35rem 0;
+}
+.alerts-advanced > summary:focus-visible { outline: 2px solid #1d4ed8; outline-offset: 2px; }
+.alerts-product { display: flex; align-items: center; gap: 0.75rem; }
+.alerts-product-photo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    flex: 0 0 auto;
+}
+.alerts-product-name { margin: 0; font-size: 0.95rem; font-weight: 800; line-height: 1.3; }
+.alerts-product-price { margin: 0.15rem 0 0; font-size: 0.86rem; }
 body.alerts-open { overflow: hidden; }
 /* Sidebar and the mobile drawer scroll too. Reserve the gutter so chip
    counts are not under that scrollbar, including in Firefox. */

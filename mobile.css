@@ -392,6 +392,9 @@
         min-height: 2.75rem;
     }
     .alerts-close { width: 2.75rem; height: 2.75rem; }
+    .alerts-choice { min-height: 2.75rem; align-items: center; }
+    .alerts-advanced > summary { min-height: 2.75rem; display: flex; align-items: center; }
+    .alerts-product-photo { width: 56px; height: 56px; }
     .quick-actions { width: 100%; }
 }
 

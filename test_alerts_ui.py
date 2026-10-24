@@ -324,7 +324,7 @@ function jsonResponse(status, body, headers) {
     nav.className = "topnav-links";
     document.body.appendChild(nav);
     wireAlerts();
-    assert.equal(document.getElementById("navAlerts").textContent, "Alerts");
+    assert.equal(document.getElementById("navAlerts").textContent, "Subscribe");
     const parent = new El("div");
     appendQuickAlert(parent, { dataset: { name: "Deck", brand: "Baker", part: "Decks", size: "8.5", price: "40", url: "https://example.com/d", store: "Tactics" } });
     assert.equal(parent.querySelector("button").textContent, "Alert me");
@@ -380,11 +380,15 @@ function jsonResponse(status, body, headers) {
         part: "Decks", size: "8.25", brand: "Baker", name: "Baker Figgy Deck 8.25",
         price: "49.99", url: "https://example.com/baker", store: "CCS"
     }) });
+    assert.equal(document.getElementById("alertsTitle").textContent, "Alert me");
     assert.match(document.getElementById("alertsBody").textContent, /Baker Figgy Deck 8.25/);
+    assert.match(document.getElementById("alertsBody").textContent, /Current price \$49\.99/);
     assert.match(document.getElementById("alertsBody").textContent, /This is a local mock\. No email is sent/);
-    assert.match(document.getElementById("alertsBody").textContent, /Meaningful drop/);
-    assert.match(document.getElementById("alertsBody").textContent, /Historical low/);
+    assert.match(document.getElementById("alertsBody").textContent, /Any meaningful price drop/);
+    assert.match(document.getElementById("alertsBody").textContent, /Verified historical low/);
     assert.match(document.getElementById("alertsBody").textContent, /Verified restock/);
+    assert.equal(document.getElementById("alertsAdvanced").open, false);
+    assert.equal(document.getElementById("alertsConsent").checked, false);
     assert.equal(document.getElementById("alertsPrice").value, "49.99");
     assert.equal(document.getElementById("alertsWidth").value, "8.25");
     assert.equal(document.getElementById("alertsPart").value, "Decks");
@@ -402,8 +406,19 @@ function jsonResponse(status, body, headers) {
 
     document.getElementById("alertsConsent").checked = true;
     await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    assert.match(document.getElementById("alertsBody").textContent, /Watching this exact product is coming soon/);
+    assert.match(document.getElementById("alertsBody").textContent, /Nothing was saved/);
+    assert.equal(document.getElementById("alertsBody").textContent.includes("Check your email to confirm."), false);
+    assert.equal(callsLive.filter(call => call.url.endsWith("/v1/subscribe")).length, 0);
+    assert.equal(document.querySelector(".alerts-status"), null);
+    await clickButton("Back");
+    document.getElementById("alertsEmail").value = "skater@example.com";
+    document.getElementById("alertsConsent").checked = true;
+    document.getElementById("alertsBroad").checked = true;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
     assert.match(document.getElementById("alertsBody").textContent, /Check your email to confirm/);
     assert.match(document.getElementById("alertsBody").textContent, /were not saved/);
+    assert.match(document.getElementById("alertsBody").textContent, /not limited to one product/);
     assert.equal(document.querySelector(".alerts-status"), null);
     const posted = callsLive.find(call => call.url.endsWith("/v1/subscribe"));
     const payload = JSON.parse(posted.options.body);
@@ -457,12 +472,21 @@ function jsonResponse(status, body, headers) {
     assert.equal(location.hash, "");
 
     window.SKATEDEALS_ALERTS = { apiBase: "http://127.0.0.1:8787" };
-    await openAlerts({ draft: alertDraftFromDataset({ name: "Shoe", brand: "Nike", part: "Sneakers", size: "9", price: "40" }) });
+    await openAlerts({ draft: alertDraftFromDataset({ name: "Shoe", brand: "Nike", part: "Sneakers", size: "9", price: "40", shoesize: "9,10" }) });
     document.getElementById("alertsEmail").value = "skater@example.com";
     document.getElementById("alertsConsent").checked = true;
     const beforeShoe = callsLive.filter(call => call.url.endsWith("/v1/subscribe")).length;
     await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    assert.match(document.getElementById("alertsBody").textContent, /exact product is coming soon/);
+    assert.equal(callsLive.filter(call => call.url.endsWith("/v1/subscribe")).length, beforeShoe);
+    assert.equal(document.querySelector(".alerts-status"), null);
+    await clickButton("Back");
+    document.getElementById("alertsEmail").value = "skater@example.com";
+    document.getElementById("alertsConsent").checked = true;
+    document.getElementById("alertsBroad").checked = true;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
     assert.match(document.getElementById("alertsError").textContent, /Decks, Wheels, Trucks, or Bearings/);
+    assert.match(document.getElementById("alertsBody").textContent, /coming soon and are not sent/);
     assert.equal(callsLive.filter(call => call.url.endsWith("/v1/subscribe")).length, beforeShoe);
     assert.equal(document.querySelector(".alerts-status"), null);
 
@@ -472,7 +496,10 @@ function jsonResponse(status, body, headers) {
     assert.equal(document.querySelector(".alerts-status"), null);
     assert.ok(document.getElementById("alertsEmail"));
     assert.match(document.getElementById("alertsBody").textContent, /could not be read/);
-    assert.equal(document.getElementById("alertsTitle").textContent, "Email alerts");
+    assert.equal(document.getElementById("alertsTitle").textContent, "Subscribe");
+    assert.match(document.getElementById("alertsBody").textContent, /not a watch on one product/);
+    assert.equal(document.getElementById("alertsAdvanced").open, false);
+    assert.equal(document.getElementById("alertsConsent").checked, false);
 })().catch(err => { console.error(err); process.exit(1); });
 '''
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)

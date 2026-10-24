@@ -5708,6 +5708,9 @@ const alertsUi = {
     config: null,
     client: null,
     view: "signup",
+    entry: "digest",
+    trigger: "below",
+    broad: false,
     draft: null,
     editingId: "",
     prefs: null,
@@ -5952,16 +5955,20 @@ function ruleFromDraft(draft) {
 
 function blankAlertDraft() {
     return {
+        kind: "digest",
         brand: "",
         name: "",
         part: "",
         width: "",
+        price: "",
         max_price: "",
         alert_on_drop: false,
         alert_on_low: false,
         alert_on_stock: false,
         note: "",
-        store: ""
+        store: "",
+        image: "",
+        shoesize: ""
     };
 }
 
@@ -5971,18 +5978,53 @@ function alertDraftFromDataset(dataset) {
     const width = part === "Decks" ? deckWidth(dataset.size) : null;
     let price = finiteNumber(dataset.price);
     if (price == null || price <= 0 || price > 2000) price = null;
+    const shown = price == null ? "" : String(price);
     return {
+        kind: "product",
         brand: dataset.brand || "",
         name: dataset.name || "",
         part: part,
         width: width == null ? "" : String(width),
-        max_price: price == null ? "" : String(price),
+        price: shown,
+        max_price: shown,
         alert_on_drop: false,
         alert_on_low: false,
         alert_on_stock: false,
         note: "",
-        store: dataset.store || ""
+        store: dataset.store || "",
+        image: "",
+        shoesize: dataset.shoesize || ""
     };
+}
+
+function alertsEntryFromDraft(draft) {
+    return draft && draft.kind === "product" ? "product" : "digest";
+}
+
+function alertsMoney(value) {
+    const num = finiteNumber(value);
+    if (num == null) return "";
+    return "$" + num.toFixed(2);
+}
+
+// API v1 stores a brand or product-name rule only. A general deal list and an
+// exact product watch are not fields the Worker accepts, so those actions never
+// call subscribe and never report success.
+function buildProductRule(draft, trigger) {
+    const shaped = Object.assign({}, draft || {});
+    shaped.note = "";
+    if (trigger === "drop") {
+        shaped.alert_on_drop = true;
+        shaped.max_price = "";
+    } else if (trigger === "below") {
+        shaped.alert_on_drop = false;
+        if (String(shaped.max_price == null ? "" : shaped.max_price).trim() === "") {
+            return { ok: false, error: "Enter a price greater than 0 and at most 2000." };
+        }
+    } else {
+        return { ok: false, error: "Choose a price or a meaningful drop." };
+    }
+    return buildRule(shaped);
 }
 
 function draftFromRule(rule) {
@@ -6310,6 +6352,9 @@ function paintDown(body) {
 function paintCheck(body) {
     body.appendChild(alertsEl("p", "alerts-copy", alertsUi.message || "Check your email to confirm."));
     body.appendChild(alertsEl("p", "alerts-hint", "If this address is already active, that email is a manage link and these rules were not saved."));
+    if (alertsUi.entry === "product") {
+        body.appendChild(alertsEl("p", "alerts-hint", "This watch matches listings by brand and name words. It is not limited to one product, and it is not active yet."));
+    }
     const actions = alertsEl("div", "alerts-actions");
     actions.appendChild(buttonEl("Email me a link", "alerts-secondary", "relink"));
     actions.appendChild(buttonEl("Use a different address", "alerts-secondary", "reset-signup"));
@@ -6321,16 +6366,36 @@ function paintDone(body) {
     body.appendChild(buttonEl("Create an alert", "alerts-secondary", "reset-signup"));
 }
 
-function paintSignup(body) {
+function paintVerifyNote(parent) {
+    parent.appendChild(alertsEl("p", "alerts-verify", "We'll email you a link to confirm. Nothing is active until you verify that link."));
+}
+
+function paintAdvancedShell() {
+    const advanced = document.createElement("details");
+    advanced.className = "alerts-advanced";
+    advanced.id = "alertsAdvanced";
+    advanced.open = false;
+    const summary = document.createElement("summary");
+    summary.textContent = "Advanced options";
+    advanced.appendChild(summary);
+    return advanced;
+}
+
+function paintDigestAdvanced(parent) {
+    const advanced = paintAdvancedShell();
+    advanced.appendChild(alertsEl("p", "alerts-soon", "Notification preferences for this list are coming soon."));
+    advanced.appendChild(alertsEl("p", "alerts-hint", "New deals, price drops, and historical lows on the general list are not available yet. The service can store those switches only on a brand or product-name rule, which is a different alert."));
+    parent.appendChild(advanced);
+}
+
+function paintDigestSignup(body) {
     if (alertsUi.health && alertsUi.health.mode === "mock") {
         body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
     } else if (alertsUi.healthUnread) {
         body.appendChild(alertsEl("p", "alerts-banner", "The alerts status check could not be read from this page."));
     }
-    const draft = alertsUi.draft || blankAlertDraft();
-    if (draft.store || draft.name) {
-        body.appendChild(alertsEl("p", "alerts-subtitle", ruleTitle({ brand: draft.brand, name: draft.name })));
-    }
+    body.appendChild(alertsEl("p", "alerts-copy", "Get general SkateDeals deal emails. This is not a watch on one product."));
+    body.appendChild(alertsEl("p", "alerts-soon", "General deal emails are coming soon. Nothing was subscribed."));
     const form = alertsEl("form", "alerts-form");
     form.id = "alertsForm";
     form.noValidate = true;
@@ -6338,9 +6403,164 @@ function paintSignup(body) {
     const email = inputEl("email", alertsUi.email);
     email.autocomplete = "email";
     email.required = true;
+    email.setAttribute("aria-required", "true");
     form.appendChild(fieldWrap("alertsEmail", "Email", email));
-    paintRuleFields(form, draft);
-    form.appendChild(checkWrap("alertsConsent", "I agree to receive email about these alerts. I can unsubscribe at any time.", alertsUi.consent));
+    form.appendChild(checkWrap("alertsConsent", "I agree to receive SkateDeals deal emails. I can unsubscribe at any time.", alertsUi.consent));
+    const actions = alertsEl("div", "alerts-actions");
+    const submit = alertsEl("button", "alerts-primary", "Subscribe");
+    submit.id = "alertsSubmit";
+    submit.type = "submit";
+    actions.appendChild(submit);
+    if (readManageToken()) actions.appendChild(buttonEl("Manage alerts", "alerts-secondary", "manage-saved"));
+    actions.appendChild(buttonEl("I already confirmed", "alerts-secondary", "relink"));
+    form.appendChild(actions);
+    paintVerifyNote(form);
+    paintDigestAdvanced(form);
+    body.appendChild(form);
+}
+
+function alertsProductImage(card) {
+    if (!card || typeof card.querySelector !== "function") return "";
+    const img = card.querySelector("img");
+    if (!img) return "";
+    const src = img.getAttribute ? (img.getAttribute("src") || "") : "";
+    return /^https?:\/\//i.test(src) ? src : "";
+}
+
+function paintProductSummary(body, draft) {
+    const row = alertsEl("div", "alerts-product");
+    const src = String(draft.image || "");
+    if (/^https?:\/\//i.test(src)) {
+        const img = document.createElement("img");
+        img.className = "alerts-product-photo";
+        img.alt = draft.name || "Product photo";
+        img.src = src;
+        img.setAttribute("src", src);
+        img.addEventListener("error", () => { img.hidden = true; });
+        row.appendChild(img);
+    }
+    const text = alertsEl("div", "alerts-product-copy");
+    text.appendChild(alertsEl("p", "alerts-product-name", draft.name || "This product"));
+    const price = alertsMoney(draft.price);
+    text.appendChild(alertsEl("p", "alerts-product-price", price ? "Current price " + price : "Current price unavailable"));
+    row.appendChild(text);
+    body.appendChild(row);
+}
+
+function setAlertsEnabled(ids, enabled) {
+    ids.forEach(id => {
+        const node = document.getElementById(id);
+        if (node) node.disabled = !enabled;
+    });
+}
+
+function paintProductAdvanced(form, draft) {
+    const advanced = paintAdvancedShell();
+    advanced.appendChild(alertsEl("p", "alerts-section", "Matching"));
+    advanced.appendChild(alertsEl("p", "alerts-soon", "Watching this exact product is coming soon. The service cannot store a product link or a single product id."));
+    advanced.appendChild(checkWrap("alertsBroad", "Match listings by brand and name (other products can match).", alertsUi.broad));
+    advanced.appendChild(alertsEl("p", "alerts-hint", "Leave this off to avoid a broader watch. Every word of the brand must appear in the listing name. The product name is matched as words, not as this exact item."));
+    const brand = inputEl("text", draft.brand);
+    brand.maxLength = 60;
+    brand.autocomplete = "off";
+    brand.disabled = !alertsUi.broad;
+    advanced.appendChild(fieldWrap("alertsBrand", "Brand", brand));
+    const name = inputEl("text", draft.name);
+    name.maxLength = 80;
+    name.disabled = !alertsUi.broad;
+    advanced.appendChild(fieldWrap("alertsName", "Product name", name));
+    const part = document.createElement("select");
+    part.disabled = !alertsUi.broad;
+    [["", "Choose a part"], ["Decks", "Decks"], ["Wheels", "Wheels"], ["Trucks", "Trucks"], ["Bearings", "Bearings"]].forEach(pair => {
+        const option = alertsEl("option", "", pair[1]);
+        option.value = pair[0];
+        part.appendChild(option);
+    });
+    part.value = draft.part || "";
+    advanced.appendChild(fieldWrap("alertsPart", "Part", part));
+    advanced.appendChild(alertsEl("p", "alerts-section", "Sizes"));
+    const width = inputEl("text", draft.width);
+    width.inputMode = "decimal";
+    width.disabled = !alertsUi.broad;
+    width.setAttribute("aria-label", "Deck width from 5 to 12");
+    advanced.appendChild(fieldWrap("alertsWidth", "Deck width (5–12)", width));
+    advanced.appendChild(alertsEl("p", "alerts-hint", "Only a deck width is saved. Other sizes are coming soon and are not sent."));
+    if (draft.shoesize) {
+        advanced.appendChild(alertsEl("p", "alerts-soon", "Sizes on this product (" + draft.shoesize + ") are coming soon and are not sent."));
+    }
+    advanced.appendChild(alertsEl("p", "alerts-section", "Tracked lows"));
+    const lowWrap = checkWrap("alertsLow", "Verified historical low", draft.alert_on_low);
+    const lowInput = lowWrap.querySelector("input");
+    if (lowInput) lowInput.disabled = !alertsUi.broad;
+    advanced.appendChild(lowWrap);
+    advanced.appendChild(alertsEl("p", "alerts-section", "Verified restock"));
+    const stockWrap = checkWrap("alertsStock", "Verified restock", draft.alert_on_stock);
+    const stockInput = stockWrap.querySelector("input");
+    if (stockInput) stockInput.disabled = !alertsUi.broad;
+    advanced.appendChild(stockWrap);
+    advanced.appendChild(alertsEl("p", "alerts-hint", "For a deck, the width above is included as the restock width."));
+    form.appendChild(advanced);
+    const broadInput = advanced.querySelector("#alertsBroad");
+    if (broadInput) {
+        broadInput.addEventListener("change", () => {
+            setAlertsEnabled(["alertsBrand", "alertsName", "alertsPart", "alertsWidth", "alertsLow", "alertsStock"], broadInput.checked);
+        });
+    }
+}
+
+function paintProductChoices(form, draft) {
+    const group = alertsEl("fieldset", "alerts-choices");
+    const legend = alertsEl("legend", "alerts-legend", "Notify me");
+    group.appendChild(legend);
+    const belowLabel = alertsEl("label", "alerts-choice");
+    const below = document.createElement("input");
+    below.type = "radio";
+    below.name = "alertsTrigger";
+    below.id = "alertsTriggerBelow";
+    below.checked = alertsUi.trigger !== "drop";
+    belowLabel.append(below, alertsEl("span", "", "Alert when below $"));
+    const price = inputEl("text", draft.max_price);
+    price.id = "alertsPrice";
+    price.inputMode = "decimal";
+    price.autocomplete = "off";
+    price.setAttribute("aria-label", "Price threshold in dollars");
+    belowLabel.appendChild(price);
+    group.appendChild(belowLabel);
+    const dropLabel = alertsEl("label", "alerts-choice");
+    const drop = document.createElement("input");
+    drop.type = "radio";
+    drop.name = "alertsTrigger";
+    drop.id = "alertsTriggerDrop";
+    drop.checked = alertsUi.trigger === "drop";
+    dropLabel.append(drop, alertsEl("span", "", "Any meaningful price drop"));
+    group.appendChild(dropLabel);
+    form.appendChild(group);
+    price.addEventListener("focus", () => {
+        below.checked = true;
+        drop.checked = false;
+    });
+}
+
+function paintProductSignup(body) {
+    if (alertsUi.health && alertsUi.health.mode === "mock") {
+        body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
+    } else if (alertsUi.healthUnread) {
+        body.appendChild(alertsEl("p", "alerts-banner", "The alerts status check could not be read from this page."));
+    }
+    const draft = alertsUi.draft || blankAlertDraft();
+    paintProductSummary(body, draft);
+    body.appendChild(alertsEl("p", "alerts-copy", "Email you about this product."));
+    const form = alertsEl("form", "alerts-form");
+    form.id = "alertsForm";
+    form.noValidate = true;
+    form.addEventListener("submit", submitSignup);
+    paintProductChoices(form, draft);
+    const email = inputEl("email", alertsUi.email);
+    email.autocomplete = "email";
+    email.required = true;
+    email.setAttribute("aria-required", "true");
+    form.appendChild(fieldWrap("alertsEmail", "Email", email));
+    form.appendChild(checkWrap("alertsConsent", "I agree to receive email about this alert. I can unsubscribe at any time.", alertsUi.consent));
     ensureTurnstile(form);
     const actions = alertsEl("div", "alerts-actions");
     const submit = alertsEl("button", "alerts-primary", "Create alert");
@@ -6349,7 +6569,29 @@ function paintSignup(body) {
     actions.appendChild(submit);
     actions.appendChild(buttonEl("I already confirmed", "alerts-secondary", "relink"));
     form.appendChild(actions);
+    paintVerifyNote(form);
+    form.appendChild(alertsEl("p", "alerts-soon", "An exact watch of this product is coming soon."));
+    paintProductAdvanced(form, draft);
     body.appendChild(form);
+}
+
+function paintUnsupported(body) {
+    const status = alertsEl("p", "alerts-soon", alertsUi.entry === "product"
+        ? "Watching this exact product is coming soon. Nothing was saved."
+        : "General deal emails are coming soon. Nothing was subscribed.");
+    status.setAttribute("role", "status");
+    body.appendChild(status);
+    body.appendChild(alertsEl("p", "alerts-copy", alertsUi.entry === "product"
+        ? "No email was sent. Brand and name matching stayed off, so this was not saved as a broader watch."
+        : "No email was sent."));
+    const back = buttonEl("Back", "alerts-secondary", "reset-signup");
+    back.id = "alertsBack";
+    body.appendChild(back);
+}
+
+function paintSignup(body) {
+    if (alertsUi.entry === "product") paintProductSignup(body);
+    else paintDigestSignup(body);
 }
 
 function paintRelink(body) {
@@ -6412,6 +6654,7 @@ function paintManage(body) {
 }
 
 function paintEdit(body) {
+    body.appendChild(alertsEl("p", "alerts-hint", "This matches listings by brand and name words. It is not a general deal email and not one exact product."));
     const draft = alertsUi.draft || blankAlertDraft();
     const form = alertsEl("form", "alerts-form");
     form.id = "alertsEditForm";
@@ -6437,7 +6680,8 @@ function paintAlerts(focusId) {
     const titles = {
         soon: "Alerts",
         down: "Alerts",
-        signup: "Email alerts",
+        signup: alertsUi.entry === "product" ? "Alert me" : "Subscribe",
+        unsupported: alertsUi.entry === "product" ? "Alert me" : "Subscribe",
         check: "Check your email",
         manage: "Manage alerts",
         edit: alertsUi.editingId ? "Edit alert" : "Add alert",
@@ -6445,18 +6689,19 @@ function paintAlerts(focusId) {
         done: "Alerts"
     };
     if (title) title.textContent = titles[alertsUi.view] || "Alerts";
-    if (live) live.textContent = alertsUi.view === "check" ? "" : (alertsUi.message || "");
+    if (live) live.textContent = (alertsUi.view === "check" || alertsUi.view === "unsupported") ? "" : (alertsUi.message || "");
     if (error) error.textContent = alertsUi.error || "";
     body.replaceChildren();
     if (alertsUi.view === "soon") paintSoon(body);
     else if (alertsUi.view === "down") paintDown(body);
     else if (alertsUi.view === "check") paintCheck(body);
+    else if (alertsUi.view === "unsupported") paintUnsupported(body);
     else if (alertsUi.view === "done") paintDone(body);
     else if (alertsUi.view === "manage") paintManage(body);
     else if (alertsUi.view === "edit") paintEdit(body);
     else if (alertsUi.view === "relink") paintRelink(body);
     else paintSignup(body);
-    const focus = focusId ? document.getElementById(focusId) : null;
+    const focus = document.getElementById(focusId || (alertsUi.view === "unsupported" ? "alertsBack" : ""));
     if (focus && focus.focus) focus.focus();
 }
 
@@ -6508,6 +6753,14 @@ async function loadAlertsPreferences(token) {
     paintAlerts();
 }
 
+function readProductTrigger() {
+    const drop = document.getElementById("alertsTriggerDrop");
+    const below = document.getElementById("alertsTriggerBelow");
+    if (drop && drop.checked) return "drop";
+    if (below && below.checked) return "below";
+    return alertsUi.trigger === "drop" ? "drop" : "below";
+}
+
 async function submitSignup(event) {
     if (event && event.preventDefault) event.preventDefault();
     if (alertsUi.busy || !alertsUi.client) return;
@@ -6516,22 +6769,39 @@ async function submitSignup(event) {
     alertsUi.email = emailNode ? emailNode.value : "";
     alertsUi.consent = !!(consentNode && consentNode.checked);
     alertsUi.draft = draftFromForm(alertsUi.draft);
+    alertsUi.active = false;
+    if (alertsUi.entry === "product") {
+        alertsUi.trigger = readProductTrigger();
+        const broadNode = document.getElementById("alertsBroad");
+        alertsUi.broad = !!(broadNode && broadNode.checked);
+    }
     if (!validEmail(alertsUi.email)) {
-        alertsUi.error = "Enter an email address.";
-        alertsUi.active = false;
+        alertsUi.error = "Enter an email address. Nothing was saved.";
         paintAlerts("alertsEmail");
         return;
     }
     if (!alertsUi.consent) {
-        alertsUi.error = "Check the box to agree before subscribing.";
-        alertsUi.active = false;
+        alertsUi.error = "Check the box to agree before subscribing. Nothing was saved.";
         paintAlerts("alertsConsent");
         return;
     }
-    const built = buildRule(alertsUi.draft);
+    if (alertsUi.entry !== "product") {
+        alertsUi.error = "";
+        alertsUi.message = "";
+        alertsUi.view = "unsupported";
+        paintAlerts();
+        return;
+    }
+    if (!alertsUi.broad) {
+        alertsUi.error = "";
+        alertsUi.message = "";
+        alertsUi.view = "unsupported";
+        paintAlerts();
+        return;
+    }
+    const built = buildProductRule(alertsUi.draft, alertsUi.trigger);
     if (!built.ok) {
-        alertsUi.error = built.error;
-        alertsUi.active = false;
+        alertsUi.error = built.error + " Nothing was saved.";
         paintAlerts();
         return;
     }
@@ -6677,7 +6947,19 @@ function onAlertsClick(event) {
         alertsUi.active = false;
         alertsUi.prefs = null;
         alertsUi.draft = alertsUi.draft || blankAlertDraft();
+        alertsUi.entry = alertsEntryFromDraft(alertsUi.draft);
         paintAlerts("alertsEmail");
+    } else if (action === "manage-saved") {
+        const saved = readManageToken();
+        alertsUi.error = "";
+        alertsUi.message = "";
+        alertsUi.active = false;
+        if (!saved) {
+            alertsUi.view = "relink";
+            paintAlerts("alertsLinkEmail");
+            return;
+        }
+        return loadAlertsPreferences(saved);
     } else if (action === "add") {
         alertsUi.draft = blankAlertDraft();
         alertsUi.editingId = "";
@@ -6751,9 +7033,10 @@ function mountAlertsNav() {
     if (document.getElementById("navAlerts")) return;
     const nav = document.querySelector ? document.querySelector(".topnav-links") : null;
     if (!nav) return;
-    const button = alertsEl("button", "nav-alerts", "Alerts");
+    const button = alertsEl("button", "nav-link nav-alerts", "Subscribe");
     button.id = "navAlerts";
     button.type = "button";
+    button.setAttribute("aria-label", "Subscribe to SkateDeals deal emails");
     button.addEventListener("click", () => openAlerts());
     nav.appendChild(button);
 }
@@ -6766,13 +7049,89 @@ function isAlertsOpen() {
 function closeAlerts() {
     alertsUi.open = false;
     setHidden(document.getElementById("alertsRoot"), true);
+    if (document.body && document.body.classList) document.body.classList.remove("alerts-open");
     if (alertsUi.returnFocus && alertsUi.returnFocus.focus) alertsUi.returnFocus.focus();
+}
+
+function alertsPanel() {
+    const root = document.getElementById("alertsRoot");
+    if (!root || !root.querySelector) return null;
+    return root.querySelector(".alerts-panel");
+}
+
+function alertsHiddenByClosedDetails(node) {
+    let parent = node.parentElement || node.parent || null;
+    while (parent) {
+        const tag = String(parent.tagName || parent.tag || "").toLowerCase();
+        if (tag === "details" && !parent.open) {
+            const nodeTag = String(node.tagName || node.tag || "").toLowerCase();
+            const nodeParent = node.parentElement || node.parent || null;
+            if (nodeTag === "summary" && nodeParent === parent) return false;
+            return true;
+        }
+        parent = parent.parentElement || parent.parent || null;
+    }
+    return false;
+}
+
+function alertsIsTabStop(node) {
+    const tag = String(node.tagName || node.tag || "").toLowerCase();
+    if (["a", "button", "input", "select", "textarea", "summary"].indexOf(tag) < 0) return false;
+    if (node.disabled) return false;
+    if (node.hidden) return false;
+    if (node.tabIndex < 0) return false;
+    if (alertsHiddenByClosedDetails(node)) return false;
+    return true;
+}
+
+function alertsTabStops(panel) {
+    const stops = [];
+    const visit = node => {
+        const kids = (node && node.children) || [];
+        for (let i = 0; i < kids.length; i++) {
+            const child = kids[i];
+            if (!child) continue;
+            if (alertsIsTabStop(child)) stops.push(child);
+            visit(child);
+        }
+    };
+    visit(panel);
+    return stops;
+}
+
+function onAlertsKeydown(event) {
+    if (!isAlertsOpen() || !event) return;
+    if (event.key === "Escape") {
+        if (event.preventDefault) event.preventDefault();
+        closeAlerts();
+        return;
+    }
+    if (event.key !== "Tab") return;
+    const panel = alertsPanel();
+    if (!panel) return;
+    const stops = alertsTabStops(panel);
+    if (!stops.length) return;
+    const active = document.activeElement;
+    const first = stops[0];
+    const last = stops[stops.length - 1];
+    const inside = panel.contains ? panel.contains(active) : false;
+    if (event.shiftKey) {
+        if (!inside || active === first) {
+            if (event.preventDefault) event.preventDefault();
+            if (last.focus) last.focus();
+        }
+        return;
+    }
+    if (!inside || active === last) {
+        if (event.preventDefault) event.preventDefault();
+        if (first.focus) first.focus();
+    }
 }
 
 async function openAlerts(options) {
     options = options || {};
     ensureAlertsShell();
-    alertsUi.returnFocus = (typeof document !== "undefined" && document.activeElement) || null;
+    alertsUi.returnFocus = options.returnFocus || (typeof document !== "undefined" && document.activeElement) || null;
     alertsUi.config = alertsPageConfig();
     alertsUi.client = createAlertsClient(alertsUi.config);
     alertsUi.open = true;
@@ -6782,9 +7141,14 @@ async function openAlerts(options) {
     alertsUi.active = false;
     alertsUi.health = null;
     alertsUi.healthUnread = false;
+    alertsUi.consent = false;
+    alertsUi.broad = false;
+    alertsUi.trigger = "below";
+    if (document.body && document.body.classList) document.body.classList.add("alerts-open");
     setHidden(document.getElementById("alertsRoot"), false);
     if (options.draft) alertsUi.draft = options.draft;
     if (!alertsUi.draft) alertsUi.draft = blankAlertDraft();
+    alertsUi.entry = alertsEntryFromDraft(alertsUi.draft);
     if (alertsUi.config.mode !== "live") {
         alertsUi.view = "soon";
         alertsUi.prefs = null;
@@ -6799,20 +7163,12 @@ async function openAlerts(options) {
         await loadAlertsPreferences(options.fragment.token);
         return;
     }
-    const saved = readManageToken();
-    if (saved && options.adding) {
-        await loadAlertsPreferences(saved);
-        if (alertsUi.view === "manage") {
-            alertsUi.editingId = "";
-            alertsUi.view = "edit";
-            alertsUi.error = "";
-            paintAlerts("alertsBrand");
+    if (options.manage) {
+        const saved = readManageToken();
+        if (saved) {
+            await loadAlertsPreferences(saved);
+            return;
         }
-        return;
-    }
-    if (saved && !options.draft) {
-        await loadAlertsPreferences(saved);
-        return;
     }
     alertsUi.view = "signup";
     alertsUi.prefs = null;
@@ -6827,9 +7183,12 @@ function appendQuickAlert(parent, card) {
     button.addEventListener("click", event => {
         if (event.stopPropagation) event.stopPropagation();
         if (event.preventDefault) event.preventDefault();
-        if (typeof closeQuickView === "function") closeQuickView();
         const dataset = (card && card.dataset) || {};
-        openAlerts({ draft: alertDraftFromDataset(dataset), adding: true });
+        const draft = alertDraftFromDataset(dataset);
+        draft.image = alertsProductImage(card);
+        const returnFocus = card && typeof card.querySelector === "function" ? card.querySelector(".card-more") : button;
+        if (typeof closeQuickView === "function") closeQuickView();
+        openAlerts({ draft: draft, returnFocus: returnFocus });
     });
     parent.appendChild(button);
 }
@@ -6839,6 +7198,9 @@ function wireAlerts() {
     alertsUi.wired = true;
     mountAlertsNav();
     ensureAlertsShell();
+    if (typeof document !== "undefined" && document.addEventListener) {
+        document.addEventListener("keydown", onAlertsKeydown);
+    }
     if (typeof window !== "undefined" && window.addEventListener) {
         window.addEventListener("hashchange", () => {
             const parsed = consumeAlertsFragment();
