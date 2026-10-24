@@ -30,7 +30,8 @@ class AlertsUiTests(unittest.TestCase):
         self.assertNotIn("/v1/mock/outbox", block)
         self.assertNotIn("/v1/internal", block)
         self.assertNotIn("alert_on_new", block)
-        self.assertNotIn("product_url", block)
+        self.assertIn("product_url", block)
+        self.assertNotIn("product_key", block)
         self.assertNotIn("paused", block)
         self.assertNotIn("Open preview confirmation", block)
         self.assertNotIn("RESEND_API_KEY", js)
@@ -378,7 +379,7 @@ function jsonResponse(status, body, headers) {
     location.hostname = "localhost";
     await openAlerts({ draft: alertDraftFromDataset({
         part: "Decks", size: "8.25", brand: "Baker", name: "Baker Figgy Deck 8.25",
-        price: "49.99", url: "https://example.com/baker", store: "CCS"
+        price: "49.99", url: "https://shop.ccs.com/products/baker-figgy-deck-8-25", store: "CCS"
     }) });
     assert.equal(document.getElementById("alertsTitle").textContent, "Alert me");
     assert.match(document.getElementById("alertsBody").textContent, /Baker Figgy Deck 8.25/);
@@ -390,8 +391,9 @@ function jsonResponse(status, body, headers) {
     assert.equal(document.getElementById("alertsAdvanced").open, false);
     assert.equal(document.getElementById("alertsConsent").checked, false);
     assert.equal(document.getElementById("alertsPrice").value, "49.99");
-    assert.equal(document.getElementById("alertsWidth").value, "8.25");
-    assert.equal(document.getElementById("alertsPart").value, "Decks");
+    assert.equal(document.getElementById("alertsBrand"), null);
+    assert.equal(document.getElementById("alertsPart"), null);
+    assert.equal(document.getElementById("alertsWidth"), null);
     assert.equal(findButton("Pause"), null);
     assert.equal(findButton("Open preview confirmation"), null);
     await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
@@ -406,19 +408,10 @@ function jsonResponse(status, body, headers) {
 
     document.getElementById("alertsConsent").checked = true;
     await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
-    assert.match(document.getElementById("alertsBody").textContent, /Watching this exact product is coming soon/);
-    assert.match(document.getElementById("alertsBody").textContent, /Nothing was saved/);
-    assert.equal(document.getElementById("alertsBody").textContent.includes("Check your email to confirm."), false);
-    assert.equal(callsLive.filter(call => call.url.endsWith("/v1/subscribe")).length, 0);
-    assert.equal(document.querySelector(".alerts-status"), null);
-    await clickButton("Back");
-    document.getElementById("alertsEmail").value = "skater@example.com";
-    document.getElementById("alertsConsent").checked = true;
-    document.getElementById("alertsBroad").checked = true;
-    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
     assert.match(document.getElementById("alertsBody").textContent, /Check your email to confirm/);
     assert.match(document.getElementById("alertsBody").textContent, /were not saved/);
-    assert.match(document.getElementById("alertsBody").textContent, /not limited to one product/);
+    assert.match(document.getElementById("alertsBody").textContent, /follows that one listing/);
+    assert.match(document.getElementById("alertsBody").textContent, /not active until/);
     assert.equal(document.querySelector(".alerts-status"), null);
     const posted = callsLive.find(call => call.url.endsWith("/v1/subscribe"));
     const payload = JSON.parse(posted.options.body);
@@ -426,13 +419,16 @@ function jsonResponse(status, body, headers) {
     assert.equal(payload.consent, true);
     assert.equal(payload.consent_version, "2026-10");
     assert.equal(payload.turnstile_token, "mock-turnstile-pass");
-    assert.equal(payload.rules[0].brand, "Baker");
-    assert.equal(payload.rules[0].name, "Baker Figgy Deck 8.25");
-    assert.equal(payload.rules[0].part, "Decks");
-    assert.equal(payload.rules[0].width, 8.25);
+    assert.equal(payload.rules[0].kind, "watch");
+    assert.equal(payload.rules[0].product_url, "https://shop.ccs.com/products/baker-figgy-deck-8-25");
+    assert.equal(payload.rules[0].label, "Baker Figgy Deck 8.25");
     assert.equal(payload.rules[0].max_price, 49.99);
+    assert.equal(payload.rules[0].brand, undefined);
+    assert.equal(payload.rules[0].name, undefined);
+    assert.equal(payload.rules[0].part, undefined);
+    assert.equal(payload.rules[0].width, undefined);
     assert.equal(payload.rules[0].id, undefined);
-    assert.equal(payload.rules[0].product_url, undefined);
+    assert.equal(payload.rules[0].product_key, undefined);
     assert.equal(payload.rules[0].alert_on_drop, undefined);
     assert.equal(location.hash, "");
     assert.equal(location.search, "?token=should-stay-out");
@@ -477,16 +473,11 @@ function jsonResponse(status, body, headers) {
     document.getElementById("alertsConsent").checked = true;
     const beforeShoe = callsLive.filter(call => call.url.endsWith("/v1/subscribe")).length;
     await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
-    assert.match(document.getElementById("alertsBody").textContent, /exact product is coming soon/);
-    assert.equal(callsLive.filter(call => call.url.endsWith("/v1/subscribe")).length, beforeShoe);
-    assert.equal(document.querySelector(".alerts-status"), null);
-    await clickButton("Back");
-    document.getElementById("alertsEmail").value = "skater@example.com";
-    document.getElementById("alertsConsent").checked = true;
-    document.getElementById("alertsBroad").checked = true;
-    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
-    assert.match(document.getElementById("alertsError").textContent, /Decks, Wheels, Trucks, or Bearings/);
+    assert.match(document.getElementById("alertsError").textContent, /listing link/);
+    assert.match(document.getElementById("alertsError").textContent, /Nothing was saved/);
+    assert.match(document.getElementById("alertsBody").textContent, /Specific sneaker sizes are coming soon and are not sent/);
     assert.match(document.getElementById("alertsBody").textContent, /coming soon and are not sent/);
+    assert.equal(document.getElementById("alertsBody").textContent.includes("Check your email to confirm."), false);
     assert.equal(callsLive.filter(call => call.url.endsWith("/v1/subscribe")).length, beforeShoe);
     assert.equal(document.querySelector(".alerts-status"), null);
 

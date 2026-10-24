@@ -32,7 +32,13 @@ A 202 `{"status":"check_email"}` is not an active alert. The page shows "Check y
 
 `PUT /v1/preferences` replaces the whole list. Response `id` values are not sent back (`unknown_field`). The last rule is not removed with an empty list; the page asks the person to unsubscribe. Adding stops at `max_rules` from the preferences payload (10 in the examples).
 
-Rule fields the form can send: `brand`, `name`, `part` (`Decks`, `Wheels`, `Trucks`, `Bearings`), deck `width`, `max_price`, `alert_on_drop`, `alert_on_low`, `alert_on_stock`, `back_in_stock_width` (with a deck width and restock), and `note`. Numbers are JSON numbers. False flags are omitted. Part is required because an omitted part becomes Decks on the server.
+Subscribe, from the main nav, sends one digest rule. With Advanced left at the defaults the rule is exactly `{"kind": "digest"}`. Advanced can add `parts` (Decks, Trucks, Wheels, Bearings, Sneakers, Accessories, Completes; omitted when every part is included), `events` (`new`, `drop`, `low`; omitted when all three are included), deck `min_width` and `max_width`, and `max_price`.
+
+Alert me, from a product quick view, sends one watch: `kind` `"watch"`, `product_url` (the card's listing URL, unchanged), optional `label` (the product name), and either `max_price` ("below $X") or no price trigger ("any meaningful price drop"). Advanced can add `alert_on_low` and `alert_on_stock`. A drop combined with either of those also sends `alert_on_drop: true`, because a watch that already has a trigger is not given a drop by the service. Brand, name, part, and width are not sent on a watch.
+
+Search rules stay on Manage → Add alert for word matching: `brand`, `name`, `part` (`Decks`, `Wheels`, `Trucks`, `Bearings`), deck `width`, `max_price`, `alert_on_drop`, `alert_on_low`, `alert_on_stock`, `back_in_stock_width` (with a deck width and restock), and `note`. Numbers are JSON numbers. False flags are omitted. Part is required on a search rule because an omitted part becomes Decks on the server.
+
+If a manage token is already stored, Subscribe and Alert me load preferences and `PUT` the whole list (replacing the one digest, or appending a watch) instead of posting subscribe again. A repeat subscribe does not change rules. The page shows the subscription as active only when that preferences response has `status` `"active"`.
 
 ## Tokens
 
@@ -48,4 +54,4 @@ The page reads `{"error":"<code>"}`, optional `fields`, and `retry_after` (or th
 
 ## Not in the API, so not in the UI
 
-Pause, per-rule pending/active/paused badges, `alert_on_new`, `product_url`, `size`, and the catalog parts Sneakers, Accessories, and Completes. A card with one of those parts makes the person pick Decks, Wheels, Trucks, or Bearings before submit. Stars stay in local storage and never subscribe.
+Pause, per-rule pending/active/paused badges, `alert_on_new`, and specific sizes (including sneaker sizes). A watch follows the listing URL only. Sizes on a shoe are shown as coming soon and are not sent. The response-only `product_key` is not sent back. Stars stay in local storage and never subscribe.
