@@ -1991,6 +1991,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     )
     chunks.append(_alerts_config_script())
     chunks.append(f"<script>const WIDTH_RANGES = {ranges_literal};\n{_read_asset('page.js')}</script>")
+    # Public site token. defer keeps the beacon off the critical path.
+    chunks.append(
+        "<!-- Cloudflare Web Analytics -->"
+        "<script defer src='https://static.cloudflareinsights.com/beacon.min.js' "
+        "data-cf-beacon='{\"token\": \"542cbf4d24534b70be3715cefe0e6a8e\"}'></script>"
+        "<!-- End Cloudflare Web Analytics -->"
+    )
     chunks.append("</body></html>")
     return "\n".join(chunk for chunk in chunks if chunk)
 
