@@ -1,5 +1,7 @@
 # Copy to wrangler.toml (gitignored) and fill in the owner's own values.
-# Nothing in this repository deploys the Worker. See docs/alerts-backend.md.
+# Deploy with ./deploy.sh (not plain `wrangler deploy`): it deploys only an
+# up-to-date main and stamps the commit into /v1/health. See
+# docs/alerts-backend.md.
 #
 # Secrets are never written here. Set them with:
 #   wrangler secret put HMAC_SECRET            # 32+ random characters; same value as the
@@ -20,7 +22,7 @@ workers_dev = true
 MODE = "staging"                                   # staging | production (mock is local only)
 PUBLIC_ORIGIN = "https://pchoward.github.io"
 PUBLIC_API_URL = "https://skatedeals-alerts.<your-subdomain>.workers.dev"
-MANAGE_PAGE_URL = "https://pchoward.github.io/salesscraper2/alerts.html"
+MANAGE_PAGE_URL = "https://pchoward.github.io/salesscraper2/sale_items_chart.html"   # the report page reads #verify= and #manage=
 CONSENT_VERSION = "2026-10"
 EMAIL_FROM = "SkateDeals <alerts@your-verified-domain.example>"   # staging may use onboarding@resend.dev
 MAX_ACTIVE_SUBSCRIBERS = "200"

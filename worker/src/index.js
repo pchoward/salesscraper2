@@ -78,9 +78,10 @@ function health(request, config) {
   const cors = trustedCors(request, config);
   if (request.method === "OPTIONS") return preflight(cors);
   if (request.method !== "GET") return withHeaders(json(405, { error: "method_not_allowed" }), cors);
+  const commit = config.settings.commit ? { commit: config.settings.commit } : {};
   const response = config.ok
-    ? json(200, { ok: true, api_version: API_VERSION, mode: config.settings.mode })
-    : json(503, { ok: false, problems: config.problems });
+    ? json(200, { ok: true, api_version: API_VERSION, mode: config.settings.mode, ...commit })
+    : json(503, { ok: false, problems: config.problems, ...commit });
   return withHeaders(response, cors);
 }
 
