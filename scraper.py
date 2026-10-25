@@ -17,6 +17,7 @@ from history import record_misses
 from notify import send_digest, send_admin_warnings
 from notification_engine import send_notifications
 from pipeline import apply_run_updates, decorate_digest, prepare_run
+from rebuild_page import discard_report_inputs, save_report_inputs
 from report import build_digest, build_report_html, compare_catalogs
 from stores.stock import confirm_stock
 from site_sales import SITE_SALES_PATH, load_state as load_site_sales
@@ -50,7 +51,7 @@ def load_price_history():
 
 def save_price_history(history):
     """Save price history to JSON file"""
-    safe_write_file("price_history.json", json.dumps(history, indent=2) + "\n")
+    return safe_write_file("price_history.json", json.dumps(history, indent=2) + "\n")
 
 
 def save_health(health):
@@ -169,8 +170,9 @@ def main():
             skip_urls=carried,
             health_results=prepared["health_results"],
         )
+    history_saved = False
     if updates.get("save_history"):
-        save_price_history(updates["history"])
+        history_saved = save_price_history(updates["history"])
         logging.info("Price history has %s listings", len(updates["history"]))
     try:
         save_health(updates["health"])
@@ -182,7 +184,7 @@ def main():
     except Exception as exc:
         logging.error("Could not save site sales (continuing): %s", exc)
 
-    save_current(curr_data)
+    data_saved = save_current(curr_data)
     try:
         decorate_digest(
             digest,
@@ -208,6 +210,16 @@ def main():
         safe_write_file("sale_items_chart.html", html)
     except Exception as exc:
         logging.error("Report build failed (continuing): %s", exc)
+    # What rebuild_page.py needs to rebuild this exact page later, after a
+    # UI-only change. Only when the data it describes was saved.
+    try:
+        if data_saved and (history_saved or not updates.get("save_history")):
+            save_report_inputs(changes, digest, failed_keys, scanned_at, history_saved)
+        else:
+            discard_report_inputs()
+    except Exception as exc:
+        logging.error("Could not save report inputs (continuing): %s", exc)
+        discard_report_inputs()
 
     # Operational warnings have a separate administrator-only delivery route.
     # Logged SMTP problems stay here so the workflow can still commit.

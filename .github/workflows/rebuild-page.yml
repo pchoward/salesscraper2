@@ -1,0 +1,49 @@
+name: Rebuild page
+
+# Publishes a UI change without scraping: regenerates sale_items_chart.html
+# from the last scrape's saved data (rebuild_page.py) and commits only that
+# file. No browser, no store requests, no email, no alerts.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - page.py
+      - page.js
+      - page.css
+      - mobile.css
+
+# The scrape's lock: a rebuild and a scrape never run at the same time.
+concurrency:
+  group: scrape-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Rebuild the page from saved data
+        # After a merge, report_inputs.json may not exist until the first
+        # scrape that writes it; that run skips instead of failing.
+        run: python rebuild_page.py ${{ github.event_name == 'push' && '--skip-if-missing' || '' }}
+
+      - name: Commit and push the page
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add sale_items_chart.html
+          git diff --quiet --cached || git commit -m "Rebuild page $(date +'%Y-%m-%d %H:%M')"
+          git pull --rebase origin main
+          git push

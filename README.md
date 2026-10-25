@@ -35,10 +35,21 @@ Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publi
 ├── price_history.json         # Bounded daily sale prices
 ├── scrape_health.json         # Recent per-store, per-part counts
 ├── site_sales.json            # Per-store sale counts and last site-wide sale
-└── .github/workflows/scrape.yml
+├── report_inputs.json         # The last scrape's page inputs, for rebuild_page.py
+├── rebuild_page.py            # Rebuild the report from saved data, without scraping
+└── .github/workflows/         # scrape.yml, rebuild-page.yml, and checks
 ```
 
-The only workflow is `.github/workflows/scrape.yml`. It checks out the repo, installs Chrome, and runs `python scraper.py`.
+The daily workflow is `.github/workflows/scrape.yml`. It checks out the repo, installs Chrome, and runs `python scraper.py`.
+
+**Publishing a UI change without scraping.** `.github/workflows/rebuild-page.yml` ("Rebuild page") runs `python rebuild_page.py`, which regenerates `sale_items_chart.html` from what the last scrape saved, and commits only that file. It runs in about a minute.
+- **How it runs:**
+  - by hand from Actions;
+  - automatically on a push to `main` that changes `page.py`, `page.js`, `page.css`, or `mobile.css`.
+- **What it never does:** use Chrome, contact a store, send email or alerts, or change any data file.
+- **Same changes and time:** the scrape saves `report_inputs.json`, which holds the diff against the scrape before it (New, Price drops, Disappeared), the digest, the failed stores, and the scrape time. So a rebuilt page shows the same changes and the same "generated at" time as the scrape's page, with the new page code.
+- **Fingerprint check:** the file records a fingerprint of `previous_data.json` and `price_history.json`. If either changed since, the rebuild refuses rather than mixing two runs.
+- **Shared lock:** it uses the scrape's concurrency group, so the two never run at once.
 
 The morning cron is `17 7 * * *` (3:17 AM EDT), off the top of the hour. A backup cron at `43 9 * * *` runs only when that morning scrape did not already succeed for the US Eastern date. `schedule.py` reads `scrape_health.json` after checkout and sets `scrape=false` when today's Eastern date already has a run with at least one store/part that did not fail. Chrome, the scrape, and the commit are skipped. `workflow_dispatch` always scrapes. A failed or skipped morning run leaves no successful health row, so the backup scrapes.
 

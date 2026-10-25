@@ -143,6 +143,11 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add sale_items_chart.html previous_data.json price_history.json scrape_health.json site_sales.json
+          # rebuild_page.py's inputs. The scrape removes the file when it could
+          # not save the data it describes; record that removal too.
+          if [ -e report_inputs.json ] || git ls-files --error-unmatch report_inputs.json >/dev/null 2>&1; then
+            git add -A -- report_inputs.json
+          fi
           git diff --quiet --cached || git commit -m "Update sale items $(date +'%Y-%m-%d %H:%M')"
           git pull --rebase origin main
           git push
