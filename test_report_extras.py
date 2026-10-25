@@ -143,20 +143,17 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("function rowMatches(row, overrides)", html)
         self.assertIn("function paintFacetCounts()", html)
         self.assertNotIn("minmax(176px, 1fr)", html)
-        self.assertIn("container-name: deals", html)
-        self.assertIn("@container deals (min-width: 1092px)", html)
-        self.assertIn("repeat(4, minmax(0, 1fr))", html)
-        self.assertIn("@container deals (min-width: 1641px)", html)
-        self.assertIn("repeat(7, minmax(0, 1fr))", html)
+        self.assertIn("minmax(170px, 1fr)", html)
+        self.assertNotIn("@container deals (min-width: 1092px)", html)
         prices = html.split(".card-prices {", 1)[1].split("}", 1)[0]
         self.assertIn("flex-wrap: wrap", prices)
         now = html.split(".now-price {", 1)[1].split("}", 1)[0]
         self.assertIn("font-weight: 800", now)
         self.assertIn("white-space: nowrap", now)
         self.assertIn("max-width: 100%", html.split(".avg-price {", 1)[1].split("}", 1)[0])
-        self.assertIn("-webkit-line-clamp: 3", html)
+        self.assertIn("-webkit-line-clamp: 2", html)
         self.assertIn('id="brandSearch"', html)
-        self.assertIn("Counts match current results", html)
+        self.assertNotIn("Counts match current results", html)
         self.assertIn("function paintSparklines()", html)
         self.assertIn("let catalogData = null", html)
         self.assertIn("function refreshCharts()", html)
@@ -188,8 +185,7 @@ class ReportExtraTests(unittest.TestCase):
             generated_at="2026-10-11T20:22:15+00:00",
         )
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
-        self.assertIn("flex: 0 0 calc(1.25em * 3)", style)
-        self.assertIn("line-clamp: 3", style)
+        self.assertIn("line-clamp: 2", style)
         self.assertIn(".deal-card .card-title .product-link", style)
         self.assertNotIn(".card-title:hover .product-name", style)
         self.assertLess(
@@ -202,12 +198,12 @@ class ReportExtraTests(unittest.TestCase):
         ]
         card = next(part for part in cards if "Independent Black Crossbolts" in part)
         self.assertIn('class="discount card-off none"', card)
-        self.assertIn("No discount info", card)
+        self.assertIn("No list price", card)
         self.assertNotIn(">N/A<", card)
         self.assertNotIn("card-off low", card)
         deck_card = next(part for part in cards if "Disney x HUF" in part)
         self.assertIn("card-off high", deck_card)
-        self.assertNotIn("No discount info", deck_card)
+        self.assertNotIn("No list price", deck_card)
 
     def test_nav_scan_label_and_brand_case_merge(self):
         low = _deck("50.00", "https://example.com/low", "Tactics", "5boro Lucky Candle Brooklyn 8.25 Skateboard Deck")
@@ -334,7 +330,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('data-section="bookmarks"', html)
         self.assertLess(html.find('id="navPills"'), html.find('id="changeLine"'))
         self.assertLess(html.find('id="changeLine"'), html.find('<div class="rail">'))
-        self.assertLess(html.find('id="storeFilters"'), html.find('id="partFilters"'))
+        self.assertLess(html.find('id="partFilters"'), html.find('id="storeFilters"'))
         self.assertLess(html.find('id="partFilters"'), html.find('id="contextSpecs"'))
         self.assertLess(html.find('data-section="width"'), html.find('id="productSpecs"'))
         self.assertLess(html.find('id="productSpecs"'), html.find('data-section="brand"'))
@@ -406,29 +402,34 @@ class ReportExtraTests(unittest.TestCase):
             price_history=history,
             generated_at="2026-10-11T21:46:35+00:00",
         )
-        card = html.split("https://example.com/drop", 1)[1].split("</article>", 1)[0]
-        self.assertIn("Now: $40.00", card)
-        self.assertIn("Average: $47.50", card)
-        self.assertIn("Dropped from $50.00 on Oct 4", card)
+        card = next(
+            part.split("</article>", 1)[0]
+            for part in html.split('<article class="deal-card')[1:]
+            if "https://example.com/drop" in part
+        )
+        self.assertIn("Now $40.00", card)
+        self.assertIn("Average $47.50", card)
+        self.assertNotIn("Dropped from $50.00 on Oct 4", card)
         self.assertNotIn("Price since Oct 4", card)
         self.assertIn('data-dropday="2026-10-04"', card)
         self.assertIn("spark-card", card)
         self.assertIn('height="30"', card)
-        face = card.split('class="card-badge"', 1)[1].split('class="card-sparkline"', 1)[0]
-        self.assertIn("quiet-low", face)
-        self.assertIn("Verified low", face)
-        self.assertNotIn("LOWEST EVER", face)
-        self.assertNotIn("New low", face)
-        self.assertNotIn("pill-lowest", face)
+        self.assertNotIn("quiet-low", card)
+        self.assertNotIn("Verified low", card)
+        self.assertNotIn("LOWEST EVER", card)
+        self.assertNotIn("New low", card)
+        self.assertNotIn("pill-lowest", card)
+        self.assertNotIn("pill-hot", card)
         flat = next(
             part for part in html.split('<article class="deal-card')[1:] if "example.com/bones" in part
         ).split("</article>", 1)[0]
-        self.assertIn("Price unchanged since Oct 2", flat)
-        self.assertIn("Now: $30.00", flat)
-        self.assertIn("At lowest tracked price", flat)
+        self.assertNotIn("Price unchanged since Oct 2", flat)
+        self.assertIn("Now $30.00", flat)
+        self.assertNotIn("At lowest tracked price", flat)
         self.assertNotIn("Verified low", flat)
         self.assertNotIn("New low", flat)
-        self.assertIn('class="avg-price" data-symbol="$" hidden', flat)
+        self.assertIn('class="avg-price" data-symbol="$"', flat)
+        self.assertNotIn('class="avg-price" data-symbol="$" hidden', flat)
         self.assertIn('height="12"', flat)
         self.assertNotIn('id="categoryStrip"', html)
         self.assertIn('id="partFilters"', html)
@@ -944,7 +945,8 @@ if (pushes !== 1) throw new Error("default search pushed " + pushes);
         for card in cards:
             self.assertIn('<h3 class="product-name">', card)
             self.assertNotIn('class="product-name" title=', card)
-            self.assertIn(">Details</button>", card)
+            self.assertNotIn(">Details</button>", card)
+            self.assertIn('class="card-quick"', card)
             self.assertIn('class="card-score" hidden', card)
         shoe_card = next(card for card in cards if "Willow Green" in card)
         self.assertIn('data-shoesize="7.5,8"', shoe_card)

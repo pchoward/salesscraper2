@@ -60,8 +60,8 @@ class ToolbarBaselineTests(unittest.TestCase):
         ]
         self.assertGreaterEqual(len(cards), 1)
         for card in cards:
-            self.assertNotIn("Alert me", card)
-            self.assertNotIn("quick-alert", card)
+            self.assertIn(">Alert me</button>", card)
+            self.assertIn('class="card-alert"', card)
         self.assertIn("appendQuickAlert(actions, card)", source)
         self.assertIn('setAttribute("aria-label", "Alert me about this deal")', source)
         self.assertIn(".quick-alert", (ROOT / "page.css").read_text(encoding="utf-8"))

@@ -20,7 +20,7 @@ class QuickViewTests(unittest.TestCase):
         self.assertIn(".deal-card:hover .card-quick", css)
         self.assertIn(".deal-card:focus-within .card-quick", css)
         self.assertIn("(hover: hover) and (pointer: fine)", css)
-        media = page.split('<div class="media">', 1)[1].split("card-face", 1)[0]
+        media = page.split('<div class="media">', 1)[1].split("card-sparkline", 1)[0]
         self.assertIn('class="card-quick"', media)
         self.assertIn(">Quick view</button>", media)
         script = Path(__file__).with_name("page.js").read_text(encoding="utf-8")

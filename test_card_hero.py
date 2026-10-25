@@ -19,16 +19,34 @@ def _deck(price, url, store, name, image="https://example.com/deck.jpg"):
     }
 
 
+def _article(html, needle):
+    return next(
+        part.split("</article>", 1)[0]
+        for part in html.split('<article class="deal-card')[1:]
+        if needle in part
+    )
+
+
+def _history(item, day="2026-10-18", earlier="2026-10-01"):
+    price = float(item["price_new"])
+    return {
+        "name": item["name"],
+        "store": item["store"],
+        "part": item["part"],
+        "first_seen": earlier,
+        "last_seen": day,
+        "prices": {earlier: price + 10, day: price},
+    }
+
+
 class CardHeroTests(unittest.TestCase):
     def test_photo_slot_is_about_half_the_card_and_secondary_copy_is_quiet(self):
         css = Path("page.css").read_text(encoding="utf-8")
         mobile = Path("mobile.css").read_text(encoding="utf-8")
         js = Path("page.js").read_text(encoding="utf-8")
-        media = css.split(".deal-card .media {", 1)[1].split("}", 1)[0]
-        self.assertIn("aspect-ratio: 100 / 64", media)
-        self.assertIn("min-height: 140px", media)
-        self.assertIn("max-height: 210px", media)
-        self.assertIn(".deal-card .card-face,\n.deal-card .price-since", css)
+        media = css.split(".deal-card .media {")[-1].split("}", 1)[0]
+        self.assertIn("aspect-ratio: 1 / 1", media)
+        self.assertIn("132px", media)
         self.assertIn(".deal-card .avg-price", css)
         self.assertIn('content: "No photo"', css)
         self.assertIn(".deal-card .hero-wrap.is-missing", css)
@@ -53,15 +71,18 @@ class CardHeroTests(unittest.TestCase):
         html = build_report_html(
             {"Zumiez_Decks": [deck], "CCS_Decks": [bare]},
             {},
+            price_history={deck["url"]: _history(deck)},
             generated_at="2026-10-18T19:12:00+00:00",
         )
-        card = html.split("https://example.com/deck", 1)[1].split("</article>", 1)[0]
-        self.assertIn("Now:", card)
-        self.assertIn('class="card-face"', card)
-        self.assertIn('class="price-since"', card)
+        card = _article(html, "https://example.com/deck")
+        self.assertIn("Now ", card)
         self.assertIn('class="card-sparkline"', card)
-        self.assertIn("card-off", card)
-        self.assertIn(">Details</button>", card)
+        self.assertIn("card-drop", card)
+        self.assertIn("↓ ", card)
+        self.assertNotIn(">Details</button>", card)
+        self.assertNotIn('class="price-since"', card)
+        self.assertNotIn("pill-hot", card)
+        self.assertNotIn("quiet-low", card)
         missing = next(
             part.split("</article>", 1)[0]
             for part in html.split('<article class="deal-card')[1:]
@@ -69,9 +90,48 @@ class CardHeroTests(unittest.TestCase):
         )
         self.assertIn('class="hero ph"', missing)
         self.assertNotIn("<img", missing)
-        # Three-line titles stay, so the price row does not jump between cards.
-        self.assertIn("flex: 0 0 calc(1.25em * 3)", html)
-        self.assertIn("line-clamp: 3", html)
+        self.assertIn("line-clamp: 2", html)
+        self.assertIn("Average ", card)
+        self.assertIn("Now ", card)
+        self.assertIn('class="card-meta"', card)
+        self.assertIn("Zumiez", card)
+
+    def test_cards_open_by_default_and_tokens_are_shared(self):
+        css = Path("page.css").read_text(encoding="utf-8")
+        js = Path("page.js").read_text(encoding="utf-8")
+        decks = [
+            _deck("39.99", "https://example.com/deck-%s" % index, "Zumiez", "Baker Logo 8.25 x 32.%s Deck" % index)
+            for index in range(5)
+        ]
+        html = build_report_html(
+            {"Zumiez_Decks": decks},
+            {},
+            price_history={deck["url"]: _history(deck, day="2026-10-24") for deck in decks},
+            generated_at="2026-10-24T16:00:00+00:00",
+        )
+        for token in (
+            "--font-xs:", "--font-sm:", "--font-md:", "--font-lg:", "--font-xl:",
+            "--radius:", "--radius-pill:",
+            "--grey-0:", "--grey-900:", "--blue:", "--green:", "--spark:",
+        ):
+            self.assertIn(token, css)
+        self.assertIn("minmax(170px, 1fr)", css)
+        compact = html.replace(" ", "")
+        self.assertIn("!=='table'", compact)
+        self.assertIn("layout-cards", compact)
+        self.assertIn('id="layoutCards" aria-pressed="true"', html)
+        self.assertIn('return "cards"', js[js.index("function readLayout("):js.index("function applyLayout(")])
+        card = _article(html, "https://example.com/deck-0")
+        self.assertIn('class="hero', card)
+        self.assertIn("↓ ", card)
+        self.assertIn("Average ", card)
+        self.assertIn("Now ", card)
+        self.assertIn('class="card-quick"', card)
+        self.assertIn(">Alert me</button>", card)
+        for gone in ("pill-hot", "quiet-low", "price-since", ">Details</button>", "card-badge"):
+            self.assertNotIn(gone, card)
+        self.assertIn('id="lengthFilters"', html)
+        self.assertNotIn("Counts match current results", html)
 
     def test_content_box_trims_padding_and_keeps_both_orientations(self):
         source = Path("page.js").read_text(encoding="utf-8")

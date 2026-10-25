@@ -395,7 +395,7 @@ def sparkline_direction(prices, days=90, end=None):
     return "flat"
 
 
-def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None, stroke=1.6, radius=2.2):
+def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None, stroke=1.6, radius=2.2, steps=False):
     ordered = clip_daily_prices(prices, days=days, end=end)
     if not ordered:
         return ""
@@ -415,10 +415,22 @@ def sparkline_svg(prices, width=72, height=22, css="spark", days=90, end=None, s
         f'<svg class="{css}" data-direction="{direction}" viewBox="0 0 {width} {height}" '
         f'width="{width}" height="{height}" aria-hidden="true">'
     ]
-    if len(coords) >= 2:
-        drawn = " ".join(f"{x_pos:.1f},{y_pos:.1f}" for x_pos, y_pos in coords)
+    line = coords
+    if steps and len(coords) >= 2:
+        line = []
+        for index, point in enumerate(coords):
+            if index:
+                line.append((point[0], coords[index - 1][1]))
+            line.append(point)
+    if len(line) >= 2 and direction != "flat":
+        drawn = " ".join(f"{x_pos:.1f},{y_pos:.1f}" for x_pos, y_pos in line)
         parts.append(
             f'<polyline fill="none" stroke="{color}" stroke-width="{stroke}" points="{drawn}"/>'
+        )
+    elif len(coords) >= 2 and direction == "flat":
+        drawn = " ".join(f"{x_pos:.1f},{y_pos:.1f}" for x_pos, y_pos in coords)
+        parts.append(
+            f'<polyline class="spark-flat" fill="none" stroke="{color}" stroke-width="1" points="{drawn}"/>'
         )
     x_pos, y_pos = coords[-1]
     parts.append(f'<circle cx="{x_pos:.1f}" cy="{y_pos:.1f}" r="{radius}" fill="{color}"/>')
@@ -1137,6 +1149,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     brands = set()
     brand_counts = {}
     lengths = set()
+    length_counts = {}
     wheels = set()
     length_hits = 0
     wheel_hits = 0
@@ -1162,6 +1175,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             brand_counts[record["brand"]] = brand_counts.get(record["brand"], 0) + 1
         if record["length_key"]:
             lengths.add(record["length_key"])
+            length_counts[record["length_key"]] = length_counts.get(record["length_key"], 0) + 1
             length_hits += 1
         if record["wheel_key"]:
             wheels.add(record["wheel_key"])
@@ -1231,7 +1245,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"<title>SkateDeals | {escape(today)}</title>",
         f"<style>{_read_asset('page.css')}</style>",
         f"<style>{_read_asset('mobile.css')}</style>",
-        "<script>try{if(localStorage.getItem('salesscraper2.layout')==='cards')document.documentElement.classList.add('layout-cards')}catch(e){}</script>",
+        "<script>try{if(localStorage.getItem('salesscraper2.layout')!=='table')document.documentElement.classList.add('layout-cards')}catch(e){document.documentElement.classList.add('layout-cards')}</script>",
         "</head><body>",
     ]
     store_options = ['<option value="all">All stores</option>']
@@ -1257,11 +1271,27 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     length_select = ""
     if section_ready(length_hits):
         options = ['<option value="all">All lengths</option>']
+        length_chips = [
+            '<button type="button" class="chip length-chip active" data-value="all" '
+            f'data-count="{length_hits}" aria-pressed="true">'
+            '<span class="spec-label">All</span>'
+            f'<span class="spec-count">{length_hits}</span></button>'
+        ]
         for value in sorted(lengths, key=float):
+            count = length_counts.get(value, 0)
             options.append(_option(value, value, data_label=value))
+            zero = " is-zero" if count == 0 else ""
+            length_chips.append(
+                f'<button type="button" class="chip length-chip{zero}" '
+                f'data-value="{escape(str(value), quote=True)}" data-count="{count}" aria-pressed="false">'
+                f'<span class="spec-label">{escape(str(value))}&quot;</span>'
+                f'<span class="spec-count">{count}</span></button>'
+            )
         length_select = (
-            '<label class="field"><span>Length</span>'
-            f'<select id="lengthSelect">{"".join(options)}</select></label>'
+            '<div class="filter-group spec-ranges" id="lengthFilters" role="group" aria-label="Length">'
+            + "".join(length_chips)
+            + "</div>"
+            f'<select id="lengthSelect" class="sr-only">{"".join(options)}</select>'
         )
     wheel_select = ""
     if section_ready(wheel_hits):
@@ -1657,11 +1687,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="section-body" id="productSpecsBody">'
         '<p class="section-note">Pick a spec to switch to that product type.</p>'
         "</div></section>"
-        + '<p class="count-note">Counts match current results '
-        '<button type="button" class="info-dot" aria-label="What filter counts mean">?</button>'
-        '<span class="tip" role="tooltip">Each number is how many deals match the other filters '
-        "if you pick that store, type, brand, width, or size. It is not a total of everything tracked."
-        "</span></p></div>"
+        + "</div>"
         + '<div class="side-group" aria-label="Shopping filters">'
         + _section("brand", "Brand", brand_facet, open_default=True)
         + '<div class="more-filters" id="morePanel">'
@@ -1787,8 +1813,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn filters-open" id="filtersOpen">Filters</button>'
         "</div>"
         '<div class="nav-row" id="navPills">'
-        + store_row
         + part_row
+        + store_row
         + "</div>"
         '<div class="tool-line">'
         '<div class="search-box tool-search"><input type="text" id="searchInput" '
@@ -1817,8 +1843,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"{sort_select}"
         '<div class="tool-display">'
         '<div class="layout-toggle" role="group" aria-label="Layout">'
-        '<button type="button" id="layoutTable" aria-pressed="true">Table</button>'
-        '<button type="button" id="layoutCards" aria-pressed="false">Cards</button>'
+        '<button type="button" id="layoutTable" aria-pressed="false">Table</button>'
+        '<button type="button" id="layoutCards" aria-pressed="true">Cards</button>'
         "</div>"
         '<button type="button" class="text-btn group-toggle" id="groupToggle" aria-pressed="false" '
         'onclick="toggleGrouped()">Group across stores</button>'
@@ -2196,51 +2222,43 @@ def _card_html(record):
     listed = " on-list" if record["listed"] else ""
     currency = item.get("currency")
     symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
-    face = _card_status(record)
-    # The percent is the store's own markdown versus its list price. It stays
-    # beside the sale price, not on the photo, and it is not a tracked-market saving.
+    # The percent is the store's own markdown versus its list price.
     if percent == "N/A":
         off_html = (
             '<span class="discount card-off none" '
             'title="This store did not publish a list price, so there is no claimed discount.">'
-            "No discount info</span>"
+            "No list price</span>"
         )
     else:
         off_html = (
-            f'<span class="discount card-off {discount}" '
+            f'<span class="discount card-off {discount} card-drop" '
             'title="Store\'s claimed discount versus its list price, not a tracked market price.">'
-            f"{escape(percent)} vs list</span>"
+            f"↓ {escape(percent)}</span>"
         )
-    drop_badge = _drop_badge(record)
     average = record.get("average")
     avg_html = ""
     if average is not None:
-        now_amount = _price(item.get("price_new"))
-        same = now_amount is not None and abs(float(average) - float(now_amount)) < 0.005
-        hidden = " hidden" if same else ""
         avg_html = (
-            f'<span class="avg-price" data-symbol="{symbol}"{hidden}>'
-            f"Average: {symbol}{float(average):.2f}</span>"
+            f'<span class="avg-price" data-symbol="{symbol}">'
+            f"Average {symbol}{float(average):.2f}</span>"
+            '<span class="price-sep" aria-hidden="true">/</span>'
         )
-    since = record.get("since_label") or ""
-    since_html = f'<p class="price-since">{escape(since)}</p>'
+    found = _month_day(record.get("first") or record.get("spark_end") or "")
+    store = record.get("store") or ""
+    meta = f"Found {found} · {store}" if found else store
     return (
         f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
-        f'<div class="media">{_thumb(record["image"], record["name"], large=True)}{drop_badge}'
+        '<button type="button" class="card-alert">Alert me</button>'
+        f'<div class="media">{_thumb(record["image"], record["name"], large=True)}'
+        f'<span class="store-mark">{escape(store)}</span>'
         '<button type="button" class="card-quick">Quick view</button></div>'
-        '<div class="card-face">'
-        f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
-        "</div>"
-        f'<div class="title-slot"><div class="card-title"><h3 class="product-name">'
-        f"{_product_link(item)}</h3></div></div>"
-        '<div class="card-prices">'
-        f'<span class="now-price">Now: {_money(item.get("price_new"), currency)}</span>'
-        f"{off_html}{avg_html}</div>"
-        f"{since_html}"
-        f'<div class="card-badge">{face}</div>'
+        f'<h3 class="product-name">{_product_link(item)}</h3>'
         f'<div class="card-sparkline">{_spark_html(record, width=156)}</div>'
-        '<button type="button" class="card-more" aria-expanded="false">Details</button>'
+        f'<p class="card-offer">{off_html}</p>'
+        '<p class="card-prices">'
+        f'{avg_html}<span class="now-price">Now {_money(item.get("price_new"), currency)}</span></p>'
+        f'<p class="card-meta">{escape(meta)}</p>'
         f'<div class="card-score" hidden>{_why_html(record, dom_id="why-card-" + str(record["id"]))}</div>'
         "</article>"
     )
@@ -2501,6 +2519,7 @@ def _spark_html(record, width=72, height=22, stroke=1.6):
         end=record.get("spark_end"),
         stroke=stroke,
         radius=radius,
+        steps=width > 80,
     )
     if not spark:
         return ""
