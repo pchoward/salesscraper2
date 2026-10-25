@@ -6598,7 +6598,12 @@ function ensureTurnstile(parent) {
     slot.id = "alertsTurnstile";
     parent.appendChild(slot);
     if (turnstileApiReady()) {
-        renderTurnstileWidget(slot);
+        // The form is still being built and is not in the page yet, and
+        // Turnstile renders nothing into a detached element. Render once the
+        // current paint has attached it.
+        Promise.resolve().then(function() {
+            if (alertsUi.open && document.getElementById("alertsTurnstile") === slot) renderTurnstileWidget(slot);
+        });
         return;
     }
     loadTurnstileApi().then(function(ok) {
