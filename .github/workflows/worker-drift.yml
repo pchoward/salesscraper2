@@ -1,0 +1,49 @@
+name: Alerts Worker drift
+
+# Fails when the live alerts Worker is older than the newest worker/ change on
+# main, so a merge that was never deployed cannot go unnoticed. It reads only
+# the public GET /v1/health (deploy.sh stamps the commit there) and needs no
+# Cloudflare credentials. It never deploys anything.
+#
+# Set the repository variable ALERTS_API_URL to the Worker URL to turn it on;
+# without it the check is skipped.
+on:
+  schedule:
+    - cron: '23 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    if: vars.ALERTS_API_URL != ''
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compare the live Worker with main
+        env:
+          API_URL: ${{ vars.ALERTS_API_URL }}
+        run: |
+          set -euo pipefail
+          needed="$(git log -1 --format=%H origin/main -- worker/src worker/migrations)"
+          health="$(curl -fsS --max-time 20 "${API_URL%/}/v1/health" || true)"
+          live="$(printf '%s' "$health" | python3 -c 'import json,sys
+          try: print(json.load(sys.stdin).get("commit", ""))
+          except ValueError: print("")')"
+          echo "Newest worker change on main: ${needed:0:12}"
+          echo "Live Worker commit: ${live:-none}"
+          if [ -z "$live" ]; then
+            echo "::error::The live Worker reports no commit. Redeploy with ./worker/deploy.sh."
+            exit 1
+          fi
+          if ! git cat-file -e "${live}^{commit}" 2>/dev/null || ! git merge-base --is-ancestor "$needed" "$live"; then
+            echo "::error::The live Worker (${live}) is missing worker/ changes from main (${needed:0:12}). Redeploy with ./worker/deploy.sh."
+            exit 1
+          fi
+          echo "The live Worker includes every worker/ change on main."

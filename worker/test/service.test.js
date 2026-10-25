@@ -112,6 +112,17 @@ test("retention removes stale pending signups, tokens, deliveries, and counters"
   assert.ok(removed.rate_limits >= 1);
 });
 
+test("/v1/health names the deployed commit only when deploy.sh stamped a valid one", async () => {
+  const stamped = await client(makeEnv("staging", { GIT_COMMIT: "4cb25dc0a1b2" })).call("GET", "/v1/health");
+  assert.deepEqual(stamped.data, { ok: true, api_version: "1", mode: "staging", commit: "4cb25dc0a1b2" });
+  const broken = await client(makeEnv("staging", { GIT_COMMIT: "4cb25dc0a1b2", HMAC_SECRET: "short" })).call("GET", "/v1/health");
+  assert.equal(broken.data.commit, "4cb25dc0a1b2", "a misconfigured deploy still says which code it is");
+  for (const value of [undefined, "", "main", "<script>", "4CB25DC"]) {
+    const health = await client(makeEnv("staging", { GIT_COMMIT: value })).call("GET", "/v1/health");
+    assert.equal(health.data.commit, undefined, String(value));
+  }
+});
+
 test("/v1/health is readable from the site, including when misconfigured (CORS regression)", async () => {
   const ACAO = "Access-Control-Allow-Origin";
   const prod = client(makeEnv("production"));

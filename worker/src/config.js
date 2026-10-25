@@ -102,6 +102,9 @@ export function loadConfig(env) {
       resendWebhookSecret: text(env.RESEND_WEBHOOK_SECRET),
       turnstileSecret: text(env.TURNSTILE_SECRET),
       stagingAllowed,
+      // The git commit this code was deployed from (worker/deploy.sh sets
+      // it). Shown by /v1/health so a stale deploy is visible.
+      commit: /^[0-9a-f]{7,40}$/.test(text(env.GIT_COMMIT)) ? text(env.GIT_COMMIT) : "",
       // "0" closes signups (a rollback switch).
       maxActiveSubscribers: positiveInt(env.MAX_ACTIVE_SUBSCRIBERS, 200, true),
       maxRules: Math.min(positiveInt(env.MAX_RULES_PER_SUBSCRIBER, 10), 25),

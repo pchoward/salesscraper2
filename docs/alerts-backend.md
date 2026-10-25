@@ -57,9 +57,18 @@ openssl rand -base64 48 | wrangler secret put TOKEN_PEPPER
 wrangler secret put RESEND_API_KEY
 wrangler secret put TURNSTILE_SECRET
 wrangler secret put STAGING_ALLOWED_EMAILS         # staging: your own inbox(es)
-wrangler deploy
-curl https://<worker>/v1/health                    # {"ok":true,...,"mode":"staging"}
+./deploy.sh                                        # not plain `wrangler deploy`; see below
+curl https://<worker>/v1/health                    # {"ok":true,...,"mode":"staging","commit":"<12 hex>"}
 ```
+
+**Every later deploy** is `git checkout main && git pull && ./worker/deploy.sh`. The script:
+- refuses unless the checkout is exactly `origin/main` with no uncommitted `worker/` changes;
+- applies any pending D1 migrations;
+- deploys with `GIT_COMMIT` set, so `/v1/health` reports which commit is live.
+
+A merge that changes `worker/` is **not live until this runs**. GitHub Pages does not deploy the Worker.
+
+**Drift check.** The **Alerts Worker drift** workflow runs daily, or on demand from Actions. It fails when the live Worker's commit lacks the newest `worker/src` or `worker/migrations` change on main. It reads only the public health endpoint and never deploys. To turn it on, set the repository variable `ALERTS_API_URL` to the Worker URL. That variable alone does not enable delivery, which still needs `ALERTS_DELIVERY_ENABLED`.
 
 Keep a copy of `HMAC_SECRET` for GitHub, below. Never rotate `TOKEN_PEPPER` casually: it makes every link and stored hash invalid.
 
