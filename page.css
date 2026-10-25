@@ -2540,6 +2540,7 @@ header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
     font-weight: 650;
 }
 .alerts-verify { margin: 0; color: var(--text-secondary); font-size: 0.78rem; }
+.alerts-turnstile { min-height: 65px; margin: 0.35rem 0 0.15rem; }
 .alerts-section {
     margin: 0.55rem 0 0;
     font-size: 0.68rem;

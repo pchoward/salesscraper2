@@ -20,6 +20,11 @@ class AlertsEntryTests(unittest.TestCase):
         self.assertIn("Any meaningful price drop", block)
         self.assertIn("We'll email you a link to confirm. Nothing is active until you verify that link.", block)
         self.assertIn("Specific sneaker sizes are coming soon and are not sent.", block)
+        self.assertIn("render=explicit", block)
+        self.assertIn("Complete the verification check. Nothing was sent.", block)
+        self.assertIn("Couldn't reach the alerts service. Nothing was sent.", block)
+        self.assertIn("not on the staging allowlist", block)
+        self.assertIn("If this address is already confirmed, we'll email a link to manage its alerts.", block)
         self.assertIn("function buildDigestRule(", block)
         self.assertIn("function buildWatchRule(", block)
         self.assertIn("function onAlertsKeydown(", block)
@@ -32,6 +37,7 @@ class AlertsEntryTests(unittest.TestCase):
         self.assertNotIn("General deal emails are coming soon", block)
         self.assertNotIn("exact watch of this product is coming soon", block)
         self.assertNotIn("Match listings by brand and name", block)
+        self.assertIn(".alerts-turnstile { min-height: 65px; margin: 0.35rem 0 0.15rem; }", css)
         self.assertIn(".alerts-advanced", css)
         self.assertIn(".alerts-product", css)
         self.assertIn(".alerts-soon", css)
@@ -427,6 +433,193 @@ function press(key, extras) {
     press("Escape");
     assert.equal(document.getElementById("alertsRoot").hidden, true);
     assert.equal(document.body.classList.contains("alerts-open"), false);
+
+    let nextToken = "";
+    let explodeGet = false;
+    const rendered = [];
+    const removed = [];
+    globalThis.turnstile = {
+        render(el, options) {
+            const id = "w" + (rendered.length + 1);
+            rendered.push({ id, options });
+            el.setAttribute("data-rendered", id);
+            return id;
+        },
+        remove(id) { removed.push(id); },
+        getResponse(id) {
+            if (explodeGet) throw new Error("Nothing to get response for");
+            return rendered.some(item => item.id === id) ? nextToken : "";
+        }
+    };
+    const staged = [];
+    let stagedMode = "ok";
+    let hold = null;
+    globalThis.fetch = async (url, options) => {
+        const path = new URL(url).pathname;
+        if (path !== "/v1/health" && hold) {
+            const waiting = hold;
+            hold = null;
+            await waiting;
+        }
+        staged.push({ url, options, path });
+        if (path === "/v1/health") return jsonResponse(200, { ok: true, api_version: "1", mode: "staging" });
+        if (stagedMode === "throw") throw new Error("Failed to fetch");
+        if (stagedMode === "staging") return jsonResponse(403, { error: "staging_recipient_not_allowed" });
+        if (stagedMode === "captcha") return jsonResponse(400, { error: "captcha_failed" });
+        if (stagedMode === "bad-token") return jsonResponse(400, { error: "invalid_token" });
+        if (path === "/v1/subscribe" || path === "/v1/link") return jsonResponse(202, { status: "check_email" });
+        return jsonResponse(500, { error: "internal_error" });
+    };
+    function stagedPosts(path) {
+        return staged.filter(call => call.path === path && call.options && call.options.method === "POST");
+    }
+    async function clickLabel(label) {
+        const buttons = document.body.querySelectorAll("button");
+        let button = null;
+        for (const item of buttons) if (item.textContent === label) button = item;
+        assert.ok(button, label);
+        const body = document.getElementById("alertsBody");
+        return body.events.click[0]({ target: button, preventDefault() {} });
+    }
+    window.SKATEDEALS_ALERTS = { apiBase: "http://127.0.0.1:8787", turnstileSiteKey: "0x4AAAAAAFjwOIPFNNUHi29X" };
+    clearManageToken();
+    await openAlerts();
+    assert.equal(document.getElementById("alertsTitle").textContent, "Subscribe");
+    const slot = document.getElementById("alertsTurnstile");
+    assert.ok(slot);
+    assert.equal(document.getElementById("alertsForm").contains(slot), true);
+    assert.equal(rendered.length, 1);
+    assert.equal(rendered[0].options.sitekey, "0x4AAAAAAFjwOIPFNNUHi29X");
+    assert.equal(document.getElementById("alertsTurnstileScript"), null);
+    assert.equal(document.getElementById("alertsBody").textContent.includes("This is a local mock"), false);
+    document.getElementById("alertsEmail").value = "rider@example.com";
+    document.getElementById("alertsConsent").checked = true;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    assert.equal(stagedPosts("/v1/subscribe").length, 0);
+    assert.match(document.getElementById("alertsError").textContent, /Complete the verification check/);
+    assert.match(document.getElementById("alertsError").textContent, /Nothing was sent/);
+    assert.equal(document.querySelector(".alerts-status"), null);
+    assert.equal(alertsUi.busy, false);
+
+    explodeGet = true;
+    document.getElementById("alertsEmail").value = "rider@example.com";
+    document.getElementById("alertsConsent").checked = true;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    assert.equal(stagedPosts("/v1/subscribe").length, 0);
+    assert.match(document.getElementById("alertsError").textContent, /Complete the verification check/);
+    assert.equal(alertsUi.busy, false);
+    explodeGet = false;
+
+    nextToken = "token-ok";
+    document.getElementById("alertsEmail").value = "rider@example.com";
+    document.getElementById("alertsConsent").checked = true;
+    let releaseHold = null;
+    hold = new Promise(resolve => { releaseHold = resolve; });
+    const pendingSend = document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    await new Promise(resolve => setTimeout(resolve, 0));
+    assert.equal(document.getElementById("alertsSubmit").disabled, true);
+    assert.match(document.getElementById("alertsLive").textContent, /Sending/);
+    releaseHold();
+    await pendingSend;
+    const posted = stagedPosts("/v1/subscribe");
+    assert.equal(posted.length, 1);
+    const digestBody = JSON.parse(posted[0].options.body);
+    assert.equal(digestBody.turnstile_token, "token-ok");
+    assert.deepEqual(digestBody.rules, [{ kind: "digest" }]);
+    assert.match(document.getElementById("alertsBody").textContent, /Check your email to confirm/);
+    assert.equal(document.querySelector(".alerts-status"), null);
+    assert.equal(alertsUi.busy, false);
+
+    nextToken = "";
+    await openAlerts();
+    document.getElementById("alertsEmail").value = "rider@example.com";
+    document.getElementById("alertsConsent").checked = true;
+    stagedMode = "staging";
+    nextToken = "token-ok";
+    const beforeStaging = stagedPosts("/v1/subscribe").length;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    assert.equal(stagedPosts("/v1/subscribe").length, beforeStaging + 1);
+    assert.match(document.getElementById("alertsError").textContent, /staging allowlist/);
+    assert.equal(document.querySelector(".alerts-status"), null);
+    assert.equal(document.getElementById("alertsTitle").textContent, "Subscribe");
+
+    stagedMode = "captcha";
+    document.getElementById("alertsEmail").value = "rider@example.com";
+    document.getElementById("alertsConsent").checked = true;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    assert.match(document.getElementById("alertsError").textContent, /captcha check failed/);
+    assert.equal(document.querySelector(".alerts-status"), null);
+
+    stagedMode = "throw";
+    document.getElementById("alertsEmail").value = "rider@example.com";
+    document.getElementById("alertsConsent").checked = true;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    assert.match(document.getElementById("alertsError").textContent, /Couldn't reach the alerts service/);
+    assert.match(document.getElementById("alertsError").textContent, /Nothing was sent/);
+    assert.equal(alertsUi.busy, false);
+
+    stagedMode = "ok";
+    nextToken = "";
+    const watch = alertDraftFromDataset({
+        name: "Powell Peralta Wheels",
+        price: "40.95",
+        url: "https://www.tactics.com/powell-peralta-wheels"
+    });
+    await openAlerts({ draft: watch });
+    assert.equal(document.getElementById("alertsTitle").textContent, "Alert me");
+    assert.ok(document.getElementById("alertsTurnstile"));
+    document.getElementById("alertsEmail").value = "pchoward@yahoo.com";
+    document.getElementById("alertsConsent").checked = true;
+    const beforeWatch = stagedPosts("/v1/subscribe").length;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    assert.equal(stagedPosts("/v1/subscribe").length, beforeWatch);
+    assert.match(document.getElementById("alertsError").textContent, /Complete the verification check/);
+    assert.equal(document.querySelector(".alerts-status"), null);
+
+    nextToken = "watch-token";
+    document.getElementById("alertsEmail").value = "pchoward@yahoo.com";
+    document.getElementById("alertsConsent").checked = true;
+    await document.getElementById("alertsForm").events.submit[0]({ preventDefault() {} });
+    const watchPost = stagedPosts("/v1/subscribe").pop();
+    const watchBody = JSON.parse(watchPost.options.body);
+    assert.equal(watchBody.turnstile_token, "watch-token");
+    assert.equal(watchBody.rules[0].kind, "watch");
+    assert.equal(watchBody.rules[0].product_url, "https://www.tactics.com/powell-peralta-wheels");
+    assert.equal(watchBody.rules[0].max_price, 40.95);
+    assert.equal(document.querySelector(".alerts-status"), null);
+
+    nextToken = "";
+    await openAlerts({ draft: watch });
+    const beforeRelink = rendered.length;
+    await clickLabel("I already confirmed");
+    assert.equal(document.getElementById("alertsTitle").textContent, "Email me a link");
+    assert.equal(document.querySelector(".alerts-copy").textContent, "If this address is already confirmed, we'll email a link to manage its alerts.");
+    assert.ok(rendered.length > beforeRelink);
+    assert.ok(removed.length >= 1);
+    assert.ok(document.getElementById("alertsTurnstile"));
+    document.getElementById("alertsLinkEmail").value = "pchoward@yahoo.com";
+    const beforeLink = stagedPosts("/v1/link").length;
+    await document.getElementById("alertsLinkForm").events.submit[0]({ preventDefault() {} });
+    assert.equal(stagedPosts("/v1/link").length, beforeLink);
+    assert.match(document.getElementById("alertsError").textContent, /Complete the verification check/);
+    assert.equal(alertsUi.busy, false);
+
+    nextToken = "link-token";
+    document.getElementById("alertsLinkEmail").value = "pchoward@yahoo.com";
+    await document.getElementById("alertsLinkForm").events.submit[0]({ preventDefault() {} });
+    const linkPost = stagedPosts("/v1/link").pop();
+    assert.deepEqual(JSON.parse(linkPost.options.body), { email: "pchoward@yahoo.com", turnstile_token: "link-token" });
+    assert.match(document.getElementById("alertsBody").textContent, /Check your email to confirm/);
+    assert.equal(document.querySelector(".alerts-status"), null);
+
+    await clickLabel("Email me a link");
+    document.getElementById("alertsLinkEmail").value = "pchoward@yahoo.com";
+    stagedMode = "bad-token";
+    nextToken = "link-token";
+    await document.getElementById("alertsLinkForm").events.submit[0]({ preventDefault() {} });
+    assert.match(document.getElementById("alertsError").textContent, /invalid or already used/);
+    assert.equal(document.querySelector(".alerts-status"), null);
+    assert.equal(alertsUi.busy, false);
 })().catch(err => { console.error(err); process.exit(1); });
 '''
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
