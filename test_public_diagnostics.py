@@ -85,7 +85,7 @@ class AudienceTests(unittest.TestCase):
         roots = {path.split('/')[0] for path in subprocess.check_output(['git','ls-files'], text=True).splitlines()}
         self.assertEqual(roots - excluded - public, set())
         for path in ('scrape_health.json', 'previous_data.json', 'price_history.json',
-                     'site_sales.json', 'email_preview.html', 'notification_state.json', 'worker',
+                     'site_sales.json', 'report_inputs.json', 'email_preview.html', 'notification_state.json', 'worker',
                      'watchlist.yaml', 'alerts_state', 'docs', 'audit'):
             self.assertIn(path, excluded)
 
