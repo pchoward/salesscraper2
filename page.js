@@ -4127,9 +4127,6 @@ function fillQuickView(card) {
     if (dialog) dialog.setAttribute("aria-labelledby", "quickLabel");
     const head = document.createElement("div");
     head.className = "quick-head";
-    const star = document.createElement("button");
-    star.type = "button";
-    star.className = "star quick-star";
     const close = document.createElement("button");
     close.type = "button";
     close.className = "quick-close";
@@ -4140,7 +4137,7 @@ function fillQuickView(card) {
         event.stopPropagation();
         closeQuickView();
     });
-    head.append(star, close);
+    head.append(heading, close);
     body.appendChild(head);
     const product = document.createElement("div");
     product.className = "quick-product";
@@ -4149,45 +4146,22 @@ function fillQuickView(card) {
     identity.className = "quick-identity";
     const store = document.createElement("p");
     store.className = "quick-kicker";
-    store.textContent = item.store || card.dataset.store || "";
+    store.textContent = quickKicker(item, card.dataset);
     const price = document.createElement("div");
     price.className = "quick-price";
     const amount = document.createElement("strong");
     amount.textContent = quickMoney(facts.symbol, card.dataset.price);
     price.appendChild(amount);
-    const discount = quickPercent(card.dataset.discount);
-    if (discount) {
-        const badge = document.createElement("span");
-        badge.className = "quick-discount";
-        badge.textContent = discount;
-        badge.title = "Store's claimed discount versus its list price. Not compared with tracked prices.";
-        price.appendChild(badge);
+    identity.append(store, price);
+    appendQuickListLine(identity, card.dataset, facts);
+    const badgeText = quickDealBadge(card.dataset, card);
+    if (badgeText) {
+        const badge = document.createElement("p");
+        badge.className = "quick-badge";
+        badge.textContent = badgeText;
+        identity.appendChild(badge);
     }
-    identity.append(store, heading, price);
-    appendQuickKeyFacts(identity, card.dataset, facts);
-    const historyText = quickHistoryNote(facts);
-    if (historyText) {
-        const history = document.createElement("p");
-        history.className = "quick-history";
-        history.textContent = historyText;
-        identity.appendChild(history);
-    }
-    const alsoText = quickAlsoLine(item);
-    if (alsoText) {
-        const also = document.createElement("p");
-        also.className = "quick-also";
-        also.textContent = alsoText;
-        identity.appendChild(also);
-    }
-    const signal = quickPriceSignal(card.dataset, card);
-    if (signal) identity.appendChild(quickSignal(signal));
-    if (item.stage) {
-        const stage = document.createElement("p");
-        stage.className = "quick-stage";
-        stage.textContent = item.stage;
-        identity.appendChild(stage);
-    }
-    appendQuickSpecLine(identity, facts.specs);
+    appendQuickSpecTable(identity, facts.specs);
     const actions = document.createElement("div");
     actions.className = "quick-actions";
     if (facts.viewUrl) {
@@ -4199,25 +4173,66 @@ function fillQuickView(card) {
         link.textContent = facts.viewLabel;
         actions.appendChild(link);
     }
+    const secondary = document.createElement("div");
+    secondary.className = "quick-secondary";
     if (typeof appendQuickAlert === "function") appendQuickAlert(actions, card);
-    if (actions.children.length) identity.appendChild(actions);
+    const alert = actions.querySelector(".quick-alert");
+    if (alert) secondary.appendChild(alert);
+    const star = document.createElement("button");
+    star.type = "button";
+    star.className = "star quick-star";
+    secondary.appendChild(star);
+    actions.appendChild(secondary);
+    identity.appendChild(actions);
     product.appendChild(identity);
     body.appendChild(product);
     syncQuickStar(card);
     appendQuickMore(body, card, item, facts);
 }
 
+function quickKicker(item, dataset) {
+    item = item || {};
+    dataset = dataset || {};
+    const store = item.store || dataset.store || "";
+    const brand = item.brand || dataset.brand || "";
+    if (store && brand && store.toLowerCase() !== brand.toLowerCase()) return store + " · " + brand;
+    return store || brand;
+}
+
+function quickDealBadge(dataset, card) {
+    dataset = dataset || {};
+    const since = quickNodeText(card, ".price-since");
+    const lowText = quickNodeText(card, ".pill-newlow") || quickNodeText(card, ".quiet-low");
+    const atLow = dataset.lowest === "1" || dataset.hitlow === "1" || !!lowText;
+    const dropped = dataset.drop === "1" || since.indexOf("Dropped from") === 0;
+    if (atLow) return "All-time low";
+    if (dropped) return "Price drop";
+    return "";
+}
+
+function quickKeySpecs(specs) {
+    return (specs || []).filter(row => row && row.label && row.label !== "In stock").slice(0, 3);
+}
+
+function quickAverageBit(facts) {
+    facts = facts || {};
+    if (facts.average == null || !Number.isFinite(Number(facts.average))) return "";
+    return "90-day average " + quickMoney(facts.symbol || "$", facts.average);
+}
+
 function quickHistoryNote(facts) {
     facts = facts || {};
     const points = facts.points || [];
     const symbol = facts.symbol || "$";
+    const averageBit = quickAverageBit(facts);
     if (!points.length) return "No tracked price history yet.";
     const only = points[0];
     if (points.length === 1) {
         const price = quickMoney(symbol, only[1]);
         const when = typeof quickShortDate === "function" ? quickShortDate(only[0]) : "";
         const shown = price ? " (" + price + (when ? " on " + when : "") + ")" : "";
-        return "Only one tracked price" + shown + ". Not enough history to compare.";
+        const average = averageBit ? " " + averageBit + "." : "";
+        return "Only one tracked price" + shown + "." + average + " Not enough history to compare.";
     }
     const bits = [];
     const low = facts.atl && Number.isFinite(Number(facts.atl.price)) ? facts.atl : null;
@@ -4240,6 +4255,7 @@ function quickHistoryNote(facts) {
         const when = typeof quickShortDate === "function" ? quickShortDate(prior[0]) : "";
         bits.push("Previous tracked price " + quickMoney(symbol, prior[1]) + (when ? " on " + when : ""));
     }
+    if (averageBit) bits.push(averageBit);
     bits.push(points.length + " tracked prices");
     return bits.join(" · ") + ".";
 }
@@ -4258,6 +4274,60 @@ function quickAlsoLine(item) {
         const label = (cheaper ? "Cheaper at " : "Also at ") + name;
         return money ? label + " " + money : label;
     }).join(" · ");
+}
+
+function appendQuickListLine(parent, dataset, facts) {
+    dataset = dataset || {};
+    facts = facts || {};
+    const symbol = facts.symbol || "$";
+    const list = Number(dataset.original);
+    const discount = quickPercent(dataset.discount);
+    const hasList = Number.isFinite(list) && list > 0;
+    if (!hasList && !discount) return;
+    const line = document.createElement("p");
+    line.className = "quick-list";
+    if (hasList) {
+        const item = document.createElement("span");
+        item.className = "quick-key is-original";
+        item.title = "Store's list price. The percent beside the sale price is this store's claimed discount, not a tracked market price.";
+        const label = document.createElement("span");
+        label.className = "quick-key-label";
+        label.textContent = "List price";
+        const value = document.createElement("strong");
+        value.textContent = quickMoney(symbol, list);
+        item.append(label, value);
+        line.appendChild(item);
+    }
+    if (discount) {
+        const badge = document.createElement("span");
+        badge.className = "quick-discount";
+        badge.textContent = discount;
+        badge.title = "Store's claimed discount versus its list price. Not compared with tracked prices.";
+        line.appendChild(badge);
+    }
+    parent.appendChild(line);
+}
+
+function appendQuickSpecTable(parent, specs) {
+    const rows = quickKeySpecs(specs);
+    if (!rows.length) return;
+    const table = document.createElement("table");
+    table.className = "quick-specs-table";
+    const caption = document.createElement("caption");
+    caption.textContent = "Key specs";
+    const tbody = document.createElement("tbody");
+    rows.forEach(row => {
+        const tr = document.createElement("tr");
+        const th = document.createElement("th");
+        th.scope = "row";
+        th.textContent = row.label;
+        const td = document.createElement("td");
+        td.textContent = row.value;
+        tr.append(th, td);
+        tbody.appendChild(tr);
+    });
+    table.append(caption, tbody);
+    parent.appendChild(table);
 }
 
 function appendQuickKeyFacts(parent, dataset, facts) {
@@ -4380,6 +4450,28 @@ function appendQuickMore(body, card, item, facts) {
     priceNote.className = "quick-price-note";
     priceNote.textContent = "List price is the store's claimed original, not a tracked market price. Average and lowest use prices tracked here.";
     more.appendChild(priceNote);
+    const historyText = quickHistoryNote(facts);
+    if (historyText) {
+        const history = document.createElement("p");
+        history.className = "quick-history";
+        history.textContent = historyText;
+        more.appendChild(history);
+    }
+    const alsoText = quickAlsoLine(item);
+    if (alsoText) {
+        const also = document.createElement("p");
+        also.className = "quick-also";
+        also.textContent = alsoText;
+        more.appendChild(also);
+    }
+    const signal = quickPriceSignal(card && card.dataset, card);
+    if (signal) more.appendChild(quickSignal(signal));
+    if (item && item.stage) {
+        const stage = document.createElement("p");
+        stage.className = "quick-stage";
+        stage.textContent = item.stage;
+        more.appendChild(stage);
+    }
     appendQuickHistoryMeta(more, facts);
     more.appendChild(quickCompareBlock(card.dataset, facts));
     if ((facts.points || []).length >= 2) {
@@ -4814,7 +4906,7 @@ function placeQuickView(card) {
     }
     const margin = 8;
     const topLimit = quickTopLimit();
-    const width = Math.min(720, window.innerWidth - margin * 2);
+    const width = Math.min(920, window.innerWidth - margin * 2);
     panel.style.width = width + "px";
     panel.style.height = "auto";
     const height = panel.getBoundingClientRect().height;
@@ -4956,7 +5048,7 @@ function wireQuickView() {
     });
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
-        if (event.target.closest("#quickView, .card-more, .group-quick, #alertsRoot, #navAlerts")) return;
+        if (event.target.closest("#quickView, .card-more, .card-quick, .group-quick, #alertsRoot, #navAlerts")) return;
         closeQuickView();
     });
 }
@@ -4989,6 +5081,16 @@ function wireDealEvents() {
                 control.setAttribute("aria-expanded", pinned ? "true" : "false");
             });
             if (pinned) placeScoreFloat(cell, score);
+            return;
+        }
+        const quickBtn = event.target.closest(".card-quick");
+        if (quickBtn) {
+            event.preventDefault();
+            event.stopPropagation();
+            const card = quickBtn.closest(".deal-card");
+            if (!card) return;
+            if (isQuickOpen() && quickCard === card && quickPinned) closeQuickView();
+            else openQuickView(card, true);
             return;
         }
         const more = event.target.closest(".card-more");
