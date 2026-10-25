@@ -1676,7 +1676,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     sidebar_html = (
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
-        '<button type="button" class="text-btn filters-done" id="filtersClose">Show results</button></div>'
+        '<button type="button" class="quick-close filters-done" id="filtersClose" aria-label="Close filters">×</button></div>'
         '<div class="filter-head"><span>Filter deals</span>'
         '<button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div>'
         + '<div class="side-group" id="specGroup" aria-label="Product specifications">'
@@ -1965,32 +1965,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="quick-panel" role="dialog" aria-labelledby="quickLabel">'
         '<div id="quickBody"></div>'
         "</div></div>"
-    )
-    chunks.append(
-        '<div id="productModal" hidden>'
-        '<div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">'
-        '<button type="button" id="modalClose">Close</button>'
-        '<h3 id="modalTitle"></h3>'
-        '<p id="modalMeta"></p>'
-        '<div class="window-toggle" role="group" aria-label="Price history window">'
-        '<button type="button" data-window="30" aria-pressed="false">30 days</button>'
-        '<button type="button" data-window="90" aria-pressed="true">90 days</button>'
-        '<button type="button" data-window="180" aria-pressed="false">180 days</button>'
-        "</div>"
-        '<div id="modalChart"></div>'
-        '<p class="chart-note" id="modalNote"></p>'
-        '<p class="modal-label">Stores</p>'
-        '<ul class="modal-offers" id="modalOffers"></ul>'
-        '<p><a id="modalLink" target="_blank" rel="noopener"></a></p>'
-        "</div></div>"
-    )
-    chunks.append(
-        '<div id="priceDrawer" hidden>'
-        '<button type="button" id="drawerClose">Close</button>'
-        '<h3 id="drawerTitle"></h3>'
-        '<p class="drawer-chain" id="drawerChain"></p>'
-        '<ul class="drawer-list" id="drawerList"></ul>'
-        '<p><a id="drawerLink" target="_blank" rel="noopener"></a></p></div>'
     )
     payload = json.dumps(
         {

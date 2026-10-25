@@ -211,10 +211,10 @@ if (!groupNote(ranked).includes("Delivery charges and tax are not included.")) t
         self.assertIn("row.dataset.group", painter)
         self.assertNotIn("product_identity", source)
         self.assertNotIn("cross_store_groups", source)
-        modal = source[source.index("function openProduct("):source.index("function closeProduct(")]
-        self.assertIn("rankGroupOffers", modal)
-        self.assertIn("Cheapest available · price only", modal)
-        self.assertNotIn("offer.cheapest", modal)
+        label = source[source.index("const GROUP_CHEAPEST_LABEL"):source.index("function groupNote(")]
+        self.assertIn("function rankGroupOffers(", label)
+        self.assertIn("Cheapest available · price only", label)
+        self.assertNotIn("offer.cheapest", label)
 
     def test_comparison_styles_exist_for_desktop_and_phone(self):
         page = Path(__file__).with_name("page.css").read_text(encoding="utf-8")

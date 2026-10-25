@@ -3724,100 +3724,20 @@ function setChartWindow(days) {
     if (chartId) drawChart(chartId);
 }
 
+function dealNode(id) {
+    indexDeals();
+    return (cardById && cardById.get(id)) || (rowById && rowById.get(id)) || null;
+}
+
 function openProduct(id, fromGroup) {
     if (!fromGroup) groupReturnFocus = null;
-    const item = (catalog().items || {})[id];
-    const modal = document.getElementById("productModal");
-    if (!modal || !item) return;
-    chartId = id;
-    const title = document.getElementById("modalTitle");
-    if (title) title.textContent = item.name || "Price history";
-    const meta = document.getElementById("modalMeta");
-    if (meta) {
-        const bits = [item.store, item.part];
-        if (item.size) bits.push(item.size + '"');
-        if (item.length) bits.push(item.length + '" long');
-        if (item.wheelbase) bits.push(item.wheelbase + '" wheelbase');
-        if (item.held) bits.push(item.held);
-        if (item.stage) bits.push(item.stage);
-        meta.textContent = bits.filter(Boolean).join(" · ");
-    }
-    const note = document.getElementById("modalNote");
-    if (note) note.textContent = item.chartNote || catalog().chartNote || "";
-    const list = document.getElementById("modalOffers");
-    if (list) {
-        list.innerHTML = "";
-        const rankedOffers = rankGroupOffers((item.offers || []).map((offer, index) => ({
-            id: (offer && offer.url) || String(index),
-            store: offer && offer.store,
-            price: offer && offer.price,
-            url: offer && offer.url,
-            availability: (offer && offer.availability) || "On sale",
-            currency: (offer && offer.currency) || "USD"
-        })));
-        const featuredOffer = rankedOffers.mode === "compare" ? rankedOffers.featured : null;
-        (item.offers || []).forEach(offer => {
-            const li = document.createElement("li");
-            const isFeatured = !!(featuredOffer && offer && offer.url && offer.url === featuredOffer.url);
-            if (isFeatured) li.className = "cheapest";
-            if (isFeatured) {
-                const tag = document.createElement("strong");
-                tag.textContent = featuredOffer.available ? "Cheapest available · price only " : "Lowest listed price · price only ";
-                li.appendChild(tag);
-            }
-            const symbol = String(offer.currency || "USD").toUpperCase() === "EUR" ? "€" : "$";
-            const label = (offer.store || "Store") + " " + symbol + Number(offer.price).toFixed(2) + " · " + (offer.availability || "On sale");
-            if (offer.url) {
-                const link = document.createElement("a");
-                link.href = offer.url;
-                link.target = "_blank";
-                link.rel = "noopener";
-                link.textContent = label;
-                li.appendChild(link);
-            } else {
-                li.appendChild(document.createTextNode(label));
-            }
-            list.appendChild(li);
-        });
-        let priceNote = document.getElementById("modalPriceNote");
-        if (!priceNote && list.parentNode) {
-            priceNote = document.createElement("p");
-            priceNote.id = "modalPriceNote";
-            priceNote.className = "group-note";
-            list.parentNode.insertBefore(priceNote, list);
-        }
-        if (priceNote) {
-            const many = (item.offers || []).filter(offer => offer && offer.url).length > 1;
-            priceNote.hidden = !many;
-            priceNote.textContent = many ? "Cheapest available is the lowest price still on sale. Delivery charges and tax are not included." : "";
-        }
-    }
-    const link = document.getElementById("modalLink");
-    if (link) {
-        if (item.url) {
-            link.hidden = false;
-            link.href = item.url;
-            link.textContent = "View at " + (item.store || "the store");
-        } else {
-            link.hidden = true;
-        }
-    }
-    document.querySelectorAll(".score-cell.pinned").forEach(cell => {
-        cell.classList.remove("pinned");
-        cell.querySelectorAll(".score-btn, .score-info").forEach(control => {
-            control.setAttribute("aria-expanded", "false");
-        });
-    });
-    modal.hidden = false;
-    setChartWindow(chartWindow || 90);
+    const card = dealNode(id);
+    if (!card) return;
+    openQuickView(card, true, !!fromGroup);
 }
 
 function closeProduct() {
-    const modal = document.getElementById("productModal");
-    const wasOpen = !!(modal && !modal.hidden);
-    if (modal) modal.hidden = true;
-    chartId = "";
-    if (wasOpen) restoreGroupFocus();
+    closeQuickView();
 }
 
 let navMode = "deals";
@@ -5080,7 +5000,11 @@ function wireQuickView() {
     });
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
-        if (event.target.closest("#quickView, .card-more, .card-quick, .card-alert, .group-quick, #alertsRoot, #navAlerts")) return;
+        if (event.target.closest("#quickView, .card-more, .card-quick, .card-alert, .group-quick, .group-chart, .price-btn, #alertsRoot, #navAlerts")) return;
+        // A tap on the card or table row is what opens this view. The same
+        // click must not count as an outside click and dismiss it.
+        const deal = event.target.closest(".deal-row, .deal-card");
+        if (deal && !event.target.closest("a, button, input, select, label")) return;
         closeQuickView();
     });
 }
@@ -5164,7 +5088,8 @@ function wireDealEvents() {
         }
         const priceBtn = event.target.closest(".price-btn");
         if (priceBtn) {
-            openProduct(priceBtn.dataset.id);
+            const card = dealNode(priceBtn.dataset.id);
+            if (card) openQuickView(card, true);
             return;
         }
         const groupQuick = event.target.closest(".group-quick");
@@ -5182,7 +5107,8 @@ function wireDealEvents() {
         if (groupChart) {
             event.stopPropagation();
             groupReturnFocus = groupChart;
-            openProduct(groupChart.dataset.id, true);
+            const card = dealNode(groupChart.dataset.id);
+            if (card) openQuickView(card, true, true);
             return;
         }
         const groupOffer = event.target.closest(".group-offer");
@@ -5192,7 +5118,7 @@ function wireDealEvents() {
         }
         const row = event.target.closest(".deal-row, .deal-card");
         if (!row || event.target.closest("a, button, input, select, label")) return;
-        openProduct(row.dataset.id);
+        openQuickView(row, true);
     }, true);
     document.addEventListener("keydown", event => {
         if (event.target && event.target.closest && event.target.closest("#groupBoard")) {
@@ -5202,7 +5128,7 @@ function wireDealEvents() {
         const row = event.target.closest(".deal-row, .deal-card");
         if (!row || event.target.closest("a, button, input, select, label")) return;
         event.preventDefault();
-        openProduct(row.dataset.id);
+        openQuickView(row, true);
     });
     document.addEventListener("mousemove", event => {
         const spark = event.target.closest(".spark-hit");
