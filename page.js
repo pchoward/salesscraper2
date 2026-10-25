@@ -7342,9 +7342,9 @@ function ensureAlertsShell() {
     const head = alertsEl("div", "alerts-head");
     const title = alertsEl("h2", "alerts-title", "Alerts");
     title.id = "alertsTitle";
-    const close = alertsEl("button", "alerts-close", "Close");
+    const close = alertsEl("button", "alerts-close", "×");
     close.type = "button";
-    close.setAttribute("aria-label", "Close alerts");
+    close.setAttribute("aria-label", "Close");
     close.addEventListener("click", closeAlerts);
     head.append(title, close);
     const live = alertsEl("p", "alerts-live", "");
