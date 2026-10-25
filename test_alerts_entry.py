@@ -440,6 +440,8 @@ function press(key, extras) {
     const removed = [];
     globalThis.turnstile = {
         render(el, options) {
+            // Like Cloudflare's: nothing renders into an element outside the page.
+            if (!el.id || document.getElementById(el.id) !== el) return undefined;
             const id = "w" + (rendered.length + 1);
             rendered.push({ id, options });
             el.setAttribute("data-rendered", id);
