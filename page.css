@@ -2936,6 +2936,9 @@ body.alerts-open { overflow: hidden; }
 }
 .deal-card .product-name {
     margin: 0;
+    /* The card is a flex column. Overflow other than visible lets this slot
+       shrink and slice the second line, so the height is fixed at two lines. */
+    flex: 0 0 calc(1.25em * 2);
     height: calc(1.25em * 2);
     min-height: calc(1.25em * 2);
     max-height: calc(1.25em * 2);
@@ -2943,14 +2946,20 @@ body.alerts-open { overflow: hidden; }
     font-size: var(--font-sm);
     font-weight: 700;
     line-height: 1.25;
+}
+.deal-card .product-name .product-link {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-}
-.deal-card .product-name .product-link {
-    color: inherit;
+    overflow: hidden;
+    height: calc(1.25em * 2);
+    max-height: calc(1.25em * 2);
+    font-size: inherit;
     font-weight: 700;
+    line-height: inherit;
+    letter-spacing: normal;
+    color: inherit;
     text-decoration: none;
 }
 .deal-card .card-prices {

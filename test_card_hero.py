@@ -91,6 +91,20 @@ class CardHeroTests(unittest.TestCase):
         self.assertIn('class="hero ph"', missing)
         self.assertNotIn("<img", missing)
         self.assertIn("line-clamp: 2", html)
+        title = css.split(".deal-card .product-name .product-link {")[-1].split("}", 1)[0]
+        for declaration in (
+            "display: -webkit-box",
+            "-webkit-line-clamp: 2",
+            "-webkit-box-orient: vertical",
+            "overflow: hidden",
+            "line-clamp: 2",
+            "height: calc(1.25em * 2)",
+            "font-size: inherit",
+        ):
+            self.assertIn(declaration, title)
+        slot = css.split(".deal-card .product-name {")[-1].split("}", 1)[0]
+        self.assertIn("flex: 0 0 calc(1.25em * 2)", slot)
+        self.assertIn("height: calc(1.25em * 2)", slot)
         self.assertIn("Average ", card)
         self.assertIn("Now ", card)
         self.assertIn('class="card-meta"', card)
