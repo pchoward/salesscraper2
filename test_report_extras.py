@@ -55,10 +55,10 @@ class ReportExtraTests(unittest.TestCase):
             price_history=history,
             generated_at="2026-09-30T12:56:14+00:00",
         )
-        self.assertIn('id="productModal"', html)
-        self.assertIn('data-window="30"', html)
-        self.assertIn('data-window="90"', html)
-        self.assertIn('data-window="180"', html)
+        self.assertIn('id="quickView"', html)
+        self.assertNotIn('id="productModal"', html)
+        self.assertNotIn('id="priceDrawer"', html)
+        self.assertNotIn(">Close</button>", html)
         self.assertIn('id="cardGrid"', html)
         self.assertIn('id="layoutCards"', html)
         self.assertIn('id="activeChips"', html)

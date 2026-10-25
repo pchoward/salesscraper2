@@ -2178,14 +2178,19 @@ select option:disabled { color: #94a3b8; }
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        flex: 1 1 auto;
-        min-height: 2.4rem;
-        margin-left: 0.45rem;
-        padding: 0.4rem 0.75rem;
-        background: #1d4ed8;
-        color: white;
-        font-weight: 800;
-        border-radius: 4px;
+        flex: 0 0 auto;
+        width: 2.5rem;
+        height: 2.5rem;
+        min-height: 0;
+        margin-left: auto;
+        padding: 0;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: #334155;
+        font-size: 1.75rem;
+        font-weight: 400;
+        line-height: 1;
     }
     .rail .sidebar { width: min(300px, 92vw); overflow: auto; }
 }

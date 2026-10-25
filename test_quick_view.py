@@ -386,6 +386,29 @@ assert.equal(body.querySelector('.quick-gallery').tag, 'div');
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
 
+    def test_card_tap_opens_the_quick_view_not_the_old_sheet(self):
+        page = Path(__file__).with_name("page.py").read_text(encoding="utf-8")
+        script = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        self.assertNotIn(">Close</button>", page)
+        self.assertNotIn('id="productModal"', page)
+        self.assertNotIn('id="modalClose"', page)
+        self.assertNotIn('id="priceDrawer"', page)
+        self.assertNotIn('id="drawerClose"', page)
+        self.assertIn('class="quick-close filters-done" id="filtersClose" aria-label="Close filters">×</button>', page)
+        deals = script[script.index("function wireDealEvents("):script.index("function backdropPixel(")]
+        self.assertNotIn("openProduct(", deals)
+        click = deals[deals.index('const row = event.target.closest(".deal-row, .deal-card");'):]
+        self.assertIn("openQuickView(row, true)", click)
+        self.assertIn("openQuickView(card, true, true)", deals)
+        self.assertIn("function openProduct(", script)
+        opener = script[script.index("function openProduct("):script.index("function closeProduct(")]
+        self.assertIn("openQuickView(card, true, !!fromGroup)", opener)
+        self.assertNotIn("productModal", opener)
+        closer = script[script.index("function wireQuickView("):script.index("function placeScoreFloat(")]
+        outside = closer[closer.index('document.addEventListener("click"'):]
+        self.assertIn('closest(".deal-row, .deal-card")', outside)
+        self.assertIn('!event.target.closest("a, button, input, select, label")', outside)
+
 
 if __name__ == "__main__":
     unittest.main()
