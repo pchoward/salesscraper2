@@ -2227,7 +2227,8 @@ def _card_html(record):
     return (
         f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
-        f'<div class="media">{_thumb(record["image"], record["name"], large=True)}{drop_badge}</div>'
+        f'<div class="media">{_thumb(record["image"], record["name"], large=True)}{drop_badge}'
+        '<button type="button" class="card-quick">Quick view</button></div>'
         '<div class="card-face">'
         f'<span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span>'
         "</div>"
