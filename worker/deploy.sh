@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Deploy the alerts Worker from an up-to-date main, and stamp the commit so
-# GET /v1/health (and the "Alerts Worker drift" workflow) can tell which code
+# GET /v1/health (and the "Alerts - Check Worker Deployment" workflow) can tell which code
 # is live. Run from anywhere: ./worker/deploy.sh
 set -euo pipefail
 cd "$(dirname "$0")"

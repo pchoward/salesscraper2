@@ -101,7 +101,7 @@ def load_report_inputs(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTO
     try:
         payload = json.loads(Path(path).read_text(encoding="utf-8"))
     except FileNotFoundError:
-        raise RebuildError(f"{path} is missing; run Scrape Sale Items once to create it") from None
+        raise RebuildError(f"{path} is missing; run 'Scraper - Run Full Scrape' once to create it") from None
     except (OSError, ValueError) as exc:
         raise RebuildError(f"{path} could not be read ({type(exc).__name__})") from None
     if not isinstance(payload, dict) or payload.get("version") != VERSION:

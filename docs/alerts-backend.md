@@ -68,7 +68,7 @@ curl https://<worker>/v1/health                    # {"ok":true,...,"mode":"stag
 
 A merge that changes `worker/` is **not live until this runs**. GitHub Pages does not deploy the Worker.
 
-**Drift check.** The **Alerts Worker drift** workflow runs daily, or on demand from Actions. It fails when the live Worker's commit lacks the newest `worker/src` or `worker/migrations` change on main. It reads only the public health endpoint and never deploys. To turn it on, set the repository variable `ALERTS_API_URL` to the Worker URL. That variable alone does not enable delivery, which still needs `ALERTS_DELIVERY_ENABLED`.
+**Drift check.** The **Alerts - Check Worker Deployment** workflow runs daily, or on demand from Actions. It fails when the live Worker's commit lacks the newest `worker/src` or `worker/migrations` change on main. It reads only the public health endpoint and never deploys. To turn it on, set the repository variable `ALERTS_API_URL` to the Worker URL. That variable alone does not enable delivery, which still needs `ALERTS_DELIVERY_ENABLED`.
 
 Keep a copy of `HMAC_SECRET` for GitHub, below. Never rotate `TOKEN_PEPPER` casually: it makes every link and stored hash invalid.
 
