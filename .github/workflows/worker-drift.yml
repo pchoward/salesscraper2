@@ -1,4 +1,4 @@
-name: Alerts Worker drift
+name: Alerts - Check Worker Deployment
 
 # Fails when the live alerts Worker is older than the newest worker/ change on
 # main, so a merge that was never deployed cannot go unnoticed. It reads only

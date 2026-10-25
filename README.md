@@ -42,7 +42,7 @@ Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publi
 
 The daily workflow is `.github/workflows/scrape.yml`. It checks out the repo, installs Chrome, and runs `python scraper.py`.
 
-**Publishing a UI change without scraping.** `.github/workflows/rebuild-page.yml` ("Rebuild page") runs `python rebuild_page.py`, which regenerates `sale_items_chart.html` from what the last scrape saved, and commits only that file. It runs in about a minute.
+**Publishing a UI change without scraping.** `.github/workflows/rebuild-page.yml` ("Pages - Rebuild Without Scraping") runs `python rebuild_page.py`, which regenerates `sale_items_chart.html` from what the last scrape saved, and commits only that file. It runs in about a minute.
 - **How it runs:**
   - by hand from Actions;
   - automatically on a push to `main` that changes `page.py`, `page.js`, `page.css`, or `mobile.css`.

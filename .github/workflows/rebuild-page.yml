@@ -1,4 +1,4 @@
-name: Rebuild page
+name: Pages - Rebuild Without Scraping
 
 # Publishes a UI change without scraping: regenerates sale_items_chart.html
 # from the last scrape's saved data (rebuild_page.py) and commits only that
