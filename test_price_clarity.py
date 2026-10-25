@@ -51,23 +51,20 @@ class CardPriceClarityTests(unittest.TestCase):
         deck_card = next(card for card in cards if "Baker Logo" in card)
         bare_card = next(card for card in cards if "Independent Bolts" in card)
         for card in (deck_card, bare_card):
-            media = card.split('<div class="media">', 1)[1].split('<div class="card-face">', 1)[0]
-            prices = card.split('<div class="card-prices">', 1)[1].split("</div>", 1)[0]
+            media = card.split('<div class="media">', 1)[1].split("</div>", 1)[0]
             self.assertIn('class="hero', media)
             self.assertNotIn("card-off", media)
             self.assertNotIn("vs list", media)
-            self.assertIn("card-off", prices)
-            self.assertIn(">Details</button>", card)
+            self.assertIn("card-off", card)
+            self.assertNotIn(">Details</button>", card)
             self.assertNotIn("You save", card)
 
-        prices = deck_card.split('<div class="card-prices">', 1)[1].split("</div>", 1)[0]
-        self.assertIn("50% vs list", prices)
-        self.assertIn("not a tracked market price", prices)
-        self.assertIn("Now:", prices)
-        bare_prices = bare_card.split('<div class="card-prices">', 1)[1].split("</div>", 1)[0]
-        self.assertIn("No discount info", bare_prices)
-        self.assertIn("no claimed discount", bare_prices)
-        self.assertNotIn("vs list", bare_prices)
+        self.assertIn("↓ 50%", deck_card)
+        self.assertIn("not a tracked market price", deck_card)
+        self.assertIn("Now ", deck_card)
+        self.assertIn("No list price", bare_card)
+        self.assertIn("no claimed discount", bare_card)
+        self.assertNotIn("vs list", bare_card)
 
     def test_claimed_chip_is_neutral_and_history_lines_fit_a_phone(self):
         css = Path("page.css").read_text(encoding="utf-8")
@@ -319,7 +316,7 @@ now.className = 'now-price';
 now.textContent = 'Now: $70.00';
 const off = new Element('span');
 off.className = 'discount card-off medium';
-off.textContent = '30% vs list';
+off.textContent = '↓ 30%';
 off.title = "Store's claimed discount versus its list price, not a tracked market price.";
 card.appendChild(now);
 card.appendChild(off);
@@ -327,12 +324,12 @@ const document = {querySelectorAll: () => [card]};
 const state = {shoeSizes: ['9']};
 ''' + chunk + r'''
 paintOfferPrices();
-assert.equal(off.textContent, '20% vs list');
+assert.equal(off.textContent, '↓ 20%');
 assert.match(off.title, /claimed discount/);
 assert.equal(off.className.split(/\s+/).includes('low'), true);
 state.shoeSizes = [];
 paintOfferPrices();
-assert.equal(off.textContent, '30% vs list');
+assert.equal(off.textContent, '↓ 30%');
 assert.match(off.title, /not a tracked market price/);
 '''
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)

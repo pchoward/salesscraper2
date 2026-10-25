@@ -241,7 +241,7 @@ class InStockVariantTests(unittest.TestCase):
         self.assertIn('data-shoesize="8,9.5"', priced_row)
         self.assertIn('data-shoeprices="8:50.00,9.5:70.00"', priced_row)
         self.assertIn('data-shoecompares="8:80.00,9.5:100.00"', priced_row)
-        self.assertIn(">Now: $50.00<", html)
+        self.assertIn(">Now $50.00<", html)
         self.assertIn(">$50.00<", html)
 
 

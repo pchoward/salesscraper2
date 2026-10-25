@@ -471,7 +471,10 @@ function paintOfferPrices() {
             const base = priceNode.dataset.baseText;
             const symbol = base.indexOf("€") >= 0 ? "€" : "$";
             const formatted = symbol + offer.price.toFixed(2);
-            priceNode.textContent = base.trim().indexOf("Now:") === 0 ? "Now: " + formatted : formatted;
+            const baseTrim = base.trim();
+            priceNode.textContent = baseTrim.indexOf("Now:") === 0 || baseTrim.indexOf("Now ") === 0
+                ? "Now " + formatted
+                : formatted;
         }
         node.querySelectorAll(".price-old").forEach(oldNode => {
             if (!oldNode.dataset.baseText) oldNode.dataset.baseText = oldNode.textContent;
@@ -503,7 +506,7 @@ function paintOfferPrices() {
                 discountNode.title = percent == null
                     ? "This store did not publish a list price, so there is no claimed discount."
                     : "Store's claimed discount versus its list price, not a tracked market price.";
-                discountNode.textContent = percent == null ? "No discount info" : Math.round(percent) + "% vs list";
+                discountNode.textContent = percent == null ? "No list price" : "\u2193 " + Math.round(percent) + "%";
             } else {
                 discountNode.textContent = percent == null ? "N/A" : Math.round(percent) + "%";
             }
@@ -719,6 +722,7 @@ function paintFacetCounts() {
     paintQuickRow("partFilters", "data-part", partCounts, state.part || "Decks");
     paintTypeHint();
     paintSelectCounts("lengthSelect", lengthCounts);
+    syncLengthChips();
     paintSelectCounts("wheelbaseSelect", wheelCounts);
     scheduleNavFit();
     SPEC_FACETS.forEach(facet => {
@@ -754,6 +758,36 @@ function paintFacetCounts() {
     syncFacetEmpty(document.getElementById("brandList"), ".facet-value", "No matching brands");
     syncFacetEmpty(document.getElementById("dealTypes"), ".kind-btn", "No deal types match");
     paintKeepaCounts();
+}
+
+function syncLengthChips() {
+    const select = document.getElementById("lengthSelect");
+    const group = document.getElementById("lengthFilters");
+    if (!group) return;
+    const current = select ? (select.value || "all") : "all";
+    const pool = select && select._facetPool ? select._facetPool : (select ? Array.from(select.options || []) : []);
+    group.querySelectorAll(".length-chip").forEach(button => {
+        const value = button.getAttribute("data-value") || "";
+        const on = value === current;
+        if (value === "all") {
+            button.hidden = false;
+            button.classList.toggle("active", on);
+            button.setAttribute("aria-pressed", on ? "true" : "false");
+            return;
+        }
+        const option = pool.find(item => item.value === value);
+        const present = !!(option && select && option.parentNode === select);
+        button.hidden = !present && !on;
+        if (option) {
+            const match = String(option.textContent || "").match(/\((\d+)\)\s*$/);
+            const slot = button.querySelector(".spec-count");
+            if (match && slot) slot.textContent = match[1];
+            if (match) button.setAttribute("data-count", match[1]);
+        }
+        button.classList.toggle("is-zero", !present);
+        button.classList.toggle("active", on);
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
 }
 
 function setPressed(selector, attr, value) {
@@ -1545,12 +1579,8 @@ function paintOneCardStat(card) {
     const average = sum / points.length;
     const now = parseFloat(card.dataset.price);
     const symbol = node.dataset.symbol || "$";
-    if (Number.isFinite(now) && Math.abs(average - now) < 0.005) {
-        node.hidden = true;
-        return;
-    }
     node.hidden = false;
-    node.textContent = "Average: " + symbol + average.toFixed(2);
+    node.textContent = "Average " + symbol + average.toFixed(2);
     node.dataset.statWindow = String(chartWindow);
 }
 
@@ -2962,10 +2992,12 @@ function placeFloat(pop, anchor, avoid) {
 
 function readLayout() {
     try {
-        return localStorage.getItem(LAYOUT_KEY) === "cards" ? "cards" : "table";
+        const saved = localStorage.getItem(LAYOUT_KEY);
+        if (saved === "table" || saved === "cards") return saved;
     } catch (err) {
-        return "table";
+        return "cards";
     }
+    return "cards";
 }
 
 function applyLayout(mode) {
@@ -4104,11 +4136,11 @@ function syncQuickStar(card) {
 }
 
 function setQuickExpanded(on) {
-    document.querySelectorAll(".card-more[aria-expanded='true']").forEach(button => {
+    document.querySelectorAll(".card-quick[aria-expanded='true'], .card-more[aria-expanded='true']").forEach(button => {
         button.setAttribute("aria-expanded", "false");
     });
     if (!on || !quickCard) return;
-    const more = quickCard.querySelector(".card-more");
+    const more = quickCard.querySelector(".card-quick, .card-more");
     if (more) more.setAttribute("aria-expanded", "true");
 }
 
@@ -4932,7 +4964,7 @@ function closeQuickView() {
     clearTimeout(quickCloseTimer);
     const panel = document.getElementById("quickView");
     const returnFocus = quickPinned && panel && panel.contains(document.activeElement)
-        && quickCard && quickCard.querySelector(".card-more");
+        && quickCard && quickCard.querySelector(".card-quick, .card-more");
     if (panel) {
         panel.hidden = true;
         panel.classList.remove("is-sheet");
@@ -5048,7 +5080,7 @@ function wireQuickView() {
     });
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
-        if (event.target.closest("#quickView, .card-more, .card-quick, .group-quick, #alertsRoot, #navAlerts")) return;
+        if (event.target.closest("#quickView, .card-more, .card-quick, .card-alert, .group-quick, #alertsRoot, #navAlerts")) return;
         closeQuickView();
     });
 }
@@ -5081,6 +5113,18 @@ function wireDealEvents() {
                 control.setAttribute("aria-expanded", pinned ? "true" : "false");
             });
             if (pinned) placeScoreFloat(cell, score);
+            return;
+        }
+        const cardAlert = event.target.closest(".card-alert");
+        if (cardAlert) {
+            event.preventDefault();
+            event.stopPropagation();
+            const card = cardAlert.closest(".deal-card, .deal-row");
+            if (!card) return;
+            const draft = alertDraftFromDataset(card.dataset || {});
+            draft.image = typeof alertsProductImage === "function" ? alertsProductImage(card) : "";
+            if (typeof closeQuickView === "function") closeQuickView();
+            if (typeof openAlerts === "function") openAlerts({ draft: draft, returnFocus: cardAlert });
             return;
         }
         const quickBtn = event.target.closest(".card-quick");
@@ -5380,6 +5424,7 @@ function settleCardCopy(card) {
     const prices = card.querySelector(".card-prices");
     if (!prices) return;
     card.querySelectorAll(".card-off").forEach(node => {
+        if (node.classList.contains("card-drop") || node.closest(".card-offer")) return;
         if (node.parentElement !== prices) prices.appendChild(node);
     });
     card.dataset.copySettled = "1";
@@ -5682,6 +5727,16 @@ function init() {
             const button = event.target.closest("[data-kind]");
             if (!button) return;
             toggleDealType(button.getAttribute("data-kind") || "");
+        });
+    }
+    const lengthFilters = document.getElementById("lengthFilters");
+    if (lengthFilters) {
+        lengthFilters.addEventListener("click", event => {
+            const button = event.target.closest(".length-chip");
+            if (!button || !lengthFilters.contains(button)) return;
+            setSelect("lengthSelect", button.getAttribute("data-value") || "all");
+            const select = document.getElementById("lengthSelect");
+            if (select && select.dispatchEvent) select.dispatchEvent(new Event("change", { bubbles: true }));
         });
     }
     const sizeFilters = document.getElementById("sizeFilters");
@@ -7623,7 +7678,9 @@ function appendQuickAlert(parent, card) {
         const dataset = (card && card.dataset) || {};
         const draft = alertDraftFromDataset(dataset);
         draft.image = alertsProductImage(card);
-        const returnFocus = card && typeof card.querySelector === "function" ? card.querySelector(".card-more") : button;
+        const returnFocus = card && typeof card.querySelector === "function"
+            ? card.querySelector(".card-alert, .card-quick, .card-more")
+            : button;
         if (typeof closeQuickView === "function") closeQuickView();
         openAlerts({ draft: draft, returnFocus: returnFocus });
     });
