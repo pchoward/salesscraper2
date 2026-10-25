@@ -24,7 +24,7 @@ There is no in-page subscription store. `window.SKATEDEALS_ALERTS.turnstileSiteK
 
 ## What the page sends
 
-`GET /v1/health` runs before signup. When `mode` is `mock`, the page sends the documented public token `mock-turnstile-pass` and says that no email is sent. In any other mode it uses the Turnstile widget only if a site key is configured. It never invents a passing token.
+`GET /v1/health` runs before signup. When `mode` is `mock`, the page sends the documented public token `mock-turnstile-pass` and says that no email is sent. In any other mode it renders the Turnstile widget explicitly into Subscribe, Alert me, and the email-a-link form whenever a site key is configured, including when the dialog opens again or switches views. A submit with no token shows "Complete the verification check" and does not call the API. The page never invents a passing token. A staging allowlist rejection is shown as that address not being on the staging allowlist.
 
 Signup is `POST /v1/subscribe`. A manage link is `POST /v1/link`. Verify is `POST /v1/verify` with the `#verify=` fragment. Preferences are `GET` and `PUT /v1/preferences` with `Authorization: Bearer`. Unsubscribe is `POST /v1/unsubscribe` with that header and no body. Delete is `DELETE /v1/subscriber`. The page does not call `/v1/internal/*`, `/v1/webhooks/resend`, or `/v1/mock/outbox`.
 

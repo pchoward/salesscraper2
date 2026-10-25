@@ -5700,7 +5700,7 @@ const ALERTS_ERRORS = {
     consent_outdated: "This page is out of date. Refresh and try again.",
     captcha_failed: "The captcha check failed. Try again.",
     invalid_rules: "Those alert details were rejected.",
-    staging_recipient_not_allowed: "That address is not allowed on this server.",
+    staging_recipient_not_allowed: "That address is not on the staging allowlist, so this server will not email it.",
     json_required: "The request was not accepted.",
     rate_limited: "Too many attempts. Nothing was changed.",
     signups_closed: "New signups are closed right now.",
@@ -5738,7 +5738,10 @@ const alertsUi = {
     consent: false,
     health: null,
     confirm: "",
-    returnFocus: null
+    returnFocus: null,
+    turnstileWidget: "",
+    turnstileLoading: null,
+    turnstileFailed: false
 };
 
 function alertsResolveConfig(env) {
@@ -6182,6 +6185,7 @@ function alertsFailureMessage(result) {
     result = result || {};
     const body = result.body || {};
     const code = result.error || body.error || "";
+    if (code === "network" || (result.status === 0 && code !== "unavailable")) return "Couldn't reach the alerts service. Nothing was sent.";
     if (result.status === 503 || code === "service_unavailable" || body.ok === false) return "Alerts are unavailable right now.";
     let text = ALERTS_ERRORS[code] || "Something went wrong. Nothing was changed.";
     if (code === "rate_limited") {
@@ -6491,27 +6495,133 @@ function draftFromForm(base) {
     return draft;
 }
 
+function turnstileApiReady() {
+    return typeof turnstile !== "undefined" && !!turnstile && typeof turnstile.render === "function";
+}
+
+function turnstileRequired() {
+    if (!alertsUi.config || !alertsUi.config.turnstileSiteKey) return false;
+    if (alertsUi.health && alertsUi.health.mode === "mock") return false;
+    return true;
+}
+
 function turnstileToken() {
     if (alertsUi.health && alertsUi.health.mode === "mock") return "mock-turnstile-pass";
-    if (typeof turnstile !== "undefined" && turnstile && typeof turnstile.getResponse === "function") {
-        return turnstile.getResponse() || "";
+    if (!alertsUi.turnstileWidget || !turnstileApiReady() || typeof turnstile.getResponse !== "function") return "";
+    try {
+        return turnstile.getResponse(alertsUi.turnstileWidget) || "";
+    } catch (err) {
+        return "";
     }
-    return "";
+}
+
+function rejectUnverifiedTurnstile() {
+    if (!turnstileRequired() || turnstileToken()) return "";
+    if (alertsUi.turnstileFailed) return "The verification check could not be loaded. Nothing was sent.";
+    if (!turnstileApiReady() || !alertsUi.turnstileWidget) return "The verification check is still loading. Nothing was sent.";
+    return "Complete the verification check. Nothing was sent.";
+}
+
+function removeTurnstileWidget() {
+    const widgetId = alertsUi.turnstileWidget;
+    alertsUi.turnstileWidget = "";
+    if (!widgetId || !turnstileApiReady() || typeof turnstile.remove !== "function") return;
+    try {
+        turnstile.remove(widgetId);
+    } catch (err) {
+        /* the dialog replaced the node already */
+    }
+}
+
+function loadTurnstileApi() {
+    if (turnstileApiReady()) return Promise.resolve(true);
+    if (alertsUi.turnstileLoading) return alertsUi.turnstileLoading;
+    alertsUi.turnstileFailed = false;
+    alertsUi.turnstileLoading = new Promise(function(resolve) {
+        let settled = false;
+        function finish(ok) {
+            if (settled) return;
+            settled = true;
+            alertsUi.turnstileFailed = !ok;
+            if (!ok) alertsUi.turnstileLoading = null;
+            resolve(!!ok);
+        }
+        if (typeof window !== "undefined") {
+            window.onAlertsTurnstileLoad = function() { finish(turnstileApiReady()); };
+        }
+        const script = document.createElement("script");
+        script.id = "alertsTurnstileScript";
+        script.async = true;
+        script.defer = true;
+        script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onAlertsTurnstileLoad";
+        script.onerror = function() { finish(false); };
+        if (document.body) document.body.appendChild(script);
+        else finish(false);
+    });
+    return alertsUi.turnstileLoading;
+}
+
+function renderTurnstileWidget(slot) {
+    if (!slot || !turnstileApiReady()) return;
+    removeTurnstileWidget();
+    try {
+        alertsUi.turnstileWidget = turnstile.render(slot, {
+            sitekey: alertsUi.config.turnstileSiteKey,
+            callback: function() {
+                if (alertsUi.error && alertsUi.error.indexOf("verification check") >= 0) {
+                    alertsUi.error = "";
+                    const error = document.getElementById("alertsError");
+                    if (error) error.textContent = "";
+                }
+            },
+            "error-callback": function() {
+                alertsUi.error = "The captcha check failed. Try again.";
+                const error = document.getElementById("alertsError");
+                if (error) error.textContent = alertsUi.error;
+            },
+            "expired-callback": function() {
+                alertsUi.error = "The verification check expired. Complete it again.";
+                const error = document.getElementById("alertsError");
+                if (error) error.textContent = alertsUi.error;
+            }
+        }) || "";
+    } catch (err) {
+        alertsUi.turnstileWidget = "";
+        alertsUi.turnstileFailed = true;
+    }
 }
 
 function ensureTurnstile(parent) {
     const key = alertsUi.config && alertsUi.config.turnstileSiteKey;
     if (!key || (alertsUi.health && alertsUi.health.mode === "mock")) return;
     const slot = alertsEl("div", "alerts-turnstile");
-    slot.setAttribute("data-sitekey", key);
+    slot.id = "alertsTurnstile";
     parent.appendChild(slot);
-    if (document.getElementById("alertsTurnstileScript")) return;
-    const script = document.createElement("script");
-    script.id = "alertsTurnstileScript";
-    script.async = true;
-    script.defer = true;
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    if (document.body) document.body.appendChild(script);
+    if (turnstileApiReady()) {
+        renderTurnstileWidget(slot);
+        return;
+    }
+    loadTurnstileApi().then(function(ok) {
+        const current = document.getElementById("alertsTurnstile");
+        if (!alertsUi.open || current !== slot) return;
+        if (ok) renderTurnstileWidget(current);
+        else if (!document.getElementById("alertsError") || !document.getElementById("alertsError").textContent) {
+            alertsUi.error = "The verification check could not be loaded. Nothing was sent.";
+            const error = document.getElementById("alertsError");
+            if (error) error.textContent = alertsUi.error;
+        }
+    });
+}
+
+function markAlertsBusy(message) {
+    alertsUi.busy = true;
+    const live = document.getElementById("alertsLive");
+    if (live) live.textContent = message || "Sending…";
+    const submit = document.getElementById("alertsSubmit");
+    if (submit) {
+        submit.disabled = true;
+        submit.setAttribute("aria-busy", "true");
+    }
 }
 
 function paintSoon(body) {
@@ -6738,7 +6848,7 @@ function paintRelink(body) {
     if (alertsUi.health && alertsUi.health.mode === "mock") {
         body.appendChild(alertsEl("p", "alerts-banner", "This is a local mock. No email is sent."));
     }
-    body.appendChild(alertsEl("p", "alerts-copy", "Email me a link"));
+    body.appendChild(alertsEl("p", "alerts-copy", "If this address is already confirmed, we'll email a link to manage its alerts."));
     const form = alertsEl("form", "alerts-form");
     form.id = "alertsLinkForm";
     form.noValidate = true;
@@ -6839,6 +6949,7 @@ function paintAlerts(focusId) {
     if (title) title.textContent = titles[alertsUi.view] || "Alerts";
     if (live) live.textContent = alertsUi.view === "check" ? "" : (alertsUi.message || "");
     if (error) error.textContent = alertsUi.error || "";
+    removeTurnstileWidget();
     body.replaceChildren();
     if (alertsUi.view === "soon") paintSoon(body);
     else if (alertsUi.view === "down") paintDown(body);
@@ -6908,7 +7019,7 @@ function readProductTrigger() {
     return alertsUi.trigger === "drop" ? "drop" : "below";
 }
 
-async function saveSignupRule(rule) {
+async function saveSignupRule(rule, captcha) {
     const token = readManageToken();
     if (token) {
         const got = await alertsUi.client.getPreferences(token);
@@ -6937,7 +7048,7 @@ async function saveSignupRule(rule) {
             rules: [rule],
             consent: true,
             consent_version: alertsUi.config.consentVersion,
-            turnstile_token: turnstileToken()
+            turnstile_token: captcha
         })
     };
 }
@@ -6972,33 +7083,44 @@ async function submitSignup(event) {
         paintAlerts();
         return;
     }
-    alertsUi.busy = true;
+    const unverified = rejectUnverifiedTurnstile();
+    if (unverified) {
+        alertsUi.error = unverified;
+        alertsUi.active = false;
+        alertsUi.view = "signup";
+        paintAlerts();
+        return;
+    }
+    const captcha = turnstileToken();
+    markAlertsBusy("Sending…");
     alertsUi.error = "";
-    const saved = await saveSignupRule(built.rule);
-    alertsUi.busy = false;
-    if (saved.localError) {
-        alertsUi.error = saved.localError;
-        alertsUi.active = false;
-        alertsUi.view = "signup";
-        paintAlerts();
-        return;
-    }
-    if (saved.put) {
-        const result = saved.put;
-        if (result.status === 200 && result.body && result.body.status === "active") {
-            adoptAlerts(alertsApplyResult({ active: false }, "preferences", result));
-            paintAlerts();
-            return;
+    try {
+        const saved = await saveSignupRule(built.rule, captcha);
+        if (saved.localError) {
+            alertsUi.error = saved.localError;
+            alertsUi.active = false;
+            alertsUi.view = "signup";
+        } else if (saved.put) {
+            const result = saved.put;
+            if (result.status === 200 && result.body && result.body.status === "active") {
+                adoptAlerts(alertsApplyResult({ active: false }, "preferences", result));
+            } else {
+                alertsUi.error = alertsFailureMessage(result);
+                alertsUi.active = false;
+                alertsUi.view = "signup";
+            }
+        } else {
+            const result = saved.subscribe;
+            adoptAlerts(alertsApplyResult({ active: false, view: "signup" }, "subscribe", result));
+            if (alertsUi.view !== "check") alertsUi.view = alertsUi.view === "down" ? "down" : "signup";
         }
-        alertsUi.error = alertsFailureMessage(result);
+    } catch (err) {
+        alertsUi.error = "Something went wrong. Nothing was sent.";
         alertsUi.active = false;
         alertsUi.view = "signup";
-        paintAlerts();
-        return;
+    } finally {
+        alertsUi.busy = false;
     }
-    const result = saved.subscribe;
-    adoptAlerts(alertsApplyResult({ active: false, view: "signup" }, "subscribe", result));
-    if (alertsUi.view !== "check") alertsUi.view = alertsUi.view === "down" ? "down" : "signup";
     paintAlerts();
 }
 
@@ -7013,13 +7135,34 @@ async function submitLink(event) {
         return;
     }
     if (!alertsUi.health) await refreshHealth();
-    alertsUi.busy = true;
-    const result = await alertsUi.client.link({
-        email: normalizeEmail(alertsUi.email),
-        turnstile_token: turnstileToken()
-    });
-    alertsUi.busy = false;
-    adoptAlerts(alertsApplyResult({ active: false }, "link", result));
+    if (alertsUi.view === "down") {
+        paintAlerts();
+        return;
+    }
+    const unverified = rejectUnverifiedTurnstile();
+    if (unverified) {
+        alertsUi.error = unverified;
+        alertsUi.active = false;
+        alertsUi.view = "relink";
+        paintAlerts("alertsLinkEmail");
+        return;
+    }
+    const captcha = turnstileToken();
+    markAlertsBusy("Sending…");
+    alertsUi.error = "";
+    try {
+        const result = await alertsUi.client.link({
+            email: normalizeEmail(alertsUi.email),
+            turnstile_token: captcha
+        });
+        adoptAlerts(alertsApplyResult({ active: false }, "link", result));
+    } catch (err) {
+        alertsUi.error = "Something went wrong. Nothing was sent.";
+        alertsUi.active = false;
+        alertsUi.view = "relink";
+    } finally {
+        alertsUi.busy = false;
+    }
     paintAlerts();
 }
 
