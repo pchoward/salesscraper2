@@ -1,9 +1,54 @@
 {
- "changes": {},
+ "changes": {
+  "Zumiez_Trucks": [
+   {
+    "item": {
+     "_brand": "Ace",
+     "_specs": {
+      "length": 33.95,
+      "wheelbase": null,
+      "width": 14.99
+     },
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/409207-US",
+     "length": 33.95,
+     "name": "Ace 66 AF1 Blue & Orange Skateboard Truck",
+     "part": "Trucks",
+     "price_new": "14.99",
+     "price_old": "33.95",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/ace-66-af1-blue-and-orange-skateboard-truck.html",
+     "width": 14.99
+    },
+    "type": "new"
+   }
+  ]
+ },
  "digest": {
   "cross_store": [],
   "drops": [],
-  "new_items": [],
+  "new_items": [
+   {
+    "_brand": "Ace",
+    "_specs": {
+     "length": 33.95,
+     "wheelbase": null,
+     "width": 14.99
+    },
+    "at_all_time_low": true,
+    "availability": "Check store",
+    "image": "https://scene7.zumiez.com/is/image/zumiez/409207-US",
+    "length": 33.95,
+    "name": "Ace 66 AF1 Blue & Orange Skateboard Truck",
+    "part": "Trucks",
+    "price_new": "14.99",
+    "price_old": "33.95",
+    "store": "Zumiez",
+    "url": "https://www.zumiez.com/ace-66-af1-blue-and-orange-skateboard-truck.html",
+    "width": 14.99
+   }
+  ],
   "removed": []
  },
  "failed_keys": [
@@ -11,10 +56,10 @@
   "Tactics_Wheels"
  ],
  "fingerprints": {
-  "data": "e2b8aa3611ccc72044c65a4c6ffe60cf9a761bd1e9db2631f5856f82d083eb28",
-  "history": "edd44078dea96373af1428433e1c666a5929086326c7b033390536323ef9cc6c"
+  "data": "0c83e3ad42060769663eb5f824e8207643ac68bb53d93b4341671333ec0d76de",
+  "history": "3affa8fbda79804cc95849aa86c93459081e62bf9acf9f0ec7e08715eaeebb10"
  },
- "generated_at": "2026-10-25T12:33:19+00:00",
+ "generated_at": "2026-10-26T14:13:31+00:00",
  "history": "file",
  "version": 1
 }
