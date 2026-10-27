@@ -11,6 +11,9 @@ from bs4 import BeautifulSoup
 
 from filters import extract_deck_size, normalize_product_name, normalize_url
 from part_specs import ordered_shoe_sizes, shoe_size_token, shoe_sizes_in
+from protection import classify as classify_protection
+from protection import sizes_in as protection_sizes_in
+from protection import variant_sizes
 from stores.base import Scraper
 from stores.browser import save_debug_file
 from tracked import accessory_rule, sneaker_rule
@@ -417,11 +420,13 @@ def _catalog_match(product, part):
         return bool(sneaker_rule(title, description))
     if part == "Accessories":
         return bool(accessory_rule(title, kind))
+    if part == "Protection":
+        return bool(classify_protection(title, kind))
     return False
 
 
 class CCSCatalogScraper(Scraper):
-    """Bearings, sneakers, and accessories from the clearance products.json feed."""
+    """Bearings, sneakers, accessories, and protection from the clearance products.json feed."""
 
     def __init__(self, part):
         super().__init__("CCS", CLEARANCE_JSON, part)
@@ -477,6 +482,8 @@ class CCSCatalogScraper(Scraper):
             if images and isinstance(images[0], dict) and images[0].get("src"):
                 item["image"] = images[0]["src"]
                 item["images"] = [photo["src"] for photo in images if isinstance(photo, dict) and photo.get("src")]
+            if self.part == "Protection":
+                set_protection_fields(item, title, product_type, sale)
             if self.part == "Sneakers" and _stock_known(variants):
                 offers = _shoe_offers(sale)
                 sizes = ordered_shoe_sizes(offers)
@@ -493,6 +500,15 @@ class CCSCatalogScraper(Scraper):
         return kept
 
 
+def set_protection_fields(item, title, product_type, variants):
+    """Subtype, and the letter sizes of the sale variants (in stock, when the feed says)."""
+    item["protection_type"] = classify_protection(title, product_type)
+    sizes = variant_sizes(variants) or protection_sizes_in(title)
+    if sizes:
+        item["protection_sizes"] = sizes
+    return item
+
+
 def scrapers():
     return [
         CCSDecksScraper(),
@@ -501,4 +517,5 @@ def scrapers():
         CCSCatalogScraper("Bearings"),
         CCSCatalogScraper("Sneakers"),
         CCSCatalogScraper("Accessories"),
+        CCSCatalogScraper("Protection"),
     ]

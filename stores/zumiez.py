@@ -410,6 +410,12 @@ class ZumiezSneakersScraper(ZumiezMultiScraper):
         return super().scrape()
 
 
+# Sale listings of protective gear (helmets, pads, wrist guards). Empty until
+# the owner confirms the URL in a browser; a guessed path would fail every
+# night. Example shape: a category page with ?customFilters=promotion_flag:Sale.
+PROTECTION_URLS = ()
+
+
 def scrapers():
     # robots.txt allows ``?customFilters=promotion_flag*Sale`` and
     # ``?customFilters=brand*``, and disallows ``/graphql``. Sneaker queries
@@ -428,4 +434,4 @@ def scrapers():
                 "https://www.zumiez.com/skate/components.html?customFilters=promotion_flag:Sale",
             ],
         ),
-    ]
+    ] + ([ZumiezMultiScraper("Protection", list(PROTECTION_URLS))] if PROTECTION_URLS else [])

@@ -11,7 +11,7 @@ import { STORE_HOSTS } from "./email.js";
 
 export const PARTS = ["Decks", "Wheels", "Trucks", "Bearings"];
 // Every part the site lists (page.py PART_ORDER). Digest filters only.
-export const CATALOG_PARTS = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes"];
+export const CATALOG_PARTS = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes", "Protection"];
 export const KINDS = ["search", "watch", "digest"];
 export const DIGEST_EVENTS = ["new", "drop", "low"];
 // The same hosts as history_identity.SHOPIFY_HOSTS: Shopify keeps a product

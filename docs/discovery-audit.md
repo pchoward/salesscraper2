@@ -14,7 +14,7 @@ python -m audit.discovery --manifest tests/fixtures/discovery_audit/manifest.jso
 python -m unittest test_discovery_audit
 ```
 
-The first two commands inventory the **current** 24 configured store/category pairs and their entry points, pagination strategy, limits, and dynamic-query caveats. They do not fetch or parse retailer pages. `--catalog` requires `--manifest` and never changes the catalog.
+The first two commands inventory the **current** configured store/category pairs (25, including CCS Protection) and their entry points, pagination strategy, limits, and dynamic-query caveats. They do not fetch or parse retailer pages. `--catalog` requires `--manifest` and never changes the catalog.
 
 The fixture example is explicitly **synthetic**, not a live capture or inventory estimate. Its two saved Tactics bearing pages contain three distinct candidates, including one duplicate across pages. Against the one-product synthetic saved catalog, two candidates are absent. A page-3 link remains unprovided. This demonstrates a discrepancy and an incomplete evidence set, not two confirmed missing valid sale products.
 
