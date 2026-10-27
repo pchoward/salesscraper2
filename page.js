@@ -2254,6 +2254,7 @@ function slugStore(value) {
         skatewarehouse: "SkateWarehouse",
         ccs: "CCS",
         tactics: "Tactics",
+        tgm: "TGM",
         skatedeluxe: "Skate Deluxe",
         muirskate: "Muir Skate"
     }[key] || "";
@@ -2274,7 +2275,9 @@ function slugType(value) {
         sneaker: "Sneakers",
         sneakers: "Sneakers",
         accessory: "Accessories",
-        accessories: "Accessories"
+        accessories: "Accessories",
+        complete: "Completes",
+        completes: "Completes"
     }[key] || "";
 }
 
@@ -2284,6 +2287,7 @@ function storeSlug(name) {
         SkateWarehouse: "skatewarehouse",
         CCS: "ccs",
         Tactics: "tactics",
+        TGM: "tgm",
         "Skate Deluxe": "skatedeluxe",
         "Muir Skate": "muirskate"
     }[name] || "";
@@ -2296,7 +2300,8 @@ function typeSlug(name) {
         Trucks: "truck",
         Bearings: "bearing",
         Sneakers: "sneaker",
-        Accessories: "accessory"
+        Accessories: "accessory",
+        Completes: "complete"
     }[name] || "";
 }
 
@@ -2943,6 +2948,7 @@ const STORE_COLOR = {
     SkateWarehouse: "#1d4ed8",
     CCS: "#059669",
     Tactics: "#d97706",
+    TGM: "#b91c1c",
     "Skate Deluxe": "#6d28d9",
     "Muir Skate": "#0f766e"
 };
@@ -5767,6 +5773,8 @@ const ALERTS_STORE_HOSTS = [
     "www.skatewarehouse.com",
     "shop.ccs.com",
     "www.tactics.com",
+    "tgmskateboards.com",
+    "www.tgmskateboards.com",
     "www.skatedeluxe.com",
     "muirskate.com",
     "www.muirskate.com"

@@ -94,6 +94,7 @@ STORE_SLUGS = {
     "skatewarehouse": "SkateWarehouse",
     "ccs": "CCS",
     "tactics": "Tactics",
+    "tgm": "TGM",
     "skatedeluxe": "Skate Deluxe",
     "muirskate": "Muir Skate",
 }
@@ -112,6 +113,8 @@ TYPE_SLUGS = {
     "sneakers": "Sneakers",
     "accessory": "Accessories",
     "accessories": "Accessories",
+    "complete": "Completes",
+    "completes": "Completes",
 }
 TYPE_TO_SLUG = {
     "Decks": "deck",
@@ -120,6 +123,7 @@ TYPE_TO_SLUG = {
     "Bearings": "bearing",
     "Sneakers": "sneaker",
     "Accessories": "accessory",
+    "Completes": "complete",
 }
 
 SORTS = (
