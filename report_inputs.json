@@ -1,27 +1,213 @@
 {
  "changes": {
-  "Zumiez_Trucks": [
+  "SkateWarehouse_Bearings": [
    {
     "item": {
-     "_brand": "Ace",
+     "_brand": "Independent",
      "_specs": {
-      "length": 33.95,
+      "length": null,
       "wheelbase": null,
-      "width": 14.99
+      "width": 8.4
+     },
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=INGPSBR-1.jpg&nw=210",
+     "images": [
+      "https://img.skatewarehouse.com/watermark/rs.php?path=INGPSBR-1.jpg&nw=210",
+      "https://img.skatewarehouse.com/watermark/rs.php?path=INGPSBR-1.jpg&nw=500"
+     ],
+     "name": "Independent GP-S Bearings",
+     "part": "Bearings",
+     "price_new": "8.40",
+     "price_old": "14.95",
+     "store": "SkateWarehouse",
+     "url": "https://www.skatewarehouse.com/Independent_GP-S_Bearings/descpage-INGPSBR.html",
+     "width": 8.4
+    },
+    "type": "new"
+   }
+  ],
+  "SkateWarehouse_Decks": [
+   {
+    "item": {
+     "_brand": "Jacuzzi",
+     "_specs": {
+      "length": 31.6,
+      "wheelbase": null,
+      "width": 8.0
+     },
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=JZBTDK-1.jpg&nw=210",
+     "images": [
+      "https://img.skatewarehouse.com/watermark/rs.php?path=JZBTDK-1.jpg&nw=210",
+      "https://img.skatewarehouse.com/watermark/rs.php?path=JZBTDK-1.jpg&nw=500"
+     ],
+     "length": 31.6,
+     "name": "Jacuzzi Unlimited Barletta Tribal Deck 8.0 x 31.6",
+     "part": "Decks",
+     "price_new": "64.98",
+     "price_old": "75.00",
+     "size": "8",
+     "store": "SkateWarehouse",
+     "url": "https://www.skatewarehouse.com/Jacuzzi_Unlimited_Barletta_Tribal_Deck/descpage-JZBTDK.html",
+     "width": 8.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "_brand": "Jacuzzi",
+     "_specs": {
+      "length": 31.5,
+      "wheelbase": null,
+      "width": 8.25
+     },
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=JZCFGDK-1.jpg&nw=210",
+     "images": [
+      "https://img.skatewarehouse.com/watermark/rs.php?path=JZCFGDK-1.jpg&nw=210",
+      "https://img.skatewarehouse.com/watermark/rs.php?path=JZCFGDK-1.jpg&nw=500"
+     ],
+     "length": 31.5,
+     "name": "Jacuzzi Unlimited Chair On Fire TWIN Deck 8.25 x 31.5",
+     "part": "Decks",
+     "price_new": "64.98",
+     "price_old": "75.00",
+     "size": "8.25",
+     "store": "SkateWarehouse",
+     "url": "https://www.skatewarehouse.com/Jacuzzi_Unlimited_Chair_On_Fire_TWIN_Deck/descpage-JZCFGDK.html",
+     "width": 8.25
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=CVP85DK-1.jpg&nw=210",
+     "images": [
+      "https://img.skatewarehouse.com/watermark/rs.php?path=CVP85DK-1.jpg&nw=210",
+      "https://img.skatewarehouse.com/watermark/rs.php?path=CVP85DK-1.jpg&nw=500"
+     ],
+     "length": 32.0,
+     "name": "Cliche V-Ply Construction Deck 8.5 x 32",
+     "part": "Decks",
+     "price_new": "64.98",
+     "price_old": "80.00",
+     "size": "8.5",
+     "store": "SkateWarehouse",
+     "url": "https://www.skatewarehouse.com/Cliche_V-Ply_Construction_Deck/descpage-CVP85DK.html",
+     "width": 8.5
+    },
+    "type": "removed"
+   }
+  ],
+  "Zumiez_Accessories": [
+   {
+    "item": {
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/374600-US",
+     "name": "Pvblic Domain Mona Grip Tape",
+     "part": "Accessories",
+     "price_new": "7.99",
+     "price_old": "14.95",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/pvblic-domain-mona-grip-tape.html",
+     "width": 7.99
+    },
+    "type": "removed"
+   }
+  ],
+  "Zumiez_Decks": [
+   {
+    "item": {
+     "_brand": "Plan B",
+     "_specs": {
+      "length": null,
+      "wheelbase": null,
+      "width": 8.25
      },
      "at_all_time_low": true,
      "availability": "Check store",
-     "image": "https://scene7.zumiez.com/is/image/zumiez/409207-US",
-     "length": 33.95,
-     "name": "Ace 66 AF1 Blue & Orange Skateboard Truck",
-     "part": "Trucks",
-     "price_new": "14.99",
-     "price_old": "33.95",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/404984-US",
+     "name": "Plan B McClung Wilted Twin 8.25\" Skateboard Deck",
+     "part": "Decks",
+     "price_new": "49.99",
+     "price_old": "68.95",
+     "size": "8.25",
      "store": "Zumiez",
-     "url": "https://www.zumiez.com/ace-66-af1-blue-and-orange-skateboard-truck.html",
-     "width": 14.99
+     "url": "https://www.zumiez.com/plan-b-mcclung-wilted-twin-8-25-skateboard-deck.html",
+     "width": 8.25
     },
     "type": "new"
+   },
+   {
+    "item": {
+     "_brand": "Real",
+     "_specs": {
+      "length": null,
+      "wheelbase": null,
+      "width": 8.38
+     },
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/405919-US",
+     "name": "Real Mason Volcano 8.38\" Skateboard Deck",
+     "part": "Decks",
+     "price_new": "69.99",
+     "price_old": "78.95",
+     "size": "8.38",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/real-mason-volcano-8-38-skateboard-deck.html",
+     "width": 8.38
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/404058-US",
+     "name": "Hoddle Kirk New Age 8.0\" Skateboard Deck",
+     "part": "Decks",
+     "price_new": "34.99",
+     "price_old": "69.95",
+     "size": "8",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/hoddle-kirk-new-age-8-0-skateboard-deck.html",
+     "width": 8.0
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/394274-US",
+     "name": "Girl Geering Modernica 8.0\" Skateboard Deck",
+     "part": "Decks",
+     "price_new": "49.99",
+     "price_old": "64.95",
+     "size": "8",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/girl-geering-modernica-8-0-skateboard-deck.html",
+     "width": 8.0
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/399070-US",
+     "name": "Deathwish Hayes Mean Machine 8.125\" Skateboard Deck",
+     "part": "Decks",
+     "price_new": "54.99",
+     "price_old": "78.95",
+     "size": "8.12",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/deathwish-hayes-mean-machine-8-125-skateboard-deck.html",
+     "width": 8.125
+    },
+    "type": "removed"
    }
   ]
  },
@@ -30,36 +216,205 @@
   "drops": [],
   "new_items": [
    {
-    "_brand": "Ace",
+    "_brand": "Plan B",
     "_specs": {
-     "length": 33.95,
+     "length": null,
      "wheelbase": null,
-     "width": 14.99
+     "width": 8.25
     },
     "at_all_time_low": true,
     "availability": "Check store",
-    "image": "https://scene7.zumiez.com/is/image/zumiez/409207-US",
-    "length": 33.95,
-    "name": "Ace 66 AF1 Blue & Orange Skateboard Truck",
-    "part": "Trucks",
-    "price_new": "14.99",
-    "price_old": "33.95",
+    "image": "https://scene7.zumiez.com/is/image/zumiez/404984-US",
+    "name": "Plan B McClung Wilted Twin 8.25\" Skateboard Deck",
+    "part": "Decks",
+    "price_new": "49.99",
+    "price_old": "68.95",
+    "size": "8.25",
     "store": "Zumiez",
-    "url": "https://www.zumiez.com/ace-66-af1-blue-and-orange-skateboard-truck.html",
-    "width": 14.99
+    "url": "https://www.zumiez.com/plan-b-mcclung-wilted-twin-8-25-skateboard-deck.html",
+    "width": 8.25
+   },
+   {
+    "_brand": "Real",
+    "_specs": {
+     "length": null,
+     "wheelbase": null,
+     "width": 8.38
+    },
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "image": "https://scene7.zumiez.com/is/image/zumiez/405919-US",
+    "name": "Real Mason Volcano 8.38\" Skateboard Deck",
+    "part": "Decks",
+    "price_new": "69.99",
+    "price_old": "78.95",
+    "size": "8.38",
+    "store": "Zumiez",
+    "url": "https://www.zumiez.com/real-mason-volcano-8-38-skateboard-deck.html",
+    "width": 8.38
+   },
+   {
+    "_brand": "Jacuzzi",
+    "_specs": {
+     "length": 31.6,
+     "wheelbase": null,
+     "width": 8.0
+    },
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=JZBTDK-1.jpg&nw=210",
+    "images": [
+     "https://img.skatewarehouse.com/watermark/rs.php?path=JZBTDK-1.jpg&nw=210",
+     "https://img.skatewarehouse.com/watermark/rs.php?path=JZBTDK-1.jpg&nw=500"
+    ],
+    "length": 31.6,
+    "name": "Jacuzzi Unlimited Barletta Tribal Deck 8.0 x 31.6",
+    "part": "Decks",
+    "price_new": "64.98",
+    "price_old": "75.00",
+    "size": "8",
+    "store": "SkateWarehouse",
+    "url": "https://www.skatewarehouse.com/Jacuzzi_Unlimited_Barletta_Tribal_Deck/descpage-JZBTDK.html",
+    "width": 8.0
+   },
+   {
+    "_brand": "Jacuzzi",
+    "_specs": {
+     "length": 31.5,
+     "wheelbase": null,
+     "width": 8.25
+    },
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=JZCFGDK-1.jpg&nw=210",
+    "images": [
+     "https://img.skatewarehouse.com/watermark/rs.php?path=JZCFGDK-1.jpg&nw=210",
+     "https://img.skatewarehouse.com/watermark/rs.php?path=JZCFGDK-1.jpg&nw=500"
+    ],
+    "length": 31.5,
+    "name": "Jacuzzi Unlimited Chair On Fire TWIN Deck 8.25 x 31.5",
+    "part": "Decks",
+    "price_new": "64.98",
+    "price_old": "75.00",
+    "size": "8.25",
+    "store": "SkateWarehouse",
+    "url": "https://www.skatewarehouse.com/Jacuzzi_Unlimited_Chair_On_Fire_TWIN_Deck/descpage-JZCFGDK.html",
+    "width": 8.25
+   },
+   {
+    "_brand": "Independent",
+    "_specs": {
+     "length": null,
+     "wheelbase": null,
+     "width": 8.4
+    },
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=INGPSBR-1.jpg&nw=210",
+    "images": [
+     "https://img.skatewarehouse.com/watermark/rs.php?path=INGPSBR-1.jpg&nw=210",
+     "https://img.skatewarehouse.com/watermark/rs.php?path=INGPSBR-1.jpg&nw=500"
+    ],
+    "name": "Independent GP-S Bearings",
+    "part": "Bearings",
+    "price_new": "8.40",
+    "price_old": "14.95",
+    "store": "SkateWarehouse",
+    "url": "https://www.skatewarehouse.com/Independent_GP-S_Bearings/descpage-INGPSBR.html",
+    "width": 8.4
    }
   ],
-  "removed": []
+  "removed": [
+   [
+    "Zumiez_Decks",
+    {
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/404058-US",
+     "name": "Hoddle Kirk New Age 8.0\" Skateboard Deck",
+     "part": "Decks",
+     "price_new": "34.99",
+     "price_old": "69.95",
+     "size": "8",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/hoddle-kirk-new-age-8-0-skateboard-deck.html",
+     "width": 8.0
+    }
+   ],
+   [
+    "Zumiez_Decks",
+    {
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/394274-US",
+     "name": "Girl Geering Modernica 8.0\" Skateboard Deck",
+     "part": "Decks",
+     "price_new": "49.99",
+     "price_old": "64.95",
+     "size": "8",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/girl-geering-modernica-8-0-skateboard-deck.html",
+     "width": 8.0
+    }
+   ],
+   [
+    "Zumiez_Decks",
+    {
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/399070-US",
+     "name": "Deathwish Hayes Mean Machine 8.125\" Skateboard Deck",
+     "part": "Decks",
+     "price_new": "54.99",
+     "price_old": "78.95",
+     "size": "8.12",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/deathwish-hayes-mean-machine-8-125-skateboard-deck.html",
+     "width": 8.125
+    }
+   ],
+   [
+    "Zumiez_Accessories",
+    {
+     "availability": "Check store",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/374600-US",
+     "name": "Pvblic Domain Mona Grip Tape",
+     "part": "Accessories",
+     "price_new": "7.99",
+     "price_old": "14.95",
+     "store": "Zumiez",
+     "url": "https://www.zumiez.com/pvblic-domain-mona-grip-tape.html",
+     "width": 7.99
+    }
+   ],
+   [
+    "SkateWarehouse_Decks",
+    {
+     "availability": "Check store",
+     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=CVP85DK-1.jpg&nw=210",
+     "images": [
+      "https://img.skatewarehouse.com/watermark/rs.php?path=CVP85DK-1.jpg&nw=210",
+      "https://img.skatewarehouse.com/watermark/rs.php?path=CVP85DK-1.jpg&nw=500"
+     ],
+     "length": 32.0,
+     "name": "Cliche V-Ply Construction Deck 8.5 x 32",
+     "part": "Decks",
+     "price_new": "64.98",
+     "price_old": "80.00",
+     "size": "8.5",
+     "store": "SkateWarehouse",
+     "url": "https://www.skatewarehouse.com/Cliche_V-Ply_Construction_Deck/descpage-CVP85DK.html",
+     "width": 8.5
+    }
+   ]
+  ]
  },
  "failed_keys": [
   "Tactics_Decks",
   "Tactics_Wheels"
  ],
  "fingerprints": {
-  "data": "0c83e3ad42060769663eb5f824e8207643ac68bb53d93b4341671333ec0d76de",
-  "history": "3affa8fbda79804cc95849aa86c93459081e62bf9acf9f0ec7e08715eaeebb10"
+  "data": "feb7b4c8fdae7536d03690c31f16799ab793b46b711d2e6c2680559037410e18",
+  "history": "6efa0239d6e38b6a546b123c80d973493bd8e523d73dd77f562d612cec5adc2e"
  },
- "generated_at": "2026-10-26T14:13:31+00:00",
+ "generated_at": "2026-10-27T13:11:02+00:00",
  "history": "file",
  "version": 1
 }
