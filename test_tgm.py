@@ -129,6 +129,12 @@ class OtherPartTests(unittest.TestCase):
     def test_wheels_trucks_bearings_use_the_brand_lists(self):
         wheels = kept("Wheels")
         self.assertEqual(wheels["f4-54"]["name"], "Spitfire Formula Four Classic 54mm 99a", "vendor added for the brand check")
+        # A title that already names the brand does not get the vendor twice.
+        for vendor, title in (("OJ Wheels", "OJ III Wheels 56mm Elite Mini Combo 101A"),
+                              ("Ace Trucks MFG", "Ace Skateboard Trucks AF1 66 Pair")):
+            self.assertEqual(tgm._title({"title": title, "vendor": vendor}), title)
+        self.assertEqual(tgm._title({"title": "Mid Pro Hollow 159", "vendor": "Independent Trucks"}),
+                         "Independent Trucks Mid Pro Hollow 159")
         self.assertNotIn("cheap-wheels", wheels)
         self.assertIn("indy-144", kept("Trucks"))
         self.assertIn("bones-reds", kept("Bearings"))

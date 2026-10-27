@@ -20,13 +20,14 @@ between pages. ``python -m stores.tgm`` previews what a run would keep
 without writing anything.
 """
 
+import collections
 import json
 import logging
 import re
 import time
 import urllib.request
 
-from filters import extract_deck_dimensions, extract_deck_size, normalize_product_name, normalize_url
+from filters import extract_deck_dimensions, extract_deck_size, filter_reason, normalize_product_name, normalize_url
 from part_specs import ordered_shoe_sizes
 from stores.base import Scraper
 from stores.ccs import _amount, _money, _plain, _shoe_offers, _stock_known, _variants_of
@@ -127,17 +128,28 @@ def _sale_variants(product):
     return sale
 
 
+# Words in a vendor name that are not the brand: "OJ Wheels", "Ace Trucks MFG".
+_VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "skateboards", "skateboard",
+                  "skate", "mfg", "co", "company", "inc", "griptape", "grip", "tape", "hardware", "shoes"}
+
+
 def _title(product):
-    """The product title, with the vendor in front when the title leaves it out.
+    """The product title, with the vendor's brand in front when the title leaves it out.
 
     The shared filters find brands by name, so "Formula Four Classic 54mm"
-    from vendor Spitfire must read "Spitfire Formula Four Classic 54mm".
+    from vendor Spitfire must read "Spitfire Formula Four Classic 54mm". A
+    title that already names the brand ("OJ III Wheels" from "OJ Wheels")
+    is left alone.
     """
     title = normalize_product_name((product or {}).get("title") or "")
     vendor = normalize_product_name((product or {}).get("vendor") or "")
-    if vendor and not vendor.casefold().startswith("tgm") and vendor.casefold() not in title.casefold():
-        title = f"{vendor} {title}".strip()
-    return title
+    if not vendor or vendor.casefold().startswith("tgm"):
+        return title
+    brand = [word for word in re.findall(r"[a-z0-9]+", vendor.casefold()) if word not in _VENDOR_FILLER]
+    words = set(re.findall(r"[a-z0-9]+", title.casefold()))
+    if brand and all(word in words for word in brand):
+        return title
+    return f"{vendor} {title}".strip()
 
 
 def _variant_label(variant):
@@ -271,6 +283,21 @@ def main():
         print(f"\n{scraper.part}: {len(items)} kept of {scraper.candidates} candidates")
         for item in items[:5]:
             print(f"  ${item['price_new']} (was ${item['price_old']})  {item['name']}")
+        reasons = collections.Counter()
+        for product in products:
+            if part_for_type(product.get("product_type")) != scraper.part or not _sale_variants(product):
+                continue
+            reason = filter_reason(_title(product), scraper.part, "", "1", "2", _plain(product.get("body_html") or ""),
+                                   str(product.get("product_type") or ""))
+            if reason and not reason.startswith(("known-brand deck", "unknown-brand deck")):
+                reasons[re.sub(r"[\d.]+", "N", reason)] += 1
+        if reasons:
+            print("  Dropped:", ", ".join(f"{reason} {count}" for reason, count in reasons.most_common(5)))
+    shoes = [_title(p) for p in products if part_for_type(p.get("product_type")) == "Sneakers"]
+    tracked = [t for t in shoes if re.search(r"waffle ?cup|pop ?cush|dunk", t, re.IGNORECASE)]
+    print(f"\nShoe titles naming Wafflecup, PopCush, or Dunk: {len(tracked)}")
+    for title in tracked[:10]:
+        print(f"  {title}")
     return 0
 
 
