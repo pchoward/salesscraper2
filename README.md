@@ -1,6 +1,6 @@
 # Skateboard Sale Scraper
 
-Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, and Tactics, then publishes a static HTML report. Skate Deluxe and Muir Skate stay in retailer activity, but both scrapers are off: Skate Deluxe is EUR-only and ships from Europe, and Muir Skate's Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
+Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, Tactics, and TGM Skateboards, then publishes a static HTML report. Skate Deluxe and Muir Skate stay in retailer activity, but both scrapers are off: Skate Deluxe is EUR-only and ships from Europe, and Muir Skate's Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
 
 ## Layout
 
@@ -52,6 +52,14 @@ The daily workflow is `.github/workflows/scrape.yml`. It checks out the repo, in
 - **Shared lock:** it uses the scrape's concurrency group, so the two never run at once.
 
 The morning cron is `17 7 * * *` (3:17 AM EDT), off the top of the hour. A backup cron at `43 9 * * *` runs only when that morning scrape did not already succeed for the US Eastern date. `schedule.py` reads `scrape_health.json` after checkout and sets `scrape=false` when today's Eastern date already has a run with at least one store/part that did not fail. Chrome, the scrape, and the commit are skipped. `workflow_dispatch` always scrapes. A failed or skipped morning run leaves no successful health row, so the backup scrapes.
+
+**TGM Skateboards** (`stores/tgm.py`) reads the Shopify feed `tgmskateboards.com/collections/sale/products.json?limit=250&page=N`, one page at a time with a 1.5 second pause, until a page is empty or short. It never requests `sort_by` or filter URLs, which robots.txt disallows. Instead it sorts by Shopify `product_type`:
+- **Kept:** Decks, Wheels, Trucks, Bearings, Grip Tape and Hardware (as Accessories), Completes, and Mens Shoes (Sneakers, only models on the `tracked.yaml` list).
+- **Skipped:** everything else, such as clothing, Disc, and Roller Hockey.
+- **Sale rule:** a variant counts as on sale only when `compare_at_price` is above `price`.
+- **Completes** use the deck rules: 7.5" and wider, street length, the deck discount rule, and no cruisers or longboards.
+
+`python -m stores.tgm` previews a live run (counts and examples per part) without writing anything.
 
 Each store runs on its own. An exception or a timeout (12 minutes) is logged, that store's parts are recorded as failed in `scrape_health.json`, and the other stores still finish. The report and the commit still happen. A failed part keeps the previous rows for that key.
 

@@ -7,6 +7,8 @@ export const STORE_HOSTS = new Set([
   "www.skatewarehouse.com",
   "shop.ccs.com",
   "www.tactics.com",
+  "tgmskateboards.com",
+  "www.tgmskateboards.com",
   "www.skatedeluxe.com",
   "muirskate.com",
   "www.muirskate.com",

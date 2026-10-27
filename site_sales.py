@@ -27,7 +27,7 @@ from filters import item_passes_filters
 logger = logging.getLogger("site_sales")
 
 SITE_SALES_PATH = "site_sales.json"
-STORES = ("Zumiez", "SkateWarehouse", "CCS", "Tactics", "Skate Deluxe", "Muir Skate")
+STORES = ("Zumiez", "SkateWarehouse", "CCS", "Tactics", "TGM", "Skate Deluxe", "Muir Skate")
 SEEDS = {"SkateWarehouse": "2026-07-04"}
 # Earlier daily counts for these stores are first-page scrapes. They are not
 # a baseline for days on or after the full sale-page scrape, or a one-day
@@ -241,6 +241,7 @@ DISPLAY_NAMES = {
     "SkateWarehouse": "Skate Warehouse",
     "CCS": "CCS",
     "Tactics": "Tactics",
+    "TGM": "TGM Skateboards",
     "Skate Deluxe": "Skate Deluxe",
     "Muir Skate": "Muir Skate",
 }

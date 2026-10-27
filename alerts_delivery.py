@@ -83,6 +83,7 @@ _CATALOG_PARTS = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessor
 # worker/src/email.js STORE_HOSTS: the only hosts a watch may name.
 STORE_HOSTS = frozenset({
     "www.zumiez.com", "www.skatewarehouse.com", "shop.ccs.com", "www.tactics.com",
+    "tgmskateboards.com", "www.tgmskateboards.com",
     "www.skatedeluxe.com", "muirskate.com", "www.muirskate.com",
 })
 _TEXT = {"brand": 60, "name": 80, "note": 80, "label": 120}

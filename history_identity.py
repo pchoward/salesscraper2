@@ -11,7 +11,7 @@ product. Two things break it:
 Identity hierarchy, strongest evidence first. Only level 2 ever joins two URLs.
 
 1. The listing URL (whitespace removed). Always the history key.
-2. A Shopify product handle (CCS, Muir Skate) on a URL with no query string.
+2. A Shopify product handle (CCS, TGM, Muir Skate) on a URL with no query string.
    Shopify keeps handles unique within a shop, so
    ``/collections/clearance/products/<handle>`` and ``/products/<handle>``
    are the same product page. ``update_price_history`` moves the history to
@@ -45,7 +45,7 @@ from filters import extract_deck_dimensions, item_passes_filters, normalize_prod
 from matching import canonical_width, describe_item
 
 # Shops known to run on Shopify, where a product handle is unique per shop.
-SHOPIFY_HOSTS = frozenset({"shop.ccs.com", "muirskate.com", "www.muirskate.com"})
+SHOPIFY_HOSTS = frozenset({"shop.ccs.com", "tgmskateboards.com", "www.tgmskateboards.com", "muirskate.com", "www.muirskate.com"})
 
 _SHOPIFY_HANDLE_RE = re.compile(r"/products/([^/?#]+)/?$")
 _SKATEWAREHOUSE_CODE_RE = re.compile(r"/descpage-([A-Za-z0-9]+)\.html$")
@@ -78,7 +78,7 @@ def listing_identity(url):
     host = parts.netloc.lower()
     path = parts.path
     if host in SHOPIFY_HOSTS:
-        info["retailer"] = "ccs" if "ccs" in host else "muirskate"
+        info["retailer"] = "ccs" if "ccs" in host else "tgm" if "tgm" in host else "muirskate"
         match = _SHOPIFY_HANDLE_RE.search(path)
         if match and not parts.query and not parts.fragment:
             handle = match.group(1).lower()

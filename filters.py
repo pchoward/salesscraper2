@@ -128,12 +128,16 @@ MIN_DROP_PERCENT = 5.0
 
 _PREFIX_WORDS = re.compile(r"^(?:(?:clearance|sale|super deal)\s+)+", re.IGNORECASE)
 _PREFIX_PERCENT = re.compile(r"^-?\s*\d{1,3}%\s*", re.IGNORECASE)
+# "8.5 x 31.8", and with inch marks on either side of the x:
+# '9.75" x 32"', '10.4"x32.25"', '9.5”X32”'.
 _WIDTH_BY_LENGTH = re.compile(
-    r"\b(\d{1,2}(?:\.\d+)?)\s*x\s*(\d{1,2}(?:\.\d+)?)\b",
+    r"(?<![\d.])(\d{1,2}(?:\.\d+)?)\s*[\"\u201d\u2033]?\s*x\s*(\d{1,2}(?:\.\d+)?)(?![\d.]*\d)",
     re.IGNORECASE,
 )
+# A number with an inch mark. It must start a number: in 'x32.25"' the
+# match is 32.25, never the ".25" tail.
 _INCH_MARKED = re.compile(
-    r"\b(\d{1,2}(?:\.\d+)?)\s*[\"\u201d\u2033]"
+    r"(?<![\d.])(\d{1,2}(?:\.\d+)?)\s*[\"\u201d\u2033]"
 )
 _DECIMAL_INCH = re.compile(r"\b(\d{1,2}\.\d+)\b")
 
@@ -427,7 +431,10 @@ def filter_reason(name, part, url="", price_new=None, price_old=None, descriptio
             return "not a tracked accessory"
         return None
 
-    if part_key == "decks":
+    if part_key in ("decks", "completes"):
+        # A complete is judged by its deck: street width and length, and the
+        # deck discount rule. Cruisers, longboards, minis, and Penny boards
+        # were already rejected above.
         size_reason = _deck_size_reason(name)
         if size_reason:
             return size_reason

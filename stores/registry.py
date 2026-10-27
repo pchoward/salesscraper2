@@ -11,6 +11,7 @@ from stores.skatedeluxe import ENABLED as DELUXE_ENABLED
 from stores.skatedeluxe import scrapers as skatedeluxe_scrapers
 from stores.skatewarehouse import scrapers as skatewarehouse_scrapers
 from stores.tactics import scrapers as tactics_scrapers
+from stores.tgm import scrapers as tgm_scrapers
 from stores.zumiez import scrapers as zumiez_scrapers
 
 logger = logging.getLogger("stores.registry")
@@ -22,6 +23,7 @@ def build_scrapers():
     scrapers.extend(skatewarehouse_scrapers())
     scrapers.extend(ccs_scrapers())
     scrapers.extend(tactics_scrapers())
+    scrapers.extend(tgm_scrapers())
     if DELUXE_ENABLED:
         scrapers.extend(skatedeluxe_scrapers())
     else:

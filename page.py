@@ -1589,7 +1589,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             + "</div></div>"
         )
 
-    primary_stores = ("Zumiez", "Tactics", "SkateWarehouse", "CCS")
+    primary_stores = ("Zumiez", "Tactics", "SkateWarehouse", "CCS", "TGM")
     store_total = sum(store_counts.values())
     store_buttons = [_quick_chip("store", "all", "All stores", store_total, pressed=True, order=0)]
     for store in primary_stores:
@@ -1951,7 +1951,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         logger.error("Retailer activity panel failed: %s", exc)
 
     chunks.append(
-        "<footer><p>Zumiez, Skate Warehouse, CCS, and Tactics. "
+        "<footer><p>Zumiez, Skate Warehouse, CCS, Tactics, and TGM Skateboards. "
         "Decks stay at 10% off or more for known street brands and 15% otherwise, "
         "7.5 inches and wider. Named cruiser and longboard listings are still excluded. "
         f"{escape(FORMULA)} "
