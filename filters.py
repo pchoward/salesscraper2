@@ -233,6 +233,15 @@ def _matches_any(text, patterns):
     return any(pattern.search(folded) for pattern in patterns)
 
 
+def _own_name(name):
+    """The part of a name that describes the product itself.
+
+    "Satori Wheels 54mm with Spitfire Bearings" is a Satori wheel; the brand
+    of a bundled extra must not pass the brand check.
+    """
+    return re.split(r"\s+with\s+", name, maxsplit=1, flags=re.IGNORECASE)[0]
+
+
 def is_known_deck_brand(name):
     return _matches_any(normalize_product_name(name), _DECK_RES)
 
@@ -407,17 +416,17 @@ def filter_reason(name, part, url="", price_new=None, price_old=None, descriptio
         return "not an accessory"
 
     if part_key == "wheels":
-        if not _matches_any(name, _WHEEL_RES):
+        if not _matches_any(_own_name(name), _WHEEL_RES):
             return "wheel brand not allowed"
         return None
 
     if part_key == "trucks":
-        if not _matches_any(name, _TRUCK_RES):
+        if not _matches_any(_own_name(name), _TRUCK_RES):
             return "truck brand not allowed"
         return None
 
     if part_key == "bearings":
-        if not _matches_any(name, _BEARING_RES):
+        if not _matches_any(_own_name(name), _BEARING_RES):
             return "bearing brand not allowed"
         return None
 

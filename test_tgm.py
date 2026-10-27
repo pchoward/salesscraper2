@@ -71,6 +71,7 @@ class ProductTypeTests(unittest.TestCase):
             "Decks": "Decks", "Wheels": "Wheels", "Trucks": "Trucks", "Bearings": "Bearings",
             "Grip Tape": "Accessories", "grip  tape": "Accessories", "Hardware": "Accessories",
             "Completes": "Completes", "Mens Shoes": "Sneakers", "Men's Shoes": "Sneakers",
+            "Risers": "Accessories", "Tool": "Accessories", "Womens Shoes": None, "Starter Sets": None,
             "Mens Clothing": None, "Disc": None, "Roller Hockey": None, "": None, None: None,
         }
         for kind, part in cases.items():
@@ -138,6 +139,15 @@ class OtherPartTests(unittest.TestCase):
         self.assertNotIn("cheap-wheels", wheels)
         self.assertIn("indy-144", kept("Trucks"))
         self.assertIn("bones-reds", kept("Bearings"))
+
+    def test_bundled_brands_do_not_pass_the_brand_check(self):
+        name = "Satori Skateboard Wheels 54mm Spencer Hamilton Canada Conical 101A with Spitfire Bearings"
+        self.assertEqual(filter_reason(name, "Wheels", "", "31.95", "59.95"), "wheel brand not allowed")
+        self.assertIsNone(filter_reason("Spitfire Formula Four 54mm with Free Sticker", "Wheels", "", "31.95", "59.95"))
+
+    def test_risers_and_tools_are_accessories(self):
+        self.assertEqual(tgm.part_for_type("Risers"), "Accessories")
+        self.assertEqual(tgm.part_for_type("Tool"), "Accessories")
 
     def test_grip_and_hardware_are_accessories_but_truck_parts_are_not(self):
         accessories = kept("Accessories")
