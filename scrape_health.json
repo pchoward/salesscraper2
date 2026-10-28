@@ -4452,6 +4452,18 @@
             "reason": "normal_variation"
           }
         },
+        "SkateWarehouse_Protection": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 5,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "SkateWarehouse_Sneakers": {
           "count": 1,
           "failed": false,
@@ -4731,14 +4743,14 @@
           }
         },
         "Zumiez_Trucks": {
-          "count": 37,
+          "count": 38,
           "failed": false,
           "diagnostics": {
             "expected_count": 35.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 37,
-            "percentage_change": 5.7,
+            "actual_count": 38,
+            "percentage_change": 8.6,
             "reason": "normal_variation"
           }
         },
@@ -4755,7 +4767,7 @@
           }
         }
       },
-      "scanned_at": "2026-10-28T01:20:15+00:00"
+      "scanned_at": "2026-10-28T01:37:32+00:00"
     }
   ],
   "baseline": {
@@ -4769,7 +4781,7 @@
     },
     "Zumiez_Trucks": {
       "date": "2026-10-28",
-      "count": 37
+      "count": 38
     },
     "SkateWarehouse_Decks": {
       "date": "2026-10-28",
@@ -4882,6 +4894,10 @@
     "Zumiez_Protection": {
       "date": "2026-10-28",
       "count": 8
+    },
+    "SkateWarehouse_Protection": {
+      "date": "2026-10-28",
+      "count": 5
     }
   },
   "completeness_baseline": {
@@ -5387,6 +5403,12 @@
       {
         "date": "2026-10-28",
         "count": 79
+      }
+    ],
+    "SkateWarehouse_Protection": [
+      {
+        "date": "2026-10-28",
+        "count": 5
       }
     ],
     "SkateWarehouse_Sneakers": [
@@ -6246,7 +6268,7 @@
       },
       {
         "date": "2026-10-28",
-        "count": 37
+        "count": 38
       }
     ],
     "Zumiez_Wheels": [
