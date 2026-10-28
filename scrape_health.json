@@ -4628,8 +4628,8 @@
             "expected_count": 135.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 51,
-            "percentage_change": -62.4,
+            "actual_count": 50,
+            "percentage_change": -63.1,
             "reason": "partial_catalog_drop"
           }
         },
@@ -4683,14 +4683,14 @@
           }
         },
         "Zumiez_Accessories": {
-          "count": 13,
+          "count": 12,
           "failed": false,
           "diagnostics": {
             "expected_count": 13,
             "baseline_samples": 11,
             "median_absolute_deviation": 1,
-            "actual_count": 13,
-            "percentage_change": 0.0,
+            "actual_count": 12,
+            "percentage_change": -7.7,
             "reason": "normal_variation"
           }
         },
@@ -4707,14 +4707,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 289,
+          "count": 287,
           "failed": false,
           "diagnostics": {
             "expected_count": 223.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 11.5,
-            "actual_count": 289,
-            "percentage_change": 29.6,
+            "actual_count": 287,
+            "percentage_change": 28.7,
             "reason": "normal_variation"
           }
         },
@@ -4767,13 +4767,13 @@
           }
         }
       },
-      "scanned_at": "2026-10-28T01:37:32+00:00"
+      "scanned_at": "2026-10-28T09:15:20+00:00"
     }
   ],
   "baseline": {
     "Zumiez_Decks": {
       "date": "2026-10-28",
-      "count": 289
+      "count": 287
     },
     "Zumiez_Wheels": {
       "date": "2026-10-28",
@@ -4821,7 +4821,7 @@
     },
     "Zumiez_Accessories": {
       "date": "2026-10-28",
-      "count": 13
+      "count": 12
     },
     "SkateWarehouse_Bearings": {
       "date": "2026-10-28",
@@ -6038,7 +6038,7 @@
       },
       {
         "date": "2026-10-28",
-        "count": 13
+        "count": 12
       }
     ],
     "Zumiez_Bearings": [
@@ -6154,7 +6154,7 @@
       },
       {
         "date": "2026-10-28",
-        "count": 289
+        "count": 287
       }
     ],
     "Zumiez_Protection": [

@@ -1,202 +1,39 @@
 {
  "changes": {
-  "SkateWarehouse_Decks": [
-   {
-    "item": {
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=BKFDRDK-1.jpg&nw=500",
-     "length": 32.25,
-     "name": "Baker Figgy Day Ross B2 Deck 8.25 x 32.25",
-     "part": "Decks",
-     "price_new": "74.98",
-     "price_old": "86.99",
-     "size": "8.25",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/Baker_Figgy_Day_Ross_B2_Deck/descpage-BKFDRDK.html",
-     "width": 8.25
-    },
-    "type": "removed"
-   },
-   {
-    "item": {
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=OPGADK-1.jpg&nw=210",
-     "images": [
-      "https://img.skatewarehouse.com/watermark/rs.php?path=OPGADK-1.jpg&nw=210",
-      "https://img.skatewarehouse.com/watermark/rs.php?path=OPGADK-1.jpg&nw=500"
-     ],
-     "length": 31.8,
-     "name": "Opera Gargoyle Deck 8.98 x 31.8",
-     "part": "Decks",
-     "price_new": "64.98",
-     "price_old": "75.00",
-     "size": "8.98",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/Opera_Gargoyle_Deck/descpage-OPGADK.html",
-     "width": 8.98
-    },
-    "type": "removed"
-   }
-  ],
-  "SkateWarehouse_Protection": [
-   {
-    "item": {
-     "_brand": "Best",
-     "_specs": {
-      "length": 49.99,
-      "wheelbase": null,
-      "width": null
-     },
-     "at_all_time_low": false,
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVPS-1.jpg&nw=210",
-     "images": [
-      "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVPS-1.jpg&nw=210",
-      "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVPS-1.jpg&nw=500"
-     ],
-     "length": 49.99,
-     "name": "Best SellerTriple 8 Saver Series Pad Set 3 Pack Black",
-     "part": "Protection",
-     "price_new": "49.99",
-     "price_old": "59.99",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/Triple_8_Saver_Series_Pad_Set_3_Pack/descpage-T8SVPS.html"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "_brand": "Triple",
-     "_specs": {
-      "length": 49.99,
-      "wheelbase": null,
-      "width": null
-     },
-     "at_all_time_low": false,
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVMPS-1.jpg&nw=210",
-     "images": [
-      "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVMPS-1.jpg&nw=210",
-      "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVMPS-1.jpg&nw=500"
-     ],
-     "length": 49.99,
-     "name": "Triple 8 Saver Series Pad Set 3 Pack Mint",
-     "part": "Protection",
-     "price_new": "49.99",
-     "price_old": "59.99",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/Triple_8_Saver_Series_Pad_Set_3_Pack/descpage-T8SVMPS.html"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "_brand": "DNA",
-     "_specs": {
-      "length": 44.99,
-      "wheelbase": null,
-      "width": null
-     },
-     "at_all_time_low": false,
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=DNKXKP-1.jpg&nw=210",
-     "images": [
-      "https://img.skatewarehouse.com/watermark/rs.php?path=DNKXKP-1.jpg&nw=210",
-      "https://img.skatewarehouse.com/watermark/rs.php?path=DNKXKP-1.jpg&nw=500"
-     ],
-     "length": 44.99,
-     "name": "DNA Kids 3 Pack Pad Set Black",
-     "part": "Protection",
-     "price_new": "44.99",
-     "price_old": "61.99",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/DNA_Kids_3_Pack_Pad_Set/descpage-DNKXKP.html"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "_brand": "DNA",
-     "_specs": {
-      "length": 44.99,
-      "wheelbase": null,
-      "width": null
-     },
-     "at_all_time_low": false,
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=DNKGKP-1.jpg&nw=210",
-     "images": [
-      "https://img.skatewarehouse.com/watermark/rs.php?path=DNKGKP-1.jpg&nw=210",
-      "https://img.skatewarehouse.com/watermark/rs.php?path=DNKGKP-1.jpg&nw=500"
-     ],
-     "length": 44.99,
-     "name": "DNA Kids 3 Pack Pad Set Pastel Green",
-     "part": "Protection",
-     "price_new": "44.99",
-     "price_old": "61.99",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/DNA_Kids_3_Pack_Pad_Set/descpage-DNKGKP.html"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "_brand": "DNA",
-     "_specs": {
-      "length": 44.99,
-      "wheelbase": null,
-      "width": null
-     },
-     "at_all_time_low": false,
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=DNKYKP-1.jpg&nw=500",
-     "length": 44.99,
-     "name": "DNA Kids 3 Pack Pad Set Yellow",
-     "part": "Protection",
-     "price_new": "44.99",
-     "price_old": "61.99",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/DNA_Kids_3_Pack_Pad_Set/descpage-DNKYKP.html"
-    },
-    "type": "new"
-   }
-  ],
-  "SkateWarehouse_Trucks": [
-   {
-    "item": {
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=INBRTR-BK-BK-1.jpg&nw=500",
-     "length": 24.98,
-     "name": "Independent Stage 11 Standard Bar Truck Flat Black",
-     "part": "Trucks",
-     "price_new": "24.98",
-     "price_old": "28.95",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/Independent_Stage_11_Standard_Bar_Truck/descpage-INBRTR.html?color=BK"
-    },
-    "type": "removed"
-   }
-  ],
   "Zumiez_Decks": [
    {
     "item": {
+     "_brand": "Creature",
+     "_specs": {
+      "length": null,
+      "wheelbase": null,
+      "width": 9.0
+     },
+     "at_all_time_low": true,
      "availability": "Check store",
-     "image": "https://scene7.zumiez.com/is/image/zumiez/398908-US",
-     "name": "5Boro Herrick 5Ball Video Series 8.25\" Skateboard Deck",
+     "image": "https://scene7.zumiez.com/is/image/zumiez/402948-US",
+     "name": "Creature Conjure 9\" Skateboard Deck",
      "part": "Decks",
      "price_new": "49.99",
-     "price_old": "59.95",
-     "size": "8.25",
+     "price_old": "79.95",
+     "size": "9",
      "store": "Zumiez",
-     "url": "https://www.zumiez.com/5boro-herrick-5ball-video-series-8-25-skateboard-deck.html",
-     "width": 8.25
+     "url": "https://www.zumiez.com/creature-conjure-9-skateboard-deck.html",
+     "width": 9.0
     },
-    "type": "removed"
+    "type": "new"
    }
   ],
   "Zumiez_Trucks": [
    {
     "item": {
+     "_brand": "Thunder",
+     "_specs": {
+      "length": 24.95,
+      "wheelbase": null,
+      "width": 14.99
+     },
+     "at_all_time_low": true,
      "availability": "Check store",
      "image": "https://scene7.zumiez.com/is/image/zumiez/376180-US",
      "length": 24.95,
@@ -208,7 +45,7 @@
      "url": "https://www.zumiez.com/thunder-select-148-gunmetal-skateboard-truck.html",
      "width": 14.99
     },
-    "type": "removed"
+    "type": "new"
    }
   ]
  },
@@ -278,204 +115,55 @@
   "drops": [],
   "new_items": [
    {
-    "_brand": "Best",
+    "_brand": "Creature",
     "_specs": {
-     "length": 49.99,
+     "length": null,
      "wheelbase": null,
-     "width": null
+     "width": 9.0
     },
-    "at_all_time_low": false,
+    "at_all_time_low": true,
     "availability": "Check store",
-    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVPS-1.jpg&nw=210",
-    "images": [
-     "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVPS-1.jpg&nw=210",
-     "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVPS-1.jpg&nw=500"
-    ],
-    "length": 49.99,
-    "name": "Best SellerTriple 8 Saver Series Pad Set 3 Pack Black",
-    "part": "Protection",
+    "image": "https://scene7.zumiez.com/is/image/zumiez/402948-US",
+    "name": "Creature Conjure 9\" Skateboard Deck",
+    "part": "Decks",
     "price_new": "49.99",
-    "price_old": "59.99",
-    "store": "SkateWarehouse",
-    "url": "https://www.skatewarehouse.com/Triple_8_Saver_Series_Pad_Set_3_Pack/descpage-T8SVPS.html"
+    "price_old": "79.95",
+    "size": "9",
+    "store": "Zumiez",
+    "url": "https://www.zumiez.com/creature-conjure-9-skateboard-deck.html",
+    "width": 9.0
    },
    {
-    "_brand": "Triple",
+    "_brand": "Thunder",
     "_specs": {
-     "length": 49.99,
+     "length": 24.95,
      "wheelbase": null,
-     "width": null
+     "width": 14.99
     },
-    "at_all_time_low": false,
+    "at_all_time_low": true,
     "availability": "Check store",
-    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVMPS-1.jpg&nw=210",
-    "images": [
-     "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVMPS-1.jpg&nw=210",
-     "https://img.skatewarehouse.com/watermark/rs.php?path=T8SVMPS-1.jpg&nw=500"
-    ],
-    "length": 49.99,
-    "name": "Triple 8 Saver Series Pad Set 3 Pack Mint",
-    "part": "Protection",
-    "price_new": "49.99",
-    "price_old": "59.99",
-    "store": "SkateWarehouse",
-    "url": "https://www.skatewarehouse.com/Triple_8_Saver_Series_Pad_Set_3_Pack/descpage-T8SVMPS.html"
-   },
-   {
-    "_brand": "DNA",
-    "_specs": {
-     "length": 44.99,
-     "wheelbase": null,
-     "width": null
-    },
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=DNKXKP-1.jpg&nw=210",
-    "images": [
-     "https://img.skatewarehouse.com/watermark/rs.php?path=DNKXKP-1.jpg&nw=210",
-     "https://img.skatewarehouse.com/watermark/rs.php?path=DNKXKP-1.jpg&nw=500"
-    ],
-    "length": 44.99,
-    "name": "DNA Kids 3 Pack Pad Set Black",
-    "part": "Protection",
-    "price_new": "44.99",
-    "price_old": "61.99",
-    "store": "SkateWarehouse",
-    "url": "https://www.skatewarehouse.com/DNA_Kids_3_Pack_Pad_Set/descpage-DNKXKP.html"
-   },
-   {
-    "_brand": "DNA",
-    "_specs": {
-     "length": 44.99,
-     "wheelbase": null,
-     "width": null
-    },
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=DNKGKP-1.jpg&nw=210",
-    "images": [
-     "https://img.skatewarehouse.com/watermark/rs.php?path=DNKGKP-1.jpg&nw=210",
-     "https://img.skatewarehouse.com/watermark/rs.php?path=DNKGKP-1.jpg&nw=500"
-    ],
-    "length": 44.99,
-    "name": "DNA Kids 3 Pack Pad Set Pastel Green",
-    "part": "Protection",
-    "price_new": "44.99",
-    "price_old": "61.99",
-    "store": "SkateWarehouse",
-    "url": "https://www.skatewarehouse.com/DNA_Kids_3_Pack_Pad_Set/descpage-DNKGKP.html"
-   },
-   {
-    "_brand": "DNA",
-    "_specs": {
-     "length": 44.99,
-     "wheelbase": null,
-     "width": null
-    },
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "image": "https://img.skatewarehouse.com/watermark/rs.php?path=DNKYKP-1.jpg&nw=500",
-    "length": 44.99,
-    "name": "DNA Kids 3 Pack Pad Set Yellow",
-    "part": "Protection",
-    "price_new": "44.99",
-    "price_old": "61.99",
-    "store": "SkateWarehouse",
-    "url": "https://www.skatewarehouse.com/DNA_Kids_3_Pack_Pad_Set/descpage-DNKYKP.html"
+    "image": "https://scene7.zumiez.com/is/image/zumiez/376180-US",
+    "length": 24.95,
+    "name": "Thunder Select 148 Gunmetal Skateboard Truck",
+    "part": "Trucks",
+    "price_new": "14.99",
+    "price_old": "24.95",
+    "store": "Zumiez",
+    "url": "https://www.zumiez.com/thunder-select-148-gunmetal-skateboard-truck.html",
+    "width": 14.99
    }
   ],
-  "removed": [
-   [
-    "Zumiez_Decks",
-    {
-     "availability": "Check store",
-     "image": "https://scene7.zumiez.com/is/image/zumiez/398908-US",
-     "name": "5Boro Herrick 5Ball Video Series 8.25\" Skateboard Deck",
-     "part": "Decks",
-     "price_new": "49.99",
-     "price_old": "59.95",
-     "size": "8.25",
-     "store": "Zumiez",
-     "url": "https://www.zumiez.com/5boro-herrick-5ball-video-series-8-25-skateboard-deck.html",
-     "width": 8.25
-    }
-   ],
-   [
-    "Zumiez_Trucks",
-    {
-     "availability": "Check store",
-     "image": "https://scene7.zumiez.com/is/image/zumiez/376180-US",
-     "length": 24.95,
-     "name": "Thunder Select 148 Gunmetal Skateboard Truck",
-     "part": "Trucks",
-     "price_new": "14.99",
-     "price_old": "24.95",
-     "store": "Zumiez",
-     "url": "https://www.zumiez.com/thunder-select-148-gunmetal-skateboard-truck.html",
-     "width": 14.99
-    }
-   ],
-   [
-    "SkateWarehouse_Decks",
-    {
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=BKFDRDK-1.jpg&nw=500",
-     "length": 32.25,
-     "name": "Baker Figgy Day Ross B2 Deck 8.25 x 32.25",
-     "part": "Decks",
-     "price_new": "74.98",
-     "price_old": "86.99",
-     "size": "8.25",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/Baker_Figgy_Day_Ross_B2_Deck/descpage-BKFDRDK.html",
-     "width": 8.25
-    }
-   ],
-   [
-    "SkateWarehouse_Decks",
-    {
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=OPGADK-1.jpg&nw=210",
-     "images": [
-      "https://img.skatewarehouse.com/watermark/rs.php?path=OPGADK-1.jpg&nw=210",
-      "https://img.skatewarehouse.com/watermark/rs.php?path=OPGADK-1.jpg&nw=500"
-     ],
-     "length": 31.8,
-     "name": "Opera Gargoyle Deck 8.98 x 31.8",
-     "part": "Decks",
-     "price_new": "64.98",
-     "price_old": "75.00",
-     "size": "8.98",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/Opera_Gargoyle_Deck/descpage-OPGADK.html",
-     "width": 8.98
-    }
-   ],
-   [
-    "SkateWarehouse_Trucks",
-    {
-     "availability": "Check store",
-     "image": "https://img.skatewarehouse.com/watermark/rs.php?path=INBRTR-BK-BK-1.jpg&nw=500",
-     "length": 24.98,
-     "name": "Independent Stage 11 Standard Bar Truck Flat Black",
-     "part": "Trucks",
-     "price_new": "24.98",
-     "price_old": "28.95",
-     "store": "SkateWarehouse",
-     "url": "https://www.skatewarehouse.com/Independent_Stage_11_Standard_Bar_Truck/descpage-INBRTR.html?color=BK"
-    }
-   ]
-  ]
+  "removed": []
  },
  "failed_keys": [
   "Tactics_Decks",
   "Tactics_Wheels"
  ],
  "fingerprints": {
-  "data": "2a4cb83dc0b14ea53a7565553b179ae2f2d289b7871da86141fe8cd879ee5f1a",
-  "history": "888a9c9de1aae028ad7d07bbb1d93008f0a79800a8eda6f94bd6f2388f719357"
+  "data": "e3afb65415c1b828c9ade4f2bb023bcfec08507a25be881288a71f647898e586",
+  "history": "bc50b935a045c1e3a6cee93f767c519bfd8c60642af9d190d5d6e8865d42782b"
  },
- "generated_at": "2026-10-28T01:37:32+00:00",
+ "generated_at": "2026-10-28T09:15:20+00:00",
  "history": "file",
  "version": 1
 }
