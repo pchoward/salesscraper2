@@ -89,6 +89,52 @@ class ExodusTests(unittest.TestCase):
         self.assertNotIn("boots", sum(found.values(), []))
 
 
+class StockReadTests(unittest.TestCase):
+    """Exodus's and Kinetic's sale feeds leave out ``available``, so sizes came out empty."""
+
+    def feed(self):
+        return [
+            product("Vans Skate Half Cab Wafflecup", "Skate Shoes", [
+                variant("54.99", "79.99", 11, "9"), variant("54.99", "79.99", 12, "10"), variant("54.99", "79.99", 13, "11"),
+            ], "half-cab"),
+            product("Vans Old Skool", "Skate Shoes", [variant("49.99", "69.99", 21, "9")], "old-skool"),
+            product("Burton Moto Boots", "Snowboard Boots", [variant("149.99", "199.99", 31, "9")], "boots"),
+        ]
+
+    def test_sizes_come_from_each_products_stock(self):
+        products = self.feed()
+        asked = []
+        live = {"variants": [{"id": 11, "available": True}, {"id": 12, "available": False}, {"id": 13, "available": True}]}
+
+        def fetch(url):
+            asked.append(url)
+            return live
+
+        shopify.enrich_stock(exodus.SHOP, products, "Sneakers", fetch=fetch, sleep=lambda _s: None)
+        self.assertEqual(asked, ["https://exodusrideshop.com/products/half-cab.js"],
+                         "only shoes the filters keep are read; not Old Skool, not snow boots")
+        shoes = kept(exodus.SHOP, "Sneakers", products)
+        self.assertEqual(shoes["half-cab"]["shoe_sizes"], ["9", "11"], "the sold-out 10 is not listed")
+
+    def test_unreadable_stock_and_the_read_limit(self):
+        products = self.feed()
+        shopify.enrich_stock(exodus.SHOP, products, "Sneakers", fetch=lambda url: None, sleep=lambda _s: None)
+        self.assertNotIn("shoe_sizes", kept(exodus.SHOP, "Sneakers", products)["half-cab"])
+        many = [product(f"Vans Wafflecup {n}", "Skate Shoes", [variant("54.99", "79.99", n, "9")], f"w{n}") for n in range(5)]
+        asked = []
+        shopify.enrich_stock(exodus.SHOP, many, "Sneakers", fetch=lambda url: asked.append(url), sleep=lambda _s: None, limit=2)
+        self.assertEqual(len(asked), 2)
+
+    def test_scrape_reads_stock_for_shoes_and_gear_only(self):
+        from unittest import mock
+
+        for part, expected in (("Sneakers", 1), ("Decks", 0), ("Protection", 1)):
+            with mock.patch.object(shopify, "load_sale_products", return_value=[]), \
+                    mock.patch.object(shopify, "enrich_stock") as enrich:
+                shopify.ShopifyScraper(exodus.SHOP, part).scrape()
+            self.assertEqual(enrich.call_count, expected, part)
+
+
 class SharedTests(unittest.TestCase):
     def test_every_store_runs_every_part_in_the_daily_scrape(self):
         for name in ("Kinetic", "SPoT", "TGM", "Exodus"):

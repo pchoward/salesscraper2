@@ -26,18 +26,23 @@ import logging
 import re
 import time
 import urllib.request
+from urllib.parse import quote
 
 from filters import extract_deck_dimensions, extract_deck_size, filter_reason, normalize_product_name, normalize_url
 from part_specs import ordered_shoe_sizes
 from protection import classify as classify_protection
 from stores.base import Scraper
-from stores.ccs import _amount, _money, _plain, _shoe_offers, _stock_known, _variants_of, set_protection_fields
+from stores.ccs import _amount, _money, _plain, _shoe_offers, _stock_known, _variants_of, apply_stock, set_protection_fields
 
 logger = logging.getLogger("stores.shopify")
 
 PAGE_LIMIT = 250
 MAX_PAGES = 20
 PAGE_DELAY = 1.5  # seconds between page requests
+STOCK_DELAY = 0.5  # seconds between product stock reads
+MAX_STOCK_READS = 120  # per store and part, per run
+# Parts whose sizes come from per-variant stock.
+SIZED_PARTS = ("Sneakers", "Protection")
 ALL_PARTS = ("Decks", "Wheels", "Trucks", "Bearings", "Completes", "Sneakers", "Accessories", "Protection")
 BY_TITLE = "by title"
 _USER_AGENT = (
@@ -161,6 +166,43 @@ def load_sale_products(store, fetch=None, sleep=time.sleep):
     return products
 
 
+def enrich_stock(store, products, part, fetch=None, sleep=time.sleep, limit=MAX_STOCK_READS):
+    """Add each variant's ``available`` flag for this part's listings.
+
+    Some sale feeds (Exodus, Kinetic) leave ``available`` out, so no size
+    can be called in stock. The product's ``/products/<handle>.js`` has it,
+    as CCS already uses. Only products of this part that the shared
+    filters would keep are read, with a short pause between reads. An
+    unreadable product leaves its sizes unknown.
+    """
+    fetch = fetch or _fetch_json
+    reads = 0
+    for product in products or []:
+        if not isinstance(product, dict) or _stock_known(_variants_of(product)):
+            continue
+        title = title_with_brand(product, store.own_vendor)
+        if part_for(store, product.get("product_type"), title) != part:
+            continue
+        sale = sale_variants(product)
+        handle = str(product.get("handle") or "").strip()
+        if not sale or not handle:
+            continue
+        cheapest = min(sale, key=lambda variant: _amount(variant.get("price")))
+        if filter_reason(title, part, "", _money(cheapest.get("price")), _money(cheapest.get("compare_at_price")),
+                         _plain(product.get("body_html") or ""), str(product.get("product_type") or "")):
+            continue
+        if reads >= limit:
+            logger.warning("%s %s: stock read for only the first %s products", store.store, part, limit)
+            break
+        if reads:
+            sleep(STOCK_DELAY)
+        reads += 1
+        live = fetch(f"{store.base}/products/{quote(handle, safe='')}.js")
+        if isinstance(live, dict) and isinstance(live.get("variants"), list):
+            apply_stock(product, live)
+    return products
+
+
 def sale_variants(product):
     """Variants with a compare-at price above the price that can be bought.
 
@@ -227,6 +269,8 @@ class ShopifyScraper(Scraper):
         products = load_sale_products(self.shop)
         if products is None:
             return None
+        if self.part in SIZED_PARTS:
+            enrich_stock(self.shop, products, self.part)
         return self.products_from(products)
 
     def parse(self, html):
