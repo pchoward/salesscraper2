@@ -4500,6 +4500,102 @@
             "reason": "insufficient_history"
           }
         },
+        "Exodus_Accessories": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 6,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Exodus_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Exodus_Completes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Exodus_Decks": {
+          "count": 15,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 15,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Exodus_Protection": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 2,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Exodus_Sneakers": {
+          "count": 34,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 34,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Exodus_Trucks": {
+          "count": 7,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 7,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Exodus_Wheels": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 5,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "Kinetic_Accessories": {
           "count": 0,
           "failed": false,
@@ -4776,6 +4872,90 @@
             "reason": "normal_variation"
           }
         },
+        "SoCal_Accessories": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "SoCal_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "SoCal_Completes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "SoCal_Decks": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 6,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "SoCal_Protection": {
+          "count": 14,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 14,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "SoCal_Trucks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "SoCal_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "TGM_Accessories": {
           "count": 13,
           "failed": false,
@@ -5043,7 +5223,7 @@
           }
         }
       },
-      "scanned_at": "2026-10-28T12:24:03+00:00"
+      "scanned_at": "2026-10-28T13:27:04+00:00"
     }
   ],
   "baseline": {
@@ -5190,6 +5370,38 @@
     "SPoT_Sneakers": {
       "date": "2026-10-28",
       "count": 1
+    },
+    "Exodus_Accessories": {
+      "date": "2026-10-28",
+      "count": 6
+    },
+    "Exodus_Decks": {
+      "date": "2026-10-28",
+      "count": 15
+    },
+    "Exodus_Protection": {
+      "date": "2026-10-28",
+      "count": 2
+    },
+    "Exodus_Sneakers": {
+      "date": "2026-10-28",
+      "count": 34
+    },
+    "Exodus_Trucks": {
+      "date": "2026-10-28",
+      "count": 7
+    },
+    "Exodus_Wheels": {
+      "date": "2026-10-28",
+      "count": 5
+    },
+    "SoCal_Decks": {
+      "date": "2026-10-28",
+      "count": 6
+    },
+    "SoCal_Protection": {
+      "date": "2026-10-28",
+      "count": 14
     }
   },
   "completeness_baseline": {
@@ -5571,6 +5783,54 @@
       {
         "date": "2026-10-28",
         "count": 0
+      }
+    ],
+    "Exodus_Accessories": [
+      {
+        "date": "2026-10-28",
+        "count": 6
+      }
+    ],
+    "Exodus_Bearings": [
+      {
+        "date": "2026-10-28",
+        "count": 0
+      }
+    ],
+    "Exodus_Completes": [
+      {
+        "date": "2026-10-28",
+        "count": 0
+      }
+    ],
+    "Exodus_Decks": [
+      {
+        "date": "2026-10-28",
+        "count": 15
+      }
+    ],
+    "Exodus_Protection": [
+      {
+        "date": "2026-10-28",
+        "count": 2
+      }
+    ],
+    "Exodus_Sneakers": [
+      {
+        "date": "2026-10-28",
+        "count": 34
+      }
+    ],
+    "Exodus_Trucks": [
+      {
+        "date": "2026-10-28",
+        "count": 7
+      }
+    ],
+    "Exodus_Wheels": [
+      {
+        "date": "2026-10-28",
+        "count": 5
       }
     ],
     "Kinetic_Accessories": [
@@ -6005,6 +6265,48 @@
       {
         "date": "2026-10-28",
         "count": 5
+      }
+    ],
+    "SoCal_Accessories": [
+      {
+        "date": "2026-10-28",
+        "count": 0
+      }
+    ],
+    "SoCal_Bearings": [
+      {
+        "date": "2026-10-28",
+        "count": 0
+      }
+    ],
+    "SoCal_Completes": [
+      {
+        "date": "2026-10-28",
+        "count": 0
+      }
+    ],
+    "SoCal_Decks": [
+      {
+        "date": "2026-10-28",
+        "count": 6
+      }
+    ],
+    "SoCal_Protection": [
+      {
+        "date": "2026-10-28",
+        "count": 14
+      }
+    ],
+    "SoCal_Trucks": [
+      {
+        "date": "2026-10-28",
+        "count": 0
+      }
+    ],
+    "SoCal_Wheels": [
+      {
+        "date": "2026-10-28",
+        "count": 0
       }
     ],
     "TGM_Accessories": [
