@@ -3061,3 +3061,8 @@ body.alerts-open { overflow: hidden; }
     background: transparent;
     color: var(--blue);
 }
+
+/* A listing the store's product page says is out of stock in every size. */
+.pill-soldout { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+.deal-card.sold-out .media img { opacity: 0.55; filter: grayscale(0.4); }
+.deal-card.sold-out .now-price { color: var(--text-secondary); }

@@ -131,6 +131,9 @@ TYPE_TO_SLUG = {
     "Protection": "protection",
 }
 
+# The sort a fresh visit opens on, and the one a link without ``sort=`` means.
+# Keep in step with DEFAULT_SORT in page.js.
+DEFAULT_SORT = "discount"
 SORTS = (
     "rank",
     "score",
@@ -191,7 +194,7 @@ def empty_state():
         "scoremax": None,
         "length": "all",
         "wheelbase": "all",
-        "sort": "rank",
+        "sort": DEFAULT_SORT,
         "change": "all",
         "watching": False,
         "low": False,
@@ -449,8 +452,8 @@ def encode_state(state):
         add("scoremax", _num_text(state["scoremax"]))
     add("length", state.get("length") or "")
     add("wheelbase", state.get("wheelbase") or "")
-    sort = state.get("sort") or "rank"
-    if sort != "rank" and sort in SORTS:
+    sort = state.get("sort") or DEFAULT_SORT
+    if sort != DEFAULT_SORT and sort in SORTS:
         add("sort", sort)
     change = state.get("change") or "all"
     if change in CHANGES:
