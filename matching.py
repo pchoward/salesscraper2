@@ -46,7 +46,7 @@ from filters import (
 )
 
 PART_ORDER = ("Decks", "Wheels", "Trucks", "Bearings")
-STORE_ORDER = ("Zumiez", "SkateWarehouse", "CCS", "Tactics", "TGM", "Deathgear", "Kinetic", "SPoT", "Exodus", "Skate Deluxe", "Muir Skate")
+STORE_ORDER = ("Zumiez", "SkateWarehouse", "CCS", "Tactics", "TGM", "Deathgear", "Kinetic", "SPoT", "Exodus", "SoCal", "Skate Deluxe", "Muir Skate")
 
 # Words that describe a line, a color, or a category. They are kept when a
 # real model word is present (so colorways stay apart) but a key made only

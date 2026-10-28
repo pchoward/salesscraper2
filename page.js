@@ -2279,6 +2279,7 @@ function slugStore(value) {
         kinetic: "Kinetic",
         spot: "SPoT",
         exodus: "Exodus",
+        socal: "SoCal",
         skatedeluxe: "Skate Deluxe",
         muirskate: "Muir Skate"
     }[key] || "";
@@ -2317,6 +2318,7 @@ function storeSlug(name) {
         Kinetic: "kinetic",
         SPoT: "spot",
         Exodus: "exodus",
+        SoCal: "socal",
         "Skate Deluxe": "skatedeluxe",
         "Muir Skate": "muirskate"
     }[name] || "";
@@ -2995,6 +2997,7 @@ const STORE_COLOR = {
     Kinetic: "#0369a1",
     SPoT: "#a16207",
     Exodus: "#4d7c0f",
+    SoCal: "#c2410c",
     "Skate Deluxe": "#6d28d9",
     "Muir Skate": "#0f766e"
 };
@@ -5836,6 +5839,8 @@ const ALERTS_STORE_HOSTS = [
     "www.skateparkoftampa.com",
     "exodusrideshop.com",
     "www.exodusrideshop.com",
+    "socalskateshop.com",
+    "www.socalskateshop.com",
     "www.skatedeluxe.com",
     "muirskate.com",
     "www.muirskate.com"
