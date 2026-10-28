@@ -1829,6 +1829,10 @@ function defaultSortDir(key) {
 }
 
 function compareSort(a, b, key, direction) {
+    // Sold-out listings go after everything that can be bought, in any sort.
+    const aSold = a.dataset.soldout === "1";
+    const bSold = b.dataset.soldout === "1";
+    if (aSold !== bSold) return aSold ? 1 : -1;
     if (key === "rank") return (parseFloat(a.dataset.rank) || 0) - (parseFloat(b.dataset.rank) || 0);
     const av = a.dataset[key];
     const bv = b.dataset[key];

@@ -2083,6 +2083,7 @@ def _deal_attrs(record):
         group_key = record["group"].get("key") or ""
     return (
         f'data-id="{record["id"]}" data-url="{_attr(record["url"])}" '
+        f'data-soldout="{1 if record.get("sold_out") else 0}" '
         f'data-store="{_attr(record["store"])}" data-part="{_attr(record["part"])}" '
         f'data-size="{_attr(record["width_key"])}" data-brand="{_attr(record["brand"])}" '
         f'data-name="{_attr(record["name"])}" data-search="{_attr(record["search"])}" '
