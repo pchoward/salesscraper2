@@ -2290,7 +2290,7 @@ def _card_html(record):
         '<button type="button" class="card-alert">Alert me</button>'
         f'<div class="media">{_thumb(record["image"], record["name"], large=True)}'
         f'<span class="store-mark">{escape(store)}</span>'
-        '<button type="button" class="card-quick">Quick view</button></div>'
+        '<button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>'
         f'<h3 class="product-name">{_product_link(item)}</h3>'
         f'<div class="card-sparkline">{_spark_html(record, width=156)}</div>'
         f'<p class="card-offer">{off_html}{_sold_out_pill(record)}</p>'

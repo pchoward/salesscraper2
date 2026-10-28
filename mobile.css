@@ -181,12 +181,14 @@
     #quickView.is-sheet .quick-panel { max-height: 92dvh; }
     #quickView .quick-product {
         grid-template-columns: minmax(0, 1fr);
-        gap: 14px;
+        gap: 10px;
         align-items: start;
     }
-    #quickView .quick-image-frame { height: min(46dvh, 380px); min-height: 220px; }
-    #quickView .quick-title { font-size: 1.2rem; }
-    #quickView .quick-price strong { font-size: 1.6rem; }
+    #quickView .quick-gallery { width: auto; max-width: none; }
+    #quickView .quick-image-frame { width: 100%; height: min(38dvh, 220px); min-height: 180px; }
+    #quickView .quick-title { font-size: 1.05rem; }
+    #quickView .quick-price strong { font-size: 1.45rem; }
+    #quickView.is-sheet .quick-view-link { min-height: 2.75rem; font-size: 1rem; }
     #quickView .quick-more > summary {
         min-height: 2.75rem;
         font-size: 0.95rem;

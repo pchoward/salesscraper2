@@ -937,7 +937,8 @@ if (pushes !== 1) throw new Error("default search pushed " + pushes);
         self.assertNotIn('class="card-hover"', html)
         self.assertNotIn(".title-slot:hover .title-pop", html)
         self.assertIn('id="quickView"', html)
-        self.assertIn("const QUICK_OPEN_MS = 300;", html)
+        self.assertNotIn("const QUICK_OPEN_MS", html)
+        self.assertNotIn("onQuickEnter", html)
         cards = [
             part.split("</article>", 1)[0]
             for part in html.split('<article class="deal-card')[1:]
@@ -955,7 +956,7 @@ if (pushes !== 1) throw new Error("default search pushed " + pushes);
         refresh = source[source.find("function refreshCharts("):source.find("function clipSeries(")]
         self.assertNotIn("drawQuickChart", refresh)
         self.assertNotIn("fillQuickView", refresh)
-        self.assertIn("closeProduct();\n            closeQuickView();", source)
+        self.assertIn("closeProduct();\n    closeQuickView();", source)
         add_days = source[source.find("function addDays("):source.find("function markerColor(")]
         facts = source[source.find("function quickClip("):source.find("function quickGalleryImages(")]
         script = "const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];\n" + add_days + facts + r"""
