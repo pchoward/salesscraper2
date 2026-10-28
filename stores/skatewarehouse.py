@@ -2,10 +2,12 @@
 
 import logging
 import re
+import time
 
 from bs4 import BeautifulSoup
 
 from filters import extract_deck_size, normalize_product_name, normalize_url
+from part_specs import ordered_shoe_sizes, shoe_size_token
 from stores.base import Scraper
 from stores.browser import fetch_page, save_debug_file
 from tracked import sneaker_rule
@@ -110,6 +112,81 @@ class SkateWarehouseScraper(Scraper):
         return products
 
 
+# Product pages read per run for shoe sizes, and the pause between them.
+MAX_SIZE_READS = 40
+SIZE_READ_DELAY = 1.0
+
+
+def shoe_offers_from_html(html):
+    """``(in-stock sizes → price, rows seen)`` from a product page.
+
+    Each size is a ``tr.subproduct`` row: "Men's Shoe Sizes: 8.5",
+    "In Stock: Yes", and its price. The rows are in the page itself.
+    """
+    soup = BeautifulSoup(html or "", "html.parser")
+    offers = {}
+    rows = 0
+    for row in soup.select("tr.subproduct"):
+        size = None
+        for entry in row.select(".stylelist li"):
+            if entry.select_one('.style[data-styleabbrev="Size"]') is not None:
+                value = entry.select_one(".styleitem")
+                size = shoe_size_token(value.get_text(strip=True), exact=True) if value is not None else None
+        if not size:
+            continue
+        rows += 1
+        available = row.select_one(".available")
+        if available is None or available.get_text(strip=True).casefold() != "yes":
+            continue
+        price = row.select_one(".price")
+        try:
+            amount = float(price.get_text(strip=True).replace(",", "")) if price is not None else None
+        except ValueError:
+            amount = None
+        if size not in offers or (amount is not None and (offers[size] is None or amount < offers[size])):
+            offers[size] = amount
+    return offers, rows
+
+
+def add_shoe_sizes(items, fetch=None, sleep=time.sleep, limit=MAX_SIZE_READS):
+    """Set ``shoe_sizes`` (in stock only) from each shoe's product page.
+
+    The clearance listing only has name and price. A page whose sizes are
+    all out of stock marks the shoe sold out; an unreadable page changes
+    nothing.
+    """
+    if fetch is None:
+        from stores.stock import _fetch_static as fetch
+    for index, item in enumerate(items[:limit]):
+        if index:
+            sleep(SIZE_READ_DELAY)
+        html = fetch(item["url"])
+        offers, rows = shoe_offers_from_html(html)
+        if not rows:
+            continue
+        sizes = ordered_shoe_sizes(offers)
+        item["shoe_sizes"] = sizes
+        prices = {size: f"{offers[size]:.2f}" for size in sizes if offers[size] is not None}
+        if len(set(prices.values())) > 1:
+            item["shoe_prices"] = prices
+        if not sizes:
+            item["stock"] = "out_of_stock"
+            item["availability"] = "Sold out"
+    if len(items) > limit:
+        logging.warning("Skate Warehouse sizes read for only the first %s of %s shoes", limit, len(items))
+    return items
+
+
+class SkateWarehouseSneakersScraper(SkateWarehouseScraper):
+    """Clearance shoes, with in-stock sizes from each product page."""
+
+    def scrape(self):
+        items = super().scrape()
+        if items is None:
+            return None
+        return add_shoe_sizes(items)
+
+
 class SkateWarehouseMultiScraper(SkateWarehouseScraper):
     """One part spread across several category pages. A failed page fails the part."""
 
@@ -162,7 +239,7 @@ def scrapers():
             "Bearings",
             require_markdown=True,
         ),
-        SkateWarehouseScraper(
+        SkateWarehouseSneakersScraper(
             "SkateWarehouse",
             "https://www.skatewarehouse.com/Clearance_Skate_Shoes/catpage-SALESHOE.html",
             "Sneakers",

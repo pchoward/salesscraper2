@@ -153,3 +153,50 @@ class SharedTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def sw_row(code, size, in_stock, price="70.00"):
+    # One tr.subproduct row from Skate Warehouse's product page (owner's capture, VAEROG).
+    return f"""
+<tr data-code="{code}" class="subproduct cf" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+<td><input type="radio" name="pcode" value="{code}" /></td><td>
+<div class=""><span class="name"><strong>Vans Skate Era Oil Green {size}</strong></span></div>
+<div class="cf"><div class="fl stock"><strong>In Stock:</strong> <span class="available ">{"Yes" if in_stock else "No"}</span></div>
+<div class="fr"><strong>Price:</strong> $<span class="price">{price}</span></div>
+<ul class="stylelist fl">
+<li><strong><span class="style" data-index="0" data-styleref="547514" data-styleabbrev="SHCO">Shoe Color</span></strong>: <span class="styleitem" data-scode="BR">Brown</span></li>
+<li><strong><span class="style" data-index="1" data-styleref="2" data-styleabbrev="Size">Men's Shoe Sizes</span></strong>: <span class="styleitem" data-scode="085">{size}</span></li>
+</ul></div></td></tr>"""
+
+
+class SkateWarehouseSizeTests(unittest.TestCase):
+    def test_in_stock_sizes_from_the_product_page(self):
+        from stores import skatewarehouse as sw
+
+        page = "<table>" + sw_row("A080", "8", True) + sw_row("A085", "8.5", True) + sw_row("A090", "9", False) \
+            + sw_row("A100", "10", True, price="65.00") + "</table>"
+        offers, rows = sw.shoe_offers_from_html(page)
+        self.assertEqual(rows, 4)
+        self.assertEqual(sorted(offers), ["10", "8", "8.5"])
+        items = [{"name": "Vans Skate Era Shoes", "url": "https://www.skatewarehouse.com/Vans_Skate_Era_Shoes/descpage-VAEROG.html"}]
+        sw.add_shoe_sizes(items, fetch=lambda url: page, sleep=lambda _s: None)
+        self.assertEqual(items[0]["shoe_sizes"], ["8", "8.5", "10"], "sold-out 9 left out")
+        self.assertEqual(items[0]["shoe_prices"]["10"], "65.00")
+
+    def test_all_sizes_sold_out_and_unreadable_pages(self):
+        from stores import skatewarehouse as sw
+
+        gone = "<table>" + sw_row("B080", "8", False) + "</table>"
+        items = [{"name": "Shoe", "url": "u1"}, {"name": "Shoe 2", "url": "u2"}]
+        sw.add_shoe_sizes(items, fetch=lambda url: gone if url == "u1" else None, sleep=lambda _s: None)
+        self.assertEqual((items[0]["shoe_sizes"], items[0]["stock"]), ([], "out_of_stock"))
+        self.assertNotIn("shoe_sizes", items[1], "an unreadable page changes nothing")
+
+    def test_the_sneaker_scraper_reads_sizes(self):
+        from unittest import mock
+        from stores import skatewarehouse as sw
+
+        scraper = next(s for s in sw.scrapers() if s.part == "Sneakers")
+        self.assertIsInstance(scraper, sw.SkateWarehouseSneakersScraper)
+        with mock.patch.object(sw.SkateWarehouseScraper, "scrape", return_value=None):
+            self.assertIsNone(scraper.scrape())
