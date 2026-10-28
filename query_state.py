@@ -99,6 +99,8 @@ STORE_SLUGS = {
     "tactics": "Tactics",
     "tgm": "TGM",
     "deathgear": "Deathgear",
+    "kinetic": "Kinetic",
+    "spot": "SPoT",
     "skatedeluxe": "Skate Deluxe",
     "muirskate": "Muir Skate",
 }

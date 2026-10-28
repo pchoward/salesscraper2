@@ -2276,6 +2276,8 @@ function slugStore(value) {
         tactics: "Tactics",
         tgm: "TGM",
         deathgear: "Deathgear",
+        kinetic: "Kinetic",
+        spot: "SPoT",
         skatedeluxe: "Skate Deluxe",
         muirskate: "Muir Skate"
     }[key] || "";
@@ -2311,6 +2313,8 @@ function storeSlug(name) {
         Tactics: "tactics",
         TGM: "tgm",
         Deathgear: "deathgear",
+        Kinetic: "kinetic",
+        SPoT: "spot",
         "Skate Deluxe": "skatedeluxe",
         "Muir Skate": "muirskate"
     }[name] || "";
@@ -2986,6 +2990,8 @@ const STORE_COLOR = {
     Tactics: "#d97706",
     TGM: "#b91c1c",
     Deathgear: "#111827",
+    Kinetic: "#0369a1",
+    SPoT: "#a16207",
     "Skate Deluxe": "#6d28d9",
     "Muir Skate": "#0f766e"
 };
@@ -5821,6 +5827,10 @@ const ALERTS_STORE_HOSTS = [
     "www.tgmskateboards.com",
     "www.deathgearproducts.com",
     "deathgearproducts.com",
+    "kineticskateboarding.com",
+    "www.kineticskateboarding.com",
+    "skateparkoftampa.com",
+    "www.skateparkoftampa.com",
     "www.skatedeluxe.com",
     "muirskate.com",
     "www.muirskate.com"
