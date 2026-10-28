@@ -15,6 +15,8 @@ export const STORE_HOSTS = new Set([
   "www.kineticskateboarding.com",
   "skateparkoftampa.com",
   "www.skateparkoftampa.com",
+  "exodusrideshop.com",
+  "www.exodusrideshop.com",
   "www.skatedeluxe.com",
   "muirskate.com",
   "www.muirskate.com",

@@ -2,7 +2,7 @@
 
 import unittest
 
-from stores import kinetic, shopify, spot
+from stores import exodus, kinetic, shopify, spot
 from stores.registry import build_scrapers
 
 
@@ -70,9 +70,28 @@ class SpotTests(unittest.TestCase):
         self.assertEqual(shopify.title_with_brand({"title": "Logo Deck", "vendor": "SPoT"}, spot.SHOP.own_vendor), "Logo Deck")
 
 
+class ExodusTests(unittest.TestCase):
+    def test_sale_1_collection_by_type_never_the_filter_url(self):
+        self.assertEqual(exodus.SHOP.sale_json, "https://exodusrideshop.com/collections/sale-1/products.json")
+        self.assertNotIn("filter", exodus.SHOP.sale_json)
+        products = [
+            product('Hockey Fire Deck 8.5"', "Decks", [variant("54.99", "74.99")], "hockey-deck"),
+            product("Independent Stage 11 Trucks 144", "Trucks", [variant("49.99", "64.99")], "indy"),
+            product("Spitfire Formula Four 54mm", "Wheels", [variant("39.99", "54.99")], "f4", vendor="Spitfire"),
+            product("Burton Moto Boots", "Snowboard Boots", [variant("149.99", "199.99")], "boots"),
+            product("Vans Skate Wafflecup", "Shoes", [variant("54.99", "79.99", 3, "9", True)], "wafflecup"),
+        ]
+        found = {part: list(kept(exodus.SHOP, part, products)) for part in shopify.ALL_PARTS}
+        self.assertEqual(found["Decks"], ["hockey-deck"])
+        self.assertEqual(found["Trucks"], ["indy"])
+        self.assertEqual(found["Wheels"], ["f4"])
+        self.assertEqual(found["Sneakers"], ["wafflecup"])
+        self.assertNotIn("boots", sum(found.values(), []))
+
+
 class SharedTests(unittest.TestCase):
     def test_every_store_runs_every_part_in_the_daily_scrape(self):
-        for name in ("Kinetic", "SPoT", "TGM"):
+        for name in ("Kinetic", "SPoT", "TGM", "Exodus"):
             self.assertEqual({s.part for s in build_scrapers() if s.name == name}, set(shopify.ALL_PARTS), name)
 
     def test_stores_keep_separate_downloads(self):

@@ -4,6 +4,7 @@ import logging
 
 from stores.ccs import scrapers as ccs_scrapers
 from stores.deathgear import scrapers as deathgear_scrapers
+from stores.exodus import scrapers as exodus_scrapers
 from stores.kinetic import scrapers as kinetic_scrapers
 from stores.muirskate import DISABLED_REASON as MUIR_REASON
 from stores.muirskate import ENABLED as MUIR_ENABLED
@@ -30,6 +31,7 @@ def build_scrapers():
     scrapers.extend(deathgear_scrapers())
     scrapers.extend(kinetic_scrapers())
     scrapers.extend(spot_scrapers())
+    scrapers.extend(exodus_scrapers())
     if DELUXE_ENABLED:
         scrapers.extend(skatedeluxe_scrapers())
     else:
