@@ -144,6 +144,15 @@ class HtmlStoreTests(unittest.TestCase):
         if not skatewarehouse.PROTECTION_URLS:
             self.assertNotIn(("SkateWarehouse", "Protection"), parts)
 
+    def test_zumiez_and_tactics_use_the_confirmed_sale_pages(self):
+        from pathlib import Path
+        parts = {(scraper.name, scraper.part): scraper for scraper in build_scrapers()}
+        self.assertEqual(parts["Zumiez", "Protection"].urls,
+                         ["https://www.zumiez.com/skate/helmets-pads.html?customFilters=promotion_flag:Sale"])
+        self.assertEqual(parts["Tactics", "Protection"].url, "https://www.tactics.com/protective-skate-gear/sale")
+        robots = (Path(__file__).resolve().parent / "tests" / "fixtures" / "zumiez_robots.txt").read_text()
+        self.assertTrue(zumiez.explicitly_allowed(zumiez.star_rules(robots), zumiez.PROTECTION_URLS[0]))
+
     def test_a_confirmed_url_adds_the_part(self):
         with mock.patch.object(zumiez, "PROTECTION_URLS", ("https://www.zumiez.com/example-protection.html",)):
             self.assertIn("Protection", [scraper.part for scraper in zumiez.scrapers()])

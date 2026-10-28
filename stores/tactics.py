@@ -210,9 +210,9 @@ class TacticsDecksScraper(TacticsScraper):
         super().__init__("Tactics", "https://www.tactics.com/skateboard-decks/sale", "Decks")
 
 
-# Sale listing of protective gear. Empty until the owner confirms the URL in
-# a browser; a guessed path would fail every night.
-PROTECTION_URL = ""
+# Sale listing of protective gear, confirmed by the owner in a browser on
+# 2026-10-28. Sale paths are allowed by robots.txt.
+PROTECTION_URL = "https://www.tactics.com/protective-skate-gear/sale"
 
 
 def scrapers():
