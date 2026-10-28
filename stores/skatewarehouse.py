@@ -134,10 +134,16 @@ class SkateWarehouseMultiScraper(SkateWarehouseScraper):
         return merged
 
 
-# Protective gear category or clearance pages. Empty until the owner confirms
-# the URLs in a browser; a guessed path would fail every night. Like the
-# accessory categories, only a two-price markdown is kept.
-PROTECTION_URLS = ()
+# Protective gear category pages, confirmed by the owner in a browser on
+# 2026-10-28. Clearance has no protection section, so like the accessory
+# categories these are full category pages and only a two-price markdown
+# (a sale price under the regular price) is kept.
+PROTECTION_URLS = (
+    "https://www.skatewarehouse.com/helmets.html",
+    "https://www.skatewarehouse.com/kneepads.html",
+    "https://www.skatewarehouse.com/elbowpad.html",
+    "https://www.skatewarehouse.com/wristguards.html",
+)
 
 
 def scrapers():
