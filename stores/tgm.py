@@ -7,8 +7,8 @@ disallows ``sort_by`` and multi-filter URLs, so the storefront's filtered
 pages are never requested; this module sorts products by their Shopify
 ``product_type`` instead.
 
-* Kept types: Decks, Wheels, Trucks, Bearings, Grip Tape and Hardware (as
-  Accessories), Completes, and Mens Shoes (as Sneakers). Everything else
+* Kept types: Decks, Wheels, Trucks, Bearings, Grip Tape, Hardware, Risers,
+  and Tool (as Accessories), Completes, and Mens Shoes (as Sneakers). Everything else
   (clothing, Disc, Roller Hockey, ...) is skipped before the filters.
 * A variant is on sale only when ``compare_at_price`` is above ``price``.
   The sale price is the variant price and the was price is its compare-at.
@@ -58,6 +58,8 @@ PART_BY_TYPE = {
     "grip tape": "Accessories",
     "griptape": "Accessories",
     "hardware": "Accessories",
+    "risers": "Accessories",
+    "tool": "Accessories",
     "completes": "Completes",
     "complete": "Completes",
     "mens shoes": "Sneakers",
@@ -284,6 +286,7 @@ def main():
         for item in items[:5]:
             print(f"  ${item['price_new']} (was ${item['price_old']})  {item['name']}")
         reasons = collections.Counter()
+        cruisers = []
         for product in products:
             if part_for_type(product.get("product_type")) != scraper.part or not _sale_variants(product):
                 continue
@@ -291,8 +294,12 @@ def main():
                                    str(product.get("product_type") or ""))
             if reason and not reason.startswith(("known-brand deck", "unknown-brand deck")):
                 reasons[re.sub(r"[\d.]+", "N", reason)] += 1
+            if reason == "cruiser" and scraper.part in ("Decks", "Completes"):
+                cruisers.append(_title(product))
         if reasons:
             print("  Dropped:", ", ".join(f"{reason} {count}" for reason, count in reasons.most_common(5)))
+        for title in cruisers:
+            print(f"    cruiser: {title}")
     shoes = [_title(p) for p in products if part_for_type(p.get("product_type")) == "Sneakers"]
     tracked = [t for t in shoes if re.search(r"waffle ?cup|pop ?cush|dunk", t, re.IGNORECASE)]
     print(f"\nShoe titles naming Wafflecup, PopCush, or Dunk: {len(tracked)}")

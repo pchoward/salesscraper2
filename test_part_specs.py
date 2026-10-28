@@ -282,14 +282,15 @@ class SpecSectionTests(unittest.TestCase):
                         length += 1
                     if specs.get("wheelbase"):
                         wheelbase += 1
+        # The parsers find the common specs in real listings. How rare the
+        # other specs (shape, ABEC, wheelbase) are depends on which stores
+        # are scraped: TGM's wheel names state Conical/Radial, for example.
+        # The gate itself is tested with fixed fixtures above.
         self.assertGreaterEqual(diameter, MIN_SPEC_COUNT)
         self.assertGreaterEqual(duro, MIN_SPEC_COUNT)
-        self.assertLess(shape, MIN_SPEC_COUNT)
         self.assertGreaterEqual(size, MIN_SPEC_COUNT)
         self.assertGreaterEqual(height, MIN_SPEC_COUNT)
-        self.assertLess(abec, MIN_SPEC_COUNT)
         self.assertGreaterEqual(length, MIN_SPEC_COUNT)
-        self.assertLess(wheelbase, MIN_SPEC_COUNT)
         self.assertGreater(wheels, 0)
         self.assertGreater(trucks, 0)
         self.assertGreaterEqual(bearings, abec)  # Inventory count can change across scrapes.
