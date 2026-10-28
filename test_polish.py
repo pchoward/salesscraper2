@@ -314,7 +314,7 @@ class QueryStateTests(unittest.TestCase):
         state = decode_query("store=nope&type=skate&sort=nope&width=abc")
         self.assertEqual(state["store"], "all")
         self.assertEqual(state["part"], "Decks")
-        self.assertEqual(state["sort"], "rank")
+        self.assertEqual(state["sort"], "discount", "unknown values fall back to the default sort, % off")
         self.assertEqual(state["widths"], [])
         self.assertEqual(encode_state(state), "")
         self.assertEqual(state["interval"], "all")

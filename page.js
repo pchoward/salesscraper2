@@ -1,3 +1,6 @@
+// The sort a fresh visit opens on, and the one a link without ?sort= means.
+// Keep in step with query_state.DEFAULT_SORT.
+const DEFAULT_SORT = "discount";
 let state = {
     store: "all",
     part: "Decks",
@@ -27,8 +30,8 @@ let state = {
     shoeSizes: [],
     protTypes: [],
     protSizes: [],
-    sortKey: "rank",
-    sortDir: "asc",
+    sortKey: DEFAULT_SORT,
+    sortDir: "desc",
     search: ""
 };
 
@@ -2139,8 +2142,8 @@ function clearFilters() {
         shoeSizes: [],
         protTypes: [],
         protSizes: [],
-        sortKey: "rank",
-        sortDir: "asc",
+        sortKey: DEFAULT_SORT,
+        sortDir: "desc",
         search: "",
         widths: []
     };
@@ -2158,7 +2161,7 @@ function clearFilters() {
     const partSelect = document.getElementById("partSelect");
     if (partSelect) partSelect.value = "Decks";
     const sort = document.getElementById("sortSelect");
-    if (sort) sort.value = "rank";
+    if (sort) sort.value = DEFAULT_SORT;
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", "false");
     const grouped = document.getElementById("groupToggle");
@@ -2174,7 +2177,7 @@ function clearFilters() {
     setPressed("#partFilters [data-part]", "data-part", "Decks");
     paintWidthChips();
     syncTypeSections(false);
-    sortBy("rank", "asc");
+    sortBy(DEFAULT_SORT, "desc");
     applyFilters();
     updateChangeLine();
     scrollResultsToTop();
@@ -2339,7 +2342,7 @@ function decodeQuery(query) {
         scoremax: null,
         length: "all",
         wheelbase: "all",
-        sort: "rank",
+        sort: DEFAULT_SORT,
         change: "all",
         watching: false,
         low: false,
@@ -2446,7 +2449,7 @@ function encodeState(snapshot) {
     if (snapshot.scoremax != null) add("scoremax", numText(snapshot.scoremax));
     add("length", snapshot.length || "");
     add("wheelbase", snapshot.wheelbase || "");
-    if (snapshot.sort && snapshot.sort !== "rank") add("sort", snapshot.sort);
+    if (snapshot.sort && snapshot.sort !== DEFAULT_SORT) add("sort", snapshot.sort);
     if (["new", "drop", "lowest", "removed"].indexOf(snapshot.change) >= 0) add("change", snapshot.change);
     if (snapshot.watching) add("watching", "1");
     if (snapshot.low && snapshot.change !== "lowest") add("low", "1");
@@ -2497,7 +2500,7 @@ function captureState() {
         scoremax: state.scoreMax,
         length: state.length,
         wheelbase: state.wheelbase,
-        sort: sort ? sort.value : "rank",
+        sort: sort ? sort.value : DEFAULT_SORT,
         change: state.change,
         watching: state.watching,
         low: state.cardLow,
@@ -2547,7 +2550,7 @@ function writeControls(snapshot) {
     const chosenBrand = document.getElementById("brandSelect");
     setSelect("lengthSelect", snapshot.length || "all");
     setSelect("wheelbaseSelect", snapshot.wheelbase || "all");
-    setSelect("sortSelect", snapshot.sort || "rank");
+    setSelect("sortSelect", snapshot.sort || DEFAULT_SORT);
     const fill = (id, value) => {
         const node = document.getElementById(id);
         if (node) node.value = value == null || !Number.isFinite(Number(value)) ? "" : numText(value);

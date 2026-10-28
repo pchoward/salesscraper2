@@ -36,7 +36,10 @@ class ToolbarBaselineTests(unittest.TestCase):
         self.assertLess(tool.find('id="sortSelect"'), tool.find('class="tool-display"'))
         self.assertIn(">vs previous scrape<", tool)
         self.assertIn('data-baseline="previous-scrape"', tool)
-        self.assertIn('<option value="discount">% off</option>', tool)
+        # % off is the default and first; the old default has a plain name.
+        self.assertIn('<select id="sortSelect"><option value="discount" selected>% off</option>', tool)
+        self.assertIn('<option value="rank">Today\'s drops &amp; new first</option>', tool)
+        self.assertNotIn("biggest drop", tool)
         self.assertNotIn("baselineSelect", html)
         self.assertNotIn("Since your last visit", html)
         self.assertNotIn("Since yesterday", html)
@@ -160,3 +163,19 @@ if (both.buttons.filter(button => button.action === "clear").length !== 1) throw
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DefaultSortTests(unittest.TestCase):
+    def test_percent_off_is_the_default_in_page_js_and_query_state(self):
+        import re
+        from pathlib import Path
+        from query_state import DEFAULT_SORT, decode_query, encode_state
+
+        source = (Path(__file__).resolve().parent / "page.js").read_text(encoding="utf-8")
+        self.assertEqual(re.search(r'const DEFAULT_SORT = "(\w+)";', source).group(1), DEFAULT_SORT)
+        self.assertEqual(DEFAULT_SORT, "discount")
+        # Declared before the state object that uses it.
+        self.assertLess(source.index("const DEFAULT_SORT"), source.index("let state = {"))
+        self.assertEqual(decode_query("")["sort"], "discount")
+        self.assertEqual(encode_state(decode_query("")), "", "the default sort leaves the URL clean")
+        self.assertEqual(encode_state(decode_query("sort=rank")), "sort=rank", "the old order is still a choice")

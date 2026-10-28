@@ -1354,12 +1354,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
     sort_select = (
         '<label class="field sort-field"><span>Sort</span><select id="sortSelect">'
-        '<option value="rank">Newest / biggest drop</option>'
+        '<option value="discount" selected>% off</option>'
+        '<option value="rank">Today\'s drops &amp; new first</option>'
         '<option value="score">Deal score</option>'
         '<option value="price">Sale price, low to high</option>'
         '<option value="price-desc">Sale price, high to low</option>'
         '<option value="original">Original price</option>'
-        '<option value="discount">% off</option>'
         '<option value="size">Size</option>'
         '<option value="store">Store</option>'
         '<option value="brand">Brand</option>'
