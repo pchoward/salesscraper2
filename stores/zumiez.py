@@ -412,18 +412,18 @@ class ZumiezSneakersScraper(ZumiezMultiScraper):
 
 class ZumiezProtectionScraper(ZumiezMultiScraper):
     """Helmets and pads on sale. The sale grid also lists items sold out in
-    every size, so each product page is checked and sold-out ones dropped."""
+    every size, so each product page is checked and those are marked sold out."""
 
     def __init__(self, urls):
         super().__init__("Protection", urls)
 
     def scrape(self):
-        from stores.stock import drop_sold_out
+        from stores.stock import mark_sold_out
 
         items = super().scrape()
         if items is None:
             return None
-        return drop_sold_out(items, "Zumiez", rendered=True)
+        return mark_sold_out(items, "Zumiez", rendered=True)
 
 
 # Sale listings of protective gear (helmets, pads, wrist guards), confirmed

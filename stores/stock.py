@@ -44,6 +44,20 @@ def stock_from_html(store, html):
     return None
 
 
+def listing_stock(store, html):
+    """``out_of_stock``, ``in_stock`` when the same status line says "in stock", else None."""
+    status = stock_from_html(store, html)
+    if status or not html:
+        return status
+    soup = BeautifulSoup(html, "html.parser")
+    name = (store or "").casefold()
+    selector = ".product-head-orderable-status" if "tactics" in name else ".ProductActions-Stock"
+    node = soup.select_one(selector)
+    if node is not None and "in stock" in node.get_text(" ", strip=True).casefold():
+        return "in_stock"
+    return None
+
+
 def _fetch_static(url, timeout=25):
     request = urllib.request.Request(
         url,
@@ -107,12 +121,14 @@ def _fetch_rendered(urls):
 MAX_IN_STOCK_CHECKS = 80
 
 
-def drop_sold_out(items, store, rendered=False, fetch_static=None, fetch_rendered=None, limit=MAX_IN_STOCK_CHECKS):
-    """The listings whose product page does not say out of stock.
+def mark_sold_out(items, store, rendered=False, fetch_static=None, fetch_rendered=None, limit=MAX_IN_STOCK_CHECKS):
+    """Every listing, with ``stock`` set from its product page.
 
     Some sale grids (Zumiez helmets and pads) list items that are sold out in
-    every size. Only a page that says so removes a listing; an unreadable
-    page, or one past ``limit``, keeps it.
+    every size. Those stay in the report, marked ``stock: out_of_stock`` and
+    "Sold out", so a watch can tell when they come back. ``in_stock`` is set
+    only when the page's status line says so. An unreadable page, or one past
+    ``limit``, sets nothing.
     """
     items = list(items or [])
     urls = [item.get("url") for item in items[:limit] if item.get("url")]
@@ -123,12 +139,19 @@ def drop_sold_out(items, store, rendered=False, fetch_static=None, fetch_rendere
     else:
         fetch = fetch_static or _fetch_static
         pages = {url: fetch(url) for url in urls}
-    sold_out = {url for url, html in pages.items() if stock_from_html(store, html) == "out_of_stock"}
+    status = {url: listing_stock(store, html) for url, html in pages.items()}
+    sold_out = sum(value == "out_of_stock" for value in status.values())
     if sold_out:
-        logger.info("%s: %s listings are out of stock on their product page", store, len(sold_out))
+        logger.info("%s: %s listings are out of stock on their product page", store, sold_out)
     if len(items) > limit:
         logger.warning("%s: only the first %s of %s listings were stock-checked", store, limit, len(items))
-    return [item for item in items if item.get("url") not in sold_out]
+    for item in items:
+        value = status.get(item.get("url"))
+        if value:
+            item["stock"] = value
+        if value == "out_of_stock":
+            item["availability"] = "Sold out"
+    return items
 
 
 def confirm_stock(history, current_data, skip_keys=None):

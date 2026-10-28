@@ -1051,7 +1051,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "hit_low": hit_low,
                 "image": image,
                 "trend": trend,
-                "availability": _availability_label(entry, present=True),
+                "availability": "Sold out" if item.get("stock") == "out_of_stock" else _availability_label(entry, present=True),
+                "sold_out": item.get("stock") == "out_of_stock",
                 "prices": prices,
                 "spark_end": today,
                 "chain": _chain(prices),
@@ -2141,7 +2142,7 @@ def _row_html(record):
         f"<td>{size_html}</td>"
         f'<td class="product-name">{_product_link(item)}'
         f'<div class="row-meta">{_badge_html(_shown_badges(record), record["listed"])}'
-        f'{_low_mark(record)}{_stage_html(record.get("stage"))}</div></td>'
+        f'{_low_mark(record)}{_stage_html(record.get("stage"))}{_sold_out_pill(record)}</div></td>'
         f'<td class="price-cell"><button type="button" class="price-btn" data-id="{record["id"]}">'
         f'<span class="price price-new">{_money(item.get("price_new"), currency)}</span></button>'
         f'{_spark_html(record)}{drop_html}</td>'
@@ -2243,11 +2244,19 @@ def _card_status(record):
     return "".join(parts)
 
 
+def _sold_out_pill(record):
+    if not record.get("sold_out"):
+        return ""
+    return ' <span class="pill pill-soldout" title="The store\'s product page says out of stock">Sold out</span>'
+
+
 def _card_html(record):
     item = record["item"]
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
     discount = _discount_class(item.get("price_new"), item.get("price_old"))
     listed = " on-list" if record["listed"] else ""
+    if record.get("sold_out"):
+        listed += " sold-out"
     currency = item.get("currency")
     symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
     # The percent is the store's own markdown versus its list price.
@@ -2283,7 +2292,7 @@ def _card_html(record):
         '<button type="button" class="card-quick">Quick view</button></div>'
         f'<h3 class="product-name">{_product_link(item)}</h3>'
         f'<div class="card-sparkline">{_spark_html(record, width=156)}</div>'
-        f'<p class="card-offer">{off_html}</p>'
+        f'<p class="card-offer">{off_html}{_sold_out_pill(record)}</p>'
         '<p class="card-prices">'
         f'{avg_html}<span class="now-price">Now {_money(item.get("price_new"), currency)}</span></p>'
         f'<p class="card-meta">{escape(meta)}</p>'

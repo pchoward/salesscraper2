@@ -211,18 +211,18 @@ class TacticsDecksScraper(TacticsScraper):
 
 
 class TacticsProtectionScraper(TacticsScraper):
-    """Protective gear on sale, without listings their product page says are sold out."""
+    """Protective gear on sale, marked sold out when the product page says so."""
 
     def __init__(self, url):
         super().__init__("Tactics", url, "Protection")
 
     def scrape(self):
-        from stores.stock import drop_sold_out
+        from stores.stock import mark_sold_out
 
         items = super().scrape()
         if items is None:
             return None
-        return drop_sold_out(items, "Tactics")
+        return mark_sold_out(items, "Tactics")
 
 
 # Sale listing of protective gear, confirmed by the owner in a browser on
