@@ -13,6 +13,7 @@ from stores.skatedeluxe import DISABLED_REASON as DELUXE_REASON
 from stores.skatedeluxe import ENABLED as DELUXE_ENABLED
 from stores.skatedeluxe import scrapers as skatedeluxe_scrapers
 from stores.skatewarehouse import scrapers as skatewarehouse_scrapers
+from stores.socal import scrapers as socal_scrapers
 from stores.spot import scrapers as spot_scrapers
 from stores.tactics import scrapers as tactics_scrapers
 from stores.tgm import scrapers as tgm_scrapers
@@ -32,6 +33,7 @@ def build_scrapers():
     scrapers.extend(kinetic_scrapers())
     scrapers.extend(spot_scrapers())
     scrapers.extend(exodus_scrapers())
+    scrapers.extend(socal_scrapers())
     if DELUXE_ENABLED:
         scrapers.extend(skatedeluxe_scrapers())
     else:

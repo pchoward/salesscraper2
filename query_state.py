@@ -102,6 +102,7 @@ STORE_SLUGS = {
     "kinetic": "Kinetic",
     "spot": "SPoT",
     "exodus": "Exodus",
+    "socal": "SoCal",
     "skatedeluxe": "Skate Deluxe",
     "muirskate": "Muir Skate",
 }

@@ -88,6 +88,7 @@ STORE_HOSTS = frozenset({
     "kineticskateboarding.com", "www.kineticskateboarding.com",
     "skateparkoftampa.com", "www.skateparkoftampa.com",
     "exodusrideshop.com", "www.exodusrideshop.com",
+    "socalskateshop.com", "www.socalskateshop.com",
     "www.skatedeluxe.com", "muirskate.com", "www.muirskate.com",
 })
 _TEXT = {"brand": 60, "name": 80, "note": 80, "label": 120}

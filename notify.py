@@ -48,6 +48,7 @@ _STORE_COLORS = {
     "kinetic": ("#e0f2fe", "#0369a1"),
     "spot": ("#fef9c3", "#a16207"),
     "exodus": ("#ecfccb", "#4d7c0f"),
+    "socal": ("#ffedd5", "#c2410c"),
     "skatedeluxe": ("#ede9fe", "#6d28d9"),
     "muirskate": ("#ccfbf1", "#0f766e"),
 }
