@@ -153,6 +153,16 @@ class HtmlStoreTests(unittest.TestCase):
         robots = (Path(__file__).resolve().parent / "tests" / "fixtures" / "zumiez_robots.txt").read_text()
         self.assertTrue(zumiez.explicitly_allowed(zumiez.star_rules(robots), zumiez.PROTECTION_URLS[0]))
 
+    def test_skate_warehouse_uses_its_category_pages_with_a_markdown_required(self):
+        scraper = next(s for s in build_scrapers() if (s.name, s.part) == ("SkateWarehouse", "Protection"))
+        self.assertEqual(scraper.urls, [
+            "https://www.skatewarehouse.com/helmets.html",
+            "https://www.skatewarehouse.com/kneepads.html",
+            "https://www.skatewarehouse.com/elbowpad.html",
+            "https://www.skatewarehouse.com/wristguards.html",
+        ])
+        self.assertTrue(scraper.require_markdown, "full-price gear on these pages is never listed")
+
     def test_a_confirmed_url_adds_the_part(self):
         with mock.patch.object(zumiez, "PROTECTION_URLS", ("https://www.zumiez.com/example-protection.html",)):
             self.assertIn("Protection", [scraper.part for scraper in zumiez.scrapers()])

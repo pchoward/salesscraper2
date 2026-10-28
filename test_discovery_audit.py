@@ -18,8 +18,8 @@ class DiscoveryAuditTests(unittest.TestCase):
     def test_inventory_tracks_current_four_retailers_and_pagination(self):
         rows = inventory()
         from stores import skatewarehouse, tactics, zumiez
-        # One row per configured store/category pair (27 with Protection at
-        # CCS, Zumiez, and Tactics; one more once Skate Warehouse has a URL).
+        # One row per configured store/category pair (28 with Protection at
+        # CCS, Zumiez, Tactics, and Skate Warehouse).
         self.assertEqual(len(rows), sum(len(m.scrapers()) for m in (ccs, skatewarehouse, tactics, zumiez)))
         self.assertGreaterEqual(len(rows), 25)
         keyed = {(r['store'], r['category']): r for r in rows}
