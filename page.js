@@ -3841,10 +3841,6 @@ function showInsights() {
     paintNav();
 }
 
-const QUICK_OPEN_MS = 300;
-const QUICK_CLOSE_MS = 180;
-let quickTimer = 0;
-let quickCloseTimer = 0;
 let quickCard = null;
 let quickPinned = false;
 let quickForceSheet = false;
@@ -4032,6 +4028,98 @@ function quickGalleryImages(item, card) {
     return [...new Set(urls.filter(url => typeof url === "string" && /^https?:\/\//i.test(url)))];
 }
 
+function clearQuickCrop(image, frame) {
+    if (frame && frame.style) {
+        frame.style.width = "";
+        frame.style.height = "";
+    }
+    if (!image || !image.style) return;
+    ["left", "top", "width", "height", "maxWidth", "maxHeight", "objectFit", "margin"].forEach(key => {
+        image.style[key] = "";
+    });
+    image._quickBox = null;
+}
+
+function layoutQuickCrop(image, frame, box, attempt) {
+    if (!image || !frame || !box || image.hidden) return;
+    const iw = Number(box.iw) || 0;
+    const ih = Number(box.ih) || 0;
+    const bw = Number(box.w) || 0;
+    const bh = Number(box.h) || 0;
+    if (!iw || !ih || !bw || !bh) return;
+    const panel = frame.closest ? frame.closest("#quickView") : null;
+    const popover = !!(panel && panel.classList && !panel.classList.contains("is-sheet"));
+    const ar = bw / bh;
+    const parentW = frame.parentElement && frame.parentElement.clientWidth > 40
+        ? frame.parentElement.clientWidth
+        : (popover ? 240 : 360);
+    const maxH = popover
+        ? (window.innerHeight <= 800 ? 168 : 250)
+        : Math.min(320, Math.round((window.innerHeight || 800) * 0.42));
+    const maxW = popover ? Math.min(250, parentW) : parentW;
+    let h = maxH;
+    let w = h * ar;
+    if (w > maxW) {
+        w = maxW;
+        h = w / ar;
+    }
+    const frameW = Math.max(1, Math.round(w));
+    const frameH = Math.max(1, Math.round(h));
+    if (frameW < 8 || frameH < 8) {
+        if ((attempt || 0) >= 4) return;
+        const retry = () => layoutQuickCrop(image, frame, box, (attempt || 0) + 1);
+        if (typeof requestAnimationFrame === "function") requestAnimationFrame(retry);
+        else setTimeout(retry, 32);
+        return;
+    }
+    frame.style.width = frameW + "px";
+    frame.style.height = frameH + "px";
+    frame.style.marginLeft = popover ? "0" : "auto";
+    frame.style.marginRight = popover ? "0" : "auto";
+    const scale = frameW / bw;
+    image.style.position = "absolute";
+    image.style.width = (iw * scale) + "px";
+    image.style.height = (ih * scale) + "px";
+    image.style.maxWidth = "none";
+    image.style.maxHeight = "none";
+    image.style.objectFit = "fill";
+    image.style.margin = "0";
+    image.style.left = ((frameW - bw * scale) / 2 - box.x * scale) + "px";
+    image.style.top = ((frameH - bh * scale) / 2 - box.y * scale) + "px";
+}
+
+function scheduleQuickCrop(image, frame) {
+    const src = image && image.getAttribute ? image.getAttribute("src") : "";
+    if (!src || typeof Image !== "function") return;
+    const probe = new Image();
+    probe.crossOrigin = "anonymous";
+    probe.onload = () => {
+        if (!image.getAttribute || image.getAttribute("src") !== src || image.hidden) return;
+        let box = null;
+        try {
+            box = measureContent(probe);
+        } catch (err) {
+            box = null;
+        }
+        if (!box) return;
+        image._quickBox = box;
+        layoutQuickCrop(image, frame, box, 0);
+        const panel = document.getElementById("quickView");
+        if (panel && !panel.hidden && !panel.classList.contains("is-sheet") && quickCard && typeof placeQuickView === "function") {
+            placeQuickView(quickCard);
+        }
+    };
+    probe.src = src;
+}
+
+function refitQuickPhoto() {
+    if (typeof document === "undefined" || !document.querySelector) return;
+    const frame = document.querySelector("#quickView .quick-image-frame");
+    const image = frame && frame.querySelector("img");
+    if (!image || !image._quickBox) return;
+    layoutQuickCrop(image, frame, image._quickBox, 0);
+}
+
 function appendQuickGallery(product, item, card) {
     const gallery = document.createElement("div");
     gallery.className = "quick-gallery";
@@ -4053,9 +4141,11 @@ function appendQuickGallery(product, item, card) {
         index = (next + images.length) % images.length;
         image.hidden = false;
         fallback.hidden = true;
+        clearQuickCrop(image, frame);
         image.alt = (item.name || "Product photo") + (images.length > 1 ? " — photo " + (index + 1) + " of " + images.length : "");
         image.src = images[index];
         if (counter) counter.textContent = (index + 1) + " / " + images.length;
+        scheduleQuickCrop(image, frame);
     }
     image.addEventListener("error", () => {
         image.hidden = true;
@@ -4151,7 +4241,7 @@ function fillQuickView(card) {
         event.stopPropagation();
         closeQuickView();
     });
-    head.append(heading, close);
+    head.append(close);
     body.appendChild(head);
     const product = document.createElement("div");
     product.className = "quick-product";
@@ -4166,7 +4256,7 @@ function fillQuickView(card) {
     const amount = document.createElement("strong");
     amount.textContent = quickMoney(facts.symbol, card.dataset.price);
     price.appendChild(amount);
-    identity.append(store, price);
+    identity.append(heading, store, price);
     appendQuickListLine(identity, card.dataset, facts);
     const badgeText = quickDealBadge(card.dataset, card);
     if (badgeText) {
@@ -4913,6 +5003,7 @@ function quickTopLimit() {
 function placeQuickView(card) {
     const panel = document.getElementById("quickView");
     if (!panel || panel.classList.contains("is-sheet") || !card) return;
+    refitQuickPhoto();
     const rect = card.getBoundingClientRect();
     if (rect.width < 40 || rect.height < 40) {
         closeQuickView();
@@ -4920,7 +5011,7 @@ function placeQuickView(card) {
     }
     const margin = 8;
     const topLimit = quickTopLimit();
-    const width = Math.min(920, window.innerWidth - margin * 2);
+    const width = Math.min(460, window.innerWidth - margin * 2);
     panel.style.width = width + "px";
     panel.style.height = "auto";
     const height = panel.getBoundingClientRect().height;
@@ -4942,8 +5033,6 @@ function placeQuickView(card) {
 }
 
 function closeQuickView() {
-    clearTimeout(quickTimer);
-    clearTimeout(quickCloseTimer);
     const panel = document.getElementById("quickView");
     const returnFocus = quickPinned && panel && panel.contains(document.activeElement)
         && quickCard && quickCard.querySelector(".card-quick, .card-more");
@@ -4973,8 +5062,6 @@ function openQuickView(card, pinned, forceSheet) {
     if (!card) return;
     quickForceSheet = !!forceSheet;
     if (!quickForceSheet) groupReturnFocus = null;
-    clearTimeout(quickTimer);
-    clearTimeout(quickCloseTimer);
     quickCard = card;
     quickPinned = !!pinned;
     const panel = document.getElementById("quickView");
@@ -4995,46 +5082,16 @@ function openQuickView(card, pinned, forceSheet) {
         placeQuickView(card);
     }
     setQuickExpanded(true);
+    refitQuickPhoto();
     if (pinned) {
         const close = panel.querySelector(".quick-close");
         if (close) close.focus();
     }
 }
 
-function onQuickEnter(card) {
-    if (!card || quickIsSheet() || quickPinned) return;
-    clearTimeout(quickCloseTimer);
-    if (quickCard === card && isQuickOpen()) {
-        clearTimeout(quickTimer);
-        return;
-    }
-    if (quickCard && quickCard !== card) closeQuickView();
-    clearTimeout(quickTimer);
-    quickTimer = setTimeout(() => openQuickView(card, false), QUICK_OPEN_MS);
-}
-
-function onQuickLeave(card) {
-    if (quickPinned) return;
-    clearTimeout(quickTimer);
-    if (!isQuickOpen() || quickCard !== card) return;
-    clearTimeout(quickCloseTimer);
-    quickCloseTimer = setTimeout(() => {
-        if (!quickPinned) closeQuickView();
-    }, QUICK_CLOSE_MS);
-}
-
 function wireQuickView() {
     const panel = document.getElementById("quickView");
     if (!panel) return;
-    panel.addEventListener("mouseenter", () => {
-        if (!quickPinned) clearTimeout(quickCloseTimer);
-    });
-    panel.addEventListener("mouseleave", event => {
-        if (quickPinned) return;
-        const next = event.relatedTarget;
-        if (next && quickCard && quickCard.contains(next)) return;
-        onQuickLeave(quickCard);
-    });
     panel.addEventListener("click", event => {
         if (!panel.classList.contains("is-sheet")) return;
         if (event.target.closest(".quick-panel")) return;
@@ -5063,10 +5120,10 @@ function wireQuickView() {
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
         if (event.target.closest("#quickView, .card-more, .card-quick, .card-alert, .group-quick, .group-chart, .price-btn, #alertsRoot, #navAlerts")) return;
-        // A tap on the card or table row is what opens this view. The same
-        // click must not count as an outside click and dismiss it.
+        // A phone tap on the card opens this view in the capture handler. That
+        // same tap must not count as an outside click and dismiss it.
         const deal = event.target.closest(".deal-row, .deal-card");
-        if (deal && !event.target.closest("a, button, input, select, label")) return;
+        if (deal && quickIsSheet() && !event.target.closest("a, button, input, select, label")) return;
         closeQuickView();
     });
 }
@@ -5180,6 +5237,11 @@ function wireDealEvents() {
         }
         const row = event.target.closest(".deal-row, .deal-card");
         if (!row || event.target.closest("a, button, input, select, label")) return;
+        // Desktop cards open only from the Quick view button. A phone tap
+        // still opens the same photo view, and table rows keep their click.
+        if (row.classList.contains("deal-card") && !quickIsSheet()) return;
+        event.preventDefault();
+        event.stopPropagation();
         openQuickView(row, true);
     }, true);
     document.addEventListener("keydown", event => {
@@ -5187,8 +5249,19 @@ function wireDealEvents() {
             moveGroupOffer(event);
         }
         if (event.key !== "Enter" && event.key !== " ") return;
+        const quickBtn = event.target.closest && event.target.closest(".card-quick");
+        if (quickBtn) {
+            event.preventDefault();
+            event.stopPropagation();
+            const card = quickBtn.closest(".deal-card");
+            if (!card) return;
+            if (isQuickOpen() && quickCard === card && quickPinned) closeQuickView();
+            else openQuickView(card, true);
+            return;
+        }
         const row = event.target.closest(".deal-row, .deal-card");
         if (!row || event.target.closest("a, button, input, select, label")) return;
+        if (row.classList.contains("deal-card") && !quickIsSheet()) return;
         event.preventDefault();
         openQuickView(row, true);
     });
@@ -5206,19 +5279,10 @@ function wireDealEvents() {
             const anchor = cell.querySelector(".score-info") || cell.querySelector(".score-btn") || cell;
             placeScoreFloat(cell, anchor);
         }
-        const card = event.target.closest(".deal-card");
-        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
-        if (event.relatedTarget && event.relatedTarget.closest && event.relatedTarget.closest("#quickView")) return;
-        onQuickEnter(card);
     });
     document.addEventListener("mouseout", event => {
         const spark = event.target.closest(".spark-hit");
         if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
-        const card = event.target.closest(".deal-card");
-        if (!card || (event.relatedTarget && card.contains(event.relatedTarget))) return;
-        const next = event.relatedTarget;
-        if (next && next.closest && next.closest("#quickView")) return;
-        onQuickLeave(card);
     });
     document.addEventListener("focusin", event => {
         const spark = event.target.closest(".spark-hit");
@@ -5239,6 +5303,23 @@ function wireDealEvents() {
         if (spark && !(event.relatedTarget && spark.contains(event.relatedTarget)) && !sparkPinned) hideSparkTip();
     });
     wireQuickView();
+}
+
+function onDocumentEscape(event) {
+    if (!event || event.key !== "Escape") return;
+    if (typeof isAlertsOpen === "function" && isAlertsOpen()) {
+        if (event.preventDefault) event.preventDefault();
+        closeAlerts();
+        return;
+    }
+    hideSparkTip();
+    closeDrawer();
+    closeSparkPanel();
+    closeProduct();
+    closeQuickView();
+    const drawer = document.getElementById("filterDrawer");
+    if (drawer) drawer.classList.remove("is-open");
+    document.body.classList.remove("filters-open");
 }
 
 function backdropPixel(r, g, b, a) {
@@ -5770,23 +5851,7 @@ function init() {
     });
     const close = document.getElementById("drawerClose");
     if (close) close.addEventListener("click", closeDrawer);
-    document.addEventListener("keydown", event => {
-        if (event.key === "Escape") {
-            if (typeof isAlertsOpen === "function" && isAlertsOpen()) {
-                event.preventDefault();
-                closeAlerts();
-                return;
-            }
-            hideSparkTip();
-            closeDrawer();
-            closeSparkPanel();
-            closeProduct();
-            closeQuickView();
-            const drawer = document.getElementById("filterDrawer");
-            if (drawer) drawer.classList.remove("is-open");
-            document.body.classList.remove("filters-open");
-        }
-    });
+    document.addEventListener("keydown", onDocumentEscape);
     document.addEventListener("click", event => {
         if (sparkPinned && !event.target.closest(".spark-hit")) hideSparkTip();
         const panel = document.getElementById("sparkPanel");

@@ -11,12 +11,13 @@ class QuickViewTests(unittest.TestCase):
         mobile = Path(__file__).with_name("mobile.css").read_text(encoding="utf-8")
         page = Path(__file__).with_name("page.py").read_text(encoding="utf-8")
         frame = css.split(".quick-image-frame {", 1)[1].split("}", 1)[0]
-        self.assertIn("height: 380px", frame)
+        self.assertIn("height: 190px", frame)
+        self.assertIn("object-fit: cover", css[css.index(".quick-image-frame img"):css.index(".quick-image-frame img") + 280])
         self.assertIn(".quick-more > summary", css)
         self.assertIn(".quick-list", css)
         self.assertIn(".quick-badge", css)
         self.assertIn(".quick-specs-table", css)
-        self.assertIn(".quick-product { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);", css)
+        self.assertIn(".quick-product { display: grid; grid-template-columns: auto minmax(0, 1fr);", css)
         self.assertIn(".deal-card:hover .card-quick", css)
         self.assertIn(".deal-card:focus-within .card-quick", css)
         self.assertIn("(hover: hover) and (pointer: fine)", css)
@@ -30,7 +31,7 @@ class QuickViewTests(unittest.TestCase):
         self.assertIn(".card-quick", closer)
         product = mobile[mobile.index("#quickView .quick-product"):]
         self.assertIn("grid-template-columns: minmax(0, 1fr)", product)
-        self.assertIn("min-height: 220px", mobile)
+        self.assertIn("min-height: 180px", mobile)
         self.assertIn("#quickView .quick-more > summary", mobile)
         self.assertIn("min-height: 2.75rem", mobile[mobile.index("#quickView .quick-more > summary"):])
 
@@ -82,6 +83,8 @@ const closeQuickView = () => { throw new Error('Unexpected close'); };
 assert.deepEqual(quickGalleryImages(item, card), ['https://example.com/front.jpg', 'https://example.com/back.jpg']);
 fillQuickView(card);
 assert.equal(body.querySelector('.quick-title').textContent, item.name);
+assert.equal(body.querySelector('.quick-head').querySelector('.quick-title'), null, 'title sits in the right column');
+assert.equal(body.querySelector('.quick-identity').querySelector('.quick-title').textContent, item.name);
 assert.equal(body.querySelector('.quick-kicker').textContent, 'CCS');
 assert.equal(body.querySelector('.quick-price').children[0].textContent, '$70.00');
 assert.equal(body.querySelector('.quick-close').attrs['aria-label'], 'Close quick view');
@@ -123,9 +126,9 @@ item.image='';image.attrs.src=''; fillQuickView(card);
 assert.equal(body.querySelector('img').hidden,true);
 assert.equal(body.querySelector('.quick-image-missing').hidden,false,'missing photo fallback');
 placeQuickView(card);
-assert.equal(panel.style.width, '920px');
+assert.equal(panel.style.width, '460px');
 assert.equal(panel.style.height, 'auto');
-assert.equal(panel.style.left, '270px', 'flip left at right edge');
+assert.equal(panel.style.left, '730px', 'flip left at right edge');
 assert.equal(panel.style.top, '462px', 'flip upward at bottom edge');
 anchor = {...anchor, left: -30, right: 160, top: 0};
 placeQuickView(card);
@@ -294,7 +297,8 @@ const dropCard = cardFor('shoe', {
 }, 'Dropped from $70.00 on Oct 17', 'pill-newlow', 'New low');
 fillQuickView(dropCard);
 assert.equal(body.querySelector('.quick-title').textContent, 'Nike SB Dunk');
-assert.equal(body.querySelector('.quick-head').querySelector('.quick-title') !== null, true);
+assert.equal(body.querySelector('.quick-head').querySelector('.quick-title'), null);
+assert.equal(body.querySelector('.quick-identity').querySelector('.quick-title').textContent, 'Nike SB Dunk');
 assert.equal(body.querySelector('.quick-kicker').textContent, 'CCS · Anti Hero');
 assert.equal(body.querySelector('.quick-gallery-controls').children[1].textContent, '1 / 2');
 assert.equal(body.querySelector('.quick-product').children[0].className, 'quick-gallery');
@@ -408,6 +412,231 @@ assert.equal(body.querySelector('.quick-gallery').tag, 'div');
         outside = closer[closer.index('document.addEventListener("click"'):]
         self.assertIn('closest(".deal-row, .deal-card")', outside)
         self.assertIn('!event.target.closest("a, button, input, select, label")', outside)
+
+    def test_quick_view_opens_from_the_button_and_closes_cleanly(self):
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        self.assertNotIn("QUICK_OPEN_MS", source)
+        self.assertNotIn("QUICK_CLOSE_MS", source)
+        self.assertNotIn("onQuickEnter", source)
+        self.assertNotIn("onQuickLeave", source)
+        self.assertNotIn("setTimeout(() => openQuickView", source)
+        self.assertIn('document.addEventListener("keydown", onDocumentEscape)', source)
+        hover = source[source.index('addEventListener("mouseover"'):source.index('addEventListener("mouseout"')]
+        self.assertNotIn("openQuickView", hover)
+        logic = source[source.index("function quickGalleryImages("):source.index("function backdropPixel(")]
+        script = r'''
+const assert = require("node:assert/strict");
+let quickCard = null;
+let quickPinned = false;
+let quickForceSheet = false;
+let groupReturnFocus = null;
+let sparkPinned = false;
+function quickIsSheet() {
+  if (window.innerWidth <= 800) return true;
+  return window.matchMedia("(pointer: coarse)").matches;
+}
+function isQuickOpen() {
+  const panelNode = document.getElementById("quickView");
+  return !!(panelNode && !panelNode.hidden);
+}
+const queued = [];
+const setTimeout = (fn) => { const id = queued.length + 1; queued.push({id, fn}); return id; };
+const clearTimeout = (id) => { const index = queued.findIndex(item => item.id === id); if (index >= 0) queued.splice(index, 1); };
+function flush() { const batch = queued.splice(0, queued.length); batch.forEach(item => item.fn()); }
+function hideSparkTip() {}
+function closeDrawer() {}
+function closeSparkPanel() {}
+function closeProduct() {}
+function toggleStar() {}
+function dealNode() { return null; }
+function cardFor() { return null; }
+function selectGroupOffer() {}
+function moveGroupOffer() {}
+function showSparkTip() {}
+function nearestPoint() { return null; }
+function placeScoreFloat() {}
+function quickMoney(symbol, price) { return symbol + Number(price).toFixed(2); }
+function quickPercent() { return "20% vs list"; }
+function catalog() {
+  return { generated: "2026-10-28", items: {
+    a: {name: "Deck A", store: "Tactics", brand: "Misc", image: "https://example.com/a.jpg"},
+    b: {name: "Deck B", store: "CCS", brand: "CCS", image: "https://example.com/b.jpg"}
+  }};
+}
+function quickFacts() {
+  return {specs: [{label: "Width", value: "9.75\""}, {label: "In stock", value: "8, 9"}], symbol: "$",
+    viewUrl: "https://example.com/p", viewLabel: "View at Tactics", points: [], rows: [], stores: [], markers: []};
+}
+class Element {
+  constructor(tag) {
+    this.tag = tag; this.tagName = String(tag || "div").toUpperCase();
+    this.children = []; this.style = {}; this.attrs = {}; this.className = "";
+    this.events = {}; this.dataset = {}; this._text = ""; this.hidden = false;
+    this.id = ""; this.parentElement = null;
+  }
+  append(...nodes) { nodes.forEach(node => { if (!node) return; node.parentElement = this; this.children.push(node); }); }
+  appendChild(node) { this.append(node); }
+  replaceChildren(...nodes) {
+    this.children.forEach(node => { if (node) node.parentElement = null; });
+    this.children = [];
+    this.append(...nodes);
+  }
+  setAttribute(name, value) { this.attrs[name] = String(value); if (name === "id") this.id = String(value); if (name === "class") this.className = String(value); }
+  getAttribute(name) { return this.attrs[name] || null; }
+  addEventListener(name, callback) { this.events[name] = callback; }
+  matches(selector) {
+    if (!selector) return false;
+    if (selector.includes(",")) return selector.split(",").some(part => this.matches(part.trim()));
+    if (selector.startsWith("#")) return this.id === selector.slice(1);
+    if (selector.startsWith(".")) {
+      const name = selector.slice(1).split("[")[0];
+      return name.split(".").filter(Boolean).every(part => this.className.split(/\s+/).includes(part));
+    }
+    return this.tag === selector.toLowerCase();
+  }
+  querySelectorAll(selector) {
+    if (selector === "*") return this.children.flatMap(child => [child, ...child.querySelectorAll("*")]);
+    if (selector.includes(",")) {
+      const seen = new Set();
+      const out = [];
+      selector.split(",").forEach(part => this.querySelectorAll(part.trim()).forEach(node => {
+        if (!seen.has(node)) { seen.add(node); out.push(node); }
+      }));
+      return out;
+    }
+    return this.children.flatMap(child => [child, ...child.querySelectorAll("*")]).filter(node => node.matches(selector));
+  }
+  querySelector(selector) { return this.querySelectorAll(selector)[0] || null; }
+  closest(selector) {
+    let node = this;
+    while (node) {
+      if (node.matches && node.matches(selector)) return node;
+      node = node.parentElement || null;
+    }
+    return null;
+  }
+  contains(node) {
+    if (!node) return false;
+    if (node === this) return true;
+    return this.children.some(child => child === node || (child.contains && child.contains(node)));
+  }
+  focus() {}
+  get textContent() { return this.children.length ? this.children.map(child => child.textContent).join("") : this._text; }
+  set textContent(value) { this._text = String(value); this.children = []; }
+  get classList() {
+    const el = this;
+    return {
+      contains: name => el.className.split(/\s+/).includes(name),
+      add: name => { if (!el.className.split(/\s+/).includes(name)) el.className = (el.className + " " + name).trim(); },
+      remove: name => { el.className = el.className.split(/\s+/).filter(part => part && part !== name).join(" "); },
+      toggle(name, force) {
+        const on = el.className.split(/\s+/).includes(name);
+        const next = force === undefined ? !on : !!force;
+        if (next) { if (!on) el.className = (el.className + " " + name).trim(); }
+        else el.className = el.className.split(/\s+/).filter(part => part && part !== name).join(" ");
+        return next;
+      }
+    };
+  }
+  getBoundingClientRect() { return {left: 0, top: 0, right: 0, bottom: 0, width: 200, height: 240}; }
+}
+const listeners = [];
+const panel = new Element("div");
+panel.id = "quickView";
+panel.hidden = true;
+const dialog = new Element("div");
+dialog.className = "quick-panel";
+const body = new Element("div");
+body.id = "quickBody";
+dialog.append(body);
+panel.append(dialog);
+function makeCard(id) {
+  const card = new Element("article");
+  card.className = "deal-card";
+  card.dataset = {id: id, price: "119.95", original: "149.94", discount: "20", store: "Tactics", lowest: "1"};
+  card.getBoundingClientRect = () => ({left: 120, right: 300, top: 180, bottom: 460, width: 180, height: 280});
+  const button = new Element("button");
+  button.className = "card-quick";
+  card.append(button);
+  return {card, button};
+}
+const cardA = makeCard("a");
+const cardB = makeCard("b");
+const docBody = new Element("body");
+const document = {
+  addEventListener(type, fn, capture) { listeners.push({type, fn, capture: !!capture}); },
+  getElementById(id) {
+    if (id === "quickView") return panel;
+    if (id === "quickBody") return body;
+    return null;
+  },
+  createElement(tag) { return new Element(tag); },
+  querySelector() { return null; },
+  querySelectorAll() { return []; },
+  activeElement: null,
+  body: docBody
+};
+const window = {
+  innerWidth: 1200,
+  innerHeight: 900,
+  matchMedia() { return {matches: false}; },
+  addEventListener() {}
+};
+function dispatch(type, target, extra) {
+  const event = {type, target, key: extra && extra.key, relatedTarget: extra && extra.relatedTarget, clientX: 0, clientY: 0,
+    preventDefault() {}, stopPropagation() { event.stopped = true; }};
+  listeners.filter(item => item.type === type && item.capture).forEach(item => { if (!event.stopped) item.fn(event); });
+  if (!event.stopped && target && target.events && target.events[type]) target.events[type](event);
+  listeners.filter(item => item.type === type && !item.capture).forEach(item => { if (!event.stopped) item.fn(event); });
+  return event;
+}
+'''
+        script += logic + r'''
+wireDealEvents();
+dispatch("mouseover", cardA.card);
+dispatch("mouseout", cardA.card);
+flush();
+assert.equal(isQuickOpen(), false, "hover does not open");
+assert.equal(queued.length, 0, "hover does not arm a timer");
+dispatch("click", cardA.card);
+flush();
+assert.equal(isQuickOpen(), false, "clicking the card does not open");
+dispatch("keydown", cardA.button, {key: "Enter"});
+assert.equal(isQuickOpen(), true, "Enter on Quick view opens");
+assert.equal(quickCard.dataset.id, "a");
+assert.equal(body.querySelector(".quick-title").textContent, "Deck A");
+dispatch("keydown", cardB.button, {key: " "});
+assert.equal(isQuickOpen(), true);
+assert.equal(quickCard.dataset.id, "b");
+assert.equal(body.querySelector(".quick-title").textContent, "Deck B");
+for (let round = 0; round < 4; round++) {
+  dispatch("click", cardA.button);
+  flush();
+  assert.equal(isQuickOpen(), true, "card A stays open, round " + round);
+  assert.equal(quickCard.dataset.id, "a");
+  assert.equal(body.querySelector(".quick-title").textContent, "Deck A");
+  dispatch("click", cardB.button);
+  flush();
+  assert.equal(isQuickOpen(), true, "card B stays open, round " + round);
+  assert.equal(quickCard.dataset.id, "b");
+  assert.equal(body.querySelector(".quick-title").textContent, "Deck B");
+}
+onDocumentEscape({key: "Escape", preventDefault() {}});
+assert.equal(isQuickOpen(), false, "Escape closes");
+assert.equal(quickCard, null);
+dispatch("click", cardA.button);
+assert.equal(isQuickOpen(), true);
+body.querySelector(".quick-close").events.click({preventDefault() {}, stopPropagation() {}});
+assert.equal(isQuickOpen(), false, "X closes");
+dispatch("click", cardA.card);
+assert.equal(isQuickOpen(), false);
+window.innerWidth = 390;
+dispatch("click", cardB.card);
+assert.equal(isQuickOpen(), true, "a phone tap still opens");
+assert.equal(quickCard.dataset.id, "b");
+'''
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
 
 
 if __name__ == "__main__":
