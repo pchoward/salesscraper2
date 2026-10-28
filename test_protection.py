@@ -301,3 +301,36 @@ class SoldOutTests(unittest.TestCase):
 
         self.assertIs(_stock({"stock": "out_of_stock"}, {}), False)
         self.assertIs(_stock({"stock": "in_stock"}, {}), True)
+
+
+class SoldOutSortTests(unittest.TestCase):
+    def test_sold_out_listings_sort_last_whatever_the_sort(self):
+        import json
+        import subprocess
+        from pathlib import Path
+
+        sold = dict(_gear("Pro-Tec Classic Black & Checkered Skateboard Helmet", "Zumiez",
+                          url="https://www.zumiez.com/protec-checkered.html", price="14.99", old="39.95"), stock="out_of_stock")
+        fine = _gear("Pro-Tec Low Pro Certified Helmet", "Zumiez", url="https://www.zumiez.com/lowpro.html", price="49.99", old="79.95")
+        html = build_report_html({"Zumiez_Protection": [sold, fine]}, {}, generated_at="2026-10-28T12:00:00+00:00")
+        self.assertRegex(html, r'data-url="https://www.zumiez.com/protec-checkered.html" data-soldout="1"')
+        self.assertRegex(html, r'data-url="https://www.zumiez.com/lowpro.html" data-soldout="0"')
+        source = (Path(__file__).resolve().parent / "page.js").read_text(encoding="utf-8")
+        start = source.index("const SORT_NUMERIC")
+        end = source.index("function sortBy(")
+        script = source[start:end] + """
+const row = (soldout, discount, price, rank) => ({ dataset: { soldout, discount, price, rank } });
+const rows = [row("1", "62", "14.99", "0"), row("0", "37", "49.99", "1"), row("0", "20", "9.99", "2")];
+const out = {};
+for (const [key, dir] of [["discount", "desc"], ["price", "asc"], ["rank", "asc"]]) {
+  out[key] = rows.slice().sort((a, b) => compareSort(a, b, key, dir)).map(r => r.dataset.discount);
+}
+console.log(JSON.stringify(out));
+"""
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout), {
+            "discount": ["37", "20", "62"],  # 62% is the best discount, but it is sold out
+            "price": ["20", "37", "62"],
+            "rank": ["37", "20", "62"],
+        })
