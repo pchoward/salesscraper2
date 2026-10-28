@@ -19,6 +19,10 @@ like the last good run.
 Completeness checks additionally compare raw counts with the last 14 successful
 observations per category. At least three prior dates are required; a drop must
 be at least half the median, at least five items, and outside normal variability.
+A partial drop that holds steady for three runs in a row (within 30% of its own
+median) is accepted as the store's new size ("sustained_new_level"), so a
+store whose sale really shrank is not held at its old listings forever. An
+empty category is never accepted that way.
 New incomplete and failed scans warn immediately, and normal recovery clears
 those warnings. Optional diagnostics and completeness_baseline fields extend historical files
 without changing the existing count/failed or last-positive baseline fields.
@@ -43,6 +47,12 @@ COMPLETENESS_MIN_RUNS = 3
 COMPLETENESS_MIN_DROP = 5
 COMPLETENESS_DROP_FRACTION = 0.5
 COMPLETENESS_MAD_MULTIPLIER = 3
+# A partial drop that holds steady this many runs in a row (today included)
+# is the store's real new size, not a broken scrape: Tactics' deck sale went
+# from about 132 to 50-61 on 2026-10-21 and was held back for a week.
+SUSTAINED_DROP_RUNS = 3
+# "Steady": every one of those counts within this fraction of their median.
+SUSTAINED_DROP_TOLERANCE = 0.3
 ALERT_STREAK = 2
 # Median item count below this is a normally small category. An empty streak
 # there is not a drop. Failed fetches still warn.
@@ -229,6 +239,29 @@ def rolling_baseline(state, key, day):
             "median_absolute_deviation": mad}
 
 
+def _recent_drop_counts(state, key, day):
+    """Raw counts of this key's latest consecutive partial-drop runs before ``day``, newest last."""
+    runs = [run for run in (state or {}).get("runs") or [] if isinstance(run, dict) and str(run.get("date") or "") < str(day)]
+    counts = []
+    for run in sorted(runs, key=lambda run: str(run.get("date") or ""), reverse=True):
+        result = (run.get("results") or {}).get(key)
+        diagnostics = result.get("diagnostics") if isinstance(result, dict) else None
+        if not isinstance(diagnostics, dict) or diagnostics.get("reason") not in {"partial_catalog_drop", "sustained_new_level"}:
+            break
+        try:
+            counts.append(int(diagnostics.get("actual_count")))
+        except (TypeError, ValueError):
+            break
+    return list(reversed(counts))
+
+
+def _steady(counts):
+    if not counts or min(counts) <= 0:
+        return False
+    middle = _median(counts)
+    return all(abs(count - middle) <= middle * SUSTAINED_DROP_TOLERANCE for count in counts)
+
+
 def assess_run(current_data, failed_keys, health, day, suspect_keys=None):
     """Assess raw results before retention or first-miss rows inflate counts.
 
@@ -261,6 +294,12 @@ def assess_run(current_data, failed_keys, health, day, suspect_keys=None):
                        and drop > COMPLETENESS_MAD_MULTIPLIER * baseline["median_absolute_deviation"])
             if suspect:
                 reason = "partial_catalog_drop" if actual else "empty_catalog_drop"
+            if suspect and actual:
+                # Accept a smaller catalog once it has held steady.
+                streak = _recent_drop_counts(health, key, day) + [actual]
+                if len(streak) >= SUSTAINED_DROP_RUNS and _steady(streak[-SUSTAINED_DROP_RUNS:]):
+                    suspect = False
+                    reason = "sustained_new_level"
         diagnostics = dict(baseline, actual_count=actual, percentage_change=change, reason=reason)
         entry = {"count": 0 if is_failed or suspect else actual,
                  "failed": bool(is_failed or suspect), "diagnostics": diagnostics}

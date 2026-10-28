@@ -304,6 +304,41 @@ class CompletenessTests(unittest.TestCase):
                     self.assertIn(expected, text)
                 self.assertEqual(saved["baseline"][DECK]["count"], 100)
 
+    def walk(self, state, actuals, start=10):
+        """Assess and record one run per day; return the results in order."""
+        results = []
+        for offset, actual in enumerate(actuals):
+            day = f"2026-10-{start + offset:02}"
+            result = self.assess(state, actual, day=day)
+            state = record_run(state, day, {DECK: result})
+            results.append(result)
+        return state, results
+
+    def test_a_steady_smaller_catalog_is_accepted_on_the_third_run(self):
+        # Tactics, 2026-10-21: the deck sale really shrank from ~132 to 50-61.
+        state = self.history([136, 135, 134, 134, 132, 132, 132])
+        state, results = self.walk(state, [58, 61, 60, 58, 55])
+        reasons = [result["diagnostics"]["reason"] for result in results]
+        self.assertEqual(reasons, ["partial_catalog_drop", "partial_catalog_drop",
+                                   "sustained_new_level", "sustained_new_level", "sustained_new_level"])
+        self.assertEqual([result["failed"] for result in results], [True, True, False, False, False])
+        self.assertEqual(results[2]["count"], 60, "the new listings are used, not the old ones")
+        self.assertEqual(broken_store_warnings(state), [], "an accepted new size does not warn")
+
+    def test_unsteady_or_empty_drops_are_never_accepted(self):
+        state = self.history([100, 100, 100, 100])
+        _state, jumpy = self.walk(state, [40, 10, 45, 12])
+        self.assertTrue(all(result["failed"] for result in jumpy), "counts that jump around stay suspect")
+        _state, empty = self.walk(state, [0, 0, 0, 0])
+        self.assertTrue(all(result["failed"] for result in empty))
+        self.assertEqual({result["diagnostics"]["reason"] for result in empty}, {"empty_catalog_drop"})
+
+    def test_a_recovery_breaks_the_streak(self):
+        state = self.history([100, 100, 100, 100])
+        _state, results = self.walk(state, [40, 100, 42, 41])
+        self.assertEqual([result["diagnostics"]["reason"] for result in results],
+                         ["partial_catalog_drop", "normal_variation", "partial_catalog_drop", "partial_catalog_drop"])
+
     def test_relative_and_absolute_thresholds_and_warmup(self):
         self.assertFalse(self.assess(self.history([100, 100]), 1)["failed"])
         self.assertTrue(self.assess(self.history([10, 10, 10]), 5)["failed"])
@@ -366,7 +401,9 @@ class CompletenessTests(unittest.TestCase):
         self.assertEqual(len(state["completeness_baseline"][DECK]), COMPLETENESS_WINDOW)
         for offset in range(MAX_RUNS + 3):
             day = (datetime.date(2026, 10, 1) + datetime.timedelta(days=offset)).isoformat()
-            result = self.assess(state, 20, day=day)
+            # Failed scans. (A steady smaller count is a real new size; see
+            # test_a_steady_smaller_catalog_is_accepted_on_the_third_run.)
+            result = self.assess(state, 20, day=day, failed={DECK})
             self.assertTrue(result["failed"])
             state = record_run(state, day, {DECK: result})
         self.assertEqual(rolling_baseline(state, DECK, "2026-12-01")["expected_count"], 100)
