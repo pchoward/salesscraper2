@@ -1,6 +1,6 @@
 # Skateboard Sale Scraper
 
-Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, Tactics, and TGM Skateboards, then publishes a static HTML report. Skate Deluxe and Muir Skate stay in retailer activity, but both scrapers are off: Skate Deluxe is EUR-only and ships from Europe, and Muir Skate's Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
+Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, Tactics, TGM Skateboards, and Deathgear, then publishes a static HTML report. Skate Deluxe and Muir Skate stay in retailer activity, but both scrapers are off: Skate Deluxe is EUR-only and ships from Europe, and Muir Skate's Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
 
 ## Layout
 
@@ -66,6 +66,13 @@ The morning cron is `17 7 * * *` (3:17 AM EDT), off the top of the hour. A backu
 - **Filter rule:** a listing is kept only when it's recognized gear and marked down from its regular price. Apparel, cruiser, and longboard words don't reject it.
 - **Sources:** CCS uses its clearance feed and TGM its sale feed. Zumiez uses `skate/helmets-pads.html` filtered to sale, and Tactics `protective-skate-gear/sale`. Skate Warehouse has no protection section in clearance, so it reads its helmet, knee pad, elbow pad, and wrist guard category pages and keeps only items with a sale price under the regular price.
 - **On the page:** Protection has its own Protection Type and Size filters (`prottype=helmet,knee`, `protsize=m,l`).
+
+**Deathgear** (`stores/deathgear.py`) is a Squarespace shop. Its sale page `/shop/sale-clearance-blemished?format=json` returns the whole listing as data in one request.
+- **Parts:** taken from the title (deck, complete, wheels, trucks, bearings, grip/hardware, protective gear). Apparel is skipped.
+- **Sale rule:** a variant counts only when the shop marks it on sale below its regular price.
+- **Stock:** sold-out variants are kept, marked Sold out.
+
+`python -m stores.deathgear` previews a live run.
 
 Each store runs on its own. An exception or a timeout (12 minutes) is logged, that store's parts are recorded as failed in `scrape_health.json`, and the other stores still finish. The report and the commit still happen. A failed part keeps the previous rows for that key.
 

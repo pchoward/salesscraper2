@@ -9,6 +9,8 @@ export const STORE_HOSTS = new Set([
   "www.tactics.com",
   "tgmskateboards.com",
   "www.tgmskateboards.com",
+  "www.deathgearproducts.com",
+  "deathgearproducts.com",
   "www.skatedeluxe.com",
   "muirskate.com",
   "www.muirskate.com",

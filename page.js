@@ -2275,6 +2275,7 @@ function slugStore(value) {
         ccs: "CCS",
         tactics: "Tactics",
         tgm: "TGM",
+        deathgear: "Deathgear",
         skatedeluxe: "Skate Deluxe",
         muirskate: "Muir Skate"
     }[key] || "";
@@ -2309,6 +2310,7 @@ function storeSlug(name) {
         CCS: "ccs",
         Tactics: "tactics",
         TGM: "tgm",
+        Deathgear: "deathgear",
         "Skate Deluxe": "skatedeluxe",
         "Muir Skate": "muirskate"
     }[name] || "";
@@ -2983,6 +2985,7 @@ const STORE_COLOR = {
     CCS: "#059669",
     Tactics: "#d97706",
     TGM: "#b91c1c",
+    Deathgear: "#111827",
     "Skate Deluxe": "#6d28d9",
     "Muir Skate": "#0f766e"
 };
@@ -5816,6 +5819,8 @@ const ALERTS_STORE_HOSTS = [
     "www.tactics.com",
     "tgmskateboards.com",
     "www.tgmskateboards.com",
+    "www.deathgearproducts.com",
+    "deathgearproducts.com",
     "www.skatedeluxe.com",
     "muirskate.com",
     "www.muirskate.com"

@@ -84,6 +84,7 @@ _CATALOG_PARTS = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessor
 STORE_HOSTS = frozenset({
     "www.zumiez.com", "www.skatewarehouse.com", "shop.ccs.com", "www.tactics.com",
     "tgmskateboards.com", "www.tgmskateboards.com",
+    "www.deathgearproducts.com", "deathgearproducts.com",
     "www.skatedeluxe.com", "muirskate.com", "www.muirskate.com",
 })
 _TEXT = {"brand": 60, "name": 80, "note": 80, "label": 120}

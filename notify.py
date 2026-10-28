@@ -44,6 +44,7 @@ _STORE_COLORS = {
     "ccs": ("#d1fae5", "#047857"),
     "tactics": ("#fef3c7", "#b45309"),
     "tgm": ("#fee2e2", "#b91c1c"),
+    "deathgear": ("#e5e7eb", "#111827"),
     "skatedeluxe": ("#ede9fe", "#6d28d9"),
     "muirskate": ("#ccfbf1", "#0f766e"),
 }
