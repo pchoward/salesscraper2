@@ -215,7 +215,9 @@ class WiringTests(unittest.TestCase):
         self.assertIn('TGM: "tgm"', page_js)
         self.assertIn('"tgmskateboards.com"', page_js)
         self.assertIn(".store-tgm {", (root / "page.css").read_text(encoding="utf-8"))
-        self.assertIn('"TGM")', (root / "page.py").read_text(encoding="utf-8"))
+        import re
+        primary = re.search(r"primary_stores = \(([^)]*)\)", (root / "page.py").read_text(encoding="utf-8")).group(1)
+        self.assertIn('"TGM"', primary)
         from query_state import STORE_SLUGS, TYPE_SLUGS
         from site_sales import DISPLAY_NAMES, STORES
         self.assertEqual(STORE_SLUGS["tgm"], "TGM")

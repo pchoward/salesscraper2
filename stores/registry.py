@@ -3,6 +3,7 @@
 import logging
 
 from stores.ccs import scrapers as ccs_scrapers
+from stores.deathgear import scrapers as deathgear_scrapers
 from stores.muirskate import DISABLED_REASON as MUIR_REASON
 from stores.muirskate import ENABLED as MUIR_ENABLED
 from stores.muirskate import scrapers as muir_scrapers
@@ -24,6 +25,7 @@ def build_scrapers():
     scrapers.extend(ccs_scrapers())
     scrapers.extend(tactics_scrapers())
     scrapers.extend(tgm_scrapers())
+    scrapers.extend(deathgear_scrapers())
     if DELUXE_ENABLED:
         scrapers.extend(skatedeluxe_scrapers())
     else:
