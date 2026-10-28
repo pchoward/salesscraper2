@@ -61,6 +61,12 @@ The morning cron is `17 7 * * *` (3:17 AM EDT), off the top of the hour. A backu
 
 `python -m stores.tgm` previews a live run (counts and examples per part) without writing anything.
 
+**Protection** (helmets, knee and elbow pads, wrist guards, pad sets, and other gear such as impact shorts and hip pads) is the part `Protection`. `protection.py` gives each listing a subtype: Helmet, Knee Pads, Elbow Pads, Wrist Guards, Pad Set, or Other.
+- **Sizes:** letter sizes (XS–XXL) come from the store's size options, in stock where the feed says so, or else from the name.
+- **Filter rule:** a listing is kept only when it's recognized gear and marked down from its regular price. Apparel, cruiser, and longboard words don't reject it.
+- **Sources:** CCS uses its clearance feed and TGM its sale feed. Zumiez uses `skate/helmets-pads.html` filtered to sale, and Tactics `protective-skate-gear/sale`. Skate Warehouse's `PROTECTION_URLS` stays empty until its protective-gear page has been confirmed in a browser, so no guessed URL is fetched.
+- **On the page:** Protection has its own Protection Type and Size filters (`prottype=helmet,knee`, `protsize=m,l`).
+
 Each store runs on its own. An exception or a timeout (12 minutes) is logged, that store's parts are recorded as failed in `scrape_health.json`, and the other stores still finish. The report and the commit still happen. A failed part keeps the previous rows for that key.
 
 Skate Deluxe (`skatedeluxe.com`) has no US or USD storefront. Prices on the public shop are euros and the site ships from Europe. `ENABLED` is false (`EUR-only European store; disabled by owner 2026-10-02`). The parser still reads `/en/c/sale` and is covered by a fixture, but the live run does not call it. Muir Skate is implemented against Shopify `products.json` and covered by a fixture, but `ENABLED` is false: on 2026-10-02 `muirskate.com` returned "This store is unavailable" in headless Chrome, and the collection JSON endpoints 404. Retailer activity still lists both stores as no recorded site-wide sale.

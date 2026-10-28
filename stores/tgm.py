@@ -8,8 +8,10 @@ pages are never requested; this module sorts products by their Shopify
 ``product_type`` instead.
 
 * Kept types: Decks, Wheels, Trucks, Bearings, Grip Tape, Hardware, Risers,
-  and Tool (as Accessories), Completes, and Mens Shoes (as Sneakers). Everything else
-  (clothing, Disc, Roller Hockey, ...) is skipped before the filters.
+  and Tool (as Accessories), Completes, Mens Shoes (as Sneakers), and
+  protective gear types such as Helmets, Combo Pads, and Elbow Pads (as
+  Protection). Everything else (clothing, Disc, Roller Hockey, ...) is
+  skipped before the filters.
 * A variant is on sale only when ``compare_at_price`` is above ``price``.
   The sale price is the variant price and the was price is its compare-at.
 * The shared filters still decide brands, deck width and discount,
@@ -30,7 +32,7 @@ import urllib.request
 from filters import extract_deck_dimensions, extract_deck_size, filter_reason, normalize_product_name, normalize_url
 from part_specs import ordered_shoe_sizes
 from stores.base import Scraper
-from stores.ccs import _amount, _money, _plain, _shoe_offers, _stock_known, _variants_of
+from stores.ccs import _amount, _money, _plain, _shoe_offers, _stock_known, _variants_of, set_protection_fields
 
 logger = logging.getLogger("stores.tgm")
 
@@ -41,7 +43,7 @@ SALE_JSON = f"{BASE}/collections/sale/products.json"
 PAGE_LIMIT = 250
 MAX_PAGES = 20
 PAGE_DELAY = 1.5  # seconds between page requests
-PARTS = ("Decks", "Wheels", "Trucks", "Bearings", "Completes", "Sneakers", "Accessories")
+PARTS = ("Decks", "Wheels", "Trucks", "Bearings", "Completes", "Sneakers", "Accessories", "Protection")
 _USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
@@ -63,6 +65,19 @@ PART_BY_TYPE = {
     "completes": "Completes",
     "complete": "Completes",
     "mens shoes": "Sneakers",
+    # Protective gear. The subtype comes from protection.classify.
+    "helmets": "Protection",
+    "helmet": "Protection",
+    "combo pads": "Protection",
+    "pad sets": "Protection",
+    "knee pads": "Protection",
+    "elbow pads": "Protection",
+    "wrist guards": "Protection",
+    "hip pads": "Protection",
+    "impact shorts": "Protection",
+    "pads": "Protection",
+    "protective gear": "Protection",
+    "protection": "Protection",
 }
 _CACHE = {}
 
@@ -247,6 +262,8 @@ class TGMScraper(Scraper):
             size = extract_deck_size(name)
             if size:
                 item["size"] = size
+        if self.part == "Protection":
+            set_protection_fields(item, name, product_type, variants)
         if self.part == "Sneakers":
             item["description"] = description
             if _stock_known(_variants_of(product)):

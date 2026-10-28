@@ -52,7 +52,8 @@ class SkateWarehouseScraper(Scraper):
                     and not sneaker_rule(text)
                 ):
                     continue
-            elif self.part == "Accessories":
+            elif self.part in ("Accessories", "Protection"):
+                # The shared filters decide: tracked accessories, or gear.
                 pass
             else:
                 if not any(part in href_lower for part in ["wheels", "truck", "bearings", "deck"]) and not any(brand.lower() in href_lower for brand in ["bones", "spitfire", "independent", "bronson"]):
@@ -133,6 +134,12 @@ class SkateWarehouseMultiScraper(SkateWarehouseScraper):
         return merged
 
 
+# Protective gear category or clearance pages. Empty until the owner confirms
+# the URLs in a browser; a guessed path would fail every night. Like the
+# accessory categories, only a two-price markdown is kept.
+PROTECTION_URLS = ()
+
+
 def scrapers():
     # Category pages are allowed. robots.txt only blocks admin and search paths.
     # catpage-SALEBEARINGS.html is a 404, so bearings come from the bearings
@@ -166,4 +173,4 @@ def scrapers():
             ],
             require_markdown=True,
         ),
-    ]
+    ] + ([SkateWarehouseMultiScraper("Protection", list(PROTECTION_URLS), require_markdown=True)] if PROTECTION_URLS else [])

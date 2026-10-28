@@ -17,8 +17,13 @@ FIXTURES = Path(__file__).parent / 'tests' / 'fixtures' / 'discovery_audit'
 class DiscoveryAuditTests(unittest.TestCase):
     def test_inventory_tracks_current_four_retailers_and_pagination(self):
         rows = inventory()
-        self.assertEqual(len(rows), 24)
+        from stores import skatewarehouse, tactics, zumiez
+        # One row per configured store/category pair (27 with Protection at
+        # CCS, Zumiez, and Tactics; one more once Skate Warehouse has a URL).
+        self.assertEqual(len(rows), sum(len(m.scrapers()) for m in (ccs, skatewarehouse, tactics, zumiez)))
+        self.assertGreaterEqual(len(rows), 25)
         keyed = {(r['store'], r['category']): r for r in rows}
+        self.assertEqual(keyed['CCS', 'Protection']['page_size'], 250)
         self.assertEqual({r['store'] for r in rows}, {'Zumiez', 'CCS', 'Tactics', 'SkateWarehouse'})
         self.assertEqual(keyed['CCS', 'Decks']['max_pages_per_entry'], 1)
         self.assertEqual(keyed['CCS', 'Sneakers']['page_size'], 250)

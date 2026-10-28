@@ -34,6 +34,8 @@ when empty. ``diameter`` is a band id (``50-51``, ``52-53``, ``54-55``,
 in the name. ``truckheight`` is ``low``, ``mid``, or ``high``. ``construction`` is
 ``hollow`` or ``standard`` when that word is printed in the name. ``abec`` is
 the rating digits. ``shoesize`` is a US men's size such as ``10`` or ``10.5``.
+``prottype`` is a protection subtype token (``helmet``, ``knee``, ``elbow``,
+``wrist``, ``set``, ``other``) and ``protsize`` a letter size (``s``, ``xl``).
 Those filters apply only to their own part.
 """
 
@@ -49,6 +51,7 @@ from part_specs import (
     ordered_shapes,
     ordered_sizes,
 )
+from protection import ordered_size_tokens, ordered_type_tokens
 
 
 class WidthRange(object):
@@ -115,6 +118,7 @@ TYPE_SLUGS = {
     "accessories": "Accessories",
     "complete": "Completes",
     "completes": "Completes",
+    "protection": "Protection",
 }
 TYPE_TO_SLUG = {
     "Decks": "deck",
@@ -124,6 +128,7 @@ TYPE_TO_SLUG = {
     "Sneakers": "sneaker",
     "Accessories": "accessory",
     "Completes": "complete",
+    "Protection": "protection",
 }
 
 SORTS = (
@@ -204,6 +209,8 @@ def empty_state():
         "constructions": [],
         "abecs": [],
         "shoe_sizes": [],
+        "prot_types": [],
+        "prot_sizes": [],
     }
 
 
@@ -393,6 +400,10 @@ def decode_query(query):
             state["abecs"] = ordered_abecs(str(value or "").split(","))
         elif key == "shoesize":
             state["shoe_sizes"] = ordered_shoe_sizes(str(value or "").split(","))
+        elif key == "prottype":
+            state["prot_types"] = ordered_type_tokens(str(value or "").split(","))
+        elif key == "protsize":
+            state["prot_sizes"] = ordered_size_tokens(str(value or "").split(","))
     return state
 
 
@@ -486,4 +497,10 @@ def encode_state(state):
     shoe_sizes = ordered_shoe_sizes(state.get("shoe_sizes"))
     if shoe_sizes:
         add("shoesize", ",".join(shoe_sizes))
+    prot_types = ordered_type_tokens(state.get("prot_types"))
+    if prot_types:
+        add("prottype", ",".join(prot_types))
+    prot_sizes = ordered_size_tokens(state.get("prot_sizes"))
+    if prot_sizes:
+        add("protsize", ",".join(prot_sizes))
     return urlencode(pairs)

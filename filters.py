@@ -391,6 +391,19 @@ def filter_reason(name, part, url="", price_new=None, price_old=None, descriptio
 
     text = f"{name} {url} {product_type}"
     part_key = (part or "").strip().casefold()
+
+    if part_key == "protection":
+        # Helmets, pads, and impact shorts fit every rider, so the apparel,
+        # cruiser, and longboard words do not apply. It must be gear, and on
+        # a real markdown (a sale or clearance price under the regular one).
+        from protection import classify
+
+        if not classify(name, product_type):
+            return "not protective gear"
+        percent = percent_off_value(price_new, price_old)
+        if percent is None or percent <= 0:
+            return "no markdown"
+        return None
     apparel = _APPAREL_RES_NOT_FOOTWEAR if part_key == "sneakers" else _APPAREL_RES
 
     if _matches_any(text, apparel):

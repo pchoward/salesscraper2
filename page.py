@@ -59,6 +59,10 @@ from part_specs import (
     truck_specs,
     wheel_specs,
 )
+from protection import SIZES as PROTECTION_SIZES
+from protection import SUBTYPE_TOKENS, ordered_sizes as ordered_protection_sizes
+from protection import classify as classify_protection
+from protection import sizes_in as protection_sizes_in
 from query_state import STARTER_VIEWS, WIDTH_RANGES, bucket_for_width
 from score import FORMULA, SCORE_LEGEND, deal_score, score_band
 from site_sales import activity_line, describe_sales, display_name, load_state
@@ -74,7 +78,7 @@ _BRANDS = {
     "bearings": BEARING_BRANDS,
     "sneakers": ("Nike SB", "Nike", "Vans"),
 }
-PART_ORDER = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes")
+PART_ORDER = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes", "Protection")
 
 # Email alerts (docs/alerts-api.md). Both values are public by design: the
 # browser calls the Worker URL, and Turnstile site keys are meant to be seen.
@@ -991,6 +995,14 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                     found.extend(shoe_sizes_in(raw_name))
                     found.extend(shoe_sizes_in(item.get("description") or ""))
                     shoe_sizes = ordered_shoe_sizes(found)
+            prot_type = ""
+            prot_sizes = []
+            if item.get("part") == "Protection":
+                subtype = item.get("protection_type") or classify_protection(raw_name, item.get("product_type") or "")
+                prot_type = SUBTYPE_TOKENS.get(subtype or "", "")
+                # A store's size list is what it sells; else sizes printed in the name.
+                sizes = item.get("protection_sizes") if "protection_sizes" in item else protection_sizes_in(raw_name)
+                prot_sizes = [size.casefold() for size in ordered_protection_sizes(sizes)]
             current_price = _price(item.get("price_new"))
             tracked_low = status.get("low")
             at_tracked_low = False
@@ -1055,6 +1067,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "construction": construction,
                 "abec": abec,
                 "shoe_sizes": shoe_sizes,
+                "prot_type": prot_type,
+                "prot_sizes": prot_sizes,
                 "percent": percent,
                 "search": " ".join(
                     bit
@@ -1162,6 +1176,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     abec_counts = {}
     shoe_size_counts = {}
     shoe_hits = 0
+    prot_type_counts = {}
+    prot_size_counts = {}
+    prot_size_hits = 0
     wheels_with_duro = 0
     for record in records:
         store_counts[record["store"]] = store_counts.get(record["store"], 0) + 1
@@ -1203,11 +1220,19 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             shoe_hits += 1
             for token in record["shoe_sizes"]:
                 shoe_size_counts[token] = shoe_size_counts.get(token, 0) + 1
+        elif record["part"] == "Protection":
+            if record.get("prot_type"):
+                prot_type_counts[record["prot_type"]] = prot_type_counts.get(record["prot_type"], 0) + 1
+            if record.get("prot_sizes"):
+                prot_size_hits += 1
+                for token in record["prot_sizes"]:
+                    prot_size_counts[token] = prot_size_counts.get(token, 0) + 1
 
     low_items = []
     try:
         low_items = [record["item"] for record in records if record["lowest"]]
-        order = {"Decks": 0, "Wheels": 1, "Trucks": 2, "Bearings": 3, "Sneakers": 4, "Accessories": 5}
+        order = {"Decks": 0, "Wheels": 1, "Trucks": 2, "Bearings": 3, "Sneakers": 4, "Accessories": 5,
+                 "Completes": 6, "Protection": 7}
         low_items.sort(key=lambda item: (order.get(item.get("part"), 9), _display_name(item)))
     except Exception as exc:
         logger.error("All-time low list failed: %s", exc)
@@ -1546,6 +1571,31 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "US men's size only when that size is in stock.",
         shoe_hits,
     )
+    prot_labels = {token: subtype for subtype, token in SUBTYPE_TOKENS.items()}
+    prot_type_section = _gated(
+        "prottype",
+        "Protection Type",
+        "Protection",
+        [
+            _spec_button(token, prot_labels[token], prot_type_counts[token], prot_labels[token])
+            for token in SUBTYPE_TOKENS.values()
+            if prot_type_counts.get(token)
+        ],
+        "Helmets, pads, wrist guards, pad sets, and other gear such as impact shorts.",
+        sum(prot_type_counts.values()),
+    )
+    prot_size_section = _gated(
+        "protsize",
+        "Size",
+        "Protection",
+        [
+            _spec_button(size.casefold(), size, prot_size_counts[size.casefold()], f"Size {size}")
+            for size in PROTECTION_SIZES
+            if prot_size_counts.get(size.casefold())
+        ],
+        "Only when the store lists the size.",
+        prot_size_hits,
+    )
     construction_buttons = [
         _spec_button(
             token,
@@ -1671,6 +1721,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + construction_section
         + abec_section
         + shoe_section
+        + prot_type_section
+        + prot_size_section
         + "</div>"
     )
     sidebar_html = (
@@ -2048,6 +2100,8 @@ def _deal_attrs(record):
         f'data-construction="{_attr(record.get("construction") or "")}" '
         f'data-abec="{_attr(record.get("abec") or "")}" '
         f'data-shoesize="{_attr(",".join(record.get("shoe_sizes") or []))}"{_offer_gap(record)} '
+        f'data-prottype="{_attr(record.get("prot_type") or "")}" '
+        f'data-protsize="{_attr(",".join(record.get("prot_sizes") or []))}" '
         f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '
         f'data-fresh="{1 if record.get("fresh") else 0}" data-back="{1 if record.get("back") else 0}" '
@@ -2440,7 +2494,7 @@ def _why_html(record, dom_id=None):
 
 
 def _category_strip(part_counts):
-    order = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories"]
+    order = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes", "Protection"]
     names = [name for name in order if part_counts.get(name)]
     for name in part_counts:
         if name and name not in names:

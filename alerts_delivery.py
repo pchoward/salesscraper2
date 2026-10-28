@@ -79,7 +79,7 @@ REBASELINE_SHARE = 0.5
 _ROUTE_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 _RULE_ID_RE = re.compile(r"r_[0-9a-f]{24}")
 _PARTS = {"Decks", "Wheels", "Trucks", "Bearings"}
-_CATALOG_PARTS = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes")
+_CATALOG_PARTS = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes", "Protection")
 # worker/src/email.js STORE_HOSTS: the only hosts a watch may name.
 STORE_HOSTS = frozenset({
     "www.zumiez.com", "www.skatewarehouse.com", "shop.ccs.com", "www.tactics.com",

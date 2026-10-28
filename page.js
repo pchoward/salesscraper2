@@ -25,6 +25,8 @@ let state = {
     constructions: [],
     abecs: [],
     shoeSizes: [],
+    protTypes: [],
+    protSizes: [],
     sortKey: "rank",
     sortDir: "asc",
     search: ""
@@ -307,6 +309,10 @@ const DIAMETER_ORDER = ["50-51", "52-53", "54-55", "56+"];
 const SHAPE_ORDER = ["conical", "radial", "sidecut"];
 const HEIGHT_ORDER = ["low", "mid", "high"];
 const CONSTRUCTION_ORDER = ["hollow", "standard"];
+// Keep in sync with protection.SUBTYPE_TOKENS / SIZES.
+const PROT_TYPE_ORDER = ["helmet", "knee", "elbow", "wrist", "set", "other"];
+const PROT_TYPE_LABELS = { helmet: "Helmet", knee: "Knee Pads", elbow: "Elbow Pads", wrist: "Wrist Guards", set: "Pad Set", other: "Other" };
+const PROT_SIZE_ORDER = ["xs", "s", "m", "l", "xl", "xxl"];
 const SPEC_FACETS = [
     { stateKey: "diameters", part: "Wheels", attr: "diameter", section: "diameterFilters" },
     { stateKey: "duros", part: "Wheels", attr: "duros", section: "duroFilters" },
@@ -315,9 +321,11 @@ const SPEC_FACETS = [
     { stateKey: "truckHeights", part: "Trucks", attr: "truckheight", section: "truckheightFilters" },
     { stateKey: "constructions", part: "Trucks", attr: "construction", section: "constructionFilters" },
     { stateKey: "abecs", part: "Bearings", attr: "abec", section: "abecFilters" },
-    { stateKey: "shoeSizes", part: "Sneakers", attr: "shoesize", section: "shoesizeFilters" }
+    { stateKey: "shoeSizes", part: "Sneakers", attr: "shoesize", section: "shoesizeFilters" },
+    { stateKey: "protTypes", part: "Protection", attr: "prottype", section: "prottypeFilters" },
+    { stateKey: "protSizes", part: "Protection", attr: "protsize", section: "protsizeFilters" }
 ];
-const SPEC_OPEN = { width: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1 };
+const SPEC_OPEN = { width: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
 
 function normalizeDuroToken(value) {
     const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
@@ -367,6 +375,8 @@ function orderSpecValues(stateKey, values) {
     if (stateKey === "shapes") return SHAPE_ORDER.filter(id => chosen[id]);
     if (stateKey === "truckHeights") return HEIGHT_ORDER.filter(id => chosen[id]);
     if (stateKey === "constructions") return CONSTRUCTION_ORDER.filter(id => chosen[id]);
+    if (stateKey === "protTypes") return PROT_TYPE_ORDER.filter(id => chosen[id]);
+    if (stateKey === "protSizes") return PROT_SIZE_ORDER.filter(id => chosen[id]);
     if (stateKey === "duros") {
         return keys.sort((a, b) => {
             const delta = parseInt(a, 10) - parseInt(b, 10);
@@ -387,6 +397,7 @@ function activeSpecKeys(part) {
     if (current === "Trucks") return ["truckSizes", "truckHeights", "constructions"];
     if (current === "Bearings") return ["abecs"];
     if (current === "Sneakers") return ["shoeSizes"];
+    if (current === "Protection") return ["protTypes", "protSizes"];
     return [];
 }
 
@@ -2126,6 +2137,8 @@ function clearFilters() {
         constructions: [],
         abecs: [],
         shoeSizes: [],
+        protTypes: [],
+        protSizes: [],
         sortKey: "rank",
         sortDir: "asc",
         search: "",
@@ -2277,7 +2290,8 @@ function slugType(value) {
         accessory: "Accessories",
         accessories: "Accessories",
         complete: "Completes",
-        completes: "Completes"
+        completes: "Completes",
+        protection: "Protection"
     }[key] || "";
 }
 
@@ -2301,7 +2315,8 @@ function typeSlug(name) {
         Bearings: "bearing",
         Sneakers: "sneaker",
         Accessories: "accessory",
-        Completes: "complete"
+        Completes: "complete",
+        Protection: "protection"
     }[name] || "";
 }
 
@@ -2341,7 +2356,9 @@ function decodeQuery(query) {
         truckHeights: [],
         constructions: [],
         abecs: [],
-        shoeSizes: []
+        shoeSizes: [],
+        protTypes: [],
+        protSizes: []
     };
     const text = String(query || "").replace(/^\?/, "");
     if (!text) return stateOut;
@@ -2392,6 +2409,8 @@ function decodeQuery(query) {
         else if (key === "construction") stateOut.constructions = orderSpecValues("constructions", String(value || "").split(","));
         else if (key === "abec") stateOut.abecs = orderSpecValues("abecs", String(value || "").split(","));
         else if (key === "shoesize") stateOut.shoeSizes = orderSpecValues("shoeSizes", String(value || "").split(","));
+        else if (key === "prottype") stateOut.protTypes = orderSpecValues("protTypes", String(value || "").split(","));
+        else if (key === "protsize") stateOut.protSizes = orderSpecValues("protSizes", String(value || "").split(","));
         else if (RETIRED_VISIT_PARAMS[key]) {
             /* Old last-visit links. Ignore the param and keep the rest. */
         }
@@ -2454,6 +2473,10 @@ function encodeState(snapshot) {
     if (abecs.length) add("abec", abecs.join(","));
     const shoeSizes = orderSpecValues("shoeSizes", snapshot.shoeSizes || []);
     if (shoeSizes.length) add("shoesize", shoeSizes.join(","));
+    const protTypes = orderSpecValues("protTypes", snapshot.protTypes || []);
+    if (protTypes.length) add("prottype", protTypes.join(","));
+    const protSizes = orderSpecValues("protSizes", snapshot.protSizes || []);
+    if (protSizes.length) add("protsize", protSizes.join(","));
     return params.toString();
 }
 
@@ -2491,7 +2514,9 @@ function captureState() {
         truckHeights: (state.truckHeights || []).slice(),
         constructions: (state.constructions || []).slice(),
         abecs: (state.abecs || []).slice(),
-        shoeSizes: (state.shoeSizes || []).slice()
+        shoeSizes: (state.shoeSizes || []).slice(),
+        protTypes: (state.protTypes || []).slice(),
+        protSizes: (state.protSizes || []).slice()
     };
 }
 
@@ -2559,6 +2584,8 @@ function writeControls(snapshot) {
     state.constructions = orderSpecValues("constructions", snapshot.constructions || []);
     state.abecs = orderSpecValues("abecs", snapshot.abecs || []);
     state.shoeSizes = orderSpecValues("shoeSizes", snapshot.shoeSizes || []);
+    state.protTypes = orderSpecValues("protTypes", snapshot.protTypes || []);
+    state.protSizes = orderSpecValues("protSizes", snapshot.protSizes || []);
     if (partChanged) syncTypeSections(true);
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
@@ -3127,7 +3154,9 @@ function collectFilterActions() {
         truckHeights: value => "Height: " + value.charAt(0).toUpperCase() + value.slice(1),
         constructions: value => "Construction: " + value.charAt(0).toUpperCase() + value.slice(1),
         abecs: value => "ABEC " + value,
-        shoeSizes: value => "Size " + value
+        shoeSizes: value => "Size " + value,
+        protTypes: value => PROT_TYPE_LABELS[value] || value,
+        protSizes: value => "Size " + value.toUpperCase()
     };
     SPEC_FACETS.forEach(facet => {
         if (!specKeyActive(facet.stateKey)) return;
@@ -3931,6 +3960,11 @@ function quickFacts(dataset, item, generated) {
     addSpec("Truck height", dataset.truckheight);
     addSpec("Construction", dataset.construction);
     addSpec("ABEC", dataset.abec);
+    // Labels inline: protection.SUBTYPE_TOKENS (PROT_TYPE_LABELS above).
+    addSpec("Type", ({ helmet: "Helmet", knee: "Knee Pads", elbow: "Elbow Pads", wrist: "Wrist Guards", set: "Pad Set", other: "Other" })[dataset.prottype] || "");
+    if (String(dataset.protsize || "").trim()) {
+        addSpec("Sizes", String(dataset.protsize).split(",").map(size => size.trim().toUpperCase()).filter(Boolean).join(", "));
+    }
     const stores = [];
     (item.offers || []).forEach(offer => {
         if (!offer || !offer.url || offer.url === item.url) return;
@@ -5766,7 +5800,7 @@ const ALERTS_API_BASE = "";
 const ALERTS_CONSENT_VERSION = "2026-10";
 const ALERTS_SESSION_KEY = "skatedeals.alerts.manage";
 const ALERTS_PARTS = ["Decks", "Wheels", "Trucks", "Bearings"];
-const ALERTS_CATALOG_PARTS = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes"];
+const ALERTS_CATALOG_PARTS = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes", "Protection"];
 const ALERTS_DIGEST_EVENTS = ["new", "drop", "low"];
 const ALERTS_STORE_HOSTS = [
     "www.zumiez.com",
