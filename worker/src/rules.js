@@ -16,7 +16,7 @@ export const KINDS = ["search", "watch", "digest"];
 export const DIGEST_EVENTS = ["new", "drop", "low"];
 // The same hosts as history_identity.SHOPIFY_HOSTS: Shopify keeps a product
 // handle unique per shop, so collection paths and /products/ are one product.
-const SHOPIFY_HOSTS = new Set(["shop.ccs.com", "tgmskateboards.com", "www.tgmskateboards.com", "kineticskateboarding.com", "www.kineticskateboarding.com", "skateparkoftampa.com", "www.skateparkoftampa.com", "muirskate.com", "www.muirskate.com"]);
+const SHOPIFY_HOSTS = new Set(["shop.ccs.com", "tgmskateboards.com", "www.tgmskateboards.com", "kineticskateboarding.com", "www.kineticskateboarding.com", "skateparkoftampa.com", "www.skateparkoftampa.com", "exodusrideshop.com", "www.exodusrideshop.com", "muirskate.com", "www.muirskate.com"]);
 const SHOPIFY_HANDLE = /\/products\/([^/?#]+)\/?$/;
 const MAX_URL = 500;
 

@@ -1,6 +1,6 @@
 # Skateboard Sale Scraper
 
-Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, Tactics, TGM Skateboards, Deathgear, Kinetic, and Skate Park of Tampa (SPoT), then publishes a static HTML report. Skate Deluxe and Muir Skate stay in retailer activity, but both scrapers are off: Skate Deluxe is EUR-only and ships from Europe, and Muir Skate's Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
+Tracks skateboard sales at Zumiez, Skate Warehouse, CCS, Tactics, TGM Skateboards, Deathgear, Kinetic, Skate Park of Tampa (SPoT), and Exodus Ride Shop, then publishes a static HTML report. Skate Deluxe and Muir Skate stay in retailer activity, but both scrapers are off: Skate Deluxe is EUR-only and ships from Europe, and Muir Skate's Shopify storefront is unavailable. GitHub Actions runs the scraper daily. The page opens with what changed since yesterday, filterable deal rows, and a smaller header that states the live counts.
 
 ## Layout
 
@@ -67,7 +67,7 @@ The morning cron is `17 7 * * *` (3:17 AM EDT), off the top of the hour. A backu
 - **Sources:** CCS uses its clearance feed and TGM its sale feed. Zumiez uses `skate/helmets-pads.html` filtered to sale, and Tactics `protective-skate-gear/sale`. Skate Warehouse has no protection section in clearance, so it reads its helmet, knee pad, elbow pad, and wrist guard category pages and keeps only items with a sale price under the regular price.
 - **On the page:** Protection has its own Protection Type and Size filters (`prottype=helmet,knee`, `protsize=m,l`).
 
-**Shopify stores** (TGM, Kinetic, SPoT) share `stores/shopify.py`. Each store module is a small config: domain, sale collection, and which product types map to which part. Kinetic files decks and completes together as "Skateboards", so those (and untyped products) take their part from the title. `python -m stores.kinetic` and `python -m stores.spot` preview a live run.
+**Shopify stores** (TGM, Kinetic, SPoT, Exodus) share `stores/shopify.py`. Each store module is a small config: domain, sale collection, and which product types map to which part. Kinetic files decks and completes together as "Skateboards", so those (and untyped products) take their part from the title. `python -m stores.kinetic` and `python -m stores.spot` preview a live run.
 
 **Deathgear** (`stores/deathgear.py`) is a Squarespace shop. Its sale page `/shop/sale-clearance-blemished?format=json` returns the whole listing as data in one request.
 - **Parts:** taken from the title (deck, complete, wheels, trucks, bearings, grip/hardware, protective gear). Apparel is skipped.

@@ -2278,6 +2278,7 @@ function slugStore(value) {
         deathgear: "Deathgear",
         kinetic: "Kinetic",
         spot: "SPoT",
+        exodus: "Exodus",
         skatedeluxe: "Skate Deluxe",
         muirskate: "Muir Skate"
     }[key] || "";
@@ -2315,6 +2316,7 @@ function storeSlug(name) {
         Deathgear: "deathgear",
         Kinetic: "kinetic",
         SPoT: "spot",
+        Exodus: "exodus",
         "Skate Deluxe": "skatedeluxe",
         "Muir Skate": "muirskate"
     }[name] || "";
@@ -2992,6 +2994,7 @@ const STORE_COLOR = {
     Deathgear: "#111827",
     Kinetic: "#0369a1",
     SPoT: "#a16207",
+    Exodus: "#4d7c0f",
     "Skate Deluxe": "#6d28d9",
     "Muir Skate": "#0f766e"
 };
@@ -5831,6 +5834,8 @@ const ALERTS_STORE_HOSTS = [
     "www.kineticskateboarding.com",
     "skateparkoftampa.com",
     "www.skateparkoftampa.com",
+    "exodusrideshop.com",
+    "www.exodusrideshop.com",
     "www.skatedeluxe.com",
     "muirskate.com",
     "www.muirskate.com"
