@@ -230,3 +230,52 @@ class PageTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SoldOutTests(unittest.TestCase):
+    """Zumiez's helmet sale grid lists helmets sold out in every size."""
+
+    ITEMS = [
+        {"name": "Pro-Tec Classic Black & Checkered Skateboard Helmet", "url": "https://www.zumiez.com/protec-checkered.html"},
+        {"name": "Pro-Tec Classic Skate Helmet", "url": "https://www.zumiez.com/protec-classic.html"},
+        {"name": "187 Killer Pads Knee Pads", "url": "https://www.zumiez.com/187-knee.html"},
+    ]
+    PAGES = {
+        "https://www.zumiez.com/protec-checkered.html": '<div class="ProductActions-Stock">Out of stock</div>',
+        "https://www.zumiez.com/protec-classic.html": '<div class="ProductActions-Stock">In stock</div>',
+        "https://www.zumiez.com/187-knee.html": None,  # page could not be read
+    }
+
+    def test_only_a_page_that_says_out_of_stock_removes_a_listing(self):
+        from stores.stock import drop_sold_out
+
+        kept = drop_sold_out(self.ITEMS, "Zumiez", rendered=True, fetch_rendered=lambda urls: {u: self.PAGES[u] for u in urls})
+        self.assertEqual([item["url"] for item in kept],
+                         ["https://www.zumiez.com/protec-classic.html", "https://www.zumiez.com/187-knee.html"])
+
+    def test_checks_stop_at_the_limit_and_keep_the_rest(self):
+        from stores.stock import drop_sold_out
+
+        asked = []
+
+        def fetch(url):
+            asked.append(url)
+            return '<div class="product-head-orderable-status">Out of stock</div>'
+
+        kept = drop_sold_out(self.ITEMS, "Tactics", fetch_static=fetch, limit=1)
+        self.assertEqual(asked, [self.ITEMS[0]["url"]])
+        self.assertEqual(len(kept), 2)
+
+    def test_zumiez_and_tactics_protection_scrapers_drop_sold_out_gear(self):
+        z = next(s for s in zumiez.scrapers() if s.part == "Protection")
+        with mock.patch.object(zumiez.ZumiezMultiScraper, "scrape", return_value=list(self.ITEMS)), \
+                mock.patch("stores.stock._fetch_rendered", side_effect=lambda urls: {u: self.PAGES[u] for u in urls}):
+            self.assertEqual(len(z.scrape()), 2)
+        t = next(s for s in tactics.scrapers() if s.part == "Protection")
+        tactics_items = [{"name": "Pro-Tec Helmet", "url": "https://www.tactics.com/pro-tec/helmet"}]
+        with mock.patch.object(tactics.TacticsScraper, "scrape", return_value=tactics_items), \
+                mock.patch("stores.stock._fetch_static",
+                           return_value='<div class="product-head-orderable-status">Sold out</div>'):
+            self.assertEqual(t.scrape(), [])
+        with mock.patch.object(zumiez.ZumiezMultiScraper, "scrape", return_value=None):
+            self.assertIsNone(z.scrape(), "a failed sale page still fails the part")
