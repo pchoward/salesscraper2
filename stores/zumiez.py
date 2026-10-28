@@ -410,6 +410,22 @@ class ZumiezSneakersScraper(ZumiezMultiScraper):
         return super().scrape()
 
 
+class ZumiezProtectionScraper(ZumiezMultiScraper):
+    """Helmets and pads on sale. The sale grid also lists items sold out in
+    every size, so each product page is checked and sold-out ones dropped."""
+
+    def __init__(self, urls):
+        super().__init__("Protection", urls)
+
+    def scrape(self):
+        from stores.stock import drop_sold_out
+
+        items = super().scrape()
+        if items is None:
+            return None
+        return drop_sold_out(items, "Zumiez", rendered=True)
+
+
 # Sale listings of protective gear (helmets, pads, wrist guards), confirmed
 # by the owner in a browser on 2026-10-28. robots.txt allows
 # ?customFilters=promotion_flag*Sale.
@@ -434,4 +450,4 @@ def scrapers():
                 "https://www.zumiez.com/skate/components.html?customFilters=promotion_flag:Sale",
             ],
         ),
-    ] + ([ZumiezMultiScraper("Protection", list(PROTECTION_URLS))] if PROTECTION_URLS else [])
+    ] + ([ZumiezProtectionScraper(list(PROTECTION_URLS))] if PROTECTION_URLS else [])

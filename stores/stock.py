@@ -103,6 +103,34 @@ def _fetch_rendered(urls):
     return found
 
 
+# Product pages checked per scraper run before keeping the rest unchecked.
+MAX_IN_STOCK_CHECKS = 80
+
+
+def drop_sold_out(items, store, rendered=False, fetch_static=None, fetch_rendered=None, limit=MAX_IN_STOCK_CHECKS):
+    """The listings whose product page does not say out of stock.
+
+    Some sale grids (Zumiez helmets and pads) list items that are sold out in
+    every size. Only a page that says so removes a listing; an unreadable
+    page, or one past ``limit``, keeps it.
+    """
+    items = list(items or [])
+    urls = [item.get("url") for item in items[:limit] if item.get("url")]
+    if not urls:
+        return items
+    if rendered:
+        pages = (fetch_rendered or _fetch_rendered)(urls)
+    else:
+        fetch = fetch_static or _fetch_static
+        pages = {url: fetch(url) for url in urls}
+    sold_out = {url for url, html in pages.items() if stock_from_html(store, html) == "out_of_stock"}
+    if sold_out:
+        logger.info("%s: %s listings are out of stock on their product page", store, len(sold_out))
+    if len(items) > limit:
+        logger.warning("%s: only the first %s of %s listings were stock-checked", store, limit, len(items))
+    return [item for item in items if item.get("url") not in sold_out]
+
+
 def confirm_stock(history, current_data, skip_keys=None):
     """Set ``stock`` to ``out_of_stock`` only when the product page says so.
 

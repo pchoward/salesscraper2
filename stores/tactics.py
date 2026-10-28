@@ -210,6 +210,21 @@ class TacticsDecksScraper(TacticsScraper):
         super().__init__("Tactics", "https://www.tactics.com/skateboard-decks/sale", "Decks")
 
 
+class TacticsProtectionScraper(TacticsScraper):
+    """Protective gear on sale, without listings their product page says are sold out."""
+
+    def __init__(self, url):
+        super().__init__("Tactics", url, "Protection")
+
+    def scrape(self):
+        from stores.stock import drop_sold_out
+
+        items = super().scrape()
+        if items is None:
+            return None
+        return drop_sold_out(items, "Tactics")
+
+
 # Sale listing of protective gear, confirmed by the owner in a browser on
 # 2026-10-28. Sale paths are allowed by robots.txt.
 PROTECTION_URL = "https://www.tactics.com/protective-skate-gear/sale"
@@ -224,4 +239,4 @@ def scrapers():
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-bearings/sale", "Bearings"),
         TacticsScraper("Tactics", "https://www.tactics.com/shoes/sale", "Sneakers"),
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-accessories/sale", "Accessories"),
-    ] + ([TacticsScraper("Tactics", PROTECTION_URL, "Protection")] if PROTECTION_URL else [])
+    ] + ([TacticsProtectionScraper(PROTECTION_URL)] if PROTECTION_URL else [])
