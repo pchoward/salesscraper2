@@ -4369,13 +4369,13 @@
           }
         },
         "CCS_Protection": {
-          "count": 17,
+          "count": 15,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 17,
+            "actual_count": 15,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -5077,16 +5077,15 @@
           }
         },
         "Tactics_Decks": {
-          "count": 0,
-          "failed": true,
-          "suspect": true,
+          "count": 50,
+          "failed": false,
           "diagnostics": {
             "expected_count": 135.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
             "actual_count": 50,
             "percentage_change": -63.1,
-            "reason": "partial_catalog_drop"
+            "reason": "sustained_new_level"
           }
         },
         "Tactics_Protection": {
@@ -5223,7 +5222,7 @@
           }
         }
       },
-      "scanned_at": "2026-10-28T13:59:47+00:00"
+      "scanned_at": "2026-10-28T14:32:30+00:00"
     }
   ],
   "baseline": {
@@ -5260,8 +5259,8 @@
       "count": 5
     },
     "Tactics_Decks": {
-      "date": "2026-10-20",
-      "count": 131
+      "date": "2026-10-28",
+      "count": 50
     },
     "Tactics_Wheels": {
       "date": "2026-10-20",
@@ -5337,7 +5336,7 @@
     },
     "CCS_Protection": {
       "date": "2026-10-28",
-      "count": 17
+      "count": 15
     },
     "TGM_Protection": {
       "date": "2026-10-28",
@@ -5574,7 +5573,7 @@
     "CCS_Protection": [
       {
         "date": "2026-10-28",
-        "count": 17
+        "count": 15
       }
     ],
     "CCS_Sneakers": [
@@ -6495,10 +6494,6 @@
     ],
     "Tactics_Decks": [
       {
-        "date": "2026-10-07",
-        "count": 140
-      },
-      {
         "date": "2026-10-08",
         "count": 139
       },
@@ -6549,6 +6544,10 @@
       {
         "date": "2026-10-20",
         "count": 131
+      },
+      {
+        "date": "2026-10-28",
+        "count": 50
       }
     ],
     "Tactics_Protection": [
