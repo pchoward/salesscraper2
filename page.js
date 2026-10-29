@@ -5485,9 +5485,9 @@ function wireDealEvents() {
         }
         const row = event.target.closest(".deal-row, .deal-card");
         if (!row || event.target.closest("a, button, input, select, label")) return;
-        // Desktop cards open only from the Quick view button. A phone tap
-        // still opens the same photo view, and table rows keep their click.
-        if (row.classList.contains("deal-card") && !quickIsSheet()) return;
+        // The card body opens quick view: photo, price, footer, and empty
+        // space. Title links, Alert, the star, and Quick view are handled
+        // above and keep their own actions. Hover does not open.
         event.preventDefault();
         event.stopPropagation();
         openQuickView(row, true);
@@ -5509,7 +5509,8 @@ function wireDealEvents() {
         }
         const row = event.target.closest(".deal-row, .deal-card");
         if (!row || event.target.closest("a, button, input, select, label")) return;
-        if (row.classList.contains("deal-card") && !quickIsSheet()) return;
+        // Enter (and Space) on the card itself opens quick view. A focused
+        // title link, Alert, star, or Quick view button keeps its own key.
         event.preventDefault();
         openQuickView(row, true);
     });

@@ -2892,6 +2892,7 @@ body.alerts-open { overflow: hidden; }
     box-shadow: none;
     content-visibility: auto;
     contain-intrinsic-size: auto 300px;
+    cursor: pointer;
 }
 .deal-card:hover { border-color: var(--grey-400); box-shadow: none; }
 .deal-card .media {

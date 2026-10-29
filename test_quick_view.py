@@ -600,7 +600,10 @@ assert.equal(isQuickOpen(), false, "hover does not open");
 assert.equal(queued.length, 0, "hover does not arm a timer");
 dispatch("click", cardA.card);
 flush();
-assert.equal(isQuickOpen(), false, "clicking the card does not open");
+assert.equal(isQuickOpen(), true, "clicking the card opens quick view");
+assert.equal(quickCard.dataset.id, "a");
+onDocumentEscape({key: "Escape", preventDefault() {}});
+assert.equal(isQuickOpen(), false, "Escape closes a card-body open");
 dispatch("keydown", cardA.button, {key: "Enter"});
 assert.equal(isQuickOpen(), true, "Enter on Quick view opens");
 assert.equal(quickCard.dataset.id, "a");
@@ -629,11 +632,85 @@ assert.equal(isQuickOpen(), true);
 body.querySelector(".quick-close").events.click({preventDefault() {}, stopPropagation() {}});
 assert.equal(isQuickOpen(), false, "X closes");
 dispatch("click", cardA.card);
-assert.equal(isQuickOpen(), false);
+assert.equal(isQuickOpen(), true, "desktop card click opens");
+assert.equal(quickCard.dataset.id, "a");
+onDocumentEscape({key: "Escape", preventDefault() {}});
 window.innerWidth = 390;
 dispatch("click", cardB.card);
 assert.equal(isQuickOpen(), true, "a phone tap still opens");
 assert.equal(quickCard.dataset.id, "b");
+const outside = new Element("div");
+dispatch("click", outside);
+assert.equal(isQuickOpen(), false, "a click outside still closes");
+function alertDraftFromDataset() { return {}; }
+function alertsProductImage() { return ""; }
+let alertsOpened = 0;
+function openAlerts() { alertsOpened += 1; }
+let starToggles = 0;
+const realToggle = toggleStar;
+toggleStar = () => { starToggles += 1; };
+function child(tag, className, parent) {
+  const node = new Element(tag);
+  node.className = className;
+  parent.append(node);
+  return node;
+}
+const rich = new Element("article");
+rich.className = "deal-card";
+rich.tabIndex = 0;
+rich.dataset = {id: "a", price: "40", url: "https://example.com/a"};
+const photo = child("img", "hero", child("div", "media", rich));
+const title = child("a", "product-link", child("h3", "product-name", rich));
+title.setAttribute("href", "https://example.com/a");
+const offer = child("p", "card-offer", rich);
+const footer = child("p", "card-meta", rich);
+footer.textContent = "Found Oct 1 · Tactics";
+const alertBtn = child("button", "card-alert", rich);
+alertBtn.textContent = "Alert me";
+const star = child("button", "star", rich);
+const quick = child("button", "card-quick", rich);
+function openedId() { return isQuickOpen() && quickCard ? quickCard.dataset.id : null; }
+onDocumentEscape({key: "Escape", preventDefault() {}});
+dispatch("click", rich);
+assert.equal(openedId(), "a", "card body opens quick view");
+onDocumentEscape({key: "Escape", preventDefault() {}});
+dispatch("click", photo);
+assert.equal(openedId(), "a", "photo opens quick view");
+onDocumentEscape({key: "Escape", preventDefault() {}});
+dispatch("click", footer);
+assert.equal(openedId(), "a", "footer opens quick view");
+dispatch("click", offer);
+assert.equal(openedId(), "a", "price area keeps quick view open");
+onDocumentEscape({key: "Escape", preventDefault() {}});
+const titleEvent = dispatch("click", title);
+assert.equal(isQuickOpen(), false, "title link does not open quick view");
+assert.equal(titleEvent.stopped, undefined, "title click is not swallowed");
+dispatch("click", alertBtn);
+assert.equal(isQuickOpen(), false, "Alert me does not open quick view");
+assert.equal(alertsOpened, 1, "Alert me keeps its action");
+dispatch("click", star);
+assert.equal(isQuickOpen(), false, "star does not open quick view");
+assert.equal(starToggles, 1, "star keeps its action");
+dispatch("keydown", rich, {key: "Enter"});
+assert.equal(openedId(), "a", "Enter on the card opens quick view");
+onDocumentEscape({key: "Escape", preventDefault() {}});
+dispatch("keydown", title, {key: "Enter"});
+assert.equal(isQuickOpen(), false, "Enter on the title does not open quick view");
+dispatch("keydown", alertBtn, {key: "Enter"});
+assert.equal(isQuickOpen(), false, "Enter on Alert does not open quick view");
+dispatch("keydown", star, {key: "Enter"});
+assert.equal(isQuickOpen(), false, "Enter on the star does not open quick view");
+dispatch("click", quick);
+assert.equal(openedId(), "a", "Quick view button still opens");
+dispatch("click", quick);
+assert.equal(isQuickOpen(), false, "Quick view button still toggles closed");
+dispatch("mouseover", rich);
+flush();
+assert.equal(isQuickOpen(), false, "hover still does not open");
+window.innerWidth = 390;
+dispatch("click", photo);
+assert.equal(openedId(), "a", "a phone tap on the photo still opens");
+toggleStar = realToggle;
 '''
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
