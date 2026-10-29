@@ -18,7 +18,7 @@ class AlertsUiTests(unittest.TestCase):
         self.assertIn('const ALERTS_API_BASE = "";', js)
         self.assertIn("function appendQuickAlert(", js)
         self.assertIn("appendQuickAlert(actions, card)", js)
-        self.assertIn('summary.textContent = "More details"', js)
+        self.assertIn('summary.textContent = "Price History & Details"', js)
         self.assertIn("/v1/subscribe", block)
         self.assertIn("/v1/verify", block)
         self.assertIn("/v1/preferences", block)

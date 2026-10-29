@@ -14,7 +14,7 @@ let state = {
     cardLow: false,
     // Digest chip. "all" is the default and is not a table filter.
     // New, price drops, hit lowest, and disappeared always use the previous
-    // daily scrape (data-added, data-drop, data-hitlow, and the gone count).
+    // daily scrape (data-added, data-drop, data-hitlow, and data-removed).
     change: "all",
     grouped: false,
     dropInterval: "all",
@@ -1044,10 +1044,18 @@ function rowMatchesNow(row, overrides) {
     if (cardLow && row.dataset.lowest !== "1") return false;
     const baseline = scrapeBaseline(row);
     const change = over.change != null ? over.change : state.change;
+    // Disappeared rows come from the previous scrape and are not live deals.
+    // Any other chip, including All deals, leaves them out. A chip with no
+    // matches stays empty instead of showing the rest of the catalog.
+    const removedOnly = row.dataset.removed === "1";
+    if (change === "removed") {
+        if (!removedOnly) return false;
+    } else if (removedOnly) {
+        return false;
+    }
     if (change === "new" && !baseline.added) return false;
     if (change === "drop" && !baseline.drop) return false;
     if (change === "lowest" && !baseline.low) return false;
-    // "removed" opens Recently gone. It does not hide current deals.
     return true;
 }
 
@@ -1510,17 +1518,6 @@ function mirrorCardFlags() {
     if (cardPoolNode()) syncMountedCards();
 }
 
-function showGone(on) {
-    const gone = document.getElementById("goneSection");
-    if (!gone) return;
-    const content = gone.querySelector(".section-content");
-    const header = gone.querySelector(".section-header");
-    if (on) {
-        if (content) content.classList.remove("collapsed");
-        if (header) header.classList.remove("collapsed");
-    }
-}
-
 let filterTimer = 0;
 
 function queueFilters() {
@@ -1534,7 +1531,6 @@ function applyFilters() {
     dealRows().forEach(row => {
         row.classList.toggle("filtered-out", !rowMatches(row));
     });
-    showGone(state.change === "removed");
     paintOfferPrices();
     applySectionFilters();
     applyGroupVisibility();
@@ -1552,6 +1548,7 @@ function applyFilters() {
     paintViews();
     paintNav();
     syncDuals();
+    updateChangeLine();
     matchMemo = null;
     fitCardPhotos();
 }
@@ -1965,10 +1962,6 @@ function setChange(kind) {
     if (!kind || kind === "all" || state.change === kind) state.change = "all";
     else state.change = kind;
     applyFilters();
-    if (state.change === "removed") {
-        const gone = document.getElementById("goneSection");
-        if (gone) gone.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
 }
 
 const SORT_NUMERIC = { price: 1, original: 1, discount: 1, size: 1, days: 1, daysat: 1, score: 1, rank: 1, observations: 1 };
@@ -2286,22 +2279,39 @@ function plural(count, singular, pluralText) {
 }
 
 function updateChangeLine() {
-    const line = document.getElementById("changeLine");
     const prefix = document.getElementById("changePrefix");
-    const added = line ? parseInt(line.dataset.new || "0", 10) : 0;
-    const drop = line ? parseInt(line.dataset.drops || "0", 10) : 0;
-    const low = line ? parseInt(line.dataset.lows || "0", 10) : 0;
-    const gone = line ? parseInt(line.dataset.gone || "0", 10) : 0;
     if (prefix) prefix.textContent = "vs previous scrape";
-    const map = {
-        btnNew: "New " + added,
-        btnDrop: "Price drops " + drop,
-        btnLow: "Hit lowest " + low,
-        btnGone: "Disappeared " + gone
-    };
-    Object.keys(map).forEach(id => {
-        const node = document.getElementById(id);
-        if (node) node.textContent = map[id];
+    function digestCount(dataKey) {
+        const line = document.getElementById("changeLine");
+        const raw = line && line.dataset ? line.dataset[dataKey] : "";
+        const count = parseInt(raw || "0", 10);
+        return Number.isFinite(count) ? count : 0;
+    }
+    // Rows under the current category, store, and other filters. The active
+    // chip uses the same rows as the result count. No table yet: the saved
+    // digest totals stay on the chips.
+    function changeMatchCount(kind) {
+        if (!document.querySelectorAll) return null;
+        const rows = dealRows();
+        if (!rows.length) return null;
+        let count = 0;
+        rows.forEach(row => {
+            if (!rowMatches(row, { change: kind })) return;
+            if (state.change === kind && row.classList.contains("grouped-hide")) return;
+            count += 1;
+        });
+        return count;
+    }
+    [
+        ["btnNew", "New ", "new", "new"],
+        ["btnDrop", "Price drops ", "drop", "drops"],
+        ["btnLow", "Hit lowest ", "lowest", "lows"],
+        ["btnGone", "Disappeared ", "removed", "gone"]
+    ].forEach(item => {
+        const node = document.getElementById(item[0]);
+        if (!node) return;
+        const matched = changeMatchCount(item[2]);
+        node.textContent = item[1] + (matched == null ? digestCount(item[3]) : matched);
     });
 }
 
@@ -4092,6 +4102,9 @@ function showInsights() {
 let quickCard = null;
 let quickPinned = false;
 let quickForceSheet = false;
+let quickTrigger = null;
+let quickHistory = false;
+let suppressQuickPop = false;
 
 function quickIsSheet() {
     if (window.innerWidth <= 800) return true;
@@ -4522,7 +4535,8 @@ function fillQuickView(card) {
         link.href = facts.viewUrl;
         link.target = "_blank";
         link.rel = "noopener";
-        link.textContent = facts.viewLabel;
+        link.textContent = "View Deal";
+        link.setAttribute("aria-label", facts.viewLabel ? facts.viewLabel.replace(/^View at /, "View Deal at ") : "View Deal");
         actions.appendChild(link);
     }
     const secondary = document.createElement("div");
@@ -4796,7 +4810,7 @@ function appendQuickMore(body, card, item, facts) {
     const more = document.createElement("details");
     more.className = "quick-more";
     const summary = document.createElement("summary");
-    summary.textContent = "More details";
+    summary.textContent = "Price History & Details";
     more.appendChild(summary);
     const priceNote = document.createElement("p");
     priceNote.className = "quick-price-note";
@@ -5280,10 +5294,11 @@ function placeQuickView(card) {
     panel.style.top = top + "px";
 }
 
-function closeQuickView() {
+function closeQuickView(fromHistory) {
     const panel = document.getElementById("quickView");
-    const returnFocus = quickPinned && panel && panel.contains(document.activeElement)
-        && quickCard && quickCard.querySelector(".card-quick, .card-more");
+    const returnFocus = quickTrigger
+        || (quickPinned && panel && panel.contains(document.activeElement)
+            && quickCard && quickCard.querySelector(".card-quick, .card-more"));
     if (panel) {
         panel.hidden = true;
         panel.classList.remove("is-sheet");
@@ -5299,11 +5314,87 @@ function closeQuickView() {
     quickPinned = false;
     quickCard = null;
     quickForceSheet = false;
+    quickTrigger = null;
     setQuickExpanded(false);
     const back = groupReturnFocus;
     groupReturnFocus = null;
-    if (back && back.isConnected && back.focus) back.focus({ preventScroll: true });
-    else if (returnFocus && returnFocus.isConnected) returnFocus.focus({ preventScroll: true });
+    // Closing does not change filters, sort, or scroll. Focus returns to the control that opened it.
+    const live = node => node && node.focus && node.isConnected !== false;
+    if (live(back)) back.focus({ preventScroll: true });
+    else if (live(returnFocus)) returnFocus.focus({ preventScroll: true });
+    if (!fromHistory && quickHistory) {
+        quickHistory = false;
+        suppressQuickPop = true;
+        try {
+            history.back();
+        } catch (err) {
+            suppressQuickPop = false;
+        }
+    } else {
+        quickHistory = false;
+    }
+}
+
+function pushQuickHistory() {
+    if (quickHistory) return;
+    if (typeof history === "undefined" || !history.pushState) return;
+    try {
+        const here = (typeof location === "undefined" ? "" : (location.pathname || "") + (location.search || "")) || ".";
+        history.pushState({ quick: 1, view: String((location && location.search) || "").replace(/^\?/, "") }, "", here);
+        quickHistory = true;
+    } catch (err) {
+        quickHistory = false;
+    }
+}
+
+function onPagePopState(event) {
+    if (suppressQuickPop) {
+        suppressQuickPop = false;
+        return;
+    }
+    const stateQuick = event && event.state && event.state.quick;
+    if (isQuickOpen() && !stateQuick) {
+        closeQuickView(true);
+        return;
+    }
+    if (stateQuick) return;
+    restoreFromUrl();
+}
+
+function quickTabStops(panel) {
+    if (!panel || !panel.querySelectorAll) return [];
+    const nodes = panel.querySelectorAll("a, button, summary, input, select, textarea");
+    const stops = [];
+    nodes.forEach(node => {
+        if (!node || node.hidden || node.disabled) return;
+        const details = node.closest && node.closest("details");
+        const summary = String(node.tagName || node.tag || "").toUpperCase() === "SUMMARY";
+        if (details && !details.open && !summary) return;
+        stops.push(node);
+    });
+    return stops;
+}
+
+function trapQuickFocus(event) {
+    if (!event || event.key !== "Tab" || !isQuickOpen()) return;
+    const panel = document.getElementById("quickView");
+    const stops = quickTabStops(panel);
+    if (!stops.length) return;
+    const first = stops[0];
+    const last = stops[stops.length - 1];
+    const active = document.activeElement;
+    const inside = panel && panel.contains && panel.contains(active);
+    if (event.shiftKey) {
+        if (!inside || active === first) {
+            if (event.preventDefault) event.preventDefault();
+            if (last.focus) last.focus();
+        }
+        return;
+    }
+    if (!inside || active === last) {
+        if (event.preventDefault) event.preventDefault();
+        if (first.focus) first.focus();
+    }
 }
 
 function openQuickView(card, pinned, forceSheet) {
@@ -5317,7 +5408,12 @@ function openQuickView(card, pinned, forceSheet) {
     const sheet = quickForceSheet || quickIsSheet();
     panel.classList.toggle("is-sheet", sheet);
     const dialog = panel.querySelector(".quick-panel");
-    if (dialog) dialog.setAttribute("aria-modal", sheet ? "true" : "false");
+    if (dialog) dialog.setAttribute("aria-modal", "true");
+    if (pinned) {
+        const from = document.activeElement;
+        const button = card.querySelector && card.querySelector(".card-quick");
+        quickTrigger = (from && card.contains && card.contains(from)) ? from : (button || from);
+    }
     fillQuickView(card);
     panel.hidden = false;
     document.body.classList.toggle("quick-sheet", sheet);
@@ -5331,9 +5427,10 @@ function openQuickView(card, pinned, forceSheet) {
     }
     setQuickExpanded(true);
     refitQuickPhoto();
+    pushQuickHistory();
     if (pinned) {
         const close = panel.querySelector(".quick-close");
-        if (close) close.focus();
+        if (close && close.focus) close.focus();
     }
 }
 
@@ -5368,12 +5465,9 @@ function wireQuickView() {
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
         if (event.target.closest("#quickView, .card-more, .card-quick, .card-alert, .group-quick, .group-chart, .price-btn, #alertsRoot, #navAlerts")) return;
-        // A phone tap on the card opens this view in the capture handler. That
-        // same tap must not count as an outside click and dismiss it.
-        const deal = event.target.closest(".deal-row, .deal-card");
-        if (deal && quickIsSheet() && !event.target.closest("a, button, input, select, label")) return;
         closeQuickView();
     });
+    document.addEventListener("keydown", trapQuickFocus);
 }
 
 function placeScoreFloat(cell, anchor) {
@@ -5483,11 +5577,9 @@ function wireDealEvents() {
             selectGroupOffer(groupOffer, false);
             return;
         }
-        const row = event.target.closest(".deal-row, .deal-card");
-        if (!row || event.target.closest("a, button, input, select, label")) return;
-        // Desktop cards open only from the Quick view button. A phone tap
-        // still opens the same photo view, and table rows keep their click.
-        if (row.classList.contains("deal-card") && !quickIsSheet()) return;
+        const row = event.target.closest(".deal-row");
+        if (!row || row.classList.contains("deal-card")) return;
+        if (event.target.closest("a, button, input, select, label")) return;
         event.preventDefault();
         event.stopPropagation();
         openQuickView(row, true);
@@ -5507,9 +5599,9 @@ function wireDealEvents() {
             else openQuickView(card, true);
             return;
         }
-        const row = event.target.closest(".deal-row, .deal-card");
-        if (!row || event.target.closest("a, button, input, select, label")) return;
-        if (row.classList.contains("deal-card") && !quickIsSheet()) return;
+        const row = event.target.closest(".deal-row");
+        if (!row || row.classList.contains("deal-card")) return;
+        if (event.target.closest("a, button, input, select, label")) return;
         event.preventDefault();
         openQuickView(row, true);
     });
@@ -6110,7 +6202,7 @@ function init() {
     paintViews();
     const home = document.getElementById("homeReset");
     if (home) home.addEventListener("click", clearFilters);
-    window.addEventListener("popstate", restoreFromUrl);
+    window.addEventListener("popstate", onPagePopState);
     if (location.search && location.search.length > 1) loadFromUrl();
     else {
         state.change = "all";

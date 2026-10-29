@@ -151,6 +151,11 @@
         opacity: 1;
         pointer-events: auto;
     }
+    /* Small Quick view control, visible without a first tap to reveal it. */
+    .deal-card .card-quick {
+        opacity: 1;
+        pointer-events: auto;
+    }
     .deal-card .spark-hit { min-height: 1.75rem; }
     .deal-card {
         height: auto;

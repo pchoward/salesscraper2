@@ -22,8 +22,20 @@ class QuickViewTests(unittest.TestCase):
         self.assertIn(".deal-card:focus-within .card-quick", css)
         self.assertIn("(hover: hover) and (pointer: fine)", css)
         media = page.split('<div class="media">', 1)[1].split("card-sparkline", 1)[0]
-        self.assertIn('class="card-quick"', media)
-        self.assertIn(">Quick view</button>", media)
+        self.assertIn("_card_quick_button(", media)
+        self.assertIn(">Quick view</button>", page)
+        link = page.split("def _card_store_link", 1)[1].split("def _card_quick_button", 1)[0]
+        self.assertIn('class="card-store-link"', link)
+        self.assertIn('target="_blank"', link)
+        self.assertNotIn("<button", link)
+        quick = page.split("def _card_quick_button", 1)[1].split("def _removed_card_html", 1)[0]
+        self.assertIn("Quick view:", quick)
+        card = page.split("def _card_html", 1)[1].split("def _spec_box", 1)[0]
+        self.assertIn("_card_store_link(", card)
+        self.assertIn("_card_quick_button(", card)
+        self.assertNotIn('tabindex="0"', card)
+        self.assertIn(".card-store-link", css)
+        self.assertIn("opacity: 1", mobile[mobile.index("Small Quick view control"):])
         script = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
         handler = script[script.index('closest(".card-quick")'):script.index('closest(".card-quick")') + 420]
         self.assertIn("openQuickView(card, true)", handler)
@@ -93,12 +105,13 @@ assert.equal(body.querySelectorAll('.quick-spec-chip').at(-1).textContent, '11')
 const more = body.querySelector('.quick-more');
 assert.equal(more.tag, 'details');
 assert.ok(!more.attrs.open, 'more details starts collapsed');
-assert.equal(more.querySelector('summary').textContent, 'More details');
+assert.equal(more.querySelector('summary').textContent, 'Price History & Details');
 assert.equal(more.querySelectorAll('.quick-spec-chip').length, 10, 'full sizes sit behind more details');
 assert.equal(body.querySelector('.quick-specs-table'), null, 'a size list is not a key spec');
 assert.equal(body.querySelector('.quick-product').children[0].className, 'quick-gallery');
 assert.equal(more.querySelector('.quick-view-link'), null);
-assert.equal(body.querySelector('.quick-view-link').textContent, 'View at CCS');
+assert.equal(body.querySelector('.quick-view-link').textContent, 'View Deal');
+assert.equal(body.querySelector('.quick-view-link').attrs['aria-label'], 'View Deal at CCS');
 for (const c of ['quick-chart','quick-tracking','quick-facts','quick-score','quick-stores']) assert.equal(body.querySelector('.'+c), null);
 const controls = body.querySelector('.quick-gallery-controls');
 const photo = body.querySelector('.quick-gallery').querySelector('img');
@@ -334,11 +347,12 @@ chart.events.mousemove({clientX: 488, clientY: 70});
 assert.match(body.querySelector('.quick-readout').textContent, /^Price reduction/);
 chart.events.touchstart({touches: [{clientX: 40, clientY: 40}]});
 assert.match(body.querySelector('.quick-readout').textContent, /Sep 1, 2026 · \$70\.00/);
-assert.equal(body.querySelector('.quick-view-link').textContent, 'View at CCS');
+assert.equal(body.querySelector('.quick-view-link').textContent, 'View Deal');
+assert.equal(body.querySelector('.quick-view-link').attrs['aria-label'], 'View Deal at CCS');
 const more = body.querySelector('.quick-more');
 assert.equal(more.tag, 'details');
 assert.ok(!more.attrs.open, 'more details starts collapsed');
-assert.equal(more.querySelector('summary').textContent, 'More details');
+assert.equal(more.querySelector('summary').textContent, 'Price History & Details');
 assert.ok(more.querySelector('.quick-compare'), 'price comparison stays behind more details');
 assert.ok(more.querySelector('.history-chart'));
 assert.ok(more.querySelector('.quick-score'));
@@ -401,7 +415,7 @@ assert.equal(body.querySelector('.quick-gallery').tag, 'div');
         self.assertIn('class="quick-close filters-done" id="filtersClose" aria-label="Close filters">×</button>', page)
         deals = script[script.index("function wireDealEvents("):script.index("function backdropPixel(")]
         self.assertNotIn("openProduct(", deals)
-        click = deals[deals.index('const row = event.target.closest(".deal-row, .deal-card");'):]
+        click = deals[deals.index('const row = event.target.closest(".deal-row");'):]
         self.assertIn("openQuickView(row, true)", click)
         self.assertIn("openQuickView(card, true, true)", deals)
         self.assertIn("function openProduct(", script)
@@ -410,8 +424,8 @@ assert.equal(body.querySelector('.quick-gallery').tag, 'div');
         self.assertNotIn("productModal", opener)
         closer = script[script.index("function wireQuickView("):script.index("function placeScoreFloat(")]
         outside = closer[closer.index('document.addEventListener("click"'):]
-        self.assertIn('closest(".deal-row, .deal-card")', outside)
-        self.assertIn('!event.target.closest("a, button, input, select, label")', outside)
+        self.assertIn('closest("#quickView, .card-more, .card-quick', outside)
+        self.assertIn("closeQuickView()", outside)
 
     def test_quick_view_opens_from_the_button_and_closes_cleanly(self):
         source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
@@ -429,6 +443,9 @@ const assert = require("node:assert/strict");
 let quickCard = null;
 let quickPinned = false;
 let quickForceSheet = false;
+let quickTrigger = null;
+let quickHistory = false;
+let suppressQuickPop = false;
 let groupReturnFocus = null;
 let sparkPinned = false;
 function quickIsSheet() {
@@ -520,7 +537,7 @@ class Element {
     if (node === this) return true;
     return this.children.some(child => child === node || (child.contains && child.contains(node)));
   }
-  focus() {}
+  focus() { document.activeElement = this; }
   get textContent() { return this.children.length ? this.children.map(child => child.textContent).join("") : this._text; }
   set textContent(value) { this._text = String(value); this.children = []; }
   get classList() {
@@ -579,9 +596,12 @@ const document = {
 const window = {
   innerWidth: 1200,
   innerHeight: 900,
+  scrollY: 40,
   matchMedia() { return {matches: false}; },
-  addEventListener() {}
+  addEventListener() {},
+  scrollTo() { window.scrollY = 0; }
 };
+const state = { part: "Decks", change: "all", store: "all", search: "", widths: [], kinds: [] };
 function dispatch(type, target, extra) {
   const event = {type, target, key: extra && extra.key, relatedTarget: extra && extra.relatedTarget, clientX: 0, clientY: 0,
     preventDefault() {}, stopPropagation() { event.stopped = true; }};
@@ -598,9 +618,10 @@ dispatch("mouseout", cardA.card);
 flush();
 assert.equal(isQuickOpen(), false, "hover does not open");
 assert.equal(queued.length, 0, "hover does not arm a timer");
-dispatch("click", cardA.card);
+const cardClick = dispatch("click", cardA.card);
 flush();
-assert.equal(isQuickOpen(), false, "clicking the card does not open");
+assert.equal(isQuickOpen(), false, "clicking the card does not open quick view");
+assert.equal(cardClick.stopped, undefined, "card click is left to the retailer link");
 dispatch("keydown", cardA.button, {key: "Enter"});
 assert.equal(isQuickOpen(), true, "Enter on Quick view opens");
 assert.equal(quickCard.dataset.id, "a");
@@ -628,12 +649,113 @@ dispatch("click", cardA.button);
 assert.equal(isQuickOpen(), true);
 body.querySelector(".quick-close").events.click({preventDefault() {}, stopPropagation() {}});
 assert.equal(isQuickOpen(), false, "X closes");
-dispatch("click", cardA.card);
-assert.equal(isQuickOpen(), false);
+const desktopCard = dispatch("click", cardA.card);
+assert.equal(isQuickOpen(), false, "desktop card click stays on the retailer link");
+assert.equal(desktopCard.stopped, undefined);
 window.innerWidth = 390;
-dispatch("click", cardB.card);
-assert.equal(isQuickOpen(), true, "a phone tap still opens");
+const phoneCard = dispatch("click", cardB.card);
+assert.equal(isQuickOpen(), false, "a phone tap on the card does not open quick view");
+assert.equal(phoneCard.stopped, undefined);
+document.activeElement = cardB.button;
+dispatch("click", cardB.button);
+assert.equal(isQuickOpen(), true, "the quick view control still opens");
 assert.equal(quickCard.dataset.id, "b");
+const outside = new Element("div");
+dispatch("click", outside);
+assert.equal(isQuickOpen(), false, "a click outside still closes");
+function alertDraftFromDataset() { return {}; }
+function alertsProductImage() { return ""; }
+let alertsOpened = 0;
+function openAlerts() { alertsOpened += 1; }
+let starToggles = 0;
+const realToggle = toggleStar;
+toggleStar = () => { starToggles += 1; };
+function child(tag, className, parent) {
+  const node = new Element(tag);
+  node.className = className;
+  parent.append(node);
+  return node;
+}
+const rich = new Element("article");
+rich.className = "deal-card";
+rich.dataset = {id: "a", price: "40", url: "https://example.com/a", store: "Tactics", name: "Deck A"};
+const storeLink = child("a", "card-store-link", rich);
+storeLink.setAttribute("href", "https://example.com/a");
+storeLink.setAttribute("target", "_blank");
+const photo = child("img", "hero", child("div", "media", rich));
+const title = child("h3", "product-name", rich);
+title.textContent = "Deck A";
+const offer = child("p", "card-offer", rich);
+const price = child("p", "card-prices", rich);
+const footer = child("p", "card-meta", rich);
+footer.textContent = "Found Oct 1 · Tactics";
+const alertBtn = child("button", "card-alert", rich);
+alertBtn.textContent = "Alert me";
+const star = child("button", "star", rich);
+const quick = child("button", "card-quick", rich);
+quick.setAttribute("aria-label", "Quick view: Deck A");
+assert.equal(storeLink.querySelector("button"), null, "the retailer link has no nested controls");
+function openedId() { return isQuickOpen() && quickCard ? quickCard.dataset.id : null; }
+function leavesRetailer(target, label) {
+  const event = dispatch("click", target);
+  assert.equal(openedId(), null, label + " does not open quick view");
+  assert.equal(event.stopped, undefined, label + " is not swallowed");
+}
+onDocumentEscape({key: "Escape", preventDefault() {}});
+leavesRetailer(rich, "card background");
+leavesRetailer(photo, "photo");
+leavesRetailer(title, "title");
+leavesRetailer(offer, "discount");
+leavesRetailer(price, "price");
+leavesRetailer(footer, "footer");
+leavesRetailer(storeLink, "retailer link");
+dispatch("click", alertBtn);
+assert.equal(isQuickOpen(), false, "Alert me does not open quick view");
+assert.equal(alertsOpened, 1, "Alert me keeps its action");
+dispatch("click", star);
+assert.equal(isQuickOpen(), false, "star does not open quick view");
+assert.equal(starToggles, 1, "star keeps its action");
+dispatch("keydown", rich, {key: "Enter"});
+assert.equal(isQuickOpen(), false, "Enter on the card does not open quick view");
+dispatch("keydown", storeLink, {key: "Enter"});
+assert.equal(isQuickOpen(), false, "Enter on the retailer link does not open quick view");
+const savedPart = state.part;
+const savedChange = state.change;
+const savedScroll = window.scrollY;
+document.activeElement = quick;
+dispatch("click", quick);
+assert.equal(openedId(), "a", "Quick view button opens only the modal");
+assert.equal(document.activeElement.className.includes("quick-close"), true, "focus moves into the modal");
+const stops = quickTabStops(document.getElementById("quickView"));
+assert.ok(stops.length > 1, "modal has several tab stops");
+const tabEvent = {key: "Tab", target: stops[stops.length - 1], preventDefault() { tabEvent.prevented = true; }, shiftKey: false};
+document.activeElement = stops[stops.length - 1];
+trapQuickFocus(tabEvent);
+assert.equal(tabEvent.prevented, true, "Tab is trapped");
+assert.equal(document.activeElement, stops[0], "Tab wraps to the first control");
+assert.equal(state.part, savedPart, "filters stay put while open");
+assert.equal(state.change, savedChange, "sort and change stay put while open");
+onDocumentEscape({key: "Escape", preventDefault() {}});
+assert.equal(isQuickOpen(), false, "Escape closes");
+assert.equal(document.activeElement, quick, "focus returns to Quick view");
+assert.equal(state.part, savedPart);
+assert.equal(state.change, savedChange);
+assert.equal(window.scrollY, savedScroll, "scroll survives close");
+document.activeElement = quick;
+dispatch("click", quick);
+assert.equal(isQuickOpen(), true);
+onPagePopState({state: {view: "type=deck"}});
+assert.equal(isQuickOpen(), false, "Back closes quick view");
+assert.equal(state.part, savedPart, "Back keeps the current filters");
+assert.equal(window.scrollY, savedScroll, "Back does not jump the page");
+dispatch("mouseover", rich);
+flush();
+assert.equal(isQuickOpen(), false, "hover still does not open");
+window.innerWidth = 390;
+leavesRetailer(photo, "phone photo");
+dispatch("click", quick);
+assert.equal(openedId(), "a", "phone quick view control still opens");
+toggleStar = realToggle;
 '''
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
