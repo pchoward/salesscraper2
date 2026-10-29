@@ -121,7 +121,7 @@ def main():
                     if isinstance(entry, dict) and entry.get("stock") == "out_of_stock"}
     if isinstance(price_history, dict):
         try:
-            carried = record_misses(prev_data, curr_data, price_history, failed_keys)
+            carried = record_misses(prev_data, curr_data, price_history, failed_keys, today=scanned_at[:10])
             logging.info("Carried %s listings after a single miss", len(carried))
             confirm_stock(price_history, curr_data, failed_keys)
         except Exception as exc:
