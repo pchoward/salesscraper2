@@ -32,6 +32,9 @@ logger = logging.getLogger("stores.socal")
 STORE = "SoCal"
 DISPLAY_NAME = "SoCal Skateshop"
 BASE = "https://socalskateshop.com/"
+# Miva serves product images from /mm5/; cards use paths relative to it
+# ("graphics/00000001/..."). A page's own <base href> wins when present.
+IMAGE_BASE = "https://socalskateshop.com/mm5/"
 CATEGORY = "https://socalskateshop.com/Clearance-Skateboard-Products.html"
 PER_PAGE = 72
 MAX_PAGES = 10
@@ -42,6 +45,8 @@ _USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 )
 _PRICE = re.compile(r"\$\s?(\d[\d,]*\.\d{2})")
+# SoCal names start with the size: "8.5x32.375 Poorhouse Pop Deck - Black Stain".
+_LEADING_SIZE = re.compile(r"^(\d{1,2}(?:\.\d+)?\s*[\"\u201d]?\s*(?:x\s*\d{1,2}(?:\.\d+)?\s*[\"\u201d]?)?)\s+(?=\D)", re.IGNORECASE)
 _CACHE = {}
 
 
@@ -59,6 +64,19 @@ def _fetch(url, timeout=30):
         return None
 
 
+def clean_name(name):
+    """Move a leading size to the end, so the name starts with the brand.
+
+    The page reads an unknown brand from the first word; "8.5x32.375" is not
+    a brand. The size still parses at the end.
+    """
+    text = normalize_product_name(name)
+    match = _LEADING_SIZE.match(text)
+    if not match:
+        return text
+    return f"{text[match.end():].strip()} {match.group(1).strip()}"
+
+
 def _price(node):
     match = _PRICE.search(node.get_text(" ", strip=True)) if node is not None else None
     return f"{float(match.group(1).replace(',', '')):.2f}" if match else None
@@ -67,13 +85,15 @@ def _price(node):
 def cards_from_html(html):
     """``[{name, url, price_new, price_old, image}]`` from one category page."""
     soup = BeautifulSoup(html or "", "html.parser")
+    base_tag = soup.find("base", href=True)
+    image_base = urljoin(BASE, base_tag["href"]) if base_tag is not None else IMAGE_BASE
     cards = []
     for card in soup.select(".x-product-list__item"):
         link = card.select_one("a.x-product-list__link[href]")
         name_node = card.select_one(".x-product-list__name")
         if link is None or name_node is None:
             continue
-        name = normalize_product_name(name_node.get_text(" ", strip=True))
+        name = clean_name(name_node.get_text(" ", strip=True))
         url = normalize_url(urljoin(BASE, link["href"]))
         was = None
         now = None
@@ -89,7 +109,7 @@ def cards_from_html(html):
                 "url": url,
                 "price_new": now,
                 "price_old": was,
-                "image": urljoin(BASE, image["src"]) if image is not None else "",
+                "image": urljoin(image_base, image["src"]) if image is not None else "",
             })
     return cards
 
