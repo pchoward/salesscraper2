@@ -79,6 +79,7 @@ _ENTRY_FIELDS = (
     "all_time_low_date",
     "stage",
     "miss_streak",
+    "miss_day",
     "stock",
     "previous_urls",
     "earlier_products",
@@ -249,6 +250,8 @@ def _ordered_entry(entry):
                 continue
             if value < 1:
                 continue
+        if field == "miss_day" and _as_date(value) is None:
+            continue
         if field == "stock" and value != "out_of_stock":
             continue
         if field in ("previous_urls", "earlier_products"):
@@ -348,6 +351,7 @@ def reconcile_moved_urls(history, current_data, skip_keys=None, skip_urls=None):
         previous = [value for value in (entry.get("previous_urls") or []) if value not in (old, url)]
         entry["previous_urls"] = (previous + [old])[-MAX_IDENTITY_NOTES:]
         entry.pop("miss_streak", None)
+        entry.pop("miss_day", None)
         entry.pop("stock", None)
         history[url] = entry
         by_handle[identity["key"]] = [value for value in by_handle[identity["key"]] if value != old] + [url]
@@ -791,7 +795,18 @@ def _store_key(entry):
     return f"{store}_{part}"
 
 
-def record_misses(previous_data, current_data, history, skip_keys=None):
+def _missed_on(entry, day):
+    """True when ``entry`` already counted a miss on ``day`` (None: never)."""
+    return day is not None and _as_date(entry.get("miss_day")) == day
+
+
+def _count_miss(entry, day, streak):
+    entry["miss_streak"] = streak
+    if day is not None:
+        entry["miss_day"] = day.isoformat()
+
+
+def record_misses(previous_data, current_data, history, skip_keys=None, today=None):
     """Count misses on this successful scan and keep a first miss in the catalog.
 
     Returns URLs carried forward. Those rows stay in ``current_data`` so they
@@ -799,6 +814,11 @@ def record_misses(previous_data, current_data, history, skip_keys=None):
     is skipped: it does not add a miss and does not drop listings. A listing
     already absent from the previous catalog that this scan also misses counts
     as the second miss (the saved catalog was the first).
+
+    With ``today``, a listing counts at most one miss per day. A same-day
+    re-scrape sees the carried row in its previous catalog; missing it again
+    that day is the same miss, so the row is carried again instead of
+    becoming Disappeared. Without ``today`` every call is its own scan.
     """
     if not isinstance(history, dict):
         raise TypeError("price history must be a dict")
@@ -806,6 +826,7 @@ def record_misses(previous_data, current_data, history, skip_keys=None):
     # A Shopify listing that moved paths is not a miss; its row follows it.
     reconcile_moved_urls(history, current_data, skip_keys)
     moved = _moved_urls(history)
+    day = _as_date(today)
     carried = set()
     for key, items in list((current_data or {}).items()):
         if key in skip or not isinstance(items, list):
@@ -821,6 +842,7 @@ def record_misses(previous_data, current_data, history, skip_keys=None):
             entry = history.get(url)
             if isinstance(entry, dict):
                 entry.pop("miss_streak", None)
+                entry.pop("miss_day", None)
                 entry.pop("stock", None)
         prev_items = (previous_data or {}).get(key) or []
         if not isinstance(prev_items, list):
@@ -844,8 +866,11 @@ def record_misses(previous_data, current_data, history, skip_keys=None):
                     "prices": {},
                 }
                 history[url] = entry
-            streak = _miss_streak(entry) + 1
-            entry["miss_streak"] = streak
+            if _missed_on(entry, day):
+                streak = _miss_streak(entry)
+            else:
+                streak = _miss_streak(entry) + 1
+                _count_miss(entry, day, streak)
             if streak < GONE_AFTER_MISSES:
                 items.append(item)
                 carried.add(url)
@@ -855,9 +880,9 @@ def record_misses(previous_data, current_data, history, skip_keys=None):
             if url in current_urls or url in prev_urls:
                 continue
             prior = _miss_streak(entry)
-            if prior >= GONE_AFTER_MISSES:
+            if prior >= GONE_AFTER_MISSES or _missed_on(entry, day):
                 continue
-            entry["miss_streak"] = GONE_AFTER_MISSES if prior == 0 else prior + 1
+            _count_miss(entry, day, GONE_AFTER_MISSES if prior == 0 else prior + 1)
     return carried
 
 
