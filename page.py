@@ -15,7 +15,7 @@ from zoneinfo import ZoneInfo
 from media import product_image_urls
 from badges import classify_badges
 from charts import CHART_NOTE, listing_series
-from dimensions import dimension_key, extract_specs
+from dimensions import dimension_key, extract_specs, parse_dimension
 from filters import (
     BEARING_BRANDS,
     DECK_BRANDS,
@@ -79,6 +79,14 @@ _BRANDS = {
     "sneakers": ("Nike SB", "Nike", "Vans"),
 }
 PART_ORDER = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes", "Protection")
+# First screen of cards. The rest stay out of the grid until the reader scrolls
+# or asks for more, so a wide catalog does not lay out every card on load.
+CARD_PAGE_SIZE = 24
+# Lower end included, upper end not. 30.0" is 30–31", not 29–30".
+LENGTH_BOUNDARY_TIP = (
+    'Deck length in inches. Each range includes its lower end and stops before '
+    'the next inch, so 30.0" is in 30\u201331", not 29\u201330".'
+)
 
 # Email alerts (docs/alerts-api.md). Both values are public by design: the
 # browser calls the Worker URL, and Turnstile site keys are meant to be seen.
@@ -115,6 +123,95 @@ def _read_asset(name):
     path = os.path.join(_HERE, name)
     with open(path, "r", encoding="utf-8") as handle:
         return handle.read()
+
+
+def parse_length(value):
+    """Inches for a deck length. ``31.75"``, ``30.0``, and ``30`` are accepted."""
+    return parse_dimension(value)
+
+
+def _length_label_number(number):
+    if abs(number - round(number)) < 1e-9:
+        return str(int(round(number)))
+    return f"{number:.4f}".rstrip("0").rstrip(".")
+
+
+def build_length_buckets(values):
+    """One-inch deck-length buckets for the values that actually occur.
+
+    The lower end of a range is included and the upper end is not.
+    ``30.0`` belongs to ``30–31"``. ``"31.75\\""`` parses as 31.75 and belongs
+    to ``31–32"``. The top bucket is open (``33"+``) so ``33.0`` is included
+    there, not in ``32–33"``.
+
+    The ends follow the data. A catalog whose shortest deck is 29.1" and whose
+    longest is 33.3" gets ``29–30"`` through ``32–33"`` and ``33"+``. Nothing
+    under 29" means that chip is left out. A shorter deck adds its own inch
+    (28.5" is ``28–29"``) instead of being folded into the next range.
+    """
+    numbers = []
+    for value in values or []:
+        number = parse_length(value)
+        if number is not None:
+            numbers.append(number)
+    if not numbers:
+        return []
+    low = math.floor(min(numbers))
+    high = math.floor(max(numbers))
+    buckets = []
+    if any(number < low - 1e-9 for number in numbers):
+        buckets.append(_length_bucket(None, low))
+    if high == low:
+        buckets.append(_length_bucket(low, low + 1))
+        return buckets
+    for inch in range(low, high):
+        buckets.append(_length_bucket(inch, inch + 1))
+    buckets.append(_length_bucket(high, None))
+    return buckets
+
+
+def _length_bucket(low, high):
+    """One bucket. ``high`` None is the open top. ``low`` None is the open bottom."""
+    if low is None:
+        label = f'under {_length_label_number(high)}"'
+        bucket_id = f"under-{_length_label_number(high)}"
+        tip = (
+            f'Under {_length_label_number(high)}". '
+            f'{_length_label_number(high)}.0" is in the next range, not this one. '
+            + LENGTH_BOUNDARY_TIP
+        )
+    elif high is None:
+        label = f'{_length_label_number(low)}"+'
+        bucket_id = f"{_length_label_number(low)}+"
+        tip = (
+            f'{_length_label_number(low)}" and longer. '
+            f'{_length_label_number(low)}.0" is included. '
+            + LENGTH_BOUNDARY_TIP
+        )
+    else:
+        label = f'{_length_label_number(low)}\u2013{_length_label_number(high)}"'
+        bucket_id = f"{_length_label_number(low)}-{_length_label_number(high)}"
+        tip = (
+            f'{_length_label_number(low)}" up to but not including {_length_label_number(high)}". '
+            + LENGTH_BOUNDARY_TIP
+        )
+    return {"id": bucket_id, "label": label, "min": low, "max": high, "tip": tip}
+
+
+def length_bucket_for(value, buckets):
+    """The bucket id for ``value``, or "" when it parses but fits none."""
+    number = parse_length(value)
+    if number is None:
+        return ""
+    for bucket in buckets or []:
+        low = bucket.get("min")
+        high = bucket.get("max")
+        if low is not None and number < low - 1e-9:
+            continue
+        if high is not None and number >= high - 1e-9:
+            continue
+        return bucket.get("id") or ""
+    return ""
 
 
 def _price(value):
@@ -473,7 +570,8 @@ def _thumb(image, alt, large=False):
     size = 200 if large else 84
     return (
         f'<span class="thumb-wrap{" hero-wrap" if large else ""}">'
-        f'<img class="{css}" src="{safe}" alt="{label}" width="{size}" height="{size}" loading="lazy" '
+        f'<img class="{css}" src="{safe}" alt="{label}" width="{size}" height="{size}" '
+        'loading="lazy" decoding="async" '
         'onerror="this.hidden=true;if(this.nextElementSibling)this.nextElementSibling.hidden=false">'
         f'<span class="{css} ph" hidden>{icon}</span></span>'
     )
@@ -1163,8 +1261,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     range_counts = {bucket.id: 0 for bucket in WIDTH_RANGES}
     brands = set()
     brand_counts = {}
-    lengths = set()
-    length_counts = {}
+    deck_lengths = []
     wheels = set()
     length_hits = 0
     wheel_hits = 0
@@ -1191,9 +1288,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         if record["brand"]:
             brands.add(record["brand"])
             brand_counts[record["brand"]] = brand_counts.get(record["brand"], 0) + 1
-        if record["length_key"]:
-            lengths.add(record["length_key"])
-            length_counts[record["length_key"]] = length_counts.get(record["length_key"], 0) + 1
+        if record["part"] == "Decks" and record["length_key"]:
+            deck_lengths.append(record["length_key"])
             length_hits += 1
         if record["wheel_key"]:
             wheels.add(record["wheel_key"])
@@ -1294,27 +1390,32 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     brand_options = ['<option value="all" data-label="All brands">All brands</option>']
     for brand in sorted_brands:
         brand_options.append(_option(brand, brand, data_label=brand))
+    length_buckets = build_length_buckets(deck_lengths)
     length_select = ""
-    if section_ready(length_hits):
+    if section_ready(length_hits) and length_buckets:
         options = ['<option value="all">All lengths</option>']
         length_chips = [
             '<button type="button" class="chip length-chip active" data-value="all" '
-            f'data-count="{length_hits}" aria-pressed="true">'
+            f'data-count="{length_hits}" aria-pressed="true" '
+            f'title="{escape(LENGTH_BOUNDARY_TIP, quote=True)}">'
             '<span class="spec-label">All</span>'
             f'<span class="spec-count">{length_hits}</span></button>'
         ]
-        for value in sorted(lengths, key=float):
-            count = length_counts.get(value, 0)
-            options.append(_option(value, value, data_label=value))
+        for bucket in length_buckets:
+            count = sum(1 for value in deck_lengths if length_bucket_for(value, [bucket]) == bucket["id"])
+            options.append(_option(bucket["id"], bucket["label"], data_label=bucket["label"]))
             zero = " is-zero" if count == 0 else ""
+            hidden = " hidden" if count == 0 else ""
             length_chips.append(
-                f'<button type="button" class="chip length-chip{zero}" '
-                f'data-value="{escape(str(value), quote=True)}" data-count="{count}" aria-pressed="false">'
-                f'<span class="spec-label">{escape(str(value))}&quot;</span>'
+                f'<button type="button" class="chip length-chip{zero}"{hidden} '
+                f'data-value="{escape(bucket["id"], quote=True)}" data-count="{count}" '
+                f'title="{escape(bucket["tip"], quote=True)}" aria-pressed="false">'
+                f'<span class="spec-label">{escape(bucket["label"])}</span>'
                 f'<span class="spec-count">{count}</span></button>'
             )
         length_select = (
-            '<div class="filter-group spec-ranges" id="lengthFilters" role="group" aria-label="Length">'
+            '<div class="filter-group spec-ranges" id="lengthFilters" role="group" '
+            f'aria-label="Deck length" title="{escape(LENGTH_BOUNDARY_TIP, quote=True)}">'
             + "".join(length_chips)
             + "</div>"
             f'<select id="lengthSelect" class="sr-only">{"".join(options)}</select>'
@@ -1380,7 +1481,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             f'<span class="facet-name">{escape(brand)}</span>'
             f'<span class="facet-count">({count})</span></button>'
         )
-    def _section(section_id, label, body, open_default=False, for_part=""):
+    def _section(section_id, label, body, open_default=False, for_part="", tip=""):
         if not body:
             return ""
         classes = ["filter-section"]
@@ -1391,10 +1492,11 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             classes.append("is-type-hidden")
         expanded = "true" if open_default else "false"
         for_attr = f' data-for="{escape(for_part, quote=True)}"' if for_part else ""
+        tip_attr = f' title="{escape(tip, quote=True)}"' if tip else ""
         return (
-            f'<section class="{" ".join(classes)}" data-section="{section_id}"{for_attr}>'
+            f'<section class="{" ".join(classes)}" data-section="{section_id}"{for_attr}{tip_attr}>'
             f'<button type="button" class="section-toggle" aria-expanded="{expanded}" '
-            f'aria-controls="section-{section_id}">{escape(label)}</button>'
+            f'aria-controls="section-{section_id}"{tip_attr}>{escape(label)}</button>'
             f'<div class="section-body" id="section-{section_id}">{body}</div>'
             "</section>"
         )
@@ -1702,6 +1804,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<select id="partSelect" class="sr-only" aria-label="Product type">{"".join(part_options)}</select>'
         "</div>"
     )
+    # Brand is rendered ahead of this block. Inside it, each type's main size
+    # comes before that type's secondary specs (length, durometer, height, …).
+    # Hidden types drop out, so a Trucks visit still reads Brand, Truck Size,
+    # Truck Height, Construction.
     context_specs = (
         '<div id="contextSpecs">'
         + _section(
@@ -1712,18 +1818,25 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             open_default=True,
             for_part="Decks",
         )
-        + _section("length", "Length", length_select, open_default=True, for_part="Decks")
-        + _section("wheelbase", "Wheelbase", wheel_select, for_part="Decks")
-        + diameter_section
-        + duro_section
-        + shape_section
         + truck_size_section
+        + diameter_section
+        + shoe_section
+        + prot_size_section
+        + abec_section
+        + _section(
+            "length",
+            "Deck Length",
+            length_select,
+            open_default=True,
+            for_part="Decks",
+            tip=LENGTH_BOUNDARY_TIP,
+        )
+        + _section("wheelbase", "Wheelbase", wheel_select, for_part="Decks")
         + truck_height_section
         + construction_section
-        + abec_section
-        + shoe_section
+        + duro_section
+        + shape_section
         + prot_type_section
-        + prot_size_section
         + "</div>"
     )
     sidebar_html = (
@@ -1733,6 +1846,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div class="filter-head"><span>Filter deals</span>'
         '<button type="button" class="text-btn" id="clearAll" onclick="clearFilters()">Clear all</button></div>'
         + '<div class="side-group" id="specGroup" aria-label="Product specifications">'
+        + _section("brand", "Brand", brand_facet, open_default=True)
         + context_specs
         + '<section class="filter-section" id="productSpecs" data-section="specs" hidden>'
         '<button type="button" class="section-toggle" aria-expanded="false" '
@@ -1742,7 +1856,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "</div></section>"
         + "</div>"
         + '<div class="side-group" aria-label="Shopping filters">'
-        + _section("brand", "Brand", brand_facet, open_default=True)
         + '<div class="more-filters" id="morePanel">'
         '<span class="sr-only">More filters</span>'
         + _section(
@@ -1973,14 +2086,33 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     )
     chunks.append(f'<div class="table-wrap"><table id="mainTable"><thead><tr>{"".join(head)}</tr></thead><tbody>')
     card_chunks = ['<div class="card-grid" id="cardGrid">']
+    pool_chunks = ['<template id="cardPool">']
+    shown_decks = 0
+    pooled_decks = 0
     for record in records:
         try:
             chunks.append(_row_html(record))
-            card_chunks.append(_card_html(record))
+            card_html = _card_html(record)
+            # The fresh visit is Decks, in this same rank order. The first
+            # page of those cards is in the grid; everything else waits.
+            if record["part"] == "Decks" and shown_decks < CARD_PAGE_SIZE:
+                card_chunks.append(card_html)
+                shown_decks += 1
+            else:
+                if record["part"] == "Decks":
+                    pooled_decks += 1
+                pool_chunks.append(card_html)
         except Exception as exc:
             logger.error("Row render failed for %s: %s", record.get("url"), exc)
     chunks.append("</tbody></table></div>")
     card_chunks.append("</div>")
+    more_hidden = "" if pooled_decks else " hidden"
+    card_chunks.append(
+        f'<button type="button" class="show-more-cards" id="showMoreCards"{more_hidden}>'
+        "Show more</button>"
+    )
+    card_chunks.extend(pool_chunks)
+    card_chunks.append("</template>")
     chunks.append("".join(card_chunks))
     chunks.append(_group_board(records))
     chunks.append("</div></div>")
@@ -2043,7 +2175,23 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         ]
     )
     chunks.append(_alerts_config_script())
-    chunks.append(f"<script>const WIDTH_RANGES = {ranges_literal};\n{_read_asset('page.js')}</script>")
+    length_literal = json.dumps(
+        [
+            {
+                "id": bucket["id"],
+                "label": bucket["label"],
+                "min": bucket["min"],
+                "max": bucket["max"],
+            }
+            for bucket in length_buckets
+        ]
+    )
+    chunks.append(
+        f"<script>const WIDTH_RANGES = {ranges_literal};\n"
+        f"const LENGTH_BUCKETS = {length_literal};\n"
+        f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
+        f"{_read_asset('page.js')}</script>"
+    )
     chunks.append("</body></html>")
     return "\n".join(chunk for chunk in chunks if chunk)
 
@@ -2292,7 +2440,7 @@ def _card_html(record):
         f'<span class="store-mark">{escape(store)}</span>'
         '<button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>'
         f'<h3 class="product-name">{_product_link(item)}</h3>'
-        f'<div class="card-sparkline">{_spark_html(record, width=156)}</div>'
+        f'<div class="card-sparkline">{_spark_html(record, width=156, defer=True)}</div>'
         f'<p class="card-offer">{off_html}{_sold_out_pill(record)}</p>'
         '<p class="card-prices">'
         f'{avg_html}<span class="now-price">Now {_money(item.get("price_new"), currency)}</span></p>'
@@ -2541,7 +2689,15 @@ def _dual_html(min_id, max_id, floor, ceil, prefix, any_label, min_label, max_la
     )
 
 
-def _spark_html(record, width=72, height=22, stroke=1.6):
+def _spark_html(record, width=72, height=22, stroke=1.6, defer=False):
+    card = " spark-card" if width > 80 else ""
+    # Card charts are drawn when the card scrolls into view. The button is
+    # reserved here so the card does not jump when the line appears.
+    if defer:
+        return (
+            f'<button type="button" class="spark-hit{card}" data-id="{record["id"]}" '
+            'aria-label="Price history"></button>'
+        )
     radius = 2.2
     if width > 80:
         direction = sparkline_direction(record["prices"], days=90, end=record.get("spark_end"))
@@ -2561,7 +2717,6 @@ def _spark_html(record, width=72, height=22, stroke=1.6):
     )
     if not spark:
         return ""
-    card = " spark-card" if width > 80 else ""
     return (
         f'<button type="button" class="spark-hit{card}" data-id="{record["id"]}" '
         'aria-label="Price history">'

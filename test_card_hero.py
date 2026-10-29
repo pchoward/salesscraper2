@@ -129,7 +129,8 @@ class CardHeroTests(unittest.TestCase):
             "--grey-0:", "--grey-900:", "--blue:", "--green:", "--spark:",
         ):
             self.assertIn(token, css)
-        self.assertIn("minmax(170px, 1fr)", css)
+        self.assertIn("max(170px, calc((100% - 7 * 8px) / 8))", css)
+        self.assertNotIn("minmax(170px, 1fr)", css)
         compact = html.replace(" ", "")
         self.assertIn("!=='table'", compact)
         self.assertIn("layout-cards", compact)
