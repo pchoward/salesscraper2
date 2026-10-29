@@ -3072,6 +3072,13 @@ body.alerts-open { overflow: hidden; }
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.gone-note {
+    margin: 0;
+    color: var(--grey-600);
+    font-size: var(--font-xs);
+    font-weight: 700;
+    line-height: 1.3;
+}
 /* Later, more specific rules so the shared chip wins over the older nav,
    sidebar, and toolbar skins, and the tracked average stays visible. */
 .nav-row .quick-chip,

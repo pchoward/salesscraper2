@@ -2104,6 +2104,28 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 pool_chunks.append(card_html)
         except Exception as exc:
             logger.error("Row render failed for %s: %s", record.get("url"), exc)
+    try:
+        removed_feed = _removed_feed(digest, products, price_history)
+    except Exception as exc:
+        logger.error("Disappeared feed failed: %s", exc)
+        removed_feed = []
+    for index, removed in enumerate(removed_feed):
+        row_id = f"g{index}"
+        try:
+            chunks.append(_removed_row_html(removed, row_id))
+            pool_chunks.append(_removed_card_html(removed, row_id))
+            catalog_json[row_id] = {
+                "name": removed["name"],
+                "url": removed["url"],
+                "store": removed["store"],
+                "part": removed["part"],
+                "image": removed.get("image") or "",
+                "images": product_image_urls(removed["item"], removed.get("image") or ""),
+                "daily": [],
+                "series": [],
+            }
+        except Exception as exc:
+            logger.error("Disappeared row failed for %s: %s", removed.get("url"), exc)
     chunks.append("</tbody></table></div>")
     card_chunks.append("</div>")
     more_hidden = "" if pooled_decks else " hidden"
@@ -2397,6 +2419,129 @@ def _sold_out_pill(record):
     if not record.get("sold_out"):
         return ""
     return ' <span class="pill pill-soldout" title="The store\'s product page says out of stock">Sold out</span>'
+
+
+def _removed_feed(digest, products, price_history):
+    """Previous-scrape listings that are not in the current catalog.
+
+    These are the Disappeared chip. They are not live deals, so the grid
+    shows them only while that chip is on.
+    """
+    current = set()
+    for item in products or []:
+        url = normalize_url((item or {}).get("url"))
+        if url:
+            current.add(url)
+    feed = []
+    seen = set()
+    for pair in getattr(digest, "removed", None) or []:
+        site = ""
+        item = None
+        if isinstance(pair, (list, tuple)) and len(pair) >= 2:
+            site, item = pair[0], pair[1]
+        elif isinstance(pair, dict):
+            nested = pair.get("item")
+            item = nested if isinstance(nested, dict) else pair
+            site = str(pair.get("site") or "")
+        if not isinstance(item, dict):
+            continue
+        url = normalize_url(item.get("url"))
+        if not url or url in current or url in seen:
+            continue
+        seen.add(url)
+        entry = _entry(price_history, url)
+        name = _display_name(item) or _display_name(entry)
+        if not name:
+            continue
+        part = item.get("part") or entry.get("part") or ""
+        store = item.get("store") or entry.get("store") or ""
+        if not store and isinstance(site, str) and "_" in str(site):
+            store = str(site).split("_", 1)[0]
+        specs = _specs_for(item, entry)
+        width_key = dimension_key(specs.get("width")) if part == "Decks" else ""
+        price = item.get("price_new")
+        if _price(price) is None:
+            prices = entry.get("prices") if isinstance(entry.get("prices"), dict) else {}
+            if prices:
+                price = prices[sorted(prices)[-1]]
+        feed.append({
+            "item": item,
+            "url": url,
+            "name": name,
+            "store": store or "Unknown",
+            "part": part,
+            "brand": listing_brand(name, part),
+            "width_key": width_key,
+            "price": price,
+            "price_old": item.get("price_old"),
+            "currency": item.get("currency"),
+            "last_seen": str(entry.get("last_seen") or "")[:10],
+            "image": item.get("image") or entry.get("image") or "",
+        })
+    return feed
+
+
+def _removed_attrs(row, row_id):
+    price = _price(row.get("price"))
+    old = _price(row.get("price_old"))
+    percent = percent_off_value(row.get("price"), row.get("price_old"))
+    search = " ".join(
+        bit for bit in (row.get("name"), row.get("store"), row.get("part"), row.get("brand"), "No longer in sale feed")
+        if bit
+    )
+    return (
+        f'data-id="{row_id}" data-url="{_attr(row["url"])}" data-removed="1" '
+        f'data-soldout="0" data-store="{_attr(row["store"])}" data-part="{_attr(row["part"])}" '
+        f'data-size="{_attr(row["width_key"])}" data-brand="{_attr(row["brand"])}" '
+        f'data-name="{_attr(row["name"])}" data-search="{_attr(search)}" '
+        f'data-price="{_attr("" if price is None else price)}" '
+        f'data-original="{_attr("" if old is None else old)}" '
+        f'data-discount="{_attr("" if percent is None else round(percent, 1))}" '
+        f'data-seen="{_attr(row.get("last_seen") or "")}" '
+        'data-added="0" data-drop="0" data-lowest="0" data-hitlow="0" '
+        'data-fresh="0" data-back="0" data-hot="0" data-score="" data-group=""'
+    )
+
+
+def _removed_row_html(row, row_id):
+    seen = row.get("last_seen") or ""
+    size = escape(row["width_key"]) if row.get("width_key") else "—"
+    return (
+        f'<tr class="deal-row filtered-out" tabindex="0" {_removed_attrs(row, row_id)}>'
+        f'<td>{_thumb(row.get("image"), row["name"])}</td>'
+        '<td><button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button></td>'
+        f'<td><span class="store-badge {_store_class(row["store"])}">{escape(row["store"])}</span></td>'
+        f'<td>{escape(row.get("brand") or "")}</td>'
+        f'<td><span class="part-badge">{escape(row.get("part") or "")}</span></td>'
+        f"<td>{size}</td>"
+        f'<td class="product-name">{_product_link(row["item"])}'
+        '<div class="row-meta"><span class="gone-note">No longer in sale feed</span></div></td>'
+        f'<td class="price-cell"><span class="price price-new">{_money(row.get("price"), row.get("currency"))}</span></td>'
+        f'<td class="price price-old">{_money(row.get("price_old"), row.get("currency")) if row.get("price_old") else "N/A"}</td>'
+        "<td></td>"
+        f"<td>{escape(seen)}</td>"
+        "<td></td></tr>"
+    )
+
+
+def _removed_card_html(row, row_id):
+    seen = _month_day(row.get("last_seen") or "")
+    store = row["store"]
+    meta = f"Last seen {seen} · {store}" if seen else f"Last seen · {store}"
+    price = _money(row.get("price"), row.get("currency"))
+    return (
+        f'<article class="deal-card filtered-out" tabindex="0" {_removed_attrs(row, row_id)}>'
+        '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
+        '<button type="button" class="card-alert">Alert me</button>'
+        f'<div class="media">{_thumb(row.get("image"), row["name"], large=True)}'
+        f'<span class="store-mark">{escape(store)}</span>'
+        '<button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>'
+        f'<h3 class="product-name">{_product_link(row["item"])}</h3>'
+        '<p class="gone-note">No longer in sale feed</p>'
+        f'<p class="card-prices"><span class="now-price">Last {price}</span></p>'
+        f'<p class="card-meta">{escape(meta)}</p>'
+        "</article>"
+    )
 
 
 def _card_html(record):

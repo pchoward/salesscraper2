@@ -496,7 +496,8 @@ class DigestDefaultTests(unittest.TestCase):
             '.change-btn[aria-pressed="true"], .mode-btn[aria-pressed="true"]',
             html,
         )
-        self.assertNotIn('if (state.change === "removed") return false', html)
+        self.assertIn('if (change === "removed")', html)
+        self.assertNotIn("It does not hide current deals.", html)
         self.assertNotIn("deals.hidden", html)
         self.assertNotIn('snapshot.change === "new"', html)
         self.assertNotIn("state.cardNew = state.change", html)

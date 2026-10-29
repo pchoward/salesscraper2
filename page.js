@@ -14,7 +14,7 @@ let state = {
     cardLow: false,
     // Digest chip. "all" is the default and is not a table filter.
     // New, price drops, hit lowest, and disappeared always use the previous
-    // daily scrape (data-added, data-drop, data-hitlow, and the gone count).
+    // daily scrape (data-added, data-drop, data-hitlow, and data-removed).
     change: "all",
     grouped: false,
     dropInterval: "all",
@@ -1044,10 +1044,18 @@ function rowMatchesNow(row, overrides) {
     if (cardLow && row.dataset.lowest !== "1") return false;
     const baseline = scrapeBaseline(row);
     const change = over.change != null ? over.change : state.change;
+    // Disappeared rows come from the previous scrape and are not live deals.
+    // Any other chip, including All deals, leaves them out. A chip with no
+    // matches stays empty instead of showing the rest of the catalog.
+    const removedOnly = row.dataset.removed === "1";
+    if (change === "removed") {
+        if (!removedOnly) return false;
+    } else if (removedOnly) {
+        return false;
+    }
     if (change === "new" && !baseline.added) return false;
     if (change === "drop" && !baseline.drop) return false;
     if (change === "lowest" && !baseline.low) return false;
-    // "removed" opens Recently gone. It does not hide current deals.
     return true;
 }
 
@@ -1510,17 +1518,6 @@ function mirrorCardFlags() {
     if (cardPoolNode()) syncMountedCards();
 }
 
-function showGone(on) {
-    const gone = document.getElementById("goneSection");
-    if (!gone) return;
-    const content = gone.querySelector(".section-content");
-    const header = gone.querySelector(".section-header");
-    if (on) {
-        if (content) content.classList.remove("collapsed");
-        if (header) header.classList.remove("collapsed");
-    }
-}
-
 let filterTimer = 0;
 
 function queueFilters() {
@@ -1534,7 +1531,6 @@ function applyFilters() {
     dealRows().forEach(row => {
         row.classList.toggle("filtered-out", !rowMatches(row));
     });
-    showGone(state.change === "removed");
     paintOfferPrices();
     applySectionFilters();
     applyGroupVisibility();
@@ -1552,6 +1548,7 @@ function applyFilters() {
     paintViews();
     paintNav();
     syncDuals();
+    updateChangeLine();
     matchMemo = null;
     fitCardPhotos();
 }
@@ -1965,10 +1962,6 @@ function setChange(kind) {
     if (!kind || kind === "all" || state.change === kind) state.change = "all";
     else state.change = kind;
     applyFilters();
-    if (state.change === "removed") {
-        const gone = document.getElementById("goneSection");
-        if (gone) gone.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
 }
 
 const SORT_NUMERIC = { price: 1, original: 1, discount: 1, size: 1, days: 1, daysat: 1, score: 1, rank: 1, observations: 1 };
@@ -2286,22 +2279,39 @@ function plural(count, singular, pluralText) {
 }
 
 function updateChangeLine() {
-    const line = document.getElementById("changeLine");
     const prefix = document.getElementById("changePrefix");
-    const added = line ? parseInt(line.dataset.new || "0", 10) : 0;
-    const drop = line ? parseInt(line.dataset.drops || "0", 10) : 0;
-    const low = line ? parseInt(line.dataset.lows || "0", 10) : 0;
-    const gone = line ? parseInt(line.dataset.gone || "0", 10) : 0;
     if (prefix) prefix.textContent = "vs previous scrape";
-    const map = {
-        btnNew: "New " + added,
-        btnDrop: "Price drops " + drop,
-        btnLow: "Hit lowest " + low,
-        btnGone: "Disappeared " + gone
-    };
-    Object.keys(map).forEach(id => {
-        const node = document.getElementById(id);
-        if (node) node.textContent = map[id];
+    function digestCount(dataKey) {
+        const line = document.getElementById("changeLine");
+        const raw = line && line.dataset ? line.dataset[dataKey] : "";
+        const count = parseInt(raw || "0", 10);
+        return Number.isFinite(count) ? count : 0;
+    }
+    // Rows under the current category, store, and other filters. The active
+    // chip uses the same rows as the result count. No table yet: the saved
+    // digest totals stay on the chips.
+    function changeMatchCount(kind) {
+        if (!document.querySelectorAll) return null;
+        const rows = dealRows();
+        if (!rows.length) return null;
+        let count = 0;
+        rows.forEach(row => {
+            if (!rowMatches(row, { change: kind })) return;
+            if (state.change === kind && row.classList.contains("grouped-hide")) return;
+            count += 1;
+        });
+        return count;
+    }
+    [
+        ["btnNew", "New ", "new", "new"],
+        ["btnDrop", "Price drops ", "drop", "drops"],
+        ["btnLow", "Hit lowest ", "lowest", "lows"],
+        ["btnGone", "Disappeared ", "removed", "gone"]
+    ].forEach(item => {
+        const node = document.getElementById(item[0]);
+        if (!node) return;
+        const matched = changeMatchCount(item[2]);
+        node.textContent = item[1] + (matched == null ? digestCount(item[3]) : matched);
     });
 }
 
