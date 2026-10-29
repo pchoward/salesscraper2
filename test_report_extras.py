@@ -875,7 +875,10 @@ if (visible.join(",") !== "20.0,12.5,") throw new Error("visible discounts " + v
         self.assertNotIn("LAYOUT_KEY", reset)
         history = source[source.find("const SEARCH_HISTORY_MS"):source.find("function applySnapshot(")]
         self.assertIn("SEARCH_HISTORY_MS", source)
-        self.assertIn('window.addEventListener("popstate", restoreFromUrl)', source)
+        self.assertIn('window.addEventListener("popstate", onPagePopState)', source)
+        pop = source[source.find("function onPagePopState("):source.find("function quickTabStops(")]
+        self.assertIn("restoreFromUrl()", pop)
+        self.assertIn("closeQuickView(true)", pop)
         script = history + r"""
 if (historyAction(null, "") !== "replace") throw new Error("first load");
 if (historyAction("", "") !== "none") throw new Error("same");

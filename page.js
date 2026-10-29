@@ -4102,6 +4102,9 @@ function showInsights() {
 let quickCard = null;
 let quickPinned = false;
 let quickForceSheet = false;
+let quickTrigger = null;
+let quickHistory = false;
+let suppressQuickPop = false;
 
 function quickIsSheet() {
     if (window.innerWidth <= 800) return true;
@@ -4532,7 +4535,8 @@ function fillQuickView(card) {
         link.href = facts.viewUrl;
         link.target = "_blank";
         link.rel = "noopener";
-        link.textContent = facts.viewLabel;
+        link.textContent = "View Deal";
+        link.setAttribute("aria-label", facts.viewLabel ? facts.viewLabel.replace(/^View at /, "View Deal at ") : "View Deal");
         actions.appendChild(link);
     }
     const secondary = document.createElement("div");
@@ -4806,7 +4810,7 @@ function appendQuickMore(body, card, item, facts) {
     const more = document.createElement("details");
     more.className = "quick-more";
     const summary = document.createElement("summary");
-    summary.textContent = "More details";
+    summary.textContent = "Price History & Details";
     more.appendChild(summary);
     const priceNote = document.createElement("p");
     priceNote.className = "quick-price-note";
@@ -5290,10 +5294,11 @@ function placeQuickView(card) {
     panel.style.top = top + "px";
 }
 
-function closeQuickView() {
+function closeQuickView(fromHistory) {
     const panel = document.getElementById("quickView");
-    const returnFocus = quickPinned && panel && panel.contains(document.activeElement)
-        && quickCard && quickCard.querySelector(".card-quick, .card-more");
+    const returnFocus = quickTrigger
+        || (quickPinned && panel && panel.contains(document.activeElement)
+            && quickCard && quickCard.querySelector(".card-quick, .card-more"));
     if (panel) {
         panel.hidden = true;
         panel.classList.remove("is-sheet");
@@ -5309,11 +5314,87 @@ function closeQuickView() {
     quickPinned = false;
     quickCard = null;
     quickForceSheet = false;
+    quickTrigger = null;
     setQuickExpanded(false);
     const back = groupReturnFocus;
     groupReturnFocus = null;
-    if (back && back.isConnected && back.focus) back.focus({ preventScroll: true });
-    else if (returnFocus && returnFocus.isConnected) returnFocus.focus({ preventScroll: true });
+    // Closing does not change filters, sort, or scroll. Focus returns to the control that opened it.
+    const live = node => node && node.focus && node.isConnected !== false;
+    if (live(back)) back.focus({ preventScroll: true });
+    else if (live(returnFocus)) returnFocus.focus({ preventScroll: true });
+    if (!fromHistory && quickHistory) {
+        quickHistory = false;
+        suppressQuickPop = true;
+        try {
+            history.back();
+        } catch (err) {
+            suppressQuickPop = false;
+        }
+    } else {
+        quickHistory = false;
+    }
+}
+
+function pushQuickHistory() {
+    if (quickHistory) return;
+    if (typeof history === "undefined" || !history.pushState) return;
+    try {
+        const here = (typeof location === "undefined" ? "" : (location.pathname || "") + (location.search || "")) || ".";
+        history.pushState({ quick: 1, view: String((location && location.search) || "").replace(/^\?/, "") }, "", here);
+        quickHistory = true;
+    } catch (err) {
+        quickHistory = false;
+    }
+}
+
+function onPagePopState(event) {
+    if (suppressQuickPop) {
+        suppressQuickPop = false;
+        return;
+    }
+    const stateQuick = event && event.state && event.state.quick;
+    if (isQuickOpen() && !stateQuick) {
+        closeQuickView(true);
+        return;
+    }
+    if (stateQuick) return;
+    restoreFromUrl();
+}
+
+function quickTabStops(panel) {
+    if (!panel || !panel.querySelectorAll) return [];
+    const nodes = panel.querySelectorAll("a, button, summary, input, select, textarea");
+    const stops = [];
+    nodes.forEach(node => {
+        if (!node || node.hidden || node.disabled) return;
+        const details = node.closest && node.closest("details");
+        const summary = String(node.tagName || node.tag || "").toUpperCase() === "SUMMARY";
+        if (details && !details.open && !summary) return;
+        stops.push(node);
+    });
+    return stops;
+}
+
+function trapQuickFocus(event) {
+    if (!event || event.key !== "Tab" || !isQuickOpen()) return;
+    const panel = document.getElementById("quickView");
+    const stops = quickTabStops(panel);
+    if (!stops.length) return;
+    const first = stops[0];
+    const last = stops[stops.length - 1];
+    const active = document.activeElement;
+    const inside = panel && panel.contains && panel.contains(active);
+    if (event.shiftKey) {
+        if (!inside || active === first) {
+            if (event.preventDefault) event.preventDefault();
+            if (last.focus) last.focus();
+        }
+        return;
+    }
+    if (!inside || active === last) {
+        if (event.preventDefault) event.preventDefault();
+        if (first.focus) first.focus();
+    }
 }
 
 function openQuickView(card, pinned, forceSheet) {
@@ -5327,7 +5408,12 @@ function openQuickView(card, pinned, forceSheet) {
     const sheet = quickForceSheet || quickIsSheet();
     panel.classList.toggle("is-sheet", sheet);
     const dialog = panel.querySelector(".quick-panel");
-    if (dialog) dialog.setAttribute("aria-modal", sheet ? "true" : "false");
+    if (dialog) dialog.setAttribute("aria-modal", "true");
+    if (pinned) {
+        const from = document.activeElement;
+        const button = card.querySelector && card.querySelector(".card-quick");
+        quickTrigger = (from && card.contains && card.contains(from)) ? from : (button || from);
+    }
     fillQuickView(card);
     panel.hidden = false;
     document.body.classList.toggle("quick-sheet", sheet);
@@ -5341,9 +5427,10 @@ function openQuickView(card, pinned, forceSheet) {
     }
     setQuickExpanded(true);
     refitQuickPhoto();
+    pushQuickHistory();
     if (pinned) {
         const close = panel.querySelector(".quick-close");
-        if (close) close.focus();
+        if (close && close.focus) close.focus();
     }
 }
 
@@ -5378,12 +5465,9 @@ function wireQuickView() {
     document.addEventListener("click", event => {
         if (!isQuickOpen()) return;
         if (event.target.closest("#quickView, .card-more, .card-quick, .card-alert, .group-quick, .group-chart, .price-btn, #alertsRoot, #navAlerts")) return;
-        // A phone tap on the card opens this view in the capture handler. That
-        // same tap must not count as an outside click and dismiss it.
-        const deal = event.target.closest(".deal-row, .deal-card");
-        if (deal && quickIsSheet() && !event.target.closest("a, button, input, select, label")) return;
         closeQuickView();
     });
+    document.addEventListener("keydown", trapQuickFocus);
 }
 
 function placeScoreFloat(cell, anchor) {
@@ -5493,11 +5577,9 @@ function wireDealEvents() {
             selectGroupOffer(groupOffer, false);
             return;
         }
-        const row = event.target.closest(".deal-row, .deal-card");
-        if (!row || event.target.closest("a, button, input, select, label")) return;
-        // The card body opens quick view: photo, price, footer, and empty
-        // space. Title links, Alert, the star, and Quick view are handled
-        // above and keep their own actions. Hover does not open.
+        const row = event.target.closest(".deal-row");
+        if (!row || row.classList.contains("deal-card")) return;
+        if (event.target.closest("a, button, input, select, label")) return;
         event.preventDefault();
         event.stopPropagation();
         openQuickView(row, true);
@@ -5517,10 +5599,9 @@ function wireDealEvents() {
             else openQuickView(card, true);
             return;
         }
-        const row = event.target.closest(".deal-row, .deal-card");
-        if (!row || event.target.closest("a, button, input, select, label")) return;
-        // Enter (and Space) on the card itself opens quick view. A focused
-        // title link, Alert, star, or Quick view button keeps its own key.
+        const row = event.target.closest(".deal-row");
+        if (!row || row.classList.contains("deal-card")) return;
+        if (event.target.closest("a, button, input, select, label")) return;
         event.preventDefault();
         openQuickView(row, true);
     });
@@ -6121,7 +6202,7 @@ function init() {
     paintViews();
     const home = document.getElementById("homeReset");
     if (home) home.addEventListener("click", clearFilters);
-    window.addEventListener("popstate", restoreFromUrl);
+    window.addEventListener("popstate", onPagePopState);
     if (location.search && location.search.length > 1) loadFromUrl();
     else {
         state.change = "all";

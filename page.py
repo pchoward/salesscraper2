@@ -2524,19 +2524,42 @@ def _removed_row_html(row, row_id):
     )
 
 
+def _card_store_link(url, name, store):
+    """Stretched retailer link. Action buttons stay siblings, not inside it."""
+    if not url:
+        return ""
+    label = name or "Product"
+    if store:
+        label = f"{label} at {store}"
+    return (
+        f'<a class="card-store-link" href="{escape(url, quote=True)}" target="_blank" rel="noopener">'
+        f'<span class="sr-only">{escape(label)}</span></a>'
+    )
+
+
+def _card_quick_button(name):
+    label = f"Quick view: {name}" if name else "Quick view"
+    return (
+        '<button type="button" class="card-quick" aria-expanded="false" '
+        f'aria-label="{escape(label, quote=True)}">Quick view</button>'
+    )
+
+
 def _removed_card_html(row, row_id):
     seen = _month_day(row.get("last_seen") or "")
     store = row["store"]
+    name = row["name"]
     meta = f"Last seen {seen} · {store}" if seen else f"Last seen · {store}"
     price = _money(row.get("price"), row.get("currency"))
     return (
-        f'<article class="deal-card filtered-out" tabindex="0" {_removed_attrs(row, row_id)}>'
+        f'<article class="deal-card filtered-out" {_removed_attrs(row, row_id)}>'
+        f'{_card_store_link(row["url"], name, store)}'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
         '<button type="button" class="card-alert">Alert me</button>'
-        f'<div class="media">{_thumb(row.get("image"), row["name"], large=True)}'
+        f'<div class="media">{_thumb(row.get("image"), name, large=True)}'
         f'<span class="store-mark">{escape(store)}</span>'
-        '<button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>'
-        f'<h3 class="product-name">{_product_link(row["item"])}</h3>'
+        f'{_card_quick_button(name)}</div>'
+        f'<h3 class="product-name">{escape(name)}</h3>'
         '<p class="gone-note">No longer in sale feed</p>'
         f'<p class="card-prices"><span class="now-price">Last {price}</span></p>'
         f'<p class="card-meta">{escape(meta)}</p>'
@@ -2576,15 +2599,17 @@ def _card_html(record):
         )
     found = _month_day(record.get("first") or record.get("spark_end") or "")
     store = record.get("store") or ""
+    name = record["name"]
     meta = f"Found {found} · {store}" if found else store
     return (
-        f'<article class="deal-card{listed}" tabindex="0" {_deal_attrs(record)}>'
+        f'<article class="deal-card{listed}" {_deal_attrs(record)}>'
+        f'{_card_store_link(record["url"], name, store)}'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
         '<button type="button" class="card-alert">Alert me</button>'
-        f'<div class="media">{_thumb(record["image"], record["name"], large=True)}'
+        f'<div class="media">{_thumb(record["image"], name, large=True)}'
         f'<span class="store-mark">{escape(store)}</span>'
-        '<button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>'
-        f'<h3 class="product-name">{_product_link(item)}</h3>'
+        f'{_card_quick_button(name)}</div>'
+        f'<h3 class="product-name">{escape(name)}</h3>'
         f'<div class="card-sparkline">{_spark_html(record, width=156, defer=True)}</div>'
         f'<p class="card-offer">{off_html}{_sold_out_pill(record)}</p>'
         '<p class="card-prices">'

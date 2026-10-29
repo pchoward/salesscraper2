@@ -1797,6 +1797,12 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
         pointer-events: auto;
     }
 }
+@media (hover: none) {
+    .deal-card .card-quick {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
 .media .drop-badge,
 .media > .card-off {
     position: absolute;
@@ -3021,6 +3027,10 @@ body.alerts-open { overflow: hidden; }
     margin: 0;
     /* The card is a flex column. Overflow other than visible lets this slot
        shrink and slice the second line, so the height is fixed at two lines. */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
     flex: 0 0 calc(1.25em * 2);
     height: calc(1.25em * 2);
     min-height: calc(1.25em * 2);
@@ -3030,6 +3040,18 @@ body.alerts-open { overflow: hidden; }
     font-weight: 700;
     line-height: 1.25;
 }
+.deal-card .card-store-link {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    cursor: pointer;
+}
+.deal-card .card-store-link:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+.deal-card .spark-hit { position: relative; z-index: 3; }
 .deal-card .product-name .product-link {
     display: -webkit-box;
     -webkit-box-orient: vertical;
