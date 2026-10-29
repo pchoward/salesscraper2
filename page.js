@@ -84,6 +84,9 @@ function indexDeals() {
     document.querySelectorAll("#cardGrid .deal-card").forEach(card => {
         cardById.set(card.dataset.id, card);
     });
+    pooledCards().forEach(card => {
+        cardById.set(card.dataset.id, card);
+    });
     detailById = new Map();
     document.querySelectorAll("#mainTable .detail-row").forEach(detail => {
         detailById.set(detail.dataset.for, detail);
@@ -98,6 +101,20 @@ function dealRows() {
 function cardFor(id) {
     indexDeals();
     return cardById.get(id) || null;
+}
+
+// Cards past the first page live in a <template>, so the browser parses them
+// without laying them out. A plain hidden div is the fallback for tests.
+function cardPoolNode() {
+    return document.getElementById("cardPool");
+}
+
+function pooledCards() {
+    const pool = cardPoolNode();
+    if (!pool) return [];
+    const root = pool.content || pool;
+    if (!root.querySelectorAll) return [];
+    return Array.from(root.querySelectorAll(".deal-card"));
 }
 
 function readJson(key, fallback) {
@@ -161,6 +178,95 @@ function widthRanges() {
     return (typeof WIDTH_RANGES === "undefined") ? [] : WIDTH_RANGES;
 }
 
+function lengthBuckets() {
+    return (typeof LENGTH_BUCKETS === "undefined") ? [] : LENGTH_BUCKETS;
+}
+
+function cardPageSize() {
+    const size = (typeof CARD_PAGE_SIZE === "number") ? CARD_PAGE_SIZE : 24;
+    return size > 0 ? size : 24;
+}
+
+// How many matching cards are in the grid. The rest sit in #cardPool.
+let cardShown = cardPageSize();
+
+// "31.75\"", "30.0", and 30 all parse. The inch mark is optional.
+function parseLength(value) {
+    if (typeof value === "number") {
+        if (!Number.isFinite(value) || value <= 0 || value > 40) return NaN;
+        return value;
+    }
+    const text = String(value == null ? "" : value).trim();
+    const match = text.match(/^(\d{1,2}(?:\.\d+)?)\s*(?:["”″]|in(?:ch(?:es)?)?)?$/i);
+    if (!match) return NaN;
+    const number = parseFloat(match[1]);
+    if (!Number.isFinite(number) || number <= 0 || number > 40) return NaN;
+    return number;
+}
+
+// Lower end included, upper end not. 30 is 30-31, not 29-30. An open top
+// (max null) keeps 33.0 in 33+.
+function lengthBucketFor(value) {
+    const number = parseLength(value);
+    if (!Number.isFinite(number)) return "";
+    const buckets = lengthBuckets();
+    for (let i = 0; i < buckets.length; i++) {
+        const bucket = buckets[i];
+        const lo = bucket.min == null ? null : Number(bucket.min);
+        const hi = bucket.max == null ? null : Number(bucket.max);
+        if (lo != null && number < lo - 1e-9) continue;
+        if (hi != null && number >= hi - 1e-9) continue;
+        return bucket.id || "";
+    }
+    return "";
+}
+
+function orderLengthIds(values) {
+    const chosen = {};
+    (values || []).forEach(value => {
+        const token = String(value || "").trim();
+        if (token && token !== "all") chosen[token] = true;
+    });
+    const buckets = lengthBuckets();
+    const ordered = buckets.map(bucket => bucket.id).filter(id => chosen[id]);
+    Object.keys(chosen).forEach(id => {
+        if (ordered.indexOf(id) < 0) ordered.push(id);
+    });
+    return ordered;
+}
+
+function selectedLengths(over) {
+    const raw = over && Object.prototype.hasOwnProperty.call(over, "length") ? over.length : state.length;
+    if (raw == null || raw === "all" || raw === "") return [];
+    const parts = Array.isArray(raw) ? raw : String(raw).split(",");
+    return orderLengthIds(parts);
+}
+
+function normalizeLengthParam(value) {
+    const parts = String(value || "").split(",").map(item => item.trim()).filter(item => item && item.toLowerCase() !== "all");
+    if (!parts.length) return "all";
+    const buckets = lengthBuckets();
+    if (!buckets.length) return parts.join(",");
+    const chosen = {};
+    parts.forEach(part => {
+        if (buckets.some(bucket => bucket.id === part)) chosen[part] = true;
+        else {
+            const id = lengthBucketFor(part);
+            if (id) chosen[id] = true;
+        }
+    });
+    const ordered = orderLengthIds(Object.keys(chosen));
+    return ordered.length ? ordered.join(",") : "all";
+}
+
+function lengthAllowed(raw, chosen) {
+    const value = String(raw || "").trim();
+    if (!value) return false;
+    if ((chosen || []).indexOf(value) >= 0) return true;
+    const id = lengthBucketFor(value);
+    return !!(id && (chosen || []).indexOf(id) >= 0);
+}
+
 function readControls() {
     const search = document.getElementById("searchInput");
     state.search = search ? search.value.toLowerCase().trim() : "";
@@ -171,10 +277,10 @@ function readControls() {
     state.scoreMin = numOrNull("scoreMin");
     state.scoreMax = numOrNull("scoreMax");
     const brand = document.getElementById("brandSelect");
-    const length = document.getElementById("lengthSelect");
     const wheelbase = document.getElementById("wheelbaseSelect");
     if (brand) state.brand = brand.value || "all";
-    if (length) state.length = length.value || "all";
+    // Length buckets are multi-select, so the hidden single <select> is not
+    // the source of truth. Chip clicks and the URL write state.length.
     if (wheelbase) state.wheelbase = wheelbase.value || "all";
 }
 
@@ -328,7 +434,7 @@ const SPEC_FACETS = [
     { stateKey: "protTypes", part: "Protection", attr: "prottype", section: "prottypeFilters" },
     { stateKey: "protSizes", part: "Protection", attr: "protsize", section: "protsizeFilters" }
 ];
-const SPEC_OPEN = { width: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
+const SPEC_OPEN = { width: 1, length: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
 
 function normalizeDuroToken(value) {
     const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
@@ -551,8 +657,9 @@ function syncTypeSections(expandSpec) {
         if (specs && specsBody && context) specsBody.appendChild(context);
         if (specs) specs.hidden = false;
     } else {
-        if (context && specGroup) specGroup.insertBefore(context, specGroup.firstChild);
-        else if (context && brand && brand.parentElement) brand.parentElement.insertBefore(context, brand);
+        // Brand stays first. This type's size and spec sections follow it.
+        if (context && brand && brand.parentNode) brand.parentNode.insertBefore(context, brand.nextSibling);
+        else if (context && specGroup) specGroup.insertBefore(context, specGroup.firstChild);
         if (specs) specs.hidden = true;
     }
     document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
@@ -682,6 +789,7 @@ function paintFacetCounts() {
     const storeCounts = Object.create(null);
     const partCounts = Object.create(null);
     const lengthCounts = Object.create(null);
+    lengthBuckets().forEach(bucket => { lengthCounts[bucket.id] = 0; });
     const wheelCounts = Object.create(null);
     const widthCounts = Object.create(null);
     widthRanges().forEach(range => { widthCounts[range.id] = 0; });
@@ -700,7 +808,11 @@ function paintFacetCounts() {
         }
         if (rowMatches(row, { length: "all" })) {
             const length = row.dataset.length || "";
-            if (length) lengthCounts[length] = (lengthCounts[length] || 0) + 1;
+            if (length) {
+                lengthCounts[length] = (lengthCounts[length] || 0) + 1;
+                const bucketId = lengthBucketFor(length);
+                if (bucketId) lengthCounts[bucketId] = (lengthCounts[bucketId] || 0) + 1;
+            }
         }
         if (rowMatches(row, { wheelbase: "all" })) {
             const wheel = row.dataset.wheelbase || "";
@@ -736,6 +848,8 @@ function paintFacetCounts() {
     paintQuickRow("partFilters", "data-part", partCounts, state.part || "Decks");
     paintTypeHint();
     paintSelectCounts("lengthSelect", lengthCounts);
+    const lengthGroup = document.getElementById("lengthFilters");
+    if (lengthGroup) lengthGroup._lengthCounts = lengthCounts;
     syncLengthChips();
     paintSelectCounts("wheelbaseSelect", wheelCounts);
     scheduleNavFit();
@@ -775,33 +889,38 @@ function paintFacetCounts() {
 }
 
 function syncLengthChips() {
-    const select = document.getElementById("lengthSelect");
     const group = document.getElementById("lengthFilters");
     if (!group) return;
-    const current = select ? (select.value || "all") : "all";
-    const pool = select && select._facetPool ? select._facetPool : (select ? Array.from(select.options || []) : []);
+    const chosen = selectedLengths();
+    const counts = group._lengthCounts || {};
+    let withLength = 0;
+    Object.keys(counts).forEach(id => {
+        if (lengthBuckets().some(bucket => bucket.id === id)) withLength += counts[id] || 0;
+    });
     group.querySelectorAll(".length-chip").forEach(button => {
         const value = button.getAttribute("data-value") || "";
-        const on = value === current;
         if (value === "all") {
+            const on = chosen.length === 0;
             button.hidden = false;
             button.classList.toggle("active", on);
             button.setAttribute("aria-pressed", on ? "true" : "false");
+            const slot = button.querySelector(".spec-count");
+            if (slot && withLength) slot.textContent = String(withLength);
+            if (withLength) button.setAttribute("data-count", String(withLength));
             return;
         }
-        const option = pool.find(item => item.value === value);
-        const present = !!(option && select && option.parentNode === select);
-        button.hidden = !present && !on;
-        if (option) {
-            const match = String(option.textContent || "").match(/\((\d+)\)\s*$/);
-            const slot = button.querySelector(".spec-count");
-            if (match && slot) slot.textContent = match[1];
-            if (match) button.setAttribute("data-count", match[1]);
-        }
-        button.classList.toggle("is-zero", !present);
+        const count = Object.prototype.hasOwnProperty.call(counts, value)
+            ? counts[value]
+            : parseInt(button.getAttribute("data-count") || "0", 10);
+        const on = chosen.indexOf(value) >= 0;
+        const slot = button.querySelector(".spec-count");
+        if (slot && Object.prototype.hasOwnProperty.call(counts, value)) slot.textContent = String(count);
+        if (Object.prototype.hasOwnProperty.call(counts, value)) button.setAttribute("data-count", String(count));
+        markFacetOption(button, count, on);
         button.classList.toggle("active", on);
         button.setAttribute("aria-pressed", on ? "true" : "false");
     });
+    syncFacetEmpty(group, ".length-chip", "No lengths match");
 }
 
 function setPressed(selector, attr, value) {
@@ -872,7 +991,6 @@ function rowMatchesNow(row, overrides) {
     const store = over.store != null ? over.store : state.store;
     const part = over.part != null ? over.part : state.part;
     const brand = over.brand != null ? over.brand : state.brand;
-    const length = over.length != null ? over.length : state.length;
     const wheelbase = over.wheelbase != null ? over.wheelbase : state.wheelbase;
     const widths = Object.prototype.hasOwnProperty.call(over, "widths") ? over.widths : null;
     const hay = (row.dataset.search || "").toLowerCase();
@@ -889,7 +1007,8 @@ function rowMatchesNow(row, overrides) {
         if (!specAllowed(row, facet, selected)) return false;
     }
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
-    if (specKeyActive("length", viewPart) && length !== "all" && (row.dataset.length || "") !== length) return false;
+    const chosenLengths = selectedLengths(over);
+    if (specKeyActive("length", viewPart) && chosenLengths.length && !lengthAllowed(row.dataset.length, chosenLengths)) return false;
     if (specKeyActive("wheelbase", viewPart) && wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
     const price = rowPrice(row);
     const priceMin = Object.prototype.hasOwnProperty.call(over, "priceMin") ? over.priceMin : state.priceMin;
@@ -1388,6 +1507,7 @@ function mirrorCardFlags() {
         card.classList.toggle("filtered-out", row.classList.contains("filtered-out"));
         card.classList.toggle("grouped-hide", row.classList.contains("grouped-hide"));
     });
+    if (cardPoolNode()) syncMountedCards();
 }
 
 function showGone(on) {
@@ -1764,11 +1884,43 @@ function filterByStore(store) {
 function filterByPart(part) {
     const next = part || "all";
     const changed = next !== (state.part || "all");
+    if (changed) cardShown = cardPageSize();
     state.part = next;
     const select = document.getElementById("partSelect");
     if (select) select.value = state.part;
     setPressed("#partFilters [data-part]", "data-part", state.part);
     syncTypeSections(changed);
+    applyFilters();
+}
+
+function toggleLengthValue(value) {
+    const next = !value || value === "all" ? "all" : String(value);
+    if ((state.part || "Decks") === "all" && next !== "all") {
+        state.part = "Decks";
+        const partSelect = document.getElementById("partSelect");
+        if (partSelect) partSelect.value = "Decks";
+        setPressed("#partFilters [data-part]", "data-part", "Decks");
+        syncTypeSections(true);
+    }
+    if (next === "all") {
+        state.length = "all";
+    } else {
+        const selected = {};
+        selectedLengths().forEach(id => {
+            if (lengthBuckets().some(bucket => bucket.id === id)) selected[id] = true;
+            else {
+                const mapped = lengthBucketFor(id);
+                if (mapped) selected[mapped] = true;
+                else if (!lengthBuckets().length) selected[id] = true;
+            }
+        });
+        if (selected[next]) delete selected[next];
+        else selected[next] = true;
+        const ordered = orderLengthIds(Object.keys(selected));
+        state.length = ordered.length ? ordered.join(",") : "all";
+    }
+    const select = document.getElementById("lengthSelect");
+    if (select) setSelect("lengthSelect", state.length.indexOf(",") < 0 ? state.length : "all");
     applyFilters();
 }
 
@@ -1874,17 +2026,107 @@ function sortBy(key, direction) {
 }
 
 function syncCardOrder() {
-    const grid = document.getElementById("cardGrid");
-    const tbody = document.querySelector("#mainTable tbody");
-    if (!grid || !tbody) return;
-    // dealRows() is cached the first time it runs, which is the rank order
-    // (new items, then score). Reading that cache put the cards back and
-    // left a % off sort looking unsorted. The table body is the live order.
-    tbody.querySelectorAll(".deal-row").forEach(row => {
-        const card = cardFor(row.dataset.id);
-        if (card) grid.appendChild(card);
-    });
+    if (cardPoolNode()) syncMountedCards();
+    else {
+        const grid = document.getElementById("cardGrid");
+        const tbody = document.querySelector("#mainTable tbody");
+        if (!grid || !tbody) return;
+        // dealRows() is cached the first time it runs, which is the rank order
+        // (new items, then score). Reading that cache put the cards back and
+        // left a % off sort looking unsorted. The table body is the live order.
+        tbody.querySelectorAll(".deal-row").forEach(row => {
+            const card = cardFor(row.dataset.id);
+            if (card) grid.appendChild(card);
+        });
+    }
     syncGroupOrder();
+}
+
+// Keep the first cardShown matching deals in the grid, in the table's order.
+// Filtered and later cards stay in #cardPool so the browser does not lay them out.
+function syncMountedCards() {
+    const grid = document.getElementById("cardGrid");
+    const pool = cardPoolNode();
+    const sink = pool && (pool.content || pool);
+    if (!grid || !sink || !cardById) return;
+    const tbody = document.querySelector("#mainTable tbody");
+    if (!tbody) return;
+    const visible = [];
+    tbody.querySelectorAll(".deal-row").forEach(row => {
+        if (row.classList.contains("filtered-out") || row.classList.contains("grouped-hide")) return;
+        visible.push(row.dataset.id);
+    });
+    const limit = Math.min(cardShown, visible.length);
+    const keep = {};
+    for (let i = 0; i < limit; i++) keep[visible[i]] = true;
+    Array.from(grid.children).forEach(node => {
+        if (!node.classList || !node.classList.contains("deal-card")) return;
+        if (!keep[node.dataset.id]) sink.appendChild(node);
+    });
+    for (let i = 0; i < limit; i++) {
+        const card = cardById.get(visible[i]);
+        if (card) grid.appendChild(card);
+    }
+    const button = document.getElementById("showMoreCards");
+    if (button) button.hidden = visible.length - limit <= 0;
+    if (chartObserver) {
+        grid.querySelectorAll(".deal-card").forEach(node => {
+            if (!chartNodeFresh(node)) chartObserver.observe(node);
+        });
+    }
+    paintOfferPrices();
+}
+
+let fillingCards = false;
+let cardFillSteps = 0;
+
+function revealMoreCards() {
+    const button = document.getElementById("showMoreCards");
+    if (!button || button.hidden) return;
+    cardShown += cardPageSize();
+    syncMountedCards();
+    fitCardPhotos();
+}
+
+// Pull another batch while the button is still near the screen. A few batches
+// per visit to that zone fills a tall window; the next scroll starts again.
+function fillCardWindow() {
+    if (fillingCards) return;
+    const button = document.getElementById("showMoreCards");
+    if (!button || button.hidden) {
+        cardFillSteps = 0;
+        return;
+    }
+    const rect = button.getBoundingClientRect ? button.getBoundingClientRect() : null;
+    const view = (typeof window !== "undefined" && window.innerHeight) || 800;
+    if (!rect || rect.top > view + 480) {
+        cardFillSteps = 0;
+        return;
+    }
+    if (cardFillSteps >= 4) return;
+    cardFillSteps += 1;
+    fillingCards = true;
+    revealMoreCards();
+    fillingCards = false;
+    if (typeof requestAnimationFrame === "function") requestAnimationFrame(fillCardWindow);
+}
+
+function wireCardPaging() {
+    const button = document.getElementById("showMoreCards");
+    if (!button || button.dataset.wired) return;
+    button.dataset.wired = "1";
+    button.addEventListener("click", revealMoreCards);
+    if (typeof IntersectionObserver !== "function") return;
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                cardFillSteps = 0;
+                return;
+            }
+            fillCardWindow();
+        });
+    }, { root: null, rootMargin: "480px" });
+    observer.observe(button);
 }
 
 function syncGroupOrder() {
@@ -2015,7 +2257,9 @@ function toggleDetail(row) {
 
 function applyStars() {
     const stars = starSet();
-    document.querySelectorAll(".deal-row, .deal-card").forEach(row => {
+    const nodes = Array.from(document.querySelectorAll(".deal-row, #cardGrid .deal-card"));
+    pooledCards().forEach(card => nodes.push(card));
+    nodes.forEach(row => {
         const on = stars.has(row.dataset.url);
         row.dataset.starred = on ? "1" : "0";
         const button = row.querySelector(".star");
@@ -2121,6 +2365,7 @@ function toggleStats() {
 }
 
 function clearFilters() {
+    cardShown = cardPageSize();
     state = {
         store: "all",
         part: "Decks",
@@ -2398,7 +2643,7 @@ function decodeQuery(query) {
         else if (key === "discountmax") stateOut.discountmax = Number(value);
         else if (key === "scoremin") stateOut.scoremin = Number(value);
         else if (key === "scoremax") stateOut.scoremax = Number(value);
-        else if (key === "length" && value && value !== "all") stateOut.length = value;
+        else if (key === "length" && value && value !== "all") stateOut.length = normalizeLengthParam(value);
         else if (key === "wheelbase" && value && value !== "all") stateOut.wheelbase = value;
         else if (key === "sort" && ["rank", "score", "price", "price-desc", "original", "discount", "size", "store", "brand", "days", "daysat"].indexOf(value) >= 0) {
             stateOut.sort = value;
@@ -2461,7 +2706,8 @@ function encodeState(snapshot) {
     if (snapshot.discountmax != null) add("discountmax", numText(snapshot.discountmax));
     if (snapshot.scoremin != null) add("scoremin", numText(snapshot.scoremin));
     if (snapshot.scoremax != null) add("scoremax", numText(snapshot.scoremax));
-    add("length", snapshot.length || "");
+    const lengthParam = normalizeLengthParam(snapshot.length || "");
+    if (lengthParam !== "all") add("length", lengthParam);
     add("wheelbase", snapshot.wheelbase || "");
     if (snapshot.sort && snapshot.sort !== DEFAULT_SORT) add("sort", snapshot.sort);
     if (["new", "drop", "lowest", "removed"].indexOf(snapshot.change) >= 0) add("change", snapshot.change);
@@ -2562,7 +2808,8 @@ function writeControls(snapshot) {
     setSelect("partSelect", snapshot.part || "Decks");
     setSelect("brandSelect", snapshot.brand || "all");
     const chosenBrand = document.getElementById("brandSelect");
-    setSelect("lengthSelect", snapshot.length || "all");
+    const lengthValue = normalizeLengthParam(snapshot.length || "all");
+    setSelect("lengthSelect", lengthValue.indexOf(",") < 0 ? lengthValue : "all");
     setSelect("wheelbaseSelect", snapshot.wheelbase || "all");
     setSelect("sortSelect", snapshot.sort || DEFAULT_SORT);
     const fill = (id, value) => {
@@ -2580,7 +2827,7 @@ function writeControls(snapshot) {
     state.part = snapshot.part || "Decks";
     state.widths = orderedWidths(snapshot.widths || []);
     state.brand = chosenBrand ? (chosenBrand.value || "all") : (snapshot.brand || "all");
-    state.length = snapshot.length || "all";
+    state.length = lengthValue;
     state.wheelbase = snapshot.wheelbase || "all";
     state.change = snapshot.change || "all";
     state.watching = !!snapshot.watching;
@@ -2812,9 +3059,8 @@ function updateMoreCount() {
     ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
         if (numOrNull(id) != null) count += 1;
     });
-    const length = document.getElementById("lengthSelect");
     const wheel = document.getElementById("wheelbaseSelect");
-    if (length && length.value && length.value !== "all") count += 1;
+    count += selectedLengths().length;
     if (wheel && wheel.value && wheel.value !== "all") count += 1;
     count += (state.widths || []).length;
     const badge = document.getElementById("moreCount");
@@ -3068,6 +3314,7 @@ function applyLayout(mode) {
         /* private mode should not break the page */
     }
     fitCardPhotos();
+    if (cards && chartGeneration) refreshCharts();
 }
 
 let filterOrder = [];
@@ -3154,12 +3401,13 @@ function collectFilterActions() {
     });
     if (state.scoreMin != null) add("scoremin", "Score " + numText(state.scoreMin) + "+", () => clearField("scoreMin"), { scoreMin: null });
     if (state.scoreMax != null) add("scoremax", "Score ≤ " + numText(state.scoreMax), () => clearField("scoreMax"), { scoreMax: null });
-    if (specKeyActive("length") && state.length !== "all") {
-        add("length", "Length " + state.length, () => {
-            setSelect("lengthSelect", "all");
-            state.length = "all";
-            applyFilters();
-        }, { length: "all" });
+    if (specKeyActive("length")) {
+        selectedLengths().forEach(id => {
+            const bucket = lengthBuckets().find(item => item.id === id);
+            const label = bucket ? bucket.label : ("Length " + id);
+            const rest = selectedLengths().filter(item => item !== id);
+            add("length:" + id, label, () => toggleLengthValue(id), { length: rest.length ? rest.join(",") : "all" });
+        });
     }
     if (specKeyActive("wheelbase") && state.wheelbase !== "all") {
         add("wheelbase", "Wheelbase " + state.wheelbase, () => {
@@ -5706,7 +5954,8 @@ function init() {
     }
     const length = document.getElementById("lengthSelect");
     if (length) length.addEventListener("change", () => {
-        if ((state.part || "Decks") === "all" && length.value && length.value !== "all") {
+        state.length = length.value || "all";
+        if ((state.part || "Decks") === "all" && state.length !== "all") {
             state.part = "Decks";
             const select = document.getElementById("partSelect");
             if (select) select.value = "Decks";
@@ -5803,9 +6052,7 @@ function init() {
         lengthFilters.addEventListener("click", event => {
             const button = event.target.closest(".length-chip");
             if (!button || !lengthFilters.contains(button)) return;
-            setSelect("lengthSelect", button.getAttribute("data-value") || "all");
-            const select = document.getElementById("lengthSelect");
-            if (select && select.dispatchEvent) select.dispatchEvent(new Event("change", { bubbles: true }));
+            toggleLengthValue(button.getAttribute("data-value") || "all");
         });
     }
     const sizeFilters = document.getElementById("sizeFilters");
@@ -5872,6 +6119,9 @@ function init() {
         state.cardLow = false;
         applyFilters();
     }
+    wireCardPaging();
+    refreshCharts();
+    if (typeof requestAnimationFrame === "function") requestAnimationFrame(fillCardWindow);
     wireAlerts();
 }
 

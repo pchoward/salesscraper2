@@ -2341,9 +2341,10 @@ select option:disabled { color: #94a3b8; }
 }
 header.is-stale .fresh-dot, header.is-failed .fresh-dot { background: #fb923c; }
 .pill-newlow { background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; font-weight: 800; }
-/* About 170px so a 1440px window fits six or seven cards beside the sidebar. */
+/* At most 8 cards on a wide screen. 170px is still the floor, so a narrower
+   window keeps wrapping down instead of squeezing eight tiny columns. */
 .card-grid {
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(max(170px, calc((100% - 7 * 8px) / 8)), 1fr));
     gap: 8px;
 }
 @media (max-width: 800px) {
@@ -2860,10 +2861,25 @@ body.alerts-open { overflow: hidden; }
     border-radius: var(--radius);
 }
 .card-grid {
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(max(170px, calc((100% - 7 * 8px) / 8)), 1fr));
     gap: 8px;
     align-items: stretch;
 }
+.show-more-cards {
+    display: block;
+    width: 100%;
+    margin: 12px 0 4px;
+    min-height: 40px;
+    border: 1px solid var(--grey-200);
+    border-radius: var(--radius);
+    background: var(--grey-0);
+    color: var(--grey-800);
+    font-size: var(--font-sm);
+    font-weight: 700;
+    cursor: pointer;
+}
+.show-more-cards[hidden] { display: none !important; }
+#cardPool { display: none !important; }
 .deal-card {
     position: relative;
     height: 300px;
@@ -2874,6 +2890,8 @@ body.alerts-open { overflow: hidden; }
     border-radius: var(--radius);
     background: var(--grey-0);
     box-shadow: none;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 300px;
 }
 .deal-card:hover { border-color: var(--grey-400); box-shadow: none; }
 .deal-card .media {
@@ -3124,3 +3142,79 @@ body.alerts-open { overflow: hidden; }
 .pill-soldout { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
 .deal-card.sold-out .media img { opacity: 0.55; filter: grayscale(0.4); }
 .deal-card.sold-out .now-price { color: var(--text-secondary); }
+
+/* Keepa-style filter panel. The column is a white bordered panel. Each
+   section header is a light gray band with a thin line above and below it
+   and a small caret on the left. The choices sit on white underneath. */
+.rail {
+    background: var(--grey-0);
+    border: 1px solid var(--grey-200);
+    border-left: 0;
+}
+.sidebar,
+.rail .sidebar {
+    gap: 0;
+    padding-top: 0;
+    padding-bottom: 8px;
+    padding-left: 0;
+    background: var(--grey-0);
+}
+.sidebar .filter-head {
+    margin: 0;
+    padding: 8px 10px;
+    background: var(--grey-0);
+    border-bottom: 1px solid var(--grey-200);
+    color: var(--grey-600);
+}
+.sidebar .side-group,
+.sidebar #contextSpecs,
+.sidebar .more-filters {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--grey-0);
+}
+.sidebar .filter-section {
+    margin: -1px 0 0;
+    border: 0;
+    border-top: 1px solid var(--grey-200);
+    background: var(--grey-0);
+    box-shadow: none;
+}
+.sidebar .filter-section > .section-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    width: 100%;
+    margin: 0;
+    padding: 7px 10px;
+    border: 0;
+    border-bottom: 1px solid var(--grey-200);
+    background: var(--grey-50);
+    color: var(--grey-600);
+    font-size: var(--font-xs);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: left;
+}
+.sidebar .filter-section > .section-toggle::after {
+    content: none;
+}
+.sidebar .filter-section > .section-toggle::before {
+    content: "▸";
+    flex: 0 0 0.85rem;
+    width: 0.85rem;
+    color: var(--grey-400);
+    font-size: 0.68rem;
+    line-height: 1;
+    text-align: center;
+}
+.sidebar .filter-section.is-open > .section-toggle::before {
+    content: "▾";
+}
+.sidebar .filter-section > .section-body {
+    padding: 8px 10px 10px;
+    background: var(--grey-0);
+}
