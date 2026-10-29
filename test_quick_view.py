@@ -54,6 +54,8 @@ class QuickViewTests(unittest.TestCase):
         placement = source[source.index("function quickTopLimit("):source.index("function closeQuickView(")]
         script = r'''
 const assert = require('node:assert/strict');
+// Price history is inline in these fixtures, as on a page built for tests.
+function historyReady() { return true; }
 class Element {
     constructor(tag = 'div') { this.tag = tag; this.children = []; this.style = {}; this.attrs = {}; this.className = ''; this.events = {}; }
     append(...nodes) { this.children.push(...nodes); }
@@ -162,6 +164,8 @@ assert.ok(panel.classList.contains('is-sheet'));
         rendering = source[source.index("function fillQuickView("):source.index("function quickTopLimit(")]
         script = r'''
 const assert = require('node:assert/strict');
+// Price history is inline in these fixtures, as on a page built for tests.
+function historyReady() { return true; }
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 class Element {
     constructor(tag = 'div') {
@@ -440,6 +444,8 @@ assert.equal(body.querySelector('.quick-gallery').tag, 'div');
         logic = source[source.index("function quickGalleryImages("):source.index("function backdropPixel(")]
         script = r'''
 const assert = require("node:assert/strict");
+// Price history is inline in these fixtures, as on a page built for tests.
+function historyReady() { return true; }
 let quickCard = null;
 let quickPinned = false;
 let quickForceSheet = false;

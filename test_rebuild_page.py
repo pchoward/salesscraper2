@@ -12,6 +12,7 @@ from pathlib import Path
 
 import rebuild_page
 import scraper
+from page import split_history, write_page
 from pipeline import decorate_digest
 from report import build_digest, build_report_html, compare_catalogs
 
@@ -62,13 +63,21 @@ def scrape_build(previous, current, history, failed_keys):
     data_saved = scraper.save_current(current)
     decorate_digest(digest, current, history, [], previous_data=previous, scanned_at=SCANNED_AT, failed_keys=failed_keys)
     html = build_report_html(current, changes, history, failed_keys, generated_at=SCANNED_AT, digest=digest)
-    Path("sale_items_chart.html").write_text(html, encoding="utf-8")
+    write_page(html, "sale_items_chart.html")
     assert data_saved and history_saved
     rebuild_page.save_report_inputs(changes, digest, failed_keys, SCANNED_AT, history_saved)
     return html, digest
 
 
 class RebuildPageTests(unittest.TestCase):
+    def assertPublished(self, html):
+        """The page and history.json together are the built page, split."""
+        page, history = split_history(html)
+        self.assertEqual(Path("sale_items_chart.html").read_text(encoding="utf-8"), page)
+        self.assertEqual(Path("history.json").read_text(encoding="utf-8"), history)
+        self.assertNotIn('id="historyJson"', page)
+        self.assertTrue(json.loads(history)["items"])
+
     def setUp(self):
         self.previous, self.current = _catalogs()
         self.history = json.loads((ROOT / "price_history.json").read_text(encoding="utf-8"))
@@ -79,8 +88,9 @@ class RebuildPageTests(unittest.TestCase):
             html, digest = scrape_build(self.previous, self.current, self.history, self.failed)
             self.assertTrue(digest.new_items and digest.drops and digest.removed, "the fixture has every kind of change")
             Path("sale_items_chart.html").unlink()
+            Path("history.json").unlink()
             self.assertTrue(rebuild_page.rebuild())
-            self.assertEqual(Path("sale_items_chart.html").read_text(encoding="utf-8"), html)
+            self.assertPublished(html)
             self.assertFalse(rebuild_page.rebuild(), "a second rebuild changes nothing")
             for name in ("previous_data.json", "price_history.json", "report_inputs.json"):
                 self.assertTrue(Path(name).exists())
@@ -135,7 +145,7 @@ class RebuildPageTests(unittest.TestCase):
             html = build_report_html(self.current, changes, {}, [], generated_at=SCANNED_AT, digest=digest)
             rebuild_page.save_report_inputs(changes, digest, [], SCANNED_AT, history_saved=False)
             rebuild_page.rebuild()
-            self.assertEqual(Path("sale_items_chart.html").read_text(encoding="utf-8"), html)
+            self.assertPublished(html)
 
     def test_workflow_is_page_only_and_shares_the_scrape_lock(self):
         workflow = (ROOT / ".github" / "workflows" / "rebuild-page.yml").read_text(encoding="utf-8")
@@ -143,6 +153,8 @@ class RebuildPageTests(unittest.TestCase):
         self.assertIn("group: scrape-${{ github.ref }}", workflow)
         self.assertIn("group: scrape-${{ github.ref }}", scrape)
         self.assertIn("git add sale_items_chart.html\n", workflow)
+        self.assertIn("if [ -e history.json ]; then git add history.json; fi", workflow)
+        self.assertIn("if [ -e history.json ]; then git add history.json; fi", scrape)
         self.assertIn("git pull --rebase origin main", workflow)
         self.assertIn("python rebuild_page.py", workflow)
         for forbidden in ("scraper.py", "chrome", "Chrome", "SMTP", "ALERTS_", "NOTIFICATION_", "secrets."):

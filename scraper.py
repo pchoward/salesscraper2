@@ -18,6 +18,7 @@ from notify import send_digest, send_admin_warnings
 from notification_engine import send_notifications
 from pipeline import apply_run_updates, decorate_digest, prepare_run
 from rebuild_page import discard_report_inputs, save_report_inputs
+from page import write_page
 from report import build_digest, build_report_html, compare_catalogs
 from stores.stock import confirm_stock
 from site_sales import SITE_SALES_PATH, load_state as load_site_sales
@@ -207,7 +208,7 @@ def main():
             generated_at=scanned_at,
             digest=digest,
         )
-        safe_write_file("sale_items_chart.html", html)
+        write_page(html, "sale_items_chart.html")
     except Exception as exc:
         logging.error("Report build failed (continuing): %s", exc)
     # What rebuild_page.py needs to rebuild this exact page later, after a

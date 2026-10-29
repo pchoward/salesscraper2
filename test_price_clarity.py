@@ -93,6 +93,8 @@ class QuickViewPriceClarityTests(unittest.TestCase):
         offers = source[source.index("function specTokens("):source.index("function specAllowed(")]
         script = r'''
 const assert = require('node:assert/strict');
+// Price history is inline in these fixtures, as on a page built for tests.
+function historyReady() { return true; }
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 class Element {
     constructor(tag = 'div') {
@@ -280,6 +282,8 @@ assert.equal(emptyCompare.includes('No history'), true);
         chunk = source[source.index("function specTokens("):source.index("function specAllowed(")]
         script = r'''
 const assert = require('node:assert/strict');
+// Price history is inline in these fixtures, as on a page built for tests.
+function historyReady() { return true; }
 class Element {
     constructor(tag) {
         this.tag = tag; this.children = []; this.className = ''; this.dataset = {}; this._text = ''; this.title = '';

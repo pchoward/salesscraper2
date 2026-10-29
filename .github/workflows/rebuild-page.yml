@@ -1,8 +1,8 @@
 name: Pages - Rebuild Without Scraping
 
 # Publishes a UI change without scraping: regenerates sale_items_chart.html
-# from the last scrape's saved data (rebuild_page.py) and commits only that
-# file. No browser, no store requests, no email, no alerts.
+# and history.json from the last scrape's saved data (rebuild_page.py) and
+# commits only those files. No browser, no store requests, no email, no alerts.
 on:
   workflow_dispatch:
   push:
@@ -44,6 +44,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add sale_items_chart.html
+          if [ -e history.json ]; then git add history.json; fi
           git diff --quiet --cached || git commit -m "Rebuild page $(date +'%Y-%m-%d %H:%M')"
           git pull --rebase origin main
           git push
