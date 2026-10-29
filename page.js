@@ -70,6 +70,79 @@ function catalog() {
     return catalogData;
 }
 
+// Price history (daily, series, seriesList per listing URL) is published as
+// history.json and fetched once, when a sparkline, average, quick view or
+// chart first needs it. Until it arrives the server-drawn sparklines and
+// averages stay as they are. An inline #historyJson (tests, local previews)
+// is used instead of the fetch.
+let historyStatus = "";
+let historyWaiters = [];
+
+function mergeHistory(payload) {
+    const items = catalog().items || {};
+    const rows = (payload && payload.items) || {};
+    Object.keys(items).forEach(id => {
+        const row = rows[items[id].url || "#" + id];
+        if (row) Object.assign(items[id], row);
+    });
+}
+
+function historyReady() {
+    if (historyStatus === "ready") return true;
+    if (historyStatus) return false;
+    const node = document.getElementById("historyJson");
+    if (!node) return false;
+    try {
+        mergeHistory(JSON.parse(node.textContent));
+    } catch (err) {
+        /* charts show no history rather than breaking the page */
+    }
+    historyStatus = "ready";
+    return true;
+}
+
+// Runs fn once the history is in. Nothing runs if it cannot be loaded.
+function whenHistory(fn) {
+    if (historyReady()) {
+        fn();
+        return;
+    }
+    if (historyStatus === "failed") return;
+    historyWaiters.push(fn);
+    if (historyStatus === "loading") return;
+    historyStatus = "loading";
+    const finish = ok => {
+        historyStatus = ok ? "ready" : "failed";
+        const waiters = historyWaiters;
+        historyWaiters = [];
+        if (!ok) return;
+        waiters.forEach(waiter => {
+            try {
+                waiter();
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    };
+    if (typeof fetch !== "function") {
+        finish(false);
+        return;
+    }
+    fetch("history.json?v=" + encodeURIComponent(String(catalog().generated || "")))
+        .then(response => {
+            if (!response.ok) throw new Error("history.json " + response.status);
+            return response.json();
+        })
+        .then(payload => {
+            mergeHistory(payload);
+            finish(true);
+        })
+        .catch(err => {
+            console.warn("Price history unavailable:", err);
+            finish(false);
+        });
+}
+
 function scanDay() {
     if (scanDayValue == null) scanDayValue = String((catalog().generated || "")).slice(0, 10);
     return scanDayValue;
@@ -1183,6 +1256,7 @@ function rowGroupOffer(row) {
         if (offer.currency) currency = offer.currency;
     });
     const badge = row.querySelector ? row.querySelector(".store-badge") : null;
+    const storeClass = badge ? String(badge.className || "") : (row.dataset.store ? "store-" + String(row.dataset.store).toLowerCase().replace(/[^a-z0-9]/g, "") : "");
     const price = rowPrice(row);
     return {
         id: row.dataset.id || "",
@@ -1193,7 +1267,7 @@ function rowGroupOffer(row) {
         part: row.dataset.part || item.part || "",
         availability: availability,
         currency: currency,
-        storeClass: badge ? String(badge.className || "") : ""
+        storeClass: storeClass
     };
 }
 
@@ -1698,6 +1772,10 @@ function wireDuals() {
 function paintOneCardStat(card) {
     const node = card ? card.querySelector(".avg-price") : null;
     if (!node) return;
+    if (!historyReady()) {
+        whenHistory(() => paintOneCardStat(card));
+        return;
+    }
     const days = typeof chartWindow === "number" ? chartWindow : 90;
     const item = (catalog().items || {})[card.dataset.id];
     const daily = item && Array.isArray(item.daily) ? item.daily : [];
@@ -3311,8 +3389,28 @@ function readLayout() {
     return "cards";
 }
 
+// Table rows ship as their <tr> and data-* attributes only, which is all
+// filtering and sorting read. The cells wait as raw text in #tableRows and
+// are parsed the first time the Table layout shows.
+function fillTableRows() {
+    const source = document.getElementById("tableRows");
+    if (!source) return;
+    source.remove();
+    const holder = document.createElement("template");
+    holder.innerHTML = "<table><tbody>" + source.textContent.replace(/<\\(\/script|!--)/gi, "<$1") + "</tbody></table>";
+    indexDeals();
+    holder.content.querySelectorAll("tr.deal-row").forEach(full => {
+        const row = rowById.get(full.dataset.id);
+        if (row && !row.firstChild) row.replaceChildren(...Array.from(full.childNodes));
+    });
+    applyStars();
+    paintOfferPrices();
+    refreshCharts();
+}
+
 function applyLayout(mode) {
     const cards = mode === "cards";
+    if (!cards) fillTableRows();
     document.documentElement.classList.toggle("layout-cards", cards);
     const tableBtn = document.getElementById("layoutTable");
     const cardBtn = document.getElementById("layoutCards");
@@ -3777,6 +3875,10 @@ function buildSparkSvg(points, width, height, stroke) {
 }
 
 function paintOneSpark(button) {
+    if (!historyReady()) {
+        whenHistory(() => paintOneSpark(button));
+        return;
+    }
     const item = (catalog().items || {})[button.dataset.id];
     const daily = item && Array.isArray(item.daily) ? item.daily : [];
     const card = button.classList.contains("spark-card");
@@ -3881,6 +3983,9 @@ function drawChart(id) {
     const item = (catalog().items || {})[id];
     const host = document.getElementById("modalChart");
     if (!host || !item) return;
+    if (!historyReady()) whenHistory(() => {
+        if (chartId === id) drawChart(id);
+    });
     const series = (item.seriesList || []).map(row => clipSeries(row, chartWindow));
     host.innerHTML = "";
     const width = 640;
@@ -4482,6 +4587,9 @@ function fillQuickView(card) {
     const body = document.getElementById("quickBody");
     if (!panel || !body || !card) return;
     const item = (catalog().items || {})[card.dataset.id] || {};
+    if (!historyReady()) whenHistory(() => {
+        if (quickCard === card && !panel.hidden) fillQuickView(card);
+    });
     const facts = quickFacts(card.dataset, item, catalog().generated || "");
     const dialog = panel.querySelector(".quick-panel");
     body.replaceChildren();

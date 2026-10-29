@@ -81,13 +81,15 @@ class AudienceTests(unittest.TestCase):
     def test_pages_excludes_every_internal_root_and_runtime_output(self):
         excluded = {json.loads(line[4:]) for line in Path('_config.yml').read_text().splitlines() if line.startswith('  - ')}
         self.assertFalse(Path('.nojekyll').exists(), 'Pages must honor Jekyll exclusions')
-        public = {'_config.yml', 'sale_items_chart.html', 'page.css', 'mobile.css', 'page.js'}
+        public = {'_config.yml', 'sale_items_chart.html', 'history.json', 'page.css', 'mobile.css', 'page.js'}
         roots = {path.split('/')[0] for path in subprocess.check_output(['git','ls-files'], text=True).splitlines()}
         self.assertEqual(roots - excluded - public, set())
         for path in ('scrape_health.json', 'previous_data.json', 'price_history.json',
                      'site_sales.json', 'report_inputs.json', 'email_preview.html', 'notification_state.json', 'worker',
                      'watchlist.yaml', 'alerts_state', 'docs', 'audit'):
             self.assertIn(path, excluded)
+        # The page fetches its price history; Pages must serve it.
+        self.assertNotIn('history.json', excluded)
 
     def test_checked_in_page_is_clean_including_embedded_data(self):
         from bs4 import BeautifulSoup
@@ -98,6 +100,9 @@ class AudienceTests(unittest.TestCase):
         self.assertNotIn('warnings', payload)
         self.assertNotIn('diagnostics', payload)
         self.assertTrue(payload['items'])
+        if Path('history.json').exists():
+            history = json.loads(Path('history.json').read_text())
+            self.assertEqual(set(history), {'generated', 'items'})
 
     def test_invalid_admin_configuration_is_isolated(self):
         with patch('notify._smtp_send') as send:

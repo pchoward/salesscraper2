@@ -142,6 +142,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          if [ -e history.json ]; then git add history.json; fi
           git add sale_items_chart.html previous_data.json price_history.json scrape_health.json site_sales.json
           # rebuild_page.py's inputs. The scrape removes the file when it could
           # not save the data it describes; record that removal too.

@@ -293,7 +293,8 @@ class SoldOutTests(unittest.TestCase):
         self.assertIn("protec-checkered", card)
         self.assertIn('class="pill pill-soldout"', card)
         self.assertEqual(html.count('class="deal-card sold-out"'), 1)
-        row = re.search(r'<tr class="deal-row"[^>]*protec-checkered.*?</tr>', html, re.S).group(0)
+        cells = html.split('id="tableRows">', 1)[1].split("</script>", 1)[0]
+        row = re.search(r'<tr class="deal-row"[^>]*protec-checkered.*?</tr>', cells, re.S).group(0)
         self.assertIn("Sold out", row)
 
     def test_an_alert_watch_sees_the_listing_as_out_of_stock(self):

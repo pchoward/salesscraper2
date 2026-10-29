@@ -20,7 +20,7 @@ changes with another run's catalog. The scrape removes the file when it could
 not save its data, for the same reason.
 
 Nothing here contacts a store, sends email, or writes any file except
-``sale_items_chart.html``.
+``sale_items_chart.html`` and its ``history.json``.
 
     python rebuild_page.py                     # rebuild, or exit 1 with the reason
     python rebuild_page.py --skip-if-missing   # exit 0 when there is nothing to rebuild from yet
@@ -140,17 +140,11 @@ def load_report_inputs(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTO
 
 def rebuild(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTORY_PATH, page_path=PAGE_PATH):
     """Rebuild the page. Returns True when the file changed. Raises RebuildError."""
+    from page import write_page
     from report import build_report_html
 
     inputs = load_report_inputs(path, data_path, history_path)
-    html = build_report_html(**inputs)
-    page = Path(page_path)
-    if page.exists() and page.read_text(encoding="utf-8") == html:
-        return False
-    temporary = page.with_name(page.name + ".tmp")
-    temporary.write_text(html, encoding="utf-8")
-    os.replace(temporary, page)
-    return True
+    return write_page(build_report_html(**inputs), page_path)
 
 
 def main(argv=None):

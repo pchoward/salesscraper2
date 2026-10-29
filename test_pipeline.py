@@ -229,7 +229,7 @@ class CompletenessPipelineTests(unittest.TestCase):
                                 "build_report_html": "report"}.items():
                 stack.enter_context(patch.object(scraper, name, return_value=value))
             mocks = {name: stack.enter_context(patch.object(scraper, name)) for name in
-                     ["confirm_stock", "save_current", "save_price_history", "save_health", "save_site_sales", "safe_write_file", "send_digest", "send_admin_warnings",
+                     ["confirm_stock", "save_current", "save_price_history", "save_health", "save_site_sales", "safe_write_file", "write_page", "send_digest", "send_admin_warnings",
                       "save_report_inputs", "discard_report_inputs"]}
             scraper.main()
         self.assertEqual(mocks["confirm_stock"].call_args.args[2], {self.key})

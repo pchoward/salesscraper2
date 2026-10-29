@@ -9,6 +9,8 @@ import json
 import logging
 import math
 import os
+import re
+from urllib.parse import quote
 from html import escape
 from zoneinfo import ZoneInfo
 
@@ -996,6 +998,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
 
     records = []
     catalog_json = {}
+    # Price history for the charts, keyed by listing URL. Published as
+    # history.json (see write_page) and fetched when a chart first needs it.
+    history_json = {}
     for item in products:
         try:
             url = normalize_url(item.get("url"))
@@ -1204,9 +1209,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "first": record["first"],
             "last": record["last"],
             "stage": STAGE_LABEL.get(record.get("stage") or "", ""),
-            "series": record["chain"],
-            "daily": _daily_points(record["prices"]),
-            "chartNote": CHART_NOTE,
             "image": record["image"],
             "images": product_image_urls(record["item"], record["image"]),
         }
@@ -1253,8 +1255,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                     ),
                 }
             )
-        catalog_json[record["id"]]["seriesList"] = series
         catalog_json[record["id"]]["offers"] = offers
+        history_json[record["url"] or f"#{record['id']}"] = {
+            "series": record["chain"],
+            "daily": _daily_points(record["prices"]),
+            "seriesList": series,
+        }
 
     store_counts = {}
     part_counts = {}
@@ -2085,14 +2091,20 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div id="emptyState" class="empty-state" hidden></div>'
     )
     chunks.append(f'<div class="table-wrap"><table id="mainTable"><thead><tr>{"".join(head)}</tr></thead><tbody>')
+    # Each table row is only its <tr> with the data-* attributes page.js
+    # filters and sorts on. The cells wait as raw text in #tableRows (not
+    # parsed, so they cost no DOM) until the Table layout is first shown.
+    cell_chunks = []
     card_chunks = ['<div class="card-grid" id="cardGrid">']
     pool_chunks = ['<template id="cardPool">']
     shown_decks = 0
     pooled_decks = 0
     for record in records:
         try:
-            chunks.append(_row_html(record))
+            row_html = _row_html(record)
             card_html = _card_html(record)
+            chunks.append(row_html[: row_html.index(">") + 1] + "</tr>")
+            cell_chunks.append(row_html)
             # The fresh visit is Decks, in this same rank order. The first
             # page of those cards is in the grid; everything else waits.
             if record["part"] == "Decks" and shown_decks < CARD_PAGE_SIZE:
@@ -2127,6 +2139,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         except Exception as exc:
             logger.error("Disappeared row failed for %s: %s", removed.get("url"), exc)
     chunks.append("</tbody></table></div>")
+    chunks.append(f'<script type="text/html" id="tableRows">{_script_text("".join(cell_chunks))}</script>')
     card_chunks.append("</div>")
     more_hidden = "" if pooled_decks else " hidden"
     card_chunks.append(
@@ -2190,6 +2203,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<div id="sparkTip" hidden></div>'
     )
     chunks.append(f'<script type="application/json" id="catalogJson">{payload}</script>')
+    history_payload = json.dumps({"generated": str(generated_at), "items": history_json}).replace("<", "\\u003c")
+    chunks.append(f'<script type="application/json" id="historyJson">{history_payload}</script>')
     ranges_literal = json.dumps(
         [
             {"id": bucket.id, "label": bucket.label, "min": bucket.min, "max": bucket.max}
@@ -2216,6 +2231,69 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     )
     chunks.append("</body></html>")
     return "\n".join(chunk for chunk in chunks if chunk)
+
+
+HISTORY_FILE = "history.json"
+_HISTORY_BLOCK = re.compile(r'\n?<script type="application/json" id="historyJson">(.*?)</script>', re.S)
+
+
+def split_history(html):
+    """``(page, history)``: the page without its inline price history, and that history as JSON text.
+
+    ``history`` is None when the page has none. page.js reads #historyJson
+    when it is inline (tests, local previews) and fetches history.json when
+    it is not.
+    """
+    match = _HISTORY_BLOCK.search(html)
+    if not match:
+        return html, None
+    history = match.group(1)
+    page = html[: match.start()] + html[match.end():]
+    # Start the download while the page is still parsing. The URL is the
+    # one page.js fetches ("?v=" + encodeURIComponent(generated)), so the
+    # fetch reuses this response.
+    generated = str(json.loads(history).get("generated") or "")
+    preload = (
+        f'<link rel="preload" href="{HISTORY_FILE}?v={quote(generated, safe="")}" '
+        'as="fetch" crossorigin="anonymous">'
+    )
+    page = page.replace("</head>", preload + "</head>", 1)
+    return page, history + "\n"
+
+
+def _replace_text(path, text):
+    """Write ``text`` atomically. True when the file changed."""
+    if os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as handle:
+            if handle.read() == text:
+                return False
+    temporary = f"{path}.tmp"
+    with open(temporary, "w", encoding="utf-8") as handle:
+        handle.write(text)
+    os.replace(temporary, path)
+    return True
+
+
+def write_page(html, page_path, history_path=None):
+    """Publish the page and its history.json next to it. True when either changed.
+
+    History first, so a published page never asks for a history file that is
+    not there yet.
+    """
+    page, history = split_history(html)
+    changed = False
+    if history is not None:
+        target = history_path or os.path.join(os.path.dirname(page_path) or ".", HISTORY_FILE)
+        changed = _replace_text(target, history)
+    return _replace_text(page_path, page) or changed
+
+
+_SCRIPT_BREAK = re.compile(r"</script|<!--", re.IGNORECASE)
+
+
+def _script_text(html):
+    """HTML kept as raw text in a <script>: nothing in it may end or confuse the element."""
+    return _SCRIPT_BREAK.sub(lambda match: "<\\" + match.group(0)[1:], html)
 
 
 def _attr(value):

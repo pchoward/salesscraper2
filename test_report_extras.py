@@ -82,7 +82,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("Deck Width", html)
         self.assertIn('id="sizeFilters"', html)
         self.assertLess(html.find('id="sizeFilters"'), html.find('id="morePanel"'))
-        payload = html.split('id="catalogJson">', 1)[1].split("</script>", 1)[0]
+        payload = html.split('id="historyJson">', 1)[1].split("</script>", 1)[0]
         data = json.loads(payload)
         series = None
         for item in data["items"].values():
@@ -232,8 +232,9 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn('data-brand="5boro"', html)
         self.assertNotIn('value="5boro"', html)
         self.assertIn('data-brand="5Boro"', html)
-        # Two table rows, two cards, and one brand facet button.
-        self.assertEqual(html.count('data-brand="5Boro"'), 5)
+        # Two table rows (each its <tr> and its cells waiting in #tableRows),
+        # two cards, and one brand facet button.
+        self.assertEqual(html.count('data-brand="5Boro"'), 7)
         self.assertEqual(html.count('value="5Boro"'), 1)
         self.assertIn("const HISTORY_COLOR", html)
         self.assertIn("function brandSame(", html)
