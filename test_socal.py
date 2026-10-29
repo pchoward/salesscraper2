@@ -44,26 +44,44 @@ class SoCalTests(unittest.TestCase):
         cards = socal.cards_from_html(page(CARDS))
         self.assertEqual(len(cards), 6)
         first = cards[0]
-        self.assertEqual(first["name"], "8.5x32.375 Poorhouse Pop Deck - Black Stain")
+        self.assertEqual(first["name"], "Poorhouse Pop Deck - Black Stain 8.5x32.375", "size moved after the brand")
         self.assertEqual(first["url"], "https://socalskateshop.com/Poorhouse-Pop-Skateboard-Deck-Black-Stain-8-5x32-375.html")
         self.assertEqual((first["price_new"], first["price_old"]), ("34.97", "49.95"))
-        self.assertEqual(first["image"], "https://socalskateshop.com/graphics/00000001/42/deck_280x280.jpg")
+        # Images live under /mm5/ (the owner saw none with the site root).
+        self.assertEqual(first["image"], "https://socalskateshop.com/mm5/graphics/00000001/42/deck_280x280.jpg")
         self.assertIsNone(cards[4]["price_old"])
 
     def test_parts_from_names_and_markdowns_only(self):
         cards = socal.cards_from_html(page(CARDS))
         found = {part: [i["name"] for i in socal.SoCalScraper(part).products_from(cards)] for part in socal.PARTS}
-        self.assertEqual(found["Decks"], ["8.5x32.375 Poorhouse Pop Deck - Black Stain"])
+        self.assertEqual(found["Decks"], ["Poorhouse Pop Deck - Black Stain 8.5x32.375"])
         self.assertEqual(found["Wheels"], ["Bones STF V5 Sidecut 54mm 99a Wheels"])
         self.assertEqual(found["Completes"], [], "a Penny cruiser is not a street complete")
         self.assertEqual(found["Protection"], ["Triple Eight Sweatsaver Helmet - Large"])
         everything = sum(found.values(), [])
-        self.assertNotIn("8.25 Some Brand Deck", everything, "no struck-through regular price, no markdown")
+        self.assertNotIn("Some Brand Deck 8.25", everything, "no struck-through regular price, no markdown")
         self.assertNotIn("SoCal Skateshop Logo T-Shirt", everything)
         deck = socal.SoCalScraper("Decks").products_from(cards)[0]
         self.assertEqual((deck["size"], deck["length"]), ("8.5", 32.375))
         helmet = socal.SoCalScraper("Protection").products_from(cards)[0]
         self.assertEqual((helmet["protection_type"], helmet["protection_sizes"]), ("Helmet", ["L"]))
+
+    def test_names_start_with_the_brand_and_base_href_wins(self):
+        cases = {
+            "8.5x32.375 Poorhouse Pop Deck - Black Stain": "Poorhouse Pop Deck - Black Stain 8.5x32.375",
+            "9.43x32.12 Powell Peralta Mike Frazier Yellow Man": "Powell Peralta Mike Frazier Yellow Man 9.43x32.12",
+            '8.25" Real Oval Deck': 'Real Oval Deck 8.25"',
+            "Bones STF V5 54mm Wheels": "Bones STF V5 54mm Wheels",
+            "187 Adult Six Pack Pad Set": "187 Adult Six Pack Pad Set",
+        }
+        for raw, clean in cases.items():
+            self.assertEqual(socal.clean_name(raw), clean, raw)
+        with_base = page(CARDS[:1]).replace("<html>", '<html><head><base href="https://socalskateshop.com/mm5/x/"></head>')
+        self.assertEqual(socal.cards_from_html(with_base)[0]["image"],
+                         "https://socalskateshop.com/mm5/x/graphics/00000001/42/deck_280x280.jpg")
+        from page import render_page
+        from filters import extract_deck_dimensions
+        self.assertEqual(extract_deck_dimensions(cases["8.5x32.375 Poorhouse Pop Deck - Black Stain"]), (8.5, 32.375))
 
     def test_pages_of_72_with_the_crawl_delay(self):
         full = [card(f"deck-{n}.html", f"Deck {n}", "50.00", "40.00") for n in range(socal.PER_PAGE)]
