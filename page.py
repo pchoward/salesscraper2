@@ -328,6 +328,16 @@ def _specs_for(item, entry):
                 specs[field] = float(entry.get(field))
             except (TypeError, ValueError):
                 pass
+    # A deck drilled for several wheelbases: the listing's own list wins,
+    # then history's, then whatever the name said.
+    for source in (item, entry):
+        options = source.get("wheelbases")
+        if isinstance(options, list) and len(options) > 1:
+            try:
+                specs["wheelbases"] = sorted({float(value) for value in options})
+            except (TypeError, ValueError):
+                continue
+            break
     return specs
 
 
@@ -1076,7 +1086,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 trend = "stable"
             width_key = dimension_key(specs.get("width")) if item.get("part") == "Decks" else ""
             length_key = dimension_key(specs.get("length")) or ""
-            wheel_key = dimension_key(specs.get("wheelbase")) or ""
+            # "14,14.62" for a deck drilled for both; page.js splits it.
+            wheel_key = ",".join(
+                key for key in (dimension_key(value) for value in (specs.get("wheelbases") or [specs.get("wheelbase")])) if key
+            )
             diameter = ""
             duros = []
             shape = ""
@@ -1308,7 +1321,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             deck_lengths.append(record["length_key"])
             length_hits += 1
         if record["wheel_key"]:
-            wheels.add(record["wheel_key"])
+            wheels.update(record["wheel_key"].split(","))
             wheel_hits += 1
         if record["part"] == "Wheels":
             if record["diameter"]:

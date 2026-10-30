@@ -24,6 +24,8 @@ _WB_NUMBER_FIRST = re.compile(
     r"\b" + _WB_VALUE + r"\s*(?:\"|\u201d|\u2033|in(?:ch(?:es)?)?\b)?\s*" + _WB_LABEL,
     re.IGNORECASE,
 )
+# "Wheelbase: 14" & 14.62"": decks drilled for two wheelbases list both.
+_WB_MORE = re.compile(r"\s*(?:\"|\u201d|\u2033|in\b)?\s*(?:&|and|or|/)\s*" + _WB_VALUE, re.IGNORECASE)
 _FRACTIONS = {"\u00bc": 0.25, "\u00bd": 0.5, "\u00be": 0.75, "\u215b": 0.125, "\u215c": 0.375, "\u215d": 0.625, "\u215e": 0.875}
 # Street and park decks run about 13-15.5"; anything outside this is not a
 # deck wheelbase (or not one we should trust).
@@ -97,30 +99,41 @@ def wheelbases_in(text):
                 continue
             if value is not None and WHEELBASE_RANGE[0] <= value <= WHEELBASE_RANGE[1]:
                 found.append((match.start(), round(value, 4)))
+            more = _WB_MORE.match(text, match.end()) if pattern is _WB_LABEL_FIRST else None
+            if more:
+                try:
+                    other = _wb_number(more.group(1))
+                except ValueError:
+                    other = None
+                if other is not None and WHEELBASE_RANGE[0] <= other <= WHEELBASE_RANGE[1]:
+                    found.append((match.start(), round(other, 4)))
     return sorted(set(found))
 
 
-def _wheelbase(text, width=None):
-    """The one wheelbase the text gives, or the one paired with ``width``.
+def wheelbase_options(text, width=None):
+    """Every wheelbase this deck is drilled for, smallest first; [] when unsure.
 
-    A page listing several sizes ("8.0 ... WB 14", "8.25 ... WB 14.25") has
-    several wheelbases. Then the value whose nearest preceding width is the
-    deck's own is used, and without such a pairing nothing is guessed.
+    One label can list two ("Wheelbase: 14" & 14.62""): a deck drilled for
+    both, and both are kept. A page listing several sizes ("8.0 ... WB 14",
+    "8.25 ... WB 14.25") gives each size its own; then the set after the
+    deck's own width is used, and without such a pairing nothing is guessed.
     """
-    found = wheelbases_in(text)
-    values = {value for _position, value in found}
-    if len(values) == 1:
-        return values.pop()
-    if not values or width is None:
-        return None
+    groups = {}
+    for position, value in wheelbases_in(text):
+        groups.setdefault(position, set()).add(value)
+    sets = {frozenset(values) for values in groups.values()}
+    if len(sets) == 1:
+        return sorted(sets.pop())
+    if not sets or width is None:
+        return []
     paired = set()
-    for position, value in found:
+    for position, values in groups.items():
         before = text[max(0, position - 60):position]
         numbers = re.findall(r"(?<![\d.])(\d{1,2}(?:\.\d{1,3})?)(?![\d.])", before)
         widths = [float(number) for number in numbers if 7 <= float(number) <= 11]
         if widths and abs(widths[-1] - width) < 0.001:
-            paired.add(value)
-    return paired.pop() if len(paired) == 1 else None
+            paired.add(frozenset(values))
+    return sorted(paired.pop()) if len(paired) == 1 else []
 
 
 def extract_specs(name, extra_text=""):
@@ -144,11 +157,13 @@ def extract_specs(name, extra_text=""):
     # Pair a multi-size page only by the listing's own width (its name), never
     # by a width read from that same page.
     own_width = extract_deck_dimensions(name)[0]
-    wheelbase = _wheelbase(name, own_width) or _wheelbase(extra, own_width)
+    options = wheelbase_options(name, own_width) or wheelbase_options(extra, own_width)
     return {
         "width": width,
         "length": length,
-        "wheelbase": wheelbase,
+        "wheelbase": options[0] if options else None,
+        # Two or more only for a deck drilled for several (see wheelbase_options).
+        "wheelbases": options if len(options) > 1 else [],
     }
 
 
@@ -160,7 +175,9 @@ def set_wheelbase(item, text):
     """
     if item.get("part") not in ("Decks", "Completes") or item.get("wheelbase") not in (None, ""):
         return item
-    value = extract_specs(item.get("name") or "", text or "")["wheelbase"]
-    if value is not None:
-        item["wheelbase"] = value
+    specs = extract_specs(item.get("name") or "", text or "")
+    if specs["wheelbase"] is not None:
+        item["wheelbase"] = specs["wheelbase"]
+    if specs["wheelbases"]:
+        item["wheelbases"] = specs["wheelbases"]
     return item

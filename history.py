@@ -80,6 +80,7 @@ _ENTRY_FIELDS = (
     "stage",
     "miss_streak",
     "miss_day",
+    "wheelbase_checked",
     "stock",
     "previous_urls",
     "earlier_products",
@@ -216,6 +217,15 @@ def _media_fields(entry):
             media[field] = float(value)
         except (TypeError, ValueError):
             continue
+    # A deck drilled for more than one wheelbase keeps them all.
+    options = (entry or {}).get("wheelbases")
+    if isinstance(options, list):
+        try:
+            values = sorted({round(float(value), 4) for value in options})
+        except (TypeError, ValueError):
+            values = []
+        if len(values) > 1:
+            media["wheelbases"] = values
     return media
 
 
@@ -224,8 +234,8 @@ def _copy_media(target, source):
     media = _media_fields(source)
     if media.get("image"):
         target["image"] = media["image"]
-    for field in ("width", "length", "wheelbase"):
-        if field in media and target.get(field) in (None, ""):
+    for field in ("width", "length", "wheelbase", "wheelbases"):
+        if field in media and target.get(field) in (None, "", []):
             target[field] = media[field]
 
 
@@ -250,7 +260,7 @@ def _ordered_entry(entry):
                 continue
             if value < 1:
                 continue
-        if field == "miss_day" and _as_date(value) is None:
+        if field in ("miss_day", "wheelbase_checked") and _as_date(value) is None:
             continue
         if field == "stock" and value != "out_of_stock":
             continue

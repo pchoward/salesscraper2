@@ -23,6 +23,7 @@ from report import build_digest, build_report_html, compare_catalogs
 from stores.stock import confirm_stock
 from site_sales import SITE_SALES_PATH, load_state as load_site_sales
 from site_sales import state_json as site_sales_json
+from stores.details import fill_wheelbases
 from stores.files import safe_write_file
 from stores.registry import build_scrapers
 from stores.runner import run_stores
@@ -171,6 +172,13 @@ def main():
             skip_urls=carried,
             health_results=prepared["health_results"],
         )
+    if updates.get("save_history"):
+        # Deck wheelbase from product pages, once per listing; saved on the
+        # history rows the page reads. Never fails the run.
+        try:
+            fill_wheelbases(curr_data, updates["history"], failed_keys, today=scanned_at[:10])
+        except Exception as exc:
+            logging.error("Wheelbase lookup failed (continuing): %s", exc)
     history_saved = False
     if updates.get("save_history"):
         history_saved = save_price_history(updates["history"])
