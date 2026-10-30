@@ -1606,6 +1606,9 @@ function applyFilters() {
         row.classList.toggle("filtered-out", !rowMatches(row));
     });
     paintOfferPrices();
+    // A fresh visit opens on the default sort without sortBy running, and
+    // shoe-size offers rewrite price and % off: re-sort before cards mount.
+    if (orderRows()) syncCardOrder();
     applySectionFilters();
     applyGroupVisibility();
     syncGroupOrder();
@@ -2081,19 +2084,35 @@ function sortBy(key, direction) {
     }
     state.sortKey = key;
     state.sortDir = direction;
-    const rows = Array.from(tbody.querySelectorAll(".deal-row"));
-    rows.sort((a, b) => compareSort(a, b, key, direction));
-    rows.forEach(row => {
-        const detail = document.querySelector('.detail-row[data-for="' + row.dataset.id + '"]');
-        tbody.appendChild(row);
-        if (detail) tbody.appendChild(detail);
-    });
+    orderRows();
     document.querySelectorAll("#mainTable [data-sort]").forEach(node => node.classList.remove("sorted"));
     const header = document.querySelector('#mainTable [data-sort="' + key + '"]');
     if (header) header.classList.add("sorted");
     mirrorSort(key, direction);
     syncCardOrder();
     syncUrl();
+}
+
+// Put every deal row, filtered or not, in the chosen sort. The table body
+// is the live order the card grid mounts from, batch by batch, so this is
+// what keeps cards past the first page sorted too. Ties fall back to the
+// page's rank, so the result never depends on the sort before it. Returns
+// true when the order changed.
+function orderRows() {
+    const tbody = document.querySelector("#mainTable tbody");
+    if (!tbody) return false;
+    const key = state.sortKey || DEFAULT_SORT;
+    const direction = state.sortDir || defaultSortDir(key);
+    const rows = Array.from(tbody.querySelectorAll(".deal-row"));
+    const sorted = rows.slice().sort((a, b) =>
+        compareSort(a, b, key, direction) || (parseFloat(a.dataset.rank) || 0) - (parseFloat(b.dataset.rank) || 0));
+    if (sorted.every((row, index) => row === rows[index])) return false;
+    sorted.forEach(row => {
+        const detail = document.querySelector('.detail-row[data-for="' + row.dataset.id + '"]');
+        tbody.appendChild(row);
+        if (detail) tbody.appendChild(detail);
+    });
+    return true;
 }
 
 function syncCardOrder() {

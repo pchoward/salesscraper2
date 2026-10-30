@@ -797,8 +797,10 @@ const checks = [
   ["price", "desc", "new,mid,hot,other,low"],
   ["score", "desc", "hot,other,mid,new,low"],
   ["original", "asc", "other,mid,new,hot,low"],
-  ["size", "asc", "other,mid,new,hot,low"],
-  ["store", "asc", "other,new,low,mid,hot"],
+  // Ties (new and mid at 10.0, new and other at CCS) fall back to rank,
+  // not to the order the sort before left.
+  ["size", "asc", "other,new,mid,hot,low"],
+  ["store", "asc", "new,other,low,mid,hot"],
   ["brand", "asc", "low,other,hot,new,mid"],
   ["days", "desc", "hot,mid,other,low,new"],
   ["daysat", "asc", "new,other,mid,hot,low"],
