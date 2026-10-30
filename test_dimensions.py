@@ -40,6 +40,27 @@ class DimensionTests(unittest.TestCase):
         self.assertEqual(specs["width"], 8.6)
         self.assertEqual(specs["wheelbase"], 14.5)
 
+    def test_wheelbase_as_stores_write_it(self):
+        for text in ('Wheelbase: 14.25"', "WB 14.25", '14.25" WB', "Wheel Base: 14.25", "wheel-base 14.25",
+                     "Wheelbase (in) 14.25", "Wheelbase - 14.25 inches", 'Wheelbase: 14 1/4"', "wheelbase 14-1/4",
+                     "Wheelbase: 14\u00bc\"", "14.25 inch wheelbase", "The wheelbase is 14.25"):
+            self.assertEqual(extract_specs("Baker Deck 8.25", text)["wheelbase"], 14.25, text)
+
+    def test_wheelbase_is_never_a_guess(self):
+        # A width or length next to "WB" is not a wheelbase.
+        self.assertIsNone(extract_specs("Baker Deck 8.25", "wb 8.25")["wheelbase"])
+        self.assertIsNone(extract_specs("Baker Deck 8.25", "8.25 x 31.875 WB")["wheelbase"])
+        # A page with every size: the deck's own width picks its wheelbase.
+        sizes = '8.0" x 31.5" WB 14 | 8.25" x 31.875" WB 14.25 | 8.5" x 32" WB 14.38'
+        self.assertEqual(extract_specs("Baker Deck 8.25", sizes)["wheelbase"], 14.25)
+        self.assertEqual(extract_specs("Baker Deck 8.5", sizes)["wheelbase"], 14.38)
+        self.assertEqual(extract_specs("Baker Deck 8.0", sizes)["wheelbase"], 14.0)
+        # Several wheelbases and no matching width: nothing rather than a wrong one.
+        self.assertIsNone(extract_specs("Baker Deck 8.6", sizes)["wheelbase"])
+        self.assertIsNone(extract_specs("Baker Deck", sizes)["wheelbase"])
+        # The same value said twice is still one wheelbase.
+        self.assertEqual(extract_specs("Baker Deck 8.25", "Wheelbase: 14.25. WB 14.25")["wheelbase"], 14.25)
+
 
 if __name__ == "__main__":
     unittest.main()

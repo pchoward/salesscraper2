@@ -12,14 +12,33 @@ _NUMBER = re.compile(
     r"^\s*(\d{1,2}(?:\.\d+)?)\s*(?:\"|\u201d|\u2033|in(?:ch(?:es)?)?)?\s*$",
     re.IGNORECASE,
 )
+# A wheelbase as stores write it: 14.25, 14 1/4, 14-1/4, or 14¼, maybe with
+# an inch mark. Fractions are eighths or quarters in practice.
+_WB_VALUE = r"(\d{2}(?:\.\d+)?(?:[\s-]+\d/\d{1,2}|[\u00bc\u00bd\u00be\u215b\u215c\u215d\u215e])?)"
+_WB_LABEL = r"(?:wheel[\s-]?base|\bwb\b)"
 _WB_LABEL_FIRST = re.compile(
-    r"\b(?:wheelbase|wb)\b\s*[:=]?\s*(\d{1,2}(?:\.\d+)?)",
+    _WB_LABEL + r"\s*(?:\((?:in|inches)\)|\[(?:in|inches)\])?\s*[:=\-\u2013|]?\s*(?:is\s+)?" + _WB_VALUE,
     re.IGNORECASE,
 )
 _WB_NUMBER_FIRST = re.compile(
-    r"\b(\d{1,2}(?:\.\d+)?)\s*(?:\"|\u201d|\u2033)?\s*(?:wheelbase|\bwb\b)",
+    r"\b" + _WB_VALUE + r"\s*(?:\"|\u201d|\u2033|in(?:ch(?:es)?)?\b)?\s*" + _WB_LABEL,
     re.IGNORECASE,
 )
+_FRACTIONS = {"\u00bc": 0.25, "\u00bd": 0.5, "\u00be": 0.75, "\u215b": 0.125, "\u215c": 0.375, "\u215d": 0.625, "\u215e": 0.875}
+# Street and park decks run about 13-15.5"; anything outside this is not a
+# deck wheelbase (or not one we should trust).
+WHEELBASE_RANGE = (12.0, 17.0)
+
+
+def _wb_number(text):
+    text = text.strip()
+    if text and text[-1] in _FRACTIONS:
+        return float(text[:-1]) + _FRACTIONS[text[-1]]
+    match = re.match(r"^(\d{2})[\s-]+(\d)/(\d{1,2})$", text)
+    if match:
+        whole, top, bottom = (int(group) for group in match.groups())
+        return whole + top / bottom if bottom and top < bottom else None
+    return float(text)
 
 
 def parse_dimension(value):
@@ -67,13 +86,41 @@ def dimension_label(value):
     return dimension_key(value)
 
 
-def _wheelbase(text):
-    if not text:
+def wheelbases_in(text):
+    """``[(position, value)]`` for every wheelbase the text states, in order."""
+    found = []
+    for pattern in (_WB_LABEL_FIRST, _WB_NUMBER_FIRST):
+        for match in pattern.finditer(text or ""):
+            try:
+                value = _wb_number(match.group(1))
+            except ValueError:
+                continue
+            if value is not None and WHEELBASE_RANGE[0] <= value <= WHEELBASE_RANGE[1]:
+                found.append((match.start(), round(value, 4)))
+    return sorted(set(found))
+
+
+def _wheelbase(text, width=None):
+    """The one wheelbase the text gives, or the one paired with ``width``.
+
+    A page listing several sizes ("8.0 ... WB 14", "8.25 ... WB 14.25") has
+    several wheelbases. Then the value whose nearest preceding width is the
+    deck's own is used, and without such a pairing nothing is guessed.
+    """
+    found = wheelbases_in(text)
+    values = {value for _position, value in found}
+    if len(values) == 1:
+        return values.pop()
+    if not values or width is None:
         return None
-    match = _WB_LABEL_FIRST.search(text) or _WB_NUMBER_FIRST.search(text)
-    if not match:
-        return None
-    return parse_dimension(match.group(1))
+    paired = set()
+    for position, value in found:
+        before = text[max(0, position - 60):position]
+        numbers = re.findall(r"(?<![\d.])(\d{1,2}(?:\.\d{1,3})?)(?![\d.])", before)
+        widths = [float(number) for number in numbers if 7 <= float(number) <= 11]
+        if widths and abs(widths[-1] - width) < 0.001:
+            paired.add(value)
+    return paired.pop() if len(paired) == 1 else None
 
 
 def extract_specs(name, extra_text=""):
@@ -94,9 +141,26 @@ def extract_specs(name, extra_text=""):
             length = extra_length
         if width is None:
             width = _extra_width
-    wheelbase = _wheelbase(name) or _wheelbase(extra)
+    # Pair a multi-size page only by the listing's own width (its name), never
+    # by a width read from that same page.
+    own_width = extract_deck_dimensions(name)[0]
+    wheelbase = _wheelbase(name, own_width) or _wheelbase(extra, own_width)
     return {
         "width": width,
         "length": length,
         "wheelbase": wheelbase,
     }
+
+
+def set_wheelbase(item, text):
+    """Put the deck's wheelbase on ``item`` when ``text`` states one for it.
+
+    For stores that already have the product description in hand (Shopify
+    feeds), so it costs no extra request. Decks and completes only.
+    """
+    if item.get("part") not in ("Decks", "Completes") or item.get("wheelbase") not in (None, ""):
+        return item
+    value = extract_specs(item.get("name") or "", text or "")["wheelbase"]
+    if value is not None:
+        item["wheelbase"] = value
+    return item

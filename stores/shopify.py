@@ -29,6 +29,7 @@ import urllib.request
 from urllib.parse import quote
 
 from filters import extract_deck_dimensions, extract_deck_size, filter_reason, normalize_product_name, normalize_url
+from dimensions import set_wheelbase
 from part_specs import ordered_shoe_sizes
 from protection import classify as classify_protection
 from stores.base import Scraper
@@ -337,6 +338,7 @@ class ShopifyScraper(Scraper):
             size = extract_deck_size(name)
             if size:
                 item["size"] = size
+            set_wheelbase(item, description)
         if self.part == "Protection":
             set_protection_fields(item, name, product_type, variants)
         if self.part == "Sneakers":
