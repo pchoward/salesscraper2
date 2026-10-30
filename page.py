@@ -941,6 +941,16 @@ def _default_rank(record):
     return (2, -score, record["name"])
 
 
+def _default_sort_key(record):
+    """page.js compareSort for DEFAULT_SORT ("discount", high first), ties by rank.
+
+    Sold out goes last, then listings without a % off.
+    """
+    percent = record["percent"]
+    rounded = round(percent, 1) if percent is not None else None
+    return (bool(record.get("sold_out")), rounded is None, -(rounded or 0), record["rank"])
+
+
 def _plural(count, singular, plural):
     return f"{count} {singular if count == 1 else plural}"
 
@@ -2099,7 +2109,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     pool_chunks = ['<template id="cardPool">']
     shown_decks = 0
     pooled_decks = 0
-    for record in records:
+    # Built in the default sort (% off) so the first cards are right before
+    # page.js runs; it re-sorts the same way. ``rank`` keeps the drops-first
+    # order for the "Today's drops & new first" option.
+    for record in sorted(records, key=_default_sort_key):
         try:
             row_html = _row_html(record)
             card_html = _card_html(record)
