@@ -1,6 +1,9 @@
 """Deck length buckets, sidebar order, card grid, and cheap page-load wins."""
 
 import json
+import os
+import re
+import signal
 import subprocess
 import tempfile
 import unittest
@@ -9,9 +12,12 @@ from pathlib import Path
 from page import (
     CARD_PAGE_SIZE,
     LENGTH_BOUNDARY_TIP,
+    WHEELBASE_CHIP_CAP,
     build_length_buckets,
+    build_wheelbase_buckets,
     length_bucket_for,
     parse_length,
+    wheelbase_bucket_for,
 )
 from report import build_report_html
 
@@ -175,8 +181,8 @@ class FilterOrderTests(unittest.TestCase):
         sections = _sections(html)
         canon = [
             "brand",
-            "width", "trucksize", "diameter", "shoesize", "protsize", "abec",
-            "length", "wheelbase", "truckheight", "construction", "duro", "shape", "prottype",
+            "width", "trucksize", "diameter", "wheelcolor", "shoesize", "protsize", "abec",
+            "length", "wheelbase", "deckcolor", "truckheight", "construction", "duro", "shape", "prottype",
             "price", "discount", "score", "deals", "interval",
         ]
         present = [item["id"] for item in sections if item["id"] in canon]
@@ -295,6 +301,195 @@ assert.equal(rowMatches(row), true);
             path = handle.name
         result = subprocess.run(["node", path], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+
+
+class WheelbaseBucketTests(unittest.TestCase):
+    def test_quarters_include_the_lower_end_and_skip_empty_gaps(self):
+        buckets = build_wheelbase_buckets([13.5, 14, 14.249, 14.25, 14.5, "14.62", 15, 15.125])
+        ids = [bucket["id"] for bucket in buckets]
+        self.assertEqual(
+            ids,
+            ["13.5-13.75", "14-14.25", "14.25-14.5", "14.5-14.75", "15-15.25"],
+        )
+        self.assertNotIn("13.75-14", ids)
+        self.assertNotIn("14.75-15", ids)
+        # 14.25 starts the next quarter. 14.5 does too. 14.62 shares 14.5's quarter.
+        self.assertEqual(wheelbase_bucket_for(14.25, buckets), "14.25-14.5")
+        self.assertEqual(wheelbase_bucket_for("14.25\"", buckets), "14.25-14.5")
+        self.assertEqual(wheelbase_bucket_for(14.249, buckets), "14-14.25")
+        self.assertEqual(wheelbase_bucket_for(14.5, buckets), "14.5-14.75")
+        self.assertEqual(wheelbase_bucket_for(14.62, buckets), "14.5-14.75")
+        self.assertEqual(wheelbase_bucket_for(14, buckets), "14-14.25")
+        self.assertEqual(wheelbase_bucket_for(15, buckets), "15-15.25")
+        self.assertIn("14.25", buckets[2]["label"])
+        self.assertIn("quarter", buckets[2]["tip"])
+
+    def test_a_long_span_folds_the_smaller_end(self):
+        # Nine occupied quarters, equal counts: the leading two fold into under 12.5".
+        values = [round(12 + index * 0.25, 4) for index in range(WHEELBASE_CHIP_CAP + 1)]
+        buckets = build_wheelbase_buckets(values)
+        self.assertEqual(len(buckets), WHEELBASE_CHIP_CAP)
+        self.assertEqual(buckets[0]["id"], "under-12.5")
+        self.assertIsNone(buckets[0]["min"])
+        self.assertEqual(buckets[0]["max"], 12.5)
+        self.assertEqual(wheelbase_bucket_for(12, buckets), "under-12.5")
+        self.assertEqual(wheelbase_bucket_for(12.25, buckets), "under-12.5")
+        self.assertEqual(wheelbase_bucket_for(12.5, buckets), "12.5-12.75")
+        # The heavy end stays a quarter and the light tail becomes 15.75"+.
+        heavy = [14] * 5 + [14.25, 14.5, 14.75, 15, 15.25, 15.5, 15.75, 16]
+        folded = build_wheelbase_buckets(heavy)
+        self.assertEqual(len(folded), WHEELBASE_CHIP_CAP)
+        self.assertEqual(folded[-1]["id"], "15.75+")
+        self.assertIsNone(folded[-1]["max"])
+        self.assertEqual(wheelbase_bucket_for(15.5, folded), "15.5-15.75")
+        self.assertEqual(wheelbase_bucket_for(15.75, folded), "15.75+")
+        self.assertEqual(wheelbase_bucket_for(16, folded), "15.75+")
+
+    def test_page_chips_count_decks_in_each_quarter(self):
+        values = [14, 14, 14.249, 14.25, 14.25, 14.5]
+        decks = [
+            _item(
+                f"Baker Logo Deck {index}",
+                "Decks",
+                f"https://example.com/wb-{index}",
+                wheelbase=value,
+            )
+            for index, value in enumerate(values)
+        ]
+        html = build_report_html({"Zumiez_Decks": decks}, {}, generated_at="2026-10-11T21:46:35+00:00")
+        self.assertIn('data-section="wheelbase" data-for="Decks"', html)
+        self.assertIn('id="wheelbaseFilters"', html)
+        self.assertIn('class="chip wheelbase-chip active"', html)
+
+        def count_for(bucket_id):
+            chip = html.split(f'data-value="{bucket_id}"', 1)[1].split("</button>", 1)[0]
+            return chip.split('data-count="', 1)[1].split('"', 1)[0]
+
+        # 14 and 14.249 are the 14–14.25 quarter. Exactly 14.25 is the next one.
+        self.assertEqual(count_for("14-14.25"), "3")
+        self.assertEqual(count_for("14.25-14.5"), "2")
+        self.assertEqual(count_for("14.5-14.75"), "1")
+        self.assertNotIn('data-value="13.75-14"', html)
+        all_chip = html.split('id="wheelbaseFilters"', 1)[1].split("</button>", 1)[0]
+        self.assertIn('data-value="all"', all_chip)
+        self.assertIn('data-count="6"', all_chip)
+
+    def test_old_wheelbase_links_select_the_quarter(self):
+        buckets = build_wheelbase_buckets([14, 14.25, 14.5, 14.62])
+        source = (ROOT / "page.js").read_text(encoding="utf-8")
+        script = """
+const assert = require("node:assert/strict");
+const document = { addEventListener() {} };
+const window = {};
+global.document = document;
+global.window = window;
+const WHEELBASE_BUCKETS = __BUCKETS__;
+const LENGTH_BUCKETS = [];
+__SOURCE__
+assert.equal(wheelbaseBucketFor(14.25), "14.25-14.5");
+assert.equal(wheelbaseBucketFor("14.25\\""), "14.25-14.5");
+assert.equal(wheelbaseBucketFor(14.249), "14-14.25");
+assert.equal(wheelbaseBucketFor(14.5), "14.5-14.75");
+assert.equal(wheelbaseBucketFor(14.62), "14.5-14.75");
+assert.equal(normalizeWheelbaseParam("14.25"), "14.25-14.5");
+assert.equal(normalizeWheelbaseParam("14"), "14-14.25");
+assert.equal(normalizeWheelbaseParam("14.25-14.5"), "14.25-14.5");
+assert.equal(normalizeWheelbaseParam("14.5,14"), "14-14.25,14.5-14.75");
+assert.equal(normalizeWheelbaseParam("all"), "all");
+state.part = "Decks";
+state.wheelbase = "14.25-14.5";
+const row = { dataset: {
+    part: "Decks", length: "", size: "8.25", search: "baker", store: "Zumiez",
+    brand: "Baker", price: "40", discount: "50", score: "10",
+    starred: "0", fresh: "0", drop: "0", lowest: "0", added: "0", highlight: "0",
+    dropday: "", soldout: "0", wheelbase: "14.25", diameter: "", duros: "", shape: "",
+    trucksize: "", truckheight: "", construction: "", abec: "", shoesize: "",
+    prottype: "", protsize: "", color: ""
+}};
+assert.equal(rowMatches(row), true);
+row.dataset.wheelbase = "14.3";
+assert.equal(rowMatches(row), true);
+row.dataset.wheelbase = "14";
+assert.equal(rowMatches(row), false);
+row.dataset.wheelbase = "14,14.62";
+state.wheelbase = "14-14.25";
+assert.equal(rowMatches(row), true);
+state.wheelbase = "14.5-14.75";
+assert.equal(rowMatches(row), true);
+row.dataset.wheelbase = "";
+assert.equal(rowMatches(row), false);
+state.wheelbase = normalizeWheelbaseParam("14.25");
+row.dataset.wheelbase = "14.38";
+assert.equal(rowMatches(row), true);
+""".replace("__BUCKETS__", json.dumps([
+            {"id": bucket["id"], "label": bucket["label"], "min": bucket["min"], "max": bucket["max"]}
+            for bucket in buckets
+        ])).replace("__SOURCE__", source)
+        with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8") as handle:
+            handle.write(script)
+            path = handle.name
+        result = subprocess.run(["node", path], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+
+
+class SliderSpacingTests(unittest.TestCase):
+    def test_caption_is_below_the_range_thumbs(self):
+        css = (ROOT / "page.css").read_text(encoding="utf-8")
+        mobile = (ROOT / "mobile.css").read_text(encoding="utf-8")
+        dual = css.split(".dual {", 1)[1].split("}", 1)[0]
+        readout = css.split(".dual-readout {", 1)[1].split("}", 1)[0]
+        self.assertIn("padding-top: 32px", dual)
+        self.assertNotIn("height: 2.6rem", dual)
+        self.assertIn("position: static", readout)
+        self.assertIn("margin-top: 10px", readout)
+        self.assertNotIn("top: 1.45rem", readout)
+        phone = mobile.split("@media", 1)[1]
+        self.assertIn("padding-top: 32px", phone)
+        self.assertIn("margin-top: 10px", phone)
+        def dual_rules(text):
+            return "\n".join(re.findall(r"[^{}]*\.dual[^{]*\{[^{}]*\}", text))
+
+        markup = (
+            "<style>\n"
+            + dual_rules(css)
+            + "\n@media (max-width: 800px), (max-height: 500px) and (pointer: coarse) {\n"
+            + dual_rules(mobile)
+            + "\n}\n</style>\n"
+            '<div class="sidebar" style="width:240px">'
+            '<div class="dual" id="sample">'
+            '<input type="range" class="dual-min" min="0" max="100" value="0">'
+            '<input type="range" class="dual-max" min="0" max="100" value="100">'
+            '<span class="dual-readout">Any discount</span>'
+            "</div></div>\n"
+            "<script>\n"
+            "const input = document.querySelector('.dual-min').getBoundingClientRect();\n"
+            "const text = document.querySelector('.dual-readout').getBoundingClientRect();\n"
+            "const gap = text.top - input.bottom;\n"
+            "document.documentElement.dataset.gap = String(Math.round(gap));\n"
+            "document.documentElement.dataset.ok = gap >= 4 ? 'yes' : 'no';\n"
+            "</script>\n"
+        )
+        with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
+            path = Path(directory) / "slider.html"
+            path.write_text(markup, encoding="utf-8")
+            for width in (1280, 390):
+                command = [
+                    "google-chrome", "--headless=new", "--disable-gpu", "--no-sandbox",
+                    "--disable-dev-shm-usage", f"--user-data-dir={directory}/chrome-{width}",
+                    f"--window-size={width},800", "--virtual-time-budget=1000",
+                    "--dump-dom", path.as_uri(),
+                ]
+                # Headless Chrome prints the DOM and then lingers on DBus.
+                proc = subprocess.Popen(
+                    command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                    text=True, start_new_session=True,
+                )
+                try:
+                    rendered, _err = proc.communicate(timeout=20)
+                except subprocess.TimeoutExpired:
+                    os.killpg(proc.pid, signal.SIGKILL)
+                    rendered, _err = proc.communicate()
+                self.assertIn('data-ok="yes"', rendered or "", f"width {width}: {(rendered or '')[-400:]}")
 
 
 if __name__ == "__main__":

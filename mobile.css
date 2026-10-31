@@ -406,6 +406,10 @@
     .alerts-advanced > summary { min-height: 2.75rem; display: flex; align-items: center; }
     .alerts-product-photo { width: 56px; height: 56px; }
     .quick-actions { width: 100%; }
+    /* Same thumb lane as desktop, so "Any price" stays under the handles. */
+    .dual { height: auto; padding-top: 32px; }
+    .dual input[type="range"] { top: 4px; height: 22px; }
+    .dual-readout { position: static; display: block; margin-top: 10px; }
 }
 
 /* Filter drawer scrollbar must not cover counts. Same gutter and end

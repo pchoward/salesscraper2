@@ -1945,17 +1945,24 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
 .kind-watch { background: #d97706; }
 .kind-hot { background: #b91c1c; }
 .section-note { margin: 0.35rem 0 0; color: #64748b; font-size: 0.68rem; line-height: 1.35; }
-.dual { position: relative; height: 2.6rem; margin: 0.45rem 0 0.2rem; }
+.dual {
+    position: relative;
+    height: auto;
+    margin: 0.45rem 0 0.2rem;
+    /* 16px thumbs sit on a 4px track and used to cover the caption.
+       The lane is tall enough for the thumbs; the caption follows in flow. */
+    padding-top: 32px;
+}
 .dual input[type="range"] {
     position: absolute;
     left: 0;
-    top: 0;
+    top: 4px;
     width: 100%;
     margin: 0;
     background: transparent;
     pointer-events: none;
     appearance: none;
-    height: 1.4rem;
+    height: 22px;
 }
 .dual-min { z-index: 3; }
 .dual-max { z-index: 2; }
@@ -1991,11 +1998,12 @@ select:disabled, input:disabled, .chip:disabled, .facet-value:disabled {
     cursor: pointer;
 }
 .dual-readout {
-    position: absolute;
-    left: 0;
-    top: 1.45rem;
+    position: static;
+    display: block;
+    margin-top: 10px;
     font-size: 0.72rem;
     font-weight: 700;
+    line-height: 1.2;
     color: #334155;
 }
 .saved-views { margin-top: 0.7rem; }
@@ -2715,6 +2723,7 @@ body.alerts-open { overflow: hidden; }
 .width-chip,
 .spec-chip,
 .length-chip,
+.wheelbase-chip,
 .kind-btn,
 .interval-btn,
 .change-btn,
@@ -2742,6 +2751,8 @@ body.alerts-open { overflow: hidden; }
 .spec-chip[aria-pressed="true"],
 .length-chip[aria-pressed="true"],
 .length-chip.active,
+.wheelbase-chip[aria-pressed="true"],
+.wheelbase-chip.active,
 .kind-btn[aria-pressed="true"],
 .interval-btn[aria-pressed="true"],
 .change-btn.active,
@@ -2755,7 +2766,8 @@ body.alerts-open { overflow: hidden; }
 .chip.is-zero,
 .width-chip.is-zero,
 .spec-chip.is-zero,
-.length-chip.is-zero {
+.length-chip.is-zero,
+.wheelbase-chip.is-zero {
     color: var(--grey-400);
     background: var(--grey-50);
     border-color: var(--grey-200);
@@ -3131,12 +3143,14 @@ body.alerts-open { overflow: hidden; }
 .nav-row .quick-chip[aria-pressed="true"] .quick-count,
 .width-chip[aria-pressed="true"] .width-count,
 .spec-chip[aria-pressed="true"] .spec-count,
-.length-chip[aria-pressed="true"] .spec-count {
+.length-chip[aria-pressed="true"] .spec-count,
+.wheelbase-chip[aria-pressed="true"] .spec-count {
     color: var(--blue);
 }
 .sidebar .width-chip,
 .sidebar .spec-chip,
 .sidebar .length-chip,
+.sidebar .wheelbase-chip,
 .sidebar .kind-btn,
 .sidebar .interval-btn {
     width: auto;
@@ -3248,3 +3262,52 @@ body.alerts-open { overflow: hidden; }
     padding: 8px 10px 10px;
     background: var(--grey-0);
 }
+
+/* Color swatches sit in the same bordered section as the other chips.
+   The name is the tooltip; the count sits beside the dot. */
+.color-swatches {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+.color-swatch:not(.color-all) {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 2px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+.color-swatch .swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid var(--grey-200, #d5dbe3);
+    background: var(--swatch, #e2e8f0);
+    box-sizing: border-box;
+    flex: 0 0 auto;
+}
+.color-swatch .swatch-clear {
+    background:
+        linear-gradient(45deg, #e2e8f0 25%, #fff 25%, #fff 50%, #e2e8f0 50%, #e2e8f0 75%, #fff 75%);
+    background-size: 8px 8px;
+}
+.color-swatch .swatch-multi {
+    background: conic-gradient(#dc2626, #eab308, #16a34a, #2563eb, #dc2626);
+}
+.color-swatch[aria-pressed="true"] .swatch {
+    box-shadow: 0 0 0 2px var(--grey-0, #fff), 0 0 0 3px var(--blue, #2563eb);
+}
+.color-swatch .spec-count {
+    font-size: 0.64rem;
+    font-weight: 650;
+    color: #64748b;
+}
+.color-swatch[aria-pressed="true"] .spec-count { color: var(--blue, #2563eb); }
+.color-swatch.is-zero { opacity: 0.45; }
+.color-swatch.is-zero[aria-pressed="true"] { opacity: 1; }

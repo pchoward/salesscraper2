@@ -558,9 +558,9 @@ function same(left, right) {
   if (left.length !== right.length) return false;
   return left.every((value, index) => value === right[index]);
 }
-if (!same(activeSpecKeys("Decks"), ["widths", "length", "wheelbase"])) throw new Error("decks");
-if (!same(activeSpecKeys(), ["widths", "length", "wheelbase"])) throw new Error("default decks");
-if (!same(activeSpecKeys("Wheels"), ["diameters", "duros", "shapes"])) throw new Error("wheels");
+if (!same(activeSpecKeys("Decks"), ["widths", "length", "wheelbase", "colors"])) throw new Error("decks");
+if (!same(activeSpecKeys(), ["widths", "length", "wheelbase", "colors"])) throw new Error("default decks");
+if (!same(activeSpecKeys("Wheels"), ["diameters", "colors", "duros", "shapes"])) throw new Error("wheels");
 if (!same(activeSpecKeys("Trucks"), ["truckSizes", "truckHeights", "constructions"])) throw new Error("trucks");
 if (!same(activeSpecKeys("Bearings"), ["abecs"])) throw new Error("bearings");
 if (!same(activeSpecKeys("Sneakers"), ["shoeSizes"])) throw new Error("sneakers");
