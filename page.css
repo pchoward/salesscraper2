@@ -353,8 +353,16 @@ tr.on-list td:first-child { box-shadow: inset 3px 0 0 #d97706; }
     background: white;
 }
 .g-offer.g-cheap, .mini-offer.g-cheap { background: #dcfce7; border-color: #86efac; }
-.group-board { display: grid; gap: 0.6rem; padding: 0.75rem; }
-.group-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 0.8rem; }
+.group-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+    gap: 0.75rem;
+    align-items: start;
+    width: 100%;
+    min-width: 0;
+    padding: 0.75rem;
+}
+.group-card { border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem 0.8rem; min-width: 0; }
 .diag-link {
     border: 0;
     background: none;
@@ -1083,8 +1091,9 @@ body.quick-sheet { overflow: hidden; }
     border-radius: 12px;
     background: #fff;
     padding: 0.85rem 0.9rem 0.75rem;
+    min-width: 0;
 }
-.group-title { margin: 0; font-size: 1.02rem; line-height: 1.35; }
+.group-title { margin: 0; font-size: 1.02rem; line-height: 1.35; overflow-wrap: anywhere; }
 .group-note { margin: 0.25rem 0 0.65rem; color: var(--text-secondary); font-size: 0.78rem; }
 .group-offers { display: flex; flex-direction: column; gap: 0.45rem; }
 .group-offer {
@@ -1157,18 +1166,41 @@ body.quick-sheet { overflow: hidden; }
     text-transform: uppercase;
     color: var(--text-secondary);
 }
-.group-selected { display: flex; gap: 0.7rem; align-items: center; }
-.group-selected-media img,
-.group-selected-media .hero,
-.group-selected-media .thumb {
+.group-selected { display: flex; gap: 0.7rem; align-items: center; min-width: 0; }
+.group-selected-media {
+    flex: 0 0 72px;
     width: 72px;
     height: 72px;
-    object-fit: contain;
+    display: block;
+    position: relative;
+    overflow: hidden;
     border-radius: 8px;
     background: #f8fafc;
 }
-.group-selected-name { margin: 0; font-weight: 700; }
-.group-selected-meta { margin: 0.15rem 0 0; color: var(--text-secondary); font-size: 0.85rem; }
+/* Card photos are cropped with inline percentage sizes and position:absolute.
+   Those declarations beat a normal stylesheet, so the thumb has to win with
+   !important or one product shot covers the results. */
+.group-selected-media img,
+.group-selected-media .hero,
+.group-selected-media .thumb {
+    display: block !important;
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 72px !important;
+    height: 72px !important;
+    max-width: 72px !important;
+    max-height: 72px !important;
+    margin: 0 !important;
+    object-fit: contain !important;
+    border-radius: 8px;
+    background: transparent;
+}
+.group-selected-copy { min-width: 0; flex: 1 1 auto; }
+.group-selected-name { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+.group-selected-meta { margin: 0.15rem 0 0; color: var(--text-secondary); font-size: 0.85rem; overflow-wrap: anywhere; }
 .group-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-top: 0.55rem; }
 .group-actions .text-btn { min-height: 2.5rem; }
 .group-actions .group-quick { background: var(--primary); color: #fff; }

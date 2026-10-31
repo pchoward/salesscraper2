@@ -1573,6 +1573,19 @@ function renderGroupOffer(offer, ranked, selected, noteId, panelId, index) {
     return button;
 }
 
+function detachHeroFit(node) {
+    if (!node) return;
+    if (node.removeAttribute) {
+        node.removeAttribute("id");
+        node.removeAttribute("style");
+    }
+    const style = node.style;
+    if (!style) return;
+    ["position", "left", "top", "right", "bottom", "width", "height", "maxWidth", "maxHeight", "objectFit", "margin"].forEach(name => {
+        style[name] = "";
+    });
+}
+
 function fillGroupPanel(panel, offer) {
     if (!panel) return;
     panel.replaceChildren();
@@ -1588,11 +1601,12 @@ function fillGroupPanel(panel, offer) {
         const media = document.createElement("span");
         media.className = "group-selected-media";
         const copy = thumb.cloneNode(true);
-        if (copy.removeAttribute) copy.removeAttribute("id");
+        detachHeroFit(copy);
         media.appendChild(copy);
         row.appendChild(media);
     }
     const text = document.createElement("div");
+    text.className = "group-selected-copy";
     const name = document.createElement("p");
     name.className = "group-selected-name";
     name.textContent = offer.name || "";

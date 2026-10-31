@@ -228,3 +228,118 @@ if (!groupNote(ranked).includes("Delivery charges and tax are not included.")) t
         rules = block.split(".group-offer", 1)[1]
         self.assertIn("min-height: 2.75rem", rules)
         self.assertIn(".group-offer.is-featured .amt", block)
+
+    def test_group_selected_media_image_is_size_constrained(self):
+        # A fitted card photo is copied into the group panel with inline
+        # position:absolute and percentage width/height. Those beat ordinary
+        # width/height, so the thumb rule has to cap the image itself.
+        page = Path(__file__).with_name("page.css").read_text(encoding="utf-8")
+        board = _rule_body(page, ".group-board {")
+        self.assertIn("repeat(auto-fill, minmax(min(100%, 22rem), 1fr))", board)
+        media = _rule_body(page, ".group-selected-media {")
+        self.assertIn("overflow: hidden", media)
+        self.assertIn("width: 72px", media)
+        self.assertIn("height: 72px", media)
+        thumb = _rule_body(page, ".group-selected-media img")
+        self.assertIn("position: static !important", thumb)
+        self.assertIn("object-fit: contain !important", thumb)
+        sizes = [int(n) for n in re.findall(r"(?:max-)?(?:width|height):\s*(\d+)px\s*!important", thumb)]
+        self.assertGreaterEqual(len(sizes), 4)
+        self.assertTrue(all(64 <= n <= 80 for n in sizes), sizes)
+        phone = Path(__file__).with_name("mobile.css").read_text(encoding="utf-8")
+        phone_board = phone.split(".group-board {", 1)[1].split("}", 1)[0]
+        self.assertIn("grid-template-columns: minmax(0, 1fr)", phone_board)
+        phone_thumb = phone.split(".group-selected-media img", 1)[1].split("}", 1)[0]
+        phone_sizes = [int(n) for n in re.findall(r"(?:max-)?(?:width|height):\s*(\d+)px\s*!important", phone_thumb)]
+        self.assertGreaterEqual(len(phone_sizes), 4)
+        self.assertTrue(all(64 <= n <= 80 for n in phone_sizes), phone_sizes)
+
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        face = source[source.index("function renderOfferFace("):source.index("function renderGroupOffer(")]
+        self.assertNotIn("createElement(\"img\")", face)
+        self.assertNotIn("createElement('img')", face)
+        painter = source[source.index("function detachHeroFit("):source.index("function offerFromButton(")]
+        script = r"""
+class El {
+    constructor(tag) {
+        this.tag = tag;
+        this.className = "";
+        this.children = [];
+        this.attrs = {};
+        this.style = {};
+        this.dataset = {};
+        this.parent = null;
+        this._text = "";
+    }
+    append(...nodes) {
+        nodes.forEach(node => {
+            if (!node) return;
+            node.parent = this;
+            this.children.push(node);
+        });
+    }
+    appendChild(node) { this.append(node); return node; }
+    replaceChildren(...nodes) { this.children = []; nodes.forEach(node => this.append(node)); }
+    setAttribute(name, value) { this.attrs[name] = String(value); }
+    getAttribute(name) { return Object.prototype.hasOwnProperty.call(this.attrs, name) ? this.attrs[name] : null; }
+    removeAttribute(name) { delete this.attrs[name]; }
+    matches(sel) { return sel === this.tag || (sel.startsWith(".") && this.className.split(/\s+/).includes(sel.slice(1))); }
+    querySelectorAll(sel) {
+        const found = [];
+        const visit = node => {
+            (node.children || []).forEach(child => {
+                if (child && child.matches(sel)) found.push(child);
+                if (child) visit(child);
+            });
+        };
+        visit(this);
+        return found;
+    }
+    querySelector(sel) { return this.querySelectorAll(sel)[0] || null; }
+    cloneNode() {
+        const copy = new El(this.tag);
+        copy.className = this.className;
+        copy.attrs = Object.assign({}, this.attrs);
+        copy.style = Object.assign({}, this.style);
+        copy._text = this._text;
+        this.children.forEach(child => copy.append(child.cloneNode()));
+        return copy;
+    }
+    get textContent() { return this._text; }
+    set textContent(value) { this._text = String(value); }
+}
+const img = new El("img");
+img.className = "hero";
+img.attrs.id = "hero-1";
+img.attrs.style = "position: absolute; left: -40%; top: 0%; width: 180%; height: 100%; max-width: none; max-height: none; object-fit: fill; margin: 0px;";
+img.style = { position: "absolute", left: "-40%", top: "0%", width: "180%", height: "100%", maxWidth: "none", maxHeight: "none", objectFit: "fill", margin: "0px" };
+const card = new El("article");
+card.append(img);
+function cardFor() { return card; }
+function groupMoney() { return "$69.95"; }
+const document = { createElement(tag) { return new El(tag); } };
+""" + painter + r"""
+const assert = require("node:assert/strict");
+const panel = new El("div");
+fillGroupPanel(panel, { id: "35", store: "TGM", price: 69.95, currency: "USD", availability: "On sale", name: "Heroin Swampy Egg 11\"", url: "https://example.com/swampy" });
+const copy = panel.querySelector("img");
+assert.ok(copy, "group panel should show the product photo");
+assert.equal(copy.className, "hero");
+assert.equal(copy.parent.className, "group-selected-media");
+assert.equal(copy.getAttribute("style"), null);
+assert.equal(copy.getAttribute("id"), null);
+for (const prop of ["position", "left", "top", "width", "height", "maxWidth", "maxHeight", "objectFit"]) {
+    assert.equal(copy.style[prop], "", prop);
+}
+assert.equal(img.style.width, "180%");
+assert.equal(img.getAttribute("style").includes("position: absolute"), true);
+const face = panel.querySelector(".group-offer-face");
+assert.equal(face, null);
+"""
+        result = subprocess.run(["node", "-e", script], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
+
+
+def _rule_body(css, selector):
+    brace = css.index("{", css.index(selector))
+    return css[brace + 1:css.index("}", brace)]

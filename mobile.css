@@ -290,6 +290,24 @@
         z-index: 65;
         background: rgb(15 23 42 / 0.45);
     }
+
+    /* Portrait phones: one group card per row, thumb still inside 64–80px. */
+    .group-board {
+        grid-template-columns: minmax(0, 1fr);
+        min-width: 0;
+    }
+    .group-card,
+    .group-selected,
+    .group-selected-copy { min-width: 0; }
+    .group-selected-media { flex: 0 0 64px; width: 64px; height: 64px; }
+    .group-selected-media img,
+    .group-selected-media .hero,
+    .group-selected-media .thumb {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: 64px !important;
+        max-height: 64px !important;
+    }
 }
 
 /* Small phones: the section links get their own row under the logo, and
@@ -373,12 +391,28 @@
     }
 
     /* Cross-store comparison stays a single column with thumb-sized targets. */
-    .group-board { padding: 0.25rem 0 0.75rem; }
+    .group-board {
+        grid-template-columns: minmax(0, 1fr);
+        min-width: 0;
+        padding: 0.25rem 0 0.75rem;
+    }
+    .group-card,
+    .group-selected,
+    .group-selected-copy { min-width: 0; }
     .group-offer,
     .group-actions .text-btn,
     .group-store-link { min-height: 2.75rem; }
     .group-store-link { display: inline-flex; align-items: center; }
     .group-selected { align-items: flex-start; }
+    .group-selected-media { flex: 0 0 64px; width: 64px; height: 64px; }
+    .group-selected-media img,
+    .group-selected-media .hero,
+    .group-selected-media .thumb {
+        width: 64px !important;
+        height: 64px !important;
+        max-width: 64px !important;
+        max-height: 64px !important;
+    }
     .group-offer.is-featured .amt,
     .group-offer.is-only .amt { font-size: 1.4rem; }
     .group-title { font-size: 1rem; }
