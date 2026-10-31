@@ -110,6 +110,20 @@ def wheelbases_in(text):
     return sorted(set(found))
 
 
+# The width a size block states: "Width: 8.25"" or "8.25" x 32"". A bare
+# number is not trusted; nose and tail lengths (6.5-7.25") look like widths.
+_WIDTH_LABEL = re.compile(r"\bwidth\b\s*[:=\-]?\s*(\d{1,2}(?:\.\d{1,4})?)", re.IGNORECASE)
+_WIDTH_BY_LENGTH = re.compile(r"(?<![\d.])(\d{1,2}(?:\.\d{1,4})?)\s*(?:\"|\u201d|\u2033)?\s*x\s*\d", re.IGNORECASE)
+
+
+def _width_before(text):
+    """The last width stated in ``text``, or None."""
+    found = [(match.start(), float(match.group(1))) for pattern in (_WIDTH_LABEL, _WIDTH_BY_LENGTH)
+             for match in pattern.finditer(text)]
+    found = [item for item in found if 6.5 <= item[1] <= 11.5]
+    return max(found)[1] if found else None
+
+
 def wheelbase_options(text, width=None):
     """Every wheelbase this deck is drilled for, smallest first; [] when unsure.
 
@@ -128,10 +142,8 @@ def wheelbase_options(text, width=None):
         return []
     paired = set()
     for position, values in groups.items():
-        before = text[max(0, position - 60):position]
-        numbers = re.findall(r"(?<![\d.])(\d{1,2}(?:\.\d{1,3})?)(?![\d.])", before)
-        widths = [float(number) for number in numbers if 7 <= float(number) <= 11]
-        if widths and abs(widths[-1] - width) < 0.001:
+        own = _width_before(text[max(0, position - 160):position])
+        if own is not None and abs(own - width) < 0.001:
             paired.add(frozenset(values))
     return sorted(paired.pop()) if len(paired) == 1 else []
 

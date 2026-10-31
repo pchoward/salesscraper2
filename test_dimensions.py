@@ -58,6 +58,13 @@ class DimensionTests(unittest.TestCase):
         # Several wheelbases and no matching width: nothing rather than a wrong one.
         self.assertIsNone(extract_specs("Baker Deck 8.6", sizes)["wheelbase"])
         self.assertIsNone(extract_specs("Baker Deck", sizes)["wheelbase"])
+        # CCS lists each shape's specs; nose and tail (7.00") are not widths.
+        shapes = ('Width: 8.0" Length: 31.75" Nose: 7.00" Tail: 6.50" Wheelbase: 14.25" "Agile 8" Shape. '
+                  'Width: 8.5" Length: 32.50" Nose: 7.25" Tail: 6.75" Wheelbase: 14.125" "Sect 8.5" Shape')
+        self.assertEqual(extract_specs("Habitat Deck 8.0", shapes)["wheelbase"], 14.25)
+        self.assertEqual(extract_specs("Habitat Deck 8.5", shapes)["wheelbase"], 14.125)
+        self.assertIsNone(extract_specs("Habitat Deck 7.0", shapes)["wheelbase"])
+        self.assertIsNone(extract_specs("Habitat Skateboard Deck", shapes)["wheelbase"], "no width of its own: no guess")
         # The same value said twice is still one wheelbase.
         self.assertEqual(extract_specs("Baker Deck 8.25", "Wheelbase: 14.25. WB 14.25")["wheelbase"], 14.25)
 
