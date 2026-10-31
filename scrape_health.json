@@ -1,76 +1,6 @@
 {
   "runs": [
     {
-      "date": "2026-10-01",
-      "results": {
-        "Zumiez_Decks": {
-          "count": 11,
-          "failed": false
-        },
-        "Zumiez_Wheels": {
-          "count": 5,
-          "failed": false
-        },
-        "Zumiez_Trucks": {
-          "count": 11,
-          "failed": false
-        },
-        "Zumiez_Bearings": {
-          "count": 0,
-          "failed": false
-        },
-        "SkateWarehouse_Decks": {
-          "count": 68,
-          "failed": false
-        },
-        "SkateWarehouse_Wheels": {
-          "count": 4,
-          "failed": false
-        },
-        "SkateWarehouse_Trucks": {
-          "count": 9,
-          "failed": false
-        },
-        "SkateWarehouse_Bearings": {
-          "count": 0,
-          "failed": false
-        },
-        "CCS_Decks": {
-          "count": 2,
-          "failed": false
-        },
-        "CCS_Wheels": {
-          "count": 0,
-          "failed": false
-        },
-        "CCS_Trucks": {
-          "count": 1,
-          "failed": false
-        },
-        "CCS_Bearings": {
-          "count": 0,
-          "failed": false
-        },
-        "Tactics_Decks": {
-          "count": 43,
-          "failed": false
-        },
-        "Tactics_Wheels": {
-          "count": 11,
-          "failed": false
-        },
-        "Tactics_Trucks": {
-          "count": 8,
-          "failed": false
-        },
-        "Tactics_Bearings": {
-          "count": 0,
-          "failed": false
-        }
-      },
-      "scanned_at": "2026-10-01T15:03:16+00:00"
-    },
-    {
       "date": "2026-10-02",
       "results": {
         "Zumiez_Decks": {
@@ -6942,196 +6872,1086 @@
         }
       },
       "scanned_at": "2026-10-30T14:05:41+00:00"
+    },
+    {
+      "date": "2026-10-31",
+      "results": {
+        "CCS_Accessories": {
+          "count": 42,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 42.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.5,
+            "actual_count": 42,
+            "percentage_change": -1.2,
+            "reason": "normal_variation"
+          }
+        },
+        "CCS_Bearings": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "CCS_Decks": {
+          "count": 36,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 36.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 36,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "CCS_Protection": {
+          "count": 16,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 17,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 1,
+            "actual_count": 16,
+            "percentage_change": -5.9,
+            "reason": "normal_variation"
+          }
+        },
+        "CCS_Sneakers": {
+          "count": 50,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 39.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 50,
+            "percentage_change": 28.2,
+            "reason": "normal_variation"
+          }
+        },
+        "CCS_Trucks": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 5,
+            "percentage_change": -16.7,
+            "reason": "normal_variation"
+          }
+        },
+        "CCS_Wheels": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 6,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Deathgear_Accessories": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Deathgear_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Deathgear_Completes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Deathgear_Decks": {
+          "count": 40,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 41,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 40,
+            "percentage_change": -2.4,
+            "reason": "normal_variation"
+          }
+        },
+        "Deathgear_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Deathgear_Trucks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Deathgear_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Exodus_Accessories": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 6,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Exodus_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Exodus_Completes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Exodus_Decks": {
+          "count": 13,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 14,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 1,
+            "actual_count": 13,
+            "percentage_change": -7.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Exodus_Protection": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 2,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Exodus_Sneakers": {
+          "count": 35,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 34,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 35,
+            "percentage_change": 2.9,
+            "reason": "normal_variation"
+          }
+        },
+        "Exodus_Trucks": {
+          "count": 7,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 7,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 7,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Exodus_Wheels": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Kinetic_Accessories": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kinetic_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kinetic_Completes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kinetic_Decks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kinetic_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kinetic_Sneakers": {
+          "count": 11,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 11,
+            "percentage_change": 37.5,
+            "reason": "normal_variation"
+          }
+        },
+        "Kinetic_Trucks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kinetic_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SPoT_Accessories": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SPoT_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SPoT_Completes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SPoT_Decks": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 5,
+            "percentage_change": -16.7,
+            "reason": "normal_variation"
+          }
+        },
+        "SPoT_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SPoT_Sneakers": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SPoT_Trucks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SPoT_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SkateWarehouse_Accessories": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 5,
+            "percentage_change": -16.7,
+            "reason": "normal_variation"
+          }
+        },
+        "SkateWarehouse_Bearings": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": 200.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SkateWarehouse_Decks": {
+          "count": 75,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 76.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 4.0,
+            "actual_count": 75,
+            "percentage_change": -1.3,
+            "reason": "normal_variation"
+          }
+        },
+        "SkateWarehouse_Protection": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 5,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 5,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SkateWarehouse_Sneakers": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SkateWarehouse_Trucks": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SkateWarehouse_Wheels": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 5.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 5,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SoCal_Accessories": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SoCal_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SoCal_Completes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "SoCal_Decks": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 6,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SoCal_Protection": {
+          "count": 14,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 14,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 14,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SoCal_Trucks": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 2,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "SoCal_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "TGM_Accessories": {
+          "count": 14,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 13.0,
+            "baseline_samples": 4,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 14,
+            "percentage_change": 7.7,
+            "reason": "normal_variation"
+          }
+        },
+        "TGM_Bearings": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8.0,
+            "baseline_samples": 4,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "TGM_Completes": {
+          "count": 66,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 59.0,
+            "baseline_samples": 4,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 66,
+            "percentage_change": 11.9,
+            "reason": "normal_variation"
+          }
+        },
+        "TGM_Decks": {
+          "count": 133,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 129.0,
+            "baseline_samples": 4,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 133,
+            "percentage_change": 3.1,
+            "reason": "normal_variation"
+          }
+        },
+        "TGM_Protection": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "TGM_Sneakers": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 4,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "TGM_Trucks": {
+          "count": 12,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 12.5,
+            "baseline_samples": 4,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 12,
+            "percentage_change": -4.0,
+            "reason": "normal_variation"
+          }
+        },
+        "TGM_Wheels": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8.0,
+            "baseline_samples": 4,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Tactics_Accessories": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Tactics_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Tactics_Decks": {
+          "count": 47,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 133.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 2.5,
+            "actual_count": 47,
+            "percentage_change": -64.7,
+            "reason": "sustained_new_level"
+          }
+        },
+        "Tactics_Protection": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 2,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Tactics_Sneakers": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 7.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 4,
+            "percentage_change": -42.9,
+            "reason": "normal_variation"
+          }
+        },
+        "Tactics_Trucks": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 2,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Tactics_Wheels": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 9.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 2,
+            "percentage_change": -77.8,
+            "reason": "sustained_new_level"
+          }
+        },
+        "Zumiez_Accessories": {
+          "count": 13,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 13.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 13,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Zumiez_Bearings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zumiez_Decks": {
+          "count": 281,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 283.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 9.0,
+            "actual_count": 281,
+            "percentage_change": -0.9,
+            "reason": "normal_variation"
+          }
+        },
+        "Zumiez_Protection": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8,
+            "baseline_samples": 3,
+            "median_absolute_deviation": 0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Zumiez_Sneakers": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zumiez_Trucks": {
+          "count": 39,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 35.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 3.0,
+            "actual_count": 39,
+            "percentage_change": 11.4,
+            "reason": "normal_variation"
+          }
+        },
+        "Zumiez_Wheels": {
+          "count": 12,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 12.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 12,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        }
+      },
+      "scanned_at": "2026-10-31T08:48:26+00:00"
     }
   ],
   "baseline": {
     "Zumiez_Decks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 281
     },
     "Zumiez_Wheels": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 12
     },
     "Zumiez_Trucks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 39
     },
     "SkateWarehouse_Decks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 75
     },
     "SkateWarehouse_Wheels": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 5
     },
     "SkateWarehouse_Trucks": {
-      "date": "2026-10-30",
-      "count": 7
+      "date": "2026-10-31",
+      "count": 8
     },
     "CCS_Decks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 36
     },
     "CCS_Trucks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 5
     },
     "Tactics_Decks": {
-      "date": "2026-10-30",
-      "count": 49
+      "date": "2026-10-31",
+      "count": 47
     },
     "Tactics_Wheels": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 2
     },
     "Tactics_Trucks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 2
     },
     "CCS_Wheels": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 6
     },
     "Zumiez_Accessories": {
-      "date": "2026-10-30",
-      "count": 12
+      "date": "2026-10-31",
+      "count": 13
     },
     "SkateWarehouse_Bearings": {
-      "date": "2026-10-30",
-      "count": 2
+      "date": "2026-10-31",
+      "count": 3
     },
     "SkateWarehouse_Sneakers": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 1
     },
     "SkateWarehouse_Accessories": {
-      "date": "2026-10-30",
-      "count": 6
+      "date": "2026-10-31",
+      "count": 5
     },
     "CCS_Sneakers": {
-      "date": "2026-10-30",
-      "count": 40
+      "date": "2026-10-31",
+      "count": 50
     },
     "CCS_Accessories": {
-      "date": "2026-10-30",
-      "count": 41
+      "date": "2026-10-31",
+      "count": 42
     },
     "Tactics_Sneakers": {
-      "date": "2026-10-30",
-      "count": 6
+      "date": "2026-10-31",
+      "count": 4
     },
     "CCS_Bearings": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 1
     },
     "Tactics_Accessories": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 1
     },
     "TGM_Accessories": {
-      "date": "2026-10-30",
-      "count": 13
+      "date": "2026-10-31",
+      "count": 14
     },
     "TGM_Bearings": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 8
     },
     "TGM_Completes": {
-      "date": "2026-10-30",
-      "count": 60
+      "date": "2026-10-31",
+      "count": 66
     },
     "TGM_Decks": {
-      "date": "2026-10-30",
-      "count": 126
+      "date": "2026-10-31",
+      "count": 133
     },
     "TGM_Trucks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 12
     },
     "TGM_Wheels": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 8
     },
     "CCS_Protection": {
-      "date": "2026-10-30",
-      "count": 18
+      "date": "2026-10-31",
+      "count": 16
     },
     "TGM_Protection": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 8
     },
     "Tactics_Protection": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 2
     },
     "Zumiez_Protection": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 8
     },
     "SkateWarehouse_Protection": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 5
     },
     "Deathgear_Decks": {
-      "date": "2026-10-30",
-      "count": 41
+      "date": "2026-10-31",
+      "count": 40
     },
     "Kinetic_Sneakers": {
-      "date": "2026-10-30",
-      "count": 8
+      "date": "2026-10-31",
+      "count": 11
     },
     "SPoT_Decks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 5
     },
     "SPoT_Sneakers": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 8
     },
     "Exodus_Accessories": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 6
     },
     "Exodus_Decks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 13
     },
     "Exodus_Protection": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 2
     },
     "Exodus_Sneakers": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 35
     },
     "Exodus_Trucks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 7
     },
     "Exodus_Wheels": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 8
     },
     "SoCal_Decks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 6
     },
     "SoCal_Protection": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 14
     },
     "SoCal_Trucks": {
-      "date": "2026-10-30",
+      "date": "2026-10-31",
       "count": 2
     }
   },
   "completeness_baseline": {
     "CCS_Accessories": [
-      {
-        "date": "2026-10-17",
-        "count": 44
-      },
       {
         "date": "2026-10-18",
         "count": 44
@@ -7183,13 +8003,13 @@
       {
         "date": "2026-10-30",
         "count": 41
+      },
+      {
+        "date": "2026-10-31",
+        "count": 42
       }
     ],
     "CCS_Bearings": [
-      {
-        "date": "2026-10-16",
-        "count": 0
-      },
       {
         "date": "2026-10-17",
         "count": 1
@@ -7241,13 +8061,13 @@
       {
         "date": "2026-10-30",
         "count": 1
+      },
+      {
+        "date": "2026-10-31",
+        "count": 1
       }
     ],
     "CCS_Decks": [
-      {
-        "date": "2026-10-17",
-        "count": 9
-      },
       {
         "date": "2026-10-18",
         "count": 9
@@ -7299,6 +8119,10 @@
       {
         "date": "2026-10-30",
         "count": 36
+      },
+      {
+        "date": "2026-10-31",
+        "count": 36
       }
     ],
     "CCS_Protection": [
@@ -7313,13 +8137,13 @@
       {
         "date": "2026-10-30",
         "count": 18
+      },
+      {
+        "date": "2026-10-31",
+        "count": 16
       }
     ],
     "CCS_Sneakers": [
-      {
-        "date": "2026-10-17",
-        "count": 12
-      },
       {
         "date": "2026-10-18",
         "count": 12
@@ -7371,13 +8195,13 @@
       {
         "date": "2026-10-30",
         "count": 40
+      },
+      {
+        "date": "2026-10-31",
+        "count": 50
       }
     ],
     "CCS_Trucks": [
-      {
-        "date": "2026-10-17",
-        "count": 6
-      },
       {
         "date": "2026-10-18",
         "count": 6
@@ -7428,15 +8252,15 @@
       },
       {
         "date": "2026-10-30",
+        "count": 5
+      },
+      {
+        "date": "2026-10-31",
         "count": 5
       }
     ],
     "CCS_Wheels": [
       {
-        "date": "2026-10-17",
-        "count": 8
-      },
-      {
         "date": "2026-10-18",
         "count": 8
       },
@@ -7486,6 +8310,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 6
+      },
+      {
+        "date": "2026-10-31",
         "count": 6
       }
     ],
@@ -7501,6 +8329,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Deathgear_Bearings": [
@@ -7514,6 +8346,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7529,6 +8365,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Deathgear_Decks": [
@@ -7543,6 +8383,10 @@
       {
         "date": "2026-10-30",
         "count": 41
+      },
+      {
+        "date": "2026-10-31",
+        "count": 40
       }
     ],
     "Deathgear_Protection": [
@@ -7556,6 +8400,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7571,6 +8419,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Deathgear_Wheels": [
@@ -7584,6 +8436,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7599,6 +8455,10 @@
       {
         "date": "2026-10-30",
         "count": 6
+      },
+      {
+        "date": "2026-10-31",
+        "count": 6
       }
     ],
     "Exodus_Bearings": [
@@ -7612,6 +8472,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7627,6 +8491,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Exodus_Decks": [
@@ -7640,6 +8508,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 13
+      },
+      {
+        "date": "2026-10-31",
         "count": 13
       }
     ],
@@ -7655,6 +8527,10 @@
       {
         "date": "2026-10-30",
         "count": 2
+      },
+      {
+        "date": "2026-10-31",
+        "count": 2
       }
     ],
     "Exodus_Sneakers": [
@@ -7668,6 +8544,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 35
+      },
+      {
+        "date": "2026-10-31",
         "count": 35
       }
     ],
@@ -7683,6 +8563,10 @@
       {
         "date": "2026-10-30",
         "count": 7
+      },
+      {
+        "date": "2026-10-31",
+        "count": 7
       }
     ],
     "Exodus_Wheels": [
@@ -7696,6 +8580,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 8
+      },
+      {
+        "date": "2026-10-31",
         "count": 8
       }
     ],
@@ -7711,6 +8599,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Kinetic_Bearings": [
@@ -7724,6 +8616,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7739,6 +8635,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Kinetic_Decks": [
@@ -7752,6 +8652,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7767,6 +8671,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Kinetic_Sneakers": [
@@ -7781,6 +8689,10 @@
       {
         "date": "2026-10-30",
         "count": 8
+      },
+      {
+        "date": "2026-10-31",
+        "count": 11
       }
     ],
     "Kinetic_Trucks": [
@@ -7794,6 +8706,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7809,6 +8725,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "SPoT_Accessories": [
@@ -7822,6 +8742,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7837,6 +8761,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "SPoT_Completes": [
@@ -7850,6 +8778,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7865,6 +8797,10 @@
       {
         "date": "2026-10-30",
         "count": 5
+      },
+      {
+        "date": "2026-10-31",
+        "count": 5
       }
     ],
     "SPoT_Protection": [
@@ -7878,6 +8814,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7893,6 +8833,10 @@
       {
         "date": "2026-10-30",
         "count": 8
+      },
+      {
+        "date": "2026-10-31",
+        "count": 8
       }
     ],
     "SPoT_Trucks": [
@@ -7906,6 +8850,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -7921,14 +8869,14 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "SkateWarehouse_Accessories": [
       {
-        "date": "2026-10-17",
-        "count": 6
-      },
-      {
         "date": "2026-10-18",
         "count": 6
       },
@@ -7979,14 +8927,14 @@
       {
         "date": "2026-10-30",
         "count": 6
+      },
+      {
+        "date": "2026-10-31",
+        "count": 5
       }
     ],
     "SkateWarehouse_Bearings": [
       {
-        "date": "2026-10-17",
-        "count": 1
-      },
-      {
         "date": "2026-10-18",
         "count": 1
       },
@@ -8037,13 +8985,13 @@
       {
         "date": "2026-10-30",
         "count": 2
+      },
+      {
+        "date": "2026-10-31",
+        "count": 3
       }
     ],
     "SkateWarehouse_Decks": [
-      {
-        "date": "2026-10-17",
-        "count": 71
-      },
       {
         "date": "2026-10-18",
         "count": 71
@@ -8095,6 +9043,10 @@
       {
         "date": "2026-10-30",
         "count": 75
+      },
+      {
+        "date": "2026-10-31",
+        "count": 75
       }
     ],
     "SkateWarehouse_Protection": [
@@ -8109,13 +9061,13 @@
       {
         "date": "2026-10-30",
         "count": 5
+      },
+      {
+        "date": "2026-10-31",
+        "count": 5
       }
     ],
     "SkateWarehouse_Sneakers": [
-      {
-        "date": "2026-10-17",
-        "count": 1
-      },
       {
         "date": "2026-10-18",
         "count": 1
@@ -8166,15 +9118,15 @@
       },
       {
         "date": "2026-10-30",
+        "count": 1
+      },
+      {
+        "date": "2026-10-31",
         "count": 1
       }
     ],
     "SkateWarehouse_Trucks": [
       {
-        "date": "2026-10-17",
-        "count": 9
-      },
-      {
         "date": "2026-10-18",
         "count": 9
       },
@@ -8225,14 +9177,14 @@
       {
         "date": "2026-10-30",
         "count": 7
+      },
+      {
+        "date": "2026-10-31",
+        "count": 8
       }
     ],
     "SkateWarehouse_Wheels": [
       {
-        "date": "2026-10-17",
-        "count": 5
-      },
-      {
         "date": "2026-10-18",
         "count": 5
       },
@@ -8282,6 +9234,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 5
+      },
+      {
+        "date": "2026-10-31",
         "count": 5
       }
     ],
@@ -8297,6 +9253,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "SoCal_Bearings": [
@@ -8310,6 +9270,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -8325,6 +9289,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "SoCal_Decks": [
@@ -8338,6 +9306,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 6
+      },
+      {
+        "date": "2026-10-31",
         "count": 6
       }
     ],
@@ -8353,6 +9325,10 @@
       {
         "date": "2026-10-30",
         "count": 14
+      },
+      {
+        "date": "2026-10-31",
+        "count": 14
       }
     ],
     "SoCal_Trucks": [
@@ -8367,6 +9343,10 @@
       {
         "date": "2026-10-30",
         "count": 2
+      },
+      {
+        "date": "2026-10-31",
+        "count": 2
       }
     ],
     "SoCal_Wheels": [
@@ -8380,6 +9360,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 0
+      },
+      {
+        "date": "2026-10-31",
         "count": 0
       }
     ],
@@ -8399,6 +9383,10 @@
       {
         "date": "2026-10-30",
         "count": 13
+      },
+      {
+        "date": "2026-10-31",
+        "count": 14
       }
     ],
     "TGM_Bearings": [
@@ -8416,6 +9404,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 8
+      },
+      {
+        "date": "2026-10-31",
         "count": 8
       }
     ],
@@ -8435,6 +9427,10 @@
       {
         "date": "2026-10-30",
         "count": 60
+      },
+      {
+        "date": "2026-10-31",
+        "count": 66
       }
     ],
     "TGM_Decks": [
@@ -8453,6 +9449,10 @@
       {
         "date": "2026-10-30",
         "count": 126
+      },
+      {
+        "date": "2026-10-31",
+        "count": 133
       }
     ],
     "TGM_Protection": [
@@ -8466,6 +9466,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 8
+      },
+      {
+        "date": "2026-10-31",
         "count": 8
       }
     ],
@@ -8485,6 +9489,10 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "TGM_Trucks": [
@@ -8502,6 +9510,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 12
+      },
+      {
+        "date": "2026-10-31",
         "count": 12
       }
     ],
@@ -8521,13 +9533,13 @@
       {
         "date": "2026-10-30",
         "count": 8
+      },
+      {
+        "date": "2026-10-31",
+        "count": 8
       }
     ],
     "Tactics_Accessories": [
-      {
-        "date": "2026-10-17",
-        "count": 0
-      },
       {
         "date": "2026-10-18",
         "count": 0
@@ -8578,15 +9590,15 @@
       },
       {
         "date": "2026-10-30",
+        "count": 1
+      },
+      {
+        "date": "2026-10-31",
         "count": 1
       }
     ],
     "Tactics_Bearings": [
       {
-        "date": "2026-10-17",
-        "count": 0
-      },
-      {
         "date": "2026-10-18",
         "count": 0
       },
@@ -8637,13 +9649,13 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Tactics_Decks": [
-      {
-        "date": "2026-10-10",
-        "count": 137
-      },
       {
         "date": "2026-10-11",
         "count": 136
@@ -8695,6 +9707,10 @@
       {
         "date": "2026-10-30",
         "count": 49
+      },
+      {
+        "date": "2026-10-31",
+        "count": 47
       }
     ],
     "Tactics_Protection": [
@@ -8709,14 +9725,14 @@
       {
         "date": "2026-10-30",
         "count": 2
+      },
+      {
+        "date": "2026-10-31",
+        "count": 2
       }
     ],
     "Tactics_Sneakers": [
       {
-        "date": "2026-10-17",
-        "count": 7
-      },
-      {
         "date": "2026-10-18",
         "count": 7
       },
@@ -8767,14 +9783,14 @@
       {
         "date": "2026-10-30",
         "count": 6
+      },
+      {
+        "date": "2026-10-31",
+        "count": 4
       }
     ],
     "Tactics_Trucks": [
       {
-        "date": "2026-10-17",
-        "count": 4
-      },
-      {
         "date": "2026-10-18",
         "count": 4
       },
@@ -8825,13 +9841,13 @@
       {
         "date": "2026-10-30",
         "count": 2
+      },
+      {
+        "date": "2026-10-31",
+        "count": 2
       }
     ],
     "Tactics_Wheels": [
-      {
-        "date": "2026-10-09",
-        "count": 10
-      },
       {
         "date": "2026-10-10",
         "count": 10
@@ -8883,13 +9899,13 @@
       {
         "date": "2026-10-30",
         "count": 2
+      },
+      {
+        "date": "2026-10-31",
+        "count": 2
       }
     ],
     "Zumiez_Accessories": [
-      {
-        "date": "2026-10-17",
-        "count": 13
-      },
       {
         "date": "2026-10-18",
         "count": 12
@@ -8941,13 +9957,13 @@
       {
         "date": "2026-10-30",
         "count": 12
+      },
+      {
+        "date": "2026-10-31",
+        "count": 13
       }
     ],
     "Zumiez_Bearings": [
-      {
-        "date": "2026-10-17",
-        "count": 0
-      },
       {
         "date": "2026-10-18",
         "count": 0
@@ -8999,13 +10015,13 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Zumiez_Decks": [
-      {
-        "date": "2026-10-17",
-        "count": 217
-      },
       {
         "date": "2026-10-18",
         "count": 215
@@ -9057,6 +10073,10 @@
       {
         "date": "2026-10-30",
         "count": 281
+      },
+      {
+        "date": "2026-10-31",
+        "count": 281
       }
     ],
     "Zumiez_Protection": [
@@ -9071,13 +10091,13 @@
       {
         "date": "2026-10-30",
         "count": 8
+      },
+      {
+        "date": "2026-10-31",
+        "count": 8
       }
     ],
     "Zumiez_Sneakers": [
-      {
-        "date": "2026-10-17",
-        "count": 0
-      },
       {
         "date": "2026-10-18",
         "count": 0
@@ -9129,13 +10149,13 @@
       {
         "date": "2026-10-30",
         "count": 0
+      },
+      {
+        "date": "2026-10-31",
+        "count": 0
       }
     ],
     "Zumiez_Trucks": [
-      {
-        "date": "2026-10-17",
-        "count": 33
-      },
       {
         "date": "2026-10-18",
         "count": 30
@@ -9187,13 +10207,13 @@
       {
         "date": "2026-10-30",
         "count": 39
+      },
+      {
+        "date": "2026-10-31",
+        "count": 39
       }
     ],
     "Zumiez_Wheels": [
-      {
-        "date": "2026-10-17",
-        "count": 10
-      },
       {
         "date": "2026-10-18",
         "count": 10
@@ -9244,6 +10264,10 @@
       },
       {
         "date": "2026-10-30",
+        "count": 12
+      },
+      {
+        "date": "2026-10-31",
         "count": 12
       }
     ]
