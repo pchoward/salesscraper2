@@ -10,6 +10,7 @@ from urllib.parse import quote
 from bs4 import BeautifulSoup
 
 from filters import extract_deck_size, normalize_product_name, normalize_url
+from dimensions import set_wheelbase
 from part_specs import ordered_shoe_sizes, shoe_size_token, shoe_sizes_in
 from protection import classify as classify_protection
 from protection import sizes_in as protection_sizes_in
@@ -482,6 +483,7 @@ class CCSCatalogScraper(Scraper):
             if images and isinstance(images[0], dict) and images[0].get("src"):
                 item["image"] = images[0]["src"]
                 item["images"] = [photo["src"] for photo in images if isinstance(photo, dict) and photo.get("src")]
+            set_wheelbase(item, description)
             if self.part == "Protection":
                 set_protection_fields(item, title, product_type, sale)
             if self.part == "Sneakers" and _stock_known(variants):

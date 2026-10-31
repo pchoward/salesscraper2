@@ -126,6 +126,27 @@ class DeckSizeTests(unittest.TestCase):
         self.assertEqual(decks["real-oval?variant=12"]["price_new"], "51.99")
 
 
+class WheelbaseTests(unittest.TestCase):
+    def test_the_description_we_already_download_gives_the_wheelbase(self):
+        catalog = [
+            product('Baker Brand Logo Deck 8.25"', "Decks", [variant("49.99", "69.99")], handle="baker-wb",
+                    body="<p>Width: 8.25&quot;</p><p>Length: 31.875&quot;</p><p>Wheelbase: 14.25&quot;</p>"),
+            product("Real Oval Deck", "Decks",
+                    [variant("49.99", "64.99", 11, '8.25"'), variant("51.99", "64.99", 12, '8.5"')], handle="real-wb",
+                    body='<ul><li>8.25" x 31.8" WB 14.25</li><li>8.5" x 32" WB 14.38</li></ul>'),
+            product('Polar Deck 8.5"', "Decks", [variant("49.99", "69.99")], handle="polar-none",
+                    body="<p>Steep concave, 7-ply maple.</p>"),
+            product("Spitfire Formula Four 54mm", "Wheels", [variant("39.99", "54.99")], vendor="Spitfire",
+                    handle="f4-wb", body="<p>Wheelbase: 14.25</p>"),
+        ]
+        decks = kept("Decks", catalog)
+        self.assertEqual(decks["baker-wb"]["wheelbase"], 14.25)
+        self.assertEqual(decks["real-wb?variant=11"]["wheelbase"], 14.25)
+        self.assertEqual(decks["real-wb?variant=12"]["wheelbase"], 14.38, "each width gets its own")
+        self.assertNotIn("wheelbase", decks["polar-none"])
+        self.assertNotIn("wheelbase", kept("Wheels", catalog)["f4-wb"], "decks and completes only")
+
+
 class OtherPartTests(unittest.TestCase):
     def test_wheels_trucks_bearings_use_the_brand_lists(self):
         wheels = kept("Wheels")

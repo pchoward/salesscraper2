@@ -888,8 +888,8 @@ function paintFacetCounts() {
             }
         }
         if (rowMatches(row, { wheelbase: "all" })) {
-            const wheel = row.dataset.wheelbase || "";
-            if (wheel) wheelCounts[wheel] = (wheelCounts[wheel] || 0) + 1;
+            // A deck drilled for two wheelbases counts under each.
+            wheelbaseList(row).forEach(wheel => { wheelCounts[wheel] = (wheelCounts[wheel] || 0) + 1; });
         }
         if ((row.dataset.part || "") === "Decks" && rowMatches(row, { widths: [] })) {
             const id = bucketForWidth(parseFloat(row.dataset.size));
@@ -1025,6 +1025,11 @@ function paintCards() {
 const DEAL_KINDS = ["new", "drop", "low", "back", "hot"];
 const DROP_INTERVALS = { day: 1, week: 7, month: 30, quarter: 90 };
 
+// "14,14.62" for a deck drilled for both wheelbases.
+function wheelbaseList(row) {
+    return String(row.dataset.wheelbase || "").split(",").filter(Boolean);
+}
+
 function kindMatch(row, kinds) {
     const selected = kinds || [];
     if (!selected.length) return true;
@@ -1082,7 +1087,7 @@ function rowMatchesNow(row, overrides) {
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
     const chosenLengths = selectedLengths(over);
     if (specKeyActive("length", viewPart) && chosenLengths.length && !lengthAllowed(row.dataset.length, chosenLengths)) return false;
-    if (specKeyActive("wheelbase", viewPart) && wheelbase !== "all" && (row.dataset.wheelbase || "") !== wheelbase) return false;
+    if (specKeyActive("wheelbase", viewPart) && wheelbase !== "all" && wheelbaseList(row).indexOf(wheelbase) < 0) return false;
     const price = rowPrice(row);
     const priceMin = Object.prototype.hasOwnProperty.call(over, "priceMin") ? over.priceMin : state.priceMin;
     const priceMax = Object.prototype.hasOwnProperty.call(over, "priceMax") ? over.priceMax : state.priceMax;
@@ -4353,7 +4358,7 @@ function quickFacts(dataset, item, generated) {
     }
     addSpec("Width", dataset.size, '"');
     addSpec("Length", dataset.length, '"');
-    addSpec("Wheelbase", dataset.wheelbase, '"');
+    addSpec("Wheelbase", String(dataset.wheelbase || "").split(",").filter(Boolean).join('" & '), '"');
     addSpec("Diameter", dataset.diameter);
     if (String(dataset.duros || "").trim()) {
         addSpec("Durometer", String(dataset.duros).split(",").map(bit => bit.trim()).filter(Boolean).join(", "));
