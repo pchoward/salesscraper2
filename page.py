@@ -2255,6 +2255,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
         f"{_read_asset('page.js')}</script>"
     )
+    chunks.append('''<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "542cbf4d24534b70be3715cefe0e6a8e"}'></script><!-- End Cloudflare Web Analytics -->''')
     chunks.append("</body></html>")
     return "\n".join(chunk for chunk in chunks if chunk)
 
