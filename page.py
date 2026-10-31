@@ -10,7 +10,7 @@ import logging
 import math
 import os
 import re
-from urllib.parse import quote
+from urllib.parse import parse_qs, quote, urlsplit
 from html import escape
 from zoneinfo import ZoneInfo
 
@@ -89,6 +89,111 @@ LENGTH_BOUNDARY_TIP = (
     'Deck length in inches. Each range includes its lower end and stops before '
     'the next inch, so 30.0" is in 30\u201331", not 29\u201330".'
 )
+# Quarter-inch wheelbase ranges. 14.25" starts 14.25–14.5", it does not
+# finish 14–14.25". A tidy row is eight chips; a longer span folds the
+# smaller end into "under X"" or "X"+".
+WHEELBASE_BOUNDARY_TIP = (
+    'Wheelbase in inches. Each range is a quarter inch, includes its lower '
+    'end, and stops before the next quarter, so 14.25" is in 14.25\u201314.5", '
+    'not 14\u201314.25".'
+)
+WHEELBASE_QUARTER = 0.25
+WHEELBASE_CHIP_CAP = 8
+# Short palette for deck stain and wheel urethane. Ids are stable in the
+# URL. Swatches are the sidebar dots; clear and multi are drawn in CSS.
+COLOR_PALETTE = (
+    ("black-stain", "Black Stain", "#5c4033"),
+    ("black", "Black", "#171717"),
+    ("white", "White", "#f8fafc"),
+    ("blue", "Blue", "#2563eb"),
+    ("red", "Red", "#dc2626"),
+    ("green", "Green", "#16a34a"),
+    ("orange", "Orange", "#ea580c"),
+    ("yellow", "Yellow", "#eab308"),
+    ("pink", "Pink", "#db2777"),
+    ("purple", "Purple", "#7c3aed"),
+    ("natural", "Natural/Wood", "#d4a574"),
+    ("clear", "Clear", ""),
+    ("multi", "Multi", ""),
+)
+_COLOR_LABELS = {color_id: label for color_id, label, _swatch in COLOR_PALETTE}
+_COLOR_SWATCH = {color_id: swatch for color_id, _label, swatch in COLOR_PALETTE}
+# Words that normalize onto the palette. Bare "wood" is only a color when a
+# variant field says so; in a title it is usually a name (Trey Wood).
+_COLOR_WORDS = {
+    "black": "black",
+    "white": "white",
+    "blue": "blue",
+    "navy": "blue",
+    "teal": "blue",
+    "red": "red",
+    "green": "green",
+    "olive": "green",
+    "lime": "green",
+    "orange": "orange",
+    "yellow": "yellow",
+    "pink": "pink",
+    "magenta": "pink",
+    "purple": "purple",
+    "violet": "purple",
+    "natural": "natural",
+    "clear": "clear",
+    "transparent": "clear",
+    "multi": "multi",
+    "rainbow": "multi",
+}
+# Skate Warehouse variant codes that are a palette color. Silver, grey, and
+# gold are not on the palette, so those codes do not invent a color.
+_COLOR_CODES = {
+    "WH": "white",
+    "WHT": "white",
+    "BK": "black",
+    "BLK": "black",
+    "BL": "blue",
+    "BLU": "blue",
+    "RD": "red",
+    "GR": "green",
+    "GN": "green",
+    "OR": "orange",
+    "ORG": "orange",
+    "YL": "yellow",
+    "YE": "yellow",
+    "YEL": "yellow",
+    "PK": "pink",
+    "PU": "purple",
+    "PR": "purple",
+    "NA": "natural",
+    "NT": "natural",
+    "CL": "clear",
+    "CLR": "clear",
+    "MU": "multi",
+    "MT": "multi",
+}
+_COLOR_WORD = (
+    r"(?:black|white|blue|navy|teal|red|green|olive|lime|orange|yellow|pink|"
+    r"magenta|purple|violet|natural|clear|transparent|multi|rainbow)"
+)
+_COLOR_OTHER = r"(?:grey|gray|gold|silver|gum|cream|tan|brown)"
+_STAIN_RE = re.compile(
+    r"\b(black|blue|red|green|orange|yellow|pink|purple|white|natural)\s+stains?\b"
+    r"|\bstains?\s+(black|blue|red|green|orange|yellow|pink|purple|white|natural)\b",
+    re.IGNORECASE,
+)
+_WOOD_RE = re.compile(r"\b(?:natural|raw)\s+wood\b", re.IGNORECASE)
+_CHAIN_RE = re.compile(
+    rf"\b{_COLOR_WORD}\b(?:\s*(?:/|&|,|\band\b)\s*\b(?:{_COLOR_WORD}|{_COLOR_OTHER})\b)+",
+    re.IGNORECASE,
+)
+_TOKEN_RE = re.compile(r"[A-Za-z]+|\d+(?:\.\d+)?")
+# The next word makes it a graphic name, not a finish: Purple Haze, Red Eye,
+# Yellow Man, Black Sheep, Green Lady.
+_BLOCK_NEXT = {"haze", "eye", "eyes", "man", "men", "sheep", "lady", "house"}
+_BLOCK_PREV = {"big"}
+_STRONG_NEXT = {
+    "deck", "decks", "wheel", "wheels", "skateboard", "skateboards",
+    "dip", "dipped", "foil", "fade", "swirl", "holographic", "egg",
+}
+_COLOR_FIELD_NAMES = {"color", "colour"}
 
 # Email alerts (docs/alerts-api.md). Both values are public by design: the
 # browser calls the Worker URL, and Turnstile site keys are meant to be seen.
@@ -214,6 +319,336 @@ def length_bucket_for(value, buckets):
             continue
         return bucket.get("id") or ""
     return ""
+
+
+def _wheelbase_numbers(values):
+    """Floats for wheelbase keys. ``14,14.62`` is two wheelbases."""
+    numbers = []
+    for value in values or []:
+        if isinstance(value, (list, tuple)):
+            numbers.extend(_wheelbase_numbers(value))
+            continue
+        text = str(value).strip()
+        if not text:
+            continue
+        parts = text.split(",") if "," in text else [text]
+        for part in parts:
+            number = parse_dimension(part)
+            if number is not None:
+                numbers.append(number)
+    return numbers
+
+
+def _quarter_start(number):
+    """Inclusive lower bound of the quarter-inch that holds ``number``."""
+    index = math.floor((float(number) + 1e-9) / WHEELBASE_QUARTER)
+    return round(index * WHEELBASE_QUARTER, 4)
+
+
+def build_wheelbase_buckets(values):
+    """Quarter-inch wheelbase buckets for the values that actually occur.
+
+    The lower end is included and the upper end is not. ``14.25`` belongs to
+    ``14.25–14.5"``, not ``14–14.25"``. Empty quarters are left out, so a
+    catalog does not grow a tail of blank chips. When the occupied quarters
+    would run past :data:`WHEELBASE_CHIP_CAP`, the smaller end folds into
+    ``under X"`` or ``X"+``.
+    """
+    numbers = _wheelbase_numbers(values)
+    if not numbers:
+        return []
+    counts = {}
+    for number in numbers:
+        start = _quarter_start(number)
+        counts[start] = counts.get(start, 0) + 1
+    pieces = [
+        {"kind": "quarter", "start": start, "count": counts[start]}
+        for start in sorted(counts)
+    ]
+    while len(pieces) > WHEELBASE_CHIP_CAP and len(pieces) > 1:
+        if pieces[0]["count"] <= pieces[-1]["count"]:
+            _fold_wheelbase_left(pieces)
+        else:
+            _fold_wheelbase_right(pieces)
+    return [_wheelbase_piece(piece) for piece in pieces]
+
+
+def _fold_wheelbase_left(pieces):
+    """Absorb the leftmost quarter into an ``under X"`` chip."""
+    if pieces[0]["kind"] == "under":
+        under = pieces[0]
+        quarter = pieces.pop(1)
+        under["count"] += quarter["count"]
+        following = pieces[1] if len(pieces) > 1 else None
+        if following and following["kind"] == "quarter":
+            under["max"] = following["start"]
+        else:
+            under["max"] = round(quarter["start"] + WHEELBASE_QUARTER, 4)
+        return
+    quarter = pieces.pop(0)
+    following = pieces[0]
+    edge = following["start"] if following["kind"] == "quarter" else following["max"]
+    pieces.insert(0, {"kind": "under", "max": edge, "count": quarter["count"]})
+
+
+def _fold_wheelbase_right(pieces):
+    """Absorb the rightmost quarter into an ``X"+`` chip."""
+    if pieces[-1]["kind"] == "plus":
+        plus = pieces[-1]
+        quarter = pieces.pop(-2)
+        plus["count"] += quarter["count"]
+        plus["min"] = quarter["start"]
+        return
+    quarter = pieces.pop()
+    pieces.append({"kind": "plus", "min": quarter["start"], "count": quarter["count"]})
+
+
+def _wheelbase_piece(piece):
+    if piece["kind"] == "under":
+        return _length_bucket(None, piece["max"]) | {"tip": _wheelbase_tip(None, piece["max"])}
+    if piece["kind"] == "plus":
+        bucket = _length_bucket(piece["min"], None)
+        bucket["tip"] = _wheelbase_tip(piece["min"], None)
+        return bucket
+    high = round(piece["start"] + WHEELBASE_QUARTER, 4)
+    bucket = _length_bucket(piece["start"], high)
+    bucket["tip"] = _wheelbase_tip(piece["start"], high)
+    return bucket
+
+
+def _wheelbase_tip(low, high):
+    if low is None:
+        label = _length_label_number(high)
+        return f'Under {label}". {label}" is in the next range, not this one. ' + WHEELBASE_BOUNDARY_TIP
+    if high is None:
+        label = _length_label_number(low)
+        return f'{label}" and longer. {label}" is included. ' + WHEELBASE_BOUNDARY_TIP
+    return (
+        f'{_length_label_number(low)}" up to but not including {_length_label_number(high)}". '
+        + WHEELBASE_BOUNDARY_TIP
+    )
+
+
+def wheelbase_bucket_for(value, buckets):
+    """The bucket id for one wheelbase, or "" when it fits none."""
+    number = parse_dimension(value)
+    if number is None:
+        return ""
+    for bucket in buckets or []:
+        low = bucket.get("min")
+        high = bucket.get("max")
+        if low is not None and number < low - 1e-9:
+            continue
+        if high is not None and number >= high - 1e-9:
+            continue
+        return bucket.get("id") or ""
+    return ""
+
+
+def _color_tokens(text):
+    return [match.group(0) for match in _TOKEN_RE.finditer(text or "")]
+
+
+def _stain_ids(text):
+    found = []
+    if _WOOD_RE.search(text or ""):
+        found.append("natural")
+    for match in _STAIN_RE.finditer(text or ""):
+        word = (match.group(1) or match.group(2) or "").lower()
+        if word == "black":
+            found.append("black-stain")
+        elif word == "natural":
+            found.append("natural")
+        elif word in _COLOR_WORDS:
+            found.append(_COLOR_WORDS[word])
+    return found
+
+
+def _chain_ids(text):
+    found = []
+    for match in _CHAIN_RE.finditer(text or ""):
+        for token in _color_tokens(match.group(0)):
+            color_id = _COLOR_WORDS.get(token.lower())
+            if color_id:
+                found.append(color_id)
+    return found
+
+
+def _loose_color_ids(text, allow_wood=False):
+    """Palette ids for color words, skipping graphic bigrams such as Yellow Man."""
+    tokens = _color_tokens(text)
+    found = []
+    for index, token in enumerate(tokens):
+        if not token.isalpha():
+            continue
+        prev = tokens[index - 1].lower() if index else ""
+        nxt = tokens[index + 1].lower() if index + 1 < len(tokens) else ""
+        if prev in _BLOCK_PREV or nxt in _BLOCK_NEXT:
+            continue
+        lowered = token.lower()
+        if allow_wood and lowered in ("wood", "raw"):
+            found.append("natural")
+            continue
+        color_id = _COLOR_WORDS.get(lowered)
+        if color_id:
+            found.append(color_id)
+    return found
+
+
+def _positioned_color_ids(text):
+    """Color words sitting where a finish goes: before the size, or before Deck/Wheels."""
+    tokens = _color_tokens(text)
+    found = []
+    for index, token in enumerate(tokens):
+        if not token.isalpha():
+            continue
+        prev = tokens[index - 1].lower() if index else ""
+        nxt = tokens[index + 1].lower() if index + 1 < len(tokens) else ""
+        if prev in _BLOCK_PREV or nxt in _BLOCK_NEXT:
+            continue
+        color_id = _COLOR_WORDS.get(token.lower())
+        if not color_id:
+            continue
+        strong = not nxt or nxt in _STRONG_NEXT or _TOKEN_RE.fullmatch(nxt) and nxt[0].isdigit()
+        if strong:
+            found.append(color_id)
+    return found
+
+
+def _suffix_chunks(text):
+    chunks = []
+    for mark in (" - ", " \u2013 ", " \u2014 "):
+        if mark in (text or ""):
+            chunks.append(text.rsplit(mark, 1)[1])
+            break
+    chunks.extend(re.findall(r"\(([^)]*)\)", text or ""))
+    return chunks
+
+
+def _unique_colors(found):
+    ordered = []
+    for color_id in found or []:
+        if color_id and color_id not in ordered:
+            ordered.append(color_id)
+    return ordered
+
+
+def _collapse_colors(found):
+    """One palette id. Two different colors are Multi."""
+    ordered = _unique_colors(found)
+    if not ordered:
+        return ""
+    if len(ordered) > 1 or "multi" in ordered:
+        return "multi"
+    return ordered[0]
+
+
+def _colors_from_phrase(text, allow_wood=False):
+    stains = _stain_ids(text)
+    if stains:
+        return stains
+    chains = _chain_ids(text)
+    if chains:
+        return chains
+    return _loose_color_ids(text, allow_wood=allow_wood)
+
+
+def _colors_from_title(title):
+    """Color words in a product title. Photos are not consulted."""
+    text = title or ""
+    stains = _stain_ids(text)
+    if stains:
+        return stains
+    chains = _chain_ids(text)
+    if chains:
+        return chains
+    for chunk in _suffix_chunks(text):
+        loose = _loose_color_ids(chunk)
+        if loose:
+            return loose
+    return _positioned_color_ids(text)
+
+
+def _explicit_color_text(item):
+    """A color a store already stored on the item, or ""."""
+    item = item or {}
+    for key in ("color", "colour", "variant_color", "variant_colour"):
+        value = item.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    for name_key, value_key in (
+        ("option1_name", "option1"),
+        ("option2_name", "option2"),
+        ("option3_name", "option3"),
+    ):
+        name = str(item.get(name_key) or "").strip().casefold()
+        if name in _COLOR_FIELD_NAMES:
+            value = item.get(value_key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+    options = item.get("options")
+    if isinstance(options, dict):
+        for key, value in options.items():
+            if str(key).strip().casefold() in _COLOR_FIELD_NAMES and str(value or "").strip():
+                return str(value).strip()
+    if isinstance(options, list):
+        for option in options:
+            if not isinstance(option, dict):
+                continue
+            name = str(option.get("name") or option.get("label") or "").strip().casefold()
+            if name not in _COLOR_FIELD_NAMES:
+                continue
+            value = option.get("value")
+            if value in (None, ""):
+                values = option.get("values")
+                if isinstance(values, list) and len(values) == 1:
+                    value = values[0]
+            if str(value or "").strip():
+                return str(value).strip()
+    variant = item.get("variant")
+    if isinstance(variant, dict):
+        for key in ("color", "colour"):
+            value = variant.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+        name = str(variant.get("option_name") or variant.get("name") or "").strip().casefold()
+        if name in _COLOR_FIELD_NAMES:
+            value = variant.get("value") or variant.get("title") or ""
+            if str(value).strip():
+                return str(value).strip()
+    return ""
+
+
+def _url_color_code(url):
+    try:
+        query = parse_qs(urlsplit(str(url or "")).query)
+    except ValueError:
+        return ""
+    values = query.get("color") or query.get("colour") or []
+    if not values:
+        return ""
+    return str(values[0]).strip().upper()
+
+
+def listing_color(item):
+    """Palette id for a deck or a wheel, or "" when no color is stated.
+
+    A variant or option color wins when the catalog has one. Otherwise color
+    words in the title (``Black Stain``, ``White``, ``Blue/Red``). Nothing is
+    read from the photo. Other product types are left blank.
+    """
+    item = item or {}
+    if item.get("part") not in ("Decks", "Wheels"):
+        return ""
+    explicit = _explicit_color_text(item)
+    if explicit:
+        found = _collapse_colors(_colors_from_phrase(explicit, allow_wood=True))
+        if found:
+            return found
+    coded = _COLOR_CODES.get(_url_color_code(item.get("url") or ""))
+    if coded:
+        return coded
+    return _collapse_colors(_colors_from_title(item.get("name") or ""))
 
 
 def _price(value):
@@ -1090,6 +1525,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             wheel_key = ",".join(
                 key for key in (dimension_key(value) for value in (specs.get("wheelbases") or [specs.get("wheelbase")])) if key
             )
+            # Variant/option color when the catalog has one, else title words.
+            # Deck photos are not a color source.
+            color = listing_color(item)
             diameter = ""
             duros = []
             shape = ""
@@ -1186,6 +1624,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "width_key": width_key,
                 "length_key": length_key,
                 "wheel_key": wheel_key,
+                "color": color,
                 "diameter": diameter,
                 "duros": duros,
                 "shape": shape,
@@ -1291,9 +1730,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     brands = set()
     brand_counts = {}
     deck_lengths = []
-    wheels = set()
+    wheel_values = []
     length_hits = 0
     wheel_hits = 0
+    deck_color_counts = {}
+    wheel_color_counts = {}
+    deck_color_hits = 0
+    wheel_color_hits = 0
     diameter_counts = {}
     duro_counts = {}
     shape_counts = {}
@@ -1320,9 +1763,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         if record["part"] == "Decks" and record["length_key"]:
             deck_lengths.append(record["length_key"])
             length_hits += 1
-        if record["wheel_key"]:
-            wheels.update(record["wheel_key"].split(","))
+        if record["part"] == "Decks" and record["wheel_key"]:
+            wheel_values.extend(record["wheel_key"].split(","))
             wheel_hits += 1
+        if record.get("color") and record["part"] == "Decks":
+            deck_color_hits += 1
+            deck_color_counts[record["color"]] = deck_color_counts.get(record["color"], 0) + 1
+        elif record.get("color") and record["part"] == "Wheels":
+            wheel_color_hits += 1
+            wheel_color_counts[record["color"]] = wheel_color_counts.get(record["color"], 0) + 1
         if record["part"] == "Wheels":
             if record["diameter"]:
                 diameter_counts[record["diameter"]] = diameter_counts.get(record["diameter"], 0) + 1
@@ -1449,14 +1898,43 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             + "</div>"
             f'<select id="lengthSelect" class="sr-only">{"".join(options)}</select>'
         )
+    wheel_buckets = build_wheelbase_buckets(wheel_values) if section_ready(wheel_hits) else []
     wheel_select = ""
-    if section_ready(wheel_hits):
+    if wheel_buckets:
         options = ['<option value="all">All wheelbases</option>']
-        for value in sorted(wheels, key=float):
-            options.append(_option(value, value, data_label=value))
+        wheel_chips = [
+            '<button type="button" class="chip wheelbase-chip active" data-value="all" '
+            f'data-count="{wheel_hits}" aria-pressed="true" '
+            f'title="{escape(WHEELBASE_BOUNDARY_TIP, quote=True)}">'
+            '<span class="spec-label">All</span>'
+            f'<span class="spec-count">{wheel_hits}</span></button>'
+        ]
+        for bucket in wheel_buckets:
+            count = 0
+            for record in records:
+                if record["part"] != "Decks" or not record["wheel_key"]:
+                    continue
+                if any(
+                    wheelbase_bucket_for(piece, [bucket]) == bucket["id"]
+                    for piece in record["wheel_key"].split(",")
+                ):
+                    count += 1
+            options.append(_option(bucket["id"], bucket["label"], data_label=bucket["label"]))
+            zero = " is-zero" if count == 0 else ""
+            hidden = " hidden" if count == 0 else ""
+            wheel_chips.append(
+                f'<button type="button" class="chip wheelbase-chip{zero}"{hidden} '
+                f'data-value="{escape(bucket["id"], quote=True)}" data-count="{count}" '
+                f'title="{escape(bucket["tip"], quote=True)}" aria-pressed="false">'
+                f'<span class="spec-label">{escape(bucket["label"])}</span>'
+                f'<span class="spec-count">{count}</span></button>'
+            )
         wheel_select = (
-            '<label class="field"><span>Wheelbase</span>'
-            f'<select id="wheelbaseSelect">{"".join(options)}</select></label>'
+            '<div class="filter-group spec-ranges" id="wheelbaseFilters" role="group" '
+            f'aria-label="Wheelbase" title="{escape(WHEELBASE_BOUNDARY_TIP, quote=True)}">'
+            + "".join(wheel_chips)
+            + "</div>"
+            f'<select id="wheelbaseSelect" class="sr-only">{"".join(options)}</select>'
         )
     # Compact labels over the existing half-open buckets. Low is inclusive
     # and high is exclusive. Buckets under 7.5" stay in WIDTH_RANGES for
@@ -1833,10 +2311,46 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<select id="partSelect" class="sr-only" aria-label="Product type">{"".join(part_options)}</select>'
         "</div>"
     )
+    def _color_section(section_id, group_id, part, counts, hits):
+        # A handful of parsed colors is enough to be a filter. Below that the
+        # section stays off, the same bar as the other spec sections.
+        if not section_ready(hits):
+            return ""
+        buttons = [
+            '<button type="button" class="chip color-swatch color-all active" data-value="all" '
+            f'data-count="{hits}" aria-pressed="true" title="All colors">'
+            '<span class="spec-label">All</span>'
+            f'<span class="spec-count">{hits}</span></button>'
+        ]
+        for color_id, label, swatch in COLOR_PALETTE:
+            count = counts.get(color_id, 0)
+            if count <= 0:
+                continue
+            swatch_class = "swatch"
+            style = ""
+            if color_id == "clear":
+                swatch_class += " swatch-clear"
+            elif color_id == "multi":
+                swatch_class += " swatch-multi"
+            elif swatch:
+                style = f' style="--swatch:{escape(swatch, quote=True)}"'
+            buttons.append(
+                f'<button type="button" class="color-swatch" data-value="{escape(color_id, quote=True)}" '
+                f'data-count="{count}" title="{escape(label, quote=True)}" aria-pressed="false">'
+                f'<span class="{swatch_class}"{style} aria-hidden="true"></span>'
+                f'<span class="spec-count">{count}</span></button>'
+            )
+        body = (
+            f'<div class="filter-group color-swatches" id="{group_id}" role="group" aria-label="Color">'
+            + "".join(buttons)
+            + "</div>"
+        )
+        return _section(section_id, "Color", body, open_default=True, for_part=part)
+
     # Brand is rendered ahead of this block. Inside it, each type's main size
     # comes before that type's secondary specs (length, durometer, height, …).
-    # Hidden types drop out, so a Trucks visit still reads Brand, Truck Size,
-    # Truck Height, Construction.
+    # Color follows that type's size filters. Hidden types drop out, so a
+    # Trucks visit still reads Brand, Truck Size, Truck Height, Construction.
     context_specs = (
         '<div id="contextSpecs">'
         + _section(
@@ -1849,6 +2363,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
         + truck_size_section
         + diameter_section
+        + _color_section("wheelcolor", "wheelColorFilters", "Wheels", wheel_color_counts, wheel_color_hits)
         + shoe_section
         + prot_size_section
         + abec_section
@@ -1860,7 +2375,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             for_part="Decks",
             tip=LENGTH_BOUNDARY_TIP,
         )
-        + _section("wheelbase", "Wheelbase", wheel_select, for_part="Decks")
+        + _section(
+            "wheelbase",
+            "Wheelbase",
+            wheel_select,
+            open_default=True,
+            for_part="Decks",
+            tip=WHEELBASE_BOUNDARY_TIP,
+        )
+        + _color_section("deckcolor", "deckColorFilters", "Decks", deck_color_counts, deck_color_hits)
         + truck_height_section
         + construction_section
         + duro_section
@@ -2252,6 +2775,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append(
         f"<script>const WIDTH_RANGES = {ranges_literal};\n"
         f"const LENGTH_BUCKETS = {length_literal};\n"
+        f"const WHEELBASE_BUCKETS = {json.dumps([{key: bucket[key] for key in ('id', 'label', 'min', 'max')} for bucket in wheel_buckets])};\n"
         f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
         f"{_read_asset('page.js')}</script>"
     )
@@ -2369,6 +2893,7 @@ def _deal_attrs(record):
         f'data-score="{record["score"]["score"]}" data-rank="{record["rank"]}" '
         f'data-stage="{_attr(record.get("stage") or "")}" '
         f'data-length="{_attr(record["length_key"])}" data-wheelbase="{_attr(record["wheel_key"])}" '
+        f'data-color="{_attr(record.get("color") or "")}" '
         f'data-diameter="{_attr(record.get("diameter") or "")}" '
         f'data-duros="{_attr(",".join(record.get("duros") or []))}" '
         f'data-shape="{_attr(record.get("shape") or "")}" '

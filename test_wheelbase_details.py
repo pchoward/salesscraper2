@@ -143,14 +143,23 @@ class DualDrillingTests(unittest.TestCase):
                                  {deck["url"]: saved}, generated_at="2026-10-30T12:00:00+00:00")
         self.assertIn('data-wheelbase="14,14.62"', html)
         self.assertIn('data-wheelbase="14.5"', html)
-        select = html.split('id="wheelbaseSelect">', 1)[1].split("</select>", 1)[0]
-        self.assertEqual(re.findall(r'<option value="([^"]+)"', select), ["all", "14", "14.5", "14.62"])
+        select = html.split('id="wheelbaseSelect"', 1)[1].split("</select>", 1)[0]
+        self.assertEqual(re.findall(r'<option value="([^"]+)"', select), ["all", "14-14.25", "14.5-14.75"])
+        # 14" is the 14–14.25 quarter. 14.5 and 14.62 share 14.5–14.75.
+        # The empty quarter between them is not a chip.
+        self.assertIn('data-value="14-14.25"', html)
+        self.assertIn('data-value="14.5-14.75"', html)
+        self.assertNotIn('data-value="14.25-14.5"', html)
+        quarter = html.split('data-value="14-14.25"', 1)[1].split("</button>", 1)[0]
+        self.assertIn(">1<", quarter)
+        shared = html.split('data-value="14.5-14.75"', 1)[1].split("</button>", 1)[0]
+        self.assertIn(f">{MIN_SPEC_COUNT + 1}<", shared)
 
     def test_the_filter_counts_and_quick_view_use_each_wheelbase(self):
         source = (Path(__file__).resolve().parent / "page.js").read_text(encoding="utf-8")
         helper = source[source.index("function wheelbaseList("):source.index("function kindMatch(")]
         match = source[source.index("function rowMatchesNow("):]
-        self.assertIn("wheelbaseList(row).indexOf(wheelbase) < 0", match[:match.index("\n}\n")])
+        self.assertIn("!wheelbaseAllowed(row, chosenWheels)", match[:match.index("\n}\n")])
         self.assertIn("wheelbaseList(row).forEach(wheel =>", source)
         self.assertIn('''addSpec("Wheelbase", String(dataset.wheelbase || "").split(",").filter(Boolean).join('" & '), '"');''', source)
         script = helper + r'''

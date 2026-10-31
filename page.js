@@ -8,6 +8,7 @@ let state = {
     brand: "all",
     length: "all",
     wheelbase: "all",
+    colors: [],
     watching: false,
     cardNew: false,
     cardDrop: false,
@@ -33,6 +34,24 @@ let state = {
     sortKey: DEFAULT_SORT,
     sortDir: "desc",
     search: ""
+};
+
+// Keep in step with COLOR_PALETTE in page.py. The id is what ?color= stores.
+const COLOR_ORDER = ["black-stain", "black", "white", "blue", "red", "green", "orange", "yellow", "pink", "purple", "natural", "clear", "multi"];
+const COLOR_LABELS = {
+    "black-stain": "Black Stain",
+    black: "Black",
+    white: "White",
+    blue: "Blue",
+    red: "Red",
+    green: "Green",
+    orange: "Orange",
+    yellow: "Yellow",
+    pink: "Pink",
+    purple: "Purple",
+    natural: "Natural/Wood",
+    clear: "Clear",
+    multi: "Multi"
 };
 
 const STAR_KEY = "salesscraper2.stars";
@@ -255,6 +274,10 @@ function lengthBuckets() {
     return (typeof LENGTH_BUCKETS === "undefined") ? [] : LENGTH_BUCKETS;
 }
 
+function wheelbaseBuckets() {
+    return (typeof WHEELBASE_BUCKETS === "undefined") ? [] : WHEELBASE_BUCKETS;
+}
+
 function cardPageSize() {
     const size = (typeof CARD_PAGE_SIZE === "number") ? CARD_PAGE_SIZE : 24;
     return size > 0 ? size : 24;
@@ -350,11 +373,9 @@ function readControls() {
     state.scoreMin = numOrNull("scoreMin");
     state.scoreMax = numOrNull("scoreMax");
     const brand = document.getElementById("brandSelect");
-    const wheelbase = document.getElementById("wheelbaseSelect");
     if (brand) state.brand = brand.value || "all";
-    // Length buckets are multi-select, so the hidden single <select> is not
-    // the source of truth. Chip clicks and the URL write state.length.
-    if (wheelbase) state.wheelbase = wheelbase.value || "all";
+    // Length and wheelbase buckets are multi-select, so the hidden single
+    // <select> is not the source of truth. Chip clicks and the URL write them.
 }
 
 // Keep in sync with query_state.bucket_contains / parse_width_param.
@@ -507,7 +528,7 @@ const SPEC_FACETS = [
     { stateKey: "protTypes", part: "Protection", attr: "prottype", section: "prottypeFilters" },
     { stateKey: "protSizes", part: "Protection", attr: "protsize", section: "protsizeFilters" }
 ];
-const SPEC_OPEN = { width: 1, length: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
+const SPEC_OPEN = { width: 1, length: 1, wheelbase: 1, deckcolor: 1, wheelcolor: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
 
 function normalizeDuroToken(value) {
     const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
@@ -574,8 +595,8 @@ function orderSpecValues(stateKey, values) {
 
 function activeSpecKeys(part) {
     const current = part || "Decks";
-    if (current === "Decks") return ["widths", "length", "wheelbase"];
-    if (current === "Wheels") return ["diameters", "duros", "shapes"];
+    if (current === "Decks") return ["widths", "length", "wheelbase", "colors"];
+    if (current === "Wheels") return ["diameters", "colors", "duros", "shapes"];
     if (current === "Trucks") return ["truckSizes", "truckHeights", "constructions"];
     if (current === "Bearings") return ["abecs"];
     if (current === "Sneakers") return ["shoeSizes"];
@@ -864,6 +885,8 @@ function paintFacetCounts() {
     const lengthCounts = Object.create(null);
     lengthBuckets().forEach(bucket => { lengthCounts[bucket.id] = 0; });
     const wheelCounts = Object.create(null);
+    wheelbaseBuckets().forEach(bucket => { wheelCounts[bucket.id] = 0; });
+    let wheelDecks = 0;
     const widthCounts = Object.create(null);
     widthRanges().forEach(range => { widthCounts[range.id] = 0; });
     dealRows().forEach(row => {
@@ -888,8 +911,17 @@ function paintFacetCounts() {
             }
         }
         if (rowMatches(row, { wheelbase: "all" })) {
-            // A deck drilled for two wheelbases counts under each.
-            wheelbaseList(row).forEach(wheel => { wheelCounts[wheel] = (wheelCounts[wheel] || 0) + 1; });
+            // A deck drilled for two wheelbases counts under each quarter it hits,
+            // and once toward All.
+            const seen = Object.create(null);
+            wheelbaseList(row).forEach(wheel => {
+                const id = wheelbaseBucketFor(wheel);
+                if (id && !seen[id]) {
+                    seen[id] = true;
+                    wheelCounts[id] = (wheelCounts[id] || 0) + 1;
+                }
+            });
+            if (Object.keys(seen).length) wheelDecks += 1;
         }
         if ((row.dataset.part || "") === "Decks" && rowMatches(row, { widths: [] })) {
             const id = bucketForWidth(parseFloat(row.dataset.size));
@@ -925,6 +957,14 @@ function paintFacetCounts() {
     if (lengthGroup) lengthGroup._lengthCounts = lengthCounts;
     syncLengthChips();
     paintSelectCounts("wheelbaseSelect", wheelCounts);
+    const wheelGroup = document.getElementById("wheelbaseFilters");
+    if (wheelGroup) {
+        wheelGroup._wheelCounts = wheelCounts;
+        wheelGroup._wheelDecks = wheelDecks;
+    }
+    syncWheelbaseChips();
+    syncColorSwatches("deckColorFilters", "Decks");
+    syncColorSwatches("wheelColorFilters", "Wheels");
     scheduleNavFit();
     SPEC_FACETS.forEach(facet => {
         const counts = Object.create(null);
@@ -996,6 +1036,79 @@ function syncLengthChips() {
     syncFacetEmpty(group, ".length-chip", "No lengths match");
 }
 
+function syncWheelbaseChips() {
+    const group = document.getElementById("wheelbaseFilters");
+    if (!group) return;
+    const chosen = selectedWheelbases();
+    const counts = group._wheelCounts || {};
+    const withWheel = group._wheelDecks || 0;
+    group.querySelectorAll(".wheelbase-chip").forEach(button => {
+        const value = button.getAttribute("data-value") || "";
+        if (value === "all") {
+            const on = chosen.length === 0;
+            button.hidden = false;
+            button.classList.toggle("active", on);
+            button.setAttribute("aria-pressed", on ? "true" : "false");
+            const slot = button.querySelector(".spec-count");
+            if (slot && withWheel) slot.textContent = String(withWheel);
+            if (withWheel) button.setAttribute("data-count", String(withWheel));
+            return;
+        }
+        const count = Object.prototype.hasOwnProperty.call(counts, value)
+            ? counts[value]
+            : parseInt(button.getAttribute("data-count") || "0", 10);
+        const on = chosen.indexOf(value) >= 0;
+        const slot = button.querySelector(".spec-count");
+        if (slot && Object.prototype.hasOwnProperty.call(counts, value)) slot.textContent = String(count);
+        if (Object.prototype.hasOwnProperty.call(counts, value)) button.setAttribute("data-count", String(count));
+        markFacetOption(button, count, on);
+        button.classList.toggle("active", on);
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    syncFacetEmpty(group, ".wheelbase-chip", "No wheelbases match");
+}
+
+function syncColorSwatches(groupId, part) {
+    const group = document.getElementById(groupId);
+    if (!group) return;
+    const chosen = selectedColors();
+    const counts = Object.create(null);
+    group.querySelectorAll(".color-swatch").forEach(button => {
+        const value = button.getAttribute("data-value") || "";
+        if (value && value !== "all") counts[value] = 0;
+    });
+    let colored = 0;
+    dealRows().forEach(row => {
+        if ((row.dataset.part || "") !== part) return;
+        if (!rowMatches(row, { colors: [] })) return;
+        const token = String(row.dataset.color || "").trim();
+        if (!token) return;
+        colored += 1;
+        if (Object.prototype.hasOwnProperty.call(counts, token)) counts[token] += 1;
+    });
+    group.querySelectorAll(".color-swatch").forEach(button => {
+        const value = button.getAttribute("data-value") || "";
+        if (value === "all") {
+            const on = chosen.length === 0;
+            button.hidden = false;
+            button.classList.toggle("active", on);
+            button.setAttribute("aria-pressed", on ? "true" : "false");
+            const slot = button.querySelector(".spec-count");
+            if (slot) slot.textContent = String(colored);
+            button.setAttribute("data-count", String(colored));
+            return;
+        }
+        const count = counts[value] || 0;
+        const on = chosen.indexOf(value) >= 0;
+        const slot = button.querySelector(".spec-count");
+        if (slot) slot.textContent = String(count);
+        button.setAttribute("data-count", String(count));
+        markFacetOption(button, count, on);
+        button.classList.toggle("active", on);
+        button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+}
+
 function setPressed(selector, attr, value) {
     document.querySelectorAll(selector).forEach(node => {
         const current = node.getAttribute(attr) || "";
@@ -1024,6 +1137,101 @@ function paintCards() {
 
 const DEAL_KINDS = ["new", "drop", "low", "back", "hot"];
 const DROP_INTERVALS = { day: 1, week: 7, month: 30, quarter: 90 };
+
+// Quarter-inch buckets come from page.py (WHEELBASE_BUCKETS). Lower end
+// included, upper end not, matching lengthBucketFor. An old ?wheelbase=14.25
+// link selects the quarter that contains 14.25.
+function wheelbaseBucketFor(value) {
+    const number = parseLength(value);
+    if (!Number.isFinite(number)) return "";
+    const buckets = wheelbaseBuckets();
+    for (let i = 0; i < buckets.length; i++) {
+        const bucket = buckets[i];
+        const lo = bucket.min == null ? null : Number(bucket.min);
+        const hi = bucket.max == null ? null : Number(bucket.max);
+        if (lo != null && number < lo - 1e-9) continue;
+        if (hi != null && number >= hi - 1e-9) continue;
+        return bucket.id || "";
+    }
+    return "";
+}
+
+function orderWheelbaseIds(values) {
+    const chosen = {};
+    (values || []).forEach(value => {
+        const token = String(value || "").trim();
+        if (token && token !== "all") chosen[token] = true;
+    });
+    const buckets = wheelbaseBuckets();
+    const ordered = buckets.map(bucket => bucket.id).filter(id => chosen[id]);
+    Object.keys(chosen).forEach(id => {
+        if (ordered.indexOf(id) < 0) ordered.push(id);
+    });
+    return ordered;
+}
+
+function selectedWheelbases(over) {
+    const raw = over && Object.prototype.hasOwnProperty.call(over, "wheelbase") ? over.wheelbase : (state.wheelbase);
+    if (raw == null || raw === "all" || raw === "") return [];
+    const parts = Array.isArray(raw) ? raw : String(raw).split(",");
+    return orderWheelbaseIds(parts);
+}
+
+function normalizeWheelbaseParam(value) {
+    const parts = String(value || "").split(",").map(item => item.trim()).filter(item => item && item.toLowerCase() !== "all");
+    if (!parts.length) return "all";
+    const buckets = wheelbaseBuckets();
+    if (!buckets.length) return parts.join(",");
+    const chosen = {};
+    parts.forEach(part => {
+        if (buckets.some(bucket => bucket.id === part)) chosen[part] = true;
+        else {
+            const id = wheelbaseBucketFor(part);
+            if (id) chosen[id] = true;
+        }
+    });
+    const ordered = orderWheelbaseIds(Object.keys(chosen));
+    return ordered.length ? ordered.join(",") : "all";
+}
+
+function wheelbaseAllowed(row, chosen) {
+    const wheels = wheelbaseList(row);
+    if (!wheels.length) return false;
+    return wheels.some(wheel => {
+        if ((chosen || []).indexOf(wheel) >= 0) return true;
+        const id = wheelbaseBucketFor(wheel);
+        return !!(id && (chosen || []).indexOf(id) >= 0);
+    });
+}
+
+function orderColorIds(values) {
+    const chosen = {};
+    (values || []).forEach(value => {
+        const token = String(value || "").trim().toLowerCase();
+        if (token && token !== "all" && COLOR_ORDER.indexOf(token) >= 0) chosen[token] = true;
+    });
+    return COLOR_ORDER.filter(id => chosen[id]);
+}
+
+function selectedColors(over) {
+    const raw = over && Object.prototype.hasOwnProperty.call(over, "colors") ? over.colors : state.colors;
+    if (raw == null || raw === "all" || raw === "") return [];
+    const parts = Array.isArray(raw) ? raw : String(raw).split(",");
+    return orderColorIds(parts);
+}
+
+function normalizeColorParam(value) {
+    const parts = String(value || "").split(",").map(item => item.trim()).filter(item => item && item.toLowerCase() !== "all");
+    if (!parts.length) return [];
+    return orderColorIds(parts);
+}
+
+function colorAllowed(row, chosen) {
+    if (!(chosen || []).length) return true;
+    const token = String((row.dataset && row.dataset.color) || "").trim();
+    if (!token) return false;
+    return chosen.indexOf(token) >= 0;
+}
 
 // "14,14.62" for a deck drilled for both wheelbases.
 function wheelbaseList(row) {
@@ -1069,7 +1277,6 @@ function rowMatchesNow(row, overrides) {
     const store = over.store != null ? over.store : state.store;
     const part = over.part != null ? over.part : state.part;
     const brand = over.brand != null ? over.brand : state.brand;
-    const wheelbase = over.wheelbase != null ? over.wheelbase : state.wheelbase;
     const widths = Object.prototype.hasOwnProperty.call(over, "widths") ? over.widths : null;
     const hay = (row.dataset.search || "").toLowerCase();
     const search = Object.prototype.hasOwnProperty.call(over, "search") ? over.search : state.search;
@@ -1087,7 +1294,10 @@ function rowMatchesNow(row, overrides) {
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
     const chosenLengths = selectedLengths(over);
     if (specKeyActive("length", viewPart) && chosenLengths.length && !lengthAllowed(row.dataset.length, chosenLengths)) return false;
-    if (specKeyActive("wheelbase", viewPart) && wheelbase !== "all" && wheelbaseList(row).indexOf(wheelbase) < 0) return false;
+    const chosenWheels = selectedWheelbases(over);
+    if (specKeyActive("wheelbase", viewPart) && chosenWheels.length && !wheelbaseAllowed(row, chosenWheels)) return false;
+    const chosenColors = selectedColors(over);
+    if (specKeyActive("colors", viewPart) && chosenColors.length && !colorAllowed(row, chosenColors)) return false;
     const price = rowPrice(row);
     const priceMin = Object.prototype.hasOwnProperty.call(over, "priceMin") ? over.priceMin : state.priceMin;
     const priceMax = Object.prototype.hasOwnProperty.call(over, "priceMax") ? over.priceMax : state.priceMax;
@@ -2007,6 +2217,58 @@ function toggleLengthValue(value) {
     applyFilters();
 }
 
+function toggleWheelbaseValue(value) {
+    const next = !value || value === "all" ? "all" : String(value);
+    if ((state.part || "Decks") === "all" && next !== "all") {
+        state.part = "Decks";
+        const partSelect = document.getElementById("partSelect");
+        if (partSelect) partSelect.value = "Decks";
+        setPressed("#partFilters [data-part]", "data-part", "Decks");
+        syncTypeSections(true);
+    }
+    if (next === "all") {
+        state.wheelbase = "all";
+    } else {
+        const selected = {};
+        selectedWheelbases().forEach(id => {
+            if (wheelbaseBuckets().some(bucket => bucket.id === id)) selected[id] = true;
+            else {
+                const mapped = wheelbaseBucketFor(id);
+                if (mapped) selected[mapped] = true;
+                else if (!wheelbaseBuckets().length) selected[id] = true;
+            }
+        });
+        if (selected[next]) delete selected[next];
+        else selected[next] = true;
+        const ordered = orderWheelbaseIds(Object.keys(selected));
+        state.wheelbase = ordered.length ? ordered.join(",") : "all";
+    }
+    const select = document.getElementById("wheelbaseSelect");
+    if (select) setSelect("wheelbaseSelect", state.wheelbase.indexOf(",") < 0 ? state.wheelbase : "all");
+    applyFilters();
+}
+
+function toggleColorValue(value, part) {
+    const next = !value || value === "all" ? "all" : String(value);
+    if ((state.part || "Decks") === "all" && next !== "all") {
+        state.part = part || "Decks";
+        const partSelect = document.getElementById("partSelect");
+        if (partSelect) partSelect.value = state.part;
+        setPressed("#partFilters [data-part]", "data-part", state.part);
+        syncTypeSections(true);
+    }
+    if (next === "all") {
+        state.colors = [];
+    } else {
+        const selected = {};
+        selectedColors().forEach(id => { selected[id] = true; });
+        if (selected[next]) delete selected[next];
+        else selected[next] = true;
+        state.colors = orderColorIds(Object.keys(selected));
+    }
+    applyFilters();
+}
+
 function toggleWidthRange(id) {
     if (!id || id === "all") {
         state.widths = [];
@@ -2484,6 +2746,7 @@ function clearFilters() {
         brand: "all",
         length: "all",
         wheelbase: "all",
+        colors: [],
         watching: false,
         cardNew: false,
         cardDrop: false,
@@ -2713,6 +2976,7 @@ function decodeQuery(query) {
         scoremax: null,
         length: "all",
         wheelbase: "all",
+        colors: [],
         sort: DEFAULT_SORT,
         change: "all",
         watching: false,
@@ -2756,7 +3020,8 @@ function decodeQuery(query) {
         else if (key === "scoremin") stateOut.scoremin = Number(value);
         else if (key === "scoremax") stateOut.scoremax = Number(value);
         else if (key === "length" && value && value !== "all") stateOut.length = normalizeLengthParam(value);
-        else if (key === "wheelbase" && value && value !== "all") stateOut.wheelbase = value;
+        else if (key === "wheelbase" && value && value !== "all") stateOut.wheelbase = normalizeWheelbaseParam(value);
+        else if (key === "color" && value && value !== "all") stateOut.colors = normalizeColorParam(value);
         else if (key === "sort" && ["rank", "score", "price", "price-desc", "original", "discount", "size", "store", "brand", "days", "daysat"].indexOf(value) >= 0) {
             stateOut.sort = value;
         } else if (key === "change" && ["new", "drop", "lowest", "removed"].indexOf(value) >= 0) {
@@ -2820,7 +3085,10 @@ function encodeState(snapshot) {
     if (snapshot.scoremax != null) add("scoremax", numText(snapshot.scoremax));
     const lengthParam = normalizeLengthParam(snapshot.length || "");
     if (lengthParam !== "all") add("length", lengthParam);
-    add("wheelbase", snapshot.wheelbase || "");
+    const wheelParam = normalizeWheelbaseParam(snapshot.wheelbase || "");
+    if (wheelParam !== "all") add("wheelbase", wheelParam);
+    const colors = orderColorIds(snapshot.colors || []);
+    if (colors.length) add("color", colors.join(","));
     if (snapshot.sort && snapshot.sort !== DEFAULT_SORT) add("sort", snapshot.sort);
     if (["new", "drop", "lowest", "removed"].indexOf(snapshot.change) >= 0) add("change", snapshot.change);
     if (snapshot.watching) add("watching", "1");
@@ -2872,6 +3140,7 @@ function captureState() {
         scoremax: state.scoreMax,
         length: state.length,
         wheelbase: state.wheelbase,
+        colors: (state.colors || []).slice(),
         sort: sort ? sort.value : DEFAULT_SORT,
         change: state.change,
         watching: state.watching,
@@ -2921,8 +3190,9 @@ function writeControls(snapshot) {
     setSelect("brandSelect", snapshot.brand || "all");
     const chosenBrand = document.getElementById("brandSelect");
     const lengthValue = normalizeLengthParam(snapshot.length || "all");
+    const wheelValue = normalizeWheelbaseParam(snapshot.wheelbase || "all");
     setSelect("lengthSelect", lengthValue.indexOf(",") < 0 ? lengthValue : "all");
-    setSelect("wheelbaseSelect", snapshot.wheelbase || "all");
+    setSelect("wheelbaseSelect", wheelValue.indexOf(",") < 0 ? wheelValue : "all");
     setSelect("sortSelect", snapshot.sort || DEFAULT_SORT);
     const fill = (id, value) => {
         const node = document.getElementById(id);
@@ -2940,7 +3210,8 @@ function writeControls(snapshot) {
     state.widths = orderedWidths(snapshot.widths || []);
     state.brand = chosenBrand ? (chosenBrand.value || "all") : (snapshot.brand || "all");
     state.length = lengthValue;
-    state.wheelbase = snapshot.wheelbase || "all";
+    state.wheelbase = wheelValue;
+    state.colors = orderColorIds(snapshot.colors || []);
     state.change = snapshot.change || "all";
     state.watching = !!snapshot.watching;
     state.grouped = !!snapshot.grouped;
@@ -3173,7 +3444,9 @@ function updateMoreCount() {
     });
     const wheel = document.getElementById("wheelbaseSelect");
     count += selectedLengths().length;
-    if (wheel && wheel.value && wheel.value !== "all") count += 1;
+    count += selectedWheelbases().length;
+    count += selectedColors().length;
+    if (wheel && wheel.value && wheel.value !== "all" && !selectedWheelbases().length) count += 1;
     count += (state.widths || []).length;
     const badge = document.getElementById("moreCount");
     const button = document.getElementById("moreFilters");
@@ -3541,12 +3814,20 @@ function collectFilterActions() {
             add("length:" + id, label, () => toggleLengthValue(id), { length: rest.length ? rest.join(",") : "all" });
         });
     }
-    if (specKeyActive("wheelbase") && state.wheelbase !== "all") {
-        add("wheelbase", "Wheelbase " + state.wheelbase, () => {
-            setSelect("wheelbaseSelect", "all");
-            state.wheelbase = "all";
-            applyFilters();
-        }, { wheelbase: "all" });
+    if (specKeyActive("wheelbase")) {
+        selectedWheelbases().forEach(id => {
+            const bucket = wheelbaseBuckets().find(item => item.id === id);
+            const label = bucket ? bucket.label : ("Wheelbase " + id);
+            const rest = selectedWheelbases().filter(item => item !== id);
+            add("wheelbase:" + id, label, () => toggleWheelbaseValue(id), { wheelbase: rest.length ? rest.join(",") : "all" });
+        });
+    }
+    if (specKeyActive("colors")) {
+        selectedColors().forEach(id => {
+            const label = COLOR_LABELS[id] || id;
+            const rest = selectedColors().filter(item => item !== id);
+            add("color:" + id, label, () => toggleColorValue(id, state.part || "Decks"), { colors: rest });
+        });
     }
     const specLabels = {
         diameters: value => "Diameter " + value,
@@ -6190,7 +6471,8 @@ function init() {
     });
     const wheelbase = document.getElementById("wheelbaseSelect");
     if (wheelbase) wheelbase.addEventListener("change", () => {
-        if ((state.part || "Decks") === "all" && wheelbase.value && wheelbase.value !== "all") {
+        state.wheelbase = normalizeWheelbaseParam(wheelbase.value || "all");
+        if ((state.part || "Decks") === "all" && state.wheelbase !== "all") {
             state.part = "Decks";
             const select = document.getElementById("partSelect");
             if (select) select.value = "Decks";
@@ -6277,6 +6559,25 @@ function init() {
             const button = event.target.closest(".length-chip");
             if (!button || !lengthFilters.contains(button)) return;
             toggleLengthValue(button.getAttribute("data-value") || "all");
+        });
+    }
+    const wheelbaseFilters = document.getElementById("wheelbaseFilters");
+    if (wheelbaseFilters) {
+        wheelbaseFilters.addEventListener("click", event => {
+            const button = event.target.closest(".wheelbase-chip");
+            if (!button || !wheelbaseFilters.contains(button)) return;
+            toggleWheelbaseValue(button.getAttribute("data-value") || "all");
+        });
+    }
+    if (document.querySelectorAll) {
+        document.querySelectorAll(".color-swatches").forEach(group => {
+            group.addEventListener("click", event => {
+                const button = event.target.closest(".color-swatch");
+                if (!button || !group.contains(button)) return;
+                const section = group.closest(".filter-section");
+                const part = section ? (section.getAttribute("data-for") || "Decks") : "Decks";
+                toggleColorValue(button.getAttribute("data-value") || "all", part);
+            });
         });
     }
     const sizeFilters = document.getElementById("sizeFilters");
