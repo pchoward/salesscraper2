@@ -380,8 +380,22 @@ def _deck_discount_reason(name, price_new, price_old):
     return None
 
 
+# Another sport's rules, while that sport is active (sports.Sport.active);
+# None means Skate's rules below.
+_SPORT_RULES = None
+
+
+def use_sport_rules(rule):
+    """Make ``rule`` (filter_reason's signature) decide every listing; None restores Skate's. Returns the previous."""
+    global _SPORT_RULES
+    previous, _SPORT_RULES = _SPORT_RULES, rule
+    return previous
+
+
 def filter_reason(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     """Return None if the listing should be kept, else a short reason."""
+    if _SPORT_RULES is not None:
+        return _SPORT_RULES(name, part, url, price_new, price_old, description, product_type)
     from tracked import accessory_rule, sneaker_rule
 
     name = normalize_product_name(name)

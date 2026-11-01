@@ -94,12 +94,13 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 
 
 class ShopifyStore:
-    def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor=""):
+    def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
         self.sale_json = f"{self.base}/collections/{collection}/products.json"
-        self.types = dict(COMMON_TYPES, **(extra_types or {}))
+        # ``types`` replaces the skate-shop types (another sport's store).
+        self.types = dict(COMMON_TYPES if types is None else types, **(extra_types or {}))
         # The shop's own name as a vendor is not a brand ("TGM Skateboards").
         self.own_vendor = own_vendor.casefold()
         self.cache = {}

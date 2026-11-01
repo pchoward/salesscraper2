@@ -6,12 +6,14 @@ Each store is isolated. An exception or timeout is logged, recorded in
 stores, the report, or the commit.
 """
 
+import argparse
 import datetime
 import json
 import logging
 import os
 import sys
 
+import sports
 from health import HEALTH_PATH, load_state, state_json
 from history import record_misses
 from notify import send_digest, send_admin_warnings
@@ -104,9 +106,29 @@ def _log_filter_counts(scrapers, results):
         logging.info("  %s total: before %s, after %s", name, bucket["before"], bucket["after"])
 
 
-def main():
+def parse_args(argv=None):
+    parser = argparse.ArgumentParser(description="Scrape one sport's stores and publish its page.")
+    parser.add_argument("--sport", default="skate", choices=sorted(sports.SPORTS),
+                        help="Skate (the default) is SkateDeals at the repository root; others use catalogs/<sport>/")
+    parser.add_argument("--email-dry-run", action="store_true", help="render email without sending it")
+    args, _unknown = parser.parse_known_args(sys.argv[1:] if argv is None else argv)
+    return args
+
+
+def main(argv=None):
+    args = parse_args(argv)
+    sport = sports.get(args.sport)
+    # Another sport's state files live in its own folder, read under its own
+    # listing rules; Skate's stay at the root. Both are put back afterwards.
+    with sport.session():
+        if not sport.is_default:
+            logging.info("Sport %s: working in %s", sport.id, sport.data_dir)
+        return _run(args, sport)
+
+
+def _run(args, sport):
     scanned_at = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0).isoformat()
-    scrapers = build_scrapers()
+    scrapers = build_scrapers() if sport.is_default else sport.build_scrapers()
     prev_data = load_previous()
     curr_data, failed_keys = run_stores(scrapers)
     _log_filter_counts(scrapers, curr_data)
@@ -172,7 +194,7 @@ def main():
             skip_urls=carried,
             health_results=prepared["health_results"],
         )
-    if updates.get("save_history"):
+    if updates.get("save_history") and sport.product_details:
         # Deck wheelbase from product pages, once per listing; saved on the
         # history rows the page reads. Never fails the run.
         try:
@@ -215,8 +237,9 @@ def main():
             failed_keys,
             generated_at=scanned_at,
             digest=digest,
+            **({} if sport.is_default else {"sport": sport}),
         )
-        write_page(html, "sale_items_chart.html")
+        write_page(html, "sale_items_chart.html" if sport.is_default else str(sport.page_file()))
     except Exception as exc:
         logging.error("Report build failed (continuing): %s", exc)
     # What rebuild_page.py needs to rebuild this exact page later, after a
@@ -230,9 +253,14 @@ def main():
         logging.error("Could not save report inputs (continuing): %s", exc)
         discard_report_inputs()
 
+    if not sport.delivery:
+        logging.info("Sport %s: no email or alerts yet (not enabled for this sport).", sport.id)
+        logging.info("Scraping complete!")
+        return
+
     # Operational warnings have a separate administrator-only delivery route.
     # Logged SMTP problems stay here so the workflow can still commit.
-    dry_run = True if "--email-dry-run" in sys.argv[1:] else None
+    dry_run = True if args.email_dry_run else None
     send_admin_warnings(updates["warnings"], dry_run=dry_run)
     if os.environ.get("NOTIFICATION_ENGINE_ENABLED", "").lower() in {"1", "true"}:
         stock_before.update({url: entry["stock"] for url, entry in updates["history"].items()

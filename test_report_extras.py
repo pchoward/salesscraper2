@@ -553,7 +553,8 @@ products.chips = [chip("all", false), chip("Decks", true)];
         end = source.find("function specKeyActive(")
         self.assertGreater(start, 0)
         self.assertGreater(end, start)
-        script = source[start:end] + """
+        default_part = next(line for line in source.splitlines() if line.startswith("const DEFAULT_PART = "))
+        script = default_part + "\n" + source[start:end] + """
 function same(left, right) {
   if (left.length !== right.length) return false;
   return left.every((value, index) => value === right[index]);
@@ -874,7 +875,9 @@ if (visible.join(",") !== "20.0,12.5,") throw new Error("visible discounts " + v
         reset = source[source.find("function clearFilters("):source.find("function scrollResultsToTop(")]
         self.assertNotIn("visitMode", reset)
         self.assertIn("grouped: false", reset)
-        self.assertIn('part: "Decks"', reset)
+        self.assertIn("part: DEFAULT_PART", reset)
+        # Skate's page has no SPORT_SETTINGS, so the default stays Decks.
+        self.assertIn('const DEFAULT_PART = (typeof SPORT_SETTINGS !== "undefined" && SPORT_SETTINGS.defaultPart) || "Decks";', source)
         self.assertIn("sortKey: DEFAULT_SORT", reset)
         self.assertIn('sortBy(DEFAULT_SORT, "desc")', reset)
         self.assertIn("scrollResultsToTop()", reset)

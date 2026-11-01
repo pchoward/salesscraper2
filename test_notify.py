@@ -464,7 +464,10 @@ class WiringTests(unittest.TestCase):
             text = handle.read()
         self.assertIn("digest = build_digest(changes, failed_keys)", text)
         self.assertLess(text.index("digest = build_digest"), text.index("send_digest(digest"))
-        self.assertIn('dry_run = True if "--email-dry-run" in sys.argv[1:] else None', text)
+        self.assertIn("dry_run = True if args.email_dry_run else None", text)
+        import scraper
+        self.assertTrue(scraper.parse_args(["--email-dry-run"]).email_dry_run)
+        self.assertFalse(scraper.parse_args([]).email_dry_run)
 
 
 if __name__ == "__main__":
