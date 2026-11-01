@@ -3343,3 +3343,67 @@ body.alerts-open { overflow: hidden; }
 .color-swatch[aria-pressed="true"] .spec-count { color: var(--blue, #2563eb); }
 .color-swatch.is-zero { opacity: 0.45; }
 .color-swatch.is-zero[aria-pressed="true"] { opacity: 1; }
+
+/* Search: suggestions, chips read from the query, highlighted matches,
+   and close matches when nothing matches (search/search-ui.js). */
+.search-field { position: relative; }
+/* The list only opens while the box has focus. A sticky search box is its
+   own stacking layer, so lift the whole box over the rows below it. */
+.search-box:focus-within { z-index: 70; }
+.search-suggest {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 60;
+    max-height: min(26rem, 70vh);
+    overflow-y: auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
+    padding: 0.25rem 0;
+}
+.search-suggest-head {
+    padding: 0.35rem 0.75rem 0.15rem;
+    font-size: var(--font-xs);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.search-option {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    font-size: var(--font-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+}
+.search-option:hover, .search-option[aria-selected="true"] { background: var(--grey-50); }
+.search-option[aria-selected="true"] { box-shadow: inset 3px 0 0 var(--primary); }
+.search-option-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.search-option-count { flex: 0 0 auto; font-size: var(--font-xs); color: var(--text-secondary); }
+mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; padding: 0 1px; }
+.search-chips { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.35rem; }
+.search-chip {
+    border: 0;
+    background: #e0e7ff;
+    color: #3730a3;
+    border-radius: var(--radius-pill);
+    padding: 0.18rem 0.55rem;
+    font-size: var(--font-xs);
+    cursor: pointer;
+}
+.search-chip:hover { background: #c7d2fe; }
+.search-chip:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.search-chip.is-inferred { background: var(--grey-100); color: var(--text-secondary); cursor: default; }
+.search-rescue { margin: 0.5rem 0 0.75rem; font-size: var(--font-sm); }
+.search-rescue p { margin: 0.35rem 0; }
+.search-rescue-fix { font-weight: 600; }
+.search-rescue-head { font-weight: 600; }
+.search-rescue-list { margin: 0.25rem 0 0.5rem; padding-left: 1.1rem; }
+.search-rescue-list li { margin: 0.15rem 0; }
+.search-rescue-meta { color: var(--text-secondary); }

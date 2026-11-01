@@ -1272,22 +1272,112 @@ function rowMatches(row, overrides) {
     return value;
 }
 
+// Search runs through SkateSearch (search/search.js). A typed query is
+// parsed into filters (54mm, 99a, under 30, tactics, wheels...) and the
+// words left over are matched typo-tolerantly and ranked. The index is built
+// from the deal rows the first time a query is typed. Without SkateSearch
+// (an old cached page), plain substring matching.
+let searchIndex = null;
+let searchMemo = { query: null, typed: null };
+
+function ensureSearchIndex() {
+    if (!searchIndex) searchIndex = SkateSearch.createIndex(dealRows().map(SkateSearch.docFromRow));
+    return searchIndex;
+}
+
+function typedSearch(query) {
+    const text = String(query || "").trim();
+    if (!text || typeof SkateSearch === "undefined") return null;
+    const key = text + "\u0000" + (state.part || "all");
+    if (searchMemo.query === key) return searchMemo.typed;
+    const parsed = SkateSearch.parseQuery(text);
+    const filters = Object.assign({}, parsed.filters);
+    let hits = null;
+    if (parsed.remainingText) hits = SkateSearch.search(ensureSearchIndex(), parsed.remainingText);
+    const inferred = inferredParts(filters, hits);
+    if (inferred) {
+        filters.parts = inferred;
+        filters.partsInferred = true;
+    }
+    searchMemo = { query: key, typed: { parsed: parsed, filters: filters, hits: hits } };
+    return searchMemo.typed;
+}
+
+// The page opens on Decks. A search for wheels should not come up empty
+// there: when no category was typed and the words match nothing in the
+// selected one, the search covers the categories they do match. Wheel
+// sizes and durometers mean wheels.
+function inferredParts(filters, hits) {
+    const current = state.part || "all";
+    if (filters.parts || current === "all") return null;
+    if (filters.diameter != null || filters.duros) return current === "Wheels" ? null : ["Wheels"];
+    if (!hits || !hits.size) return null;
+    const found = {};
+    dealRows().forEach(row => {
+        if (hits.has(row.dataset.id) && SkateSearch.rowAllows(filters, row)) found[row.dataset.part || ""] = true;
+    });
+    if (found[current]) return null;
+    const parts = Object.keys(found).filter(Boolean);
+    return parts.length ? parts : null;
+}
+
+// The filters a query typed. For that search they win over the sidebar's
+// choice of the same thing; the sidebar itself is left as it was.
+function typedFilters(query) {
+    const typed = typedSearch(query);
+    return (typed && typed.filters) || {};
+}
+
+// "near" widens a typed wheel size by that many mm (close matches).
+function searchMatches(row, query, near) {
+    if (!query) return true;
+    const typed = typedSearch(query);
+    if (!typed) return (row.dataset.search || "").toLowerCase().includes(String(query).toLowerCase());
+    if (typed.hits && !typed.hits.has(row.dataset.id)) return false;
+    return SkateSearch.rowAllows(typed.filters, row, near);
+}
+
+// Lists outside the index (Disappeared, All-time lows) match word by word.
+function searchHayMatches(hay, query) {
+    if (!query) return true;
+    if (typeof SkateSearch === "undefined") return String(hay || "").toLowerCase().includes(String(query).toLowerCase());
+    return SkateSearch.matchesText(SkateSearch.parseQuery(query).remainingText, hay || "");
+}
+
+// How well a deal matches the typed search, for the Best match sort.
+function searchScore(row) {
+    const typed = typedSearch(state.search);
+    return (typed && typed.hits && typed.hits.get(row.dataset.id)) || 0;
+}
+
+function typedOr(over, typed, key, fallback) {
+    if (Object.prototype.hasOwnProperty.call(over, key)) return over[key];
+    return typed[key] != null ? typed[key] : fallback;
+}
+
 function rowMatchesNow(row, overrides) {
     const over = overrides || {};
     const store = over.store != null ? over.store : state.store;
     const part = over.part != null ? over.part : state.part;
     const brand = over.brand != null ? over.brand : state.brand;
     const widths = Object.prototype.hasOwnProperty.call(over, "widths") ? over.widths : null;
-    const hay = (row.dataset.search || "").toLowerCase();
     const search = Object.prototype.hasOwnProperty.call(over, "search") ? over.search : state.search;
-    if (search && !hay.includes(String(search).toLowerCase())) return false;
-    if (store !== "all" && (row.dataset.store || "") !== store) return false;
-    if (part !== "all" && (row.dataset.part || "") !== part) return false;
-    const viewPart = part || "Decks";
-    if (specKeyActive("widths", viewPart) && !deckWidthAllowed(row, widths)) return false;
+    if (!searchMatches(row, search, over.searchNear || 0)) return false;
+    const typed = typedFilters(search);
+    if (over.store == null && typed.stores) {
+        if (typed.stores.indexOf(row.dataset.store || "") < 0) return false;
+    } else if (store !== "all" && (row.dataset.store || "") !== store) return false;
+    if (over.part == null && typed.parts) {
+        if (typed.parts.indexOf(row.dataset.part || "") < 0) return false;
+    } else if (part !== "all" && (row.dataset.part || "") !== part) return false;
+    // A typed category is the one whose spec filters apply.
+    const viewPart = over.part == null && typed.parts && typed.parts.length === 1 ? typed.parts[0] : (part || "Decks");
+    if (typed.width == null && specKeyActive("widths", viewPart) && !deckWidthAllowed(row, widths)) return false;
     for (let specIndex = 0; specIndex < SPEC_FACETS.length; specIndex++) {
         const facet = SPEC_FACETS[specIndex];
         if (!specKeyActive(facet.stateKey, viewPart)) continue;
+        if (facet.stateKey === "diameters" && typed.diameter != null) continue;
+        if (facet.stateKey === "duros" && typed.duros) continue;
         const selected = Object.prototype.hasOwnProperty.call(over, facet.stateKey) ? over[facet.stateKey] : state[facet.stateKey];
         if (!specAllowed(row, facet, selected)) return false;
     }
@@ -1299,11 +1389,11 @@ function rowMatchesNow(row, overrides) {
     const chosenColors = selectedColors(over);
     if (specKeyActive("colors", viewPart) && chosenColors.length && !colorAllowed(row, chosenColors)) return false;
     const price = rowPrice(row);
-    const priceMin = Object.prototype.hasOwnProperty.call(over, "priceMin") ? over.priceMin : state.priceMin;
-    const priceMax = Object.prototype.hasOwnProperty.call(over, "priceMax") ? over.priceMax : state.priceMax;
+    const priceMin = typedOr(over, typed, "priceMin", state.priceMin);
+    const priceMax = typedOr(over, typed, "priceMax", state.priceMax);
     if (priceMin != null && !(price >= priceMin)) return false;
     if (priceMax != null && !(price <= priceMax)) return false;
-    const discountMin = Object.prototype.hasOwnProperty.call(over, "discountMin") ? over.discountMin : state.discountMin;
+    const discountMin = typedOr(over, typed, "discountMin", state.discountMin);
     const discountMax = Object.prototype.hasOwnProperty.call(over, "discountMax") ? over.discountMax : state.discountMax;
     if (discountMin != null || discountMax != null) {
         const discount = rowDiscount(row);
@@ -1825,7 +1915,7 @@ let filterTimer = 0;
 
 function queueFilters() {
     clearTimeout(filterTimer);
-    filterTimer = setTimeout(applyFilters, 80);
+    filterTimer = setTimeout(applyFilters, 100);
 }
 
 function applyFilters() {
@@ -1857,6 +1947,8 @@ function applyFilters() {
     updateChangeLine();
     matchMemo = null;
     fitCardPhotos();
+    // search/search-ui.js: chips, highlights, close matches.
+    if (typeof afterSearchFilters === "function") afterSearchFilters();
 }
 
 function paintKeepaCounts() {
@@ -2340,6 +2432,7 @@ function compareSort(a, b, key, direction) {
     const aSold = a.dataset.soldout === "1";
     const bSold = b.dataset.soldout === "1";
     if (aSold !== bSold) return aSold ? 1 : -1;
+    if (key === "relevance") return (searchScore(b) - searchScore(a)) || compareSort(a, b, "discount", "desc");
     if (key === "rank") return (parseFloat(a.dataset.rank) || 0) - (parseFloat(b.dataset.rank) || 0);
     const av = a.dataset[key];
     const bv = b.dataset[key];
@@ -2561,15 +2654,7 @@ function sortSection(tableId, key, direction) {
 }
 
 function sectionMatches(row) {
-    const hay = (row.dataset.search || "").toLowerCase();
-    if (state.search && !hay.includes(state.search)) return false;
-    if (state.store !== "all" && (row.dataset.store || "") !== state.store) return false;
-    if (state.part !== "all" && (row.dataset.part || "") !== state.part) return false;
-    if (state.brand !== "all" && !brandSame(row.dataset.brand, state.brand)) return false;
-    const price = parseFloat(row.dataset.price);
-    if (state.priceMin != null && !(price >= state.priceMin)) return false;
-    if (state.priceMax != null && !(price <= state.priceMax)) return false;
-    return true;
+    return goneRowMatches(row);
 }
 
 function applySectionFilters() {
@@ -2613,6 +2698,32 @@ function applySortChoice() {
     else if (value === "brand") sortBy("brand", "asc");
     else if (value === "days") sortBy("days", "desc");
     else if (value === "daysat") sortBy("daysat", "asc");
+    else if (value === "relevance") sortBy("relevance", "desc");
+}
+
+// While a search is typed, Best match orders the deals, unless a sort was
+// picked by hand. Without a search there is nothing to rank, so it goes back.
+let relevanceAuto = false;
+
+function syncSearchSort() {
+    const select = document.getElementById("sortSelect");
+    const input = document.getElementById("searchInput");
+    if (!select || !input) return;
+    const typed = !!input.value.trim();
+    if (typed && select.value === DEFAULT_SORT && !relevanceAuto) {
+        select.value = "relevance";
+        relevanceAuto = true;
+    } else if (!typed && select.value === "relevance") {
+        select.value = DEFAULT_SORT;
+        relevanceAuto = false;
+    } else if (!typed) {
+        relevanceAuto = false;
+        return;
+    } else {
+        return;
+    }
+    state.sortKey = select.value;
+    state.sortDir = defaultSortDir(select.value);
 }
 
 function toggleSection(header) {
@@ -3036,7 +3147,7 @@ function decodeQuery(query) {
         else if (key === "length" && value && value !== "all") stateOut.length = normalizeLengthParam(value);
         else if (key === "wheelbase" && value && value !== "all") stateOut.wheelbase = normalizeWheelbaseParam(value);
         else if (key === "color" && value && value !== "all") stateOut.colors = normalizeColorParam(value);
-        else if (key === "sort" && ["rank", "score", "price", "price-desc", "original", "discount", "size", "store", "brand", "days", "daysat"].indexOf(value) >= 0) {
+        else if (key === "sort" && ["rank", "score", "price", "price-desc", "original", "discount", "size", "store", "brand", "days", "daysat", "relevance"].indexOf(value) >= 0) {
             stateOut.sort = value;
         } else if (key === "change" && ["new", "drop", "lowest", "removed"].indexOf(value) >= 0) {
             stateOut.change = value;
@@ -3945,12 +4056,16 @@ function goneRowMatches(row, over) {
     const store = lift.store != null ? lift.store : state.store;
     const part = lift.part != null ? lift.part : state.part;
     const brand = lift.brand != null ? lift.brand : state.brand;
-    const priceMin = Object.prototype.hasOwnProperty.call(lift, "priceMin") ? lift.priceMin : state.priceMin;
-    const priceMax = Object.prototype.hasOwnProperty.call(lift, "priceMax") ? lift.priceMax : state.priceMax;
-    const hay = (row.dataset.search || "").toLowerCase();
-    if (search && !hay.includes(String(search).toLowerCase())) return false;
-    if (store !== "all" && (row.dataset.store || "") !== store) return false;
-    if (part !== "all" && (row.dataset.part || "") !== part) return false;
+    const typed = typedFilters(search);
+    const priceMin = typedOr(lift, typed, "priceMin", state.priceMin);
+    const priceMax = typedOr(lift, typed, "priceMax", state.priceMax);
+    if (!searchHayMatches(row.dataset.search, search)) return false;
+    if (lift.store == null && typed.stores) {
+        if (typed.stores.indexOf(row.dataset.store || "") < 0) return false;
+    } else if (store !== "all" && (row.dataset.store || "") !== store) return false;
+    if (lift.part == null && typed.parts) {
+        if (typed.parts.indexOf(row.dataset.part || "") < 0) return false;
+    } else if (part !== "all" && (row.dataset.part || "") !== part) return false;
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
     const price = parseFloat(row.dataset.price);
     if (priceMin != null && !(price >= priceMin)) return false;
@@ -6385,7 +6500,10 @@ function init() {
     const bar = document.getElementById("stickyBar");
     if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
     const search = document.getElementById("searchInput");
-    if (search) search.addEventListener("input", queueFilters);
+    if (search) search.addEventListener("input", () => {
+        syncSearchSort();
+        queueFilters();
+    });
     ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
         const node = document.getElementById(id);
         if (node) node.addEventListener("input", queueFilters);
@@ -6496,7 +6614,10 @@ function init() {
         applyFilters();
     });
     const sort = document.getElementById("sortSelect");
-    if (sort) sort.addEventListener("change", applySortChoice);
+    if (sort) sort.addEventListener("change", () => {
+        relevanceAuto = false;
+        applySortChoice();
+    });
     const more = document.getElementById("moreFilters");
     if (more) more.addEventListener("click", toggleMore);
     const save = document.getElementById("saveView");

@@ -151,6 +151,7 @@ SORTS = (
     "brand",
     "days",
     "daysat",
+    "relevance",
 )
 CHANGES = ("new", "drop", "lowest", "removed")
 INTERVALS = ("day", "week", "month", "quarter")

@@ -226,6 +226,12 @@ def _alerts_config_script(config=None):
     return "<script>window.SKATEDEALS_ALERTS = " + literal.replace("</", "<\\/") + ";</script>"
 
 
+def _search_aliases():
+    """search/aliases.json as a script literal: compact, and nothing in it can end the <script>."""
+    aliases = json.loads(_read_asset("search/aliases.json"))
+    return json.dumps(aliases, separators=(",", ":"), ensure_ascii=False).replace("<", "\\u003c")
+
+
 def _read_asset(name):
     path = os.path.join(_HERE, name)
     with open(path, "r", encoding="utf-8") as handle:
@@ -1973,6 +1979,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<option value="brand">Brand</option>'
         '<option value="days">Days tracked</option>'
         '<option value="daysat">Days at this price</option>'
+        '<option value="relevance">Best match (search)</option>'
         "</select></label>"
     )
     brand_buttons = [
@@ -2535,8 +2542,17 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + store_row
         + "</div>"
         '<div class="tool-line">'
-        '<div class="search-box tool-search"><input type="text" id="searchInput" '
-        'placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals"></div>'
+        # A combobox: suggestions in #searchSuggest, filters read from the
+        # query as chips in #searchChips (search/search-ui.js).
+        '<div class="search-box tool-search"><div class="search-field">'
+        '<input type="text" id="searchInput" role="combobox" aria-autocomplete="list" aria-expanded="false" '
+        'aria-controls="searchSuggest" aria-describedby="searchHelp" autocomplete="off" spellcheck="false" '
+        'placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals">'
+        '<div id="searchSuggest" class="search-suggest" role="listbox" aria-label="Search suggestions" hidden></div>'
+        "</div>"
+        '<p id="searchHelp" class="sr-only">Type a brand, product, size or price, like spitfire 54mm 99a under 30. '
+        "Press slash to search from anywhere.</p>"
+        '<div id="searchChips" class="search-chips" aria-label="Filters read from your search" hidden></div></div>'
         '<div class="tool-deals">'
         '<p class="lede digest" id="changeLine" '
         f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}" '
@@ -2773,12 +2789,18 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         ]
     )
     chunks.append(
+        # Search: MiniSearch (vendored, MIT) and SkateDeals' search module.
+        f"<script>{_read_asset('search/vendor/minisearch.js')}\n{_read_asset('search/search.js')}\n"
+        f"SkateSearch.configure({_search_aliases()});</script>"
+    )
+    chunks.append(
         f"<script>const WIDTH_RANGES = {ranges_literal};\n"
         f"const LENGTH_BUCKETS = {length_literal};\n"
         f"const WHEELBASE_BUCKETS = {json.dumps([{key: bucket[key] for key in ('id', 'label', 'min', 'max')} for bucket in wheel_buckets])};\n"
         f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
         f"{_read_asset('page.js')}</script>"
     )
+    chunks.append(f"<script>{_read_asset('search/search-ui.js')}</script>")
     chunks.append('''<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "542cbf4d24534b70be3715cefe0e6a8e"}'></script><!-- End Cloudflare Web Analytics -->''')
     chunks.append("</body></html>")
     return "\n".join(chunk for chunk in chunks if chunk)
