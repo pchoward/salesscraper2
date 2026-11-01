@@ -22,24 +22,26 @@ _TAG = re.compile(r'^w(?:heel)?[\s_-]*size[\s_:-]*(12|14|16|18|20|22|24|26|27\.5
 
 # Shopify product_type (as stores/shopify.type_key gives it) -> kind.
 KINDS = {
-    "bmx bikes": "Complete Bikes", "bmx bike": "Complete Bikes", "bikes": "Complete Bikes",
+    "bmx bikes": "Complete Bikes", "bmx bike": "Complete Bikes", "bikes": "Complete Bikes", "bmx race bikes": "Complete Bikes",
     "complete bikes": "Complete Bikes",
-    "frames": "Frames", "frame": "Frames", "bmx frames": "Frames",
-    "forks": "Forks", "fork": "Forks", "bmx forks": "Forks",
+    "frames": "Frames", "frame": "Frames", "bmx frames": "Frames", "bmx race frames": "Frames",
+    "forks": "Forks", "fork": "Forks", "bmx forks": "Forks", "bmx fork top caps": "Forks",
     "bars": "Handlebars", "handlebars": "Handlebars", "handlebar": "Handlebars", "bmx bars": "Handlebars",
-    "stems": "Stems", "stem": "Stems",
-    "headsets": "Headsets", "headset": "Headsets",
+    "bmx handlebars": "Handlebars",
+    "stems": "Stems", "stem": "Stems", "bmx stems": "Stems",
+    "headsets": "Headsets", "headset": "Headsets", "bmx headsets": "Headsets",
     "grips": "Grips & Bar Ends", "bar ends": "Grips & Bar Ends", "grips bar ends": "Grips & Bar Ends",
     "detanglers": "Detanglers", "gyros": "Detanglers",
-    "cranks": "Cranks", "crank": "Cranks", "cranksets": "Cranks", "crank arms": "Cranks", "spindles": "Cranks",
-    "sprockets": "Sprockets", "sprocket": "Sprockets", "chainrings": "Sprockets",
+    "cranks": "Cranks", "crank": "Cranks", "bmx cranks": "Cranks", "cranksets": "Cranks", "crank arms": "Cranks", "spindles": "Cranks",
+    "sprockets": "Sprockets", "sprocket": "Sprockets", "chainrings": "Sprockets", "bmx sprockets": "Sprockets",
     "bottom brackets": "Bottom Brackets", "bottom bracket": "Bottom Brackets", "bb": "Bottom Brackets",
     "chains": "Chains", "chain": "Chains",
     "chain tensioners": "Chain Tensioners", "chain tensioner": "Chain Tensioners", "tensioners": "Chain Tensioners",
-    "pedals": "Pedals", "pedal": "Pedals",
-    "hubs": "Hubs", "hub": "Hubs", "bmx hubs": "Hubs",
+    "pedals": "Pedals", "pedal": "Pedals", "bmx pedals": "Pedals",
+    "hubs": "Hubs", "hub": "Hubs", "bmx hubs": "Hubs", "hubsets": "Hubs", "bmx rear hubs": "Hubs",
+    "bmx front hubs": "Hubs", "hub parts": "Hub Parts", "bmx hub spares": "Hub Parts",
     "drivers": "Drivers & Freewheels", "freewheels": "Drivers & Freewheels",
-    "rims": "Rims & Rim Strips", "rim": "Rims & Rim Strips", "rim strips": "Rims & Rim Strips",
+    "rims": "Rims & Rim Strips", "rim": "Rims & Rim Strips", "bmx rims": "Rims & Rim Strips", "rim strips": "Rims & Rim Strips",
     "rim strip": "Rims & Rim Strips",
     "spokes": "Spokes & Nipples", "spoke": "Spokes & Nipples", "spokes nipples": "Spokes & Nipples",
     "nipples": "Spokes & Nipples",
@@ -47,15 +49,16 @@ KINDS = {
     "hub guards": "Hub Guards", "hub guard": "Hub Guards", "hubguards": "Hub Guards",
     "pegs": "Pegs", "peg": "Pegs",
     "valve caps": "Valve Caps", "valve cap": "Valve Caps",
-    "tires": "Tires", "tire": "Tires", "bmx tires": "Tires",
-    "tubes": "Tubes", "tube": "Tubes",
-    "seats": "Seats", "seat": "Seats",
+    "tires": "Tires", "tire": "Tires", "bmx tires": "Tires", "bmx tyres": "Tires", "tyres": "Tires",
+    "tubes": "Tubes", "tube": "Tubes", "bmx innertubes": "Tubes", "innertubes": "Tubes",
+    "seats": "Seats", "seat": "Seats", "bmx seats": "Seats",
     "seat posts": "Seat Posts", "seat post": "Seat Posts", "seatposts": "Seat Posts",
     "seat clamps": "Seat Post Clamps", "seat clamp": "Seat Post Clamps", "seat post clamps": "Seat Post Clamps",
-    "seat post clamp": "Seat Post Clamps", "seat posts clamps": "Seat Post Clamps",
+    "seat post clamp": "Seat Post Clamps", "seat posts clamps": "Seat Post Clamps", "bmx seat clamps": "Seat Post Clamps",
     "brakes": "Brakes & Accessories", "brake": "Brakes & Accessories", "brake levers": "Brakes & Accessories",
     "levers": "Brakes & Accessories", "brake cables": "Brakes & Accessories", "cables": "Brakes & Accessories",
-    "brake parts": "Brakes & Accessories", "brake pads": "Brakes & Accessories",
+    "brake parts": "Brakes & Accessories", "brake pads": "Brakes & Accessories", "bmx brakes": "Brakes & Accessories",
+    "bmx brake cables": "Brakes & Accessories", "bmx brake levers": "Brakes & Accessories",
 }
 
 _KIND_WORDS = tuple(sorted((word for word in KINDS if word not in ("bikes", "bmx bikes", "bmx bike", "cables", "levers")),
@@ -81,6 +84,8 @@ def wheel_size(title, tags=()):
 
 
 def kind_for(type_key, title, category):
+    if category == "Wheels":
+        return "Wheels"  # front / rear not split yet (owner, 2026-11-01)
     kind = KINDS.get(type_key)
     if kind:
         return kind

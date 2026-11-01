@@ -31,9 +31,13 @@ def _table(aliases_path):
     return table
 
 
+# Vendor values that are a condition or a placeholder, not a brand.
+NOT_BRANDS = {"scratch & dent", "scratch and dent", "scratch dent", "misc", "default", "unknown", "n a", "none"}
+
+
 def canonical(vendor, aliases_path):
     vendor = " ".join(str(vendor or "").split())
-    if not vendor:
+    if not vendor or _key(vendor) in NOT_BRANDS:
         return ""
     table = _table(str(aliases_path))
     key = _key(vendor)

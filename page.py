@@ -1695,7 +1695,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "images": product_image_urls(record["item"], record["image"]),
         }
         # Other sports' filter fields (sports/bmx/specs.py); Skate has none.
-        for key in ("kind", "wheel_size"):
+        for key in ("kind", "wheel_size", "condition"):
             if record["item"].get(key):
                 catalog_json[record["id"]][key] = record["item"][key]
 

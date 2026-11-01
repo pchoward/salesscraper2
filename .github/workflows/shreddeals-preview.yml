@@ -11,6 +11,10 @@ name: ShredDeals - Preview Site
 # New sports' price history lives on the shreddeals-preview branch under
 # _data/, carried from run to run, until it is approved for main.
 on:
+  # Daily BMX refresh (owner, 2026-11-01): builds BMX price history on the
+  # preview branch. 21:37 UTC, away from Skate's 07:17 / 09:43 scrapes.
+  schedule:
+    - cron: '37 21 * * *'
   workflow_dispatch:
     inputs:
       scrape:
@@ -41,7 +45,7 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.ref }}
+          ref: ${{ inputs.ref || 'main' }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -65,17 +69,18 @@ jobs:
           rm -rf catalogs && cp -r preview-data/_data/catalogs catalogs
           find catalogs -type f | sort
 
-      - name: Scrape ${{ inputs.scrape }}
-        if: inputs.scrape != 'none'
+      - name: Scrape ${{ inputs.scrape || 'bmx' }}
+        if: (inputs.scrape || 'bmx') != 'none'
         env:
-          SPORT: ${{ inputs.scrape }}
+          # A scheduled run has no inputs: it scrapes BMX on main.
+          SPORT: ${{ inputs.scrape || 'bmx' }}
         # Only this sport's stores. Its run sends no email or alerts
         # (sports/__init__.py: delivery is Skate-only).
         run: python scraper.py --sport "$SPORT"
 
       - name: Build the site
         env:
-          LABEL: "ShredDeals preview ${{ inputs.ref }} · ${{ github.run_number }}"
+          LABEL: "ShredDeals preview ${{ inputs.ref || 'main' }} · ${{ github.run_number }}"
         run: python ci/build_preview.py site --label "$LABEL" --data-root .
 
       - name: Set up Node.js

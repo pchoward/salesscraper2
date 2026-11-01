@@ -291,7 +291,7 @@ class BmxSpecTests(unittest.TestCase):
                     kept[item["name"]] = (item["part"], item.get("kind"), item.get("wheel_size"))
         self.assertEqual(kept, {
             "Odyssey Clutch Freecoaster Hub": ("Wheel Parts", "Hubs", "20"),
-            "Merritt Pro Front Wheel": ("Wheels", "Front Wheels", None),
+            "Merritt Pro Front Wheel": ("Wheels", "Wheels", None),
             "Odyssey Graduate Pegs": ("Wheel Parts", "Pegs", None),
         })
 
@@ -310,7 +310,7 @@ class CircuitTests(unittest.TestCase):
         from sports.bmx import stores
 
         self.assertEqual(stores.CIRCUIT.sale_json, "https://www.circuitbmx.com/collections/sale-items/products.json")
-        self.assertEqual({scraper.shop.store for scraper in sports.BMX.build_scrapers()}, {"Albe's BMX", "Circuit BMX"})
+        self.assertIn("Circuit BMX", {scraper.shop.store for scraper in sports.BMX.build_scrapers()})
         feed = {"products": [
             {"title": "Plastic Pegs 4.5in", "vendor": "Odyssey", "handle": "pegs", "product_type": "Small Parts",
              "variants": [{"id": 1, "price": "20", "compare_at_price": "30"}]},
@@ -332,6 +332,60 @@ class CircuitTests(unittest.TestCase):
 
         store = shopify.ShopifyStore("Shop", "Shop", "https://shop.example")
         self.assertIsNone(shopify.part_for(store, "Mystery", "Baker Deck 8.25"))
+
+
+class MoreBmxStoresTests(unittest.TestCase):
+    def test_four_stores_with_their_sale_collections(self):
+        from sports.bmx import stores
+
+        self.assertEqual({scraper.shop.store for scraper in sports.BMX.build_scrapers()},
+                         {"Albe's BMX", "Circuit BMX", "Powers BMX", "Source BMX US"})
+        self.assertEqual(stores.POWERS.sale_jsons, [
+            "https://www.powersbmx.com/collections/clearance/products.json",
+            "https://www.powersbmx.com/collections/black-friday-deals/products.json"])
+        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.SOURCE_US.sale_jsons],
+                         ["bmx-parts-sale", "bmx-wheel-sale", "bmx-frame-sale", "bmx-bike-sale"])
+
+    def test_several_collections_are_merged_and_one_missing_is_skipped(self):
+        from stores import shopify
+
+        store = shopify.ShopifyStore("S", "S", "https://s.example", collection="a", more_collections=("b", "gone"))
+        pages = {"https://s.example/collections/a/products.json": [{"id": 1}, {"id": 2}],
+                 "https://s.example/collections/b/products.json": [{"id": 2}, {"id": 3}]}
+
+        def fetch(url):
+            base = url.split("?")[0]
+            if base not in pages:
+                return None
+            return {"products": pages[base] if "page=1" in url else []}
+
+        products = shopify.load_sale_products(store, fetch=fetch, sleep=lambda seconds: None)
+        self.assertEqual([product["id"] for product in products], [1, 2, 3])
+        single = shopify.ShopifyStore("T", "T", "https://s.example", collection="gone")
+        self.assertIsNone(shopify.load_sale_products(single, fetch=fetch, sleep=lambda seconds: None),
+                          "a store with one collection still fails when it can't be read")
+
+    def test_source_scratch_and_dent_is_a_condition_not_a_brand(self):
+        from sports.bmx import stores
+
+        feed = {"products": [
+            {"title": "Radio Raceline Xenon Pro Frame", "vendor": "Scratch & Dent", "handle": "xenon",
+             "product_type": "BMX Race Frames", "tags": ["Scratch & Dent", 'Wheel Size: 20"'],
+             "variants": [{"id": 1, "price": "199", "compare_at_price": "349"}]},
+            {"title": "Profile Mini Rear Hub", "vendor": "Profile", "handle": "mini", "product_type": "BMX Rear Hubs",
+             "variants": [{"id": 2, "price": "150", "compare_at_price": "190"}]},
+            {"title": "Stay Strong Race Gloves", "vendor": "Stay Strong", "handle": "gloves", "product_type": "BMX Gloves",
+             "variants": [{"id": 3, "price": "15", "compare_at_price": "25"}]},
+        ]}
+        kept = {}
+        with sports.BMX.active():
+            for store_scraper in stores.shopify.scrapers_for(stores.SOURCE_US, stores.PARTS):
+                for item in store_scraper.parse(json.dumps(feed)):
+                    kept[item["name"]] = (item["part"], item.get("kind"), item.get("brand"), item.get("condition"))
+        self.assertEqual(kept, {
+            "Radio Raceline Xenon Pro Frame": ("Frames & Forks", "Frames", None, "Scratch & Dent"),
+            "Profile Mini Rear Hub": ("Wheel Parts", "Hubs", "Profile", None),
+        })
 
 
 if __name__ == "__main__":

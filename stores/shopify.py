@@ -95,11 +95,14 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 
 class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
-                 brand_of=None, title_part=None, details=None, unknown_by_title=False):
+                 brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=()):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
         self.sale_json = f"{self.base}/collections/{collection}/products.json"
+        # Stores that split their sale (parts, wheels, frames...) read every
+        # listed collection; a product in two is kept once.
+        self.sale_jsons = [self.sale_json] + [f"{self.base}/collections/{name}/products.json" for name in more_collections]
         # ``types`` replaces the skate-shop types (another sport's store).
         self.types = dict(COMMON_TYPES if types is None else types, **(extra_types or {}))
         # The shop's own name as a vendor is not a brand ("TGM Skateboards").
@@ -162,24 +165,51 @@ def load_sale_products(store, fetch=None, sleep=time.sleep):
     if own_fetch and "products" in store.cache:
         return store.cache["products"]
     fetch = fetch or _fetch_json
+    sale_jsons = getattr(store, "sale_jsons", None) or [store.sale_json]
     products = []
-    for page in range(1, MAX_PAGES + 1):
-        if page > 1:
+    seen = set()
+    read = 0
+    for index, sale_json in enumerate(sale_jsons):
+        if index:
             sleep(PAGE_DELAY)
-        payload = fetch(f"{store.sale_json}?limit={PAGE_LIMIT}&page={page}")
-        if not isinstance(payload, dict) or not isinstance(payload.get("products"), list):
-            return None
-        batch = payload["products"]
-        products.extend(batch)
-        if len(batch) < PAGE_LIMIT:
-            break
-    else:
-        logger.error("%s sale catalog exceeded %s pages", store.store, MAX_PAGES)
+        batch_products = _read_collection(store, sale_json, fetch, sleep)
+        if batch_products is None:
+            if len(sale_jsons) == 1:
+                return None
+            # One of several collections (a seasonal one that ended): the
+            # store still counts as read when another collection worked.
+            logger.warning("%s: could not read %s; using the other sale collections", store.store, sale_json)
+            continue
+        read += 1
+        for product in batch_products:
+            key = (product.get("id") or product.get("handle")) if isinstance(product, dict) else None
+            if key is not None and key in seen:
+                continue
+            if key is not None:
+                seen.add(key)
+            products.append(product)
+    if not read:
         return None
     if own_fetch:
         store.cache["products"] = products
         log_feed_summary(store, products)
     return products
+
+
+def _read_collection(store, sale_json, fetch, sleep):
+    products = []
+    for page in range(1, MAX_PAGES + 1):
+        if page > 1:
+            sleep(PAGE_DELAY)
+        payload = fetch(f"{sale_json}?limit={PAGE_LIMIT}&page={page}")
+        if not isinstance(payload, dict) or not isinstance(payload.get("products"), list):
+            return None
+        batch = payload["products"]
+        products.extend(batch)
+        if len(batch) < PAGE_LIMIT:
+            return products
+    logger.error("%s sale catalog exceeded %s pages", store.store, MAX_PAGES)
+    return None
 
 
 def feed_summary(store, products):
@@ -286,7 +316,9 @@ def title_with_brand(product, own_vendor="", brand_of=None):
     if not vendor or (own_vendor and vendor.casefold().startswith(own_vendor)):
         return title
     if brand_of:
-        vendor = brand_of(vendor) or vendor
+        vendor = brand_of(vendor)
+        if not vendor:  # not a brand ("Scratch & Dent")
+            return title
     brand = [word for word in re.findall(r"[a-z0-9]+", vendor.casefold()) if word not in _VENDOR_FILLER]
     words = set(re.findall(r"[a-z0-9]+", title.casefold()))
     if brand and all(word in words for word in brand):
