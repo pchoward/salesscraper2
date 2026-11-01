@@ -291,6 +291,12 @@ That writes `email_preview.html`. Product names are prefixed with `[SAMPLE]`, an
 python scraper.py
 ```
 
+Pull requests get a PREVIEW build, browser checks on desktop and phone, and one comment with screenshots. Nothing merges or deploys automatically. Set-up, costs, and the mobile runbook are in [docs/level2-autonomy.md](docs/level2-autonomy.md). To try it locally:
+
+```bash
+python ci/build_preview.py preview/site && node ci/smoke.mjs preview/site preview/shots
+```
+
 Chrome or Chromium is required. The browser runs headless.
 
 Dry-check the filters, email, history prune, store warnings, cross-store match, deal score, badges, watchlist, site-wide sales, dimensions, and image extraction (no network):

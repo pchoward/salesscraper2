@@ -60,3 +60,7 @@ worker/wrangler.toml
 worker/.wrangler/
 worker/.dev.vars
 alerts_state/
+
+# CI preview builds (ci/build_preview.py, ci/smoke.mjs)
+ci/node_modules/
+preview/
