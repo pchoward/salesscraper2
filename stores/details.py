@@ -123,6 +123,15 @@ def fill_wheelbases(current_data, history, skip_keys=(), today=None, fetch=_get,
             continue  # try again next run
         read += 1
         entry["wheelbase_checked"] = today.isoformat()
+        from product_specs import enrich
+        if item.get('width') in (None, '') and not item.get('widths'):
+            enriched = enrich(dict(item), text)
+            if enriched.get('width') is not None:
+                item['width'] = enriched['width']
+                item['widths'] = enriched['widths']
+                if entry.get('width') in (None, ''):
+                    entry['width'] = item['width']
+                    entry['widths'] = item['widths']
         specs = extract_specs(item.get("name") or "", text)
         if specs["wheelbase"] is not None:
             for target in (entry, item):
