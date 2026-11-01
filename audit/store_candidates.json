@@ -1,0 +1,27 @@
+{
+  "_about": "Stores the read-only store probe (python -m audit.store_probe) checks for each new sport. Add or remove freely; the probe follows each site's robots.txt and makes a handful of requests per store.",
+  "bmx": [
+    {"name": "Dan's Comp", "url": "https://www.danscomp.com"},
+    {"name": "Circuit BMX", "url": "https://www.circuitbmx.com"},
+    {"name": "Albe's BMX", "url": "https://www.albes.com"},
+    {"name": "Empire BMX", "url": "https://www.empirebmx.com"},
+    {"name": "Tree Fort Bikes", "url": "https://www.treefortbikes.com"},
+    {"name": "Source BMX", "url": "https://www.sourcebmx.com"}
+  ],
+  "mtb": [
+    {"name": "Jenson USA", "url": "https://www.jensonusa.com"},
+    {"name": "Competitive Cyclist", "url": "https://www.competitivecyclist.com"},
+    {"name": "Worldwide Cyclery", "url": "https://www.worldwidecyclery.com"},
+    {"name": "Fanatik Bike Co", "url": "https://www.fanatikbike.com"},
+    {"name": "Tree Fort Bikes", "url": "https://www.treefortbikes.com"},
+    {"name": "evo", "url": "https://www.evo.com"}
+  ],
+  "ski": [
+    {"name": "evo", "url": "https://www.evo.com"},
+    {"name": "Christy Sports", "url": "https://www.christysports.com"},
+    {"name": "The House", "url": "https://www.the-house.com"},
+    {"name": "Peter Glenn", "url": "https://www.peterglenn.com"},
+    {"name": "Level Nine Sports", "url": "https://www.levelninesports.com"},
+    {"name": "Steep & Cheap", "url": "https://www.steepandcheap.com"}
+  ]
+}
