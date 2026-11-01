@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-11-01T18:26:15.696343+00:00",
+  "production_scan": false,
+  "retailers": [
+    {
+      "retailer": "Dan's Comp",
+      "base": "https://www.danscomp.com/",
+      "requests": [
+        {
+          "url": "https://www.danscomp.com/robots.txt",
+          "status": "environment_proxy_denied",
+          "error": "Tunnel connection failed: 403 Forbidden"
+        }
+      ],
+      "status": "access_unverified",
+      "platform": [],
+      "sale_links": [],
+      "terms": [],
+      "products_observed": null,
+      "catalog_scan": false,
+      "approved_source": false,
+      "blocker": "robots.txt could not be verified; no retailer page or feed was requested"
+    },
+    {
+      "retailer": "Source BMX",
+      "base": "https://www.sourcebmx.com/",
+      "requests": [
+        {
+          "url": "https://www.sourcebmx.com/robots.txt",
+          "status": "environment_proxy_denied",
+          "error": "Tunnel connection failed: 403 Forbidden"
+        }
+      ],
+      "status": "access_unverified",
+      "platform": [],
+      "sale_links": [],
+      "terms": [],
+      "products_observed": null,
+      "catalog_scan": false,
+      "approved_source": false,
+      "blocker": "robots.txt could not be verified; no retailer page or feed was requested"
+    }
+  ]
+}
