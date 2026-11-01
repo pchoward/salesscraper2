@@ -1,6 +1,7 @@
 """BMX stores. Each returns scrapers like stores/registry.py's skate stores.
 
-Circuit BMX second (Shopify, a smaller sale collection). Its product types
+Circuit BMX second (Shopify, a smaller sale collection); then Powers BMX
+and Source BMX's US store, both Shopify with several sale collections. Its product types
 weren't sampled yet, so types not in TYPES are sorted by title words; the
 scrape log's feed summary shows what it holds.
 
@@ -45,6 +46,21 @@ TYPES = {
     "pedal": "Drivetrain", "chain tensioner": "Drivetrain", "bb": "Drivetrain",
 }
 
+# Powers BMX and Source BMX (US) types, from the store probe (2026-11-01).
+TYPES.update({
+    "hubsets": "Wheel Parts", "hub parts": "Wheel Parts", "bmx hub spares": "Wheel Parts", "bmx rear hubs": "Wheel Parts",
+    "bmx front hubs": "Wheel Parts", "bmx rims": "Wheel Parts", "rim": "Wheel Parts",
+    "stock rear wheels": "Wheels", "stock front wheels": "Wheels", "bmx wheels": "Wheels", "bmx wheelsets": "Wheels",
+    "bmx innertubes": "Tires", "innertubes": "Tires", "bmx tyres": "Tires", "tyres": "Tires", "bmx tires": "Tires",
+    "bmx race frames": "Frames & Forks", "bmx forks": "Frames & Forks", "bmx fork top caps": "Frames & Forks",
+    "bmx seats": "Seating", "bmx seat clamps": "Seating", "bmx seat posts": "Seating",
+    "bmx sprockets": "Drivetrain", "bmx pedals": "Drivetrain", "bmx cranks": "Drivetrain", "bmx chains": "Drivetrain",
+    "bmx bottom brackets": "Drivetrain",
+    "bmx brakes": "Braking", "bmx brake cables": "Braking", "bmx brake levers": "Braking",
+    "bmx handlebars": "Steering", "bmx stems": "Steering", "bmx headsets": "Steering", "bmx grips": "Steering",
+    "bmx race bikes": "Bikes",
+})
+
 # Vague types: the category comes from the title's words.
 TYPES.update({"parts": shopify.BY_TITLE, "": shopify.BY_TITLE, "none": shopify.BY_TITLE})
 
@@ -61,6 +77,10 @@ def details(item, product, kind_key):
     size = specs.wheel_size(product.get("title") or item.get("name"), product.get("tags") or ())
     if size:
         item["wheel_size"] = size
+    # Dan's-style deal type: Source files these under the vendor "Scratch & Dent".
+    marks = [str(product.get("vendor") or "")] + [str(tag) for tag in product.get("tags") or ()]
+    if any("scratch" in mark.casefold() and "dent" in mark.casefold() for mark in marks):
+        item["condition"] = "Scratch & Dent"
 
 
 ALBES = shopify.ShopifyStore(
@@ -88,7 +108,39 @@ CIRCUIT = shopify.ShopifyStore(
     unknown_by_title=True,
 )
 
-STORES = (ALBES, CIRCUIT)
+# Race and freestyle; sale is "clearance", plus a seasonal Black Friday
+# collection while it lasts (a missing collection is skipped, not a failure).
+POWERS = shopify.ShopifyStore(
+    "Powers BMX",
+    "Powers BMX",
+    "https://www.powersbmx.com",
+    collection="clearance",
+    more_collections=("black-friday-deals",),
+    types=TYPES,
+    brand_of=brands.for_sport(sports.BMX),
+    own_vendor="powers",
+    title_part=title_part,
+    details=details,
+    unknown_by_title=True,
+)
+
+# Source BMX's US store (separate from the UK site). Its sale is split by
+# section; clothing and race-wear sales are left out.
+SOURCE_US = shopify.ShopifyStore(
+    "Source BMX US",
+    "Source BMX (US)",
+    "https://us.sourcebmx.com",
+    collection="bmx-parts-sale",
+    more_collections=("bmx-wheel-sale", "bmx-frame-sale", "bmx-bike-sale"),
+    types=TYPES,
+    brand_of=brands.for_sport(sports.BMX),
+    own_vendor="source",
+    title_part=title_part,
+    details=details,
+    unknown_by_title=True,
+)
+
+STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US)
 
 PARTS = ("Bikes", "Frames & Forks", "Steering", "Drivetrain", "Wheels", "Wheel Parts", "Tires", "Seating", "Braking")
 

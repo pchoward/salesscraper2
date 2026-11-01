@@ -6,7 +6,14 @@ The simplest path, all from the GitHub app. No Codespaces, no commands.
 
 GitHub only lists a manual workflow after it is on `main`.
 
-## Every time
+## Daily
+
+The workflow also runs by itself every day at 21:37 UTC (2:37 pm Pacific),
+scraping BMX into the preview, so BMX price history builds up. The phone link
+always shows the latest run. To pause it: Actions → ShredDeals - Preview Site
+→ ⋯ → Disable workflow.
+
+## By hand
 
 1. GitHub app → **salesscraper2** → **Actions** → **ShredDeals - Preview Site** →
    **Run workflow**.
