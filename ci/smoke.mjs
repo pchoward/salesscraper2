@@ -170,9 +170,9 @@ async function run(browser, base, view, options) {
 }
 
 // The ShredDeals homepage (index.html): sport tabs around the SkateDeals
-// page in a same-origin frame. Skate shows the catalog; every other sport
-// must stay empty (no skate products passed off as BMX), follow the URL, and
-// come back with Back.
+// page in a same-origin frame. Skate shows the catalog; a sport with its
+// own catalog shows that one; every other sport must stay empty (no skate
+// products passed off as BMX). Tabs follow the URL and come back with Back.
 async function runHomepage(browser, base, view, options) {
     let shell = "";
     try {
@@ -225,17 +225,44 @@ async function runHomepage(browser, base, view, options) {
     });
     await shot("shell");
 
-    await check(view, "Other sports stay empty", async () => {
+    // Sports with their own catalog page (bmx/sale_items_chart.html) show it
+    // in the frame; the rest stay empty, never showing Skate's products.
+    const catalogs = await page.evaluate(() => {
+        const config = JSON.parse(document.getElementById("sportConfig").textContent);
+        return Object.fromEntries(config.sports.map(sport => [sport.id, sport.catalog || null]));
+    });
+    await check(view, "Other sports", async () => {
         if (!others.length) return { skip: "only Skate" };
+        const seen = [];
+        let emptyShot = false;
         for (const sport of others) {
             await page.locator("#sport-" + sport).click();
             await page.waitForTimeout(250);
             expect(new URL(page.url()).searchParams.get("sport") === sport, `URL does not say sport=${sport}`);
-            expect(!(await page.locator("#skateFrame").isVisible()), `${sport} still shows the Skate catalog`);
-            expect(await page.locator("#comingSoon").isVisible(), `${sport} shows no empty state`);
-            if (sport === others[0]) await shot("sport");
+            if (catalogs[sport]) {
+                let count = 0;
+                for (let i = 0; i < 60 && !count; i++) {
+                    const shown = await page.evaluate(() => {
+                        try { return document.getElementById("skateFrame").contentWindow.location.pathname; } catch (_) { return ""; }
+                    });
+                    count = shown.endsWith("/" + catalogs[sport]) ? await frameCards().catch(() => 0) : 0;
+                    if (!count) await page.waitForTimeout(500);
+                }
+                expect(count > 0, `${sport} catalog did not load`);
+                expect(await page.locator("#skateFrame").isVisible(), `${sport} catalog is hidden`);
+                const skateItems = await page.frameLocator("#skateFrame").locator('[data-part="Decks"][data-store]').count();
+                expect(skateItems === 0, `${sport} shows Skate decks`);
+                await shot("sport-" + sport);
+                seen.push(`${sport}: ${count} deals`);
+            } else {
+                expect(!(await page.locator("#skateFrame").isVisible()), `${sport} still shows the Skate catalog`);
+                expect(await page.locator("#comingSoon").isVisible(), `${sport} shows no empty state`);
+                if (!emptyShot) await shot("sport");
+                emptyShot = true;
+                seen.push(`${sport}: coming soon`);
+            }
         }
-        return others.join(", ") + ": no catalog";
+        return seen.join(", ");
     });
 
     await check(view, "Back and Forward", async () => {

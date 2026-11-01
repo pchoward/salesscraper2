@@ -1,0 +1,152 @@
+name: ShredDeals - Preview Site
+
+# Builds the whole ShredDeals site (homepage, Skate, and every sport with
+# listings) and publishes it to the shreddeals-preview branch, viewable from a
+# phone (docs/shreddeals-preview.md). Optionally scrapes ONE new sport first,
+# so BMX can be refreshed without touching any skate store.
+#
+# Never production: nothing is pushed to main, GitHub Pages is untouched, and
+# no email or alert is sent (only Skate delivers, and Skate is never scraped
+# here; its page is rebuilt from the data already on the chosen branch).
+# New sports' price history lives on the shreddeals-preview branch under
+# _data/, carried from run to run, until it is approved for main.
+on:
+  workflow_dispatch:
+    inputs:
+      scrape:
+        description: Scrape one sport first (none = just rebuild)
+        type: choice
+        default: bmx
+        options: [none, bmx, ski, mtb]
+      ref:
+        description: Branch whose code and Skate data to use
+        required: false
+        default: main
+        type: string
+
+concurrency:
+  group: shreddeals-preview
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      PREVIEW_BRANCH: shreddeals-preview
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Bring back earlier runs' sport data
+        # The previous preview's _data/catalogs (BMX price history...). A
+        # first run starts empty.
+        run: |
+          set -euo pipefail
+          mkdir -p preview-data
+          if git fetch -q --depth 1 origin "$PREVIEW_BRANCH"; then
+            git archive FETCH_HEAD _data 2>/dev/null | tar -x -C preview-data || echo "No saved sport data yet."
+          fi
+          mkdir -p preview-data/_data/catalogs
+          rm -rf catalogs && cp -r preview-data/_data/catalogs catalogs
+          find catalogs -type f | sort
+
+      - name: Scrape ${{ inputs.scrape }}
+        if: inputs.scrape != 'none'
+        env:
+          SPORT: ${{ inputs.scrape }}
+        # Only this sport's stores. Its run sends no email or alerts
+        # (sports/__init__.py: delivery is Skate-only).
+        run: python scraper.py --sport "$SPORT"
+
+      - name: Build the site
+        env:
+          LABEL: "ShredDeals preview ${{ inputs.ref }} · ${{ github.run_number }}"
+        run: python ci/build_preview.py site --label "$LABEL" --data-root .
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Cache Playwright's browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.56.1-ubuntu-24.04
+
+      - name: Install Playwright 1.56.1 and Chromium
+        run: |
+          npm install --prefix ci --no-save --no-audit --no-fund playwright@1.56.1
+          ci/node_modules/.bin/playwright install --with-deps chromium
+
+      - name: Browser checks and phone screenshots
+        id: smoke
+        continue-on-error: true
+        run: node ci/smoke.mjs site shots
+
+      - name: Publish to the preview branch
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        # One commit, replaced each run: the branch never grows, is never
+        # merged, and is not served by GitHub Pages.
+        run: |
+          set -euo pipefail
+          mkdir -p site/_data site/_shots
+          cp -r catalogs site/_data/catalogs
+          cp shots/*.png site/_shots/ 2>/dev/null || true
+          cd site
+          git init -q
+          git checkout -q -b "$PREVIEW_BRANCH"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git add -A
+          git commit -q -m "ShredDeals preview: $RUN_URL"
+          # The checkout's token (contents: write on this repository only).
+          git config http.https://github.com/.extraheader "$(git -C .. config --get http.https://github.com/.extraheader)"
+          git push -q --force "$(git -C .. remote get-url origin)" "HEAD:$PREVIEW_BRANCH"
+
+      - name: Summary
+        env:
+          REPO: ${{ github.repository }}
+          SMOKE: ${{ steps.smoke.outcome }}
+        run: |
+          raw="https://raw.githubusercontent.com/${REPO}/${PREVIEW_BRANCH}/_shots"
+          {
+            echo "## ShredDeals preview"
+            echo
+            echo "**Open on your phone:** https://raw.githack.com/${REPO}/${PREVIEW_BRANCH}/index.html"
+            echo
+            echo "Browser checks: ${SMOKE} (details in the step log)"
+            echo
+            echo "Pages built:"
+            (cd site && find . -name sale_items_chart.html -not -path './.git/*' | sort | sed 's/^\.\//- /')
+            echo
+            for name in mobile-shell mobile-sport-bmx mobile-sport-ski mobile-sport-mtb mobile-sport; do
+              if [ -f "site/_shots/${name}.png" ]; then
+                echo "<img src=\"${raw}/${name}.png\" width=\"260\" alt=\"${name}\">"
+              fi
+            done
+            echo
+            echo "Not production: main and GitHub Pages are unchanged; no email or alerts."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail when a browser check failed
+        if: steps.smoke.outcome != 'success'
+        run: |
+          echo "::error::A browser check failed; the preview was still published. See 'Browser checks'."
+          exit 1

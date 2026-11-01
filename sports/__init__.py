@@ -86,16 +86,18 @@ class Sport:
             filters.use_sport_rules(previous)
 
     @contextlib.contextmanager
-    def session(self):
+    def session(self, folder=None):
         """For a whole run: work in this sport's data folder (created when
-        missing) under its listing rules, then put both back. Skate's run is
-        unchanged: its files are at the repository root."""
+        missing; ``folder`` overrides it) under its listing rules, then put
+        both back. Every state file and side file (site sales, watchlist) is
+        read relative to it. Skate's run is unchanged: its files are at the
+        repository root."""
         if self.is_default:
             yield self
             return
         import filters
 
-        folder = self.data_path()
+        folder = Path(folder) if folder is not None else self.data_path()
         folder.mkdir(parents=True, exist_ok=True)
         before = os.getcwd()
         previous = filters.use_sport_rules(self._rules())

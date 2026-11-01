@@ -10,7 +10,10 @@ copy is changed so it cannot be mistaken for, or act as, production:
   left out, so page.js keeps the alerts UI off);
 * no Cloudflare Web Analytics beacon, so previews never count as visits.
 
-    python ci/build_preview.py OUT_DIR [--label "PR #123 abc1234"]
+    python ci/build_preview.py OUT_DIR [--label "PR #123 abc1234"] [--data-root DIR]
+
+Other sports (BMX, Ski, MTB) are added when their catalogs/<id>/ data has
+listings; their homepage tabs then open their own page.
 """
 
 import argparse
@@ -50,8 +53,51 @@ def mark_preview(html, label=""):
     return html
 
 
-def build(out_dir, label=""):
-    """Write the preview site into ``out_dir``. Returns the list of files."""
+def build_sport_pages(out, label="", data_root=None):
+    """Pages for the other sports that have scraped listings, from their
+    catalogs/<id>/ data under ``data_root`` (the repository by default).
+    Returns {sport id: page path} for the homepage; a sport with no
+    listings yet is left out, so its tab keeps saying "coming soon"."""
+    import rebuild_page
+    import sports
+    from report import build_report_html
+
+    data_root = Path(data_root or ROOT).resolve()
+    catalogs = {}
+    for sport in sports.SPORTS.values():
+        if sport.is_default:
+            continue
+        folder = data_root / sport.data_dir
+        try:
+            data = json.loads((folder / rebuild_page.DATA_PATH).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if not any(items for items in data.values()):
+            continue
+        try:
+            inputs = rebuild_page.load_report_inputs(folder / rebuild_page.INPUTS_PATH, folder / rebuild_page.DATA_PATH,
+                                                     folder / rebuild_page.HISTORY_PATH)
+        except rebuild_page.RebuildError as exc:
+            print(f"{sport.label}: saved report inputs unusable ({exc}); building from the catalog alone.", file=sys.stderr)
+            try:
+                history = json.loads((folder / rebuild_page.HISTORY_PATH).read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                history = {}
+            inputs = {"data": data, "changes": {}, "price_history": history}
+        inputs.pop("sport", None)
+        with sport.session(folder):
+            html = build_report_html(**inputs, sport=sport)
+        target = out.resolve() / sport.page_path
+        page.write_page(mark_preview(html, label), str(target))
+        catalogs[sport.id] = sport.page_path
+    return catalogs
+
+
+def build(out_dir, label="", data_root=None):
+    """Write the preview site into ``out_dir``. Returns the list of files.
+
+    ``data_root`` holds the other sports' catalogs/<id>/ folders (the
+    ShredDeals preview workflow keeps them off main)."""
     import rebuild_page
     from report import build_report_html
 
@@ -70,8 +116,9 @@ def build(out_dir, label=""):
         history = json.loads((ROOT / rebuild_page.HISTORY_PATH).read_text(encoding="utf-8"))
         html = build_report_html(data, {}, history)
     page.write_page(mark_preview(html, label), str(out / "sale_items_chart.html"))
+    catalogs = build_sport_pages(out, label, data_root)
     from previews.publish import publish
-    publish(out)
+    publish(out, catalogs=catalogs)
     homepage = out / "index.html"
     homepage.write_text(mark_preview(homepage.read_text(encoding="utf-8"), label), encoding="utf-8")
     (out / "_headers").write_text("/*\n  X-Robots-Tag: noindex, nofollow\n", encoding="utf-8")
@@ -82,8 +129,9 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("out_dir")
     parser.add_argument("--label", default="")
+    parser.add_argument("--data-root", help="folder holding catalogs/<sport>/ for BMX, Ski and MTB (default: the repository)")
     args = parser.parse_args(argv)
-    files = build(args.out_dir, args.label)
+    files = build(args.out_dir, args.label, args.data_root)
     print("Preview written:", ", ".join(files))
     return 0
 
