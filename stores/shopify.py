@@ -95,7 +95,7 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 
 class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
-                 brand_of=None):
+                 brand_of=None, title_part=None, details=None):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
@@ -107,6 +107,10 @@ class ShopifyStore:
         # vendor -> brand name. When set, each listing carries that brand
         # (BMX: Albe's vendors), instead of the page guessing from the title.
         self.brand_of = brand_of
+        # title -> part for types mapped to BY_TITLE (default: skate parts).
+        self.title_part = title_part
+        # (item, product, type_key) -> None: adds sport-specific fields.
+        self.details = details
         self.cache = {}
 
 
@@ -129,7 +133,7 @@ def part_for(store, product_type, title=""):
     """The report part for a product, or None to skip it."""
     part = store.types.get(type_key(product_type))
     if part == BY_TITLE:
-        return part_for_title(title)
+        return (getattr(store, "title_part", None) or part_for_title)(title)
     return part
 
 
@@ -379,6 +383,11 @@ class ShopifyScraper(Scraper):
             brand = self.shop.brand_of(vendor) if vendor else ""
             if brand and not (self.shop.own_vendor and vendor.casefold().startswith(self.shop.own_vendor)):
                 item["brand"] = brand
+        if self.shop.details:
+            try:
+                self.shop.details(item, product, type_key(product_type))
+            except Exception as exc:  # a detail never drops a listing
+                logger.error("%s details failed for %s: %s", self.shop.store, url, exc)
         images = _images(product)
         if images:
             item["image"] = images[0]
