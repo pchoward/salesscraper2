@@ -160,3 +160,17 @@ Remaining: real raw-variant/spec evidence via Actions (to extend precise coverag
 retailer access-policy evidence, the agreed native-header integration, and pricing
 wording. A separate reviewed Actions run can later validate the combined branch;
 no workflow or production deployment is triggered here.
+
+Final branch validation: **599 tests completed successfully, one existing skip**.
+Eight Chrome-dependent cases are unavailable in this environment. The separate
+real Firefox acceptance check passed on desktop/mobile. No tests were disabled
+or assertions weakened; the existing external runner reports the eight unrun
+Chrome cases separately.
+
+Coordination with `claude/bmx-brands` at `478a1d6`: the code merges without file
+conflicts. Its `BmxBrandTests.test_brand_comes_from_the_vendor_with_one_spelling`
+expects a 16-inch fixture wheelset to remain. That is intentionally incompatible
+with this limited first scope. Change that **synthetic brand-test example and
+expected name** from 16 to 20 inches when integrating; it still asserts the same
+FIT-to-Fit normalization. This handoff does not edit Claude's branch or remove
+any brand assertion. Other brand/engine tests run unchanged.
