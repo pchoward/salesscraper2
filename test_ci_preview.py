@@ -117,7 +117,7 @@ class CommentTests(unittest.TestCase):
             {"view": "mobile", "name": "Search", "status": "fail", "detail": "nothing found"},
             {"view": "mobile", "name": "Sport tabs", "status": "skip", "detail": "none"},
         ],
-        "screenshots": ["desktop-home.png", "mobile-home.png"],
+        "screenshots": ["desktop-home.png", "mobile-home.png", "mobile-shell.png"],
     }
 
     def test_a_readable_comment_with_screenshots(self):
@@ -128,6 +128,7 @@ class CommentTests(unittest.TestCase):
         self.assertIn("| Search | ✅ | ❌ |", body)
         self.assertIn("**mobile · Search**: nothing found", body)
         self.assertIn('<img src="https://img/pr-1/abcdef1/mobile-home.png" width="160"', body)
+        self.assertIn("mobile-shell.png", body, "the homepage screenshot is shown")
         self.assertIn("not set up", body, "says when there is no live preview")
         with_link = pr_comment.render(self.SUMMARY, "abc", "https://run", "success", preview_url="https://pr-1.p.pages.dev/x")
         self.assertIn("[Open the preview](https://pr-1.p.pages.dev/x)", with_link)

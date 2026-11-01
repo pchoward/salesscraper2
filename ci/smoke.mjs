@@ -5,9 +5,10 @@
 // Serves SITE_DIR on localhost, opens it in Chromium at desktop and phone
 // sizes, and checks what a visitor does first: the page loads clean,
 // a category filter, a search, a retailer link, Quick View, the alerts
-// panel (which must stay offline in a preview), and sport tabs where the
-// page has them. Writes OUT_DIR/summary.json and PNG screenshots. Exits 1
-// when a check fails, so CI shows it; screenshots are written either way.
+// panel (which must stay offline in a preview), then the ShredDeals
+// homepage: sport tabs, Skate's catalog, empty other sports, Back/Forward.
+// Writes OUT_DIR/summary.json and PNG screenshots. Exits 1 when a check
+// fails, so CI shows it; screenshots are written either way.
 
 import { createRequire } from "node:module";
 import { createServer } from "node:http";
@@ -162,21 +163,97 @@ async function run(browser, base, view, options) {
         return "mode " + mode;
     });
 
-    await check(view, "Sport tabs", async () => {
-        const tabs = await page.locator("[data-sport]").count();
-        if (!tabs) return { skip: "no sport navigation on this page" };
-        const sports = await page.evaluate(() => Array.from(document.querySelectorAll("[data-sport]")).map(node => node.getAttribute("data-sport")));
-        const other = sports.find(sport => sport && sport !== "skate");
-        if (!other) return `${tabs} tab(s)`;
-        await page.locator(`[data-sport="${other}"]`).first().click();
-        await page.waitForTimeout(300);
-        expect(page.url().includes("sport=" + other), "URL does not follow the sport tab");
-        await shot("sport");
-        return `${sports.length} tabs; ${other} reachable`;
-    });
-
     record(view, "No page errors", errors.length ? "fail" : "pass", errors.slice(0, 3).join(" | "));
     record(view, "No production calls", forbidden.length ? "fail" : "pass", forbidden.slice(0, 2).join(" | "));
+    await context.close();
+    return shots;
+}
+
+// The ShredDeals homepage (index.html): sport tabs around the SkateDeals
+// page in a same-origin frame. Skate shows the catalog; every other sport
+// must stay empty (no skate products passed off as BMX), follow the URL, and
+// come back with Back.
+async function runHomepage(browser, base, view, options) {
+    let shell = "";
+    try {
+        shell = await readFile(join(SITE, "index.html"), "utf8");
+    } catch (err) {
+        shell = "";
+    }
+    if (!shell.includes('id="sportTabs"')) {
+        record(view, "Homepage sport tabs", "skip", "no ShredDeals homepage");
+        return [];
+    }
+    const context = await browser.newContext(options);
+    const page = await context.newPage();
+    const errors = [];
+    page.on("pageerror", error => errors.push(String(error)));
+    await page.route(/^https?:\/\/(?!127\.0\.0\.1)/, route =>
+        (route.request().resourceType() === "image" ? route.continue() : route.abort()));
+    const shots = [];
+    async function shot(name) {
+        const file = `${view}-${name}.png`;
+        await page.screenshot({ path: join(outDir, file) });
+        shots.push(file);
+    }
+    const frameCards = () => page.frameLocator("#skateFrame").locator("#cardGrid .deal-card").count();
+    const selected = () => page.evaluate(() => {
+        const tab = document.querySelector('#sportTabs [role="tab"][aria-selected="true"]');
+        return tab ? tab.id.replace(/^sport-/, "") : "";
+    });
+    let others = [];
+
+    await check(view, "Homepage sport tabs", async () => {
+        await page.goto(base + "/index.html", { waitUntil: "load", timeout: 60000 });
+        const tabs = await page.evaluate(() => Array.from(document.querySelectorAll('#sportTabs [role="tab"]')).map(tab => tab.id.replace(/^sport-/, "")));
+        expect(tabs.length >= 2, "fewer than two sport tabs");
+        expect(tabs.includes("skate"), "no Skate tab");
+        expect(await selected() === "skate", "Skate is not selected on a fresh visit");
+        others = tabs.filter(id => id !== "skate");
+        return tabs.join(", ");
+    });
+
+    await check(view, "Homepage shows Skate deals", async () => {
+        let count = 0;
+        for (let i = 0; i < 60 && !count; i++) {
+            count = await frameCards().catch(() => 0);
+            if (!count) await page.waitForTimeout(500);
+        }
+        expect(count > 0, "the Skate catalog did not load in the homepage");
+        expect(await page.locator("#skateFrame").isVisible(), "the Skate frame is hidden");
+        return count + " deal cards";
+    });
+    await shot("shell");
+
+    await check(view, "Other sports stay empty", async () => {
+        if (!others.length) return { skip: "only Skate" };
+        for (const sport of others) {
+            await page.locator("#sport-" + sport).click();
+            await page.waitForTimeout(250);
+            expect(new URL(page.url()).searchParams.get("sport") === sport, `URL does not say sport=${sport}`);
+            expect(!(await page.locator("#skateFrame").isVisible()), `${sport} still shows the Skate catalog`);
+            expect(await page.locator("#comingSoon").isVisible(), `${sport} shows no empty state`);
+            if (sport === others[0]) await shot("sport");
+        }
+        return others.join(", ") + ": no catalog";
+    });
+
+    await check(view, "Back and Forward", async () => {
+        if (others.length < 2) return { skip: "needs two other sports" };
+        await page.goBack();
+        await page.waitForTimeout(250);
+        const back = await selected();
+        expect(back === others[others.length - 2], `Back shows ${back}, expected ${others[others.length - 2]}`);
+        await page.goForward();
+        await page.waitForTimeout(250);
+        expect(await selected() === others[others.length - 1], "Forward did not return");
+        await page.locator("#sport-skate").click();
+        await page.waitForTimeout(250);
+        expect(await page.locator("#skateFrame").isVisible(), "Skate did not come back");
+        return "restores the sport";
+    });
+
+    record(view, "Homepage page errors", errors.length ? "fail" : "pass", errors.slice(0, 3).join(" | "));
     await context.close();
     return shots;
 }
@@ -187,8 +264,12 @@ await mkdir(outDir, { recursive: true });
 const browser = await chromium.launch();
 const shots = [];
 try {
-    shots.push(...await run(browser, base, "desktop", { viewport: { width: 1366, height: 900 } }));
-    shots.push(...await run(browser, base, "mobile", { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }));
+    const desktop = { viewport: { width: 1366, height: 900 } };
+    const mobile = { viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 };
+    shots.push(...await run(browser, base, "desktop", desktop));
+    shots.push(...await run(browser, base, "mobile", mobile));
+    shots.push(...await runHomepage(browser, base, "desktop", desktop));
+    shots.push(...await runHomepage(browser, base, "mobile", mobile));
 } finally {
     await browser.close();
     server.close();

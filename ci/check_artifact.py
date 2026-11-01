@@ -18,7 +18,7 @@ import re
 import sys
 from pathlib import Path
 
-SHOT = re.compile(r"^(desktop|mobile)-(home|search|quickview|sport)\.png$")
+SHOT = re.compile(r"^(desktop|mobile)-(home|search|quickview|shell|sport)\.png$")
 SITE_FILES = {"index.html", "sale_items_chart.html", "history.json", "_headers",
               "navigation/navigation.js", "navigation/navigation.css", "navigation/skate-bridge.js"}
 PNG = b"\x89PNG\r\n\x1a\n"
