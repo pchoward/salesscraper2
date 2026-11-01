@@ -12,6 +12,8 @@ listed are skipped. ``python -c "from sports.bmx import stores;
 stores.preview()"`` shows what a live run would keep without saving anything.
 """
 
+import re
+
 import sports
 from sports import brands
 from sports.bmx import specs
@@ -58,7 +60,7 @@ TYPES.update({
     "bmx bottom brackets": "Drivetrain",
     "bmx brakes": "Braking", "bmx brake cables": "Braking", "bmx brake levers": "Braking",
     "bmx handlebars": "Steering", "bmx stems": "Steering", "bmx headsets": "Steering", "bmx grips": "Steering",
-    "bmx race bikes": "Bikes", "race bmx mini": "Bikes", "race bmx": "Bikes",
+    "bmx race bikes": "Bikes", "race bmx mini": "Bikes", "race bmx": "Bikes", "complete bike": "Bikes",
     "chainring": "Drivetrain", "freewheel cogs": "Wheel Parts", "bmx brake spares": "Braking",
     "bmx bar ends": "Steering", "bar end": "Steering", "bmx spokes": "Wheel Parts", "bmx gyro kits": "Steering",
     "bmx gyro cables": "Steering", "bmx crank spindles etc": "Drivetrain", "bmx brake pads": "Braking",
@@ -70,12 +72,18 @@ TYPES.update({
 TYPES.update({"parts": shopify.BY_TITLE, "": shopify.BY_TITLE, "none": shopify.BY_TITLE})
 
 
+# A title names a whole bike only when it ends with "bike" (maybe a model
+# year or colour after it) or says "complete bike". "Bikes" inside a brand
+# ("SE Bikes Padset", "SE Bikes Bike Life Number plate") doesn't count.
+_WHOLE_BIKE = re.compile(r"\bcomplete bike\b|\bbike(?:\s+(?:19|20)\d\d)?(?:\s+[a-z]+(?:/[a-z]+)+)?\s*$", re.I)
+
+
 def title_part(title):
-    """A category from the title, for vague or unknown store types. Never
-    Bikes: stores always type complete bikes, and "bike" is in brand names
-    ("SE Bikes Padset", "Haro Bikes Keychain")."""
+    """A category from the title, for vague or unknown store types."""
     category = specs.category_for_title(title, sports.BMX.aliases_file())
-    return None if category == "Bikes" else category
+    if category == "Bikes" and not _WHOLE_BIKE.search(str(title or "").strip()):
+        return None
+    return category
 
 
 def details(item, product, kind_key):

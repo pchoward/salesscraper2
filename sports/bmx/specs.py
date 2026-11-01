@@ -91,6 +91,8 @@ def wheel_size(title, tags=()):
 def kind_for(type_key, title, category):
     if category == "Wheels":
         return "Wheels"  # front / rear not split yet (owner, 2026-11-01)
+    if category == "Bikes":
+        return "Complete Bikes"
     kind = KINDS.get(type_key)
     if kind:
         return kind

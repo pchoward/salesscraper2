@@ -412,6 +412,16 @@ class TitleFallbackTests(unittest.TestCase):
         self.assertEqual(kept, {"We The People Arrow Rear Hub Female Bolt Set": ("Wheel Parts", "Hubs"),
                                 "SE Bikes Mini Race Bike": ("Bikes", "Complete Bikes")})
 
+    def test_whole_bikes_without_a_type_are_still_bikes(self):
+        from sports.bmx import stores
+
+        for title in ("Haro Skwad 2 Electric Bike", "Kuwahara KW-29 Bike", "Fit Series 22\u201d Wheel Complete Bike 2026",
+                      "Radio Cobalt mini Race Bike black/red"):
+            self.assertEqual(stores.title_part(title), "Bikes", title)
+        for title in ("SE BIKES Wing Padset", "SE BIkes Bike Life Number plate black/white/blue", "SE Bikes SE Racing Keychain"):
+            self.assertIsNone(stores.title_part(title), title)
+        self.assertEqual(stores.TYPES["complete bike"], "Bikes")
+
 
 if __name__ == "__main__":
     unittest.main()
