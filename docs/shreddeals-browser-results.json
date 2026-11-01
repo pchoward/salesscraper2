@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "checks": [
+    "Legacy Skate URLs, retailer links, and Brand-before-dimensions preserved",
+    "Existing search, sorting, Subscribe UI, price history, desktop Quick View and Back preserved",
+    "Keyboard arrows/Home/End, focus/roving tabindex, sport-only Back/Forward restoration",
+    "Other sports never display Skate inventory; no discipline subdivision is rendered",
+    "True 390\u00d7844 mobile viewport, coarse pointer, compact navigation, persistent header at short heights, preserved responsive Skate iframe"
+  ],
+  "browser": "firefox",
+  "version": "153.5.0",
+  "viewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "screenshots": [
+    "desktop-skate.png",
+    "desktop-bmx.png",
+    "desktop-quick-view.png",
+    "mobile-skate.png",
+    "mobile-mtb.png"
+  ]
+}
