@@ -77,7 +77,9 @@ PR push --> CI - Pull Request Tests  (PR code, read-only, no secrets)
   the alerts Worker URL, Turnstile key and analytics beacon are left out, so
   the alerts panel shows its offline "soon" state. Every page carries a
   PREVIEW banner and `noindex`.
-- **Browser checks** (`ci/smoke.mjs`, Playwright 1.56.1 Chromium), desktop
+- **Browser checks** (`ci/smoke.mjs`, Playwright 1.56.1 Chromium on the
+  `ubuntu-24.04` runner; Playwright 1.56.1 doesn't support Ubuntu 26.04, the
+  current `ubuntu-latest`, so upgrade both together), desktop
   1366px and phone 390px:
   - the page loads;
   - a category filter;

@@ -57,7 +57,9 @@ jobs:
   preview:
     name: Preview build and browser checks
     if: github.event_name == 'pull_request' && vars.PR_PREVIEWS != 'off'
-    runs-on: ubuntu-latest
+    # Pinned: Playwright 1.56.1 supports Ubuntu 24.04 but not 26.04 (the
+    # current ubuntu-latest). Move both together when upgrading.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
       contents: read
@@ -87,7 +89,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: playwright-1.56.1-${{ runner.os }}
+          key: playwright-1.56.1-ubuntu-24.04
 
       - name: Install Playwright 1.56.1 and Chromium
         run: |
