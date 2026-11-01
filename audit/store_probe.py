@@ -148,6 +148,13 @@ def shopify_sale(products):
 
 
 def probe(store, fetch=_get, sleep=time.sleep):
+    # A URL naming a Shopify collection (https://shop/collections/ski-sale)
+    # samples that collection instead of the biggest sale-looking one.
+    wanted = None
+    match = re.search(r"/collections/([^/?#]+)", store["url"])
+    if match:
+        wanted = match.group(1)
+        store = dict(store, url=store["url"][:match.start()])
     base = store["url"].rstrip("/") + "/"
     report = {"name": store.get("name") or base, "url": base, "robots": None, "platform": [], "sale_links": [],
               "shopify": None, "notes": []}
@@ -192,6 +199,9 @@ def probe(store, fetch=_get, sleep=time.sleep):
         sale = [c for c in collections_ if SALE_WORDS.search((c.get("title") or "") + " " + (c.get("handle") or "").replace("-", " "))]
         shop["sale_collections"] = [{"handle": c.get("handle"), "title": c.get("title"), "products": c.get("products_count")} for c in sale][:12]
         best = max(sale, key=lambda c: c.get("products_count") or 0, default=None)
+        if wanted:
+            best = next((c for c in collections_ if c.get("handle") == wanted), {"handle": wanted, "products_count": None})
+            report["name"] = f"{report['name']} ({wanted})"
         if best and allowed(f"/collections/{best['handle']}/products.json"):
             status, body = get(urljoin(base, f"/collections/{best['handle']}/products.json?limit=250"), "application/json")
             try:

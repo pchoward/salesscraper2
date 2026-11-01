@@ -69,6 +69,20 @@ class ProbeTests(unittest.TestCase):
         self.assertIn("| [Shop](https://shop.example/) | Shopify | 200, crawl-delay 5 |", table)
         self.assertIn("**Variant options (filter candidates):** Top Tube (2)", table)
 
+    def test_a_collection_url_samples_that_collection(self):
+        base = "https://shop.example"
+        site = FakeSite({
+            base + "/robots.txt": (200, "User-agent: *\nAllow: /\n"),
+            base + "/": (200, SHOPIFY_HOME),
+            base + "/collections.json?limit=250": (200, json.dumps({"collections": [
+                {"handle": "clearance", "title": "Clearance", "products_count": 300}]})),
+            base + "/collections/ski-sale/products.json?limit=250": (200, json.dumps(PRODUCTS)),
+        })
+        report = store_probe.probe({"url": base + "/collections/ski-sale"}, fetch=site, sleep=lambda seconds: None)
+        self.assertEqual(report["url"], base + "/")
+        self.assertEqual(report["shopify"]["sampled"], "ski-sale")
+        self.assertEqual(report["shopify"]["products"], 3)
+
     def test_robots_txt_is_obeyed(self):
         base = "https://closed.example"
         site = FakeSite({base + "/robots.txt": (200, "User-agent: *\nDisallow: /\n")})
