@@ -191,7 +191,11 @@ What the checks mean:
 | Retailer link | the first card has no https store link |
 | Quick View | Quick View does not open |
 | Alerts stay offline | the alerts panel would talk to the live Worker |
-| Sport tabs | (ShredDeals) a sport tab does not update the URL |
+| Homepage sport tabs | the ShredDeals homepage lacks its tabs, or Skate isn't selected first |
+| Homepage shows Skate deals | the Skate catalog doesn't load inside the homepage |
+| Other sports stay empty | Ski, MTB or BMX shows the Skate catalog, has no "coming soon", or the URL doesn't say `?sport=` |
+| Back and Forward | the browser's Back or Forward doesn't restore the sport |
+| Homepage page errors | the homepage threw a JavaScript error |
 | No page errors | the page threw a JavaScript error |
 | No production calls | the page called the alerts Worker, Turnstile or analytics |
 

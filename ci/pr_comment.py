@@ -18,7 +18,7 @@ from pathlib import Path
 MARKER = "<!-- skatedeals-pr-preview -->"
 ICON = {"pass": "✅", "fail": "❌", "skip": "➖"}
 VIEWS = ("desktop", "mobile")
-SHOT = re.compile(r"^(desktop|mobile)-(home|search|quickview|sport)\.png$")
+SHOT = re.compile(r"^(desktop|mobile)-(home|search|quickview|shell|sport)\.png$")
 # summary.json comes from the PR's own run, so it is untrusted: only known
 # views, statuses and screenshot names, and escaped, shortened text get through.
 
@@ -82,7 +82,7 @@ def render(summary, sha, run_url, ci, preview_url="", images_base=""):
     if shots and images_base:
         lines.append("")
         pairs = []
-        for name in ("home", "search", "quickview", "sport"):
+        for name in ("shell", "sport", "home", "search", "quickview"):
             row = [f"{view}-{name}.png" for view in VIEWS if f"{view}-{name}.png" in shots]
             if row:
                 pairs.append((name, row))
