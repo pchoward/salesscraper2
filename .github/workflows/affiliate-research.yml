@@ -1,0 +1,55 @@
+name: Research - BMX Affiliate Sources
+
+# Public GET-only research, manually requested after owner review. No signup,
+# outreach, product scraping, affiliate activation or site publication.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out research code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Collect public source evidence
+        id: collect
+        continue-on-error: true
+        env:
+          REPORT_DIR: ${{ runner.temp }}/bmx-affiliate-research
+        run: python -m research.affiliates --output-dir "$REPORT_DIR"
+
+      - name: Add research summary
+        if: always()
+        env:
+          REPORT_DIR: ${{ runner.temp }}/bmx-affiliate-research
+        run: |
+          if [ -f "$REPORT_DIR/summary.md" ]; then
+            cat "$REPORT_DIR/summary.md" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Retain evidence for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bmx-affiliate-research
+          path: ${{ runner.temp }}/bmx-affiliate-research/
+          retention-days: 14
+          if-no-files-found: warn
+
+      - name: Report blocked collection
+        if: steps.collect.outcome != 'success'
+        run: |
+          echo "::error::Source collection did not complete successfully. Review the evidence artifact; no program was approved or enabled."
+          exit 1

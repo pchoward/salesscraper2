@@ -412,3 +412,8 @@ ShredDeals with Skate, Ski, MTB and BMX; `sale_items_chart.html` remains the
 standalone SkateDeals page with existing links and filters. Public assets are
 generated with `python -m previews.publish`; this command does not scrape or send
 notifications. The change is currently on a review branch, not deployed.
+
+BMX affiliate research (#136), with all tracking disabled:
+[program matrix, source-verification status and conditional implementation plan](docs/affiliates/README.md).
+The manual **Research - BMX Affiliate Sources** workflow collects public evidence
+only; it does not register accounts, transform retailer links or publish the site.

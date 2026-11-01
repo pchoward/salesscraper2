@@ -1,0 +1,86 @@
+{
+  "issue": 136,
+  "as_of": "2026-11-01",
+  "runtime_integration": false,
+  "registration_authorized": false,
+  "rollout_authorized": false,
+  "retailers": [
+    {
+      "id": "albes", "retailer": "Albe's BMX", "catalog_status": "current",
+      "retailer_url": "https://www.albes.com/", "application_url": null,
+      "program_lead_url": null, "network": null, "commission": null, "cookie_days": null,
+      "us_eligibility": "unverified", "deal_coupon_policy": "unverified",
+      "deep_link_access": "unverified", "affiliate_data_feed_access": "unverified",
+      "existing_data_route": "Repository Shopify adapter: bmx-sale-bikes-parts collection; not an affiliate feed license.",
+      "restrictions": ["No verified affiliate terms or publisher approval.", "Store loyalty/referral rewards must not be treated as a publisher affiliate partnership."],
+      "confidence": "unverified", "verified_on": null, "attempted_on": "2026-11-01",
+      "verification_state": "environment_blocked", "approval": "not_requested", "enabled": false,
+      "lead_claims": [], "sources": ["albes-home"]
+    },
+    {
+      "id": "circuit", "retailer": "Circuit BMX", "catalog_status": "current",
+      "retailer_url": "https://www.circuitbmx.com/", "application_url": null,
+      "program_lead_url": null, "network": null, "commission": null, "cookie_days": null,
+      "us_eligibility": "unverified", "deal_coupon_policy": "unverified",
+      "deep_link_access": "unverified", "affiliate_data_feed_access": "unverified",
+      "existing_data_route": "Repository Shopify adapter: sale-items collection; not an affiliate feed license.",
+      "restrictions": ["No verified affiliate terms or publisher approval.", "Any personal referral/rewards offer needs separate classification."],
+      "confidence": "unverified", "verified_on": null, "attempted_on": "2026-11-01",
+      "verification_state": "environment_blocked", "approval": "not_requested", "enabled": false,
+      "lead_claims": [], "sources": ["circuit-home"]
+    },
+    {
+      "id": "powers", "retailer": "Powers BMX", "catalog_status": "current",
+      "retailer_url": "https://www.powersbmx.com/", "application_url": null,
+      "program_lead_url": null, "network": null, "commission": null, "cookie_days": null,
+      "us_eligibility": "unverified", "deal_coupon_policy": "unverified",
+      "deep_link_access": "unverified", "affiliate_data_feed_access": "unverified",
+      "existing_data_route": "Repository Shopify adapter: clearance and optional black-friday-deals; not an affiliate feed license.",
+      "restrictions": ["No verified affiliate terms or publisher approval.", "Sale/coupon listings do not establish permission to advertise exclusive codes."],
+      "confidence": "unverified", "verified_on": null, "attempted_on": "2026-11-01",
+      "verification_state": "environment_blocked", "approval": "not_requested", "enabled": false,
+      "lead_claims": [], "sources": ["powers-home"]
+    },
+    {
+      "id": "source_us", "retailer": "Source BMX US", "catalog_status": "current",
+      "retailer_url": "https://us.sourcebmx.com/", "application_url": null,
+      "program_lead_url": "https://www.flexoffers.com/affiliate-programs/sourcebmx-us-affiliate-program/",
+      "network": null, "commission": null, "cookie_days": null,
+      "us_eligibility": "unverified", "deal_coupon_policy": "unverified",
+      "deep_link_access": "unverified", "affiliate_data_feed_access": "unverified",
+      "existing_data_route": "Repository US Shopify adapter: four sale collections; US and UK merchant/feed coverage must not be conflated.",
+      "restrictions": ["FlexOffers directory lead is not approval or proof of a currently active program.", "Confirm allowed US destination host, currency, publisher country, attribution, reversals, coupon/comparison-site policy and feed rights."],
+      "confidence": "lead_only", "verified_on": null, "attempted_on": "2026-11-01",
+      "verification_state": "environment_blocked", "approval": "not_requested", "enabled": false,
+      "lead_claims": [
+        {"source": "source-flexoffers", "claim": "Issue #136 reports a FlexOffers Source BMX US listing at 1.6% commission and 30-day cookie. Not independently reverified.", "commission_percent": 1.6, "cookie_days": 30, "verified": false},
+        {"source": "bmxunion-disclosure", "claim": "Issue #136 cites historical Source affiliate participation by BMX Union; not current ShredDeals eligibility or approval.", "verified": false}
+      ],
+      "sources": ["source-flexoffers", "bmxunion-disclosure", "source-home"]
+    },
+    {
+      "id": "danscomp", "retailer": "Dan's Comp", "catalog_status": "expansion_candidate",
+      "retailer_url": "https://www.danscomp.com/", "application_url": null,
+      "program_lead_url": "https://www.danscomp.com/sponsorship-requests/i792",
+      "network": null, "commission": null, "cookie_days": null,
+      "us_eligibility": "unverified", "deal_coupon_policy": "unverified",
+      "deep_link_access": "unverified", "affiliate_data_feed_access": "unverified",
+      "existing_data_route": "No Dan's Comp BMX adapter in current sports/bmx/stores.py. Prefer a permitted licensed feed before custom scraping.",
+      "restrictions": ["Follow the official sponsorship page's Affiliate Program Page link; destination and current terms remain unverified.", "Sponsorship approval is not an affiliate contract. Do not assume a network, rate or cookie duration."],
+      "confidence": "lead_only", "verified_on": null, "attempted_on": "2026-11-01",
+      "verification_state": "environment_blocked", "approval": "not_requested", "enabled": false,
+      "lead_claims": [{"source": "danscomp-sponsorship", "claim": "Issue #136 reports an Affiliate Program Page link on the official sponsorship page. Application destination, commission and terms are pending retrieval.", "verified": false}],
+      "sources": ["danscomp-sponsorship"]
+    }
+  ],
+  "sources": [
+    {"id": "danscomp-sponsorship", "url": "https://www.danscomp.com/sponsorship-requests/i792", "type": "merchant_lead", "retrieval": "environment_blocked"},
+    {"id": "source-flexoffers", "url": "https://www.flexoffers.com/affiliate-programs/sourcebmx-us-affiliate-program/", "type": "network_directory_lead", "retrieval": "environment_blocked"},
+    {"id": "bmxunion-disclosure", "url": "https://bmxunion.com/affiliate-disclosure/", "type": "historical_third_party_lead", "retrieval": "environment_blocked"},
+    {"id": "avantlink-publishers", "url": "https://www.avantlink.com/publishers/", "type": "adjacent_network_lead", "retrieval": "environment_blocked"},
+    {"id": "albes-home", "url": "https://www.albes.com/", "type": "merchant_home", "retrieval": "environment_blocked"},
+    {"id": "circuit-home", "url": "https://www.circuitbmx.com/", "type": "merchant_home", "retrieval": "environment_blocked"},
+    {"id": "powers-home", "url": "https://www.powersbmx.com/", "type": "merchant_home", "retrieval": "environment_blocked"},
+    {"id": "source-home", "url": "https://us.sourcebmx.com/", "type": "merchant_home", "retrieval": "environment_blocked"}
+  ]
+}

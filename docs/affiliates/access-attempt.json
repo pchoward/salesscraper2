@@ -1,0 +1,107 @@
+{
+  "observed_at_utc": "2026-11-01T23:33:50.950722+00:00",
+  "purpose": "public-source research only",
+  "program_approval": false,
+  "tracking_enabled": false,
+  "review_required": true,
+  "sources": [
+    {
+      "source": "danscomp-sponsorship",
+      "url": "https://www.danscomp.com/sponsorship-requests/i792",
+      "access": "robots_unavailable",
+      "status": "not_fetched",
+      "review_required": true
+    },
+    {
+      "source": "source-flexoffers",
+      "url": "https://www.flexoffers.com/affiliate-programs/sourcebmx-us-affiliate-program/",
+      "access": "robots_unavailable",
+      "status": "not_fetched",
+      "review_required": true
+    },
+    {
+      "source": "bmxunion-disclosure",
+      "url": "https://bmxunion.com/affiliate-disclosure/",
+      "access": "robots_unavailable",
+      "status": "not_fetched",
+      "review_required": true
+    },
+    {
+      "source": "avantlink-publishers",
+      "url": "https://www.avantlink.com/publishers/",
+      "access": "robots_unavailable",
+      "status": "not_fetched",
+      "review_required": true
+    },
+    {
+      "source": "albes-home",
+      "url": "https://www.albes.com/",
+      "access": "robots_unavailable",
+      "status": "not_fetched",
+      "review_required": true
+    },
+    {
+      "source": "circuit-home",
+      "url": "https://www.circuitbmx.com/",
+      "access": "robots_unavailable",
+      "status": "not_fetched",
+      "review_required": true
+    },
+    {
+      "source": "powers-home",
+      "url": "https://www.powersbmx.com/",
+      "access": "robots_unavailable",
+      "status": "not_fetched",
+      "review_required": true
+    },
+    {
+      "source": "source-home",
+      "url": "https://us.sourcebmx.com/",
+      "access": "robots_unavailable",
+      "status": "not_fetched",
+      "review_required": true
+    }
+  ],
+  "requests": [
+    {
+      "url": "https://www.danscomp.com/robots.txt",
+      "status": "environment_proxy_denied",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+      "url": "https://www.flexoffers.com/robots.txt",
+      "status": "environment_proxy_denied",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+      "url": "https://bmxunion.com/robots.txt",
+      "status": "environment_proxy_denied",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+      "url": "https://www.avantlink.com/robots.txt",
+      "status": "environment_proxy_denied",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+      "url": "https://www.albes.com/robots.txt",
+      "status": "environment_proxy_denied",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+      "url": "https://www.circuitbmx.com/robots.txt",
+      "status": "environment_proxy_denied",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+      "url": "https://www.powersbmx.com/robots.txt",
+      "status": "environment_proxy_denied",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    },
+    {
+      "url": "https://us.sourcebmx.com/robots.txt",
+      "status": "environment_proxy_denied",
+      "error": "Tunnel connection failed: 403 Forbidden"
+    }
+  ]
+}
