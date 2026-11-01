@@ -404,3 +404,11 @@ python -m previews.check_navigation --preview-dir /tmp/shreddeals-preview \
 The browser check serves the preview temporarily, exercises the original Skate
 controls plus navigation/history/keyboard/mobile behavior, saves screenshots,
 and stops its server. See [architecture, limitations, and screenshots](docs/shreddeals-architecture.md).
+
+The proposed public homepage integration is documented in
+[docs/shreddeals-homepage.md](docs/shreddeals-homepage.md), including the exact
+before/after URL contract. After owner review/merge, `/salesscraper2/` will show
+ShredDeals with Skate, Ski, MTB and BMX; `sale_items_chart.html` remains the
+standalone SkateDeals page with existing links and filters. Public assets are
+generated with `python -m previews.publish`; this command does not scrape or send
+notifications. The change is currently on a review branch, not deployed.

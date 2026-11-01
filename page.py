@@ -1852,6 +1852,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "<!DOCTYPE html>",
         '<html lang="en">',
         "<head>",
+        '<script>if(window.parent!==window&&!window.shredBridgeInstalled){'
+        'const bridge=document.createElement("script");bridge.src="navigation/skate-bridge.js";'
+        'bridge.async=false;document.head.appendChild(bridge);}</script>',
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         f"<title>SkateDeals | {escape(today)}</title>",

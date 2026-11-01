@@ -101,15 +101,16 @@
             const current = state(win.location.href, config);
             tabs(sportTabs, config.sports, current.sport.id, "sport-", "sportPanel", id => choose(id, "sport"));
             doc.getElementById("sportPanel").setAttribute("aria-labelledby", "sport-" + current.sport.id);
-            doc.title = config.brand.name + " · " + current.sport.label + " preview";
+            doc.title = config.brand.name + " · " + current.sport.label + (config.production ? "" : " preview");
             const skate = current.sport.id === "skate";
             frame.hidden = !skate;
             frame.setAttribute("aria-hidden", String(!skate));
             frame.tabIndex = skate ? 0 : -1;
             empty.hidden = skate;
             const note = doc.getElementById("contextNote");
+            note.hidden = !!config.production;
             if (skate) {
-                note.textContent = "Skate · saved SkateDeals catalog. Development preview; live delivery is disabled.";
+                note.textContent = config.production ? "" : "Skate · saved SkateDeals catalog. Development preview; live delivery is disabled.";
                 const target = skateURL(win.location.href, config).href;
                 if (frame.dataset.currentURL !== target) {
                     delete frame.dataset.ready;
@@ -117,9 +118,9 @@
                     frame.src = target;
                 }
             } else {
-                note.textContent = current.sport.label + " · navigation prototype";
+                note.textContent = config.production ? "" : current.sport.label + " · navigation prototype";
                 doc.getElementById("emptyTitle").textContent = current.sport.label;
-                doc.getElementById("emptyDescription").textContent = "Inventory for " + current.sport.label + " has not been connected.";
+                doc.getElementById("emptyDescription").textContent = config.production ? "Explore Skate deals while we add " + current.sport.label + " deals." : "Inventory for " + current.sport.label + " has not been connected.";
             }
             if (focusGroup) {
                 const target = doc.getElementById("sport-" + current.sport.id);

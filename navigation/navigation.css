@@ -1,0 +1,38 @@
+:root { color-scheme: light; --ink:#20252c; --muted:#616b79; --line:#d5dbe3; --blue:#2563eb; --paper:#fff; --ground:#f4f6f8; }
+* { box-sizing:border-box; }
+body { overflow:hidden; margin:0; height:100vh; height:100dvh; display:flex; flex-direction:column; background:var(--ground); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; }
+button { font:inherit; cursor:pointer; color:inherit; }
+button:focus-visible,a:focus-visible { outline:3px solid var(--blue); outline-offset:3px; }
+[hidden] { display:none!important; }
+.skip { position:absolute; left:12px; top:-80px; padding:12px; background:white; z-index:20; }
+.skip:focus { top:8px; }
+.shell-header { background:var(--paper); border-bottom:1px solid var(--line); flex-shrink:0; }
+.top-row { display:flex; align-items:center; gap:24px; padding:8px 20px 0; }
+.brand { border:0; background:none; padding:8px 0; font-size:21px; font-weight:750; letter-spacing:-.6px; }
+.top-row nav { flex:1; min-width:0; }
+.preview-badge { color:var(--muted); font-size:11px; border:1px solid var(--line); border-radius:4px; padding:4px 7px; white-space:nowrap; }
+[role=tablist] { display:flex; gap:4px; }
+[role=tab] { border:0; border-bottom:3px solid transparent; background:transparent; padding:11px 18px; font-size:14px; min-height:44px; white-space:nowrap; }
+#sportTabs [aria-selected=true] { border-bottom-color:var(--blue); font-weight:700; }
+main { flex:1; min-height:0; overflow:auto; }
+#catalogPanel { height:100%; display:flex; flex-direction:column; }
+#contextNote { margin:0; padding:5px 16px; font-size:11px; color:var(--muted); background:#eef2f6; border-bottom:1px solid var(--line); flex-shrink:0; }
+#skateFrame { display:block; width:100%; flex:1; min-height:0; border:0; background:white; }
+#comingSoon { align-self:center; width:min(720px,calc(100% - 32px)); margin:clamp(32px,9vh,100px) 16px; padding:32px; background:var(--paper); border:1px solid var(--line); border-radius:8px; }
+.empty-kicker { color:var(--muted); font-size:11px; letter-spacing:1.5px; }
+h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
+.empty-lead { font-weight:650; font-size:18px; }
+#comingSoon p { line-height:1.6; }
+.empty-detail { color:var(--muted); font-size:13px; }
+#backToSkate { margin-top:16px; border:1px solid var(--line); border-radius:4px; background:white; padding:10px 14px; font-size:13px; }
+@media(max-width:600px) {
+ .top-row { display:grid; grid-template-columns:1fr auto; padding:5px 12px 0; gap:0 10px; }
+ .brand { justify-self:start; font-size:18px; }
+ .preview-badge { grid-column:2; grid-row:1; font-size:9px; }
+ .top-row nav { grid-column:1/-1; width:100%; }
+ #sportTabs { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+ #sportTabs [role=tab] { padding:7px 10px; font-size:13px; }
+ #contextNote { font-size:10px; padding:5px 12px; }
+ #comingSoon { padding:22px; margin-top:32px; }
+ h1 { font-size:25px; }
+}

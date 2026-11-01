@@ -70,12 +70,10 @@ def build(out_dir, label=""):
         history = json.loads((ROOT / rebuild_page.HISTORY_PATH).read_text(encoding="utf-8"))
         html = build_report_html(data, {}, history)
     page.write_page(mark_preview(html, label), str(out / "sale_items_chart.html"))
-    (out / "index.html").write_text(
-        '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex,nofollow">'
-        '<meta http-equiv="refresh" content="0; url=sale_items_chart.html">'
-        '<a href="sale_items_chart.html">SkateDeals preview</a>\n',
-        encoding="utf-8",
-    )
+    from previews.publish import publish
+    publish(out)
+    homepage = out / "index.html"
+    homepage.write_text(mark_preview(homepage.read_text(encoding="utf-8"), label), encoding="utf-8")
     (out / "_headers").write_text("/*\n  X-Robots-Tag: noindex, nofollow\n", encoding="utf-8")
     return sorted(path.name for path in out.iterdir())
 

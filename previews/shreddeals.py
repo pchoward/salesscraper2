@@ -40,6 +40,20 @@ def skate_query_keys():
     return sorted(keys)
 
 
+def render_shell(config, asset_prefix=''):
+    template = (HERE/'shell.html').read_text()
+    template = template.replace('href="navigation.css"', f'href="{asset_prefix}navigation.css"')
+    template = template.replace('src="navigation.js"', f'src="{asset_prefix}navigation.js"')
+    if config.get('production'):
+        template = template.replace('<title>ShredDeals development preview</title>', '<title>ShredDeals</title>')
+        template = template.replace('<span class="preview-badge">Development prototype</span>', '')
+        template = template.replace('CATALOG PREVIEW', 'SHREDDEALS')
+        template = template.replace('No products, price histories or alerts are active for this sport. Skate deals stay in Skate.', 'Skate deals are available now while we add more sports.')
+        template = template.replace('This prototype needs JavaScript for navigation. The original SkateDeals page remains available separately.', 'Sport navigation needs JavaScript. <a href="sale_items_chart.html">Open SkateDeals</a>.')
+    payload = json.dumps(config).replace('<', '\\u003c')
+    return template.replace('__CONFIG__', payload)
+
+
 def build(output, source=SOURCE, config_path=HERE/'sports.json'):
     source = Path(source).resolve()
     output = Path(output).absolute()
@@ -70,9 +84,7 @@ def build(output, source=SOURCE, config_path=HERE/'sports.json'):
     shutil.copyfile(history, output/'skate/history.json')
     for name in ('navigation.js','navigation.css','skate-bridge.js'):
         shutil.copyfile(HERE/name, output/name)
-    template = (HERE/'shell.html').read_text()
-    payload = json.dumps(config).replace('<','\\u003c')
-    (output/'index.html').write_text(template.replace('__CONFIG__',payload))
+    (output/'index.html').write_text(render_shell(config))
     manifest = {'development_only':True, 'source_page_sha256':hashlib.sha256(page.read_bytes()).hexdigest(),
                 'source_history_sha256':hashlib.sha256(history.read_bytes()).hexdigest(),
                 'catalogs':{'skate':'saved public catalog','bmx':None,'ski':None,'mtb':None},

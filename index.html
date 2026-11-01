@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="script-src 'self'; connect-src 'self'; frame-src 'self'; form-action 'none'; object-src 'none'; base-uri 'none'">
+<title>ShredDeals</title><link rel="stylesheet" href="navigation/navigation.css">
+<script type="application/json" id="sportConfig">{"brand": {"name": "ShredDeals", "domain": null}, "defaultSport": "skate", "sports": [{"id": "skate", "label": "Skate", "catalog": "sale_items_chart.html", "categories": ["Decks", "Wheels", "Trucks", "Bearings", "Completes", "Sneakers", "Accessories", "Protection"], "facets": {"Decks": ["brand", "width", "length", "wheelbase", "color"], "Wheels": ["brand", "diameter", "durometer", "shape", "color"], "Trucks": ["brand", "size", "height", "construction"], "Bearings": ["brand", "abec"], "Sneakers": ["brand", "shoeSize"], "Protection": ["brand", "type", "size"]}}, {"id": "ski", "label": "Ski", "catalog": null, "categories": [], "facets": {}}, {"id": "mtb", "label": "MTB", "catalog": null, "categories": [], "facets": {}}, {"id": "bmx", "label": "BMX", "catalog": null, "categories": [], "facets": {}}], "production": true, "skateQueryKeys": ["abec", "added", "baseline", "brand", "change", "construction", "diameter", "discount", "discountmax", "dropped", "duro", "group", "highlights", "interval", "kinds", "length", "low", "max", "min", "protsize", "prottype", "q", "scoremax", "scoremin", "shape", "shoesize", "since", "sort", "store", "truckheight", "trucksize", "type", "visit", "visitmode", "watching", "wheelbase", "width"]}</script><script src="navigation/navigation.js" defer></script></head>
+<body><a class="skip" href="#sportPanel">Skip navigation</a>
+<header class="shell-header"><div class="top-row"><button id="brandHome" class="brand" type="button">ShredDeals</button>
+<nav aria-label="Sports"><div id="sportTabs" role="tablist" aria-label="Sports"></div></nav>
+</div>
+</header>
+<main id="sportPanel" role="tabpanel" tabindex="-1"><section id="catalogPanel">
+<p id="contextNote" role="status" aria-live="polite"></p>
+<iframe id="skateFrame" title="SkateDeals — existing catalog and controls" hidden></iframe>
+<section id="comingSoon" hidden><span class="empty-kicker">SHREDDEALS</span><h1 id="emptyTitle"></h1><p class="empty-lead">Coming soon / no catalog yet</p>
+<p id="emptyDescription"></p><p class="empty-detail">Skate deals are available now while we add more sports.</p>
+<button id="backToSkate" type="button">Browse Skate deals</button></section>
+<noscript>Sport navigation needs JavaScript. <a href="sale_items_chart.html">Open SkateDeals</a>.</noscript>
+</section></main></body></html>
