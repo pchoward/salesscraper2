@@ -1,10 +1,31 @@
-# Issue #123 — BMX Freestyle readiness (blocked research stage)
+# Issue #123 — BMX Freestyle readiness and Actions handoff
 
 Base: main `0d5b1c6`. This branch intentionally does not contain the pending
 sport-engine changes or duplicate issue #122's header. No production scrape,
 engine/header edit, production data/state write, delivery, merge or deployment.
 
-## Verified observations
+
+## Current route: Claude's PR #124 supersedes the local-network blocker
+
+The owner relayed Claude's coordination update: #124 (`claude/sport-engine`)
+provides the sport engine, first Albe's BMX adapter and manual **ShredDeals -
+Preview Site** workflow. Retailer collection runs in GitHub Actions, which can
+reach the stores; **local domain changes are not required for this plan**.
+The Dan's Comp/Source BMX observations below remain accurate historical evidence,
+but do not block the first Albe's preview. Do not duplicate Claude's adapter or
+engine. Merge/release decisions remain with the owner.
+
+Sequence: #124, Codex's `codex/unified-shreddeals-header`, then Claude's small
+native-header integration PR. Only that last integration changes the live
+homepage. Once the engine is merged, #123 should validate the real Actions output,
+retailer permission evidence, freestyle versus race selection, 20/22-inch
+attributes, availability, observed-history versus compare-at discounts, counts,
+health protection and desktop/mobile behavior. The current engine's BMX rules
+are broad category/apparel rules; freestyle/race and detailed fit claims must be
+verified rather than assumed. Dan's Comp and Source BMX remain optional later
+candidates, not requirements before the Albe's preview.
+
+## Historical local observations
 
 On November 1, 2026, attempts to read the candidates' `robots.txt` both returned
 **environment proxy CONNECT 403**. These are not retailer HTTP refusals.
@@ -39,7 +60,7 @@ retailer error distinction, crawl delays, terms capture, unknown product counts,
 blocked/foreign terms and output isolation. Fixtures are synthetic access-policy
 examples, not retailer product evidence.
 
-## Blockers and handoff
+## Historical blockers and remaining handoff
 
 1. **Network**: allow `www.danscomp.com`, `www.sourcebmx.com` and `api.github.com`.
    Existing saved custom domains must be preserved. The current runtime has no
