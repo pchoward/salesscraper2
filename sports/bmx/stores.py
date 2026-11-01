@@ -1,5 +1,9 @@
 """BMX stores. Each returns scrapers like stores/registry.py's skate stores.
 
+Circuit BMX second (Shopify, a smaller sale collection). Its product types
+weren't sampled yet, so types not in TYPES are sorted by title words; the
+scrape log's feed summary shows what it holds.
+
 Albe's BMX first: Shopify, with a sale collection of ~750 bikes and parts
 (store probe, 2026-11-01). Its product types map to the BMX categories
 (sports/__init__.py, grouped like Dan's Comp and Circuit BMX); types not
@@ -71,15 +75,28 @@ ALBES = shopify.ShopifyStore(
     details=details,
 )
 
+CIRCUIT = shopify.ShopifyStore(
+    "Circuit BMX",
+    "Circuit BMX",
+    "https://www.circuitbmx.com",
+    collection="sale-items",
+    types=TYPES,
+    brand_of=brands.for_sport(sports.BMX),
+    own_vendor="circuit",
+    title_part=title_part,
+    details=details,
+    unknown_by_title=True,
+)
+
+STORES = (ALBES, CIRCUIT)
+
 PARTS = ("Bikes", "Frames & Forks", "Steering", "Drivetrain", "Wheels", "Wheel Parts", "Tires", "Seating", "Braking")
 
 
 def scrapers():
-    return shopify.scrapers_for(ALBES, PARTS)
+    return [scraper for store in STORES for scraper in shopify.scrapers_for(store, PARTS)]
 
 
-def preview():
-    import sports
-
+def preview(store=ALBES):
     with sports.BMX.active():
-        return shopify.preview(ALBES, PARTS)
+        return shopify.preview(store, PARTS)

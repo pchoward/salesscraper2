@@ -203,7 +203,7 @@ class AlbesTests(unittest.TestCase):
         ]}
         kept = {}
         with sports.BMX.active():
-            for store_scraper in stores.scrapers():
+            for store_scraper in stores.shopify.scrapers_for(stores.ALBES, stores.PARTS):
                 for item in store_scraper.parse(json.dumps(feed)):
                     kept[item["name"]] = item["part"]
         self.assertEqual(kept, {"Cult Gateway Frame": "Frames & Forks", "Odyssey Clutch Freecoaster Hub": "Wheel Parts"})
@@ -230,7 +230,7 @@ class BmxBrandTests(unittest.TestCase):
 
         kept = []
         with sports.BMX.active():
-            for store_scraper in stores.scrapers():
+            for store_scraper in stores.shopify.scrapers_for(stores.ALBES, stores.PARTS):
                 kept += store_scraper.parse(json.dumps(self.FEED))
         return {item["name"]: item.get("brand") for item in kept}
 
@@ -286,7 +286,7 @@ class BmxSpecTests(unittest.TestCase):
         ]}
         kept = {}
         with sports.BMX.active():
-            for store_scraper in stores.scrapers():
+            for store_scraper in stores.shopify.scrapers_for(stores.ALBES, stores.PARTS):
                 for item in store_scraper.parse(json.dumps(feed)):
                     kept[item["name"]] = (item["part"], item.get("kind"), item.get("wheel_size"))
         self.assertEqual(kept, {
@@ -303,6 +303,35 @@ class BmxSpecTests(unittest.TestCase):
         catalog = json.loads(html.split('id="catalogJson"', 1)[1].split(">", 1)[1].split("</script>", 1)[0])
         entry = next(iter(catalog["items"].values()))
         self.assertEqual((entry["kind"], entry["wheel_size"]), ("Hubs", "20"))
+
+
+class CircuitTests(unittest.TestCase):
+    def test_second_store_reads_unknown_types_by_title(self):
+        from sports.bmx import stores
+
+        self.assertEqual(stores.CIRCUIT.sale_json, "https://www.circuitbmx.com/collections/sale-items/products.json")
+        self.assertEqual({scraper.shop.store for scraper in sports.BMX.build_scrapers()}, {"Albe's BMX", "Circuit BMX"})
+        feed = {"products": [
+            {"title": "Plastic Pegs 4.5in", "vendor": "Odyssey", "handle": "pegs", "product_type": "Small Parts",
+             "variants": [{"id": 1, "price": "20", "compare_at_price": "30"}]},
+            {"title": "Logo Hoodie", "vendor": "Circuit BMX", "handle": "hoodie", "product_type": "Softgoods",
+             "variants": [{"id": 2, "price": "40", "compare_at_price": "60"}]},
+            {"title": "Pivotal Seat", "vendor": "Cult", "handle": "seat", "product_type": "Seats",
+             "variants": [{"id": 3, "price": "25", "compare_at_price": "35"}]},
+        ]}
+        kept = {}
+        with sports.BMX.active():
+            for store_scraper in stores.shopify.scrapers_for(stores.CIRCUIT, stores.PARTS):
+                for item in store_scraper.parse(json.dumps(feed)):
+                    kept[item["name"]] = (item["part"], item.get("kind"), item["store"])
+        self.assertEqual(kept, {"Odyssey Plastic Pegs 4.5in": ("Wheel Parts", "Pegs", "Circuit BMX"),
+                                "Cult Pivotal Seat": ("Seating", "Seats", "Circuit BMX")})
+
+    def test_skate_stores_still_skip_unknown_types(self):
+        from stores import shopify
+
+        store = shopify.ShopifyStore("Shop", "Shop", "https://shop.example")
+        self.assertIsNone(shopify.part_for(store, "Mystery", "Baker Deck 8.25"))
 
 
 if __name__ == "__main__":
