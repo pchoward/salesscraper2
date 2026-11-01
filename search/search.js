@@ -22,19 +22,93 @@
     const FUZZY = 0.2;
     const FUZZY_MIN_TERM = 3;
 
-    function normalize(text) {
-        return String(text == null ? "" : text)
+    // ---- Normalization -------------------------------------------------
+
+    // Durometer on the A scale: Spitfire's "d" already is; B reads 20 lower.
+    function duroToA(token) {
+        const match = /^(\d{2,3})([abd])$/.exec(String(token || "").trim().toLowerCase());
+        if (!match) return "";
+        const value = parseInt(match[1], 10) + (match[2] === "b" ? 20 : 0);
+        return value + "a";
+    }
+
+    // Lowercase words with skate units unified: "O.J." -> "oj", "54 mm" ->
+    // "54mm", 8.25" and "8.25in" -> "8.25", "101a/95a" -> "101a 95a", and
+    // every durometer on the A scale ("84b" -> "104a").
+    function basic(text) {
+        const spaced = String(text == null ? "" : text)
             .toLowerCase()
             .normalize("NFKD")
-            .replace(/[̀-ͯ]/g, "")
-            .replace(/[^a-z0-9.]+/g, " ")
-            .replace(/(^|\s)\.+|\.+(?=\s|$)/g, " ")
-            .replace(/\s+/g, " ")
-            .trim();
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/\b(?:[a-z]\.){2,}/g, match => match.replace(/\./g, "") + " ")
+            .replace(/(\d)\s*mm\b/g, "$1mm ")
+            .replace(/(\d)\s*(?:"|\u201d|\u2033|''|inch(?:es)?\b|in\b)/g, "$1 ")
+            .replace(/[^a-z0-9.]+/g, " ");
+        return words(spaced).map(token => {
+            const clean = /^\d+\.\d+/.test(token) ? token.replace(/\.+$/, "") : token.replace(/\./g, "");
+            return duroToA(clean) || clean;
+        }).filter(Boolean).join(" ");
+    }
+
+    // Aliases (search/aliases.json): phrase -> canonical, both normalized.
+    let vocabulary = { phrases: new Map(), longest: 1, stores: new Map(), categories: new Map(), terms: [] };
+
+    function configure(aliases) {
+        const phrases = new Map();
+        const stores = new Map();
+        const categories = new Map();
+        const terms = [];
+        let longest = 1;
+        function add(map, canonical, alias) {
+            const key = basic(alias);
+            if (!key) return;
+            map.set(key, canonical);
+            longest = Math.max(longest, key.split(" ").length);
+        }
+        ["brands", "models"].forEach(group => {
+            Object.keys((aliases && aliases[group]) || {}).forEach(name => {
+                const canonical = basic(name);
+                terms.push({ group: group, name: name, key: canonical });
+                add(phrases, canonical, name);
+                (aliases[group][name] || []).forEach(alias => add(phrases, canonical, alias));
+            });
+        });
+        [["stores", stores], ["categories", categories]].forEach(([group, map]) => {
+            Object.keys((aliases && aliases[group]) || {}).forEach(name => {
+                add(map, name, name);
+                (aliases[group][name] || []).forEach(alias => add(map, name, alias));
+            });
+        });
+        vocabulary = { phrases: phrases, longest: longest, stores: stores, categories: categories, terms: terms };
+        return vocabulary;
+    }
+
+    // Greedy, longest phrase first, so "powell peralta" is one brand and
+    // never "powell peralta peralta".
+    function applyAliases(tokens) {
+        const out = [];
+        for (let i = 0; i < tokens.length;) {
+            let matched = 0;
+            for (let size = Math.min(vocabulary.longest, tokens.length - i); size > 0; size--) {
+                const canonical = vocabulary.phrases.get(tokens.slice(i, i + size).join(" "));
+                if (canonical) {
+                    out.push(canonical);
+                    matched = size;
+                    break;
+                }
+            }
+            if (matched) i += matched;
+            else out.push(tokens[i++]);
+        }
+        return out;
+    }
+
+    function normalize(text) {
+        return applyAliases(words(basic(text))).join(" ");
     }
 
     function words(text) {
-        return text ? text.split(" ").filter(Boolean) : [];
+        return text ? String(text).split(/\s+/).filter(Boolean) : [];
     }
 
     // One searchable document per deal row. ``row`` is anything with a
@@ -46,9 +120,16 @@
             name: data.name || "",
             brand: data.brand || "",
             category: data.part || "",
-            store: data.store || "",
-            tags: [data.shape, data.duros, data.size].filter(Boolean).join(" ")
+            store: storeWords(data.store || ""),
+            tags: [data.shape, String(data.duros || "").replace(/,/g, " "), data.size].filter(Boolean).join(" ")
         };
+    }
+
+    // "SkateWarehouse" is also "skate warehouse": every way the store is typed.
+    function storeWords(store) {
+        const names = [store];
+        vocabulary.stores.forEach((canonical, alias) => { if (canonical === store) names.push(alias); });
+        return names.join(" ");
     }
 
     function prepare(doc) {
@@ -66,7 +147,8 @@
             searchOptions: {
                 boost: BOOST,
                 prefix: true,
-                fuzzy: term => (term.length >= FUZZY_MIN_TERM ? FUZZY : false),
+                // Sizes and durometers are exact: 104a is not a typo of 101a.
+                fuzzy: term => (term.length >= FUZZY_MIN_TERM && !/\d/.test(term) ? FUZZY : false),
                 combineWith: "AND"
             }
         });
@@ -99,7 +181,20 @@
         return hits;
     }
 
+    // For lists outside the index (Disappeared, All-time lows): every query
+    // word starts some word of ``hay``, after normalization and aliases.
+    function matchesText(query, hay) {
+        const wanted = words(normalize(query));
+        if (!wanted.length) return true;
+        const have = words(normalize(hay));
+        return wanted.every(term => have.some(word => word.startsWith(term)));
+    }
+
     return {
+        configure: configure,
+        matchesText: matchesText,
+        basic: basic,
+        duroToA: duroToA,
         normalize: normalize,
         docFromRow: docFromRow,
         createIndex: createIndex,

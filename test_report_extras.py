@@ -627,6 +627,8 @@ if (body.indexOf("if (!specKeyActive(facet.stateKey, viewPart)) continue;") < 0)
         source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
         compare = source[source.find("const SORT_NUMERIC"):source.find("function sortBy(")]
         matches = source[source.find("function sectionMatches("):source.find("function applySectionFilters(")]
+        # Without SkateSearch loaded, the helper keeps plain substring matching.
+        matches += source[source.find("function searchHayMatches("):source.find("// How well a deal matches")]
         self.assertIn("compareSort(a, b, key, direction)", source[source.find("function sortBy("):source.find("function syncCardOrder(")])
         self.assertIn("compareSort(a, b, key, direction)", source[source.find("function sortSection("):source.find("function sectionMatches(")])
         script = """

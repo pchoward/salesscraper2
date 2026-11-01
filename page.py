@@ -226,6 +226,12 @@ def _alerts_config_script(config=None):
     return "<script>window.SKATEDEALS_ALERTS = " + literal.replace("</", "<\\/") + ";</script>"
 
 
+def _search_aliases():
+    """search/aliases.json as a script literal: compact, and nothing in it can end the <script>."""
+    aliases = json.loads(_read_asset("search/aliases.json"))
+    return json.dumps(aliases, separators=(",", ":"), ensure_ascii=False).replace("<", "\\u003c")
+
+
 def _read_asset(name):
     path = os.path.join(_HERE, name)
     with open(path, "r", encoding="utf-8") as handle:
@@ -2775,7 +2781,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     )
     chunks.append(
         # Search: MiniSearch (vendored, MIT) and SkateDeals' search module.
-        f"<script>{_read_asset('search/vendor/minisearch.js')}\n{_read_asset('search/search.js')}</script>"
+        f"<script>{_read_asset('search/vendor/minisearch.js')}\n{_read_asset('search/search.js')}\n"
+        f"SkateSearch.configure({_search_aliases()});</script>"
     )
     chunks.append(
         f"<script>const WIDTH_RANGES = {ranges_literal};\n"

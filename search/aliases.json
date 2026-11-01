@@ -1,0 +1,247 @@
+{
+  "_about": "Skate vocabulary for search. brands and models map a canonical term to the other ways people type it; both product text and typed queries are rewritten to the canonical term, so either spelling finds the other. categories and stores turn a typed word into a filter (\"wheels\", \"tactics\"); keep those to words that mean the whole category or store. Matching ignores case and punctuation, and a phrase (\"formula 4\") matches as a whole. Edit freely; no code changes needed.",
+  "brands": {
+    "Spitfire": [
+      "spitty",
+      "spitfires"
+    ],
+    "Independent": [
+      "indy",
+      "indys",
+      "indies",
+      "indie"
+    ],
+    "OJ": [
+      "o.j.",
+      "o j",
+      "ojs",
+      "oj's"
+    ],
+    "Bones": [
+      "bonez"
+    ],
+    "Thunder": [
+      "thunders"
+    ],
+    "Venture": [
+      "ventures"
+    ],
+    "Ace": [
+      "aces"
+    ],
+    "Powell Peralta": [
+      "powell",
+      "powell-peralta",
+      "powellperalta"
+    ],
+    "Anti Hero": [
+      "antihero",
+      "anti-hero"
+    ],
+    "Santa Cruz": [
+      "santacruz",
+      "santa-cruz"
+    ],
+    "Deathwish": [
+      "death wish"
+    ],
+    "Fucking Awesome": [
+      "fa",
+      "f.a."
+    ],
+    "Bronson Speed Co": [
+      "bronson",
+      "bronsons",
+      "bronson speed"
+    ],
+    "Andale": [],
+    "Satori": [],
+    "Krux": [],
+    "Primitive": [
+      "prim"
+    ],
+    "Real": [],
+    "Krooked": [
+      "crooked"
+    ],
+    "enjoi": [
+      "enjoy"
+    ],
+    "Mob": [],
+    "Shake Junt": [
+      "shakejunt"
+    ]
+  },
+  "models": {
+    "Formula Four": [
+      "f4",
+      "formula 4",
+      "formula4",
+      "f 4"
+    ],
+    "Chubbies": [
+      "chubby",
+      "chubbie"
+    ],
+    "Bighead": [
+      "big head",
+      "bigheads",
+      "big heads"
+    ],
+    "Classic": [
+      "classics"
+    ],
+    "Conical": [
+      "conicals",
+      "conical full",
+      "full conical"
+    ],
+    "Radial": [
+      "radials"
+    ],
+    "Double Duro": [
+      "double duros",
+      "dd",
+      "dual duro",
+      "dual durometer"
+    ],
+    "Hardline": [
+      "hard line",
+      "hardlines"
+    ],
+    "Elite": [
+      "elites"
+    ],
+    "Mini Combo": [
+      "mini combos",
+      "minicombo"
+    ],
+    "EZ Edge": [
+      "ezedge",
+      "easy edge"
+    ],
+    "Stage 11": [
+      "s11",
+      "stage11",
+      "stage xi"
+    ],
+    "Hollow": [
+      "hollows",
+      "hollowed"
+    ],
+    "V Hollow": [
+      "v-hollow",
+      "v-hollows",
+      "vhollow",
+      "v hollows"
+    ],
+    "AF1": [
+      "af 1",
+      "af-1"
+    ],
+    "STF": [
+      "street tech formula"
+    ],
+    "SPF": [
+      "skatepark formula"
+    ],
+    "Reds": [
+      "bones reds"
+    ],
+    "Swiss": [],
+    "G3": [
+      "g 3"
+    ],
+    "Rider Stock": [
+      "rider-stock",
+      "riderstock"
+    ]
+  },
+  "categories": {
+    "Wheels": [
+      "wheel",
+      "wheels"
+    ],
+    "Decks": [
+      "deck",
+      "decks",
+      "board",
+      "boards"
+    ],
+    "Trucks": [
+      "truck",
+      "trucks"
+    ],
+    "Bearings": [
+      "bearing",
+      "bearings"
+    ],
+    "Completes": [
+      "complete",
+      "completes",
+      "complete skateboard",
+      "complete skateboards"
+    ],
+    "Accessories": [
+      "accessory",
+      "accessories"
+    ],
+    "Sneakers": [
+      "sneaker",
+      "sneakers",
+      "shoe",
+      "shoes",
+      "skate shoes"
+    ],
+    "Protection": [
+      "protection",
+      "protective gear",
+      "safety gear"
+    ]
+  },
+  "stores": {
+    "Zumiez": [
+      "zumiez",
+      "zumi"
+    ],
+    "Tactics": [
+      "tactics",
+      "tactics boardshop"
+    ],
+    "SkateWarehouse": [
+      "skate warehouse",
+      "skatewarehouse",
+      "sw",
+      "swh"
+    ],
+    "CCS": [
+      "ccs"
+    ],
+    "TGM": [
+      "tgm",
+      "tgm skateboards"
+    ],
+    "Deathgear": [
+      "deathgear",
+      "death gear"
+    ],
+    "Kinetic": [
+      "kinetic",
+      "kinetic skateboarding"
+    ],
+    "SPoT": [
+      "spot",
+      "skate park of tampa",
+      "skatepark of tampa"
+    ],
+    "Exodus": [
+      "exodus",
+      "exodus ride shop"
+    ],
+    "SoCal": [
+      "socal",
+      "socal skateshop",
+      "so cal"
+    ]
+  }
+}

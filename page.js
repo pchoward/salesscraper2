@@ -1294,6 +1294,13 @@ function searchMatches(row, query) {
     return (row.dataset.search || "").toLowerCase().includes(String(query).toLowerCase());
 }
 
+// Lists outside the index (Disappeared, All-time lows) match word by word.
+function searchHayMatches(hay, query) {
+    if (!query) return true;
+    if (typeof SkateSearch !== "undefined") return SkateSearch.matchesText(query, hay || "");
+    return String(hay || "").toLowerCase().includes(String(query).toLowerCase());
+}
+
 // How well a deal matches the typed search, for the Best match sort.
 function searchScore(row) {
     const hits = searchHits(state.search);
@@ -2589,8 +2596,7 @@ function sortSection(tableId, key, direction) {
 }
 
 function sectionMatches(row) {
-    const hay = (row.dataset.search || "").toLowerCase();
-    if (state.search && !hay.includes(state.search)) return false;
+    if (!searchHayMatches(row.dataset.search, state.search)) return false;
     if (state.store !== "all" && (row.dataset.store || "") !== state.store) return false;
     if (state.part !== "all" && (row.dataset.part || "") !== state.part) return false;
     if (state.brand !== "all" && !brandSame(row.dataset.brand, state.brand)) return false;
@@ -4001,8 +4007,7 @@ function goneRowMatches(row, over) {
     const brand = lift.brand != null ? lift.brand : state.brand;
     const priceMin = Object.prototype.hasOwnProperty.call(lift, "priceMin") ? lift.priceMin : state.priceMin;
     const priceMax = Object.prototype.hasOwnProperty.call(lift, "priceMax") ? lift.priceMax : state.priceMax;
-    const hay = (row.dataset.search || "").toLowerCase();
-    if (search && !hay.includes(String(search).toLowerCase())) return false;
+    if (!searchHayMatches(row.dataset.search, search)) return false;
     if (store !== "all" && (row.dataset.store || "") !== store) return false;
     if (part !== "all" && (row.dataset.part || "") !== part) return false;
     if (brand !== "all" && !brandSame(row.dataset.brand, brand)) return false;
