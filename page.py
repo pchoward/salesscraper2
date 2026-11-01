@@ -1414,6 +1414,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     # The sport's categories, branding and search vocabulary (sports/).
     # Skate's page is built exactly as before and carries no sport settings.
     sport = sport or sports.SKATE
+    # Skate's page has no SPORT_SETTINGS, so its alert and watch controls stay.
+    # Another sport hides them unless that sport has opted into delivery.
+    show_alerts = bool(sport.is_default or sport.delivery)
     part_order_for_sport = PART_ORDER if sport.is_default else sport.parts
     default_part = sport.default_part
     # Shared assets live at the site root; a page in bmx/ reaches them with ../
@@ -2093,6 +2096,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         ("watch", "Watching", "kind-watch"),
         ("hot", "Hot", "kind-hot"),
     ):
+        if key == "watch" and not show_alerts:
+            continue
         kind_buttons.append(
             f'<button type="button" class="kind-btn" data-kind="{key}" aria-pressed="false">'
             f'<span class="kind-dot {dot}" aria-hidden="true"></span>{label} '
@@ -2497,12 +2502,16 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "</form>"
             '<div class="view-row" id="viewRow"></div></div>',
         )
-        + _section(
-            "watching",
-            "Watching",
-            '<div class="tool-row">'
-            '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" '
-            'onclick="toggleWatching()">Watching</button></div>',
+        + (
+            _section(
+                "watching",
+                "Watching",
+                '<div class="tool-row">'
+                '<button type="button" class="text-btn" id="watchingToggle" aria-pressed="false" '
+                'onclick="toggleWatching()">Watching</button></div>',
+            )
+            if show_alerts
+            else ""
         )
         + _section(
             "bookmarks",
@@ -2685,8 +2694,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     # order for the "Today's drops & new first" option.
     for record in sorted(records, key=_default_sort_key):
         try:
-            row_html = _row_html(record)
-            card_html = _card_html(record)
+            row_html = _row_html(record, alerts=show_alerts)
+            card_html = _card_html(record, alerts=show_alerts)
             chunks.append(row_html[: row_html.index(">") + 1] + "</tr>")
             cell_chunks.append(row_html)
             # The fresh visit is Decks, in this same rank order. The first
@@ -2708,8 +2717,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     for index, removed in enumerate(removed_feed):
         row_id = f"g{index}"
         try:
-            chunks.append(_removed_row_html(removed, row_id))
-            pool_chunks.append(_removed_card_html(removed, row_id))
+            chunks.append(_removed_row_html(removed, row_id, alerts=show_alerts))
+            pool_chunks.append(_removed_card_html(removed, row_id, alerts=show_alerts))
             catalog_json[row_id] = {
                 "name": removed["name"],
                 "url": removed["url"],
@@ -2978,7 +2987,15 @@ def _deal_attrs(record):
     )
 
 
-def _row_html(record):
+def _watch_button():
+    return '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
+
+
+def _alert_button():
+    return '<button type="button" class="card-alert">Alert me</button>'
+
+
+def _row_html(record, alerts=True):
     item = record["item"]
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
     discount = _discount_class(item.get("price_new"), item.get("price_old"))
@@ -3001,7 +3018,7 @@ def _row_html(record):
     return (
         f'<tr class="deal-row{listed}" tabindex="0" {_deal_attrs(record)}>'
         f'<td>{_thumb(record["image"], record["name"])}</td>'
-        '<td><button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button></td>'
+        f'<td>{_watch_button() if alerts else ""}</td>'
         f'<td><span class="store-badge {_store_class(record["store"])}">{escape(record["store"])}</span></td>'
         f'<td>{escape(record["brand"])}</td>'
         f'<td><span class="part-badge">{escape(record["part"])}</span></td>'
@@ -3198,13 +3215,13 @@ def _removed_attrs(row, row_id):
     )
 
 
-def _removed_row_html(row, row_id):
+def _removed_row_html(row, row_id, alerts=True):
     seen = row.get("last_seen") or ""
     size = escape(row["width_key"]) if row.get("width_key") else "—"
     return (
         f'<tr class="deal-row filtered-out" tabindex="0" {_removed_attrs(row, row_id)}>'
         f'<td>{_thumb(row.get("image"), row["name"])}</td>'
-        '<td><button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button></td>'
+        f'<td>{_watch_button() if alerts else ""}</td>'
         f'<td><span class="store-badge {_store_class(row["store"])}">{escape(row["store"])}</span></td>'
         f'<td>{escape(row.get("brand") or "")}</td>'
         f'<td><span class="part-badge">{escape(row.get("part") or "")}</span></td>'
@@ -3240,7 +3257,7 @@ def _card_quick_button(name):
     )
 
 
-def _removed_card_html(row, row_id):
+def _removed_card_html(row, row_id, alerts=True):
     seen = _month_day(row.get("last_seen") or "")
     store = row["store"]
     name = row["name"]
@@ -3249,8 +3266,8 @@ def _removed_card_html(row, row_id):
     return (
         f'<article class="deal-card filtered-out" {_removed_attrs(row, row_id)}>'
         f'{_card_store_link(row["url"], name, store)}'
-        '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
-        '<button type="button" class="card-alert">Alert me</button>'
+        f'{_watch_button() if alerts else ""}'
+        f'{_alert_button() if alerts else ""}'
         f'<div class="media">{_thumb(row.get("image"), name, large=True)}'
         f'<span class="store-mark">{escape(store)}</span>'
         f'{_card_quick_button(name)}</div>'
@@ -3262,7 +3279,7 @@ def _removed_card_html(row, row_id):
     )
 
 
-def _card_html(record):
+def _card_html(record, alerts=True):
     item = record["item"]
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
     discount = _discount_class(item.get("price_new"), item.get("price_old"))
@@ -3299,8 +3316,8 @@ def _card_html(record):
     return (
         f'<article class="deal-card{listed}" {_deal_attrs(record)}>'
         f'{_card_store_link(record["url"], name, store)}'
-        '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
-        '<button type="button" class="card-alert">Alert me</button>'
+        f'{_watch_button() if alerts else ""}'
+        f'{_alert_button() if alerts else ""}'
         f'<div class="media">{_thumb(record["image"], name, large=True)}'
         f'<span class="store-mark">{escape(store)}</span>'
         f'{_card_quick_button(name)}</div>'

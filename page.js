@@ -5111,13 +5111,18 @@ function fillQuickView(card) {
     }
     const secondary = document.createElement("div");
     secondary.className = "quick-secondary";
-    if (typeof appendQuickAlert === "function") appendQuickAlert(actions, card);
+    // No SPORT_SETTINGS means Skate, which has alerts. A sport that sets
+    // alerts: false has no alert service and no watch prompt.
+    const alertsOn = typeof SPORT_SETTINGS === "undefined" || SPORT_SETTINGS.alerts !== false;
+    if (alertsOn && typeof appendQuickAlert === "function") appendQuickAlert(actions, card);
     const alert = actions.querySelector(".quick-alert");
     if (alert) secondary.appendChild(alert);
-    const star = document.createElement("button");
-    star.type = "button";
-    star.className = "star quick-star";
-    secondary.appendChild(star);
+    if (alertsOn) {
+        const star = document.createElement("button");
+        star.type = "button";
+        star.className = "star quick-star";
+        secondary.appendChild(star);
+    }
     actions.appendChild(secondary);
     identity.appendChild(actions);
     product.appendChild(identity);
@@ -6074,6 +6079,7 @@ function wireDealEvents() {
         if (cardAlert) {
             event.preventDefault();
             event.stopPropagation();
+            if (typeof SPORT_SETTINGS !== "undefined" && SPORT_SETTINGS.alerts === false) return;
             const card = cardAlert.closest(".deal-card, .deal-row");
             if (!card) return;
             const draft = alertDraftFromDataset(card.dataset || {});
@@ -8623,7 +8629,12 @@ function onAlertsKeydown(event) {
     }
 }
 
+function sportAlertsOn() {
+    return typeof SPORT_SETTINGS === "undefined" || SPORT_SETTINGS.alerts !== false;
+}
+
 async function openAlerts(options) {
+    if (!sportAlertsOn()) return;
     options = options || {};
     ensureAlertsShell();
     alertsUi.returnFocus = options.returnFocus || (typeof document !== "undefined" && document.activeElement) || null;
@@ -8693,6 +8704,7 @@ function appendQuickAlert(parent, card) {
 function wireAlerts() {
     if (alertsUi.wired) return;
     alertsUi.wired = true;
+    if (!sportAlertsOn()) return;
     mountAlertsNav();
     ensureAlertsShell();
     if (typeof document !== "undefined" && document.addEventListener) {
