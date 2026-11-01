@@ -1,0 +1,54 @@
+name: Stores - Probe Candidates
+
+# Read-only research for new sports (docs/multi-sport-plan.md): which
+# candidate stores ShredDeals can read, and how. Follows each site's
+# robots.txt, a handful of requests per store a few seconds apart. Run it by
+# hand from the Actions tab (works from the GitHub app); the report is the
+# run's summary. Writes nothing to the repository, needs no secrets.
+on:
+  workflow_dispatch:
+    inputs:
+      sport:
+        description: Which candidate list to probe
+        type: choice
+        default: bmx
+        options: [bmx, mtb, ski, all]
+      urls:
+        description: Optional, space-separated store URLs to probe instead
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Probe the stores
+        env:
+          SPORT: ${{ inputs.sport }}
+          URLS: ${{ inputs.urls }}
+        run: |
+          set -euo pipefail
+          args=(--sport "$SPORT" --json probe.json --summary "$GITHUB_STEP_SUMMARY")
+          for url in $URLS; do args+=(--url "$url"); done
+          python -m audit.store_probe "${args[@]}"
+
+      - name: Keep the full report
+        uses: actions/upload-artifact@v4
+        with:
+          name: store-probe
+          path: probe.json
+          retention-days: 30
