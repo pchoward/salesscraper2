@@ -360,3 +360,36 @@ health data, watch configuration, backend files, and previews. Only the public
 deal page and its assets are published. Keep new internal roots in the exclusion
 list; the regression test checks the tracked file boundary. No recipient settings
 are serialized into Pages assets or email preview comments.
+
+## ShredDeals navigation prototype (issue #111)
+
+Build an isolated preview using the existing public SkateDeals page and chart data:
+
+```bash
+source .venv/bin/activate
+python -m previews.shreddeals --output-dir /tmp/shreddeals-preview
+python -m http.server --bind 127.0.0.1 --directory /tmp/shreddeals-preview 8765
+```
+
+Open `index.html` through that local static server. The builder prints its exact
+absolute HTML path; use a **new directory outside the checkout** on each rebuild.
+Serve the folder rather than opening it as `file://`, so charts and the shared
+parent/iframe URL history work normally. No scrape, production rebuild, email,
+alert delivery or deployment is run. BMX, Ski and MTB explicitly have no catalog.
+Skate Street/Park navigation is labeled as showing the full Skate catalog until
+real discipline tagging exists.
+
+Both tab rows, branding, and the optional domain label are configuration in
+`previews/sports.json`. Pass `--config /path/to/sports.json` to build with a local
+copy; there are no DNS/domain changes. The source public page stays unchanged.
+
+```bash
+python -m unittest test_shreddeals
+python -m previews.check_navigation --preview-dir /tmp/shreddeals-preview \
+  --screenshots /tmp/shreddeals-screenshots \
+  --firefox /path/to/firefox --geckodriver /path/to/geckodriver
+```
+
+The browser check serves the preview temporarily, exercises the original Skate
+controls plus navigation/history/keyboard/mobile behavior, saves screenshots,
+and stops its server. See [architecture, limitations, and screenshots](docs/shreddeals-architecture.md).
