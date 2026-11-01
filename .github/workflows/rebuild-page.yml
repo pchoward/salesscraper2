@@ -12,6 +12,8 @@ on:
       - page.js
       - page.css
       - mobile.css
+      - previews/**
+      - query_state.py
 
 # The scrape's lock: a rebuild and a scrape never run at the same time.
 concurrency:
@@ -39,11 +41,15 @@ jobs:
         # scrape that writes it; that run skips instead of failing.
         run: python rebuild_page.py ${{ github.event_name == 'push' && '--skip-if-missing' || '' }}
 
+      - name: Generate public sport navigation without scraping
+        run: python -m previews.publish
+
       - name: Commit and push the page
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add sale_items_chart.html
+          git add index.html navigation
           if [ -e history.json ]; then git add history.json; fi
           git diff --quiet --cached || git commit -m "Rebuild page $(date +'%Y-%m-%d %H:%M')"
           git pull --rebase origin main
