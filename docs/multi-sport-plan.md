@@ -134,6 +134,19 @@ same way as Skate's aliases.
 5. **Ski, then MTB,** repeating steps 3–4. Ski's sale season is now: last
    season's skis are being marked down.
 
+### Status (2026-11-01)
+
+- Step 1 is done (#121).
+- Step 2 is done in the sport-engine PR. Ski and MTB settings are ready
+  too.
+- Step 3 is mostly done in the same PR:
+  - Albe's BMX is the first store;
+  - a BMX scrape runs on its own;
+  - the preview site shows BMX in the homepage tab
+    (docs/shreddeals-preview.md).
+
+  Going live with BMX is the remaining part, and needs approval.
+
 ## 5. Running the probe
 
 GitHub app → repository → Actions → **Stores - Probe Candidates** → Run

@@ -10,10 +10,12 @@ import logging
 import math
 import os
 import re
+from pathlib import Path
 from urllib.parse import parse_qs, quote, urlsplit
 from html import escape
 from zoneinfo import ZoneInfo
 
+import sports
 from media import product_image_urls
 from badges import classify_badges
 from charts import CHART_NOTE, listing_series
@@ -226,9 +228,9 @@ def _alerts_config_script(config=None):
     return "<script>window.SKATEDEALS_ALERTS = " + literal.replace("</", "<\\/") + ";</script>"
 
 
-def _search_aliases():
-    """search/aliases.json as a script literal: compact, and nothing in it can end the <script>."""
-    aliases = json.loads(_read_asset("search/aliases.json"))
+def _search_aliases(path=None):
+    """A sport's search vocabulary as a script literal: compact, and nothing in it can end the <script>."""
+    aliases = json.loads(Path(path).read_text(encoding="utf-8") if path else _read_asset("search/aliases.json"))
     return json.dumps(aliases, separators=(",", ":"), ensure_ascii=False).replace("<", "\\u003c")
 
 
@@ -1406,8 +1408,16 @@ def _plural(count, singular, plural):
     return f"{count} {singular if count == 1 else plural}"
 
 
-def render_page(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None):
+def render_page(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None, sport=None):
     from report import build_digest
+
+    # The sport's categories, branding and search vocabulary (sports/).
+    # Skate's page is built exactly as before and carries no sport settings.
+    sport = sport or sports.SKATE
+    part_order_for_sport = PART_ORDER if sport.is_default else sport.parts
+    default_part = sport.default_part
+    # Shared assets live at the site root; a page in bmx/ reaches them with ../
+    asset_prefix = "../" * sport.page_path.count("/")
 
     price_history = price_history or {}
     failed_keys = list(failed_keys or [])
@@ -1853,11 +1863,11 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<html lang="en">',
         "<head>",
         '<script>if(window.parent!==window&&!window.shredBridgeInstalled){'
-        'const bridge=document.createElement("script");bridge.src="navigation/skate-bridge.js";'
+        f'const bridge=document.createElement("script");bridge.src="{asset_prefix}navigation/skate-bridge.js";'
         'bridge.async=false;document.head.appendChild(bridge);}</script>',
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-        f"<title>SkateDeals | {escape(today)}</title>",
+        f"<title>{escape(sport.brand)} | {escape(today)}</title>",
         f"<style>{_read_asset('page.css')}</style>",
         f"<style>{_read_asset('mobile.css')}</style>",
         "<script>try{if(localStorage.getItem('salesscraper2.layout')!=='table')document.documentElement.classList.add('layout-cards')}catch(e){document.documentElement.classList.add('layout-cards')}</script>",
@@ -1868,14 +1878,14 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         store_options.append(
             _option(store, f"{store} ({store_counts[store]})", data_label=store)
         )
-    part_options = ['<option value="all">All types</option>']
-    for part in PART_ORDER:
-        if part in part_counts or part == "Decks":
+    part_options = ['<option value="all"' + (" selected" if default_part == "all" else "") + ">All types</option>"]
+    for part in part_order_for_sport:
+        if part in part_counts or part == default_part:
             part_options.append(
                 _option(
                     part,
                     f"{part} ({part_counts.get(part, 0)})",
-                    selected=(part == "Decks"),
+                    selected=(part == default_part),
                     data_label=part,
                 )
             )
@@ -2291,18 +2301,18 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<select id="storeSelect" class="sr-only" aria-label="Store">{"".join(store_options)}</select>'
         "</div>"
     )
-    part_order = PART_ORDER
+    part_order = part_order_for_sport
     part_total = sum(part_counts.values())
-    part_buttons = [_quick_chip("part", "all", "All", part_total, order=0)]
+    part_buttons = [_quick_chip("part", "all", "All", part_total, pressed=(default_part == "all"), order=0)]
     shown_parts = []
     for part in part_order:
-        if part not in part_counts and part != "Decks":
+        if part not in part_counts and part != default_part:
             continue
         shown_parts.append(part)
         part_buttons.append(
             _quick_chip(
                 "part", part, part, part_counts.get(part, 0),
-                pressed=(part == "Decks"), order=len(part_buttons),
+                pressed=(part == default_part), order=len(part_buttons),
             )
         )
     extra_parts = [part for part in sorted(part_counts) if part not in shown_parts]
@@ -2534,7 +2544,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<rect x="2" y="8" width="20" height="5.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.7"/>'
         '<circle cx="7.2" cy="17.2" r="1.7" fill="currentColor"/>'
         '<circle cx="16.8" cy="17.2" r="1.7" fill="currentColor"/>'
-        "</svg>SkateDeals</button></h1>"
+        f"</svg>{escape(sport.brand)}</button></h1>"
         '<div class="topnav-links" role="group" aria-label="Sections">'
         '<button type="button" class="nav-link" id="navDeals" aria-pressed="true">Deals</button>'
         '<button type="button" class="nav-link" id="navTrack" aria-pressed="false">Track</button>'
@@ -2744,16 +2754,26 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     except Exception as exc:
         logger.error("Retailer activity panel failed: %s", exc)
 
-    chunks.append(
-        "<footer><p>Zumiez, Skate Warehouse, CCS, Tactics, TGM Skateboards, Deathgear, Kinetic, Skate Park of Tampa, Exodus Ride Shop, and SoCal Skateshop. "
-        "Decks stay at 10% off or more for known street brands and 15% otherwise, "
-        "7.5 inches and wider. Named cruiser and longboard listings are still excluded. "
-        f"{escape(FORMULA)} "
-        "Stars are saved in this browser. "
-        "A site-wide sale is a day when a store's sale count is at least 2.5× its recent median and 30 items higher, "
-        "after 7 quieter days. Skate Warehouse is seeded at 2026-07-04 until a later day clears that bar.</p>"
-        "</footer></div></div>"
-    )
+    if sport.is_default:
+        chunks.append(
+            "<footer><p>Zumiez, Skate Warehouse, CCS, Tactics, TGM Skateboards, Deathgear, Kinetic, Skate Park of Tampa, Exodus Ride Shop, and SoCal Skateshop. "
+            "Decks stay at 10% off or more for known street brands and 15% otherwise, "
+            "7.5 inches and wider. Named cruiser and longboard listings are still excluded. "
+            f"{escape(FORMULA)} "
+            "Stars are saved in this browser. "
+            "A site-wide sale is a day when a store's sale count is at least 2.5× its recent median and 30 items higher, "
+            "after 7 quieter days. Skate Warehouse is seeded at 2026-07-04 until a later day clears that bar.</p>"
+            "</footer></div></div>"
+        )
+    else:
+        stores_line = f"Deals from {', '.join(sorted(store_counts))}. " if store_counts else "No stores yet. "
+        chunks.append(
+            f"<footer><p>{escape(stores_line)}{escape(FORMULA)} "
+            "Stars are saved in this browser. "
+            "A site-wide sale is a day when a store's sale count is at least 2.5× its recent median and 30 items higher, "
+            "after 7 quieter days.</p>"
+            "</footer></div></div>"
+        )
     chunks.append(
         '<div id="quickView" hidden>'
         '<div class="quick-panel" role="dialog" aria-labelledby="quickLabel">'
@@ -2800,10 +2820,18 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     chunks.append(
         # Search: MiniSearch (vendored, MIT) and SkateDeals' search module.
         f"<script>{_read_asset('search/vendor/minisearch.js')}\n{_read_asset('search/search.js')}\n"
-        f"SkateSearch.configure({_search_aliases()});</script>"
+        f"SkateSearch.configure({_search_aliases(sport.aliases_file())});</script>"
     )
     chunks.append(
-        f"<script>const WIDTH_RANGES = {ranges_literal};\n"
+        "<script>"
+        + (
+            ""
+            if sport.is_default
+            else "const SPORT_SETTINGS = "
+            + json.dumps({"id": sport.id, "label": sport.label, "defaultPart": default_part, "parts": list(sport.parts)}).replace("<", "\\u003c")
+            + ";\n"
+        )
+        + f"const WIDTH_RANGES = {ranges_literal};\n"
         f"const LENGTH_BUCKETS = {length_literal};\n"
         f"const WHEELBASE_BUCKETS = {json.dumps([{key: bucket[key] for key in ('id', 'label', 'min', 'max')} for bucket in wheel_buckets])};\n"
         f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
@@ -2863,6 +2891,9 @@ def write_page(html, page_path, history_path=None):
     not there yet.
     """
     page, history = split_history(html)
+    folder = os.path.dirname(page_path)
+    if folder:
+        os.makedirs(folder, exist_ok=True)  # a sport's first page (bmx/)
     changed = False
     if history is not None:
         target = history_path or os.path.join(os.path.dirname(page_path) or ".", HISTORY_FILE)

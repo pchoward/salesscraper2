@@ -214,15 +214,20 @@ def build_digest(changes, failed_keys=None):
     return Digest(new_items, drops, removed)
 
 
-def build_report_html(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None):
-    """Render the static report. Failures are logged by the caller."""
+def build_report_html(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None, sport=None):
+    """Render the static report for a sport (Skate when none is given). Failures are logged by the caller."""
+    import contextlib
+
     from page import render_page
 
-    return render_page(
-        data,
-        changes,
-        price_history=price_history,
-        failed_keys=failed_keys,
-        generated_at=generated_at,
-        digest=digest,
-    )
+    # Another sport's page is built under that sport's listing rules.
+    with (sport.active() if sport is not None else contextlib.nullcontext()):
+        return render_page(
+            data,
+            changes,
+            price_history=price_history,
+            failed_keys=failed_keys,
+            generated_at=generated_at,
+            digest=digest,
+            sport=sport,
+        )

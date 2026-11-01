@@ -18,23 +18,30 @@
     function navigate(url, config, sportId) {
         const next = new URL(url);
         const sport = config.sports.find(item => item.id === sportId) || config.sports.find(item => item.id === config.defaultSport);
+        // Filters belong to one catalog: moving to another sport's catalog
+        // starts fresh. A "coming soon" sport keeps them for the way back.
+        const current = state(url, config).sport;
+        if (current.id !== sport.id && hasCatalog(current) && hasCatalog(sport)) (config.skateQueryKeys || []).forEach(key => next.searchParams.delete(key));
         next.searchParams.set("sport", sport.id);
         next.searchParams.delete("discipline");
         return next;
     }
-    function skateURL(url, config) {
+    // A sport with a catalog page shows it in the frame; the rest say "coming soon".
+    function catalogURL(url, config, sportId) {
         const parent = new URL(url);
-        const skate = config.sports.find(item => item.id === "skate");
-        const next = new URL(skate.catalog, parent);
+        const sport = config.sports.find(item => item.id === sportId);
+        const next = new URL(sport.catalog, parent);
         next.search = parent.search;
         NAV_KEYS.forEach(key => next.searchParams.delete(key));
         next.hash = parent.hash;
         return next;
     }
-    function mergeSkateURL(parentURL, childURL, config) {
+    function skateURL(url, config) { return catalogURL(url, config, "skate"); }
+    function hasCatalog(sport) { return !!(sport && sport.catalog); }
+    function mergeSkateURL(parentURL, childURL, config, sportId) {
         const parent = new URL(parentURL);
         const child = new URL(childURL);
-        const expected = skateURL(parentURL, config);
+        const expected = catalogURL(parentURL, config, sportId || "skate");
         if (child.origin !== parent.origin || child.pathname !== expected.pathname) throw new Error("Unexpected child URL");
         // Remove only production-owned keys. Unknown legacy/analytics parameters
         // survive even when the embedded app's normalizer does not know them.
@@ -92,8 +99,9 @@
             }));
         }
         function restoreFrame(historyState) {
-            if (state(win.location.href, config).sport.id !== "skate" || !frame.dataset.ready) return;
-            const expected = skateURL(win.location.href, config);
+            const sport = state(win.location.href, config).sport;
+            if (!hasCatalog(sport) || !frame.dataset.ready) return;
+            const expected = catalogURL(win.location.href, config, sport.id);
             if (frame.dataset.currentURL !== expected.href) return;
             frame.contentWindow.postMessage({ type: "shreddeals:restore", href: expected.href, state: historyState && historyState.skateState || null }, win.location.origin);
         }
@@ -102,7 +110,7 @@
             tabs(sportTabs, config.sports, current.sport.id, "sport-", "sportPanel", id => choose(id, "sport"));
             doc.getElementById("sportPanel").setAttribute("aria-labelledby", "sport-" + current.sport.id);
             doc.title = config.brand.name + " · " + current.sport.label + (config.production ? "" : " preview");
-            const skate = current.sport.id === "skate";
+            const skate = hasCatalog(current.sport);
             frame.hidden = !skate;
             frame.setAttribute("aria-hidden", String(!skate));
             frame.tabIndex = skate ? 0 : -1;
@@ -110,12 +118,19 @@
             const note = doc.getElementById("contextNote");
             note.hidden = !!config.production;
             if (skate) {
-                note.textContent = config.production ? "" : "Skate · saved SkateDeals catalog. Development preview; live delivery is disabled.";
-                const target = skateURL(win.location.href, config).href;
+                note.textContent = config.production ? "" : (current.sport.id === "skate" ? "Skate · saved SkateDeals catalog" : current.sport.label + " · preview catalog") + ". Development preview; live delivery is disabled.";
+                const target = catalogURL(win.location.href, config, current.sport.id).href;
                 if (frame.dataset.currentURL !== target) {
                     delete frame.dataset.ready;
+                    const loaded = frame.dataset.currentURL;
                     frame.dataset.currentURL = target;
-                    frame.src = target;
+                    // Swapping catalogs (Skate to BMX) must not add a history
+                    // entry of its own, or Back would only change the frame.
+                    let replaced = false;
+                    if (loaded) {
+                        try { frame.contentWindow.location.replace(target); replaced = true; } catch (_) { /* not loaded yet */ }
+                    }
+                    if (!replaced) frame.src = target;
                 }
             } else {
                 note.textContent = config.production ? "" : current.sport.label + " · navigation prototype";
@@ -131,20 +146,22 @@
         win.addEventListener("popstate", event => { render(); restoreFrame(event.state); });
         win.addEventListener("message", event => {
             if (event.origin !== win.location.origin || event.source !== frame.contentWindow || !event.data) return;
-            const currentSport = state(win.location.href, config).sport.id;
-            if (event.data.type === "shreddeals:back") { if (currentSport === "skate") win.history.back(); return; }
+            const current = state(win.location.href, config).sport;
+            const currentSport = current.id;
+            if (event.data.type === "shreddeals:back") { if (hasCatalog(current)) win.history.back(); return; }
             if (event.data.type !== "shreddeals:skate-url") return;
             try {
-                const next = mergeSkateURL(win.location.href, event.data.href, config);
-                frame.dataset.ready = "true";
-                if (currentSport !== "skate") {
+                if (!hasCatalog(current)) {
                     // A late load while hidden must not rewrite the active sport.
-                    frame.dataset.currentURL = skateURL(win.location.href, config).href;
+                    frame.dataset.ready = "true";
                     return;
                 }
+                // Throws for a late load of another sport's catalog: ignored.
+                const next = mergeSkateURL(win.location.href, event.data.href, config, currentSport);
+                frame.dataset.ready = "true";
                 // Cache the shell's logical URL, including retained unknown keys,
                 // rather than reloading whenever the embedded normalizer drops one.
-                frame.dataset.currentURL = skateURL(next, config).href;
+                frame.dataset.currentURL = catalogURL(next, config, currentSport).href;
                 const method = event.data.action === "push" ? "pushState" : "replaceState";
                 win.history[method]({ skateState: event.data.state || null }, "", next);
             } catch (_) { /* Ignore foreign paths and malformed messages. */ }
@@ -154,5 +171,5 @@
         render();
         return { render, choose, state: () => state(win.location.href, config) };
     }
-    return { state, navigate, skateURL, mergeSkateURL, nextIndex, mount };
+    return { state, navigate, skateURL, catalogURL, mergeSkateURL, nextIndex, mount };
 });

@@ -6,13 +6,15 @@ import shutil
 from previews.shreddeals import HERE, SOURCE, load_config, render_shell, skate_query_keys
 
 
-def publish(output=SOURCE):
+def publish(output=SOURCE, catalogs=None):
+    """``catalogs`` maps other sports to their pages ({'bmx': 'bmx/sale_items_chart.html'}); without it only Skate has one."""
     output=Path(output).resolve()
     config=load_config(HERE/'sports.json')
     config['production']=True
     config['skateQueryKeys']=skate_query_keys()
     for sport in config['sports']:
         if sport['id']=='skate':sport['catalog']='sale_items_chart.html'
+        elif (catalogs or {}).get(sport['id']):sport['catalog']=catalogs[sport['id']]
     assets=output/'navigation'
     for path in (output/'index.html',assets):
         if path.is_symlink():raise ValueError('Public output paths must not be symlinks')

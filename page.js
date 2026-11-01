@@ -1,9 +1,19 @@
 // The sort a fresh visit opens on, and the one a link without ?sort= means.
 // Keep in step with query_state.DEFAULT_SORT.
 const DEFAULT_SORT = "discount";
+// The category a fresh visit opens on, and the one a link without ?type=
+// means. Skate's page carries no SPORT_SETTINGS, so it stays Decks; other
+// sports set it (sports/__init__.py).
+const DEFAULT_PART = (typeof SPORT_SETTINGS !== "undefined" && SPORT_SETTINGS.defaultPart) || "Decks";
+
+// URL slug for a category or store name that has no fixed slug ("Frames &
+// Forks" -> "frames-forks"); used by sports beyond Skate.
+function nameSlug(name) {
+    return String(name || "").toLowerCase().replace(/&/g, " ").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
 let state = {
     store: "all",
-    part: "Decks",
+    part: DEFAULT_PART,
     widths: [],
     brand: "all",
     length: "all",
@@ -593,7 +603,7 @@ function orderSpecValues(stateKey, values) {
 }
 
 function activeSpecKeys(part) {
-    const current = part || "Decks";
+    const current = part || DEFAULT_PART;
     if (current === "Decks") return ["widths", "length", "wheelbase", "colors"];
     if (current === "Wheels") return ["diameters", "colors", "duros", "shapes"];
     if (current === "Trucks") return ["truckSizes", "truckHeights", "constructions"];
@@ -604,7 +614,7 @@ function activeSpecKeys(part) {
 }
 
 function specKeyActive(key, part) {
-    const current = part != null ? part : (state.part || "Decks");
+    const current = part != null ? part : (state.part || DEFAULT_PART);
     return activeSpecKeys(current).indexOf(key) >= 0;
 }
 
@@ -740,7 +750,7 @@ function specAllowed(row, facet, selected) {
 }
 
 function syncTypeSections(expandSpec) {
-    const part = state.part || "Decks";
+    const part = state.part || DEFAULT_PART;
     const context = document.getElementById("contextSpecs");
     const specs = document.getElementById("productSpecs");
     const specsBody = document.getElementById("productSpecsBody");
@@ -767,7 +777,7 @@ function syncTypeSections(expandSpec) {
 
 function adoptSpecPart(stateKey) {
     const facet = SPEC_FACETS.find(item => item.stateKey === stateKey);
-    if (!facet || (state.part || "Decks") !== "all") return;
+    if (!facet || (state.part || DEFAULT_PART) !== "all") return;
     state.part = facet.part;
     const select = document.getElementById("partSelect");
     if (select) select.value = state.part;
@@ -949,7 +959,7 @@ function paintFacetCounts() {
     paintSelectCounts("storeSelect", storeCounts);
     paintSelectCounts("partSelect", partCounts);
     paintQuickRow("storeFilters", "data-store", storeCounts, state.store || "all");
-    paintQuickRow("partFilters", "data-part", partCounts, state.part || "Decks");
+    paintQuickRow("partFilters", "data-part", partCounts, state.part || DEFAULT_PART);
     paintTypeHint();
     paintSelectCounts("lengthSelect", lengthCounts);
     const lengthGroup = document.getElementById("lengthFilters");
@@ -1370,7 +1380,7 @@ function rowMatchesNow(row, overrides) {
         if (typed.parts.indexOf(row.dataset.part || "") < 0) return false;
     } else if (part !== "all" && (row.dataset.part || "") !== part) return false;
     // A typed category is the one whose spec filters apply.
-    const viewPart = over.part == null && typed.parts && typed.parts.length === 1 ? typed.parts[0] : (part || "Decks");
+    const viewPart = over.part == null && typed.parts && typed.parts.length === 1 ? typed.parts[0] : (part || DEFAULT_PART);
     if (typed.width == null && specKeyActive("widths", viewPart) && !deckWidthAllowed(row, widths)) return false;
     for (let specIndex = 0; specIndex < SPEC_FACETS.length; specIndex++) {
         const facet = SPEC_FACETS[specIndex];
@@ -2003,7 +2013,7 @@ function paintKeepaCounts() {
         const count = part === "all" ? categoryAll : (categoryCounts[part] || 0);
         const slot = button.querySelector(".cat-count");
         if (slot) slot.textContent = String(count);
-        const on = (state.part || "Decks") === part;
+        const on = (state.part || DEFAULT_PART) === part;
         button.setAttribute("aria-pressed", on ? "true" : "false");
         markFacetOption(button, count, part === "all" || on);
     });
@@ -2871,7 +2881,7 @@ function clearFilters() {
     cardShown = cardPageSize();
     state = {
         store: "all",
-        part: "Decks",
+        part: DEFAULT_PART,
         brand: "all",
         length: "all",
         wheelbase: "all",
@@ -2912,7 +2922,7 @@ function clearFilters() {
         if (node) node.value = "all";
     });
     const partSelect = document.getElementById("partSelect");
-    if (partSelect) partSelect.value = "Decks";
+    if (partSelect) partSelect.value = DEFAULT_PART;
     const sort = document.getElementById("sortSelect");
     if (sort) sort.value = DEFAULT_SORT;
     const watching = document.getElementById("watchingToggle");
@@ -2927,7 +2937,7 @@ function clearFilters() {
     if (brandSearch) brandSearch.value = "";
     filterBrandList("");
     setPressed("#storeFilters [data-store]", "data-store", "all");
-    setPressed("#partFilters [data-part]", "data-part", "Decks");
+    setPressed("#partFilters [data-part]", "data-part", DEFAULT_PART);
     paintWidthChips();
     syncTypeSections(false);
     sortBy(DEFAULT_SORT, "desc");
@@ -3031,7 +3041,14 @@ function slugStore(value) {
         socal: "SoCal",
         skatedeluxe: "Skate Deluxe",
         muirskate: "Muir Skate"
-    }[key] || "";
+    }[key] || pageStoreForSlug(key);
+}
+
+// Stores beyond Skate's fixed list: the store chips on this page.
+function pageStoreForSlug(key) {
+    if (typeof document === "undefined" || !document.querySelectorAll) return "";
+    const names = Array.from(document.querySelectorAll("#storeFilters [data-store]")).map(node => node.getAttribute("data-store"));
+    return names.find(name => name && name !== "all" && name.toLowerCase().replace(/[^a-z0-9]/g, "") === key) || "";
 }
 
 function slugType(value) {
@@ -3053,7 +3070,12 @@ function slugType(value) {
         complete: "Completes",
         completes: "Completes",
         protection: "Protection"
-    }[key] || "";
+    }[key] || sportPartForSlug(key);
+}
+
+function sportPartForSlug(key) {
+    const parts = (typeof SPORT_SETTINGS !== "undefined" && SPORT_SETTINGS.parts) || [];
+    return parts.find(part => nameSlug(part) === key) || "";
 }
 
 function storeSlug(name) {
@@ -3070,7 +3092,7 @@ function storeSlug(name) {
         SoCal: "socal",
         "Skate Deluxe": "skatedeluxe",
         "Muir Skate": "muirskate"
-    }[name] || "";
+    }[name] || String(name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
 function typeSlug(name) {
@@ -3083,7 +3105,7 @@ function typeSlug(name) {
         Accessories: "accessory",
         Completes: "complete",
         Protection: "protection"
-    }[name] || "";
+    }[name] || nameSlug(name);
 }
 
 function flagOn(value) {
@@ -3094,7 +3116,7 @@ function decodeQuery(query) {
     const stateOut = {
         q: "",
         store: "all",
-        part: "Decks",
+        part: DEFAULT_PART,
         widths: [],
         brand: "all",
         min: null,
@@ -3201,8 +3223,10 @@ function encodeState(snapshot) {
     if (snapshot.store && snapshot.store !== "all") add("store", storeSlug(snapshot.store));
     // Missing type is Decks and stays out of the URL. All has to be written
     // with set(), because add() drops a bare "all".
-    if (snapshot.part === "all") params.set("type", "all");
-    else if (snapshot.part && snapshot.part !== "Decks") add("type", typeSlug(snapshot.part));
+    if (snapshot.part && snapshot.part !== DEFAULT_PART) {
+        if (snapshot.part === "all") params.set("type", "all");
+        else add("type", typeSlug(snapshot.part));
+    }
     const widths = orderedWidths(snapshot.widths || []);
     if (widths.length) add("width", widths.join(","));
     add("brand", snapshot.brand || "");
@@ -3315,7 +3339,7 @@ function writeControls(snapshot) {
     const search = document.getElementById("searchInput");
     if (search) search.value = snapshot.q || "";
     setSelect("storeSelect", snapshot.store || "all");
-    setSelect("partSelect", snapshot.part || "Decks");
+    setSelect("partSelect", snapshot.part || DEFAULT_PART);
     setSelect("brandSelect", snapshot.brand || "all");
     const chosenBrand = document.getElementById("brandSelect");
     const lengthValue = normalizeLengthParam(snapshot.length || "all");
@@ -3333,9 +3357,9 @@ function writeControls(snapshot) {
     fill("discountMax", snapshot.discountmax);
     fill("scoreMin", snapshot.scoremin);
     fill("scoreMax", snapshot.scoremax);
-    const partChanged = (snapshot.part || "Decks") !== (state.part || "Decks");
+    const partChanged = (snapshot.part || DEFAULT_PART) !== (state.part || DEFAULT_PART);
     state.store = snapshot.store || "all";
-    state.part = snapshot.part || "Decks";
+    state.part = snapshot.part || DEFAULT_PART;
     state.widths = orderedWidths(snapshot.widths || []);
     state.brand = chosenBrand ? (chosenBrand.value || "all") : (snapshot.brand || "all");
     state.length = lengthValue;
@@ -3886,11 +3910,11 @@ function collectFilterActions() {
         }, { search: "" }, false);
     }
     if (state.store !== "all") add("store", "Store: " + state.store, () => filterByStore("all"), { store: "all" });
-    if (state.part === "Decks") {
-        add("part", "Decks", () => filterByPart("all"), { part: "all" }, false);
-    } else if (state.part) {
+    if (state.part === DEFAULT_PART && DEFAULT_PART !== "all") {
+        add("part", DEFAULT_PART, () => filterByPart("all"), { part: "all" }, false);
+    } else if (state.part && state.part !== DEFAULT_PART) {
         const typeLabel = state.part === "all" ? "Type: All types" : "Type: " + state.part;
-        add("part", typeLabel, () => filterByPart("Decks"), { part: "Decks" });
+        add("part", typeLabel, () => filterByPart(DEFAULT_PART), { part: DEFAULT_PART });
     }
     if (state.brand !== "all") {
         add("brand", state.brand, () => {

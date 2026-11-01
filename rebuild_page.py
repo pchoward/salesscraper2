@@ -34,6 +34,7 @@ import os
 import sys
 from pathlib import Path
 
+import sports
 from report import Digest
 
 logger = logging.getLogger("rebuild_page")
@@ -138,12 +139,14 @@ def load_report_inputs(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTO
     }
 
 
-def rebuild(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTORY_PATH, page_path=PAGE_PATH):
+def rebuild(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTORY_PATH, page_path=PAGE_PATH, sport=None):
     """Rebuild the page. Returns True when the file changed. Raises RebuildError."""
     from page import write_page
     from report import build_report_html
 
     inputs = load_report_inputs(path, data_path, history_path)
+    if sport is not None and not sport.is_default:
+        inputs["sport"] = sport
     return write_page(build_report_html(**inputs), page_path)
 
 
@@ -151,17 +154,26 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Rebuild sale_items_chart.html from the last scrape's saved data.")
     parser.add_argument("--skip-if-missing", action="store_true",
                         help=f"exit 0 when {INPUTS_PATH} does not exist yet")
+    parser.add_argument("--sport", default="skate", choices=sorted(sports.SPORTS),
+                        help="rebuild this sport's page from its catalogs/<sport>/ data (Skate: the repository root)")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s - %(message)s")
+    sport = sports.get(args.sport)
+    page_path = PAGE_PATH if sport.is_default else str(sport.page_file())
+    with sport.session():
+        return _rebuild_main(args, sport, page_path)
+
+
+def _rebuild_main(args, sport, page_path):
     if args.skip_if_missing and not Path(INPUTS_PATH).exists():
         print(f"{INPUTS_PATH} does not exist yet; the next scrape creates it. Nothing rebuilt.")
         return 0
     try:
-        changed = rebuild()
+        changed = rebuild(page_path=page_path, sport=sport)
     except RebuildError as exc:
         print(f"Not rebuilt: {exc}", file=sys.stderr)
         return 1
-    print(f"Rebuilt {PAGE_PATH}." if changed else f"{PAGE_PATH} is already current.")
+    print(f"Rebuilt {page_path}." if changed else f"{page_path} is already current.")
     return 0
 
 

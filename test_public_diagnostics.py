@@ -81,12 +81,12 @@ class AudienceTests(unittest.TestCase):
     def test_pages_excludes_every_internal_root_and_runtime_output(self):
         excluded = {json.loads(line[4:]) for line in Path('_config.yml').read_text().splitlines() if line.startswith('  - ')}
         self.assertFalse(Path('.nojekyll').exists(), 'Pages must honor Jekyll exclusions')
-        public = {'_config.yml', 'index.html', 'navigation', 'sale_items_chart.html', 'history.json', 'page.css', 'mobile.css', 'page.js'}
+        public = {'_config.yml', 'index.html', 'navigation', 'bmx', 'sale_items_chart.html', 'history.json', 'page.css', 'mobile.css', 'page.js'}
         roots = {path.split('/')[0] for path in subprocess.check_output(['git','ls-files'], text=True).splitlines()}
         self.assertEqual(roots - excluded - public, set())
         for path in ('scrape_health.json', 'previous_data.json', 'price_history.json',
                      'site_sales.json', 'report_inputs.json', 'email_preview.html', 'notification_state.json', 'worker',
-                     'watchlist.yaml', 'alerts_state', 'docs', 'audit'):
+                     'watchlist.yaml', 'alerts_state', 'docs', 'audit', 'catalogs', 'sports'):
             self.assertIn(path, excluded)
         # The page fetches its price history; Pages must serve it.
         self.assertNotIn('history.json', excluded)
