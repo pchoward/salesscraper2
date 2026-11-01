@@ -1973,6 +1973,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<option value="brand">Brand</option>'
         '<option value="days">Days tracked</option>'
         '<option value="daysat">Days at this price</option>'
+        '<option value="relevance">Best match (search)</option>'
         "</select></label>"
     )
     brand_buttons = [
@@ -2771,6 +2772,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             }
             for bucket in length_buckets
         ]
+    )
+    chunks.append(
+        # Search: MiniSearch (vendored, MIT) and SkateDeals' search module.
+        f"<script>{_read_asset('search/vendor/minisearch.js')}\n{_read_asset('search/search.js')}</script>"
     )
     chunks.append(
         f"<script>const WIDTH_RANGES = {ranges_literal};\n"
