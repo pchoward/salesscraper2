@@ -111,6 +111,203 @@
         return text ? String(text).split(/\s+/).filter(Boolean) : [];
     }
 
+    // ---- Query understanding --------------------------------------------
+
+    const STORE_LABELS = { SkateWarehouse: "Skate Warehouse", SPoT: "Skate Park of Tampa", SoCal: "SoCal Skateshop" };
+
+    function money(value) {
+        return "$" + (Number.isInteger(value) ? String(value) : value.toFixed(2));
+    }
+
+    function numberText(value) {
+        return String(Math.round(value * 1000) / 1000);
+    }
+
+    // Each pattern: a regex over the raw query and what a match means. They
+    // run in this order and never overlap, so "under 8.5" is a price cap and
+    // never also a deck width.
+    const PATTERNS = [
+        {
+            kind: "priceMax",
+            re: /(^|[^\w$])((?:under|below|less than|up to|max|<=?)\s*\$?\s*(\d{1,4}(?:\.\d{1,2})?))(?![\d.%])/gi,
+            read: match => ({ value: parseFloat(match[3]) })
+        },
+        {
+            kind: "priceMin",
+            re: /(^|[^\w$])((?:over|above|more than|min|>=?)\s*\$?\s*(\d{1,4}(?:\.\d{1,2})?))(?![\d.%])/gi,
+            read: match => ({ value: parseFloat(match[3]) })
+        },
+        {
+            kind: "discountMin",
+            re: /(^|[^\w.])((\d{1,2})\s*%\s*(?:off\b|\+|or more\b)?\+?)/gi,
+            read: match => ({ value: parseInt(match[3], 10) })
+        },
+        {
+            // 101a/95a: a double duro, both in one token.
+            kind: "duros",
+            re: /(^|[^\w.])((\d{2,3})\s*([abd])\s*[\/&,+]\s*(\d{2,3})\s*([abd]))(?![\w])/gi,
+            read: match => ({ value: [duroToA(match[3] + match[4]), duroToA(match[5] + match[6])], typed: [match[3] + match[4], match[5] + match[6]] })
+        },
+        {
+            kind: "duros",
+            re: /(^|[^\w.])((\d{2,3})\s*([abd]))(?![\w])/gi,
+            read: match => ({ value: [duroToA(match[3] + match[4])], typed: [match[3] + match[4]] })
+        },
+        {
+            kind: "diameter",
+            re: /(^|[^\w.])((\d{2}(?:\.\d)?)\s*mm)(?![\w])/gi,
+            read: match => ({ value: parseFloat(match[3]) })
+        },
+        {
+            // 8.25, 8.25in, 8.25", 8 inch. A whole number needs its unit.
+            kind: "width",
+            re: /(^|[^\w.$])((\d{1,2}(?:\.\d{1,3})?)\s*("|”|″|inch(?:es)?\b|in\b)?)(?![\w.%])/gi,
+            read: match => (match[4] || match[3].indexOf(".") >= 0 ? { value: parseFloat(match[3]) } : null)
+        }
+    ];
+
+    const VALID = {
+        priceMax: value => value > 0,
+        priceMin: value => value >= 0,
+        discountMin: value => value > 0 && value < 100,
+        duros: value => value.every(duro => duro && parseInt(duro, 10) >= 70 && parseInt(duro, 10) <= 110),
+        diameter: value => value >= 40 && value <= 75,
+        width: value => value >= 7 && value <= 10.5
+    };
+
+    // "84b (104a)": what was typed, and the A scale when that differs.
+    function duroLabel(typed, value) {
+        return typed.map((text, index) => {
+            const own = text.toLowerCase();
+            return own === value[index] ? own : own + " (" + value[index] + ")";
+        }).join("/");
+    }
+
+    function label(kind, value) {
+        if (kind === "priceMax") return "< " + money(value);
+        if (kind === "priceMin") return "> " + money(value);
+        if (kind === "discountMin") return value + "%+ off";
+        if (kind === "duros") return value.join("/");
+        if (kind === "diameter") return numberText(value) + "mm";
+        if (kind === "width") return numberText(value) + '"';
+        if (kind === "store") return STORE_LABELS[value] || value;
+        return value;
+    }
+
+    function overlaps(spans, start, end) {
+        return spans.some(span => start < span.end && end > span.start);
+    }
+
+    // Stores and categories: whole words, through the alias file, longest first.
+    function phraseTokens(text, spans, kind, map) {
+        const found = [];
+        const tokens = [];
+        const re = /[A-Za-z0-9][A-Za-z0-9.'-]*/g;
+        let match;
+        while ((match = re.exec(text))) tokens.push({ start: match.index, end: match.index + match[0].length, word: basic(match[0]) });
+        for (let i = 0; i < tokens.length; i++) {
+            for (let size = Math.min(4, tokens.length - i); size > 0; size--) {
+                const start = tokens[i].start;
+                const end = tokens[i + size - 1].end;
+                const key = tokens.slice(i, i + size).map(token => token.word).join(" ");
+                const value = map.get(key);
+                if (!value || overlaps(spans, start, end)) continue;
+                found.push({ kind: kind, value: value, start: start, end: end });
+                spans.push({ start: start, end: end });
+                i += size - 1;
+                break;
+            }
+        }
+        return found;
+    }
+
+    /**
+     * Pull filters out of a typed query.
+     *
+     * ``{ filters, remainingText, tokens }``: ``filters`` holds diameter (mm),
+     * duros (A scale, all required), width (inches), priceMin, priceMax,
+     * discountMin, stores and parts (any of them); ``tokens`` lists what was read, with its place in ``text`` (for
+     * chips); ``remainingText`` is the rest, for the fuzzy search.
+     */
+    function parseQuery(text) {
+        const raw = String(text == null ? "" : text);
+        const spans = [];
+        const tokens = [];
+        PATTERNS.forEach(pattern => {
+            pattern.re.lastIndex = 0;
+            let match;
+            while ((match = pattern.re.exec(raw))) {
+                const start = match.index + match[1].length;
+                const end = start + match[2].length;
+                const read = pattern.read(match);
+                if (!read || !VALID[pattern.kind](read.value) || overlaps(spans, start, end)) continue;
+                spans.push({ start: start, end: end });
+                tokens.push({ kind: pattern.kind, value: read.value, typed: read.typed, start: start, end: end });
+            }
+        });
+        phraseTokens(raw, spans, "store", vocabulary.stores).forEach(token => tokens.push(token));
+        phraseTokens(raw, spans, "part", vocabulary.categories).forEach(token => tokens.push(token));
+        tokens.sort((a, b) => a.start - b.start);
+        const filters = {};
+        tokens.forEach(token => {
+            token.raw = raw.slice(token.start, token.end);
+            token.label = token.kind === "duros" ? duroLabel(token.typed, token.value) : label(token.kind, token.value);
+            // Several stores or categories widen the search: any of them.
+            if (token.kind === "duros") filters.duros = (filters.duros || []).concat(token.value);
+            else if (token.kind === "store") filters.stores = (filters.stores || []).concat(token.value);
+            else if (token.kind === "part") filters.parts = (filters.parts || []).concat(token.value);
+            else filters[token.kind] = token.value;
+        });
+        let rest = "";
+        let at = 0;
+        spans.slice().sort((a, b) => a.start - b.start).forEach(span => {
+            rest += raw.slice(at, span.start) + " ";
+            at = span.end;
+        });
+        rest += raw.slice(at);
+        return { filters: filters, tokens: tokens, remainingText: rest.replace(/\s+/g, " ").trim() };
+    }
+
+    /** ``text`` without one parsed token (a removed chip). */
+    function queryWithout(text, token) {
+        const raw = String(text || "");
+        return (raw.slice(0, token.start) + " " + raw.slice(token.end)).replace(/\s+/g, " ").trim();
+    }
+
+    function nameSizes(name) {
+        const sizes = [];
+        const re = /(\d{2}(?:\.\d)?)\s*mm\b/gi;
+        let match;
+        while ((match = re.exec(String(name || "")))) sizes.push(parseFloat(match[1]));
+        return sizes;
+    }
+
+    function rowDuros(data) {
+        const listed = String(data.duros || "").split(",").map(duroToA);
+        const named = words(basic(data.name)).filter(word => /^\d{2,3}a$/.test(word));
+        return listed.concat(named).filter(Boolean);
+    }
+
+    /**
+     * Whether a row passes the spec filters a query typed (diameter, duros,
+     * width). Store, category, price and discount are applied by the page,
+     * merged with the sidebar. ``near`` widens a diameter by that many mm.
+     */
+    function rowAllows(filters, row, near) {
+        const data = (row && row.dataset) || row || {};
+        if (!filters) return true;
+        if (filters.diameter != null) {
+            const reach = (near || 0) + 0.01;
+            if (!nameSizes(data.name).some(size => Math.abs(size - filters.diameter) < reach)) return false;
+        }
+        if (filters.duros && filters.duros.length) {
+            const have = rowDuros(data);
+            if (!filters.duros.every(duro => have.indexOf(duro) >= 0)) return false;
+        }
+        if (filters.width != null && !(Math.abs(parseFloat(data.size) - filters.width) < 0.001)) return false;
+        return true;
+    }
+
     // One searchable document per deal row. ``row`` is anything with a
     // ``dataset`` like the page's <tr class="deal-row">.
     function docFromRow(row) {
@@ -192,6 +389,9 @@
 
     return {
         configure: configure,
+        parseQuery: parseQuery,
+        queryWithout: queryWithout,
+        rowAllows: rowAllows,
         matchesText: matchesText,
         basic: basic,
         duroToA: duroToA,
