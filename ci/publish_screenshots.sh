@@ -48,6 +48,8 @@ git_ add -A
 git_ -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
   commit -q -m "PR preview screenshots $(date -u '+%Y-%m-%d %H:%M')"
 git_ push -q --force origin "snapshot:refs/heads/$branch"
-commit="$(git_ rev-parse HEAD)"
-echo "base=https://raw.githubusercontent.com/${REPO}/${commit}/pr-${number}/${short}" >> "${GITHUB_OUTPUT:-/dev/null}"
-echo "Published screenshots for PR #$number at $commit."
+# Link through the branch, not this commit: the next run replaces the
+# commit, but keeps every open PR's folder. The path names the PR's head
+# commit, so a new push gets new URLs (no stale cached images).
+echo "base=https://raw.githubusercontent.com/${REPO}/${branch}/pr-${number}/${short}" >> "${GITHUB_OUTPUT:-/dev/null}"
+echo "Published screenshots for PR #$number on $branch."

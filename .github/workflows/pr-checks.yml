@@ -98,7 +98,8 @@ jobs:
 
       - name: Build the preview site
         env:
-          LABEL: PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}
+          # Quoted: in YAML an unquoted " #" starts a comment.
+          LABEL: "PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}"
         run: python ci/build_preview.py preview/site --label "${LABEL:0:16}"
 
       - name: Browser checks and screenshots

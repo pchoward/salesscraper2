@@ -144,6 +144,9 @@ class WorkflowSafetyTests(unittest.TestCase):
         self.assertEqual(preview["permissions"], {"contents": "read"})
         self.assertIn("vars.PR_PREVIEWS != 'off'", preview["if"])
         self.assertIs(preview["steps"][0]["with"]["persist-credentials"], False)
+        # The banner label keeps the PR number (an unquoted " #" was a YAML comment).
+        label = next(step for step in preview["steps"] if step["name"] == "Build the preview site")["env"]["LABEL"]
+        self.assertTrue(label.startswith("PR #${{ github.event.pull_request.number }}"), label)
 
     def test_the_publisher_runs_main_code_on_data_only(self):
         publish = _workflow("pr-preview-publish.yml")
@@ -174,6 +177,9 @@ class WorkflowSafetyTests(unittest.TestCase):
             for forbidden in ("scraper.py", "SMTP", "ALERTS_HMAC", "deploy.sh", "git push origin main", "gh pr merge", "/merge"):
                 self.assertNotIn(forbidden, text, f"{name}: {forbidden}")
         script = (ROOT / "ci" / "publish_screenshots.sh").read_text(encoding="utf-8")
+        # Comment images link through the branch: a commit link breaks once
+        # the next run replaces that commit.
+        self.assertIn("raw.githubusercontent.com/${REPO}/${branch}/pr-${number}/${short}", script)
         self.assertIn('branch="ci-previews"', script)
         self.assertIn('"snapshot:refs/heads/$branch"', script)
         self.assertNotIn("refs/heads/main", script)
