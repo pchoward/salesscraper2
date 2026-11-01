@@ -117,12 +117,13 @@ class PreviewWorkflowTests(unittest.TestCase):
     def test_runs_by_hand_or_daily_and_scrapes_at_most_one_new_sport(self):
         self.assertEqual(sorted(self.workflow["on"]), ["schedule", "workflow_dispatch"])
         self.assertEqual(len(self.workflow["on"]["schedule"]), 1, "once a day")
-        # A scheduled run has no inputs; it must default to BMX, never Skate.
-        self.assertIn("SPORT: ${{ inputs.scrape || 'bmx' }}", self.text)
-        self.assertNotIn("|| 'skate'", self.text)
+        # A scheduled run has no inputs; "all" means the new sports, never Skate.
+        self.assertIn("CHOICE: ${{ inputs.scrape || 'all' }}", self.text)
+        self.assertIn("set -- bmx ski mtb", self.text)
+        self.assertNotIn("skate", self.text.split("set -- bmx ski mtb")[0].split("CHOICE:")[1])
         options = self.workflow["on"]["workflow_dispatch"]["inputs"]["scrape"]["options"]
-        self.assertEqual(options, ["none", "bmx", "ski", "mtb"], "Skate is never scraped here")
-        for option in options[1:]:
+        self.assertEqual(options, ["all", "none", "bmx", "ski", "mtb"], "Skate is never scraped here")
+        for option in ("bmx", "ski", "mtb"):
             self.assertFalse(sports.get(option).delivery, f"{option} would send email")
         self.assertIn('python scraper.py --sport "$SPORT"', self.text)
 

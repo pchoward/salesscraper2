@@ -11,17 +11,17 @@ name: ShredDeals - Preview Site
 # New sports' price history lives on the shreddeals-preview branch under
 # _data/, carried from run to run, until it is approved for main.
 on:
-  # Daily BMX refresh (owner, 2026-11-01): builds BMX price history on the
-  # preview branch. 21:37 UTC, away from Skate's 07:17 / 09:43 scrapes.
+  # Daily refresh of BMX, Ski and MTB (owner, 2026-11-01): builds their
+  # price history on the preview branch. 21:37 UTC, away from Skate's 07:17 / 09:43 scrapes.
   schedule:
     - cron: '37 21 * * *'
   workflow_dispatch:
     inputs:
       scrape:
-        description: Scrape one sport first (none = just rebuild)
+        description: Scrape first (all = BMX, Ski and MTB; none = just rebuild)
         type: choice
-        default: bmx
-        options: [none, bmx, ski, mtb]
+        default: all
+        options: [all, none, bmx, ski, mtb]
       ref:
         description: Branch whose code and Skate data to use
         required: false
@@ -69,14 +69,22 @@ jobs:
           rm -rf catalogs && cp -r preview-data/_data/catalogs catalogs
           find catalogs -type f | sort
 
-      - name: Scrape ${{ inputs.scrape || 'bmx' }}
-        if: (inputs.scrape || 'bmx') != 'none'
+      - name: Scrape ${{ inputs.scrape || 'all' }}
+        if: (inputs.scrape || 'all') != 'none'
         env:
-          # A scheduled run has no inputs: it scrapes BMX on main.
-          SPORT: ${{ inputs.scrape || 'bmx' }}
-        # Only this sport's stores. Its run sends no email or alerts
-        # (sports/__init__.py: delivery is Skate-only).
-        run: python scraper.py --sport "$SPORT"
+          # A scheduled run has no inputs: it scrapes every new sport on main.
+          CHOICE: ${{ inputs.scrape || 'all' }}
+        # Only these sports' stores, one sport at a time; never Skate. Their
+        # runs send no email or alerts (sports/__init__.py: delivery is
+        # Skate-only). A sport whose scrape fails keeps its last data; the
+        # others still publish.
+        run: |
+          if [ "$CHOICE" = all ]; then set -- bmx ski mtb; else set -- "$CHOICE"; fi
+          for SPORT in "$@"; do
+            echo "::group::Scrape $SPORT"
+            python scraper.py --sport "$SPORT" || echo "::warning::$SPORT scrape failed; keeping its previous data"
+            echo "::endgroup::"
+          done
 
       - name: Build the site
         env:
