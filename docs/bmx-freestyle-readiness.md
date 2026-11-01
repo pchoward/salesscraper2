@@ -97,3 +97,7 @@ Validation on the isolated BMX branch: **573 tests completed, OK (one existing
 skip)**. Eight Chrome-dependent cases were unavailable in this environment. The
 20 focused readiness/store-probe/public-diagnostic tests also passed. These tests
 use saved/synthetic inputs; they do not validate a live BMX source or adapter.
+
+The first real Actions run has now succeeded: **72 Albe's listings**, 72 distinct
+URLs and 72 rendered cards. See [the validation report](bmx-actions-validation.md)
+for counts, screenshots reviewed, scope mismatches and the remaining #123 work.
