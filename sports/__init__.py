@@ -137,22 +137,23 @@ BMX = Sport(
     rules="sports.rules:bmx",
 )
 
-# Ready for catalogs: categories, folders and rules are set; no stores yet,
-# so a run builds an empty page and the homepage keeps "coming soon".
+# Gear West's alpine closeouts first (store probe, 2026-11-01).
 SKI = Sport(
     id="ski",
     label="Ski",
     brand="ShredDeals Ski",
-    parts=("Skis", "Ski Boots", "Bindings", "Poles", "Snowboards", "Snowboard Boots", "Snowboard Bindings",
-           "Helmets", "Goggles"),
+    # Issue #134: alpine skiing first; snowboards are a separate, later decision.
+    parts=("Skis", "Boots", "Bindings", "Poles", "Helmets"),
     default_part="all",
     data_dir="catalogs/ski",
     page_path="ski/sale_items_chart.html",
     aliases="sports/ski/aliases.json",
-    scrapers="sports:no_stores",
+    scrapers="sports.ski.stores:scrapers",
     rules="sports.rules:ski",
 )
 
+# Ready for catalogs: categories, folders and rules are set; no stores yet,
+# so a run builds an empty page and the homepage keeps "coming soon".
 MTB = Sport(
     id="mtb",
     label="MTB",

@@ -1,12 +1,14 @@
 {
-  "_about": "Ski and snowboard search vocabulary, in search/aliases.json's format. Starter list; edit freely.",
+  "_about": "Ski search vocabulary, in search/aliases.json's format. Alpine first (issue #134). Edit freely; no code changes needed.",
   "brands": {
     "Rossignol": [
       "rossi"
     ],
     "Salomon": [],
     "Atomic": [],
-    "K2": [],
+    "K2": [
+      "k2 skis"
+    ],
     "Line": [
       "line skis"
     ],
@@ -17,15 +19,22 @@
     "Jones": [
       "jones snowboards"
     ],
-    "Black Crows": [],
-    "Volkl": [
-      "völkl"
+    "Black Crows": [
+      "blackcrows"
     ],
-    "Head": [],
+    "Head": [
+      "head skis",
+      "head tyrolia",
+      "head tyrolia wintersports"
+    ],
     "Nordica": [],
     "Blizzard": [],
-    "Armada": [],
-    "Faction": [],
+    "Armada": [
+      "armada skis"
+    ],
+    "Faction": [
+      "faction skis"
+    ],
     "Look": [],
     "Marker": [],
     "Tyrolia": [],
@@ -33,7 +42,41 @@
     "Oakley": [],
     "Union": [
       "union bindings"
-    ]
+    ],
+    "Stöckli": [
+      "stockli",
+      "stoeckli"
+    ],
+    "Dynastar": [],
+    "Fischer": [],
+    "Kästle": [
+      "kastle",
+      "kastle skis",
+      "kästle skis"
+    ],
+    "Lange": [],
+    "Tecnica": [],
+    "Scarpa": [
+      "scarpa north america"
+    ],
+    "Dalbello": [],
+    "Dynafit": [],
+    "Phaenom": [],
+    "Völkl": [
+      "voelkl",
+      "volkl",
+      "völkl"
+    ],
+    "Elan": [],
+    "Full Tilt": [
+      "fulltilt"
+    ],
+    "Roxa": [],
+    "Moment": [
+      "moment skis"
+    ],
+    "Shift": [],
+    "Leki": []
   },
   "models": {
     "Twin Tip": [
@@ -50,46 +93,52 @@
     "Powder": [
       "pow"
     ],
-    "Freeride": []
+    "Freeride": [],
+    "Mondo": [
+      "mondopoint",
+      "mondo point"
+    ],
+    "GripWalk": [
+      "grip walk",
+      "gw"
+    ]
   },
   "categories": {
     "Skis": [
       "ski",
-      "skis"
+      "skis",
+      "alpine ski",
+      "alpine skis",
+      "park ski",
+      "park skis",
+      "race ski",
+      "race skis"
     ],
-    "Ski Boots": [
+    "Boots": [
+      "boot",
+      "boots",
       "ski boot",
-      "ski boots"
+      "ski boots",
+      "alpine boots",
+      "touring boots",
+      "telemark boots"
     ],
     "Bindings": [
       "binding",
       "bindings",
+      "ski binding",
       "ski bindings"
     ],
     "Poles": [
       "pole",
-      "poles"
-    ],
-    "Snowboards": [
-      "snowboard",
-      "snowboards",
-      "board"
-    ],
-    "Snowboard Boots": [
-      "snowboard boot",
-      "snowboard boots"
-    ],
-    "Snowboard Bindings": [
-      "snowboard binding",
-      "snowboard bindings"
+      "poles",
+      "ski pole",
+      "ski poles"
     ],
     "Helmets": [
       "helmet",
-      "helmets"
-    ],
-    "Goggles": [
-      "goggle",
-      "goggles"
+      "helmets",
+      "ski helmet"
     ]
   },
   "stores": {}
