@@ -3266,6 +3266,41 @@ def _removed_card_html(row, row_id):
     )
 
 
+def _card_price_stat(record, symbol):
+    """Comparison next to the sale price.
+
+    Two or more tracked days use their average. Fewer than that is not an
+    average (a first day would print the sale price twice), so the store's
+    list price is shown instead: "Was $27.95 · Now $2.50". The percent off
+    stays the store's claimed discount versus that list price.
+    """
+    points = clip_daily_prices(record.get("prices"), 90, record.get("spark_end"))
+    if len(points) >= 2:
+        average = record.get("average")
+        if average is None:
+            return ""
+        return (
+            f'<span class="avg-price" data-symbol="{symbol}">'
+            f"Average {symbol}{float(average):.2f}</span>"
+            '<span class="price-sep" aria-hidden="true">/</span>'
+        )
+    list_price = _price((record.get("item") or {}).get("price_old"))
+    if list_price is not None and list_price > 0:
+        return (
+            f'<span class="avg-price" data-symbol="{symbol}">'
+            f"Was {symbol}{list_price:.2f}</span>"
+            '<span class="price-sep" aria-hidden="true">\u00b7</span>'
+        )
+    if points:
+        # Nothing honest to show yet. The slot stays so a wider chart window
+        # can fill in an average once a second day is inside it.
+        return (
+            f'<span class="avg-price" data-symbol="{symbol}" hidden></span>'
+            '<span class="price-sep" aria-hidden="true" hidden>/</span>'
+        )
+    return ""
+
+
 def _card_html(record):
     item = record["item"]
     percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
@@ -3288,14 +3323,7 @@ def _card_html(record):
             'title="Store\'s claimed discount versus its list price, not a tracked market price.">'
             f"↓ {escape(percent)}</span>"
         )
-    average = record.get("average")
-    avg_html = ""
-    if average is not None:
-        avg_html = (
-            f'<span class="avg-price" data-symbol="{symbol}">'
-            f"Average {symbol}{float(average):.2f}</span>"
-            '<span class="price-sep" aria-hidden="true">/</span>'
-        )
+    avg_html = _card_price_stat(record, symbol)
     found = _month_day(record.get("first") or record.get("spark_end") or "")
     store = record.get("store") or ""
     name = record["name"]
