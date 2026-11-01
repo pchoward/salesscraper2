@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en" data-sport="skate" data-accents="utility" data-catalog="ready">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShredDeals design preview</title>
+<link rel="stylesheet" href="shreddeals.css">
+</head>
+<body>
+<a class="sd-skip" href="#catalog">Skip navigation</a>
+<header class="sd-header">
+  <a class="sd-brand" id="brandHome" href="?sport=skate&amp;accents=utility">
+    <svg class="sd-mark" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <path d="M3 12c3.2-5.6 14.8-5.6 18 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M7 17h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span class="sd-word"><span class="sd-word-shred">Shred</span><span class="sd-word-deals">Deals</span></span>
+  </a>
+  <nav class="sd-sports" aria-label="Sports">
+    <div class="sd-sport-frame">
+      <div class="sd-sport-scroll" id="sportScroll">
+        <a class="sd-sport" href="?sport=skate&amp;accents=utility" data-sport="skate" aria-current="page">Skate</a>
+        <a class="sd-sport" href="?sport=ski&amp;accents=utility" data-sport="ski">Ski</a>
+        <a class="sd-sport" href="?sport=mtb&amp;accents=utility" data-sport="mtb">MTB</a>
+        <a class="sd-sport" href="?sport=bmx&amp;accents=utility" data-sport="bmx">BMX</a>
+      </div>
+    </div>
+  </nav>
+  <nav class="sd-secondary" aria-label="Sections">
+    <button type="button" class="sd-link" data-section="deals" aria-pressed="true">Deals</button>
+    <button type="button" class="sd-link" data-section="track" aria-pressed="false">Track</button>
+    <button type="button" class="sd-link" data-section="insights" aria-pressed="false">Insights</button>
+    <button type="button" class="sd-link" data-section="subscribe" aria-pressed="false">Subscribe</button>
+  </nav>
+  <p class="sd-scan">
+    <span class="sd-fresh" aria-hidden="true"></span>
+    <span class="sd-scan-kicker">last scan</span>
+    <time datetime="2026-11-01T14:15:06+00:00"><span class="sd-scan-long">Nov 1, 9:15 AM ET</span><span class="sd-scan-short">9:15 AM ET</span></time>
+    <span class="sd-scan-exact">Nov 1, 2026 9:15:06 AM ET</span>
+  </p>
+  <div class="sd-accent-toggle" role="group" aria-label="Accent theme, preview only">
+    <button type="button" data-accents="utility" aria-pressed="true">Utility</button>
+    <button type="button" data-accents="sport" aria-pressed="false">Sport</button>
+  </div>
+</header>
+<p class="sr-only" id="sportStatus" role="status"></p>
+<main class="sd-main" id="catalog">
+  <div class="catalog-slice" id="catalogSlice">
+    <button type="button" class="text-btn" id="filtersOpen">Filters</button>
+    <div class="nav-row" id="navPills">
+      <div class="nav-cluster quick-filters" id="partFilters">
+        <span class="quick-label">Products</span>
+        <div class="quick-row" role="group" aria-label="Product type">
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">All</span><span class="quick-count">1034</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="true"><span class="quick-name">Decks</span><span class="quick-count">635</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Trucks</span><span class="quick-count">74</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Bearings</span><span class="quick-count">12</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Sneakers</span><span class="quick-count">109</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Accessories</span><span class="quick-count">81</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Completes</span><span class="quick-count">66</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Protection</span><span class="quick-count">57</span></button>
+        </div>
+      </div>
+      <div class="nav-cluster quick-filters" id="storeFilters">
+        <span class="quick-label">Stores</span>
+        <div class="quick-row" role="group" aria-label="Store">
+          <button type="button" class="chip quick-chip" aria-pressed="true"><span class="quick-name">All stores</span><span class="quick-count">1034</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Zumiez</span><span class="quick-count">339</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Tactics</span><span class="quick-count">56</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">SkateWarehouse</span><span class="quick-count">97</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">CCS</span><span class="quick-count">152</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">TGM</span><span class="quick-count">241</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Deathgear</span><span class="quick-count">40</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Kinetic</span><span class="quick-count">11</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">SPoT</span><span class="quick-count">13</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">Exodus</span><span class="quick-count">63</span></button>
+          <button type="button" class="chip quick-chip" aria-pressed="false"><span class="quick-name">SoCal</span><span class="quick-count">22</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="tool-line">
+      <div class="search-box"><input type="search" placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals" autocomplete="off"></div>
+      <div class="segment" role="group" aria-label="What changed">
+        <button type="button" class="change-btn" aria-pressed="true">All deals</button>
+        <button type="button" class="change-btn" aria-pressed="false">New 0</button>
+        <button type="button" class="change-btn" aria-pressed="false">Price drops 0</button>
+        <button type="button" class="change-btn" aria-pressed="false">Hit lowest 0</button>
+        <button type="button" class="change-btn" aria-pressed="false">Disappeared 19</button>
+      </div>
+      <p class="result-count">635 deals</p>
+      <label class="sort-field"><span>Sort</span>
+        <select aria-label="Sort">
+          <option selected>% off</option>
+          <option>Today's drops &amp; new first</option>
+          <option>Deal score</option>
+          <option>Sale price, low to high</option>
+        </select>
+      </label>
+    </div>
+    <div class="shell">
+      <div class="rail">
+        <aside class="sidebar" aria-label="Filters">
+          <div class="filter-head"><span>Filter deals</span><button type="button" class="text-btn">Clear all</button></div>
+          <div class="side-group">
+            <section class="filter-section is-open" data-section="brand">
+              <button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-brand">Brand</button>
+              <div class="section-body" id="section-brand">
+                <div class="facet brand-facet">
+                  <input class="brand-search" type="search" placeholder="Find a brand" aria-label="Find a brand" autocomplete="off">
+                  <div class="facet-list" aria-label="Brands">
+                    <button type="button" class="facet-value" aria-pressed="true"><span class="facet-name">All brands</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Baker</span><span class="facet-count">(46)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Primitive</span><span class="facet-count">(30)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Heroin</span><span class="facet-count">(29)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Welcome</span><span class="facet-count">(23)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Zero</span><span class="facet-count">(23)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Anti-Hero</span><span class="facet-count">(20)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Real</span><span class="facet-count">(20)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Death Wish</span><span class="facet-count">(17)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Chocolate</span><span class="facet-count">(15)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Almost</span><span class="facet-count">(12)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Creature</span><span class="facet-count">(12)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Girl</span><span class="facet-count">(7)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Foundation</span><span class="facet-count">(6)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Hockey</span><span class="facet-count">(6)</span></button>
+                    <button type="button" class="facet-value" aria-pressed="false"><span class="facet-name">Quasi</span><span class="facet-count">(5)</span></button>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="filter-section is-open" data-section="width">
+              <button type="button" class="section-toggle" aria-expanded="true" aria-controls="section-width">Deck Width</button>
+              <div class="section-body" id="section-width">
+                <div class="width-ranges" role="group" aria-label="Deck width">
+                  <button type="button" class="chip width-chip" aria-pressed="false"><span class="width-label">7.5</span><span class="width-count">9</span></button>
+                  <button type="button" class="chip width-chip" aria-pressed="false"><span class="width-label">7.75</span><span class="width-count">13</span></button>
+                  <button type="button" class="chip width-chip" aria-pressed="false"><span class="width-label">8.0</span><span class="width-count">108</span></button>
+                  <button type="button" class="chip width-chip" aria-pressed="false"><span class="width-label">8.25</span><span class="width-count">196</span></button>
+                  <button type="button" class="chip width-chip" aria-pressed="false"><span class="width-label">8.5</span><span class="width-count">146</span></button>
+                  <button type="button" class="chip width-chip" aria-pressed="false"><span class="width-label">8.75</span><span class="width-count">18</span></button>
+                  <button type="button" class="chip width-chip" aria-pressed="false"><span class="width-label">9.0</span><span class="width-count">58</span></button>
+                  <button type="button" class="chip width-chip" aria-pressed="false"><span class="width-label">10+</span><span class="width-count">33</span></button>
+                </div>
+              </div>
+            </section>
+            <section class="filter-section" data-section="length">
+              <button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-length">Deck Length</button>
+              <div class="section-body" id="section-length"></div>
+            </section>
+            <section class="filter-section" data-section="wheelbase">
+              <button type="button" class="section-toggle" aria-expanded="false" aria-controls="section-wheelbase">Wheelbase</button>
+              <div class="section-body" id="section-wheelbase"></div>
+            </section>
+          </div>
+        </aside>
+      </div>
+      <div class="board">
+        <div class="card-grid" id="cardGrid">
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Heroin The Watermelon Egg Twin 13.5&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Heroin The Watermelon Egg Twin 13.5&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,6 16,7 32,5 48,8 64,11 80,14 96,16 112,18"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 62%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $64.30</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $54.99</span></p>
+            <p class="card-meta">Found Oct 2 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Frog Decker Locked In 8.25&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Frog Decker Locked In 8.25&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,8 18,8 36,9 54,10 72,12 90,15 112,17"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 61%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $29.99</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $29.99</span></p>
+            <p class="card-meta">Found Oct 22 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Primitive Gillet Portal 8.125&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Primitive Gillet Portal 8.125&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,5 20,6 40,8 60,7 80,12 100,15 112,16"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 57%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $33.37</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $29.99</span></p>
+            <p class="card-meta">Found Feb 20 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Brand-x Blemished Truitt Skates Street Egg Skateboard Deck at Deathgear</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Deathgear</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Brand-x Blemished Truitt Skates Street Egg Skateboard Deck #2</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,10 22,10 44,11 66,11 88,12 112,13"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 57%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $30.00</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $30.00</span></p>
+            <p class="card-meta">Found Oct 28 · Deathgear</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Quasi Dream 8.25&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Quasi Dream 8.25&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,7 16,6 32,9 48,8 64,13 80,15 96,14 112,18"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 56%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $29.99</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $29.99</span></p>
+            <p class="card-meta">Found Oct 27 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Disney x HUF Mickey Mouse Worldwide Tour 8.25&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Disney x HUF Mickey Mouse Worldwide Tour 8.25&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,9 28,8 56,10 84,13 112,16"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 50%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $49.99</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $49.99</span></p>
+            <p class="card-meta">Found Mar 27 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Foundation 3 Star 7.88&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Foundation 3 Star 7.88&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,6 20,8 40,7 60,11 80,10 100,15 112,17"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 50%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $30.85</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $29.99</span></p>
+            <p class="card-meta">Found Mar 22 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Harry Potter x Welcome Finale 9.5&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Harry Potter x Welcome Finale 9.5&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,11 24,10 48,12 72,12 96,14 112,15"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 50%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $44.99</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $44.99</span></p>
+            <p class="card-meta">Found Feb 20 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Primitive Desarmo Daydream 8.125&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Primitive Desarmo Daydream 8.125&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,5 18,7 36,6 54,10 72,13 90,12 112,18"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 50%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $36.15</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $34.99</span></p>
+            <p class="card-meta">Found Mar 20 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Primitive Gillet Virgin 8.125&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Primitive Gillet Virgin 8.125&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,8 22,7 44,9 66,12 88,14 112,17"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 50%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $36.10</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $34.99</span></p>
+            <p class="card-meta">Found Apr 21 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">EDGLRD Tech Script 8.25&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">EDGLRD Tech Script 8.25&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,7 20,8 40,6 60,11 80,13 100,16 112,18"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 49%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $39.99</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $39.99</span></p>
+            <p class="card-meta">Found May 16 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">EDGLRD Barrio Triste 002 8.0&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">EDGLRD Barrio Triste 002 8.0&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,4 16,6 32,8 48,7 64,12 80,14 96,17 112,19"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 49%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $46.32</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $39.99</span></p>
+            <p class="card-meta">Found Jun 26 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Jacuzzi Big Ol J Egg 8.38&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Jacuzzi Big Ol J Egg 8.38&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,9 26,9 52,11 78,13 112,16"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 47%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $39.99</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $39.99</span></p>
+            <p class="card-meta">Found Mar 21 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Chocolate Rodriguez Poe Reissue 7.5&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Chocolate Rodriguez Poe Reissue 7.5&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,8 20,7 40,10 60,9 80,14 100,15 112,18"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 47%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $39.99</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $39.99</span></p>
+            <p class="card-meta">Found Apr 12 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Chocolate York Kid Reissue 7.5&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Chocolate York Kid Reissue 7.5&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,6 24,8 48,7 72,12 96,15 112,17"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 47%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $40.30</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $39.99</span></p>
+            <p class="card-meta">Found May 21 · Zumiez</p>
+          </article>
+          <article class="deal-card">
+            <a class="card-store-link" href="#preview"><span class="sr-only">Primitive Hamilton Dimension 8.125&quot; Skateboard Deck at Zumiez</span></a>
+            <button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>
+            <button type="button" class="card-alert">Alert me</button>
+            <div class="media"><span class="thumb-wrap hero-wrap"><span class="hero ph"></span></span><span class="store-mark">Zumiez</span><button type="button" class="card-quick" aria-expanded="false">Quick view</button></div>
+            <h3 class="product-name">Primitive Hamilton Dimension 8.125&quot; Skateboard Deck</h3>
+            <div class="card-sparkline" aria-hidden="true"><svg viewBox="0 0 112 22"><polyline points="0,10 18,9 36,11 54,10 72,14 90,16 112,18"/></svg></div>
+            <p class="card-offer"><span class="card-drop">↓ 50%</span></p>
+            <p class="card-prices"><span class="avg-price">Average $34.99</span><span class="price-sep" aria-hidden="true">/</span><span class="now-price">Now $34.99</span></p>
+            <p class="card-meta">Found Apr 4 · Zumiez</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="sd-coming" id="comingSoon" hidden>
+    <div class="sd-coming-head">
+      <span class="sd-coming-icon" aria-hidden="true">
+        <svg class="sd-coming-glyph" data-sport="ski" viewBox="0 0 18 18"><path d="M4.2 16V5.4c0-1.5 2.1-1.5 2.1 0M9.8 16V5.4c0-1.5 2.1-1.5 2.1 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="sd-coming-glyph" data-sport="mtb" viewBox="0 0 18 18"><circle cx="4.4" cy="13" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="13.6" cy="13" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.4 13 8 6.2h4.1L13.6 13M8 6.2 6.4 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        <svg class="sd-coming-glyph" data-sport="bmx" viewBox="0 0 18 18"><circle cx="4.2" cy="13.2" r="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12.8" cy="13.2" r="1.8" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4.2 13.2 8 7.4h3.2L12.8 13.2M8 7.4 6.6 13.2M12.8 13.2h2.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      </span>
+      <h2 id="comingTitle">Ski deals are coming soon</h2>
+    </div>
+    <p class="sd-coming-copy" id="comingCopy">No listings yet. Prices, history, and alerts are not available for this sport.</p>
+    <div class="sd-coming-actions">
+      <button type="button" class="sd-notify" id="notifyBtn" aria-describedby="notifyNote">Notify me</button>
+      <p class="sd-notify-note" id="notifyNote">Preview only. Nothing is saved and no alert is set.</p>
+      <p class="sd-notify-status" id="notifyStatus" role="status" hidden></p>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  var sports = ["skate", "ski", "mtb", "bmx"];
+  var root = document.documentElement;
+  var links = Array.prototype.slice.call(document.querySelectorAll(".sd-sport"));
+  var status = document.getElementById("sportStatus");
+  var coming = document.getElementById("comingSoon");
+  var title = document.getElementById("comingTitle");
+  var slice = document.getElementById("catalogSlice");
+  var brand = document.getElementById("brandHome");
+  var params = new URLSearchParams(location.search);
+  var sportId = sports.indexOf(params.get("sport")) >= 0 ? params.get("sport") : "skate";
+  var accents = params.get("accents") === "sport" ? "sport" : "utility";
+
+  function writeUrl() {
+    var url = new URL(location.href);
+    url.searchParams.set("sport", sportId);
+    url.searchParams.set("accents", accents);
+    try { history.replaceState(null, "", url); } catch (err) {}
+    links.forEach(function (link) {
+      link.href = "?sport=" + link.dataset.sport + "&accents=" + accents;
+    });
+    brand.href = "?sport=skate&accents=" + accents;
+  }
+
+  function render(announce) {
+    var ready = sportId === "skate";
+    root.dataset.sport = sportId;
+    root.dataset.accents = accents;
+    root.dataset.catalog = ready ? "ready" : "soon";
+    links.forEach(function (link) {
+      if (link.dataset.sport === sportId) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+    document.querySelectorAll(".sd-accent-toggle button").forEach(function (button) {
+      button.setAttribute("aria-pressed", button.dataset.accents === accents ? "true" : "false");
+    });
+    slice.hidden = !ready;
+    coming.hidden = ready;
+    var label = {skate: "Skate", ski: "Ski", mtb: "MTB", bmx: "BMX"}[sportId];
+    title.textContent = label + " deals are coming soon";
+    document.title = "ShredDeals design preview · " + label;
+    if (announce) status.textContent = ready ? label + " deals" : label + " deals are coming soon";
+    writeUrl();
+    root.dataset.ready = "true";
+  }
+
+  links.forEach(function (link) {
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      sportId = link.dataset.sport;
+      render(true);
+    });
+  });
+  document.querySelector(".sd-sports").addEventListener("keydown", function (event) {
+    var index = links.indexOf(document.activeElement);
+    if (index < 0) return;
+    var next = null;
+    if (event.key === "ArrowRight") next = (index + 1) % links.length;
+    else if (event.key === "ArrowLeft") next = (index - 1 + links.length) % links.length;
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = links.length - 1;
+    if (next == null) return;
+    event.preventDefault();
+    sportId = links[next].dataset.sport;
+    render(true);
+    links[next].focus();
+  });
+  document.querySelectorAll(".sd-accent-toggle button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      accents = button.dataset.accents;
+      render(false);
+    });
+  });
+  document.querySelectorAll(".sd-link").forEach(function (button) {
+    button.addEventListener("click", function () {
+      document.querySelectorAll(".sd-link").forEach(function (other) {
+        other.setAttribute("aria-pressed", other === button ? "true" : "false");
+      });
+    });
+  });
+  document.getElementById("notifyBtn").addEventListener("click", function (event) {
+    event.currentTarget.setAttribute("aria-pressed", "true");
+    var note = document.getElementById("notifyStatus");
+    note.hidden = false;
+    note.textContent = "Still a placeholder. No alert was set.";
+  });
+  brand.addEventListener("click", function (event) {
+    event.preventDefault();
+    sportId = "skate";
+    render(true);
+  });
+  render(false);
+})();
+</script>
+</body>
+</html>
