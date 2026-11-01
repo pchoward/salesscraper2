@@ -13,15 +13,13 @@
     function state(url, config) {
         const parsed = new URL(url);
         const sport = config.sports.find(item => item.id === parsed.searchParams.get("sport")) || config.sports.find(item => item.id === config.defaultSport);
-        const discipline = sport.disciplines.find(item => item.id === parsed.searchParams.get("discipline")) || sport.disciplines[0];
-        return { sport, discipline };
+        return { sport };
     }
-    function navigate(url, config, sportId, disciplineId) {
+    function navigate(url, config, sportId) {
         const next = new URL(url);
         const sport = config.sports.find(item => item.id === sportId) || config.sports.find(item => item.id === config.defaultSport);
-        const discipline = sport.disciplines.find(item => item.id === disciplineId) || sport.disciplines[0];
         next.searchParams.set("sport", sport.id);
-        next.searchParams.set("discipline", discipline.id);
+        next.searchParams.delete("discipline");
         return next;
     }
     function skateURL(url, config) {
@@ -44,6 +42,7 @@
         const incomingKeys = new Set(child.searchParams.keys());
         incomingKeys.forEach(key => { if (!NAV_KEYS.includes(key)) parent.searchParams.delete(key); });
         child.searchParams.forEach((value, key) => { if (!NAV_KEYS.includes(key)) parent.searchParams.append(key, value); });
+        parent.searchParams.delete("discipline");
         parent.hash = child.hash;
         return parent;
     }
@@ -55,16 +54,20 @@
         return null;
     }
     function mount(win, config) {
+        const cleanURL = new URL(win.location.href);
+        if (cleanURL.searchParams.has("discipline")) {
+            cleanURL.searchParams.delete("discipline");
+            win.history.replaceState(win.history.state, "", cleanURL);
+        }
         const doc = win.document;
         const sportTabs = doc.getElementById("sportTabs");
-        const disciplineTabs = doc.getElementById("disciplineTabs");
         const frame = doc.getElementById("skateFrame");
         const empty = doc.getElementById("comingSoon");
         const brand = doc.getElementById("brandHome");
         brand.textContent = config.brand.name;
-        brand.title = config.brand.domain || "Back to Skate / All";
-        function choose(sportId, disciplineId, focusGroup) {
-            const next = navigate(win.location.href, config, sportId, disciplineId);
+        brand.title = config.brand.domain || "Back to Skate";
+        function choose(sportId, focusGroup) {
+            const next = navigate(win.location.href, config, sportId);
             if (next.href !== win.location.href) win.history.pushState(win.history.state || {}, "", next);
             render(focusGroup);
         }
@@ -96,11 +99,9 @@
         }
         function render(focusGroup) {
             const current = state(win.location.href, config);
-            tabs(sportTabs, config.sports, current.sport.id, "sport-", "sportPanel", id => choose(id, "all", "sport"));
-            tabs(disciplineTabs, current.sport.disciplines, current.discipline.id, "discipline-", "disciplinePanel", id => choose(current.sport.id, id, "discipline"));
+            tabs(sportTabs, config.sports, current.sport.id, "sport-", "sportPanel", id => choose(id, "sport"));
             doc.getElementById("sportPanel").setAttribute("aria-labelledby", "sport-" + current.sport.id);
-            doc.getElementById("disciplinePanel").setAttribute("aria-labelledby", "discipline-" + current.discipline.id);
-            doc.title = config.brand.name + " · " + current.sport.label + " · " + current.discipline.label + " preview";
+            doc.title = config.brand.name + " · " + current.sport.label + " preview";
             const skate = current.sport.id === "skate";
             frame.hidden = !skate;
             frame.setAttribute("aria-hidden", String(!skate));
@@ -108,7 +109,7 @@
             empty.hidden = skate;
             const note = doc.getElementById("contextNote");
             if (skate) {
-                note.textContent = current.discipline.id === "all" ? "Skate · saved SkateDeals catalog. Development preview; live delivery is disabled." : current.discipline.label + " · discipline tagging is not available yet. Showing the full Skate catalog.";
+                note.textContent = "Skate · saved SkateDeals catalog. Development preview; live delivery is disabled.";
                 const target = skateURL(win.location.href, config).href;
                 if (frame.dataset.currentURL !== target) {
                     delete frame.dataset.ready;
@@ -116,12 +117,12 @@
                     frame.src = target;
                 }
             } else {
-                note.textContent = current.sport.label + " · " + current.discipline.label + " · navigation prototype";
-                doc.getElementById("emptyTitle").textContent = current.sport.label + (current.discipline.id === "all" ? "" : " / " + current.discipline.label);
-                doc.getElementById("emptyDescription").textContent = "You are browsing the " + current.discipline.label + " navigation for " + current.sport.label + ". Inventory has not been connected.";
+                note.textContent = current.sport.label + " · navigation prototype";
+                doc.getElementById("emptyTitle").textContent = current.sport.label;
+                doc.getElementById("emptyDescription").textContent = "Inventory for " + current.sport.label + " has not been connected.";
             }
             if (focusGroup) {
-                const target = doc.getElementById(focusGroup === "sport" ? "sport-" + current.sport.id : "discipline-" + current.discipline.id);
+                const target = doc.getElementById("sport-" + current.sport.id);
                 target.focus({ preventScroll: true });
                 target.scrollIntoView({ block: "nearest", inline: "nearest" });
             }
@@ -147,8 +148,8 @@
                 win.history[method]({ skateState: event.data.state || null }, "", next);
             } catch (_) { /* Ignore foreign paths and malformed messages. */ }
         });
-        brand.addEventListener("click", () => choose("skate", "all", "sport"));
-        doc.getElementById("backToSkate").addEventListener("click", () => choose("skate", "all", "sport"));
+        brand.addEventListener("click", () => choose("skate", "sport"));
+        doc.getElementById("backToSkate").addEventListener("click", () => choose("skate", "sport"));
         render();
         return { render, choose, state: () => state(win.location.href, config) };
     }

@@ -376,10 +376,10 @@ absolute HTML path; use a **new directory outside the checkout** on each rebuild
 Serve the folder rather than opening it as `file://`, so charts and the shared
 parent/iframe URL history work normally. No scrape, production rebuild, email,
 alert delivery or deployment is run. BMX, Ski and MTB explicitly have no catalog.
-Skate Street/Park navigation is labeled as showing the full Skate catalog until
-real discipline tagging exists.
+The only navigation categories are Skate, Ski, MTB and BMX; there is no
+discipline row or Street/Transition/Freestyle subdivision.
 
-Both tab rows, branding, and the optional domain label are configuration in
+The four sport tabs, branding, and the optional domain label are configuration in
 `previews/sports.json`. Pass `--config /path/to/sports.json` to build with a local
 copy; there are no DNS/domain changes. The source public page stays unchanged.
 

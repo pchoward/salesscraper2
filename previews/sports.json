@@ -1,15 +1,80 @@
 {
-  "brand": {"name": "ShredDeals", "domain": null},
+  "brand": {
+    "name": "ShredDeals",
+    "domain": null
+  },
   "defaultSport": "skate",
   "sports": [
     {
-      "id": "skate", "label": "Skate", "catalog": "skate/sale_items_chart.html",
-      "disciplines": [{"id": "all", "label": "All"}, {"id": "street", "label": "Street"}, {"id": "park-transition", "label": "Park / Transition"}],
-      "categories": ["Decks", "Wheels", "Trucks", "Bearings", "Completes", "Sneakers", "Accessories", "Protection"],
-      "facets": {"Decks": ["brand", "width", "length", "wheelbase", "color"], "Wheels": ["brand", "diameter", "durometer", "shape", "color"], "Trucks": ["brand", "size", "height", "construction"], "Bearings": ["brand", "abec"], "Sneakers": ["brand", "shoeSize"], "Protection": ["brand", "type", "size"]}
+      "id": "skate",
+      "label": "Skate",
+      "catalog": "skate/sale_items_chart.html",
+      "categories": [
+        "Decks",
+        "Wheels",
+        "Trucks",
+        "Bearings",
+        "Completes",
+        "Sneakers",
+        "Accessories",
+        "Protection"
+      ],
+      "facets": {
+        "Decks": [
+          "brand",
+          "width",
+          "length",
+          "wheelbase",
+          "color"
+        ],
+        "Wheels": [
+          "brand",
+          "diameter",
+          "durometer",
+          "shape",
+          "color"
+        ],
+        "Trucks": [
+          "brand",
+          "size",
+          "height",
+          "construction"
+        ],
+        "Bearings": [
+          "brand",
+          "abec"
+        ],
+        "Sneakers": [
+          "brand",
+          "shoeSize"
+        ],
+        "Protection": [
+          "brand",
+          "type",
+          "size"
+        ]
+      }
     },
-    {"id": "bmx", "label": "BMX", "catalog": null, "disciplines": [{"id": "all", "label": "All"}, {"id": "freestyle", "label": "Freestyle"}, {"id": "race", "label": "Race"}, {"id": "dirt", "label": "Dirt"}], "categories": [], "facets": {}},
-    {"id": "ski", "label": "Ski", "catalog": null, "disciplines": [{"id": "all", "label": "All"}, {"id": "park", "label": "Park"}, {"id": "moguls", "label": "Moguls"}, {"id": "all-mountain", "label": "All-Mountain"}], "categories": [], "facets": {}},
-    {"id": "mtb", "label": "MTB", "catalog": null, "disciplines": [{"id": "all", "label": "All"}, {"id": "trail", "label": "Trail"}, {"id": "enduro", "label": "Enduro"}, {"id": "downhill", "label": "Downhill"}, {"id": "dirt-jump", "label": "Dirt Jump"}], "categories": [], "facets": {}}
+    {
+      "id": "ski",
+      "label": "Ski",
+      "catalog": null,
+      "categories": [],
+      "facets": {}
+    },
+    {
+      "id": "mtb",
+      "label": "MTB",
+      "catalog": null,
+      "categories": [],
+      "facets": {}
+    },
+    {
+      "id": "bmx",
+      "label": "BMX",
+      "catalog": null,
+      "categories": [],
+      "facets": {}
+    }
   ]
 }

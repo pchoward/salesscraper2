@@ -13,35 +13,33 @@ from previews.shreddeals import SOURCE,HERE,build,load_config,skate_query_keys
 
 
 class ShredDealsTests(unittest.TestCase):
-    def test_navigation_config_covers_required_sports_and_disciplines(self):
+    def test_navigation_config_covers_four_sports_without_segmentation(self):
         config=load_config(HERE/'sports.json')
-        self.assertEqual([sport['label'] for sport in config['sports']],['Skate','BMX','Ski','MTB'])
-        expected={'skate':['all','street','park-transition'],'bmx':['all','freestyle','race','dirt'],
-                  'ski':['all','park','moguls','all-mountain'],'mtb':['all','trail','enduro','downhill','dirt-jump']}
+        self.assertEqual([sport['label'] for sport in config['sports']],['Skate','Ski','MTB','BMX'])
         for sport in config['sports']:
-            self.assertEqual([d['id'] for d in sport['disciplines']],expected[sport['id']])
+            self.assertNotIn('disciplines',sport)
             if sport['id']!='skate':
                 self.assertIsNone(sport['catalog'])
                 self.assertEqual(sport['categories'],[])
         self.assertIsNone(config['brand']['domain'])
         self.assertEqual(config['sports'][0]['facets']['Decks'][:2],['brand','width'])
 
-    def test_url_switching_resets_discipline_and_preserves_legacy_parameters(self):
+    def test_sport_switching_discards_old_discipline_and_preserves_legacy_parameters(self):
         script='''const assert=require('node:assert/strict');const N=require('./previews/navigation.js');
 const config=JSON.parse(process.argv[1]);config.skateQueryKeys=JSON.parse(process.argv[2]);
 const start='https://preview.example/index.html?sport=bmx&discipline=freestyle&store=CCS&width=8.25&q=baker&utm_source=test#kept';
-const bmx=N.state(start,config);assert.equal(bmx.sport.id,'bmx');assert.equal(bmx.discipline.id,'freestyle');
-const ski=N.navigate(start,config,'ski');assert.equal(ski.searchParams.get('discipline'),'all');
+const bmx=N.state(start,config);assert.equal(bmx.sport.id,'bmx');assert.equal(bmx.discipline,undefined);
+const ski=N.navigate(start,config,'ski');assert.equal(ski.searchParams.get('discipline'),null);
 assert.equal(ski.searchParams.get('q'),'baker');assert.equal(ski.hash,'#kept');
-assert.equal(N.state(N.navigate(ski,config,'ski','moguls'),config).discipline.id,'moguls');
-assert.equal(N.state(start,config).discipline.id,'freestyle','back/forward can restore a prior URL exactly');
+assert.equal(N.state(N.navigate(ski,config,'ski'),config).sport.id,'ski');
+assert.equal(N.state(start,config).sport.id,'bmx','back/forward restores sport');
 assert.equal(N.state('https://preview.example/?sport=unknown&discipline=dirt',config).sport.id,'skate');
-assert.equal(N.state('https://preview.example/?sport=skate&discipline=dirt',config).discipline.id,'all');
+assert.equal(N.state('https://preview.example/?sport=skate&discipline=dirt',config).discipline,undefined);
 const frame=N.skateURL(start,config);assert.equal(frame.pathname,'/skate/sale_items_chart.html');
 assert.equal(frame.searchParams.get('sport'),null);assert.equal(frame.searchParams.get('discipline'),null);
 assert.equal(frame.searchParams.get('store'),'CCS');assert.equal(frame.searchParams.get('width'),'8.25');
 const merged=N.mergeSkateURL(start,'https://preview.example/skate/sale_items_chart.html?store=Tactics&q=oj#after',config);
-assert.equal(merged.searchParams.get('sport'),'bmx');assert.equal(merged.searchParams.get('discipline'),'freestyle');
+assert.equal(merged.searchParams.get('sport'),'bmx');assert.equal(merged.searchParams.get('discipline'),null);
 assert.equal(merged.searchParams.get('store'),'Tactics');assert.equal(merged.searchParams.get('width'),null);
 assert.equal(merged.searchParams.get('utm_source'),'test','unknown parameters survive child normalization');
 assert.equal(merged.hash,'#after');
@@ -50,7 +48,7 @@ assert.throws(()=>N.mergeSkateURL(start,'https://preview.example/other.html',con
 assert.equal(N.nextIndex(3,'ArrowRight',4),0);assert.equal(N.nextIndex(0,'ArrowLeft',4),3);
 assert.equal(N.nextIndex(2,'Home',4),0);assert.equal(N.nextIndex(2,'End',4),3);assert.equal(N.nextIndex(2,'Tab',4),null);
 // Navigation does not hardcode four sports or their labels in rendering logic.
-config.sports.push({id:'surf',label:'Surf',catalog:null,disciplines:[{id:'all',label:'All'}]});
+config.sports.push({id:'surf',label:'Surf',catalog:null});
 assert.equal(N.state(N.navigate(start,config,'surf'),config).sport.label,'Surf');
 '''
         result=subprocess.run(['node','-e',script,json.dumps(load_config(HERE/'sports.json')),json.dumps(skate_query_keys())],
@@ -121,18 +119,22 @@ assert.equal(N.state(N.navigate(start,config,'surf'),config).sport.label,'Surf')
             soup=BeautifulSoup(path.read_text(),'html.parser')
             payload=json.loads(soup.select_one('#sportConfig').string)
             self.assertEqual(payload['brand'],config['brand'])
-            self.assertEqual(len(soup.select('[role="tablist"]')),2)
+            self.assertEqual(len(soup.select('[role="tablist"]')),1)
             self.assertTrue(soup.select_one('#skateFrame').has_attr('hidden'))
             self.assertIn('Coming soon / no catalog yet',soup.get_text())
             self.assertTrue(soup.select_one('a.skip'))
+            self.assertEqual(soup.select_one('main').parent.name,'body')
+            self.assertEqual(soup.select_one('#skateFrame').parent.get('id'),'catalogPanel')
         css=(HERE/'navigation.css').read_text()
         self.assertIn(':focus-visible',css)
         self.assertIn('@media(max-width:600px)',css)
-        self.assertIn('overflow-x:auto',css)
+        self.assertIn('repeat(4,1fr)',css)
+        self.assertNotIn('disciplineTabs',css)
         js=(HERE/'navigation.js').read_text()
         self.assertIn('event.source !== frame.contentWindow',js)
         self.assertIn('event.origin !== win.location.origin',js)
-        self.assertIn('discipline tagging is not available yet',js)
+        self.assertNotIn('disciplineTabs',js)
+        self.assertNotIn('disciplinePanel',js)
 
 
 if __name__=='__main__':unittest.main()

@@ -56,9 +56,9 @@ def run(preview, screenshots, firefox, geckodriver):
         assert driver.execute_script('return innerWidth') == width
         assert driver.execute_script('return innerHeight') == height
 
-    def wait_state(sport, discipline):
+    def wait_state(sport):
         WebDriverWait(driver, 15).until(lambda d: d.execute_script(
-            'return [shredApp.state().sport.id,shredApp.state().discipline.id]') == [sport, discipline])
+            'return shredApp.state().sport.id') == sport)
 
     def frame():
         WebDriverWait(driver, 20).until(lambda d: d.execute_script('return document.getElementById("skateFrame").dataset.ready === "true"'))
@@ -75,7 +75,7 @@ def run(preview, screenshots, firefox, geckodriver):
         driver.set_page_load_timeout(25)
         viewport(1440, 1000)
         driver.get(base+'?store=CCS&type=deck&width=8.25&utm_source=prototype-test')
-        wait_state('skate', 'all')
+        wait_state('skate')
         frame()
         cards = visible_cards()
         assert cards and all(card['store'] == 'CCS' for card in cards)
@@ -118,27 +118,24 @@ def run(preview, screenshots, firefox, geckodriver):
         driver.switch_to.default_content()
         passed.append('Existing search, sorting, Subscribe UI, price history, desktop Quick View and Back preserved')
         driver.find_element(By.ID, 'brandHome').click()
-        driver.find_element(By.ID, 'sport-skate').send_keys(Keys.ARROW_RIGHT)
-        wait_state('bmx', 'all')
+        driver.find_element(By.ID, 'sport-skate').send_keys(Keys.ARROW_LEFT)
+        wait_state('bmx')
         assert driver.execute_script('return document.activeElement.id') == 'sport-bmx'
         assert driver.find_element(By.ID, 'sport-bmx').get_attribute('tabindex') == '0'
         assert driver.find_element(By.ID, 'sport-skate').get_attribute('tabindex') == '-1'
         assert driver.find_element(By.ID, 'skateFrame').get_attribute('hidden') is not None
-        driver.find_element(By.ID, 'discipline-all').send_keys(Keys.ARROW_RIGHT)
-        wait_state('bmx', 'freestyle')
         driver.find_element(By.ID, 'sport-ski').click()
-        wait_state('ski', 'all')
+        wait_state('ski')
         driver.back()
-        wait_state('bmx', 'freestyle')
+        wait_state('bmx')
         driver.forward()
-        wait_state('ski', 'all')
-        driver.find_element(By.ID, 'discipline-all').send_keys(Keys.END)
-        wait_state('ski', 'all-mountain')
-        driver.find_element(By.ID, 'discipline-all-mountain').send_keys(Keys.HOME)
-        wait_state('ski', 'all')
-        passed.append('Keyboard arrows/Home/End, focus/roving tabindex, discipline reset, Back/Forward restoration')
+        wait_state('ski')
+        driver.find_element(By.ID, 'sport-ski').send_keys(Keys.END)
+        wait_state('bmx')
+        driver.find_element(By.ID, 'sport-bmx').send_keys(Keys.HOME)
+        wait_state('skate')
+        passed.append('Keyboard arrows/Home/End, focus/roving tabindex, sport-only Back/Forward restoration')
         driver.find_element(By.ID, 'sport-bmx').click()
-        driver.find_element(By.ID, 'discipline-freestyle').click()
         assert driver.find_element(By.ID, 'comingSoon').is_displayed()
         assert not driver.find_element(By.ID, 'skateFrame').is_displayed()
         assert 'no catalog yet' in driver.find_element(By.ID, 'comingSoon').text
@@ -149,20 +146,19 @@ def run(preview, screenshots, firefox, geckodriver):
         driver.switch_to.default_content()
         ActionChains(driver).move_to_element(driver.find_element(By.ID, 'brandHome')).perform()
         driver.save_screenshot(str(screenshots/'desktop-skate.png'))
-        driver.find_element(By.ID, 'discipline-street').click()
-        assert 'full Skate catalog' in driver.find_element(By.ID, 'contextNote').text
-        passed.append('Other sports never display Skate inventory; missing Skate discipline tags are explicit')
+        assert not driver.find_elements(By.ID, 'disciplineTabs')
+        passed.append('Other sports never display Skate inventory; no discipline subdivision is rendered')
         driver.quit()
         driver = browser(coarse=True)
         driver.set_page_load_timeout(25)
         viewport(390, 844)
-        driver.get(base+'?sport=mtb&discipline=dirt-jump')
-        wait_state('mtb', 'dirt-jump')
+        driver.get(base+'?sport=mtb')
+        wait_state('mtb')
         assert not driver.find_element(By.ID, 'skateFrame').is_displayed()
         assert driver.execute_script('return document.documentElement.scrollWidth <= innerWidth')
         driver.save_screenshot(str(screenshots/'mobile-mtb.png'))
         driver.find_element(By.ID, 'sport-skate').click()
-        wait_state('skate', 'all')
+        wait_state('skate')
         frame()
         assert driver.execute_script('return innerWidth') == 390
         assert driver.execute_script('return document.documentElement.scrollWidth <= innerWidth')

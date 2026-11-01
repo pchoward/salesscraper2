@@ -20,9 +20,6 @@ def load_config(path):
         if not re.fullmatch(r'[a-z]+', sid) or sid in ids:
             raise ValueError('Sport IDs must be unique lowercase tokens')
         ids.append(sid)
-        disciplines = [item['id'] for item in sport['disciplines']]
-        if not disciplines or disciplines[0] != 'all' or len(set(disciplines)) != len(disciplines) or any(not re.fullmatch(r'[a-z]+(?:-[a-z]+)*', value) for value in disciplines):
-            raise ValueError('Each sport needs unique disciplines with All first')
         if sid != 'skate' and sport.get('catalog'):
             raise ValueError('This prototype has a Skate catalog only')
         if sid == 'skate' and sport.get('catalog') != 'skate/sale_items_chart.html':

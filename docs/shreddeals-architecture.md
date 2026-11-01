@@ -5,6 +5,8 @@
 Base: latest main `4979926` (after Claude's search PR #110). Product specification
 work is on `codex/product-specification-coverage`, not a dependency of this branch.
 The full issue was read from its GitHub issue page on November 1, 2026.
+The owner subsequently simplified the scope to four categories, in this order:
+Skate, Ski, MTB, BMX. No discipline segmentation is included.
 
 The current site uses generated HTML with inline vanilla JavaScript/CSS and
 `history.json` loaded on demand. `page.py` builds the page; `page.js` owns filters,
@@ -19,9 +21,9 @@ is needed. Existing retailer-first links, hover Quick View, dense cards, search,
 alerts controls, saved views, and charts should execute their original code.
 
 Minimal configuration: brand name/domain, default sport, and a sports array with
-IDs, labels, discipline IDs/labels, catalog availability, category names, and facet
+IDs, labels, catalog availability, category names, and facet
 ordering. Other sports have empty categories/facets and no catalog. This is
-navigation/capability configuration, not a new product schema. Both tab rows are
+navigation/capability configuration, not a new product schema. The sport tabs are
 rendered from it. Category/facet descriptors document the existing Skate contract;
 they do not reimplement or override the existing filter code.
 
@@ -37,9 +39,8 @@ Only the local copy receives a history bridge and preview safety policy. Externa
 analytics is removed, and remote API/form/frame connections are blocked. Same-origin
 chart data remains available; retailer links still open normally. Other sports
 hide the entire Skate iframe and show explicit Coming soon / no catalog yet text.
-Skate Street/Park tabs change navigation context, but explicitly state that discipline
-tagging is unavailable and the full Skate catalog is being shown. No product is
-inferred to belong to a discipline.
+Skate always shows its full existing catalog and controls. No product is inferred
+to belong to a discipline; no sub-discipline navigation is rendered.
 
 This is a deliberate prototype boundary, not the final multi-sport rendering
 architecture. Its costs are a second scroll context, a snapshot that needs
@@ -48,11 +49,11 @@ percentage claim about measured code reuse.
 
 ## URL contract and future path
 
-The parent owns `sport` and `discipline`. Existing Skate query keys/hash remain
+The parent owns `sport`. Obsolete `discipline` parameters are removed without
+changing the selected sport or existing Skate filters. Existing Skate query keys/hash remain
 addressable and pass through to the embedded app. Unknown parameters must survive
 navigation. Parent and child history synchronization must avoid duplicate history
-entries and validate message origin/source/path. Sport changes reset discipline
-to All; back/forward restores both context and Skate query state.
+entries and validate message origin/source/path. Back/forward restores the sport and Skate query state.
 
 The first real BMX step is a separate reviewed data contract for one category
 (e.g. frames and top-tube length), followed by one permitted retailer/feed adapter.
@@ -72,7 +73,7 @@ Serve that directory over HTTP for iframe messaging and lazy chart data; opening
 only index.html as a file is not the supported runtime. Configuration is embedded
 as escaped JSON, so no remote configuration fetch or domain is required.
 
-Automated unit checks cover the required configuration, sport/discipline URLs,
+Automated unit checks cover the required configuration, sport-only URLs and compatibility with old discipline URLs,
 legacy query/hash preservation, unknown parameters, source/origin/path rejection,
 keyboard indexing, custom branding, unsafe output paths, absent non-Skate catalogs,
 production input hashes, and identical inline Skate application/style code.
@@ -81,7 +82,7 @@ production input hashes, and identical inline Skate application/style code.
 Selenium dependency. It verifies the live generated prototype, retailer links,
 Brand-before-dimension ordering, original search/sorting/Subscribe controls,
 local price-history loading, hover-capable desktop Quick View and Back, roving
-focus/Arrow/Home/End keyboard behavior, discipline reset, Back/Forward, and honest
+focus/Arrow/Home/End keyboard behavior, sport switching, Back/Forward, and honest
 empty states. WebDriver BiDi sets true 1440×1000 and 390×844 viewports, avoiding
 Firefox's minimum outer-window-width limitation. Pointer capabilities are set to
 fine/hover for desktop and coarse for mobile; no product CSS is altered to stage
@@ -97,11 +98,11 @@ Mobile Skate:
 
 BMX placeholder:
 
-![BMX Freestyle preview](screenshots/shreddeals-bmx.png)
+![BMX preview](screenshots/shreddeals-bmx.png)
 
 Mobile MTB placeholder:
 
-![MTB Dirt Jump preview](screenshots/shreddeals-mtb-mobile.png)
+![MTB preview](screenshots/shreddeals-mtb-mobile.png)
 
 The screenshot browser may not load remote product photos under this environment's
 network policy; these are the existing page's own no-photo placeholders, not
@@ -122,7 +123,7 @@ than silently serving a broken preview. A production rollout would require a
 separate architecture/deployment decision; the iframe prototype is not wired into
 GitHub Pages, production navigation, or the daily job.
 
-Validation for this branch: 529 Python tests ran (528 passed, 1 skipped); all 40
+Initial branch validation: 529 Python tests ran (528 passed, 1 skipped); all 40
 Worker tests passed; all seven new navigation/isolation unit tests passed. Eight
 pre-existing Chrome-only browser cases remain unverified in this environment:
 `google-chrome` is absent and installed Chromium emits no DOM. The separate real
@@ -132,3 +133,7 @@ See `docs/shreddeals-browser-results.json` for recorded results. JavaScript
 syntax, Python compilation and staged whitespace checks passed. Remote CI has
 not run because GitHub API access currently blocks opening the PR. Nothing is
 merged or deployed.
+
+The four-sport simplification passed all seven updated unit tests and the full
+Firefox desktop/mobile acceptance check. Screenshots show the current single-row
+Skate / Ski / MTB / BMX navigation, with no discipline tabs.

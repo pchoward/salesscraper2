@@ -14,11 +14,8 @@ button:focus-visible,a:focus-visible { outline:3px solid var(--blue); outline-of
 [role=tablist] { display:flex; gap:4px; }
 [role=tab] { border:0; border-bottom:3px solid transparent; background:transparent; padding:11px 18px; font-size:14px; min-height:44px; white-space:nowrap; }
 #sportTabs [aria-selected=true] { border-bottom-color:var(--blue); font-weight:700; }
-.discipline-nav { border-top:1px solid #edf0f3; padding:3px 20px; overflow-x:auto; }
-#disciplineTabs [role=tab] { font-size:12px; padding:8px 13px; min-height:36px; }
-#disciplineTabs [aria-selected=true] { border-bottom-color:var(--ink); font-weight:650; }
 main { flex:1; min-height:0; overflow:auto; }
-#disciplinePanel { height:100%; display:flex; flex-direction:column; }
+#catalogPanel { height:100%; display:flex; flex-direction:column; }
 #contextNote { margin:0; padding:5px 16px; font-size:11px; color:var(--muted); background:#eef2f6; border-bottom:1px solid var(--line); flex-shrink:0; }
 #skateFrame { display:block; width:100%; flex:1; min-height:0; border:0; background:white; }
 #comingSoon { align-self:center; width:min(720px,calc(100% - 32px)); margin:clamp(32px,9vh,100px) 16px; padding:32px; background:var(--paper); border:1px solid var(--line); border-radius:8px; }
@@ -35,9 +32,6 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
  .top-row nav { grid-column:1/-1; width:100%; }
  #sportTabs { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
  #sportTabs [role=tab] { padding:7px 10px; font-size:13px; }
- .discipline-nav { padding:3px 10px; }
- #disciplineTabs { gap:1px; }
- #disciplineTabs [role=tab] { font-size:11px; padding:7px 10px; min-height:36px; }
  #contextNote { font-size:10px; padding:5px 12px; }
  #comingSoon { padding:22px; margin-top:32px; }
  h1 { font-size:25px; }
