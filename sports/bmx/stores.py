@@ -58,7 +58,12 @@ TYPES.update({
     "bmx bottom brackets": "Drivetrain",
     "bmx brakes": "Braking", "bmx brake cables": "Braking", "bmx brake levers": "Braking",
     "bmx handlebars": "Steering", "bmx stems": "Steering", "bmx headsets": "Steering", "bmx grips": "Steering",
-    "bmx race bikes": "Bikes",
+    "bmx race bikes": "Bikes", "race bmx mini": "Bikes", "race bmx": "Bikes",
+    "chainring": "Drivetrain", "freewheel cogs": "Wheel Parts", "bmx brake spares": "Braking",
+    "bmx bar ends": "Steering", "bar end": "Steering", "bmx spokes": "Wheel Parts", "bmx gyro kits": "Steering",
+    "bmx gyro cables": "Steering", "bmx crank spindles etc": "Drivetrain", "bmx brake pads": "Braking",
+    "bmx disc brakes": "Braking", "bmx front hubs": "Wheel Parts", "bmx grips": "Steering", "bmx chains": "Drivetrain",
+    "bmx frames": "Frames & Forks", "pegs": "Wheel Parts", "chains": "Drivetrain",
 })
 
 # Vague types: the category comes from the title's words.
@@ -66,7 +71,11 @@ TYPES.update({"parts": shopify.BY_TITLE, "": shopify.BY_TITLE, "none": shopify.B
 
 
 def title_part(title):
-    return specs.category_for_title(title, sports.BMX.aliases_file())
+    """A category from the title, for vague or unknown store types. Never
+    Bikes: stores always type complete bikes, and "bike" is in brand names
+    ("SE Bikes Padset", "Haro Bikes Keychain")."""
+    category = specs.category_for_title(title, sports.BMX.aliases_file())
+    return None if category == "Bikes" else category
 
 
 def details(item, product, kind_key):

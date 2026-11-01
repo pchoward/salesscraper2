@@ -388,5 +388,30 @@ class MoreBmxStoresTests(unittest.TestCase):
         })
 
 
+class TitleFallbackTests(unittest.TestCase):
+    def test_brand_words_never_make_a_bike(self):
+        from sports.bmx import stores
+
+        feed = {"products": [
+            {"title": "Wing Padset", "vendor": "SE BIKES", "handle": "padset", "product_type": "Pad Sets",
+             "variants": [{"id": 1, "price": "15.99", "compare_at_price": "25.99"}]},
+            {"title": "SE Racing Keychain", "vendor": "SE Bikes", "handle": "key", "product_type": "Apparel",
+             "variants": [{"id": 2, "price": "5.99", "compare_at_price": "9.99"}]},
+            {"title": "Bike Life Number plate", "vendor": "SE Bikes", "handle": "plate", "product_type": "number plate",
+             "variants": [{"id": 3, "price": "19.99", "compare_at_price": "28.99"}]},
+            {"title": "Arrow Rear Hub Female Bolt Set", "vendor": "We The People", "handle": "bolts", "product_type": "",
+             "variants": [{"id": 4, "price": "9", "compare_at_price": "12"}]},
+            {"title": "Mini Race Bike", "vendor": "SE Bikes", "handle": "mini", "product_type": "Race BMX - Mini",
+             "variants": [{"id": 5, "price": "299", "compare_at_price": "399"}]},
+        ]}
+        kept = {}
+        with sports.BMX.active():
+            for store_scraper in stores.shopify.scrapers_for(stores.POWERS, stores.PARTS):
+                for item in store_scraper.parse(json.dumps(feed)):
+                    kept[item["name"]] = (item["part"], item.get("kind"))
+        self.assertEqual(kept, {"We The People Arrow Rear Hub Female Bolt Set": ("Wheel Parts", "Hubs"),
+                                "SE Bikes Mini Race Bike": ("Bikes", "Complete Bikes")})
+
+
 if __name__ == "__main__":
     unittest.main()
