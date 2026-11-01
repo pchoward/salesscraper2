@@ -1,7 +1,7 @@
 # Issue #122 — native unified ShredDeals header
 
-This is a **review-only native-page preview and reusable header component**, based
-on main `0d5b1c6` (including #119, #120 and #121). The full #122 and the #111/#115
+This is a **review-only native-page preview and reusable header component**, originally based
+on main `0d5b1c6`, now rebased onto `7383c15` after engine PR #124 merged. The full #122 and the #111/#115
 architecture were reviewed. No live homepage, catalog, standalone page, engine,
 configuration, scraper, price history, subscriber state or delivery changes.
 The existing standalone preservation tag is not changed.
@@ -52,8 +52,8 @@ main-branch publisher/security allowlist or deployment workflow is modified.
 ## Claude integration handoff / dependency
 
 **Claude owns `page.py`, `page.js`, sport configuration and separate engine outputs.**
-None of these files are edited here. The preview is usable now; production adoption
-of this header depends on his forthcoming engine PR/output contract. It is not
+None of these files are edited here. The preview is usable now; engine #124 is
+merged, and production adoption awaits Claude’s small page-integration PR. It is not
 safe to claim this PR alone replaces the live iframe homepage.
 
 `previews/unified-header.js` and `.css` are the shared, framework-free component.
@@ -151,3 +151,6 @@ route. The integration should suppress unavailable non-Skate alerts/actions
 using the engine's capabilities (BMX delivery is off), and render honest empty
 pages for sports with no catalog. The component itself does not decide product
 availability or enable delivery. This handoff does not authorize deployment.
+
+After #124 merged, this branch was rebased onto current main `7383c15`;
+the engine/preview/header integration tests were rerun against that base.
