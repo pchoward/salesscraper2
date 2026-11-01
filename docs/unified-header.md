@@ -133,3 +133,21 @@ the existing No photo fallback rather than fabricated imagery.
 Full available regression run: **571 tests completed, OK (one existing skip)**.
 Eight Chrome-dependent cases could not run in this environment; the separate
 Firefox native-header acceptance check passed.
+
+## Coordination update: engine PR #124
+
+Claude's `claude/sport-engine` PR #124 supplies the native engine paths, Albe's
+BMX adapter and manual **ShredDeals - Preview Site** Actions workflow. Agreed
+sequence: owner merges #124, then reviews/merges this header PR, then Claude opens
+a small integration PR that injects this header into each sport page using
+`sports.SPORTS`/`Sport.page_path` and removes the outer iframe shell. Only that
+final integration changes the live homepage. No local retailer-domain updates
+are required for this route; retailer collection occurs in GitHub Actions.
+
+The component accepts per-page relative URLs; for nested pages such as
+`bmx/sale_items_chart.html`, derive each href relative to that page's parent
+rather than passing root-relative assumptions. Preserve the Skate standalone
+route. The integration should suppress unavailable non-Skate alerts/actions
+using the engine's capabilities (BMX delivery is off), and render honest empty
+pages for sports with no catalog. The component itself does not decide product
+availability or enable delivery. This handoff does not authorize deployment.
