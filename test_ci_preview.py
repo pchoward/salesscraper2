@@ -38,7 +38,12 @@ class PreviewBuildTests(unittest.TestCase):
     def test_the_built_preview_has_no_live_alerts_or_analytics(self):
         with tempfile.TemporaryDirectory() as directory:
             files = build_preview.build(directory, "PR #1 test")
-            self.assertEqual(files, ["_headers", "history.json", "index.html", "sale_items_chart.html"])
+            self.assertEqual(files, ["_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
+            home = (Path(directory) / "index.html").read_text(encoding="utf-8")
+            self.assertIn("ShredDeals", home)
+            self.assertNotIn("http-equiv=\"refresh\"", home)
+            self.assertIn('id="previewBanner"', home)
+            self.assertTrue((Path(directory) / "navigation/navigation.js").is_file())
             html = (Path(directory) / "sale_items_chart.html").read_text(encoding="utf-8")
             self.assertNotIn("window.SKATEDEALS_ALERTS = ", html, "no alerts config: page.js keeps alerts off")
             self.assertNotIn("skatedeals-alerts.pchoward.workers.dev", html)
@@ -58,8 +63,10 @@ class ArtifactCheckTests(unittest.TestCase):
         (root / "pr.json").write_text(json.dumps({"number": number, "head_sha": sha}))
         for name, body in (shots or {"desktop-home.png": PNG, "summary.json": b"{}"}).items():
             (root / "shots" / name).write_bytes(body)
-        for name in site or ("index.html", "sale_items_chart.html", "history.json", "_headers"):
-            (root / "site" / name).write_text("x")
+        for name in site or sorted(check_artifact.SITE_FILES):
+            target = root / "site" / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text("x")
         return root
 
     def test_a_good_artifact_names_its_pr(self):
@@ -74,6 +81,7 @@ class ArtifactCheckTests(unittest.TestCase):
             "a fake PNG": dict(shots={"desktop-home.png": b"<svg onload=x>"}),
             "an unexpected screenshot name": dict(shots={"evil.png": PNG}),
             "an extra site file": dict(site=("index.html", "evil.js")),
+            "an extra navigation file": dict(site=("navigation/evil.js",)),
         }
         for label, kwargs in cases.items():
             with self.subTest(label), tempfile.TemporaryDirectory() as directory:
@@ -89,6 +97,15 @@ class ArtifactCheckTests(unittest.TestCase):
             root = self.make(directory)
             os.symlink("/etc/hostname", root / "site" / "history.json.tmp")
             os.replace(root / "site" / "history.json.tmp", root / "site" / "history.json")
+            with self.assertRaises(check_artifact.Refused):
+                check_artifact.check(directory, "a" * 40, {12})
+
+    def test_navigation_symlink_is_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make(directory)
+            asset = root / "site/navigation/navigation.js"
+            asset.unlink()
+            asset.symlink_to("/etc/hostname")
             with self.assertRaises(check_artifact.Refused):
                 check_artifact.check(directory, "a" * 40, {12})
 

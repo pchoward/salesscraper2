@@ -19,7 +19,8 @@ import sys
 from pathlib import Path
 
 SHOT = re.compile(r"^(desktop|mobile)-(home|search|quickview|sport)\.png$")
-SITE_FILES = {"index.html", "sale_items_chart.html", "history.json", "_headers"}
+SITE_FILES = {"index.html", "sale_items_chart.html", "history.json", "_headers",
+              "navigation/navigation.js", "navigation/navigation.css", "navigation/skate-bridge.js"}
 PNG = b"\x89PNG\r\n\x1a\n"
 MAX_SHOT = 3 * 1024 * 1024
 MAX_SITE = 40 * 1024 * 1024
@@ -53,8 +54,11 @@ def check(root, head_sha, open_prs):
     site = root / "site"
     if site.is_dir():
         total = 0
-        for path in site.iterdir():
-            if path.name not in SITE_FILES or path.is_symlink() or not path.is_file():
+        for path in site.rglob("*"):
+            relative = path.relative_to(site).as_posix()
+            if relative == "navigation" and path.is_dir() and not path.is_symlink():
+                continue
+            if relative not in SITE_FILES or path.is_symlink() or not path.is_file():
                 raise Refused(f"unexpected file in site/: {path.name}")
             total += path.stat().st_size
         if total > MAX_SITE:

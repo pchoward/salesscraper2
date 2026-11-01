@@ -2,7 +2,7 @@ name: Pages - Rebuild Without Scraping
 
 # Publishes a UI change without scraping: regenerates sale_items_chart.html
 # and history.json from the last scrape's saved data (rebuild_page.py) and
-# commits only those files. No browser, no store requests, no email, no alerts.
+# refreshes the homepage/navigation assets too. No store requests, email or alerts.
 on:
   workflow_dispatch:
   push:

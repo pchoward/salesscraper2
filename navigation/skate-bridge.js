@@ -2,6 +2,9 @@
 (function () {
     "use strict";
     if (window.parent === window || window.shredBridgeInstalled) return;
+    try {
+        if (window.parent.location.origin !== location.origin || !window.parent.ShredNavigation) return;
+    } catch (_) { return; }
     window.shredBridgeInstalled = true;
     const replace = history.replaceState.bind(history);
     function send(action) {
