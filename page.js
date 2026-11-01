@@ -2110,6 +2110,7 @@ function wireDuals() {
 function paintOneCardStat(card) {
     const node = card ? card.querySelector(".avg-price") : null;
     if (!node) return;
+    const sep = card.querySelector(".price-sep");
     if (!historyReady()) {
         whenHistory(() => paintOneCardStat(card));
         return;
@@ -2118,16 +2119,34 @@ function paintOneCardStat(card) {
     const item = (catalog().items || {})[card.dataset.id];
     const daily = item && Array.isArray(item.daily) ? item.daily : [];
     const points = clipDailyPrices(daily, days);
-    if (!points.length) {
-        node.hidden = true;
+    const symbol = node.dataset.symbol || "$";
+    const list = parseFloat(card.dataset.original);
+    const hasList = Number.isFinite(list) && list > 0;
+    // One tracked day is not an average. Show the store's list price until a
+    // second day exists, matching the server-rendered card.
+    if (points.length < 2) {
+        if (!hasList) {
+            node.hidden = true;
+            if (sep) sep.hidden = true;
+            return;
+        }
+        node.hidden = false;
+        node.textContent = "Was " + symbol + list.toFixed(2);
+        if (sep) {
+            sep.hidden = false;
+            sep.textContent = "\u00b7";
+        }
+        node.dataset.statWindow = String(chartWindow);
         return;
     }
     const sum = points.reduce((total, point) => total + Number(point[1]), 0);
     const average = sum / points.length;
-    const now = parseFloat(card.dataset.price);
-    const symbol = node.dataset.symbol || "$";
     node.hidden = false;
     node.textContent = "Average " + symbol + average.toFixed(2);
+    if (sep) {
+        sep.hidden = false;
+        sep.textContent = "/";
+    }
     node.dataset.statWindow = String(chartWindow);
 }
 
