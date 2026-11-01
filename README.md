@@ -291,6 +291,12 @@ That writes `email_preview.html`. Product names are prefixed with `[SAMPLE]`, an
 python scraper.py
 ```
 
+Pull requests get a PREVIEW build, browser checks on desktop and phone, and one comment with screenshots. Nothing merges or deploys automatically. Set-up, costs, and the mobile runbook are in [docs/level2-autonomy.md](docs/level2-autonomy.md). To try it locally:
+
+```bash
+python ci/build_preview.py preview/site && node ci/smoke.mjs preview/site preview/shots
+```
+
 Chrome or Chromium is required. The browser runs headless.
 
 Dry-check the filters, email, history prune, store warnings, cross-store match, deal score, badges, watchlist, site-wide sales, dimensions, and image extraction (no network):
@@ -365,3 +371,36 @@ Product specification extraction and the read-only before/after coverage audit
 are documented in [docs/product-specifications.md](docs/product-specifications.md).
 Run `python -m audit.specifications` to inspect eligible saved listings without
 network requests or state changes.
+
+## ShredDeals navigation prototype (issue #111)
+
+Build an isolated preview using the existing public SkateDeals page and chart data:
+
+```bash
+source .venv/bin/activate
+python -m previews.shreddeals --output-dir /tmp/shreddeals-preview
+python -m http.server --bind 127.0.0.1 --directory /tmp/shreddeals-preview 8765
+```
+
+Open `index.html` through that local static server. The builder prints its exact
+absolute HTML path; use a **new directory outside the checkout** on each rebuild.
+Serve the folder rather than opening it as `file://`, so charts and the shared
+parent/iframe URL history work normally. No scrape, production rebuild, email,
+alert delivery or deployment is run. BMX, Ski and MTB explicitly have no catalog.
+The only navigation categories are Skate, Ski, MTB and BMX; there is no
+discipline row or Street/Transition/Freestyle subdivision.
+
+The four sport tabs, branding, and the optional domain label are configuration in
+`previews/sports.json`. Pass `--config /path/to/sports.json` to build with a local
+copy; there are no DNS/domain changes. The source public page stays unchanged.
+
+```bash
+python -m unittest test_shreddeals
+python -m previews.check_navigation --preview-dir /tmp/shreddeals-preview \
+  --screenshots /tmp/shreddeals-screenshots \
+  --firefox /path/to/firefox --geckodriver /path/to/geckodriver
+```
+
+The browser check serves the preview temporarily, exercises the original Skate
+controls plus navigation/history/keyboard/mobile behavior, saves screenshots,
+and stops its server. See [architecture, limitations, and screenshots](docs/shreddeals-architecture.md).

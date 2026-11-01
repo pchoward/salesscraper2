@@ -47,3 +47,83 @@ jobs:
 
       - name: Run Python and embedded JavaScript regression tests
         run: python -m unittest discover -s . -p 'test_*.py' -v
+
+  # Builds a PREVIEW site from the PR's committed data (no scraping, email,
+  # alerts or analytics), checks it in Chromium at desktop and phone sizes,
+  # and uploads the site and screenshots. Runs with the PR's own code, so it
+  # gets no secrets and a read-only token; "CI - Publish PR Preview" (a
+  # workflow_run on main's code) posts the results. docs/level2-autonomy.md.
+  # Off switch: repository variable PR_PREVIEWS=off.
+  preview:
+    name: Preview build and browser checks
+    if: github.event_name == 'pull_request' && vars.PR_PREVIEWS != 'off'
+    # Pinned: Playwright 1.56.1 supports Ubuntu 24.04 but not 26.04 (the
+    # current ubuntu-latest). Move both together when upgrading.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Cache Playwright's browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.56.1-ubuntu-24.04
+
+      - name: Install Playwright 1.56.1 and Chromium
+        run: |
+          npm install --prefix ci --no-save --no-audit --no-fund playwright@1.56.1
+          ci/node_modules/.bin/playwright install --with-deps chromium
+
+      - name: Build the preview site
+        env:
+          # Quoted: in YAML an unquoted " #" starts a comment.
+          LABEL: "PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}"
+        run: python ci/build_preview.py preview/site --label "${LABEL:0:16}"
+
+      - name: Browser checks and screenshots
+        id: smoke
+        continue-on-error: true
+        run: node ci/smoke.mjs preview/site preview/shots
+
+      - name: Record the PR this preview belongs to
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          printf '{"number": %s, "head_sha": "%s"}\n' "$PR_NUMBER" "$HEAD_SHA" > preview/pr.json
+
+      - name: Upload the preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-preview
+          path: preview/
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Fail when a browser check failed
+        if: steps.smoke.outcome != 'success'
+        run: |
+          echo "::error::A browser check failed; see the step above and the PR comment."
+          exit 1
