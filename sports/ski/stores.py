@@ -41,7 +41,7 @@ def details(item, product, type_key):
     if isinstance(tags, str):
         tags = [tag.strip() for tag in tags.split(",")]
     if item.get("part") == "Skis":
-        found = specs.lengths(product, variants)
+        found = specs.lengths(product, variants) or specs.title_length(product.get("title"))
         if found:
             item["lengths"] = found
     if item.get("part") == "Boots":

@@ -70,6 +70,8 @@ class GearWestTests(unittest.TestCase):
         self.assertEqual(specs.style("ALPINE - ALPINE BOOTS - Park Boots", []), "Park")
         self.assertEqual(specs.gender("ALPINE - ALPINE SKIS - Wmn's Skis", []), "Women")
         self.assertEqual(stores.type_part("alpine alpine boots race boots"), "Boots")
+        self.assertEqual(specs.title_length("Rossignol Hero Athlete SL 150cm R22 Race Ski 2026"), ["150"])
+        self.assertEqual(specs.title_length("Justis Ski 2026"), [])
         self.assertIsNone(stores.type_part("baselayers"))
 
     def test_ski_page(self):

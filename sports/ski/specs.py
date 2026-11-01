@@ -50,6 +50,15 @@ def lengths(product, variants):
     return sorted(found, key=int)
 
 
+_TITLE_LENGTH = re.compile(r"(?<![\d.])(\d{2,3})\s?cm\b", re.I)
+
+
+def title_length(title):
+    """A ski length stated once in the title ("... SL 150cm R22 Race Ski")."""
+    found = {match.group(1) for match in _TITLE_LENGTH.finditer(str(title or "")) if 60 <= int(match.group(1)) <= 210}
+    return sorted(found) if len(found) == 1 else []
+
+
 def boot_sizes(product, variants):
     found = set()
     for variant in variants:
