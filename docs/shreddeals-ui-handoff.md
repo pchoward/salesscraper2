@@ -61,10 +61,14 @@ header** (#122). Claude keeps the **engine, scrapers, data and CI**
    you build the filter UI. Copy the existing facet pattern (`SPEC_FACETS`,
    `activeSpecKeys`); don't build a new system. Order and labels are in
    docs/multi-sport-plan.md §3, modelled on Dan's Comp:
-   - **Wheel size first.** Field `wheel_size` (12/14/16/18/20/22/24/26/27.5/29)
-     is coming from Claude next.
+   - **Wheel size first.** Ready: `wheel_size` ("12" ... "20" ... "27.5",
+     "29") on each listing's entry in `#catalogJson` `items`. It is missing
+     when the store doesn't state a size (most parts fit any size), so offer
+     "Any / not stated" too.
    - **Type within a category** (Hubs, Rims, Pegs... inside Wheel Parts), like
-     Skate's Protection type. Field `kind` is coming from Claude.
+     Skate's Protection type. Ready: `kind` on the same entries. Labels are
+     in `sports/bmx/specs.py` `KINDS` ("Hubs", "Spokes & Nipples", "Front
+     Wheels", ...).
    - Then Hub Type, Toptube Length (shown within a wheel size), Drive Side.
 5. **Older iPhones** (#118 follow-up): a regex lookbehind breaks old Safari.
    Low priority.

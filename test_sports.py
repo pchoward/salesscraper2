@@ -260,5 +260,50 @@ class BmxBrandTests(unittest.TestCase):
         self.assertEqual(shopify.title_with_brand(product), "Spitfire Formula Four Classic 54mm")
 
 
+class BmxSpecTests(unittest.TestCase):
+    def test_wheel_size_is_read_not_guessed(self):
+        from sports.bmx.specs import wheel_size
+
+        cases = {'Fit 29" Rim': "29", 'FIT OEM 16" WHEELSET': "16", 'Black Ops DefendR 24" Fork': "24",
+                 "Cult 20 inch Front Wheel": "20", 'Haro Klunkerson 27.5" Bike': "27.5", "Odyssey Path 20x2.4 Tire": "20",
+                 'Kink Gap 20.5" TT Frame': None, 'Primo 12" and 14" Wheels': None, "Cult Race Stem": None}
+        for title, size in cases.items():
+            self.assertEqual(wheel_size(title), size, title)
+        self.assertEqual(wheel_size("Cult Frame", ['Wsize_20"', "frames"]), "20", "a store tag wins")
+
+    def test_kind_and_vague_types_from_the_title(self):
+        from sports.bmx import stores
+
+        feed = {"products": [
+            {"title": "Clutch Freecoaster Hub", "vendor": "Odyssey", "handle": "clutch", "product_type": "Hubs",
+             "tags": ['Wsize_20"'], "variants": [{"id": 1, "price": "150", "compare_at_price": "190"}]},
+            {"title": "Pro Front Wheel", "vendor": "Merritt", "handle": "front", "product_type": "Wheels",
+             "variants": [{"id": 2, "price": "120", "compare_at_price": "160"}]},
+            {"title": "Graduate Pegs", "vendor": "Odyssey", "handle": "pegs", "product_type": "PARTS",
+             "variants": [{"id": 3, "price": "20", "compare_at_price": "30"}]},
+            {"title": "Mystery Thing", "vendor": "Odyssey", "handle": "thing", "product_type": "",
+             "variants": [{"id": 4, "price": "5", "compare_at_price": "10"}]},
+        ]}
+        kept = {}
+        with sports.BMX.active():
+            for store_scraper in stores.scrapers():
+                for item in store_scraper.parse(json.dumps(feed)):
+                    kept[item["name"]] = (item["part"], item.get("kind"), item.get("wheel_size"))
+        self.assertEqual(kept, {
+            "Odyssey Clutch Freecoaster Hub": ("Wheel Parts", "Hubs", "20"),
+            "Merritt Pro Front Wheel": ("Wheels", "Front Wheels", None),
+            "Odyssey Graduate Pegs": ("Wheel Parts", "Pegs", None),
+        })
+
+    def test_catalog_entries_carry_the_fields_for_the_filters(self):
+        data = {"Albes_Hubs": [{"name": "Odyssey Clutch Hub", "url": "https://bmx.example/clutch", "price_new": "150",
+                                "price_old": "190", "part": "Wheel Parts", "store": "Albe's BMX", "kind": "Hubs",
+                                "wheel_size": "20"}]}
+        html = render(sports.BMX, data=data)
+        catalog = json.loads(html.split('id="catalogJson"', 1)[1].split(">", 1)[1].split("</script>", 1)[0])
+        entry = next(iter(catalog["items"].values()))
+        self.assertEqual((entry["kind"], entry["wheel_size"]), ("Hubs", "20"))
+
+
 if __name__ == "__main__":
     unittest.main()

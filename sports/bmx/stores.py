@@ -9,6 +9,7 @@ stores.preview()"`` shows what a live run would keep without saving anything.
 
 import sports
 from sports import brands
+from sports.bmx import specs
 from stores import shopify
 
 # Shopify product_type (lowercased, punctuation dropped) -> BMX category.
@@ -40,6 +41,24 @@ TYPES = {
     "pedal": "Drivetrain", "chain tensioner": "Drivetrain", "bb": "Drivetrain",
 }
 
+# Vague types: the category comes from the title's words.
+TYPES.update({"parts": shopify.BY_TITLE, "": shopify.BY_TITLE, "none": shopify.BY_TITLE})
+
+
+def title_part(title):
+    return specs.category_for_title(title, sports.BMX.aliases_file())
+
+
+def details(item, product, kind_key):
+    """kind and wheel_size for the filters (sports/bmx/specs.py)."""
+    kind = specs.kind_for(kind_key, item.get("name"), item.get("part"))
+    if kind:
+        item["kind"] = kind
+    size = specs.wheel_size(product.get("title") or item.get("name"), product.get("tags") or ())
+    if size:
+        item["wheel_size"] = size
+
+
 ALBES = shopify.ShopifyStore(
     "Albe's BMX",
     "Albe's BMX",
@@ -48,6 +67,8 @@ ALBES = shopify.ShopifyStore(
     types=TYPES,
     brand_of=brands.for_sport(sports.BMX),
     own_vendor="albe",  # the shop's own name as a vendor is not a brand
+    title_part=title_part,
+    details=details,
 )
 
 PARTS = ("Bikes", "Frames & Forks", "Steering", "Drivetrain", "Wheels", "Wheel Parts", "Tires", "Seating", "Braking")
