@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "checks": [
+    "63 real distinct listings, nine exclusions absent, original scan time and retailer-first links preserved",
+    "Original search, sort, Insights/Deals, offline Subscribe, history, Quick View and Back work",
+    "Existing Skate catalog stays separate from BMX through the unchanged shell",
+    "True 390x844 mobile layout, search and Filters drawer work without horizontal overflow"
+  ],
+  "viewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "browser": "firefox"
+}

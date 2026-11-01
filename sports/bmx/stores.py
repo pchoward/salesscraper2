@@ -8,6 +8,7 @@ stores.preview()"`` shows what a live run would keep without saving anything.
 """
 
 from stores import shopify
+from sports.bmx.catalog import BmxShopifyScraper
 
 # Shopify product_type (lowercased, punctuation dropped) -> BMX category.
 TYPES = {
@@ -43,7 +44,7 @@ PARTS = ("Bikes", "Frames & Forks", "Steering", "Drivetrain", "Wheels", "Wheel P
 
 
 def scrapers():
-    return shopify.scrapers_for(ALBES, PARTS)
+    return [BmxShopifyScraper(ALBES, part) for part in PARTS]
 
 
 def preview():

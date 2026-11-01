@@ -1,0 +1,83 @@
+{
+  "before": {
+    "Albe's BMX_Bikes": 6,
+    "Albe's BMX_Frames & Forks": 4,
+    "Albe's BMX_Steering": 9,
+    "Albe's BMX_Drivetrain": 13,
+    "Albe's BMX_Wheels": 10,
+    "Albe's BMX_Wheel Parts": 11,
+    "Albe's BMX_Tires": 8,
+    "Albe's BMX_Seating": 11,
+    "Albe's BMX_Braking": 0
+  },
+  "after": {
+    "Albe's BMX_Bikes": 3,
+    "Albe's BMX_Frames & Forks": 2,
+    "Albe's BMX_Steering": 9,
+    "Albe's BMX_Drivetrain": 13,
+    "Albe's BMX_Wheels": 7,
+    "Albe's BMX_Wheel Parts": 10,
+    "Albe's BMX_Tires": 8,
+    "Albe's BMX_Seating": 11,
+    "Albe's BMX_Braking": 0
+  },
+  "excluded": [
+    {
+      "url": "https://www.albes.com/products/elite-outlaw-26-bike-2021",
+      "name": "Elite BMX Elite Outlaw 26\" Bike",
+      "category": "Bikes",
+      "reason": "wheel compatibility outside initial 20/22-inch scope: 26"
+    },
+    {
+      "url": "https://www.albes.com/products/haro-klunkerson-27-5-bike",
+      "name": "Haro Bikes Haro Klunkerson 27.5\" Bike",
+      "category": "Bikes",
+      "reason": "wheel compatibility outside initial 20/22-inch scope: 27.5"
+    },
+    {
+      "url": "https://www.albes.com/products/haro-skwad-1-electric-bike",
+      "name": "Haro Bikes Haro Skwad 1 Electric Bike",
+      "category": "Bikes",
+      "reason": "electric bike outside BMX freestyle scope"
+    },
+    {
+      "url": "https://www.albes.com/products/black-ops-defendr-24-fork",
+      "name": "Black Ops DefendR 24\" Fork",
+      "category": "Frames & Forks",
+      "reason": "wheel compatibility outside initial 20/22-inch scope: 24"
+    },
+    {
+      "url": "https://www.albes.com/products/haro-b-m-f-frame-fork-kit-26",
+      "name": "Haro Bikes Haro B.M.F Frame & Fork Kit (26\")",
+      "category": "Frames & Forks",
+      "reason": "wheel compatibility outside initial 20/22-inch scope: 26"
+    },
+    {
+      "url": "https://www.albes.com/products/fit-oem-wheelset-16-inch",
+      "name": "FIT OEM 16\" WHEELSET",
+      "category": "Wheels",
+      "reason": "wheel compatibility outside initial 20/22-inch scope: 16"
+    },
+    {
+      "url": "https://www.albes.com/products/rant-moonwalker-ii-18-freecoaster-rear-wheel",
+      "name": "Rant BMX RANT MOONWALKER II 18\" FREECOASTER REAR WHEEL",
+      "category": "Wheels",
+      "reason": "wheel compatibility outside initial 20/22-inch scope: 18"
+    },
+    {
+      "url": "https://www.albes.com/products/rant-party-on-v2-18-rear-cassette-wheel",
+      "name": "Rant BMX Rant Party On V2 18\" Rear Cassette Wheel",
+      "category": "Wheels",
+      "reason": "wheel compatibility outside initial 20/22-inch scope: 18"
+    },
+    {
+      "url": "https://www.albes.com/products/fit-29-rim",
+      "name": "Fit 29\" Rim",
+      "category": "Wheel Parts",
+      "reason": "wheel compatibility outside initial 20/22-inch scope: 29"
+    }
+  ],
+  "specs_known": 3,
+  "specs_unknown": 60,
+  "scan_timestamp": "2026-11-01T18:52:07+00:00"
+}

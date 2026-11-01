@@ -1,0 +1,16 @@
+{
+  "_note": "Synthetic Shopify edge cases; not raw Albe's source evidence or live inventory.",
+  "products": [
+    {
+      "title": "Example Freestyle Freecoaster Wheel",
+      "vendor": "Fixture Brand", "handle": "fixture-freestyle-wheel", "product_type": "Wheels",
+      "options": [{"name": "Wheel Size"}],
+      "variants": [
+        {"id": 180, "option1": "18 inches", "price": "50.00", "compare_at_price": "100.00", "available": true},
+        {"id": 200, "option1": "20 inches", "price": "100.00", "compare_at_price": "160.00", "available": true},
+        {"id": 220, "option1": "22 inches", "price": "120.00", "compare_at_price": "180.00"},
+        {"id": 221, "option1": "22 inches", "price": "90.00", "compare_at_price": "180.00", "available": false}
+      ]
+    }
+  ]
+}

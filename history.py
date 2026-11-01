@@ -84,6 +84,7 @@ _ENTRY_FIELDS = (
     "stock",
     "previous_urls",
     "earlier_products",
+    "catalog_scope_reason",
 )
 # Bounded so a URL that keeps changing cannot grow its row forever.
 MAX_IDENTITY_NOTES = 5
@@ -526,6 +527,13 @@ def _active_items(current_data):
     return active
 
 
+def _outside_catalog_scope(entry, url):
+    # Intentional assortment changes are not retailer disappearances. Scope
+    # reasons are opt-in; existing Skate rules never return this prefix.
+    reason = entry.get("catalog_scope_reason") or filter_reason(entry.get("name"), entry.get("part"), url)
+    return str(reason or "").startswith("catalog scope: ")
+
+
 def _filters_allow(entry, url):
     price = _latest_price(_clean_prices(entry.get("prices")))
     if price is None:
@@ -587,7 +595,7 @@ def prune_price_history(history, today=None, current_data=None):
                 entry["store"] = item.get("store") or entry.get("store") or ""
                 entry["part"] = item.get("part") or entry.get("part") or ""
                 _copy_media(entry, item)
-            elif not _filters_allow(entry, url):
+            elif not _outside_catalog_scope(entry, url) and not _filters_allow(entry, url):
                 stats["dropped_filter"] += 1
                 continue
 
@@ -828,7 +836,7 @@ def _count_miss(entry, day, streak):
         entry["miss_day"] = day.isoformat()
 
 
-def record_misses(previous_data, current_data, history, skip_keys=None, today=None):
+def record_misses(previous_data, current_data, history, skip_keys=None, today=None, scope_exclusions=None):
     """Count misses on this successful scan and keep a first miss in the catalog.
 
     Returns URLs carried forward. Those rows stay in ``current_data`` so they
@@ -845,6 +853,12 @@ def record_misses(previous_data, current_data, history, skip_keys=None, today=No
     if not isinstance(history, dict):
         raise TypeError("price history must be a dict")
     skip = {str(key) for key in (skip_keys or [])}
+    # An adapter can retain explicit exclusion evidence absent from old titles
+    # (e.g. a variant's wheel size). Failed keys cannot alter this ledger.
+    for raw_url, reason in (scope_exclusions or {}).items():
+        entry = history.get(normalize_url(raw_url))
+        if isinstance(entry, dict) and _store_key(entry) not in skip and str(reason).startswith("catalog scope: "):
+            entry["catalog_scope_reason"] = str(reason)
     # A Shopify listing that moved paths is not a miss; its row follows it.
     reconcile_moved_urls(history, current_data, skip_keys)
     moved = _moved_urls(history)
@@ -866,6 +880,7 @@ def record_misses(previous_data, current_data, history, skip_keys=None, today=No
                 entry.pop("miss_streak", None)
                 entry.pop("miss_day", None)
                 entry.pop("stock", None)
+                entry.pop("catalog_scope_reason", None)
         prev_items = (previous_data or {}).get(key) or []
         if not isinstance(prev_items, list):
             prev_items = []
@@ -877,6 +892,8 @@ def record_misses(previous_data, current_data, history, skip_keys=None, today=No
             if not url:
                 continue
             prev_urls.add(url)
+            if _outside_catalog_scope(item, url) or _outside_catalog_scope(history.get(url) or {}, url):
+                continue
             if url in current_urls or url in moved:
                 continue
             entry = history.get(url)
@@ -899,7 +916,7 @@ def record_misses(previous_data, current_data, history, skip_keys=None, today=No
         for url, entry in list(history.items()):
             if not isinstance(entry, dict) or _store_key(entry) != key:
                 continue
-            if url in current_urls or url in prev_urls:
+            if url in current_urls or url in prev_urls or _outside_catalog_scope(entry, url):
                 continue
             prior = _miss_streak(entry)
             if prior >= GONE_AFTER_MISSES or _missed_on(entry, day):
@@ -923,6 +940,8 @@ def apply_lifecycle(history, current_data, today=None, skip_keys=None):
         if not isinstance(entry, dict):
             continue
         try:
+            if _outside_catalog_scope(entry, url):
+                continue
             present = url in active
             key = _store_key(entry)
             if not present and key and key in skip:
@@ -965,7 +984,7 @@ def recently_gone(history, current_data=None, today=None, skip_keys=None):
             key = _store_key(entry)
             if key and key in skip:
                 continue
-            if not _filters_allow(entry, url):
+            if _outside_catalog_scope(entry, url) or not _filters_allow(entry, url):
                 continue
             last = _as_date(entry.get("last_seen"))
             if last is None or today_day is None:

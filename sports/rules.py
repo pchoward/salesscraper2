@@ -26,7 +26,10 @@ def _basic(sport, name, part):
 
 def bmx(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     import sports
-    return _basic(sports.BMX, name, part)
+    from sports.bmx.quality import scope_reason
+    basic = _basic(sports.BMX, name, part)
+    reason = scope_reason(name, part, description, product_type)
+    return basic or ("catalog scope: " + reason if reason else None)
 
 
 def ski(name, part, url="", price_new=None, price_old=None, description="", product_type=""):

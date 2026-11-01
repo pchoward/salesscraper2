@@ -412,3 +412,14 @@ ShredDeals with Skate, Ski, MTB and BMX; `sale_items_chart.html` remains the
 standalone SkateDeals page with existing links and filters. Public assets are
 generated with `python -m previews.publish`; this command does not scrape or send
 notifications. The change is currently on a review branch, not deployed.
+
+For #123's saved-data BMX filtering/data-quality preview (no scrape or delivery):
+
+```bash
+python -m previews.bmx_quality --output-dir /tmp/bmx-quality-review
+python -m http.server 8000 --directory /tmp/bmx-quality-review/site
+```
+
+Open the served `index.html?sport=bmx`. The preview retains the captured scan time;
+the internal audit report is outside `site/`. See [counts, screenshots and engine
+integration notes](docs/bmx-catalog-quality.md).
