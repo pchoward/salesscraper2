@@ -44,6 +44,8 @@ class Scraper:
     def _finish(self, item, node, base):
         try:
             attach_listing_media(item, node, base)
+            from product_specs import listing
+            listing(item, node)
         except Exception as exc:
             logger.error("Listing media failed for %s: %s", item.get("url"), exc)
         return item

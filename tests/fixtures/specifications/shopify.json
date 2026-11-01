@@ -1,0 +1,95 @@
+{
+  "_fixture_note": "Synthetic specification regression examples; not live inventory evidence.",
+  "products": [
+    {
+      "title": "DGK Bilyeu Major League Skateboard Deck",
+      "vendor": "DGK",
+      "handle": "dgk-bilyeu",
+      "product_type": "Decks",
+      "body_html": "<p>Length: 32 inches; Wheelbase: 14.25 inches</p>",
+      "options": [
+        {
+          "name": "Width"
+        }
+      ],
+      "variants": [
+        {
+          "id": 1,
+          "title": "8.25",
+          "option1": "8.25",
+          "price": "49.95",
+          "compare_at_price": "69.95",
+          "available": true
+        },
+        {
+          "id": 2,
+          "title": "8.5",
+          "option1": "8.5",
+          "price": "39.95",
+          "compare_at_price": "69.95",
+          "available": false
+        }
+      ]
+    },
+    {
+      "title": "OJ Elite Mini Combo Skateboard Wheels",
+      "vendor": "OJ",
+      "handle": "oj-combo",
+      "product_type": "Wheels",
+      "body_html": "Width: 32mm; Durometer: 99A",
+      "options": [
+        {
+          "name": "Diameter"
+        },
+        {
+          "name": "Hardness"
+        }
+      ],
+      "variants": [
+        {
+          "id": 3,
+          "title": "52mm / 99A",
+          "option1": "52",
+          "option2": "99A",
+          "price": "29.95",
+          "compare_at_price": "44.95",
+          "available": true
+        },
+        {
+          "id": 4,
+          "title": "54mm / 101A",
+          "option1": "54",
+          "option2": "101A",
+          "price": "34.95",
+          "compare_at_price": "44.95",
+          "available": true
+        },
+        {
+          "id": 5,
+          "title": "56mm / 99A",
+          "option1": "56",
+          "option2": "99A",
+          "price": "19.95",
+          "compare_at_price": "44.95",
+          "available": false
+        }
+      ]
+    },
+    {
+      "title": "Birdhouse David Loy Toy Invasion Deck",
+      "vendor": "Birdhouse",
+      "handle": "birdhouse-loy",
+      "product_type": "Deck",
+      "body_html": "<table><tr><td>Width</td><td>8.375 inches</td></tr><tr><td>Length</td><td>32 inches</td></tr></table>",
+      "variants": [
+        {
+          "id": 6,
+          "title": "Default Title",
+          "price": "49.95",
+          "compare_at_price": "69.95",
+          "available": true
+        }
+      ]
+    }
+  ]
+}

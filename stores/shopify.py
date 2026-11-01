@@ -354,7 +354,9 @@ class ShopifyScraper(Scraper):
                 if len(set(compares.values())) > 1:
                     item["shoe_compares"] = compares
         # Width, length, and wheelbase from the name, like the other stores.
-        return self._finish(item, None, self.shop.base)
+        item = self._finish(item, None, self.shop.base)
+        from product_specs import enrich
+        return enrich(item, description, product, [dict(v, **{key: _amount(v[key]) for key in ('price', 'compare_at_price') if key in v}) for v in variants])
 
 
 def scrapers_for(store, parts=ALL_PARTS):

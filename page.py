@@ -1543,9 +1543,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             abec = ""
             raw_name = item.get("name") or ""
             if item.get("part") == "Wheels":
+                from product_specs import enrich
+                enriched_specs = item if any(key in item for key in ("spec_offers", "diameters_mm", "durometers")) else enrich(dict(item))
                 parsed = wheel_specs(raw_name)
-                diameter = diameter_band(parsed.get("diameter_mm"))
-                duros = list(parsed.get("durometers") or [])
+                diameter = ",".join(dict.fromkeys(band for value in (enriched_specs.get("diameters_mm") or []) if (band := diameter_band(value))))
+                if not diameter and not enriched_specs.get('diameters_mm'):
+                    diameter = diameter_band(parsed.get("diameter_mm"))
+                duros = [token.lower() for token in (enriched_specs.get("durometers") or parsed.get("durometers") or []) if re.fullmatch(r"\d{2,3}[abd]", token.lower())]
                 shape = parsed.get("shape") or ""
             elif item.get("part") == "Trucks":
                 parsed = truck_specs(raw_name)
@@ -1759,10 +1763,11 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     for record in records:
         store_counts[record["store"]] = store_counts.get(record["store"], 0) + 1
         part_counts[record["part"]] = part_counts.get(record["part"], 0) + 1
-        if record["part"] == "Decks" and record["width_key"]:
-            bucket = bucket_for_width(record["width_key"])
-            if bucket is not None:
-                range_counts[bucket.id] += 1
+        if record["part"] == "Decks":
+            widths = record["item"].get("widths") or ([record["width_key"]] if record["width_key"] else [])
+            buckets = {bucket.id for value in widths if (bucket := bucket_for_width(value)) is not None}
+            for bucket_id in buckets:
+                range_counts[bucket_id] += 1
         if record["brand"]:
             brands.add(record["brand"])
             brand_counts[record["brand"]] = brand_counts.get(record["brand"], 0) + 1
@@ -1780,7 +1785,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             wheel_color_counts[record["color"]] = wheel_color_counts.get(record["color"], 0) + 1
         if record["part"] == "Wheels":
             if record["diameter"]:
-                diameter_counts[record["diameter"]] = diameter_counts.get(record["diameter"], 0) + 1
+                for band in record["diameter"].split(","):
+                    diameter_counts[band] = diameter_counts.get(band, 0) + 1
             if record["duros"]:
                 wheels_with_duro += 1
                 for token in record["duros"]:
@@ -2916,6 +2922,9 @@ def _deal_attrs(record):
         f'data-stage="{_attr(record.get("stage") or "")}" '
         f'data-length="{_attr(record["length_key"])}" data-wheelbase="{_attr(record["wheel_key"])}" '
         f'data-color="{_attr(record.get("color") or "")}" '
+        f'data-diameters="{_attr(",".join(str(v) for v in (item.get("diameters_mm") or ([item["diameter_mm"]] if item.get("diameter_mm") else []))))}" '
+        f'data-widths="{_attr(",".join(str(v) for v in (item.get("widths") or [])))}" '
+        f'data-spec-offers="{_attr(json.dumps(item.get("spec_offers") or [], separators=(",", ":")))}" '
         f'data-diameter="{_attr(record.get("diameter") or "")}" '
         f'data-duros="{_attr(",".join(record.get("duros") or []))}" '
         f'data-shape="{_attr(record.get("shape") or "")}" '

@@ -226,16 +226,28 @@ def _media_fields(entry):
             values = []
         if len(values) > 1:
             media["wheelbases"] = values
+    from copy import deepcopy
+    for field in ('widths', 'diameter_mm', 'diameters_mm', 'durometers', 'spec_offers', 'spec_conflicts'):
+        value = (entry or {}).get(field)
+        if value not in (None, '', []):
+            media[field] = deepcopy(value)
     return media
 
 
 def _copy_media(target, source):
-    """Copy a new image, and fill specs that are still empty."""
+    """Keep fixed dimensions, and refresh additive variant specification observations."""
     media = _media_fields(source)
+    if len(source.get('diameters_mm') or []) > 1:
+        target.pop('diameter_mm', None)
+    if source.get('widths'):
+        if len(source['widths']) > 1:
+            target.pop('width', None)
+        elif 'width' in media:
+            target['width'] = media['width']
     if media.get("image"):
         target["image"] = media["image"]
-    for field in ("width", "length", "wheelbase", "wheelbases"):
-        if field in media and target.get(field) in (None, "", []):
+    for field in ("width", "length", "wheelbase", "wheelbases", "widths", "diameter_mm", "diameters_mm", "durometers", "spec_offers", "spec_conflicts"):
+        if field in media and (field in ("widths", "diameter_mm", "diameters_mm", "durometers", "spec_offers", "spec_conflicts") or target.get(field) in (None, "", [])):
             target[field] = media[field]
 
 

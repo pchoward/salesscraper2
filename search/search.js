@@ -280,10 +280,28 @@
 
     function nameSizes(name) {
         const sizes = [];
-        const re = /(\d{2}(?:\.\d)?)\s*mm\b/gi;
+        const re = /(?<![\d.])(\d{2}(?:\.\d+)?)\s*mm\b/gi;
         let match;
-        while ((match = re.exec(String(name || "")))) sizes.push(parseFloat(match[1]));
+        while ((match = re.exec(String(name || "")))) {
+            if (/\d\s*[-–]\s*$/.test(String(name).slice(0, match.index))) continue;
+            sizes.push(parseFloat(match[1]));
+        }
         return sizes;
+    }
+
+    // Additive scraper metadata; old catalogs still use title/scalar fallbacks.
+    function sizes(data, key, fallback) {
+        const raw = data[key];
+        const values = Array.isArray(raw) ? raw : String(raw || "").split(",");
+        const parsed = values.filter(value => String(value).trim()).map(Number).filter(Number.isFinite);
+        return parsed.length ? parsed : fallback;
+    }
+
+    function offers(data) {
+        try {
+            const value = typeof data.specOffers === "string" ? JSON.parse(data.specOffers) : data.specOffers;
+            return Array.isArray(value) ? value : [];
+        } catch (_) { return []; }
     }
 
     function rowDuros(data) {
@@ -300,15 +318,32 @@
     function rowAllows(filters, row, near) {
         const data = (row && row.dataset) || row || {};
         if (!filters) return true;
+        const variants = offers(data);
+        if (variants.length && (filters.diameter != null || filters.width != null || filters.duros)) {
+            return variants.some(offer => {
+                if (offer.available === false) return false;
+                const reach = (near || 0) + 0.01;
+                if (filters.diameter != null && !(offer.diameter_mm != null && Math.abs(offer.diameter_mm - filters.diameter) < reach)) return false;
+                if (filters.width != null && !(offer.width != null && Math.abs(offer.width - filters.width) < 0.001)) return false;
+                const have = rowDuros({ duros: (offer.durometers || []).join(",") });
+                if (filters.duros && !filters.duros.every(duro => have.indexOf(duro) >= 0)) return false;
+                if (filters.priceMin != null && !(offer.price >= filters.priceMin)) return false;
+                if (filters.priceMax != null && !(offer.price <= filters.priceMax)) return false;
+                const discount = offer.compare_at_price > 0 && offer.price > 0 ? (1 - offer.price / offer.compare_at_price) * 100 : null;
+                if (filters.discountMin != null && !(discount != null && discount >= filters.discountMin)) return false;
+                if (filters.discountMax != null && !(discount != null && discount <= filters.discountMax)) return false;
+                return true;
+            });
+        }
         if (filters.diameter != null) {
             const reach = (near || 0) + 0.01;
-            if (!nameSizes(data.name).some(size => Math.abs(size - filters.diameter) < reach)) return false;
+            if (!sizes(data, "diameters", nameSizes(data.name)).some(size => Math.abs(size - filters.diameter) < reach)) return false;
         }
         if (filters.duros && filters.duros.length) {
             const have = rowDuros(data);
             if (!filters.duros.every(duro => have.indexOf(duro) >= 0)) return false;
         }
-        if (filters.width != null && !(Math.abs(parseFloat(data.size) - filters.width) < 0.001)) return false;
+        if (filters.width != null && !sizes(data, "widths", [parseFloat(data.size)]).some(width => Math.abs(width - filters.width) < 0.001)) return false;
         return true;
     }
 
@@ -324,7 +359,8 @@
             store: storeWords(data.store || ""),
             tags: [data.shape, String(data.duros || "").replace(/,/g, " "), data.size].filter(Boolean).join(" "),
             size: data.size || "",
-            duros: data.duros || ""
+            duros: data.duros || "",
+            diameters: data.diameters || "", widths: data.widths || "", specOffers: data.specOffers || ""
         };
     }
 
@@ -418,7 +454,7 @@
         };
         docs.forEach(doc => {
             if (doc.brand) bump(brands, normalize(doc.brand), doc.brand);
-            nameSizes(doc.name).forEach(size => bump(diameters, numberText(size), numberText(size) + "mm"));
+            sizes(doc, "diameters", nameSizes(doc.name)).forEach(size => bump(diameters, numberText(size), numberText(size) + "mm"));
             const width = parseFloat(doc.size);
             if (doc.category === "Decks" && width >= 7 && width <= 10.5) bump(widths, numberText(width), numberText(width) + '"');
             rowDuros(doc).forEach(duro => bump(duros, duro, duro));
@@ -555,6 +591,8 @@
         parseQuery: parseQuery,
         queryWithout: queryWithout,
         rowAllows: rowAllows,
+        hasSpecOffers: (filters, row) => offers((row && row.dataset) || row || {}).length > 0 &&
+            (filters.diameter != null || filters.width != null || !!filters.duros),
         matchesText: matchesText,
         basic: basic,
         duroToA: duroToA,

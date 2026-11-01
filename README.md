@@ -360,3 +360,8 @@ health data, watch configuration, backend files, and previews. Only the public
 deal page and its assets are published. Keep new internal roots in the exclusion
 list; the regression test checks the tracked file boundary. No recipient settings
 are serialized into Pages assets or email preview comments.
+
+Product specification extraction and the read-only before/after coverage audit
+are documented in [docs/product-specifications.md](docs/product-specifications.md).
+Run `python -m audit.specifications` to inspect eligible saved listings without
+network requests or state changes.

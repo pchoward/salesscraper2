@@ -460,12 +460,11 @@ function deckWidthAllowed(row, widths) {
     const selected = widths != null ? widths : (state.widths || []);
     if (!selected.length) return true;
     if ((row.dataset.part || "") !== "Decks") return true;
-    const size = parseFloat(row.dataset.size);
-    if (!Number.isFinite(size)) return false;
+    const sizes = String(row.dataset.widths || row.dataset.size || "").split(",").map(Number).filter(Number.isFinite);
     const ranges = widthRanges();
     return selected.some(id => {
         const range = ranges.find(item => item.id === id);
-        return bucketContains(range, size);
+        return sizes.some(size => bucketContains(range, size));
     });
 }
 
@@ -1391,11 +1390,16 @@ function rowMatchesNow(row, overrides) {
     const price = rowPrice(row);
     const priceMin = typedOr(over, typed, "priceMin", state.priceMin);
     const priceMax = typedOr(over, typed, "priceMax", state.priceMax);
-    if (priceMin != null && !(price >= priceMin)) return false;
-    if (priceMax != null && !(price <= priceMax)) return false;
     const discountMin = typedOr(over, typed, "discountMin", state.discountMin);
     const discountMax = Object.prototype.hasOwnProperty.call(over, "discountMax") ? over.discountMax : state.discountMax;
-    if (discountMin != null || discountMax != null) {
+    const scopedOffers = typeof SkateSearch !== "undefined" && SkateSearch.hasSpecOffers && SkateSearch.hasSpecOffers(typed, row);
+    if (scopedOffers) {
+        if (!SkateSearch.rowAllows(Object.assign({}, typed, { priceMin, priceMax, discountMin, discountMax }), row, over.searchNear || 0)) return false;
+    } else {
+        if (priceMin != null && !(price >= priceMin)) return false;
+        if (priceMax != null && !(price <= priceMax)) return false;
+    }
+    if (!scopedOffers && (discountMin != null || discountMax != null)) {
         const discount = rowDiscount(row);
         if (discount == null) return false;
         if (discountMin != null && discount < discountMin) return false;

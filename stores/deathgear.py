@@ -213,7 +213,11 @@ class DeathgearScraper(Scraper):
         if self.part == "Protection":
             variants = [{"option1": _variant_label(v)} for v, _deal_ in (buyable or deals)]
             set_protection_fields(item, name, "", variants)
-        return self._finish(item, None, BASE)
+        item = self._finish(item, None, BASE)
+        from product_specs import enrich
+        description = product.get('body') or product.get('excerpt') or (product.get('structuredContent') or {}).get('description') or ''
+        variants = [dict(v, price=deal[0], compare_at_price=deal[1], available=_in_stock(v)) for v, deal in deals]
+        return enrich(item, description, product, variants)
 
 
 def scrapers():
