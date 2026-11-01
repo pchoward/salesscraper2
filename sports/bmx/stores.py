@@ -7,6 +7,8 @@ listed are skipped. ``python -c "from sports.bmx import stores;
 stores.preview()"`` shows what a live run would keep without saving anything.
 """
 
+import sports
+from sports import brands
 from stores import shopify
 
 # Shopify product_type (lowercased, punctuation dropped) -> BMX category.
@@ -28,7 +30,14 @@ TYPES = {
     "seats": "Seating", "seat": "Seating", "seat posts": "Seating", "seat post": "Seating",
     "seatposts": "Seating", "seat clamps": "Seating", "seat post clamps": "Seating",
     "brakes": "Braking", "brake": "Braking", "brake levers": "Braking", "levers": "Braking",
-    "brake cables": "Braking", "cables": "Braking",
+    "brake cables": "Braking", "cables": "Braking", "brake parts": "Braking", "brake pads": "Braking",
+    "grips bar ends": "Steering", "bar ends": "Steering", "handlebar": "Steering", "bmx bars": "Steering",
+    "bmx frames": "Frames & Forks", "bmx forks": "Frames & Forks", "bmx wheels": "Wheels",
+    "bmx tires": "Tires", "bmx hubs": "Wheel Parts", "hubguards": "Wheel Parts", "hub guard": "Wheel Parts",
+    "spoke": "Wheel Parts", "rim strip": "Wheel Parts", "valve cap": "Wheel Parts", "peg": "Wheel Parts",
+    "seat clamp": "Seating", "seat post clamp": "Seating", "seatpost": "Seating", "seat posts clamps": "Seating",
+    "cranksets": "Drivetrain", "crank arms": "Drivetrain", "spindles": "Drivetrain", "chainrings": "Drivetrain",
+    "pedal": "Drivetrain", "chain tensioner": "Drivetrain", "bb": "Drivetrain",
 }
 
 ALBES = shopify.ShopifyStore(
@@ -37,6 +46,8 @@ ALBES = shopify.ShopifyStore(
     "https://www.albes.com",
     collection="bmx-sale-bikes-parts",
     types=TYPES,
+    brand_of=brands.for_sport(sports.BMX),
+    own_vendor="albe",  # the shop's own name as a vendor is not a brand
 )
 
 PARTS = ("Bikes", "Frames & Forks", "Steering", "Drivetrain", "Wheels", "Wheel Parts", "Tires", "Seating", "Braking")
