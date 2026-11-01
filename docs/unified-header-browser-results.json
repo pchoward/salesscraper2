@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "checks": [
+    "Native sport page links, exact Skate query restoration, Back/Forward, honest non-Skate placeholders",
+    "Native link keyboard semantics, Arrow/Home/End focus without destructive selection",
+    "Original search/sort, Deals/Track/Insights/Subscribe listeners and panel/filter retention",
+    "Retailer-first links, original history loading and Quick View with Back",
+    "390\u00d7844 mobile, 320/360/768px and intermediate desktop layout, filters drawer, sticky short viewport"
+  ],
+  "browser": "firefox",
+  "viewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "native_pages": true
+}

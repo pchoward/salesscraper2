@@ -412,3 +412,15 @@ ShredDeals with Skate, Ski, MTB and BMX; `sale_items_chart.html` remains the
 standalone SkateDeals page with existing links and filters. Public assets are
 generated with `python -m previews.publish`; this command does not scrape or send
 notifications. The change is currently on a review branch, not deployed.
+
+Issue #122's **unified native header preview** (one dark header, no iframe) is
+review-only and does not change the live homepage or Claude's sport engine:
+
+```bash
+python -m previews.unified_header --output-dir /tmp/shreddeals-unified-header
+python -m http.server 8000 --directory /tmp/shreddeals-unified-header
+```
+
+Open the served `index.html`; the builder prints its exact path. For PR review,
+the CI artifact **unified-header-preview** contains the same runnable directory.
+See [screenshots and Claude integration handoff](docs/unified-header.md).

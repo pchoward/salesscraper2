@@ -41,6 +41,19 @@ jobs:
       - name: Validate JavaScript syntax
         run: node --check page.js
 
+      - name: Build unified header review artifact
+        if: github.event_name == 'pull_request'
+        run: python -m previews.unified_header --output-dir "${{ runner.temp }}/unified-header-preview"
+
+      - name: Upload unified header review artifact
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: unified-header-preview
+          path: ${{ runner.temp }}/unified-header-preview/
+          retention-days: 7
+          if-no-files-found: error
+
       - name: Run alerts Worker tests (local SQLite, mocked network)
         working-directory: worker
         run: node --test test/*.test.js
