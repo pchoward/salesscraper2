@@ -94,7 +94,8 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 
 
 class ShopifyStore:
-    def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None):
+    def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
+                 brand_of=None):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
@@ -103,6 +104,9 @@ class ShopifyStore:
         self.types = dict(COMMON_TYPES if types is None else types, **(extra_types or {}))
         # The shop's own name as a vendor is not a brand ("TGM Skateboards").
         self.own_vendor = own_vendor.casefold()
+        # vendor -> brand name. When set, each listing carries that brand
+        # (BMX: Albe's vendors), instead of the page guessing from the title.
+        self.brand_of = brand_of
         self.cache = {}
 
 
@@ -165,7 +169,45 @@ def load_sale_products(store, fetch=None, sleep=time.sleep):
         return None
     if own_fetch:
         store.cache["products"] = products
+        log_feed_summary(store, products)
     return products
+
+
+def feed_summary(store, products):
+    """What the sale feed held and why products were left out, before the filters."""
+    marked, sold_out = 0, 0
+    unmapped = collections.Counter()
+    for product in products or []:
+        if not isinstance(product, dict):
+            continue
+        priced = [v for v in _variants_of(product)
+                  if (_amount(v.get("price")) or 0) > 0 and (_amount(v.get("compare_at_price")) or 0) > (_amount(v.get("price")) or 0)]
+        if not priced:
+            continue
+        if not sale_variants(product):
+            sold_out += 1
+            continue
+        marked += 1
+        title = title_with_brand(product, store.own_vendor, store.brand_of)
+        if part_for(store, product.get("product_type"), title) is None:
+            unmapped[str(product.get("product_type") or "(none)").strip() or "(none)"] += 1
+    return {"products": len(products or []), "marked_down": marked, "sold_out": sold_out,
+            "unmapped_types": unmapped.most_common()}
+
+
+def log_feed_summary(store, products):
+    try:
+        summary = feed_summary(store, products)
+    except Exception as exc:  # logging only; never fails a run
+        logger.error("%s feed summary failed: %s", store.store, exc)
+        return
+    skipped = sum(count for _, count in summary["unmapped_types"])
+    logger.info("%s sale feed: %s products, %s marked down and buyable, %s marked down but sold out, "
+                "%s in product types with no category", store.store, summary["products"], summary["marked_down"],
+                summary["sold_out"], skipped)
+    if summary["unmapped_types"]:
+        logger.info("%s product types with no category: %s", store.store,
+                    ", ".join(f"{kind} ({count})" for kind, count in summary["unmapped_types"][:25]))
 
 
 def enrich_stock(store, products, part, fetch=None, sleep=time.sleep, limit=MAX_STOCK_READS):
@@ -182,7 +224,7 @@ def enrich_stock(store, products, part, fetch=None, sleep=time.sleep, limit=MAX_
     for product in products or []:
         if not isinstance(product, dict) or _stock_known(_variants_of(product)):
             continue
-        title = title_with_brand(product, store.own_vendor)
+        title = title_with_brand(product, store.own_vendor, store.brand_of)
         if part_for(store, product.get("product_type"), title) != part:
             continue
         sale = sale_variants(product)
@@ -223,7 +265,7 @@ def sale_variants(product):
     return sale
 
 
-def title_with_brand(product, own_vendor=""):
+def title_with_brand(product, own_vendor="", brand_of=None):
     """The product title, with the vendor's brand in front when the title leaves it out.
 
     "Formula Four Classic 54mm" from vendor Spitfire reads "Spitfire Formula
@@ -234,6 +276,8 @@ def title_with_brand(product, own_vendor=""):
     vendor = normalize_product_name((product or {}).get("vendor") or "")
     if not vendor or (own_vendor and vendor.casefold().startswith(own_vendor)):
         return title
+    if brand_of:
+        vendor = brand_of(vendor) or vendor
     brand = [word for word in re.findall(r"[a-z0-9]+", vendor.casefold()) if word not in _VENDOR_FILLER]
     words = set(re.findall(r"[a-z0-9]+", title.casefold()))
     if brand and all(word in words for word in brand):
@@ -289,7 +333,7 @@ class ShopifyScraper(Scraper):
         for product in products or []:
             if not isinstance(product, dict):
                 continue
-            title = title_with_brand(product, self.shop.own_vendor)
+            title = title_with_brand(product, self.shop.own_vendor, self.shop.brand_of)
             if part_for(self.shop, product.get("product_type"), title) != self.part:
                 continue
             handle = str(product.get("handle") or "").strip()
@@ -330,6 +374,11 @@ class ShopifyScraper(Scraper):
             "store": self.shop.store,
             "product_type": product_type,
         }
+        if self.shop.brand_of:
+            vendor = normalize_product_name(product.get("vendor") or "")
+            brand = self.shop.brand_of(vendor) if vendor else ""
+            if brand and not (self.shop.own_vendor and vendor.casefold().startswith(self.shop.own_vendor)):
+                item["brand"] = brand
         images = _images(product)
         if images:
             item["image"] = images[0]
@@ -382,7 +431,7 @@ def preview(store, parts=ALL_PARTS):
         reasons = collections.Counter()
         cruisers = []
         for product in products:
-            title = title_with_brand(product, store.own_vendor)
+            title = title_with_brand(product, store.own_vendor, store.brand_of)
             if part_for(store, product.get("product_type"), title) != scraper.part or not sale_variants(product):
                 continue
             reason = filter_reason(title, scraper.part, "", "1", "2", _plain(product.get("body_html") or ""),
@@ -395,8 +444,8 @@ def preview(store, parts=ALL_PARTS):
             print("  Dropped:", ", ".join(f"{reason} {count}" for reason, count in reasons.most_common(5)))
         for title in cruisers:
             print(f"    cruiser: {title}")
-    shoes = [title_with_brand(p, store.own_vendor) for p in products
-             if part_for(store, p.get("product_type"), title_with_brand(p, store.own_vendor)) == "Sneakers"]
+    shoes = [title_with_brand(p, store.own_vendor, store.brand_of) for p in products
+             if part_for(store, p.get("product_type"), title_with_brand(p, store.own_vendor, store.brand_of)) == "Sneakers"]
     tracked = [t for t in shoes if re.search(r"waffle ?cup|pop ?cush|dunk", t, re.IGNORECASE)]
     print(f"\nShoe titles naming Wafflecup, PopCush, or Dunk: {len(tracked)}")
     for title in tracked[:10]:

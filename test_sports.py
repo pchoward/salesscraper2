@@ -65,6 +65,7 @@ class RenderTests(unittest.TestCase):
         settings = json.loads(re.search(r"const SPORT_SETTINGS = (\{.*?\});", html).group(1))
         self.assertEqual(settings["defaultPart"], "all")
         self.assertEqual(settings["parts"], list(sports.BMX.parts))
+        self.assertIs(settings["alerts"], False, "the page can hide alert buttons for BMX")
         self.assertTrue('data-part="all" data-count="2" aria-pressed="true"' in html, "opens on every category")
         for part in ("Frames &amp; Forks", "Wheel Parts"):
             self.assertTrue(f'data-part="{part}" data-count="1" aria-pressed="false"' in html, part)
@@ -208,6 +209,55 @@ class AlbesTests(unittest.TestCase):
         self.assertEqual(kept, {"Cult Gateway Frame": "Frames & Forks", "Odyssey Clutch Freecoaster Hub": "Wheel Parts"})
         self.assertEqual(stores.ALBES.sale_json, "https://www.albes.com/collections/bmx-sale-bikes-parts/products.json")
         self.assertEqual(sports.BMX.build_scrapers()[0].shop, stores.ALBES)
+
+
+class BmxBrandTests(unittest.TestCase):
+    FEED = {"products": [
+        {"title": "Eastern Cobra Bike", "vendor": "Eastern Bikes", "handle": "cobra", "product_type": "BMX BIKES",
+         "variants": [{"id": 1, "price": "329.95", "compare_at_price": "379.95"}]},
+        {"title": "OEM 16\" Wheelset", "vendor": "FIT", "handle": "fit-wheels", "product_type": "Wheels",
+         "variants": [{"id": 2, "price": "74.95", "compare_at_price": "129.99"}]},
+        {"title": "DefendR Fork", "vendor": "Black Ops", "handle": "defendr", "product_type": "Forks",
+         "variants": [{"id": 3, "price": "79.95", "compare_at_price": "159.99"}]},
+        {"title": "Shop Tool", "vendor": "Albes", "handle": "tool", "product_type": "Tools",
+         "variants": [{"id": 4, "price": "5", "compare_at_price": "10"}]},
+        {"title": "Sold Out Bars", "vendor": "S&M", "handle": "bars", "product_type": "Bars",
+         "variants": [{"id": 5, "price": "50", "compare_at_price": "90", "available": False}]},
+    ]}
+
+    def items(self):
+        from sports.bmx import stores
+
+        kept = []
+        with sports.BMX.active():
+            for store_scraper in stores.scrapers():
+                kept += store_scraper.parse(json.dumps(self.FEED))
+        return {item["name"]: item.get("brand") for item in kept}
+
+    def test_brand_comes_from_the_vendor_with_one_spelling(self):
+        self.assertEqual(self.items(), {"Eastern Cobra Bike": "Eastern", "Fit OEM 16\" Wheelset": "Fit",
+                                        "Black Ops DefendR Fork": "Black Ops"})
+
+    def test_page_brand_filter_uses_it(self):
+        data = {"Albes_Forks": [{"name": "Black Ops DefendR Fork", "url": "https://bmx.example/defendr", "price_new": "79.95",
+                                 "price_old": "159.99", "part": "Frames & Forks", "store": "Albe's BMX", "brand": "Black Ops"}]}
+        html = render(sports.BMX, data=data)
+        self.assertIn('data-brand="Black Ops"', html)
+        self.assertNotIn('data-brand="Black"', html)
+
+    def test_feed_summary_says_what_was_skipped(self):
+        from sports.bmx import stores
+        from stores import shopify
+
+        summary = shopify.feed_summary(stores.ALBES, self.FEED["products"])
+        self.assertEqual((summary["products"], summary["marked_down"], summary["sold_out"]), (5, 4, 1))
+        self.assertEqual(summary["unmapped_types"], [("Tools", 1)])
+
+    def test_skate_titles_are_unchanged(self):
+        from stores import shopify
+
+        product = {"title": "Formula Four Classic 54mm", "vendor": "Spitfire"}
+        self.assertEqual(shopify.title_with_brand(product), "Spitfire Formula Four Classic 54mm")
 
 
 if __name__ == "__main__":

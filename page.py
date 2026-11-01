@@ -1133,7 +1133,7 @@ def _atl_section(low_items, history):
             store = item.get("store") or "Unknown"
             part = item.get("part") or ""
             name = item.get("name") or ""
-            brand = item.get("_brand") or listing_brand(name, part)
+            brand = item.get("_brand") or item.get("brand") or listing_brand(name, part)
             observations = status.get("observations")
             title = escape(status.get("title") or "All-time low", quote=True)
             search = " ".join(bit for bit in (name, store, part, brand, "all-time low") if bit)
@@ -1520,7 +1520,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             except Exception:
                 stage = "new"
             listed = any(rule_matches(rule, item) for rule in rules)
-            brand = listing_brand(item.get("name") or "", item.get("part"))
+            brand = item.get("brand") or listing_brand(item.get("name") or "", item.get("part"))
             hit_low = bool(status.get("flagged")) and (
                 str(status.get("low_date") or "")[:10] == today or drop is not None
             )
@@ -2828,7 +2828,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             ""
             if sport.is_default
             else "const SPORT_SETTINGS = "
-            + json.dumps({"id": sport.id, "label": sport.label, "defaultPart": default_part, "parts": list(sport.parts)}).replace("<", "\\u003c")
+            + json.dumps({"id": sport.id, "label": sport.label, "defaultPart": default_part, "parts": list(sport.parts), "alerts": bool(sport.delivery)}).replace("<", "\\u003c")
             + ";\n"
         )
         + f"const WIDTH_RANGES = {ranges_literal};\n"
@@ -3165,7 +3165,7 @@ def _removed_feed(digest, products, price_history):
             "name": name,
             "store": store or "Unknown",
             "part": part,
-            "brand": listing_brand(name, part),
+            "brand": item.get("brand") or listing_brand(name, part),
             "width_key": width_key,
             "price": price,
             "price_old": item.get("price_old"),

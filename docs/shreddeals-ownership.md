@@ -1,6 +1,6 @@
 # ShredDeals: who owns which files
 
-Codex and Claude both work on this repository. To avoid editing the same
+Codex, Grok and Claude all work on this repository. To avoid editing the same
 files at the same time, each area has one owner. To change a file in an area
 it doesn't own, an agent asks first: in the PR, or through the user. If the
 change is unavoidable, it keeps the edit small and says so in its PR.
@@ -8,7 +8,7 @@ change is unavoidable, it keeps the edit small and says so in its PR.
 | Area | Files | Owner |
 |---|---|---|
 | Homepage, sport tabs, unified header | `previews/` (`shell.html`, `navigation.js`, `navigation.css`, `skate-bridge.js`, `shreddeals.py`, `publish.py`, `sports.json`), `navigation/`, `index.html` | **Codex** |
-| Catalog page UI | `page.js`, `page.css`, `mobile.css`, the markup in `page.py` | **Codex** (UI-owned) |
+| Catalog page UI (cards, filters, chips, panels) | `page.js`, `page.css`, `mobile.css`, the card and filter markup in `page.py` | **Grok** (from 2026-11-01; was Codex). Tasks: docs/shreddeals-ui-handoff.md |
 | Engine: sports, scraping, data, rules | `sports/`, `scraper.py`, `rebuild_page.py`, `pipeline.py`, `history.py`, `filters.py`, `stores/`, `report.py`, the data parts of `page.py` | **Claude** |
 | Build, preview and CI | `ci/`, `.github/workflows/` (except the scrape workflow's delivery steps), `audit/` | **Claude** |
 | Data files | `previous_data.json`, `price_history.json`, ..., `catalogs/` | written only by workflows |

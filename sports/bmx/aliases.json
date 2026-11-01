@@ -1,59 +1,245 @@
 {
   "_about": "BMX search vocabulary, in search/aliases.json's format. brands and models map a canonical term to other spellings (both sides are rewritten to it). categories turns a typed word into one of the BMX category chips (sports/__init__.py); stores turns a typed store name into a store filter. Edit freely; no code changes needed.",
   "brands": {
-    "We The People": ["wtp", "wethepeople", "we the ppl"],
-    "S&M": ["s and m", "s&m bikes", "sandm"],
-    "Shadow Conspiracy": ["shadow", "tsc"],
-    "Odyssey": ["ody"],
-    "Cult": ["cult crew"],
-    "Kink": ["kink bmx"],
-    "Sunday": ["sunday bikes"],
-    "Fit": ["fit bike co", "fitbikeco"],
+    "We The People": [
+      "wtp",
+      "wethepeople",
+      "we the ppl"
+    ],
+    "S&M": [
+      "s and m",
+      "s&m bikes",
+      "sandm"
+    ],
+    "Shadow Conspiracy": [
+      "shadow",
+      "tsc"
+    ],
+    "Odyssey": [
+      "ody"
+    ],
+    "Cult": [
+      "cult crew"
+    ],
+    "Kink": [
+      "kink bmx"
+    ],
+    "Sunday": [
+      "sunday bikes"
+    ],
+    "Fit": [
+      "fit bike co",
+      "fitbikeco",
+      "fit bike co."
+    ],
     "Fiend": [],
-    "BSD": ["bsd forever"],
+    "BSD": [
+      "bsd forever"
+    ],
     "Subrosa": [],
-    "Haro": ["haro bikes"],
-    "GT": ["gt bikes"],
-    "SE Bikes": ["se", "se racing"],
-    "Mongoose": ["goose"],
+    "Haro": [
+      "haro bikes"
+    ],
+    "GT": [
+      "gt bikes"
+    ],
+    "SE Bikes": [
+      "se",
+      "se racing"
+    ],
+    "Mongoose": [
+      "goose"
+    ],
     "Eclat": [],
     "Merritt": [],
     "Cinema": [],
-    "Profile": ["profile racing"],
+    "Profile": [
+      "profile racing"
+    ],
     "Primo": [],
     "Federal": [],
     "Stolen": [],
     "Colony": [],
-    "Eastern": ["eastern bikes"],
-    "Radio": ["radio bikes"],
-    "Box": ["box components"],
-    "Alienation": []
+    "Eastern": [
+      "eastern bikes"
+    ],
+    "Radio": [
+      "radio bikes"
+    ],
+    "Box": [
+      "box components"
+    ],
+    "Alienation": [],
+    "Black Ops": [
+      "blackops"
+    ],
+    "Theory": [
+      "theory bmx"
+    ],
+    "Sunlite": [],
+    "Origin 8": [
+      "origin8"
+    ],
+    "Elite": [
+      "elite bmx"
+    ],
+    "DK": [
+      "dk bicycles",
+      "dk bikes"
+    ],
+    "Kenda": [],
+    "Vans": [],
+    "Rant": [],
+    "Demolition": [
+      "demolition parts"
+    ],
+    "Odi": [
+      "odi grips"
+    ]
   },
   "models": {
-    "Freecoaster": ["fc", "free coaster", "freecoasters"],
-    "Cassette": ["cass", "cassettes"],
-    "Right Hand Drive": ["rhd", "rsd", "right side drive"],
-    "Left Hand Drive": ["lhd", "lsd", "left side drive"],
-    "Top Tube": ["tt", "toptube", "top-tube"],
-    "Chainstay": ["cs", "chain stay"],
-    "Pivotal": ["pivotal seat"],
-    "Tripod": ["tripod seat"],
-    "Mid BB": ["mid bottom bracket"],
-    "Spanish BB": ["spanish bottom bracket"],
-    "Hub Guard": ["hubguard", "hub guards"],
-    "Driver": ["drivers"],
-    "Sprocket": ["sprockets", "sprocket", "sprox"]
+    "Freecoaster": [
+      "fc",
+      "free coaster",
+      "freecoasters"
+    ],
+    "Cassette": [
+      "cass",
+      "cassettes"
+    ],
+    "Right Hand Drive": [
+      "rhd",
+      "rsd",
+      "right side drive"
+    ],
+    "Left Hand Drive": [
+      "lhd",
+      "lsd",
+      "left side drive"
+    ],
+    "Top Tube": [
+      "tt",
+      "toptube",
+      "top-tube"
+    ],
+    "Chainstay": [
+      "cs",
+      "chain stay"
+    ],
+    "Pivotal": [
+      "pivotal seat"
+    ],
+    "Tripod": [
+      "tripod seat"
+    ],
+    "Mid BB": [
+      "mid bottom bracket"
+    ],
+    "Spanish BB": [
+      "spanish bottom bracket"
+    ],
+    "Hub Guard": [
+      "hubguard",
+      "hub guards"
+    ],
+    "Driver": [
+      "drivers"
+    ],
+    "Sprocket": [
+      "sprockets",
+      "sprocket",
+      "sprox"
+    ]
   },
   "categories": {
-    "Bikes": ["bike", "bikes", "complete", "completes", "complete bike", "complete bikes"],
-    "Frames & Forks": ["frame", "frames", "fork", "forks"],
-    "Steering": ["steering", "bars", "bar", "handlebar", "handlebars", "stem", "stems", "headset", "headsets", "grips", "detangler", "gyro"],
-    "Drivetrain": ["drivetrain", "cranks", "crank", "chain", "chains", "bottom bracket", "bottom brackets", "pedals", "pedal", "tensioner", "chain tensioner"],
-    "Wheels": ["wheels", "wheel", "wheelset", "wheel set"],
-    "Wheel Parts": ["wheel parts", "hub", "hubs", "rim", "rims", "spokes", "nipples", "axle", "axles", "pegs", "peg", "rim strip", "valve caps"],
-    "Tires": ["tires", "tire", "tyres", "tyre", "tubes", "tube", "inner tube"],
-    "Seating": ["seating", "seat", "seats", "seat post", "seatpost", "seat posts", "seat clamp"],
-    "Braking": ["braking", "brakes", "brake", "u-brake", "lever", "levers"]
+    "Bikes": [
+      "bike",
+      "bikes",
+      "complete",
+      "completes",
+      "complete bike",
+      "complete bikes"
+    ],
+    "Frames & Forks": [
+      "frame",
+      "frames",
+      "fork",
+      "forks"
+    ],
+    "Steering": [
+      "steering",
+      "bars",
+      "bar",
+      "handlebar",
+      "handlebars",
+      "stem",
+      "stems",
+      "headset",
+      "headsets",
+      "grips",
+      "detangler",
+      "gyro"
+    ],
+    "Drivetrain": [
+      "drivetrain",
+      "cranks",
+      "crank",
+      "chain",
+      "chains",
+      "bottom bracket",
+      "bottom brackets",
+      "pedals",
+      "pedal",
+      "tensioner",
+      "chain tensioner"
+    ],
+    "Wheels": [
+      "wheels",
+      "wheel",
+      "wheelset",
+      "wheel set"
+    ],
+    "Wheel Parts": [
+      "wheel parts",
+      "hub",
+      "hubs",
+      "rim",
+      "rims",
+      "spokes",
+      "nipples",
+      "axle",
+      "axles",
+      "pegs",
+      "peg",
+      "rim strip",
+      "valve caps"
+    ],
+    "Tires": [
+      "tires",
+      "tire",
+      "tyres",
+      "tyre",
+      "tubes",
+      "tube",
+      "inner tube"
+    ],
+    "Seating": [
+      "seating",
+      "seat",
+      "seats",
+      "seat post",
+      "seatpost",
+      "seat posts",
+      "seat clamp"
+    ],
+    "Braking": [
+      "braking",
+      "brakes",
+      "brake",
+      "u-brake",
+      "lever",
+      "levers"
+    ]
   },
   "stores": {}
 }
