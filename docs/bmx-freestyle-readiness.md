@@ -71,3 +71,8 @@ renderer. Label compare-at discounts separately from observed history, establish
 an initial snapshot without invented historical drops, report actual before/after
 counts and request costs, test desktop/mobile, then open the adapter/integration
 PR for review. No live production scrape or deployment without owner approval.
+
+Validation on the isolated BMX branch: **573 tests completed, OK (one existing
+skip)**. Eight Chrome-dependent cases were unavailable in this environment. The
+20 focused readiness/store-probe/public-diagnostic tests also passed. These tests
+use saved/synthetic inputs; they do not validate a live BMX source or adapter.
