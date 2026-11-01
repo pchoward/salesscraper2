@@ -226,6 +226,39 @@ assert.ok(S.matchesText("", "anything"));
         self.assertEqual(code, 0, out)
 
 
+class SuggestionTests(unittest.TestCase):
+    def test_grouped_suggestions_highlights_and_did_you_mean(self):
+        code, out = run(FIXTURE + r"""
+const groups = list => list.map(entry => entry.group + ":" + entry.label);
+const spi = S.suggest(index, "spi");
+assert.equal(spi[0].group + ":" + spi[0].label, "Brands:Spitfire");
+assert.ok(spi.filter(entry => entry.group === "Products").every(entry => entry.label.startsWith("Spitfire")));
+assert.ok(S.suggest(index, "spitfre").some(entry => entry.kind === "brand" && entry.label === "Spitfire"), "a typo still suggests the brand");
+assert.ok(S.suggest(index, "o").length <= 8);
+const sizes = S.suggest(index, "spitfire 5").filter(entry => entry.kind === "size").map(entry => entry.label);
+assert.ok(sizes.length > 0 && sizes.length <= 3, "at most three sizes");
+assert.ok(sizes.every(size => /^5\dmm$/.test(size)), "only wheel sizes that start with 5: " + sizes);
+assert.ok(!S.suggest(index, "spitfire 5").some(entry => entry.kind === "brand" && entry.label !== "Spitfire"), "a lone 5 suggests no brand");
+assert.deepEqual(S.suggest(index, "8.").filter(entry => entry.kind === "size").map(entry => entry.label).sort(), ['8.25"', '8.5"']);
+const products = S.suggest(index, "spitfire 54mm").filter(entry => entry.kind === "product").map(entry => entry.id);
+assert.deepEqual(products, ["sf-bighead"], "products respect the typed size");
+assert.ok(S.suggest(index, "big").some(entry => entry.kind === "model" && entry.label === "Bighead"));
+
+assert.deepEqual(S.didYouMean(index, "spitfrie"), { word: "spitfrie", label: "Spitfire" });
+assert.deepEqual(S.didYouMean(index, "bakr deck"), { word: "bakr", label: "Baker" });
+assert.equal(S.didYouMean(index, "zzqx"), null);
+assert.equal(S.didYouMean(index, "spitfire"), null, "a right word needs no fix");
+
+const title = "Spitfire Formula Four Big Head 54mm 99a";
+const marked = query => S.highlightRanges(title, query).map(([a, b]) => title.slice(a, b));
+assert.deepEqual(marked("spitty f4 54mm"), ["Spitfire", "Formula", "Four", "54mm"]);
+assert.deepEqual(marked("99a under 30"), ["99a"]);
+assert.deepEqual(marked(""), []);
+assert.deepEqual(S.highlightRanges("OJ Elite Mini Combo", "o.j. combo").length, 2);
+""")
+        self.assertEqual(code, 0, out)
+
+
 class PerformanceTests(unittest.TestCase):
     def test_ten_thousand_items_stay_fast(self):
         code, out = run(r"""

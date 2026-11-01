@@ -19,8 +19,12 @@
     const BOOST = { brand: 3, name: 3, category: 1.5, store: 0.5, tags: 0.5 };
     // Queries this short match anywhere in a word, ranked word-start first.
     const SHORT_QUERY = 2;
+    // Typos: about one edit in five letters (MiniSearch rounds, so 5-7
+    // letters allow 1 and 8+ allow 2). Shorter words get none: one edit in a
+    // 3-4 letter word is mostly noise ("spi" -> SPF, "indy" -> Andy), and
+    // prefixes already cover a word being typed.
     const FUZZY = 0.2;
-    const FUZZY_MIN_TERM = 3;
+    const FUZZY_MIN_TERM = 5;
 
     // ---- Normalization -------------------------------------------------
 
@@ -318,7 +322,9 @@
             brand: data.brand || "",
             category: data.part || "",
             store: storeWords(data.store || ""),
-            tags: [data.shape, String(data.duros || "").replace(/,/g, " "), data.size].filter(Boolean).join(" ")
+            tags: [data.shape, String(data.duros || "").replace(/,/g, " "), data.size].filter(Boolean).join(" "),
+            size: data.size || "",
+            duros: data.duros || ""
         };
     }
 
@@ -352,7 +358,8 @@
         const byId = new Map();
         const prepared = (docs || []).map(prepare).filter(doc => doc.id && !byId.has(doc.id) && byId.set(doc.id, doc));
         mini.addAll(prepared);
-        return { mini: mini, docs: byId };
+        const raw = new Map((docs || []).map(doc => [doc.id, doc]));
+        return { mini: mini, docs: byId, raw: raw, terms: catalogTerms(Array.from(raw.values())) };
     }
 
     // ``bo``: Bones (word start) before "Combo" (mid-word).
@@ -378,6 +385,159 @@
         return hits;
     }
 
+    // ---- Suggestions, "did you mean", highlighting ----------------------
+
+    function editDistance(a, b, limit) {
+        if (Math.abs(a.length - b.length) > limit) return limit + 1;
+        let previous = Array.from({ length: b.length + 1 }, (_, i) => i);
+        for (let i = 1; i <= a.length; i++) {
+            const current = [i];
+            let best = i;
+            for (let j = 1; j <= b.length; j++) {
+                current[j] = Math.min(previous[j] + 1, current[j - 1] + 1, previous[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+                best = Math.min(best, current[j]);
+            }
+            if (best > limit) return limit + 1;
+            previous = current;
+        }
+        return previous[b.length];
+    }
+
+    // What the catalog holds, for suggestions: brands (with counts), the
+    // aliases' models that appear in some name, and sizes and durometers.
+    function catalogTerms(docs) {
+        const brands = new Map();
+        const diameters = new Map();
+        const widths = new Map();
+        const duros = new Map();
+        const names = [];
+        const bump = (map, key, label) => {
+            const entry = map.get(key) || { label: label, count: 0 };
+            entry.count += 1;
+            map.set(key, entry);
+        };
+        docs.forEach(doc => {
+            if (doc.brand) bump(brands, normalize(doc.brand), doc.brand);
+            nameSizes(doc.name).forEach(size => bump(diameters, numberText(size), numberText(size) + "mm"));
+            const width = parseFloat(doc.size);
+            if (doc.category === "Decks" && width >= 7 && width <= 10.5) bump(widths, numberText(width), numberText(width) + '"');
+            rowDuros(doc).forEach(duro => bump(duros, duro, duro));
+            names.push(" " + normalize(doc.name) + " ");
+        });
+        const models = vocabulary.terms.filter(term => term.group === "models")
+            .map(term => ({ key: term.key, label: term.name, count: names.filter(name => name.indexOf(" " + term.key + " ") >= 0).length }))
+            .filter(term => term.count > 0);
+        return { brands: brands, models: models, diameters: diameters, widths: widths, duros: duros };
+    }
+
+    function byCount(a, b) {
+        return b.count - a.count || a.label.localeCompare(b.label);
+    }
+
+    function prefixOrClose(candidate, typed) {
+        if (!typed) return false;
+        if (candidate.startsWith(typed)) return true;
+        if (typed.length < 4) return false;
+        const limit = typed.length >= 7 ? 2 : 1;
+        return editDistance(candidate.slice(0, typed.length), typed, 1) <= 1 || editDistance(candidate, typed, limit) <= limit;
+    }
+
+    /**
+     * Grouped suggestions for the search box, at most ``limit`` rows:
+     * ``[{ group, kind, label, value, count?, id? }]``. Brands and sizes apply
+     * as filters; models and products fill the text.
+     */
+    function suggest(index, query, limit) {
+        const max = limit || 8;
+        const raw = String(query || "");
+        const parsed = parseQuery(raw);
+        const text = normalize(parsed.remainingText);
+        const words = text ? text.split(" ") : [];
+        const last = words[words.length - 1] || "";
+        const terms = index.terms;
+        const out = [];
+        if (text) {
+            const brands = [];
+            // The last word alone suggests a brand only when it is a word ("spitfire bo" -> Bones), not "5".
+            const lastWord = words.length > 1 && last.length >= 2 && !/\d/.test(last) ? last : "";
+            terms.brands.forEach((entry, key) => { if (prefixOrClose(key, text) || (lastWord && prefixOrClose(key, lastWord))) brands.push(entry); });
+            brands.sort(byCount).slice(0, 3).forEach(entry => out.push({ group: "Brands", kind: "brand", label: entry.label, value: entry.label, count: entry.count }));
+            terms.models.filter(model => last.length >= 2 && (prefixOrClose(model.key, last) || prefixOrClose(model.key, text)))
+                .sort(byCount).slice(0, 2)
+                .forEach(model => out.push({ group: "Models", kind: "model", label: model.label, value: model.label, count: model.count }));
+        }
+        const number = /(\d{1,3}(?:\.\d{0,3})?)$/.exec(raw.trim());
+        if (number && !parsed.tokens.some(token => token.end === raw.trimEnd().length)) {
+            const typed = number[1];
+            const sizes = [];
+            [terms.diameters, terms.widths, terms.duros].forEach(map => map.forEach((entry, key) => {
+                if (key.startsWith(typed)) sizes.push(entry);
+            }));
+            sizes.sort(byCount).slice(0, 3).forEach(entry => out.push({ group: "Sizes", kind: "size", label: entry.label, value: entry.label, count: entry.count }));
+        }
+        if (text) {
+            const hits = search(index, parsed.remainingText) || new Map();
+            const room = Math.max(0, Math.min(4, max - out.length));
+            // Products respect what the query typed (54mm, 99a, wheels...).
+            const fits = doc => doc && rowAllows(parsed.filters, doc)
+                && (!parsed.filters.parts || parsed.filters.parts.indexOf(doc.category) >= 0);
+            Array.from(hits.entries()).sort((a, b) => b[1] - a[1])
+                .map(([id]) => index.raw.get(id)).filter(fits).slice(0, room)
+                .forEach(doc => out.push({ group: "Products", kind: "product", label: doc.name, value: doc.name, id: doc.id }));
+        }
+        return out.slice(0, max);
+    }
+
+    /**
+     * The closest brand or model to a typed word, as ``{ word, label }``
+     * (``word`` as typed, to replace it), or null.
+     */
+    function didYouMean(index, text) {
+        const typed = words(basic(text));
+        let best = { distance: 3, label: "", word: "" };
+        typed.forEach(word => {
+            if (word.length < 4 || /\d/.test(word)) return;
+            const limit = word.length >= 7 ? 2 : 1;
+            index.terms.brands.forEach((entry, key) => {
+                const distance = editDistance(word, key, limit);
+                if (distance > 0 && distance <= limit && distance < best.distance) best = { distance: distance, label: entry.label, word: word };
+            });
+            index.terms.models.forEach(model => {
+                const distance = editDistance(word, model.key, limit);
+                if (distance > 0 && distance <= limit && distance < best.distance) best = { distance: distance, label: model.label, word: word };
+            });
+        });
+        return best.label ? { word: best.word, label: best.label } : null;
+    }
+
+    /**
+     * ``[[start, end], ...]`` in ``text`` to highlight for ``query``: words
+     * that start with a query word, after normalization and aliases, so
+     * "spitty" marks "Spitfire" and "f4" marks "Formula Four".
+     */
+    function highlightRanges(text, query) {
+        const parsed = parseQuery(query);
+        const wanted = words(normalize(parsed.remainingText));
+        parsed.tokens.forEach(token => {
+            if (token.kind === "diameter") wanted.push(numberText(token.value) + "mm");
+            if (token.kind === "duros") token.value.forEach(duro => wanted.push(duro));
+        });
+        const terms = Array.from(new Set(wanted.flatMap(term => term.split(" ")))).filter(Boolean);
+        if (!terms.length) return [];
+        const ranges = [];
+        const re = /[A-Za-z0-9][A-Za-z0-9.'-]*/g;
+        const source = String(text || "");
+        let match;
+        while ((match = re.exec(source))) {
+            const forms = words(normalize(match[0])).join(" ").split(" ");
+            const plain = basic(match[0]);
+            if (terms.some(term => forms.some(form => form.startsWith(term)) || (term.length <= SHORT_QUERY && plain.indexOf(term) >= 0))) {
+                ranges.push([match.index, match.index + match[0].length]);
+            }
+        }
+        return ranges;
+    }
+
     // For lists outside the index (Disappeared, All-time lows): every query
     // word starts some word of ``hay``, after normalization and aliases.
     function matchesText(query, hay) {
@@ -389,6 +549,9 @@
 
     return {
         configure: configure,
+        suggest: suggest,
+        didYouMean: didYouMean,
+        highlightRanges: highlightRanges,
         parseQuery: parseQuery,
         queryWithout: queryWithout,
         rowAllows: rowAllows,

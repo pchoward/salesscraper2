@@ -2542,8 +2542,17 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + store_row
         + "</div>"
         '<div class="tool-line">'
-        '<div class="search-box tool-search"><input type="text" id="searchInput" '
-        'placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals"></div>'
+        # A combobox: suggestions in #searchSuggest, filters read from the
+        # query as chips in #searchChips (search/search-ui.js).
+        '<div class="search-box tool-search"><div class="search-field">'
+        '<input type="text" id="searchInput" role="combobox" aria-autocomplete="list" aria-expanded="false" '
+        'aria-controls="searchSuggest" aria-describedby="searchHelp" autocomplete="off" spellcheck="false" '
+        'placeholder="Search deals (brand, product, keyword...)" aria-label="Search deals">'
+        '<div id="searchSuggest" class="search-suggest" role="listbox" aria-label="Search suggestions" hidden></div>'
+        "</div>"
+        '<p id="searchHelp" class="sr-only">Type a brand, product, size or price, like spitfire 54mm 99a under 30. '
+        "Press slash to search from anywhere.</p>"
+        '<div id="searchChips" class="search-chips" aria-label="Filters read from your search" hidden></div></div>'
         '<div class="tool-deals">'
         '<p class="lede digest" id="changeLine" '
         f'data-new="{new_count}" data-drops="{drop_count}" data-lows="{hit_count}" data-gone="{gone_count}" '
@@ -2791,6 +2800,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
         f"{_read_asset('page.js')}</script>"
     )
+    chunks.append(f"<script>{_read_asset('search/search-ui.js')}</script>")
     chunks.append('''<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "542cbf4d24534b70be3715cefe0e6a8e"}'></script><!-- End Cloudflare Web Analytics -->''')
     chunks.append("</body></html>")
     return "\n".join(chunk for chunk in chunks if chunk)

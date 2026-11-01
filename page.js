@@ -1280,6 +1280,11 @@ function rowMatches(row, overrides) {
 let searchIndex = null;
 let searchMemo = { query: null, typed: null };
 
+function ensureSearchIndex() {
+    if (!searchIndex) searchIndex = SkateSearch.createIndex(dealRows().map(SkateSearch.docFromRow));
+    return searchIndex;
+}
+
 function typedSearch(query) {
     const text = String(query || "").trim();
     if (!text || typeof SkateSearch === "undefined") return null;
@@ -1288,10 +1293,7 @@ function typedSearch(query) {
     const parsed = SkateSearch.parseQuery(text);
     const filters = Object.assign({}, parsed.filters);
     let hits = null;
-    if (parsed.remainingText) {
-        if (!searchIndex) searchIndex = SkateSearch.createIndex(dealRows().map(SkateSearch.docFromRow));
-        hits = SkateSearch.search(searchIndex, parsed.remainingText);
-    }
+    if (parsed.remainingText) hits = SkateSearch.search(ensureSearchIndex(), parsed.remainingText);
     const inferred = inferredParts(filters, hits);
     if (inferred) {
         filters.parts = inferred;
@@ -1326,12 +1328,13 @@ function typedFilters(query) {
     return (typed && typed.filters) || {};
 }
 
-function searchMatches(row, query) {
+// "near" widens a typed wheel size by that many mm (close matches).
+function searchMatches(row, query, near) {
     if (!query) return true;
     const typed = typedSearch(query);
     if (!typed) return (row.dataset.search || "").toLowerCase().includes(String(query).toLowerCase());
     if (typed.hits && !typed.hits.has(row.dataset.id)) return false;
-    return SkateSearch.rowAllows(typed.filters, row);
+    return SkateSearch.rowAllows(typed.filters, row, near);
 }
 
 // Lists outside the index (Disappeared, All-time lows) match word by word.
@@ -1359,7 +1362,7 @@ function rowMatchesNow(row, overrides) {
     const brand = over.brand != null ? over.brand : state.brand;
     const widths = Object.prototype.hasOwnProperty.call(over, "widths") ? over.widths : null;
     const search = Object.prototype.hasOwnProperty.call(over, "search") ? over.search : state.search;
-    if (!searchMatches(row, search)) return false;
+    if (!searchMatches(row, search, over.searchNear || 0)) return false;
     const typed = typedFilters(search);
     if (over.store == null && typed.stores) {
         if (typed.stores.indexOf(row.dataset.store || "") < 0) return false;
@@ -1944,6 +1947,8 @@ function applyFilters() {
     updateChangeLine();
     matchMemo = null;
     fitCardPhotos();
+    // search/search-ui.js: chips, highlights, close matches.
+    if (typeof afterSearchFilters === "function") afterSearchFilters();
 }
 
 function paintKeepaCounts() {
@@ -3142,7 +3147,7 @@ function decodeQuery(query) {
         else if (key === "length" && value && value !== "all") stateOut.length = normalizeLengthParam(value);
         else if (key === "wheelbase" && value && value !== "all") stateOut.wheelbase = normalizeWheelbaseParam(value);
         else if (key === "color" && value && value !== "all") stateOut.colors = normalizeColorParam(value);
-        else if (key === "sort" && ["rank", "score", "price", "price-desc", "original", "discount", "size", "store", "brand", "days", "daysat"].indexOf(value) >= 0) {
+        else if (key === "sort" && ["rank", "score", "price", "price-desc", "original", "discount", "size", "store", "brand", "days", "daysat", "relevance"].indexOf(value) >= 0) {
             stateOut.sort = value;
         } else if (key === "change" && ["new", "drop", "lowest", "removed"].indexOf(value) >= 0) {
             stateOut.change = value;
