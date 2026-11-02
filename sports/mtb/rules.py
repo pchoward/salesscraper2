@@ -18,7 +18,7 @@ _RULES=(
 
 # Road/gravel groupsets, for parts filed under a shared MTB/Road type.
 _NOT_MTB=(r'\b(?:road|gravel|cyclocross|triathlon|bmx|commuter|ultegra|dura[- ]?ace|tiagra|sora|claris|grx|'
-          r'rival|(?:force|red)\s+(?:axs|etap|22)|(?:force|apex)\s+xplr)\b|\b700\s*c\b|\bdrop[- ]bars?\b|\b(?:bar|handlebar)\s+tape\b')
+          r'rival|(?:force|red)\s+(?:axs|etap|22)|xplr|sram\s+red)\b|\b700\s*(?:c\b|x\s*\d)|(?<![\d.])\d{2}(?:-\d{2})?c\b|\bdrop[- ]bars?\b|\b(?:bar|handlebar)\s+tape\b')
 
 
 def title_part(title):
