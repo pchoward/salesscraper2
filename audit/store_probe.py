@@ -116,6 +116,41 @@ def _money(value):
         return None
 
 
+# Spec fields a filter could use, and how a product description would state
+# them (evo-style ski filters, Dan's-style BMX). Counts only; nothing is saved.
+SPEC_WORDS = {
+    "waist width": r"\bwaist\b|\b\d{3}\s*/\s*\d{2,3}\s*/\s*\d{3}\b",
+    "turn radius": r"\b(?:turn(?:ing)?\s+)?radius\b|\bsidecut\b",
+    "rocker / camber": r"\brocker\b|\bcamber\b",
+    "ability level": r"\bability\b|\b(?:beginner|intermediate|advanced|expert)\b",
+    "terrain / ski type": r"\ball[- ]mountain\b|\bpowder\b|\bfreeride\b|\bpark\b|\bfreestyle\b|\btouring\b|\bcarving\b|\bfrontside\b",
+    "boot flex": r"\bflex\b",
+    "boot last": r"\blast\b(?:\s*width)?|\b\d{2,3}\s*mm\s*last\b",
+    "walk mode": r"\bwalk\s*mode\b|\bhike\b",
+    "binding compatibility": r"\bgrip\s*walk\b|\bgw\b|\biso\s*5355\b|\biso\s*9523\b|\bmnc\b",
+    "DIN": r"\bdin\b",
+    "brake width": r"\bbrake\b",
+    "bindings included": r"\bbinding(?:s)?\s+included\b|\bw/\s*[a-z].*binding|\bflat\b",
+    "top tube": r"\btop\s*tube\b|\btt\b",
+    "material": r"\bchromoly\b|\b4130\b|\balumin|\bcarbon\b|\bhi-?ten\b",
+}
+
+
+def spec_coverage(products):
+    """How many products' title, description or tags state each spec field."""
+    counts = collections.Counter()
+    for product in products:
+        body = re.sub(r"<[^>]+>", " ", str(product.get("body_html") or ""))
+        tags = product.get("tags") or []
+        if isinstance(tags, str):
+            tags = tags.split(",")
+        text = " ".join([str(product.get("title") or ""), body, " ".join(str(tag) for tag in tags)])
+        for field, pattern in SPEC_WORDS.items():
+            if re.search(pattern, text, re.I):
+                counts[field] += 1
+    return counts.most_common()
+
+
 def shopify_sale(products):
     """What a Shopify sale collection holds and which spec fields it carries."""
     types = collections.Counter()
@@ -144,6 +179,7 @@ def shopify_sale(products):
         "variant_options": options.most_common(12),
         "vendors": vendors.most_common(12),
         "tags": tags.most_common(15),
+        "spec_coverage": spec_coverage(products),
     }
 
 
@@ -234,7 +270,8 @@ def markdown(reports):
         for note in report.get("notes") or []:
             lines.append(f"- {note}")
         for key, label in (("sale_collections", "Sale collections"), ("product_types", "Product types"),
-                           ("variant_options", "Variant options (filter candidates)"), ("vendors", "Brands"), ("tags", "Tags")):
+                           ("variant_options", "Variant options (filter candidates)"), ("vendors", "Brands"), ("tags", "Tags"),
+                           ("spec_coverage", "Spec fields stated in title/description/tags")):
             value = shop.get(key)
             if value:
                 if key == "sale_collections":
