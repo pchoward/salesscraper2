@@ -2,10 +2,341 @@
   "runs": [
     {
       "date": "2026-11-02",
-      "results": {},
-      "scanned_at": "2026-11-02T00:32:00+00:00"
+      "results": {
+        "Fanatik_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Brakes": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 1,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Cockpit": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 1,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Drivetrain": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 6,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Forks & Shocks": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 3,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Frames": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 2,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Protection": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 1,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Fanatik_Wheels": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 6,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Worldwide Cyclery_Bikes": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Brakes": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Cockpit": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Drivetrain": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Forks & Shocks": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Frames": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Pedals": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Protection": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Tires": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        },
+        "Worldwide Cyclery_Wheels": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "scrape_failed"
+          }
+        }
+      },
+      "scanned_at": "2026-11-02T01:25:53+00:00"
     }
   ],
-  "baseline": {},
-  "completeness_baseline": {}
+  "baseline": {
+    "Fanatik_Brakes": {
+      "date": "2026-11-02",
+      "count": 1
+    },
+    "Fanatik_Cockpit": {
+      "date": "2026-11-02",
+      "count": 1
+    },
+    "Fanatik_Drivetrain": {
+      "date": "2026-11-02",
+      "count": 6
+    },
+    "Fanatik_Forks & Shocks": {
+      "date": "2026-11-02",
+      "count": 3
+    },
+    "Fanatik_Frames": {
+      "date": "2026-11-02",
+      "count": 2
+    },
+    "Fanatik_Protection": {
+      "date": "2026-11-02",
+      "count": 1
+    },
+    "Fanatik_Wheels": {
+      "date": "2026-11-02",
+      "count": 6
+    }
+  },
+  "completeness_baseline": {
+    "Fanatik_Bikes": [
+      {
+        "date": "2026-11-02",
+        "count": 0
+      }
+    ],
+    "Fanatik_Brakes": [
+      {
+        "date": "2026-11-02",
+        "count": 1
+      }
+    ],
+    "Fanatik_Cockpit": [
+      {
+        "date": "2026-11-02",
+        "count": 1
+      }
+    ],
+    "Fanatik_Drivetrain": [
+      {
+        "date": "2026-11-02",
+        "count": 6
+      }
+    ],
+    "Fanatik_Forks & Shocks": [
+      {
+        "date": "2026-11-02",
+        "count": 3
+      }
+    ],
+    "Fanatik_Frames": [
+      {
+        "date": "2026-11-02",
+        "count": 2
+      }
+    ],
+    "Fanatik_Pedals": [
+      {
+        "date": "2026-11-02",
+        "count": 0
+      }
+    ],
+    "Fanatik_Protection": [
+      {
+        "date": "2026-11-02",
+        "count": 1
+      }
+    ],
+    "Fanatik_Tires": [
+      {
+        "date": "2026-11-02",
+        "count": 0
+      }
+    ],
+    "Fanatik_Wheels": [
+      {
+        "date": "2026-11-02",
+        "count": 6
+      }
+    ]
+  }
 }

@@ -118,19 +118,19 @@
           }
         },
         "Gear West_Skis": {
-          "count": 130,
+          "count": 129,
           "failed": false,
           "diagnostics": {
             "expected_count": 130,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 130,
-            "percentage_change": 0.0,
+            "actual_count": 129,
+            "percentage_change": -0.8,
             "reason": "insufficient_history"
           }
         }
       },
-      "scanned_at": "2026-11-02T00:31:55+00:00"
+      "scanned_at": "2026-11-02T01:25:49+00:00"
     }
   ],
   "baseline": {
@@ -140,7 +140,7 @@
     },
     "Gear West_Skis": {
       "date": "2026-11-02",
-      "count": 130
+      "count": 129
     }
   },
   "completeness_baseline": {
@@ -191,7 +191,7 @@
       },
       {
         "date": "2026-11-02",
-        "count": 130
+        "count": 129
       }
     ]
   }
