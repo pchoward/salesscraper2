@@ -429,3 +429,15 @@ For real retailer validation, manually run **ShredDeals - Preview Site** with
 **scrape `mtb`** and **ref `codex/mtb-catalog`** before merging this branch.
 
 Sport-specific sidebar field definitions and the BMX/Ski `technical_offers` integration contract are documented in [docs/sport-spec-filters.md](docs/sport-spec-filters.md).
+
+Issue #122's **unified native header preview** (one dark header, no iframe) is
+review-only and does not change the live homepage or Claude's sport engine:
+
+```bash
+python -m previews.unified_header --output-dir /tmp/shreddeals-unified-header
+python -m http.server 8000 --directory /tmp/shreddeals-unified-header
+```
+
+Open the served `index.html`; the builder prints its exact path. For PR review,
+the CI artifact **unified-header-preview** contains the same runnable directory.
+See [screenshots and Claude integration handoff](docs/unified-header.md).

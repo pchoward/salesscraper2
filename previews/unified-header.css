@@ -1,0 +1,62 @@
+/* Loaded after page.css and mobile.css. Only the existing header is enhanced. */
+.topnav.shred-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 .85rem;
+    min-height: 48px;
+    padding: 0 .8rem;
+    background: var(--nav, #1e293b);
+    color: #f8fafc;
+}
+.shred-header .brand { flex: 0 0 auto; font-size: 1rem; }
+.shred-header .brand-home { min-height: 44px; }
+.shred-sports { display: flex; align-items: stretch; gap: .15rem; }
+.shred-sport {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 .6rem;
+    border-bottom: 2px solid transparent;
+    color: #cbd5e1;
+    font: 700 .8rem/1 system-ui, sans-serif;
+    text-decoration: none;
+}
+.shred-sport:hover { color: white; background: #334155; }
+.shred-sport[aria-current="page"] { color: white; border-bottom-color: #60a5fa; background: #334155; }
+.shred-sport:focus-visible { outline: 2px solid #93c5fd; outline-offset: -3px; }
+.shred-header .topnav-links { border-left: 1px solid #475569; padding-left: .55rem; }
+.shred-header .nav-link { min-height: 44px; }
+.shred-header .scan-wrap { margin-left: auto; }
+.shred-header .fresh-note { margin-left: 0; }
+.shred-empty { max-width: 38rem; margin: 3rem auto; padding: 1.2rem; }
+.shred-empty h1 { font-size: 1.4rem; }
+.shred-empty a { color: #1d4ed8; }
+@media (max-width: 1100px) and (min-width: 801px) {
+    .topnav.shred-header { gap: 0 .4rem; }
+    .shred-header .nav-link { padding-right: .35rem; padding-left: .35rem; }
+    .shred-sport { padding: 0 .4rem; }
+    .shred-header .scan-wrap, .shred-header .fresh-note { font-size: .65rem; }
+}
+@media (max-width: 800px), (max-height: 500px) and (pointer: coarse) {
+    .topnav.shred-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas: 'brand sports sports' 'links links filters' 'scan scan status';
+        gap: 0 .25rem;
+        padding: 0 .5rem .2rem;
+    }
+    .shred-header .brand { grid-area: brand; font-size: .95rem; }
+    .shred-sports { grid-area: sports; justify-self: end; gap: 0; }
+    .shred-sport { min-width: 44px; padding: 0 .4rem; }
+    .shred-header .topnav-links { grid-area: links; justify-content: flex-start; flex-wrap: nowrap; border: 0; padding: 0; }
+    .shred-header .nav-link { padding: .5rem .55rem; font-size: .69rem; letter-spacing: .02em; }
+    .shred-header .scan-wrap { grid-area: scan; margin: 0; font-size: .64rem; }
+    .shred-header .fresh-note { grid-area: status; margin: 0; font-size: .64rem; }
+    .shred-header #filtersOpen { min-height: 36px; padding: 0 .6rem; }
+    html:has(.shred-header) { scroll-padding-top: 7rem; }
+}
+@media (max-width: 350px) {
+    .shred-sport { padding: 0 .2rem; min-width: 40px; font-size: .75rem; }
+    .shred-header .nav-link { padding-left: .35rem; padding-right: .35rem; }
+}
