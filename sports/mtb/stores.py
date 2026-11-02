@@ -75,7 +75,7 @@ CAMBRIA_TYPES={'hardtail':'Bikes','full suspension':'Bikes','electric mountain b
     'mtb groupsets':'Drivetrain','tubes':'Tires'}
 def cambria_part(product_type):
     kind=' '.join(str(product_type or '').lower().split())
-    if not kind or re.search(r'\b(?:bags?|tape|tools?|lubricants?|cleaners?)\b',kind):return None
+    if not kind or re.search(r'\b(?:bags?|tape|tools?|lubricants?|cleaners?|cruiser|comfort|wheelchair|kids)\b',kind):return None
     return CAMBRIA_TYPES.get(kind) or title_part(kind)
 
 def _tag_values(product,name):

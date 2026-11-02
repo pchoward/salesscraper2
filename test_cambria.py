@@ -29,6 +29,8 @@ BAG = product(6, "Topeak Saddle Bag", "Topeak", "Saddle Bags", [variant(61)])
 WHEELS = product(7, "Stans Flow MK4 Wheelset", "Stans", "MTB Wheels",
                  [variant(71, option1='27.5"'), variant(72, option1='29"')],
                  tags=['Fwheelsize_27.5" (650b)', 'Fwheelsize_29"'])
+CRUISER = product(9, "WheelMaster 24\" Alloy Cruiser/Comfort Wheel - Front", "WheelMaster", "Cruiser Wheels", [variant(91)])
+CHAIR = product(10, "Sunlite Wheelchair Tire - Gray", "Sunlite", "Wheelchair Tires", [variant(101)])
 TAPE = product(8, "Lizard Skins DSP Bar Tape", "Lizard Skins", "Handlebar Tape", [variant(81)])
 
 
@@ -43,13 +45,13 @@ def parse(products):
 
 class CambriaTests(unittest.TestCase):
     def test_mountain_parts_only(self):
-        kept = parse([ALPAKA, DUB, ULTEGRA, SADDLE, ROAD_BIKE, BAG, WHEELS, TAPE])
+        kept = parse([ALPAKA, DUB, ULTEGRA, SADDLE, ROAD_BIKE, BAG, WHEELS, TAPE, CRUISER, CHAIR])
         self.assertEqual({name: item["part"] for name, item in kept.items()}, {
             "Eastern Alpaka 29 MTB Hardtail Bike - Gray": "Bikes",
             "SRAM DUB Threaded Bottom Bracket - BSA - 68/73mm": "Drivetrain",
             "WTB Volt Saddle": "Cockpit",
             "Stans Flow MK4 Wheelset": "Wheels",
-        }, "shared MTB/Road types stay; road groupsets, road bikes, bags and bar tape don't")
+        }, "shared MTB/Road types stay; road groupsets, road bikes, bags, bar tape, cruiser and wheelchair parts don't")
 
     def test_tagged_wheel_size_and_travel(self):
         kept = parse([ALPAKA, WHEELS])
