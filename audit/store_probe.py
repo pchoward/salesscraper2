@@ -320,6 +320,13 @@ def raw(url, fetch=_get):
         return line
     time.sleep(DELAY)
     status, html = fetch(url, "text/html,application/json")
+    if url.endswith(".js") and status == 200:
+        try:
+            product = json.loads(html)
+        except ValueError:
+            product = {}
+        return line + "; options " + json.dumps(product.get("options"))[:300] + "; variants " + json.dumps(
+            [(v.get("title"), v.get("available")) for v in product.get("variants", [])])[:600]
     if "products.json" in url and status == 200:
         try:
             products = json.loads(html).get("products") or []
