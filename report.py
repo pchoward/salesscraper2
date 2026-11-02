@@ -28,7 +28,7 @@ def _price(value):
         return None
 
 
-def compare_catalogs(prev, curr, failed_keys=None):
+def compare_catalogs(prev, curr, failed_keys=None, excluded_urls=None):
     """Diff two catalogs.
 
     New rows and price drops must pass ``passes_filters``. A price drop is a
@@ -37,6 +37,7 @@ def compare_catalogs(prev, curr, failed_keys=None):
     previous item still passes the filters.
     """
     failed_keys = set(failed_keys or [])
+    excluded_urls = {normalize_url(url) for url in (excluded_urls or [])}
     changes = {}
 
     for site, items in (curr or {}).items():
@@ -80,7 +81,7 @@ def compare_catalogs(prev, curr, failed_keys=None):
 
         if site not in failed_keys:
             for url, previous in prev_map.items():
-                if url in current_urls or not item_passes_filters(previous):
+                if url in current_urls or url in excluded_urls or not item_passes_filters(previous):
                     continue
                 diffs.append({"type": "removed", "item": previous})
 

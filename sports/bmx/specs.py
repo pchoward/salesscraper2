@@ -79,13 +79,18 @@ _TITLE_KINDS = (
 
 
 def wheel_size(title, tags=()):
-    for tag in tags or ():
-        match = _TAG.match(str(tag).strip())
-        if match:
-            return match.group(1)
+    """One stated size, or None. When the store's tags and the title state
+    different sizes the field is withheld rather than guessed (from
+    codex/bmx-catalog-quality)."""
+    tagged = {match.group(1) for tag in tags or () for match in [_TAG.match(str(tag).strip())] if match}
     text = str(title or "")
-    sizes = {match.group(1) for pattern in (_SIZE, _TIRE) for match in pattern.finditer(text)}
-    return sizes.pop() if len(sizes) == 1 else None
+    titled = {match.group(1) for pattern in (_SIZE, _TIRE) for match in pattern.finditer(text)}
+    if len(tagged) > 1 or len(titled) > 1:
+        return None
+    if tagged and titled and tagged != titled:
+        return None
+    sizes = tagged or titled
+    return sizes.pop() if sizes else None
 
 
 def kind_for(type_key, title, category):

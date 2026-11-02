@@ -68,6 +68,7 @@ GEAR_WEST = shopify.ShopifyStore(
     own_vendor="gear west",
     title_part=title_part,
     details=details,
+    track_exclusions=True,
     unknown_by_title=True,
 )
 

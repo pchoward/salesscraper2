@@ -96,7 +96,7 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
                  brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=(),
-                 type_part=None):
+                 type_part=None, track_exclusions=False):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
@@ -120,6 +120,10 @@ class ShopifyStore:
         self.unknown_by_title = unknown_by_title
         # type key -> part, for types not in ``types`` (patterned type names).
         self.type_part = type_part
+        # Record the sale products this store deliberately leaves out (no
+        # category, or the sport's rules reject them), so a listing that is
+        # reclassified is not counted as a deal that disappeared.
+        self.track_exclusions = track_exclusions
         self.cache = {}
 
 
@@ -198,7 +202,33 @@ def load_sale_products(store, fetch=None, sleep=time.sleep):
     if own_fetch:
         store.cache["products"] = products
         log_feed_summary(store, products)
+        if getattr(store, "track_exclusions", False):
+            store.cache["exclusions"] = exclusions(store, products)
     return products
+
+
+def exclusions(store, products):
+    """{url: "catalog scope: <why>"} for sale products this store leaves out on
+    purpose. history.py treats these as intentional assortment changes, not
+    retailer disappearances (no miss, no "Disappeared", history kept)."""
+    found = {}
+    for product in products or []:
+        if not isinstance(product, dict) or not sale_variants(product):
+            continue
+        handle = str(product.get("handle") or "").strip()
+        if not handle:
+            continue
+        title = title_with_brand(product, store.own_vendor, getattr(store, "brand_of", None))
+        part = part_for(store, product.get("product_type"), title)
+        if part is None:
+            reason = "no category for product type " + repr(str(product.get("product_type") or ""))
+        else:
+            cheapest = min(sale_variants(product), key=lambda variant: _amount(variant.get("price")))
+            reason = filter_reason(title, part, "", _money(cheapest.get("price")), _money(cheapest.get("compare_at_price")),
+                                   _plain(product.get("body_html") or ""), str(product.get("product_type") or ""))
+        if reason:
+            found[normalize_url(f"{store.base}/products/{handle}")] = "catalog scope: " + str(reason)
+    return found
 
 
 def _read_collection(store, sale_json, fetch, sleep):
@@ -356,6 +386,12 @@ class ShopifyScraper(Scraper):
     def __init__(self, store, part):
         super().__init__(store.store, store.sale_json, part)
         self.shop = store
+
+    @property
+    def catalog_scope_exclusions(self):
+        """This store's deliberate exclusions this run (scraper.py passes them
+        to history.record_misses); empty unless the store tracks them."""
+        return self.shop.cache.get("exclusions") or {}
 
     def scrape(self):
         products = load_sale_products(self.shop)
