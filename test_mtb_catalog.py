@@ -20,11 +20,12 @@ class MtbCatalogTests(unittest.TestCase):
     def feed(self):return json.loads(FIXTURE.read_text())['products']
 
     def test_both_exact_collections_reuse_the_shared_parser_and_keep_only_sale_equipment(self):
-        self.assertEqual([s.sale_json for s in stores.STORES],[
+        # Mike's Bikes (#165) has its own path-typed tests (test_mikes_bikes.py).
+        self.assertEqual([s.sale_json for s in (stores.WORLDWIDE,stores.FANATIK)],[
             'https://www.worldwidecyclery.com/collections/deals/products.json',
             'https://www.fanatikbike.com/collections/fanatik-outlet/products.json'])
         with sports.MTB.active(),patch('stores.shopify._fetch_json',side_effect=AssertionError('fixtures must not fetch')):
-            for shop in stores.STORES:
+            for shop in (stores.WORLDWIDE,stores.FANATIK):
                 items=[item for parser in stores.scrapers() if parser.shop==shop for item in parser.products_from(self.feed())]
                 self.assertEqual(len(items),6)
                 self.assertEqual(len({i['url'] for i in items}),6)
