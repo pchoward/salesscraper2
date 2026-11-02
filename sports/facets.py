@@ -35,16 +35,47 @@ def payload(data, sport):
     return {'fields': fields, 'items': items}
 
 
+def counts(config):
+    """{field key: {value: listings}} among listings the field applies to."""
+    found = {field['key']: {} for field in config['fields']}
+    for item in config['items'].values():
+        for field in config['fields']:
+            if not applies(field, item['part']):
+                continue
+            values = set()
+            for offer in item['offers']:
+                values.update(str(v) for v in offer.get('specs', {}).get(field['key'], []))
+            for value in values:
+                found[field['key']][value] = found[field['key']].get(value, 0) + 1
+    return found
+
+
 def sidebar(data, section, sport):
+    """One collapsible section per field with count chips, like Skate's
+    Deck Width / Deck Length sections; several values can be picked."""
     config = payload(data, sport)
-    body = '<p class="section-note">Only stated specifications are filterable. Unknown specifications are hidden when a filter is selected.</p>'
+    tally = counts(config)
+    sections = []
     for field in config['fields']:
-        body += (f'<label class="field" data-technical-field="{escape(field["key"], quote=True)}"><span>{escape(field["label"])}</span>'
-                 f'<select id="tech-{field["key"]}" aria-label="{escape(field["label"], quote=True)}"><option value="">Any</option>'
-                 + ''.join(f'<option value="{escape(v, quote=True)}">{escape(v)}</option>' for v in field['values']) + '</select></label>')
-    if not config['fields']:
-        body = '<p class="section-note">No exact technical specifications were published for these deals.</p>'
-    return '<div id="contextSpecs">' + section('technical', sport.label + ' specifications', body, open_default=True) + '</div>'
+        key = escape(field['key'], quote=True)
+        label = escape(field['label'], quote=True)
+        total = sum(1 for item in config['items'].values()
+                    if applies(field, item['part']) and any(offer.get('specs', {}).get(field['key']) for offer in item['offers']))
+        chips = ['<button type="button" class="chip spec-chip tech-chip active" data-tech-key="' + key + '" data-value="" '
+                 f'data-count="{total}" aria-pressed="true"><span class="spec-label">All</span>'
+                 f'<span class="spec-count">{total}</span></button>']
+        for value in field['values']:
+            count = tally[field['key']].get(value, 0)
+            chips.append(f'<button type="button" class="chip spec-chip tech-chip" data-tech-key="{key}" '
+                         f'data-value="{escape(value, quote=True)}" data-count="{count}" aria-pressed="false">'
+                         f'<span class="spec-label">{escape(value)}</span><span class="spec-count">{count}</span></button>')
+        body = (f'<div class="filter-group spec-ranges" id="tech-{key}" role="group" aria-label="{label}">'
+                + ''.join(chips) + '</div>')
+        sections.append(f'<div data-technical-field="{key}">'
+                        + section('tech-' + field['key'], field['label'], body, open_default=True) + '</div>')
+    if not sections:
+        return '<div id="contextSpecs"></div>'
+    return '<div id="contextSpecs">' + ''.join(sections) + '</div>'
 
 
 def script(data, sport):
