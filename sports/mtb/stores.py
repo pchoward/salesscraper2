@@ -1,5 +1,6 @@
 """First MTB stores from Claude's #137 collection probe; one shared feed/store."""
 import logging
+import re
 import time
 from urllib import robotparser
 from urllib.error import HTTPError
@@ -65,7 +66,44 @@ MIKES=shopify.ShopifyStore("Mike's Bikes","Mike's Bikes",'https://mikesbikes.com
     more_collections=('clearance-and-sale-bikes','mountain-bikes','santa-cruz-bikes-on-sale'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor="mike's bikes",
     title_part=None,type_part=mikes_part,raw_type_part=True,track_exclusions=True)
-STORES=(WORLDWIDE,FANATIK,MIKES)
+# Cambria (issue #165): one sale collection per part. Types name the
+# discipline ("MTB Cassettes", "Road Cassettes", "MTB/Road Chains"); the MTB
+# rules drop road/gravel/BMX ones and road groupsets filed under shared types.
+CAMBRIA_TYPES={'hardtail':'Bikes','full suspension':'Bikes','electric mountain bikes':'Bikes','ex-demo mtb bikes':'Bikes',
+    'full suspension frames':'Frames','hardtail frames':'Frames',
+    'mtb/road bottom brackets':'Drivetrain','bottom bracket parts':'Drivetrain','electronic gear shifting':'Drivetrain',
+    'mtb groupsets':'Drivetrain','tubes':'Tires'}
+def cambria_part(product_type):
+    kind=' '.join(str(product_type or '').lower().split())
+    if not kind or re.search(r'\b(?:bags?|tape|tools?|lubricants?|cleaners?|cruiser|comfort|wheelchair|kids)\b',kind):return None
+    return CAMBRIA_TYPES.get(kind) or title_part(kind)
+
+def _tag_values(product,name):
+    prefix='F'+name+'_'
+    return [t[len(prefix):] for t in product.get('tags') or [] if isinstance(t,str) and t.startswith(prefix)]
+
+def cambria_specs(product,variant,part):
+    """Wheel size and fork travel from Cambria's filter tags ("Fwheelsize_27.5\" (650b)",
+    "Fforktravel_130mm"). A product tagged with several wheel sizes gives each
+    variant only the size its own options name."""
+    found={}
+    if part in ('Bikes','Frames','Forks & Shocks','Wheels','Tires'):
+        wheels={m[1] for v in _tag_values(product,'wheelsize') for m in [re.match(r'(26|27\.5|29)"',v.strip())] if m}
+        if len(wheels)>1:
+            own=' '.join(str(variant.get(k) or '') for k in ('title','option1','option2','option3'))
+            wheels={w for w in wheels if re.search(r'(?<![\d.])'+re.escape(w)+r'(?![\d])',own)}
+        if wheels:found['wheel_size']=wheels
+    if part in ('Bikes','Frames','Forks & Shocks'):
+        travel={m[1] for v in _tag_values(product,'forktravel') for m in [re.fullmatch(r'(\d{2,3})\s*mm',v.strip())] if m and 50<=int(m[1])<=250}
+        if len(travel)==1:found['travel_mm']=travel
+    return found
+
+CAMBRIA=shopify.ShopifyStore('Cambria','Cambria Bike','https://cambriabike.com',
+    collection='sale-components',more_collections=('sale-frames-forks','sale-wheels','sale-tires','sale-bikes'),
+    types={},brand_of=brands.for_sport(sports.MTB),own_vendor='cambria',
+    title_part=title_part,type_part=cambria_part,raw_type_part=True,track_exclusions=True)
+CAMBRIA.extra_specs=cambria_specs
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA)
 
 
 def robots_policy(store):
@@ -141,6 +179,9 @@ class MtbShopifyScraper(shopify.ShopifyScraper):
                 logger.warning('Optional MTB specs unavailable for %s (%s)',url,type(exc).__name__)
                 specs,conflicts={},['unreadable specifications']
             warnings.update(conflicts)
+            # Store-tagged facts (Cambria's filter tags) fill keys the title/options left empty.
+            for key,values in (getattr(self.shop,'extra_specs',None) or (lambda *a:{}))(product,variant,self.part).items():
+                if values and key not in specs:specs[key]=sorted(values)
             offers.append({'variant_id':variant.get('id'),'price':float(shopify._amount(variant['price'])),
                            'compare':float(shopify._amount(variant['compare_at_price'])),
                            'available':variant.get('available') if isinstance(variant.get('available'),bool) else None,

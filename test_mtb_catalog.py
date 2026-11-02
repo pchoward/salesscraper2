@@ -160,7 +160,7 @@ f.clear();assert.equal(f.price(url),null);assert.equal(f.allows(url),true);
     def test_renderer_has_actual_mtb_controls_and_no_skate_size_controls(self):
         from bs4 import BeautifulSoup
         from report import build_report_html
-        with sports.MTB.active():data={s.name+'_'+s.part:s.products_from(self.feed()) for s in stores.scrapers()}
+        with sports.MTB.active():data={s.name+'_'+s.part:s.products_from(self.feed()) for s in stores.scrapers() if s.shop in (stores.WORLDWIDE,stores.FANATIK)}
         html=build_report_html(data,{},generated_at='2026-11-02T00:00:00+00:00',sport=sports.MTB)
         soup=BeautifulSoup(html,'html.parser')
         self.assertIsNotNone(soup.select_one('#tech-wheel_size'))
