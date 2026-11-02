@@ -14,6 +14,11 @@ import functools
 import json
 import re
 
+# Sidebar spec filters (key -> label), shaped like sports/mtb/specs.FIELDS on
+# codex/mtb-catalog; PARAMS are their URL keys.
+FIELDS = {"kind": "Type", "wheel_size": "Wheel size (in)", "condition": "Condition"}
+PARAMS = {"kind": "bmx_type", "wheel_size": "bmx_wheel", "condition": "bmx_condition"}
+
 WHEEL_SIZES = ("12", "14", "16", "18", "20", "22", "24", "26", "27.5", "29")
 _SIZE = re.compile(r'(?<![\d.])(12|14|16|18|20|22|24|26|27\.5|29)\s*(?:"|”|″|\'\'|-?\s?inch(?:es)?\b|in\b)', re.I)
 # Tire sizes: 20 x 2.4, 20x1.95.

@@ -12,6 +12,11 @@ Nothing here is guessed: a field is left out when the store doesn't state it.
 
 import re
 
+# Sidebar spec filters (key -> label), shaped like sports/mtb/specs.FIELDS on
+# codex/mtb-catalog; PARAMS are their URL keys.
+FIELDS = {"length_cm": "Ski length (cm)", "mondo": "Boot size (mondo)", "style": "Style", "gender": "Gender"}
+PARAMS = {"length_cm": "ski_length", "mondo": "ski_mondo", "style": "ski_style", "gender": "ski_gender"}
+
 _LENGTH = re.compile(r"^\s*(\d{2,3})(?:\s*cm)?\s*$", re.I)
 _MONDO = re.compile(r"^\s*(\d{2}(?:\.5)?)(?:\s*mondo)?\s*$", re.I)
 _STYLES = (
@@ -38,6 +43,14 @@ def _option_values(product, variant, names):
             if value:
                 values.append(str(value))
     return values
+
+
+def variant_length(product, variant):
+    return lengths(product, [variant])
+
+
+def variant_mondo(product, variant):
+    return boot_sizes(product, [variant])
 
 
 def lengths(product, variants):
