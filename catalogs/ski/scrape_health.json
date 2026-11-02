@@ -188,9 +188,69 @@
             "percentage_change": null,
             "reason": "insufficient_history"
           }
+        },
+        "evo_Bindings": {
+          "count": 25,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 25,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "evo_Boots": {
+          "count": 302,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 302,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "evo_Helmets": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "evo_Poles": {
+          "count": 20,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 20,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "evo_Skis": {
+          "count": 188,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 188,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
         }
       },
-      "scanned_at": "2026-11-02T10:15:32+00:00"
+      "scanned_at": "2026-11-02T11:20:19+00:00"
     }
   ],
   "baseline": {
@@ -221,6 +281,22 @@
     "Utah Ski_Skis": {
       "date": "2026-11-02",
       "count": 49
+    },
+    "evo_Bindings": {
+      "date": "2026-11-02",
+      "count": 25
+    },
+    "evo_Boots": {
+      "date": "2026-11-02",
+      "count": 302
+    },
+    "evo_Poles": {
+      "date": "2026-11-02",
+      "count": 20
+    },
+    "evo_Skis": {
+      "date": "2026-11-02",
+      "count": 188
     }
   },
   "completeness_baseline": {
@@ -302,6 +378,36 @@
       {
         "date": "2026-11-02",
         "count": 49
+      }
+    ],
+    "evo_Bindings": [
+      {
+        "date": "2026-11-02",
+        "count": 25
+      }
+    ],
+    "evo_Boots": [
+      {
+        "date": "2026-11-02",
+        "count": 302
+      }
+    ],
+    "evo_Helmets": [
+      {
+        "date": "2026-11-02",
+        "count": 0
+      }
+    ],
+    "evo_Poles": [
+      {
+        "date": "2026-11-02",
+        "count": 20
+      }
+    ],
+    "evo_Skis": [
+      {
+        "date": "2026-11-02",
+        "count": 188
       }
     ]
   }

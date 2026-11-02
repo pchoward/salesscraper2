@@ -101,3 +101,30 @@ class UtahSkiTests(unittest.TestCase):
         self.assertEqual([utah_part([tag]) for tag in ("Category: Skis", "Category: Demo Skis", "Category: Ski Boots",
                                                       "Category: Ski Bindings", "Category: Snowboards", "Category: Jackets")],
                          ["Skis", "Skis", "Boots", "Bindings", None, None])
+
+
+class EvoStoreTests(unittest.TestCase):
+    """evo (third ski store) and the binding filters it brings."""
+
+    def test_evo_reads_its_category_collections(self):
+        from sports.ski import stores
+
+        self.assertIn(stores.EVO, stores.STORES)
+        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.EVO.sale_jsons],
+                         ["skis", "ski-boots", "ski-bindings", "ski-poles"])
+        self.assertEqual(stores.EVO.types["alpine touring ski bindings"], "Bindings")
+
+    def test_binding_din_brake_and_sole(self):
+        self.assertEqual(evo.din("Look Pivot 15 GW Ski Bindings 2026", ""), (15.0, "model"))
+        self.assertEqual(evo.din("Salomon Strive 12 GW", "DIN: 3.5 - 12"), (12.0, "stated"))
+        self.assertEqual(evo.din("Marker Griffon 13 ID / 11 TCX", ""), (None, None), "two numbers: ambiguous")
+        self.assertEqual(evo.brake_widths("an all new 105mm brake width"), [105])
+        self.assertEqual(evo.fields("Bindings", "Look Pivot 15 GW Ski Bindings 2026", "Alpine Ski Bindings", [],
+                                    "an all new 105mm brake width"),
+                         {"din": ["14 and up"], "brake": ["105 mm"], "sole": ["GripWalk"]})
+
+    def test_evo_prose(self):
+        self.assertEqual(evo.waist_widths("Hustle series at 102mm in the waist (give or take)"), [102])
+        self.assertEqual(evo.fields("Boots", "Salomon Select Wide R60 GW Ski Boots", "Alpine Ski Boots", [],
+                                    "a roomy 104 mm last and a forgiving 70 flex")["flex"], ["Soft (under 80)"],
+                         "a stated flex wins over the name")
