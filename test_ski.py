@@ -70,8 +70,8 @@ class GearWestTests(unittest.TestCase):
         kept = parse()
         bent = kept["Atomic Bent 110 Skis 2026"]
         self.assertEqual([(offer["variant_id"], offer["price"], offer["specs"]["length"]) for offer in bent["technical_offers"]],
-                         [(1, 499.99, ["172"]), (2, 499.99, ["180"])], "one offer per buyable sale length")
-        self.assertEqual(bent["technical_specs"], {"gender": ["Men"], "length": ["172", "180"], "style": ["Park"]})
+                         [(1, 499.99, ["170–179 cm"]), (2, 499.99, ["180–189 cm"])], "one offer per buyable sale length, grouped")
+        self.assertEqual(bent["technical_specs"], {"gender": ["Men"], "length": ["170–179 cm", "180–189 cm"], "style": ["Park"]})
         boots = kept["Nordica Speedmachine 3 110 Ski Boots"]
         self.assertEqual([offer["specs"]["mondo"] for offer in boots["technical_offers"]], [["26.5"], ["27.5"]])
         self.assertNotIn("style", boots["technical_specs"], "no style unless the store states one")
@@ -85,6 +85,8 @@ class GearWestTests(unittest.TestCase):
         self.assertEqual(stores.type_part("alpine alpine boots race boots"), "Boots")
         self.assertEqual(specs.title_length("Rossignol Hero Athlete SL 150cm R22 Race Ski 2026"), ["150"])
         self.assertEqual(specs.title_length("Justis Ski 2026"), [])
+        self.assertEqual([specs.length_range(cm) for cm in ("85", "100", "164", "169", "170", "205")],
+                         ["Under 100 cm", "100–109 cm", "160–169 cm", "160–169 cm", "170–179 cm", "200–209 cm"])
         self.assertIsNone(stores.type_part("baselayers"))
 
     def test_ski_page(self):

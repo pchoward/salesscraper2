@@ -40,6 +40,17 @@ def _option_values(product, variant, names):
     return values
 
 
+def length_range(cm):
+    """The sidebar's length group for a ski length: "160–169 cm" (10 cm
+    ranges), or "Under 100 cm" for the smallest kids' skis. Exact lengths stay
+    on the listing (``lengths``)."""
+    value = int(cm)
+    if value < 100:
+        return "Under 100 cm"
+    low = value // 10 * 10
+    return f"{low}–{low + 9} cm"
+
+
 def variant_length(product, variant):
     return lengths(product, [variant])
 
