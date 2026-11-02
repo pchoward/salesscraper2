@@ -46,7 +46,7 @@ class GearWestTests(unittest.TestCase):
         self.assertEqual(stores.GEAR_WEST.sale_jsons, [
             "https://www.gearwest.com/collections/closeout-alpine-skis/products.json",
             "https://www.gearwest.com/collections/closeout-alpine-boots/products.json"])
-        self.assertEqual({scraper.shop.store for scraper in sports.SKI.build_scrapers()}, {"Gear West", "Utah Ski", "evo"})
+        self.assertEqual({scraper.shop.store for scraper in sports.SKI.build_scrapers() if hasattr(scraper, "shop")}, {"Gear West", "Utah Ski", "evo"})
 
     def test_skis_and_boots_with_their_real_details(self):
         kept = parse()
