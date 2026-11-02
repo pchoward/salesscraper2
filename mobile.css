@@ -455,3 +455,31 @@
     scrollbar-gutter: stable;
     padding-inline-end: 12px;
 }
+
+/* Compact phone toolbar; keep horizontal selector scrolling and all controls. */
+@media (max-width:800px), (max-height:500px) and (pointer:coarse) {
+ #stickyBar .nav-row { padding:2px 0; gap:0; }
+ #stickyBar .nav-cluster { padding:0 8px; gap:6px; }
+ #stickyBar .nav-cluster + .nav-cluster { border-top:0; }
+ #stickyBar .quick-row { flex-wrap:nowrap; gap:0; }
+ #stickyBar .quick-label { min-width:52px; font-size:9px; }
+ #stickyBar .quick-chip, #stickyBar .more-toggle { min-height:36px; padding:5px 8px; font-size:12px; }
+ #stickyBar .tool-line { grid-template-columns:minmax(0,1fr) auto; gap:4px 8px; padding:6px 8px; }
+ #stickyBar .tool-search { grid-column:1/-1; grid-row:1; max-width:none; }
+ #stickyBar .tool-search input { min-height:40px; font-size:16px; }
+ #stickyBar .tool-deals { grid-column:1/-1; grid-row:2; gap:2px 8px; }
+ #stickyBar .lede.digest { flex:1 1 100%; width:100%; overflow-x:auto; }
+ #stickyBar .baseline-note { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+ #stickyBar .segment { width:max-content; flex-wrap:nowrap; }
+ #stickyBar .change-btn { min-height:36px; padding:4px 8px; font-size:11px; }
+ #stickyBar .sort-field { grid-column:1; grid-row:3; width:auto; min-width:0; }
+ #stickyBar .sort-field select { min-height:36px; max-width:165px; }
+ #stickyBar .sort-field span { font-size:11px; }
+ #stickyBar .tool-display { grid-column:2; grid-row:3; gap:4px; }
+ #stickyBar .group-toggle { padding:4px; min-height:36px; font-size:10px; }
+ #stickyBar #filtersOpen { display:inline-flex; min-height:36px; margin:0; padding:4px 9px; border-radius:3px; font-size:12px; }
+ #stickyBar .active-filters { grid-row:4; }
+ #stickyBar .tool-deals .scan-wrap { font-size:9px; }
+ #stickyBar .tool-deals .fresh-note { font-size:9px; }
+ #stickyBar .layout-toggle { display:none; }
+}
