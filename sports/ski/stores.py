@@ -7,7 +7,7 @@ Skis"; anything not recognised is read from the title's words.
 import sports
 from sports import brands, offers
 from sports.bmx.specs import category_for_title
-from sports.ski import specs
+from sports.ski import evo, specs
 from stores import shopify
 
 PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets")
@@ -66,8 +66,12 @@ def details(item, product, type_key):
                                           (specs.variant_length(product, variant) or title_cm)]}
     elif item.get("part") == "Boots":
         own = lambda variant: {"mondo": specs.variant_mondo(product, variant)}
-    offers.attach(item, offers.technical_offers(variants, own, shared={"style": [kind] if kind else [],
-                                                                       "gender": [who] if who else []}))
+    # evo-style fields from the title, type, tags and description (sports/ski/evo.py).
+    shared = evo.fields(item.get("part"), product.get("title") or item.get("name"), product.get("product_type"),
+                        tags, shopify._plain(product.get("body_html") or ""))
+    if who:
+        shared["gender"] = [who]
+    offers.attach(item, offers.technical_offers(variants, own, shared=shared))
 
 
 GEAR_WEST = shopify.ShopifyStore(
