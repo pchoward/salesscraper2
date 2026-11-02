@@ -106,6 +106,9 @@ def details(item, product, kind_key):
     # variant's own (a frame's top tube, a hub's drive side, a colour).
     title = product.get("title") or item.get("name") or ""
     shared.update({key: [value] for key, value in dans.listing_fields(title, item.get("part")).items()})
+    # Labelled specs from the description: bar rise, crank length, axle, top tube.
+    for key, values in dans.description_fields(shopify._plain(product.get("body_html") or ""), item.get("part")).items():
+        shared.setdefault(key, values)
     offers.attach(item, offers.technical_offers(
         shopify.sale_variants(product), lambda variant: dans.variant_fields(product, variant, item.get("part")),
         shared=shared))
