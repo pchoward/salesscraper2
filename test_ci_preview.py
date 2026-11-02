@@ -38,7 +38,10 @@ class PreviewBuildTests(unittest.TestCase):
     def test_the_built_preview_has_no_live_alerts_or_analytics(self):
         with tempfile.TemporaryDirectory() as directory:
             files = build_preview.build(directory, "PR #1 test")
-            self.assertEqual(files, ["_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
+            # Plus a folder per live sport (bmx/, ski/...) once main holds its data.
+            import sports
+            live = sorted(page.split("/")[0] for page in sports.published_catalogs().values())
+            self.assertEqual(files, sorted(["_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"] + live))
             home = (Path(directory) / "index.html").read_text(encoding="utf-8")
             self.assertIn("ShredDeals", home)
             self.assertNotIn("http-equiv=\"refresh\"", home)
