@@ -57,6 +57,7 @@ class TheHouseTests(unittest.TestCase):
                                               "name": "AK Cyclic Gore-Tex Men's Snow Jacket"}), "ski clothing is out")
         self.assertEqual(the_house.part_for(dict(equipment, name="Look Pivot 15 GW Bindings")), "Bindings")
         self.assertEqual(the_house.part_for(dict(equipment, name="Stance 84 Skis w/ M12 GW Bindings")), "Skis")
+        self.assertEqual(the_house.part_for(dict(equipment, name="Stance 80 Men's 161 Ski w/ M11 GW 90MM Bindings")), "Skis")
         self.assertEqual(the_house.part_for(dict(equipment, name="Hawx Prime 100 Ski Boots")), "Boots")
         self.assertEqual(the_house.part_for(dict(equipment, name="Leki Carbon Poles")), "Poles")
         self.assertEqual(the_house.part_for({"category": "snowboard", "subcategory": "helmets", "name": "Smith Helmet"}), "Helmets")

@@ -64,7 +64,7 @@ def part_for(data):
     if re.search(r" poles? ", name):
         return "Poles"
     # "... Skis", "... Skis w/ Bindings" or a name ending in "Ski"; not "Ski Wax Kit".
-    if " skis " in name or name.rstrip().endswith(" ski"):
+    if " skis " in name or " ski w " in name or name.rstrip().endswith(" ski"):
         return "Skis"
     if re.search(r" bindings? ", name):
         return "Bindings"
