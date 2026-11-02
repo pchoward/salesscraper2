@@ -61,7 +61,9 @@ def details(item, product, type_key):
     own = None
     if item.get("part") == "Skis":
         title_cm = specs.title_length(product.get("title"))
-        own = lambda variant: {"length": specs.variant_length(product, variant) or title_cm}
+        # The filter groups lengths into 10 cm ranges; exact lengths stay in "lengths".
+        own = lambda variant: {"length": [specs.length_range(cm) for cm in
+                                          (specs.variant_length(product, variant) or title_cm)]}
     elif item.get("part") == "Boots":
         own = lambda variant: {"mondo": specs.variant_mondo(product, variant)}
     offers.attach(item, offers.technical_offers(variants, own, shared={"style": [kind] if kind else [],
