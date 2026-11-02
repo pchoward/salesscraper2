@@ -412,3 +412,18 @@ ShredDeals with Skate, Ski, MTB and BMX; `sale_items_chart.html` remains the
 standalone SkateDeals page with existing links and filters. Public assets are
 generated with `python -m previews.publish`; this command does not scrape or send
 notifications. The change is currently on a review branch, not deployed.
+
+### MTB catalog review
+
+MTB uses Worldwide Cyclery's deals collection and Fanatik's outlet through the
+existing sport-aware engine. See [MTB implementation and verification status](docs/mtb-catalog.md).
+For an isolated HTML preview from saved scan state (no requests or delivery):
+
+```bash
+python -m previews.mtb_catalog --data-root /path/to/saved-state --output-dir /tmp/mtb-review
+```
+
+The command prints the exact homepage path and preserves scan timestamps.
+Use `--fixture` instead of `--data-root` only for visibly labeled synthetic QA.
+For real retailer validation, manually run **ShredDeals - Preview Site** with
+**scrape `mtb`** and **ref `codex/mtb-catalog`** before merging this branch.

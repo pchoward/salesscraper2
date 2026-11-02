@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "synthetic": true,
+  "checks": [
+    "Exact wheel/width same-variant filtering, variant price and compare-at, URL Back/Forward",
+    "Clear all, original sort/Quick View/Back/new-tab retailer links, no live alerts config",
+    "True 390x844 mobile layout, original drawer, technical filter and preserved results"
+  ],
+  "viewports": [
+    [
+      1440,
+      1000
+    ],
+    [
+      390,
+      844
+    ]
+  ]
+}
