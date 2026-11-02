@@ -65,6 +65,19 @@ class GearWestTests(unittest.TestCase):
         self.assertEqual(junior["gender"], "Kids")
         self.assertNotIn("lengths", junior, "'One Size' is not a length; nothing is guessed")
 
+    def test_sidebar_offers_per_variant(self):
+        """technical_offers in the format of Codex's sidebar spec filters."""
+        kept = parse()
+        bent = kept["Atomic Bent 110 Skis 2026"]
+        self.assertEqual([(offer["variant_id"], offer["price"], offer["specs"]["length"]) for offer in bent["technical_offers"]],
+                         [(1, 499.99, ["172"]), (2, 499.99, ["180"])], "one offer per buyable sale length")
+        self.assertEqual(bent["technical_specs"], {"gender": ["Men"], "length": ["172", "180"], "style": ["Park"]})
+        boots = kept["Nordica Speedmachine 3 110 Ski Boots"]
+        self.assertEqual([offer["specs"]["mondo"] for offer in boots["technical_offers"]], [["26.5"], ["27.5"]])
+        self.assertNotIn("style", boots["technical_specs"], "no style unless the store states one")
+        from sports.ski import facets
+        self.assertTrue({"length", "mondo", "style", "gender"} <= {field["key"] for field in facets.FIELDS})
+
     def test_spec_readers(self):
         self.assertIsNone(specs.style("Skis", ["Alpine", "Men"]), "no style unless the store says")
         self.assertEqual(specs.style("ALPINE - ALPINE BOOTS - Park Boots", []), "Park")

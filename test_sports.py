@@ -296,6 +296,24 @@ class BmxSpecTests(unittest.TestCase):
             "Odyssey Graduate Pegs": ("Wheel Parts", "Pegs", None),
         })
 
+    def test_sidebar_offers_share_the_listing_specs(self):
+        from sports.bmx import facets, stores
+
+        feed = {"products": [{"title": "Clutch Freecoaster Hub", "vendor": "Odyssey", "handle": "clutch", "product_type": "Hubs",
+                              "tags": ['Wsize_20"'], "variants": [
+                                  {"id": 1, "title": "RSD", "price": "150", "compare_at_price": "190"},
+                                  {"id": 2, "title": "LSD", "price": "155", "compare_at_price": "190"},
+                                  {"id": 3, "title": "Black", "price": "190", "compare_at_price": "190"}]}]}
+        with sports.BMX.active():
+            items = [item for scraper in stores.shopify.scrapers_for(stores.ALBES, stores.PARTS)
+                     for item in scraper.parse(json.dumps(feed))]
+        self.assertEqual(len(items), 1)
+        hub = items[0]
+        self.assertEqual([(offer["variant_id"], offer["price"]) for offer in hub["technical_offers"]], [(1, 150.0), (2, 155.0)],
+                         "only marked-down variants")
+        self.assertEqual(hub["technical_specs"], {"kind": ["Hubs"], "wheel_size": ["20"]})
+        self.assertTrue({"kind", "wheel_size"} <= {field["key"] for field in facets.FIELDS})
+
     def test_catalog_entries_carry_the_fields_for_the_filters(self):
         data = {"Albes_Hubs": [{"name": "Odyssey Clutch Hub", "url": "https://bmx.example/clutch", "price_new": "150",
                                 "price_old": "190", "part": "Wheel Parts", "store": "Albe's BMX", "kind": "Hubs",

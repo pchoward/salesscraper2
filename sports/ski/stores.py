@@ -5,7 +5,7 @@ Skis"; anything not recognised is read from the title's words.
 """
 
 import sports
-from sports import brands
+from sports import brands, offers
 from sports.bmx.specs import category_for_title
 from sports.ski import specs
 from stores import shopify
@@ -54,6 +54,18 @@ def details(item, product, type_key):
     who = specs.gender(product.get("product_type"), tags)
     if who:
         item["gender"] = who
+    # Per-variant offers for the sidebar spec filters (sports/offers.py; keys
+    # are the fields in sports/ski/facets.py): a
+    # ski's length and a boot's mondo size belong to the variant, so a filter
+    # shows that variant's price; style and gender are the listing's.
+    own = None
+    if item.get("part") == "Skis":
+        title_cm = specs.title_length(product.get("title"))
+        own = lambda variant: {"length": specs.variant_length(product, variant) or title_cm}
+    elif item.get("part") == "Boots":
+        own = lambda variant: {"mondo": specs.variant_mondo(product, variant)}
+    offers.attach(item, offers.technical_offers(variants, own, shared={"style": [kind] if kind else [],
+                                                                       "gender": [who] if who else []}))
 
 
 GEAR_WEST = shopify.ShopifyStore(
