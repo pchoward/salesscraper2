@@ -158,10 +158,10 @@ STORES = (GEAR_WEST, UTAH_SKI, EVO)
 
 
 def scrapers():
-    from sports.ski import the_house
+    from sports.ski import christy, the_house
 
     shopify_scrapers = [scraper for store in STORES for scraper in shopify.scrapers_for(store, PARTS)]
-    return shopify_scrapers + the_house.scrapers()
+    return shopify_scrapers + the_house.scrapers() + christy.scrapers()
 
 
 def preview(store=GEAR_WEST):
