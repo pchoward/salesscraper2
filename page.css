@@ -3407,3 +3407,34 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 .search-rescue-list { margin: 0.25rem 0 0.5rem; padding-left: 1.1rem; }
 .search-rescue-list li { margin: 0.15rem 0; }
 .search-rescue-meta { color: var(--text-secondary); }
+
+/* Issue 154 — compact catalog controls. Deliberately scoped to the top bar;
+   retailer data, product cards and sport-specific sidebar facets are untouched. */
+#stickyBar .nav-row { gap:2px; padding:4px 12px; background:#f4f6f8; }
+#stickyBar .nav-cluster { display:flex; flex-direction:row; align-items:center; flex-wrap:nowrap; gap:8px; min-width:0; }
+#stickyBar .quick-label { position:static; width:auto; height:auto; clip:auto; overflow:visible; min-width:58px; margin:0; color:#687382; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
+#stickyBar .quick-row { gap:2px; }
+#stickyBar .quick-chip, #stickyBar .more-toggle { border:0; border-radius:3px; min-height:28px; padding:4px 7px; background:transparent; color:#46515f; font-size:12px; font-weight:500; }
+#stickyBar .quick-chip:hover, #stickyBar .more-toggle:hover { background:#e7ebf0; color:#1c2430; }
+#stickyBar .quick-chip[aria-pressed="true"], #stickyBar .more-toggle[aria-expanded="true"] { background:#dde5ee; color:#243c56; box-shadow:inset 0 -2px #537b9f; font-weight:700; }
+#stickyBar .quick-count { font-size:10px; color:#697788; font-weight:500; }
+#stickyBar .tool-line { display:grid; grid-template-columns:minmax(200px,1fr) auto auto; gap:6px 16px; padding:8px 12px; background:#fff; }
+#stickyBar .tool-search { grid-column:1; grid-row:1; min-width:0; max-width:600px; width:100%; }
+#stickyBar .tool-search input { min-height:34px; border-radius:3px; font-size:13px; background:#fafbfc; }
+#stickyBar .sort-field { grid-column:2; grid-row:1; margin:0; }
+#stickyBar .sort-field select { min-height:32px; font-size:12px; }
+#stickyBar .tool-display { grid-column:3; grid-row:1; margin:0; display:flex; align-items:center; gap:8px; }
+#stickyBar .tool-deals { grid-column:1/-1; grid-row:2; display:flex; align-items:center; flex-wrap:wrap; gap:4px 12px; min-width:0; }
+#stickyBar .lede.digest { flex:0 1 auto; margin:0; display:flex; align-items:center; gap:8px; }
+#stickyBar .baseline-note { font-size:10px; color:#687382; }
+#stickyBar .segment { display:flex; gap:0; background:none; border:0; padding:0; }
+#stickyBar .change-btn { min-height:28px; padding:3px 8px; border:0; border-radius:0; background:transparent; color:#526074; font-size:12px; font-weight:500; }
+#stickyBar .change-btn.active { background:transparent; color:#243c56; box-shadow:inset 0 -2px #537b9f; font-weight:700; }
+#stickyBar .result-count { margin:0; font-size:12px; font-weight:600; color:#35404d; }
+#stickyBar .active-filters { grid-column:1/-1; grid-row:3; margin:0; padding:4px 0 0; border:0; }
+#stickyBar .layout-toggle { border:0; background:#f0f3f6; border-radius:3px; padding:2px; }
+#stickyBar .layout-toggle button { min-height:28px; border-radius:2px; padding:3px 9px; font-size:12px; }
+#stickyBar .layout-toggle button[aria-pressed="true"] { background:#fff; color:#243c56; box-shadow:0 1px 2px #1c24301a; }
+.shred-embedded #stickyBar .topnav { display:none; }
+#stickyBar .tool-deals .scan-wrap { margin-left:auto; color:#687382; font-size:10px; }
+#stickyBar .tool-deals .fresh-note { color:#687382; font-size:10px; }
