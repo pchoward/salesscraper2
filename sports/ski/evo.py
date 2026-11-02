@@ -82,8 +82,15 @@ _WAIST = (
 _DIMENSIONS = re.compile(r"\b(\d{3})\s*[/-]\s*(\d{2,3})\s*[/-]\s*(\d{3})\b")
 
 
+_WAIST_RANGE = re.compile(r"\bwaist(?:[- ]width)?\s*:\s*(\d{2,3})\s*[-–]\s*(\d{2,3})\s*mm", re.I)
+
+
 def waist_widths(text):
     found = set()
+    # A store's range tag ("Skis-Waist Width: 96-110mm") covers low..high-1.
+    for low, high in _WAIST_RANGE.findall(text):
+        found.update((int(low), int(high) - 1))
+    text = _WAIST_RANGE.sub(" ", text)
     for pattern in _WAIST:
         found.update(int(value) for value in pattern.findall(text))
     for tip, waist, tail in _DIMENSIONS.findall(text):
@@ -140,8 +147,14 @@ _FLAT = re.compile(r"\bflat\s+ski\b|\bbindings?\s+not\s+included\b|\bno\s+bindin
 _WITH_BINDING = re.compile(r"\bw/\s*[^,;]{0,40}\bbinding|\bwith\s+[^,;]{0,40}\bbindings?\b|\bbindings?\s+included\b|\bsystem\s+ski\b", re.I)
 
 
+_BINDING_TAG = re.compile(r"\bwith\s*bindings?\s*:\s*(yes|no)\b", re.I)
+
+
 def bindings(title, text):
     """"Included" or "Flat (no bindings)", from the title first."""
+    tag = _BINDING_TAG.search(text or "")
+    if tag:
+        return "Included" if tag.group(1).casefold() == "yes" else "Flat (no bindings)"
     for source in (title, text):
         if _FLAT.search(source or ""):
             return "Flat (no bindings)"
@@ -229,7 +242,9 @@ def walk_mode(text):
 def fields(part, title, product_type, tags, text):
     """{filter key: [values]} for one listing; empty keys are left out."""
     title = title or ""
-    text = " ".join(str(text or "").split())
+    # Tags count as stated specs too ("Skill Level: Advanced", "Skis-Waist Width: 96-110mm").
+    tag_text = " ; ".join(str(tag) for tag in tags or ())
+    text = " ".join((str(text or "") + " ; " + tag_text).split())
     found = {}
 
     def put(key, values):

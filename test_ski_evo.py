@@ -51,3 +51,53 @@ class BootTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class UtahSkiTests(unittest.TestCase):
+    """Utah Ski: categories and specs come from tags (store probe, 2026-11-02)."""
+
+    FEED = [
+        {"title": "Mantra 102 Skis 2026", "vendor": "VOLKL", "handle": "mantra", "product_type": "D S M",
+         "tags": ["Category: Demo Skis", "Skis-Best Use: All Mountain", "Skis-With Bindings: Yes", "Skill Level: Advanced",
+                  "Skill Level: Expert", "Skis-Waist Width: 85-95mm", "Skis-Rocker Profile: Rocker/Camber/Rocker", "Gender: Mens"],
+         "options": [{"name": "Size"}], "variants": [{"id": 1, "option1": "177", "price": "499", "compare_at_price": "899"}]},
+        {"title": "Shell Jacket", "vendor": "Picture", "handle": "jacket", "product_type": "C J M", "tags": ["Category: Jackets"],
+         "variants": [{"id": 2, "price": "100", "compare_at_price": "200"}]},
+        {"title": "Custom Snowboard", "vendor": "Burton", "handle": "sb", "product_type": "B S M", "tags": ["Category: Snowboards"],
+         "variants": [{"id": 3, "price": "300", "compare_at_price": "500"}]},
+        {"title": "Snowboard Boots", "vendor": "Burton", "handle": "sbb", "product_type": "B B M",
+         "tags": ["Category: Snowboard Boots"], "variants": [{"id": 4, "price": "200", "compare_at_price": "300"}]},
+        {"title": "Hawx Ultra 120 Ski Boots", "vendor": "Atomic", "handle": "hawx", "product_type": "A B M",
+         "tags": ["Category: Ski Boots", "Gender: Mens"], "options": [{"name": "Size"}],
+         "variants": [{"id": 5, "option1": "27.5", "price": "399", "compare_at_price": "649"}]},
+    ]
+
+    def test_tag_categories_and_specs(self):
+        import json
+
+        import sports
+        from sports.ski import stores
+
+        kept = {}
+        with sports.SKI.active():
+            for scraper in stores.shopify.scrapers_for(stores.UTAH_SKI, stores.PARTS):
+                for item in scraper.parse(json.dumps({"products": self.FEED})):
+                    kept[item["name"]] = item
+        self.assertEqual(sorted(kept), ["Atomic Hawx Ultra 120 Ski Boots", "Völkl Mantra 102 Skis 2026"],
+                         "clothing and snowboard gear are left out")
+        mantra = kept["Völkl Mantra 102 Skis 2026"]["technical_specs"]
+        self.assertEqual(mantra["waist"], ["85–94 mm"], "a tagged 85-95mm range is 85..94")
+        self.assertEqual((mantra["ski_type"], mantra["bindings"], mantra["ability"], mantra["rocker"]),
+                         (["All-Mountain"], ["Included"], ["Advanced", "Expert"], ["Rocker / Camber / Rocker"]))
+        self.assertEqual(kept["Atomic Hawx Ultra 120 Ski Boots"]["technical_specs"]["mondo"], ["27.5"])
+        self.assertIn(stores.UTAH_SKI, stores.STORES)
+        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.UTAH_SKI.sale_jsons],
+                         ["sale", "demos-sale"])
+
+    def test_tag_readers(self):
+        self.assertEqual(evo.waist_widths("Skis-Waist Width: 96-110mm"), [96, 109])
+        self.assertEqual(evo.bindings("Mantra 102", "Skis-With Bindings: No"), "Flat (no bindings)")
+        from sports.ski.stores import utah_part
+        self.assertEqual([utah_part([tag]) for tag in ("Category: Skis", "Category: Demo Skis", "Category: Ski Boots",
+                                                      "Category: Ski Bindings", "Category: Snowboards", "Category: Jackets")],
+                         ["Skis", "Skis", "Boots", "Bindings", None, None])

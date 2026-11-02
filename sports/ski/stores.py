@@ -1,8 +1,10 @@
-"""Ski stores. Gear West first: Shopify, with alpine ski and boot closeout
+"""Ski stores. Gear West first, then Utah Ski (tag-based categories). Gear West: Shopify, with alpine ski and boot closeout
 collections (store probe, 2026-11-01: 229 skis, 145 marked down; 228 boots,
 174 marked down). Its product types look like "ALPINE - ALPINE SKIS - Park
 Skis"; anything not recognised is read from the title's words.
 """
+
+import re
 
 import sports
 from sports import brands, offers
@@ -90,7 +92,43 @@ GEAR_WEST = shopify.ShopifyStore(
     unknown_by_title=True,
 )
 
-STORES = (GEAR_WEST,)
+def utah_part(tags):
+    """Utah Ski files categories as tags ("Category: Skis", "Category: Demo
+    Skis"); its product types are internal codes. Snowboard gear is out."""
+    if isinstance(tags, str):
+        tags = tags.split(",")
+    for tag in tags or ():
+        match = re.match(r"\s*category\s*:\s*(.+)", str(tag), re.I)
+        if not match:
+            continue
+        category = match.group(1).casefold()
+        if "snowboard" in category:
+            return None
+        for words, part in (("boot", "Boots"), ("binding", "Bindings"), ("pole", "Poles"), ("helmet", "Helmets"),
+                            ("ski", "Skis")):
+            if words in category:
+                return part
+    return None
+
+
+# Utah Ski (Shopify; store probe 2026-11-02): one big sale collection plus
+# demo skis, with evo-like spec tags (waist width, rocker, best use, skill
+# level, with bindings). Clothing and snowboard gear are left out.
+UTAH_SKI = shopify.ShopifyStore(
+    "Utah Ski",
+    "Utah Ski",
+    "https://www.utahskis.com",
+    collection="sale",
+    more_collections=("demos-sale",),
+    types={},
+    brand_of=brands.for_sport(sports.SKI),
+    own_vendor="utah ski",
+    details=details,
+    track_exclusions=True,
+    tag_part=utah_part,
+)
+
+STORES = (GEAR_WEST, UTAH_SKI)
 
 
 def scrapers():

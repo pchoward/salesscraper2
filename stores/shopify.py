@@ -96,7 +96,7 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
                  brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=(),
-                 type_part=None, track_exclusions=False):
+                 type_part=None, track_exclusions=False, tag_part=None):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
@@ -124,6 +124,8 @@ class ShopifyStore:
         # category, or the sport's rules reject them), so a listing that is
         # reclassified is not counted as a deal that disappeared.
         self.track_exclusions = track_exclusions
+        # tags -> part, for stores whose categories are tags, not product types.
+        self.tag_part = tag_part
         self.cache = {}
 
 
@@ -142,8 +144,11 @@ def part_for_title(title):
     return None
 
 
-def part_for(store, product_type, title=""):
+def part_for(store, product_type, title="", tags=None):
     """The report part for a product, or None to skip it."""
+    if getattr(store, "tag_part", None) and tags is not None:
+        # A store that files categories in tags ("Category: Skis").
+        return store.tag_part(tags)
     part = store.types.get(type_key(product_type))
     if part is None and getattr(store, "type_part", None):
         part = store.type_part(type_key(product_type))
@@ -219,7 +224,7 @@ def exclusions(store, products):
         if not handle:
             continue
         title = title_with_brand(product, store.own_vendor, getattr(store, "brand_of", None))
-        part = part_for(store, product.get("product_type"), title)
+        part = part_for(store, product.get("product_type"), title, product.get("tags"))
         if part is None:
             reason = "no category for product type " + repr(str(product.get("product_type") or ""))
         else:
@@ -263,7 +268,7 @@ def feed_summary(store, products):
             continue
         marked += 1
         title = title_with_brand(product, store.own_vendor, store.brand_of)
-        if part_for(store, product.get("product_type"), title) is None:
+        if part_for(store, product.get("product_type"), title, product.get("tags")) is None:
             unmapped[str(product.get("product_type") or "(none)").strip() or "(none)"] += 1
     return {"products": len(products or []), "marked_down": marked, "sold_out": sold_out,
             "unmapped_types": unmapped.most_common()}
@@ -299,7 +304,7 @@ def enrich_stock(store, products, part, fetch=None, sleep=time.sleep, limit=MAX_
         if not isinstance(product, dict) or _stock_known(_variants_of(product)):
             continue
         title = title_with_brand(product, store.own_vendor, store.brand_of)
-        if part_for(store, product.get("product_type"), title) != part:
+        if part_for(store, product.get("product_type"), title, product.get("tags")) != part:
             continue
         sale = sale_variants(product)
         handle = str(product.get("handle") or "").strip()
@@ -416,7 +421,7 @@ class ShopifyScraper(Scraper):
             if not isinstance(product, dict):
                 continue
             title = title_with_brand(product, self.shop.own_vendor, self.shop.brand_of)
-            if part_for(self.shop, product.get("product_type"), title) != self.part:
+            if part_for(self.shop, product.get("product_type"), title, product.get("tags")) != self.part:
                 continue
             handle = str(product.get("handle") or "").strip()
             sale = sale_variants(product)
@@ -519,7 +524,7 @@ def preview(store, parts=ALL_PARTS):
         cruisers = []
         for product in products:
             title = title_with_brand(product, store.own_vendor, store.brand_of)
-            if part_for(store, product.get("product_type"), title) != scraper.part or not sale_variants(product):
+            if part_for(store, product.get("product_type"), title, product.get("tags")) != scraper.part or not sale_variants(product):
                 continue
             reason = filter_reason(title, scraper.part, "", "1", "2", _plain(product.get("body_html") or ""),
                                    str(product.get("product_type") or ""))
@@ -532,7 +537,7 @@ def preview(store, parts=ALL_PARTS):
         for title in cruisers:
             print(f"    cruiser: {title}")
     shoes = [title_with_brand(p, store.own_vendor, store.brand_of) for p in products
-             if part_for(store, p.get("product_type"), title_with_brand(p, store.own_vendor, store.brand_of)) == "Sneakers"]
+             if part_for(store, p.get("product_type"), title_with_brand(p, store.own_vendor, store.brand_of), p.get("tags")) == "Sneakers"]
     tracked = [t for t in shoes if re.search(r"waffle ?cup|pop ?cush|dunk", t, re.IGNORECASE)]
     print(f"\nShoe titles naming Wafflecup, PopCush, or Dunk: {len(tracked)}")
     for title in tracked[:10]:
