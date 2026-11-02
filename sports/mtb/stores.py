@@ -111,7 +111,9 @@ def bikes_online_part(kind):
 
 def bikes_online_title(title):
     value=' '.join(str(title or '').split())
-    if re.search(r'\b(?:kids?|tools?|lube|bleed\s+kit)\b',value,re.I):return None
+    # Polygon's road/gravel lines, and the store's "Raod" spelling.
+    if re.search(r'\b(?:kids?|tools?|lube|bleed\s+kit|tambora|strattos|bend|path|raod)\b',value,re.I):return None
+    if re.search(r'\bfox\s+3[468]\b|\bfloat\b.*\b(?:fork|grip)\b',value,re.I):return 'Forks & Shocks'
     part=title_part(value)
     if part is None and re.search(r'\bbar\b',value,re.I):return 'Cockpit'
     return part

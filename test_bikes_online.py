@@ -27,6 +27,12 @@ FEED = [
     product(10, "Entity Chain Whip Tool", "Accessories", "Entity"),
     product(11, "Muc-Off C3 Wet Ceramic Bike Chain Lube - 120ml", "Accessories", "Muc-Off"),
     product(12, "Spank Flare 25 Vibrocore Drop Bar", "Parts", "Spank"),
+    product(13, "Linc Beta 50 Carbon Raod Wheelset", "Parts", "Linc"),
+    product(14, "Continental Gatorskin Tire - 700 x 28", "Parts", "Continental"),
+    product(15, "2x Entity Inner Tube 700x32-48c Presta Valve", "Parts", "Entity"),
+    product(16, "Polygon Tambora G8X - Frameset", "Parts"),
+    product(17, "Sram Force XG-1271 XPLR 12 Speed Cassette", "Parts", "SRAM"),
+    product(18, "Fox 34 Float Performance SC GRIP 29 - OEM", "Parts", "Fox"),
 ]
 
 
@@ -43,7 +49,8 @@ class BikesOnlineTests(unittest.TestCase):
             "Spank Spoon 800 Bar": "Cockpit",
             "5x Entity Inner Tube 27.5x1.5-2.5 Presta Valve 650b Mountain Bike": "Tires",
             "IXS Trigger AM Helmet - Mips": "Protection",
-        })
+            "Fox 34 Float Performance SC GRIP 29 - OEM": "Forks & Shocks",
+        }, "road/gravel parts (700 x 28, 32-48c, XPLR, Tambora, 'Raod') stay out")
 
     def test_collections(self):
         self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.BIKES_ONLINE.sale_jsons],
