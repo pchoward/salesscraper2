@@ -30,7 +30,7 @@ def run(site,shots,firefox,geckodriver):
     def viewport(w,h):driver.browsing_context.set_viewport(context=driver.current_window_handle,viewport={'width':w,'height':h})
     def cards():return driver.execute_script('''return Array.from(document.querySelectorAll('#cardGrid .deal-card'))
         .filter(c=>!c.classList.contains('filtered-out')&&!c.classList.contains('grouped-hide')&&c.offsetParent!==null)
-        .map(c=>({name:c.dataset.name,price:parseFloat(c.dataset.price)}))''')
+        .map(c=>({name:c.dataset.name,part:c.dataset.part,price:parseFloat(c.dataset.price)}))''')
     def choose(key,value):Select(driver.find_element(By.ID,'tech-'+key)).select_by_value(value)
     def show_specs():
         button=driver.find_element(By.CSS_SELECTOR,'#productSpecs>.section-toggle')
@@ -45,14 +45,15 @@ def run(site,shots,firefox,geckodriver):
         if manifest['synthetic']:
             assert len(cards())==12
             choose('wheel_size','29');WebDriverWait(driver,10).until(lambda d:'mtb_wheel=29' in d.current_url)
-            assert len(cards())==4
+            assert sum(c['part']=='Tires' for c in cards())==2
+            assert any(c['part']=='Protection' for c in cards()), 'unrelated categories remain visible'
             tire=driver.find_element(By.CSS_SELECTOR,'.deal-card[data-part="Tires"]:not(.filtered-out)')
             assert '$55.00' in tire.find_element(By.CSS_SELECTOR,'.now-price').text
             assert '$90.00' in tire.find_element(By.CSS_SELECTOR,'.avg-price').text
-            choose('tire_width','2.4');WebDriverWait(driver,10).until(lambda d:len(cards())==0)
-            choose('tire_width','2.5');WebDriverWait(driver,10).until(lambda d:len(cards())==2)
-            driver.back();WebDriverWait(driver,10).until(lambda d:len(cards())==0)
-            driver.forward();WebDriverWait(driver,10).until(lambda d:len(cards())==2)
+            choose('tire_width','2.4');WebDriverWait(driver,10).until(lambda d:sum(c['part']=='Tires' for c in cards())==0)
+            choose('tire_width','2.5');WebDriverWait(driver,10).until(lambda d:sum(c['part']=='Tires' for c in cards())==2)
+            driver.back();WebDriverWait(driver,10).until(lambda d:sum(c['part']=='Tires' for c in cards())==0)
+            driver.forward();WebDriverWait(driver,10).until(lambda d:sum(c['part']=='Tires' for c in cards())==2)
             checks.append('Exact wheel/width same-variant filtering, variant price and compare-at, URL Back/Forward')
         else:
             selects=driver.find_elements(By.CSS_SELECTOR,'#contextSpecs select')

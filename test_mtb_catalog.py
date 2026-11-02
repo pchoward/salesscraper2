@@ -172,7 +172,7 @@ f.clear();assert.equal(f.price(url),null);assert.equal(f.allows(url),true);
         skate=build_report_html({}, {}, sport=sports.SKATE)
         bmx=build_report_html({}, {}, sport=sports.BMX)
         self.assertNotIn('id="technicalCatalog"',skate)
-        self.assertNotIn('id="technicalCatalog"',bmx)
+        self.assertIn('id="technicalCatalog"',bmx)
 
     def test_preview_isolation_and_explicit_fixture_label(self):
         from previews.mtb_catalog import build

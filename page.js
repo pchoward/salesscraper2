@@ -756,6 +756,7 @@ function specAllowed(row, facet, selected) {
 
 function syncTypeSections(expandSpec) {
     const part = state.part || DEFAULT_PART;
+    if (typeof SportSpecFilters !== "undefined") SportSpecFilters.sync(part);
     const context = document.getElementById("contextSpecs");
     const specs = document.getElementById("productSpecs");
     const specsBody = document.getElementById("productSpecsBody");
@@ -1370,7 +1371,7 @@ function typedOr(over, typed, key, fallback) {
 }
 
 function rowMatchesNow(row, overrides) {
-    if (typeof SportSpecFilters !== "undefined" && !SportSpecFilters.allows(row.dataset.url)) return false;
+    if (typeof SportSpecFilters !== "undefined" && !SportSpecFilters.allows(row.dataset.url, row.dataset.part)) return false;
     const over = overrides || {};
     const store = over.store != null ? over.store : state.store;
     const part = over.part != null ? over.part : state.part;

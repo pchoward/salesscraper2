@@ -427,3 +427,5 @@ The command prints the exact homepage path and preserves scan timestamps.
 Use `--fixture` instead of `--data-root` only for visibly labeled synthetic QA.
 For real retailer validation, manually run **ShredDeals - Preview Site** with
 **scrape `mtb`** and **ref `codex/mtb-catalog`** before merging this branch.
+
+Sport-specific sidebar field definitions and the BMX/Ski `technical_offers` integration contract are documented in [docs/sport-spec-filters.md](docs/sport-spec-filters.md).

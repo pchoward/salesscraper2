@@ -19,17 +19,25 @@
             return result;
         }
         function restore(value){selected=clean(value);if(doc)fields.forEach(f=>{const n=doc.getElementById('tech-'+f.key);if(n)n.value=selected[f.key]||'';});}
-        function matches(offer){return offer.available!==false&&Object.keys(selected).every(k=>(offer.specs[k]||[]).includes(selected[k]));}
-        function options(url){const item=(config.items||{})[url];return item?(item.offers||[]).filter(matches):[];}
+        function applies(field,part){return !(field.categories||[]).length||field.categories.includes(part);}
+        function active(url){const item=(config.items||{})[url];return fields.filter(f=>selected[f.key]&&(!item||applies(f,item.part)));}
+        function options(url){const item=(config.items||{})[url];return item?(item.offers||[]).filter(offer=>
+            offer.available!==false&&active(url).every(f=>((offer.specs||{})[f.key]||[]).includes(selected[f.key]))):[];}
+        function sync(part){if(doc)fields.forEach(f=>{const node=doc.querySelector('[data-technical-field="'+f.key+'"]');
+            if(node){node.hidden=part!=='all'&&!applies(f,part);node.style.display=node.hidden?'none':'';}});}
         return {
             capture(){return {...selected};},
             restore,
             clear(){restore({});},
             decode(params){const result={};fields.forEach(f=>{const v=params.get(f.param);if(v)result[f.key]=v;});return clean(result);},
             encode(params,value){const result=clean(value);fields.forEach(f=>{if(result[f.key])params.set(f.param,result[f.key]);});},
-            allows(url){return !Object.keys(selected).length||options(url).length>0;},
+            allows(url,part){
+                const applicable=fields.some(f=>selected[f.key]&&applies(f,part===undefined?((config.items||{})[url]||{}).part:part));
+                return !applicable||options(url).length>0;
+            },
+            sync,
             price(url){
-                if(!Object.keys(selected).length)return null;
+                if(!active(url).length)return null;
                 const offers=options(url).filter(o=>Number.isFinite(Number(o.price))&&Number(o.price)>0&&Number(o.compare)>Number(o.price));
                 if(!offers.length)return null;
                 const best=offers.reduce((a,b)=>Number(a.price)<=Number(b.price)?a:b);
@@ -44,7 +52,7 @@
                 const symbol=was.dataset.techBaseText.includes('€')?'€':'$';
                 was.textContent=offer&&Number.isFinite(offer.compare)?'Was '+symbol+offer.compare.toFixed(2):was.dataset.techBaseText;
             },
-            mount(document){doc=document;restore(selected);fields.forEach(f=>{const n=doc.getElementById('tech-'+f.key);if(n)n.addEventListener('change',()=>{
+            mount(document){doc=document;restore(selected);sync((doc.getElementById("partSelect")||{}).value||"all");fields.forEach(f=>{const n=doc.getElementById('tech-'+f.key);if(n)n.addEventListener('change',()=>{
                 const next={...selected};if(n.value)next[f.key]=n.value;else delete next[f.key];selected=clean(next);
                 if(typeof applyFilters==='function')applyFilters();
             });});}

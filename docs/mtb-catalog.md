@@ -23,7 +23,7 @@ One canonical product URL remains one listing. Variant offers retain their own p
 
 ### Integration handoff
 
-Only the MTB entry in `sports/__init__.py` changes scraper/rule registration. No shared Shopify parser changes are needed. `page.py` has a small MTB-only facet/config insertion; `page.js` has guarded optional `SportSpecFilters` hooks for filtering, prices, state and browser navigation. `previews/sport-filters.js` is an optional configurable module, not a new page engine. Existing Skate/BMX query state is unchanged when the module is absent. Claude's main-branch non-Skate alert guard is retained. Grok/Claude should review these small shared UI hooks alongside ongoing page work.
+Only the MTB entry in `sports/__init__.py` changes scraper/rule registration; BMX/Ski additionally register their own UI field modules. No shared Shopify parser changes are needed. `page.py` loads the configured sport facet module; `page.js` has guarded optional `SportSpecFilters` hooks for filtering, prices, state and browser navigation. `previews/sport-filters.js` is an optional configurable module, not a new page engine. Existing Skate/BMX query state is unchanged when the module is absent. Claude's main-branch non-Skate alert guard is retained. Grok/Claude should review these small shared UI hooks alongside ongoing page work.
 
 ### Requests and safeguards
 
@@ -61,3 +61,7 @@ Screenshots below are **synthetic QA only**, pending real Actions inventory veri
 - [Browser results](screenshots/mtb/browser-results.json)
 
 Eight existing Chrome-dependent tests cannot run in this environment; the separate Firefox review is additional coverage, not a claim those Chrome cases passed. See the PR for final suite counts.
+
+## Shared sport filter follow-up
+
+The sidebar now loads each sport’s own field list through `Sport.facets`; see [the BMX/Ski integration contract](sport-spec-filters.md). Category-specific filters leave unrelated products visible, matching Skate’s established behavior. BMX/Ski offer extraction remains Claude’s responsibility.
