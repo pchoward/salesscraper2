@@ -71,12 +71,12 @@ class GearWestTests(unittest.TestCase):
         bent = kept["Atomic Bent 110 Skis 2026"]
         self.assertEqual([(offer["variant_id"], offer["price"], offer["specs"]["length"]) for offer in bent["technical_offers"]],
                          [(1, 499.99, ["170–179 cm"]), (2, 499.99, ["180–189 cm"])], "one offer per buyable sale length, grouped")
-        self.assertEqual(bent["technical_specs"], {"gender": ["Men"], "length": ["170–179 cm", "180–189 cm"], "style": ["Park"]})
+        self.assertEqual(bent["technical_specs"], {"gender": ["Men"], "length": ["170–179 cm", "180–189 cm"], "ski_type": ["Park & Freestyle"]})
         boots = kept["Nordica Speedmachine 3 110 Ski Boots"]
         self.assertEqual([offer["specs"]["mondo"] for offer in boots["technical_offers"]], [["26.5"], ["27.5"]])
-        self.assertNotIn("style", boots["technical_specs"], "no style unless the store states one")
+        self.assertNotIn("ski_type", boots["technical_specs"], "no type unless the store states one")
         from sports.ski import facets
-        self.assertTrue({"length", "mondo", "style", "gender"} <= {field["key"] for field in facets.FIELDS})
+        self.assertTrue({"length", "mondo", "ski_type", "gender"} <= {field["key"] for field in facets.FIELDS})
 
     def test_spec_readers(self):
         self.assertIsNone(specs.style("Skis", ["Alpine", "Men"]), "no style unless the store says")
