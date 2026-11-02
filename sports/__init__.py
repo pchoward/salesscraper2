@@ -164,8 +164,8 @@ MTB = Sport(
     data_dir="catalogs/mtb",
     page_path="mtb/sale_items_chart.html",
     aliases="sports/mtb/aliases.json",
-    scrapers="sports:no_stores",
-    rules="sports.rules:mtb",
+    scrapers="sports.mtb.stores:scrapers",
+    rules="sports.mtb.rules:filter_reason",
 )
 
 SPORTS = {sport.id: sport for sport in (SKATE, SKI, MTB, BMX)}

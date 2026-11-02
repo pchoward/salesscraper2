@@ -1,0 +1,30 @@
+{
+  "_note": "Synthetic Shopify parser cases, not Claude's probe output or actual retailer inventory.",
+  "products": [
+    {"id":1,"title":"Trail Tire","vendor":"Maxxis","handle":"fixture-trail-tire","product_type":"Tires",
+     "options":[{"name":"Size"}],"tags":["trail"],
+     "variants":[{"id":11,"option1":"27.5 x 2.4","price":"40.00","compare_at_price":"80.00","available":true},
+                 {"id":12,"option1":"29 x 2.5","price":"55.00","compare_at_price":"90.00","available":true},
+                 {"id":13,"option1":"29 x 2.4","price":"30.00","compare_at_price":"90.00","available":false}]},
+    {"id":2,"title":"Enduro Suspension Fork 29 inches 160mm 51mm Offset","vendor":"RockShox","handle":"fixture-fork","product_type":"Forks",
+     "options":[{"name":"Travel"},{"name":"Axle"}],"tags":["enduro"],
+     "variants":[{"id":21,"option1":"160mm","option2":"15 x 110mm","price":"499.00","compare_at_price":"799.00","available":true}]},
+    {"id":3,"title":"Trail Frame","vendor":"Transition","handle":"fixture-frame","product_type":"Frames",
+     "options":[{"name":"Frame Size"}],"tags":["trail"],
+     "variants":[{"id":31,"option1":"Medium","price":"1200.00","compare_at_price":"1800.00","available":true}]},
+    {"id":4,"title":"Downhill Full Face Helmet","vendor":"Fox","handle":"fixture-helmet","product_type":"Helmets",
+     "variants":[{"id":41,"price":"99.00","compare_at_price":"199.00","available":true}]},
+    {"id":5,"title":"Team Jersey","vendor":"Fox","handle":"fixture-jersey","product_type":"Jerseys",
+     "variants":[{"id":51,"price":"19.00","compare_at_price":"49.00","available":true}]},
+    {"id":6,"title":"Gravel Tire 700c","vendor":"Other","handle":"fixture-road","product_type":"Tires",
+     "variants":[{"id":61,"price":"39.00","compare_at_price":"69.00","available":true}]},
+    {"id":7,"title":"Trail Pedals","vendor":"Deity","handle":"fixture-full-price","product_type":"Pedals",
+     "variants":[{"id":71,"price":"100.00","compare_at_price":"100.00","available":true}]},
+    {"id":8,"title":"Trail Wheel","vendor":"DT Swiss","handle":"fixture-sold-out","product_type":"Wheels",
+     "variants":[{"id":81,"price":"100.00","compare_at_price":"200.00","available":false}]},
+    {"id":9,"title":"Trail Stem","vendor":"Deity","handle":"fixture-unknown-stock","product_type":"Stems",
+     "variants":[{"id":91,"price":"50.00","compare_at_price":"80.00"}]},
+    {"id":10,"title":"Disc Rotor 203mm","vendor":"Hope","handle":"fixture-rotor","product_type":"Rotors",
+     "variants":[{"id":101,"price":"35.00","compare_at_price":"60.00","available":true}]}
+  ]
+}
