@@ -9,11 +9,12 @@
     }
 })(typeof window !== "undefined" ? window : globalThis, function () {
     "use strict";
-    const NAV_KEYS = ["sport", "discipline"];
+    const NAV_KEYS = ["sport", "discipline", "view", "scope"];
     function state(url, config) {
         const parsed = new URL(url);
         const sport = config.sports.find(item => item.id === parsed.searchParams.get("sport")) || config.sports.find(item => item.id === config.defaultSport);
-        return { sport };
+        const scope = (config.exploreScopes || []).find(item => item.sport === sport.id && item.id === parsed.searchParams.get("scope"));
+        return { sport, scope: parsed.searchParams.get("view") === "explore" ? scope : null };
     }
     function clearCatalogQuery(params, config) {
         const keys = new Set(config.skateQueryKeys || []);
@@ -22,7 +23,7 @@
         // a facet without making the checked-in shell stale after a merge.
         const prefixes = config.sports.map(sport => sport.id + "_");
         Array.from(params.keys()).forEach(key => {
-            if (keys.has(key) || prefixes.some(prefix => key.startsWith(prefix))) params.delete(key);
+            if (key.startsWith("ex_") || keys.has(key) || prefixes.some(prefix => key.startsWith(prefix))) params.delete(key);
         });
     }
     function navigate(url, config, sportId) {
@@ -31,16 +32,19 @@
         // Filters belong to one catalog: moving to another sport's catalog
         // starts fresh. A "coming soon" sport keeps them for the way back.
         const current = state(url, config).sport;
-        if (current.id !== sport.id && hasCatalog(current) && hasCatalog(sport)) clearCatalogQuery(next.searchParams, config);
+        if ((current.id !== sport.id || state(url, config).scope) && hasCatalog(current) && hasCatalog(sport)) clearCatalogQuery(next.searchParams, config);
         next.searchParams.set("sport", sport.id);
         next.searchParams.delete("discipline");
+        next.searchParams.delete("view");
+        next.searchParams.delete("scope");
         return next;
     }
     // A sport with a catalog page shows it in the frame; the rest say "coming soon".
     function catalogURL(url, config, sportId) {
         const parent = new URL(url);
         const sport = config.sports.find(item => item.id === sportId);
-        const next = new URL(sport.catalog, parent);
+        const selected = state(url, config);
+        const next = new URL(selected.scope && selected.sport.id === sportId ? selected.scope.catalog : sport.catalog, parent);
         next.search = parent.search;
         NAV_KEYS.forEach(key => next.searchParams.delete(key));
         next.hash = parent.hash;
@@ -87,6 +91,18 @@
             const next = navigate(win.location.href, config, sportId);
             if (next.href !== win.location.href) win.history.pushState(win.history.state || {}, "", next);
             render(focusGroup);
+        }
+        function chooseView(scopeId) {
+            const next = new URL(win.location.href);
+            const current = state(next, config);
+            const scope = (config.exploreScopes || []).find(item => item.id === scopeId && item.sport === current.sport.id);
+            clearCatalogQuery(next.searchParams, config);
+            next.hash = "";
+            next.searchParams.delete("view");
+            next.searchParams.delete("scope");
+            if (scope) { next.searchParams.set("view", "explore"); next.searchParams.set("scope", scope.id); }
+            win.history.pushState({}, "", next);
+            render();
         }
         function tabs(container, items, selected, prefix, panel, chooseItem) {
             container.replaceChildren(...items.map(item => {
@@ -179,7 +195,7 @@
         brand.addEventListener("click", () => choose("skate", "sport"));
         doc.getElementById("backToSkate").addEventListener("click", () => choose("skate", "sport"));
         render();
-        return { render, choose, state: () => state(win.location.href, config) };
+        return { render, choose, chooseView, state: () => state(win.location.href, config) };
     }
     return { state, navigate, skateURL, catalogURL, mergeSkateURL, nextIndex, mount };
 });

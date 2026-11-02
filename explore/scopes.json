@@ -1,0 +1,11 @@
+{
+  "mtb-dirt-jump": {
+    "id": "mtb-dirt-jump", "sport": "mtb", "category": "bikes", "discipline": "dirt-jump",
+    "label": "Dirt Jump complete bikes", "published": false,
+    "sources": [
+      {"id": "albes", "base": "https://www.albes.com", "collection": "dirt-jump-bikes", "market": "US", "currency": "USD", "approved": false, "approval_note": "", "product_types": ["Dirt Jump Bikes"], "max_pages": 4, "spec_options": {"size": "frame_size", "wheel size": "wheel_size"}},
+      {"id": "verde", "base": "https://verdebicycles.com", "collection": "dirt-jumpers", "market": "US", "currency": "USD", "approved": false, "approval_note": "", "product_types": ["Dirt Jump Bikes"], "max_pages": 4, "spec_options": {"size": "frame_size", "wheel size": "wheel_size"}},
+      {"id": "the-path", "base": "https://www.thepathbikeshop.com", "collection": "dirt-jump-bikes", "market": "US", "currency": "USD", "approved": false, "approval_note": "", "product_types": ["Dirt Jump Bikes"], "max_pages": 4, "spec_options": {"size": "frame_size", "wheel size": "wheel_size"}}
+    ]
+  }
+}
