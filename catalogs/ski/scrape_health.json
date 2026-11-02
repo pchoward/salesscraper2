@@ -128,9 +128,69 @@
             "percentage_change": -0.8,
             "reason": "insufficient_history"
           }
+        },
+        "Utah Ski_Bindings": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 3,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Utah Ski_Boots": {
+          "count": 29,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 29,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Utah Ski_Helmets": {
+          "count": 24,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 24,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Utah Ski_Poles": {
+          "count": 25,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 25,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Utah Ski_Skis": {
+          "count": 49,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 49,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
         }
       },
-      "scanned_at": "2026-11-02T09:42:52+00:00"
+      "scanned_at": "2026-11-02T10:15:32+00:00"
     }
   ],
   "baseline": {
@@ -141,6 +201,26 @@
     "Gear West_Skis": {
       "date": "2026-11-02",
       "count": 129
+    },
+    "Utah Ski_Bindings": {
+      "date": "2026-11-02",
+      "count": 3
+    },
+    "Utah Ski_Boots": {
+      "date": "2026-11-02",
+      "count": 29
+    },
+    "Utah Ski_Helmets": {
+      "date": "2026-11-02",
+      "count": 24
+    },
+    "Utah Ski_Poles": {
+      "date": "2026-11-02",
+      "count": 25
+    },
+    "Utah Ski_Skis": {
+      "date": "2026-11-02",
+      "count": 49
     }
   },
   "completeness_baseline": {
@@ -192,6 +272,36 @@
       {
         "date": "2026-11-02",
         "count": 129
+      }
+    ],
+    "Utah Ski_Bindings": [
+      {
+        "date": "2026-11-02",
+        "count": 3
+      }
+    ],
+    "Utah Ski_Boots": [
+      {
+        "date": "2026-11-02",
+        "count": 29
+      }
+    ],
+    "Utah Ski_Helmets": [
+      {
+        "date": "2026-11-02",
+        "count": 24
+      }
+    ],
+    "Utah Ski_Poles": [
+      {
+        "date": "2026-11-02",
+        "count": 25
+      }
+    ],
+    "Utah Ski_Skis": [
+      {
+        "date": "2026-11-02",
+        "count": 49
       }
     ]
   }
