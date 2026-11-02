@@ -9,7 +9,7 @@ GitHub only lists a manual workflow after it is on `main`.
 ## Daily
 
 The workflow also runs by itself every day at 21:37 UTC (2:37 pm Pacific),
-scraping BMX into the preview, so BMX price history builds up. The phone link
+scraping BMX, Ski and MTB into the preview, so their price history builds up. The phone link
 always shows the latest run. To pause it: Actions → ShredDeals - Preview Site
 → ⋯ → Disable workflow.
 
@@ -17,8 +17,8 @@ always shows the latest run. To pause it: Actions → ShredDeals - Preview Site
 
 1. GitHub app → **salesscraper2** → **Actions** → **ShredDeals - Preview Site** →
    **Run workflow**.
-   - **Scrape**: `bmx` refreshes BMX deals from Albe's BMX first (about a
-     minute). `none` just rebuilds. Skate is never scraped here; its page is
+   - **Scrape**: `all` (the default) refreshes BMX, Ski and MTB; pick one
+     sport to refresh only it; `none` just rebuilds. Skate is never scraped here; its page is
      rebuilt from the data already on `main`.
    - **Branch**: leave `main`, or type a PR's branch to try its code.
 2. Wait for the run (about 3–4 minutes) and open it. The summary at the top
