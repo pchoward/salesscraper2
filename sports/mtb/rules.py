@@ -16,6 +16,10 @@ _RULES=(
  ('Bikes',r'\b(?:mountain\s*bikes?|mtb\s*bikes?|complete\s*bikes?|hardtails?|enduro\s*bikes?|downhill\s*bikes?|dirt\s*jump\s*bikes?)\b'),
 )
 
+# Road/gravel groupsets, for parts filed under a shared MTB/Road type.
+_NOT_MTB=(r'\b(?:road|gravel|cyclocross|triathlon|bmx|commuter|ultegra|dura[- ]?ace|tiagra|sora|claris|grx|'
+          r'rival|(?:force|red)\s+(?:axs|etap|22)|(?:force|apex)\s+xplr)\b|\b700\s*c\b|\bdrop[- ]bars?\b|\b(?:bar|handlebar)\s+tape\b')
+
 
 def title_part(title):
     value=normalize_product_name(title)
@@ -30,6 +34,10 @@ def filter_reason(name,part,url='',price_new=None,price_old=None,description='',
     value=' '+str(name)+' '+str(product_type)+' '
     if re.search(r'\b(?:t[- ]?shirts?|hoodies?|sweatshirts?|jerseys?|shorts|pants|socks|beanies?|caps|gift\s*cards?|stickers?|bottles?|bottle\s*cages?)\b',value,re.I):
         return 'apparel or unrelated merchandise'
-    if re.search(r'\b(?:road|gravel|cyclocross|triathlon|bmx|commuter)\b|\b700\s*c\b|\bdrop[- ]bars?\b',value,re.I):
+    # A type shared by both ("MTB/Road Chains", "Road & MTB Saddles", Cambria)
+    # is not a road part by itself; the name still decides.
+    kind=str(product_type)
+    if re.search(r'\b(?:mtb|mountain)\b',kind,re.I):kind=''
+    if re.search(_NOT_MTB,' '+str(name)+' '+kind+' ',re.I):
         return 'explicit non-MTB equipment'
     return None

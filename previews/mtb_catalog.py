@@ -20,10 +20,11 @@ def build(output,data_root=None,fixture=False):
     if not fixture and data_root is None:raise ValueError('Provide saved sport state with --data-root; real inventory is never invented')
     with (tempfile.TemporaryDirectory() if fixture else nullcontext(None)) as temporary:
         if fixture:
-            from sports.mtb.stores import scrapers
+            # The synthetic feed stands for Worldwide and Fanatik (#165 adds stores with other catalogs).
+            from sports.mtb.stores import scrapers,WORLDWIDE,FANATIK
             root=Path(temporary)
             products=json.loads((SOURCE/'tests/fixtures/mtb/shopify-synthetic.json').read_text())['products']
-            with sports.MTB.active():data={s.name+'_'+s.part:s.products_from(products) for s in scrapers()}
+            with sports.MTB.active():data={s.name+'_'+s.part:s.products_from(products) for s in scrapers() if s.shop in (WORLDWIDE,FANATIK)}
             folder=root/'catalogs/mtb';folder.mkdir(parents=True)
             data_path=folder/'previous_data.json';data_path.write_text(json.dumps(data))
             history_path=folder/'price_history.json';history_path.write_text('{}')
