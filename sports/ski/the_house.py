@@ -95,6 +95,9 @@ def load(fetch=None, sleep=time.sleep):
     if own:
         _cache["tiles"] = found
     logger.info("The House on-sale search: %s products", len(found))
+    import collections
+    tally = collections.Counter(f"{data.get('category')}/{data.get('subcategory')}" for _, data, _ in found)
+    logger.info("The House categories: %s", ", ".join(f"{name} ({count})" for name, count in tally.most_common(40)))
     return found
 
 
