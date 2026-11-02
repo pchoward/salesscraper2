@@ -61,13 +61,28 @@ assert.equal(H.nextIndex(0,'Tab',4),null);
             for style in old.select('style'):
                 self.assertIn(str(style), str(new))
             self.assertEqual((root/'history.json').read_bytes(), (SOURCE/'history.json').read_bytes())
+            # Sports with a live catalog (sports.published_catalogs) use their real
+            # page; the rest get an honest placeholder.
+            import sports as engine
+            live = engine.published_catalogs(SOURCE)
+            pages = {'index.html', 'sale_items_chart.html'}
             for sport in ('ski', 'mtb', 'bmx'):
-                empty = BeautifulSoup((root/(sport+'.html')).read_text(), 'html.parser')
-                self.assertEqual(empty.select('.deal-card'), [])
-                self.assertIn('Coming soon', empty.get_text())
-                self.assertEqual(len(empty.select('header')), 1)
-                self.assertTrue(all('disabled' in b.attrs for b in empty.select('.topnav-links button')))
-            for name in ('index.html', 'sale_items_chart.html', 'ski.html', 'mtb.html', 'bmx.html'):
+                name = live.get(sport) or sport + '.html'
+                pages.add(name)
+                page = BeautifulSoup((root/name).read_text(), 'html.parser')
+                self.assertEqual(len(page.select('header')), 1)
+                self.assertEqual(page.select('iframe'), [])
+                if sport in live:
+                    self.assertTrue(page.select('[data-part][data-store]'), f'{sport} keeps its real listings')
+                    self.assertTrue((root/name).with_name('history.json').is_file())
+                    config = json.loads(page.select_one('#shredHeaderConfig').string)
+                    self.assertEqual(config['currentSport'], sport)
+                    self.assertIn('../index.html', [s['href'] for s in config['sports']], 'links reach the root from <sport>/')
+                else:
+                    self.assertEqual(page.select('.deal-card'), [])
+                    self.assertIn('Coming soon', page.get_text())
+                    self.assertTrue(all('disabled' in b.attrs for b in page.select('.topnav-links button')))
+            for name in pages:
                 text = (root/name).read_text()
                 self.assertNotIn('window.SKATEDEALS_ALERTS = ', text)
                 self.assertNotIn('skatedeals-alerts.pchoward.workers.dev', text)
@@ -75,8 +90,9 @@ assert.equal(H.nextIndex(0,'Tab',4),null);
                 self.assertIn('form-action &apos;none&apos;', text)
                 self.assertIn('connect-src &apos;self&apos;', text)
                 self.assertIn('noindex,nofollow', text)
-            self.assertEqual(set(p.name for p in root.iterdir()),
-                             {'index.html','sale_items_chart.html','history.json','ski.html','mtb.html','bmx.html','manifest.json'})
+            self.assertEqual({str(p.relative_to(root)) for p in root.rglob('*') if p.is_file()},
+                             pages | {'history.json', 'manifest.json'}
+                             | {str(Path(live[s]).parent / 'history.json') for s in live})
         self.assertEqual(before, hashes())
 
     def test_preview_rejects_existing_or_production_output(self):

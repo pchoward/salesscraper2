@@ -133,3 +133,13 @@ the existing No photo fallback rather than fabricated imagery.
 Full available regression run: **571 tests completed, OK (one existing skip)**.
 Eight Chrome-dependent cases could not run in this environment; the separate
 Firefox native-header acceptance check passed.
+
+## Rebased onto live sports (Claude, 2026-11-02)
+
+Since BMX and Ski went live, the preview builder uses each live sport's real
+page (`sports.published_catalogs`: `bmx/` and `ski/sale_items_chart.html` with
+their `history.json`) instead of a placeholder. Header links are made relative
+to each page, so `bmx/` pages reach `../index.html`. MTB keeps its placeholder
+until it has listings. The shared sidebar spec filters (#143) are untouched.
+Browser check at 1440 and 390 px: one header per page, sport links and Back
+work, no page errors. Screenshots: `docs/screenshots/unified-header-live/`.

@@ -43,24 +43,44 @@ def build(output, source=SOURCE):
     # Read names/order only. Claude owns the sport engine/configuration; this
     # preview does not invent the final output paths or change his configuration.
     source_config = json.loads((HERE / 'sports.json').read_text())
+    # Sports with a live catalog (Claude's engine: <id>/sale_items_chart.html
+    # with listings) use their real page; the rest get a placeholder.
+    import sports as engine
+    live = engine.published_catalogs(source)
     sports = []
     for sport in source_config['sports']:
         if not re.fullmatch('[a-z][a-z0-9-]*', sport['id']):
             raise ValueError('Invalid sport ID')
         if sport['id'] != 'skate' and sport.get('catalog'):
             raise ValueError('A new catalog is configured; integrate its engine output explicitly first')
-        sports.append({'id': sport['id'], 'label': sport['label'],
-                       'href': 'index.html' if sport['id'] == 'skate' else sport['id'] + '.html'})
+        href = 'index.html' if sport['id'] == 'skate' else live.get(sport['id']) or sport['id'] + '.html'
+        sports.append({'id': sport['id'], 'label': sport['label'], 'href': href})
     skate = next(s for s in sports if s['id'] == 'skate')
     skate['aliases'] = ['./', 'sale_items_chart.html']
     html = (source / 'sale_items_chart.html').read_text()
     if 'id="stickyBar"' not in html or 'id="homeReset"' not in html:
         raise ValueError('Saved page needs the existing Skate header')
     output.mkdir(parents=True)
+
+    def config_for(sport):
+        """Links relative to this page: a bmx/ page reaches ../index.html."""
+        up = '../' * sport['href'].count('/')
+        return {'brand': 'ShredDeals', 'currentSport': sport['id'],
+                'sports': [dict(other, href=up + other['href'],
+                                **({'aliases': [up + alias for alias in other['aliases']]} if other.get('aliases') else {}))
+                           for other in sports]}
+
     for sport in sports:
-        config = {'brand': 'ShredDeals', 'currentSport': sport['id'], 'sports': sports}
+        config = config_for(sport)
         if sport['id'] == 'skate':
             rendered = inert(html)
+        elif sport['id'] in live:
+            page = source / sport['href']
+            rendered = inert(page.read_text())
+            (output / sport['href']).parent.mkdir(parents=True, exist_ok=True)
+            history = page.parent / 'history.json'
+            if history.is_file():
+                shutil.copyfile(history, output / sport['href'].rsplit('/', 1)[0] / 'history.json')
         else:
             label = escape(sport['label'])
             # Reuse the source's base styles, without any catalog or app scripts.
