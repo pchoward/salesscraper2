@@ -336,7 +336,13 @@ def raw(url, fetch=_get):
         samples.append("JSON-LD: " + " ".join(block.split())[:900])
     tile = re.search(r'<div[^>]+class="[^"]*product-tile[^"]*"', html or "", re.I)
     if tile:
-        samples.append("TILE: " + " ".join(html[tile.start():tile.start() + 2600].split())[:2000])
+        samples.append("TILE: " + " ".join(html[tile.start():tile.start() + 2600].split())[:600])
+        chunk = html[tile.start():tile.start() + 20000]
+        price = re.search(r'class="[^"]*\bprice\b', chunk)
+        if price:
+            samples.append("PRICE: " + " ".join(chunk[max(0, price.start() - 200):price.start() + 1600].split())[:1500])
+        end = re.search(r'<div[^>]+class="[^"]*product-tile', chunk[50:])
+        samples.append(f"TILES ON PAGE: {len(re.findall(r'class=\"product-tile ', html or ''))}")
     if samples:
         print("\n".join("    " + sample for sample in samples))
     hosts = sorted(set(re.findall(r"https://([a-z0-9.-]*(?:api|search|catalog|graphql|algolia|searchspring|cnstrc|bloomreach)[a-z0-9.-]*)", html or "", re.I)))[:8]
