@@ -26,7 +26,10 @@ class ProductionNavigationTests(unittest.TestCase):
             self.assertNotIn('Development prototype',html)
             self.assertNotIn('live delivery is disabled',html)
             self.assertTrue(soup.select_one('noscript a[href="sale_items_chart.html"]'))
-            for sport in config['sports'][1:]:self.assertIsNone(sport['catalog'])
+            # Other sports get a tab once their catalog has listings (sports.published_catalogs).
+            import sports
+            live=sports.published_catalogs(SOURCE)
+            for sport in config['sports'][1:]:self.assertEqual(sport['catalog'],live.get(sport['id']))
             for name in ('navigation.js','navigation.css','skate-bridge.js'):
                 self.assertEqual((root/'navigation'/name).read_bytes(),(HERE/name).read_bytes())
 

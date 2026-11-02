@@ -6,12 +6,17 @@ The simplest path, all from the GitHub app. No Codespaces, no commands.
 
 GitHub only lists a manual workflow after it is on `main`.
 
-## Daily
+## Live since 2026-11-02
 
-The workflow also runs by itself every day at 21:37 UTC (2:37 pm Pacific),
-scraping BMX, Ski and MTB into the preview, so their price history builds up. The phone link
-always shows the latest run. To pause it: Actions → ShredDeals - Preview Site
-→ ⋯ → Disable workflow.
+BMX and Ski are on the live site, next to Skate: pchoward.github.io/salesscraper2
+(tap BMX or Ski). **"Scraper - BMX, Ski, MTB"** scrapes them every day at
+21:37 UTC (2:37 pm Pacific) and publishes to `main`, the way Skate's scrape
+does. It shares Skate's lock, never touches Skate's files, and sends no email
+or alerts. A sport's tab opens its catalog once it has listings (MTB stays
+"coming soon" until its stores land). To pause it: Actions → Scraper - BMX,
+Ski, MTB → ⋯ → Disable workflow.
+
+The preview below is now only for trying a branch's code before merging.
 
 ## By hand
 
@@ -57,13 +62,3 @@ are off.
   `site` files are still there. GitHub itself cannot serve a second site
   from this repository without changing the Pages setup, which is
   production's.
-
-## Going live with BMX (later, needs your approval)
-
-1. Move BMX's data from the preview branch into `main`'s `catalogs/bmx/`.
-2. Add a scheduled BMX scrape: the same `python scraper.py --sport bmx`.
-3. Have `previews/publish.py` list BMX's page, so the homepage BMX tab opens
-   it instead of "coming soon".
-
-Each is a small PR. None of them sends email: delivery stays Skate-only
-until a sport is opted in (`sports/__init__.py`, `delivery=True`).

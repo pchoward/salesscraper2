@@ -114,13 +114,9 @@ class PreviewWorkflowTests(unittest.TestCase):
         self.workflow = yaml.safe_load(self.text)
         self.workflow["on"] = self.workflow.pop(True, self.workflow.get("on"))
 
-    def test_runs_by_hand_or_daily_and_scrapes_at_most_one_new_sport(self):
-        self.assertEqual(sorted(self.workflow["on"]), ["schedule", "workflow_dispatch"])
-        self.assertEqual(len(self.workflow["on"]["schedule"]), 1, "once a day")
-        # A scheduled run has no inputs; "all" means the new sports, never Skate.
-        self.assertIn("CHOICE: ${{ inputs.scrape || 'all' }}", self.text)
+    def test_runs_by_hand_and_never_scrapes_skate(self):
+        self.assertEqual(list(self.workflow["on"]), ["workflow_dispatch"], "the daily scrape is the live one now")
         self.assertIn("set -- bmx ski mtb", self.text)
-        self.assertNotIn("skate", self.text.split("set -- bmx ski mtb")[0].split("CHOICE:")[1])
         options = self.workflow["on"]["workflow_dispatch"]["inputs"]["scrape"]["options"]
         self.assertEqual(options, ["all", "none", "bmx", "ski", "mtb"], "Skate is never scraped here")
         for option in ("bmx", "ski", "mtb"):
@@ -139,3 +135,60 @@ class PreviewWorkflowTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LiveSportsWorkflowTests(unittest.TestCase):
+    """Going live (2026-11-02): the daily BMX/Ski/MTB scrape publishes to main."""
+
+    def setUp(self):
+        self.text = (ROOT / ".github/workflows/scrape-sports.yml").read_text(encoding="utf-8")
+        self.workflow = yaml.safe_load(self.text)
+        self.workflow["on"] = self.workflow.pop(True, self.workflow.get("on"))
+
+    def test_daily_and_by_hand_for_the_new_sports_only(self):
+        self.assertEqual(sorted(self.workflow["on"]), ["schedule", "workflow_dispatch"])
+        self.assertEqual(self.workflow["on"]["workflow_dispatch"]["inputs"]["sport"]["options"], ["all", "bmx", "ski", "mtb"])
+        for sport_id in ("bmx", "ski", "mtb"):
+            self.assertFalse(sports.get(sport_id).delivery, f"{sport_id} would send email")
+        self.assertIn('python scraper.py --sport "$SPORT"', self.text)
+        self.assertNotIn("skate", self.text.lower().split("jobs:")[1].replace("skate's", ""))
+
+    def test_shares_the_scrape_lock_uses_no_secrets_and_commits_only_its_sports(self):
+        self.assertEqual(self.workflow["concurrency"]["group"], "scrape-${{ github.ref }}")
+        skate = yaml.safe_load((ROOT / ".github/workflows/scrape.yml").read_text(encoding="utf-8"))
+        self.assertEqual(skate["concurrency"]["group"], self.workflow["concurrency"]["group"])
+        self.assertNotIn("${{ secrets.", self.text)
+        self.assertNotIn("${{ vars.", self.text)
+        adds = [line.strip() for line in self.text.splitlines() if "git add" in line]
+        self.assertEqual(adds, ["git add index.html navigation",
+                                'if [ -e "catalogs/$sport" ]; then git add -A -- "catalogs/$sport"; fi',
+                                'if [ -e "$sport/sale_items_chart.html" ]; then git add -A -- "$sport"; fi'])
+        for skate_file in ("previous_data.json", "price_history.json", "sale_items_chart.html\n", "scrape_health.json"):
+            self.assertNotIn(f"git add {skate_file}", self.text)
+
+    def test_non_skate_pages_carry_no_live_alerts(self):
+        import page
+        from report import build_report_html
+
+        live = {"apiBase": "https://alerts.example", "turnstileSiteKey": "site-key"}
+        with mock.patch.object(page, "ALERTS_UI_CONFIG", live):
+            bmx = build_report_html({}, {}, {}, set(), generated_at="2026-11-02T12:00:00+00:00", sport=sports.BMX)
+            skate = build_report_html({}, {}, {}, set(), generated_at="2026-11-02T12:00:00+00:00")
+        self.assertNotIn("window.SKATEDEALS_ALERTS = ", bmx)
+        self.assertIn("window.SKATEDEALS_ALERTS = ", skate)
+
+    def test_homepage_tabs_follow_catalogs_with_listings(self):
+        import json
+        import tempfile
+        from pathlib import Path
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for sport_id, items in (("bmx", [{"url": "x"}]), ("ski", [])):
+                sport = sports.get(sport_id)
+                (root / sport.data_dir).mkdir(parents=True)
+                (root / sport.data_dir / "previous_data.json").write_text(json.dumps({"A_Parts": items}))
+                (root / sport.page_path).parent.mkdir(parents=True)
+                (root / sport.page_path).write_text("<html></html>")
+            self.assertEqual(sports.published_catalogs(root), {"bmx": "bmx/sale_items_chart.html"},
+                             "Ski has a page but no listings yet: still 'coming soon'")

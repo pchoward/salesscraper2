@@ -11,10 +11,9 @@ name: ShredDeals - Preview Site
 # New sports' price history lives on the shreddeals-preview branch under
 # _data/, carried from run to run, until it is approved for main.
 on:
-  # Daily refresh of BMX, Ski and MTB (owner, 2026-11-01): builds their
-  # price history on the preview branch. 21:37 UTC, away from Skate's 07:17 / 09:43 scrapes.
-  schedule:
-    - cron: '37 21 * * *'
+  # Manual only: since going live (2026-11-02) the daily scrape is
+  # "Scraper - BMX, Ski, MTB", which publishes to main. This preview is for
+  # trying a branch's code before merging.
   workflow_dispatch:
     inputs:
       scrape:
@@ -45,7 +44,7 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.ref || 'main' }}
+          ref: ${{ inputs.ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -56,24 +55,26 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Bring back earlier runs' sport data
-        # The previous preview's _data/catalogs (BMX price history...). A
-        # first run starts empty.
+      - name: Sport data
+        # The checkout's catalogs/<sport>/ (main's live data). A sport with
+        # none yet starts from the previous preview's copy.
         run: |
           set -euo pipefail
-          mkdir -p preview-data
-          if git fetch -q --depth 1 origin "$PREVIEW_BRANCH"; then
-            git archive FETCH_HEAD _data 2>/dev/null | tar -x -C preview-data || echo "No saved sport data yet."
+          if git fetch -q --depth 1 origin "$PREVIEW_BRANCH" 2>/dev/null; then
+            for sport in bmx ski mtb; do
+              if [ ! -e "catalogs/$sport/previous_data.json" ] && git cat-file -e "FETCH_HEAD:_data/catalogs/$sport/previous_data.json" 2>/dev/null; then
+                mkdir -p "catalogs/$sport"
+                git archive FETCH_HEAD "_data/catalogs/$sport" | tar -x --strip-components=3 -C "catalogs/$sport"
+              fi
+            done
           fi
-          mkdir -p preview-data/_data/catalogs
-          rm -rf catalogs && cp -r preview-data/_data/catalogs catalogs
+          mkdir -p catalogs
           find catalogs -type f | sort
 
-      - name: Scrape ${{ inputs.scrape || 'all' }}
-        if: (inputs.scrape || 'all') != 'none'
+      - name: Scrape ${{ inputs.scrape }}
+        if: inputs.scrape != 'none'
         env:
-          # A scheduled run has no inputs: it scrapes every new sport on main.
-          CHOICE: ${{ inputs.scrape || 'all' }}
+                    CHOICE: ${{ inputs.scrape }}
         # Only these sports' stores, one sport at a time; never Skate. Their
         # runs send no email or alerts (sports/__init__.py: delivery is
         # Skate-only). A sport whose scrape fails keeps its last data; the
@@ -88,7 +89,7 @@ jobs:
 
       - name: Build the site
         env:
-          LABEL: "ShredDeals preview ${{ inputs.ref || 'main' }} · ${{ github.run_number }}"
+          LABEL: "ShredDeals preview ${{ inputs.ref }} · ${{ github.run_number }}"
         run: python ci/build_preview.py site --label "$LABEL" --data-root .
 
       - name: Set up Node.js

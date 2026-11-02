@@ -14,6 +14,7 @@ on:
       - mobile.css
       - previews/**
       - query_state.py
+      - sports/**
 
 # The scrape's lock: a rebuild and a scrape never run at the same time.
 concurrency:
@@ -41,6 +42,13 @@ jobs:
         # scrape that writes it; that run skips instead of failing.
         run: python rebuild_page.py ${{ github.event_name == 'push' && '--skip-if-missing' || '' }}
 
+      - name: Rebuild BMX, Ski and MTB pages from their saved data
+        # Each sport's own catalogs/<sport>/ data; a sport not scraped yet is skipped.
+        run: |
+          for sport in bmx ski mtb; do
+            python rebuild_page.py --sport "$sport" --skip-if-missing
+          done
+
       - name: Generate public sport navigation without scraping
         run: python -m previews.publish
 
@@ -50,6 +58,9 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add sale_items_chart.html
           git add index.html navigation
+          for sport in bmx ski mtb; do
+            if [ -e "$sport/sale_items_chart.html" ]; then git add "$sport"; fi
+          done
           if [ -e history.json ]; then git add history.json; fi
           git diff --quiet --cached || git commit -m "Rebuild page $(date +'%Y-%m-%d %H:%M')"
           git pull --rebase origin main

@@ -178,3 +178,23 @@ def no_stores():
 def get(sport_id=None):
     """The sport by id; Skate when none is given. Unknown ids raise KeyError."""
     return SPORTS[sport_id or "skate"]
+
+
+def published_catalogs(root=None):
+    """{sport id: page path} for the other sports whose catalog has listings and
+    whose page exists under ``root`` (the repository by default): the
+    homepage's tabs open these, and the rest keep "coming soon"."""
+    import json
+
+    root = Path(root) if root is not None else ROOT
+    found = {}
+    for sport in SPORTS.values():
+        if sport.is_default or not (root / sport.page_path).is_file():
+            continue
+        try:
+            data = json.loads((root / sport.data_dir / "previous_data.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if any(items for items in data.values()):
+            found[sport.id] = sport.page_path
+    return found
