@@ -26,6 +26,12 @@ FEED = [
     product(9, "Continental Grand Prix 5000 700c Tire", "Continental", "Road Tires Folding"),
     product(10, 'DT Swiss XM 1700 29" MTB Wheel - Rear', "DT Swiss", "MTB Wheels"),
     product(11, "Eastern Alpaka 29 MTB Hardtail Bike - Black", "Eastern", "Hardtail"),
+    product(12, "Maxxis Rekon Tire - 29 x 2.4, Tubeless, Folding, Black, Dual", "Maxxis", "Tires"),
+    product(13, "Schwalbe Big Ben Tire - 27.5 x 2, Clincher, Wire, Black", "Schwalbe", "Tires"),
+    product(14, "Schwalbe Marathon Racer Tire - 26 x 1.60, Clincher, Wire", "Schwalbe", "Tires"),
+    product(15, "Maxxis Holy Roller Tire - 20 x 2.2, Clincher, Wire, Black", "Maxxis", "Tires"),
+    product(16, "Maxxis Re-Fuse Tire - 700 x 32, Tubeless, Folding", "Maxxis", "Tires"),
+    product(17, "Stan's Flow MK4 29 Boost Wheelset", "Stan's", "Wheels"),
 ]
 
 
@@ -43,7 +49,9 @@ class ColoradoCyclistTests(unittest.TestCase):
             "Nutcase Street MIPS Helmet - Dust for Prints Reflective": "Protection",
             'Maxxis Minion DHF 29" Folding MTB Tire': "Tires",
             'DT Swiss XM 1700 29" MTB Wheel - Rear': "Wheels",
-        }, "road/kids helmets, visors, road tires and Cambria-duplicate bikes stay out")
+            "Maxxis Rekon Tire - 29 x 2.4, Tubeless, Folding, Black, Dual": "Tires",
+            "Stan's Flow MK4 29 Boost Wheelset": "Wheels",
+        }, "road/kids helmets, visors, road/commuter/BMX tires and Cambria-duplicate bikes stay out")
 
     def test_collections(self):
         self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.COLORADO.sale_jsons],
