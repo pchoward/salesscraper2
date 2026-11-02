@@ -483,3 +483,8 @@
  #stickyBar .tool-deals .fresh-note { font-size:9px; }
  #stickyBar .layout-toggle { display:none; }
 }
+
+/* Dense spec chips and help buttons still need a usable phone hit area. */
+@media (max-width:800px), (max-height:500px) and (pointer:coarse) {
+    .rail .sidebar#filterDrawer button { min-height:24px; min-width:24px; }
+}

@@ -3438,3 +3438,6 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 .shred-embedded #stickyBar .topnav { display:none; }
 #stickyBar .tool-deals .scan-wrap { margin-left:auto; color:#687382; font-size:10px; }
 #stickyBar .tool-deals .fresh-note { color:#687382; font-size:10px; }
+
+/* Local Watch remains available; delivery is explicitly opted in per sport. */
+.alerts-unavailable .card-alert { display:none; }

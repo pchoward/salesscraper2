@@ -87,6 +87,10 @@ window.addEventListener("load", () => {
 
     type("bakr 7.5 under 10");
     out.didYouMean = (document.getElementById("searchRescue") || {}).innerText || "";
+    type("spi");
+    clearFilters();
+    out.clearedSuggestions = {expanded:input.getAttribute("aria-expanded"),
+      hidden:document.getElementById("searchSuggest").hidden};
   } catch (err) {
     out.error = String(err && err.stack || err);
   }
@@ -126,6 +130,9 @@ class SearchUiTests(unittest.TestCase):
     def setUpClass(cls):
         cls.html = build_report_html(CATALOG, {}, {}, generated_at="2026-11-01T12:00:00+00:00")
         cls.result = _render(cls.html)
+
+    def test_clear_filters_dismisses_stale_suggestions(self):
+        self.assertEqual(self.result["clearedSuggestions"], {"expanded": "false", "hidden": True})
 
     def test_no_errors(self):
         self.assertNotIn("error", self.result, self.result.get("error"))

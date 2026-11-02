@@ -62,3 +62,131 @@ f.clear();assert.equal(f.allows('unknown','Skis'),true);assert.equal(f.price('sk
 '''
         result=subprocess.run(['node','-e',js,json.dumps(config)],cwd=Path(__file__).parent,capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stderr)
+
+
+class TechnicalInteractionRegressionTests(unittest.TestCase):
+    def test_removable_actions_and_price_ranges_use_one_matching_variant(self):
+        script = r"""
+const assert=require('node:assert/strict');
+const config={fields:[
+ {key:'wheel',label:'Wheel size',param:'wheel',values:['29','27.5'],categories:['Forks']},
+ {key:'travel',label:'Travel',param:'travel',values:['160','140'],categories:['Forks']}
+],items:{fork:{part:'Forks',offers:[
+ {price:100,compare:400,specs:{wheel:['27.5'],travel:['140']}},
+ {price:250,compare:400,specs:{wheel:['29'],travel:['160']}},
+ {price:300,compare:400,specs:{wheel:['29'],travel:['160']}},
+ {price:50,compare:400,available:false,specs:{wheel:['29'],travel:['160']}}
+]}}};
+const f=require('./previews/sport-filters.js')(config);
+f.restore({wheel:'29',travel:'160'});
+assert.deepEqual(f.price('fork'),{price:250,compare:400});
+assert.deepEqual(f.price('fork',undefined,{priceMin:275}),{price:300,compare:400});
+assert.equal(f.allows('fork','Forks',undefined,{priceMin:275,priceMax:280}),false);
+assert.equal(f.allows('missing','Forks'),false);
+assert.equal(f.allows('missing','Gloves'),true);
+assert.deepEqual(f.price('fork',undefined,{discountMin:30}),{price:250,compare:400});
+assert.equal(f.allows('fork','Forks',undefined,{priceMin:275,discountMin:30}),false,
+ 'price and discount cannot match different variants');
+const actions=f.actions();
+assert.deepEqual(actions.map(a=>a.label),['Wheel size: 29','Travel: 160']);
+assert.equal(f.price('fork',actions[0].remaining).price,250);
+assert.deepEqual(f.capture(),{wheel:'29',travel:'160'},'hypothetical recovery must not mutate active state');
+f.restore(actions[0].remaining);
+assert.deepEqual(f.capture(),{travel:'160'});
+f.clear();assert.deepEqual(f.actions(),[]);
+config.items.boundary={part:'Forks',offers:[{price:70,compare:100,specs:{wheel:['29'],travel:['160']}}]};
+f.restore({wheel:'29'});
+assert.equal(f.allows('boundary','Forks',undefined,{discountMin:30,discountMax:30}),true,
+ 'an exact 30% discount must meet inclusive range boundaries');
+"""
+        result=subprocess.run(['node','-e',script],cwd=Path(__file__).parent,capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+
+    def test_shell_clears_all_sport_owned_technical_query_parameters(self):
+        from previews.shreddeals import skate_query_keys
+        keys = skate_query_keys()
+        script = r"""
+const assert=require('node:assert/strict'),H=require('./previews/navigation.js');
+const config={defaultSport:'skate',sports:[{id:'skate',catalog:'sale_items_chart.html'},
+ {id:'ski',catalog:'ski/sale_items_chart.html'},{id:'bmx',catalog:'bmx/sale_items_chart.html'}],
+ skateQueryKeys:JSON.parse(process.argv[1])};
+const next=H.navigate('https://example.org/?sport=ski&ski_length=170&ski_gender=Women&ski_future_facet=new&q=armada&utm_source=kept',config,'bmx');
+assert.equal(next.searchParams.has('ski_length'),false);
+assert.equal(next.searchParams.has('ski_gender'),false);
+assert.equal(next.searchParams.has('ski_future_facet'),false);
+const restored=H.mergeSkateURL('https://example.org/?sport=ski&ski_future_facet=old&utm_source=kept','https://example.org/ski/sale_items_chart.html',config,'ski');
+assert.equal(restored.searchParams.has('ski_future_facet'),false);
+assert.equal(restored.searchParams.get('utm_source'),'kept');
+assert.equal(next.searchParams.has('q'),false);
+assert.equal(next.searchParams.get('utm_source'),'kept');
+"""
+        result=subprocess.run(['node','-e',script,json.dumps(keys)],cwd=Path(__file__).parent,capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+
+
+class VariantPriceRangeRenderingTests(unittest.TestCase):
+    def test_slider_includes_available_variant_prices(self):
+        from bs4 import BeautifulSoup
+        from report import build_report_html
+        item={'name':'UI Audit Ski','part':'Skis','store':'Fixture',
+              'url':'https://example.test/ski','price_new':'100','price_old':'400',
+              'technical_offers':[
+                  {'price':300,'compare':400,'available':True,'specs':{'length':['170–179 cm']}},
+                  {'price':999,'compare':1200,'available':False,'specs':{'length':['180–189 cm']}}]}
+        with sports.SKI.active():
+            html=build_report_html({'Fixture_Skis':[item]}, {}, {}, sport=sports.SKI)
+        soup=BeautifulSoup(html,'html.parser')
+        slider=soup.select_one('[data-min-input="priceMin"] input.dual-max')
+        self.assertEqual(slider['max'], '300')
+
+
+class DisappearedTechnicalFilterTests(unittest.TestCase):
+    def test_gone_table_cannot_match_missing_technical_facts(self):
+        source=Path(__file__).with_name('page.js').read_text()
+        function=source.split('function goneRowMatches(',1)[1].split('function revealCount(',1)[0]
+        script=r"""
+const assert=require('node:assert/strict');
+const state={search:'',store:'all',part:'all',brand:'all',priceMin:null,priceMax:null};
+const typedFilters=()=>({}),typedOr=(over,typed,key,fallback)=>fallback;
+const technicalPriceConstraints=()=>({}),searchHayMatches=()=>true;
+const SportSpecFilters={allows:()=>false};
+eval('function goneRowMatches('+JSON.parse(process.argv[1]));
+assert.equal(goneRowMatches({dataset:{part:'Skis',url:'https://example.test/gone',price:'100'}}),false);
+"""
+        result=subprocess.run(['node','-e',script,json.dumps(function)],capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+
+
+class ExpandedStoreRowTests(unittest.TestCase):
+    def test_each_sport_starts_with_its_dynamic_stores_inline(self):
+        from bs4 import BeautifulSoup
+        from report import build_report_html
+        for sport, part, name in (
+            (sports.BMX, 'Frames & Forks', 'Cult Audit Frame'),
+            (sports.SKI, 'Skis', 'Armada Audit Skis'),
+            (sports.MTB, 'Forks & Shocks', 'RockShox Audit Fork'),
+        ):
+            data = {}
+            for store in ('New Retailer A', 'New Retailer B'):
+                data[store+'_'+part] = [{'name':name, 'part':part, 'store':store,
+                    'url':'https://example.test/'+store.replace(' ','-'),
+                    'price_new':'100', 'price_old':'200'}]
+            with self.subTest(sport=sport.id), sport.active():
+                soup = BeautifulSoup(build_report_html(data, {}, {}, sport=sport), 'html.parser')
+                inline = soup.select('#storeFilters .quick-row > button[data-store]')
+                self.assertEqual({n['data-store'] for n in inline}, {'all','New Retailer A','New Retailer B'})
+                self.assertTrue(all(n['data-home']=='row' for n in inline))
+                self.assertEqual(soup.select('#moreStoresList button'), [])
+
+    def test_adding_a_sport_field_does_not_stale_the_public_shell(self):
+        import tempfile
+        from unittest.mock import patch
+        import sports.ski.facets
+        from previews.publish import publish
+        from previews.shreddeals import SOURCE
+        fields = sports.ski.facets.FIELDS + ({'key':'new_engine_fact', 'label':'New fact',
+            'param':'ski_future_field', 'categories':()},)
+        with tempfile.TemporaryDirectory() as directory, patch.object(sports.ski.facets,'FIELDS',fields):
+            root = Path(directory)
+            publish(root)
+            self.assertEqual((root/'index.html').read_bytes(), (SOURCE/'index.html').read_bytes())

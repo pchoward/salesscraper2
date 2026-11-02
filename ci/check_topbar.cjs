@@ -7,7 +7,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const http = require('node:http');
 const [site, output, before] = process.argv.slice(2);
-if (!site || !output) throw new Error('Expected SITE_DIR OUTPUT_DIR [BEFORE_SITE_DIR]');
+if (require.main === module && (!site || !output)) throw new Error('Expected SITE_DIR OUTPUT_DIR [BEFORE_SITE_DIR]');
 const mime = {'.html':'text/html', '.js':'text/javascript', '.css':'text/css', '.json':'application/json'};
 async function serve(root) {
     root = path.resolve(root);
@@ -126,4 +126,5 @@ async function main() {
         console.log(JSON.stringify(results,null,2));
     } finally { await browser.close(); }
 }
-main().catch(error => { console.error(error); process.exitCode = 1; });
+module.exports = { serve };
+if (require.main === module) main().catch(error => { console.error(error); process.exitCode = 1; });
