@@ -207,7 +207,8 @@ class AlbesTests(unittest.TestCase):
                 for item in store_scraper.parse(json.dumps(feed)):
                     kept[item["name"]] = item["part"]
         self.assertEqual(kept, {"Cult Gateway Frame": "Frames & Forks", "Odyssey Clutch Freecoaster Hub": "Wheel Parts"})
-        self.assertEqual(stores.ALBES.sale_json, "https://www.albes.com/collections/bmx-sale-bikes-parts/products.json")
+        self.assertEqual(stores.ALBES.sale_jsons, ["https://www.albes.com/collections/bmx-sale-bikes-parts/products.json",
+                                                   "https://www.albes.com/collections/bmx-bike-sale/products.json"])
         self.assertEqual(sports.BMX.build_scrapers()[0].shop, stores.ALBES)
 
 

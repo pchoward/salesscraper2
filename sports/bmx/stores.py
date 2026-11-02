@@ -105,6 +105,9 @@ ALBES = shopify.ShopifyStore(
     "Albe's BMX",
     "https://www.albes.com",
     collection="bmx-sale-bikes-parts",
+    # Its separate bike sale holds ~30 bikes the combined collection misses
+    # (store probe, 2026-11-01).
+    more_collections=("bmx-bike-sale",),
     types=TYPES,
     brand_of=brands.for_sport(sports.BMX),
     own_vendor="albe",  # the shop's own name as a vendor is not a brand
