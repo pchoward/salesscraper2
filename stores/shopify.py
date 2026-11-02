@@ -95,7 +95,8 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 
 class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
-                 brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=()):
+                 brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=(),
+                 type_part=None):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
@@ -117,6 +118,8 @@ class ShopifyStore:
         # A store whose types aren't known yet: unmapped types are read from
         # the title too, instead of skipped.
         self.unknown_by_title = unknown_by_title
+        # type key -> part, for types not in ``types`` (patterned type names).
+        self.type_part = type_part
         self.cache = {}
 
 
@@ -138,6 +141,8 @@ def part_for_title(title):
 def part_for(store, product_type, title=""):
     """The report part for a product, or None to skip it."""
     part = store.types.get(type_key(product_type))
+    if part is None and getattr(store, "type_part", None):
+        part = store.type_part(type_key(product_type))
     if part is None and getattr(store, "unknown_by_title", False):
         part = BY_TITLE
     if part == BY_TITLE:
