@@ -46,6 +46,9 @@ class MtbCatalogTests(unittest.TestCase):
         self.assertNotIn('travel_mm',specs)
         specs,_=extract({'title':'Trail Frame Size: 29 inches'}, {}, 'Frames')
         self.assertNotIn('wheel_size',specs)
+        specs,_=extract({'title':'Suspension Fork','product_type':'Forks','body_html':'<table><tr><th>Wheel Size</th><td>29 inches</td></tr><tr><th>Travel</th><td>160mm</td></tr></table>'},{},'Forks & Shocks')
+        self.assertEqual(specs['wheel_size'],['29'])
+        self.assertEqual(specs['travel_mm'],['160'])
 
     def test_conflicting_or_ambiguous_specs_are_not_invented(self):
         p={'title':'Fork 29 inches','options':[{'name':'Wheel Size'}]}
@@ -72,8 +75,9 @@ class MtbCatalogTests(unittest.TestCase):
         robots=robotparser.RobotFileParser();robots.parse(['User-agent: *','Allow: /'])
         shop=deepcopy(stores.WORLDWIDE);shop.cache={}
         parsers=[stores.MtbShopifyScraper(shop,p) for p in ('Tires','Frames')]
+        known=self.feed();known[8]['variants'][0]['available']=True
         with sports.MTB.active(),patch('sports.mtb.stores.robots_policy',return_value=(robots,0)) as policy, \
-             patch('stores.shopify._fetch_json',return_value={'products':self.feed()}) as fetch:
+             patch('stores.shopify._fetch_json',return_value={'products':known}) as fetch:
             self.assertEqual(len(parsers[0].scrape()),1)
             self.assertEqual(len(parsers[1].scrape()),1)
             self.assertEqual(fetch.call_count,1);self.assertEqual(policy.call_count,1)
@@ -87,6 +91,34 @@ class MtbCatalogTests(unittest.TestCase):
         robots=robotparser.RobotFileParser();robots.parse(['User-agent: *','Disallow: /'])
         with patch('sports.mtb.stores.robots_policy',return_value=(robots,0)),patch('stores.shopify._fetch_json') as fetch:
             self.assertIsNone(parsers[0].scrape());fetch.assert_not_called()
+
+    def test_unknown_stock_is_checked_once_or_left_unknown_without_failing_store(self):
+        from urllib import robotparser
+        robots=robotparser.RobotFileParser();robots.parse(['User-agent: *','Allow: /'])
+        shop=deepcopy(stores.WORLDWIDE);shop.cache={}
+        parser=stores.MtbShopifyScraper(shop,'Cockpit')
+        with sports.MTB.active(),patch('sports.mtb.stores.robots_policy',return_value=(robots,0)), \
+             patch('stores.shopify._fetch_json',side_effect=[{'products':self.feed()},{'variants':[{'id':91,'available':False}]}]) as get:
+            self.assertEqual(parser.scrape(),[])
+            self.assertEqual(get.call_count,2)
+        shop.cache={}
+        with sports.MTB.active(),patch('sports.mtb.stores.robots_policy',return_value=(robots,0)), \
+             patch('stores.shopify._fetch_json',side_effect=[{'products':self.feed()},None]):
+            self.assertEqual(parser.scrape()[0]['availability'],'Check store')
+        shop.cache={}
+        with sports.MTB.active(),patch('sports.mtb.stores.robots_policy',return_value=(robots,0)), \
+             patch('sports.mtb.stores.MAX_STOCK_LOOKUPS',0),patch('stores.shopify._fetch_json',return_value={'products':self.feed()}) as get:
+            self.assertEqual(parser.scrape()[0]['availability'],'Check store')
+            self.assertEqual(get.call_count,1)
+
+    def test_invalid_stock_fields_do_not_turn_unknown_into_sold_out(self):
+        from urllib import robotparser
+        robots=robotparser.RobotFileParser();robots.parse(['User-agent: *','Allow: /'])
+        shop=deepcopy(stores.WORLDWIDE);shop.cache={}
+        with sports.MTB.active(),patch('sports.mtb.stores.robots_policy',return_value=(robots,0)), \
+             patch('stores.shopify._fetch_json',side_effect=[{'products':self.feed()},{'variants':[{'id':91}]}]):
+            items=stores.MtbShopifyScraper(shop,'Cockpit').scrape()
+            self.assertEqual(items[0]['availability'],'Check store')
 
     def test_frontend_facets_use_same_variant_for_all_specs_and_price(self):
         from sports.mtb.facets import payload

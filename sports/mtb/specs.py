@@ -2,6 +2,7 @@
 import re
 from decimal import Decimal, InvalidOperation
 from product_specs import option_text,text
+from bs4 import BeautifulSoup
 
 FIELDS={
  'wheel_size':'Wheel size (in)', 'travel_mm':'Suspension travel (mm)',
@@ -49,6 +50,15 @@ def extract(product,variant,part):
     if part=='Brakes' and re.search(r'\brotors?\b',name,re.I):
         add('rotor_mm',[number(v) for v in re.findall(NUMBER+r'\s*mm\b',name,re.I) if 140<=float(v)<=240])
     axes=option_text(product,variant)
+    # Feed descriptions often contain actual manufacturer spec tables. Read
+    # labeled cells rather than treating arbitrary body numbers as dimensions.
+    soup=BeautifulSoup(str(product.get('body_html') or ''),'html.parser')
+    for row in soup.select('tr'):
+        cells=row.find_all(['th','td'],recursive=False)
+        if len(cells)==2:axes.append((cells[0].get_text(' ',strip=True),cells[1].get_text(' ',strip=True)))
+    for term in soup.select('dt'):
+        value=term.find_next_sibling('dd')
+        if value is not None:axes.append((term.get_text(' ',strip=True),value.get_text(' ',strip=True)))
     labeled={}
     for label,raw in axes:
         label=re.sub(r'[^a-z0-9 ]',' ',str(label).lower())
