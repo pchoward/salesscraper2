@@ -13,9 +13,9 @@ HECKLER = {
     "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN LIGHT WEIGHT/HECKLER SL",
     "tags": ["Sale", "my24"], "options": [{"name": "Color"}, {"name": "Size"}],
     "variants": [
-        {"id": 11, "option1": "Gloss Black", "option2": "XXL", "price": "4499.77", "compare_at_price": "12999.99", "available": True},
-        {"id": 12, "option1": "Gloss Black", "option2": "L", "price": "4499.77", "compare_at_price": "12999.99", "available": False},
-        {"id": 13, "option1": "Gloss Black", "option2": "M", "price": "4499.77", "compare_at_price": "12999.99", "available": False},
+        {"id": 11, "option1": "Gloss Black", "option2": "XX-Large", "price": "4499.77", "compare_at_price": "12999.99", "available": True},
+        {"id": 12, "option1": "Gloss Black", "option2": "Large", "price": "4499.77", "compare_at_price": "12999.99", "available": False},
+        {"id": 13, "option1": "Gloss Black", "option2": "Medium", "price": "4499.77", "compare_at_price": "12999.99", "available": False},
     ],
 }
 ROAD = {"id": 2, "title": "Soloist", "vendor": "Cervelo", "handle": "soloist",
@@ -48,7 +48,7 @@ class MikesBikesTests(unittest.TestCase):
         bike = parse([HECKLER])["Santa Cruz Heckler SL CC X0 Transmission Reserve"]
         self.assertEqual([offer["variant_id"] for offer in bike["technical_offers"]], [11],
                          "only the XXL is buyable; L and M are not offered")
-        self.assertEqual(bike["technical_specs"].get("frame_size"), ["XXL"])
+        self.assertEqual(bike["technical_specs"].get("frame_size"), ["XXL"], "Mike's spells it XX-Large")
         self.assertEqual((bike["price_new"], bike["price_old"]), ("4499.77", "12999.99"))
 
     def test_collections_and_dedup(self):
