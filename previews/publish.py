@@ -7,7 +7,11 @@ from previews.shreddeals import HERE, SOURCE, load_config, render_shell, skate_q
 
 
 def publish(output=SOURCE, catalogs=None):
-    """``catalogs`` maps other sports to their pages ({'bmx': 'bmx/sale_items_chart.html'}); without it only Skate has one."""
+    """``catalogs`` maps other sports to their pages ({'bmx': 'bmx/sale_items_chart.html'}). Without it, the
+    sports whose catalog has listings in the repository (sports.published_catalogs) get their tab."""
+    if catalogs is None:
+        import sports
+        catalogs = sports.published_catalogs(SOURCE)
     output=Path(output).resolve()
     config=load_config(HERE/'sports.json')
     config['production']=True

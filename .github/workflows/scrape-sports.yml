@@ -1,0 +1,90 @@
+name: Scraper - BMX, Ski, MTB
+
+# Daily scrape of the newer ShredDeals sports, published on the live site
+# next to Skate (owner's go-live, 2026-11-02). Each sport is scraped on its
+# own (python scraper.py --sport <id>) into its own catalogs/<id>/ data and
+# <id>/ page; Skate's files and stores are never touched. These sports send
+# no email or alerts (sports/__init__.py: delivery is Skate-only), and the
+# workflow uses no secrets.
+on:
+  schedule:
+    - cron: '37 21 * * *'
+  workflow_dispatch:
+    inputs:
+      sport:
+        description: Which sport to scrape (all = BMX, Ski and MTB)
+        type: choice
+        default: all
+        options: [all, bmx, ski, mtb]
+
+# The scrape's lock, shared with the Skate scrape and the page rebuild: they
+# never push at the same time.
+concurrency:
+  group: scrape-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  scrape:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Carry over the preview's history (first live run only)
+        # Before going live, BMX and Ski were scraped into the
+        # shreddeals-preview branch. A sport with no data on main yet starts
+        # from there, so its first-seen dates and prices carry over.
+        run: |
+          set -euo pipefail
+          if git fetch -q --depth 1 origin shreddeals-preview 2>/dev/null; then
+            for sport in bmx ski mtb; do
+              if [ ! -e "catalogs/$sport/previous_data.json" ] && git cat-file -e "FETCH_HEAD:_data/catalogs/$sport/previous_data.json" 2>/dev/null; then
+                mkdir -p "catalogs/$sport"
+                git archive FETCH_HEAD "_data/catalogs/$sport" | tar -x --strip-components=3 -C "catalogs/$sport"
+                echo "Started $sport from the preview's data."
+              fi
+            done
+          fi
+
+      - name: Scrape
+        env:
+          CHOICE: ${{ inputs.sport || 'all' }}
+        # One sport at a time; a sport whose scrape fails keeps its previous
+        # data and the others still publish.
+        run: |
+          if [ "$CHOICE" = all ]; then set -- bmx ski mtb; else set -- "$CHOICE"; fi
+          for SPORT in "$@"; do
+            echo "::group::Scrape $SPORT"
+            python scraper.py --sport "$SPORT" || echo "::warning::$SPORT scrape failed; keeping its previous data"
+            echo "::endgroup::"
+          done
+
+      - name: Update the homepage's sport tabs
+        # A sport gets its tab once its catalog has listings.
+        run: python -m previews.publish
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add index.html navigation
+          for sport in bmx ski mtb; do
+            if [ -e "catalogs/$sport" ]; then git add -A -- "catalogs/$sport"; fi
+            if [ -e "$sport/sale_items_chart.html" ]; then git add -A -- "$sport"; fi
+          done
+          git diff --quiet --cached || git commit -m "Update BMX, Ski, MTB deals $(date +'%Y-%m-%d %H:%M')"
+          git pull --rebase origin main
+          git push

@@ -2809,7 +2809,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             for bucket in WIDTH_RANGES
         ]
     )
-    chunks.append(_alerts_config_script())
+    # Subscriber alerts are Skate-only until a sport opts in (sports/__init__.py
+    # delivery); without the config page.js shows alerts as "coming soon".
+    chunks.append(_alerts_config_script() if sport.delivery else "")
     length_literal = json.dumps(
         [
             {
