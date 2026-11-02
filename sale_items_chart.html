@@ -8897,7 +8897,9 @@ function syncTypeSections(expandSpec) {
     const specsBody = document.getElementById("productSpecsBody");
     const brand = document.querySelector('[data-section="brand"]');
     const specGroup = document.getElementById("specGroup");
-    if (part === "all") {
+    // Skate tucks its per-category size filters away on "All". A sport with
+    // sidebar spec filters (BMX, Ski, MTB) keeps them open under Brand.
+    if (part === "all" && typeof SportSpecFilters === "undefined") {
         if (specs && specsBody && context) specsBody.appendChild(context);
         if (specs) specs.hidden = false;
     } else {
