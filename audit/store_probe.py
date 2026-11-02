@@ -299,7 +299,49 @@ def markdown(reports):
     return "\n".join(lines) + "\n"
 
 
+_SIGNALS = {
+    "next.js data": r"__NEXT_DATA__", "json-ld product": r'"@type"\s*:\s*"Product"', "json-ld itemlist": r'"@type"\s*:\s*"ItemList"',
+    "algolia": r"algolia", "searchspring": r"searchspring", "constructor.io": r"constructor\.io|cnstrc",
+    "bloomreach": r"bloomreach|brcdn|br_data", "klevu": r"klevu", "unbxd": r"unbxd", "coveo": r"coveo",
+    "graphql": r"/graphql", "demandware/sfcc": r"demandware|/on/demandware", "shopify": r"cdn\.shopify\.com",
+    "akamai/bot wall": r"akamai|_abck|bm_sz|perimeterx|px-captcha|datadome|cf-chl", "price in html": r"\$\d{2,4}\.\d{2}",
+}
+
+
+def raw(url, fetch=_get):
+    """Research only: is this page allowed and readable, and what serves its products?"""
+    base = urljoin(url, "/")
+    status, text = fetch(urljoin(base, "/robots.txt"), "text/plain")
+    robots = robotparser.RobotFileParser()
+    robots.parse(text.splitlines() if status == 200 else [])
+    allowed = robots.can_fetch(USER_AGENT, url) and robots.can_fetch("*", url)
+    line = f"- {url}: robots {status} {'allows' if allowed else 'DISALLOWS'}"
+    if not allowed:
+        return line
+    time.sleep(DELAY)
+    status, html = fetch(url, "text/html,application/json")
+    found = [name for name, pattern in _SIGNALS.items() if re.search(pattern, html or "", re.I)]
+    hosts = sorted(set(re.findall(r"https://([a-z0-9.-]*(?:api|search|catalog|graphql|algolia|searchspring|cnstrc|bloomreach)[a-z0-9.-]*)", html or "", re.I)))[:8]
+    title = re.search(r"<title[^>]*>(.*?)</title>", html or "", re.I | re.S)
+    return (line + f"; page {status}, {len(html or '')} bytes, title {(title.group(1).strip()[:70] if title else '-')!r}"
+            + f"; signals: {', '.join(found) or 'none'}; hosts: {', '.join(hosts) or 'none'}")
+
+
 def main(argv=None):
+    if argv is None and len(sys.argv) > 1 and any(a.startswith("raw:") for a in sys.argv[1:]):
+        urls = [a[4:] for a in sys.argv[1:] if a.startswith("raw:")]
+        lines = []
+        for url in urls:
+            print(f"Raw {url} ...", file=sys.stderr)
+            lines.append(raw(url))
+            time.sleep(DELAY)
+        text = "\n".join(lines) + "\n"
+        print(text)
+        summary = next((sys.argv[i + 1] for i, a in enumerate(sys.argv) if a == "--summary" and i + 1 < len(sys.argv)), None)
+        if summary:
+            with open(summary, "a", encoding="utf-8") as handle:
+                handle.write("## Raw research\n\n" + text)
+        return 0
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--sport", choices=("bmx", "mtb", "ski", "all"), default="bmx")
     parser.add_argument("--url", action="append", help="probe these URLs instead of the candidate list")
