@@ -1,0 +1,198 @@
+{
+  "runs": [
+    {
+      "date": "2026-11-01",
+      "results": {
+        "Gear West_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Gear West_Boots": {
+          "count": 169,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 169,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Gear West_Helmets": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Gear West_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Gear West_Skis": {
+          "count": 130,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 130,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        }
+      },
+      "scanned_at": "2026-11-01T23:55:01+00:00"
+    },
+    {
+      "date": "2026-11-02",
+      "results": {
+        "Gear West_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 1,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Gear West_Boots": {
+          "count": 169,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 169,
+            "baseline_samples": 1,
+            "median_absolute_deviation": 0,
+            "actual_count": 169,
+            "percentage_change": 0.0,
+            "reason": "insufficient_history"
+          }
+        },
+        "Gear West_Helmets": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 1,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Gear West_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 1,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Gear West_Skis": {
+          "count": 129,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 130,
+            "baseline_samples": 1,
+            "median_absolute_deviation": 0,
+            "actual_count": 129,
+            "percentage_change": -0.8,
+            "reason": "insufficient_history"
+          }
+        }
+      },
+      "scanned_at": "2026-11-02T01:25:49+00:00"
+    }
+  ],
+  "baseline": {
+    "Gear West_Boots": {
+      "date": "2026-11-02",
+      "count": 169
+    },
+    "Gear West_Skis": {
+      "date": "2026-11-02",
+      "count": 129
+    }
+  },
+  "completeness_baseline": {
+    "Gear West_Bindings": [
+      {
+        "date": "2026-11-01",
+        "count": 0
+      },
+      {
+        "date": "2026-11-02",
+        "count": 0
+      }
+    ],
+    "Gear West_Boots": [
+      {
+        "date": "2026-11-01",
+        "count": 169
+      },
+      {
+        "date": "2026-11-02",
+        "count": 169
+      }
+    ],
+    "Gear West_Helmets": [
+      {
+        "date": "2026-11-01",
+        "count": 0
+      },
+      {
+        "date": "2026-11-02",
+        "count": 0
+      }
+    ],
+    "Gear West_Poles": [
+      {
+        "date": "2026-11-01",
+        "count": 0
+      },
+      {
+        "date": "2026-11-02",
+        "count": 0
+      }
+    ],
+    "Gear West_Skis": [
+      {
+        "date": "2026-11-01",
+        "count": 130
+      },
+      {
+        "date": "2026-11-02",
+        "count": 129
+      }
+    ]
+  }
+}
