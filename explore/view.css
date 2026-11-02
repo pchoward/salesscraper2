@@ -1,0 +1,15 @@
+body {background:var(--grey-50);font-size:13px}
+[hidden]{display:none!important}
+.topnav {display:flex;gap:28px;align-items:center;background:var(--nav);color:white;padding:0 12px;min-height:48px}
+.topnav-links{display:flex;gap:12px}.topnav button{background:none;color:white;border:0;min-height:44px}
+.shred-embedded .topnav{display:none}.preview-note{padding:5px 12px;background:#fff4df;color:#75420b;font-size:11px}
+main{padding:8px 12px}h1{font-size:16px;margin:0 0 3px}#coverage{font-size:11px;color:var(--text-secondary);margin:0 0 8px}
+.explore-tools{display:flex;align-items:end;flex-wrap:wrap;gap:6px;padding:8px 0;border-block:1px solid var(--border)}
+.explore-tools label{display:flex;flex-direction:column;font-size:11px;gap:2px}.explore-tools .search{flex:1;min-width:170px}
+input,select,button{font:inherit;min-height:32px;max-width:100%}.explore-tools input,.explore-tools select{border:1px solid var(--border);background:white;padding:4px 6px;border-radius:2px}
+#inventory.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px}
+.inventory-card{background:white;border:1px solid var(--border);padding:12px;min-width:0}.inventory-card h2{font-size:14px;margin:4px 0 6px}.inventory-card p{margin:4px 0;font-size:12px}.inventory-card a{color:var(--text-primary);text-decoration:none}.inventory-card a:hover{text-decoration:underline}
+.offer-price{font-size:18px;font-weight:700;color:var(--green)}.muted{color:var(--text-secondary);font-size:11px}.inventory-card button{margin-top:5px;border:0;background:var(--grey-100);padding:4px 9px}
+#inventory.table{display:block}.table .inventory-card{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;align-items:center;border-bottom:0}.table .inventory-card:last-child{border-bottom:1px solid var(--border)}
+dialog{width:min(480px,calc(100% - 24px));border:1px solid var(--border);border-radius:4px;padding:16px}dialog::backdrop{background:#17202b80}dialog h2{font-size:17px}
+@media(max-width:600px){main{padding:8px}.explore-tools{gap:6px}.explore-tools label{flex:1 1 28%;min-width:0}.explore-tools .search{flex-basis:100%;order:-1}.explore-tools select{width:100%}#inventory.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.inventory-card{padding:9px}.inventory-card h2{font-size:13px}.table .inventory-card{grid-template-columns:1fr 1fr;gap:4px}}
