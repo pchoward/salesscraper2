@@ -3,6 +3,7 @@ from copy import deepcopy
 import json
 from pathlib import Path
 import unittest
+import subprocess
 from unittest.mock import patch
 
 import sports
@@ -63,8 +64,71 @@ class MtbCatalogTests(unittest.TestCase):
         self.assertFalse(sports.MTB.delivery)
         self.assertEqual(sports.BMX.scrapers,'sports.bmx.stores:scrapers')
         self.assertTrue(sports.SKATE.delivery)
-        with patch('stores.shopify.load_sale_products',return_value=None):
+        with patch('sports.mtb.stores.robots_policy',return_value=None):
             self.assertIsNone(stores.scrapers()[0].scrape())
+
+    def test_robots_and_pagination_are_cached_per_store_without_partial_success(self):
+        from urllib import robotparser
+        robots=robotparser.RobotFileParser();robots.parse(['User-agent: *','Allow: /'])
+        shop=deepcopy(stores.WORLDWIDE);shop.cache={}
+        parsers=[stores.MtbShopifyScraper(shop,p) for p in ('Tires','Frames')]
+        with sports.MTB.active(),patch('sports.mtb.stores.robots_policy',return_value=(robots,0)) as policy, \
+             patch('stores.shopify._fetch_json',return_value={'products':self.feed()}) as fetch:
+            self.assertEqual(len(parsers[0].scrape()),1)
+            self.assertEqual(len(parsers[1].scrape()),1)
+            self.assertEqual(fetch.call_count,1);self.assertEqual(policy.call_count,1)
+        shop.cache={}
+        batch=self.feed()*25
+        with sports.MTB.active(),patch('sports.mtb.stores.robots_policy',return_value=(robots,0)), \
+             patch('stores.shopify._fetch_json',side_effect=[{'products':batch},None]),patch('stores.shopify.time.sleep'):
+            self.assertIsNone(parsers[0].scrape())
+            self.assertIsNone(parsers[1].scrape())
+        shop.cache={}
+        robots=robotparser.RobotFileParser();robots.parse(['User-agent: *','Disallow: /'])
+        with patch('sports.mtb.stores.robots_policy',return_value=(robots,0)),patch('stores.shopify._fetch_json') as fetch:
+            self.assertIsNone(parsers[0].scrape());fetch.assert_not_called()
+
+    def test_frontend_facets_use_same_variant_for_all_specs_and_price(self):
+        from sports.mtb.facets import payload
+        with sports.MTB.active():
+            data={s.name+'_'+s.part:s.products_from(self.feed()) for s in stores.scrapers()}
+            config=payload(data)
+        script=r"""
+const assert=require('assert');
+const create=require('./previews/sport-filters.js');
+const config=JSON.parse(process.argv[1]),f=create(config);
+const url='https://www.worldwidecyclery.com/products/fixture-trail-tire';
+f.restore({wheel_size:'29'});
+assert.equal(f.price(url).price,55);assert.equal(f.price(url).compare,90);
+f.restore({wheel_size:'29',tire_width:'2.4'});
+assert.equal(f.allows(url),false); // 29 x 2.4 is sold out, not a fabricated cross-variant match.
+f.restore({wheel_size:'27.5',tire_width:'2.4'});
+assert.equal(f.price(url).price,40);
+const params=new URLSearchParams('q=tire&store=worldwide');f.encode(params,f.capture());
+assert.equal(params.get('mtb_wheel'),'27.5');assert.equal(params.get('q'),'tire');
+f.restore(f.decode(params));assert.equal(f.capture().tire_width,'2.4');
+f.clear();assert.equal(f.price(url),null);assert.equal(f.allows(url),true);
+"""
+        result=subprocess.run(['node','-e',script,json.dumps(config)],cwd=Path(__file__).parent,capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+
+    def test_renderer_has_actual_mtb_controls_and_no_skate_size_controls(self):
+        from bs4 import BeautifulSoup
+        from report import build_report_html
+        with sports.MTB.active():data={s.name+'_'+s.part:s.products_from(self.feed()) for s in stores.scrapers()}
+        html=build_report_html(data,{},generated_at='2026-11-02T00:00:00+00:00',sport=sports.MTB)
+        soup=BeautifulSoup(html,'html.parser')
+        self.assertIsNotNone(soup.select_one('#tech-wheel_size'))
+        self.assertIsNotNone(soup.select_one('#tech-travel_mm'))
+        self.assertIsNotNone(soup.select_one('#tech-frame_size'))
+        self.assertIsNotNone(soup.select_one('#tech-tire_width'))
+        self.assertIsNone(soup.select_one('#sizeFilters'))
+        self.assertEqual(len(soup.select('.deal-card')),12)
+        self.assertNotIn('window.SKATEDEALS_ALERTS = ',html)
+        skate=build_report_html({}, {}, sport=sports.SKATE)
+        bmx=build_report_html({}, {}, sport=sports.BMX)
+        self.assertNotIn('id="technicalCatalog"',skate)
+        self.assertNotIn('id="technicalCatalog"',bmx)
 
 
 if __name__=='__main__':unittest.main()

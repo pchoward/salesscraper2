@@ -636,6 +636,10 @@ function shoeOfferMap(raw) {
 
 // The selected size's price, when the in-stock variants do not all cost the same.
 function selectedShoePrice(row) {
+    if (typeof SportSpecFilters !== "undefined") {
+        const offer = SportSpecFilters.price(row.dataset.url);
+        if (offer) return offer;
+    }
     const selected = state.shoeSizes || [];
     if (!selected.length || (row.dataset.part || "") !== "Sneakers") return null;
     const prices = shoeOfferMap(row.dataset.shoeprices);
@@ -708,6 +712,7 @@ function paintOfferPrices() {
             const symbol = (oldNode.dataset.baseText || "").indexOf("€") >= 0 ? "€" : "$";
             oldNode.textContent = symbol + offer.compare.toFixed(2);
         });
+        if (typeof SportSpecFilters !== "undefined") SportSpecFilters.paintCompare(node, offer);
         node.querySelectorAll(".discount").forEach(discountNode => {
             if (!discountNode.dataset.baseText) discountNode.dataset.baseText = discountNode.textContent;
             if (!discountNode.dataset.baseTitle) discountNode.dataset.baseTitle = discountNode.title || "";
@@ -1365,6 +1370,7 @@ function typedOr(over, typed, key, fallback) {
 }
 
 function rowMatchesNow(row, overrides) {
+    if (typeof SportSpecFilters !== "undefined" && !SportSpecFilters.allows(row.dataset.url)) return false;
     const over = overrides || {};
     const store = over.store != null ? over.store : state.store;
     const part = over.part != null ? over.part : state.part;
@@ -2897,6 +2903,7 @@ function toggleStats() {
 }
 
 function clearFilters() {
+    if (typeof SportSpecFilters !== "undefined") SportSpecFilters.clear();
     cardShown = cardPageSize();
     state = {
         store: "all",
@@ -3169,6 +3176,7 @@ function decodeQuery(query) {
         protSizes: []
     };
     const text = String(query || "").replace(/^\?/, "");
+    if (typeof SportSpecFilters !== "undefined") stateOut.technical = SportSpecFilters.decode(new URLSearchParams(text));
     if (!text) return stateOut;
     const params = new URLSearchParams(text);
     params.forEach((value, key) => {
@@ -3292,6 +3300,7 @@ function encodeState(snapshot) {
     if (protTypes.length) add("prottype", protTypes.join(","));
     const protSizes = orderSpecValues("protSizes", snapshot.protSizes || []);
     if (protSizes.length) add("protsize", protSizes.join(","));
+    if (typeof SportSpecFilters !== "undefined") SportSpecFilters.encode(params, snapshot.technical);
     return params.toString();
 }
 
@@ -3299,6 +3308,7 @@ function captureState() {
     readControls();
     const sort = document.getElementById("sortSelect");
     return {
+        ...(typeof SportSpecFilters !== "undefined" ? { technical: SportSpecFilters.capture() } : {}),
         q: (document.getElementById("searchInput") || {}).value || "",
         store: state.store,
         part: state.part,
@@ -3355,6 +3365,7 @@ function setSelect(id, value) {
 }
 
 function writeControls(snapshot) {
+    if (typeof SportSpecFilters !== "undefined") SportSpecFilters.restore(snapshot.technical || {});
     const search = document.getElementById("searchInput");
     if (search) search.value = snapshot.q || "";
     setSelect("storeSelect", snapshot.store || "all");

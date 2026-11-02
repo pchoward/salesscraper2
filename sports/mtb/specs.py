@@ -25,6 +25,7 @@ def extract(product,variant,part):
     body=text(product.get('body_html',''))
     specs={}
     warnings=[]
+    travel_allowed=part in ('Bikes','Frames') or (part=='Forks & Shocks' and re.search(r'\bforks?\b',name+' '+str(product.get('product_type','')),re.I))
     def add(key,values):
         values={str(v) for v in values if v is not None}
         if values:specs.setdefault(key,set()).update(values)
@@ -41,7 +42,7 @@ def extract(product,variant,part):
             if (number(m[1]) in WHEELS and not re.search(r'(?:frame size|top tube|seat tube|width)\s*[:=]?\s*$',name[:m.start()],re.I)):
                 add('wheel_size',[number(m[1])])
     for m in re.finditer(r'\b(?:suspension\s+)?travel\s*[:=]\s*'+NUMBER+r'\s*mm\b',name+'; '+body,re.I):
-        if 50<=float(m[1])<=250:add('travel_mm',[number(m[1])])
+        if travel_allowed and 50<=float(m[1])<=250:add('travel_mm',[number(m[1])])
     if part=='Forks & Shocks' and re.search(r'\bforks?\b',name,re.I):
         for m in re.finditer(r'(?<![\d.])'+NUMBER+r'\s*mm\b',name,re.I):
             if 50<=float(m[1])<=250 and not re.search(r'\boffset\s*[:=]?\s*$',name[:m.start()],re.I) and not re.match(r'\s*offset\b',name[m.end():],re.I):add('travel_mm',[number(m[1])])
@@ -63,13 +64,13 @@ def extract(product,variant,part):
         if (('wheel' in label and 'width' not in label) or label=='diameter' or (label=='size' and part in ('Wheels','Tires'))):
             m=re.fullmatch(NUMBER+r'\s*(?:'+INCH+r')?',value,re.I)
             if m and number(m[1]) in WHEELS:key='wheel_size';values=[number(m[1])]
-        elif 'travel' in label:
+        elif 'travel' in label and travel_allowed:
             m=re.fullmatch(NUMBER+r'\s*(?:mm)?',value,re.I)
             if m and 50<=float(m[1])<=250:key='travel_mm';values=[number(m[1])]
         elif ('frame size' in label or label=='size') and part in ('Bikes','Frames'):
             sizes={'extra small':'XS','x small':'XS','small':'S','medium':'M','large':'L','extra large':'XL','x large':'XL','xx large':'XXL'}
             val=sizes.get(value.lower(),value.upper())
-            if val in ('XS','S','M','L','XL','XXL'):key='frame_size';values=[val]
+            if val in ('XS','S','M','L','XL','XXL') or re.fullmatch(r'S[1-6]',val):key='frame_size';values=[val]
         elif ('width' in label or label=='size') and part=='Tires':
             m=re.fullmatch(NUMBER+r'\s*(?:'+INCH+r')?',value,re.I)
             if m and 1.5<=float(m[1])<=5:key='tire_width';values=[number(m[1])]

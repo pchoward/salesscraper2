@@ -2421,6 +2421,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + prot_type_section
         + "</div>"
     )
+    if sport.id == "mtb":
+        from sports.mtb.facets import sidebar
+        context_specs = sidebar(data, _section)
     sidebar_html = (
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
@@ -2828,6 +2831,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"<script>{_read_asset('search/vendor/minisearch.js')}\n{_read_asset('search/search.js')}\n"
         f"SkateSearch.configure({_search_aliases(sport.aliases_file())});</script>"
     )
+    if sport.id == "mtb":
+        from sports.mtb.facets import script
+        chunks.append(script(data))
     chunks.append(
         "<script>"
         + (

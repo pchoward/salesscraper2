@@ -1,5 +1,9 @@
 """First MTB stores from Claude's #137 collection probe; one shared feed/store."""
 import logging
+import time
+from urllib import robotparser
+from urllib.error import HTTPError
+from urllib.request import Request,urlopen
 import sports
 from sports import brands
 from stores import shopify
@@ -31,7 +35,52 @@ FANATIK=shopify.ShopifyStore('Fanatik','Fanatik','https://www.fanatikbike.com',
 STORES=(WORLDWIDE,FANATIK)
 
 
+def robots_policy(store):
+    """Fail closed on unreadable policy; the same UA as the shared JSON fetch."""
+    try:
+        request=Request(store.base+'/robots.txt',headers={'User-Agent':shopify._USER_AGENT})
+        with urlopen(request,timeout=20) as response:
+            raw=response.read(256_001)
+            if len(raw)>256_000:return None
+            body=raw.decode('utf-8','replace')
+            if 'user-agent:' not in body.lower():return None
+    except HTTPError as exc:
+        if exc.code!=404:return None
+        body=''
+    except Exception as exc:
+        logger.warning('%s: robots policy unavailable (%s)',store.store,type(exc).__name__)
+        return None
+    parser=robotparser.RobotFileParser()
+    parser.parse(body.splitlines())
+    delay=max(shopify.PAGE_DELAY,parser.crawl_delay(shopify._USER_AGENT) or 0)
+    rate=parser.request_rate(shopify._USER_AGENT)
+    if rate and rate.requests:delay=max(delay,rate.seconds/rate.requests)
+    return parser,delay
+
+
 class MtbShopifyScraper(shopify.ShopifyScraper):
+    def scrape(self):
+        if 'mtb_products' not in self.shop.cache:
+            policy=robots_policy(self.shop)
+            products=None
+            if policy is not None:
+                robots,delay=policy
+                last=[time.monotonic()]
+                def fetch(url):
+                    if not robots.can_fetch(shopify._USER_AGENT,url):
+                        logger.warning('%s: robots disallows collection feed',self.shop.store)
+                        return None
+                    remaining=delay-(time.monotonic()-last[0])
+                    if remaining>0:time.sleep(remaining)
+                    result=shopify._fetch_json(url)
+                    last[0]=time.monotonic()
+                    return result
+                products=shopify.load_sale_products(self.shop,fetch=fetch)
+                if products is not None:shopify.log_feed_summary(self.shop,products)
+            self.shop.cache['mtb_products']=products
+        products=self.shop.cache['mtb_products']
+        return None if products is None else self.products_from(products)
+
     def _item(self,product,name,url,variants):
         item=super()._item(product,name,url,variants)
         if item is None:return None
