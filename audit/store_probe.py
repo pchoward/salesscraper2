@@ -320,6 +320,16 @@ def raw(url, fetch=_get):
         return line
     time.sleep(DELAY)
     status, html = fetch(url, "text/html,application/json")
+    if "products.json" in url and status == 200:
+        try:
+            products = json.loads(html).get("products") or []
+        except ValueError:
+            products = []
+        summary = shopify_sale(products)
+        return (line + f"; {summary['products']} products, {summary['marked_down']} marked down; types: "
+                + ", ".join(f"{k} ({v})" for k, v in summary["product_types"][:15])
+                + "; options: " + ", ".join(f"{k} ({v})" for k, v in summary["variant_options"][:6])
+                + "; tags: " + ", ".join(f"{k} ({v})" for k, v in summary["tags"][:12]))
     found = [name for name, pattern in _SIGNALS.items() if re.search(pattern, html or "", re.I)]
     hosts = sorted(set(re.findall(r"https://([a-z0-9.-]*(?:api|search|catalog|graphql|algolia|searchspring|cnstrc|bloomreach)[a-z0-9.-]*)", html or "", re.I)))[:8]
     title = re.search(r"<title[^>]*>(.*?)</title>", html or "", re.I | re.S)
