@@ -122,7 +122,23 @@ BIKES_ONLINE=shopify.ShopifyStore('Bikes Online','Bikes Online','https://www.bik
     collection='mountain-bikes-sale',more_collections=('mountain-gear-sale','sale'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='bikes online',
     title_part=bikes_online_title,type_part=bikes_online_part,track_exclusions=True)
-STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE)
+# Colorado Cyclist (issue #165): the same platform and tags as Cambria. Its
+# sale bikes and frames are largely Cambria's listings at Cambria's prices, so
+# only helmets, tires and wheels are read. Road, kids' helmets and helmet
+# parts (visors, liners) stay out.
+COLORADO_HELMETS=('mtb helmets','full face helmets','dirt jump helmets')
+def colorado_part(product_type):
+    kind=' '.join(str(product_type or '').lower().split())
+    if 'helmet' in kind:return 'Protection' if kind in COLORADO_HELMETS else None
+    part=cambria_part(product_type)
+    return part if part in ('Tires','Wheels') else None
+
+COLORADO=shopify.ShopifyStore('Colorado Cyclist','Colorado Cyclist','https://www.coloradocyclist.com',
+    collection='sale-helmets',more_collections=('sale-tires','sale-wheels'),
+    types={},brand_of=brands.for_sport(sports.MTB),own_vendor='colorado cyclist',
+    title_part=title_part,type_part=colorado_part,raw_type_part=True,track_exclusions=True)
+COLORADO.extra_specs=cambria_specs
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO)
 
 
 def robots_policy(store):

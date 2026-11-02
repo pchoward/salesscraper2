@@ -38,6 +38,9 @@ def filter_reason(name,part,url='',price_new=None,price_old=None,description='',
     # is not a road part by itself; the name still decides.
     kind=str(product_type)
     if re.search(r'\b(?:mtb|mountain)\b',kind,re.I):kind=''
-    if re.search(_NOT_MTB,' '+str(name)+' '+kind+' ',re.I):
+    text=' '+str(name)+' '+kind+' '
+    # Dirt jump riders wear BMX lids and pads ("Bell Local BMX Helmet").
+    if part=='Protection':text=re.sub(r'\bbmx\b',' ',text,flags=re.I)
+    if re.search(_NOT_MTB,text,re.I):
         return 'explicit non-MTB equipment'
     return None
