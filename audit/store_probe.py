@@ -342,7 +342,8 @@ def raw(url, fetch=_get):
         if price:
             samples.append("PRICE: " + " ".join(chunk[max(0, price.start() - 200):price.start() + 1600].split())[:1500])
         end = re.search(r'<div[^>]+class="[^"]*product-tile', chunk[50:])
-        samples.append(f"TILES ON PAGE: {len(re.findall(r'class=\"product-tile ', html or ''))}")
+        count = len(re.findall('class="product-tile ', html or ""))
+        samples.append("TILES ON PAGE: " + str(count))
     if samples:
         print("\n".join("    " + sample for sample in samples))
     hosts = sorted(set(re.findall(r"https://([a-z0-9.-]*(?:api|search|catalog|graphql|algolia|searchspring|cnstrc|bloomreach)[a-z0-9.-]*)", html or "", re.I)))[:8]
