@@ -136,6 +136,21 @@ SPEC_WORDS = {
 }
 
 
+def spec_examples(products, limit=3, width=70):
+    """A few short snippets around each spec field's wording, to design exact parsers."""
+    found = {}
+    for product in products:
+        body = " ".join(re.sub(r"<[^>]+>", " ", str(product.get("body_html") or "")).split())
+        for field, pattern in SPEC_WORDS.items():
+            if len(found.get(field, [])) >= limit:
+                continue
+            match = re.search(pattern, body, re.I)
+            if match:
+                start = max(0, match.start() - width // 2)
+                found.setdefault(field, []).append(body[start:match.end() + width // 2])
+    return [(field, " ‖ ".join(snippets)) for field, snippets in found.items()]
+
+
 def spec_coverage(products):
     """How many products' title, description or tags state each spec field."""
     counts = collections.Counter()
@@ -180,6 +195,7 @@ def shopify_sale(products):
         "vendors": vendors.most_common(12),
         "tags": tags.most_common(15),
         "spec_coverage": spec_coverage(products),
+        "spec_examples": spec_examples(products),
     }
 
 
@@ -271,13 +287,14 @@ def markdown(reports):
             lines.append(f"- {note}")
         for key, label in (("sale_collections", "Sale collections"), ("product_types", "Product types"),
                            ("variant_options", "Variant options (filter candidates)"), ("vendors", "Brands"), ("tags", "Tags"),
-                           ("spec_coverage", "Spec fields stated in title/description/tags")):
+                           ("spec_coverage", "Spec fields stated in title/description/tags"),
+                           ("spec_examples", "How descriptions state them")):
             value = shop.get(key)
             if value:
                 if key == "sale_collections":
                     text = ", ".join(f"{c['title']} ({c['products']})" for c in value)
                 else:
-                    text = ", ".join(f"{name} ({count})" for name, count in value)
+                    text = ", ".join(f"{name} ({count})" if key != "spec_examples" else f"\n  - {name}: {count}" for name, count in value)
                 lines.append(f"- **{label}:** {text}")
     return "\n".join(lines) + "\n"
 
