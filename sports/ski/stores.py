@@ -128,7 +128,33 @@ UTAH_SKI = shopify.ShopifyStore(
     tag_part=utah_part,
 )
 
-STORES = (GEAR_WEST, UTAH_SKI)
+# evo (Shopify): its "sale" collections come back empty to automated reads,
+# but its category collections are readable with real compare-at prices
+# (store probe, 2026-11-02: skis 245/250, boots 236/250, bindings 153/250,
+# poles 178/250 marked down). Only marked-down, buyable variants are kept,
+# as for every store.
+EVO_TYPES = {
+    "skis": "Skis",
+    "alpine ski boots": "Boots", "alpine touring ski boots": "Boots", "telemark ski boots": "Boots",
+    "alpine ski bindings": "Bindings", "alpine touring ski bindings": "Bindings", "telemark ski bindings": "Bindings",
+    "ski poles": "Poles",
+    "ski and snowboard helmets": "Helmets",
+}
+
+EVO = shopify.ShopifyStore(
+    "evo",
+    "evo",
+    "https://www.evo.com",
+    collection="skis",
+    more_collections=("ski-boots", "ski-bindings", "ski-poles"),
+    types=EVO_TYPES,
+    brand_of=brands.for_sport(sports.SKI),
+    own_vendor="evo",
+    details=details,
+    track_exclusions=True,
+)
+
+STORES = (GEAR_WEST, UTAH_SKI, EVO)
 
 
 def scrapers():

@@ -75,7 +75,7 @@ def ski_types(product_type, tags, text):
 
 
 _WAIST = (
-    re.compile(r"\b(\d{2,3})\s*mm\s*(?:at\s+the\s+|underfoot|waist)", re.I),
+    re.compile(r"\b(\d{2,3})\s*mm\s*(?:at\s+the\s+|in\s+the\s+waist|underfoot|waist)", re.I),
     re.compile(r"\bwaist(?:[- ]width)?\s*(?:of\s*|:\s*|-\s*|=\s*)?(\d{2,3})\s*(?:mm)?\b", re.I),
     re.compile(r"\bunderfoot\s*[:\-]?\s*(\d{2,3})\s*mm", re.I),
 )
@@ -237,6 +237,45 @@ def walk_mode(text):
     return "Walk mode" if _WALK.search(text) else None
 
 
+# ---- bindings -----------------------------------------------------------------
+
+_STATED_DIN = re.compile(r"\bdin(?:\s*range|\s*setting)?\s*[:=\-]?\s*(\d{1,2}(?:\.\d)?)\s*(?:-|–|to)\s*(\d{1,2}(?:\.\d)?)\b", re.I)
+_MODEL_DIN = re.compile(r"(?<![\d.])(\d{1,2})(?![\d.])")
+
+
+def din(title, text):
+    """(max DIN, how): a stated range's top ("DIN: 4-13"), else the model
+    number in a binding's name ("Look Pivot 15", "Strive 12"), by convention."""
+    stated = {float(high) for _, high in _STATED_DIN.findall(text) if 3 <= float(high) <= 20}
+    if len(stated) == 1:
+        return stated.pop(), "stated"
+    numbers = [int(value) for value in _MODEL_DIN.findall(re.sub(r"\b20\d\d\b", " ", title or ""))]
+    numbers = [value for value in numbers if 3 <= value <= 20]
+    if len(numbers) == 1:
+        return float(numbers[0]), "model"
+    return None, None
+
+
+def din_range(value):
+    if value <= 10:
+        return "Up to 10"
+    if value <= 13:
+        return "11–13"
+    return "14 and up"
+
+
+_BRAKE = re.compile(r"\b(\d{2,3})\s*mm\s+brake(?:\s*width)?\b|\bbrake(?:\s*width)?\s*[:=\-]\s*(\d{2,3})\s*mm", re.I)
+
+
+def brake_widths(text):
+    found = set()
+    for first, second in _BRAKE.findall(text):
+        value = int(first or second)
+        if 70 <= value <= 140:
+            found.add(value)
+    return sorted(found)
+
+
 # ---- per listing -------------------------------------------------------------
 
 def fields(part, title, product_type, tags, text):
@@ -264,7 +303,14 @@ def fields(part, title, product_type, tags, text):
         value, how = flex(title, text)
         if value:
             put("flex", flex_range(value))
-        put("sole", soles(text))
+        put("sole", soles(title + " " + text))
         put("walk", walk_mode(text))
+    elif part == "Bindings":
+        put("ski_type", ski_types(product_type, tags, text))
+        value, how = din(title, text)
+        if value:
+            put("din", din_range(value))
+        put("brake", [f"{mm} mm" for mm in brake_widths(text)])
+        put("sole", soles(title + " " + text))
     put("ability", ability(text))
     return found
