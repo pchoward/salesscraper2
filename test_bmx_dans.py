@@ -85,6 +85,9 @@ class DescriptionSpecTests(unittest.TestCase):
         self.assertEqual(dans.description_fields('Available in 20.5", 20.75" and 21" top tube', "Frames & Forks"), {},
                          "a description listing every size states no single top tube")
         self.assertEqual(dans.description_fields("Our model 10 fork", "Frames & Forks"), {})
+        self.assertEqual(dans.description_fields('A race frame for 20" wheels with a long top tube', "Frames & Forks"), {},
+                         "a wheel size in the top-tube sentence is not a top tube")
+        self.assertEqual(dans.description_fields('Mini frame. Top tube: 18"', "Frames & Forks"), {"top_tube": ['18"']})
         self.assertEqual(dans.description_fields("Crank Length: 165mm", "Steering"), {}, "only where it applies")
         self.assertEqual(dans.description_fields("Fits 14mm or 3/8 axle hubs: 14mm axle and 3/8\" axle", "Wheel Parts"), {},
                          "two axle sizes: ambiguous")

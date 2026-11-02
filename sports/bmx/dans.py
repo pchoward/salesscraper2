@@ -132,9 +132,15 @@ def _top_tube_text(text):
     listing several sizes ("20.5\", 20.75\" and 21\" top tube") gives none."""
     found = set()
     for sentence in (part for part in _SENTENCE_BREAK.split(text) if _MENTIONS_TT.search(part)):
+        labelled = {value for pattern in _TT_TEXT for value in pattern.findall(sentence)}
         for value in _INCHES.findall(sentence):
-            if 18 <= float(value) <= 22.5:
-                found.add(value)
+            if not 18 <= float(value) <= 22.5:
+                continue
+            # A whole wheel size ("20\" wheels") in the same sentence is not a
+            # top tube unless it is the labelled one ("Top tube: 20\"").
+            if float(value) in (18, 20, 22) and value not in labelled:
+                continue
+            found.add(value)
     return found
 _AXLE = (("14mm", re.compile(r"\b14\s*mm\s*(?:female\s*|male\s*|chromoly\s*|cr-?mo\s*)?axle", re.I)),
          ("10mm", re.compile(r"\b10\s*mm\s*(?:female\s*|male\s*|chromoly\s*|cr-?mo\s*)?axle", re.I)),
