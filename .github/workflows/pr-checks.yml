@@ -120,6 +120,23 @@ jobs:
         continue-on-error: true
         run: node ci/smoke.mjs preview/site preview/shots
 
+      - name: Four-sport UI regression checks (saved catalogs and labeled fixtures)
+        id: sport_audit
+        continue-on-error: true
+        run: |
+          python ci/build_preview.py "${{ runner.temp }}/four-sport-site" --label "Four-sport UI QA"
+          python ci/build_audit_fixtures.py "${{ runner.temp }}/four-sport-site"
+          node ci/audit_sports.cjs "${{ runner.temp }}/four-sport-site" "${{ runner.temp }}/four-sport-results"
+
+      - name: Upload four-sport audit evidence (artifact only)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: four-sport-ui-audit
+          path: ${{ runner.temp }}/four-sport-results/
+          retention-days: 7
+          if-no-files-found: warn
+
       - name: Record the PR this preview belongs to
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
@@ -136,7 +153,7 @@ jobs:
           if-no-files-found: error
 
       - name: Fail when a browser check failed
-        if: steps.smoke.outcome != 'success'
+        if: steps.smoke.outcome != 'success' || steps.sport_audit.outcome != 'success'
         run: |
           echo "::error::A browser check failed; see the step above and the PR comment."
           exit 1

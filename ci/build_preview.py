@@ -41,7 +41,7 @@ def mark_preview(html, label=""):
     """The production page made into a labeled, inert preview."""
     note = "PREVIEW" + (f" · {label}" if label else "") + " · not the live site; alerts and analytics are off"
     banner = (
-        f'<div id="{BANNER_ID}" role="note" style="position:sticky;top:0;z-index:1000;background:#b45309;color:#fff;'
+        f'<div id="{BANNER_ID}" role="note" style="position:static;background:#b45309;color:#fff;'
         'font:600 13px/1.4 system-ui,sans-serif;padding:6px 12px;text-align:center">'
         f"{_html_escape(note)}</div>"
     )

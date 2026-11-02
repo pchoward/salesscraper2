@@ -634,10 +634,22 @@ function shoeOfferMap(raw) {
     return map;
 }
 
+// Price and discount bounds must apply to the same selected technical offer.
+function technicalPriceConstraints(overrides) {
+    const over = overrides || {};
+    const typed = typedFilters(Object.prototype.hasOwnProperty.call(over, "search") ? over.search : state.search);
+    return {
+        priceMin: typedOr(over, typed, "priceMin", state.priceMin),
+        priceMax: typedOr(over, typed, "priceMax", state.priceMax),
+        discountMin: typedOr(over, typed, "discountMin", state.discountMin),
+        discountMax: Object.prototype.hasOwnProperty.call(over, "discountMax") ? over.discountMax : state.discountMax
+    };
+}
+
 // The selected size's price, when the in-stock variants do not all cost the same.
-function selectedShoePrice(row) {
+function selectedShoePrice(row, technical, ranges) {
     if (typeof SportSpecFilters !== "undefined") {
-        const offer = SportSpecFilters.price(row.dataset.url);
+        const offer = SportSpecFilters.price(row.dataset.url, technical, ranges || technicalPriceConstraints());
         if (offer) return offer;
     }
     const selected = state.shoeSizes || [];
@@ -655,20 +667,20 @@ function selectedShoePrice(row) {
     return best;
 }
 
-function rowPrice(row) {
-    const offer = selectedShoePrice(row);
+function rowPrice(row, technical, ranges) {
+    const offer = selectedShoePrice(row, technical, ranges);
     if (offer) return offer.price;
-    const raw = row.dataset.price;
+    const raw = technical !== undefined && row.dataset.priceSaved ? row.dataset.basePrice : row.dataset.price;
     if (raw === undefined || raw === "") return null;
     const price = parseFloat(raw);
     return Number.isFinite(price) ? price : null;
 }
 
-function rowDiscount(row) {
-    const offer = selectedShoePrice(row);
+function rowDiscount(row, technical, ranges) {
+    const offer = selectedShoePrice(row, technical, ranges);
     if (!offer) {
         if (row.dataset.discount === "") return null;
-        const parsed = parseFloat(row.dataset.discount);
+        const parsed = parseFloat(technical !== undefined && row.dataset.priceSaved ? row.dataset.baseDiscount : row.dataset.discount);
         return Number.isFinite(parsed) ? parsed : null;
     }
     const compare = Number.isFinite(offer.compare) ? offer.compare : parseFloat(row.dataset.original);
@@ -1373,8 +1385,8 @@ function typedOr(over, typed, key, fallback) {
 }
 
 function rowMatchesNow(row, overrides) {
-    if (typeof SportSpecFilters !== "undefined" && !SportSpecFilters.allows(row.dataset.url, row.dataset.part)) return false;
     const over = overrides || {};
+    if (typeof SportSpecFilters !== "undefined" && !SportSpecFilters.allows(row.dataset.url, row.dataset.part, over.technical, technicalPriceConstraints(over))) return false;
     const store = over.store != null ? over.store : state.store;
     const part = over.part != null ? over.part : state.part;
     const brand = over.brand != null ? over.brand : state.brand;
@@ -1406,7 +1418,7 @@ function rowMatchesNow(row, overrides) {
     if (specKeyActive("wheelbase", viewPart) && chosenWheels.length && !wheelbaseAllowed(row, chosenWheels)) return false;
     const chosenColors = selectedColors(over);
     if (specKeyActive("colors", viewPart) && chosenColors.length && !colorAllowed(row, chosenColors)) return false;
-    const price = rowPrice(row);
+    const price = rowPrice(row, over.technical, technicalPriceConstraints(over));
     const priceMin = typedOr(over, typed, "priceMin", state.priceMin);
     const priceMax = typedOr(over, typed, "priceMax", state.priceMax);
     const discountMin = typedOr(over, typed, "discountMin", state.discountMin);
@@ -1419,7 +1431,7 @@ function rowMatchesNow(row, overrides) {
         if (priceMax != null && !(price <= priceMax)) return false;
     }
     if (!scopedOffers && (discountMin != null || discountMax != null)) {
-        const discount = rowDiscount(row);
+        const discount = rowDiscount(row, over.technical, technicalPriceConstraints(over));
         if (discount == null) return false;
         if (discountMin != null && discount < discountMin) return false;
         if (discountMax != null && discount > discountMax) return false;
@@ -4035,6 +4047,14 @@ function collectFilterActions() {
             add("spec:" + facet.stateKey + ":" + value, specLabels[facet.stateKey](value), () => toggleSpec(facet.stateKey, value), lift);
         });
     });
+    if (typeof SportSpecFilters !== "undefined" && SportSpecFilters.actions) {
+        SportSpecFilters.actions().forEach(action => {
+            add(action.key, action.label, () => {
+                SportSpecFilters.restore(action.remaining);
+                applyFilters();
+            }, { technical: action.remaining });
+        });
+    }
     if (state.highlights) add("highlights", "Highlights", () => toggleDealType("highlights"), { highlights: false });
     if (state.watching) add("watching", "Watching", () => toggleWatching(), { watching: false });
     if (state.cardNew) add("added", "New deals", () => toggleCard("new"), { cardNew: false });
@@ -4113,6 +4133,7 @@ function goneRows() {
 
 function goneRowMatches(row, over) {
     const lift = over || {};
+    if (typeof SportSpecFilters !== "undefined" && !SportSpecFilters.allows(row.dataset.url, row.dataset.part, lift.technical, technicalPriceConstraints(lift))) return false;
     const search = Object.prototype.hasOwnProperty.call(lift, "search") ? lift.search : state.search;
     const store = lift.store != null ? lift.store : state.store;
     const part = lift.part != null ? lift.part : state.part;
@@ -5418,6 +5439,9 @@ function appendQuickMore(body, card, item, facts) {
     const priceNote = document.createElement("p");
     priceNote.className = "quick-price-note";
     priceNote.textContent = "List price is the store's claimed original, not a tracked market price. Average and lowest use prices tracked here.";
+    if (typeof selectedShoePrice === "function" && card && selectedShoePrice(card)) {
+        priceNote.textContent += " Current price reflects your selected variant; history is for this listing and may include other variants.";
+    }
     more.appendChild(priceNote);
     const historyText = quickHistoryNote(facts);
     if (historyText) {
@@ -8557,12 +8581,20 @@ function ensureAlertsShell() {
     if (document.body) document.body.appendChild(root);
 }
 
+function sportAlertsSupported() {
+    return typeof SPORT_SETTINGS === "undefined" || SPORT_SETTINGS.alerts !== false;
+}
+
 function mountAlertsNav() {
     if (document.getElementById("navAlerts")) return;
     const nav = document.querySelector ? document.querySelector(".topnav-links") : null;
     if (!nav) return;
     const button = alertsEl("button", "nav-link nav-alerts", "Subscribe");
     button.id = "navAlerts";
+    if (!sportAlertsSupported()) {
+        button.disabled = true;
+        button.title = "Email alerts are not available for this sport yet";
+    }
     button.type = "button";
     button.setAttribute("aria-label", "Subscribe to SkateDeals deal emails");
     button.addEventListener("click", () => openAlerts());
@@ -8705,6 +8737,7 @@ async function openAlerts(options) {
 }
 
 function appendQuickAlert(parent, card) {
+    if (!sportAlertsSupported()) return;
     const button = alertsEl("button", "quick-alert", "Alert me");
     button.type = "button";
     button.setAttribute("aria-label", "Alert me about this deal");
@@ -8726,7 +8759,9 @@ function appendQuickAlert(parent, card) {
 function wireAlerts() {
     if (alertsUi.wired) return;
     alertsUi.wired = true;
+    if (!sportAlertsSupported()) document.documentElement.classList.add("alerts-unavailable");
     mountAlertsNav();
+    if (!sportAlertsSupported()) return;
     ensureAlertsShell();
     if (typeof document !== "undefined" && document.addEventListener) {
         document.addEventListener("keydown", onAlertsKeydown);

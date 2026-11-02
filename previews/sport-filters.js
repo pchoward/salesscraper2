@@ -40,9 +40,17 @@
         }
         function restore(value){selected=clean(value);paint();}
         function applies(field,part){return !(field.categories||[]).length||field.categories.includes(part);}
-        function active(url){const item=(config.items||{})[url];return fields.filter(f=>selected[f.key]&&(!item||applies(f,item.part)));}
-        function options(url){const item=(config.items||{})[url];return item?(item.offers||[]).filter(offer=>
-            offer.available!==false&&active(url).every(f=>((offer.specs||{})[f.key]||[]).some(v=>selected[f.key].includes(v)))):[];}
+        function active(url,picked=selected){const item=(config.items||{})[url];return fields.filter(f=>picked[f.key]&&(!item||applies(f,item.part)));}
+        function inRange(offer,ranges={}){
+            const price=Number(offer.price),compare=Number(offer.compare);
+            const discount=compare>0&&price>0?((compare-price)/compare)*100:null;
+            return (ranges.priceMin==null||price>=ranges.priceMin)&&
+                (ranges.priceMax==null||price<=ranges.priceMax)&&
+                (ranges.discountMin==null||(discount!=null&&discount>=ranges.discountMin))&&
+                (ranges.discountMax==null||(discount!=null&&discount<=ranges.discountMax));
+        }
+        function options(url,picked=selected,ranges){const item=(config.items||{})[url];return item?(item.offers||[]).filter(offer=>
+            offer.available!==false&&inRange(offer,ranges)&&active(url,picked).every(f=>((offer.specs||{})[f.key]||[]).some(v=>picked[f.key].includes(v)))):[];}
         function sync(part){if(doc)fields.forEach(f=>{const node=doc.querySelector('[data-technical-field="'+f.key+'"]');
             if(node){node.hidden=part!=='all'&&!applies(f,part);node.style.display=node.hidden?'none':'';}});}
         return {
@@ -52,14 +60,23 @@
             clear(){restore({});},
             decode(params){const result={};fields.forEach(f=>{const v=params.get(f.param);if(v)result[f.key]=v;});return clean(result);},
             encode(params,value){const result=clean(value);fields.forEach(f=>{if(result[f.key])params.set(f.param,result[f.key].join(','));});},
-            allows(url,part){
-                const applicable=fields.some(f=>selected[f.key]&&applies(f,part===undefined?((config.items||{})[url]||{}).part:part));
-                return !applicable||options(url).length>0;
+            allows(url,part,value,ranges){
+                const picked=value===undefined?selected:clean(value);
+                const applicable=fields.some(f=>picked[f.key]&&applies(f,part===undefined?((config.items||{})[url]||{}).part:part));
+                return !applicable||options(url,picked,ranges).length>0;
             },
+            // Metadata for the existing active-filter/zero-result UI. Facet
+            // labels and values remain owned by each sport's configuration.
+            actions(){return fields.flatMap(f=>(selected[f.key]||[]).map(value=>{
+                const remaining={...selected,[f.key]:selected[f.key].filter(v=>v!==value)};
+                if(!remaining[f.key].length)delete remaining[f.key];
+                return {key:'technical:'+f.key+':'+value,label:f.label+': '+value,remaining};
+            }));},
             sync,
-            price(url){
-                if(!active(url).length)return null;
-                const offers=options(url).filter(o=>Number.isFinite(Number(o.price))&&Number(o.price)>0&&Number(o.compare)>Number(o.price));
+            price(url,value,ranges){
+                const picked=value===undefined?selected:clean(value);
+                if(!active(url,picked).length)return null;
+                const offers=options(url,picked,ranges).filter(o=>Number.isFinite(Number(o.price))&&Number(o.price)>0&&Number(o.compare)>Number(o.price));
                 if(!offers.length)return null;
                 const best=offers.reduce((a,b)=>Number(a.price)<=Number(b.price)?a:b);
                 return {price:Number(best.price),compare:Number(best.compare)};

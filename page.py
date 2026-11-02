@@ -2071,6 +2071,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         for record in records
         if (amount := _price(record["item"].get("price_new"))) is not None
     ]
+    # The listing price may be the cheapest variant. The range control must
+    # still reach more expensive available variants selected by technical facts.
+    sale_prices.extend(
+        amount
+        for record in records
+        for offer in record["item"].get("technical_offers", [])
+        if offer.get("available") is not False
+        and (amount := _price(offer.get("price"))) is not None
+    )
     price_cap = int(math.ceil(max(sale_prices))) if sale_prices else 1
     if price_cap < 1:
         price_cap = 1

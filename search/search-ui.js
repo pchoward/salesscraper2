@@ -16,6 +16,7 @@
     let chips = null;
     let options = [];
     let active = -1;
+    let suggestionQuery = null;
 
     // ---- Recent searches (this browser only; fine without storage) -------
 
@@ -94,6 +95,7 @@
     function render() {
         if (!input || !list) return;
         const text = input.value;
+        suggestionQuery = text;
         let entries;
         if (!text.trim()) {
             entries = recent().map(query => ({ group: "Recent searches", kind: "recent", label: query, value: query }));
@@ -364,6 +366,8 @@
     // page.js calls this after every filter pass.
     window.afterSearchFilters = function () {
         if (!input) return;
+        // Clear/history/other controls can change the query without an input event.
+        if (input.value !== suggestionQuery) close();
         paintChips();
         highlightCards();
         paintRescue();
