@@ -40,6 +40,14 @@ def _option_values(product, variant, names):
     return values
 
 
+def variant_length(product, variant):
+    return lengths(product, [variant])
+
+
+def variant_mondo(product, variant):
+    return boot_sizes(product, [variant])
+
+
 def lengths(product, variants):
     found = set()
     for variant in variants:

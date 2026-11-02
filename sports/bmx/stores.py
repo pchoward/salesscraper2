@@ -15,8 +15,8 @@ stores.preview()"`` shows what a live run would keep without saving anything.
 import re
 
 import sports
-from sports import brands
-from sports.bmx import specs
+from sports import brands, offers
+from sports.bmx import facets, specs
 from stores import shopify
 
 # Shopify product_type (lowercased, punctuation dropped) -> BMX category.
@@ -98,6 +98,11 @@ def details(item, product, kind_key):
     marks = [str(product.get("vendor") or "")] + [str(tag) for tag in product.get("tags") or ()]
     if any("scratch" in mark.casefold() and "dent" in mark.casefold() for mark in marks):
         item["condition"] = "Scratch & Dent"
+    # Per-variant offers for the sidebar spec filters (sports/offers.py).
+    # BMX specs are the listing's own, so every sale variant shares them.
+    # Keys are the sidebar fields in sports/bmx/facets.py.
+    offers.attach(item, offers.technical_offers(shopify.sale_variants(product), shared={
+        field["key"]: [item[field["key"]]] for field in facets.FIELDS if item.get(field["key"])}))
 
 
 ALBES = shopify.ShopifyStore(
