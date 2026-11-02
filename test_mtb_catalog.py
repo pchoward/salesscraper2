@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import unittest
 import subprocess
+import tempfile
+import hashlib
 from unittest.mock import patch
 
 import sports
@@ -120,6 +122,16 @@ class MtbCatalogTests(unittest.TestCase):
             items=stores.MtbShopifyScraper(shop,'Cockpit').scrape()
             self.assertEqual(items[0]['availability'],'Check store')
 
+    def test_unmapped_sale_equipment_is_not_successful_empty_catalog(self):
+        from urllib import robotparser
+        robots=robotparser.RobotFileParser();robots.parse(['User-agent: *','Allow: /'])
+        shop=deepcopy(stores.WORLDWIDE);shop.cache={}
+        feed=[{'title':'Unclassified Model','handle':'unknown','product_type':'Unknown Equipment',
+               'variants':[{'id':1,'price':'10','compare_at_price':'20','available':True}]}]
+        with sports.MTB.active(),patch('sports.mtb.stores.robots_policy',return_value=(robots,0)), \
+             patch('stores.shopify._fetch_json',return_value={'products':feed}):
+            self.assertIsNone(stores.MtbShopifyScraper(shop,'Bikes').scrape())
+
     def test_frontend_facets_use_same_variant_for_all_specs_and_price(self):
         from sports.mtb.facets import payload
         with sports.MTB.active():
@@ -161,6 +173,25 @@ f.clear();assert.equal(f.price(url),null);assert.equal(f.allows(url),true);
         bmx=build_report_html({}, {}, sport=sports.BMX)
         self.assertNotIn('id="technicalCatalog"',skate)
         self.assertNotIn('id="technicalCatalog"',bmx)
+
+    def test_preview_isolation_and_explicit_fixture_label(self):
+        from previews.mtb_catalog import build
+        from previews.shreddeals import SOURCE
+        names=('previous_data.json','price_history.json','scrape_health.json','notification_state.json',
+               'index.html','sale_items_chart.html','history.json')
+        def hashes():
+            return {n:hashlib.sha256((SOURCE/n).read_bytes()).hexdigest() if (SOURCE/n).exists() else None for n in names}
+        before=hashes()
+        with tempfile.TemporaryDirectory() as directory,patch('urllib.request.urlopen',side_effect=AssertionError('no fetching')):
+            output=Path(directory)/'review'
+            home=build(output,fixture=True)
+            manifest=json.loads((output/'review-manifest.json').read_text())
+            self.assertTrue(manifest['synthetic'])
+            self.assertFalse(manifest['delivery'])
+            self.assertEqual(manifest['mtb_listings'],12)
+            self.assertIn('SYNTHETIC FIXTURE', (output/'mtb/sale_items_chart.html').read_text()[-500:])
+            with self.assertRaises(ValueError):build(Path(directory)/'no-real-state')
+        self.assertEqual(before,hashes())
 
 
 if __name__=='__main__':unittest.main()

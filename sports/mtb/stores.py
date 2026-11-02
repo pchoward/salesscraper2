@@ -7,7 +7,7 @@ from urllib.request import Request,urlopen
 import sports
 from sports import brands
 from stores import shopify
-from sports.mtb.rules import PARTS,title_part
+from sports.mtb.rules import PARTS,filter_reason,title_part
 from sports.mtb.specs import extract
 
 logger=logging.getLogger('stores.mtb')
@@ -29,10 +29,10 @@ for part,names in {
 
 WORLDWIDE=shopify.ShopifyStore('Worldwide Cyclery','Worldwide Cyclery','https://www.worldwidecyclery.com',
     collection='deals',types=TYPES,brand_of=brands.for_sport(sports.MTB),own_vendor='worldwide',
-    title_part=title_part,unknown_by_title=True)
+    title_part=title_part,type_part=title_part,unknown_by_title=True)
 FANATIK=shopify.ShopifyStore('Fanatik','Fanatik','https://www.fanatikbike.com',
     collection='fanatik-outlet',types=TYPES,brand_of=brands.for_sport(sports.MTB),own_vendor='fanatik',
-    title_part=title_part,unknown_by_title=True)
+    title_part=title_part,type_part=title_part,unknown_by_title=True)
 STORES=(WORLDWIDE,FANATIK)
 
 
@@ -84,6 +84,13 @@ class MtbShopifyScraper(shopify.ShopifyScraper):
                     return result
                 products=shopify.load_sale_products(self.shop,fetch=fetch)
                 if products is not None:
+                    relevant=[p for p in products if isinstance(p,dict) and shopify.sale_variants(p)
+                              and not filter_reason(
+                                  shopify.title_with_brand(p),PARTS[0],product_type=p.get('product_type',''))]
+                    if relevant and not any(shopify.part_for(self.shop,p.get('product_type'),p.get('title','')) for p in relevant):
+                        logger.error('%s: sale products exist but none map to MTB equipment; not reporting empty success',self.shop.store)
+                        self.shop.cache['mtb_products']=None
+                        return None
                     for part in PARTS:
                         shopify.enrich_stock(self.shop,products,part,fetch=fetch)
                     shopify.log_feed_summary(self.shop,products)

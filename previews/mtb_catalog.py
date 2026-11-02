@@ -40,7 +40,9 @@ def build(output,data_root=None,fixture=False):
         with patch.object(page,'ALERTS_UI_CONFIG',{}):build_site(output,label,data_root=root)
     # Preview-only banner cannot cover the existing mobile filter drawer.
     for target in output.rglob('sale_items_chart.html'):
-        html=target.read_text().replace('</head>','<style>#previewBanner{position:static!important;z-index:auto!important}</style></head>',1)
+        html=target.read_text()
+        if fixture:html=html.replace('</body>','<aside role="note" style="position:fixed;bottom:0;right:0;z-index:2000;background:#92400e;color:white;padding:4px;font:12px system-ui">SYNTHETIC FIXTURE — NOT LIVE INVENTORY</aside></body>',1)
+        html=html.replace('</head>','<style>#previewBanner{position:static!important;z-index:auto!important}</style></head>',1)
         html=html.replace('</head>','<meta http-equiv="Content-Security-Policy" content="connect-src &apos;self&apos;; form-action &apos;none&apos;; frame-src &apos;none&apos;"></head>',1)
         target.write_text(html)
     (output/'review-manifest.json').write_text(json.dumps({'synthetic':fixture,'scraping':False,'delivery':False,
