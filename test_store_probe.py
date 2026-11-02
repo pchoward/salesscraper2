@@ -63,6 +63,7 @@ class ProbeTests(unittest.TestCase):
         self.assertEqual(shop["product_types"][0], ("Frames", 2))
         self.assertIn(("Top Tube", 2), shop["variant_options"])
         self.assertIn(("Drive Side", 1), shop["variant_options"])
+        self.assertIn(("material", 1), shop["spec_coverage"], "'chromoly' tag counts as a stated material")
         self.assertEqual(len(site.asked), 4, "a handful of requests per store")
         self.assertTrue(all(wait >= store_probe.DELAY for wait in waits), "spaced out")
         table = store_probe.markdown([report])
