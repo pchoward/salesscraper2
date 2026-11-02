@@ -8,6 +8,9 @@ FIELDS = (
     {"key": "top_tube", "label": "Toptube Length", "param": "bmx_tt", "categories": ("Bikes", "Frames & Forks")},
     {"key": "drive_side", "label": "Drive Side", "param": "bmx_drive",
      "categories": ("Bikes", "Wheels", "Wheel Parts", "Drivetrain")},
+    {"key": "bar_rise", "label": "Bar Rise", "param": "bmx_rise", "categories": ("Steering",)},
+    {"key": "crank_length", "label": "Crank Length", "param": "bmx_crank", "categories": ("Drivetrain",)},
+    {"key": "axle", "label": "Axle", "param": "bmx_axle", "categories": ("Bikes", "Frames & Forks", "Wheels", "Wheel Parts")},
     {"key": "material", "label": "Material", "param": "bmx_material", "categories": ()},
     {"key": "color", "label": "Color", "param": "bmx_color", "categories": ()},
 )

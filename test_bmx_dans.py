@@ -69,3 +69,26 @@ class DansFieldTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DescriptionSpecTests(unittest.TestCase):
+    """Bar rise, crank length, axle and top tube from labelled description text."""
+
+    def test_labelled_values(self):
+        self.assertEqual(dans.description_fields('S&M Race XLT Bars. Rise: 9.25" Width: 29.5"', "Steering"), {"bar_rise": ['9.25"']})
+        self.assertEqual(dans.description_fields("Profile Elite cranks in 175mm length", "Drivetrain"), {"crank_length": ["175 mm"]})
+        self.assertEqual(dans.description_fields("Crank Length: 165mm", "Drivetrain"), {"crank_length": ["165 mm"]})
+        self.assertEqual(dans.description_fields("Freecoaster hub with 14mm female axle", "Wheel Parts"), {"axle": ["14mm"]})
+        self.assertEqual(dans.description_fields('Top Tube: 20.75" Chainstay: 12.9"', "Frames & Forks"), {"top_tube": ['20.75"']})
+
+    def test_lists_and_unlabelled_numbers_are_not_specs(self):
+        self.assertEqual(dans.description_fields('Available in 20.5", 20.75" and 21" top tube', "Frames & Forks"), {},
+                         "a description listing every size states no single top tube")
+        self.assertEqual(dans.description_fields("Our model 10 fork", "Frames & Forks"), {})
+        self.assertEqual(dans.description_fields("Crank Length: 165mm", "Steering"), {}, "only where it applies")
+        self.assertEqual(dans.description_fields("Fits 14mm or 3/8 axle hubs: 14mm axle and 3/8\" axle", "Wheel Parts"), {},
+                         "two axle sizes: ambiguous")
+
+    def test_the_sidebar_offers_them(self):
+        keys = {field["key"]: field["label"] for field in facets.FIELDS}
+        self.assertEqual((keys["bar_rise"], keys["crank_length"], keys["axle"]), ("Bar Rise", "Crank Length", "Axle"))

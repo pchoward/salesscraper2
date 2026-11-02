@@ -110,3 +110,68 @@ def variant_fields(product, variant, part):
             if color:
                 fields.setdefault("color", set()).add(color)
     return {key: sorted(values) for key, values in fields.items()}
+
+
+# ---- from the product description (Codex's bmx-catalog-quality approach) ----
+
+_NUM = r"(\d{1,2}(?:\.\d{1,3})?)"
+_IN = r"\s*(?:\"|”|″|''|in(?:ch(?:es)?)?\b)"
+_TT_TEXT = (re.compile(r"\b(?:top\s*tube|tt)(?:\s*length)?\s*[:=\-]?\s*" + _NUM + _IN, re.I),
+            re.compile(_NUM + _IN + r"\s*(?:top\s*tube|tt)\b", re.I))
+_RISE = (re.compile(r"\brise\s*[:=\-]?\s*" + _NUM + _IN, re.I),
+         re.compile(_NUM + _IN + r"\s*rise\b", re.I))
+_CRANK = (re.compile(r"\b(?:crank\s*)?(?:arm\s*)?length\s*[:=\-]?\s*(1[5-8]\d(?:\.\d)?)\s*mm\b", re.I),
+          re.compile(r"\b(1[5-8]\d(?:\.\d)?)\s*mm\s*(?:crank|arm|length|long)", re.I))
+_SENTENCE_BREAK = re.compile(r"(?<!\d)[.;!?](?!\d)|\n")
+_MENTIONS_TT = re.compile(r"\b(?:top\s*tube|tt)\b", re.I)
+_INCHES = re.compile(_NUM + _IN)
+
+
+def _top_tube_text(text):
+    """One top tube stated in the sentence(s) that mention it; a sentence
+    listing several sizes ("20.5\", 20.75\" and 21\" top tube") gives none."""
+    found = set()
+    for sentence in (part for part in _SENTENCE_BREAK.split(text) if _MENTIONS_TT.search(part)):
+        for value in _INCHES.findall(sentence):
+            if 18 <= float(value) <= 22.5:
+                found.add(value)
+    return found
+_AXLE = (("14mm", re.compile(r"\b14\s*mm\s*(?:female\s*|male\s*|chromoly\s*|cr-?mo\s*)?axle", re.I)),
+         ("10mm", re.compile(r"\b10\s*mm\s*(?:female\s*|male\s*|chromoly\s*|cr-?mo\s*)?axle", re.I)),
+         ("3/8\"", re.compile(r"\b3/8\s*(?:\"|”|in(?:ch)?)?\s*(?:female\s*|male\s*)?axle", re.I)))
+
+
+def _numbers(patterns, text, low, high):
+    found = set()
+    for pattern in patterns:
+        for value in pattern.findall(text):
+            number = float(value)
+            if low <= number <= high:
+                found.add(value.rstrip("0").rstrip(".") if "." in value else value)
+    return found
+
+
+def description_fields(text, part):
+    """Labelled specs from a description; a field with two different
+    values is left out (a description listing every size is not one spec)."""
+    text = " ".join(str(text or "").split())
+    fields = {}
+    if part in ("Bikes", "Frames & Forks"):
+        values = _top_tube_text(text)
+        if len(values) == 1:
+            fields["top_tube"] = [values.pop() + '"']
+    checks = (
+        ("bar_rise", _RISE, 4, 15, ("Steering",), '"'),
+        ("crank_length", _CRANK, 150, 185, ("Drivetrain",), " mm"),
+    )
+    for key, patterns, low, high, parts, unit in checks:
+        if part not in parts:
+            continue
+        values = _numbers(patterns, text, low, high)
+        if len(values) == 1:
+            fields[key] = [values.pop() + unit]
+    if part in ("Wheels", "Wheel Parts", "Frames & Forks", "Bikes"):
+        axles = [label for label, pattern in _AXLE if pattern.search(text)]
+        if len(axles) == 1:
+            fields["axle"] = axles
+    return fields
