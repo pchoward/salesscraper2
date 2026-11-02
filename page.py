@@ -2297,13 +2297,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 _quick_chip("store", store, store, store_counts[store], order=len(store_buttons))
             )
     extra_stores = [store for store in sorted(store_counts) if store not in primary_stores]
-    store_more = [
-        _quick_chip(
-            "store", store, store, store_counts[store],
-            order=len(store_buttons) + index, home="more",
+    # Every sport's retailers get the same inline treatment as Skate's.
+    # fitNavPills can move entries to More only if the row actually overflows.
+    for store in extra_stores:
+        store_buttons.append(
+            _quick_chip("store", store, store, store_counts[store], order=len(store_buttons))
         )
-        for index, store in enumerate(extra_stores)
-    ]
+    store_more = []
     store_row = (
         '<div class="nav-cluster quick-filters" id="storeFilters">'
         '<span class="quick-label">Stores</span>'

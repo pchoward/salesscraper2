@@ -13,6 +13,7 @@ files are unchanged.
 | --- | --- | --- |
 | Header, sports, active states and responsive hierarchy | Pass | Pass |
 | Category/store/brand/search/sort combinations | Pass | Pass |
+| Retailers expanded like Skate by default | Needs improvement: new sport stores began inside More | Pass after follow-up |
 | Technical specs combined with price/discount bounds | Fail: only cheapest matching offer considered | Pass: one offer must satisfy the whole combination |
 | Technical selection visibility and removal | Fail: selections missing from summary/count/recovery | Pass |
 | Sport navigation and filter URL isolation | Fail: technical URL keys survived sport switches | Pass |
@@ -54,8 +55,8 @@ inventory counts.
    rather than ignoring the selected specification.
 3. **P2 — hidden state leaks across sports.** Select a Ski technical value and
    switch to BMX. Previously `ski_length`/other sport-owned keys remained in the
-   URL and could unexpectedly reactivate on a later visit. The shell now derives
-   all technical parameter names from the existing sport definitions. A fresh
+   URL and could unexpectedly reactivate on a later visit. The shell now recognizes each configured sport's technical URL namespace
+   without embedding a changing field list in the generated homepage. A fresh
    sport switch clears catalog state; Back/Forward restores the prior exact
    technical selection. Unrelated attribution parameters remain intact.
 4. **P2 — stale search suggestions intercept product clicks.** Focus search,
@@ -145,3 +146,31 @@ Validation evidence:
 - GitHub API access still fails at the proxy's CONNECT step with 403. Git push
   works; use the branch Compare link for PR creation/review. Nothing is merged
   or deployed automatically.
+
+
+## PR #162 follow-up: CI and default store expansion
+
+The CI failure was `ProductionNavigationTests.test_checked_in_public_assets_are_current_and_pages_can_serve_them`.
+The first implementation serialized every sport's technical field names in the
+homepage. Claude's concurrent Ski-field additions changed the generated output
+in GitHub's merge test, making the checked-in homepage stale. Cleanup now uses
+configured sport namespaces (`ski_`, `bmx_`, `mtb_`) alongside the existing shared
+query keys. New fields require no shell regeneration. A regression explicitly
+adds a future Ski field and checks that the public homepage remains identical.
+
+The owner's follow-up also requested each sport's retailers inline by default,
+as in SkateDeals. Newly encountered retailers now start in the normal store row
+rather than being assigned to More solely because they are not on Skate's
+historical primary-store list. Existing ordering and dynamic data are preserved;
+normal overflow handling remains available, and phones retain horizontal scrolling.
+Eligible store choices were verified inline across all four sports at all five
+widths. Intentionally hidden zero-count chips can still exist without a select option.
+
+The focused regression run passed **57 tests under CI's Python 3.11 / Node 22**,
+including the failing public-assets test and the new merge-resilience/store-row
+cases. Additional store-visibility browser checks passed all 20 sport/viewport
+combinations. Updated screenshots below use the saved branch catalogs; they do
+not invent the retailers Claude is adding on main.
+
+The follow-up full responsive browser run also passed **166/166 checks**, with
+the updated inline-store screenshots and final results committed here.

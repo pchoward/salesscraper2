@@ -37,13 +37,6 @@ def skate_query_keys():
     for node in ast.walk(tree):
         if isinstance(node, ast.Compare) and isinstance(node.left, ast.Name) and node.left.id == 'key':
             keys.update(value.value for value in node.comparators if isinstance(value, ast.Constant) and isinstance(value.value, str))
-    # Sport-owned facet parameters are catalog state too. Without them, a
-    # switch to another live sport leaks the previous sport's hidden filters.
-    import importlib
-    import sports
-    for sport in sports.SPORTS.values():
-        if sport.facets:
-            keys.update(field['param'] for field in importlib.import_module(sport.facets).FIELDS)
     return sorted(keys)
 
 

@@ -103,21 +103,20 @@ assert.equal(f.allows('boundary','Forks',undefined,{discountMin:30,discountMax:3
         self.assertEqual(result.returncode,0,result.stderr)
 
     def test_shell_clears_all_sport_owned_technical_query_parameters(self):
-        import importlib
         from previews.shreddeals import skate_query_keys
         keys = skate_query_keys()
-        for sport in sports.SPORTS.values():
-            if sport.facets:
-                for field in importlib.import_module(sport.facets).FIELDS:
-                    self.assertIn(field['param'], keys)
         script = r"""
 const assert=require('node:assert/strict'),H=require('./previews/navigation.js');
 const config={defaultSport:'skate',sports:[{id:'skate',catalog:'sale_items_chart.html'},
  {id:'ski',catalog:'ski/sale_items_chart.html'},{id:'bmx',catalog:'bmx/sale_items_chart.html'}],
  skateQueryKeys:JSON.parse(process.argv[1])};
-const next=H.navigate('https://example.org/?sport=ski&ski_length=170&ski_gender=Women&q=armada&utm_source=kept',config,'bmx');
+const next=H.navigate('https://example.org/?sport=ski&ski_length=170&ski_gender=Women&ski_future_facet=new&q=armada&utm_source=kept',config,'bmx');
 assert.equal(next.searchParams.has('ski_length'),false);
 assert.equal(next.searchParams.has('ski_gender'),false);
+assert.equal(next.searchParams.has('ski_future_facet'),false);
+const restored=H.mergeSkateURL('https://example.org/?sport=ski&ski_future_facet=old&utm_source=kept','https://example.org/ski/sale_items_chart.html',config,'ski');
+assert.equal(restored.searchParams.has('ski_future_facet'),false);
+assert.equal(restored.searchParams.get('utm_source'),'kept');
 assert.equal(next.searchParams.has('q'),false);
 assert.equal(next.searchParams.get('utm_source'),'kept');
 """
@@ -156,3 +155,38 @@ assert.equal(goneRowMatches({dataset:{part:'Skis',url:'https://example.test/gone
 """
         result=subprocess.run(['node','-e',script,json.dumps(function)],capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stderr)
+
+
+class ExpandedStoreRowTests(unittest.TestCase):
+    def test_each_sport_starts_with_its_dynamic_stores_inline(self):
+        from bs4 import BeautifulSoup
+        from report import build_report_html
+        for sport, part, name in (
+            (sports.BMX, 'Frames & Forks', 'Cult Audit Frame'),
+            (sports.SKI, 'Skis', 'Armada Audit Skis'),
+            (sports.MTB, 'Forks & Shocks', 'RockShox Audit Fork'),
+        ):
+            data = {}
+            for store in ('New Retailer A', 'New Retailer B'):
+                data[store+'_'+part] = [{'name':name, 'part':part, 'store':store,
+                    'url':'https://example.test/'+store.replace(' ','-'),
+                    'price_new':'100', 'price_old':'200'}]
+            with self.subTest(sport=sport.id), sport.active():
+                soup = BeautifulSoup(build_report_html(data, {}, {}, sport=sport), 'html.parser')
+                inline = soup.select('#storeFilters .quick-row > button[data-store]')
+                self.assertEqual({n['data-store'] for n in inline}, {'all','New Retailer A','New Retailer B'})
+                self.assertTrue(all(n['data-home']=='row' for n in inline))
+                self.assertEqual(soup.select('#moreStoresList button'), [])
+
+    def test_adding_a_sport_field_does_not_stale_the_public_shell(self):
+        import tempfile
+        from unittest.mock import patch
+        import sports.ski.facets
+        from previews.publish import publish
+        from previews.shreddeals import SOURCE
+        fields = sports.ski.facets.FIELDS + ({'key':'new_engine_fact', 'label':'New fact',
+            'param':'ski_future_field', 'categories':()},)
+        with tempfile.TemporaryDirectory() as directory, patch.object(sports.ski.facets,'FIELDS',fields):
+            root = Path(directory)
+            publish(root)
+            self.assertEqual((root/'index.html').read_bytes(), (SOURCE/'index.html').read_bytes())

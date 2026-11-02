@@ -15,13 +15,23 @@
         const sport = config.sports.find(item => item.id === parsed.searchParams.get("sport")) || config.sports.find(item => item.id === config.defaultSport);
         return { sport };
     }
+    function clearCatalogQuery(params, config) {
+        const keys = new Set(config.skateQueryKeys || []);
+        // Technical URL parameters use each configured sport's namespace.
+        // Do not serialize field names into index.html: another sport can add
+        // a facet without making the checked-in shell stale after a merge.
+        const prefixes = config.sports.map(sport => sport.id + "_");
+        Array.from(params.keys()).forEach(key => {
+            if (keys.has(key) || prefixes.some(prefix => key.startsWith(prefix))) params.delete(key);
+        });
+    }
     function navigate(url, config, sportId) {
         const next = new URL(url);
         const sport = config.sports.find(item => item.id === sportId) || config.sports.find(item => item.id === config.defaultSport);
         // Filters belong to one catalog: moving to another sport's catalog
         // starts fresh. A "coming soon" sport keeps them for the way back.
         const current = state(url, config).sport;
-        if (current.id !== sport.id && hasCatalog(current) && hasCatalog(sport)) (config.skateQueryKeys || []).forEach(key => next.searchParams.delete(key));
+        if (current.id !== sport.id && hasCatalog(current) && hasCatalog(sport)) clearCatalogQuery(next.searchParams, config);
         next.searchParams.set("sport", sport.id);
         next.searchParams.delete("discipline");
         return next;
@@ -45,7 +55,7 @@
         if (child.origin !== parent.origin || child.pathname !== expected.pathname) throw new Error("Unexpected child URL");
         // Remove only production-owned keys. Unknown legacy/analytics parameters
         // survive even when the embedded app's normalizer does not know them.
-        (config.skateQueryKeys || []).forEach(key => parent.searchParams.delete(key));
+        clearCatalogQuery(parent.searchParams, config);
         const incomingKeys = new Set(child.searchParams.keys());
         incomingKeys.forEach(key => { if (!NAV_KEYS.includes(key)) parent.searchParams.delete(key); });
         child.searchParams.forEach((value, key) => { if (!NAV_KEYS.includes(key)) parent.searchParams.append(key, value); });

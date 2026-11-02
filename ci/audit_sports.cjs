@@ -46,6 +46,12 @@ async function main(){
      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
      assert(await frame.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
      assert.equal(await frame.locator('.topnav').isVisible(),false);
+     const stores=await frame.evaluate(()=>({
+      options:[...document.querySelectorAll('#storeSelect option')].map(n=>n.value).sort(),
+      inline:[...document.querySelectorAll('#storeFilters .quick-row > button[data-store]')].map(n=>n.dataset.store).sort()
+     }));
+     // An ineligible zero-count store can retain a hidden chip but have no select option.
+     assert.deepEqual(stores.inline.filter(store=>stores.options.includes(store)),stores.options,'eligible stores must be inline by default on every sport');
      const buttons=await page.locator('.catalog-sections button').evaluateAll(ns=>ns.map(n=>{const r=n.getBoundingClientRect();return {x:r.left,right:r.right,y:r.top,bottom:r.bottom}}));
      assert(buttons.every(r=>r.x>=0&&r.right<=width+1));
      assert(buttons.every((r,i)=>buttons.slice(i+1).every(b=>r.right<=b.x+1||r.bottom<=b.y+1||b.right<=r.x+1||b.bottom<=r.y+1)));
