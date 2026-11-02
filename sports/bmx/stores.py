@@ -118,6 +118,7 @@ ALBES = shopify.ShopifyStore(
     own_vendor="albe",  # the shop's own name as a vendor is not a brand
     title_part=title_part,
     details=details,
+    track_exclusions=True,
 )
 
 CIRCUIT = shopify.ShopifyStore(
@@ -130,6 +131,7 @@ CIRCUIT = shopify.ShopifyStore(
     own_vendor="circuit",
     title_part=title_part,
     details=details,
+    track_exclusions=True,
     unknown_by_title=True,
 )
 
@@ -146,6 +148,7 @@ POWERS = shopify.ShopifyStore(
     own_vendor="powers",
     title_part=title_part,
     details=details,
+    track_exclusions=True,
     unknown_by_title=True,
 )
 
@@ -162,6 +165,7 @@ SOURCE_US = shopify.ShopifyStore(
     own_vendor="source",
     title_part=title_part,
     details=details,
+    track_exclusions=True,
     unknown_by_title=True,
 )
 

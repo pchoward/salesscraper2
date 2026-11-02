@@ -139,20 +139,24 @@ def _run(args, sport):
     failed_keys = prepared["failed_keys"]
     suspect_keys = prepared["suspect_keys"]
 
+    scope_exclusions = {url: reason for store_scraper in scrapers
+                        if f"{store_scraper.name}_{store_scraper.part}" not in failed_keys
+                        for url, reason in getattr(store_scraper, "catalog_scope_exclusions", {}).items()}
     price_history = load_price_history()
     carried = set()
     stock_before = {url: entry["stock"] for url, entry in (price_history or {}).items()
                     if isinstance(entry, dict) and entry.get("stock") == "out_of_stock"}
     if isinstance(price_history, dict):
         try:
-            carried = record_misses(prev_data, curr_data, price_history, failed_keys, today=scanned_at[:10])
+            carried = record_misses(prev_data, curr_data, price_history, failed_keys,
+                                    today=scanned_at[:10], scope_exclusions=scope_exclusions)
             logging.info("Carried %s listings after a single miss", len(carried))
             confirm_stock(price_history, curr_data, failed_keys)
         except Exception as exc:
             logging.error("Miss tracking failed (continuing): %s", exc)
             carried = set()
 
-    changes = compare_catalogs(prev_data, curr_data, failed_keys)
+    changes = compare_catalogs(prev_data, curr_data, failed_keys, excluded_urls=scope_exclusions)
     digest = build_digest(changes, failed_keys)
 
     if changes:
