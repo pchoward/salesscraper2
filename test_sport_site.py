@@ -192,3 +192,14 @@ class LiveSportsWorkflowTests(unittest.TestCase):
                 (root / sport.page_path).write_text("<html></html>")
             self.assertEqual(sports.published_catalogs(root), {"bmx": "bmx/sale_items_chart.html"},
                              "Ski has a page but no listings yet: still 'coming soon'")
+
+
+class PushRetryTests(unittest.TestCase):
+    """A merge landing mid-run made a rebuild's single push fail (2026-11-02)."""
+
+    def test_publishing_workflows_retry_the_push(self):
+        for name in ("rebuild-page.yml", "scrape-sports.yml", "scrape.yml"):
+            text = (ROOT / ".github/workflows" / name).read_text(encoding="utf-8")
+            self.assertIn("for attempt in 1 2 3 4; do", text, name)
+            self.assertIn("git pull --rebase origin main && git push && break", text, name)
+            self.assertNotIn("--force", text, name)
