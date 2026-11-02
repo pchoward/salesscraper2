@@ -331,6 +331,14 @@ def raw(url, fetch=_get):
                 + "; options: " + ", ".join(f"{k} ({v})" for k, v in summary["variant_options"][:6])
                 + "; tags: " + ", ".join(f"{k} ({v})" for k, v in summary["tags"][:12]))
     found = [name for name, pattern in _SIGNALS.items() if re.search(pattern, html or "", re.I)]
+    samples = []
+    for block in re.findall(r'<script[^>]+application/ld\+json[^>]*>(.*?)</script>', html or "", re.S | re.I)[:2]:
+        samples.append("JSON-LD: " + " ".join(block.split())[:900])
+    tile = re.search(r'<div[^>]+class="[^"]*product-tile[^"]*"', html or "", re.I)
+    if tile:
+        samples.append("TILE: " + " ".join(html[tile.start():tile.start() + 2600].split())[:2000])
+    if samples:
+        print("\n".join("    " + sample for sample in samples))
     hosts = sorted(set(re.findall(r"https://([a-z0-9.-]*(?:api|search|catalog|graphql|algolia|searchspring|cnstrc|bloomreach)[a-z0-9.-]*)", html or "", re.I)))[:8]
     title = re.search(r"<title[^>]*>(.*?)</title>", html or "", re.I | re.S)
     return (line + f"; page {status}, {len(html or '')} bytes, title {(title.group(1).strip()[:70] if title else '-')!r}"
