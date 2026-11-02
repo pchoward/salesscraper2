@@ -33,7 +33,39 @@ WORLDWIDE=shopify.ShopifyStore('Worldwide Cyclery','Worldwide Cyclery','https://
 FANATIK=shopify.ShopifyStore('Fanatik','Fanatik','https://www.fanatikbike.com',
     collection='fanatik-outlet',types=TYPES,brand_of=brands.for_sport(sports.MTB),own_vendor='fanatik',
     title_part=title_part,type_part=title_part,unknown_by_title=True)
-STORES=(WORLDWIDE,FANATIK)
+
+
+def mikes_part(product_type):
+    """Mike's Bikes files products by path ("BIKES AND FRAMES/BIKES - MOUNTAIN/
+    CROSS COUNTRY/BLUR", "COMPONENTS/PEDALS/MTB FLAT"). Mountain bikes and
+    e-MTBs are Bikes; components and protection use the shared title rules on
+    the path's later segments; road, gravel, active/city e-bikes, bar tape and
+    accessories are out (issue #165)."""
+    segments=[part.strip().lower() for part in str(product_type or '').split('/') if part.strip()]
+    if not segments:return None
+    text=' / '.join(segments)
+    if any(word in text for word in ('road','gravel','bar tape','cyclocross')):return None
+    top,rest=segments[0],' '.join(segments[1:])
+    if top=='bikes and frames':
+        if 'mountain' not in rest:return None
+        return 'Frames' if rest.startswith('frame') else 'Bikes'
+    if top in ('components','protection'):
+        return title_part(rest)
+    if top=='apparel':
+        return 'Protection' if title_part(rest)=='Protection' else None
+    return None
+
+
+# Mike's Bikes (issue #165; store probe 2026-11-02): Shopify. Its clearance and
+# sale collection (~669) covers bikes and parts; the mountain and Santa Cruz
+# sale collections catch bikes listed only there. A product in several
+# collections is kept once (Shopify product id).
+MIKES=shopify.ShopifyStore("Mike's Bikes","Mike's Bikes",'https://mikesbikes.com',
+    collection='clearance-and-sale',
+    more_collections=('clearance-and-sale-bikes','mountain-bikes','santa-cruz-bikes-on-sale'),
+    types={},brand_of=brands.for_sport(sports.MTB),own_vendor="mike's bikes",
+    title_part=None,type_part=mikes_part,raw_type_part=True,track_exclusions=True)
+STORES=(WORLDWIDE,FANATIK,MIKES)
 
 
 def robots_policy(store):
