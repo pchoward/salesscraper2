@@ -78,8 +78,10 @@ def extract(product,variant,part):
             m=re.fullmatch(NUMBER+r'\s*(?:mm)?',value,re.I)
             if m and 50<=float(m[1])<=250:key='travel_mm';values=[number(m[1])]
         elif ('frame size' in label or label=='size') and part in ('Bikes','Frames'):
-            sizes={'extra small':'XS','x small':'XS','small':'S','medium':'M','large':'L','extra large':'XL','x large':'XL','xx large':'XXL'}
-            val=sizes.get(value.lower(),value.upper())
+            sizes={'extra small':'XS','x small':'XS','small':'S','medium':'M','large':'L','extra large':'XL','x large':'XL','xx large':'XXL',
+                   'extra extra large':'XXL','2x large':'XXL','xxl':'XXL','xl':'XL','xs':'XS'}
+            # Stores spell sizes out ("X-Large", "XX-Large"; Mike's Bikes, #165).
+            val=sizes.get(' '.join(value.lower().replace('-',' ').split()),value.upper())
             if val in ('XS','S','M','L','XL','XXL') or re.fullmatch(r'S[1-6]',val):key='frame_size';values=[val]
         elif ('width' in label or label=='size') and part=='Tires':
             m=re.fullmatch(NUMBER+r'\s*(?:'+INCH+r')?',value,re.I)
