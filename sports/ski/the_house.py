@@ -47,14 +47,27 @@ def _fetch(url, timeout=30):
 
 
 def part_for(data):
-    """Skis / Boots / Bindings / Poles / Helmets from the tile's category, or None."""
-    text = " ".join(str(data.get(key) or "") for key in ("category", "subcategory", "dimension46")).casefold()
-    if "snowboard" in text or "ski" not in text and "helmet" not in text:
+    """Skis / Boots / Bindings / Poles / Helmets, or None.
+
+    The House files all ski hardgoods under one subcategory, "ski-equipment"
+    (ski clothing is "ski-clothing"), and helmets under "helmets"; the name
+    says which part (live tally, 2026-11-02). "Skis w/ Bindings" is a ski.
+    """
+    subcategory = str(data.get("subcategory") or "").casefold()
+    name = " " + re.sub(r"[^a-z0-9]+", " ", str(data.get("name") or "").casefold()) + " "
+    if subcategory == "helmets":
+        return "Helmets"
+    if subcategory != "ski-equipment":
         return None
-    for words, part in (("boot", "Boots"), ("binding", "Bindings"), ("pole", "Poles"), ("helmet", "Helmets"),
-                        ("skis", "Skis"), ("ski", "Skis")):
-        if words in text:
-            return part
+    if re.search(r" boots? ", name):
+        return "Boots"
+    if re.search(r" poles? ", name):
+        return "Poles"
+    # "... Skis", "... Skis w/ Bindings" or a name ending in "Ski"; not "Ski Wax Kit".
+    if " skis " in name or name.rstrip().endswith(" ski"):
+        return "Skis"
+    if re.search(r" bindings? ", name):
+        return "Bindings"
     return None
 
 
