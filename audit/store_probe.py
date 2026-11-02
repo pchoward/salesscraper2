@@ -193,7 +193,7 @@ def shopify_sale(products):
         "product_types": types.most_common(20),
         "variant_options": options.most_common(12),
         "vendors": vendors.most_common(12),
-        "tags": tags.most_common(15),
+        "tags": tags.most_common(80),
         "spec_coverage": spec_coverage(products),
         "spec_examples": spec_examples(products),
     }
@@ -249,7 +249,7 @@ def probe(store, fetch=_get, sleep=time.sleep):
         except ValueError:
             collections_ = []
         sale = [c for c in collections_ if SALE_WORDS.search((c.get("title") or "") + " " + (c.get("handle") or "").replace("-", " "))]
-        shop["sale_collections"] = [{"handle": c.get("handle"), "title": c.get("title"), "products": c.get("products_count")} for c in sale][:12]
+        shop["sale_collections"] = [{"handle": c.get("handle"), "title": c.get("title"), "products": c.get("products_count")} for c in sale][:60]
         best = max(sale, key=lambda c: c.get("products_count") or 0, default=None)
         if wanted:
             best = next((c for c in collections_ if c.get("handle") == wanted), {"handle": wanted, "products_count": None})
