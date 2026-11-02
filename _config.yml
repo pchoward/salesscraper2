@@ -1,6 +1,8 @@
 # Only the deal page and its assets belong on GitHub Pages.
 # Keep new internal roots excluded; regression tests enforce this boundary.
 exclude:
+  - "test_mtb_catalog.py"
+  - "test_sport_facets.py"
   - "product_specs.py"
   - "test_product_specs.py"
   - "test_shreddeals_publish.py"

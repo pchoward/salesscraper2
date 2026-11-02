@@ -50,6 +50,8 @@ class Sport:
     delivery: bool = False
     # Product-page lookups that only Skate's stores support (deck wheelbase).
     product_details: bool = False
+    # Optional module exposing FIELDS for the shared technical-offer sidebar.
+    facets: str = ""
 
     @property
     def is_default(self):
@@ -126,6 +128,7 @@ SKATE = Sport(
 # Categories follow Dan's Comp and Circuit BMX (docs/multi-sport-plan.md).
 BMX = Sport(
     id="bmx",
+    facets="sports.bmx.facets",
     label="BMX",
     brand="ShredDeals BMX",
     parts=("Bikes", "Frames & Forks", "Steering", "Drivetrain", "Wheels", "Wheel Parts", "Tires", "Seating", "Braking"),
@@ -140,6 +143,7 @@ BMX = Sport(
 # Gear West's alpine closeouts first (store probe, 2026-11-01).
 SKI = Sport(
     id="ski",
+    facets="sports.ski.facets",
     label="Ski",
     brand="ShredDeals Ski",
     # Issue #134: alpine skiing first; snowboards are a separate, later decision.
@@ -156,6 +160,7 @@ SKI = Sport(
 # so a run builds an empty page and the homepage keeps "coming soon".
 MTB = Sport(
     id="mtb",
+    facets="sports.mtb.facets",
     label="MTB",
     brand="ShredDeals MTB",
     parts=("Bikes", "Frames", "Forks & Shocks", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals",
@@ -164,8 +169,8 @@ MTB = Sport(
     data_dir="catalogs/mtb",
     page_path="mtb/sale_items_chart.html",
     aliases="sports/mtb/aliases.json",
-    scrapers="sports:no_stores",
-    rules="sports.rules:mtb",
+    scrapers="sports.mtb.stores:scrapers",
+    rules="sports.mtb.rules:filter_reason",
 )
 
 SPORTS = {sport.id: sport for sport in (SKATE, SKI, MTB, BMX)}

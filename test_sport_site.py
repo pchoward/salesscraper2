@@ -66,11 +66,11 @@ class PreviewSiteTests(unittest.TestCase):
             files = build_preview.build(out, "test", data_root=data_root)
             self.assertEqual(files, ["_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
 
-    def test_published_homepage_still_has_only_skate(self):
+    def test_published_homepage_without_catalogs_has_only_skate(self):
         from previews.publish import publish
 
         with tempfile.TemporaryDirectory() as out:
-            home = publish(out).read_text(encoding="utf-8")
+            home = publish(out, catalogs={}).read_text(encoding="utf-8")
             self.assertIn('"catalog": "sale_items_chart.html"', home)
             self.assertNotIn("bmx/sale_items_chart.html", home)
 
