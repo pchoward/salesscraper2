@@ -86,5 +86,10 @@ jobs:
             if [ -e "$sport/sale_items_chart.html" ]; then git add -A -- "$sport"; fi
           done
           git diff --quiet --cached || git commit -m "Update BMX, Ski, MTB deals $(date +'%Y-%m-%d %H:%M')"
-          git pull --rebase origin main
-          git push
+          # main can move while this runs (a merge or another publish):
+          # re-sync and retry instead of failing the run.
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main && git push && break
+            if [ "$attempt" = 4 ]; then exit 1; fi
+            sleep $((attempt * 5))
+          done
