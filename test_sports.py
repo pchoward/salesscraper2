@@ -311,7 +311,7 @@ class BmxSpecTests(unittest.TestCase):
         hub = items[0]
         self.assertEqual([(offer["variant_id"], offer["price"]) for offer in hub["technical_offers"]], [(1, 150.0), (2, 155.0)],
                          "only marked-down variants")
-        self.assertEqual(hub["technical_specs"], {"kind": ["Hubs"], "wheel_size": ["20"]})
+        self.assertEqual(hub["technical_specs"], {"kind": ["Hubs"], "wheel_size": ["20"], "hub_type": ["Freecoaster"]})
         self.assertTrue({"kind", "wheel_size"} <= {field["key"] for field in facets.FIELDS})
 
     def test_catalog_entries_carry_the_fields_for_the_filters(self):
