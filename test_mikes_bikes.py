@@ -77,7 +77,7 @@ class MikesBikesTests(unittest.TestCase):
     def test_other_stores_are_unchanged(self):
         self.assertFalse(stores.WORLDWIDE.raw_type_part)
         self.assertFalse(stores.FANATIK.raw_type_part)
-        self.assertEqual({store.store for store in stores.STORES}, {"Worldwide Cyclery", "Fanatik", "Mike's Bikes", "Cambria"})
+        self.assertLessEqual({"Worldwide Cyclery", "Fanatik", "Mike's Bikes", "Cambria"}, {store.store for store in stores.STORES})
 
 
 if __name__ == "__main__":

@@ -103,7 +103,24 @@ CAMBRIA=shopify.ShopifyStore('Cambria','Cambria Bike','https://cambriabike.com',
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='cambria',
     title_part=title_part,type_part=cambria_part,raw_type_part=True,track_exclusions=True)
 CAMBRIA.extra_specs=cambria_specs
-STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA)
+# Bikes Online (issue #165): coarse types ("Bikes", "Parts", "Clothing &
+# Protective Gear", "Accessories"), so the part comes from the title. Kids'
+# bikes and accessories (lights, racks, lube, computers) stay out.
+def bikes_online_part(kind):
+    return shopify.BY_TITLE if kind in ('bikes','parts','clothing protective gear') else None
+
+def bikes_online_title(title):
+    value=' '.join(str(title or '').split())
+    if re.search(r'\b(?:kids?|tools?|lube|bleed\s+kit)\b',value,re.I):return None
+    part=title_part(value)
+    if part is None and re.search(r'\bbar\b',value,re.I):return 'Cockpit'
+    return part
+
+BIKES_ONLINE=shopify.ShopifyStore('Bikes Online','Bikes Online','https://www.bikesonline.com',
+    collection='mountain-bikes-sale',more_collections=('mountain-gear-sale','sale'),
+    types={},brand_of=brands.for_sport(sports.MTB),own_vendor='bikes online',
+    title_part=bikes_online_title,type_part=bikes_online_part,track_exclusions=True)
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE)
 
 
 def robots_policy(store):
