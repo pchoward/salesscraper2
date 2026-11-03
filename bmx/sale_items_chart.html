@@ -6973,7 +6973,7 @@ SkateSearch.configure({"_about":"BMX search vocabulary, in search/aliases.json's
         function options(url,picked=selected,ranges){const item=(config.items||{})[url];return item?(item.offers||[]).filter(offer=>
             offer.available!==false&&inRange(offer,ranges)&&active(url,picked).every(f=>((offer.specs||{})[f.key]||[]).some(v=>picked[f.key].includes(v)))):[];}
         function sync(part){if(doc)fields.forEach(f=>{const node=doc.querySelector('[data-technical-field="'+f.key+'"]');
-            if(node){node.hidden=part!=='all'&&!applies(f,part);node.style.display=node.hidden?'none':'';}});}
+            if(node){node.hidden=part!=='all'&&!applies(f,part);node.style.display=node.hidden||(node.dataset||{}).techEmpty?'none':'';}});}
         return {
             // One value reads back as a string (older links and callers), several as a list.
             capture(){const out={};Object.keys(selected).forEach(k=>{out[k]=selected[k].length===1?selected[k][0]:[...selected[k]];});return out;},
@@ -6994,6 +6994,29 @@ SkateSearch.configure({"_about":"BMX search vocabulary, in search/aliases.json's
                 return {key:'technical:'+f.key+':'+value,label:f.label+': '+value,remaining};
             }));},
             sync,
+            // Live chip counts, like Skate's: each field counts the listings
+            // that pass every other filter (brand, store, type, price and the
+            // other spec picks), by the values of their matching offers.
+            // ``matches(row, technical)`` is the page's own filter test.
+            counts(rows,matches,ranges){
+                const out={},cache={};
+                fields.forEach(f=>{
+                    const rest={...selected};delete rest[f.key];
+                    const cacheKey=JSON.stringify(rest);
+                    const passing=cache[cacheKey]||(cache[cacheKey]=rows.filter(row=>matches(row,rest)));
+                    const tally={'':0};
+                    passing.forEach(row=>{
+                        if(!applies(f,row.part))return;
+                        const values=new Set();
+                        options(row.url,rest,ranges).forEach(offer=>((offer.specs||{})[f.key]||[]).forEach(v=>values.add(String(v))));
+                        if(!values.size)return;
+                        tally['']+=1;
+                        values.forEach(v=>{tally[v]=(tally[v]||0)+1;});
+                    });
+                    out[f.key]=tally;
+                });
+                return out;
+            },
             price(url,value,ranges){
                 const picked=value===undefined?selected:clean(value);
                 if(!active(url,picked).length)return null;
@@ -8062,10 +8085,45 @@ function paintFacetCounts() {
         });
         syncFacetEmpty(document.getElementById(facet.section), ".spec-chip", "No options match");
     });
+    paintTechnicalCounts();
     syncFacetEmpty(document.getElementById("sizeFilters"), ".width-chip", "No sizes match");
     syncFacetEmpty(document.getElementById("brandList"), ".facet-value", "No matching brands");
     syncFacetEmpty(document.getElementById("dealTypes"), ".kind-btn", "No deal types match");
     paintKeepaCounts();
+}
+
+// BMX/Ski/MTB spec chips narrow with the other filters, as Skate's do.
+function paintTechnicalCounts() {
+    if (typeof SportSpecFilters === "undefined" || !SportSpecFilters.counts) return;
+    const rows = dealRows().map(node => ({ node, url: node.dataset.url, part: node.dataset.part || "" }));
+    const tally = SportSpecFilters.counts(rows, (row, technical) => rowMatches(row.node, { technical }), technicalPriceConstraints());
+    document.querySelectorAll(".tech-chip").forEach(node => {
+        const counts = tally[node.dataset.techKey];
+        if (!counts) return;
+        const value = node.dataset.value || "";
+        const count = counts[value] || 0;
+        const slot = node.querySelector(".spec-count");
+        if (slot) slot.textContent = String(count);
+        node.setAttribute("data-count", String(count));
+        markFacetOption(node, count, value === "" || node.getAttribute("aria-pressed") === "true");
+    });
+    // A field with nothing left under the other filters folds away (Ski boot
+    // fields once only Blizzard skis remain); SportSpecFilters.sync still
+    // decides which fields a type shows.
+    document.querySelectorAll("[data-technical-field]").forEach(section => {
+        const key = section.dataset.technicalField;
+        const counts = tally[key];
+        if (!counts) return;
+        const picked = !!section.querySelector(".tech-chip[aria-pressed='true']:not([data-value=''])");
+        const empty = !counts[""] && !picked;
+        if (empty) {
+            section.dataset.techEmpty = "1";
+            section.style.display = "none";
+        } else if (section.dataset.techEmpty) {
+            delete section.dataset.techEmpty;
+            section.style.display = section.hidden ? "none" : "";
+        }
+    });
 }
 
 function syncLengthChips() {
