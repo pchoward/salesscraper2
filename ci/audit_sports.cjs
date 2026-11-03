@@ -23,7 +23,16 @@ async function technical(frame,key,value,mobile) {
     const section=frame.locator(`[data-technical-field="${key}"] .section-toggle`);
     if(await section.getAttribute('aria-expanded')!=='true') await section.click();
 
-    await frame.locator(`.tech-chip[data-tech-key="${key}"]`).filter({has:frame.locator('span.spec-label',{hasText:new RegExp('^'+value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'$')})}).click();
+    const chip=frame.locator(`.tech-chip[data-tech-key="${key}"]`).filter({has:frame.locator('span.spec-label',{hasText:new RegExp('^'+value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'$')})});
+    // Live counts fold empty filter sections a moment after the previous
+    // change, so the chip can move while the click is in flight and the click
+    // lands where it was. Confirm the chip is selected; click again if not.
+    for(let attempt=0;attempt<3;attempt++){
+     await chip.click();
+     const end=Date.now()+1500;
+     while(Date.now()<end&&await chip.getAttribute('aria-pressed')!=='true')await frame.waitForTimeout(50);
+     if(await chip.getAttribute('aria-pressed')==='true')break;
+    }
     await frame.waitForTimeout(180);
     if(mobile) await frame.locator('#filtersClose').click();
 }
