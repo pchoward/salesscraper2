@@ -220,6 +220,9 @@ function jsonResponse(status, body, headers) {
     assert.equal(alertsResolveConfig({ config: { apiBase: "http://127.0.0.1:8787" }, host: "localhost" }).mode, "live");
     assert.equal(alertsResolveConfig({ config: { apiBase: "https://user:pass@alerts.example.com" }, host: "localhost" }).mode, "soon");
     assert.equal(alertsResolveConfig({ config: {}, host: "sale.github.io" }).mode, "soon");
+    // shreddeals.com is the live site too: no plain-http alerts server there.
+    assert.equal(alertsResolveConfig({ config: { apiBase: "http://127.0.0.1:8787" }, host: "shreddeals.com" }).mode, "soon");
+    assert.equal(alertsResolveConfig({ config: { apiBase: "https://alerts.example.com" }, host: "www.shreddeals.com" }).production, true);
 
     assert.deepEqual(readAlertsFragment("#verify=abc"), { purpose: "verify", token: "abc" });
     assert.deepEqual(readAlertsFragment("#manage=abc%3D"), { purpose: "manage", token: "abc=" });

@@ -19,7 +19,7 @@ const env = {
   MODE: "mock",
   HMAC_SECRET: "mock-hmac-secret-not-for-production-000",
   TOKEN_PEPPER: "mock-token-pepper-not-for-production-00",
-  PUBLIC_ORIGIN: process.env.PUBLIC_ORIGIN || "https://pchoward.github.io",
+  PUBLIC_ORIGIN: process.env.PUBLIC_ORIGIN || "https://shreddeals.com",
   PUBLIC_API_URL: `http://localhost:${port}`,
   MANAGE_PAGE_URL: process.env.MANAGE_PAGE_URL || "http://localhost:8000/alerts.html",
   CONSENT_VERSION: process.env.CONSENT_VERSION || "2026-10",

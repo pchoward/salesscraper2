@@ -256,7 +256,7 @@ Add each value as its own secret. In the GitHub repo: **Settings → Secrets and
 | `EMAIL_FROM` | no | From address. Defaults to `SMTP_USER` |
 | `EMAIL_TO` | yes | Recipients, comma-separated |
 | `SMTP_SECURITY` | no | `starttls` (default) or `ssl` (use with port 465) |
-| `REPORT_URL` | no | Full-report link. Defaults to `https://pchoward.github.io/salesscraper2/sale_items_chart.html` |
+| `REPORT_URL` | no | Full-report link. Defaults to `https://shreddeals.com/sale_items_chart.html` |
 
 GitHub Pages for this repo is the `main` branch at the site root, so that default is the published `sale_items_chart.html`. Do not put addresses in the workflow file. Empty secrets are skipped.
 

@@ -8,7 +8,7 @@ GitHub only lists a manual workflow after it is on `main`.
 
 ## Live since 2026-11-02
 
-BMX and Ski are on the live site, next to Skate: pchoward.github.io/salesscraper2
+BMX and Ski are on the live site, next to Skate: shreddeals.com
 (tap BMX or Ski). **"Scraper - BMX, Ski, MTB"** scrapes them every day at
 21:37 UTC (2:37 pm Pacific) and publishes to `main`, the way Skate's scrape
 does. It shares Skate's lock, never touches Skate's files, and sends no email
@@ -41,7 +41,7 @@ are off.
 
 ## What it is, and what it isn't
 
-| | Preview | Production (pchoward.github.io/salesscraper2) |
+| | Preview | Production (shreddeals.com) |
 |---|---|---|
 | Where | `shreddeals-preview` branch, one commit replaced each run | `main`, served by GitHub Pages |
 | Skate | rebuilt from `main`'s saved data | the scrape workflow, unchanged |

@@ -261,7 +261,7 @@ Provider webhooks for bounces and complaints (verified signature) suppress the a
 ### Security
 
 - The static site has **no secrets** and is not trusted. It only calls the public endpoints, and the Worker validates everything again.
-- CORS allows only `https://pchoward.github.io` on the public endpoints.
+- CORS allows only the site origin (`PUBLIC_ORIGIN`, `https://shreddeals.com` since 2026-11-03) on the public endpoints.
 - Secrets:
   - Worker: email API key, HMAC secret, token secret.
   - GitHub: the HMAC secret only (`ALERTS_HMAC_SECRET`) plus the Worker URL.

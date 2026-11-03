@@ -20,9 +20,9 @@ workers_dev = true
 
 [vars]
 MODE = "staging"                                   # staging | production (mock is local only)
-PUBLIC_ORIGIN = "https://pchoward.github.io"
+PUBLIC_ORIGIN = "https://shreddeals.com"
 PUBLIC_API_URL = "https://skatedeals-alerts.<your-subdomain>.workers.dev"
-MANAGE_PAGE_URL = "https://pchoward.github.io/salesscraper2/sale_items_chart.html"   # the report page reads #verify= and #manage=
+MANAGE_PAGE_URL = "https://shreddeals.com/sale_items_chart.html"   # the report page reads #verify= and #manage=
 CONSENT_VERSION = "2026-10"
 EMAIL_FROM = "SkateDeals <alerts@your-verified-domain.example>"   # staging may use onboarding@resend.dev
 MAX_ACTIVE_SUBSCRIBERS = "200"
