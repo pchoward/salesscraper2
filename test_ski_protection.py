@@ -23,6 +23,15 @@ class SkiProtectionTests(unittest.TestCase):
         self.assertEqual(christy.part_for("POC Spine VPD Air Back Protector"), "Protection")
         self.assertEqual(christy.part_for("Oakley Flight Deck Goggles"), "Protection")
 
+    def test_every_ski_store_scrapes_every_part(self):
+        import sports
+        self.assertEqual(stores.PARTS, sports.SKI.parts)
+        self.assertEqual(the_house.PARTS, sports.SKI.parts)
+        self.assertEqual(christy.PARTS, sports.SKI.parts)
+        built = {(scraper.name.rsplit("_", 1)[0], scraper.part) for scraper in stores.scrapers()}
+        for store in ("evo", "Utah Ski", "Gear West", "The House", "Christy Sports"):
+            self.assertIn((store, "Protection"), built, store)
+
 
 if __name__ == "__main__":
     unittest.main()

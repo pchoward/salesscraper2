@@ -26,7 +26,7 @@ MAX_PAGES = 40
 PAGE_DELAY = 2.0
 _USER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
-PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection")
+PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection")  # = sports.SKI.parts
 
 _TILE_START = re.compile(r'<div class="product-tile[^"]*" data-pid="([^"]+)"')
 _LINK = re.compile(r'href="(/product/[^"?]+\.html)')

@@ -12,7 +12,7 @@ from sports.bmx.specs import category_for_title
 from sports.ski import evo, specs
 from stores import shopify
 
-PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets")
+PARTS = sports.SKI.parts
 
 TYPES = {
     "skis": "Skis", "kids skis": "Skis", "alpine skis": "Skis",
