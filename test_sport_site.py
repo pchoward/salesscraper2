@@ -160,7 +160,7 @@ class LiveSportsWorkflowTests(unittest.TestCase):
         self.assertNotIn("${{ secrets.", self.text)
         self.assertNotIn("${{ vars.", self.text)
         adds = [line.strip() for line in self.text.splitlines() if "git add" in line]
-        self.assertEqual(adds, ["git add index.html navigation",
+        self.assertEqual(adds, ["git add index.html navigation discover",
                                 'if [ -e "catalogs/$sport" ]; then git add -A -- "catalogs/$sport"; fi',
                                 'if [ -e "$sport/sale_items_chart.html" ]; then git add -A -- "$sport"; fi'])
         for skate_file in ("previous_data.json", "price_history.json", "sale_items_chart.html\n", "scrape_health.json"):

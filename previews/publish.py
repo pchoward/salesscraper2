@@ -27,6 +27,9 @@ def publish(output=SOURCE, catalogs=None):
     for name in ('navigation.js','navigation.css','skate-bridge.js'):
         if (assets/name).is_symlink():raise ValueError('Public assets must not be symlinks')
         shutil.copyfile(HERE/name,assets/name)
+    if any(sport['id'] == 'mtb' and sport.get('catalog') for sport in config['sports']):
+        from explore.public import publish_demo
+        config['exploreScopes'] = [publish_demo(output)]
     (output/'index.html').write_text(render_shell(config,asset_prefix='navigation/'))
     return output/'index.html'
 

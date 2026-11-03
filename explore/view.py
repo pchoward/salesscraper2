@@ -1,4 +1,4 @@
-"""Opt-in Explore review pages, sharing the catalog's compact styles/bridge."""
+"""Explore demo/review pages sharing the catalog's compact styles and bridge."""
 import html
 import json
 from pathlib import Path
@@ -10,10 +10,10 @@ def render(scope, state):
     css = (ROOT / 'page.css').read_text() + '\n' + (Path(__file__).with_name('view.css')).read_text()
     payload = json.dumps({'scope': scope, 'state': state}).replace('<', '\\u003c')
     return '''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><title>ShredDeals · Explore review</title><style>''' + css + '''</style>
+<meta name="robots" content="noindex,nofollow"><title>ShredDeals · Explore DEMO</title><style>''' + css + '''</style>
 <script src="../../navigation/skate-bridge.js" defer></script><script src="../view.js" defer></script></head>
 <body><nav class="topnav"><strong>ShredDeals</strong><div class="topnav-links"><button id="navDeals">Deals</button><button id="navExplore" aria-pressed="true">Explore</button></div></nav>
-<div class="preview-note">REVIEW PREVIEW · synthetic fixtures, not retailer offers</div>
+<div class="preview-note">DEMO / SAMPLE PRODUCTS · not real inventory · not available to buy</div>
 <main><h1>''' + html.escape(scope['label']) + '''</h1><p id="coverage"></p>
 <form id="filters" class="explore-tools"><label>Category<select id="category"></select></label><label>Store<select id="store"></select></label><label>Brand<select id="brand"></select></label>
 <label class="search">Search<input id="query" type="search" placeholder="Search inventory…"></label><label>Size<select id="size"></select></label><label>Price type<select id="sale"><option value="">All prices</option><option value="sale">Discounted</option><option value="regular">Regular price</option></select></label>

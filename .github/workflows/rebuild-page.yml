@@ -13,6 +13,7 @@ on:
       - page.css
       - mobile.css
       - previews/**
+      - explore/**
       - query_state.py
       - sports/**
 
@@ -57,7 +58,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add sale_items_chart.html
-          git add index.html navigation
+          git add index.html navigation discover
           for sport in bmx ski mtb; do
             if [ -e "$sport/sale_items_chart.html" ]; then git add "$sport"; fi
           done

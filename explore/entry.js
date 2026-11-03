@@ -3,7 +3,7 @@
     const app = window.parent !== window && window.parent.shredApp;
     if (!app) return;
     const links = document.querySelector('.topnav-links');
-    if (!links) return;
+    if (!links || links.querySelector('#navExplore')) return;
     const current = app.state();
     const config = JSON.parse(window.parent.document.getElementById('sportConfig').textContent);
     const scope = (config.exploreScopes || []).find(item => item.sport === current.sport.id);

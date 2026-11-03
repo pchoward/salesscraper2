@@ -82,6 +82,9 @@ class ArtifactCheckTests(unittest.TestCase):
             "an unexpected screenshot name": dict(shots={"evil.png": PNG}),
             "an extra site file": dict(site=("index.html", "evil.js")),
             "an extra navigation file": dict(site=("navigation/evil.js",)),
+            "Explore source": dict(site=("discover/engine.py",)),
+            "unapproved demo script": dict(site=("discover/evil.js",)),
+            "internal Explore source folder": dict(site=("explore/view.js",)),
         }
         for label, kwargs in cases.items():
             with self.subTest(label), tempfile.TemporaryDirectory() as directory:
@@ -91,6 +94,14 @@ class ArtifactCheckTests(unittest.TestCase):
                     continue  # the bad name cannot even be written; nothing to publish
                 with self.assertRaises(check_artifact.Refused):
                     check_artifact.check(directory, "a" * 40, {12})
+
+    def test_site_size_budget_still_rejects_oversized_artifacts(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make(directory)
+            with patch('ci.check_artifact.MAX_SITE', 1):
+                with self.assertRaisesRegex(check_artifact.Refused, 'over'):
+                    check_artifact.check(root, 'a' * 40, {12})
 
     def test_symlinks_are_refused(self):
         with tempfile.TemporaryDirectory() as directory:

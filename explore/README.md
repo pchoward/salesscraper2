@@ -1,6 +1,8 @@
 # Scoped Explore engine (#169)
 
-Review implementation following research PR #168. **Not enabled on the live site.**
+Implementation following research PR #168. Public publication now includes a
+clearly labeled **DEMO / SAMPLE PRODUCTS** entry under MTB; real retailer
+Explore ingestion remains disabled. The activation takes effect after review/merge.
 Deals stays the default and continues through its existing sale-only pipeline.
 No Explore offers enter sale snapshots, alert scoring, or subscriber delivery.
 
@@ -97,8 +99,10 @@ python -m unittest test_explore test_shreddeals_publish -v
 
 The inert preview uses existing saved Deals catalogs and **synthetic Explore
 fixtures**, including a second sport (Ski). It reuses `page.css`, the shell and
-same-origin navigation bridge. The Explore entry is injected only into this
-opt-in review build. Default `previews.publish` output does not expose Explore.
+same-origin navigation bridge. The normal `previews.publish` output includes **only the MTB demo** as built
+HTML/JavaScript under `discover/`; the source `explore/` directory remains
+excluded from Pages. Publication regenerates this output on rebuilds/scrapes.
+The second Ski scope remains fixture-only in this opt-in review build.
 All source cards and screenshots are explicitly labeled synthetic.
 
 The view supports category/store/brand/search, dynamic variant-specification
@@ -110,6 +114,8 @@ Watch controls are offered. This is a compact review interface, not a claim that
 live inventory or retailer images have been collected.
 
 See [review evidence](../docs/reviews/explore-pilot/README.md) for screenshots,
-coverage limitations and verification. Production source approval, a permitted
-live capture and rollout review remain outstanding; no workflow or deployment
-was changed.
+coverage limitations and verification. Retailer source approval and a permitted live capture remain outstanding.
+Public activation preserves Deals as default, labels sample cards/table/Quick View,
+and disables sample purchase links, alerts and Watch. Rebuild/sports workflows
+stage the generated static folder; no scrape schedule or notification behavior
+changes. See the [public activation review](../docs/reviews/explore-public-demo/README.md).

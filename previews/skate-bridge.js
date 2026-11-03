@@ -39,6 +39,16 @@
         const host = parent.querySelector('.top-row');
         const links = document.querySelector('.topnav-links');
         if (!host || !links) return;
+        // Publication owns enabled scopes; rebuilt Deals pages need no injected markup.
+        const app = window.parent.shredApp;
+        const config = JSON.parse(parent.getElementById('sportConfig').textContent);
+        const scope = (config.exploreScopes || []).find(item => item.sport === app?.state().sport.id);
+        if (scope && !links.querySelector('#navExplore')) {
+            const button = document.createElement('button');
+            button.id = 'navExplore'; button.type = 'button'; button.textContent = 'Explore';
+            button.onclick = () => app.chooseView(scope.id);
+            links.appendChild(button);
+        }
         parent.querySelector('.catalog-sections')?.remove();
         const nav = parent.createElement('nav');
         nav.className = 'catalog-sections';
