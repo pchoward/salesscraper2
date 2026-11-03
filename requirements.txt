@@ -1,5 +1,9 @@
-beautifulsoup4>=4.14.3
-fake-useragent>=2.2.0
-selenium>=4.38.0
-webdriver-manager>=4.0.2
-PyYAML>=6.0.1
+# Exact versions, verified with the full test suite on 2026-11-03 (Python 3.11
+# and 3.13). An unpinned soupsieve 4.0 release broke CI that day; bump these
+# on purpose, in a PR, so a new upstream release can't change behaviour.
+beautifulsoup4==4.15.0
+soupsieve==4.0
+fake-useragent==2.2.0
+selenium==4.52.0
+webdriver-manager==4.1.2
+PyYAML==6.0.3
