@@ -9,6 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+import page
 from report import build_report_html
 
 
@@ -104,6 +105,8 @@ def _render(html, query=""):
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as directory:
         path = Path(directory) / "page.html"
         path.write_text(html.replace("</body>", DRIVER + "</body>"), encoding="utf-8")
+        # The generated page loads its shared code by URL, just like production.
+        page.write_assets(directory)
         command = [
             "google-chrome", "--headless=new", "--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage",
             f"--user-data-dir={directory}/chrome", "--window-size=1280,900", "--virtual-time-budget=4000",

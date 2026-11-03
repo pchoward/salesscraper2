@@ -5,8 +5,18 @@ import subprocess
 import unittest
 from pathlib import Path
 
-from page import _atl_section, _gone_section
+from page import _atl_section, _gone_section, _read_asset
 from report import build_report_html
+
+
+def _page_css():
+    """The report stylesheet. It is an external, versioned asset now."""
+    return _read_asset("page.css")
+
+
+def _page_js():
+    """The report script. It is an external, versioned asset now."""
+    return _read_asset("page.js")
 
 
 def _deck(price, url, store, name):
@@ -116,7 +126,8 @@ class ReportExtraTests(unittest.TestCase):
             {},
             generated_at="2026-10-11T17:32:48+00:00",
         )
-        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        style = _page_css()
+        source = _page_js()
         self.assertRegex(
             style,
             r"\.deal-card\.filtered-out\s*,\s*\.deal-card\.grouped-hide\s*,\s*"
@@ -136,31 +147,31 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn('id="brandMore"', html)
         self.assertIn('id="showMoreCards"', html)
         self.assertIn('id="brandList" tabindex="0"', html)
-        self.assertIn("max-height: 200px", html)
+        self.assertIn("max-height: 200px", style)
         self.assertIn('class="facet-value" data-brand="Anti-Hero"', html)
         self.assertIn('class="facet-value" data-brand="Habitat"', html)
         self.assertNotIn("is-extra", html)
-        self.assertIn("function rowMatches(row, overrides)", html)
-        self.assertIn("function paintFacetCounts()", html)
-        self.assertNotIn("minmax(176px, 1fr)", html)
-        self.assertNotIn("minmax(170px, 1fr)", html)
-        self.assertIn("max(170px, calc((100% - 7 * 8px) / 8))", html)
-        self.assertNotIn("@container deals (min-width: 1092px)", html)
-        prices = html.split(".card-prices {", 1)[1].split("}", 1)[0]
+        self.assertIn("function rowMatches(row, overrides)", source)
+        self.assertIn("function paintFacetCounts()", source)
+        self.assertNotIn("minmax(176px, 1fr)", style)
+        self.assertNotIn("minmax(170px, 1fr)", style)
+        self.assertIn("max(170px, calc((100% - 7 * 8px) / 8))", style)
+        self.assertNotIn("@container deals (min-width: 1092px)", style)
+        prices = style.split(".card-prices {", 1)[1].split("}", 1)[0]
         self.assertIn("flex-wrap: wrap", prices)
-        now = html.split(".now-price {", 1)[1].split("}", 1)[0]
+        now = style.split(".now-price {", 1)[1].split("}", 1)[0]
         self.assertIn("font-weight: 800", now)
         self.assertIn("white-space: nowrap", now)
-        self.assertIn("max-width: 100%", html.split(".avg-price {", 1)[1].split("}", 1)[0])
-        self.assertIn("-webkit-line-clamp: 2", html)
+        self.assertIn("max-width: 100%", style.split(".avg-price {", 1)[1].split("}", 1)[0])
+        self.assertIn("-webkit-line-clamp: 2", style)
         self.assertIn('id="brandSearch"', html)
         self.assertNotIn("Counts match current results", html)
-        self.assertIn("function paintSparklines()", html)
-        self.assertIn("let catalogData = null", html)
-        self.assertIn("function refreshCharts()", html)
-        self.assertIn("function queueFilters()", html)
-        self.assertNotIn("paintSparklines();\n    paintCardStats();", html)
-        self.assertIn("function sparkDirection(", html)
+        self.assertIn("function paintSparklines()", source)
+        self.assertIn("let catalogData = null", source)
+        self.assertIn("function refreshCharts()", source)
+        self.assertIn("function queueFilters()", source)
+        self.assertNotIn("paintSparklines();\n    paintCardStats();", source)
+        self.assertIn("function sparkDirection(", source)
         self.assertIn('data-buckets="10up"', html)
         self.assertIn('class="chip width-chip is-zero"', html)
         self.assertIn(">10+</span>", html)
@@ -185,7 +196,7 @@ class ReportExtraTests(unittest.TestCase):
             {},
             generated_at="2026-10-11T20:22:15+00:00",
         )
-        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        style = _page_css()
         self.assertIn("line-clamp: 2", style)
         self.assertIn(".deal-card .card-title .product-link", style)
         self.assertNotIn(".card-title:hover .product-name", style)
@@ -236,8 +247,8 @@ class ReportExtraTests(unittest.TestCase):
         # two cards, and one brand facet button.
         self.assertEqual(html.count('data-brand="5Boro"'), 7)
         self.assertEqual(html.count('value="5Boro"'), 1)
-        self.assertIn("const HISTORY_COLOR", html)
-        self.assertIn("function brandSame(", html)
+        self.assertIn("const HISTORY_COLOR", _page_js())
+        self.assertIn("function brandSame(", _page_js())
 
     def test_sidebar_rail_starts_with_the_board(self):
         """Search and filters share one grid row with the board.
@@ -251,7 +262,7 @@ class ReportExtraTests(unittest.TestCase):
             {},
             generated_at="2026-10-11T20:22:15+00:00",
         )
-        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        style = _page_css()
         self.assertIn('class="rail"', html)
         rail = html.split('<div class="rail">', 1)[1].split('<div class="board">', 1)[0]
         self.assertIn('id="searchInput"', html)
@@ -307,11 +318,12 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn(">All stores<", rail)
         self.assertNotIn(">Stores<", rail)
         self.assertNotIn(">Products<", rail)
-        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        style = _page_css()
+        source = _page_js()
         nav_css = style.split(".nav-row {", 1)[1].split("}", 1)[0]
         self.assertIn("flex-wrap: nowrap", nav_css)
-        self.assertIn("function nextNavOverflow(", html)
-        self.assertIn("function fitNavPills(", html)
+        self.assertIn("function nextNavOverflow(", source)
+        self.assertIn("function fitNavPills(", source)
         self.assertIn("#filtersOpen { display: inline-flex", style)
         self.assertNotIn(".filters-open { display: inline-flex", style)
         self.assertIn("body.filters-open", style)
@@ -343,22 +355,22 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('aria-label="Shopping filters"', html)
         self.assertIn('aria-label="Deal intelligence"', html)
         self.assertIn('aria-label="Personal tools"', html)
-        self.assertIn("function activeSpecKeys(", html)
+        self.assertIn("function activeSpecKeys(", source)
         self.assertIn("Historical low", html)
         self.assertIn('aria-label="Score breakdown"', html)
         self.assertLess(html.find('data-section="deals"'), html.find('data-section="interval"'))
-        self.assertIn("function syncTypeSections(", html)
-        self.assertIn(".filter-section.is-type-hidden", html)
-        self.assertIn("salesscraper2.filterSections", html)
-        self.assertIn("function restoreFilterSections(", html)
-        self.assertIn("function rememberFilterSections(", html)
-        self.assertIn("function chartHitLabel(", html)
-        self.assertIn("function nearestChartHit(", html)
-        nearest = html.split("function nearestChartHit(", 1)[1].split("function paintFilterSection(", 1)[0]
+        self.assertIn("function syncTypeSections(", source)
+        self.assertIn(".filter-section.is-type-hidden", style)
+        self.assertIn("salesscraper2.filterSections", source)
+        self.assertIn("function restoreFilterSections(", source)
+        self.assertIn("function rememberFilterSections(", source)
+        self.assertIn("function chartHitLabel(", source)
+        self.assertIn("function nearestChartHit(", source)
+        nearest = source.split("function nearestChartHit(", 1)[1].split("function paintFilterSection(", 1)[0]
         self.assertIn("hit.y", nearest)
         self.assertIn("Math.hypot", nearest)
-        self.assertIn("Price reduction · ", html)
-        self.assertIn("function paintResultCount(", html)
+        self.assertIn("Price reduction · ", source)
+        self.assertIn("function paintResultCount(", source)
 
     def test_keepa_card_uses_tracked_prices_and_drop_interval(self):
         deck = _deck(
@@ -435,7 +447,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn('class="avg-price" data-symbol="$" hidden', flat)
         flat_spark = flat.split('class="spark-hit', 1)[1].split("</button>", 1)[0]
         self.assertNotIn("<svg", flat_spark)
-        self.assertIn("flat ? 12 : 30", html)
+        self.assertIn("flat ? 12 : 30", _page_js())
         self.assertNotIn('id="categoryStrip"', html)
         self.assertIn('id="partFilters"', html)
         self.assertIn('data-part="Decks"', html)
@@ -450,8 +462,8 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn("Bookmark this selection", html)
         self.assertIn('id="discountMax"', html)
         self.assertIn("Any price", html)
-        self.assertIn("function dropInInterval(", html)
-        self.assertIn("function syncDuals(", html)
+        self.assertIn("function dropInInterval(", _page_js())
+        self.assertIn("function syncDuals(", _page_js())
 
     def test_highlights_view_uses_digest_lists_and_width_groups_are_truthful(self):
         fresh = _deck("40.00", "https://example.com/fresh", "Zumiez", "Baker Brand Logo 8.5 Skateboard Deck")
@@ -467,13 +479,13 @@ class ReportExtraTests(unittest.TestCase):
             return next(part for part in html.split("<tr ") if url in part)
         self.assertIn('data-highlight="1"', row_for("https://example.com/fresh"))
         self.assertIn('data-highlight="0"', row_for("https://example.com/older"))
-        self.assertIn("if (highlights && row.dataset.highlight !== \"1\") return false;", html)
+        self.assertIn("if (highlights && row.dataset.highlight !== \"1\") return false;", _page_js())
         self.assertNotIn("<summary>Today's highlights</summary>", html)
         self.assertIn("Deal Type", html)
         self.assertIn(">Products<", html)
         self.assertIn("Saved Views", html)
         self.assertIn(">Show results</button>", html)
-        self.assertIn("function adoptSpecPart(", html)
+        self.assertIn("function adoptSpecPart(", _page_js())
         self.assertIn('id="groupToggle"', html)
         self.assertLess(html.find('id="groupToggle"'), html.find('<div class="rail">'))
 
@@ -835,7 +847,7 @@ if (visible.join(",") !== "20.0,12.5,") throw new Error("visible discounts " + v
             {},
             generated_at="2026-10-15T12:00:00+00:00",
         )
-        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        style = _page_css()
         base = style.split("@media (min-width: 801px)", 1)[0]
         self.assertIn("min-height: 100vh;", base)
         desktop = style.split("@media (min-width: 801px)", 1)[1].split("@media", 1)[0]
@@ -850,7 +862,7 @@ if (visible.join(",") !== "20.0,12.5,") throw new Error("visible discounts " + v
             {},
             generated_at="2026-10-15T12:00:00+00:00",
         )
-        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        style = _page_css()
         base = style.split("@media (min-width: 801px)", 1)[0]
         self.assertIn("top: var(--stick-top);", base)
         desktop = style.split("@media (min-width: 801px)", 1)[1].split("@media", 1)[0]
@@ -868,7 +880,7 @@ if (visible.join(",") !== "20.0,12.5,") throw new Error("visible discounts " + v
         self.assertIn('title="Back to default view"', html)
         self.assertIn('class="brand-home"', html)
         self.assertEqual(html.count('onclick="clearFilters()"'), 2)
-        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        style = _page_css()
         home = style.split(".brand-home", 1)[1].split("}", 1)[0]
         self.assertIn("cursor: pointer;", home)
         source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")

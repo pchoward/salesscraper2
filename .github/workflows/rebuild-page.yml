@@ -59,6 +59,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add sale_items_chart.html
           git add index.html navigation discover
+          if [ -e assets ]; then git add -A -- assets; fi
           for sport in bmx ski mtb; do
             if [ -e "$sport/sale_items_chart.html" ]; then git add "$sport"; fi
           done

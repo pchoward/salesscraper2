@@ -90,7 +90,7 @@ class CardHeroTests(unittest.TestCase):
         )
         self.assertIn('class="hero ph"', missing)
         self.assertNotIn("<img", missing)
-        self.assertIn("line-clamp: 2", html)
+        self.assertIn("line-clamp: 2", css)
         title = css.split(".deal-card .product-name .product-link {")[-1].split("}", 1)[0]
         for declaration in (
             "display: -webkit-box",

@@ -82,7 +82,7 @@ class AudienceTests(unittest.TestCase):
         excluded = {json.loads(line[4:]) for line in Path('_config.yml').read_text().splitlines() if line.startswith('  - ')}
         self.assertFalse(Path('.nojekyll').exists(), 'Pages must honor Jekyll exclusions')
         # CNAME: the custom domain (shreddeals.com, 2026-11-03); Pages must serve it.
-        public = {'_config.yml', 'CNAME', 'index.html', 'navigation', 'discover', 'bmx', 'ski', 'mtb', 'sale_items_chart.html', 'history.json', 'page.css', 'mobile.css', 'page.js'}
+        public = {'_config.yml', 'CNAME', 'index.html', 'navigation', 'discover', 'bmx', 'ski', 'mtb', 'assets', 'sale_items_chart.html', 'history.json', 'page.css', 'mobile.css', 'page.js'}
         roots = {path.split('/')[0] for path in subprocess.check_output(['git','ls-files'], text=True).splitlines()}
         self.assertEqual(roots - excluded - public, set())
         for path in ('scrape_health.json', 'previous_data.json', 'price_history.json',
@@ -119,6 +119,7 @@ class AudienceTests(unittest.TestCase):
         workflow = Path('.github/workflows/scrape.yml').read_text()
         self.assertIn('ADMIN_EMAIL_TO: ${{ secrets.ADMIN_EMAIL_TO }}', workflow)
         self.assertIn('git add sale_items_chart.html previous_data.json price_history.json scrape_health.json', workflow)
+        self.assertIn('if [ -e assets ]; then git add -A -- assets; fi', workflow)
 
 
 if __name__ == '__main__':

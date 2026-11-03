@@ -31,7 +31,7 @@ class FacetVisibilityTests(unittest.TestCase):
             {},
             generated_at="2026-10-21T12:00:00+00:00",
         )
-        for style in (page, mobile, html):
+        for style in (page, mobile):
             self.assertIn("scrollbar-gutter: stable", style)
             self.assertIn("padding-inline-end: 12px", style)
         facet = page.split(".brand-facet .facet-list {", 1)[1].split("}", 1)[0]

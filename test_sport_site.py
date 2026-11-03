@@ -64,7 +64,7 @@ class PreviewSiteTests(unittest.TestCase):
     def test_without_sport_data_the_preview_is_unchanged(self):
         with tempfile.TemporaryDirectory() as data_root, tempfile.TemporaryDirectory() as out:
             files = build_preview.build(out, "test", data_root=data_root)
-            self.assertEqual(files, ["_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
+            self.assertEqual(files, ["_headers", "assets", "history.json", "index.html", "navigation", "sale_items_chart.html"])
 
     def test_published_homepage_without_catalogs_has_only_skate(self):
         from previews.publish import publish
@@ -161,6 +161,7 @@ class LiveSportsWorkflowTests(unittest.TestCase):
         self.assertNotIn("${{ vars.", self.text)
         adds = [line.strip() for line in self.text.splitlines() if "git add" in line]
         self.assertEqual(adds, ["git add index.html navigation discover",
+                                "if [ -e assets ]; then git add -A -- assets; fi",
                                 'if [ -e "catalogs/$sport" ]; then git add -A -- "catalogs/$sport"; fi',
                                 'if [ -e "$sport/sale_items_chart.html" ]; then git add -A -- "$sport"; fi'])
         for skate_file in ("previous_data.json", "price_history.json", "sale_items_chart.html\n", "scrape_health.json"):

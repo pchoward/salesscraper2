@@ -53,7 +53,13 @@ def build(output):
                                      generated_at='2026-11-02T00:00:00+00:00')
         path = output / 'audit-fixtures' / sport.id / 'sale_items_chart.html'
         path.parent.mkdir(parents=True, exist_ok=True)
-        page.write_page(mark_preview(html, 'SYNTHETIC UI QA — NOT LIVE INVENTORY'), str(path))
+        page.write_page(mark_preview(html, 'SYNTHETIC UI QA — NOT LIVE INVENTORY'), str(path), asset_root=str(output))
+        # These fixtures live one level deeper than <sport>/ pages, so their
+        # shared-asset URLs must point one directory further up.
+        text = path.read_text(encoding='utf-8')
+        for asset in page.SHARED_ASSETS:
+            text = text.replace(page.asset_url(asset, '../'), page.asset_url(asset, '../../'))
+        path.write_text(text, encoding='utf-8')
         manifest[sport.id] = {'path': str(path.relative_to(output)), 'part': part, 'selected': target,
                              'match': items[0]['url'], 'price': 250, 'synthetic': True}
     (output / 'audit-fixtures' / 'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')

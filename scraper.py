@@ -243,7 +243,8 @@ def _run(args, sport):
             digest=digest,
             **({} if sport.is_default else {"sport": sport}),
         )
-        write_page(html, "sale_items_chart.html" if sport.is_default else str(sport.page_file()))
+        write_page(html, "sale_items_chart.html" if sport.is_default else str(sport.page_file()),
+                   asset_root=str(sports.ROOT))
     except Exception as exc:
         logging.error("Report build failed (continuing): %s", exc)
     # What rebuild_page.py needs to rebuild this exact page later, after a

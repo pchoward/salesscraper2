@@ -56,7 +56,7 @@ class AlertsUiTests(unittest.TestCase):
         html = build_report_html({}, {}, generated_at="2026-10-24T12:00:00+00:00")
         config = '<script>window.SKATEDEALS_ALERTS = {"apiBase": "https://skatedeals-alerts.pchoward.workers.dev"'
         self.assertEqual(html.count("window.SKATEDEALS_ALERTS ="), 1)
-        self.assertLess(html.index(config), html.index("const ALERTS_API_BASE"), "config must load before page.js")
+        self.assertLess(html.index(config), html.index(page.asset_url("page.js")), "config must load before page.js")
         # Public values only, and markup in a value cannot close the script.
         self.assertEqual(set(page.ALERTS_UI_CONFIG), {"apiBase", "turnstileSiteKey"})
         self.assertTrue(page.ALERTS_UI_CONFIG["apiBase"].startswith("https://"))

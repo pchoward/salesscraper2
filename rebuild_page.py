@@ -139,15 +139,16 @@ def load_report_inputs(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTO
     }
 
 
-def rebuild(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTORY_PATH, page_path=PAGE_PATH, sport=None):
-    """Rebuild the page. Returns True when the file changed. Raises RebuildError."""
+def rebuild(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTORY_PATH, page_path=PAGE_PATH, sport=None,
+            asset_root=None):
+    """Rebuild the page. Returns True when a file changed. Raises RebuildError."""
     from page import write_page
     from report import build_report_html
 
     inputs = load_report_inputs(path, data_path, history_path)
     if sport is not None and not sport.is_default:
         inputs["sport"] = sport
-    return write_page(build_report_html(**inputs), page_path)
+    return write_page(build_report_html(**inputs), page_path, asset_root=asset_root)
 
 
 def main(argv=None):
@@ -169,7 +170,7 @@ def _rebuild_main(args, sport, page_path):
         print(f"{INPUTS_PATH} does not exist yet; the next scrape creates it. Nothing rebuilt.")
         return 0
     try:
-        changed = rebuild(page_path=page_path, sport=sport)
+        changed = rebuild(page_path=page_path, sport=sport, asset_root=str(sports.ROOT))
     except RebuildError as exc:
         print(f"Not rebuilt: {exc}", file=sys.stderr)
         return 1

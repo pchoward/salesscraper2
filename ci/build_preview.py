@@ -88,7 +88,7 @@ def build_sport_pages(out, label="", data_root=None):
         with sport.session(folder):
             html = build_report_html(**inputs, sport=sport)
         target = out.resolve() / sport.page_path
-        page.write_page(mark_preview(html, label), str(target))
+        page.write_page(mark_preview(html, label), str(target), asset_root=str(out))
         catalogs[sport.id] = sport.page_path
     return catalogs
 
@@ -115,7 +115,7 @@ def build(out_dir, label="", data_root=None):
         data = json.loads((ROOT / rebuild_page.DATA_PATH).read_text(encoding="utf-8"))
         history = json.loads((ROOT / rebuild_page.HISTORY_PATH).read_text(encoding="utf-8"))
         html = build_report_html(data, {}, history)
-    page.write_page(mark_preview(html, label), str(out / "sale_items_chart.html"))
+    page.write_page(mark_preview(html, label), str(out / "sale_items_chart.html"), asset_root=str(out))
     catalogs = build_sport_pages(out, label, data_root)
     from previews.publish import publish
     publish(out, catalogs=catalogs)

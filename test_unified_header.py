@@ -2,6 +2,7 @@
 import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
 import tempfile
 import unittest
@@ -92,7 +93,12 @@ assert.equal(H.nextIndex(0,'Tab',4),null);
                 self.assertIn('noindex,nofollow', text)
             self.assertEqual({str(p.relative_to(root)) for p in root.rglob('*') if p.is_file()},
                              pages | {'history.json', 'manifest.json'}
-                             | {str(Path(live[s]).parent / 'history.json') for s in live})
+                             | {str(Path(live[s]).parent / 'history.json') for s in live}
+                             # A saved page that already loads the shared code by
+                             # URL keeps its versioned assets in the copy.
+                             | {f'assets/{name}' for name in re.findall(
+                                 r'(?:href|src)="(?:\.\./)*assets/((?:page|mobile)\.[0-9a-f]{12}\.(?:css|js))"',
+                                 (SOURCE/'sale_items_chart.html').read_text(encoding='utf-8'))})
         self.assertEqual(before, hashes())
 
     def test_preview_rejects_existing_or_production_output(self):

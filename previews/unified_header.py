@@ -7,7 +7,7 @@ from pathlib import Path
 import re
 import shutil
 
-from previews.shreddeals import SOURCE, HERE
+from previews.shreddeals import SOURCE, HERE, copy_shared_assets
 
 
 def inject_header(html, config):
@@ -61,6 +61,7 @@ def build(output, source=SOURCE):
     if 'id="stickyBar"' not in html or 'id="homeReset"' not in html:
         raise ValueError('Saved page needs the existing Skate header')
     output.mkdir(parents=True)
+    html = copy_shared_assets(html, source, output)
 
     def config_for(sport):
         """Links relative to this page: a bmx/ page reaches ../index.html."""
@@ -76,7 +77,7 @@ def build(output, source=SOURCE):
             rendered = inert(html)
         elif sport['id'] in live:
             page = source / sport['href']
-            rendered = inert(page.read_text())
+            rendered = inert(copy_shared_assets(page.read_text(), source, output, source_path=sport['href']))
             (output / sport['href']).parent.mkdir(parents=True, exist_ok=True)
             history = page.parent / 'history.json'
             if history.is_file():
@@ -84,7 +85,7 @@ def build(output, source=SOURCE):
         else:
             label = escape(sport['label'])
             # Reuse the source's base styles, without any catalog or app scripts.
-            styles = ''.join(re.findall(r'<style\b[^>]*>.*?</style>', html, flags=re.S))
+            styles = ''.join(re.findall(r'<style\b[^>]*>.*?</style>|<link\b[^>]*rel=["\']stylesheet["\'][^>]*>', html, flags=re.S))
             rendered = f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>ShredDeals — {label}</title>{styles}</head>
 <body><header id="stickyBar"><div class="topnav"><h1 class="brand"><button class="brand-home" id="homeReset" type="button" onclick="location.href='index.html'">ShredDeals</button></h1>

@@ -10,7 +10,8 @@ from pathlib import Path
 
 import yaml
 
-from ci import build_preview, check_artifact, pr_comment
+from ci import build_audit_fixtures, build_preview, check_artifact, pr_comment
+import page
 
 ROOT = Path(__file__).resolve().parent
 WORKFLOWS = ROOT / ".github" / "workflows"
@@ -38,7 +39,13 @@ class PreviewBuildTests(unittest.TestCase):
     def test_the_built_preview_has_no_live_alerts_or_analytics(self):
         with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as data_root:
             files = build_preview.build(directory, "PR #1 test", data_root=data_root)
-            self.assertEqual(files, ["_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
+            self.assertEqual(files, ["_headers", "assets", "history.json", "index.html", "navigation", "sale_items_chart.html"])
+            assets = sorted(path.name for path in (Path(directory) / "assets").iterdir())
+            self.assertEqual(len(assets), 4, "three hashed assets plus their retention manifest")
+            self.assertIn("manifest.json", assets)
+            self.assertTrue(any(name.startswith("page.") and name.endswith(".js") for name in assets))
+            self.assertTrue(any(name.startswith("page.") and name.endswith(".css") for name in assets))
+            self.assertTrue(any(name.startswith("mobile.") and name.endswith(".css") for name in assets))
             home = (Path(directory) / "index.html").read_text(encoding="utf-8")
             self.assertIn("ShredDeals", home)
             self.assertNotIn("http-equiv=\"refresh\"", home)
@@ -53,6 +60,21 @@ class PreviewBuildTests(unittest.TestCase):
             self.assertIn("X-Robots-Tag: noindex", (Path(directory) / "_headers").read_text())
         # Building a preview never touches the published page.
         self.assertIn("window.SKATEDEALS_ALERTS = ", (ROOT / "sale_items_chart.html").read_text(encoding="utf-8"))
+
+
+    def test_labeled_synthetic_fixtures_load_the_shared_assets(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory) / "site"
+            manifest = build_audit_fixtures.build(out)
+            self.assertEqual(sorted(manifest), ["bmx", "mtb", "ski"])
+            for sport_id, case in manifest.items():
+                html = (out / case["path"]).read_text(encoding="utf-8")
+                for name in page.SHARED_ASSETS:
+                    file_name = page.asset_name(name)
+                    url = f"../../assets/{file_name}"
+                    self.assertIn(url, html, f"{sport_id} fixture loads {name} at its depth")
+                    self.assertNotIn(f'"../{url}"', html)
+                    self.assertTrue((out / "assets" / file_name).is_file())
 
 
 class ArtifactCheckTests(unittest.TestCase):
@@ -74,6 +96,16 @@ class ArtifactCheckTests(unittest.TestCase):
             self.make(directory)
             self.assertEqual(check_artifact.check(directory, "a" * 40, {12}), 12)
 
+    def test_content_hashed_assets_are_allowed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            site = sorted(check_artifact.SITE_FILES) + [
+                "assets/page.0123456789ab.css",
+                "assets/mobile.0123456789ab.css",
+                "assets/page.0123456789ab.js",
+            ]
+            self.make(directory, site=site)
+            self.assertEqual(check_artifact.check(directory, "a" * 40, {12}), 12)
+
     def test_refusals(self):
         cases = {
             "another commit": dict(sha="b" * 40),
@@ -81,6 +113,8 @@ class ArtifactCheckTests(unittest.TestCase):
             "a fake PNG": dict(shots={"desktop-home.png": b"<svg onload=x>"}),
             "an unexpected screenshot name": dict(shots={"evil.png": PNG}),
             "an extra site file": dict(site=("index.html", "evil.js")),
+            "an unhashed asset": dict(site=("assets/page.css",)),
+            "an unexpected asset": dict(site=("assets/evil.0123456789ab.js",)),
             "an extra navigation file": dict(site=("navigation/evil.js",)),
             "Explore source": dict(site=("discover/engine.py",)),
             "unapproved demo script": dict(site=("discover/evil.js",)),
