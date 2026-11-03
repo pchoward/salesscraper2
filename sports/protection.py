@@ -91,6 +91,11 @@ def protects(title, product_type="", description=""):
     if "Goggles" in found and lens_only:
         found.remove("Goggles")
         found.append("Goggle lenses")
+    # Armor kits ("Zero PLUS Vest + Shorts", "X V7 Shorts + Knee Pads"): the
+    # shorts in them are impact shorts. Chamois/bib shorts never are.
+    if (found and "Hips & Tailbone" not in found and re.search(r"\bshorts\b", title or "", re.I)
+            and not re.search(r"\b(?:chamois|bibs?|liner|cycling\s+shorts)\b", title or "", re.I)):
+        found.append("Hips & Tailbone")
     if not found and _PAD_SET.search(text):
         # "Saver Series Pad Set (3-Pack)": knees, elbows and wrists.
         found = ["Pad Sets"]

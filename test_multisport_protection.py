@@ -24,6 +24,12 @@ class SuitsTests(unittest.TestCase):
         for (title, kind), expected in cases.items():
             self.assertEqual({s for s in ("bmx", "mtb", "ski") if protection.suits(s, title, kind)}, expected, title)
 
+    def test_kits_with_shorts_protect_hips(self):
+        self.assertIn("Hips & Tailbone", protection.protects("Demon Steel Spine Kit — Zero PLUS Vest + Shorts"))
+        self.assertIn("Hips & Tailbone", protection.protects("Demon Park Rat Kit — Padded Shorts + Wrist Guards"))
+        self.assertEqual(protection.protects("Demon Crossover Kit — X V7 Shorts + Zero RF Knee Pads"), ["Knees", "Hips & Tailbone"])
+        self.assertEqual(protection.protects("Pearl Izumi Padded Liner Shorts"), [])
+
     def test_each_sport_reads_its_brands(self):
         from sports.bmx import stores as bmx
         from sports.mtb import stores as mtb
