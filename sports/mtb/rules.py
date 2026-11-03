@@ -38,8 +38,11 @@ def filter_reason(name,part,url='',price_new=None,price_old=None,description='',
     value=' '+str(name)+' '+str(product_type)+' '
     from sports.protection import protects
     armor=part=='Protection' and protects(str(name),str(product_type))
-    if not armor and re.search(r'\b(?:t[- ]?shirts?|hoodies?|sweatshirts?|jerseys?|shorts|pants|socks|beanies?|caps|gift\s*cards?|stickers?|bottles?|bottle\s*cages?)\b',value,re.I):
+    if not armor and re.search(r'\b(?:t[- ]?shirts?|hoodies?|sweatshirts?|jerseys?|shorts|pants|socks|beanies?|caps|vests?|jackets?|gift\s*cards?|stickers?|bottles?|bottle\s*cages?)\b',value,re.I):
         return 'apparel or unrelated merchandise'
+    # A helmet's bag, liner or visor is not protection itself.
+    if part=='Protection' and re.search(r'\bhelmet\s+bags?\b|\bheadliner\b|\bvisors?\b|\bcheek\s*pads?\b|\breplacement\b',str(name),re.I):
+        return 'spare or accessory'
     # A type shared by both ("MTB/Road Chains", "Road & MTB Saddles", Cambria)
     # is not a road part by itself; the name still decides.
     kind=str(product_type)
