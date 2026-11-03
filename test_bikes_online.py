@@ -53,8 +53,9 @@ class BikesOnlineTests(unittest.TestCase):
         }, "road/gravel parts (700 x 28, 32-48c, XPLR, Tambora, 'Raod') stay out")
 
     def test_collections(self):
-        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.BIKES_ONLINE.sale_jsons],
-                         ["mountain-bikes-sale", "mountain-gear-sale", "sale"])
+        handles = [url.split("/collections/")[1].split("/")[0] for url in stores.BIKES_ONLINE.sale_jsons]
+        self.assertEqual(handles[:3], ["mountain-bikes-sale", "mountain-gear-sale", "sale"])
+        self.assertIn("cycling-body-armor", handles, "protection collections follow (2026-11-03)")
 
 
 if __name__ == "__main__":

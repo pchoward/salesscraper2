@@ -23,6 +23,10 @@ _NOT_MTB=(r'\b(?:road|gravel|cyclocross|triathlon|bmx|commuter|ultegra|dura[- ]?
 
 def title_part(title):
     value=normalize_product_name(title)
+    # Helmets, pads, armor, gloves, goggles, neck braces (sports/protection.py).
+    from sports.protection import protects
+    if protects(value):return 'Protection'
+
     for part,pattern in _RULES:
         if re.search(pattern,value,re.I):return part
     return None
@@ -32,7 +36,9 @@ def filter_reason(name,part,url='',price_new=None,price_old=None,description='',
     if not normalize_product_name(name):return 'missing name'
     if part not in PARTS:return 'not an MTB equipment category'
     value=' '+str(name)+' '+str(product_type)+' '
-    if re.search(r'\b(?:t[- ]?shirts?|hoodies?|sweatshirts?|jerseys?|shorts|pants|socks|beanies?|caps|gift\s*cards?|stickers?|bottles?|bottle\s*cages?)\b',value,re.I):
+    from sports.protection import protects
+    armor=part=='Protection' and protects(str(name),str(product_type))
+    if not armor and re.search(r'\b(?:t[- ]?shirts?|hoodies?|sweatshirts?|jerseys?|shorts|pants|socks|beanies?|caps|gift\s*cards?|stickers?|bottles?|bottle\s*cages?)\b',value,re.I):
         return 'apparel or unrelated merchandise'
     # A type shared by both ("MTB/Road Chains", "Road & MTB Saddles", Cambria)
     # is not a road part by itself; the name still decides.
