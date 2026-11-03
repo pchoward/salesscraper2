@@ -157,10 +157,23 @@ async function main(){
      await frame.locator('#btnNew').click();assert((await rows(frame)).every(r=>r.added==='1'&&r.removed!=='1'));await frame.locator('#btnGone').click();assert((await rows(frame)).every(r=>r.removed==='1'));await frame.locator('#btnAll').click();assert((await rows(frame)).every(r=>r.removed!=='1'));
     });
     await check(sport,width,'Back/Forward and cross-sport state isolation',async()=>{
-     await frame.locator('#searchInput').fill('audit-no-such-product-zzzz');await page.waitForTimeout(250);assert.equal((await rows(frame)).length,0);
-     const url=page.url();const next=sport==='ski'?'bmx':'ski';await page.locator('#sport-'+next).click();await page.waitForTimeout(400);await page.goBack();await page.waitForTimeout(400);
-     frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput');assert.equal(await frame.locator('#searchInput').inputValue(),'audit-no-such-product-zzzz');assert.equal(page.url(),url);
-     await page.goForward();await page.waitForTimeout(400);assert.equal(new URL(page.url()).searchParams.get('sport'),next);
+     // Each step waits for its own result (URL, restored search, rows), not a
+     // fixed delay: slower CI runners made the fixed 250-400 ms waits flaky.
+     const until=async(test,what,limit=10000)=>{const end=Date.now()+limit;let last;
+      while(Date.now()<end){try{last=await test();if(last)return last;}catch(e){last=e.message;}await page.waitForTimeout(100);}
+      throw new Error('Timed out waiting for '+what+' (last: '+last+')');};
+     await frame.locator('#searchInput').fill('audit-no-such-product-zzzz');
+     await until(async()=>(await rows(frame)).length===0,'the search to empty the list');
+     const url=page.url();const next=sport==='ski'?'bmx':'ski';
+     await page.locator('#sport-'+next).click();
+     await until(()=>new URL(page.url()).searchParams.get('sport')===next,'the '+next+' tab');
+     await page.goBack();
+     await until(()=>page.url()===url,'Back to '+sport);
+     frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput');
+     await until(async()=>(await frame.locator('#searchInput').inputValue())==='audit-no-such-product-zzzz','the search to be restored');
+     assert.equal(page.url(),url);
+     await page.goForward();
+     await until(()=>new URL(page.url()).searchParams.get('sport')===next,'Forward to '+next);
     });
     await check(sport,width,'No browser errors',async()=>assert.deepEqual(errors,[]));
    }catch(error){results.push({sport,width,name:'Catalog readiness',status:'fail',detail:error.message});}
