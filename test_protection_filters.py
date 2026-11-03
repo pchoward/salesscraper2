@@ -46,6 +46,9 @@ class ProtectsTests(unittest.TestCase):
     def test_ski_helmets_category_counts_as_helmets(self):
         found = evo.fields("Helmets", "Giro Ledge FS Mens Mips 2026", "H H M", [], "")
         self.assertEqual((found["protects"], found["helmet_style"], found["rotational"]), (["Helmets"], ["Snow"], ["MIPS"]))
+        # A description that mentions gloves or all-mountain skiing changes neither.
+        found = evo.fields("Helmets", "Giro Neo Mips Mens Helmet 2026", "H H M", [], "All-mountain comfort; pairs with our gloves")
+        self.assertEqual((found["protects"], found["helmet_style"]), (["Helmets"], ["Snow"]))
 
     def test_every_sport_has_the_fields(self):
         for sport, categories in ((sports.BMX, ("Protection",)), (sports.MTB, ("Protection",)), (sports.SKI, ("Helmets",))):

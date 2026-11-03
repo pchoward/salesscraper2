@@ -93,6 +93,9 @@ def protects(title, product_type="", description=""):
 
 def helmet_style(title, product_type="", description="", sport=""):
     text = f" {title or ''} ; {product_type or ''} "
+    if sport == "ski":
+        # Snow helmets describe "all-mountain" skiing, not trail riding.
+        return "Full face" if _HELMET_STYLES[0][1].search(text) else "Snow"
     style = _first(_HELMET_STYLES, text)
     if style is None and description:
         style = _first(_HELMET_STYLES, str(description)[:600])
@@ -110,7 +113,9 @@ def fields(title, product_type="", description="", sport="", default=None):
     """{filter key: [values]} for one protection listing. ``default`` names
     the kind when the store's category already says it (Ski "Helmets")."""
     found = {}
-    kinds = protects(title, product_type, description) or ([default] if default else [])
+    # When the store's category already names the kind, its description is
+    # not mined for others ("...pairs well with our gloves").
+    kinds = (protects(title, product_type) or [default]) if default else protects(title, product_type, description)
     if kinds:
         found["protects"] = kinds
     if "Helmets" in kinds:
