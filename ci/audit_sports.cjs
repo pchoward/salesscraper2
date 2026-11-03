@@ -164,6 +164,9 @@ async function main(){
       throw new Error('Timed out waiting for '+what+' (last: '+last+')');};
      await frame.locator('#searchInput').fill('audit-no-such-product-zzzz');
      await until(async()=>(await rows(frame)).length===0,'the search to empty the list');
+     // The page writes the search into the URL a moment after typing; capture
+     // the URL only once it holds it (the old fixed 250 ms raced this).
+     await until(()=>new URL(page.url()).searchParams.get('q')==='audit-no-such-product-zzzz','the search in the URL');
      const url=page.url();const next=sport==='ski'?'bmx':'ski';
      await page.locator('#sport-'+next).click();
      await until(()=>new URL(page.url()).searchParams.get('sport')===next,'the '+next+' tab');
