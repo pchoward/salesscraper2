@@ -52,14 +52,15 @@ class MikesBikesTests(unittest.TestCase):
         self.assertEqual((bike["price_new"], bike["price_old"]), ("4499.77", "12999.99"))
 
     def test_collections_and_dedup(self):
-        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.MIKES.sale_jsons],
-                         ["clearance-and-sale", "clearance-and-sale-bikes", "mountain-bikes", "santa-cruz-bikes-on-sale"])
+        handles = [url.split("/collections/")[1].split("/")[0] for url in stores.MIKES.sale_jsons]
+        self.assertEqual(handles[:4], ["clearance-and-sale", "clearance-and-sale-bikes", "mountain-bikes", "santa-cruz-bikes-on-sale"])
+        self.assertIn("protective-gear", handles, "protection collections follow (2026-11-03)")
         pages = {"clearance-and-sale": [HECKLER, PEDALS], "clearance-and-sale-bikes": [HECKLER],
                  "mountain-bikes": [HECKLER], "santa-cruz-bikes-on-sale": [HECKLER]}
 
         def fetch(url):
             handle = url.split("/collections/")[1].split("/")[0]
-            return {"products": pages[handle] if "page=1" in url else []}
+            return {"products": pages.get(handle, []) if "page=1" in url else []}
 
         products = shopify.load_sale_products(stores.MIKES, fetch=fetch, sleep=lambda seconds: None)
         self.assertEqual([product["id"] for product in products], [1, 3], "a bike in four collections is kept once")

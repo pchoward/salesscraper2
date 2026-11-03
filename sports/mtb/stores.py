@@ -24,15 +24,18 @@ for part,names in {
  'Brakes':('brakes','disc brakes','brake rotors','rotors','brake pads'),
  'Cockpit':('handlebars','stems','grips','headsets','seatposts','dropper posts','saddles'),
  'Pedals':('pedals',),
- 'Protection':('helmets','pads','knee pads','elbow pads','protection','body armor'),
+ 'Protection':('helmets','pads','knee pads','elbow pads','protection','body armor','gloves','goggles','neck braces',
+                'chest protectors','shin guards','arm pads'),
 }.items():
     TYPES.update({name:part for name in names})
 
 WORLDWIDE=shopify.ShopifyStore('Worldwide Cyclery','Worldwide Cyclery','https://www.worldwidecyclery.com',
     collection='deals',types=TYPES,brand_of=brands.for_sport(sports.MTB),own_vendor='worldwide',
     title_part=title_part,type_part=title_part,unknown_by_title=True)
+# Protection (2026-11-03): each store's protection and helmet collections are
+# read too; as everywhere, only marked-down variants are listed.
 FANATIK=shopify.ShopifyStore('Fanatik','Fanatik','https://www.fanatikbike.com',
-    collection='fanatik-outlet',types=TYPES,brand_of=brands.for_sport(sports.MTB),own_vendor='fanatik',
+    collection='fanatik-outlet',more_collections=('on-sale-protection','on-sale-helmets','mountain-bike-protection'),types=TYPES,brand_of=brands.for_sport(sports.MTB),own_vendor='fanatik',
     title_part=title_part,type_part=title_part,unknown_by_title=True)
 
 
@@ -63,7 +66,8 @@ def mikes_part(product_type):
 # collections is kept once (Shopify product id).
 MIKES=shopify.ShopifyStore("Mike's Bikes","Mike's Bikes",'https://mikesbikes.com',
     collection='clearance-and-sale',
-    more_collections=('clearance-and-sale-bikes','mountain-bikes','santa-cruz-bikes-on-sale'),
+    more_collections=('clearance-and-sale-bikes','mountain-bikes','santa-cruz-bikes-on-sale',
+                      'protective-gear','clearance-and-sale-helmets','mountain-bike-helmets'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor="mike's bikes",
     title_part=None,type_part=mikes_part,raw_type_part=True,track_exclusions=True)
 # Cambria (issue #165): one sale collection per part. Types name the
@@ -75,7 +79,8 @@ CAMBRIA_TYPES={'hardtail':'Bikes','full suspension':'Bikes','electric mountain b
     'mtb groupsets':'Drivetrain','tubes':'Tires'}
 def cambria_part(product_type):
     kind=' '.join(str(product_type or '').lower().split())
-    if not kind or re.search(r'\b(?:bags?|tape|tools?|lubricants?|cleaners?|cruiser|comfort|wheelchair|kids)\b',kind):return None
+    if 'helmet' not in kind and protection.protects('',kind):return 'Protection'
+    if not kind or re.search(r'\b(?:bags?|tape|tools?|lubricants?|cleaners?|cruiser|comfort|wheelchair|kids)\b|\b(?:helmet|goggle)\s+parts\b',kind):return None
     return CAMBRIA_TYPES.get(kind) or title_part(kind)
 
 def _tag_values(product,name):
@@ -99,7 +104,8 @@ def cambria_specs(product,variant,part):
     return found
 
 CAMBRIA=shopify.ShopifyStore('Cambria','Cambria Bike','https://cambriabike.com',
-    collection='sale-components',more_collections=('sale-frames-forks','sale-wheels','sale-tires','sale-bikes'),
+    collection='sale-components',more_collections=('sale-frames-forks','sale-wheels','sale-tires','sale-bikes',
+                                                   'body-armor','goggles','neck-braces'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='cambria',
     title_part=title_part,type_part=cambria_part,raw_type_part=True,track_exclusions=True)
 CAMBRIA.extra_specs=cambria_specs
@@ -119,7 +125,8 @@ def bikes_online_title(title):
     return part
 
 BIKES_ONLINE=shopify.ShopifyStore('Bikes Online','Bikes Online','https://www.bikesonline.com',
-    collection='mountain-bikes-sale',more_collections=('mountain-gear-sale','sale'),
+    collection='mountain-bikes-sale',more_collections=('mountain-gear-sale','sale','clothing-protection-on-sale',
+                                                       'helmets-on-sale','cycling-body-armor','cycling-goggles'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='bikes online',
     title_part=bikes_online_title,type_part=bikes_online_part,track_exclusions=True)
 # Colorado Cyclist (issue #165): the same platform and tags as Cambria. Its
@@ -132,6 +139,7 @@ _NOT_MTB_TIRES=r'\b(?:marathon|big\s+ben|big\s+apple|super\s+moto|fat\s+frank|g-
 def colorado_part(product_type):
     kind=' '.join(str(product_type or '').lower().split())
     if 'helmet' in kind:return 'Protection' if kind in COLORADO_HELMETS else None
+    if protection.protects('',kind):return 'Protection'  # pads, armor, goggles, roost guards
     if kind in ('tires','wheels'):return shopify.BY_TITLE  # one generic type: the title decides
     part=cambria_part(product_type)
     return part if part in ('Tires','Wheels') else None
@@ -150,7 +158,7 @@ def colorado_title(title):
     return None
 
 COLORADO=shopify.ShopifyStore('Colorado Cyclist','Colorado Cyclist','https://www.coloradocyclist.com',
-    collection='sale-helmets',more_collections=('sale-tires','sale-wheels'),
+    collection='sale-helmets',more_collections=('sale-tires','sale-wheels','sale-body-armor','goggles-1','roost-guards'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='colorado cyclist',
     title_part=colorado_title,type_part=colorado_part,raw_type_part=True,track_exclusions=True)
 COLORADO.extra_specs=cambria_specs

@@ -54,8 +54,9 @@ class ColoradoCyclistTests(unittest.TestCase):
         }, "road/kids helmets, visors, road/commuter/BMX tires and Cambria-duplicate bikes stay out")
 
     def test_collections(self):
-        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.COLORADO.sale_jsons],
-                         ["sale-helmets", "sale-tires", "sale-wheels"])
+        handles = [url.split("/collections/")[1].split("/")[0] for url in stores.COLORADO.sale_jsons]
+        self.assertEqual(handles[:3], ["sale-helmets", "sale-tires", "sale-wheels"])
+        self.assertIn("sale-body-armor", handles, "protection collections follow (2026-11-03)")
 
     def test_bmx_parts_still_out(self):
         from sports.mtb.rules import filter_reason

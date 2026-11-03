@@ -14,21 +14,21 @@ PARTS = (
     ("Helmets", r"\bhelmets?\b|\bfull[- ]?face\b|\bbrain\s*buckets?\b"),
     ("Goggles", r"\bgoggles?\b|\bgoggle\s+lens(?:es)?\b"),
     ("Neck", r"\bneck\s*(?:brace|braces|guard|guards|roll|protector)s?\b"),
-    ("Shoulders", r"\bshoulder\s*(?:pads?|guards?|protectors?|armou?r)\b"),
+    ("Shoulders", r"\bshoulder\s*(?:pads?|guards?|protectors?|armou?r|supports?|braces?)\b"),
     ("Chest & Ribs", r"\bchest\s*(?:protectors?|guards?|plates?|pads?)\b|\broost\s*(?:guards?|deflectors?)\b"
-                     r"|\brib\s*(?:protectors?|guards?|pads?)\b|\bbody\s*armou?r\b|\bpressure\s*suits?\b"
+                     r"|\brib\s*(?:protectors?|guards?|pads?)\b|\bbody\s*armou?r\b(?!\s*(?:underwear|shorts|pants))|\bpressure\s*suits?\b"
                      r"|\bpadded\s+(?:shirts?|tops?|jerseys?|jackets?|vests?|tees?)\b|\bprotective\s+(?:shirts?|tops?|jackets?|vests?)\b"
                      r"|\bupper\s*(?:body\s*)?(?:protective|protection|armou?r)\b"
                      r"|\bbody\s*protectors?\b|\bprotection\s+jackets?\b"),
     ("Back & Spine", r"\bback\s*(?:protectors?|guards?|plates?|pads?|armou?r)\b|\bspine\s*(?:protectors?|guards?|pads?)\b"
                      r"|\bprotector\s+vests?\b|\bprotective\s+vests?\b|\bspine\b|\bbody\s*protectors?\b"),
-    ("Elbows", r"\belbows?\b"),
+    ("Elbows", r"\belbows?\b|\barm\s*(?:pads?|guards?|protectors?)\b"),
     ("Forearms", r"\bforearms?\b"),
-    ("Wrists", r"\bwrists?\s*(?:guards?|braces?|pads?|protectors?|wraps?)\b|\bwristguards?\b"),
+    ("Wrists", r"\bwrists?\s*(?:guards?|braces?|pads?|protectors?|wraps?|supports?)\b|\bwristguards?\b"),
     ("Gloves", r"\bgloves?\b|\bmitts?\b|\bmittens?\b"),
     ("Hips & Tailbone", r"\bhips?\s*(?:pads?|guards?|protectors?)\b|\btailbone\b|\bcrash\s*(?:pants|shorts)\b"
-                        r"|\bimpact\s*(?:shorts|pants|liners?)\b|\bpadded\s*(?:shorts|pants|liners?|underwear)\b"
-                        r"|\bprotective\s*(?:shorts|pants|liners?)\b|\bbum\s*pads?\b"),
+                        r"|\bimpact\s*(?:shorts|pants|liners?|underwear)\b|\barmou?r\s*(?:underwear|shorts|pants)\b"
+                        r"|\bprotective\s*(?:shorts|pants|underwear)\b|\bbum\s*pads?\b"),
     ("Knees", r"\bknees?\b"),
     ("Shins", r"\bshins?\b"),
     ("Ankles", r"\bankles?\b"),
@@ -73,7 +73,13 @@ def _first(table, text):
 def protects(title, product_type="", description=""):
     """The body parts / kinds a piece protects, in sidebar order."""
     text = f" {title or ''} ; {product_type or ''} "
-    found = [label for label, pattern in _PARTS if pattern.search(text)]
+    if re.search(r"\b(?:goggle|helmet)\s+parts\b|\bhelmet\s+bags?\b", text, re.I):
+        return []  # spares and bags, not the piece
+    # The title names the piece; the store's category ("Ankle & Wrist
+    # Supports", "Knee & Shin Pads") only fills in when the title doesn't.
+    found = [label for label, pattern in _PARTS if pattern.search(f" {title or ''} ")]
+    if not found:
+        found = [label for label, pattern in _PARTS if pattern.search(text)]
     if "Helmets" in found and _SPARE.search(title or ""):
         # A visor or replacement pads for a helmet is not a helmet.
         found.remove("Helmets")

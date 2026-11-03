@@ -63,8 +63,9 @@ class CambriaTests(unittest.TestCase):
         self.assertEqual(offers, {71: ["27.5"], 72: ["29"]}, "each variant gets only its own wheel size")
 
     def test_collections(self):
-        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.CAMBRIA.sale_jsons],
-                         ["sale-components", "sale-frames-forks", "sale-wheels", "sale-tires", "sale-bikes"])
+        handles = [url.split("/collections/")[1].split("/")[0] for url in stores.CAMBRIA.sale_jsons]
+        self.assertEqual(handles[:5], ["sale-components", "sale-frames-forks", "sale-wheels", "sale-tires", "sale-bikes"])
+        self.assertIn("body-armor", handles, "protection collections follow (2026-11-03)")
 
     def test_shared_type_rule(self):
         self.assertIsNone(filter_reason("Shimano XT Chain", "Drivetrain", product_type="MTB/Road Chains"))

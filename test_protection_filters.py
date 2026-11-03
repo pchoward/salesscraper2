@@ -60,3 +60,32 @@ class ProtectsTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MtbProtectionTests(unittest.TestCase):
+    """Filling MTB protection (2026-11-03): pads, armor, gloves, goggles, neck braces."""
+
+    def test_rules_keep_protection_and_drop_apparel(self):
+        from sports.mtb.rules import filter_reason, title_part
+        for title in ("Fox Racing Ranger Gloves", "100% Accuri 2 Goggles", "Leatt 5.5 Neck Brace",
+                      "G-Form Pro-X3 Impact Shorts", "Fox Racing Baseframe Pro Chest Guard"):
+            self.assertEqual(title_part(title), "Protection", title)
+            self.assertIsNone(filter_reason(title, "Protection"), title)
+        self.assertEqual(filter_reason("Fox Ranger Shorts", "Protection"), "apparel or unrelated merchandise")
+        self.assertIsNotNone(filter_reason("Giro Cielo MIPS Road Helmet", "Protection"))
+
+    def test_cambria_and_colorado_types(self):
+        from sports.mtb import stores
+        for kind in ("Knee Pads", "Arm Pads", "Knee & Shin Pads", "Ankle & Wrist Supports", "Body Armor Underwear",
+                     "Goggles", "Roost Guards", "Neck Braces"):
+            self.assertEqual(stores.cambria_part(kind), "Protection", kind)
+            self.assertEqual(stores.colorado_part(kind), "Protection", kind)
+        for kind in ("Helmet Parts", "Goggle Parts", "MTB Shorts"):
+            self.assertIsNone(stores.cambria_part(kind), kind)
+        self.assertEqual(stores.cambria_part("Derailleur Parts"), "Drivetrain")
+        self.assertEqual(protection.protects("Demon Body Armor Underwear"), ["Hips & Tailbone"])
+        self.assertEqual(protection.protects("Fox Racing Arm Pads"), ["Elbows"])
+        # The title wins over the store's category.
+        self.assertEqual(protection.protects("7 iDP Control Shoulder Support - Left", "Ankle & Wrist Supports"), ["Shoulders"])
+        self.assertEqual(protection.protects("7 iDP Control Ankle Protector", "Ankle & Wrist Supports"), ["Ankles"])
+        self.assertEqual(protection.protects("Race Face Ambush Leg", "Knee & Shin Pads"), ["Knees", "Shins"])
