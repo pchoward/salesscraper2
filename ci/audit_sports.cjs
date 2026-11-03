@@ -116,9 +116,19 @@ async function main(){
      frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput');
      assert.equal(page.url(),savedTechnicalURL);assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),selection);
      const chips=await frame.locator('#activeChips').textContent();assert(chips.includes(preferred[1]),'technical choice must appear in removable active filters');
-     // A second scoped field combines with AND on one offer; no matching result is required.
-     const second=config.fields.find(f=>f.key!==field.key&&(!f.categories?.length||f.categories.includes(category)));
-     if(second){await technical(frame,second.key,second.values[0],mobile);selection=await frame.evaluate(()=>SportSpecFilters.capture());expected=oracle(selection);actual=await rows(frame);assert.deepEqual(actual.map(r=>r.id).sort(),expected.map(r=>r.id).sort());}
+     // A second scoped field combines with AND on one offer. Counts are live
+     // (as on Skate), so options and fields with no match under the first pick
+     // are hidden: pick a value that is still offered.
+     const second=await frame.evaluate(first=>{
+      for(const section of document.querySelectorAll('[data-technical-field]')){
+       const key=section.dataset.technicalField;
+       if(key===first||section.hidden||section.style.display==='none')continue;
+       const chip=[...section.querySelectorAll('.tech-chip')].find(c=>c.dataset.value&&!c.hidden&&Number(c.dataset.count)>0);
+       if(chip)return {key,value:chip.dataset.value};
+      }
+      return null;
+     },field.key);
+     if(second){await technical(frame,second.key,second.value,mobile);selection=await frame.evaluate(()=>SportSpecFilters.capture());expected=oracle(selection);actual=await rows(frame);assert.deepEqual(actual.map(r=>r.id).sort(),expected.map(r=>r.id).sort());}
      await frame.evaluate(()=>clearFilters());assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),{});
     });
     await frame.evaluate(()=>clearFilters());
