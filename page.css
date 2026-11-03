@@ -3441,3 +3441,13 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 
 /* Local Watch remains available; delivery is explicitly opted in per sport. */
 .alerts-unavailable .card-alert { display:none; }
+
+/* Breadcrumbs (Tactics-style): Sport / Type / Brand / ... ; a crumb backs out to it. */
+.crumbs { flex: 1 1 100%; order: -1; margin: 0 0 4px; font-size: 0.8rem; color: #64748b; }
+.crumbs[hidden] { display: none; }
+.crumbs ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; }
+.crumbs li { display: inline-flex; align-items: center; }
+.crumbs li + li::before { content: "/"; margin: 0 6px; color: #94a3b8; }
+.crumbs .crumb-link { background: none; border: 0; padding: 2px 0; font: inherit; color: #475569; cursor: pointer; }
+.crumbs .crumb-link:hover, .crumbs .crumb-link:focus-visible { color: #0f172a; text-decoration: underline; }
+.crumbs [aria-current="page"] { color: #0f172a; font-weight: 600; }

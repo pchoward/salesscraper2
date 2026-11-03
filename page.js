@@ -1953,7 +1953,10 @@ function queueFilters() {
     filterTimer = setTimeout(applyFilters, 100);
 }
 
+let crumbBatch = false;
+
 function applyFilters() {
+    if (crumbBatch) return;
     matchMemo = new Map();
     readControls();
     dealRows().forEach(row => {
@@ -1973,6 +1976,7 @@ function applyFilters() {
     paintFacetCounts();
     updateMoreCount();
     paintActiveChips();
+    paintBreadcrumbs();
     paintResultCount();
     paintEmptyState();
     syncUrl();
@@ -4262,6 +4266,81 @@ function paintActiveChips() {
         button.addEventListener("click", chip.clear);
         host.appendChild(button);
     });
+}
+
+// Tactics-style trail: Sport / Type / Brand / Store / the other filters in
+// the order they were picked. A crumb backs out of everything after it; the
+// sport clears every filter. The last crumb is where you are.
+function crumbLabel(entry) {
+    // A spec pick shows its value ("160–169 cm"), like Tactics' "Size 8.75".
+    if (entry.key.indexOf("technical:") === 0) return entry.key.split(":").slice(2).join(":");
+    return String(entry.label).replace(/^(Type|Store): /, "").replace(/ ×$/, "");
+}
+
+function breadcrumbTrail() {
+    const entries = collectFilterActions().filter(entry => entry.label !== "Type: All types");
+    const order = rememberFilterOrder(entries);
+    const rank = key => {
+        const fixed = ["part", "brand", "store"].indexOf(key);
+        if (fixed >= 0) return fixed;
+        const picked = order.indexOf(key);
+        return 3 + (picked < 0 ? order.length : picked);
+    };
+    return entries.slice().sort((a, b) => rank(a.key) - rank(b.key));
+}
+
+function backOutTo(trail, index) {
+    const later = trail.slice(index + 1).reverse();
+    if (!later.length) return;
+    // BMX/Ski/MTB spec picks are dropped together: each one's own "remove"
+    // would restore the others it saw.
+    const specs = later.filter(entry => entry.key.indexOf("technical:") === 0);
+    crumbBatch = true;
+    try {
+        later.filter(entry => specs.indexOf(entry) < 0).forEach(entry => entry.clear());
+        if (specs.length && typeof SportSpecFilters !== "undefined") {
+            const kept = SportSpecFilters.capture();
+            specs.forEach(entry => {
+                const parts = entry.key.split(":");
+                const field = parts[1], value = parts.slice(2).join(":");
+                const left = [].concat(kept[field] || []).filter(item => item !== value);
+                if (left.length) kept[field] = left; else delete kept[field];
+            });
+            SportSpecFilters.restore(kept);
+        }
+    } finally {
+        crumbBatch = false;
+    }
+    applyFilters();
+}
+
+function paintBreadcrumbs() {
+    const host = document.getElementById("breadcrumbs");
+    if (!host) return;
+    const list = host.querySelector("ol");
+    const trail = breadcrumbTrail();
+    const sport = (typeof SPORT_SETTINGS !== "undefined" && SPORT_SETTINGS.label) || "Skate";
+    list.innerHTML = "";
+    const crumb = (label, onClick, current) => {
+        const item = document.createElement("li");
+        if (current) {
+            const here = document.createElement("span");
+            here.setAttribute("aria-current", "page");
+            here.textContent = label;
+            item.appendChild(here);
+        } else {
+            const link = document.createElement("button");
+            link.type = "button";
+            link.className = "crumb-link";
+            link.textContent = label;
+            link.addEventListener("click", onClick);
+            item.appendChild(link);
+        }
+        list.appendChild(item);
+    };
+    crumb(sport, () => clearFilters(), !trail.length);
+    trail.forEach((entry, index) => crumb(crumbLabel(entry), () => backOutTo(trail, index), index === trail.length - 1));
+    host.hidden = !trail.length;
 }
 
 // The phone Filters button shows how many filters are on (mobile.css).
