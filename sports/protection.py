@@ -83,7 +83,11 @@ def protects(title, product_type="", description=""):
     if "Helmets" in found and _SPARE.search(title or ""):
         # A visor or replacement pads for a helmet is not a helmet.
         found.remove("Helmets")
-    if "Goggles" in found and re.search(r"\blens(?:es)?\b", title or "", re.I):
+    # "Goggle Replacement Lenses" / "Goggle Lens - Clear" are spares;
+    # "Goggles with Bonus Lens" is a pair of goggles.
+    lens_only = re.search(r"\b(?:replacement|spare)\s+lens", title or "", re.I) or (
+        re.search(r"\blens(?:es)?\b", title or "", re.I) and not re.search(r"\bgoggles?\b(?!\s+lens)", title or "", re.I))
+    if "Goggles" in found and lens_only:
         found.remove("Goggles")
         found.append("Goggle lenses")
     if not found and _PAD_SET.search(text):

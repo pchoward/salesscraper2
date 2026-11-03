@@ -12,7 +12,7 @@ from sports.bmx.specs import category_for_title
 from sports.ski import evo, specs
 from stores import shopify
 
-PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets")
+PARTS = sports.SKI.parts
 
 TYPES = {
     "skis": "Skis", "kids skis": "Skis", "alpine skis": "Skis",
@@ -21,13 +21,16 @@ TYPES = {
     "bindings": "Bindings", "alpine bindings": "Bindings",
     "poles": "Poles", "alpine poles": "Poles",
     "helmets": "Helmets", "kids helmets": "Helmets",
+    # Protection (2026-11-03): goggles and armor; "Eyewear" also holds sunglasses, so its title decides.
+    "goggles": "Protection", "eyewear": shopify.BY_TITLE,
 }
 
 
 def type_part(type_key):
     """Gear West's three-level types: "ALPINE - ALPINE SKIS - Park Skis"."""
     for word, part in (("alpine skis", "Skis"), ("alpine boots", "Boots"), ("alpine bindings", "Bindings"),
-                       ("alpine poles", "Poles")):
+                       ("alpine poles", "Poles"), ("helmets goggles helmets", "Helmets"),
+                       ("helmets goggles goggles", "Protection")):
         if word in type_key:
             return part
     return None
@@ -81,7 +84,7 @@ GEAR_WEST = shopify.ShopifyStore(
     "Gear West",
     "https://www.gearwest.com",
     collection="closeout-alpine-skis",
-    more_collections=("closeout-alpine-boots",),
+    more_collections=("closeout-alpine-boots", "helmets-protection", "eyewear"),
     types=TYPES,
     type_part=type_part,
     brand_of=brands.for_sport(sports.SKI),
@@ -105,7 +108,7 @@ def utah_part(tags):
         if "snowboard" in category:
             return None
         for words, part in (("boot", "Boots"), ("binding", "Bindings"), ("pole", "Poles"), ("helmet", "Helmets"),
-                            ("ski", "Skis")):
+                            ("goggle", "Protection"), ("protect", "Protection"), ("ski", "Skis")):
             if words in category:
                 return part
     return None
@@ -119,7 +122,7 @@ UTAH_SKI = shopify.ShopifyStore(
     "Utah Ski",
     "https://www.utahskis.com",
     collection="sale",
-    more_collections=("demos-sale",),
+    more_collections=("demos-sale", "sale-helmet-goggle"),
     types={},
     brand_of=brands.for_sport(sports.SKI),
     own_vendor="utah ski",
@@ -139,6 +142,7 @@ EVO_TYPES = {
     "alpine ski bindings": "Bindings", "alpine touring ski bindings": "Bindings", "telemark ski bindings": "Bindings",
     "ski poles": "Poles",
     "ski and snowboard helmets": "Helmets",
+    "goggles": "Protection", "armor": "Protection",  # snow armor; evo's bike armor is "Body Armor"
 }
 
 EVO = shopify.ShopifyStore(
@@ -146,7 +150,10 @@ EVO = shopify.ShopifyStore(
     "evo",
     "https://www.evo.com",
     collection="skis",
-    more_collections=("ski-boots", "ski-bindings", "ski-poles"),
+    more_collections=("ski-boots", "ski-bindings", "ski-poles",
+                      # Protection (2026-11-03): helmets, goggles, back protectors, vests, impact shorts.
+                      "helmets", "goggles", "body-armor", "d3o-back-protector-0avz03a",
+                      "hip-protection-shorts-0avz06a", "childrens-ski-back-protector-0avz00a"),
     types=EVO_TYPES,
     brand_of=brands.for_sport(sports.SKI),
     own_vendor="evo",
