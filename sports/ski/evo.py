@@ -312,5 +312,8 @@ def fields(part, title, product_type, tags, text):
             put("din", din_range(value))
         put("brake", [f"{mm} mm" for mm in brake_widths(text)])
         put("sole", soles(title + " " + text))
+    elif part in ("Helmets", "Protection"):
+        from sports import protection
+        found.update(protection.fields(title, product_type, text, "ski", default="Helmets" if part == "Helmets" else None))
     put("ability", ability(text))
     return found
