@@ -9348,6 +9348,18 @@
     {
       "date": "2026-11-03",
       "results": {
+        "187 Killer Pads_Protection": {
+          "count": 7,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 7,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "CCS_Accessories": {
           "count": 41,
           "failed": false,
@@ -9516,6 +9528,18 @@
             "reason": "normal_variation"
           }
         },
+        "Demon_Protection": {
+          "count": 15,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 15,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "Exodus_Accessories": {
           "count": 6,
           "failed": false,
@@ -9610,6 +9634,18 @@
             "actual_count": 8,
             "percentage_change": 0.0,
             "reason": "normal_variation"
+          }
+        },
+        "G-Form_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
           }
         },
         "Kinetic_Accessories": {
@@ -10153,6 +10189,18 @@
             "reason": "sustained_new_level"
           }
         },
+        "Triple 8_Protection": {
+          "count": 7,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 7,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "Zumiez_Accessories": {
           "count": 14,
           "failed": false,
@@ -10238,7 +10286,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-03T15:14:48+00:00"
+      "scanned_at": "2026-11-03T15:43:08+00:00"
     }
   ],
   "baseline": {
@@ -10425,9 +10473,27 @@
     "Tactics_Bearings": {
       "date": "2026-11-03",
       "count": 8
+    },
+    "187 Killer Pads_Protection": {
+      "date": "2026-11-03",
+      "count": 7
+    },
+    "Demon_Protection": {
+      "date": "2026-11-03",
+      "count": 15
+    },
+    "Triple 8_Protection": {
+      "date": "2026-11-03",
+      "count": 7
     }
   },
   "completeness_baseline": {
+    "187 Killer Pads_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 7
+      }
+    ],
     "CCS_Accessories": [
       {
         "date": "2026-10-21",
@@ -11016,6 +11082,12 @@
         "count": 0
       }
     ],
+    "Demon_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 15
+      }
+    ],
     "Exodus_Accessories": [
       {
         "date": "2026-10-28",
@@ -11254,6 +11326,12 @@
       {
         "date": "2026-11-03",
         "count": 8
+      }
+    ],
+    "G-Form_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 0
       }
     ],
     "Kinetic_Accessories": [
@@ -12964,6 +13042,12 @@
       {
         "date": "2026-11-03",
         "count": 2
+      }
+    ],
+    "Triple 8_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 7
       }
     ],
     "Zumiez_Accessories": [
