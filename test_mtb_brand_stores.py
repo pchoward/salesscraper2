@@ -50,6 +50,9 @@ class BrandStoreTests(unittest.TestCase):
         self.assertIsNotNone(filter_reason("Alpinestars Descender Waterproof Vest", "Protection"), "a rain vest")
         self.assertIsNone(filter_reason("Fox Racing Baseframe Pro D3O Cycling Jacket - Black", "Protection"), "armor")
         self.assertIsNone(stores.brand_title("Demon Mountain Bike Tailgate Pad"))
+        self.assertEqual(filter_reason("7iDP Project.23 Helmet Bag - Rally", "Protection"), "spare or accessory")
+        self.assertEqual(filter_reason("Troy Lee Designs D3 Headliner", "Protection"), "spare or accessory")
+        self.assertEqual(canonical("G-Form.com"), "G-Form")
 
     def test_all_are_mtb_stores(self):
         for store in stores.BRAND_STORES:
