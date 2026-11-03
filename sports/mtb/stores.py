@@ -122,7 +122,39 @@ BIKES_ONLINE=shopify.ShopifyStore('Bikes Online','Bikes Online','https://www.bik
     collection='mountain-bikes-sale',more_collections=('mountain-gear-sale','sale'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='bikes online',
     title_part=bikes_online_title,type_part=bikes_online_part,track_exclusions=True)
-STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE)
+# Colorado Cyclist (issue #165): the same platform and tags as Cambria. Its
+# sale bikes and frames are largely Cambria's listings at Cambria's prices, so
+# only helmets, tires and wheels are read. Road, kids' helmets and helmet
+# parts (visors, liners) stay out.
+COLORADO_HELMETS=('mtb helmets','full face helmets','dirt jump helmets')
+# Commuter, touring and gravel tire lines that come in MTB wheel sizes.
+_NOT_MTB_TIRES=r'\b(?:marathon|big\s+ben|big\s+apple|super\s+moto|fat\s+frank|g-one|hurricane|kojak|energizer|land\s+cruiser|road\s+cruiser|smart\s+sam|citizen|delta\s+cruiser)\b'
+def colorado_part(product_type):
+    kind=' '.join(str(product_type or '').lower().split())
+    if 'helmet' in kind:return 'Protection' if kind in COLORADO_HELMETS else None
+    if kind in ('tires','wheels'):return shopify.BY_TITLE  # one generic type: the title decides
+    part=cambria_part(product_type)
+    return part if part in ('Tires','Wheels') else None
+
+def colorado_title(title):
+    """Tires: 26/27.5/29 x 1.9 in or wider, not commuter lines. Wheels: MTB sizes."""
+    value=' '.join(str(title or '').split())
+    part=title_part(value)
+    if part=='Tires':
+        if re.search(r'\btubes?\b',value,re.I):return 'Tires'
+        size=re.search(r'(?<![\d.])(26|27\.5|29)\s*["″]?\s*x\s*(\d(?:\.\d+)?)',value,re.I)
+        if not size or float(size[2])<1.9 or re.search(_NOT_MTB_TIRES,value,re.I):return None
+        return 'Tires'
+    if part=='Wheels':
+        return 'Wheels' if re.search(r'(?<![\d.])(?:26|27\.5|29)(?:["″]|er\b|\b)|\b(?:mtb|mountain|boost|enduro|trail|xc)\b',value,re.I) else None
+    return None
+
+COLORADO=shopify.ShopifyStore('Colorado Cyclist','Colorado Cyclist','https://www.coloradocyclist.com',
+    collection='sale-helmets',more_collections=('sale-tires','sale-wheels'),
+    types={},brand_of=brands.for_sport(sports.MTB),own_vendor='colorado cyclist',
+    title_part=colorado_title,type_part=colorado_part,raw_type_part=True,track_exclusions=True)
+COLORADO.extra_specs=cambria_specs
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO)
 
 
 def robots_policy(store):
