@@ -273,7 +273,9 @@ PARTS = sports.BMX.parts
 
 
 def scrapers():
-    return [scraper for store in STORES for scraper in shopify.scrapers_for(store, PARTS)]
+    from stores import skatepro
+    shops = [scraper for store in STORES for scraper in shopify.scrapers_for(store, PARTS)]
+    return shops + skatepro.scrapers("bmx", skatepro.bmx_extra)  # BMX helmets, pads, padded shorts
 
 
 def preview(store=ALBES):
