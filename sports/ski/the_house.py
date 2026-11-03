@@ -29,7 +29,7 @@ MAX_PAGES = 40
 PAGE_DELAY = 2.0
 _USER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
-PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets")
+PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection")
 
 _TILE = re.compile(r'data-pid="(\d+)"\s+data-gtmdata="([^"]+)"')
 _IMAGE = re.compile(r'data-(?:bg|src)="(https://[^"]+?\.(?:jpg|jpeg|png|webp)[^"]*)"', re.I)
@@ -57,6 +57,13 @@ def part_for(data):
     name = " " + re.sub(r"[^a-z0-9]+", " ", str(data.get("name") or "").casefold()) + " "
     if subcategory == "helmets":
         return "Helmets"
+    # Goggles (filed under snowboard, worn by skiers too) and armor among the
+    # accessories: wrist guards, impact shorts, back protectors (2026-11-03).
+    if subcategory == "goggles":
+        return "Protection" if re.search(r" goggles? ", name) and not re.search(r" lens(?:es)? ", name) else None
+    if subcategory in ("ski-accessories", "snowboard-accessories"):
+        from sports.protection import protects
+        return "Protection" if protects(str(data.get("name") or "")) else None
     if subcategory != "ski-equipment":
         return None
     if re.search(r" boots? ", name):

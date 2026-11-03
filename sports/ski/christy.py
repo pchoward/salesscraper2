@@ -26,7 +26,7 @@ MAX_PAGES = 40
 PAGE_DELAY = 2.0
 _USER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
-PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets")
+PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection")
 
 _TILE_START = re.compile(r'<div class="product-tile[^"]*" data-pid="([^"]+)"')
 _LINK = re.compile(r'href="(/product/[^"?]+\.html)')
@@ -52,6 +52,11 @@ def part_for(name):
     words = " " + re.sub(r"[^a-z0-9]+", " ", str(name or "").casefold()) + " "
     if re.search(r" helmets? ", words):
         return "Helmets"
+    if re.search(r" goggles? ", words) and not re.search(r" lens(?:es)? ", words):
+        return "Protection"
+    from sports.protection import protects
+    if protects(str(name or "")):
+        return "Protection"  # back protectors, wrist guards, impact shorts
     if re.search(r" boots? ", words):
         return "Boots"
     if re.search(r" poles? ", words):

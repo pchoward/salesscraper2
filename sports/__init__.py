@@ -148,7 +148,7 @@ SKI = Sport(
     label="Ski",
     brand="ShredDeals Ski",
     # Issue #134: alpine skiing first; snowboards are a separate, later decision.
-    parts=("Skis", "Boots", "Bindings", "Poles", "Helmets"),
+    parts=("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection"),
     default_part="all",
     data_dir="catalogs/ski",
     page_path="ski/sale_items_chart.html",

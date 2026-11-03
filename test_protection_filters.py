@@ -51,7 +51,7 @@ class ProtectsTests(unittest.TestCase):
         self.assertEqual((found["protects"], found["helmet_style"]), (["Helmets"], ["Snow"]))
 
     def test_every_sport_has_the_fields(self):
-        for sport, categories in ((sports.BMX, ("Protection",)), (sports.MTB, ("Protection",)), (sports.SKI, ("Helmets",))):
+        for sport, categories in ((sports.BMX, ("Protection",)), (sports.MTB, ("Protection",)), (sports.SKI, ("Helmets", "Protection"))):
             import importlib
             fields = {f["key"]: f for f in importlib.import_module(sport.facets).FIELDS}
             for key in protection.FIELD_KEYS:

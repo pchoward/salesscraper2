@@ -92,7 +92,7 @@ class UtahSkiTests(unittest.TestCase):
         self.assertEqual(kept["Atomic Hawx Ultra 120 Ski Boots"]["technical_specs"]["mondo"], ["27.5"])
         self.assertIn(stores.UTAH_SKI, stores.STORES)
         self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.UTAH_SKI.sale_jsons],
-                         ["sale", "demos-sale"])
+                         ["sale", "demos-sale", "sale-helmet-goggle"])
 
     def test_tag_readers(self):
         self.assertEqual(evo.waist_widths("Skis-Waist Width: 96-110mm"), [96, 109])
@@ -110,8 +110,9 @@ class EvoStoreTests(unittest.TestCase):
         from sports.ski import stores
 
         self.assertIn(stores.EVO, stores.STORES)
-        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.EVO.sale_jsons],
-                         ["skis", "ski-boots", "ski-bindings", "ski-poles"])
+        handles = [url.split("/collections/")[1].split("/")[0] for url in stores.EVO.sale_jsons]
+        self.assertEqual(handles[:4], ["skis", "ski-boots", "ski-bindings", "ski-poles"])
+        self.assertTrue({"helmets", "goggles", "body-armor"} <= set(handles), "protection (2026-11-03)")
         self.assertEqual(stores.EVO.types["alpine touring ski bindings"], "Bindings")
 
     def test_binding_din_brake_and_sole(self):

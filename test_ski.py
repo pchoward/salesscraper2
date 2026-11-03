@@ -41,11 +41,12 @@ def parse(feed=FEED):
 
 class GearWestTests(unittest.TestCase):
     def test_settings(self):
-        self.assertEqual(sports.SKI.parts, ("Skis", "Boots", "Bindings", "Poles", "Helmets"))
+        self.assertEqual(sports.SKI.parts, ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection"))
         self.assertFalse(sports.SKI.delivery, "no email or alerts for Ski")
-        self.assertEqual(stores.GEAR_WEST.sale_jsons, [
+        self.assertEqual(stores.GEAR_WEST.sale_jsons[:2], [
             "https://www.gearwest.com/collections/closeout-alpine-skis/products.json",
             "https://www.gearwest.com/collections/closeout-alpine-boots/products.json"])
+        self.assertIn("https://www.gearwest.com/collections/eyewear/products.json", stores.GEAR_WEST.sale_jsons)
         self.assertEqual({scraper.shop.store for scraper in sports.SKI.build_scrapers() if hasattr(scraper, "shop")},
                          {"Gear West", "Utah Ski", "evo"})
 
