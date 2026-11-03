@@ -162,7 +162,31 @@ COLORADO=shopify.ShopifyStore('Colorado Cyclist','Colorado Cyclist','https://www
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='colorado cyclist',
     title_part=colorado_title,type_part=colorado_part,raw_type_part=True,track_exclusions=True)
 COLORADO.extra_specs=cambria_specs
-STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO)
+# Brand-direct stores (owner, 2026-11-03: "a LOT more protective gear ... all
+# the main brands"). Their sale collections also hold jerseys and shorts (the
+# MTB rules leave those out) and other sports' gear, which the title filter
+# leaves out: baseball/soccer guards (G-Form), moto (Troy Lee), snow (Demon).
+# Leatt's and Fox's own stores can't be read (empty feed / not Shopify); their
+# gear comes through the retailers. iXS prices in euros, so it isn't used.
+_OTHER_SPORTS=r'\b(?:baseball|softball|soccer|football|lacrosse|hockey|batter\'?s?|catcher|snow|ski|moto|mx|motocross|motorcycle)\b'
+def brand_title(title):
+    if re.search(_OTHER_SPORTS,str(title or ''),re.I):return None
+    return title_part(title)
+
+def brand_store(name,base,handles):
+    return shopify.ShopifyStore(name,name,base,collection=handles[0],more_collections=tuple(handles[1:]),
+        types=TYPES,brand_of=brands.for_sport(sports.MTB),title_part=brand_title,type_part=brand_title,
+        unknown_by_title=True,track_exclusions=True)
+
+TROY_LEE=brand_store('Troy Lee Designs','https://www.troyleedesigns.com',('troys-garage-bike-sale','sale-bike-womens'))
+ALPINESTARS=brand_store('Alpinestars','https://www.alpinestars.com',('sale-all-mtb',))
+DEMON=brand_store('Demon','https://www.demonunited.com',('sale','discount-eligible'))
+SEVEN_IDP=brand_store('7iDP','https://7idp.com',('sale',))
+G_FORM=brand_store('G-Form','https://www.g-form.com',('sale-m2','sale-included-products'))
+RACE_FACE=brand_store('Race Face','https://www.raceface.com',
+    ('outlet-sale','protection-sale','fall-sale','sale','on-sale','clearance-week'))
+BRAND_STORES=(TROY_LEE,ALPINESTARS,DEMON,SEVEN_IDP,G_FORM,RACE_FACE)
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES
 
 
 def robots_policy(store):
