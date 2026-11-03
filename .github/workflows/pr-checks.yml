@@ -120,6 +120,18 @@ jobs:
         continue-on-error: true
         run: node ci/smoke.mjs preview/site preview/shots
 
+      - name: Public Explore demo navigation and mobile checks
+        run: node ci/check_explore.cjs preview/site "${{ runner.temp }}/public-explore-results" --public
+
+      - name: Upload public Explore demo screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-explore-demo
+          path: ${{ runner.temp }}/public-explore-results/
+          retention-days: 7
+          if-no-files-found: warn
+
       - name: Four-sport UI regression checks (saved catalogs and labeled fixtures)
         id: sport_audit
         continue-on-error: true

@@ -1,6 +1,7 @@
 (() => {
     'use strict';
     const {scope, state} = JSON.parse(document.getElementById('exploreData').textContent);
+    const demo = scope.demo === true;
     const $ = id => document.getElementById(id);
     const rows = state.offers.filter(offer => offer.available === true);
     const controls = ['category', 'store', 'brand', 'query', 'size', 'sale', 'sort', 'view'];
@@ -22,26 +23,28 @@
         controls.push(id); options(id, rows.map(row => row.specs[axis]).filter(Boolean));
     }
     const verified = state.manifest.filter(item => item.complete).length;
-    $('coverage').textContent = `${scope.label} · ${verified}/${state.manifest.length} configured sources completed · ${state.stale ? 'STALE — last good inventory' : 'snapshot complete for configured sources only'} · last success ${state.last_success || 'none'}`;
+    $('coverage').textContent = demo ? 'DEMO / SAMPLE PRODUCTS · Live retailer coverage is unverified. All products, prices, stock and history below are fictional.' : `${scope.label} · ${verified}/${state.manifest.length} configured sources completed · ${state.stale ? 'STALE — last good inventory' : 'snapshot complete for configured sources only'} · last success ${state.last_success || 'none'}`;
     function node(tag, text, className) {
         const result = document.createElement(tag); result.textContent = text;
         if (className) result.className = className; return result;
     }
     function retailer(offer) {
+        if (demo) return node('span', offer.title);
         const link = node('a', offer.title); const url = new URL(offer.url);
         if (url.protocol === 'https:') link.href = url.href;
         link.target = '_blank'; link.rel = 'noopener noreferrer'; return link;
     }
     function price(offer) {
         const result = node('div', ''); result.append(node('span', `${offer.currency} ${offer.price}`, 'offer-price'));
-        result.append(node('p', offer.compare_at ? `${Math.round((1 - Number(offer.price)/Number(offer.compare_at))*100)}% off retailer compare-at ${offer.compare_at}` : 'Regular price · no reference price', 'muted'));
+        if (demo) result.append(node('p', 'Sample price · not an actual offer', 'muted'));
+        result.append(node('p', offer.compare_at ? `${Math.round((1 - Number(offer.price)/Number(offer.compare_at))*100)}% ${demo ? 'sample discount / sample reference' : 'off retailer compare-at'} ${offer.compare_at}` : 'Regular price · no reference price', 'muted'));
         return result;
     }
     function quick(offer) {
-        const body = $('quickContent'); body.replaceChildren(node('h2', offer.title), price(offer), node('p', `${offer.brand} · ${offer.store} · ${JSON.stringify(offer.specs)}`));
+        const body = $('quickContent'); body.replaceChildren(node('p', demo ? 'DEMO / SAMPLE PRODUCTS — not available to buy' : '', 'demo-label'), node('h2', offer.title), price(offer), node('p', `${offer.brand} · ${offer.store} · ${JSON.stringify(offer.specs)}`));
         const points = state.history[offer.id]?.points || [];
-        body.append(node('h3', 'Observed price history'));
-        if (!points.length) body.append(node('p', 'No verified in-stock observations yet.'));
+        body.append(node('h3', demo ? 'Sample price history — fictional' : 'Observed price history'));
+        if (!points.length) body.append(node('p', demo ? 'No real price observations — sample inventory only.' : 'No verified in-stock observations yet.'));
         for (const point of points) body.append(node('p', `${point.day} · ${offer.currency} ${point.price}`));
         body.append(node('p', 'Retailer compare-at is a reference, not an observed historical price.', 'muted'), retailer(offer));
         $('quick').showModal();
@@ -57,14 +60,16 @@
                 `${offer.title} ${offer.brand}`.toLowerCase().includes($('query').value.toLowerCase());
         });
         filtered.sort((a,b) => $('sort').value === 'price' ? a.currency.localeCompare(b.currency) || Number(a.price)-Number(b.price) : a.title.localeCompare(b.title));
-        $('count').textContent = `${filtered.length} available variants · prices are for the shown size`;
+        $('count').textContent = demo ? `${filtered.length} SAMPLE variants · not live stock` : `${filtered.length} available variants · prices are for the shown size`;
         $('inventory').className = $('view').value === 'table' ? 'table' : 'cards';
         $('inventory').replaceChildren(...filtered.map(offer => {
             const card = node('article', '', 'inventory-card'); card.dataset.variant = offer.variant_id;
-            const heading = node('h2', ''); heading.append(retailer(offer)); card.append(heading, node('p', `${offer.brand} · ${offer.store}`), price(offer), node('p', Object.entries(offer.specs).map(([key,value]) => `${key}: ${value}`).join(' · ') || 'Specifications not provided'));
+            const heading = node('h2', ''); heading.append(retailer(offer));
+            if (demo) card.append(node('p', 'DEMO / SAMPLE PRODUCT', 'demo-label'));
+            card.append(heading, node('p', `${offer.brand} · ${offer.store}`), price(offer), node('p', Object.entries(offer.specs).map(([key,value]) => `${key}: ${value}`).join(' · ') || 'Specifications not provided'));
             const button = node('button', 'Quick View'); button.type = 'button'; button.onclick = () => quick(offer); card.append(button); return card;
         }));
-        if (!filtered.length) $('inventory').append(node('p', 'No matching verified in-stock variants. Clear filters to broaden your search.'));
+        if (!filtered.length) $('inventory').append(node('p', demo ? 'No matching SAMPLE variants. Clear filters to explore the demo.' : 'No matching verified in-stock variants. Clear filters to broaden your search.'));
     }
     $('filters').onsubmit = event => event.preventDefault();
     function update() {

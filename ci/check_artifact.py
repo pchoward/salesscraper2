@@ -20,10 +20,16 @@ from pathlib import Path
 
 SHOT = re.compile(r"^(desktop|mobile)-(home|search|quickview|shell|sport(?:-[a-z]+)?)\.png$")
 SITE_FILES = {"index.html", "sale_items_chart.html", "history.json", "_headers",
+              "discover/view.js", "discover/mtb-dirt-jump/index.html",
               "navigation/navigation.js", "navigation/navigation.css", "navigation/skate-bridge.js"}
+SPORT_FILES = {f"{sport}/{name}" for sport in ('bmx', 'ski', 'mtb')
+               for name in ('sale_items_chart.html', 'history.json')}
+SITE_FILES |= SPORT_FILES
+SITE_DIRS = {'navigation', 'discover', 'discover/mtb-dirt-jump', 'bmx', 'ski', 'mtb'}
 PNG = b"\x89PNG\r\n\x1a\n"
 MAX_SHOT = 3 * 1024 * 1024
-MAX_SITE = 40 * 1024 * 1024
+# Current four-sport preview is ~49 MiB; retain a bounded 64 MiB cap.
+MAX_SITE = 64 * 1024 * 1024
 
 
 class Refused(Exception):
@@ -56,7 +62,7 @@ def check(root, head_sha, open_prs):
         total = 0
         for path in site.rglob("*"):
             relative = path.relative_to(site).as_posix()
-            if relative == "navigation" and path.is_dir() and not path.is_symlink():
+            if relative in SITE_DIRS and path.is_dir() and not path.is_symlink():
                 continue
             if relative not in SITE_FILES or path.is_symlink() or not path.is_file():
                 raise Refused(f"unexpected file in site/: {path.name}")

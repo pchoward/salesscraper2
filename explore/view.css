@@ -13,3 +13,5 @@ input,select,button{font:inherit;min-height:32px;max-width:100%}.explore-tools i
 #inventory.table{display:block}.table .inventory-card{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;align-items:center;border-bottom:0}.table .inventory-card:last-child{border-bottom:1px solid var(--border)}
 dialog{width:min(480px,calc(100% - 24px));border:1px solid var(--border);border-radius:4px;padding:16px}dialog::backdrop{background:#17202b80}dialog h2{font-size:17px}
 @media(max-width:600px){main{padding:8px}.explore-tools{gap:6px}.explore-tools label{flex:1 1 28%;min-width:0}.explore-tools .search{flex-basis:100%;order:-1}.explore-tools select{width:100%}#inventory.cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.inventory-card{padding:9px}.inventory-card h2{font-size:13px}.table .inventory-card{grid-template-columns:1fr 1fr;gap:4px}}
+
+.demo-label{font-size:10px!important;font-weight:700;color:#75420b}.preview-note{font-weight:700}
