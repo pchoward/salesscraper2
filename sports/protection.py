@@ -42,7 +42,12 @@ _SPARE = re.compile(r"\breplacement\b|\bspare\b|\bvisors?\b|\bpeaks?\b|\bliners?
 
 # Helmet style, from the title + type, then the description.
 HELMET_STYLES = (
-    ("Full face", r"\bfull[- ]?face\b|\bdownhill\s+helmet\b|\bdh\s+helmet\b|\bconvertible\b|\bchin\s*bar\b"),
+    # Plus full-face models whose names don't say so, as their makers sell
+    # them (owner, 2026-11-03: BMX riders want these): 7iDP Project 23, Troy
+    # Lee D3/D4, Bell Full-9/Full-10/Sanction, Fox Rampage/Proframe, Kali Zoka.
+    ("Full face", r"\bfull[- ]?face\b|\bdownhill\s+helmet\b|\bdh\s+helmet\b|\bconvertible\b|\bchin\s*bar\b"
+                  r"|\bproject[ .]?23\b|\bp23\b|\btroy\s+lee\b.*\bd[34]\b|\bd[34]\s+(?:composite|carbon|polyacrylite)\b"
+                  r"|\bfull[- ]?(?:9|10)\b|\bsanction\b|\brampage\b|\bproframe\b|\bzoka\b"),
     ("Dirt jump / BMX", r"\bdirt\s*jump\b|\bbmx\b|\bskate(?:board)?\b|\bdual[- ]certified\b|\bdj\s+helmet\b|\bbucket\b"),
     ("Trail / half shell", r"\b(?:mtb|mountain|trail|enduro|all[- ]?mountain|half[- ]?shell|open[- ]?face|xc)\b"),
     ("Snow", r"\bski\b|\bsnow(?:board)?\b"),
