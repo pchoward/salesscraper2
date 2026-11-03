@@ -30,7 +30,11 @@ def payload(data, sport):
                     continue
                 for offer in offers:
                     values[field['key']].update(str(v) for v in offer.get('specs', {}).get(field['key'], []))
-    fields = [dict(field, values=sorted(values[field['key']]))
+    def ordered(field, found):
+        # A field's own order ("XS".."XXL", Adult/Youth/Kids), then the rest A-Z.
+        order = list(field.get('order') or ())
+        return sorted(found, key=lambda value: (order.index(value) if value in order else len(order), value))
+    fields = [dict(field, values=ordered(field, values[field['key']]))
               for field in definitions if values[field['key']]]
     return {'fields': fields, 'items': items}
 

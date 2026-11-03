@@ -48,12 +48,73 @@ HELMET_STYLES = (
     ("Full face", r"\bfull[- ]?face\b|\bdownhill\s+helmet\b|\bdh\s+helmet\b|\bconvertible\b|\bchin\s*bar\b"
                   r"|\bproject[ .]?23\b|\bp23\b|\btroy\s+lee\b.*\bd[34]\b|\bd[34]\s+(?:composite|carbon|polyacrylite)\b"
                   r"|\bfull[- ]?(?:9|10)\b|\bsanction\b|\brampage\b|\bproframe\b|\bzoka\b"),
-    ("Dirt jump / BMX", r"\bdirt\s*jump\b|\bbmx\b|\bskate(?:board)?\b|\bdual[- ]certified\b|\bdj\s+helmet\b|\bbucket\b"),
-    ("Trail / half shell", r"\b(?:mtb|mountain|trail|enduro|all[- ]?mountain|half[- ]?shell|open[- ]?face|xc)\b"),
+    ("Half shell (skate / BMX)", r"\bdirt\s*jump\b|\bbmx\b|\bskate(?:board)?\b|\bdual[- ]certified\b|\bdj\s+helmet\b|\bbucket\b"),
+    ("Half shell (trail)", r"\b(?:mtb|mountain|trail|enduro|all[- ]?mountain|half[- ]?shell|open[- ]?face|xc)\b"),
     ("Snow", r"\bski\b|\bsnow(?:board)?\b"),
     ("Road / commuter", r"\broad\b|\bcommuter\b|\burban\b|\bcity\b|\brecreation(?:al)?\b"),
 )
 _HELMET_STYLES = tuple((label, re.compile(pattern, re.I)) for label, pattern in HELMET_STYLES)
+
+# Helmet and pad certifications, named as standards bodies write them
+# (owner, 2026-11-03: "certified, double certified (name the certs)"). Read
+# from the title and description only: a listing that doesn't state one has
+# none here, it is never assumed from the brand or model.
+CERTIFICATIONS = (
+    ("Dual certified (CPSC + ASTM F1492)", r"\b(?:dual|double|twin)[- ]certifi(?:ed|cation)\b"),
+    ("CPSC (US bike)", r"\bcpsc\b|\b16\s*cfr\s*(?:part\s*)?1203\b"),
+    ("ASTM F1492 (skate)", r"\bf[\s-]?1492\b"),
+    ("ASTM F2032 (BMX)", r"\bf[\s-]?2032\b"),
+    ("ASTM F1952 (downhill)", r"\bf[\s-]?1952\b"),
+    ("ASTM F2040 (snow)", r"\bf[\s-]?2040\b"),
+    ("EN 1078 (EU bike / skate)", r"\ben[\s-]?1078\b"),
+    ("EN 1077 (EU snow)", r"\ben[\s-]?1077\b"),
+    ("EN 1621 (CE impact armor)", r"\ben[\s-]?1621(?:-[12])?\b|\bce\s+level\s*[12]\b"),
+    ("EN 14120 (roller sports pads)", r"\ben[\s-]?14120\b"),
+)
+_CERTIFICATIONS = tuple((label, re.compile(pattern, re.I)) for label, pattern in CERTIFICATIONS)
+CERTIFIED_UNNAMED = "Certified (standard not named)"
+CERTIFICATION_ORDER = [label for label, _ in CERTIFICATIONS] + [CERTIFIED_UNNAMED]
+
+
+def certifications(title, description=""):
+    """The certifications a listing states, in CERTIFICATION_ORDER."""
+    text = f" {title or ''} ; {str(description or '')[:3000]} "
+    found = [label for label, pattern in _CERTIFICATIONS if pattern.search(text)]
+    if "CPSC (US bike)" in found and "ASTM F1492 (skate)" in found and CERTIFICATION_ORDER[0] not in found:
+        found.insert(0, CERTIFICATION_ORDER[0])
+    if not found and re.search(r"\bcertified\b", text, re.I):
+        # "The Certified Sweatsaver": certified, but the standard isn't named.
+        found = [CERTIFIED_UNNAMED]
+    return found
+
+
+AGE_ORDER = ["Adult", "Youth", "Kids"]
+_KIDS = re.compile(r"\b(?:kids?|child(?:ren)?'?s?|toddlers?|little|lil|infant|baby|tike)\b", re.I)
+_YOUTH = re.compile(r"\b(?:youth|junior|jr\.?|grom|teen)\b", re.I)
+
+
+def age(title):
+    """Adult, Youth or Kids, from the title (adult when it says neither)."""
+    title = str(title or "")
+    if _KIDS.search(title):
+        return "Kids"
+    if _YOUTH.search(title):
+        return "Youth"
+    return "Adult"
+
+
+SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL"]
+
+
+def variant_size(product, variant):
+    """Letter sizes (XS-XXL) a variant's Size option names: "S/M" is S and M."""
+    from protection import size_tokens  # Skate's reader of size labels
+    found = []
+    for index, option in enumerate((product or {}).get("options") or [], start=1):
+        name = option.get("name") if isinstance(option, dict) else option
+        if "size" in str(name or "").lower():
+            found.extend(size_tokens((variant or {}).get(f"option{index}")))
+    return [size for size in SIZE_ORDER if size in found]
 
 # Rotational-impact systems, as named by their makers.
 ROTATIONAL = (
@@ -66,7 +127,7 @@ ROTATIONAL = (
 )
 _ROTATIONAL = tuple((label, re.compile(pattern, re.I)) for label, pattern in ROTATIONAL)
 
-FIELD_KEYS = ("protects", "helmet_style", "rotational")
+FIELD_KEYS = ("protects", "helmet_style", "certification", "rotational", "prot_size", "age")
 
 
 def _first(table, text):
@@ -139,6 +200,10 @@ def fields(title, product_type="", description="", sport="", default=None):
     kinds = (protects(title, product_type) or [default]) if default else protects(title, product_type, description)
     if kinds:
         found["protects"] = kinds
+        found["age"] = [age(title)]
+        certs = certifications(title, description)
+        if certs:
+            found["certification"] = certs
     if "Helmets" in kinds:
         style = helmet_style(title, product_type, description, sport)
         if style:
@@ -150,12 +215,22 @@ def fields(title, product_type="", description="", sport="", default=None):
 
 
 def facet_fields(prefix, categories):
-    """The three sidebar fields for a sport, scoped to its protection categories."""
+    """The protection sidebar fields for a sport, scoped to its protection
+    categories: what it protects, helmet type, certifications, rotational
+    system, size and age. ``order`` lists values in a natural order."""
+    categories = tuple(categories)
     return (
-        {"key": "protects", "label": "Protects", "param": prefix + "_protects", "categories": tuple(categories)},
-        {"key": "helmet_style", "label": "Helmet style", "param": prefix + "_helmet", "categories": tuple(categories)},
+        {"key": "protects", "label": "Protects", "param": prefix + "_protects", "categories": categories,
+         "order": [label for label, _ in PARTS] + ["Goggle lenses", "Pad Sets"]},
+        {"key": "helmet_style", "label": "Helmet type", "param": prefix + "_helmet", "categories": categories,
+         "order": [label for label, _ in HELMET_STYLES]},
+        {"key": "certification", "label": "Certification", "param": prefix + "_cert", "categories": categories,
+         "order": CERTIFICATION_ORDER},
         {"key": "rotational", "label": "Rotational protection", "param": prefix + "_rotational",
-         "categories": tuple(categories)},
+         "categories": categories, "order": [label for label, _ in ROTATIONAL]},
+        {"key": "prot_size", "label": "Size", "param": prefix + "_psize", "categories": categories,
+         "order": SIZE_ORDER},
+        {"key": "age", "label": "Age", "param": prefix + "_age", "categories": categories, "order": AGE_ORDER},
     )
 
 
