@@ -26,7 +26,14 @@ def _basic(sport, name, part):
 
 def bmx(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     import sports
-    return _basic(sports.BMX, name, part)
+    reason = _basic(sports.BMX, name, part)
+    if reason is None and part == "Protection":
+        # Helmet replacement pads, visors, straps: protection only when it
+        # says what it protects (owner, 2026-11-03).
+        from sports.protection import protects
+        if not protects(name, product_type):
+            return "not protective gear"
+    return reason
 
 
 def ski(name, part, url="", price_new=None, price_old=None, description="", product_type=""):

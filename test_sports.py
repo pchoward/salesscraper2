@@ -331,7 +331,7 @@ class CircuitTests(unittest.TestCase):
         from sports.bmx import stores
 
         self.assertEqual(stores.CIRCUIT.sale_json, "https://www.circuitbmx.com/collections/sale-items/products.json")
-        self.assertIn("Circuit BMX", {scraper.shop.store for scraper in sports.BMX.build_scrapers()})
+        self.assertIn("Circuit BMX", {scraper.shop.store for scraper in sports.BMX.build_scrapers() if hasattr(scraper, "shop")})
         feed = {"products": [
             {"title": "Plastic Pegs 4.5in", "vendor": "Odyssey", "handle": "pegs", "product_type": "Small Parts",
              "variants": [{"id": 1, "price": "20", "compare_at_price": "30"}]},
@@ -360,7 +360,7 @@ class MoreBmxStoresTests(unittest.TestCase):
         from sports.bmx import stores
 
         self.assertLessEqual({"Albe's BMX", "Circuit BMX", "Powers BMX", "Source BMX US"},
-                             {scraper.shop.store for scraper in sports.BMX.build_scrapers()})
+                             {scraper.shop.store for scraper in sports.BMX.build_scrapers() if hasattr(scraper, "shop")})
         self.assertEqual(stores.POWERS.sale_jsons[:2], [
             "https://www.powersbmx.com/collections/clearance/products.json",
             "https://www.powersbmx.com/collections/black-friday-deals/products.json"])
