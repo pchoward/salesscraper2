@@ -30,7 +30,7 @@ Names below come from the workflow files.
 |---|---|---|---|---|
 | CI - Pull Request Tests (`pr-checks.yml`) | PRs to main, pushes to main | read | none | compiles Python, checks page.js, Worker tests, all `test_*.py` |
 | Pages - Rebuild Without Scraping (`rebuild-page.yml`) | push to main touching page files; manual | **write** | none | rebuilds and commits the page from saved data |
-| Scraper - Run Full Scrape (`scrape.yml`) | 07:17 and 09:43 UTC; manual | **write** | `SMTP_*`, `EMAIL_FROM/TO`, `ADMIN_EMAIL_TO`, `REPORT_URL`, `ALERTS_HMAC_SECRET`; vars `NOTIFICATION_*`, `ALERTS_*` | scrapes, emails, commits data and page |
+| Scraper - Skate (`scrape.yml`) | 07:17 and 09:43 UTC; manual | **write** | `SMTP_*`, `EMAIL_FROM/TO`, `ADMIN_EMAIL_TO`, `REPORT_URL`, `ALERTS_HMAC_SECRET`; vars `NOTIFICATION_*`, `ALERTS_*` | scrapes, emails, commits data and page |
 | Alerts - Check Worker Deployment (`worker-drift.yml`) | daily | read | var `ALERTS_API_URL` | compares the live Worker with main |
 | pages build and deployment | GitHub-managed | | | publishes `main` to pchoward.github.io/salesscraper2 |
 

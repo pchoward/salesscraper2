@@ -126,7 +126,7 @@ class RebuildPageTests(unittest.TestCase):
 
     def test_missing_or_discarded_inputs(self):
         with working_copy():
-            with self.assertRaisesRegex(rebuild_page.RebuildError, "run 'Scraper - Run Full Scrape' once"):
+            with self.assertRaisesRegex(rebuild_page.RebuildError, "run 'Scraper - Skate' once"):
                 rebuild_page.rebuild()
             self.assertEqual(rebuild_page.main(["--skip-if-missing"]), 0)
             self.assertFalse(Path("sale_items_chart.html").exists())
