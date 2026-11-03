@@ -23,6 +23,16 @@ class SkiProtectionTests(unittest.TestCase):
         self.assertEqual(christy.part_for("POC Spine VPD Air Back Protector"), "Protection")
         self.assertEqual(christy.part_for("Oakley Flight Deck Goggles"), "Protection")
 
+    def test_goggles_lenses_and_armor(self):
+        from sports import protection
+        from sports.ski import evo
+        self.assertEqual(protection.protects("Dragon RVX MAG OTG Goggles with Bonus Lens"), ["Goggles"])
+        self.assertEqual(protection.protects("Anon M4S Goggles + Bonus Lens + MFI Facemask"), ["Goggles"])
+        self.assertEqual(protection.protects("Stay Strong Race DVSN Goggle Lens - Clear"), ["Goggle lenses"])
+        self.assertEqual(protection.protects("Fly Racing Zone goggle Replacement Lenses"), ["Goggle lenses"])
+        self.assertEqual(evo.fields("Protection", "Atomic Live Shield Amid Lite Jr. Vest - Kids'", "Armor", [], "")["protects"],
+                         ["Back & Spine"])
+
     def test_every_ski_store_scrapes_every_part(self):
         import sports
         self.assertEqual(stores.PARTS, sports.SKI.parts)

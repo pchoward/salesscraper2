@@ -314,6 +314,9 @@ def fields(part, title, product_type, tags, text):
         put("sole", soles(title + " " + text))
     elif part in ("Helmets", "Protection"):
         from sports import protection
-        found.update(protection.fields(title, product_type, text, "ski", default="Helmets" if part == "Helmets" else None))
+        # Ski armor vests (evo's "Armor") are back protectors.
+        default = "Helmets" if part == "Helmets" else (
+            "Back & Spine" if "armor" in str(product_type or "").lower() else None)
+        found.update(protection.fields(title, product_type, text, "ski", default=default))
     put("ability", ability(text))
     return found
