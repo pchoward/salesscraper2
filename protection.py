@@ -2,9 +2,11 @@
 
 Every store's protective gear is the part ``"Protection"``, with one subtype:
 
-    Helmet, Knee Pads, Elbow Pads, Wrist Guards, Pad Set, Other
+    Helmet, Knee Pads, Elbow Pads, Wrist Guards, Hip & Tailbone, Ankle Guards,
+    Shin Guards, Pad Set, Other
 
-``Other`` is impact shorts, hip and tailbone pads, and similar. Sizes are
+Hip & Tailbone is impact shorts and hip/tailbone pads; Ankle and Shin guards
+have their own types too (owner, 2026-11-03: plenty of skaters wear them). Sizes are
 the letter sizes XS–XXL, from a store's size options when it has them, else
 from the name. Youth, kids, and "one size" labels are not sizes here.
 """
@@ -12,13 +14,17 @@ from the name. Youth, kids, and "one size" labels are not sizes here.
 import re
 
 PART = "Protection"
-SUBTYPES = ("Helmet", "Knee Pads", "Elbow Pads", "Wrist Guards", "Pad Set", "Other")
+SUBTYPES = ("Helmet", "Knee Pads", "Elbow Pads", "Wrist Guards", "Hip & Tailbone", "Ankle Guards", "Shin Guards",
+            "Pad Set", "Other")
 # URL and filter tokens, in display order.
 SUBTYPE_TOKENS = {
     "Helmet": "helmet",
     "Knee Pads": "knee",
     "Elbow Pads": "elbow",
     "Wrist Guards": "wrist",
+    "Hip & Tailbone": "hip",
+    "Ankle Guards": "ankle",
+    "Shin Guards": "shin",
     "Pad Set": "set",
     "Other": "other",
 }
@@ -34,11 +40,12 @@ _SET = _RE(
     r"|\bcombo\s*pads?\b|\bpad\s*combo\b"
     r"|\b(?:3|three|6|six)[\s-]*(?:pack|pk|piece|pc)\b"
 )
-_OTHER = _RE(
-    r"\bimpact\s*shorts?\b|\bpadded\s*shorts?\b|\bcrash\s*(?:pads?|shorts?)\b"
+_HIP = _RE(
+    r"\bimpact\s*shorts?\b|\bpadded\s*shorts?\b|\bcrash\s*(?:pads?|shorts?|pants)\b|\bbumsavers?\b"
     r"|\b(?:hip|tailbone|bum|butt|coccyx)\s*(?:pads?|protectors?|guards?|savers?)\b"
-    r"|\bshin\s*guards?\b|\bankle\s*(?:guards?|braces?)\b"
 )
+_ANKLE = _RE(r"\bankle\s*(?:guards?|braces?|supports?|protectors?|pads?|savers?)\b")
+_SHIN = _RE(r"\bshin\s*(?:guards?|pads?|protectors?|savers?)\b")
 # Pads that are not body protection: riser and shock pads are hardware.
 _NOT_GEAR = _RE(r"\briser\b|\bshock\s*pads?\b|\bgrip\b|\bhelmet\s*(?:stickers?|bags?|cams?|mounts?)\b")
 # A product type that says the whole product is protective gear.
@@ -65,8 +72,12 @@ def classify(name, product_type=""):
         return "Elbow Pads"
     if _WRIST.search(text):
         return "Wrist Guards"
-    if _OTHER.search(text):
-        return "Other"
+    if _HIP.search(text):
+        return "Hip & Tailbone"
+    if _ANKLE.search(text):
+        return "Ankle Guards"
+    if _SHIN.search(text):
+        return "Shin Guards"
     if _GEAR_TYPE.search(kind) and re.search(r"\b(?:pads?|guards?|protect\w*)\b", name, re.IGNORECASE):
         return "Other"
     return None

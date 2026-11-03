@@ -161,7 +161,23 @@ EVO = shopify.ShopifyStore(
     track_exclusions=True,
 )
 
-STORES = (GEAR_WEST, UTAH_SKI, EVO)
+# Multisport protection brands (owner, 2026-11-03): snow helmets, and the
+# impact shorts, wrist guards and back protectors skiers wear too.
+def multisport_part(title):
+    from sports import protection
+    if not protection.suits("ski", title):
+        return None
+    return "Helmets" if "Helmets" in protection.protects(title) else "Protection"
+
+
+def _brand_stores():
+    from sports import protection
+    return tuple(protection.brand_store(name, sports.SKI, multisport_part, details=details)
+                 for name in ("Triple 8", "Bern", "Demon"))
+
+
+BRAND_STORES = _brand_stores()
+STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES
 
 
 def scrapers():

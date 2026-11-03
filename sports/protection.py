@@ -29,7 +29,7 @@ PARTS = (
     ("Gloves", r"\bgloves?\b|\bmitts?\b|\bmittens?\b"),
     ("Hips & Tailbone", r"\bhips?\s*(?:pads?|guards?|protectors?)\b|\btailbone\b|\bcrash\s*(?:pants|shorts)\b"
                         r"|\bimpact\s*(?:shorts|pants|liners?|underwear)\b|\barmou?r\s*(?:underwear|shorts|pants)\b"
-                        r"|\bprotective\s*(?:shorts|pants|underwear)\b|\bbum\s*pads?\b"),
+                        r"|\bprotective\s*(?:shorts|pants|underwear)\b|\bbum\s*(?:pads?|savers?)\b|\bbumsavers?\b"),
     ("Knees", r"\bknees?\b"),
     ("Shins", r"\bshins?\b"),
     ("Ankles", r"\bankles?\b"),
@@ -91,6 +91,11 @@ def protects(title, product_type="", description=""):
     if "Goggles" in found and lens_only:
         found.remove("Goggles")
         found.append("Goggle lenses")
+    # Armor kits ("Zero PLUS Vest + Shorts", "X V7 Shorts + Knee Pads"): the
+    # shorts in them are impact shorts. Chamois/bib shorts never are.
+    if (found and "Hips & Tailbone" not in found and re.search(r"\bshorts\b", title or "", re.I)
+            and not re.search(r"\b(?:chamois|bibs?|liner|cycling\s+shorts)\b", title or "", re.I)):
+        found.append("Hips & Tailbone")
     if not found and _PAD_SET.search(text):
         # "Saver Series Pad Set (3-Pack)": knees, elbows and wrists.
         found = ["Pad Sets"]
@@ -147,3 +152,52 @@ def facet_fields(prefix, categories):
         {"key": "rotational", "label": "Rotational protection", "param": prefix + "_rotational",
          "categories": tuple(categories)},
     )
+
+
+# Multisport brands (Triple 8, 187, Kali, Bern, Demon, G-Form...) sell one
+# catalog for several sports (owner, 2026-11-03: "most are made for
+# multisport"). Which sport's Protection a piece belongs in, from its words.
+_OTHER_SPORTS = re.compile(r"\b(?:baseball|softball|soccer|football|lacrosse|hockey|batter'?s?|catcher|moto|mx|motocross"
+                           r"|motorcycle|equestrian|horse)\b", re.I)
+_SNOW = re.compile(r"\b(?:snow|ski|skiing|winter|snowboard(?:ing)?)\b", re.I)
+# Worn on snow too: impact shorts, wrist guards, back and body protectors.
+_SNOW_BODY = {"Hips & Tailbone", "Wrists", "Back & Spine", "Chest & Ribs"}
+
+
+def suits(sport_id, title, product_type=""):
+    """True when a multisport brand's piece belongs in ``sport_id``'s Protection."""
+    text = f" {title or ''} ; {product_type or ''} "
+    kinds = set(protects(title, product_type))
+    if not kinds or _OTHER_SPORTS.search(text):
+        return False
+    # A store's "SKI/SNOW" category doesn't pin impact shorts or wrist guards
+    # to snow; only the title saying so does.
+    body_only = kinds <= _SNOW_BODY
+    snow = bool(_SNOW.search(f" {title or ''} " if body_only else text))
+    if sport_id == "ski":
+        return snow or body_only
+    return not snow
+
+
+# Multisport brand stores (Shopify sale collections, store probe 2026-11-03).
+# Each sport reads the ones that suit it; ``suits`` picks the pieces. Pro-Tec
+# and S1 aren't Shopify, TSG and Fuse didn't answer: their gear comes through
+# the skate shops and BMX stores.
+BRAND_STORES = {
+    "Triple 8": ("https://www.triple8.com", ("yard-sale", "4th-of-july-sale", "sale")),
+    "187 Killer Pads": ("https://www.187killerpads.com", ("all-products-sales-tax-must-manually-add-new-product-lines", "yard-sale")),
+    "Kali": ("https://www.kaliprotectives.com", ("all",)),
+    "Bern": ("https://www.bernunlimited.com", ("bern-barn", "bern-outlet")),
+    "Demon": ("https://www.demonunited.com", ("sale", "discount-eligible")),
+    "G-Form": ("https://www.g-form.com", ("sale-m2", "sale-included-products")),
+}
+
+
+def brand_store(name, sport, part_of, **options):
+    """A Shopify store config for one multisport brand in ``sport``."""
+    from sports import brands
+    from stores import shopify
+    base, handles = BRAND_STORES[name]
+    return shopify.ShopifyStore(name, name, base, collection=handles[0], more_collections=handles[1:], types={},
+                                type_part=lambda kind: shopify.BY_TITLE, title_part=part_of, unknown_by_title=True,
+                                brand_of=brands.for_sport(sport), track_exclusions=True, **options)

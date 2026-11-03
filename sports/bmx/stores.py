@@ -199,7 +199,16 @@ SOURCE_US = shopify.ShopifyStore(
     unknown_by_title=True,
 )
 
-STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US)
+# Multisport protection brands (owner, 2026-11-03): helmets and pads made for
+# skate, BMX and bike alike; snow-only and other sports' gear stays out.
+def multisport_part(title):
+    return "Protection" if protection.suits("bmx", title) else None
+
+
+BRAND_STORES = tuple(protection.brand_store(name, sports.BMX, multisport_part, details=details)
+                     for name in ("Triple 8", "187 Killer Pads", "Kali", "Bern", "Demon", "G-Form"))
+
+STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES
 
 PARTS = sports.BMX.parts
 
