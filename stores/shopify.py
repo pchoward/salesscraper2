@@ -367,6 +367,9 @@ def title_with_brand(product, own_vendor="", brand_of=None):
     words = set(re.findall(r"[a-z0-9]+", title.casefold()))
     if brand and all(word in words for word in brand):
         return title
+    # "7iDP" vs "7 iDP Project 23": the same brand, spaced differently.
+    if brand and "".join(brand) in re.sub(r"[^a-z0-9]+", "", title.casefold()):
+        return title
     return f"{vendor} {title}".strip()
 
 

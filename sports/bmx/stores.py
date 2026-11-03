@@ -202,13 +202,72 @@ SOURCE_US = shopify.ShopifyStore(
 # Multisport protection brands (owner, 2026-11-03): helmets and pads made for
 # skate, BMX and bike alike; snow-only and other sports' gear stays out.
 def multisport_part(title):
-    return "Protection" if protection.suits("bmx", title) else None
+    if not protection.suits("bmx", title):
+        return None
+    # Helmets: skate, dirt jump / BMX or full face; not road, trail or snow ones.
+    found = protection.fields(title, sport="bmx")
+    if "Helmets" in found.get("protects", ()) and set(found.get("helmet_style", ())) & {
+            "Road / commuter", "Trail / half shell", "Snow"}:
+        return None
+    return "Protection"
 
 
 BRAND_STORES = tuple(protection.brand_store(name, sports.BMX, multisport_part, details=details)
-                     for name in ("Triple 8", "187 Killer Pads", "Kali", "Bern", "Demon", "G-Form"))
+                     for name in ("Triple 8", "187 Killer Pads", "Kali", "Demon", "G-Form"))  # Bern's are commuter lids
 
-STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES
+# Bike shops' BMX-style protection (owner, 2026-11-03: "very few helmets in
+# BMX ... the one thing people wear, then shin or knee guards"). Helmets only
+# when dirt jump / BMX or full face (BMX racing needs full face); pads for
+# knees, shins, elbows, ankles and hips. Trail, road and snow helmets stay out.
+_BMX_PADS = {"Knees", "Shins", "Elbows", "Ankles", "Hips & Tailbone", "Wrists", "Pad Sets", "Chest & Ribs", "Back & Spine"}
+_BMX_HELMETS = {"Full face", "Dirt jump / BMX"}
+_SHOP_TYPES = {"dirt jump helmets": "Protection", "full face helmets": "Protection", "knee pads": "Protection",
+               "knee & shin pads": "Protection", "knee shin pads": "Protection", "arm pads": "Protection",
+               "ankle & wrist supports": "Protection", "body armor underwear": "Protection"}
+
+
+def bike_shop_part(title):
+    found = protection.fields(title, sport="bmx")
+    kinds = set(found.get("protects", ()))
+    if not kinds or not protection.suits("bmx", title):
+        return None
+    if "Helmets" in kinds:
+        return "Protection" if set(found.get("helmet_style", ())) & _BMX_HELMETS else None
+    return "Protection" if kinds & _BMX_PADS else None
+
+
+def bike_shop_type(kind):
+    """A bike shop's own type ("Dirt Jump Helmets", "Knee & Shin Pads") decides
+    when it says BMX-style; anything else is read from the title."""
+    key = " ".join(str(kind or "").lower().split())
+    if key in _SHOP_TYPES:
+        return _SHOP_TYPES[key]
+    # "P23 Helmet", "Bike - Full Face - Zoka": the type names a full-face or
+    # dirt jump helmet.
+    if "helmet" in key or "full face" in key:
+        style = protection.helmet_style("", key)
+        if style in _BMX_HELMETS and protection.suits("bmx", key + " helmet"):
+            return "Protection"
+    # A generic type ("HELMETS", "MTB Helmets"): the title must show it.
+    return shopify.BY_TITLE
+
+
+def bike_shop(name, base, handles):
+    return shopify.ShopifyStore(name, name, base, collection=handles[0], more_collections=tuple(handles[1:]), types={},
+                                type_part=bike_shop_type, raw_type_part=True, title_part=bike_shop_part,
+                                unknown_by_title=True, brand_of=brands.for_sport(sports.BMX), details=details,
+                                track_exclusions=True)
+
+
+BIKE_SHOPS = (
+    bike_shop("Colorado Cyclist", "https://www.coloradocyclist.com", ("sale-helmets", "sale-body-armor")),
+    bike_shop("Cambria", "https://cambriabike.com", ("dirt-jump-helmets", "full-face-helmets", "knee-pads", "knee-shin-pads")),
+    bike_shop("7iDP", "https://7idp.com", ("sale",)),
+    bike_shop("Troy Lee Designs", "https://www.troyleedesigns.com", ("troys-garage-bike-sale",)),
+    bike_shop("Bikes Online", "https://www.bikesonline.com", ("helmets-on-sale", "cycling-knee-pads", "cycling-body-armor")),
+)
+
+STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES + BIKE_SHOPS
 
 PARTS = sports.BMX.parts
 
