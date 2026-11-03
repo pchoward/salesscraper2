@@ -32,6 +32,14 @@ class BmxHelmetTests(unittest.TestCase):
                       "Kali Zoka Helmet", "Fox Proframe RS Helmet"):
             self.assertEqual(protection.helmet_style(title), "Full face", title)
 
+    def test_brand_spacing_and_brand_store_helmets(self):
+        import sports
+        from sports import brands
+        self.assertEqual(shopify.title_with_brand({"title": "7 iDP Project 23 ABS Full Face Helmet", "vendor": "7 iDP"}, "",
+                                                  brands.for_sport(sports.BMX)), "7 iDP Project 23 ABS Full Face Helmet")
+        self.assertIsNone(stores.multisport_part("Giro Cielo MIPS Road Helmet"))
+        self.assertEqual(stores.multisport_part("Triple 8 The Certified Sweatsaver Helmet"), "Protection")
+
     def test_registered(self):
         self.assertEqual([s.store for s in stores.BIKE_SHOPS],
                          ["Colorado Cyclist", "Cambria", "7iDP", "Troy Lee Designs", "Bikes Online"])

@@ -202,11 +202,18 @@ SOURCE_US = shopify.ShopifyStore(
 # Multisport protection brands (owner, 2026-11-03): helmets and pads made for
 # skate, BMX and bike alike; snow-only and other sports' gear stays out.
 def multisport_part(title):
-    return "Protection" if protection.suits("bmx", title) else None
+    if not protection.suits("bmx", title):
+        return None
+    # Helmets: skate, dirt jump / BMX or full face; not road, trail or snow ones.
+    found = protection.fields(title, sport="bmx")
+    if "Helmets" in found.get("protects", ()) and set(found.get("helmet_style", ())) & {
+            "Road / commuter", "Trail / half shell", "Snow"}:
+        return None
+    return "Protection"
 
 
 BRAND_STORES = tuple(protection.brand_store(name, sports.BMX, multisport_part, details=details)
-                     for name in ("Triple 8", "187 Killer Pads", "Kali", "Bern", "Demon", "G-Form"))
+                     for name in ("Triple 8", "187 Killer Pads", "Kali", "Demon", "G-Form"))  # Bern's are commuter lids
 
 # Bike shops' BMX-style protection (owner, 2026-11-03: "very few helmets in
 # BMX ... the one thing people wear, then shin or knee guards"). Helmets only
