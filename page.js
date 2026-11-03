@@ -1024,10 +1024,45 @@ function paintFacetCounts() {
         });
         syncFacetEmpty(document.getElementById(facet.section), ".spec-chip", "No options match");
     });
+    paintTechnicalCounts();
     syncFacetEmpty(document.getElementById("sizeFilters"), ".width-chip", "No sizes match");
     syncFacetEmpty(document.getElementById("brandList"), ".facet-value", "No matching brands");
     syncFacetEmpty(document.getElementById("dealTypes"), ".kind-btn", "No deal types match");
     paintKeepaCounts();
+}
+
+// BMX/Ski/MTB spec chips narrow with the other filters, as Skate's do.
+function paintTechnicalCounts() {
+    if (typeof SportSpecFilters === "undefined" || !SportSpecFilters.counts) return;
+    const rows = dealRows().map(node => ({ node, url: node.dataset.url, part: node.dataset.part || "" }));
+    const tally = SportSpecFilters.counts(rows, (row, technical) => rowMatches(row.node, { technical }), technicalPriceConstraints());
+    document.querySelectorAll(".tech-chip").forEach(node => {
+        const counts = tally[node.dataset.techKey];
+        if (!counts) return;
+        const value = node.dataset.value || "";
+        const count = counts[value] || 0;
+        const slot = node.querySelector(".spec-count");
+        if (slot) slot.textContent = String(count);
+        node.setAttribute("data-count", String(count));
+        markFacetOption(node, count, value === "" || node.getAttribute("aria-pressed") === "true");
+    });
+    // A field with nothing left under the other filters folds away (Ski boot
+    // fields once only Blizzard skis remain); SportSpecFilters.sync still
+    // decides which fields a type shows.
+    document.querySelectorAll("[data-technical-field]").forEach(section => {
+        const key = section.dataset.technicalField;
+        const counts = tally[key];
+        if (!counts) return;
+        const picked = !!section.querySelector(".tech-chip[aria-pressed='true']:not([data-value=''])");
+        const empty = !counts[""] && !picked;
+        if (empty) {
+            section.dataset.techEmpty = "1";
+            section.style.display = "none";
+        } else if (section.dataset.techEmpty) {
+            delete section.dataset.techEmpty;
+            section.style.display = section.hidden ? "none" : "";
+        }
+    });
 }
 
 function syncLengthChips() {
