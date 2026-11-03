@@ -2607,6 +2607,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<button type="button" class="change-btn" id="btnGone" data-change="removed" aria-pressed="false" '
         f"onclick=\"setChange('removed')\">Disappeared {gone_count}</button>"
         "</span></p>"
+        '<nav class="crumbs" id="breadcrumbs" aria-label="Breadcrumb" hidden><ol></ol></nav>'
         f'<p class="result-count"><span id="statusCounts">{len(records)} deals</span></p>'
         "</div>"
         f"{sort_select}"
