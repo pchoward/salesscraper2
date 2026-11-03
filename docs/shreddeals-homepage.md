@@ -9,12 +9,12 @@ preview copy. It includes the subsequently merged specification changes (#116).
 
 | URL | What it will show |
 |---|---|
-| `https://pchoward.github.io/salesscraper2/` | The ShredDeals homepage with **Skate · Ski · MTB · BMX**, Skate selected by default, and the current SkateDeals catalog/controls embedded below. No discipline row. |
-| `https://pchoward.github.io/salesscraper2/?sport=skate` | The same homepage, with Skate selected explicitly. |
-| `https://pchoward.github.io/salesscraper2/?sport=ski` | ShredDeals with Ski selected and an honest Coming soon / no catalog yet message. No Skate products presented as Ski. |
-| `https://pchoward.github.io/salesscraper2/?sport=mtb` | The corresponding MTB empty state. |
-| `https://pchoward.github.io/salesscraper2/?sport=bmx` | The corresponding BMX empty state. |
-| `https://pchoward.github.io/salesscraper2/sale_items_chart.html` | The existing **standalone SkateDeals page**, with no redirect and no extra sport navigation injected into its standalone UI. Existing email links keep working. |
+| `https://shreddeals.com/` | The ShredDeals homepage with **Skate · Ski · MTB · BMX**, Skate selected by default, and the current SkateDeals catalog/controls embedded below. No discipline row. |
+| `https://shreddeals.com/?sport=skate` | The same homepage, with Skate selected explicitly. |
+| `https://shreddeals.com/?sport=ski` | ShredDeals with Ski selected and an honest Coming soon / no catalog yet message. No Skate products presented as Ski. |
+| `https://shreddeals.com/?sport=mtb` | The corresponding MTB empty state. |
+| `https://shreddeals.com/?sport=bmx` | The corresponding BMX empty state. |
+| `https://shreddeals.com/sale_items_chart.html` | The existing **standalone SkateDeals page**, with no redirect and no extra sport navigation injected into its standalone UI. Existing email links keep working. |
 | `/salesscraper2/sale_items_chart.html?store=ccs&width=8.25&q=baker` | The same existing filtered Skate page. Existing query decoding, saved views, fragments, and direct retailer links are retained. |
 | `/salesscraper2/?sport=skate&store=ccs&width=8.25&q=baker` | The new homepage with those existing filters applied to the embedded Skate catalog. Filter changes synchronize to the homepage URL; Back/Forward remains usable. |
 

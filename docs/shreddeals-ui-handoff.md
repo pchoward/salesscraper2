@@ -8,7 +8,7 @@ header** (#122). Claude keeps the **engine, scrapers, data and CI**
 
 ## Where things are
 
-- **Skate (SkateDeals)** is live at pchoward.github.io/salesscraper2, unchanged.
+- **Skate (SkateDeals)** is live at shreddeals.com, unchanged.
 - **BMX** has a working preview with 72 real sale items from Albe's BMX, on
   the `shreddeals-preview` branch:
   https://raw.githack.com/pchoward/salesscraper2/shreddeals-preview/index.html
