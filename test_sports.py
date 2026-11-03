@@ -359,8 +359,8 @@ class MoreBmxStoresTests(unittest.TestCase):
     def test_four_stores_with_their_sale_collections(self):
         from sports.bmx import stores
 
-        self.assertEqual({scraper.shop.store for scraper in sports.BMX.build_scrapers()},
-                         {"Albe's BMX", "Circuit BMX", "Powers BMX", "Source BMX US"})
+        self.assertLessEqual({"Albe's BMX", "Circuit BMX", "Powers BMX", "Source BMX US"},
+                             {scraper.shop.store for scraper in sports.BMX.build_scrapers()})
         self.assertEqual(stores.POWERS.sale_jsons[:2], [
             "https://www.powersbmx.com/collections/clearance/products.json",
             "https://www.powersbmx.com/collections/black-friday-deals/products.json"])

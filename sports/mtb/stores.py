@@ -168,7 +168,7 @@ COLORADO.extra_specs=cambria_specs
 # leaves out: baseball/soccer guards (G-Form), moto (Troy Lee), snow (Demon).
 # Leatt's and Fox's own stores can't be read (empty feed / not Shopify); their
 # gear comes through the retailers. iXS prices in euros, so it isn't used.
-_OTHER_SPORTS=r'\b(?:baseball|softball|soccer|football|lacrosse|hockey|batter\'?s?|catcher|snow|ski|moto|mx|motocross|motorcycle)\b'
+_OTHER_SPORTS=r'\b(?:baseball|softball|soccer|football|lacrosse|hockey|batter\'?s?|catcher|snow|ski|winter|snowboard|moto|mx|motocross|motorcycle)\b'
 def brand_title(title):
     if re.search(_OTHER_SPORTS,str(title or ''),re.I):return None
     if re.search(r'\b(?:tailgate|straps?|racks?|bags?|backpacks?)\b',str(title or ''),re.I):return None
@@ -186,7 +186,10 @@ SEVEN_IDP=brand_store('7iDP','https://7idp.com',('sale',))
 G_FORM=brand_store('G-Form','https://www.g-form.com',('sale-m2','sale-included-products'))
 RACE_FACE=brand_store('Race Face','https://www.raceface.com',
     ('outlet-sale','protection-sale','fall-sale','sale','on-sale','clearance-week'))
-BRAND_STORES=(TROY_LEE,ALPINESTARS,DEMON,SEVEN_IDP,G_FORM,RACE_FACE)
+KALI=brand_store('Kali','https://www.kaliprotectives.com',('all',))
+BERN=brand_store('Bern','https://www.bernunlimited.com',('bern-barn','bern-outlet'))
+SMITH=brand_store('Smith','https://www.smithoptics.com',('bike-sale',))  # bike helmets, MTB goggles
+BRAND_STORES=(TROY_LEE,ALPINESTARS,DEMON,SEVEN_IDP,G_FORM,RACE_FACE,KALI,BERN,SMITH)
 # The Lost Co. (owner, 2026-11-03): an MTB parts shop with ~650 marked-down
 # parts. Its types are clean ("Fork Parts", "Rear Shocks", "Chainrings");
 # tools, lubes, fluids, cleaners, sealant and fenders are left out.

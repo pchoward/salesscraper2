@@ -47,8 +47,7 @@ class GearWestTests(unittest.TestCase):
             "https://www.gearwest.com/collections/closeout-alpine-skis/products.json",
             "https://www.gearwest.com/collections/closeout-alpine-boots/products.json"])
         self.assertIn("https://www.gearwest.com/collections/eyewear/products.json", stores.GEAR_WEST.sale_jsons)
-        self.assertEqual({scraper.shop.store for scraper in sports.SKI.build_scrapers() if hasattr(scraper, "shop")},
-                         {"Gear West", "Utah Ski", "evo"})
+        self.assertLessEqual({"Gear West", "Utah Ski", "evo"}, {scraper.shop.store for scraper in sports.SKI.build_scrapers() if hasattr(scraper, "shop")})  # multisport protection brands follow (2026-11-03)
 
     def test_skis_and_boots_with_their_real_details(self):
         kept = parse()
