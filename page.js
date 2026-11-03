@@ -522,9 +522,8 @@ const SHAPE_ORDER = ["conical", "radial", "sidecut"];
 const HEIGHT_ORDER = ["low", "mid", "high"];
 const CONSTRUCTION_ORDER = ["hollow", "standard"];
 // Keep in sync with protection.SUBTYPE_TOKENS / SIZES.
-const PROT_TYPE_ORDER = ["helmet", "knee", "elbow", "wrist", "hip", "ankle", "shin", "set", "other"];
-const PROT_TYPE_LABELS = { helmet: "Helmet", knee: "Knee Pads", elbow: "Elbow Pads", wrist: "Wrist Guards", hip: "Hip & Tailbone",
-    ankle: "Ankle Guards", shin: "Shin Guards", set: "Pad Set", other: "Other" };
+const PROT_TYPE_ORDER = ["helmet", "knee", "elbow", "wrist", "set", "other"];
+const PROT_TYPE_LABELS = { helmet: "Helmet", knee: "Knee Pads", elbow: "Elbow Pads", wrist: "Wrist Guards", set: "Pad Set", other: "Other" };
 const PROT_SIZE_ORDER = ["xs", "s", "m", "l", "xl", "xxl"];
 const SPEC_FACETS = [
     { stateKey: "diameters", part: "Wheels", attr: "diameter", section: "diameterFilters" },
@@ -4976,8 +4975,7 @@ function quickFacts(dataset, item, generated) {
     addSpec("Construction", dataset.construction);
     addSpec("ABEC", dataset.abec);
     // Labels inline: protection.SUBTYPE_TOKENS (PROT_TYPE_LABELS above).
-    addSpec("Type", ({ helmet: "Helmet", knee: "Knee Pads", elbow: "Elbow Pads", wrist: "Wrist Guards", hip: "Hip & Tailbone",
-        ankle: "Ankle Guards", shin: "Shin Guards", set: "Pad Set", other: "Other" })[dataset.prottype] || "");
+    addSpec("Type", ({ helmet: "Helmet", knee: "Knee Pads", elbow: "Elbow Pads", wrist: "Wrist Guards", set: "Pad Set", other: "Other" })[dataset.prottype] || "");
     if (String(dataset.protsize || "").trim()) {
         addSpec("Sizes", String(dataset.protsize).split(",").map(size => size.trim().toUpperCase()).filter(Boolean).join(", "));
     }

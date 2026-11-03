@@ -24,12 +24,8 @@ class ClassifyTests(unittest.TestCase):
             "187 Killer Pads Six Pack Pad Set": "Pad Set",
             "Destroyer Pads Elbow and Knee": "Pad Set",
             "Pro-Tec Street Knee and Elbow Pads": "Pad Set",
-            # Their own types since 2026-11-03 (were "Other").
-            "187 Killer Pads Impact Shorts": "Hip & Tailbone",
-            "Triple Eight Bumsaver Hip Pads": "Hip & Tailbone",
-            "Demon Flex-Force Pro Ankle Guard": "Ankle Guards",
-            "Fuse Alpha Pro Ankle Brace": "Ankle Guards",
-            "Fuse Stealth Shin Pad": "Shin Guards",
+            "187 Killer Pads Impact Shorts": "Other",
+            "Triple Eight Bumsaver Hip Pads": "Other",
         }
         for name, subtype in cases.items():
             self.assertEqual(protection.classify(name), subtype, name)
