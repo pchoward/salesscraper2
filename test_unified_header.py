@@ -51,7 +51,7 @@ assert.equal(H.nextIndex(0,'Tab',4),null);
             self.assertEqual(len(new.select('header')), 1)
             self.assertEqual(new.select('iframe'), [])
             self.assertEqual(str(old.select_one('#lastScan')), str(new.select_one('#lastScan')))
-            self.assertEqual([str(c) for c in old.select('.deal-card')], [str(c) for c in new.select('.deal-card')])
+            self.assertEqual([str(c) for c in old.find_all(class_='deal-card')], [str(c) for c in new.find_all(class_='deal-card')])
             self.assertEqual([x.get('href') for x in old.select('a[target="_blank"]')], [x.get('href') for x in new.select('a[target="_blank"]')])
             # Original application/search scripts and styles are unchanged. Only
             # the public config assignment/analytics are removed for safety.
