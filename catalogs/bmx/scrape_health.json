@@ -928,13 +928,13 @@
           }
         },
         "187 Killer Pads_Protection": {
-          "count": 8,
+          "count": 9,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 8,
+            "actual_count": 9,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -988,6 +988,126 @@
           }
         },
         "187 Killer Pads_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Braking": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Frames & Forks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Protection": {
+          "count": 13,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 13,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Seating": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Steering": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Wheel Parts": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "7iDP_Wheels": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1119,7 +1239,7 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Bikes": {
+        "Bikes Online_Bikes": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1131,7 +1251,7 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Braking": {
+        "Bikes Online_Braking": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1143,7 +1263,7 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Drivetrain": {
+        "Bikes Online_Drivetrain": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1155,7 +1275,7 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Frames & Forks": {
+        "Bikes Online_Frames & Forks": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1167,19 +1287,19 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Protection": {
-          "count": 3,
+        "Bikes Online_Protection": {
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 3,
+            "actual_count": 14,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
         },
-        "Bern_Seating": {
+        "Bikes Online_Seating": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1191,7 +1311,7 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Steering": {
+        "Bikes Online_Steering": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1203,7 +1323,7 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Tires": {
+        "Bikes Online_Tires": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1215,7 +1335,7 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Wheel Parts": {
+        "Bikes Online_Wheel Parts": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1227,7 +1347,127 @@
             "reason": "insufficient_history"
           }
         },
-        "Bern_Wheels": {
+        "Bikes Online_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Braking": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Frames & Forks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Protection": {
+          "count": 92,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 92,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Seating": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Steering": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Wheel Parts": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Cambria_Wheels": {
           "count": 0,
           "failed": false,
           "diagnostics": {
@@ -1354,6 +1594,126 @@
             "expected_count": 0.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Braking": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Frames & Forks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Protection": {
+          "count": 109,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 109,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Seating": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Steering": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Wheel Parts": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Colorado Cyclist_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "insufficient_history"
@@ -2008,13 +2368,13 @@
           }
         },
         "Triple 8_Protection": {
-          "count": 7,
+          "count": 8,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 7,
+            "actual_count": 8,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -2078,9 +2438,129 @@
             "percentage_change": null,
             "reason": "insufficient_history"
           }
+        },
+        "Troy Lee Designs_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Braking": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Frames & Forks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Protection": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 4,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Seating": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Steering": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Wheel Parts": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Troy Lee Designs_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
         }
       },
-      "scanned_at": "2026-11-03T15:31:52+00:00"
+      "scanned_at": "2026-11-03T18:04:23+00:00"
     }
   ],
   "baseline": {
@@ -2210,7 +2690,7 @@
     },
     "187 Killer Pads_Protection": {
       "date": "2026-11-03",
-      "count": 8
+      "count": 9
     },
     "Bern_Protection": {
       "date": "2026-11-03",
@@ -2230,7 +2710,27 @@
     },
     "Triple 8_Protection": {
       "date": "2026-11-03",
-      "count": 7
+      "count": 8
+    },
+    "7iDP_Protection": {
+      "date": "2026-11-03",
+      "count": 13
+    },
+    "Bikes Online_Protection": {
+      "date": "2026-11-03",
+      "count": 14
+    },
+    "Cambria_Protection": {
+      "date": "2026-11-03",
+      "count": 92
+    },
+    "Colorado Cyclist_Protection": {
+      "date": "2026-11-03",
+      "count": 109
+    },
+    "Troy Lee Designs_Protection": {
+      "date": "2026-11-03",
+      "count": 4
     }
   },
   "completeness_baseline": {
@@ -2261,7 +2761,7 @@
     "187 Killer Pads_Protection": [
       {
         "date": "2026-11-03",
-        "count": 8
+        "count": 9
       }
     ],
     "187 Killer Pads_Seating": [
@@ -2289,6 +2789,66 @@
       }
     ],
     "187 Killer Pads_Wheels": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Bikes": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Braking": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Drivetrain": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Frames & Forks": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 13
+      }
+    ],
+    "7iDP_Seating": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Steering": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Tires": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Wheel Parts": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "7iDP_Wheels": [
       {
         "date": "2026-11-03",
         "count": 0
@@ -2486,6 +3046,126 @@
         "count": 0
       }
     ],
+    "Bikes Online_Bikes": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Bikes Online_Braking": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Bikes Online_Drivetrain": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Bikes Online_Frames & Forks": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Bikes Online_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 14
+      }
+    ],
+    "Bikes Online_Seating": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Bikes Online_Steering": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Bikes Online_Tires": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Bikes Online_Wheel Parts": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Bikes Online_Wheels": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Bikes": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Braking": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Drivetrain": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Frames & Forks": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 92
+      }
+    ],
+    "Cambria_Seating": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Steering": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Tires": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Wheel Parts": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Cambria_Wheels": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
     "Circuit BMX_Bikes": [
       {
         "date": "2026-11-01",
@@ -2613,6 +3293,66 @@
         "date": "2026-11-02",
         "count": 0
       },
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Bikes": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Braking": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Drivetrain": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Frames & Forks": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 109
+      }
+    ],
+    "Colorado Cyclist_Seating": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Steering": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Tires": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Wheel Parts": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Colorado Cyclist_Wheels": [
       {
         "date": "2026-11-03",
         "count": 0
@@ -3089,7 +3829,7 @@
     "Triple 8_Protection": [
       {
         "date": "2026-11-03",
-        "count": 7
+        "count": 8
       }
     ],
     "Triple 8_Seating": [
@@ -3117,6 +3857,66 @@
       }
     ],
     "Triple 8_Wheels": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Bikes": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Braking": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Drivetrain": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Frames & Forks": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 4
+      }
+    ],
+    "Troy Lee Designs_Seating": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Steering": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Tires": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Wheel Parts": [
+      {
+        "date": "2026-11-03",
+        "count": 0
+      }
+    ],
+    "Troy Lee Designs_Wheels": [
       {
         "date": "2026-11-03",
         "count": 0

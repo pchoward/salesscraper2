@@ -1078,14 +1078,14 @@
           }
         },
         "Bikes Online_Wheels": {
-          "count": 15,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 15,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 15,
-            "percentage_change": 0.0,
+            "actual_count": 14,
+            "percentage_change": -6.7,
             "reason": "insufficient_history"
           }
         },
@@ -1102,74 +1102,74 @@
           }
         },
         "Cambria_Brakes": {
-          "count": 56,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 56,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 56,
-            "percentage_change": 0.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "insufficient_history"
           }
         },
         "Cambria_Cockpit": {
-          "count": 159,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 160,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 159,
-            "percentage_change": -0.6,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "insufficient_history"
           }
         },
         "Cambria_Drivetrain": {
-          "count": 305,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 304,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 305,
-            "percentage_change": 0.3,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "insufficient_history"
           }
         },
         "Cambria_Forks & Shocks": {
-          "count": 8,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 8,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 8,
-            "percentage_change": 0.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "insufficient_history"
           }
         },
         "Cambria_Frames": {
-          "count": 7,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 6,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 7,
-            "percentage_change": 16.7,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "insufficient_history"
           }
         },
         "Cambria_Pedals": {
-          "count": 23,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 23,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 23,
-            "percentage_change": 0.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "insufficient_history"
           }
         },
@@ -1198,14 +1198,14 @@
           }
         },
         "Cambria_Wheels": {
-          "count": 32,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 32,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 32,
-            "percentage_change": 0.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "insufficient_history"
           }
         },
@@ -2194,25 +2194,25 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 147,
+          "count": 165,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 147,
+            "actual_count": 165,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
         },
         "The Lost Co._Drivetrain": {
-          "count": 106,
+          "count": 137,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 106,
+            "actual_count": 137,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -2278,13 +2278,13 @@
           }
         },
         "The Lost Co._Wheels": {
-          "count": 25,
+          "count": 31,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 25,
+            "actual_count": 31,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -2530,7 +2530,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-03T15:37:54+00:00"
+      "scanned_at": "2026-11-03T18:10:02+00:00"
     }
   ],
   "baseline": {
@@ -2574,37 +2574,9 @@
       "date": "2026-11-03",
       "count": 33
     },
-    "Cambria_Brakes": {
-      "date": "2026-11-03",
-      "count": 56
-    },
-    "Cambria_Cockpit": {
-      "date": "2026-11-03",
-      "count": 159
-    },
-    "Cambria_Drivetrain": {
-      "date": "2026-11-03",
-      "count": 305
-    },
-    "Cambria_Forks & Shocks": {
-      "date": "2026-11-03",
-      "count": 8
-    },
-    "Cambria_Frames": {
-      "date": "2026-11-03",
-      "count": 7
-    },
-    "Cambria_Pedals": {
-      "date": "2026-11-03",
-      "count": 23
-    },
     "Cambria_Tires": {
       "date": "2026-11-03",
       "count": 87
-    },
-    "Cambria_Wheels": {
-      "date": "2026-11-03",
-      "count": 32
     },
     "Mike's Bikes_Bikes": {
       "date": "2026-11-03",
@@ -2676,7 +2648,7 @@
     },
     "Bikes Online_Wheels": {
       "date": "2026-11-03",
-      "count": 15
+      "count": 14
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-03",
@@ -2752,11 +2724,11 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-03",
-      "count": 147
+      "count": 165
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-03",
-      "count": 106
+      "count": 137
     },
     "The Lost Co._Forks & Shocks": {
       "date": "2026-11-03",
@@ -2780,7 +2752,7 @@
     },
     "The Lost Co._Wheels": {
       "date": "2026-11-03",
-      "count": 25
+      "count": 31
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-03",
@@ -3065,7 +3037,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 15
+        "count": 14
       }
     ],
     "Cambria_Bikes": [
@@ -3085,7 +3057,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 56
+        "count": 0
       }
     ],
     "Cambria_Cockpit": [
@@ -3095,7 +3067,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 159
+        "count": 0
       }
     ],
     "Cambria_Drivetrain": [
@@ -3105,7 +3077,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 305
+        "count": 0
       }
     ],
     "Cambria_Forks & Shocks": [
@@ -3115,7 +3087,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 8
+        "count": 0
       }
     ],
     "Cambria_Frames": [
@@ -3125,7 +3097,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 7
+        "count": 0
       }
     ],
     "Cambria_Pedals": [
@@ -3135,7 +3107,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 23
+        "count": 0
       }
     ],
     "Cambria_Protection": [
@@ -3165,7 +3137,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 32
+        "count": 0
       }
     ],
     "Colorado Cyclist_Bikes": [
@@ -3743,13 +3715,13 @@
     "The Lost Co._Cockpit": [
       {
         "date": "2026-11-03",
-        "count": 147
+        "count": 165
       }
     ],
     "The Lost Co._Drivetrain": [
       {
         "date": "2026-11-03",
-        "count": 106
+        "count": 137
       }
     ],
     "The Lost Co._Forks & Shocks": [
@@ -3785,7 +3757,7 @@
     "The Lost Co._Wheels": [
       {
         "date": "2026-11-03",
-        "count": 25
+        "count": 31
       }
     ],
     "Troy Lee Designs_Bikes": [

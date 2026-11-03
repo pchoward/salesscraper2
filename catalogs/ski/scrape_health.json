@@ -460,14 +460,14 @@
           }
         },
         "Christy Sports_Boots": {
-          "count": 156,
+          "count": 157,
           "failed": false,
           "diagnostics": {
             "expected_count": 156,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 156,
-            "percentage_change": 0.0,
+            "actual_count": 157,
+            "percentage_change": 0.6,
             "reason": "insufficient_history"
           }
         },
@@ -604,14 +604,14 @@
           }
         },
         "Gear West_Boots": {
-          "count": 168,
+          "count": 167,
           "failed": false,
           "diagnostics": {
             "expected_count": 169.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 168,
-            "percentage_change": -0.6,
+            "actual_count": 167,
+            "percentage_change": -1.2,
             "reason": "insufficient_history"
           }
         },
@@ -760,13 +760,13 @@
           }
         },
         "Triple 8_Helmets": {
-          "count": 0,
+          "count": 3,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 0,
+            "actual_count": 3,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -892,14 +892,14 @@
           }
         },
         "evo_Boots": {
-          "count": 295,
+          "count": 297,
           "failed": false,
           "diagnostics": {
             "expected_count": 298,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 295,
-            "percentage_change": -1.0,
+            "actual_count": 297,
+            "percentage_change": -0.3,
             "reason": "insufficient_history"
           }
         },
@@ -952,13 +952,13 @@
           }
         }
       },
-      "scanned_at": "2026-11-03T15:33:19+00:00"
+      "scanned_at": "2026-11-03T18:06:12+00:00"
     }
   ],
   "baseline": {
     "Gear West_Boots": {
       "date": "2026-11-03",
-      "count": 168
+      "count": 167
     },
     "Gear West_Skis": {
       "date": "2026-11-03",
@@ -990,7 +990,7 @@
     },
     "evo_Boots": {
       "date": "2026-11-03",
-      "count": 295
+      "count": 297
     },
     "evo_Poles": {
       "date": "2026-11-03",
@@ -1006,7 +1006,7 @@
     },
     "Christy Sports_Boots": {
       "date": "2026-11-03",
-      "count": 156
+      "count": 157
     },
     "Christy Sports_Poles": {
       "date": "2026-11-03",
@@ -1075,6 +1075,10 @@
     "Triple 8_Protection": {
       "date": "2026-11-03",
       "count": 1
+    },
+    "Triple 8_Helmets": {
+      "date": "2026-11-03",
+      "count": 3
     }
   },
   "completeness_baseline": {
@@ -1131,7 +1135,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 156
+        "count": 157
       }
     ],
     "Christy Sports_Helmets": [
@@ -1231,7 +1235,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 168
+        "count": 167
       }
     ],
     "Gear West_Helmets": [
@@ -1353,7 +1357,7 @@
     "Triple 8_Helmets": [
       {
         "date": "2026-11-03",
-        "count": 0
+        "count": 3
       }
     ],
     "Triple 8_Poles": [
@@ -1447,7 +1451,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 295
+        "count": 297
       }
     ],
     "evo_Helmets": [
