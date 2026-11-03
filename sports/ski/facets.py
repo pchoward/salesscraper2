@@ -1,5 +1,7 @@
 """Ski UI configuration, modelled on evo's ski filters (owner, 2026-11-02).
 Offer extraction is owned by the Ski adapter (sports/ski/stores.py, evo.py)."""
+from sports import protection
+
 FIELDS = (
     {"key": "ski_type", "label": "Type", "param": "ski_type", "categories": ("Skis", "Boots", "Bindings")},
     {"key": "length", "label": "Ski length", "param": "ski_length", "categories": ("Skis", "Poles")},
@@ -16,4 +18,4 @@ FIELDS = (
     {"key": "walk", "label": "Walk mode", "param": "ski_walk", "categories": ("Boots",)},
     {"key": "ability", "label": "Ability level", "param": "ski_ability", "categories": ()},
     {"key": "gender", "label": "Gender", "param": "ski_gender", "categories": ()},
-)
+) + protection.facet_fields("ski", ("Helmets",))

@@ -1,4 +1,6 @@
 """BMX UI configuration. Offer extraction is owned by the BMX adapter."""
+from sports import protection
+
 FIELDS = (
     {"key": "kind", "label": "Product kind", "param": "bmx_kind", "categories": ()},
     {"key": "wheel_size", "label": "Wheel size (in)", "param": "bmx_wheel", "categories": ("Bikes", "Frames & Forks", "Wheels", "Tires")},
@@ -13,4 +15,4 @@ FIELDS = (
     {"key": "axle", "label": "Axle", "param": "bmx_axle", "categories": ("Bikes", "Frames & Forks", "Wheels", "Wheel Parts")},
     {"key": "material", "label": "Material", "param": "bmx_material", "categories": ()},
     {"key": "color", "label": "Color", "param": "bmx_color", "categories": ()},
-)
+) + protection.facet_fields("bmx", ("Protection",))

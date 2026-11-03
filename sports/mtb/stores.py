@@ -6,7 +6,7 @@ from urllib import robotparser
 from urllib.error import HTTPError
 from urllib.request import Request,urlopen
 import sports
-from sports import brands
+from sports import brands, protection
 from stores import shopify
 from sports.mtb.rules import PARTS,filter_reason,title_part
 from sports.mtb.specs import extract
@@ -233,6 +233,9 @@ class MtbShopifyScraper(shopify.ShopifyScraper):
             # Store-tagged facts (Cambria's filter tags) fill keys the title/options left empty.
             for key,values in (getattr(self.shop,'extra_specs',None) or (lambda *a:{}))(product,variant,self.part).items():
                 if values and key not in specs:specs[key]=sorted(values)
+            if self.part=='Protection':
+                specs.update(protection.fields(product.get('title',''),product.get('product_type',''),
+                                               shopify._plain(product.get('body_html') or ''),'mtb'))
             offers.append({'variant_id':variant.get('id'),'price':float(shopify._amount(variant['price'])),
                            'compare':float(shopify._amount(variant['compare_at_price'])),
                            'available':variant.get('available') if isinstance(variant.get('available'),bool) else None,

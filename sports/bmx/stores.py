@@ -15,7 +15,7 @@ stores.preview()"`` shows what a live run would keep without saving anything.
 import re
 
 import sports
-from sports import brands, offers
+from sports import brands, offers, protection
 from sports.bmx import dans, facets, specs
 from stores import shopify
 
@@ -117,6 +117,10 @@ def details(item, product, kind_key):
     # Labelled specs from the description: bar rise, crank length, axle, top tube.
     for key, values in dans.description_fields(shopify._plain(product.get("body_html") or ""), item.get("part")).items():
         shared.setdefault(key, values)
+    # What a piece protects, helmet style, rotational system (sports/protection.py).
+    if item.get("part") == "Protection":
+        shared.update(protection.fields(title, product.get("product_type") or "",
+                                        shopify._plain(product.get("body_html") or ""), "bmx"))
     offers.attach(item, offers.technical_offers(
         shopify.sale_variants(product), lambda variant: dans.variant_fields(product, variant, item.get("part")),
         shared=shared))
