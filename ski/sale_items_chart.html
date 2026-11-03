@@ -15583,7 +15583,8 @@ function alertsResolveConfig(env) {
     env = env || {};
     const cfg = env.config || {};
     const host = String(env.host || "");
-    const production = /(^|\.)github\.io$/i.test(host);
+    // The live site: shreddeals.com (2026-11-03) and the original github.io address.
+    const production = /(^|\.)(github\.io|shreddeals\.com)$/i.test(host);
     const requested = String(cfg.apiBase || cfg.baseUrl || env.metaContent || env.fallbackBase || "").trim();
     const consentVersion = String(cfg.consentVersion || ALERTS_CONSENT_VERSION);
     const turnstileSiteKey = String(cfg.turnstileSiteKey || "").trim();
