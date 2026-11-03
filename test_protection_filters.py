@@ -85,3 +85,7 @@ class MtbProtectionTests(unittest.TestCase):
         self.assertEqual(stores.cambria_part("Derailleur Parts"), "Drivetrain")
         self.assertEqual(protection.protects("Demon Body Armor Underwear"), ["Hips & Tailbone"])
         self.assertEqual(protection.protects("Fox Racing Arm Pads"), ["Elbows"])
+        # The title wins over the store's category.
+        self.assertEqual(protection.protects("7 iDP Control Shoulder Support - Left", "Ankle & Wrist Supports"), ["Shoulders"])
+        self.assertEqual(protection.protects("7 iDP Control Ankle Protector", "Ankle & Wrist Supports"), ["Ankles"])
+        self.assertEqual(protection.protects("Race Face Ambush Leg", "Knee & Shin Pads"), ["Knees", "Shins"])

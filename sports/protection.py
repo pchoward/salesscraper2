@@ -14,7 +14,7 @@ PARTS = (
     ("Helmets", r"\bhelmets?\b|\bfull[- ]?face\b|\bbrain\s*buckets?\b"),
     ("Goggles", r"\bgoggles?\b|\bgoggle\s+lens(?:es)?\b"),
     ("Neck", r"\bneck\s*(?:brace|braces|guard|guards|roll|protector)s?\b"),
-    ("Shoulders", r"\bshoulder\s*(?:pads?|guards?|protectors?|armou?r)\b"),
+    ("Shoulders", r"\bshoulder\s*(?:pads?|guards?|protectors?|armou?r|supports?|braces?)\b"),
     ("Chest & Ribs", r"\bchest\s*(?:protectors?|guards?|plates?|pads?)\b|\broost\s*(?:guards?|deflectors?)\b"
                      r"|\brib\s*(?:protectors?|guards?|pads?)\b|\bbody\s*armou?r\b(?!\s*(?:underwear|shorts|pants))|\bpressure\s*suits?\b"
                      r"|\bpadded\s+(?:shirts?|tops?|jerseys?|jackets?|vests?|tees?)\b|\bprotective\s+(?:shirts?|tops?|jackets?|vests?)\b"
@@ -75,7 +75,11 @@ def protects(title, product_type="", description=""):
     text = f" {title or ''} ; {product_type or ''} "
     if re.search(r"\b(?:goggle|helmet)\s+parts\b|\bhelmet\s+bags?\b", text, re.I):
         return []  # spares and bags, not the piece
-    found = [label for label, pattern in _PARTS if pattern.search(text)]
+    # The title names the piece; the store's category ("Ankle & Wrist
+    # Supports", "Knee & Shin Pads") only fills in when the title doesn't.
+    found = [label for label, pattern in _PARTS if pattern.search(f" {title or ''} ")]
+    if not found:
+        found = [label for label, pattern in _PARTS if pattern.search(text)]
     if "Helmets" in found and _SPARE.search(title or ""):
         # A visor or replacement pads for a helmet is not a helmet.
         found.remove("Helmets")
