@@ -187,7 +187,23 @@ G_FORM=brand_store('G-Form','https://www.g-form.com',('sale-m2','sale-included-p
 RACE_FACE=brand_store('Race Face','https://www.raceface.com',
     ('outlet-sale','protection-sale','fall-sale','sale','on-sale','clearance-week'))
 BRAND_STORES=(TROY_LEE,ALPINESTARS,DEMON,SEVEN_IDP,G_FORM,RACE_FACE)
-STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES
+# The Lost Co. (owner, 2026-11-03): an MTB parts shop with ~650 marked-down
+# parts. Its types are clean ("Fork Parts", "Rear Shocks", "Chainrings");
+# tools, lubes, fluids, cleaners, sealant and fenders are left out.
+LOST_CO_TYPES={'bottom brackets':'Drivetrain','groupsets':'Drivetrain','dropper parts':'Cockpit','dropper posts':'Cockpit',
+    'full suspension bikes':'Bikes','hardtail bikes':'Bikes','tire inserts':'Tires','seatpost':'Cockpit','headsets':'Cockpit'}
+def lost_co_part(product_type):
+    kind=' '.join(str(product_type or '').lower().split())
+    if not kind or re.search(r'\b(?:tools?|lubes?|lubricants?|fluid|greases?|oil|cleaners?|polish|pumps?|pliers|hammers?|sealant'
+                             r'|number\s+plates?|fenders?|exclude|flat\s+fixers?|valves?|binders?|bearings?|geometry)\b',kind):
+        return None
+    return LOST_CO_TYPES.get(kind) or title_part(kind)
+
+LOST_CO=shopify.ShopifyStore('The Lost Co.','The Lost Co.','https://www.thelostco.com',
+    collection='mtb-parts-on-sale',more_collections=('clearance-mountain-bike-parts',),
+    types={},brand_of=brands.for_sport(sports.MTB),own_vendor='the lost co',
+    title_part=title_part,type_part=lost_co_part,raw_type_part=True,track_exclusions=True)
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES+(LOST_CO,)
 
 
 def robots_policy(store):
