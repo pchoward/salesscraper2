@@ -1156,14 +1156,14 @@
           }
         },
         "Powers BMX_Frames & Forks": {
-          "count": 17,
+          "count": 18,
           "failed": false,
           "diagnostics": {
             "expected_count": 17.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 17,
-            "percentage_change": 0.0,
+            "actual_count": 18,
+            "percentage_change": 5.9,
             "reason": "insufficient_history"
           }
         },
@@ -1216,14 +1216,14 @@
           }
         },
         "Powers BMX_Wheel Parts": {
-          "count": 32,
+          "count": 35,
           "failed": false,
           "diagnostics": {
             "expected_count": 32.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 32,
-            "percentage_change": 0.0,
+            "actual_count": 35,
+            "percentage_change": 9.4,
             "reason": "insufficient_history"
           }
         },
@@ -1288,13 +1288,13 @@
           }
         },
         "Source BMX US_Protection": {
-          "count": 31,
+          "count": 32,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 31,
+            "actual_count": 32,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -1360,7 +1360,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-03T07:46:49+00:00"
+      "scanned_at": "2026-11-03T10:51:09+00:00"
     }
   ],
   "baseline": {
@@ -1418,7 +1418,7 @@
     },
     "Powers BMX_Frames & Forks": {
       "date": "2026-11-03",
-      "count": 17
+      "count": 18
     },
     "Powers BMX_Seating": {
       "date": "2026-11-03",
@@ -1434,7 +1434,7 @@
     },
     "Powers BMX_Wheel Parts": {
       "date": "2026-11-03",
-      "count": 32
+      "count": 35
     },
     "Powers BMX_Wheels": {
       "date": "2026-11-03",
@@ -1486,7 +1486,7 @@
     },
     "Source BMX US_Protection": {
       "date": "2026-11-03",
-      "count": 31
+      "count": 32
     }
   },
   "completeness_baseline": {
@@ -1807,7 +1807,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 17
+        "count": 18
       }
     ],
     "Powers BMX_Protection": [
@@ -1869,7 +1869,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 32
+        "count": 35
       }
     ],
     "Powers BMX_Wheels": [
@@ -1945,7 +1945,7 @@
     "Source BMX US_Protection": [
       {
         "date": "2026-11-03",
-        "count": 31
+        "count": 32
       }
     ],
     "Source BMX US_Seating": [

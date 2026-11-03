@@ -5813,6 +5813,12 @@
             "kind": [
               "Helmets"
             ],
+            "protects": [
+              "Helmets"
+            ],
+            "helmet_style": [
+              "Dirt jump / BMX"
+            ],
             "color": [
               "Black"
             ]
@@ -5826,6 +5832,12 @@
           "specs": {
             "kind": [
               "Helmets"
+            ],
+            "protects": [
+              "Helmets"
+            ],
+            "helmet_style": [
+              "Dirt jump / BMX"
             ],
             "color": [
               "Teal"
@@ -5841,6 +5853,12 @@
             "kind": [
               "Helmets"
             ],
+            "protects": [
+              "Helmets"
+            ],
+            "helmet_style": [
+              "Dirt jump / BMX"
+            ],
             "color": [
               "White"
             ]
@@ -5850,6 +5868,12 @@
       "technical_specs": {
         "kind": [
           "Helmets"
+        ],
+        "protects": [
+          "Helmets"
+        ],
+        "helmet_style": [
+          "Dirt jump / BMX"
         ],
         "color": [
           "Black",
@@ -5895,6 +5919,9 @@
             "kind": [
               "Pads & Guards"
             ],
+            "protects": [
+              "Ankles"
+            ],
             "color": [
               "Black"
             ]
@@ -5904,6 +5931,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Ankles"
         ],
         "color": [
           "Black"
@@ -5939,6 +5969,11 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles",
+              "Knees",
+              "Shins"
             ]
           }
         },
@@ -5950,6 +5985,11 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles",
+              "Knees",
+              "Shins"
             ]
           }
         },
@@ -5961,6 +6001,11 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles",
+              "Knees",
+              "Shins"
             ]
           }
         },
@@ -5972,6 +6017,11 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles",
+              "Knees",
+              "Shins"
             ]
           }
         },
@@ -5983,6 +6033,11 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles",
+              "Knees",
+              "Shins"
             ]
           }
         }
@@ -5990,6 +6045,11 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Ankles",
+          "Knees",
+          "Shins"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/5F6D249E-C72E-4615-AA63-9286A38DED86.jpg?v=1792431052",
@@ -6029,6 +6089,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Chrome / Polished"
             ]
@@ -6043,6 +6106,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Chrome / Polished"
             ]
@@ -6051,6 +6117,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ],
         "color": [
@@ -6089,6 +6158,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees"
             ]
           }
         }
@@ -6096,6 +6168,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Knees"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Fuse.Omega.Knee.pads__72579.1580773958.1280.1280.jpg?v=1582044460",
@@ -6129,6 +6204,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles"
             ]
           }
         },
@@ -6140,6 +6218,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles"
             ]
           }
         }
@@ -6147,6 +6228,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Ankles"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/EAB87C5F-2435-4611-B3CD-2B3CF74E5701.jpg?v=1792429157",
@@ -6183,6 +6267,10 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees",
+              "Pad Sets"
             ]
           }
         },
@@ -6194,6 +6282,10 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees",
+              "Pad Sets"
             ]
           }
         },
@@ -6205,6 +6297,10 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees",
+              "Pad Sets"
             ]
           }
         },
@@ -6216,6 +6312,10 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees",
+              "Pad Sets"
             ]
           }
         },
@@ -6227,6 +6327,10 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees",
+              "Pad Sets"
             ]
           }
         }
@@ -6234,6 +6338,10 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Knees",
+          "Pad Sets"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/D01D190F-E2C1-45DB-8E53-CB495EC47643.jpg?v=1792425606",
@@ -6272,6 +6380,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Shins"
             ]
           }
         },
@@ -6283,6 +6394,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Shins"
             ]
           }
         },
@@ -6294,6 +6408,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Shins"
             ]
           }
         },
@@ -6305,6 +6422,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Shins"
             ]
           }
         },
@@ -6316,6 +6436,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Shins"
             ]
           }
         }
@@ -6323,6 +6446,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Shins"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/656A39F2-C82F-4456-B2D7-C084B0816229.jpg?v=1792190081",
@@ -6362,6 +6488,9 @@
             "kind": [
               "Helmets"
             ],
+            "protects": [
+              "Helmets"
+            ],
             "color": [
               "Blue"
             ]
@@ -6375,6 +6504,9 @@
           "specs": {
             "kind": [
               "Helmets"
+            ],
+            "protects": [
+              "Helmets"
             ]
           }
         },
@@ -6385,6 +6517,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Helmets"
+            ],
+            "protects": [
               "Helmets"
             ],
             "color": [
@@ -6401,6 +6536,9 @@
             "kind": [
               "Helmets"
             ],
+            "protects": [
+              "Helmets"
+            ],
             "color": [
               "Blue"
             ]
@@ -6409,6 +6547,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Helmets"
+        ],
+        "protects": [
           "Helmets"
         ],
         "color": [
@@ -6499,6 +6640,9 @@
             "kind": [
               "Helmets"
             ],
+            "protects": [
+              "Helmets"
+            ],
             "color": [
               "Grey"
             ]
@@ -6511,6 +6655,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Helmets"
+            ],
+            "protects": [
               "Helmets"
             ],
             "color": [
@@ -6527,6 +6674,9 @@
             "kind": [
               "Helmets"
             ],
+            "protects": [
+              "Helmets"
+            ],
             "color": [
               "Black"
             ]
@@ -6539,6 +6689,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Helmets"
+            ],
+            "protects": [
               "Helmets"
             ],
             "color": [
@@ -6555,6 +6708,9 @@
             "kind": [
               "Helmets"
             ],
+            "protects": [
+              "Helmets"
+            ],
             "color": [
               "Grey"
             ]
@@ -6563,6 +6719,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Helmets"
+        ],
+        "protects": [
           "Helmets"
         ],
         "color": [
@@ -6650,6 +6809,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles"
             ]
           }
         },
@@ -6661,6 +6823,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles"
             ]
           }
         },
@@ -6672,6 +6837,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles"
             ]
           }
         }
@@ -6679,6 +6847,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Ankles"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.invisalite.ankle.guard.1__03409.1520626575.1280.1280.jpg?v=1582040601",
@@ -6715,6 +6886,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees"
             ]
           }
         },
@@ -6726,6 +6900,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees"
             ]
           }
         },
@@ -6737,6 +6914,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees"
             ]
           }
         }
@@ -6744,6 +6924,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Knees"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.super.slim.v2.knee.1.png?v=1604680049",
@@ -6778,6 +6961,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Pad Sets"
             ]
           }
         }
@@ -6785,6 +6971,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Pad Sets"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Triple.Eight.Saver.Series.Pads__84238.1575071895.1280.1280.jpg?v=1582044104",
@@ -7818,6 +8007,47 @@
         "https://cdn.shopify.com/s/files/1/0689/7043/products/image_79fd7472-26b3-443f-a8ed-b75114d425f6.jpg?v=1617804879",
         "https://cdn.shopify.com/s/files/1/0689/7043/products/ssquared-blue-frame-2021-600x600.jpg?v=1661806645",
         "https://cdn.shopify.com/s/files/1/0689/7043/products/ssquared-black-frame-2021-600x600.jpg?v=1661806645"
+      ]
+    },
+    {
+      "name": "Answer Dagger OS20 11/8 steer 20mm",
+      "url": "https://www.powersbmx.com/products/answer-dagger-os20-11-8-steer-20mm",
+      "price_new": "269.99",
+      "price_old": "359.99",
+      "availability": "Check store",
+      "part": "Frames & Forks",
+      "store": "Powers BMX",
+      "product_type": "Forks",
+      "brand": "Answer",
+      "kind": "Forks",
+      "technical_offers": [
+        {
+          "variant_id": 45409751793817,
+          "price": 269.99,
+          "compare": 359.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Forks"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "kind": [
+          "Forks"
+        ],
+        "color": [
+          "Black"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0689/7043/files/answer-bmx-20mm-matte-black-dagger-carbon-fork-600x600.jpg?v=1747863679",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0689/7043/files/answer-bmx-20mm-matte-black-dagger-carbon-fork-600x600.jpg?v=1747863679",
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/answer-bmx-dagger-20mm-fork-640x360.jpg?v=1617804202"
       ]
     },
     {
@@ -10549,6 +10779,70 @@
   ],
   "Powers BMX_Wheel Parts": [
     {
+      "name": "44BMX Carbon Brakeless 36H Rim",
+      "url": "https://www.powersbmx.com/products/44bmx-carbon-brakeless-36h-rim",
+      "price_new": "149.99",
+      "price_old": "239.99",
+      "availability": "Check store",
+      "part": "Wheel Parts",
+      "store": "Powers BMX",
+      "product_type": "rim",
+      "brand": "44bmx",
+      "kind": "Rims & Rim Strips",
+      "technical_offers": [
+        {
+          "variant_id": 41141003124889,
+          "price": 159.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "material": [
+              "Carbon"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        },
+        {
+          "variant_id": 41861755994265,
+          "price": 149.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "material": [
+              "Carbon"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "kind": [
+          "Rims & Rim Strips"
+        ],
+        "material": [
+          "Carbon"
+        ],
+        "color": [
+          "Black"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0689/7043/products/44carbon.png?v=1617801483",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/44carbon.png?v=1617801483",
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/image_a41def0d-ca16-4c5e-9430-ad466585a261.jpg?v=1656445187"
+      ]
+    },
+    {
       "name": "RANT LL Cool Peg",
       "url": "https://www.powersbmx.com/products/rant-ll-cool-peg",
       "price_new": "17.99",
@@ -10839,6 +11133,64 @@
         "https://cdn.shopify.com/s/files/1/0689/7043/files/371694.jpg?v=1765643342",
         "https://cdn.shopify.com/s/files/1/0689/7043/products/image_ad5c5d0f-eb2d-4d69-b453-5a8dc04cfe74.jpg?v=1765643342",
         "https://cdn.shopify.com/s/files/1/0689/7043/products/image_ca365d11-2561-4e4b-9d78-fe444974ff66.jpg?v=1765643342"
+      ]
+    },
+    {
+      "name": "Alienation Mischief OS20 Brakeless Rim",
+      "url": "https://www.powersbmx.com/products/alienation-mischief-os20-brakeless-rim",
+      "price_new": "55.99",
+      "price_old": "85.99",
+      "availability": "Check store",
+      "part": "Wheel Parts",
+      "store": "Powers BMX",
+      "product_type": "rim",
+      "brand": "Alienation",
+      "kind": "Rims & Rim Strips",
+      "technical_offers": [
+        {
+          "variant_id": 45053028958361,
+          "price": 55.99,
+          "compare": 85.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        },
+        {
+          "variant_id": 45053029089433,
+          "price": 55.99,
+          "compare": 85.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "Blue"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "kind": [
+          "Rims & Rim Strips"
+        ],
+        "color": [
+          "Black",
+          "Blue"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0689/7043/files/470979.jpg?v=1736465924",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0689/7043/files/470979.jpg?v=1736465924",
+        "https://cdn.shopify.com/s/files/1/0689/7043/files/470980.jpg?v=1736465974",
+        "https://cdn.shopify.com/s/files/1/0689/7043/files/471071.jpg?v=1736466116",
+        "https://cdn.shopify.com/s/files/1/0689/7043/files/470981.jpg?v=1736466208"
       ]
     },
     {
@@ -11382,6 +11734,156 @@
         "https://cdn.shopify.com/s/files/1/0689/7043/files/alienation-ankle-biter-race-rim.jpg?v=1716225070",
         "https://cdn.shopify.com/s/files/1/0689/7043/files/51RIMAB2436BLK.jpg?v=1716225241",
         "https://cdn.shopify.com/s/files/1/0689/7043/files/470347.jpg?v=1743460531"
+      ]
+    },
+    {
+      "name": "TNT M80 36H Rim OS20",
+      "url": "https://www.powersbmx.com/products/tnt-m80-36h-rim-os20",
+      "price_new": "49.99",
+      "price_old": "65.99",
+      "availability": "Check store",
+      "part": "Wheel Parts",
+      "store": "Powers BMX",
+      "product_type": "rim",
+      "brand": "TNT",
+      "kind": "Rims & Rim Strips",
+      "technical_offers": [
+        {
+          "variant_id": 67915497570457,
+          "price": 49.99,
+          "compare": 65.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        },
+        {
+          "variant_id": 67915497603225,
+          "price": 49.99,
+          "compare": 65.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "Purple"
+            ]
+          }
+        },
+        {
+          "variant_id": 67915497635993,
+          "price": 49.99,
+          "compare": 65.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "Gold"
+            ]
+          }
+        },
+        {
+          "variant_id": 67915497668761,
+          "price": 49.99,
+          "compare": 65.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "Red"
+            ]
+          }
+        },
+        {
+          "variant_id": 67915497701529,
+          "price": 49.99,
+          "compare": 65.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "Blue"
+            ]
+          }
+        },
+        {
+          "variant_id": 67915497734297,
+          "price": 49.99,
+          "compare": 65.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "White"
+            ]
+          }
+        },
+        {
+          "variant_id": 67915497767065,
+          "price": 49.99,
+          "compare": 65.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "White"
+            ]
+          }
+        },
+        {
+          "variant_id": 67915497799833,
+          "price": 49.99,
+          "compare": 65.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Rims & Rim Strips"
+            ],
+            "color": [
+              "Chrome / Polished"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "kind": [
+          "Rims & Rim Strips"
+        ],
+        "color": [
+          "Black",
+          "Blue",
+          "Chrome / Polished",
+          "Gold",
+          "Purple",
+          "Red",
+          "White"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0689/7043/products/tntm80blue.png?v=1617801614",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/tntm80blue.png?v=1617801614",
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/tntm80gold.png?v=1617801619",
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/tntm80purple.png?v=1617801623",
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/tntm80black.png?v=1617801628",
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/tntm80white.png?v=1617801634",
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/tntm80red.png?v=1617801639",
+        "https://cdn.shopify.com/s/files/1/0689/7043/products/tnt_rim.jpg?v=1617801641"
       ]
     },
     {
@@ -13657,6 +14159,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "White"
             ]
@@ -13665,6 +14170,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ],
         "color": [
@@ -13704,6 +14212,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -13716,6 +14227,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -13732,6 +14246,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "White"
             ]
@@ -13744,6 +14261,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -13760,6 +14280,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "White"
             ]
@@ -13772,6 +14295,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -13788,6 +14314,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -13800,6 +14329,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -13816,6 +14348,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "White"
             ]
@@ -13828,6 +14363,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -13844,6 +14382,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -13852,6 +14393,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ],
         "color": [
@@ -13891,6 +14435,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -13903,6 +14450,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -13919,6 +14469,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Blue"
             ]
@@ -13931,6 +14484,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -13947,6 +14503,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "White"
             ]
@@ -13955,6 +14514,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ],
         "color": [
@@ -13999,6 +14561,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14011,6 +14576,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14027,6 +14595,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14039,6 +14610,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14055,6 +14629,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14067,6 +14644,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14083,6 +14663,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Blue"
             ]
@@ -14095,6 +14678,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14111,6 +14697,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14123,6 +14712,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14139,6 +14731,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14151,6 +14746,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14167,6 +14765,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14179,6 +14780,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14195,6 +14799,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14207,6 +14814,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14223,6 +14833,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Blue"
             ]
@@ -14235,6 +14848,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14251,6 +14867,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14263,6 +14882,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ],
             "color": [
@@ -14279,6 +14901,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Blue"
             ]
@@ -14287,6 +14912,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ],
         "color": [
@@ -14329,6 +14957,9 @@
           "specs": {
             "kind": [
               "Goggles"
+            ],
+            "protects": [
+              "Goggle lenses"
             ]
           }
         },
@@ -14340,6 +14971,9 @@
           "specs": {
             "kind": [
               "Goggles"
+            ],
+            "protects": [
+              "Goggle lenses"
             ]
           }
         }
@@ -14347,6 +14981,9 @@
       "technical_specs": {
         "kind": [
           "Goggles"
+        ],
+        "protects": [
+          "Goggle lenses"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0689/7043/products/45ec-5ae7a3ab3edc0_1.jpg?v=1631041139",
@@ -14388,6 +15025,9 @@
             "kind": [
               "Pads & Guards"
             ],
+            "protects": [
+              "Pad Sets"
+            ],
             "color": [
               "Blue"
             ]
@@ -14402,6 +15042,9 @@
             "kind": [
               "Pads & Guards"
             ],
+            "protects": [
+              "Pad Sets"
+            ],
             "color": [
               "Black"
             ]
@@ -14411,6 +15054,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Pad Sets"
         ],
         "color": [
           "Black",
@@ -14446,6 +15092,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14459,12 +15108,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ],
         "color": [
@@ -14502,6 +15157,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Red"
             ]
@@ -14510,6 +15168,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ],
         "color": [
@@ -14544,6 +15205,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14558,6 +15222,9 @@
             "kind": [
               "Gloves"
             ],
+            "protects": [
+              "Gloves"
+            ],
             "color": [
               "Black"
             ]
@@ -14566,6 +15233,9 @@
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ],
         "color": [
@@ -14598,6 +15268,9 @@
           "specs": {
             "kind": [
               "Goggles"
+            ],
+            "protects": [
+              "Goggle lenses"
             ]
           }
         },
@@ -14609,6 +15282,9 @@
           "specs": {
             "kind": [
               "Goggles"
+            ],
+            "protects": [
+              "Goggle lenses"
             ],
             "color": [
               "Blue"
@@ -14624,6 +15300,9 @@
             "kind": [
               "Goggles"
             ],
+            "protects": [
+              "Goggle lenses"
+            ],
             "color": [
               "Orange"
             ]
@@ -14633,6 +15312,9 @@
       "technical_specs": {
         "kind": [
           "Goggles"
+        ],
+        "protects": [
+          "Goggle lenses"
         ],
         "color": [
           "Blue",
@@ -14668,6 +15350,9 @@
             "kind": [
               "Pads & Guards"
             ],
+            "protects": [
+              "Pad Sets"
+            ],
             "color": [
               "Blue"
             ]
@@ -14682,6 +15367,9 @@
             "kind": [
               "Pads & Guards"
             ],
+            "protects": [
+              "Pad Sets"
+            ],
             "color": [
               "Black"
             ]
@@ -14691,6 +15379,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Pad Sets"
         ],
         "color": [
           "Black",
@@ -14725,6 +15416,9 @@
             "kind": [
               "Pads & Guards"
             ],
+            "protects": [
+              "Pad Sets"
+            ],
             "color": [
               "Red"
             ]
@@ -14734,6 +15428,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Pad Sets"
         ],
         "color": [
           "Red"
@@ -14766,12 +15463,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -14801,6 +15504,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -14812,12 +15518,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -14852,6 +15564,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Pad Sets"
             ]
           }
         }
@@ -14859,6 +15574,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Pad Sets"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0689/7043/files/914009_1.jpg?v=1781910730",
@@ -14884,6 +15602,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -14894,6 +15615,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ]
           }
@@ -14906,12 +15630,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -14943,12 +15673,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -14975,6 +15711,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -14986,12 +15725,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -15026,6 +15771,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Pad Sets"
             ]
           }
         }
@@ -15033,6 +15781,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Pad Sets"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0689/7043/products/BTKA_1571421046756796_10885895b9540f4281582185f27a3f__33553.1571421565.1280.1280_1005x704_72195c83-1c35-45bd-8e61-65ef5ba3b239.jpg?v=1633287099",
@@ -15058,12 +15809,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -15097,12 +15854,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -15136,12 +15899,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -15171,12 +15940,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -22779,12 +23554,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -22815,12 +23596,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -22851,12 +23638,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -22890,12 +23683,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -22926,12 +23725,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -22962,6 +23767,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -22973,12 +23781,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23013,6 +23827,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -23024,12 +23841,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23060,6 +23883,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -23071,12 +23897,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23108,6 +23940,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -23119,12 +23954,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23159,6 +24000,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -23169,6 +24013,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ]
           }
@@ -23181,12 +24028,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23217,6 +24070,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -23227,6 +24083,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ]
           }
@@ -23239,12 +24098,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23275,12 +24140,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23312,6 +24183,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -23322,6 +24196,9 @@
           "available": true,
           "specs": {
             "kind": [
+              "Gloves"
+            ],
+            "protects": [
               "Gloves"
             ]
           }
@@ -23334,6 +24211,9 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         },
@@ -23345,12 +24225,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23386,12 +24272,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23418,12 +24310,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23455,12 +24353,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23492,12 +24396,18 @@
           "specs": {
             "kind": [
               "Gloves"
+            ],
+            "protects": [
+              "Gloves"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Gloves"
+        ],
+        "protects": [
           "Gloves"
         ]
       },
@@ -23528,6 +24438,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
             ]
           }
         }
@@ -23535,10 +24448,60 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Elbows"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/f94d5a97-076d-4913-bb75-a975d1bd8b2f.jpg?v=1771850915",
       "protection_type": "Elbow Pads"
+    },
+    {
+      "name": "Fuse Omega Elbow Pads - Black/ Neon Yellow",
+      "url": "https://us.sourcebmx.com/products/fuse-omega-elbow-pads-black-neon-yellow",
+      "price_new": "60.28",
+      "price_old": "75.92",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Source BMX US",
+      "product_type": "BMX Pads",
+      "brand": "Fuse",
+      "kind": "Pads & Guards",
+      "technical_offers": [
+        {
+          "variant_id": 43007886032957,
+          "price": 60.28,
+          "compare": 75.92,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "kind": [
+          "Pads & Guards"
+        ],
+        "protects": [
+          "Elbows"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/78fa618c-4a38-427b-8b90-fe62634e8528.jpg?v=1771850916",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/78fa618c-4a38-427b-8b90-fe62634e8528.jpg?v=1771850916",
+        "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/f7e34255-629c-4376-a1bc-e56e0df70dd5.jpg?v=1771850916",
+        "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/1d6d08c0-7bc2-4941-9d89-0352b88036bd.jpg?v=1771850917"
+      ],
+      "protection_type": "Elbow Pads",
+      "protection_sizes": [
+        "M",
+        "L"
+      ]
     },
     {
       "name": "187 Killer Pads Slim Elbow Pads - Black",
@@ -23560,6 +24523,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
             ]
           }
         },
@@ -23571,6 +24537,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
             ]
           }
         }
@@ -23578,6 +24547,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Elbows"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/23d9b221-81f3-4dcf-bc21-d4855881f0a0.jpg?v=1771850917",
@@ -23609,6 +24581,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
             ]
           }
         },
@@ -23620,6 +24595,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
             ]
           }
         }
@@ -23627,6 +24605,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Elbows"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d5dc9d95-a554-46ae-b142-43560ab41d86.jpg?v=1771850927",
@@ -23657,6 +24638,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees"
             ]
           }
         },
@@ -23668,6 +24652,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees"
             ]
           }
         }
@@ -23675,6 +24662,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Knees"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9a268fc9-ce23-4e57-977b-3d5c8e23e993.jpg?v=1771850931",
@@ -23715,6 +24705,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
             ]
           }
         }
@@ -23722,6 +24715,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Elbows"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/729ee83b-dc2b-4a43-b6d4-f0fd1ca598b5.jpg?v=1771850935",
@@ -23753,6 +24749,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
             ]
           }
         }
@@ -23760,6 +24759,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Elbows"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/fba55fd4-76fa-4c4b-945c-c55ceef71e61.jpg?v=1771850936",
@@ -23796,6 +24798,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Elbows"
             ]
           }
         }
@@ -23803,6 +24808,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Elbows"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/84a9d3e8-1b78-4716-a96a-e971645b9be1.jpg?v=1771850937",
@@ -23835,6 +24843,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Knees"
             ]
           }
         }
@@ -23842,6 +24853,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Knees"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/af03782c-3f48-4a77-b07b-6128d041b394.jpg?v=1771850941",
@@ -23874,6 +24888,9 @@
           "specs": {
             "kind": [
               "Pads & Guards"
+            ],
+            "protects": [
+              "Ankles"
             ]
           }
         }
@@ -23881,6 +24898,9 @@
       "technical_specs": {
         "kind": [
           "Pads & Guards"
+        ],
+        "protects": [
+          "Ankles"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/8e110452-77ea-460e-8471-76390d9b7535.jpg?v=1771850942",
@@ -23915,6 +24935,9 @@
           "specs": {
             "kind": [
               "Goggles"
+            ],
+            "protects": [
+              "Goggle lenses"
             ]
           }
         }
@@ -23922,6 +24945,9 @@
       "technical_specs": {
         "kind": [
           "Goggles"
+        ],
+        "protects": [
+          "Goggle lenses"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/a5c108a8-8a84-4c81-9391-147f15066feb.jpg?v=1771856766",
@@ -23947,12 +24973,18 @@
           "specs": {
             "kind": [
               "Goggles"
+            ],
+            "protects": [
+              "Goggles"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Goggles"
+        ],
+        "protects": [
           "Goggles"
         ]
       },
@@ -23986,6 +25018,9 @@
           "specs": {
             "kind": [
               "Goggles"
+            ],
+            "protects": [
+              "Goggle lenses"
             ]
           }
         }
@@ -23993,6 +25028,9 @@
       "technical_specs": {
         "kind": [
           "Goggles"
+        ],
+        "protects": [
+          "Goggle lenses"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/8981ea67-2c1b-4109-b512-3985c05bea58.jpg?v=1771856772",
@@ -24018,6 +25056,9 @@
           "specs": {
             "kind": [
               "Goggles"
+            ],
+            "protects": [
+              "Goggle lenses"
             ]
           }
         }
@@ -24025,6 +25066,9 @@
       "technical_specs": {
         "kind": [
           "Goggles"
+        ],
+        "protects": [
+          "Goggle lenses"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/5d1051b8-cc9f-4f15-8ee8-ba8b8d273efd.jpg?v=1771856771",
@@ -24050,12 +25094,18 @@
           "specs": {
             "kind": [
               "Helmets"
+            ],
+            "protects": [
+              "Helmets"
             ]
           }
         }
       ],
       "technical_specs": {
         "kind": [
+          "Helmets"
+        ],
+        "protects": [
           "Helmets"
         ]
       },

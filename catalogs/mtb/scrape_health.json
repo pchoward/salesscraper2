@@ -694,14 +694,14 @@
           }
         },
         "Bikes Online_Protection": {
-          "count": 31,
+          "count": 37,
           "failed": false,
           "diagnostics": {
             "expected_count": 30,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 31,
-            "percentage_change": 3.3,
+            "actual_count": 37,
+            "percentage_change": 23.3,
             "reason": "insufficient_history"
           }
         },
@@ -814,13 +814,13 @@
           }
         },
         "Cambria_Protection": {
-          "count": 0,
+          "count": 87,
           "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
+            "actual_count": 87,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -934,13 +934,13 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 171,
+          "count": 240,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 171,
+            "actual_count": 240,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -1054,14 +1054,14 @@
           }
         },
         "Fanatik_Protection": {
-          "count": 1,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 1,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 1,
-            "percentage_change": 0.0,
+            "actual_count": 14,
+            "percentage_change": 1300.0,
             "reason": "insufficient_history"
           }
         },
@@ -1174,14 +1174,14 @@
           }
         },
         "Mike's Bikes_Protection": {
-          "count": 27,
+          "count": 39,
           "failed": false,
           "diagnostics": {
             "expected_count": 27,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 27,
-            "percentage_change": 0.0,
+            "actual_count": 39,
+            "percentage_change": 44.4,
             "reason": "insufficient_history"
           }
         },
@@ -1294,13 +1294,13 @@
           }
         },
         "Worldwide Cyclery_Protection": {
-          "count": 0,
+          "count": 3,
           "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
+            "actual_count": 3,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -1330,7 +1330,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-03T07:50:57+00:00"
+      "scanned_at": "2026-11-03T10:55:47+00:00"
     }
   ],
   "baseline": {
@@ -1356,7 +1356,7 @@
     },
     "Fanatik_Protection": {
       "date": "2026-11-03",
-      "count": 1
+      "count": 14
     },
     "Fanatik_Wheels": {
       "date": "2026-11-03",
@@ -1428,7 +1428,7 @@
     },
     "Mike's Bikes_Protection": {
       "date": "2026-11-03",
-      "count": 27
+      "count": 39
     },
     "Mike's Bikes_Tires": {
       "date": "2026-11-03",
@@ -1468,7 +1468,7 @@
     },
     "Bikes Online_Protection": {
       "date": "2026-11-03",
-      "count": 31
+      "count": 37
     },
     "Bikes Online_Tires": {
       "date": "2026-11-03",
@@ -1480,11 +1480,19 @@
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-03",
-      "count": 171
+      "count": 240
     },
     "Colorado Cyclist_Tires": {
       "date": "2026-11-03",
       "count": 358
+    },
+    "Cambria_Protection": {
+      "date": "2026-11-03",
+      "count": 87
+    },
+    "Worldwide Cyclery_Protection": {
+      "date": "2026-11-03",
+      "count": 3
     }
   },
   "completeness_baseline": {
@@ -1565,7 +1573,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 31
+        "count": 37
       }
     ],
     "Bikes Online_Tires": [
@@ -1665,7 +1673,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 0
+        "count": 87
       }
     ],
     "Cambria_Tires": [
@@ -1733,7 +1741,7 @@
     "Colorado Cyclist_Protection": [
       {
         "date": "2026-11-03",
-        "count": 171
+        "count": 240
       }
     ],
     "Colorado Cyclist_Tires": [
@@ -1825,7 +1833,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 1
+        "count": 14
       }
     ],
     "Fanatik_Tires": [
@@ -1925,7 +1933,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 27
+        "count": 39
       }
     ],
     "Mike's Bikes_Tires": [
@@ -2025,7 +2033,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 0
+        "count": 3
       }
     ],
     "Worldwide Cyclery_Tires": [
