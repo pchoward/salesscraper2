@@ -9349,13 +9349,13 @@
       "date": "2026-11-03",
       "results": {
         "187 Killer Pads_Protection": {
-          "count": 7,
+          "count": 8,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 7,
+            "actual_count": 8,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -9577,15 +9577,15 @@
           }
         },
         "Exodus_Decks": {
-          "count": 13,
-          "failed": false,
+          "count": 0,
+          "failed": true,
           "diagnostics": {
             "expected_count": 13.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 13,
-            "percentage_change": 0.0,
-            "reason": "normal_variation"
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "scrape_failed"
           }
         },
         "Exodus_Protection": {
@@ -10130,26 +10130,26 @@
           }
         },
         "Tactics_Decks": {
-          "count": 43,
+          "count": 51,
           "failed": false,
           "diagnostics": {
             "expected_count": 131.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 4.0,
-            "actual_count": 43,
-            "percentage_change": -67.3,
+            "actual_count": 51,
+            "percentage_change": -61.2,
             "reason": "sustained_new_level"
           }
         },
         "Tactics_Protection": {
-          "count": 2,
+          "count": 4,
           "failed": false,
           "diagnostics": {
             "expected_count": 2.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 2,
-            "percentage_change": 0.0,
+            "actual_count": 4,
+            "percentage_change": 100.0,
             "reason": "normal_variation"
           }
         },
@@ -10166,14 +10166,14 @@
           }
         },
         "Tactics_Trucks": {
-          "count": 1,
+          "count": 8,
           "failed": false,
           "diagnostics": {
             "expected_count": 2.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 1,
-            "percentage_change": -50.0,
+            "actual_count": 8,
+            "percentage_change": 300.0,
             "reason": "normal_variation"
           }
         },
@@ -10190,27 +10190,28 @@
           }
         },
         "Triple 8_Protection": {
-          "count": 7,
+          "count": 8,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 7,
+            "actual_count": 8,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
         },
         "Zumiez_Accessories": {
-          "count": 14,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 13.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 14,
-            "percentage_change": 7.7,
-            "reason": "normal_variation"
+            "actual_count": 5,
+            "percentage_change": -61.5,
+            "reason": "partial_catalog_drop"
           }
         },
         "Zumiez_Bearings": {
@@ -10226,27 +10227,29 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 275,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 283.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 7.0,
-            "actual_count": 275,
-            "percentage_change": -3.0,
-            "reason": "normal_variation"
+            "actual_count": 44,
+            "percentage_change": -84.5,
+            "reason": "partial_catalog_drop"
           }
         },
         "Zumiez_Protection": {
-          "count": 8,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 8.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 8,
-            "percentage_change": 0.0,
-            "reason": "normal_variation"
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "empty_catalog_drop"
           }
         },
         "Zumiez_Sneakers": {
@@ -10262,46 +10265,36 @@
           }
         },
         "Zumiez_Trucks": {
-          "count": 37,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 37.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 37,
-            "percentage_change": 0.0,
-            "reason": "normal_variation"
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "empty_catalog_drop"
           }
         },
         "Zumiez_Wheels": {
-          "count": 12,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 12.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 12,
-            "percentage_change": 0.0,
-            "reason": "normal_variation"
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "empty_catalog_drop"
           }
         }
       },
-      "scanned_at": "2026-11-03T15:43:08+00:00"
+      "scanned_at": "2026-11-03T18:14:31+00:00"
     }
   ],
   "baseline": {
-    "Zumiez_Decks": {
-      "date": "2026-11-03",
-      "count": 275
-    },
-    "Zumiez_Wheels": {
-      "date": "2026-11-03",
-      "count": 12
-    },
-    "Zumiez_Trucks": {
-      "date": "2026-11-03",
-      "count": 37
-    },
     "SkateWarehouse_Decks": {
       "date": "2026-11-03",
       "count": 75
@@ -10324,7 +10317,7 @@
     },
     "Tactics_Decks": {
       "date": "2026-11-03",
-      "count": 43
+      "count": 51
     },
     "Tactics_Wheels": {
       "date": "2026-11-03",
@@ -10332,15 +10325,11 @@
     },
     "Tactics_Trucks": {
       "date": "2026-11-03",
-      "count": 1
+      "count": 8
     },
     "CCS_Wheels": {
       "date": "2026-11-03",
       "count": 6
-    },
-    "Zumiez_Accessories": {
-      "date": "2026-11-03",
-      "count": 14
     },
     "SkateWarehouse_Bearings": {
       "date": "2026-11-03",
@@ -10408,11 +10397,7 @@
     },
     "Tactics_Protection": {
       "date": "2026-11-03",
-      "count": 2
-    },
-    "Zumiez_Protection": {
-      "date": "2026-11-03",
-      "count": 8
+      "count": 4
     },
     "SkateWarehouse_Protection": {
       "date": "2026-11-03",
@@ -10437,10 +10422,6 @@
     "Exodus_Accessories": {
       "date": "2026-11-03",
       "count": 6
-    },
-    "Exodus_Decks": {
-      "date": "2026-11-03",
-      "count": 13
     },
     "Exodus_Protection": {
       "date": "2026-11-03",
@@ -10476,7 +10457,7 @@
     },
     "187 Killer Pads_Protection": {
       "date": "2026-11-03",
-      "count": 7
+      "count": 8
     },
     "Demon_Protection": {
       "date": "2026-11-03",
@@ -10484,14 +10465,14 @@
     },
     "Triple 8_Protection": {
       "date": "2026-11-03",
-      "count": 7
+      "count": 8
     }
   },
   "completeness_baseline": {
     "187 Killer Pads_Protection": [
       {
         "date": "2026-11-03",
-        "count": 7
+        "count": 8
       }
     ],
     "CCS_Accessories": [
@@ -11201,10 +11182,6 @@
       },
       {
         "date": "2026-11-02",
-        "count": 13
-      },
-      {
-        "date": "2026-11-03",
         "count": 13
       }
     ],
@@ -12837,7 +12814,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 43
+        "count": 51
       }
     ],
     "Tactics_Protection": [
@@ -12867,7 +12844,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 2
+        "count": 4
       }
     ],
     "Tactics_Sneakers": [
@@ -12983,7 +12960,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 1
+        "count": 8
       }
     ],
     "Tactics_Wheels": [
@@ -13047,10 +13024,14 @@
     "Triple 8_Protection": [
       {
         "date": "2026-11-03",
-        "count": 7
+        "count": 8
       }
     ],
     "Zumiez_Accessories": [
+      {
+        "date": "2026-10-20",
+        "count": 13
+      },
       {
         "date": "2026-10-21",
         "count": 13
@@ -13101,10 +13082,6 @@
       },
       {
         "date": "2026-11-02",
-        "count": 14
-      },
-      {
-        "date": "2026-11-03",
         "count": 14
       }
     ],
@@ -13168,6 +13145,10 @@
     ],
     "Zumiez_Decks": [
       {
+        "date": "2026-10-20",
+        "count": 212
+      },
+      {
         "date": "2026-10-21",
         "count": 211
       },
@@ -13218,10 +13199,6 @@
       {
         "date": "2026-11-02",
         "count": 275
-      },
-      {
-        "date": "2026-11-03",
-        "count": 275
       }
     ],
     "Zumiez_Protection": [
@@ -13247,10 +13224,6 @@
       },
       {
         "date": "2026-11-02",
-        "count": 8
-      },
-      {
-        "date": "2026-11-03",
         "count": 8
       }
     ],
@@ -13314,6 +13287,10 @@
     ],
     "Zumiez_Trucks": [
       {
+        "date": "2026-10-20",
+        "count": 31
+      },
+      {
         "date": "2026-10-21",
         "count": 30
       },
@@ -13364,13 +13341,13 @@
       {
         "date": "2026-11-02",
         "count": 37
-      },
-      {
-        "date": "2026-11-03",
-        "count": 37
       }
     ],
     "Zumiez_Wheels": [
+      {
+        "date": "2026-10-20",
+        "count": 11
+      },
       {
         "date": "2026-10-21",
         "count": 11
@@ -13421,10 +13398,6 @@
       },
       {
         "date": "2026-11-02",
-        "count": 12
-      },
-      {
-        "date": "2026-11-03",
         "count": 12
       }
     ]
