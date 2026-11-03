@@ -168,7 +168,7 @@ f.clear();assert.equal(f.price(url),null);assert.equal(f.allows(url),true);
         self.assertIsNotNone(soup.select_one('#tech-frame_size'))
         self.assertIsNotNone(soup.select_one('#tech-tire_width'))
         self.assertIsNone(soup.select_one('#sizeFilters'))
-        self.assertEqual(len(soup.select('.deal-card')),12)
+        self.assertEqual(len(soup.find_all(class_='deal-card')),12)
         self.assertNotIn('window.SKATEDEALS_ALERTS = ',html)
         skate=build_report_html({}, {}, sport=sports.SKATE)
         bmx=build_report_html({}, {}, sport=sports.BMX)
