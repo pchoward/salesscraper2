@@ -171,6 +171,7 @@ COLORADO.extra_specs=cambria_specs
 _OTHER_SPORTS=r'\b(?:baseball|softball|soccer|football|lacrosse|hockey|batter\'?s?|catcher|snow|ski|moto|mx|motocross|motorcycle)\b'
 def brand_title(title):
     if re.search(_OTHER_SPORTS,str(title or ''),re.I):return None
+    if re.search(r'\b(?:tailgate|straps?|racks?|bags?|backpacks?)\b',str(title or ''),re.I):return None
     return title_part(title)
 
 def brand_store(name,base,handles):

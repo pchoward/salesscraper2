@@ -41,6 +41,16 @@ class BrandStoreTests(unittest.TestCase):
         self.assertEqual(self.kept(stores.SEVEN_IDP, [product(9, "Project 23 Carbon - 2025", "7iDP", "P23 Helmet")]),
                          {"7iDP Project 23 Carbon - 2025": "Protection"})
 
+    def test_brand_names_vests_and_armor_tops(self):
+        from sports import brands
+        from sports.mtb.rules import filter_reason
+        canonical = brands.for_sport(sports.MTB)
+        self.assertEqual([canonical(v) for v in ("Alpinestars US", "Demon United", "FOX Clothing", "Fox Racing", "7 iDP")],
+                         ["Alpinestars", "Demon", "Fox", "Fox", "7iDP"])
+        self.assertIsNotNone(filter_reason("Alpinestars Descender Waterproof Vest", "Protection"), "a rain vest")
+        self.assertIsNone(filter_reason("Fox Racing Baseframe Pro D3O Cycling Jacket - Black", "Protection"), "armor")
+        self.assertIsNone(stores.brand_title("Demon Mountain Bike Tailgate Pad"))
+
     def test_all_are_mtb_stores(self):
         for store in stores.BRAND_STORES:
             self.assertIn(store, stores.STORES)

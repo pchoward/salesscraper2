@@ -19,7 +19,8 @@ PARTS = (
                      r"|\brib\s*(?:protectors?|guards?|pads?)\b|\bbody\s*armou?r\b(?!\s*(?:underwear|shorts|pants))|\bpressure\s*suits?\b"
                      r"|\bpadded\s+(?:shirts?|tops?|jerseys?|jackets?|vests?|tees?)\b|\bprotective\s+(?:shirts?|tops?|jackets?|vests?)\b"
                      r"|\bupper\s*(?:body\s*)?(?:protective|protection|armou?r)\b"
-                     r"|\bbody\s*protectors?\b|\bprotection\s+jackets?\b"),
+                     r"|\bbody\s*protectors?\b|\bprotection\s+jackets?\b"
+                     r"|\b(?:d3o|armou?red|protective|padded)\b[^;]*\b(?:jackets?|shirts?|vests?|tops?|jerseys?)\b"),
     ("Back & Spine", r"\bback\s*(?:protectors?|guards?|plates?|pads?|armou?r)\b|\bspine\s*(?:protectors?|guards?|pads?)\b"
                      r"|\bprotector\s+vests?\b|\bprotective\s+vests?\b|\bspine\b|\bbody\s*protectors?\b"),
     ("Elbows", r"\belbows?\b|\barm\s*(?:pads?|guards?|protectors?)\b"),
