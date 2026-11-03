@@ -52,7 +52,7 @@
         function options(url,picked=selected,ranges){const item=(config.items||{})[url];return item?(item.offers||[]).filter(offer=>
             offer.available!==false&&inRange(offer,ranges)&&active(url,picked).every(f=>((offer.specs||{})[f.key]||[]).some(v=>picked[f.key].includes(v)))):[];}
         function sync(part){if(doc)fields.forEach(f=>{const node=doc.querySelector('[data-technical-field="'+f.key+'"]');
-            if(node){node.hidden=part!=='all'&&!applies(f,part);node.style.display=node.hidden?'none':'';}});}
+            if(node){node.hidden=part!=='all'&&!applies(f,part);node.style.display=node.hidden||(node.dataset||{}).techEmpty?'none':'';}});}
         return {
             // One value reads back as a string (older links and callers), several as a list.
             capture(){const out={};Object.keys(selected).forEach(k=>{out[k]=selected[k].length===1?selected[k][0]:[...selected[k]];});return out;},
@@ -73,6 +73,29 @@
                 return {key:'technical:'+f.key+':'+value,label:f.label+': '+value,remaining};
             }));},
             sync,
+            // Live chip counts, like Skate's: each field counts the listings
+            // that pass every other filter (brand, store, type, price and the
+            // other spec picks), by the values of their matching offers.
+            // ``matches(row, technical)`` is the page's own filter test.
+            counts(rows,matches,ranges){
+                const out={},cache={};
+                fields.forEach(f=>{
+                    const rest={...selected};delete rest[f.key];
+                    const cacheKey=JSON.stringify(rest);
+                    const passing=cache[cacheKey]||(cache[cacheKey]=rows.filter(row=>matches(row,rest)));
+                    const tally={'':0};
+                    passing.forEach(row=>{
+                        if(!applies(f,row.part))return;
+                        const values=new Set();
+                        options(row.url,rest,ranges).forEach(offer=>((offer.specs||{})[f.key]||[]).forEach(v=>values.add(String(v))));
+                        if(!values.size)return;
+                        tally['']+=1;
+                        values.forEach(v=>{tally[v]=(tally[v]||0)+1;});
+                    });
+                    out[f.key]=tally;
+                });
+                return out;
+            },
             price(url,value,ranges){
                 const picked=value===undefined?selected:clean(value);
                 if(!active(url,picked).length)return null;
