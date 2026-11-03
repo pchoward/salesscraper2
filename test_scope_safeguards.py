@@ -52,10 +52,10 @@ class ExclusionTests(unittest.TestCase):
             products = shopify.load_sale_products(store, fetch=lambda url: FEED if "page=1" in url else {"products": []},
                                                   sleep=lambda seconds: None)
             found = shopify.exclusions(store, products)
-        self.assertEqual(set(found), {PADSET, "https://www.powersbmx.com/products/hoodie"},
-                         "kept bikes and full-price items are not exclusions")
+        # The pad set is BMX Protection now (2026-11-03), so it is kept.
+        self.assertEqual(set(found), {"https://www.powersbmx.com/products/hoodie"},
+                         "kept bikes, kept protection and full-price items are not exclusions")
         self.assertTrue(all(reason.startswith("catalog scope: ") for reason in found.values()))
-        self.assertIn("no category", found[PADSET])
 
     def test_only_opted_in_stores_track_exclusions(self):
         self.assertTrue(all(store.track_exclusions for store in stores.STORES))

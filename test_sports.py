@@ -207,8 +207,10 @@ class AlbesTests(unittest.TestCase):
                 for item in store_scraper.parse(json.dumps(feed)):
                     kept[item["name"]] = item["part"]
         self.assertEqual(kept, {"Cult Gateway Frame": "Frames & Forks", "Odyssey Clutch Freecoaster Hub": "Wheel Parts"})
-        self.assertEqual(stores.ALBES.sale_jsons, ["https://www.albes.com/collections/bmx-sale-bikes-parts/products.json",
-                                                   "https://www.albes.com/collections/bmx-bike-sale/products.json"])
+        self.assertEqual(stores.ALBES.sale_jsons[:2], ["https://www.albes.com/collections/bmx-sale-bikes-parts/products.json",
+                                                       "https://www.albes.com/collections/bmx-bike-sale/products.json"])
+        # Protection (2026-11-03): its helmet, pad and glove collections follow.
+        self.assertIn("https://www.albes.com/collections/bmx-safety-gear/products.json", stores.ALBES.sale_jsons)
         self.assertEqual(sports.BMX.build_scrapers()[0].shop, stores.ALBES)
 
 
@@ -359,11 +361,11 @@ class MoreBmxStoresTests(unittest.TestCase):
 
         self.assertEqual({scraper.shop.store for scraper in sports.BMX.build_scrapers()},
                          {"Albe's BMX", "Circuit BMX", "Powers BMX", "Source BMX US"})
-        self.assertEqual(stores.POWERS.sale_jsons, [
+        self.assertEqual(stores.POWERS.sale_jsons[:2], [
             "https://www.powersbmx.com/collections/clearance/products.json",
             "https://www.powersbmx.com/collections/black-friday-deals/products.json"])
         self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.SOURCE_US.sale_jsons],
-                         ["bmx-parts-sale", "bmx-wheel-sale", "bmx-frame-sale", "bmx-bike-sale"])
+                         ["bmx-parts-sale", "bmx-wheel-sale", "bmx-frame-sale", "bmx-bike-sale"] + list(stores.SOURCE_PROTECTION))
 
     def test_several_collections_are_merged_and_one_missing_is_skipped(self):
         from stores import shopify
@@ -404,6 +406,7 @@ class MoreBmxStoresTests(unittest.TestCase):
         self.assertEqual(kept, {
             "Radio Raceline Xenon Pro Frame": ("Frames & Forks", "Frames", None, "Scratch & Dent"),
             "Profile Mini Rear Hub": ("Wheel Parts", "Hubs", "Profile", None),
+            "Stay Strong Race Gloves": ("Protection", "Gloves", "Stay Strong", None),  # BMX protection, 2026-11-03
         })
 
 
@@ -429,7 +432,8 @@ class TitleFallbackTests(unittest.TestCase):
                 for item in store_scraper.parse(json.dumps(feed)):
                     kept[item["name"]] = (item["part"], item.get("kind"))
         self.assertEqual(kept, {"We The People Arrow Rear Hub Female Bolt Set": ("Wheel Parts", "Hubs"),
-                                "SE Bikes Mini Race Bike": ("Bikes", "Complete Bikes")})
+                                "SE Bikes Mini Race Bike": ("Bikes", "Complete Bikes"),
+                                "SE Bikes Wing Padset": ("Protection", "Pads & Guards")})
 
     def test_whole_bikes_without_a_type_are_still_bikes(self):
         from sports.bmx import stores
@@ -437,8 +441,9 @@ class TitleFallbackTests(unittest.TestCase):
         for title in ("Haro Skwad 2 Electric Bike", "Kuwahara KW-29 Bike", "Fit Series 22\u201d Wheel Complete Bike 2026",
                       "Radio Cobalt mini Race Bike black/red"):
             self.assertEqual(stores.title_part(title), "Bikes", title)
-        for title in ("SE BIKES Wing Padset", "SE BIkes Bike Life Number plate black/white/blue", "SE Bikes SE Racing Keychain"):
+        for title in ("SE BIkes Bike Life Number plate black/white/blue", "SE Bikes SE Racing Keychain"):
             self.assertIsNone(stores.title_part(title), title)
+        self.assertEqual(stores.title_part("SE BIKES Wing Padset"), "Protection", "a pad set, not a bike")
         self.assertEqual(stores.TYPES["complete bike"], "Bikes")
 
 

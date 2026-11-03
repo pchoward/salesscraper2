@@ -64,7 +64,24 @@ KINDS = {
     "levers": "Brakes & Accessories", "brake cables": "Brakes & Accessories", "cables": "Brakes & Accessories",
     "brake parts": "Brakes & Accessories", "brake pads": "Brakes & Accessories", "bmx brakes": "Brakes & Accessories",
     "bmx brake cables": "Brakes & Accessories", "bmx brake levers": "Brakes & Accessories",
+    # Protection (2026-11-03): every store's helmets, pads, gloves and goggles.
+    "helmets": "Helmets", "helmet": "Helmets", "bmx helmets": "Helmets", "full face helmets": "Helmets",
+    "race helmets": "Helmets", "freestyle helmets": "Helmets",
+    "gloves": "Gloves", "glove": "Gloves", "bmx gloves": "Gloves",
+    "pads": "Pads & Guards", "bmx pads": "Pads & Guards", "pad sets": "Pads & Guards", "knee pads": "Pads & Guards",
+    "shin pads": "Pads & Guards", "shin guards": "Pads & Guards", "elbow pads": "Pads & Guards",
+    "ankle guards": "Pads & Guards", "wrist guards": "Pads & Guards",
+    "goggles": "Goggles", "padded shirts": "Padded Shirts",
 }
+
+# Protection kinds from the title, when the store's type is vague ("SAFETY GEAR").
+PROTECTION_KINDS = (
+    ("Helmets", re.compile(r"\bhelmets?\b|\bfull[- ]face\b", re.I)),
+    ("Gloves", re.compile(r"\bgloves?\b", re.I)),
+    ("Goggles", re.compile(r"\bgoggles?\b", re.I)),
+    ("Padded Shirts", re.compile(r"\bpadded\s+(?:shirt|top|jersey)", re.I)),
+    ("Pads & Guards", re.compile(r"\bpads?\b|\bpadsets?\b|\bguards?\b|\bbrace\b|\bprotectors?\b|\bsleeves?\b", re.I)),
+)
 
 _KIND_WORDS = tuple(sorted((word for word in KINDS if word not in ("bikes", "bmx bikes", "bmx bike", "cables", "levers")),
                            key=len, reverse=True))
@@ -94,6 +111,11 @@ def wheel_size(title, tags=()):
 
 
 def kind_for(type_key, title, category):
+    if category == "Protection":
+        for label, pattern in PROTECTION_KINDS:
+            if pattern.search(title or ""):
+                return label
+        return KINDS.get(type_key)
     if category == "Wheels":
         return "Wheels"  # front / rear not split yet (owner, 2026-11-01)
     if category == "Bikes":
