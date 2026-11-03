@@ -68,8 +68,16 @@ TYPES.update({
     "bmx frames": "Frames & Forks", "pegs": "Wheel Parts", "chains": "Drivetrain",
 })
 
+# Protection (2026-11-03): helmets, pads, gloves and goggles from every store.
+TYPES.update({kind: "Protection" for kind in (
+    "protection", "safety gear", "helmets", "helmet", "bmx helmets", "full face helmets", "race helmets",
+    "freestyle helmets", "gloves", "glove", "bmx gloves", "pads", "bmx pads", "pad sets", "knee pads",
+    "shin pads", "shin guards", "elbow pads", "ankle guards", "wrist guards", "goggles", "padded shirts",
+    "body armor")})
+
 # Vague types: the category comes from the title's words.
-TYPES.update({"parts": shopify.BY_TITLE, "": shopify.BY_TITLE, "none": shopify.BY_TITLE})
+TYPES.update({"parts": shopify.BY_TITLE, "": shopify.BY_TITLE, "none": shopify.BY_TITLE,
+              "codes": shopify.BY_TITLE})  # Albe's files some pads as "codes"
 
 
 # A title names a whole bike only when it ends with "bike" (maybe a model
@@ -114,6 +122,14 @@ def details(item, product, kind_key):
         shared=shared))
 
 
+# Each store's protection collections (store probe, 2026-11-03). They hold
+# full-price gear too; only marked-down variants are listed, as everywhere.
+ALBES_PROTECTION = ("bmx-safety-gear", "bmx-helmets", "bmx-gloves", "bmx-pad-sets", "bmx-knee-pads",
+                    "bmx-shin-guards", "bmx-elbow-pads", "bmx-ankle-guards", "fuse-protection", "wrist-guards")
+POWERS_PROTECTION = ("protection", "helmets", "freestyle-helmets", "race-helmets", "protection-full-face-helmets",
+                     "pads", "pad-sets", "gloves", "goggles", "padded-shirts")
+SOURCE_PROTECTION = ("bmx-protection", "bmx-helmets", "bmx-race-helmets", "bmx-pads", "bmx-gloves")
+
 ALBES = shopify.ShopifyStore(
     "Albe's BMX",
     "Albe's BMX",
@@ -121,7 +137,7 @@ ALBES = shopify.ShopifyStore(
     collection="bmx-sale-bikes-parts",
     # Its separate bike sale holds ~30 bikes the combined collection misses
     # (store probe, 2026-11-01).
-    more_collections=("bmx-bike-sale",),
+    more_collections=("bmx-bike-sale",) + ALBES_PROTECTION,
     types=TYPES,
     brand_of=brands.for_sport(sports.BMX),
     own_vendor="albe",  # the shop's own name as a vendor is not a brand
@@ -135,6 +151,7 @@ CIRCUIT = shopify.ShopifyStore(
     "Circuit BMX",
     "https://www.circuitbmx.com",
     collection="sale-items",
+    more_collections=("protective-wear-and-pads", "helmets"),
     types=TYPES,
     brand_of=brands.for_sport(sports.BMX),
     own_vendor="circuit",
@@ -151,7 +168,7 @@ POWERS = shopify.ShopifyStore(
     "Powers BMX",
     "https://www.powersbmx.com",
     collection="clearance",
-    more_collections=("black-friday-deals",),
+    more_collections=("black-friday-deals",) + POWERS_PROTECTION,
     types=TYPES,
     brand_of=brands.for_sport(sports.BMX),
     own_vendor="powers",
@@ -168,7 +185,7 @@ SOURCE_US = shopify.ShopifyStore(
     "Source BMX (US)",
     "https://us.sourcebmx.com",
     collection="bmx-parts-sale",
-    more_collections=("bmx-wheel-sale", "bmx-frame-sale", "bmx-bike-sale"),
+    more_collections=("bmx-wheel-sale", "bmx-frame-sale", "bmx-bike-sale") + SOURCE_PROTECTION,
     types=TYPES,
     brand_of=brands.for_sport(sports.BMX),
     own_vendor="source",
@@ -180,7 +197,7 @@ SOURCE_US = shopify.ShopifyStore(
 
 STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US)
 
-PARTS = ("Bikes", "Frames & Forks", "Steering", "Drivetrain", "Wheels", "Wheel Parts", "Tires", "Seating", "Braking")
+PARTS = sports.BMX.parts
 
 
 def scrapers():
