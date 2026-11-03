@@ -9409,14 +9409,14 @@
           }
         },
         "CCS_Sneakers": {
-          "count": 48,
+          "count": 47,
           "failed": false,
           "diagnostics": {
             "expected_count": 39.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 48,
-            "percentage_change": 23.1,
+            "actual_count": 47,
+            "percentage_change": 20.5,
             "reason": "normal_variation"
           }
         },
@@ -9577,15 +9577,15 @@
           }
         },
         "Exodus_Decks": {
-          "count": 0,
-          "failed": true,
+          "count": 13,
+          "failed": false,
           "diagnostics": {
             "expected_count": 13.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "scrape_failed"
+            "actual_count": 13,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Exodus_Protection": {
@@ -9838,6 +9838,18 @@
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
+          }
+        },
+        "SkatePro_Protection": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 2,
+            "percentage_change": null,
+            "reason": "insufficient_history"
           }
         },
         "SkateWarehouse_Accessories": {
@@ -10202,16 +10214,15 @@
           }
         },
         "Zumiez_Accessories": {
-          "count": 0,
-          "failed": true,
-          "suspect": true,
+          "count": 14,
+          "failed": false,
           "diagnostics": {
             "expected_count": 13.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 5,
-            "percentage_change": -61.5,
-            "reason": "partial_catalog_drop"
+            "actual_count": 14,
+            "percentage_change": 7.7,
+            "reason": "normal_variation"
           }
         },
         "Zumiez_Bearings": {
@@ -10227,29 +10238,27 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 0,
-          "failed": true,
-          "suspect": true,
+          "count": 275,
+          "failed": false,
           "diagnostics": {
             "expected_count": 283.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 7.0,
-            "actual_count": 44,
-            "percentage_change": -84.5,
-            "reason": "partial_catalog_drop"
+            "actual_count": 275,
+            "percentage_change": -3.0,
+            "reason": "normal_variation"
           }
         },
         "Zumiez_Protection": {
-          "count": 0,
-          "failed": true,
-          "suspect": true,
+          "count": 8,
+          "failed": false,
           "diagnostics": {
             "expected_count": 8.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "empty_catalog_drop"
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Zumiez_Sneakers": {
@@ -10265,33 +10274,31 @@
           }
         },
         "Zumiez_Trucks": {
-          "count": 0,
-          "failed": true,
-          "suspect": true,
+          "count": 37,
+          "failed": false,
           "diagnostics": {
             "expected_count": 37.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "empty_catalog_drop"
+            "actual_count": 37,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Zumiez_Wheels": {
-          "count": 0,
-          "failed": true,
-          "suspect": true,
+          "count": 12,
+          "failed": false,
           "diagnostics": {
             "expected_count": 12.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "empty_catalog_drop"
+            "actual_count": 12,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-03T18:14:31+00:00"
+      "scanned_at": "2026-11-03T20:05:58+00:00"
     }
   ],
   "baseline": {
@@ -10345,7 +10352,7 @@
     },
     "CCS_Sneakers": {
       "date": "2026-11-03",
-      "count": 48
+      "count": 47
     },
     "CCS_Accessories": {
       "date": "2026-11-03",
@@ -10466,6 +10473,34 @@
     "Triple 8_Protection": {
       "date": "2026-11-03",
       "count": 8
+    },
+    "Exodus_Decks": {
+      "date": "2026-11-03",
+      "count": 13
+    },
+    "SkatePro_Protection": {
+      "date": "2026-11-03",
+      "count": 2
+    },
+    "Zumiez_Accessories": {
+      "date": "2026-11-03",
+      "count": 14
+    },
+    "Zumiez_Decks": {
+      "date": "2026-11-03",
+      "count": 275
+    },
+    "Zumiez_Protection": {
+      "date": "2026-11-03",
+      "count": 8
+    },
+    "Zumiez_Trucks": {
+      "date": "2026-11-03",
+      "count": 37
+    },
+    "Zumiez_Wheels": {
+      "date": "2026-11-03",
+      "count": 12
     }
   },
   "completeness_baseline": {
@@ -10734,7 +10769,7 @@
       },
       {
         "date": "2026-11-03",
-        "count": 48
+        "count": 47
       }
     ],
     "CCS_Trucks": [
@@ -11182,6 +11217,10 @@
       },
       {
         "date": "2026-11-02",
+        "count": 13
+      },
+      {
+        "date": "2026-11-03",
         "count": 13
       }
     ],
@@ -11789,6 +11828,12 @@
       {
         "date": "2026-11-03",
         "count": 0
+      }
+    ],
+    "SkatePro_Protection": [
+      {
+        "date": "2026-11-03",
+        "count": 2
       }
     ],
     "SkateWarehouse_Accessories": [
@@ -13029,10 +13074,6 @@
     ],
     "Zumiez_Accessories": [
       {
-        "date": "2026-10-20",
-        "count": 13
-      },
-      {
         "date": "2026-10-21",
         "count": 13
       },
@@ -13082,6 +13123,10 @@
       },
       {
         "date": "2026-11-02",
+        "count": 14
+      },
+      {
+        "date": "2026-11-03",
         "count": 14
       }
     ],
@@ -13145,10 +13190,6 @@
     ],
     "Zumiez_Decks": [
       {
-        "date": "2026-10-20",
-        "count": 212
-      },
-      {
         "date": "2026-10-21",
         "count": 211
       },
@@ -13199,6 +13240,10 @@
       {
         "date": "2026-11-02",
         "count": 275
+      },
+      {
+        "date": "2026-11-03",
+        "count": 275
       }
     ],
     "Zumiez_Protection": [
@@ -13224,6 +13269,10 @@
       },
       {
         "date": "2026-11-02",
+        "count": 8
+      },
+      {
+        "date": "2026-11-03",
         "count": 8
       }
     ],
@@ -13287,10 +13336,6 @@
     ],
     "Zumiez_Trucks": [
       {
-        "date": "2026-10-20",
-        "count": 31
-      },
-      {
         "date": "2026-10-21",
         "count": 30
       },
@@ -13341,13 +13386,13 @@
       {
         "date": "2026-11-02",
         "count": 37
+      },
+      {
+        "date": "2026-11-03",
+        "count": 37
       }
     ],
     "Zumiez_Wheels": [
-      {
-        "date": "2026-10-20",
-        "count": 11
-      },
       {
         "date": "2026-10-21",
         "count": 11
@@ -13398,6 +13443,10 @@
       },
       {
         "date": "2026-11-02",
+        "count": 12
+      },
+      {
+        "date": "2026-11-03",
         "count": 12
       }
     ]

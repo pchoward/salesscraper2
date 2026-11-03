@@ -7170,6 +7170,8 @@
     "all_time_low": 25.35,
     "all_time_low_date": "2026-10-31",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-03",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/197063314097-1.jpg?v=1721800026",
     "prices": {
       "2026-10-22": 31.85,
@@ -17096,11 +17098,11 @@
     "observation_count": 1,
     "all_time_low": 25.49,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0335/4194/7532/products/187KillerPads-Carousel-Product-Images_ComboPack-Black-01-Hero_667a016b-336c-4f7d-98fe-8c0096b2aadc.jpg?v=1675749630",
     "prices": {
       "2026-11-03": 25.49
-    },
-    "stage": "new"
+    }
   },
   "https://www.187killerpads.com/products/knee-elbow-pad-combo-pack-camo": {
     "name": "187killerpads KNEE & ELBOW PAD COMBO PACK - Camo",
@@ -18828,6 +18830,36 @@
     "prices": {
       "2026-11-03": 319.98
     }
+  },
+  "https://www.skatepro.com/en-us/115-17465.htm": {
+    "name": "TSG Skate/BMX Injected Skate Helmet",
+    "store": "SkatePro",
+    "part": "Protection",
+    "first_seen": "2026-11-03",
+    "last_seen": "2026-11-03",
+    "observation_count": 1,
+    "all_time_low": 41.95,
+    "all_time_low_date": "2026-11-03",
+    "image": "https://cdn.skatepro.com/product/400/tsg-skate-bmx-injected-skate-helmet-6x.webp",
+    "prices": {
+      "2026-11-03": 41.95
+    },
+    "stage": "new"
+  },
+  "https://www.skatepro.com/en-us/117-25594.htm": {
+    "name": "TSG All Terrain Knee pads",
+    "store": "SkatePro",
+    "part": "Protection",
+    "first_seen": "2026-11-03",
+    "last_seen": "2026-11-03",
+    "observation_count": 1,
+    "all_time_low": 56.95,
+    "all_time_low_date": "2026-11-03",
+    "image": "https://cdn.skatepro.com/product/400/tsg-all-terrain-skate-knee-pads.webp",
+    "prices": {
+      "2026-11-03": 56.95
+    },
+    "stage": "new"
   },
   "https://www.skatewarehouse.com/5Boro_Keith_Hardy_Demon_Cat_Deck/descpage-5BDCTDK.html": {
     "name": "5Boro Keith Hardy Demon Cat Deck 8.5 x 32",
@@ -32464,12 +32496,12 @@
     "observation_count": 1,
     "all_time_low": 54.95,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
     "image": "https://www.tactics.com/a/dny0/1a/ace-af-1-hollow-low-skateboard-trucks-polished-silver-44.jpg",
     "length": 54.95,
     "prices": {
       "2026-11-03": 54.95
-    },
-    "stage": "new"
+    }
   },
   "https://www.tactics.com/ace/af-1-low-hollow-kingpin-skateboard-trucks/polished-silver-60": {
     "name": "Ace AF-1 Low Hollow Kingpin Skateboard Trucks - polished silver 60",
@@ -33990,18 +34022,18 @@
     "observation_count": 1,
     "all_time_low": 51.95,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
+    "wheelbase_checked": "2026-11-03",
     "image": "https://www.tactics.com/a/gr3b/1a/blood-wizard-flying-wizard-80-skateboard-deck-green.jpg",
     "width": 8.0,
     "length": 51.95,
+    "wheelbase": 14.0,
     "widths": [
       8.0
     ],
     "prices": {
       "2026-11-03": 51.95
-    },
-    "stage": "new",
-    "wheelbase_checked": "2026-11-03",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/blood-wizard/flying-wizard-925-skateboard-deck/yellow": {
     "name": "Blood Wizard Flying Wizard 9.25 Skateboard Deck - yellow",
@@ -36992,9 +37024,11 @@
     "all_time_low": 43.95,
     "all_time_low_date": "2026-06-02",
     "stage": "new",
+    "wheelbase_checked": "2026-11-03",
     "image": "https://www.tactics.com/a/gj64/1a/doom-sayers-club-corpo-guy-81-skateboard-deck-brown.jpg",
     "width": 8.1,
     "length": 43.95,
+    "wheelbase": 14.25,
     "widths": [
       8.1
     ],
@@ -37022,9 +37056,7 @@
       "2026-10-19": 43.95,
       "2026-10-20": 43.95,
       "2026-11-03": 49.95
-    },
-    "wheelbase_checked": "2026-11-03",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/doom-sayers-club/corpo-guy-81-skateboard-deck/orange": {
     "name": "Doom Sayers Club Corpo Guy 8.1 Skateboard Deck - orange",
@@ -37036,9 +37068,11 @@
     "all_time_low": 43.95,
     "all_time_low_date": "2026-05-04",
     "stage": "price_drop",
+    "wheelbase_checked": "2026-11-03",
     "image": "https://www.tactics.com/a/gj65/1a/doom-sayers-club-corpo-guy-81-skateboard-deck-orange.jpg",
     "width": 8.1,
     "length": 43.95,
+    "wheelbase": 14.25,
     "widths": [
       8.1
     ],
@@ -37072,9 +37106,7 @@
       "2026-10-19": 43.95,
       "2026-10-20": 43.95,
       "2026-11-03": 49.95
-    },
-    "wheelbase_checked": "2026-11-03",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/doom-sayers-club/corpo-guy-81-skateboard-deck/yellow": {
     "name": "Doom Sayers Club Corpo Guy 8.1 Skateboard Deck - yellow",
@@ -37086,9 +37118,11 @@
     "all_time_low": 43.95,
     "all_time_low_date": "2026-04-30",
     "stage": "price_drop",
+    "wheelbase_checked": "2026-11-03",
     "image": "https://www.tactics.com/a/gj67/1a/doom-sayers-club-corpo-guy-81-skateboard-deck-yellow.jpg",
     "width": 8.1,
     "length": 43.95,
+    "wheelbase": 14.25,
     "widths": [
       8.1
     ],
@@ -37122,9 +37156,7 @@
       "2026-10-19": 43.95,
       "2026-10-20": 43.95,
       "2026-11-03": 49.95
-    },
-    "wheelbase_checked": "2026-11-03",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/doom-sayers-club/eli-snake-shake-825-3d-skateboard-deck": {
     "name": "Doom Sayers Club Eli Snake Shake 8.25 3D Skateboard Deck",
@@ -42399,9 +42431,11 @@
     "all_time_low": 71.95,
     "all_time_low_date": "2026-09-11",
     "stage": "all_time_low",
+    "wheelbase_checked": "2026-11-03",
     "image": "https://www.tactics.com/a/fp0r/1a/limosine-sharpie-86-skateboard-deck-orange.jpg",
     "width": 8.6,
     "length": 71.95,
+    "wheelbase": 14.45,
     "widths": [
       8.6
     ],
@@ -42430,9 +42464,7 @@
       "2026-10-19": 71.95,
       "2026-10-20": 71.95,
       "2026-11-03": 71.95
-    },
-    "wheelbase_checked": "2026-11-03",
-    "wheelbase": 14.45
+    }
   },
   "https://www.tactics.com/limosine/sharpie-86-skateboard-deck/yellow": {
     "name": "Limosine Sharpie 8.6 Skateboard Deck - yellow",
@@ -45532,16 +45564,16 @@
     "all_time_low": 106.95,
     "all_time_low_date": "2026-02-14",
     "stage": "all_time_low",
+    "wheelbase_checked": "2026-11-03",
     "image": "https://www.tactics.com/a/gdy2/1a/real-ishod-cerebrus-dbx-838-skateboard-deck-black.jpg",
     "width": 8.38,
+    "wheelbase": 14.5,
     "widths": [
       8.38
     ],
     "prices": {
       "2026-11-03": 106.95
-    },
-    "wheelbase_checked": "2026-11-03",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/real/ishod-grille-ltd-skateboard-deck/gold-foil": {
     "name": "Real Ishod Grille LTD Skateboard Deck - gold foil",
@@ -45587,17 +45619,17 @@
     "observation_count": 1,
     "all_time_low": 110.95,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
+    "wheelbase_checked": "2026-11-03",
     "image": "https://www.tactics.com/a/gut0/1a/real-mason-volcano-dbx-825-skateboard-deck-assorted.jpg",
     "width": 8.25,
+    "wheelbase": 14.38,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-03": 110.95
-    },
-    "stage": "new",
-    "wheelbase_checked": "2026-11-03",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/real/praman-favorite-skater-85-skateboard-deck/red-yellow-stain": {
     "name": "Real Praman Favorite Skater 8.5 Skateboard Deck - red/yellow stain",
@@ -46584,13 +46616,13 @@
     "observation_count": 1,
     "all_time_low": 41.95,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
     "image": "https://www.tactics.com/a/edo3/1a/slappy-st1-inverted-skateboard-trucks-polished-825.jpg",
     "width": 8.25,
     "length": 41.95,
     "prices": {
       "2026-11-03": 41.95
-    },
-    "stage": "new"
+    }
   },
   "https://www.tactics.com/sour-skateboards/barney-hot-potatoes-85-skateboard-deck": {
     "name": "Sour Barney Hot Potatoes 8.5 Skateboard Deck",
@@ -48849,12 +48881,12 @@
     "observation_count": 1,
     "all_time_low": 70.95,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
     "image": "https://www.tactics.com/a/d70r/1a/thunder-titanium-lights-iii-skateboard-trucks-polished-147.jpg",
     "length": 70.95,
     "prices": {
       "2026-11-03": 70.95
-    },
-    "stage": "new"
+    }
   },
   "https://www.tactics.com/tightbooth/cp-logo-838-skateboard-deck/green": {
     "name": "Tightbooth CP Logo 8.38 Skateboard Deck - green",
@@ -49260,12 +49292,12 @@
     "observation_count": 1,
     "all_time_low": 80.95,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
     "image": "https://www.tactics.com/a/ftts/1a/triple-8-deep-cover-skate-helmet-matte-black.jpg",
     "length": 80.95,
     "prices": {
       "2026-11-03": 80.95
-    },
-    "stage": "new"
+    }
   },
   "https://www.tactics.com/triple-8/deep-cover-skate-helmet/navy-matte": {
     "name": "Triple Eight Deep Cover Skate Helmet - navy matte",
@@ -49276,12 +49308,12 @@
     "observation_count": 1,
     "all_time_low": 80.95,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
     "image": "https://www.tactics.com/a/fttt/1a/triple-8-deep-cover-skate-helmet-navy-matte.jpg",
     "length": 80.95,
     "prices": {
       "2026-11-03": 80.95
-    },
-    "stage": "new"
+    }
   },
   "https://www.tactics.com/unity/ice-cream-cone-806-skateboard-deck": {
     "name": "Unity Ice Cream Cone 8.06 Skateboard Deck",
@@ -50816,11 +50848,11 @@
     "observation_count": 1,
     "all_time_low": 7.49,
     "all_time_low_date": "2026-11-03",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0279/0277/1337/products/Street-Elbow-2.jpg?v=1746538619",
     "prices": {
       "2026-11-03": 7.49
-    },
-    "stage": "new"
+    }
   },
   "https://www.triple8.com/products/street-knee-pads-grey-with-white-cap": {
     "name": "Triple 8 Street Knee Pads - Grey With White Cap",
