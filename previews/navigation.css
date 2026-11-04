@@ -95,3 +95,6 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
   .top-row .catalog-sections { justify-self:stretch; margin:0; flex:initial; border-top:1px solid #35404d; overflow-x:auto; }
   .catalog-sections button { min-height:36px; flex:1 0 auto; }
 }
+
+/* The development-only badge is omitted from this compact header layout. */
+.shell-header .preview-badge { display:none; }
