@@ -199,12 +199,15 @@ class FeedTests(unittest.TestCase):
 
         def fetch(url):
             urls.append(url)
+            if not url.startswith(tgm.SALE_JSON):  # flash sale, whole catalog: nothing more
+                return {"products": []}
             return {"products": pages[int(url.rsplit("page=", 1)[1])]}
 
         products = tgm.load_sale_products(fetch, sleep=pauses.append)
         self.assertEqual(len(products), 501)
-        self.assertEqual(urls, [f"{tgm.SALE_JSON}?limit=250&page={n}" for n in (1, 2, 3)])
-        self.assertEqual(pauses, [tgm.PAGE_DELAY, tgm.PAGE_DELAY])
+        self.assertEqual([url for url in urls if url.startswith(tgm.SALE_JSON)],
+                         [f"{tgm.SALE_JSON}?limit=250&page={n}" for n in (1, 2, 3)])
+        self.assertEqual(set(pauses), {tgm.PAGE_DELAY})
         for url in urls:
             self.assertNotIn("sort_by", url)
             self.assertNotIn("filter.", url)
@@ -214,8 +217,13 @@ class FeedTests(unittest.TestCase):
         self.assertEqual(len(tgm.load_sale_products(lambda url: {"products": full if url.endswith("page=1") else []},
                                                     sleep=lambda _s: None)), 250)
         self.assertIsNone(tgm.load_sale_products(lambda url: None, sleep=lambda _s: None))
+        # The main sale collection failing fails the store, whatever the
+        # whole-catalog feed (Black Friday coverage) read.
+        endless_sale = lambda url: {"products": full} if "/collections/" in url else {"products": []}
+        self.assertIsNone(tgm.load_sale_products(endless_sale, sleep=lambda _s: None),
+                          "the main sale feed failing still fails the store")
         self.assertIsNone(tgm.load_sale_products(lambda url: {"products": full}, sleep=lambda _s: None),
-                          "a feed that never ends is a failure, not 5,000 listings")
+                          "a sale feed that never ends is a failure, not 5,000 listings")
 
     def test_parse_reads_a_saved_products_json(self):
         import json

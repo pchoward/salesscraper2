@@ -87,7 +87,29 @@ def collect_sale_pages(start_url, fetch=fetch_html, max_pages=MAX_SALE_PAGES):
         url = nxt
     return pages
 
+# Seasonal deals linked from the homepage ("Pre-Black Friday Clearance",
+# 2,924 items, mostly snowboard; probe 2026-11-04). Its skate section (decks,
+# completes, accessories, skate protection, ~150) and men's shoes are read
+# whole. The skate section mixes parts, so each part keeps the items whose
+# title names it. Read once per run and shared by every part; a page that
+# can't be read (the event ended) adds nothing and fails nothing.
+DEALS_HOME = "https://www.tactics.com/limited-time-deals"
+DEAL_SECTIONS = {"skate": DEALS_HOME + "/skate", "shoes": DEALS_HOME + "/mens-shoes"}
+DEAL_URLS = (DEALS_HOME,) + tuple(DEAL_SECTIONS.values())
+_deal_pages = {}
+
+
+def deal_pages(section="skate", fetch=fetch_html):
+    url = DEAL_SECTIONS[section]
+    if url not in _deal_pages:
+        _deal_pages[url] = collect_sale_pages(url, fetch=fetch) or []
+    return _deal_pages[url]
+
+
 class TacticsScraper(Scraper):
+    # Parts whose items a deal page's titles can name (not shoes or accessories).
+    DEAL_PARTS = ("Decks", "Wheels", "Trucks", "Bearings", "Protection", "Completes")
+
     def scrape(self):
         pages = collect_sale_pages(self.url)
         if not pages:
@@ -101,7 +123,21 @@ class TacticsScraper(Scraper):
                     continue
                 seen.add(url)
                 products.append(item)
-        logging.info("Tactics %s: %s items across %s sale pages", self.part, len(products), len(pages))
+        sale_count = len(products)
+        if self.part in self.DEAL_PARTS or self.part == "Sneakers":
+            from stores.shopify import part_for_title
+            shoes = self.part == "Sneakers"
+            for html in deal_pages("shoes" if shoes else "skate"):
+                for item in self.parse(html):
+                    url = item.get("url")
+                    if not url or url in seen:
+                        continue
+                    if not shoes and part_for_title(item.get("name") or "") != self.part:
+                        continue
+                    seen.add(url)
+                    products.append(item)
+        logging.info("Tactics %s: %s items across %s sale pages, %s more from deal pages",
+                     self.part, sale_count, len(pages), len(products) - sale_count)
         return products
 
     def parse(self, html):
@@ -205,6 +241,27 @@ class TacticsScraper(Scraper):
         return products
 
 
+class TacticsDealCompletesScraper(TacticsScraper):
+    """Complete skateboards, which Tactics lists on sale only in its deals'
+    skate section (probe, 2026-11-04: ~30 completes, no completes sale page).
+    Once the deals end it finds none, so they leave the catalog."""
+
+    def __init__(self):
+        super().__init__("Tactics", DEAL_SECTIONS["skate"], "Completes")
+
+    def scrape(self):
+        from stores.shopify import part_for_title
+        products, seen = [], set()
+        for html in deal_pages("skate"):
+            for item in self.parse(html):
+                url = item.get("url")
+                if url and url not in seen and part_for_title(item.get("name") or "") == "Completes":
+                    seen.add(url)
+                    products.append(item)
+        logging.info("Tactics Completes: %s from the deals' skate section", len(products))
+        return products
+
+
 class TacticsDecksScraper(TacticsScraper):
     def __init__(self):
         super().__init__("Tactics", "https://www.tactics.com/skateboard-decks/sale", "Decks")
@@ -239,4 +296,5 @@ def scrapers():
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-bearings/sale", "Bearings"),
         TacticsScraper("Tactics", "https://www.tactics.com/shoes/sale", "Sneakers"),
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-accessories/sale", "Accessories"),
+        TacticsDealCompletesScraper(),
     ] + ([TacticsProtectionScraper(PROTECTION_URL)] if PROTECTION_URL else [])

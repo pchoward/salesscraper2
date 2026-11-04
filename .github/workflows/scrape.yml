@@ -130,6 +130,7 @@ jobs:
           ALERTS_ALLOW_BOOTSTRAP: ${{ vars.ALERTS_ALLOW_BOOTSTRAP }}
           ALERTS_API_URL: ${{ vars.ALERTS_API_URL }}
           ALERTS_HMAC_SECRET: ${{ secrets.ALERTS_HMAC_SECRET }}
+          SALE_WATCH: "1"
         run: python scraper.py
 
       - name: Save subscriber alert journal (not published)
@@ -153,6 +154,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           if [ -e history.json ]; then git add history.json; fi
           git add sale_items_chart.html previous_data.json price_history.json scrape_health.json site_sales.json
+          if [ -e sale_sections.json ]; then git add sale_sections.json; fi
           # rebuild_page.py's inputs. The scrape removes the file when it could
           # not save the data it describes; record that removal too.
           if [ -e report_inputs.json ] || git ls-files --error-unmatch report_inputs.json >/dev/null 2>&1; then

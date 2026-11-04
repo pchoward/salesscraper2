@@ -32,7 +32,20 @@ SEEDS = {"SkateWarehouse": "2026-07-04"}
 # Earlier daily counts for these stores are first-page scrapes. They are not
 # a baseline for days on or after the full sale-page scrape, or a one-day
 # jump in the count would look like a site-wide sale.
-FULL_CATALOG_FROM = {"Zumiez": "2026-10-02", "Tactics": "2026-10-02"}
+# Black Friday coverage (2026-11-04) reads whole Shopify catalogs and
+# Tactics' deal pages: counts from then on are compared only with each other.
+# A store can have several cut-overs; a day uses the latest one on or before it.
+FULL_CATALOG_FROM = {"Zumiez": "2026-10-02", "Tactics": ("2026-10-02", "2026-11-04"), "TGM": "2026-11-04", "CCS": "2026-11-04",
+                     "Kinetic": "2026-11-04", "SPoT": "2026-11-04", "Exodus": "2026-11-04"}
+
+
+def _cut_over(store, day):
+    """The latest coverage change for ``store`` on or before ``day`` (ISO), or None."""
+    dates = FULL_CATALOG_FROM.get(store) or ()
+    if isinstance(dates, str):
+        dates = (dates,)
+    earlier = [date for date in dates if date <= day]
+    return max(earlier) if earlier else None
 
 SPIKE_MULTIPLIER = 2.5
 SPIKE_MIN_EXTRA = 30
@@ -188,7 +201,7 @@ def _apply_spikes(state):
         window = days[max(0, index - SPIKE_BASELINE_DAYS) : index]
         for store, count in state["daily"][day].items():
             prior = []
-            start = FULL_CATALOG_FROM.get(store)
+            start = _cut_over(store, day)
             for prev in window:
                 if start and day >= start and prev < start:
                     continue

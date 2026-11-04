@@ -39,6 +39,11 @@ logger = logging.getLogger("stores.shopify")
 
 PAGE_LIMIT = 250
 MAX_PAGES = 20
+# A store's whole catalog (``whole_site``) is bigger than a sale collection.
+# Shopify serves at most 100 pages (25,000 products); a bigger catalog keeps
+# what those pages hold (probe, 2026-11-04: SPoT and Exodus ~45-60 pages,
+# TGM past 100).
+WHOLE_SITE_MAX_PAGES = 100
 PAGE_DELAY = 1.5  # seconds between page requests
 STOCK_DELAY = 0.5  # seconds between product stock reads
 MAX_STOCK_READS = 120  # per store and part, per run
@@ -96,7 +101,7 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
                  brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=(),
-                 type_part=None, track_exclusions=False, tag_part=None, raw_type_part=False):
+                 type_part=None, track_exclusions=False, tag_part=None, raw_type_part=False, whole_site=False):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
@@ -104,6 +109,14 @@ class ShopifyStore:
         # Stores that split their sale (parts, wheels, frames...) read every
         # listed collection; a product in two is kept once.
         self.sale_jsons = [self.sale_json] + [f"{self.base}/collections/{name}/products.json" for name in more_collections]
+        # Black Friday (owner, 2026-11-04): stores put markdowns in new
+        # collections ("black-friday-specials", "flash-sale") or nowhere in
+        # particular. ``whole_site`` also reads the store's whole catalog, so
+        # any product priced below its compare-at price is found wherever
+        # it is filed. Only marked-down variants count, as in a sale feed.
+        self.whole_site = whole_site
+        if whole_site:
+            self.sale_jsons.append(f"{self.base}/products.json")
         # ``types`` replaces the skate-shop types (another sport's store).
         self.types = dict(COMMON_TYPES if types is None else types, **(extra_types or {}))
         # The shop's own name as a vendor is not a brand ("TGM Skateboards").
@@ -194,6 +207,11 @@ def load_sale_products(store, fetch=None, sleep=time.sleep):
         if batch_products is None:
             if len(sale_jsons) == 1:
                 return None
+            if index == 0 and getattr(store, "whole_site", False):
+                # The main sale feed failed: a capped whole catalog could miss
+                # some of its deals, which would read as disappeared. Keep the
+                # previous data instead, as a single-feed store does.
+                return None
             # One of several collections (a seasonal one that ended): the
             # store still counts as read when another collection worked.
             logger.warning("%s: could not read %s; using the other sale collections", store.store, sale_json)
@@ -242,7 +260,9 @@ def exclusions(store, products):
 
 def _read_collection(store, sale_json, fetch, sleep):
     products = []
-    for page in range(1, MAX_PAGES + 1):
+    whole = "/collections/" not in sale_json
+    limit = WHOLE_SITE_MAX_PAGES if whole else MAX_PAGES
+    for page in range(1, limit + 1):
         if page > 1:
             sleep(PAGE_DELAY)
         payload = fetch(f"{sale_json}?limit={PAGE_LIMIT}&page={page}")
@@ -252,7 +272,10 @@ def _read_collection(store, sale_json, fetch, sleep):
         products.extend(batch)
         if len(batch) < PAGE_LIMIT:
             return products
-    logger.error("%s sale catalog exceeded %s pages", store.store, MAX_PAGES)
+    if whole:
+        logger.warning("%s catalog has more than %s pages; using the first %s products", store.store, limit, len(products))
+        return products
+    logger.error("%s sale catalog exceeded %s pages", store.store, limit)
     return None
 
 
