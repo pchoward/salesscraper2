@@ -3358,14 +3358,14 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 100,
+          "count": 101,
           "failed": false,
           "diagnostics": {
             "expected_count": 100,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 100,
-            "percentage_change": 0.0,
+            "actual_count": 101,
+            "percentage_change": 1.0,
             "reason": "insufficient_history"
           }
         },
@@ -3958,14 +3958,14 @@
           }
         },
         "SkatePro_Protection": {
-          "count": 3,
+          "count": 4,
           "failed": false,
           "diagnostics": {
             "expected_count": 3,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 3,
-            "percentage_change": 0.0,
+            "actual_count": 4,
+            "percentage_change": 33.3,
             "reason": "insufficient_history"
           }
         },
@@ -4366,7 +4366,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-04T01:37:15+00:00"
+      "scanned_at": "2026-11-04T09:26:48+00:00"
     }
   ],
   "baseline": {
@@ -4532,7 +4532,7 @@
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-04",
-      "count": 100
+      "count": 101
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-04",
@@ -4540,7 +4540,7 @@
     },
     "SkatePro_Protection": {
       "date": "2026-11-04",
-      "count": 3
+      "count": 4
     },
     "CCS_Protection": {
       "date": "2026-11-04",
@@ -5421,7 +5421,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 100
+        "count": 101
       }
     ],
     "Colorado Cyclist_Seating": [
@@ -5977,7 +5977,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 3
+        "count": 4
       }
     ],
     "SoCal_Protection": [

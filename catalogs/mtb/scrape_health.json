@@ -3052,14 +3052,14 @@
           }
         },
         "Cambria_Drivetrain": {
-          "count": 306,
+          "count": 305,
           "failed": false,
           "diagnostics": {
             "expected_count": 304.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 306,
-            "percentage_change": 0.7,
+            "actual_count": 305,
+            "percentage_change": 0.3,
             "reason": "insufficient_history"
           }
         },
@@ -4456,7 +4456,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-04T01:44:57+00:00"
+      "scanned_at": "2026-11-04T09:36:51+00:00"
     }
   ],
   "baseline": {
@@ -4694,7 +4694,7 @@
     },
     "Cambria_Drivetrain": {
       "date": "2026-11-04",
-      "count": 306
+      "count": 305
     },
     "Cambria_Forks & Shocks": {
       "date": "2026-11-04",
@@ -5207,7 +5207,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 306
+        "count": 305
       }
     ],
     "Cambria_Forks & Shocks": [

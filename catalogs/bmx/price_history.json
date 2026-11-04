@@ -7699,13 +7699,13 @@
     "first_seen": "2026-11-03",
     "last_seen": "2026-11-04",
     "observation_count": 2,
-    "all_time_low": 29.99,
-    "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "all_time_low": 19.99,
+    "all_time_low_date": "2026-11-04",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/Z-70001-00005_1-Photoroom.png?v=1775652643",
     "prices": {
       "2026-11-03": 29.99,
-      "2026-11-04": 29.99
+      "2026-11-04": 19.99
     }
   },
   "https://www.coloradocyclist.com/products/100-ridecamp-knee-guard-red-black": {
@@ -9230,6 +9230,21 @@
       "2026-11-03": 49.99,
       "2026-11-04": 49.99
     }
+  },
+  "https://www.coloradocyclist.com/products/troy-lee-designs-rockfight-chest-protector-white": {
+    "name": "Troy Lee Designs Rockfight Chest Protector - White",
+    "store": "Colorado Cyclist",
+    "part": "Protection",
+    "first_seen": "2026-11-04",
+    "last_seen": "2026-11-04",
+    "observation_count": 1,
+    "all_time_low": 121.99,
+    "all_time_low_date": "2026-11-04",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/TroyLeeDesignsRockfightChestProtector-White_d8c32900-9fdf-4823-8e9f-c6811311a073.jpg?v=1775651487",
+    "prices": {
+      "2026-11-04": 121.99
+    },
+    "stage": "new"
   },
   "https://www.coloradocyclist.com/products/troy-lee-designs-rogue-knee-guard-replacement-buckle-youth-red": {
     "name": "Troy Lee Designs Rogue Knee Guard Replacement Buckle - Youth - Red",
@@ -12572,6 +12587,21 @@
       "2026-11-03": 51.95,
       "2026-11-04": 51.95
     }
+  },
+  "https://www.skatepro.com/en-us/72-5026.htm": {
+    "name": "SFR Essentials Matte Skate Helmet",
+    "store": "SkatePro",
+    "part": "Protection",
+    "first_seen": "2026-11-04",
+    "last_seen": "2026-11-04",
+    "observation_count": 1,
+    "all_time_low": 30.95,
+    "all_time_low_date": "2026-11-04",
+    "image": "https://cdn.skatepro.com/product/400/sfr-essentials-matte-skate-helmet-n7.webp",
+    "prices": {
+      "2026-11-04": 30.95
+    },
+    "stage": "new"
   },
   "https://www.tactics.com/187-killer-pads/slim-knee-pads/black": {
     "name": "187 Killer Pads Slim Knee Pads - black",

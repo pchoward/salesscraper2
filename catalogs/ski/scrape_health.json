@@ -1318,14 +1318,14 @@
           }
         },
         "The House_Helmets": {
-          "count": 14,
+          "count": 13,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 14,
-            "percentage_change": 0.0,
+            "actual_count": 13,
+            "percentage_change": -7.1,
             "reason": "insufficient_history"
           }
         },
@@ -1354,14 +1354,14 @@
           }
         },
         "The House_Skis": {
-          "count": 65,
+          "count": 62,
           "failed": false,
           "diagnostics": {
             "expected_count": 65.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 65,
-            "percentage_change": 0.0,
+            "actual_count": 62,
+            "percentage_change": -4.6,
             "reason": "insufficient_history"
           }
         },
@@ -1570,19 +1570,19 @@
           }
         },
         "evo_Skis": {
-          "count": 192,
+          "count": 190,
           "failed": false,
           "diagnostics": {
             "expected_count": 188.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 2.0,
-            "actual_count": 192,
-            "percentage_change": 2.1,
+            "actual_count": 190,
+            "percentage_change": 1.1,
             "reason": "insufficient_history"
           }
         }
       },
-      "scanned_at": "2026-11-04T01:40:21+00:00"
+      "scanned_at": "2026-11-04T09:30:10+00:00"
     }
   ],
   "baseline": {
@@ -1628,7 +1628,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-04",
-      "count": 192
+      "count": 190
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-04",
@@ -1656,7 +1656,7 @@
     },
     "The House_Helmets": {
       "date": "2026-11-04",
-      "count": 14
+      "count": 13
     },
     "The House_Poles": {
       "date": "2026-11-04",
@@ -1664,7 +1664,7 @@
     },
     "The House_Skis": {
       "date": "2026-11-04",
-      "count": 65
+      "count": 62
     },
     "Gear West_Helmets": {
       "date": "2026-11-04",
@@ -2079,7 +2079,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 14
+        "count": 13
       }
     ],
     "The House_Poles": [
@@ -2117,7 +2117,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 65
+        "count": 62
       }
     ],
     "Triple 8_Bindings": [
@@ -2337,7 +2337,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 192
+        "count": 190
       }
     ]
   }

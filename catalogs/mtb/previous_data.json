@@ -13583,20 +13583,6 @@
       ],
       "technical_offers": [
         {
-          "variant_id": 43811532898486,
-          "price": 7749.0,
-          "compare": 9099.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "M"
-            ],
-            "travel_mm": [
-              "170"
-            ]
-          }
-        },
-        {
           "variant_id": 43811532996790,
           "price": 7749.0,
           "compare": 9099.0,
@@ -13613,7 +13599,6 @@
       ],
       "technical_specs": {
         "frame_size": [
-          "M",
           "XXL"
         ],
         "travel_mm": [
@@ -21155,28 +21140,6 @@
       "technical_specs": {}
     },
     {
-      "name": "SRAM GX Eagle Dub 12 Spd Boost Crankset - Lunar",
-      "url": "https://cambriabike.com/products/sram-gx-eagle-dub-12-spd-boost-crankset-lunar",
-      "price_new": "159.99",
-      "price_old": "160.00",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "Cambria",
-      "product_type": "MTB Cranksets",
-      "brand": "SRAM",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/GXEagleDub12SpeedBoostCrankset-2020_edf669f2-8538-4ab2-a874-966ab85c2c97.jpg?v=1642754711",
-      "technical_offers": [
-        {
-          "variant_id": 41116272558262,
-          "price": 159.99,
-          "compare": 160.0,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
       "name": "SRAM MRX Comp Micro Twist Shifter",
       "url": "https://cambriabike.com/products/sram-mrx-comp-micro-twist-shifter",
       "price_new": "14.99",
@@ -21556,13 +21519,6 @@
         "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Shimano-CUES-FC-U6000-Kurbel-42-Zahne-EFCU60001CXB2X_800x800_54983205-66f7-46b2-b7cf-7ae485639f1c.jpg?v=1695289861"
       ],
       "technical_offers": [
-        {
-          "variant_id": 42381014794422,
-          "price": 64.99,
-          "compare": 80.0,
-          "available": true,
-          "specs": {}
-        },
         {
           "variant_id": 42381014925494,
           "price": 64.99,
@@ -22487,13 +22443,6 @@
         },
         {
           "variant_id": 30937203179594,
-          "price": 20.99,
-          "compare": 23.0,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 30937203212362,
           "price": 20.99,
           "compare": 23.0,
           "available": true,
@@ -28316,6 +28265,28 @@
       "technical_specs": {}
     },
     {
+      "name": "SRAM GX Eagle Dub 12 Spd Boost Crankset - Lunar",
+      "url": "https://cambriabike.com/products/sram-gx-eagle-dub-12-spd-boost-crankset-lunar",
+      "price_new": "159.99",
+      "price_old": "160.00",
+      "availability": "In stock",
+      "part": "Drivetrain",
+      "store": "Cambria",
+      "product_type": "MTB Cranksets",
+      "brand": "SRAM",
+      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/GXEagleDub12SpeedBoostCrankset-2020_edf669f2-8538-4ab2-a874-966ab85c2c97.jpg?v=1642754711",
+      "technical_offers": [
+        {
+          "variant_id": 41116272558262,
+          "price": 159.99,
+          "compare": 160.0,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
       "name": "SRAM XPLR XG-1271 12 Spd MTB Cassette - Silver",
       "url": "https://cambriabike.com/products/sram-xplr-xg-1271-12-spd-mtb-cassette-silver",
       "price_new": "209.49",
@@ -30240,13 +30211,6 @@
       ],
       "technical_offers": [
         {
-          "variant_id": 43346857132214,
-          "price": 124.99,
-          "compare": 159.0,
-          "available": true,
-          "specs": {}
-        },
-        {
           "variant_id": 43346857197750,
           "price": 124.99,
           "compare": 159.0,
@@ -30475,13 +30439,6 @@
       "technical_offers": [
         {
           "variant_id": 41157496209590,
-          "price": 149.99,
-          "compare": 189.0,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 41157496242358,
           "price": 149.99,
           "compare": 189.0,
           "available": true,
@@ -35910,7 +35867,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "7 iDP Sam Hill Lite Elbow Pads - Black",
@@ -36119,7 +36077,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "G-Form E-Line Knee Pad - Black",
@@ -36599,7 +36558,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Ridecamp Elbow Guard - Youth - Black",
@@ -36673,7 +36633,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Ridecamp Knee Guard - Youth - Black",
@@ -36747,7 +36708,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "7 iDP Control Ankle Protector - Black",
@@ -36928,7 +36890,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Leatt Enduro Knee Guard - Hard Shell - White",
@@ -37630,7 +37593,8 @@
         "prot_size": [
           "S"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Fortis Knee Guard - Black",
@@ -37851,7 +37815,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Fox Racing Enduro Pro Elbow Guard - Black",
@@ -38127,7 +38092,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "ION K-Sleeve Amp Knee Pads - Black",
@@ -38442,7 +38408,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "7 iDP Control Shoulder Support - Right",
@@ -40342,7 +40309,8 @@
         "prot_size": [
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "SixSixOne 661 Radia MTB Goggle - Script Black",
@@ -76152,69 +76120,6 @@
       }
     },
     {
-      "name": "Fox Racing Dropframe Pro MTB Helmet - Matt Black",
-      "url": "https://www.coloradocyclist.com/products/fox-racing-dropframe-pro-mtb-helmet-matt-black",
-      "price_new": "199.99",
-      "price_old": "314.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Colorado Cyclist",
-      "product_type": "MTB Helmets",
-      "brand": "Fox",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/61MMIYY-36L._AC_SL1500_b352670f-1eb1-4c6b-a141-3abcde516d72.jpg?v=1765388469",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/61MMIYY-36L._AC_SL1500_b352670f-1eb1-4c6b-a141-3abcde516d72.jpg?v=1765388469",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/51p_93mJQTL._AC_SL1500_ee15ad73-44b3-45ca-9ea8-4a2b4e570676.jpg?v=1765388470",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/61WmSdiLCIL._AC_SL1500_d8d0d8dd-3c73-4263-a8d9-1f98c0104865.jpg?v=1765388469"
-      ],
-      "protection_type": "Helmet",
-      "protection_sizes": [
-        "M"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 48466034688240,
-          "price": 199.99,
-          "compare": 314.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Half shell (trail)"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Half shell (trail)"
-        ],
-        "rotational": [
-          "MIPS"
-        ],
-        "prot_size": [
-          "M"
-        ]
-      }
-    },
-    {
       "name": "Fox Racing Dropframe MTB Helmet - Black",
       "url": "https://www.coloradocyclist.com/products/fox-racing-dropframe-mtb-helmet-black",
       "price_new": "159.99",
@@ -83534,7 +83439,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Fortis Knee Guard - Heather Gray-Black",
@@ -83852,7 +83758,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "7 iDP Transition Elbow Pads - Black",
@@ -84483,7 +84390,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "7 iDP Sam Hill Lite Elbow Pads - Black",
@@ -84822,12 +84730,13 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Ridecamp Knee Guard - Heather Gray-Black",
       "url": "https://www.coloradocyclist.com/products/100-ridecamp-knee-guard-heather-gray-black",
-      "price_new": "29.99",
+      "price_new": "19.99",
       "price_old": "59.00",
       "availability": "In stock",
       "part": "Protection",
@@ -84849,7 +84758,7 @@
       "technical_offers": [
         {
           "variant_id": 49510193725680,
-          "price": 29.99,
+          "price": 19.99,
           "compare": 59.0,
           "available": true,
           "specs": {
@@ -84866,7 +84775,7 @@
         },
         {
           "variant_id": 49510193758448,
-          "price": 29.99,
+          "price": 19.99,
           "compare": 59.0,
           "available": true,
           "specs": {
@@ -84883,7 +84792,7 @@
         },
         {
           "variant_id": 49510193791216,
-          "price": 29.99,
+          "price": 19.99,
           "compare": 59.0,
           "available": true,
           "specs": {
@@ -84900,7 +84809,7 @@
         },
         {
           "variant_id": 49510193823984,
-          "price": 29.99,
+          "price": 19.99,
           "compare": 59.0,
           "available": true,
           "specs": {
@@ -84929,7 +84838,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "7 iDP Project Knee Pads - Black-Blue-Gray",
@@ -85123,7 +85033,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Fortis Elbow Guard - Black",
@@ -85609,7 +85520,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Giro Loam Knee Sleeve - Black",
@@ -86486,7 +86398,8 @@
         "prot_size": [
           "S"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Leatt 3DF 6.0 Knee Guard - Flint - 2025",
@@ -86763,7 +86676,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "Ridecamp Elbow Guard - Heather Gray-Black",
@@ -86869,7 +86783,8 @@
           "S",
           "XL"
         ]
-      }
+      },
+      "brand": "Ridecamp"
     },
     {
       "name": "7 iDP Control Ankle Support",
@@ -87494,6 +87409,103 @@
         ],
         "prot_size": [
           "XL"
+        ]
+      }
+    },
+    {
+      "name": "Troy Lee Designs Rockfight Chest Protector - White",
+      "url": "https://www.coloradocyclist.com/products/troy-lee-designs-rockfight-chest-protector-white",
+      "price_new": "121.99",
+      "price_old": "135.00",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Colorado Cyclist",
+      "product_type": "Body Armor Suits",
+      "brand": "Troy Lee Designs",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/TroyLeeDesignsRockfightChestProtector-White_d8c32900-9fdf-4823-8e9f-c6811311a073.jpg?v=1775651487",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/TroyLeeDesignsRockfightChestProtector-White_d8c32900-9fdf-4823-8e9f-c6811311a073.jpg?v=1775651487",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/TroyLeeDesignsRockfightChestProtector-White2_c9dcc018-dd9b-4694-9bea-3a95901a957d.jpg?v=1775651487"
+      ],
+      "protection_type": null,
+      "protection_sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 49510053773552,
+          "price": 121.99,
+          "compare": 135.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Chest & Ribs"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XS",
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 49510053806320,
+          "price": 121.99,
+          "compare": 135.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Chest & Ribs"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M",
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 49510053839088,
+          "price": 121.99,
+          "compare": 135.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Chest & Ribs"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL",
+              "XXL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Chest & Ribs"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S",
+          "XL",
+          "XS",
+          "XXL"
         ]
       }
     },
@@ -88234,6 +88246,69 @@
         ],
         "certification": [
           "Certified (standard not named)"
+        ]
+      }
+    },
+    {
+      "name": "Fox Racing Dropframe Pro MTB Helmet - Matt Black",
+      "url": "https://www.coloradocyclist.com/products/fox-racing-dropframe-pro-mtb-helmet-matt-black",
+      "price_new": "199.99",
+      "price_old": "314.95",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Colorado Cyclist",
+      "product_type": "MTB Helmets",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/61MMIYY-36L._AC_SL1500_b352670f-1eb1-4c6b-a141-3abcde516d72.jpg?v=1765388469",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/61MMIYY-36L._AC_SL1500_b352670f-1eb1-4c6b-a141-3abcde516d72.jpg?v=1765388469",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/51p_93mJQTL._AC_SL1500_ee15ad73-44b3-45ca-9ea8-4a2b4e570676.jpg?v=1765388470",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/61WmSdiLCIL._AC_SL1500_d8d0d8dd-3c73-4263-a8d9-1f98c0104865.jpg?v=1765388469"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "M"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 48466034688240,
+          "price": 199.99,
+          "compare": 314.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "M"
         ]
       }
     },
@@ -121921,7 +121996,8 @@
           "specs": {}
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {},
+      "brand": "RockShox"
     },
     {
       "name": "RockShox 38mm Fork Lower Leg Service Kit - Fits ZEB A1-3, Domain, and BoXXer D1",
@@ -121942,7 +122018,8 @@
           "specs": {}
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {},
+      "brand": "RockShox"
     },
     {
       "name": "Fox Float X (2022+) Rear Shock Air Can Service Kit",
@@ -121963,7 +122040,8 @@
           "specs": {}
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {},
+      "brand": "Fox"
     },
     {
       "name": "Fox 36 Fork Lower Leg Pro Service Kit",
@@ -121984,7 +122062,8 @@
           "specs": {}
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {},
+      "brand": "Fox"
     },
     {
       "name": "Fox 36 Fork Lower Leg Basic Service Kit",
@@ -122005,7 +122084,8 @@
           "specs": {}
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {},
+      "brand": "Fox"
     },
     {
       "name": "Fox 38 Fork Lower Leg Pro Service Kit",
@@ -122026,7 +122106,8 @@
           "specs": {}
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {},
+      "brand": "Fox"
     },
     {
       "name": "Fox 38 Fork Lower Leg Basic Service Kit",
@@ -122047,7 +122128,8 @@
           "specs": {}
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {},
+      "brand": "Fox"
     }
   ],
   "The Lost Co._Wheels": [
@@ -124167,7 +124249,7 @@
     {
       "name": "Maxxis High Roller III - 29x2.4 - 3C MaxxGrip / EXO+",
       "url": "https://www.thelostco.com/products/maxxis-high-roller-iii-mountain-tire-29x2-40-folding-tubeless-ready-3c-maxx-grip-exo-60tpi-black",
-      "price_new": "94.00",
+      "price_new": "95.00",
       "price_old": "104.00",
       "availability": "In stock",
       "part": "Tires",
@@ -124184,7 +124266,7 @@
       "technical_offers": [
         {
           "variant_id": 44276306444486,
-          "price": 94.0,
+          "price": 95.0,
           "compare": 104.0,
           "available": true,
           "specs": {
