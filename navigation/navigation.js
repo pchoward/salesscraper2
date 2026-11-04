@@ -97,6 +97,19 @@
             frame.contentWindow.postMessage({ type:"shreddeals:search-query", query:shellSearch.value }, win.location.origin);
         }
         shellSearch.addEventListener("input", sendSearch);
+        function searchEvent(type, extra={}) {
+            if (!frame.hidden) frame.contentWindow.postMessage({type,...extra},win.location.origin);
+        }
+        shellSearch.addEventListener('focus', () => searchEvent('shreddeals:search-focus',{focused:true}));
+        shellSearch.addEventListener('blur', () => {
+            doc.getElementById('shellSuggestions').hidden = true;
+            shellSearch.setAttribute('aria-expanded','false');
+            searchEvent('shreddeals:search-focus',{focused:false});
+        });
+        shellSearch.addEventListener('keydown', event => {
+            if (!['ArrowDown','ArrowUp','Enter','Escape'].includes(event.key)) return;
+            event.preventDefault(); searchEvent('shreddeals:search-key',{key:event.key});
+        });
         doc.addEventListener("keydown", event => {
             if (event.key !== "/" || event.ctrlKey || event.altKey || event.metaKey) return;
             const t = event.target;
@@ -224,7 +237,7 @@
         brand.addEventListener("click", () => choose("skate", "sport"));
         doc.getElementById("backToSkate").addEventListener("click", () => choose("skate", "sport"));
         render();
-        return { render, choose, chooseView, state: () => state(win.location.href, config) };
+        return { render, choose, chooseView, state: () => state(win.location.href, config), bridgeVersion: config.bridgeVersion };
     }
     return { state, navigate, skateURL, catalogURL, mergeSkateURL, nextIndex, mount };
 });

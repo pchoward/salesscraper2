@@ -93,6 +93,17 @@ class ProductionNavigationTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 publish(root, catalogs={'mtb': 'mtb/sale_items_chart.html'})
 
+    def test_header_asset_urls_match_current_content_versions(self):
+        import hashlib
+        with tempfile.TemporaryDirectory() as directory:
+            soup = BeautifulSoup(publish(Path(directory)).read_text(), 'html.parser')
+            for name, selector, attribute in [('navigation.css', 'link[rel=stylesheet]', 'href'),
+                                              ('navigation.js', 'script[src]', 'src')]:
+                version = hashlib.sha256((HERE/name).read_bytes()).hexdigest()[:12]
+                self.assertEqual(soup.select_one(selector)[attribute], 'navigation/' + name + '?v=' + version)
+            config = json.loads(soup.select_one('#sportConfig').string)
+            self.assertEqual(config['bridgeVersion'], hashlib.sha256((HERE/'skate-bridge.js').read_bytes()).hexdigest()[:12])
+
     def test_publish_rejects_symlink_targets(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);(root/'index.html').symlink_to(SOURCE/'sale_items_chart.html')

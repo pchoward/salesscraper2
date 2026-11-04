@@ -69,7 +69,7 @@ async function main(){
      const baseRows=await rows(frame);assert(baseRows.length>0);assert(baseRows.every(r=>r.part===category));
      const sample=baseRows[0];
      await control(frame,'storeSelect',sample.store);await control(frame,'brandSelect',sample.brand);
-     await frame.locator('#searchInput').fill(sample.brand);await page.waitForTimeout(200);
+     await page.locator('#shellSearch').fill(sample.brand);await page.waitForTimeout(200);
      let live=await rows(frame);assert(live.length>0);assert(live.every(r=>r.part===category&&r.store===sample.store&&r.brand.toLowerCase()===sample.brand.toLowerCase()));
      await frame.locator('#sortSelect').selectOption('price');
      const prices=(await rows(frame)).map(r=>Number(r.price));assert.deepEqual(prices,[...prices].sort((a,b)=>a-b));
@@ -113,7 +113,7 @@ async function main(){
      await page.locator('#sport-'+(sport==='ski'?'bmx':'ski')).click();await page.waitForTimeout(250);
      for(const f of config.fields)assert.equal(new URL(page.url()).searchParams.has(f.param),false,'technical parameters must not leak between sports');
      await page.goBack();await page.waitForTimeout(250);
-     frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput');
+     frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput',{state:'attached'});
      assert.equal(page.url(),savedTechnicalURL);assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),selection);
      const chips=await frame.locator('#activeChips').textContent();assert(chips.includes(preferred[1]),'technical choice must appear in removable active filters');
      // A second scoped field combines with AND on one offer. Counts are live
@@ -162,7 +162,7 @@ async function main(){
      const until=async(test,what,limit=10000)=>{const end=Date.now()+limit;let last;
       while(Date.now()<end){try{last=await test();if(last)return last;}catch(e){last=e.message;}await page.waitForTimeout(100);}
       throw new Error('Timed out waiting for '+what+' (last: '+last+')');};
-     await frame.locator('#searchInput').fill('audit-no-such-product-zzzz');
+     await page.locator('#shellSearch').fill('audit-no-such-product-zzzz');
      await until(async()=>(await rows(frame)).length===0,'the search to empty the list');
      // The page writes the search into the URL a moment after typing; capture
      // the URL only once it holds it (the old fixed 250 ms raced this).
@@ -172,7 +172,7 @@ async function main(){
      await until(()=>new URL(page.url()).searchParams.get('sport')===next,'the '+next+' tab');
      await page.goBack();
      await until(()=>page.url()===url,'Back to '+sport);
-     frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput');
+     frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput',{state:'attached'});
      await until(async()=>(await frame.locator('#searchInput').inputValue())==='audit-no-such-product-zzzz','the search to be restored');
      assert.equal(page.url(),url);
      await page.goForward();

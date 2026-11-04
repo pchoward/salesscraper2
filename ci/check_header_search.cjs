@@ -32,8 +32,18 @@ async function main() {
                 console.log('Checking header search',sport,width);
                 await page.goto(base + '/?sport=' + sport + '&q=initial-query');
                 let frame = await (await page.waitForSelector('#skateFrame')).contentFrame();
-                await frame.waitForSelector('#searchInput');
+                await frame.waitForSelector('#searchInput',{state:'attached'});
                 await frameInput('searchInput','initial-query'); await headerValue('initial-query');
+                assert.equal(await frame.locator('#searchInput').isVisible(),false,'duplicate search must be hidden');
+                const layout = await page.evaluate(() => {
+                    const search=document.querySelector('.shell-search').getBoundingClientRect();
+                    const sports=document.getElementById('sportTabs').getBoundingClientRect();
+                    const utility=document.querySelector('.catalog-sections')?.getBoundingClientRect();
+                    return {search:{width:search.width,bottom:search.bottom,right:search.right},sportsTop:sports.top,utilityRight:utility?.right};
+                });
+                assert(layout.search.width >= (width > 800 ? 600 : width-30),'primary search must be large');
+                assert(layout.sportsTop >= layout.search.bottom,'sports must be on a separate row');
+                if (width > 800) assert(layout.utilityRight >= width-30,'utility controls must be at the far right');
                 await frame.evaluate(() => clearFilters()); await headerValue('');
                 const sample = await frame.locator('.deal-row:not(.filtered-out)').first().evaluate(row => ({store:row.dataset.store,part:row.dataset.part}));
                 await frame.evaluate(sample => {
@@ -47,8 +57,21 @@ async function main() {
                 await header.fill(''); await frameInput('searchInput','');
                 assert.equal(await frame.locator('#partSelect').inputValue(),sample.part);
                 assert.equal(await frame.locator('#storeSelect').inputValue(),sample.store);
-                await frame.locator('#searchInput').fill('native-search'); await headerValue('native-search');
+                await frame.evaluate(() => { const input=document.getElementById('searchInput');input.value='native-search';input.dispatchEvent(new Event('input',{bubbles:true})); }); await headerValue('native-search');
                 await frame.evaluate(() => clearFilters()); await headerValue('');
+                if (sport === 'skate') {
+                    await header.fill('spi');
+                    await page.locator('#shellSuggestions [role=option]').first().waitFor();
+                    await header.press('ArrowDown');
+                    await page.waitForFunction(() => document.getElementById('shellSearch').hasAttribute('aria-activedescendant'));
+                    await header.press('Enter');
+                    await page.locator('#shellSuggestions').waitFor({state:'hidden'});
+                    await frame.evaluate(() => clearFilters()); await headerValue('');
+                    await header.fill('spi');
+                    await page.locator('#shellSuggestions [role=option]').first().click();
+                    await page.locator('#shellSuggestions').waitFor({state:'hidden'});
+                    await frame.evaluate(() => clearFilters()); await headerValue('');
+                }
                 // Programmatic search-chip changes use URL state rather than input events.
                 await header.fill('under 100'); await frameInput('searchInput','under 100');
                 await frame.locator('#searchChips .search-chip').first().waitFor();
@@ -61,16 +84,17 @@ async function main() {
                 await page.goForward(); await headerValue('history-second'); await frameInput('searchInput','history-second');
                 await frame.evaluate(() => clearFilters()); await headerValue('');
                 assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+                if (sport === 'mtb') await page.evaluate(() => document.getElementById('sportPanel').focus());
                 if (sport === 'mtb') await page.screenshot({path:path.join(output,`header-${width}.png`)});
                 results.push({sport,width,case:'Deals search, clear, chips, existing filters and history',status:'pass'});
             }
             await page.goto(base + '/?sport=mtb&view=explore&scope=mtb-dirt-jump&ex_query=Example');
             let frame = await (await page.waitForSelector('#skateFrame')).contentFrame();
-            await frame.waitForSelector('#query'); await headerValue('Example');
+            await frame.waitForSelector('#query',{state:'attached'}); await headerValue('Example');
             await header.fill('zzzz-unmatched-header-search'); await frameInput('query','zzzz-unmatched-header-search');
             assert.equal(await frame.locator('.inventory-card').count(),0);
             await frame.locator('button[type=reset]').click(); await headerValue('');
-            await frame.locator('#query').fill('complete 1'); await headerValue('complete 1');
+            await header.fill('complete 1'); await headerValue('complete 1');
             assert.equal(await frame.locator('.inventory-card').count(),2);
             await page.locator('[data-catalog-control=navDeals]').click();
             await frameInput('searchInput',''); await headerValue('');
@@ -92,6 +116,14 @@ async function main() {
             await frameInput('searchInput',''); await headerValue('');
             assert(await header.isEnabled());
             assert.deepEqual(errors,[]);
+            // Direct catalog links retain their original standalone search UI.
+            await page.goto(base + '/sale_items_chart.html');
+            const standalone = page.locator('#searchInput');
+            await standalone.waitFor();
+            await standalone.fill('spi');
+            await page.locator('#searchSuggest [role=option]').first().waitFor();
+            await standalone.press('ArrowDown'); await standalone.press('Enter');
+            await page.locator('#searchSuggest').waitFor({state:'hidden'});
             results.push({sport:'mtb',width,case:'Explore bidirectional search, reset, mode/sport switches and stale-message isolation',status:'pass'});
             await page.close();
         }

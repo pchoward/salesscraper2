@@ -1893,6 +1893,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "<head>",
         '<script>if(window.parent!==window&&!window.shredBridgeInstalled){'
         f'const bridge=document.createElement("script");bridge.src="{asset_prefix}navigation/skate-bridge.js";'
+        'if(window.parent.shredApp?.bridgeVersion)bridge.src+="?v="+window.parent.shredApp.bridgeVersion;'
         'bridge.async=false;document.head.appendChild(bridge);}</script>',
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',

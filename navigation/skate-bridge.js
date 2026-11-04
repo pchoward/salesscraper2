@@ -112,13 +112,57 @@
     function wireSearch() {
         const input = document.getElementById("searchInput") || document.getElementById("query");
         if (!input) return;
+        const header = window.parent.document.getElementById('shellSearch');
+        if (!header) return;
+        const field = input.closest('.search-field') || (input.id === 'query' ? input.parentElement : null);
+        if (field) field.hidden = true;
+        const box = input.closest('.tool-search');
+        if (box) box.style.display = 'contents';
         window.addEventListener("message", event => {
-            if (event.source !== window.parent || event.origin !== location.origin ||
-                event.data?.type !== "shreddeals:search-query" || typeof event.data.query !== "string") return;
-            if (input.value === event.data.query) return;
-            input.value = event.data.query;
-            input.dispatchEvent(new Event("input", { bubbles:true }));
+            if (event.source !== window.parent || event.origin !== location.origin) return;
+            const data = event.data;
+            if (data?.type === 'shreddeals:search-query' && typeof data.query === 'string') {
+                if (input.value === data.query) return;
+                input.value = data.query;
+                input.dispatchEvent(new Event('input',{bubbles:true}));
+            } else if (data?.type === 'shreddeals:search-key' && ['ArrowDown','ArrowUp','Enter','Escape'].includes(data.key)) {
+                input.dispatchEvent(new KeyboardEvent('keydown',{key:data.key,bubbles:true,cancelable:true}));
+            } else if (data?.type === 'shreddeals:search-focus' && typeof data.focused === 'boolean') {
+                input.dispatchEvent(new FocusEvent(data.focused ? 'focus' : 'blur'));
+            }
         });
+        const list = document.getElementById('searchSuggest');
+        const popup = window.parent.document.getElementById('shellSuggestions');
+        if (list && popup) {
+            function mirrorSuggestions() {
+                const open = !list.hidden && header.ownerDocument.activeElement === header;
+                popup.hidden = !open;
+                header.setAttribute('aria-expanded',String(open));
+                if (!open) { popup.replaceChildren(); header.removeAttribute('aria-activedescendant'); return; }
+                const copies = [...list.childNodes].map(node => node.cloneNode(true));
+                popup.replaceChildren(...copies);
+                popup.querySelectorAll('[id]').forEach(node => { node.id = 'shell-' + node.id; });
+                popup.querySelectorAll('[aria-labelledby]').forEach(node => {
+                    node.setAttribute('aria-labelledby',node.getAttribute('aria-labelledby').split(' ').map(id => 'shell-' + id).join(' '));
+                });
+                popup.querySelectorAll('[role=option]').forEach(option => {
+                    const id = option.id.slice('shell-'.length);
+                    option.addEventListener('pointerdown',event => {
+                        event.preventDefault();
+                        document.getElementById(id)?.dispatchEvent(new MouseEvent('mousedown',{bubbles:true,cancelable:true}));
+                    });
+                });
+                const active = input.getAttribute('aria-activedescendant');
+                if (active) {
+                    header.setAttribute('aria-activedescendant','shell-' + active);
+                    popup.querySelector('[aria-selected=true]')?.scrollIntoView({block:'nearest'});
+                } else header.removeAttribute('aria-activedescendant');
+            }
+            const suggestions = new MutationObserver(mirrorSuggestions);
+            suggestions.observe(list,{childList:true,subtree:true,attributes:true});
+            suggestions.observe(input,{attributes:true,attributeFilter:['aria-expanded','aria-activedescendant']});
+            window.addEventListener('pagehide',() => { suggestions.disconnect(); popup.hidden=true; },{once:true});
+        }
         let lastQuery = null;
         function sync() {
             if (input.value === lastQuery) return;

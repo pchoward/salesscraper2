@@ -40,10 +40,15 @@ def skate_query_keys():
     return sorted(keys)
 
 
+def asset_version(name):
+    return hashlib.sha256((HERE/name).read_bytes()).hexdigest()[:12]
+
+
 def render_shell(config, asset_prefix=''):
+    config = dict(config, bridgeVersion=asset_version('skate-bridge.js'))
     template = (HERE/'shell.html').read_text()
-    template = template.replace('href="navigation.css"', f'href="{asset_prefix}navigation.css"')
-    template = template.replace('src="navigation.js"', f'src="{asset_prefix}navigation.js"')
+    template = template.replace('href="navigation.css"', f'href="{asset_prefix}navigation.css?v={asset_version("navigation.css")}"')
+    template = template.replace('src="navigation.js"', f'src="{asset_prefix}navigation.js?v={asset_version("navigation.js")}"')
     if config.get('production'):
         template = template.replace('<title>ShredDeals development preview</title>', '<title>ShredDeals</title>')
         template = template.replace('<span class="preview-badge">Development prototype</span>', '')
