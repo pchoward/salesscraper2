@@ -199,12 +199,15 @@ class FeedTests(unittest.TestCase):
 
         def fetch(url):
             urls.append(url)
+            if not url.startswith(tgm.SALE_JSON):  # flash sale, whole catalog: nothing more
+                return {"products": []}
             return {"products": pages[int(url.rsplit("page=", 1)[1])]}
 
         products = tgm.load_sale_products(fetch, sleep=pauses.append)
         self.assertEqual(len(products), 501)
-        self.assertEqual(urls, [f"{tgm.SALE_JSON}?limit=250&page={n}" for n in (1, 2, 3)])
-        self.assertEqual(pauses, [tgm.PAGE_DELAY, tgm.PAGE_DELAY])
+        self.assertEqual([url for url in urls if url.startswith(tgm.SALE_JSON)],
+                         [f"{tgm.SALE_JSON}?limit=250&page={n}" for n in (1, 2, 3)])
+        self.assertEqual(set(pauses), {tgm.PAGE_DELAY})
         for url in urls:
             self.assertNotIn("sort_by", url)
             self.assertNotIn("filter.", url)

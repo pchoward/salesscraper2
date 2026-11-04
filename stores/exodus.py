@@ -17,6 +17,9 @@ SHOP = shopify.ShopifyStore(
     "Exodus Ride Shop",
     "https://exodusrideshop.com",
     collection="sale-1",
+    # Black Friday and deck clearance live outside sale-1 (probe, 2026-11-04).
+    more_collections=("black-friday-specials", "clearance-decks"),
+    whole_site=True,
     extra_types={
         "shoes": "Sneakers",
         "skate shoes": "Sneakers",

@@ -26,6 +26,7 @@ SHOP = shopify.ShopifyStore(
         "": shopify.BY_TITLE,
     },
     own_vendor="kinetic",
+    whole_site=True,
 )
 
 

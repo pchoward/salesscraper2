@@ -138,6 +138,12 @@ def _run(args, sport):
         for items in (curr_data or {}).values():
             brands.settle(items, sport.aliases_file())
     _log_filter_counts(scrapers, curr_data)
+    if sport.is_default and os.environ.get("SALE_WATCH") == "1":
+        # Sale sections no scraper reads (Black Friday collections, homepage
+        # deal pages): listed in the run summary, never a failure. The Skate
+        # workflow turns it on; tests and local runs make no extra requests.
+        import sale_watch
+        sale_watch.run()
 
     health_before = load_state()
     prepared = prepare_run(curr_data, failed_keys, prev_data, health_before, today=scanned_at[:10])

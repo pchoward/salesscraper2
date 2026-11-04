@@ -87,7 +87,25 @@ def collect_sale_pages(start_url, fetch=fetch_html, max_pages=MAX_SALE_PAGES):
         url = nxt
     return pages
 
+# Seasonal deal pages linked from the homepage ("Pre-Black Friday Clearance",
+# probe 2026-11-04). They mix every category, so each part keeps the items
+# whose title names it. Read once per run and shared by every part; a page
+# that can't be read (the event ended) adds nothing and fails nothing.
+DEAL_URLS = ("https://www.tactics.com/limited-time-deals",)
+_deal_pages = {}
+
+
+def deal_pages(fetch=fetch_html):
+    for url in DEAL_URLS:
+        if url not in _deal_pages:
+            _deal_pages[url] = collect_sale_pages(url, fetch=fetch) or []
+    return [html for url in DEAL_URLS for html in _deal_pages[url]]
+
+
 class TacticsScraper(Scraper):
+    # Parts whose items a deal page's titles can name (not shoes or accessories).
+    DEAL_PARTS = ("Decks", "Wheels", "Trucks", "Bearings", "Protection", "Completes")
+
     def scrape(self):
         pages = collect_sale_pages(self.url)
         if not pages:
@@ -101,7 +119,18 @@ class TacticsScraper(Scraper):
                     continue
                 seen.add(url)
                 products.append(item)
-        logging.info("Tactics %s: %s items across %s sale pages", self.part, len(products), len(pages))
+        sale_count = len(products)
+        if self.part in self.DEAL_PARTS:
+            from stores.shopify import part_for_title
+            for html in deal_pages():
+                for item in self.parse(html):
+                    url = item.get("url")
+                    if not url or url in seen or part_for_title(item.get("name") or "") != self.part:
+                        continue
+                    seen.add(url)
+                    products.append(item)
+        logging.info("Tactics %s: %s items across %s sale pages, %s more from deal pages",
+                     self.part, sale_count, len(pages), len(products) - sale_count)
         return products
 
     def parse(self, html):

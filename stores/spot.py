@@ -16,6 +16,8 @@ SHOP = shopify.ShopifyStore(
     "https://skateparkoftampa.com",
     extra_types={"shoes": "Sneakers", "skateboards": shopify.BY_TITLE, "skateboard": shopify.BY_TITLE},
     own_vendor="spot",
+    more_collections=("blacker-friday-deals",),  # Black Friday (probe, 2026-11-04)
+    whole_site=True,
 )
 
 
