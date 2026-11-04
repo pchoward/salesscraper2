@@ -51,9 +51,9 @@ async function main() {
             assert.equal(await frame.locator('.inventory-card').count(), 0);
             await frame.locator('button[type=reset]').click();
             assert.equal(await frame.locator('.inventory-card').count(), 12);
-            await frame.locator('#query').fill('nothing matches');
+            await page.locator('#shellSearch').fill('nothing matches');
             assert.equal(await frame.locator('.inventory-card').count(), 0);
-            await frame.locator('#query').fill('');
+            await page.locator('#shellSearch').fill('');
             await frame.locator('.inventory-card button').first().click();
             assert(await frame.locator('#quick').isVisible());
             assert.match(await frame.locator('#quickContent').innerText(), /Sample price history/);

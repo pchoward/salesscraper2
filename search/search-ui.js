@@ -92,6 +92,18 @@
         nodes[active].scrollIntoView({ block: "nearest" });
     }
 
+    function headerInput() {
+        try { return window.shredBridgeInstalled ? window.parent.document.getElementById('shellSearch') : null; }
+        catch (_) { return null; }
+    }
+    function focusSearch() {
+        (headerInput() || input).focus();
+    }
+    function searchFocused() {
+        const header = headerInput();
+        return document.activeElement === input || (header && header.ownerDocument.activeElement === header);
+    }
+
     function render() {
         if (!input || !list) return;
         const text = input.value;
@@ -102,7 +114,7 @@
         } else {
             entries = SkateSearch.suggest(ensureSearchIndex(), text, SUGGEST_MAX);
         }
-        if (!entries.length || document.activeElement !== input) {
+        if (!entries.length || !searchFocused()) {
             close();
             return;
         }
@@ -192,7 +204,7 @@
         }
         remember(input.value);
         close();
-        input.focus();
+        focusSearch();
     }
 
     function onKeydown(event) {
@@ -231,8 +243,8 @@
         const tag = target && target.tagName ? target.tagName.toLowerCase() : "";
         if (tag === "input" || tag === "textarea" || tag === "select" || (target && target.isContentEditable)) return;
         event.preventDefault();
-        input.focus();
-        input.select();
+        focusSearch();
+        (headerInput() || input).select();
     }
 
     // ---- Chips ---------------------------------------------------------
@@ -254,7 +266,7 @@
             chip.appendChild(x);
             chip.addEventListener("click", () => {
                 run(SkateSearch.queryWithout(input.value, token));
-                input.focus();
+                focusSearch();
             });
             chips.appendChild(chip);
         });

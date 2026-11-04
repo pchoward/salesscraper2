@@ -5,7 +5,7 @@
 <script type="application/json" id="sportConfig">__CONFIG__</script><script src="navigation.js" defer></script></head>
 <body><a class="skip" href="#sportPanel">Skip navigation</a>
 <header class="shell-header"><div class="top-row"><button id="brandHome" class="brand" type="button">ShredDeals</button>
-<label class="shell-search" for="shellSearch"><span class="shell-search-icon" aria-hidden="true"></span><input id="shellSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Search deals, brands or gear…" aria-label="Search current catalog"></label>
+<div class="shell-search" role="search"><span class="shell-search-icon" aria-hidden="true"></span><input id="shellSearch" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="shellSuggestions" autocomplete="off" spellcheck="false" placeholder="Search deals, gear, brands or stores…" aria-label="Search current catalog"><div id="shellSuggestions" class="shell-suggestions" role="listbox" aria-label="Search suggestions" hidden></div></div>
 <nav aria-label="Sports"><div id="sportTabs" role="tablist" aria-label="Sports"></div></nav>
 <span class="preview-badge">Development prototype</span></div>
 </header>

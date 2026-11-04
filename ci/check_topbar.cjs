@@ -63,7 +63,7 @@ async function main() {
                         const originalCounts = await frame.locator('#partFilters [data-part]').count();
                         const storeCounts = await frame.locator('#storeFilters [data-store]').count();
                         assert(originalCounts > 2 && storeCounts > 2);
-                        await frame.locator('#searchInput').fill('baker');
+                        await (await page.locator('#shellSearch').count() ? page.locator('#shellSearch') : frame.locator('#searchInput')).fill('baker');
                         await page.waitForTimeout(400);
                         assert.match(page.url(), /q=baker/);
                         const queryURL = page.url();
@@ -81,7 +81,7 @@ async function main() {
                         assert.notEqual(await frame.evaluate(() => alertsUi.config.mode), 'live');
                         await page.keyboard.press('Escape');
                         await frame.evaluate(() => closeAlerts());
-                        await frame.locator('#searchInput').fill('');
+                        await (await page.locator('#shellSearch').count() ? page.locator('#shellSearch') : frame.locator('#searchInput')).fill('');
                         await page.waitForTimeout(350);
                         await frame.locator('#partFilters [data-part="Wheels"]').click();
                         assert.equal(await frame.evaluate(() => state.part), 'Wheels');
