@@ -38,13 +38,17 @@ async function main() {
                 const layout = await page.evaluate(() => {
                     const search=document.querySelector('.shell-search').getBoundingClientRect();
                     const sports=document.getElementById('sportTabs').getBoundingClientRect();
+                    const logo=document.getElementById('brandHome').getBoundingClientRect();
                     const utility=document.querySelector('.catalog-sections')?.getBoundingClientRect();
-                    return {search:{width:search.width,height:search.height,bottom:search.bottom,right:search.right},sportsTop:sports.top,utilityRight:utility?.right};
+                    return {search:{width:search.width,height:search.height,bottom:search.bottom,right:search.right,center:search.top+search.height/2},logoCenter:logo.top+logo.height/2,sportsTop:sports.top,utilityRight:utility?.right};
                 });
                 assert(width > 800 ? layout.search.width >= 320 && layout.search.width <= 650 : layout.search.width >= width-30,'search width must remain compact on desktop and usable on mobile');
                 assert(layout.search.height >= 30 && layout.search.height <= (width > 800 ? 34 : 38),'search height must stay close to the wordmark');
                 assert(layout.sportsTop >= layout.search.bottom,'sports must be on a separate row');
-                if (width > 800) assert(layout.utilityRight >= width-30,'utility controls must be at the far right');
+                if (width > 800) {
+                    assert(layout.utilityRight >= width-30,'utility controls must be at the far right');
+                    assert(Math.abs(layout.search.center-layout.logoCenter) <= 1,'search and wordmark must be vertically centered');
+                }
                 await frame.evaluate(() => clearFilters()); await headerValue('');
                 const sample = await frame.locator('.deal-row:not(.filtered-out)').first().evaluate(row => ({store:row.dataset.store,part:row.dataset.part}));
                 await frame.evaluate(sample => {
