@@ -2599,8 +2599,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn filters-open" id="filtersOpen">Filters</button>'
         "</div>"
         '<div class="nav-row" id="navPills">'
-        + part_row
         + store_row
+        + part_row
         + "</div>"
         '<div class="tool-line">'
         # A combobox: suggestions in #searchSuggest, filters read from the
