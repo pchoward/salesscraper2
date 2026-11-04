@@ -121,9 +121,15 @@ def details(item, product, kind_key):
     if item.get("part") == "Protection":
         shared.update(protection.fields(title, product.get("product_type") or "",
                                         shopify._plain(product.get("body_html") or ""), "bmx"))
-    offers.attach(item, offers.technical_offers(
-        shopify.sale_variants(product), lambda variant: dans.variant_fields(product, variant, item.get("part")),
-        shared=shared))
+    def own(variant):
+        found = dans.variant_fields(product, variant, item.get("part"))
+        if item.get("part") == "Protection":
+            size = protection.variant_size(product, variant)  # XS-XXL per variant
+            if size:
+                found["prot_size"] = size
+        return found
+
+    offers.attach(item, offers.technical_offers(shopify.sale_variants(product), own, shared=shared))
 
 
 # Each store's protection collections (store probe, 2026-11-03). They hold
@@ -207,7 +213,7 @@ def multisport_part(title):
     # Helmets: skate, dirt jump / BMX or full face; not road, trail or snow ones.
     found = protection.fields(title, sport="bmx")
     if "Helmets" in found.get("protects", ()) and set(found.get("helmet_style", ())) & {
-            "Road / commuter", "Trail / half shell", "Snow"}:
+            "Road / commuter", "Half shell (trail)", "Snow"}:
         return None
     return "Protection"
 
@@ -220,7 +226,7 @@ BRAND_STORES = tuple(protection.brand_store(name, sports.BMX, multisport_part, d
 # when dirt jump / BMX or full face (BMX racing needs full face); pads for
 # knees, shins, elbows, ankles and hips. Trail, road and snow helmets stay out.
 _BMX_PADS = {"Knees", "Shins", "Elbows", "Ankles", "Hips & Tailbone", "Wrists", "Pad Sets", "Chest & Ribs", "Back & Spine"}
-_BMX_HELMETS = {"Full face", "Dirt jump / BMX"}
+_BMX_HELMETS = {"Full face", "Half shell (skate / BMX)"}
 _SHOP_TYPES = {"dirt jump helmets": "Protection", "full face helmets": "Protection", "knee pads": "Protection",
                "knee & shin pads": "Protection", "knee shin pads": "Protection", "arm pads": "Protection",
                "ankle & wrist supports": "Protection", "body armor underwear": "Protection"}

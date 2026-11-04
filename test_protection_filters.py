@@ -35,10 +35,11 @@ class ProtectsTests(unittest.TestCase):
 
     def test_helmet_style_and_rotational(self):
         self.assertEqual(protection.fields("Troy Lee Designs D4 Carbon Full Face Helmet"),
-                         {"protects": ["Helmets"], "helmet_style": ["Full face"]})
+                         {"protects": ["Helmets"], "helmet_style": ["Full face"], "age": ["Adult"]})
         self.assertEqual(protection.fields("Giro Manifest Spherical MTB Helmet"),
-                         {"protects": ["Helmets"], "helmet_style": ["Trail / half shell"], "rotational": ["Spherical"]})
-        self.assertEqual(protection.fields("Bell Local BMX Helmet")["helmet_style"], ["Dirt jump / BMX"])
+                         {"protects": ["Helmets"], "helmet_style": ["Half shell (trail)"], "rotational": ["Spherical"],
+                          "age": ["Adult"]})
+        self.assertEqual(protection.fields("Bell Local BMX Helmet")["helmet_style"], ["Half shell (skate / BMX)"])
         self.assertEqual(protection.fields("Giro Caden MIPS II Helmet", "APPAREL/HELMETS/RECREATION HELMETS")["helmet_style"],
                          ["Road / commuter"])
         self.assertNotIn("helmet_style", protection.fields("Smith Session MIPS Helmet"), "no style is guessed from a model name")
@@ -89,3 +90,41 @@ class MtbProtectionTests(unittest.TestCase):
         self.assertEqual(protection.protects("7 iDP Control Shoulder Support - Left", "Ankle & Wrist Supports"), ["Shoulders"])
         self.assertEqual(protection.protects("7 iDP Control Ankle Protector", "Ankle & Wrist Supports"), ["Ankles"])
         self.assertEqual(protection.protects("Race Face Ambush Leg", "Knee & Shin Pads"), ["Knees", "Shins"])
+
+
+class CertificationAgeSizeTests(unittest.TestCase):
+    """Helmet type, named certifications, size and age (owner, 2026-11-03)."""
+
+    def test_certifications_are_read_never_assumed(self):
+        cases = {
+            ("Triple 8 Gotham Dual Certified Helmet", ""): ["Dual certified (CPSC + ASTM F1492)"],
+            ("Pro-Tec Classic Helmet", "Meets CPSC and ASTM F-1492 standards"):
+                ["Dual certified (CPSC + ASTM F1492)", "CPSC (US bike)", "ASTM F1492 (skate)"],
+            ("Bell Full-9 Fusion MIPS Helmet", "Meets CPSC and ASTM F1952"): ["CPSC (US bike)", "ASTM F1952 (downhill)"],
+            ("Smith Vantage MIPS Ski Helmet", "Certified to ASTM F2040 and EN 1077"): ["ASTM F2040 (snow)", "EN 1077 (EU snow)"],
+            ("Leatt 3DF 5.0 Zip Knee Guard", "CE certified EN 1621-1 Level 1"): ["EN 1621 (CE impact armor)"],
+            ("Triple 8 The Certified Sweatsaver Helmet", ""): ["Certified (standard not named)"],
+            ("Bell Local BMX Helmet", ""): [],
+        }
+        for (title, text), expected in cases.items():
+            self.assertEqual(protection.certifications(title, text), expected, title)
+
+    def test_age_and_size(self):
+        self.assertEqual([protection.age(t) for t in ("Bell Lil Ripper Child Helmet", "Smith Scout Jr. MIPS Helmet",
+                                                       "Fox Proframe Helmet")], ["Kids", "Youth", "Adult"])
+        product = {"options": [{"name": "Color"}, {"name": "Size"}]}
+        self.assertEqual(protection.variant_size(product, {"option1": "Black", "option2": "S/M"}), ["S", "M"])
+        self.assertEqual(protection.variant_size(product, {"option1": "Black", "option2": "X-Large"}), ["XL"])
+        self.assertEqual(protection.variant_size({"options": [{"name": "Color"}]}, {"option1": "Black"}), [])
+
+    def test_sidebar_order(self):
+        from sports.facets import payload
+        fields = {f["key"]: f for f in protection.facet_fields("bmx", ("Protection",))}
+        self.assertEqual(fields["prot_size"]["order"], ["XS", "S", "M", "L", "XL", "XXL"])
+        self.assertEqual(fields["helmet_style"]["label"], "Helmet type")
+        data = {"S_Protection": [{"url": "https://s.example/p", "name": "Fuse Omega Knee Pad", "part": "Protection",
+                                  "store": "S", "price_new": "40.00", "price_old": "60.00", "technical_offers": [
+            {"variant_id": 1, "price": 40, "compare": 60, "available": True, "specs": {"prot_size": ["XL", "M", "S"]}}]}]}
+        with sports.BMX.active():
+            found = {f["key"]: f["values"] for f in payload(data, sports.BMX)["fields"]}
+        self.assertEqual(found["prot_size"], ["S", "M", "XL"], "sizes in size order, not A-Z")

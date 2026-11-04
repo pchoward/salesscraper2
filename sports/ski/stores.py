@@ -71,6 +71,9 @@ def details(item, product, type_key):
                                           (specs.variant_length(product, variant) or title_cm)]}
     elif item.get("part") == "Boots":
         own = lambda variant: {"mondo": specs.variant_mondo(product, variant)}
+    elif item.get("part") in ("Helmets", "Protection"):
+        from sports import protection
+        own = lambda variant: {"prot_size": protection.variant_size(product, variant)}
     # evo-style fields from the title, type, tags and description (sports/ski/evo.py).
     shared = evo.fields(item.get("part"), product.get("title") or item.get("name"), product.get("product_type"),
                         tags, shopify._plain(product.get("body_html") or ""))

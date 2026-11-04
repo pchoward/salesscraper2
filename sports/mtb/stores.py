@@ -288,6 +288,8 @@ class MtbShopifyScraper(shopify.ShopifyScraper):
             if self.part=='Protection':
                 specs.update(protection.fields(product.get('title',''),product.get('product_type',''),
                                                shopify._plain(product.get('body_html') or ''),'mtb'))
+                size=protection.variant_size(product,variant)
+                if size:specs['prot_size']=size
             offers.append({'variant_id':variant.get('id'),'price':float(shopify._amount(variant['price'])),
                            'compare':float(shopify._amount(variant['compare_at_price'])),
                            'available':variant.get('available') if isinstance(variant.get('available'),bool) else None,
