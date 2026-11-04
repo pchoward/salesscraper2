@@ -33,6 +33,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Start from main as it is now, not as it was when the run was
+          # queued: a rebuild that held the lock may have pushed meanwhile.
+          ref: ${{ github.ref_name }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -90,6 +94,7 @@ jobs:
           # re-sync and retry instead of failing the run.
           for attempt in 1 2 3 4; do
             git pull --rebase origin main && git push && break
+            git rebase --abort 2>/dev/null || true
             if [ "$attempt" = 4 ]; then exit 1; fi
             sleep $((attempt * 5))
           done
