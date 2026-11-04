@@ -479,16 +479,22 @@ class SliderSpacingTests(unittest.TestCase):
                     f"--window-size={width},800", "--virtual-time-budget=1000",
                     "--dump-dom", path.as_uri(),
                 ]
-                # Headless Chrome prints the DOM and then lingers on DBus.
-                proc = subprocess.Popen(
-                    command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                    text=True, start_new_session=True,
-                )
-                try:
-                    rendered, _err = proc.communicate(timeout=20)
-                except subprocess.TimeoutExpired:
-                    os.killpg(proc.pid, signal.SIGKILL)
-                    rendered, _err = proc.communicate()
+                # Headless Chrome prints the DOM and then lingers on DBus. Now
+                # and then it exits without printing anything (CI, 2026-11-03
+                # and -04); an empty dump is not a layout result, so retry.
+                rendered = ""
+                for attempt in range(3):
+                    proc = subprocess.Popen(
+                        command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                        text=True, start_new_session=True,
+                    )
+                    try:
+                        rendered, _err = proc.communicate(timeout=20)
+                    except subprocess.TimeoutExpired:
+                        os.killpg(proc.pid, signal.SIGKILL)
+                        rendered, _err = proc.communicate()
+                    if rendered and "data-ok=" in rendered:
+                        break
                 self.assertIn('data-ok="yes"', rendered or "", f"width {width}: {(rendered or '')[-400:]}")
 
 
