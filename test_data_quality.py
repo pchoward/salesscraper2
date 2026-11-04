@@ -22,6 +22,15 @@ class BrandSpellingTests(unittest.TestCase):
                 self.assertEqual(brands.canonical(vendor, aliases), brand, (sport_id, vendor))
 
 
+class PadSetTests(unittest.TestCase):
+    def test_a_three_pack_is_a_pad_set_only_when_it_is_pads(self):
+        from sports.protection import protects
+        self.assertEqual(protects("Jason Markk Quick Wipes 3 Pack"), [])
+        self.assertEqual(protects("Stance Socks 3 Pack"), [])
+        self.assertEqual(protects("Triple 8 Saver Series 3-Pack"), ["Pad Sets"])
+        self.assertEqual(protects("187 Combo Pack Pads - Camo"), ["Pad Sets"])
+
+
 class FakeSkateScraper:
     name, part, url, candidates = "TGM", "Protection", "https://tgm.example", 3
 
