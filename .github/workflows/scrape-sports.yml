@@ -9,6 +9,11 @@ name: Scraper - BMX, Ski, MTB
 on:
   schedule:
     - cron: '37 21 * * *'
+    # Backups (GitHub runs scheduled jobs hours late or drops them): each
+    # scrapes only if today's (US Eastern) BMX, Ski and MTB scrapes have not
+    # all succeeded.
+    - cron: '19 0 * * *'
+    - cron: '23 3 * * *'
   workflow_dispatch:
     inputs:
       sport:
@@ -38,16 +43,27 @@ jobs:
           # queued: a rebuild that held the lock may have pushed meanwhile.
           ref: ${{ github.ref_name }}
 
+      - name: Skip a backup run when today's scrape already succeeded
+        id: gate
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_SCHEDULE: ${{ github.event.schedule }}
+          HEALTH_PATHS: catalogs/bmx/scrape_health.json catalogs/ski/scrape_health.json catalogs/mtb/scrape_health.json
+        run: python3 schedule.py
+
       - name: Set up Python
+        if: steps.gate.outputs.scrape == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: pip
 
       - name: Install dependencies
+        if: steps.gate.outputs.scrape == 'true'
         run: pip install -r requirements.txt
 
       - name: Carry over the preview's history (first live run only)
+        if: steps.gate.outputs.scrape == 'true'
         # Before going live, BMX and Ski were scraped into the
         # shreddeals-preview branch. A sport with no data on main yet starts
         # from there, so its first-seen dates and prices carry over.
@@ -64,6 +80,7 @@ jobs:
           fi
 
       - name: Scrape
+        if: steps.gate.outputs.scrape == 'true'
         env:
           CHOICE: ${{ inputs.sport || 'all' }}
         # One sport at a time; a sport whose scrape fails keeps its previous
@@ -77,10 +94,12 @@ jobs:
           done
 
       - name: Update the homepage's sport tabs
+        if: steps.gate.outputs.scrape == 'true'
         # A sport gets its tab once its catalog has listings.
         run: python -m previews.publish
 
       - name: Commit and push
+        if: steps.gate.outputs.scrape == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"

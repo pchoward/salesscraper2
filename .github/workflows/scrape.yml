@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: '17 7 * * *'
     - cron: '43 9 * * *'
+    # More backups: GitHub runs scheduled jobs hours late or drops them.
+    # Each one scrapes only if today's (US Eastern) scrape has not succeeded.
+    - cron: '41 12 * * *'
+    - cron: '47 15 * * *'
+    - cron: '53 18 * * *'
   workflow_dispatch:
     inputs:
       notification_checkpoint_key:
