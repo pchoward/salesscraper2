@@ -1,4 +1,4 @@
-"""Card price line: list price until a second tracked day, then the average.
+"""Card price line: list price until the tracked price moves, then the average.
 
 A first-day card used to read "Average $2.50 / Now $2.50". The percent off is
 still the store's claimed discount versus its list price. The client repaint
@@ -84,6 +84,17 @@ class CardWasPriceTests(unittest.TestCase):
         self.assertIn(">/</span>", card)
         self.assertNotIn("Was ", card)
         self.assertIn("↓ 91%", card)
+
+    def test_days_at_one_price_are_not_an_average(self):
+        # Owner, 2026-11-04: "↓ 70% Average $7.49 / Now $7.49" read as a contradiction.
+        item = _deck("7.49", "https://example.com/flat", "Triple 8 Street Elbow Pads", old="24.99", part="Protection")
+        html = _page([item], {item["url"]: _history(item, {"2026-10-31": 7.49, "2026-11-01": 7.49})})
+        card = _card(html, "flat")
+        self.assertIn("Was $24.99", card)
+        self.assertNotIn("Average ", card)
+        flat_no_list = _deck("7.49", "https://example.com/flat-bare", "Bones Reds Bearings", old=None, part="Bearings")
+        html = _page([flat_no_list], {flat_no_list["url"]: _history(flat_no_list, {"2026-10-31": 7.49, "2026-11-01": 7.49})})
+        self.assertIn("Average $7.49", _card(html, "flat-bare"), "no list price: the tracked average is all there is")
 
     def test_missing_list_price_has_no_was_line(self):
         one = _deck("2.50", "https://example.com/no-list", "Bones Reds Bearings", old=None, part="Bearings")
@@ -178,6 +189,13 @@ const narrowed = card("4", "27.95", "Average $6.25", "/");
 paintOneCardStat(narrowed);
 assert.equal(narrowed.querySelector(".avg-price").textContent, "Was $27.95");
 assert.equal(narrowed.querySelector(".price-sep").textContent, "\u00b7");
+
+chartWindow = 90;
+catalogData.items["6"] = { daily: [["2026-10-31", 2.5], ["2026-11-01", 2.5]] };
+const flat = card("6", "27.95", "Average $2.50", "/");
+paintOneCardStat(flat);
+assert.equal(flat.querySelector(".avg-price").textContent, "Was $27.95");
+assert.equal(flat.querySelector(".price-sep").textContent, "\u00b7");
 
 historyLoaded = false;
 const waiting = card("5", "27.95", "Was $27.95", "\u00b7");
