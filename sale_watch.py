@@ -56,8 +56,20 @@ def _allowed(base, path, fetch):
     return parser.can_fetch("*", base.rstrip("/") + path)
 
 
-def shopify_sections(base, read_handles, fetch=_get):
-    """Sale-like collection handles at ``base`` that are not in ``read_handles``."""
+def _marked_down(product):
+    for variant in (product or {}).get("variants") or []:
+        try:
+            if float(variant.get("compare_at_price") or 0) > float(variant.get("price") or 0) > 0:
+                return True
+        except (TypeError, ValueError):
+            continue
+    return False
+
+
+def shopify_sections(base, read_handles, fetch=_get, covered=None):
+    """Sale-like collections at ``base`` not in ``read_handles`` that hold
+    marked-down products the run did not already read (``covered``: product
+    ids). Old or empty seasonal collections are left out."""
     if not _allowed(base, "/collections.json", fetch):
         return []
     text = fetch(base.rstrip("/") + "/collections.json?limit=250")
@@ -70,7 +82,15 @@ def shopify_sections(base, read_handles, fetch=_get):
         handle = str((entry or {}).get("handle") or "")
         if not handle or handle in read_handles or not SALE_HANDLE.search(handle) or IGNORE.search(handle):
             continue
-        found.append({"label": (entry.get("title") or handle)[:80],
+        text = fetch(f"{base.rstrip('/')}/collections/{handle}/products.json?limit=250")
+        try:
+            products = json.loads(text or "")["products"]
+        except (ValueError, KeyError, TypeError):
+            continue
+        missing = [p for p in products if _marked_down(p) and (covered is None or p.get("id") not in covered)]
+        if not missing:
+            continue
+        found.append({"label": (entry.get("title") or handle)[:80], "count": len(missing),
                       "url": f"{base.rstrip('/')}/collections/{handle}"})
     return found
 
@@ -99,14 +119,19 @@ def _clean(url):
     return str(url or "").split("?", 1)[0].split("#", 1)[0].rstrip("/").lower()
 
 
+def _ids(products):
+    return {p.get("id") for p in products or () if isinstance(p, dict)} or None
+
+
 def _shopify_stores():
-    """(name, base, handles we read) for the Skate shops read through Shopify."""
-    from stores import exodus, kinetic, spot, tgm
+    """(name, base, handles we read, product ids this run read) for the
+    Skate shops read through Shopify."""
+    from stores import ccs, exodus, kinetic, spot, tgm
     out = []
     for shop in (tgm.SHOP, kinetic.SHOP, spot.SHOP, exodus.SHOP):
         handles = {url.split("/collections/", 1)[1].split("/", 1)[0] for url in shop.sale_jsons if "/collections/" in url}
-        out.append((shop.store, shop.base, handles))
-    out.append(("CCS", "https://shop.ccs.com", {"clearance"}))
+        out.append((shop.store, shop.base, handles, _ids(shop.cache.get("products"))))
+    out.append(("CCS", "https://shop.ccs.com", {"clearance"}, _ids(ccs._CACHE.get("products"))))
     return out
 
 
@@ -126,9 +151,9 @@ def _homepages():
 def check(fetch=_get, sleep=time.sleep, shops=None, homepages=None):
     """{store: [{label, url}]} of sale sections no scraper reads."""
     report = {}
-    for name, base, handles in (shops if shops is not None else _shopify_stores()):
+    for name, base, handles, covered in (shops if shops is not None else _shopify_stores()):
         sleep(DELAY)
-        found = shopify_sections(base, handles, fetch)
+        found = shopify_sections(base, handles, fetch, covered)
         if found:
             report[name] = found
     for name, home, read in (homepages if homepages is not None else _homepages()):
@@ -146,7 +171,8 @@ def markdown(report):
              "New or seasonal sale sections (Black Friday, flash sales...). Worth adding if they hold skate gear.", ""]
     for store, entries in sorted(report.items()):
         for entry in entries:
-            lines.append(f"- **{store}**: [{entry['label']}]({entry['url']})")
+            count = f" ({entry['count']} marked down we don't list)" if entry.get("count") else ""
+            lines.append(f"- **{store}**: [{entry['label']}]({entry['url']}){count}")
     return "\n".join(lines) + "\n"
 
 

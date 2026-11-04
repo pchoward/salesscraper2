@@ -25,7 +25,10 @@ STORE = "TGM"
 DISPLAY_NAME = "TGM Skateboards"
 BASE = "https://tgmskateboards.com"
 SHOP = shopify.ShopifyStore(STORE, DISPLAY_NAME, BASE, extra_types={"mens shoes": "Sneakers"}, own_vendor="tgm",
-                           more_collections=("flash-sale",),  # probe, 2026-11-04
+                           # Its catalog is past Shopify's 100-page limit, so its
+                           # live sale collections are read too (probe, 2026-11-04).
+                           more_collections=("flash-sale", "bakerboys-september-sale",
+                                             "premium-usa-made-wheels-on-sale", "sale-shoes"),
                            whole_site=True)
 SALE_JSON = SHOP.sale_json
 PAGE_DELAY = shopify.PAGE_DELAY

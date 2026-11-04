@@ -33,7 +33,7 @@ class WholeSiteTests(unittest.TestCase):
         self.assertEqual([p["id"] for p in products], [1, 2])
         self.assertEqual([p["id"] for p in products if shopify.sale_variants(p)], [1])
 
-    def test_a_big_catalog_is_skipped_not_fatal(self):
+    def test_a_catalog_past_shopifys_page_limit_keeps_what_it_read(self):
         shop = shopify.ShopifyStore("T", "T", "https://t.example", whole_site=True)
         sale = {"id": 1, "handle": "a", "title": "A Deck", "product_type": "Decks",
                 "variants": [{"id": 1, "price": "1.00", "compare_at_price": "2.00", "available": True}]}
@@ -42,7 +42,8 @@ class WholeSiteTests(unittest.TestCase):
                 return {"products": [sale] if "page=1" in url else []}
             return {"products": [dict(sale, id=n) for n in range(shopify.PAGE_LIMIT)]}  # never ends
         products = shopify.load_sale_products(shop, fetch=fetch, sleep=lambda s: None)
-        self.assertEqual([p["id"] for p in products], [1])
+        self.assertEqual(len(products), 1 + shopify.PAGE_LIMIT - 1, "the sale product plus the catalog's, deduplicated")
+        self.assertEqual(shopify.WHOLE_SITE_MAX_PAGES, 100)
 
 
 class TacticsDealTests(unittest.TestCase):
@@ -84,14 +85,22 @@ class SaleWatchTests(unittest.TestCase):
     def fetch(self, pages):
         return lambda url: pages.get(url)
 
-    def test_new_sale_collections(self):
+    def test_new_sale_collections_with_markdowns_we_did_not_read(self):
         listing = {"collections": [{"handle": h, "title": h} for h in (
-            "sale", "flash-sale", "blacker-friday-deals", "baker-holiday-2026-complete-collection", "sale-pants",
-            "disc-golf-sale", "new-arrivals")]}
-        fetch = self.fetch({"https://shop.example/robots.txt": "User-agent: *\nDisallow: /cart",
-                            "https://shop.example/collections.json?limit=250": json.dumps(listing)})
-        found = sale_watch.shopify_sections("https://shop.example", {"sale"}, fetch)
-        self.assertEqual([f["url"].rsplit("/", 1)[1] for f in found], ["flash-sale", "blacker-friday-deals"])
+            "sale", "flash-sale", "blacker-friday-deals", "bfd-2024", "new-deal-skateboards",
+            "baker-holiday-2026-complete-collection", "sale-pants", "disc-golf-sale", "new-arrivals")]}
+        down = lambda pid: {"id": pid, "variants": [{"price": "10.00", "compare_at_price": "20.00"}]}
+        full = lambda pid: {"id": pid, "variants": [{"price": "20.00", "compare_at_price": None}]}
+        base = "https://shop.example"
+        feeds = {"flash-sale": [down(1)], "blacker-friday-deals": [down(2), down(3)], "bfd-2024": [full(4)],
+                 "new-deal-skateboards": []}
+        pages = {f"{base}/robots.txt": "User-agent: *\nDisallow: /cart",
+                 f"{base}/collections.json?limit=250": json.dumps(listing)}
+        pages.update({f"{base}/collections/{h}/products.json?limit=250": json.dumps({"products": p}) for h, p in feeds.items()})
+        found = sale_watch.shopify_sections(base, {"sale"}, self.fetch(pages), covered={2})
+        self.assertEqual([(f["url"].rsplit("/", 1)[1], f["count"]) for f in found],
+                         [("flash-sale", 1), ("blacker-friday-deals", 1)])
+        self.assertEqual(sale_watch.shopify_sections(base, {"sale"}, self.fetch(pages), covered={1, 2, 3}), [])
 
     def test_homepage_deal_links(self):
         html = ('<a href="/limited-time-deals">Pre-BlackFriday Clearance</a><a href="/decks/sale">Sale</a>'

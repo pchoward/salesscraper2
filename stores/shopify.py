@@ -40,7 +40,10 @@ logger = logging.getLogger("stores.shopify")
 PAGE_LIMIT = 250
 MAX_PAGES = 20
 # A store's whole catalog (``whole_site``) is bigger than a sale collection.
-WHOLE_SITE_MAX_PAGES = 40
+# Shopify serves at most 100 pages (25,000 products); a bigger catalog keeps
+# what those pages hold (probe, 2026-11-04: SPoT and Exodus ~45-60 pages,
+# TGM past 100).
+WHOLE_SITE_MAX_PAGES = 100
 PAGE_DELAY = 1.5  # seconds between page requests
 STOCK_DELAY = 0.5  # seconds between product stock reads
 MAX_STOCK_READS = 120  # per store and part, per run
@@ -204,6 +207,11 @@ def load_sale_products(store, fetch=None, sleep=time.sleep):
         if batch_products is None:
             if len(sale_jsons) == 1:
                 return None
+            if index == 0 and getattr(store, "whole_site", False):
+                # The main sale feed failed: a capped whole catalog could miss
+                # some of its deals, which would read as disappeared. Keep the
+                # previous data instead, as a single-feed store does.
+                return None
             # One of several collections (a seasonal one that ended): the
             # store still counts as read when another collection worked.
             logger.warning("%s: could not read %s; using the other sale collections", store.store, sale_json)
@@ -264,7 +272,10 @@ def _read_collection(store, sale_json, fetch, sleep):
         products.extend(batch)
         if len(batch) < PAGE_LIMIT:
             return products
-    logger.error("%s %s exceeded %s pages", store.store, "catalog" if whole else "sale catalog", limit)
+    if whole:
+        logger.warning("%s catalog has more than %s pages; using the first %s products", store.store, limit, len(products))
+        return products
+    logger.error("%s sale catalog exceeded %s pages", store.store, limit)
     return None
 
 
