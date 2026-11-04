@@ -1346,8 +1346,38 @@ let searchIndex = null;
 let searchMemo = { query: null, typed: null };
 
 function ensureSearchIndex() {
-    if (!searchIndex) searchIndex = SkateSearch.createIndex(dealRows().map(SkateSearch.docFromRow));
+    if (!searchIndex) {
+        const specs = technicalSearchWords();
+        searchIndex = SkateSearch.createIndex(dealRows().map(row => {
+            const doc = SkateSearch.docFromRow(row);
+            const words = specs[row.dataset.url || ""];
+            if (words) doc.specs = words;
+            return doc;
+        }));
+    }
     return searchIndex;
+}
+
+// BMX, Ski, MTB: each deal's filter values (technicalCatalog), as words the
+// search can match: "Knees", "Full face", "CPSC", "Youth". Bracketed notes
+// ("(US bike)", "(skate / BMX)") are left out. Skate has no such catalog.
+function technicalSearchWords() {
+    const out = {};
+    const node = document.getElementById("technicalCatalog");
+    if (!node) return out;
+    let catalog;
+    try { catalog = JSON.parse(node.textContent); } catch (error) { return out; }
+    Object.entries((catalog && catalog.items) || {}).forEach(([url, item]) => {
+        const seen = new Set();
+        ((item && item.offers) || []).forEach(offer => Object.values((offer && offer.specs) || {}).forEach(values => {
+            (Array.isArray(values) ? values : [values]).forEach(value => {
+                const text = String(value == null ? "" : value).replace(/\([^)]*\)/g, " ").replace(/\s+/g, " ").trim();
+                if (text) seen.add(text);
+            });
+        }));
+        if (seen.size) out[url] = Array.from(seen).join(" ");
+    });
+    return out;
 }
 
 function typedSearch(query) {

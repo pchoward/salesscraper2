@@ -14,9 +14,24 @@
 })(typeof self !== "undefined" ? self : this, function (MiniSearch) {
     "use strict";
 
-    const FIELDS = ["brand", "name", "category", "store", "tags"];
+    const FIELDS = ["brand", "name", "category", "store", "tags", "specs"];
     // Brand and product name decide a match; store and specs only help.
-    const BOOST = { brand: 3, name: 3, category: 1.5, store: 0.5, tags: 0.5 };
+    // ``specs``: a sport's filter values for the deal (Knees, Full face,
+    // CPSC, Youth, Dirt jump...), so "cpsc helmet" finds what the title omits.
+    const BOOST = { brand: 3, name: 3, category: 1.5, store: 0.5, tags: 0.5, specs: 1 };
+
+    // Words that mean the same in every sport, unified in deals and queries.
+    const SYNONYMS = {
+        "armor": ["armour"],
+        "knee pad": ["knee guard", "knee guards"],
+        "elbow pad": ["elbow guard", "elbow guards"],
+        "shin pad": ["shin guard", "shin guards"],
+        "tire": ["tyre"],
+        "tires": ["tyres"],
+        "downhill": ["dh"],
+        "cross country": ["xc"],
+        "dirt jump": ["dj", "dirt jumper", "dirtjump"]
+    };
     // Queries this short match anywhere in a word, ranked word-start first.
     const SHORT_QUERY = 2;
     // Typos: about one edit in five letters (MiniSearch rounds, so 5-7
@@ -83,6 +98,9 @@
                 (aliases[group][name] || []).forEach(alias => add(map, name, alias));
             });
         });
+        Object.keys(SYNONYMS).forEach(canonical => SYNONYMS[canonical].forEach(alias => {
+            if (!phrases.has(basic(alias))) add(phrases, basic(canonical), alias);
+        }));
         vocabulary = { phrases: phrases, longest: longest, stores: stores, categories: categories, terms: terms };
         return vocabulary;
     }
@@ -384,7 +402,8 @@
             tags: [data.shape, String(data.duros || "").replace(/,/g, " "), data.size].filter(Boolean).join(" "),
             size: data.size || "",
             duros: data.duros || "",
-            diameters: data.diameters || "", widths: data.widths || "", specOffers: data.specOffers || ""
+            diameters: data.diameters || "", widths: data.widths || "", specOffers: data.specOffers || "",
+            specs: data.specs || ""
         };
     }
 
