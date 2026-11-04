@@ -281,9 +281,16 @@ BIKE_SHOPS = (
 # BMX brands' own stores (store probe, 2026-11-04; all USD, robots allow
 # collections). Their vendor is the brand itself. T-shirts and jackets have
 # no part and stay out. Federal's store prices in GBP, so it is left out.
+def brand_title_part(title):
+    """title_part, except bags ("Haro Buzzard Internal Frame Bag" is no frame)."""
+    if re.search(r"\bbags?\b", str(title or ""), re.I):
+        return None
+    return title_part(title)
+
+
 def bmx_brand(name, base, collection):
     return shopify.ShopifyStore(name, name, base, collection=collection, types=TYPES,
-                                brand_of=brands.for_sport(sports.BMX), title_part=title_part, details=details,
+                                brand_of=brands.for_sport(sports.BMX), title_part=brand_title_part, details=details,
                                 track_exclusions=True, unknown_by_title=True)
 
 

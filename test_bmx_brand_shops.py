@@ -22,6 +22,8 @@ class BmxBrandShopTests(unittest.TestCase):
                  ("Seatpost", "Haro Pivotal Post"): "Seating"}
         for (kind, title), part in cases.items():
             self.assertEqual(shopify.part_for(store, kind, title), part, kind)
+        self.assertIsNone(shopify.part_for(stores.BMX_BRANDS[1], "Accessories", "Haro Buzzard Internal Frame Bag"))
+        self.assertEqual(shopify.part_for(stores.BMX_BRANDS[1], "Accessories", "Haro Baseline Seat Clamp"), "Seating")
         for kind, title in (("T-Shirts", "Kink Logo Tee"), ("Jackets", "Kink Coach Jacket")):
             self.assertIn(shopify.part_for(store, kind, title), (None, shopify.BY_TITLE, ""), kind)
 
