@@ -55,3 +55,40 @@ def canonical(vendor, aliases_path):
 def for_sport(sport):
     """A ``brand_of`` function for a store of ``sport``."""
     return lambda vendor: canonical(vendor, str(sport.aliases_file()))
+
+
+@functools.lru_cache(maxsize=None)
+def _prefixes(aliases_path):
+    """(spelling key, canonical) pairs, longest spelling first."""
+    pairs = [(spelling, canonical) for spelling, canonical in _table(aliases_path).items() if spelling]
+    return tuple(sorted(pairs, key=lambda pair: -len(pair[0])))
+
+
+def from_title(name, aliases_path):
+    """The brand a listing's name starts with ("Pro-Tec Classic Helmet" ->
+    "Pro-Tec", "Triple Eight Deep Cover" -> "Triple 8"), from the sport's
+    brand list, or "" when it names none. The longest spelling wins, on word
+    boundaries, so "Pro-Tec" is never "Pro" and "Profile" never "Pro"."""
+    key = _key(name)
+    for spelling, canonical in _prefixes(str(aliases_path)):
+        if key == spelling or key.startswith(spelling + " "):
+            return canonical
+    return ""
+
+
+def settle(items, aliases_path):
+    """One spelling per brand for a run's listings (owner, 2026-11-04: 187,
+    Pro-Tec and Triple 8 showed under two names). A listing without a brand
+    gets the one its name starts with; a store's own spelling becomes the
+    canonical one. Listings whose name starts with no known brand keep none."""
+    for item in items or ():
+        if not isinstance(item, dict):
+            continue
+        brand = item.get("brand") or ""
+        if brand:
+            item["brand"] = canonical(brand, aliases_path) or brand
+        else:
+            found = from_title(item.get("name") or "", aliases_path)
+            if found:
+                item["brand"] = found
+    return items

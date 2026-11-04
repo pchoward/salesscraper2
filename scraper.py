@@ -131,6 +131,12 @@ def _run(args, sport):
     scrapers = build_scrapers() if sport.is_default else sport.build_scrapers()
     prev_data = load_previous()
     curr_data, failed_keys = run_stores(scrapers)
+    if not sport.is_default:
+        # One spelling per brand: stores without a vendor field (Skate shops,
+        # SkatePro) get the brand their listing's name starts with.
+        from sports import brands
+        for items in (curr_data or {}).values():
+            brands.settle(items, sport.aliases_file())
     _log_filter_counts(scrapers, curr_data)
 
     health_before = load_state()
