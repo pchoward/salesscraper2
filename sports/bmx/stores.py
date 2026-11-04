@@ -75,9 +75,14 @@ TYPES.update({kind: "Protection" for kind in (
     "shin pads", "shin guards", "elbow pads", "ankle guards", "wrist guards", "goggles", "padded shirts",
     "body armor")})
 
+# BMX brand stores' types (store probe, 2026-11-04): Kink, Haro, Fiend.
+TYPES.update({"tires tubes": "Tires", "hubs guards": "Wheel Parts", "cranks bbs": "Drivetrain",
+              "braking": "Braking", "seatpost": "Seating"})
+
 # Vague types: the category comes from the title's words.
 TYPES.update({"parts": shopify.BY_TITLE, "": shopify.BY_TITLE, "none": shopify.BY_TITLE,
-              "codes": shopify.BY_TITLE})  # Albe's files some pads as "codes"
+              "codes": shopify.BY_TITLE, "small parts": shopify.BY_TITLE, "specialty": shopify.BY_TITLE,
+              "accessories": shopify.BY_TITLE, "clamps": shopify.BY_TITLE})  # Albe's files some pads as "codes"
 
 
 # A title names a whole bike only when it ends with "bike" (maybe a model
@@ -273,7 +278,22 @@ BIKE_SHOPS = (
     bike_shop("Bikes Online", "https://www.bikesonline.com", ("helmets-on-sale", "cycling-knee-pads", "cycling-body-armor")),
 )
 
-STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES + BIKE_SHOPS
+# BMX brands' own stores (store probe, 2026-11-04; all USD, robots allow
+# collections). Their vendor is the brand itself. T-shirts and jackets have
+# no part and stay out. Federal's store prices in GBP, so it is left out.
+def bmx_brand(name, base, collection):
+    return shopify.ShopifyStore(name, name, base, collection=collection, types=TYPES,
+                                brand_of=brands.for_sport(sports.BMX), title_part=title_part, details=details,
+                                track_exclusions=True, unknown_by_title=True)
+
+
+BMX_BRANDS = (
+    bmx_brand("Kink", "https://www.kinkbmx.com", "sale"),
+    bmx_brand("Haro", "https://www.harobikes.com", "summer-parts-sale"),
+    bmx_brand("Fiend", "https://www.fiendbmx.com", "clearance"),
+)
+
+STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS
 
 PARTS = sports.BMX.parts
 
