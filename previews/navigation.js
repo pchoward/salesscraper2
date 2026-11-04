@@ -91,11 +91,6 @@
             frame.contentWindow.postMessage({ type:"shreddeals:search-query", query:shellSearch.value }, win.location.origin);
         }
         shellSearch.addEventListener("input", sendSearch);
-        frame.addEventListener("load", () => {
-            // A newly selected catalog starts with the shell's visible query.
-            // Search remains implemented by the existing catalog controls.
-            sendSearch();
-        });
         doc.addEventListener("keydown", event => {
             if (event.key !== "/" || event.ctrlKey || event.altKey || event.metaKey) return;
             const t = event.target;
