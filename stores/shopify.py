@@ -360,6 +360,11 @@ def title_with_brand(product, own_vendor="", brand_of=None):
     if not vendor or (own_vendor and vendor.casefold().startswith(own_vendor)):
         return title
     if brand_of:
+        # The title may already name the brand the store's way ("Stans Flow
+        # MK4" from vendor "Stans", canonical "Stan's NoTubes").
+        raw = [word for word in re.findall(r"[a-z0-9]+", vendor.casefold()) if word not in _VENDOR_FILLER]
+        if raw and all(word in set(re.findall(r"[a-z0-9]+", title.casefold())) for word in raw):
+            return title
         vendor = brand_of(vendor)
         if not vendor:  # not a brand ("Scratch & Dent")
             return title

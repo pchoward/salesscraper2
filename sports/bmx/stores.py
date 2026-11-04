@@ -278,10 +278,52 @@ STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES + BIKE_SHOPS
 PARTS = sports.BMX.parts
 
 
+class SkateShopProtection:
+    """A Skate shop's Protection scraper, read for BMX (owner, 2026-11-03:
+    "show Skate shops' protection in BMX too"). The same helmets and pads
+    serve both; snow, road/trail helmets and other sports' gear stay out, and
+    each listing gets BMX's protection filters."""
+
+    def __init__(self, inner):
+        self.inner = inner
+        self.name, self.part, self.url = inner.name, "Protection", getattr(inner, "url", "")
+
+    @property
+    def candidates(self):
+        return getattr(self.inner, "candidates", 0)
+
+    def scrape(self):
+        from stores import skatepro
+        items = self.inner.scrape()
+        if items is None:
+            return None
+        kept = []
+        for item in items:
+            if multisport_part(item.get("name", "")) != "Protection":
+                continue
+            item = dict(item, part="Protection")
+            for key in ("technical_offers", "technical_specs", "kind", "prot_type", "prot_sizes"):
+                item.pop(key, None)
+            skatepro.bmx_extra(item)
+            kept.append(item)
+        return kept
+
+
+def skate_shop_scrapers():
+    """The Skate shops that read over plain HTTP (Zumiez and Skate Warehouse
+    need a browser, which the BMX/Ski/MTB scrape doesn't run)."""
+    from stores import ccs, deathgear, exodus, kinetic, socal, spot, tactics, tgm
+    found = []
+    for module in (ccs, tactics, tgm, deathgear, kinetic, spot, exodus, socal):
+        found.extend(SkateShopProtection(s) for s in module.scrapers() if getattr(s, "part", "") == "Protection")
+    return found
+
+
 def scrapers():
     from stores import skatepro
     shops = [scraper for store in STORES for scraper in shopify.scrapers_for(store, PARTS)]
-    return shops + skatepro.scrapers("bmx", skatepro.bmx_extra)  # BMX helmets, pads, padded shorts
+    return (shops + skatepro.scrapers("bmx", skatepro.bmx_extra)  # BMX helmets, pads, padded shorts
+            + skate_shop_scrapers())
 
 
 def preview(store=ALBES):

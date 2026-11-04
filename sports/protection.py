@@ -35,7 +35,7 @@ PARTS = (
     ("Ankles", r"\bankles?\b"),
 )
 _PARTS = tuple((label, re.compile(pattern, re.I)) for label, pattern in PARTS)
-_PAD_SET = re.compile(r"\bpad\s*-?sets?\b|\bpadsets?\b|\b(?:3|three)[- ]?(?:pc|piece|pack)\b|\bcombo\b", re.I)
+_PAD_SET = re.compile(r"\bpad\s*-?sets?\b|\bpadsets?\b|(?=.*\b(?:pads?|guards?|protect\w*|saver)\b)(?:.*\b(?:3|three|6|six)[- ]?(?:pc|piece|pack)\b|.*\bcombo\b)", re.I)
 # "Helmet Replacement Pads", "Visor", "Lens": parts for a piece, not the piece.
 _SPARE = re.compile(r"\breplacement\b|\bspare\b|\bvisors?\b|\bpeaks?\b|\bliners?\b(?!\s*(?:shorts|pants))|\bcheek\s*pads?\b"
                     r"|\blens(?:es)?\b|\bstraps?\b|\bbuckles?\b|\bmount\b|\bparts?\b", re.I)
