@@ -3316,10 +3316,15 @@ def _card_price_stat(record, symbol):
     Two or more tracked days use their average. Fewer than that is not an
     average (a first day would print the sale price twice), so the store's
     list price is shown instead: "Was $27.95 · Now $2.50". The percent off
-    stays the store's claimed discount versus that list price.
+    stays the store's claimed discount versus that list price. Days that all
+    sat at one price are no average either ("Average $7.49 / Now $7.49"):
+    they keep the list price too.
     """
     points = clip_daily_prices(record.get("prices"), 90, record.get("spark_end"))
-    if len(points) >= 2:
+    flat = bool(points) and all(abs(price - points[0][1]) < 0.005 for _, price in points)
+    list_price = _price((record.get("item") or {}).get("price_old"))
+    has_list = list_price is not None and list_price > 0
+    if len(points) >= 2 and not (flat and has_list):
         average = record.get("average")
         if average is None:
             return ""
@@ -3328,8 +3333,7 @@ def _card_price_stat(record, symbol):
             f"Average {symbol}{float(average):.2f}</span>"
             '<span class="price-sep" aria-hidden="true">/</span>'
         )
-    list_price = _price((record.get("item") or {}).get("price_old"))
-    if list_price is not None and list_price > 0:
+    if has_list:
         return (
             f'<span class="avg-price" data-symbol="{symbol}">'
             f"Was {symbol}{list_price:.2f}</span>"

@@ -2217,9 +2217,11 @@ function paintOneCardStat(card) {
     const symbol = node.dataset.symbol || "$";
     const list = parseFloat(card.dataset.original);
     const hasList = Number.isFinite(list) && list > 0;
-    // One tracked day is not an average. Show the store's list price until a
-    // second day exists, matching the server-rendered card.
-    if (points.length < 2) {
+    // One tracked day is not an average, nor are days that all sat at one
+    // price ("Average $7.49 / Now $7.49"). Show the store's list price until
+    // the tracked price moves, matching the server-rendered card.
+    const flat = points.length > 0 && points.every(point => Math.abs(Number(point[1]) - Number(points[0][1])) < 0.005);
+    if (points.length < 2 || (flat && hasList)) {
         if (!hasList) {
             node.hidden = true;
             if (sep) sep.hidden = true;
