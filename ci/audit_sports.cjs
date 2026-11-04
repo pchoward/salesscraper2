@@ -123,6 +123,8 @@ async function main(){
      for(const f of config.fields)assert.equal(new URL(page.url()).searchParams.has(f.param),false,'technical parameters must not leak between sports');
      await page.goBack();await page.waitForTimeout(250);
      frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput');
+     // The spec filters' script runs a moment after the search box exists.
+     await frame.waitForFunction(()=>typeof SportSpecFilters!=='undefined'&&typeof applyFilters==='function');
      assert.equal(page.url(),savedTechnicalURL);assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),selection);
      const chips=await frame.locator('#activeChips').textContent();assert(chips.includes(preferred[1]),'technical choice must appear in removable active filters');
      // A second scoped field combines with AND on one offer. Counts are live
