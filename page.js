@@ -1364,7 +1364,8 @@ function typedSearch(query) {
         filters.parts = inferred;
         filters.partsInferred = true;
     }
-    searchMemo = { query: key, typed: { parsed: parsed, filters: filters, hits: hits } };
+    const prefer = parsed.preferText && SkateSearch.preferred ? SkateSearch.preferred(ensureSearchIndex(), parsed.preferText) : null;
+    searchMemo = { query: key, typed: { parsed: parsed, filters: filters, hits: hits, prefer: prefer } };
     return searchMemo.typed;
 }
 
@@ -1412,7 +1413,10 @@ function searchHayMatches(hay, query) {
 // How well a deal matches the typed search, for the Best match sort.
 function searchScore(row) {
     const typed = typedSearch(state.search);
-    return (typed && typed.hits && typed.hits.get(row.dataset.id)) || 0;
+    if (!typed) return 0;
+    // Deals of the narrower kind typed ("helmet" in Protection) come first.
+    const preferred = typed.prefer && typed.prefer.has(row.dataset.id) ? 1e6 : 0;
+    return preferred + ((typed.hits && typed.hits.get(row.dataset.id)) || 0);
 }
 
 function typedOr(over, typed, key, fallback) {
