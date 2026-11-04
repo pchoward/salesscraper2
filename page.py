@@ -738,7 +738,32 @@ def _canonicalize_brands(records):
             record["search"] = (search + " " + canon).strip()
 
 
+_PROTECTION_BRANDS = Path(__file__).resolve().parent / "sports" / "protection_brands.json"
+
+
+def deal_brand(item, name=None, part=None):
+    """The Brand filter label: the stored brand, else one named by the title.
+
+    Protection brands get one spelling ("187killerpads", "Pro Tec", "Triple
+    Eight" -> 187 Killer Pads, Pro-Tec, Triple 8); other brands are unchanged.
+    """
+    from sports import brands as brand_table
+
+    name = item.get("name") or "" if name is None else name
+    part = item.get("part") if part is None else part
+    stored = item.get("_brand") or item.get("brand") or ""
+    table = str(_PROTECTION_BRANDS)
+    if stored:
+        return brand_table._table(table).get(brand_table._key(stored), stored)
+    return listing_brand(name, part)
+
+
 def listing_brand(name, part):
+    from sports import brands as brand_table
+
+    found = brand_table.from_title(name, str(_PROTECTION_BRANDS))
+    if found:
+        return found
     brands = _BRANDS.get((part or "").strip().casefold(), ())
     found = find_brand(name, brands) if brands else None
     if not found:
@@ -1133,7 +1158,7 @@ def _atl_section(low_items, history):
             store = item.get("store") or "Unknown"
             part = item.get("part") or ""
             name = item.get("name") or ""
-            brand = item.get("_brand") or item.get("brand") or listing_brand(name, part)
+            brand = deal_brand(item, name, part)
             observations = status.get("observations")
             title = escape(status.get("title") or "All-time low", quote=True)
             search = " ".join(bit for bit in (name, store, part, brand, "all-time low") if bit)
@@ -1520,7 +1545,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             except Exception:
                 stage = "new"
             listed = any(rule_matches(rule, item) for rule in rules)
-            brand = item.get("brand") or listing_brand(item.get("name") or "", item.get("part"))
+            brand = deal_brand(item)
             hit_low = bool(status.get("flagged")) and (
                 str(status.get("low_date") or "")[:10] == today or drop is not None
             )
@@ -3187,7 +3212,7 @@ def _removed_feed(digest, products, price_history):
             "name": name,
             "store": store or "Unknown",
             "part": part,
-            "brand": item.get("brand") or listing_brand(name, part),
+            "brand": deal_brand(item, name, part),
             "width_key": width_key,
             "price": price,
             "price_old": item.get("price_old"),
