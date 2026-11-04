@@ -16,6 +16,7 @@ class FromTitleTests(unittest.TestCase):
                  (bmx, "S-One Lifer Helmet", "S-One"),
                  (bmx, "Profile Racing Hub", "Profile"),
                  (mtb, "Pro Koryak Dropper Seatpost", "Pro"),
+                 (mtb, "KS Suspension Crux Integra Dropper", "KS"),
                  (bmx, "Jason Markk Wipes", "")]
         for path, name, brand in cases:
             self.assertEqual(brands.from_title(name, path), brand, name)
