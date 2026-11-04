@@ -3124,14 +3124,14 @@
           }
         },
         "Cambria_Wheels": {
-          "count": 32,
+          "count": 34,
           "failed": false,
           "diagnostics": {
             "expected_count": 32.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 32,
-            "percentage_change": 0.0,
+            "actual_count": 34,
+            "percentage_change": 6.2,
             "reason": "insufficient_history"
           }
         },
@@ -4132,14 +4132,14 @@
           }
         },
         "The Lost Co._Drivetrain": {
-          "count": 136,
+          "count": 135,
           "failed": false,
           "diagnostics": {
             "expected_count": 135,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 136,
-            "percentage_change": 0.7,
+            "actual_count": 135,
+            "percentage_change": 0.0,
             "reason": "insufficient_history"
           }
         },
@@ -4456,7 +4456,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-04T09:36:51+00:00"
+      "scanned_at": "2026-11-04T10:52:21+00:00"
     }
   ],
   "baseline": {
@@ -4654,7 +4654,7 @@
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-04",
-      "count": 136
+      "count": 135
     },
     "The Lost Co._Forks & Shocks": {
       "date": "2026-11-04",
@@ -4710,7 +4710,7 @@
     },
     "Cambria_Wheels": {
       "date": "2026-11-04",
-      "count": 32
+      "count": 34
     }
   },
   "completeness_baseline": {
@@ -5291,7 +5291,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 32
+        "count": 34
       }
     ],
     "Colorado Cyclist_Bikes": [
@@ -6211,7 +6211,7 @@
       },
       {
         "date": "2026-11-04",
-        "count": 136
+        "count": 135
       }
     ],
     "The Lost Co._Forks & Shocks": [
