@@ -39,9 +39,10 @@ async function main() {
                     const search=document.querySelector('.shell-search').getBoundingClientRect();
                     const sports=document.getElementById('sportTabs').getBoundingClientRect();
                     const utility=document.querySelector('.catalog-sections')?.getBoundingClientRect();
-                    return {search:{width:search.width,bottom:search.bottom,right:search.right},sportsTop:sports.top,utilityRight:utility?.right};
+                    return {search:{width:search.width,height:search.height,bottom:search.bottom,right:search.right},sportsTop:sports.top,utilityRight:utility?.right};
                 });
-                assert(layout.search.width >= (width > 800 ? 600 : width-30),'primary search must be large');
+                assert(width > 800 ? layout.search.width >= 320 && layout.search.width <= 650 : layout.search.width >= width-30,'search width must remain compact on desktop and usable on mobile');
+                assert(layout.search.height >= 30 && layout.search.height <= (width > 800 ? 34 : 38),'search height must stay close to the wordmark');
                 assert(layout.sportsTop >= layout.search.bottom,'sports must be on a separate row');
                 if (width > 800) assert(layout.utilityRight >= width-30,'utility controls must be at the far right');
                 await frame.evaluate(() => clearFilters()); await headerValue('');

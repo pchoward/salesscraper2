@@ -69,11 +69,11 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
  #sportTabs [role=tab] { padding:0 8px; }
 }
 
-/* Large primary search; sport navigation has its own row. */
+/* Compact primary search; sport navigation has its own row. */
 .shell-header .top-row { display:grid; grid-template-columns:auto minmax(0,1fr) auto; grid-template-areas:"brand search sections" "sports sports sports"; align-items:center; gap:0 24px; padding:8px 20px 0; }
 .top-row .brand { grid-area:brand; justify-self:start; font-size:21px; }
-.top-row .shell-search { grid-area:search; display:flex; align-items:center; position:relative; gap:12px; width:100%; min-width:0; height:50px; margin:0 0 8px; padding:0 16px; background:#f7f9fb; color:#1c2430; border:1px solid #95a5b7; border-radius:6px; }
-.shell-search input { width:100%; min-width:0; height:100%; border:0; outline:0; background:transparent; color:#17212e; font:inherit; font-size:16px; }
+.top-row .shell-search { grid-area:search; display:flex; align-items:center; position:relative; gap:10px; width:clamp(240px,50%,640px); max-width:100%; min-width:0; height:32px; margin:0 0 8px; padding:0 12px; background:#f7f9fb; color:#1c2430; border:1px solid #95a5b7; border-radius:6px; }
+.shell-search input { width:100%; min-width:0; height:100%; border:0; outline:0; background:transparent; color:#17212e; font:inherit; font-size:14px; }
 .shell-search:focus-within { outline:2px solid #9ac7f5; outline-offset:2px; }
 .shell-search input:focus-visible { outline:none; }
 .shell-search input::placeholder { color:#657484; }
@@ -92,7 +92,8 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
 @media(max-width:800px) {
  .shell-header .top-row { grid-template-columns:minmax(0,1fr); grid-template-areas:"brand" "search" "sports" "sections"; gap:0; padding:0 12px; }
  .top-row .brand { min-height:43px; font-size:18px; }
- .top-row .shell-search { height:48px; margin-bottom:8px; }
+ .top-row .shell-search { width:100%; max-width:none; height:36px; margin-bottom:8px; }
+ .shell-search input { font-size:16px; }
  .top-row > nav[aria-label="Sports"] { width:100%; margin:0; }
  #sportTabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); width:100%; }
  .top-row .catalog-sections { justify-self:stretch; margin:0; flex:initial; border-top:1px solid #35404d; }
