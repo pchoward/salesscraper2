@@ -35,7 +35,7 @@ SEEDS = {"SkateWarehouse": "2026-07-04"}
 # Black Friday coverage (2026-11-04) reads whole Shopify catalogs and
 # Tactics' deal pages: counts from then on are compared only with each other.
 # A store can have several cut-overs; a day uses the latest one on or before it.
-FULL_CATALOG_FROM = {"Zumiez": "2026-10-02", "Tactics": ("2026-10-02", "2026-11-04"), "TGM": "2026-11-04",
+FULL_CATALOG_FROM = {"Zumiez": "2026-10-02", "Tactics": ("2026-10-02", "2026-11-04"), "TGM": "2026-11-04", "CCS": "2026-11-04",
                      "Kinetic": "2026-11-04", "SPoT": "2026-11-04", "Exodus": "2026-11-04"}
 
 

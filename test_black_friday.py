@@ -122,3 +122,14 @@ class SaleWatchTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CCSCompletesTests(unittest.TestCase):
+    def test_clearance_completes_are_read(self):
+        from stores import ccs
+        self.assertIn("Completes", [s.part for s in ccs.scrapers()])
+        complete = {"title": "Frog Team Skateboard Complete - 8.25\"", "product_type": "Skateboard Complete"}
+        deck = {"title": "Frog Team Skateboard Deck - 8.25\"", "product_type": "Skateboard Deck"}
+        self.assertTrue(ccs._catalog_match(complete, "Completes"))
+        self.assertFalse(ccs._catalog_match(deck, "Completes"))
+        self.assertTrue(ccs._catalog_match({"title": "Toy Machine Skateboard Complete 8.0", "product_type": ""}, "Completes"))

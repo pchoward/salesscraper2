@@ -423,11 +423,17 @@ def _catalog_match(product, part):
         return bool(accessory_rule(title, kind))
     if part == "Protection":
         return bool(classify_protection(title, kind))
+    if part == "Completes":
+        # "Skateboard Complete" (probe, 2026-11-04: Toy Machine, Frog,
+        # Disorder completes marked down in clearance, none listed before).
+        if kind.casefold() in ("skateboard complete", "skateboard completes", "complete skateboard", "completes"):
+            return True
+        return not kind and bool(re.search(r"\bcomplete\b", title, re.IGNORECASE)) and "skateboard" in title.casefold()
     return False
 
 
 class CCSCatalogScraper(Scraper):
-    """Bearings, sneakers, accessories, and protection from the clearance products.json feed."""
+    """Bearings, sneakers, accessories, protection and completes from the clearance products.json feed."""
 
     def __init__(self, part):
         super().__init__("CCS", CLEARANCE_JSON, part)
@@ -520,4 +526,5 @@ def scrapers():
         CCSCatalogScraper("Sneakers"),
         CCSCatalogScraper("Accessories"),
         CCSCatalogScraper("Protection"),
+        CCSCatalogScraper("Completes"),
     ]
