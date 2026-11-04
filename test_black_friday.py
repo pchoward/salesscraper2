@@ -66,6 +66,19 @@ class TacticsDealTests(unittest.TestCase):
         wheels = tactics.TacticsScraper("Tactics", "https://www.tactics.com/skateboard-wheels/sale", "Wheels").scrape()
         self.assertIn("spitfire", [i["url"].rsplit("/", 1)[1] for i in wheels])
 
+    def test_completes_come_from_the_deals_skate_section(self):
+        card = ('<div class="browse-grid-item"><a href="/{slug}"><img alt="{name}"></a>'
+                '<span class="browse-grid-item-sale-price">${price}</span>'
+                '<span class="browse-grid-item-discount">30% off</span></div>')
+        section = card.format(slug="krooked-complete", name="Krooked Arketype 7.5 Complete Skateboard", price="69.95") \
+            + card.format(slug="baker-deck", name="Baker Brand Logo Skateboard Deck 8.25", price="45.00")
+        old = tactics._deal_pages.copy()
+        self.addCleanup(lambda: (tactics._deal_pages.clear(), tactics._deal_pages.update(old)))
+        tactics._deal_pages[tactics.DEAL_SECTIONS["skate"]] = [section]
+        self.assertIn("Completes", [s.part for s in tactics.scrapers()])
+        found = tactics.TacticsDealCompletesScraper().scrape()
+        self.assertEqual([i["url"].rsplit("/", 1)[1] for i in found], ["krooked-complete"])
+
 
 class SiteSaleCutOverTests(unittest.TestCase):
     def test_wider_coverage_is_not_a_site_wide_sale(self):

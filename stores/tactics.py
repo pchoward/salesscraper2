@@ -241,6 +241,27 @@ class TacticsScraper(Scraper):
         return products
 
 
+class TacticsDealCompletesScraper(TacticsScraper):
+    """Complete skateboards, which Tactics lists on sale only in its deals'
+    skate section (probe, 2026-11-04: ~30 completes, no completes sale page).
+    Once the deals end it finds none, so they leave the catalog."""
+
+    def __init__(self):
+        super().__init__("Tactics", DEAL_SECTIONS["skate"], "Completes")
+
+    def scrape(self):
+        from stores.shopify import part_for_title
+        products, seen = [], set()
+        for html in deal_pages("skate"):
+            for item in self.parse(html):
+                url = item.get("url")
+                if url and url not in seen and part_for_title(item.get("name") or "") == "Completes":
+                    seen.add(url)
+                    products.append(item)
+        logging.info("Tactics Completes: %s from the deals' skate section", len(products))
+        return products
+
+
 class TacticsDecksScraper(TacticsScraper):
     def __init__(self):
         super().__init__("Tactics", "https://www.tactics.com/skateboard-decks/sale", "Decks")
@@ -275,4 +296,5 @@ def scrapers():
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-bearings/sale", "Bearings"),
         TacticsScraper("Tactics", "https://www.tactics.com/shoes/sale", "Sneakers"),
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-accessories/sale", "Accessories"),
+        TacticsDealCompletesScraper(),
     ] + ([TacticsProtectionScraper(PROTECTION_URL)] if PROTECTION_URL else [])
