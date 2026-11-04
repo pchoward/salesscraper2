@@ -280,6 +280,24 @@ class ZumiezScraper(Scraper):
                 seen_kept.add(item_url)
                 products.append(item)
             if len(raw) < PAGE_SIZE and not has_page_link(html, page + 1):
+                # A short page without a pager is the end, or a page that
+                # painted only some cards and no pager yet (2026-11-04: page 2
+                # showed 51 of 60 and the run stopped at 98 of 270 decks).
+                # Look once more before ending the walk.
+                again = self._fetch_grid(url)
+                if again and grid_loaded(again):
+                    more = listing_urls(again)
+                    if len(more) > len(raw) or has_page_link(again, page + 1):
+                        logging.warning("Zumiez %s page %s filled in on a second look (%s -> %s cards)",
+                                        self.part, page, len(raw), len(more))
+                        seen_raw.update(more)
+                        for item in self.parse(again):
+                            item_url = item.get("url")
+                            if item_url and item_url not in seen_kept:
+                                seen_kept.add(item_url)
+                                products.append(item)
+                        if len(more) >= PAGE_SIZE or has_page_link(again, page + 1):
+                            continue
                 break
         logging.info("Zumiez %s: %s items across the sale pages", self.part, len(products))
         return products
@@ -360,9 +378,16 @@ class ZumiezScraper(Scraper):
         return products
 
 
+DECKS_URL = "https://www.zumiez.com/skate/skateboard-decks.html"
+
+
 class ZumiezDecksScraper(ZumiezScraper):
     def __init__(self):
-        super().__init__("Zumiez", "https://www.zumiez.com/skate/skateboard-decks.html?customFilters=promotion_flag:Sale", "Decks")
+        # The whole deck category, keeping every discounted card: the Sale
+        # flag misses some markdowns (2026-11-04: 270 vs 278), and robots.txt
+        # disallows the "% off" filter (percent_off_facet). Plain category
+        # pages are allowed.
+        super().__init__("Zumiez", DECKS_URL, "Decks")
 
 
 class ZumiezMultiScraper(ZumiezScraper):
