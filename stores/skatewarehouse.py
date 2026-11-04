@@ -22,6 +22,16 @@ def _markdown(prices):
     except ValueError:
         return False
 
+# Card badges that run into the product name ("Best SellerTriple 8 Saver...").
+# Only when the next character is a capital or digit with no space, so
+# "Salem" and "Newport" keep their names.
+_BADGE = re.compile(r"^(?i:best\s*seller|new\s*arrival|online\s*only)(?=[A-Z0-9])")
+
+
+def _drop_badge(text):
+    return _BADGE.sub("", text, count=1).strip()
+
+
 class SkateWarehouseScraper(Scraper):
     def __init__(self, name, url, part, require_markdown=False):
         super().__init__(name, url, part)
@@ -83,7 +93,7 @@ class SkateWarehouseScraper(Scraper):
                 logging.info(f"Duplicate URL skipped: {href}")
                 continue
 
-            name = normalize_product_name(text.split(f"${prices[0]}")[0].strip())
+            name = normalize_product_name(_drop_badge(text.split(f"${prices[0]}")[0].strip()))
             if not name:
                 logging.warning(f"No name found for {href}")
                 continue

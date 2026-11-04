@@ -33,5 +33,28 @@ class FromTitleTests(unittest.TestCase):
         self.assertIn("brands.settle(items, sport.aliases_file())", text)
 
 
+class SkateBrandTests(unittest.TestCase):
+    """The Skate page (owner, 2026-11-04: 187 / 187killerpads, Pro, Triple)."""
+
+    def test_protection_brands_get_one_spelling(self):
+        import page
+        cases = [({"name": "187 Combo Pack Pads - Camo", "part": "Protection"}, "187 Killer Pads"),
+                 ({"name": "187killerpads ELBOW PAD", "brand": "187killerpads"}, "187 Killer Pads"),
+                 ({"name": "Pro Tec Gasket Elbow Pads", "part": "Protection"}, "Pro-Tec"),
+                 ({"name": "Pro-Tec Classic Helmet", "part": "Protection"}, "Pro-Tec"),
+                 ({"name": "Triple Eight Deep Cover Helmet", "part": "Protection"}, "Triple 8"),
+                 ({"name": "Pads", "brand": "Demon United"}, "Demon"),
+                 ({"name": "Baker Brand Logo Deck", "part": "Decks", "brand": "Baker"}, "Baker"),
+                 ({"name": "Spitfire Formula Four Wheels", "part": "Wheels"}, "Spitfire")]
+        for item, brand in cases:
+            self.assertEqual(page.deal_brand(item), brand, item["name"])
+
+    def test_skate_warehouse_badge_is_not_part_of_the_name(self):
+        from stores.skatewarehouse import _drop_badge
+        self.assertEqual(_drop_badge("Best SellerTriple 8 Saver Series"), "Triple 8 Saver Series")
+        for name in ("Salem Deck", "Newport Shoe", "Best Seller Pads"):
+            self.assertEqual(_drop_badge(name), name)
+
+
 if __name__ == "__main__":
     unittest.main()
