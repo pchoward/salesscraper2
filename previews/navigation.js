@@ -85,6 +85,24 @@
         const frame = doc.getElementById("skateFrame");
         const empty = doc.getElementById("comingSoon");
         const brand = doc.getElementById("brandHome");
+        const shellSearch = doc.getElementById("shellSearch");
+        function syncSearch(url) {
+            const current = state(url, config);
+            const params = new URL(url).searchParams;
+            shellSearch.value = hasCatalog(current.sport) ? params.get(current.scope ? 'ex_query' : 'q') || '' : '';
+            shellSearch.disabled = !hasCatalog(current.sport);
+        }
+        function sendSearch() {
+            if (frame.hidden || !frame.contentWindow) return;
+            frame.contentWindow.postMessage({ type:"shreddeals:search-query", query:shellSearch.value }, win.location.origin);
+        }
+        shellSearch.addEventListener("input", sendSearch);
+        doc.addEventListener("keydown", event => {
+            if (event.key !== "/" || event.ctrlKey || event.altKey || event.metaKey) return;
+            const t = event.target;
+            if (t && (t.closest("input,textarea,select") || t.isContentEditable)) return;
+            event.preventDefault(); shellSearch.focus();
+        });
         brand.textContent = config.brand.name;
         brand.title = config.brand.domain || "Back to Skate";
         function choose(sportId, focusGroup) {
@@ -133,6 +151,7 @@
         }
         function render(focusGroup) {
             const current = state(win.location.href, config);
+            syncSearch(win.location.href);
             tabs(sportTabs, config.sports, current.sport.id, "sport-", "sportPanel", id => choose(id, "sport"));
             doc.getElementById("sportPanel").setAttribute("aria-labelledby", "sport-" + current.sport.id);
             doc.title = config.brand.name + " · " + current.sport.label + (config.production ? "" : " preview");
@@ -174,6 +193,15 @@
             if (event.origin !== win.location.origin || event.source !== frame.contentWindow || !event.data) return;
             const current = state(win.location.href, config).sport;
             const currentSport = current.id;
+            if (event.data.type === "shreddeals:search-sync") {
+                if (!hasCatalog(current) || typeof event.data.query !== 'string') return;
+                try {
+                    // Reject messages still queued from the previous sport/view.
+                    mergeSkateURL(win.location.href, event.data.href, config, currentSport);
+                    shellSearch.value = event.data.query;
+                } catch (_) { /* Ignore a late load or foreign path. */ }
+                return;
+            }
             if (event.data.type === "shreddeals:back") { if (hasCatalog(current)) win.history.back(); return; }
             if (event.data.type !== "shreddeals:skate-url") return;
             try {
@@ -184,6 +212,7 @@
                 }
                 // Throws for a late load of another sport's catalog: ignored.
                 const next = mergeSkateURL(win.location.href, event.data.href, config, currentSport);
+                syncSearch(next.href);
                 frame.dataset.ready = "true";
                 // Cache the shell's logical URL, including retained unknown keys,
                 // rather than reloading whenever the embedded normalizer drops one.
