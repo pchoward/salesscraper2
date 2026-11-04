@@ -110,7 +110,7 @@
     "use strict";
     if (!window.shredBridgeInstalled) return;
     function wireSearch() {
-        const input = document.getElementById("searchInput");
+        const input = document.getElementById("searchInput") || document.getElementById("query");
         if (!input) return;
         window.addEventListener("message", event => {
             if (event.source !== window.parent || event.origin !== location.origin ||
@@ -119,10 +119,24 @@
             input.value = event.data.query;
             input.dispatchEvent(new Event("input", { bubbles:true }));
         });
-        input.addEventListener("input", () => {
-            window.parent.postMessage({type:"shreddeals:search-sync", query:input.value}, location.origin);
-        });
-        window.parent.postMessage({type:"shreddeals:search-sync", query:input.value}, location.origin);
+        let lastQuery = null;
+        function sync() {
+            if (input.value === lastQuery) return;
+            lastQuery = input.value;
+            window.parent.postMessage({type:"shreddeals:search-sync", href:location.href, query:input.value}, location.origin);
+        }
+        input.addEventListener("input", sync);
+        // Chips/saved searches/reset can change .value without an input event,
+        // even before the debounced URL update commits. Observe the catalog's
+        // own rendered search state; do not replace its search implementation.
+        const renderedSearch = document.getElementById("searchChips") || document.getElementById("count");
+        if (renderedSearch) {
+            const observer = new MutationObserver(sync);
+            observer.observe(renderedSearch, {childList:true, subtree:true, characterData:true});
+            window.addEventListener('pagehide', () => observer.disconnect(), {once:true});
+        }
+        // Let the catalog's DOMContentLoaded handlers restore URL/search state first.
+        setTimeout(sync, 0);
     }
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wireSearch);
     else wireSearch();
