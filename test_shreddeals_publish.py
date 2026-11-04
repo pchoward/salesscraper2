@@ -104,6 +104,16 @@ class ProductionNavigationTests(unittest.TestCase):
             config = json.loads(soup.select_one('#sportConfig').string)
             self.assertEqual(config['bridgeVersion'], hashlib.sha256((HERE/'skate-bridge.js').read_bytes()).hexdigest()[:12])
 
+    def test_category_navigation_is_one_browse_row_without_static_category_counts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            soup = BeautifulSoup(publish(Path(directory)).read_text(), 'html.parser')
+            browse = soup.select_one('.browse-nav')
+            self.assertTrue(browse.select_one('#sportTabs'))
+            self.assertTrue(browse.select_one('#categoryToggle[aria-controls="categoryPanel"]'))
+            self.assertEqual(soup.select('#categoryChoices button'), [])
+            self.assertEqual(soup.select_one('#categoryCount').text, '')
+            self.assertFalse(soup.select('.top-row #sportTabs'))
+
     def test_publish_rejects_symlink_targets(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);(root/'index.html').symlink_to(SOURCE/'sale_items_chart.html')

@@ -120,6 +120,18 @@ jobs:
         continue-on-error: true
         run: node ci/smoke.mjs preview/site preview/shots
 
+      - name: Sport/category navigation and live facet counts
+        run: node ci/check_category_navigation.cjs preview/site "${{ runner.temp }}/category-navigation-results"
+
+      - name: Upload category navigation screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: category-navigation-review
+          path: ${{ runner.temp }}/category-navigation-results/
+          retention-days: 7
+          if-no-files-found: warn
+
       - name: Header search synchronization regression checks
         run: node ci/check_header_search.cjs preview/site "${{ runner.temp }}/header-search-results"
 

@@ -2298,7 +2298,7 @@ function nextNavOverflow(clusters) {
 function navClusters() {
     return ["storeFilters", "partFilters"].map(id => {
         const root = document.getElementById(id);
-        if (!root) return null;
+        if (!root || root.hidden) return null;
         const row = root.querySelector(".quick-row");
         const menu = root.querySelector(".more-menu");
         const list = root.querySelector(".more-list");

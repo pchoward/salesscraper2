@@ -118,6 +118,55 @@
         });
         brand.textContent = config.brand.name;
         brand.title = config.brand.domain || "Back to Skate";
+        function closeCategories(focus=false) {
+            doc.getElementById('categoryPanel').hidden = true;
+            doc.getElementById('categoryToggle').setAttribute('aria-expanded','false');
+            if (focus) doc.getElementById('categoryToggle').focus();
+        }
+        function fitCategories() {
+            const panel = doc.getElementById('categoryPanel');
+            if (panel.hidden) return;
+            const height = win.visualViewport?.height || win.innerHeight;
+            panel.style.maxHeight = Math.max(0,Math.min(460,height-panel.getBoundingClientRect().top-12)) + 'px';
+        }
+        win.addEventListener('resize',fitCategories);
+        win.visualViewport?.addEventListener('resize',fitCategories);
+        function toggleCategories() {
+            const toggle = doc.getElementById('categoryToggle');
+            if (toggle.disabled) return;
+            const panel = doc.getElementById('categoryPanel');
+            const open = panel.hidden;
+            panel.hidden = !open;
+            toggle.setAttribute('aria-expanded',String(open));
+            if (open) fitCategories();
+        }
+        doc.getElementById('categoryToggle').addEventListener('click',toggleCategories);
+        doc.getElementById('categoryClose').addEventListener('click',() => closeCategories(true));
+        doc.addEventListener('pointerdown',event => {
+            if (!event.target.closest('#categoryNavigation')) closeCategories();
+        });
+        doc.addEventListener('focusin',event => {
+            if (!event.target.closest('#categoryNavigation')) closeCategories();
+        });
+        doc.addEventListener('keydown',event => {
+            if (event.key === 'Escape' && !doc.getElementById('categoryPanel').hidden) {
+                event.preventDefault(); closeCategories(true);
+            }
+        });
+        doc.getElementById('categoryToggle').addEventListener('keydown',event => {
+            if (event.key !== 'ArrowDown') return;
+            event.preventDefault();
+            if (doc.getElementById('categoryPanel').hidden) toggleCategories();
+            doc.querySelector('#categoryChoices button[aria-pressed=true]:not(:disabled), #categoryChoices button:not(:disabled)')?.focus();
+        });
+        doc.getElementById('categoryChoices').addEventListener('keydown',event => {
+            const buttons = [...doc.querySelectorAll('#categoryChoices button:not(:disabled)')];
+            const index = buttons.indexOf(doc.activeElement);
+            const key = event.key === 'ArrowDown' ? 'ArrowRight' : event.key === 'ArrowUp' ? 'ArrowLeft' : event.key;
+            const next = nextIndex(index,key,buttons.length);
+            if (next == null || !buttons.length) return;
+            event.preventDefault(); buttons[next].focus();
+        });
         function choose(sportId, focusGroup) {
             const next = navigate(win.location.href, config, sportId);
             if (next.href !== win.location.href) win.history.pushState(win.history.state || {}, "", next);
@@ -164,7 +213,17 @@
         }
         function render(focusGroup) {
             const current = state(win.location.href, config);
+            closeCategories();
+            const categories = doc.getElementById('categoryNavigation');
+            categories.hidden = true;
+            doc.getElementById('categoryToggle').disabled = true;
             syncSearch(win.location.href);
+            const unchangedCatalog = hasCatalog(current.sport) && frame.dataset.currentURL === catalogURL(win.location.href,config,current.sport.id).href;
+            if (!unchangedCatalog) doc.getElementById('categoryChoices').replaceChildren();
+            if (unchangedCatalog && !current.scope && doc.querySelector('#categoryChoices button')) {
+                categories.hidden = false;
+                doc.getElementById('categoryToggle').disabled = false;
+            }
             tabs(sportTabs, config.sports, current.sport.id, "sport-", "sportPanel", id => choose(id, "sport"));
             doc.getElementById("sportPanel").setAttribute("aria-labelledby", "sport-" + current.sport.id);
             doc.title = config.brand.name + " · " + current.sport.label + (config.production ? "" : " preview");
@@ -237,7 +296,7 @@
         brand.addEventListener("click", () => choose("skate", "sport"));
         doc.getElementById("backToSkate").addEventListener("click", () => choose("skate", "sport"));
         render();
-        return { render, choose, chooseView, state: () => state(win.location.href, config), bridgeVersion: config.bridgeVersion };
+        return { render, choose, chooseView, state: () => state(win.location.href, config), closeCategories, bridgeVersion: config.bridgeVersion };
     }
     return { state, navigate, skateURL, catalogURL, mergeSkateURL, nextIndex, mount };
 });
