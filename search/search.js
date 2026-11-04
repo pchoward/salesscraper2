@@ -262,6 +262,10 @@
             else if (token.kind === "part") filters.parts = (filters.parts || []).concat(token.value);
             else filters[token.kind] = token.value;
         });
+        // "helmet" means Protection (the filter) but is narrower than it:
+        // keep the word to rank helmets first ("triple 8 helmet").
+        const prefer = tokens.filter(token => token.kind === "part" && stem(basic(token.raw)) !== stem(basic(token.value)))
+            .map(token => basic(token.raw)).join(" ");
         let rest = "";
         let at = 0;
         spans.slice().sort((a, b) => a.start - b.start).forEach(span => {
@@ -269,7 +273,27 @@
             at = span.end;
         });
         rest += raw.slice(at);
-        return { filters: filters, tokens: tokens, remainingText: rest.replace(/\s+/g, " ").trim() };
+        return { filters: filters, tokens: tokens, remainingText: rest.replace(/\s+/g, " ").trim(), preferText: prefer };
+    }
+
+    // "pads" and "pad", "gloves" and "glove" rank alike.
+    function stem(word) {
+        return String(word || "").split(" ").map(part => (part.length > 3 ? part.replace(/(es|s)$/, "") : part)).join(" ");
+    }
+
+    /**
+     * Ids of the deals whose words cover ``text`` (each word starts some
+     * word of the deal, plurals aside). Ranks only; filters nothing.
+     */
+    function preferred(index, text) {
+        const wanted = words(normalize(text)).flatMap(term => term.split(" ")).filter(Boolean).map(stem);
+        const found = new Set();
+        if (!wanted.length) return found;
+        index.docs.forEach(doc => {
+            const have = doc.hay.split(" ").filter(Boolean);
+            if (wanted.every(term => have.some(word => word.startsWith(term)))) found.add(doc.id);
+        });
+        return found;
     }
 
     /** ``text`` without one parsed token (a removed chip). */
@@ -553,7 +577,7 @@
      */
     function highlightRanges(text, query) {
         const parsed = parseQuery(query);
-        const wanted = words(normalize(parsed.remainingText));
+        const wanted = words(normalize((parsed.remainingText + " " + (parsed.preferText || "")).trim()));
         parsed.tokens.forEach(token => {
             if (token.kind === "diameter") wanted.push(numberText(token.value) + "mm");
             if (token.kind === "duros") token.value.forEach(duro => wanted.push(duro));
@@ -599,6 +623,7 @@
         normalize: normalize,
         docFromRow: docFromRow,
         createIndex: createIndex,
+        preferred: preferred,
         search: search
     };
 });
