@@ -1,0 +1,58 @@
+name: Scraper - Flash Sale Check
+
+# Every ~2 hours (GitHub runs schedules late at times): read cheap Skate sale
+# signals (sale collection sizes, Tactics result counts, unread sale
+# sections) and start "Scraper - Skate" when a sale jumps or a new sale
+# section appears (sale_sniffer.py). At most 3 triggered scrapes a day,
+# 3 hours apart, never while a Skate scrape is queued or running. The last
+# check lives in the workflow cache; nothing is committed or emailed.
+on:
+  schedule:
+    - cron: '23 */2 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: sale-sniffer
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write   # list runs, start the Skate scraper, use the cache
+
+jobs:
+  sniff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore the last check
+        uses: actions/cache/restore@v4
+        with:
+          path: sniff_state.json
+          key: sale-sniffer-${{ github.run_id }}
+          restore-keys: sale-sniffer-
+
+      - name: Check sale signals
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python sale_sniffer.py --state sniff_state.json --trigger
+
+      - name: Save this check
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: sniff_state.json
+          key: sale-sniffer-${{ github.run_id }}
