@@ -57,7 +57,7 @@ class TacticsDealTests(unittest.TestCase):
         old = tactics._deal_pages.copy()
         self.addCleanup(lambda: (tactics._deal_pages.clear(), tactics._deal_pages.update(old)))
         tactics._deal_pages.clear()
-        tactics._deal_pages.update({url: [deals] for url in tactics.DEAL_URLS})
+        tactics._deal_pages.update({tactics.DEAL_SECTIONS["skate"]: [deals], tactics.DEAL_SECTIONS["shoes"]: []})
         original = tactics.collect_sale_pages
         tactics.collect_sale_pages = lambda url, fetch=None: [sale]
         self.addCleanup(setattr, tactics, "collect_sale_pages", original)

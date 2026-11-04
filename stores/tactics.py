@@ -87,19 +87,23 @@ def collect_sale_pages(start_url, fetch=fetch_html, max_pages=MAX_SALE_PAGES):
         url = nxt
     return pages
 
-# Seasonal deal pages linked from the homepage ("Pre-Black Friday Clearance",
-# probe 2026-11-04). They mix every category, so each part keeps the items
-# whose title names it. Read once per run and shared by every part; a page
-# that can't be read (the event ended) adds nothing and fails nothing.
-DEAL_URLS = ("https://www.tactics.com/limited-time-deals",)
+# Seasonal deals linked from the homepage ("Pre-Black Friday Clearance",
+# 2,924 items, mostly snowboard; probe 2026-11-04). Its skate section (decks,
+# completes, accessories, skate protection, ~150) and men's shoes are read
+# whole. The skate section mixes parts, so each part keeps the items whose
+# title names it. Read once per run and shared by every part; a page that
+# can't be read (the event ended) adds nothing and fails nothing.
+DEALS_HOME = "https://www.tactics.com/limited-time-deals"
+DEAL_SECTIONS = {"skate": DEALS_HOME + "/skate", "shoes": DEALS_HOME + "/mens-shoes"}
+DEAL_URLS = (DEALS_HOME,) + tuple(DEAL_SECTIONS.values())
 _deal_pages = {}
 
 
-def deal_pages(fetch=fetch_html):
-    for url in DEAL_URLS:
-        if url not in _deal_pages:
-            _deal_pages[url] = collect_sale_pages(url, fetch=fetch) or []
-    return [html for url in DEAL_URLS for html in _deal_pages[url]]
+def deal_pages(section="skate", fetch=fetch_html):
+    url = DEAL_SECTIONS[section]
+    if url not in _deal_pages:
+        _deal_pages[url] = collect_sale_pages(url, fetch=fetch) or []
+    return _deal_pages[url]
 
 
 class TacticsScraper(Scraper):
@@ -120,12 +124,15 @@ class TacticsScraper(Scraper):
                 seen.add(url)
                 products.append(item)
         sale_count = len(products)
-        if self.part in self.DEAL_PARTS:
+        if self.part in self.DEAL_PARTS or self.part == "Sneakers":
             from stores.shopify import part_for_title
-            for html in deal_pages():
+            shoes = self.part == "Sneakers"
+            for html in deal_pages("shoes" if shoes else "skate"):
                 for item in self.parse(html):
                     url = item.get("url")
-                    if not url or url in seen or part_for_title(item.get("name") or "") != self.part:
+                    if not url or url in seen:
+                        continue
+                    if not shoes and part_for_title(item.get("name") or "") != self.part:
                         continue
                     seen.add(url)
                     products.append(item)
