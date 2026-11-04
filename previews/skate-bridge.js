@@ -103,3 +103,27 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mountHeader);
     else mountHeader();
 })();
+
+// Keep the outer header search linked to the catalog's existing search logic.
+// The catalog owns filtering; we never duplicate its filter implementation.
+(function () {
+    "use strict";
+    if (!window.shredBridgeInstalled) return;
+    function wireSearch() {
+        const input = document.getElementById("searchInput");
+        if (!input) return;
+        window.addEventListener("message", event => {
+            if (event.source !== window.parent || event.origin !== location.origin ||
+                event.data?.type !== "shreddeals:search-query" || typeof event.data.query !== "string") return;
+            if (input.value === event.data.query) return;
+            input.value = event.data.query;
+            input.dispatchEvent(new Event("input", { bubbles:true }));
+        });
+        input.addEventListener("input", () => {
+            window.parent.postMessage({type:"shreddeals:search-sync", query:input.value}, location.origin);
+        });
+        window.parent.postMessage({type:"shreddeals:search-sync", query:input.value}, location.origin);
+    }
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wireSearch);
+    else wireSearch();
+})();
