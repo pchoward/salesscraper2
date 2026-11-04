@@ -1,10 +1,13 @@
 """Decide whether a GitHub Actions run should scrape.
 
-The morning cron is ``17 7 * * *`` (3:17 AM EDT). The backup cron is
-``43 9 * * *``. The backup exits without scraping or committing when a
-successful scrape already finished on today's US Eastern date. A run counts
-as successful when ``scrape_health.json`` has a run for that Eastern date
-and at least one store/part did not fail. workflow_dispatch always scrapes.
+The Skate morning cron is ``17 7 * * *`` (3:17 AM EDT) and BMX/Ski/MTB's is
+``37 21 * * *``. GitHub starts scheduled runs late (often by hours) and
+sometimes not at all, so each workflow also has backup crons. A backup exits
+without scraping or committing when a successful scrape already finished on
+today's US Eastern date. A run counts as successful when the health file has
+a run for that Eastern date and at least one store/part did not fail; with
+several health files (BMX, Ski, MTB) every one must. workflow_dispatch and
+the main crons always scrape.
 """
 
 import datetime
@@ -16,6 +19,8 @@ from health import load_state
 
 EASTERN = ZoneInfo("America/New_York")
 BACKUP_CRON = "43 9 * * *"
+# Every cron that is not a workflow's main one (scrape.yml, scrape-sports.yml).
+MAIN_CRONS = {"17 7 * * *", "37 21 * * *"}
 
 
 def _eastern_date(value):
@@ -79,9 +84,10 @@ def gate_should_scrape(event_name, schedule, path="scrape_health.json", now=None
     """False only for the backup cron after a successful Eastern-day scrape."""
     event = (event_name or "").strip()
     cron = " ".join((schedule or "").split())
-    if event != "schedule" or cron != BACKUP_CRON:
+    if event != "schedule" or cron in MAIN_CRONS:
         return True
-    return not already_succeeded_today(path, now=now)
+    paths = [path] if isinstance(path, (str, os.PathLike)) else list(path)
+    return not all(already_succeeded_today(each, now=now) for each in paths)
 
 
 def write_gate_output(should_scrape, output_path=None):
@@ -95,7 +101,9 @@ def write_gate_output(should_scrape, output_path=None):
 def main(argv=None):
     event = os.environ.get("EVENT_NAME") or os.environ.get("GITHUB_EVENT_NAME") or ""
     schedule = os.environ.get("EVENT_SCHEDULE") or ""
-    should = gate_should_scrape(event, schedule)
+    # HEALTH_PATHS: space-separated health files (BMX, Ski, MTB); Skate's by default.
+    paths = (os.environ.get("HEALTH_PATHS") or "scrape_health.json").split()
+    should = gate_should_scrape(event, schedule, paths)
     write_gate_output(should)
     if should:
         print("scrape=true")
