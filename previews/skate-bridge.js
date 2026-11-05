@@ -5,12 +5,6 @@
     try {
         if (window.parent.location.origin !== location.origin || !window.parent.ShredNavigation) return;
     } catch (_) { return; }
-    if (window.frameElement?.dataset.categoryPreview) {
-        const register = () => window.parent.shredApp?.registerCategories(document.getElementById('partFilters'),window,true);
-        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',register);
-        else register();
-        return;
-    }
     window.shredBridgeInstalled = true;
     const replace = history.replaceState.bind(history);
     function send(action) {

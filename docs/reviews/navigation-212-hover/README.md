@@ -30,31 +30,48 @@ facet counts. Active-sport category choices preserve the existing own-facet
 exclusion semantics; the adjacent result readout reports actual matching rows.
 Inactive zero-count choices are disabled as before.
 
-An inactive sport is loaded on demand in one hidden same-origin catalog frame.
-Its original controls calculate the available categories/counts; its bridge does
-not install the main shell's search, utility or history forwarding. Only one
-inactive preview frame is retained at a time. Menus say when counts describe the
-other sport before applying filters. Choosing its category starts a fresh sport
-scope using the native category URL slug. No scraper runs or live inventory
-requests are used to populate menus.
+Publication writes `navigation/<sport>-categories.json` from the published
+catalog's own category controls (category, order and total count, plus its native
+URL slug). The shell fetches and caches this small metadata file for inactive
+sports. A content hash in each URL refreshes metadata when a new shell is
+published. No inactive catalog is loaded, parsed or mounted in the browser.
+The only catalog frame is the selected sport's visible application.
 
-This avoids publishing a second taxonomy/count dataset. The tradeoff is a first
-hover loading delay and the cost of parsing one additional saved catalog. A
-future lightweight catalog-owned navigation endpoint could reduce that cost;
-that is outside this focused UI change.
+Inactive menus clearly label their counts as totals before filtering. Once a
+sport is selected, the existing catalog bridge takes over with live facet counts;
+a late metadata response cannot replace that live source. Failed metadata requests
+show a retry message and can be retried by reopening the menu. The checked-in
+files total about 2.2 KB uncompressed across all four sports (MTB: 622 bytes).
+No scraper, inventory request, duplicate filter engine or additional service is
+required. The previous hidden-preview-frame implementation has been removed.
 
 ## Validation
+
+### Metadata revision
+
+* 59 focused publication, navigation, preview artifact and public-safety tests passed.
+* 16 menu cases passed with explicit assertions that inactive sport menus make no
+  catalog requests, add no frames and cache metadata fetches.
+* The full 20-case count/filter matrix passed; eight desktop/mobile cases passed
+  again after the final departing-catalog count guard.
+* All 10 search/Explore regression cases passed again.
+* Screenshots and menu/search/count result files have been refreshed for this revision.
+
+### Original menu build
 
 * New sport menu checks: 16 passed across all four sports at 1440, 768, 430 and
   390px, including real touch emulation, pointer transitions/dismissal, keyboard,
   inactive-sport selection, All products, result categories and Back/Forward.
+  These also assert that hovering/tapping never requests an inactive catalog,
+  creates no additional frame, and fetches each metadata file at most once.
 * Existing header/search checks: 10 passed, covering autocomplete, query chips,
   keyboard shortcuts, history, standalone search and Explore switching.
 * Existing category/filter/count matrix: 20 passed across five viewport widths,
   including combined filters, zero results, native count parity and history.
 * Supported Python/embedded JavaScript suite: 800 tests passed, nine skipped only
   in the local runner because the legacy Chrome file-URL harness is unsupported.
-  No tests were disabled in CI. Focused publication/navigation checks: 45 passed.
+  No tests were disabled in CI. Focused publication/navigation checks: 16 passed, including JSON taxonomy/order/counts,
+  native slugs, output-catalog precedence and content versions.
 * Existing four-sport audit: 70 checks passed at desktop and 390px, including
   Quick View, retailer links, Watch, technical-variant price oracles and six
   labeled synthetic missing-spec/sold-out/boundary cases.

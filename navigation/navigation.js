@@ -121,7 +121,8 @@
         const panel = doc.getElementById('categoryPanel');
         const choices = doc.getElementById('categoryChoices');
         const sources = new Map();
-        let menuSport = null, opener = null, dismissTimer, previewFrame;
+        let menuSport = null, opener = null, dismissTimer;
+        const categoryLoads = new Map(), categoryErrors = new Set(), categoryCache = new Map();
         let suppressFocus = false, hoverBlockPoint = null, pendingMenuFocus = null;
         function closeCategories(focus=false) {
             win.clearTimeout(dismissTimer);
@@ -147,20 +148,27 @@
             panel.setAttribute('aria-busy',String(!entry));
             doc.getElementById('categoryHint').textContent = entry ?
                 (menuSport === state(win.location.href,config).sport.id ? 'Counts update with your filters.' : 'Counts for this sport before applying filters.') : 'Loading catalog categories…';
-            if (!entry) return;
-            for (const original of [...entry.source.querySelectorAll('button[data-part]')].sort((a,b)=>Number(a.dataset.order)-Number(b.dataset.order))) {
-                const part = original.dataset.part;
+            if (!entry) {
+                if (categoryErrors.has(menuSport)) {
+                    panel.setAttribute('aria-busy','false');
+                    doc.getElementById('categoryHint').textContent = 'Categories could not load. Reopen this menu to retry.';
+                }
+                return;
+            }
+            const originals = entry.source ? [...entry.source.querySelectorAll('button[data-part]')].sort((a,b)=>Number(a.dataset.order)-Number(b.dataset.order)) : entry.categories;
+            for (const original of originals) {
+                const part = entry.source ? original.dataset.part : original.category;
                 const button = doc.createElement('button');
                 button.type = 'button'; button.className = 'category-choice'; button.dataset.part = part;
-                const name = part === 'all' ? 'All products' : original.querySelector('.quick-name').textContent;
-                const count = original.getAttribute('data-count') || '0';
-                const active = menuSport === state(win.location.href,config).sport.id && original.getAttribute('aria-pressed') === 'true';
+                const name = part === 'all' ? 'All products' : entry.source ? original.querySelector('.quick-name').textContent : part;
+                const count = entry.source ? original.getAttribute('data-count') || '0' : String(original.count);
+                const active = !!entry.source && menuSport === state(win.location.href,config).sport.id && original.getAttribute('aria-pressed') === 'true';
                 for (const [className,text] of [['category-name',name],['category-count',count]]) {
                     const span = doc.createElement('span'); span.className = className; span.textContent = text; button.appendChild(span);
                 }
                 button.dataset.count = count;
                 button.setAttribute('aria-pressed',String(active));
-                button.disabled = original.disabled || (Number(count) === 0 && !active && part !== 'all');
+                button.disabled = (entry.source && original.disabled) || (Number(count) === 0 && !active && part !== 'all');
                 button.setAttribute('aria-label',name + ', ' + count + ' matching products');
                 button.addEventListener('click',() => {
                     const current = state(win.location.href,config);
@@ -168,7 +176,7 @@
                     else {
                         const next = navigate(win.location.href,config,menuSport);
                         if (part === 'all') next.searchParams.set('type','all');
-                        else next.searchParams.set('type',entry.child.typeSlug(part));
+                        else next.searchParams.set('type',entry.source ? entry.child.typeSlug(part) : original.slug);
                         win.history.pushState({},'',next); render();
                     }
                     opener = doc.getElementById('sport-'+state(win.location.href,config).sport.id);
@@ -180,7 +188,7 @@
                 pendingMenuFocus = null; choices.querySelector('button:not(:disabled)')?.focus();
             }
         }
-        function registerCategories(source,child,isPreview=false) {
+        function registerCategories(source,child) {
             const sport = config.sports.find(item => new URL(item.catalog,win.location.href).pathname === child.location.pathname);
             if (!sport) return;
             const entry = {source,child}; sources.set(sport.id,entry);
@@ -192,7 +200,7 @@
                     refreshCategories();
                     if (focused) choices.querySelector('[data-part='+JSON.stringify(focused)+']')?.focus({preventScroll:true});
                 }
-                if (isPreview || state(win.location.href,config).sport.id !== sport.id || state(win.location.href,config).scope) return;
+                if (state(win.location.href,config).sport.id !== sport.id || state(win.location.href,config).scope) return;
                 const selected = source.querySelector('[aria-pressed=true]');
                 const parts = typeof child.typedFilters === 'function' ? child.typedFilters(child.document.getElementById('searchInput')?.value || '').parts : null;
                 const searching = parts?.length && (parts.length !== 1 || parts[0] !== selected?.dataset.part);
@@ -208,7 +216,13 @@
             observer.observe(source,{childList:true,subtree:true,attributes:true,characterData:true});
             const status = child.document.getElementById('statusCounts');
             if (status) observer.observe(status,{childList:true,subtree:true,characterData:true});
-            child.addEventListener('pagehide',()=>{observer.disconnect();if(sources.get(sport.id)===entry)sources.delete(sport.id);},{once:true});
+            child.addEventListener('pagehide',()=>{
+                observer.disconnect();
+                if(sources.get(sport.id)===entry) {
+                    if(categoryCache.has(sport.id))sources.set(sport.id,{categories:categoryCache.get(sport.id)});
+                    else sources.delete(sport.id);
+                }
+            },{once:true});
             sync();
         }
         function openSportMenu(id,button) {
@@ -216,22 +230,29 @@
             menuSport = id; opener = button; panel.hidden = false;
             sportTabs.querySelectorAll('button').forEach(node=>node.setAttribute('aria-expanded',String(node === button)));
             doc.getElementById('categoryToggle').setAttribute('aria-expanded',String(button.id === 'categoryToggle'));
-            if (hasCatalog(config.sports.find(item=>item.id===id)) && !sources.has(id)) {
-                // Load only the hovered sport, on demand. Its own native controls
-                // compute taxonomy/counts; preview bridges never own URL or search.
-                if (previewFrame?.dataset.sport !== id) {
-                    if (previewFrame) {
-                        const old = sources.get(previewFrame.dataset.sport);
-                        if (old?.child === previewFrame.contentWindow) sources.delete(previewFrame.dataset.sport);
-                        previewFrame.remove();
-                    }
-                    previewFrame = doc.createElement('iframe');
-                    previewFrame.hidden = true; previewFrame.tabIndex = -1;
-                    previewFrame.dataset.categoryPreview = 'true'; previewFrame.dataset.sport = id;
-                    previewFrame.title = 'Category navigation data';
-                    previewFrame.src = catalogURL(navigate(win.location.href,config,id),config,id).href;
-                    doc.body.appendChild(previewFrame);
-                }
+            const sport = config.sports.find(item=>item.id===id);
+            const current = state(win.location.href,config);
+            // A departing catalog can still be unloading. Never show its
+            // filtered live counts as another sport's unfiltered totals.
+            if (sources.get(id)?.source && (current.sport.id !== id || current.scope)) {
+                if (categoryCache.has(id)) sources.set(id,{categories:categoryCache.get(id)});
+                else sources.delete(id);
+            }
+            if (hasCatalog(sport) && !sources.has(id) && !categoryLoads.has(id)) {
+                categoryErrors.delete(id);
+                const load = win.fetch(sport.categoriesURL).then(response=>{
+                    if (!response.ok) throw new Error('Category metadata unavailable');
+                    return response.json();
+                }).then(categories=>{
+                    if (!Array.isArray(categories) || !categories.every(item=>typeof item.category==='string' && typeof item.slug==='string' && Number.isInteger(item.order) && Number.isInteger(item.count) && item.count>=0)) throw new Error('Invalid category metadata');
+                    categoryCache.set(id,categories);
+                    // A catalog may have become active while the request ran.
+                    if (!sources.get(id)?.source) sources.set(id,{categories:categories.sort((a,b)=>a.order-b.order)});
+                }).catch(()=>categoryErrors.add(id)).finally(()=>{
+                    categoryLoads.delete(id);
+                    if(menuSport===id && !panel.hidden) {refreshCategories();fitCategories();}
+                });
+                categoryLoads.set(id,load);
             }
             refreshCategories(); fitCategories();
             if (!hasCatalog(config.sports.find(item=>item.id===id))) {
