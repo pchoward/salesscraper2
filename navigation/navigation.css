@@ -105,7 +105,7 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
 .browse-nav #sportTabs { display:flex; gap:0; width:auto; }
 .browse-nav #sportTabs [role=tab] { color:#334155; min-height:44px; padding:0 14px; font-weight:600; }
 .browse-nav #sportTabs [aria-selected=true] { color:#1e3a5f; background:#f1f5f9; border-bottom-color:#537b9f; }
-.browse-nav #sportTabs [role=tab]:hover { color:#1e3a5f; background:#f1f5f9; }
+.browse-nav #sportTabs [role=tab]:hover,.browse-nav #sportTabs [aria-expanded=true] { color:#1e3a5f; background:#f1f5f9; }
 #categoryNavigation { border-left:1px solid #d5dbe3; padding-left:12px; min-width:0; }
 #categoryToggle { display:flex; align-items:center; gap:8px; min-height:44px; max-width:100%; padding:0 8px; border:0; background:none; font-size:13px; font-weight:600; color:#243c56; }
 #categoryLabel { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }

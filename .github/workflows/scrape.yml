@@ -133,6 +133,10 @@ jobs:
           SALE_WATCH: "1"
         run: python scraper.py
 
+      - name: Refresh public navigation and category counts
+        if: steps.gate.outputs.scrape == 'true'
+        run: python -m previews.publish
+
       - name: Save subscriber alert journal (not published)
         if: always() && steps.gate.outputs.scrape == 'true' && (vars.ALERTS_DELIVERY_ENABLED == '1' || vars.ALERTS_DELIVERY_ENABLED == 'true') && hashFiles('alerts_state/manifest.json') != ''
         uses: actions/cache/save@v4
@@ -154,6 +158,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           if [ -e history.json ]; then git add history.json; fi
           git add sale_items_chart.html previous_data.json price_history.json scrape_health.json site_sales.json
+          git add index.html navigation discover
           if [ -e sale_sections.json ]; then git add sale_sections.json; fi
           # rebuild_page.py's inputs. The scrape removes the file when it could
           # not save the data it describes; record that removal too.

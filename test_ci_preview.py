@@ -82,6 +82,7 @@ class ArtifactCheckTests(unittest.TestCase):
             "an unexpected screenshot name": dict(shots={"evil.png": PNG}),
             "an extra site file": dict(site=("index.html", "evil.js")),
             "an extra navigation file": dict(site=("navigation/evil.js",)),
+            "an unknown sport metadata file": dict(site=("navigation/surf-categories.json",)),
             "Explore source": dict(site=("discover/engine.py",)),
             "unapproved demo script": dict(site=("discover/evil.js",)),
             "internal Explore source folder": dict(site=("explore/view.js",)),

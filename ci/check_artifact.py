@@ -25,6 +25,7 @@ SITE_FILES = {"index.html", "sale_items_chart.html", "history.json", "_headers",
 SPORT_FILES = {f"{sport}/{name}" for sport in ('bmx', 'ski', 'mtb')
                for name in ('sale_items_chart.html', 'history.json')}
 SITE_FILES |= SPORT_FILES
+SITE_FILES |= {f'navigation/{sport}-categories.json' for sport in ('skate','ski','mtb','bmx')}
 SITE_DIRS = {'navigation', 'discover', 'discover/mtb-dirt-jump', 'bmx', 'ski', 'mtb'}
 PNG = b"\x89PNG\r\n\x1a\n"
 MAX_SHOT = 3 * 1024 * 1024
