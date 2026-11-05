@@ -224,7 +224,7 @@ class GridAndLoadTests(unittest.TestCase):
         self.assertEqual(grid.count("<article"), CARD_PAGE_SIZE)
         self.assertGreater(pool.count("<article"), 0)
         self.assertIn(">Show more<", html)
-        self.assertIn("function syncMountedCards(", html)
+        self.assertIn("function syncMountedCards(", (ROOT / "page.js").read_text(encoding="utf-8"))
         photo = grid.split("<img ", 1)[1].split(">", 1)[0]
         self.assertIn('decoding="async"', photo)
         self.assertIn('loading="lazy"', photo)
@@ -232,7 +232,7 @@ class GridAndLoadTests(unittest.TestCase):
         self.assertIn('height="200"', photo)
         spark = grid.split('class="spark-hit', 1)[1].split("</button>", 1)[0]
         self.assertNotIn("<svg", spark)
-        self.assertIn("function refreshCharts(", html)
+        self.assertIn("function refreshCharts(", (ROOT / "page.js").read_text(encoding="utf-8"))
 
     def test_sidebar_headers_match_the_keepa_panel(self):
         css = (ROOT / "page.css").read_text(encoding="utf-8")

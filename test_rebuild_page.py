@@ -155,6 +155,8 @@ class RebuildPageTests(unittest.TestCase):
         self.assertIn("git add sale_items_chart.html\n", workflow)
         self.assertIn("if [ -e history.json ]; then git add history.json; fi", workflow)
         self.assertIn("if [ -e history.json ]; then git add history.json; fi", scrape)
+        self.assertIn("if [ -e assets ]; then git add -A -- assets; fi", workflow)
+        self.assertIn("if [ -e assets ]; then git add -A -- assets; fi", scrape)
         self.assertIn("git pull --rebase origin main", workflow)
         self.assertIn("python rebuild_page.py", workflow)
         for forbidden in ("scraper.py", "chrome", "Chrome", "SMTP", "ALERTS_", "NOTIFICATION_", "secrets."):

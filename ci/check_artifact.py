@@ -19,13 +19,15 @@ import sys
 from pathlib import Path
 
 SHOT = re.compile(r"^(desktop|mobile)-(home|search|quickview|shell|sport(?:-[a-z]+)?)\.png$")
-SITE_FILES = {"index.html", "sale_items_chart.html", "history.json", "_headers",
+# Shared, content-hashed page assets: page.<sha256[:12]>.css and friends.
+ASSET = re.compile(r"^assets/(?:page|mobile)\.[0-9a-f]{12}\.(?:css|js)$")
+SITE_FILES = {"index.html", "sale_items_chart.html", "history.json", "_headers", "assets/manifest.json",
               "discover/view.js", "discover/mtb-dirt-jump/index.html",
               "navigation/navigation.js", "navigation/navigation.css", "navigation/skate-bridge.js"}
 SPORT_FILES = {f"{sport}/{name}" for sport in ('bmx', 'ski', 'mtb')
                for name in ('sale_items_chart.html', 'history.json')}
 SITE_FILES |= SPORT_FILES
-SITE_DIRS = {'navigation', 'discover', 'discover/mtb-dirt-jump', 'bmx', 'ski', 'mtb'}
+SITE_DIRS = {'navigation', 'discover', 'discover/mtb-dirt-jump', 'bmx', 'ski', 'mtb', 'assets'}
 PNG = b"\x89PNG\r\n\x1a\n"
 MAX_SHOT = 3 * 1024 * 1024
 # Current four-sport preview is ~49 MiB; retain a bounded 64 MiB cap.
@@ -64,7 +66,7 @@ def check(root, head_sha, open_prs):
             relative = path.relative_to(site).as_posix()
             if relative in SITE_DIRS and path.is_dir() and not path.is_symlink():
                 continue
-            if relative not in SITE_FILES or path.is_symlink() or not path.is_file():
+            if (relative not in SITE_FILES and not ASSET.match(relative)) or path.is_symlink() or not path.is_file():
                 raise Refused(f"unexpected file in site/: {path.name}")
             total += path.stat().st_size
         if total > MAX_SITE:

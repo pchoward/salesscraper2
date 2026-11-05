@@ -5,6 +5,7 @@ drawer run in the browser. A problem in one section is logged and skipped.
 """
 
 import datetime
+import hashlib
 import json
 import logging
 import math
@@ -238,6 +239,138 @@ def _read_asset(name):
     path = os.path.join(_HERE, name)
     with open(path, "r", encoding="utf-8") as handle:
         return handle.read()
+
+
+ASSET_DIR = "assets"
+ASSET_MANIFEST = "manifest.json"
+ASSET_RETENTION_DAYS = 3
+_VERSION_LENGTH = 12
+# Shared by every sport's report: one copy serves all four catalogs.
+SHARED_ASSETS = ("page.css", "mobile.css", "page.js")
+_ASSET_FILE = re.compile(r"(?:page|mobile)\.[0-9a-f]{12}\.(?:css|js)\Z")
+_ASSET_REFERENCE = re.compile(
+    r'(?:href|src)=["\'](?:\.\./)*assets/((?:page|mobile)\.[0-9a-f]{12}\.(?:css|js))["\']'
+)
+
+
+def _read_asset_bytes(name):
+    with open(os.path.join(_HERE, name), "rb") as handle:
+        return handle.read()
+
+
+def asset_name(name):
+    """``page.css`` -> ``page.<sha256>.css``. The hash is the cache key."""
+    version = hashlib.sha256(_read_asset_bytes(name)).hexdigest()[:_VERSION_LENGTH]
+    stem, extension = os.path.splitext(name)
+    return f"{stem}.{version}{extension}"
+
+
+def asset_url(name, prefix=""):
+    """A page's URL for a shared asset; ``prefix`` is ``../`` in a sport folder."""
+    return f"{prefix}{ASSET_DIR}/{asset_name(name)}"
+
+
+def _asset_now():
+    return datetime.datetime.now(datetime.timezone.utc)
+
+
+def _asset_manifest(folder):
+    """First-published times for retained assets; corrupt entries are ignored."""
+    try:
+        payload = json.loads((folder / ASSET_MANIFEST).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    if not isinstance(payload, dict):
+        return {}
+    manifest = {}
+    for name, value in payload.items():
+        if not _ASSET_FILE.fullmatch(name) or not isinstance(value, str):
+            continue
+        try:
+            first_seen = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        if first_seen.tzinfo is None:
+            first_seen = first_seen.replace(tzinfo=datetime.timezone.utc)
+        manifest[name] = first_seen.astimezone(datetime.timezone.utc)
+    return manifest
+
+
+def _referenced_assets(root):
+    """Asset names still used by a report on disk, including a partial rebuild."""
+    root = Path(root)
+    paths = [root / "sale_items_chart.html", *root.glob("*/sale_items_chart.html")]
+    referenced = set()
+    for path in paths:
+        try:
+            html = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        referenced.update(_ASSET_REFERENCE.findall(html))
+    return referenced
+
+
+def _replace_bytes(path, content):
+    """Write bytes atomically. True when the file changed."""
+    path = os.fspath(path)
+    if os.path.exists(path):
+        with open(path, "rb") as handle:
+            if handle.read() == content:
+                return False
+    temporary = path + ".tmp"
+    try:
+        with open(temporary, "wb") as handle:
+            handle.write(content)
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.remove(temporary)
+    return True
+
+
+def write_assets(root="."):
+    """Publish shared assets under ``root/assets``. True when a file changed.
+
+    Unchanged content keeps its URL and cache entry; changed content gets a new
+    one. Current and referenced versions are always retained. An unreferenced
+    version is deleted after a grace period, covering cached HTML and partially
+    rebuilt pages without growing the repository forever.
+    """
+    folder = Path(root) / ASSET_DIR
+    folder.mkdir(parents=True, exist_ok=True)
+    now = _asset_now()
+    manifest = _asset_manifest(folder)
+    current = {asset_name(name) for name in SHARED_ASSETS}
+    changed = False
+    for name in SHARED_ASSETS:
+        target = asset_name(name)
+        changed = _replace_bytes(folder / target, _read_asset_bytes(name)) or changed
+    for path in folder.iterdir():
+        if path.is_file() and _ASSET_FILE.fullmatch(path.name):
+            manifest.setdefault(path.name, now)
+
+    referenced = _referenced_assets(root)
+    cutoff = now - datetime.timedelta(days=ASSET_RETENTION_DAYS)
+    for name, first_seen in list(manifest.items()):
+        path = folder / name
+        if not path.is_file():
+            del manifest[name]
+            continue
+        if name in current or name in referenced or first_seen >= cutoff:
+            continue
+        try:
+            path.unlink()
+        except OSError as exc:
+            logger.warning("Could not remove old shared asset %s: %s", path, exc)
+        else:
+            del manifest[name]
+            changed = True
+    payload = json.dumps(
+        {name: manifest[name].isoformat().replace("+00:00", "Z") for name in sorted(manifest)},
+        indent=1,
+        sort_keys=True,
+    ).encode("utf-8") + b"\n"
+    return _replace_bytes(folder / ASSET_MANIFEST, payload) or changed
 
 
 def parse_length(value):
@@ -1898,8 +2031,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
         f"<title>{escape(sport.brand)} | {escape(today)}</title>",
-        f"<style>{_read_asset('page.css')}</style>",
-        f"<style>{_read_asset('mobile.css')}</style>",
+        f'<link rel="stylesheet" href="{asset_url("page.css", asset_prefix)}">',
+        f'<link rel="stylesheet" href="{asset_url("mobile.css", asset_prefix)}">',
         "<script>try{if(localStorage.getItem('salesscraper2.layout')!=='table')document.documentElement.classList.add('layout-cards')}catch(e){document.documentElement.classList.add('layout-cards')}</script>",
         "</head><body>",
     ]
@@ -2870,9 +3003,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     if sport.facets:
         from sports.facets import script
         chunks.append(script(data, sport))
-    chunks.append(
-        "<script>"
-        + (
+    config_script = (
+        (
             ""
             if sport.is_default
             else "const SPORT_SETTINGS = "
@@ -2882,9 +3014,11 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + f"const WIDTH_RANGES = {ranges_literal};\n"
         f"const LENGTH_BUCKETS = {length_literal};\n"
         f"const WHEELBASE_BUCKETS = {json.dumps([{key: bucket[key] for key in ('id', 'label', 'min', 'max')} for bucket in wheel_buckets])};\n"
-        f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
-        f"{_read_asset('page.js')}</script>"
+        f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};"
     )
+    chunks.append(f"<script>{config_script}</script>")
+    # Shared with every sport, and cached by the browser across them.
+    chunks.append(f'<script src="{asset_url("page.js", asset_prefix)}"></script>')
     chunks.append(f"<script>{_read_asset('search/search-ui.js')}</script>")
     chunks.append('''<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "542cbf4d24534b70be3715cefe0e6a8e"}'></script><!-- End Cloudflare Web Analytics -->''')
     chunks.append("</body></html>")
@@ -2932,20 +3066,21 @@ def _replace_text(path, text):
     return True
 
 
-def write_page(html, page_path, history_path=None):
-    """Publish the page and its history.json next to it. True when either changed.
+def write_page(html, page_path, history_path=None, asset_root=None):
+    """Publish the page, its history.json and, when ``asset_root`` is given,
+    the shared assets. True when any file changed.
 
-    History first, so a published page never asks for a history file that is
-    not there yet.
+    Assets first, then history, so a published page never asks for a file that
+    is not there yet.
     """
     page, history = split_history(html)
     folder = os.path.dirname(page_path)
     if folder:
         os.makedirs(folder, exist_ok=True)  # a sport's first page (bmx/)
-    changed = False
+    changed = write_assets(asset_root) if asset_root is not None else False
     if history is not None:
         target = history_path or os.path.join(os.path.dirname(page_path) or ".", HISTORY_FILE)
-        changed = _replace_text(target, history)
+        changed = _replace_text(target, history) or changed
     return _replace_text(page_path, page) or changed
 
 

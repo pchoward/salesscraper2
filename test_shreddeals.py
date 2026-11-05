@@ -102,6 +102,28 @@ assert.equal(N.state(N.navigate(start,config,'surf'),config).sport.label,'Surf')
             with self.assertRaises(ValueError):build(output,source=source)
             self.assertFalse(output.exists())
 
+    def test_external_asset_pages_copy_their_shared_assets(self):
+        """A page that loads page.js by URL keeps working in the preview copy."""
+        import page
+        from report import build_report_html
+
+        html = build_report_html({}, {}, generated_at='2026-11-03T10:00:00+00:00')
+        self.assertNotIn('<style>', html, 'precondition: the page loads its styles by URL')
+        self.assertIn(f'src="{page.asset_url("page.js")}"', html)
+        with tempfile.TemporaryDirectory() as directory:
+            source=Path(directory)/'source';source.mkdir()
+            (source/'sale_items_chart.html').write_text(html, encoding='utf-8')
+            (source/'history.json').write_text('{"items":{}}', encoding='utf-8')
+            page.write_assets(source)
+            root=Path(directory)/'preview'
+            path=build(root, source=source)
+            copied=(path.parent/'skate'/'sale_items_chart.html').read_text(encoding='utf-8')
+            for url in (page.asset_url('page.js'), page.asset_url('page.css'), page.asset_url('mobile.css')):
+                prefix='../'
+                self.assertIn(f'"{prefix}{url}"', copied)
+                self.assertNotIn(f'"{url}"', copied)
+                self.assertEqual((path.parent/Path(url)).read_bytes(), (source/url).read_bytes())
+
     def test_invalid_config_cannot_attach_skate_inventory_to_another_sport(self):
         config=load_config(HERE/'sports.json')
         config['sports'][1]['catalog']='skate/sale_items_chart.html'

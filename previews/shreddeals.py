@@ -10,6 +10,43 @@ import shutil
 
 SOURCE = Path(__file__).resolve().parents[1]
 HERE = Path(__file__).resolve().parent
+SHARED_ASSET = re.compile(r'^(?:\.\./)*assets/((?:page|mobile)\.[0-9a-f]{12}\.(?:css|js))$')
+
+
+def copy_shared_assets(html, source, output, source_path='sale_items_chart.html', output_path=None):
+    """Validate and copy a report's versioned assets, rewriting relative URLs.
+
+    The development preview moves Skate into ``skate/``; the native preview
+    keeps each report at its original path. Any new local dependency still
+    fails closed instead of silently producing a broken copy.
+    """
+    source = Path(source).resolve()
+    output = Path(output).resolve()
+    source_path = Path(source_path)
+    output_path = Path(output_path or source_path)
+    local_scripts = re.findall(r'<script[^>]+src=["\'](?!https?://)([^"\']+)', html, re.I)
+    local_links = re.findall(r'<link[^>]+href=["\'](?!https?://|data:|#)([^"\']+)', html, re.I)
+    assets = []
+    for reference in [*local_scripts, *local_links]:
+        if reference in local_links and reference.split('?', 1)[0] == 'history.json':
+            continue
+        match = SHARED_ASSET.fullmatch(reference)
+        if not match:
+            raise ValueError('New local asset dependencies need review before copying')
+        name = match.group(1)
+        asset = (source / source_path.parent / reference).resolve()
+        if asset.parent != (source/'assets').resolve() or asset.name != name or not asset.is_file():
+            raise ValueError(f'Missing shared page asset: {reference}')
+        assets.append((reference, name, asset))
+    for reference, name, asset in assets:
+        target = output/'assets'/name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(asset, target)
+        replacement = '../' * len(output_path.parent.parts) + 'assets/' + name
+        for attribute in ('href', 'src'):
+            html = html.replace(f'{attribute}="{reference}"', f'{attribute}="{replacement}"')
+            html = html.replace(f"{attribute}='{reference}'", f"{attribute}='{replacement}'")
+    return html
 
 
 def load_config(path):
@@ -71,21 +108,18 @@ def build(output, source=SOURCE, config_path=HERE/'sports.json'):
     config['skateQueryKeys'] = skate_query_keys()
     page = source/'sale_items_chart.html'
     history = source/'history.json'
-    html = page.read_text()
+    html = page.read_text(encoding='utf-8')
     if '<body>' not in html or not history.is_file():
         raise ValueError('Saved public page and history.json are required')
-    # All current app/search/style code is inline. Fail rather than silently lose
-    # future local dependencies if production changes its generated-page format.
-    local_scripts = re.findall(r'<script[^>]+src=["\'](?!https?://)([^"\']+)', html, re.I)
-    local_links = re.findall(r'<link[^>]+href=["\'](?!https?://|data:|#)([^"\']+)', html, re.I)
-    if local_scripts or any(link.split('?', 1)[0] != 'history.json' for link in local_links):
-        raise ValueError('New local asset dependencies need review before copying')
-    output.mkdir(parents=True)
+    # Shared page code may be inline or a versioned local asset. Copy only the
+    # reviewed asset shapes and reject anything new before writing the page.
+    html = copy_shared_assets(html, source, output, output_path='skate/sale_items_chart.html')
+    output.mkdir(parents=True, exist_ok=True)
     (output/'skate').mkdir()
     policy = '<meta http-equiv="Content-Security-Policy" content="connect-src &apos;self&apos;; form-action &apos;none&apos;; frame-src &apos;none&apos;; script-src &apos;self&apos; &apos;unsafe-inline&apos;">'
     html = re.sub(r'<script\b[^>]*src=["\']https://static\.cloudflareinsights\.com/[^>]*>\s*</script>', '', html, flags=re.I)
     html = html.replace('<head>', '<head>'+policy+'<script src="../skate-bridge.js"></script>', 1)
-    (output/'skate/sale_items_chart.html').write_text(html)
+    (output/'skate/sale_items_chart.html').write_text(html, encoding='utf-8')
     shutil.copyfile(history, output/'skate/history.json')
     for name in ('navigation.js','navigation.css','skate-bridge.js'):
         shutil.copyfile(HERE/name, output/name)

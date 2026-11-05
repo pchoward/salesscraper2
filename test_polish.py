@@ -2,6 +2,7 @@
 
 import datetime
 import unittest
+from pathlib import Path
 
 from history import (
     apply_lifecycle,
@@ -496,12 +497,13 @@ class DigestDefaultTests(unittest.TestCase):
             '.change-btn[aria-pressed="true"], .mode-btn[aria-pressed="true"]',
             html,
         )
-        self.assertIn('if (change === "removed")', html)
+        source = Path(__file__).with_name("page.js").read_text(encoding="utf-8")
+        self.assertIn('if (change === "removed")', source)
         self.assertNotIn("It does not hide current deals.", html)
         self.assertNotIn("deals.hidden", html)
-        self.assertNotIn('snapshot.change === "new"', html)
-        self.assertNotIn("state.cardNew = state.change", html)
-        self.assertIn('kind === "all" || state.change === kind', html)
+        self.assertNotIn('snapshot.change === "new"', source)
+        self.assertNotIn("state.cardNew = state.change", source)
+        self.assertIn('kind === "all" || state.change === kind', source)
         blank = decode_query("")
         self.assertEqual(blank["change"], "all")
         self.assertFalse(blank["added"])

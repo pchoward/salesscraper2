@@ -16,7 +16,7 @@ class ProductionNavigationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory,patch('urllib.request.urlopen',side_effect=AssertionError('no network')):
             root=Path(directory)
             path=publish(root)
-            self.assertEqual({str(p.relative_to(root)) for p in root.rglob('*') if p.is_file()},
+            self.assertEqual({p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()},
                              {'index.html','navigation/navigation.js','navigation/navigation.css','navigation/skate-bridge.js',
                               'discover/view.js','discover/mtb-dirt-jump/index.html'})
             html=path.read_text();soup=BeautifulSoup(html,'html.parser')
