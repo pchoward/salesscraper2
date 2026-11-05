@@ -185,3 +185,93 @@
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wireSearch);
     else wireSearch();
 })();
+
+// #212: category navigation mirrors the catalog's own buttons and facet counts.
+// No second category dataset, count algorithm, or filter state lives in the shell.
+(function () {
+    'use strict';
+    if (!window.shredBridgeInstalled) return;
+    function mountCategories() {
+        const parent = window.parent.document;
+        const source = document.getElementById('partFilters');
+        const host = parent.getElementById('categoryNavigation');
+        const app = window.parent.shredApp;
+        if (!source || !host || !app || app.state().scope) return;
+        const choices = parent.getElementById('categoryChoices');
+        const toggle = parent.getElementById('categoryToggle');
+        const config = JSON.parse(parent.getElementById('sportConfig').textContent);
+        const ownPath = location.pathname;
+        function isCurrent() {
+            const current = app.state();
+            return !current.scope && window.parent.ShredNavigation.catalogURL(window.parent.location.href,config,current.sport.id).pathname === ownPath;
+        }
+        if (!isCurrent()) return;
+        source.hidden = true;
+        source.style.display = 'none';
+        choices.replaceChildren();
+        const buttons = new Map();
+        function sync() {
+            if (!isCurrent()) return;
+            const originals = [...source.querySelectorAll('button[data-part]')].sort((a,b) => Number(a.dataset.order)-Number(b.dataset.order));
+            const present = new Set();
+            let selected;
+            for (const original of originals) {
+                const part = original.dataset.part;
+                present.add(part);
+                let button = buttons.get(part);
+                if (!button) {
+                    button = parent.createElement('button');
+                    button.type = 'button'; button.className = 'category-choice'; button.dataset.part = part;
+                    const label = parent.createElement('span'); label.className = 'category-name';
+                    const count = parent.createElement('span'); count.className = 'category-count';
+                    button.append(label,count);
+                    button.addEventListener('click',() => {
+                        if (!isCurrent()) return;
+                        original.click();
+                        app.closeCategories(true);
+                    });
+                    buttons.set(part,button); choices.appendChild(button);
+                }
+                const name = part === 'all' ? 'All products' : original.querySelector('.quick-name').textContent;
+                const count = original.getAttribute('data-count') ?? original.querySelector('.quick-count').textContent;
+                const active = original.getAttribute('aria-pressed') === 'true';
+                button.querySelector('.category-name').textContent = name;
+                button.querySelector('.category-count').textContent = count;
+                button.dataset.count = count;
+                button.setAttribute('aria-pressed',String(active));
+                button.disabled = original.disabled || (Number(count) === 0 && !active && part !== 'all');
+                button.setAttribute('aria-label',name + ', ' + count + ' matching products');
+                if (active) selected = {name,count,part};
+            }
+            for (const [part,button] of buttons) if (!present.has(part)) { button.remove(); buttons.delete(part); }
+            const sport = app.state().sport;
+            parent.getElementById('categoryTitle').textContent = sport.label + ' categories';
+            const queryParts = typeof typedFilters === 'function' && typeof state !== 'undefined' ? typedFilters(state.search).parts : null;
+            const searchScope = queryParts?.length && (queryParts.length !== 1 || queryParts[0] !== selected?.part);
+            const label = searchScope ? 'Search results' : selected?.name || 'Categories';
+            parent.getElementById('categoryLabel').textContent = label;
+            const hint = parent.getElementById('categoryHint');
+            if (hint) hint.textContent = searchScope ? 'Your search selects the product type. Clear it to browse another category.' : 'Counts update with your filters.';
+            // The native category facet can broaden category-specific sizes.
+            // Keep those menu counts; the trigger reports the actual result count.
+            const matched = /^\s*([\d,]+)/.exec(document.getElementById('statusCounts')?.textContent || '')?.[1] || selected?.count || '0';
+            parent.getElementById('categoryCount').textContent = matched;
+            toggle.setAttribute('aria-label',sport.label + ': ' + label + ', ' + matched + ' matching products. Choose product category');
+            toggle.disabled = originals.length === 0;
+            host.hidden = originals.length === 0;
+        }
+        const observer = new MutationObserver(sync);
+        observer.observe(source,{childList:true,subtree:true,attributes:true,characterData:true});
+        const status = document.getElementById('statusCounts');
+        if (status) observer.observe(status,{childList:true,subtree:true,characterData:true});
+        const dismiss = () => app.closeCategories();
+        document.addEventListener('pointerdown',dismiss);
+        setTimeout(sync,0);
+        window.addEventListener('pagehide',() => {
+            observer.disconnect(); document.removeEventListener('pointerdown',dismiss);
+            if (isCurrent()) { app.closeCategories(); host.hidden = true; toggle.disabled = true; }
+        },{once:true});
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mountCategories);
+    else mountCategories();
+})();

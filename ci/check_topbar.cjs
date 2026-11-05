@@ -83,7 +83,8 @@ async function main() {
                         await frame.evaluate(() => closeAlerts());
                         await (await page.locator('#shellSearch').count() ? page.locator('#shellSearch') : frame.locator('#searchInput')).fill('');
                         await page.waitForTimeout(350);
-                        await frame.locator('#partFilters [data-part="Wheels"]').click();
+                        await page.locator('#categoryToggle').click();
+                        await page.locator('#categoryChoices [data-part="Wheels"]').click();
                         assert.equal(await frame.evaluate(() => state.part), 'Wheels');
                         await frame.locator('#storeFilters [data-store="Zumiez"]').click();
                         assert.equal(await frame.evaluate(() => state.store), 'Zumiez');
