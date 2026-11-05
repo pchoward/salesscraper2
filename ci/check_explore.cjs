@@ -52,6 +52,8 @@ async function main() {
             await frame.locator('button[type=reset]').click();
             assert.equal(await frame.locator('.inventory-card').count(), 12);
             await page.locator('#shellSearch').fill('nothing matches');
+            // The search is debounced: wait for it to apply, don't read the count at once.
+            await frame.waitForFunction(() => document.querySelectorAll('.inventory-card').length === 0, null, {timeout: 5000});
             assert.equal(await frame.locator('.inventory-card').count(), 0);
             await page.locator('#shellSearch').fill('');
             await frame.locator('.inventory-card button').first().click();
