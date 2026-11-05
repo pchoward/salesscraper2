@@ -18,14 +18,12 @@ class BmxEbikeTests(unittest.TestCase):
             self.assertNotEqual(rules.bmx(name, "Steering" if "Grips" in name else "Bikes"), "electric bike", name)
 
     def test_none_left_in_live_bmx_data(self):
+        # The live catalog changes with every scrape: check what stays true
+        # (no listing the rule would drop), not which bikes were on sale once.
         data = json.loads((Path(__file__).resolve().parent / "catalogs/bmx/previous_data.json").read_text())
-        kept = [i["name"] for v in data.values() if isinstance(v, list) for i in v
-                if rules.bmx(i["name"], i.get("part")) != "electric bike"]
-        dropped = [i["name"] for v in data.values() if isinstance(v, list) for i in v
-                   if rules.bmx(i["name"], i.get("part")) == "electric bike"]
-        self.assertEqual(sorted(dropped), ["Haro Skwad 1 Electric Bike", "Haro Skwad 2 Electric Bike"])
-        self.assertTrue(kept)
-
+        names = [i["name"] for v in data.values() if isinstance(v, list) for i in v]
+        self.assertTrue(names)
+        self.assertEqual([n for n in names if rules.bmx(n, "Bikes") == "electric bike"], [])
 
 if __name__ == "__main__":
     unittest.main()
