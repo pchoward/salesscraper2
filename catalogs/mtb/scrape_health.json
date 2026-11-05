@@ -6059,14 +6059,14 @@
           }
         },
         "The Lost Co._Drivetrain": {
-          "count": 136,
+          "count": 135,
           "failed": false,
           "diagnostics": {
             "expected_count": 135.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 136,
-            "percentage_change": 0.7,
+            "actual_count": 135,
+            "percentage_change": 0.0,
             "reason": "insufficient_history"
           }
         },
@@ -6383,7 +6383,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-05T01:59:04+00:00"
+      "scanned_at": "2026-11-05T07:02:49+00:00"
     }
   ],
   "baseline": {
@@ -6581,7 +6581,7 @@
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-05",
-      "count": 136
+      "count": 135
     },
     "The Lost Co._Forks & Shocks": {
       "date": "2026-11-05",
@@ -8670,7 +8670,7 @@
       },
       {
         "date": "2026-11-05",
-        "count": 136
+        "count": 135
       }
     ],
     "The Lost Co._Forks & Shocks": [
