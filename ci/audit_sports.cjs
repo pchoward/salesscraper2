@@ -109,11 +109,22 @@ async function main(){
       assert.deepEqual((await rows(frame)).map(r=>r.id).sort(),expected.filter(r=>ids.has(r.id)).map(r=>r.id).sort());
       await control(frame,'brandSelect','all');
      }
+     // Native controls debounce URL writes; a sport menu can also load another
+     // catalog in the background. Wait for committed state, not a fixed delay.
+     await page.waitForFunction(()=>{
+      const child=document.getElementById('skateFrame').contentWindow;
+      if(typeof child.encodeState!=='function')return false;
+      const actual=new URL(location.href).searchParams;actual.delete('sport');
+      return actual.toString()===child.encodeState(child.captureState());
+     });
      const savedTechnicalURL=page.url();
-     await page.locator('#sport-'+(sport==='ski'?'bmx':'ski')).click();await page.waitForTimeout(250);
+     const nextSport=sport==='ski'?'bmx':'ski';
+     await page.locator('#sport-'+nextSport).click();
+     await page.waitForURL(url=>url.searchParams.get('sport')===nextSport);
      for(const f of config.fields)assert.equal(new URL(page.url()).searchParams.has(f.param),false,'technical parameters must not leak between sports');
-     await page.goBack();await page.waitForTimeout(250);
-     frame=await(await page.waitForSelector('#skateFrame')).contentFrame();await frame.waitForSelector('#searchInput',{state:'attached'});
+     await page.goBack();await page.waitForURL(savedTechnicalURL);
+     frame=await(await page.waitForSelector('#skateFrame')).contentFrame();
+     await frame.waitForFunction(expected=>typeof SportSpecFilters!=='undefined'&&JSON.stringify(SportSpecFilters.capture())===JSON.stringify(expected),selection);
      assert.equal(page.url(),savedTechnicalURL);assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),selection);
      const chips=await frame.locator('#activeChips').textContent();assert(chips.includes(preferred[1]),'technical choice must appear in removable active filters');
      // A second scoped field combines with AND on one offer. Counts are live
