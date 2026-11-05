@@ -101,10 +101,21 @@ class ProductionNavigationTests(unittest.TestCase):
         self.assertIn('explore', excluded)
         self.assertIn('test_explore.py', excluded)
         self.assertNotIn('discover', excluded)
-        for name in ('rebuild-page.yml', 'scrape-sports.yml'):
+        for name in ('rebuild-page.yml', 'scrape-sports.yml', 'scrape.yml'):
             workflow = (SOURCE/'.github/workflows'/name).read_text()
             self.assertIn('python -m previews.publish', workflow)
             self.assertIn('git add index.html navigation discover', workflow)
+
+    def test_skate_scrape_publishes_navigation_after_scraping_before_committing(self):
+        import yaml
+        steps = yaml.safe_load((SOURCE/'.github/workflows/scrape.yml').read_text())['jobs']['scrape']['steps']
+        scrape = next(i for i, step in enumerate(steps) if step.get('run') == 'python scraper.py')
+        publish_step = next(i for i, step in enumerate(steps) if step.get('run') == 'python -m previews.publish')
+        commit = next(i for i, step in enumerate(steps) if 'git add index.html navigation discover' in step.get('run', ''))
+        self.assertLess(scrape, publish_step)
+        self.assertLess(publish_step, commit)
+        self.assertEqual(steps[publish_step]['if'], steps[scrape]['if'])
+        self.assertEqual(steps[publish_step]['if'], steps[commit]['if'])
 
     def test_demo_output_rejects_symlinks_and_skate_only_has_no_entry(self):
         with tempfile.TemporaryDirectory() as directory:
