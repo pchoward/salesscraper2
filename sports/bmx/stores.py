@@ -159,6 +159,8 @@ ALBES = shopify.ShopifyStore(
     title_part=title_part,
     details=details,
     track_exclusions=True,
+    # Whole catalog too: 51 listable markdowns sat outside these collections (audit 2026-11-06).
+    whole_site=True,
 )
 
 CIRCUIT = shopify.ShopifyStore(
@@ -208,6 +210,8 @@ SOURCE_US = shopify.ShopifyStore(
     details=details,
     track_exclusions=True,
     unknown_by_title=True,
+    # Whole catalog too: 55 listable markdowns sat outside these collections (audit 2026-11-06).
+    whole_site=True,
 )
 
 # Multisport protection brands (owner, 2026-11-03): helmets and pads made for
@@ -288,8 +292,8 @@ def brand_title_part(title):
     return title_part(title)
 
 
-def bmx_brand(name, base, collection):
-    return shopify.ShopifyStore(name, name, base, collection=collection, types=TYPES,
+def bmx_brand(name, base, collection, whole_site=False):
+    return shopify.ShopifyStore(name, name, base, collection=collection, types=TYPES, whole_site=whole_site,
                                 brand_of=brands.for_sport(sports.BMX), title_part=brand_title_part, details=details,
                                 track_exclusions=True, unknown_by_title=True)
 
@@ -297,7 +301,7 @@ def bmx_brand(name, base, collection):
 BMX_BRANDS = (
     bmx_brand("Kink", "https://www.kinkbmx.com", "sale"),
     bmx_brand("Haro", "https://www.harobikes.com", "summer-parts-sale"),
-    bmx_brand("Fiend", "https://www.fiendbmx.com", "clearance"),
+    bmx_brand("Fiend", "https://www.fiendbmx.com", "clearance", whole_site=True),  # audit 2026-11-06: 3 more
 )
 
 STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS

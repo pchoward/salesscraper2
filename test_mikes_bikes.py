@@ -52,13 +52,15 @@ class MikesBikesTests(unittest.TestCase):
         self.assertEqual((bike["price_new"], bike["price_old"]), ("4499.77", "12999.99"))
 
     def test_collections_and_dedup(self):
-        handles = [url.split("/collections/")[1].split("/")[0] for url in stores.MIKES.sale_jsons]
+        handles = [url.split("/collections/")[1].split("/")[0] for url in stores.MIKES.sale_jsons if "/collections/" in url]
         self.assertEqual(handles[:4], ["clearance-and-sale", "clearance-and-sale-bikes", "mountain-bikes", "santa-cruz-bikes-on-sale"])
         self.assertIn("protective-gear", handles, "protection collections follow (2026-11-03)")
         pages = {"clearance-and-sale": [HECKLER, PEDALS], "clearance-and-sale-bikes": [HECKLER],
                  "mountain-bikes": [HECKLER], "santa-cruz-bikes-on-sale": [HECKLER]}
 
         def fetch(url):
+            if "/collections/" not in url:  # the whole catalog (audit 2026-11-06): nothing more here
+                return {"products": []}
             handle = url.split("/collections/")[1].split("/")[0]
             return {"products": pages.get(handle, []) if "page=1" in url else []}
 

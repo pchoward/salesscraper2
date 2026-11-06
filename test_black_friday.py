@@ -164,3 +164,16 @@ class FanatikWholeSiteTests(unittest.TestCase):
         from sports.mtb import stores
         self.assertEqual(stores.FANATIK.sale_jsons[-1], "https://www.fanatikbike.com/products.json")
         self.assertIn("https://www.fanatikbike.com/collections/fanatik-outlet/products.json", stores.FANATIK.sale_jsons)
+
+
+class SportShopsWholeSiteTests(unittest.TestCase):
+    def test_audited_shops_read_their_whole_catalog(self):
+        # Audit 2026-11-06: listable markdowns outside the collections read.
+        from sports.bmx import stores as bmx
+        from sports.mtb import stores as mtb
+        from sports.ski import stores as ski
+        for store in (bmx.ALBES, bmx.SOURCE_US, bmx.BMX_BRANDS[2], mtb.MIKES, ski.GEAR_WEST):
+            self.assertTrue(store.whole_site, store.store)
+            self.assertEqual(store.sale_jsons[-1], store.base + "/products.json")
+        # Left out on purpose: Haro (non-BMX bikes), Alpinestars (moto gear), Smith (snow gear in MTB).
+        self.assertFalse(bmx.BMX_BRANDS[1].whole_site)

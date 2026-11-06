@@ -73,7 +73,10 @@ MIKES=shopify.ShopifyStore("Mike's Bikes","Mike's Bikes",'https://mikesbikes.com
     more_collections=('clearance-and-sale-bikes','mountain-bikes','santa-cruz-bikes-on-sale',
                       'protective-gear','clearance-and-sale-helmets','mountain-bike-helmets'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor="mike's bikes",
-    title_part=None,type_part=mikes_part,raw_type_part=True,track_exclusions=True)
+    title_part=None,type_part=mikes_part,raw_type_part=True,track_exclusions=True,
+    # Whole catalog too: 18 listable markdowns sat outside these collections (audit 2026-11-06).
+    whole_site=True,
+)
 # Cambria (issue #165): one sale collection per part. Types name the
 # discipline ("MTB Cassettes", "Road Cassettes", "MTB/Road Chains"); the MTB
 # rules drop road/gravel/BMX ones and road groupsets filed under shared types.
