@@ -29,6 +29,9 @@ class SportMatchTests(unittest.TestCase):
             (item("Colorado Cyclist", "Maxxis High Roller III Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+",
                   "Maxxis", "Tires"),
              item("The Lost Co.", "Maxxis High Roller III - 29x2.4 - 3C MaxxGrip / EXO+", "Maxxis", "Tires")),
+            # Model years group together (owner, 2026-11-06: the Hawx Magna 130 S).
+            (item("evo", "Atomic Hawx Magna 130 S Ski Boots 2026", "Atomic", "Boots"),
+             item("Gear West", "Atomic Hawx Magna 130 S Ski Boot 2027", "Atomic", "Boots")),
             (item("Albe's BMX", "Haro La Bastille Pivotal Seat", "Haro", "Seating"),
              item("Haro", "Haro La Bastille Pivotal Seat", "Haro", "Seating")),
         ]
@@ -42,7 +45,6 @@ class SportMatchTests(unittest.TestCase):
             ("Dragon DX3 OTG Goggles", "Dragon DX3 Plus OTG Goggles 2025", "Dragon", "Protection"),
             ("Atomic Savor Amid Helmet", "Atomic Savor GT Amid 2026", "Atomic", "Helmets"),
             ("Smith 4D MAG Goggles", "Smith I/O MAG XL Goggles", "Smith", "Protection"),
-            ("Atomic Hawx Prime 120 S Ski Boots 2026", "Atomic Hawx Prime 120 S Ski Boots 2025", "Atomic", "Boots"),
             ("Atomic Hawx Prime 95 BOA Ski Boots", "Atomic Hawx Prime 95 BOA W Ski Boots - Women's", "Atomic", "Boots"),
             ("Atomic Hawx Ultra 85 Ski Boots", "Atomic Hawx Ultra 85 Ski Boots - Used", "Atomic", "Boots"),
             ("K2 Mindbender 90C Skis", "K2 Mindbender 90C Skis w/ Quikclick Bindings", "K2", "Skis"),
@@ -72,3 +74,16 @@ class SportMatchTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AcrossYearsTests(unittest.TestCase):
+    def test_hawx_magna_130_s_at_three_stores(self):
+        items = [item("evo", "Atomic Hawx Magna 130 S Ski Boots 2026", "Atomic", "Boots", "379.95"),
+                 item("Christy Sports", "Atomic Hawx Magna 130 S Ski Boots", "Atomic", "Boots", "424.97"),
+                 item("Gear West", "Atomic Hawx Magna 130 S Ski Boot 2027", "Atomic", "Boots", "799.95"),
+                 item("Christy Sports", "Atomic Hawx Magna 130 S Wide Ski Boots", "Atomic", "Boots", "473.97")]
+        groups = matching.sport_groups(items, apply_filters=False)
+        self.assertEqual(len(groups), 1)
+        self.assertEqual(sorted(o["store"] for o in groups[0]["offers"]), ["Christy Sports", "Gear West", "evo"])
+        self.assertEqual(groups[0]["cheapest_price"], 379.95)
+        self.assertNotIn("Wide", " ".join(o["name"] for o in groups[0]["offers"]), "Wide is its own boot")
