@@ -179,3 +179,14 @@ class NewestSectionsFirstTests(unittest.TestCase):
         found = sale_watch.shopify_sections(base, set(), pages.get, sale_re=s.SPORT_SALE_HANDLE,
                                             ignore=s.SPORT_IGNORE, limit=3)
         self.assertEqual(found[0]["url"], f"{base}/collections/up-to-60-off-snow")
+
+
+class HomepageSaleTests(unittest.TestCase):
+    def test_a_hidden_sale_collection_is_found_on_the_homepage(self):
+        base = "https://evo.example"
+        html = ('<a href="/collections/up-to-60-off-snow?hero">Up to 60% off</a>'
+                '<a href="https://evo.example/collections/mens-jackets-sale">Jackets</a>'
+                '<a href="/collections/skis">Skis</a><a href="/collections/new-arrivals">New</a>')
+        pages = {f"{base}/robots.txt": "User-agent: *\nAllow: /", f"{base}/": html}
+        found = s.homepage_sale_collections(base, {"skis"}, pages.get)
+        self.assertEqual(found, [f"{base}/collections/up-to-60-off-snow"])

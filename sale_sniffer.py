@@ -197,6 +197,27 @@ def sport_sources():
             for name, base, handles in sport_shops() for handle in sorted(handles)]
 
 
+def homepage_sale_collections(base, read_handles, fetch=_get):
+    """Sale-like collections the store's homepage links to and we don't read.
+
+    Some stores launch a sale in a collection their public collection list
+    doesn't include (evo's 3,500 collections leave out "up-to-60-off-snow");
+    the homepage's sale banner links to it."""
+    import sale_watch
+    if not sale_watch._allowed(base, "/", fetch):
+        return []
+    html = fetch(base.rstrip("/") + "/") or ""
+    found = []
+    for handle in re.findall(r'href="(?:https?://[^"/]+)?/collections/([a-z0-9][a-z0-9-]*)', html, re.I):
+        handle = handle.lower()
+        if handle in read_handles or not SPORT_SALE_HANDLE.search(handle) or SPORT_IGNORE.search(handle):
+            continue
+        url = f"{base.rstrip('/')}/collections/{handle}"
+        if url not in found:
+            found.append(url)
+    return found
+
+
 def read_sport_signals(fetch=_get, sleep=time.sleep, shops=None):
     """Sale collection sizes and new sale-like collections at the BMX/Ski/MTB shops."""
     import sale_watch
@@ -213,7 +234,12 @@ def read_sport_signals(fetch=_get, sleep=time.sleep, shops=None):
             logger.info("sniff: sections at %s skipped: %s", name, exc)
             continue
         urls += [entry["url"] for entry in found]
-    result["sections"] = sorted(urls)
+        sleep(DELAY)
+        try:
+            urls += homepage_sale_collections(base, handles, fetch)
+        except Exception as exc:
+            logger.info("sniff: homepage of %s skipped: %s", name, exc)
+    result["sections"] = sorted(set(urls))
     return result
 
 
