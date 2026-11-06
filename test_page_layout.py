@@ -473,22 +473,29 @@ class SliderSpacingTests(unittest.TestCase):
             path = Path(directory) / "slider.html"
             path.write_text(markup, encoding="utf-8")
             for width in (1280, 390):
-                command = [
-                    "google-chrome", "--headless=new", "--disable-gpu", "--no-sandbox",
-                    "--disable-dev-shm-usage", f"--user-data-dir={directory}/chrome-{width}",
-                    f"--window-size={width},800", "--virtual-time-budget=1000",
-                    "--dump-dom", path.as_uri(),
-                ]
-                # Headless Chrome prints the DOM and then lingers on DBus.
-                proc = subprocess.Popen(
-                    command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                    text=True, start_new_session=True,
-                )
-                try:
-                    rendered, _err = proc.communicate(timeout=20)
-                except subprocess.TimeoutExpired:
-                    os.killpg(proc.pid, signal.SIGKILL)
-                    rendered, _err = proc.communicate()
+                # A slow Chrome start on a busy CI runner can print nothing:
+                # try again with a fresh profile; a page that renders but is
+                # wrong still fails.
+                rendered = ""
+                for attempt in range(3):
+                    command = [
+                        "google-chrome", "--headless=new", "--disable-gpu", "--no-sandbox",
+                        "--disable-dev-shm-usage", f"--user-data-dir={directory}/chrome-{width}-{attempt}",
+                        f"--window-size={width},800", "--virtual-time-budget=1000",
+                        "--dump-dom", path.as_uri(),
+                    ]
+                    # Headless Chrome prints the DOM and then lingers on DBus.
+                    proc = subprocess.Popen(
+                        command, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+                        text=True, start_new_session=True,
+                    )
+                    try:
+                        rendered, _err = proc.communicate(timeout=40)
+                    except subprocess.TimeoutExpired:
+                        os.killpg(proc.pid, signal.SIGKILL)
+                        rendered, _err = proc.communicate()
+                    if "data-ok=" in (rendered or ""):
+                        break
                 self.assertIn('data-ok="yes"', rendered or "", f"width {width}: {(rendered or '')[-400:]}")
 
 
