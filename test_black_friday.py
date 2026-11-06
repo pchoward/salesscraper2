@@ -155,3 +155,12 @@ class CCSCompletesTests(unittest.TestCase):
         self.assertTrue(ccs._catalog_match(complete, "Completes"))
         self.assertFalse(ccs._catalog_match(deck, "Completes"))
         self.assertTrue(ccs._catalog_match({"title": "Toy Machine Skateboard Complete 8.0", "product_type": ""}, "Completes"))
+
+
+class FanatikWholeSiteTests(unittest.TestCase):
+    def test_fanatik_reads_its_whole_catalog(self):
+        # Owner, 2026-11-06: Fanatik's TRP 20%-off promo sat in brakes-drivetrain,
+        # outside the outlet we read (35 deals listed; 511 with the whole catalog).
+        from sports.mtb import stores
+        self.assertEqual(stores.FANATIK.sale_jsons[-1], "https://www.fanatikbike.com/products.json")
+        self.assertIn("https://www.fanatikbike.com/collections/fanatik-outlet/products.json", stores.FANATIK.sale_jsons)

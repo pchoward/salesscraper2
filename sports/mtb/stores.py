@@ -34,9 +34,13 @@ WORLDWIDE=shopify.ShopifyStore('Worldwide Cyclery','Worldwide Cyclery','https://
     title_part=title_part,type_part=title_part,unknown_by_title=True)
 # Protection (2026-11-03): each store's protection and helmet collections are
 # read too; as everywhere, only marked-down variants are listed.
+# Whole catalog too (2026-11-06): its TRP brake and drivetrain promo (20% off
+# to Nov 30) and ~170 other markdowns sit in brakes-drivetrain/drivetrain,
+# not the outlet; the catalog is ~18 pages, and a Black Friday collection is
+# ready to fill. Only marked-down variants are listed, as everywhere.
 FANATIK=shopify.ShopifyStore('Fanatik','Fanatik','https://www.fanatikbike.com',
     collection='fanatik-outlet',more_collections=('on-sale-protection','on-sale-helmets','mountain-bike-protection'),types=TYPES,brand_of=brands.for_sport(sports.MTB),own_vendor='fanatik',
-    title_part=title_part,type_part=title_part,unknown_by_title=True)
+    title_part=title_part,type_part=title_part,unknown_by_title=True,whole_site=True)
 
 
 def mikes_part(product_type):
