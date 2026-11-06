@@ -172,7 +172,8 @@ SPORT_SALE_HANDLE = re.compile(
 # Clothing and the like are not in the BMX/Ski/MTB catalogs; snow and ski are.
 SPORT_IGNORE = re.compile(
     r"jacket|pant|shirt|tee|hood|sock|hat|beanie|underwear|fleece|base-?layer|midlayer|outerwear|apparel|"
-    r"clothing|swim|sandal|footwear|shoe|gift|test|do-not-use|road|gravel|triathlon", re.I)
+    r"clothing|swim|sandal|footwear|shoe|gift|test|do-not-use|road|gravel|triathlon|"
+    r"muc-?off|off-?road|kick-?off|off-?set", re.I)  # "off" inside a brand or word, not "N% off"
 SECTIONS_PER_STORE = 8
 
 

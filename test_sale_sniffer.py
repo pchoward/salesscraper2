@@ -130,7 +130,7 @@ class PagesGuardTests(unittest.TestCase):
 class SportsScopeTests(unittest.TestCase):
     def test_sale_names_for_the_sport_shops(self):
         keep = ("up-to-60-off-snow", "fanatik-black-friday", "past-season-skis", "bike-sale", "clearance")
-        drop = ("mens-jackets-sale", "road-bike-sale", "snow-helmets", "new-arrivals", "base-layer-sale")
+        drop = ("mens-jackets-sale", "road-bike-sale", "snow-helmets", "new-arrivals", "base-layer-sale", "muc-off")
         for handle in keep:
             self.assertTrue(s.SPORT_SALE_HANDLE.search(handle) and not s.SPORT_IGNORE.search(handle), handle)
         for handle in drop:
