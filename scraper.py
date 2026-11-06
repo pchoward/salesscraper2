@@ -242,6 +242,7 @@ def _run(args, sport):
             site_sales=updates.get("site_sales"),
             scanned_at=scanned_at,
             failed_keys=failed_keys,
+            sport=sport,
         )
     except Exception as exc:
         logging.error("Digest extras failed (continuing): %s", exc)

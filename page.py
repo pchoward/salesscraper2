@@ -1481,7 +1481,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         logger.error("Site-sale line failed: %s", exc)
         sales = []
     try:
-        groups = list(getattr(digest, "cross_store", None) or []) or cross_store_groups(products)
+        groups = list(getattr(digest, "cross_store", None) or []) or cross_store_groups(products, sport=sport)
     except Exception as exc:
         logger.error("Cross-store groups failed: %s", exc)
         groups = []

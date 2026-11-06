@@ -174,6 +174,7 @@ def decorate_digest(
     site_sales=None,
     scanned_at=None,
     failed_keys=None,
+    sport=None,
 ):
     """Attach warnings, all-time lows, and cross-store groups. Never raises.
 
@@ -210,7 +211,7 @@ def decorate_digest(
             if not isinstance(change, dict):
                 continue
             change["at_all_time_low"] = stamp(change.get("item") or {})
-        digest.cross_store = cross_store_groups(products)
+        digest.cross_store = cross_store_groups(products, sport=sport)
     except Exception as exc:
         logger.error("Price extras failed (continuing): %s", exc)
         if not getattr(digest, "all_time_lows", None):

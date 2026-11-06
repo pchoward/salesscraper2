@@ -645,14 +645,178 @@ def _merge_contained(infos_by_key):
     return {key: find(key) for key in root}
 
 
-def cross_store_groups(items, explain=False, apply_filters=True):
+# ---- BMX, Ski, MTB --------------------------------------------------------
+# A listing there is a whole product with its sizes as variants, so the
+# identity is the brand plus the model words. Model numbers are part of the
+# model (flex 100 vs 110, Forefront 2 vs 3); sizes with units are not, except
+# for tires and wheels, which stores list one size at a time.
+
+SPORT_COLORS = LOOSE_IGNORED | frozenset({
+    "matt", "matte", "gloss", "glossy", "satin", "charcoal", "olive", "sand", "stone", "camo", "heather",
+    "bronze", "copper", "burgundy", "maroon", "slate", "smoke", "titanium", "chrome",
+})
+# Words that name the kind of product, not the model: dropped.
+SPORT_GENERIC = frozenset(
+    "bike bikes complete frame frames fork forks helmet helmets tire tires tyre tyres wheelset ski skis "
+    "boot boots pole poles goggle goggles seat seats saddle grips grip bar bars handlebar "
+    "handlebars stem stems mtb bmx mountain new the with for and of by in on set pair mens men unisex adult "
+    "adults prior past season archive collection alpine touring snow winter dirt jump full face".split())
+# Words that say which component or body part: both listings need the same
+# ones ("Brake" vs "Brake Pads", "Knee" vs "Elbow/Knee").
+SPORT_TYPES = frozenset(
+    "pad guard rotor lever assembly caliper hose cable housing spring hanger pulley kit chainring cassette "
+    "derailleur shifter crankset crank arm spindle bracket bb tube valve sealant insert hub axle spacer "
+    "bearing replacement service cover spoke nipple rim liner short jersey glove sleeve knee elbow shin leg "
+    "chest back vest jacket wrist ankle hip brake pedal sprocket chain wheel dropper seatpost post shock "
+    "binding".split())
+# A word only one listing has that makes it a different model.
+SPORT_LINE_WORDS = frozenset(
+    "xtd pro xt lt lite light carbon alloy al team elite race comp sl hv mv lv wide plus xl ti gt jr junior "
+    "youth max ultra evo rs boa".split())
+_SPORT_SIZE_RE = re.compile(r"\b\d+(?:\.\d+)?\s*(?:mm|cm|in|lbs?|g)\b|\b\d+\.\d+\b|\b\d+(?:\.\d+)?\s*x\s*\d+(?:\.\d+)?\b"
+                            r"|\b\d+(?:\.\d+)?\s*[\"”]", re.I)
+_TIRE_SIZE_RE = re.compile(r"\b(\d{2}(?:\.\d+)?)\s*(?:[\"”]|in)?\s*x\s*(\d(?:\.\d+)?)\b", re.I)
+# XL stays: a goggle or helmet "XL" is its own frame, not a size variant.
+_SPORT_SIZES = frozenset("xs s m l xxl xxxl sm md lg small medium large regular".split())
+_WOMENS_RE = re.compile(r"\bwom[ae]n'?s?\b|\bwmns\b|\bladies\b|\bw\b", re.I)
+_KIDS_RE = re.compile(r"\bkids?'?\b|\byouth\b|\bjunior\b|\bjr\.?(?=\s|$)|\btoddler\b|\bboys?'?\b|\bgirls?'?\b", re.I)
+_USED_RE = re.compile(r"\bused\b|\bdemo\b|\bblem(?:ished)?\b|\brefurb(?:ished)?\b|\bscratch\s*(?:&|and)?\s*dent\b", re.I)
+_YEAR_RE = re.compile(r"\b(20[1-3]\d)(?:/(?:20)?\d\d)?\b")
+_SIZED_PARTS = frozenset({"Tires", "Wheels"})
+
+
+def _singular(word):
+    return word[:-1] if len(word) > 3 and word.endswith("s") and not word.endswith("ss") else word
+
+
+def describe_sport_item(item):
+    """Brand, model words, type words, sizes and flags of a BMX, Ski or MTB listing, or None."""
+    if not isinstance(item, dict):
+        return None
+    brand = str(item.get("brand") or "").strip()
+    name = normalize_product_name(item.get("name") or "")
+    part = item.get("part") or ""
+    if not brand or not name:
+        return None
+    text = _strip_accents(name)
+    years = set(_YEAR_RE.findall(text))
+    flags = {"womens": bool(_WOMENS_RE.search(text)), "kids": bool(_KIDS_RE.search(text)),
+             "used": bool(_USED_RE.search(text))}
+    sizes = set()
+    if part in _SIZED_PARTS:
+        sizes = {f"{float(a):g}x{float(b):g}" for a, b in _TIRE_SIZE_RE.findall(text)}
+        sizes |= {f"{float(v):g}in" for v in re.findall(r"\b(20|24|26|27\.5|29|700)\s*(?:[\"”]|in\b|c\b)", text)}
+    text = _YEAR_RE.sub(" ", text)
+    text = _SPORT_SIZE_RE.sub(" ", text)
+    text = _APOSTROPHE_RE.sub("", text)
+    text = re.sub(r"\b([A-Za-z])/([A-Za-z])\b", r"\1\2", text)  # "I/O" -> "IO", "S/Pro" -> "SPro"
+    for word in re.findall(r"[A-Za-z0-9]+", brand):
+        text = re.sub(rf"\b{re.escape(word)}\b", " ", text, count=1, flags=re.I)
+    words, types = [], set()
+    for raw in re.findall(r"[A-Za-z0-9]+", text):
+        token = _fold(raw)
+        if (len(token) < 2 and not token.isdigit()) or token in SPORT_COLORS or token in SPORT_GENERIC \
+                or token in _SPORT_SIZES or _WOMENS_RE.fullmatch(token) or _KIDS_RE.fullmatch(token) \
+                or _USED_RE.fullmatch(token):
+            continue
+        if _singular(token) in SPORT_TYPES:
+            types.add(_singular(token))
+            continue
+        if token not in words:
+            words.append(token)
+    return {"part": part, "brand": brand, "brand_key": brand_key(brand), "words": words, "types": types,
+            "sizes": sizes, "years": years, "flags": flags, "label": " ".join([brand] + words[:6])}
+
+
+def _sport_compatible(a, b):
+    if a["part"] != b["part"] or a["brand_key"] != b["brand_key"] or a["flags"] != b["flags"]:
+        return False
+    if a["types"] != b["types"] or a["sizes"] != b["sizes"]:
+        return False
+    return not (a["years"] and b["years"] and not a["years"] & b["years"])
+
+
+def _sport_fits(small, big):
+    """Every model word of ``small`` is in ``big``; the extra words carry no
+    digit (2, 4D, V2) and no line word (Plus, GT, XTD, BOA), at most three."""
+    small_words, big_words = set(small["words"]), set(big["words"])
+    if not small_words or not small_words <= big_words:
+        return False
+    extra = big_words - small_words
+    if len(extra) > 3 or any(any(ch.isdigit() for ch in word) or word in SPORT_LINE_WORDS for word in extra):
+        return False
+    return sum(1 for word in small_words if _token_is_specific(word)) >= 2
+
+
+def sport_groups(items, explain=False, apply_filters=True):
+    """Cross-store groups for BMX, Ski and MTB listings.
+
+    Same part, brand, component/body-part words, tire size, women's/kids'/used
+    flags and (when stated) model year; one listing's model words all within
+    the other's, so a colour suffix ("- Matt Black") doesn't split them. A
+    listing joins only when it fits exactly one product and agrees with every
+    listing already in it, so a vague name never chains two products. Prices
+    compared are each store's lowest (its cheapest variant).
+    """
+    entries = []
+    for item in items or []:
+        if apply_filters and not item_passes_filters(item):
+            continue
+        info = describe_sport_item(item)
+        price = _price(item.get("price_new"))
+        store = item.get("store") or ""
+        if info is None or price is None or not store:
+            continue
+        if sum(1 for word in info["words"] if _token_is_specific(word)) < 2:
+            continue
+        entries.append((item, info, price, store))
+    order = sorted(range(len(entries)), key=lambda i: (-len(entries[i][1]["words"]), i))
+    members = {}
+    for index in order:
+        info = entries[index][1]
+        fits = [root for root, group in members.items()
+                if _sport_fits(info, entries[root][1])
+                and all(_sport_compatible(info, entries[member][1]) for member in group)]
+        if len(fits) == 1:
+            members[fits[0]].append(index)
+        else:
+            members[index] = [index]
+    groups = []
+    for root, group in members.items():
+        by_store = {}
+        for index in group:
+            item, _, price, store = entries[index]
+            offer = {"store": store, "price": price, "url": item.get("url") or "",
+                     "name": normalize_product_name(item.get("name") or "")}
+            current = by_store.get(store)
+            if current is None or (price, offer["url"]) < (current["price"], current["url"]):
+                by_store[store] = offer
+        if len(by_store) < 2:
+            continue
+        info = entries[root][1]
+        offers = [by_store[store] for store in sorted(by_store)]
+        built = {"key": "sport|" + "|".join([info["part"], info["brand_key"], *sorted(info["words"])]),
+                 "part": info["part"], "label": info["label"], "offers": offers,
+                 "cheapest_price": min(offer["price"] for offer in offers)}
+        if explain:
+            built["explanation"] = {"part": info["part"], "brand": info["brand"], "model_words": list(info["words"]),
+                                    "years": sorted(info["years"]), "flags": info["flags"]}
+        groups.append(built)
+    groups.sort(key=lambda g: (g["part"], -(max(o["price"] for o in g["offers"]) - g["cheapest_price"]), g["label"]))
+    return groups
+
+
+def cross_store_groups(items, explain=False, apply_filters=True, sport=None):
     """Groups of the same product in at least two stores. Cheapest price included.
 
     With ``explain=True`` each group also carries ``explanation``: the part,
     brand, sizes, and model words every offer in it shares.
     ``apply_filters=False`` skips the store filters, for reviewing price
-    history, which has no original prices.
+    history, which has no original prices. ``sport``: BMX, Ski or MTB use
+    ``sport_groups``; Skate (the default) is matched as below.
     """
+    if sport is not None and not getattr(sport, "is_default", True):
+        return sport_groups(items, explain=explain, apply_filters=apply_filters)
     buckets = {}
     labels = {}
     for item in items or []:
