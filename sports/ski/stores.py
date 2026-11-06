@@ -96,6 +96,8 @@ GEAR_WEST = shopify.ShopifyStore(
     details=details,
     track_exclusions=True,
     unknown_by_title=True,
+    # Whole catalog too: 9 listable markdowns (next-season skis) sat outside these collections (audit 2026-11-06).
+    whole_site=True,
 )
 
 def utah_part(tags):

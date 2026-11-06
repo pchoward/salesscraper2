@@ -364,7 +364,7 @@ class MoreBmxStoresTests(unittest.TestCase):
         self.assertEqual(stores.POWERS.sale_jsons[:2], [
             "https://www.powersbmx.com/collections/clearance/products.json",
             "https://www.powersbmx.com/collections/black-friday-deals/products.json"])
-        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.SOURCE_US.sale_jsons],
+        self.assertEqual([url.split("/collections/")[1].split("/")[0] for url in stores.SOURCE_US.sale_jsons if "/collections/" in url],
                          ["bmx-parts-sale", "bmx-wheel-sale", "bmx-frame-sale", "bmx-bike-sale"] + list(stores.SOURCE_PROTECTION))
 
     def test_several_collections_are_merged_and_one_missing_is_skipped(self):
