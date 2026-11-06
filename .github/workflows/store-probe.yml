@@ -42,6 +42,7 @@ jobs:
           URLS: ${{ inputs.urls }}
         run: |
           set -euo pipefail
+          if [ "$URLS" = research ]; then pip install -q -r requirements.txt; python -m audit.priority_a; exit 0; fi
           args=(--sport "$SPORT" --json probe.json --summary "$GITHUB_STEP_SUMMARY")
           for url in $URLS; do args+=(--url "$url"); done
           python -m audit.store_probe "${args[@]}"
