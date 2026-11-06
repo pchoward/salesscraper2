@@ -324,6 +324,29 @@ def _unknown_deck_brand(text):
     return first
 
 
+def _data_width(item):
+    """The store's own single deck width (variant data) when the name has none.
+
+    Several widths (one listing for every size) are not one product size, so
+    they give nothing.
+    """
+    values = []
+    raw = item.get("widths")
+    if isinstance(raw, (list, tuple)):
+        values = list(raw)
+    elif item.get("size") not in (None, ""):
+        values = [item.get("size")]
+    widths = set()
+    for value in values:
+        try:
+            number = float(str(value).strip().rstrip('"'))
+        except (TypeError, ValueError):
+            continue
+        if 6.5 <= number <= 11.5:
+            widths.add(number)
+    return widths.pop() if len(widths) == 1 else None
+
+
 def _whole(value):
     """``{int(value)}`` when value is a whole number, else an empty set."""
     try:
@@ -376,6 +399,10 @@ def describe_item(item):
     if part_key == "decks":
         brand = find_brand(text, DECK_BRANDS) or _unknown_deck_brand(text)
         width, length = extract_deck_dimensions(text)
+        if width is None:
+            width = _data_width(item)
+            if width is not None:
+                info["size_from_data"] = True
         if width is None:
             problems.append("no deck width in the name")
         else:
@@ -539,6 +566,85 @@ def explain_match(left, right):
     }
 
 
+# Words that name a colour or a pack, not a product: ignored when one name's
+# words are compared with another's (decks and trucks only).
+LOOSE_IGNORED = frozenset({
+    "black", "white", "red", "blue", "green", "yellow", "pink", "purple", "orange", "grey", "gray", "navy",
+    "tan", "brown", "gold", "silver", "teal", "mint", "lime", "cream", "natural", "clear", "multi",
+    "assorted", "prismatic", "polished", "raw", "pair", "set",
+})
+# Parts where one listing's words may be a subset of another's. Bearings and
+# wheels stay exact: "Bronson G3" is not the "Bronson x Fucking Awesome G3"
+# edition, and wheel colour treatments are different products. Trucks stay
+# exact too: Zumiez sells one truck ("Ace 60 AF1 ... Truck", $19.99) where
+# other stores sell a pair, so a looser match would compare unlike prices.
+LOOSE_PARTS = frozenset({"Decks"})
+
+
+def _loose_words(info):
+    """(words, joined): an item's model words without colours, and adjacent
+    pairs written together ("toy box" -> "toybox"), in the order written."""
+    ordered = [_ABBREVIATIONS.get(_fold(word), _fold(word)) for word in info.get("model_words") or []]
+    ordered = [word for word in ordered if word and word not in LOOSE_IGNORED]
+    words = set(word for word in ordered if word in set(info.get("model") or ()))
+    joined = {a + b for a, b in zip(ordered, ordered[1:])}
+    return words, joined
+
+
+def _contained(small, big):
+    """True when every word of ``small`` is in ``big`` (either may join two
+    adjacent words into one) and ``small`` keeps two specific words."""
+    small_words, small_joined = small
+    big_words, big_joined = big
+    covered = set()
+    for word in small_words:
+        if word in big_words or word in big_joined:
+            covered.add(word)
+    # "toy" + "box" in the short name, "toybox" in the long one.
+    for pair in small_joined:
+        if pair in big_words:
+            covered.update(word for word in small_words if pair.startswith(word) or pair.endswith(word))
+    if covered != small_words:
+        return False
+    return sum(1 for word in small_words if _token_is_specific(word)) >= 2
+
+
+def _merge_contained(infos_by_key):
+    """{key: root key}: a deck whose words fit inside exactly one other
+    listing of the same brand and width joins it (one candidate only, so a
+    vague name never chains two different decks together)."""
+    root = {key: key for key in infos_by_key}
+    classes = {}
+    for key, info in infos_by_key.items():
+        if info["part"] not in LOOSE_PARTS:
+            continue
+        size_key = key.split("|")[2]
+        classes.setdefault((info["part"], info["brand_key"], size_key), []).append(key)
+    for keys in classes.values():
+        loose = {key: _loose_words(infos_by_key[key]) for key in keys}
+        for key in keys:
+            same = [other for other in keys if other != key and loose[other][0] == loose[key][0]]
+            if same:
+                # Identical once colours are set aside ("Nuevo Script" /
+                # "Nuevo Script Blue"): all join the first key.
+                first = min([key] + same)
+                if first != key and _contained(loose[key], loose[first]):
+                    root[key] = first
+                continue
+            fits = [other for other in keys if other != key and len(loose[key][0]) < len(loose[other][0])
+                    and _contained(loose[key], loose[other])]
+            if len(fits) == 1:
+                root[key] = fits[0]
+    # Follow chains to their end (a contained in b contained in c).
+    def find(key):
+        seen = set()
+        while root[key] != key and key not in seen:
+            seen.add(key)
+            key = root[key]
+        return key
+    return {key: find(key) for key in root}
+
+
 def cross_store_groups(items, explain=False, apply_filters=True):
     """Groups of the same product in at least two stores. Cheapest price included.
 
@@ -578,6 +684,22 @@ def cross_store_groups(items, explain=False, apply_filters=True):
             buckets[key][store] = offer
             labels.setdefault(key, {})[store] = info
 
+    # Decks and trucks named with more or fewer words at different stores
+    # ("Opera Trey Lightning" / "Opera Trey Wood Lightning") join one group.
+    infos_by_key = {key: next(iter(by_store.values())) for key, by_store in labels.items()}
+    roots = _merge_contained(infos_by_key)
+    merged, merged_labels, loose_keys = {}, {}, set()
+    for key, by_store in buckets.items():
+        target = roots.get(key, key)
+        if target != key:
+            loose_keys.add(target)
+        for store, offer in by_store.items():
+            current = merged.setdefault(target, {}).get(store)
+            if current is None or (offer["price"], offer["url"]) < (current["price"], current["url"]):
+                merged[target][store] = offer
+                merged_labels.setdefault(target, {})[store] = labels[key][store]
+    buckets, labels = merged, merged_labels
+
     groups = []
     for key, by_store in buckets.items():
         if len(by_store) < 2:
@@ -601,6 +723,8 @@ def cross_store_groups(items, explain=False, apply_filters=True):
                 "sizes": dict(info["sizes"]),
                 "model_words": list(info["model_words"]),
             }
+            if key in loose_keys:
+                group["explanation"]["match"] = "one store's name has extra words (rider surname, colour)"
         groups.append(group)
 
     def sort_key(group):
