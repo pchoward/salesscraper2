@@ -165,3 +165,17 @@ class SportsScopeTests(unittest.TestCase):
         self.assertEqual(new["skate"], {"last": {"counts": {"TGM:sale": 1}}, "triggers": ["t"]})
         self.assertEqual(new["pages_retries"], {"9": 1})
         self.assertEqual(s.split_state(new), new)
+
+
+class NewestSectionsFirstTests(unittest.TestCase):
+    def test_a_new_sale_wins_over_old_promos_under_the_cap(self):
+        import sale_watch
+        base = "https://evo.example"
+        old = [{"handle": f"{n}-off-one-full-price-item", "published_at": f"2025-0{n % 9 + 1}-01"} for n in range(10, 22)]
+        new = {"handle": "up-to-60-off-snow", "published_at": "2026-11-06T08:00:00"}
+        down = json.dumps({"products": [{"id": 1, "variants": [{"price": "40.00", "compare_at_price": "100.00"}]}]})
+        pages = {f"{base}/robots.txt": "", f"{base}/collections.json?limit=250": json.dumps({"collections": old + [new]})}
+        pages.update({f"{base}/collections/{c['handle']}/products.json?limit=250": down for c in old + [new]})
+        found = sale_watch.shopify_sections(base, set(), pages.get, sale_re=s.SPORT_SALE_HANDLE,
+                                            ignore=s.SPORT_IGNORE, limit=3)
+        self.assertEqual(found[0]["url"], f"{base}/collections/up-to-60-off-snow")
