@@ -6,6 +6,8 @@ name: Scraper - Flash Sale Check
 # section appears (sale_sniffer.py). At most 3 triggered scrapes a day,
 # 3 hours apart, never while a Skate scrape is queued or running. The last
 # check lives in the workflow cache; nothing is committed or emailed.
+# It also re-runs the site's latest Pages deploy if it failed (at most twice
+# per deploy), so a GitHub-side timeout can't leave the live site stale.
 on:
   schedule:
     - cron: '23 */2 * * *'

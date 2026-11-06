@@ -89,3 +89,39 @@ class WorkflowTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PagesGuardTests(unittest.TestCase):
+    def gh(self, runs, posted):
+        def call(args):
+            if args[0] == "-X":
+                posted.append(args[-1])
+                return {}
+            return {"workflow_runs": runs}
+        return call
+
+    def test_failed_deploy_is_rerun_at_most_twice(self):
+        runs = [{"id": 7, "name": "pages build and deployment", "status": "completed", "conclusion": "failure",
+                 "head_sha": "8dd0dfc123"}]
+        posted, state = [], {}
+        for _ in range(3):
+            state, line = s.pages_guard(state, "o/r", gh=self.gh(runs, posted))
+        self.assertEqual(posted, ["repos/o/r/actions/runs/7/rerun-failed-jobs"] * 2)
+        self.assertIn("leaving it for a person", line)
+
+    def test_healthy_or_running_deploys_are_left_alone(self):
+        for run in ({"conclusion": "success", "status": "completed"}, {"conclusion": None, "status": "in_progress"}):
+            posted = []
+            _, line = s.pages_guard({}, "o/r", gh=self.gh([dict(run, id=1, name="pages build and deployment")], posted))
+            self.assertEqual((posted, line), ([], ""))
+        older_failure = [{"id": 2, "name": "pages build and deployment", "status": "completed", "conclusion": "success"},
+                         {"id": 1, "name": "pages build and deployment", "status": "completed", "conclusion": "failure"}]
+        posted = []
+        s.pages_guard({}, "o/r", gh=self.gh(older_failure, posted))
+        self.assertEqual(posted, [], "only the latest deploy matters")
+
+    def test_a_broken_gh_never_fails_the_check(self):
+        def broken(args):
+            raise RuntimeError("HTTP 403")
+        state, line = s.pages_guard({}, "o/r", gh=broken)
+        self.assertIn("skipped", line)
