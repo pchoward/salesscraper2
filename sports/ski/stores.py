@@ -180,7 +180,30 @@ def _brand_stores():
 
 
 BRAND_STORES = _brand_stores()
-STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES
+
+# Smith's snow goggles and helmets (owner, 2026-11-06). Its titles don't say
+# what the product is ("4D MAG - Past Season") and past-season pieces leave
+# the snow collections, but its product types do: Goggles are Protection
+# (bike goggles like "Rhythm MTB" are dropped by the Ski rules), and a Helmet
+# counts only when it is one of Smith's snow models; the bike helmets
+# (Forefront, Mainline, Payroll, Session...) and unknown models stay out.
+# Sunglasses and RX frames have no part. The catalog is ~3 pages: all of it.
+SMITH_SNOW_HELMETS = frozenset(
+    "survey method liberty descend level vantage altus mission nexus rodeo scout holt code mirage allure "
+    "quantum maze gage zoom glide compass".split())
+
+
+def smith_helmet_part(title):
+    words = {word.casefold() for word in re.findall(r"[A-Za-z]+", str(title or ""))}
+    return "Helmets" if words & SMITH_SNOW_HELMETS else None
+
+
+SMITH = shopify.ShopifyStore(
+    "Smith", "Smith", "https://www.smithoptics.com", collection="sale-goggles",
+    types={"goggles": "Protection", "helmet": shopify.BY_TITLE}, title_part=smith_helmet_part,
+    brand_of=brands.for_sport(sports.SKI), details=details, track_exclusions=True, whole_site=True)
+
+STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES + (SMITH,)
 
 
 def scrapers():
