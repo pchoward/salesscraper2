@@ -6954,14 +6954,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 86,
+          "count": 85,
           "failed": false,
           "diagnostics": {
             "expected_count": 86.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 0.0,
-            "actual_count": 86,
-            "percentage_change": 0.0,
+            "actual_count": 85,
+            "percentage_change": -1.2,
             "reason": "normal_variation"
           }
         },
@@ -7590,14 +7590,14 @@
           }
         },
         "Mike's Bikes_Bikes": {
-          "count": 55,
+          "count": 54,
           "failed": false,
           "diagnostics": {
             "expected_count": 56.5,
             "baseline_samples": 4,
             "median_absolute_deviation": 0.5,
-            "actual_count": 55,
-            "percentage_change": -2.7,
+            "actual_count": 54,
+            "percentage_change": -4.4,
             "reason": "normal_variation"
           }
         },
@@ -7986,14 +7986,14 @@
           }
         },
         "The Lost Co._Drivetrain": {
-          "count": 136,
+          "count": 134,
           "failed": false,
           "diagnostics": {
             "expected_count": 135,
             "baseline_samples": 3,
             "median_absolute_deviation": 0,
-            "actual_count": 136,
-            "percentage_change": 0.7,
+            "actual_count": 134,
+            "percentage_change": -0.7,
             "reason": "normal_variation"
           }
         },
@@ -8310,7 +8310,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-06T02:01:56+00:00"
+      "scanned_at": "2026-11-06T07:04:14+00:00"
     }
   ],
   "baseline": {
@@ -8360,7 +8360,7 @@
     },
     "Mike's Bikes_Bikes": {
       "date": "2026-11-06",
-      "count": 55
+      "count": 54
     },
     "Mike's Bikes_Brakes": {
       "date": "2026-11-06",
@@ -8440,7 +8440,7 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-06",
-      "count": 86
+      "count": 85
     },
     "Worldwide Cyclery_Protection": {
       "date": "2026-11-06",
@@ -8508,7 +8508,7 @@
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-06",
-      "count": 136
+      "count": 134
     },
     "The Lost Co._Forks & Shocks": {
       "date": "2026-11-06",
@@ -9493,7 +9493,7 @@
       },
       {
         "date": "2026-11-06",
-        "count": 86
+        "count": 85
       }
     ],
     "Cambria_Tires": [
@@ -10499,7 +10499,7 @@
       },
       {
         "date": "2026-11-06",
-        "count": 55
+        "count": 54
       }
     ],
     "Mike's Bikes_Brakes": [
@@ -11129,7 +11129,7 @@
       },
       {
         "date": "2026-11-06",
-        "count": 136
+        "count": 134
       }
     ],
     "The Lost Co._Forks & Shocks": [

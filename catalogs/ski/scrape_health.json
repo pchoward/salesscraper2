@@ -2722,38 +2722,38 @@
           }
         },
         "evo_Bindings": {
-          "count": 26,
+          "count": 27,
           "failed": false,
           "diagnostics": {
             "expected_count": 25.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 0.0,
-            "actual_count": 26,
-            "percentage_change": 4.0,
+            "actual_count": 27,
+            "percentage_change": 8.0,
             "reason": "normal_variation"
           }
         },
         "evo_Boots": {
-          "count": 307,
+          "count": 308,
           "failed": false,
           "diagnostics": {
             "expected_count": 297.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 1.0,
-            "actual_count": 307,
-            "percentage_change": 3.4,
+            "actual_count": 308,
+            "percentage_change": 3.7,
             "reason": "normal_variation"
           }
         },
         "evo_Helmets": {
-          "count": 153,
+          "count": 152,
           "failed": false,
           "diagnostics": {
             "expected_count": 152.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 0.0,
-            "actual_count": 153,
-            "percentage_change": 0.7,
+            "actual_count": 152,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -2770,14 +2770,14 @@
           }
         },
         "evo_Protection": {
-          "count": 128,
+          "count": 129,
           "failed": false,
           "diagnostics": {
             "expected_count": 127,
             "baseline_samples": 3,
             "median_absolute_deviation": 0,
-            "actual_count": 128,
-            "percentage_change": 0.8,
+            "actual_count": 129,
+            "percentage_change": 1.6,
             "reason": "normal_variation"
           }
         },
@@ -2794,7 +2794,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-06T01:56:33+00:00"
+      "scanned_at": "2026-11-06T06:58:46+00:00"
     }
   ],
   "baseline": {
@@ -2828,11 +2828,11 @@
     },
     "evo_Bindings": {
       "date": "2026-11-06",
-      "count": 26
+      "count": 27
     },
     "evo_Boots": {
       "date": "2026-11-06",
-      "count": 307
+      "count": 308
     },
     "evo_Poles": {
       "date": "2026-11-06",
@@ -2896,11 +2896,11 @@
     },
     "evo_Helmets": {
       "date": "2026-11-06",
-      "count": 153
+      "count": 152
     },
     "evo_Protection": {
       "date": "2026-11-06",
-      "count": 128
+      "count": 129
     },
     "Bern_Helmets": {
       "date": "2026-11-06",
@@ -3843,7 +3843,7 @@
       },
       {
         "date": "2026-11-06",
-        "count": 26
+        "count": 27
       }
     ],
     "evo_Boots": [
@@ -3865,7 +3865,7 @@
       },
       {
         "date": "2026-11-06",
-        "count": 307
+        "count": 308
       }
     ],
     "evo_Helmets": [
@@ -3887,7 +3887,7 @@
       },
       {
         "date": "2026-11-06",
-        "count": 153
+        "count": 152
       }
     ],
     "evo_Poles": [
@@ -3927,7 +3927,7 @@
       },
       {
         "date": "2026-11-06",
-        "count": 128
+        "count": 129
       }
     ],
     "evo_Skis": [
