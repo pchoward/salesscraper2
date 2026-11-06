@@ -13,6 +13,9 @@ starts the Skate scraper. Guard rails: at most ``MAX_PER_DAY`` triggered
 scrapes per US-Eastern day, ``MIN_GAP_HOURS`` apart, and none while a Skate
 scrape is queued or running. Nothing is emailed.
 
+It also re-runs the site's Pages deploy when the latest one failed (a
+GitHub-side timeout once left the live site a day stale).
+
 ``python sale_sniffer.py --state sniff.json`` checks and prints the decision;
 ``--trigger`` also starts the scrape (the workflow passes it).
 """
@@ -159,6 +162,46 @@ def start_scrape(run=subprocess.run):
     return result.returncode == 0
 
 
+PAGES_RUN = "pages build and deployment"
+MAX_PAGES_RETRIES = 2
+
+
+def _gh_json(args, run=subprocess.run):
+    result = run(["gh", "api", *args], capture_output=True, text=True, timeout=60)
+    if result.returncode != 0:
+        raise RuntimeError((result.stderr or result.stdout or "gh api failed").strip()[:200])
+    return json.loads(result.stdout or "null")
+
+
+def pages_guard(state, repo, gh=_gh_json):
+    """Re-run the site's latest Pages deploy when it failed (2026-11-05: a
+    deploy timed out on GitHub's side and the site kept serving the previous
+    day's Skate page). Each failed run is retried at most MAX_PAGES_RETRIES
+    times. Returns (state, report line or "")."""
+    state = dict(state or {})
+    try:
+        runs = gh([f"repos/{repo}/actions/runs?branch=main&per_page=30"])["workflow_runs"]
+    except Exception as exc:
+        return state, f"Site deploy check skipped: {exc}"
+    pages = [run for run in runs if run.get("name") == PAGES_RUN]
+    if not pages:
+        return state, ""
+    latest = pages[0]
+    if latest.get("status") != "completed" or latest.get("conclusion") != "failure":
+        return state, ""
+    tried = dict(state.get("pages_retries") or {})
+    key = str(latest["id"])
+    if tried.get(key, 0) >= MAX_PAGES_RETRIES:
+        return state, f"Site deploy {key} still failing after {MAX_PAGES_RETRIES} retries; leaving it for a person."
+    try:
+        gh(["-X", "POST", f"repos/{repo}/actions/runs/{key}/rerun-failed-jobs"])
+    except Exception as exc:
+        return state, f"Site deploy {key} failed and could not be re-run: {exc}"
+    tried[key] = tried.get(key, 0) + 1
+    state["pages_retries"] = dict(list(tried.items())[-10:])
+    return state, f"Site deploy {key} (commit {str(latest.get('head_sha', ''))[:7]}) had failed: re-ran it."
+
+
 def sniff(state, now, read=read_signals, busy=scrape_busy, start=start_scrape, trigger=False):
     """Check once. Returns (new_state, report lines)."""
     state = dict(state or {})
@@ -201,6 +244,11 @@ def main(argv=None):
         state = {}
     now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
     state, lines = sniff(state, now, trigger=args.trigger)
+    repo = os.environ.get("GITHUB_REPOSITORY")
+    if args.trigger and repo:
+        state, line = pages_guard(state, repo)
+        if line:
+            lines.append(line)
     with open(args.state, "w", encoding="utf-8") as handle:
         json.dump(state, handle, indent=2, sort_keys=True)
     text = "## Flash-sale check\n\n" + "\n".join(lines) + "\n"
