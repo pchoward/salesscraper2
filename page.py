@@ -1579,8 +1579,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             abec = ""
             raw_name = item.get("name") or ""
             if item.get("part") == "Wheels":
-                from product_specs import enrich
-                enriched_specs = item if any(key in item for key in ("spec_offers", "diameters_mm", "durometers")) else enrich(dict(item))
+                enriched_specs = item
+                if not any(key in item for key in ("spec_offers", "diameters_mm", "durometers")):
+                    try:
+                        from product_specs import enrich
+                        enriched_specs = enrich(dict(item))
+                    except ImportError as exc:  # keep the wheel, read its name only
+                        logger.warning("Wheel specs from the name only: %s", exc)
                 parsed = wheel_specs(raw_name)
                 diameter = ",".join(dict.fromkeys(band for value in (enriched_specs.get("diameters_mm") or []) if (band := diameter_band(value))))
                 if not diameter and not enriched_specs.get('diameters_mm'):

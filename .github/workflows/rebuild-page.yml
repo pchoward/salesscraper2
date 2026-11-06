@@ -41,6 +41,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        # The page reads wheel sizes with the scraper's parser (BeautifulSoup).
+        # Without it every wheel was dropped from the rebuilt pages.
+        run: pip install -r requirements.txt
 
       - name: Rebuild the page from saved data
         # After a merge, report_inputs.json may not exist until the first
