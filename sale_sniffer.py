@@ -145,10 +145,10 @@ def allowed(state, now, busy=False):
     return True, ""
 
 
-def scrape_busy(run=subprocess.run):
-    """True when a Skate scrape run is queued or in progress (needs gh)."""
+def scrape_busy(run=subprocess.run, workflow=WORKFLOW):
+    """True when a run of ``workflow`` is queued or in progress (needs gh)."""
     try:
-        result = run(["gh", "run", "list", "--workflow", WORKFLOW, "--limit", "5", "--json", "status"],
+        result = run(["gh", "run", "list", "--workflow", workflow, "--limit", "5", "--json", "status"],
                      capture_output=True, text=True, timeout=60)
         runs = json.loads(result.stdout or "[]")
     except Exception as exc:
@@ -157,9 +157,91 @@ def scrape_busy(run=subprocess.run):
     return any(entry.get("status") in ("queued", "in_progress", "waiting", "pending", "requested") for entry in runs)
 
 
-def start_scrape(run=subprocess.run):
-    result = run(["gh", "workflow", "run", WORKFLOW, "--ref", "main"], capture_output=True, text=True, timeout=60)
+def start_scrape(run=subprocess.run, workflow=WORKFLOW):
+    result = run(["gh", "workflow", "run", workflow, "--ref", "main"], capture_output=True, text=True, timeout=60)
     return result.returncode == 0
+
+
+# ---- BMX, Ski, MTB (owner, 2026-11-06: evo's Big Snow Sale and Fanatik's
+# TRP promo arrived as new collections; this check was Skate only) ---------
+SPORTS_WORKFLOW = "scrape-sports.yml"
+# Sale-like collection names, including "up-to-60-off-snow" and "past-season".
+SPORT_SALE_HANDLE = re.compile(
+    r"sale|clearance|closeout|deal|black[-_]?friday|blacker|cyber|doorbuster|flash|outlet|markdown|blowout|bfcm|"
+    r"(?:^|-)\d+-off(?:-|$)|(?:^|-)off(?:-|$)|percent-off|past-season|last-chance", re.I)
+# Clothing and the like are not in the BMX/Ski/MTB catalogs; snow and ski are.
+SPORT_IGNORE = re.compile(
+    r"jacket|pant|shirt|tee|hood|sock|hat|beanie|underwear|fleece|base-?layer|midlayer|outerwear|apparel|"
+    r"clothing|swim|sandal|footwear|shoe|gift|test|do-not-use|road|gravel|triathlon|"
+    r"muc-?off|off-?road|kick-?off|off-?set", re.I)  # "off" inside a brand or word, not "N% off"
+SECTIONS_PER_STORE = 8
+
+
+def sport_shops():
+    """[(store name, base, collection handles read)] for every BMX/Ski/MTB Shopify store."""
+    import importlib
+    from stores import shopify
+    seen = {}
+    for sport in ("bmx", "mtb", "ski"):
+        module = importlib.import_module(f"sports.{sport}.stores")
+        for value in vars(module).values():
+            for store in (value if isinstance(value, (tuple, list)) else [value]):
+                if isinstance(store, shopify.ShopifyStore) and store.base not in seen:
+                    handles = {url.split("/collections/", 1)[1].split("/", 1)[0]
+                               for url in store.sale_jsons if "/collections/" in url}
+                    seen[store.base] = (store.store, store.base, handles)
+    return list(seen.values())
+
+
+def sport_sources():
+    return [(f"{name}:{handle}", "shopify", (base, handle))
+            for name, base, handles in sport_shops() for handle in sorted(handles)]
+
+
+def homepage_sale_collections(base, read_handles, fetch=_get):
+    """Sale-like collections the store's homepage links to and we don't read.
+
+    Some stores launch a sale in a collection their public collection list
+    doesn't include (evo's 3,500 collections leave out "up-to-60-off-snow");
+    the homepage's sale banner links to it."""
+    import sale_watch
+    if not sale_watch._allowed(base, "/", fetch):
+        return []
+    html = fetch(base.rstrip("/") + "/") or ""
+    found = []
+    for handle in re.findall(r'href="(?:https?://[^"/]+)?/collections/([a-z0-9][a-z0-9-]*)', html, re.I):
+        handle = handle.lower()
+        if handle in read_handles or not SPORT_SALE_HANDLE.search(handle) or SPORT_IGNORE.search(handle):
+            continue
+        url = f"{base.rstrip('/')}/collections/{handle}"
+        if url not in found:
+            found.append(url)
+    return found
+
+
+def read_sport_signals(fetch=_get, sleep=time.sleep, shops=None):
+    """Sale collection sizes and new sale-like collections at the BMX/Ski/MTB shops."""
+    import sale_watch
+    shops = shops if shops is not None else sport_shops()
+    sources = [(f"{name}:{handle}", "shopify", (base, handle)) for name, base, handles in shops for handle in sorted(handles)]
+    result = read_signals(fetch=fetch, sleep=sleep, source_list=sources, sections=[])
+    urls = []
+    for name, base, handles in shops:
+        sleep(DELAY)
+        try:
+            found = sale_watch.shopify_sections(base, handles, fetch, sale_re=SPORT_SALE_HANDLE, ignore=SPORT_IGNORE,
+                                                limit=SECTIONS_PER_STORE, sleep=sleep)
+        except Exception as exc:
+            logger.info("sniff: sections at %s skipped: %s", name, exc)
+            continue
+        urls += [entry["url"] for entry in found]
+        sleep(DELAY)
+        try:
+            urls += homepage_sale_collections(base, handles, fetch)
+        except Exception as exc:
+            logger.info("sniff: homepage of %s skipped: %s", name, exc)
+    result["sections"] = sorted(set(urls))
+    return result
 
 
 PAGES_RUN = "pages build and deployment"
@@ -202,7 +284,7 @@ def pages_guard(state, repo, gh=_gh_json):
     return state, f"Site deploy {key} (commit {str(latest.get('head_sha', ''))[:7]}) had failed: re-ran it."
 
 
-def sniff(state, now, read=read_signals, busy=scrape_busy, start=start_scrape, trigger=False):
+def sniff(state, now, read=read_signals, busy=scrape_busy, start=start_scrape, trigger=False, label="Skate"):
     """Check once. Returns (new_state, report lines)."""
     state = dict(state or {})
     current = read()
@@ -217,12 +299,12 @@ def sniff(state, now, read=read_signals, busy=scrape_busy, start=start_scrape, t
         if not ok:
             lines.append(f"Not scraping: {why}.")
         elif not trigger:
-            lines.append("Would start the Skate scraper (dry run).")
+            lines.append(f"Would start the {label} scraper (dry run).")
         elif start():
-            lines.append("Started the Skate scraper.")
+            lines.append(f"Started the {label} scraper.")
             state["triggers"] = (list(state.get("triggers") or []) + [now.isoformat()])[-20:]
         else:
-            lines.append("Could not start the Skate scraper.")
+            lines.append(f"Could not start the {label} scraper.")
     elif previous is not None:
         lines.append("No sale jumps or new sale sections.")
     # Keep the last readable value for a signal that failed this time.
@@ -231,10 +313,20 @@ def sniff(state, now, read=read_signals, busy=scrape_busy, start=start_scrape, t
     return state, lines
 
 
+def split_state(state):
+    """Skate and BMX/Ski/MTB keep their own baseline and trigger history.
+    A state saved before the split is Skate's."""
+    state = dict(state or {})
+    if "last" in state or "triggers" in state:
+        skate = {key: state.pop(key) for key in ("last", "triggers") if key in state}
+        state.setdefault("skate", skate)
+    return state
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--state", default="sniff_state.json")
-    parser.add_argument("--trigger", action="store_true", help="start the Skate scraper on a jump")
+    parser.add_argument("--trigger", action="store_true", help="start the matching scraper on a jump")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(message)s")
     try:
@@ -243,7 +335,14 @@ def main(argv=None):
     except (OSError, ValueError):
         state = {}
     now = datetime.datetime.now(datetime.timezone.utc).replace(microsecond=0)
-    state, lines = sniff(state, now, trigger=args.trigger)
+    state = split_state(state)
+    skate, lines = sniff(state.get("skate"), now, trigger=args.trigger)
+    lines = ["### Skate", *lines]
+    sports_state, sport_lines = sniff(
+        state.get("sports"), now, read=read_sport_signals, trigger=args.trigger, label="BMX, Ski, MTB",
+        busy=lambda: scrape_busy(workflow=SPORTS_WORKFLOW), start=lambda: start_scrape(workflow=SPORTS_WORKFLOW))
+    lines += ["", "### BMX, Ski, MTB", *sport_lines]
+    state.update({"skate": skate, "sports": sports_state})
     repo = os.environ.get("GITHUB_REPOSITORY")
     if args.trigger and repo:
         state, line = pages_guard(state, repo)

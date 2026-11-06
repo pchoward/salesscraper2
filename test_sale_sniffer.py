@@ -125,3 +125,68 @@ class PagesGuardTests(unittest.TestCase):
             raise RuntimeError("HTTP 403")
         state, line = s.pages_guard({}, "o/r", gh=broken)
         self.assertIn("skipped", line)
+
+
+class SportsScopeTests(unittest.TestCase):
+    def test_sale_names_for_the_sport_shops(self):
+        keep = ("up-to-60-off-snow", "fanatik-black-friday", "past-season-skis", "bike-sale", "clearance")
+        drop = ("mens-jackets-sale", "road-bike-sale", "snow-helmets", "new-arrivals", "base-layer-sale", "muc-off")
+        for handle in keep:
+            self.assertTrue(s.SPORT_SALE_HANDLE.search(handle) and not s.SPORT_IGNORE.search(handle), handle)
+        for handle in drop:
+            self.assertFalse(s.SPORT_SALE_HANDLE.search(handle) and not s.SPORT_IGNORE.search(handle), handle)
+
+    def test_shops_cover_bmx_ski_mtb(self):
+        names = {name for name, _, _ in s.sport_shops()}
+        for store in ("evo", "Fanatik", "Albe's BMX", "Mike's Bikes", "Gear West", "Smith"):
+            self.assertIn(store, names)
+
+    def test_a_new_sport_sale_collection_starts_the_sports_scraper(self):
+        base = "https://evo.example"
+        pages = {f"{base}/collections/skis.json": json.dumps({"collection": {"products_count": 900}}),
+                 f"{base}/robots.txt": "",
+                 f"{base}/collections.json?limit=250": json.dumps({"collections": [{"handle": "up-to-60-off-snow"}]}),
+                 f"{base}/collections/up-to-60-off-snow/products.json?limit=250": json.dumps(
+                     {"products": [{"id": 1, "variants": [{"price": "40.00", "compare_at_price": "100.00"}]}]})}
+        fetch = lambda url: pages.get(url)
+        shops = [("evo", base, {"skis"})]
+        before = {"last": {"counts": {"evo:skis": 900}, "sections": []}}
+        read = lambda: s.read_sport_signals(fetch=fetch, sleep=lambda x: None, shops=shops)
+        started = []
+        state, lines = s.sniff(before, NOW, read=read, busy=lambda: False, trigger=True, label="BMX, Ski, MTB",
+                               start=lambda: started.append("sports") or True)
+        self.assertEqual(started, ["sports"])
+        self.assertIn("Started the BMX, Ski, MTB scraper.", lines)
+        self.assertIn("new sale section https://evo.example/collections/up-to-60-off-snow", lines[1])
+
+    def test_state_splits_per_scope(self):
+        old = {"last": {"counts": {"TGM:sale": 1}}, "triggers": ["t"], "pages_retries": {"9": 1}}
+        new = s.split_state(old)
+        self.assertEqual(new["skate"], {"last": {"counts": {"TGM:sale": 1}}, "triggers": ["t"]})
+        self.assertEqual(new["pages_retries"], {"9": 1})
+        self.assertEqual(s.split_state(new), new)
+
+
+class NewestSectionsFirstTests(unittest.TestCase):
+    def test_a_new_sale_wins_over_old_promos_under_the_cap(self):
+        import sale_watch
+        base = "https://evo.example"
+        old = [{"handle": f"{n}-off-one-full-price-item", "published_at": f"2025-0{n % 9 + 1}-01"} for n in range(10, 22)]
+        new = {"handle": "up-to-60-off-snow", "published_at": "2026-11-06T08:00:00"}
+        down = json.dumps({"products": [{"id": 1, "variants": [{"price": "40.00", "compare_at_price": "100.00"}]}]})
+        pages = {f"{base}/robots.txt": "", f"{base}/collections.json?limit=250": json.dumps({"collections": old + [new]})}
+        pages.update({f"{base}/collections/{c['handle']}/products.json?limit=250": down for c in old + [new]})
+        found = sale_watch.shopify_sections(base, set(), pages.get, sale_re=s.SPORT_SALE_HANDLE,
+                                            ignore=s.SPORT_IGNORE, limit=3)
+        self.assertEqual(found[0]["url"], f"{base}/collections/up-to-60-off-snow")
+
+
+class HomepageSaleTests(unittest.TestCase):
+    def test_a_hidden_sale_collection_is_found_on_the_homepage(self):
+        base = "https://evo.example"
+        html = ('<a href="/collections/up-to-60-off-snow?hero">Up to 60% off</a>'
+                '<a href="https://evo.example/collections/mens-jackets-sale">Jackets</a>'
+                '<a href="/collections/skis">Skis</a><a href="/collections/new-arrivals">New</a>')
+        pages = {f"{base}/robots.txt": "User-agent: *\nAllow: /", f"{base}/": html}
+        found = s.homepage_sale_collections(base, {"skis"}, pages.get)
+        self.assertEqual(found, [f"{base}/collections/up-to-60-off-snow"])

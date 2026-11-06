@@ -66,22 +66,46 @@ def _marked_down(product):
     return False
 
 
-def shopify_sections(base, read_handles, fetch=_get, covered=None):
+def shopify_sections(base, read_handles, fetch=_get, covered=None, sale_re=None, ignore=None, limit=None,
+                     sleep=None):
     """Sale-like collections at ``base`` not in ``read_handles`` that hold
     marked-down products the run did not already read (``covered``: product
     ids). Old or empty seasonal collections are left out."""
     if not _allowed(base, "/collections.json", fetch):
         return []
-    text = fetch(base.rstrip("/") + "/collections.json?limit=250")
-    try:
-        collections = json.loads(text or "")["collections"]
-    except (ValueError, KeyError, TypeError):
-        return []
+    collections = []
+    for page in range(1, (4 if limit is not None else 1) + 1):
+        url = base.rstrip("/") + "/collections.json?limit=250" + (f"&page={page}" if page > 1 else "")
+        text = fetch(url)
+        try:
+            batch = json.loads(text or "")["collections"]
+        except (ValueError, KeyError, TypeError):
+            batch = None
+        if not batch:
+            if page == 1:
+                return []
+            break
+        collections.extend(batch)
+        if len(batch) < 250:
+            break
+    if limit is not None:
+        # A store with dozens of sale collections: look at the newest first,
+        # so a sale that just launched (evo's "up-to-60-off-snow") is checked
+        # before older standing promos.
+        collections.sort(key=lambda entry: str((entry or {}).get("published_at") or (entry or {}).get("updated_at") or ""),
+                         reverse=True)
     found = []
     for entry in collections:
         handle = str((entry or {}).get("handle") or "")
-        if not handle or handle in read_handles or not SALE_HANDLE.search(handle) or IGNORE.search(handle):
+        if not handle or handle in read_handles or not (sale_re or SALE_HANDLE).search(handle) \
+                or (ignore or IGNORE).search(handle):
             continue
+        if limit is not None and limit <= 0:
+            break
+        if limit is not None:
+            limit -= 1
+        if sleep:
+            sleep(DELAY)
         text = fetch(f"{base.rstrip('/')}/collections/{handle}/products.json?limit=250")
         try:
             products = json.loads(text or "")["products"]
