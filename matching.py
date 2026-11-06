@@ -731,9 +731,10 @@ def describe_sport_item(item):
 def _sport_compatible(a, b):
     if a["part"] != b["part"] or a["brand_key"] != b["brand_key"] or a["flags"] != b["flags"]:
         return False
-    if a["types"] != b["types"] or a["sizes"] != b["sizes"]:
-        return False
-    return not (a["years"] and b["years"] and not a["years"] & b["years"])
+    # Model years don't split a product (owner, 2026-11-06): the 2026 boot at
+    # evo, the 2027 one at Gear West and Christy's undated one are one
+    # comparison, and each listing's name still shows its year.
+    return a["types"] == b["types"] and a["sizes"] == b["sizes"]
 
 
 def _sport_fits(small, big):
@@ -751,8 +752,8 @@ def _sport_fits(small, big):
 def sport_groups(items, explain=False, apply_filters=True):
     """Cross-store groups for BMX, Ski and MTB listings.
 
-    Same part, brand, component/body-part words, tire size, women's/kids'/used
-    flags and (when stated) model year; one listing's model words all within
+    Same part, brand, component/body-part words, tire size and women's/kids'/
+    used flags (any model year: names show it); one listing's model words all within
     the other's, so a colour suffix ("- Matt Black") doesn't split them. A
     listing joins only when it fits exactly one product and agrees with every
     listing already in it, so a vague name never chains two products. Prices
