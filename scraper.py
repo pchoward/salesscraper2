@@ -62,6 +62,13 @@ def save_health(health):
     safe_write_file(HEALTH_PATH, state_json(health))
 
 
+def save_sale_events(history, current_data, today):
+    """Store sale log (dates, cut, holiday), rebuilt from the price history.
+    Never raises."""
+    import sale_events
+    return sale_events.run(history, current_data, today)
+
+
 def save_site_sales(state):
     if not isinstance(state, dict):
         return False
@@ -221,6 +228,7 @@ def _run(args, sport):
     if updates.get("save_history"):
         history_saved = save_price_history(updates["history"])
         logging.info("Price history has %s listings", len(updates["history"]))
+        save_sale_events(updates["history"], curr_data, scanned_at[:10])
     try:
         save_health(updates["health"])
     except Exception as exc:

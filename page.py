@@ -70,6 +70,7 @@ from protection import sizes_in as protection_sizes_in
 from query_state import STARTER_VIEWS, WIDTH_RANGES, bucket_for_width
 from score import FORMULA, SCORE_LEGEND, deal_score, score_band
 from site_sales import activity_line, describe_sales, display_name, load_state
+import sale_events
 from watchlist import load_watchlist, rule_matches
 
 logger = logging.getLogger("page")
@@ -2793,7 +2794,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     except Exception as exc:
         logger.error("Across-stores section failed: %s", exc)
     try:
-        chunks.append(_activity_html(sales, generated_at))
+        try:
+            history_html = _sale_history_html(sale_events.load(), today)
+        except Exception as exc:
+            logger.error("Sale history failed: %s", exc)
+            history_html = ""
+        chunks.append(_activity_html(sales, generated_at, history_html))
     except Exception as exc:
         logger.error("Retailer activity panel failed: %s", exc)
 
@@ -3669,8 +3675,26 @@ def _spark_html(record, width=72, height=22, stroke=1.6, defer=False):
     )
 
 
-def _activity_html(sales, generated_at):
-    if not sales:
+def _sale_history_html(state, today):
+    """Each store's sale record: running, last, last at each holiday, rhythm."""
+    rows = sale_events.lines(state, today, names={store: display_name(store) for store in (state or {}).get("stores") or {}})
+    if not rows:
+        return ""
+    items = "".join(
+        f'<li><strong>{escape(store)}</strong><ul>' + "".join(f"<li>{escape(text)}</li>" for text in texts) + "</ul></li>"
+        for store, texts in rows
+    )
+    return (
+        '<div class="sale-history"><h3>Sale history</h3>'
+        f'<ul class="activity-list sale-history-list">{items}</ul>'
+        '<p class="sale-history-note">A sale is a day many listings we track are cut by the same amount at once, '
+        "until their prices go back up. It covers the stores' sale pages we read, not their whole catalog. "
+        "Past sales say what a store did then, not what it will do.</p></div>"
+    )
+
+
+def _activity_html(sales, generated_at, history_html=""):
+    if not sales and not history_html:
         return ""
     banners = []
     for row in sales:
@@ -3693,7 +3717,9 @@ def _activity_html(sales, generated_at):
         '<section class="activity" id="retailerActivity">'
         "<h2>Retailer activity</h2>"
         + "".join(banners)
-        + f'<ul class="activity-list">{items}</ul></section>'
+        + (f'<ul class="activity-list">{items}</ul>' if items else "")
+        + history_html
+        + "</section>"
     )
 
 

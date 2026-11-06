@@ -160,6 +160,7 @@ jobs:
           git add sale_items_chart.html previous_data.json price_history.json scrape_health.json site_sales.json
           git add index.html navigation discover
           if [ -e sale_sections.json ]; then git add sale_sections.json; fi
+          if [ -e sale_events.json ]; then git add sale_events.json; fi
           # rebuild_page.py's inputs. The scrape removes the file when it could
           # not save the data it describes; record that removal too.
           if [ -e report_inputs.json ] || git ls-files --error-unmatch report_inputs.json >/dev/null 2>&1; then
