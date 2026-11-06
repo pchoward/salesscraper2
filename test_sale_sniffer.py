@@ -125,3 +125,43 @@ class PagesGuardTests(unittest.TestCase):
             raise RuntimeError("HTTP 403")
         state, line = s.pages_guard({}, "o/r", gh=broken)
         self.assertIn("skipped", line)
+
+
+class SportsScopeTests(unittest.TestCase):
+    def test_sale_names_for_the_sport_shops(self):
+        keep = ("up-to-60-off-snow", "fanatik-black-friday", "past-season-skis", "bike-sale", "clearance")
+        drop = ("mens-jackets-sale", "road-bike-sale", "snow-helmets", "new-arrivals", "base-layer-sale")
+        for handle in keep:
+            self.assertTrue(s.SPORT_SALE_HANDLE.search(handle) and not s.SPORT_IGNORE.search(handle), handle)
+        for handle in drop:
+            self.assertFalse(s.SPORT_SALE_HANDLE.search(handle) and not s.SPORT_IGNORE.search(handle), handle)
+
+    def test_shops_cover_bmx_ski_mtb(self):
+        names = {name for name, _, _ in s.sport_shops()}
+        for store in ("evo", "Fanatik", "Albe's BMX", "Mike's Bikes", "Gear West", "Smith"):
+            self.assertIn(store, names)
+
+    def test_a_new_sport_sale_collection_starts_the_sports_scraper(self):
+        base = "https://evo.example"
+        pages = {f"{base}/collections/skis.json": json.dumps({"collection": {"products_count": 900}}),
+                 f"{base}/robots.txt": "",
+                 f"{base}/collections.json?limit=250": json.dumps({"collections": [{"handle": "up-to-60-off-snow"}]}),
+                 f"{base}/collections/up-to-60-off-snow/products.json?limit=250": json.dumps(
+                     {"products": [{"id": 1, "variants": [{"price": "40.00", "compare_at_price": "100.00"}]}]})}
+        fetch = lambda url: pages.get(url)
+        shops = [("evo", base, {"skis"})]
+        before = {"last": {"counts": {"evo:skis": 900}, "sections": []}}
+        read = lambda: s.read_sport_signals(fetch=fetch, sleep=lambda x: None, shops=shops)
+        started = []
+        state, lines = s.sniff(before, NOW, read=read, busy=lambda: False, trigger=True, label="BMX, Ski, MTB",
+                               start=lambda: started.append("sports") or True)
+        self.assertEqual(started, ["sports"])
+        self.assertIn("Started the BMX, Ski, MTB scraper.", lines)
+        self.assertIn("new sale section https://evo.example/collections/up-to-60-off-snow", lines[1])
+
+    def test_state_splits_per_scope(self):
+        old = {"last": {"counts": {"TGM:sale": 1}}, "triggers": ["t"], "pages_retries": {"9": 1}}
+        new = s.split_state(old)
+        self.assertEqual(new["skate"], {"last": {"counts": {"TGM:sale": 1}}, "triggers": ["t"]})
+        self.assertEqual(new["pages_retries"], {"9": 1})
+        self.assertEqual(s.split_state(new), new)

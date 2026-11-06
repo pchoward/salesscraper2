@@ -66,7 +66,8 @@ def _marked_down(product):
     return False
 
 
-def shopify_sections(base, read_handles, fetch=_get, covered=None):
+def shopify_sections(base, read_handles, fetch=_get, covered=None, sale_re=None, ignore=None, limit=None,
+                     sleep=None):
     """Sale-like collections at ``base`` not in ``read_handles`` that hold
     marked-down products the run did not already read (``covered``: product
     ids). Old or empty seasonal collections are left out."""
@@ -80,8 +81,15 @@ def shopify_sections(base, read_handles, fetch=_get, covered=None):
     found = []
     for entry in collections:
         handle = str((entry or {}).get("handle") or "")
-        if not handle or handle in read_handles or not SALE_HANDLE.search(handle) or IGNORE.search(handle):
+        if not handle or handle in read_handles or not (sale_re or SALE_HANDLE).search(handle) \
+                or (ignore or IGNORE).search(handle):
             continue
+        if limit is not None and limit <= 0:
+            break
+        if limit is not None:
+            limit -= 1
+        if sleep:
+            sleep(DELAY)
         text = fetch(f"{base.rstrip('/')}/collections/{handle}/products.json?limit=250")
         try:
             products = json.loads(text or "")["products"]

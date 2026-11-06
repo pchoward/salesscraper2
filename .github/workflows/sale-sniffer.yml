@@ -1,9 +1,10 @@
 name: Scraper - Flash Sale Check
 
-# Every ~2 hours (GitHub runs schedules late at times): read cheap Skate sale
-# signals (sale collection sizes, Tactics result counts, unread sale
+# Every ~2 hours (GitHub runs schedules late at times): read cheap sale
+# signals for Skate and, separately, for BMX/Ski/MTB (sale collection sizes, Tactics result counts, unread sale
 # sections) and start "Scraper - Skate" when a sale jumps or a new sale
-# section appears (sale_sniffer.py). At most 3 triggered scrapes a day,
+# section appears (sale_sniffer.py); BMX/Ski/MTB start "Scraper - BMX, Ski,
+# MTB" the same way, with their own limits. At most 3 triggered scrapes a day,
 # 3 hours apart, never while a Skate scrape is queued or running. The last
 # check lives in the workflow cache; nothing is committed or emailed.
 # It also re-runs the site's latest Pages deploy if it failed (at most twice
@@ -24,7 +25,7 @@ permissions:
 jobs:
   sniff:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
