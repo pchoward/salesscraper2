@@ -46,8 +46,14 @@ def bmx(name, part, url="", price_new=None, price_old=None, description="", prod
     return reason
 
 
+# Bike gear sold by snow brands (Smith's "Rhythm MTB" goggle) isn't Ski.
+_BIKE_WORDS = re.compile(r"\b(?:mtb|bike|cycling|mountain\s+bike)\b", re.I)
+
+
 def ski(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     import sports
+    if _BIKE_WORDS.search(name or ""):
+        return "bike gear"
     return _basic(sports.SKI, name, part)
 
 
