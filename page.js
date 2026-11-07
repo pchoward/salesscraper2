@@ -3623,7 +3623,7 @@ function loadFromUrl() {
 
 function customViews() {
     const stored = readJson(VIEWS_KEY, []);
-    return Array.isArray(stored) ? stored.filter(view => view && view.name && view.query) : [];
+    return Array.isArray(stored) ? stored.filter(view => view && view.name && typeof view.query === "string") : [];
 }
 
 function currentQuery() {

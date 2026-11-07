@@ -129,3 +129,25 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
  #categoryToggle { width:100%; padding:0 3px; font-size:12px; gap:5px; }
  .category-choices { grid-template-columns:repeat(2,minmax(0,1fr)); }
 }
+
+/* Personal tools share the compact header; catalog ownership stays in the frame. */
+.shell-header .top-row { grid-template-columns:auto minmax(0,1fr) auto auto; grid-template-areas:"brand search stuff sections"; gap:0 16px; }
+.my-stuff { grid-area:stuff; }
+#myStuffToggle { min-height:36px; padding:0 10px; border:1px solid #59697b; border-radius:4px; background:transparent; color:white; font:inherit; font-size:12px; }
+#myStuffToggle[aria-expanded=true] { background:#35475a; }
+#myStuffPanel { position:fixed; z-index:180; top:62px; right:16px; width:min(360px,calc(100vw - 24px)); max-height:calc(100dvh - 80px); overflow:auto; padding:16px; background:white; color:#243447; border:1px solid #cbd5e1; border-radius:4px; box-shadow:0 10px 32px #17212e40; font-size:13px; }
+#myStuffPanel h2 { font-size:16px; margin:0; } #myStuffPanel h3 { font-size:13px; margin:16px 0 6px; }
+#myStuffPanel button { min-height:36px; max-width:100%; border:1px solid #cbd5e1; border-radius:3px; background:#f3f6f9; color:#243447; padding:6px 10px; text-align:left; font:inherit; }
+#myStuffPanel button:disabled { opacity:.5; } #myStuffPanel input { width:100%; min-width:0; padding:8px; font:inherit; border:1px solid #bcc9d7; border-radius:3px; }
+#myStuffPanel form { display:grid; gap:6px; margin-top:12px; } #myStuffPanel form label { font-size:12px; }
+.my-stuff-view { display:flex; gap:4px; margin:4px 0; } .my-stuff-view .apply-view { flex:1; min-width:0; overflow-wrap:anywhere; }
+.my-stuff-note,#myStuffStatus { color:#617286; font-size:11px; margin:6px 0; }
+#myStuffBackdrop { position:fixed; inset:0; z-index:150; background:#17212e25; } .my-stuff:has(#myStuffPanel:not([hidden])) { position:relative; z-index:170; }
+#myStuffPanel :focus-visible,#myStuffToggle:focus-visible { outline:2px solid #5388b8; outline-offset:2px; }
+@media(max-width:800px) {
+ .shell-header .top-row { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"brand stuff" "search search" "sections sections"; gap:0 8px; }
+ #myStuffPanel { top:48px; right:12px; max-height:calc(100dvh - 64px); }
+ body.my-stuff-open { overflow:hidden; }
+}
+
+#myStuffWatching[aria-pressed=true] { background:#e7eff7; border-color:#537b9f; font-weight:650; }

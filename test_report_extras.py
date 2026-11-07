@@ -22,6 +22,17 @@ def _deck(price, url, store, name):
 
 
 class ReportExtraTests(unittest.TestCase):
+    def test_standalone_personal_tools_remain_at_end_of_sidebar(self):
+        from bs4 import BeautifulSoup
+        html = build_report_html({}, {})
+        soup = BeautifulSoup(html, 'html.parser')
+        for section in ('views', 'watching', 'bookmarks'):
+            self.assertIsNotNone(soup.select_one('#filterDrawer #personalTools [data-section="'+section+'"]'))
+        drawer = soup.select_one('#filterDrawer')
+        self.assertIn('show-results', drawer.find_all(recursive=False)[-1].get('class', []))
+        self.assertIsNotNone(soup.select_one('#personalTools #viewNameInput'))
+        self.assertIsNotNone(soup.select_one('#personalTools #bookmarkView'))
+
     def test_page_has_the_new_views_and_a_combined_chart(self):
         left = _deck("64.99", "https://example.com/z", "Zumiez", "Baker Figgy Divine Evil Deck 8.125")
         right = _deck("44.99", "https://example.com/s", "SkateWarehouse", "Baker Figgy Divine Evil Deck 8.12 x 31.875")

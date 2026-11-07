@@ -199,3 +199,49 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mountCategories);
     else mountCategories();
 })();
+
+// Personal controls remain catalog-owned and retain their original storage format.
+(function(){
+    if(!window.shredBridgeInstalled)return;
+    function mount(){
+        const tools=document.getElementById('personalTools');
+        if(!tools)return; // Explore does not expose catalog personal tools.
+        tools.remove();tools.hidden=true;tools.style.display='none';document.body.appendChild(tools);
+        const config=JSON.parse(window.parent.document.getElementById('sportConfig').textContent);
+        const sport=config.sports.find(item=>new URL(item.catalog,window.parent.location.href).pathname===location.pathname);
+        if(!sport)return;
+        function views(){
+            const presets=(catalog().views||[]).filter(view=>{
+                const params=new URLSearchParams(view.query);
+                const part=params.get('type'),store=params.get('store');
+                if(part&&![...document.getElementById('partSelect').options].some(option=>option.value===slugType(part)))return false;
+                if(store&&![...document.getElementById('storeSelect').options].some(option=>storeSlug(option.value)===store))return false;
+                return true;
+            });
+            return [...presets.map(view=>({...view,builtin:true})),...customViews().map(view=>({...view,builtin:false}))]
+                .map(view=>({...view,sport:view.sport||new URLSearchParams(view.query).get('sport')||null}))
+                .filter(view=>view.builtin||!view.sport||view.sport===sport.id);
+        }
+        function sync(){
+            window.parent.postMessage({type:'shreddeals:my-stuff',href:location.href,sportLabel:sport.label,
+                views:views(),stars:readJson(STAR_KEY,[]).length,watching:!!state.watching,
+                matching:document.querySelectorAll('.deal-row:not(.filtered-out)').length},location.origin);
+        }
+        const observer=new MutationObserver(sync);observer.observe(tools,{subtree:true,childList:true,attributes:true});
+        const count=document.getElementById('statusCounts');if(count)observer.observe(count,{subtree:true,childList:true,characterData:true});
+        const receive=event=>{
+            if(event.origin!==location.origin||event.source!==window.parent||event.data?.catalog!==location.pathname)return;
+            const data=event.data,name=typeof data.name==='string'?data.name.trim().slice(0,80):'';
+            if(data.type==='shreddeals:save-view'&&name)saveCurrentView(name);
+            else if(data.type==='shreddeals:apply-view'&&typeof data.query==='string'&&views().some(view=>view.query===data.query))applySnapshot(decodeQuery(data.query));
+            else if(data.type==='shreddeals:rename-view'&&name&&customViews().some(view=>view.id===data.id))commitRename(data.id,name);
+            else if(data.type==='shreddeals:delete-view'&&customViews().some(view=>view.id===data.id))deleteView(data.id);
+            else if(data.type==='shreddeals:toggle-watching')toggleWatching();
+            else return;
+            sync();
+        };
+        window.addEventListener('message',receive);window.addEventListener('storage',sync);
+        sync();window.addEventListener('pagehide',()=>{observer.disconnect();window.removeEventListener('message',receive);window.removeEventListener('storage',sync);},{once:true});
+    }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
+})();

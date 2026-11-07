@@ -1,8 +1,8 @@
 name: CI - Pull Request Tests
 
 on:
+  # Also test stacked PRs whose base is another feature branch.
   pull_request:
-    branches: [main]
   push:
     branches: [main]
   workflow_dispatch:
@@ -73,7 +73,7 @@ jobs:
     # Pinned: Playwright 1.56.1 supports Ubuntu 24.04 but not 26.04 (the
     # current ubuntu-latest). Move both together when upgrading.
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: read
     steps:
@@ -128,6 +128,9 @@ jobs:
 
       - name: Sidebar disclosure and saved-link browser checks
         run: node ci/check_sidebar.cjs preview/site "${{ runner.temp }}/category-navigation-results/sidebar"
+
+      - name: My stuff persistence and mobile browser checks
+        run: node ci/check_my_stuff.cjs preview/site "${{ runner.temp }}/category-navigation-results/my-stuff"
 
       - name: Upload category navigation screenshots
         if: always()
