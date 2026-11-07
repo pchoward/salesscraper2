@@ -54,7 +54,7 @@ async function main(){
    }
    if(prior&&(width===1440||width===390)){
     await page.goto(prior.base+'/?sport='+sport);const old=await frame();await old.waitForSelector('.deal-row',{state:'attached'});
-    await old.evaluate(part=>filterByPart(part),({skate:'Wheels',ski:'Skis',mtb:'Forks & Shocks',bmx:'Bikes'})[sport]);
+    await old.evaluate(part=>filterByPart(part),({skate:'Wheels',ski:'Skis',mtb:'Suspension',bmx:'Bikes'})[sport]);
     await page.waitForTimeout(150);await page.screenshot({path:path.join(output,`before-${sport}-${width}.png`)});
    }
    await page.goto(base+'/?sport='+sport);await ready();let child=await frame();await counts();
@@ -72,7 +72,7 @@ async function main(){
     await page.waitForFunction(()=>document.getElementById('categoryLabel').textContent==='Decks');
     await counts();
    }
-   const targets={skate:'Wheels',ski:'Skis',mtb:'Forks & Shocks',bmx:'Bikes'};
+   const targets={skate:'Wheels',ski:'Skis',mtb:'Suspension',bmx:'Bikes'};
    const target=targets[sport];
    await select(target);
    if(sport==='skate'){
