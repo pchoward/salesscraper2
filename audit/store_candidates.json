@@ -2,6 +2,9 @@
   "_about": "Stores the read-only store probe (python -m audit.store_probe) checks for each new sport. Add or remove freely; the probe follows each site's robots.txt and makes a handful of requests per store.",
   "bmx": [
     {"name": "Dan's Comp", "url": "https://www.danscomp.com"},
+    {"name": "Cult BMX", "url": "https://cultcrew.com"},
+    {"name": "Sunday Bikes", "url": "https://sundaybikes.com"},
+    {"name": "Fitbikeco", "url": "https://www.fitbikeco.com"},
     {"name": "Circuit BMX", "url": "https://www.circuitbmx.com"},
     {"name": "Albe's BMX", "url": "https://www.albes.com"},
     {"name": "Empire BMX", "url": "https://www.empirebmx.com"},
