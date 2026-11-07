@@ -16,6 +16,10 @@ FIELDS = (
     {"key": "din", "label": "DIN (stated or model number)", "param": "ski_din", "categories": ("Bindings",)},
     {"key": "brake", "label": "Brake width", "param": "ski_brake", "categories": ("Bindings",)},
     {"key": "walk", "label": "Walk mode", "param": "ski_walk", "categories": ("Boots",)},
+    {"key": "goggle_size", "label": "Frame size", "param": "ski_gsize", "categories": ("Goggles", "Protection"),
+     "order": ["Small", "Medium", "Large", "XL"]},
+    {"key": "goggle_fit", "label": "Fit", "param": "ski_gfit", "categories": ("Goggles", "Protection")},
+    {"key": "goggle_lens", "label": "Lens", "param": "ski_glens", "categories": ("Goggles", "Protection")},
     {"key": "ability", "label": "Ability level", "param": "ski_ability", "categories": ()},
     {"key": "gender", "label": "Gender", "param": "ski_gender", "categories": ()},
 ) + protection.facet_fields("ski", ("Helmets", "Protection", "Goggles", "Body Armor"))

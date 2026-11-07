@@ -237,6 +237,53 @@ def walk_mode(text):
     return "Walk mode" if _WALK.search(text) else None
 
 
+# From the boot's name (owner, 2026-11-07): Lange, Tecnica, Rossignol and
+# others name the last "LV" / "MV" / "HV" (low, mid, high volume); a
+# touring boot or a "Hike"/"Walk" model walks.
+_VOLUME = (("Narrow (98 mm and under)", re.compile(r"\bLV\b|\blow\s+volume\b|\bnarrow\b", re.I)),
+           ("Medium (99–101 mm)", re.compile(r"\bMV\b|\bmid\s+volume\b", re.I)),
+           ("Wide (102 mm and over)", re.compile(r"\bHV\b|\bhigh\s+volume\b|\bwide\b", re.I)))
+_WALK_NAME = re.compile(r"\b(?:hike|walk|tour|touring|XTD|alpine\s+touring)\b", re.I)
+
+
+def name_last(title):
+    found = [label for label, pattern in _VOLUME if pattern.search(title or "")]
+    return found if len(found) == 1 else []
+
+
+def name_walks(title, types):
+    return "Walk mode" if _WALK_NAME.search(title or "") or "Backcountry / Touring" in (types or ()) else None
+
+
+# Goggles: what their names say about fit and lenses ("Line Miner L",
+# "Squad XL", "Low Bridge Fit", "OTG", "with Bonus Lens", "4D MAG").
+_GOGGLE = re.compile(r"\bgoggles?\b", re.I)
+_GOGGLE_SIZE = (("Small", re.compile(r"\b(?:S|small)\b(?!\s*/)", re.I)), ("Medium", re.compile(r"\b(?:M|medium)\b")),
+                ("Large", re.compile(r"\b(?:L|large)\b")), ("XL", re.compile(r"\bXL\b|\bx-?large\b", re.I)))
+_GOGGLE_FIT = (("Low bridge fit", re.compile(r"\blow\s*bridge\b|\basian\s*fit\b|\bLBF\b", re.I)),
+               ("Over glasses (OTG)", re.compile(r"\bOTG\b|\bover\s+the\s+glass(?:es)?\b", re.I)),
+               ("Kids", re.compile(r"\bkids?\b|\byouth\b|\bjunior\b|\bgrom\b", re.I)))
+_GOGGLE_LENS = (("Bonus lens included", re.compile(r"\b(?:bonus|spare|extra|second)\s+lens\b|\+\s*bonus\b", re.I)),
+                ("Magnetic lens change", re.compile(r"\bMAG\b|\bmagnetic\b", re.I)),
+                ("Photochromic", re.compile(r"\bphotochromic\b|\bphoto\b|\btransitions?\b", re.I)))
+
+
+def goggle_fields(title):
+    """{goggle_size, goggle_fit, goggle_lens} a goggle's name states."""
+    title = str(title or "")
+    if not _GOGGLE.search(title):
+        return {}
+    found = {}
+    sizes = [label for label, pattern in _GOGGLE_SIZE if pattern.search(title)]
+    if len(sizes) == 1:
+        found["goggle_size"] = sizes
+    for key, table in (("goggle_fit", _GOGGLE_FIT), ("goggle_lens", _GOGGLE_LENS)):
+        values = [label for label, pattern in table if pattern.search(title)]
+        if values:
+            found[key] = values
+    return found
+
+
 # ---- bindings -----------------------------------------------------------------
 
 _STATED_DIN = re.compile(r"\bdin(?:\s*range|\s*setting)?\s*[:=\-]?\s*(\d{1,2}(?:\.\d)?)\s*(?:-|–|to)\s*(\d{1,2}(?:\.\d)?)\b", re.I)
@@ -304,7 +351,9 @@ def fields(part, title, product_type, tags, text):
         if value:
             put("flex", flex_range(value))
         put("sole", soles(title + " " + text))
-        put("walk", walk_mode(text))
+        put("walk", walk_mode(text) or name_walks(title, found.get("ski_type")))
+        if "last" not in found:
+            put("last", name_last(title))
     elif part == "Bindings":
         put("ski_type", ski_types(product_type, tags, text))
         value, how = din(title, text)
@@ -318,5 +367,6 @@ def fields(part, title, product_type, tags, text):
         default = "Helmets" if part == "Helmets" else (
             "Back & Spine" if "armor" in str(product_type or "").lower() else None)
         found.update(protection.fields(title, product_type, text, "ski", default=default))
+        found.update(goggle_fields(title))
     put("ability", ability(text))
     return found
