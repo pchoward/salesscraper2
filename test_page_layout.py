@@ -193,7 +193,7 @@ class FilterOrderTests(unittest.TestCase):
             "brand",
             "width", "trucksize", "diameter", "wheelcolor", "shoesize", "protsize", "abec",
             "length", "wheelbase", "deckcolor", "truckheight", "construction", "duro", "shape", "prottype",
-            "price", "discount", "score", "deals", "interval",
+            "store", "price", "more", "score", "deals", "interval",
         ]
         present = [item["id"] for item in sections if item["id"] in canon]
         self.assertEqual(present, [item for item in canon if item in present])

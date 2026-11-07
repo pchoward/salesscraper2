@@ -86,6 +86,88 @@
         const empty = doc.getElementById("comingSoon");
         const brand = doc.getElementById("brandHome");
         const shellSearch = doc.getElementById("shellSearch");
+        const stuffPanel = doc.getElementById('myStuffPanel');
+        const stuffToggle = doc.getElementById('myStuffToggle');
+        const stuffName = doc.getElementById('myStuffName');
+        let stuffReady = false, stuffReturnTabIndex = null;
+        function closeMyStuff(focus=false) {
+            if (stuffPanel.hidden) return;
+            stuffPanel.hidden = true;
+            stuffToggle.setAttribute('aria-expanded','false');
+            doc.getElementById('myStuffBackdrop').hidden = true;
+            doc.body.classList.remove('my-stuff-open');
+            frame.inert = false;
+            if (stuffReturnTabIndex == null) frame.removeAttribute('tabindex');
+            else frame.setAttribute('tabindex',stuffReturnTabIndex);
+            if(focus)stuffToggle.focus({preventScroll:true});
+        }
+        function sendStuff(type,extra={}) {
+            if(!stuffReady || frame.hidden)return;
+            const current = state(win.location.href,config);
+            frame.contentWindow.postMessage({type,...extra,catalog:catalogURL(win.location.href,config,current.sport.id).pathname},win.location.origin);
+        }
+        stuffToggle.addEventListener('click',()=>{
+            if(!stuffPanel.hidden){closeMyStuff(true);return;}
+            closeCategories();
+            stuffPanel.hidden=false;stuffToggle.setAttribute('aria-expanded','true');
+            doc.getElementById('myStuffBackdrop').hidden=false;
+            doc.body.classList.add('my-stuff-open');
+            stuffReturnTabIndex=frame.getAttribute('tabindex');frame.inert=true;frame.tabIndex=-1;
+            doc.getElementById('myStuffClose').focus({preventScroll:true});
+        });
+        doc.getElementById('myStuffClose').addEventListener('click',()=>closeMyStuff(true));
+        doc.getElementById('myStuffBackdrop').addEventListener('click',()=>closeMyStuff(true));
+        doc.addEventListener('keydown',event=>{
+            if(stuffPanel.hidden)return;
+            if(event.key==='/'&&!event.target.closest('input,textarea,select'))closeMyStuff();
+            if(event.key==='Escape'){event.preventDefault();event.stopPropagation();closeMyStuff(true);}
+            if(event.key==='Tab'){
+                const stops=[...stuffPanel.querySelectorAll('button,input')].filter(node=>!node.disabled&&!node.hidden);
+                const first=stops[0],last=stops[stops.length-1];
+                if(event.shiftKey&&doc.activeElement===first){event.preventDefault();last?.focus();}
+                else if(!event.shiftKey&&doc.activeElement===last){event.preventDefault();first?.focus();}
+            }
+        });
+        function clearRename(){delete stuffName.dataset.rename;stuffName.value='';doc.getElementById('myStuffSave').textContent='Save current view';doc.getElementById('myStuffCancel').hidden=true;}
+        doc.getElementById('myStuffCancel').addEventListener('click',clearRename);
+        doc.getElementById('myStuffSaveForm').addEventListener('submit',event=>{
+            event.preventDefault();const name=stuffName.value.trim();if(!name)return;
+            sendStuff(stuffName.dataset.rename?'shreddeals:rename-view':'shreddeals:save-view',{name,id:stuffName.dataset.rename});
+            clearRename();doc.getElementById('myStuffStatus').textContent='View saved.';
+        });
+        doc.getElementById('myStuffWatching').addEventListener('click',()=>sendStuff('shreddeals:toggle-watching'));
+        doc.getElementById('myStuffBookmark').addEventListener('click',async()=>{
+            let href=win.location.href;
+            try {
+                const child=frame.contentWindow;
+                if(stuffReady&&typeof child.currentQuery==='function'){
+                    const source=new URL(child.location.href);source.search=child.currentQuery();
+                    href=mergeSkateURL(href,source,config,state(href,config).sport.id).href;
+                }
+                await win.navigator.clipboard.writeText(href);
+                doc.getElementById('myStuffStatus').textContent='Selection link copied.';
+            } catch(_){const input=doc.getElementById('myStuffCopyFallback');input.hidden=false;input.value=href;input.focus();input.select();doc.getElementById('myStuffStatus').textContent='Copy this selection link.';}
+        });
+        function renderStuff(data) {
+            stuffReady=true;doc.getElementById('myStuffSave').disabled=false;
+            const watching=doc.getElementById('myStuffWatching');watching.disabled=false;watching.setAttribute('aria-pressed',String(!!data.watching));watching.textContent=data.watching?'Show all deals':'Show watching';
+            doc.getElementById('myStuffStars').textContent=data.stars+' starred deal'+(data.stars===1?'':'s')+' · '+data.matching+' matching this selection';
+            if(doc.getElementById('myStuffStatus').textContent==='Loading catalog tools…')doc.getElementById('myStuffStatus').textContent='';
+            const focused=doc.activeElement?.dataset?.viewKey;
+            const list=doc.getElementById('myStuffViews');list.replaceChildren();
+            for(const view of data.views||[]) {
+                const row=doc.createElement('div');row.className='my-stuff-view';
+                const apply=doc.createElement('button');apply.type='button';apply.className='apply-view';apply.textContent=view.name+(view.builtin?' · '+data.sportLabel:view.sport?' · '+(config.sports.find(sport=>sport.id===view.sport)?.label||view.sport):' · Shared');apply.dataset.viewKey='apply-'+view.id;
+                apply.addEventListener('click',()=>{sendStuff('shreddeals:apply-view',{query:view.query});closeMyStuff(true);});row.appendChild(apply);
+                if(!view.builtin){
+                    const rename=doc.createElement('button');rename.type='button';rename.textContent='Rename';rename.dataset.viewKey='rename-'+view.id;rename.setAttribute('aria-label','Rename '+view.name);
+                    rename.addEventListener('click',()=>{stuffName.value=view.name;stuffName.dataset.rename=view.id;doc.getElementById('myStuffSave').textContent='Rename view';doc.getElementById('myStuffCancel').hidden=false;stuffName.focus();});
+                    const remove=doc.createElement('button');remove.type='button';remove.textContent='×';remove.dataset.viewKey='delete-'+view.id;remove.setAttribute('aria-label','Delete '+view.name);remove.addEventListener('click',()=>sendStuff('shreddeals:delete-view',{id:view.id}));row.append(rename,remove);
+                }
+                list.appendChild(row);
+            }
+            if(focused&&!stuffPanel.hidden)list.querySelector('[data-view-key='+JSON.stringify(focused)+']')?.focus({preventScroll:true});
+        }
         function syncSearch(url) {
             const current = state(url, config);
             const params = new URL(url).searchParams;
@@ -362,7 +444,12 @@
             frame.contentWindow.postMessage({ type: "shreddeals:restore", href: expected.href, state: historyState && historyState.skateState || null }, win.location.origin);
         }
         function render(focusGroup) {
+            closeMyStuff();stuffReady=false;clearRename();
+            doc.getElementById('myStuffViews').replaceChildren();
+            doc.getElementById('myStuffSave').disabled=true;doc.getElementById('myStuffWatching').disabled=true;
+            doc.getElementById('myStuffStars').textContent='';doc.getElementById('myStuffStatus').textContent='Loading catalog tools…';
             const current = state(win.location.href, config);
+            if(current.scope || !hasCatalog(current.sport))doc.getElementById('myStuffStatus').textContent='Personal tools are available in Deals. You can still bookmark this selection.';
             closeCategories();
             menuSport = current.sport.id;
             const categories = doc.getElementById('categoryNavigation');
@@ -416,6 +503,10 @@
             if (event.origin !== win.location.origin || event.source !== frame.contentWindow || !event.data) return;
             const current = state(win.location.href, config).sport;
             const currentSport = current.id;
+            if(event.data.type==='shreddeals:my-stuff'){
+                try {mergeSkateURL(win.location.href,event.data.href,config,currentSport);renderStuff(event.data);}catch(_){}
+                return;
+            }
             if (event.data.type === "shreddeals:search-sync") {
                 if (!hasCatalog(current) || typeof event.data.query !== 'string') return;
                 try {

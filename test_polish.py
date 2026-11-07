@@ -385,7 +385,7 @@ class ReportPolishTests(unittest.TestCase):
         self.assertIn("d tracked", html)
         self.assertIn("d @ $", html)
         self.assertIn("Why ", html)
-        self.assertIn("More filters", html)
+        self.assertIn('data-section="more"', html)
         self.assertIn("Deck Width", html)
         self.assertIn('data-buckets="10up"', html)
         self.assertIn("10.0&quot; and wider", html)
@@ -394,7 +394,7 @@ class ReportPolishTests(unittest.TestCase):
         self.assertIn("Recently gone", html)
         self.assertIn("Retailer activity", html)
         self.assertIn("Oct 1, 2026 8:56:14 AM ET".replace("Oct 1", "Sep 30"), html)
-        self.assertIn('id="morePanel"', html)
+        self.assertIn('id="section-more"', html)
         self.assertIn("data-daysat=", html)
 
     def test_width_range_chips_count_decks_and_keep_zeros(self):

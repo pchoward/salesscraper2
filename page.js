@@ -3623,7 +3623,7 @@ function loadFromUrl() {
 
 function customViews() {
     const stored = readJson(VIEWS_KEY, []);
-    return Array.isArray(stored) ? stored.filter(view => view && view.name && view.query) : [];
+    return Array.isArray(stored) ? stored.filter(view => view && view.name && typeof view.query === "string") : [];
 }
 
 function currentQuery() {
@@ -3721,23 +3721,23 @@ function saveCurrentView(name) {
 }
 
 function updateMoreCount() {
-    let count = 0;
-    ["priceMin", "priceMax", "discountMin", "discountMax", "scoreMin", "scoreMax"].forEach(id => {
-        if (numOrNull(id) != null) count += 1;
-    });
-    const wheel = document.getElementById("wheelbaseSelect");
-    count += selectedLengths().length;
-    count += selectedWheelbases().length;
-    count += selectedColors().length;
-    if (wheel && wheel.value && wheel.value !== "all" && !selectedWheelbases().length) count += 1;
-    count += (state.widths || []).length;
+    const score = ["scoreMin", "scoreMax"].filter(id => numOrNull(id) != null).length;
+    const kinds = (state.kinds || []).length;
+    const interval = state.dropInterval && state.dropInterval !== "all" ? 1 : 0;
+    const count = score + kinds + interval;
     const badge = document.getElementById("moreCount");
-    const button = document.getElementById("moreFilters");
-    if (badge) {
-        badge.hidden = count === 0;
-        badge.textContent = count ? "(" + count + ")" : "";
+    if (badge) { badge.hidden = !count; badge.textContent = count ? " · " + count : ""; }
+    const more = document.querySelector('[data-section="more"]');
+    // Reopening/restoring a saved link must never conceal active controls.
+    if (more && count) {
+        paintFilterSection(more, true);
+        ["score", "deals", "interval"].forEach((id,index) => {
+            const section = more.querySelector('[data-section="' + id + '"]');
+            if (section && [score,kinds,interval][index]) paintFilterSection(section, true);
+        });
     }
-    if (button) button.classList.toggle("has-more", count > 0);
+    const price = document.querySelector('[data-section="price"]');
+    if (price && ["priceMin", "priceMax", "discountMin", "discountMax"].some(id => numOrNull(id) != null)) paintFilterSection(price,true);
 }
 
 function toggleMore() {
@@ -3841,7 +3841,8 @@ function restoreFilterSections() {
 }
 
 function rememberFilterSections() {
-    const saved = {};
+    const previous = readJson(FILTER_SECTION_KEY, {});
+    const saved = previous && typeof previous === "object" && !Array.isArray(previous) ? previous : {};
     document.querySelectorAll(".filter-section").forEach(section => {
         const id = section.getAttribute("data-section");
         if (id) saved[id] = section.classList.contains("is-open");

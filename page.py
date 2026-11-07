@@ -2351,7 +2351,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + "".join(store_buttons)
         + _more_menu("moreStores", "+ More stores", store_more)
         + "</div>"
-        f'<select id="storeSelect" class="sr-only" aria-label="Store">{"".join(store_options)}</select>'
         "</div>"
     )
     part_order = part_order_for_sport
@@ -2490,31 +2489,27 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "</div></section>"
         + "</div>"
         + '<div class="side-group" aria-label="Shopping filters">'
-        + '<div class="more-filters" id="morePanel">'
-        '<span class="sr-only">More filters</span>'
+        + _section("store", "Store", '<label class="field"><span class="sr-only">Store</span>'
+                   f'<select id="storeSelect" aria-label="Store">{"".join(store_options)}</select></label>')
         + _section(
             "price",
-            "Price",
+            "Price & discount",
             '<div class="field-pair">'
             '<label class="field"><span>Min</span><input id="priceMin" type="number" min="0" step="1" inputmode="decimal"></label>'
             '<label class="field"><span>Max</span><input id="priceMax" type="number" min="0" step="1" inputmode="decimal"></label>'
             "</div>"
-            + _dual_html("priceMin", "priceMax", 0, price_cap, "$", "Any price", "Minimum price", "Maximum price"),
-        )
-        + _section(
-            "discount",
-            "Discount",
-            '<div class="field-pair">'
-            '<label class="field"><span>Min %</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
-            '<label class="field"><span>Max %</span><input id="discountMax" type="number" min="0" max="100" step="1"></label>'
+            + _dual_html("priceMin", "priceMax", 0, price_cap, "$", "Any price", "Minimum price", "Maximum price")
+            + '<div class="field-pair">'
+            '<label class="field"><span>At least % off</span><input id="discountMin" type="number" min="0" max="100" step="1"></label>'
+            '<label class="field"><span>Up to % off</span><input id="discountMax" type="number" min="0" max="100" step="1"></label>'
             "</div>"
             + _dual_html(
                 "discountMin", "discountMax", 0, 100, "", "Any discount",
                 "Minimum percent off", "Maximum percent off", suffix="%",
             ),
         )
-        + "</div></div>"
-        + '<div class="side-group" aria-label="Deal intelligence">'
+        + "</div>"
+        + _section("more", "More", '<div class="side-group" aria-label="Deal intelligence">'
         + _section(
             "score",
             "Deal quality",
@@ -2526,22 +2521,22 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
         + _section(
             "deals",
-            "Deal Type",
+            "Deal type",
             '<div class="kind-list" id="dealTypes" role="group" aria-label="Deal type">'
             + "".join(kind_buttons)
             + "</div>",
         )
         + _section(
             "interval",
-            "Drop Interval",
+            "Price-drop window",
             '<div class="interval-list" id="dropInterval" role="group" aria-label="Drop interval">'
             + "".join(interval_buttons)
             + "</div>"
             '<p class="section-note">A drop is at least $2 or 5% below the previous tracked price. '
             "Day is today or yesterday.</p>",
         )
-        + "</div>"
-        + '<div class="side-group" aria-label="Personal tools">'
+        + "</div>").replace('>More</button>', '>More<span id="moreCount" class="more-count" hidden></span></button>')
+        + '<div class="side-group" id="personalTools" aria-label="My stuff"><p class="personal-label">My stuff</p>'
         + _section(
             "views",
             "Saved Views",

@@ -168,6 +168,7 @@ class WorkflowSafetyTests(unittest.TestCase):
         checks = _workflow("pr-checks.yml")
         text = (WORKFLOWS / "pr-checks.yml").read_text(encoding="utf-8")
         self.assertNotIn("pull_request_target", text)
+        self.assertIsNone(checks["on"]["pull_request"])
         self.assertNotIn("secrets.", text)
         self.assertEqual(checks["permissions"], {"contents": "read"})
         preview = checks["jobs"]["preview"]

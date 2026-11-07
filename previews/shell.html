@@ -6,11 +6,18 @@
 <body><a class="skip" href="#sportPanel">Skip navigation</a>
 <header class="shell-header"><div class="top-row"><button id="brandHome" class="brand" type="button">ShredDeals</button>
 <div class="shell-search" role="search"><span class="shell-search-icon" aria-hidden="true"></span><input id="shellSearch" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="shellSuggestions" autocomplete="off" spellcheck="false" placeholder="Search deals, gear, brands or stores…" aria-label="Search current catalog"><div id="shellSuggestions" class="shell-suggestions" role="listbox" aria-label="Search suggestions" hidden></div></div>
+<div class="my-stuff"><button id="myStuffToggle" type="button" aria-expanded="false" aria-controls="myStuffPanel">My stuff</button>
+<section id="myStuffPanel" role="dialog" aria-modal="true" aria-labelledby="myStuffTitle" hidden><div class="category-heading"><h2 id="myStuffTitle">My stuff</h2><button id="myStuffClose" type="button" aria-label="Close My stuff">×</button></div>
+<h3>Saved views</h3><p class="my-stuff-note">Shared views can be applied to any sport.</p><div id="myStuffViews"></div>
+<form id="myStuffSaveForm"><label for="myStuffName">View name</label><input id="myStuffName" maxlength="80" required autocomplete="off"><button id="myStuffSave" type="submit" disabled>Save current view</button><button id="myStuffCancel" type="button" hidden>Cancel rename</button></form>
+<h3>Watching</h3><button id="myStuffWatching" type="button" aria-pressed="false" disabled>Show watching</button><p id="myStuffStars" class="my-stuff-note"></p>
+<h3>Bookmark</h3><button id="myStuffBookmark" type="button">Bookmark this selection</button><input id="myStuffCopyFallback" aria-label="Selection URL" readonly hidden><p id="myStuffStatus" role="status" aria-live="polite">Loading catalog tools…</p></section></div>
 <span class="preview-badge">Development prototype</span></div>
 <nav class="browse-nav" aria-label="Browse catalog"><div id="sportTabs" role="tablist" aria-label="Sports"></div>
 <div id="categoryNavigation" hidden><button id="categoryToggle" type="button" aria-expanded="false" aria-controls="categoryPanel" disabled><span id="categoryLabel">Categories</span><span id="categoryCount" class="category-count"></span><span aria-hidden="true">▾</span></button></div>
 <section id="categoryPanel" class="category-panel" aria-labelledby="categoryTitle" hidden><div class="category-heading"><h2 id="categoryTitle">Shop by category</h2><button id="categoryClose" type="button" aria-label="Close categories">×</button></div><div id="categoryChoices" class="category-choices" role="group" aria-label="Product categories"></div><p id="categoryHint">Counts update with your filters.</p></section></nav>
 </header>
+<div id="myStuffBackdrop" hidden></div>
 <main id="sportPanel" role="tabpanel" tabindex="-1"><section id="catalogPanel">
 <p id="contextNote" role="status" aria-live="polite"></p>
 <iframe id="skateFrame" title="SkateDeals — existing catalog and controls" hidden></iframe>

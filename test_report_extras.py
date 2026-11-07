@@ -22,6 +22,17 @@ def _deck(price, url, store, name):
 
 
 class ReportExtraTests(unittest.TestCase):
+    def test_standalone_personal_tools_remain_at_end_of_sidebar(self):
+        from bs4 import BeautifulSoup
+        html = build_report_html({}, {})
+        soup = BeautifulSoup(html, 'html.parser')
+        for section in ('views', 'watching', 'bookmarks'):
+            self.assertIsNotNone(soup.select_one('#filterDrawer #personalTools [data-section="'+section+'"]'))
+        drawer = soup.select_one('#filterDrawer')
+        self.assertIn('show-results', drawer.find_all(recursive=False)[-1].get('class', []))
+        self.assertIsNotNone(soup.select_one('#personalTools #viewNameInput'))
+        self.assertIsNotNone(soup.select_one('#personalTools #bookmarkView'))
+
     def test_page_has_the_new_views_and_a_combined_chart(self):
         left = _deck("64.99", "https://example.com/z", "Zumiez", "Baker Figgy Divine Evil Deck 8.125")
         right = _deck("44.99", "https://example.com/s", "SkateWarehouse", "Baker Figgy Divine Evil Deck 8.12 x 31.875")
@@ -78,10 +89,10 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn(">Highlights", html)
         self.assertIn("Zumiez (", html)
         self.assertNotIn('class="store-strip"', html)
-        self.assertIn('id="morePanel"', html)
+        self.assertIn('id="section-more"', html)
         self.assertIn("Deck Width", html)
         self.assertIn('id="sizeFilters"', html)
-        self.assertLess(html.find('id="sizeFilters"'), html.find('id="morePanel"'))
+        self.assertLess(html.find('id="sizeFilters"'), html.find('id="section-more"'))
         payload = html.split('id="historyJson">', 1)[1].split("</script>", 1)[0]
         data = json.loads(payload)
         series = None
@@ -283,7 +294,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('class="filter-section" data-section="deals"', html)
         self.assertNotIn('class="filter-section is-open" data-section="deals"', html)
         self.assertIn('class="filter-section" data-section="interval"', html)
-        self.assertNotIn('data-section="store"', html)
+        self.assertIn('data-section="store"', html)
         self.assertNotIn('data-section="type"', html)
         self.assertIn('id="storeFilters"', html)
         self.assertIn('id="partFilters"', html)
@@ -294,7 +305,7 @@ class ReportExtraTests(unittest.TestCase):
             'data-part="Decks" data-count="1" aria-pressed="true"',
             html,
         )
-        self.assertIn('class="sr-only" aria-label="Store"', html)
+        self.assertIn('id="storeSelect" aria-label="Store"', html)
         self.assertIn('class="sr-only" aria-label="Product type"', html)
         self.assertIn('id="moreStores" hidden', html)
         self.assertIn('id="moreParts" hidden', html)
@@ -304,7 +315,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn('id="storeFilters"', rail)
         self.assertNotIn('id="partFilters"', rail)
         self.assertNotIn("quick-chip", rail)
-        self.assertNotIn(">All stores<", rail)
+        self.assertIn('id="storeSelect"', rail)
         self.assertNotIn(">Stores<", rail)
         self.assertNotIn(">Products<", rail)
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
@@ -324,7 +335,10 @@ class ReportExtraTests(unittest.TestCase):
         )
         self.assertNotIn('is-type-hidden" data-section="width"', html)
         self.assertIn('class="filter-section" data-section="price"', html)
-        self.assertIn('class="filter-section" data-section="discount"', html)
+        self.assertNotIn('data-section="discount"', html)
+        self.assertIn('data-section="more"', html)
+        self.assertIn("At least % off", html)
+        self.assertIn("Up to % off", html)
         self.assertIn('data-section="score"', html)
         self.assertIn(">Deal quality<", html)
         self.assertIn('class="filter-section" data-section="views"', html)
@@ -342,7 +356,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('id="specGroup"', html)
         self.assertIn('aria-label="Shopping filters"', html)
         self.assertIn('aria-label="Deal intelligence"', html)
-        self.assertIn('aria-label="Personal tools"', html)
+        self.assertIn('aria-label="My stuff"', html)
         self.assertIn("function activeSpecKeys(", html)
         self.assertIn("Historical low", html)
         self.assertIn('aria-label="Score breakdown"', html)
@@ -469,7 +483,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertIn('data-highlight="0"', row_for("https://example.com/older"))
         self.assertIn("if (highlights && row.dataset.highlight !== \"1\") return false;", html)
         self.assertNotIn("<summary>Today's highlights</summary>", html)
-        self.assertIn("Deal Type", html)
+        self.assertIn("Deal type", html)
         self.assertIn(">Products<", html)
         self.assertIn("Saved Views", html)
         self.assertIn(">Show results</button>", html)
