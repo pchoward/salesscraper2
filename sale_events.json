@@ -1,0 +1,188 @@
+{
+  "stores": {
+    "187 Killer Pads": {
+      "events": []
+    },
+    "CCS": {
+      "events": [
+        {
+          "cut": 17,
+          "cut_high": 17,
+          "cut_low": 14,
+          "deals": {
+            "deals": 433,
+            "high": 30,
+            "low": 12,
+            "max_off": 64,
+            "uniform": 12
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-07",
+              "text": "most deals 12% off"
+            }
+          ],
+          "kind": "sale",
+          "listings": 36,
+          "moment": "",
+          "start": "2026-10-31",
+          "steps": [],
+          "tracked": 139,
+          "uniform": false
+        }
+      ]
+    },
+    "Deathgear": {
+      "events": []
+    },
+    "Demon": {
+      "events": []
+    },
+    "Exodus": {
+      "events": []
+    },
+    "Kinetic": {
+      "events": []
+    },
+    "SPoT": {
+      "events": []
+    },
+    "SkatePro": {
+      "events": []
+    },
+    "SkateWarehouse": {
+      "events": [
+        {
+          "cut": 14,
+          "cut_high": 23,
+          "cut_low": 7,
+          "deals": {
+            "deals": 94,
+            "high": 30,
+            "low": 13,
+            "max_off": 50,
+            "uniform": null
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-07",
+              "text": "up to 50% off (most 13-30%)"
+            }
+          ],
+          "kind": "sale",
+          "listings": 24,
+          "moment": "",
+          "start": "2026-10-07",
+          "steps": [
+            {
+              "cut": 15,
+              "from": "2026-11-04",
+              "listings": 13
+            }
+          ],
+          "tracked": 93,
+          "uniform": false
+        }
+      ]
+    },
+    "SoCal": {
+      "events": [
+        {
+          "cut": 15,
+          "cut_high": 15,
+          "cut_low": 15,
+          "end": "2026-11-02",
+          "kind": "sale",
+          "listings": 20,
+          "moment": "",
+          "start": "2026-10-29",
+          "steps": [],
+          "tracked": 20,
+          "uniform": true
+        }
+      ]
+    },
+    "TGM": {
+      "events": []
+    },
+    "Tactics": {
+      "events": [
+        {
+          "cut": 20,
+          "cut_high": 20,
+          "cut_low": 19,
+          "end": "2026-08-11",
+          "kind": "sale",
+          "listings": 19,
+          "moment": "",
+          "start": null,
+          "steps": [],
+          "tracked": 19,
+          "uniform": true
+        },
+        {
+          "cut": 20,
+          "cut_high": 20,
+          "cut_low": 19,
+          "end": "2026-09-11",
+          "kind": "sale",
+          "listings": 72,
+          "moment": "Labor Day",
+          "start": "2026-09-03",
+          "steps": [],
+          "tracked": 72,
+          "uniform": true
+        },
+        {
+          "cut": 12,
+          "cut_high": 13,
+          "cut_low": 12,
+          "end": "2026-10-28",
+          "kind": "sale",
+          "listings": 11,
+          "moment": "",
+          "start": "2026-09-17",
+          "steps": [],
+          "tracked": 54,
+          "uniform": true
+        }
+      ]
+    },
+    "Triple 8": {
+      "events": []
+    },
+    "Zumiez": {
+      "events": [
+        {
+          "cut": 20,
+          "cut_high": 21,
+          "cut_low": 17,
+          "deals": {
+            "deals": 346,
+            "high": 33,
+            "low": 20,
+            "max_off": 62,
+            "uniform": null
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-07",
+              "text": "up to 62% off (most 20-33%)"
+            }
+          ],
+          "kind": "sale",
+          "listings": 31,
+          "moment": "",
+          "start": "2026-10-22",
+          "steps": [],
+          "tracked": 267,
+          "uniform": false
+        }
+      ]
+    }
+  },
+  "updated": "2026-11-07"
+}
