@@ -176,9 +176,9 @@ def multisport_part(title):
 
 
 def _brand_stores():
-    from sports import protection
+    from sports import protection, zeitbike
     return tuple(protection.brand_store(name, sports.SKI, multisport_part, details=details)
-                 for name in ("Triple 8", "Bern", "Demon"))
+                 for name in ("Triple 8", "Bern", "Demon")) + (zeitbike.store(sports.SKI, details=details),)
 
 
 BRAND_STORES = _brand_stores()

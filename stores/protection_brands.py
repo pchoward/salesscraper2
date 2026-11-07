@@ -18,7 +18,10 @@ def part_of(title):
     return "Protection" if multisport.suits("skate", title) else None
 
 
-STORES = tuple(multisport.brand_store(name, sports.SKATE, part_of) for name in NAMES)
+# TSG through its US distributor, filed by Zeitbike's own sport tags.
+from sports import zeitbike
+
+STORES = tuple(multisport.brand_store(name, sports.SKATE, part_of) for name in NAMES) + (zeitbike.store(sports.SKATE),)
 
 
 def scrapers():

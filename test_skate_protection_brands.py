@@ -28,7 +28,7 @@ class SkateBrandTests(unittest.TestCase):
 
     def test_registered_for_protection_only(self):
         scrapers = [s for s in registry.build_scrapers() if getattr(s, "shop", None) in protection_brands.STORES]
-        self.assertEqual({s.shop.store for s in scrapers}, {"Triple 8", "187 Killer Pads", "Demon", "G-Form"})
+        self.assertEqual({s.shop.store for s in scrapers}, {"Triple 8", "187 Killer Pads", "Demon", "G-Form", "Zeitbike"})
         self.assertEqual({s.part for s in scrapers}, {"Protection"})
 
     def test_new_types_in_order(self):
