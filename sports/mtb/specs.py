@@ -8,7 +8,63 @@ FIELDS={
  'wheel_size':'Wheel size (in)', 'travel_mm':'Suspension travel (mm)',
  'frame_size':'Frame size','tire_width':'Tire width (in)',
  'axle':'Axle / spacing','rotor_mm':'Rotor diameter (mm)','riding_type':'Riding type',
+ 'speed':'Drivetrain speed','casing':'Tire casing','tubeless':'Tubeless',
 }
+
+# Owner, 2026-11-07 (menus and filters proposal): read from the name what
+# shops print there. Speed: "12-Speed", "12sp", and drivetrains that only
+# come in one ("Eagle", "T-Type", Shimano's M6100 series).
+_SPEED=re.compile(r'(?<![\d.])(\d{1,2})\s*-?\s*(?:speed|spd|sp)\b',re.I)
+_ONE_SPEED=(
+ (re.compile(r'\beagle\b|\bt-?type\b|\btransmission\b',re.I),'12'),
+ (re.compile(r'\b[MU][5-9]1\d\d\b'),None),          # Shimano 12-speed MTB families, checked below
+ (re.compile(r'\bM(?:7|8|9)0\d\d\b'),'11'),
+ (re.compile(r'\bM6000\b|\bM4100\b'),'10'),
+)
+_CASINGS=(
+ ('EXO+',re.compile(r'\bexo\s*\+|\bexo\s*plus\b',re.I)),
+ ('EXO',re.compile(r'\bexo\b(?!\s*(?:\+|plus))',re.I)),
+ ('DoubleDown',re.compile(r'(?i:\bdouble\s*down\b)|\bDD\b')),
+ ('DH',re.compile(r'\bDH\b(?!\s*(?:[FR]\b|tires?\b))',re.I)),
+ ('Super Trail',re.compile(r'\bsuper\s*trail\b',re.I)),
+ ('Super Gravity',re.compile(r'\bsuper\s*gravity\b',re.I)),
+ ('Super Downhill',re.compile(r'\bsuper\s*downhill\b',re.I)),
+ ('Super Ground',re.compile(r'\bsuper\s*ground\b',re.I)),
+ ('Super Race',re.compile(r'\bsuper\s*race\b',re.I)),
+ ('Radial',re.compile(r'\bradial\b',re.I)),
+ ('Grid Gravity',re.compile(r'\bgrid\s*gravity\b',re.I)),
+ ('Grid Trail',re.compile(r'\bgrid\s*trail\b',re.I)),
+ ('Grid',re.compile(r'\bgrid\b(?!\s*(?:gravity|trail))',re.I)),
+ ('Tough',re.compile(r'\btough\b',re.I)),
+ ('Trail casing',re.compile(r'\btrail\s+casing\b',re.I)),
+ ('Enduro casing',re.compile(r'\benduro\s+casing\b|\benduro\s*core\b',re.I)),
+ ('Downhill casing',re.compile(r'\b(?:downhill|gravity)\s+casing\b',re.I)),
+)
+_TUBELESS=re.compile(r'\btubeless\b|\bTLR\b|\bTR\b|\bTLE\b|\bTCS\b|\b2Bliss\b|\bTL[- ]?ready\b|\bTL\b',re.I)
+_NOT_A_TIRE=re.compile(r'\binserts?\b|\bsealant\b|\bvalves?\b|\bplugs?\b|\brepair\b|\btubes?\b|\brim\s*tape\b|\bliner\b',re.I)
+
+
+def speeds(name):
+    """Drivetrain speeds a part's name states: "12-Speed", "12sp", or a
+    family that only comes in one ("SRAM GX Eagle", "Shimano XT M8100")."""
+    found={m[1] for m in _SPEED.finditer(name) if 7<=int(m[1])<=13}
+    if found:return found
+    for pattern,speed in _ONE_SPEED:
+        match=pattern.search(name)
+        if not match:continue
+        if speed is None:
+            # M5100 is 11-speed; M6100-M9100 (and U-series) are 12.
+            speed='11' if match.group(0)[1:3]=='51' else '12'
+        return {speed}
+    return set()
+
+
+def casings(name):
+    return {label for label,pattern in _CASINGS if pattern.search(name)}
+
+
+def tubeless(name):
+    return bool(_TUBELESS.search(name)) and not _NOT_A_TIRE.search(name)
 WHEELS={'26','27.5','29'}
 NUMBER=r'(\d+(?:\.\d+)?)'
 INCH=r'(?:["″”]|inches\b|inch\b|in\b)'
@@ -47,6 +103,15 @@ def extract(product,variant,part):
     if part=='Forks & Shocks' and re.search(r'\bforks?\b',name,re.I):
         for m in re.finditer(r'(?<![\d.])'+NUMBER+r'\s*mm\b',name,re.I):
             if 50<=float(m[1])<=250 and not re.search(r'\boffset\s*[:=]?\s*$',name[:m.start()],re.I) and not re.match(r'\s*offset\b',name[m.end():],re.I):add('travel_mm',[number(m[1])])
+    if part in ('Drivetrain','Bikes'):add('speed',[s+'-speed' for s in speeds(name)])
+    if part=='Tires' and not _NOT_A_TIRE.search(name):
+        add('casing',casings(name))
+        if tubeless(name):add('tubeless',['Tubeless ready'])
+    # A fork's or frame's wheel size printed bare: "Fox 36 Float 29", "Hightower 4 CC 29 Frame".
+    if part in ('Forks & Shocks','Frames','Bikes'):
+        for m in re.finditer(r'(?<![\d.\-/])(27\.5|29)(?:er)?(?![\d.]|\s*(?:mm|t\b|x\b|tooth))',name,re.I):
+            if not re.search(r'(?:frame size|top tube|seat tube|size|width|reach)\s*[:=]?\s*$',name[:m.start()],re.I):
+                add('wheel_size',[m[1]])
     if part=='Brakes' and re.search(r'\brotors?\b',name,re.I):
         add('rotor_mm',[number(v) for v in re.findall(NUMBER+r'\s*mm\b',name,re.I) if 140<=float(v)<=240])
     axes=option_text(product,variant)

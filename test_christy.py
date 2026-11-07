@@ -42,7 +42,9 @@ class ChristyTests(unittest.TestCase):
         self.assertEqual((boot["price_new"], boot["price_old"], boot["url"]),
                          ("318.97", "529.99", "https://www.christysports.com/product/x-1/1.html"))
         self.assertEqual(boot["image"], "https://img.example/1.jpg?sw=600&sh=600")
-        self.assertEqual(boot["technical_specs"], {"flex": ["Medium (80–100)"], "gender": ["Women"]})
+        # "HV" in the name: Tecnica's high-volume (wide) last.
+        self.assertEqual(boot["technical_specs"], {"flex": ["Medium (80–100)"], "last": ["Wide (102 mm and over)"],
+                                                   "gender": ["Women"]})
         binding = self.parse("Bindings")[0]
         self.assertEqual(binding["technical_specs"]["din"], ["14 and up"])
 
