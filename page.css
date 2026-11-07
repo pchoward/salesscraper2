@@ -3455,3 +3455,9 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 .sale-history-list > li { margin: 0.2rem 0; }
 .sale-history-list ul { margin: 0.1rem 0 0; padding-left: 1rem; }
 .sale-history-note { margin: 0.35rem 0 0; color: var(--text-secondary); font-size: 0.78rem; }
+
+/* Sidebar cleanup: one price section, rare deal tools behind More. */
+.sidebar [data-section="more"] > .section-body { padding:0 6px 6px; }
+.sidebar .more-count { margin-left:4px; color:var(--primary); font-variant-numeric:tabular-nums; }
+.sidebar .personal-label { margin:8px 0 4px; padding:0 8px; font-size:11px; color:var(--grey-600); }
+.sidebar #storeSelect { width:100%; max-width:100%; }

@@ -126,6 +126,9 @@ jobs:
       - name: Sport hover, keyboard and touch menu checks
         run: node ci/check_sport_menus.cjs preview/site "${{ runner.temp }}/category-navigation-results/sport-menus"
 
+      - name: Sidebar disclosure and saved-link browser checks
+        run: node ci/check_sidebar.cjs preview/site "${{ runner.temp }}/category-navigation-results/sidebar"
+
       - name: Upload category navigation screenshots
         if: always()
         uses: actions/upload-artifact@v4
