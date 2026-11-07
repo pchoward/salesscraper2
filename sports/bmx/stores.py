@@ -15,7 +15,7 @@ stores.preview()"`` shows what a live run would keep without saving anything.
 import re
 
 import sports
-from sports import brands, offers, protection
+from sports import brands, offers, protection, zeitbike
 from sports.bmx import dans, facets, specs
 from stores import shopify
 
@@ -228,7 +228,8 @@ def multisport_part(title):
 
 
 BRAND_STORES = tuple(protection.brand_store(name, sports.BMX, multisport_part, details=details)
-                     for name in ("Triple 8", "187 Killer Pads", "Kali", "Demon", "G-Form"))  # Bern's are commuter lids
+                     for name in ("Triple 8", "187 Killer Pads", "Kali", "Demon", "G-Form")) + (
+    zeitbike.store(sports.BMX, details=details),)  # TSG, filed by Zeitbike's own sport tags  # Bern's are commuter lids
 
 # Bike shops' BMX-style protection (owner, 2026-11-03: "very few helmets in
 # BMX ... the one thing people wear, then shin or knee guards"). Helmets only

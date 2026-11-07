@@ -186,10 +186,15 @@ def sport_shops():
         module = importlib.import_module(f"sports.{sport}.stores")
         for value in vars(module).values():
             for store in (value if isinstance(value, (tuple, list)) else [value]):
-                if isinstance(store, shopify.ShopifyStore) and store.base not in seen:
+                if isinstance(store, shopify.ShopifyStore):
                     handles = {url.split("/collections/", 1)[1].split("/", 1)[0]
                                for url in store.sale_jsons if "/collections/" in url}
-                    seen[store.base] = (store.store, store.base, handles)
+                    # One site read by several sports (Zeitbike: TSG, and
+                    # NEWMEN for MTB): every collection any of them reads.
+                    if store.base in seen:
+                        seen[store.base][2].update(handles)
+                    else:
+                        seen[store.base] = (store.store, store.base, handles)
     return list(seen.values())
 
 

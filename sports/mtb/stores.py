@@ -196,7 +196,15 @@ RACE_FACE=brand_store('Race Face','https://www.raceface.com',
 KALI=brand_store('Kali','https://www.kaliprotectives.com',('all',))
 BERN=brand_store('Bern','https://www.bernunlimited.com',('bern-barn','bern-outlet'))
 SMITH=brand_store('Smith','https://www.smithoptics.com',('bike-sale',))  # bike helmets, MTB goggles
-BRAND_STORES=(TROY_LEE,ALPINESTARS,DEMON,SEVEN_IDP,G_FORM,RACE_FACE,KALI,BERN,SMITH)
+# Zeitbike (owner, 2026-11-07): TSG's US distributor; its TSG line and
+# NEWMEN's wheels, bars, stems and posts. Its other brands (Ergotec city
+# parts, Mondraker spares) aren't read.
+from sports import zeitbike
+def _newmen_part(product_type,title):
+    kind=shopify.type_key(product_type)
+    return TYPES.get(kind) or brand_title(kind) or brand_title(title)
+ZEITBIKE=zeitbike.store(sports.MTB,('tsg','newmen-components'),fallback=_newmen_part)
+BRAND_STORES=(TROY_LEE,ALPINESTARS,DEMON,SEVEN_IDP,G_FORM,RACE_FACE,KALI,BERN,SMITH,ZEITBIKE)
 # The Lost Co. (owner, 2026-11-03): an MTB parts shop with ~650 marked-down
 # parts. Its types are clean ("Fork Parts", "Rear Shocks", "Chainrings");
 # tools, lubes, fluids, cleaners, sealant and fenders are left out.

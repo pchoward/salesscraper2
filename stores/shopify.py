@@ -101,7 +101,8 @@ _VENDOR_FILLER = {"wheels", "wheel", "trucks", "truck", "bearings", "bearing", "
 class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
                  brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=(),
-                 type_part=None, track_exclusions=False, tag_part=None, raw_type_part=False, whole_site=False):
+                 type_part=None, track_exclusions=False, tag_part=None, raw_type_part=False, whole_site=False,
+                 product_part=None):
         self.store = store
         self.display_name = display_name
         self.base = base.rstrip("/")
@@ -142,6 +143,9 @@ class ShopifyStore:
         # type_part gets the store's product type as written ("A/B - C/D"),
         # for stores whose types are paths whose separators matter.
         self.raw_type_part = raw_type_part
+        # (product type, title, tags) -> part: a store that files by sport in
+        # its tags (Zeitbike's "Helmets (Skate)"); it decides alone.
+        self.product_part = product_part
         self.cache = {}
 
 
@@ -162,6 +166,8 @@ def part_for_title(title):
 
 def part_for(store, product_type, title="", tags=None):
     """The report part for a product, or None to skip it."""
+    if getattr(store, "product_part", None):
+        return store.product_part(product_type, title, tags)
     if getattr(store, "tag_part", None) and tags is not None:
         # A store that files categories in tags ("Category: Skis").
         return store.tag_part(tags)

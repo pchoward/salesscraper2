@@ -34,8 +34,8 @@ class SuitsTests(unittest.TestCase):
         from sports.bmx import stores as bmx
         from sports.mtb import stores as mtb
         from sports.ski import stores as ski
-        self.assertEqual([s.store for s in bmx.BRAND_STORES], ["Triple 8", "187 Killer Pads", "Kali", "Demon", "G-Form"])
-        self.assertEqual([s.store for s in ski.BRAND_STORES], ["Triple 8", "Bern", "Demon"])
+        self.assertEqual([s.store for s in bmx.BRAND_STORES], ["Triple 8", "187 Killer Pads", "Kali", "Demon", "G-Form", "Zeitbike"])
+        self.assertEqual([s.store for s in ski.BRAND_STORES], ["Triple 8", "Bern", "Demon", "Zeitbike"])
         self.assertTrue({"Kali", "Bern", "Smith"} <= {s.store for s in mtb.STORES})
         self.assertEqual(bmx.multisport_part("Triple 8 Saver Series Pad Set 3 Pack"), "Protection")
         self.assertEqual(ski.multisport_part("Halo Snow Standard Helmet"), "Helmets")
