@@ -669,7 +669,7 @@ function truckSelection(overrides) {
 function selectedShoePrice(row, technical, ranges, overrides) {
     if (typeof TruckFit !== "undefined" && row.dataset.part === "Trucks") {
         const truck = truckSelection(overrides);
-        if (truck.fits.length || truck.native.length) return TruckFit.cheapest(row, truck, ranges || technicalPriceConstraints(overrides));
+        if (truck.fits.length || truck.native.length || overrides?._truckOffers) return TruckFit.cheapest(row, truck, ranges || technicalPriceConstraints(overrides));
     }
     if (typeof SportSpecFilters !== "undefined") {
         const offer = SportSpecFilters.price(row.dataset.url, technical, ranges || technicalPriceConstraints());
@@ -1040,6 +1040,7 @@ function paintFacetCounts() {
         });
         const override = {};
         override[facet.stateKey] = [];
+        if (facet.stateKey === "truckFits" || facet.stateKey === "truckNatives") override._truckOffers = true;
         dealRows().forEach(row => {
             if ((row.dataset.part || "") !== facet.part) return;
             if (!rowMatches(row, override)) return;
@@ -1508,7 +1509,7 @@ function rowMatchesNow(row, overrides) {
     if (!searchMatches(row, search, over.searchNear || 0)) return false;
     const typed = typedFilters(search);
     const truck = typeof TruckFit !== "undefined" ? truckSelection(over) : {fits: [], native: []};
-    if ((truck.fits.length || truck.native.length) &&
+    if ((truck.fits.length || truck.native.length || over._truckOffers) &&
         (row.dataset.part !== "Trucks" || !TruckFit.options(row, truck, technicalPriceConstraints(over)).length)) return false;
     if (over.store == null && typed.stores) {
         if (typed.stores.indexOf(row.dataset.store || "") < 0) return false;

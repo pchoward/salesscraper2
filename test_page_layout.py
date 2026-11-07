@@ -191,7 +191,7 @@ class FilterOrderTests(unittest.TestCase):
         sections = _sections(html)
         canon = [
             "brand",
-            "width", "trucksize", "diameter", "wheelcolor", "shoesize", "protsize", "abec",
+            "width", "truckfit", "trucknative", "diameter", "wheelcolor", "shoesize", "protsize", "abec",
             "length", "wheelbase", "deckcolor", "truckheight", "construction", "duro", "shape", "prottype",
             "store", "price", "more", "score", "deals", "interval",
         ]
@@ -199,7 +199,7 @@ class FilterOrderTests(unittest.TestCase):
         self.assertEqual(present, [item for item in canon if item in present])
         expected = {
             "Decks": ["brand", "width", "length", "wheelbase", "price"],
-            "Trucks": ["brand", "trucksize", "truckheight", "construction", "price"],
+            "Trucks": ["brand", "truckfit", "trucknative", "truckheight", "construction", "price"],
             "Wheels": ["brand", "diameter", "duro", "shape", "price"],
             "Sneakers": ["brand", "shoesize", "price"],
             "Protection": ["brand", "protsize", "prottype", "price"],

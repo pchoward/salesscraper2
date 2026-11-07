@@ -19,6 +19,8 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
   const visible=()=>page.locator('.deal-row:not(.filtered-out)').evaluateAll(nodes=>nodes.map(n=>new URL(n.dataset.url).pathname.slice(1)).sort());
   await visit();assert.equal((await visible()).length,8);
   assert(await page.locator('[data-section="trucknative"]').evaluate(n=>n.classList.contains('is-type-hidden')));
+  await visit('&min=100');
+  assert.equal(await page.locator('#truckfitFilters [data-value="9.0"] .spec-count').innerText(),'1');
   await visit('&truckfit=9.0&max=60');assert.deepEqual(await visible(),[]);
   await visit('&truckfit=9.0&trucknative=ace%3A55');assert.deepEqual(await visible(),[]);
   await visit('&truckfit=9.0&brand=Ace');assert.deepEqual(await visible(),['variants']);
@@ -48,7 +50,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
   assert.match(await page.locator('#quickView').innerText(),/150\.00/);
   assert.match(await page.locator('#quickView').innerText(),/Ace 66/);
   await page.keyboard.press('Escape');
-  if(width<500)await page.locator('#filtersOpen').click();
+  if(width<500){await page.locator('#filtersOpen').click();await page.waitForFunction(()=>getComputedStyle(document.getElementById('filterDrawer')).transform==='none');}
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   await page.screenshot({path:path.join(out,'trucks-'+width+'.png')});
   assert.deepEqual(errors,[]);results.push({width,status:'pass'});await page.close();

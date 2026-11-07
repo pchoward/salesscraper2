@@ -3328,7 +3328,6 @@ def _removed_card_html(row, row_id):
         f'<span class="store-mark">{escape(store)}</span>'
         f'{_card_quick_button(name)}</div>'
         f'<h3 class="product-name">{escape(name)}</h3>'
-        f'{truck_label_html}'
         '<p class="gone-note">No longer in sale feed</p>'
         f'<p class="card-prices"><span class="now-price">Last {price}</span></p>'
         f'<p class="card-meta">{escape(meta)}</p>'
