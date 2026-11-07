@@ -93,3 +93,46 @@ After tasks 3–5 land, update `docs/menu-wireframe.html`:
 - the new Skate filters
 
 Then tell the owner the page needs republishing. Claude republishes the artifact from that file.
+
+## 10. Trucks: one "Fits deck" filter that keeps each brand's own sizes
+Owner, 2026-11-07: "I kept seeing 151 and thought we didn't have anything bigger."
+
+**The problem:** today's Truck Size filter (`page.py` `truck_specs`, Trucks sections) mixes four systems in one list:
+- Independent numbers: 129–151
+- Ace numbers: 33–66
+- Venture numbers: 5.6
+- axle widths in inches: 7.75–11.0
+
+The names are also read wrongly:
+- "Independent 166 Stage 4" gets no size.
+- "Reynolds 159 (8.75")" is filed as 8.75, so 159 never shows.
+- 22 of 77 trucks have no size in the name. Their size is only in the store's size options or variants.
+
+**What to build:**
+1. **Size table.** `TRUCK_SIZES` maps a brand's size to the deck widths it fits (one or two widths):
+   - Independent: 109, 129, 139, 144, 149, 151, 159, 166, 169, 215
+   - Ace: 00, 11, 22, 33, 44, 55, 60, 66, 77, 80
+   - Venture: 5.0, 5.2, 5.6, 5.8, 6.1
+   - Thunder: 143, 145, 147, 148, 149, 151, 161
+   - Krux, Royal, Tensor and Slappy where their charts give one
+
+   Take the widths from each brand's own published size chart (cite the URL in a comment), not from memory. A size that spans two widths (Indy 159 ≈ 8.75–9.0) matches both.
+2. **Reading sizes.** Read the brand size from the name, and also from the store's size option or variant titles when the name has none. When both a brand number and inches are printed, keep both: the brand number as the native size, the inches as a cross-check.
+3. **Sidebar.** One section, **"Fits deck"**, using the deck-width bands:
+   - The bands are 7.75 · 8.0 · 8.25 · 8.5 · 8.75 · 9.0 · 9.5+.
+   - Each chip lists the brand sizes it covers in small text, e.g. "8.5"  Indy 149 · Ace 55 · Venture 5.8".
+4. **Brand row.** A second row, **brand sizes**, appears only when exactly one brand is selected:
+   - Independent: 129 · 139 · 144 · 149 · 159 · 166 · 169 · 215
+   - Ace: 33 · 44 · 55 · 60 · 66 · 77
+5. **Cards.** Show the native size and the fit, e.g. "Independent Stage 11 · 159 (fits ~8.75–9.0")".
+6. **Search.** "indy 159", "ace 66" and "9.0 trucks" all find the right trucks.
+7. **URL.**
+   - Keep `trucksize` working for old links, mapping old values onto the new bands.
+   - Add `truckfit` for the bands and `trucknative` for the brand row.
+8. **PR body.** Coverage before and after: trucks with a size went from 55 of 77 to ?.
+
+**Tests:**
+- Name parsing: 166, "159 (8.75")", Ace 66, Venture 5.8.
+- Variant-only sizes.
+- One band chip lists the right brand sizes.
+- The brand row only appears with a single brand selected.
