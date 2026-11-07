@@ -293,8 +293,9 @@ def brand_title_part(title):
     return title_part(title)
 
 
-def bmx_brand(name, base, collection, whole_site=False):
+def bmx_brand(name, base, collection, whole_site=False, more_collections=(), extra_types=None):
     return shopify.ShopifyStore(name, name, base, collection=collection, types=TYPES, whole_site=whole_site,
+                                more_collections=more_collections, extra_types=extra_types,
                                 brand_of=brands.for_sport(sports.BMX), title_part=brand_title_part, details=details,
                                 track_exclusions=True, unknown_by_title=True)
 
@@ -304,6 +305,18 @@ BMX_BRANDS = (
     bmx_brand("Haro", "https://www.harobikes.com", "summer-parts-sale"),
     bmx_brand("Fiend", "https://www.fiendbmx.com", "clearance", whole_site=True),  # audit 2026-11-06: 3 more
 )
+# Cult (store probe, 2026-11-07): the priority freestyle completes live in
+# a dedicated "Bikes" collection (19, none on sale today; types all "Bikes",
+# vendor "CULT CREW" -> brand "Cult" via the alias) and its annual Cyber
+# Monday-style sale collection (12 items this season, 10 marked down).
+# "Hubs / Wheels" is Cult's one text type not in TYPES (type_key collapses
+# the slash); T-shirts and softgoods (500+ items) stay out. Sunday's Shopify
+# JSON is locked and Fitbikeco is WooCommerce (see the store probe for both),
+# so no store yet.
+CULT = bmx_brand("Cult", "https://cultcrew.com", "cult-complete-bikes",
+                 more_collections=("black-friday",), extra_types={"hubs wheels": "Wheel Parts"})
+BMX_BRANDS = BMX_BRANDS + (CULT,)
+
 
 STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS
 

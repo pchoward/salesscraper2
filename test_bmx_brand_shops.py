@@ -1,4 +1,6 @@
-"""BMX brands' own stores (2026-11-04): Kink, Haro and Fiend sale sections."""
+"""BMX brands' own stores (2026-11-04): Kink, Haro and Fiend sale sections;
+Cult's complete bikes joined (2026-11-07, store probe; docs/audit-
+bmx-bikes-2026-11-07.md)."""
 
 import unittest
 
@@ -11,7 +13,8 @@ class BmxBrandShopTests(unittest.TestCase):
         self.assertEqual([(s.store, s.sale_json) for s in stores.BMX_BRANDS],
                          [("Kink", "https://www.kinkbmx.com/collections/sale/products.json"),
                           ("Haro", "https://www.harobikes.com/collections/summer-parts-sale/products.json"),
-                          ("Fiend", "https://www.fiendbmx.com/collections/clearance/products.json")])
+                          ("Fiend", "https://www.fiendbmx.com/collections/clearance/products.json"),
+                          ("Cult", "https://cultcrew.com/collections/cult-complete-bikes/products.json")])
         self.assertTrue(set(stores.BMX_BRANDS) <= set(stores.STORES))
 
     def test_their_product_types(self):
