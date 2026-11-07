@@ -30,7 +30,8 @@ in any bucket, so it is hidden while any range is selected.
 Wheel, truck, and bearing specs are the same kind of list. They are omitted
 when empty. ``diameter`` is a band id (``50-51``, ``52-53``, ``54-55``,
 ``56+``). ``duro`` is a hardness token such as ``99a``. ``shape`` is
-``conical``, ``radial``, or ``sidecut``. ``trucksize`` is the size printed
+``conical``, ``radial``, or ``sidecut``. ``truckfit`` selects deck-fit bands; ``trucknative`` selects brand-qualified
+native codes (e.g. ``ace:66``). ``trucksize`` is the legacy exact size printed
 in the name. ``truckheight`` is ``low``, ``mid``, or ``high``. ``construction`` is
 ``hollow`` or ``standard`` when that word is printed in the name. ``abec`` is
 the rating digits. ``shoesize`` is a US men's size such as ``10`` or ``10.5``.
@@ -51,6 +52,7 @@ from part_specs import (
     ordered_shapes,
     ordered_sizes,
 )
+from truck_fit import ordered_fits, ordered_natives
 from protection import ordered_size_tokens, ordered_type_tokens
 
 
@@ -217,6 +219,8 @@ def empty_state():
         "duros": [],
         "shapes": [],
         "truck_sizes": [],
+        "truck_fit": [],
+        "truck_native": [],
         "truck_heights": [],
         "constructions": [],
         "abecs": [],
@@ -402,6 +406,10 @@ def decode_query(query):
             state["duros"] = ordered_duros(str(value or "").split(","))
         elif key == "shape":
             state["shapes"] = ordered_shapes(str(value or "").split(","))
+        elif key == "truckfit":
+            state["truck_fit"] = ordered_fits(str(value or "").split(","))
+        elif key == "trucknative":
+            state["truck_native"] = ordered_natives(str(value or "").split(","))
         elif key == "trucksize":
             state["truck_sizes"] = ordered_sizes(str(value or "").split(","))
         elif key == "truckheight":
@@ -494,6 +502,10 @@ def encode_state(state):
     shapes = ordered_shapes(state.get("shapes"))
     if shapes:
         add("shape", ",".join(shapes))
+    for key, normalizer in (("truckfit", ordered_fits), ("trucknative", ordered_natives)):
+        values = normalizer(state.get({"truckfit": "truck_fit", "trucknative": "truck_native"}[key]))
+        if values:
+            add(key, ",".join(values))
     sizes = ordered_sizes(state.get("truck_sizes"))
     if sizes:
         add("trucksize", ",".join(sizes))

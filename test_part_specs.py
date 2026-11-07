@@ -191,14 +191,13 @@ class SpecSectionTests(unittest.TestCase):
             _item('Thunder Low 8.0" Skateboard Truck', "Trucks", "https://example.com/t5"),
         ]
         html = build_report_html({"Zumiez_Trucks": trucks}, {}, generated_at="2026-10-11T21:46:35+00:00")
-        self.assertIn('data-section="trucksize" data-for="Trucks"', html)
+        self.assertIn('data-section="truckfit" data-for="Trucks"', html)
         self.assertNotIn('data-section="truckheight"', html)
-        self.assertIn('data-value="149"', html)
-        self.assertIn('data-value="5.6"', html)
+        self.assertIn('data-value="independent:149"', html)
+        self.assertIn('data-value="venture:5.6"', html)
         self.assertIn('data-value="8.0"', html)
-        self.assertIn("Hanger size 149 printed in the name", html)
-        self.assertIn("Ace size 55 printed in the name", html)
-        self.assertIn("Axle width 5.6 printed in the name", html)
+        self.assertIn('Native size, without inferred deck fit', html)
+        self.assertIn('data-trucksize="149"', html)
         tall = trucks + [
             _item("Independent Mid 151 Skateboard Truck", "Trucks", "https://example.com/t6"),
             _item("Ace 44 Low Skateboard Truck", "Trucks", "https://example.com/t7"),

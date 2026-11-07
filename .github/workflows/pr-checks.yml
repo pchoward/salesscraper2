@@ -132,6 +132,11 @@ jobs:
       - name: My stuff persistence and mobile browser checks
         run: node ci/check_my_stuff.cjs preview/site "${{ runner.temp }}/category-navigation-results/my-stuff"
 
+      - name: Variant-aware truck fit and legacy-link browser checks
+        run: |
+          python ci/build_truck_fixtures.py preview/site
+          node ci/check_truck_fit.cjs preview/site "${{ runner.temp }}/category-navigation-results/truck-fit"
+
       - name: Upload category navigation screenshots
         if: always()
         uses: actions/upload-artifact@v4
