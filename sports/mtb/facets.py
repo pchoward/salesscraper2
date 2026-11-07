@@ -13,7 +13,7 @@ FIELDS = (
     {"key": "casing", "label": "Casing", "param": "mtb_casing", "categories": ("Tires",)},
     {"key": "tubeless", "label": "Tubeless", "param": "mtb_tubeless", "categories": ("Tires",)},
     {"key": "riding_type", "label": "Riding type", "param": "mtb_ride", "categories": ()},
-) + protection.facet_fields("mtb", ("Protection", "Helmets"))
+) + protection.facet_fields("mtb", ("Protection", "Helmets", "Goggles", "Gloves"))
 
 # Compatibility for callers on the original MTB branch.
 def payload(data):

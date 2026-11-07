@@ -611,6 +611,7 @@ function activeSpecKeys(part) {
     if (current === "Bearings") return ["abecs"];
     if (current === "Sneakers") return ["shoeSizes"];
     if (current === "Protection") return ["protTypes", "protSizes"];
+    if (current === "Helmets") return ["protSizes"];
     return [];
 }
 
@@ -788,7 +789,8 @@ function syncTypeSections(expandSpec) {
     }
     document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
         const owner = section.getAttribute("data-for") || "";
-        const show = part === "all" || owner === part;
+        // A section can serve several types ("Protection Helmets": size).
+        const show = part === "all" || owner.split(" ").indexOf(part) >= 0;
         section.classList.toggle("is-type-hidden", !show);
         const id = section.getAttribute("data-section") || "";
         if (show && part !== "all" && expandSpec && SPEC_OPEN[id]) paintFilterSection(section, true);
@@ -3186,7 +3188,9 @@ function slugType(value) {
         accessories: "Accessories",
         complete: "Completes",
         completes: "Completes",
-        protection: "Protection"
+        protection: "Protection",
+        helmet: "Helmets",
+        helmets: "Helmets"
     }[key];
     const sportParts = typeof SPORT_SETTINGS !== "undefined" ? SPORT_SETTINGS.parts || [] : null;
     if (fixed && (!sportParts || sportParts.indexOf(fixed) >= 0)) return fixed;
@@ -6952,7 +6956,7 @@ function init() {
                 const button = event.target.closest(".color-swatch");
                 if (!button || !group.contains(button)) return;
                 const section = group.closest(".filter-section");
-                const part = section ? (section.getAttribute("data-for") || "Decks") : "Decks";
+                const part = section ? ((section.getAttribute("data-for") || "Decks").split(" ")[0]) : "Decks";
                 toggleColorValue(button.getAttribute("data-value") || "all", part);
             });
         });

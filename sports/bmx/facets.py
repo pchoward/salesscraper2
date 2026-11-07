@@ -15,4 +15,4 @@ FIELDS = (
     {"key": "axle", "label": "Axle", "param": "bmx_axle", "categories": ("Bikes", "Frames & Forks", "Wheels", "Wheel Parts", "Wheels & Hubs")},
     {"key": "material", "label": "Material", "param": "bmx_material", "categories": ()},
     {"key": "color", "label": "Color", "param": "bmx_color", "categories": ()},
-) + protection.facet_fields("bmx", ("Protection", "Helmets", "Pads & Gloves"))
+) + protection.facet_fields("bmx", ("Protection", "Helmets", "Goggles", "Gloves"))

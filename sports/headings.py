@@ -5,10 +5,11 @@ Stores and scrapers keep their own categories (``Sport.parts``): price
 history, scrape health, alerts and old links all use them. The page groups
 the same deals under headings people shop by:
 
-* Ski: Goggles and Body Armor come out of Protection (93% of it was goggles).
-* MTB: Helmets come out of Protection; Forks & Shocks reads Suspension.
-* BMX: Helmets come out of Protection, the rest is Pads & Gloves; Wheels and
-  Wheel Parts are one Wheels & Hubs; BMX shop words for the rest.
+* Every sport: Helmets, Goggles and Gloves come out of Protection, which
+  keeps pads, armor, impact shorts and wrist guards (GEAR, below).
+* MTB: Forks & Shocks reads Suspension.
+* BMX: Wheels and Wheel Parts are one Wheels & Hubs; BMX shop words for the rest.
+* Skate: shop order, Helmets out of Protection.
 
 A heading is a thing to shop for. Types within it (ski type, hub vs rim)
 are filters, not more headings, so the menu stays short on a phone.
@@ -18,12 +19,18 @@ import re
 
 from sports.protection import protects as _protects
 
+# The gear at the bottom of every menu has the same names on every sport
+# (owner, 2026-11-07; the map is docs/menu-wireframe.md): Helmets, Goggles, Gloves,
+# then Protection for pads, armor, impact shorts and wrist guards. A
+# heading with no deals is not shown.
+GEAR = ("Helmets", "Goggles", "Gloves", "Protection")
+
 HEADINGS = {
-    "ski": ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Goggles", "Body Armor"),
-    "mtb": ("Bikes", "Frames", "Suspension", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals",
-            "Helmets", "Protection"),
+    "skate": ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories") + GEAR + ("Sneakers",),
+    "ski": ("Skis", "Boots", "Bindings", "Poles") + GEAR,
+    "mtb": ("Bikes", "Frames", "Suspension", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals") + GEAR,
     "bmx": ("Bikes", "Frames & Forks", "Bars & Steering", "Drivetrain", "Wheels & Hubs", "Tires & Tubes",
-            "Seats & Posts", "Brakes", "Helmets", "Pads & Gloves"),
+            "Seats & Posts", "Brakes") + GEAR,
 }
 
 # Store category -> heading, where it is a plain rename or merge.
@@ -35,10 +42,10 @@ _RENAMED = {
 
 # Old ?type= links keep working: the old category's slug opens its heading.
 ALIASES = {
-    "ski": {"protection": "Goggles"},
+    "ski": {"body-armor": "Protection"},
     "mtb": {"forks-shocks": "Suspension"},
     "bmx": {"steering": "Bars & Steering", "wheels": "Wheels & Hubs", "wheel-parts": "Wheels & Hubs",
-            "tires": "Tires & Tubes", "seating": "Seats & Posts", "braking": "Brakes", "protection": "Pads & Gloves"},
+            "tires": "Tires & Tubes", "seating": "Seats & Posts", "braking": "Brakes", "pads-gloves": "Protection"},
 }
 
 
@@ -61,13 +68,13 @@ def heading(sport_id, item):
     part = (item or {}).get("part") or ""
     if part == "Protection":
         kinds = _protected(item)
-        if sport_id == "ski":
-            return "Goggles" if kinds & {"Goggles", "Goggle lenses"} or re.search(r"\bgoggles?\b", item.get("name") or "", re.I) \
-                else "Body Armor"
-        if sport_id in ("mtb", "bmx"):
-            if "Helmets" in kinds:
-                return "Helmets"
-            return "Protection" if sport_id == "mtb" else "Pads & Gloves"
+        if "Helmets" in kinds:
+            return "Helmets"
+        if kinds & {"Goggles", "Goggle lenses"} or re.search(r"\bgoggles?\b", item.get("name") or "", re.I):
+            return "Goggles"
+        if kinds == {"Gloves"}:
+            return "Gloves"
+        return "Protection"
     return _RENAMED.get(sport_id, {}).get(part, part)
 
 

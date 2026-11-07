@@ -222,12 +222,12 @@ def build_report_html(data, changes, price_history=None, failed_keys=None, gener
     from page import render_page
 
     # Another sport's page is built under that sport's listing rules.
-    if sport is not None and not sport.is_default:
-        # The page groups deals under menu headings (Goggles, Helmets, Wheels &
-        # Hubs); stored data keeps the stores' categories.
-        from sports import headings
-        data = headings.regroup(data, sport.id)
-        price_history = headings.regroup_history(price_history, sport.id)
+    # The page groups deals under menu headings (Helmets, Goggles, Wheels &
+    # Hubs); stored data keeps the stores' categories.
+    from sports import headings
+    sport_id = sport.id if sport is not None else "skate"
+    data = headings.regroup(data, sport_id)
+    price_history = headings.regroup_history(price_history, sport_id)
     with (sport.active() if sport is not None else contextlib.nullcontext()):
         return render_page(
             data,

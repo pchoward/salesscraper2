@@ -91,6 +91,15 @@ def _catalog():
             protection_sizes=["M", "L"],
         )
         for index in range(5)
+    ] + [
+        # Helmets have their own heading; pads stay under Protection.
+        _item(
+            "Pro-Tec Street Knee Pads",
+            "Protection",
+            f"https://example.com/knee-{index}",
+            protection_sizes=["M", "L"],
+        )
+        for index in range(5)
     ]
     return {
         "Zumiez_Decks": decks,
@@ -122,7 +131,8 @@ def _visible(sections, part):
     return [
         item["id"]
         for item in sections
-        if not item["hidden"] and (not item["for"] or item["for"] == part)
+        # A section can serve several types: data-for="Protection Helmets".
+        if not item["hidden"] and (not item["for"] or part in item["for"].split())
     ]
 
 
@@ -193,6 +203,7 @@ class FilterOrderTests(unittest.TestCase):
             "Wheels": ["brand", "diameter", "duro", "shape", "price"],
             "Sneakers": ["brand", "shoesize", "price"],
             "Protection": ["brand", "protsize", "prottype", "price"],
+            "Helmets": ["brand", "protsize", "price"],
             "Bearings": ["brand", "abec", "price"],
             "Accessories": ["brand", "price"],
             "Completes": ["brand", "price"],
