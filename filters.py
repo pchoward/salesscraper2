@@ -489,7 +489,9 @@ def item_passes_filters(item):
         return False
     return passes_filters(
         item.get("name", ""),
-        item.get("part", ""),
+        # The store's category: a page can show a deal under another heading
+        # (sports/headings.py) and the catalog rules still judge it as sold.
+        item.get("store_part") or item.get("part", ""),
         item.get("url", ""),
         item.get("price_new"),
         item.get("price_old"),

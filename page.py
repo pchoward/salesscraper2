@@ -71,6 +71,7 @@ from query_state import STARTER_VIEWS, WIDTH_RANGES, bucket_for_width
 from score import FORMULA, SCORE_LEGEND, deal_score, score_band
 from site_sales import activity_line, describe_sales, display_name, load_state
 import sale_events
+from sports import headings as sport_headings
 from watchlist import load_watchlist, rule_matches
 
 logger = logging.getLogger("page")
@@ -83,7 +84,10 @@ _BRANDS = {
     "bearings": BEARING_BRANDS,
     "sneakers": ("Nike SB", "Nike", "Vans"),
 }
-PART_ORDER = ("Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes", "Protection")
+# Skate's menu, in shop order (Tactics' too): completes second, shoes last.
+PART_ORDER = ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories", "Protection", "Sneakers")
+# What the menu calls a store category; filters and links keep the category.
+PART_LABELS = {"Sneakers": "Shoes", "Accessories": "Grip, Hardware & Tools"}
 # First screen of cards. The rest stay out of the grid until the reader scrolls
 # or asks for more, so a wide catalog does not lay out every card on load.
 CARD_PAGE_SIZE = 24
@@ -1440,7 +1444,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     # The sport's categories, branding and search vocabulary (sports/).
     # Skate's page is built exactly as before and carries no sport settings.
     sport = sport or sports.SKATE
-    part_order_for_sport = PART_ORDER if sport.is_default else sport.parts
+    part_order_for_sport = PART_ORDER if sport.is_default else sport_headings.headings(sport)
     default_part = sport.default_part
     # Shared assets live at the site root; a page in bmx/ reaches them with ../
     asset_prefix = "../" * sport.page_path.count("/")
@@ -2351,7 +2355,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         shown_parts.append(part)
         part_buttons.append(
             _quick_chip(
-                "part", part, part, part_counts.get(part, 0),
+                "part", part, PART_LABELS.get(part, part), part_counts.get(part, 0),
                 pressed=(part == default_part), order=len(part_buttons),
             )
         )
@@ -2882,7 +2886,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             ""
             if sport.is_default
             else "const SPORT_SETTINGS = "
-            + json.dumps({"id": sport.id, "label": sport.label, "defaultPart": default_part, "parts": list(sport.parts), "alerts": bool(sport.delivery)}).replace("<", "\\u003c")
+            + json.dumps({"id": sport.id, "label": sport.label, "defaultPart": default_part, "parts": list(part_order_for_sport), "partAliases": sport_headings.ALIASES.get(sport.id, {}), "alerts": bool(sport.delivery)}).replace("<", "\\u003c")
             + ";\n"
         )
         + f"const WIDTH_RANGES = {ranges_literal};\n"
@@ -3603,8 +3607,7 @@ def _why_html(record, dom_id=None):
 
 
 def _category_strip(part_counts):
-    order = ["Decks", "Trucks", "Wheels", "Bearings", "Sneakers", "Accessories", "Completes", "Protection"]
-    names = [name for name in order if part_counts.get(name)]
+    names = [name for name in PART_ORDER if part_counts.get(name)]
     for name in part_counts:
         if name and name not in names:
             names.append(name)
@@ -3618,7 +3621,7 @@ def _category_strip(part_counts):
         pressed = "true" if name == "Decks" else "false"
         buttons.append(
             f'<button type="button" data-part="{escape(name, quote=True)}" aria-pressed="{pressed}">'
-            f'{escape(name)} <span class="cat-count">{part_counts.get(name, 0)}</span></button>'
+            f'{escape(PART_LABELS.get(name, name))} <span class="cat-count">{part_counts.get(name, 0)}</span></button>'
         )
     return (
         '<div class="category-strip" id="categoryStrip" role="group" aria-label="Category">'

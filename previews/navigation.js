@@ -160,7 +160,7 @@
                 const part = entry.source ? original.dataset.part : original.category;
                 const button = doc.createElement('button');
                 button.type = 'button'; button.className = 'category-choice'; button.dataset.part = part;
-                const name = part === 'all' ? 'All products' : entry.source ? original.querySelector('.quick-name').textContent : part;
+                const name = part === 'all' ? 'All products' : entry.source ? original.querySelector('.quick-name').textContent : (original.label || part);
                 const count = entry.source ? original.getAttribute('data-count') || '0' : String(original.count);
                 const active = !!entry.source && menuSport === state(win.location.href,config).sport.id && original.getAttribute('aria-pressed') === 'true';
                 for (const [className,text] of [['category-name',name],['category-count',count]]) {

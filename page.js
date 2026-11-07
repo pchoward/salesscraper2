@@ -3171,7 +3171,7 @@ function pageStoreForSlug(key) {
 function slugType(value) {
     const key = String(value || "").trim().toLowerCase();
     if (key === "all") return "all";
-    return {
+    const fixed = {
         deck: "Decks",
         decks: "Decks",
         wheel: "Wheels",
@@ -3187,12 +3187,17 @@ function slugType(value) {
         complete: "Completes",
         completes: "Completes",
         protection: "Protection"
-    }[key] || sportPartForSlug(key);
+    }[key];
+    const sportParts = typeof SPORT_SETTINGS !== "undefined" ? SPORT_SETTINGS.parts || [] : null;
+    if (fixed && (!sportParts || sportParts.indexOf(fixed) >= 0)) return fixed;
+    return sportPartForSlug(key);
 }
 
 function sportPartForSlug(key) {
-    const parts = (typeof SPORT_SETTINGS !== "undefined" && SPORT_SETTINGS.parts) || [];
-    return parts.find(part => nameSlug(part) === key) || "";
+    const settings = typeof SPORT_SETTINGS !== "undefined" ? SPORT_SETTINGS : {};
+    const parts = settings.parts || [];
+    // An old category link (?type=protection on Ski) opens its new heading.
+    return parts.find(part => nameSlug(part) === key) || (settings.partAliases || {})[key] || "";
 }
 
 function storeSlug(name) {

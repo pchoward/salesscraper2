@@ -15,9 +15,14 @@ class CategoryParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.categories = {}
+        self._button = None
+        self._name = None
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == 'span' and self._button and 'quick-name' in (attrs.get('class') or '').split():
+            self._name = []
+            return
         if tag != 'button' or not all(key in attrs for key in ('data-part', 'data-order', 'data-count')):
             return
         category = attrs['data-part']
@@ -25,6 +30,22 @@ class CategoryParser(HTMLParser):
         slug = 'all' if category == 'all' else TYPE_TO_SLUG.get(category) or re.sub(r'[^a-z0-9]+', '-', category.lower().replace('&', ' ')).strip('-')
         self.categories[category] = {'category': category, 'order': int(attrs['data-order']),
                                      'count': int(attrs['data-count']), 'slug': slug}
+        self._button = category
+
+    def handle_data(self, data):
+        if self._name is not None:
+            self._name.append(data)
+
+    def handle_endtag(self, tag):
+        if tag == 'span' and self._name is not None:
+            # The menu's name for a category ("Shoes" for Sneakers), when it differs.
+            label = ' '.join(''.join(self._name).split())
+            entry = self.categories.get(self._button)
+            if entry and label and label != entry['category'] and entry['category'] != 'all':
+                entry['label'] = label
+            self._name = None
+        elif tag == 'button':
+            self._button = None
 
 
 def publish_categories(output, config):

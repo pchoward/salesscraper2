@@ -64,10 +64,11 @@ class RenderTests(unittest.TestCase):
         self.assertIn("<title>ShredDeals BMX |", html)
         settings = json.loads(re.search(r"const SPORT_SETTINGS = (\{.*?\});", html).group(1))
         self.assertEqual(settings["defaultPart"], "all")
-        self.assertEqual(settings["parts"], list(sports.BMX.parts))
+        from sports.headings import headings
+        self.assertEqual(settings["parts"], list(headings(sports.BMX)))
         self.assertIs(settings["alerts"], False, "the page can hide alert buttons for BMX")
         self.assertTrue('data-part="all" data-count="2" aria-pressed="true"' in html, "opens on every category")
-        for part in ("Frames &amp; Forks", "Wheel Parts"):
+        for part in ("Frames &amp; Forks", "Wheels &amp; Hubs"):
             self.assertTrue(f'data-part="{part}" data-count="1" aria-pressed="false"' in html, part)
         self.assertNotIn('data-part="Decks"', html)
         self.assertIn("freecoaster", html.lower(), "BMX aliases are inlined")
