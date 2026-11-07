@@ -9972,14 +9972,14 @@
           }
         },
         "The Lost Co._Tires": {
-          "count": 120,
+          "count": 119,
           "failed": false,
           "diagnostics": {
             "expected_count": 123.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 3.5,
-            "actual_count": 120,
-            "percentage_change": -2.4,
+            "actual_count": 119,
+            "percentage_change": -3.3,
             "reason": "normal_variation"
           }
         },
@@ -10356,7 +10356,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-07T06:16:48+00:00"
+      "scanned_at": "2026-11-07T09:28:01+00:00"
     }
   ],
   "baseline": {
@@ -10574,7 +10574,7 @@
     },
     "The Lost Co._Tires": {
       "date": "2026-11-07",
-      "count": 120
+      "count": 119
     },
     "The Lost Co._Wheels": {
       "date": "2026-11-07",
@@ -13841,7 +13841,7 @@
       },
       {
         "date": "2026-11-07",
-        "count": 120
+        "count": 119
       }
     ],
     "The Lost Co._Wheels": [
