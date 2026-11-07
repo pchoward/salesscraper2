@@ -22,7 +22,7 @@ const path=require('node:path');
    await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
    await page.goto(base+'/?sport=skate');
    await page.waitForFunction(()=>!document.getElementById('categoryToggle').disabled);
-   for(const [sport,part] of [['skate','Wheels'],['ski','Skis'],['mtb','Forks & Shocks'],['bmx','Bikes']]){
+   for(const [sport,part] of [['skate','Wheels'],['ski','Skis'],['mtb','Suspension'],['bmx','Bikes']]){
     console.log('Sport menu',width,sport);
     const before=page.url(),loadedCatalogs=catalogRequests.length;
     if(touch) await page.locator('#sport-'+sport).tap();

@@ -682,7 +682,7 @@ _WOMENS_RE = re.compile(r"\bwom[ae]n'?s?\b|\bwmns\b|\bladies\b|\bw\b", re.I)
 _KIDS_RE = re.compile(r"\bkids?'?\b|\byouth\b|\bjunior\b|\bjr\.?(?=\s|$)|\btoddler\b|\bboys?'?\b|\bgirls?'?\b", re.I)
 _USED_RE = re.compile(r"\bused\b|\bdemo\b|\bblem(?:ished)?\b|\brefurb(?:ished)?\b|\bscratch\s*(?:&|and)?\s*dent\b", re.I)
 _YEAR_RE = re.compile(r"\b(20[1-3]\d)(?:/(?:20)?\d\d)?\b")
-_SIZED_PARTS = frozenset({"Tires", "Wheels"})
+_SIZED_PARTS = frozenset({"Tires", "Wheels", "Tires & Tubes", "Wheels & Hubs"})
 
 
 def _singular(word):

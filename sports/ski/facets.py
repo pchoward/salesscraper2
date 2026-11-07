@@ -18,4 +18,4 @@ FIELDS = (
     {"key": "walk", "label": "Walk mode", "param": "ski_walk", "categories": ("Boots",)},
     {"key": "ability", "label": "Ability level", "param": "ski_ability", "categories": ()},
     {"key": "gender", "label": "Gender", "param": "ski_gender", "categories": ()},
-) + protection.facet_fields("ski", ("Helmets", "Protection"))
+) + protection.facet_fields("ski", ("Helmets", "Protection", "Goggles", "Body Armor"))

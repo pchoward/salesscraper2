@@ -52,7 +52,9 @@ class ProtectsTests(unittest.TestCase):
         self.assertEqual((found["protects"], found["helmet_style"]), (["Helmets"], ["Snow"]))
 
     def test_every_sport_has_the_fields(self):
-        for sport, categories in ((sports.BMX, ("Protection",)), (sports.MTB, ("Protection",)), (sports.SKI, ("Helmets", "Protection"))):
+        # The stores' Protection plus the menu headings it is shown under (sports/headings.py).
+        for sport, categories in ((sports.BMX, ("Protection", "Helmets", "Pads & Gloves")), (sports.MTB, ("Protection", "Helmets")),
+                                  (sports.SKI, ("Helmets", "Protection", "Goggles", "Body Armor"))):
             import importlib
             fields = {f["key"]: f for f in importlib.import_module(sport.facets).FIELDS}
             for key in protection.FIELD_KEYS:

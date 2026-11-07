@@ -63,7 +63,7 @@ async function main(){
      const alerts=await frame.locator('.card-alert:visible').count();assert.equal(alerts>0,supported);
      assert(await frame.locator('.star:visible').count()>0,'local Watch remains usable');
     });
-    const category={skate:'Decks',bmx:'Frames & Forks',ski:'Skis',mtb:'Forks & Shocks'}[sport];
+    const category={skate:'Decks',bmx:'Frames & Forks',ski:'Skis',mtb:'Suspension'}[sport];
     await control(frame,'partSelect',category);
     await check(sport,width,'Category, store, brand, search, sort and ranges',async()=>{
      const baseRows=await rows(frame);assert(baseRows.length>0);assert(baseRows.every(r=>r.part===category));
