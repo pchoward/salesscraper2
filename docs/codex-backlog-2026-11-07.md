@@ -93,3 +93,58 @@ After tasks 3–5 land, update `docs/menu-wireframe.html`:
 - the new Skate filters
 
 Then tell the owner the page needs republishing. Claude republishes the artifact from that file.
+
+## 10. Trucks: one "Fits deck" filter that keeps each brand's own sizes
+Owner, 2026-11-07: "I kept seeing 151 and thought we didn't have anything bigger."
+
+**The problem:** today's Truck Size filter (`page.py` `truck_specs`, Trucks sections) mixes four systems in one list:
+- Independent numbers: 129–151
+- Ace numbers: 33–66
+- Venture numbers: 5.6
+- axle widths in inches: 7.75–11.0
+
+It also misreads names. 55 of 77 trucks get a size. The other 22 are mostly unparsed, not unnamed:
+- "Independent 166 Stage 4" is rejected.
+- "Reynolds 159 (8.75")" keeps only 8.75.
+
+Checked by Codex, 2026-11-07.
+
+**Split of work:**
+- **Claude (extraction):** truck records carry no variant or option data today. Claude adds per-variant truck offers at scrape time: size option, availability and price, like decks' `spec_offers`. It's a separate PR, and the variant part of this task needs it first.
+- **Codex:** parsing, the size table and the UI below, built on the names now and on `spec_offers` once they exist.
+
+**What to build:**
+1. **Size table.** `TRUCK_SIZES` maps a brand's size to the deck widths it fits (one or two widths):
+   - Independent: 109, 129, 139, 144, 149, 151, 159, 166, 169, 215
+   - Ace: 00, 11, 22, 33, 44, 55, 60, 66, 77, 80
+   - Venture: 5.0, 5.2, 5.6, 5.8, 6.1
+   - Thunder: 143, 145, 147, 148, 149, 151, 161
+   - Krux, Royal, Tensor and Slappy where their charts give one
+
+   Take the widths from each brand's own published size chart (cite the URL in a comment), not from memory.
+   - Map per **product family** where the brand's chart differs by family (e.g. Indy Stage 11 vs Stage 4 or Mid; Thunder Team vs Hollow Lights).
+   - A size that spans two widths (e.g. Indy 159) matches both.
+   - An unverified size stays unmapped and keeps showing its native number. Don't guess.
+2. **Reading sizes.**
+   - Read the brand size from the name. Accept 159, 166, 169 and 215.
+   - When both a brand number and inches are printed ("159 (8.75")"), keep both: the brand number as the native size, the inches as a cross-check.
+   - Once Claude's `spec_offers` land, read variant sizes too.
+   - **The variant's fit, stock and displayed price must all come from the same offer,** as decks already do with `spec_offers`.
+3. **Sidebar.** One section, **"Fits deck"**, using the deck-width bands:
+   - The bands are 7.75 · 8.0 · 8.25 · 8.5 · 8.75 · 9.0 · 9.5+.
+   - Each chip lists the brand sizes it covers in small text, e.g. "8.5"  Indy 149 · Ace 55 · Venture 5.8".
+4. **Brand row.** A second row, **brand sizes**, appears only when exactly one brand is selected:
+   - Independent: 129 · 139 · 144 · 149 · 159 · 166 · 169 · 215
+   - Ace: 33 · 44 · 55 · 60 · 66 · 77
+5. **Cards.** Show the native size and the fit, e.g. "Independent Stage 11 · 159 (fits ~8.75–9.0")".
+6. **Search.** "indy 159", "ace 66" and "9.0 trucks" all find the right trucks.
+7. **URL.**
+   - Keep `trucksize` with its **exact old matching**, so an old link shows the same trucks it did. Don't silently broaden it into a fit band.
+   - Add `truckfit` for the bands and `trucknative` for the brand row.
+8. **PR body.** Coverage before and after: trucks with a size went from 55 of 77 to ?.
+
+**Tests:**
+- Name parsing: 166, "159 (8.75")", Ace 66, Venture 5.8.
+- Variant-only sizes.
+- One band chip lists the right brand sizes.
+- The brand row only appears with a single brand selected.
