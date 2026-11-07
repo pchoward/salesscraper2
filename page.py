@@ -85,7 +85,10 @@ _BRANDS = {
     "sneakers": ("Nike SB", "Nike", "Vans"),
 }
 # Skate's menu, in shop order (Tactics' too): completes second, shoes last.
-PART_ORDER = ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories", "Protection", "Sneakers")
+PART_ORDER = ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories", "Helmets", "Protection", "Sneakers")
+# Helmets are protective gear shown under their own heading; they share
+# Protection's type and size filters.
+PROTECTIVE_PARTS = ("Protection", "Helmets")
 # What the menu calls a store category; filters and links keep the category.
 PART_LABELS = {"Sneakers": "Shoes", "Accessories": "Grip, Hardware & Tools"}
 # First screen of cards. The rest stay out of the grid until the reader scrolls
@@ -1616,7 +1619,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                     shoe_sizes = ordered_shoe_sizes(found)
             prot_type = ""
             prot_sizes = []
-            if item.get("part") == "Protection":
+            if item.get("part") in PROTECTIVE_PARTS:
                 subtype = item.get("protection_type") or classify_protection(raw_name, item.get("product_type") or "")
                 prot_type = SUBTYPE_TOKENS.get(subtype or "", "")
                 # A store's size list is what it sells; else sizes printed in the name.
@@ -1856,8 +1859,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             shoe_hits += 1
             for token in record["shoe_sizes"]:
                 shoe_size_counts[token] = shoe_size_counts.get(token, 0) + 1
-        elif record["part"] == "Protection":
-            if record.get("prot_type"):
+        elif record["part"] in PROTECTIVE_PARTS:
+            # Helmets have their own heading; the type chips are the rest.
+            if record.get("prot_type") and record["part"] == "Protection":
                 prot_type_counts[record["prot_type"]] = prot_type_counts.get(record["prot_type"], 0) + 1
             if record.get("prot_sizes"):
                 prot_size_hits += 1
@@ -2272,7 +2276,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     prot_size_section = _gated(
         "protsize",
         "Size",
-        "Protection",
+        "Protection Helmets",
         [
             _spec_button(size.casefold(), size, prot_size_counts[size.casefold()], f"Size {size}")
             for size in PROTECTION_SIZES

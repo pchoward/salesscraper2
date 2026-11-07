@@ -1,0 +1,263 @@
+<title>ShredDeals Menu Wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: a wireframe board. Four sport columns side by side (stacked on a phone); each is a menu box, then each heading's tree of types and filters. Grey ink, one blue for "changes", dashed boxes for "proposed". */
+:root {
+  --paper: #f3f4f2;
+  --sheet: #ffffff;
+  --ink: #1d2220;
+  --muted: #69716d;
+  --line: #c9cec9;
+  --faint: #e6e9e6;
+  --mark: #2457c5;
+  --mark-soft: #e5ecfb;
+  --warn: #9a5b00;
+  --warn-soft: #fbf0dc;
+  --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141716; --sheet: #1b1f1d; --ink: #e3e7e4; --muted: #9aa39e; --line: #3a423e; --faint: #262c29;
+    --mark: #8fb0ff; --mark-soft: #1f2a44; --warn: #f0b860; --warn-soft: #3a2d14; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141716; --sheet: #1b1f1d; --ink: #e3e7e4; --muted: #9aa39e; --line: #3a423e; --faint: #262c29;
+  --mark: #8fb0ff; --mark-soft: #1f2a44; --warn: #f0b860; --warn-soft: #3a2d14; color-scheme: dark;
+}
+body { background: var(--paper); color: var(--ink); font: 15px/1.5 var(--sans); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-block: 24px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1 { font: 700 clamp(1.6rem, 4vw, 2.2rem)/1.15 var(--sans); margin: 0; text-wrap: balance; }
+h2 { font: 600 0.78rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 2rem 0 0.7rem; }
+p { margin: 0.4rem 0; max-width: 72ch; }
+.lede { color: var(--muted); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.key { display: flex; flex-wrap: wrap; gap: 14px; margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--muted); }
+.tag { font: 600 0.68rem/1 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; padding: 3px 6px; border-radius: 3px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.tag.chg { border-color: var(--mark); color: var(--mark); background: var(--mark-soft); }
+.tag.ask { border-color: var(--warn); color: var(--warn); background: var(--warn-soft); }
+
+/* the shared bottom of every menu */
+.pattern { overflow-x: auto; }
+.pattern table { border-collapse: collapse; min-width: 640px; width: 100%; background: var(--sheet); border: 1px solid var(--line); }
+.pattern th, .pattern td { border: 1px solid var(--faint); padding: 7px 9px; text-align: left; vertical-align: top; font-size: 0.9rem; }
+.pattern th { font: 600 0.72rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); background: var(--faint); }
+.pattern td.na { color: var(--muted); }
+.was { display: block; font-size: 0.78rem; color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
+
+/* board */
+.board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 1100px) { .board { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .board { grid-template-columns: 1fr; } }
+.col { min-width: 0; display: grid; gap: 10px; align-content: start; }
+.tab { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid var(--ink); padding-bottom: 4px; }
+.tab b { font: 700 1.25rem/1 var(--sans); }
+.tab span { font: 400 0.8rem/1 var(--mono); color: var(--muted); }
+
+.menu { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 6px 0; }
+.menu .cap { font: 600 0.66rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 4px 10px 6px; }
+.row { display: flex; align-items: center; gap: 6px; padding: 5px 10px; border-top: 1px solid var(--faint); font-size: 0.92rem; }
+.row .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); color: var(--muted); }
+.row.gear { background: repeating-linear-gradient(-45deg, transparent 0 6px, var(--faint) 6px 7px); }
+.row.chg .lbl { color: var(--mark); font-weight: 600; }
+
+details.node { background: var(--sheet); border: 1px dashed var(--line); border-radius: 6px; }
+details.node > summary { list-style: none; cursor: pointer; display: flex; gap: 6px; align-items: center; padding: 7px 10px; font-weight: 600; font-size: 0.92rem; }
+details.node > summary::-webkit-details-marker { display: none; }
+details.node > summary::before { content: "▸"; font: 400 0.8rem/1 var(--mono); color: var(--muted); }
+details.node[open] > summary::before { content: "▾"; }
+details.node > summary:focus-visible { outline: 2px solid var(--mark); outline-offset: -2px; border-radius: 6px; }
+details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); color: var(--muted); font-weight: 400; }
+.node .body { padding: 0 10px 10px 22px; display: grid; gap: 7px; }
+.lab { font: 600 0.64rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.chip { font-size: 0.8rem; padding: 1px 7px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); white-space: nowrap; }
+.chip i { font-style: normal; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-left: 3px; }
+.chip.new { border-color: var(--mark); color: var(--mark); }
+.flt { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 0.82rem; }
+.flt span { white-space: nowrap; }
+.flt span::before { content: "☐ "; color: var(--muted); }
+.flt span.new { color: var(--mark); }
+.flt span.more { color: var(--muted); }
+.flt span.more::before { content: "⋯ "; }
+
+.asks { display: grid; gap: 8px; margin: 0.5rem 0; max-width: 78ch; }
+.asks div { background: var(--sheet); border-left: 3px solid var(--warn); padding: 8px 12px; }
+.foot { color: var(--muted); font-size: 0.82rem; margin-top: 2rem; }
+</style>
+
+<div class="wrap">
+  <h1>ShredDeals Menu Wireframe</h1>
+  <p class="lede">Tap a sport (top right), get its headings, open a heading for its types and filters. The gear at the bottom of every menu uses the same words on every sport. Counts are today's deals. <b>Decided Nov 7, 2026:</b> every sport gets Helmets, Goggles and Gloves headings; Protection is the rest. Change this page first, then the code (<span class="mono">sports/headings.py</span>).</p>
+  <div class="key"><span><span class="tag">live</span> as on the site now</span><span><span class="tag chg">change</span> what this wireframe changes</span><span><span class="tag ask">your call</span> open question</span></div>
+
+  <h2>The bottom of every menu: same words, every sport</h2>
+  <div class="pattern"><table>
+    <thead><tr><th>Heading</th><th>What's in it</th><th>Skate</th><th>Ski</th><th>MTB</th><th>BMX</th></tr></thead>
+    <tbody>
+      <tr><td><b>Helmets</b></td><td>Anything worn on the head for impact</td>
+        <td><span class="mono">23</span> <span class="tag chg">split out</span><span class="was">inside Protection</span></td>
+        <td><span class="mono">252</span></td><td><span class="mono">251</span></td><td><span class="mono">107</span></td></tr>
+      <tr><td><b>Goggles</b></td><td>Eye &amp; face</td>
+        <td class="na">none yet</td><td><span class="mono">223</span></td>
+        <td><span class="mono">20</span> <span class="tag chg">split out</span></td><td><span class="mono">6</span> <span class="tag chg">split out</span></td></tr>
+      <tr><td><b>Gloves</b></td><td>Hands</td>
+        <td class="na">none yet</td><td class="na">none yet</td>
+        <td><span class="mono">87</span> <span class="tag chg">split out</span></td><td><span class="mono">37</span> <span class="tag chg">split out</span></td></tr>
+      <tr><td><b>Protection</b></td><td>Pads, armor, impact shorts, wrist guards</td>
+        <td><span class="mono">70</span></td>
+        <td><span class="mono">17</span> <span class="tag chg">renamed</span><span class="was">Body Armor</span></td>
+        <td><span class="mono">210</span></td>
+        <td><span class="mono">231</span> <span class="tag chg">renamed</span><span class="was">Pads &amp; Gloves</span></td></tr>
+    </tbody></table></div>
+  <p>Order at the bottom of every menu: <b>Helmets · Goggles · Gloves · Protection</b>. A heading with no deals isn't shown. Inside Protection, one filter does the narrowing on every sport: <b>Protects</b> (knees, elbows, wrists, hips, back &amp; chest).</p>
+
+  <h2>All four sports</h2>
+  <div class="board">
+
+    <!-- SKATE -->
+    <section class="col" aria-label="Skate">
+      <div class="tab"><b>Skate</b><span>1,423</span></div>
+      <div class="menu"><div class="cap">Menu</div>
+        <div class="row"><span class="lbl">Decks</span><span class="n">634</span></div>
+        <div class="row"><span class="lbl">Completes</span><span class="n">378</span></div>
+        <div class="row"><span class="lbl">Trucks</span><span class="n">77</span></div>
+        <div class="row"><span class="lbl">Wheels</span><span class="n">39</span></div>
+        <div class="row"><span class="lbl">Bearings</span><span class="n">19</span></div>
+        <div class="row"><span class="lbl">Grip, Hardware &amp; Tools</span><span class="n">77</span></div>
+        <div class="row gear chg"><span class="lbl">Helmets</span><span class="tag chg">new</span><span class="n">23</span></div>
+        <div class="row gear"><span class="lbl">Protection</span><span class="n">70</span></div>
+        <div class="row"><span class="lbl">Shoes</span><span class="n">106</span></div>
+      </div>
+      <details class="node" open><summary>Decks<span class="n">634</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Width</span><span>Length</span><span>Wheelbase</span><span>Color</span><span>Brand</span><span>Store</span><span>Price &amp; % off</span></div></div></div></details>
+      <details class="node"><summary>Completes<span class="n">378</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Wheelbase</span><span class="more">Width</span><span>Brand</span><span>Price</span></div></div></div></details>
+      <details class="node"><summary>Trucks · Wheels · Bearings</summary><div class="body">
+        <div><div class="lab">Trucks</div><div class="flt"><span>Size</span><span>Height</span><span>Brand</span></div></div>
+        <div><div class="lab">Wheels</div><div class="flt"><span>Diameter</span><span>Durometer</span><span>Shape</span><span>Color</span></div></div>
+        <div><div class="lab">Bearings</div><div class="flt"><span>ABEC</span><span>Brand</span></div></div></div></details>
+      <details class="node"><summary>Grip, Hardware &amp; Tools<span class="n">77</span></summary><div class="body">
+        <div><div class="lab">Types</div><div class="chips"><span class="chip">Grip tape<i>30</i></span><span class="chip">Hardware<i>18</i></span><span class="chip">Bushings<i>6</i></span><span class="chip">Tools &amp; wax<i>3</i></span></div></div></div></details>
+      <details class="node"><summary>Helmets<span class="tag chg">new</span><span class="n">23</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Size</span><span>Certification</span><span>Brand</span><span>Price</span></div></div></div></details>
+      <details class="node"><summary>Protection<span class="n">70</span></summary><div class="body">
+        <div><div class="lab">Protects</div><div class="chips"><span class="chip">Elbows</span><span class="chip">Knees</span><span class="chip">Pad sets<i>15</i></span><span class="chip">Wrists</span><span class="chip">Hips</span></div></div>
+        <div><div class="lab">Filters</div><div class="flt"><span>Protects</span><span>Size</span><span>Brand</span></div></div></div></details>
+      <details class="node"><summary>Shoes<span class="n">106</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Size (in stock)</span><span>Brand</span><span>Price</span></div></div></div></details>
+    </section>
+
+    <!-- SKI -->
+    <section class="col" aria-label="Ski">
+      <div class="tab"><b>Ski</b><span>1,903</span></div>
+      <div class="menu"><div class="cap">Menu</div>
+        <div class="row"><span class="lbl">Skis</span><span class="n">541</span></div>
+        <div class="row"><span class="lbl">Boots</span><span class="n">749</span></div>
+        <div class="row"><span class="lbl">Bindings</span><span class="n">53</span></div>
+        <div class="row"><span class="lbl">Poles</span><span class="n">68</span></div>
+        <div class="row gear"><span class="lbl">Helmets</span><span class="n">252</span></div>
+        <div class="row gear"><span class="lbl">Goggles</span><span class="n">223</span></div>
+        <div class="row gear chg"><span class="lbl">Protection</span><span class="tag chg">was Body Armor</span><span class="n">17</span></div>
+      </div>
+      <details class="node" open><summary>Skis<span class="n">541</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Type</span><span>Length</span><span>Men / Women / Kids</span><span class="more">Waist</span><span class="more">Rocker</span><span class="more">Ability</span><span>Bindings incl.</span></div></div></div></details>
+      <details class="node"><summary>Boots<span class="n">749</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Flex</span><span>Mondo size</span><span class="new">Last (46%)</span><span>Men / Women / Kids</span><span>Sole</span><span class="new">Walk mode</span><span>Type</span></div></div></div></details>
+      <details class="node"><summary>Bindings · Poles</summary><div class="body">
+        <div><div class="lab">Bindings</div><div class="flt"><span>DIN</span><span>Sole fit</span><span>Type</span></div></div>
+        <div><div class="lab">Poles</div><div class="flt"><span>Men / Women / Kids</span><span>Brand</span></div></div></div></details>
+      <details class="node"><summary>Helmets<span class="n">252</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Size</span><span>MIPS / rotational</span><span>Adult / Youth / Kids</span><span class="more">Certification</span></div></div></div></details>
+      <details class="node"><summary>Goggles<span class="n">223</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span class="new">Frame size</span><span class="new">Fit (low bridge, OTG)</span><span class="new">Lens (bonus, magnetic)</span><span>Adult / Kids</span><span>Brand</span></div></div></div></details>
+      <details class="node"><summary>Protection<span class="n">17</span></summary><div class="body">
+        <div><div class="lab">Protects</div><div class="chips"><span class="chip">Back &amp; spine<i>9</i></span><span class="chip">Hips<i>6</i></span><span class="chip">Chest<i>3</i></span><span class="chip">Wrists<i>2</i></span></div></div></div></details>
+    </section>
+
+    <!-- MTB -->
+    <section class="col" aria-label="MTB">
+      <div class="tab"><b>MTB</b><span>3,075</span></div>
+      <div class="menu"><div class="cap">Menu</div>
+        <div class="row"><span class="lbl">Bikes</span><span class="n">167</span></div>
+        <div class="row"><span class="lbl">Frames</span><span class="n">63</span></div>
+        <div class="row"><span class="lbl">Suspension</span><span class="n">167</span></div>
+        <div class="row"><span class="lbl">Wheels</span><span class="n">118</span></div>
+        <div class="row"><span class="lbl">Tires</span><span class="n">657</span></div>
+        <div class="row"><span class="lbl">Drivetrain</span><span class="n">648</span></div>
+        <div class="row"><span class="lbl">Brakes</span><span class="n">188</span></div>
+        <div class="row"><span class="lbl">Cockpit</span><span class="n">438</span></div>
+        <div class="row"><span class="lbl">Pedals</span><span class="n">61</span></div>
+        <div class="row gear"><span class="lbl">Helmets</span><span class="n">251</span></div>
+        <div class="row gear chg"><span class="lbl">Goggles</span><span class="tag chg">new</span><span class="n">20</span></div>
+        <div class="row gear chg"><span class="lbl">Gloves</span><span class="tag chg">new</span><span class="n">87</span></div>
+        <div class="row gear"><span class="lbl">Protection</span><span class="n">210</span></div>
+      </div>
+      <details class="node" open><summary>Drivetrain<span class="n">648</span></summary><div class="body">
+        <div><div class="lab">Types</div><div class="chips"><span class="chip">Shifters</span><span class="chip">Derailleurs</span><span class="chip">Cranks</span><span class="chip">Chainrings</span><span class="chip">Cassettes</span><span class="chip">Chains</span><span class="chip">BBs</span></div></div>
+        <div><div class="lab">Filters</div><div class="flt"><span class="new">Speed (58%)</span><span>Brand</span><span>Price</span></div></div></div></details>
+      <details class="node"><summary>Tires<span class="n">657</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Wheel size</span><span>Width</span><span class="new">Casing (65%)</span><span class="new">Tubeless (48%)</span></div></div></div></details>
+      <details class="node"><summary>Bikes · Frames · Suspension · Wheels</summary><div class="body">
+        <div><div class="lab">Bikes</div><div class="flt"><span>Frame size</span><span class="more">Travel</span><span class="more">Wheel size</span></div></div>
+        <div><div class="lab">Suspension</div><div class="chips"><span class="chip">Forks</span><span class="chip">Rear shocks</span><span class="chip">Parts</span></div></div>
+        <div><div class="lab">Wheels</div><div class="flt"><span>Wheel size</span><span class="more">Axle</span></div></div></div></details>
+      <details class="node"><summary>Brakes · Cockpit · Pedals</summary><div class="body">
+        <div><div class="lab">Cockpit</div><div class="chips"><span class="chip">Grips</span><span class="chip">Bars</span><span class="chip">Stems</span><span class="chip">Headsets</span><span class="chip">Droppers</span><span class="chip">Saddles</span></div></div>
+        <div><div class="lab">Brakes</div><div class="chips"><span class="chip">Brakes</span><span class="chip">Pads</span><span class="chip">Rotors</span></div></div></div></details>
+      <details class="node"><summary>Helmets<span class="n">251</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Helmet type</span><span>Size</span><span>Certification</span><span>MIPS / rotational</span></div></div></div></details>
+      <details class="node"><summary>Goggles · Gloves</summary><div class="body">
+        <div><div class="lab">Gloves</div><div class="flt"><span>Size</span><span>Brand</span><span>Price</span></div></div>
+        <div><div class="lab">Goggles</div><div class="flt"><span>Brand</span><span>Price</span></div></div></div></details>
+      <details class="node"><summary>Protection<span class="n">210</span></summary><div class="body">
+        <div><div class="lab">Protects</div><div class="chips"><span class="chip">Knees<i>125</i></span><span class="chip">Elbows<i>66</i></span><span class="chip">Hips<i>16</i></span><span class="chip">Chest &amp; back<i>12</i></span><span class="chip">Shins<i>10</i></span></div></div></div></details>
+    </section>
+
+    <!-- BMX -->
+    <section class="col" aria-label="BMX">
+      <div class="tab"><b>BMX</b><span>877</span></div>
+      <div class="menu"><div class="cap">Menu</div>
+        <div class="row"><span class="lbl">Bikes</span><span class="n">9</span></div>
+        <div class="row"><span class="lbl">Frames &amp; Forks</span><span class="n">62</span></div>
+        <div class="row"><span class="lbl">Bars &amp; Steering</span><span class="n">51</span></div>
+        <div class="row"><span class="lbl">Drivetrain</span><span class="n">71</span></div>
+        <div class="row"><span class="lbl">Wheels &amp; Hubs</span><span class="n">172</span></div>
+        <div class="row"><span class="lbl">Tires &amp; Tubes</span><span class="n">54</span></div>
+        <div class="row"><span class="lbl">Seats &amp; Posts</span><span class="n">65</span></div>
+        <div class="row"><span class="lbl">Brakes</span><span class="n">12</span></div>
+        <div class="row gear"><span class="lbl">Helmets</span><span class="n">107</span></div>
+        <div class="row gear chg"><span class="lbl">Goggles</span><span class="tag chg">new</span><span class="n">6</span></div>
+        <div class="row gear chg"><span class="lbl">Gloves</span><span class="tag chg">new</span><span class="n">37</span></div>
+        <div class="row gear chg"><span class="lbl">Protection</span><span class="tag chg">was Pads &amp; Gloves</span><span class="n">231</span></div>
+      </div>
+      <details class="node" open><summary>Wheels &amp; Hubs<span class="n">172</span></summary><div class="body">
+        <div><div class="lab">Types</div><div class="chips"><span class="chip">Wheels<i>31</i></span><span class="chip">Hubs<i>51</i></span><span class="chip">Hub parts<i>34</i></span><span class="chip">Rims<i>26</i></span><span class="chip">Guards<i>13</i></span><span class="chip">Pegs<i>12</i></span></div></div>
+        <div><div class="lab">Filters</div><div class="flt"><span>Freecoaster / cassette</span><span>Drive side</span><span class="more">Wheel size</span><span class="more">Axle</span></div></div></div></details>
+      <details class="node"><summary>Frames &amp; Forks<span class="n">62</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Top tube</span><span>Wheel size</span><span>Color</span></div></div></div></details>
+      <details class="node"><summary>Bars · Drivetrain · Tires · Seats · Brakes</summary><div class="body">
+        <div><div class="lab">Bars &amp; Steering</div><div class="chips"><span class="chip">Grips<i>19</i></span><span class="chip">Headsets<i>13</i></span><span class="chip">Bars<i>9</i></span><span class="chip">Stems<i>7</i></span></div></div>
+        <div><div class="lab">Drivetrain</div><div class="chips"><span class="chip">Pedals<i>27</i></span><span class="chip">Sprockets<i>23</i></span><span class="chip">BBs<i>10</i></span><span class="chip">Chains<i>6</i></span><span class="chip">Cranks<i>5</i></span></div></div>
+        <div><div class="lab">Tires &amp; Tubes</div><div class="chips"><span class="chip">Tires<i>30</i></span><span class="chip">Tubes<i>24</i></span></div></div></div></details>
+      <details class="node"><summary>Helmets<span class="n">107</span></summary><div class="body">
+        <div><div class="lab">Filters</div><div class="flt"><span>Full face / half shell</span><span>Size</span><span>Certification</span></div></div></div></details>
+      <details class="node"><summary>Protection<span class="n">231</span></summary><div class="body">
+        <div><div class="lab">Protects</div><div class="chips"><span class="chip">Knees<i>137</i></span><span class="chip">Elbows<i>67</i></span><span class="chip">Pad sets<i>17</i></span><span class="chip">Hips<i>16</i></span><span class="chip">Shins &amp; ankles<i>18</i></span></div></div></div></details>
+    </section>
+  </div>
+
+  <h2>Decided</h2>
+  <div class="asks">
+    <div><span class="tag">1</span> <b>Every sport gets Helmets.</b> Skate's 23 helmets have their own heading, with the Size filter.</div>
+    <div><span class="tag">2</span> <b>Gloves get their own heading</b> (MTB 87, BMX 37).</div>
+    <div><span class="tag">3</span> <b>Goggles get their own heading</b> wherever there are any (Ski 223, MTB 20, BMX 6).</div>
+  </div>
+
+  <p class="foot">Counts from the latest scrapes (Skate Nov 6, Ski/MTB/BMX Nov 6–7). "⋯" filters sit under More until more deals carry that spec. Blue filters are new: they come from product names after #231, from the next BMX/Ski/MTB scrape. The site today matches this board except the items marked "change".</p>
+</div>

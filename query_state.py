@@ -124,6 +124,8 @@ TYPE_SLUGS = {
     "complete": "Completes",
     "completes": "Completes",
     "protection": "Protection",
+    "helmet": "Helmets",
+    "helmets": "Helmets",
 }
 TYPE_TO_SLUG = {
     "Decks": "deck",
@@ -134,6 +136,7 @@ TYPE_TO_SLUG = {
     "Accessories": "accessory",
     "Completes": "complete",
     "Protection": "protection",
+    "Helmets": "helmets",
 }
 
 # The sort a fresh visit opens on, and the one a link without ``sort=`` means.
