@@ -97,8 +97,49 @@ def _variant_specs(product, variant, part):
     return sorted(set(values)), list(dict.fromkeys(duros))
 
 
+_TRUCK_SIZE_LABEL = re.compile(r'size|width|axle|hanger', re.I)
+_NOT_A_SIZE = re.compile(r'color|colour|sku|code|finish|height', re.I)
+
+
+def _price_fields(offer, variant):
+    for key in ('price', 'compare_at_price'):
+        try:
+            amount = float(variant[key])
+            if math.isfinite(amount) and amount > 0:
+                offer[key] = amount
+        except (KeyError, TypeError, ValueError):
+            pass
+    return offer
+
+
+def _truck_offers(item, product, variants):
+    """One offer per truck variant: the size as the store writes it ("149",
+    "8.5\"", "5.8 Hi"), with its own stock and price (owner, 2026-11-07:
+    sizes past 151 kept looking missing). Reading the size into a brand
+    number and a deck fit is the page's job (Codex, backlog task 10)."""
+    offers = []
+    for variant in variants or []:
+        if not isinstance(variant, dict):
+            continue
+        sizes = [value.strip() for label, value in option_text(product, variant)
+                 if value and _TRUCK_SIZE_LABEL.search(label) and not _NOT_A_SIZE.search(label)]
+        offer = _price_fields({'truck_size': sizes[0] if len(sizes) == 1 else None,
+                               'variant_id': str(variant.get('id') or ''),
+                               'available': variant.get('available') if isinstance(variant.get('available'), bool) else None},
+                              variant)
+        if offer not in offers:
+            offers.append(offer)
+    if any(offer['truck_size'] for offer in offers):
+        item['spec_offers'] = offers
+        item['truck_sizes'] = list(dict.fromkeys(offer['truck_size'] for offer in offers
+                                                 if offer['truck_size'] and offer['available'] is not False))
+    return item
+
+
 def _enrich(item, description='', product=None, variants=None):
     """Attach exact fields and per-variant offers, leaving identity/prices alone."""
+    if item.get('part') == 'Trucks':
+        return _truck_offers(item, product or {}, variants)
     if item.get('part') not in ('Decks', 'Completes', 'Wheels'):
         return item
     product = product or {}
