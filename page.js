@@ -35,6 +35,8 @@ let state = {
     duros: [],
     shapes: [],
     truckSizes: [],
+        truckFits: [],
+        truckNatives: [],
     truckHeights: [],
     constructions: [],
     abecs: [],
@@ -530,6 +532,8 @@ const SPEC_FACETS = [
     { stateKey: "diameters", part: "Wheels", attr: "diameter", section: "diameterFilters" },
     { stateKey: "duros", part: "Wheels", attr: "duros", section: "duroFilters" },
     { stateKey: "shapes", part: "Wheels", attr: "shape", section: "shapeFilters" },
+    { stateKey: "truckFits", part: "Trucks", attr: "truckfits", section: "truckfitFilters" },
+    { stateKey: "truckNatives", part: "Trucks", attr: "trucknatives", section: "trucknativeFilters" },
     { stateKey: "truckSizes", part: "Trucks", attr: "trucksize", section: "trucksizeFilters" },
     { stateKey: "truckHeights", part: "Trucks", attr: "truckheight", section: "truckheightFilters" },
     { stateKey: "constructions", part: "Trucks", attr: "construction", section: "constructionFilters" },
@@ -538,7 +542,7 @@ const SPEC_FACETS = [
     { stateKey: "protTypes", part: "Protection", attr: "prottype", section: "prottypeFilters" },
     { stateKey: "protSizes", part: "Protection", attr: "protsize", section: "protsizeFilters" }
 ];
-const SPEC_OPEN = { width: 1, length: 1, wheelbase: 1, deckcolor: 1, wheelcolor: 1, diameter: 1, duro: 1, shape: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
+const SPEC_OPEN = { width: 1, length: 1, wheelbase: 1, deckcolor: 1, wheelcolor: 1, diameter: 1, duro: 1, shape: 1, truckfit: 1, trucknative: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
 
 function normalizeDuroToken(value) {
     const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
@@ -566,6 +570,8 @@ function normalizeSizeToken(value) {
 }
 
 function orderSpecValues(stateKey, values) {
+    if (stateKey === "truckFits") return TruckFit.fits(values);
+    if (stateKey === "truckNatives") return TruckFit.natives(values);
     const chosen = {};
     (values || []).forEach(value => {
         let token = String(value || "").trim();
@@ -607,7 +613,7 @@ function activeSpecKeys(part) {
     const current = part || DEFAULT_PART;
     if (current === "Decks") return ["widths", "length", "wheelbase", "colors"];
     if (current === "Wheels") return ["diameters", "colors", "duros", "shapes"];
-    if (current === "Trucks") return ["truckSizes", "truckHeights", "constructions"];
+    if (current === "Trucks") return ["truckFits", "truckNatives", "truckSizes", "truckHeights", "constructions"];
     if (current === "Bearings") return ["abecs"];
     if (current === "Sneakers") return ["shoeSizes"];
     if (current === "Protection") return ["protTypes", "protSizes"];
@@ -649,7 +655,22 @@ function technicalPriceConstraints(overrides) {
 }
 
 // The selected size's price, when the in-stock variants do not all cost the same.
-function selectedShoePrice(row, technical, ranges) {
+function truckSelection(overrides) {
+    const over = overrides || {};
+    const typed = typedFilters(Object.prototype.hasOwnProperty.call(over, "search") ? over.search : state.search);
+    const part = over.part == null ? state.part : over.part;
+    const active = part === "Trucks" || (typed.parts || []).includes("Trucks");
+    return {
+        fits: typed.truckFit ? [typed.truckFit] : active ? (over.truckFits || state.truckFits || []) : [],
+        native: typed.truckNatives || (active ? (over.truckNatives || state.truckNatives || []) : [])
+    };
+}
+
+function selectedShoePrice(row, technical, ranges, overrides) {
+    if (typeof TruckFit !== "undefined" && row.dataset.part === "Trucks") {
+        const truck = truckSelection(overrides);
+        if (truck.fits.length || truck.native.length || overrides?._truckOffers) return TruckFit.cheapest(row, truck, ranges || technicalPriceConstraints(overrides));
+    }
     if (typeof SportSpecFilters !== "undefined") {
         const offer = SportSpecFilters.price(row.dataset.url, technical, ranges || technicalPriceConstraints());
         if (offer) return offer;
@@ -669,8 +690,8 @@ function selectedShoePrice(row, technical, ranges) {
     return best;
 }
 
-function rowPrice(row, technical, ranges) {
-    const offer = selectedShoePrice(row, technical, ranges);
+function rowPrice(row, technical, ranges, overrides) {
+    const offer = selectedShoePrice(row, technical, ranges, overrides);
     if (offer) return offer.price;
     const raw = technical !== undefined && row.dataset.priceSaved ? row.dataset.basePrice : row.dataset.price;
     if (raw === undefined || raw === "") return null;
@@ -678,13 +699,14 @@ function rowPrice(row, technical, ranges) {
     return Number.isFinite(price) ? price : null;
 }
 
-function rowDiscount(row, technical, ranges) {
-    const offer = selectedShoePrice(row, technical, ranges);
+function rowDiscount(row, technical, ranges, overrides) {
+    const offer = selectedShoePrice(row, technical, ranges, overrides);
     if (!offer) {
         if (row.dataset.discount === "") return null;
         const parsed = parseFloat(technical !== undefined && row.dataset.priceSaved ? row.dataset.baseDiscount : row.dataset.discount);
         return Number.isFinite(parsed) ? parsed : null;
     }
+    if (offer.truck && !Number.isFinite(offer.compare)) return null;
     const compare = Number.isFinite(offer.compare) ? offer.compare : parseFloat(row.dataset.original);
     if (!Number.isFinite(compare) || compare <= 0) return null;
     return ((compare - offer.price) / compare) * 100;
@@ -701,6 +723,14 @@ function paintOfferPrices() {
         }
         if (!priceNode.dataset.baseText) priceNode.dataset.baseText = priceNode.textContent;
         const offer = selectedShoePrice(node);
+        if (typeof TruckFit !== "undefined" && node.dataset.part === "Trucks") {
+            TruckFit.paintCompare(node, offer);
+            const label = node.querySelector(".truck-fit-label");
+            if (label) {
+                if (label.dataset.baseText === undefined) label.dataset.baseText = label.textContent;
+                label.textContent = offer?.truck ? TruckFit.label(offer) : label.dataset.baseText;
+            }
+        }
         if (!offer) {
             node.dataset.price = node.dataset.basePrice;
             node.dataset.discount = node.dataset.baseDiscount;
@@ -720,7 +750,7 @@ function paintOfferPrices() {
         node.querySelectorAll(".price-old").forEach(oldNode => {
             if (!oldNode.dataset.baseText) oldNode.dataset.baseText = oldNode.textContent;
             if (!offer || !Number.isFinite(offer.compare)) {
-                oldNode.textContent = oldNode.dataset.baseText;
+                oldNode.textContent = offer?.truck ? "—" : oldNode.dataset.baseText;
                 return;
             }
             const symbol = (oldNode.dataset.baseText || "").indexOf("€") >= 0 ? "€" : "$";
@@ -790,7 +820,12 @@ function syncTypeSections(expandSpec) {
     document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
         const owner = section.getAttribute("data-for") || "";
         // A section can serve several types ("Protection Helmets": size).
-        const show = part === "all" || owner.split(" ").indexOf(part) >= 0;
+        const native = section.getAttribute("data-section") === "trucknative";
+        const show = (part === "all" || owner.split(" ").indexOf(part) >= 0) && (!native || state.brand !== "all");
+        if (native) section.querySelectorAll(".spec-chip").forEach(button => {
+            const key = (button.getAttribute("data-value") || "").split(":")[0];
+            button.hidden = !brandSame(TruckFit.brands[key] || key, state.brand);
+        });
         section.classList.toggle("is-type-hidden", !show);
         const id = section.getAttribute("data-section") || "";
         if (show && part !== "all" && expandSpec && SPEC_OPEN[id]) paintFilterSection(section, true);
@@ -1005,10 +1040,13 @@ function paintFacetCounts() {
         });
         const override = {};
         override[facet.stateKey] = [];
+        if (facet.stateKey === "truckFits" || facet.stateKey === "truckNatives") override._truckOffers = true;
         dealRows().forEach(row => {
             if ((row.dataset.part || "") !== facet.part) return;
             if (!rowMatches(row, override)) return;
-            specTokens(row, facet.attr).forEach(token => {
+            const truckFacet = facet.stateKey === "truckFits" || facet.stateKey === "truckNatives";
+            const tokens = truckFacet ? [...new Set(TruckFit.options(row, truckSelection(override), technicalPriceConstraints(override)).flatMap(o => facet.stateKey === "truckFits" ? o.fits : [o.key]))] : specTokens(row, facet.attr);
+            tokens.forEach(token => {
                 if (Object.prototype.hasOwnProperty.call(counts, token)) counts[token] += 1;
             });
         });
@@ -1024,6 +1062,10 @@ function paintFacetCounts() {
             // Shoe and deck sizes only count tokens already stored on the row.
             // Those are the in-stock sizes; a size named in the title is not added.
             markFacetOption(node, count, on);
+            if (facet.stateKey === "truckNatives") {
+                const brand = (node.getAttribute("data-value") || "").split(":")[0];
+                if (!brandSame(TruckFit.brands[brand] || brand, state.brand)) setHidden(node, true);
+            }
         });
         syncFacetEmpty(document.getElementById(facet.section), ".spec-chip", "No options match");
     });
@@ -1466,6 +1508,9 @@ function rowMatchesNow(row, overrides) {
     const search = Object.prototype.hasOwnProperty.call(over, "search") ? over.search : state.search;
     if (!searchMatches(row, search, over.searchNear || 0)) return false;
     const typed = typedFilters(search);
+    const truck = typeof TruckFit !== "undefined" ? truckSelection(over) : {fits: [], native: []};
+    if ((truck.fits.length || truck.native.length || over._truckOffers) &&
+        (row.dataset.part !== "Trucks" || !TruckFit.options(row, truck, technicalPriceConstraints(over)).length)) return false;
     if (over.store == null && typed.stores) {
         if (typed.stores.indexOf(row.dataset.store || "") < 0) return false;
     } else if (store !== "all" && (row.dataset.store || "") !== store) return false;
@@ -1477,6 +1522,7 @@ function rowMatchesNow(row, overrides) {
     if (typed.width == null && specKeyActive("widths", viewPart) && !deckWidthAllowed(row, widths)) return false;
     for (let specIndex = 0; specIndex < SPEC_FACETS.length; specIndex++) {
         const facet = SPEC_FACETS[specIndex];
+        if (facet.stateKey === "truckFits" || facet.stateKey === "truckNatives") continue;
         if (!specKeyActive(facet.stateKey, viewPart)) continue;
         if (facet.stateKey === "diameters" && typed.diameter != null) continue;
         if (facet.stateKey === "duros" && typed.duros) continue;
@@ -1490,7 +1536,7 @@ function rowMatchesNow(row, overrides) {
     if (specKeyActive("wheelbase", viewPart) && chosenWheels.length && !wheelbaseAllowed(row, chosenWheels)) return false;
     const chosenColors = selectedColors(over);
     if (specKeyActive("colors", viewPart) && chosenColors.length && !colorAllowed(row, chosenColors)) return false;
-    const price = rowPrice(row, over.technical, technicalPriceConstraints(over));
+    const price = rowPrice(row, over.technical, technicalPriceConstraints(over), over);
     const priceMin = typedOr(over, typed, "priceMin", state.priceMin);
     const priceMax = typedOr(over, typed, "priceMax", state.priceMax);
     const discountMin = typedOr(over, typed, "discountMin", state.discountMin);
@@ -1503,7 +1549,7 @@ function rowMatchesNow(row, overrides) {
         if (priceMax != null && !(price <= priceMax)) return false;
     }
     if (!scopedOffers && (discountMin != null || discountMax != null)) {
-        const discount = rowDiscount(row, over.technical, technicalPriceConstraints(over));
+        const discount = rowDiscount(row, over.technical, technicalPriceConstraints(over), over);
         if (discount == null) return false;
         if (discountMin != null && discount < discountMin) return false;
         if (discountMax != null && discount > discountMax) return false;
@@ -3018,6 +3064,8 @@ function clearFilters() {
         duros: [],
         shapes: [],
         truckSizes: [],
+        truckFits: [],
+        truckNatives: [],
         truckHeights: [],
         constructions: [],
         abecs: [],
@@ -3268,6 +3316,8 @@ function decodeQuery(query) {
         duros: [],
         shapes: [],
         truckSizes: [],
+        truckFits: [],
+        truckNatives: [],
         truckHeights: [],
         constructions: [],
         abecs: [],
@@ -3321,6 +3371,8 @@ function decodeQuery(query) {
         else if (key === "diameter") stateOut.diameters = orderSpecValues("diameters", String(value || "").split(","));
         else if (key === "duro") stateOut.duros = orderSpecValues("duros", String(value || "").split(","));
         else if (key === "shape") stateOut.shapes = orderSpecValues("shapes", String(value || "").split(","));
+        else if (key === "truckfit") stateOut.truckFits = orderSpecValues("truckFits", String(value || "").split(","));
+        else if (key === "trucknative") stateOut.truckNatives = orderSpecValues("truckNatives", String(value || "").split(","));
         else if (key === "trucksize") stateOut.truckSizes = orderSpecValues("truckSizes", String(value || "").split(","));
         else if (key === "truckheight") stateOut.truckHeights = orderSpecValues("truckHeights", String(value || "").split(","));
         else if (key === "construction") stateOut.constructions = orderSpecValues("constructions", String(value || "").split(","));
@@ -3386,6 +3438,10 @@ function encodeState(snapshot) {
     if (duros.length) add("duro", duros.join(","));
     const shapes = orderSpecValues("shapes", snapshot.shapes || []);
     if (shapes.length) add("shape", shapes.join(","));
+    const truckFits = orderSpecValues("truckFits", snapshot.truckFits || []);
+    if (truckFits.length) add("truckfit", truckFits.join(","));
+    const truckNatives = orderSpecValues("truckNatives", snapshot.truckNatives || []);
+    if (truckNatives.length) add("trucknative", truckNatives.join(","));
     const truckSizes = orderSpecValues("truckSizes", snapshot.truckSizes || []);
     if (truckSizes.length) add("trucksize", truckSizes.join(","));
     const truckHeights = orderSpecValues("truckHeights", snapshot.truckHeights || []);
@@ -3437,6 +3493,8 @@ function captureState() {
         duros: (state.duros || []).slice(),
         shapes: (state.shapes || []).slice(),
         truckSizes: (state.truckSizes || []).slice(),
+        truckFits: (state.truckFits || []).slice(),
+        truckNatives: (state.truckNatives || []).slice(),
         truckHeights: (state.truckHeights || []).slice(),
         constructions: (state.constructions || []).slice(),
         abecs: (state.abecs || []).slice(),
@@ -3509,6 +3567,8 @@ function writeControls(snapshot) {
     state.diameters = orderSpecValues("diameters", snapshot.diameters || []);
     state.duros = orderSpecValues("duros", snapshot.duros || []);
     state.shapes = orderSpecValues("shapes", snapshot.shapes || []);
+    state.truckFits = orderSpecValues("truckFits", snapshot.truckFits || []);
+    state.truckNatives = orderSpecValues("truckNatives", snapshot.truckNatives || []);
     state.truckSizes = orderSpecValues("truckSizes", snapshot.truckSizes || []);
     state.truckHeights = orderSpecValues("truckHeights", snapshot.truckHeights || []);
     state.constructions = orderSpecValues("constructions", snapshot.constructions || []);
@@ -4117,7 +4177,9 @@ function collectFilterActions() {
         diameters: value => "Diameter " + value,
         duros: value => value,
         shapes: value => "Shape: " + value.charAt(0).toUpperCase() + value.slice(1),
-        truckSizes: value => "Size " + value,
+        truckSizes: value => "Legacy truck size " + value,
+        truckFits: value => "Fits deck " + value + "″",
+        truckNatives: value => TruckFit.nativeLabel(value),
         truckHeights: value => "Height: " + value.charAt(0).toUpperCase() + value.slice(1),
         constructions: value => "Construction: " + value.charAt(0).toUpperCase() + value.slice(1),
         abecs: value => "ABEC " + value,
@@ -5018,6 +5080,12 @@ function quickFacts(dataset, item, generated) {
     }
     addSpec("Shape", dataset.shape);
     addSpec("Truck size", dataset.trucksize);
+    if (typeof TruckFit !== "undefined" && dataset.part === "Trucks") {
+        const chosen = selectedShoePrice({dataset});
+        const offers = chosen?.truck ? [chosen] : TruckFit.offers({dataset}).filter(o => o.available !== false);
+        addSpec("Native size / deck fit", [...new Set(offers.map(TruckFit.label))].join("; "));
+        addSpec("Maximum deck range", [...new Set(offers.filter(o => o.maximum).map(o => o.maximum.join("–") + "″"))].join("; "));
+    }
     addSpec("Truck height", dataset.truckheight);
     addSpec("Construction", dataset.construction);
     addSpec("ABEC", dataset.abec);

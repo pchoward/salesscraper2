@@ -576,7 +576,7 @@ function same(left, right) {
 if (!same(activeSpecKeys("Decks"), ["widths", "length", "wheelbase", "colors"])) throw new Error("decks");
 if (!same(activeSpecKeys(), ["widths", "length", "wheelbase", "colors"])) throw new Error("default decks");
 if (!same(activeSpecKeys("Wheels"), ["diameters", "colors", "duros", "shapes"])) throw new Error("wheels");
-if (!same(activeSpecKeys("Trucks"), ["truckSizes", "truckHeights", "constructions"])) throw new Error("trucks");
+if (!same(activeSpecKeys("Trucks"), ["truckFits", "truckNatives", "truckSizes", "truckHeights", "constructions"])) throw new Error("trucks");
 if (!same(activeSpecKeys("Bearings"), ["abecs"])) throw new Error("bearings");
 if (!same(activeSpecKeys("Sneakers"), ["shoeSizes"])) throw new Error("sneakers");
 if (activeSpecKeys("Accessories").length) throw new Error("accessories hide specs");

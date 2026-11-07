@@ -211,6 +211,8 @@
         if (kind === "discountMin") return value + "%+ off";
         if (kind === "duros") return value.join("/");
         if (kind === "diameter") return numberText(value) + "mm";
+        if (kind === "truckFit") return "Fits deck " + value + "″";
+        if (kind === "truckNatives") return value.replace(":", " ");
         if (kind === "width") return numberText(value) + '"';
         if (kind === "store") return STORE_LABELS[value] || value;
         return value;
@@ -269,6 +271,25 @@
         });
         phraseTokens(raw, spans, "store", vocabulary.stores).forEach(token => tokens.push(token));
         phraseTokens(raw, spans, "part", vocabulary.categories).forEach(token => tokens.push(token));
+        const partTokens = tokens.filter(t => t.kind === "part");
+        if (!partTokens.length || partTokens.every(t => t.value === "Trucks")) {
+            const native = /\b(indy|independent|ace)\s+(\d{2,3})\b/gi;
+            let match;
+            while ((match = native.exec(raw))) {
+                const start = match.index, end = start + match[0].length;
+                if (overlaps(spans, start, end)) continue;
+                const value = (match[1].toLowerCase() === "ace" ? "ace" : "independent") + ":" + match[2];
+                spans.push({start, end});
+                tokens.push({kind: "truckNatives", value, start, end});
+            }
+            const truckQuery = partTokens.some(t => t.value === "Trucks") || tokens.some(t => t.kind === "truckNatives");
+            if (truckQuery) tokens.forEach(t => {
+                if (t.kind === "width") {
+                    t.kind = "truckFit";
+                    t.value = Number(t.value) >= 9.5 ? "9.5+" : Number(t.value) === Math.round(Number(t.value)) ? Number(t.value).toFixed(1) : String(t.value);
+                }
+            });
+        }
         tokens.sort((a, b) => a.start - b.start);
         const filters = {};
         tokens.forEach(token => {
@@ -277,9 +298,11 @@
             // Several stores or categories widen the search: any of them.
             if (token.kind === "duros") filters.duros = (filters.duros || []).concat(token.value);
             else if (token.kind === "store") filters.stores = (filters.stores || []).concat(token.value);
+            else if (token.kind === "truckNatives") filters.truckNatives = (filters.truckNatives || []).concat(token.value);
             else if (token.kind === "part") filters.parts = (filters.parts || []).concat(token.value);
             else filters[token.kind] = token.value;
         });
+        if (filters.truckNatives && !filters.parts) filters.parts = ["Trucks"];
         // "helmet" means Protection (the filter) but is narrower than it:
         // keep the word to rank helmets first ("triple 8 helmet").
         const prefer = tokens.filter(token => token.kind === "part" && stem(basic(token.raw)) !== stem(basic(token.value)))
@@ -360,6 +383,10 @@
     function rowAllows(filters, row, near) {
         const data = (row && row.dataset) || row || {};
         if (!filters) return true;
+        if ((filters.truckFit || filters.truckNatives) && typeof TruckFit !== "undefined") {
+            if ((data.part || data.category) !== "Trucks") return false;
+            if (!TruckFit.options({dataset: data}, {fits: filters.truckFit ? [filters.truckFit] : [], native: filters.truckNatives || []}, filters).length) return false;
+        }
         const variants = offers(data);
         if (variants.length && (filters.diameter != null || filters.width != null || filters.duros)) {
             return variants.some(offer => {
@@ -403,6 +430,7 @@
             size: data.size || "",
             duros: data.duros || "",
             diameters: data.diameters || "", widths: data.widths || "", specOffers: data.specOffers || "",
+            truckOffers: data.truckOffers || "",
             specs: data.specs || ""
         };
     }

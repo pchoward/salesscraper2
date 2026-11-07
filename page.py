@@ -4,6 +4,7 @@ The published page is one HTML file. Filters, sorting, stars, and the price
 drawer run in the browser. A problem in one section is logged and skipped.
 """
 
+import truck_fit
 import datetime
 import json
 import logging
@@ -1708,6 +1709,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             }
             item["_specs"] = specs
             item["_brand"] = brand
+            record["truck_offers"] = truck_fit.offers_for({**item, "brand": brand}) if item.get("part") == "Trucks" else []
+            record["search"] += " " + " ".join(o["native"] for o in record["truck_offers"] if o.get("available") is not False)
             records.append(record)
         except Exception as exc:
             logger.error("Skipping report row %s: %s", (item or {}).get("url"), exc)
@@ -2078,13 +2081,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             "</section>"
         )
 
-    def _spec_button(value, label, count, tip):
+    def _spec_button(value, label, count, tip, subtitle=""):
         zero = " is-zero" if count == 0 else ""
         return (
             f'<button type="button" class="chip spec-chip{zero}" '
             f'data-value="{escape(str(value), quote=True)}" data-count="{count}" '
             f'title="{escape(tip, quote=True)}" aria-pressed="false">'
-            f'<span class="spec-label">{escape(str(label))}</span>'
+            f'<span class="spec-label">{escape(str(label))}'
+            + (f'<small class="truck-native-note">{escape(subtitle)}</small>' if subtitle else "")
+            + '</span>'
             f'<span class="spec-count">{count}</span></button>'
         )
 
@@ -2224,14 +2229,19 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "Only a shape word printed in the name.",
         sum(shape_counts.values()),
     )
-    truck_size_section = _gated(
-        "trucksize",
-        "Truck Size",
-        "Trucks",
-        size_buttons,
-        "Hanger size, Ace size, inch width, or axle width printed in the name.",
-        sum(truck_size_counts.values()),
-    )
+    truck_records = [r for r in records if r["part"] == "Trucks"]
+    truck_fit_buttons = []
+    for band in truck_fit.FIT_BANDS:
+        matching = [r for r in truck_records if any(band in o["fits"] and o["available"] is not False for o in r["truck_offers"])]
+        native_labels = sorted({o["brand_label"] + " " + o["native"] for r in matching for o in r["truck_offers"] if band in o["fits"] and o["available"] is not False})
+        truck_fit_buttons.append(_spec_button(band, band + '″', len(matching), "Exact ranges shown on cards", ' · '.join(native_labels)))
+    native_keys = sorted({o["key"] for r in truck_records for o in r["truck_offers"] if o["key"] and o["available"] is not False})
+    native_buttons = [_spec_button(key, truck_fit.BRANDS.get(key.split(":")[0], key.split(":")[0]) + " " + key.split(":")[1],
+                        sum(any(o["key"] == key and o["available"] is not False for o in r["truck_offers"]) for r in truck_records), "Native size, without inferred deck fit") for key in native_keys]
+    truck_size_section = _gated("truckfit", "Fits deck", "Trucks", truck_fit_buttons,
+        "Owner-supplied guide. Uses ideal ranges; maximum-only entries are marked. 9.5+ groups wider ranges: see exact fit on cards. Unmapped sizes and widths below 7.75 remain in All.", len(truck_records))
+    truck_size_section += _gated("trucknative", "Brand sizes", "Trucks", native_buttons,
+        "Native sizes for the selected brand. Unverified fit stays unmapped.", len(truck_records))
     truck_height_section = _gated(
         "truckheight",
         "Truck Height",
@@ -2878,7 +2888,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     )
     chunks.append(
         # Search: MiniSearch (vendored, MIT) and SkateDeals' search module.
-        f"<script>{_read_asset('search/vendor/minisearch.js')}\n{_read_asset('search/search.js')}\n"
+        f"<script>{_read_asset('truck-fit.js')}\n{_read_asset('search/vendor/minisearch.js')}\n{_read_asset('search/search.js')}\n"
         f"SkateSearch.configure({_search_aliases(sport.aliases_file())});</script>"
     )
     if sport.facets:
@@ -3024,6 +3034,7 @@ def _deal_attrs(record):
         f'data-diameter="{_attr(record.get("diameter") or "")}" '
         f'data-duros="{_attr(",".join(record.get("duros") or []))}" '
         f'data-shape="{_attr(record.get("shape") or "")}" '
+        f'data-truck-offers="{_attr(json.dumps(record.get("truck_offers") or [], separators=(",", ":")))}" '
         f'data-trucksize="{_attr(record.get("truck_size") or "")}" '
         f'data-truckheight="{_attr(record.get("truck_height") or "")}" '
         f'data-construction="{_attr(record.get("construction") or "")}" '
@@ -3390,6 +3401,8 @@ def _card_html(record):
     store = record.get("store") or ""
     name = record["name"]
     meta = f"Found {found} · {store}" if found else store
+    truck_labels = list(dict.fromkeys(o["brand_label"] + " " + (o["native"] or "size not listed") + " · " + truck_fit.range_text(o) for o in record.get("truck_offers", []) if o["available"] is not False))
+    truck_label_html = '<p class="truck-fit-label">' + escape('; '.join(truck_labels)) + '</p>' if truck_labels else ''
     return (
         f'<article class="deal-card{listed}" {_deal_attrs(record)}>'
         f'{_card_store_link(record["url"], name, store)}'
@@ -3399,6 +3412,7 @@ def _card_html(record):
         f'<span class="store-mark">{escape(store)}</span>'
         f'{_card_quick_button(name)}</div>'
         f'<h3 class="product-name">{escape(name)}</h3>'
+        f'{truck_label_html}'
         f'<div class="card-sparkline">{_spark_html(record, width=156, defer=True)}</div>'
         f'<p class="card-offer">{off_html}{_sold_out_pill(record)}</p>'
         '<p class="card-prices">'
