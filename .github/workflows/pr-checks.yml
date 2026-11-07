@@ -133,9 +133,13 @@ jobs:
         run: node ci/check_my_stuff.cjs preview/site "${{ runner.temp }}/category-navigation-results/my-stuff"
 
       - name: Variant-aware truck fit and legacy-link browser checks
+        # The fixtures must be built outside the checkout (the builder
+        # refuses in-tree output), and the check serves the directory
+        # it is given.
         run: |
-          python ci/build_truck_fixtures.py preview/site
-          node ci/check_truck_fit.cjs preview/site "${{ runner.temp }}/category-navigation-results/truck-fit"
+          mkdir -p "${{ runner.temp }}/truck-fit-site"
+          python ci/build_truck_fixtures.py "${{ runner.temp }}/truck-fit-site"
+          node ci/check_truck_fit.cjs "${{ runner.temp }}/truck-fit-site" "${{ runner.temp }}/category-navigation-results/truck-fit"
 
       - name: Upload category navigation screenshots
         if: always()
