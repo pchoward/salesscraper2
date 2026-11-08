@@ -11937,6 +11937,126 @@
             "reason": "normal_variation"
           }
         },
+        "Empire BMX_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Braking": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Frames & Forks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Seating": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Steering": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Wheel Parts": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Empire BMX_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "Exodus_Protection": {
           "count": 2,
           "failed": false,
@@ -12742,14 +12862,14 @@
           }
         },
         "Source BMX US_Drivetrain": {
-          "count": 24,
+          "count": 23,
           "failed": false,
           "diagnostics": {
             "expected_count": 19,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 24,
-            "percentage_change": 26.3,
+            "actual_count": 23,
+            "percentage_change": 21.1,
             "reason": "normal_variation"
           }
         },
@@ -13222,7 +13342,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-08T06:02:41+00:00"
+      "scanned_at": "2026-11-08T15:34:12+00:00"
     }
   ],
   "baseline": {
@@ -13308,7 +13428,7 @@
     },
     "Source BMX US_Drivetrain": {
       "date": "2026-11-08",
-      "count": 24
+      "count": 23
     },
     "Source BMX US_Frames & Forks": {
       "date": "2026-11-08",
@@ -15812,6 +15932,66 @@
         "count": 0
       }
     ],
+    "Empire BMX_Bikes": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Braking": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Drivetrain": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Frames & Forks": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Protection": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Seating": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Steering": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Tires": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Wheel Parts": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
+    "Empire BMX_Wheels": [
+      {
+        "date": "2026-11-08",
+        "count": 0
+      }
+    ],
     "Exodus_Protection": [
       {
         "date": "2026-11-04",
@@ -17377,7 +17557,7 @@
       },
       {
         "date": "2026-11-08",
-        "count": 24
+        "count": 23
       }
     ],
     "Source BMX US_Frames & Forks": [

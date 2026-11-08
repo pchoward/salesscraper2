@@ -4345,14 +4345,14 @@
           }
         },
         "evo_Protection": {
-          "count": 133,
+          "count": 132,
           "failed": false,
           "diagnostics": {
             "expected_count": 128,
             "baseline_samples": 5,
             "median_absolute_deviation": 1,
-            "actual_count": 133,
-            "percentage_change": 3.9,
+            "actual_count": 132,
+            "percentage_change": 3.1,
             "reason": "normal_variation"
           }
         },
@@ -4369,7 +4369,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-08T06:13:20+00:00"
+      "scanned_at": "2026-11-08T15:45:01+00:00"
     }
   ],
   "baseline": {
@@ -4471,7 +4471,7 @@
     },
     "evo_Protection": {
       "date": "2026-11-08",
-      "count": 133
+      "count": 132
     },
     "Bern_Helmets": {
       "date": "2026-11-08",
@@ -6030,7 +6030,7 @@
       },
       {
         "date": "2026-11-08",
-        "count": 133
+        "count": 132
       }
     ],
     "evo_Skis": [
