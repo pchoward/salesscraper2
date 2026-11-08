@@ -127,7 +127,10 @@ MIN_DROP_DOLLARS = 2.0
 MIN_DROP_PERCENT = 5.0
 
 _PREFIX_WORDS = re.compile(r"^(?:(?:clearance|sale|super deal)\s+)+", re.IGNORECASE)
-_PREFIX_PERCENT = re.compile(r"^-?\s*\d{1,3}%\s*", re.IGNORECASE)
+_PREFIX_PERCENT = re.compile(r"^-\s*\d{1,3}%\s*", re.IGNORECASE)
+# After "Clearance"/"Sale" the minus may be missing ("Sale 24%Madness"). A bare
+# leading percent otherwise is a name: the brand 100% ("100% Ridecamp Knee Guard").
+_PREFIX_BARE_PERCENT = re.compile(r"^\d{1,3}%\s*", re.IGNORECASE)
 # "8.5 x 31.8", and with inch marks on either side of the x:
 # '9.75" x 32"', '10.4"x32.25"', '9.5”X32”'.
 _WIDTH_BY_LENGTH = re.compile(
@@ -198,6 +201,8 @@ def normalize_product_name(name):
     text = re.sub(r"\s+", " ", text).strip()
     while True:
         updated = _PREFIX_WORDS.sub("", text).strip()
+        if updated != text:
+            updated = _PREFIX_BARE_PERCENT.sub("", updated).strip()
         updated = _PREFIX_PERCENT.sub("", updated).strip()
         if updated == text:
             return text
