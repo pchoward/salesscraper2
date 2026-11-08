@@ -12586,14 +12586,14 @@
           }
         },
         "Kink_Drivetrain": {
-          "count": 1,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 1,
             "baseline_samples": 3,
             "median_absolute_deviation": 0,
-            "actual_count": 1,
-            "percentage_change": 0.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "normal_variation"
           }
         },
@@ -13342,7 +13342,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-08T15:34:12+00:00"
+      "scanned_at": "2026-11-08T16:56:53+00:00"
     }
   ],
   "baseline": {
@@ -13559,10 +13559,6 @@
       "count": 2
     },
     "Kink_Braking": {
-      "date": "2026-11-08",
-      "count": 1
-    },
-    "Kink_Drivetrain": {
       "date": "2026-11-08",
       "count": 1
     },
@@ -16927,7 +16923,7 @@
       },
       {
         "date": "2026-11-08",
-        "count": 1
+        "count": 0
       }
     ],
     "Kink_Frames & Forks": [
