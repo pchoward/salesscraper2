@@ -299,13 +299,76 @@ def bmx_brand(name, base, collection, whole_site=False):
                                 track_exclusions=True, unknown_by_title=True)
 
 
+# Empire BMX (store probe, 2026-11-08): Shopify, robots allow collections.
+# 1,697 products, 80 of them bikes. Every product type is blank and titles
+# often skip the word "bike" ("Fairdale Lookfar 2023"), but its tags name the
+# category, so those decide. Its "Sale Items" tag carried 28 cut prices with
+# no compare-at price that day; those can't show a markdown and stay out, as
+# everywhere. The whole catalog is read so Black Friday markdowns are found
+# wherever Empire files them.
+EMPIRE_TAGS = {
+    "bikes": "Bikes",
+    "frames": "Frames & Forks", "forks": "Frames & Forks",
+    "handlebars": "Steering", "stems": "Steering", "grips": "Steering", "headset stuff": "Steering",
+    "bar ends": "Steering", "detanglers and parts": "Steering",
+    "cranksets and crank arms": "Drivetrain", "sprockets sprocket guards adapters": "Drivetrain",
+    "bottom bracket stuff": "Drivetrain", "chains": "Drivetrain", "pedals": "Drivetrain",
+    "chain tensioners": "Drivetrain",
+    "stock wheels": "Wheels", "custom wheels": "Wheels",
+    "hubs": "Wheel Parts", "rims": "Wheel Parts", "spokes": "Wheel Parts", "axles and hub parts": "Wheel Parts",
+    "hub guards": "Wheel Parts", "pegs": "Wheel Parts", "freewheels cassette cogs drivers": "Wheel Parts",
+    "tires": "Tires", "tubes and rimstrips": "Tires",
+    "seats": "Seating", "seat posts": "Seating", "seat post clamps": "Seating",
+    "brake stuff": "Braking",
+    "safety gear": "Protection", "helmets": "Protection", "kneepads": "Protection", "shinguards": "Protection",
+    "elbow pads": "Protection", "gloves": "Protection",
+}
+
+
+def empire_part(tags):
+    """Empire's category tag -> BMX category; None for clothes, tools, media."""
+    parts = {EMPIRE_TAGS.get(shopify.type_key(tag)) for tag in tags or ()} - {None}
+    if "Bikes" in parts:  # a bike also carries its wheel size, never a part tag
+        return "Bikes"
+    if "Protection" in parts:
+        return "Protection"
+    return parts.pop() if len(parts) == 1 else None
+
+
+_EMPIRE_SIZE = re.compile(r'^(12|14|16|18|20|22|24)"$')  # "26\" and larger" names no one size
+
+
+def empire_details(item, product, kind_key):
+    """details, plus the wheel size Empire states only as a tag ('20"')."""
+    details(item, product, kind_key)
+    sizes = {m.group(1) for tag in product.get("tags") or () for m in [_EMPIRE_SIZE.match(str(tag).strip())] if m}
+    if not item.get("wheel_size") and len(sizes) == 1:
+        item["wheel_size"] = sizes.pop()
+
+
+EMPIRE = shopify.ShopifyStore(
+    "Empire BMX",
+    "Empire BMX",
+    "https://www.empirebmx.com",
+    collection="sale",
+    more_collections=("clearance",),
+    types=TYPES,
+    tag_part=empire_part,
+    brand_of=brands.for_sport(sports.BMX),
+    own_vendor="empire",  # every vendor is "Empire BMX", the shop itself
+    details=empire_details,
+    track_exclusions=True,
+    whole_site=True,
+)
+
+
 BMX_BRANDS = (
     bmx_brand("Kink", "https://www.kinkbmx.com", "sale"),
     bmx_brand("Haro", "https://www.harobikes.com", "summer-parts-sale"),
     bmx_brand("Fiend", "https://www.fiendbmx.com", "clearance", whole_site=True),  # audit 2026-11-06: 3 more
 )
 
-STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS
+STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US, EMPIRE) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS
 
 PARTS = sports.BMX.parts
 
