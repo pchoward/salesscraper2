@@ -11302,14 +11302,14 @@
           }
         },
         "Albe's BMX_Wheels": {
-          "count": 22,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 11,
             "baseline_samples": 7,
             "median_absolute_deviation": 1,
-            "actual_count": 22,
-            "percentage_change": 100.0,
+            "actual_count": 21,
+            "percentage_change": 90.9,
             "reason": "normal_variation"
           }
         },
@@ -13222,7 +13222,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-08T00:53:23+00:00"
+      "scanned_at": "2026-11-08T06:02:41+00:00"
     }
   ],
   "baseline": {
@@ -13256,7 +13256,7 @@
     },
     "Albe's BMX_Wheels": {
       "date": "2026-11-08",
-      "count": 22
+      "count": 21
     },
     "Circuit BMX_Drivetrain": {
       "date": "2026-11-08",
@@ -14333,7 +14333,7 @@
       },
       {
         "date": "2026-11-08",
-        "count": 22
+        "count": 21
       }
     ],
     "Bern_Bikes": [

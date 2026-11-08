@@ -3696,14 +3696,14 @@
           }
         },
         "Christy Sports_Bindings": {
-          "count": 11,
+          "count": 10,
           "failed": false,
           "diagnostics": {
             "expected_count": 10.5,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.5,
-            "actual_count": 11,
-            "percentage_change": 4.8,
+            "actual_count": 10,
+            "percentage_change": -4.8,
             "reason": "normal_variation"
           }
         },
@@ -3960,14 +3960,14 @@
           }
         },
         "Smith_Helmets": {
-          "count": 0,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 15.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 1.0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
+            "actual_count": 14,
+            "percentage_change": -6.7,
             "reason": "insufficient_history"
           }
         },
@@ -4357,19 +4357,19 @@
           }
         },
         "evo_Skis": {
-          "count": 196,
+          "count": 195,
           "failed": false,
           "diagnostics": {
             "expected_count": 190.5,
             "baseline_samples": 6,
             "median_absolute_deviation": 2.5,
-            "actual_count": 196,
-            "percentage_change": 2.9,
+            "actual_count": 195,
+            "percentage_change": 2.4,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-08T01:04:18+00:00"
+      "scanned_at": "2026-11-08T06:13:20+00:00"
     }
   ],
   "baseline": {
@@ -4411,11 +4411,11 @@
     },
     "evo_Skis": {
       "date": "2026-11-08",
-      "count": 196
+      "count": 195
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-08",
-      "count": 11
+      "count": 10
     },
     "Christy Sports_Boots": {
       "date": "2026-11-08",
@@ -4502,7 +4502,7 @@
       "count": 2
     },
     "Smith_Helmets": {
-      "date": "2026-11-07",
+      "date": "2026-11-08",
       "count": 14
     },
     "Smith_Protection": {
@@ -4694,7 +4694,7 @@
       },
       {
         "date": "2026-11-08",
-        "count": 11
+        "count": 10
       }
     ],
     "Christy Sports_Boots": [
@@ -5286,7 +5286,7 @@
       },
       {
         "date": "2026-11-08",
-        "count": 0
+        "count": 14
       }
     ],
     "Smith_Poles": [
@@ -6060,7 +6060,7 @@
       },
       {
         "date": "2026-11-08",
-        "count": 196
+        "count": 195
       }
     ]
   }
