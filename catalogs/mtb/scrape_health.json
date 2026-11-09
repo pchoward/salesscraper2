@@ -13260,26 +13260,26 @@
           }
         },
         "Fanatik_Brakes": {
-          "count": 53,
+          "count": 54,
           "failed": false,
           "diagnostics": {
             "expected_count": 1,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 53,
-            "percentage_change": 5200.0,
+            "actual_count": 54,
+            "percentage_change": 5300.0,
             "reason": "normal_variation"
           }
         },
         "Fanatik_Cockpit": {
-          "count": 41,
+          "count": 43,
           "failed": false,
           "diagnostics": {
             "expected_count": 4,
             "baseline_samples": 7,
             "median_absolute_deviation": 3,
-            "actual_count": 41,
-            "percentage_change": 925.0,
+            "actual_count": 43,
+            "percentage_change": 975.0,
             "reason": "normal_variation"
           }
         },
@@ -13296,14 +13296,14 @@
           }
         },
         "Fanatik_Forks & Shocks": {
-          "count": 84,
+          "count": 86,
           "failed": false,
           "diagnostics": {
             "expected_count": 3,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 84,
-            "percentage_change": 2700.0,
+            "actual_count": 86,
+            "percentage_change": 2766.7,
             "reason": "normal_variation"
           }
         },
@@ -13980,50 +13980,50 @@
           }
         },
         "The Lost Co._Brakes": {
-          "count": 33,
+          "count": 42,
           "failed": false,
           "diagnostics": {
             "expected_count": 33.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 33,
-            "percentage_change": 0.0,
+            "actual_count": 42,
+            "percentage_change": 27.3,
             "reason": "normal_variation"
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 162,
+          "count": 178,
           "failed": false,
           "diagnostics": {
             "expected_count": 163.5,
             "baseline_samples": 6,
             "median_absolute_deviation": 1.5,
-            "actual_count": 162,
-            "percentage_change": -0.9,
+            "actual_count": 178,
+            "percentage_change": 8.9,
             "reason": "normal_variation"
           }
         },
         "The Lost Co._Drivetrain": {
-          "count": 131,
+          "count": 147,
           "failed": false,
           "diagnostics": {
             "expected_count": 134.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 1.0,
-            "actual_count": 131,
-            "percentage_change": -2.2,
+            "actual_count": 147,
+            "percentage_change": 9.7,
             "reason": "normal_variation"
           }
         },
         "The Lost Co._Forks & Shocks": {
-          "count": 67,
+          "count": 70,
           "failed": false,
           "diagnostics": {
             "expected_count": 67.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 67,
-            "percentage_change": 0.0,
+            "actual_count": 70,
+            "percentage_change": 4.5,
             "reason": "normal_variation"
           }
         },
@@ -14064,26 +14064,26 @@
           }
         },
         "The Lost Co._Tires": {
-          "count": 120,
+          "count": 132,
           "failed": false,
           "diagnostics": {
             "expected_count": 119.5,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.5,
-            "actual_count": 120,
-            "percentage_change": 0.4,
+            "actual_count": 132,
+            "percentage_change": 10.5,
             "reason": "normal_variation"
           }
         },
         "The Lost Co._Wheels": {
-          "count": 30,
+          "count": 32,
           "failed": false,
           "diagnostics": {
             "expected_count": 30.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 30,
-            "percentage_change": 0.0,
+            "actual_count": 32,
+            "percentage_change": 6.7,
             "reason": "normal_variation"
           }
         },
@@ -14448,17 +14448,17 @@
           }
         }
       },
-      "scanned_at": "2026-11-09T01:28:19+00:00"
+      "scanned_at": "2026-11-09T06:49:46+00:00"
     }
   ],
   "baseline": {
     "Fanatik_Brakes": {
       "date": "2026-11-09",
-      "count": 53
+      "count": 54
     },
     "Fanatik_Cockpit": {
       "date": "2026-11-09",
-      "count": 41
+      "count": 43
     },
     "Fanatik_Drivetrain": {
       "date": "2026-11-09",
@@ -14466,7 +14466,7 @@
     },
     "Fanatik_Forks & Shocks": {
       "date": "2026-11-09",
-      "count": 84
+      "count": 86
     },
     "Fanatik_Frames": {
       "date": "2026-11-09",
@@ -14638,19 +14638,19 @@
     },
     "The Lost Co._Brakes": {
       "date": "2026-11-09",
-      "count": 33
+      "count": 42
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-09",
-      "count": 162
+      "count": 178
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-09",
-      "count": 131
+      "count": 147
     },
     "The Lost Co._Forks & Shocks": {
       "date": "2026-11-09",
-      "count": 67
+      "count": 70
     },
     "The Lost Co._Frames": {
       "date": "2026-11-09",
@@ -14666,11 +14666,11 @@
     },
     "The Lost Co._Tires": {
       "date": "2026-11-09",
-      "count": 120
+      "count": 132
     },
     "The Lost Co._Wheels": {
       "date": "2026-11-09",
-      "count": 30
+      "count": 32
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-09",
@@ -16971,7 +16971,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 53
+        "count": 54
       }
     ],
     "Fanatik_Cockpit": [
@@ -17005,7 +17005,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 41
+        "count": 43
       }
     ],
     "Fanatik_Drivetrain": [
@@ -17073,7 +17073,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 84
+        "count": 86
       }
     ],
     "Fanatik_Frames": [
@@ -18843,7 +18843,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 33
+        "count": 42
       }
     ],
     "The Lost Co._Cockpit": [
@@ -18873,7 +18873,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 162
+        "count": 178
       }
     ],
     "The Lost Co._Drivetrain": [
@@ -18903,7 +18903,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 131
+        "count": 147
       }
     ],
     "The Lost Co._Forks & Shocks": [
@@ -18933,7 +18933,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 67
+        "count": 70
       }
     ],
     "The Lost Co._Frames": [
@@ -19053,7 +19053,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 120
+        "count": 132
       }
     ],
     "The Lost Co._Wheels": [
@@ -19083,7 +19083,7 @@
       },
       {
         "date": "2026-11-09",
-        "count": 30
+        "count": 32
       }
     ],
     "Troy Lee Designs_Bikes": [
