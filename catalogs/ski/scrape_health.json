@@ -5570,14 +5570,14 @@
           }
         },
         "The House_Skis": {
-          "count": 62,
+          "count": 61,
           "failed": false,
           "diagnostics": {
             "expected_count": 62.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.0,
-            "actual_count": 62,
-            "percentage_change": 0.0,
+            "actual_count": 61,
+            "percentage_change": -1.6,
             "reason": "normal_variation"
           }
         },
@@ -5810,14 +5810,14 @@
           }
         },
         "evo_Boots": {
-          "count": 279,
+          "count": 278,
           "failed": false,
           "diagnostics": {
             "expected_count": 297.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 1.0,
-            "actual_count": 279,
-            "percentage_change": -6.1,
+            "actual_count": 278,
+            "percentage_change": -6.4,
             "reason": "normal_variation"
           }
         },
@@ -5858,19 +5858,19 @@
           }
         },
         "evo_Skis": {
-          "count": 188,
+          "count": 190,
           "failed": false,
           "diagnostics": {
             "expected_count": 192.5,
             "baseline_samples": 8,
             "median_absolute_deviation": 2.5,
-            "actual_count": 188,
-            "percentage_change": -2.3,
+            "actual_count": 190,
+            "percentage_change": -1.3,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-10T07:30:49+00:00"
+      "scanned_at": "2026-11-10T13:10:22+00:00"
     }
   ],
   "baseline": {
@@ -5912,7 +5912,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-10",
-      "count": 188
+      "count": 190
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-10",
@@ -5948,7 +5948,7 @@
     },
     "The House_Skis": {
       "date": "2026-11-10",
-      "count": 62
+      "count": 61
     },
     "Gear West_Helmets": {
       "date": "2026-11-10",
@@ -6012,7 +6012,7 @@
     },
     "evo_Boots": {
       "date": "2026-11-10",
-      "count": 279
+      "count": 278
     }
   },
   "completeness_baseline": {
@@ -7313,7 +7313,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 62
+        "count": 61
       }
     ],
     "Triple 8_Bindings": [
@@ -7909,7 +7909,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 279
+        "count": 278
       }
     ],
     "evo_Helmets": [
@@ -8057,7 +8057,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 188
+        "count": 190
       }
     ]
   }
