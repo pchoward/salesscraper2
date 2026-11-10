@@ -157,10 +157,20 @@ def _run(args, sport):
     curr_data = prepared["current_data"]
     failed_keys = prepared["failed_keys"]
     suspect_keys = prepared["suspect_keys"]
+    # One listing per product per store: sizes, colours and model years a
+    # store sells under one name become one card at the lowest price. After
+    # the health check, so it compares each store's raw counts; a failed
+    # store's retained previous listings are left as they were.
+    import versions
+    merged_versions = versions.merge({key: items for key, items in (curr_data or {}).items()
+                                      if key not in failed_keys}, into=curr_data)
+    if merged_versions:
+        logging.info("Merged %s same-name versions into one listing each", len(merged_versions))
 
     scope_exclusions = {url: reason for store_scraper in scrapers
                         if f"{store_scraper.name}_{store_scraper.part}" not in failed_keys
                         for url, reason in getattr(store_scraper, "catalog_scope_exclusions", {}).items()}
+    scope_exclusions.update(merged_versions)
     price_history = load_price_history()
     carried = set()
     stock_before = {url: entry["stock"] for url, entry in (price_history or {}).items()
