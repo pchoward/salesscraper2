@@ -32,6 +32,26 @@ def _basic(sport, name, part):
 _EBIKE = re.compile(r"\belectric\s+(?:bikes?|bmx|balance\s+bikes?)\b|\be-?bikes?\b|\bpedal[\s-]+assist|\be-?bmx\b", re.I)
 
 
+# Skate pads BMX riders don't wear (owner, 2026-11-10). Roller-skate and
+# derby gear, and skate brands' knee + elbow (+ wrist) packs. Single hard-cap
+# knee pads (Triple 8 KP 22, 187 Slim) stay: some park riders wear them.
+# "Moxi" alone is a signature colourway (a Triple 8 helmet), not roller gear.
+_ROLLER = re.compile(r"\b(?:derby|roller\s*skates?|rollerskates?|quad\s+skates?|impala)\b", re.I)
+_SKATE_PAD_BRAND = re.compile(r"^(?:187(?:\s+killer\s+pads)?|triple\s*(?:8|eight)|pro-?tec|s-?one)\b", re.I)
+_PAD_PACK = re.compile(r"\b(?:combo\s+pack|six\s+pack|\d\s*-?\s*pack|pack\s+of|saver\s+series|set\s+of\s+pads|"
+                       r"pads?\s+set|knee\s*(?:/|&|and|\+)\s*elbow)\b", re.I)
+
+
+def skate_only_pads(name):
+    """A reason when BMX should leave this protection out, else None."""
+    name = str(name or "")
+    if _ROLLER.search(name):
+        return "roller-skate or derby gear"
+    if _SKATE_PAD_BRAND.search(name) and _PAD_PACK.search(name):
+        return "skate pad pack"
+    return None
+
+
 def bmx(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     import sports
     if _EBIKE.search(f"{name} {product_type}"):
@@ -43,6 +63,9 @@ def bmx(name, part, url="", price_new=None, price_old=None, description="", prod
         from sports.protection import protects
         if not protects(name, product_type):
             return "not protective gear"
+        skate = skate_only_pads(name)
+        if skate:
+            return skate
     return reason
 
 
