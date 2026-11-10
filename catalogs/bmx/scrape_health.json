@@ -16283,14 +16283,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 90,
+          "count": 94,
           "failed": false,
           "diagnostics": {
             "expected_count": 92,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 90,
-            "percentage_change": -2.2,
+            "actual_count": 94,
+            "percentage_change": 2.2,
             "reason": "normal_variation"
           }
         },
@@ -17496,14 +17496,14 @@
           }
         },
         "Powers BMX_Drivetrain": {
-          "count": 24,
+          "count": 23,
           "failed": false,
           "diagnostics": {
             "expected_count": 25,
             "baseline_samples": 9,
             "median_absolute_deviation": 0,
-            "actual_count": 24,
-            "percentage_change": -4.0,
+            "actual_count": 23,
+            "percentage_change": -8.0,
             "reason": "normal_variation"
           }
         },
@@ -18133,7 +18133,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-10T12:58:54+00:00"
+      "scanned_at": "2026-11-10T21:07:24+00:00"
     }
   ],
   "baseline": {
@@ -18187,7 +18187,7 @@
     },
     "Powers BMX_Drivetrain": {
       "date": "2026-11-10",
-      "count": 24
+      "count": 23
     },
     "Powers BMX_Frames & Forks": {
       "date": "2026-11-10",
@@ -18291,7 +18291,7 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-10",
-      "count": 90
+      "count": 94
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-10",
@@ -20068,7 +20068,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 90
+        "count": 94
       }
     ],
     "Cambria_Seating": [
@@ -23102,7 +23102,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 24
+        "count": 23
       }
     ],
     "Powers BMX_Frames & Forks": [
