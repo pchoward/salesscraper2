@@ -102,8 +102,12 @@ class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
                  brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=(),
                  type_part=None, track_exclusions=False, tag_part=None, raw_type_part=False, whole_site=False,
-                 product_part=None):
+                 product_part=None, max_pages=MAX_PAGES):
         self.store = store
+        # Pages read per collection before it counts as a failed read. Big
+        # category collections (evo ski-boots, Cambria sale-components) pass
+        # 20 pages some days, and a failed read hides every listing in it.
+        self.max_pages = max_pages
         self.display_name = display_name
         self.base = base.rstrip("/")
         self.sale_json = f"{self.base}/collections/{collection}/products.json"
@@ -267,7 +271,7 @@ def exclusions(store, products):
 def _read_collection(store, sale_json, fetch, sleep):
     products = []
     whole = "/collections/" not in sale_json
-    limit = WHOLE_SITE_MAX_PAGES if whole else MAX_PAGES
+    limit = WHOLE_SITE_MAX_PAGES if whole else getattr(store, "max_pages", MAX_PAGES)
     for page in range(1, limit + 1):
         if page > 1:
             sleep(PAGE_DELAY)

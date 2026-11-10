@@ -164,6 +164,9 @@ EVO = shopify.ShopifyStore(
     own_vendor="evo",
     details=details,
     track_exclusions=True,
+    # ski-boots passed 20 pages (5,000 products) on 10 runs, 2026-11-06 to 11-09,
+    # and every boot left the Ski tab (audit 2026-11-10).
+    max_pages=60,
 )
 
 # Multisport protection brands (owner, 2026-11-03): snow helmets, and the
