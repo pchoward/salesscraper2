@@ -397,8 +397,32 @@ def use_sport_rules(rule):
     return previous
 
 
+# Every sport, every part (owner, 2026-11-09): a deal is at least 10% off.
+# Decks keep their own stricter rule for unknown brands (15%).
+MIN_PERCENT_OFF = 10.0
+
+
+def _minimum_markdown_reason(price_new, price_old):
+    """A reason when both prices are known and the markdown is under 10%.
+
+    A listing with no regular price (a history check, a store that shows no
+    "was" price) is left to the other rules."""
+    if price_new in (None, "") or price_old in (None, ""):
+        return None
+    percent = percent_off_value(price_new, price_old)
+    if percent is None or percent <= 0 or percent >= MIN_PERCENT_OFF:
+        return None
+    return f"{percent:.0f}% off (< {MIN_PERCENT_OFF:.0f}%)"
+
+
 def filter_reason(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     """Return None if the listing should be kept, else a short reason."""
+    reason = _rule_reason(name, part, url, price_new, price_old, description, product_type)
+    return reason or _minimum_markdown_reason(price_new, price_old)
+
+
+def _rule_reason(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
+    """Each sport's own listing rules (Skate's below)."""
     if _SPORT_RULES is not None:
         return _SPORT_RULES(name, part, url, price_new, price_old, description, product_type)
     from tracked import accessory_rule, sneaker_rule
