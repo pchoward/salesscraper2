@@ -5486,14 +5486,14 @@
           }
         },
         "Smith_Protection": {
-          "count": 24,
+          "count": 23,
           "failed": false,
           "diagnostics": {
             "expected_count": 23.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 0.0,
-            "actual_count": 24,
-            "percentage_change": 4.3,
+            "actual_count": 23,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -5810,14 +5810,14 @@
           }
         },
         "evo_Boots": {
-          "count": 278,
+          "count": 279,
           "failed": false,
           "diagnostics": {
             "expected_count": 297.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 1.0,
-            "actual_count": 278,
-            "percentage_change": -6.4,
+            "actual_count": 279,
+            "percentage_change": -6.1,
             "reason": "normal_variation"
           }
         },
@@ -5846,31 +5846,31 @@
           }
         },
         "evo_Protection": {
-          "count": 119,
+          "count": 118,
           "failed": false,
           "diagnostics": {
             "expected_count": 131,
             "baseline_samples": 7,
             "median_absolute_deviation": 3,
-            "actual_count": 119,
-            "percentage_change": -9.2,
+            "actual_count": 118,
+            "percentage_change": -9.9,
             "reason": "normal_variation"
           }
         },
         "evo_Skis": {
-          "count": 190,
+          "count": 188,
           "failed": false,
           "diagnostics": {
             "expected_count": 192.5,
             "baseline_samples": 8,
             "median_absolute_deviation": 2.5,
-            "actual_count": 190,
-            "percentage_change": -1.3,
+            "actual_count": 188,
+            "percentage_change": -2.3,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-10T03:57:14+00:00"
+      "scanned_at": "2026-11-10T07:30:49+00:00"
     }
   ],
   "baseline": {
@@ -5912,7 +5912,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-10",
-      "count": 190
+      "count": 188
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-10",
@@ -5972,7 +5972,7 @@
     },
     "evo_Protection": {
       "date": "2026-11-10",
-      "count": 119
+      "count": 118
     },
     "Bern_Helmets": {
       "date": "2026-11-10",
@@ -6008,11 +6008,11 @@
     },
     "Smith_Protection": {
       "date": "2026-11-10",
-      "count": 24
+      "count": 23
     },
     "evo_Boots": {
       "date": "2026-11-10",
-      "count": 278
+      "count": 279
     }
   },
   "completeness_baseline": {
@@ -7067,7 +7067,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 24
+        "count": 23
       }
     ],
     "Smith_Skis": [
@@ -7909,7 +7909,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 278
+        "count": 279
       }
     ],
     "evo_Helmets": [
@@ -8019,7 +8019,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 119
+        "count": 118
       }
     ],
     "evo_Skis": [
@@ -8057,7 +8057,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 190
+        "count": 188
       }
     ]
   }
