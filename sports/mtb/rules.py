@@ -17,7 +17,11 @@ _RULES=(
 )
 
 # Road/gravel groupsets, for parts filed under a shared MTB/Road type.
-_NOT_MTB=(r'\b(?:road|gravel|cyclocross|triathlon|bmx|commuter|ultegra|dura[- ]?ace|tiagra|sora|claris|grx|'
+# Road groups and tires named without the word "road" (2026-11-11, Bike Mart's
+# parts sale): Campagnolo and its groups, Shimano 105, GP5000, Schwalbe One.
+_NOT_MTB=(r'\b(?:campagnolo|campy|super\s+record|chorus|centaur|ekar|shimano\s+105|gp\s*5000|grand\s+prix|gatorskin|'
+          r'schwalbe\s+one|pro\s+one|corsa|aero\s+(?:bars?|wheels?)|time\s+trial|tt\s+bars?)\b|'
+          r'\b(?:road|gravel|cyclocross|triathlon|bmx|commuter|ultegra|dura[- ]?ace|tiagra|sora|claris|grx|'
           r'rival|(?:force|red)\s+(?:axs|etap|22)|xplr|sram\s+red)\b|\b700\s*(?:c\b|x\s*\d)|(?<![\d.])\d{2}(?:-\d{2})?c\b|\bdrop[- ]bars?\b|\b(?:bar|handlebar)\s+tape\b')
 
 
