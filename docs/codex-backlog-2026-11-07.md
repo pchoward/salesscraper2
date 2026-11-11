@@ -148,3 +148,27 @@ Checked by Codex, 2026-11-07.
 - Variant-only sizes.
 - One band chip lists the right brand sizes.
 - The brand row only appears with a single brand selected.
+
+## 11. Picking a category from the top menu starts a fresh browse
+**Reported by the owner, 2026-11-11 (BMX).** They filtered Protection by Protects: Wrists and Elbows, then picked Seats & Posts from the top menu, then a brand.
+- The page showed `BMX / Seats & Posts / supacaz / Wrists / Elbows`: the protection picks rode along into Seats & Posts.
+- Reopening the top menu, categories with no matches under those leftover filters were greyed out. Everything was available again only after clearing the filters by hand.
+
+**Cause:** `navigation/navigation.js`, `refreshCategories()`. For the current sport, a menu choice calls `original.click()` on the page's own category button. That swaps only the category and keeps every other filter. The menu's counts and disabled states come from that button's `data-count`, which reflects the leftover filters.
+
+**Wanted:**
+- **A top-menu pick resets the browse:**
+  - Clear every filter except the sport: brand, store, price, spec and protection picks, and search.
+  - The result is the same view as following the category's link fresh (`?type=<slug>`).
+  - The page's own category buttons in the sidebar keep today's behaviour (narrow within the current filters).
+- **Menu counts are each category's full count,** never zero because of filters the user is about to leave. A category with stock is never greyed out in the top menu.
+- **Leftover picks can't hide or decorate results.** If a filter can't apply to the current category (Protects on Seats & Posts), the URL keeps it for old links, but it's left out of the active chips and breadcrumbs.
+- **Back** returns to the filtered view the user came from, as today.
+
+**Keep unchanged:** URL parameter names, saved views and `localStorage` keys. Old links with mixed filters must still open.
+
+**Tests:** extend `ci/check_category_navigation.cjs`:
+- Filter BMX Protection by Protects: Wrists.
+- Pick Seats & Posts from the top menu.
+- Check that the breadcrumbs read `BMX / Seats & Posts`, no Protects chip is shown, the result count equals the category's full count, and no top-menu category with items is disabled.
+- Press Back and check that the Protection view with Wrists returns.
