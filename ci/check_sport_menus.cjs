@@ -53,7 +53,7 @@ const path=require('node:path');
     // One-click All products route, after entering a category.
     if(touch)await page.locator('#sport-'+sport).tap();else await page.locator('#sport-'+sport).hover();
     await page.locator('#categoryChoices [data-part="all"]').click();
-    await frame.waitForFunction(()=>state.part==='all');
+    await frame.waitForFunction(()=>typeof state!=='undefined'&&state.part==='all');
     await page.waitForURL(url=>url.searchParams.get('type')===(sport==='skate'?'all':null));
     await page.goBack();
     await page.waitForFunction(part=>document.getElementById('skateFrame').contentDocument?.querySelector('#partFilters [aria-pressed=true]')?.dataset.part===part,part);

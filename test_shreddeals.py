@@ -55,6 +55,23 @@ assert.equal(N.state(N.navigate(start,config,'surf'),config).sport.label,'Surf')
                               cwd=SOURCE,capture_output=True,text=True)
         self.assertEqual(result.returncode,0,result.stderr)
 
+    def test_top_category_navigation_resets_filters_but_not_direct_urls(self):
+        script = r"""
+const assert=require('node:assert/strict'),N=require('./previews/navigation.js');
+const config=JSON.parse(process.argv[1]);config.skateQueryKeys=JSON.parse(process.argv[2]);
+config.sports.forEach(s=>s.catalog=s.id+'/sale_items_chart.html');
+const old='https://example.test/?sport=bmx&type=protection&bmx_protects=Wrists,Elbows&bmx_future=old&brand=supacaz&store=albes&max=1&discount=20&diameter=52&q=clamp&watching=1&utm_source=kept#anchor';
+const next=N.categoryURL(old,config,'bmx','seats-posts');
+assert.deepEqual([...next.searchParams.entries()],[['sport','bmx'],['utm_source','kept'],['type','seats-posts']]);
+const foreign=N.categoryURL(old,config,'ski','skis');assert.equal(foreign.searchParams.get('sport'),'ski');assert(!foreign.searchParams.has('bmx_protects'));
+const direct=N.catalogURL(old,config,'bmx');assert.equal(direct.searchParams.get('bmx_protects'),'Wrists,Elbows');
+assert.equal(direct.searchParams.get('brand'),'supacaz','direct links are not navigation reset actions');
+assert.equal(new URL(old).searchParams.get('q'),'clamp','previous history URL remains unchanged');
+assert.deepEqual(N.baseCategoryCounts([{part:'Protection'},{dataset:{part:'Seats & Posts'}},{part:'Bikes',removed:'1'}]),{all:2,Protection:1,'Seats & Posts':1});
+"""
+        result=subprocess.run(['node','-e',script,json.dumps(load_config(HERE/'sports.json')),json.dumps(skate_query_keys())],cwd=SOURCE,capture_output=True,text=True)
+        self.assertEqual(result.returncode,0,result.stderr)
+
     def test_build_preserves_original_inline_application_and_production_files(self):
         names=('sale_items_chart.html','history.json','previous_data.json','price_history.json','scrape_health.json',
                'notification_state.json','notification_state.json.lock')

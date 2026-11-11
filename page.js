@@ -4196,7 +4196,7 @@ function collectFilterActions() {
         });
     });
     if (typeof SportSpecFilters !== "undefined" && SportSpecFilters.actions) {
-        SportSpecFilters.actions().forEach(action => {
+        SportSpecFilters.actions(state.part || DEFAULT_PART).forEach(action => {
             add(action.key, action.label, () => {
                 SportSpecFilters.restore(action.remaining);
                 applyFilters();

@@ -67,7 +67,7 @@
             },
             // Metadata for the existing active-filter/zero-result UI. Facet
             // labels and values remain owned by each sport's configuration.
-            actions(){return fields.flatMap(f=>(selected[f.key]||[]).map(value=>{
+            actions(part){return fields.filter(f=>part===undefined||part==='all'||applies(f,part)).flatMap(f=>(selected[f.key]||[]).map(value=>{
                 const remaining={...selected,[f.key]:selected[f.key].filter(v=>v!==value)};
                 if(!remaining[f.key].length)delete remaining[f.key];
                 return {key:'technical:'+f.key+':'+value,label:f.label+': '+value,remaining};

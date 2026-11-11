@@ -89,6 +89,11 @@ assert.equal(f.allows('fork','Forks',undefined,{priceMin:275,discountMin:30}),fa
  'price and discount cannot match different variants');
 const actions=f.actions();
 assert.deepEqual(actions.map(a=>a.label),['Wheel size: 29','Travel: 160']);
+assert.deepEqual(f.actions('Seats & Posts'),[],'unrelated dimensions must not decorate another category');
+assert.deepEqual(f.actions('Forks').map(a=>a.label),['Wheel size: 29','Travel: 160']);
+const encoded=new URLSearchParams();f.encode(encoded,f.capture());
+assert.equal(encoded.get('wheel'),'29','hiding an inapplicable action must not delete old-link state');
+assert.equal(encoded.get('travel'),'160');
 assert.equal(f.price('fork',actions[0].remaining).price,250);
 assert.deepEqual(f.capture(),{wheel:'29',travel:'160'},'hypothetical recovery must not mutate active state');
 f.restore(actions[0].remaining);
