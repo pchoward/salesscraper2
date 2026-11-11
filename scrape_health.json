@@ -17181,15 +17181,27 @@
             "reason": "normal_variation"
           }
         },
+        "SkateWarehouse_Completes": {
+          "count": 33,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 33,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "SkateWarehouse_Decks": {
-          "count": 58,
+          "count": 78,
           "failed": false,
           "diagnostics": {
             "expected_count": 74.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 58,
-            "percentage_change": -21.6,
+            "actual_count": 78,
+            "percentage_change": 5.4,
             "reason": "normal_variation"
           }
         },
@@ -17218,26 +17230,26 @@
           }
         },
         "SkateWarehouse_Trucks": {
-          "count": 7,
+          "count": 12,
           "failed": false,
           "diagnostics": {
             "expected_count": 6.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 7,
-            "percentage_change": 16.7,
+            "actual_count": 12,
+            "percentage_change": 100.0,
             "reason": "normal_variation"
           }
         },
         "SkateWarehouse_Wheels": {
-          "count": 4,
+          "count": 5,
           "failed": false,
           "diagnostics": {
             "expected_count": 4.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 4,
-            "percentage_change": 0.0,
+            "actual_count": 5,
+            "percentage_change": 25.0,
             "reason": "normal_variation"
           }
         },
@@ -17566,14 +17578,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 271,
+          "count": 268,
           "failed": false,
           "diagnostics": {
             "expected_count": 276.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 4.5,
-            "actual_count": 271,
-            "percentage_change": -1.8,
+            "actual_count": 268,
+            "percentage_change": -2.9,
             "reason": "normal_variation"
           }
         },
@@ -17626,21 +17638,21 @@
           }
         }
       },
-      "scanned_at": "2026-11-11T02:01:07+00:00"
+      "scanned_at": "2026-11-11T09:37:15+00:00"
     }
   ],
   "baseline": {
     "SkateWarehouse_Decks": {
       "date": "2026-11-11",
-      "count": 58
+      "count": 78
     },
     "SkateWarehouse_Wheels": {
       "date": "2026-11-11",
-      "count": 4
+      "count": 5
     },
     "SkateWarehouse_Trucks": {
       "date": "2026-11-11",
-      "count": 7
+      "count": 12
     },
     "CCS_Decks": {
       "date": "2026-11-11",
@@ -17836,7 +17848,11 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-11",
-      "count": 271
+      "count": 268
+    },
+    "SkateWarehouse_Completes": {
+      "date": "2026-11-11",
+      "count": 33
     }
   },
   "completeness_baseline": {
@@ -20338,6 +20354,12 @@
         "count": 5
       }
     ],
+    "SkateWarehouse_Completes": [
+      {
+        "date": "2026-11-11",
+        "count": 33
+      }
+    ],
     "SkateWarehouse_Decks": [
       {
         "date": "2026-10-29",
@@ -20393,7 +20415,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 58
+        "count": 78
       }
     ],
     "SkateWarehouse_Protection": [
@@ -20567,7 +20589,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 7
+        "count": 12
       }
     ],
     "SkateWarehouse_Wheels": [
@@ -20625,7 +20647,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 4
+        "count": 5
       }
     ],
     "SoCal_Accessories": [
@@ -22165,7 +22187,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 271
+        "count": 268
       }
     ],
     "Zumiez_Protection": [
