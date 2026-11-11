@@ -205,6 +205,19 @@ def load_sale_products(store, fetch=None, sleep=time.sleep):
     own_fetch = fetch is None
     if own_fetch and "products" in store.cache:
         return store.cache["products"]
+    # A store whose feed is not products.json (a headless Hydrogen store,
+    # sports/ski/skiessentials.py) supplies its own products in that shape.
+    loader = getattr(store, "load_products", None)
+    if loader is not None:
+        products = loader()
+        if products is None:
+            return None
+        if own_fetch:
+            store.cache["products"] = products
+            log_feed_summary(store, products)
+            if getattr(store, "track_exclusions", False):
+                store.cache["exclusions"] = exclusions(store, products)
+        return products
     fetch = fetch or _fetch_json
     sale_jsons = getattr(store, "sale_jsons", None) or [store.sale_json]
     products = []
