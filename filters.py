@@ -9,11 +9,14 @@ import unicodedata
 
 # Wheels: case-insensitive, word boundaries (so "OJ" does not match inside
 # another token, and "Powell" still matches "Powell-Peralta").
-WHEEL_BRANDS = ("Bones", "Powell", "Spitfire", "OJ")
+# Opera, Orbs and Satori added by the owner, 2026-11-11 (Skate Warehouse's
+# Black November wheels).
+WHEEL_BRANDS = ("Bones", "Powell", "Spitfire", "OJ", "Opera", "Orbs", "Satori")
 
 # Trucks. "Ace" and "Indy" are matched as whole words so "Space" / "Face"
 # and the interior of "Independent" do not false-hit.
-TRUCK_BRANDS = ("Independent", "Indy", "Ace", "Thunder", "Venture", "Slappy")
+# Bullet and Krux added by the owner, 2026-11-11 (Black November trucks).
+TRUCK_BRANDS = ("Independent", "Indy", "Ace", "Thunder", "Venture", "Slappy", "Bullet", "Krux")
 
 # Bearings. Anything else (SKF, Modus, unbranded ABEC packs) is rejected.
 BEARING_BRANDS = (
