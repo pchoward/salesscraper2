@@ -16985,16 +16985,15 @@
           }
         },
         "Cambria_Bikes": {
-          "count": 0,
-          "failed": true,
-          "suspect": true,
+          "count": 33,
+          "failed": false,
           "diagnostics": {
             "expected_count": 33,
             "baseline_samples": 9,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "empty_catalog_drop"
+            "actual_count": 33,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Cambria_Brakes": {
@@ -18100,20 +18099,20 @@
             "expected_count": 164,
             "baseline_samples": 7,
             "median_absolute_deviation": 1,
-            "actual_count": 59,
-            "percentage_change": -64.0,
+            "actual_count": 60,
+            "percentage_change": -63.4,
             "reason": "partial_catalog_drop"
           }
         },
         "The Lost Co._Drivetrain": {
-          "count": 89,
+          "count": 95,
           "failed": false,
           "diagnostics": {
             "expected_count": 134.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 1.5,
-            "actual_count": 89,
-            "percentage_change": -33.6,
+            "actual_count": 95,
+            "percentage_change": -29.1,
             "reason": "normal_variation"
           }
         },
@@ -18179,15 +18178,16 @@
           }
         },
         "The Lost Co._Wheels": {
-          "count": 16,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 30.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.5,
-            "actual_count": 16,
-            "percentage_change": -46.7,
-            "reason": "normal_variation"
+            "actual_count": 15,
+            "percentage_change": -50.0,
+            "reason": "partial_catalog_drop"
           }
         },
         "Troy Lee Designs_Bikes": {
@@ -18551,7 +18551,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-11T06:41:35+00:00"
+      "scanned_at": "2026-11-11T10:22:45+00:00"
     }
   ],
   "baseline": {
@@ -18745,7 +18745,7 @@
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-11",
-      "count": 89
+      "count": 95
     },
     "The Lost Co._Forks & Shocks": {
       "date": "2026-11-11",
@@ -18766,10 +18766,6 @@
     "The Lost Co._Tires": {
       "date": "2026-11-09",
       "count": 132
-    },
-    "The Lost Co._Wheels": {
-      "date": "2026-11-11",
-      "count": 16
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-11",
@@ -18830,6 +18826,10 @@
     "Worldwide Cyclery_Wheels": {
       "date": "2026-11-11",
       "count": 1
+    },
+    "Cambria_Bikes": {
+      "date": "2026-11-11",
+      "count": 33
     }
   },
   "completeness_baseline": {
@@ -20420,6 +20420,10 @@
       },
       {
         "date": "2026-11-10",
+        "count": 33
+      },
+      {
+        "date": "2026-11-11",
         "count": 33
       }
     ],
@@ -24038,7 +24042,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 89
+        "count": 95
       }
     ],
     "The Lost Co._Forks & Shocks": [
@@ -24254,10 +24258,6 @@
       },
       {
         "date": "2026-11-10",
-        "count": 16
-      },
-      {
-        "date": "2026-11-11",
         "count": 16
       }
     ],

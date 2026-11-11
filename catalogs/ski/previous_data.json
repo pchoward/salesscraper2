@@ -66410,8 +66410,7 @@
       "sizes": [
         "19",
         "19.5",
-        "20",
-        "20.5"
+        "20"
       ],
       "technical_offers": [
         {
@@ -66455,20 +66454,6 @@
               "20"
             ]
           }
-        },
-        {
-          "variant_id": 46569833595030,
-          "price": 142.95,
-          "compare": 240.0,
-          "available": true,
-          "specs": {
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ],
-            "mondo": [
-              "20.5"
-            ]
-          }
         }
       ],
       "technical_specs": {
@@ -66478,8 +66463,7 @@
         "mondo": [
           "19",
           "19.5",
-          "20",
-          "20.5"
+          "20"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1176864.jpg?v=1767736348",
@@ -88595,29 +88579,6 @@
           }
         },
         {
-          "variant_id": 46151988871318,
-          "price": 82.46,
-          "compare": 109.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Kids"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        },
-        {
           "variant_id": 46151988904086,
           "price": 82.46,
           "compare": 109.95,
@@ -91535,7 +91496,7 @@
     {
       "name": "Salomon Driver Pro Sigma MIPS Helmet",
       "url": "https://www.evo.com/products/218748-salomon-driver-pro-sigma-mips-helmet",
-      "price_new": "233.97",
+      "price_new": "274.95",
       "price_old": "389.95",
       "availability": "Check store",
       "part": "Helmets",
@@ -91543,29 +91504,6 @@
       "product_type": "Ski and Snowboard Helmets",
       "brand": "Salomon",
       "technical_offers": [
-        {
-          "variant_id": 46129954259094,
-          "price": 233.97,
-          "compare": 389.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        },
         {
           "variant_id": 46129954455702,
           "price": 274.95,
@@ -99964,26 +99902,6 @@
           }
         },
         {
-          "variant_id": 46412373721238,
-          "price": 283.45,
-          "compare": 479.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "prot_size": [
-              "XL"
-            ]
-          }
-        },
-        {
           "variant_id": 46412373655702,
           "price": 216.95,
           "compare": 479.95,
@@ -100036,8 +99954,7 @@
         ],
         "prot_size": [
           "M",
-          "S",
-          "XL"
+          "S"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304061.jpg?v=1780948050",
@@ -132777,42 +132694,6 @@
       }
     },
     {
-      "name": "Rossignol Nova 2 Women's Skis w/ Xpress 10 GW Bindings",
-      "url": "https://www.the-house.com/1149939.html",
-      "price_new": "499.95",
-      "price_old": "595.18",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "Rossignol",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwb17a166d/images/large/1149939_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1149939",
-          "price": 499.95,
-          "compare": 595.18,
-          "available": true,
-          "specs": {
-            "bindings": [
-              "Included"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "bindings": [
-          "Included"
-        ],
-        "gender": [
-          "Women"
-        ]
-      }
-    },
-    {
       "name": "K2 Fatty 88 Skis w/ Bindings Package",
       "url": "https://www.the-house.com/1157463.html",
       "price_new": "500.00",
@@ -132876,6 +132757,42 @@
         ]
       },
       "brand": "K2"
+    },
+    {
+      "name": "Rossignol Nova 2 Women's Skis w/ Xpress 10 GW Bindings",
+      "url": "https://www.the-house.com/1149939.html",
+      "price_new": "499.95",
+      "price_old": "595.18",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "Rossignol",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwb17a166d/images/large/1149939_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1149939",
+          "price": 499.95,
+          "compare": 595.18,
+          "available": true,
+          "specs": {
+            "bindings": [
+              "Included"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "bindings": [
+          "Included"
+        ],
+        "gender": [
+          "Women"
+        ]
+      }
     },
     {
       "name": "Rossignol Delta Sport Skate Unisex Nordic Skis",
@@ -133301,6 +133218,82 @@
       }
     },
     {
+      "name": "K2 Disruption 76 Skis w/ Quikclik Free Bindings",
+      "url": "https://www.the-house.com/1157714.html",
+      "price_new": "449.95",
+      "price_old": "749.92",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw6084b712/images/large/1157714_1.jpg?sw=400&sh=400",
+      "technical_offers": [
+        {
+          "variant_id": "1157714",
+          "price": 449.95,
+          "compare": 749.92,
+          "available": true,
+          "specs": {
+            "bindings": [
+              "Included"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "bindings": [
+          "Included"
+        ]
+      }
+    },
+    {
+      "name": "Rossignol Forza 20\u00b0 V-FG 1080 Snow Skis",
+      "url": "https://www.the-house.com/1118059.html",
+      "price_new": "399.95",
+      "price_old": "563.31",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "Rossignol",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw34639605/images/large/1118059_1.jpg?sw=400&sh=400"
+    },
+    {
+      "name": "Rossignol Men's All-Mountain Experience 78 Carbon Snow Skis with Xpress 11 GripWalk Bindings",
+      "url": "https://www.the-house.com/1117761.html",
+      "price_new": "580.00",
+      "price_old": "725.00",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "Rossignol",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw6f45b8c1/images/large/1117761_1.jpg?sw=400&sh=400",
+      "gender": "Men",
+      "technical_offers": [
+        {
+          "variant_id": "1117761",
+          "price": 580.0,
+          "compare": 725.0,
+          "available": true,
+          "specs": {
+            "bindings": [
+              "Included"
+            ],
+            "gender": [
+              "Men"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "bindings": [
+          "Included"
+        ],
+        "gender": [
+          "Men"
+        ]
+      }
+    },
+    {
       "name": "K2 Mindbender 96C Women's Skis",
       "url": "https://www.the-house.com/1118712.html",
       "price_new": "800.00",
@@ -133316,6 +133309,36 @@
           "variant_id": "1118712",
           "price": 800.0,
           "compare": 1333.33,
+          "available": true,
+          "specs": {
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Women"
+        ]
+      }
+    },
+    {
+      "name": "K2 Midnight Women's Skis",
+      "url": "https://www.the-house.com/1118725.html",
+      "price_new": "600.00",
+      "price_old": "1016.95",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0bdce13f/images/large/1118725_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1118725",
+          "price": 600.0,
+          "compare": 1016.95,
           "available": true,
           "specs": {
             "gender": [
@@ -133367,134 +133390,6 @@
       }
     },
     {
-      "name": "K2 Midnight Women's Skis",
-      "url": "https://www.the-house.com/1118725.html",
-      "price_new": "600.00",
-      "price_old": "1016.95",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0bdce13f/images/large/1118725_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1118725",
-          "price": 600.0,
-          "compare": 1016.95,
-          "available": true,
-          "specs": {
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Women"
-        ]
-      }
-    },
-    {
-      "name": "K2 Disruption 76 Skis w/ Quikclik Free Bindings",
-      "url": "https://www.the-house.com/1157714.html",
-      "price_new": "449.95",
-      "price_old": "749.92",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw6084b712/images/large/1157714_1.jpg?sw=400&sh=400",
-      "technical_offers": [
-        {
-          "variant_id": "1157714",
-          "price": 449.95,
-          "compare": 749.92,
-          "available": true,
-          "specs": {
-            "bindings": [
-              "Included"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "bindings": [
-          "Included"
-        ]
-      }
-    },
-    {
-      "name": "Rossignol Men's All-Mountain Experience 78 Carbon Snow Skis with Xpress 11 GripWalk Bindings",
-      "url": "https://www.the-house.com/1117761.html",
-      "price_new": "580.00",
-      "price_old": "725.00",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "Rossignol",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw6f45b8c1/images/large/1117761_1.jpg?sw=400&sh=400",
-      "gender": "Men",
-      "technical_offers": [
-        {
-          "variant_id": "1117761",
-          "price": 580.0,
-          "compare": 725.0,
-          "available": true,
-          "specs": {
-            "bindings": [
-              "Included"
-            ],
-            "gender": [
-              "Men"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "bindings": [
-          "Included"
-        ],
-        "gender": [
-          "Men"
-        ]
-      }
-    },
-    {
-      "name": "Rossignol Forza 20\u00b0 V-FG 1080 Snow Skis",
-      "url": "https://www.the-house.com/1118059.html",
-      "price_new": "399.95",
-      "price_old": "563.31",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "Rossignol",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw34639605/images/large/1118059_1.jpg?sw=400&sh=400"
-    },
-    {
-      "name": "Atomic Bent 100 Flat Skis",
-      "url": "https://www.the-house.com/1160990.html",
-      "price_new": "649.95",
-      "price_old": "928.50",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "Atomic",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwd806df46/images/large/1160990_1.jpg?sw=400&sh=400"
-    },
-    {
-      "name": "Salomon Stance 96 Unisex All-Mountain Skis",
-      "url": "https://www.the-house.com/1117788.html",
-      "price_new": "750.00",
-      "price_old": "1119.40",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwcfde9f83/images/large/1117788_1.jpg?sw=400&sh=400"
-    },
-    {
       "name": "K2 Mindbender 85 Men's Flat Skis",
       "url": "https://www.the-house.com/1118718.html",
       "price_new": "750.00",
@@ -133523,6 +133418,28 @@
           "Men"
         ]
       }
+    },
+    {
+      "name": "Atomic Bent 100 Flat Skis",
+      "url": "https://www.the-house.com/1160990.html",
+      "price_new": "649.95",
+      "price_old": "928.50",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "Atomic",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwd806df46/images/large/1160990_1.jpg?sw=400&sh=400"
+    },
+    {
+      "name": "Atomic Bent 85 All-Mountain and Park Skis",
+      "url": "https://www.the-house.com/1166211.html",
+      "price_new": "600.00",
+      "price_old": "714.29",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "Atomic",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw4c73446c/images/large/1166211_1.jpg?sw=400&sh=400"
     },
     {
       "name": "K2 Reckoner 92 Women's Skis w/ Quikclik Free Bindings",
@@ -133561,15 +133478,15 @@
       }
     },
     {
-      "name": "Atomic Bent 85 All-Mountain and Park Skis",
-      "url": "https://www.the-house.com/1166211.html",
-      "price_new": "600.00",
-      "price_old": "714.29",
+      "name": "Salomon Stance 96 Unisex All-Mountain Skis",
+      "url": "https://www.the-house.com/1117788.html",
+      "price_new": "750.00",
+      "price_old": "1119.40",
       "availability": "In stock",
       "part": "Skis",
       "store": "The House",
-      "brand": "Atomic",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw4c73446c/images/large/1166211_1.jpg?sw=400&sh=400"
+      "brand": "Salomon",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwcfde9f83/images/large/1117788_1.jpg?sw=400&sh=400"
     },
     {
       "name": "Atomic Redster Q4 Skis w/ M10 GW Bindings",
@@ -133670,17 +133587,6 @@
       "brand": "Dynastar"
     },
     {
-      "name": "Salomon Stance 90 Skis",
-      "url": "https://www.the-house.com/1113943.html",
-      "price_new": "559.95",
-      "price_old": "674.64",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw25da6194/images/large/1113943_1.jpg?sw=400&sh=400",
-      "brand": "Salomon"
-    },
-    {
       "name": "Rossignol Women's On Piste Nova 2 Snow Skis with Xpress W 10 GripWalk Bindings",
       "url": "https://www.the-house.com/1117758.html",
       "price_new": "479.95",
@@ -133715,6 +133621,17 @@
           "Women"
         ]
       }
+    },
+    {
+      "name": "Salomon Stance 90 Skis",
+      "url": "https://www.the-house.com/1113943.html",
+      "price_new": "559.95",
+      "price_old": "674.64",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw25da6194/images/large/1113943_1.jpg?sw=400&sh=400",
+      "brand": "Salomon"
     },
     {
       "name": "K2 Reckoner 92 Women's Skis Quikclik w/ Marker Bindings",
@@ -133789,42 +133706,6 @@
       }
     },
     {
-      "name": "Rossignol Super Roostie Kid's Skis w/ Xpress Jr 7 GW Bindings | 140cm",
-      "url": "https://www.the-house.com/1157754.html",
-      "price_new": "399.95",
-      "price_old": "799.90",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "Rossignol",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwd2393f50/images/large/1157754_1.jpg?sw=400&sh=400",
-      "gender": "Kids",
-      "technical_offers": [
-        {
-          "variant_id": "1157754",
-          "price": 399.95,
-          "compare": 799.9,
-          "available": true,
-          "specs": {
-            "bindings": [
-              "Included"
-            ],
-            "gender": [
-              "Kids"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "bindings": [
-          "Included"
-        ],
-        "gender": [
-          "Kids"
-        ]
-      }
-    },
-    {
       "name": "Salomon S/Force Ti.76 Men's Skis w/ Z12 GW Bindings",
       "url": "https://www.the-house.com/1127129.html",
       "price_new": "850.00",
@@ -133859,6 +133740,42 @@
         ]
       },
       "brand": "Salomon"
+    },
+    {
+      "name": "Rossignol Super Roostie Kid's Skis w/ Xpress Jr 7 GW Bindings | 140cm",
+      "url": "https://www.the-house.com/1157754.html",
+      "price_new": "399.95",
+      "price_old": "799.90",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "Rossignol",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwd2393f50/images/large/1157754_1.jpg?sw=400&sh=400",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "1157754",
+          "price": 399.95,
+          "compare": 799.9,
+          "available": true,
+          "specs": {
+            "bindings": [
+              "Included"
+            ],
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "bindings": [
+          "Included"
+        ],
+        "gender": [
+          "Kids"
+        ]
+      }
     },
     {
       "name": "Salomon Stance 88 Skis",
@@ -133901,17 +133818,6 @@
       }
     },
     {
-      "name": "Armada Reliance 102 Ti Snow Skis, 172 cm",
-      "url": "https://www.the-house.com/1113988.html",
-      "price_new": "699.95",
-      "price_old": "813.90",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw93ebb6e8/images/large/1113988_1.jpg?sw=400&sh=400",
-      "brand": "Armada"
-    },
-    {
       "name": "Atomic Bent Decode Skis",
       "url": "https://www.the-house.com/1166216.html",
       "price_new": "850.00",
@@ -133921,6 +133827,17 @@
       "store": "The House",
       "brand": "Atomic",
       "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwa222e21d/images/large/1166216_1.jpg?sw=400&sh=400"
+    },
+    {
+      "name": "Armada Reliance 102 Ti Snow Skis, 172 cm",
+      "url": "https://www.the-house.com/1113988.html",
+      "price_new": "699.95",
+      "price_old": "813.90",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw93ebb6e8/images/large/1113988_1.jpg?sw=400&sh=400",
+      "brand": "Armada"
     },
     {
       "name": "K2 Mindbender RX Snow Skis with Marker Free Ten QuikClik Bindings, 177cm",
@@ -133950,6 +133867,17 @@
         ]
       },
       "brand": "K2"
+    },
+    {
+      "name": "Salomon Stance 94 Skis",
+      "url": "https://www.the-house.com/1113984.html",
+      "price_new": "559.95",
+      "price_old": "727.21",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwcff391d9/images/large/1113984_1.jpg?sw=400&sh=400",
+      "brand": "Salomon"
     },
     {
       "name": "K2 Blur 76 Women's Skis w/ Quikclik Free Bindings",
@@ -133986,17 +133914,6 @@
           "Women"
         ]
       }
-    },
-    {
-      "name": "Salomon Stance 94 Skis",
-      "url": "https://www.the-house.com/1113984.html",
-      "price_new": "559.95",
-      "price_old": "727.21",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwcff391d9/images/large/1113984_1.jpg?sw=400&sh=400",
-      "brand": "Salomon"
     },
     {
       "name": "K2 Indy Youth Skis w/ FDT 7.0 Bindings - 136cm",
@@ -134064,35 +133981,6 @@
       }
     },
     {
-      "name": "Atomic Bent 85 Skis w/ M10 GW Bindings",
-      "url": "https://www.the-house.com/1162507.html",
-      "price_new": "675.00",
-      "price_old": "843.75",
-      "availability": "In stock",
-      "part": "Skis",
-      "store": "The House",
-      "brand": "Atomic",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw4bb8b23d/images/large/1162507_1.jpg?sw=400&sh=400",
-      "technical_offers": [
-        {
-          "variant_id": "1162507",
-          "price": 675.0,
-          "compare": 843.75,
-          "available": true,
-          "specs": {
-            "bindings": [
-              "Included"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "bindings": [
-          "Included"
-        ]
-      }
-    },
-    {
       "name": "Rossignol Freestyle Trixie Skis w/ Xpress W 10 GW B93 Bindings",
       "url": "https://www.the-house.com/1117769.html",
       "price_new": "430.00",
@@ -134122,28 +134010,24 @@
       "brand": "Rossignol"
     },
     {
-      "name": "Rossignol Kid's All-Mountain Experience Pro Snow Skis with Kid's 4 GripWalk Bindings",
-      "url": "https://www.the-house.com/1117770.html",
-      "price_new": "274.95",
-      "price_old": "343.69",
+      "name": "Atomic Bent 85 Skis w/ M10 GW Bindings",
+      "url": "https://www.the-house.com/1162507.html",
+      "price_new": "675.00",
+      "price_old": "843.75",
       "availability": "In stock",
       "part": "Skis",
       "store": "The House",
-      "brand": "Rossignol",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwcbc23e1e/images/large/1117770_1.jpg?sw=400&sh=400",
-      "gender": "Kids",
+      "brand": "Atomic",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw4bb8b23d/images/large/1162507_1.jpg?sw=400&sh=400",
       "technical_offers": [
         {
-          "variant_id": "1117770",
-          "price": 274.95,
-          "compare": 343.69,
+          "variant_id": "1162507",
+          "price": 675.0,
+          "compare": 843.75,
           "available": true,
           "specs": {
             "bindings": [
               "Included"
-            ],
-            "gender": [
-              "Kids"
             ]
           }
         }
@@ -134151,9 +134035,6 @@
       "technical_specs": {
         "bindings": [
           "Included"
-        ],
-        "gender": [
-          "Kids"
         ]
       }
     },
@@ -134192,6 +134073,42 @@
         ]
       },
       "brand": "K2"
+    },
+    {
+      "name": "Rossignol Kid's All-Mountain Experience Pro Snow Skis with Kid's 4 GripWalk Bindings",
+      "url": "https://www.the-house.com/1117770.html",
+      "price_new": "274.95",
+      "price_old": "343.69",
+      "availability": "In stock",
+      "part": "Skis",
+      "store": "The House",
+      "brand": "Rossignol",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwcbc23e1e/images/large/1117770_1.jpg?sw=400&sh=400",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "1117770",
+          "price": 274.95,
+          "compare": 343.69,
+          "available": true,
+          "specs": {
+            "bindings": [
+              "Included"
+            ],
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "bindings": [
+          "Included"
+        ],
+        "gender": [
+          "Kids"
+        ]
+      }
     },
     {
       "name": "Salomon E Quest 92 Skis w/ M11 Bindings",
@@ -134591,6 +134508,42 @@
       }
     },
     {
+      "name": "Rossignol Kelia 50 Women's Ski Boots",
+      "url": "https://www.the-house.com/1161787.html",
+      "price_new": "350.00",
+      "price_old": "583.33",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "Rossignol",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwb3f15acc/images/large/1161787_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1161787",
+          "price": 350.0,
+          "compare": 583.33,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Soft (under 80)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Soft (under 80)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      }
+    },
+    {
       "name": "K2 Anthem 85 BOA Women's Ski Boots",
       "url": "https://www.the-house.com/1162051.html",
       "price_new": "549.95",
@@ -134723,6 +134676,42 @@
       "brand": "Rossignol"
     },
     {
+      "name": "K2 Mindbender 95 BOA Women's Ski Boots",
+      "url": "https://www.the-house.com/1118257.html",
+      "price_new": "850.00",
+      "price_old": "1416.67",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwa79cba37/images/large/1118257_mult_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1118257",
+          "price": 850.0,
+          "compare": 1416.67,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      }
+    },
+    {
       "name": "Salomon Pro 110 AT GW Men's Freeride Ski Boots",
       "url": "https://www.the-house.com/366224.html",
       "price_new": "649.95",
@@ -134761,42 +134750,6 @@
         ],
         "gender": [
           "Men"
-        ]
-      }
-    },
-    {
-      "name": "K2 Mindbender 95 BOA Women's Ski Boots",
-      "url": "https://www.the-house.com/1118257.html",
-      "price_new": "850.00",
-      "price_old": "1416.67",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwa79cba37/images/large/1118257_mult_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1118257",
-          "price": 850.0,
-          "compare": 1416.67,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Women"
         ]
       }
     },
@@ -134908,41 +134861,6 @@
       }
     },
     {
-      "name": "Salomon S/Pro Supra BOA 120 GW Ski Boots",
-      "url": "https://www.the-house.com/1150080.html",
-      "price_new": "749.95",
-      "price_old": "1071.36",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0ec0b98a/images/large/1150080_BGML_1.jpg?sw=400&sh=400",
-      "technical_offers": [
-        {
-          "variant_id": "1150080",
-          "price": 749.95,
-          "compare": 1071.36,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "sole": [
-              "GripWalk"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "sole": [
-          "GripWalk"
-        ]
-      }
-    },
-    {
       "name": "Salomon S/Pro MV 100 GW Men's On-Piste Ski Boots",
       "url": "https://www.the-house.com/366203.html",
       "price_new": "499.95",
@@ -134991,6 +134909,41 @@
       }
     },
     {
+      "name": "Salomon S/Pro Supra BOA 120 GW Ski Boots",
+      "url": "https://www.the-house.com/1150080.html",
+      "price_new": "749.95",
+      "price_old": "1071.36",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "Salomon",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0ec0b98a/images/large/1150080_BGML_1.jpg?sw=400&sh=400",
+      "technical_offers": [
+        {
+          "variant_id": "1150080",
+          "price": 749.95,
+          "compare": 1071.36,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "sole": [
+              "GripWalk"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "sole": [
+          "GripWalk"
+        ]
+      }
+    },
+    {
       "name": "Salomon QST Access 70 T GW Youth Ski Boots",
       "url": "https://www.the-house.com/1150085.html",
       "price_new": "279.95",
@@ -135029,42 +134982,6 @@
         ],
         "gender": [
           "Kids"
-        ]
-      }
-    },
-    {
-      "name": "K2 Mindbender 90 Men's Ski Boots",
-      "url": "https://www.the-house.com/1162041.html",
-      "price_new": "549.95",
-      "price_old": "916.58",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw2d03595e/images/large/1162041_1.jpg?sw=400&sh=400",
-      "gender": "Men",
-      "technical_offers": [
-        {
-          "variant_id": "1162041",
-          "price": 549.95,
-          "compare": 916.58,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Men"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Men"
         ]
       }
     },
@@ -135147,38 +135064,38 @@
       }
     },
     {
-      "name": "Rossignol Kelia 50 Women's Ski Boots",
-      "url": "https://www.the-house.com/1161787.html",
-      "price_new": "350.00",
-      "price_old": "583.33",
+      "name": "K2 Mindbender 90 Men's Ski Boots",
+      "url": "https://www.the-house.com/1162041.html",
+      "price_new": "549.95",
+      "price_old": "916.58",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "brand": "Rossignol",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwb3f15acc/images/large/1161787_1.jpg?sw=400&sh=400",
-      "gender": "Women",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw2d03595e/images/large/1162041_1.jpg?sw=400&sh=400",
+      "gender": "Men",
       "technical_offers": [
         {
-          "variant_id": "1161787",
-          "price": 350.0,
-          "compare": 583.33,
+          "variant_id": "1162041",
+          "price": 549.95,
+          "compare": 916.58,
           "available": true,
           "specs": {
             "flex": [
-              "Soft (under 80)"
+              "Medium (80\u2013100)"
             ],
             "gender": [
-              "Women"
+              "Men"
             ]
           }
         }
       ],
       "technical_specs": {
         "flex": [
-          "Soft (under 80)"
+          "Medium (80\u2013100)"
         ],
         "gender": [
-          "Women"
+          "Men"
         ]
       }
     },
@@ -135225,36 +135142,6 @@
       }
     },
     {
-      "name": "Rossignol Comp J3 Kid's Ski Boots",
-      "url": "https://www.the-house.com/1118067.html",
-      "price_new": "149.95",
-      "price_old": "214.21",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwdb73e4c3/images/large/1118067_1.jpg?sw=400&sh=400",
-      "gender": "Kids",
-      "technical_offers": [
-        {
-          "variant_id": "1118067",
-          "price": 149.95,
-          "compare": 214.21,
-          "available": true,
-          "specs": {
-            "gender": [
-              "Kids"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Kids"
-        ]
-      },
-      "brand": "Rossignol"
-    },
-    {
       "name": "K2 Revolve Pro Men's Ski Boots",
       "url": "https://www.the-house.com/1162060.html",
       "price_new": "750.00",
@@ -135283,6 +135170,36 @@
           "Men"
         ]
       }
+    },
+    {
+      "name": "Rossignol Comp J3 Kid's Ski Boots",
+      "url": "https://www.the-house.com/1118067.html",
+      "price_new": "149.95",
+      "price_old": "214.21",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwdb73e4c3/images/large/1118067_1.jpg?sw=400&sh=400",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "1118067",
+          "price": 149.95,
+          "compare": 214.21,
+          "available": true,
+          "specs": {
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Kids"
+        ]
+      },
+      "brand": "Rossignol"
     },
     {
       "name": "Atomic Hawx Ultra 115 RS GW Women's Ski Boots",
@@ -135327,42 +135244,6 @@
       }
     },
     {
-      "name": "K2 WOMEN'S BFC BOA 85 SKI BOOTS",
-      "url": "https://www.the-house.com/1164669.html",
-      "price_new": "650.00",
-      "price_old": "844.16",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw1350b8c0/images/large/1164669_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1164669",
-          "price": 650.0,
-          "compare": 844.16,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      }
-    },
-    {
       "name": "K2 BFC 100 BOA Men's Ski Boots (2027)",
       "url": "https://www.the-house.com/1164658.html",
       "price_new": "700.00",
@@ -135395,6 +135276,42 @@
         ],
         "gender": [
           "Men"
+        ]
+      }
+    },
+    {
+      "name": "K2 WOMEN'S BFC BOA 85 SKI BOOTS",
+      "url": "https://www.the-house.com/1164669.html",
+      "price_new": "650.00",
+      "price_old": "844.16",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw1350b8c0/images/large/1164669_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1164669",
+          "price": 650.0,
+          "compare": 844.16,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
         ]
       }
     },
@@ -135525,30 +135442,34 @@
       }
     },
     {
-      "name": "Rossignol Track 90 HV+ Men's Ski Boots",
-      "url": "https://www.the-house.com/1118065.html",
-      "price_new": "379.95",
-      "price_old": "527.71",
+      "name": "Salomon S/Pro MV 80 CS GW Women's On-Piste Ski Boots",
+      "url": "https://www.the-house.com/366218.html",
+      "price_new": "449.95",
+      "price_old": "642.79",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw5a97f4a4/images/large/1118065_char_1.jpg?sw=400&sh=400",
-      "gender": "Men",
+      "brand": "Salomon",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw662d3bcb/images/large/366218_bwsm_1.jpg?sw=400&sh=400",
+      "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "1118065",
-          "price": 379.95,
-          "compare": 527.71,
+          "variant_id": "366218",
+          "price": 449.95,
+          "compare": 642.79,
           "available": true,
           "specs": {
             "flex": [
               "Medium (80\u2013100)"
             ],
+            "sole": [
+              "GripWalk"
+            ],
             "last": [
-              "Wide (102 mm and over)"
+              "Medium (99\u2013101 mm)"
             ],
             "gender": [
-              "Men"
+              "Women"
             ]
           }
         }
@@ -135557,31 +135478,33 @@
         "flex": [
           "Medium (80\u2013100)"
         ],
+        "sole": [
+          "GripWalk"
+        ],
         "last": [
-          "Wide (102 mm and over)"
+          "Medium (99\u2013101 mm)"
         ],
         "gender": [
-          "Men"
+          "Women"
         ]
-      },
-      "brand": "Rossignol"
+      }
     },
     {
-      "name": "K2 Mindbender 100 BOA Men's Ski Boots",
-      "url": "https://www.the-house.com/1162032.html",
-      "price_new": "800.00",
-      "price_old": "975.61",
+      "name": "Salomon S/Pro Supra BOA 100 Men's Ski Boots",
+      "url": "https://www.the-house.com/1161914.html",
+      "price_new": "600.00",
+      "price_old": "857.14",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw05e5c138/images/large/1162032_1.jpg?sw=400&sh=400",
+      "brand": "Salomon",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwbbcd5339/images/large/1161914_1.jpg?sw=400&sh=400",
       "gender": "Men",
       "technical_offers": [
         {
-          "variant_id": "1162032",
-          "price": 800.0,
-          "compare": 975.61,
+          "variant_id": "1161914",
+          "price": 600.0,
+          "compare": 857.14,
           "available": true,
           "specs": {
             "flex": [
@@ -135603,21 +135526,21 @@
       }
     },
     {
-      "name": "Salomon S/Pro Supra BOA 100 Men's Ski Boots",
-      "url": "https://www.the-house.com/1161914.html",
-      "price_new": "600.00",
-      "price_old": "857.14",
+      "name": "K2 Mindbender 100 BOA Men's Ski Boots",
+      "url": "https://www.the-house.com/1162032.html",
+      "price_new": "800.00",
+      "price_old": "975.61",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwbbcd5339/images/large/1161914_1.jpg?sw=400&sh=400",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw05e5c138/images/large/1162032_1.jpg?sw=400&sh=400",
       "gender": "Men",
       "technical_offers": [
         {
-          "variant_id": "1161914",
-          "price": 600.0,
-          "compare": 857.14,
+          "variant_id": "1162032",
+          "price": 800.0,
+          "compare": 975.61,
           "available": true,
           "specs": {
             "flex": [
@@ -135675,21 +135598,20 @@
       }
     },
     {
-      "name": "Rossignol Speed 80 HV Plus Men's Ski Boots",
-      "url": "https://www.the-house.com/1161768.html",
-      "price_new": "500.00",
-      "price_old": "714.29",
+      "name": "Rossignol Track 90 HV+ Men's Ski Boots",
+      "url": "https://www.the-house.com/1118065.html",
+      "price_new": "379.95",
+      "price_old": "527.71",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "brand": "Rossignol",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw3258df0a/images/large/1161768_1.jpg?sw=400&sh=400",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw5a97f4a4/images/large/1118065_char_1.jpg?sw=400&sh=400",
       "gender": "Men",
       "technical_offers": [
         {
-          "variant_id": "1161768",
-          "price": 500.0,
-          "compare": 714.29,
+          "variant_id": "1118065",
+          "price": 379.95,
+          "compare": 527.71,
           "available": true,
           "specs": {
             "flex": [
@@ -135714,24 +135636,25 @@
         "gender": [
           "Men"
         ]
-      }
+      },
+      "brand": "Rossignol"
     },
     {
-      "name": "Salomon S/Pro Supra 85 Women's Ski Boots",
-      "url": "https://www.the-house.com/1161910.html",
-      "price_new": "399.95",
-      "price_old": "571.36",
+      "name": "K2 Anthem 95 BOA Women's Ski Boots",
+      "url": "https://www.the-house.com/1118229.html",
+      "price_new": "750.00",
+      "price_old": "1293.10",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw41b98bfa/images/large/1161910_1.jpg?sw=400&sh=400",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwc80c9d42/images/large/1118229_wtan_1.jpg?sw=400&sh=400",
       "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "1161910",
-          "price": 399.95,
-          "compare": 571.36,
+          "variant_id": "1118229",
+          "price": 750.0,
+          "compare": 1293.1,
           "available": true,
           "specs": {
             "flex": [
@@ -135753,21 +135676,21 @@
       }
     },
     {
-      "name": "Salomon S/Pro MV 80 CS GW Women's On-Piste Ski Boots",
-      "url": "https://www.the-house.com/366218.html",
-      "price_new": "449.95",
-      "price_old": "642.79",
+      "name": "Salomon S/Pro Supra BOA X90 GW Women's Ski Boots",
+      "url": "https://www.the-house.com/1150102.html",
+      "price_new": "499.95",
+      "price_old": "714.21",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
       "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw662d3bcb/images/large/366218_bwsm_1.jpg?sw=400&sh=400",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw3f639a04/images/large/1150102_BLCK_1.jpg?sw=400&sh=400",
       "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "366218",
-          "price": 449.95,
-          "compare": 642.79,
+          "variant_id": "1150102",
+          "price": 499.95,
+          "compare": 714.21,
           "available": true,
           "specs": {
             "flex": [
@@ -135775,9 +135698,6 @@
             ],
             "sole": [
               "GripWalk"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
             ],
             "gender": [
               "Women"
@@ -135791,9 +135711,6 @@
         ],
         "sole": [
           "GripWalk"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
         ],
         "gender": [
           "Women"
@@ -135850,31 +135767,31 @@
       ]
     },
     {
-      "name": "Salomon S/Pro Supra BOA X90 GW Women's Ski Boots",
-      "url": "https://www.the-house.com/1150102.html",
-      "price_new": "499.95",
-      "price_old": "714.21",
+      "name": "Rossignol Speed 80 HV Plus Men's Ski Boots",
+      "url": "https://www.the-house.com/1161768.html",
+      "price_new": "500.00",
+      "price_old": "714.29",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw3f639a04/images/large/1150102_BLCK_1.jpg?sw=400&sh=400",
-      "gender": "Women",
+      "brand": "Rossignol",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw3258df0a/images/large/1161768_1.jpg?sw=400&sh=400",
+      "gender": "Men",
       "technical_offers": [
         {
-          "variant_id": "1150102",
-          "price": 499.95,
-          "compare": 714.21,
+          "variant_id": "1161768",
+          "price": 500.0,
+          "compare": 714.29,
           "available": true,
           "specs": {
             "flex": [
               "Medium (80\u2013100)"
             ],
-            "sole": [
-              "GripWalk"
+            "last": [
+              "Wide (102 mm and over)"
             ],
             "gender": [
-              "Women"
+              "Men"
             ]
           }
         }
@@ -135883,37 +135800,39 @@
         "flex": [
           "Medium (80\u2013100)"
         ],
-        "sole": [
-          "GripWalk"
+        "last": [
+          "Wide (102 mm and over)"
         ],
         "gender": [
-          "Women"
+          "Men"
         ]
       }
     },
     {
-      "name": "K2 Anthem 95 BOA Women's Ski Boots",
-      "url": "https://www.the-house.com/1118229.html",
-      "price_new": "750.00",
-      "price_old": "1293.10",
+      "name": "Tecnica Mach Sport LV 100 Men's Ski Boots",
+      "url": "https://www.the-house.com/1114165.html",
+      "price_new": "399.95",
+      "price_old": "454.49",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwc80c9d42/images/large/1118229_wtan_1.jpg?sw=400&sh=400",
-      "gender": "Women",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwf2b5881b/images/large/1114165_blck_1.jpg?sw=400&sh=400",
+      "gender": "Men",
       "technical_offers": [
         {
-          "variant_id": "1118229",
-          "price": 750.0,
-          "compare": 1293.1,
+          "variant_id": "1114165",
+          "price": 399.95,
+          "compare": 454.49,
           "available": true,
           "specs": {
             "flex": [
               "Medium (80\u2013100)"
             ],
+            "last": [
+              "Narrow (98 mm and under)"
+            ],
             "gender": [
-              "Women"
+              "Men"
             ]
           }
         }
@@ -135922,10 +135841,14 @@
         "flex": [
           "Medium (80\u2013100)"
         ],
+        "last": [
+          "Narrow (98 mm and under)"
+        ],
         "gender": [
-          "Women"
+          "Men"
         ]
-      }
+      },
+      "brand": "Tecnica"
     },
     {
       "name": "Atomic Magna 75 Women's Ski Boots",
@@ -136060,27 +135983,97 @@
       }
     },
     {
-      "name": "Tecnica Mach Sport LV 100 Men's Ski Boots",
-      "url": "https://www.the-house.com/1114165.html",
+      "name": "Salomon S/Pro Supra 85 Women's Ski Boots",
+      "url": "https://www.the-house.com/1161910.html",
       "price_new": "399.95",
-      "price_old": "454.49",
+      "price_old": "571.36",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwf2b5881b/images/large/1114165_blck_1.jpg?sw=400&sh=400",
-      "gender": "Men",
+      "brand": "Salomon",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw41b98bfa/images/large/1161910_1.jpg?sw=400&sh=400",
+      "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "1114165",
+          "variant_id": "1161910",
           "price": 399.95,
-          "compare": 454.49,
+          "compare": 571.36,
           "available": true,
           "specs": {
             "flex": [
               "Medium (80\u2013100)"
             ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      }
+    },
+    {
+      "name": "Nordica One RTL Women's Ski Boots",
+      "url": "https://www.the-house.com/1114155.html",
+      "price_new": "449.95",
+      "price_old": "1956.30",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwd101d32c/images/large/1114155_blck_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1114155",
+          "price": 449.95,
+          "compare": 1956.3,
+          "available": true,
+          "specs": {
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Nordica"
+    },
+    {
+      "name": "Salomon S/Pro MV 90 CS GW Men's On-Piste Ski Boots",
+      "url": "https://www.the-house.com/366244.html",
+      "price_new": "449.95",
+      "price_old": "642.79",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "Salomon",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwfe96e5a8/images/large/366244_bcsm_1.jpg?sw=400&sh=400",
+      "gender": "Men",
+      "technical_offers": [
+        {
+          "variant_id": "366244",
+          "price": 449.95,
+          "compare": 642.79,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
             "last": [
-              "Narrow (98 mm and under)"
+              "Medium (99\u2013101 mm)"
             ],
             "gender": [
               "Men"
@@ -136092,14 +136085,46 @@
         "flex": [
           "Medium (80\u2013100)"
         ],
+        "sole": [
+          "GripWalk"
+        ],
         "last": [
-          "Narrow (98 mm and under)"
+          "Medium (99\u2013101 mm)"
         ],
         "gender": [
           "Men"
         ]
+      }
+    },
+    {
+      "name": "Rossignol Comp J4 Kid's Ski Boots",
+      "url": "https://www.the-house.com/1118066.html",
+      "price_new": "189.95",
+      "price_old": "231.65",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0012d032/images/large/1118066_1.jpg?sw=400&sh=400",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "1118066",
+          "price": 189.95,
+          "compare": 231.65,
+          "available": true,
+          "specs": {
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Kids"
+        ]
       },
-      "brand": "Tecnica"
+      "brand": "Rossignol"
     },
     {
       "name": "Rossignol Hi-Speed 80 HV Men's Ski Boots",
@@ -136198,84 +136223,6 @@
       }
     },
     {
-      "name": "Salomon S/Pro MV 90 CS GW Men's On-Piste Ski Boots",
-      "url": "https://www.the-house.com/366244.html",
-      "price_new": "449.95",
-      "price_old": "642.79",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwfe96e5a8/images/large/366244_bcsm_1.jpg?sw=400&sh=400",
-      "gender": "Men",
-      "technical_offers": [
-        {
-          "variant_id": "366244",
-          "price": 449.95,
-          "compare": 642.79,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ],
-            "gender": [
-              "Men"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
-        ],
-        "gender": [
-          "Men"
-        ]
-      }
-    },
-    {
-      "name": "Nordica One RTL Women's Ski Boots",
-      "url": "https://www.the-house.com/1114155.html",
-      "price_new": "449.95",
-      "price_old": "1956.30",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwd101d32c/images/large/1114155_blck_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1114155",
-          "price": 449.95,
-          "compare": 1956.3,
-          "available": true,
-          "specs": {
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Nordica"
-    },
-    {
       "name": "Atomic Hawx Prime 110 S GW Ski Boots",
       "url": "https://www.the-house.com/1116727.html",
       "price_new": "675.00",
@@ -136311,34 +136258,33 @@
       "brand": "Atomic"
     },
     {
-      "name": "Rossignol Comp J4 Kid's Ski Boots",
-      "url": "https://www.the-house.com/1118066.html",
-      "price_new": "189.95",
-      "price_old": "231.65",
+      "name": "Atomic Hawx Prime 100 BOA Ski Boots",
+      "url": "https://www.the-house.com/1161007.html",
+      "price_new": "499.95",
+      "price_old": "714.21",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0012d032/images/large/1118066_1.jpg?sw=400&sh=400",
-      "gender": "Kids",
+      "brand": "Atomic",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwab33b1cb/images/large/1161007_1.jpg?sw=400&sh=400",
       "technical_offers": [
         {
-          "variant_id": "1118066",
-          "price": 189.95,
-          "compare": 231.65,
+          "variant_id": "1161007",
+          "price": 499.95,
+          "compare": 714.21,
           "available": true,
           "specs": {
-            "gender": [
-              "Kids"
+            "flex": [
+              "Medium (80\u2013100)"
             ]
           }
         }
       ],
       "technical_specs": {
-        "gender": [
-          "Kids"
+        "flex": [
+          "Medium (80\u2013100)"
         ]
-      },
-      "brand": "Rossignol"
+      }
     },
     {
       "name": "Atomic Hawx Magna 100 Boa Ski Boots",
@@ -136412,35 +136358,6 @@
       }
     },
     {
-      "name": "Atomic Hawx Prime 100 BOA Ski Boots",
-      "url": "https://www.the-house.com/1161007.html",
-      "price_new": "499.95",
-      "price_old": "714.21",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "Atomic",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwab33b1cb/images/large/1161007_1.jpg?sw=400&sh=400",
-      "technical_offers": [
-        {
-          "variant_id": "1161007",
-          "price": 499.95,
-          "compare": 714.21,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ]
-      }
-    },
-    {
       "name": "K2 Anthem 85 MV Women's Ski Boots",
       "url": "https://www.the-house.com/1118234.html",
       "price_new": "306.30",
@@ -136476,42 +136393,6 @@
         ],
         "last": [
           "Medium (99\u2013101 mm)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      }
-    },
-    {
-      "name": "K2 Mindbender 95 BOA\u00ae Women's Ski Boots",
-      "url": "https://www.the-house.com/1150816.html",
-      "price_new": "699.95",
-      "price_old": "1166.58",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw5188114a/images/large/1150816_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1150816",
-          "price": 699.95,
-          "compare": 1166.58,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
         ],
         "gender": [
           "Women"
@@ -136565,6 +136446,42 @@
         ]
       },
       "brand": "Salomon"
+    },
+    {
+      "name": "K2 Mindbender 95 BOA\u00ae Women's Ski Boots",
+      "url": "https://www.the-house.com/1150816.html",
+      "price_new": "699.95",
+      "price_old": "1166.58",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw5188114a/images/large/1150816_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1150816",
+          "price": 699.95,
+          "compare": 1166.58,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      }
     },
     {
       "name": "Salomon S/Pro Supra BOA 85 Women's Ski Boots",
@@ -136637,48 +136554,6 @@
         ]
       },
       "brand": "Rossignol"
-    },
-    {
-      "name": "Atomic Hawx Prime 85 BOA GW Women's Ski Boots",
-      "url": "https://www.the-house.com/1149926.html",
-      "price_new": "600.00",
-      "price_old": "1016.95",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "Atomic",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw43cf57a5/images/large/1149926_BLCK_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1149926",
-          "price": 600.0,
-          "compare": 1016.95,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "gender": [
-          "Women"
-        ]
-      }
     },
     {
       "name": "K2 Anthem 95 BOA\u00ae Women's Ski Boots",
@@ -136759,32 +136634,44 @@
       }
     },
     {
-      "name": "K2 Method Men's Ski Boots",
-      "url": "https://www.the-house.com/1162070.html",
-      "price_new": "650.00",
-      "price_old": "844.16",
+      "name": "Atomic Hawx Prime 85 BOA GW Women's Ski Boots",
+      "url": "https://www.the-house.com/1149926.html",
+      "price_new": "600.00",
+      "price_old": "1016.95",
       "availability": "In stock",
       "part": "Boots",
       "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0a240c5a/images/large/1162070_1.jpg?sw=400&sh=400",
-      "gender": "Men",
+      "brand": "Atomic",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw43cf57a5/images/large/1149926_BLCK_1.jpg?sw=400&sh=400",
+      "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "1162070",
-          "price": 650.0,
-          "compare": 844.16,
+          "variant_id": "1149926",
+          "price": 600.0,
+          "compare": 1016.95,
           "available": true,
           "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
             "gender": [
-              "Men"
+              "Women"
             ]
           }
         }
       ],
       "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
         "gender": [
-          "Men"
+          "Women"
         ]
       }
     },
@@ -136835,6 +136722,36 @@
         ]
       },
       "brand": "Lange"
+    },
+    {
+      "name": "K2 Method Men's Ski Boots",
+      "url": "https://www.the-house.com/1162070.html",
+      "price_new": "650.00",
+      "price_old": "844.16",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0a240c5a/images/large/1162070_1.jpg?sw=400&sh=400",
+      "gender": "Men",
+      "technical_offers": [
+        {
+          "variant_id": "1162070",
+          "price": 650.0,
+          "compare": 844.16,
+          "available": true,
+          "specs": {
+            "gender": [
+              "Men"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Men"
+        ]
+      }
     },
     {
       "name": "Lange LX 110 HV GW Men's Ski Boots",
@@ -136969,35 +136886,6 @@
       }
     },
     {
-      "name": "K2 Recon 100 2027 BOA Ski Boots",
-      "url": "https://www.the-house.com/1164653.html",
-      "price_new": "700.00",
-      "price_old": "886.08",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw93f59106/images/large/1164653_1.jpg?sw=400&sh=400",
-      "technical_offers": [
-        {
-          "variant_id": "1164653",
-          "price": 700.0,
-          "compare": 886.08,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ]
-      }
-    },
-    {
       "name": "Rossignol Vizion 4B 100 HV GW Ski Boots",
       "url": "https://www.the-house.com/1166500.html",
       "price_new": "700.00",
@@ -137035,6 +136923,35 @@
         ],
         "last": [
           "Wide (102 mm and over)"
+        ]
+      }
+    },
+    {
+      "name": "K2 Recon 100 2027 BOA Ski Boots",
+      "url": "https://www.the-house.com/1164653.html",
+      "price_new": "700.00",
+      "price_old": "886.08",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw93f59106/images/large/1164653_1.jpg?sw=400&sh=400",
+      "technical_offers": [
+        {
+          "variant_id": "1164653",
+          "price": 700.0,
+          "compare": 886.08,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
         ]
       }
     },
@@ -137083,42 +137000,6 @@
         ],
         "gender": [
           "Men"
-        ]
-      }
-    },
-    {
-      "name": "Salomon Sense 70 Women's Ski Boots",
-      "url": "https://www.the-house.com/1161931.html",
-      "price_new": "475.00",
-      "price_old": "558.82",
-      "availability": "In stock",
-      "part": "Boots",
-      "store": "The House",
-      "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwe7a95396/images/large/1161931_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1161931",
-          "price": 475.0,
-          "compare": 558.82,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Soft (under 80)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Soft (under 80)"
-        ],
-        "gender": [
-          "Women"
         ]
       }
     },
@@ -137188,6 +137069,42 @@
       "technical_specs": {
         "flex": [
           "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      }
+    },
+    {
+      "name": "Salomon Sense 70 Women's Ski Boots",
+      "url": "https://www.the-house.com/1161931.html",
+      "price_new": "475.00",
+      "price_old": "558.82",
+      "availability": "In stock",
+      "part": "Boots",
+      "store": "The House",
+      "brand": "Salomon",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwe7a95396/images/large/1161931_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1161931",
+          "price": 475.0,
+          "compare": 558.82,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Soft (under 80)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Soft (under 80)"
         ],
         "gender": [
           "Women"
@@ -137360,6 +137277,41 @@
       }
     },
     {
+      "name": "Atomic Strive 10 GW Ski Bindings",
+      "url": "https://www.the-house.com/1166226.html",
+      "price_new": "230.00",
+      "price_old": "264.37",
+      "availability": "In stock",
+      "part": "Bindings",
+      "store": "The House",
+      "brand": "Atomic",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0215d1b8/images/large/1166226_BLCK_1.jpg?sw=400&sh=400",
+      "technical_offers": [
+        {
+          "variant_id": "1166226",
+          "price": 230.0,
+          "compare": 264.37,
+          "available": true,
+          "specs": {
+            "din": [
+              "Up to 10"
+            ],
+            "sole": [
+              "GripWalk"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "din": [
+          "Up to 10"
+        ],
+        "sole": [
+          "GripWalk"
+        ]
+      }
+    },
+    {
       "name": "Rossignol Super Roostie Youth Ski Package w/ Express 7 Bindings",
       "url": "https://www.the-house.com/1162515.html",
       "price_new": "329.95",
@@ -137392,41 +137344,6 @@
         ],
         "gender": [
           "Kids"
-        ]
-      }
-    },
-    {
-      "name": "Atomic Strive 10 GW Ski Bindings",
-      "url": "https://www.the-house.com/1166226.html",
-      "price_new": "230.00",
-      "price_old": "264.37",
-      "availability": "In stock",
-      "part": "Bindings",
-      "store": "The House",
-      "brand": "Atomic",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw0215d1b8/images/large/1166226_BLCK_1.jpg?sw=400&sh=400",
-      "technical_offers": [
-        {
-          "variant_id": "1166226",
-          "price": 230.0,
-          "compare": 264.37,
-          "available": true,
-          "specs": {
-            "din": [
-              "Up to 10"
-            ],
-            "sole": [
-              "GripWalk"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "din": [
-          "Up to 10"
-        ],
-        "sole": [
-          "GripWalk"
         ]
       }
     },
@@ -137577,36 +137494,6 @@
       "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw1ac40de1/images/large/1163540_BLPL_1.jpg?sw=400&sh=400"
     },
     {
-      "name": "Salomon Angel S3 Women's Alpine Ski Poles",
-      "url": "https://www.the-house.com/366198.html",
-      "price_new": "69.95",
-      "price_old": "99.93",
-      "availability": "In stock",
-      "part": "Poles",
-      "store": "The House",
-      "brand": "Salomon",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwd7afc285/images/large/366198_blck_1.jpg?sw=400&sh=400",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "366198",
-          "price": 69.95,
-          "compare": 99.93,
-          "available": true,
-          "specs": {
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Women"
-        ]
-      }
-    },
-    {
       "name": "Scott Sports Proguide SRS Poles",
       "url": "https://www.the-house.com/1163544.html",
       "price_new": "130.00",
@@ -137640,6 +137527,36 @@
       "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw4017ef74/images/large/366246_blaq_1.jpg?sw=400&sh=400"
     },
     {
+      "name": "Salomon Angel S3 Women's Alpine Ski Poles",
+      "url": "https://www.the-house.com/366198.html",
+      "price_new": "69.95",
+      "price_old": "99.93",
+      "availability": "In stock",
+      "part": "Poles",
+      "store": "The House",
+      "brand": "Salomon",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwd7afc285/images/large/366198_blck_1.jpg?sw=400&sh=400",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "366198",
+          "price": 69.95,
+          "compare": 99.93,
+          "available": true,
+          "specs": {
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Women"
+        ]
+      }
+    },
+    {
       "name": "Salomon MTN S3 Aluminum Ski Poles - One Size, Evening Haze",
       "url": "https://www.the-house.com/1150107.html",
       "price_new": "119.95",
@@ -137649,36 +137566,6 @@
       "store": "The House",
       "brand": "Salomon",
       "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw17901659/images/large/1150107_1.jpg?sw=400&sh=400"
-    },
-    {
-      "name": "K2 Decoy Youth Ski Poles",
-      "url": "https://www.the-house.com/1118191.html",
-      "price_new": "34.95",
-      "price_old": "60.26",
-      "availability": "In stock",
-      "part": "Poles",
-      "store": "The House",
-      "brand": "K2",
-      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwb99bf1ba/images/large/1118191_sage_1.jpg?sw=400&sh=400",
-      "gender": "Kids",
-      "technical_offers": [
-        {
-          "variant_id": "1118191",
-          "price": 34.95,
-          "compare": 60.26,
-          "available": true,
-          "specs": {
-            "gender": [
-              "Kids"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Kids"
-        ]
-      }
     },
     {
       "name": "K2 Power Aluminum Ski Poles",
@@ -137718,6 +137605,36 @@
       "technical_specs": {
         "gender": [
           "Women"
+        ]
+      }
+    },
+    {
+      "name": "K2 Decoy Youth Ski Poles",
+      "url": "https://www.the-house.com/1118191.html",
+      "price_new": "34.95",
+      "price_old": "60.26",
+      "availability": "In stock",
+      "part": "Poles",
+      "store": "The House",
+      "brand": "K2",
+      "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwb99bf1ba/images/large/1118191_sage_1.jpg?sw=400&sh=400",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "1118191",
+          "price": 34.95,
+          "compare": 60.26,
+          "available": true,
+          "specs": {
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Kids"
         ]
       }
     },
@@ -139083,15 +139000,34 @@
       ]
     },
     {
-      "name": "Atomic Bent 110-130 Skis + C5 GW Bindings Juniors",
-      "url": "https://www.christysports.com/product/atomic-bent-110-130-skis-x-c5-gw-bindings-juniors/8201496.html",
-      "price_new": "179.97",
-      "price_old": "299.95",
+      "name": "Armada ARW 94 Vibrant Skis Womens",
+      "url": "https://www.christysports.com/product/armada-arw-94-vibrant-skis-womens/8201447.html",
+      "price_new": "419.97",
+      "price_old": "599.95",
       "availability": "Check store",
       "part": "Skis",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw712141bc/8201496_000_1.jpg?sw=600&sh=600",
-      "brand": "Atomic"
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw58489b61/8201447_000_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8201447",
+          "price": 419.97,
+          "compare": 599.95,
+          "available": null,
+          "specs": {
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Armada"
     },
     {
       "name": "Atomic Maven 86 C Skis Womens",
@@ -139124,17 +139060,6 @@
       "brand": "Atomic"
     },
     {
-      "name": "Blizzard Hustle 10 Skis",
-      "url": "https://www.christysports.com/product/blizzard-hustle-10-skis/1042206.html",
-      "price_new": "519.97",
-      "price_old": "799.95",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw2cc0a25d/1042206_000_01.jpg?sw=600&sh=600",
-      "brand": "Blizzard"
-    },
-    {
       "name": "Atomic Maverick 86C Skis",
       "url": "https://www.christysports.com/product/atomic-maverick-86c-skis/8201486.html",
       "price_new": "359.97",
@@ -139157,45 +139082,15 @@
       "brand": "Atomic"
     },
     {
-      "name": "Blizzard Black Pearl 88 Skis Womens",
-      "url": "https://www.christysports.com/product/blizzard-black-pearl-88-skis-womens/8111779.html",
-      "price_new": "450.97",
-      "price_old": "749.99",
+      "name": "Atomic Bent 110-130 Skis + C5 GW Bindings Juniors",
+      "url": "https://www.christysports.com/product/atomic-bent-110-130-skis-x-c5-gw-bindings-juniors/8201496.html",
+      "price_new": "179.97",
+      "price_old": "299.95",
       "availability": "Check store",
       "part": "Skis",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7e57c721/8111779_000_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111779",
-          "price": 450.97,
-          "compare": 749.99,
-          "available": null,
-          "specs": {
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Blizzard"
-    },
-    {
-      "name": "Elan Ripstick 88 Skis",
-      "url": "https://www.christysports.com/product/elan-ripstick-88-skis/8113394.html",
-      "price_new": "450.97",
-      "price_old": "749.99",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwa97b8f5f/8113394_000_1.jpg?sw=600&sh=600",
-      "brand": "Elan"
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw712141bc/8201496_000_1.jpg?sw=600&sh=600",
+      "brand": "Atomic"
     },
     {
       "name": "Atomic Bent 90 Skis",
@@ -139207,36 +139102,6 @@
       "store": "Christy Sports",
       "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7b9aaef6/8201495_000_1.jpg?sw=600&sh=600",
       "brand": "Atomic"
-    },
-    {
-      "name": "Blizzard Black Pearl 84 Skis Womens",
-      "url": "https://www.christysports.com/product/blizzard-black-pearl-84-skis-womens/8111780.html",
-      "price_new": "420.97",
-      "price_old": "699.99",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwac14bc0d/8111780_000_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111780",
-          "price": 420.97,
-          "compare": 699.99,
-          "available": null,
-          "specs": {
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Blizzard"
     },
     {
       "name": "Armada Reliance 92 TI Skis Womens",
@@ -139408,36 +139273,6 @@
       }
     },
     {
-      "name": "Armada ARW 94 Vibrant Skis Womens",
-      "url": "https://www.christysports.com/product/armada-arw-94-vibrant-skis-womens/8201447.html",
-      "price_new": "419.97",
-      "price_old": "599.95",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw58489b61/8201447_000_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8201447",
-          "price": 419.97,
-          "compare": 599.95,
-          "available": null,
-          "specs": {
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Armada"
-    },
-    {
       "name": "K2 Mindbender 89Ti Skis Womens",
       "url": "https://www.christysports.com/product/k2-mindbender-89ti-skis-womens/8202273.html",
       "price_new": "449.97",
@@ -139501,6 +139336,17 @@
       "brand": "Elan"
     },
     {
+      "name": "Atomic Bent Chetler 120 Skis",
+      "url": "https://www.christysports.com/product/atomic-bent-chetler-120-skis/8201492.html",
+      "price_new": "509.97",
+      "price_old": "849.95",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw534a89a2/8201492_000_1.jpg?sw=600&sh=600",
+      "brand": "Atomic"
+    },
+    {
       "name": "Volkl Mantra 88 Skis Womens",
       "url": "https://www.christysports.com/product/volkl-mantra-88-skis-womens/8202188.html",
       "price_new": "510.97",
@@ -139529,28 +139375,6 @@
           "Women"
         ]
       }
-    },
-    {
-      "name": "Atomic Bent Chetler 120 Skis",
-      "url": "https://www.christysports.com/product/atomic-bent-chetler-120-skis/8201492.html",
-      "price_new": "509.97",
-      "price_old": "849.95",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw534a89a2/8201492_000_1.jpg?sw=600&sh=600",
-      "brand": "Atomic"
-    },
-    {
-      "name": "Faction Prodigy 3 Skis",
-      "url": "https://www.christysports.com/product/faction-prodigy-3-skis/8201602.html",
-      "price_new": "467.97",
-      "price_old": "779.00",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw08630af1/8201602_000_1.jpg?sw=600&sh=600",
-      "brand": "Faction"
     },
     {
       "name": "K2 Mindbender 96C Skis Womens",
@@ -139611,6 +139435,17 @@
         ]
       },
       "brand": "K2"
+    },
+    {
+      "name": "Faction Prodigy 3 Skis",
+      "url": "https://www.christysports.com/product/faction-prodigy-3-skis/8201602.html",
+      "price_new": "467.97",
+      "price_old": "779.00",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw08630af1/8201602_000_1.jpg?sw=600&sh=600",
+      "brand": "Faction"
     },
     {
       "name": "Volkl Mantra 84 Skis Womens",
@@ -139736,6 +139571,17 @@
       "brand": "Line"
     },
     {
+      "name": "Elan Ripstick 88 Skis",
+      "url": "https://www.christysports.com/product/elan-ripstick-88-skis/8113394.html",
+      "price_new": "450.97",
+      "price_old": "749.99",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwa97b8f5f/8113394_000_1.jpg?sw=600&sh=600",
+      "brand": "Elan"
+    },
+    {
       "name": "Dynafit Radical 97 Skis",
       "url": "https://www.christysports.com/product/dynafit-radical-97-skis/8107221.html",
       "price_new": "639.97",
@@ -139837,6 +139683,17 @@
       "brand": "Head"
     },
     {
+      "name": "Blizzard Hustle 10 Skis",
+      "url": "https://www.christysports.com/product/blizzard-hustle-10-skis/1042206.html",
+      "price_new": "519.97",
+      "price_old": "799.95",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw2cc0a25d/1042206_000_01.jpg?sw=600&sh=600",
+      "brand": "Blizzard"
+    },
+    {
       "name": "Elan Ripstick 100 Skis Womens",
       "url": "https://www.christysports.com/product/elan-ripstick-100-skis-womens/8113396.html",
       "price_new": "480.97",
@@ -139867,15 +139724,34 @@
       "brand": "Elan"
     },
     {
-      "name": "Volkl Revolt 101 Skis",
-      "url": "https://www.christysports.com/product/volkl-revolt-101-skis/8202190.html",
+      "name": "Blizzard Black Pearl 88 Skis Womens",
+      "url": "https://www.christysports.com/product/blizzard-black-pearl-88-skis-womens/8111779.html",
       "price_new": "450.97",
       "price_old": "749.99",
       "availability": "Check store",
       "part": "Skis",
       "store": "Christy Sports",
-      "brand": "V\u00f6lkl",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw6b6d218e/8202190_000_1.jpg?sw=600&sh=600"
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7e57c721/8111779_000_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111779",
+          "price": 450.97,
+          "compare": 749.99,
+          "available": null,
+          "specs": {
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Blizzard"
     },
     {
       "name": "Blizzard Sheeva Twin + FDT 4.5 Skis Junior",
@@ -139906,6 +139782,17 @@
         ]
       },
       "brand": "Blizzard"
+    },
+    {
+      "name": "Volkl Revolt 101 Skis",
+      "url": "https://www.christysports.com/product/volkl-revolt-101-skis/8202190.html",
+      "price_new": "450.97",
+      "price_old": "749.99",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "brand": "V\u00f6lkl",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw6b6d218e/8202190_000_1.jpg?sw=600&sh=600"
     },
     {
       "name": "Elan Ripstick 96 Skis",
@@ -139988,6 +139875,36 @@
         ]
       },
       "brand": "Head"
+    },
+    {
+      "name": "Blizzard Black Pearl 84 Skis Womens",
+      "url": "https://www.christysports.com/product/blizzard-black-pearl-84-skis-womens/8111780.html",
+      "price_new": "420.97",
+      "price_old": "699.99",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwac14bc0d/8111780_000_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111780",
+          "price": 420.97,
+          "compare": 699.99,
+          "available": null,
+          "specs": {
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Blizzard"
     },
     {
       "name": "Head Kore 99 Freeride Skis Mens",
@@ -140282,36 +140199,6 @@
       "brand": "Dynastar"
     },
     {
-      "name": "Blizzard Rustler 10 Skis Mens",
-      "url": "https://www.christysports.com/product/blizzard-rustler-10-skis-mens/8106088.html",
-      "price_new": "399.97",
-      "price_old": "799.95",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf2678c01/8106088_000_1.jpg?sw=600&sh=600",
-      "gender": "Men",
-      "technical_offers": [
-        {
-          "variant_id": "8106088",
-          "price": 399.97,
-          "compare": 799.95,
-          "available": null,
-          "specs": {
-            "gender": [
-              "Men"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Men"
-        ]
-      },
-      "brand": "Blizzard"
-    },
-    {
       "name": "Faction Dancer 2 Skis",
       "url": "https://www.christysports.com/product/faction-dancer-2-skis/8112334.html",
       "price_new": "503.97",
@@ -140441,6 +140328,36 @@
           "Women"
         ]
       }
+    },
+    {
+      "name": "Blizzard Rustler 10 Skis Mens",
+      "url": "https://www.christysports.com/product/blizzard-rustler-10-skis-mens/8106088.html",
+      "price_new": "399.97",
+      "price_old": "799.95",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf2678c01/8106088_000_1.jpg?sw=600&sh=600",
+      "gender": "Men",
+      "technical_offers": [
+        {
+          "variant_id": "8106088",
+          "price": 399.97,
+          "compare": 799.95,
+          "available": null,
+          "specs": {
+            "gender": [
+              "Men"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Men"
+        ]
+      },
+      "brand": "Blizzard"
     },
     {
       "name": "Elan Ripstick 108 Skis",
@@ -142097,6 +142014,72 @@
       "brand": "Tecnica"
     },
     {
+      "name": "Nordica SpeedMachine J2 Ski Boots Kids",
+      "url": "https://www.christysports.com/product/nordica-speedmachine-j2-ski-boots-kids/8101124.html",
+      "price_new": "102.97",
+      "price_old": "170.00",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw3bf810b6/8101124_320_1.jpg?sw=600&sh=600",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "8101124",
+          "price": 102.97,
+          "compare": 170.0,
+          "available": null,
+          "specs": {
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Kids"
+        ]
+      },
+      "brand": "Nordica"
+    },
+    {
+      "name": "Salomon QST Access 70 T Ski Boots Junior",
+      "url": "https://www.christysports.com/product/salomon-qst-access-70-t-ski-boots-junior/8105833.html",
+      "price_new": "139.97",
+      "price_old": "279.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7ee9f548/8105833_347_1.jpg?sw=600&sh=600",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "8105833",
+          "price": 139.97,
+          "compare": 279.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Soft (under 80)"
+            ],
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Soft (under 80)"
+        ],
+        "gender": [
+          "Kids"
+        ]
+      },
+      "brand": "Salomon"
+    },
+    {
       "name": "Nordica SpeedMachine J 4 Ski Boots Kids",
       "url": "https://www.christysports.com/product/nordica-speedmachine-j-4-ski-boots-kids/8101121.html",
       "price_new": "144.97",
@@ -142125,6 +142108,77 @@
         ]
       },
       "brand": "Nordica"
+    },
+    {
+      "name": "Roxa Trinity 95 I.R. Ski Boots",
+      "url": "https://www.christysports.com/product/roxa-trinity-95-i.r.-ski-boots/8101098.html",
+      "price_new": "200.97",
+      "price_old": "499.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf9f6680e/8101098_050_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8101098",
+          "price": 200.97,
+          "compare": 499.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ]
+      },
+      "brand": "Roxa"
+    },
+    {
+      "name": "Dalbello Cabrio LV 120 Ski Boots Mens",
+      "url": "https://www.christysports.com/product/dalbello-cabrio-lv-120-ski-boots-mens/8111763.html",
+      "price_new": "350.97",
+      "price_old": "699.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwdee4b4cc/8111763_320_1.jpg?sw=600&sh=600",
+      "gender": "Men",
+      "technical_offers": [
+        {
+          "variant_id": "8111763",
+          "price": 350.97,
+          "compare": 699.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Narrow (98 mm and under)"
+            ],
+            "gender": [
+              "Men"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "last": [
+          "Narrow (98 mm and under)"
+        ],
+        "gender": [
+          "Men"
+        ]
+      },
+      "brand": "Dalbello"
     },
     {
       "name": "Atomic Hawx Prime 120 S GW BOA Ski Boots",
@@ -142198,240 +142252,6 @@
       "brand": "Atomic"
     },
     {
-      "name": "Nordica SpeedMachine J2 Ski Boots Kids",
-      "url": "https://www.christysports.com/product/nordica-speedmachine-j2-ski-boots-kids/8101124.html",
-      "price_new": "102.97",
-      "price_old": "170.00",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw3bf810b6/8101124_320_1.jpg?sw=600&sh=600",
-      "gender": "Kids",
-      "technical_offers": [
-        {
-          "variant_id": "8101124",
-          "price": 102.97,
-          "compare": 170.0,
-          "available": null,
-          "specs": {
-            "gender": [
-              "Kids"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Kids"
-        ]
-      },
-      "brand": "Nordica"
-    },
-    {
-      "name": "Dalbello Cabrio MV 120 3DWrap Ski Boots",
-      "url": "https://www.christysports.com/product/dalbello-cabrio-mv-120-3dwrap-ski-boots/8111758.html",
-      "price_new": "438.97",
-      "price_old": "729.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwcdf1273c/8111758_320_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8111758",
-          "price": 438.97,
-          "compare": 729.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
-        ]
-      },
-      "brand": "Dalbello"
-    },
-    {
-      "name": "Atomic Hawx Ultra 95 S Ski Boots Womens",
-      "url": "https://www.christysports.com/product/atomic-hawx-ultra-95-s-ski-boots-womens/8111504.html",
-      "price_new": "249.97",
-      "price_old": "499.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw23baab48/8111504_320_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111504",
-          "price": 249.97,
-          "compare": 499.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Atomic"
-    },
-    {
-      "name": "Dalbello Cabrio LV Free 105 Ski Boots Womens",
-      "url": "https://www.christysports.com/product/dalbello-cabrio-lv-free-105-ski-boots-womens/8106947.html",
-      "price_new": "260.97",
-      "price_old": "649.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw9334cb8b/8106947_030_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8106947",
-          "price": 260.97,
-          "compare": 649.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Narrow (98 mm and under)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        },
-        {
-          "variant_id": "8111764",
-          "price": 350.97,
-          "compare": 699.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Narrow (98 mm and under)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "last": [
-          "Narrow (98 mm and under)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Dalbello",
-      "versions": [
-        {
-          "url": "https://www.christysports.com/product/dalbello-cabrio-lv-free-105-ski-boots-womens/8111764.html",
-          "price_new": "350.97",
-          "price_old": "699.99",
-          "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwdee1f9cc/8111764_320_1.jpg?sw=600&sh=600"
-        }
-      ]
-    },
-    {
-      "name": "Scarpa 4 Quattro XT Ski Boots Womens",
-      "url": "https://www.christysports.com/product/scarpa-4-quattro-xt-ski-boots-womens/1043689.html",
-      "price_new": "347.97",
-      "price_old": "869.00",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwb628a327/1043689_031_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1043689",
-          "price": 347.97,
-          "compare": 869.0,
-          "available": null,
-          "specs": {
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Scarpa"
-    },
-    {
-      "name": "K2 BFC 95 BOA Ski Boots Womens",
-      "url": "https://www.christysports.com/product/k2-bfc-95-boa-ski-boots-womens/8111740.html",
-      "price_new": "329.97",
-      "price_old": "549.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw4f508f79/8111740_000_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111740",
-          "price": 329.97,
-          "compare": 549.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "K2"
-    },
-    {
       "name": "Atomic Hawx Prime 105 S BOA Ski Boots Womens",
       "url": "https://www.christysports.com/product/atomic-hawx-prime-105-s-boa-ski-boots-womens/8111507.html",
       "price_new": "407.97",
@@ -142502,42 +142322,6 @@
         ]
       },
       "brand": "K2"
-    },
-    {
-      "name": "Salomon Shift Pro 80T AT Ski Boots Kids",
-      "url": "https://www.christysports.com/product/salomon-shift-pro-80t-at-ski-boots-kids/8101217.html",
-      "price_new": "199.97",
-      "price_old": "399.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw45768147/8101217_014_1.jpg?sw=600&sh=600",
-      "gender": "Kids",
-      "technical_offers": [
-        {
-          "variant_id": "8101217",
-          "price": 199.97,
-          "compare": 399.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Kids"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Kids"
-        ]
-      },
-      "brand": "Salomon"
     },
     {
       "name": "Dalbello Cabrio MV 95 3DWrap Ski Boots Womens",
@@ -142616,6 +142400,42 @@
         ]
       },
       "brand": "Atomic"
+    },
+    {
+      "name": "Salomon Shift Pro 80T AT Ski Boots Kids",
+      "url": "https://www.christysports.com/product/salomon-shift-pro-80t-at-ski-boots-kids/8101217.html",
+      "price_new": "199.97",
+      "price_old": "399.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw45768147/8101217_014_1.jpg?sw=600&sh=600",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "8101217",
+          "price": 199.97,
+          "compare": 399.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Kids"
+        ]
+      },
+      "brand": "Salomon"
     },
     {
       "name": "Atomic Hawx Prime 110 S BOA Ski Boots",
@@ -142708,64 +142528,6 @@
       "brand": "Salomon"
     },
     {
-      "name": "K2 Anthem 95 BOA Ski Boots Womens",
-      "url": "https://www.christysports.com/product/k2-anthem-95-boa-ski-boots-womens/1046548.html",
-      "price_new": "299.97",
-      "price_old": "599.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwd12a1774/1046548_000_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1046548",
-          "price": 299.97,
-          "compare": 599.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        },
-        {
-          "variant_id": "8202286",
-          "price": 419.97,
-          "compare": 699.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "K2",
-      "versions": [
-        {
-          "url": "https://www.christysports.com/product/k2-anthem-95-boa-ski-boots-womens/8202286.html",
-          "price_new": "419.97",
-          "price_old": "699.95",
-          "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw07eb987f/8202286_000_1.jpg?sw=600&sh=600"
-        }
-      ]
-    },
-    {
       "name": "Rossignol Hi-Speed Elite 130 LV Ski Boots Mens",
       "url": "https://www.christysports.com/product/rossignol-hi-speed-elite-130-lv-ski-boots-mens/8111811.html",
       "price_new": "399.97",
@@ -142806,6 +142568,42 @@
         ]
       },
       "brand": "Rossignol"
+    },
+    {
+      "name": "Lange RSJ 65 Ski Boots Junior",
+      "url": "https://www.christysports.com/product/lange-rsj-65-ski-boots-junior/8111691.html",
+      "price_new": "164.97",
+      "price_old": "274.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw0c5ff985/8111691_047_1.jpg?sw=600&sh=600",
+      "gender": "Kids",
+      "technical_offers": [
+        {
+          "variant_id": "8111691",
+          "price": 164.97,
+          "compare": 274.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Soft (under 80)"
+            ],
+            "gender": [
+              "Kids"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Soft (under 80)"
+        ],
+        "gender": [
+          "Kids"
+        ]
+      },
+      "brand": "Lange"
     },
     {
       "name": "Atomic Hawx Prime XTD 120 BOA Ski Boots",
@@ -142884,17 +142682,17 @@
       "brand": "Head"
     },
     {
-      "name": "Dalbello Cabrio LV 120 3DWrap Ski Boots",
-      "url": "https://www.christysports.com/product/dalbello-cabrio-lv-120-3dwrap-ski-boots/8111765.html",
+      "name": "Dalbello Cabrio MV 120 3DWrap Ski Boots",
+      "url": "https://www.christysports.com/product/dalbello-cabrio-mv-120-3dwrap-ski-boots/8111758.html",
       "price_new": "438.97",
       "price_old": "729.99",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw3b7fba9e/8111765_020_1.jpg?sw=600&sh=600",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwcdf1273c/8111758_320_1.jpg?sw=600&sh=600",
       "technical_offers": [
         {
-          "variant_id": "8111765",
+          "variant_id": "8111758",
           "price": 438.97,
           "compare": 729.99,
           "available": null,
@@ -142903,7 +142701,7 @@
               "Stiff (105\u2013120)"
             ],
             "last": [
-              "Narrow (98 mm and under)"
+              "Medium (99\u2013101 mm)"
             ]
           }
         }
@@ -142913,10 +142711,104 @@
           "Stiff (105\u2013120)"
         ],
         "last": [
-          "Narrow (98 mm and under)"
+          "Medium (99\u2013101 mm)"
         ]
       },
       "brand": "Dalbello"
+    },
+    {
+      "name": "Atomic Hawx Ultra 95 S Ski Boots Womens",
+      "url": "https://www.christysports.com/product/atomic-hawx-ultra-95-s-ski-boots-womens/8111504.html",
+      "price_new": "249.97",
+      "price_old": "499.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw23baab48/8111504_320_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111504",
+          "price": 249.97,
+          "compare": 499.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Atomic"
+    },
+    {
+      "name": "K2 Anthem 95 BOA Ski Boots Womens",
+      "url": "https://www.christysports.com/product/k2-anthem-95-boa-ski-boots-womens/1046548.html",
+      "price_new": "299.97",
+      "price_old": "599.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwd12a1774/1046548_000_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1046548",
+          "price": 299.97,
+          "compare": 599.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        },
+        {
+          "variant_id": "8202286",
+          "price": 419.97,
+          "compare": 699.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "K2",
+      "versions": [
+        {
+          "url": "https://www.christysports.com/product/k2-anthem-95-boa-ski-boots-womens/8202286.html",
+          "price_new": "419.97",
+          "price_old": "699.95",
+          "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw07eb987f/8202286_000_1.jpg?sw=600&sh=600"
+        }
+      ]
     },
     {
       "name": "Lange All Mountain LX 95 HV Ski Boots Womens",
@@ -143050,39 +142942,40 @@
       "brand": "Head"
     },
     {
-      "name": "Atomic Hawx Magna 130 S Wide Ski Boots",
-      "url": "https://www.christysports.com/product/atomic-hawx-magna-130-s-wide-ski-boots/8201506.html",
-      "price_new": "473.97",
-      "price_old": "789.95",
+      "name": "Rossignol Alltrack Pro 80 Ski Boots Womens",
+      "url": "https://www.christysports.com/product/rossignol-alltrack-pro-80-ski-boots-womens/8107995.html",
+      "price_new": "214.97",
+      "price_old": "429.95",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw8b456f2e/8201506_020_1.jpg?sw=600&sh=600",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw8cc600b1/8107995_020_1.jpg?sw=600&sh=600",
+      "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "8201506",
-          "price": 473.97,
-          "compare": 789.95,
+          "variant_id": "8107995",
+          "price": 214.97,
+          "compare": 429.95,
           "available": null,
           "specs": {
             "flex": [
-              "Very stiff (over 120)"
+              "Medium (80\u2013100)"
             ],
-            "last": [
-              "Wide (102 mm and over)"
+            "gender": [
+              "Women"
             ]
           }
         }
       ],
       "technical_specs": {
         "flex": [
-          "Very stiff (over 120)"
+          "Medium (80\u2013100)"
         ],
-        "last": [
-          "Wide (102 mm and over)"
+        "gender": [
+          "Women"
         ]
       },
-      "brand": "Atomic"
+      "brand": "Rossignol"
     },
     {
       "name": "K2 Recon 110 BOA Ski Boots Mens",
@@ -143121,6 +143014,41 @@
       "brand": "K2"
     },
     {
+      "name": "Atomic Hawx Magna 130 S Wide Ski Boots",
+      "url": "https://www.christysports.com/product/atomic-hawx-magna-130-s-wide-ski-boots/8201506.html",
+      "price_new": "473.97",
+      "price_old": "789.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw8b456f2e/8201506_020_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8201506",
+          "price": 473.97,
+          "compare": 789.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Very stiff (over 120)"
+            ],
+            "last": [
+              "Wide (102 mm and over)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Very stiff (over 120)"
+        ],
+        "last": [
+          "Wide (102 mm and over)"
+        ]
+      },
+      "brand": "Atomic"
+    },
+    {
       "name": "Head Formula 105 MV Ski Boots",
       "url": "https://www.christysports.com/product/head-formula-105-mv-ski-boots/8107963.html",
       "price_new": "279.97",
@@ -143156,24 +143084,44 @@
       "brand": "Head"
     },
     {
-      "name": "Rossignol Alltrack Pro 80 Ski Boots Womens",
-      "url": "https://www.christysports.com/product/rossignol-alltrack-pro-80-ski-boots-womens/8107995.html",
-      "price_new": "214.97",
-      "price_old": "429.95",
+      "name": "Dalbello Cabrio LV Free 105 Ski Boots Womens",
+      "url": "https://www.christysports.com/product/dalbello-cabrio-lv-free-105-ski-boots-womens/8106947.html",
+      "price_new": "260.97",
+      "price_old": "649.99",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw8cc600b1/8107995_020_1.jpg?sw=600&sh=600",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw9334cb8b/8106947_030_1.jpg?sw=600&sh=600",
       "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "8107995",
-          "price": 214.97,
-          "compare": 429.95,
+          "variant_id": "8106947",
+          "price": 260.97,
+          "compare": 649.99,
           "available": null,
           "specs": {
             "flex": [
-              "Medium (80\u2013100)"
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Narrow (98 mm and under)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        },
+        {
+          "variant_id": "8111764",
+          "price": 350.97,
+          "compare": 699.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Narrow (98 mm and under)"
             ],
             "gender": [
               "Women"
@@ -143183,48 +143131,24 @@
       ],
       "technical_specs": {
         "flex": [
-          "Medium (80\u2013100)"
+          "Stiff (105\u2013120)"
+        ],
+        "last": [
+          "Narrow (98 mm and under)"
         ],
         "gender": [
           "Women"
         ]
       },
-      "brand": "Rossignol"
-    },
-    {
-      "name": "Dalbello Cabrio MV 100 IF Ski Boots",
-      "url": "https://www.christysports.com/product/dalbello-cabrio-mv-100-if-ski-boots/8111759.html",
-      "price_new": "330.97",
-      "price_old": "549.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwa761ca99/8111759_020_1.jpg?sw=600&sh=600",
-      "technical_offers": [
+      "brand": "Dalbello",
+      "versions": [
         {
-          "variant_id": "8111759",
-          "price": 330.97,
-          "compare": 549.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ]
-          }
+          "url": "https://www.christysports.com/product/dalbello-cabrio-lv-free-105-ski-boots-womens/8111764.html",
+          "price_new": "350.97",
+          "price_old": "699.99",
+          "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwdee1f9cc/8111764_320_1.jpg?sw=600&sh=600"
         }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
-        ]
-      },
-      "brand": "Dalbello"
+      ]
     },
     {
       "name": "Lange Shadow 115 MV GW Ski Boots Womens",
@@ -143275,39 +143199,39 @@
       "brand": "Lange"
     },
     {
-      "name": "Atomic Hawx Ultra 110 S GW Ski Boots",
-      "url": "https://www.christysports.com/product/atomic-hawx-ultra-110-s-gw-ski-boots/8107582.html",
-      "price_new": "299.97",
-      "price_old": "599.95",
+      "name": "Dalbello Cabrio MV 100 IF Ski Boots",
+      "url": "https://www.christysports.com/product/dalbello-cabrio-mv-100-if-ski-boots/8111759.html",
+      "price_new": "330.97",
+      "price_old": "549.99",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf00da221/8107582_020_01.jpg?sw=600&sh=600",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwa761ca99/8111759_020_1.jpg?sw=600&sh=600",
       "technical_offers": [
         {
-          "variant_id": "8107582",
-          "price": 299.97,
-          "compare": 599.95,
+          "variant_id": "8111759",
+          "price": 330.97,
+          "compare": 549.99,
           "available": null,
           "specs": {
             "flex": [
-              "Stiff (105\u2013120)"
+              "Medium (80\u2013100)"
             ],
-            "sole": [
-              "GripWalk"
+            "last": [
+              "Medium (99\u2013101 mm)"
             ]
           }
         }
       ],
       "technical_specs": {
         "flex": [
-          "Stiff (105\u2013120)"
+          "Medium (80\u2013100)"
         ],
-        "sole": [
-          "GripWalk"
+        "last": [
+          "Medium (99\u2013101 mm)"
         ]
       },
-      "brand": "Atomic"
+      "brand": "Dalbello"
     },
     {
       "name": "K2 Anthem 105 BOA Ski Boots Womens",
@@ -143344,6 +143268,73 @@
         ]
       },
       "brand": "K2"
+    },
+    {
+      "name": "Tecnica Mach1 MV 95 Ski Boots Womens",
+      "url": "https://www.christysports.com/product/tecnica-mach1-mv-95-ski-boots-womens/8111794.html",
+      "price_new": "300.97",
+      "price_old": "599.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw8475f8b2/8111794_020_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111794",
+          "price": 300.97,
+          "compare": 599.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        },
+        {
+          "variant_id": "1042210",
+          "price": 389.97,
+          "compare": 599.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "last": [
+          "Medium (99\u2013101 mm)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Tecnica",
+      "versions": [
+        {
+          "url": "https://www.christysports.com/product/tecnica-mach1-mv-95-ski-boots-womens/1042210.html",
+          "price_new": "389.97",
+          "price_old": "599.95",
+          "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw45a74fd4/1042210_040_1.jpg?sw=600&sh=600"
+        }
+      ]
     },
     {
       "name": "Tecnica Cochise 95 Ski Boots Womens",
@@ -143471,44 +143462,24 @@
       "brand": "Tecnica"
     },
     {
-      "name": "Tecnica Mach1 MV 95 Ski Boots Womens",
-      "url": "https://www.christysports.com/product/tecnica-mach1-mv-95-ski-boots-womens/8111794.html",
-      "price_new": "300.97",
-      "price_old": "599.99",
+      "name": "K2 BFC 95 BOA Ski Boots Womens",
+      "url": "https://www.christysports.com/product/k2-bfc-95-boa-ski-boots-womens/8111740.html",
+      "price_new": "329.97",
+      "price_old": "549.95",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw8475f8b2/8111794_020_1.jpg?sw=600&sh=600",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw4f508f79/8111740_000_1.jpg?sw=600&sh=600",
       "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "8111794",
-          "price": 300.97,
-          "compare": 599.99,
+          "variant_id": "8111740",
+          "price": 329.97,
+          "compare": 549.95,
           "available": null,
           "specs": {
             "flex": [
               "Medium (80\u2013100)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        },
-        {
-          "variant_id": "1042210",
-          "price": 389.97,
-          "compare": 599.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
             ],
             "gender": [
               "Women"
@@ -143520,22 +143491,11 @@
         "flex": [
           "Medium (80\u2013100)"
         ],
-        "last": [
-          "Medium (99\u2013101 mm)"
-        ],
         "gender": [
           "Women"
         ]
       },
-      "brand": "Tecnica",
-      "versions": [
-        {
-          "url": "https://www.christysports.com/product/tecnica-mach1-mv-95-ski-boots-womens/1042210.html",
-          "price_new": "389.97",
-          "price_old": "599.95",
-          "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw45a74fd4/1042210_040_1.jpg?sw=600&sh=600"
-        }
-      ]
+      "brand": "K2"
     },
     {
       "name": "Dalbello Cabrio MV 85 IF Ski Boots Womens",
@@ -143729,40 +143689,104 @@
       "brand": "Nordica"
     },
     {
-      "name": "Salomon QST Access 70 T Ski Boots Junior",
-      "url": "https://www.christysports.com/product/salomon-qst-access-70-t-ski-boots-junior/8105833.html",
-      "price_new": "139.97",
-      "price_old": "279.95",
+      "name": "Scarpa 4 Quattro XT Ski Boots Womens",
+      "url": "https://www.christysports.com/product/scarpa-4-quattro-xt-ski-boots-womens/1043689.html",
+      "price_new": "347.97",
+      "price_old": "869.00",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7ee9f548/8105833_347_1.jpg?sw=600&sh=600",
-      "gender": "Kids",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwb628a327/1043689_031_1.jpg?sw=600&sh=600",
+      "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "8105833",
-          "price": 139.97,
-          "compare": 279.95,
+          "variant_id": "1043689",
+          "price": 347.97,
+          "compare": 869.0,
+          "available": null,
+          "specs": {
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Scarpa"
+    },
+    {
+      "name": "Dalbello Cabrio LV 120 3DWrap Ski Boots",
+      "url": "https://www.christysports.com/product/dalbello-cabrio-lv-120-3dwrap-ski-boots/8111765.html",
+      "price_new": "438.97",
+      "price_old": "729.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw3b7fba9e/8111765_020_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8111765",
+          "price": 438.97,
+          "compare": 729.99,
           "available": null,
           "specs": {
             "flex": [
-              "Soft (under 80)"
+              "Stiff (105\u2013120)"
             ],
-            "gender": [
-              "Kids"
+            "last": [
+              "Narrow (98 mm and under)"
             ]
           }
         }
       ],
       "technical_specs": {
         "flex": [
-          "Soft (under 80)"
+          "Stiff (105\u2013120)"
         ],
-        "gender": [
-          "Kids"
+        "last": [
+          "Narrow (98 mm and under)"
         ]
       },
-      "brand": "Salomon"
+      "brand": "Dalbello"
+    },
+    {
+      "name": "Atomic Hawx Ultra 110 S GW Ski Boots",
+      "url": "https://www.christysports.com/product/atomic-hawx-ultra-110-s-gw-ski-boots/8107582.html",
+      "price_new": "299.97",
+      "price_old": "599.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf00da221/8107582_020_01.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8107582",
+          "price": 299.97,
+          "compare": 599.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "sole": [
+              "GripWalk"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "sole": [
+          "GripWalk"
+        ]
+      },
+      "brand": "Atomic"
     },
     {
       "name": "K2 Method Pro Ski Boots Womens",
@@ -143793,70 +143817,6 @@
         ]
       },
       "brand": "K2"
-    },
-    {
-      "name": "Roxa Trinity 95 I.R. Ski Boots",
-      "url": "https://www.christysports.com/product/roxa-trinity-95-i.r.-ski-boots/8101098.html",
-      "price_new": "200.97",
-      "price_old": "499.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf9f6680e/8101098_050_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8101098",
-          "price": 200.97,
-          "compare": 499.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ]
-      },
-      "brand": "Roxa"
-    },
-    {
-      "name": "Salomon S/Pro HV 120 Ski Boots",
-      "url": "https://www.christysports.com/product/salomon-spro-hv-120-ski-boots/8105823.html",
-      "price_new": "324.97",
-      "price_old": "649.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw08ef9dfb/8105823_320_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8105823",
-          "price": 324.97,
-          "compare": 649.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Wide (102 mm and over)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "last": [
-          "Wide (102 mm and over)"
-        ]
-      },
-      "brand": "Salomon"
     },
     {
       "name": "Lange Shadow 120 MV GW Ski Boots Mens",
@@ -143947,6 +143907,41 @@
         ]
       },
       "brand": "Atomic"
+    },
+    {
+      "name": "Salomon S/Pro HV 120 Ski Boots",
+      "url": "https://www.christysports.com/product/salomon-spro-hv-120-ski-boots/8105823.html",
+      "price_new": "324.97",
+      "price_old": "649.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw08ef9dfb/8105823_320_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8105823",
+          "price": 324.97,
+          "compare": 649.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Wide (102 mm and over)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "last": [
+          "Wide (102 mm and over)"
+        ]
+      },
+      "brand": "Salomon"
     },
     {
       "name": "Salomon S/Pro Supra BOA 105 Ski Boots Womens",
@@ -144050,83 +144045,6 @@
       "brand": "K2"
     },
     {
-      "name": "Head Kore 120 GW AT Ski Boots",
-      "url": "https://www.christysports.com/product/head-kore-120-gw-at-ski-boots/8102236.html",
-      "price_new": "319.97",
-      "price_old": "799.00",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw3cdf4174/8102236_020_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8102236",
-          "price": 319.97,
-          "compare": 799.0,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "sole": [
-              "GripWalk"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "sole": [
-          "GripWalk"
-        ]
-      },
-      "brand": "Head"
-    },
-    {
-      "name": "Dalbello Cabrio LV 120 Ski Boots Mens",
-      "url": "https://www.christysports.com/product/dalbello-cabrio-lv-120-ski-boots-mens/8111763.html",
-      "price_new": "350.97",
-      "price_old": "699.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwdee4b4cc/8111763_320_1.jpg?sw=600&sh=600",
-      "gender": "Men",
-      "technical_offers": [
-        {
-          "variant_id": "8111763",
-          "price": 350.97,
-          "compare": 699.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Narrow (98 mm and under)"
-            ],
-            "gender": [
-              "Men"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "last": [
-          "Narrow (98 mm and under)"
-        ],
-        "gender": [
-          "Men"
-        ]
-      },
-      "brand": "Dalbello"
-    },
-    {
       "name": "Tecnica Mach1 LV 95 Ski Boots Womens",
       "url": "https://www.christysports.com/product/tecnica-mach1-lv-95-ski-boots-womens/8111792.html",
       "price_new": "300.97",
@@ -144194,6 +144112,48 @@
       ]
     },
     {
+      "name": "Atomic Hawx Prime 95 Boa GW Ski Boots Womens",
+      "url": "https://www.christysports.com/product/atomic-hawx-prime-95-boa-gw-ski-boots-womens/8111508.html",
+      "price_new": "299.97",
+      "price_old": "599.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwae851bb0/8111508_320_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111508",
+          "price": 299.97,
+          "compare": 599.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Atomic"
+    },
+    {
       "name": "Head Formula 95 MV GW Ski Boots Womens",
       "url": "https://www.christysports.com/product/head-formula-95-mv-gw-ski-boots-womens/8111533.html",
       "price_new": "299.97",
@@ -144242,82 +144202,39 @@
       "brand": "Head"
     },
     {
-      "name": "Atomic Hawx Prime 95 Boa GW Ski Boots Womens",
-      "url": "https://www.christysports.com/product/atomic-hawx-prime-95-boa-gw-ski-boots-womens/8111508.html",
-      "price_new": "299.97",
-      "price_old": "599.95",
+      "name": "Head Kore 120 GW AT Ski Boots",
+      "url": "https://www.christysports.com/product/head-kore-120-gw-at-ski-boots/8102236.html",
+      "price_new": "319.97",
+      "price_old": "799.00",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwae851bb0/8111508_320_1.jpg?sw=600&sh=600",
-      "gender": "Women",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw3cdf4174/8102236_020_1.jpg?sw=600&sh=600",
       "technical_offers": [
         {
-          "variant_id": "8111508",
-          "price": 299.97,
-          "compare": 599.95,
+          "variant_id": "8102236",
+          "price": 319.97,
+          "compare": 799.0,
           "available": null,
           "specs": {
             "flex": [
-              "Medium (80\u2013100)"
+              "Stiff (105\u2013120)"
             ],
             "sole": [
               "GripWalk"
-            ],
-            "gender": [
-              "Women"
             ]
           }
         }
       ],
       "technical_specs": {
         "flex": [
-          "Medium (80\u2013100)"
+          "Stiff (105\u2013120)"
         ],
         "sole": [
           "GripWalk"
-        ],
-        "gender": [
-          "Women"
         ]
       },
-      "brand": "Atomic"
-    },
-    {
-      "name": "K2 Mindbender 95 BOA Ski Boots Womens",
-      "url": "https://www.christysports.com/product/k2-mindbender-95-boa-ski-boots-womens/8111742.html",
-      "price_new": "349.97",
-      "price_old": "699.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwa7a1d045/8111742_000_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111742",
-          "price": 349.97,
-          "compare": 699.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "K2"
+      "brand": "Head"
     },
     {
       "name": "Atomic Hawx Ultra 85 GW Ski Boots Womens",
@@ -144410,48 +144327,6 @@
       "brand": "Lange"
     },
     {
-      "name": "Dalbello Veloce 75 GW Ski Boots Womens",
-      "url": "https://www.christysports.com/product/dalbello-veloce-75-gw-ski-boots-womens/8100533.html",
-      "price_new": "152.97",
-      "price_old": "379.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf59e923c/8100533_010_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8100533",
-          "price": 152.97,
-          "compare": 379.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Soft (under 80)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Soft (under 80)"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Dalbello"
-    },
-    {
       "name": "Atomic Hawx Prime 85 BOA Ski Boots Womens",
       "url": "https://www.christysports.com/product/atomic-hawx-prime-85-boa-ski-boots-womens/8201505.html",
       "price_new": "311.97",
@@ -144524,46 +144399,46 @@
       "brand": "Atomic"
     },
     {
-      "name": "Salomon S/Pro Supra BOA GW 120 Ski Boots Mens",
-      "url": "https://www.christysports.com/product/salomon-spro-supra-boa-gw-120-ski-boots-mens/8105820.html",
-      "price_new": "374.97",
-      "price_old": "749.95",
+      "name": "Dalbello Veloce 75 GW Ski Boots Womens",
+      "url": "https://www.christysports.com/product/dalbello-veloce-75-gw-ski-boots-womens/8100533.html",
+      "price_new": "152.97",
+      "price_old": "379.99",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw0bad8564/8105820_321_1.jpg?sw=600&sh=600",
-      "gender": "Men",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf59e923c/8100533_010_1.jpg?sw=600&sh=600",
+      "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "8105820",
-          "price": 374.97,
-          "compare": 749.95,
+          "variant_id": "8100533",
+          "price": 152.97,
+          "compare": 379.99,
           "available": null,
           "specs": {
             "flex": [
-              "Stiff (105\u2013120)"
+              "Soft (under 80)"
             ],
             "sole": [
               "GripWalk"
             ],
             "gender": [
-              "Men"
+              "Women"
             ]
           }
         }
       ],
       "technical_specs": {
         "flex": [
-          "Stiff (105\u2013120)"
+          "Soft (under 80)"
         ],
         "sole": [
           "GripWalk"
         ],
         "gender": [
-          "Men"
+          "Women"
         ]
       },
-      "brand": "Salomon"
+      "brand": "Dalbello"
     },
     {
       "name": "Atomic Hawx Magna 105 S GW Ski Boots Womens",
@@ -144606,6 +144481,42 @@
         ]
       },
       "brand": "Atomic"
+    },
+    {
+      "name": "K2 Mindbender 95 BOA Ski Boots Womens",
+      "url": "https://www.christysports.com/product/k2-mindbender-95-boa-ski-boots-womens/8111742.html",
+      "price_new": "349.97",
+      "price_old": "699.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwa7a1d045/8111742_000_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111742",
+          "price": 349.97,
+          "compare": 699.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "K2"
     },
     {
       "name": "Tecnica Mach1 MV 130 Ski Boots",
@@ -144769,46 +144680,46 @@
       "brand": "Salomon"
     },
     {
-      "name": "Rossignol Pure Elite 90 GW Ski Boots Womens",
-      "url": "https://www.christysports.com/product/rossignol-pure-elite-90-gw-ski-boots-womens/8101584.html",
-      "price_new": "260.97",
-      "price_old": "649.95",
+      "name": "Salomon S/Pro Supra BOA GW 120 Ski Boots Mens",
+      "url": "https://www.christysports.com/product/salomon-spro-supra-boa-gw-120-ski-boots-mens/8105820.html",
+      "price_new": "374.97",
+      "price_old": "749.95",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw25272034/8101584_023_1.jpg?sw=600&sh=600",
-      "gender": "Women",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw0bad8564/8105820_321_1.jpg?sw=600&sh=600",
+      "gender": "Men",
       "technical_offers": [
         {
-          "variant_id": "8101584",
-          "price": 260.97,
-          "compare": 649.95,
+          "variant_id": "8105820",
+          "price": 374.97,
+          "compare": 749.95,
           "available": null,
           "specs": {
             "flex": [
-              "Medium (80\u2013100)"
+              "Stiff (105\u2013120)"
             ],
             "sole": [
               "GripWalk"
             ],
             "gender": [
-              "Women"
+              "Men"
             ]
           }
         }
       ],
       "technical_specs": {
         "flex": [
-          "Medium (80\u2013100)"
+          "Stiff (105\u2013120)"
         ],
         "sole": [
           "GripWalk"
         ],
         "gender": [
-          "Women"
+          "Men"
         ]
       },
-      "brand": "Rossignol"
+      "brand": "Salomon"
     },
     {
       "name": "Nordica SportMachine 95 GW Ski Boots Womens",
@@ -144851,6 +144762,48 @@
         ]
       },
       "brand": "Nordica"
+    },
+    {
+      "name": "Rossignol Pure Elite 90 GW Ski Boots Womens",
+      "url": "https://www.christysports.com/product/rossignol-pure-elite-90-gw-ski-boots-womens/8101584.html",
+      "price_new": "260.97",
+      "price_old": "649.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw25272034/8101584_023_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8101584",
+          "price": 260.97,
+          "compare": 649.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Rossignol"
     },
     {
       "name": "Rossignol Pure Pro 100 MV Ski Boots Womens",
@@ -144924,6 +144877,35 @@
       "brand": "K2"
     },
     {
+      "name": "Nordica SportMachine 3 100 Ski Boots",
+      "url": "https://www.christysports.com/product/nordica-sportmachine-3-100-ski-boots/8101112.html",
+      "price_new": "225.97",
+      "price_old": "449.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw69c23641/8101112_320_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8101112",
+          "price": 225.97,
+          "compare": 449.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ]
+      },
+      "brand": "Nordica"
+    },
+    {
       "name": "Roxa Element 120 GW Ski Boots",
       "url": "https://www.christysports.com/product/roxa-element-120-gw-ski-boots/8101095.html",
       "price_new": "200.97",
@@ -144957,76 +144939,6 @@
         ]
       },
       "brand": "Roxa"
-    },
-    {
-      "name": "Head Formula 110 MV GW Ski Boots",
-      "url": "https://www.christysports.com/product/head-formula-110-mv-gw-ski-boots/8111532.html",
-      "price_new": "299.97",
-      "price_old": "599.00",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw8c667cfb/8111532_390_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8111532",
-          "price": 299.97,
-          "compare": 599.0,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
-        ]
-      },
-      "brand": "Head"
-    },
-    {
-      "name": "Nordica SportMachine 3 100 Ski Boots",
-      "url": "https://www.christysports.com/product/nordica-sportmachine-3-100-ski-boots/8101112.html",
-      "price_new": "225.97",
-      "price_old": "449.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw69c23641/8101112_320_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8101112",
-          "price": 225.97,
-          "compare": 449.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ]
-      },
-      "brand": "Nordica"
     },
     {
       "name": "Lange Shadow 110 MV GW Ski Boots Mens",
@@ -145077,6 +144989,82 @@
       "brand": "Lange"
     },
     {
+      "name": "Head Formula 110 MV GW Ski Boots",
+      "url": "https://www.christysports.com/product/head-formula-110-mv-gw-ski-boots/8111532.html",
+      "price_new": "299.97",
+      "price_old": "599.00",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw8c667cfb/8111532_390_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8111532",
+          "price": 299.97,
+          "compare": 599.0,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
+        "last": [
+          "Medium (99\u2013101 mm)"
+        ]
+      },
+      "brand": "Head"
+    },
+    {
+      "name": "Head Formula 95 MV Ski Boots",
+      "url": "https://www.christysports.com/product/head-formula-95-mv-ski-boots/8107965.html",
+      "price_new": "239.97",
+      "price_old": "599.00",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwd29e3147/8107965_012_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8107965",
+          "price": 239.97,
+          "compare": 599.0,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "last": [
+          "Medium (99\u2013101 mm)"
+        ]
+      },
+      "brand": "Head"
+    },
+    {
       "name": "Rossignol Alltrack Pro 120LT MV GW Ski Boots Mens",
       "url": "https://www.christysports.com/product/rossignol-alltrack-pro-120lt-mv-gw-ski-boots-mens/8107991.html",
       "price_new": "300.97",
@@ -145125,77 +145113,6 @@
       "brand": "Rossignol"
     },
     {
-      "name": "Head Formula 95 MV Ski Boots",
-      "url": "https://www.christysports.com/product/head-formula-95-mv-ski-boots/8107965.html",
-      "price_new": "239.97",
-      "price_old": "599.00",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwd29e3147/8107965_012_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8107965",
-          "price": 239.97,
-          "compare": 599.0,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
-        ]
-      },
-      "brand": "Head"
-    },
-    {
-      "name": "Salomon Shift Pro 100 AT Ski Boots Womens",
-      "url": "https://www.christysports.com/product/salomon-shift-pro-100-at-ski-boots-womens/1045425.html",
-      "price_new": "260.97",
-      "price_old": "649.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw83f9703f/1045425_010_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1045425",
-          "price": 260.97,
-          "compare": 649.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Salomon"
-    },
-    {
       "name": "Tecnica Mach1 HV 95 Ski Boots Womens",
       "url": "https://www.christysports.com/product/tecnica-mach1-hv-95-ski-boots-womens/8100299.html",
       "price_new": "389.97",
@@ -145238,27 +145155,24 @@
       "brand": "Tecnica"
     },
     {
-      "name": "Salomon S/Pro MV 90 Ski Boots Womens",
-      "url": "https://www.christysports.com/product/salomon-spro-mv-90-ski-boots-womens/8105828.html",
-      "price_new": "200.97",
-      "price_old": "499.95",
+      "name": "Salomon Shift Pro 100 AT Ski Boots Womens",
+      "url": "https://www.christysports.com/product/salomon-shift-pro-100-at-ski-boots-womens/1045425.html",
+      "price_new": "260.97",
+      "price_old": "649.95",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw11e1dfde/8105828_320_1.jpg?sw=600&sh=600",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw83f9703f/1045425_010_1.jpg?sw=600&sh=600",
       "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "8105828",
-          "price": 200.97,
-          "compare": 499.95,
+          "variant_id": "1045425",
+          "price": 260.97,
+          "compare": 649.95,
           "available": null,
           "specs": {
             "flex": [
               "Medium (80\u2013100)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
             ],
             "gender": [
               "Women"
@@ -145269,9 +145183,6 @@
       "technical_specs": {
         "flex": [
           "Medium (80\u2013100)"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
         ],
         "gender": [
           "Women"
@@ -145326,6 +145237,48 @@
         ]
       },
       "brand": "Lange"
+    },
+    {
+      "name": "Salomon S/Pro MV 90 Ski Boots Womens",
+      "url": "https://www.christysports.com/product/salomon-spro-mv-90-ski-boots-womens/8105828.html",
+      "price_new": "200.97",
+      "price_old": "499.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw11e1dfde/8105828_320_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8105828",
+          "price": 200.97,
+          "compare": 499.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "last": [
+          "Medium (99\u2013101 mm)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Salomon"
     },
     {
       "name": "Nordica SpeedMachine 3 105 Ski Boots Womens",
@@ -145399,77 +145352,6 @@
       "brand": "Nordica"
     },
     {
-      "name": "Salomon S/Pro Alpha 110 EL Ski Boots Womens",
-      "url": "https://www.christysports.com/product/salomon-spro-alpha-110-el-ski-boots-womens/1045426.html",
-      "price_new": "280.97",
-      "price_old": "699.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwb155bc10/1045426_020_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1045426",
-          "price": 280.97,
-          "compare": 699.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Salomon"
-    },
-    {
-      "name": "Tecnica Cochise 120 GW Ski Boots",
-      "url": "https://www.christysports.com/product/tecnica-cochise-120-gw-ski-boots/8106110.html",
-      "price_new": "350.97",
-      "price_old": "699.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf1fed495/8106110_030_01.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8106110",
-          "price": 350.97,
-          "compare": 699.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "sole": [
-              "GripWalk"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "sole": [
-          "GripWalk"
-        ]
-      },
-      "brand": "Tecnica"
-    },
-    {
       "name": "Tecnica Cochise 105 Ski Boots Womens",
       "url": "https://www.christysports.com/product/tecnica-cochise-105-ski-boots-womens/8106117.html",
       "price_new": "350.97",
@@ -145506,33 +145388,27 @@
       "brand": "Tecnica"
     },
     {
-      "name": "Rossignol Speed 120 HV GW Ski Boots Mens",
-      "url": "https://www.christysports.com/product/rossignol-speed-120-hv-gw-ski-boots-mens/8107998.html",
-      "price_new": "264.97",
-      "price_old": "529.95",
+      "name": "Salomon S/Pro Alpha 110 EL Ski Boots Womens",
+      "url": "https://www.christysports.com/product/salomon-spro-alpha-110-el-ski-boots-womens/1045426.html",
+      "price_new": "280.97",
+      "price_old": "699.95",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw2aee9428/8107998_020_1.jpg?sw=600&sh=600",
-      "gender": "Men",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwb155bc10/1045426_020_1.jpg?sw=600&sh=600",
+      "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "8107998",
-          "price": 264.97,
-          "compare": 529.95,
+          "variant_id": "1045426",
+          "price": 280.97,
+          "compare": 699.95,
           "available": null,
           "specs": {
             "flex": [
               "Stiff (105\u2013120)"
             ],
-            "sole": [
-              "GripWalk"
-            ],
-            "last": [
-              "Wide (102 mm and over)"
-            ],
             "gender": [
-              "Men"
+              "Women"
             ]
           }
         }
@@ -145541,17 +145417,11 @@
         "flex": [
           "Stiff (105\u2013120)"
         ],
-        "sole": [
-          "GripWalk"
-        ],
-        "last": [
-          "Wide (102 mm and over)"
-        ],
         "gender": [
-          "Men"
+          "Women"
         ]
       },
-      "brand": "Rossignol"
+      "brand": "Salomon"
     },
     {
       "name": "Lange Shadow 110 LV Ski Boots Mens",
@@ -145625,6 +145495,169 @@
       "brand": "Salomon"
     },
     {
+      "name": "Lange LX 95 HV GW Ski Boots Womens",
+      "url": "https://www.christysports.com/product/lange-lx-95-hv-gw-ski-boots-womens/8101265.html",
+      "price_new": "192.97",
+      "price_old": "479.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw6768ebd5/8101265_045_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8101265",
+          "price": 192.97,
+          "compare": 479.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "last": [
+              "Wide (102 mm and over)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
+        "last": [
+          "Wide (102 mm and over)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Lange"
+    },
+    {
+      "name": "Rossignol Speed 120 HV GW Ski Boots Mens",
+      "url": "https://www.christysports.com/product/rossignol-speed-120-hv-gw-ski-boots-mens/8107998.html",
+      "price_new": "264.97",
+      "price_old": "529.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw2aee9428/8107998_020_1.jpg?sw=600&sh=600",
+      "gender": "Men",
+      "technical_offers": [
+        {
+          "variant_id": "8107998",
+          "price": 264.97,
+          "compare": 529.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "last": [
+              "Wide (102 mm and over)"
+            ],
+            "gender": [
+              "Men"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
+        "last": [
+          "Wide (102 mm and over)"
+        ],
+        "gender": [
+          "Men"
+        ]
+      },
+      "brand": "Rossignol"
+    },
+    {
+      "name": "Tecnica Mach1 MV 105 Ski Boots Womens",
+      "url": "https://www.christysports.com/product/tecnica-mach1-mv-105-ski-boots-womens/8111793.html",
+      "price_new": "350.97",
+      "price_old": "699.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw2fed39a3/8111793_030_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111793",
+          "price": 350.97,
+          "compare": 699.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        },
+        {
+          "variant_id": "1042209",
+          "price": 454.97,
+          "compare": 699.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "last": [
+          "Medium (99\u2013101 mm)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Tecnica",
+      "versions": [
+        {
+          "url": "https://www.christysports.com/product/tecnica-mach1-mv-105-ski-boots-womens/1042209.html",
+          "price_new": "454.97",
+          "price_old": "699.95",
+          "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw91d31084/1042209_020_1.jpg?sw=600&sh=600"
+        }
+      ]
+    },
+    {
       "name": "Salomon S/Pro HV 130 Ski Boots",
       "url": "https://www.christysports.com/product/salomon-spro-hv-130-ski-boots/8105822.html",
       "price_new": "374.97",
@@ -145695,157 +145728,6 @@
       "brand": "Rossignol"
     },
     {
-      "name": "Lange LX 95 HV GW Ski Boots Womens",
-      "url": "https://www.christysports.com/product/lange-lx-95-hv-gw-ski-boots-womens/8101265.html",
-      "price_new": "192.97",
-      "price_old": "479.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw6768ebd5/8101265_045_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8101265",
-          "price": 192.97,
-          "compare": 479.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "last": [
-              "Wide (102 mm and over)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "last": [
-          "Wide (102 mm and over)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Lange"
-    },
-    {
-      "name": "Tecnica Mach1 MV 105 Ski Boots Womens",
-      "url": "https://www.christysports.com/product/tecnica-mach1-mv-105-ski-boots-womens/8111793.html",
-      "price_new": "350.97",
-      "price_old": "699.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw2fed39a3/8111793_030_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111793",
-          "price": 350.97,
-          "compare": 699.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        },
-        {
-          "variant_id": "1042209",
-          "price": 454.97,
-          "compare": 699.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Tecnica",
-      "versions": [
-        {
-          "url": "https://www.christysports.com/product/tecnica-mach1-mv-105-ski-boots-womens/1042209.html",
-          "price_new": "454.97",
-          "price_old": "699.95",
-          "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw91d31084/1042209_020_1.jpg?sw=600&sh=600"
-        }
-      ]
-    },
-    {
-      "name": "Dalbello Panterra 85 Ski Boots Womens",
-      "url": "https://www.christysports.com/product/dalbello-panterra-85-ski-boots-womens/8106943.html",
-      "price_new": "180.97",
-      "price_old": "449.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwd139578a/8106943_030_1[1].jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8106943",
-          "price": 180.97,
-          "compare": 449.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Dalbello"
-    },
-    {
       "name": "Head Formula 120 MV GW Black Ski Boots",
       "url": "https://www.christysports.com/product/head-formula-120-mv-gw-black-ski-boots/8107962.html",
       "price_new": "279.97",
@@ -145887,20 +145769,20 @@
       "brand": "Head"
     },
     {
-      "name": "Dalbello Panterra 95 Ski Boots Womens",
-      "url": "https://www.christysports.com/product/dalbello-panterra-95-ski-boots-womens/1045498.html",
-      "price_new": "220.97",
-      "price_old": "549.99",
+      "name": "Dalbello Panterra 85 Ski Boots Womens",
+      "url": "https://www.christysports.com/product/dalbello-panterra-85-ski-boots-womens/8106943.html",
+      "price_new": "180.97",
+      "price_old": "449.99",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw096bfca5/1045498_010_1[1].jpg?sw=600&sh=600",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwd139578a/8106943_030_1[1].jpg?sw=600&sh=600",
       "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "1045498",
-          "price": 220.97,
-          "compare": 549.99,
+          "variant_id": "8106943",
+          "price": 180.97,
+          "compare": 449.99,
           "available": null,
           "specs": {
             "flex": [
@@ -145923,20 +145805,20 @@
       "brand": "Dalbello"
     },
     {
-      "name": "Dalbello Panterra 95 ID Ski Boots Womens",
-      "url": "https://www.christysports.com/product/dalbello-panterra-95-id-ski-boots-womens/8106942.html",
-      "price_new": "240.97",
-      "price_old": "599.99",
+      "name": "Dalbello Panterra 95 Ski Boots Womens",
+      "url": "https://www.christysports.com/product/dalbello-panterra-95-ski-boots-womens/1045498.html",
+      "price_new": "220.97",
+      "price_old": "549.99",
       "availability": "Check store",
       "part": "Boots",
       "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwfeecac5f/8106942_010_1.jpg?sw=600&sh=600",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw096bfca5/1045498_010_1[1].jpg?sw=600&sh=600",
       "gender": "Women",
       "technical_offers": [
         {
-          "variant_id": "8106942",
-          "price": 240.97,
-          "compare": 599.99,
+          "variant_id": "1045498",
+          "price": 220.97,
+          "compare": 549.99,
           "available": null,
           "specs": {
             "flex": [
@@ -145999,6 +145881,42 @@
         ]
       },
       "brand": "Nordica"
+    },
+    {
+      "name": "Dalbello Panterra 95 ID Ski Boots Womens",
+      "url": "https://www.christysports.com/product/dalbello-panterra-95-id-ski-boots-womens/8106942.html",
+      "price_new": "240.97",
+      "price_old": "599.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwfeecac5f/8106942_010_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8106942",
+          "price": 240.97,
+          "compare": 599.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Dalbello"
     },
     {
       "name": "Lange Shadow 95 LV Ski Boots Womens",
@@ -146127,6 +146045,119 @@
       "brand": "Lange"
     },
     {
+      "name": "Nordica SportMachine 3 120 Ski Boots",
+      "url": "https://www.christysports.com/product/nordica-sportmachine-3-120-ski-boots/8101111.html",
+      "price_new": "300.97",
+      "price_old": "599.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw14004f90/8101111-020-01.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8101111",
+          "price": 300.97,
+          "compare": 599.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ]
+      },
+      "brand": "Nordica"
+    },
+    {
+      "name": "Tecnica Mach1 LV 115 Ski Boots Womens",
+      "url": "https://www.christysports.com/product/tecnica-mach1-lv-115-ski-boots-womens/8111791.html",
+      "price_new": "375.97",
+      "price_old": "749.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw0acb31fb/8111791_040_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111791",
+          "price": 375.97,
+          "compare": 749.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Narrow (98 mm and under)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "last": [
+          "Narrow (98 mm and under)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Tecnica"
+    },
+    {
+      "name": "Dalbello Panterra 75 GW LS Boots Womens",
+      "url": "https://www.christysports.com/product/dalbello-panterra-75-gw-ls-boots-womens/8106945.html",
+      "price_new": "220.97",
+      "price_old": "549.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwa5d1494f/8106945_020_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8106945",
+          "price": 220.97,
+          "compare": 549.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Soft (under 80)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Soft (under 80)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Dalbello"
+    },
+    {
       "name": "Rossignol Hi-Speed Pro 120 MV GW Ski Boots Mens",
       "url": "https://www.christysports.com/product/rossignol-hi-speed-pro-120-mv-gw-ski-boots-mens/1041008.html",
       "price_new": "300.97",
@@ -146173,155 +146204,6 @@
         ]
       },
       "brand": "Rossignol"
-    },
-    {
-      "name": "Tecnica Mach1 LV 115 Ski Boots Womens",
-      "url": "https://www.christysports.com/product/tecnica-mach1-lv-115-ski-boots-womens/8111791.html",
-      "price_new": "375.97",
-      "price_old": "749.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw0acb31fb/8111791_040_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111791",
-          "price": 375.97,
-          "compare": 749.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Narrow (98 mm and under)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "last": [
-          "Narrow (98 mm and under)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Tecnica"
-    },
-    {
-      "name": "Nordica SportMachine 3 120 Ski Boots",
-      "url": "https://www.christysports.com/product/nordica-sportmachine-3-120-ski-boots/8101111.html",
-      "price_new": "300.97",
-      "price_old": "599.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw14004f90/8101111-020-01.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8101111",
-          "price": 300.97,
-          "compare": 599.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ]
-      },
-      "brand": "Nordica"
-    },
-    {
-      "name": "Dalbello Panterra 75 GW LS Boots Womens",
-      "url": "https://www.christysports.com/product/dalbello-panterra-75-gw-ls-boots-womens/8106945.html",
-      "price_new": "220.97",
-      "price_old": "549.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwa5d1494f/8106945_020_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8106945",
-          "price": 220.97,
-          "compare": 549.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Soft (under 80)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Soft (under 80)"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Dalbello"
-    },
-    {
-      "name": "Lange RSJ 65 Ski Boots Junior",
-      "url": "https://www.christysports.com/product/lange-rsj-65-ski-boots-junior/8111691.html",
-      "price_new": "164.97",
-      "price_old": "274.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw0c5ff985/8111691_047_1.jpg?sw=600&sh=600",
-      "gender": "Kids",
-      "technical_offers": [
-        {
-          "variant_id": "8111691",
-          "price": 164.97,
-          "compare": 274.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Soft (under 80)"
-            ],
-            "gender": [
-              "Kids"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Soft (under 80)"
-        ],
-        "gender": [
-          "Kids"
-        ]
-      },
-      "brand": "Lange"
     },
     {
       "name": "Scarpa 4-Quattro XT Ski Boots",
@@ -146394,6 +146276,41 @@
         ],
         "last": [
           "Wide (102 mm and over)"
+        ]
+      },
+      "brand": "Tecnica"
+    },
+    {
+      "name": "Tecnica Cochise 120 GW Ski Boots",
+      "url": "https://www.christysports.com/product/tecnica-cochise-120-gw-ski-boots/8106110.html",
+      "price_new": "350.97",
+      "price_old": "699.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf1fed495/8106110_030_01.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8106110",
+          "price": 350.97,
+          "compare": 699.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "sole": [
+              "GripWalk"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "sole": [
+          "GripWalk"
         ]
       },
       "brand": "Tecnica"
@@ -146638,6 +146555,16 @@
       "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwc6e76add/8108590_010_1.jpg?sw=600&sh=600"
     },
     {
+      "name": "Swix Blackline Stingray Carbon Ski Poles",
+      "url": "https://www.christysports.com/product/swix-blackline-stingray-carbon-ski-poles/8108588.html",
+      "price_new": "52.97",
+      "price_old": "129.99",
+      "availability": "Check store",
+      "part": "Poles",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7c5d4ef2/8108588_020_1.jpg?sw=600&sh=600"
+    },
+    {
       "name": "Rossignol Tactic Ski Poles Jr",
       "url": "https://www.christysports.com/product/rossignol-tactic-ski-poles-jr/8111824.html",
       "price_new": "19.97",
@@ -146666,16 +146593,6 @@
         ]
       },
       "brand": "Rossignol"
-    },
-    {
-      "name": "Swix Blackline Stingray Carbon Ski Poles",
-      "url": "https://www.christysports.com/product/swix-blackline-stingray-carbon-ski-poles/8108588.html",
-      "price_new": "52.97",
-      "price_old": "129.99",
-      "availability": "Check store",
-      "part": "Poles",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7c5d4ef2/8108588_020_1.jpg?sw=600&sh=600"
     },
     {
       "name": "Rossignol Tactic Ski Poles Juniors",
@@ -146944,6 +146861,47 @@
       }
     },
     {
+      "name": "Salomon Pioneer LT Ski Helmet",
+      "url": "https://www.skatepro.com/en-us/316-52067.htm",
+      "price_new": "81.95",
+      "price_old": "119.95",
+      "availability": "In stock",
+      "part": "Helmets",
+      "store": "SkatePro",
+      "brand": "Salomon",
+      "image": "https://cdn.skatepro.com/product/400/salomon-pioneer-lt-ski-helmet-p8.webp",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.skatepro.com/en-us/316-52067.htm",
+          "price": 81.95,
+          "compare": 119.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Snow"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Snow"
+        ]
+      }
+    },
+    {
       "name": "Atomic Savor Amid Visor HD Ski Helmet",
       "url": "https://www.skatepro.com/en-us/316-44710.htm",
       "price_new": "173.95",
@@ -147028,47 +146986,6 @@
         ],
         "rotational": [
           "MIPS"
-        ]
-      }
-    },
-    {
-      "name": "Salomon Pioneer LT Ski Helmet",
-      "url": "https://www.skatepro.com/en-us/316-52067.htm",
-      "price_new": "81.95",
-      "price_old": "119.95",
-      "availability": "In stock",
-      "part": "Helmets",
-      "store": "SkatePro",
-      "brand": "Salomon",
-      "image": "https://cdn.skatepro.com/product/400/salomon-pioneer-lt-ski-helmet-p8.webp",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.skatepro.com/en-us/316-52067.htm",
-          "price": 81.95,
-          "compare": 119.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Snow"
         ]
       }
     },
