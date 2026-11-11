@@ -6560,14 +6560,14 @@
           }
         },
         "evo_Boots": {
-          "count": 277,
+          "count": 276,
           "failed": false,
           "diagnostics": {
             "expected_count": 296,
             "baseline_samples": 5,
             "median_absolute_deviation": 2,
-            "actual_count": 277,
-            "percentage_change": -6.4,
+            "actual_count": 276,
+            "percentage_change": -6.8,
             "reason": "normal_variation"
           }
         },
@@ -6620,7 +6620,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-11T01:38:07+00:00"
+      "scanned_at": "2026-11-11T06:34:55+00:00"
     }
   ],
   "baseline": {
@@ -6762,7 +6762,7 @@
     },
     "evo_Boots": {
       "date": "2026-11-11",
-      "count": 277
+      "count": 276
     }
   },
   "completeness_baseline": {
@@ -8891,7 +8891,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 277
+        "count": 276
       }
     ],
     "evo_Helmets": [

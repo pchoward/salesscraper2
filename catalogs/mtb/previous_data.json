@@ -20521,30 +20521,7 @@
               "S"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "frame_size": [
-          "S"
-        ]
-      }
-    },
-    {
-      "name": "Santa Cruz Vala C GX AXS",
-      "url": "https://mikesbikes.com/products/santa-cruz-vala-c-gx-axs-2026",
-      "price_new": "8549.00",
-      "price_old": "10049.00",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Mike's Bikes",
-      "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN FULL POWER/VALA",
-      "brand": "Santa Cruz",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Vala-C-GX-AXS-2026_Midnight-Green.jpg?v=1752599787",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Vala-C-GX-AXS-2026_Midnight-Green.jpg?v=1752599787",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Vala-C-GX-AXS-2026_Gloss-Grey.jpg?v=1752599787"
-      ],
-      "technical_offers": [
+        },
         {
           "variant_id": 43054257340485,
           "price": 8549.0,
@@ -20614,12 +20591,20 @@
       ],
       "technical_specs": {
         "frame_size": [
+          "S",
           "L",
           "M",
-          "S",
           "XL"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://mikesbikes.com/products/santa-cruz-vala-c-gx-axs-2026",
+          "price_new": "8549.00",
+          "price_old": "10049.00",
+          "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Vala-C-GX-AXS-2026_Midnight-Green.jpg?v=1752599787"
+        }
+      ]
     },
     {
       "name": "Santa Cruz Bullit 4 C 70",
@@ -21350,17 +21335,6 @@
       ],
       "technical_offers": [
         {
-          "variant_id": 42575098380357,
-          "price": 3999.77,
-          "compare": 7299.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "XL"
-            ]
-          }
-        },
-        {
           "variant_id": 42575098445893,
           "price": 3999.77,
           "compare": 7299.0,
@@ -21374,7 +21348,6 @@
       ],
       "technical_specs": {
         "frame_size": [
-          "XL",
           "XXL"
         ]
       }
@@ -26938,33 +26911,6 @@
           }
         },
         {
-          "variant_id": 43684143169605,
-          "price": 180.77,
-          "compare": 300.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "certification": [
-              "CPSC (US bike)",
-              "EN 1078 (EU bike / skate)"
-            ],
-            "helmet_style": [
-              "Half shell (trail)"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
-        },
-        {
           "variant_id": 43684143202373,
           "price": 180.77,
           "compare": 300.0,
@@ -27789,7 +27735,9 @@
       "protection_type": null,
       "protection_sizes": [
         "L",
-        "XL"
+        "XL",
+        "S",
+        "M"
       ],
       "technical_offers": [
         {
@@ -27825,6 +27773,74 @@
               "XL"
             ]
           }
+        },
+        {
+          "variant_id": 40645946998853,
+          "price": 27.77,
+          "compare": 39.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 40645946933317,
+          "price": 27.77,
+          "compare": 39.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 40645946900549,
+          "price": 27.77,
+          "compare": 39.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 40645947031621,
+          "price": 27.77,
+          "compare": 39.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
         }
       ],
       "technical_specs": {
@@ -27836,9 +27852,19 @@
         ],
         "prot_size": [
           "L",
-          "XL"
+          "XL",
+          "M",
+          "S"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://mikesbikes.com/products/pearl-izumi-expedition-gel-gloves-womens",
+          "price_new": "27.77",
+          "price_old": "39.99",
+          "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/my7se0sephyi1bpdfb3m_1000x_6a03cb77-5230-410a-a7e6-058c46ebfb31.png?v=1698255071"
+        }
+      ]
     },
     {
       "name": "POC Axion Race MIPS Helmet",
@@ -29562,113 +29588,6 @@
         ],
         "prot_size": [
           "XS"
-        ]
-      }
-    },
-    {
-      "name": "Pearl Izumi Expedition Gel Gloves (Women's)",
-      "url": "https://mikesbikes.com/products/pearl-izumi-expedition-gel-gloves-womens",
-      "price_new": "27.77",
-      "price_old": "39.99",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Mike's Bikes",
-      "product_type": "APPAREL/GLOVES/LONG FINGER",
-      "brand": "Pearl Izumi",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/my7se0sephyi1bpdfb3m_1000x_6a03cb77-5230-410a-a7e6-058c46ebfb31.png?v=1698255071",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/my7se0sephyi1bpdfb3m_1000x_6a03cb77-5230-410a-a7e6-058c46ebfb31.png?v=1698255071",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/jnyo34stoivlxu5cmbxn_1000x_c5201524-bf2b-4b55-b9c9-f3dda18db624.png?v=1698255082"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40645946998853,
-          "price": 27.77,
-          "compare": 39.99,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        },
-        {
-          "variant_id": 40645946933317,
-          "price": 27.77,
-          "compare": 39.99,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        },
-        {
-          "variant_id": 40645946900549,
-          "price": 27.77,
-          "compare": 39.99,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
-        },
-        {
-          "variant_id": 40645947031621,
-          "price": 27.77,
-          "compare": 39.99,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "L",
-          "M",
-          "S",
-          "XL"
         ]
       }
     },
@@ -56134,17 +56053,6 @@
           }
         },
         {
-          "variant_id": 49874209734948,
-          "price": 3699.99,
-          "compare": 4499.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "L"
-            ]
-          }
-        },
-        {
           "variant_id": 49874209767716,
           "price": 3699.99,
           "compare": 4499.99,
@@ -56158,7 +56066,6 @@
       ],
       "technical_specs": {
         "frame_size": [
-          "L",
           "M",
           "S",
           "XL"
@@ -58503,7 +58410,7 @@
     },
     {
       "name": "Ex-Demo \u2013 Polygon Xtrada 5 - Mountain Bike [New]",
-      "url": "https://www.bikesonline.com/products/ex-demo-polygon-xtrada-5-mountain-bike-new-1",
+      "url": "https://www.bikesonline.com/products/ex-demo-polygon-xtrada-5-mountain-bike-new",
       "price_new": "719.99",
       "price_old": "899.99",
       "availability": "In stock",
@@ -58524,12 +58431,27 @@
         "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_dcu5.jpg?v=1769048778",
         "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_dcu3.jpg?v=1769048778",
         "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Polygon_Xtrada_5_-_Mountain_Bike_New_dcu_4.jpg?v=1769048717",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC08020.jpg?v=1793729545",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC08021.jpg?v=1793729545",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC08022.jpg?v=1793729545",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC08023.jpg?v=1793729545"
+        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07884.jpg?v=1790884763",
+        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07885.jpg?v=1790884764",
+        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07886.jpg?v=1790884763",
+        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07887.jpg?v=1790884763",
+        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07888.jpg?v=1790884763",
+        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07889.jpg?v=1790884763",
+        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07890.jpg?v=1790884763",
+        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07891.jpg?v=1790884763"
       ],
       "technical_offers": [
+        {
+          "variant_id": 67590302925092,
+          "price": 719.99,
+          "compare": 899.99,
+          "available": true,
+          "specs": {
+            "frame_size": [
+              "XL"
+            ]
+          }
+        },
         {
           "variant_id": 68003447701796,
           "price": 719.99,
@@ -58544,9 +58466,18 @@
       ],
       "technical_specs": {
         "frame_size": [
+          "XL",
           "L"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.bikesonline.com/products/ex-demo-polygon-xtrada-5-mountain-bike-new-1",
+          "price_new": "719.99",
+          "price_old": "899.99",
+          "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_1.jpg?v=1769048779"
+        }
+      ]
     },
     {
       "name": "Ex-Demo \u2013 Polygon Siskiu TE-N Bosch E-Mountain Bike",
@@ -58649,57 +58580,6 @@
         ],
         "wheel_size": [
           "29"
-        ]
-      }
-    },
-    {
-      "name": "Ex-Demo \u2013 Polygon Xtrada 5 - Mountain Bike [New]",
-      "url": "https://www.bikesonline.com/products/ex-demo-polygon-xtrada-5-mountain-bike-new",
-      "price_new": "719.99",
-      "price_old": "899.99",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Bikes Online",
-      "product_type": "Bikes",
-      "brand": "Polygon",
-      "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_1.jpg?v=1769048779",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_1.jpg?v=1769048779",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_icons.jpg?v=1769048779",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_2.jpg?v=1769048779",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_4.jpg?v=1769048779",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_3.jpg?v=1769048779",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_DCU.jpg?v=1769048779",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_scu3.jpg?v=1769048778",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_dcu12.jpg?v=1769048778",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_dcu5.jpg?v=1769048778",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PolygonXtrada5-MountainBike_New_dcu3.jpg?v=1769048778",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Polygon_Xtrada_5_-_Mountain_Bike_New_dcu_4.jpg?v=1769048717",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07884.jpg?v=1790884763",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07885.jpg?v=1790884764",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07886.jpg?v=1790884763",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07887.jpg?v=1790884763",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07888.jpg?v=1790884763",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07889.jpg?v=1790884763",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07890.jpg?v=1790884763",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/DSC07891.jpg?v=1790884763"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 67590302925092,
-          "price": 719.99,
-          "compare": 899.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "XL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "frame_size": [
-          "XL"
         ]
       }
     },
@@ -88610,7 +88490,7 @@
     {
       "name": "7 iDP Project 21 Pro Trail MTB Helmet - LTD Edition - Rally",
       "url": "https://www.coloradocyclist.com/products/7-idp-project-21-pro-trail-mtb-helmet-ltd-edition-rally",
-      "price_new": "249.99",
+      "price_new": "124.95",
       "price_old": "299.99",
       "availability": "In stock",
       "part": "Protection",
@@ -88637,7 +88517,7 @@
       "technical_offers": [
         {
           "variant_id": 48772198334704,
-          "price": 249.99,
+          "price": 124.95,
           "compare": 299.99,
           "available": true,
           "specs": {
@@ -88661,7 +88541,7 @@
         },
         {
           "variant_id": 48772198367472,
-          "price": 249.99,
+          "price": 124.95,
           "compare": 299.99,
           "available": true,
           "specs": {
@@ -88685,7 +88565,7 @@
         },
         {
           "variant_id": 48772198400240,
-          "price": 249.99,
+          "price": 124.95,
           "compare": 299.99,
           "available": true,
           "specs": {
@@ -89873,7 +89753,7 @@
     {
       "name": "7 iDP Project 21 Trail MTB Helmet - Matt Electric Blue",
       "url": "https://www.coloradocyclist.com/products/7-idp-project-21-trail-mtb-helmet-matt-electric-blue",
-      "price_new": "119.99",
+      "price_new": "74.95",
       "price_old": "149.99",
       "availability": "In stock",
       "part": "Protection",
@@ -89896,7 +89776,7 @@
       "technical_offers": [
         {
           "variant_id": 48466382782704,
-          "price": 119.99,
+          "price": 74.95,
           "compare": 149.99,
           "available": true,
           "specs": {
@@ -89920,7 +89800,7 @@
         },
         {
           "variant_id": 48466382815472,
-          "price": 119.99,
+          "price": 74.95,
           "compare": 149.99,
           "available": true,
           "specs": {
@@ -89967,7 +89847,7 @@
     {
       "name": "7 iDP Project 21 Pro Trail MTB Helmet - Matt Blue-Black Fade",
       "url": "https://www.coloradocyclist.com/products/7-idp-project-21-pro-trail-mtb-helmet-matt-blue-black-fade",
-      "price_new": "112.99",
+      "price_new": "94.95",
       "price_old": "189.99",
       "availability": "In stock",
       "part": "Protection",
@@ -89992,7 +89872,7 @@
       "technical_offers": [
         {
           "variant_id": 48466382618864,
-          "price": 112.99,
+          "price": 94.95,
           "compare": 189.99,
           "available": true,
           "specs": {
@@ -90013,7 +89893,7 @@
         },
         {
           "variant_id": 48466382651632,
-          "price": 149.99,
+          "price": 94.95,
           "compare": 189.99,
           "available": true,
           "specs": {
@@ -90034,7 +89914,7 @@
         },
         {
           "variant_id": 48466382684400,
-          "price": 149.99,
+          "price": 94.95,
           "compare": 189.99,
           "available": true,
           "specs": {
@@ -90077,7 +89957,7 @@
     {
       "name": "7 iDP Project 21 Trail MTB Helmet - Matt Ice White",
       "url": "https://www.coloradocyclist.com/products/7-idp-project-21-trail-mtb-helmet-matt-ice-white",
-      "price_new": "119.99",
+      "price_new": "74.95",
       "price_old": "149.99",
       "availability": "In stock",
       "part": "Protection",
@@ -90100,7 +89980,7 @@
       "technical_offers": [
         {
           "variant_id": 48466379768048,
-          "price": 119.99,
+          "price": 74.95,
           "compare": 149.99,
           "available": true,
           "specs": {
@@ -90124,7 +90004,7 @@
         },
         {
           "variant_id": 48466379833584,
-          "price": 119.99,
+          "price": 74.95,
           "compare": 149.99,
           "available": true,
           "specs": {
@@ -90171,7 +90051,7 @@
     {
       "name": "7 iDP Project 21 Pro Trail MTB Helmet - Matt Black Camo",
       "url": "https://www.coloradocyclist.com/products/7-idp-project-21-pro-trail-mtb-helmet-matt-black-camo",
-      "price_new": "112.99",
+      "price_new": "94.95",
       "price_old": "189.99",
       "availability": "In stock",
       "part": "Protection",
@@ -90196,7 +90076,7 @@
       "technical_offers": [
         {
           "variant_id": 48466374787312,
-          "price": 112.99,
+          "price": 94.95,
           "compare": 189.99,
           "available": true,
           "specs": {
@@ -90217,7 +90097,7 @@
         },
         {
           "variant_id": 48466374820080,
-          "price": 149.99,
+          "price": 94.95,
           "compare": 189.99,
           "available": true,
           "specs": {
@@ -90238,7 +90118,7 @@
         },
         {
           "variant_id": 48466374852848,
-          "price": 112.99,
+          "price": 94.95,
           "compare": 189.99,
           "available": true,
           "specs": {
@@ -90281,7 +90161,7 @@
     {
       "name": "7 iDP Project 21 Trail MTB Helmet - Matt Black",
       "url": "https://www.coloradocyclist.com/products/7-idp-project-21-trail-mtb-helmet-matt-black",
-      "price_new": "119.99",
+      "price_new": "74.95",
       "price_old": "149.99",
       "availability": "In stock",
       "part": "Protection",
@@ -90304,7 +90184,7 @@
       "technical_offers": [
         {
           "variant_id": 48466374689008,
-          "price": 119.99,
+          "price": 74.95,
           "compare": 149.99,
           "available": true,
           "specs": {
@@ -90328,7 +90208,7 @@
         },
         {
           "variant_id": 48466374754544,
-          "price": 119.99,
+          "price": 74.95,
           "compare": 149.99,
           "available": true,
           "specs": {
@@ -96913,6 +96793,106 @@
         "prot_size": [
           "S",
           "XS"
+        ]
+      }
+    },
+    {
+      "name": "7 iDP M1 Full Face Helmet - Sea Foam Green",
+      "url": "https://www.coloradocyclist.com/products/7-idp-m1-full-face-helmet-sea-foam-green",
+      "price_new": "115.95",
+      "price_old": "144.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Colorado Cyclist",
+      "product_type": "Full Face Helmets",
+      "brand": "7iDP",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0000_Layer_1_1800x1800_601c36a1-9d7c-4e84-bc17-4792370fd7c9.webp?v=1779874735",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0000_Layer_1_1800x1800_601c36a1-9d7c-4e84-bc17-4792370fd7c9.webp?v=1779874735",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0003_Layer_2_1800x1800_a3810526-9404-4067-97bf-fb01cad5356e.webp?v=1779874875"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "M",
+        "L",
+        "XL"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 48772199481584,
+          "price": 115.95,
+          "compare": 144.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 48772199514352,
+          "price": 115.95,
+          "compare": 144.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 48772199547120,
+          "price": 115.95,
+          "compare": 144.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Full face"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "XL"
         ]
       }
     },
@@ -104955,7 +104935,9 @@
       "protection_type": null,
       "protection_sizes": [
         "S",
-        "XL"
+        "XL",
+        "M",
+        "L"
       ],
       "technical_offers": [
         {
@@ -104991,6 +104973,88 @@
               "XL"
             ]
           }
+        },
+        {
+          "variant_id": 40551202652220,
+          "price": 28.2,
+          "compare": 47.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 40551202684988,
+          "price": 28.2,
+          "compare": 47.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 40551202717756,
+          "price": 28.2,
+          "compare": 47.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 40551202750524,
+          "price": 28.2,
+          "compare": 47.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40551202783292,
+          "price": 28.2,
+          "compare": 47.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
         }
       ],
       "technical_specs": {
@@ -105002,9 +105066,19 @@
         ],
         "prot_size": [
           "S",
-          "XL"
+          "XL",
+          "L",
+          "M"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.troyleedesigns.com/products/sp23-womens-luxe-glove-solid-black",
+          "price_new": "28.20",
+          "price_old": "47.00",
+          "image": "https://cdn.shopify.com/s/files/1/0248/5587/1548/products/TLD_LUXE_GLOVE_SOLID_BLK_01_58bb4a91-d0d8-4cba-8a0f-da7ddd9f3270.jpg?v=1679431860"
+        }
+      ]
     },
     {
       "name": "Troy Lee Designs Womens Ace Glove Panther Honey",
@@ -106095,128 +106169,6 @@
       }
     },
     {
-      "name": "Troy Lee Designs Womens Luxe Glove Solid Black",
-      "url": "https://www.troyleedesigns.com/products/sp23-womens-luxe-glove-solid-black",
-      "price_new": "28.20",
-      "price_old": "47.00",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Troy Lee Designs",
-      "product_type": "GLOVES",
-      "brand": "Troy Lee Designs",
-      "image": "https://cdn.shopify.com/s/files/1/0248/5587/1548/products/TLD_LUXE_GLOVE_SOLID_BLK_01_58bb4a91-d0d8-4cba-8a0f-da7ddd9f3270.jpg?v=1679431860",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0248/5587/1548/products/TLD_LUXE_GLOVE_SOLID_BLK_01_58bb4a91-d0d8-4cba-8a0f-da7ddd9f3270.jpg?v=1679431860",
-        "https://cdn.shopify.com/s/files/1/0248/5587/1548/products/TLD_LUXE_GLOVE_SOLID_BLK_01.png?v=1679431860",
-        "https://cdn.shopify.com/s/files/1/0248/5587/1548/products/TLD_LUXE_GLOVE_SOLID_BLK_02_2d9e3afd-69a8-4226-bbde-e42046c8ea99.jpg?v=1679431861"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40551202652220,
-          "price": 28.2,
-          "compare": 47.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        },
-        {
-          "variant_id": 40551202684988,
-          "price": 28.2,
-          "compare": 47.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        },
-        {
-          "variant_id": 40551202717756,
-          "price": 28.2,
-          "compare": 47.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
-        },
-        {
-          "variant_id": 40551202750524,
-          "price": 28.2,
-          "compare": 47.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XL"
-            ]
-          }
-        },
-        {
-          "variant_id": 40551202783292,
-          "price": 28.2,
-          "compare": 47.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "L",
-          "M",
-          "S",
-          "XL"
-        ]
-      }
-    },
-    {
       "name": "Troy Lee Designs Womens Ace 2.0 Glove Twisted Checkers Deep Purple",
       "url": "https://www.troyleedesigns.com/products/sp25-womens-ace-2-0-glove-twisted-checkers-deep-purple",
       "price_new": "28.20",
@@ -107022,7 +106974,7 @@
     },
     {
       "name": "Alpinestars Techstar Gloves",
-      "url": "https://www.alpinestars.com/products/2020-techstar-gloves-1-steel-gray-coral",
+      "url": "https://www.alpinestars.com/products/2020-techstar-gloves-1",
       "price_new": "34.87",
       "price_old": "49.95",
       "availability": "In stock",
@@ -107030,20 +106982,22 @@
       "store": "Alpinestars",
       "product_type": "Gloves",
       "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-053-fr_techstar-glove_8a3c307e-cb7d-4d62-8895-d8037bd8a05f.png?v=1783761695",
+      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-1303-fr_techstar-glove_1ae2d5dd-2f68-40d3-81f2-fc38b2870558.png?v=1783758355",
       "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-053-fr_techstar-glove_8a3c307e-cb7d-4d62-8895-d8037bd8a05f.png?v=1783761695",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-053-ba_techstar-glove_cf6a8ac1-9915-4280-b825-ebd9815cc91a.png?v=1783761700"
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-1303-fr_techstar-glove_1ae2d5dd-2f68-40d3-81f2-fc38b2870558.png?v=1783758355",
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-1303-ba_techstar-glove_d26a655f-c617-431e-992e-b56afb007337.png?v=1783758360"
       ],
       "protection_type": null,
       "protection_sizes": [
         "M",
         "XL",
-        "XXL"
+        "XXL",
+        "S",
+        "L"
       ],
       "technical_offers": [
         {
-          "variant_id": 40390659768378,
+          "variant_id": 40390659014714,
           "price": 34.87,
           "compare": 49.95,
           "available": true,
@@ -107060,7 +107014,7 @@
           }
         },
         {
-          "variant_id": 40390659833914,
+          "variant_id": 40390659178554,
           "price": 34.87,
           "compare": 49.95,
           "available": true,
@@ -107077,7 +107031,7 @@
           }
         },
         {
-          "variant_id": 40390659866682,
+          "variant_id": 40390659244090,
           "price": 34.87,
           "compare": 49.95,
           "available": true,
@@ -107092,46 +107046,21 @@
               "XXL"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "M",
-          "XL",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Techstar Gloves",
-      "url": "https://www.alpinestars.com/products/2020-techstar-gloves-1-black",
-      "price_new": "34.87",
-      "price_old": "49.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-10-fr_techstar-glove_8859d641-2051-402f-9e1a-bff4354ccead.png?v=1783760820",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-10-fr_techstar-glove_8859d641-2051-402f-9e1a-bff4354ccead.png?v=1783760820",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-10-ba_techstar-glove_c53a1572-a0ef-4d76-9aec-fa79c1f476ba.png?v=1783760824"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "technical_offers": [
+        },
+        {
+          "variant_id": 40390659276858,
+          "price": 34.87,
+          "compare": 49.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        },
         {
           "variant_id": 40390659539002,
           "price": 34.87,
@@ -107216,44 +107145,7 @@
               "XXL"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "L",
-          "M",
-          "S",
-          "XL",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Techstar Gloves",
-      "url": "https://www.alpinestars.com/products/2020-techstar-gloves-1-emerald",
-      "price_new": "34.87",
-      "price_old": "49.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-6000-fr_techstar-glove_6801d140-96e4-4df0-ad70-c663e0709da3.png?v=1783758610",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-6000-fr_techstar-glove_6801d140-96e4-4df0-ad70-c663e0709da3.png?v=1783758610",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-6000-ba_techstar-glove_5668b6a7-c27e-4b19-9ffc-1948d81d3267.png?v=1783758614"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "XXL"
-      ],
-      "technical_offers": [
+        },
         {
           "variant_id": 40390659473466,
           "price": 34.87,
@@ -107284,44 +107176,9 @@
               "Adult"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Techstar Gloves",
-      "url": "https://www.alpinestars.com/products/2020-techstar-gloves-1",
-      "price_new": "34.87",
-      "price_old": "49.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-1303-fr_techstar-glove_1ae2d5dd-2f68-40d3-81f2-fc38b2870558.png?v=1783758355",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-1303-fr_techstar-glove_1ae2d5dd-2f68-40d3-81f2-fc38b2870558.png?v=1783758355",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-1303-ba_techstar-glove_d26a655f-c617-431e-992e-b56afb007337.png?v=1783758360"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "M",
-        "XL",
-        "XXL"
-      ],
-      "technical_offers": [
+        },
         {
-          "variant_id": 40390659014714,
+          "variant_id": 40390659768378,
           "price": 34.87,
           "compare": 49.95,
           "available": true,
@@ -107338,7 +107195,7 @@
           }
         },
         {
-          "variant_id": 40390659178554,
+          "variant_id": 40390659833914,
           "price": 34.87,
           "compare": 49.95,
           "available": true,
@@ -107355,7 +107212,7 @@
           }
         },
         {
-          "variant_id": 40390659244090,
+          "variant_id": 40390659866682,
           "price": 34.87,
           "compare": 49.95,
           "available": true,
@@ -107370,20 +107227,6 @@
               "XXL"
             ]
           }
-        },
-        {
-          "variant_id": 40390659276858,
-          "price": 34.87,
-          "compare": 49.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ]
-          }
         }
       ],
       "technical_specs": {
@@ -107396,13 +107239,35 @@
         "prot_size": [
           "M",
           "XL",
-          "XXL"
+          "XXL",
+          "L",
+          "S"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.alpinestars.com/products/2020-techstar-gloves-1-black",
+          "price_new": "34.87",
+          "price_old": "49.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-10-fr_techstar-glove_8859d641-2051-402f-9e1a-bff4354ccead.png?v=1783760820"
+        },
+        {
+          "url": "https://www.alpinestars.com/products/2020-techstar-gloves-1-emerald",
+          "price_new": "34.87",
+          "price_old": "49.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-6000-fr_techstar-glove_6801d140-96e4-4df0-ad70-c663e0709da3.png?v=1783758610"
+        },
+        {
+          "url": "https://www.alpinestars.com/products/2020-techstar-gloves-1-steel-gray-coral",
+          "price_new": "34.87",
+          "price_old": "49.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1560120-053-fr_techstar-glove_8a3c307e-cb7d-4d62-8895-d8037bd8a05f.png?v=1783761695"
+        }
+      ]
     },
     {
       "name": "Alpinestars Drop 6.0 Gloves",
-      "url": "https://www.alpinestars.com/products/drop-6-0-gloves-mid-blue",
+      "url": "https://www.alpinestars.com/products/drop-6-0-gloves",
       "price_new": "31.96",
       "price_old": "39.95",
       "availability": "In stock",
@@ -107410,21 +107275,151 @@
       "store": "Alpinestars",
       "product_type": "Gloves",
       "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-7310-fr_drop-v6-glove_f6cedf99-4671-44e8-8275-33c4658a8ddc.png?v=1783754056",
+      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-10-fr_drop-v6-glove_885cef9c-37a6-4a41-abca-441a72e7c676.png?v=1783753806",
       "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-7310-fr_drop-v6-glove_f6cedf99-4671-44e8-8275-33c4658a8ddc.png?v=1783754056",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-7310-ba_drop-v6-glove_ad6eac42-3c66-48c0-ae9f-26e58a3bc107.png?v=1783754062"
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-10-fr_drop-v6-glove_885cef9c-37a6-4a41-abca-441a72e7c676.png?v=1783753806",
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-10-ba_drop-v6-glove_7417d17f-11a6-42c0-a0c4-a1b3380bf597.png?v=1783753810"
       ],
       "protection_type": null,
       "protection_sizes": [
-        "S",
         "M",
         "L",
         "XL",
-        "XXL"
+        "XXL",
+        "S"
       ],
       "width": 6.0,
       "technical_offers": [
+        {
+          "variant_id": 40389959581754,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389959614522,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389959647290,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389959680058,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XXL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389959712826,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389960106042,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389960138810,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XXL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389960171578,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        },
         {
           "variant_id": 40389966463034,
           "price": 31.96,
@@ -107535,217 +107530,25 @@
         "prot_size": [
           "L",
           "M",
-          "S",
           "XL",
-          "XXL"
+          "XXL",
+          "S"
         ]
-      }
-    },
-    {
-      "name": "Alpinestars Drop 6.0 Gloves",
-      "url": "https://www.alpinestars.com/products/drop-6-0-gloves-atlantic",
-      "price_new": "31.96",
-      "price_old": "39.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-7170-fr_drop-v6-glove_c22b5196-3e98-4afa-b305-080e1e21f791.png?v=1783760643",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-7170-fr_drop-v6-glove_c22b5196-3e98-4afa-b305-080e1e21f791.png?v=1783760643",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-7170-ba_drop-v6-glove_8eda37d5-6cfb-4426-87ea-7ab34c166f66.png?v=1783760648"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "XL",
-        "XXL"
-      ],
-      "width": 6.0,
-      "technical_offers": [
+      },
+      "versions": [
         {
-          "variant_id": 40389960106042,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XL"
-            ]
-          }
+          "url": "https://www.alpinestars.com/products/drop-6-0-gloves-atlantic",
+          "price_new": "31.96",
+          "price_old": "39.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-7170-fr_drop-v6-glove_c22b5196-3e98-4afa-b305-080e1e21f791.png?v=1783760643"
         },
         {
-          "variant_id": 40389960138810,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XXL"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389960171578,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ]
-          }
+          "url": "https://www.alpinestars.com/products/drop-6-0-gloves-mid-blue",
+          "price_new": "31.96",
+          "price_old": "39.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-7310-fr_drop-v6-glove_f6cedf99-4671-44e8-8275-33c4658a8ddc.png?v=1783754056"
         }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "XL",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Drop 6.0 Gloves",
-      "url": "https://www.alpinestars.com/products/drop-6-0-gloves",
-      "price_new": "31.96",
-      "price_old": "39.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-10-fr_drop-v6-glove_885cef9c-37a6-4a41-abca-441a72e7c676.png?v=1783753806",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-10-fr_drop-v6-glove_885cef9c-37a6-4a41-abca-441a72e7c676.png?v=1783753806",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566320-10-ba_drop-v6-glove_7417d17f-11a6-42c0-a0c4-a1b3380bf597.png?v=1783753810"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "width": 6.0,
-      "technical_offers": [
-        {
-          "variant_id": 40389959581754,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389959614522,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389959647290,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XL"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389959680058,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XXL"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389959712826,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "L",
-          "M",
-          "XL",
-          "XXL"
-        ]
-      }
+      ]
     },
     {
       "name": "Alpinestars Alderex Pro Gloves",
@@ -107766,7 +107569,10 @@
       "protection_sizes": [
         "S",
         "XL",
-        "XXL"
+        "XXL",
+        "XS",
+        "M",
+        "L"
       ],
       "technical_offers": [
         {
@@ -107819,43 +107625,75 @@
               "XXL"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "S",
-          "XL",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Alderex Pro Gloves",
-      "url": "https://www.alpinestars.com/products/alderex-pro-gloves-black-anthracite-gray",
-      "price_new": "31.96",
-      "price_old": "39.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1564119-1058-fr_aspen-pro-glove_c3d38809-d018-4af9-baa9-9a69671903d1.jpg?v=1783752901",
-      "protection_type": null,
-      "protection_sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "technical_offers": [
+        },
+        {
+          "variant_id": 40389693571130,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XS"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389693603898,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389693702202,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389693767738,
+          "price": 31.96,
+          "compare": 39.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XXL"
+            ]
+          }
+        },
         {
           "variant_id": 40389698977850,
           "price": 31.96,
@@ -107967,38 +107805,56 @@
           "Adult"
         ],
         "prot_size": [
-          "L",
-          "M",
           "S",
           "XL",
+          "XXL",
           "XS",
-          "XXL"
+          "L",
+          "M"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.alpinestars.com/products/alderex-pro-gloves-anthracite-stillwater-red-ochre",
+          "price_new": "31.96",
+          "price_old": "39.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1564119-1145-fr_aspen-pro-glove_0c051074-4677-47fd-bfe5-ad69980db29b.jpg?v=1783756331"
+        },
+        {
+          "url": "https://www.alpinestars.com/products/alderex-pro-gloves-black-anthracite-gray",
+          "price_new": "31.96",
+          "price_old": "39.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1564119-1058-fr_aspen-pro-glove_c3d38809-d018-4af9-baa9-9a69671903d1.jpg?v=1783752901"
+        }
+      ]
     },
     {
-      "name": "Alpinestars Alderex Pro Gloves",
-      "url": "https://www.alpinestars.com/products/alderex-pro-gloves-anthracite-stillwater-red-ochre",
-      "price_new": "31.96",
-      "price_old": "39.95",
+      "name": "Alpinestars Alps Gloves",
+      "url": "https://www.alpinestars.com/products/alps-gloves-black",
+      "price_new": "27.96",
+      "price_old": "34.95",
       "availability": "In stock",
       "part": "Protection",
       "store": "Alpinestars",
       "product_type": "Gloves",
       "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1564119-1145-fr_aspen-pro-glove_0c051074-4677-47fd-bfe5-ad69980db29b.jpg?v=1783756331",
+      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-10-fr_alps-glove_a3f5a602-3666-472e-8262-1de9a3b3e50f.png?v=1793289168",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-10-fr_alps-glove_a3f5a602-3666-472e-8262-1de9a3b3e50f.png?v=1793289168",
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-10-ba_alps-glove.png?v=1793289167"
+      ],
       "protection_type": null,
       "protection_sizes": [
-        "XS",
-        "S",
+        "M",
         "XL",
-        "XXL"
+        "XXL",
+        "L"
       ],
       "technical_offers": [
         {
-          "variant_id": 40389693571130,
-          "price": 31.96,
-          "compare": 39.95,
+          "variant_id": 40389726896186,
+          "price": 27.96,
+          "compare": 34.95,
           "available": true,
           "specs": {
             "protects": [
@@ -108008,31 +107864,14 @@
               "Adult"
             ],
             "prot_size": [
-              "XS"
+              "M"
             ]
           }
         },
         {
-          "variant_id": 40389693603898,
-          "price": 31.96,
-          "compare": 39.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389693702202,
-          "price": 31.96,
-          "compare": 39.95,
+          "variant_id": 40389726961722,
+          "price": 27.96,
+          "compare": 34.95,
           "available": true,
           "specs": {
             "protects": [
@@ -108047,9 +107886,9 @@
           }
         },
         {
-          "variant_id": 40389693767738,
-          "price": 31.96,
-          "compare": 39.95,
+          "variant_id": 40389726994490,
+          "price": 27.96,
+          "compare": 34.95,
           "available": true,
           "specs": {
             "protects": [
@@ -108062,45 +107901,7 @@
               "XXL"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "S",
-          "XL",
-          "XS",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Alps Gloves",
-      "url": "https://www.alpinestars.com/products/alps-gloves-black-tangerine",
-      "price_new": "27.96",
-      "price_old": "34.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-1400-fr_alps-glove_daadc426-f350-463e-9bf2-8f5b0eb41d36.png?v=1793288670",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-1400-fr_alps-glove_daadc426-f350-463e-9bf2-8f5b0eb41d36.png?v=1793288670",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-1400-ba_alps-glove.png?v=1793288669"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "technical_offers": [
+        },
         {
           "variant_id": 40389730598970,
           "price": 27.96,
@@ -108161,99 +107962,20 @@
           "Adult"
         ],
         "prot_size": [
-          "L",
-          "XL",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Alps Gloves",
-      "url": "https://www.alpinestars.com/products/alps-gloves-black",
-      "price_new": "27.96",
-      "price_old": "34.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-10-fr_alps-glove_a3f5a602-3666-472e-8262-1de9a3b3e50f.png?v=1793289168",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-10-fr_alps-glove_a3f5a602-3666-472e-8262-1de9a3b3e50f.png?v=1793289168",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-10-ba_alps-glove.png?v=1793289167"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "M",
-        "XL",
-        "XXL"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40389726896186,
-          "price": 27.96,
-          "compare": 34.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389726961722,
-          "price": 27.96,
-          "compare": 34.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XL"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389726994490,
-          "price": 27.96,
-          "compare": 34.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XXL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
           "M",
           "XL",
-          "XXL"
+          "XXL",
+          "L"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.alpinestars.com/products/alps-gloves-black-tangerine",
+          "price_new": "27.96",
+          "price_old": "34.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563922-1400-fr_alps-glove_daadc426-f350-463e-9bf2-8f5b0eb41d36.png?v=1793288670"
+        }
+      ]
     },
     {
       "name": "Alpinestars Freeride Gloves",
@@ -108394,7 +108116,9 @@
         "XS",
         "S",
         "M",
-        "XL"
+        "XL",
+        "L",
+        "XXL"
       ],
       "technical_offers": [
         {
@@ -108464,6 +108188,159 @@
               "XL"
             ]
           }
+        },
+        {
+          "variant_id": 40390676119610,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XS"
+            ]
+          }
+        },
+        {
+          "variant_id": 40390676250682,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40390671433786,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XS"
+            ]
+          }
+        },
+        {
+          "variant_id": 40390671368250,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 40390671401018,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XXL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40390672023610,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XS"
+            ]
+          }
+        },
+        {
+          "variant_id": 40390672056378,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 40390672089146,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 40390672187450,
+          "price": 23.96,
+          "compare": 29.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XXL"
+            ]
+          }
         }
       ],
       "technical_specs": {
@@ -108477,9 +108354,31 @@
           "M",
           "S",
           "XL",
-          "XS"
+          "XS",
+          "L",
+          "XXL"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.alpinestars.com/products/teton-plus-gloves-black-anthracite",
+          "price_new": "23.96",
+          "price_old": "29.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1562919-184-fr_teton-plus-glove_2de1b4f7-6f91-4450-b56a-58515b04774c.png?v=1783758207"
+        },
+        {
+          "url": "https://www.alpinestars.com/products/teton-plus-gloves-ochre-mid-blue",
+          "price_new": "23.96",
+          "price_old": "29.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1562919-487-fr_teton-plus-glove_60957c27-efa8-4266-9ba6-4d8341793e13.png?v=1783758701"
+        },
+        {
+          "url": "https://www.alpinestars.com/products/teton-plus-gloves-red-gray-heather",
+          "price_new": "23.96",
+          "price_old": "29.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1562919-3012-fr_teton-plus-glove.png?v=1783758932"
+        }
+      ]
     },
     {
       "name": "Alpinestars Alderex Plus Gloves",
@@ -108585,44 +108484,7 @@
               "XXL"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "L",
-          "M",
-          "S",
-          "XL",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Alderex Plus Gloves",
-      "url": "https://www.alpinestars.com/products/alderex-plus-gloves-burgundy",
-      "price_new": "22.36",
-      "price_old": "27.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1564319-309-fr_aspen-plus-glove_b9bb6ad1-c61f-48ab-85bd-dc3e7336d994.jpg?v=1783752866",
-      "protection_type": null,
-      "protection_sizes": [
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "technical_offers": [
+        },
         {
           "variant_id": 40389692325946,
           "price": 22.36,
@@ -108723,7 +108585,15 @@
           "XL",
           "XXL"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.alpinestars.com/products/alderex-plus-gloves-burgundy",
+          "price_new": "22.36",
+          "price_old": "27.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1564319-309-fr_aspen-plus-glove_b9bb6ad1-c61f-48ab-85bd-dc3e7336d994.jpg?v=1783752866"
+        }
+      ]
     },
     {
       "name": "Alpinestars Women Stella Alps V2 Gloves",
@@ -108834,7 +108704,7 @@
     },
     {
       "name": "Alpinestars Drop 4.0 Gloves",
-      "url": "https://www.alpinestars.com/products/drop-4-0-gloves-red",
+      "url": "https://www.alpinestars.com/products/drop-4-0-gloves",
       "price_new": "20.97",
       "price_old": "34.95",
       "availability": "In stock",
@@ -108842,21 +108712,103 @@
       "store": "Alpinestars",
       "product_type": "Gloves",
       "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-30-fr_drop-v4-glove_eb8fe102-1231-4079-ae06-0bfd29c168d2.png?v=1783753861",
+      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-10-fr_drop-v4-glove_580c22e7-1300-47b9-983c-71c19c888875.png?v=1783759154",
       "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-30-fr_drop-v4-glove_eb8fe102-1231-4079-ae06-0bfd29c168d2.png?v=1783753861",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-30-ba_drop-v4-glove_eeec5fba-694e-49aa-8333-d64f5bd5a956.png?v=1783753865"
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-10-fr_drop-v4-glove_580c22e7-1300-47b9-983c-71c19c888875.png?v=1783759154",
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-10-ba_drop-v4-glove_8734b935-9147-4095-af0a-d63123b68f9d.png?v=1783759158"
       ],
       "protection_type": null,
       "protection_sizes": [
-        "S",
         "M",
         "L",
         "XL",
-        "XXL"
+        "XXL",
+        "S"
       ],
       "width": 4.0,
       "technical_offers": [
+        {
+          "variant_id": 40389961449530,
+          "price": 20.97,
+          "compare": 34.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389961482298,
+          "price": 20.97,
+          "compare": 34.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389961515066,
+          "price": 20.97,
+          "compare": 34.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389961547834,
+          "price": 20.97,
+          "compare": 34.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XXL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40389961580602,
+          "price": 20.97,
+          "compare": 34.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        },
         {
           "variant_id": 40389961973818,
           "price": 20.97,
@@ -108967,15 +108919,23 @@
         "prot_size": [
           "L",
           "M",
-          "S",
           "XL",
-          "XXL"
+          "XXL",
+          "S"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.alpinestars.com/products/drop-4-0-gloves-red",
+          "price_new": "20.97",
+          "price_old": "34.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-30-fr_drop-v4-glove_eb8fe102-1231-4079-ae06-0bfd29c168d2.png?v=1783753861"
+        }
+      ]
     },
     {
-      "name": "Alpinestars Drop 4.0 Gloves",
-      "url": "https://www.alpinestars.com/products/drop-4-0-gloves",
+      "name": "Alpinestars Alps V2 Gloves",
+      "url": "https://www.alpinestars.com/products/alps-v2-gloves",
       "price_new": "20.97",
       "price_old": "34.95",
       "availability": "In stock",
@@ -108983,73 +108943,19 @@
       "store": "Alpinestars",
       "product_type": "Gloves",
       "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-10-fr_drop-v4-glove_580c22e7-1300-47b9-983c-71c19c888875.png?v=1783759154",
+      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-929-fr_alps-v2-gloves_9141fd94-8149-4058-812a-70912aeefd2b.png?v=1783761392",
       "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-10-fr_drop-v4-glove_580c22e7-1300-47b9-983c-71c19c888875.png?v=1783759154",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1566220-10-ba_drop-v4-glove_8734b935-9147-4095-af0a-d63123b68f9d.png?v=1783759158"
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-929-fr_alps-v2-gloves_9141fd94-8149-4058-812a-70912aeefd2b.png?v=1783761392",
+        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-929-ba_alps-v2-gloves_37df9020-881a-47a3-898d-003f87a3eddf.png?v=1783761396"
       ],
       "protection_type": null,
       "protection_sizes": [
-        "M",
-        "L",
-        "XL",
-        "XXL"
+        "XXL",
+        "XL"
       ],
-      "width": 4.0,
       "technical_offers": [
         {
-          "variant_id": 40389961449530,
-          "price": 20.97,
-          "compare": 34.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389961482298,
-          "price": 20.97,
-          "compare": 34.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389961515066,
-          "price": 20.97,
-          "compare": 34.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XL"
-            ]
-          }
-        },
-        {
-          "variant_id": 40389961547834,
+          "variant_id": 40389731450938,
           "price": 20.97,
           "compare": 34.95,
           "available": true,
@@ -109065,56 +108971,6 @@
             ]
           }
         },
-        {
-          "variant_id": 40389961580602,
-          "price": 20.97,
-          "compare": 34.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "L",
-          "M",
-          "XL",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Alps V2 Gloves",
-      "url": "https://www.alpinestars.com/products/alps-v2-gloves-pc-black-1",
-      "price_new": "20.97",
-      "price_old": "34.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-10-fr_alps-v2-gloves_b2ba3deb-4058-4a1c-8b90-1f0b91e763d3.png?v=1783756402",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-10-fr_alps-v2-gloves_b2ba3deb-4058-4a1c-8b90-1f0b91e763d3.png?v=1783756402",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-10-ba_alps-v2-gloves-copy_bcc7f645-5a1f-490e-b6bc-c4f31fc7a0c1.png?v=1783756406"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "XXL"
-      ],
-      "technical_offers": [
         {
           "variant_id": 40389739118650,
           "price": 20.97,
@@ -109131,37 +108987,7 @@
               "XXL"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Alps V2 Gloves",
-      "url": "https://www.alpinestars.com/products/alps-v2-gloves-sparrow-gray",
-      "price_new": "20.97",
-      "price_old": "34.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-9070-fr_alps-v2-gloves_ea261886-f692-4594-9226-996c6fa7fa36.png?v=1783753212",
-      "protection_type": null,
-      "protection_sizes": [
-        "XL",
-        "XXL"
-      ],
-      "technical_offers": [
+        },
         {
           "variant_id": 40389733384250,
           "price": 20.97,
@@ -109205,60 +109031,24 @@
           "Adult"
         ],
         "prot_size": [
-          "XL",
-          "XXL"
+          "XXL",
+          "XL"
         ]
-      }
-    },
-    {
-      "name": "Alpinestars Alps V2 Gloves",
-      "url": "https://www.alpinestars.com/products/alps-v2-gloves",
-      "price_new": "20.97",
-      "price_old": "34.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-929-fr_alps-v2-gloves_9141fd94-8149-4058-812a-70912aeefd2b.png?v=1783761392",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-929-fr_alps-v2-gloves_9141fd94-8149-4058-812a-70912aeefd2b.png?v=1783761392",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-929-ba_alps-v2-gloves_37df9020-881a-47a3-898d-003f87a3eddf.png?v=1783761396"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "XXL"
-      ],
-      "technical_offers": [
+      },
+      "versions": [
         {
-          "variant_id": 40389731450938,
-          "price": 20.97,
-          "compare": 34.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XXL"
-            ]
-          }
+          "url": "https://www.alpinestars.com/products/alps-v2-gloves-pc-black-1",
+          "price_new": "20.97",
+          "price_old": "34.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-10-fr_alps-v2-gloves_b2ba3deb-4058-4a1c-8b90-1f0b91e763d3.png?v=1783756402"
+        },
+        {
+          "url": "https://www.alpinestars.com/products/alps-v2-gloves-sparrow-gray",
+          "price_new": "20.97",
+          "price_old": "34.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1563923-9070-fr_alps-v2-gloves_ea261886-f692-4594-9226-996c6fa7fa36.png?v=1783753212"
         }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "XXL"
-        ]
-      }
+      ]
     },
     {
       "name": "Alpinestars Alderex Pro Lite Gloves",
@@ -109275,7 +109065,10 @@
       "protection_sizes": [
         "XS",
         "S",
-        "XXL"
+        "XXL",
+        "M",
+        "L",
+        "XL"
       ],
       "technical_offers": [
         {
@@ -109328,43 +109121,7 @@
               "XXL"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "S",
-          "XS",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Alderex Pro Lite Gloves",
-      "url": "https://www.alpinestars.com/products/alderex-pro-lite-gloves-anthracite",
-      "price_new": "19.77",
-      "price_old": "32.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1564219-114-fr_aspen-pro-lite-glove_883f8bae-a2f7-4234-b6a6-8a23dc0a5845.jpg?v=1783752936",
-      "protection_type": null,
-      "protection_sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "technical_offers": [
+        },
         {
           "variant_id": 40389700223034,
           "price": 19.77,
@@ -109476,270 +109233,22 @@
           "Adult"
         ],
         "prot_size": [
-          "L",
-          "M",
-          "S",
-          "XL",
-          "XS",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Teton Plus Gloves",
-      "url": "https://www.alpinestars.com/products/teton-plus-gloves-black-anthracite",
-      "price_new": "23.96",
-      "price_old": "29.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1562919-184-fr_teton-plus-glove_2de1b4f7-6f91-4450-b56a-58515b04774c.png?v=1783758207",
-      "protection_type": null,
-      "protection_sizes": [
-        "XS",
-        "XL"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40390676119610,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XS"
-            ]
-          }
-        },
-        {
-          "variant_id": 40390676250682,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "XL",
-          "XS"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Teton Plus Gloves",
-      "url": "https://www.alpinestars.com/products/teton-plus-gloves-ochre-mid-blue",
-      "price_new": "23.96",
-      "price_old": "29.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1562919-487-fr_teton-plus-glove_60957c27-efa8-4266-9ba6-4d8341793e13.png?v=1783758701",
-      "protection_type": null,
-      "protection_sizes": [
-        "XS",
-        "L",
-        "XXL"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40390671433786,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XS"
-            ]
-          }
-        },
-        {
-          "variant_id": 40390671368250,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
-        },
-        {
-          "variant_id": 40390671401018,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XXL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "L",
-          "XS",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Alpinestars Teton Plus Gloves",
-      "url": "https://www.alpinestars.com/products/teton-plus-gloves-red-gray-heather",
-      "price_new": "23.96",
-      "price_old": "29.95",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Alpinestars",
-      "product_type": "Gloves",
-      "brand": "Alpinestars",
-      "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1562919-3012-fr_teton-plus-glove.png?v=1783758932",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/1562919-3012-fr_teton-plus-glove.png?v=1783758932",
-        "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1562919-3012-ba_teton-plus-glove_a4fbe13f-6c0e-4442-92a2-ffe25d57b630.jpg?v=1783758936"
-      ],
-      "protection_type": null,
-      "protection_sizes": [
-        "XS",
-        "S",
-        "M",
-        "XXL"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40390672023610,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XS"
-            ]
-          }
-        },
-        {
-          "variant_id": 40390672056378,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        },
-        {
-          "variant_id": 40390672089146,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        },
-        {
-          "variant_id": 40390672187450,
-          "price": 23.96,
-          "compare": 29.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Gloves"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "prot_size": [
-              "XXL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Gloves"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "prot_size": [
-          "M",
           "S",
           "XS",
-          "XXL"
+          "XXL",
+          "L",
+          "M",
+          "XL"
         ]
-      }
+      },
+      "versions": [
+        {
+          "url": "https://www.alpinestars.com/products/alderex-pro-lite-gloves-anthracite",
+          "price_new": "19.77",
+          "price_old": "32.95",
+          "image": "https://cdn.shopify.com/s/files/1/0258/9160/2490/files/Large-1564219-114-fr_aspen-pro-lite-glove_883f8bae-a2f7-4234-b6a6-8a23dc0a5845.jpg?v=1783752936"
+        }
+      ]
     }
   ],
   "Demon_Bikes": [],
@@ -147562,28 +147071,6 @@
       "technical_specs": {}
     },
     {
-      "name": "SRAM DUB Bottom Bracket Preload Adjuster Kit",
-      "url": "https://www.thelostco.com/products/sram-dub-bottom-bracket-preload-adjuster-kit",
-      "price_new": "5.10",
-      "price_old": "6.00",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "The Lost Co.",
-      "product_type": "Crank Bolts and Parts",
-      "brand": "SRAM",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/dfc4b2d57b1a244373d6b03ae9aad6a9e18c662a.jpg?v=1785972770",
-      "technical_offers": [
-        {
-          "variant_id": 46857507438790,
-          "price": 5.1,
-          "compare": 6.0,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
       "name": "SRAM XX Eagle T-Type Direct Mount Chainring - 34t, 12-Speed, 8-Bolt Direct Mount, 3mm Offset, Aluminum, Black, D1",
       "url": "https://www.thelostco.com/products/sram-eagle-t-type-dm-x0-chainring-teeth-34-speed-12-bcd-direct-mount-aluminum-black",
       "price_new": "102.00",
@@ -147966,6 +147453,28 @@
           "variant_id": 42653089562822,
           "price": 38.25,
           "compare": 45.0,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
+      "name": "SRAM DUB Bottom Bracket Preload Adjuster Kit",
+      "url": "https://www.thelostco.com/products/sram-dub-bottom-bracket-preload-adjuster-kit",
+      "price_new": "5.10",
+      "price_old": "6.00",
+      "availability": "In stock",
+      "part": "Drivetrain",
+      "store": "The Lost Co.",
+      "product_type": "Crank Bolts and Parts",
+      "brand": "SRAM",
+      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/dfc4b2d57b1a244373d6b03ae9aad6a9e18c662a.jpg?v=1785972770",
+      "technical_offers": [
+        {
+          "variant_id": 46857507438790,
+          "price": 5.1,
+          "compare": 6.0,
           "available": true,
           "specs": {}
         }
