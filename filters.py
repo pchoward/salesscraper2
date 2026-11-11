@@ -400,9 +400,10 @@ def use_sport_rules(rule):
     return previous
 
 
-# Every sport, every part (owner, 2026-11-09): a deal is at least 10% off.
-# Decks keep their own stricter rule for unknown brands (15%).
-MIN_PERCENT_OFF = 10.0
+# Every sport, every part: a deal is at least 5% off (owner, 2026-11-11,
+# lowered from 10% set 2026-11-09: "I'd rather have more items than less").
+# Decks keep their own rule (10% known brands, 15% unknown).
+MIN_PERCENT_OFF = 5.0
 
 
 def _minimum_markdown_reason(price_new, price_old):
