@@ -18380,14 +18380,14 @@
           }
         },
         "Albe's BMX_Bikes": {
-          "count": 4,
+          "count": 6,
           "failed": false,
           "diagnostics": {
             "expected_count": 7.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 4,
-            "percentage_change": -42.9,
+            "actual_count": 6,
+            "percentage_change": -14.3,
             "reason": "normal_variation"
           }
         },
@@ -18404,98 +18404,98 @@
           }
         },
         "Albe's BMX_Drivetrain": {
-          "count": 16,
+          "count": 17,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 16,
-            "percentage_change": 14.3,
+            "actual_count": 17,
+            "percentage_change": 21.4,
             "reason": "normal_variation"
           }
         },
         "Albe's BMX_Frames & Forks": {
-          "count": 14,
+          "count": 16,
           "failed": false,
           "diagnostics": {
             "expected_count": 9.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 5.0,
-            "actual_count": 14,
-            "percentage_change": 55.6,
+            "actual_count": 16,
+            "percentage_change": 77.8,
             "reason": "normal_variation"
           }
         },
         "Albe's BMX_Protection": {
-          "count": 11,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 13.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.0,
-            "actual_count": 11,
-            "percentage_change": -15.4,
+            "actual_count": 14,
+            "percentage_change": 7.7,
             "reason": "normal_variation"
           }
         },
         "Albe's BMX_Seating": {
-          "count": 18,
+          "count": 19,
           "failed": false,
           "diagnostics": {
             "expected_count": 13.5,
             "baseline_samples": 10,
             "median_absolute_deviation": 2.5,
-            "actual_count": 18,
-            "percentage_change": 33.3,
+            "actual_count": 19,
+            "percentage_change": 40.7,
             "reason": "normal_variation"
           }
         },
         "Albe's BMX_Steering": {
-          "count": 11,
+          "count": 12,
           "failed": false,
           "diagnostics": {
             "expected_count": 9.5,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.5,
-            "actual_count": 11,
-            "percentage_change": 15.8,
+            "actual_count": 12,
+            "percentage_change": 26.3,
             "reason": "normal_variation"
           }
         },
         "Albe's BMX_Tires": {
-          "count": 10,
+          "count": 13,
           "failed": false,
           "diagnostics": {
             "expected_count": 8.5,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.5,
-            "actual_count": 10,
-            "percentage_change": 17.6,
+            "actual_count": 13,
+            "percentage_change": 52.9,
             "reason": "normal_variation"
           }
         },
         "Albe's BMX_Wheel Parts": {
-          "count": 16,
+          "count": 17,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.5,
             "baseline_samples": 10,
             "median_absolute_deviation": 2.0,
-            "actual_count": 16,
-            "percentage_change": 10.3,
+            "actual_count": 17,
+            "percentage_change": 17.2,
             "reason": "normal_variation"
           }
         },
         "Albe's BMX_Wheels": {
-          "count": 12,
+          "count": 20,
           "failed": false,
           "diagnostics": {
             "expected_count": 11.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 12,
-            "percentage_change": 9.1,
+            "actual_count": 20,
+            "percentage_change": 81.8,
             "reason": "normal_variation"
           }
         },
@@ -18680,14 +18680,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 93,
+          "count": 94,
           "failed": false,
           "diagnostics": {
             "expected_count": 92.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.0,
-            "actual_count": 93,
-            "percentage_change": 1.1,
+            "actual_count": 94,
+            "percentage_change": 2.2,
             "reason": "normal_variation"
           }
         },
@@ -18752,14 +18752,14 @@
           }
         },
         "Circuit BMX_Bikes": {
-          "count": 0,
+          "count": 1,
           "failed": false,
           "diagnostics": {
             "expected_count": 1.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -18920,14 +18920,14 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 101,
+          "count": 102,
           "failed": false,
           "diagnostics": {
             "expected_count": 101.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.0,
-            "actual_count": 101,
-            "percentage_change": 0.0,
+            "actual_count": 102,
+            "percentage_change": 1.0,
             "reason": "normal_variation"
           }
         },
@@ -19052,16 +19052,15 @@
           }
         },
         "Demon_Protection": {
-          "count": 0,
-          "failed": true,
-          "suspect": true,
+          "count": 20,
+          "failed": false,
           "diagnostics": {
             "expected_count": 20,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 5,
-            "percentage_change": -75.0,
-            "reason": "partial_catalog_drop"
+            "actual_count": 20,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Demon_Seating": {
@@ -19869,14 +19868,14 @@
           }
         },
         "Powers BMX_Bikes": {
-          "count": 1,
+          "count": 2,
           "failed": false,
           "diagnostics": {
             "expected_count": 1.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 1,
-            "percentage_change": 0.0,
+            "actual_count": 2,
+            "percentage_change": 100.0,
             "reason": "normal_variation"
           }
         },
@@ -19893,14 +19892,14 @@
           }
         },
         "Powers BMX_Drivetrain": {
-          "count": 23,
+          "count": 25,
           "failed": false,
           "diagnostics": {
             "expected_count": 25.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 23,
-            "percentage_change": -8.0,
+            "actual_count": 25,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -19929,14 +19928,14 @@
           }
         },
         "Powers BMX_Seating": {
-          "count": 20,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 20.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 20,
-            "percentage_change": 0.0,
+            "actual_count": 21,
+            "percentage_change": 5.0,
             "reason": "normal_variation"
           }
         },
@@ -20001,14 +20000,14 @@
           }
         },
         "SkatePro_Protection": {
-          "count": 2,
+          "count": 3,
           "failed": false,
           "diagnostics": {
             "expected_count": 3.5,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.5,
-            "actual_count": 2,
-            "percentage_change": -42.9,
+            "actual_count": 3,
+            "percentage_change": -14.3,
             "reason": "normal_variation"
           }
         },
@@ -20049,26 +20048,26 @@
           }
         },
         "Source BMX US_Drivetrain": {
-          "count": 20,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 20.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 20,
-            "percentage_change": 0.0,
+            "actual_count": 21,
+            "percentage_change": 5.0,
             "reason": "normal_variation"
           }
         },
         "Source BMX US_Frames & Forks": {
-          "count": 17,
+          "count": 18,
           "failed": false,
           "diagnostics": {
             "expected_count": 16.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 17,
-            "percentage_change": 6.2,
+            "actual_count": 18,
+            "percentage_change": 12.5,
             "reason": "normal_variation"
           }
         },
@@ -20085,14 +20084,14 @@
           }
         },
         "Source BMX US_Seating": {
-          "count": 8,
+          "count": 9,
           "failed": false,
           "diagnostics": {
             "expected_count": 9.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 8,
-            "percentage_change": -11.1,
+            "actual_count": 9,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -20121,14 +20120,14 @@
           }
         },
         "Source BMX US_Wheel Parts": {
-          "count": 69,
+          "count": 72,
           "failed": false,
           "diagnostics": {
             "expected_count": 50.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 19.5,
-            "actual_count": 69,
-            "percentage_change": 38.0,
+            "actual_count": 72,
+            "percentage_change": 44.0,
             "reason": "normal_variation"
           }
         },
@@ -20530,41 +20529,41 @@
           }
         }
       },
-      "scanned_at": "2026-11-11T10:03:58+00:00"
+      "scanned_at": "2026-11-11T14:59:57+00:00"
     }
   ],
   "baseline": {
     "Albe's BMX_Bikes": {
       "date": "2026-11-11",
-      "count": 4
+      "count": 6
     },
     "Albe's BMX_Drivetrain": {
       "date": "2026-11-11",
-      "count": 16
+      "count": 17
     },
     "Albe's BMX_Frames & Forks": {
       "date": "2026-11-11",
-      "count": 14
+      "count": 16
     },
     "Albe's BMX_Seating": {
       "date": "2026-11-11",
-      "count": 18
+      "count": 19
     },
     "Albe's BMX_Steering": {
       "date": "2026-11-11",
-      "count": 11
+      "count": 12
     },
     "Albe's BMX_Tires": {
       "date": "2026-11-11",
-      "count": 10
+      "count": 13
     },
     "Albe's BMX_Wheel Parts": {
       "date": "2026-11-11",
-      "count": 16
+      "count": 17
     },
     "Albe's BMX_Wheels": {
       "date": "2026-11-11",
-      "count": 12
+      "count": 20
     },
     "Circuit BMX_Drivetrain": {
       "date": "2026-11-11",
@@ -20580,11 +20579,11 @@
     },
     "Powers BMX_Bikes": {
       "date": "2026-11-11",
-      "count": 1
+      "count": 2
     },
     "Powers BMX_Drivetrain": {
       "date": "2026-11-11",
-      "count": 23
+      "count": 25
     },
     "Powers BMX_Frames & Forks": {
       "date": "2026-11-11",
@@ -20592,7 +20591,7 @@
     },
     "Powers BMX_Seating": {
       "date": "2026-11-11",
-      "count": 20
+      "count": 21
     },
     "Powers BMX_Steering": {
       "date": "2026-11-11",
@@ -20616,15 +20615,15 @@
     },
     "Source BMX US_Drivetrain": {
       "date": "2026-11-11",
-      "count": 20
+      "count": 21
     },
     "Source BMX US_Frames & Forks": {
       "date": "2026-11-11",
-      "count": 17
+      "count": 18
     },
     "Source BMX US_Seating": {
       "date": "2026-11-11",
-      "count": 8
+      "count": 9
     },
     "Source BMX US_Steering": {
       "date": "2026-11-11",
@@ -20636,19 +20635,19 @@
     },
     "Source BMX US_Wheel Parts": {
       "date": "2026-11-11",
-      "count": 69
+      "count": 72
     },
     "Source BMX US_Wheels": {
       "date": "2026-11-11",
       "count": 2
     },
     "Circuit BMX_Bikes": {
-      "date": "2026-11-09",
+      "date": "2026-11-11",
       "count": 1
     },
     "Albe's BMX_Protection": {
       "date": "2026-11-11",
-      "count": 11
+      "count": 14
     },
     "Powers BMX_Protection": {
       "date": "2026-11-11",
@@ -20663,7 +20662,7 @@
       "count": 3
     },
     "Demon_Protection": {
-      "date": "2026-11-09",
+      "date": "2026-11-11",
       "count": 20
     },
     "G-Form_Protection": {
@@ -20688,11 +20687,11 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-11",
-      "count": 93
+      "count": 94
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-11",
-      "count": 101
+      "count": 102
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-11",
@@ -20700,7 +20699,7 @@
     },
     "SkatePro_Protection": {
       "date": "2026-11-11",
-      "count": 2
+      "count": 3
     },
     "CCS_Protection": {
       "date": "2026-11-11",
@@ -21575,7 +21574,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 4
+        "count": 6
       }
     ],
     "Albe's BMX_Braking": [
@@ -21667,7 +21666,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 16
+        "count": 17
       }
     ],
     "Albe's BMX_Frames & Forks": [
@@ -21713,7 +21712,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 14
+        "count": 16
       }
     ],
     "Albe's BMX_Protection": [
@@ -21751,7 +21750,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 11
+        "count": 14
       }
     ],
     "Albe's BMX_Seating": [
@@ -21797,7 +21796,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 18
+        "count": 19
       }
     ],
     "Albe's BMX_Steering": [
@@ -21843,7 +21842,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 11
+        "count": 12
       }
     ],
     "Albe's BMX_Tires": [
@@ -21889,7 +21888,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 10
+        "count": 13
       }
     ],
     "Albe's BMX_Wheel Parts": [
@@ -21935,7 +21934,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 16
+        "count": 17
       }
     ],
     "Albe's BMX_Wheels": [
@@ -21981,7 +21980,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 12
+        "count": 20
       }
     ],
     "Bern_Bikes": [
@@ -22645,7 +22644,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 93
+        "count": 94
       }
     ],
     "Cambria_Seating": [
@@ -22881,7 +22880,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 0
+        "count": 1
       }
     ],
     "Circuit BMX_Braking": [
@@ -23477,7 +23476,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 101
+        "count": 102
       }
     ],
     "Colorado Cyclist_Seating": [
@@ -23883,6 +23882,10 @@
       },
       {
         "date": "2026-11-09",
+        "count": 20
+      },
+      {
+        "date": "2026-11-11",
         "count": 20
       }
     ],
@@ -25987,7 +25990,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 1
+        "count": 2
       }
     ],
     "Powers BMX_Braking": [
@@ -26079,7 +26082,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 23
+        "count": 25
       }
     ],
     "Powers BMX_Frames & Forks": [
@@ -26209,7 +26212,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 20
+        "count": 21
       }
     ],
     "Powers BMX_Steering": [
@@ -26465,7 +26468,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 2
+        "count": 3
       }
     ],
     "SoCal_Protection": [
@@ -26637,7 +26640,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 20
+        "count": 21
       }
     ],
     "Source BMX US_Frames & Forks": [
@@ -26683,7 +26686,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 17
+        "count": 18
       }
     ],
     "Source BMX US_Protection": [
@@ -26767,7 +26770,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 8
+        "count": 9
       }
     ],
     "Source BMX US_Steering": [
@@ -26905,7 +26908,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 69
+        "count": 72
       }
     ],
     "Source BMX US_Wheels": [

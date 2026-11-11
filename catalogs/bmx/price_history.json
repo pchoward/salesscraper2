@@ -1449,12 +1449,11 @@
     "store": "Cambria",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 94.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/G-FormProRugged2KneePad-Black.jpg?v=1649331979",
     "prices": {
       "2026-11-03": 94.99,
@@ -1463,7 +1462,8 @@
       "2026-11-06": 94.99,
       "2026-11-07": 94.99,
       "2026-11-08": 94.99,
-      "2026-11-09": 94.99
+      "2026-11-09": 94.99,
+      "2026-11-11": 94.99
     }
   },
   "https://cambriabike.com/products/giro-coalition-spherical-full-face-helmet-matt-black": {
@@ -4472,12 +4472,11 @@
     "store": "Source BMX US",
     "part": "Wheel Parts",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 173.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 10% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/99fd8fd8-9603-4cbf-b5fb-d0a197f2a133.jpg?v=1771853712",
     "prices": {
       "2026-11-01": 173.95,
@@ -4488,7 +4487,8 @@
       "2026-11-06": 173.95,
       "2026-11-07": 173.95,
       "2026-11-08": 173.95,
-      "2026-11-09": 173.95
+      "2026-11-09": 173.95,
+      "2026-11-11": 173.95
     }
   },
   "https://us.sourcebmx.com/products/odyssey-clutch-v2-freecoaster-hub-rhd": {
@@ -4496,12 +4496,11 @@
     "store": "Source BMX US",
     "part": "Wheel Parts",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 173.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 10% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/e4c15a99-4cc2-4c9a-acc9-eaed0958637f.jpg?v=1771853710",
     "prices": {
       "2026-11-01": 173.95,
@@ -4512,7 +4511,8 @@
       "2026-11-06": 173.95,
       "2026-11-07": 173.95,
       "2026-11-08": 173.95,
-      "2026-11-09": 173.95
+      "2026-11-09": 173.95,
+      "2026-11-11": 173.95
     }
   },
   "https://us.sourcebmx.com/products/odyssey-grandstand-v2-pc-pedals": {
@@ -5040,7 +5040,7 @@
     "all_time_low": 199.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 5% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/851ce670-54fa-4cc9-8664-0049eda5c43f.jpg?v=1771860812",
     "spec_offers": [
       {
@@ -5074,7 +5074,7 @@
     "all_time_low": 199.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 5% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/58ac047a-07f7-40e9-9788-484b1a3bf314.jpg?v=1771860835",
     "spec_offers": [
       {
@@ -5614,7 +5614,7 @@
     "all_time_low": 54.99,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 3% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 3% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/441e144f-6038-4786-98a3-11ddcc096e64.jpg?v=1771851194",
     "prices": {
       "2026-11-06": 54.99,
@@ -5868,7 +5868,7 @@
     "all_time_low": 10.99,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 3% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 3% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/16b0f0a8-4471-4e28-930e-d1d728aa58ce.jpg?v=1771845036",
     "prices": {
       "2026-11-06": 10.99,
@@ -5912,7 +5912,7 @@
     "all_time_low": 32.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 3% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 3% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bface8dd-c398-4a2c-a7bc-f841b74303c4.jpg?v=1771856921",
     "prices": {
       "2026-11-01": 32.99,
@@ -6058,12 +6058,11 @@
     "store": "Source BMX US",
     "part": "Drivetrain",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 57.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 9% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/a2b3abb5-aa45-40f6-9839-dcf9d695862c.jpg?v=1771856117",
     "prices": {
       "2026-11-01": 57.99,
@@ -6074,7 +6073,8 @@
       "2026-11-06": 57.99,
       "2026-11-07": 57.99,
       "2026-11-08": 57.99,
-      "2026-11-09": 57.99
+      "2026-11-09": 57.99,
+      "2026-11-11": 57.99
     }
   },
   "https://us.sourcebmx.com/products/shadow-x-subrosa-conspire-gloves-speed-wolf": {
@@ -6686,12 +6686,11 @@
     "store": "Source BMX US",
     "part": "Wheel Parts",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 224.39,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 10% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/cdb3eed4-5888-4882-8c95-f39346ed7458.jpg?v=1771853498",
     "prices": {
       "2026-11-01": 224.39,
@@ -6702,7 +6701,8 @@
       "2026-11-06": 224.39,
       "2026-11-07": 224.39,
       "2026-11-08": 224.39,
-      "2026-11-09": 224.39
+      "2026-11-09": 224.39,
+      "2026-11-11": 224.39
     }
   },
   "https://us.sourcebmx.com/products/stay-strong-expert-28h-front-axle": {
@@ -8053,12 +8053,11 @@
     "store": "Source BMX US",
     "part": "Frames & Forks",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 419.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 7% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/99cd5232-cba9-4b9e-8af0-4dcaadc8cbfa.jpg?v=1771847534",
     "prices": {
       "2026-11-01": 419.99,
@@ -8069,7 +8068,8 @@
       "2026-11-06": 419.99,
       "2026-11-07": 419.99,
       "2026-11-08": 419.99,
-      "2026-11-09": 419.99
+      "2026-11-09": 419.99,
+      "2026-11-11": 419.99
     }
   },
   "https://us.sourcebmx.com/products/subrosa-genetic-flangeless-dcr-grips": {
@@ -8097,12 +8097,11 @@
     "store": "Source BMX US",
     "part": "Seating",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 45.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 6% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ab7dca37-e48e-429a-91d6-13937e33acfd.jpg?v=1771854589",
     "prices": {
       "2026-11-01": 45.99,
@@ -8113,7 +8112,8 @@
       "2026-11-06": 45.99,
       "2026-11-07": 45.99,
       "2026-11-08": 45.99,
-      "2026-11-09": 45.99
+      "2026-11-09": 45.99,
+      "2026-11-11": 45.99
     }
   },
   "https://us.sourcebmx.com/products/sunday-cornerstone-grips": {
@@ -8399,18 +8399,18 @@
     "store": "Albe's BMX",
     "part": "Wheel Parts",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 389.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 9% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/Alienation.UD.Carbon.rim.470951.jpg?v=1731347293",
     "prices": {
       "2026-11-06": 389.95,
       "2026-11-07": 389.95,
       "2026-11-08": 389.95,
-      "2026-11-09": 389.95
+      "2026-11-09": 389.95,
+      "2026-11-11": 389.95
     }
   },
   "https://www.albes.com/products/alienation-clash-full-ud-carbon-rim": {
@@ -8618,12 +8618,11 @@
     "store": "Albe's BMX",
     "part": "Wheels",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 349.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 9% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/alienation.vandal.22.freecoaster.wheel.black.png?v=1707520774",
     "length": 22.0,
     "spec_offers": [
@@ -8645,7 +8644,8 @@
       "2026-11-06": 349.95,
       "2026-11-07": 349.95,
       "2026-11-08": 349.95,
-      "2026-11-09": 349.95
+      "2026-11-09": 349.95,
+      "2026-11-11": 349.95
     }
   },
   "https://www.albes.com/products/alienation-vault-top-load-stem": {
@@ -8716,12 +8716,11 @@
     "store": "Albe's BMX",
     "part": "Wheels",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 99.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 9% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/alloy.36.spoke.wheels.white.png?v=1686337040",
     "spec_offers": [
       {
@@ -8742,7 +8741,8 @@
       "2026-11-06": 99.95,
       "2026-11-07": 99.95,
       "2026-11-08": 99.95,
-      "2026-11-09": 99.95
+      "2026-11-09": 99.95,
+      "2026-11-11": 99.95
     }
   },
   "https://www.albes.com/products/beartrap-pedals": {
@@ -8750,12 +8750,11 @@
     "store": "Albe's BMX",
     "part": "Drivetrain",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 36.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/BearTrap.Black__15644.1565293645.1280.1280.jpg?v=1582036825",
     "prices": {
       "2026-11-01": 36.95,
@@ -8766,7 +8765,8 @@
       "2026-11-06": 36.95,
       "2026-11-07": 36.95,
       "2026-11-08": 36.95,
-      "2026-11-09": 36.95
+      "2026-11-09": 36.95,
+      "2026-11-11": 36.95
     }
   },
   "https://www.albes.com/products/billet-bmx-deez-nuts-12-point-threadless-headset-kit-1-1-8": {
@@ -9068,7 +9068,7 @@
     "all_time_low": 39.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 0% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 0% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Cinema.Rock.Sprocket.Black__45194.1522797529.1280.1280.jpg?v=1620326088",
     "prices": {
       "2026-11-01": 39.95,
@@ -9165,18 +9165,18 @@
     "store": "Albe's BMX",
     "part": "Tires",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 29.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 9% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/cst.caeser.tire.blk.2.png?v=1768325564",
     "prices": {
       "2026-11-06": 29.95,
       "2026-11-07": 29.95,
       "2026-11-08": 29.95,
-      "2026-11-09": 29.95
+      "2026-11-09": 29.95,
+      "2026-11-11": 29.95
     }
   },
   "https://www.albes.com/products/cult-vans-29-tire": {
@@ -9333,18 +9333,18 @@
     "store": "Albe's BMX",
     "part": "Bikes",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 369.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 7% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/Elite.destro.Black.gold.bike.webp?v=1760718466",
     "prices": {
       "2026-11-06": 369.95,
       "2026-11-07": 369.95,
       "2026-11-08": 369.95,
-      "2026-11-09": 369.95
+      "2026-11-09": 369.95,
+      "2026-11-11": 369.95
     }
   },
   "https://www.albes.com/products/elite-outlaw-26-bike-2021": {
@@ -9352,12 +9352,11 @@
     "store": "Albe's BMX",
     "part": "Bikes",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 549.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/elite.outlaw.white.splatter.webp?v=1776179765",
     "length": 26.0,
     "prices": {
@@ -9369,7 +9368,8 @@
       "2026-11-06": 549.95,
       "2026-11-07": 549.95,
       "2026-11-08": 549.95,
-      "2026-11-09": 549.95
+      "2026-11-09": 549.95,
+      "2026-11-11": 549.95
     }
   },
   "https://www.albes.com/products/fiend-raekes-frame": {
@@ -9397,12 +9397,11 @@
     "store": "Albe's BMX",
     "part": "Wheels",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 159.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 6% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Fit.Cassette.Wheelset.black__43393.1572705496.1280.1280.jpg?v=1633460354",
     "spec_offers": [
       {
@@ -9418,7 +9417,8 @@
       "2026-11-06": 159.95,
       "2026-11-07": 159.95,
       "2026-11-08": 159.95,
-      "2026-11-09": 159.95
+      "2026-11-09": 159.95,
+      "2026-11-11": 159.95
     }
   },
   "https://www.albes.com/products/fit-29-rim": {
@@ -9539,12 +9539,11 @@
     "store": "Albe's BMX",
     "part": "Steering",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 10.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/fittechgripflange.jpg?v=1599834172",
     "prices": {
       "2026-11-01": 10.95,
@@ -9555,7 +9554,8 @@
       "2026-11-06": 10.95,
       "2026-11-07": 10.95,
       "2026-11-08": 10.95,
-      "2026-11-09": 10.95
+      "2026-11-09": 10.95,
+      "2026-11-11": 10.95
     }
   },
   "https://www.albes.com/products/fuse-alpha-pro-ankle-brace": {
@@ -9586,12 +9586,11 @@
     "store": "Albe's BMX",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 149.95,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
-    "catalog_scope_reason": "catalog scope: 6% off (< 10%)",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/5F6D249E-C72E-4615-AA63-9286A38DED86.jpg?v=1792431052",
     "prices": {
       "2026-11-03": 149.95,
@@ -9600,7 +9599,8 @@
       "2026-11-06": 149.95,
       "2026-11-07": 149.95,
       "2026-11-08": 149.95,
-      "2026-11-09": 149.95
+      "2026-11-09": 149.95,
+      "2026-11-11": 149.95
     }
   },
   "https://www.albes.com/products/fuse-omega-ballpark-gloves": {
@@ -9723,12 +9723,11 @@
     "store": "Albe's BMX",
     "part": "Wheels",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 339.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Gsport.Elite.Freecoaster.wheel.toothpaste__90569.1543282708.1280.1280.jpg?v=1672851528",
     "spec_offers": [
       {
@@ -9752,7 +9751,8 @@
       "2026-11-06": 339.95,
       "2026-11-07": 339.95,
       "2026-11-08": 339.95,
-      "2026-11-09": 339.95
+      "2026-11-09": 339.95,
+      "2026-11-11": 339.95
     }
   },
   "https://www.albes.com/products/gt-bikes-lp-5-heritage-20-tire": {
@@ -10242,18 +10242,18 @@
     "store": "Albe's BMX",
     "part": "Frames & Forks",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 179.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/kink.stoic.fork.chrome.png?v=1619121319",
     "prices": {
       "2026-11-06": 179.95,
       "2026-11-07": 179.95,
       "2026-11-08": 179.95,
-      "2026-11-09": 179.95
+      "2026-11-09": 179.95,
+      "2026-11-11": 179.95
     }
   },
   "https://www.albes.com/products/kink-universal-freecoaster-guard": {
@@ -10291,7 +10291,7 @@
     "all_time_low": 104.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 5% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Kink.Williams.Bars.chrome__59104.1551998772.1280.1280.jpg?v=1611192495",
     "prices": {
       "2026-11-06": 104.95,
@@ -10473,12 +10473,11 @@
     "store": "Albe's BMX",
     "part": "Tires",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 34.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/MERRITT.FT1.TIRE.BLACK.TAN.WALL.1.png?v=1764117582",
     "prices": {
       "2026-11-01": 34.95,
@@ -10489,7 +10488,8 @@
       "2026-11-06": 34.95,
       "2026-11-07": 34.95,
       "2026-11-08": 34.95,
-      "2026-11-09": 34.95
+      "2026-11-09": 34.95,
+      "2026-11-11": 34.95
     }
   },
   "https://www.albes.com/products/merritt-final-drive-mkll-freecoaster-hub": {
@@ -10650,7 +10650,7 @@
     "all_time_low": 36.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 3% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 3% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/image_27985a96-d6a5-40aa-a467-5da32dd4f0d6.jpg?v=1667254506",
     "prices": {
       "2026-11-01": 36.95,
@@ -10719,7 +10719,7 @@
     "all_time_low": 174.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 0% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 0% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/image_5d4dce75-e2ea-419e-9e9a-ba87ea2d6edb.jpg?v=1675183482",
     "spec_offers": [
       {
@@ -10799,18 +10799,18 @@
     "store": "Albe's BMX",
     "part": "Seating",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 54.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/mission.carrier.stealth.kit.v2.violet.png?v=1696523626",
     "prices": {
       "2026-11-06": 54.95,
       "2026-11-07": 54.95,
       "2026-11-08": 54.95,
-      "2026-11-09": 54.95
+      "2026-11-09": 54.95,
+      "2026-11-11": 54.95
     }
   },
   "https://www.albes.com/products/mission-command-bars": {
@@ -10863,12 +10863,11 @@
     "store": "Albe's BMX",
     "part": "Tires",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 22.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/16433_source_1490909057.jpg?v=1604334194",
     "prices": {
       "2026-11-01": 22.95,
@@ -10879,7 +10878,8 @@
       "2026-11-06": 22.95,
       "2026-11-07": 22.95,
       "2026-11-08": 22.95,
-      "2026-11-09": 22.95
+      "2026-11-09": 22.95,
+      "2026-11-11": 22.95
     }
   },
   "https://www.albes.com/products/mission-impulse-pc-pedals": {
@@ -10937,7 +10937,7 @@
     "all_time_low": 22.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 0% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 0% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Mission.Nexus.Sprocket.black__16533.1580401472.1280.1280.jpg?v=1594837652",
     "prices": {
       "2026-11-01": 22.95,
@@ -10976,12 +10976,11 @@
     "store": "Albe's BMX",
     "part": "Wheels",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 279.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/ODYSSEY.HAZARD.LITE.FREECOASTER.WHEEL.BLACK.png?v=1645214418",
     "spec_offers": [
       {
@@ -11005,7 +11004,8 @@
       "2026-11-06": 279.95,
       "2026-11-07": 279.95,
       "2026-11-08": 279.95,
-      "2026-11-09": 279.95
+      "2026-11-09": 279.95,
+      "2026-11-11": 279.95
     }
   },
   "https://www.albes.com/products/odyssey-hazard-lite-24-front-wheel": {
@@ -11013,12 +11013,11 @@
     "store": "Albe's BMX",
     "part": "Wheels",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 199.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 9% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Odyssey.Hazard.Lite.24inch.front.wheel.black.jpg?v=1600813219",
     "length": 24.0,
     "spec_offers": [
@@ -11035,7 +11034,8 @@
       "2026-11-06": 199.95,
       "2026-11-07": 199.95,
       "2026-11-08": 199.95,
-      "2026-11-09": 199.95
+      "2026-11-09": 199.95,
+      "2026-11-11": 199.95
     }
   },
   "https://www.albes.com/products/odyssey-hazard-lite-24-rear-wheel": {
@@ -11043,12 +11043,11 @@
     "store": "Albe's BMX",
     "part": "Wheels",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 279.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 7% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/odyssey.hazard.lite.24.wheel.blk.3.png?v=1770067361",
     "length": 24.0,
     "spec_offers": [
@@ -11065,7 +11064,8 @@
       "2026-11-06": 279.95,
       "2026-11-07": 279.95,
       "2026-11-08": 279.95,
-      "2026-11-09": 279.95
+      "2026-11-09": 279.95,
+      "2026-11-11": 279.95
     }
   },
   "https://www.albes.com/products/odyssey-hazard-lite-vandero-pro-front-wheel": {
@@ -11078,7 +11078,7 @@
     "all_time_low": 199.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 5% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/BTKA_15654679214310172_28f58f61be5ca90ddd5d3ecb5c8ddc__13556.1575935706.1280.1280.jpg?v=1582045160",
     "spec_offers": [
       {
@@ -11112,7 +11112,7 @@
     "all_time_low": 229.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 0% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 0% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/odyssey.quadrant.freecoaster.wheel.black.png?v=1611013748",
     "length": 20.0,
     "spec_offers": [
@@ -11192,19 +11192,18 @@
     "store": "Albe's BMX",
     "part": "Wheels",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 159.95,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 6% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.moonwalker.freecoaster.black.png?v=1606348796",
     "length": 18.0,
     "spec_offers": [
       {
         "diameter_mm": null,
         "durometers": [],
-        "variant_id": "32596983578698",
+        "variant_id": "39504316432458",
         "available": true,
         "price": 159.95,
         "compare_at_price": 169.95
@@ -11219,7 +11218,8 @@
       "2026-11-06": 159.95,
       "2026-11-07": 159.95,
       "2026-11-08": 159.95,
-      "2026-11-09": 159.95
+      "2026-11-09": 159.95,
+      "2026-11-11": 159.95
     }
   },
   "https://www.albes.com/products/rant-party-on-v2-18-rear-cassette-wheel": {
@@ -11509,7 +11509,7 @@
     "all_time_low": 44.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 2% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 2% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/image_59687194-cc2a-459e-a48b-1baf1bf08b85.jpg?v=1614815544",
     "length": 29.0,
     "prices": {
@@ -11564,12 +11564,11 @@
     "store": "Albe's BMX",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 27.95,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
-    "catalog_scope_reason": "catalog scope: 7% off (< 10%)",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.invisalite.ankle.guard.1__03409.1520626575.1280.1280.jpg?v=1582040601",
     "prices": {
       "2026-11-03": 27.95,
@@ -11578,7 +11577,8 @@
       "2026-11-06": 27.95,
       "2026-11-07": 27.95,
       "2026-11-08": 27.95,
-      "2026-11-09": 27.95
+      "2026-11-09": 27.95,
+      "2026-11-11": 27.95
     }
   },
   "https://www.albes.com/products/shadow-invisa-lite-shin-ankle-combo-youth-pads": {
@@ -11636,12 +11636,11 @@
     "store": "Albe's BMX",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 55.95,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.super.slim.v2.knee.1.png?v=1604680049",
     "prices": {
       "2026-11-03": 55.95,
@@ -11650,7 +11649,8 @@
       "2026-11-06": 55.95,
       "2026-11-07": 55.95,
       "2026-11-08": 55.95,
-      "2026-11-09": 55.95
+      "2026-11-09": 55.95,
+      "2026-11-11": 55.95
     }
   },
   "https://www.albes.com/products/shadow-transmission-conspire-gloves": {
@@ -11724,18 +11724,18 @@
     "store": "Albe's BMX",
     "part": "Frames & Forks",
     "first_seen": "2026-11-06",
-    "last_seen": "2026-11-09",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 489.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 9% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/sunday.nightshift.frame.skyblue.png?v=1772038254",
     "prices": {
       "2026-11-06": 489.95,
       "2026-11-07": 489.95,
       "2026-11-08": 489.95,
-      "2026-11-09": 489.95
+      "2026-11-09": 489.95,
+      "2026-11-11": 489.95
     }
   },
   "https://www.albes.com/products/sunday-wavelength-frame": {
@@ -11748,7 +11748,7 @@
     "all_time_low": 389.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 5% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/sunday.wavelength.frame.matte.gold.1.webp?v=1778683989",
     "prices": {
       "2026-11-06": 389.95,
@@ -12067,7 +12067,7 @@
     "all_time_low": 399.95,
     "all_time_low_date": "2026-11-06",
     "stage": "new",
-    "catalog_scope_reason": "catalog scope: 5% off (< 10%)",
+    "catalog_scope_reason": "catalog scope: 5% off (< 5%)",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/36DE4E49-7178-403F-A50B-858F3281D839.jpg?v=1790791426",
     "prices": {
       "2026-11-06": 399.95,
@@ -12576,12 +12576,11 @@
     "store": "Circuit BMX",
     "part": "Bikes",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 679.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 6% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0045/7862/files/08D5FF38-698D-4571-8604-361BDB42FE26.jpg?v=1759838821",
     "length": 22.0,
     "prices": {
@@ -12593,7 +12592,8 @@
       "2026-11-06": 679.99,
       "2026-11-07": 679.99,
       "2026-11-08": 679.99,
-      "2026-11-09": 679.99
+      "2026-11-09": 679.99,
+      "2026-11-11": 679.99
     }
   },
   "https://www.circuitbmx.com/products/gt-overdrive-sprocket": {
@@ -15044,12 +15044,11 @@
     "store": "Colorado Cyclist",
     "part": "Protection",
     "first_seen": "2026-11-04",
-    "last_seen": "2026-11-09",
-    "observation_count": 6,
+    "last_seen": "2026-11-11",
+    "observation_count": 7,
     "all_time_low": 121.99,
     "all_time_low_date": "2026-11-04",
-    "stage": "new",
-    "catalog_scope_reason": "catalog scope: 10% off (< 10%)",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/TroyLeeDesignsRockfightChestProtector-White_d8c32900-9fdf-4823-8e9f-c6811311a073.jpg?v=1775651487",
     "prices": {
       "2026-11-04": 121.99,
@@ -15057,7 +15056,8 @@
       "2026-11-06": 121.99,
       "2026-11-07": 121.99,
       "2026-11-08": 121.99,
-      "2026-11-09": 121.99
+      "2026-11-09": 121.99,
+      "2026-11-11": 121.99
     }
   },
   "https://www.coloradocyclist.com/products/troy-lee-designs-rogue-knee-guard-replacement-buckle-youth-red": {
@@ -15134,11 +15134,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 447.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/apex-womens-hero.png?v=1791905786",
     "prices": {
       "2026-11-03": 447.99,
@@ -15147,7 +15147,8 @@
       "2026-11-06": 447.99,
       "2026-11-07": 447.99,
       "2026-11-08": 447.99,
-      "2026-11-09": 447.99
+      "2026-11-09": 447.99,
+      "2026-11-11": 447.99
     }
   },
   "https://www.demonunited.com/products/crossover-kit-x-v7-shorts-zero-rf-knee-pads": {
@@ -15155,11 +15156,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 173.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-x-v7-crossover-kit-shorts-zero-rf-knee-bundle-v1.png?v=1792431219",
     "prices": {
       "2026-11-03": 173.99,
@@ -15168,7 +15169,8 @@
       "2026-11-06": 173.99,
       "2026-11-07": 173.99,
       "2026-11-08": 173.99,
-      "2026-11-09": 173.99
+      "2026-11-09": 173.99,
+      "2026-11-11": 173.99
     }
   },
   "https://www.demonunited.com/products/demon-crash-course-protection-kit": {
@@ -15176,11 +15178,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 118.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-zero-plus-park-rat-kit-shorts-wrist-bundle-v2.png?v=1793723881",
     "prices": {
       "2026-11-03": 118.99,
@@ -15189,7 +15191,8 @@
       "2026-11-06": 118.99,
       "2026-11-07": 118.99,
       "2026-11-08": 118.99,
-      "2026-11-09": 118.99
+      "2026-11-09": 118.99,
+      "2026-11-11": 118.99
     }
   },
   "https://www.demonunited.com/products/demon-full-send-protection-kit": {
@@ -15197,11 +15200,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 164.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-zero-plus-full-send-loadout-shorts-knee-wrist-bundle-v2.png?v=1793723880",
     "prices": {
       "2026-11-03": 164.99,
@@ -15210,7 +15213,8 @@
       "2026-11-06": 164.99,
       "2026-11-07": 164.99,
       "2026-11-08": 164.99,
-      "2026-11-09": 164.99
+      "2026-11-09": 164.99,
+      "2026-11-11": 164.99
     }
   },
   "https://www.demonunited.com/products/demon-lower-body-protection-kit": {
@@ -15218,11 +15222,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 146.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-zero-plus-send-it-starter-kit-shorts-knee-bundle-v2.png?v=1793723880",
     "prices": {
       "2026-11-03": 146.99,
@@ -15231,7 +15235,8 @@
       "2026-11-06": 146.99,
       "2026-11-07": 146.99,
       "2026-11-08": 146.99,
-      "2026-11-09": 146.99
+      "2026-11-09": 146.99,
+      "2026-11-11": 146.99
     }
   },
   "https://www.demonunited.com/products/demon-pad-pack-knee-elbow": {
@@ -15239,11 +15244,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 86.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/hf_20260720_193603_95ff8b44-f021-4aad-94d9-24e2a96e47a8.png?v=1784576309",
     "prices": {
       "2026-11-03": 86.99,
@@ -15252,7 +15257,8 @@
       "2026-11-06": 86.99,
       "2026-11-07": 86.99,
       "2026-11-08": 86.99,
-      "2026-11-09": 86.99
+      "2026-11-09": 86.99,
+      "2026-11-11": 86.99
     }
   },
   "https://www.demonunited.com/products/demon-podium-helmet-w-mips-no-original-packaging": {
@@ -15260,11 +15266,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 84.0,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/products/Demon_2018Podium_mips3_1.jpg?v=1593467724",
     "prices": {
       "2026-11-03": 84.0,
@@ -15273,7 +15279,8 @@
       "2026-11-06": 84.0,
       "2026-11-07": 84.0,
       "2026-11-08": 84.0,
-      "2026-11-09": 84.0
+      "2026-11-09": 84.0,
+      "2026-11-11": 84.0
     }
   },
   "https://www.demonunited.com/products/demon-tactic-knee-shin-guards-no-original-packaging-tags": {
@@ -15281,11 +15288,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 41.6,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/products/Tactical_front_67625d46-12eb-4c23-a581-e959077a5764.jpg?v=1650645888",
     "prices": {
       "2026-11-03": 41.6,
@@ -15294,7 +15301,8 @@
       "2026-11-06": 41.6,
       "2026-11-07": 41.6,
       "2026-11-08": 41.6,
-      "2026-11-09": 41.6
+      "2026-11-09": 41.6,
+      "2026-11-11": 41.6
     }
   },
   "https://www.demonunited.com/products/demon-vest-shorts-kit": {
@@ -15302,11 +15310,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 191.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/hf_20260720_193611_36db44ea-d9eb-45bb-abca-8d75e24ed142.png?v=1784576310",
     "prices": {
       "2026-11-03": 191.99,
@@ -15315,7 +15323,8 @@
       "2026-11-06": 191.99,
       "2026-11-07": 191.99,
       "2026-11-08": 191.99,
-      "2026-11-09": 191.99
+      "2026-11-09": 191.99,
+      "2026-11-11": 191.99
     }
   },
   "https://www.demonunited.com/products/demon-x-v7-d3o-complete-kit-top-shorts-knee-pads": {
@@ -15323,11 +15332,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 447.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/hf_20260720_193904_77bc02ef-a3f2-4800-a0fc-162714e1e49d.png?v=1784576435",
     "prices": {
       "2026-11-03": 447.99,
@@ -15336,7 +15345,8 @@
       "2026-11-06": 447.99,
       "2026-11-07": 447.99,
       "2026-11-08": 447.99,
-      "2026-11-09": 447.99
+      "2026-11-09": 447.99,
+      "2026-11-11": 447.99
     }
   },
   "https://www.demonunited.com/products/demon-zero-rf-complete-kit-top-shorts-knee-pads": {
@@ -15344,11 +15354,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 251.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/hf_20260720_194610_766c8619-c4b8-4ff9-983b-c48396ebf2f2_1.png?v=1784579318",
     "prices": {
       "2026-11-03": 251.99,
@@ -15357,7 +15367,8 @@
       "2026-11-06": 251.99,
       "2026-11-07": 251.99,
       "2026-11-08": 251.99,
-      "2026-11-09": 251.99
+      "2026-11-09": 251.99,
+      "2026-11-11": 251.99
     }
   },
   "https://www.demonunited.com/products/demon-zero-rf-impact-base-layer-kit": {
@@ -15365,11 +15376,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 205.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/hf_20260720_205643_200ba498-4fa5-4133-aa84-80f5d4db8477.png?v=1784581119",
     "prices": {
       "2026-11-03": 205.99,
@@ -15378,7 +15389,8 @@
       "2026-11-06": 205.99,
       "2026-11-07": 205.99,
       "2026-11-08": 205.99,
-      "2026-11-09": 205.99
+      "2026-11-09": 205.99,
+      "2026-11-11": 205.99
     }
   },
   "https://www.demonunited.com/products/full-metal-loadout-zero-plus-top-shorts-knee-pads": {
@@ -15386,11 +15398,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 292.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-zero-plus-full-metal-loadout-top-shorts-knee-pads-bundle-v4_9d9cbc9a-2677-41be-a01d-27f8e0bf0358.png?v=1791305880",
     "prices": {
       "2026-11-03": 292.99,
@@ -15399,7 +15411,8 @@
       "2026-11-06": 292.99,
       "2026-11-07": 292.99,
       "2026-11-08": 292.99,
-      "2026-11-09": 292.99
+      "2026-11-09": 292.99,
+      "2026-11-11": 292.99
     }
   },
   "https://www.demonunited.com/products/hard-landing-kit-womens-x-v7-shorts-hyper-knee-pads": {
@@ -15407,11 +15420,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 228.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-x-v7-hard-landing-kit-womens-shorts-knee-bundle-v1.png?v=1792431219",
     "prices": {
       "2026-11-03": 228.99,
@@ -15420,7 +15433,8 @@
       "2026-11-06": 228.99,
       "2026-11-07": 228.99,
       "2026-11-08": 228.99,
-      "2026-11-09": 228.99
+      "2026-11-09": 228.99,
+      "2026-11-11": 228.99
     }
   },
   "https://www.demonunited.com/products/hard-landing-kit-x-v7-shorts-hyper-knee-pads": {
@@ -15428,11 +15442,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 228.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-x-v7-hard-landing-kit-shorts-knee-bundle-v1.png?v=1792431207",
     "prices": {
       "2026-11-03": 228.99,
@@ -15441,7 +15455,8 @@
       "2026-11-06": 228.99,
       "2026-11-07": 228.99,
       "2026-11-08": 228.99,
-      "2026-11-09": 228.99
+      "2026-11-09": 228.99,
+      "2026-11-11": 228.99
     }
   },
   "https://www.demonunited.com/products/hyper-elbow-d30-no-original-packaging-tags": {
@@ -15449,11 +15464,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 29.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/products/DS5126_20Hyper_20xd30_20elbow-900x900.jpg?v=1593467718",
     "prices": {
       "2026-11-03": 29.99,
@@ -15462,7 +15477,8 @@
       "2026-11-06": 29.99,
       "2026-11-07": 29.99,
       "2026-11-08": 29.99,
-      "2026-11-09": 29.99
+      "2026-11-09": 29.99,
+      "2026-11-11": 29.99
     }
   },
   "https://www.demonunited.com/products/hyper-knee-d30-v3-no-original-packaging-tags": {
@@ -15470,11 +15486,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 38.39,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/products/DS5125_20hyper_20knee_20xd30-900x900.jpg?v=1593467713",
     "prices": {
       "2026-11-03": 38.39,
@@ -15483,7 +15499,8 @@
       "2026-11-06": 38.39,
       "2026-11-07": 38.39,
       "2026-11-08": 38.39,
-      "2026-11-09": 38.39
+      "2026-11-09": 38.39,
+      "2026-11-11": 38.39
     }
   },
   "https://www.demonunited.com/products/no-packaging-flexmeter-single-sided-wrist-guards": {
@@ -15491,11 +15508,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 44.0,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/products/Flexmeter-single_a7476f4f-80f2-4b88-b450-40ffbb0d93da.png?v=1640799421",
     "prices": {
       "2026-11-03": 44.0,
@@ -15504,7 +15521,8 @@
       "2026-11-06": 44.0,
       "2026-11-07": 44.0,
       "2026-11-08": 44.0,
-      "2026-11-09": 44.0
+      "2026-11-09": 44.0,
+      "2026-11-11": 44.0
     }
   },
   "https://www.demonunited.com/products/steel-spine-kit-zero-plus-vest-shorts": {
@@ -15512,11 +15530,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 219.99,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-zero-plus-steel-spine-kit-vest-shorts-bundle-v3_f63acae6-8d23-44af-bc18-66ce13600057.png?v=1791305583",
     "prices": {
       "2026-11-03": 219.99,
@@ -15525,7 +15543,8 @@
       "2026-11-06": 219.99,
       "2026-11-07": 219.99,
       "2026-11-08": 219.99,
-      "2026-11-09": 219.99
+      "2026-11-09": 219.99,
+      "2026-11-11": 219.99
     }
   },
   "https://www.demonunited.com/products/suit-up-send-it-x-v7-d3o-top-knee-pads": {
@@ -15533,11 +15552,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 7,
+    "last_seen": "2026-11-11",
+    "observation_count": 8,
     "all_time_low": 319.98,
     "all_time_low_date": "2026-11-03",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/demon-suit-up-send-it-bundle-x-v7-d3o-top-hyper-x-v7-knee-pads.png?v=1786922891",
     "prices": {
       "2026-11-03": 319.98,
@@ -15546,7 +15565,8 @@
       "2026-11-06": 319.98,
       "2026-11-07": 319.98,
       "2026-11-08": 319.98,
-      "2026-11-09": 319.98
+      "2026-11-09": 319.98,
+      "2026-11-11": 319.98
     }
   },
   "https://www.fiendbmx.com/products/cab-freecoaster": {
@@ -18865,12 +18885,11 @@
     "store": "Powers BMX",
     "part": "Seating",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 36.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0689/7043/files/ODSY-Tropical_Seat-3QR-web_2048x2048_28cd1c4e-4a0a-4b53-8253-0087fbcbff4f.webp?v=1744741950",
     "prices": {
       "2026-11-01": 36.99,
@@ -18881,7 +18900,8 @@
       "2026-11-06": 36.99,
       "2026-11-07": 36.99,
       "2026-11-08": 36.99,
-      "2026-11-09": 36.99
+      "2026-11-09": 36.99,
+      "2026-11-11": 36.99
     }
   },
   "https://www.powersbmx.com/products/onyx-hubs-cotm-dark-charcoal-blue": {
@@ -19215,12 +19235,11 @@
     "store": "Powers BMX",
     "part": "Bikes",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 549.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 8% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0689/7043/files/921482-01_1.jpg?v=1739552533",
     "prices": {
       "2026-11-01": 549.99,
@@ -19231,7 +19250,8 @@
       "2026-11-06": 549.99,
       "2026-11-07": 549.99,
       "2026-11-08": 549.99,
-      "2026-11-09": 549.99
+      "2026-11-09": 549.99,
+      "2026-11-11": 549.99
     }
   },
   "https://www.powersbmx.com/products/radio-raceline-oxygen-tire": {
@@ -19950,12 +19970,11 @@
     "store": "Powers BMX",
     "part": "Drivetrain",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 69.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 7% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0689/7043/products/103-07066_TSC_MetalPedalAlloySealed_Black_WEB-800x800.jpg?v=1617804511",
     "prices": {
       "2026-11-01": 69.99,
@@ -19966,7 +19985,8 @@
       "2026-11-06": 69.99,
       "2026-11-07": 69.99,
       "2026-11-08": 69.99,
-      "2026-11-09": 69.99
+      "2026-11-09": 69.99,
+      "2026-11-11": 69.99
     }
   },
   "https://www.powersbmx.com/products/shadow-penumbra-trey-jones-series-10-seat": {
@@ -19999,12 +20019,11 @@
     "store": "Powers BMX",
     "part": "Drivetrain",
     "first_seen": "2026-11-01",
-    "last_seen": "2026-11-09",
-    "observation_count": 9,
+    "last_seen": "2026-11-11",
+    "observation_count": 10,
     "all_time_low": 69.99,
     "all_time_low_date": "2026-11-01",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: 7% off (< 10%)",
     "image": "https://cdn.shopify.com/s/files/1/0689/7043/files/410334.jpg?v=1790976337",
     "prices": {
       "2026-11-01": 69.99,
@@ -20015,7 +20034,8 @@
       "2026-11-06": 69.99,
       "2026-11-07": 69.99,
       "2026-11-08": 69.99,
-      "2026-11-09": 69.99
+      "2026-11-09": 69.99,
+      "2026-11-11": 69.99
     }
   },
   "https://www.powersbmx.com/products/shadow-tripod-seatpost-25-4mm": {
@@ -20785,19 +20805,18 @@
     "store": "SkatePro",
     "part": "Protection",
     "first_seen": "2026-11-04",
-    "last_seen": "2026-11-07",
-    "observation_count": 4,
+    "last_seen": "2026-11-11",
+    "observation_count": 5,
     "all_time_low": 30.95,
     "all_time_low_date": "2026-11-04",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-09",
+    "stage": "all_time_low",
     "image": "https://cdn.skatepro.com/product/400/sfr-essentials-matte-skate-helmet-n7.webp",
     "prices": {
       "2026-11-04": 30.95,
       "2026-11-05": 30.95,
       "2026-11-06": 30.95,
-      "2026-11-07": 30.95
+      "2026-11-07": 30.95,
+      "2026-11-11": 30.95
     }
   },
   "https://www.tactics.com/187-killer-pads/slim-knee-pads/black": {
