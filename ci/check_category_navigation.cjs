@@ -25,21 +25,24 @@ async function main(){
    async function counts(){
     await page.waitForFunction(()=>{
      const source=document.getElementById('skateFrame').contentDocument;
+     if(!source?.querySelector('#mainTable'))return false;
      const actual=[...document.querySelectorAll('#categoryChoices button[data-part]')];
      const original=[...source.querySelectorAll('#partFilters button[data-part]')];
-     return actual.length===original.length&&actual.every(button=>original.some(node=>node.dataset.part===button.dataset.part&&node.dataset.count===button.dataset.count&&node.getAttribute('aria-pressed')===button.getAttribute('aria-pressed')));
+     const totals={all:0};for(const row of source.querySelectorAll('#mainTable .deal-row')){
+      if(row.dataset.removed==='1')continue;
+      totals.all++;totals[row.dataset.part]=(totals[row.dataset.part]||0)+1;
+     }
+     return actual.length===original.length&&actual.every(button=>original.some(node=>node.dataset.part===button.dataset.part&&Number(button.dataset.count)===(totals[node.dataset.part]||0)&&node.getAttribute('aria-pressed')===button.getAttribute('aria-pressed')));
     });
     const child=await frame();
     const live=await child.locator('.deal-row:not(.filtered-out)').count();
-    const selected=await page.locator('#categoryChoices button[aria-pressed=true]').getAttribute('data-count');
-    const available = await child.evaluate(() => dealRows().filter(row => rowMatches(row,{part:'all'}) && (state.part==='all' || row.dataset.part===state.part)).length);
-    assert.equal(Number(selected),available,'menu must retain existing category facet semantics');
+    assert.equal(await page.locator('#categoryChoices button').evaluateAll(nodes=>nodes.filter(n=>Number(n.dataset.count)>0&&n.disabled).length),0,'available navigation categories are never disabled by filters');
     assert.equal(Number(await page.locator('#categoryCount').innerText()),live);
    }
    async function select(part){
     await page.locator('#categoryToggle').click();
     await page.locator('#categoryChoices button[data-part='+JSON.stringify(part)+']').click();
-    const child=await frame();await child.waitForFunction(part=>state.part===part,part);
+    await ready();const child=await frame();await child.waitForFunction(part=>typeof state!=='undefined'&&state.part===part,part);
     await counts();
    }
    async function input(id,value){
@@ -93,8 +96,54 @@ async function main(){
    await child.evaluate(()=>clearFilters());await counts();
    if(sport==='skate'){
     await child.locator('#storeFilters .quick-chip[data-store="Tactics"]').click();
+    await child.evaluate(()=>filterByPart('Wheels'));await counts();
+    assert.equal(await child.locator('#storeSelect').inputValue(),'Tactics','sidebar category facet still preserves retailer');
     await select('Wheels');
-    assert.equal(await child.locator('#storeSelect').inputValue(),'Tactics','category choice must preserve retailer selection');
+    assert.equal(await child.locator('#storeSelect').inputValue(),'all','top category choice clears retailer selection');
+    await child.evaluate(()=>clearFilters());await counts();
+   }
+   if(sport==='bmx'){
+    // #254 primary brief / #255 acceptance: fresh top navigation, deliberate URLs preserved.
+    await select('Protection');
+    await child.evaluate(()=>{SportSpecFilters.restore({protects:['Wrists','Elbows']});applyFilters();});
+    await page.waitForURL(url=>url.searchParams.has('bmx_protects'));
+    await child.waitForFunction(()=>document.querySelectorAll('.deal-row:not(.filtered-out)').length>0);
+    const sample=await child.locator('.deal-row:not(.filtered-out)').first().evaluate(n=>({brand:n.dataset.brand,store:n.dataset.store}));
+    await input('brandSelect',sample.brand);await input('storeSelect',sample.store);await input('priceMax','1');
+    const priorURL=page.url();
+    const priorState=await child.evaluate(()=>({technical:SportSpecFilters.capture(),brand:state.brand,store:state.store,priceMax:state.priceMax}));
+    const seatsTotal=Number(await page.locator('#categoryChoices [data-part="Seats & Posts"]').getAttribute('data-count'));
+    await select('Seats & Posts');
+    assert.equal(await child.locator('.deal-row:not(.filtered-out)').count(),seatsTotal);
+    assert.equal((await child.locator('#breadcrumbs').innerText()).replace(/\s+/g,' ').trim(),'BMX Seats & Posts');
+    assert.doesNotMatch(await child.locator('#activeChips').innerText(),/Wrists|Elbows|Protects/);
+    assert.equal(await child.locator('#brandSelect').inputValue(),'all');
+    assert.equal(await child.locator('#storeSelect').inputValue(),'all');
+    assert.equal(await child.locator('#priceMax').inputValue(),'');
+    assert.equal(new URL(page.url()).searchParams.has('bmx_protects'),false);
+    if(width===1440||width===390)await page.screenshot({path:path.join(output,`fresh-seats-${width}.png`)});
+    await page.goBack();await ready();await counts();
+    assert.equal(page.url(),priorURL);
+    assert.deepEqual(await child.evaluate(()=>({technical:SportSpecFilters.capture(),brand:state.brand,store:state.store,priceMax:state.priceMax})),priorState);
+    assert.match(await child.locator('#breadcrumbs').innerText(),/Wrists/);
+    await page.goForward();await ready();await counts();
+    const supacaz=await child.evaluate(()=>{const node=document.getElementById('brandSelect');return Array.from(node._facetPool||node.options).find(o=>o.value.toLowerCase()==='supacaz')?.value;});
+    assert(supacaz,'catalog has the reported Supacaz brand');await input('brandSelect',supacaz);
+    await select('Bikes');
+    assert.equal(await child.locator('#brandSelect').inputValue(),'all','seats brand cannot constrain bike navigation');
+    // Direct legacy/saved-view state remains serialized even when its dimension is dormant.
+    await page.goto(base+'/?sport=bmx&type=seats-posts&bmx_protects=Wrists%2CElbows&brand=supacaz');
+    await ready();await counts();child=await frame();
+    assert.deepEqual(await child.evaluate(()=>SportSpecFilters.capture().protects),['Wrists','Elbows']);
+    assert.doesNotMatch(await child.locator('#breadcrumbs').innerText(),/Wrists|Elbows/);
+    assert.doesNotMatch(await child.locator('#activeChips').innerText(),/Protects|Wrists|Elbows/);
+    assert.match(await child.evaluate(()=>encodeState(captureState())),/bmx_protects=Wrists%2CElbows/);
+    const saved=await child.evaluate(()=>encodeState(captureState()));
+    await child.evaluate(query=>{applySnapshot(decodeQuery(query));},saved);
+    await counts();
+    assert.equal(await child.locator('.deal-row:not(.filtered-out)').count(),1);
+    await child.evaluate(()=>filterByPart('Protection'));
+    assert.match(await child.locator('#activeChips').innerText(),/Wrists/,'sidebar restores applicability without destroying mixed state');
     await child.evaluate(()=>clearFilters());await counts();
    }
    await select(target);

@@ -39,6 +39,25 @@
         next.searchParams.delete("scope");
         return next;
     }
+    // Global category navigation starts fresh; sidebar category facets do not.
+    function categoryURL(url, config, sportId, slug) {
+        const next = navigate(url, config, sportId);
+        clearCatalogQuery(next.searchParams, config);
+        next.searchParams.set('type', slug);
+        return next;
+    }
+    function baseCategoryCounts(rows) {
+        const counts = {all: 0};
+        for (const row of rows) {
+            const data = row.dataset || row;
+            if (data.removed === '1') continue;
+            const part = data.part;
+            if (!part || part === 'all') continue;
+            counts.all += 1;
+            counts[part] = (counts[part] || 0) + 1;
+        }
+        return counts;
+    }
     // A sport with a catalog page shows it in the frame; the rest say "coming soon".
     function catalogURL(url, config, sportId) {
         const parent = new URL(url);
@@ -229,7 +248,7 @@
             doc.getElementById('categoryTitle').textContent = (sport?.label || '') + ' categories';
             panel.setAttribute('aria-busy',String(!entry));
             doc.getElementById('categoryHint').textContent = entry ?
-                (menuSport === state(win.location.href,config).sport.id ? 'Counts update with your filters.' : 'Counts for this sport before applying filters.') : 'Loading catalog categories…';
+                'Full catalog counts. Choosing a category clears filters.' : 'Loading catalog categories…';
             if (!entry) {
                 if (categoryErrors.has(menuSport)) {
                     panel.setAttribute('aria-busy','false');
@@ -237,30 +256,24 @@
                 }
                 return;
             }
-            const originals = entry.source ? [...entry.source.querySelectorAll('button[data-part]')].sort((a,b)=>Number(a.dataset.order)-Number(b.dataset.order)) : entry.categories;
-            for (const original of originals) {
-                const part = entry.source ? original.dataset.part : original.category;
+            const selected = entry.source?.querySelector('[aria-pressed=true]')?.dataset.part;
+            for (const original of entry.categories) {
+                const part = original.category;
                 const button = doc.createElement('button');
                 button.type = 'button'; button.className = 'category-choice'; button.dataset.part = part;
-                const name = part === 'all' ? 'All products' : entry.source ? original.querySelector('.quick-name').textContent : (original.label || part);
-                const count = entry.source ? original.getAttribute('data-count') || '0' : String(original.count);
-                const active = !!entry.source && menuSport === state(win.location.href,config).sport.id && original.getAttribute('aria-pressed') === 'true';
+                const name = part === 'all' ? 'All products' : original.label || part;
+                const count = String(original.count);
+                const active = !!entry.source && menuSport === state(win.location.href,config).sport.id && selected === part;
                 for (const [className,text] of [['category-name',name],['category-count',count]]) {
                     const span = doc.createElement('span'); span.className = className; span.textContent = text; button.appendChild(span);
                 }
                 button.dataset.count = count;
                 button.setAttribute('aria-pressed',String(active));
-                button.disabled = (entry.source && original.disabled) || (Number(count) === 0 && !active && part !== 'all');
-                button.setAttribute('aria-label',name + ', ' + count + ' matching products');
+                button.disabled = Number(count) === 0 && !active && part !== 'all';
+                button.setAttribute('aria-label',name + ', ' + count + ' catalog products');
                 button.addEventListener('click',() => {
-                    const current = state(win.location.href,config);
-                    if (menuSport === current.sport.id && !current.scope && entry.child === frame.contentWindow) original.click();
-                    else {
-                        const next = navigate(win.location.href,config,menuSport);
-                        if (part === 'all') next.searchParams.set('type','all');
-                        else next.searchParams.set('type',entry.source ? entry.child.typeSlug(part) : original.slug);
-                        win.history.pushState({},'',next); render();
-                    }
+                    const next = categoryURL(win.location.href,config,menuSport,original.slug);
+                    win.history.pushState({},'',next); render();
                     opener = doc.getElementById('sport-'+state(win.location.href,config).sport.id);
                     closeCategories(true);
                 });
@@ -273,7 +286,15 @@
         function registerCategories(source,child) {
             const sport = config.sports.find(item => new URL(item.catalog,win.location.href).pathname === child.location.pathname);
             if (!sport) return;
-            const entry = {source,child}; sources.set(sport.id,entry);
+            // Count actual catalog rows once, before any filter semantics. Direct
+            // filtered URLs may already have changed every source button count.
+            const counts = baseCategoryCounts(child.dealRows());
+            const categories = [...source.querySelectorAll('button[data-part]')]
+                .sort((a,b)=>Number(a.dataset.order)-Number(b.dataset.order))
+                .map(button=>({category:button.dataset.part, slug:child.typeSlug(button.dataset.part),
+                    label:button.querySelector('.quick-name').textContent,
+                    count:counts[button.dataset.part] || 0}));
+            const entry = {source,child,categories}; sources.set(sport.id,entry);
             function sync() {
                 if (sources.get(sport.id) !== entry) return;
                 if (menuSport === sport.id && !panel.hidden) {
@@ -540,5 +561,5 @@
         render();
         return { render, choose, chooseView, state: () => state(win.location.href, config), closeCategories, registerCategories, bridgeVersion: config.bridgeVersion };
     }
-    return { state, navigate, skateURL, catalogURL, mergeSkateURL, nextIndex, mount };
+    return { state, navigate, categoryURL, baseCategoryCounts, skateURL, catalogURL, mergeSkateURL, nextIndex, mount };
 });
