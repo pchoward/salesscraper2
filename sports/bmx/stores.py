@@ -362,13 +362,38 @@ EMPIRE = shopify.ShopifyStore(
 )
 
 
+# Stacked BMX (store probe 2026-11-11, owner approved): rider-owned shop in
+# Riverside, CA. Shopify, USD, robots allow collections. Its sale collection
+# shows a few items, so the whole catalog (~1,400) is read for markdowns
+# (15 that day, among them Kuwahara and Race Inc big-BMX bikes).
+STACKED_TYPES = dict(TYPES, **{
+    "freestyle bmx bikes": "Bikes", "big bmx wheelie bikes": "Bikes", "bmx race bikes": "Bikes",
+    "mini bmx bikes": "Bikes", "brakes accessories": "Braking", "brake parts": "Braking",
+    "hubs hub guards": "Wheel Parts", "bb crank bearings": "Drivetrain", "cranks": "Drivetrain",
+    "tubes": "Tires", "rim strips": "Wheel Parts", "protective pads braces": "Protection",
+})
+STACKED = shopify.ShopifyStore(
+    "Stacked BMX",
+    "Stacked BMX",
+    "https://www.stackedbmxshop.com",
+    collection="the-best-deals-on-bmx-bikes-parts-on-sale",
+    types=STACKED_TYPES,
+    brand_of=brands.for_sport(sports.BMX),
+    own_vendor="stacked",
+    title_part=title_part,
+    details=details,
+    track_exclusions=True,
+    whole_site=True,
+)
+
+
 BMX_BRANDS = (
     bmx_brand("Kink", "https://www.kinkbmx.com", "sale"),
     bmx_brand("Haro", "https://www.harobikes.com", "summer-parts-sale"),
     bmx_brand("Fiend", "https://www.fiendbmx.com", "clearance", whole_site=True),  # audit 2026-11-06: 3 more
 )
 
-STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US, EMPIRE) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS
+STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US, EMPIRE, STACKED) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS
 
 PARTS = sports.BMX.parts
 
