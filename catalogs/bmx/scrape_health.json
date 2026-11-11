@@ -20048,38 +20048,38 @@
           }
         },
         "Source BMX US_Drivetrain": {
-          "count": 21,
+          "count": 20,
           "failed": false,
           "diagnostics": {
             "expected_count": 20.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 21,
-            "percentage_change": 5.0,
+            "actual_count": 20,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
         "Source BMX US_Frames & Forks": {
-          "count": 18,
+          "count": 20,
           "failed": false,
           "diagnostics": {
             "expected_count": 16.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 18,
-            "percentage_change": 12.5,
+            "actual_count": 20,
+            "percentage_change": 25.0,
             "reason": "normal_variation"
           }
         },
         "Source BMX US_Protection": {
-          "count": 31,
+          "count": 44,
           "failed": false,
           "diagnostics": {
             "expected_count": 31.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.0,
-            "actual_count": 31,
-            "percentage_change": 0.0,
+            "actual_count": 44,
+            "percentage_change": 41.9,
             "reason": "normal_variation"
           }
         },
@@ -20096,38 +20096,38 @@
           }
         },
         "Source BMX US_Steering": {
-          "count": 21,
+          "count": 22,
           "failed": false,
           "diagnostics": {
             "expected_count": 22.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 21,
-            "percentage_change": -4.5,
+            "actual_count": 22,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
         "Source BMX US_Tires": {
-          "count": 23,
+          "count": 24,
           "failed": false,
           "diagnostics": {
             "expected_count": 24.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 23,
-            "percentage_change": -4.2,
+            "actual_count": 24,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
         "Source BMX US_Wheel Parts": {
-          "count": 72,
+          "count": 73,
           "failed": false,
           "diagnostics": {
             "expected_count": 50.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 19.5,
-            "actual_count": 72,
-            "percentage_change": 44.0,
+            "actual_count": 73,
+            "percentage_change": 46.0,
             "reason": "normal_variation"
           }
         },
@@ -20529,7 +20529,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-11T14:59:57+00:00"
+      "scanned_at": "2026-11-11T18:10:12+00:00"
     }
   ],
   "baseline": {
@@ -20615,11 +20615,11 @@
     },
     "Source BMX US_Drivetrain": {
       "date": "2026-11-11",
-      "count": 21
+      "count": 20
     },
     "Source BMX US_Frames & Forks": {
       "date": "2026-11-11",
-      "count": 18
+      "count": 20
     },
     "Source BMX US_Seating": {
       "date": "2026-11-11",
@@ -20627,15 +20627,15 @@
     },
     "Source BMX US_Steering": {
       "date": "2026-11-11",
-      "count": 21
+      "count": 22
     },
     "Source BMX US_Tires": {
       "date": "2026-11-11",
-      "count": 23
+      "count": 24
     },
     "Source BMX US_Wheel Parts": {
       "date": "2026-11-11",
-      "count": 72
+      "count": 73
     },
     "Source BMX US_Wheels": {
       "date": "2026-11-11",
@@ -20655,7 +20655,7 @@
     },
     "Source BMX US_Protection": {
       "date": "2026-11-11",
-      "count": 31
+      "count": 44
     },
     "Bern_Protection": {
       "date": "2026-11-03",
@@ -26640,7 +26640,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 21
+        "count": 20
       }
     ],
     "Source BMX US_Frames & Forks": [
@@ -26686,7 +26686,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 18
+        "count": 20
       }
     ],
     "Source BMX US_Protection": [
@@ -26724,7 +26724,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 31
+        "count": 44
       }
     ],
     "Source BMX US_Seating": [
@@ -26816,7 +26816,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 21
+        "count": 22
       }
     ],
     "Source BMX US_Tires": [
@@ -26862,7 +26862,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 23
+        "count": 24
       }
     ],
     "Source BMX US_Wheel Parts": [
@@ -26908,7 +26908,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 72
+        "count": 73
       }
     ],
     "Source BMX US_Wheels": [

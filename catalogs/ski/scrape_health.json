@@ -5960,14 +5960,14 @@
           }
         },
         "Christy Sports_Boots": {
-          "count": 156,
+          "count": 157,
           "failed": false,
           "diagnostics": {
             "expected_count": 157,
             "baseline_samples": 9,
             "median_absolute_deviation": 0,
-            "actual_count": 156,
-            "percentage_change": -0.6,
+            "actual_count": 157,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -6572,14 +6572,14 @@
           }
         },
         "evo_Helmets": {
-          "count": 151,
+          "count": 150,
           "failed": false,
           "diagnostics": {
             "expected_count": 152,
             "baseline_samples": 9,
             "median_absolute_deviation": 0,
-            "actual_count": 151,
-            "percentage_change": -0.7,
+            "actual_count": 150,
+            "percentage_change": -1.3,
             "reason": "normal_variation"
           }
         },
@@ -6596,31 +6596,31 @@
           }
         },
         "evo_Protection": {
-          "count": 132,
+          "count": 133,
           "failed": false,
           "diagnostics": {
             "expected_count": 129.5,
             "baseline_samples": 8,
             "median_absolute_deviation": 3.0,
-            "actual_count": 132,
-            "percentage_change": 1.9,
+            "actual_count": 133,
+            "percentage_change": 2.7,
             "reason": "normal_variation"
           }
         },
         "evo_Skis": {
-          "count": 188,
+          "count": 186,
           "failed": false,
           "diagnostics": {
             "expected_count": 191,
             "baseline_samples": 9,
             "median_absolute_deviation": 4,
-            "actual_count": 188,
-            "percentage_change": -1.6,
+            "actual_count": 186,
+            "percentage_change": -2.6,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-11T15:11:52+00:00"
+      "scanned_at": "2026-11-11T18:21:36+00:00"
     }
   ],
   "baseline": {
@@ -6662,7 +6662,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-11",
-      "count": 188
+      "count": 186
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-11",
@@ -6670,7 +6670,7 @@
     },
     "Christy Sports_Boots": {
       "date": "2026-11-11",
-      "count": 156
+      "count": 157
     },
     "Christy Sports_Poles": {
       "date": "2026-11-11",
@@ -6718,11 +6718,11 @@
     },
     "evo_Helmets": {
       "date": "2026-11-11",
-      "count": 151
+      "count": 150
     },
     "evo_Protection": {
       "date": "2026-11-11",
-      "count": 132
+      "count": 133
     },
     "Bern_Helmets": {
       "date": "2026-11-11",
@@ -7075,7 +7075,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 156
+        "count": 157
       }
     ],
     "Christy Sports_Helmets": [
@@ -8933,7 +8933,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 151
+        "count": 150
       }
     ],
     "evo_Poles": [
@@ -9013,7 +9013,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 132
+        "count": 133
       }
     ],
     "evo_Skis": [
@@ -9055,7 +9055,7 @@
       },
       {
         "date": "2026-11-11",
-        "count": 188
+        "count": 186
       }
     ]
   }

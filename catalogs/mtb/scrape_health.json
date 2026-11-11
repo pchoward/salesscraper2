@@ -16864,6 +16864,126 @@
             "reason": "normal_variation"
           }
         },
+        "Bicycle Warehouse_Bikes": {
+          "count": 25,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 25,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Brakes": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 2,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Cockpit": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 4,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Frames": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 2,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Pedals": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 1,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Protection": {
+          "count": 15,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 15,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Tires": {
+          "count": 11,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 11,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "Bicycle Warehouse_Wheels": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 1,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "Bikes Online_Bikes": {
           "count": 58,
           "failed": false,
@@ -18546,7 +18666,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-11T15:19:40+00:00"
+      "scanned_at": "2026-11-11T18:28:15+00:00"
     }
   ],
   "baseline": {
@@ -18825,6 +18945,38 @@
     "Cambria_Bikes": {
       "date": "2026-11-11",
       "count": 33
+    },
+    "Bicycle Warehouse_Bikes": {
+      "date": "2026-11-11",
+      "count": 25
+    },
+    "Bicycle Warehouse_Brakes": {
+      "date": "2026-11-11",
+      "count": 2
+    },
+    "Bicycle Warehouse_Cockpit": {
+      "date": "2026-11-11",
+      "count": 4
+    },
+    "Bicycle Warehouse_Frames": {
+      "date": "2026-11-11",
+      "count": 2
+    },
+    "Bicycle Warehouse_Pedals": {
+      "date": "2026-11-11",
+      "count": 1
+    },
+    "Bicycle Warehouse_Protection": {
+      "date": "2026-11-11",
+      "count": 15
+    },
+    "Bicycle Warehouse_Tires": {
+      "date": "2026-11-11",
+      "count": 11
+    },
+    "Bicycle Warehouse_Wheels": {
+      "date": "2026-11-11",
+      "count": 1
     }
   },
   "completeness_baseline": {
@@ -19966,6 +20118,66 @@
       {
         "date": "2026-11-11",
         "count": 0
+      }
+    ],
+    "Bicycle Warehouse_Bikes": [
+      {
+        "date": "2026-11-11",
+        "count": 25
+      }
+    ],
+    "Bicycle Warehouse_Brakes": [
+      {
+        "date": "2026-11-11",
+        "count": 2
+      }
+    ],
+    "Bicycle Warehouse_Cockpit": [
+      {
+        "date": "2026-11-11",
+        "count": 4
+      }
+    ],
+    "Bicycle Warehouse_Drivetrain": [
+      {
+        "date": "2026-11-11",
+        "count": 0
+      }
+    ],
+    "Bicycle Warehouse_Forks & Shocks": [
+      {
+        "date": "2026-11-11",
+        "count": 0
+      }
+    ],
+    "Bicycle Warehouse_Frames": [
+      {
+        "date": "2026-11-11",
+        "count": 2
+      }
+    ],
+    "Bicycle Warehouse_Pedals": [
+      {
+        "date": "2026-11-11",
+        "count": 1
+      }
+    ],
+    "Bicycle Warehouse_Protection": [
+      {
+        "date": "2026-11-11",
+        "count": 15
+      }
+    ],
+    "Bicycle Warehouse_Tires": [
+      {
+        "date": "2026-11-11",
+        "count": 11
+      }
+    ],
+    "Bicycle Warehouse_Wheels": [
+      {
+        "date": "2026-11-11",
+        "count": 1
       }
     ],
     "Bikes Online_Bikes": [

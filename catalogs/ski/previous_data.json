@@ -16906,7 +16906,6 @@
       "product_type": "ALPINE - ALPINE BOOTS - Men's Boots",
       "brand": "Atomic",
       "sizes": [
-        "25.5",
         "26.5",
         "27.5",
         "28.5",
@@ -16915,26 +16914,6 @@
       ],
       "gender": "Men",
       "technical_offers": [
-        {
-          "variant_id": 47847619756270,
-          "price": 799.95,
-          "compare": 970.0,
-          "available": true,
-          "specs": {
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ],
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "gender": [
-              "Men"
-            ],
-            "mondo": [
-              "25.5"
-            ]
-          }
-        },
         {
           "variant_id": 47847619789038,
           "price": 799.95,
@@ -17047,7 +17026,6 @@
           "Men"
         ],
         "mondo": [
-          "25.5",
           "26.5",
           "27.5",
           "28.5",
@@ -19175,7 +19153,6 @@
       "product_type": "Touring Boots",
       "brand": "Scarpa",
       "sizes": [
-        "24.5",
         "26.5"
       ],
       "kind": "Touring",
@@ -19206,32 +19183,6 @@
               "26.5"
             ]
           }
-        },
-        {
-          "variant_id": 43574535323886,
-          "price": 449.33,
-          "compare": 699.0,
-          "available": true,
-          "specs": {
-            "ski_type": [
-              "Backcountry / Touring"
-            ],
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "walk": [
-              "Walk mode"
-            ],
-            "gender": [
-              "Women"
-            ],
-            "mondo": [
-              "24.5"
-            ]
-          }
         }
       ],
       "technical_specs": {
@@ -19251,7 +19202,6 @@
           "Women"
         ],
         "mondo": [
-          "24.5",
           "26.5"
         ]
       },
@@ -36394,39 +36344,7 @@
               "Expert"
             ]
           }
-        }
-      ],
-      "technical_specs": {
-        "din": [
-          "11\u201313"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "ability": [
-          "Advanced",
-          "Expert"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/blk_8bc0054a-9169-4f0b-9748-a5acbeb5ef30.jpg?v=1763401832",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/blk_8bc0054a-9169-4f0b-9748-a5acbeb5ef30.jpg?v=1763401832",
-        "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/Markergriffon.jpg?v=1772763217",
-        "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/redm13id_9d3f5240-5a3e-4f90-b26b-793e58270ffd.jpg?v=1772726973"
-      ]
-    },
-    {
-      "name": "Marker Griffon 13 ID Ski Bindings 2023",
-      "url": "https://www.utahskis.com/products/marker-griffon-13-id-ski-bindings-2023",
-      "price_new": "199.99",
-      "price_old": "299.99",
-      "availability": "Check store",
-      "part": "Bindings",
-      "store": "Utah Ski",
-      "product_type": "H I A",
-      "brand": "Marker",
-      "gender": "Men",
-      "technical_offers": [
+        },
         {
           "variant_id": 44689192910907,
           "price": 199.99,
@@ -36452,18 +36370,31 @@
           "11\u201313"
         ],
         "sole": [
-          "Alpine (ISO 5355)",
           "GripWalk",
+          "Alpine (ISO 5355)",
           "Touring (ISO 9523)"
+        ],
+        "ability": [
+          "Advanced",
+          "Expert"
         ],
         "gender": [
           "Men"
         ]
       },
-      "image": "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/Griff13.jpg?v=1792715231",
+      "image": "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/blk_8bc0054a-9169-4f0b-9748-a5acbeb5ef30.jpg?v=1763401832",
       "images": [
-        "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/Griff13.jpg?v=1792715231",
-        "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/Marker-Griffon-13-ID-Ski-Bindings-2023__S_1.jpg?v=1792715231"
+        "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/blk_8bc0054a-9169-4f0b-9748-a5acbeb5ef30.jpg?v=1763401832",
+        "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/Markergriffon.jpg?v=1772763217",
+        "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/redm13id_9d3f5240-5a3e-4f90-b26b-793e58270ffd.jpg?v=1772726973"
+      ],
+      "versions": [
+        {
+          "url": "https://www.utahskis.com/products/marker-griffon-13-id-ski-bindings-2023",
+          "price_new": "199.99",
+          "price_old": "299.99",
+          "image": "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/Griff13.jpg?v=1792715231"
+        }
       ]
     },
     {
@@ -39326,6 +39257,36 @@
               "L"
             ]
           }
+        },
+        {
+          "variant_id": 42385130750011,
+          "price": 132.0,
+          "compare": 220.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "ASTM F2040 (snow)",
+              "EN 1077 (EU snow)"
+            ],
+            "helmet_style": [
+              "Snow"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "gender": [
+              "Men"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
         }
       ],
       "technical_specs": {
@@ -39349,7 +39310,8 @@
           "Men"
         ],
         "prot_size": [
-          "L"
+          "L",
+          "M"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/AN5005660_4_GHO_SAVOR_GT_AMID_BLACK-2222_da950425-6b9e-488f-8956-56e06b294f74.jpg?v=1755023487"
@@ -45410,39 +45372,6 @@
       ]
     },
     {
-      "name": "V\u00f6lkl Mantra Junior Skis - Kids' 2026",
-      "url": "https://www.evo.com/products/254898-volkl-mantra-junior-skis-kids-2026",
-      "price_new": "233.96",
-      "price_old": "389.99",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "evo",
-      "product_type": "Skis",
-      "brand": "V\u00f6lkl",
-      "lengths": [
-        "118"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46078520885398,
-          "price": 233.96,
-          "compare": 389.99,
-          "available": true,
-          "specs": {
-            "length": [
-              "110\u2013119 cm"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "length": [
-          "110\u2013119 cm"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1094983.jpg?v=1767732853"
-    },
-    {
       "name": "Salomon QST X Skis 2026",
       "url": "https://www.evo.com/products/253511-salomon-qst-x-skis-2026",
       "price_new": "444.95",
@@ -47017,17 +46946,6 @@
         "186"
       ],
       "technical_offers": [
-        {
-          "variant_id": 46146334818454,
-          "price": 469.95,
-          "compare": 789.0,
-          "available": true,
-          "specs": {
-            "length": [
-              "170\u2013179 cm"
-            ]
-          }
-        },
         {
           "variant_id": 46146334851222,
           "price": 469.95,
@@ -52438,39 +52356,6 @@
       ]
     },
     {
-      "name": "Season Nexus Skis - Blem 2026",
-      "url": "https://www.evo.com/products/262681-season-nexus-skis-blem-2026-used",
-      "price_new": "378.95",
-      "price_old": "749.95",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "evo",
-      "product_type": "Skis",
-      "brand": "Season",
-      "lengths": [
-        "167"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46150755582102,
-          "price": 378.95,
-          "compare": 749.95,
-          "available": true,
-          "specs": {
-            "length": [
-              "160\u2013169 cm"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "length": [
-          "160\u2013169 cm"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1237368.jpg?v=1767738639"
-    },
-    {
       "name": "DPS Lotus 117 Skis 2026",
       "url": "https://www.evo.com/products/241822-dps-lotus-117-skis-2026",
       "price_new": "1356.00",
@@ -54892,6 +54777,72 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1368948.jpg?v=1791221938",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1368946.jpg?v=1791221938"
       ]
+    },
+    {
+      "name": "V\u00f6lkl Mantra Junior Skis - Kids' 2026",
+      "url": "https://www.evo.com/products/254898-volkl-mantra-junior-skis-kids-2026",
+      "price_new": "233.96",
+      "price_old": "389.99",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "evo",
+      "product_type": "Skis",
+      "brand": "V\u00f6lkl",
+      "lengths": [
+        "118"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46078520885398,
+          "price": 233.96,
+          "compare": 389.99,
+          "available": true,
+          "specs": {
+            "length": [
+              "110\u2013119 cm"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "length": [
+          "110\u2013119 cm"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1094983.jpg?v=1767732853"
+    },
+    {
+      "name": "Season Nexus Skis - Blem 2026",
+      "url": "https://www.evo.com/products/262681-season-nexus-skis-blem-2026-used",
+      "price_new": "378.95",
+      "price_old": "749.95",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "evo",
+      "product_type": "Skis",
+      "brand": "Season",
+      "lengths": [
+        "167"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46150755582102,
+          "price": 378.95,
+          "compare": 749.95,
+          "available": true,
+          "specs": {
+            "length": [
+              "160\u2013169 cm"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "length": [
+          "160\u2013169 cm"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1237368.jpg?v=1767738639"
     }
   ],
   "evo_Boots": [
@@ -69105,7 +69056,6 @@
       "brand": "Lange",
       "sizes": [
         "19",
-        "20.5",
         "27.5"
       ],
       "technical_offers": [
@@ -69120,20 +69070,6 @@
             ],
             "mondo": [
               "19"
-            ]
-          }
-        },
-        {
-          "variant_id": 46150339559574,
-          "price": 135.45,
-          "compare": 209.95,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Soft (under 80)"
-            ],
-            "mondo": [
-              "20.5"
             ]
           }
         },
@@ -69158,7 +69094,6 @@
         ],
         "mondo": [
           "19",
-          "20.5",
           "27.5"
         ]
       },
@@ -77339,7 +77274,6 @@
       "brand": "Salomon",
       "sizes": [
         "25.5",
-        "26.5",
         "27.5"
       ],
       "technical_offers": [
@@ -77357,23 +77291,6 @@
             ],
             "mondo": [
               "25.5"
-            ]
-          }
-        },
-        {
-          "variant_id": 46537933586582,
-          "price": 293.97,
-          "compare": 599.95,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "mondo": [
-              "26.5"
             ]
           }
         },
@@ -77404,7 +77321,6 @@
         ],
         "mondo": [
           "25.5",
-          "26.5",
           "27.5"
         ]
       },
@@ -82662,21 +82578,6 @@
       "brand": "Salomon",
       "technical_offers": [
         {
-          "variant_id": 46140031336598,
-          "price": 168.95,
-          "compare": 239.95,
-          "available": true,
-          "specs": {
-            "din": [
-              "11\u201313"
-            ],
-            "sole": [
-              "Alpine (ISO 5355)",
-              "GripWalk"
-            ]
-          }
-        },
-        {
           "variant_id": 46077999579286,
           "price": 160.78,
           "compare": 249.95,
@@ -86420,29 +86321,6 @@
             ],
             "prot_size": [
               "L"
-            ]
-          }
-        },
-        {
-          "variant_id": 46151990018198,
-          "price": 93.71,
-          "compare": 124.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "S"
             ]
           }
         },
@@ -96514,26 +96392,6 @@
           }
         },
         {
-          "variant_id": 46142462656662,
-          "price": 53.97,
-          "compare": 89.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Kids"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
-        },
-        {
           "variant_id": 46142462558358,
           "price": 53.97,
           "compare": 89.95,
@@ -105500,59 +105358,6 @@
       ]
     },
     {
-      "name": "Atomic Nomad Helmet",
-      "url": "https://www.evo.com/products/209854-atomic-nomad-helmet",
-      "price_new": "50.00",
-      "price_old": "100.00",
-      "availability": "Check store",
-      "part": "Helmets",
-      "store": "evo",
-      "product_type": "Ski and Snowboard Helmets",
-      "brand": "Atomic",
-      "technical_offers": [
-        {
-          "variant_id": 46477696008342,
-          "price": 50.0,
-          "compare": 100.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Snow"
-        ],
-        "prot_size": [
-          "M"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387188.jpg?v=1792702017",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387188.jpg?v=1792702017",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387187.jpg?v=1792702017",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387185.jpg?v=1792702017"
-      ]
-    },
-    {
       "name": "Sandbox Classic Ace 2.0 Helmet - Kids'",
       "url": "https://www.evo.com/products/204298-sandbox-classic-ace-2-0-helmet-kids",
       "price_new": "71.97",
@@ -108322,6 +108127,59 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1318544.jpg?v=1783366137",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1318540.jpg?v=1783366137"
       ]
+    },
+    {
+      "name": "Atomic Nomad Helmet",
+      "url": "https://www.evo.com/products/209854-atomic-nomad-helmet",
+      "price_new": "50.00",
+      "price_old": "100.00",
+      "availability": "Check store",
+      "part": "Helmets",
+      "store": "evo",
+      "product_type": "Ski and Snowboard Helmets",
+      "brand": "Atomic",
+      "technical_offers": [
+        {
+          "variant_id": 46477696008342,
+          "price": 50.0,
+          "compare": 100.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Snow"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Snow"
+        ],
+        "prot_size": [
+          "M"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387188.jpg?v=1792702017",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387188.jpg?v=1792702017",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387187.jpg?v=1792702017",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387185.jpg?v=1792702017"
+      ]
     }
   ],
   "evo_Protection": [
@@ -108372,6 +108230,40 @@
         },
         {
           "variant_id": 46129044095126,
+          "price": 208.8,
+          "compare": 348.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "goggle_lens": [
+              "Magnetic lens change"
+            ]
+          }
+        },
+        {
+          "variant_id": 46547381125270,
+          "price": 213.0,
+          "compare": 355.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "goggle_lens": [
+              "Magnetic lens change"
+            ]
+          }
+        },
+        {
+          "variant_id": 46129044127894,
           "price": 208.8,
           "compare": 348.0,
           "available": true,
@@ -108439,23 +108331,6 @@
           }
         },
         {
-          "variant_id": 46129044127894,
-          "price": 208.8,
-          "compare": 348.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Goggles"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "goggle_lens": [
-              "Magnetic lens change"
-            ]
-          }
-        },
-        {
           "variant_id": 46547380863126,
           "price": 213.0,
           "compare": 355.0,
@@ -108474,23 +108349,6 @@
         },
         {
           "variant_id": 46547380994198,
-          "price": 213.0,
-          "compare": 355.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Goggles"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "goggle_lens": [
-              "Magnetic lens change"
-            ]
-          }
-        },
-        {
-          "variant_id": 46547381125270,
           "price": 213.0,
           "compare": 355.0,
           "available": true,
@@ -108715,6 +108573,12 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250708.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250711.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250709.jpg?v=1793691200",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392701.jpg?v=1793906774",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392702.jpg?v=1793907052",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392716.jpg?v=1793907197",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392715.jpg?v=1793907196",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392703.jpg?v=1793907055",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392706.jpg?v=1793907053",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250716.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250714.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250715.jpg?v=1793691201",
@@ -108754,22 +108618,16 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253386.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253388.jpg?v=1767739280",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253391.jpg?v=1767739282",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392718.jpg?v=1793907195",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392738.jpg?v=1793907195",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253461.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253460.jpg?v=1767739284",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253459.jpg?v=1793691202",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1302767.jpg?v=1780526908",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1302764.jpg?v=1780526908",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1302763.jpg?v=1780526908",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392701.jpg?v=1793906774",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392702.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392703.jpg?v=1793907055",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392706.jpg?v=1793907053",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392704.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392705.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392707.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392709.jpg?v=1793907054",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392710.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392708.jpg?v=1793907054"
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392705.jpg?v=1793907052"
       ],
       "protection_type": null
     },
@@ -114038,6 +113896,20 @@
       "technical_offers": [
         {
           "variant_id": 46138361938070,
+          "price": 58.8,
+          "compare": 98.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        },
+        {
+          "variant_id": 46138362036374,
           "price": 58.8,
           "compare": 98.0,
           "available": true,
@@ -121926,6 +121798,112 @@
       "protection_type": null
     },
     {
+      "name": "Salomon S/View 3 ML Goggles",
+      "url": "https://www.evo.com/products/269220-salomon-s-view-3-ml-goggles",
+      "price_new": "56.97",
+      "price_old": "94.95",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "evo",
+      "product_type": "Goggles",
+      "brand": "Salomon",
+      "technical_offers": [
+        {
+          "variant_id": 46153025290390,
+          "price": 56.97,
+          "compare": 94.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Goggles"
+        ],
+        "age": [
+          "Adult"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227647.jpg?v=1767738228",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227647.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227650.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227646.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227651.jpg?v=1767738227",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227655.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227656.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227648.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227642.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227641.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227643.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227640.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227644.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227634.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227639.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227649.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227645.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227658.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227659.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227652.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227654.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227653.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227681.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227682.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227680.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227679.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227683.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227690.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227660.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227657.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227663.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227662.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227661.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227676.jpg?v=1767738232",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227671.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227668.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227673.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227674.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227670.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227677.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227672.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227678.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227675.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227666.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227669.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227664.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227667.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227665.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227636.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227633.jpg?v=1767738227",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227637.jpg?v=1767738227",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227638.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227635.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227686.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227685.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227684.jpg?v=1767738228",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227687.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227689.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227692.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227688.jpg?v=1767738229",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227694.jpg?v=1767738230",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227691.jpg?v=1767738231",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227693.jpg?v=1767738232",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1342655.jpg?v=1787947759",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1342667.jpg?v=1787948059",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1342671.jpg?v=1787948060",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1342664.jpg?v=1787947759",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1342656.jpg?v=1787947759"
+      ],
+      "protection_type": null
+    },
+    {
       "name": "Oakley Line Miner S Goggles",
       "url": "https://www.evo.com/products/135819-oakley-line-miner-s-goggles",
       "price_new": "105.60",
@@ -129694,6 +129672,12 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250708.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250711.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250709.jpg?v=1793691200",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392701.jpg?v=1793906774",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392702.jpg?v=1793907052",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392716.jpg?v=1793907197",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392715.jpg?v=1793907196",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392703.jpg?v=1793907055",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392706.jpg?v=1793907053",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250716.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250714.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1250715.jpg?v=1793691201",
@@ -129733,22 +129717,16 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253386.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253388.jpg?v=1767739280",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253391.jpg?v=1767739282",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392718.jpg?v=1793907195",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392738.jpg?v=1793907195",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253461.jpg?v=1793691201",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253460.jpg?v=1767739284",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1253459.jpg?v=1793691202",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1302767.jpg?v=1780526908",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1302764.jpg?v=1780526908",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1302763.jpg?v=1780526908",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392701.jpg?v=1793906774",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392702.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392703.jpg?v=1793907055",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392706.jpg?v=1793907053",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392704.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392705.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392707.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392709.jpg?v=1793907054",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392710.jpg?v=1793907052",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392708.jpg?v=1793907054"
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1392705.jpg?v=1793907052"
       ],
       "protection_type": null
     },
@@ -138921,6 +138899,34 @@
               "Adult"
             ]
           }
+        },
+        {
+          "variant_id": 49829868634350,
+          "price": 177.0,
+          "compare": 295.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        },
+        {
+          "variant_id": 49829868732654,
+          "price": 177.0,
+          "compare": 295.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
         }
       ],
       "technical_specs": {
@@ -139075,6 +139081,20 @@
           "variant_id": 47766473572590,
           "price": 169.8,
           "compare": 283.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        },
+        {
+          "variant_id": 49836472565998,
+          "price": 177.0,
+          "compare": 295.0,
           "available": true,
           "specs": {
             "protects": [
@@ -139323,6 +139343,20 @@
         },
         {
           "variant_id": 49836254691566,
+          "price": 213.0,
+          "compare": 355.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        },
+        {
+          "variant_id": 49836254724334,
           "price": 213.0,
           "compare": 355.0,
           "available": true,
@@ -147681,36 +147715,6 @@
       "brand": "Elan"
     },
     {
-      "name": "Blizzard Black Pearl 88 Skis Womens",
-      "url": "https://www.christysports.com/product/blizzard-black-pearl-88-skis-womens/8111779.html",
-      "price_new": "450.97",
-      "price_old": "749.99",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7e57c721/8111779_000_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111779",
-          "price": 450.97,
-          "compare": 749.99,
-          "available": null,
-          "specs": {
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Blizzard"
-    },
-    {
       "name": "Blizzard Sheeva Twin + FDT 4.5 Skis Junior",
       "url": "https://www.christysports.com/product/blizzard-sheeva-twin-x-fdt-4.5-skis-junior/8111782.html",
       "price_new": "198.97",
@@ -147750,6 +147754,36 @@
       "store": "Christy Sports",
       "brand": "V\u00f6lkl",
       "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw6b6d218e/8202190_000_1.jpg?sw=600&sh=600"
+    },
+    {
+      "name": "Blizzard Black Pearl 88 Skis Womens",
+      "url": "https://www.christysports.com/product/blizzard-black-pearl-88-skis-womens/8111779.html",
+      "price_new": "450.97",
+      "price_old": "749.99",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7e57c721/8111779_000_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111779",
+          "price": 450.97,
+          "compare": 749.99,
+          "available": null,
+          "specs": {
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Blizzard"
     },
     {
       "name": "Elan Ripstick 96 Skis",
@@ -150598,6 +150632,41 @@
       "brand": "Atomic"
     },
     {
+      "name": "Dalbello Cabrio MV 120 3DWrap Ski Boots",
+      "url": "https://www.christysports.com/product/dalbello-cabrio-mv-120-3dwrap-ski-boots/8111758.html",
+      "price_new": "438.97",
+      "price_old": "729.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwcdf1273c/8111758_320_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8111758",
+          "price": 438.97,
+          "compare": 729.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "last": [
+          "Medium (99\u2013101 mm)"
+        ]
+      },
+      "brand": "Dalbello"
+    },
+    {
       "name": "Head Formula 120 MV GW Ski Boots",
       "url": "https://www.christysports.com/product/head-formula-120-mv-gw-ski-boots/8111530.html",
       "price_new": "349.97",
@@ -150637,41 +150706,6 @@
         ]
       },
       "brand": "Head"
-    },
-    {
-      "name": "Dalbello Cabrio MV 120 3DWrap Ski Boots",
-      "url": "https://www.christysports.com/product/dalbello-cabrio-mv-120-3dwrap-ski-boots/8111758.html",
-      "price_new": "438.97",
-      "price_old": "729.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwcdf1273c/8111758_320_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8111758",
-          "price": 438.97,
-          "compare": 729.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Medium (99\u2013101 mm)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "last": [
-          "Medium (99\u2013101 mm)"
-        ]
-      },
-      "brand": "Dalbello"
     },
     {
       "name": "Atomic Hawx Ultra 95 S Ski Boots Womens",
@@ -151824,6 +151858,41 @@
       "brand": "Lange"
     },
     {
+      "name": "Salomon S/Pro HV 120 Ski Boots",
+      "url": "https://www.christysports.com/product/salomon-spro-hv-120-ski-boots/8105823.html",
+      "price_new": "324.97",
+      "price_old": "649.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw08ef9dfb/8105823_320_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8105823",
+          "price": 324.97,
+          "compare": 649.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Wide (102 mm and over)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "last": [
+          "Wide (102 mm and over)"
+        ]
+      },
+      "brand": "Salomon"
+    },
+    {
       "name": "Atomic Hawx Ultra 115 S GW Ski Boots Womens",
       "url": "https://www.christysports.com/product/atomic-hawx-ultra-115-s-gw-ski-boots-womens/8107583.html",
       "price_new": "349.97",
@@ -151864,41 +151933,6 @@
         ]
       },
       "brand": "Atomic"
-    },
-    {
-      "name": "Salomon S/Pro HV 120 Ski Boots",
-      "url": "https://www.christysports.com/product/salomon-spro-hv-120-ski-boots/8105823.html",
-      "price_new": "324.97",
-      "price_old": "649.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw08ef9dfb/8105823_320_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8105823",
-          "price": 324.97,
-          "compare": 649.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "last": [
-              "Wide (102 mm and over)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "last": [
-          "Wide (102 mm and over)"
-        ]
-      },
-      "brand": "Salomon"
     },
     {
       "name": "Salomon S/Pro Supra BOA 105 Ski Boots Womens",
@@ -152069,48 +152103,6 @@
       ]
     },
     {
-      "name": "Atomic Hawx Prime 95 Boa GW Ski Boots Womens",
-      "url": "https://www.christysports.com/product/atomic-hawx-prime-95-boa-gw-ski-boots-womens/8111508.html",
-      "price_new": "299.97",
-      "price_old": "599.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwae851bb0/8111508_320_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8111508",
-          "price": 299.97,
-          "compare": 599.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Medium (80\u2013100)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Medium (80\u2013100)"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Atomic"
-    },
-    {
       "name": "Head Formula 95 MV GW Ski Boots Womens",
       "url": "https://www.christysports.com/product/head-formula-95-mv-gw-ski-boots-womens/8111533.html",
       "price_new": "299.97",
@@ -152157,6 +152149,48 @@
         ]
       },
       "brand": "Head"
+    },
+    {
+      "name": "Atomic Hawx Prime 95 Boa GW Ski Boots Womens",
+      "url": "https://www.christysports.com/product/atomic-hawx-prime-95-boa-gw-ski-boots-womens/8111508.html",
+      "price_new": "299.97",
+      "price_old": "599.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwae851bb0/8111508_320_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8111508",
+          "price": 299.97,
+          "compare": 599.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Medium (80\u2013100)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Atomic"
     },
     {
       "name": "Head Kore 120 GW AT Ski Boots",
@@ -153309,6 +153343,41 @@
       "brand": "Nordica"
     },
     {
+      "name": "Tecnica Cochise 120 GW Ski Boots",
+      "url": "https://www.christysports.com/product/tecnica-cochise-120-gw-ski-boots/8106110.html",
+      "price_new": "350.97",
+      "price_old": "699.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf1fed495/8106110_030_01.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8106110",
+          "price": 350.97,
+          "compare": 699.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "sole": [
+              "GripWalk"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "sole": [
+          "GripWalk"
+        ]
+      },
+      "brand": "Tecnica"
+    },
+    {
       "name": "Tecnica Cochise 105 Ski Boots Womens",
       "url": "https://www.christysports.com/product/tecnica-cochise-105-ski-boots-womens/8106117.html",
       "price_new": "350.97",
@@ -154002,35 +154071,6 @@
       "brand": "Lange"
     },
     {
-      "name": "Nordica SportMachine 3 120 Ski Boots",
-      "url": "https://www.christysports.com/product/nordica-sportmachine-3-120-ski-boots/8101111.html",
-      "price_new": "300.97",
-      "price_old": "599.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw14004f90/8101111-020-01.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8101111",
-          "price": 300.97,
-          "compare": 599.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ]
-      },
-      "brand": "Nordica"
-    },
-    {
       "name": "Tecnica Mach1 LV 115 Ski Boots Womens",
       "url": "https://www.christysports.com/product/tecnica-mach1-lv-115-ski-boots-womens/8111791.html",
       "price_new": "375.97",
@@ -154071,6 +154111,35 @@
         ]
       },
       "brand": "Tecnica"
+    },
+    {
+      "name": "Nordica SportMachine 3 120 Ski Boots",
+      "url": "https://www.christysports.com/product/nordica-sportmachine-3-120-ski-boots/8101111.html",
+      "price_new": "300.97",
+      "price_old": "599.99",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw14004f90/8101111-020-01.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8101111",
+          "price": 300.97,
+          "compare": 599.99,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ]
+      },
+      "brand": "Nordica"
     },
     {
       "name": "Dalbello Panterra 75 GW LS Boots Womens",
@@ -154233,41 +154302,6 @@
         ],
         "last": [
           "Wide (102 mm and over)"
-        ]
-      },
-      "brand": "Tecnica"
-    },
-    {
-      "name": "Tecnica Cochise 120 GW Ski Boots",
-      "url": "https://www.christysports.com/product/tecnica-cochise-120-gw-ski-boots/8106110.html",
-      "price_new": "350.97",
-      "price_old": "699.99",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwf1fed495/8106110_030_01.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8106110",
-          "price": 350.97,
-          "compare": 699.99,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "sole": [
-              "GripWalk"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "sole": [
-          "GripWalk"
         ]
       },
       "brand": "Tecnica"
@@ -155035,20 +155069,20 @@
       }
     },
     {
-      "name": "Oakley MOD1 Pro Seasonal Collection Ski Helmet",
-      "url": "https://www.skatepro.com/en-us/316-54369.htm",
-      "price_new": "113.95",
-      "price_old": "162.95",
+      "name": "Oakley MOD5 Seasonal Collection Ski Helmet",
+      "url": "https://www.skatepro.com/en-us/316-54370.htm",
+      "price_new": "209.95",
+      "price_old": "279.95",
       "availability": "In stock",
       "part": "Helmets",
       "store": "SkatePro",
       "brand": "Oakley",
-      "image": "https://cdn.skatepro.com/product/400/oakley-mod1-pro-seasonal-collection-ski-helmet-3i.webp",
+      "image": "https://cdn.skatepro.com/product/400/oakley-mod5-seasonal-collection-ski-helmet-54.webp",
       "technical_offers": [
         {
-          "variant_id": "https://www.skatepro.com/en-us/316-54369.htm",
-          "price": 113.95,
-          "compare": 162.95,
+          "variant_id": "https://www.skatepro.com/en-us/316-54370.htm",
+          "price": 209.95,
+          "compare": 279.95,
           "available": true,
           "specs": {
             "protects": [
@@ -155076,20 +155110,20 @@
       }
     },
     {
-      "name": "Oakley MOD5 Seasonal Collection Ski Helmet",
-      "url": "https://www.skatepro.com/en-us/316-54370.htm",
-      "price_new": "209.95",
-      "price_old": "279.95",
+      "name": "Oakley MOD1 Pro Seasonal Collection Ski Helmet",
+      "url": "https://www.skatepro.com/en-us/316-54369.htm",
+      "price_new": "113.95",
+      "price_old": "162.95",
       "availability": "In stock",
       "part": "Helmets",
       "store": "SkatePro",
       "brand": "Oakley",
-      "image": "https://cdn.skatepro.com/product/400/oakley-mod5-seasonal-collection-ski-helmet-54.webp",
+      "image": "https://cdn.skatepro.com/product/400/oakley-mod1-pro-seasonal-collection-ski-helmet-3i.webp",
       "technical_offers": [
         {
-          "variant_id": "https://www.skatepro.com/en-us/316-54370.htm",
-          "price": 209.95,
-          "compare": 279.95,
+          "variant_id": "https://www.skatepro.com/en-us/316-54369.htm",
+          "price": 113.95,
+          "compare": 162.95,
           "available": true,
           "specs": {
             "protects": [
