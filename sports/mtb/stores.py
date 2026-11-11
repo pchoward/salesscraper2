@@ -242,7 +242,25 @@ BICYCLE_WAREHOUSE=shopify.ShopifyStore('Bicycle Warehouse','Bicycle Warehouse','
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='bicycle warehouse',
     title_part=title_part,type_part=bicycle_warehouse_part,raw_type_part=True,track_exclusions=True)
 
-STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES+(LOST_CO,BICYCLE_WAREHOUSE)
+# Bike Mart (store probe 2026-11-11, owner approved): Shopify, USD, robots
+# allow collections. Bike types name the kind ("Full Suspension Mountain Bike",
+# "Hardtail Mountain Bike", "Full Suspension Mountain Frameset", "Hybrid
+# Bike"): only mountain ones count. Its parts sale (~2,100) is typed plainly
+# ("Tires", "Hubs", "Stems"); the shared title rules sort it and the MTB
+# listing rules drop road parts. Its accessory deals are tools and gadgets.
+def bike_mart_part(product_type):
+    kind=str(product_type or '').strip()
+    if re.search(r'\b(?:bike|frameset)\b',kind,re.I):
+        if not re.search(r'mountain',kind,re.I):return None
+        return 'Frames' if re.search(r'frameset',kind,re.I) else 'Bikes'
+    if not kind or _BW_CLOTHING.search(kind):return shopify.BY_TITLE if not kind else None
+    return title_part(kind) or shopify.BY_TITLE
+BIKE_MART=shopify.ShopifyStore('Bike Mart','Bike Mart','https://www.bikemart.com',
+    collection='bike-deals',more_collections=('parts-deals',),
+    types={},brand_of=brands.for_sport(sports.MTB),own_vendor='bike mart',
+    title_part=title_part,type_part=bike_mart_part,raw_type_part=True,track_exclusions=True)
+
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES+(LOST_CO,BICYCLE_WAREHOUSE,BIKE_MART)
 
 
 def robots_policy(store):
