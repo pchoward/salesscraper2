@@ -273,7 +273,12 @@ SKI_SHOPS = (
     ski_shop("Skipro", "https://skipro.com", "sale", own_vendor="skipro", max_pages=40),
 )
 
-STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES + (SMITH,) + SKI_SHOPS
+# Ski Essentials: headless Shopify, read from its page data (sports/ski/skiessentials.py).
+from sports.ski import skiessentials  # noqa: E402
+
+SKI_ESSENTIALS = skiessentials.store(details)
+
+STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES + (SMITH,) + SKI_SHOPS + (SKI_ESSENTIALS,)
 
 
 def scrapers():
