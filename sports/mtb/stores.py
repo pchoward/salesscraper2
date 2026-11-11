@@ -222,7 +222,27 @@ LOST_CO=shopify.ShopifyStore('The Lost Co.','The Lost Co.','https://www.thelostc
     collection='mtb-parts-on-sale',more_collections=('clearance-mountain-bike-parts',),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='the lost co',
     title_part=title_part,type_part=lost_co_part,raw_type_part=True,track_exclusions=True)
-STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES+(LOST_CO,)
+# Bicycle Warehouse (store probe 2026-11-11, owner approved): Shopify, USD,
+# robots allow collections. Bikes are typed "Bikes - Full Suspension 29",
+# "Bikes - E-Full Suspension 29", "Bikes - Hybrid"...: only mountain ones
+# (suspension, hardtail, mountain, trail) count. Clothing types stay out;
+# parts and protection use the shared title rules on the type, then the title.
+_BW_CLOTHING=re.compile(r'jersey|short|headwear|jacket|glove|baselayer|sock|shoe|warmer|vest|hood|sweater|balaclava|bag|light|bottle|cage|bundle|gift|bar tape',re.I)
+def bicycle_warehouse_part(product_type):
+    kind=str(product_type or '').strip()
+    if kind.lower().startswith('bikes'):
+        return 'Bikes' if re.search(r'suspension|hardtail|mountain|trail|enduro|downhill',kind,re.I) else None
+    if not kind or _BW_CLOTHING.search(kind):return None
+    if re.search(r'^framesets?$',kind,re.I):return 'Frames'
+    if re.search(r'^protective$',kind,re.I):return shopify.BY_TITLE
+    return title_part(kind) or shopify.BY_TITLE
+BICYCLE_WAREHOUSE=shopify.ShopifyStore('Bicycle Warehouse','Bicycle Warehouse','https://bicyclewarehouse.com',
+    collection='sale',more_collections=('mountain-bikes-for-sale','closeouts','closeout-bike-parts','bike-tires-for-sale',
+                                        'bike-helmets-for-sale'),
+    types={},brand_of=brands.for_sport(sports.MTB),own_vendor='bicycle warehouse',
+    title_part=title_part,type_part=bicycle_warehouse_part,raw_type_part=True,track_exclusions=True)
+
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES+(LOST_CO,BICYCLE_WAREHOUSE)
 
 
 def robots_policy(store):
