@@ -1,140 +1,877 @@
 {
  "changes": {
-  "evo_Boots": [
+  "Gear West_Bindings": [
    {
-    "at_all_time_low": true,
-    "delta": 39.96,
     "item": {
-     "at_all_time_low": true,
+     "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "Nordica",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014359.jpg?v=1767729765",
+     "brand": "Atomic",
+     "image": "https://cdn.shopify.com/s/files/1/0564/7620/5256/files/iconrs12race.webp?v=1794341910",
+     "kind": "Race",
+     "name": "Atomic NY Icon 12 Ski Race Binding 2027",
+     "part": "Bindings",
+     "price_new": "239.95",
+     "price_old": "290.00",
+     "product_type": "ALPINE - BINDINGS - Race Bindings",
+     "store": "Gear West",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 290.0,
+       "price": 239.95,
+       "specs": {
+        "din": [
+         "11–13"
+        ],
+        "ski_type": [
+         "Race"
+        ]
+       },
+       "variant_id": 49685725577454
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "11–13"
+      ],
+      "ski_type": [
+       "Race"
+      ]
+     },
+     "url": "https://www.gearwest.com/products/atomic-w27-ny-icon-12-red-black"
+    },
+    "type": "new"
+   }
+  ],
+  "Smith_Helmets": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Smith",
+     "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056330P5559_Vantage_2_Mips_Matte_Dusk_Thistle_3Q.png?v=1763664024",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014359.jpg?v=1767729765",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014329.jpg?v=1767729761",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014328.jpg?v=1767729764",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014327.jpg?v=1767729760"
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056330P5559_Vantage_2_Mips_Matte_Dusk_Thistle_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteDuskThistle_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteDuskThistle_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056333P5559_Vantage_2_Mips_Matte_Ironwood_Bandit_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteIronwoodBandit_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteIronwoodBandit_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056334F5559_Vantage_2_Mips_Matte_Mystic_Gold_Dust_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteMysticGoldDust_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteMysticGoldDust_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E005633FK5559_Vantage_2_Mips_Matte_Black_Ultraviolet_Emerald_City_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle04.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle02.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle01.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle03.jpg?v=1763664024"
      ],
-     "kind": "Touring",
-     "name": "Nordica Unlimited 130 DYN Ski Boots 2025",
-     "part": "Boots",
-     "price_new": "289.99",
-     "price_old": "849.99",
-     "product_type": "Alpine Touring Ski Boots",
-     "sizes": [
-      "24.5",
-      "25.5",
-      "26.5",
-      "28.5"
+     "name": "Smith Vantage 2 Mips® - Past Season",
+     "part": "Helmets",
+     "price_new": "177.00",
+     "price_old": "295.00",
+     "product_type": "Helmet",
+     "store": "Smith",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 295.0,
+       "price": 177.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F2040 (snow)",
+         "EN 1077 (EU snow)"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 47717845336302
+      }
      ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F2040 (snow)",
+       "EN 1077 (EU snow)"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.smithoptics.com/products/vantage-2-mips-r-sale"
+    },
+    "type": "new"
+   }
+  ],
+  "evo_Helmets": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Pit Viper",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347037.jpg?v=1788884295",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347037.jpg?v=1788884295",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347031.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347035.jpg?v=1788884296",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347038.jpg?v=1788884296",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347034.jpg?v=1788884296",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347041.jpg?v=1788884296",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347039.jpg?v=1788884296",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347040.jpg?v=1788884296",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347036.jpg?v=1788884296",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347042.jpg?v=1788884295",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347033.jpg?v=1788884296",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347032.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347027.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347029.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347030.jpg?v=1788884115"
+     ],
+     "name": "Pit Viper The Mega Peak Ultrastorm MIPS Helmet",
+     "part": "Helmets",
+     "price_new": "117.30",
+     "price_old": "170.00",
+     "product_type": "Ski and Snowboard Helmets",
      "store": "evo",
      "technical_offers": [
       {
        "available": true,
-       "compare": 849.99,
-       "price": 289.99,
+       "compare": 170.0,
+       "price": 117.3,
        "specs": {
-        "flex": [
-         "Very stiff (over 120)"
+        "age": [
+         "Adult"
         ],
-        "mondo": [
-         "28.5"
+        "helmet_style": [
+         "Snow"
         ],
-        "ski_type": [
-         "Backcountry / Touring"
+        "prot_size": [
+         "L",
+         "XL"
         ],
-        "walk": [
-         "Walk mode"
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
         ]
        },
-       "variant_id": 46353795022998
+       "variant_id": 46189650182294
       },
       {
        "available": true,
-       "compare": 849.99,
-       "price": 329.95,
+       "compare": 170.0,
+       "price": 117.3,
        "specs": {
-        "flex": [
-         "Very stiff (over 120)"
+        "age": [
+         "Adult"
         ],
-        "mondo": [
-         "24.5"
+        "helmet_style": [
+         "Snow"
         ],
-        "ski_type": [
-         "Backcountry / Touring"
+        "prot_size": [
+         "M"
         ],
-        "walk": [
-         "Walk mode"
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
         ]
        },
-       "variant_id": 46353794891926
+       "variant_id": 46189650215062
       },
       {
        "available": true,
-       "compare": 849.99,
-       "price": 329.95,
+       "compare": 170.0,
+       "price": 117.3,
        "specs": {
-        "flex": [
-         "Very stiff (over 120)"
+        "age": [
+         "Adult"
         ],
-        "mondo": [
-         "25.5"
+        "helmet_style": [
+         "Snow"
         ],
-        "ski_type": [
-         "Backcountry / Touring"
+        "prot_size": [
+         "S",
+         "XS"
         ],
-        "walk": [
-         "Walk mode"
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
         ]
        },
-       "variant_id": 46353794924694
+       "variant_id": 46189650247830
       },
       {
        "available": true,
-       "compare": 849.99,
-       "price": 329.95,
+       "compare": 170.0,
+       "price": 117.3,
        "specs": {
-        "flex": [
-         "Very stiff (over 120)"
+        "age": [
+         "Adult"
         ],
-        "mondo": [
-         "26.5"
+        "helmet_style": [
+         "Snow"
         ],
-        "ski_type": [
-         "Backcountry / Touring"
+        "prot_size": [
+         "L",
+         "XL"
         ],
-        "walk": [
-         "Walk mode"
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
         ]
        },
-       "variant_id": 46353794957462
+       "variant_id": 46180556505238
+      },
+      {
+       "available": true,
+       "compare": 170.0,
+       "price": 117.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46189650116758
+      },
+      {
+       "available": true,
+       "compare": 170.0,
+       "price": 117.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S",
+         "XS"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46189650149526
+      },
+      {
+       "available": true,
+       "compare": 170.0,
+       "price": 117.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "L",
+         "XL"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46189650280598
+      },
+      {
+       "available": true,
+       "compare": 170.0,
+       "price": 117.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46189650313366
       }
      ],
      "technical_specs": {
-      "flex": [
-       "Very stiff (over 120)"
+      "age": [
+       "Adult"
       ],
-      "mondo": [
-       "24.5",
-       "25.5",
-       "26.5",
-       "28.5"
+      "helmet_style": [
+       "Snow"
       ],
-      "ski_type": [
-       "Backcountry / Touring"
+      "prot_size": [
+       "L",
+       "M",
+       "S",
+       "XL",
+       "XS"
       ],
-      "walk": [
-       "Walk mode"
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
       ]
      },
-     "url": "https://www.evo.com/products/242012-nordica-unlimited-130-dyn-ski-boots-2025"
+     "url": "https://www.evo.com/products/282210-pit-viper-the-mega-peak-ultrastorm-mips-helmet"
     },
-    "name": "Nordica Unlimited 130 DYN Ski Boots 2025",
-    "new": "289.99",
-    "old": "329.95",
-    "percent_vs_prior": 12.1,
+    "type": "new"
+   }
+  ],
+  "evo_Protection": [
+   {
+    "at_all_time_low": true,
+    "delta": 11.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "Pit Viper",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215201.jpg?v=1767737742",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215201.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215200.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215202.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215212.jpg?v=1767737743",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215203.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215205.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215207.jpg?v=1767737743",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215193.jpg?v=1767737743",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215195.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215194.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215198.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215204.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215199.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215189.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215188.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215191.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215192.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215197.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215190.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215187.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215196.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215181.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215183.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215179.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215182.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215184.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215186.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215180.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1137896.jpg?v=1767734666",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1137891.jpg?v=1767734665",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1137903.jpg?v=1767734665",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134508.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134500.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134503.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134509.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134513.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134511.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134502.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134506.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134504.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134515.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134521.jpg?v=1767734512",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134523.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134507.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134505.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134510.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134520.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134519.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134522.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134514.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134516.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134512.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134517.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134518.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346944.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346946.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346942.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346943.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346945.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346951.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346948.jpg?v=1788883815",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346949.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346947.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346950.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346953.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346952.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346955.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346954.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346957.jpg?v=1788883816"
+     ],
+     "name": "Pit Viper The French Fry Goggles - Small",
+     "part": "Protection",
+     "price_new": "34.50",
+     "price_old": "50.00",
+     "product_type": "Goggles",
+     "protection_sizes": [
+      "S"
+     ],
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 70.0,
+       "price": 48.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "goggle_size": [
+         "Small"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46149157224598
+      },
+      {
+       "available": true,
+       "compare": 70.0,
+       "price": 48.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "goggle_size": [
+         "Small"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46149157191830
+      },
+      {
+       "available": true,
+       "compare": 70.0,
+       "price": 48.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "goggle_size": [
+         "Small"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46149157159062
+      },
+      {
+       "available": true,
+       "compare": 50.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "goggle_size": [
+         "Small"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208431521942
+      },
+      {
+       "available": true,
+       "compare": 50.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "goggle_size": [
+         "Small"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208431554710
+      },
+      {
+       "available": true,
+       "compare": 50.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "goggle_size": [
+         "Small"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208431587478
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "goggle_size": [
+       "Small"
+      ],
+      "protects": [
+       "Goggles"
+      ]
+     },
+     "url": "https://www.evo.com/products/255753-pit-viper-the-french-fry-goggles-small"
+    },
+    "name": "Pit Viper The French Fry Goggles - Small",
+    "new": "34.50",
+    "old": "45.50",
+    "percent_vs_prior": 24.2,
     "type": "price_drop",
-    "url": "https://www.evo.com/products/242012-nordica-unlimited-130-dyn-ski-boots-2025"
+    "url": "https://www.evo.com/products/255753-pit-viper-the-french-fry-goggles-small"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Pit Viper",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215156.jpg?v=1767737738",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215156.jpg?v=1767737738",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215150.jpg?v=1767737738",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215151.jpg?v=1767737738",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215153.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215152.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215154.jpg?v=1767737738",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215155.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215170.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215166.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215165.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215171.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215169.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215167.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215168.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215177.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215173.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215178.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215174.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215172.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215176.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215175.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215162.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215161.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215157.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215164.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215158.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215160.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215163.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134497.jpg?v=1767734506",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134490.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134494.jpg?v=1767734506",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134487.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134483.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134491.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134493.jpg?v=1767734507",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134492.jpg?v=1767734507",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134496.jpg?v=1767734507",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134484.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134489.jpg?v=1767734506",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134495.jpg?v=1767734507",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134498.jpg?v=1767734507",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134499.jpg?v=1767734506",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134501.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134485.jpg?v=1767734506",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134486.jpg?v=1767734507",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134488.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346938.jpg?v=1788883815",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346936.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346940.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346939.jpg?v=1788883815",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346941.jpg?v=1788883816"
+     ],
+     "name": "Pit Viper The French Fry Goggles - Large",
+     "part": "Protection",
+     "price_new": "34.50",
+     "price_old": "50.00",
+     "product_type": "Goggles",
+     "protection_sizes": [
+      "L"
+     ],
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 70.0,
+       "price": 48.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46149160632470
+      },
+      {
+       "available": true,
+       "compare": 70.0,
+       "price": 48.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46149160566934
+      },
+      {
+       "available": true,
+       "compare": 50.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208431489174
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "protects": [
+       "Goggles"
+      ]
+     },
+     "url": "https://www.evo.com/products/255752-pit-viper-the-french-fry-goggles-large"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Pit Viper",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346999.jpg?v=1788884116",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346999.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347001.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347003.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346998.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347002.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347000.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347009.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347004.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347007.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347006.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347005.jpg?v=1788884115"
+     ],
+     "name": "Pit Viper The Flip-Off Goggles",
+     "part": "Protection",
+     "price_new": "82.80",
+     "price_old": "120.00",
+     "product_type": "Goggles",
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 120.0,
+       "price": 82.8,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46180555784342
+      },
+      {
+       "available": true,
+       "compare": 120.0,
+       "price": 82.8,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208634126486
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "protects": [
+       "Goggles"
+      ]
+     },
+     "url": "https://www.evo.com/products/282201-pit-viper-the-flip-off-goggles"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Pit Viper",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347019.jpg?v=1788884115",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347019.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347020.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347017.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347021.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347016.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347018.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347014.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347012.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347013.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347015.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347011.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347010.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347008.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347026.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347022.jpg?v=1788884116",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347028.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347023.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347024.jpg?v=1788884115",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347025.jpg?v=1788884115"
+     ],
+     "name": "Pit Viper The Pro Callout Goggles",
+     "part": "Protection",
+     "price_new": "117.30",
+     "price_old": "170.00",
+     "product_type": "Goggles",
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 170.0,
+       "price": 117.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208634585238
+      },
+      {
+       "available": true,
+       "compare": 170.0,
+       "price": 117.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46180556308630
+      },
+      {
+       "available": true,
+       "compare": 170.0,
+       "price": 117.3,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208634618006
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "protects": [
+       "Goggles"
+      ]
+     },
+     "url": "https://www.evo.com/products/282205-pit-viper-the-pro-callout-goggles"
+    },
+    "type": "new"
    }
   ]
  },
@@ -1977,6 +2714,26 @@
     "part": "Helmets"
    },
    {
+    "cheapest_price": 177.0,
+    "key": "sport|Helmets|smith|2|mips|vantage",
+    "label": "Smith vantage 2 mips",
+    "offers": [
+     {
+      "name": "Smith Vantage 2 Mips® - Past Season",
+      "price": 177.0,
+      "store": "Smith",
+      "url": "https://www.smithoptics.com/products/vantage-2-mips-r-sale"
+     },
+     {
+      "name": "Smith Vantage 2 MIPS Helmet",
+      "price": 177.0,
+      "store": "evo",
+      "url": "https://www.evo.com/products/268781-smith-vantage-2-mips-helmet"
+     }
+    ],
+    "part": "Helmets"
+   },
+   {
     "cheapest_price": 48.97,
     "key": "sport|Poles|k2|aluminum|power",
     "label": "K2 power aluminum",
@@ -2103,26 +2860,6 @@
     "part": "Protection"
    },
    {
-    "cheapest_price": 29.81,
-    "key": "sport|Protection|pitviper|french|fry",
-    "label": "Pit Viper french fry",
-    "offers": [
-     {
-      "name": "Pit Viper The French Fry L Goggles 2026",
-      "price": 29.81,
-      "store": "Utah Ski",
-      "url": "https://www.utahskis.com/products/pit-viper-the-french-fry-l-goggles-2026"
-     },
-     {
-      "name": "Pit Viper The French Fry Goggles - Small",
-      "price": 45.5,
-      "store": "evo",
-      "url": "https://www.evo.com/products/255753-pit-viper-the-french-fry-goggles-small"
-     }
-    ],
-    "part": "Protection"
-   },
-   {
     "cheapest_price": 199.99,
     "key": "sport|Protection|smith|4d|bridge|fit|low|mag",
     "label": "Smith 4d mag low bridge fit",
@@ -2190,6 +2927,26 @@
       "price": 204.0,
       "store": "evo",
       "url": "https://www.evo.com/products/251927-smith-4d-mag-xl-goggles"
+     }
+    ],
+    "part": "Protection"
+   },
+   {
+    "cheapest_price": 29.81,
+    "key": "sport|Protection|pitviper|french|fry",
+    "label": "Pit Viper french fry",
+    "offers": [
+     {
+      "name": "Pit Viper The French Fry L Goggles 2026",
+      "price": 29.81,
+      "store": "Utah Ski",
+      "url": "https://www.utahskis.com/products/pit-viper-the-french-fry-l-goggles-2026"
+     },
+     {
+      "name": "Pit Viper The French Fry Goggles - Large",
+      "price": 34.5,
+      "store": "evo",
+      "url": "https://www.evo.com/products/255752-pit-viper-the-french-fry-goggles-large"
      }
     ],
     "part": "Protection"
@@ -2375,6 +3132,32 @@
     "part": "Skis"
    },
    {
+    "cheapest_price": 229.99,
+    "key": "sport|Skis|volkl|88|secret|volkl",
+    "label": "Völkl volkl secret 88",
+    "offers": [
+     {
+      "name": "Volkl Secret 88 Skis Womens",
+      "price": 375.97,
+      "store": "Christy Sports",
+      "url": "https://www.christysports.com/product/volkl-secret-88-skis-womens/8111749.html"
+     },
+     {
+      "name": "Volkl Secret 88 Womens Skis 2025",
+      "price": 419.95,
+      "store": "Utah Ski",
+      "url": "https://www.utahskis.com/products/volkl-secret-88-womens-skis-2025"
+     },
+     {
+      "name": "Völkl Secret 88 Skis - Women's 2025",
+      "price": 229.99,
+      "store": "evo",
+      "url": "https://www.evo.com/products/254887-volkl-secret-88-skis-women-s-2025"
+     }
+    ],
+    "part": "Skis"
+   },
+   {
     "cheapest_price": 699.95,
     "key": "sport|Skis|atomic|bent|decode",
     "label": "Atomic bent decode",
@@ -2531,26 +3314,6 @@
     "part": "Skis"
    },
    {
-    "cheapest_price": 375.97,
-    "key": "sport|Skis|volkl|88|secret|volkl",
-    "label": "Völkl volkl secret 88",
-    "offers": [
-     {
-      "name": "Volkl Secret 88 Skis Womens",
-      "price": 375.97,
-      "store": "Christy Sports",
-      "url": "https://www.christysports.com/product/volkl-secret-88-skis-womens/8111749.html"
-     },
-     {
-      "name": "Volkl Secret 88 Womens Skis 2025",
-      "price": 419.95,
-      "store": "Utah Ski",
-      "url": "https://www.utahskis.com/products/volkl-secret-88-womens-skis-2025"
-     }
-    ],
-    "part": "Skis"
-   },
-   {
     "cheapest_price": 359.97,
     "key": "sport|Skis|rossignol|92|rallybird|soul",
     "label": "Rossignol rallybird soul 92",
@@ -2698,149 +3461,863 @@
   "drops": [
    {
     "at_all_time_low": true,
-    "delta": 39.96,
+    "delta": 11.0,
     "item": {
      "at_all_time_low": true,
      "availability": "Check store",
-     "brand": "Nordica",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014359.jpg?v=1767729765",
+     "brand": "Pit Viper",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215201.jpg?v=1767737742",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014359.jpg?v=1767729765",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014329.jpg?v=1767729761",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014328.jpg?v=1767729764",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014327.jpg?v=1767729760"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215201.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215200.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215202.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215212.jpg?v=1767737743",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215203.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215205.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215207.jpg?v=1767737743",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215193.jpg?v=1767737743",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215195.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215194.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215198.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215204.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215199.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215189.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215188.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215191.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215192.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215197.jpg?v=1767737742",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215190.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215187.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215196.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215181.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215183.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215179.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215182.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215184.jpg?v=1767737740",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215186.jpg?v=1767737741",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215180.jpg?v=1767737739",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1137896.jpg?v=1767734666",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1137891.jpg?v=1767734665",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1137903.jpg?v=1767734665",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134508.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134500.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134503.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134509.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134513.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134511.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134502.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134506.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134504.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134515.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134521.jpg?v=1767734512",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134523.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134507.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134505.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134510.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134520.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134519.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134522.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134514.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134516.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134512.jpg?v=1767734509",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134517.jpg?v=1767734510",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134518.jpg?v=1767734508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346944.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346946.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346942.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346943.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346945.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346951.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346948.jpg?v=1788883815",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346949.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346947.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346950.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346953.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346952.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346955.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346954.jpg?v=1788883816",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346957.jpg?v=1788883816"
      ],
-     "kind": "Touring",
-     "name": "Nordica Unlimited 130 DYN Ski Boots 2025",
-     "part": "Boots",
-     "price_new": "289.99",
-     "price_old": "849.99",
-     "product_type": "Alpine Touring Ski Boots",
-     "sizes": [
-      "24.5",
-      "25.5",
-      "26.5",
-      "28.5"
+     "name": "Pit Viper The French Fry Goggles - Small",
+     "part": "Protection",
+     "price_new": "34.50",
+     "price_old": "50.00",
+     "product_type": "Goggles",
+     "protection_sizes": [
+      "S"
      ],
+     "protection_type": null,
      "store": "evo",
      "technical_offers": [
       {
        "available": true,
-       "compare": 849.99,
-       "price": 289.99,
+       "compare": 70.0,
+       "price": 48.3,
        "specs": {
-        "flex": [
-         "Very stiff (over 120)"
+        "age": [
+         "Adult"
         ],
-        "mondo": [
-         "28.5"
+        "goggle_size": [
+         "Small"
         ],
-        "ski_type": [
-         "Backcountry / Touring"
-        ],
-        "walk": [
-         "Walk mode"
+        "protects": [
+         "Goggles"
         ]
        },
-       "variant_id": 46353795022998
+       "variant_id": 46149157224598
       },
       {
        "available": true,
-       "compare": 849.99,
-       "price": 329.95,
+       "compare": 70.0,
+       "price": 48.3,
        "specs": {
-        "flex": [
-         "Very stiff (over 120)"
+        "age": [
+         "Adult"
         ],
-        "mondo": [
-         "24.5"
+        "goggle_size": [
+         "Small"
         ],
-        "ski_type": [
-         "Backcountry / Touring"
-        ],
-        "walk": [
-         "Walk mode"
+        "protects": [
+         "Goggles"
         ]
        },
-       "variant_id": 46353794891926
+       "variant_id": 46149157191830
       },
       {
        "available": true,
-       "compare": 849.99,
-       "price": 329.95,
+       "compare": 70.0,
+       "price": 48.3,
        "specs": {
-        "flex": [
-         "Very stiff (over 120)"
+        "age": [
+         "Adult"
         ],
-        "mondo": [
-         "25.5"
+        "goggle_size": [
+         "Small"
         ],
-        "ski_type": [
-         "Backcountry / Touring"
-        ],
-        "walk": [
-         "Walk mode"
+        "protects": [
+         "Goggles"
         ]
        },
-       "variant_id": 46353794924694
+       "variant_id": 46149157159062
       },
       {
        "available": true,
-       "compare": 849.99,
-       "price": 329.95,
+       "compare": 50.0,
+       "price": 34.5,
        "specs": {
-        "flex": [
-         "Very stiff (over 120)"
+        "age": [
+         "Adult"
         ],
-        "mondo": [
-         "26.5"
+        "goggle_size": [
+         "Small"
         ],
-        "ski_type": [
-         "Backcountry / Touring"
-        ],
-        "walk": [
-         "Walk mode"
+        "protects": [
+         "Goggles"
         ]
        },
-       "variant_id": 46353794957462
+       "variant_id": 46208431521942
+      },
+      {
+       "available": true,
+       "compare": 50.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "goggle_size": [
+         "Small"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208431554710
+      },
+      {
+       "available": true,
+       "compare": 50.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "goggle_size": [
+         "Small"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46208431587478
       }
      ],
      "technical_specs": {
-      "flex": [
-       "Very stiff (over 120)"
+      "age": [
+       "Adult"
       ],
-      "mondo": [
-       "24.5",
-       "25.5",
-       "26.5",
-       "28.5"
+      "goggle_size": [
+       "Small"
       ],
-      "ski_type": [
-       "Backcountry / Touring"
-      ],
-      "walk": [
-       "Walk mode"
+      "protects": [
+       "Goggles"
       ]
      },
-     "url": "https://www.evo.com/products/242012-nordica-unlimited-130-dyn-ski-boots-2025"
+     "url": "https://www.evo.com/products/255753-pit-viper-the-french-fry-goggles-small"
     },
-    "name": "Nordica Unlimited 130 DYN Ski Boots 2025",
-    "new": "289.99",
-    "old": "329.95",
-    "percent_vs_prior": 12.1,
+    "name": "Pit Viper The French Fry Goggles - Small",
+    "new": "34.50",
+    "old": "45.50",
+    "percent_vs_prior": 24.2,
     "type": "price_drop",
-    "url": "https://www.evo.com/products/242012-nordica-unlimited-130-dyn-ski-boots-2025"
+    "url": "https://www.evo.com/products/255753-pit-viper-the-french-fry-goggles-small"
    }
   ],
-  "new_items": [],
+  "new_items": [
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Atomic",
+    "image": "https://cdn.shopify.com/s/files/1/0564/7620/5256/files/iconrs12race.webp?v=1794341910",
+    "kind": "Race",
+    "name": "Atomic NY Icon 12 Ski Race Binding 2027",
+    "part": "Bindings",
+    "price_new": "239.95",
+    "price_old": "290.00",
+    "product_type": "ALPINE - BINDINGS - Race Bindings",
+    "store": "Gear West",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 290.0,
+      "price": 239.95,
+      "specs": {
+       "din": [
+        "11–13"
+       ],
+       "ski_type": [
+        "Race"
+       ]
+      },
+      "variant_id": 49685725577454
+     }
+    ],
+    "technical_specs": {
+     "din": [
+      "11–13"
+     ],
+     "ski_type": [
+      "Race"
+     ]
+    },
+    "url": "https://www.gearwest.com/products/atomic-w27-ny-icon-12-red-black"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Pit Viper",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347037.jpg?v=1788884295",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347037.jpg?v=1788884295",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347031.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347035.jpg?v=1788884296",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347038.jpg?v=1788884296",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347034.jpg?v=1788884296",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347041.jpg?v=1788884296",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347039.jpg?v=1788884296",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347040.jpg?v=1788884296",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347036.jpg?v=1788884296",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347042.jpg?v=1788884295",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347033.jpg?v=1788884296",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347032.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347027.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347029.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347030.jpg?v=1788884115"
+    ],
+    "name": "Pit Viper The Mega Peak Ultrastorm MIPS Helmet",
+    "part": "Helmets",
+    "price_new": "117.30",
+    "price_old": "170.00",
+    "product_type": "Ski and Snowboard Helmets",
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "L",
+        "XL"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46189650182294
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46189650215062
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "S",
+        "XS"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46189650247830
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "L",
+        "XL"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46180556505238
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46189650116758
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "S",
+        "XS"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46189650149526
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "L",
+        "XL"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46189650280598
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46189650313366
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "helmet_style": [
+      "Snow"
+     ],
+     "prot_size": [
+      "L",
+      "M",
+      "S",
+      "XL",
+      "XS"
+     ],
+     "protects": [
+      "Helmets"
+     ],
+     "rotational": [
+      "MIPS"
+     ]
+    },
+    "url": "https://www.evo.com/products/282210-pit-viper-the-mega-peak-ultrastorm-mips-helmet"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Pit Viper",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215156.jpg?v=1767737738",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215156.jpg?v=1767737738",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215150.jpg?v=1767737738",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215151.jpg?v=1767737738",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215153.jpg?v=1767737740",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215152.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215154.jpg?v=1767737738",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215155.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215170.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215166.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215165.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215171.jpg?v=1767737742",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215169.jpg?v=1767737741",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215167.jpg?v=1767737740",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215168.jpg?v=1767737740",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215177.jpg?v=1767737742",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215173.jpg?v=1767737740",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215178.jpg?v=1767737741",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215174.jpg?v=1767737742",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215172.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215176.jpg?v=1767737740",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215175.jpg?v=1767737740",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215162.jpg?v=1767737740",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215161.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215157.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215164.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215158.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215160.jpg?v=1767737740",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215163.jpg?v=1767737739",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134497.jpg?v=1767734506",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134490.jpg?v=1767734508",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134494.jpg?v=1767734506",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134487.jpg?v=1767734508",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134483.jpg?v=1767734508",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134491.jpg?v=1767734508",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134493.jpg?v=1767734507",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134492.jpg?v=1767734507",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134496.jpg?v=1767734507",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134484.jpg?v=1767734509",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134489.jpg?v=1767734506",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134495.jpg?v=1767734507",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134498.jpg?v=1767734507",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134499.jpg?v=1767734506",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134501.jpg?v=1767734510",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134485.jpg?v=1767734506",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134486.jpg?v=1767734507",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1134488.jpg?v=1767734508",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346938.jpg?v=1788883815",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346936.jpg?v=1788883816",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346940.jpg?v=1788883816",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346939.jpg?v=1788883815",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346941.jpg?v=1788883816"
+    ],
+    "name": "Pit Viper The French Fry Goggles - Large",
+    "part": "Protection",
+    "price_new": "34.50",
+    "price_old": "50.00",
+    "product_type": "Goggles",
+    "protection_sizes": [
+     "L"
+    ],
+    "protection_type": null,
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 70.0,
+      "price": 48.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Goggles"
+       ]
+      },
+      "variant_id": 46149160632470
+     },
+     {
+      "available": true,
+      "compare": 70.0,
+      "price": 48.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Goggles"
+       ]
+      },
+      "variant_id": 46149160566934
+     },
+     {
+      "available": true,
+      "compare": 50.0,
+      "price": 34.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Goggles"
+       ]
+      },
+      "variant_id": 46208431489174
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "protects": [
+      "Goggles"
+     ]
+    },
+    "url": "https://www.evo.com/products/255752-pit-viper-the-french-fry-goggles-large"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Pit Viper",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346999.jpg?v=1788884116",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346999.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347001.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347003.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346998.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347002.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347000.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347009.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347004.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347007.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347006.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347005.jpg?v=1788884115"
+    ],
+    "name": "Pit Viper The Flip-Off Goggles",
+    "part": "Protection",
+    "price_new": "82.80",
+    "price_old": "120.00",
+    "product_type": "Goggles",
+    "protection_type": null,
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 120.0,
+      "price": 82.8,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Goggles"
+       ]
+      },
+      "variant_id": 46180555784342
+     },
+     {
+      "available": true,
+      "compare": 120.0,
+      "price": 82.8,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Goggles"
+       ]
+      },
+      "variant_id": 46208634126486
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "protects": [
+      "Goggles"
+     ]
+    },
+    "url": "https://www.evo.com/products/282201-pit-viper-the-flip-off-goggles"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Pit Viper",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347019.jpg?v=1788884115",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347019.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347020.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347017.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347021.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347016.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347018.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347014.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347012.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347013.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347015.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347011.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347010.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347008.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347026.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347022.jpg?v=1788884116",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347028.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347023.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347024.jpg?v=1788884115",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347025.jpg?v=1788884115"
+    ],
+    "name": "Pit Viper The Pro Callout Goggles",
+    "part": "Protection",
+    "price_new": "117.30",
+    "price_old": "170.00",
+    "product_type": "Goggles",
+    "protection_type": null,
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Goggles"
+       ]
+      },
+      "variant_id": 46208634585238
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Goggles"
+       ]
+      },
+      "variant_id": 46180556308630
+     },
+     {
+      "available": true,
+      "compare": 170.0,
+      "price": 117.3,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Goggles"
+       ]
+      },
+      "variant_id": 46208634618006
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "protects": [
+      "Goggles"
+     ]
+    },
+    "url": "https://www.evo.com/products/282205-pit-viper-the-pro-callout-goggles"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Smith",
+    "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056330P5559_Vantage_2_Mips_Matte_Dusk_Thistle_3Q.png?v=1763664024",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056330P5559_Vantage_2_Mips_Matte_Dusk_Thistle_3Q.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteDuskThistle_BACK.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteDuskThistle_TOP.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056333P5559_Vantage_2_Mips_Matte_Ironwood_Bandit_3Q.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteIronwoodBandit_BACK.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteIronwoodBandit_TOP.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056334F5559_Vantage_2_Mips_Matte_Mystic_Gold_Dust_3Q.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteMysticGoldDust_BACK.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteMysticGoldDust_TOP.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_TOP.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E005633FK5559_Vantage_2_Mips_Matte_Black_Ultraviolet_Emerald_City_3Q.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_BACK.png?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle04.jpg?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle02.jpg?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle01.jpg?v=1763664024",
+     "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle03.jpg?v=1763664024"
+    ],
+    "name": "Smith Vantage 2 Mips® - Past Season",
+    "part": "Helmets",
+    "price_new": "177.00",
+    "price_old": "295.00",
+    "product_type": "Helmet",
+    "store": "Smith",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 295.0,
+      "price": 177.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "certification": [
+        "ASTM F2040 (snow)",
+        "EN 1077 (EU snow)"
+       ],
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 47717845336302
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "certification": [
+      "ASTM F2040 (snow)",
+      "EN 1077 (EU snow)"
+     ],
+     "helmet_style": [
+      "Snow"
+     ],
+     "prot_size": [
+      "S"
+     ],
+     "protects": [
+      "Helmets"
+     ],
+     "rotational": [
+      "MIPS"
+     ]
+    },
+    "url": "https://www.smithoptics.com/products/vantage-2-mips-r-sale"
+   }
+  ],
   "removed": []
  },
  "failed_keys": [],
  "fingerprints": {
-  "data": "fc1cffeb02fb8a26af45ce26711c29dfe6c593a4385744eaf07abed1654ac63c",
-  "history": "59833d1f3a29029717400f11586dc511be82eb26d19b2b4669c40c23b405a43b"
+  "data": "93abdeb8dfbe8f29ba1b908e9907d23f881ddb0079200694e35125bf4b26882f",
+  "history": "6fea385d5a95934381cba5e5309157312e0632d769cc5a290e143918c36ec4d3"
  },
- "generated_at": "2026-11-10T07:30:49+00:00",
+ "generated_at": "2026-11-10T21:18:39+00:00",
  "history": "file",
  "version": 1
 }

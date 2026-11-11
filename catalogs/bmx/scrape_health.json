@@ -15790,15 +15790,16 @@
           }
         },
         "187 Killer Pads_Protection": {
-          "count": 9,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 11,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 9,
-            "percentage_change": -18.2,
-            "reason": "normal_variation"
+            "actual_count": 5,
+            "percentage_change": -54.5,
+            "reason": "partial_catalog_drop"
           }
         },
         "187 Killer Pads_Seating": {
@@ -16030,14 +16031,14 @@
           }
         },
         "Albe's BMX_Protection": {
-          "count": 10,
+          "count": 9,
           "failed": false,
           "diagnostics": {
             "expected_count": 13,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 10,
-            "percentage_change": -23.1,
+            "actual_count": 9,
+            "percentage_change": -30.8,
             "reason": "normal_variation"
           }
         },
@@ -16222,14 +16223,14 @@
           }
         },
         "CCS_Protection": {
-          "count": 12,
+          "count": 9,
           "failed": false,
           "diagnostics": {
             "expected_count": 12.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 12,
-            "percentage_change": 0.0,
+            "actual_count": 9,
+            "percentage_change": -25.0,
             "reason": "normal_variation"
           }
         },
@@ -16282,14 +16283,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 90,
+          "count": 94,
           "failed": false,
           "diagnostics": {
             "expected_count": 92,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 90,
-            "percentage_change": -2.2,
+            "actual_count": 94,
+            "percentage_change": 2.2,
             "reason": "normal_variation"
           }
         },
@@ -17495,14 +17496,14 @@
           }
         },
         "Powers BMX_Drivetrain": {
-          "count": 24,
+          "count": 23,
           "failed": false,
           "diagnostics": {
             "expected_count": 25,
             "baseline_samples": 9,
             "median_absolute_deviation": 0,
-            "actual_count": 24,
-            "percentage_change": -4.0,
+            "actual_count": 23,
+            "percentage_change": -8.0,
             "reason": "normal_variation"
           }
         },
@@ -17615,14 +17616,14 @@
           }
         },
         "SoCal_Protection": {
-          "count": 14,
+          "count": 11,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 14,
-            "percentage_change": 0.0,
+            "actual_count": 11,
+            "percentage_change": -21.4,
             "reason": "normal_variation"
           }
         },
@@ -17699,14 +17700,14 @@
           }
         },
         "Source BMX US_Steering": {
-          "count": 22,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 22,
             "baseline_samples": 9,
             "median_absolute_deviation": 1,
-            "actual_count": 22,
-            "percentage_change": 0.0,
+            "actual_count": 21,
+            "percentage_change": -4.5,
             "reason": "normal_variation"
           }
         },
@@ -17747,15 +17748,16 @@
           }
         },
         "TGM_Protection": {
-          "count": 9,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 9.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 9,
-            "percentage_change": 0.0,
-            "reason": "normal_variation"
+            "actual_count": 4,
+            "percentage_change": -55.6,
+            "reason": "partial_catalog_drop"
           }
         },
         "Tactics_Protection": {
@@ -17819,14 +17821,14 @@
           }
         },
         "Triple 8_Protection": {
-          "count": 9,
+          "count": 7,
           "failed": false,
           "diagnostics": {
             "expected_count": 8,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 9,
-            "percentage_change": 12.5,
+            "actual_count": 7,
+            "percentage_change": -12.5,
             "reason": "normal_variation"
           }
         },
@@ -18131,7 +18133,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-10T07:19:48+00:00"
+      "scanned_at": "2026-11-10T21:07:24+00:00"
     }
   ],
   "baseline": {
@@ -18185,7 +18187,7 @@
     },
     "Powers BMX_Drivetrain": {
       "date": "2026-11-10",
-      "count": 24
+      "count": 23
     },
     "Powers BMX_Frames & Forks": {
       "date": "2026-11-10",
@@ -18229,7 +18231,7 @@
     },
     "Source BMX US_Steering": {
       "date": "2026-11-10",
-      "count": 22
+      "count": 21
     },
     "Source BMX US_Tires": {
       "date": "2026-11-10",
@@ -18249,7 +18251,7 @@
     },
     "Albe's BMX_Protection": {
       "date": "2026-11-10",
-      "count": 10
+      "count": 9
     },
     "Powers BMX_Protection": {
       "date": "2026-11-10",
@@ -18258,10 +18260,6 @@
     "Source BMX US_Protection": {
       "date": "2026-11-10",
       "count": 31
-    },
-    "187 Killer Pads_Protection": {
-      "date": "2026-11-10",
-      "count": 9
     },
     "Bern_Protection": {
       "date": "2026-11-03",
@@ -18281,7 +18279,7 @@
     },
     "Triple 8_Protection": {
       "date": "2026-11-10",
-      "count": 9
+      "count": 7
     },
     "7iDP_Protection": {
       "date": "2026-11-10",
@@ -18293,7 +18291,7 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-10",
-      "count": 90
+      "count": 94
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-10",
@@ -18309,7 +18307,7 @@
     },
     "CCS_Protection": {
       "date": "2026-11-10",
-      "count": 12
+      "count": 9
     },
     "Exodus_Protection": {
       "date": "2026-11-10",
@@ -18317,11 +18315,7 @@
     },
     "SoCal_Protection": {
       "date": "2026-11-10",
-      "count": 14
-    },
-    "TGM_Protection": {
-      "date": "2026-11-10",
-      "count": 9
+      "count": 11
     },
     "Tactics_Protection": {
       "date": "2026-11-10",
@@ -18553,10 +18547,6 @@
       {
         "date": "2026-11-09",
         "count": 11
-      },
-      {
-        "date": "2026-11-10",
-        "count": 9
       }
     ],
     "187 Killer Pads_Seating": [
@@ -19268,7 +19258,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 10
+        "count": 9
       }
     ],
     "Albe's BMX_Seating": [
@@ -19908,7 +19898,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 12
+        "count": 9
       }
     ],
     "Cambria_Bikes": [
@@ -20078,7 +20068,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 90
+        "count": 94
       }
     ],
     "Cambria_Seating": [
@@ -23112,7 +23102,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 24
+        "count": 23
       }
     ],
     "Powers BMX_Frames & Forks": [
@@ -23492,7 +23482,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 14
+        "count": 11
       }
     ],
     "Source BMX US_Bikes": [
@@ -23778,7 +23768,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 22
+        "count": 21
       }
     ],
     "Source BMX US_Tires": [
@@ -23930,10 +23920,6 @@
       },
       {
         "date": "2026-11-09",
-        "count": 9
-      },
-      {
-        "date": "2026-11-10",
         "count": 9
       }
     ],
@@ -24134,7 +24120,7 @@
       },
       {
         "date": "2026-11-10",
-        "count": 9
+        "count": 7
       }
     ],
     "Triple 8_Seating": [

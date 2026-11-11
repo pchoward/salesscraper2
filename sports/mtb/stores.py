@@ -114,7 +114,8 @@ CAMBRIA=shopify.ShopifyStore('Cambria','Cambria Bike','https://cambriabike.com',
     collection='sale-components',more_collections=('sale-frames-forks','sale-wheels','sale-tires','sale-bikes',
                                                    'body-armor','goggles','neck-braces'),
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='cambria',
-    title_part=title_part,type_part=cambria_part,raw_type_part=True,track_exclusions=True)
+    title_part=title_part,type_part=cambria_part,raw_type_part=True,track_exclusions=True,
+    max_pages=60)  # sale-components passed 20 pages on 2 runs (audit 2026-11-10)
 CAMBRIA.extra_specs=cambria_specs
 # Bikes Online (issue #165): coarse types ("Bikes", "Parts", "Clothing &
 # Protective Gear", "Accessories"), so the part comes from the title. Kids'
