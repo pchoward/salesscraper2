@@ -208,7 +208,77 @@ SMITH = shopify.ShopifyStore(
     types={"goggles": "Protection", "helmet": shopify.BY_TITLE}, title_part=smith_helmet_part,
     brand_of=brands.for_sport(sports.SKI), details=details, track_exclusions=True, whole_site=True)
 
-STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES + (SMITH,)
+# Ski shops added 2026-11-11 (store probe, owner approved): Willis Ski and
+# Board, The Pro Ski and Ride, Aspen Ski and Board, Skipro. All Shopify in
+# USD, robots allow collections. Their product types name the gear plainly
+# ("Womens Ski Boots", "System Skis", "Flat Skis", "Junior Ski Bindings"), so
+# one rule sorts them; snowboard, water-sport, Nordic and clothing types stay out.
+_SHOP_SKIP = re.compile(r"snowboard|splitboard|wake|water|surf|swim|life jacket|kite|cross country|nordic|\bxc\b|"
+                        r"jacket|pant|bib|sock|bag|glove|mitten|base ?layer|hood|beanie|hat|sweater|vest|underwear|"
+                        r"shirt|sportswear|sportwear|fleece|after ski|shot ski|boot fitting|accessor|tune|wax|lock|"
+                        r"replacement|part|strap|leash|lens", re.I)
+
+
+def ski_shop_part(type_key):
+    """A ski shop's product type -> Ski category, or None to leave it out."""
+    key = str(type_key or "")
+    if not key or _SHOP_SKIP.search(key):
+        return None
+    for pattern, part in ((r"\bboots?\b", "Boots"), (r"\bhelmets?\b", "Helmets"), (r"\bgoggles?\b", "Protection"),
+                          (r"\bbindings?\b", "Bindings"), (r"\bpoles?\b", "Poles"),
+                          (r"\bskis?\b|system ski|ski package", "Skis")):
+        if re.search(pattern, key, re.I):
+            return part
+    return None
+
+
+# The same exclusions for a title, as whole words ("Ski Warm Junior Ski Sock").
+_SHOP_SKIP_TITLE = re.compile(r"\b(?:snowboards?|splitboards?|wake\w*|water|surf\w*|swim\w*|kite|cross[- ]country|nordic|xc|"
+                              r"jackets?|pants?|bibs?|socks?|bags?|gloves?|mittens?|base ?layers?|hood(?:ie)?s?|beanies?|"
+                              r"hats?|sweaters?|vests?|underwear|shirts?|tees?|fleece|after[- ]ski|shot ?skis?|tun(?:e|ing)|"
+                              r"wax|locks?|straps?|leash(?:es)?|lens(?:es)?|replacement|parts?|warmers?|heaters?|"
+                              r"carriers?|racks?|footbeds?|insoles?)\b", re.I)
+
+
+def ski_shop_title_part(title):
+    """title_part for a ski shop's untyped products, minus clothing and accessories."""
+    if _SHOP_SKIP_TITLE.search(str(title or "")):
+        return None
+    part = title_part(title)
+    # "Northside Ladies Brookelle SE Boot" is a winter boot, not a ski boot.
+    if part == "Boots" and not re.search(r"\bski[- ]?boots?\b", str(title), re.I):
+        return None
+    return part
+
+
+def ski_shop(name, base, collection, more=(), own_vendor="", max_pages=shopify.MAX_PAGES):
+    # No type (or "NA"): the title decides, as for Gear West.
+    return shopify.ShopifyStore(name, name, base, collection=collection, more_collections=more,
+                                types={"": shopify.BY_TITLE, "na": shopify.BY_TITLE}, title_part=ski_shop_title_part,
+                                type_part=ski_shop_part, brand_of=brands.for_sport(sports.SKI),
+                                own_vendor=own_vendor or name.casefold(), details=details,
+                                track_exclusions=True, max_pages=max_pages)
+
+
+SKI_SHOPS = (
+    # Willis: "sale" (737) and "clearance-sale" (402); about 300 ski items marked down.
+    ski_shop("Willis Ski and Board", "https://www.willisskiandboard.com", "sale", ("clearance-sale",), own_vendor="willis"),
+    # The Pro Ski and Ride: its Clear the Gear sale lists 1,171 but serves 200 to
+    # products.json; its clearance adds 71.
+    ski_shop("The Pro Ski and Ride", "https://theproskiandride.com", "clear-the-gear-sale", ("clearance",),
+             own_vendor="the pro"),
+    # Aspen Ski and Board: "sale" (1,145) and "outlet" (1,276), mostly the same products.
+    ski_shop("Aspen Ski and Board", "https://aspenskiandboard.com", "sale", ("outlet",), own_vendor="aspen"),
+    # Skipro: one "sale" collection of 6,400+ (ski, snowboard, water sports), 26 pages.
+    ski_shop("Skipro", "https://skipro.com", "sale", own_vendor="skipro", max_pages=40),
+)
+
+# Ski Essentials: headless Shopify, read from its page data (sports/ski/skiessentials.py).
+from sports.ski import skiessentials  # noqa: E402
+
+SKI_ESSENTIALS = skiessentials.store(details)
+
+STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES + (SMITH,) + SKI_SHOPS + (SKI_ESSENTIALS,)
 
 
 def scrapers():
