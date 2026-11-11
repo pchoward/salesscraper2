@@ -162,7 +162,7 @@ class OtherPartTests(unittest.TestCase):
         self.assertIn("bones-reds", kept("Bearings"))
 
     def test_bundled_brands_do_not_pass_the_brand_check(self):
-        name = "Slime Balls Skateboard Wheels 54mm Conical 101A with Spitfire Bearings"
+        name = "Ricta Skateboard Wheels 54mm Conical 101A with Spitfire Bearings"
         self.assertEqual(filter_reason(name, "Wheels", "", "31.95", "59.95"), "wheel brand not allowed")
         self.assertIsNone(filter_reason("Spitfire Formula Four 54mm with Free Sticker", "Wheels", "", "31.95", "59.95"))
 
