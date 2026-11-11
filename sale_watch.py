@@ -30,7 +30,7 @@ _UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
 SALE_HANDLE = re.compile(r"sale|clearance|closeout|deal|black[-_]?friday|blacker|cyber|doorbuster|flash|outlet|"
                          r"markdown|blowout|bfcm|warehouse[-_]?sale", re.I)
 # A homepage link to a seasonal sale.
-SALE_LINK = re.compile(r"black[\s_-]*friday|blacker|cyber|doorbuster|door[\s-]buster|limited[\s-]*time[\s-]*deals?|"
+SALE_LINK = re.compile(r"black[\s_-]*(?:friday|november|week)|blacker|cyber|doorbuster|door[\s-]buster|limited[\s-]*time[\s-]*deals?|"
                        r"bfcm|flash[\s-]*sale|early[\s-]*access|holiday[\s-]*sale|warehouse[\s-]*sale", re.I)
 # Handles that are never a skate sale, whatever their name says.
 IGNORE = re.compile(r"snow|ski\b|disc[-_]?golf|apparel|pants|shirt|tee|hood|jacket|sock|hat|beanie|"

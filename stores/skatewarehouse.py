@@ -33,10 +33,14 @@ def _drop_badge(text):
 
 
 class SkateWarehouseScraper(Scraper):
-    def __init__(self, name, url, part, require_markdown=False):
+    def __init__(self, name, url, part, require_markdown=False, promo_urls=()):
         super().__init__(name, url, part)
         self.require_markdown = require_markdown
         self.urls = [url]
+        self.promo_urls = tuple(promo_urls)
+
+    def scrape(self):
+        return add_promos(self, super().scrape())
 
     def parse(self, html):
         if not html:
@@ -122,6 +126,87 @@ class SkateWarehouseScraper(Scraper):
         return products
 
 
+# Promo pages (owner, 2026-11-11: the Black November sale). They mix every
+# category, and link words don't say which ("Opera SOS Echo Classic"), so
+# each card's own category decides. Seasonal: a page that is gone is skipped,
+# never a failed part. Only a sale price under a crossed-out price is kept.
+BLACK_NOVEMBER = "https://www.skatewarehouse.com/Black_November_Sale__Up_To_60_Off/catpage-BNSALE.html"
+PROMO_URLS = {
+    "Decks": (BLACK_NOVEMBER, "https://www.skatewarehouse.com/Jacuzzi_Decks_Only_5998/catpage-DECKDEAL.html"),
+    "Completes": (BLACK_NOVEMBER, "https://www.skatewarehouse.com/30_Off_Complete_Skateboards/catpage-COMPLETES30.html"),
+    "Wheels": (BLACK_NOVEMBER, "https://www.skatewarehouse.com/Select_Wheels_40_Off/catpage-WHEELS40.html"),
+    "Trucks": (BLACK_NOVEMBER,),
+    "Bearings": (BLACK_NOVEMBER,),
+    "Accessories": (BLACK_NOVEMBER,),
+}
+# A card's category (data-gtm_impression_category, first part) -> part.
+CARD_PARTS = {"decks": "Decks", "complete decks": "Completes", "wheels": "Wheels", "trucks": "Trucks",
+              "bearings": "Bearings", "hardware": "Accessories", "miscellaneous": "Accessories"}
+BASE = "https://www.skatewarehouse.com"
+
+
+def card_items(scraper, html):
+    """Marked-down cards of ``scraper.part`` on a mixed-category page."""
+    soup = BeautifulSoup(html or "", "html.parser")
+    items = []
+    for card in soup.select("div.gtm_impression[data-gtm_impression_category]"):
+        category = str(card.get("data-gtm_impression_category") or "").split("/")[0].strip().casefold()
+        if CARD_PARTS.get(category) != scraper.part:
+            continue
+        link = card.find("a", href=True)
+        price = card.select_one(".cattable-wrap-cell-info-price")
+        if link is None or price is None:
+            continue
+        href = str(link["href"]).strip().split("?", 1)[0]
+        if href.startswith("/"):
+            href = BASE + href
+        href = normalize_url(href)
+        prices = re.findall(r"\$([\d,]+\.\d{2})", price.get_text(" ", strip=True))
+        prices = [value.replace(",", "") for value in prices]
+        if not _markdown(prices):
+            continue
+        name = normalize_product_name(str(card.get("data-gtm_impression_name") or ""))
+        if not name or not scraper._keep(name, href, prices[0], prices[1]):
+            continue
+        item = {"name": name, "url": href, "price_new": prices[0], "price_old": prices[1],
+                "availability": "Check store", "part": scraper.part, "store": "SkateWarehouse"}
+        if scraper.part in ("Decks", "Completes"):
+            item["size"] = extract_deck_size(name)
+        scraper._finish(item, card, BASE)
+        items.append(item)
+    return items
+
+
+def add_promos(scraper, items, fetch=None):
+    """``items`` plus this part's promo-page cards not already among them."""
+    if items is None:
+        return None
+    fetch = fetch or fetch_page
+    seen = {item.get("url") for item in items}
+    merged = list(items)
+    for url in getattr(scraper, "promo_urls", ()):
+        html = fetch(url)
+        if not html:
+            logging.info("SkateWarehouse promo page not read (sale over?): %s", url)
+            continue
+        for item in card_items(scraper, html):
+            if item["url"] not in seen:
+                seen.add(item["url"])
+                merged.append(item)
+    return merged
+
+
+class SkateWarehouseCardScraper(SkateWarehouseScraper):
+    """A category page read by its cards (Completes: "Pre-Built Complete
+    Skateboards", where link words don't say complete)."""
+
+    def parse(self, html):
+        if not html:
+            logging.error("No HTML to parse")
+            return []
+        return card_items(self, html)
+
+
 # Product pages read per run for shoe sizes, and the pause between them.
 MAX_SIZE_READS = 40
 SIZE_READ_DELAY = 1.0
@@ -200,11 +285,14 @@ class SkateWarehouseSneakersScraper(SkateWarehouseScraper):
 class SkateWarehouseMultiScraper(SkateWarehouseScraper):
     """One part spread across several category pages. A failed page fails the part."""
 
-    def __init__(self, part, urls, require_markdown=False):
-        super().__init__("SkateWarehouse", urls[0], part, require_markdown=require_markdown)
+    def __init__(self, part, urls, require_markdown=False, promo_urls=()):
+        super().__init__("SkateWarehouse", urls[0], part, require_markdown=require_markdown, promo_urls=promo_urls)
         self.urls = list(urls)
 
     def scrape(self):
+        return add_promos(self, self._scrape_pages())
+
+    def _scrape_pages(self):
         merged = []
         seen = set()
         for url in self.urls:
@@ -240,14 +328,20 @@ def scrapers():
     # page is sunglasses and stickers, not hardware, so accessories use the
     # hardware, grip, wax, tool, riser, and bushing categories the same way.
     return [
-        SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Decks/catpage-SALEDECK.html", "Decks"),
-        SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Wheels/catpage-SALEWHEELS.html", "Wheels"),
-        SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Trucks/catpage-SALETRUCKS.html", "Trucks"),
+        SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Decks/catpage-SALEDECK.html", "Decks",
+                              promo_urls=PROMO_URLS["Decks"]),
+        SkateWarehouseCardScraper("SkateWarehouse", "https://www.skatewarehouse.com/Pre-Built_Complete_Skateboards/catpage-BRCOMPLETE.html",
+                                  "Completes", promo_urls=PROMO_URLS["Completes"]),
+        SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Wheels/catpage-SALEWHEELS.html", "Wheels",
+                              promo_urls=PROMO_URLS["Wheels"]),
+        SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Trucks/catpage-SALETRUCKS.html", "Trucks",
+                              promo_urls=PROMO_URLS["Trucks"]),
         SkateWarehouseScraper(
             "SkateWarehouse",
             "https://www.skatewarehouse.com/bearings.html",
             "Bearings",
             require_markdown=True,
+            promo_urls=PROMO_URLS["Bearings"],
         ),
         SkateWarehouseSneakersScraper(
             "SkateWarehouse",
@@ -265,5 +359,6 @@ def scrapers():
                 "https://www.skatewarehouse.com/bushings.html",
             ],
             require_markdown=True,
+            promo_urls=PROMO_URLS["Accessories"],
         ),
     ] + ([SkateWarehouseMultiScraper("Protection", list(PROTECTION_URLS), require_markdown=True)] if PROTECTION_URLS else [])
