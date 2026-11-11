@@ -16,6 +16,7 @@ from stores.skatedeluxe import ENABLED as DELUXE_ENABLED
 from stores.skatedeluxe import scrapers as skatedeluxe_scrapers
 from stores.skatewarehouse import scrapers as skatewarehouse_scrapers
 from stores.socal import scrapers as socal_scrapers
+from stores.sourceboards import scrapers as sourceboards_scrapers
 from stores.spot import scrapers as spot_scrapers
 from stores.tactics import scrapers as tactics_scrapers
 from stores.tgm import scrapers as tgm_scrapers
@@ -36,6 +37,8 @@ def build_scrapers():
     scrapers.extend(spot_scrapers())
     scrapers.extend(exodus_scrapers())
     scrapers.extend(socal_scrapers())
+    # Sourceboards' US storefront, skate sale collections (2026-11-11).
+    scrapers.extend(sourceboards_scrapers())
     # Multisport protection brands, Protection only (2026-11-03).
     scrapers.extend(protection_brand_scrapers())
     # SkatePro's skate helmets, pads and impact shorts (2026-11-03).
