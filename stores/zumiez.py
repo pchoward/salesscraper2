@@ -455,6 +455,7 @@ class ZumiezProtectionScraper(ZumiezMultiScraper):
 # by the owner in a browser on 2026-10-28. robots.txt allows
 # ?customFilters=promotion_flag*Sale.
 PROTECTION_URLS = ("https://www.zumiez.com/skate/helmets-pads.html?customFilters=promotion_flag:Sale",)
+PACKS_URL = "https://www.zumiez.com/accessories/backpacks-bags.html?customFilters=promotion_flag:Sale"
 
 
 def scrapers():
@@ -475,4 +476,8 @@ def scrapers():
                 "https://www.zumiez.com/skate/components.html?customFilters=promotion_flag:Sale",
             ],
         ),
+        # Packs (owner, 2026-11-12): the Backpacks & Bags category on sale, the
+        # same promotion filter as the other categories (robots allow it). The
+        # Skate rules keep only real packs (sports/packs.py).
+        ZumiezScraper("Zumiez", PACKS_URL, "Packs"),
     ] + ([ZumiezProtectionScraper(list(PROTECTION_URLS))] if PROTECTION_URLS else [])
