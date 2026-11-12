@@ -6782,14 +6782,14 @@
           }
         },
         "Christy Sports_Boots": {
-          "count": 156,
+          "count": 155,
           "failed": false,
           "diagnostics": {
             "expected_count": 157.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 156,
-            "percentage_change": -0.6,
+            "actual_count": 155,
+            "percentage_change": -1.3,
             "reason": "normal_variation"
           }
         },
@@ -7202,14 +7202,14 @@
           }
         },
         "Smith_Protection": {
-          "count": 22,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 23.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 22,
-            "percentage_change": -4.3,
+            "actual_count": 21,
+            "percentage_change": -8.7,
             "reason": "normal_variation"
           }
         },
@@ -7334,13 +7334,13 @@
           }
         },
         "The Pro Ski and Ride_Poles": {
-          "count": 7,
+          "count": 6,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 7,
+            "actual_count": 6,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -7478,14 +7478,14 @@
           }
         },
         "Utah Ski_Poles": {
-          "count": 25,
+          "count": 24,
           "failed": false,
           "diagnostics": {
             "expected_count": 25.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 25,
-            "percentage_change": 0.0,
+            "actual_count": 24,
+            "percentage_change": -4.0,
             "reason": "normal_variation"
           }
         },
@@ -7670,26 +7670,26 @@
           }
         },
         "evo_Boots": {
-          "count": 298,
+          "count": 300,
           "failed": false,
           "diagnostics": {
             "expected_count": 296.5,
             "baseline_samples": 6,
             "median_absolute_deviation": 1.0,
-            "actual_count": 298,
-            "percentage_change": 0.5,
+            "actual_count": 300,
+            "percentage_change": 1.2,
             "reason": "normal_variation"
           }
         },
         "evo_Helmets": {
-          "count": 150,
+          "count": 151,
           "failed": false,
           "diagnostics": {
             "expected_count": 152.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 150,
-            "percentage_change": -1.3,
+            "actual_count": 151,
+            "percentage_change": -0.7,
             "reason": "normal_variation"
           }
         },
@@ -7706,14 +7706,14 @@
           }
         },
         "evo_Protection": {
-          "count": 134,
+          "count": 131,
           "failed": false,
           "diagnostics": {
             "expected_count": 131,
             "baseline_samples": 9,
             "median_absolute_deviation": 3,
-            "actual_count": 134,
-            "percentage_change": 2.3,
+            "actual_count": 131,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -7730,7 +7730,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-12T01:17:30+00:00"
+      "scanned_at": "2026-11-12T07:23:47+00:00"
     }
   ],
   "baseline": {
@@ -7756,7 +7756,7 @@
     },
     "Utah Ski_Poles": {
       "date": "2026-11-12",
-      "count": 25
+      "count": 24
     },
     "Utah Ski_Skis": {
       "date": "2026-11-12",
@@ -7780,7 +7780,7 @@
     },
     "Christy Sports_Boots": {
       "date": "2026-11-12",
-      "count": 156
+      "count": 155
     },
     "Christy Sports_Poles": {
       "date": "2026-11-12",
@@ -7828,11 +7828,11 @@
     },
     "evo_Helmets": {
       "date": "2026-11-12",
-      "count": 150
+      "count": 151
     },
     "evo_Protection": {
       "date": "2026-11-12",
-      "count": 134
+      "count": 131
     },
     "Bern_Helmets": {
       "date": "2026-11-12",
@@ -7868,11 +7868,11 @@
     },
     "Smith_Protection": {
       "date": "2026-11-12",
-      "count": 22
+      "count": 21
     },
     "evo_Boots": {
       "date": "2026-11-12",
-      "count": 298
+      "count": 300
     },
     "Aspen Ski and Board_Bindings": {
       "date": "2026-11-12",
@@ -7952,7 +7952,7 @@
     },
     "The Pro Ski and Ride_Poles": {
       "date": "2026-11-12",
-      "count": 7
+      "count": 6
     },
     "The Pro Ski and Ride_Protection": {
       "date": "2026-11-12",
@@ -8365,7 +8365,7 @@
       },
       {
         "date": "2026-11-12",
-        "count": 156
+        "count": 155
       }
     ],
     "Christy Sports_Helmets": [
@@ -9395,7 +9395,7 @@
       },
       {
         "date": "2026-11-12",
-        "count": 22
+        "count": 21
       }
     ],
     "Smith_Skis": [
@@ -9721,7 +9721,7 @@
     "The Pro Ski and Ride_Poles": [
       {
         "date": "2026-11-12",
-        "count": 7
+        "count": 6
       }
     ],
     "The Pro Ski and Ride_Protection": [
@@ -10169,7 +10169,7 @@
       },
       {
         "date": "2026-11-12",
-        "count": 25
+        "count": 24
       }
     ],
     "Utah Ski_Protection": [
@@ -10525,7 +10525,7 @@
       },
       {
         "date": "2026-11-12",
-        "count": 298
+        "count": 300
       }
     ],
     "evo_Helmets": [
@@ -10571,7 +10571,7 @@
       },
       {
         "date": "2026-11-12",
-        "count": 150
+        "count": 151
       }
     ],
     "evo_Poles": [
@@ -10659,7 +10659,7 @@
       },
       {
         "date": "2026-11-12",
-        "count": 134
+        "count": 131
       }
     ],
     "evo_Skis": [
