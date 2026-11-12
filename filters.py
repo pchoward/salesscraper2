@@ -406,11 +406,22 @@ def use_sport_rules(rule):
 MIN_PERCENT_OFF = 5.0
 
 
+# Clutter (owner, 2026-11-12): nothing under $2 is listed, whatever its
+# markdown (50-cent headset spacers, an 85-cent cable strap).
+MIN_PRICE = 2.0
+
+
 def _minimum_markdown_reason(price_new, price_old):
-    """A reason when both prices are known and the markdown is under 10%.
+    """A reason when the price is under $2, or both prices are known and the
+    markdown is under the minimum.
 
     A listing with no regular price (a history check, a store that shows no
-    "was" price) is left to the other rules."""
+    "was" price) is otherwise left to the other rules."""
+    try:
+        if price_new not in (None, "") and float(price_new) < MIN_PRICE:
+            return f"under ${MIN_PRICE:.0f}"
+    except (TypeError, ValueError):
+        pass
     if price_new in (None, "") or price_old in (None, ""):
         return None
     percent = percent_off_value(price_new, price_old)
@@ -419,8 +430,17 @@ def _minimum_markdown_reason(price_new, price_old):
     return f"{percent:.0f}% off (< {MIN_PERCENT_OFF:.0f}%)"
 
 
+# Used gear stays out (owner, 2026-11-12: "leave used out for now"). Its
+# "was" price is the new price, so the markdown overstates the deal
+# (evo's "... Ski Boots 2025 - Used", 129 listings that day). Demo skis and
+# ex-demo bikes are not covered here.
+_USED = re.compile(r"\b(?:used|pre-?owned|second[- ]?hand|refurb(?:ished)?)\b", re.I)
+
+
 def filter_reason(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     """Return None if the listing should be kept, else a short reason."""
+    if _USED.search(normalize_product_name(name)):
+        return "catalog scope: used"
     reason = _rule_reason(name, part, url, price_new, price_old, description, product_type)
     return reason or _minimum_markdown_reason(price_new, price_old)
 
