@@ -18161,15 +18161,27 @@
           }
         },
         "SkateWarehouse_Decks": {
-          "count": 76,
+          "count": 74,
           "failed": false,
           "diagnostics": {
             "expected_count": 74.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 76,
-            "percentage_change": 2.7,
+            "actual_count": 74,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
+          }
+        },
+        "SkateWarehouse_Packs": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 2,
+            "percentage_change": null,
+            "reason": "insufficient_history"
           }
         },
         "SkateWarehouse_Protection": {
@@ -18197,14 +18209,14 @@
           }
         },
         "SkateWarehouse_Trucks": {
-          "count": 18,
+          "count": 12,
           "failed": false,
           "diagnostics": {
             "expected_count": 6.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 18,
-            "percentage_change": 200.0,
+            "actual_count": 12,
+            "percentage_change": 100.0,
             "reason": "normal_variation"
           }
         },
@@ -18568,6 +18580,18 @@
             "reason": "normal_variation"
           }
         },
+        "Tactics_Packs": {
+          "count": 28,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 28,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "Tactics_Protection": {
           "count": 4,
           "failed": false,
@@ -18676,6 +18700,18 @@
             "reason": "normal_variation"
           }
         },
+        "Zumiez_Packs": {
+          "count": 49,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 49,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "Zumiez_Protection": {
           "count": 8,
           "failed": false,
@@ -18725,13 +18761,13 @@
           }
         }
       },
-      "scanned_at": "2026-11-12T15:57:39+00:00"
+      "scanned_at": "2026-11-12T18:52:32+00:00"
     }
   ],
   "baseline": {
     "SkateWarehouse_Decks": {
       "date": "2026-11-12",
-      "count": 76
+      "count": 74
     },
     "SkateWarehouse_Wheels": {
       "date": "2026-11-12",
@@ -18739,7 +18775,7 @@
     },
     "SkateWarehouse_Trucks": {
       "date": "2026-11-12",
-      "count": 18
+      "count": 12
     },
     "CCS_Decks": {
       "date": "2026-11-12",
@@ -18960,6 +18996,18 @@
     "TGM_Packs": {
       "date": "2026-11-12",
       "count": 3
+    },
+    "SkateWarehouse_Packs": {
+      "date": "2026-11-12",
+      "count": 2
+    },
+    "Tactics_Packs": {
+      "date": "2026-11-12",
+      "count": 28
+    },
+    "Zumiez_Packs": {
+      "date": "2026-11-12",
+      "count": 49
     }
   },
   "completeness_baseline": {
@@ -21568,7 +21616,13 @@
       },
       {
         "date": "2026-11-12",
-        "count": 76
+        "count": 74
+      }
+    ],
+    "SkateWarehouse_Packs": [
+      {
+        "date": "2026-11-12",
+        "count": 2
       }
     ],
     "SkateWarehouse_Protection": [
@@ -21742,7 +21796,7 @@
       },
       {
         "date": "2026-11-12",
-        "count": 18
+        "count": 12
       }
     ],
     "SkateWarehouse_Wheels": [
@@ -22945,6 +22999,12 @@
         "count": 41
       }
     ],
+    "Tactics_Packs": [
+      {
+        "date": "2026-11-12",
+        "count": 28
+      }
+    ],
     "Tactics_Protection": [
       {
         "date": "2026-10-30",
@@ -23417,6 +23477,12 @@
       {
         "date": "2026-11-12",
         "count": 268
+      }
+    ],
+    "Zumiez_Packs": [
+      {
+        "date": "2026-11-12",
+        "count": 49
       }
     ],
     "Zumiez_Protection": [
