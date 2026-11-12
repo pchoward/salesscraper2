@@ -984,13 +984,15 @@
     "observation_count": 1,
     "all_time_low": 19.99,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
     "width": 2.0,
     "length": 1.0,
     "prices": {
       "2026-11-12": 19.99
-    },
-    "stage": "new"
+    }
   },
   "https://bicyclewarehouse.com/products/serfas-var-2-variant-2-adjustable-flex-bike-saddle": {
     "name": "Serfas VAR-2 Chromoly Rails Adjustable Flex Bike Saddle",
@@ -1065,11 +1067,13 @@
     "observation_count": 1,
     "all_time_low": 59.99,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
     "prices": {
       "2026-11-12": 59.99
-    },
-    "stage": "new"
+    }
   },
   "https://bicyclewarehouse.com/products/specialized-2bliss-ready-tire-sealant": {
     "name": "Specialized 2Bliss Ready Bike Tire Sealant",
@@ -5227,11 +5231,11 @@
     "observation_count": 1,
     "all_time_low": 18.99,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ESI_Racers_Edge_Silicon_MTB_Grips_Black_6b534ebb-54a2-4c60-a7ae-e234364583a5.jpg?v=1623830072",
     "prices": {
       "2026-11-12": 18.99
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/esi-racers-edge-silicon-mtb-grips-black-blem": {
     "name": "ESI Racers Edge Silicon MTB Grips - Black - Blem",
@@ -5267,11 +5271,11 @@
     "observation_count": 1,
     "all_time_low": 18.99,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/181517000162_c6f2a6c1-2372-42e7-bc49-225917c470f6.jpg?v=1623830076",
     "prices": {
       "2026-11-12": 18.99
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/esi-racers-edge-silicon-mtb-grips-green": {
     "name": "ESI Racers Edge Silicon MTB Grips - Green",
@@ -5756,6 +5760,8 @@
     "all_time_low": 519.99,
     "all_time_low_date": "2026-11-10",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/36AWL_HD_MY25_Hero.webp?v=1732715713",
     "prices": {
       "2026-11-10": 519.99,
@@ -6331,7 +6337,7 @@
     }
   },
   "https://cambriabike.com/products/industry-9-torch-on-enve-hv60-27-5-mtb-wheel-front": {
-    "name": "Industry Nine Industry 9 Torch on ENVE HV60 27.5\" MTB Wheel - Front",
+    "name": "Industry 9 Torch on ENVE HV60 27.5\" MTB Wheel - Front",
     "store": "Cambria",
     "part": "Wheels",
     "first_seen": "2026-11-02",
@@ -6376,7 +6382,7 @@
     }
   },
   "https://cambriabike.com/products/industry-9-torch-on-enve-m60-40-hv-27-5-mtb-wheel-front": {
-    "name": "Industry Nine Industry 9 Torch on ENVE M60/40 HV 27.5\" MTB Wheel - Front",
+    "name": "Industry 9 Torch on ENVE M60/40 HV 27.5\" MTB Wheel - Front",
     "store": "Cambria",
     "part": "Wheels",
     "first_seen": "2026-11-02",
@@ -6720,11 +6726,11 @@
     "observation_count": 1,
     "all_time_low": 107.1,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTenRemoteExternalDropperPost-NoRemote.jpg?v=1647945188",
     "prices": {
       "2026-11-12": 107.1
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/ks-suspension-eteni-integra-dropper-seatpost-2020": {
     "name": "KS Suspension eTENi Integra Dropper Seatpost - 2020",
@@ -6735,11 +6741,11 @@
     "observation_count": 1,
     "all_time_low": 116.1,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTENiIntegraDropperSeatpost-2020.jpg?v=1612877766",
     "prices": {
       "2026-11-12": 116.1
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/ks-suspension-lev-carbon-integra-internal-dropper-post": {
     "name": "KS Suspension LEV Carbon Integra Internal Dropper Post",
@@ -6775,9 +6781,25 @@
     "observation_count": 1,
     "all_time_low": 161.1,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/KSSuspensionRage-iSDropperSeatpost.jpg?v=1735304786",
     "prices": {
       "2026-11-12": 161.1
+    }
+  },
+  "https://cambriabike.com/products/leatt-3-0-fusion-vest-black": {
+    "name": "Leatt 3.0 Fusion Vest - Black",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 287.2,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/41979_Leatt_FusionVest_3.0_Black_front_1015400100.webp?v=1793097425",
+    "width": 3.0,
+    "prices": {
+      "2026-11-12": 287.2
     },
     "stage": "new"
   },
@@ -7085,6 +7107,38 @@
       "2026-11-12": 49.99
     }
   },
+  "https://cambriabike.com/products/leatt-velocity-4-5-desert-mtb-goggle-stealth-smoke-2024": {
+    "name": "Leatt Velocity 4.5 Desert MTB Goggle - Stealth-Smoke - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 33.87,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_4.5desert_stealth_front_10000672.webp?v=1708343425",
+    "width": 4.5,
+    "prices": {
+      "2026-11-12": 33.87
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/leatt-velocity-4-5-iriz-mtb-goggle-sundown-purple-2024": {
+    "name": "Leatt Velocity 4.5 Iriz MTB Goggle - SunDown-Purple - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 46.19,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_4.5iriz_sundown_front_8024070480.webp?v=1708343911",
+    "width": 4.5,
+    "prices": {
+      "2026-11-12": 46.19
+    },
+    "stage": "new"
+  },
   "https://cambriabike.com/products/leatt-velocity-4-5-mtb-goggle-red-light-gray": {
     "name": "Leatt Velocity 4.5 MTB Goggle - Red-Light Gray",
     "store": "Cambria",
@@ -7109,6 +7163,54 @@
       "2026-11-09": 49.99,
       "2026-11-10": 49.99
     }
+  },
+  "https://cambriabike.com/products/leatt-velocity-4-5-mtb-goggle-uv-light-gray-2024": {
+    "name": "Leatt Velocity 4.5 MTB Goggle - UV - Light Gray - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 42.34,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_4.5_uv_front_8024070580.webp?v=1708341185",
+    "width": 4.5,
+    "prices": {
+      "2026-11-12": 42.34
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/leatt-velocity-5-5-iriz-mtb-goggle-citrus-bronze-2024": {
+    "name": "Leatt Velocity 5.5 Iriz MTB Goggle - Citrus-Bronze - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 67.2,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_5.5iriz_citrus_front_8024070240.webp?v=1708342974",
+    "width": 5.5,
+    "prices": {
+      "2026-11-12": 67.2
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/leatt-velocity-5-5-iriz-mtb-goggle-graphite-platinum-2024": {
+    "name": "Leatt Velocity 5.5 Iriz MTB Goggle - Graphite-Platinum - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 67.2,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_5.5iriz_graphite_front_8024070270.webp?v=1708343348",
+    "width": 5.5,
+    "prices": {
+      "2026-11-12": 67.2
+    },
+    "stage": "new"
   },
   "https://cambriabike.com/products/leatt-velocity-5-5-iriz-mtb-goggle-uv-purple-2024": {
     "name": "Leatt Velocity 5.5 Iriz MTB Goggle - UV-Purple - 2024",
@@ -7135,6 +7237,54 @@
       "2026-11-12": 70.85
     }
   },
+  "https://cambriabike.com/products/leatt-velocity-6-5-iriz-mtb-goggle-forge-silver-2024": {
+    "name": "Leatt Velocity 6.5 Iriz MTB Goggle - Forge-Silver - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 79.52,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_6.5iriz_forge_front_8024070110.webp?v=1708341958",
+    "width": 6.5,
+    "prices": {
+      "2026-11-12": 79.52
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/leatt-velocity-6-5-iriz-mtb-goggle-red-red-2024": {
+    "name": "Leatt Velocity 6.5 Iriz MTB Goggle - Red-Red - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 79.52,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_6.5iriz_red_front_8024070130.webp?v=1708342046",
+    "width": 6.5,
+    "prices": {
+      "2026-11-12": 79.52
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/leatt-velocity-6-5-iriz-mtb-goggle-sundown-purple-2024": {
+    "name": "Leatt Velocity 6.5 Iriz MTB Goggle - SunDown-Purple - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 79.52,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_6.5iriz_sundown_front_8024070140.webp?v=1708342139",
+    "width": 6.5,
+    "prices": {
+      "2026-11-12": 79.52
+    },
+    "stage": "new"
+  },
   "https://cambriabike.com/products/leatt-velocity-6-5-mtb-goggle-royal-light-gray-2024": {
     "name": "Leatt Velocity 6.5 MTB Goggle - Royal-Light Gray - 2024",
     "store": "Cambria",
@@ -7159,6 +7309,22 @@
       "2026-11-11": 67.2,
       "2026-11-12": 67.2
     }
+  },
+  "https://cambriabike.com/products/leatt-velocity-6-5-mtb-goggle-sundown-light-gray-2024": {
+    "name": "Leatt Velocity 6.5 MTB Goggle - SunDown-Light Gray - 2024",
+    "store": "Cambria",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 67.2,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/goggle_6.5_sundown_front_8024070220.webp?v=1708342244",
+    "width": 6.5,
+    "prices": {
+      "2026-11-12": 67.2
+    },
+    "stage": "new"
   },
   "https://cambriabike.com/products/leatt-velocity-6-5-roll-off-mtb-goggle-red-blue": {
     "name": "Leatt Velocity 6.5 Roll-Off MTB Goggle - Red-Blue",
@@ -8681,12 +8847,12 @@
     "observation_count": 1,
     "all_time_low": 65.0,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Minion-DHR-II-Rear-Tire-EXO-TR_Black_60dc1d38-0afd-44af-9408-362a7ecab7a6.jpg?v=1625212035",
     "length": 26.0,
     "prices": {
       "2026-11-12": 65.0
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/maxxis-minion-dhr-ii-27-5-folding-mtb-tire-exo": {
     "name": "Maxxis Minion DHR II 27.5\" Folding MTB Tire - EXO",
@@ -8748,6 +8914,8 @@
     "all_time_low": 94.99,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Minion-DHR-II-3C-TR-DD-Double-Down_Black_710d7998-f4b2-4ead-90ae-154a42257cd4.jpg?v=1625212046",
     "length": 27.5,
     "prices": {
@@ -9120,12 +9288,12 @@
     "observation_count": 1,
     "all_time_low": 88.0,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410.jpg?v=1691588515",
     "length": 29.0,
     "prices": {
       "2026-11-12": 88.0
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/maxxis-rekon-race-29-folding-mtb-tire-exo-black": {
     "name": "Maxxis Rekon Race 29\" Folding MTB Tire - EXO - Black",
@@ -9744,11 +9912,11 @@
     "observation_count": 1,
     "all_time_low": 30.15,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODI_Dread_Lock_Grips_Black_e6206d3e-5251-4261-b23a-78d426e5aba1.jpg?v=1623830406",
     "prices": {
       "2026-11-12": 30.15
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/odi-elite-flow-lock-on-grips-black": {
     "name": "ODI Elite Flow Lock-On Grips - Black",
@@ -9783,11 +9951,11 @@
     "observation_count": 1,
     "all_time_low": 27.23,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_ArmyGreen_bc8e7bc3-cb4a-43b9-9506-898bdcf8255f.jpg?v=1623830424",
     "prices": {
       "2026-11-12": 27.23
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/odi-elite-pro-lock-on-bonus-pack-mtb-grips-graphite-black": {
     "name": "ODI Elite Pro Lock-On Bonus Pack MTB Grips - Graphite-Black",
@@ -9819,11 +9987,11 @@
     "observation_count": 1,
     "all_time_low": 27.23,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_Navy_26bf625a-91f5-4a8c-97ee-1a040e856a2d.jpg?v=1623830429",
     "prices": {
       "2026-11-12": 27.23
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/odi-elite-pro-lock-on-bonus-pack-mtb-grips-turquoise": {
     "name": "ODI Elite Pro Lock-On Bonus Pack MTB Grips - Turquoise",
@@ -9834,11 +10002,11 @@
     "observation_count": 1,
     "all_time_low": 27.23,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_Turquoise_ca5770c7-00b0-4e1f-a930-518d34f86e26.jpg?v=1623830432",
     "prices": {
       "2026-11-12": 27.23
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/odi-longneck-sl-grips-bright-red": {
     "name": "ODI Longneck SL Grips - Bright Red",
@@ -9849,11 +10017,11 @@
     "observation_count": 1,
     "all_time_low": 11.66,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODILongneckSLGrips_BrightRed_640dac93-259f-4472-851c-4eaf0f854f9f.jpg?v=1623830443",
     "prices": {
       "2026-11-12": 11.66
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/odi-longneck-sl-grips-pink": {
     "name": "ODI Longneck SL Grips - Pink",
@@ -9864,11 +10032,11 @@
     "observation_count": 1,
     "all_time_low": 11.66,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODILongneckSLGrips_Pink_9917aa4c-b702-4165-87e9-8aa3ddaa2a76.jpg?v=1623830448",
     "prices": {
       "2026-11-12": 11.66
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/odi-longneck-v2-1-lock-on-grips-black": {
     "name": "ODI Longneck V2.1 Lock-On Grips - Black",
@@ -12353,12 +12521,12 @@
     "observation_count": 1,
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SchwalbeRocketRonSuperGroundMTBTire_Black_8c8c2a9c-d2d5-4e67-9aec-865ab0abe6f8.jpg?v=1625212307",
     "length": 29.0,
     "prices": {
       "2026-11-12": 94.86
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/sdg-slater-jr-lock-on-grips-neon-pink": {
     "name": "SDG Slater Jr Lock-On Grips - Neon Pink",
@@ -12637,20 +12805,19 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-06",
-    "observation_count": 5,
+    "last_seen": "2026-11-12",
+    "observation_count": 6,
     "all_time_low": 24.99,
     "all_time_low_date": "2026-11-02",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-07",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Shimano_Alivio_HG201_9_Speed_MTB_Cassette_Silver_a52fc6b2-0839-48c0-a977-7f5226a23626.jpg?v=1643621704",
     "prices": {
       "2026-11-02": 24.99,
       "2026-11-03": 24.99,
       "2026-11-04": 24.99,
       "2026-11-05": 24.99,
-      "2026-11-06": 24.99
+      "2026-11-06": 24.99,
+      "2026-11-12": 24.99
     }
   },
   "https://cambriabike.com/products/shimano-alivio-hg400-9-spd-mtb-cassette": {
@@ -12873,13 +13040,11 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-11",
-    "observation_count": 9,
+    "last_seen": "2026-11-12",
+    "observation_count": 10,
     "all_time_low": 27.99,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Shimano-Altus-M310-7-8-Speed-Rear-Derailleur_Black_081aed3d-d8b1-4bda-bb81-15c4b60a2b3f.jpg?v=1711906885",
     "prices": {
       "2026-11-02": 27.99,
@@ -12890,7 +13055,8 @@
       "2026-11-07": 27.99,
       "2026-11-08": 27.99,
       "2026-11-09": 27.99,
-      "2026-11-11": 27.99
+      "2026-11-11": 27.99,
+      "2026-11-12": 27.99
     }
   },
   "https://cambriabike.com/products/shimano-altus-m313-7-8-speed-triple-front-derailleur": {
@@ -13067,13 +13233,11 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-09",
-    "observation_count": 8,
+    "last_seen": "2026-11-12",
+    "observation_count": 9,
     "all_time_low": 24.99,
     "all_time_low_date": "2026-11-02",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-11",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/CR0309_x1024_c9bfe68d-c056-4daa-99b3-5dac13d9c3e0.webp?v=1701162585",
     "prices": {
       "2026-11-02": 24.99,
@@ -13083,7 +13247,8 @@
       "2026-11-06": 24.99,
       "2026-11-07": 24.99,
       "2026-11-08": 24.99,
-      "2026-11-09": 24.99
+      "2026-11-09": 24.99,
+      "2026-11-12": 24.99
     }
   },
   "https://cambriabike.com/products/shimano-bb-rs500-press-fit-bottom-bracket": {
@@ -15330,13 +15495,11 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-07",
-    "observation_count": 6,
+    "last_seen": "2026-11-12",
+    "observation_count": 7,
     "all_time_low": 119.99,
     "all_time_low_date": "2026-11-02",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-09",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/shimano-cs-lg400-11-cassette-2-1285459.jpg?v=1677583555",
     "prices": {
       "2026-11-02": 119.99,
@@ -15344,7 +15507,8 @@
       "2026-11-04": 119.99,
       "2026-11-05": 119.99,
       "2026-11-06": 119.99,
-      "2026-11-07": 119.99
+      "2026-11-07": 119.99,
+      "2026-11-12": 119.99
     }
   },
   "https://cambriabike.com/products/shimano-m310-3x7-8-front-derailleur": {
@@ -15667,17 +15831,16 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-03",
-    "observation_count": 2,
+    "last_seen": "2026-11-12",
+    "observation_count": 3,
     "all_time_low": 28.99,
     "all_time_low_date": "2026-11-02",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-04",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Shimano_Saint_BB80_Hollowtech_II_MTB_Bottom_Bracket_Black_-_Gold.jpg?v=1572521813",
     "prices": {
       "2026-11-02": 28.99,
-      "2026-11-03": 28.99
+      "2026-11-03": 28.99,
+      "2026-11-12": 28.99
     }
   },
   "https://cambriabike.com/products/shimano-saint-m800-shift-brake-dual-control-left-hand-gray-oe": {
@@ -16392,17 +16555,16 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-03",
-    "observation_count": 2,
+    "last_seen": "2026-11-12",
+    "observation_count": 3,
     "all_time_low": 22.5,
     "all_time_low_date": "2026-11-02",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-04",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ShimanoTourneyA0707SpeedRearDerailleur-DirectMount-Black_ea38e0cf-232d-4e12-a6a7-e61e21f05e85.jpg?v=1643622019",
     "prices": {
       "2026-11-02": 22.5,
-      "2026-11-03": 22.5
+      "2026-11-03": 22.5,
+      "2026-11-12": 22.5
     }
   },
   "https://cambriabike.com/products/shimano-tourney-a073-7-speed-triple-front-derailleur": {
@@ -16498,6 +16660,23 @@
       "2026-11-02": 19.99,
       "2026-11-03": 19.99
     }
+  },
+  "https://cambriabike.com/products/shimano-tourney-tx30-3x7-spd-shifter-set": {
+    "name": "Shimano Tourney TX30 3x7 Spd Shifter Set",
+    "store": "Cambria",
+    "part": "Drivetrain",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 19.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Shimano_Tourney_TX30_3x7_Speed_Shifter_Set_Black_dbe4d9c8-9da3-40f1-9d59-f8edf42a520a.jpg?v=1642754935",
+    "width": 3.0,
+    "length": 7.0,
+    "prices": {
+      "2026-11-12": 19.99
+    },
+    "stage": "new"
   },
   "https://cambriabike.com/products/shimano-tourney-tx800-7-8-spd-mtb-rear-derailleur": {
     "name": "Shimano Tourney TX800 7/8 Spd MTB Rear Derailleur",
@@ -20841,6 +21020,7 @@
     "observation_count": 1,
     "all_time_low": 543.0,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266131.jpg?v=1650616859",
     "length": 29.0,
     "spec_offers": [
@@ -20855,8 +21035,7 @@
     ],
     "prices": {
       "2026-11-12": 543.0
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/stans-no-tubes-crest-mk4-29-mtb-wheel-front": {
     "name": "Stans No Tubes Crest MK4 29\" MTB Wheel - Front",
@@ -20867,6 +21046,7 @@
     "observation_count": 1,
     "all_time_low": 257.0,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266136.jpg?v=1650616522",
     "length": 29.0,
     "spec_offers": [
@@ -20881,8 +21061,7 @@
     ],
     "prices": {
       "2026-11-12": 257.0
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/stans-no-tubes-crest-mk4-29-mtb-wheel-rear": {
     "name": "Stans No Tubes Crest MK4 29\" MTB Wheel - Rear",
@@ -20893,6 +21072,7 @@
     "observation_count": 1,
     "all_time_low": 543.0,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266145.jpg?v=1650616572",
     "length": 29.0,
     "spec_offers": [
@@ -20907,8 +21087,7 @@
     ],
     "prices": {
       "2026-11-12": 543.0
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/stans-the-crow-29-folding-mtb-tire": {
     "name": "Stans The Crow 29\" Folding MTB Tire",
@@ -21579,6 +21758,81 @@
       "2026-11-11": 59.99,
       "2026-11-12": 59.99
     }
+  },
+  "https://cambriabike.com/products/trp-dh-r-evo-hd-m846-disc-brake-and-lever-front": {
+    "name": "TRP DH-R EVO HD-M846 Disc Brake and Lever - Front",
+    "store": "Cambria",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 207.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/110056.jpg?v=1700646328",
+    "prices": {
+      "2026-11-12": 207.99
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/trp-dh-r-evo-hd-m846-disc-brake-and-lever-rear": {
+    "name": "TRP DH-R EVO HD-M846 Disc Brake and Lever - Rear",
+    "store": "Cambria",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 207.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/110056_1.jpg?v=1700646370",
+    "prices": {
+      "2026-11-12": 207.99
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/trp-evo-pro-m9040-disc-brake-front": {
+    "name": "TRP EVO Pro M9040 Disc Brake - Front",
+    "store": "Cambria",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 247.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/D1508_BR1441_febce148-5009-466e-ae03-df56668fa082.webp?v=1776772917",
+    "prices": {
+      "2026-11-12": 247.99
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/trp-evo-pro-m9040-disc-brake-rear": {
+    "name": "TRP EVO Pro M9040 Disc Brake - Rear",
+    "store": "Cambria",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 247.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/D1508_BR1440.webp?v=1776772433",
+    "prices": {
+      "2026-11-12": 247.99
+    },
+    "stage": "new"
+  },
+  "https://cambriabike.com/products/trp-trail-evo-disc-brake-and-lever-black": {
+    "name": "TRP Trail EVO Disc Brake and Lever - Black",
+    "store": "Cambria",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 179.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Trailevo.webp?v=1769075304",
+    "prices": {
+      "2026-11-12": 179.99
+    },
+    "stage": "new"
   },
   "https://cambriabike.com/products/truvativ-descendant-31-8-mtb-stem-black": {
     "name": "Truvativ Descendant 31.8 MTB Stem - Black",
@@ -23819,6 +24073,31 @@
       "2026-11-12": 27.99
     }
   },
+  "https://mikesbikes.com/products/dt-swiss-conversion-kit-black-15mm": {
+    "name": "DT Swiss Front Hub Conversion Kit",
+    "store": "Mike's Bikes",
+    "part": "Wheels",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 49.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/HU1377.jpg?v=1747271054",
+    "spec_offers": [
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "31206024020037",
+        "available": true,
+        "price": 49.99,
+        "compare_at_price": 52.99
+      }
+    ],
+    "prices": {
+      "2026-11-12": 49.99
+    },
+    "stage": "new"
+  },
   "https://mikesbikes.com/products/dt-swiss-dt350-hubs-front": {
     "name": "DT Swiss DT350 Hubs (Front)",
     "store": "Mike's Bikes",
@@ -25292,7 +25571,7 @@
     }
   },
   "https://mikesbikes.com/products/oneup-stem": {
-    "name": "OneUp Components OneUP Stem",
+    "name": "OneUP Stem",
     "store": "Mike's Bikes",
     "part": "Cockpit",
     "first_seen": "2026-11-12",
@@ -25320,6 +25599,21 @@
     "prices": {
       "2026-11-12": 202.49
     }
+  },
+  "https://mikesbikes.com/products/osprey-siskin-8-hydration-pack": {
+    "name": "Osprey Packs Siskin 8 Hydration Pack",
+    "store": "Mike's Bikes",
+    "part": "Packs",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 95.77,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/siskin8l_s23_side_ultimatered.jpg?v=1747271081",
+    "prices": {
+      "2026-11-12": 95.77
+    },
+    "stage": "new"
   },
   "https://mikesbikes.com/products/paul-disc-brake-adaptor-p-p-180mm-post-200mm-rotor": {
     "name": "Paul Component Engineering Disc Brake Adaptor (180mm Post/200mm Rotor)",
@@ -26206,6 +26500,7 @@
     "observation_count": 1,
     "all_time_low": 1599.0,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Reserve_40_44_gravel_wheel_bundle_victoria_terrino.jpg?v=1794427490",
     "spec_offers": [
       {
@@ -26222,8 +26517,7 @@
     ],
     "prices": {
       "2026-11-12": 1599.0
-    },
-    "stage": "new"
+    }
   },
   "https://mikesbikes.com/products/reserve-e-30-hd-31-dh-wheelset-microspline": {
     "name": "Reserve E 30|HD 31|DH Wheelset (Microspline)",
@@ -29704,6 +29998,8 @@
     "all_time_low": 65.0,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0027/9379/9739/files/Major_Matte_Black_main_1fd6c149-c4da-4442-9579-88f5fba2fff7.png?v=1749043955",
     "prices": {
       "2026-11-03": 65.0,
@@ -29753,8 +30049,6 @@
     "all_time_low": 4999.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
-    "miss_streak": 1,
-    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
     "prices": {
       "2026-11-12": 4999.0
@@ -29767,13 +30061,28 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-12",
     "observation_count": 1,
-    "all_time_low": 3499.97,
+    "all_time_low": 3499.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelEXCFrameset_23_37141_A_Primary.jpg?v=1764008492",
     "prices": {
-      "2026-11-12": 3499.97
+      "2026-11-12": 3499.93
     }
+  },
+  "https://www.bikemart.com/products/2025-tempt-1-hardtail-mountain-bike": {
+    "name": "Liv 2025 Tempt 1 Hardtail Mountain Bike",
+    "store": "Bike Mart",
+    "part": "Bikes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 900.0,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond.jpg?v=1764000643",
+    "prices": {
+      "2026-11-12": 900.0
+    },
+    "stage": "new"
   },
   "https://www.bikemart.com/products/2026-s-works-turbo-levo-sl-2-di2-full-suspension-electric-mountain-bike": {
     "name": "Specialized 2026 S-Works Turbo Levo SL 2 Di2 Electric Full Suspension Mountain Bike",
@@ -29789,6 +30098,38 @@
     "prices": {
       "2026-11-12": 11499.99
     }
+  },
+  "https://www.bikemart.com/products/2026-slash-9-9-x0-axs-t-type-gen-6-full-suspension-mountain-bike": {
+    "name": "Trek 2026 Slash 9.9 X0 AXS T-Type Gen 6 Full Suspension Mountain Bike",
+    "store": "Bike Mart",
+    "part": "Bikes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 7799.93,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+    "width": 9.9,
+    "length": 0.0,
+    "prices": {
+      "2026-11-12": 7799.93
+    },
+    "stage": "new"
+  },
+  "https://www.bikemart.com/products/2026-stumpjumper-15-expert-di2": {
+    "name": "Specialized Stumpjumper 15 EVO Expert - Shimano XT Di2, FOX Performance Elite",
+    "store": "Bike Mart",
+    "part": "Bikes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 5299.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-30_SJ-15-EXPERT-DI2-NBLMET-DLMMET_HERO-PDP.jpg?v=1762264578",
+    "prices": {
+      "2026-11-12": 5299.99
+    },
+    "stage": "new"
   },
   "https://www.bikemart.com/products/2026-turbo-levo-sl-2-comp-alloy-full-suspension-electric-mountain-bike": {
     "name": "Specialized 2026 Turbo Levo SL 2 Comp Alloy Electric Full Suspension Mountain Bike",
@@ -30002,6 +30343,46 @@
     "prices": {
       "2026-11-12": 29.99
     }
+  },
+  "https://www.bikemart.com/products/cross-country-tubeless-rim-tape": {
+    "name": "Bontrager Cross-Country Tubeless Rim Tape",
+    "store": "Bike Mart",
+    "part": "Wheels",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 4.93,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
+    "spec_offers": [
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "46764081709309",
+        "available": true,
+        "price": 4.93,
+        "compare_at_price": 21.99
+      }
+    ],
+    "prices": {
+      "2026-11-12": 4.93
+    },
+    "stage": "new"
+  },
+  "https://www.bikemart.com/products/disc-brake-pads-juicybb7bb5": {
+    "name": "Avid Disc Brake Pads (Juicy/BB7/BB5)",
+    "store": "Bike Mart",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 10.93,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+    "prices": {
+      "2026-11-12": 10.93
+    },
+    "stage": "new"
   },
   "https://www.bikemart.com/products/dt-swiss-350-front-hub-15-x-110mm-center-lock-black-28h-straight-pull": {
     "name": "DT Swiss 350 Front Hub - 15 x 110mm Center-Lock Black 28H Straight Pull",
@@ -30373,6 +30754,21 @@
       "2026-11-12": 13.0
     }
   },
+  "https://www.bikemart.com/products/fr-5-brake-lever-pair": {
+    "name": "SRAM FR-5 Brake Lever- Pair",
+    "store": "Bike Mart",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 17.6,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
+    "prices": {
+      "2026-11-12": 17.6
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/grip-bontrager-xr-trail-comp-recycled-plastic-volt": {
     "name": "Grip Bontrager XR Trail Comp Recycled Plastic Volt",
     "store": "Bike Mart",
@@ -30434,6 +30830,21 @@
     "prices": {
       "2026-11-12": 30.8
     }
+  },
+  "https://www.bikemart.com/products/kenda-k1247-amrak-tire": {
+    "name": "Kenda K1247 Amrak Tire - Clincher Wire Black 30tpi",
+    "store": "Bike Mart",
+    "part": "Tires",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 39.95,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4038.jpg?v=1762254189",
+    "prices": {
+      "2026-11-12": 39.95
+    },
+    "stage": "new"
   },
   "https://www.bikemart.com/products/kenda-koncept-24x1-tire": {
     "name": "Kenda Koncept 24x1 Tire",
@@ -30661,12 +31072,12 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-12",
     "observation_count": 1,
-    "all_time_low": 16.93,
+    "all_time_low": 14.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-line-dropper-seatpost-cartridge-585442-1.png?v=1761060607",
     "prices": {
-      "2026-11-12": 16.93
+      "2026-11-12": 14.93
     }
   },
   "https://www.bikemart.com/products/maxxis-aggressor-tire-26x2-3-exo-tr": {
@@ -33575,11 +33986,11 @@
     "observation_count": 1,
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
     "prices": {
       "2026-11-12": 28.8
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikemart.com/products/odi-rogue-v2-1-lock-on-grips": {
     "name": "ODI Rogue v2.1 Lock-On Grips",
@@ -42058,6 +42469,21 @@
       "2026-11-12": 31.99
     }
   },
+  "https://www.bikemart.com/products/raceface-crank-boots-for-alloy-cranks-2-pack": {
+    "name": "RaceFace Crank Boots: For Alloy Cranks 2-Pack",
+    "store": "Bike Mart",
+    "part": "Drivetrain",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 12.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CR8315.jpg?v=1763559243",
+    "prices": {
+      "2026-11-12": 12.99
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/raceface-crank-boots-for-next-sl-g4-cranks": {
     "name": "RaceFace Crank Boots - For Next SL G4 Cranks",
     "store": "Bike Mart",
@@ -43188,11 +43614,11 @@
     "observation_count": 1,
     "all_time_low": 28.83,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
     "prices": {
       "2026-11-12": 28.83
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikemart.com/products/schwalbe-rocket-ron-performance-twin-27-5x2-25-tubeless-tire": {
     "name": "Schwalbe Rocket Ron Performance Twin 27.5x2.25 Tubeless Tire",
@@ -43647,7 +44073,7 @@
     }
   },
   "https://www.bikemart.com/products/stans-arch-mk4-rear-wheels": {
-    "name": "Stan's NoTubes Stan's Arch MK4 Rear Wheels",
+    "name": "Stan's Arch MK4 Rear Wheels",
     "store": "Bike Mart",
     "part": "Wheels",
     "first_seen": "2026-11-12",
@@ -43677,7 +44103,7 @@
     }
   },
   "https://www.bikemart.com/products/stans-arch-s2-rear-wheel": {
-    "name": "Stan's NoTubes Stan's Arch S2 Rear Wheel",
+    "name": "Stan's Arch S2 Rear Wheel",
     "store": "Bike Mart",
     "part": "Wheels",
     "first_seen": "2026-11-12",
@@ -43685,6 +44111,7 @@
     "observation_count": 1,
     "all_time_low": 325.0,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1882.jpg?v=1762409592",
     "durometers": [
       "650B"
@@ -43743,11 +44170,10 @@
     ],
     "prices": {
       "2026-11-12": 325.0
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikemart.com/products/stans-crest-s2-rear-wheel": {
-    "name": "Stan's NoTubes Stan's Crest S2 Rear Wheel",
+    "name": "Stan's Crest S2 Rear Wheel",
     "store": "Bike Mart",
     "part": "Wheels",
     "first_seen": "2026-11-12",
@@ -43797,7 +44223,7 @@
     }
   },
   "https://www.bikemart.com/products/stans-flow-s2-rear-wheel-6-bolt": {
-    "name": "Stan's NoTubes Stan's Flow S2 Rear Wheel, 6 Bolt",
+    "name": "Stan's Flow S2 Rear Wheel, 6 Bolt",
     "store": "Bike Mart",
     "part": "Wheels",
     "first_seen": "2026-11-12",
@@ -45535,8 +45961,6 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
-    "miss_streak": 1,
-    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR8023.jpg?v=1762312147",
     "prices": {
       "2026-11-12": 59.99
@@ -45953,6 +46377,21 @@
       "2026-11-12": 229.99
     }
   },
+  "https://www.bikemart.com/products/trp-flat-mount-disc-brake-bolts": {
+    "name": "TRP Flat Mount Disc Brake Bolts - Stainless",
+    "store": "Bike Mart",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 2.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR8163.jpg?v=1763523097",
+    "prices": {
+      "2026-11-12": 2.99
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/trp-hy-rd-mechanical-hydraulic-disc-brakes": {
     "name": "TRP HY/RD Mechanical/Hydraulic Disc Brakes",
     "store": "Bike Mart",
@@ -46059,7 +46498,7 @@
     }
   },
   "https://www.bikemart.com/products/vp-grind-1-2inch-black-pair-pedal": {
-    "name": "VP Components VP Grind 1/2inch Black Pair Pedal",
+    "name": "VP Grind 1/2inch Black Pair Pedal",
     "store": "Bike Mart",
     "part": "Pedals",
     "first_seen": "2026-11-12",
@@ -46068,8 +46507,6 @@
     "all_time_low": 12.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
-    "miss_streak": 1,
-    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/21714_A_1_VP_Grind_Black_Pedal.jpg?v=1762267757",
     "prices": {
       "2026-11-12": 12.93
@@ -46559,6 +46996,21 @@
     "prices": {
       "2026-11-12": 6.36
     }
+  },
+  "https://www.bikemart.com/products/wtb-all-terrain-comp-tire": {
+    "name": "WTB All Terrain Comp Tire",
+    "store": "Bike Mart",
+    "part": "Tires",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 29.95,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1594.jpg?v=1762256540",
+    "prices": {
+      "2026-11-12": 29.95
+    },
+    "stage": "new"
   },
   "https://www.bikemart.com/products/wtb-byway-tire-650b-x-47-tcs-tubeless-folding-blk-tan-light-fast-rolling-dual-dna-sg": {
     "name": "WTB Byway Tire - 650b x 47 TCS Tubeless Folding BLK/Tan Light/Fast Rolling Dual DNA SG",
@@ -47734,12 +48186,12 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-12",
     "observation_count": 1,
-    "all_time_low": 115.5,
+    "all_time_low": 29.62,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
     "prices": {
-      "2026-11-12": 115.5
+      "2026-11-12": 29.62
     }
   },
   "https://www.bikemart.com/products/xmc-1501-spline-one-front-wheel-110-x-15mm": {
@@ -50040,7 +50492,7 @@
     }
   },
   "https://www.bikesonline.com/products/ns-bike-eccentric-cromo-29-hardtail-frameset": {
-    "name": "NS Bikes NS Bike Eccentric Cromo 29 Hardtail Frameset",
+    "name": "NS Bike Eccentric Cromo 29 Hardtail Frameset",
     "store": "Bikes Online",
     "part": "Frames",
     "first_seen": "2026-11-02",
@@ -50063,7 +50515,7 @@
     }
   },
   "https://www.bikesonline.com/products/ns-bike-enigma-freebody-hub": {
-    "name": "NS Bikes NS Bike Enigma Freebody Hub",
+    "name": "NS Bike Enigma Freebody Hub",
     "store": "Bikes Online",
     "part": "Wheels",
     "first_seen": "2026-11-02",
@@ -50098,7 +50550,7 @@
     }
   },
   "https://www.bikesonline.com/products/ns-bike-enigma-rock-dh-29-wheelset": {
-    "name": "NS Bikes NS Bike Enigma Rock DH 29 Wheelset",
+    "name": "NS Bike Enigma Rock DH 29 Wheelset",
     "store": "Bikes Online",
     "part": "Wheels",
     "first_seen": "2026-11-02",
@@ -51855,14 +52307,6 @@
         "diameter_mm": null,
         "durometers": [],
         "variant_id": "56020174897444",
-        "available": true,
-        "price": 79.99,
-        "compare_at_price": 169.99
-      },
-      {
-        "diameter_mm": null,
-        "durometers": [],
-        "variant_id": "56020174930212",
         "available": true,
         "price": 79.99,
         "compare_at_price": 169.99
@@ -54679,6 +55123,21 @@
       "2026-11-11": 79.99,
       "2026-11-12": 79.99
     }
+  },
+  "https://www.coloradocyclist.com/products/7-idp-project-23-carbon-full-face-helmet-black-raw-carbon": {
+    "name": "7 iDP Project 23 Carbon Full Face Helmet - Black-Raw Carbon",
+    "store": "Colorado Cyclist",
+    "part": "Protection",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 199.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/7iDPProject23CarbonFullFaceHelmet-Black-RawCarbon-2022_f2142112-575b-413e-a027-d1c19dfde40f.jpg?v=1765387996",
+    "prices": {
+      "2026-11-12": 199.99
+    },
+    "stage": "new"
   },
   "https://www.coloradocyclist.com/products/7-idp-project-23-carbon-full-face-helmet-matt-ice-blue-black": {
     "name": "7 iDP Project 23 Carbon Full Face Helmet - Matt Ice Blue-Black",
@@ -58592,7 +59051,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-assegai-tire-29-x-2-5-tubeless-folding-black-3c-maxxgrip-dh-wide-trail-e-50": {
-    "name": "Maxxis Assegai Tire - 29 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, DH, Wide Trail, E-50",
+    "name": "Maxxis Assegai Tire - 29 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, DH, Wide Trail",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -58626,6 +59085,7 @@
     "all_time_low": 106.0,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/maxxis-assegai-tire-29-x-2-5-tubeless-folding-black-3c-maxxgrip-dh-wide-trail-e-50",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K7328_TR1342.jpg?v=1793513276",
     "width": 29.0,
     "length": 2.5,
@@ -58967,7 +59427,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-dissector-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxx-grip-exo-wide-trail": {
-    "name": "Maxxis Dissector II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+, Wide Trail",
+    "name": "Maxxis Dissector II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -59117,7 +59577,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-dissector-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxterra-exo-wide-trail": {
-    "name": "Maxxis Dissector Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxTerra, EXO, Wide Trail",
+    "name": "Maxxis Dissector Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxTerra, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -59391,6 +59851,23 @@
       "2026-11-12": 82.0
     }
   },
+  "https://www.coloradocyclist.com/products/maxxis-dth-tire-26-x-2-30-clincher-folding-black-dark-tan-exo": {
+    "name": "Maxxis DTH Tire - 26 x 2.3, Clincher, Folding, Black/Dark Tan, Dual, EXO",
+    "store": "Colorado Cyclist",
+    "part": "Tires",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 49.0,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/13169_TR0495_cdec63db-19db-4f03-97da-f2793b84f3b6.jpg?v=1793506052",
+    "width": 26.0,
+    "length": 2.3,
+    "prices": {
+      "2026-11-12": 49.0
+    },
+    "stage": "new"
+  },
   "https://www.coloradocyclist.com/products/maxxis-forekaster-tire-27-5-x-2-4-tubeless-folding-black-exo-wide-trail": {
     "name": "Maxxis Forekaster Tire - 27.5 x 2.4, Tubeless, Folding, Black, EXO, Wide Trail",
     "store": "Colorado Cyclist",
@@ -59442,7 +59919,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-forekaster-tire-29-x-2-4-tubeless-folding-black-dual-compound-exo-wide-trail": {
-    "name": "Maxxis Forekaster Tire - 29 x 2.4, Tubeless, Folding, Black, Dual Compound, EXO, Wide Trail",
+    "name": "Maxxis Forekaster Tire - 29 x 2.4, Tubeless, Folding, Black, Dual Compound, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -59617,7 +60094,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-high-roller-iii-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxgrip-new-dh-e-25": {
-    "name": "Maxxis High Roller III Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, New DH, E-25",
+    "name": "Maxxis High Roller III Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, New DH",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -59717,7 +60194,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-high-roller-iii-tire-29-x-2-4-tubeless-folding-black-3c-maxxgrip-new-dh-e-25": {
-    "name": "Maxxis High Roller III Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, New DH, E-25",
+    "name": "Maxxis High Roller III Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, New DH",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -60267,7 +60744,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhf-tire-27-5-x-2-5-tubeless-folding-black-3c-maxx-grip-exo-wide-trail": {
-    "name": "Maxxis Minion DHF Tire - 27.5 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, EXO, Wide Trail",
+    "name": "Maxxis Minion DHF Tire - 27.5 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -60617,7 +61094,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhf-tire-29-x-2-5-tubeless-folding-black-dark-tan-dual-exo-wide-trail": {
-    "name": "Maxxis Minion DHF Tire - 29 x 2.5, Tubeless, Folding, Black/Dark Tan, Dual, EXO, Wide Trail",
+    "name": "Maxxis Minion DHF Tire - 29 x 2.5, Tubeless, Folding, Black/Dark Tan, Dual, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -60792,7 +61269,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhf-tire-29-x-2-6-tubeless-folding-black-dark-tan-dual-exo-wide-trail": {
-    "name": "Maxxis Minion DHF Tire - 29 x 2.6, Tubeless, Folding, Black/Dark Tan, Dual, EXO, Wide Trail",
+    "name": "Maxxis Minion DHF Tire - 29 x 2.6, Tubeless, Folding, Black/Dark Tan, Dual, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -60817,7 +61294,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhf-tire-29-x-2-6-tubeless-folding-black-dual-compound-exo-wide-trail": {
-    "name": "Maxxis Minion DHF Tire - 29 x 2.6, Tubeless, Folding, Black, Dual Compound, EXO, Wide Trail",
+    "name": "Maxxis Minion DHF Tire - 29 x 2.6, Tubeless, Folding, Black, Dual Compound, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -60992,7 +61469,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxgrip-dd-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DD, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DD",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61017,7 +61494,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxgrip-dh-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DH, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DH",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61042,7 +61519,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxgrip-exo-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61067,7 +61544,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxgrip-new-dh-e-25": {
-    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, New DH, E-25",
+    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, New DH",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61117,7 +61594,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-black-dark-tan-dual-exo-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black/Dark Tan, Dual, EXO, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black/Dark Tan, Dual, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61292,7 +61769,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-5-tubeless-folding-black-3c-maxxgrip-new-dh-e-25": {
-    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, New DH, E-25",
+    "name": "Maxxis Minion DHR II Tire - 27.5 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, New DH",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61592,7 +62069,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxxgrip-dd-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DD, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DD",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61617,7 +62094,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxxgrip-dh-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DH, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DH",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61642,7 +62119,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxxgrip-exo-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61667,7 +62144,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxxgrip-exo-wide-trail-1": {
-    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -61742,7 +62219,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-black-dark-tan-dual-exo-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black/Dark Tan, Dual, EXO, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black/Dark Tan, Dual, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -62042,7 +62519,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-6-tubeless-folding-black-dark-tan-dual-exo-wide-trail": {
-    "name": "Maxxis Minion DHR II Tire - 29 x 2.6, Tubeless, Folding, Black/Dark Tan, Dual, EXO, Wide Trail",
+    "name": "Maxxis Minion DHR II Tire - 29 x 2.6, Tubeless, Folding, Black/Dark Tan, Dual, EXO",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -62562,7 +63039,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/maxxis-rekon-race-tire-29-x-2-4-tubeless-folding-black-maxxspeed-exo-wide-trail-e-25": {
-    "name": "Maxxis Rekon Race Tire - 29 x 2.4, Tubeless, Folding, Black, MaxxSpeed, EXO, Wide Trail, E-25",
+    "name": "Maxxis Rekon Race Tire - 29 x 2.4, Tubeless, Folding, Black, MaxxSpeed, EXO, Wide Trail",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63256,7 +63733,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-enduro-s-tire-29-x-2-4-tubeless-folding-classic-tan-prowall-smartgrip-gravity": {
-    "name": "Pirelli Scorpion Enduro S Tire - 29 x 2.4, Tubeless, Folding, Classic Tan, ProWall, SmartGrip Gravity",
+    "name": "Pirelli Scorpion Enduro S Tire - 29 x 2.4, Tubeless, Folding, Classic Tan, ProWall",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63281,7 +63758,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-race-dh-s-tire-29-x-2-5-clincher-wire-yellow-label-team-edition-dualwall-smartevo-dh": {
-    "name": "Pirelli Scorpion Race DH S Tire - 29 x 2.5, Clincher, Wire, Yellow Label Team Edition, DualWALL+, SmartEVO DH",
+    "name": "Pirelli Scorpion Race DH S Tire - 29 x 2.5, Clincher, Wire, Yellow Label Team Edition",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63306,7 +63783,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-race-dh-t-tire-29-x-2-5-clincher-wire-yellow-label-team-edition-dualwall-smartevo-dh": {
-    "name": "Pirelli Scorpion Race DH T Tire - 29 x 2.5, Clincher, Wire, Yellow Label Team Edition, DualWALL+, SmartEVO DH",
+    "name": "Pirelli Scorpion Race DH T Tire - 29 x 2.5, Clincher, Wire, Yellow Label Team Edition",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63331,7 +63808,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-race-enduro-m-tire-29-x-2-5-tubeless-folding-yellow-label-team-edition-dualwall-smartevo-dh": {
-    "name": "Pirelli Scorpion Race Enduro M Tire - 29 x 2.5, Tubeless, Folding, Yellow Label Team Edition, DualWALL, SmartEVO DH",
+    "name": "Pirelli Scorpion Race Enduro M Tire - 29 x 2.5, Tubeless, Folding",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63356,7 +63833,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-race-enduro-s-tire-29-x-2-5-tubeless-folding-yellow-label-team-edition-dualwall-smartevo-dh": {
-    "name": "Pirelli Scorpion Race Enduro S Tire - 29 x 2.5, Tubeless, Folding, Yellow Label Team Edition, DualWALL, SmartEVO DH",
+    "name": "Pirelli Scorpion Race Enduro S Tire - 29 x 2.5, Tubeless, Folding",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63381,7 +63858,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-race-enduro-t-tire-29-x-2-5-tubeless-folding-yellow-label-team-edition-dualwall-smartevo-dh": {
-    "name": "Pirelli Scorpion Race Enduro T Tire - 29 x 2.5, Tubeless, Folding, Yellow Label Team Edition, DualWALL, SmartEVO DH",
+    "name": "Pirelli Scorpion Race Enduro T Tire - 29 x 2.5, Tubeless, Folding",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63506,7 +63983,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-xc-m-tire-29-x-2-4-tubeless-folding-yellow-label-team-edition-lite-race": {
-    "name": "Pirelli Scorpion XC M Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition, Lite, Race",
+    "name": "Pirelli Scorpion XC M Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition, Lite",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63531,7 +64008,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-xc-m-tire-29-x-2-4-tubeless-folding-yellow-label-team-edition-prowall-race": {
-    "name": "Pirelli Scorpion XC M Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition, ProWall, Race",
+    "name": "Pirelli Scorpion XC M Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63581,7 +64058,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-xc-rc-tire-29-x-2-4-tubeless-folding-yellow-label-team-edition-lite-race": {
-    "name": "Pirelli Scorpion XC RC Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition, Lite, Race",
+    "name": "Pirelli Scorpion XC RC Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63615,6 +64092,7 @@
     "all_time_low": 93.51,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/pirelli-scorpion-xc-rc-tire-29-x-2-4-tubeless-folding-yellow-label-team-edition-lite-race",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J1961_TR00180.jpg?v=1793510349",
     "width": 29.0,
     "length": 2.4,
@@ -63656,7 +64134,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/pirelli-scorpion-xc-rh-tire-29-x-2-4-tubeless-folding-yellow-label-team-edition-prowall-race": {
-    "name": "Pirelli Scorpion XC RH Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition, ProWall, Race",
+    "name": "Pirelli Scorpion XC RH Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63825,7 +64303,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-al-mighty-tire-26-x-4-8-tubeless-folding-black-evolution-line-addix-speed-grip-super-ground-e-25": {
-    "name": "Schwalbe Al Mighty Tire - 26 x 4.8\", Tubeless, Folding, Black, Evolution Line, Addix Speed Grip, Super Ground, E-25",
+    "name": "Schwalbe Al Mighty Tire - 26 x 4.8\", Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63859,6 +64337,7 @@
     "all_time_low": 172.05,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-al-mighty-tire-26-x-4-8-tubeless-folding-black-evolution-line-addix-speed-grip-super-ground-e-25",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2419_TR1827.jpg?v=1793507779",
     "width": 26.0,
     "length": 4.8,
@@ -63875,7 +64354,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-albert-tire-27-5-x-2-50-tubeless-folding-black-evolution-line-gravity-pro-addix-soft-radial-e-51": {
-    "name": "Schwalbe Albert Tire - 27.5 x 2.50, Tubeless, Folding, Black, Evolution Line, Gravity Pro, Addix Soft, Radial, E-50",
+    "name": "Schwalbe Albert Tire - 27.5 x 2.50, Tubeless, Folding, Black, Evolution Line, Gravity Pro",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63900,7 +64379,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-albert-tire-27-5-x-2-50-tubeless-folding-black-evolution-line-trail-pro-addix-soft-radial-e-51": {
-    "name": "Schwalbe Albert Tire - 27.5 x 2.50, Tubeless, Folding, Black, Evolution Line, Trail Pro, Addix Soft, Radial, E-50",
+    "name": "Schwalbe Albert Tire - 27.5 x 2.50, Tubeless, Folding, Black, Evolution Line, Trail Pro",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63934,6 +64413,7 @@
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-albert-tire-27-5-x-2-50-tubeless-folding-black-evolution-line-trail-pro-addix-soft-radial-e-51",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2796_TR8934.jpg?v=1793513654",
     "width": 27.5,
     "length": 2.5,
@@ -63950,7 +64430,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-albert-tire-27-5-x-2-60-tubeless-folding-black-evolution-line-gravity-pro-addix-soft-radial-e-51": {
-    "name": "Schwalbe Albert Tire - 27.5 x 2.60, Tubeless, Folding, Black, Evolution Line, Gravity Pro, Addix Soft, Radial, E-50",
+    "name": "Schwalbe Albert Tire - 27.5 x 2.60, Tubeless, Folding, Black, Evolution Line, Gravity Pro",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -63975,7 +64455,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-albert-tire-29-x-2-50-tubeless-folding-black-evolution-line-gravity-pro-addix-soft-radial-e-50": {
-    "name": "Schwalbe Albert Tire - 29 x 2.50, Tubeless, Folding, Black, Evolution Line, Gravity Pro, Addix Soft, Radial, E-50",
+    "name": "Schwalbe Albert Tire - 29 x 2.50, Tubeless, Folding, Black, Evolution Line, Gravity Pro",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64033,6 +64513,7 @@
     "all_time_low": 100.44,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-albert-tire-29-x-2-50-tubeless-folding-black-evolution-line-gravity-pro-addix-soft-radial-e-50",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2727_TR8934_d52850e8-4a2b-47f3-9e96-b6605dd8c29c.jpg?v=1793505917",
     "width": 29.0,
     "length": 2.5,
@@ -64049,7 +64530,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-albert-tire-29-x-2-50-tubeless-folding-black-evolution-line-trail-pro-addix-soft-radial-e-51": {
-    "name": "Schwalbe Albert Tire - 29 x 2.50, Tubeless, Folding, Black, Evolution Line, Trail Pro, Addix Soft, Radial, E-50",
+    "name": "Schwalbe Albert Tire - 29 x 2.50, Tubeless, Folding, Black, Evolution Line, Trail Pro",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64083,6 +64564,7 @@
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-albert-tire-29-x-2-50-tubeless-folding-black-evolution-line-trail-pro-addix-soft-radial-e-51",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2727_TR00731_bf4a3cf9-be35-4670-99ac-38c33ea83b67.jpg?v=1793505909",
     "width": 29.0,
     "length": 2.5,
@@ -64099,7 +64581,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-albert-tire-29-x-2-60-tubeless-folding-black-evolution-line-gravity-pro-addix-soft-radial-e-50": {
-    "name": "Schwalbe Albert Tire - 29 x 2.60, Tubeless, Folding, Black, Evolution Line, Gravity Pro, Addix Soft, Radial, E-50",
+    "name": "Schwalbe Albert Tire - 29 x 2.60, Tubeless, Folding, Black, Evolution Line, Gravity Pro",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64133,6 +64615,7 @@
     "all_time_low": 100.44,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-albert-tire-29-x-2-60-tubeless-folding-black-evolution-line-gravity-pro-addix-soft-radial-e-50",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2727_TR00731.jpg?v=1793505932",
     "width": 29.0,
     "length": 2.6,
@@ -64224,7 +64707,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-fat-albert-front-tire-27-5-x-2-35-tubeless-folding-black-evolution-addix-soft-snakeskin": {
-    "name": "Schwalbe Fat Albert Front Tire - 27.5 x 2.35, Tubeless, Folding, Black, Evolution, Addix Soft, Snakeskin",
+    "name": "Schwalbe Fat Albert Front Tire - 27.5 x 2.35, Tubeless, Folding, Black, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64249,7 +64732,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-fat-albert-rear-tire-27-5-x-2-35-tubeless-folding-black-evolution-addix-speedgrip-snakeskin": {
-    "name": "Schwalbe Fat Albert Rear Tire - 27.5 x 2.35, Tubeless, Folding, Black, Evolution, Addix SpeedGrip, Snakeskin",
+    "name": "Schwalbe Fat Albert Rear Tire - 27.5 x 2.35, Tubeless, Folding, Black, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64299,7 +64782,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-ice-spiker-pro-tire-29-x-2-25-clincher-wire-black-performance-raceguard-winter-402-studs": {
-    "name": "Schwalbe Ice Spiker Pro Tire - 29 x 2.25, Clincher, Wire, Black, Performance, RaceGuard, Winter, 402 Studs",
+    "name": "Schwalbe Ice Spiker Pro Tire - 29 x 2.25, Clincher, Wire, Black, Performance, RaceGuard",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64324,7 +64807,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-ice-spiker-pro-tire-29-x-2-25-tubeless-folding-black-performance-raceguard-double-defense-402-aluminum-studs": {
-    "name": "Schwalbe Ice Spiker Pro Tire - 29 x 2.25, Tubeless, Folding, Black, Performance, RaceGuard, Double Defense, 402 Aluminum Studs",
+    "name": "Schwalbe Ice Spiker Pro Tire - 29 x 2.25, Tubeless, Folding, Black, Performance, RaceGuard",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64349,7 +64832,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-jumbo-jim-tire-26-x-4-8-tubeless-folding-black-evolution-super-ground-addix-speedgrip": {
-    "name": "Schwalbe Jumbo Jim Tire - 26 x 4.8, Tubeless, Folding, Black, Evolution, Super Ground, Addix SpeedGrip",
+    "name": "Schwalbe Jumbo Jim Tire - 26 x 4.8, Tubeless, Folding, Black, Evolution, Super Ground",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64374,7 +64857,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-jumbo-jim-tire-26-x-4-tubeless-folding-black-evolution-super-ground-addix-speedgrip": {
-    "name": "Schwalbe Jumbo Jim Tire - 26 x 4, Tubeless, Folding, Black, Evolution, Super Ground, Addix SpeedGrip",
+    "name": "Schwalbe Jumbo Jim Tire - 26 x 4, Tubeless, Folding, Black, Evolution, Super Ground",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64424,7 +64907,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-26-x-2-35-tubeless-folding-black-standard-gravity-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 26 x 2.35, Tubeless, Folding, Black, Standard, Gravity, Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 26 x 2.35, Tubeless, Folding, Black, Standard, Gravity, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64449,7 +64932,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-4-tubeless-folding-black-evolution-line-addix-soft-super-trail": {
-    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.4\", Tubeless, Folding, Black, Evolution Line, Addix Soft, Super Trail",
+    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.4\", Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64474,7 +64957,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-4-tubeless-folding-black-evolution-line-super-downhill-addix-ultra-soft": {
-    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.4, Tubeless, Folding, Black, Evolution Line, Super Downhill, Addix Ultra Soft",
+    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.4, Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64524,7 +65007,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-40-tubeless-folding-black-pro-gravity-ultra-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64574,7 +65057,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-40-tubeless-folding-black-pro-trail-ultra-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Pro, Trail, Ultra Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Pro, Trail, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64599,7 +65082,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-40-tubeless-folding-black-standard-gravity-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64624,7 +65107,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-40-tubeless-folding-black-standard-trail-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Trail, Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Trail, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64649,7 +65132,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial, E-50",
+    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64674,7 +65157,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-50-tubeless-folding-black-pro-trail-soft-radial-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial, E-50",
+    "name": "Schwalbe Magic Mary Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64724,7 +65207,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-4-tubeless-folding-black-evolution-line-super-downhill-addix-ultra-soft": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.4, Tubeless, Folding, Black, Evolution Line, Super Downhill, Addix Ultra Soft",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.4, Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64758,6 +65241,7 @@
     "all_time_low": 100.44,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-4-tubeless-folding-black-evolution-line-super-downhill-addix-ultra-soft",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/33739_TR6161_5f5af186-7956-4fb1-b698-83fb432df157.jpg?v=1793506517",
     "width": 29.0,
     "length": 2.4,
@@ -64774,7 +65258,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-40-tubeless-folding-black-bronze-pro-gravity-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black/Bronze, Pro, Gravity, Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black/Bronze, Pro, Gravity, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64824,7 +65308,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-40-tubeless-folding-black-pro-gravity-ultra-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-12",
@@ -64866,7 +65350,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-40-tubeless-folding-black-pro-trail-ultra-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Trail, Ultra Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Trail, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64891,7 +65375,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-40-tubeless-folding-black-standard-gravity-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64916,7 +65400,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-40-tubeless-folding-black-standard-trail-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black, Standard, Trail, Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.40, Tubeless, Folding, Black, Standard, Trail, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64941,7 +65425,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64966,7 +65450,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-50-tubeless-folding-black-pro-gravity-ultra-soft-radial-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft, Radial, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -64991,7 +65475,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-50-tubeless-folding-black-pro-trail-soft-radial-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65016,7 +65500,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-50-tubeless-folding-black-pro-trail-ultra-soft-radial-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Trail, Ultra Soft, Radial, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Trail, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65066,7 +65550,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-60-tubeless-folding-black-pro-trail-ultra-soft-e-50": {
-    "name": "Schwalbe Magic Mary Tire - 29 x 2.60, Tubeless, Folding, Black, Pro, Trail, Ultra Soft, E-50",
+    "name": "Schwalbe Magic Mary Tire - 29 x 2.60, Tubeless, Folding, Black, Pro, Trail, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65091,7 +65575,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-26-x-2-25-clincher-wire-black-pro-standard-addix-green-e-50": {
-    "name": "Schwalbe Nobby Nic Tire - 26 x 2.25, Clincher, Wire, Black, Pro, Standard, Addix Green, E-50",
+    "name": "Schwalbe Nobby Nic Tire - 26 x 2.25, Clincher, Wire, Black, Pro, Standard, Addix Green",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65192,7 +65676,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-27-5-x-2-25-tubeless-folding-black-standard-addix-green-e-50": {
-    "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.25, Tubeless, Folding, Black, Standard, Addix Green, E-50",
+    "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.25, Tubeless, Folding, Black, Standard, Addix Green",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65217,7 +65701,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-27-5-x-2-40-tubeless-folding-black-evolution-line-addix-speedgrip-super-trail": {
-    "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.40\", Tubeless, Folding, Black, Evolution Line, Addix SpeedGrip, Super Trail",
+    "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.40\", Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65242,7 +65726,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-27-5-x-2-40-tubeless-folding-black-standard-addix-green-e-50": {
-    "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Addix Green, E-50",
+    "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Addix Green",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65292,7 +65776,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-27-5-x-2-60-tubeless-folding-black-standard-addix-green-e-50": {
-    "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.60, Tubeless, Folding, Black, Standard, Addix Green, E-50",
+    "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.60, Tubeless, Folding, Black, Standard, Addix Green",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65386,7 +65870,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-29-x-2-4-tubeless-folding-black-addix-speedgrip-super-ground": {
-    "name": "Schwalbe Nobby Nic Tire - 29 x 2.4, Tubeless, Folding, Black, Addix SpeedGrip, Super Ground",
+    "name": "Schwalbe Nobby Nic Tire - 29 x 2.4, Tubeless, Folding, Black, Addix SpeedGrip",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65411,7 +65895,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-29-x-2-4-tubeless-folding-black-evolution-addix-soft-supertrail": {
-    "name": "Schwalbe Nobby Nic Tire - 29 x 2.4, Tubeless, Folding, Black, Evolution, Addix Soft, SuperTrail",
+    "name": "Schwalbe Nobby Nic Tire - 29 x 2.4, Tubeless, Folding, Black, Evolution, Addix Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65536,7 +66020,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ralph-tire-29-x-2-25-tubeless-folding-black-evolution-super-ground-addix-speed": {
-    "name": "Schwalbe Racing Ralph Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution, Super Ground, Addix Speed",
+    "name": "Schwalbe Racing Ralph Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution, Super Ground",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65561,7 +66045,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ralph-tire-29-x-2-25-tubeless-folding-black-performance-line-twinskin-addix": {
-    "name": "Schwalbe Racing Ralph Tire - 29 x 2.25, Tubeless, Folding, Black, Performance Line, TwinSkin, Addix",
+    "name": "Schwalbe Racing Ralph Tire - 29 x 2.25, Tubeless, Folding, Black, Performance Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65586,7 +66070,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ralph-tire-29-x-2-25-tubeless-folding-black-transparent-evolution-super-race-addix-speed": {
-    "name": "Schwalbe Racing Ralph Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent, Evolution, Super Race, Addix Speed",
+    "name": "Schwalbe Racing Ralph Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65611,7 +66095,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ralph-tire-29-x-2-35-tubeless-folding-black-evolution-super-ground-addix-speed": {
-    "name": "Schwalbe Racing Ralph Tire - 29 x 2.35, Tubeless, Folding, Black, Evolution, Super Ground, Addix Speed",
+    "name": "Schwalbe Racing Ralph Tire - 29 x 2.35, Tubeless, Folding, Black, Evolution, Super Ground",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65636,7 +66120,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ralph-tire-29-x-2-35-tubeless-folding-black-transparent-evolution-super-race-addix-speed": {
-    "name": "Schwalbe Racing Ralph Tire - 29 x 2.35, Tubeless, Folding, Black/Transparent, Evolution, Super Race, Addix Speed",
+    "name": "Schwalbe Racing Ralph Tire - 29 x 2.35, Tubeless, Folding, Black/Transparent, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65661,7 +66145,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ray-tire-29-x-2-25-tubeless-folding-black-performance-line-twinskin-addix": {
-    "name": "Schwalbe Racing Ray Tire - 29 x 2.25, Tubeless, Folding, Black, Performance Line, TwinSkin, Addix",
+    "name": "Schwalbe Racing Ray Tire - 29 x 2.25, Tubeless, Folding, Black, Performance Line, TwinSkin",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65686,7 +66170,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ray-tire-29-x-2-25-tubeless-folding-black-transparent-evolution-super-race-addix-speed": {
-    "name": "Schwalbe Racing Ray Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent, Evolution, Super Race, Addix Speed",
+    "name": "Schwalbe Racing Ray Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65711,7 +66195,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ray-tire-29-x-2-35-tubeless-folding-black-evolution-super-ground-addix-speedgrip": {
-    "name": "Schwalbe Racing Ray Tire - 29 x 2.35, Tubeless, Folding, Black, Evolution, Super Ground, Addix SpeedGrip",
+    "name": "Schwalbe Racing Ray Tire - 29 x 2.35, Tubeless, Folding, Black, Evolution, Super Ground",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65736,7 +66220,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-racing-ray-tire-29-x-2-35-tubeless-folding-black-transparent-evolution-super-race-addix-speed": {
-    "name": "Schwalbe Racing Ray Tire - 29 x 2.35, Tubeless, Folding, Black/Transparent, Evolution, Super Race, Addix Speed",
+    "name": "Schwalbe Racing Ray Tire - 29 x 2.35, Tubeless, Folding, Black/Transparent, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65861,7 +66345,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-rick-xc-pro-tire-29-x-2-25-tubeless-folding-black-evolution-line-pro-addix-speedgrip": {
-    "name": "Schwalbe Rick XC Pro Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution Line, Pro, Addix SpeedGrip",
+    "name": "Schwalbe Rick XC Pro Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution Line, Pro",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65886,7 +66370,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-rick-xc-pro-tire-29-x-2-25-tubeless-folding-black-transparent-evolution-line-pro-addix-speedgrip": {
-    "name": "Schwalbe Rick XC Pro Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent, Evolution Line, Pro, Addix SpeedGrip",
+    "name": "Schwalbe Rick XC Pro Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65911,7 +66395,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-rick-xc-pro-tire-29-x-2-40-tubeless-folding-black-evolution-line-pro-addix-speedgrip": {
-    "name": "Schwalbe Rick XC Pro Tire - 29 x 2.40, Tubeless, Folding, Black, Evolution Line, Pro, Addix SpeedGrip",
+    "name": "Schwalbe Rick XC Pro Tire - 29 x 2.40, Tubeless, Folding, Black, Evolution Line, Pro",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -65936,7 +66420,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-rick-xc-pro-tire-29-x-2-40-tubeless-folding-black-transparent-evolution-line-pro-addix-speedgrip": {
-    "name": "Schwalbe Rick XC Pro Tire - 29 x 2.40, Tubeless, Folding, Black/Transparent, Evolution Line, Pro, Addix SpeedGrip",
+    "name": "Schwalbe Rick XC Pro Tire - 29 x 2.40, Tubeless, Folding, Black/Transparent",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66011,7 +66495,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-rocket-ron-tire-29-x-2-25-tubeless-folding-black-evolution-line-super-ground-addix-speedgrip": {
-    "name": "Schwalbe Rocket Ron Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution Line, Super Ground, Addix SpeedGrip",
+    "name": "Schwalbe Rocket Ron Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66036,7 +66520,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-rocket-ron-tire-29-x-2-25-tubeless-folding-black-evolution-line-super-race-addix-speed": {
-    "name": "Schwalbe Rocket Ron Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution Line, Super Race, Addix Speed",
+    "name": "Schwalbe Rocket Ron Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution Line, Super Race",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66061,7 +66545,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-shredda-front-tire-29-x-2-50-tubeless-folding-black-evolution-line-gravity-pro-addix-ultra-soft-radial-e-50": {
-    "name": "Schwalbe Shredda Front Tire - 29 x 2.50, Tubeless, Folding, Black, Evolution Line, Gravity Pro, Addix Ultra Soft, Radial, E-50",
+    "name": "Schwalbe Shredda Front Tire - 29 x 2.50, Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66110,7 +66594,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-shredda-rear-tire-27-5-x-2-50-tubeless-folding-black-evolution-line-gravity-pro-addix-ultra-soft-radial-e-50": {
-    "name": "Schwalbe Shredda Rear Tire - 27.5 x 2.50, Tubeless, Folding, Black, Evolution Line, Gravity Pro, Addix Ultra Soft, Radial, E-50",
+    "name": "Schwalbe Shredda Rear Tire - 27.5 x 2.50, Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66135,7 +66619,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-shredda-rear-tire-29-x-2-50-tubeless-folding-black-evolution-line-gravity-pro-addix-ultra-soft-radial-e-50": {
-    "name": "Schwalbe Shredda Rear Tire - 29 x 2.50, Tubeless, Folding, Black, Evolution Line, Gravity Pro, Addix Ultra Soft, Radial, E-50",
+    "name": "Schwalbe Shredda Rear Tire - 29 x 2.50, Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66185,7 +66669,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-27-5-x-2-40-tubeless-folding-black-pro-gravity-ultra-soft-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.40, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.40, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66235,7 +66719,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-27-5-x-2-40-tubeless-folding-black-standard-gravity-soft-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66260,7 +66744,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-27-5-x-2-40-tubeless-folding-black-standard-trail-soft-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Trail, Soft, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Trail, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66285,7 +66769,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-27-5-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-11",
@@ -66303,7 +66787,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-27-5-x-2-50-tubeless-folding-black-pro-gravity-ultra-soft-radial-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft, Radial, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66328,7 +66812,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-27-5-x-2-50-tubeless-folding-black-pro-trail-soft-radial-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66353,7 +66837,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-27-5-x-2-50-tubeless-folding-black-pro-trail-ultra-soft-radial-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Trail, Ultra Soft, Radial, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Trail, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66387,6 +66871,7 @@
     "all_time_low": 100.44,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-evolution-line-super-ground-addix-soft-e-50",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2846_TR4386_66180a39-9ed7-4bae-bc57-16cfc889cde2.jpg?v=1793508339",
     "width": 29.0,
     "length": 2.4,
@@ -66412,6 +66897,7 @@
     "all_time_low": 100.44,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-evolution-line-super-ground-addix-soft-e-50",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2846_TR4386.jpg?v=1793508334",
     "width": 29.0,
     "length": 2.4,
@@ -66428,7 +66914,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-evolution-line-super-ground-addix-soft-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Evolution Line, Super Ground, Addix Soft, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66462,6 +66948,7 @@
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-evolution-line-super-ground-addix-soft-e-50",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2846_TR4386_fac22a82-4ab0-4594-82da-2eb89cd78662.jpg?v=1793508312",
     "width": 29.0,
     "length": 2.4,
@@ -66487,6 +66974,7 @@
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-evolution-line-super-ground-addix-soft-e-50",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2846_TR4383_9e66ed9b-a482-4153-9af5-cd2597e9a306.jpg?v=1793508328",
     "width": 29.0,
     "length": 2.4,
@@ -66512,6 +67000,7 @@
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "catalog_scope_reason": "catalog scope: another version of https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-evolution-line-super-ground-addix-soft-e-50",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2846_TR4386_2d89795d-f149-42cd-93dd-e6984c6a9f1d.jpg?v=1793508311",
     "width": 29.0,
     "length": 2.4,
@@ -66553,7 +67042,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-pro-gravity-ultra-soft-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66628,7 +67117,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-pro-trail-ultra-soft-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Trail, Ultra Soft, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Trail, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66653,7 +67142,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-standard-gravity-soft-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66678,7 +67167,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-standard-trail-soft-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Standard, Trail, Soft, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Standard, Trail, Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66703,7 +67192,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66728,7 +67217,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-50-tubeless-folding-black-pro-gravity-ultra-soft-radial-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft, Radial, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Ultra Soft",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66753,7 +67242,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-50-tubeless-folding-black-pro-trail-soft-radial-e-50": {
-    "name": "Schwalbe Tacky Chan Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial, E-50",
+    "name": "Schwalbe Tacky Chan Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-11",
@@ -66771,7 +67260,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-thunder-burt-tire-29-x-2-1-tubeless-folding-black-evolution-super-ground-addix-speed": {
-    "name": "Schwalbe Thunder Burt Tire - 29 x 2.1, Tubeless, Folding, Black, Evolution, Super Ground, Addix Speed",
+    "name": "Schwalbe Thunder Burt Tire - 29 x 2.1, Tubeless, Folding, Black, Evolution, Super Ground",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66796,7 +67285,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-thunder-burt-tire-29-x-2-1-tubeless-folding-black-transparent-evolution-super-race-addix-speed": {
-    "name": "Schwalbe Thunder Burt Tire - 29 x 2.1, Tubeless, Folding, Black/Transparent, Evolution, Super Race, Addix Speed",
+    "name": "Schwalbe Thunder Burt Tire - 29 x 2.1, Tubeless, Folding, Black/Transparent, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66821,7 +67310,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-thunder-burt-tire-29-x-2-25-tubeless-folding-black-evolution-super-ground-addix-speed": {
-    "name": "Schwalbe Thunder Burt Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution, Super Ground, Addix Speed",
+    "name": "Schwalbe Thunder Burt Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution, Super Ground",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66846,7 +67335,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-thunder-burt-tire-29-x-2-25-tubeless-folding-black-transparent-evolution-super-race-addix-speed": {
-    "name": "Schwalbe Thunder Burt Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent, Evolution, Super Race, Addix Speed",
+    "name": "Schwalbe Thunder Burt Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -66871,7 +67360,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-thunder-burt-tire-29-x-2-35-tubeless-folding-black-transparent-evolution-super-race-addix-speed": {
-    "name": "Schwalbe Thunder Burt Tire - 29 x 2.35, Tubeless, Folding, Black/Transparent, Evolution, Super Race, Addix Speed",
+    "name": "Schwalbe Thunder Burt Tire - 29 x 2.35, Tubeless, Folding, Black/Transparent, Evolution",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -67146,7 +67635,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-wicked-will-tire-29-x-2-25-tubeless-folding-black-performance-line-addix-twin-skin": {
-    "name": "Schwalbe Wicked Will Tire - 29 x 2.25, Tubeless, Folding, Black, Performance Line, Addix, Twin Skin",
+    "name": "Schwalbe Wicked Will Tire - 29 x 2.25, Tubeless, Folding, Black, Performance Line, Addix",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -67171,7 +67660,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-wicked-will-tire-29-x-2-25-tubeless-folding-black-transparent-evolution-line-super-race-addix-speedgrip": {
-    "name": "Schwalbe Wicked Will Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent, Evolution Line, Super Race, Addix SpeedGrip",
+    "name": "Schwalbe Wicked Will Tire - 29 x 2.25, Tubeless, Folding, Black/Transparent",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -67196,7 +67685,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/schwalbe-wicked-will-tire-29-x-2-6-tubeless-folding-black-evolution-line-super-ground-addix-speedgrip": {
-    "name": "Schwalbe Wicked Will Tire - 29 x 2.6, Tubeless, Folding, Black, Evolution Line, Super Ground, Addix SpeedGrip",
+    "name": "Schwalbe Wicked Will Tire - 29 x 2.6, Tubeless, Folding, Black, Evolution Line",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -67767,7 +68256,7 @@
     }
   },
   "https://www.coloradocyclist.com/products/vittoria-martello-tire-29-x-2-6-tubeless-folding-black-anthracite-4c-trail-tnt-g2-0": {
-    "name": "Vittoria Martello Trail Tire - 29 x 2.60, Tubeless, Folding, Black/Anthracite, 4C Graphene, G2.0, E-Bike",
+    "name": "Vittoria Martello Trail Tire - 29 x 2.60, Tubeless, Folding, Black/Anthracite, 4C Graphene",
     "store": "Colorado Cyclist",
     "part": "Tires",
     "first_seen": "2026-11-03",
@@ -68686,6 +69175,21 @@
       "2026-11-11": 24.95,
       "2026-11-12": 24.95
     }
+  },
+  "https://www.fanatikbike.com/products/cane-creek-dbinline-db-air-il-damper-oil-rebuild-kit": {
+    "name": "Cane Creek DBInline/DB Air IL - Damper/ Oil Rebuild Kit",
+    "store": "Fanatik",
+    "part": "Forks & Shocks",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 40.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/dc8608.jpg?v=1714655752",
+    "prices": {
+      "2026-11-12": 40.99
+    },
+    "stage": "new"
   },
   "https://www.fanatikbike.com/products/charger-3-1-damper-shim-tune-kit-comp-standard-heavy-reb-light-standard-heavy": {
     "name": "RockShox Charger 3.1 Damper Shim Tune Kit - Comp (Standard/Heavy), Reb (Light/Standard/Heavy)",
@@ -69738,6 +70242,21 @@
       "2026-11-11": 89.95,
       "2026-11-12": 89.95
     }
+  },
+  "https://www.fanatikbike.com/products/high-above-rad-hip-pack": {
+    "name": "High Above Rad Hip Pack",
+    "store": "Fanatik",
+    "part": "Packs",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 67.49,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/the-rad-pack-894156_2048x2048_03643e96-7005-472e-8130-17542edf0aa3.jpg?v=1731448349",
+    "prices": {
+      "2026-11-12": 67.49
+    },
+    "stage": "new"
   },
   "https://www.fanatikbike.com/products/hope-bolt-on-seat-collar": {
     "name": "Hope Bolt-On Seat Collar",
@@ -71480,7 +71999,7 @@
     }
   },
   "https://www.fanatikbike.com/products/oneup-12x148mm-28h-rear-hub": {
-    "name": "OneUp Components OneUp 12x148mm 28H Rear Hub",
+    "name": "OneUp 12x148mm 28H Rear Hub",
     "store": "Fanatik",
     "part": "Wheels",
     "first_seen": "2026-11-12",
@@ -71513,7 +72032,7 @@
     }
   },
   "https://www.fanatikbike.com/products/oneup-12x148mm-32h-rear-hub": {
-    "name": "OneUp Components OneUp 12x148mm 32H Rear Hub",
+    "name": "OneUp 12x148mm 32H Rear Hub",
     "store": "Fanatik",
     "part": "Wheels",
     "first_seen": "2026-11-12",
@@ -71578,7 +72097,7 @@
     }
   },
   "https://www.fanatikbike.com/products/oneup-15x110mm-28h-front-hub": {
-    "name": "OneUp Components OneUp 15x110mm 28H Front Hub",
+    "name": "OneUp 15x110mm 28H Front Hub",
     "store": "Fanatik",
     "part": "Wheels",
     "first_seen": "2026-11-12",
@@ -71643,7 +72162,7 @@
     }
   },
   "https://www.fanatikbike.com/products/oneup-15x110mm-32h-front-hub": {
-    "name": "OneUp Components OneUp 15x110mm 32H Front Hub",
+    "name": "OneUp 15x110mm 32H Front Hub",
     "store": "Fanatik",
     "part": "Wheels",
     "first_seen": "2026-11-12",
@@ -73888,7 +74407,7 @@
     }
   },
   "https://www.fanatikbike.com/products/rockshox-fork-service-kit-200-hours-1-year-zeb-base-select-select-ultimate-2021-generation-a": {
-    "name": "RockShox Fork Service Kit - 200 Hours/1 Year, ZEB Base / Select / Select+ / Ultimate (2021+), Generation-A",
+    "name": "RockShox Fork Service Kit - 200 Hours/1 Year, ZEB Base / Select / Select+ / Ultimate (2021+)",
     "store": "Fanatik",
     "part": "Forks & Shocks",
     "first_seen": "2026-11-06",
@@ -75312,6 +75831,21 @@
       "2026-11-12": 72.95
     }
   },
+  "https://www.fanatikbike.com/products/shimano-g05s-rx-resin-disc-brake-pads": {
+    "name": "Shimano G05S-RX Resin Disc Brake Pads",
+    "store": "Fanatik",
+    "part": "Brakes",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 7.75,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/Shimano-G05S-RX-Pads.png?v=1794506083",
+    "prices": {
+      "2026-11-12": 7.75
+    },
+    "stage": "new"
+  },
   "https://www.fanatikbike.com/products/shimano-saint-m820-b-disc-brake": {
     "name": "Shimano Saint M820-B Disc Brake",
     "store": "Fanatik",
@@ -76684,7 +77218,7 @@
     }
   },
   "https://www.fanatikbike.com/products/sram-code-bronze-stealth-lever-blade-kit-aluminum-includes-blade-reach-knob-cam-spring-bushing-c1": {
-    "name": "SRAM Code Bronze Stealth Lever Blade Kit - Aluminum, Includes Blade, Reach Knob, Cam, Spring, Bushing, C1",
+    "name": "SRAM Code Bronze Stealth Lever Blade Kit - Aluminum, Includes Blade, Reach Knob, Cam",
     "store": "Fanatik",
     "part": "Brakes",
     "first_seen": "2026-11-06",
@@ -76810,7 +77344,7 @@
     }
   },
   "https://www.fanatikbike.com/products/sram-code-ultimate-stealth-lever-blade-kit-carbon-includes-blade-reach-knob-cam-spring-bearing-c1": {
-    "name": "SRAM Code Ultimate Stealth Lever Blade Kit - Carbon, Includes: Blade, Reach Knob, Cam, Spring, Bearing, C1",
+    "name": "SRAM Code Ultimate Stealth Lever Blade Kit - Carbon, Includes: Blade, Reach Knob, Cam",
     "store": "Fanatik",
     "part": "Brakes",
     "first_seen": "2026-11-06",
@@ -78417,7 +78951,7 @@
     }
   },
   "https://www.fanatikbike.com/products/sram-replacement-code-r-rsc-caliper-assembly-fits-guide-re-post-mount-non-cps-front-rear-diffusion-black": {
-    "name": "SRAM Replacement Code R/RSC Caliper Assembly - Fits Guide RE, Post Mount (non-CPS), Front/Rear, Diffusion Black",
+    "name": "SRAM Replacement Code R/RSC Caliper Assembly - Fits Guide RE, Post Mount (non-CPS)",
     "store": "Fanatik",
     "part": "Brakes",
     "first_seen": "2026-11-06",
@@ -78687,6 +79221,21 @@
       "2026-11-11": 21.95,
       "2026-11-12": 21.95
     }
+  },
+  "https://www.fanatikbike.com/products/sram-x-sync-2-eagle-chainring-6mm-offset": {
+    "name": "SRAM X-Sync 2 Eagle Chainring - 6mm Offset",
+    "store": "Fanatik",
+    "part": "Drivetrain",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 107.0,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0904/4132/products/FBC_5834_b7528d42-9b5c-44a5-939e-f2c7bcf35f59.jpg?v=1551907823",
+    "prices": {
+      "2026-11-12": 107.0
+    },
+    "stage": "new"
   },
   "https://www.fanatikbike.com/products/sram-x-sync-2-sl-dm-chainring-3mm-offset": {
     "name": "SRAM X-Sync 2 SL DM - 3mm Offset - Chainring",
@@ -83407,6 +83956,81 @@
       "2026-11-12": 106.0
     }
   },
+  "https://www.thelostco.com/products/copy-of-oneup-components-clip-pedals-black": {
+    "name": "OneUp Components XC Clip Pedals - Black",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-xc-clip-pedals-black-oneup-components-the-lost-co-1c1052blk-628219407658-8421824.jpg?v=1772681361",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/copy-of-oneup-components-clip-pedals-dark-blue": {
+    "name": "OneUp Components Clip Pedals - Dark Green",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-clip-pedals-dark-green-oneup-components-the-lost-co-1c1000dgr-628219406668-494725.jpg?v=1736911260",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/copy-of-oneup-components-clip-pedals-grey": {
+    "name": "OneUp Components Clip Pedals - Bronze",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-clip-pedals-bronze-oneup-components-the-lost-co-1c1000brz-628219406729-582066.jpg?v=1736911261",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/copy-of-oneup-components-xc-clip-pedals-black": {
+    "name": "OneUp Components XC Clip Pedals - Dark Blue",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-xc-clip-pedals-dark-blue-oneup-components-the-lost-co-1c1052dbl-628219407665-7323735.jpg?v=1772681360",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/copy-of-oneup-components-xc-clip-pedals-purple": {
+    "name": "OneUp Components XC Clip Pedals - Bronze",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-xc-clip-pedals-bronze-oneup-components-the-lost-co-1c1052brz-628219407726-9523351.jpg?v=1772681360",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
   "https://www.thelostco.com/products/copy-of-sram-gx-eagle-t-type-direct-mount-chainring-34t-8-bolt-3mm-offset-dark-polar": {
     "name": "SRAM GX Eagle T-Type Direct Mount Chainring - 34t - 8-bolt - 3mm Offset - Dark Polar",
     "store": "The Lost Co.",
@@ -87589,6 +88213,186 @@
       "2026-11-12": 40.46
     }
   },
+  "https://www.thelostco.com/products/oneup-carbon-e-bar-carbon-handlebar": {
+    "name": "OneUp Components E-Bar Carbon Handlebar - 35mm Rise - 35mm Diamater",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-e-bar-carbon-handlebar-35mm-oneup-components-the-lost-co-1c0702-987381.jpg?v=1654634868",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-aluminum": {
+    "name": "OneUp Components Aluminum Pedals",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 112.49,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-aluminum-pedals-oneup-components-the-lost-co-1c0380blk-018062821945-948272.jpg?v=1599688276",
+    "prices": {
+      "2026-11-12": 112.49
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-aluminum-pedals": {
+    "name": "OneUp Components Wave Pedals",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-wave-pedals-oneup-components-the-lost-co-1c1010blk-0628219407399-942560.jpg?v=1746044611",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-bash-guide": {
+    "name": "OneUp Components Bash Guide V2",
+    "store": "The Lost Co.",
+    "part": "Drivetrain",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 75.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneupbash.png?v=1600115821",
+    "prices": {
+      "2026-11-12": 75.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-carbon-handlebar": {
+    "name": "OneUp Components V2 Carbon Handlebar",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-v2-carbon-handlebar-oneup-components-the-lost-co-1c1019-0628219407511-1540926.jpg?v=1754654016",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-clip-pedals-black": {
+    "name": "OneUp Components Clip Pedals - Black",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-clip-pedals-black-oneup-components-the-lost-co-1c1000blk-628219406644-123967.jpg?v=1736911397",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-clip-pedals-dark-blue": {
+    "name": "OneUp Components Clip Pedals - Dark Blue",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-clip-pedals-dark-blue-oneup-components-the-lost-co-1c1000dbl-628219406651-693873.jpg?v=1736911261",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-clip-pedals-grey": {
+    "name": "OneUp Components Clip Pedals - Grey",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-clip-pedals-grey-oneup-components-the-lost-co-1c1000gry-628219406675-845997.jpg?v=1736911261",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-clip-pedals-orange": {
+    "name": "OneUp Components Clip Pedals - Orange",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-clip-pedals-orange-oneup-components-the-lost-co-1c1000ora-628219406682-919838.jpg?v=1736911261",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-clip-pedals-purple": {
+    "name": "OneUp Components Clip Pedals - Purple",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-clip-pedals-purple-oneup-components-the-lost-co-1c1000pur-628219406705-474372.jpg?v=1736911261",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-clip-pedals-red": {
+    "name": "OneUp Components Clip Pedals - Red",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-clip-pedals-red-oneup-components-the-lost-co-1c1000red-628219406712-187781.jpg?v=1736911261",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-composite": {
+    "name": "OneUp Components Composite Pedals",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 37.49,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-composite-pedals-oneup-components-the-lost-co-1c0399blk-020462821944-294390.jpg?v=1607113413",
+    "prices": {
+      "2026-11-12": 37.49
+    },
+    "stage": "new"
+  },
   "https://www.thelostco.com/products/oneup-components-composite-pedal-bearing-rebuild-kit": {
     "name": "OneUp Components Composite Pedal Bearing Rebuild Kit",
     "store": "The Lost Co.",
@@ -87612,6 +88416,351 @@
       "2026-11-11": 13.99,
       "2026-11-12": 13.99
     }
+  },
+  "https://www.thelostco.com/products/oneup-components-direct-mount-stem": {
+    "name": "OneUp Components Direct Mount Stem",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 79.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-direct-mount-stem-oneup-components-the-lost-co-1c0803blk-62821940581-196129.webp?v=1688146011",
+    "prices": {
+      "2026-11-12": 79.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-dropper-post-v3": {
+    "name": "OneUp Components Dropper Post V3",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 202.49,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-dropper-post-v3-oneup-components-the-lost-co-1c0970-0628219406194-866470.jpg?v=1705490794",
+    "prices": {
+      "2026-11-12": 202.49
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-lever-cushion-for-v3-dropper-remote": {
+    "name": "OneUp Components Lever Cushion - For V3 Dropper Remote",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 4.79,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-lever-cushion-for-v3-dropper-remote-oneup-components-the-lost-co-1c0800blk-132857.jpg?v=1659004078",
+    "prices": {
+      "2026-11-12": 4.79
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-lock-on-grips": {
+    "name": "OneUp Components Lock-On Grips",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-lock-on-grips-oneup-components-the-lost-co-1c0623blk-036362821946-591610.jpg?v=1599688329",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-stem": {
+    "name": "OneUp Components Stem",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 71.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-stem-oneup-components-the-lost-co-1c0520blk-030362821944-307502.jpg?v=1646977746",
+    "prices": {
+      "2026-11-12": 71.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thick-lock-on-grips-black": {
+    "name": "OneUp Components Thick Lock-On Grips - Black",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thick-lock-on-grips-black-oneup-components-the-lost-co-1c0845blk-057462821940-797579.jpg?v=1689790942",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thick-lock-on-grips-blue": {
+    "name": "OneUp Components Thick Lock-On Grips - Blue",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thick-lock-on-grips-blue-oneup-components-the-lost-co-1c0845blu-057562821949-655520.jpg?v=1689790941",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thick-lock-on-grips-green": {
+    "name": "OneUp Components Thick Lock-On Grips - Green",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thick-lock-on-grips-green-oneup-components-the-lost-co-1c0845grn-057662821948-814471.jpg?v=1689790941",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thick-lock-on-grips-orange": {
+    "name": "OneUp Components Thick Lock-On Grips - Orange",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thick-lock-on-grips-orange-oneup-components-the-lost-co-1c0845ora-057762821947-399872.jpg?v=1689790941",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thick-lock-on-grips-purple": {
+    "name": "OneUp Components Thick Lock-On Grips - Purple",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thick-lock-on-grips-purple-oneup-components-the-lost-co-1c0845pur-057862821946-133370.jpg?v=1689790941",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thick-lock-on-grips-red": {
+    "name": "OneUp Components Thick Lock-On Grips - Red",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thick-lock-on-grips-red-oneup-components-the-lost-co-1c0845red-057962821945-610735.jpg?v=1689790941",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thick-lock-on-grips-turquoise": {
+    "name": "OneUp Components Thick Lock-On Grips - Turquoise",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thick-lock-on-grips-turquoise-oneup-components-the-lost-co-1c0845tur-058062821941-733306.jpg?v=1689790941",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thin-lock-on-grips-black": {
+    "name": "OneUp Components Thin Lock-On Grips - Black",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thin-lock-on-grips-black-oneup-components-the-lost-co-1c0842blk-056362821944-576739.jpg?v=1689790941",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thin-lock-on-grips-blue": {
+    "name": "OneUp Components Thin Lock-On Grips - Blue",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thin-lock-on-grips-blue-oneup-components-the-lost-co-1c0842blu-056462821943-896577.jpg?v=1689790942",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thin-lock-on-grips-orange": {
+    "name": "OneUp Components Thin Lock-On Grips - Orange",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thin-lock-on-grips-orange-oneup-components-the-lost-co-1c0842ora-056662821941-942981.jpg?v=1689790957",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thin-lock-on-grips-purple": {
+    "name": "OneUp Components Thin Lock-On Grips - Purple",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thin-lock-on-grips-purple-oneup-components-the-lost-co-1c0842pur-056762821940-895513.jpg?v=1689790958",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thin-lock-on-grips-red": {
+    "name": "OneUp Components Thin Lock-On Grips - Red",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thin-lock-on-grips-red-oneup-components-the-lost-co-1c0842red-056862821949-439211.jpg?v=1689790957",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-thin-lock-on-grips-turquoise": {
+    "name": "OneUp Components Thin Lock-On Grips - Turquoise",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 21.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-thin-lock-on-grips-turquoise-oneup-components-the-lost-co-1c0842tur-056962821948-480013.jpg?v=1689790957",
+    "prices": {
+      "2026-11-12": 21.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-xc-clip-pedals-dark-green": {
+    "name": "OneUp Components XC Clip Pedals - Dark Green",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-xc-clip-pedals-dark-green-oneup-components-the-lost-co-1c1052dgr-628219407672-3893067.jpg?v=1772681360",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-xc-clip-pedals-grey": {
+    "name": "OneUp Components XC Clip Pedals - Grey",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-xc-clip-pedals-grey-oneup-components-the-lost-co-1c1052gry-628219407689-4404520.jpg?v=1772681360",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-components-xc-clip-pedals-purple": {
+    "name": "OneUp Components XC Clip Pedals - Purple",
+    "store": "The Lost Co.",
+    "part": "Pedals",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/oneup-components-xc-clip-pedals-purple-oneup-components-the-lost-co-1c1052pur-628219407702-1693055.jpg?v=1772681360",
+    "prices": {
+      "2026-11-12": 119.99
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-decal-kit": {
+    "name": "OneUp Components Decal Kit",
+    "store": "The Lost Co.",
+    "part": "Cockpit",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 5.59,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-decal-kit-oneup-components-the-lost-co-1c0629wht-037062821946-465997.jpg?v=1600115933",
+    "prices": {
+      "2026-11-12": 5.59
+    },
+    "stage": "new"
+  },
+  "https://www.thelostco.com/products/oneup-iscg05-chain-guide": {
+    "name": "OneUp Components Chain Guide V2",
+    "store": "The Lost Co.",
+    "part": "Drivetrain",
+    "first_seen": "2026-11-12",
+    "last_seen": "2026-11-12",
+    "observation_count": 1,
+    "all_time_low": 47.99,
+    "all_time_low_date": "2026-11-12",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/oneup-components-chain-guide-v2-oneup-components-the-lost-co-1c0611-038262821941-994945.jpg?v=1599688263",
+    "prices": {
+      "2026-11-12": 47.99
+    },
+    "stage": "new"
   },
   "https://www.thelostco.com/products/orbea-occam-lt-m30": {
     "name": "2026 Orbea Occam LT M30",
@@ -91897,7 +93046,7 @@
     }
   },
   "https://www.thelostco.com/products/rear-derailleur-cover-skid-kit-xx-t-type-eagle-axs-upper-lower-outer-link-with-bushings-including-bolts": {
-    "name": "SRAM REAR DERAILLEUR COVER/SKID KIT XX T-TYPE EAGLE AXS (UPPER & LOWER OUTER LINK WITH BUSHINGS, INCLUDING BOLTS)",
+    "name": "SRAM Rear Derailleur Cover/Skid Kit XX T-Type Eagle AXS",
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
@@ -91921,7 +93070,7 @@
     }
   },
   "https://www.thelostco.com/products/rear-derailleur-pulley-kit-xx-t-type-eagle-axs-includes-14t-upper-and-16t-lower-black-metal-spider-pulley-2-aluminum-pulley-screws": {
-    "name": "SRAM REAR DERAILLEUR PULLEY KIT XX T-TYPE EAGLE AXS (INCLUDES 14T UPPER AND 16T LOWER BLACK METAL SPIDER PULLEY, 2 ALUMINUM PULLEY SCREWS )",
+    "name": "SRAM Rear Derailleur Pulley Kit XX T-Type Eagle AXS",
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
@@ -92453,7 +93602,7 @@
     }
   },
   "https://www.thelostco.com/products/rockshox-fork-damper-tune-assembly-includes-shims-for-compression-rebound-configs-piston-tool-charger-3-1-pike-c1-lyrik-d1-zeb-a1-boxxer-d1": {
-    "name": "RockShox Fork Damper Tune Assembly - Includes Shims for Compression & Rebound Configs, Piston Tool - Charger 3.1 - Pike C1+, Lyrik D1+, Zeb A1+, Boxxer D1+",
+    "name": "RockShox Fork Damper Tune Assembly - Includes Shims for Compression & Rebound Configs, Piston Tool - Charger 3.1 - Pike C1+, Lyrik D1+",
     "store": "The Lost Co.",
     "part": "Forks & Shocks",
     "first_seen": "2026-11-03",
@@ -93148,7 +94297,7 @@
     }
   },
   "https://www.thelostco.com/products/rockshox-universal-bleed-kit-inclues-2-syringes-2-standard-fittings-charger-fitting-reverb-bleeding-edge-fitting": {
-    "name": "RockShox Universal Bleed Kit - Inclues 2 Syringes, 2 Standard Fittings, Charger Fitting, Reverb Bleeding Edge Fitting",
+    "name": "RockShox Universal Bleed Kit - Inclues 2 Syringes, 2 Standard Fittings, Charger Fitting",
     "store": "The Lost Co.",
     "part": "Forks & Shocks",
     "first_seen": "2026-11-03",
@@ -93542,13 +94691,15 @@
     "observation_count": 1,
     "all_time_low": 100.44,
     "all_time_low_date": "2026-11-12",
+    "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-12",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/schwalbe-magic-mary-29x25-trail-pro-radial-ultra-soft-schwalbe-the-lost-co-1165459701-4026495971645-2787473.jpg?v=1776939367",
     "width": 27.5,
     "length": 2.5,
     "prices": {
       "2026-11-12": 100.44
-    },
-    "stage": "new"
+    }
   },
   "https://www.thelostco.com/products/schwalbe-magic-mary-gravity-pro-radial-29x2-5-soft": {
     "name": "Schwalbe Magic Mary - 29x2.5 - Gravity Pro Radial - Soft",
@@ -94381,7 +95532,7 @@
     }
   },
   "https://www.thelostco.com/products/sram-eagle-t-type-dm-x0-chainring-teeth-30-speed-12-bcd-direct-mount-aluminum-black": {
-    "name": "SRAM XX Eagle T-Type Direct Mount Chainring - 30t, 12-Speed, 8-Bolt Direct Mount, 3mm Offset, Aluminum, Black, D1",
+    "name": "SRAM XX Eagle T-Type Direct Mount Chainring - 30t, 12-Speed, 8-Bolt Direct Mount",
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
@@ -94405,7 +95556,7 @@
     }
   },
   "https://www.thelostco.com/products/sram-eagle-t-type-dm-x0-chainring-teeth-34-speed-12-bcd-direct-mount-aluminum-black": {
-    "name": "SRAM XX Eagle T-Type Direct Mount Chainring - 34t, 12-Speed, 8-Bolt Direct Mount, 3mm Offset, Aluminum, Black, D1",
+    "name": "SRAM XX Eagle T-Type Direct Mount Chainring - 34t, 12-Speed, 8-Bolt Direct Mount",
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
@@ -95731,7 +96882,7 @@
     }
   },
   "https://www.thelostco.com/products/sram-x0-derailleur-cover-skid-kit": {
-    "name": "SRAM REAR DERAILLEUR COVER/SKID KIT X0 T-TYPE EAGLE AXS (UPPER & LOWER OUTER LINK WITH BUSHINGS, INCLUDING BOLTS)",
+    "name": "SRAM Rear Derailleur Cover/Skid Kit X0 T-Type Eagle AXS",
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
@@ -95755,7 +96906,7 @@
     }
   },
   "https://www.thelostco.com/products/sram-x0-eagle-t-type-direct-mount-chainring-30t-12-speed-8-bolt-direct-mount-3mm-offset-aluminum-black-d1": {
-    "name": "SRAM X0 Eagle T-Type Direct Mount Chainring - 30t, 12-Speed, 8-Bolt Direct Mount, 3mm Offset, Aluminum, Black, D1",
+    "name": "SRAM X0 Eagle T-Type Direct Mount Chainring - 30t, 12-Speed, 8-Bolt Direct Mount",
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
@@ -95803,7 +96954,7 @@
     }
   },
   "https://www.thelostco.com/products/sram-x0-eagle-t-type-direct-mount-chainring-34t-12-speed-8-bolt-direct-mount-3mm-offset-aluminum-black-d1": {
-    "name": "SRAM X0 Eagle T-Type Direct Mount Chainring - 34t, 12-Speed, 8-Bolt Direct Mount, 3mm Offset, Aluminum, Black, D1",
+    "name": "SRAM X0 Eagle T-Type Direct Mount Chainring - 34t, 12-Speed, 8-Bolt Direct Mount",
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
@@ -97653,7 +98804,7 @@
     }
   },
   "https://www.thelostco.com/products/wolf-tooth-geoshift-performance-angle-headset-2-deg-short-ec44-zs56-black": {
-    "name": "Wolf Tooth Components Wolf Tooth GeoShift Performance Angle Headset - 2 Deg Short EC44/ZS56 Black",
+    "name": "Wolf Tooth GeoShift Performance Angle Headset - 2 Deg Short EC44/ZS56 Black",
     "store": "The Lost Co.",
     "part": "Cockpit",
     "first_seen": "2026-11-03",
@@ -98577,7 +99728,7 @@
     }
   },
   "https://www.worldwidecyclery.com/products/ceramicspeed-ospw-x-oversized-pulley-wheel-system-for-sram-eagle-axs-coated-alloy-pulley-carbon-cage-black": {
-    "name": "CeramicSpeed OSPW X Pulley Wheel System for SRAM Eagle AXS - Coated Races, Alloy Pulley, Carbon Cage, Black",
+    "name": "CeramicSpeed OSPW X Pulley Wheel System for SRAM Eagle AXS - Coated Races, Alloy Pulley",
     "store": "Worldwide Cyclery",
     "part": "Wheels",
     "first_seen": "2026-11-08",
@@ -98705,7 +99856,7 @@
     }
   },
   "https://www.worldwidecyclery.com/products/fox-dhx-factory-live-valve-neo-rear-shock-metric-230-x-60-mm-kashima-coat": {
-    "name": "FOX DHX Live Valve Neo Factory Rear Shock - Metric, 230 x 60 mm, Hard Chromoly Stanchion, Black",
+    "name": "FOX DHX Live Valve Neo Factory Rear Shock - Metric, 230 x 60 mm, Hard Chromoly Stanchion",
     "store": "Worldwide Cyclery",
     "part": "Forks & Shocks",
     "first_seen": "2026-11-08",
@@ -98724,7 +99875,7 @@
     }
   },
   "https://www.worldwidecyclery.com/products/fox-dhx2-factory-rear-shock-metric-210-x-50-mm-2-position-lever-hard-chromoly-damper-shaft-1": {
-    "name": "FOX DHX2 Factory Rear Shock - Metric, 210 x 50 mm, 2-Position Lever, Hard Chromoly Damper Shaft",
+    "name": "FOX DHX2 Factory Rear Shock - Metric, 210 x 50 mm, 2-Position Lever",
     "store": "Worldwide Cyclery",
     "part": "Forks & Shocks",
     "first_seen": "2026-11-08",
@@ -98743,7 +99894,7 @@
     }
   },
   "https://www.worldwidecyclery.com/products/fox-transfer-sl-factory-dropper-seat-post-27-2-50-mm-internal-routing-kashima-coat-upper": {
-    "name": "FOX Transfer SL Factory Dropper Seatpost - 27.2, 50 mm, Internal Routing, Kashima Coat Upper",
+    "name": "FOX Transfer SL Factory Dropper Seatpost - 27.2, 50 mm, Internal Routing",
     "store": "Worldwide Cyclery",
     "part": "Cockpit",
     "first_seen": "2026-11-02",
@@ -98870,7 +100021,7 @@
     }
   },
   "https://www.worldwidecyclery.com/products/sram-xx1-eagle-dub-boost-148-175mm-34t-x-sync-2-direct-mount-chainring-1": {
-    "name": "SRAM XX1 Eagle Carbon Boost Crankset - 175mm, 12-Speed, 34t, Direct Mount, DUB Spindle Interface, Black/Gold",
+    "name": "SRAM XX1 Eagle Carbon Boost Crankset - 175mm, 12-Speed, 34t, Direct Mount",
     "store": "Worldwide Cyclery",
     "part": "Drivetrain",
     "first_seen": "2026-11-07",
