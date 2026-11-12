@@ -3659,6 +3659,8 @@ function syncUrl() {
 }
 
 function restoreFromUrl() {
+    // A pending live input must not race a history restoration/repaint.
+    clearTimeout(filterTimer);
     clearTimeout(searchHistoryTimer);
     ignoreHistory = true;
     try {
