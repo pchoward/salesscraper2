@@ -488,3 +488,41 @@
 @media (max-width:800px), (max-height:500px) and (pointer:coarse) {
     .rail .sidebar#filterDrawer button { min-height:24px; min-width:24px; }
 }
+
+/* Wrappers are layout-neutral outside task 12's <=640px phone scope. */
+.phone-filter-body, .phone-filter-footer { display:contents; }
+.phone-brands-more { display:none; }
+@media (max-width:640px) {
+    #stickyBar .tool-line { display:flex; flex-direction:column; align-items:stretch; gap:8px; min-width:0; }
+    #stickyBar .tool-search { display:contents; }
+    #stickyBar .tool-deals { order:1; width:100%; min-width:0; }
+    #stickyBar .sort-field { order:2; display:flex; align-items:center; gap:8px; width:100%; min-width:0; }
+    #stickyBar .sort-field select { flex:1; width:0; min-width:0; min-height:44px; }
+    #stickyBar .tool-display { order:3; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:8px; width:100%; min-width:0; }
+    #stickyBar .tool-display .layout-toggle { display:none; }
+    #stickyBar .tool-display #filtersOpen { grid-column:1; grid-row:1; width:100%; min-height:44px; margin:0; justify-content:center; background:#1d4ed8; color:white; }
+    #filtersOpen[data-count]::after { content:"· " attr(data-count); margin-left:4px; padding:0; background:none; font-size:inherit; }
+    #stickyBar .tool-display .group-toggle { grid-column:2; grid-row:1; width:100%; min-width:0; min-height:44px; white-space:normal; margin:0; }
+    #stickyBar .active-filters { order:4; }
+    .rail .sidebar#filterDrawer { inset:0; z-index:120; width:100%; max-width:none; height:100vh; height:100dvh; max-height:none; padding:0; border-radius:0; display:flex; flex-direction:column; overflow:hidden; scrollbar-gutter:auto; box-shadow:none; }
+    #filterDrawer .drawer-head { display:grid; grid-template-columns:44px minmax(0,1fr) auto; align-items:center; gap:8px; flex:none; margin:0; padding:calc(6px + env(safe-area-inset-top)) 12px 6px; border-bottom:1px solid var(--border); background:white; }
+    #filterDrawer .drawer-head #filtersClose { grid-column:1; grid-row:1; min-height:44px; width:44px; margin:0; font-size:24px; }
+    #filterDrawer .drawer-head strong { grid-column:2; grid-row:1; font-size:17px; }
+    #filterDrawer .drawer-head #clearAll { grid-column:3; grid-row:1; min-height:44px; }
+    #filterDrawer .phone-filter-body { display:block; flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; padding:0 0 12px; }
+    #filterDrawer .phone-filter-body > .filter-head { display:none; }
+    #filterDrawer .phone-filter-footer { display:block; flex:none; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:white; border-top:1px solid var(--border); }
+    .rail .sidebar#filterDrawer button { min-height:44px; }
+    .rail .sidebar#filterDrawer .show-results { display:block; width:100%; min-height:48px; margin:0; padding:10px; border-radius:4px; font-size:16px; background:#1d4ed8; color:white; font-weight:700; }
+    #filterDrawer .show-results:disabled { background:#e2e8f0; color:#475569; cursor:default; }
+    #phoneFilterHint { margin:0 0 8px; color:#475569; font-size:13px; line-height:1.4; }
+    #filterDrawer #brandList { max-height:none; overflow:visible; }
+    #brandList .phone-brand-hidden { display:none!important; }
+    #filterDrawer .phone-brands-more[hidden] { display:none!important; }
+    #filterDrawer .phone-brands-more { display:block; width:100%; min-height:44px; padding:8px 10px; margin-top:6px; text-align:left; border:1px solid var(--border); border-radius:3px; background:white; color:var(--text-primary); }
+    #filterDrawer .facet-value, #filterDrawer .section-toggle { min-height:44px; }
+    #filterDrawer .brand-search { min-height:44px; font-size:16px; }
+    #filterDrawer .spec-ranges, #filterDrawer .width-ranges, #filterDrawer .length-ranges, #filterDrawer .wheelbase-ranges { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+    #filterDrawer #contextSpecs .spec-chip, #filterDrawer .spec-chip, #filterDrawer .width-chip, #filterDrawer .length-chip, #filterDrawer .wheelbase-chip { min-height:44px; min-width:0; white-space:normal; }
+    .deal-card .product-name { -webkit-line-clamp:3; line-clamp:3; flex:0 0 calc(1.25em * 3); height:calc(1.25em * 3); min-height:calc(1.25em * 3); max-height:calc(1.25em * 3); }
+}

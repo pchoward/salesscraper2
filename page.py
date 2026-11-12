@@ -2907,7 +2907,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"const LENGTH_BUCKETS = {length_literal};\n"
         f"const WHEELBASE_BUCKETS = {json.dumps([{key: bucket[key] for key in ('id', 'label', 'min', 'max')} for bucket in wheel_buckets])};\n"
         f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
-        f"{_read_asset('page.js')}</script>"
+        f"{_read_asset('phone-filters.js')}\n{_read_asset('page.js')}</script>"
     )
     chunks.append(f"<script>{_read_asset('search/search-ui.js')}</script>")
     chunks.append('''<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "542cbf4d24534b70be3715cefe0e6a8e"}'></script><!-- End Cloudflare Web Analytics -->''')

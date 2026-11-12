@@ -141,6 +141,9 @@ jobs:
           python ci/build_truck_fixtures.py "${{ runner.temp }}/truck-fit-site"
           node ci/check_truck_fit.cjs "${{ runner.temp }}/truck-fit-site" "${{ runner.temp }}/category-navigation-results/truck-fit"
 
+      - name: Full-screen phone filters and desktop preservation
+        run: node ci/check_phone_filters.cjs preview/site "${{ runner.temp }}/category-navigation-results/phone-filters"
+
       - name: Upload category navigation screenshots
         if: always()
         uses: actions/upload-artifact@v4
