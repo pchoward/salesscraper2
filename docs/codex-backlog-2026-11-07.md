@@ -197,7 +197,8 @@ Checked by Codex, 2026-11-07.
    - Chip sections (wheel diameter, deck width, sizes) wrap in a grid with 44 px tap targets.
 3. **Sort row.** Put **Sort** and **Group across stores** on separate lines, or move "Group across stores" into the sort menu as an option. Nothing may overlap at 320–430 px.
 4. **One clear Filters button** in the results bar: full width or prominent, showing the active count ("Filters · 1").
-5. **Less chrome above the cards (optional; owner to approve in the PR screenshots).** On phones, the New/Price drops/Hit lowest/Disappeared tabs can collapse into one "All deals ▾" picker, and the stores row can move into the filter sheet under **Store**.
+5. **Card names: three lines on phones.** Names are clamped to two lines today. At 390 px, two different TGM wheels, "Satori Skateboard Wheels 52mm Brian Delatorre …", both cut off at "Brian…" and look like duplicates. On phones, clamp the name to 3 lines and show the full name as the link's `title`/accessible name. Desktop stays at its current clamp.
+6. **Less chrome above the cards (optional; owner to approve in the PR screenshots).** On phones, the New/Price drops/Hit lowest/Disappeared tabs can collapse into one "All deals ▾" picker, and the stores row can move into the filter sheet under **Store**.
 
 **Keep unchanged:** URL parameters, saved views, `localStorage` keys, and filter behaviour and counts (this is layout only). Desktop layout stays as it is.
 
@@ -207,5 +208,6 @@ Checked by Codex, 2026-11-07.
   - Open Filters; the sheet fills the viewport and the page behind it doesn't scroll.
   - Pick a brand; the button count matches the results count after closing.
   - "Show N deals" closes the sheet; browser Back from the open sheet closes it and stays on the page.
+  - A card name longer than two lines shows three lines at 390 px.
 - Run on all four sports.
 - **PR:** before/after phone screenshots of Skate › Wheels results, the open sheet, and the BMX and Ski equivalents.
