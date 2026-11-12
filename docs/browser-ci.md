@@ -39,7 +39,7 @@ node ci/run_browser_shard.cjs search /tmp/browser-input/site /tmp/browser-review
 
 Use a separate copy of the site for each group when running groups concurrently on one machine, matching the isolated GitHub runners. `BROWSER_BINARY` optionally selects an installed Chromium for local validation; CI keeps Playwright's pinned browser. Run `node ci/summarize_browser_runs.cjs <merged-review-directory>` to verify that every planned task passed and print timings.
 
-The expected speedup comes from separate runners, not weaker tests. Actual wall time still depends on runner availability, setup and artifact transfers. Six runner slots are needed for full parallelism; extra runner startup may increase total Actions minutes even while reducing wait time. Local timings are not a substitute for measuring the first GitHub run.
+The expected speedup comes from separate runners, not weaker tests. Actual wall time still depends on runner availability, setup and artifact transfers. Six runner slots are needed for full parallelism; extra runner startup may increase total Actions minutes even while reducing wait time. Local timings are not a substitute for GitHub measurements; the first real result is recorded below.
 
 ## Validation on 2026-11-12
 
@@ -54,6 +54,12 @@ Every original browser suite passed locally. The final six reports pass the same
 | audit-wide | 4m 56s |
 | audit-phone | 3m 22s |
 
-[Raw timing reports](browser-ci-timings.json) record the actual commands and exit statuses. The host had four CPU cores; initial groups ran with at most three local workers, and final navigation used two processes. These are per-group local timings, **not an end-to-end GitHub measurement**. The longest measured group is about five minutes, so runner startup/build/transfer time determines the remaining critical path. The first real Actions run must establish the final speedup.
+[Raw timing reports](browser-ci-timings.json) record the actual commands and exit statuses. The host had four CPU cores; initial groups ran with at most three local workers, and final navigation used two processes. These are per-group local timings, **not an end-to-end GitHub measurement**. The longest measured group is about five minutes, so runner startup/build/transfer time determines the remaining critical path. The first real Actions result is recorded below.
 
 The assembled real preview also passes the publisher validator at 118,957,243 bytes. Boundary tests accept an expanded catalog and still reject a site over 128 MiB, unknown paths, test fixtures and symlinks. Runner tests cover failures, hung processes, bounded parallel execution and missing/incomplete reports.
+
+## First Actions result
+
+[PR #280, run 43284318074](https://github.com/pchoward/salesscraper2/actions/runs/43284318074) completed in **6m 26s**. All browser groups and the aggregate browser check passed, compared with the earlier serial browser job at 25m 53s.
+
+The run was red because two separate Python rebuild fixtures omitted cross-sport pack pooling after the scheduled catalog update. Claude's existing [PR #281](https://github.com/pchoward/salesscraper2/pull/281) corrects those expected-page builds to use the same pooling as the real scrape/rebuild. That commit is included in this branch with its original authorship. No equality assertions or browser checks were weakened.
