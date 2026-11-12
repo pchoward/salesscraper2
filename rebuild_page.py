@@ -147,7 +147,7 @@ def rebuild(path=INPUTS_PATH, data_path=DATA_PATH, history_path=HISTORY_PATH, pa
     inputs = load_report_inputs(path, data_path, history_path)
     if sport is not None and not sport.is_default:
         inputs["sport"] = sport
-    return write_page(build_report_html(**inputs), page_path)
+    return write_page(build_report_html(**inputs, pool_packs=True), page_path)
 
 
 def main(argv=None):

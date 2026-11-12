@@ -49,7 +49,7 @@ STOCK_DELAY = 0.5  # seconds between product stock reads
 MAX_STOCK_READS = 120  # per store and part, per run
 # Parts whose sizes come from per-variant stock.
 SIZED_PARTS = ("Sneakers", "Protection")
-ALL_PARTS = ("Decks", "Wheels", "Trucks", "Bearings", "Completes", "Sneakers", "Accessories", "Protection")
+ALL_PARTS = ("Decks", "Wheels", "Trucks", "Bearings", "Completes", "Sneakers", "Accessories", "Protection", "Packs")
 BY_TITLE = "by title"
 _USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -170,6 +170,11 @@ def part_for_title(title):
 
 def part_for(store, product_type, title="", tags=None):
     """The report part for a product, or None to skip it."""
+    # Backpacks and hydration packs, on every sport (sports/packs.py). A store
+    # without a Packs scraper simply never lists them.
+    from sports import packs
+    if packs.is_pack(title, product_type, tags):
+        return packs.PART
     if getattr(store, "product_part", None):
         return store.product_part(product_type, title, tags)
     if getattr(store, "tag_part", None) and tags is not None:

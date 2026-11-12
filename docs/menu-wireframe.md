@@ -12,9 +12,12 @@ filters. **Change the wireframe first, then the code.**
 1. A heading is a thing to shop for. Types inside it (ski type, hub vs rim)
    are filters or chips, not more headings, so the menu stays short on a phone.
 2. The gear at the bottom of every menu uses the same names on every sport, in
-   this order: **Helmets · Goggles · Gloves · Protection**. Protection is
-   pads, armor, impact shorts and wrist guards. A heading with no deals isn't
-   shown.
+   this order: **Helmets · Goggles · Gloves · Protection · Packs**. Protection
+   is pads, armor, impact shorts and wrist guards. Packs (owner, 2026-11-12) is
+   backpacks and hydration packs: general brands show on every sport's tab,
+   wherever they're sold; packs from a sport's own brands (Shadow for BMX,
+   Spitfire for Skate) and avalanche packs (Ski) only on that sport. A heading
+   with no deals isn't shown.
 3. Inside Protection, the **Protects** filter (knees, elbows, wrists, hips,
    back & chest) narrows on every sport.
 4. Stored data keeps the stores' categories. The page groups deals into

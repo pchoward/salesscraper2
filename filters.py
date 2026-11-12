@@ -439,6 +439,14 @@ def _rule_reason(name, part, url="", price_new=None, price_old=None, description
     text = f"{name} {url} {product_type}"
     part_key = (part or "").strip().casefold()
 
+    if part_key == "packs":
+        # Backpacks and hydration packs (sports/packs.py): a pack, and not one
+        # of another sport's own brands. The apparel words don't apply.
+        from sports import packs
+        if not packs.is_pack(name, product_type):
+            return "not a pack"
+        return packs.rule_reason("skate", name)
+
     if part_key == "protection":
         # Helmets, pads, and impact shorts fit every rider, so the apparel,
         # cruiser, and longboard words do not apply. It must be gear, and on

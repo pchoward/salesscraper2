@@ -158,7 +158,9 @@ EVO = shopify.ShopifyStore(
     more_collections=("ski-boots", "ski-bindings", "ski-poles",
                       # Protection (2026-11-03): helmets, goggles, back protectors, vests, impact shorts.
                       "helmets", "goggles", "body-armor", "d3o-back-protector-0avz03a",
-                      "hip-protection-shorts-0avz06a", "childrens-ski-back-protector-0avz00a"),
+                      "hip-protection-shorts-0avz06a", "childrens-ski-back-protector-0avz00a",
+                      # Packs (2026-11-12): ~60 backpacks and ~20 hydration packs marked down.
+                      "backpacks", "hydration-packs"),
     types=EVO_TYPES,
     brand_of=brands.for_sport(sports.SKI),
     own_vendor="evo",

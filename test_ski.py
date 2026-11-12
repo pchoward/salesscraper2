@@ -41,7 +41,7 @@ def parse(feed=FEED):
 
 class GearWestTests(unittest.TestCase):
     def test_settings(self):
-        self.assertEqual(sports.SKI.parts, ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection"))
+        self.assertEqual(sports.SKI.parts, ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection", "Packs"))
         self.assertFalse(sports.SKI.delivery, "no email or alerts for Ski")
         self.assertEqual(stores.GEAR_WEST.sale_jsons[:2], [
             "https://www.gearwest.com/collections/closeout-alpine-skis/products.json",

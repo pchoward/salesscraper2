@@ -35,7 +35,8 @@ class HeadingTest(unittest.TestCase):
         self.assertEqual(headings.heading("mtb", _item("100% Strata 2 Goggles", "Protection")), "Goggles")
         self.assertEqual(headings.heading("skate", _item("187 Pro Knee Pads", "Protection")), "Protection")
         for sport_id, menu in headings.HEADINGS.items():
-            self.assertEqual(menu[-4:] if sport_id != "skate" else menu[-5:-1], headings.GEAR, sport_id)
+            size = len(headings.GEAR)
+            self.assertEqual(menu[-size:] if sport_id != "skate" else menu[-size - 1:-1], headings.GEAR, sport_id)
 
     def test_renames_and_merges(self):
         self.assertEqual(headings.heading("mtb", _item("RockShox ZEB", "Forks & Shocks")), "Suspension")
