@@ -215,8 +215,14 @@ def build_digest(changes, failed_keys=None):
     return Digest(new_items, drops, removed)
 
 
-def build_report_html(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None, sport=None):
-    """Render the static report for a sport (Skate when none is given). Failures are logged by the caller."""
+def build_report_html(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None, sport=None,
+                      pool_packs=False):
+    """Render the static report for a sport (Skate when none is given). Failures are logged by the caller.
+
+    ``pool_packs``: also show the other sports' general packs (sports/packs.py),
+    read from their stored catalogs. The scrape and the page rebuild turn it
+    on; tests and fixtures leave it off so their output never depends on
+    live data."""
     import contextlib
 
     from page import render_page
@@ -226,6 +232,9 @@ def build_report_html(data, changes, price_history=None, failed_keys=None, gener
     # Hubs); stored data keeps the stores' categories.
     from sports import headings
     sport_id = sport.id if sport is not None else "skate"
+    if pool_packs:
+        from sports import packs
+        data = packs.pool(data, sport_id)
     data = headings.regroup(data, sport_id)
     price_history = headings.regroup_history(price_history, sport_id)
     with (sport.active() if sport is not None else contextlib.nullcontext()):

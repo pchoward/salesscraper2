@@ -29,6 +29,7 @@
         more.setAttribute('aria-controls','brandList');more.setAttribute('aria-expanded','false');brands.after(more);
         let expanded=false, opened=false, closing=false, savedY=0, originalPosition='', originalTop='', originalWidth='';
         let sectionState=[], inertState=[], titleState=new Map();
+        let openedQuery='';
         let host=null;
         try{if(win.parent!==win&&win.parent.location.origin===win.location.origin)host=win.parent.shredApp;}catch(_){}
         function activeSection(section){
@@ -109,6 +110,7 @@
         }
         function open(){
             if(opened)return;
+            openedQuery=hooks.query();
             if(host?.openPhoneFilters)host.openPhoneFilters();
             else win.history.pushState({...win.history.state,phoneFilters:1},'',win.location.href);
             openVisual();
@@ -116,14 +118,20 @@
         function requestClose(scroll=false){
             if(!opened||closing)return;closing=true;
             if(host?.closePhoneFilters)host.closePhoneFilters(scroll);
-            else {pendingScroll=scroll;win.history.back();}
+            else if(hooks.query()!==openedQuery){
+                // The live picks become one ordinary browse entry. Consuming
+                // the overlay with Back here would overwrite the pre-sheet view.
+                win.history.replaceState({view:hooks.query()},'',win.location.href);
+                closeVisual(scroll);
+            }else {pendingScroll=scroll;win.history.back();}
         }
         let pendingScroll=false;
         function pop(event){
             if(host)return false; // The shell owns embedded history.
             if(opened){const query=hooks.query();closeVisual(pendingScroll);pendingScroll=false;
                 const target=new URL(win.location.href);target.search=query;
-                win.history.replaceState({view:query},'',target);return true;}
+                const method=query===openedQuery?'replaceState':'pushState';
+                win.history[method]({view:query},'',target);return true;}
             if(event?.state?.phoneFilters&&media.matches){hooks.restore();openVisual();return true;}
             return false;
         }

@@ -40,6 +40,8 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
   }
   const sort=await frame.locator('#sortSelect').boundingBox(),group=await frame.locator('#groupToggle').boundingBox();
   if(!capture){assert(!overlaps(sort,group),'sort and Group across stores must not overlap');assert(await frame.locator('#filtersOpen').isVisible());}
+  const browseBefore=page.url();
+  const rowsBefore=await frame.locator('.deal-row:not(.filtered-out)').count();
   await frame.locator('#filtersOpen').click();
   await frame.waitForFunction(()=>getComputedStyle(document.getElementById('filterDrawer')).transform==='none');
   if(capture){await page.screenshot({path:path.join(out,`${sport}-${width}-sheet.png`)});await page.close();continue;}
@@ -64,11 +66,22 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
   const have=await frame.evaluate(()=>state.brand);assert.equal(have,chosen);
   assert(await frame.locator('#brandList .facet-value[aria-pressed="true"]').isVisible());
   await page.screenshot({path:path.join(out,`${sport}-${width}-sheet-selected.png`)});
-  const expected=await sheetButton.innerText();await sheetButton.click();
+  const expected=await sheetButton.innerText();
+  const rowsChosen=await frame.locator('.deal-row:not(.filtered-out)').count();
+  await sheetButton.click();
   await frame.waitForFunction(()=>!phoneFilterSheet.isOpen());
   assert.equal(await frame.locator('#statusCounts').innerText(),expected.replace(/^Show /,''));
   assert.equal(await frame.evaluate(()=>state.brand),chosen,'closing preserves live brand');
   assert(!await page.locator('.shell-header').evaluate(n=>n.inert));
+  // Closing changed picks must preserve the pre-sheet browse, not replace it.
+  const browseChosen=page.url();
+  await page.goBack();
+  await frame.waitForFunction(n=>typeof state!=='undefined'&&state.brand==='all'&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===n,rowsBefore);
+  assert.equal(page.url(),browseBefore);assert(!await frame.evaluate(()=>phoneFilterSheet.isOpen()));
+  await page.goForward();
+  await frame.waitForFunction(({brand,n})=>typeof state!=='undefined'&&state.brand===brand&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===n,{brand:chosen,n:rowsChosen});
+  assert.equal(page.url(),browseChosen);assert(!await frame.evaluate(()=>phoneFilterSheet.isOpen()));
+
   await frame.locator('#filtersOpen').scrollIntoViewIfNeeded();await frame.locator('#filtersOpen').click();
   await frame.waitForFunction(()=>phoneFilterSheet.isOpen());
   const address=page.url();await page.goBack();await frame.waitForFunction(()=>!phoneFilterSheet.isOpen());
@@ -104,6 +117,18 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
    await page.waitForFunction(()=>typeof phoneFilterSheet!=='undefined'&&phoneFilterSheet!==null);
    await page.locator('#filtersOpen').click();await page.waitForFunction(()=>phoneFilterSheet.isOpen());
    const location=page.url();await page.goBack();await page.waitForFunction(()=>!phoneFilterSheet.isOpen());assert.equal(page.url(),location);
+   const initialRows=await page.locator('.deal-row:not(.filtered-out)').count();
+   await page.locator('#filtersOpen').click();
+   const pick=page.locator('#brandList .facet-value:not([hidden]):not(.phone-brand-hidden):not([data-brand="all"])').first();
+   const name=await pick.getAttribute('data-brand');await pick.click();
+   await page.waitForFunction(()=>new URLSearchParams(location.search).has('brand'));
+   const filteredRows=await page.locator('.deal-row:not(.filtered-out)').count();
+   await page.locator('#filterDrawer .show-results').click();await page.waitForFunction(()=>!phoneFilterSheet.isOpen());
+   await page.goBack();await page.waitForFunction(n=>typeof state!=='undefined'&&state.brand==='all'&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===n,initialRows);
+   assert.equal(page.url(),location);assert(!await page.evaluate(()=>phoneFilterSheet.isOpen()));
+   await page.goForward();await page.waitForFunction(({name,n})=>state.brand===name&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===n,{name,n:filteredRows});
+   assert(!await page.evaluate(()=>phoneFilterSheet.isOpen()));
+
   }
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.deepEqual(errors,[]);
   results.push({sport,width,status:'pass'});fs.writeFileSync(path.join(out,'results.json'),JSON.stringify(results,null,2));await page.close();
