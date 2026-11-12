@@ -109,7 +109,7 @@
         const stuffToggle = doc.getElementById('myStuffToggle');
         const stuffName = doc.getElementById('myStuffName');
         let stuffReady = false, stuffReturnTabIndex = null;
-        let phoneFiltersActive=false, phoneFiltersScroll=false, headerWasInert=false;
+        let phoneFiltersActive=false, phoneFiltersScroll=false, headerWasInert=false, phoneFiltersStart='';
         function paintPhoneFiltersHost(open) {
             const header=doc.querySelector('.shell-header');
             if(open)headerWasInert=header.inert;
@@ -119,21 +119,28 @@
         function openPhoneFilters() {
             if(phoneFiltersActive||!win.matchMedia('(max-width: 640px)').matches)return;
             closeCategories();closeMyStuff();phoneFiltersActive=true;phoneFiltersScroll=false;
+            phoneFiltersStart=win.location.href;
             win.history.pushState({...win.history.state,phoneFilters:1},'',win.location.href);
             paintPhoneFiltersHost(true);
         }
         function closePhoneFilters(scroll=false) {
             if(!phoneFiltersActive)return;
-            phoneFiltersScroll=scroll;win.history.back();
+            phoneFiltersScroll=scroll;
+            const next=mergeSkateURL(win.location.href,frame.contentWindow.location.href,config,state(win.location.href,config).sport.id);
+            if(next.href!==phoneFiltersStart)finishPhoneFilters(false);
+            else win.history.back();
         }
-        function finishPhoneFilters() {
+        function finishPhoneFilters(fromPop=true) {
             phoneFiltersActive=false;paintPhoneFiltersHost(false);
             const child=frame.contentWindow;
             // The picks apply live: consume only the sheet's history entry,
             // retaining the current catalog query rather than undoing a pick.
             try {
                 const next=mergeSkateURL(win.location.href,child.location.href,config,state(win.location.href,config).sport.id);
-                win.history.replaceState({skateState:child.history.state},'',next);
+                // Keep the pre-sheet browse entry when picks changed. Back from
+                // an open sheet still closes it without undoing those picks.
+                const method=fromPop&&next.href!==phoneFiltersStart?'pushState':'replaceState';
+                win.history[method]({skateState:child.history.state},'',next);
                 frame.dataset.currentURL=catalogURL(next,config,state(next,config).sport.id).href;
                 syncSearch(next);
             }catch(_){}
@@ -555,7 +562,7 @@
             if(event.state?.phoneFilters&&win.matchMedia('(max-width: 640px)').matches){
                 const expected=catalogURL(win.location.href,config,state(win.location.href,config).sport.id);
                 if(frame.dataset.currentURL===expected.href){
-                    phoneFiltersActive=true;paintPhoneFiltersHost(true);
+                    phoneFiltersActive=true;phoneFiltersStart=win.location.href;paintPhoneFiltersHost(true);
                     frame.contentWindow.dispatchEvent(new frame.contentWindow.CustomEvent('phonefiltersopen'));return;
                 }
             }

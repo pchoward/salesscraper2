@@ -20,6 +20,11 @@ def _basic(sport, name, part):
         return "missing name"
     if part not in sport.parts:
         return f"not a {sport.label} category"
+    if part == "Packs":
+        # Backpacks and hydration packs (sports/packs.py): another sport's own
+        # brands stay on that sport; the apparel words don't apply.
+        from sports import packs
+        return packs.rule_reason(sport.id, name)
     text = f" {name.casefold()} "
     if any(word in text for word in _APPAREL):
         return "apparel"
@@ -75,7 +80,7 @@ _BIKE_WORDS = re.compile(r"\b(?:mtb|bike|cycling|mountain\s+bike)\b", re.I)
 
 def ski(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     import sports
-    if _BIKE_WORDS.search(name or ""):
+    if part != "Packs" and _BIKE_WORDS.search(name or ""):
         return "bike gear"
     return _basic(sports.SKI, name, part)
 

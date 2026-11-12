@@ -42,9 +42,11 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
   await page.locator('#truckfitFilters [data-value="9.0"]').click();
   await page.waitForFunction(()=>new URLSearchParams(location.search).get('truckfit')==='9.0');
   assert.deepEqual(await visible(),['stage4','variants']);
-  await page.goBack();await page.waitForFunction(()=>state.truckFits.length===0);assert.equal((await visible()).length,8);
-  await page.goForward();await page.waitForFunction(()=>state.truckFits.includes('9.0'));assert.deepEqual(await visible(),['stage4','variants']);
-  if(width<500)await page.locator('#filtersClose').click();
+  if(width<500){
+   await page.locator('#filtersClose').click();await page.waitForFunction(()=>!phoneFilterSheet.isOpen());
+  }
+  await page.goBack();await page.waitForFunction(()=>state.truckFits.length===0&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===8);assert.equal((await visible()).length,8);
+  await page.goForward();await page.waitForFunction(()=>state.truckFits.includes('9.0')&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===2);assert.deepEqual(await visible(),['stage4','variants']);
   const quick=page.locator('.deal-card[data-url$="/variants"]');await quick.hover();await quick.locator('.card-quick').click();
   await page.waitForSelector('#quickView', {state:'visible'});
   assert.match(await page.locator('#quickView').innerText(),/150\.00/);
