@@ -244,6 +244,14 @@ class QueryStateTests(unittest.TestCase):
         self.assertEqual(encode_state(state), encoded)
         self.assertEqual(decode_query(encode_state(state)), state)
 
+    def test_multiple_stores_keep_the_existing_query_key_and_single_store_links(self):
+        state = decode_query("store=tactics,ccs,tactics,unknown&type=all&max=75")
+        self.assertEqual(state["store"], "CCS,Tactics")
+        self.assertEqual(encode_state(state), "store=ccs%2Ctactics&type=all&max=75")
+        self.assertEqual(decode_query(encode_state(state)), state)
+        self.assertEqual(encode_state(decode_query("store=ccs")), "store=ccs")
+        self.assertEqual(decode_query("store=unknown")["store"], "all")
+
     def test_width_range_and_starter_views(self):
         state = decode_query("type=deck&width=8.25-8.5&discount=35")
         self.assertEqual(state["part"], "Decks")

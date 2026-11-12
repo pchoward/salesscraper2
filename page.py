@@ -2482,6 +2482,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     if sport.facets:
         from sports.facets import sidebar
         context_specs = sidebar(data, _section, sport)
+    store_facet = '<p class="section-note">Choose one or more stores.</p><div id="storeList" role="group" aria-label="Stores">' + ''.join(
+        '<button type="button" class="facet-value store-choice" data-store="' + escape(store, quote=True) + '" '
+        + 'aria-pressed="' + ('true' if store == 'all' else 'false') + '"><span class="store-check" aria-hidden="true"></span>'
+        + '<span class="facet-name">' + escape('All stores' if store == 'all' else store) + '</span> '
+        + '<span class="facet-count">(' + str(sum(store_counts.values()) if store == 'all' else store_counts[store]) + ')</span></button>'
+        for store in ['all', *sorted(store_counts)]
+    ) + '</div>'
     sidebar_html = (
         '<aside class="sidebar" id="filterDrawer">'
         '<div class="drawer-head"><strong>Filters</strong>'
@@ -2499,8 +2506,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         "</div></section>"
         + "</div>"
         + '<div class="side-group" aria-label="Shopping filters">'
-        + _section("store", "Store", '<label class="field"><span class="sr-only">Store</span>'
-                   f'<select id="storeSelect" aria-label="Store">{"".join(store_options)}</select></label>')
+        + _section("store", "Stores", store_facet + f'<select id="storeSelect" aria-label="Store" hidden>{"".join(store_options)}</select>')
         + _section(
             "price",
             "Price & discount",

@@ -13,6 +13,10 @@ list means All. Each chip is one bucket: the lower bound is inclusive and
 the upper bound is exclusive, so 8.5" is ``8.5-8.75`` and 10.0" is ``10up``
 (the chip labeled ``10.0+``).
 
+Store picks use the existing ``store`` key: a single slug for old links,
+or comma-separated slugs for any of several retailers. The saved-view shape
+stays the same (a query string).
+
 Older links still resolve:
 
 * ``width=8.25`` selects the one bucket that contains 8.25".
@@ -353,9 +357,9 @@ def decode_query(query):
         if key == "q":
             state["q"] = value.strip()
         elif key == "store":
-            store = _store(value)
-            if store:
-                state["store"] = store
+            stores = {_store(part) for part in value.split(",")} - {""}
+            if stores:
+                state["store"] = ",".join(sorted(stores, key=lambda name: STORE_TO_SLUG[name]))
         elif key == "type":
             part = _part(value)
             if part:
@@ -443,7 +447,7 @@ def encode_state(state):
     add("q", state.get("q") or "")
     store = state.get("store") or "all"
     if store != "all":
-        add("store", STORE_TO_SLUG.get(store, ""))
+        add("store", ",".join(sorted({STORE_TO_SLUG[name.strip()] for name in store.split(",") if name.strip() in STORE_TO_SLUG})))
     # Missing type is Decks. All has to be written out, because the helper
     # below drops a bare "all" as "leave this at the default".
     part = state.get("part") or "Decks"
