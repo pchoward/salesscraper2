@@ -1,4 +1,4 @@
-"""BMX brands' own stores (2026-11-04): Kink, Haro and Fiend sale sections."""
+"""BMX brands' own stores (2026-11-04): Kink, Haro and Fiend sale sections; Sparky's Brands (2026-11-12)."""
 
 import unittest
 
@@ -11,7 +11,12 @@ class BmxBrandShopTests(unittest.TestCase):
         self.assertEqual([(s.store, s.sale_json) for s in stores.BMX_BRANDS],
                          [("Kink", "https://www.kinkbmx.com/collections/sale/products.json"),
                           ("Haro", "https://www.harobikes.com/collections/summer-parts-sale/products.json"),
-                          ("Fiend", "https://www.fiendbmx.com/collections/clearance/products.json")])
+                          ("Fiend", "https://www.fiendbmx.com/collections/clearance/products.json"),
+                          ("Sparky's Brands", "https://www.sparkysbrands.com/collections/sales/products.json")])
+        sparkys = stores.BMX_BRANDS[3]
+        self.assertTrue(sparkys.whole_site)
+        self.assertEqual(shopify.part_for(sparkys, "BMX Forks", "Subrosa Simo 18 Forks"), "Frames & Forks")
+        self.assertEqual(shopify.part_for(sparkys, "BMX Gloves", "Shadow Conspiracy Jolt Gloves"), "Protection")
         self.assertTrue(set(stores.BMX_BRANDS) <= set(stores.STORES))
 
     def test_their_product_types(self):

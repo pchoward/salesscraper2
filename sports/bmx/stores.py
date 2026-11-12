@@ -391,6 +391,11 @@ BMX_BRANDS = (
     bmx_brand("Kink", "https://www.kinkbmx.com", "sale"),
     bmx_brand("Haro", "https://www.harobikes.com", "summer-parts-sale"),
     bmx_brand("Fiend", "https://www.fiendbmx.com", "clearance", whole_site=True),  # audit 2026-11-06: 3 more
+    # Sparky's Brands (store probe 2026-11-12, owner approved): the rider-owned
+    # distributor's own store for Shadow Conspiracy, Subrosa, Rant and Shadow
+    # Riding Gear. Shopify, USD, public retail prices (dealer pricing is behind
+    # a login). Its "sales" collection (~160) plus the whole catalog.
+    bmx_brand("Sparky's Brands", "https://www.sparkysbrands.com", "sales", whole_site=True),
 )
 
 STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US, EMPIRE, STACKED) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS
