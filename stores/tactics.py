@@ -287,6 +287,35 @@ class TacticsProtectionScraper(TacticsScraper):
 PROTECTION_URL = "https://www.tactics.com/protective-skate-gear/sale"
 
 
+# Packs (owner, 2026-11-12): backpacks and "street" daypacks on sale. The
+# Skate rules keep only real packs (sports/packs.py) and drop another
+# sport's own brands.
+PACK_URLS = ("https://www.tactics.com/backpacks/sale", "https://www.tactics.com/daypacks/sale")
+
+
+class TacticsPacksScraper(TacticsScraper):
+    """Packs from both backpack sale pages, each listing once. A page that
+    fails fails the part, like a single sale page."""
+
+    def __init__(self, urls=PACK_URLS):
+        super().__init__("Tactics", urls[0], "Packs")
+        self.urls = tuple(urls)
+
+    def scrape(self):
+        products, seen = [], set()
+        for url in self.urls:
+            pages = collect_sale_pages(url)
+            if not pages:
+                return None
+            for html in pages:
+                for item in self.parse(html):
+                    if item.get("url") and item["url"] not in seen:
+                        seen.add(item["url"])
+                        products.append(item)
+        logging.info("Tactics Packs: %s items across %s sale pages", len(products), len(self.urls))
+        return products
+
+
 def scrapers():
     # Sale paths are allowed. robots.txt only blocks account, cart, checkout, and search.
     return [
@@ -297,4 +326,5 @@ def scrapers():
         TacticsScraper("Tactics", "https://www.tactics.com/shoes/sale", "Sneakers"),
         TacticsScraper("Tactics", "https://www.tactics.com/skateboard-accessories/sale", "Accessories"),
         TacticsDealCompletesScraper(),
+        TacticsPacksScraper(),
     ] + ([TacticsProtectionScraper(PROTECTION_URL)] if PROTECTION_URL else [])

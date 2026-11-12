@@ -138,10 +138,11 @@ PROMO_URLS = {
     "Trucks": (BLACK_NOVEMBER,),
     "Bearings": (BLACK_NOVEMBER,),
     "Accessories": (BLACK_NOVEMBER,),
+    "Packs": (BLACK_NOVEMBER,),
 }
 # A card's category (data-gtm_impression_category, first part) -> part.
 CARD_PARTS = {"decks": "Decks", "complete decks": "Completes", "wheels": "Wheels", "trucks": "Trucks",
-              "bearings": "Bearings", "hardware": "Accessories", "miscellaneous": "Accessories"}
+              "bearings": "Bearings", "hardware": "Accessories", "miscellaneous": "Accessories", "backpacks": "Packs"}
 BASE = "https://www.skatewarehouse.com"
 
 
@@ -332,6 +333,10 @@ def scrapers():
                               promo_urls=PROMO_URLS["Decks"]),
         SkateWarehouseCardScraper("SkateWarehouse", "https://www.skatewarehouse.com/Pre-Built_Complete_Skateboards/catpage-BRCOMPLETE.html",
                                   "Completes", promo_urls=PROMO_URLS["Completes"]),
+        # Packs (2026-11-12): the backpacks category (26 packs, 2 marked down
+        # that day), read by its cards like Completes.
+        SkateWarehouseCardScraper("SkateWarehouse", "https://www.skatewarehouse.com/backpacks.html", "Packs",
+                                  promo_urls=PROMO_URLS["Packs"]),
         SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Wheels/catpage-SALEWHEELS.html", "Wheels",
                               promo_urls=PROMO_URLS["Wheels"]),
         SkateWarehouseScraper("SkateWarehouse", "https://www.skatewarehouse.com/Clearance_Skateboard_Trucks/catpage-SALETRUCKS.html", "Trucks",
