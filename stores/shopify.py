@@ -399,6 +399,17 @@ def sale_variants(product):
     return sale
 
 
+def _starts_with_brand_word(title, vendor):
+    """True when the title opens with the brand's first word, a shorter or
+    different spelling of the same brand (audit 2026-11-12, 85 listings):
+    "Shadow Metal Pedal" from "Shadow Conspiracy", "Demon Podium Helmet" from
+    "Demon United", "SE RACING Narler Stem" from "SE Bikes", "Crank brothers
+    Egg Beater" from "crank bros"."""
+    first = re.findall(r"[a-z0-9]+", str(vendor or "").casefold())
+    lead = re.findall(r"[a-z0-9]+", str(title or "").casefold())
+    return bool(first and lead and first[0] == lead[0])
+
+
 def title_with_brand(product, own_vendor="", brand_of=None):
     """The product title, with the vendor's brand in front when the title leaves it out.
 
@@ -410,6 +421,8 @@ def title_with_brand(product, own_vendor="", brand_of=None):
     vendor = normalize_product_name((product or {}).get("vendor") or "")
     if not vendor or (own_vendor and vendor.casefold().startswith(own_vendor)):
         return title
+    if _starts_with_brand_word(title, vendor):
+        return title
     if brand_of:
         # The title may already name the brand the store's way ("Stans Flow
         # MK4" from vendor "Stans", canonical "Stan's NoTubes").
@@ -419,6 +432,8 @@ def title_with_brand(product, own_vendor="", brand_of=None):
         vendor = brand_of(vendor)
         if not vendor:  # not a brand ("Scratch & Dent")
             return title
+    if _starts_with_brand_word(title, vendor):
+        return title
     brand = [word for word in re.findall(r"[a-z0-9]+", vendor.casefold()) if word not in _VENDOR_FILLER]
     words = set(re.findall(r"[a-z0-9]+", title.casefold()))
     if brand and all(word in words for word in brand):

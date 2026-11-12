@@ -138,6 +138,12 @@ def _run(args, sport):
     scrapers = build_scrapers() if sport.is_default else sport.build_scrapers()
     prev_data = load_previous()
     curr_data, failed_keys = run_stores(scrapers)
+    # Card names: ALL-CAPS names in title case, spec dumps over 90 characters
+    # trimmed (names.py, audit 2026-11-12).
+    import names
+    tidied = names.tidy_items(curr_data)
+    if tidied:
+        logging.info("Tidied %s listing names", tidied)
     if not sport.is_default:
         # One spelling per brand: stores without a vendor field (Skate shops,
         # SkatePro) get the brand their listing's name starts with.
