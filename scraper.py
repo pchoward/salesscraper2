@@ -272,6 +272,7 @@ def _run(args, sport):
             failed_keys,
             generated_at=scanned_at,
             digest=digest,
+            pool_packs=True,
             **({} if sport.is_default else {"sport": sport}),
         )
         write_page(html, "sale_items_chart.html" if sport.is_default else str(sport.page_file()))

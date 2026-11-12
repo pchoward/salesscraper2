@@ -86,7 +86,8 @@ _BRANDS = {
     "sneakers": ("Nike SB", "Nike", "Vans"),
 }
 # Skate's menu, in shop order (Tactics' too): completes second, shoes last.
-PART_ORDER = ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories", "Helmets", "Protection", "Sneakers")
+PART_ORDER = ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories", "Helmets", "Protection", "Packs",
+              "Sneakers")
 # Helmets are protective gear shown under their own heading; they share
 # Protection's type and size filters.
 PROTECTIVE_PARTS = ("Protection", "Helmets")

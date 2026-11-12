@@ -23,7 +23,8 @@ from sports.protection import protects as _protects
 # (owner, 2026-11-07; the map is docs/menu-wireframe.md): Helmets, Goggles, Gloves,
 # then Protection for pads, armor, impact shorts and wrist guards. A
 # heading with no deals is not shown.
-GEAR = ("Helmets", "Goggles", "Gloves", "Protection")
+# Packs (owner, 2026-11-12): backpacks and hydration packs, after Protection.
+GEAR = ("Helmets", "Goggles", "Gloves", "Protection", "Packs")
 
 HEADINGS = {
     "skate": ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories") + GEAR + ("Sneakers",),

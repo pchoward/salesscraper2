@@ -36,7 +36,7 @@ class ChristyTests(unittest.TestCase):
         names = {part: [item["name"] for item in self.parse(part)] for part in christy.PARTS}
         self.assertEqual(names, {"Skis": ["Volkl Mantra 102 Skis"], "Boots": ["Tecnica Mach Sport HV 85 Ski Boots Womens"],
                                  "Bindings": ["Look Pivot 15 GW Ski Bindings"], "Poles": ["Leki Carbon Ski Poles"],
-                                 "Helmets": ["Smith Vantage MIPS Helmet"], "Protection": []},
+                                 "Helmets": ["Smith Vantage MIPS Helmet"], "Protection": [], "Packs": []},
                          "wax kits and items without a list price are left out")
         boot = self.parse("Boots")[0]
         self.assertEqual((boot["price_new"], boot["price_old"], boot["url"]),

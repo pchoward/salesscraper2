@@ -93,7 +93,7 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
 
 <div class="wrap">
   <h1>ShredDeals Menu Wireframe</h1>
-  <p class="lede">Tap a sport (top right), get its headings, open a heading for its types and filters. The gear at the bottom of every menu uses the same words on every sport. Counts are today's deals. <b>Decided Nov 7, 2026:</b> every sport gets Helmets, Goggles and Gloves headings; Protection is the rest. Change this page first, then the code (<span class="mono">sports/headings.py</span>).</p>
+  <p class="lede">Tap a sport (top right), get its headings, open a heading for its types and filters. The gear at the bottom of every menu uses the same words on every sport. Counts are today's deals. <b>Decided Nov 7, 2026:</b> every sport gets Helmets, Goggles and Gloves headings; Protection is the rest. <b>Nov 12:</b> Packs added after Protection on every sport. Change this page first, then the code (<span class="mono">sports/headings.py</span>).</p>
   <div class="key"><span><span class="tag">live</span> as on the site now</span><span><span class="tag chg">change</span> what this wireframe changes</span><span><span class="tag ask">your call</span> open question</span></div>
 
   <h2>Sidebar order — current-site cleanup</h2>
@@ -117,8 +117,10 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
         <td><span class="mono">17</span> <span class="tag chg">renamed</span><span class="was">Body Armor</span></td>
         <td><span class="mono">210</span></td>
         <td><span class="mono">231</span> <span class="tag chg">renamed</span><span class="was">Pads &amp; Gloves</span></td></tr>
+      <tr><td><b>Packs</b> <span class="tag chg">new</span></td><td>Backpacks &amp; hydration packs. General brands on every tab; a sport's own brands (Shadow, Spitfire) and avalanche packs only on that sport. Not duffels, travel or ski/board bags, saddle or handlebar bags.</td>
+        <td class="na">new</td><td class="na">new</td><td class="na">new</td><td class="na">new</td></tr>
     </tbody></table></div>
-  <p>Order at the bottom of every menu: <b>Helmets · Goggles · Gloves · Protection</b>. A heading with no deals isn't shown. Inside Protection, one filter does the narrowing on every sport: <b>Protects</b> (knees, elbows, wrists, hips, back &amp; chest).</p>
+  <p>Order at the bottom of every menu: <b>Helmets · Goggles · Gloves · Protection · Packs</b>. A heading with no deals isn't shown. Inside Protection, one filter does the narrowing on every sport: <b>Protects</b> (knees, elbows, wrists, hips, back &amp; chest).</p>
 
   <h2>All four sports</h2>
   <div class="board">
@@ -135,6 +137,7 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
         <div class="row"><span class="lbl">Grip, Hardware &amp; Tools</span><span class="n">77</span></div>
         <div class="row gear chg"><span class="lbl">Helmets</span><span class="tag chg">new</span><span class="n">23</span></div>
         <div class="row gear"><span class="lbl">Protection</span><span class="n">70</span></div>
+        <div class="row gear chg"><span class="lbl">Packs</span><span class="tag chg">new</span><span class="n">–</span></div>
         <div class="row"><span class="lbl">Shoes</span><span class="n">106</span></div>
       </div>
       <details class="node" open><summary>Decks<span class="n">634</span></summary><div class="body">
@@ -152,6 +155,9 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
       <details class="node"><summary>Protection<span class="n">70</span></summary><div class="body">
         <div><div class="lab">Protects</div><div class="chips"><span class="chip">Elbows</span><span class="chip">Knees</span><span class="chip">Pad sets<i>15</i></span><span class="chip">Wrists</span><span class="chip">Hips</span></div></div>
         <div><div class="lab">Filters</div><div class="flt"><span>Protects</span><span>Size</span><span>Brand</span></div></div></div></details>
+      <details class="node"><summary>Packs<span class="tag chg">new</span></summary><div class="body">
+        <div><div class="lab">What's in it</div><p>Backpacks &amp; hydration packs. General brands from every sport's stores; this sport's own brands only here.</p></div>
+        <div><div class="lab">Filters</div><div class="flt"><span>Brand</span><span>Store</span><span>Price &amp; % off</span></div></div></div></details>
       <details class="node"><summary>Shoes<span class="n">106</span></summary><div class="body">
         <div><div class="lab">Filters</div><div class="flt"><span>Size (in stock)</span><span>Brand</span><span>Price</span></div></div></div></details>
     </section>
@@ -167,6 +173,7 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
         <div class="row gear"><span class="lbl">Helmets</span><span class="n">252</span></div>
         <div class="row gear"><span class="lbl">Goggles</span><span class="n">223</span></div>
         <div class="row gear chg"><span class="lbl">Protection</span><span class="tag chg">was Body Armor</span><span class="n">17</span></div>
+        <div class="row gear chg"><span class="lbl">Packs</span><span class="tag chg">new</span><span class="n">–</span></div>
       </div>
       <details class="node" open><summary>Skis<span class="n">541</span></summary><div class="body">
         <div><div class="lab">Filters</div><div class="flt"><span>Type</span><span>Length</span><span>Men / Women / Kids</span><span class="more">Waist</span><span class="more">Rocker</span><span class="more">Ability</span><span>Bindings incl.</span></div></div></div></details>
@@ -181,6 +188,9 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
         <div><div class="lab">Filters</div><div class="flt"><span class="new">Frame size</span><span class="new">Fit (low bridge, OTG)</span><span class="new">Lens (bonus, magnetic)</span><span>Adult / Kids</span><span>Brand</span></div></div></div></details>
       <details class="node"><summary>Protection<span class="n">17</span></summary><div class="body">
         <div><div class="lab">Protects</div><div class="chips"><span class="chip">Back &amp; spine<i>9</i></span><span class="chip">Hips<i>6</i></span><span class="chip">Chest<i>3</i></span><span class="chip">Wrists<i>2</i></span></div></div></div></details>
+      <details class="node"><summary>Packs<span class="tag chg">new</span></summary><div class="body">
+        <div><div class="lab">What's in it</div><p>Backpacks &amp; hydration packs. General brands from every sport's stores; this sport's own brands only here.</p></div>
+        <div><div class="lab">Filters</div><div class="flt"><span>Brand</span><span>Store</span><span>Price &amp; % off</span></div></div></div></details>
     </section>
 
     <!-- MTB -->
@@ -200,6 +210,7 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
         <div class="row gear chg"><span class="lbl">Goggles</span><span class="tag chg">new</span><span class="n">20</span></div>
         <div class="row gear chg"><span class="lbl">Gloves</span><span class="tag chg">new</span><span class="n">87</span></div>
         <div class="row gear"><span class="lbl">Protection</span><span class="n">210</span></div>
+        <div class="row gear chg"><span class="lbl">Packs</span><span class="tag chg">new</span><span class="n">–</span></div>
       </div>
       <details class="node" open><summary>Drivetrain<span class="n">648</span></summary><div class="body">
         <div><div class="lab">Types</div><div class="chips"><span class="chip">Shifters</span><span class="chip">Derailleurs</span><span class="chip">Cranks</span><span class="chip">Chainrings</span><span class="chip">Cassettes</span><span class="chip">Chains</span><span class="chip">BBs</span></div></div>
@@ -220,6 +231,9 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
         <div><div class="lab">Goggles</div><div class="flt"><span>Brand</span><span>Price</span></div></div></div></details>
       <details class="node"><summary>Protection<span class="n">210</span></summary><div class="body">
         <div><div class="lab">Protects</div><div class="chips"><span class="chip">Knees<i>125</i></span><span class="chip">Elbows<i>66</i></span><span class="chip">Hips<i>16</i></span><span class="chip">Chest &amp; back<i>12</i></span><span class="chip">Shins<i>10</i></span></div></div></div></details>
+      <details class="node"><summary>Packs<span class="tag chg">new</span></summary><div class="body">
+        <div><div class="lab">What's in it</div><p>Backpacks &amp; hydration packs. General brands from every sport's stores; this sport's own brands only here.</p></div>
+        <div><div class="lab">Filters</div><div class="flt"><span>Brand</span><span>Store</span><span>Price &amp; % off</span></div></div></div></details>
     </section>
 
     <!-- BMX -->
@@ -238,6 +252,7 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
         <div class="row gear chg"><span class="lbl">Goggles</span><span class="tag chg">new</span><span class="n">6</span></div>
         <div class="row gear chg"><span class="lbl">Gloves</span><span class="tag chg">new</span><span class="n">37</span></div>
         <div class="row gear chg"><span class="lbl">Protection</span><span class="tag chg">was Pads &amp; Gloves</span><span class="n">231</span></div>
+        <div class="row gear chg"><span class="lbl">Packs</span><span class="tag chg">new</span><span class="n">–</span></div>
       </div>
       <details class="node" open><summary>Wheels &amp; Hubs<span class="n">172</span></summary><div class="body">
         <div><div class="lab">Types</div><div class="chips"><span class="chip">Wheels<i>31</i></span><span class="chip">Hubs<i>51</i></span><span class="chip">Hub parts<i>34</i></span><span class="chip">Rims<i>26</i></span><span class="chip">Guards<i>13</i></span><span class="chip">Pegs<i>12</i></span></div></div>
@@ -252,6 +267,9 @@ details.node > summary .n { margin-left: auto; font: 400 0.78rem/1 var(--mono); 
         <div><div class="lab">Filters</div><div class="flt"><span>Full face / half shell</span><span>Size</span><span>Certification</span></div></div></div></details>
       <details class="node"><summary>Protection<span class="n">231</span></summary><div class="body">
         <div><div class="lab">Protects</div><div class="chips"><span class="chip">Knees<i>137</i></span><span class="chip">Elbows<i>67</i></span><span class="chip">Pad sets<i>17</i></span><span class="chip">Hips<i>16</i></span><span class="chip">Shins &amp; ankles<i>18</i></span></div></div></div></details>
+      <details class="node"><summary>Packs<span class="tag chg">new</span></summary><div class="body">
+        <div><div class="lab">What's in it</div><p>Backpacks &amp; hydration packs. General brands from every sport's stores; this sport's own brands only here.</p></div>
+        <div><div class="lab">Filters</div><div class="flt"><span>Brand</span><span>Store</span><span>Price &amp; % off</span></div></div></div></details>
     </section>
   </div>
 

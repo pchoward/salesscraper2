@@ -2,7 +2,7 @@
 import re
 from filters import normalize_product_name
 
-PARTS=('Bikes','Frames','Forks & Shocks','Wheels','Tires','Drivetrain','Brakes','Cockpit','Pedals','Protection')
+PARTS=('Bikes','Frames','Forks & Shocks','Wheels','Tires','Drivetrain','Brakes','Cockpit','Pedals','Protection','Packs')
 _RULES=(
  ('Protection',r'\b(?:helmets?|knee\s*(?:pads?|guards?)|elbow\s*(?:pads?|guards?)|body\s*(?:armor|armour)|chest\s*protectors?)\b'),
  ('Forks & Shocks',r'\b(?:suspension\s+forks?|forks?|rear\s+shocks?|shocks?|shock\s+springs?)\b'),
@@ -39,6 +39,11 @@ def title_part(title):
 def filter_reason(name,part,url='',price_new=None,price_old=None,description='',product_type=''):
     if not normalize_product_name(name):return 'missing name'
     if part not in PARTS:return 'not an MTB equipment category'
+    # Backpacks and hydration packs (sports/packs.py): another sport's own
+    # brands stay on that sport; apparel and road words don't apply.
+    if part=='Packs':
+        from sports import packs
+        return packs.rule_reason('mtb',name)
     value=' '+str(name)+' '+str(product_type)+' '
     from sports.protection import protects
     armor=part=='Protection' and protects(str(name),str(product_type))

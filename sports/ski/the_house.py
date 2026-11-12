@@ -29,7 +29,7 @@ MAX_PAGES = 40
 PAGE_DELAY = 2.0
 _USER_AGENT = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
                "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36")
-PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection")  # = sports.SKI.parts
+PARTS = ("Skis", "Boots", "Bindings", "Poles", "Helmets", "Protection", "Packs")  # = sports.SKI.parts
 
 _TILE = re.compile(r'data-pid="(\d+)"\s+data-gtmdata="([^"]+)"')
 _IMAGE = re.compile(r'data-(?:bg|src)="(https://[^"]+?\.(?:jpg|jpeg|png|webp)[^"]*)"', re.I)
@@ -55,6 +55,10 @@ def part_for(data):
     """
     subcategory = str(data.get("subcategory") or "").casefold()
     name = " " + re.sub(r"[^a-z0-9]+", " ", str(data.get("name") or "").casefold()) + " "
+    # Backpacks and hydration packs, whatever they're filed under (sports/packs.py).
+    from sports import packs
+    if packs.is_pack(data.get("name"), data.get("category") or ""):
+        return packs.PART
     if subcategory == "helmets":
         return "Helmets"
     # Goggles (filed under snowboard, worn by skiers too) and armor among the
