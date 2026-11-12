@@ -161,11 +161,11 @@ class SendGateTests(unittest.TestCase):
 class SubjectAndRenderTests(unittest.TestCase):
     def test_subject_counts(self):
         digest = Digest(new_items=[_deck(), _wheel(), _truck()], drops=[_drop(_bearing()), _drop(_wheel())])
-        self.assertEqual(subject_line(digest, WHEN), "Skate deals: 3 new, 2 price drops (Sep 28)")
+        self.assertEqual(subject_line(digest, WHEN), "ShredDeals Skate: 3 new, 2 price drops (Sep 28)")
 
     def test_subject_singular_price_drop(self):
         digest = Digest(new_items=[_deck()], drops=[_drop(_bearing())])
-        self.assertEqual(subject_line(digest, WHEN), "Skate deals: 1 new, 1 price drop (Sep 28)")
+        self.assertEqual(subject_line(digest, WHEN), "ShredDeals Skate: 1 new, 1 price drop (Sep 28)")
 
     def test_rendering_groups_parts_and_shows_prices(self):
         digest = _sample_digest()
@@ -262,7 +262,7 @@ class ConfigAndDeliveryTests(unittest.TestCase):
             smtp_ssl.assert_not_called()
             with open(path, encoding="utf-8") as handle:
                 text = handle.read()
-        self.assertIn("Subject: Skate deals: 3 new, 1 price drop (Sep 28)", text)
+        self.assertIn("Subject: ShredDeals Skate: 3 new, 1 price drop (Sep 28)", text)
         self.assertIn("https://example.com/deals.html", text)
         self.assertNotIn(DEFAULT_REPORT_URL, text)
         self.assertIn("Baker Team Deck 8.25", text)
@@ -296,7 +296,7 @@ class ConfigAndDeliveryTests(unittest.TestCase):
         server.starttls.assert_called_once()
         server.login.assert_called_once_with("user@example.com", "super-secret-password")
         message = server.send_message.call_args[0][0]
-        self.assertEqual(message["Subject"], "Skate deals: 3 new, 1 price drop (Sep 28)")
+        self.assertEqual(message["Subject"], "ShredDeals Skate: 3 new, 1 price drop (Sep 28)")
         self.assertEqual(message["From"], "user@example.com")
         self.assertEqual(message["To"], "one@example.com, two@example.com")
         self.assertEqual(message.get_content_type(), "multipart/alternative")
@@ -316,7 +316,7 @@ class ConfigAndDeliveryTests(unittest.TestCase):
         server.starttls.assert_not_called()
         message = server.send_message.call_args[0][0]
         self.assertEqual(message["From"], "deals@example.com")
-        self.assertEqual(message["Subject"], "Skate deals: 1 new, 0 price drops (Sep 28)")
+        self.assertEqual(message["Subject"], "ShredDeals Skate: 1 new, 0 price drops (Sep 28)")
 
     def test_smtp_error_is_logged_and_does_not_raise(self):
         with patch("notify.smtplib.SMTP") as smtp_cls:
@@ -370,7 +370,7 @@ class SamplePreviewTests(unittest.TestCase):
         self.assertIn("Sample preview, not a live alert", text)
         self.assertIn("[SAMPLE]", text)
         self.assertIn(DEFAULT_REPORT_URL, text)
-        self.assertIn("Subject: Skate deals:", text)
+        self.assertIn("Subject: ShredDeals Skate:", text)
 
 
 class StoreWarningTests(unittest.TestCase):
@@ -394,7 +394,7 @@ class StoreWarningTests(unittest.TestCase):
 
     def test_warning_with_deal_stays_out_of_subject_and_bodies(self):
         digest = Digest(new_items=[_deck()], warnings=[self._warning()])
-        self.assertEqual(subject_line(digest, WHEN), "Skate deals: 1 new, 0 price drops (Sep 28)")
+        self.assertEqual(subject_line(digest, WHEN), "ShredDeals Skate: 1 new, 0 price drops (Sep 28)")
         for body in (render_plain(digest, DEFAULT_REPORT_URL), render_html(digest, DEFAULT_REPORT_URL)):
             self.assertNotIn("Store check failed", body)
             self.assertNotIn("STORE CHECK FAILED", body)
