@@ -288,7 +288,7 @@ async function runHomepage(browser, base, view, options) {
 const server = await serve();
 const base = `http://127.0.0.1:${server.address().port}`;
 await mkdir(outDir, { recursive: true });
-const browser = await chromium.launch();
+const browser = await chromium.launch(process.env.BROWSER_BINARY ? {executablePath:process.env.BROWSER_BINARY} : {});
 const shots = [];
 try {
     const desktop = { viewport: { width: 1366, height: 900 } };

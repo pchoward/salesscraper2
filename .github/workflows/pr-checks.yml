@@ -7,6 +7,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Stop obsolete PR runs competing with the current commit. Main runs finish.
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
 
@@ -61,21 +66,12 @@ jobs:
       - name: Run Python and embedded JavaScript regression tests
         run: python -m unittest discover -s . -p 'test_*.py' -v
 
-  # Builds a PREVIEW site from the PR's committed data (no scraping, email,
-  # alerts or analytics), checks it in Chromium at desktop and phone sizes,
-  # and uploads the site and screenshots. Runs with the PR's own code, so it
-  # gets no secrets and a read-only token; "CI - Publish PR Preview" (a
-  # workflow_run on main's code) posts the results. docs/level2-autonomy.md.
-  # Off switch: repository variable PR_PREVIEWS=off.
-  preview:
-    name: Preview build and browser checks
+  # Build once; reuse this inert site and its prebuilt fixtures in every group.
+  preview-build:
+    name: Build browser preview
     if: github.event_name == 'pull_request' && vars.PR_PREVIEWS != 'off'
-    # Pinned: Playwright 1.56.1 supports Ubuntu 24.04 but not 26.04 (the
-    # current ubuntu-latest). Move both together when upgrading.
     runs-on: ubuntu-24.04
-    # Raised from 20 (2026-11-12): the browser checks grew to 18-20 minutes
-    # (#270 19.5, #271 18.6) and #272 was cut off at the limit.
-    timeout-minutes: 35
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
@@ -83,142 +79,149 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: false
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: pip
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
-
-      - name: Cache Playwright's browser
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-1.56.1-ubuntu-24.04
-
-      - name: Install Playwright 1.56.1 and Chromium
-        run: |
-          npm install --prefix ci --no-save --no-audit --no-fund playwright@1.56.1
-          ci/node_modules/.bin/playwright install --with-deps chromium
-
+      - name: Install report dependencies
+        run: python -m pip install -r requirements.txt
       - name: Build the preview site
         env:
-          # Quoted: in YAML an unquoted " #" starts a comment.
           LABEL: "PR #${{ github.event.pull_request.number }} ${{ github.event.pull_request.head.sha }}"
         run: python ci/build_preview.py preview/site --label "${LABEL:0:16}"
-
-      - name: Browser checks and screenshots
-        id: smoke
-        continue-on-error: true
-        run: node ci/smoke.mjs preview/site preview/shots
-
-      - name: Sport/category navigation and live facet counts
-        run: node ci/check_category_navigation.cjs preview/site "${{ runner.temp }}/category-navigation-results"
-
-      - name: Sport hover, keyboard and touch menu checks
-        run: node ci/check_sport_menus.cjs preview/site "${{ runner.temp }}/category-navigation-results/sport-menus"
-
-      - name: Sidebar disclosure and saved-link browser checks
-        run: node ci/check_sidebar.cjs preview/site "${{ runner.temp }}/category-navigation-results/sidebar"
-
-      - name: My stuff persistence and mobile browser checks
-        run: node ci/check_my_stuff.cjs preview/site "${{ runner.temp }}/category-navigation-results/my-stuff"
-
-      - name: Variant-aware truck fit and legacy-link browser checks
-        # The fixtures must be built outside the checkout (the builder
-        # refuses in-tree output), and the check serves the directory
-        # it is given.
+      - name: Build isolated browser fixtures (no second catalog rebuild)
         run: |
-          mkdir -p "${{ runner.temp }}/truck-fit-site"
-          python ci/build_truck_fixtures.py "${{ runner.temp }}/truck-fit-site"
-          node ci/check_truck_fit.cjs "${{ runner.temp }}/truck-fit-site" "${{ runner.temp }}/category-navigation-results/truck-fit"
-
-      - name: Multi-select store filtering, persistence and history
-        run: node ci/check_multi_store.cjs preview/site "${{ runner.temp }}/category-navigation-results/multi-store"
-
-      - name: Full-screen phone filters and desktop preservation
-        run: node ci/check_phone_filters.cjs preview/site "${{ runner.temp }}/category-navigation-results/phone-filters"
-
-      - name: Opt-in Shopify live-search browser checks (mocked network)
-        run: node ci/check_catalog_search.cjs preview/site "${{ runner.temp }}/category-navigation-results/live-catalog"
-
-      - name: Upload category navigation screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: category-navigation-review
-          path: ${{ runner.temp }}/category-navigation-results/
-          retention-days: 7
-          if-no-files-found: warn
-
-      - name: Header search synchronization regression checks
-        run: node ci/check_header_search.cjs preview/site "${{ runner.temp }}/header-search-results"
-
-      - name: Upload header search screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: header-search-review
-          path: ${{ runner.temp }}/header-search-results/
-          retention-days: 7
-          if-no-files-found: warn
-
-      - name: Public Explore demo navigation and mobile checks
-        run: node ci/check_explore.cjs preview/site "${{ runner.temp }}/public-explore-results" --public
-
-      - name: Upload public Explore demo screenshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: public-explore-demo
-          path: ${{ runner.temp }}/public-explore-results/
-          retention-days: 7
-          if-no-files-found: warn
-
-      - name: Four-sport UI regression checks (saved catalogs and labeled fixtures)
-        id: sport_audit
-        continue-on-error: true
-        run: |
-          python ci/build_preview.py "${{ runner.temp }}/four-sport-site" --label "Four-sport UI QA"
-          python ci/build_audit_fixtures.py "${{ runner.temp }}/four-sport-site"
-          node ci/audit_sports.cjs "${{ runner.temp }}/four-sport-site" "${{ runner.temp }}/four-sport-results"
-
-      - name: Upload four-sport audit evidence (artifact only)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: four-sport-ui-audit
-          path: ${{ runner.temp }}/four-sport-results/
-          retention-days: 7
-          if-no-files-found: warn
-
+          mkdir -p "${{ runner.temp }}/browser-fixtures"
+          python ci/build_audit_fixtures.py "${{ runner.temp }}/browser-fixtures"
+          python ci/build_truck_fixtures.py "${{ runner.temp }}/browser-fixtures"
       - name: Record the PR this preview belongs to
         env:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           printf '{"number": %s, "head_sha": "%s"}\n' "$PR_NUMBER" "$HEAD_SHA" > preview/pr.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: browser-preview-input
+          path: preview/
+          include-hidden-files: true
+          retention-days: 7
+          compression-level: 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: browser-fixtures
+          path: ${{ runner.temp }}/browser-fixtures/
+          retention-days: 7
+          compression-level: 1
 
+  browser:
+    name: Browser group / ${{ matrix.group }}
+    needs: preview-build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [navigation, controls, filters, search, audit-wide, audit-phone]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-1.56.1-ubuntu-24.04
+      - name: Install pinned Playwright and Chromium
+        run: |
+          npm install --prefix ci --no-save --no-audit --no-fund playwright@1.56.1
+          ci/node_modules/.bin/playwright install --with-deps chromium
+      - uses: actions/download-artifact@v4
+        with:
+          name: browser-preview-input
+          path: preview
+      - uses: actions/download-artifact@v4
+        with:
+          name: browser-fixtures
+          path: ${{ runner.temp }}/browser-fixtures
+      - name: Run browser group and record per-suite timings
+        run: node ci/run_browser_shard.cjs "${{ matrix.group }}" preview/site review "${{ runner.temp }}/browser-fixtures"
+      - name: Keep screenshots and timings even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-review-${{ matrix.group }}
+          path: review/
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: warn
+
+  # Preserve the existing required check name and the publisher's pr-preview
+  # contract. A missing, cancelled or failing group can never make this green.
+  preview:
+    name: Preview build and browser checks
+    needs: [preview-build, browser]
+    if: always() && github.event_name == 'pull_request' && vars.PR_PREVIEWS != 'off'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download the pristine preview (without test fixtures)
+        if: needs.preview-build.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          name: browser-preview-input
+          path: preview
+      - name: Collect all browser evidence
+        if: always() && needs.preview-build.result == 'success'
+        uses: actions/download-artifact@v4
+        with:
+          pattern: browser-review-*
+          path: review
+          merge-multiple: true
+      - name: Assemble the existing screenshot/comment artifact
+        if: always() && needs.preview-build.result == 'success'
+        run: |
+          if [ -d review/shots ]; then cp -R review/shots preview/shots; fi
       - name: Upload the preview
+        if: always() && needs.preview-build.result == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: pr-preview
           path: preview/
+          # Preserve the existing main-only publisher whitelist. Live search
+          # is off in previews, so the hidden agent profile is not required.
+          include-hidden-files: false
           retention-days: 7
+          compression-level: 1
           if-no-files-found: error
-
-      - name: Fail when a browser check failed
-        if: steps.smoke.outcome != 'success' || steps.sport_audit.outcome != 'success'
+      - name: Upload combined browser review
+        if: always() && needs.preview-build.result == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-review
+          path: review/
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: warn
+      - name: Check every suite and publish timing summary
+        if: always()
+        run: node ci/summarize_browser_runs.cjs review
+      - name: Require the build and every browser group to pass
+        if: always()
+        env:
+          BUILD_RESULT: ${{ needs.preview-build.result }}
+          BROWSER_RESULT: ${{ needs.browser.result }}
         run: |
-          echo "::error::A browser check failed; see the step above and the PR comment."
-          exit 1
+          test "$BUILD_RESULT" = success
+          test "$BROWSER_RESULT" = success

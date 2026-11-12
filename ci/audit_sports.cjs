@@ -194,7 +194,7 @@ async function main(){
    await page.close();
   }
   const fixturePath=path.join(site,'audit-fixtures','manifest.json');
-  if(fs.existsSync(fixturePath)) {
+  if(process.env.AUDIT_FIXTURES!=='off'&&fs.existsSync(fixturePath)) {
    const fixtures=JSON.parse(fs.readFileSync(fixturePath));
    for(const width of [1440,390]) for(const [sport,fixture] of Object.entries(fixtures)) {
     await check(sport,width,'Synthetic same-variant, missing-spec, sold-out and price boundaries',async()=>{
