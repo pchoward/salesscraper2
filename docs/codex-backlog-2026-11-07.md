@@ -172,3 +172,42 @@ Checked by Codex, 2026-11-07.
 - Pick Seats & Posts from the top menu.
 - Check that the breadcrumbs read `BMX / Seats & Posts`, no Protects chip is shown, the result count equals the category's full count, and no top-menu category with items is disabled.
 - Press Back and check that the Protection view with Wrists returns.
+
+## 12. Phone filters: a full-screen sheet with a "Show N deals" button
+**Owner, 2026-11-12, on an iPhone (390 px).** They compared our Skate › Wheels view with Tactics' skateboard wheels page and want ours to work like Tactics. This makes task 8 concrete for the results view and the filters; do it first.
+
+**What Tactics does well:**
+- The landing view is the title, the result count and one large **Filters** button, then products.
+- **Filters open full screen.** A sticky bar at the top has a back arrow and **"Apply 139 Results"** with the live count; tapping it closes the filters.
+- Brands show the top few plus **"More Brands +"**. Sizes are a grid of tappable chips.
+
+**What ours does now (same width):**
+- **Bug: the sort row overlaps.** "Group across stores" sits on top of the `% off` sort box (the right part of the box is covered).
+- The filter drawer covers about 90% of the width, so the page shows behind it and the header stays above it. There's no "show results" button: the only way out is ✕, and the result count isn't visible while filtering.
+- Before the first deal card there are seven rows: site header, search, Deals/Track/Insights/Subscribe, sport tabs and category, stores, breadcrumbs, the New/Price drops/Hit lowest/Disappeared tabs, count, sort and filters, chips. Cards start about 60% down the first screen; Tactics' start about halfway.
+
+**Wanted, at phone widths only (≤ 640 px). Desktop is unchanged:**
+1. **Full-screen filter sheet.** It covers the whole viewport, header included, and the page behind it doesn't scroll.
+   - **Top bar (sticky):** a back/close control on the left, the title "Filters", and **Clear all** on the right.
+   - **Bottom bar (sticky, thumb reach):** a full-width button **"Show 73 deals"** with the live count, updating as filters change ("Show 0 deals" disabled, with a hint to clear a filter). Tapping it closes the sheet and scrolls to the first card.
+   - Filters keep applying live as today; the button just closes the sheet. Back (browser or swipe) closes the sheet and doesn't leave the page.
+2. **Inside the sheet:**
+   - Sections stay collapsible. The first two sections open by default, plus any section with an active pick.
+   - **Brand:** keep the search box and counts, but show the top 8 by count, then **"More brands (N) +"**. Active brands always show.
+   - Chip sections (wheel diameter, deck width, sizes) wrap in a grid with 44 px tap targets.
+3. **Sort row.** Put **Sort** and **Group across stores** on separate lines, or move "Group across stores" into the sort menu as an option. Nothing may overlap at 320–430 px.
+4. **One clear Filters button** in the results bar: full width or prominent, showing the active count ("Filters · 1").
+5. **Card names: three lines on phones.** Names are clamped to two lines today. At 390 px, two different TGM wheels, "Satori Skateboard Wheels 52mm Brian Delatorre …", both cut off at "Brian…" and look like duplicates. On phones, clamp the name to 3 lines and show the full name as the link's `title`/accessible name. Desktop stays at its current clamp.
+6. **Less chrome above the cards (optional; owner to approve in the PR screenshots).** On phones, the New/Price drops/Hit lowest/Disappeared tabs can collapse into one "All deals ▾" picker, and the stores row can move into the filter sheet under **Store**.
+
+**Keep unchanged:** URL parameters, saved views, `localStorage` keys, and filter behaviour and counts (this is layout only). Desktop layout stays as it is.
+
+**Tests:**
+- Extend the phone checks in `ci/` (pattern: `ci/check_category_navigation.cjs`) at 390 × 844 and 320 × 640:
+  - Open Skate › Wheels; the sort box and "Group across stores" don't overlap (bounding boxes).
+  - Open Filters; the sheet fills the viewport and the page behind it doesn't scroll.
+  - Pick a brand; the button count matches the results count after closing.
+  - "Show N deals" closes the sheet; browser Back from the open sheet closes it and stays on the page.
+  - A card name longer than two lines shows three lines at 390 px.
+- Run on all four sports.
+- **PR:** before/after phone screenshots of Skate › Wheels results, the open sheet, and the BMX and Ski equivalents.
