@@ -73,7 +73,9 @@ jobs:
     # Pinned: Playwright 1.56.1 supports Ubuntu 24.04 but not 26.04 (the
     # current ubuntu-latest). Move both together when upgrading.
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    # Raised from 20 (2026-11-12): the browser checks grew to 18-20 minutes
+    # (#270 19.5, #271 18.6) and #272 was cut off at the limit.
+    timeout-minutes: 35
     permissions:
       contents: read
     steps:
