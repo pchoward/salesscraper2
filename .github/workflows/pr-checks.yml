@@ -149,6 +149,9 @@ jobs:
       - name: Full-screen phone filters and desktop preservation
         run: node ci/check_phone_filters.cjs preview/site "${{ runner.temp }}/category-navigation-results/phone-filters"
 
+      - name: Opt-in Shopify live-search browser checks (mocked network)
+        run: node ci/check_catalog_search.cjs preview/site "${{ runner.temp }}/category-navigation-results/live-catalog"
+
       - name: Upload category navigation screenshots
         if: always()
         uses: actions/upload-artifact@v4

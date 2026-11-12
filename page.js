@@ -2086,6 +2086,8 @@ function queueFilters() {
 
 let crumbBatch = false;
 
+let liveCatalogSearch = null;
+
 function applyFilters() {
     if (crumbBatch) return;
     matchMemo = new Map();
@@ -2119,6 +2121,7 @@ function applyFilters() {
     fitCardPhotos();
     // search/search-ui.js: chips, highlights, close matches.
     if (typeof afterSearchFilters === "function") afterSearchFilters();
+    if (typeof liveCatalogSearch !== 'undefined') liveCatalogSearch?.sync();
 }
 
 function paintKeepaCounts() {
@@ -4954,6 +4957,7 @@ function closeProduct() {
 let navMode = "deals";
 
 function paintNav() {
+    if (typeof liveCatalogSearch !== 'undefined') liveCatalogSearch?.sync();
     const mode = navMode === "insights" ? "insights" : (state.watching ? "track" : "deals");
     [
         ["navDeals", "deals"],
@@ -6868,6 +6872,10 @@ function init() {
     const bar = document.getElementById("stickyBar");
     if (bar && window.ResizeObserver) new ResizeObserver(measureBar).observe(bar);
     const search = document.getElementById("searchInput");
+    if (typeof ShredCatalogSearch !== 'undefined') liveCatalogSearch = ShredCatalogSearch.mount(window, {
+        sport: () => typeof SPORT_SETTINGS === 'undefined' ? 'skate' : SPORT_SETTINGS.id,
+        allowed: () => navMode === 'deals' && !state.watching,
+    });
     if (search) search.addEventListener("input", () => {
         syncSearchSort();
         queueFilters();

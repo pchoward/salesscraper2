@@ -92,6 +92,13 @@ def publish(output=SOURCE, catalogs=None):
     for name in ('navigation.js','navigation.css','skate-bridge.js'):
         if (assets/name).is_symlink():raise ValueError('Public assets must not be symlinks')
         shutil.copyfile(HERE/name,assets/name)
+    # Jekyll explicitly includes this hidden directory in _config.yml.
+    profile = output / '.well-known' / 'ucp-agent.json'
+    if profile.parent.is_symlink() or profile.is_symlink():
+        raise ValueError('Public assets must not be symlinks')
+    profile.parent.mkdir(exist_ok=True)
+    if profile != SOURCE / '.well-known' / 'ucp-agent.json':
+        shutil.copyfile(SOURCE / '.well-known' / 'ucp-agent.json', profile)
     publish_categories(output, config)
     if any(sport['id'] == 'mtb' and sport.get('catalog') for sport in config['sports']):
         from explore.public import publish_demo

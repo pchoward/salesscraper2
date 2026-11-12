@@ -38,7 +38,7 @@ class PreviewBuildTests(unittest.TestCase):
     def test_the_built_preview_has_no_live_alerts_or_analytics(self):
         with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as data_root:
             files = build_preview.build(directory, "PR #1 test", data_root=data_root)
-            self.assertEqual(files, ["_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
+            self.assertEqual(files, [".well-known", "_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
             home = (Path(directory) / "index.html").read_text(encoding="utf-8")
             self.assertIn("ShredDeals", home)
             self.assertNotIn("http-equiv=\"refresh\"", home)

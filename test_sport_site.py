@@ -64,7 +64,7 @@ class PreviewSiteTests(unittest.TestCase):
     def test_without_sport_data_the_preview_is_unchanged(self):
         with tempfile.TemporaryDirectory() as data_root, tempfile.TemporaryDirectory() as out:
             files = build_preview.build(out, "test", data_root=data_root)
-            self.assertEqual(files, ["_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
+            self.assertEqual(files, [".well-known", "_headers", "history.json", "index.html", "navigation", "sale_items_chart.html"])
 
     def test_published_homepage_without_catalogs_has_only_skate(self):
         from previews.publish import publish

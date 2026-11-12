@@ -82,7 +82,7 @@ class AudienceTests(unittest.TestCase):
         excluded = {json.loads(line[4:]) for line in Path('_config.yml').read_text().splitlines() if line.startswith('  - ')}
         self.assertFalse(Path('.nojekyll').exists(), 'Pages must honor Jekyll exclusions')
         # CNAME: the custom domain (shreddeals.com, 2026-11-03); Pages must serve it.
-        public = {'_config.yml', 'CNAME', 'index.html', 'navigation', 'discover', 'bmx', 'ski', 'mtb', 'sale_items_chart.html', 'history.json', 'page.css', 'mobile.css', 'page.js'}
+        public = {'.well-known', '_config.yml', 'CNAME', 'index.html', 'navigation', 'discover', 'bmx', 'ski', 'mtb', 'sale_items_chart.html', 'history.json', 'page.css', 'mobile.css', 'page.js'}
         roots = {path.split('/')[0] for path in subprocess.check_output(['git','ls-files'], text=True).splitlines()}
         self.assertEqual(roots - excluded - public, set())
         for path in ('scrape_health.json', 'previous_data.json', 'price_history.json',
