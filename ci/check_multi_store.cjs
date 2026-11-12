@@ -22,7 +22,9 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
   }
   if(baseline&&width!==320){const old=await visit(baseline.base+url);await stores(old);await page.screenshot({path:path.join(out,`${sport}-${width}-before.png`)});}
   let frame=await visit();
-  const all=await frame.locator('.deal-row').evaluateAll(nodes=>nodes.map(n=>({id:n.id,store:n.dataset.store,part:n.dataset.part,brand:n.dataset.brand,price:Number(n.dataset.price)})));
+  // "Disappeared" cards (data-removed=1) stay hidden under All deals by design,
+  // so they are never part of what a store pick should show.
+  const all=(await frame.locator('.deal-row').evaluateAll(nodes=>nodes.map(n=>({id:n.id,store:n.dataset.store,part:n.dataset.part,brand:n.dataset.brand,price:Number(n.dataset.price),removed:n.dataset.removed==='1'})))).filter(r=>!r.removed);
   const names=[...new Set(all.map(r=>r.store))];assert(names.length>=2,'catalog needs at least two stores');
   const chosen=sport==='skate'&&names.includes('CCS')&&names.includes('Tactics')?['CCS','Tactics']:names.sort((a,b)=>all.filter(r=>r.store===b).length-all.filter(r=>r.store===a).length).slice(0,2);
   const expected=all.filter(r=>chosen.includes(r.store)).map(r=>r.id).sort();
