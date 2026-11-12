@@ -211,3 +211,6 @@ Checked by Codex, 2026-11-07.
   - A card name longer than two lines shows three lines at 390 px.
 - Run on all four sports.
 - **PR:** before/after phone screenshots of Skate › Wheels results, the open sheet, and the BMX and Ski equivalents.
+
+## 13. Live search across Shopify shops ("More deals from other shops")
+See `docs/live-search-catalog.md`: a Worker route that calls Shopify's Global Catalog when a shopper searches, plus a results section below our own search results, with only marked-down items, Shopify's attribution kept and a 10-minute cache at most. **Nothing from it is stored in our catalog.** It's behind a flag that stays off until the owner deploys the Worker and creates a Catalog API client. Promoted placements (paid) are out unless the owner asks.
