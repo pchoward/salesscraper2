@@ -150,6 +150,11 @@ def _run(args, sport):
         from sports import brands
         for items in (curr_data or {}).values():
             brands.settle(items, sport.aliases_file())
+    # Demo gear stays listed with a "Demo" condition (sports/condition.py).
+    from sports import condition
+    demos = condition.label_items(curr_data)
+    if demos:
+        logging.info("Labelled %s demo listings", demos)
     _log_filter_counts(scrapers, curr_data)
     if sport.is_default and os.environ.get("SALE_WATCH") == "1":
         # Sale sections no scraper reads (Black Friday collections, homepage
