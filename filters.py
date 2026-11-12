@@ -406,11 +406,22 @@ def use_sport_rules(rule):
 MIN_PERCENT_OFF = 5.0
 
 
+# Clutter (owner, 2026-11-12): nothing under $2 is listed, whatever its
+# markdown (50-cent headset spacers, an 85-cent cable strap).
+MIN_PRICE = 2.0
+
+
 def _minimum_markdown_reason(price_new, price_old):
-    """A reason when both prices are known and the markdown is under 10%.
+    """A reason when the price is under $2, or both prices are known and the
+    markdown is under the minimum.
 
     A listing with no regular price (a history check, a store that shows no
-    "was" price) is left to the other rules."""
+    "was" price) is otherwise left to the other rules."""
+    try:
+        if price_new not in (None, "") and float(price_new) < MIN_PRICE:
+            return f"under ${MIN_PRICE:.0f}"
+    except (TypeError, ValueError):
+        pass
     if price_new in (None, "") or price_old in (None, ""):
         return None
     percent = percent_off_value(price_new, price_old)
