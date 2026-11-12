@@ -109,6 +109,37 @@
         const stuffToggle = doc.getElementById('myStuffToggle');
         const stuffName = doc.getElementById('myStuffName');
         let stuffReady = false, stuffReturnTabIndex = null;
+        let phoneFiltersActive=false, phoneFiltersScroll=false, headerWasInert=false;
+        function paintPhoneFiltersHost(open) {
+            const header=doc.querySelector('.shell-header');
+            if(open)headerWasInert=header.inert;
+            header.inert=open?true:headerWasInert;
+            doc.body.classList.toggle('phone-filters-open',open);
+        }
+        function openPhoneFilters() {
+            if(phoneFiltersActive||!win.matchMedia('(max-width: 640px)').matches)return;
+            closeCategories();closeMyStuff();phoneFiltersActive=true;phoneFiltersScroll=false;
+            win.history.pushState({...win.history.state,phoneFilters:1},'',win.location.href);
+            paintPhoneFiltersHost(true);
+        }
+        function closePhoneFilters(scroll=false) {
+            if(!phoneFiltersActive)return;
+            phoneFiltersScroll=scroll;win.history.back();
+        }
+        function finishPhoneFilters() {
+            phoneFiltersActive=false;paintPhoneFiltersHost(false);
+            const child=frame.contentWindow;
+            // The picks apply live: consume only the sheet's history entry,
+            // retaining the current catalog query rather than undoing a pick.
+            try {
+                const next=mergeSkateURL(win.location.href,child.location.href,config,state(win.location.href,config).sport.id);
+                win.history.replaceState({skateState:child.history.state},'',next);
+                frame.dataset.currentURL=catalogURL(next,config,state(next,config).sport.id).href;
+                syncSearch(next);
+            }catch(_){}
+            child.dispatchEvent(new child.CustomEvent('phonefiltersclose',{detail:{scroll:phoneFiltersScroll}}));
+            phoneFiltersScroll=false;
+        }
         function closeMyStuff(focus=false) {
             if (stuffPanel.hidden) return;
             stuffPanel.hidden = true;
@@ -519,7 +550,17 @@
                 target.scrollIntoView({ block: "nearest", inline: "nearest" });
             }
         }
-        win.addEventListener("popstate", event => { render(); restoreFrame(event.state); });
+        win.addEventListener("popstate", event => {
+            if(phoneFiltersActive){finishPhoneFilters();return;}
+            if(event.state?.phoneFilters&&win.matchMedia('(max-width: 640px)').matches){
+                const expected=catalogURL(win.location.href,config,state(win.location.href,config).sport.id);
+                if(frame.dataset.currentURL===expected.href){
+                    phoneFiltersActive=true;paintPhoneFiltersHost(true);
+                    frame.contentWindow.dispatchEvent(new frame.contentWindow.CustomEvent('phonefiltersopen'));return;
+                }
+            }
+            render();restoreFrame(event.state);
+        });
         win.addEventListener("message", event => {
             if (event.origin !== win.location.origin || event.source !== frame.contentWindow || !event.data) return;
             const current = state(win.location.href, config).sport;
@@ -552,14 +593,16 @@
                 // Cache the shell's logical URL, including retained unknown keys,
                 // rather than reloading whenever the embedded normalizer drops one.
                 frame.dataset.currentURL = catalogURL(next, config, currentSport).href;
-                const method = event.data.action === "push" ? "pushState" : "replaceState";
-                win.history[method]({ skateState: event.data.state || null }, "", next);
+                const method = !phoneFiltersActive&&event.data.action === "push" ? "pushState" : "replaceState";
+                const value={skateState:event.data.state || null};
+                if(phoneFiltersActive)value.phoneFilters=1;
+                win.history[method](value, "", next);
             } catch (_) { /* Ignore foreign paths and malformed messages. */ }
         });
         brand.addEventListener("click", () => choose("skate", "sport"));
         doc.getElementById("backToSkate").addEventListener("click", () => choose("skate", "sport"));
         render();
-        return { render, choose, chooseView, state: () => state(win.location.href, config), closeCategories, registerCategories, bridgeVersion: config.bridgeVersion };
+        return { render, choose, chooseView, state: () => state(win.location.href, config), closeCategories, registerCategories, openPhoneFilters, closePhoneFilters, bridgeVersion: config.bridgeVersion };
     }
     return { state, navigate, categoryURL, baseCategoryCounts, skateURL, catalogURL, mergeSkateURL, nextIndex, mount };
 });

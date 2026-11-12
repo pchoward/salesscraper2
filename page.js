@@ -3623,7 +3623,9 @@ function commitHistory(query, mode) {
     const target = historyUrl(query);
     const current = location.pathname + location.search;
     if (current !== target) {
-        const data = { view: query };
+        const sheetOpen=typeof phoneFilterSheet!=="undefined"&&phoneFilterSheet?.isOpen();
+        const data = sheetOpen ? {view:query,phoneFilters:1} : {view:query};
+        if (sheetOpen) mode="replace";
         if (mode === "push") history.pushState(data, "", target);
         else history.replaceState(data, "", target);
     }
@@ -3961,6 +3963,7 @@ function closeSparkPanel() {
 
 const LAYOUT_KEY = "salesscraper2.layout";
 // Keep in step with the media query at the top of mobile.css.
+let phoneFilterSheet = null;
 const PHONE_QUERY = "(max-width: 800px), (max-height: 500px) and (pointer: coarse)";
 const STORE_COLOR = {
     Zumiez: "#be185d",
@@ -6205,6 +6208,7 @@ function pushQuickHistory() {
 }
 
 function onPagePopState(event) {
+    if (typeof phoneFilterSheet!=="undefined"&&phoneFilterSheet?.pop(event)) return;
     if (suppressQuickPop) {
         suppressQuickPop = false;
         return;
@@ -6826,8 +6830,16 @@ function init() {
     const filtersOpen = document.getElementById("filtersOpen");
     const filtersClose = document.getElementById("filtersClose");
     const filterDrawer = document.getElementById("filterDrawer");
+    if(typeof ShredPhoneFilters!=="undefined")phoneFilterSheet=ShredPhoneFilters.mount(window,{
+        count:()=>parseInt(document.getElementById('statusCounts')?.textContent||'0',10)||0,
+        section:paintFilterSection,query:currentQuery,restore:restoreFromUrl,
+        results:()=>[...document.querySelectorAll('#cardGrid .deal-card:not(.filtered-out), #groupBoard .group-card, #emptyState')].find(node=>node.getClientRects().length)?.scrollIntoView({block:'start'})
+    });
     function setFilters(open) {
         if (!filterDrawer) return;
+        if(phoneFilterSheet&&(phoneFilterSheet.isPhone()||phoneFilterSheet.isOpen())){
+            if(open)phoneFilterSheet.open();else phoneFilterSheet.close(false);return;
+        }
         filterDrawer.classList.toggle("is-open", open);
         document.body.classList.toggle("filters-open", open);
     }
@@ -7049,7 +7061,7 @@ function init() {
     });
     document.querySelectorAll(".filters-done").forEach(button => {
         if (button.id === "filtersClose") return;
-        button.addEventListener("click", () => setFilters(false));
+        button.addEventListener("click", () => {if(phoneFilterSheet?.isPhone())phoneFilterSheet.close(true);else setFilters(false);});
     });
     document.addEventListener("click", event => {
         if (!filterDrawer || !filterDrawer.classList.contains("is-open")) return;

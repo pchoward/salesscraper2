@@ -10,11 +10,11 @@ async function main(){
  const prior=before?await serve(before):null;
  const browser=await chromium.launch({executablePath:process.env.BROWSER_BINARY,args:['--no-sandbox','--disable-dev-shm-usage']});
  const results=[];
- const widths=(process.env.CATEGORY_WIDTHS||'1440,1024,768,430,390').split(',').map(Number);
+ const widths=(process.env.CATEGORY_WIDTHS||'1440,1024,768,430,390,320').split(',').map(Number);
  try{
   for(const width of widths)for(const sport of ['skate','ski','mtb','bmx']){
    console.log('Category navigation',sport,width);
-   const page=await browser.newPage({viewport:{width,height:950}});const errors=[];
+   const page=await browser.newPage({viewport:{width,height:width===320?640:width===390?844:950}});const errors=[];
    page.on('pageerror',e=>errors.push(String(e)));
    await page.route('**/*',r=>[base,prior?.base].includes(new URL(r.request().url()).origin)?r.continue():r.abort());
    const frame=async()=>await(await page.waitForSelector('#skateFrame')).contentFrame();
@@ -59,6 +59,12 @@ async function main(){
     await page.goto(prior.base+'/?sport='+sport);const old=await frame();await old.waitForSelector('.deal-row',{state:'attached'});
     await old.evaluate(part=>filterByPart(part),({skate:'Wheels',ski:'Skis',mtb:'Suspension',bmx:'Bikes'})[sport]);
     await page.waitForTimeout(150);await page.screenshot({path:path.join(output,`before-${sport}-${width}.png`)});
+   }
+   if(prior&&sport==='bmx'&&width<=390){
+    await page.goto(prior.base+'/?sport=bmx&type=seats-posts&bmx_protects=Wrists%2CElbows&brand=supacaz');
+    const old=await frame();await old.waitForFunction(()=>typeof state!=='undefined'&&state.part==='Seats & Posts');
+    await page.screenshot({path:path.join(output,`before-stale-${width}.png`)});
+    await page.locator('#categoryToggle').click();await page.screenshot({path:path.join(output,`before-menu-${width}.png`)});
    }
    await page.goto(base+'/?sport='+sport);await ready();let child=await frame();await counts();
    assert.equal(await child.locator('#partFilters').isVisible(),false,'duplicate Products row must be hidden');
@@ -105,11 +111,22 @@ async function main(){
    if(sport==='bmx'){
     // #254 primary brief / #255 acceptance: fresh top navigation, deliberate URLs preserved.
     await select('Protection');
-    await child.evaluate(()=>{SportSpecFilters.restore({protects:['Wrists','Elbows']});applyFilters();});
+    const phone=width<=640;
+    if(phone){
+     await child.locator('#filtersOpen').click();await child.waitForFunction(()=>phoneFilterSheet?.isOpen());
+     const protects=child.locator('[data-technical-field="protects"] .filter-section');
+     if(!await protects.evaluate(n=>n.classList.contains('is-open')))await protects.locator(':scope > .section-toggle').click();
+     await protects.locator('[data-value="Wrists"]').click();await protects.locator('[data-value="Elbows"]').click();
+    }else await child.evaluate(()=>{SportSpecFilters.restore({protects:['Wrists','Elbows']});applyFilters();});
     await page.waitForURL(url=>url.searchParams.has('bmx_protects'));
     await child.waitForFunction(()=>document.querySelectorAll('.deal-row:not(.filtered-out)').length>0);
     const sample=await child.locator('.deal-row:not(.filtered-out)').first().evaluate(n=>({brand:n.dataset.brand,store:n.dataset.store}));
     await input('brandSelect',sample.brand);await input('storeSelect',sample.store);await input('priceMax','1');
+    if(phone){
+     assert(await child.locator('.show-results').isDisabled(),'zero results can still be exited with Back');
+     await child.locator('#filtersClose').click();await child.waitForFunction(()=>!phoneFilterSheet.isOpen());
+     await page.waitForURL(url=>url.searchParams.get('max')==='1');
+    }
     const priorURL=page.url();
     const priorState=await child.evaluate(()=>({technical:SportSpecFilters.capture(),brand:state.brand,store:state.store,priceMax:state.priceMax}));
     const seatsTotal=Number(await page.locator('#categoryChoices [data-part="Seats & Posts"]').getAttribute('data-count'));
@@ -121,11 +138,13 @@ async function main(){
     assert.equal(await child.locator('#storeSelect').inputValue(),'all');
     assert.equal(await child.locator('#priceMax').inputValue(),'');
     assert.equal(new URL(page.url()).searchParams.has('bmx_protects'),false);
-    if(width===1440||width===390)await page.screenshot({path:path.join(output,`fresh-seats-${width}.png`)});
+    if(width===1440||width===390||width===320)await page.screenshot({path:path.join(output,`fresh-seats-${width}.png`)});
     await page.goBack();await ready();await counts();
     assert.equal(page.url(),priorURL);
+    if(phone)assert.equal(await child.evaluate(()=>phoneFilterSheet.isOpen()),false,'category Back restores filters without reopening an old sheet');
     assert.deepEqual(await child.evaluate(()=>({technical:SportSpecFilters.capture(),brand:state.brand,store:state.store,priceMax:state.priceMax})),priorState);
     assert.match(await child.locator('#breadcrumbs').innerText(),/Wrists/);
+    if(width<=390)await page.screenshot({path:path.join(output,`restored-protection-${width}.png`)});
     await page.goForward();await ready();await counts();
     const supacaz=await child.evaluate(()=>{const node=document.getElementById('brandSelect');return Array.from(node._facetPool||node.options).find(o=>o.value.toLowerCase()==='supacaz')?.value;});
     assert(supacaz,'catalog has the reported Supacaz brand');await input('brandSelect',supacaz);
@@ -138,6 +157,11 @@ async function main(){
     assert.doesNotMatch(await child.locator('#breadcrumbs').innerText(),/Wrists|Elbows/);
     assert.doesNotMatch(await child.locator('#activeChips').innerText(),/Protects|Wrists|Elbows/);
     assert.match(await child.evaluate(()=>encodeState(captureState())),/bmx_protects=Wrists%2CElbows/);
+    if(width<=390){
+     await page.screenshot({path:path.join(output,`after-stale-${width}.png`)});
+     await page.locator('#categoryToggle').click();await page.screenshot({path:path.join(output,`after-menu-${width}.png`)});
+     await page.locator('#categoryClose').click();
+    }
     const saved=await child.evaluate(()=>encodeState(captureState()));
     await child.evaluate(query=>{applySnapshot(decodeQuery(query));},saved);
     await counts();
