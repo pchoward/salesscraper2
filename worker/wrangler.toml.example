@@ -28,6 +28,7 @@ EMAIL_FROM = "SkateDeals <alerts@your-verified-domain.example>"   # staging may 
 MAX_ACTIVE_SUBSCRIBERS = "200"
 MAX_RULES_PER_SUBSCRIBER = "10"
 DAILY_EMAILS_PER_SUBSCRIBER = "3"
+CATALOG_SEARCH_ENABLED = "false"                     # opt-in live Catalog route; independent of alerts mode
 
 [[d1_databases]]
 binding = "DB"
@@ -40,3 +41,11 @@ crons = ["37 4 * * *"]                             # daily retention cleanup (UT
 
 [observability]
 enabled = true
+
+# Optional live Shopify Catalog search (off until the owner opts in).
+# CATALOG_SEARCH_ENABLED is in [vars] above. Catalog uses DB and TOKEN_PEPPER
+# for shared rate counters; no Catalog product/query data is written there.
+# Worker secrets (after the owner creates a Shopify Catalog API client):
+#   wrangler secret put SHOPIFY_CATALOG_CLIENT_ID
+#   wrangler secret put SHOPIFY_CATALOG_CLIENT_SECRET
+# See docs/live-search-implementation.md for the separate page flag and rollout.

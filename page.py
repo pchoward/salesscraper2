@@ -215,6 +215,10 @@ ALERTS_UI_CONFIG = {
     "apiBase": "https://skatedeals-alerts.pchoward.workers.dev",
     "turnstileSiteKey": "0x4AAAAAAFjwOIPFNNUHi29X",
 }
+# Enable only after the owner deploys/configures the Worker and Catalog client.
+# This is public configuration; API credentials belong in Worker secrets only.
+LIVE_CATALOG_UI_CONFIG = {"enabled": False, "apiBase": ""}
+
 _BRAND_ALIAS = {
     "anti hero": "Anti-Hero",
     "antihero": "Anti-Hero",
@@ -2803,6 +2807,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     card_chunks.append("</template>")
     chunks.append("".join(card_chunks))
     chunks.append(_group_board(records))
+    chunks.append('<section id="liveCatalogDeals" class="catalog-live" aria-labelledby="liveCatalogTitle" hidden>'
+                  '<h2 id="liveCatalogTitle">More deals from other shops</h2>'
+                  '<p class="catalog-live-disclosure">Results from Shopify Catalog. Prices and stock from each shop; check before you buy.</p>'
+                  '<div id="liveCatalogGrid" class="catalog-live-grid"></div></section>')
     chunks.append("</div></div>")
     chunks.append(stats_html)
 
@@ -2882,6 +2890,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     # Subscriber alerts are Skate-only until a sport opts in (sports/__init__.py
     # delivery); without the config page.js shows alerts as "coming soon".
     chunks.append(_alerts_config_script() if sport.delivery else "")
+    catalog_config = {"enabled": LIVE_CATALOG_UI_CONFIG.get("enabled") is True,
+                      "apiBase": str(LIVE_CATALOG_UI_CONFIG.get("apiBase") or "")}
+    chunks.append('<script type="application/json" id="liveCatalogSettings">' +
+                  json.dumps(catalog_config).replace("<", "\\u003c") + '</script>')
     length_literal = json.dumps(
         [
             {
@@ -2914,7 +2926,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"const LENGTH_BUCKETS = {length_literal};\n"
         f"const WHEELBASE_BUCKETS = {json.dumps([{key: bucket[key] for key in ('id', 'label', 'min', 'max')} for bucket in wheel_buckets])};\n"
         f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
-        f"{_read_asset('phone-filters.js')}\n{_read_asset('page.js')}</script>"
+        f"{_read_asset('phone-filters.js')}\n{_read_asset('catalog-search.js')}\n{_read_asset('page.js')}</script>"
     )
     chunks.append(f"<script>{_read_asset('search/search-ui.js')}</script>")
     chunks.append('''<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "542cbf4d24534b70be3715cefe0e6a8e"}'></script><!-- End Cloudflare Web Analytics -->''')

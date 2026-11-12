@@ -105,6 +105,7 @@ def build(out_dir, label="", data_root=None):
     out.mkdir(parents=True, exist_ok=True)
     # Alerts off: no production Worker URL or Turnstile key in the page.
     page.ALERTS_UI_CONFIG = {}
+    page.LIVE_CATALOG_UI_CONFIG = {"enabled": False, "apiBase": ""}
     try:
         html = build_report_html(**rebuild_page.load_report_inputs(
             ROOT / rebuild_page.INPUTS_PATH, ROOT / rebuild_page.DATA_PATH, ROOT / rebuild_page.HISTORY_PATH))

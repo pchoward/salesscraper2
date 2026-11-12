@@ -18,7 +18,7 @@ class ProductionNavigationTests(unittest.TestCase):
             path=publish(root)
             self.assertEqual({str(p.relative_to(root)) for p in root.rglob('*') if p.is_file()},
                              {'index.html','navigation/navigation.js','navigation/navigation.css','navigation/skate-bridge.js',
-                              'discover/view.js','discover/mtb-dirt-jump/index.html',
+                              'discover/view.js','discover/mtb-dirt-jump/index.html','.well-known/ucp-agent.json',
                               *{'navigation/'+sport+'-categories.json' for sport in ('skate','ski','mtb','bmx')}})
             html=path.read_text();soup=BeautifulSoup(html,'html.parser')
             config=json.loads(soup.select_one('#sportConfig').string)
@@ -68,7 +68,7 @@ class ProductionNavigationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);publish(root)
             for relative in ('index.html','navigation/navigation.js','navigation/navigation.css','navigation/skate-bridge.js',
-                             'discover/view.js','discover/mtb-dirt-jump/index.html',
+                             'discover/view.js','discover/mtb-dirt-jump/index.html','.well-known/ucp-agent.json',
                              *('navigation/'+sport+'-categories.json' for sport in ('skate','ski','mtb','bmx'))):
                 self.assertEqual((root/relative).read_bytes(),(SOURCE/relative).read_bytes())
         config=(SOURCE/'_config.yml').read_text()

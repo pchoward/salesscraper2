@@ -1,6 +1,10 @@
 # Only the deal page and its assets belong on GitHub Pages.
 # Keep new internal roots excluded; regression tests enforce this boundary.
+include:
+  - ".well-known"
 exclude:
+  - "catalog-search.js"
+  - "test_catalog_search.py"
   - "explore"
   - "test_explore.py"
   - "test_mtb_catalog.py"

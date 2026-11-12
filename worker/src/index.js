@@ -17,6 +17,7 @@ import {
   verify,
 } from "./subscribers.js";
 import { resendWebhook } from "./webhooks.js";
+import { catalogSearch, pruneCatalogLimits } from "./catalog.js";
 
 const PUBLIC = {
   "/v1/subscribe": { POST: subscribe },
@@ -91,9 +92,10 @@ function health(request, config) {
  */
 export async function handle(request, env, deps = {}) {
   const url = new URL(request.url);
+  if (url.pathname === "/v1/catalog-search") return catalogSearch(request, env, deps);
   const config = loadConfig(env);
   if (url.pathname === "/v1/health") return health(request, config);
-  // Fail closed: no endpoint does anything while settings are incomplete.
+  // Email-alert routes fail closed while their settings are incomplete.
   if (!config.ok) {
     const browserFacing = Boolean(PUBLIC[url.pathname]) || url.pathname === "/v1/mock/outbox";
     const cors = browserFacing ? trustedCors(request, config) : {};
@@ -149,7 +151,10 @@ export default {
     return handle(request, env);
   },
   async scheduled(_event, env, ctx) {
-    if (!loadConfig(env).ok) return;
-    ctx.waitUntil(runMaintenance(env.DB));
+    if (loadConfig(env).ok) ctx.waitUntil(runMaintenance(env.DB));
+    else if (env.CATALOG_SEARCH_ENABLED === 'true' && env.DB?.prepare) {
+      // Catalog-only configuration still retires its opaque rate counters.
+      ctx.waitUntil(pruneCatalogLimits(env.DB));
+    }
   },
 };

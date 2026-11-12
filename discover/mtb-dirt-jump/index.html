@@ -3477,6 +3477,22 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 .store-choice[aria-pressed="true"] .store-check::after { content:'✓'; font-size:12px; line-height:1; }
 #storeList .facet-name { white-space:normal; overflow-wrap:anywhere; }
 
+/* Ephemeral Shopify results stay separate from our deal cards and filters. */
+.catalog-live { margin-top:24px; border-top:1px solid var(--grey-200, #d4dce6); padding-top:16px; }
+.catalog-live[hidden] { display:none; }
+.catalog-live h2 { font-size:1rem; margin:0 0 6px; }
+.catalog-live-disclosure { font-size:12px; color:#526074; margin:0 0 12px; }
+.catalog-live-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:10px; }
+.catalog-live-card { min-width:0; border:1px solid #d4dce6; background:#fff; padding:12px; }
+.catalog-live-link { display:block; color:inherit; font-weight:700; }
+.catalog-live-link img { width:100%; height:150px; object-fit:contain; }
+.catalog-live-title { display:block; overflow-wrap:anywhere; }
+.catalog-live-shop { font-size:12px; margin:8px 0; overflow-wrap:anywhere; }
+.catalog-live-shop small { display:block; color:#526074; }
+.catalog-live-price { display:flex; gap:8px; flex-wrap:wrap; font-size:12px; margin:0; }
+.catalog-live-price strong { color:#16703b; }
+@media(max-width:640px) { .catalog-live-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .catalog-live-card { padding:9px; } }
+
 body {background:var(--grey-50);font-size:13px}
 [hidden]{display:none!important}
 .topnav {display:flex;gap:28px;align-items:center;background:var(--nav);color:white;padding:0 12px;min-height:48px}
