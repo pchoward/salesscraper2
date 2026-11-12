@@ -1,0 +1,162 @@
+{
+  "baseline_github_job_seconds": 1553,
+  "baseline_github_job_url": "https://github.com/pchoward/salesscraper2/actions/runs/43266415886/job/131351071359",
+  "measurement_note": "Local four-core host. Groups validated with at most three concurrent groups; final navigation separately uses two concurrent width sets. These exclude CI setup/build/artifact time and are not an end-to-end GitHub measurement.",
+  "published_site_bytes": 118957243,
+  "groups": [
+    {
+      "shard": "audit-phone",
+      "started_at": "2026-11-12T18:31:11.838Z",
+      "tasks": [
+        {
+          "id": "audit-phone",
+          "status": "pass",
+          "duration_ms": 202434,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        }
+      ],
+      "duration_ms": 202434
+    },
+    {
+      "shard": "audit-wide",
+      "started_at": "2026-11-12T18:28:23.807Z",
+      "tasks": [
+        {
+          "id": "audit-wide",
+          "status": "pass",
+          "duration_ms": 296372,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        }
+      ],
+      "duration_ms": 296372
+    },
+    {
+      "shard": "controls",
+      "started_at": "2026-11-12T18:23:28.450Z",
+      "tasks": [
+        {
+          "id": "smoke",
+          "status": "pass",
+          "duration_ms": 31795,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "id": "sport-menus",
+          "status": "pass",
+          "duration_ms": 103382,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "id": "sidebar",
+          "status": "pass",
+          "duration_ms": 68458,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "id": "my-stuff",
+          "status": "pass",
+          "duration_ms": 70065,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "id": "explore",
+          "status": "pass",
+          "duration_ms": 21300,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        }
+      ],
+      "duration_ms": 295000
+    },
+    {
+      "shard": "filters",
+      "started_at": "2026-11-12T18:23:28.478Z",
+      "tasks": [
+        {
+          "id": "truck-fit",
+          "status": "pass",
+          "duration_ms": 14087,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "id": "multi-store",
+          "status": "pass",
+          "duration_ms": 186325,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "id": "phone-filters",
+          "status": "pass",
+          "duration_ms": 83494,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        }
+      ],
+      "duration_ms": 283906
+    },
+    {
+      "shard": "navigation",
+      "started_at": "2026-11-12T18:40:10.021Z",
+      "tasks": [
+        {
+          "id": "categories-wide",
+          "status": "pass",
+          "duration_ms": 215127,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "id": "categories-phone",
+          "status": "pass",
+          "duration_ms": 212574,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        }
+      ],
+      "duration_ms": 215128
+    },
+    {
+      "shard": "search",
+      "started_at": "2026-11-12T18:28:12.970Z",
+      "tasks": [
+        {
+          "id": "catalog-search",
+          "status": "pass",
+          "duration_ms": 216441,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        },
+        {
+          "id": "header-search",
+          "status": "pass",
+          "duration_ms": 97598,
+          "timed_out": false,
+          "code": 0,
+          "signal": null
+        }
+      ],
+      "duration_ms": 314039
+    }
+  ]
+}
