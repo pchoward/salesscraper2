@@ -919,7 +919,7 @@ function paintSelectCounts(id, counts) {
     if (!select || !select.options) return;
     // Firefox ignores hidden and display on <option>, so a zero choice is
     // taken out of the list. The pool keeps it so a later filter can put it back.
-    if (!select._facetPool) select._facetPool = Array.from(select.options);
+    if (!select._facetPool) select._facetPool = Array.from(select.options).filter(option => !option.hasAttribute('data-multi-store'));
     const pool = select._facetPool;
     const current = select.value || "";
     pool.forEach(option => {
@@ -1014,7 +1014,20 @@ function paintFacetCounts() {
         const on = node.getAttribute("aria-pressed") === "true" || node.classList.contains("is-partial");
         markFacetOption(node, count, on);
     });
+    document.querySelectorAll('#storeList [data-store]').forEach(node => {
+        const name = node.dataset.store;
+        const count = name === 'all' ? Object.values(storeCounts).reduce((a,b) => a+b, 0) : storeCounts[name] || 0;
+        node.dataset.count = String(count);
+        node.querySelector('.facet-count').textContent = '(' + count + ')';
+        markFacetOption(node, count, name === 'all' || storeSelected(name));
+        if (name === 'all') node.classList.remove('is-zero');
+    });
+    // The compatibility select keeps its single-store options/counts. Its
+    // synthetic multi-selection is presentation only, never a retailer.
+    const legacySelect = document.getElementById('storeSelect');
+    legacySelect?.querySelector('[data-multi-store]')?.remove();
     paintSelectCounts("storeSelect", storeCounts);
+    syncStoreControls();
     paintSelectCounts("partSelect", partCounts);
     paintQuickRow("storeFilters", "data-store", storeCounts, state.store || "all");
     paintQuickRow("partFilters", "data-part", partCounts, state.part || DEFAULT_PART);
@@ -1221,7 +1234,7 @@ function syncColorSwatches(groupId, part) {
 function setPressed(selector, attr, value) {
     document.querySelectorAll(selector).forEach(node => {
         const current = node.getAttribute(attr) || "";
-        const on = current === value || (value === "all" && current === "all");
+        const on = attr === 'data-store' ? (current === 'all' ? value === 'all' : storeSelected(current, value)) : current === value;
         node.classList.toggle("active", on);
         if (node.hasAttribute("aria-pressed")) node.setAttribute("aria-pressed", on ? "true" : "false");
     });
@@ -1234,7 +1247,7 @@ function paintCards() {
         if (kind === "new") on = state.cardNew;
         if (kind === "drop") on = state.cardDrop;
         if (kind === "lowest") on = state.cardLow;
-        if (kind === "store") on = state.store !== "all" && card.getAttribute("data-store") === state.store;
+        if (kind === "store") on = storeSelected(card.getAttribute("data-store"));
         card.setAttribute("aria-pressed", on ? "true" : "false");
     });
     document.querySelectorAll("[data-change]").forEach(button => {
@@ -1513,7 +1526,7 @@ function rowMatchesNow(row, overrides) {
         (row.dataset.part !== "Trucks" || !TruckFit.options(row, truck, technicalPriceConstraints(over)).length)) return false;
     if (over.store == null && typed.stores) {
         if (typed.stores.indexOf(row.dataset.store || "") < 0) return false;
-    } else if (store !== "all" && (row.dataset.store || "") !== store) return false;
+    } else if (store !== "all" && !storeSelected(row.dataset.store || "", store)) return false;
     if (over.part == null && typed.parts) {
         if (typed.parts.indexOf(row.dataset.part || "") < 0) return false;
     } else if (part !== "all" && (row.dataset.part || "") !== part) return false;
@@ -2321,7 +2334,7 @@ function paintQuickRow(groupId, attr, counts, current) {
         const count = value === "all" ? total : (counts[value] || 0);
         const slot = node.querySelector(".quick-count");
         if (slot) slot.textContent = String(count);
-        const on = value === current;
+        const on = attr === 'data-store' ? (value === 'all' ? current === 'all' : storeSelected(value, current)) : value === current;
         node.classList.toggle("active", on);
         node.setAttribute("aria-pressed", on ? "true" : "false");
         node.setAttribute("data-count", String(count));
@@ -2450,11 +2463,44 @@ function paintTypeHint() {
     if (hint) hint.hidden = state.part !== "all";
 }
 
+// Keep the existing string-valued store state and URL key for old views.
+// Multiple stores are an OR list, sorted by their stable URL slugs.
+function selectedStores(value = state.store) {
+    return [...new Set(String(value || '').split(',').map(name => name.trim()).filter(name => name && name !== 'all'))]
+        .sort((a, b) => storeSlug(a).localeCompare(storeSlug(b), 'en'));
+}
+
+function storeSelection(value) {
+    return selectedStores(value).join(',') || 'all';
+}
+
+function storeSelected(name, value = state.store) {
+    return selectedStores(value).includes(name);
+}
+
+function syncStoreControls() {
+    const select = document.getElementById('storeSelect');
+    if (select) {
+        select.querySelector('[data-multi-store]')?.remove();
+        if (selectedStores().length > 1) {
+            const option = document.createElement('option');
+            option.value = state.store; option.textContent = selectedStores().join(', ');
+            option.dataset.multiStore = 'true'; select.appendChild(option);
+            select.value = state.store;
+        } else setSelect('storeSelect', state.store);
+    }
+    setPressed('#storeFilters [data-store], #storeList [data-store]', 'data-store', state.store);
+}
+
+function toggleStore(store) {
+    if (!store || store === 'all') return filterByStore('all');
+    const next = selectedStores();
+    filterByStore(next.includes(store) ? next.filter(name => name !== store).join(',') : next.concat(store).join(','));
+}
+
 function filterByStore(store) {
-    state.store = store || "all";
-    const select = document.getElementById("storeSelect");
-    if (select) select.value = state.store;
-    setPressed("#storeFilters [data-store]", "data-store", state.store);
+    state.store = storeSelection(store);
+    syncStoreControls();
     applyFilters();
 }
 
@@ -2572,10 +2618,8 @@ function toggleCard(kind, store) {
     else if (kind === "drop") state.cardDrop = !state.cardDrop;
     else if (kind === "lowest") state.cardLow = !state.cardLow;
     else if (kind === "store") {
-        state.store = state.store === store ? "all" : store;
-        const select = document.getElementById("storeSelect");
-        if (select) select.value = state.store;
-        setPressed("#storeFilters [data-store]", "data-store", state.store);
+        toggleStore(store);
+        return;
     } else if (kind === "clear") {
         state.cardNew = false;
         state.cardDrop = false;
@@ -3333,8 +3377,8 @@ function decodeQuery(query) {
         key = String(key || "").toLowerCase();
         if (key === "q") stateOut.q = value.trim();
         else if (key === "store") {
-            const store = slugStore(value);
-            if (store) stateOut.store = store;
+            const stores = value.split(',').map(slugStore).filter(Boolean);
+            if (stores.length) stateOut.store = storeSelection(stores.join(','));
         } else if (key === "type") {
             const part = slugType(value);
             if (part) stateOut.part = part;
@@ -3399,7 +3443,7 @@ function encodeState(snapshot) {
         params.set(key, text);
     }
     add("q", snapshot.q || "");
-    if (snapshot.store && snapshot.store !== "all") add("store", storeSlug(snapshot.store));
+    if (snapshot.store && snapshot.store !== "all") add("store", selectedStores(snapshot.store).map(storeSlug).join(','));
     // Missing type is Decks and stays out of the URL. All has to be written
     // with set(), because add() drops a bare "all".
     if (snapshot.part && snapshot.part !== DEFAULT_PART) {
@@ -3526,7 +3570,7 @@ function writeControls(snapshot) {
     if (typeof SportSpecFilters !== "undefined") SportSpecFilters.restore(snapshot.technical || {});
     const search = document.getElementById("searchInput");
     if (search) search.value = snapshot.q || "";
-    setSelect("storeSelect", snapshot.store || "all");
+
     setSelect("partSelect", snapshot.part || DEFAULT_PART);
     setSelect("brandSelect", snapshot.brand || "all");
     const chosenBrand = document.getElementById("brandSelect");
@@ -3546,7 +3590,7 @@ function writeControls(snapshot) {
     fill("scoreMin", snapshot.scoremin);
     fill("scoreMax", snapshot.scoremax);
     const partChanged = (snapshot.part || DEFAULT_PART) !== (state.part || DEFAULT_PART);
-    state.store = snapshot.store || "all";
+    state.store = storeSelection(snapshot.store);
     state.part = snapshot.part || DEFAULT_PART;
     state.widths = orderedWidths(snapshot.widths || []);
     state.brand = chosenBrand ? (chosenBrand.value || "all") : (snapshot.brand || "all");
@@ -3581,7 +3625,7 @@ function writeControls(snapshot) {
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
     const grouped = document.getElementById("groupToggle");
     if (grouped) grouped.setAttribute("aria-pressed", state.grouped ? "true" : "false");
-    setPressed("#storeFilters [data-store]", "data-store", state.store);
+    syncStoreControls();
     setPressed("#partFilters [data-part]", "data-part", state.part);
     paintWidthChips();
 }
@@ -4105,7 +4149,10 @@ function collectFilterActions() {
             applyFilters();
         }, { search: "" }, false);
     }
-    if (state.store !== "all") add("store", "Store: " + state.store, () => filterByStore("all"), { store: "all" });
+    selectedStores().forEach(store => {
+        const rest = storeSelection(selectedStores().filter(name => name !== store).join(','));
+        add('store:' + storeSlug(store), 'Store: ' + store, () => filterByStore(rest), { store: rest });
+    });
     if (state.part === DEFAULT_PART && DEFAULT_PART !== "all") {
         add("part", DEFAULT_PART, () => filterByPart("all"), { part: "all" }, false);
     } else if (state.part && state.part !== DEFAULT_PART) {
@@ -4297,7 +4344,7 @@ function goneRowMatches(row, over) {
     if (!searchHayMatches(row.dataset.search, search)) return false;
     if (lift.store == null && typed.stores) {
         if (typed.stores.indexOf(row.dataset.store || "") < 0) return false;
-    } else if (store !== "all" && (row.dataset.store || "") !== store) return false;
+    } else if (store !== "all" && !storeSelected(row.dataset.store || "", store)) return false;
     if (lift.part == null && typed.parts) {
         if (typed.parts.indexOf(row.dataset.part || "") < 0) return false;
     } else if (part !== "all" && (row.dataset.part || "") !== part) return false;
@@ -6859,6 +6906,10 @@ function init() {
     }
     const scoreInfo = document.getElementById("scoreInfo");
     if (scoreInfo) scoreInfo.addEventListener("click", event => event.stopPropagation());
+    document.getElementById('storeList')?.addEventListener('click', event => {
+        const button = event.target.closest('button[data-store]');
+        if (button) toggleStore(button.dataset.store);
+    });
     const storeSelect = document.getElementById("storeSelect");
     if (storeSelect) storeSelect.addEventListener("change", () => filterByStore(storeSelect.value));
     const partSelect = document.getElementById("partSelect");
@@ -6868,7 +6919,7 @@ function init() {
         storeFilters.addEventListener("click", event => {
             const button = event.target.closest(".quick-chip[data-store]");
             if (!button || !storeFilters.contains(button)) return;
-            filterByStore(button.getAttribute("data-store") || "all");
+            toggleStore(button.getAttribute("data-store") || "all");
         });
     }
     const partFilters = document.getElementById("partFilters");

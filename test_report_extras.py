@@ -316,7 +316,9 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn('id="partFilters"', rail)
         self.assertNotIn("quick-chip", rail)
         self.assertIn('id="storeSelect"', rail)
-        self.assertNotIn(">Stores<", rail)
+        self.assertIn(">Stores<", rail)
+        self.assertIn('id="storeList" role="group" aria-label="Stores"', rail)
+        self.assertIn('class="facet-value store-choice" data-store="Zumiez" aria-pressed="false"', rail)
         self.assertNotIn(">Products<", rail)
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
         nav_css = style.split(".nav-row {", 1)[1].split("}", 1)[0]
@@ -646,6 +648,8 @@ if (body.indexOf("if (!specKeyActive(facet.stateKey, viewPart)) continue;") < 0)
         # a query types no filters.
         matches += source[source.find("let searchIndex = null;"):source.find("function rowMatchesNow(")]
         matches += source[source.find("function goneRowMatches("):source.find("function revealCount(")]
+        matches += source[source.find("function selectedStores("):source.find("function syncStoreControls(")]
+        matches += source[source.find("function storeSlug("):source.find("function typeSlug(")]
         self.assertIn("compareSort(a, b, key, direction)", source[source.find("function sortBy("):source.find("function syncCardOrder(")])
         self.assertIn("compareSort(a, b, key, direction)", source[source.find("function sortSection("):source.find("function sectionMatches(")])
         script = """
@@ -668,6 +672,8 @@ const desc = rows.slice().sort((a, b) => compareSort(a, b, "price", "desc"));
 if (prices(desc) !== "40.00,19.00,12.50,") throw new Error("desc " + prices(desc));
 state.store = "Zumiez";
 if (rows.filter(sectionMatches).length !== 2) throw new Error("store");
+state.store = "CCS,Zumiez";
+if (rows.filter(sectionMatches).length !== 3) throw new Error("multiple stores use OR in gone/ATL tables too");
 state.store = "all";
 state.part = "Wheels";
 if (rows.filter(sectionMatches).map(item => item.dataset.part).join() !== "Wheels") throw new Error("part");
