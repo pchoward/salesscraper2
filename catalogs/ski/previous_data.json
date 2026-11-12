@@ -66458,7 +66458,8 @@
       "product_type": "Alpine Ski Boots",
       "brand": "Atomic",
       "sizes": [
-        "25.5"
+        "25.5",
+        "30.5"
       ],
       "technical_offers": [
         {
@@ -66477,6 +66478,23 @@
               "25.5"
             ]
           }
+        },
+        {
+          "variant_id": 46152828256406,
+          "price": 233.05,
+          "compare": 369.95,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Medium (80\u2013100)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "mondo": [
+              "30.5"
+            ]
+          }
         }
       ],
       "technical_specs": {
@@ -66487,7 +66505,8 @@
           "GripWalk"
         ],
         "mondo": [
-          "25.5"
+          "25.5",
+          "30.5"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1171641.jpg?v=1767736131",
@@ -69245,11 +69264,32 @@
       "product_type": "Alpine Ski Boots",
       "brand": "Tecnica",
       "sizes": [
+        "24.5",
         "25.5",
         "26.5",
         "29.5"
       ],
       "technical_offers": [
+        {
+          "variant_id": 46079207538838,
+          "price": 389.99,
+          "compare": 649.99,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "last": [
+              "Medium (99\u2013101 mm)"
+            ],
+            "ability": [
+              "Intermediate"
+            ],
+            "mondo": [
+              "24.5"
+            ]
+          }
+        },
         {
           "variant_id": 46154146218134,
           "price": 389.99,
@@ -69322,6 +69362,7 @@
           "Intermediate"
         ],
         "mondo": [
+          "24.5",
           "25.5",
           "26.5",
           "29.5"
@@ -80664,52 +80705,6 @@
       ]
     },
     {
-      "name": "Phaenom Footwear fs 02 110 Ski Boots 2027 - Used",
-      "url": "https://www.evo.com/products/283610-phaenom-footwear-fs-02-110-ski-boots-2027-used",
-      "price_new": "584.10",
-      "price_old": "649.00",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "evo",
-      "product_type": "Alpine Ski Boots",
-      "brand": "Phaenom",
-      "sizes": [
-        "25.5"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 67633075290262,
-          "price": 584.1,
-          "compare": 649.0,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "mondo": [
-              "25.5"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "mondo": [
-          "25.5"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346449.jpg?v=1788544994",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346449.jpg?v=1788544994",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346447.jpg?v=1788544994",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346446.jpg?v=1788544994",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346448.jpg?v=1788544994",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346450.jpg?v=1788544995"
-      ]
-    },
-    {
       "name": "Nordica Speedmachine 3 110 X BOA Ski Boots 2027 - Used",
       "url": "https://www.evo.com/products/284832-nordica-speedmachine-3-110-x-boa-ski-boots-2027-used",
       "price_new": "569.99",
@@ -81953,6 +81948,52 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095802.jpg?v=1767732875",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095804.jpg?v=1767732875",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095803.jpg?v=1767732874"
+      ]
+    },
+    {
+      "name": "Phaenom Footwear fs 02 110 Ski Boots 2027 - Used",
+      "url": "https://www.evo.com/products/283610-phaenom-footwear-fs-02-110-ski-boots-2027-used",
+      "price_new": "584.10",
+      "price_old": "649.00",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "evo",
+      "product_type": "Alpine Ski Boots",
+      "brand": "Phaenom",
+      "sizes": [
+        "25.5"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 67633075290262,
+          "price": 584.1,
+          "compare": 649.0,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "mondo": [
+              "25.5"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "mondo": [
+          "25.5"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346449.jpg?v=1788544994",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346449.jpg?v=1788544994",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346447.jpg?v=1788544994",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346446.jpg?v=1788544994",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346448.jpg?v=1788544994",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346450.jpg?v=1788544995"
       ]
     }
   ],
@@ -87539,7 +87580,7 @@
     {
       "name": "Smith Altus MIPS Helmet",
       "url": "https://www.evo.com/products/179298-smith-altus-mips-helmet",
-      "price_new": "76.00",
+      "price_new": "114.00",
       "price_old": "190.00",
       "availability": "Check store",
       "part": "Helmets",
@@ -87550,29 +87591,6 @@
         {
           "variant_id": 46108509995158,
           "price": 114.0,
-          "compare": 190.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        },
-        {
-          "variant_id": 46108510781590,
-          "price": 76.0,
           "compare": 190.0,
           "available": true,
           "specs": {
@@ -122178,23 +122196,6 @@
       "brand": "Oakley",
       "technical_offers": [
         {
-          "variant_id": 46119806566550,
-          "price": 55.8,
-          "compare": 93.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Goggles"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "goggle_size": [
-              "Small"
-            ]
-          }
-        },
-        {
           "variant_id": 46119806599318,
           "price": 55.8,
           "compare": 93.0,
@@ -126940,23 +126941,6 @@
           "variant_id": 46152108474518,
           "price": 142.8,
           "compare": 238.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Goggles"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "goggle_fit": [
-              "Low bridge fit"
-            ]
-          }
-        },
-        {
-          "variant_id": 46152108540054,
-          "price": 124.8,
-          "compare": 208.0,
           "available": true,
           "specs": {
             "protects": [
@@ -136395,35 +136379,6 @@
               "L"
             ]
           }
-        },
-        {
-          "variant_id": 47722638835950,
-          "price": 96.0,
-          "compare": 160.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "certification": [
-              "ASTM F2040 (snow)",
-              "CPSC (US bike)",
-              "EN 1077 (EU snow)",
-              "EN 1078 (EU bike / skate)"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
         }
       ],
       "technical_specs": {
@@ -139676,60 +139631,6 @@
       "protection_type": null
     },
     {
-      "name": "Smith Reason OTG - Past Season",
-      "url": "https://www.smithoptics.com/products/reason-otg-sale",
-      "price_new": "46.80",
-      "price_old": "78.00",
-      "availability": "Check store",
-      "part": "Protection",
-      "store": "Smith",
-      "product_type": "Goggles",
-      "brand": "Smith",
-      "technical_offers": [
-        {
-          "variant_id": 47766581346542,
-          "price": 46.8,
-          "compare": 78.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Goggles"
-            ],
-            "age": [
-              "Adult"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Goggles"
-        ],
-        "age": [
-          "Adult"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_3Q_0bff819f-61ce-458c-a5fd-22fefe8fa134.png?v=1773412222",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_3Q_0bff819f-61ce-458c-a5fd-22fefe8fa134.png?v=1773412222",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_BACK_edc831a0-0e3f-494c-81a2-d12adb8f2ed1.png?v=1773412222",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_FRONT_1574f51a-5d46-4fc9-8695-da468b15145d.png?v=1773412222",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_RIGHT_e8d99909-d2f8-4470-a93a-86a25c7ed1c6.png?v=1773412222",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-rc36_3Q_1795a70a-3eaa-4396-a3eb-0fbf6f2b3556.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-rc36_BACK_a1b6a69a-7862-4032-b704-76f025f546c0.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-rc36_FRONT_f42a4256-e560-4fb9-9aab-9695360abd7f.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-rc36_RIGHT_e755cd3f-7421-4a99-8a4e-d99ca1164636.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-greenSolxMirror_3Q_1f10c2ff-edcb-44f9-8565-133c5c0d44ac.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-greenSolxMirror_BACK_373be980-2455-4170-8496-337054ab65e2.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-greenSolxMirror_FRONT_79ca0f14-499f-43f5-9fa4-cc1b82be1cb1.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-greenSolxMirror_RIGHT_b102b937-2739-493d-9a4f-e06c5eb98df4.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-rc36_3Q_bd7b6a4f-14a9-447c-98ed-b9a669c56b61.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_ironwood-rc36_3Q.png?v=1773412474",
-        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_slate-rc36_3Q_b60c3d03-9253-442e-8eb9-e043262f8f94.png?v=1773412474"
-      ],
-      "protection_type": null
-    },
-    {
       "name": "Smith 4D MAG XL Low Bridge Fit - Past Season",
       "url": "https://www.smithoptics.com/products/4d-mag-xl-low-bridge-fit-sale",
       "price_new": "208.80",
@@ -139917,6 +139818,60 @@
         "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/preview-goggle_lifestyles_0027_02132025_DarcyBacha_SmithOptics__NelsonBC_0430_bac4a58f-fea5-4029-b8ff-01c579cf4792.jpg?v=1763743122",
         "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/preview-goggles_komodo-cpEverydayRedMirror_lifestyle02_a1efc125-b7d3-422e-9f2d-b9f140aa0e73.jpg?v=1763743122",
         "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/preview-goggles_komodo-cpEverydayRedMirror_lifestyle03_cf95a31a-0c26-4fc9-a976-2d407025a40d.jpg?v=1763743122"
+      ],
+      "protection_type": null
+    },
+    {
+      "name": "Smith Reason OTG - Past Season",
+      "url": "https://www.smithoptics.com/products/reason-otg-sale",
+      "price_new": "46.80",
+      "price_old": "78.00",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Smith",
+      "product_type": "Goggles",
+      "brand": "Smith",
+      "technical_offers": [
+        {
+          "variant_id": 47766581346542,
+          "price": 46.8,
+          "compare": 78.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Goggles"
+            ],
+            "age": [
+              "Adult"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Goggles"
+        ],
+        "age": [
+          "Adult"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_3Q_0bff819f-61ce-458c-a5fd-22fefe8fa134.png?v=1773412222",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_3Q_0bff819f-61ce-458c-a5fd-22fefe8fa134.png?v=1773412222",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_BACK_edc831a0-0e3f-494c-81a2-d12adb8f2ed1.png?v=1773412222",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_FRONT_1574f51a-5d46-4fc9-8695-da468b15145d.png?v=1773412222",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-ignitorMirror_RIGHT_e8d99909-d2f8-4470-a93a-86a25c7ed1c6.png?v=1773412222",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-rc36_3Q_1795a70a-3eaa-4396-a3eb-0fbf6f2b3556.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-rc36_BACK_a1b6a69a-7862-4032-b704-76f025f546c0.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-rc36_FRONT_f42a4256-e560-4fb9-9aab-9695360abd7f.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_chalkSpaceInvader-rc36_RIGHT_e755cd3f-7421-4a99-8a4e-d99ca1164636.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-greenSolxMirror_3Q_1f10c2ff-edcb-44f9-8565-133c5c0d44ac.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-greenSolxMirror_BACK_373be980-2455-4170-8496-337054ab65e2.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-greenSolxMirror_FRONT_79ca0f14-499f-43f5-9fa4-cc1b82be1cb1.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-greenSolxMirror_RIGHT_b102b937-2739-493d-9a4f-e06c5eb98df4.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_serpentine-rc36_3Q_bd7b6a4f-14a9-447c-98ed-b9a669c56b61.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_ironwood-rc36_3Q.png?v=1773412474",
+        "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/reason-otg-goggles_slate-rc36_3Q_b60c3d03-9253-442e-8eb9-e043262f8f94.png?v=1773412474"
       ],
       "protection_type": null
     },
@@ -263525,6 +263480,42 @@
       "brand": "Rossignol"
     },
     {
+      "name": "K2 Recon 110 BOA Ski Boots Mens",
+      "url": "https://www.christysports.com/product/k2-recon-110-boa-ski-boots-mens/8202285.html",
+      "price_new": "419.97",
+      "price_old": "699.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw9371e637/8202285_000_1.jpg?sw=600&sh=600",
+      "gender": "Men",
+      "technical_offers": [
+        {
+          "variant_id": "8202285",
+          "price": 419.97,
+          "compare": 699.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "gender": [
+              "Men"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "gender": [
+          "Men"
+        ]
+      },
+      "brand": "K2"
+    },
+    {
       "name": "Atomic Hawx Magna 130 S Wide Ski Boots",
       "url": "https://www.christysports.com/product/atomic-hawx-magna-130-s-wide-ski-boots/8201506.html",
       "price_new": "473.97",
@@ -263593,42 +263584,6 @@
         ]
       },
       "brand": "Head"
-    },
-    {
-      "name": "K2 Recon 110 BOA Ski Boots Mens",
-      "url": "https://www.christysports.com/product/k2-recon-110-boa-ski-boots-mens/8202285.html",
-      "price_new": "419.97",
-      "price_old": "699.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw9371e637/8202285_000_1.jpg?sw=600&sh=600",
-      "gender": "Men",
-      "technical_offers": [
-        {
-          "variant_id": "8202285",
-          "price": 419.97,
-          "compare": 699.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "gender": [
-              "Men"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "gender": [
-          "Men"
-        ]
-      },
-      "brand": "K2"
     },
     {
       "name": "Dalbello Cabrio LV Free 105 Ski Boots Womens",
@@ -267578,6 +267533,47 @@
       }
     },
     {
+      "name": "Head Radar 5K Visor Ski Helmet",
+      "url": "https://www.skatepro.com/en-us/316-48833.htm",
+      "price_new": "184.95",
+      "price_old": "319.95",
+      "availability": "In stock",
+      "part": "Helmets",
+      "store": "SkatePro",
+      "brand": "Head",
+      "image": "https://cdn.skatepro.com/product/400/head-radar-5k-visor-ski-helmet-d4.webp",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.skatepro.com/en-us/316-48833.htm",
+          "price": 184.95,
+          "compare": 319.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Snow"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Snow"
+        ]
+      }
+    },
+    {
       "name": "Smith Vantage MIPS Womens Ski helmet",
       "url": "https://www.skatepro.com/en-us/316-52351.htm",
       "price_new": "135.95",
@@ -267750,47 +267746,6 @@
         ],
         "rotational": [
           "MIPS"
-        ]
-      }
-    },
-    {
-      "name": "Head Radar 5K Visor Ski Helmet",
-      "url": "https://www.skatepro.com/en-us/316-48833.htm",
-      "price_new": "184.95",
-      "price_old": "319.95",
-      "availability": "In stock",
-      "part": "Helmets",
-      "store": "SkatePro",
-      "brand": "Head",
-      "image": "https://cdn.skatepro.com/product/400/head-radar-5k-visor-ski-helmet-d4.webp",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.skatepro.com/en-us/316-48833.htm",
-          "price": 184.95,
-          "compare": 319.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Snow"
         ]
       }
     },
