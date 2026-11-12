@@ -419,8 +419,17 @@ def _minimum_markdown_reason(price_new, price_old):
     return f"{percent:.0f}% off (< {MIN_PERCENT_OFF:.0f}%)"
 
 
+# Used gear stays out (owner, 2026-11-12: "leave used out for now"). Its
+# "was" price is the new price, so the markdown overstates the deal
+# (evo's "... Ski Boots 2025 - Used", 129 listings that day). Demo skis and
+# ex-demo bikes are not covered here.
+_USED = re.compile(r"\b(?:used|pre-?owned|second[- ]?hand|refurb(?:ished)?)\b", re.I)
+
+
 def filter_reason(name, part, url="", price_new=None, price_old=None, description="", product_type=""):
     """Return None if the listing should be kept, else a short reason."""
+    if _USED.search(normalize_product_name(name)):
+        return "catalog scope: used"
     reason = _rule_reason(name, part, url, price_new, price_old, description, product_type)
     return reason or _minimum_markdown_reason(price_new, price_old)
 
