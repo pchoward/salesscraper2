@@ -4,6 +4,7 @@ workflows keep PR code away from secrets and production."""
 
 import json
 import os
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -81,6 +82,8 @@ class ArtifactCheckTests(unittest.TestCase):
             "a fake PNG": dict(shots={"desktop-home.png": b"<svg onload=x>"}),
             "an unexpected screenshot name": dict(shots={"evil.png": PNG}),
             "an extra site file": dict(site=("index.html", "evil.js")),
+            "an unapproved hidden file": dict(site=(".well-known/private.key",)),
+            "test fixtures in the published site": dict(site=("audit-fixtures/manifest.json",)),
             "an extra navigation file": dict(site=("navigation/evil.js",)),
             "an unknown sport metadata file": dict(site=("navigation/surf-categories.json",)),
             "Explore source": dict(site=("discover/engine.py",)),
@@ -103,6 +106,18 @@ class ArtifactCheckTests(unittest.TestCase):
             with patch('ci.check_artifact.MAX_SITE', 1):
                 with self.assertRaisesRegex(check_artifact.Refused, 'over'):
                     check_artifact.check(root, 'a' * 40, {12})
+
+    def test_expanded_catalog_fits_but_the_new_size_limit_is_still_enforced(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = self.make(directory)
+            catalog = root / 'site' / 'mtb' / 'sale_items_chart.html'
+            with catalog.open('wb') as handle:
+                handle.truncate(70 * 1024 * 1024)
+            self.assertEqual(check_artifact.check(root, 'a' * 40, {12}), 12)
+            with catalog.open('wb') as handle:
+                handle.truncate(129 * 1024 * 1024)
+            with self.assertRaisesRegex(check_artifact.Refused, 'over'):
+                check_artifact.check(root, 'a' * 40, {12})
 
     def test_symlinks_are_refused(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -174,10 +189,32 @@ class WorkflowSafetyTests(unittest.TestCase):
         preview = checks["jobs"]["preview"]
         self.assertEqual(preview["permissions"], {"contents": "read"})
         self.assertIn("vars.PR_PREVIEWS != 'off'", preview["if"])
-        self.assertIs(preview["steps"][0]["with"]["persist-credentials"], False)
+        self.assertIn('always()', preview['if'])
+        self.assertEqual(set(preview['needs']), {'preview-build', 'browser'})
+        for name in ('preview-build', 'browser', 'preview'):
+            job = checks['jobs'][name]
+            self.assertEqual(job['permissions'], {'contents': 'read'})
+            self.assertIs(job['steps'][0]['with']['persist-credentials'], False)
+        self.assertFalse(checks['jobs']['browser']['strategy']['fail-fast'])
         # The banner label keeps the PR number (an unquoted " #" was a YAML comment).
-        label = next(step for step in preview["steps"] if step["name"] == "Build the preview site")["env"]["LABEL"]
+        label = next(step for step in checks['jobs']['preview-build']["steps"] if step.get("name") == "Build the preview site")["env"]["LABEL"]
         self.assertTrue(label.startswith("PR #${{ github.event.pull_request.number }}"), label)
+
+    def test_browser_shards_preserve_coverage_and_fail_closed(self):
+        result = subprocess.run(['node', 'ci/browser_shards.test.cjs'], cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        checks = _workflow('pr-checks.yml')
+        plan = json.loads(subprocess.check_output(['node', '-e', "console.log(JSON.stringify(require('./ci/browser_plan.cjs').PLAN))"], cwd=ROOT))
+        self.assertEqual(set(checks['jobs']['browser']['strategy']['matrix']['group']), set(plan))
+        text = (WORKFLOWS/'pr-checks.yml').read_text()
+        self.assertEqual(text.count('python ci/build_preview.py'), 1)
+        self.assertIn('cancel-in-progress:', text)
+        self.assertIn("github.event_name == 'pull_request'", str(checks['concurrency']['cancel-in-progress']))
+        gate = checks['jobs']['preview']
+        self.assertFalse(any(step.get('continue-on-error') for step in gate['steps']))
+        preview_artifact = next(step for step in gate['steps'] if step.get('with', {}).get('name') == 'pr-preview')
+        self.assertIs(preview_artifact['with']['include-hidden-files'], False)
+        self.assertNotIn('python ci/build_audit_fixtures.py', str(checks['jobs']['browser']))
 
     def test_the_publisher_runs_main_code_on_data_only(self):
         publish = _workflow("pr-preview-publish.yml")

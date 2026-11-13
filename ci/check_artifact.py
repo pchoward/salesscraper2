@@ -29,8 +29,9 @@ SITE_FILES |= {f'navigation/{sport}-categories.json' for sport in ('skate','ski'
 SITE_DIRS = {'navigation', 'discover', 'discover/mtb-dirt-jump', 'bmx', 'ski', 'mtb'}
 PNG = b"\x89PNG\r\n\x1a\n"
 MAX_SHOT = 3 * 1024 * 1024
-# Current four-sport preview is ~49 MiB; retain a bounded 64 MiB cap.
-MAX_SITE = 64 * 1024 * 1024
+# Expanded four-sport preview is ~113 MiB (2026-11-12). Keep a bounded
+# 128 MiB cap; the strict file/directory whitelist remains the same.
+MAX_SITE = 128 * 1024 * 1024
 
 
 class Refused(Exception):

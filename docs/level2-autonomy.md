@@ -61,8 +61,8 @@ Grok (advisory). **No agent runs inside GitHub Actions**, and there is no
 
 ```
 PR push --> CI - Pull Request Tests  (PR code, read-only, no secrets)
-              |- tests            (unchanged)
-              `- preview          build preview -> browser checks -> artifact
+              |- tests            Python/JavaScript regressions
+              `- preview-build -> six browser groups -> preview (gate + artifact)
                      |
                      v  workflow_run (main's code; never runs PR code)
             CI - Publish PR Preview
@@ -72,6 +72,7 @@ PR push --> CI - Pull Request Tests  (PR code, read-only, no secrets)
               `- one sticky PR comment: tests, checks, screenshots, link
 ```
 
+- **Parallel browser groups:** [browser CI guide and measured timings](browser-ci.md). The required check names and main-only publisher boundary are preserved.
 - **Preview build** (`ci/build_preview.py`): built from the data already
   committed in the branch. No store requests, email, alerts or analytics:
   the alerts Worker URL, Turnstile key and analytics beacon are left out, so
