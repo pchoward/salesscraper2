@@ -51,7 +51,7 @@ class BackupTests(unittest.TestCase):
     def test_sports_workflow_steps_follow_the_gate(self):
         text = (ROOT / ".github" / "workflows" / "scrape-sports.yml").read_text(encoding="utf-8")
         self.assertIn("HEALTH_PATHS: catalogs/bmx/scrape_health.json", text)
-        self.assertEqual(text.count("if: steps.gate.outputs.scrape == 'true'"), 6)
+        self.assertEqual(text.count("if: steps.gate.outputs.scrape == 'true'"), 7)
 
 
 if __name__ == "__main__":

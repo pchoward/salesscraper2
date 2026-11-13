@@ -1,4 +1,4 @@
-"""Email the skate sale digest over SMTP.
+"""Email the ShredDeals sale digest over SMTP (Skate; BMX, Ski and MTB are in sports_email.py).
 
 Subscriber digests contain deals and watch alerts only. Operational warnings
 are delivered separately through send_admin_warnings.
@@ -174,8 +174,11 @@ def summary_counts(digest):
     return base
 
 
+BRAND = "ShredDeals"
+
+
 def subject_line(digest, when=None):
-    return f"Skate deals: {summary_counts(digest)} ({_short_date(when)})"
+    return f"{BRAND} Skate: {summary_counts(digest)} ({_short_date(when)})"
 
 
 def _money(value, currency=None):
@@ -539,7 +542,7 @@ def _html_sales(digest):
 
 def render_plain(digest, report_url, when=None, banner=None):
     lines = [
-        f"Skate deals — {_long_date(when)}",
+        f"{BRAND} · Skate deals — {_long_date(when)}",
         summary_counts(digest),
         "",
     ]
@@ -661,13 +664,14 @@ def render_html(digest, report_url, when=None, banner=None):
     return "\n".join(chunks)
 
 
-def _html_header(when, summary):
+def _html_header(when, summary, heading="Skate deals"):
     return (
         '<tr><td bgcolor="#1d4ed8" style="background:#1d4ed8;padding:28px 24px;'
         'font-family:Arial,Helvetica,sans-serif;">'
         '<p style="margin:0;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#dbeafe;">'
-        "Skateboard sale tracker</p>"
-        '<h1 style="margin:8px 0 0;font-size:26px;line-height:1.2;font-weight:700;color:#ffffff;">Skate deals</h1>'
+        f"{BRAND}</p>"
+        '<h1 style="margin:8px 0 0;font-size:26px;line-height:1.2;font-weight:700;color:#ffffff;">'
+        f"{escape(heading)}</h1>"
         f'<p style="margin:8px 0 0;font-size:15px;line-height:1.4;color:#dbeafe;">{escape(_long_date(when))}'
         f" · {escape(summary)}</p>"
         "</td></tr>"
@@ -933,10 +937,10 @@ def send_admin_warnings(warnings, env=None, dry_run=None):
             logger.warning("Administrator email skipped: missing %s", ", ".join(config.missing))
             return False
         message = EmailMessage()
-        message["Subject"] = f"[SkateDeals ADMIN] {len(warnings)} scraper warning(s)"
+        message["Subject"] = f"[ShredDeals ADMIN] {len(warnings)} scraper warning(s)"
         message["From"] = config.sender
         message["To"] = ", ".join(config.recipients)
-        lines = ["SkateDeals administrator scraper report", ""]
+        lines = ["ShredDeals administrator scraper report", ""]
         for warning in warnings:
             lines.append(warning_text(warning) if isinstance(warning, dict) else str(warning))
         lines.append("Inspect the scrape workflow logs and scrape_health.json; retry affected categories.")

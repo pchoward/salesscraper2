@@ -46,7 +46,7 @@ class AudienceTests(unittest.TestCase):
         self.assertIn('20', plain)
         self.assertIn('-80', plain)
         self.assertIn('retry', plain)
-        self.assertIn('[SkateDeals ADMIN]', admin['Subject'])
+        self.assertIn('[ShredDeals ADMIN]', admin['Subject'])
 
     def test_admin_never_falls_back_to_subscribers(self):
         with patch('notify._smtp_send') as send:

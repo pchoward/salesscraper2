@@ -153,11 +153,20 @@ class LiveSportsWorkflowTests(unittest.TestCase):
         self.assertIn('python scraper.py --sport "$SPORT"', self.text)
         self.assertNotIn("skate", self.text.lower().split("jobs:")[1].replace("skate's", ""))
 
-    def test_shares_the_scrape_lock_uses_no_secrets_and_commits_only_its_sports(self):
+    def test_shares_the_scrape_lock_uses_only_mail_secrets_and_commits_only_its_sports(self):
         self.assertEqual(self.workflow["concurrency"]["group"], "scrape-${{ github.ref }}")
         skate = yaml.safe_load((ROOT / ".github/workflows/scrape.yml").read_text(encoding="utf-8"))
         self.assertEqual(skate["concurrency"]["group"], self.workflow["concurrency"]["group"])
-        self.assertNotIn("${{ secrets.", self.text)
+        # Only the evening email step reads secrets, and only the SMTP ones
+        # Skate's email uses (sports_email.py, owner 2026-11-12).
+        mail = {"SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASSWORD", "EMAIL_FROM", "EMAIL_TO", "SMTP_SECURITY"}
+        for step in self.workflow["jobs"]["scrape"]["steps"]:
+            secret_env = {k for k, v in (step.get("env") or {}).items() if "secrets." in str(v)}
+            if step.get("name") == "Email BMX, Ski and MTB deals":
+                self.assertEqual(secret_env, mail)
+            else:
+                self.assertFalse(secret_env, step.get("name"))
+        self.assertEqual(self.text.count("${{ secrets."), len(mail))
         self.assertNotIn("${{ vars.", self.text)
         adds = [line.strip() for line in self.text.splitlines() if "git add" in line]
         self.assertEqual(adds, ["git add index.html navigation discover",

@@ -3,9 +3,9 @@ name: Scraper - BMX, Ski, MTB
 # Daily scrape of the newer ShredDeals sports, published on the live site
 # next to Skate (owner's go-live, 2026-11-02). Each sport is scraped on its
 # own (python scraper.py --sport <id>) into its own catalogs/<id>/ data and
-# <id>/ page; Skate's files and stores are never touched. These sports send
-# no email or alerts (sports/__init__.py: delivery is Skate-only), and the
-# workflow uses no secrets.
+# <id>/ page; Skate's files and stores are never touched. One email covers
+# all three (sports_email.py, using Skate's SMTP secrets and nothing else);
+# no subscriber alerts (sports/__init__.py: delivery is Skate-only).
 on:
   schedule:
     - cron: '37 21 * * *'
@@ -86,12 +86,32 @@ jobs:
         # One sport at a time; a sport whose scrape fails keeps its previous
         # data and the others still publish.
         run: |
+          # The evening email only covers scrapes from this run.
+          echo "SCRAPE_STARTED=$(date -u +%Y-%m-%dT%H:%M:%S+00:00)" >> "$GITHUB_ENV"
           if [ "$CHOICE" = all ]; then set -- bmx ski mtb; else set -- "$CHOICE"; fi
           for SPORT in "$@"; do
             echo "::group::Scrape $SPORT"
             python scraper.py --sport "$SPORT" || echo "::warning::$SPORT scrape failed; keeping its previous data"
             echo "::endgroup::"
           done
+
+      - name: Email BMX, Ski and MTB deals
+        if: steps.gate.outputs.scrape == 'true'
+        # One email for the sports scraped above (sports_email.py), with the
+        # same SMTP settings and recipients as Skate's. Mail problems are
+        # logged and never fail the run.
+        env:
+          CHOICE: ${{ inputs.sport || 'all' }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          SMTP_SECURITY: ${{ secrets.SMTP_SECURITY }}
+        run: |
+          if [ "$CHOICE" = all ]; then set -- bmx ski mtb; else set -- "$CHOICE"; fi
+          python sports_email.py --since "$SCRAPE_STARTED" "$@" || true
 
       - name: Update the homepage's sport tabs
         if: steps.gate.outputs.scrape == 'true'
