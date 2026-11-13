@@ -18733,14 +18733,14 @@
           }
         },
         "CCS_Completes": {
-          "count": 276,
+          "count": 275,
           "failed": false,
           "diagnostics": {
             "expected_count": 283,
             "baseline_samples": 9,
             "median_absolute_deviation": 3,
-            "actual_count": 276,
-            "percentage_change": -2.5,
+            "actual_count": 275,
+            "percentage_change": -2.8,
             "reason": "normal_variation"
           }
         },
@@ -19345,14 +19345,14 @@
           }
         },
         "SkateWarehouse_Wheels": {
-          "count": 25,
+          "count": 24,
           "failed": false,
           "diagnostics": {
             "expected_count": 4.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 25,
-            "percentage_change": 525.0,
+            "actual_count": 24,
+            "percentage_change": 500.0,
             "reason": "normal_variation"
           }
         },
@@ -19585,14 +19585,14 @@
           }
         },
         "TGM_Decks": {
-          "count": 146,
+          "count": 145,
           "failed": false,
           "diagnostics": {
             "expected_count": 133.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.0,
-            "actual_count": 146,
-            "percentage_change": 9.8,
+            "actual_count": 145,
+            "percentage_change": 9.0,
             "reason": "normal_variation"
           }
         },
@@ -19693,26 +19693,26 @@
           }
         },
         "Tactics_Decks": {
-          "count": 40,
+          "count": 39,
           "failed": false,
           "diagnostics": {
             "expected_count": 46.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 40,
-            "percentage_change": -13.0,
+            "actual_count": 39,
+            "percentage_change": -15.2,
             "reason": "normal_variation"
           }
         },
         "Tactics_Packs": {
-          "count": 28,
+          "count": 27,
           "failed": false,
           "diagnostics": {
             "expected_count": 28,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 28,
-            "percentage_change": 0.0,
+            "actual_count": 27,
+            "percentage_change": -3.6,
             "reason": "insufficient_history"
           }
         },
@@ -19765,14 +19765,14 @@
           }
         },
         "Triple 8_Protection": {
-          "count": 11,
+          "count": 10,
           "failed": false,
           "diagnostics": {
             "expected_count": 8.5,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.5,
-            "actual_count": 11,
-            "percentage_change": 29.4,
+            "actual_count": 10,
+            "percentage_change": 17.6,
             "reason": "normal_variation"
           }
         },
@@ -19813,14 +19813,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 268,
+          "count": 266,
           "failed": false,
           "diagnostics": {
             "expected_count": 274.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 4.0,
-            "actual_count": 268,
-            "percentage_change": -2.4,
+            "actual_count": 266,
+            "percentage_change": -3.1,
             "reason": "normal_variation"
           }
         },
@@ -19885,7 +19885,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-13T01:14:19+00:00"
+      "scanned_at": "2026-11-13T12:11:39+00:00"
     }
   ],
   "baseline": {
@@ -19895,7 +19895,7 @@
     },
     "SkateWarehouse_Wheels": {
       "date": "2026-11-13",
-      "count": 25
+      "count": 24
     },
     "SkateWarehouse_Trucks": {
       "date": "2026-11-13",
@@ -19911,7 +19911,7 @@
     },
     "Tactics_Decks": {
       "date": "2026-11-13",
-      "count": 40
+      "count": 39
     },
     "Tactics_Wheels": {
       "date": "2026-11-13",
@@ -19971,7 +19971,7 @@
     },
     "TGM_Decks": {
       "date": "2026-11-13",
-      "count": 146
+      "count": 145
     },
     "TGM_Trucks": {
       "date": "2026-11-13",
@@ -20059,7 +20059,7 @@
     },
     "Triple 8_Protection": {
       "date": "2026-11-13",
-      "count": 11
+      "count": 10
     },
     "Exodus_Decks": {
       "date": "2026-11-13",
@@ -20087,7 +20087,7 @@
     },
     "CCS_Completes": {
       "date": "2026-11-13",
-      "count": 276
+      "count": 275
     },
     "Tactics_Completes": {
       "date": "2026-11-13",
@@ -20095,7 +20095,7 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-13",
-      "count": 268
+      "count": 266
     },
     "SkateWarehouse_Completes": {
       "date": "2026-11-13",
@@ -20127,7 +20127,7 @@
     },
     "Tactics_Packs": {
       "date": "2026-11-13",
-      "count": 28
+      "count": 27
     },
     "Zumiez_Packs": {
       "date": "2026-11-13",
@@ -20336,7 +20336,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 276
+        "count": 275
       }
     ],
     "CCS_Decks": [
@@ -23018,7 +23018,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 25
+        "count": 24
       }
     ],
     "SoCal_Accessories": [
@@ -23746,7 +23746,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 146
+        "count": 145
       }
     ],
     "TGM_Packs": [
@@ -24204,7 +24204,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 40
+        "count": 39
       }
     ],
     "Tactics_Packs": [
@@ -24214,7 +24214,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 28
+        "count": 27
       }
     ],
     "Tactics_Protection": [
@@ -24492,7 +24492,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 11
+        "count": 10
       }
     ],
     "Zeitbike_Protection": [
@@ -24696,7 +24696,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 268
+        "count": 266
       }
     ],
     "Zumiez_Packs": [
