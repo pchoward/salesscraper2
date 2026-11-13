@@ -2,6 +2,7 @@
 from sports import protection
 
 FIELDS = (
+    {"key": "condition", "label": "Condition", "param": "mtb_condition", "categories": ()},  # Demo (2026-11-12)
     {"key": "wheel_size", "label": "Wheel size (in)", "param": "mtb_wheel", "categories": ("Bikes", "Frames", "Forks & Shocks", "Suspension", "Wheels", "Tires")},
     {"key": "travel_mm", "label": "Suspension travel (mm)", "param": "mtb_travel", "categories": ("Bikes", "Frames", "Forks & Shocks", "Suspension")},
     {"key": "frame_size", "label": "Frame size", "param": "mtb_frame", "categories": ("Bikes", "Frames")},

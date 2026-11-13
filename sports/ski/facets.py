@@ -3,6 +3,7 @@ Offer extraction is owned by the Ski adapter (sports/ski/stores.py, evo.py)."""
 from sports import protection
 
 FIELDS = (
+    {"key": "condition", "label": "Condition", "param": "ski_condition", "categories": ()},  # Demo (2026-11-12)
     {"key": "ski_type", "label": "Type", "param": "ski_type", "categories": ("Skis", "Boots", "Bindings")},
     {"key": "length", "label": "Ski length", "param": "ski_length", "categories": ("Skis", "Poles")},
     {"key": "waist", "label": "Waist width", "param": "ski_waist", "categories": ("Skis",)},
