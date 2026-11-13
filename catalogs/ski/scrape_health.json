@@ -8324,14 +8324,14 @@
           }
         },
         "Gear West_Skis": {
-          "count": 132,
+          "count": 131,
           "failed": false,
           "diagnostics": {
             "expected_count": 131.5,
             "baseline_samples": 12,
             "median_absolute_deviation": 5.0,
-            "actual_count": 132,
-            "percentage_change": 0.4,
+            "actual_count": 131,
+            "percentage_change": -0.4,
             "reason": "normal_variation"
           }
         },
@@ -8456,14 +8456,14 @@
           }
         },
         "Skipro_Boots": {
-          "count": 246,
+          "count": 245,
           "failed": false,
           "diagnostics": {
             "expected_count": 246,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 246,
-            "percentage_change": 0.0,
+            "actual_count": 245,
+            "percentage_change": -0.4,
             "reason": "insufficient_history"
           }
         },
@@ -8876,14 +8876,14 @@
           }
         },
         "Utah Ski_Boots": {
-          "count": 29,
+          "count": 28,
           "failed": false,
           "diagnostics": {
             "expected_count": 29,
             "baseline_samples": 11,
             "median_absolute_deviation": 0,
-            "actual_count": 29,
-            "percentage_change": 0.0,
+            "actual_count": 28,
+            "percentage_change": -3.4,
             "reason": "normal_variation"
           }
         },
@@ -9176,31 +9176,31 @@
           }
         },
         "evo_Protection": {
-          "count": 117,
+          "count": 116,
           "failed": false,
           "diagnostics": {
             "expected_count": 132.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 2.0,
-            "actual_count": 117,
-            "percentage_change": -11.4,
+            "actual_count": 116,
+            "percentage_change": -12.1,
             "reason": "normal_variation"
           }
         },
         "evo_Skis": {
-          "count": 177,
+          "count": 175,
           "failed": false,
           "diagnostics": {
             "expected_count": 190,
             "baseline_samples": 11,
             "median_absolute_deviation": 4,
-            "actual_count": 177,
-            "percentage_change": -6.8,
+            "actual_count": 175,
+            "percentage_change": -7.9,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-13T02:19:23+00:00"
+      "scanned_at": "2026-11-13T06:57:53+00:00"
     }
   ],
   "baseline": {
@@ -9210,7 +9210,7 @@
     },
     "Gear West_Skis": {
       "date": "2026-11-13",
-      "count": 132
+      "count": 131
     },
     "Utah Ski_Bindings": {
       "date": "2026-11-13",
@@ -9218,7 +9218,7 @@
     },
     "Utah Ski_Boots": {
       "date": "2026-11-13",
-      "count": 29
+      "count": 28
     },
     "Utah Ski_Helmets": {
       "date": "2026-11-13",
@@ -9242,7 +9242,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-13",
-      "count": 177
+      "count": 175
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-13",
@@ -9302,7 +9302,7 @@
     },
     "evo_Protection": {
       "date": "2026-11-13",
-      "count": 117
+      "count": 116
     },
     "Bern_Helmets": {
       "date": "2026-11-13",
@@ -9398,7 +9398,7 @@
     },
     "Skipro_Boots": {
       "date": "2026-11-13",
-      "count": 246
+      "count": 245
     },
     "Skipro_Helmets": {
       "date": "2026-11-13",
@@ -10749,7 +10749,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 132
+        "count": 131
       }
     ],
     "SkatePro_Helmets": [
@@ -10931,7 +10931,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 246
+        "count": 245
       }
     ],
     "Skipro_Helmets": [
@@ -11957,7 +11957,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 29
+        "count": 28
       }
     ],
     "Utah Ski_Helmets": [
@@ -12663,7 +12663,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 117
+        "count": 116
       }
     ],
     "evo_Skis": [
@@ -12713,7 +12713,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 177
+        "count": 175
       }
     ]
   }

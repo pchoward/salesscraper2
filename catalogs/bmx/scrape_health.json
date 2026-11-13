@@ -24021,14 +24021,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 96,
+          "count": 95,
           "failed": false,
           "diagnostics": {
             "expected_count": 92.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 96,
-            "percentage_change": 4.3,
+            "actual_count": 95,
+            "percentage_change": 3.3,
             "reason": "normal_variation"
           }
         },
@@ -24285,14 +24285,14 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 103,
+          "count": 102,
           "failed": false,
           "diagnostics": {
             "expected_count": 101.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 103,
-            "percentage_change": 2.0,
+            "actual_count": 102,
+            "percentage_change": 1.0,
             "reason": "normal_variation"
           }
         },
@@ -25701,14 +25701,14 @@
           }
         },
         "Sparky's Brands_Steering": {
-          "count": 22,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 22,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 22,
-            "percentage_change": 0.0,
+            "actual_count": 21,
+            "percentage_change": -4.5,
             "reason": "insufficient_history"
           }
         },
@@ -26301,7 +26301,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-13T02:07:31+00:00"
+      "scanned_at": "2026-11-13T06:46:54+00:00"
     }
   ],
   "baseline": {
@@ -26459,11 +26459,11 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-13",
-      "count": 96
+      "count": 95
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-13",
-      "count": 103
+      "count": 102
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-13",
@@ -26595,7 +26595,7 @@
     },
     "Sparky's Brands_Steering": {
       "date": "2026-11-13",
-      "count": 22
+      "count": 21
     },
     "Sparky's Brands_Tires": {
       "date": "2026-11-13",
@@ -28894,7 +28894,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 96
+        "count": 95
       }
     ],
     "Cambria_Seating": [
@@ -29906,7 +29906,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 103
+        "count": 102
       }
     ],
     "Colorado Cyclist_Seating": [
@@ -34362,7 +34362,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 22
+        "count": 21
       }
     ],
     "Sparky's Brands_Tires": [
