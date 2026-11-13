@@ -3,7 +3,7 @@ const {PLAN,CONCURRENCY}=require('./browser_plan.cjs'),{runShard,runTask}=requir
 test('every suite remains scheduled, with the exact audit widths and fixtures once',()=>{
  const tasks=Object.values(PLAN).flat();
  const scripts=tasks.map(t=>t.script);
- assert.deepEqual([...new Set(scripts)].sort(),['smoke.mjs','check_category_navigation.cjs','check_sport_menus.cjs','check_sidebar.cjs','check_my_stuff.cjs','check_truck_fit.cjs','check_multi_store.cjs','check_phone_filters.cjs','check_catalog_search.cjs','check_header_search.cjs','check_explore.cjs','audit_sports.cjs'].sort());
+ assert.deepEqual([...new Set(scripts)].sort(),['smoke.mjs','check_category_navigation.cjs','check_sport_menus.cjs','check_catalog_readiness.cjs','check_sidebar.cjs','check_my_stuff.cjs','check_truck_fit.cjs','check_multi_store.cjs','check_phone_filters.cjs','check_catalog_search.cjs','check_header_search.cjs','check_explore.cjs','audit_sports.cjs'].sort());
  for(const script of scripts.filter(s=>!['audit_sports.cjs','check_category_navigation.cjs'].includes(s)))assert.equal(scripts.filter(s=>s===script).length,1);
  const audits=tasks.filter(t=>t.script==='audit_sports.cjs');assert.equal(audits.length,2);
  assert.deepEqual(audits.flatMap(t=>t.env.AUDIT_WIDTHS.split(',')).sort(),['1440','1024','768','430','390'].sort());

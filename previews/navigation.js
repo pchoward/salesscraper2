@@ -321,20 +321,51 @@
                 pendingMenuFocus = null; choices.querySelector('button:not(:disabled)')?.focus();
             }
         }
-        function registerCategories(source,child) {
-            const sport = config.sports.find(item => new URL(item.catalog,win.location.href).pathname === child.location.pathname);
-            if (!sport) return;
+        const catalogRegistrations = new WeakMap();
+        const pendingCatalogs = new WeakSet();
+        function registerCategories(source,child,catalogDocument=source?.ownerDocument) {
+            function isCurrent() {
+                try {
+                    const current = state(win.location.href,config);
+                    return !current.scope && hasCatalog(current.sport) && source?.ownerDocument === catalogDocument &&
+                        child === frame.contentWindow && child.document === catalogDocument &&
+                        new URL(catalogDocument.URL).pathname === new URL(current.sport.catalog,win.location.href).pathname;
+                } catch (_) { return false; }
+            }
+            if (!isCurrent()) return false;
+            const sport = state(win.location.href,config).sport;
+            // Older cached catalogs predate the ready event. Only use their globals
+            // after load; current catalogs publish a document-scoped API after init.
+            const api = catalogDocument.shredCatalogReady || (catalogDocument.readyState === 'complete' &&
+                typeof child.dealRows === 'function' && typeof child.typeSlug === 'function' ?
+                {dealRows:child.dealRows,typeSlug:child.typeSlug,typedFilters:child.typedFilters} : null);
+            if (!api) {
+                if (!pendingCatalogs.has(catalogDocument)) {
+                    pendingCatalogs.add(catalogDocument);
+                    const retry = ()=>registerCategories(source,child,catalogDocument);
+                    catalogDocument.addEventListener('shreddeals:catalog-ready',retry,{once:true});
+                    child.addEventListener('load',retry,{once:true});
+                    child.addEventListener('pagehide',()=>{
+                        catalogDocument.removeEventListener('shreddeals:catalog-ready',retry);
+                        child.removeEventListener('load',retry);
+                    },{once:true});
+                }
+                return false;
+            }
+            const previous = catalogRegistrations.get(catalogDocument);
+            if (previous && sources.get(sport.id) === previous) return true;
             // Count actual catalog rows once, before any filter semantics. Direct
             // filtered URLs may already have changed every source button count.
-            const counts = baseCategoryCounts(child.dealRows());
+            const counts = baseCategoryCounts(api.dealRows());
             const categories = [...source.querySelectorAll('button[data-part]')]
                 .sort((a,b)=>Number(a.dataset.order)-Number(b.dataset.order))
-                .map(button=>({category:button.dataset.part, slug:child.typeSlug(button.dataset.part),
+                .map(button=>({category:button.dataset.part, slug:api.typeSlug(button.dataset.part),
                     label:button.querySelector('.quick-name').textContent,
                     count:counts[button.dataset.part] || 0}));
             const entry = {source,child,categories}; sources.set(sport.id,entry);
+            catalogRegistrations.set(catalogDocument,entry);
             function sync() {
-                if (sources.get(sport.id) !== entry) return;
+                if (sources.get(sport.id) !== entry || !isCurrent()) return;
                 if (menuSport === sport.id && !panel.hidden) {
                     // Preserve keyboard focus when counts change in the open menu.
                     const focused = choices.contains(doc.activeElement) ? doc.activeElement.dataset.part : null;
@@ -343,11 +374,11 @@
                 }
                 if (state(win.location.href,config).sport.id !== sport.id || state(win.location.href,config).scope) return;
                 const selected = source.querySelector('[aria-pressed=true]');
-                const parts = typeof child.typedFilters === 'function' ? child.typedFilters(child.document.getElementById('searchInput')?.value || '').parts : null;
+                const parts = typeof api.typedFilters === 'function' ? api.typedFilters(catalogDocument.getElementById('searchInput')?.value || '').parts : null;
                 const searching = parts?.length && (parts.length !== 1 || parts[0] !== selected?.dataset.part);
                 const label = searching ? 'Search results' : selected?.dataset.part === 'all' ? 'All products' : selected?.querySelector('.quick-name')?.textContent || 'Categories';
                 doc.getElementById('categoryLabel').textContent = label;
-                doc.getElementById('categoryCount').textContent = /^\s*([\d,]+)/.exec(child.document.getElementById('statusCounts')?.textContent || '')?.[1] || '0';
+                doc.getElementById('categoryCount').textContent = /^\s*([\d,]+)/.exec(catalogDocument.getElementById('statusCounts')?.textContent || '')?.[1] || '0';
                 const toggle = doc.getElementById('categoryToggle');
                 toggle.disabled = false; toggle.setAttribute('aria-label',sport.label + ': ' + label + '. Choose product category');
                 doc.getElementById('categoryNavigation').hidden = false;
@@ -355,7 +386,7 @@
             }
             const observer = new MutationObserver(sync);
             observer.observe(source,{childList:true,subtree:true,attributes:true,characterData:true});
-            const status = child.document.getElementById('statusCounts');
+            const status = catalogDocument.getElementById('statusCounts');
             if (status) observer.observe(status,{childList:true,subtree:true,characterData:true});
             child.addEventListener('pagehide',()=>{
                 observer.disconnect();
@@ -365,6 +396,7 @@
                 }
             },{once:true});
             sync();
+            return true;
         }
         function openSportMenu(id,button) {
             win.clearTimeout(dismissTimer);

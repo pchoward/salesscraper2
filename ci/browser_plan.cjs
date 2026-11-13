@@ -4,6 +4,7 @@ const PLAN={
  navigation:[task('categories-wide','check_category_navigation.cjs','category-navigation-results/wide',{CATEGORY_WIDTHS:'1440,1024,768'}),
   task('categories-phone','check_category_navigation.cjs','category-navigation-results/phone',{CATEGORY_WIDTHS:'430,390,320'})],
  controls:[task('smoke','smoke.mjs','shots'),task('sport-menus','check_sport_menus.cjs','category-navigation-results/sport-menus'),
+  task('catalog-readiness','check_catalog_readiness.cjs','category-navigation-results/catalog-readiness'),
   task('sidebar','check_sidebar.cjs','category-navigation-results/sidebar'),task('my-stuff','check_my_stuff.cjs','category-navigation-results/my-stuff'),
   task('explore','check_explore.cjs','public-explore-results',{},['--public'])],
  filters:[task('truck-fit','check_truck_fit.cjs','category-navigation-results/truck-fit'),

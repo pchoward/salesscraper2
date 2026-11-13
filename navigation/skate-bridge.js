@@ -189,14 +189,23 @@
 // Active catalog owns filtering, counts and history. The shell only mirrors it.
 (function () {
     if (!window.shredBridgeInstalled) return;
+    const catalogDocument = document;
+    let mounted = false;
     function mountCategories() {
-        const source = document.getElementById('partFilters');
-        if (!source || window.parent.shredApp?.state().scope) return;
+        if (window.document !== catalogDocument) return;
+        const source = catalogDocument.getElementById('partFilters');
+        const app = window.parent.shredApp;
+        if (!source || !app || app.state().scope) return;
+        if (!app.registerCategories(source,window,catalogDocument)) return;
         source.hidden = true; source.style.display = 'none';
-        window.parent.shredApp.registerCategories(source,window);
-        document.addEventListener('pointerdown',()=>window.parent.shredApp.closeCategories());
+        if (!mounted) {
+            mounted = true;
+            catalogDocument.addEventListener('pointerdown',()=>window.parent.shredApp.closeCategories());
+        }
     }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mountCategories);
+    catalogDocument.addEventListener('shreddeals:catalog-ready',mountCategories);
+    window.addEventListener('load',mountCategories,{once:true});
+    if (catalogDocument.readyState === 'loading') catalogDocument.addEventListener('DOMContentLoaded',mountCategories,{once:true});
     else mountCategories();
 })();
 
