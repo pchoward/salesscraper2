@@ -21607,25 +21607,25 @@
           }
         },
         "Bicycle Warehouse_Cockpit": {
-          "count": 5,
+          "count": 4,
           "failed": false,
           "diagnostics": {
             "expected_count": 4.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 5,
-            "percentage_change": 25.0,
+            "actual_count": 4,
+            "percentage_change": 0.0,
             "reason": "insufficient_history"
           }
         },
         "Bicycle Warehouse_Drivetrain": {
-          "count": 1,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 0.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 1,
+            "actual_count": 0,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -21847,14 +21847,14 @@
           }
         },
         "Bikes Online_Bikes": {
-          "count": 59,
+          "count": 58,
           "failed": false,
           "diagnostics": {
             "expected_count": 60,
             "baseline_samples": 11,
             "median_absolute_deviation": 2,
-            "actual_count": 59,
-            "percentage_change": -1.7,
+            "actual_count": 58,
+            "percentage_change": -3.3,
             "reason": "normal_variation"
           }
         },
@@ -22003,14 +22003,14 @@
           }
         },
         "Cambria_Cockpit": {
-          "count": 167,
+          "count": 166,
           "failed": false,
           "diagnostics": {
             "expected_count": 163,
             "baseline_samples": 11,
             "median_absolute_deviation": 2,
-            "actual_count": 167,
-            "percentage_change": 2.5,
+            "actual_count": 166,
+            "percentage_change": 1.8,
             "reason": "normal_variation"
           }
         },
@@ -23695,7 +23695,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-13T07:05:53+00:00"
+      "scanned_at": "2026-11-13T10:19:23+00:00"
     }
   ],
   "baseline": {
@@ -23773,7 +23773,7 @@
     },
     "Bikes Online_Bikes": {
       "date": "2026-11-13",
-      "count": 59
+      "count": 58
     },
     "Bikes Online_Brakes": {
       "date": "2026-11-13",
@@ -23921,7 +23921,7 @@
     },
     "Cambria_Cockpit": {
       "date": "2026-11-13",
-      "count": 167
+      "count": 166
     },
     "Cambria_Drivetrain": {
       "date": "2026-11-13",
@@ -23985,7 +23985,7 @@
     },
     "Bicycle Warehouse_Cockpit": {
       "date": "2026-11-13",
-      "count": 5
+      "count": 4
     },
     "Bicycle Warehouse_Frames": {
       "date": "2026-11-13",
@@ -24054,10 +24054,6 @@
     "The Lost Co._Wheels": {
       "date": "2026-11-13",
       "count": 16
-    },
-    "Bicycle Warehouse_Drivetrain": {
-      "date": "2026-11-13",
-      "count": 1
     }
   },
   "completeness_baseline": {
@@ -25510,7 +25506,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 5
+        "count": 4
       }
     ],
     "Bicycle Warehouse_Drivetrain": [
@@ -25524,7 +25520,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 1
+        "count": 0
       }
     ],
     "Bicycle Warehouse_Forks & Shocks": [
@@ -25778,7 +25774,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 59
+        "count": 58
       }
     ],
     "Bikes Online_Brakes": [
@@ -26380,7 +26376,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 167
+        "count": 166
       }
     ],
     "Cambria_Drivetrain": [
