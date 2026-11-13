@@ -21715,62 +21715,62 @@
           }
         },
         "Bike Mart_Bikes": {
-          "count": 7,
+          "count": 10,
           "failed": false,
           "diagnostics": {
             "expected_count": 12,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 7,
-            "percentage_change": -41.7,
+            "actual_count": 10,
+            "percentage_change": -16.7,
             "reason": "insufficient_history"
           }
         },
         "Bike Mart_Brakes": {
-          "count": 112,
+          "count": 116,
           "failed": false,
           "diagnostics": {
             "expected_count": 119,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 112,
-            "percentage_change": -5.9,
+            "actual_count": 116,
+            "percentage_change": -2.5,
             "reason": "insufficient_history"
           }
         },
         "Bike Mart_Cockpit": {
-          "count": 259,
+          "count": 261,
           "failed": false,
           "diagnostics": {
             "expected_count": 265,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 259,
-            "percentage_change": -2.3,
+            "actual_count": 261,
+            "percentage_change": -1.5,
             "reason": "insufficient_history"
           }
         },
         "Bike Mart_Drivetrain": {
-          "count": 144,
+          "count": 146,
           "failed": false,
           "diagnostics": {
             "expected_count": 148,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 144,
-            "percentage_change": -2.7,
+            "actual_count": 146,
+            "percentage_change": -1.4,
             "reason": "insufficient_history"
           }
         },
         "Bike Mart_Forks & Shocks": {
-          "count": 11,
+          "count": 12,
           "failed": false,
           "diagnostics": {
             "expected_count": 13,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 11,
-            "percentage_change": -15.4,
+            "actual_count": 12,
+            "percentage_change": -7.7,
             "reason": "insufficient_history"
           }
         },
@@ -21799,14 +21799,14 @@
           }
         },
         "Bike Mart_Pedals": {
-          "count": 48,
+          "count": 49,
           "failed": false,
           "diagnostics": {
             "expected_count": 49,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 48,
-            "percentage_change": -2.0,
+            "actual_count": 49,
+            "percentage_change": 0.0,
             "reason": "insufficient_history"
           }
         },
@@ -21823,26 +21823,26 @@
           }
         },
         "Bike Mart_Tires": {
-          "count": 291,
+          "count": 296,
           "failed": false,
           "diagnostics": {
             "expected_count": 298,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 291,
-            "percentage_change": -2.3,
+            "actual_count": 296,
+            "percentage_change": -0.7,
             "reason": "insufficient_history"
           }
         },
         "Bike Mart_Wheels": {
-          "count": 169,
+          "count": 170,
           "failed": false,
           "diagnostics": {
             "expected_count": 175,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 169,
-            "percentage_change": -3.4,
+            "actual_count": 170,
+            "percentage_change": -2.9,
             "reason": "insufficient_history"
           }
         },
@@ -22003,14 +22003,14 @@
           }
         },
         "Cambria_Cockpit": {
-          "count": 166,
+          "count": 172,
           "failed": false,
           "diagnostics": {
             "expected_count": 163,
             "baseline_samples": 11,
             "median_absolute_deviation": 2,
-            "actual_count": 166,
-            "percentage_change": 1.8,
+            "actual_count": 172,
+            "percentage_change": 5.5,
             "reason": "normal_variation"
           }
         },
@@ -22027,14 +22027,14 @@
           }
         },
         "Cambria_Forks & Shocks": {
-          "count": 7,
+          "count": 6,
           "failed": false,
           "diagnostics": {
             "expected_count": 8,
             "baseline_samples": 11,
             "median_absolute_deviation": 0,
-            "actual_count": 7,
-            "percentage_change": -12.5,
+            "actual_count": 6,
+            "percentage_change": -25.0,
             "reason": "normal_variation"
           }
         },
@@ -22063,38 +22063,38 @@
           }
         },
         "Cambria_Pedals": {
-          "count": 24,
+          "count": 55,
           "failed": false,
           "diagnostics": {
             "expected_count": 24,
             "baseline_samples": 11,
             "median_absolute_deviation": 0,
-            "actual_count": 24,
-            "percentage_change": 0.0,
+            "actual_count": 55,
+            "percentage_change": 129.2,
             "reason": "normal_variation"
           }
         },
         "Cambria_Protection": {
-          "count": 94,
+          "count": 93,
           "failed": false,
           "diagnostics": {
             "expected_count": 85,
             "baseline_samples": 11,
             "median_absolute_deviation": 1,
-            "actual_count": 94,
-            "percentage_change": 10.6,
+            "actual_count": 93,
+            "percentage_change": 9.4,
             "reason": "normal_variation"
           }
         },
         "Cambria_Tires": {
-          "count": 89,
+          "count": 90,
           "failed": false,
           "diagnostics": {
             "expected_count": 91.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 89,
-            "percentage_change": -2.2,
+            "actual_count": 90,
+            "percentage_change": -1.1,
             "reason": "normal_variation"
           }
         },
@@ -22207,26 +22207,26 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 229,
+          "count": 228,
           "failed": false,
           "diagnostics": {
             "expected_count": 238.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 2.0,
-            "actual_count": 229,
-            "percentage_change": -3.8,
+            "actual_count": 228,
+            "percentage_change": -4.2,
             "reason": "normal_variation"
           }
         },
         "Colorado Cyclist_Tires": {
-          "count": 356,
+          "count": 355,
           "failed": false,
           "diagnostics": {
             "expected_count": 357,
             "baseline_samples": 9,
             "median_absolute_deviation": 1,
-            "actual_count": 356,
-            "percentage_change": -0.3,
+            "actual_count": 355,
+            "percentage_change": -0.6,
             "reason": "normal_variation"
           }
         },
@@ -22339,14 +22339,14 @@
           }
         },
         "Demon_Protection": {
-          "count": 20,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 20,
             "baseline_samples": 9,
             "median_absolute_deviation": 0,
-            "actual_count": 20,
-            "percentage_change": 0.0,
+            "actual_count": 21,
+            "percentage_change": 5.0,
             "reason": "normal_variation"
           }
         },
@@ -22399,14 +22399,14 @@
           }
         },
         "Fanatik_Cockpit": {
-          "count": 56,
+          "count": 57,
           "failed": false,
           "diagnostics": {
             "expected_count": 41,
             "baseline_samples": 11,
             "median_absolute_deviation": 8,
-            "actual_count": 56,
-            "percentage_change": 36.6,
+            "actual_count": 57,
+            "percentage_change": 39.0,
             "reason": "normal_variation"
           }
         },
@@ -22471,14 +22471,14 @@
           }
         },
         "Fanatik_Protection": {
-          "count": 12,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 12,
             "baseline_samples": 11,
             "median_absolute_deviation": 0,
-            "actual_count": 12,
-            "percentage_change": 0.0,
+            "actual_count": 14,
+            "percentage_change": 16.7,
             "reason": "normal_variation"
           }
         },
@@ -23695,7 +23695,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-13T10:19:23+00:00"
+      "scanned_at": "2026-11-13T18:25:54+00:00"
     }
   ],
   "baseline": {
@@ -23705,7 +23705,7 @@
     },
     "Fanatik_Cockpit": {
       "date": "2026-11-13",
-      "count": 56
+      "count": 57
     },
     "Fanatik_Drivetrain": {
       "date": "2026-11-13",
@@ -23721,7 +23721,7 @@
     },
     "Fanatik_Protection": {
       "date": "2026-11-13",
-      "count": 12
+      "count": 14
     },
     "Fanatik_Wheels": {
       "date": "2026-11-13",
@@ -23737,7 +23737,7 @@
     },
     "Cambria_Tires": {
       "date": "2026-11-13",
-      "count": 89
+      "count": 90
     },
     "Mike's Bikes_Bikes": {
       "date": "2026-11-13",
@@ -23813,15 +23813,15 @@
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-13",
-      "count": 229
+      "count": 228
     },
     "Colorado Cyclist_Tires": {
       "date": "2026-11-13",
-      "count": 356
+      "count": 355
     },
     "Cambria_Protection": {
       "date": "2026-11-13",
-      "count": 94
+      "count": 93
     },
     "Worldwide Cyclery_Protection": {
       "date": "2026-11-13",
@@ -23841,7 +23841,7 @@
     },
     "Demon_Protection": {
       "date": "2026-11-13",
-      "count": 20
+      "count": 21
     },
     "G-Form_Protection": {
       "date": "2026-11-13",
@@ -23921,7 +23921,7 @@
     },
     "Cambria_Cockpit": {
       "date": "2026-11-13",
-      "count": 166
+      "count": 172
     },
     "Cambria_Drivetrain": {
       "date": "2026-11-13",
@@ -23929,7 +23929,7 @@
     },
     "Cambria_Forks & Shocks": {
       "date": "2026-11-13",
-      "count": 7
+      "count": 6
     },
     "Cambria_Frames": {
       "date": "2026-11-13",
@@ -23937,7 +23937,7 @@
     },
     "Cambria_Pedals": {
       "date": "2026-11-13",
-      "count": 24
+      "count": 55
     },
     "Cambria_Wheels": {
       "date": "2026-11-13",
@@ -24009,23 +24009,23 @@
     },
     "Bike Mart_Bikes": {
       "date": "2026-11-13",
-      "count": 7
+      "count": 10
     },
     "Bike Mart_Brakes": {
       "date": "2026-11-13",
-      "count": 112
+      "count": 116
     },
     "Bike Mart_Cockpit": {
       "date": "2026-11-13",
-      "count": 259
+      "count": 261
     },
     "Bike Mart_Drivetrain": {
       "date": "2026-11-13",
-      "count": 144
+      "count": 146
     },
     "Bike Mart_Forks & Shocks": {
       "date": "2026-11-13",
-      "count": 11
+      "count": 12
     },
     "Bike Mart_Frames": {
       "date": "2026-11-13",
@@ -24033,15 +24033,15 @@
     },
     "Bike Mart_Pedals": {
       "date": "2026-11-13",
-      "count": 48
+      "count": 49
     },
     "Bike Mart_Tires": {
       "date": "2026-11-13",
-      "count": 291
+      "count": 296
     },
     "Bike Mart_Wheels": {
       "date": "2026-11-13",
-      "count": 169
+      "count": 170
     },
     "Fanatik_Packs": {
       "date": "2026-11-13",
@@ -25624,7 +25624,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 7
+        "count": 10
       }
     ],
     "Bike Mart_Brakes": [
@@ -25634,7 +25634,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 112
+        "count": 116
       }
     ],
     "Bike Mart_Cockpit": [
@@ -25644,7 +25644,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 259
+        "count": 261
       }
     ],
     "Bike Mart_Drivetrain": [
@@ -25654,7 +25654,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 144
+        "count": 146
       }
     ],
     "Bike Mart_Forks & Shocks": [
@@ -25664,7 +25664,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 11
+        "count": 12
       }
     ],
     "Bike Mart_Frames": [
@@ -25694,7 +25694,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 48
+        "count": 49
       }
     ],
     "Bike Mart_Protection": [
@@ -25714,7 +25714,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 291
+        "count": 296
       }
     ],
     "Bike Mart_Wheels": [
@@ -25724,7 +25724,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 169
+        "count": 170
       }
     ],
     "Bikes Online_Bikes": [
@@ -26376,7 +26376,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 166
+        "count": 172
       }
     ],
     "Cambria_Drivetrain": [
@@ -26476,7 +26476,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 7
+        "count": 6
       }
     ],
     "Cambria_Frames": [
@@ -26586,7 +26586,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 24
+        "count": 55
       }
     ],
     "Cambria_Protection": [
@@ -26636,7 +26636,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 94
+        "count": 93
       }
     ],
     "Cambria_Tires": [
@@ -26682,7 +26682,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 89
+        "count": 90
       }
     ],
     "Cambria_Wheels": [
@@ -27110,7 +27110,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 229
+        "count": 228
       }
     ],
     "Colorado Cyclist_Tires": [
@@ -27152,7 +27152,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 356
+        "count": 355
       }
     ],
     "Colorado Cyclist_Wheels": [
@@ -27572,7 +27572,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 20
+        "count": 21
       }
     ],
     "Demon_Tires": [
@@ -27814,7 +27814,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 56
+        "count": 57
       }
     ],
     "Fanatik_Drivetrain": [
@@ -28074,7 +28074,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 12
+        "count": 14
       }
     ],
     "Fanatik_Tires": [

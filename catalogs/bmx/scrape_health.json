@@ -24021,14 +24021,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 95,
+          "count": 94,
           "failed": false,
           "diagnostics": {
             "expected_count": 92.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 95,
-            "percentage_change": 3.3,
+            "actual_count": 94,
+            "percentage_change": 2.2,
             "reason": "normal_variation"
           }
         },
@@ -24285,14 +24285,14 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 102,
+          "count": 101,
           "failed": false,
           "diagnostics": {
             "expected_count": 101.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 102,
-            "percentage_change": 1.0,
+            "actual_count": 101,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -25881,15 +25881,15 @@
           }
         },
         "TGM_Protection": {
-          "count": 4,
-          "failed": false,
+          "count": 0,
+          "failed": true,
           "diagnostics": {
             "expected_count": 9,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
-            "actual_count": 4,
-            "percentage_change": -55.6,
-            "reason": "sustained_new_level"
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "scrape_failed"
           }
         },
         "Tactics_Protection": {
@@ -25965,14 +25965,14 @@
           }
         },
         "Triple 8_Protection": {
-          "count": 9,
+          "count": 10,
           "failed": false,
           "diagnostics": {
             "expected_count": 8.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 9,
-            "percentage_change": 12.5,
+            "actual_count": 10,
+            "percentage_change": 25.0,
             "reason": "normal_variation"
           }
         },
@@ -26301,7 +26301,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-13T09:59:06+00:00"
+      "scanned_at": "2026-11-13T18:09:15+00:00"
     }
   ],
   "baseline": {
@@ -26447,7 +26447,7 @@
     },
     "Triple 8_Protection": {
       "date": "2026-11-13",
-      "count": 9
+      "count": 10
     },
     "7iDP_Protection": {
       "date": "2026-11-13",
@@ -26459,11 +26459,11 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-13",
-      "count": 95
+      "count": 94
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-13",
-      "count": 102
+      "count": 101
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-13",
@@ -26552,10 +26552,6 @@
     "187 Killer Pads_Protection": {
       "date": "2026-11-13",
       "count": 5
-    },
-    "TGM_Protection": {
-      "date": "2026-11-13",
-      "count": 4
     },
     "Albe's BMX_Packs": {
       "date": "2026-11-13",
@@ -28894,7 +28890,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 95
+        "count": 94
       }
     ],
     "Cambria_Seating": [
@@ -29906,7 +29902,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 102
+        "count": 101
       }
     ],
     "Colorado Cyclist_Seating": [
@@ -34423,10 +34419,6 @@
       {
         "date": "2026-11-12",
         "count": 4
-      },
-      {
-        "date": "2026-11-13",
-        "count": 4
       }
     ],
     "Tactics_Protection": [
@@ -34708,7 +34700,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 9
+        "count": 10
       }
     ],
     "Triple 8_Seating": [
