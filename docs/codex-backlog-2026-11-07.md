@@ -214,3 +214,21 @@ Checked by Codex, 2026-11-07.
 
 ## 13. Live search across Shopify shops ("More deals from other shops")
 See `docs/live-search-catalog.md`: a Worker route that calls Shopify's Global Catalog when a shopper searches, plus a results section below our own search results, with only marked-down items, Shopify's attribution kept and a 10-minute cache at most. **Nothing from it is stored in our catalog.** It's behind a flag that stays off until the owner deploys the Worker and creates a Catalog API client. Promoted placements (paid) are out unless the owner asks.
+
+## 14. Intermittent "child.dealRows is not a function" (flaky browser check)
+**Seen:** the PR browser checks fail now and then with `TypeError: child.dealRows is not a function` under "No browser errors". It hits a different sport and width each time: Ski at 390 px on PR 281 (2026-11-12); earlier PRs too. A re-run usually passes. Nothing in the PR's change is involved, so it blocks unrelated PRs.
+
+**Where:** `navigation/navigation.js` `registerCategories(source, child)` calls `child.dealRows()` and `child.typeSlug()` straight away. Those are top-level functions in `page.js`, inlined at the end of the catalog page. `navigation/skate-bridge.js` `mountCategories()` calls `registerCategories` on DOMContentLoaded, or at once when the bridge script (added dynamically in the page `<head>`) runs after parsing. Likely causes to check:
+- the bridge running before `page.js` has defined those functions; or
+- `child` being a WindowProxy for an iframe that has already started loading another sport's catalog (quick tab switches), so its globals aren't there yet.
+
+**Wanted:**
+- No page error in any order of loading. If `child.dealRows`/`child.typeSlug` aren't functions yet, wait for the catalog to say it's ready (an event or a flag `page.js` sets once its functions exist) and register then. Don't swallow the error and leave the menu empty.
+- A registration from an iframe that has since moved to another sport is ignored.
+- Menu counts and behaviour unchanged. URL parameters, saved views and `localStorage` keys unchanged.
+- Keep `previews/navigation.js` and `previews/skate-bridge.js` in step if they're still copies.
+
+**Tests:**
+- A check in `ci/` that loads the shell with the bridge delayed or run early (for example, by stalling `page.js` or firing `registerCategories` before it) and asserts no page errors and correct menu counts.
+- A check that switches sport tabs quickly (Skate → Ski → MTB within a second) at 390 px and asserts no page errors.
+- Run the full browser checks three times in the PR; all green.
