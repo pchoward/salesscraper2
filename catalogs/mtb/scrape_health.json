@@ -21691,14 +21691,14 @@
           }
         },
         "Bicycle Warehouse_Tires": {
-          "count": 11,
+          "count": 10,
           "failed": false,
           "diagnostics": {
             "expected_count": 11.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 11,
-            "percentage_change": 0.0,
+            "actual_count": 10,
+            "percentage_change": -9.1,
             "reason": "insufficient_history"
           }
         },
@@ -23695,7 +23695,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-13T01:58:44+00:00"
+      "scanned_at": "2026-11-13T02:27:27+00:00"
     }
   ],
   "baseline": {
@@ -24001,7 +24001,7 @@
     },
     "Bicycle Warehouse_Tires": {
       "date": "2026-11-13",
-      "count": 11
+      "count": 10
     },
     "Bicycle Warehouse_Wheels": {
       "date": "2026-11-13",
@@ -25600,7 +25600,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 11
+        "count": 10
       }
     ],
     "Bicycle Warehouse_Wheels": [

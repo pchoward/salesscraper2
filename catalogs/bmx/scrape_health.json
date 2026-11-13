@@ -25965,14 +25965,14 @@
           }
         },
         "Triple 8_Protection": {
-          "count": 10,
+          "count": 9,
           "failed": false,
           "diagnostics": {
             "expected_count": 8.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 0.0,
-            "actual_count": 10,
-            "percentage_change": 25.0,
+            "actual_count": 9,
+            "percentage_change": 12.5,
             "reason": "normal_variation"
           }
         },
@@ -26301,7 +26301,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-13T01:39:12+00:00"
+      "scanned_at": "2026-11-13T02:07:31+00:00"
     }
   ],
   "baseline": {
@@ -26447,7 +26447,7 @@
     },
     "Triple 8_Protection": {
       "date": "2026-11-13",
-      "count": 10
+      "count": 9
     },
     "7iDP_Protection": {
       "date": "2026-11-13",
@@ -34708,7 +34708,7 @@
       },
       {
         "date": "2026-11-13",
-        "count": 10
+        "count": 9
       }
     ],
     "Triple 8_Seating": [
