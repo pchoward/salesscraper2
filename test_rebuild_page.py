@@ -62,7 +62,9 @@ def scrape_build(previous, current, history, failed_keys):
     history_saved = scraper.save_price_history(history)
     data_saved = scraper.save_current(current)
     decorate_digest(digest, current, history, [], previous_data=previous, scanned_at=SCANNED_AT, failed_keys=failed_keys)
-    html = build_report_html(current, changes, history, failed_keys, generated_at=SCANNED_AT, digest=digest)
+    # The scrape pools the other sports' general packs (sports/packs.py), as the rebuild does.
+    html = build_report_html(current, changes, history, failed_keys, generated_at=SCANNED_AT, digest=digest,
+                             pool_packs=True)
     write_page(html, "sale_items_chart.html")
     assert data_saved and history_saved
     rebuild_page.save_report_inputs(changes, digest, failed_keys, SCANNED_AT, history_saved)
@@ -142,7 +144,8 @@ class RebuildPageTests(unittest.TestCase):
             Path("price_history.json").write_text('{"stale": {}}', encoding="utf-8")
             changes = compare_catalogs(self.previous, self.current, [])
             digest = build_digest(changes, [])
-            html = build_report_html(self.current, changes, {}, [], generated_at=SCANNED_AT, digest=digest)
+            html = build_report_html(self.current, changes, {}, [], generated_at=SCANNED_AT, digest=digest,
+                                     pool_packs=True)
             rebuild_page.save_report_inputs(changes, digest, [], SCANNED_AT, history_saved=False)
             rebuild_page.rebuild()
             self.assertPublished(html)

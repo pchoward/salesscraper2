@@ -1,1073 +1,5 @@
 {
- "changes": {
-  "Bicycle Warehouse_Cockpit": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Spank",
-     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
-     ],
-     "name": "Spank Spoon 350 35mm Stem",
-     "part": "Cockpit",
-     "price_new": "59.99",
-     "price_old": "69.99",
-     "product_type": "Stems",
-     "store": "Bicycle Warehouse",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 69.99,
-       "price": 59.99,
-       "specs": {},
-       "variant_id": 40431254798438
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem"
-    },
-    "type": "new"
-   }
-  ],
-  "Bicycle Warehouse_Drivetrain": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "KMC",
-     "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
-     ],
-     "length": 1.0,
-     "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
-     "part": "Drivetrain",
-     "price_new": "19.99",
-     "price_old": "23.60",
-     "product_type": "Chains",
-     "store": "Bicycle Warehouse",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 23.6,
-       "price": 19.99,
-       "specs": {},
-       "variant_id": 42413792624742
-      },
-      {
-       "available": true,
-       "compare": 23.6,
-       "price": 19.99,
-       "specs": {},
-       "variant_id": 42413792821350
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
-     "width": 2.0
-    },
-    "type": "new"
-   }
-  ],
-  "Bike Mart_Cockpit": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ODI",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4111.jpg?v=1762250171",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4112.jpg?v=1762250170",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4113.jpg?v=1762250171",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4114.jpg?v=1762250170",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4115.jpg?v=1762250170",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4116.jpg?v=1762250171"
-     ],
-     "name": "ODI Reflex v2.1 XL Lock-On Grips - Round 135mm",
-     "part": "Cockpit",
-     "price_new": "28.80",
-     "price_old": "32.00",
-     "product_type": "Lock-On Grips",
-     "store": "Bike Mart",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 32.0,
-       "price": 28.8,
-       "specs": {},
-       "variant_id": 46838322692349
-      },
-      {
-       "available": true,
-       "compare": 32.0,
-       "price": 28.8,
-       "specs": {},
-       "variant_id": 46838322725117
-      },
-      {
-       "available": true,
-       "compare": 32.0,
-       "price": 28.8,
-       "specs": {},
-       "variant_id": 46838322757885
-      },
-      {
-       "available": true,
-       "compare": 32.0,
-       "price": 28.8,
-       "specs": {},
-       "variant_id": 46838322790653
-      },
-      {
-       "available": true,
-       "compare": 32.0,
-       "price": 28.8,
-       "specs": {},
-       "variant_id": 46838322823421
-      },
-      {
-       "available": true,
-       "compare": 32.0,
-       "price": 28.8,
-       "specs": {},
-       "variant_id": 46838322856189
-      },
-      {
-       "available": true,
-       "compare": 32.0,
-       "price": 28.8,
-       "specs": {},
-       "variant_id": 46838322888957
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://www.bikemart.com/products/odi-reflex-v2-1-xl-lock-on-grips-white-black"
-    },
-    "type": "new"
-   }
-  ],
-  "Bike Mart_Tires": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Schwalbe",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4961.jpg?v=1762329187"
-     ],
-     "name": "Schwalbe RapidRob Tire - Clincher Wire Black",
-     "part": "Tires",
-     "price_new": "28.83",
-     "price_old": "31.00",
-     "product_type": "Tires",
-     "store": "Bike Mart",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 31.0,
-       "price": 28.83,
-       "specs": {
-        "tire_width": [
-         "2.1"
-        ],
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 46844436283645
-      }
-     ],
-     "technical_specs": {
-      "tire_width": [
-       "2.1"
-      ],
-      "wheel_size": [
-       "29"
-      ]
-     },
-     "url": "https://www.bikemart.com/products/schwalbe-rapid-rob-tire-26-x-2-1-clincher-wire-black-k-guard-liteskin"
-    },
-    "type": "new"
-   }
-  ],
-  "Bike Mart_Wheels": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Stan's NoTubes",
-     "durometers": [
-      "650B"
-     ],
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1882.jpg?v=1762409592",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1882.jpg?v=1762409592",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1881.jpg?v=1762409592",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1880.jpg?v=1762409592",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1884.jpg?v=1762409592"
-     ],
-     "name": "Stan's NoTubes Stan's Arch S2 Rear Wheel",
-     "part": "Wheels",
-     "price_new": "325.00",
-     "price_old": "400.00",
-     "product_type": "Rear Wheel",
-     "spec_offers": [
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46847352504573"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46847352602877"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46847352635645"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46847352701181"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46847352733949"
-      }
-     ],
-     "store": "Bike Mart",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x142mm"
-        ],
-        "wheel_size": [
-         "27.5"
-        ]
-       },
-       "variant_id": 46847352504573
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x148mm"
-        ],
-        "wheel_size": [
-         "27.5"
-        ]
-       },
-       "variant_id": 46847352602877
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x142mm"
-        ],
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 46847352635645
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x148mm"
-        ],
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 46847352701181
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x148mm"
-        ],
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 46847352733949
-      }
-     ],
-     "technical_specs": {
-      "axle": [
-       "12x142mm",
-       "12x148mm"
-      ],
-      "wheel_size": [
-       "27.5",
-       "29"
-      ]
-     },
-     "url": "https://www.bikemart.com/products/stans-arch-s2-rear-wheel"
-    },
-    "type": "new"
-   }
-  ],
-  "Cambria_Cockpit": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ESI",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ESI_Racers_Edge_Silicon_MTB_Grips_Black_6b534ebb-54a2-4c60-a7ae-e234364583a5.jpg?v=1623830072",
-     "name": "ESI Racers Edge Silicon MTB Grips - Black",
-     "part": "Cockpit",
-     "price_new": "18.99",
-     "price_old": "19.99",
-     "product_type": "MTB Grips",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 19.99,
-       "price": 18.99,
-       "specs": {},
-       "variant_id": 39947167662262
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/esi-racers-edge-silicon-mtb-grips-black"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "KS",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTENiIntegraDropperSeatpost-2020.jpg?v=1612877766",
-     "name": "KS Suspension eTENi Integra Dropper Seatpost - 2020",
-     "part": "Cockpit",
-     "price_new": "116.10",
-     "price_old": "129.00",
-     "product_type": "Dropper Adjustable Seatposts",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 129.0,
-       "price": 116.1,
-       "specs": {},
-       "variant_id": 38018889810102
-      },
-      {
-       "available": true,
-       "compare": 129.0,
-       "price": 116.1,
-       "specs": {},
-       "variant_id": 39576056135862
-      },
-      {
-       "available": true,
-       "compare": 129.0,
-       "price": 116.1,
-       "specs": {},
-       "variant_id": 40515330605238
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/ks-suspension-eteni-integra-dropper-seatpost-2020"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ODI",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_ArmyGreen_bc8e7bc3-cb4a-43b9-9506-898bdcf8255f.jpg?v=1623830424",
-     "name": "ODI Elite Pro Lock-On Bonus Pack MTB Grips - Army Green",
-     "part": "Cockpit",
-     "price_new": "27.23",
-     "price_old": "30.25",
-     "product_type": "MTB Grips",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 30.25,
-       "price": 27.23,
-       "specs": {},
-       "variant_id": 39947192107190
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/odi-elite-pro-lock-on-bonus-pack-mtb-grips-army-green"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ODI",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_Turquoise_ca5770c7-00b0-4e1f-a930-518d34f86e26.jpg?v=1623830432",
-     "name": "ODI Elite Pro Lock-On Bonus Pack MTB Grips - Turquoise",
-     "part": "Cockpit",
-     "price_new": "27.23",
-     "price_old": "30.25",
-     "product_type": "MTB Grips",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 30.25,
-       "price": 27.23,
-       "specs": {},
-       "variant_id": 39947192434870
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/odi-elite-pro-lock-on-bonus-pack-mtb-grips-turquoise"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ODI",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_Navy_26bf625a-91f5-4a8c-97ee-1a040e856a2d.jpg?v=1623830429",
-     "name": "ODI Elite Pro Lock-On Bonus Pack MTB Grips - Navy Blue",
-     "part": "Cockpit",
-     "price_new": "27.23",
-     "price_old": "30.25",
-     "product_type": "MTB Grips",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 30.25,
-       "price": 27.23,
-       "specs": {},
-       "variant_id": 39947192303798
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/odi-elite-pro-lock-on-bonus-pack-mtb-grips-navy-blue"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ODI",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODI_Dread_Lock_Grips_Black_e6206d3e-5251-4261-b23a-78d426e5aba1.jpg?v=1623830406",
-     "name": "ODI Dread Lock Grips - Black",
-     "part": "Cockpit",
-     "price_new": "30.15",
-     "price_old": "33.50",
-     "product_type": "MTB Grips",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 33.5,
-       "price": 30.15,
-       "specs": {},
-       "variant_id": 39947190370486
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/odi-dread-lock-grips-black"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ODI",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODILongneckSLGrips_BrightRed_640dac93-259f-4472-851c-4eaf0f854f9f.jpg?v=1623830443",
-     "name": "ODI Longneck SL Grips - Bright Red",
-     "part": "Cockpit",
-     "price_new": "11.66",
-     "price_old": "12.95",
-     "product_type": "MTB Grips",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 12.95,
-       "price": 11.66,
-       "specs": {},
-       "variant_id": 39947192828086
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/odi-longneck-sl-grips-bright-red"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ESI",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/181517000162_c6f2a6c1-2372-42e7-bc49-225917c470f6.jpg?v=1623830076",
-     "name": "ESI Racers Edge Silicon MTB Grips - Gray",
-     "part": "Cockpit",
-     "price_new": "18.99",
-     "price_old": "19.99",
-     "product_type": "MTB Grips",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 19.99,
-       "price": 18.99,
-       "specs": {},
-       "variant_id": 39947167858870
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/esi-racers-edge-silicon-mtb-grips-gray"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "KS",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/KSSuspensionRage-iSDropperSeatpost.jpg?v=1735304786",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/KSSuspensionRage-iSDropperSeatpost.jpg?v=1735304786",
-      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Capture_781e6cfb-5613-4674-bbcd-c7eac4103b54.jpg?v=1735304788"
-     ],
-     "name": "KS Suspension Rage-iS Dropper Seatpost",
-     "part": "Cockpit",
-     "price_new": "161.10",
-     "price_old": "179.00",
-     "product_type": "Dropper Adjustable Seatposts",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 179.0,
-       "price": 161.1,
-       "specs": {},
-       "variant_id": 43686495355062
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/ks-suspension-rage-is-dropper-seatpost"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "KS",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTenRemoteExternalDropperPost-NoRemote.jpg?v=1647945188",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTenRemoteExternalDropperPost-NoRemote.jpg?v=1647945188",
-      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTenRemoteExternalDropperPost-NoRemote2.jpg?v=1647945188"
-     ],
-     "name": "KS Suspension eTen Remote External Dropper Post - No Remote",
-     "part": "Cockpit",
-     "price_new": "107.10",
-     "price_old": "119.00",
-     "product_type": "Dropper Adjustable Seatposts",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 119.0,
-       "price": 107.1,
-       "specs": {},
-       "variant_id": 41310259511478
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/ks-suspension-eten-remote-external-dropper-post-no-remote"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "ODI",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODILongneckSLGrips_Pink_9917aa4c-b702-4165-87e9-8aa3ddaa2a76.jpg?v=1623830448",
-     "name": "ODI Longneck SL Grips - Pink",
-     "part": "Cockpit",
-     "price_new": "11.66",
-     "price_old": "12.95",
-     "product_type": "MTB Grips",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 12.95,
-       "price": 11.66,
-       "specs": {},
-       "variant_id": 39947192959158
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://cambriabike.com/products/odi-longneck-sl-grips-pink"
-    },
-    "type": "new"
-   }
-  ],
-  "Cambria_Tires": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Maxxis",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Minion-DHR-II-Rear-Tire-EXO-TR_Black_60dc1d38-0afd-44af-9408-362a7ecab7a6.jpg?v=1625212035",
-     "length": 26.0,
-     "name": "Maxxis Minion DHR II 26\" Folding MTB Tire - EXO - NLM",
-     "part": "Tires",
-     "price_new": "65.00",
-     "price_old": "71.00",
-     "product_type": "MTB Tires Folding",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 71.0,
-       "price": 65.0,
-       "specs": {
-        "casing": [
-         "EXO"
-        ],
-        "wheel_size": [
-         "26"
-        ]
-       },
-       "variant_id": 40066378367158
-      }
-     ],
-     "technical_specs": {
-      "casing": [
-       "EXO"
-      ],
-      "wheel_size": [
-       "26"
-      ]
-     },
-     "url": "https://cambriabike.com/products/maxxis-minion-dhr-ii-26-folding-mtb-tire-exo-nlm"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Maxxis",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410.jpg?v=1691588515",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410.jpg?v=1691588515",
-      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410_2.jpg?v=1691588515",
-      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410_1.jpg?v=1691588513"
-     ],
-     "length": 29.0,
-     "name": "Maxxis Rekon Race 29\" Folding MTB Tire - E-25",
-     "part": "Tires",
-     "price_new": "88.00",
-     "price_old": "96.00",
-     "product_type": "MTB Tires Folding",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 96.0,
-       "price": 88.0,
-       "specs": {
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 42336827310262
-      }
-     ],
-     "technical_specs": {
-      "wheel_size": [
-       "29"
-      ]
-     },
-     "url": "https://cambriabike.com/products/maxxis-rekon-race-29-folding-mtb-tire-e-25"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Schwalbe",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SchwalbeRocketRonSuperGroundMTBTire_Black_8c8c2a9c-d2d5-4e67-9aec-865ab0abe6f8.jpg?v=1625212307",
-     "length": 29.0,
-     "name": "Schwalbe Rocket Ron Evolution 29\" Folding MTB Tire - Super Ground - Snakeskin",
-     "part": "Tires",
-     "price_new": "94.86",
-     "price_old": "102.00",
-     "product_type": "MTB Tires Folding",
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 102.0,
-       "price": 94.86,
-       "specs": {
-        "casing": [
-         "Super Ground"
-        ],
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 40066395537590
-      }
-     ],
-     "technical_specs": {
-      "casing": [
-       "Super Ground"
-      ],
-      "wheel_size": [
-       "29"
-      ]
-     },
-     "url": "https://cambriabike.com/products/schwalbe-rocket-ron-evolution-29-folding-mtb-tire-super-ground-snakeskin"
-    },
-    "type": "new"
-   }
-  ],
-  "Cambria_Wheels": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Stan's NoTubes",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266145.jpg?v=1650616572",
-     "length": 29.0,
-     "name": "Stans No Tubes Crest MK4 29\" MTB Wheel - Rear",
-     "part": "Wheels",
-     "price_new": "543.00",
-     "price_old": "675.00",
-     "product_type": "MTB Wheels",
-     "spec_offers": [
-      {
-       "available": true,
-       "compare_at_price": 675.0,
-       "diameter_mm": null,
-       "durometers": [],
-       "price": 543.0,
-       "variant_id": "41401747734710"
-      }
-     ],
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 675.0,
-       "price": 543.0,
-       "specs": {
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 41401747734710
-      }
-     ],
-     "technical_specs": {
-      "wheel_size": [
-       "29"
-      ]
-     },
-     "url": "https://cambriabike.com/products/stans-no-tubes-crest-mk4-29-mtb-wheel-rear"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Stan's NoTubes",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266136.jpg?v=1650616522",
-     "length": 29.0,
-     "name": "Stans No Tubes Crest MK4 29\" MTB Wheel - Front",
-     "part": "Wheels",
-     "price_new": "257.00",
-     "price_old": "320.00",
-     "product_type": "MTB Wheels",
-     "spec_offers": [
-      {
-       "available": true,
-       "compare_at_price": 320.0,
-       "diameter_mm": null,
-       "durometers": [],
-       "price": 257.0,
-       "variant_id": "41401747701942"
-      }
-     ],
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 320.0,
-       "price": 257.0,
-       "specs": {
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 41401747701942
-      }
-     ],
-     "technical_specs": {
-      "wheel_size": [
-       "29"
-      ]
-     },
-     "url": "https://cambriabike.com/products/stans-no-tubes-crest-mk4-29-mtb-wheel-front"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Stan's NoTubes",
-     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266131.jpg?v=1650616859",
-     "length": 29.0,
-     "name": "Stans No Tubes Arch MK4 29\" MTB Wheel - Rear",
-     "part": "Wheels",
-     "price_new": "543.00",
-     "price_old": "675.00",
-     "product_type": "MTB Wheels",
-     "spec_offers": [
-      {
-       "available": true,
-       "compare_at_price": 675.0,
-       "diameter_mm": null,
-       "durometers": [],
-       "price": 543.0,
-       "variant_id": "41401747800246"
-      }
-     ],
-     "store": "Cambria",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 675.0,
-       "price": 543.0,
-       "specs": {
-        "wheel_size": [
-         "29"
-        ]
-       },
-       "variant_id": 41401747800246
-      }
-     ],
-     "technical_specs": {
-      "wheel_size": [
-       "29"
-      ]
-     },
-     "url": "https://cambriabike.com/products/stans-no-tubes-arch-mk4-29-mtb-wheel-rear"
-    },
-    "type": "new"
-   }
-  ],
-  "Mike's Bikes_Wheels": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Reserve",
-     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Reserve_40_44_gravel_wheel_bundle_victoria_terrino.jpg?v=1794427490",
-     "name": "Reserve 40|44 GR Wheelset + Vittoria Terreno T40 Tire Bundle",
-     "part": "Wheels",
-     "price_new": "1599.00",
-     "price_old": "1999.00",
-     "product_type": "COMPONENTS/WHEELS/PERFORMANCE WHEELS CARBON",
-     "spec_conflicts": [
-      "ambiguous description size"
-     ],
-     "spec_offers": [
-      {
-       "available": true,
-       "compare_at_price": 1999.0,
-       "diameter_mm": null,
-       "durometers": [],
-       "price": 1599.0,
-       "variant_id": "46090098966597"
-      }
-     ],
-     "store": "Mike's Bikes",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 1999.0,
-       "price": 1599.0,
-       "specs": {},
-       "variant_id": 46090098966597
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://mikesbikes.com/products/reserve-40-44-gr-terreno-t40-wheelset-bundle"
-    },
-    "type": "new"
-   }
-  ],
-  "The Lost Co._Tires": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Schwalbe",
-     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/schwalbe-magic-mary-29x25-trail-pro-radial-ultra-soft-schwalbe-the-lost-co-1165459701-4026495971645-2787473.jpg?v=1776939367",
-     "length": 2.5,
-     "name": "Schwalbe Magic Mary Tire - 27.5x2.5 - Gravity Pro - Soft - Radial",
-     "part": "Tires",
-     "price_new": "100.44",
-     "price_old": "108.00",
-     "product_type": "Tires",
-     "store": "The Lost Co.",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 108.0,
-       "price": 100.44,
-       "specs": {
-        "casing": [
-         "Radial"
-        ],
-        "tire_width": [
-         "2.5"
-        ],
-        "wheel_size": [
-         "27.5"
-        ]
-       },
-       "variant_id": 45752621236422
-      }
-     ],
-     "technical_specs": {
-      "casing": [
-       "Radial"
-      ],
-      "tire_width": [
-       "2.5"
-      ],
-      "wheel_size": [
-       "27.5"
-      ]
-     },
-     "url": "https://www.thelostco.com/products/schwalbe-magic-mary-gravity-pro-radial-27-5x2-5-soft",
-     "width": 27.5
-    },
-    "type": "new"
-   }
-  ]
- },
+ "changes": {},
  "digest": {
   "cross_store": [
    {
@@ -1448,10 +380,10 @@
     "label": "ODI ruffian mini v2 1",
     "offers": [
      {
-      "name": "ODI Ruffian V2.1 Grips 135mm Purple Pair",
+      "name": "ODI Ruffian Mini V2.1 Grips - 110mm",
       "price": 28.8,
       "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/odi-ruffian-v2-1-grips-135mm-purple-pair"
+      "url": "https://www.bikemart.com/products/odi-ruffian-mini-v2-1-lock-on-bmx"
      },
      {
       "name": "ODI Ruffian Mini V2.1 Grips 110mm Black Pair",
@@ -1484,6 +416,26 @@
       "price": 28.8,
       "store": "The Lost Co.",
       "url": "https://www.thelostco.com/products/odi-ruffian-v2-1-lock-on-grips-gray"
+     }
+    ],
+    "part": "Cockpit"
+   },
+   {
+    "cheapest_price": 79.99,
+    "key": "sport|Cockpit|oneupcomponents|clamp|direct|length|mount",
+    "label": "OneUp Components direct mount length clamp",
+    "offers": [
+     {
+      "name": "OneUp Components Direct Mount Stem 45mm Length - 35mm Clamp",
+      "price": 79.99,
+      "store": "Fanatik",
+      "url": "https://www.fanatikbike.com/products/oneup-direct-mount-stem-45mm-length-35mm-clamp"
+     },
+     {
+      "name": "OneUp Components Direct Mount Stem",
+      "price": 79.99,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/oneup-components-direct-mount-stem"
      }
     ],
     "part": "Cockpit"
@@ -1524,29 +476,15 @@
       "price": 119.99,
       "store": "Mike's Bikes",
       "url": "https://mikesbikes.com/products/one-up-v2-carbon-handlebar"
+     },
+     {
+      "name": "OneUp Components V2 Carbon Handlebar",
+      "price": 119.99,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/oneup-components-carbon-handlebar"
      }
     ],
     "part": "Cockpit"
-   },
-   {
-    "cheapest_price": 36.0,
-    "key": "sport|Drivetrain|kmc|12|speed|x12",
-    "label": "KMC x12 12 speed",
-    "offers": [
-     {
-      "name": "KMC X12 12-Speed Chain",
-      "price": 115.5,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/x12-12-speed-chain"
-     },
-     {
-      "name": "KMC X12 12-Speed Chain",
-      "price": 36.0,
-      "store": "Fanatik",
-      "url": "https://www.fanatikbike.com/products/kmc-x12-12-speed-chain"
-     }
-    ],
-    "part": "Drivetrain"
    },
    {
     "cheapest_price": 50.25,
@@ -1590,6 +528,46 @@
       "price": 35.22,
       "store": "The Lost Co.",
       "url": "https://www.thelostco.com/products/shimano-deore-cn-m6100-chain-12-speed-138-links-silver-hyperglide"
+     }
+    ],
+    "part": "Drivetrain"
+   },
+   {
+    "cheapest_price": 76.5,
+    "key": "sport|Drivetrain|sram|axs|eagle|magic|rear|transmission|type|xx",
+    "label": "SRAM xx eagle transmission type axs rear",
+    "offers": [
+     {
+      "name": "SRAM XX Eagle Transmission T-Type AXS Rear Derailleur \"Magic\" Pulley Kit",
+      "price": 84.95,
+      "store": "Fanatik",
+      "url": "https://www.fanatikbike.com/products/sram-xx-eagle-transmission-t-type-axs-rear-derailleur-magic-pulley-kit"
+     },
+     {
+      "name": "SRAM Rear Derailleur Pulley Kit XX T-Type Eagle AXS",
+      "price": 76.5,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/rear-derailleur-pulley-kit-xx-t-type-eagle-axs-includes-14t-upper-and-16t-lower-black-metal-spider-pulley-2-aluminum-pulley-screws"
+     }
+    ],
+    "part": "Drivetrain"
+   },
+   {
+    "cheapest_price": 29.62,
+    "key": "sport|Drivetrain|kmc|12|speed|x12",
+    "label": "KMC x12 12 speed",
+    "offers": [
+     {
+      "name": "KMC X12 12-Speed Chain",
+      "price": 29.62,
+      "store": "Bike Mart",
+      "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+     },
+     {
+      "name": "KMC X12 12-Speed Chain",
+      "price": 36.0,
+      "store": "Fanatik",
+      "url": "https://www.fanatikbike.com/products/kmc-x12-12-speed-chain"
      }
     ],
     "part": "Drivetrain"
@@ -1670,26 +648,6 @@
       "price": 17.0,
       "store": "The Lost Co.",
       "url": "https://www.thelostco.com/products/sram-universal-derailleur-hanger-aluminum-black"
-     }
-    ],
-    "part": "Drivetrain"
-   },
-   {
-    "cheapest_price": 19.99,
-    "key": "sport|Drivetrain|kmc|1|s1|single|speed",
-    "label": "KMC s1 single speed 1",
-    "offers": [
-     {
-      "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
-      "price": 19.99,
-      "store": "Bicycle Warehouse",
-      "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9"
-     },
-     {
-      "name": "Kmc S1 1 Speed Chain",
-      "price": 20.6,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/kmc-s1-1-speed-chain"
      }
     ],
     "part": "Drivetrain"
@@ -2671,21 +1629,21 @@
     "part": "Protection"
    },
    {
-    "cheapest_price": 89.91,
-    "key": "sport|Tires|pirelli|dh|dualwall|edition|enduro|folding|label|race|scorpion|smartevo|team|tubeless|ylw",
-    "label": "Pirelli scorpion race enduro tubeless folding ylw",
+    "cheapest_price": 64.17,
+    "key": "sport|Tires|schwalbe|addix|folding|nic|nobby|speedgrip|tubeless",
+    "label": "Schwalbe nobby nic tubeless folding addix speedgrip",
     "offers": [
      {
-      "name": "Pirelli Scorpion Race Enduro M Tire - 29 x 2.5 Tubeless Folding YLW Label Team Edition DualWALL SmartEVO DH",
-      "price": 109.71,
+      "name": "Schwalbe Nobby Nic 29x2.4 Tubeless Tire",
+      "price": 64.17,
       "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/pirelli-scorpion-race-enduro-m-tire-29-x-2-5-tubeless-folding-ylw-label-team-edition-dualwall-smartevo-dh"
+      "url": "https://www.bikemart.com/products/schwalbe-nobby-nic-performance-dd-e50-tire-29x2-4-addix"
      },
      {
-      "name": "Pirelli Scorpion Race Enduro S Tire - 29 x 2.5, Tubeless, Folding, Yellow Label Team Edition, DualWALL, SmartEVO DH",
-      "price": 89.91,
+      "name": "Schwalbe Nobby Nic Tire - 29 x 2.4, Tubeless, Folding, Black, Addix SpeedGrip",
+      "price": 94.86,
       "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-race-enduro-s-tire-29-x-2-5-tubeless-folding-yellow-label-team-edition-dualwall-smartevo-dh"
+      "url": "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-29-x-2-4-tubeless-folding-black-addix-speedgrip-super-ground"
      }
     ],
     "part": "Tires"
@@ -2766,6 +1724,26 @@
       "price": 95.0,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/maxxis-assegai-tire-27-5-x-2-60-tubeless-folding-black-maxxterra-exo"
+     }
+    ],
+    "part": "Tires"
+   },
+   {
+    "cheapest_price": 87.0,
+    "key": "sport|Tires|maxxis|3c|dissector|exo|folding|maxxterra|tubeless",
+    "label": "Maxxis dissector tubeless folding 3c maxxterra exo",
+    "offers": [
+     {
+      "name": "Maxxis Dissector Tire - 27.5 x 2.4 Tubeless Folding Black 3C MaxxTerra EXO+",
+      "price": 94.0,
+      "store": "Bike Mart",
+      "url": "https://www.bikemart.com/products/maxxis-dissector-tire-27-5-x-2-4-tubeless-folding-black-3c-maxx-terra-exo"
+     },
+     {
+      "name": "Maxxis Dissector Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxTerra, EXO",
+      "price": 87.0,
+      "store": "Colorado Cyclist",
+      "url": "https://www.coloradocyclist.com/products/maxxis-dissector-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxterra-exo-wide-trail"
      }
     ],
     "part": "Tires"
@@ -2911,26 +1889,6 @@
     "part": "Tires"
    },
    {
-    "cheapest_price": 106.0,
-    "key": "sport|Tires|maxxis|3c|50|assegai|blk|dh|folding|maxxgrip|trail|tubeless|wide",
-    "label": "Maxxis assegai tubeless folding blk 3c maxxgrip",
-    "offers": [
-     {
-      "name": "Maxxis Assegai Tire - 29 x 2.5 Tubeless Folding BLK 3C MaxxGrip DH Wide Trail E-50",
-      "price": 106.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-assegai-tire-29-x-2-5-tubeless-folding-blk-3c-maxxgrip-dh-wide-trail-e-50"
-     },
-     {
-      "name": "Maxxis Assegai Tire - 29 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, DH, Wide Trail, E-50",
-      "price": 106.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-assegai-tire-29-x-2-5-tubeless-folding-black-3c-maxxgrip-dh-wide-trail-e-50"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
     "cheapest_price": 95.0,
     "key": "sport|Tires|maxxis|3c|assegai|blk|exo|folding|maxxgrip|trail|tubeless|wide",
     "label": "Maxxis assegai tubeless folding blk 3c maxxgrip",
@@ -3025,7 +1983,7 @@
       "name": "Maxxis Assegai Tire - 29 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, DH, Wide Trail",
       "price": 106.0,
       "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-assegai-tire-29-x-2-5-tubeless-folding-black-3c-maxxgrip-dh-wide-trail-oe-packaging"
+      "url": "https://www.coloradocyclist.com/products/maxxis-assegai-tire-29-x-2-5-tubeless-folding-black-3c-maxxgrip-dh-wide-trail-e-50"
      }
     ],
     "part": "Tires"
@@ -3171,26 +2129,6 @@
     "part": "Tires"
    },
    {
-    "cheapest_price": 95.0,
-    "key": "sport|Tires|maxxis|3c|blk|dissector|exo|folding|ii|maxxgrip|trail|tubeless|wide",
-    "label": "Maxxis dissector ii tubeless folding blk 3c",
-    "offers": [
-     {
-      "name": "Maxxis Dissector II Tire - 29 x 2.4 Tubeless Folding BLK 3C MaxxGrip EXO+ Wide Trail",
-      "price": 95.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-dissector-ii-tire-29-x-2-4-tubeless-folding-blk-3c-maxx-grip-exo-wide-trail"
-     },
-     {
-      "name": "Maxxis Dissector II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+, Wide Trail",
-      "price": 95.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-dissector-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxx-grip-exo-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
     "cheapest_price": 106.0,
     "key": "sport|Tires|maxxis|3c|blk|dd|dissector|folding|ii|maxxgrip|trail|tubeless|wide",
     "label": "Maxxis dissector ii tubeless folding blk 3c",
@@ -3231,26 +2169,6 @@
     "part": "Tires"
    },
    {
-    "cheapest_price": 94.0,
-    "key": "sport|Tires|maxxis|3c|dissector|exo|folding|maxxterra|tubeless",
-    "label": "Maxxis dissector tubeless folding 3c maxxterra exo",
-    "offers": [
-     {
-      "name": "Maxxis Dissector Tire - 27.5 x 2.4 Tubeless Folding Black 3C MaxxTerra EXO+",
-      "price": 94.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-dissector-tire-27-5-x-2-4-tubeless-folding-black-3c-maxx-terra-exo"
-     },
-     {
-      "name": "Maxxis Dissector Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxTerra, EXO+",
-      "price": 94.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-dissector-tire-27-5-x-2-4-tubeless-folding-black-3c-maxx-terra-exo"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
     "cheapest_price": 105.0,
     "key": "sport|Tires|maxxis|3c|blk|dh|dissector|folding|maxxgrip|trail|tubeless|wide",
     "label": "Maxxis dissector tubeless folding blk 3c maxxgrip",
@@ -3286,26 +2204,6 @@
       "price": 99.0,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/maxxis-dissector-tire-29-x-2-6-tubeless-folding-black-3c-maxx-terra-exo-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 87.0,
-    "key": "sport|Tires|maxxis|3c|blk|dissector|exo|folding|maxxterra|trail|tubeless|wide",
-    "label": "Maxxis dissector tubeless folding blk 3c maxxterra",
-    "offers": [
-     {
-      "name": "Maxxis Dissector Tire - 27.5 x 2.4 Tubeless Folding BLK 3C MaxxTerra EXO Wide Trail",
-      "price": 87.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-dissector-tire-27-5-x-2-4-tubeless-folding-blk-3c-maxxterra-exo-wide-trail"
-     },
-     {
-      "name": "Maxxis Dissector Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxTerra, EXO, Wide Trail",
-      "price": 87.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-dissector-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxterra-exo-wide-trail"
      }
     ],
     "part": "Tires"
@@ -3386,26 +2284,6 @@
       "price": 82.0,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/maxxis-dissector-tire-29-x-2-6-tubeless-folding-black-dual-exo-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 78.0,
-    "key": "sport|Tires|maxxis|blk|compound|dual|exo|folding|forekaster|trail|tubeless|wide",
-    "label": "Maxxis forekaster tubeless folding blk dual compound",
-    "offers": [
-     {
-      "name": "Maxxis Forekaster Tire - 29 x 2.4 Tubeless Folding BLK Dual Compound EXO Wide Trail",
-      "price": 78.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-forekaster-tire-29-x-2-4-tubeless-folding-blk-dual-compound-exo-wide-trail"
-     },
-     {
-      "name": "Maxxis Forekaster Tire - 29 x 2.4, Tubeless, Folding, Black, Dual Compound, EXO, Wide Trail",
-      "price": 78.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-forekaster-tire-29-x-2-4-tubeless-folding-black-dual-compound-exo-wide-trail"
      }
     ],
     "part": "Tires"
@@ -3831,26 +2709,6 @@
     "part": "Tires"
    },
    {
-    "cheapest_price": 88.0,
-    "key": "sport|Tires|maxxis|3c|blk|dhf|exo|folding|maxxgrip|minion|trail|tubeless|wide",
-    "label": "Maxxis minion dhf tubeless folding blk 3c",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHF Tire - 27.5 x 2.5 Tubeless Folding BLK 3C MaxxGrip EXO Wide Trail",
-      "price": 88.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhf-tire-27-5-x-2-5-tubeless-folding-blk-3c-maxx-grip-exo-wide-trail"
-     },
-     {
-      "name": "Maxxis Minion DHF Tire - 27.5 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, EXO, Wide Trail",
-      "price": 88.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhf-tire-27-5-x-2-5-tubeless-folding-black-3c-maxx-grip-exo-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
     "cheapest_price": 106.0,
     "key": "sport|Tires|maxxis|3c|blk|dd|dhf|folding|maxxgrip|minion|trail|tubeless|wide",
     "label": "Maxxis minion dhf tubeless folding blk 3c",
@@ -3906,46 +2764,6 @@
       "price": 106.0,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhf-tire-29-x-2-50-tubeless-folding-black-3cg-dh-wide-trail-e-50"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 83.0,
-    "key": "sport|Tires|maxxis|blk|dark|dhf|dual|exo|folding|minion|trail|tubeless|wide",
-    "label": "Maxxis minion dhf tubeless folding blk dark",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHF Tire - 29 x 2.6 Tubeless Folding BLK/Dark Tan Dual EXO Wide Trail",
-      "price": 83.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhf-tire-29-x-2-6-tubeless-folding-blk-dark-tan-dual-exo-wide-trail"
-     },
-     {
-      "name": "Maxxis Minion DHF Tire - 29 x 2.6, Tubeless, Folding, Black/Dark Tan, Dual, EXO, Wide Trail",
-      "price": 83.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhf-tire-29-x-2-6-tubeless-folding-black-dark-tan-dual-exo-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 83.0,
-    "key": "sport|Tires|maxxis|blk|compound|dhf|dual|exo|folding|minion|trail|tubeless|wide",
-    "label": "Maxxis minion dhf tubeless folding blk dual",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHF Tire - 29 x 2.6 Tubeless Folding BLK Dual Compound EXO Wide Trail",
-      "price": 83.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhf-tire-29-x-2-6-tubeless-folding-blk-dual-compound-exo-wide-trail"
-     },
-     {
-      "name": "Maxxis Minion DHF Tire - 29 x 2.6, Tubeless, Folding, Black, Dual Compound, EXO, Wide Trail",
-      "price": 83.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhf-tire-29-x-2-6-tubeless-folding-black-dual-compound-exo-wide-trail"
      }
     ],
     "part": "Tires"
@@ -4031,6 +2849,26 @@
     "part": "Tires"
    },
    {
+    "cheapest_price": 88.0,
+    "key": "sport|Tires|maxxis|3c|dhr|exo|folding|ii|maxxgrip|minion|tubeless",
+    "label": "Maxxis minion dhr ii tubeless folding 3c",
+    "offers": [
+     {
+      "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO",
+      "price": 88.0,
+      "store": "Colorado Cyclist",
+      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxxgrip-exo-wide-trail-1"
+     },
+     {
+      "name": "Maxxis Minion DHR II Tire - 29x2.4 - 3C MaxxGrip / EXO",
+      "price": 88.0,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-blk-3c-maxxgrip-exo"
+     }
+    ],
+    "part": "Tires"
+   },
+   {
     "cheapest_price": 106.0,
     "key": "sport|Tires|maxxis|3c|dd|dhr|folding|ii|maxxgrip|minion|tubeless",
     "label": "Maxxis minion dhr ii tubeless folding 3c",
@@ -4092,6 +2930,32 @@
    },
    {
     "cheapest_price": 106.0,
+    "key": "sport|Tires|maxxis|3c|dh|dhr|folding|ii|maxxgrip|minion|tubeless",
+    "label": "Maxxis minion dhr ii tubeless folding 3c",
+    "offers": [
+     {
+      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.5 Tubeless Folding Black 3C MaxxGrip DH",
+      "price": 106.0,
+      "store": "Bike Mart",
+      "url": "https://www.bikemart.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-5-tubeless-folding-black-3c-maxxgrip-dh"
+     },
+     {
+      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, New DH",
+      "price": 106.0,
+      "store": "Colorado Cyclist",
+      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-5-tubeless-folding-black-3c-maxxgrip-new-dh-e-25"
+     },
+     {
+      "name": "Maxxis Minion DHR II Tire - 27.5x2.5 - 3C MaxxGrip / DH",
+      "price": 106.0,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/maxxis-minion-dhr-ii-tire-27-5x2-5-3cg-dh-tr-wt"
+     }
+    ],
+    "part": "Tires"
+   },
+   {
+    "cheapest_price": 106.0,
     "key": "sport|Tires|maxxis|3c|dd|dhr|folding|ii|maxxterra|minion|tubeless",
     "label": "Maxxis minion dhr ii tubeless folding 3c",
     "offers": [
@@ -4126,126 +2990,6 @@
       "price": 106.0,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-5-tubeless-folding-black-3c-maxxgrip-dd"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 106.0,
-    "key": "sport|Tires|maxxis|3c|dh|dhr|folding|ii|maxxgrip|minion|tubeless",
-    "label": "Maxxis minion dhr ii tubeless folding 3c",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.5 Tubeless Folding Black 3C MaxxGrip DH",
-      "price": 106.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-5-tubeless-folding-black-3c-maxxgrip-dh"
-     },
-     {
-      "name": "Maxxis Minion DHR II Tire - 27.5x2.5 - 3C MaxxGrip / DH",
-      "price": 106.0,
-      "store": "The Lost Co.",
-      "url": "https://www.thelostco.com/products/maxxis-minion-dhr-ii-tire-27-5x2-5-3cg-dh-tr-wt"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 106.0,
-    "key": "sport|Tires|maxxis|3c|blk|dd|dhr|folding|ii|maxxgrip|minion|trail|tubeless|wide",
-    "label": "Maxxis minion dhr ii tubeless folding blk",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHR II Tire - 29 x 2.4 Tubeless Folding BLK 3C MaxxGrip DD Wide Trail",
-      "price": 106.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-blk-3c-maxxgrip-dd-wide-trail"
-     },
-     {
-      "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DD, Wide Trail",
-      "price": 106.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxxgrip-dd-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 106.0,
-    "key": "sport|Tires|maxxis|3c|blk|dd|dhr|folding|ii|maxxgrip|minion|trail|tubeless|wide",
-    "label": "Maxxis minion dhr ii tubeless folding blk",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4 Tubeless Folding BLK 3C MaxxGrip DD Wide Trail",
-      "price": 106.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-blk-3c-maxxgrip-dd-wide-trail"
-     },
-     {
-      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DD, Wide Trail",
-      "price": 106.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxgrip-dd-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 106.0,
-    "key": "sport|Tires|maxxis|3c|blk|dh|dhr|folding|ii|maxxgrip|minion|trail|tubeless|wide",
-    "label": "Maxxis minion dhr ii tubeless folding blk",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHR II Tire - 29 x 2.4 Tubeless Folding BLK 3C MaxxGrip DH Wide Trail",
-      "price": 106.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-blk-3c-maxxgrip-dh-wide-trail"
-     },
-     {
-      "name": "Maxxis Minion DHR II Tire - 29 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DH, Wide Trail",
-      "price": 106.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-29-x-2-4-tubeless-folding-black-3c-maxxgrip-dh-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 95.0,
-    "key": "sport|Tires|maxxis|3c|blk|dhr|exo|folding|ii|maxxgrip|minion|trail|tubeless|wide",
-    "label": "Maxxis minion dhr ii tubeless folding blk",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4 Tubeless Folding BLK 3C MaxxGrip EXO+ Wide Trail",
-      "price": 95.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-blk-3c-maxxgrip-exo-wide-trail"
-     },
-     {
-      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, EXO+, Wide Trail",
-      "price": 95.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxgrip-exo-wide-trail"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 106.0,
-    "key": "sport|Tires|maxxis|3c|blk|dh|dhr|folding|ii|maxxgrip|minion|trail|tubeless|wide",
-    "label": "Maxxis minion dhr ii tubeless folding blk",
-    "offers": [
-     {
-      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4 Tubeless Folding BLK 3C MaxxGrip DH Wide Trail",
-      "price": 106.0,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-blk-3c-maxxgrip-dh-wide-trail"
-     },
-     {
-      "name": "Maxxis Minion DHR II Tire - 27.5 x 2.4, Tubeless, Folding, Black, 3C MaxxGrip, DH, Wide Trail",
-      "price": 106.0,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhr-ii-tire-27-5-x-2-4-tubeless-folding-black-3c-maxxgrip-dh-wide-trail"
      }
     ],
     "part": "Tires"
@@ -4462,7 +3206,7 @@
       "url": "https://www.bikemart.com/products/pirelli-scorpion-race-dh-s-tire-29-x-2-5-clincher-wire-ylw-label-team-edition-dualwall-smartevo-dh"
      },
      {
-      "name": "Pirelli Scorpion Race DH S Tire - 29 x 2.5, Clincher, Wire, Yellow Label Team Edition, DualWALL+, SmartEVO DH",
+      "name": "Pirelli Scorpion Race DH S Tire - 29 x 2.5, Clincher, Wire, Yellow Label Team Edition",
       "price": 109.71,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-race-dh-s-tire-29-x-2-5-clincher-wire-yellow-label-team-edition-dualwall-smartevo-dh"
@@ -4476,10 +3220,10 @@
     "label": "Pirelli scorpion trail tubeless folding blk prowall",
     "offers": [
      {
-      "name": "Pirelli Scorpion Trail S Tire - 29 x 2.4 Tubeless Folding BLK ProWall SmartGrip",
+      "name": "Pirelli Scorpion Trail M Tire - 29 x 2.4, Tubeless, Folding",
       "price": 93.51,
       "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/pirelli-scorpion-trail-s-tire-29-x-2-4-tubeless-folding-blk-prowall-smartgrip"
+      "url": "https://www.bikemart.com/products/pirelli-scorpion-trail-m-tire-29-x-2-4-tubeless-folding"
      },
      {
       "name": "Pirelli Scorpion Trail M Tire - 29 x 2.4, Tubeless, Folding, Black",
@@ -4511,26 +3255,6 @@
     "part": "Tires"
    },
    {
-    "cheapest_price": 93.51,
-    "key": "sport|Tires|pirelli|edition|folding|label|lite|race|rc|scorpion|team|tubeless|xc|ylw",
-    "label": "Pirelli scorpion xc rc tubeless folding ylw",
-    "offers": [
-     {
-      "name": "Pirelli Scorpion XC M Tire - 29 x 2.4 Tubeless Folding YLW Label Team Edition Lite Race",
-      "price": 93.51,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/pirelli-scorpion-xc-m-tire-29-x-2-4-tubeless-folding-ylw-label-team-edition-lite-race"
-     },
-     {
-      "name": "Pirelli Scorpion XC M Tire - 29 x 2.4, Tubeless, Folding, Yellow Label, Team Edition, Lite, Race",
-      "price": 93.51,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-xc-m-tire-29-x-2-4-tubeless-folding-yellow-label-team-edition-lite-race"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
     "cheapest_price": 100.44,
     "key": "sport|Tires|schwalbe|addix|dan|dirty|folding|tubeless|ultrasoft",
     "label": "Schwalbe dirty dan tubeless folding addix ultrasoft",
@@ -4551,121 +3275,81 @@
     "part": "Tires"
    },
    {
-    "cheapest_price": 80.86,
-    "key": "sport|Tires|schwalbe|addix|albert|blk|evolution|fat|folding|front|snakeskin|soft|tubeless",
-    "label": "Schwalbe fat albert front tubeless folding blk",
-    "offers": [
-     {
-      "name": "Schwalbe Fat Albert Front Tire - 27.5 x 2.35 Tubeless Folding BLK Evolution Addix Soft Snakeskin",
-      "price": 80.86,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/schwalbe-fat-albert-front-tire-27-5-x-2-35-tubeless-folding-blk-evolution-addix-soft-snakeskin"
-     },
-     {
-      "name": "Schwalbe Fat Albert Front Tire - 27.5 x 2.35, Tubeless, Folding, Black, Evolution, Addix Soft, Snakeskin",
-      "price": 80.86,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-fat-albert-front-tire-27-5-x-2-35-tubeless-folding-black-evolution-addix-soft-snakeskin"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
     "cheapest_price": 100.44,
-    "key": "sport|Tires|schwalbe|addix|blk|downhill|evolution|folding|line|magic|mary|soft|super|tubeless|ultra",
-    "label": "Schwalbe magic mary tubeless folding blk evolution",
+    "key": "sport|Tires|schwalbe|folding|gravity|magic|mary|pro|radial|soft|tubeless",
+    "label": "Schwalbe magic mary tubeless folding pro gravity",
     "offers": [
      {
-      "name": "Schwalbe Magic Mary Tire - 27.5 x 2.4 Tubeless Folding BLK Evolution Line Super Downhill Addix Ultra Soft",
-      "price": 100.44,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/schwalbe-magic-mary-tire-27-5-x-2-4-tubeless-folding-blk-evolution-line-super-downhill-addix-ultra-soft"
-     },
-     {
-      "name": "Schwalbe Magic Mary Tire - 27.5 x 2.4, Tubeless, Folding, Black, Evolution Line, Super Downhill, Addix Ultra Soft",
+      "name": "Schwalbe Magic Mary Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial",
       "price": 100.44,
       "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-4-tubeless-folding-black-evolution-line-super-downhill-addix-ultra-soft"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 100.44,
-    "key": "sport|Tires|schwalbe|addix|blk|downhill|evolution|folding|line|magic|mary|soft|super|tubeless|ultra",
-    "label": "Schwalbe magic mary tubeless folding blk evolution",
-    "offers": [
-     {
-      "name": "Schwalbe Magic Mary Tire - 29 x 2.4 Tubeless Folding BLK Evolution Line Super Downhill Addix Ultra Soft",
-      "price": 100.44,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/schwalbe-magic-mary-tire-29-x-2-4-tubeless-folding-blk-evolution-line-super-downhill-addix-ultra-soft"
+      "url": "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50"
      },
      {
-      "name": "Schwalbe Magic Mary Tire - 29 x 2.4, Tubeless, Folding, Black, Evolution Line, Super Downhill, Addix Ultra Soft",
+      "name": "Schwalbe Magic Mary - 29x2.5 - Gravity Pro Radial - Soft",
       "price": 100.44,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-29-x-2-4-tubeless-folding-black-evolution-line-super-downhill-addix-ultra-soft"
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/schwalbe-magic-mary-gravity-pro-radial-29x2-5-soft"
      }
     ],
     "part": "Tires"
    },
    {
     "cheapest_price": 94.86,
-    "key": "sport|Tires|schwalbe|addix|blk|evolution|folding|line|magic|mary|soft|super|trail|tubeless",
-    "label": "Schwalbe magic mary tubeless folding blk evolution",
+    "key": "sport|Tires|schwalbe|folding|magic|mary|pro|radial|soft|trail|tubeless",
+    "label": "Schwalbe magic mary tubeless folding pro trail",
     "offers": [
      {
-      "name": "Schwalbe Magic Mary Tire - 27.5 x 2.4\" Tubeless Folding BLK Evolution Line Addix Soft Super Trail",
-      "price": 94.86,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/schwalbe-magic-mary-tire-27-5-x-2-4-tubeless-folding-blk-evolution-line-addix-soft-super-trail"
-     },
-     {
-      "name": "Schwalbe Magic Mary Tire - 27.5 x 2.4\", Tubeless, Folding, Black, Evolution Line, Addix Soft, Super Trail",
+      "name": "Schwalbe Magic Mary Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Trail, Soft, Radial",
       "price": 94.86,
       "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-4-tubeless-folding-black-evolution-line-addix-soft-super-trail"
+      "url": "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-50-tubeless-folding-black-pro-trail-soft-radial-e-50"
+     },
+     {
+      "name": "Schwalbe Magic Mary - 27.5x2.5 - Trail Pro Radial - Soft",
+      "price": 94.86,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/schwalbe-magic-mary-tire-27-5-x-2-50-tubeless-folding-blk-pro-trail-soft-radial-e-50"
      }
     ],
     "part": "Tires"
    },
    {
-    "cheapest_price": 94.86,
-    "key": "sport|Tires|schwalbe|addix|blk|folding|ground|nic|nobby|speedgrip|super|tubeless",
-    "label": "Schwalbe nobby nic tubeless folding blk addix",
+    "cheapest_price": 64.17,
+    "key": "sport|Tires|schwalbe|folding|gravity|magic|mary|soft|standard|tubeless",
+    "label": "Schwalbe magic mary tubeless folding standard gravity",
     "offers": [
      {
-      "name": "Schwalbe Nobby Nic Tire - 29 x 2.4 Tubeless Folding BLK Addix SpeedGrip Super Ground",
-      "price": 94.86,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/schwalbe-nobby-nic-tire-29-x-2-4-tubeless-folding-blk-addix-speedgrip-super-ground"
+      "name": "Schwalbe Magic Mary Tire - 27.5 x 2.40, Tubeless, Folding, Black, Standard, Gravity, Soft",
+      "price": 64.17,
+      "store": "Colorado Cyclist",
+      "url": "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-27-5-x-2-40-tubeless-folding-black-standard-gravity-soft-e-50"
      },
      {
-      "name": "Schwalbe Nobby Nic Tire - 29 x 2.4, Tubeless, Folding, Black, Addix SpeedGrip, Super Ground",
-      "price": 94.86,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-29-x-2-4-tubeless-folding-black-addix-speedgrip-super-ground"
+      "name": "Schwalbe Magic Mary - 27.5x2.40 - Gravity - Soft",
+      "price": 64.17,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/schwalbe-magic-mary-tire-27-5-x-2-40-tubeless-folding-blk-standard-gravity-soft-e-50"
      }
     ],
     "part": "Tires"
    },
    {
-    "cheapest_price": 94.86,
-    "key": "sport|Tires|schwalbe|addix|blk|evolution|folding|line|nic|nobby|speedgrip|super|trail|tubeless",
-    "label": "Schwalbe nobby nic tubeless folding blk evolution",
+    "cheapest_price": 64.17,
+    "key": "sport|Tires|schwalbe|folding|gravity|magic|mary|soft|standard|tubeless",
+    "label": "Schwalbe magic mary tubeless folding standard gravity",
     "offers": [
      {
-      "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.40\" Tubeless Folding BLK Evolution Line Addix SpeedGrip Super Trail",
-      "price": 94.86,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/schwalbe-nobby-nic-tire-27-5-x-2-40-tubeless-folding-blk-evolution-line-addix-speedgrip-super-trail"
+      "name": "Schwalbe Magic Mary Tire - 26 x 2.35, Tubeless, Folding, Black, Standard, Gravity, Soft",
+      "price": 64.17,
+      "store": "Colorado Cyclist",
+      "url": "https://www.coloradocyclist.com/products/schwalbe-magic-mary-tire-26-x-2-35-tubeless-folding-black-standard-gravity-soft-e-50"
      },
      {
-      "name": "Schwalbe Nobby Nic Tire - 27.5 x 2.40\", Tubeless, Folding, Black, Evolution Line, Addix SpeedGrip, Super Trail",
-      "price": 94.86,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-27-5-x-2-40-tubeless-folding-black-evolution-line-addix-speedgrip-super-trail"
+      "name": "Schwalbe Magic Mary - 26x2.35 - Gravity - Soft",
+      "price": 64.17,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/schwalbe-magic-mary-tire-26-x-2-35-tubeless-folding-blk-standard-gravity-soft-e-50"
      }
     ],
     "part": "Tires"
@@ -4682,7 +3366,7 @@
       "url": "https://www.bikemart.com/products/schwalbe-nobby-nic-tire-29-x-2-4-tubeless-folding-blk-evolution-addix-soft-supertrail"
      },
      {
-      "name": "Schwalbe Nobby Nic Tire - 29 x 2.4, Tubeless, Folding, Black, Evolution, Addix Soft, SuperTrail",
+      "name": "Schwalbe Nobby Nic Tire - 29 x 2.4, Tubeless, Folding, Black, Evolution, Addix Soft",
       "price": 94.86,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/schwalbe-nobby-nic-tire-29-x-2-4-tubeless-folding-black-evolution-addix-soft-supertrail"
@@ -4722,7 +3406,7 @@
       "url": "https://www.bikemart.com/products/schwalbe-rocket-ron-tire-29-x-2-25-tubeless-folding-blk-evolution-line-super-race-addix-speed"
      },
      {
-      "name": "Schwalbe Rocket Ron Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution Line, Super Race, Addix Speed",
+      "name": "Schwalbe Rocket Ron Tire - 29 x 2.25, Tubeless, Folding, Black, Evolution Line, Super Race",
       "price": 94.86,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/schwalbe-rocket-ron-tire-29-x-2-25-tubeless-folding-black-evolution-line-super-race-addix-speed"
@@ -4732,40 +3416,20 @@
    },
    {
     "cheapest_price": 94.86,
-    "key": "sport|Tires|schwalbe|50|addix|blk|chan|evolution|folding|ground|line|soft|super|tacky|tubeless|ultra",
-    "label": "Schwalbe tacky chan tubeless folding blk evolution",
+    "key": "sport|Tires|schwalbe|evolution|folding|line|tubeless|wicked|will",
+    "label": "Schwalbe wicked will tubeless folding evolution line",
     "offers": [
      {
-      "name": "Schwalbe Tacky Chan Tire - 29 x 2.40 Tubeless Folding BLK Evolution Line Super Ground Addix Ultra Soft E-50",
+      "name": "Schwalbe Wicked Will 29x2.6 Tubeless Tire",
       "price": 94.86,
       "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-blk-evolution-line-super-ground-addix-ultra-soft-e-50"
+      "url": "https://www.bikemart.com/products/schwalbe-wicked-will-mountain-tire-29x2-60-folding-tubeless-ready-addix-speedgrip-super-trail-tl-easy-black"
      },
      {
-      "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Evolution Line, Super Ground, Addix Ultra Soft, E-50",
+      "name": "Schwalbe Wicked Will Tire - 29 x 2.6, Tubeless, Folding, Black, Evolution Line",
       "price": 94.86,
       "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-evolution-line-super-ground-addix-ultra-soft-e-50"
-     }
-    ],
-    "part": "Tires"
-   },
-   {
-    "cheapest_price": 94.86,
-    "key": "sport|Tires|schwalbe|50|addix|blk|chan|evolution|folding|ground|line|soft|super|tacky|tubeless",
-    "label": "Schwalbe tacky chan tubeless folding blk evolution",
-    "offers": [
-     {
-      "name": "Schwalbe Tacky Chan Tire - 29 x 2.40 Tubeless Folding BLK Evolution Line Super Ground Addix Soft E-50",
-      "price": 94.86,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-blk-evolution-line-super-ground-addix-soft-e-50"
-     },
-     {
-      "name": "Schwalbe Tacky Chan Tire - 29 x 2.40, Tubeless, Folding, Black, Evolution Line, Super Ground, Addix Soft, E-50",
-      "price": 94.86,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-tacky-chan-tire-29-x-2-40-tubeless-folding-black-evolution-line-super-ground-addix-soft-e-50"
+      "url": "https://www.coloradocyclist.com/products/schwalbe-wicked-will-tire-29-x-2-6-tubeless-folding-black-evolution-line-super-ground-addix-speedgrip"
      }
     ],
     "part": "Tires"
@@ -4832,993 +3496,15 @@
    }
   ],
   "drops": [],
-  "new_items": [
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Reserve",
-    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Reserve_40_44_gravel_wheel_bundle_victoria_terrino.jpg?v=1794427490",
-    "name": "Reserve 40|44 GR Wheelset + Vittoria Terreno T40 Tire Bundle",
-    "part": "Wheels",
-    "price_new": "1599.00",
-    "price_old": "1999.00",
-    "product_type": "COMPONENTS/WHEELS/PERFORMANCE WHEELS CARBON",
-    "spec_conflicts": [
-     "ambiguous description size"
-    ],
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 1999.0,
-      "diameter_mm": null,
-      "durometers": [],
-      "price": 1599.0,
-      "variant_id": "46090098966597"
-     }
-    ],
-    "store": "Mike's Bikes",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 1999.0,
-      "price": 1599.0,
-      "specs": {},
-      "variant_id": 46090098966597
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://mikesbikes.com/products/reserve-40-44-gr-terreno-t40-wheelset-bundle"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Stan's NoTubes",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266145.jpg?v=1650616572",
-    "length": 29.0,
-    "name": "Stans No Tubes Crest MK4 29\" MTB Wheel - Rear",
-    "part": "Wheels",
-    "price_new": "543.00",
-    "price_old": "675.00",
-    "product_type": "MTB Wheels",
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 675.0,
-      "diameter_mm": null,
-      "durometers": [],
-      "price": 543.0,
-      "variant_id": "41401747734710"
-     }
-    ],
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 675.0,
-      "price": 543.0,
-      "specs": {
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 41401747734710
-     }
-    ],
-    "technical_specs": {
-     "wheel_size": [
-      "29"
-     ]
-    },
-    "url": "https://cambriabike.com/products/stans-no-tubes-crest-mk4-29-mtb-wheel-rear"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Stan's NoTubes",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266136.jpg?v=1650616522",
-    "length": 29.0,
-    "name": "Stans No Tubes Crest MK4 29\" MTB Wheel - Front",
-    "part": "Wheels",
-    "price_new": "257.00",
-    "price_old": "320.00",
-    "product_type": "MTB Wheels",
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 320.0,
-      "diameter_mm": null,
-      "durometers": [],
-      "price": 257.0,
-      "variant_id": "41401747701942"
-     }
-    ],
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 320.0,
-      "price": 257.0,
-      "specs": {
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 41401747701942
-     }
-    ],
-    "technical_specs": {
-     "wheel_size": [
-      "29"
-     ]
-    },
-    "url": "https://cambriabike.com/products/stans-no-tubes-crest-mk4-29-mtb-wheel-front"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Stan's NoTubes",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/266131.jpg?v=1650616859",
-    "length": 29.0,
-    "name": "Stans No Tubes Arch MK4 29\" MTB Wheel - Rear",
-    "part": "Wheels",
-    "price_new": "543.00",
-    "price_old": "675.00",
-    "product_type": "MTB Wheels",
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 675.0,
-      "diameter_mm": null,
-      "durometers": [],
-      "price": 543.0,
-      "variant_id": "41401747800246"
-     }
-    ],
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 675.0,
-      "price": 543.0,
-      "specs": {
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 41401747800246
-     }
-    ],
-    "technical_specs": {
-     "wheel_size": [
-      "29"
-     ]
-    },
-    "url": "https://cambriabike.com/products/stans-no-tubes-arch-mk4-29-mtb-wheel-rear"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Maxxis",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Minion-DHR-II-Rear-Tire-EXO-TR_Black_60dc1d38-0afd-44af-9408-362a7ecab7a6.jpg?v=1625212035",
-    "length": 26.0,
-    "name": "Maxxis Minion DHR II 26\" Folding MTB Tire - EXO - NLM",
-    "part": "Tires",
-    "price_new": "65.00",
-    "price_old": "71.00",
-    "product_type": "MTB Tires Folding",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 71.0,
-      "price": 65.0,
-      "specs": {
-       "casing": [
-        "EXO"
-       ],
-       "wheel_size": [
-        "26"
-       ]
-      },
-      "variant_id": 40066378367158
-     }
-    ],
-    "technical_specs": {
-     "casing": [
-      "EXO"
-     ],
-     "wheel_size": [
-      "26"
-     ]
-    },
-    "url": "https://cambriabike.com/products/maxxis-minion-dhr-ii-26-folding-mtb-tire-exo-nlm"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Maxxis",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410.jpg?v=1691588515",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410.jpg?v=1691588515",
-     "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410_2.jpg?v=1691588515",
-     "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113410_1.jpg?v=1691588513"
-    ],
-    "length": 29.0,
-    "name": "Maxxis Rekon Race 29\" Folding MTB Tire - E-25",
-    "part": "Tires",
-    "price_new": "88.00",
-    "price_old": "96.00",
-    "product_type": "MTB Tires Folding",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 96.0,
-      "price": 88.0,
-      "specs": {
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 42336827310262
-     }
-    ],
-    "technical_specs": {
-     "wheel_size": [
-      "29"
-     ]
-    },
-    "url": "https://cambriabike.com/products/maxxis-rekon-race-29-folding-mtb-tire-e-25"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Schwalbe",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SchwalbeRocketRonSuperGroundMTBTire_Black_8c8c2a9c-d2d5-4e67-9aec-865ab0abe6f8.jpg?v=1625212307",
-    "length": 29.0,
-    "name": "Schwalbe Rocket Ron Evolution 29\" Folding MTB Tire - Super Ground - Snakeskin",
-    "part": "Tires",
-    "price_new": "94.86",
-    "price_old": "102.00",
-    "product_type": "MTB Tires Folding",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 102.0,
-      "price": 94.86,
-      "specs": {
-       "casing": [
-        "Super Ground"
-       ],
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 40066395537590
-     }
-    ],
-    "technical_specs": {
-     "casing": [
-      "Super Ground"
-     ],
-     "wheel_size": [
-      "29"
-     ]
-    },
-    "url": "https://cambriabike.com/products/schwalbe-rocket-ron-evolution-29-folding-mtb-tire-super-ground-snakeskin"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ESI",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ESI_Racers_Edge_Silicon_MTB_Grips_Black_6b534ebb-54a2-4c60-a7ae-e234364583a5.jpg?v=1623830072",
-    "name": "ESI Racers Edge Silicon MTB Grips - Black",
-    "part": "Cockpit",
-    "price_new": "18.99",
-    "price_old": "19.99",
-    "product_type": "MTB Grips",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 19.99,
-      "price": 18.99,
-      "specs": {},
-      "variant_id": 39947167662262
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/esi-racers-edge-silicon-mtb-grips-black"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "KS",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTENiIntegraDropperSeatpost-2020.jpg?v=1612877766",
-    "name": "KS Suspension eTENi Integra Dropper Seatpost - 2020",
-    "part": "Cockpit",
-    "price_new": "116.10",
-    "price_old": "129.00",
-    "product_type": "Dropper Adjustable Seatposts",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 129.0,
-      "price": 116.1,
-      "specs": {},
-      "variant_id": 38018889810102
-     },
-     {
-      "available": true,
-      "compare": 129.0,
-      "price": 116.1,
-      "specs": {},
-      "variant_id": 39576056135862
-     },
-     {
-      "available": true,
-      "compare": 129.0,
-      "price": 116.1,
-      "specs": {},
-      "variant_id": 40515330605238
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/ks-suspension-eteni-integra-dropper-seatpost-2020"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ODI",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_ArmyGreen_bc8e7bc3-cb4a-43b9-9506-898bdcf8255f.jpg?v=1623830424",
-    "name": "ODI Elite Pro Lock-On Bonus Pack MTB Grips - Army Green",
-    "part": "Cockpit",
-    "price_new": "27.23",
-    "price_old": "30.25",
-    "product_type": "MTB Grips",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 30.25,
-      "price": 27.23,
-      "specs": {},
-      "variant_id": 39947192107190
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/odi-elite-pro-lock-on-bonus-pack-mtb-grips-army-green"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ODI",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_Turquoise_ca5770c7-00b0-4e1f-a930-518d34f86e26.jpg?v=1623830432",
-    "name": "ODI Elite Pro Lock-On Bonus Pack MTB Grips - Turquoise",
-    "part": "Cockpit",
-    "price_new": "27.23",
-    "price_old": "30.25",
-    "product_type": "MTB Grips",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 30.25,
-      "price": 27.23,
-      "specs": {},
-      "variant_id": 39947192434870
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/odi-elite-pro-lock-on-bonus-pack-mtb-grips-turquoise"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ODI",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODIEliteProLock-OnBonusPackMTBGrips_Navy_26bf625a-91f5-4a8c-97ee-1a040e856a2d.jpg?v=1623830429",
-    "name": "ODI Elite Pro Lock-On Bonus Pack MTB Grips - Navy Blue",
-    "part": "Cockpit",
-    "price_new": "27.23",
-    "price_old": "30.25",
-    "product_type": "MTB Grips",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 30.25,
-      "price": 27.23,
-      "specs": {},
-      "variant_id": 39947192303798
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/odi-elite-pro-lock-on-bonus-pack-mtb-grips-navy-blue"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ODI",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODI_Dread_Lock_Grips_Black_e6206d3e-5251-4261-b23a-78d426e5aba1.jpg?v=1623830406",
-    "name": "ODI Dread Lock Grips - Black",
-    "part": "Cockpit",
-    "price_new": "30.15",
-    "price_old": "33.50",
-    "product_type": "MTB Grips",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 33.5,
-      "price": 30.15,
-      "specs": {},
-      "variant_id": 39947190370486
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/odi-dread-lock-grips-black"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ODI",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODILongneckSLGrips_BrightRed_640dac93-259f-4472-851c-4eaf0f854f9f.jpg?v=1623830443",
-    "name": "ODI Longneck SL Grips - Bright Red",
-    "part": "Cockpit",
-    "price_new": "11.66",
-    "price_old": "12.95",
-    "product_type": "MTB Grips",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 12.95,
-      "price": 11.66,
-      "specs": {},
-      "variant_id": 39947192828086
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/odi-longneck-sl-grips-bright-red"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ESI",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/181517000162_c6f2a6c1-2372-42e7-bc49-225917c470f6.jpg?v=1623830076",
-    "name": "ESI Racers Edge Silicon MTB Grips - Gray",
-    "part": "Cockpit",
-    "price_new": "18.99",
-    "price_old": "19.99",
-    "product_type": "MTB Grips",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 19.99,
-      "price": 18.99,
-      "specs": {},
-      "variant_id": 39947167858870
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/esi-racers-edge-silicon-mtb-grips-gray"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "KS",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/KSSuspensionRage-iSDropperSeatpost.jpg?v=1735304786",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/KSSuspensionRage-iSDropperSeatpost.jpg?v=1735304786",
-     "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Capture_781e6cfb-5613-4674-bbcd-c7eac4103b54.jpg?v=1735304788"
-    ],
-    "name": "KS Suspension Rage-iS Dropper Seatpost",
-    "part": "Cockpit",
-    "price_new": "161.10",
-    "price_old": "179.00",
-    "product_type": "Dropper Adjustable Seatposts",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 179.0,
-      "price": 161.1,
-      "specs": {},
-      "variant_id": 43686495355062
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/ks-suspension-rage-is-dropper-seatpost"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "KS",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTenRemoteExternalDropperPost-NoRemote.jpg?v=1647945188",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTenRemoteExternalDropperPost-NoRemote.jpg?v=1647945188",
-     "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/KSSuspensioneTenRemoteExternalDropperPost-NoRemote2.jpg?v=1647945188"
-    ],
-    "name": "KS Suspension eTen Remote External Dropper Post - No Remote",
-    "part": "Cockpit",
-    "price_new": "107.10",
-    "price_old": "119.00",
-    "product_type": "Dropper Adjustable Seatposts",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 119.0,
-      "price": 107.1,
-      "specs": {},
-      "variant_id": 41310259511478
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/ks-suspension-eten-remote-external-dropper-post-no-remote"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ODI",
-    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ODILongneckSLGrips_Pink_9917aa4c-b702-4165-87e9-8aa3ddaa2a76.jpg?v=1623830448",
-    "name": "ODI Longneck SL Grips - Pink",
-    "part": "Cockpit",
-    "price_new": "11.66",
-    "price_old": "12.95",
-    "product_type": "MTB Grips",
-    "store": "Cambria",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 12.95,
-      "price": 11.66,
-      "specs": {},
-      "variant_id": 39947192959158
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://cambriabike.com/products/odi-longneck-sl-grips-pink"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Schwalbe",
-    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/schwalbe-magic-mary-29x25-trail-pro-radial-ultra-soft-schwalbe-the-lost-co-1165459701-4026495971645-2787473.jpg?v=1776939367",
-    "length": 2.5,
-    "name": "Schwalbe Magic Mary Tire - 27.5x2.5 - Gravity Pro - Soft - Radial",
-    "part": "Tires",
-    "price_new": "100.44",
-    "price_old": "108.00",
-    "product_type": "Tires",
-    "store": "The Lost Co.",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 108.0,
-      "price": 100.44,
-      "specs": {
-       "casing": [
-        "Radial"
-       ],
-       "tire_width": [
-        "2.5"
-       ],
-       "wheel_size": [
-        "27.5"
-       ]
-      },
-      "variant_id": 45752621236422
-     }
-    ],
-    "technical_specs": {
-     "casing": [
-      "Radial"
-     ],
-     "tire_width": [
-      "2.5"
-     ],
-     "wheel_size": [
-      "27.5"
-     ]
-    },
-    "url": "https://www.thelostco.com/products/schwalbe-magic-mary-gravity-pro-radial-27-5x2-5-soft",
-    "width": 27.5
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "KMC",
-    "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
-    ],
-    "length": 1.0,
-    "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
-    "part": "Drivetrain",
-    "price_new": "19.99",
-    "price_old": "23.60",
-    "product_type": "Chains",
-    "store": "Bicycle Warehouse",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 23.6,
-      "price": 19.99,
-      "specs": {},
-      "variant_id": 42413792624742
-     },
-     {
-      "available": true,
-      "compare": 23.6,
-      "price": 19.99,
-      "specs": {},
-      "variant_id": 42413792821350
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
-    "width": 2.0
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Spank",
-    "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
-    ],
-    "name": "Spank Spoon 350 35mm Stem",
-    "part": "Cockpit",
-    "price_new": "59.99",
-    "price_old": "69.99",
-    "product_type": "Stems",
-    "store": "Bicycle Warehouse",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 69.99,
-      "price": 59.99,
-      "specs": {},
-      "variant_id": 40431254798438
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Stan's NoTubes",
-    "durometers": [
-     "650B"
-    ],
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1882.jpg?v=1762409592",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1882.jpg?v=1762409592",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1881.jpg?v=1762409592",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1880.jpg?v=1762409592",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1884.jpg?v=1762409592"
-    ],
-    "name": "Stan's NoTubes Stan's Arch S2 Rear Wheel",
-    "part": "Wheels",
-    "price_new": "325.00",
-    "price_old": "400.00",
-    "product_type": "Rear Wheel",
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46847352504573"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46847352602877"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46847352635645"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46847352701181"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46847352733949"
-     }
-    ],
-    "store": "Bike Mart",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x142mm"
-       ],
-       "wheel_size": [
-        "27.5"
-       ]
-      },
-      "variant_id": 46847352504573
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x148mm"
-       ],
-       "wheel_size": [
-        "27.5"
-       ]
-      },
-      "variant_id": 46847352602877
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x142mm"
-       ],
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 46847352635645
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x148mm"
-       ],
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 46847352701181
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x148mm"
-       ],
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 46847352733949
-     }
-    ],
-    "technical_specs": {
-     "axle": [
-      "12x142mm",
-      "12x148mm"
-     ],
-     "wheel_size": [
-      "27.5",
-      "29"
-     ]
-    },
-    "url": "https://www.bikemart.com/products/stans-arch-s2-rear-wheel"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Schwalbe",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4961.jpg?v=1762329187"
-    ],
-    "name": "Schwalbe RapidRob Tire - Clincher Wire Black",
-    "part": "Tires",
-    "price_new": "28.83",
-    "price_old": "31.00",
-    "product_type": "Tires",
-    "store": "Bike Mart",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 31.0,
-      "price": 28.83,
-      "specs": {
-       "tire_width": [
-        "2.1"
-       ],
-       "wheel_size": [
-        "29"
-       ]
-      },
-      "variant_id": 46844436283645
-     }
-    ],
-    "technical_specs": {
-     "tire_width": [
-      "2.1"
-     ],
-     "wheel_size": [
-      "29"
-     ]
-    },
-    "url": "https://www.bikemart.com/products/schwalbe-rapid-rob-tire-26-x-2-1-clincher-wire-black-k-guard-liteskin"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "ODI",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4111.jpg?v=1762250171",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4112.jpg?v=1762250170",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4113.jpg?v=1762250171",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4114.jpg?v=1762250170",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4115.jpg?v=1762250170",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4116.jpg?v=1762250171"
-    ],
-    "name": "ODI Reflex v2.1 XL Lock-On Grips - Round 135mm",
-    "part": "Cockpit",
-    "price_new": "28.80",
-    "price_old": "32.00",
-    "product_type": "Lock-On Grips",
-    "store": "Bike Mart",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 32.0,
-      "price": 28.8,
-      "specs": {},
-      "variant_id": 46838322692349
-     },
-     {
-      "available": true,
-      "compare": 32.0,
-      "price": 28.8,
-      "specs": {},
-      "variant_id": 46838322725117
-     },
-     {
-      "available": true,
-      "compare": 32.0,
-      "price": 28.8,
-      "specs": {},
-      "variant_id": 46838322757885
-     },
-     {
-      "available": true,
-      "compare": 32.0,
-      "price": 28.8,
-      "specs": {},
-      "variant_id": 46838322790653
-     },
-     {
-      "available": true,
-      "compare": 32.0,
-      "price": 28.8,
-      "specs": {},
-      "variant_id": 46838322823421
-     },
-     {
-      "available": true,
-      "compare": 32.0,
-      "price": 28.8,
-      "specs": {},
-      "variant_id": 46838322856189
-     },
-     {
-      "available": true,
-      "compare": 32.0,
-      "price": 28.8,
-      "specs": {},
-      "variant_id": 46838322888957
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://www.bikemart.com/products/odi-reflex-v2-1-xl-lock-on-grips-white-black"
-   }
-  ],
+  "new_items": [],
   "removed": []
  },
- "failed_keys": [
-  "The Lost Co._Wheels"
- ],
+ "failed_keys": [],
  "fingerprints": {
-  "data": "ab42ecb0204a4af5424fd6947079f91d55b39a42e745f2dc6ebe64738df901bc",
-  "history": "52b71399c2fa3eccee05beff39baf153f1d337368e6d200a4640075d98d2ef69"
+  "data": "8436943ff282335c7874b1d0a979d92b99cf54cc6fb1f5acca52547746f5902e",
+  "history": "76e186500ab1f4656d1a42ba58cff6dde10897f1da84d6d7590f216322f73a30"
  },
- "generated_at": "2026-11-12T07:31:39+00:00",
+ "generated_at": "2026-11-13T02:27:27+00:00",
  "history": "file",
  "version": 1
 }

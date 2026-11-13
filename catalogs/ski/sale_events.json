@@ -1,5 +1,8 @@
 {
   "stores": {
+    "Aspen Ski and Board": {
+      "events": []
+    },
     "Bern": {
       "events": []
     },
@@ -15,16 +18,55 @@
     "SkatePro": {
       "events": []
     },
+    "Ski Essentials": {
+      "events": []
+    },
+    "Skipro": {
+      "events": []
+    },
     "Smith": {
       "events": []
     },
     "The House": {
       "events": []
     },
+    "The Pro Ski and Ride": {
+      "events": []
+    },
     "Triple 8": {
       "events": []
     },
     "Utah Ski": {
+      "events": [
+        {
+          "cut": 8,
+          "cut_high": 10,
+          "cut_low": 6,
+          "deals": {
+            "deals": 174,
+            "high": 45,
+            "low": 37,
+            "max_off": 66,
+            "uniform": null
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-13",
+              "text": "up to 66% off (most 37-45%)"
+            }
+          ],
+          "kind": "sale",
+          "listings": 17,
+          "moment": "",
+          "start": "2026-11-13",
+          "steps": [],
+          "tracked": 168,
+          "uniform": false
+        }
+      ]
+    },
+    "Willis Ski and Board": {
       "events": []
     },
     "evo": {
@@ -34,13 +76,13 @@
           "cut_high": 29,
           "cut_low": 16,
           "deals": {
-            "deals": 814,
+            "deals": 891,
             "high": 48,
             "low": 31,
             "max_off": 88,
             "uniform": null
           },
-          "end": null,
+          "end": "2026-11-13",
           "headlines": [
             {
               "from": "2026-11-07",
@@ -78,5 +120,5 @@
       ]
     }
   },
-  "updated": "2026-11-12"
+  "updated": "2026-11-13"
 }
