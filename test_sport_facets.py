@@ -9,6 +9,47 @@ from sports.facets import payload, sidebar, script
 
 
 class SportFacetTests(unittest.TestCase):
+    def test_every_menu_heading_round_trips_without_changing_legacy_slugs(self):
+        import page
+        from sports.headings import headings
+        source = Path(__file__).with_name('page.js').read_text()
+        functions = source[source.index('function nameSlug('):source.index('let state =')]
+        functions += source[source.index('function slugType('):source.index('function storeSlug(')]
+        functions += source[source.index('function typeSlug('):source.index('function flagOn(')]
+        cases = [{'id': 'skate', 'parts': list(page.PART_ORDER)}]
+        cases += [{'id': sport.id, 'parts': list(headings(sport))}
+                  for sport in (sports.BMX, sports.SKI, sports.MTB)]
+        js = r"""
+const assert=require('node:assert/strict'),vm=require('node:vm');
+const [functions,cases]=JSON.parse(process.argv[1]);
+for(const item of cases){
+ const parts=[...item.parts,'Future Category'];
+ const context={document:{querySelectorAll:selector=>{
+  assert.equal(selector,'#partSelect option');return parts.map(value=>({value}));
+ }}};
+ if(item.id!=='skate')context.SPORT_SETTINGS={parts};
+ vm.createContext(context);vm.runInContext(functions,context);
+ for(const part of parts)assert.equal(context.slugType(context.typeSlug(part)),part,item.id+': '+part);
+ assert.equal(context.slugType('all'),'all');
+ assert.equal(context.slugType('unknown-category'),'');
+ if(item.id==='skate'){
+  const legacy={Decks:'deck',Wheels:'wheel',Trucks:'truck',Bearings:'bearing',Sneakers:'sneaker',Accessories:'accessory',Completes:'complete',Protection:'protection',Helmets:'helmets',Packs:'packs'};
+  for(const [part,slug] of Object.entries(legacy))assert.equal(context.typeSlug(part),slug);
+  assert.equal(context.slugType('pack'),'Packs');assert.equal(context.slugType('packs'),'Packs');
+ }
+}
+"""
+        result = subprocess.run(['node', '-e', js, json.dumps([functions, cases])],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        # The Python URL model must agree with the page's actual Skate menu.
+        from query_state import TYPE_TO_SLUG, decode_query, encode_state
+        for part in page.PART_ORDER:
+            with self.subTest(part=part):
+                decoded = decode_query('type=' + TYPE_TO_SLUG[part])
+                self.assertEqual(decoded['part'], part)
+                self.assertEqual(decode_query(encode_state(decoded))['part'], part)
+
     def item(self, part, specs, url='https://example.com/item'):
         return {'name': 'Fixture equipment', 'part': part, 'url': url,
                 'price': '$50', 'original_price': '$100',

@@ -130,6 +130,8 @@ TYPE_SLUGS = {
     "complete": "Completes",
     "completes": "Completes",
     "protection": "Protection",
+    "pack": "Packs",
+    "packs": "Packs",
     "helmet": "Helmets",
     "helmets": "Helmets",
 }
@@ -142,6 +144,7 @@ TYPE_TO_SLUG = {
     "Accessories": "accessory",
     "Completes": "complete",
     "Protection": "protection",
+    "Packs": "packs",
     "Helmets": "helmets",
 }
 
