@@ -27,9 +27,10 @@ from site_sales import activity_line
 
 logger = logging.getLogger("notify")
 
-# GitHub Pages serves the repo root from main:
-# https://shreddeals.com/sale_items_chart.html (the custom domain, 2026-11-03)
-DEFAULT_REPORT_URL = "https://shreddeals.com/sale_items_chart.html"
+# The site's main page opened on Skate, with its menus and sport tabs
+# (owner, 2026-11-14). sale_items_chart.html on its own is the bare catalog
+# the main page shows inside it, without the navigation.
+DEFAULT_REPORT_URL = "https://shreddeals.com/?sport=skate"
 PART_ORDER = ("Decks", "Wheels", "Trucks", "Bearings")
 PREVIEW_PATH = "email_preview.html"
 SAMPLE_BANNER = (

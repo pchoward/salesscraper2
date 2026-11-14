@@ -44,7 +44,9 @@ class Section:
 
     @property
     def url(self):
-        return SITE + self.sport.page_path
+        # The main page opened on this sport, with its menus and tabs; the
+        # sport's catalog page on its own has no navigation (owner, 2026-11-14).
+        return f"{SITE}?sport={self.sport.id}"
 
     @property
     def total_new(self):
