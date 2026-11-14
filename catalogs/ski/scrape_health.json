@@ -9446,14 +9446,14 @@
           }
         },
         "Christy Sports_Skis": {
-          "count": 107,
+          "count": 106,
           "failed": false,
           "diagnostics": {
             "expected_count": 95.5,
             "baseline_samples": 12,
             "median_absolute_deviation": 0.5,
-            "actual_count": 107,
-            "percentage_change": 12.0,
+            "actual_count": 106,
+            "percentage_change": 11.0,
             "reason": "normal_variation"
           }
         },
@@ -9722,14 +9722,14 @@
           }
         },
         "Ski Essentials_Skis": {
-          "count": 129,
+          "count": 128,
           "failed": false,
           "diagnostics": {
             "expected_count": 129.5,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.5,
-            "actual_count": 129,
-            "percentage_change": -0.4,
+            "actual_count": 128,
+            "percentage_change": -1.2,
             "reason": "insufficient_history"
           }
         },
@@ -10466,14 +10466,14 @@
           }
         },
         "evo_Protection": {
-          "count": 117,
+          "count": 116,
           "failed": false,
           "diagnostics": {
             "expected_count": 131,
             "baseline_samples": 11,
             "median_absolute_deviation": 3,
-            "actual_count": 117,
-            "percentage_change": -10.7,
+            "actual_count": 116,
+            "percentage_change": -11.5,
             "reason": "normal_variation"
           }
         },
@@ -10490,7 +10490,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-14T00:20:49+00:00"
+      "scanned_at": "2026-11-14T01:53:12+00:00"
     }
   ],
   "baseline": {
@@ -10548,7 +10548,7 @@
     },
     "Christy Sports_Skis": {
       "date": "2026-11-14",
-      "count": 107
+      "count": 106
     },
     "The House_Bindings": {
       "date": "2026-11-14",
@@ -10592,7 +10592,7 @@
     },
     "evo_Protection": {
       "date": "2026-11-14",
-      "count": 117
+      "count": 116
     },
     "Bern_Helmets": {
       "date": "2026-11-14",
@@ -10680,7 +10680,7 @@
     },
     "Ski Essentials_Skis": {
       "date": "2026-11-14",
-      "count": 129
+      "count": 128
     },
     "Skipro_Bindings": {
       "date": "2026-11-14",
@@ -11511,7 +11511,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 107
+        "count": 106
       }
     ],
     "Demon_Bindings": [
@@ -12377,7 +12377,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 129
+        "count": 128
       }
     ],
     "Skipro_Bindings": [
@@ -14377,7 +14377,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 117
+        "count": 116
       }
     ],
     "evo_Skis": [

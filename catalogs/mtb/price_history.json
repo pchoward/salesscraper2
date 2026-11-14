@@ -8304,12 +8304,12 @@
     "observation_count": 1,
     "all_time_low": 99.0,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis_Aggressor_26_Folding_MTB_Tire_Black_086b67b3-e42b-4dd1-b9b0-71a4689a2c19.jpg?v=1557488166",
     "length": 27.5,
     "prices": {
       "2026-11-14": 99.0
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/maxxis-aggressor-29-folding-mtb-tire": {
     "name": "Maxxis Aggressor 29\" Folding MTB Tire",
@@ -8374,12 +8374,12 @@
     "observation_count": 1,
     "all_time_low": 82.0,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/90401.jpg?v=1728379433",
     "length": 29.0,
     "prices": {
       "2026-11-14": 82.0
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/maxxis-aspen-29-folding-mtb-tire-maxxspeed-silica": {
     "name": "Maxxis Aspen 29\" Folding MTB Tire - MaxxSpeed Silica",
@@ -9633,12 +9633,12 @@
     "observation_count": 1,
     "all_time_low": 77.0,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Minion-DHR-II-Rear-Tire-EXO-TR_Black_a3705315-c97f-4fee-835c-df60ef7f20a0.jpg?v=1643105719",
     "length": 27.5,
     "prices": {
       "2026-11-14": 77.0
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/maxxis-minion-dhr-ii-27-5-folding-mtb-tire-wt-wide-trail-exoplus": {
     "name": "Maxxis Minion DHR II 27.5\" Folding MTB Tire - WT Wide Trail - EXOplus",
@@ -30212,11 +30212,11 @@
     "observation_count": 1,
     "all_time_low": 1999.77,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-C-S_Gloss_Melon.png?v=1747271006",
     "prices": {
       "2026-11-14": 1999.77
-    },
-    "stage": "new"
+    }
   },
   "https://mikesbikes.com/products/santa-cruz-tallboy-5-cc-x0-axs-2024": {
     "name": "Santa Cruz Tallboy 5 CC X0 AXS",
@@ -33131,6 +33131,8 @@
     "all_time_low": 4999.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
     "prices": {
       "2026-11-12": 4999.0,
@@ -33152,7 +33154,7 @@
     "prices": {
       "2026-11-12": 3499.93,
       "2026-11-13": 3499.93,
-      "2026-11-14": 3499.93
+      "2026-11-14": 3499.97
     }
   },
   "https://www.bikemart.com/products/2025-tempt-1-hardtail-mountain-bike": {
@@ -33165,6 +33167,8 @@
     "all_time_low": 900.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond.jpg?v=1764000643",
     "prices": {
       "2026-11-12": 900.0,
@@ -33199,6 +33203,8 @@
     "all_time_low": 7799.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
     "width": 9.9,
     "length": 0.0,
@@ -33448,6 +33454,23 @@
       "2026-11-14": 11.99
     }
   },
+  "https://www.bikemart.com/products/cast-by-pirelli-dh-enduro-protagonist-tl-29-tire-29x2-4-evo": {
+    "name": "Cast by Pirelli DH/Enduro Protagonist TL 29 Tire - 29x2.4 Evo",
+    "store": "Bike Mart",
+    "part": "Tires",
+    "first_seen": "2026-11-14",
+    "last_seen": "2026-11-14",
+    "observation_count": 1,
+    "all_time_low": 120.51,
+    "all_time_low_date": "2026-11-14",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/pv3515inset1.jpg?v=1762279323",
+    "width": 29.0,
+    "length": 2.4,
+    "prices": {
+      "2026-11-14": 120.51
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/crankbrothers-highline-7-dropper-seatpost": {
     "name": "Crankbrothers Highline 7 Dropper Seatpost - Black",
     "store": "Bike Mart",
@@ -33492,6 +33515,8 @@
     "all_time_low": 4.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
     "spec_offers": [
       {
@@ -33519,6 +33544,8 @@
     "all_time_low": 10.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
     "prices": {
       "2026-11-12": 10.93,
@@ -33607,6 +33634,31 @@
       "2026-11-14": 50.0
     }
   },
+  "https://www.bikemart.com/products/dt-swiss-end-cap-conversion-kit-240-front-hubs-15-x-100mm-15-x-110mm": {
+    "name": "DT Swiss End Cap Conversion Kit: 240 Front Hubs 15 x 100mm 15 x 110mm",
+    "store": "Bike Mart",
+    "part": "Wheels",
+    "first_seen": "2026-11-14",
+    "last_seen": "2026-11-14",
+    "observation_count": 1,
+    "all_time_low": 52.3,
+    "all_time_low_date": "2026-11-14",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HU1377.jpg?v=1762254984",
+    "spec_offers": [
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "46838561833213",
+        "available": true,
+        "price": 52.3,
+        "compare_at_price": 55.3
+      }
+    ],
+    "prices": {
+      "2026-11-14": 52.3
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/dt-swiss-hg-1800-spline-front-wheel": {
     "name": "DT Swiss HG 1800 Spline Front Wheel - Center-Lock Black",
     "store": "Bike Mart",
@@ -33653,6 +33705,8 @@
     "all_time_low": 59.62,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
     "prices": {
       "2026-11-12": 59.62,
@@ -33696,16 +33750,15 @@
     "store": "Bike Mart",
     "part": "Cockpit",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 18.99,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5308.jpg?v=1763591434",
     "prices": {
-      "2026-11-12": 18.99
+      "2026-11-12": 18.99,
+      "2026-11-14": 18.99
     }
   },
   "https://www.bikemart.com/products/eten-dropper-seatpost-100mm-20mm": {
@@ -33735,6 +33788,8 @@
     "all_time_low": 149.99,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA5391.jpg?v=1762312293",
     "prices": {
       "2026-11-12": 149.99,
@@ -33978,6 +34033,8 @@
     "all_time_low": 12.5,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR1746.jpg?v=1762306028",
     "prices": {
       "2026-11-12": 12.5,
@@ -33995,6 +34052,8 @@
     "all_time_low": 78.5,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR9411.jpg?v=1762286214",
     "prices": {
       "2026-11-12": 78.5,
@@ -34024,16 +34083,15 @@
     "store": "Bike Mart",
     "part": "Tires",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 39.95,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4038.jpg?v=1762254189",
     "prices": {
-      "2026-11-12": 39.95
+      "2026-11-12": 39.95,
+      "2026-11-14": 39.95
     }
   },
   "https://www.bikemart.com/products/kenda-koncept-24x1-tire": {
@@ -34141,6 +34199,8 @@
     "all_time_low": 24.95,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5104.jpg?v=1762266163",
     "prices": {
       "2026-11-12": 24.95,
@@ -34293,7 +34353,7 @@
     "prices": {
       "2026-11-12": 14.93,
       "2026-11-13": 14.93,
-      "2026-11-14": 14.93
+      "2026-11-14": 16.93
     }
   },
   "https://www.bikemart.com/products/maxxis-aggressor-tire-26x2-3-exo-tr": {
@@ -34363,6 +34423,8 @@
     "all_time_low": 100.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1340-02_374136bd-1278-4546-9966-ca94b37edd0d.jpg?v=1763569707",
     "width": 29.0,
     "length": 2.5,
@@ -34424,7 +34486,7 @@
     "prices": {
       "2026-11-12": 82.0,
       "2026-11-13": 82.0,
-      "2026-11-14": 82.0
+      "2026-11-14": 83.0
     }
   },
   "https://www.bikemart.com/products/maxxis-assegai-tire-27-5-x-2-5-tubeless-folding-black-dual-exo-wide-trail": {
@@ -34532,6 +34594,8 @@
     "all_time_low": 78.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1341_ccd788de-1760-48c3-88f1-37d4415f64b6.jpg?v=1763522982",
     "width": 27.5,
     "length": 2.5,
@@ -34548,16 +34612,16 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-14",
     "observation_count": 3,
-    "all_time_low": 108.0,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 106.0,
+    "all_time_low_date": "2026-11-14",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1341_4956f328-1b44-4812-a54a-62e0ae1ce937.jpg?v=1763567005",
     "width": 27.5,
     "length": 2.6,
     "prices": {
       "2026-11-12": 108.0,
       "2026-11-13": 108.0,
-      "2026-11-14": 108.0
+      "2026-11-14": 106.0
     }
   },
   "https://www.bikemart.com/products/maxxis-assegai-tire-27-5x2-5-dh-3cg-tr-e50": {
@@ -34576,7 +34640,7 @@
     "prices": {
       "2026-11-12": 105.0,
       "2026-11-13": 105.0,
-      "2026-11-14": 105.0
+      "2026-11-14": 106.0
     }
   },
   "https://www.bikemart.com/products/maxxis-assegai-tire-29-x-2-5-tubeless-folding-black-dual-exo-wide-trail": {
@@ -34709,7 +34773,7 @@
     "prices": {
       "2026-11-12": 75.0,
       "2026-11-13": 75.0,
-      "2026-11-14": 75.0
+      "2026-11-14": 76.0
     }
   },
   "https://www.bikemart.com/products/maxxis-assegai-tire-29-x-2-6-tubeless-folding-black-3c-maxxterra-exo-1": {
@@ -34728,7 +34792,7 @@
     "prices": {
       "2026-11-12": 99.0,
       "2026-11-13": 99.0,
-      "2026-11-14": 99.0
+      "2026-11-14": 100.0
     }
   },
   "https://www.bikemart.com/products/maxxis-assegai-tire-29-x-2-6-tubeless-folding-black-dual-exo-wide-trail": {
@@ -34804,7 +34868,7 @@
     "prices": {
       "2026-11-12": 77.0,
       "2026-11-13": 77.0,
-      "2026-11-14": 77.0
+      "2026-11-14": 78.0
     }
   },
   "https://www.bikemart.com/products/maxxis-crossmark-ii-tire": {
@@ -34821,7 +34885,7 @@
     "prices": {
       "2026-11-12": 43.0,
       "2026-11-13": 43.0,
-      "2026-11-14": 43.0
+      "2026-11-14": 78.0
     }
   },
   "https://www.bikemart.com/products/maxxis-detonator-sc-sw-27-5x1-5-standard-tire": {
@@ -34840,7 +34904,7 @@
     "prices": {
       "2026-11-12": 38.0,
       "2026-11-13": 38.0,
-      "2026-11-14": 38.0
+      "2026-11-14": 39.0
     }
   },
   "https://www.bikemart.com/products/maxxis-dissector-ii-tire-29-x-2-4-tubeless-folding-black-exo-wide-trail": {
@@ -34929,6 +34993,8 @@
     "all_time_low": 87.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR00164_fafd9358-7392-42f3-bdd6-35e17689d249.jpg?v=1763564219",
     "width": 29.0,
     "length": 2.4,
@@ -34948,6 +35014,8 @@
     "all_time_low": 94.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952.jpg?v=1763513842",
     "width": 27.5,
     "length": 2.4,
@@ -34986,6 +35054,8 @@
     "all_time_low": 87.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_4b779d47-7375-448d-a8bb-eb92a4daa171.jpg?v=1763527370",
     "width": 27.5,
     "length": 2.4,
@@ -35005,6 +35075,8 @@
     "all_time_low": 99.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_ce3144e2-5eca-4ad8-9f05-7cb220a3bf1d.jpg?v=1763556482",
     "width": 27.5,
     "length": 2.6,
@@ -35024,6 +35096,8 @@
     "all_time_low": 94.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_73a50c94-5f4e-45ef-a84b-30d4d44e72e4.jpg?v=1763526680",
     "width": 27.5,
     "length": 2.6,
@@ -35048,7 +35122,7 @@
     "prices": {
       "2026-11-12": 105.0,
       "2026-11-13": 105.0,
-      "2026-11-14": 105.0
+      "2026-11-14": 106.0
     }
   },
   "https://www.bikemart.com/products/maxxis-dissector-tire-29-x-2-4-tubeless-folding-black-dual-exo-wide-trail": {
@@ -35061,6 +35135,8 @@
     "all_time_low": 77.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_dec262a1-cc71-440b-bfaa-121864471741.jpg?v=1763524832",
     "width": 29.0,
     "length": 2.4,
@@ -35099,6 +35175,8 @@
     "all_time_low": 105.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_8cba065d-0217-4bd9-abf4-f8679349ea4b.jpg?v=1763524851",
     "width": 29.0,
     "length": 2.4,
@@ -35118,6 +35196,8 @@
     "all_time_low": 105.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_3c34d637-5808-4d31-a92a-6691d679af86.jpg?v=1763581958",
     "width": 29.0,
     "length": 2.4,
@@ -35137,6 +35217,8 @@
     "all_time_low": 87.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_7686bbbd-2f71-4486-9d0e-156e523196a0.jpg?v=1763576027",
     "width": 29.0,
     "length": 2.4,
@@ -35156,6 +35238,8 @@
     "all_time_low": 94.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_cd9794ca-a42f-4ae9-8112-937c2a1f9b5f.jpg?v=1763525590",
     "width": 29.0,
     "length": 2.4,
@@ -35181,7 +35265,7 @@
     "prices": {
       "2026-11-12": 82.0,
       "2026-11-13": 82.0,
-      "2026-11-14": 82.0
+      "2026-11-14": 83.0
     }
   },
   "https://www.bikemart.com/products/maxxis-dissector-tire-29-x-2-6-tubeless-folding-black-tan-dual-exo": {
@@ -35200,7 +35284,7 @@
     "prices": {
       "2026-11-12": 82.0,
       "2026-11-13": 82.0,
-      "2026-11-14": 82.0
+      "2026-11-14": 83.0
     }
   },
   "https://www.bikemart.com/products/maxxis-dissector-tire-29-x-2-6-tubeless-folding-blk-3c-maxx-terra-exo-wide-trail": {
@@ -35213,6 +35297,8 @@
     "all_time_low": 99.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_58ee14c8-d09b-43d7-b43c-7d27ef3036a6.jpg?v=1763571402",
     "width": 29.0,
     "length": 2.6,
@@ -35232,6 +35318,8 @@
     "all_time_low": 94.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1952_e473e8b3-02ca-46db-bd82-b180dfa1f69b.jpg?v=1763574812",
     "width": 29.0,
     "length": 2.6,
@@ -35257,7 +35345,7 @@
     "prices": {
       "2026-11-12": 45.0,
       "2026-11-13": 45.0,
-      "2026-11-14": 45.0
+      "2026-11-14": 46.0
     }
   },
   "https://www.bikemart.com/products/maxxis-dth-20x1-75-standard-tire": {
@@ -35314,7 +35402,7 @@
     "prices": {
       "2026-11-12": 45.0,
       "2026-11-13": 45.0,
-      "2026-11-14": 45.0
+      "2026-11-14": 46.0
     }
   },
   "https://www.bikemart.com/products/maxxis-dth-26x2-3-standard-tire": {
@@ -35441,6 +35529,8 @@
     "all_time_low": 33.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1962.jpg?v=1763579637",
     "prices": {
       "2026-11-12": 33.0,
@@ -35477,6 +35567,8 @@
     "all_time_low": 94.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR0408_cc350560-5ed3-4399-be3f-7cb4e2508c42.jpg?v=1763598794",
     "width": 29.0,
     "length": 2.4,
@@ -35610,6 +35702,8 @@
     "all_time_low": 95.0,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma3422inset1a.jpg?v=1763555397",
     "prices": {
       "2026-11-13": 95.0,
@@ -35645,6 +35739,8 @@
     "all_time_low": 33.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1219_2a74f201-e63b-4e0c-a219-f6fcb61d77e9.jpg?v=1763564655",
     "width": 20.0,
     "length": 1.95,
@@ -35708,7 +35804,7 @@
     "prices": {
       "2026-11-12": 87.0,
       "2026-11-13": 87.0,
-      "2026-11-14": 87.0
+      "2026-11-14": 88.0
     }
   },
   "https://www.bikemart.com/products/maxxis-ikon-27-5x2-35-tubeless-tire": {
@@ -35727,7 +35823,7 @@
     "prices": {
       "2026-11-12": 87.0,
       "2026-11-13": 87.0,
-      "2026-11-14": 87.0
+      "2026-11-14": 88.0
     }
   },
   "https://www.bikemart.com/products/maxxis-ikon-tire-26-x-2-2-3c-exo-tr": {
@@ -35778,6 +35874,8 @@
     "all_time_low": 40.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1408.jpg?v=1763529829",
     "width": 26.0,
     "length": 2.2,
@@ -35835,6 +35933,8 @@
     "all_time_low": 43.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1408_655015d0-435d-4b5d-87c8-e2ba45199329.jpg?v=1763543252",
     "width": 27.5,
     "length": 2.2,
@@ -35873,6 +35973,8 @@
     "all_time_low": 43.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1408_634a727e-2e71-4872-aeff-54075e320db9.jpg?v=1763577634",
     "width": 29.0,
     "length": 2.2,
@@ -35993,7 +36095,7 @@
     "prices": {
       "2026-11-12": 65.0,
       "2026-11-13": 65.0,
-      "2026-11-14": 65.0
+      "2026-11-14": 66.0
     }
   },
   "https://www.bikemart.com/products/maxxis-minion-dhf-tire-20-x-2-40-clincher-folding-black-dual": {
@@ -36120,6 +36222,8 @@
     "all_time_low": 77.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma2524a_6d71a0cd-32b6-44a1-b311-a736f12b4743.jpg?v=1763570589",
     "width": 26.0,
     "length": 2.3,
@@ -36139,6 +36243,8 @@
     "all_time_low": 78.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma2524a_ef9148d6-06a8-4813-bb77-7650df439094.jpg?v=1763535203",
     "width": 26.0,
     "length": 2.5,
@@ -36158,6 +36264,8 @@
     "all_time_low": 88.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6413_52553577-6d0b-4d21-b278-de2382467f3d.jpg?v=1763555605",
     "width": 27.5,
     "length": 2.3,
@@ -36311,6 +36419,8 @@
     "all_time_low": 95.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6413_52842a8b-5f0b-4194-99ef-a08c3660caca.jpg?v=1763580864",
     "width": 27.5,
     "length": 2.6,
@@ -36349,6 +36459,8 @@
     "all_time_low": 95.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6413_297cf245-a77c-456b-b605-f165b01b08b1.jpg?v=1763557383",
     "width": 27.5,
     "length": 2.6,
@@ -36368,6 +36480,8 @@
     "all_time_low": 101.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6413_4f985ef3-7dbf-4a3c-ba81-00431100288c.jpg?v=1763535465",
     "width": 27.5,
     "length": 2.8,
@@ -36406,6 +36520,8 @@
     "all_time_low": 106.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6413_ca61cbad-5a53-4b10-8db1-077428c2ba72.jpg?v=1763566400",
     "width": 27.5,
     "length": 2.8,
@@ -36431,7 +36547,7 @@
     "prices": {
       "2026-11-12": 105.0,
       "2026-11-13": 105.0,
-      "2026-11-14": 105.0
+      "2026-11-14": 106.0
     }
   },
   "https://www.bikemart.com/products/maxxis-minion-dhf-tire-29-x-2-3-tubeless-folding-black-3c-maxx-terra-dd": {
@@ -36444,6 +36560,8 @@
     "all_time_low": 106.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6413_f4d0767b-105a-4355-9b9a-39be63d379d6.jpg?v=1763579737",
     "width": 29.0,
     "length": 2.3,
@@ -36482,6 +36600,8 @@
     "all_time_low": 106.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6413_ffab2b4c-a9f4-471b-99f7-828f789a89b9.jpg?v=1763555834",
     "width": 29.0,
     "length": 2.5,
@@ -36691,6 +36811,8 @@
     "all_time_low": 105.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6366_862d3ed3-94e4-4a9f-b8e0-0cfeb97e8b14.jpg?v=1763590767",
     "width": 27.5,
     "length": 2.3,
@@ -36805,6 +36927,8 @@
     "all_time_low": 101.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6366_e1ad81a1-797f-4733-b042-f78d00e601c6.jpg?v=1763524982",
     "width": 27.5,
     "length": 2.8,
@@ -36830,7 +36954,7 @@
     "prices": {
       "2026-11-12": 87.0,
       "2026-11-13": 87.0,
-      "2026-11-14": 87.0
+      "2026-11-14": 88.0
     }
   },
   "https://www.bikemart.com/products/maxxis-minion-dhr-ii-tire-27-5x2-4-3ct-dh-tr-e50": {
@@ -36862,6 +36986,8 @@
     "all_time_low": 106.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6366_a17b6ad1-efe9-4d22-b91a-7d7a05733f26.jpg?v=1763521451",
     "width": 29.0,
     "length": 2.3,
@@ -37145,7 +37271,7 @@
     "prices": {
       "2026-11-12": 87.0,
       "2026-11-13": 87.0,
-      "2026-11-14": 87.0
+      "2026-11-14": 88.0
     }
   },
   "https://www.bikemart.com/products/maxxis-rekon-race-dc-exo-tr-29x2-35-tubeless-tire": {
@@ -37183,7 +37309,7 @@
     "prices": {
       "2026-11-12": 82.0,
       "2026-11-13": 82.0,
-      "2026-11-14": 82.0
+      "2026-11-14": 83.0
     }
   },
   "https://www.bikemart.com/products/maxxis-rekon-tire-27-5-x-2-25-clincher-wire-black": {
@@ -37196,6 +37322,8 @@
     "all_time_low": 43.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6832-02.jpg?v=1763536908",
     "width": 27.5,
     "length": 2.25,
@@ -37215,6 +37343,8 @@
     "all_time_low": 43.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6832-02_05b0fb8d-82c1-4944-9457-8bc3202e6577.jpg?v=1763554523",
     "width": 29.0,
     "length": 2.25,
@@ -37253,6 +37383,8 @@
     "all_time_low": 43.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6832-02_7ed68fe2-21d1-498e-a762-c266cc9eed6a.jpg?v=1763548128",
     "width": 29.0,
     "length": 2.4,
@@ -37272,6 +37404,8 @@
     "all_time_low": 48.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6832-02_45e2e31b-b886-4f39-8a93-19067a4d4a14.jpg?v=1763576978",
     "width": 29.0,
     "length": 2.6,
@@ -37313,7 +37447,7 @@
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1228.jpg?v=1763515354",
     "prices": {
       "2026-11-13": 72.0,
-      "2026-11-14": 72.0
+      "2026-11-14": 87.0
     }
   },
   "https://www.bikemart.com/products/maxxis-snyper-tire-24-x-2-clincher-folding-black-dual-silkshield": {
@@ -37364,6 +37498,8 @@
     "all_time_low": 44.0,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1385.jpg?v=1763533435",
     "prices": {
       "2026-11-13": 44.0,
@@ -37528,6 +37664,8 @@
     "all_time_low": 13.85,
     "all_time_low_date": "2026-11-13",
     "stage": "price_drop",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od3100.jpg?v=1762248232",
     "prices": {
       "2026-11-12": 13.95,
@@ -37596,6 +37734,8 @@
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0364.jpg?v=1762297781",
     "prices": {
       "2026-11-12": 28.8,
@@ -37608,16 +37748,15 @@
     "store": "Bike Mart",
     "part": "Cockpit",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
     "prices": {
-      "2026-11-12": 28.8
+      "2026-11-12": 28.8,
+      "2026-11-14": 28.8
     }
   },
   "https://www.bikemart.com/products/odi-rogue-v2-1-lock-on-grips": {
@@ -37630,6 +37769,8 @@
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0335.jpg?v=1762306311",
     "prices": {
       "2026-11-12": 28.8,
@@ -37647,6 +37788,8 @@
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od9650.jpg?v=1762272585",
     "prices": {
       "2026-11-13": 28.8,
@@ -37675,16 +37818,15 @@
     "store": "Bike Mart",
     "part": "Cockpit",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0339.jpg?v=1762290159",
     "prices": {
-      "2026-11-12": 28.8
+      "2026-11-12": 28.8,
+      "2026-11-14": 28.8
     }
   },
   "https://www.bikemart.com/products/odi-tangent-contour-v2-1-grips-black": {
@@ -41729,6 +41871,39 @@
       "2026-11-14": 126.09
     }
   },
+  "https://www.bikemart.com/products/origin8-mt-3200-2-mtb-hubs-hub-rear-32h-148": {
+    "name": "Origin8 MT-3200.2 MTB Hubs hub rear 32H 148",
+    "store": "Bike Mart",
+    "part": "Wheels",
+    "first_seen": "2026-11-14",
+    "last_seen": "2026-11-14",
+    "observation_count": 1,
+    "all_time_low": 126.09,
+    "all_time_low_date": "2026-11-14",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/372090.jpg?v=1762247059",
+    "spec_offers": [
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "46838170484989",
+        "available": true,
+        "price": 126.09,
+        "compare_at_price": 139.99
+      },
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "46838269509885",
+        "available": true,
+        "price": 126.09,
+        "compare_at_price": 139.99
+      }
+    ],
+    "prices": {
+      "2026-11-14": 126.09
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/origin8-mt-3200-2-mtb-hubs-hub-rear-32h-150": {
     "name": "Origin8 MT-3200.2 MTB Hubs hub rear 32H 148",
     "store": "Bike Mart",
@@ -41739,6 +41914,8 @@
     "all_time_low": 120.69,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/372117.jpg?v=1762305618",
     "spec_offers": [
       {
@@ -46801,7 +46978,7 @@
     "prices": {
       "2026-11-12": 83.61,
       "2026-11-13": 83.61,
-      "2026-11-14": 83.61
+      "2026-11-14": 97.11
     }
   },
   "https://www.bikemart.com/products/pirelli-scorpion-enduro-r-mountain-tire-folding-tubeless-ready-smartgrip-hardwall-60tpi-black": {
@@ -46818,7 +46995,7 @@
     "prices": {
       "2026-11-12": 83.61,
       "2026-11-13": 83.61,
-      "2026-11-14": 83.61
+      "2026-11-14": 97.11
     }
   },
   "https://www.bikemart.com/products/pirelli-scorpion-enduro-r-tire-29": {
@@ -46853,7 +47030,7 @@
     "prices": {
       "2026-11-12": 83.61,
       "2026-11-13": 83.61,
-      "2026-11-14": 83.61
+      "2026-11-14": 97.11
     }
   },
   "https://www.bikemart.com/products/pirelli-scorpion-race-dh-s-tire-29-x-2-5-clincher-wire-ylw-label-team-edition-dualwall-smartevo-dh": {
@@ -46940,6 +47117,8 @@
     "all_time_low": 93.51,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR7118.jpg?v=1762261844",
     "width": 29.0,
     "length": 2.4,
@@ -47166,6 +47345,8 @@
     "all_time_low": 4.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/RS6816_68a78fea-6940-4d98-a3d5-af7bd91330eb.jpg?v=1762291836",
     "width": 10.0,
     "length": 50.0,
@@ -47185,6 +47366,8 @@
     "all_time_low": 14.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ST0939.jpg?v=1762264314",
     "prices": {
       "2026-11-12": 14.93,
@@ -47202,6 +47385,8 @@
     "all_time_low": 7.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ST7114.jpg?v=1762319014",
     "prices": {
       "2026-11-12": 7.93,
@@ -47219,6 +47404,8 @@
     "all_time_low": 599.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/140947-17_1.jpg?v=1764313363",
     "prices": {
       "2026-11-12": 599.0,
@@ -47439,6 +47626,8 @@
     "all_time_low": 138.57,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1826.jpg?v=1762285337",
     "width": 26.0,
     "length": 4.8,
@@ -47508,18 +47697,17 @@
     "store": "Bike Mart",
     "part": "Tires",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 28.83,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5837.jpg?v=1762262320",
     "width": 27.5,
     "length": 2.0,
     "prices": {
-      "2026-11-12": 28.83
+      "2026-11-12": 28.83,
+      "2026-11-14": 28.83
     }
   },
   "https://www.bikemart.com/products/schwalbe-big-ben-perf-lite-rg-27-5x2-0-standard-tire": {
@@ -47694,16 +47882,15 @@
     "store": "Bike Mart",
     "part": "Tires",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 42.78,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR0291.jpg?v=1762281232",
     "prices": {
-      "2026-11-12": 42.78
+      "2026-11-12": 42.78,
+      "2026-11-14": 42.78
     }
   },
   "https://www.bikemart.com/products/schwalbe-fat-albert-front-tire-27-5-x-2-35-tubeless-folding-blk-evolution-addix-soft-snakeskin": {
@@ -48044,6 +48231,21 @@
       "2026-11-14": 100.44
     }
   },
+  "https://www.bikemart.com/products/schwalbe-marathon-almotion-tire": {
+    "name": "Schwalbe Marathon Almotion Tire - Clincher Folding BLK V-Guard",
+    "store": "Bike Mart",
+    "part": "Tires",
+    "first_seen": "2026-11-14",
+    "last_seen": "2026-11-14",
+    "observation_count": 1,
+    "all_time_low": 84.63,
+    "all_time_low_date": "2026-11-14",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5411-02.jpg?v=1762259881",
+    "prices": {
+      "2026-11-14": 84.63
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/schwalbe-marathon-e-plus-tire": {
     "name": "Schwalbe Marathon E-Plus Tire",
     "store": "Bike Mart",
@@ -48348,16 +48550,15 @@
     "store": "Bike Mart",
     "part": "Tires",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 28.83,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
     "prices": {
-      "2026-11-12": 28.83
+      "2026-11-12": 28.83,
+      "2026-11-14": 28.83
     }
   },
   "https://www.bikemart.com/products/schwalbe-rick-xc-pro-tire-29": {
@@ -48370,6 +48571,8 @@
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR8978.jpg?v=1762255665",
     "length": 29.0,
     "prices": {
@@ -48573,6 +48776,8 @@
     "all_time_low": 26.04,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR0907.jpg?v=1762314952",
     "prices": {
       "2026-11-12": 26.04,
@@ -48926,6 +49131,8 @@
     "all_time_low": 225.0,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1872.jpg?v=1762428309",
     "durometers": [
       "650B"
@@ -49941,14 +50148,14 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-14",
     "observation_count": 3,
-    "all_time_low": 19.99,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 16.49,
+    "all_time_low_date": "2026-11-14",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/41346.jpg?v=1762293145",
     "prices": {
       "2026-11-12": 19.99,
       "2026-11-13": 19.99,
-      "2026-11-14": 19.99
+      "2026-11-14": 16.49
     }
   },
   "https://www.bikemart.com/products/sunlite-juvenile-9-16-black": {
@@ -50805,16 +51012,15 @@
     "store": "Bike Mart",
     "part": "Brakes",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 26.0,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR1636.jpg?v=1762291162",
     "prices": {
-      "2026-11-12": 26.0
+      "2026-11-12": 26.0,
+      "2026-11-14": 26.0
     }
   },
   "https://www.bikemart.com/products/tektro-50-hydraulic-brake-hose-kit-with-connecting-bolt-unit-5-5mm-x-2500mm-for-auriga-twin-auriga": {
@@ -50997,6 +51203,8 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR8023.jpg?v=1762312147",
     "prices": {
       "2026-11-12": 59.99,
@@ -51065,6 +51273,8 @@
     "all_time_low": 29.99,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7545.jpg?v=1762255886",
     "prices": {
       "2026-11-13": 29.99,
@@ -51119,7 +51329,7 @@
     "prices": {
       "2026-11-12": 8.16,
       "2026-11-13": 8.16,
-      "2026-11-14": 8.16
+      "2026-11-14": 9.99
     }
   },
   "https://www.bikemart.com/products/tektro-q10rs-disc-brake-pad-resin-for-use-with-4-piston-calipers-red": {
@@ -51136,7 +51346,7 @@
     "prices": {
       "2026-11-12": 19.99,
       "2026-11-13": 19.99,
-      "2026-11-14": 19.99
+      "2026-11-14": 21.29
     }
   },
   "https://www.bikemart.com/products/tektro-rl340-ergo-brake-lever-set": {
@@ -51144,16 +51354,15 @@
     "store": "Bike Mart",
     "part": "Brakes",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-14",
+    "observation_count": 2,
     "all_time_low": 29.99,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7223.jpg?v=1762279403",
     "prices": {
-      "2026-11-12": 29.99
+      "2026-11-12": 29.99,
+      "2026-11-14": 29.99
     }
   },
   "https://www.bikemart.com/products/tektro-s20-11-disc-brake-pads-organic-compound-fits-volans-hd-t700-auriga-twin-hd-t515-auriga-e-sub-hd-e510-e515-green": {
@@ -51219,6 +51428,8 @@
     "all_time_low": 39.99,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7195.jpg?v=1762310310",
     "prices": {
       "2026-11-12": 39.99,
@@ -51491,6 +51702,8 @@
     "all_time_low": 64.99,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7489.jpg?v=1763528940",
     "prices": {
       "2026-11-13": 64.99,
@@ -51643,6 +51856,8 @@
     "all_time_low": 12.93,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/21714_A_1_VP_Grind_Black_Pedal.jpg?v=1762267757",
     "prices": {
       "2026-11-12": 12.93,
@@ -52157,6 +52372,8 @@
     "all_time_low": 119.9,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HD0294.jpg?v=1762299984",
     "prices": {
       "2026-11-12": 119.9,
@@ -53394,6 +53611,8 @@
     "all_time_low": 80.95,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/wt1095.jpg?v=1762316613",
     "width": 27.5,
     "length": 2.4,
@@ -53474,6 +53693,8 @@
     "all_time_low": 29.62,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-14",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
     "prices": {
       "2026-11-12": 29.62,
@@ -56046,6 +56267,7 @@
     "observation_count": 1,
     "all_time_low": 249.99,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ns-bikes--enigma-rock-roll-27_5-rotary-boost-148x12-rotary-boost-110x15-wheelset-1_jpg.webp?v=1753735484",
     "spec_offers": [
       {
@@ -56059,8 +56281,7 @@
     ],
     "prices": {
       "2026-11-14": 249.99
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikesonline.com/products/octane-one-hooner-frameset": {
     "name": "NS Bikes Octane One Hooner Frameset",
@@ -57437,11 +57658,11 @@
     "observation_count": 1,
     "all_time_low": 179.99,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/products/EPDM821.jpg?v=1774405343",
     "prices": {
       "2026-11-14": 179.99
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikesonline.com/products/shimano-slx-chain-12-speed": {
     "name": "Shimano SLX Chain - 12 Speed",
@@ -95691,11 +95912,11 @@
     "observation_count": 1,
     "all_time_low": 28.79,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/mtx-gold-label-hd-brake-pads-mtx-braking-the-lost-co-gl185-680794.jpg?v=1663954264",
     "prices": {
       "2026-11-14": 28.79
-    },
-    "stage": "new"
+    }
   },
   "https://www.thelostco.com/products/mtx-red-label-race-brake-pads": {
     "name": "MTX Red Label RACE Brake Pads",
@@ -95706,11 +95927,11 @@
     "observation_count": 1,
     "all_time_low": 28.79,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/mtx-red-label-race-brake-pads-mtx-braking-the-lost-co-rl185-717353.jpg?v=1663954237",
     "prices": {
       "2026-11-14": 28.79
-    },
-    "stage": "new"
+    }
   },
   "https://www.thelostco.com/products/odi-ag2-grips-graphite-cool-gray-lock-on": {
     "name": "ODI AG2 Grips - Graphite Cool Gray Lock-On",
@@ -98147,11 +98368,11 @@
     "observation_count": 1,
     "all_time_low": 195.0,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/1075_PC10591-1037-1-d1p1ngtxb.avif?v=1780596918",
     "prices": {
       "2026-11-14": 195.0
-    },
-    "stage": "new"
+    }
   },
   "https://www.thelostco.com/products/poc-kortal-race-mips-helmet-pargasite-green-hydrogen-white": {
     "name": "POC Kortal Race MIPS Helmet - Pargasite Green / Hydrogen White",
@@ -109192,12 +109413,12 @@
     "observation_count": 1,
     "all_time_low": 80.0,
     "all_time_low_date": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0349/7357/files/SM0932.jpg?v=1763414654",
     "width": 8.0,
     "prices": {
       "2026-11-14": 80.0
-    },
-    "stage": "new"
+    }
   },
   "https://www.worldwidecyclery.com/products/dt-swiss-e-532-29-tubeless-ready-disc-rim-28h-black": {
     "name": "DT Swiss E 532 Rim - 29\", Disc, Black, 28H",
