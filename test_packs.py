@@ -53,26 +53,60 @@ class PackTests(unittest.TestCase):
         self.assertEqual(shopify.part_for(store, "Bags", "Dakine Mission 25L Backpack"), "Packs")
         self.assertEqual(shopify.part_for(store, "Bags", "Dakine Boot Locker 69L Bag"), "Accessories")
 
-    def test_pool_adds_other_sports_general_packs_once(self):
-        def item(name, url, part="Packs"):
-            return {"name": name, "url": url, "part": part, "price_new": "30", "price_old": "50", "store": "evo"}
+    def test_pool_shares_packs_where_they_belong(self):
+        """Owner, 2026-11-14: no ski packs on BMX or Skate. Snow packs go to
+        Ski, bike packs to MTB, a sport's own brand to that sport; everyday
+        packs go to the tabs of their store's family (skate+BMX, ski+MTB)."""
+        def item(name, url, part="Packs", kind="", brand=""):
+            return {"name": name, "url": url, "part": part, "product_type": kind, "brand": brand,
+                    "price_new": "30", "price_old": "50", "store": "x"}
         catalogs = {
-            "ski": {"evo_Packs": [item("Dakine Heli Pro 20L Backpack", "https://evo/heli"),
-                                  item("Mammut Free 28 Airbag 3.0 Backpack", "https://evo/mammut")],
+            "ski": {"evo_Packs": [item("Dakine Heli Pro 20L Backpack", "https://evo/heli", kind="Ski Snowboard Backpacks"),
+                                  item("CamelBak M.U.L.E. 12 Hydration Pack", "https://evo/mule", kind="Hydration Packs"),
+                                  item("Topo Designs Rover Classic Backpack", "https://evo/topo", kind="Day Packs"),
+                                  item("Hurley Printed Standard Backpack Beach Chair", "https://evo/chair")],
                     "evo_Skis": [item("Line Pandora 94", "https://evo/ski", "Skis")]},
-            "skate": {"Exodus_Packs": [item("Spitfire Bighead Backpack", "https://exodus/spitfire")]},
-            "mtb": {"Mike's Bikes_Packs": [item("CamelBak M.U.L.E. 12 Hydration Pack", "https://mikes/mule")]},
-            "bmx": {},
+            "skate": {"Zumiez_Packs": [item("Jansport Superbreak Plus Backpack", "https://zumiez/jansport"),
+                                       item("Spitfire Bighead Backpack", "https://zumiez/spitfire")],
+                      "Tactics_Packs": [item("DAKINE Women's Heli 12L Backpack - pinebark", "https://tactics/heli")]},
+            "mtb": {"EVOC_Packs": [item("EVOC RIDE 12", "https://evoc/ride", kind="Hydration Bags", brand="EVOC")]},
+            "bmx": {"Source BMX US_Packs": [item("Shadow Conspiracy Session Backpack", "https://source/shadow")]},
         }
-        own = {"Source BMX US_Packs": [item("Shadow Conspiracy Session Backpack", "https://source/shadow")],
-               "Source BMX US_Tires": [item("Shadow Valor Tire", "https://source/tire", "Tires")]}
-        pooled = packs.pool(own, "bmx", load=lambda sport: catalogs[sport.id])
-        urls = sorted(i["url"] for items in pooled.values() for i in items if i.get("part") == "Packs")
-        self.assertEqual(urls, ["https://evo/heli", "https://mikes/mule", "https://source/shadow"])
+        load = lambda sport: catalogs[sport.id]
+        def urls(sport_id):
+            pooled = packs.pool(catalogs[sport_id], sport_id, load=load)
+            return sorted(i["url"] for items in pooled.values() for i in items if i.get("part") == "Packs")
+        self.assertEqual(urls("bmx"), ["https://source/shadow", "https://zumiez/jansport"])
+        self.assertEqual(urls("skate"), ["https://zumiez/jansport", "https://zumiez/spitfire"])
+        self.assertEqual(urls("ski"), ["https://evo/heli", "https://evo/topo", "https://tactics/heli"])
+        self.assertEqual(urls("mtb"), ["https://evo/mule", "https://evo/topo", "https://evoc/ride"])
+        pooled = packs.pool(catalogs["mtb"], "mtb", load=load)
         self.assertEqual(pooled["evo_Packs"][0]["pooled_from"], "ski")
         self.assertNotIn("evo_Skis", pooled)
-        self.assertEqual(len(own["Source BMX US_Packs"]), 1)  # input untouched
-        self.assertEqual(packs.pool(pooled, "bmx", load=lambda sport: catalogs[sport.id]), pooled)
+        self.assertEqual(len(catalogs["ski"]["evo_Packs"]), 4)  # stored data untouched
+        self.assertEqual(packs.pool(pooled, "mtb", load=load), pooled)
+
+    def test_pack_homes(self):
+        cases = {("Ortovox Switchback 27L Backpack", "Ski Snowboard Backpacks"): "ski",
+                 ("Dakine Poacher RAS Vest / Backpack - black", ""): "ski",
+                 ("Osprey Seral 7 Lumbar Pack", "Fanny Packs"): "mtb",
+                 ("Dakine Hot Laps 5L Hip Pack", ""): "mtb",
+                 ("EVOC Mission", "Backpacks"): "mtb",
+                 ("Herschel Supply Co. Classic XL Black Backpack", ""): None,
+                 ("Burton Day Hiker 22L Pack", ""): None,
+                 ("Vans Old Skool Backpack", ""): None}
+        for (name, kind), home in cases.items():
+            self.assertEqual(packs.home(name, "", kind), home, name)
+
+    def test_junk_dropped_when_built(self):
+        for name in ("Discmania Disc Golf Bag Fanatic Go Backpack", "2020 Rant Sticker Pack",
+                     "100% Racecraft 2 / Accuri 2 / Strata 2 Tear-Offs 2x7 laminated pack", "Shadow Obscura Camera Bag",
+                     "Fit Louis Bumbag", "CamelBak Quick Stow 17oz Flask", "Herschel Supply Co. Nova Crossbody"):
+            self.assertFalse(packs.shown_on({"part": "Packs", "name": name}, "bmx"), name)
+        # Real packs whose names mention a bladder or pouch stay.
+        for name in ("EVOC Hydro Pro 3 + 1.5l Bladder", "EVOC Hip Pouch Pro + Drink Bottle"):
+            self.assertTrue(packs.shown_on({"part": "Packs", "name": name, "brand": "EVOC"}, "mtb"), name)
+        self.assertTrue(packs.shown_on({"part": "Decks", "name": "Sticker deck"}, "skate"))
 
 
 if __name__ == "__main__":

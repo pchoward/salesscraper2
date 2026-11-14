@@ -90,8 +90,14 @@ def load_section(sport, since=None):
             logger.info("%s: no scrape since %s; left out", sport.label, since.isoformat())
             return None
     saved = payload.get("digest") or {}
-    new_items = _biggest_first([i for i in saved.get("new_items") or [] if isinstance(i, dict)], lambda i: i)
-    drops = _biggest_first([c for c in saved.get("drops") or [] if isinstance(c, dict)], lambda c: c.get("item"))
+    # Packs that belong on another tab (a ski store's hydration packs) stay
+    # out of this sport's section, as on its page (sports/packs.py).
+    from sports import packs
+    new_items = _biggest_first([i for i in saved.get("new_items") or []
+                                if isinstance(i, dict) and packs.shown_on(i, sport.id)], lambda i: i)
+    drops = _biggest_first([c for c in saved.get("drops") or []
+                            if isinstance(c, dict) and packs.shown_on(c.get("item") or {}, sport.id)],
+                           lambda c: c.get("item"))
     if not new_items and not drops:
         return None
     return Section(sport, new_items[:LIMIT], drops[:LIMIT],
