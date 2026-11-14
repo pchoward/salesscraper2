@@ -13,6 +13,16 @@ const path=require('node:path');
   for(const mode of ['early','legacy','late','stale']){
    const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
    const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+   await page.addInitScript(()=>{
+    const owner=document,Observer=window.MutationObserver;
+    window.MutationObserver=class extends Observer{
+     constructor(callback){super(callback);this.callback=callback;}
+     observe(target,options){
+      if(target.id==='personalTools')owner.task14PersonalSync=this.callback;
+      return super.observe(target,options);
+     }
+    };
+   });
    let release,held=false,body;
    const gate=new Promise(resolve=>release=resolve);
    await page.route('**/*',async route=>{
@@ -42,8 +52,9 @@ const path=require('node:path');
     await page.evaluate(()=>{
      const child=document.getElementById('skateFrame').contentWindow;
      window.oldCatalog={child,source:child.document.getElementById('partFilters'),document:child.document};
+     window.sportSwitchStarted=performance.now();
      shredApp.choose('ski','sport');
-     setTimeout(()=>shredApp.choose('mtb','sport'),30);
+     setTimeout(()=>{window.sportSwitchElapsed=performance.now()-window.sportSwitchStarted;shredApp.choose('mtb','sport');},30);
     });
    }
    await page.waitForFunction(mode=>{
@@ -58,6 +69,23 @@ const path=require('node:path');
     setTimeout(()=>shredApp.registerCategories(old.source,old.child,old.document),0);
     old.document.dispatchEvent(new Event('shreddeals:catalog-ready'));
    });
+   if(mode==='stale'){
+    assert(await page.evaluate(()=>sportSwitchElapsed<1000),'sport switches complete within one second');
+    assert(await page.evaluate(()=>typeof oldCatalog.document.task14PersonalSync==='function'),'personal observer captured');
+    const staleMessages=await page.evaluate(()=>new Promise(resolve=>{
+     let messages=0;
+     const listener=event=>{
+      if(event.data?.type==='shreddeals:my-stuff')messages++;
+      if(event.data?.type==='task14:barrier'){removeEventListener('message',listener);resolve(messages);}
+     };
+     addEventListener('message',listener);
+     setTimeout(()=>{
+      try{oldCatalog.document.task14PersonalSync([]);}
+      finally{postMessage({type:'task14:barrier'},location.origin);}
+     },0);
+    }));
+    assert.equal(staleMessages,0,'departed personal controls must not publish new-catalog messages');
+   }
    assert.deepEqual(errors,[]);
    release();
    await page.waitForFunction(()=>!document.getElementById('categoryToggle').disabled);
