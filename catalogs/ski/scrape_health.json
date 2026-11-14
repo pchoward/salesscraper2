@@ -9386,14 +9386,14 @@
           }
         },
         "Christy Sports_Boots": {
-          "count": 154,
+          "count": 152,
           "failed": false,
           "diagnostics": {
             "expected_count": 157.0,
             "baseline_samples": 12,
             "median_absolute_deviation": 0.0,
-            "actual_count": 154,
-            "percentage_change": -1.9,
+            "actual_count": 152,
+            "percentage_change": -3.2,
             "reason": "normal_variation"
           }
         },
@@ -9539,6 +9539,90 @@
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
+          }
+        },
+        "EVOC_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Boots": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Helmets": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Packs": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 3,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Skis": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
           }
         },
         "Gear West_Bindings": {
@@ -9842,14 +9926,14 @@
           }
         },
         "Smith_Helmets": {
-          "count": 10,
+          "count": 9,
           "failed": false,
           "diagnostics": {
             "expected_count": 12.5,
             "baseline_samples": 8,
             "median_absolute_deviation": 1.5,
-            "actual_count": 10,
-            "percentage_change": -20.0,
+            "actual_count": 9,
+            "percentage_change": -28.0,
             "reason": "normal_variation"
           }
         },
@@ -10250,14 +10334,14 @@
           }
         },
         "Willis Ski and Board_Boots": {
-          "count": 61,
+          "count": 59,
           "failed": false,
           "diagnostics": {
             "expected_count": 61.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 0.0,
-            "actual_count": 61,
-            "percentage_change": 0.0,
+            "actual_count": 59,
+            "percentage_change": -3.3,
             "reason": "insufficient_history"
           }
         },
@@ -10310,14 +10394,14 @@
           }
         },
         "Willis Ski and Board_Skis": {
-          "count": 37,
+          "count": 35,
           "failed": false,
           "diagnostics": {
             "expected_count": 36.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 1.0,
-            "actual_count": 37,
-            "percentage_change": 2.8,
+            "actual_count": 35,
+            "percentage_change": -2.8,
             "reason": "insufficient_history"
           }
         },
@@ -10478,19 +10562,19 @@
           }
         },
         "evo_Skis": {
-          "count": 175,
+          "count": 173,
           "failed": false,
           "diagnostics": {
             "expected_count": 190.0,
             "baseline_samples": 12,
             "median_absolute_deviation": 4.0,
-            "actual_count": 175,
-            "percentage_change": -7.9,
+            "actual_count": 173,
+            "percentage_change": -8.9,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-14T01:53:12+00:00"
+      "scanned_at": "2026-11-14T06:36:19+00:00"
     }
   ],
   "baseline": {
@@ -10532,7 +10616,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-14",
-      "count": 175
+      "count": 173
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-14",
@@ -10540,7 +10624,7 @@
     },
     "Christy Sports_Boots": {
       "date": "2026-11-14",
-      "count": 154
+      "count": 152
     },
     "Christy Sports_Poles": {
       "date": "2026-11-14",
@@ -10624,7 +10708,7 @@
     },
     "Smith_Helmets": {
       "date": "2026-11-14",
-      "count": 10
+      "count": 9
     },
     "Smith_Protection": {
       "date": "2026-11-14",
@@ -10728,7 +10812,7 @@
     },
     "Willis Ski and Board_Boots": {
       "date": "2026-11-14",
-      "count": 61
+      "count": 59
     },
     "Willis Ski and Board_Helmets": {
       "date": "2026-11-14",
@@ -10744,7 +10828,7 @@
     },
     "Willis Ski and Board_Skis": {
       "date": "2026-11-14",
-      "count": 37
+      "count": 35
     },
     "Aspen Ski and Board_Packs": {
       "date": "2026-11-14",
@@ -10765,6 +10849,10 @@
     "Triple 8_Protection": {
       "date": "2026-11-14",
       "count": 2
+    },
+    "EVOC_Packs": {
+      "date": "2026-11-14",
+      "count": 3
     }
   },
   "completeness_baseline": {
@@ -11285,7 +11373,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 154
+        "count": 152
       }
     ],
     "Christy Sports_Helmets": [
@@ -11823,6 +11911,48 @@
         "date": "2026-11-13",
         "count": 0
       },
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Bindings": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Boots": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Helmets": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Packs": [
+      {
+        "date": "2026-11-14",
+        "count": 3
+      }
+    ],
+    "EVOC_Poles": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Protection": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Skis": [
       {
         "date": "2026-11-14",
         "count": 0
@@ -12589,7 +12719,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 10
+        "count": 9
       }
     ],
     "Smith_Packs": [
@@ -13825,7 +13955,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 61
+        "count": 59
       }
     ],
     "Willis Ski and Board_Helmets": [
@@ -13895,7 +14025,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 37
+        "count": 35
       }
     ],
     "Zeitbike_Bindings": [
@@ -14431,7 +14561,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 175
+        "count": 173
       }
     ]
   }

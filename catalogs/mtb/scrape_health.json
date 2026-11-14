@@ -24888,6 +24888,138 @@
             "reason": "normal_variation"
           }
         },
+        "EVOC_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Packs": {
+          "count": 17,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 17,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Protection": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 5,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
+        "EVOC_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": null,
+            "baseline_samples": 0,
+            "median_absolute_deviation": null,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "insufficient_history"
+          }
+        },
         "Fanatik_Bikes": {
           "count": 10,
           "failed": false,
@@ -25705,26 +25837,26 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 130,
+          "count": 129,
           "failed": false,
           "diagnostics": {
             "expected_count": 162.5,
             "baseline_samples": 10,
             "median_absolute_deviation": 2.5,
-            "actual_count": 130,
-            "percentage_change": -20.0,
+            "actual_count": 129,
+            "percentage_change": -20.6,
             "reason": "normal_variation"
           }
         },
         "The Lost Co._Drivetrain": {
-          "count": 105,
+          "count": 104,
           "failed": false,
           "diagnostics": {
             "expected_count": 132,
             "baseline_samples": 11,
             "median_absolute_deviation": 3,
-            "actual_count": 105,
-            "percentage_change": -20.5,
+            "actual_count": 104,
+            "percentage_change": -21.2,
             "reason": "normal_variation"
           }
         },
@@ -26209,7 +26341,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-14T02:00:47+00:00"
+      "scanned_at": "2026-11-14T06:44:24+00:00"
     }
   ],
   "baseline": {
@@ -26399,11 +26531,11 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-14",
-      "count": 130
+      "count": 129
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-14",
-      "count": 105
+      "count": 104
     },
     "The Lost Co._Forks & Shocks": {
       "date": "2026-11-14",
@@ -26568,6 +26700,14 @@
     "The Lost Co._Wheels": {
       "date": "2026-11-14",
       "count": 16
+    },
+    "EVOC_Packs": {
+      "date": "2026-11-14",
+      "count": 17
+    },
+    "EVOC_Protection": {
+      "date": "2026-11-14",
+      "count": 5
     }
   },
   "completeness_baseline": {
@@ -30577,6 +30717,72 @@
         "count": 0
       }
     ],
+    "EVOC_Bikes": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Brakes": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Cockpit": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Drivetrain": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Forks & Shocks": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Frames": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Packs": [
+      {
+        "date": "2026-11-14",
+        "count": 17
+      }
+    ],
+    "EVOC_Pedals": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Protection": [
+      {
+        "date": "2026-11-14",
+        "count": 5
+      }
+    ],
+    "EVOC_Tires": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
+    "EVOC_Wheels": [
+      {
+        "date": "2026-11-14",
+        "count": 0
+      }
+    ],
     "Fanatik_Bikes": [
       {
         "date": "2026-11-02",
@@ -33884,7 +34090,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 130
+        "count": 129
       }
     ],
     "The Lost Co._Drivetrain": [
@@ -33934,7 +34140,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 105
+        "count": 104
       }
     ],
     "The Lost Co._Forks & Shocks": [
