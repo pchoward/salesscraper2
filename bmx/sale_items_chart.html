@@ -16484,6 +16484,9 @@ function init() {
     refreshCharts();
     if (typeof requestAnimationFrame === "function") requestAnimationFrame(fillCardWindow);
     wireAlerts();
+    // Readiness belongs to this document, never the iframe's reusable WindowProxy.
+    document.shredCatalogReady = {dealRows, typeSlug, typedFilters};
+    document.dispatchEvent(new Event("shreddeals:catalog-ready"));
 }
 
 document.addEventListener("DOMContentLoaded", updateAgo);
