@@ -1,10 +1,13 @@
 """Packs: backpacks and hydration packs, on every sport (owner, 2026-11-12).
 
 The heading sits after Protection at the bottom of every menu
-(docs/menu-wireframe.md). Most packs suit any sport, so a general pack sold
-by any store shows on all four tabs (``pool`` adds the other sports' general
-packs when a page is built). A pack from a sport's own brands (Shadow for
-BMX, Spitfire for Skate) or an avalanche pack (Ski) shows only on that sport.
+(docs/menu-wireframe.md). Each pack shows where it's used (owner,
+2026-11-14), whichever store sells it (``home``): ski and avalanche packs on
+Ski, hydration/hip/protector packs on MTB, a sport's own brands (Shadow,
+Spitfire) on that sport. Everyday packs are shared within two pairs of tabs
+(``FAMILY``): skate+BMX shops' streetwear packs, ski+bike shops' outdoor
+packs. ``pool`` does this when a page is built; stored data keeps every pack
+the stores file.
 
 Duffels, travel, ski, board and boot bags, bike bags (saddle, handlebar,
 frame), slings, totes and hydration bladders on their own are not packs, and
@@ -15,6 +18,14 @@ import json
 import re
 
 PART = "Packs"
+
+# Filed under packs by a store but not packs (owner, 2026-11-14): disc golf
+# bags, a beach chair, a flask, crossbodies, camera bags, bum bags, sticker
+# packs and goggle tear-offs. Also checked when a page is built, so listings
+# saved under older rules drop off too.
+JUNK = (r"\bdisc\s*golf\b|\bchairs?\b|\bflasks?\b|\bcross\s*body\b|\bcamera\s*bags?\b|\bbum\s*bags?\b|"
+        r"\btear[\s-]*offs?\b|\bstickers?\b|\bpad\s*sets?\b")
+_JUNK = re.compile(JUNK, re.I)
 
 _PACK = re.compile(
     r"\bback\s*packs?\b|\bbackpacks?\b|\bdaypacks?\b|\brucksacks?\b|\bhydration\s+(?:packs?|vests?|bags?)\b|"
@@ -28,7 +39,7 @@ _NOT_PACK = re.compile(
     r"\bsticker\b|\bpad\s*(?:sets?|packs?)\b|\b\d+\s*-?\s*packs?\b|\bsix\s*packs?\b|\bpacks?\s+of\b|"
     r"\bbattery\b|\b(?:ice|gel)\s*packs?\b|\b(?:reservoir|bladder)s?\b(?!.*\bpack)|\brain\s*cover\b|"
     r"\bslings?\b|\btotes?\b|\bfanny\b|\bwallets?\b|\bpouch(?:es)?\b|\bkey\s*chains?\b|\bstraps?\b|"
-    r"\breplacement\b|\bpatch(?:es)?\b|\bsocks?\b|\bshirts?\b|\btees?\b|\bhoodies?\b|\bbeanies?\b",
+    r"\breplacement\b|\bpatch(?:es)?\b|\bsocks?\b|\bshirts?\b|\btees?\b|\bhoodies?\b|\bbeanies?\b|" + JUNK,
     re.I)
 
 # Words that make a pack Ski-only: avalanche safety packs.
@@ -101,6 +112,55 @@ def sport_of(title, brand="", product_type=""):
     return None
 
 
+# Where a pack is used (owner, 2026-11-14: "ski packs in BMX or skate ...
+# don't make sense"). Snow packs belong on Ski, bike packs on MTB; the store's
+# own category decides first, then known models and brands.
+_SNOW_TYPE = re.compile(r"\b(?:ski|skis|snow|snowboard|avalanche|airbags?)\b", re.I)
+_SNOW_TITLE = re.compile(
+    r"\b(?:ski|snowboard|splitboard|backcountry|heli|poacher|sopris|soelden|kamber|ortovox|arva|bca|ras|"
+    r"tour\s*rider|switchback)\b", re.I)
+_BIKE = re.compile(r"\bhydration\b|\bhip\s*packs?\b|\blumbar\b|\bwaist\s*packs?\b|\bprotector\b|\bbladder\b|"
+                   r"\bfanny\b|\bbike\b|\benduro\b|\bmtb\b", re.I)
+BIKE_BRANDS = ("EVOC", "CamelBak", "USWE", "High Above")
+
+
+def home(name, brand="", product_type=""):
+    """The sport a pack belongs on ("ski", "mtb", "bmx", "skate"), or None
+    for an everyday pack that suits every tab."""
+    owner = sport_of(name, brand, product_type)
+    if owner:
+        return owner
+    name, kind = str(name or ""), str(product_type or "")
+    if _SNOW_TYPE.search(kind) or _SNOW_TITLE.search(name):
+        return "ski"
+    if _BIKE.search(kind) or _BIKE.search(name) or _starts_with(brand or name, BIKE_BRANDS):
+        return "mtb"
+    return None
+
+
+# Tabs that share their everyday packs: the skate and BMX shops' streetwear
+# packs (Jansport, Vans, Herschel) go on Skate and BMX; the ski and bike
+# shops' outdoor packs (Arc'teryx, Topo, Dakine Campus) on Ski and MTB.
+FAMILY = {"skate": "street", "bmx": "street", "ski": "outdoor", "mtb": "outdoor"}
+
+
+def shown_on(item, sport_id, source=None):
+    """True when this listing belongs on ``sport_id``'s page. Anything that
+    isn't a pack stays. A pack with a home sport (ski, bike, a sport's own
+    brand) shows only there; an everyday pack shows on the tabs of its
+    store's family. ``source`` is the sport whose store sold it (default:
+    this one)."""
+    if not isinstance(item, dict) or item.get("part") != PART:
+        return True
+    name, kind = str(item.get("name") or ""), item.get("product_type")
+    if _JUNK.search(name) or _JUNK.search(str(kind or "")):
+        return False
+    owner = home(name, item.get("brand"), kind)
+    if owner:
+        return owner == sport_id
+    return FAMILY.get(source or sport_id) == FAMILY.get(sport_id)
+
+
 def rule_reason(sport_id, name, brand=""):
     """A reason when this pack belongs to another sport, else None."""
     owner = sport_of(name, brand)
@@ -117,20 +177,25 @@ def _items(data):
 
 
 def pool(data, sport_id, load=None):
-    """``data`` plus the other sports' general packs, each under its own
-    store key ("<Store>_Packs"), skipping listings already there. Read-only:
-    nothing is written back. ``load(sport) -> data`` reads a sport's stored
-    catalog (default: its previous_data.json)."""
+    """The packs ``sport_id``'s page shows (``shown_on``): its own stores'
+    packs that belong here, plus the other sports' packs that do (evo's
+    hydration packs on MTB, Tactics' ski packs on Ski, the skate shops'
+    everyday packs on BMX), each under its own store key ("<Store>_Packs"),
+    each listing once. Read-only: stored data keeps every pack the stores file.
+    ``load(sport) -> data`` reads a sport's stored catalog (default: its
+    previous_data.json)."""
     import sports
     load = load or _load_catalog
-    merged = {key: list(items) if isinstance(items, list) else items for key, items in (data or {}).items()}
+    merged = {}
+    for key, items in (data or {}).items():
+        merged[key] = [item for item in items if shown_on(item, sport_id)] if isinstance(items, list) else items
     seen = {item.get("url") for _, item in _items(merged)}
     for other in sports.SPORTS.values():
         if other.id == sport_id:
             continue
         for key, item in _items(load(other)):
             url = item.get("url")
-            if not url or url in seen or sport_of(item.get("name"), item.get("brand"), item.get("product_type")):
+            if not url or url in seen or not shown_on(item, sport_id, other.id):
                 continue
             seen.add(url)
             merged.setdefault(key, []).append(dict(item, pooled_from=other.id))

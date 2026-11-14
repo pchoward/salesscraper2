@@ -14,9 +14,13 @@ filters. **Change the wireframe first, then the code.**
 2. The gear at the bottom of every menu uses the same names on every sport, in
    this order: **Helmets · Goggles · Gloves · Protection · Packs**. Protection
    is pads, armor, impact shorts and wrist guards. Packs (owner, 2026-11-12) is
-   backpacks and hydration packs: general brands show on every sport's tab,
-   wherever they're sold; packs from a sport's own brands (Shadow for BMX,
-   Spitfire for Skate) and avalanche packs (Ski) only on that sport. A heading
+   backpacks and hydration packs. Each pack shows where it's used (owner,
+   2026-11-14): ski, snowboard and avalanche packs on Ski; hydration, hip,
+   lumbar and protector packs on MTB; a sport's own brands (Shadow for BMX,
+   Spitfire for Skate) on that sport. Everyday packs are shared within two
+   pairs: the skate and BMX shops' (Jansport, Vans, Herschel) on Skate and
+   BMX, the ski and bike shops' (Arc'teryx, Topo, Dakine Campus) on Ski and
+   MTB. A heading
    with no deals isn't shown.
 3. Inside Protection, the **Protects** filter (knees, elbows, wrists, hips,
    back & chest) narrows on every sport.

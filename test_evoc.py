@@ -51,7 +51,10 @@ class EvocTests(unittest.TestCase):
         catalogs = {"ski": {"EVOC_Packs": [item("EVOC Line 20", "Snow Backpacks", "https://evocsports.us/line-20")]},
                     "mtb": {"EVOC_Packs": [item("EVOC MISSION", "Backpacks", "https://evocsports.us/mission")]},
                     "skate": {}, "bmx": {}}
+        # EVOC's packs are bike packs: MTB only, not BMX or Skate.
         pooled = packs.pool({}, "bmx", load=lambda sport: catalogs[sport.id])
+        self.assertEqual([i["url"] for items in pooled.values() for i in items], [])
+        pooled = packs.pool(catalogs["mtb"], "mtb", load=lambda sport: catalogs[sport.id])
         self.assertEqual([i["url"] for items in pooled.values() for i in items], ["https://evocsports.us/mission"])
 
     def test_only_marked_down_items_kept(self):
