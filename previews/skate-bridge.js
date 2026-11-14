@@ -189,27 +189,43 @@
 // Active catalog owns filtering, counts and history. The shell only mirrors it.
 (function () {
     if (!window.shredBridgeInstalled) return;
+    const catalogDocument = document;
+    let mounted = false;
     function mountCategories() {
-        const source = document.getElementById('partFilters');
-        if (!source || window.parent.shredApp?.state().scope) return;
+        if (window.document !== catalogDocument) return;
+        const source = catalogDocument.getElementById('partFilters');
+        const app = window.parent.shredApp;
+        if (!source || !app || app.state().scope) return;
+        if (!app.registerCategories(source,window,catalogDocument)) return;
         source.hidden = true; source.style.display = 'none';
-        window.parent.shredApp.registerCategories(source,window);
-        document.addEventListener('pointerdown',()=>window.parent.shredApp.closeCategories());
+        if (!mounted) {
+            mounted = true;
+            catalogDocument.addEventListener('pointerdown',()=>window.parent.shredApp.closeCategories());
+        }
     }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',mountCategories);
+    catalogDocument.addEventListener('shreddeals:catalog-ready',mountCategories);
+    window.addEventListener('load',mountCategories,{once:true});
+    if (catalogDocument.readyState === 'loading') catalogDocument.addEventListener('DOMContentLoaded',mountCategories,{once:true});
     else mountCategories();
 })();
 
 // Personal controls remain catalog-owned and retain their original storage format.
 (function(){
     if(!window.shredBridgeInstalled)return;
+    const catalogDocument=document;
+    let mounted=false;
+    function isCurrent(){return window.document===catalogDocument;}
     function mount(){
+        if(mounted||!isCurrent())return;
+        if(!catalogDocument.shredCatalogReady&&catalogDocument.readyState!=='complete')return;
+        if(typeof catalog!=='function')return; // A cancelled page can be complete before its script ran.
         const tools=document.getElementById('personalTools');
         if(!tools)return; // Explore does not expose catalog personal tools.
         tools.remove();tools.hidden=true;tools.style.display='none';document.body.appendChild(tools);
         const config=JSON.parse(window.parent.document.getElementById('sportConfig').textContent);
         const sport=config.sports.find(item=>new URL(item.catalog,window.parent.location.href).pathname===location.pathname);
         if(!sport)return;
+        mounted=true;
         function views(){
             const presets=(catalog().views||[]).filter(view=>{
                 const params=new URLSearchParams(view.query);
@@ -223,6 +239,7 @@
                 .filter(view=>view.builtin||!view.sport||view.sport===sport.id);
         }
         function sync(){
+            if(!isCurrent())return;
             window.parent.postMessage({type:'shreddeals:my-stuff',href:location.href,sportLabel:sport.label,
                 views:views(),stars:readJson(STAR_KEY,[]).length,watching:!!state.watching,
                 matching:document.querySelectorAll('.deal-row:not(.filtered-out)').length},location.origin);
@@ -230,7 +247,7 @@
         const observer=new MutationObserver(sync);observer.observe(tools,{subtree:true,childList:true,attributes:true});
         const count=document.getElementById('statusCounts');if(count)observer.observe(count,{subtree:true,childList:true,characterData:true});
         const receive=event=>{
-            if(event.origin!==location.origin||event.source!==window.parent||event.data?.catalog!==location.pathname)return;
+            if(!isCurrent()||event.origin!==location.origin||event.source!==window.parent||event.data?.catalog!==location.pathname)return;
             const data=event.data,name=typeof data.name==='string'?data.name.trim().slice(0,80):'';
             if(data.type==='shreddeals:save-view'&&name)saveCurrentView(name);
             else if(data.type==='shreddeals:apply-view'&&typeof data.query==='string'&&views().some(view=>view.query===data.query))applySnapshot(decodeQuery(data.query));
@@ -243,5 +260,7 @@
         window.addEventListener('message',receive);window.addEventListener('storage',sync);
         sync();window.addEventListener('pagehide',()=>{observer.disconnect();window.removeEventListener('message',receive);window.removeEventListener('storage',sync);},{once:true});
     }
-    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
+    catalogDocument.addEventListener('shreddeals:catalog-ready',mount,{once:true});
+    window.addEventListener('load',mount,{once:true});
+    if(catalogDocument.readyState==='loading')catalogDocument.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
 })();

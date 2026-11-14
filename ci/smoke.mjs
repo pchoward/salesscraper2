@@ -75,7 +75,7 @@ async function run(browser, base, view, options) {
     const page = await context.newPage();
     const errors = [];
     const forbidden = [];
-    page.on("pageerror", error => errors.push(String(error)));
+    page.on("pageerror", error => errors.push(error.stack || String(error)));
     page.on("request", request => { if (FORBIDDEN.test(request.url())) forbidden.push(request.url()); });
     // Off-site requests are blocked, except product photos (the stores'
     // image CDNs, as any visitor loads them) so screenshots look real.
@@ -187,7 +187,7 @@ async function runHomepage(browser, base, view, options) {
     const context = await browser.newContext(options);
     const page = await context.newPage();
     const errors = [];
-    page.on("pageerror", error => errors.push(String(error)));
+    page.on("pageerror", error => errors.push(error.stack || String(error)));
     await page.route(/^https?:\/\/(?!127\.0\.0\.1)/, route =>
         (route.request().resourceType() === "image" ? route.continue() : route.abort()));
     const shots = [];

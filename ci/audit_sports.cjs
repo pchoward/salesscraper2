@@ -33,7 +33,7 @@ async function main(){
  try{
   for(const width of (process.env.AUDIT_WIDTHS === 'fixtures' ? [] : (process.env.AUDIT_WIDTHS||'1440,1024,768,430,390').split(',').map(Number))) for(const sport of ['skate','bmx','ski','mtb']){
    const page=await browser.newPage({viewport:{width,height:width>800?1000:900},isMobile:width<=800,hasTouch:width<=800});
-   page.setDefaultTimeout(5000);const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+   page.setDefaultTimeout(5000);const errors=[];page.on('pageerror',e=>errors.push(e.stack || String(e)));
    await page.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
    try{
     await page.goto(base+'/?sport='+sport);let frame=await(await page.waitForSelector('#skateFrame')).contentFrame();
