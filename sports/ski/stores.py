@@ -280,7 +280,11 @@ from sports.ski import skiessentials  # noqa: E402
 
 SKI_ESSENTIALS = skiessentials.store(details)
 
-STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES + (SMITH,) + SKI_SHOPS + (SKI_ESSENTIALS,)
+from sports import evoc
+
+EVOC = evoc.store(sports.SKI, evoc.SKI_TYPES)  # owner, 2026-11-14: snow backpacks
+
+STORES = (GEAR_WEST, UTAH_SKI, EVO) + BRAND_STORES + (SMITH,) + SKI_SHOPS + (SKI_ESSENTIALS, EVOC)
 
 
 def scrapers():

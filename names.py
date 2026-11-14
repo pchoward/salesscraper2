@@ -23,7 +23,7 @@ ACRONYMS = {
     "CA", "HV", "LV", "MV", "TI", "ID", "SL", "XL", "XXL", "XS", "SM", "MD", "LG", "UL", "CTD", "HD", "LED", "ABS",
     "DNA", "GT", "SE", "BSD", "KMC", "FSA", "ZX", "VX", "FX", "CR", "XLT", "PVC", "TPU", "CNC", "OS", "XD", "HG",
     "MS", "RS", "SS", "LT", "ST", "EX", "SX", "NX", "GX", "XO", "XX", "SPD", "DIN", "MX", "CF", "AL", "AM", "BB",
-    "FC", "II", "III", "IV", "VI", "WTP", "S&M", "WD", "NOS", "KHE", "YKK", "D3O", "DOT", "CPSC", "EN", "ASTM",
+    "FC", "II", "III", "IV", "VI", "WTP", "S&M", "WD", "NOS", "KHE", "YKK", "D3O", "DOT", "CPSC", "EN", "ASTM", "EVOC",
 }
 SMALL = {"a", "an", "and", "as", "at", "by", "for", "in", "of", "on", "or", "the", "to", "w/", "with", "x"}
 
