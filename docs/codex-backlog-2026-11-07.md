@@ -232,3 +232,19 @@ See `docs/live-search-catalog.md`: a Worker route that calls Shopify's Global Ca
 - A check in `ci/` that loads the shell with the bridge delayed or run early (for example, by stalling `page.js` or firing `registerCategories` before it) and asserts no page errors and correct menu counts.
 - A check that switches sport tabs quickly (Skate → Ski → MTB within a second) at 390 px and asserts no page errors.
 - Run the full browser checks three times in the PR; all green.
+
+## 15. Skate › Packs opens Decks (owner, 2026-11-14)
+**Seen:** on the Skate tab, picking **Packs** from the menu opens Decks. The Skate catalog has about 500 pack listings (`data-part="Packs"`); BMX, Ski and MTB open their Packs fine.
+
+**Cause:** the menu link is `?sport=skate&type=packs`. In `page.js`, `slugType()` turns `type` back into a heading with a fixed map (deck, wheel, truck, bearing, sneaker, accessory, complete, protection, helmet). `packs` isn't in it, and Skate has no `SPORT_SETTINGS.parts` for `sportPartForSlug()` to fall back on. So the part stays `DEFAULT_PART` (Decks). `typeSlug("Packs")` already writes `packs` (through `nameSlug`).
+
+**Fix:**
+- In `slugType()`'s map, add `pack: "Packs"` and `packs: "Packs"`.
+- In `typeSlug()`'s map, add `Packs: "packs"`, so the written slug stays what links already use.
+- Check each Skate heading in `page.py` `PART_ORDER` the same way, and make sure every one round-trips through `typeSlug` and `slugType`. Any new Skate heading should work without another map entry: falling back to `nameSlug` over the Skate part list would do.
+
+**Keep:** existing URLs (`type=deck`, `type=protection` and so on), saved views and `localStorage` keys unchanged.
+
+**Tests:**
+- A unit check that every Skate heading in `PART_ORDER` round-trips (`slugType(typeSlug(part)) === part`).
+- A browser check that Skate › Packs from the menu shows pack cards and the "Packs" breadcrumb, on desktop and at 390 px.
