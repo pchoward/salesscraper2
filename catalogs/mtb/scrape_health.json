@@ -24097,14 +24097,14 @@
           }
         },
         "Bicycle Warehouse_Bikes": {
-          "count": 24,
+          "count": 25,
           "failed": false,
           "diagnostics": {
             "expected_count": 25,
             "baseline_samples": 3,
             "median_absolute_deviation": 0,
-            "actual_count": 24,
-            "percentage_change": -4.0,
+            "actual_count": 25,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -24121,25 +24121,25 @@
           }
         },
         "Bicycle Warehouse_Cockpit": {
-          "count": 4,
+          "count": 5,
           "failed": false,
           "diagnostics": {
             "expected_count": 4,
             "baseline_samples": 3,
             "median_absolute_deviation": 0,
-            "actual_count": 4,
-            "percentage_change": 0.0,
+            "actual_count": 5,
+            "percentage_change": 25.0,
             "reason": "normal_variation"
           }
         },
         "Bicycle Warehouse_Drivetrain": {
-          "count": 0,
+          "count": 1,
           "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 3,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
+            "actual_count": 1,
             "percentage_change": null,
             "reason": "normal_variation"
           }
@@ -24193,14 +24193,14 @@
           }
         },
         "Bicycle Warehouse_Protection": {
-          "count": 13,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 14,
             "baseline_samples": 3,
             "median_absolute_deviation": 0,
-            "actual_count": 13,
-            "percentage_change": -7.1,
+            "actual_count": 14,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -24229,26 +24229,26 @@
           }
         },
         "Bike Mart_Bikes": {
-          "count": 7,
+          "count": 8,
           "failed": false,
           "diagnostics": {
             "expected_count": 11.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 1.0,
-            "actual_count": 7,
-            "percentage_change": -36.4,
+            "actual_count": 8,
+            "percentage_change": -27.3,
             "reason": "insufficient_history"
           }
         },
         "Bike Mart_Brakes": {
-          "count": 111,
+          "count": 112,
           "failed": false,
           "diagnostics": {
             "expected_count": 117.5,
             "baseline_samples": 2,
             "median_absolute_deviation": 1.5,
-            "actual_count": 111,
-            "percentage_change": -5.5,
+            "actual_count": 112,
+            "percentage_change": -4.7,
             "reason": "insufficient_history"
           }
         },
@@ -24265,14 +24265,14 @@
           }
         },
         "Bike Mart_Drivetrain": {
-          "count": 144,
+          "count": 146,
           "failed": false,
           "diagnostics": {
             "expected_count": 147.0,
             "baseline_samples": 2,
             "median_absolute_deviation": 1.0,
-            "actual_count": 144,
-            "percentage_change": -2.0,
+            "actual_count": 146,
+            "percentage_change": -0.7,
             "reason": "insufficient_history"
           }
         },
@@ -24349,14 +24349,14 @@
           }
         },
         "Bike Mart_Wheels": {
-          "count": 169,
+          "count": 172,
           "failed": false,
           "diagnostics": {
             "expected_count": 172.5,
             "baseline_samples": 2,
             "median_absolute_deviation": 2.5,
-            "actual_count": 169,
-            "percentage_change": -2.0,
+            "actual_count": 172,
+            "percentage_change": -0.3,
             "reason": "insufficient_history"
           }
         },
@@ -26341,7 +26341,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-14T06:44:24+00:00"
+      "scanned_at": "2026-11-14T07:19:20+00:00"
     }
   ],
   "baseline": {
@@ -26623,7 +26623,7 @@
     },
     "Bicycle Warehouse_Bikes": {
       "date": "2026-11-14",
-      "count": 24
+      "count": 25
     },
     "Bicycle Warehouse_Brakes": {
       "date": "2026-11-14",
@@ -26631,7 +26631,7 @@
     },
     "Bicycle Warehouse_Cockpit": {
       "date": "2026-11-14",
-      "count": 4
+      "count": 5
     },
     "Bicycle Warehouse_Frames": {
       "date": "2026-11-14",
@@ -26643,7 +26643,7 @@
     },
     "Bicycle Warehouse_Protection": {
       "date": "2026-11-14",
-      "count": 13
+      "count": 14
     },
     "Bicycle Warehouse_Tires": {
       "date": "2026-11-14",
@@ -26655,11 +26655,11 @@
     },
     "Bike Mart_Bikes": {
       "date": "2026-11-14",
-      "count": 7
+      "count": 8
     },
     "Bike Mart_Brakes": {
       "date": "2026-11-14",
-      "count": 111
+      "count": 112
     },
     "Bike Mart_Cockpit": {
       "date": "2026-11-14",
@@ -26667,7 +26667,7 @@
     },
     "Bike Mart_Drivetrain": {
       "date": "2026-11-14",
-      "count": 144
+      "count": 146
     },
     "Bike Mart_Forks & Shocks": {
       "date": "2026-11-14",
@@ -26687,7 +26687,7 @@
     },
     "Bike Mart_Wheels": {
       "date": "2026-11-14",
-      "count": 169
+      "count": 172
     },
     "Fanatik_Packs": {
       "date": "2026-11-14",
@@ -26708,6 +26708,10 @@
     "EVOC_Protection": {
       "date": "2026-11-14",
       "count": 5
+    },
+    "Bicycle Warehouse_Drivetrain": {
+      "date": "2026-11-14",
+      "count": 1
     }
   },
   "completeness_baseline": {
@@ -28268,7 +28272,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 24
+        "count": 25
       }
     ],
     "Bicycle Warehouse_Brakes": [
@@ -28304,7 +28308,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 4
+        "count": 5
       }
     ],
     "Bicycle Warehouse_Drivetrain": [
@@ -28322,7 +28326,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 0
+        "count": 1
       }
     ],
     "Bicycle Warehouse_Forks & Shocks": [
@@ -28408,7 +28412,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 13
+        "count": 14
       }
     ],
     "Bicycle Warehouse_Tires": [
@@ -28458,7 +28462,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 7
+        "count": 8
       }
     ],
     "Bike Mart_Brakes": [
@@ -28472,7 +28476,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 111
+        "count": 112
       }
     ],
     "Bike Mart_Cockpit": [
@@ -28500,7 +28504,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 144
+        "count": 146
       }
     ],
     "Bike Mart_Forks & Shocks": [
@@ -28598,7 +28602,7 @@
       },
       {
         "date": "2026-11-14",
-        "count": 169
+        "count": 172
       }
     ],
     "Bikes Online_Bikes": [

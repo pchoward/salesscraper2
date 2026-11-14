@@ -1,78 +1,200 @@
 {
  "changes": {
-  "EVOC_Packs": [
+  "evo_Bindings": [
    {
+    "at_all_time_low": false,
+    "delta": 39.98,
     "item": {
      "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "EVOC",
-     "image": "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_1_cc4ad70d-62f5-4da9-aaaf-b893fd8af4bc.jpg?v=1690297179",
+     "brand": "Marker",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_1_cc4ad70d-62f5-4da9-aaaf-b893fd8af4bc.jpg?v=1690297179",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_2_8849ba44-c679-41d8-97fa-ad6745f28d36.jpg?v=1696374732",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_3_f8cb9cf4-786b-4430-a0c1-490d2c4b06ca.jpg?v=1696965029",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_4_9a9a128e-b7af-48e3-a9cf-59cccdaa40d7.jpg?v=1696965029",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_5_9e79363d-3bb2-493a-98fc-dd2cae75a8e6.jpg?v=1696965029",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_6_bab0a988-9d24-4f75-985b-f95446b39fe4.jpg?v=1696965029",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-01_4_5b701a21-0ced-4e0d-a6b7-66c0ee6f1c80.jpg?v=1696965029",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-01_5_82f58ecc-0009-4f2f-b295-a85fdc9da650.jpg?v=1696965029",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-01_8_e498c1ac-f906-4ba7-94dd-b53d0b533c48.jpg?v=1696965029",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-01_9_f145f095-db89-4aaf-9fdb-dadc114a2bf8.jpg?v=1696965029"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248709.jpg?v=1767739102",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1241128.jpg?v=1767738797",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1241129.jpg?v=1767738798",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119063.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119064.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119067.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119061.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119062.jpg?v=1767733780",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119066.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119069.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119065.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119068.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-707433.jpg?v=1767746088",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977995.jpg?v=1767756485",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977993.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977994.jpg?v=1767756483",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-979349.jpg?v=1767756532",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-979348.jpg?v=1767756532",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977991.jpg?v=1767756485",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977984.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977980.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981941.jpg?v=1767756638",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981944.jpg?v=1767756635",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977990.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977989.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977986.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981942.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981945.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977988.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977985.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977987.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981947.jpg?v=1767756638",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981943.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977997.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977992.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977996.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981946.jpg?v=1767756635",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981948.jpg?v=1767756637",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011359.jpg?v=1767729632",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011364.jpg?v=1767729631",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011365.jpg?v=1767729633",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188514.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188512.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188516.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188509.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188511.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188515.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188510.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188513.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188521.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188517.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188518.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188520.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188519.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188523.jpg?v=1767736760",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206133.jpg?v=1767737373",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206132.jpg?v=1767737374"
      ],
-     "name": "EVOC Line Pro 30",
-     "part": "Packs",
-     "price_new": "114.99",
-     "price_old": "290.00",
-     "product_type": "Snow Backpacks",
-     "store": "EVOC",
-     "url": "https://evocsports.us/products/line-pro-30"
+     "name": "Marker Griffon 13 ID Ski Bindings",
+     "part": "Bindings",
+     "price_new": "209.99",
+     "price_old": "299.99",
+     "product_type": "Alpine Ski Bindings",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 209.99,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107396145302
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394834582
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394867350
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394900118
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394932886
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "11–13"
+      ]
+     },
+     "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings"
     },
-    "type": "new"
-   },
+    "name": "Marker Griffon 13 ID Ski Bindings",
+    "new": "209.99",
+    "old": "249.97",
+    "percent_vs_prior": 16.0,
+    "type": "price_drop",
+    "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings"
+   }
+  ],
+  "evo_Boots": [
    {
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "Check store",
-     "brand": "EVOC",
-     "image": "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_1_8e1f0c29-7b59-4a5c-8666-9c45a09db7f5.jpg?v=1637353921",
+     "brand": "Salomon",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018139.jpg?v=1767729957",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_1_8e1f0c29-7b59-4a5c-8666-9c45a09db7f5.jpg?v=1637353921",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_2_22ef1a2b-a890-4269-b080-c38a735eb107.jpg?v=1637353921",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_3_75a9d960-8f0e-4449-a604-f14224560860.jpg?v=1637353921",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_4_68d2ee63-e126-4440-b83f-607f6ca8c71b.jpg?v=1637353922",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_5_e2c214f2-f91e-4277-8842-a078f93bc004.jpg?v=1637353922",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_6_e37284bc-deba-40cd-a6d2-73b23a542b6a.jpg?v=1637353922",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_7_1406c073-e59e-486f-a5c0-fde5d8b23251.jpg?v=1637353922",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_8_d8ea9c49-7f4b-40a2-a24a-7d5c9d05204c.jpg?v=1637353922",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/files/721409-03_1.jpg?v=1718909671"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018139.jpg?v=1767729957",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018142.jpg?v=1767729958",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018140.jpg?v=1767729958",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018137.jpg?v=1767729955",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018138.jpg?v=1767729955"
      ],
-     "name": "EVOC Line Pro 20",
-     "part": "Packs",
-     "price_new": "119.99",
-     "price_old": "270.00",
-     "product_type": "Snow Backpacks",
-     "store": "EVOC",
-     "url": "https://evocsports.us/products/line-pro-20"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "Check store",
-     "brand": "EVOC",
-     "image": "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721337-04_1.jpg?v=1637270363",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721337-04_1.jpg?v=1637270363",
-      "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721337-04_2.jpg?v=1637270363"
-     ],
-     "name": "EVOC Line 20",
-     "part": "Packs",
+     "name": "Salomon QST Access 60 W Ski Boots - Women's 2025",
+     "part": "Boots",
      "price_new": "89.99",
-     "price_old": "180.00",
-     "product_type": "Snow Backpacks",
-     "store": "EVOC",
-     "url": "https://evocsports.us/products/line-20"
+     "price_old": "379.95",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "24.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 379.95,
+       "price": 89.99,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "mondo": [
+         "24.5"
+        ]
+       },
+       "variant_id": 46353206378646
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "mondo": [
+       "24.5"
+      ]
+     },
+     "url": "https://www.evo.com/products/238161-salomon-qst-access-60-w-ski-boots-women-s-2025"
     },
     "type": "new"
    }
@@ -782,6 +904,26 @@
       "price": 419.99,
       "store": "evo",
       "url": "https://www.evo.com/products/267330-tecnica-mach-boa-mv-95-ski-boots-women-s-2026"
+     }
+    ],
+    "part": "Boots"
+   },
+   {
+    "cheapest_price": 89.99,
+    "key": "sport|Boots|salomon|60|access|qst",
+    "label": "Salomon qst access 60",
+    "offers": [
+     {
+      "name": "Salomon QST Access 60 Women's Ski Boots",
+      "price": 379.95,
+      "store": "The House",
+      "url": "https://www.the-house.com/1150063.html"
+     },
+     {
+      "name": "Salomon QST Access 60 W Ski Boots - Women's 2025",
+      "price": 89.99,
+      "store": "evo",
+      "url": "https://www.evo.com/products/238161-salomon-qst-access-60-w-ski-boots-women-s-2025"
      }
     ],
     "part": "Boots"
@@ -5373,83 +5515,210 @@
     "part": "Skis"
    }
   ],
-  "drops": [],
+  "drops": [
+   {
+    "at_all_time_low": false,
+    "delta": 39.98,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Marker",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248709.jpg?v=1767739102",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1241128.jpg?v=1767738797",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1241129.jpg?v=1767738798",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119063.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119064.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119067.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119061.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119062.jpg?v=1767733780",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119066.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119069.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119065.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119068.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-707433.jpg?v=1767746088",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977995.jpg?v=1767756485",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977993.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977994.jpg?v=1767756483",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-979349.jpg?v=1767756532",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-979348.jpg?v=1767756532",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977991.jpg?v=1767756485",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977984.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977980.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981941.jpg?v=1767756638",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981944.jpg?v=1767756635",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977990.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977989.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977986.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981942.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981945.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977988.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977985.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977987.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981947.jpg?v=1767756638",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981943.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977997.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977992.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977996.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981946.jpg?v=1767756635",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981948.jpg?v=1767756637",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011359.jpg?v=1767729632",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011364.jpg?v=1767729631",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011365.jpg?v=1767729633",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188514.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188512.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188516.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188509.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188511.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188515.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188510.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188513.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188521.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188517.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188518.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188520.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188519.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188523.jpg?v=1767736760",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206133.jpg?v=1767737373",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206132.jpg?v=1767737374"
+     ],
+     "name": "Marker Griffon 13 ID Ski Bindings",
+     "part": "Bindings",
+     "price_new": "209.99",
+     "price_old": "299.99",
+     "product_type": "Alpine Ski Bindings",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 209.99,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107396145302
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394834582
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394867350
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394900118
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394932886
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "11–13"
+      ]
+     },
+     "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings"
+    },
+    "name": "Marker Griffon 13 ID Ski Bindings",
+    "new": "209.99",
+    "old": "249.97",
+    "percent_vs_prior": 16.0,
+    "type": "price_drop",
+    "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings"
+   }
+  ],
   "new_items": [
    {
-    "at_all_time_low": false,
+    "at_all_time_low": true,
     "availability": "Check store",
-    "brand": "EVOC",
-    "image": "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_1_cc4ad70d-62f5-4da9-aaaf-b893fd8af4bc.jpg?v=1690297179",
+    "brand": "Salomon",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018139.jpg?v=1767729957",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_1_cc4ad70d-62f5-4da9-aaaf-b893fd8af4bc.jpg?v=1690297179",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_2_8849ba44-c679-41d8-97fa-ad6745f28d36.jpg?v=1696374732",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_3_f8cb9cf4-786b-4430-a0c1-490d2c4b06ca.jpg?v=1696965029",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_4_9a9a128e-b7af-48e3-a9cf-59cccdaa40d7.jpg?v=1696965029",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_5_9e79363d-3bb2-493a-98fc-dd2cae75a8e6.jpg?v=1696965029",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-04_6_bab0a988-9d24-4f75-985b-f95446b39fe4.jpg?v=1696965029",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-01_4_5b701a21-0ced-4e0d-a6b7-66c0ee6f1c80.jpg?v=1696965029",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-01_5_82f58ecc-0009-4f2f-b295-a85fdc9da650.jpg?v=1696965029",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-01_8_e498c1ac-f906-4ba7-94dd-b53d0b533c48.jpg?v=1696965029",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721408-01_9_f145f095-db89-4aaf-9fdb-dadc114a2bf8.jpg?v=1696965029"
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018139.jpg?v=1767729957",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018142.jpg?v=1767729958",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018140.jpg?v=1767729958",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018137.jpg?v=1767729955",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018138.jpg?v=1767729955"
     ],
-    "name": "EVOC Line Pro 30",
-    "part": "Packs",
-    "price_new": "114.99",
-    "price_old": "290.00",
-    "product_type": "Snow Backpacks",
-    "store": "EVOC",
-    "url": "https://evocsports.us/products/line-pro-30"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "brand": "EVOC",
-    "image": "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_1_8e1f0c29-7b59-4a5c-8666-9c45a09db7f5.jpg?v=1637353921",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_1_8e1f0c29-7b59-4a5c-8666-9c45a09db7f5.jpg?v=1637353921",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_2_22ef1a2b-a890-4269-b080-c38a735eb107.jpg?v=1637353921",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_3_75a9d960-8f0e-4449-a604-f14224560860.jpg?v=1637353921",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_4_68d2ee63-e126-4440-b83f-607f6ca8c71b.jpg?v=1637353922",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_5_e2c214f2-f91e-4277-8842-a078f93bc004.jpg?v=1637353922",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_6_e37284bc-deba-40cd-a6d2-73b23a542b6a.jpg?v=1637353922",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_7_1406c073-e59e-486f-a5c0-fde5d8b23251.jpg?v=1637353922",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721409-04_8_d8ea9c49-7f4b-40a2-a24a-7d5c9d05204c.jpg?v=1637353922",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/files/721409-03_1.jpg?v=1718909671"
-    ],
-    "name": "EVOC Line Pro 20",
-    "part": "Packs",
-    "price_new": "119.99",
-    "price_old": "270.00",
-    "product_type": "Snow Backpacks",
-    "store": "EVOC",
-    "url": "https://evocsports.us/products/line-pro-20"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "brand": "EVOC",
-    "image": "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721337-04_1.jpg?v=1637270363",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721337-04_1.jpg?v=1637270363",
-     "https://cdn.shopify.com/s/files/1/0534/2321/0695/products/721337-04_2.jpg?v=1637270363"
-    ],
-    "name": "EVOC Line 20",
-    "part": "Packs",
+    "name": "Salomon QST Access 60 W Ski Boots - Women's 2025",
+    "part": "Boots",
     "price_new": "89.99",
-    "price_old": "180.00",
-    "product_type": "Snow Backpacks",
-    "store": "EVOC",
-    "url": "https://evocsports.us/products/line-20"
+    "price_old": "379.95",
+    "product_type": "Alpine Ski Boots",
+    "sizes": [
+     "24.5"
+    ],
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 379.95,
+      "price": 89.99,
+      "specs": {
+       "flex": [
+        "Soft (under 80)"
+       ],
+       "mondo": [
+        "24.5"
+       ]
+      },
+      "variant_id": 46353206378646
+     }
+    ],
+    "technical_specs": {
+     "flex": [
+      "Soft (under 80)"
+     ],
+     "mondo": [
+      "24.5"
+     ]
+    },
+    "url": "https://www.evo.com/products/238161-salomon-qst-access-60-w-ski-boots-women-s-2025"
    }
   ],
   "removed": []
  },
  "failed_keys": [],
  "fingerprints": {
-  "data": "4a4ee66a8d50c9be978f904ae7094ff710acae5316c515f1e5371b8da1b2a086",
-  "history": "41c7922ee7623d418ee3a03de66b60b925aae3b32e3964442dd806143bb44eb1"
+  "data": "a69095519ae9b59675de55ce9bee6a4150c5961c32a78962976afce887ef97ad",
+  "history": "e32c81886b7ddd98c3841831dff186ea28cb1e6f228ddc86eb1b763f005c48f2"
  },
- "generated_at": "2026-11-14T06:36:19+00:00",
+ "generated_at": "2026-11-14T07:11:19+00:00",
  "history": "file",
  "version": 1
 }
