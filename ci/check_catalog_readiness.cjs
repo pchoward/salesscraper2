@@ -10,7 +10,7 @@ const path=require('node:path');
  const browser=await chromium.launch({executablePath:process.env.BROWSER_BINARY,args:['--no-sandbox','--disable-dev-shm-usage']});
  const results=[];
  try{
-  for(const mode of ['early','legacy','late','stale']){
+  for(const mode of ['early','complete','legacy','late','stale']){
    const page=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});
    const errors=[];page.on('pageerror',e=>errors.push(String(e)));
    await page.addInitScript(()=>{
@@ -34,12 +34,13 @@ const path=require('node:path');
     if(url.pathname==='/__stalled_catalog.js'){
      held=true;await gate;return route.fulfill({contentType:'application/javascript',body});
     }
-    if(url.pathname.endsWith('sale_items_chart.html')&&mode!=='late'&&(mode==='early'||mode==='legacy'||url.pathname.includes('/mtb/'))){
+    if(url.pathname.endsWith('sale_items_chart.html')&&mode!=='late'&&(mode==='early'||mode==='complete'||mode==='legacy'||url.pathname.includes('/mtb/'))){
      const response=await route.fetch();let html=await response.text();
      let replaced=false;
      html=html.replace(/<script>(?=(?:const SPORT_SETTINGS|const WIDTH_RANGES))([\s\S]*?)<\/script>/,(_,script)=>{
       replaced=true;body=mode==='legacy'?script.replace(/    \/\/ Readiness belongs[^\n]*\n    document.shredCatalogReady[^\n]*\n    document.dispatchEvent\(new Event\("shreddeals:catalog-ready"\)\);\n/,''):script;
-      return '<script>document.documentElement.dataset.stalled="yes";'+(['early','legacy'].includes(mode)?'window.parent.shredApp.registerCategories(document.getElementById("partFilters"),window);':'')+'</script><script src="/__stalled_catalog.js"></script>';
+      const complete=mode==='complete'?'<script>Object.defineProperty(document,"readyState",{configurable:true,get:()=>"complete"})</script><script src="/navigation/skate-bridge.js?task14=complete"></script>':'';
+      return complete+'<script>document.documentElement.dataset.stalled="yes";'+(['early','legacy'].includes(mode)?'window.parent.shredApp.registerCategories(document.getElementById("partFilters"),window);':'')+'</script><script src="/__stalled_catalog.js"></script>';
      });
      assert(replaced,'catalog main script was stalled');
      return route.fulfill({response,body:html});

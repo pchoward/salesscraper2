@@ -218,6 +218,7 @@
     function mount(){
         if(mounted||!isCurrent())return;
         if(!catalogDocument.shredCatalogReady&&catalogDocument.readyState!=='complete')return;
+        if(typeof catalog!=='function')return; // A cancelled page can be complete before its script ran.
         const tools=document.getElementById('personalTools');
         if(!tools)return; // Explore does not expose catalog personal tools.
         tools.remove();tools.hidden=true;tools.style.display='none';document.body.appendChild(tools);
