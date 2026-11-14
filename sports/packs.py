@@ -85,10 +85,11 @@ def is_pack(title, product_type="", tags=()):
     return any(_TYPE.search(label) and not _NOT_PACK.search(label) for label in labels)
 
 
-def sport_of(title, brand=""):
-    """"bmx", "skate" or "ski" for a sport's own pack, or None for a general one."""
+def sport_of(title, brand="", product_type=""):
+    """"bmx", "skate" or "ski" for a sport's own pack, or None for a general one.
+    A store type that says snow ("Snow Backpacks", EVOC) makes it Ski's."""
     title, brand = str(title or ""), str(brand or "")
-    if _SKI_ONLY.search(title):
+    if _SKI_ONLY.search(title) or re.search(r"\b(?:snow|avalanche|ski)\b", str(product_type or ""), re.I):
         return "ski"
     for text in (brand, title):
         if not text:
@@ -129,7 +130,7 @@ def pool(data, sport_id, load=None):
             continue
         for key, item in _items(load(other)):
             url = item.get("url")
-            if not url or url in seen or sport_of(item.get("name"), item.get("brand")):
+            if not url or url in seen or sport_of(item.get("name"), item.get("brand"), item.get("product_type")):
                 continue
             seen.add(url)
             merged.setdefault(key, []).append(dict(item, pooled_from=other.id))

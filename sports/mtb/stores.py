@@ -205,7 +205,9 @@ def _newmen_part(product_type,title):
     kind=shopify.type_key(product_type)
     return TYPES.get(kind) or brand_title(kind) or brand_title(title)
 ZEITBIKE=zeitbike.store(sports.MTB,('tsg','newmen-components'),fallback=_newmen_part)
-BRAND_STORES=(TROY_LEE,ALPINESTARS,DEMON,SEVEN_IDP,G_FORM,RACE_FACE,KALI,BERN,SMITH,ZEITBIKE)
+from sports import evoc
+EVOC=evoc.store(sports.MTB,evoc.MTB_TYPES)  # owner, 2026-11-14: packs and armor
+BRAND_STORES=(TROY_LEE,ALPINESTARS,DEMON,SEVEN_IDP,G_FORM,RACE_FACE,KALI,BERN,SMITH,ZEITBIKE,EVOC)
 # The Lost Co. (owner, 2026-11-03): an MTB parts shop with ~650 marked-down
 # parts. Its types are clean ("Fork Parts", "Rear Shocks", "Chainrings");
 # tools, lubes, fluids, cleaners, sealant and fenders are left out.

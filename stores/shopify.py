@@ -102,7 +102,7 @@ class ShopifyStore:
     def __init__(self, store, display_name, base, collection="sale", extra_types=None, own_vendor="", types=None,
                  brand_of=None, title_part=None, details=None, unknown_by_title=False, more_collections=(),
                  type_part=None, track_exclusions=False, tag_part=None, raw_type_part=False, whole_site=False,
-                 product_part=None, max_pages=MAX_PAGES):
+                 product_part=None, max_pages=MAX_PAGES, only_types=None):
         self.store = store
         # Pages read per collection before it counts as a failed read. Big
         # category collections (evo ski-boots, Cambria sale-components) pass
@@ -150,6 +150,10 @@ class ShopifyStore:
         # (product type, title, tags) -> part: a store that files by sport in
         # its tags (Zeitbike's "Helmets (Skate)"); it decides alone.
         self.product_part = product_part
+        # Store product types to read, by type key; every other type is left
+        # out before any part rule, packs included (EVOC: MTB reads its bike
+        # packs and armor, Ski its snow backpacks). None reads every type.
+        self.only_types = frozenset(only_types) if only_types is not None else None
         self.cache = {}
 
 
@@ -173,6 +177,9 @@ def part_for(store, product_type, title="", tags=None):
     # Backpacks and hydration packs, on every sport (sports/packs.py). A store
     # without a Packs scraper simply never lists them.
     from sports import packs
+    only = getattr(store, "only_types", None)
+    if only is not None and type_key(product_type) not in only:
+        return None
     if packs.is_pack(title, product_type, tags):
         return packs.PART
     if getattr(store, "product_part", None):
