@@ -1,203 +1,195 @@
 {
  "changes": {
-  "Bicycle Warehouse_Cockpit": [
+  "Bike Mart_Cockpit": [
    {
+    "at_all_time_low": false,
+    "delta": 2.0,
     "item": {
      "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "Spank",
-     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
-     ],
-     "name": "Spank Spoon 350 35mm Stem",
+     "brand": "Bontrager",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-line-dropper-seatpost-cartridge-585442-1.png?v=1761060607",
+     "name": "Bontrager Line Dropper Seatpost Cartridge",
      "part": "Cockpit",
-     "price_new": "59.99",
-     "price_old": "69.99",
-     "product_type": "Stems",
-     "store": "Bicycle Warehouse",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 69.99,
-       "price": 59.99,
-       "specs": {},
-       "variant_id": 40431254798438
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem"
-    },
-    "type": "new"
-   }
-  ],
-  "Bicycle Warehouse_Drivetrain": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "KMC",
-     "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
-     ],
-     "length": 1.0,
-     "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
-     "part": "Drivetrain",
-     "price_new": "19.99",
-     "price_old": "23.60",
-     "product_type": "Chains",
-     "store": "Bicycle Warehouse",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 23.6,
-       "price": 19.99,
-       "specs": {},
-       "variant_id": 42413792624742
-      },
-      {
-       "available": true,
-       "compare": 23.6,
-       "price": 19.99,
-       "specs": {},
-       "variant_id": 42413792821350
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
-     "width": 2.0
-    },
-    "type": "new"
-   }
-  ],
-  "Bike Mart_Bikes": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Unified Bike Co.",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0602.jpg?v=1764086745",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0514.jpg?v=1764086745",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0617.jpg?v=1764086745"
-     ],
-     "name": "Unified Bike Co. Racello Deore 12 Hardtail Mountain Bike",
-     "part": "Bikes",
-     "price_new": "599.62",
-     "price_old": "999.99",
-     "product_type": "Hardtail Mountain Bike",
-     "store": "Bike Mart",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 999.99,
-       "price": 599.62,
-       "specs": {},
-       "variant_id": 46907848622333
-      },
-      {
-       "available": true,
-       "compare": 999.99,
-       "price": 599.62,
-       "specs": {
-        "frame_size": [
-         "L"
-        ]
-       },
-       "variant_id": 46907848655101
-      }
-     ],
-     "technical_specs": {
-      "frame_size": [
-       "L"
-      ]
-     },
-     "url": "https://www.bikemart.com/products/unified-bike-co-racello-deore-12-ship-to-your-door-hardtail"
-    },
-    "type": "new"
-   }
-  ],
-  "Bike Mart_Brakes": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "SRAM",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair--fix-iv-776258-2.png?v=1761060642",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-3.png?v=1761060642",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair--fix-iv-776258-1.png?v=1761060642"
-     ],
-     "name": "SRAM FR-5 Brake Lever- Pair",
-     "part": "Brakes",
-     "price_new": "17.60",
-     "price_old": "25.00",
+     "price_new": "14.93",
+     "price_old": "59.99",
      "product_type": "",
      "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 25.0,
-       "price": 17.6,
+       "compare": 65.99,
+       "price": 16.93,
        "specs": {},
-       "variant_id": 46764363907325
+       "variant_id": 46764334678269
+      },
+      {
+       "available": true,
+       "compare": 65.99,
+       "price": 16.93,
+       "specs": {},
+       "variant_id": 46764334711037
+      },
+      {
+       "available": true,
+       "compare": 59.99,
+       "price": 14.93,
+       "specs": {},
+       "variant_id": 46764334743805
       }
      ],
      "technical_specs": {},
-     "url": "https://www.bikemart.com/products/fr-5-brake-lever-pair"
+     "url": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge"
+    },
+    "name": "Bontrager Line Dropper Seatpost Cartridge",
+    "new": "14.93",
+    "old": "16.93",
+    "percent_vs_prior": 11.8,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1540.jpg?v=1762254886",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1540.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1541.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1542.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1543.jpg?v=1762254886"
+     ],
+     "name": "WTB Solano SL Saddle - Black",
+     "part": "Cockpit",
+     "price_new": "116.95",
+     "price_old": "129.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 229.95,
+       "price": 206.95,
+       "specs": {},
+       "variant_id": 46838557868285
+      },
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46838557901053
+      },
+      {
+       "available": true,
+       "compare": 229.95,
+       "price": 206.95,
+       "specs": {},
+       "variant_id": 46838557933821
+      },
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46838557966589
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-solano-sl-saddle"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
+     ],
+     "name": "WTB Rocket Saddle - Black Medium Fusion Form",
+     "part": "Cockpit",
+     "price_new": "71.95",
+     "price_old": "89.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46839154934013
+      },
+      {
+       "available": true,
+       "compare": 119.95,
+       "price": 107.95,
+       "specs": {},
+       "variant_id": 46839154966781
+      },
+      {
+       "available": true,
+       "compare": 104.95,
+       "price": 94.95,
+       "specs": {},
+       "variant_id": 46839154999549
+      },
+      {
+       "available": true,
+       "compare": 89.95,
+       "price": 71.95,
+       "specs": {},
+       "variant_id": 46839155032317
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-rocket-saddle"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1191.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1192.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1193.jpg?v=1762331072"
+     ],
+     "name": "WTB Gravelier Saddle - Black",
+     "part": "Cockpit",
+     "price_new": "94.95",
+     "price_old": "104.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 104.95,
+       "price": 94.95,
+       "specs": {},
+       "variant_id": 46844595208445
+      },
+      {
+       "available": true,
+       "compare": 119.95,
+       "price": 107.95,
+       "specs": {},
+       "variant_id": 46844595241213
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-gravelier-saddle"
     },
     "type": "new"
    }
@@ -207,164 +199,153 @@
     "item": {
      "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "Odyssey",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9033.jpg?v=1762282102"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-1.jpg?v=1761060271"
      ],
-     "length": 1.0,
-     "name": "Odyssey Bluebird Chain - Single Speed 1/2\" x 1/8\"",
+     "name": "KMC X12EPT Eco Pro Teq Chain",
      "part": "Drivetrain",
-     "price_new": "36.99",
-     "price_old": "39.99",
-     "product_type": "Chains",
+     "price_new": "45.62",
+     "price_old": "66.00",
+     "product_type": "",
      "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 39.99,
-       "price": 36.99,
+       "compare": 66.0,
+       "price": 45.62,
        "specs": {},
-       "variant_id": 46840926667005
+       "variant_id": 46764155994365
       }
      ],
      "technical_specs": {},
-     "url": "https://www.bikemart.com/products/odyssey-bluebird-chain",
-     "width": 2.0
+     "url": "https://www.bikemart.com/products/x12ept-eco-pro-teq-chain"
     },
     "type": "new"
+   },
+   {
+    "at_all_time_low": false,
+    "delta": 85.88,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-1.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-16.jpg?v=1761060266"
+     ],
+     "name": "KMC X12 12-Speed Chain",
+     "part": "Drivetrain",
+     "price_new": "29.62",
+     "price_old": "44.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 44.0,
+       "price": 29.62,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151374077
+      },
+      {
+       "available": true,
+       "compare": 154.0,
+       "price": 115.5,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151406845
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+    },
+    "name": "KMC X12 12-Speed Chain",
+    "new": "29.62",
+    "old": "115.50",
+    "percent_vs_prior": 74.4,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/x12-12-speed-chain"
    }
   ],
-  "Bike Mart_Wheels": [
+  "Bike Mart_Tires": [
    {
     "item": {
      "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "DT Swiss",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323102-1_207c4c95-e1ca-4047-a53f-2c0bc20cc06c.png?v=1761060534",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323103-2_c0523351-bf95-4b8b-902a-b92b10c381b0.png?v=1761060534",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323104-3_2006c4e8-7528-4221-821f-9995ec6d0ccc.png?v=1761060534"
-     ],
-     "name": "DT Swiss X 1900 Spline Rear Wheel - 29-inch / Centerlock",
-     "part": "Wheels",
-     "price_new": "329.62",
-     "price_old": "429.80",
-     "product_type": "",
-     "spec_offers": [
-      {
-       "available": true,
-       "compare_at_price": 429.8,
-       "diameter_mm": null,
-       "durometers": [],
-       "price": 329.62,
-       "variant_id": "46764290474237"
-      }
-     ],
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/wt1553.jpg?v=1762292758",
+     "length": 2.4,
+     "name": "WTB Judge TCS 27.5x2.4\" Tire",
+     "part": "Tires",
+     "price_new": "72.95",
+     "price_old": "80.95",
+     "product_type": "Tires",
      "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 429.8,
-       "price": 329.62,
-       "specs": {},
-       "variant_id": 46764290474237
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://www.bikemart.com/products/x-1900-spline-rear-wheel-29-inch-centerlock"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "DT Swiss",
-     "diameter_mm": 12.0,
-     "diameters_mm": [
-      12.0
-     ],
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323108-2_7d0b1623-f947-4158-b1d5-7d90320782a5.png?v=1761060517"
-     ],
-     "name": "DT Swiss XMC 1501 SPLINE ONE Rear Wheel - 6-Bolt / 12mm Thru x 148mm",
-     "part": "Wheels",
-     "price_new": "799.62",
-     "price_old": "1099.90",
-     "product_type": "",
-     "spec_offers": [
+       "compare": 93.95,
+       "price": 84.95,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46842335854845
+      },
       {
        "available": true,
-       "compare_at_price": 1099.9,
-       "diameter_mm": 12.0,
-       "durometers": [],
-       "price": 799.62,
-       "variant_id": "46764290244861"
+       "compare": 80.95,
+       "price": 72.95,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46842335887613
       }
      ],
-     "store": "Bike Mart",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 1099.9,
-       "price": 799.62,
-       "specs": {},
-       "variant_id": 46764290244861
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://www.bikemart.com/products/xmc-1501-spline-one-rear-wheel-6-bolt-12mm-thru-x-148mm"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "DT Swiss",
-     "diameter_mm": 15.0,
-     "diameters_mm": [
-      15.0
-     ],
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323039-1_d1899562-5156-4bdb-8b42-116e00448ea6.png?v=1761060533",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323040-2_d457824f-b053-41ff-a264-f5db1873f52f.png?v=1761060533"
-     ],
-     "name": "DT Swiss XMC 1501 SPLINE ONE Front Wheel - 110 x 15mm",
-     "part": "Wheels",
-     "price_new": "599.62",
-     "price_old": "931.88",
-     "product_type": "",
-     "spec_offers": [
-      {
-       "available": true,
-       "compare_at_price": 931.88,
-       "diameter_mm": 15.0,
-       "durometers": [],
-       "price": 599.62,
-       "variant_id": "46764290965757"
-      }
-     ],
-     "store": "Bike Mart",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 931.88,
-       "price": 599.62,
-       "specs": {},
-       "variant_id": 46764290965757
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://www.bikemart.com/products/xmc-1501-spline-one-front-wheel-110-x-15mm"
+     "technical_specs": {
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/wtb-judge-tcs-27-5x2-4-tire",
+     "width": 27.5
     },
     "type": "new"
    }
@@ -857,26 +838,6 @@
     "part": "Cockpit"
    },
    {
-    "cheapest_price": 36.0,
-    "key": "sport|Drivetrain|kmc|12|speed|x12",
-    "label": "KMC x12 12 speed",
-    "offers": [
-     {
-      "name": "KMC X12 12-Speed Chain",
-      "price": 115.5,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/x12-12-speed-chain"
-     },
-     {
-      "name": "KMC X12 12-Speed Chain",
-      "price": 36.0,
-      "store": "Fanatik",
-      "url": "https://www.fanatikbike.com/products/kmc-x12-12-speed-chain"
-     }
-    ],
-    "part": "Drivetrain"
-   },
-   {
     "cheapest_price": 50.25,
     "key": "sport|Drivetrain|sram|10|gx|rear|speed|type",
     "label": "SRAM gx type 10 speed rear",
@@ -938,6 +899,26 @@
       "price": 76.5,
       "store": "The Lost Co.",
       "url": "https://www.thelostco.com/products/rear-derailleur-pulley-kit-xx-t-type-eagle-axs-includes-14t-upper-and-16t-lower-black-metal-spider-pulley-2-aluminum-pulley-screws"
+     }
+    ],
+    "part": "Drivetrain"
+   },
+   {
+    "cheapest_price": 29.62,
+    "key": "sport|Drivetrain|kmc|12|speed|x12",
+    "label": "KMC x12 12 speed",
+    "offers": [
+     {
+      "name": "KMC X12 12-Speed Chain",
+      "price": 29.62,
+      "store": "Bike Mart",
+      "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+     },
+     {
+      "name": "KMC X12 12-Speed Chain",
+      "price": 36.0,
+      "store": "Fanatik",
+      "url": "https://www.fanatikbike.com/products/kmc-x12-12-speed-chain"
      }
     ],
     "part": "Drivetrain"
@@ -3905,350 +3886,347 @@
     "part": "Tires"
    }
   ],
-  "drops": [],
+  "drops": [
+   {
+    "at_all_time_low": false,
+    "delta": 85.88,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-1.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-16.jpg?v=1761060266"
+     ],
+     "name": "KMC X12 12-Speed Chain",
+     "part": "Drivetrain",
+     "price_new": "29.62",
+     "price_old": "44.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 44.0,
+       "price": 29.62,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151374077
+      },
+      {
+       "available": true,
+       "compare": 154.0,
+       "price": 115.5,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151406845
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+    },
+    "name": "KMC X12 12-Speed Chain",
+    "new": "29.62",
+    "old": "115.50",
+    "percent_vs_prior": 74.4,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+   },
+   {
+    "at_all_time_low": false,
+    "delta": 2.0,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Bontrager",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-line-dropper-seatpost-cartridge-585442-1.png?v=1761060607",
+     "name": "Bontrager Line Dropper Seatpost Cartridge",
+     "part": "Cockpit",
+     "price_new": "14.93",
+     "price_old": "59.99",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 65.99,
+       "price": 16.93,
+       "specs": {},
+       "variant_id": 46764334678269
+      },
+      {
+       "available": true,
+       "compare": 65.99,
+       "price": 16.93,
+       "specs": {},
+       "variant_id": 46764334711037
+      },
+      {
+       "available": true,
+       "compare": 59.99,
+       "price": 14.93,
+       "specs": {},
+       "variant_id": 46764334743805
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge"
+    },
+    "name": "Bontrager Line Dropper Seatpost Cartridge",
+    "new": "14.93",
+    "old": "16.93",
+    "percent_vs_prior": 11.8,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge"
+   }
+  ],
   "new_items": [
    {
     "at_all_time_low": false,
     "availability": "In stock",
-    "brand": "KMC",
-    "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
-    ],
-    "length": 1.0,
-    "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
-    "part": "Drivetrain",
-    "price_new": "19.99",
-    "price_old": "23.60",
-    "product_type": "Chains",
-    "store": "Bicycle Warehouse",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 23.6,
-      "price": 19.99,
-      "specs": {},
-      "variant_id": 42413792624742
-     },
-     {
-      "available": true,
-      "compare": 23.6,
-      "price": 19.99,
-      "specs": {},
-      "variant_id": 42413792821350
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
-    "width": 2.0
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Spank",
-    "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
-    ],
-    "name": "Spank Spoon 350 35mm Stem",
-    "part": "Cockpit",
-    "price_new": "59.99",
-    "price_old": "69.99",
-    "product_type": "Stems",
-    "store": "Bicycle Warehouse",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 69.99,
-      "price": 59.99,
-      "specs": {},
-      "variant_id": 40431254798438
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Unified Bike Co.",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0602.jpg?v=1764086745",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0514.jpg?v=1764086745",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0617.jpg?v=1764086745"
-    ],
-    "name": "Unified Bike Co. Racello Deore 12 Hardtail Mountain Bike",
-    "part": "Bikes",
-    "price_new": "599.62",
-    "price_old": "999.99",
-    "product_type": "Hardtail Mountain Bike",
+    "brand": "WTB",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/wt1553.jpg?v=1762292758",
+    "length": 2.4,
+    "name": "WTB Judge TCS 27.5x2.4\" Tire",
+    "part": "Tires",
+    "price_new": "72.95",
+    "price_old": "80.95",
+    "product_type": "Tires",
     "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 999.99,
-      "price": 599.62,
-      "specs": {},
-      "variant_id": 46907848622333
+      "compare": 93.95,
+      "price": 84.95,
+      "specs": {
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "27.5"
+       ]
+      },
+      "variant_id": 46842335854845
      },
      {
       "available": true,
-      "compare": 999.99,
-      "price": 599.62,
+      "compare": 80.95,
+      "price": 72.95,
       "specs": {
-       "frame_size": [
-        "L"
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "27.5"
        ]
       },
-      "variant_id": 46907848655101
+      "variant_id": 46842335887613
      }
     ],
     "technical_specs": {
-     "frame_size": [
-      "L"
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "27.5"
      ]
     },
-    "url": "https://www.bikemart.com/products/unified-bike-co-racello-deore-12-ship-to-your-door-hardtail"
+    "url": "https://www.bikemart.com/products/wtb-judge-tcs-27-5x2-4-tire",
+    "width": 27.5
    },
    {
     "at_all_time_low": false,
     "availability": "In stock",
-    "brand": "DT Swiss",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+    "brand": "KMC",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323102-1_207c4c95-e1ca-4047-a53f-2c0bc20cc06c.png?v=1761060534",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323103-2_c0523351-bf95-4b8b-902a-b92b10c381b0.png?v=1761060534",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323104-3_2006c4e8-7528-4221-821f-9995ec6d0ccc.png?v=1761060534"
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-1.jpg?v=1761060271"
     ],
-    "name": "DT Swiss X 1900 Spline Rear Wheel - 29-inch / Centerlock",
-    "part": "Wheels",
-    "price_new": "329.62",
-    "price_old": "429.80",
-    "product_type": "",
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 429.8,
-      "diameter_mm": null,
-      "durometers": [],
-      "price": 329.62,
-      "variant_id": "46764290474237"
-     }
-    ],
-    "store": "Bike Mart",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 429.8,
-      "price": 329.62,
-      "specs": {},
-      "variant_id": 46764290474237
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://www.bikemart.com/products/x-1900-spline-rear-wheel-29-inch-centerlock"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "DT Swiss",
-    "diameter_mm": 12.0,
-    "diameters_mm": [
-     12.0
-    ],
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323108-2_7d0b1623-f947-4158-b1d5-7d90320782a5.png?v=1761060517"
-    ],
-    "name": "DT Swiss XMC 1501 SPLINE ONE Rear Wheel - 6-Bolt / 12mm Thru x 148mm",
-    "part": "Wheels",
-    "price_new": "799.62",
-    "price_old": "1099.90",
-    "product_type": "",
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 1099.9,
-      "diameter_mm": 12.0,
-      "durometers": [],
-      "price": 799.62,
-      "variant_id": "46764290244861"
-     }
-    ],
-    "store": "Bike Mart",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 1099.9,
-      "price": 799.62,
-      "specs": {},
-      "variant_id": 46764290244861
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://www.bikemart.com/products/xmc-1501-spline-one-rear-wheel-6-bolt-12mm-thru-x-148mm"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "DT Swiss",
-    "diameter_mm": 15.0,
-    "diameters_mm": [
-     15.0
-    ],
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323039-1_d1899562-5156-4bdb-8b42-116e00448ea6.png?v=1761060533",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323040-2_d457824f-b053-41ff-a264-f5db1873f52f.png?v=1761060533"
-    ],
-    "name": "DT Swiss XMC 1501 SPLINE ONE Front Wheel - 110 x 15mm",
-    "part": "Wheels",
-    "price_new": "599.62",
-    "price_old": "931.88",
-    "product_type": "",
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 931.88,
-      "diameter_mm": 15.0,
-      "durometers": [],
-      "price": 599.62,
-      "variant_id": "46764290965757"
-     }
-    ],
-    "store": "Bike Mart",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 931.88,
-      "price": 599.62,
-      "specs": {},
-      "variant_id": 46764290965757
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://www.bikemart.com/products/xmc-1501-spline-one-front-wheel-110-x-15mm"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Odyssey",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9033.jpg?v=1762282102"
-    ],
-    "length": 1.0,
-    "name": "Odyssey Bluebird Chain - Single Speed 1/2\" x 1/8\"",
+    "name": "KMC X12EPT Eco Pro Teq Chain",
     "part": "Drivetrain",
-    "price_new": "36.99",
-    "price_old": "39.99",
-    "product_type": "Chains",
-    "store": "Bike Mart",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 39.99,
-      "price": 36.99,
-      "specs": {},
-      "variant_id": 46840926667005
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://www.bikemart.com/products/odyssey-bluebird-chain",
-    "width": 2.0
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "SRAM",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair--fix-iv-776258-2.png?v=1761060642",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-3.png?v=1761060642",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair--fix-iv-776258-1.png?v=1761060642"
-    ],
-    "name": "SRAM FR-5 Brake Lever- Pair",
-    "part": "Brakes",
-    "price_new": "17.60",
-    "price_old": "25.00",
+    "price_new": "45.62",
+    "price_old": "66.00",
     "product_type": "",
     "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 25.0,
-      "price": 17.6,
+      "compare": 66.0,
+      "price": 45.62,
       "specs": {},
-      "variant_id": 46764363907325
+      "variant_id": 46764155994365
      }
     ],
     "technical_specs": {},
-    "url": "https://www.bikemart.com/products/fr-5-brake-lever-pair"
+    "url": "https://www.bikemart.com/products/x12ept-eco-pro-teq-chain"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "WTB",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1540.jpg?v=1762254886",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1540.jpg?v=1762254886",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1541.jpg?v=1762254886",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1542.jpg?v=1762254886",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1543.jpg?v=1762254886"
+    ],
+    "name": "WTB Solano SL Saddle - Black",
+    "part": "Cockpit",
+    "price_new": "116.95",
+    "price_old": "129.95",
+    "product_type": "Saddles",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 229.95,
+      "price": 206.95,
+      "specs": {},
+      "variant_id": 46838557868285
+     },
+     {
+      "available": true,
+      "compare": 129.95,
+      "price": 116.95,
+      "specs": {},
+      "variant_id": 46838557901053
+     },
+     {
+      "available": true,
+      "compare": 229.95,
+      "price": 206.95,
+      "specs": {},
+      "variant_id": 46838557933821
+     },
+     {
+      "available": true,
+      "compare": 129.95,
+      "price": 116.95,
+      "specs": {},
+      "variant_id": 46838557966589
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/wtb-solano-sl-saddle"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "WTB",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
+    ],
+    "name": "WTB Rocket Saddle - Black Medium Fusion Form",
+    "part": "Cockpit",
+    "price_new": "71.95",
+    "price_old": "89.95",
+    "product_type": "Saddles",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 129.95,
+      "price": 116.95,
+      "specs": {},
+      "variant_id": 46839154934013
+     },
+     {
+      "available": true,
+      "compare": 119.95,
+      "price": 107.95,
+      "specs": {},
+      "variant_id": 46839154966781
+     },
+     {
+      "available": true,
+      "compare": 104.95,
+      "price": 94.95,
+      "specs": {},
+      "variant_id": 46839154999549
+     },
+     {
+      "available": true,
+      "compare": 89.95,
+      "price": 71.95,
+      "specs": {},
+      "variant_id": 46839155032317
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/wtb-rocket-saddle"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "WTB",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1191.jpg?v=1762331072",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1192.jpg?v=1762331072",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1193.jpg?v=1762331072"
+    ],
+    "name": "WTB Gravelier Saddle - Black",
+    "part": "Cockpit",
+    "price_new": "94.95",
+    "price_old": "104.95",
+    "product_type": "Saddles",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 104.95,
+      "price": 94.95,
+      "specs": {},
+      "variant_id": 46844595208445
+     },
+     {
+      "available": true,
+      "compare": 119.95,
+      "price": 107.95,
+      "specs": {},
+      "variant_id": 46844595241213
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/wtb-gravelier-saddle"
    }
   ],
   "removed": []
  },
  "failed_keys": [],
  "fingerprints": {
-  "data": "2f09c93719dd980ea994734766be7b0f51582c92c1a91522215cc86f92fc85c6",
-  "history": "ce2aabdbe984b3ed1fa8ee2921d5777a0e541a890d4060402bc52efb8df7b128"
+  "data": "13c725485b335cbb5b826b58338cd3d8769f17093fc31893424b00188002775e",
+  "history": "2c172164c898c24c1f4fc3ea5dc3625a90445df7f00c11ed55e680c9f0eed296"
  },
- "generated_at": "2026-11-14T07:19:20+00:00",
+ "generated_at": "2026-11-14T15:47:44+00:00",
  "history": "file",
  "version": 1
 }
