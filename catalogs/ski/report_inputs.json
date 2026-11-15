@@ -1,19 +1,86 @@
 {
  "changes": {
+  "Christy Sports_Boots": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Salomon",
+     "gender": "Kids",
+     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7ee9f548/8105833_347_1.jpg?sw=600&sh=600",
+     "name": "Salomon QST Access 70 T Ski Boots Junior",
+     "part": "Boots",
+     "price_new": "139.97",
+     "price_old": "279.95",
+     "store": "Christy Sports",
+     "technical_offers": [
+      {
+       "available": null,
+       "compare": 279.95,
+       "price": 139.97,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "gender": [
+         "Kids"
+        ]
+       },
+       "variant_id": "8105833"
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "gender": [
+       "Kids"
+      ]
+     },
+     "url": "https://www.christysports.com/product/salomon-qst-access-70-t-ski-boots-junior/8105833.html"
+    },
+    "type": "removed"
+   }
+  ],
+  "Christy Sports_Poles": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Rossignol",
+     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwc2270ae4/1021185_023_1.jpg?sw=600&sh=600",
+     "name": "Rossignol Tactic Ski Poles Juniors",
+     "part": "Poles",
+     "price_new": "16.97",
+     "price_old": "39.95",
+     "store": "Christy Sports",
+     "url": "https://www.christysports.com/product/rossignol-tactic-ski-poles-juniors/1021185.html"
+    },
+    "type": "removed"
+   }
+  ],
   "Christy Sports_Skis": [
    {
     "item": {
-     "at_all_time_low": true,
      "availability": "Check store",
      "brand": "Armada",
      "gender": "Women",
-     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw229e9ba0/8201449_000_1.jpg?sw=600&sh=600",
+     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw0a9d8c64/8111948_000_1.jpg?sw=600&sh=600",
      "name": "Armada Reliance 92 TI Skis Womens",
      "part": "Skis",
-     "price_new": "524.97",
-     "price_old": "749.95",
+     "price_new": "399.97",
+     "price_old": "799.95",
      "store": "Christy Sports",
      "technical_offers": [
+      {
+       "available": null,
+       "compare": 799.95,
+       "price": 399.97,
+       "specs": {
+        "gender": [
+         "Women"
+        ]
+       },
+       "variant_id": "8111948"
+      },
       {
        "available": null,
        "compare": 749.95,
@@ -31,61 +98,1428 @@
        "Women"
       ]
      },
-     "url": "https://www.christysports.com/product/armada-reliance-92-ti-skis-womens/8201449.html"
+     "url": "https://www.christysports.com/product/armada-reliance-92-ti-skis-womens/8111948.html",
+     "versions": [
+      {
+       "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw229e9ba0/8201449_000_1.jpg?sw=600&sh=600",
+       "price_new": "524.97",
+       "price_old": "749.95",
+       "url": "https://www.christysports.com/product/armada-reliance-92-ti-skis-womens/8201449.html"
+      }
+     ]
     },
-    "type": "new"
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Armada",
+     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw802e121e/8201441_000_1.jpg?sw=600&sh=600",
+     "name": "Armada ARV 100 MadSteez Skis",
+     "part": "Skis",
+     "price_new": "489.97",
+     "price_old": "699.95",
+     "store": "Christy Sports",
+     "url": "https://www.christysports.com/product/armada-arv-100-madsteez-skis/8201441.html"
+    },
+    "type": "removed"
    }
   ],
-  "The Pro Ski and Ride_Skis": [
+  "Ski Essentials_Skis": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Stöckli",
+     "gender": "Women",
+     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2024-stockli-nela-88-women-s-skis-41040424.jpg?v=1770767954",
+     "kind": "All Mountain",
+     "name": "2024 Stockli Nela 88 Women's Skis",
+     "part": "Skis",
+     "price_new": "579.95",
+     "price_old": "1099.00",
+     "product_type": "Alpine Ski > Ski > Downhill > Flat",
+     "store": "Ski Essentials",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 1099.0,
+       "price": 579.95,
+       "specs": {
+        "gender": [
+         "Women"
+        ],
+        "ski_type": [
+         "All-Mountain",
+         "Carving / Frontside"
+        ],
+        "waist": [
+         "85–94 mm"
+        ]
+       },
+       "variant_id": 44862970495272
+      }
+     ],
+     "technical_specs": {
+      "gender": [
+       "Women"
+      ],
+      "ski_type": [
+       "All-Mountain",
+       "Carving / Frontside"
+      ],
+      "waist": [
+       "85–94 mm"
+      ]
+     },
+     "url": "https://www.skiessentials.com/products/2024-stockli-nela-88-women-s-skis"
+    },
+    "type": "removed"
+   }
+  ],
+  "Smith_Helmets": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Smith",
+     "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056330P5559_Vantage_2_Mips_Matte_Dusk_Thistle_3Q.png?v=1763664024",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056330P5559_Vantage_2_Mips_Matte_Dusk_Thistle_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteDuskThistle_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteDuskThistle_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056333P5559_Vantage_2_Mips_Matte_Ironwood_Bandit_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteIronwoodBandit_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteIronwoodBandit_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056334F5559_Vantage_2_Mips_Matte_Mystic_Gold_Dust_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteMysticGoldDust_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteMysticGoldDust_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E005633FK5559_Vantage_2_Mips_Matte_Black_Ultraviolet_Emerald_City_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle04.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle02.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle01.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle03.jpg?v=1763664024"
+     ],
+     "name": "Smith Vantage 2 Mips® - Past Season",
+     "part": "Helmets",
+     "price_new": "177.00",
+     "price_old": "295.00",
+     "product_type": "Helmet",
+     "store": "Smith",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 295.0,
+       "price": 177.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F2040 (snow)",
+         "EN 1077 (EU snow)"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 47717845336302
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F2040 (snow)",
+       "EN 1077 (EU snow)"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.smithoptics.com/products/vantage-2-mips-r-sale"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Smith",
+     "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteMidnightNavy_3Q_cd5a787f-4a2e-4648-b040-8ed9db1b137e.png?v=1759515967",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteMidnightNavy_3Q_cd5a787f-4a2e-4648-b040-8ed9db1b137e.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteMidnightNavy_BACK_d5095f81-be05-451c-aca6-2cb33ec8a4bb.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteMidnightNavy_TOP_c065cc8c-bf0f-4022-9dbf-eadc6f2740e0.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteGoldBar_3Q_8995c79c-906a-4bcc-ab01-38ba3e6ac0e5.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteGoldBar_BACK_237ee3f5-3f2f-404b-9a14-c6d701542f9e.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteGoldBar_TOP_ddd16fc3-355a-4065-9874-21b838fe5f8d.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteBlackStripes_3Q_ca52a44c-142e-4d1d-9543-29efdb8b729e.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteBlackStripes_BACK_283510ac-989d-4684-a60b-e63d0cfa6a99.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteBlackStripes_TOP_027c9588-26f8-410b-8b0c-b5e963545ef1.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlateStripes_3Q_e3f57cec-17e8-4ba3-a55d-24322533cec4.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlateStripes_BACK_31e098da-358c-40a0-b8e5-9b25389f820d.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlateStripes_TOP_2e1b4a5e-d437-4305-9a8f-5254545f4ae3.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E006977BK5155_01_1fdec5cc-7bde-4f09-bc19-da5345d89503.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlate_3Q_acc1b9ea-3461-4550-a740-4b8a3c53b2da.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlate_BACK_e529fe3a-8795-468e-b872-396fe205c76b.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlate_TOP_fb4c1d0f-814c-4560-83bd-36c6d8ae83b3.png?v=1759515967"
+     ],
+     "name": "Smith Mission Mips® - Past Season",
+     "part": "Helmets",
+     "price_new": "87.00",
+     "price_old": "145.00",
+     "product_type": "Helmet",
+     "store": "Smith",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 145.0,
+       "price": 87.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F2040 (snow)",
+         "CPSC (US bike)",
+         "EN 1077 (EU snow)"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46957644808430
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F2040 (snow)",
+       "CPSC (US bike)",
+       "EN 1077 (EU snow)"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.smithoptics.com/products/mission-mips-r-sale"
+    },
+    "type": "removed"
+   }
+  ],
+  "Utah Ski_Helmets": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Smith",
+     "gender": "Kids",
+     "image": "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/E00682-ZW9-Large-2222.jpg?v=1686860698",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/E00682-ZW9-Large-2222.jpg?v=1686860698",
+      "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/E0068218LLARGE.jpg?v=1763403678",
+      "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/E006821IILARGE.jpg?v=1763403678"
+     ],
+     "name": "Smith Holt Jr. Kids Helmet 2024",
+     "part": "Helmets",
+     "price_new": "42.00",
+     "price_old": "70.00",
+     "product_type": "H H J",
+     "store": "Utah Ski",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 70.0,
+       "price": 42.0,
+       "specs": {
+        "age": [
+         "Kids"
+        ],
+        "certification": [
+         "ASTM F2040 (snow)",
+         "CPSC (US bike)",
+         "EN 1077 (EU snow)"
+        ],
+        "gender": [
+         "Kids"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 41274750304315
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Kids"
+      ],
+      "certification": [
+       "ASTM F2040 (snow)",
+       "CPSC (US bike)",
+       "EN 1077 (EU snow)"
+      ],
+      "gender": [
+       "Kids"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.utahskis.com/products/smith-holt-jr-kids-helmet-2024"
+    },
+    "type": "removed"
+   }
+  ],
+  "Willis Ski and Board_Boots": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Lange",
+     "gender": "Kids",
+     "image": "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Lange_Starlet_60_Jr_Boots_2021.jpg?v=1764777911",
+     "name": "Lange Starlet 60 Junior Ski Boots",
+     "part": "Boots",
+     "price_new": "169.99",
+     "price_old": "225.00",
+     "product_type": "Junior Ski Boots",
+     "store": "Willis Ski and Board",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 225.0,
+       "price": 169.99,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "gender": [
+         "Kids"
+        ]
+       },
+       "variant_id": 48507275804877
+      },
+      {
+       "available": true,
+       "compare": 225.0,
+       "price": 169.99,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "gender": [
+         "Kids"
+        ]
+       },
+       "variant_id": 48507275870413
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "gender": [
+       "Kids"
+      ]
+     },
+     "url": "https://www.willisskiandboard.com/products/lange-starlet-60-junior-ski-boots"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Atomic",
+     "gender": "Kids",
+     "image": "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Atomic_Redster_Club_Sport_80_LC_Boots_2022.jpg?v=1764777879",
+     "name": "Atomic Redster Club Sport 80 Lc Boots",
+     "part": "Boots",
+     "price_new": "199.99",
+     "price_old": "425.00",
+     "product_type": "Junior Ski Boots",
+     "store": "Willis Ski and Board",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 425.0,
+       "price": 199.99,
+       "specs": {
+        "flex": [
+         "Medium (80–100)"
+        ],
+        "gender": [
+         "Kids"
+        ]
+       },
+       "variant_id": 48507274494157
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Medium (80–100)"
+      ],
+      "gender": [
+       "Kids"
+      ]
+     },
+     "url": "https://www.willisskiandboard.com/products/atomic-redster-club-sport-80-lc-boots"
+    },
+    "type": "removed"
+   }
+  ],
+  "Willis Ski and Board_Skis": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Line",
+     "gender": "Men",
+     "image": "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026-H.webp?v=1794575130",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026-H.webp?v=1794575130",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_Honey_Badger_Skis_2026_4d3e5c1a-4579-438b-a2f8-7657e286cee0.jpg?v=1789535866",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_Honey_Badger_Skis_2026_Flat-155_e626f939-e3b3-4d17-899a-46015156ceaa.jpg?v=1789535866",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_Honey_Badger_Skis_2026_Flat-166_3ad043f5-236a-40a7-8e11-50e1a676beea.jpg?v=1789535866",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_Honey_Badger_Skis_2026_Flat-172_0d62c21d-2b48-4a89-a525-15d184703d75.jpg?v=1789535866",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026_20Flat-155-H.webp?v=1794575129",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026_20Flat-166-H.webp?v=1794575130",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026_20Flat-172-H.webp?v=1794575130"
+     ],
+     "name": "Line Honey Badger Skis 2026",
+     "part": "Skis",
+     "price_new": "309.99",
+     "price_old": "525.00",
+     "product_type": "Mens Skis",
+     "store": "Willis Ski and Board",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 525.0,
+       "price": 309.99,
+       "specs": {
+        "gender": [
+         "Men"
+        ],
+        "rocker": [
+         "Full Camber"
+        ]
+       },
+       "variant_id": 47971563929805
+      }
+     ],
+     "technical_specs": {
+      "gender": [
+       "Men"
+      ],
+      "rocker": [
+       "Full Camber"
+      ]
+     },
+     "url": "https://www.willisskiandboard.com/products/line-honey-badger-skis"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Elan",
+     "gender": "Men",
+     "image": "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025-H.webp?v=1794574961",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025-H.webp?v=1794574961",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_28c2f32a-763c-4eb9-9078-8f4093384850.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_Flat-161.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_Flat-168_1e22a24e-79d4-4764-8cfd-44419df27fcb.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_Flat-175_d17d7305-9227-46f3-a9a0-964c47666754.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_Flat-182_8a92bc78-a63f-4991-b9d4-19bc6dcc5308.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025_20Flat-161-H.webp?v=1794574961",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025_20Flat-168-H.webp?v=1794574961",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025_20Flat-175-H.webp?v=1794574961",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025_20Flat-182-H.webp?v=1794574961"
+     ],
+     "name": "Elan Ripstick 88 Skis",
+     "part": "Skis",
+     "price_new": "480.99",
+     "price_old": "900.00",
+     "product_type": "Mens Skis",
+     "store": "Willis Ski and Board",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 900.0,
+       "price": 480.99,
+       "specs": {
+        "gender": [
+         "Men"
+        ],
+        "radius": [
+         "Short (under 16 m)"
+        ],
+        "rocker": [
+         "Full Camber"
+        ]
+       },
+       "variant_id": 48079200288973
+      },
+      {
+       "available": true,
+       "compare": 900.0,
+       "price": 480.99,
+       "specs": {
+        "gender": [
+         "Men"
+        ],
+        "radius": [
+         "Short (under 16 m)"
+        ],
+        "rocker": [
+         "Full Camber"
+        ]
+       },
+       "variant_id": 48079200321741
+      }
+     ],
+     "technical_specs": {
+      "gender": [
+       "Men"
+      ],
+      "radius": [
+       "Short (under 16 m)"
+      ],
+      "rocker": [
+       "Full Camber"
+      ]
+     },
+     "url": "https://www.willisskiandboard.com/products/elan-ripstick-88-skis"
+    },
+    "type": "removed"
+   }
+  ],
+  "evo_Bindings": [
+   {
+    "at_all_time_low": true,
+    "delta": 30.03,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "Marker",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248709.jpg?v=1767739102",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1241128.jpg?v=1767738797",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1241129.jpg?v=1767738798",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119063.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119064.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119067.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119061.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119062.jpg?v=1767733780",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119066.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119069.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119065.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119068.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-707433.jpg?v=1767746088",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977995.jpg?v=1767756485",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977993.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977994.jpg?v=1767756483",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-979349.jpg?v=1767756532",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-979348.jpg?v=1767756532",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977991.jpg?v=1767756485",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977984.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977980.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981941.jpg?v=1767756638",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981944.jpg?v=1767756635",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977990.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977989.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977986.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981942.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981945.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977988.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977985.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977987.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981947.jpg?v=1767756638",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981943.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977997.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977992.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977996.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981946.jpg?v=1767756635",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981948.jpg?v=1767756637",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011359.jpg?v=1767729632",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011364.jpg?v=1767729631",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011365.jpg?v=1767729633",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188514.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188512.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188516.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188509.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188511.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188515.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188510.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188513.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188521.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188517.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188518.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188520.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188519.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188523.jpg?v=1767736760",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206133.jpg?v=1767737373",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206132.jpg?v=1767737374"
+     ],
+     "name": "Marker Griffon 13 ID Ski Bindings",
+     "part": "Bindings",
+     "price_new": "179.96",
+     "price_old": "299.99",
+     "product_type": "Alpine Ski Bindings",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 179.96,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107395031190
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394834582
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394867350
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394900118
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394932886
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "11–13"
+      ]
+     },
+     "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings"
+    },
+    "name": "Marker Griffon 13 ID Ski Bindings",
+    "new": "179.96",
+    "old": "209.99",
+    "percent_vs_prior": 14.3,
+    "type": "price_drop",
+    "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Armada",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1153220.jpg?v=1767735358",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1153220.jpg?v=1767735358",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269628.jpg?v=1769147092",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269626.jpg?v=1769147091",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1153222.jpg?v=1767735357",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-929432.jpg?v=1767754508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1176909.jpg?v=1767736348",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1176911.jpg?v=1767736348",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1176904.jpg?v=1767736347",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923863.jpg?v=1767754318",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269621.jpg?v=1769147090",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269625.jpg?v=1769147089",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269623.jpg?v=1769147091",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269629.jpg?v=1769147089",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269627.jpg?v=1769147089",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269624.jpg?v=1769147090",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269620.jpg?v=1769147091",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1290803.jpg?v=1775681947",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1290802.jpg?v=1775681946"
+     ],
+     "name": "Armada Strive 14 GW Ski Bindings",
+     "part": "Bindings",
+     "price_new": "192.95",
+     "price_old": "279.95",
+     "product_type": "Alpine Ski Bindings",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 279.95,
+       "price": 192.95,
+       "specs": {
+        "din": [
+         "14 and up"
+        ],
+        "sole": [
+         "GripWalk"
+        ]
+       },
+       "variant_id": 46130612109462
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "14 and up"
+      ],
+      "sole": [
+       "GripWalk"
+      ]
+     },
+     "url": "https://www.evo.com/products/219667-armada-strive-14-gw-ski-bindings"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Marker",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119999.jpg?v=1767733819",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119999.jpg?v=1767733819",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1120150.jpg?v=1767733824",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1120001.jpg?v=1767733820"
+     ],
+     "name": "Marker Jester 18 Pro Ski Bindings 2026",
+     "part": "Bindings",
+     "price_new": "329.94",
+     "price_old": "549.99",
+     "product_type": "Alpine Ski Bindings",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 549.99,
+       "price": 329.94,
+       "specs": {
+        "din": [
+         "14 and up"
+        ],
+        "sole": [
+         "Touring (ISO 9523)"
+        ]
+       },
+       "variant_id": 46148731928726
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "14 and up"
+      ],
+      "sole": [
+       "Touring (ISO 9523)"
+      ]
+     },
+     "url": "https://www.evo.com/products/254764-marker-jester-18-pro-ski-bindings-2026"
+    },
+    "type": "removed"
+   }
+  ],
+  "evo_Boots": [
    {
     "item": {
      "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "Kästle",
-     "image": "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Mounted.jpg?v=1794667583",
+     "brand": "Tecnica",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105369.jpg?v=1767733202",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Mounted.jpg?v=1794667583",
-      "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Tips.webp?v=1794667596",
-      "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Tip_and_Base.webp?v=1794667612",
-      "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Logo.webp?v=1794667624",
-      "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Tail.webp?v=1794667632",
-      "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Closeup.avif?v=1794667644",
-      "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Vertical.jpg?v=1794667664"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105369.jpg?v=1767733202",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105366.jpg?v=1767733203",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105364.jpg?v=1767733202",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105367.jpg?v=1767733202",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105368.jpg?v=1767733203"
      ],
-     "lengths": [
-      "165"
+     "name": "Tecnica Mach1 MV 130 Ski Boots 2026",
+     "part": "Boots",
+     "price_new": "509.99",
+     "price_old": "849.99",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "29.5"
      ],
-     "name": "Kastle MX 75 Skis 2024 (Bindings Included)",
-     "part": "Skis",
-     "price_new": "600.00",
-     "price_old": "1299.99",
-     "product_type": "Skis",
-     "store": "The Pro Ski and Ride",
+     "store": "evo",
      "technical_offers": [
       {
        "available": true,
-       "compare": 1299.99,
-       "price": 600.0,
+       "compare": 849.99,
+       "price": 509.99,
        "specs": {
-        "bindings": [
-         "Included"
+        "flex": [
+         "Very stiff (over 120)"
         ],
-        "length": [
-         "160–169 cm"
+        "last": [
+         "Medium (99–101 mm)"
+        ],
+        "mondo": [
+         "29.5"
         ]
        },
-       "variant_id": 47866275692633
+       "variant_id": 46147223879830
       }
      ],
      "technical_specs": {
-      "bindings": [
-       "Included"
+      "flex": [
+       "Very stiff (over 120)"
       ],
-      "length": [
-       "160–169 cm"
+      "last": [
+       "Medium (99–101 mm)"
+      ],
+      "mondo": [
+       "29.5"
       ]
      },
-     "url": "https://theproskiandride.com/products/kastle-mx-75-skis-2024-bindings-included"
+     "url": "https://www.evo.com/products/253073-tecnica-mach1-mv-130-ski-boots-2026"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Atomic",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1262935.jpg?v=1767739650",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1262935.jpg?v=1767739650",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1262934.jpg?v=1767739651",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1262933.jpg?v=1767739651"
+     ],
+     "name": "Atomic Hawx Prime 130 S BOA GW Ski Boots 2025",
+     "part": "Boots",
+     "price_new": "294.99",
+     "price_old": "849.95",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "26.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 849.95,
+       "price": 294.99,
+       "specs": {
+        "flex": [
+         "Very stiff (over 120)"
+        ],
+        "mondo": [
+         "26.5"
+        ],
+        "sole": [
+         "GripWalk"
+        ]
+       },
+       "variant_id": 46148414439574
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Very stiff (over 120)"
+      ],
+      "mondo": [
+       "26.5"
+      ],
+      "sole": [
+       "GripWalk"
+      ]
+     },
+     "url": "https://www.evo.com/products/254263-atomic-hawx-prime-130-s-boa-gw-ski-boots-2025"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Lange",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1254514.jpg?v=1777044904",
+     "name": "Lange RSJ 65 Ski Boots - Kids' 2024",
+     "part": "Boots",
+     "price_new": "49.99",
+     "price_old": "275.00",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "19.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 275.0,
+       "price": 49.99,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "mondo": [
+         "19.5"
+        ]
+       },
+       "variant_id": 46348063080598
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "mondo": [
+       "19.5"
+      ]
+     },
+     "url": "https://www.evo.com/products/246833-lange-rsj-65-ski-boots-kids-2024"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Salomon",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018139.jpg?v=1767729957",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018139.jpg?v=1767729957",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018142.jpg?v=1767729958",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018140.jpg?v=1767729958",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018137.jpg?v=1767729955",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018138.jpg?v=1767729955"
+     ],
+     "name": "Salomon QST Access 60 W Ski Boots - Women's 2025",
+     "part": "Boots",
+     "price_new": "89.99",
+     "price_old": "379.95",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "24.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 379.95,
+       "price": 89.99,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "mondo": [
+         "24.5"
+        ]
+       },
+       "variant_id": 46353206378646
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "mondo": [
+       "24.5"
+      ]
+     },
+     "url": "https://www.evo.com/products/238161-salomon-qst-access-60-w-ski-boots-women-s-2025"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Atomic",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095789.jpg?v=1767732874",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095789.jpg?v=1767732874",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095788.jpg?v=1767732874",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095787.jpg?v=1767732874"
+     ],
+     "kind": "Touring",
+     "name": "Atomic Hawx Prime XTD 110 BOA GW Alpine Touring Ski Boots 2026",
+     "part": "Boots",
+     "price_new": "497.65",
+     "price_old": "789.95",
+     "product_type": "Alpine Touring Ski Boots",
+     "sizes": [
+      "27.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 789.95,
+       "price": 497.65,
+       "specs": {
+        "flex": [
+         "Stiff (105–120)"
+        ],
+        "mondo": [
+         "27.5"
+        ],
+        "ski_type": [
+         "Backcountry / Touring"
+        ],
+        "sole": [
+         "GripWalk"
+        ],
+        "walk": [
+         "Walk mode"
+        ]
+       },
+       "variant_id": 46148406182038
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Stiff (105–120)"
+      ],
+      "mondo": [
+       "27.5"
+      ],
+      "ski_type": [
+       "Backcountry / Touring"
+      ],
+      "sole": [
+       "GripWalk"
+      ],
+      "walk": [
+       "Walk mode"
+      ]
+     },
+     "url": "https://www.evo.com/products/254251-atomic-hawx-prime-xtd-110-boa-gw-alpine-touring-ski-boots-2026"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "K2",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099110.jpg?v=1767733005",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099110.jpg?v=1767733005",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099093.jpg?v=1767733003",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099097.jpg?v=1767733003",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099094.jpg?v=1767733004"
+     ],
+     "name": "K2 Anthem 95 BOA Ski Boots - Women's 2025",
+     "part": "Boots",
+     "price_new": "175.27",
+     "price_old": "599.95",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "22.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 599.95,
+       "price": 175.27,
+       "specs": {
+        "flex": [
+         "Medium (80–100)"
+        ],
+        "mondo": [
+         "22.5"
+        ]
+       },
+       "variant_id": 46078442143894
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Medium (80–100)"
+      ],
+      "mondo": [
+       "22.5"
+      ]
+     },
+     "url": "https://www.evo.com/products/252813-k2-anthem-95-boa-ski-boots-women-s-2025"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Lange",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-919604.jpg?v=1767754135",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-919604.jpg?v=1767754135",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-919605.jpg?v=1767754137",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-919606.jpg?v=1767754136"
+     ],
+     "name": "Lange LX 75 HV GW Ski Boots - Women's 2024",
+     "part": "Boots",
+     "price_new": "139.49",
+     "price_old": "379.95",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "22.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 379.95,
+       "price": 139.49,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "last": [
+         "Wide (102 mm and over)"
+        ],
+        "mondo": [
+         "22.5"
+        ],
+        "sole": [
+         "GripWalk"
+        ]
+       },
+       "variant_id": 46077750804630
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "last": [
+       "Wide (102 mm and over)"
+      ],
+      "mondo": [
+       "22.5"
+      ],
+      "sole": [
+       "GripWalk"
+      ]
+     },
+     "url": "https://www.evo.com/products/228675-lange-lx-75-hv-gw-ski-boots-women-s-2024"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Tecnica",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1159509.jpg?v=1767735615",
+     "name": "Tecnica Mach1 LV 105 W Ski Boots - Women's 2026",
+     "part": "Boots",
+     "price_new": "528.95",
+     "price_old": "749.99",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "25.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 749.99,
+       "price": 528.95,
+       "specs": {
+        "flex": [
+         "Stiff (105–120)"
+        ],
+        "last": [
+         "Narrow (98 mm and under)"
+        ],
+        "mondo": [
+         "25.5"
+        ]
+       },
+       "variant_id": 46150893797526
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Stiff (105–120)"
+      ],
+      "last": [
+       "Narrow (98 mm and under)"
+      ],
+      "mondo": [
+       "25.5"
+      ]
+     },
+     "url": "https://www.evo.com/products/263297-tecnica-mach1-lv-105-w-ski-boots-women-s-2026"
+    },
+    "type": "removed"
+   }
+  ],
+  "evo_Helmets": [
+   {
+    "at_all_time_low": true,
+    "delta": 53.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "Smith",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923322.jpg?v=1767754293",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923322.jpg?v=1767754293",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-982248.jpg?v=1767756649",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-820472.jpg?v=1767750040",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713019.jpg?v=1767746311",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052750.jpg?v=1767731281",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052753.jpg?v=1767731279",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052751.jpg?v=1767731281",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-982247.jpg?v=1767756648",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-982246.jpg?v=1767756647",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713023.jpg?v=1767746310",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069983.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069984.jpg?v=1767731918",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069985.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069986.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069987.jpg?v=1767731918",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069988.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713024.jpg?v=1767746310",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713025.jpg?v=1767746309",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713026.jpg?v=1767746309",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-820474.jpg?v=1767750040",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923321.jpg?v=1767754293",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026259.jpg?v=1767730234",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069994.jpg?v=1767731920",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069990.jpg?v=1767731920",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026261.jpg?v=1767730237",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069992.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069991.jpg?v=1767731921",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026262.jpg?v=1767730235",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069995.jpg?v=1767731920",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069993.jpg?v=1767731920",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026263.jpg?v=1767730236",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069996.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069989.jpg?v=1767731918",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096608.jpg?v=1767732908",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096609.jpg?v=1767732906",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096607.jpg?v=1767732905",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096600.jpg?v=1767732908",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096597.jpg?v=1767732905",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096596.jpg?v=1767732907",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348348.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348347.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348345.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348353.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348352.jpg?v=1788987261",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348351.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096601.jpg?v=1767732908",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096602.jpg?v=1767732907",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096603.jpg?v=1767732907",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096606.jpg?v=1767732907",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096605.jpg?v=1767732906",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096604.jpg?v=1767732906",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259970.jpg?v=1767739535",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259971.jpg?v=1767739534",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259968.jpg?v=1767739535",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348346.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348350.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348349.jpg?v=1788987260"
+     ],
+     "name": "Smith Altus MIPS Helmet",
+     "part": "Helmets",
+     "price_new": "76.00",
+     "price_old": "190.00",
+     "product_type": "Ski and Snowboard Helmets",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 190.0,
+       "price": 76.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46108510781590
+      },
+      {
+       "available": true,
+       "compare": 215.0,
+       "price": 129.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46108511568022
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.evo.com/products/179298-smith-altus-mips-helmet"
+    },
+    "name": "Smith Altus MIPS Helmet",
+    "new": "76.00",
+    "old": "129.00",
+    "percent_vs_prior": 41.1,
+    "type": "price_drop",
+    "url": "https://www.evo.com/products/179298-smith-altus-mips-helmet"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Atomic",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304077.jpg?v=1780948050",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304077.jpg?v=1780948050",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304078.jpg?v=1780948050"
+     ],
+     "name": "Atomic Savor Helmet",
+     "part": "Helmets",
+     "price_new": "75.55",
+     "price_old": "140.00",
+     "product_type": "Ski and Snowboard Helmets",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 140.0,
+       "price": 75.55,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Helmets"
+        ]
+       },
+       "variant_id": 46412373033110
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "prot_size": [
+       "M"
+      ],
+      "protects": [
+       "Helmets"
+      ]
+     },
+     "url": "https://www.evo.com/products/289333-atomic-savor-helmet"
     },
     "type": "new"
    }
@@ -93,287 +1527,220 @@
   "evo_Packs": [
    {
     "item": {
-     "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "Helly Hansen",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124133.jpg?v=1767733998",
+     "brand": "CamelBak",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268994.jpg?v=1769147088",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124133.jpg?v=1767733998",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124132.jpg?v=1767733998",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124135.jpg?v=1767733997",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124141.jpg?v=1767733998",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124140.jpg?v=1767733999",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124143.jpg?v=1767734000",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124136.jpg?v=1767733998",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124131.jpg?v=1767733997",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124134.jpg?v=1767734000",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124138.jpg?v=1767733998",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124137.jpg?v=1767734000",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124139.jpg?v=1767733998"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268994.jpg?v=1769147088",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268997.jpg?v=1769147089"
      ],
-     "name": "Helly Hansen Fauna Pack - Kids'",
+     "name": "CamelBak Quick Stow 17oz Flask",
      "part": "Packs",
-     "price_new": "38.50",
-     "price_old": "55.00",
-     "product_type": "Day Packs",
+     "price_new": "17.99",
+     "price_old": "24.00",
+     "product_type": "Backpack Accessories",
      "store": "evo",
      "technical_offers": [
       {
        "available": true,
-       "compare": 55.0,
-       "price": 38.5,
+       "compare": 24.0,
+       "price": 17.99,
        "specs": {},
-       "variant_id": 46146429747350
+       "variant_id": 46079131517078
       }
      ],
-     "url": "https://www.evo.com/products/252020-helly-hansen-fauna-pack-kids"
+     "url": "https://www.evo.com/products/278157-camelbak-quick-stow-17oz-flask"
+    },
+    "type": "removed"
+   }
+  ],
+  "evo_Poles": [
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-881949.jpg?v=1767752449",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-881949.jpg?v=1767752449",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1087823.jpg?v=1767732577",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1078058.jpg?v=1767732209"
+     ],
+     "name": "evo Enduro Ski Poles 2025",
+     "part": "Poles",
+     "price_new": "34.99",
+     "price_old": "89.95",
+     "product_type": "Ski Poles",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 89.95,
+       "price": 34.99,
+       "specs": {},
+       "variant_id": 46112085147798
+      }
+     ],
+     "url": "https://www.evo.com/products/183612-evo-enduro-ski-poles-2025"
     },
     "type": "new"
    },
    {
     "item": {
-     "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "Uswe",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291433.jpg?v=1775835483",
+     "brand": "Faction",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668548.jpg?v=1767744549",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291433.jpg?v=1775835483",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291427.jpg?v=1775835483",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291424.jpg?v=1775835483",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291426.jpg?v=1775835482",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291429.jpg?v=1775835484",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180151.jpg?v=1767736468",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180152.jpg?v=1767736469",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180150.jpg?v=1767736469",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180149.jpg?v=1767736469",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180147.jpg?v=1767736472",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180148.jpg?v=1767736469",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180153.jpg?v=1767736471",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180154.jpg?v=1767736470",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180158.jpg?v=1767736469"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668548.jpg?v=1767744549",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668545.jpg?v=1767744552",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668547.jpg?v=1767744551",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668546.jpg?v=1767744553",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391801.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391802.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391803.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391805.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391806.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-766387.jpg?v=1767747983",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-766388.jpg?v=1767747985",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-839327.jpg?v=1767750773",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-940139.jpg?v=1767755001",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-940138.jpg?v=1767755002"
      ],
-     "name": "USWE Outlander XC 2L Hydration Pack",
-     "part": "Packs",
-     "price_new": "87.99",
-     "price_old": "109.99",
-     "product_type": "Hydration Packs",
+     "name": "Faction Ski Poles",
+     "part": "Poles",
+     "price_new": "66.15",
+     "price_old": "105.00",
+     "product_type": "Ski Poles",
      "store": "evo",
      "technical_offers": [
       {
        "available": true,
-       "compare": 109.99,
-       "price": 87.99,
+       "compare": 105.0,
+       "price": 66.15,
        "specs": {},
-       "variant_id": 46153226977430
+       "variant_id": 46101365915798
       }
      ],
-     "url": "https://www.evo.com/products/270734-uswe-outlander-xc-2l-hydration-pack"
+     "url": "https://www.evo.com/products/162541-faction-ski-poles-2026"
     },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "Check store",
-     "brand": "Uswe",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291432.jpg?v=1775835482",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291432.jpg?v=1775835482",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291449.jpg?v=1775835483",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291428.jpg?v=1775835483",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291451.jpg?v=1775835484",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180159.jpg?v=1767736469",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180161.jpg?v=1767736470",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180157.jpg?v=1767736470",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180160.jpg?v=1767736470",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180155.jpg?v=1767736469",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180156.jpg?v=1767736470"
-     ],
-     "name": "USWE Outlander XC 4L Hydration Pack",
-     "part": "Packs",
-     "price_new": "115.99",
-     "price_old": "144.99",
-     "product_type": "Hydration Packs",
-     "store": "evo",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 115.99,
-       "specs": {},
-       "variant_id": 46153226911894
-      }
-     ],
-     "url": "https://www.evo.com/products/270735-uswe-outlander-xc-4l-hydration-pack"
-    },
-    "type": "new"
-   },
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "Check store",
-     "brand": "Uswe",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180183.jpg?v=1767736470",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180183.jpg?v=1767736470",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180179.jpg?v=1767736471",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180182.jpg?v=1767736470",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180181.jpg?v=1767736472",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180180.jpg?v=1767736470",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180184.jpg?v=1767736471"
-     ],
-     "name": "USWE Waist 6L Hydration Hip Pack",
-     "part": "Packs",
-     "price_new": "71.99",
-     "price_old": "89.99",
-     "product_type": "Hydration Packs",
-     "store": "evo",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 71.99,
-       "specs": {},
-       "variant_id": 46078985502870
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 71.99,
-       "specs": {},
-       "variant_id": 46153226158230
-      }
-     ],
-     "url": "https://www.evo.com/products/270737-uswe-waist-6l-hydration-hip-pack"
-    },
-    "type": "new"
+    "type": "removed"
    }
   ],
   "evo_Protection": [
    {
     "item": {
-     "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "Giro",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917363.jpg?v=1767754035",
+     "brand": "POC",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325109.jpg?v=1784600456",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917363.jpg?v=1767754035",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917364.jpg?v=1767754036",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917365.jpg?v=1767754034",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912357.jpg?v=1767753814",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912432.jpg?v=1767753819",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912431.jpg?v=1767753816",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912440.jpg?v=1767753819",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912436.jpg?v=1767753816",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912441.jpg?v=1767753820",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912434.jpg?v=1767753817",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912437.jpg?v=1767753819",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912438.jpg?v=1767753817",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912442.jpg?v=1767753817",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912439.jpg?v=1767753817",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912443.jpg?v=1767753818",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912444.jpg?v=1767753819",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912449.jpg?v=1767753819",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912446.jpg?v=1767753818",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912448.jpg?v=1767753817",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912445.jpg?v=1767753818",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912450.jpg?v=1767753818",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912454.jpg?v=1767753820",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912447.jpg?v=1767753819",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912453.jpg?v=1767753818",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912455.jpg?v=1767753817",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912451.jpg?v=1767753817",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912452.jpg?v=1767753819",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917370.jpg?v=1767754037",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917373.jpg?v=1767754035",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917366.jpg?v=1767754034",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389963.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389958.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389962.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389964.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389966.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389968.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389967.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389965.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389969.jpg?v=1793307197",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389971.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389972.jpg?v=1793307196",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389970.jpg?v=1793307196"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325109.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325116.jpg?v=1784600459",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325113.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325142.jpg?v=1784600458",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325114.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325146.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325119.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207422.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207418.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207420.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207417.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207397.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207398.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207399.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207401.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207402.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207403.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207400.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207404.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207405.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207409.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207406.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207407.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207413.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207408.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207411.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207410.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207415.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207412.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207416.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207414.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207425.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207419.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207421.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207426.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207435.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207423.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207424.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207427.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207432.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207429.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207428.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207430.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207433.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207431.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207434.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207439.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207437.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207438.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207436.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207441.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207443.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207440.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207442.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325106.jpg?v=1784600459",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325103.jpg?v=1784600455",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325104.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325107.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325112.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325108.jpg?v=1784600455",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325111.jpg?v=1784600455",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325110.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325123.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325115.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325121.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325117.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325118.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325132.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325120.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325127.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325122.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325125.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325124.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325126.jpg?v=1784600456"
      ],
-     "name": "Giro Moxie Goggles - Women's",
+     "name": "POC Nexal Goggles",
      "part": "Protection",
-     "price_new": "47.98",
-     "price_old": "79.95",
+     "price_new": "135.00",
+     "price_old": "270.00",
      "product_type": "Goggles",
      "protection_type": null,
      "store": "evo",
      "technical_offers": [
       {
        "available": true,
-       "compare": 79.95,
-       "price": 47.98,
+       "compare": 270.0,
+       "price": 135.0,
        "specs": {
         "age": [
          "Adult"
-        ],
-        "goggle_size": [
-         "Small"
         ],
         "protects": [
          "Goggles"
         ]
        },
-       "variant_id": 67651744202902
-      },
-      {
-       "available": true,
-       "compare": 79.95,
-       "price": 47.98,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "goggle_size": [
-         "Small"
-        ],
-        "protects": [
-         "Goggles"
-        ]
-       },
-       "variant_id": 67651744235670
-      },
-      {
-       "available": true,
-       "compare": 79.95,
-       "price": 47.98,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "goggle_size": [
-         "Small"
-        ],
-        "protects": [
-         "Goggles"
-        ]
-       },
-       "variant_id": 67651744268438
+       "variant_id": 46152925053078
       }
      ],
      "technical_specs": {
       "age": [
        "Adult"
       ],
-      "goggle_size": [
-       "Small"
-      ],
       "protects": [
        "Goggles"
       ]
      },
-     "url": "https://www.evo.com/products/193239-giro-moxie-goggles-women-s"
+     "url": "https://www.evo.com/products/268617-poc-nexal-goggles"
     },
-    "type": "new"
+    "type": "removed"
    }
   ],
   "evo_Skis": [
@@ -382,85 +1749,134 @@
      "at_all_time_low": false,
      "availability": "Check store",
      "brand": "Armada",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270900.jpg?v=1770248658",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182480.jpg?v=1767736558",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270900.jpg?v=1770248658",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270897.jpg?v=1770248657",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270898.jpg?v=1770248658",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270895.jpg?v=1770248658",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270896.jpg?v=1770248656",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270894.jpg?v=1770248658",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270902.jpg?v=1770248657",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270899.jpg?v=1770248655"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182480.jpg?v=1767736558",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182479.jpg?v=1767736557",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182478.jpg?v=1767736560",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269715.jpg?v=1769147097",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269712.jpg?v=1769147097",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269713.jpg?v=1769147096"
      ],
      "lengths": [
-      "152",
-      "162",
-      "172"
+      "164"
      ],
-     "name": "Armada Locator 88 Skis 2026",
+     "name": "Armada ARW 84 Skis - Women's 2026",
      "part": "Skis",
-     "price_new": "441.86",
-     "price_old": "699.95",
+     "price_new": "239.95",
+     "price_old": "399.95",
      "product_type": "Skis",
      "store": "evo",
      "technical_offers": [
       {
        "available": true,
-       "compare": 699.95,
-       "price": 441.86,
-       "specs": {
-        "length": [
-         "150–159 cm"
-        ],
-        "rocker": [
-         "Tip Rocker / Camber"
-        ]
-       },
-       "variant_id": 46239880446102
-      },
-      {
-       "available": true,
-       "compare": 699.95,
-       "price": 441.86,
+       "compare": 399.95,
+       "price": 239.95,
        "specs": {
         "length": [
          "160–169 cm"
         ],
-        "rocker": [
-         "Tip Rocker / Camber"
+        "ski_type": [
+         "Park & Freestyle"
         ]
        },
-       "variant_id": 46239946309782
-      },
-      {
-       "available": true,
-       "compare": 699.95,
-       "price": 441.86,
-       "specs": {
-        "length": [
-         "170–179 cm"
-        ],
-        "rocker": [
-         "Tip Rocker / Camber"
-        ]
-       },
-       "variant_id": 46239946342550
+       "variant_id": 46152745844886
       }
      ],
      "technical_specs": {
       "length": [
-       "150–159 cm",
-       "160–169 cm",
-       "170–179 cm"
+       "160–169 cm"
       ],
-      "rocker": [
-       "Tip Rocker / Camber"
+      "ski_type": [
+       "Park & Freestyle"
       ]
      },
-     "url": "https://www.evo.com/products/284007-armada-locator-88-skis-2026"
+     "url": "https://www.evo.com/products/267820-armada-arw-84-skis-women-s-2026"
     },
     "type": "new"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Rossignol",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139319.jpg?v=1767734732",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139319.jpg?v=1767734732",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139315.jpg?v=1767734732",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139317.jpg?v=1767734734",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139314.jpg?v=1767734733",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139313.jpg?v=1767734732"
+     ],
+     "lengths": [
+      "164"
+     ],
+     "name": "Rossignol Sender 94 Skis 2025",
+     "part": "Skis",
+     "price_new": "244.99",
+     "price_old": "499.95",
+     "product_type": "Skis",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 499.95,
+       "price": 244.99,
+       "specs": {
+        "length": [
+         "160–169 cm"
+        ]
+       },
+       "variant_id": 46149069471894
+      }
+     ],
+     "technical_specs": {
+      "length": [
+       "160–169 cm"
+      ]
+     },
+     "url": "https://www.evo.com/products/255531-rossignol-sender-94-skis-2025"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Nordica",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182501.jpg?v=1767736558",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182501.jpg?v=1767736558",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182499.jpg?v=1767736558"
+     ],
+     "lengths": [
+      "160"
+     ],
+     "name": "Nordica Enforcer 80 S Skis - Kids' 2026",
+     "part": "Skis",
+     "price_new": "239.99",
+     "price_old": "399.99",
+     "product_type": "Skis",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 399.99,
+       "price": 239.99,
+       "specs": {
+        "length": [
+         "160–169 cm"
+        ]
+       },
+       "variant_id": 46152107491478
+      }
+     ],
+     "technical_specs": {
+      "length": [
+       "160–169 cm"
+      ]
+     },
+     "url": "https://www.evo.com/products/266501-nordica-enforcer-80-s-skis-kids-2026"
+    },
+    "type": "removed"
    }
   ]
  },
@@ -482,6 +1898,38 @@
       "price": 190.24,
       "store": "evo",
       "url": "https://www.evo.com/products/242022-nordica-unlimited-95-w-dyn-ski-boots-women-s-2025"
+     }
+    ],
+    "part": "Boots"
+   },
+   {
+    "cheapest_price": 294.99,
+    "key": "sport|Boots|atomic|130|boa|gw|hawx|prime",
+    "label": "Atomic hawx prime 130 boa gw",
+    "offers": [
+     {
+      "name": "Atomic Hawx Prime 130 S Boa Mens Ski Boots 2026",
+      "price": 439.94,
+      "store": "Aspen Ski and Board",
+      "url": "https://aspenskiandboard.com/products/atomic-hawx-prime-130-s-boa-mens-ski-boots-2026"
+     },
+     {
+      "name": "Atomic Hawx Prime 130 S BOA Ski Boot 2027",
+      "price": 899.95,
+      "store": "Gear West",
+      "url": "https://www.gearwest.com/products/atomic-w27-hawx-prime-130-s-boa"
+     },
+     {
+      "name": "Atomic Hawx Prime 130 S BOA Ski Boots 2026",
+      "price": 539.95,
+      "store": "Skipro",
+      "url": "https://skipro.com/products/hawx-prime-130-s-boa-boot-56w"
+     },
+     {
+      "name": "Atomic Hawx Prime 130 S BOA GW Ski Boots 2025",
+      "price": 294.99,
+      "store": "evo",
+      "url": "https://www.evo.com/products/254263-atomic-hawx-prime-130-s-boa-gw-ski-boots-2025"
      }
     ],
     "part": "Boots"
@@ -609,32 +2057,6 @@
     "part": "Boots"
    },
    {
-    "cheapest_price": 439.94,
-    "key": "sport|Boots|atomic|130|boa|hawx|prime",
-    "label": "Atomic hawx prime 130 boa",
-    "offers": [
-     {
-      "name": "Atomic Hawx Prime 130 S Boa Mens Ski Boots 2026",
-      "price": 439.94,
-      "store": "Aspen Ski and Board",
-      "url": "https://aspenskiandboard.com/products/atomic-hawx-prime-130-s-boa-mens-ski-boots-2026"
-     },
-     {
-      "name": "Atomic Hawx Prime 130 S BOA Ski Boot 2027",
-      "price": 899.95,
-      "store": "Gear West",
-      "url": "https://www.gearwest.com/products/atomic-w27-hawx-prime-130-s-boa"
-     },
-     {
-      "name": "Atomic Hawx Prime 130 S BOA Ski Boots 2026",
-      "price": 539.95,
-      "store": "Skipro",
-      "url": "https://skipro.com/products/hawx-prime-130-s-boa-boot-56w"
-     }
-    ],
-    "part": "Boots"
-   },
-   {
     "cheapest_price": 419.97,
     "key": "sport|Boots|k2|110|boa|recon|zonal",
     "label": "K2 recon 110 zonal boa",
@@ -700,50 +2122,6 @@
       "price": 273.95,
       "store": "evo",
       "url": "https://www.evo.com/products/254277-atomic-hawx-prime-105-s-boa-w-gw-ski-boots-women-s-2026"
-     }
-    ],
-    "part": "Boots"
-   },
-   {
-    "cheapest_price": 175.27,
-    "key": "sport|Boots|k2|95|anthem|boa",
-    "label": "K2 anthem 95 boa",
-    "offers": [
-     {
-      "name": "K2 Anthem 95 BOA Womens Ski Boots 2026",
-      "price": 419.97,
-      "store": "Aspen Ski and Board",
-      "url": "https://aspenskiandboard.com/products/k2-anthem-95-boa-womens-ski-boots-2026"
-     },
-     {
-      "name": "K2 Anthem 95 BOA Ski Boots Womens",
-      "price": 299.97,
-      "store": "Christy Sports",
-      "url": "https://www.christysports.com/product/k2-anthem-95-boa-ski-boots-womens/1046548.html"
-     },
-     {
-      "name": "2026 K2 Anthem 95 BOA Women's Ski Boots",
-      "price": 419.97,
-      "store": "Ski Essentials",
-      "url": "https://www.skiessentials.com/products/2026-k2-anthem-95-boa-women-s-ski-boots-ks251336"
-     },
-     {
-      "name": "K2 Women's Anthem 95 BOA Ski Boot 2024",
-      "price": 309.95,
-      "store": "Skipro",
-      "url": "https://skipro.com/products/k2_ladies_anthem_95_boa_ski_boot"
-     },
-     {
-      "name": "K2 Anthem 95 BOA® Women's Ski Boots",
-      "price": 599.95,
-      "store": "The House",
-      "url": "https://www.the-house.com/1150747.html"
-     },
-     {
-      "name": "K2 Anthem 95 BOA Ski Boots - Women's 2025",
-      "price": 175.27,
-      "store": "evo",
-      "url": "https://www.evo.com/products/252813-k2-anthem-95-boa-ski-boots-women-s-2025"
      }
     ],
     "part": "Boots"
@@ -1173,21 +2551,45 @@
     "part": "Boots"
    },
    {
-    "cheapest_price": 89.99,
-    "key": "sport|Boots|salomon|60|access|qst",
-    "label": "Salomon qst access 60",
+    "cheapest_price": 299.97,
+    "key": "sport|Boots|k2|95|anthem|boa",
+    "label": "K2 anthem 95 boa",
     "offers": [
      {
-      "name": "Salomon QST Access 60 Women's Ski Boots",
-      "price": 379.95,
-      "store": "The House",
-      "url": "https://www.the-house.com/1150063.html"
+      "name": "K2 Anthem 95 BOA Womens Ski Boots 2026",
+      "price": 419.97,
+      "store": "Aspen Ski and Board",
+      "url": "https://aspenskiandboard.com/products/k2-anthem-95-boa-womens-ski-boots-2026"
      },
      {
-      "name": "Salomon QST Access 60 W Ski Boots - Women's 2025",
-      "price": 89.99,
+      "name": "K2 Anthem 95 BOA Ski Boots Womens",
+      "price": 299.97,
+      "store": "Christy Sports",
+      "url": "https://www.christysports.com/product/k2-anthem-95-boa-ski-boots-womens/1046548.html"
+     },
+     {
+      "name": "2026 K2 Anthem 95 BOA Women's Ski Boots",
+      "price": 419.97,
+      "store": "Ski Essentials",
+      "url": "https://www.skiessentials.com/products/2026-k2-anthem-95-boa-women-s-ski-boots-ks251336"
+     },
+     {
+      "name": "K2 Women's Anthem 95 BOA Ski Boot 2024",
+      "price": 309.95,
+      "store": "Skipro",
+      "url": "https://skipro.com/products/k2_ladies_anthem_95_boa_ski_boot"
+     },
+     {
+      "name": "K2 Anthem 95 BOA® Women's Ski Boots",
+      "price": 599.95,
+      "store": "The House",
+      "url": "https://www.the-house.com/1150747.html"
+     },
+     {
+      "name": "K2 Anthem 95 BOA Ski Boots - Women's 2026",
+      "price": 419.97,
       "store": "evo",
-      "url": "https://www.evo.com/products/238161-salomon-qst-access-60-w-ski-boots-women-s-2025"
+      "url": "https://www.evo.com/products/266104-k2-anthem-95-boa-ski-boots-women-s-2026"
      }
     ],
     "part": "Boots"
@@ -1687,26 +3089,6 @@
     "part": "Boots"
    },
    {
-    "cheapest_price": 139.97,
-    "key": "sport|Boots|salomon|70|access|gw|qst",
-    "label": "Salomon qst access 70 gw",
-    "offers": [
-     {
-      "name": "Salomon QST Access 70 T Ski Boots Junior",
-      "price": 139.97,
-      "store": "Christy Sports",
-      "url": "https://www.christysports.com/product/salomon-qst-access-70-t-ski-boots-junior/8105833.html"
-     },
-     {
-      "name": "Salomon QST Access 70 T GW Youth Ski Boots",
-      "price": 279.95,
-      "store": "The House",
-      "url": "https://www.the-house.com/1150085.html"
-     }
-    ],
-    "part": "Boots"
-   },
-   {
     "cheapest_price": 119.94,
     "key": "sport|Boots|dalbello|65|ls|max|veloce",
     "label": "Dalbello veloce max 65 ls",
@@ -1939,7 +3321,7 @@
      },
      {
       "name": "Atomic Hawx Magna 80 Ski Boots 2026",
-      "price": 233.05,
+      "price": 251.95,
       "store": "evo",
       "url": "https://www.evo.com/products/268249-atomic-hawx-magna-80-ski-boots-2026"
      }
@@ -2757,32 +4139,6 @@
     "part": "Boots"
    },
    {
-    "cheapest_price": 459.94,
-    "key": "sport|Boots|atomic|110|boa|gw|hawx|prime|xtd",
-    "label": "Atomic hawx prime xtd 110 boa gw",
-    "offers": [
-     {
-      "name": "Atomic Hawx Prime XTD 110 Boa Mens Ski Boots 2026",
-      "price": 459.94,
-      "store": "Aspen Ski and Board",
-      "url": "https://aspenskiandboard.com/products/atomic-hawx-prime-xtd-110-boa-mens-ski-boots-2026"
-     },
-     {
-      "name": "Atomic Hawx Prime XTD 110 Boa Ski Boot 2026",
-      "price": 479.95,
-      "store": "Skipro",
-      "url": "https://skipro.com/products/hawx-prime-xtd-110-boa-bt-45w"
-     },
-     {
-      "name": "Atomic Hawx Prime XTD 110 BOA GW Alpine Touring Ski Boots 2026",
-      "price": 497.65,
-      "store": "evo",
-      "url": "https://www.evo.com/products/254251-atomic-hawx-prime-xtd-110-boa-gw-alpine-touring-ski-boots-2026"
-     }
-    ],
-    "part": "Boots"
-   },
-   {
     "cheapest_price": 379.95,
     "key": "sport|Boots|atomic|110x|boa|hawx|prime",
     "label": "Atomic hawx prime 110x boa",
@@ -2898,6 +4254,26 @@
       "price": 142.95,
       "store": "evo",
       "url": "https://www.evo.com/products/267408-nordica-speedmachine-j4-ski-boots-kids-2026"
+     }
+    ],
+    "part": "Boots"
+   },
+   {
+    "cheapest_price": 459.94,
+    "key": "sport|Boots|atomic|110|boa|hawx|prime|xtd",
+    "label": "Atomic hawx prime xtd 110 boa",
+    "offers": [
+     {
+      "name": "Atomic Hawx Prime XTD 110 Boa Mens Ski Boots 2026",
+      "price": 459.94,
+      "store": "Aspen Ski and Board",
+      "url": "https://aspenskiandboard.com/products/atomic-hawx-prime-xtd-110-boa-mens-ski-boots-2026"
+     },
+     {
+      "name": "Atomic Hawx Prime XTD 110 Boa Ski Boot 2026",
+      "price": 479.95,
+      "store": "Skipro",
+      "url": "https://skipro.com/products/hawx-prime-xtd-110-boa-bt-45w"
      }
     ],
     "part": "Boots"
@@ -3541,26 +4917,6 @@
     "part": "Helmets"
    },
    {
-    "cheapest_price": 89.95,
-    "key": "sport|Helmets|smith|altus|mips",
-    "label": "Smith altus mips",
-    "offers": [
-     {
-      "name": "Smith Altus MIPS Helmet",
-      "price": 89.95,
-      "store": "Ski Essentials",
-      "url": "https://www.skiessentials.com/products/smith-altus-mips-helmet"
-     },
-     {
-      "name": "Smith Altus MIPS Helmet",
-      "price": 129.0,
-      "store": "evo",
-      "url": "https://www.evo.com/products/179298-smith-altus-mips-helmet"
-     }
-    ],
-    "part": "Helmets"
-   },
-   {
     "cheapest_price": 62.0,
     "key": "sport|Helmets|smith|allure|mips",
     "label": "Smith allure mips",
@@ -3602,12 +4958,6 @@
       "price": 119.95,
       "store": "Skipro",
       "url": "https://skipro.com/products/smith_mission_mips_helmet_2023"
-     },
-     {
-      "name": "Smith Mission Mips® - Past Season",
-      "price": 87.0,
-      "store": "Smith",
-      "url": "https://www.smithoptics.com/products/mission-mips-r-sale"
      }
     ],
     "part": "Helmets"
@@ -3790,6 +5140,26 @@
       "price": 119.95,
       "store": "Ski Essentials",
       "url": "https://www.skiessentials.com/products/smith-vida-mips-helmet"
+     }
+    ],
+    "part": "Helmets"
+   },
+   {
+    "cheapest_price": 76.0,
+    "key": "sport|Helmets|smith|altus|mips",
+    "label": "Smith altus mips",
+    "offers": [
+     {
+      "name": "Smith Altus MIPS Helmet",
+      "price": 89.95,
+      "store": "Ski Essentials",
+      "url": "https://www.skiessentials.com/products/smith-altus-mips-helmet"
+     },
+     {
+      "name": "Smith Altus MIPS Helmet",
+      "price": 76.0,
+      "store": "evo",
+      "url": "https://www.evo.com/products/179298-smith-altus-mips-helmet"
      }
     ],
     "part": "Helmets"
@@ -4010,12 +5380,6 @@
       "price": 179.95,
       "store": "Ski Essentials",
       "url": "https://www.skiessentials.com/products/smith-vantage-2-mips-helmet-e00563"
-     },
-     {
-      "name": "Smith Vantage 2 Mips® - Past Season",
-      "price": 177.0,
-      "store": "Smith",
-      "url": "https://www.smithoptics.com/products/vantage-2-mips-r-sale"
      },
      {
       "name": "Smith Vantage 2 MIPS Helmet",
@@ -4749,32 +6113,6 @@
     "part": "Skis"
    },
    {
-    "cheapest_price": 579.95,
-    "key": "sport|Skis|stockli|88|nela|stockli",
-    "label": "Stöckli stockli nela 88",
-    "offers": [
-     {
-      "name": "Stockli Nela 88 Skis Womens",
-      "price": 1023.97,
-      "store": "Christy Sports",
-      "url": "https://www.christysports.com/product/stockli-nela-88-skis-womens/8112332.html"
-     },
-     {
-      "name": "2024 Stockli Nela 88 Women's Skis",
-      "price": 579.95,
-      "store": "Ski Essentials",
-      "url": "https://www.skiessentials.com/products/2024-stockli-nela-88-women-s-skis"
-     },
-     {
-      "name": "Stöckli Nela 88 Skis - Women's 2026",
-      "price": 833.95,
-      "store": "evo",
-      "url": "https://www.evo.com/products/255999-stockli-nela-88-skis-women-s-2026"
-     }
-    ],
-    "part": "Skis"
-   },
-   {
     "cheapest_price": 419.97,
     "key": "sport|Skis|k2|96c|mindbender",
     "label": "K2 mindbender 96c",
@@ -4850,6 +6188,26 @@
       "price": 169.95,
       "store": "Ski Essentials",
       "url": "https://www.skiessentials.com/products/2023-nordica-santa-ana-93-women-s-skis"
+     }
+    ],
+    "part": "Skis"
+   },
+   {
+    "cheapest_price": 833.95,
+    "key": "sport|Skis|stockli|88|nela|stockli",
+    "label": "Stöckli stockli nela 88",
+    "offers": [
+     {
+      "name": "Stockli Nela 88 Skis Womens",
+      "price": 1023.97,
+      "store": "Christy Sports",
+      "url": "https://www.christysports.com/product/stockli-nela-88-skis-womens/8112332.html"
+     },
+     {
+      "name": "Stöckli Nela 88 Skis - Women's 2026",
+      "price": 833.95,
+      "store": "evo",
+      "url": "https://www.evo.com/products/255999-stockli-nela-88-skis-women-s-2026"
      }
     ],
     "part": "Skis"
@@ -5779,446 +7137,1850 @@
     "part": "Skis"
    }
   ],
-  "drops": [],
+  "drops": [
+   {
+    "at_all_time_low": true,
+    "delta": 30.03,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "Marker",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248709.jpg?v=1767739102",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1241128.jpg?v=1767738797",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1241129.jpg?v=1767738798",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119063.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119064.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119067.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119061.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119062.jpg?v=1767733780",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119066.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119069.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119065.jpg?v=1767733782",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119068.jpg?v=1767733781",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-707433.jpg?v=1767746088",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977995.jpg?v=1767756485",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977993.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977994.jpg?v=1767756483",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-979349.jpg?v=1767756532",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-979348.jpg?v=1767756532",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977991.jpg?v=1767756485",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977984.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977980.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981941.jpg?v=1767756638",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981944.jpg?v=1767756635",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977990.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977989.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977986.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981942.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981945.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977988.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977985.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977987.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981947.jpg?v=1767756638",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981943.jpg?v=1767756636",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977997.jpg?v=1767756486",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977992.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-977996.jpg?v=1767756484",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981946.jpg?v=1767756635",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-981948.jpg?v=1767756637",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011359.jpg?v=1767729632",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011364.jpg?v=1767729631",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1011365.jpg?v=1767729633",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188514.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188512.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188516.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188509.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188511.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188515.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188510.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188513.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188521.jpg?v=1767736762",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188517.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188518.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188520.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188519.jpg?v=1767736761",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188523.jpg?v=1767736760",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206133.jpg?v=1767737373",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206132.jpg?v=1767737374"
+     ],
+     "name": "Marker Griffon 13 ID Ski Bindings",
+     "part": "Bindings",
+     "price_new": "179.96",
+     "price_old": "299.99",
+     "product_type": "Alpine Ski Bindings",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 179.96,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107395031190
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394834582
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394867350
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394900118
+      },
+      {
+       "available": true,
+       "compare": 299.99,
+       "price": 249.97,
+       "specs": {
+        "din": [
+         "11–13"
+        ]
+       },
+       "variant_id": 46107394932886
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "11–13"
+      ]
+     },
+     "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings"
+    },
+    "name": "Marker Griffon 13 ID Ski Bindings",
+    "new": "179.96",
+    "old": "209.99",
+    "percent_vs_prior": 14.3,
+    "type": "price_drop",
+    "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 53.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "Smith",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923322.jpg?v=1767754293",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923322.jpg?v=1767754293",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-982248.jpg?v=1767756649",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-820472.jpg?v=1767750040",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713019.jpg?v=1767746311",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052750.jpg?v=1767731281",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052753.jpg?v=1767731279",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052751.jpg?v=1767731281",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-982247.jpg?v=1767756648",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-982246.jpg?v=1767756647",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713023.jpg?v=1767746310",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069983.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069984.jpg?v=1767731918",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069985.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069986.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069987.jpg?v=1767731918",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069988.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713024.jpg?v=1767746310",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713025.jpg?v=1767746309",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713026.jpg?v=1767746309",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-820474.jpg?v=1767750040",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923321.jpg?v=1767754293",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026259.jpg?v=1767730234",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069994.jpg?v=1767731920",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069990.jpg?v=1767731920",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026261.jpg?v=1767730237",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069992.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069991.jpg?v=1767731921",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026262.jpg?v=1767730235",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069995.jpg?v=1767731920",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069993.jpg?v=1767731920",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026263.jpg?v=1767730236",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069996.jpg?v=1767731919",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1069989.jpg?v=1767731918",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096608.jpg?v=1767732908",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096609.jpg?v=1767732906",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096607.jpg?v=1767732905",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096600.jpg?v=1767732908",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096597.jpg?v=1767732905",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096596.jpg?v=1767732907",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348348.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348347.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348345.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348353.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348352.jpg?v=1788987261",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348351.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096601.jpg?v=1767732908",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096602.jpg?v=1767732907",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096603.jpg?v=1767732907",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096606.jpg?v=1767732907",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096605.jpg?v=1767732906",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096604.jpg?v=1767732906",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259970.jpg?v=1767739535",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259971.jpg?v=1767739534",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259968.jpg?v=1767739535",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348346.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348350.jpg?v=1788987260",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348349.jpg?v=1788987260"
+     ],
+     "name": "Smith Altus MIPS Helmet",
+     "part": "Helmets",
+     "price_new": "76.00",
+     "price_old": "190.00",
+     "product_type": "Ski and Snowboard Helmets",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 190.0,
+       "price": 76.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46108510781590
+      },
+      {
+       "available": true,
+       "compare": 215.0,
+       "price": 129.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46108511568022
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.evo.com/products/179298-smith-altus-mips-helmet"
+    },
+    "name": "Smith Altus MIPS Helmet",
+    "new": "76.00",
+    "old": "129.00",
+    "percent_vs_prior": 41.1,
+    "type": "price_drop",
+    "url": "https://www.evo.com/products/179298-smith-altus-mips-helmet"
+   }
+  ],
   "new_items": [
    {
     "at_all_time_low": false,
     "availability": "Check store",
     "brand": "Armada",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270900.jpg?v=1770248658",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182480.jpg?v=1767736558",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270900.jpg?v=1770248658",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270897.jpg?v=1770248657",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270898.jpg?v=1770248658",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270895.jpg?v=1770248658",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270896.jpg?v=1770248656",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270894.jpg?v=1770248658",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270902.jpg?v=1770248657",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1270899.jpg?v=1770248655"
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182480.jpg?v=1767736558",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182479.jpg?v=1767736557",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182478.jpg?v=1767736560",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269715.jpg?v=1769147097",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269712.jpg?v=1769147097",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269713.jpg?v=1769147096"
     ],
     "lengths": [
-     "152",
-     "162",
-     "172"
+     "164"
     ],
-    "name": "Armada Locator 88 Skis 2026",
+    "name": "Armada ARW 84 Skis - Women's 2026",
     "part": "Skis",
-    "price_new": "441.86",
-    "price_old": "699.95",
+    "price_new": "239.95",
+    "price_old": "399.95",
     "product_type": "Skis",
     "store": "evo",
     "technical_offers": [
      {
       "available": true,
-      "compare": 699.95,
-      "price": 441.86,
-      "specs": {
-       "length": [
-        "150–159 cm"
-       ],
-       "rocker": [
-        "Tip Rocker / Camber"
-       ]
-      },
-      "variant_id": 46239880446102
-     },
-     {
-      "available": true,
-      "compare": 699.95,
-      "price": 441.86,
+      "compare": 399.95,
+      "price": 239.95,
       "specs": {
        "length": [
         "160–169 cm"
        ],
-       "rocker": [
-        "Tip Rocker / Camber"
+       "ski_type": [
+        "Park & Freestyle"
        ]
       },
-      "variant_id": 46239946309782
-     },
-     {
-      "available": true,
-      "compare": 699.95,
-      "price": 441.86,
-      "specs": {
-       "length": [
-        "170–179 cm"
-       ],
-       "rocker": [
-        "Tip Rocker / Camber"
-       ]
-      },
-      "variant_id": 46239946342550
+      "variant_id": 46152745844886
      }
     ],
     "technical_specs": {
      "length": [
-      "150–159 cm",
-      "160–169 cm",
-      "170–179 cm"
+      "160–169 cm"
      ],
-     "rocker": [
-      "Tip Rocker / Camber"
+     "ski_type": [
+      "Park & Freestyle"
      ]
     },
-    "url": "https://www.evo.com/products/284007-armada-locator-88-skis-2026"
+    "url": "https://www.evo.com/products/267820-armada-arw-84-skis-women-s-2026"
    },
    {
     "at_all_time_low": false,
     "availability": "Check store",
-    "brand": "Giro",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917363.jpg?v=1767754035",
+    "brand": "Tecnica",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105369.jpg?v=1767733202",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917363.jpg?v=1767754035",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917364.jpg?v=1767754036",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917365.jpg?v=1767754034",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912357.jpg?v=1767753814",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912432.jpg?v=1767753819",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912431.jpg?v=1767753816",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912440.jpg?v=1767753819",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912436.jpg?v=1767753816",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912441.jpg?v=1767753820",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912434.jpg?v=1767753817",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912437.jpg?v=1767753819",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912438.jpg?v=1767753817",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912442.jpg?v=1767753817",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912439.jpg?v=1767753817",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912443.jpg?v=1767753818",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912444.jpg?v=1767753819",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912449.jpg?v=1767753819",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912446.jpg?v=1767753818",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912448.jpg?v=1767753817",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912445.jpg?v=1767753818",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912450.jpg?v=1767753818",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912454.jpg?v=1767753820",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912447.jpg?v=1767753819",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912453.jpg?v=1767753818",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912455.jpg?v=1767753817",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912451.jpg?v=1767753817",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-912452.jpg?v=1767753819",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917370.jpg?v=1767754037",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917373.jpg?v=1767754035",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917366.jpg?v=1767754034",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389963.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389958.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389962.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389964.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389966.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389968.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389967.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389965.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389969.jpg?v=1793307197",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389971.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389972.jpg?v=1793307196",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389970.jpg?v=1793307196"
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105369.jpg?v=1767733202",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105366.jpg?v=1767733203",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105364.jpg?v=1767733202",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105367.jpg?v=1767733202",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1105368.jpg?v=1767733203"
     ],
-    "name": "Giro Moxie Goggles - Women's",
-    "part": "Protection",
-    "price_new": "47.98",
-    "price_old": "79.95",
-    "product_type": "Goggles",
-    "protection_type": null,
+    "name": "Tecnica Mach1 MV 130 Ski Boots 2026",
+    "part": "Boots",
+    "price_new": "509.99",
+    "price_old": "849.99",
+    "product_type": "Alpine Ski Boots",
+    "sizes": [
+     "29.5"
+    ],
     "store": "evo",
     "technical_offers": [
      {
       "available": true,
-      "compare": 79.95,
-      "price": 47.98,
+      "compare": 849.99,
+      "price": 509.99,
       "specs": {
-       "age": [
-        "Adult"
+       "flex": [
+        "Very stiff (over 120)"
        ],
-       "goggle_size": [
-        "Small"
+       "last": [
+        "Medium (99–101 mm)"
        ],
-       "protects": [
-        "Goggles"
+       "mondo": [
+        "29.5"
        ]
       },
-      "variant_id": 67651744202902
-     },
+      "variant_id": 46147223879830
+     }
+    ],
+    "technical_specs": {
+     "flex": [
+      "Very stiff (over 120)"
+     ],
+     "last": [
+      "Medium (99–101 mm)"
+     ],
+     "mondo": [
+      "29.5"
+     ]
+    },
+    "url": "https://www.evo.com/products/253073-tecnica-mach1-mv-130-ski-boots-2026"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Atomic",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1262935.jpg?v=1767739650",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1262935.jpg?v=1767739650",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1262934.jpg?v=1767739651",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1262933.jpg?v=1767739651"
+    ],
+    "name": "Atomic Hawx Prime 130 S BOA GW Ski Boots 2025",
+    "part": "Boots",
+    "price_new": "294.99",
+    "price_old": "849.95",
+    "product_type": "Alpine Ski Boots",
+    "sizes": [
+     "26.5"
+    ],
+    "store": "evo",
+    "technical_offers": [
      {
       "available": true,
-      "compare": 79.95,
-      "price": 47.98,
+      "compare": 849.95,
+      "price": 294.99,
       "specs": {
-       "age": [
-        "Adult"
+       "flex": [
+        "Very stiff (over 120)"
        ],
-       "goggle_size": [
-        "Small"
+       "mondo": [
+        "26.5"
        ],
-       "protects": [
-        "Goggles"
+       "sole": [
+        "GripWalk"
        ]
       },
-      "variant_id": 67651744235670
-     },
+      "variant_id": 46148414439574
+     }
+    ],
+    "technical_specs": {
+     "flex": [
+      "Very stiff (over 120)"
+     ],
+     "mondo": [
+      "26.5"
+     ],
+     "sole": [
+      "GripWalk"
+     ]
+    },
+    "url": "https://www.evo.com/products/254263-atomic-hawx-prime-130-s-boa-gw-ski-boots-2025"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Lange",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1254514.jpg?v=1777044904",
+    "name": "Lange RSJ 65 Ski Boots - Kids' 2024",
+    "part": "Boots",
+    "price_new": "49.99",
+    "price_old": "275.00",
+    "product_type": "Alpine Ski Boots",
+    "sizes": [
+     "19.5"
+    ],
+    "store": "evo",
+    "technical_offers": [
      {
       "available": true,
-      "compare": 79.95,
-      "price": 47.98,
+      "compare": 275.0,
+      "price": 49.99,
+      "specs": {
+       "flex": [
+        "Soft (under 80)"
+       ],
+       "mondo": [
+        "19.5"
+       ]
+      },
+      "variant_id": 46348063080598
+     }
+    ],
+    "technical_specs": {
+     "flex": [
+      "Soft (under 80)"
+     ],
+     "mondo": [
+      "19.5"
+     ]
+    },
+    "url": "https://www.evo.com/products/246833-lange-rsj-65-ski-boots-kids-2024"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "Check store",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-881949.jpg?v=1767752449",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-881949.jpg?v=1767752449",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1087823.jpg?v=1767732577",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1078058.jpg?v=1767732209"
+    ],
+    "name": "evo Enduro Ski Poles 2025",
+    "part": "Poles",
+    "price_new": "34.99",
+    "price_old": "89.95",
+    "product_type": "Ski Poles",
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 89.95,
+      "price": 34.99,
+      "specs": {},
+      "variant_id": 46112085147798
+     }
+    ],
+    "url": "https://www.evo.com/products/183612-evo-enduro-ski-poles-2025"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Atomic",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304077.jpg?v=1780948050",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304077.jpg?v=1780948050",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304078.jpg?v=1780948050"
+    ],
+    "name": "Atomic Savor Helmet",
+    "part": "Helmets",
+    "price_new": "75.55",
+    "price_old": "140.00",
+    "product_type": "Ski and Snowboard Helmets",
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 140.0,
+      "price": 75.55,
       "specs": {
        "age": [
         "Adult"
        ],
-       "goggle_size": [
-        "Small"
+       "helmet_style": [
+        "Snow"
+       ],
+       "prot_size": [
+        "M"
        ],
        "protects": [
-        "Goggles"
+        "Helmets"
        ]
       },
-      "variant_id": 67651744268438
+      "variant_id": 46412373033110
      }
     ],
     "technical_specs": {
      "age": [
       "Adult"
      ],
-     "goggle_size": [
-      "Small"
+     "helmet_style": [
+      "Snow"
+     ],
+     "prot_size": [
+      "M"
      ],
      "protects": [
-      "Goggles"
+      "Helmets"
      ]
     },
-    "url": "https://www.evo.com/products/193239-giro-moxie-goggles-women-s"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "brand": "Helly Hansen",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124133.jpg?v=1767733998",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124133.jpg?v=1767733998",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124132.jpg?v=1767733998",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124135.jpg?v=1767733997",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124141.jpg?v=1767733998",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124140.jpg?v=1767733999",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124143.jpg?v=1767734000",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124136.jpg?v=1767733998",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124131.jpg?v=1767733997",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124134.jpg?v=1767734000",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124138.jpg?v=1767733998",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124137.jpg?v=1767734000",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1124139.jpg?v=1767733998"
-    ],
-    "name": "Helly Hansen Fauna Pack - Kids'",
-    "part": "Packs",
-    "price_new": "38.50",
-    "price_old": "55.00",
-    "product_type": "Day Packs",
-    "store": "evo",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 55.0,
-      "price": 38.5,
-      "specs": {},
-      "variant_id": 46146429747350
-     }
-    ],
-    "url": "https://www.evo.com/products/252020-helly-hansen-fauna-pack-kids"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "brand": "Uswe",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291433.jpg?v=1775835483",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291433.jpg?v=1775835483",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291427.jpg?v=1775835483",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291424.jpg?v=1775835483",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291426.jpg?v=1775835482",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291429.jpg?v=1775835484",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180151.jpg?v=1767736468",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180152.jpg?v=1767736469",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180150.jpg?v=1767736469",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180149.jpg?v=1767736469",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180147.jpg?v=1767736472",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180148.jpg?v=1767736469",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180153.jpg?v=1767736471",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180154.jpg?v=1767736470",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180158.jpg?v=1767736469"
-    ],
-    "name": "USWE Outlander XC 2L Hydration Pack",
-    "part": "Packs",
-    "price_new": "87.99",
-    "price_old": "109.99",
-    "product_type": "Hydration Packs",
-    "store": "evo",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 109.99,
-      "price": 87.99,
-      "specs": {},
-      "variant_id": 46153226977430
-     }
-    ],
-    "url": "https://www.evo.com/products/270734-uswe-outlander-xc-2l-hydration-pack"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "brand": "Uswe",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291432.jpg?v=1775835482",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291432.jpg?v=1775835482",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291449.jpg?v=1775835483",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291428.jpg?v=1775835483",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1291451.jpg?v=1775835484",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180159.jpg?v=1767736469",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180161.jpg?v=1767736470",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180157.jpg?v=1767736470",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180160.jpg?v=1767736470",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180155.jpg?v=1767736469",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180156.jpg?v=1767736470"
-    ],
-    "name": "USWE Outlander XC 4L Hydration Pack",
-    "part": "Packs",
-    "price_new": "115.99",
-    "price_old": "144.99",
-    "product_type": "Hydration Packs",
-    "store": "evo",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 144.99,
-      "price": 115.99,
-      "specs": {},
-      "variant_id": 46153226911894
-     }
-    ],
-    "url": "https://www.evo.com/products/270735-uswe-outlander-xc-4l-hydration-pack"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "brand": "Uswe",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180183.jpg?v=1767736470",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180183.jpg?v=1767736470",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180179.jpg?v=1767736471",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180182.jpg?v=1767736470",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180181.jpg?v=1767736472",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180180.jpg?v=1767736470",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1180184.jpg?v=1767736471"
-    ],
-    "name": "USWE Waist 6L Hydration Hip Pack",
-    "part": "Packs",
-    "price_new": "71.99",
-    "price_old": "89.99",
-    "product_type": "Hydration Packs",
-    "store": "evo",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 71.99,
-      "specs": {},
-      "variant_id": 46078985502870
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 71.99,
-      "specs": {},
-      "variant_id": 46153226158230
-     }
-    ],
-    "url": "https://www.evo.com/products/270737-uswe-waist-6l-hydration-hip-pack"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "brand": "Kästle",
-    "image": "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Mounted.jpg?v=1794667583",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Mounted.jpg?v=1794667583",
-     "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Tips.webp?v=1794667596",
-     "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Tip_and_Base.webp?v=1794667612",
-     "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Logo.webp?v=1794667624",
-     "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Tail.webp?v=1794667632",
-     "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Closeup.avif?v=1794667644",
-     "https://cdn.shopify.com/s/files/1/0274/7731/1577/files/Kastle_MX_75_Skis_2024_Vertical.jpg?v=1794667664"
-    ],
-    "lengths": [
-     "165"
-    ],
-    "name": "Kastle MX 75 Skis 2024 (Bindings Included)",
-    "part": "Skis",
-    "price_new": "600.00",
-    "price_old": "1299.99",
-    "product_type": "Skis",
-    "store": "The Pro Ski and Ride",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 1299.99,
-      "price": 600.0,
-      "specs": {
-       "bindings": [
-        "Included"
-       ],
-       "length": [
-        "160–169 cm"
-       ]
-      },
-      "variant_id": 47866275692633
-     }
-    ],
-    "technical_specs": {
-     "bindings": [
-      "Included"
-     ],
-     "length": [
-      "160–169 cm"
-     ]
-    },
-    "url": "https://theproskiandride.com/products/kastle-mx-75-skis-2024-bindings-included"
-   },
-   {
-    "at_all_time_low": true,
-    "availability": "Check store",
-    "brand": "Armada",
-    "gender": "Women",
-    "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw229e9ba0/8201449_000_1.jpg?sw=600&sh=600",
-    "name": "Armada Reliance 92 TI Skis Womens",
-    "part": "Skis",
-    "price_new": "524.97",
-    "price_old": "749.95",
-    "store": "Christy Sports",
-    "technical_offers": [
-     {
-      "available": null,
-      "compare": 749.95,
-      "price": 524.97,
-      "specs": {
-       "gender": [
-        "Women"
-       ]
-      },
-      "variant_id": "8201449"
-     }
-    ],
-    "technical_specs": {
-     "gender": [
-      "Women"
-     ]
-    },
-    "url": "https://www.christysports.com/product/armada-reliance-92-ti-skis-womens/8201449.html"
+    "url": "https://www.evo.com/products/289333-atomic-savor-helmet"
    }
   ],
-  "removed": []
+  "removed": [
+   [
+    "Utah Ski_Helmets",
+    {
+     "availability": "Check store",
+     "brand": "Smith",
+     "gender": "Kids",
+     "image": "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/E00682-ZW9-Large-2222.jpg?v=1686860698",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/E00682-ZW9-Large-2222.jpg?v=1686860698",
+      "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/E0068218LLARGE.jpg?v=1763403678",
+      "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/E006821IILARGE.jpg?v=1763403678"
+     ],
+     "name": "Smith Holt Jr. Kids Helmet 2024",
+     "part": "Helmets",
+     "price_new": "42.00",
+     "price_old": "70.00",
+     "product_type": "H H J",
+     "store": "Utah Ski",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 70.0,
+       "price": 42.0,
+       "specs": {
+        "age": [
+         "Kids"
+        ],
+        "certification": [
+         "ASTM F2040 (snow)",
+         "CPSC (US bike)",
+         "EN 1077 (EU snow)"
+        ],
+        "gender": [
+         "Kids"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 41274750304315
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Kids"
+      ],
+      "certification": [
+       "ASTM F2040 (snow)",
+       "CPSC (US bike)",
+       "EN 1077 (EU snow)"
+      ],
+      "gender": [
+       "Kids"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.utahskis.com/products/smith-holt-jr-kids-helmet-2024"
+    }
+   ],
+   [
+    "evo_Skis",
+    {
+     "availability": "Check store",
+     "brand": "Rossignol",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139319.jpg?v=1767734732",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139319.jpg?v=1767734732",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139315.jpg?v=1767734732",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139317.jpg?v=1767734734",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139314.jpg?v=1767734733",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1139313.jpg?v=1767734732"
+     ],
+     "lengths": [
+      "164"
+     ],
+     "name": "Rossignol Sender 94 Skis 2025",
+     "part": "Skis",
+     "price_new": "244.99",
+     "price_old": "499.95",
+     "product_type": "Skis",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 499.95,
+       "price": 244.99,
+       "specs": {
+        "length": [
+         "160–169 cm"
+        ]
+       },
+       "variant_id": 46149069471894
+      }
+     ],
+     "technical_specs": {
+      "length": [
+       "160–169 cm"
+      ]
+     },
+     "url": "https://www.evo.com/products/255531-rossignol-sender-94-skis-2025"
+    }
+   ],
+   [
+    "evo_Skis",
+    {
+     "availability": "Check store",
+     "brand": "Nordica",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182501.jpg?v=1767736558",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182501.jpg?v=1767736558",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1182499.jpg?v=1767736558"
+     ],
+     "lengths": [
+      "160"
+     ],
+     "name": "Nordica Enforcer 80 S Skis - Kids' 2026",
+     "part": "Skis",
+     "price_new": "239.99",
+     "price_old": "399.99",
+     "product_type": "Skis",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 399.99,
+       "price": 239.99,
+       "specs": {
+        "length": [
+         "160–169 cm"
+        ]
+       },
+       "variant_id": 46152107491478
+      }
+     ],
+     "technical_specs": {
+      "length": [
+       "160–169 cm"
+      ]
+     },
+     "url": "https://www.evo.com/products/266501-nordica-enforcer-80-s-skis-kids-2026"
+    }
+   ],
+   [
+    "evo_Boots",
+    {
+     "availability": "Check store",
+     "brand": "Salomon",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018139.jpg?v=1767729957",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018139.jpg?v=1767729957",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018142.jpg?v=1767729958",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018140.jpg?v=1767729958",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018137.jpg?v=1767729955",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1018138.jpg?v=1767729955"
+     ],
+     "name": "Salomon QST Access 60 W Ski Boots - Women's 2025",
+     "part": "Boots",
+     "price_new": "89.99",
+     "price_old": "379.95",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "24.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 379.95,
+       "price": 89.99,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "mondo": [
+         "24.5"
+        ]
+       },
+       "variant_id": 46353206378646
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "mondo": [
+       "24.5"
+      ]
+     },
+     "url": "https://www.evo.com/products/238161-salomon-qst-access-60-w-ski-boots-women-s-2025"
+    }
+   ],
+   [
+    "evo_Boots",
+    {
+     "availability": "Check store",
+     "brand": "Atomic",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095789.jpg?v=1767732874",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095789.jpg?v=1767732874",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095788.jpg?v=1767732874",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095787.jpg?v=1767732874"
+     ],
+     "kind": "Touring",
+     "name": "Atomic Hawx Prime XTD 110 BOA GW Alpine Touring Ski Boots 2026",
+     "part": "Boots",
+     "price_new": "497.65",
+     "price_old": "789.95",
+     "product_type": "Alpine Touring Ski Boots",
+     "sizes": [
+      "27.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 789.95,
+       "price": 497.65,
+       "specs": {
+        "flex": [
+         "Stiff (105–120)"
+        ],
+        "mondo": [
+         "27.5"
+        ],
+        "ski_type": [
+         "Backcountry / Touring"
+        ],
+        "sole": [
+         "GripWalk"
+        ],
+        "walk": [
+         "Walk mode"
+        ]
+       },
+       "variant_id": 46148406182038
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Stiff (105–120)"
+      ],
+      "mondo": [
+       "27.5"
+      ],
+      "ski_type": [
+       "Backcountry / Touring"
+      ],
+      "sole": [
+       "GripWalk"
+      ],
+      "walk": [
+       "Walk mode"
+      ]
+     },
+     "url": "https://www.evo.com/products/254251-atomic-hawx-prime-xtd-110-boa-gw-alpine-touring-ski-boots-2026"
+    }
+   ],
+   [
+    "evo_Boots",
+    {
+     "availability": "Check store",
+     "brand": "K2",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099110.jpg?v=1767733005",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099110.jpg?v=1767733005",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099093.jpg?v=1767733003",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099097.jpg?v=1767733003",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1099094.jpg?v=1767733004"
+     ],
+     "name": "K2 Anthem 95 BOA Ski Boots - Women's 2025",
+     "part": "Boots",
+     "price_new": "175.27",
+     "price_old": "599.95",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "22.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 599.95,
+       "price": 175.27,
+       "specs": {
+        "flex": [
+         "Medium (80–100)"
+        ],
+        "mondo": [
+         "22.5"
+        ]
+       },
+       "variant_id": 46078442143894
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Medium (80–100)"
+      ],
+      "mondo": [
+       "22.5"
+      ]
+     },
+     "url": "https://www.evo.com/products/252813-k2-anthem-95-boa-ski-boots-women-s-2025"
+    }
+   ],
+   [
+    "evo_Boots",
+    {
+     "availability": "Check store",
+     "brand": "Lange",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-919604.jpg?v=1767754135",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-919604.jpg?v=1767754135",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-919605.jpg?v=1767754137",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-919606.jpg?v=1767754136"
+     ],
+     "name": "Lange LX 75 HV GW Ski Boots - Women's 2024",
+     "part": "Boots",
+     "price_new": "139.49",
+     "price_old": "379.95",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "22.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 379.95,
+       "price": 139.49,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "last": [
+         "Wide (102 mm and over)"
+        ],
+        "mondo": [
+         "22.5"
+        ],
+        "sole": [
+         "GripWalk"
+        ]
+       },
+       "variant_id": 46077750804630
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "last": [
+       "Wide (102 mm and over)"
+      ],
+      "mondo": [
+       "22.5"
+      ],
+      "sole": [
+       "GripWalk"
+      ]
+     },
+     "url": "https://www.evo.com/products/228675-lange-lx-75-hv-gw-ski-boots-women-s-2024"
+    }
+   ],
+   [
+    "evo_Boots",
+    {
+     "availability": "Check store",
+     "brand": "Tecnica",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1159509.jpg?v=1767735615",
+     "name": "Tecnica Mach1 LV 105 W Ski Boots - Women's 2026",
+     "part": "Boots",
+     "price_new": "528.95",
+     "price_old": "749.99",
+     "product_type": "Alpine Ski Boots",
+     "sizes": [
+      "25.5"
+     ],
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 749.99,
+       "price": 528.95,
+       "specs": {
+        "flex": [
+         "Stiff (105–120)"
+        ],
+        "last": [
+         "Narrow (98 mm and under)"
+        ],
+        "mondo": [
+         "25.5"
+        ]
+       },
+       "variant_id": 46150893797526
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Stiff (105–120)"
+      ],
+      "last": [
+       "Narrow (98 mm and under)"
+      ],
+      "mondo": [
+       "25.5"
+      ]
+     },
+     "url": "https://www.evo.com/products/263297-tecnica-mach1-lv-105-w-ski-boots-women-s-2026"
+    }
+   ],
+   [
+    "evo_Bindings",
+    {
+     "availability": "Check store",
+     "brand": "Armada",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1153220.jpg?v=1767735358",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1153220.jpg?v=1767735358",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269628.jpg?v=1769147092",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269626.jpg?v=1769147091",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1153222.jpg?v=1767735357",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-929432.jpg?v=1767754508",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1176909.jpg?v=1767736348",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1176911.jpg?v=1767736348",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1176904.jpg?v=1767736347",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923863.jpg?v=1767754318",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269621.jpg?v=1769147090",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269625.jpg?v=1769147089",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269623.jpg?v=1769147091",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269629.jpg?v=1769147089",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269627.jpg?v=1769147089",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269624.jpg?v=1769147090",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1269620.jpg?v=1769147091",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1290803.jpg?v=1775681947",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1290802.jpg?v=1775681946"
+     ],
+     "name": "Armada Strive 14 GW Ski Bindings",
+     "part": "Bindings",
+     "price_new": "192.95",
+     "price_old": "279.95",
+     "product_type": "Alpine Ski Bindings",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 279.95,
+       "price": 192.95,
+       "specs": {
+        "din": [
+         "14 and up"
+        ],
+        "sole": [
+         "GripWalk"
+        ]
+       },
+       "variant_id": 46130612109462
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "14 and up"
+      ],
+      "sole": [
+       "GripWalk"
+      ]
+     },
+     "url": "https://www.evo.com/products/219667-armada-strive-14-gw-ski-bindings"
+    }
+   ],
+   [
+    "evo_Bindings",
+    {
+     "availability": "Check store",
+     "brand": "Marker",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119999.jpg?v=1767733819",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119999.jpg?v=1767733819",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1120150.jpg?v=1767733824",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1120001.jpg?v=1767733820"
+     ],
+     "name": "Marker Jester 18 Pro Ski Bindings 2026",
+     "part": "Bindings",
+     "price_new": "329.94",
+     "price_old": "549.99",
+     "product_type": "Alpine Ski Bindings",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 549.99,
+       "price": 329.94,
+       "specs": {
+        "din": [
+         "14 and up"
+        ],
+        "sole": [
+         "Touring (ISO 9523)"
+        ]
+       },
+       "variant_id": 46148731928726
+      }
+     ],
+     "technical_specs": {
+      "din": [
+       "14 and up"
+      ],
+      "sole": [
+       "Touring (ISO 9523)"
+      ]
+     },
+     "url": "https://www.evo.com/products/254764-marker-jester-18-pro-ski-bindings-2026"
+    }
+   ],
+   [
+    "evo_Poles",
+    {
+     "availability": "Check store",
+     "brand": "Faction",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668548.jpg?v=1767744549",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668548.jpg?v=1767744549",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668545.jpg?v=1767744552",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668547.jpg?v=1767744551",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668546.jpg?v=1767744553",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391801.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391802.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391803.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391805.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391806.jpg?v=1793830835",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-766387.jpg?v=1767747983",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-766388.jpg?v=1767747985",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-839327.jpg?v=1767750773",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-940139.jpg?v=1767755001",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-940138.jpg?v=1767755002"
+     ],
+     "name": "Faction Ski Poles",
+     "part": "Poles",
+     "price_new": "66.15",
+     "price_old": "105.00",
+     "product_type": "Ski Poles",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 105.0,
+       "price": 66.15,
+       "specs": {},
+       "variant_id": 46101365915798
+      }
+     ],
+     "url": "https://www.evo.com/products/162541-faction-ski-poles-2026"
+    }
+   ],
+   [
+    "evo_Protection",
+    {
+     "availability": "Check store",
+     "brand": "POC",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325109.jpg?v=1784600456",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325109.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325116.jpg?v=1784600459",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325113.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325142.jpg?v=1784600458",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325114.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325146.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325119.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207422.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207418.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207420.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207417.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207397.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207398.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207399.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207401.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207402.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207403.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207400.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207404.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207405.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207409.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207406.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207407.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207413.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207408.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207411.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207410.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207415.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207412.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207416.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207414.jpg?v=1767737424",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207425.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207419.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207421.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207426.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207435.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207423.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207424.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207427.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207432.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207429.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207428.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207430.jpg?v=1767737425",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207433.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207431.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207434.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207439.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207437.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207438.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207436.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207441.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207443.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207440.jpg?v=1767737427",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207442.jpg?v=1767737426",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325106.jpg?v=1784600459",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325103.jpg?v=1784600455",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325104.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325107.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325112.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325108.jpg?v=1784600455",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325111.jpg?v=1784600455",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325110.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325123.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325115.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325121.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325117.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325118.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325132.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325120.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325127.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325122.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325125.jpg?v=1784600456",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325124.jpg?v=1784600457",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325126.jpg?v=1784600456"
+     ],
+     "name": "POC Nexal Goggles",
+     "part": "Protection",
+     "price_new": "135.00",
+     "price_old": "270.00",
+     "product_type": "Goggles",
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 270.0,
+       "price": 135.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Goggles"
+        ]
+       },
+       "variant_id": 46152925053078
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "protects": [
+       "Goggles"
+      ]
+     },
+     "url": "https://www.evo.com/products/268617-poc-nexal-goggles"
+    }
+   ],
+   [
+    "evo_Packs",
+    {
+     "availability": "Check store",
+     "brand": "CamelBak",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268994.jpg?v=1769147088",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268994.jpg?v=1769147088",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268997.jpg?v=1769147089"
+     ],
+     "name": "CamelBak Quick Stow 17oz Flask",
+     "part": "Packs",
+     "price_new": "17.99",
+     "price_old": "24.00",
+     "product_type": "Backpack Accessories",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 24.0,
+       "price": 17.99,
+       "specs": {},
+       "variant_id": 46079131517078
+      }
+     ],
+     "url": "https://www.evo.com/products/278157-camelbak-quick-stow-17oz-flask"
+    }
+   ],
+   [
+    "Smith_Helmets",
+    {
+     "availability": "Check store",
+     "brand": "Smith",
+     "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056330P5559_Vantage_2_Mips_Matte_Dusk_Thistle_3Q.png?v=1763664024",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056330P5559_Vantage_2_Mips_Matte_Dusk_Thistle_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteDuskThistle_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteDuskThistle_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056333P5559_Vantage_2_Mips_Matte_Ironwood_Bandit_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteIronwoodBandit_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteIronwoodBandit_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E0056334F5559_Vantage_2_Mips_Matte_Mystic_Gold_Dust_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteMysticGoldDust_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteMysticGoldDust_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_TOP.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E005633FK5559_Vantage_2_Mips_Matte_Black_Ultraviolet_Emerald_City_3Q.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_BACK.png?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle04.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle02.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle01.jpg?v=1763664024",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/vantage2-mips-helmet_matteBlackUltravioletEmeraldCity_lifestyle03.jpg?v=1763664024"
+     ],
+     "name": "Smith Vantage 2 Mips® - Past Season",
+     "part": "Helmets",
+     "price_new": "177.00",
+     "price_old": "295.00",
+     "product_type": "Helmet",
+     "store": "Smith",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 295.0,
+       "price": 177.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F2040 (snow)",
+         "EN 1077 (EU snow)"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 47717845336302
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F2040 (snow)",
+       "EN 1077 (EU snow)"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.smithoptics.com/products/vantage-2-mips-r-sale"
+    }
+   ],
+   [
+    "Smith_Helmets",
+    {
+     "availability": "Check store",
+     "brand": "Smith",
+     "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteMidnightNavy_3Q_cd5a787f-4a2e-4648-b040-8ed9db1b137e.png?v=1759515967",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteMidnightNavy_3Q_cd5a787f-4a2e-4648-b040-8ed9db1b137e.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteMidnightNavy_BACK_d5095f81-be05-451c-aca6-2cb33ec8a4bb.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteMidnightNavy_TOP_c065cc8c-bf0f-4022-9dbf-eadc6f2740e0.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteGoldBar_3Q_8995c79c-906a-4bcc-ab01-38ba3e6ac0e5.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteGoldBar_BACK_237ee3f5-3f2f-404b-9a14-c6d701542f9e.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteGoldBar_TOP_ddd16fc3-355a-4065-9874-21b838fe5f8d.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteBlackStripes_3Q_ca52a44c-142e-4d1d-9543-29efdb8b729e.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteBlackStripes_BACK_283510ac-989d-4684-a60b-e63d0cfa6a99.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteBlackStripes_TOP_027c9588-26f8-410b-8b0c-b5e963545ef1.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlateStripes_3Q_e3f57cec-17e8-4ba3-a55d-24322533cec4.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlateStripes_BACK_31e098da-358c-40a0-b8e5-9b25389f820d.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlateStripes_TOP_2e1b4a5e-d437-4305-9a8f-5254545f4ae3.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/E006977BK5155_01_1fdec5cc-7bde-4f09-bc19-da5345d89503.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlate_3Q_acc1b9ea-3461-4550-a740-4b8a3c53b2da.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlate_BACK_e529fe3a-8795-468e-b872-396fe205c76b.png?v=1759515967",
+      "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/mission-mips-helmet_matteSlate_TOP_fb4c1d0f-814c-4560-83bd-36c6d8ae83b3.png?v=1759515967"
+     ],
+     "name": "Smith Mission Mips® - Past Season",
+     "part": "Helmets",
+     "price_new": "87.00",
+     "price_old": "145.00",
+     "product_type": "Helmet",
+     "store": "Smith",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 145.0,
+       "price": 87.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F2040 (snow)",
+         "CPSC (US bike)",
+         "EN 1077 (EU snow)"
+        ],
+        "helmet_style": [
+         "Snow"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46957644808430
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F2040 (snow)",
+       "CPSC (US bike)",
+       "EN 1077 (EU snow)"
+      ],
+      "helmet_style": [
+       "Snow"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.smithoptics.com/products/mission-mips-r-sale"
+    }
+   ],
+   [
+    "Willis Ski and Board_Skis",
+    {
+     "availability": "Check store",
+     "brand": "Line",
+     "gender": "Men",
+     "image": "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026-H.webp?v=1794575130",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026-H.webp?v=1794575130",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_Honey_Badger_Skis_2026_4d3e5c1a-4579-438b-a2f8-7657e286cee0.jpg?v=1789535866",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_Honey_Badger_Skis_2026_Flat-155_e626f939-e3b3-4d17-899a-46015156ceaa.jpg?v=1789535866",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_Honey_Badger_Skis_2026_Flat-166_3ad043f5-236a-40a7-8e11-50e1a676beea.jpg?v=1789535866",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_Honey_Badger_Skis_2026_Flat-172_0d62c21d-2b48-4a89-a525-15d184703d75.jpg?v=1789535866",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026_20Flat-155-H.webp?v=1794575129",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026_20Flat-166-H.webp?v=1794575130",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Line_20Honey_20Badger_20Skis_202026_20Flat-172-H.webp?v=1794575130"
+     ],
+     "name": "Line Honey Badger Skis 2026",
+     "part": "Skis",
+     "price_new": "309.99",
+     "price_old": "525.00",
+     "product_type": "Mens Skis",
+     "store": "Willis Ski and Board",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 525.0,
+       "price": 309.99,
+       "specs": {
+        "gender": [
+         "Men"
+        ],
+        "rocker": [
+         "Full Camber"
+        ]
+       },
+       "variant_id": 47971563929805
+      }
+     ],
+     "technical_specs": {
+      "gender": [
+       "Men"
+      ],
+      "rocker": [
+       "Full Camber"
+      ]
+     },
+     "url": "https://www.willisskiandboard.com/products/line-honey-badger-skis"
+    }
+   ],
+   [
+    "Willis Ski and Board_Skis",
+    {
+     "availability": "Check store",
+     "brand": "Elan",
+     "gender": "Men",
+     "image": "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025-H.webp?v=1794574961",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025-H.webp?v=1794574961",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_28c2f32a-763c-4eb9-9078-8f4093384850.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_Flat-161.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_Flat-168_1e22a24e-79d4-4764-8cfd-44419df27fcb.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_Flat-175_d17d7305-9227-46f3-a9a0-964c47666754.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_Ripstick_88_Skis_2025_Flat-182_8a92bc78-a63f-4991-b9d4-19bc6dcc5308.jpg?v=1789535795",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025_20Flat-161-H.webp?v=1794574961",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025_20Flat-168-H.webp?v=1794574961",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025_20Flat-175-H.webp?v=1794574961",
+      "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Elan_20Ripstick_2088_20Skis_202025_20Flat-182-H.webp?v=1794574961"
+     ],
+     "name": "Elan Ripstick 88 Skis",
+     "part": "Skis",
+     "price_new": "480.99",
+     "price_old": "900.00",
+     "product_type": "Mens Skis",
+     "store": "Willis Ski and Board",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 900.0,
+       "price": 480.99,
+       "specs": {
+        "gender": [
+         "Men"
+        ],
+        "radius": [
+         "Short (under 16 m)"
+        ],
+        "rocker": [
+         "Full Camber"
+        ]
+       },
+       "variant_id": 48079200288973
+      },
+      {
+       "available": true,
+       "compare": 900.0,
+       "price": 480.99,
+       "specs": {
+        "gender": [
+         "Men"
+        ],
+        "radius": [
+         "Short (under 16 m)"
+        ],
+        "rocker": [
+         "Full Camber"
+        ]
+       },
+       "variant_id": 48079200321741
+      }
+     ],
+     "technical_specs": {
+      "gender": [
+       "Men"
+      ],
+      "radius": [
+       "Short (under 16 m)"
+      ],
+      "rocker": [
+       "Full Camber"
+      ]
+     },
+     "url": "https://www.willisskiandboard.com/products/elan-ripstick-88-skis"
+    }
+   ],
+   [
+    "Willis Ski and Board_Boots",
+    {
+     "availability": "Check store",
+     "brand": "Lange",
+     "gender": "Kids",
+     "image": "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Lange_Starlet_60_Jr_Boots_2021.jpg?v=1764777911",
+     "name": "Lange Starlet 60 Junior Ski Boots",
+     "part": "Boots",
+     "price_new": "169.99",
+     "price_old": "225.00",
+     "product_type": "Junior Ski Boots",
+     "store": "Willis Ski and Board",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 225.0,
+       "price": 169.99,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "gender": [
+         "Kids"
+        ]
+       },
+       "variant_id": 48507275804877
+      },
+      {
+       "available": true,
+       "compare": 225.0,
+       "price": 169.99,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "gender": [
+         "Kids"
+        ]
+       },
+       "variant_id": 48507275870413
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "gender": [
+       "Kids"
+      ]
+     },
+     "url": "https://www.willisskiandboard.com/products/lange-starlet-60-junior-ski-boots"
+    }
+   ],
+   [
+    "Willis Ski and Board_Boots",
+    {
+     "availability": "Check store",
+     "brand": "Atomic",
+     "gender": "Kids",
+     "image": "https://cdn.shopify.com/s/files/1/0621/6001/1469/files/Atomic_Redster_Club_Sport_80_LC_Boots_2022.jpg?v=1764777879",
+     "name": "Atomic Redster Club Sport 80 Lc Boots",
+     "part": "Boots",
+     "price_new": "199.99",
+     "price_old": "425.00",
+     "product_type": "Junior Ski Boots",
+     "store": "Willis Ski and Board",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 425.0,
+       "price": 199.99,
+       "specs": {
+        "flex": [
+         "Medium (80–100)"
+        ],
+        "gender": [
+         "Kids"
+        ]
+       },
+       "variant_id": 48507274494157
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Medium (80–100)"
+      ],
+      "gender": [
+       "Kids"
+      ]
+     },
+     "url": "https://www.willisskiandboard.com/products/atomic-redster-club-sport-80-lc-boots"
+    }
+   ],
+   [
+    "Ski Essentials_Skis",
+    {
+     "availability": "Check store",
+     "brand": "Stöckli",
+     "gender": "Women",
+     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2024-stockli-nela-88-women-s-skis-41040424.jpg?v=1770767954",
+     "kind": "All Mountain",
+     "name": "2024 Stockli Nela 88 Women's Skis",
+     "part": "Skis",
+     "price_new": "579.95",
+     "price_old": "1099.00",
+     "product_type": "Alpine Ski > Ski > Downhill > Flat",
+     "store": "Ski Essentials",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 1099.0,
+       "price": 579.95,
+       "specs": {
+        "gender": [
+         "Women"
+        ],
+        "ski_type": [
+         "All-Mountain",
+         "Carving / Frontside"
+        ],
+        "waist": [
+         "85–94 mm"
+        ]
+       },
+       "variant_id": 44862970495272
+      }
+     ],
+     "technical_specs": {
+      "gender": [
+       "Women"
+      ],
+      "ski_type": [
+       "All-Mountain",
+       "Carving / Frontside"
+      ],
+      "waist": [
+       "85–94 mm"
+      ]
+     },
+     "url": "https://www.skiessentials.com/products/2024-stockli-nela-88-women-s-skis"
+    }
+   ],
+   [
+    "Christy Sports_Skis",
+    {
+     "availability": "Check store",
+     "brand": "Armada",
+     "gender": "Women",
+     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw0a9d8c64/8111948_000_1.jpg?sw=600&sh=600",
+     "name": "Armada Reliance 92 TI Skis Womens",
+     "part": "Skis",
+     "price_new": "399.97",
+     "price_old": "799.95",
+     "store": "Christy Sports",
+     "technical_offers": [
+      {
+       "available": null,
+       "compare": 799.95,
+       "price": 399.97,
+       "specs": {
+        "gender": [
+         "Women"
+        ]
+       },
+       "variant_id": "8111948"
+      },
+      {
+       "available": null,
+       "compare": 749.95,
+       "price": 524.97,
+       "specs": {
+        "gender": [
+         "Women"
+        ]
+       },
+       "variant_id": "8201449"
+      }
+     ],
+     "technical_specs": {
+      "gender": [
+       "Women"
+      ]
+     },
+     "url": "https://www.christysports.com/product/armada-reliance-92-ti-skis-womens/8111948.html",
+     "versions": [
+      {
+       "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw229e9ba0/8201449_000_1.jpg?sw=600&sh=600",
+       "price_new": "524.97",
+       "price_old": "749.95",
+       "url": "https://www.christysports.com/product/armada-reliance-92-ti-skis-womens/8201449.html"
+      }
+     ]
+    }
+   ],
+   [
+    "Christy Sports_Skis",
+    {
+     "availability": "Check store",
+     "brand": "Armada",
+     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw802e121e/8201441_000_1.jpg?sw=600&sh=600",
+     "name": "Armada ARV 100 MadSteez Skis",
+     "part": "Skis",
+     "price_new": "489.97",
+     "price_old": "699.95",
+     "store": "Christy Sports",
+     "url": "https://www.christysports.com/product/armada-arv-100-madsteez-skis/8201441.html"
+    }
+   ],
+   [
+    "Christy Sports_Boots",
+    {
+     "availability": "Check store",
+     "brand": "Salomon",
+     "gender": "Kids",
+     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw7ee9f548/8105833_347_1.jpg?sw=600&sh=600",
+     "name": "Salomon QST Access 70 T Ski Boots Junior",
+     "part": "Boots",
+     "price_new": "139.97",
+     "price_old": "279.95",
+     "store": "Christy Sports",
+     "technical_offers": [
+      {
+       "available": null,
+       "compare": 279.95,
+       "price": 139.97,
+       "specs": {
+        "flex": [
+         "Soft (under 80)"
+        ],
+        "gender": [
+         "Kids"
+        ]
+       },
+       "variant_id": "8105833"
+      }
+     ],
+     "technical_specs": {
+      "flex": [
+       "Soft (under 80)"
+      ],
+      "gender": [
+       "Kids"
+      ]
+     },
+     "url": "https://www.christysports.com/product/salomon-qst-access-70-t-ski-boots-junior/8105833.html"
+    }
+   ],
+   [
+    "Christy Sports_Poles",
+    {
+     "availability": "Check store",
+     "brand": "Rossignol",
+     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwc2270ae4/1021185_023_1.jpg?sw=600&sh=600",
+     "name": "Rossignol Tactic Ski Poles Juniors",
+     "part": "Poles",
+     "price_new": "16.97",
+     "price_old": "39.95",
+     "store": "Christy Sports",
+     "url": "https://www.christysports.com/product/rossignol-tactic-ski-poles-juniors/1021185.html"
+    }
+   ]
+  ]
  },
  "failed_keys": [],
  "fingerprints": {
-  "data": "f3bca7fbaab55ea5edb43d6a98b9f181d7814a8eadbec083b8db04080cfff572",
-  "history": "11dc4462ccd82c6598e95ef9b4c9255244fa2365f8fba21365a10e990b038788"
+  "data": "3bfa57159968628525d72d9ab047256d4d82f606ae2331e0870ff047729c2e06",
+  "history": "a6e755a0f3f20e8898b9bef9f89145a13db826f1f640531eb4653758ed171974"
  },
- "generated_at": "2026-11-14T15:39:24+00:00",
+ "generated_at": "2026-11-15T01:27:19+00:00",
  "history": "file",
  "version": 1
 }
