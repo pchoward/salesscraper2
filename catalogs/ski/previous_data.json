@@ -46267,8 +46267,7 @@
       "product_type": "Skis",
       "brand": "Line",
       "lengths": [
-        "171",
-        "185"
+        "171"
       ],
       "technical_offers": [
         {
@@ -46281,23 +46280,11 @@
               "170\u2013179 cm"
             ]
           }
-        },
-        {
-          "variant_id": 46152010301590,
-          "price": 384.96,
-          "compare": 549.95,
-          "available": true,
-          "specs": {
-            "length": [
-              "180\u2013189 cm"
-            ]
-          }
         }
       ],
       "technical_specs": {
         "length": [
-          "170\u2013179 cm",
-          "180\u2013189 cm"
+          "170\u2013179 cm"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1206604.jpg?v=1767737392",
@@ -60684,57 +60671,6 @@
       "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1176844.jpg?v=1767736346"
     },
     {
-      "name": "Head Edge 120 HV GW Ski Boots 2025",
-      "url": "https://www.evo.com/products/271203-head-edge-120-hv-gw-ski-boots-2025",
-      "price_new": "199.99",
-      "price_old": "649.00",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "evo",
-      "product_type": "Alpine Ski Boots",
-      "brand": "Head",
-      "sizes": [
-        "26.5"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46153280061590,
-          "price": 199.99,
-          "compare": 649.0,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "sole": [
-              "GripWalk"
-            ],
-            "last": [
-              "Wide (102 mm and over)"
-            ],
-            "mondo": [
-              "26.5"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "sole": [
-          "GripWalk"
-        ],
-        "last": [
-          "Wide (102 mm and over)"
-        ],
-        "mondo": [
-          "26.5"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187996.jpg?v=1767736739"
-    },
-    {
       "name": "Atomic Hawx Prime XTD 120 BOA GW Alpine Touring Ski Boots 2026",
       "url": "https://www.evo.com/products/254250-atomic-hawx-prime-xtd-120-boa-gw-alpine-touring-ski-boots-2026",
       "price_new": "542.95",
@@ -63348,7 +63284,7 @@
     {
       "name": "Lange XT3 Free 130 LV GW Alpine Touring Ski Boots 2026",
       "url": "https://www.evo.com/products/255413-lange-xt3-free-130-lv-gw-alpine-touring-ski-boots-2026",
-      "price_new": "459.95",
+      "price_new": "385.95",
       "price_old": "899.95",
       "availability": "Check store",
       "part": "Boots",
@@ -63356,6 +63292,7 @@
       "product_type": "Alpine Touring Ski Boots",
       "brand": "Lange",
       "sizes": [
+        "25.5",
         "26.5",
         "27.5",
         "28.5",
@@ -63363,6 +63300,32 @@
       ],
       "kind": "Touring",
       "technical_offers": [
+        {
+          "variant_id": 46149035950230,
+          "price": 385.95,
+          "compare": 899.95,
+          "available": true,
+          "specs": {
+            "ski_type": [
+              "Backcountry / Touring"
+            ],
+            "flex": [
+              "Very stiff (over 120)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "walk": [
+              "Walk mode"
+            ],
+            "last": [
+              "Narrow (98 mm and under)"
+            ],
+            "mondo": [
+              "25.5"
+            ]
+          }
+        },
         {
           "variant_id": 46149035982998,
           "price": 459.95,
@@ -63485,6 +63448,7 @@
           "Narrow (98 mm and under)"
         ],
         "mondo": [
+          "25.5",
           "26.5",
           "27.5",
           "28.5",
@@ -78289,13 +78253,64 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304104.jpg?v=1780950637",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304100.jpg?v=1780950637"
       ]
+    },
+    {
+      "name": "Head Edge 120 HV GW Ski Boots 2025",
+      "url": "https://www.evo.com/products/271203-head-edge-120-hv-gw-ski-boots-2025",
+      "price_new": "199.99",
+      "price_old": "649.00",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "evo",
+      "product_type": "Alpine Ski Boots",
+      "brand": "Head",
+      "sizes": [
+        "26.5"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46153280061590,
+          "price": 199.99,
+          "compare": 649.0,
+          "available": true,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "sole": [
+              "GripWalk"
+            ],
+            "last": [
+              "Wide (102 mm and over)"
+            ],
+            "mondo": [
+              "26.5"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "sole": [
+          "GripWalk"
+        ],
+        "last": [
+          "Wide (102 mm and over)"
+        ],
+        "mondo": [
+          "26.5"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187996.jpg?v=1767736739"
     }
   ],
   "evo_Bindings": [
     {
       "name": "Marker Griffon 13 ID Ski Bindings",
       "url": "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings",
-      "price_new": "179.96",
+      "price_new": "249.97",
       "price_old": "299.99",
       "availability": "Check store",
       "part": "Bindings",
@@ -78303,17 +78318,6 @@
       "product_type": "Alpine Ski Bindings",
       "brand": "Marker",
       "technical_offers": [
-        {
-          "variant_id": 46107395031190,
-          "price": 179.96,
-          "compare": 299.99,
-          "available": true,
-          "specs": {
-            "din": [
-              "11\u201313"
-            ]
-          }
-        },
         {
           "variant_id": 46107394834582,
           "price": 249.97,
@@ -81708,29 +81712,6 @@
           }
         },
         {
-          "variant_id": 46151991263382,
-          "price": 74.97,
-          "compare": 124.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "L"
-            ]
-          }
-        },
-        {
           "variant_id": 46151989887126,
           "price": 93.71,
           "compare": 124.95,
@@ -83242,88 +83223,6 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387247.jpg?v=1792705594",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387245.jpg?v=1792705593",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387246.jpg?v=1792705593"
-      ]
-    },
-    {
-      "name": "Smith Mirage MIPS Helmet - Women's",
-      "url": "https://www.evo.com/products/156075-smith-mirage-mips-helmet-women-s",
-      "price_new": "87.00",
-      "price_old": "145.00",
-      "availability": "Check store",
-      "part": "Helmets",
-      "store": "evo",
-      "product_type": "Ski and Snowboard Helmets",
-      "brand": "Smith",
-      "technical_offers": [
-        {
-          "variant_id": 46096714727574,
-          "price": 87.0,
-          "compare": 145.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Snow"
-        ],
-        "rotational": [
-          "MIPS"
-        ],
-        "prot_size": [
-          "S"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096594.jpg?v=1767732908",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096594.jpg?v=1767732908",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096590.jpg?v=1767732906",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096593.jpg?v=1767732907",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026251.jpg?v=1767730236",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-783017.jpg?v=1767748563",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923435.jpg?v=1767754300",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923436.jpg?v=1767754300",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-820316.jpg?v=1767750034",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-633777.jpg?v=1767743233",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-633778.jpg?v=1767743234",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-711211.jpg?v=1767746237",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713012.jpg?v=1767746309",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-820315.jpg?v=1767750032",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-633775.jpg?v=1767743233",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052782.jpg?v=1767731280",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052785.jpg?v=1767731281",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052784.jpg?v=1767731281",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096589.jpg?v=1767732906",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096592.jpg?v=1767732907",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096591.jpg?v=1767732905",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096599.jpg?v=1767732907",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096598.jpg?v=1767732906",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096595.jpg?v=1767732905",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259953.jpg?v=1767739536",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259954.jpg?v=1767739534",
-        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259952.jpg?v=1767739534"
       ]
     },
     {
@@ -85280,30 +85179,6 @@
           "variant_id": 46090713333910,
           "price": 162.74,
           "compare": 284.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "M",
-              "S"
-            ]
-          }
-        },
-        {
-          "variant_id": 46090715955350,
-          "price": 120.99,
-          "compare": 269.95,
           "available": true,
           "specs": {
             "protects": [
@@ -89556,29 +89431,6 @@
       "brand": "Giro",
       "technical_offers": [
         {
-          "variant_id": 46151991885974,
-          "price": 164.96,
-          "compare": 219.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        },
-        {
           "variant_id": 46151991722134,
           "price": 164.96,
           "compare": 219.95,
@@ -89640,7 +89492,6 @@
         ],
         "prot_size": [
           "L",
-          "M",
           "S"
         ]
       },
@@ -97726,29 +97577,6 @@
               "M"
             ]
           }
-        },
-        {
-          "variant_id": 46152119025814,
-          "price": 89.98,
-          "compare": 149.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Kids"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
         }
       ],
       "technical_specs": {
@@ -101882,6 +101710,88 @@
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347027.jpg?v=1788884115",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347029.jpg?v=1788884116",
         "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1347030.jpg?v=1788884115"
+      ]
+    },
+    {
+      "name": "Smith Mirage MIPS Helmet - Women's",
+      "url": "https://www.evo.com/products/156075-smith-mirage-mips-helmet-women-s",
+      "price_new": "87.00",
+      "price_old": "145.00",
+      "availability": "Check store",
+      "part": "Helmets",
+      "store": "evo",
+      "product_type": "Ski and Snowboard Helmets",
+      "brand": "Smith",
+      "technical_offers": [
+        {
+          "variant_id": 46096714727574,
+          "price": 87.0,
+          "compare": 145.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Snow"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Snow"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "S"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096594.jpg?v=1767732908",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096594.jpg?v=1767732908",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096590.jpg?v=1767732906",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096593.jpg?v=1767732907",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1026251.jpg?v=1767730236",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-783017.jpg?v=1767748563",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923435.jpg?v=1767754300",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-923436.jpg?v=1767754300",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-820316.jpg?v=1767750034",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-633777.jpg?v=1767743233",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-633778.jpg?v=1767743234",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-711211.jpg?v=1767746237",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-713012.jpg?v=1767746309",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-820315.jpg?v=1767750032",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-633775.jpg?v=1767743233",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052782.jpg?v=1767731280",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052785.jpg?v=1767731281",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1052784.jpg?v=1767731281",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096589.jpg?v=1767732906",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096592.jpg?v=1767732907",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096591.jpg?v=1767732905",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096599.jpg?v=1767732907",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096598.jpg?v=1767732906",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1096595.jpg?v=1767732905",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259953.jpg?v=1767739536",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259954.jpg?v=1767739534",
+        "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1259952.jpg?v=1767739534"
       ]
     },
     {
@@ -107916,26 +107826,6 @@
           }
         },
         {
-          "variant_id": 46129066246294,
-          "price": 169.8,
-          "compare": 283.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Goggles"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "goggle_size": [
-              "Small"
-            ],
-            "goggle_lens": [
-              "Magnetic lens change"
-            ]
-          }
-        },
-        {
           "variant_id": 46129066279062,
           "price": 165.0,
           "compare": 275.0,
@@ -113171,26 +113061,6 @@
           }
         },
         {
-          "variant_id": 46189526974614,
-          "price": 195.96,
-          "compare": 279.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Goggles"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "goggle_fit": [
-              "Over glasses (OTG)"
-            ],
-            "goggle_lens": [
-              "Magnetic lens change"
-            ]
-          }
-        },
-        {
           "variant_id": 46236892135574,
           "price": 188.96,
           "compare": 269.95,
@@ -114216,26 +114086,6 @@
       "technical_offers": [
         {
           "variant_id": 46078036246678,
-          "price": 52.46,
-          "compare": 74.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Goggles"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "goggle_size": [
-              "Large"
-            ],
-            "goggle_fit": [
-              "Over glasses (OTG)"
-            ]
-          }
-        },
-        {
-          "variant_id": 46140758917270,
           "price": 52.46,
           "compare": 74.95,
           "available": true,
@@ -165550,8 +165400,7 @@
       "sizes": [
         "25.5",
         "26.5",
-        "27.5",
-        "28.5"
+        "27.5"
       ],
       "gender": "Men",
       "technical_offers": [
@@ -165605,23 +165454,6 @@
               "27.5"
             ]
           }
-        },
-        {
-          "variant_id": 50304576323872,
-          "price": 129.95,
-          "compare": 189.99,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Soft (under 80)"
-            ],
-            "gender": [
-              "Men"
-            ],
-            "mondo": [
-              "28.5"
-            ]
-          }
         }
       ],
       "technical_specs": {
@@ -165634,8 +165466,7 @@
         "mondo": [
           "25.5",
           "26.5",
-          "27.5",
-          "28.5"
+          "27.5"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0965/4642/files/700_242804_1015969_383c0da1-9142-4dda-a859-ca4d282849b6.webp?v=1750280452"
@@ -168617,7 +168448,7 @@
     {
       "name": "Atomic Hawx Prime 105 S Boa W Womens Ski Boots 2026",
       "url": "https://aspenskiandboard.com/products/atomic-hawx-prime-105-s-boa-w-womens-ski-boots-2026",
-      "price_new": "334.88",
+      "price_new": "334.87",
       "price_old": "830.00",
       "availability": "Check store",
       "part": "Boots",
@@ -168628,7 +168459,7 @@
       "technical_offers": [
         {
           "variant_id": 51042051129632,
-          "price": 334.88,
+          "price": 334.87,
           "compare": 830.0,
           "available": true,
           "specs": {
@@ -168642,7 +168473,7 @@
         },
         {
           "variant_id": 51042051162400,
-          "price": 334.88,
+          "price": 334.87,
           "compare": 830.0,
           "available": true,
           "specs": {
@@ -168656,7 +168487,7 @@
         },
         {
           "variant_id": 51042051195168,
-          "price": 334.88,
+          "price": 334.87,
           "compare": 830.0,
           "available": true,
           "specs": {
@@ -168670,7 +168501,7 @@
         },
         {
           "variant_id": 51042051227936,
-          "price": 334.88,
+          "price": 334.87,
           "compare": 830.0,
           "available": true,
           "specs": {
@@ -172563,7 +172394,7 @@
       "brand": "Dalbello",
       "sizes": [
         "22.5",
-        "25.5",
+        "24.5",
         "26.5"
       ],
       "gender": "Men",
@@ -172586,7 +172417,7 @@
           }
         },
         {
-          "variant_id": 52019929579808,
+          "variant_id": 52019929547040,
           "price": 299.95,
           "compare": 950.0,
           "available": true,
@@ -172598,7 +172429,7 @@
               "Men"
             ],
             "mondo": [
-              "25.5"
+              "24.5"
             ]
           }
         },
@@ -172629,7 +172460,7 @@
         ],
         "mondo": [
           "22.5",
-          "25.5",
+          "24.5",
           "26.5"
         ]
       },
@@ -179567,29 +179398,6 @@
       "gender": "Men",
       "technical_offers": [
         {
-          "variant_id": 51365327929632,
-          "price": 190.0,
-          "compare": 380.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ],
-            "gender": [
-              "Men"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        },
-        {
           "variant_id": 51365327962400,
           "price": 190.0,
           "compare": 380.0,
@@ -179627,8 +179435,7 @@
           "Men"
         ],
         "prot_size": [
-          "M",
-          "S"
+          "M"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0965/4642/files/shopping_bdb4d84e-a095-4801-8b39-4715b64be38d.webp?v=1772551385",
@@ -192114,8 +191921,7 @@
       "lengths": [
         "149",
         "156",
-        "163",
-        "177"
+        "163"
       ],
       "technical_offers": [
         {
@@ -192150,25 +191956,13 @@
               "160\u2013169 cm"
             ]
           }
-        },
-        {
-          "variant_id": 44067610001585,
-          "price": 379.95,
-          "compare": 599.95,
-          "available": true,
-          "specs": {
-            "length": [
-              "170\u2013179 cm"
-            ]
-          }
         }
       ],
       "technical_specs": {
         "length": [
           "140\u2013149 cm",
           "150\u2013159 cm",
-          "160\u2013169 cm",
-          "170\u2013179 cm"
+          "160\u2013169 cm"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0568/2020/3697/files/line_2425_pandora_99_top1534.jpg?v=1715807652",
@@ -205904,7 +205698,6 @@
       "brand": "Nordica",
       "sizes": [
         "23.5",
-        "24.5",
         "25.5",
         "26.5"
       ],
@@ -205920,20 +205713,6 @@
             ],
             "mondo": [
               "23.5"
-            ]
-          }
-        },
-        {
-          "variant_id": 44390392463537,
-          "price": 137.99,
-          "compare": 190.0,
-          "available": true,
-          "specs": {
-            "flex": [
-              "Soft (under 80)"
-            ],
-            "mondo": [
-              "24.5"
             ]
           }
         },
@@ -205972,7 +205751,6 @@
         ],
         "mondo": [
           "23.5",
-          "24.5",
           "25.5",
           "26.5"
         ]
@@ -259377,42 +259155,6 @@
       "brand": "Nordica"
     },
     {
-      "name": "Salomon S/Pro Alpha 110 EL Ski Boots Womens",
-      "url": "https://www.christysports.com/product/salomon-spro-alpha-110-el-ski-boots-womens/1045426.html",
-      "price_new": "280.97",
-      "price_old": "699.95",
-      "availability": "Check store",
-      "part": "Boots",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwb155bc10/1045426_020_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "1045426",
-          "price": 280.97,
-          "compare": 699.95,
-          "available": null,
-          "specs": {
-            "flex": [
-              "Stiff (105\u2013120)"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "flex": [
-          "Stiff (105\u2013120)"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "Salomon"
-    },
-    {
       "name": "Tecnica Cochise 105 Ski Boots Womens",
       "url": "https://www.christysports.com/product/tecnica-cochise-105-ski-boots-womens/8106117.html",
       "price_new": "350.97",
@@ -260294,6 +260036,42 @@
       "brand": "Tecnica"
     },
     {
+      "name": "Salomon S/Pro Alpha 110 EL Ski Boots Womens",
+      "url": "https://www.christysports.com/product/salomon-spro-alpha-110-el-ski-boots-womens/1045426.html",
+      "price_new": "280.97",
+      "price_old": "699.95",
+      "availability": "Check store",
+      "part": "Boots",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwb155bc10/1045426_020_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "1045426",
+          "price": 280.97,
+          "compare": 699.95,
+          "available": null,
+          "specs": {
+            "flex": [
+              "Stiff (105\u2013120)"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "flex": [
+          "Stiff (105\u2013120)"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "Salomon"
+    },
+    {
       "name": "Rossignol Alltrack Pro 120LT MV GW Ski Boots Mens",
       "url": "https://www.christysports.com/product/rossignol-alltrack-pro-120lt-mv-gw-ski-boots-mens/8107991.html",
       "price_new": "300.97",
@@ -260945,47 +260723,6 @@
           "image": "https://cdn.skatepro.com/product/400/smith-vantage-mips-ski-helmet-wo.webp"
         }
       ]
-    },
-    {
-      "name": "Atomic Savor Amid Visor HD Ski Helmet",
-      "url": "https://www.skatepro.com/en-us/316-44710.htm",
-      "price_new": "173.95",
-      "price_old": "309.95",
-      "availability": "In stock",
-      "part": "Helmets",
-      "store": "SkatePro",
-      "brand": "Atomic",
-      "image": "https://cdn.skatepro.com/product/400/atomic-savor-amid-visor-hd-ski-helmet-ve.webp",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.skatepro.com/en-us/316-44710.htm",
-          "price": 173.95,
-          "compare": 309.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Snow"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Snow"
-        ]
-      }
     },
     {
       "name": "Salomon Orka Visor Junior Ski Helmet",
@@ -261963,6 +261700,47 @@
         ],
         "rotational": [
           "MIPS"
+        ]
+      }
+    },
+    {
+      "name": "Atomic Savor Amid Visor HD Ski Helmet",
+      "url": "https://www.skatepro.com/en-us/316-44710.htm",
+      "price_new": "173.95",
+      "price_old": "309.95",
+      "availability": "In stock",
+      "part": "Helmets",
+      "store": "SkatePro",
+      "brand": "Atomic",
+      "image": "https://cdn.skatepro.com/product/400/atomic-savor-amid-visor-hd-ski-helmet-ve.webp",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.skatepro.com/en-us/316-44710.htm",
+          "price": 173.95,
+          "compare": 309.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Snow"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Snow"
         ]
       }
     }

@@ -10760,14 +10760,14 @@
           }
         },
         "Christy Sports_Boots": {
-          "count": 152,
+          "count": 151,
           "failed": false,
           "diagnostics": {
             "expected_count": 157,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 152,
-            "percentage_change": -3.2,
+            "actual_count": 151,
+            "percentage_change": -3.8,
             "reason": "normal_variation"
           }
         },
@@ -11084,14 +11084,14 @@
           }
         },
         "SkatePro_Helmets": {
-          "count": 31,
+          "count": 30,
           "failed": false,
           "diagnostics": {
             "expected_count": 30.0,
             "baseline_samples": 12,
             "median_absolute_deviation": 0.0,
-            "actual_count": 31,
-            "percentage_change": 3.3,
+            "actual_count": 30,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -11876,26 +11876,26 @@
           }
         },
         "evo_Boots": {
-          "count": 231,
+          "count": 230,
           "failed": false,
           "diagnostics": {
             "expected_count": 296,
             "baseline_samples": 9,
             "median_absolute_deviation": 3,
-            "actual_count": 231,
-            "percentage_change": -22.0,
+            "actual_count": 230,
+            "percentage_change": -22.3,
             "reason": "normal_variation"
           }
         },
         "evo_Helmets": {
-          "count": 136,
+          "count": 135,
           "failed": false,
           "diagnostics": {
             "expected_count": 152,
             "baseline_samples": 13,
             "median_absolute_deviation": 2,
-            "actual_count": 136,
-            "percentage_change": -10.5,
+            "actual_count": 135,
+            "percentage_change": -11.2,
             "reason": "normal_variation"
           }
         },
@@ -11948,7 +11948,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-15T01:27:19+00:00"
+      "scanned_at": "2026-11-15T06:45:41+00:00"
     }
   ],
   "baseline": {
@@ -11998,7 +11998,7 @@
     },
     "Christy Sports_Boots": {
       "date": "2026-11-15",
-      "count": 152
+      "count": 151
     },
     "Christy Sports_Poles": {
       "date": "2026-11-15",
@@ -12046,7 +12046,7 @@
     },
     "evo_Helmets": {
       "date": "2026-11-15",
-      "count": 136
+      "count": 135
     },
     "evo_Protection": {
       "date": "2026-11-15",
@@ -12070,7 +12070,7 @@
     },
     "SkatePro_Helmets": {
       "date": "2026-11-15",
-      "count": 31
+      "count": 30
     },
     "SkatePro_Protection": {
       "date": "2026-11-15",
@@ -12090,7 +12090,7 @@
     },
     "evo_Boots": {
       "date": "2026-11-15",
-      "count": 231
+      "count": 230
     },
     "Aspen Ski and Board_Bindings": {
       "date": "2026-11-15",
@@ -12811,7 +12811,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 152
+        "count": 151
       }
     ],
     "Christy Sports_Helmets": [
@@ -13885,7 +13885,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 31
+        "count": 30
       }
     ],
     "SkatePro_Protection": [
@@ -16125,7 +16125,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 231
+        "count": 230
       }
     ],
     "evo_Helmets": [
@@ -16183,7 +16183,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 136
+        "count": 135
       }
     ],
     "evo_Packs": [

@@ -26839,14 +26839,14 @@
           }
         },
         "Bicycle Warehouse_Protection": {
-          "count": 14,
+          "count": 13,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.0,
             "baseline_samples": 4,
             "median_absolute_deviation": 0.0,
-            "actual_count": 14,
-            "percentage_change": 0.0,
+            "actual_count": 13,
+            "percentage_change": -7.1,
             "reason": "normal_variation"
           }
         },
@@ -26887,14 +26887,14 @@
           }
         },
         "Bike Mart_Brakes": {
-          "count": 112,
+          "count": 113,
           "failed": false,
           "diagnostics": {
             "expected_count": 116,
             "baseline_samples": 3,
             "median_absolute_deviation": 3,
-            "actual_count": 112,
-            "percentage_change": -3.4,
+            "actual_count": 113,
+            "percentage_change": -2.6,
             "reason": "normal_variation"
           }
         },
@@ -26983,14 +26983,14 @@
           }
         },
         "Bike Mart_Tires": {
-          "count": 253,
+          "count": 256,
           "failed": false,
           "diagnostics": {
             "expected_count": 296,
             "baseline_samples": 3,
             "median_absolute_deviation": 2,
-            "actual_count": 253,
-            "percentage_change": -14.5,
+            "actual_count": 256,
+            "percentage_change": -13.5,
             "reason": "normal_variation"
           }
         },
@@ -27139,14 +27139,14 @@
           }
         },
         "Cambria_Bikes": {
-          "count": 33,
+          "count": 32,
           "failed": false,
           "diagnostics": {
             "expected_count": 33,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 33,
-            "percentage_change": 0.0,
+            "actual_count": 32,
+            "percentage_change": -3.0,
             "reason": "normal_variation"
           }
         },
@@ -28483,14 +28483,14 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 129,
+          "count": 130,
           "failed": false,
           "diagnostics": {
             "expected_count": 162,
             "baseline_samples": 11,
             "median_absolute_deviation": 3,
-            "actual_count": 129,
-            "percentage_change": -20.4,
+            "actual_count": 130,
+            "percentage_change": -19.8,
             "reason": "normal_variation"
           }
         },
@@ -28567,14 +28567,14 @@
           }
         },
         "The Lost Co._Tires": {
-          "count": 131,
+          "count": 132,
           "failed": false,
           "diagnostics": {
             "expected_count": 128,
             "baseline_samples": 11,
             "median_absolute_deviation": 3,
-            "actual_count": 131,
-            "percentage_change": 2.3,
+            "actual_count": 132,
+            "percentage_change": 3.1,
             "reason": "normal_variation"
           }
         },
@@ -28987,7 +28987,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-15T01:36:07+00:00"
+      "scanned_at": "2026-11-15T06:54:12+00:00"
     }
   ],
   "baseline": {
@@ -29177,7 +29177,7 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-15",
-      "count": 129
+      "count": 130
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-15",
@@ -29201,7 +29201,7 @@
     },
     "The Lost Co._Tires": {
       "date": "2026-11-15",
-      "count": 131
+      "count": 132
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-15",
@@ -29265,7 +29265,7 @@
     },
     "Cambria_Bikes": {
       "date": "2026-11-15",
-      "count": 33
+      "count": 32
     },
     "Bicycle Warehouse_Bikes": {
       "date": "2026-11-15",
@@ -29289,7 +29289,7 @@
     },
     "Bicycle Warehouse_Protection": {
       "date": "2026-11-15",
-      "count": 14
+      "count": 13
     },
     "Bicycle Warehouse_Tires": {
       "date": "2026-11-15",
@@ -29305,7 +29305,7 @@
     },
     "Bike Mart_Brakes": {
       "date": "2026-11-15",
-      "count": 112
+      "count": 113
     },
     "Bike Mart_Cockpit": {
       "date": "2026-11-15",
@@ -29329,7 +29329,7 @@
     },
     "Bike Mart_Tires": {
       "date": "2026-11-15",
-      "count": 253
+      "count": 256
     },
     "Bike Mart_Wheels": {
       "date": "2026-11-15",
@@ -31222,7 +31222,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 14
+        "count": 13
       }
     ],
     "Bicycle Warehouse_Tires": [
@@ -31302,7 +31302,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 112
+        "count": 113
       }
     ],
     "Bike Mart_Cockpit": [
@@ -31446,7 +31446,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 253
+        "count": 256
       }
     ],
     "Bike Mart_Wheels": [
@@ -32112,7 +32112,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 33
+        "count": 32
       }
     ],
     "Cambria_Brakes": [
@@ -37452,7 +37452,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 129
+        "count": 130
       }
     ],
     "The Lost Co._Drivetrain": [
@@ -37790,7 +37790,7 @@
       },
       {
         "date": "2026-11-15",
-        "count": 131
+        "count": 132
       }
     ],
     "The Lost Co._Wheels": [
