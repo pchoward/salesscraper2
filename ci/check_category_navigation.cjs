@@ -67,6 +67,26 @@ async function main(){
     await page.locator('#categoryToggle').click();await page.screenshot({path:path.join(output,`before-menu-${width}.png`)});
    }
    await page.goto(base+'/?sport='+sport);await ready();let child=await frame();await counts();
+   // Every published Skate heading must survive both a menu pick and a fresh
+   // deep link; in-page clicks alone can hide a broken URL decoder (#287).
+   if(sport==='skate'&&[1440,390].includes(width)){
+    const categories=await child.locator('#partFilters button[data-part]').evaluateAll(nodes=>nodes
+     .filter(node=>node.dataset.part!=='all'&&Number(node.dataset.count)>0)
+     .map(node=>({part:node.dataset.part,label:node.querySelector('.quick-name').textContent})));
+    for(const {part,label} of categories){
+     await select(part);
+     const slug=await (await frame()).evaluate(part=>typeSlug(part),part);
+     await page.goto(base+'/?sport=skate&type='+encodeURIComponent(slug));await ready();
+     child=await frame();
+     assert.equal(await child.evaluate(()=>state.part),part,'deep link: '+part);
+     const rows=await child.locator('.deal-row:not(.filtered-out)').evaluateAll(nodes=>nodes.map(node=>node.dataset.part));
+     assert(rows.length>0&&rows.every(value=>value===part),part+' results');
+     assert((await child.locator('#breadcrumbs').innerText()).includes(part),part+' breadcrumb');
+     if(part==='Packs')await page.screenshot({path:path.join(output,`packs-${width}.png`)});
+     await counts();
+    }
+    await page.goto(base+'/?sport=skate');await ready();child=await frame();
+   }
    assert.equal(await child.locator('#partFilters').isVisible(),false,'duplicate Products row must be hidden');
    assert(await child.locator('#storeFilters').isVisible(),'store chips remain visible');
    await page.locator('#categoryToggle').focus();await page.keyboard.press('ArrowDown');
