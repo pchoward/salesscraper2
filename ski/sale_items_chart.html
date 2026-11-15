@@ -15541,6 +15541,8 @@ function slugType(value) {
         complete: "Completes",
         completes: "Completes",
         protection: "Protection",
+        pack: "Packs",
+        packs: "Packs",
         helmet: "Helmets",
         helmets: "Helmets"
     }[key];
@@ -15551,7 +15553,10 @@ function slugType(value) {
 
 function sportPartForSlug(key) {
     const settings = typeof SPORT_SETTINGS !== "undefined" ? SPORT_SETTINGS : {};
-    const parts = settings.parts || [];
+    // Skate has no SPORT_SETTINGS. Its rendered options are the authoritative
+    // category list, including future headings and retailer-specific extras.
+    const parts = settings.parts || (typeof document !== "undefined" ?
+        Array.from(document.querySelectorAll("#partSelect option"), option => option.value) : []);
     // An old category link (?type=protection on Ski) opens its new heading.
     return parts.find(part => nameSlug(part) === key) || (settings.partAliases || {})[key] || "";
 }
@@ -15582,7 +15587,8 @@ function typeSlug(name) {
         Sneakers: "sneaker",
         Accessories: "accessory",
         Completes: "complete",
-        Protection: "protection"
+        Protection: "protection",
+        Packs: "packs"
     }[name] || nameSlug(name);
 }
 
