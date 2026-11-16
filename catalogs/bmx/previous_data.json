@@ -3784,20 +3784,6 @@
               "Black"
             ]
           }
-        },
-        {
-          "variant_id": 32597015167050,
-          "price": 125.0,
-          "compare": 189.95,
-          "available": true,
-          "specs": {
-            "kind": [
-              "Cranks"
-            ],
-            "color": [
-              "Black"
-            ]
-          }
         }
       ],
       "technical_specs": {
@@ -17320,6 +17306,37 @@
       "image": "https://cdn.shopify.com/s/files/1/0689/7043/products/seat_pinstripe_k3003blugy_3ql_1800x1800_a8b6002b-4159-421f-bda2-a1449d49dcb9.jpg?v=1621976372"
     },
     {
+      "name": "Alienation Gypsy Seat",
+      "url": "https://www.powersbmx.com/products/alienation-gypsy-seat",
+      "price_new": "20.00",
+      "price_old": "34.99",
+      "availability": "Check store",
+      "part": "Seating",
+      "store": "Powers BMX",
+      "product_type": "Seat",
+      "brand": "Alienation",
+      "kind": "Seats",
+      "technical_offers": [
+        {
+          "variant_id": 42061795164313,
+          "price": 20.0,
+          "compare": 34.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Seats"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "kind": [
+          "Seats"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/0689/7043/products/50838.jpg?v=1650303731"
+    },
+    {
       "name": "Odyssey Tropical Seat",
       "url": "https://www.powersbmx.com/products/odyssey-tropical-seat",
       "price_new": "36.99",
@@ -17396,37 +17413,6 @@
         "https://cdn.shopify.com/s/files/1/0689/7043/files/Promax-DP-1-Dropper-Seat-Post-Clamp-34-9mm-Red_eda0aa32-d9a7-4c8c-aabd-7f46289c7c2e.5f174830b8897fa53d8b7457a6d3eec7.avif?v=1773515969",
         "https://cdn.shopify.com/s/files/1/0689/7043/files/ST0868.jpg?v=1773515969"
       ]
-    },
-    {
-      "name": "Alienation Gypsy Seat",
-      "url": "https://www.powersbmx.com/products/alienation-gypsy-seat",
-      "price_new": "20.00",
-      "price_old": "34.99",
-      "availability": "Check store",
-      "part": "Seating",
-      "store": "Powers BMX",
-      "product_type": "Seat",
-      "brand": "Alienation",
-      "kind": "Seats",
-      "technical_offers": [
-        {
-          "variant_id": 42061795164313,
-          "price": 20.0,
-          "compare": 34.99,
-          "available": true,
-          "specs": {
-            "kind": [
-              "Seats"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "kind": [
-          "Seats"
-        ]
-      },
-      "image": "https://cdn.shopify.com/s/files/1/0689/7043/products/50838.jpg?v=1650303731"
     },
     {
       "name": "Odyssey tripod seat post",
@@ -89855,44 +89841,50 @@
   ],
   "Tactics_Protection": [
     {
-      "name": "ProTec Street Wrist Guards - black",
-      "url": "https://www.tactics.com/protec/street-wrist-guards/black",
-      "price_new": "25.95",
-      "price_old": "29.83",
+      "name": "ProTec Old School Low Pro Skate Helmet - gloss white",
+      "url": "https://www.tactics.com/protec/old-school-low-pro-skate-helmet/gloss-white",
+      "price_new": "72.95",
+      "price_old": "91.19",
       "availability": "Check store",
       "part": "Protection",
       "store": "Tactics",
-      "image": "https://www.tactics.com/a/fd11/1a/protec-street-wrist-guards-black.jpg",
-      "length": 25.95,
-      "kind": "Pads & Guards",
+      "image": "https://www.tactics.com/a/gurd/1a/protec-old-school-low-pro-skate-helmet-gloss-white.jpg",
+      "length": 72.95,
+      "kind": "Helmets",
       "technical_offers": [
         {
-          "variant_id": "https://www.tactics.com/protec/street-wrist-guards/black",
-          "price": 25.95,
-          "compare": 29.83,
+          "variant_id": "https://www.tactics.com/protec/old-school-low-pro-skate-helmet/gloss-white",
+          "price": 72.95,
+          "compare": 91.19,
           "available": true,
           "specs": {
             "protects": [
-              "Wrists"
+              "Helmets"
             ],
             "age": [
               "Adult"
             ],
+            "helmet_style": [
+              "Half shell (skate / BMX)"
+            ],
             "kind": [
-              "Pads & Guards"
+              "Helmets"
             ]
           }
         }
       ],
       "technical_specs": {
         "protects": [
-          "Wrists"
+          "Helmets"
         ],
         "age": [
           "Adult"
         ],
+        "helmet_style": [
+          "Half shell (skate / BMX)"
+        ],
         "kind": [
-          "Pads & Guards"
+          "Helmets"
         ]
       },
       "brand": "Pro-Tec"
@@ -89930,6 +89922,49 @@
       "technical_specs": {
         "protects": [
           "Elbows"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "kind": [
+          "Pads & Guards"
+        ]
+      },
+      "brand": "Triple 8"
+    },
+    {
+      "name": "Triple Eight Street Knee Pads - black",
+      "url": "https://www.tactics.com/triple-8/street-knee-pads/black",
+      "price_new": "33.95",
+      "price_old": "36.9",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Tactics",
+      "image": "https://www.tactics.com/a/98fr/1a/triple-8-street-knee-pads-black.jpg",
+      "length": 33.95,
+      "kind": "Pads & Guards",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.tactics.com/triple-8/street-knee-pads/black",
+          "price": 33.95,
+          "compare": 36.9,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "kind": [
+              "Pads & Guards"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Knees"
         ],
         "age": [
           "Adult"
@@ -89990,163 +90025,28 @@
       "brand": "Yepa"
     },
     {
-      "name": "ProTec Old School Low Pro Skate Helmet - gloss white",
-      "url": "https://www.tactics.com/protec/old-school-low-pro-skate-helmet/gloss-white",
-      "price_new": "72.95",
-      "price_old": "91.19",
+      "name": "ProTec JR Classic Fit Certified Skate Helmet - gloss white",
+      "url": "https://www.tactics.com/protec/jr-classic-fit-certified-skate-helmet/gloss-white",
+      "price_new": "54.95",
+      "price_old": "67.84",
       "availability": "Check store",
       "part": "Protection",
       "store": "Tactics",
-      "image": "https://www.tactics.com/a/gurd/1a/protec-old-school-low-pro-skate-helmet-gloss-white.jpg",
-      "length": 72.95,
+      "image": "https://www.tactics.com/a/gus1/1a/protec-jr-classic-fit-certified-skate-helmet-gloss-white.jpg",
+      "length": 54.95,
       "kind": "Helmets",
       "technical_offers": [
         {
-          "variant_id": "https://www.tactics.com/protec/old-school-low-pro-skate-helmet/gloss-white",
-          "price": 72.95,
-          "compare": 91.19,
+          "variant_id": "https://www.tactics.com/protec/jr-classic-fit-certified-skate-helmet/gloss-white",
+          "price": 54.95,
+          "compare": 67.84,
           "available": true,
           "specs": {
             "protects": [
               "Helmets"
             ],
             "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Half shell (skate / BMX)"
-            ],
-            "kind": [
-              "Helmets"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Half shell (skate / BMX)"
-        ],
-        "kind": [
-          "Helmets"
-        ]
-      },
-      "brand": "Pro-Tec"
-    },
-    {
-      "name": "Triple Eight Street Knee Pads - black",
-      "url": "https://www.tactics.com/triple-8/street-knee-pads/black",
-      "price_new": "33.95",
-      "price_old": "36.9",
-      "availability": "Check store",
-      "part": "Protection",
-      "store": "Tactics",
-      "image": "https://www.tactics.com/a/98fr/1a/triple-8-street-knee-pads-black.jpg",
-      "length": 33.95,
-      "kind": "Pads & Guards",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.tactics.com/triple-8/street-knee-pads/black",
-          "price": 33.95,
-          "compare": 36.9,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Knees"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "kind": [
-              "Pads & Guards"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Knees"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "kind": [
-          "Pads & Guards"
-        ]
-      },
-      "brand": "Triple 8"
-    },
-    {
-      "name": "187 Killer Pads Fly Knee Pads - black",
-      "url": "https://www.tactics.com/187-killer-pads/fly-knee-pads/black",
-      "price_new": "53.95",
-      "price_old": "59.94",
-      "availability": "Check store",
-      "part": "Protection",
-      "store": "Tactics",
-      "image": "https://www.tactics.com/a/am45/1a/187-killer-pads-fly-knee-pads-black.jpg",
-      "length": 53.95,
-      "kind": "Pads & Guards",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.tactics.com/187-killer-pads/fly-knee-pads/black",
-          "price": 53.95,
-          "compare": 59.94,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Knees"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "kind": [
-              "Pads & Guards"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Knees"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "kind": [
-          "Pads & Guards"
-        ]
-      },
-      "brand": "187 Killer Pads"
-    },
-    {
-      "name": "Triple Eight THE Certified Sweatsaver Skate Helmet - black matte",
-      "url": "https://www.tactics.com/triple-8/the-certified-sweatsaver-skate-helmet/black-matte",
-      "price_new": "67.95",
-      "price_old": "74.67",
-      "availability": "Check store",
-      "part": "Protection",
-      "store": "Tactics",
-      "image": "https://www.tactics.com/a/ewtf/1a/triple-8-the-certified-sweatsaver-skate-helmet-black-matte.jpg",
-      "length": 67.95,
-      "kind": "Helmets",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.tactics.com/triple-8/the-certified-sweatsaver-skate-helmet/black-matte",
-          "price": 67.95,
-          "compare": 74.67,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
+              "Youth"
             ],
             "certification": [
               "Certified (standard not named)"
@@ -90165,62 +90065,7 @@
           "Helmets"
         ],
         "age": [
-          "Adult"
-        ],
-        "certification": [
-          "Certified (standard not named)"
-        ],
-        "helmet_style": [
-          "Half shell (skate / BMX)"
-        ],
-        "kind": [
-          "Helmets"
-        ]
-      },
-      "brand": "Triple 8"
-    },
-    {
-      "name": "ProTec Classic Certified EPS Skate Helmet - matte blue",
-      "url": "https://www.tactics.com/protec/classic-certified-eps-skate-helmet/matte-blue",
-      "price_new": "58.95",
-      "price_old": "72.78",
-      "availability": "Check store",
-      "part": "Protection",
-      "store": "Tactics",
-      "image": "https://www.tactics.com/a/gcxm/1a/protec-classic-certified-eps-skate-helmet-matte-blue.jpg",
-      "length": 58.95,
-      "kind": "Helmets",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.tactics.com/protec/classic-certified-eps-skate-helmet/matte-blue",
-          "price": 58.95,
-          "compare": 72.78,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "certification": [
-              "Certified (standard not named)"
-            ],
-            "helmet_style": [
-              "Half shell (skate / BMX)"
-            ],
-            "kind": [
-              "Helmets"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
+          "Youth"
         ],
         "certification": [
           "Certified (standard not named)"
@@ -90284,76 +90129,21 @@
       "brand": "Triple 8"
     },
     {
-      "name": "ProTec JR Classic Fit Certified Skate Helmet - gloss white",
-      "url": "https://www.tactics.com/protec/jr-classic-fit-certified-skate-helmet/gloss-white",
-      "price_new": "54.95",
-      "price_old": "67.84",
+      "name": "187 Killer Pads Fly Knee Pads - black",
+      "url": "https://www.tactics.com/187-killer-pads/fly-knee-pads/black",
+      "price_new": "53.95",
+      "price_old": "59.94",
       "availability": "Check store",
       "part": "Protection",
       "store": "Tactics",
-      "image": "https://www.tactics.com/a/gus1/1a/protec-jr-classic-fit-certified-skate-helmet-gloss-white.jpg",
-      "length": 54.95,
-      "kind": "Helmets",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.tactics.com/protec/jr-classic-fit-certified-skate-helmet/gloss-white",
-          "price": 54.95,
-          "compare": 67.84,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Youth"
-            ],
-            "certification": [
-              "Certified (standard not named)"
-            ],
-            "helmet_style": [
-              "Half shell (skate / BMX)"
-            ],
-            "kind": [
-              "Helmets"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Youth"
-        ],
-        "certification": [
-          "Certified (standard not named)"
-        ],
-        "helmet_style": [
-          "Half shell (skate / BMX)"
-        ],
-        "kind": [
-          "Helmets"
-        ]
-      },
-      "brand": "Pro-Tec"
-    },
-    {
-      "name": "187 Killer Pads Slim Knee Pads - black",
-      "url": "https://www.tactics.com/187-killer-pads/slim-knee-pads/black",
-      "price_new": "60.95",
-      "price_old": "81.27",
-      "availability": "Check store",
-      "part": "Protection",
-      "store": "Tactics",
-      "image": "https://www.tactics.com/a/bede/1a/187-killer-pads-slim-knee-pads.jpg",
-      "length": 60.95,
+      "image": "https://www.tactics.com/a/am45/1a/187-killer-pads-fly-knee-pads-black.jpg",
+      "length": 53.95,
       "kind": "Pads & Guards",
       "technical_offers": [
         {
-          "variant_id": "https://www.tactics.com/187-killer-pads/slim-knee-pads/black",
-          "price": 60.95,
-          "compare": 81.27,
+          "variant_id": "https://www.tactics.com/187-killer-pads/fly-knee-pads/black",
+          "price": 53.95,
+          "compare": 59.94,
           "available": true,
           "specs": {
             "protects": [
@@ -90380,55 +90170,6 @@
         ]
       },
       "brand": "187 Killer Pads"
-    },
-    {
-      "name": "Triple Eight Deep Cover Skate Helmet - navy matte",
-      "url": "https://www.tactics.com/triple-8/deep-cover-skate-helmet/navy-matte",
-      "price_new": "80.95",
-      "price_old": "101.19",
-      "availability": "Check store",
-      "part": "Protection",
-      "store": "Tactics",
-      "image": "https://www.tactics.com/a/fttt/1a/triple-8-deep-cover-skate-helmet-navy-matte.jpg",
-      "length": 80.95,
-      "kind": "Helmets",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.tactics.com/triple-8/deep-cover-skate-helmet/navy-matte",
-          "price": 80.95,
-          "compare": 101.19,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Half shell (skate / BMX)"
-            ],
-            "kind": [
-              "Helmets"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Half shell (skate / BMX)"
-        ],
-        "kind": [
-          "Helmets"
-        ]
-      },
-      "brand": "Triple 8"
     },
     {
       "name": "ProTec Low Pro Certified Skate Helmet - white",
@@ -90486,21 +90227,21 @@
       "brand": "Pro-Tec"
     },
     {
-      "name": "Triple Eight THE Certified Sweatsaver Skate Helmet - carbon matte",
-      "url": "https://www.tactics.com/triple-8/the-certified-sweatsaver-skate-helmet/carbon-matte",
-      "price_new": "63.95",
-      "price_old": "75.24",
+      "name": "Triple Eight Deep Cover Skate Helmet - navy matte",
+      "url": "https://www.tactics.com/triple-8/deep-cover-skate-helmet/navy-matte",
+      "price_new": "80.95",
+      "price_old": "101.19",
       "availability": "Check store",
       "part": "Protection",
       "store": "Tactics",
-      "image": "https://www.tactics.com/a/ewtg/1a/triple-8-the-certified-sweatsaver-skate-helmet-carbon-matte.jpg",
-      "length": 63.95,
+      "image": "https://www.tactics.com/a/fttt/1a/triple-8-deep-cover-skate-helmet-navy-matte.jpg",
+      "length": 80.95,
       "kind": "Helmets",
       "technical_offers": [
         {
-          "variant_id": "https://www.tactics.com/triple-8/the-certified-sweatsaver-skate-helmet/carbon-matte",
-          "price": 63.95,
-          "compare": 75.24,
+          "variant_id": "https://www.tactics.com/triple-8/deep-cover-skate-helmet/navy-matte",
+          "price": 80.95,
+          "compare": 101.19,
           "available": true,
           "specs": {
             "protects": [
@@ -90508,9 +90249,6 @@
             ],
             "age": [
               "Adult"
-            ],
-            "certification": [
-              "Certified (standard not named)"
             ],
             "helmet_style": [
               "Half shell (skate / BMX)"
@@ -90527,9 +90265,6 @@
         ],
         "age": [
           "Adult"
-        ],
-        "certification": [
-          "Certified (standard not named)"
         ],
         "helmet_style": [
           "Half shell (skate / BMX)"
@@ -90596,6 +90331,104 @@
       "brand": "Pro-Tec"
     },
     {
+      "name": "187 Killer Pads Slim Knee Pads - black",
+      "url": "https://www.tactics.com/187-killer-pads/slim-knee-pads/black",
+      "price_new": "60.95",
+      "price_old": "81.27",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Tactics",
+      "image": "https://www.tactics.com/a/bede/1a/187-killer-pads-slim-knee-pads.jpg",
+      "length": 60.95,
+      "kind": "Pads & Guards",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.tactics.com/187-killer-pads/slim-knee-pads/black",
+          "price": 60.95,
+          "compare": 81.27,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "kind": [
+              "Pads & Guards"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Knees"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "kind": [
+          "Pads & Guards"
+        ]
+      },
+      "brand": "187 Killer Pads"
+    },
+    {
+      "name": "Triple Eight THE Certified Sweatsaver Skate Helmet - carbon matte",
+      "url": "https://www.tactics.com/triple-8/the-certified-sweatsaver-skate-helmet/carbon-matte",
+      "price_new": "63.95",
+      "price_old": "75.24",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Tactics",
+      "image": "https://www.tactics.com/a/ewtg/1a/triple-8-the-certified-sweatsaver-skate-helmet-carbon-matte.jpg",
+      "length": 63.95,
+      "kind": "Helmets",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.tactics.com/triple-8/the-certified-sweatsaver-skate-helmet/carbon-matte",
+          "price": 63.95,
+          "compare": 75.24,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Half shell (skate / BMX)"
+            ],
+            "kind": [
+              "Helmets"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "Certified (standard not named)"
+        ],
+        "helmet_style": [
+          "Half shell (skate / BMX)"
+        ],
+        "kind": [
+          "Helmets"
+        ]
+      },
+      "brand": "Triple 8"
+    },
+    {
       "name": "ProTec Old School Low Pro Skate Helmet - matte black",
       "url": "https://www.tactics.com/protec/old-school-low-pro-skate-helmet/matte-black",
       "price_new": "72.95",
@@ -90645,6 +90478,61 @@
       "brand": "Pro-Tec"
     },
     {
+      "name": "Triple Eight THE Certified Sweatsaver Skate Helmet - black matte",
+      "url": "https://www.tactics.com/triple-8/the-certified-sweatsaver-skate-helmet/black-matte",
+      "price_new": "67.95",
+      "price_old": "74.67",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Tactics",
+      "image": "https://www.tactics.com/a/ewtf/1a/triple-8-the-certified-sweatsaver-skate-helmet-black-matte.jpg",
+      "length": 67.95,
+      "kind": "Helmets",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.tactics.com/triple-8/the-certified-sweatsaver-skate-helmet/black-matte",
+          "price": 67.95,
+          "compare": 74.67,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Half shell (skate / BMX)"
+            ],
+            "kind": [
+              "Helmets"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "Certified (standard not named)"
+        ],
+        "helmet_style": [
+          "Half shell (skate / BMX)"
+        ],
+        "kind": [
+          "Helmets"
+        ]
+      },
+      "brand": "Triple 8"
+    },
+    {
       "name": "ProTec Old School Low Pro Skate Helmet - matte grey",
       "url": "https://www.tactics.com/protec/old-school-low-pro-skate-helmet/matte-grey",
       "price_new": "81.95",
@@ -90689,49 +90577,6 @@
         ],
         "kind": [
           "Helmets"
-        ]
-      },
-      "brand": "Pro-Tec"
-    },
-    {
-      "name": "ProTec Street Knee Open Back Skate Knee Pads - black",
-      "url": "https://www.tactics.com/protec/street-knee-open-back-skate-knee-pads/black",
-      "price_new": "40.95",
-      "price_old": "45.0",
-      "availability": "Check store",
-      "part": "Protection",
-      "store": "Tactics",
-      "image": "https://www.tactics.com/a/fayg/1a/protec-street-knee-open-back-skate-pads-black.jpg",
-      "length": 40.95,
-      "kind": "Pads & Guards",
-      "technical_offers": [
-        {
-          "variant_id": "https://www.tactics.com/protec/street-knee-open-back-skate-knee-pads/black",
-          "price": 40.95,
-          "compare": 45.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Knees"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "kind": [
-              "Pads & Guards"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Knees"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "kind": [
-          "Pads & Guards"
         ]
       },
       "brand": "Pro-Tec"
@@ -90792,6 +90637,49 @@
       "brand": "Pro-Tec"
     },
     {
+      "name": "ProTec Street Knee Open Back Skate Knee Pads - black",
+      "url": "https://www.tactics.com/protec/street-knee-open-back-skate-knee-pads/black",
+      "price_new": "40.95",
+      "price_old": "45.0",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Tactics",
+      "image": "https://www.tactics.com/a/fayg/1a/protec-street-knee-open-back-skate-pads-black.jpg",
+      "length": 40.95,
+      "kind": "Pads & Guards",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.tactics.com/protec/street-knee-open-back-skate-knee-pads/black",
+          "price": 40.95,
+          "compare": 45.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "kind": [
+              "Pads & Guards"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Knees"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "kind": [
+          "Pads & Guards"
+        ]
+      },
+      "brand": "Pro-Tec"
+    },
+    {
       "name": "ProTec Classic Certified EPS Skate Helmet - matte grey",
       "url": "https://www.tactics.com/protec/classic-certified-eps-skate-helmet/matte-grey",
       "price_new": "58.95",
@@ -90805,6 +90693,104 @@
       "technical_offers": [
         {
           "variant_id": "https://www.tactics.com/protec/classic-certified-eps-skate-helmet/matte-grey",
+          "price": 58.95,
+          "compare": 72.78,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Half shell (skate / BMX)"
+            ],
+            "kind": [
+              "Helmets"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "Certified (standard not named)"
+        ],
+        "helmet_style": [
+          "Half shell (skate / BMX)"
+        ],
+        "kind": [
+          "Helmets"
+        ]
+      },
+      "brand": "Pro-Tec"
+    },
+    {
+      "name": "ProTec Street Wrist Guards - black",
+      "url": "https://www.tactics.com/protec/street-wrist-guards/black",
+      "price_new": "25.95",
+      "price_old": "29.83",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Tactics",
+      "image": "https://www.tactics.com/a/fd11/1a/protec-street-wrist-guards-black.jpg",
+      "length": 25.95,
+      "kind": "Pads & Guards",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.tactics.com/protec/street-wrist-guards/black",
+          "price": 25.95,
+          "compare": 29.83,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Wrists"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "kind": [
+              "Pads & Guards"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Wrists"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "kind": [
+          "Pads & Guards"
+        ]
+      },
+      "brand": "Pro-Tec"
+    },
+    {
+      "name": "ProTec Classic Certified EPS Skate Helmet - matte blue",
+      "url": "https://www.tactics.com/protec/classic-certified-eps-skate-helmet/matte-blue",
+      "price_new": "58.95",
+      "price_old": "72.78",
+      "availability": "Check store",
+      "part": "Protection",
+      "store": "Tactics",
+      "image": "https://www.tactics.com/a/gcxm/1a/protec-classic-certified-eps-skate-helmet-matte-blue.jpg",
+      "length": 58.95,
+      "kind": "Helmets",
+      "technical_offers": [
+        {
+          "variant_id": "https://www.tactics.com/protec/classic-certified-eps-skate-helmet/matte-blue",
           "price": 58.95,
           "compare": 72.78,
           "available": true,

@@ -1,60 +1,1300 @@
 {
  "changes": {
-  "Bike Mart_Brakes": [
+  "Bicycle Warehouse_Bikes": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Norco",
+     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/66a7f54b5c642f7c3621a6a323916ae3a81aa629.jpg?v=1787783633",
+     "name": "Norco 2024 Sight A1 MX",
+     "part": "Bikes",
+     "price_new": "4299.00",
+     "price_old": "5699.00",
+     "product_type": "Bikes - Full Suspension 27.5",
+     "store": "Bicycle Warehouse",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 5699.0,
+       "price": 4299.0,
+       "specs": {
+        "riding_type": [
+         "enduro"
+        ]
+       },
+       "variant_id": 46652926754918
+      },
+      {
+       "available": true,
+       "compare": 5699.0,
+       "price": 4299.0,
+       "specs": {
+        "riding_type": [
+         "enduro"
+        ]
+       },
+       "variant_id": 46652926787686
+      }
+     ],
+     "technical_specs": {
+      "riding_type": [
+       "enduro"
+      ]
+     },
+     "url": "https://bicyclewarehouse.com/products/2024-sight-a1-mx"
+    },
+    "type": "removed"
+   }
+  ],
+  "Bicycle Warehouse_Protection": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Fox",
+     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_1.jpg?v=1772088450",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_1.jpg?v=1772088450",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_10.jpg?v=1772088452",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_3.jpg?v=1772088454",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_4.jpg?v=1772088455",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_6.jpg?v=1772088457"
+     ],
+     "name": "Fox Flight Helmet Solid",
+     "part": "Protection",
+     "price_new": "79.99",
+     "price_old": "84.95",
+     "product_type": "Helmets",
+     "protection_sizes": [
+      "S",
+      "L"
+     ],
+     "protection_type": "Helmet",
+     "store": "Bicycle Warehouse",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 84.95,
+       "price": 79.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Half shell (skate / BMX)"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 40740050665574
+      },
+      {
+       "available": true,
+       "compare": 84.95,
+       "price": 79.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Half shell (skate / BMX)"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 40740050731110
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "helmet_style": [
+       "Half shell (skate / BMX)"
+      ],
+      "prot_size": [
+       "L",
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://bicyclewarehouse.com/products/flight-helmet-solid"
+    },
+    "type": "removed"
+   }
+  ],
+  "Bike Mart_Bikes": [
    {
     "item": {
      "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "TRP",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7489.jpg?v=1763528940",
+     "brand": "Specialized",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-00_SJ-15-SW-DI2-DLMMET-SMKLQDMET_HERO_DARK-PDP.jpg?v=1762254543",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7489.jpg?v=1763528940",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7490.jpg?v=1763528940"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-00_SJ-15-SW-DI2-DLMMET-SMKLQDMET_HERO_DARK-PDP.jpg?v=1762254543",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-01_SJ-15-SW-DI2-SLDMET-REDSKY-BRSHCP_HERO_DARK-PDP.jpg?v=1762254544"
      ],
-     "name": "TRP-33 Disc Brake Rotor - 140mm 6-Bolt 1.8mm Silver/Black",
-     "part": "Brakes",
-     "price_new": "64.99",
-     "price_old": "94.76",
-     "product_type": "Disc Rotor",
-     "spec_warnings": [
-      "conflicting rotor_mm"
-     ],
+     "name": "Specialized S-Works Stumpjumper 15 EVO - Shimano XTR Di2, FOX Factory",
+     "part": "Bikes",
+     "price_new": "9499.99",
+     "price_old": "11300.00",
+     "product_type": "Mountain Bike",
      "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 94.76,
-       "price": 64.99,
+       "compare": 11300.0,
+       "price": 9499.99,
        "specs": {
-        "rotor_mm": [
-         "140"
+        "frame_size": [
+         "S1"
         ]
        },
-       "variant_id": 46886670041341
+       "variant_id": 46838541484285
       },
       {
        "available": true,
-       "compare": 92.92,
-       "price": 64.99,
-       "specs": {},
-       "variant_id": 46886670074109
+       "compare": 11300.0,
+       "price": 9499.99,
+       "specs": {
+        "frame_size": [
+         "S2"
+        ]
+       },
+       "variant_id": 46838541517053
       },
       {
        "available": true,
-       "compare": 85.7,
-       "price": 69.99,
-       "specs": {},
-       "variant_id": 46886670106877
+       "compare": 11300.0,
+       "price": 9499.99,
+       "specs": {
+        "frame_size": [
+         "S3"
+        ]
+       },
+       "variant_id": 46838541549821
+      },
+      {
+       "available": true,
+       "compare": 11300.0,
+       "price": 9499.99,
+       "specs": {
+        "frame_size": [
+         "S4"
+        ]
+       },
+       "variant_id": 46838541582589
+      },
+      {
+       "available": true,
+       "compare": 11300.0,
+       "price": 9499.99,
+       "specs": {
+        "frame_size": [
+         "S1"
+        ]
+       },
+       "variant_id": 46838541680893
+      },
+      {
+       "available": true,
+       "compare": 11300.0,
+       "price": 9499.99,
+       "specs": {
+        "frame_size": [
+         "S3"
+        ]
+       },
+       "variant_id": 46838541746429
+      },
+      {
+       "available": true,
+       "compare": 11300.0,
+       "price": 9499.99,
+       "specs": {
+        "frame_size": [
+         "S4"
+        ]
+       },
+       "variant_id": 46838541779197
+      },
+      {
+       "available": true,
+       "compare": 11300.0,
+       "price": 9499.99,
+       "specs": {
+        "frame_size": [
+         "S5"
+        ]
+       },
+       "variant_id": 46838541811965
+      },
+      {
+       "available": true,
+       "compare": 11300.0,
+       "price": 9499.99,
+       "specs": {
+        "frame_size": [
+         "S6"
+        ]
+       },
+       "variant_id": 46838541844733
       }
      ],
      "technical_specs": {
-      "rotor_mm": [
-       "140"
+      "frame_size": [
+       "S1",
+       "S2",
+       "S3",
+       "S4",
+       "S5",
+       "S6"
       ]
      },
-     "url": "https://www.bikemart.com/products/trp-33-disc-brake-rotor-6-bolt-1-8mm-silver-black"
+     "url": "https://www.bikemart.com/products/2026-stumpjumper-15-s-works-di2"
     },
     "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Specialized",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-30_SJ-15-EXPERT-DI2-NBLMET-DLMMET_HERO-PDP.jpg?v=1762264578",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-30_SJ-15-EXPERT-DI2-NBLMET-DLMMET_HERO-PDP.jpg?v=1762264578",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-31_SJ-15-EXPERT-DI2-PST-DKMOS_HERO-PDP.jpg?v=1762264578"
+     ],
+     "name": "Specialized Stumpjumper 15 EVO Expert - Shimano XT Di2, FOX Performance Elite",
+     "part": "Bikes",
+     "price_new": "5299.99",
+     "price_old": "6200.00",
+     "product_type": "Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 6200.0,
+       "price": 5299.99,
+       "specs": {
+        "frame_size": [
+         "S1"
+        ]
+       },
+       "variant_id": 46839643111677
+      },
+      {
+       "available": true,
+       "compare": 6200.0,
+       "price": 5299.99,
+       "specs": {
+        "frame_size": [
+         "S6"
+        ]
+       },
+       "variant_id": 46839643275517
+      },
+      {
+       "available": true,
+       "compare": 6200.0,
+       "price": 5299.99,
+       "specs": {
+        "frame_size": [
+         "S1"
+        ]
+       },
+       "variant_id": 46839643308285
+      },
+      {
+       "available": true,
+       "compare": 6200.0,
+       "price": 5299.99,
+       "specs": {
+        "frame_size": [
+         "S6"
+        ]
+       },
+       "variant_id": 46839643472125
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "S1",
+       "S6"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-stumpjumper-15-expert-di2"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Portrait.jpg?v=1764016762",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt1.jpg?v=1764008227",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt2.jpg?v=1764008228",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt3.jpg?v=1764008228",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt4.jpg?v=1764008229"
+     ],
+     "length": 0.0,
+     "name": "Trek 2026 Slash 9.9 X0 AXS T-Type Gen 6 Full Suspension Mountain Bike",
+     "part": "Bikes",
+     "price_new": "7799.93",
+     "price_old": "8699.99",
+     "product_type": "Full Suspension Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46906856407293
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "frame_size": [
+         "M"
+        ],
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46906856440061
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46906856472829
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "frame_size": [
+         "L"
+        ],
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46906856505597
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "L",
+       "M"
+      ],
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-slash-9-9-x0-axs-t-type-gen-6-full-suspension-mountain-bike",
+     "width": 9.9
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Giant",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Front.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Rear.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-4.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-5.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-6.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-7.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-8.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-9.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamondMTB-10.jpg?v=1764025528"
+     ],
+     "name": "Giant 2023 Reign Advanced Pro 1 Full Suspension Mountain Bike",
+     "part": "Bikes",
+     "price_new": "4999.00",
+     "price_old": "6460.00",
+     "product_type": "Full Suspension Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 6460.0,
+       "price": 4999.0,
+       "specs": {
+        "frame_size": [
+         "S"
+        ]
+       },
+       "variant_id": 46907588673789
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "S"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2023-reign-advanced-pro-1-full-suspension-mountain-bike"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Liv",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond.jpg?v=1764000643",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-Front.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D2.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D3.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D4.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D5.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D6.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D7.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D8.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D9.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D10.jpg?v=1764000643"
+     ],
+     "name": "Liv 2025 Tempt 1 Hardtail Mountain Bike",
+     "part": "Bikes",
+     "price_new": "900.00",
+     "price_old": "1000.00",
+     "product_type": "Hardtail Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 1000.0,
+       "price": 900.0,
+       "specs": {},
+       "variant_id": 46906591314173
+      },
+      {
+       "available": true,
+       "compare": 1000.0,
+       "price": 900.0,
+       "specs": {},
+       "variant_id": 46906591346941
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/2025-tempt-1-hardtail-mountain-bike"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Unified Bike Co.",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0602.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0514.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0617.jpg?v=1764086745"
+     ],
+     "name": "Unified Bike Co. Racello Deore 12 Hardtail Mountain Bike",
+     "part": "Bikes",
+     "price_new": "599.62",
+     "price_old": "999.99",
+     "product_type": "Hardtail Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 999.99,
+       "price": 599.62,
+       "specs": {},
+       "variant_id": 46907848622333
+      },
+      {
+       "available": true,
+       "compare": 999.99,
+       "price": 599.62,
+       "specs": {
+        "frame_size": [
+         "L"
+        ]
+       },
+       "variant_id": 46907848655101
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "L"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/unified-bike-co-racello-deore-12-ship-to-your-door-hardtail"
+    },
+    "type": "removed"
+   }
+  ],
+  "Bike Mart_Brakes": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "SRAM",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair--fix-iv-776258-2.png?v=1761060642",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-3.png?v=1761060642",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair--fix-iv-776258-1.png?v=1761060642"
+     ],
+     "name": "SRAM FR-5 Brake Lever- Pair",
+     "part": "Brakes",
+     "price_new": "17.60",
+     "price_old": "25.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 25.0,
+       "price": 17.6,
+       "specs": {},
+       "variant_id": 46764363907325
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/fr-5-brake-lever-pair"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Avid",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-1.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-12.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-11.jpg?v=1761060041"
+     ],
+     "name": "Avid Disc Brake Pads (Juicy/BB7/BB5)",
+     "part": "Brakes",
+     "price_new": "10.93",
+     "price_old": "35.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 10.93,
+       "specs": {},
+       "variant_id": 46764026527997
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/disc-brake-pads-juicybb7bb5"
+    },
+    "type": "removed"
+   }
+  ],
+  "Bike Mart_Cockpit": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "ODI",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0339.jpg?v=1762290159",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0339.jpg?v=1762290159",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0340.jpg?v=1762290159",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0341.jpg?v=1762290159",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0338.jpg?v=1762290160"
+     ],
+     "name": "ODI Ruffian v2.1 Lock-On Grips - Length 135mm, Round Shape",
+     "part": "Cockpit",
+     "price_new": "28.80",
+     "price_old": "32.00",
+     "product_type": "Grips",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46842211926269
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46842211959037
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46842211991805
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/odi-ruffian-v2-1-lock-on-grips"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "ESI",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5308.jpg?v=1763591434",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5308.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT8019.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5305.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5307.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5309.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/eg1108.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5311.jpg?v=1763591435",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5315.jpg?v=1763591434"
+     ],
+     "name": "ESI Racer's Edge Grips",
+     "part": "Cockpit",
+     "price_new": "18.99",
+     "price_old": "19.99",
+     "product_type": "Grips",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 19.99,
+       "price": 18.99,
+       "specs": {},
+       "variant_id": 46891832738045
+      },
+      {
+       "available": true,
+       "compare": 19.99,
+       "price": 18.99,
+       "specs": {},
+       "variant_id": 46891832770813
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/esi-racers-edge-grips"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1540.jpg?v=1762254886",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1540.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1541.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1542.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1543.jpg?v=1762254886"
+     ],
+     "name": "WTB Solano SL Saddle - Black",
+     "part": "Cockpit",
+     "price_new": "116.95",
+     "price_old": "129.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 229.95,
+       "price": 206.95,
+       "specs": {},
+       "variant_id": 46838557868285
+      },
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46838557901053
+      },
+      {
+       "available": true,
+       "compare": 229.95,
+       "price": 206.95,
+       "specs": {},
+       "variant_id": 46838557933821
+      },
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46838557966589
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-solano-sl-saddle"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
+     ],
+     "name": "WTB Rocket Saddle - Black Medium Fusion Form",
+     "part": "Cockpit",
+     "price_new": "71.95",
+     "price_old": "89.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46839154934013
+      },
+      {
+       "available": true,
+       "compare": 119.95,
+       "price": 107.95,
+       "specs": {},
+       "variant_id": 46839154966781
+      },
+      {
+       "available": true,
+       "compare": 104.95,
+       "price": 94.95,
+       "specs": {},
+       "variant_id": 46839154999549
+      },
+      {
+       "available": true,
+       "compare": 89.95,
+       "price": 71.95,
+       "specs": {},
+       "variant_id": 46839155032317
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-rocket-saddle"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1191.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1192.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1193.jpg?v=1762331072"
+     ],
+     "name": "WTB Gravelier Saddle - Black",
+     "part": "Cockpit",
+     "price_new": "94.95",
+     "price_old": "104.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 104.95,
+       "price": 94.95,
+       "specs": {},
+       "variant_id": 46844595208445
+      },
+      {
+       "available": true,
+       "compare": 119.95,
+       "price": 107.95,
+       "specs": {},
+       "variant_id": 46844595241213
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-gravelier-saddle"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "ODI",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4111.jpg?v=1762250171",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4112.jpg?v=1762250170",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4113.jpg?v=1762250171",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4114.jpg?v=1762250170",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4115.jpg?v=1762250170",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4116.jpg?v=1762250171"
+     ],
+     "name": "ODI Reflex v2.1 XL Lock-On Grips - Round 135mm",
+     "part": "Cockpit",
+     "price_new": "28.80",
+     "price_old": "32.00",
+     "product_type": "Lock-On Grips",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322692349
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322725117
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322757885
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322790653
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322823421
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322856189
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322888957
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/odi-reflex-v2-1-xl-lock-on-grips-white-black"
+    },
+    "type": "removed"
+   }
+  ],
+  "Bike Mart_Drivetrain": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-1.jpg?v=1761060271"
+     ],
+     "name": "KMC X12EPT Eco Pro Teq Chain",
+     "part": "Drivetrain",
+     "price_new": "45.62",
+     "price_old": "66.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 66.0,
+       "price": 45.62,
+       "specs": {},
+       "variant_id": 46764155994365
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/x12ept-eco-pro-teq-chain"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-1.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-16.jpg?v=1761060266"
+     ],
+     "name": "KMC X12 12-Speed Chain",
+     "part": "Drivetrain",
+     "price_new": "29.62",
+     "price_old": "44.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 44.0,
+       "price": 29.62,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151374077
+      },
+      {
+       "available": true,
+       "compare": 154.0,
+       "price": 115.5,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151406845
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Odyssey",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9033.jpg?v=1762282102"
+     ],
+     "length": 1.0,
+     "name": "Odyssey Bluebird Chain - Single Speed 1/2\" x 1/8\"",
+     "part": "Drivetrain",
+     "price_new": "36.99",
+     "price_old": "39.99",
+     "product_type": "Chains",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 39.99,
+       "price": 36.99,
+       "specs": {},
+       "variant_id": 46840926667005
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/odyssey-bluebird-chain",
+     "width": 2.0
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x11e-turbo-chain-335884-1.jpg?v=1761060214"
+     ],
+     "name": "KMC E11-EPT Eco ProteQ eBike Chain",
+     "part": "Drivetrain",
+     "price_new": "59.62",
+     "price_old": "88.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 88.0,
+       "price": 59.62,
+       "specs": {},
+       "variant_id": 46764131188989
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/e11-ept-eco-proteq-ebike-chain"
+    },
+    "type": "removed"
+   }
+  ],
+  "Bike Mart_Forks & Shocks": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "RockShox",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/RS6816_68a78fea-6940-4d98-a3d5-af7bd91330eb.jpg?v=1762291836",
+     "length": 50.0,
+     "name": "RockShox Rear Shock Mounting Hardware - 3-Piece 1/2\" 10 x 50.0 Offset Trek Carbon",
+     "part": "Forks & Shocks",
+     "price_new": "4.93",
+     "price_old": "15.00",
+     "product_type": "Shock Mounting Hardware",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 15.0,
+       "price": 4.93,
+       "specs": {},
+       "variant_id": 46842302824701
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/rockshox-rear-shock-mounting-hardware-3-piece-1-2-10-x-50-0-offset-trek-carbon",
+     "width": 10.0
+    },
+    "type": "removed"
+   }
+  ],
+  "Bike Mart_Frames": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Specialized",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/78026-00_KENEVO-SL-SW-CARBON-FRMSET-TLTNT-SMK-DUNEWHT_HERO-PDP.jpg?v=1762306007",
+     "name": "Specialized S-Works Turbo Kenevo SL 2 Frameset",
+     "part": "Frames",
+     "price_new": "5999.99",
+     "price_old": "7500.00",
+     "product_type": "Framesets",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 7500.0,
+       "price": 5999.99,
+       "specs": {
+        "frame_size": [
+         "S4"
+        ]
+       },
+       "variant_id": 46842970472701
+      },
+      {
+       "available": true,
+       "compare": 7500.0,
+       "price": 5999.99,
+       "specs": {
+        "frame_size": [
+         "S5"
+        ]
+       },
+       "variant_id": 46842970505469
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "S4",
+       "S5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-kenevo-sl-s-works-carbon-frmset"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Specialized",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73326-00_SJ-15-SW-FRM-ASHGRY-SHDWSIL-BLKLQDMET_HERO-PDP.jpg?v=1762256069",
+     "name": "Specialized S-Works Stumpjumper 15 EVO Frameset - FOX FLOAT X GENIE Factory",
+     "part": "Frames",
+     "price_new": "3299.99",
+     "price_old": "3600.00",
+     "product_type": "Framesets",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 3600.0,
+       "price": 3299.99,
+       "specs": {
+        "frame_size": [
+         "S1"
+        ]
+       },
+       "variant_id": 46838592405757
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "S1"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-stumpjumper-15-s-works-frm"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Specialized",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-00_SJ-15-SW-FRM-NRBLK-BLK-CLGRY_HERO-PDP.jpg?v=1762328022",
+     "name": "Specialized S-Works Stumpjumper 15 Frameset - FOX FLOAT GENIE Factory",
+     "part": "Frames",
+     "price_new": "2899.99",
+     "price_old": "3600.00",
+     "product_type": "Framesets",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 3600.0,
+       "price": 2899.99,
+       "specs": {
+        "frame_size": [
+         "S1"
+        ]
+       },
+       "variant_id": 46844350890237
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "S1"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2025-stumpjumper-15-s-works-frm"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Specialized",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-70_SJ-15-ALLOY-FRM-OBSD-SILDST_HERO-PDP.jpg?v=1762326603",
+     "name": "Specialized Stumpjumper 15 Alloy Frameset - FOX FLOAT GENIE Performance",
+     "part": "Frames",
+     "price_new": "1699.99",
+     "price_old": "2100.00",
+     "product_type": "Framesets",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 2100.0,
+       "price": 1699.99,
+       "specs": {
+        "frame_size": [
+         "S1"
+        ]
+       },
+       "variant_id": 46844258451709
+      },
+      {
+       "available": true,
+       "compare": 2100.0,
+       "price": 1699.99,
+       "specs": {
+        "frame_size": [
+         "S6"
+        ]
+       },
+       "variant_id": 46844258517245
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "S1",
+       "S6"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2025-stumpjumper-15-alloy-frm"
+    },
+    "type": "new"
+   }
+  ],
+  "Bike Mart_Pedals": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "VP Components",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/21714_A_1_VP_Grind_Black_Pedal.jpg?v=1762267757",
+     "name": "VP Grind 1/2inch Black Pair Pedal",
+     "part": "Pedals",
+     "price_new": "12.93",
+     "price_old": "19.99",
+     "product_type": "Pedal",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 19.99,
+       "price": 12.93,
+       "specs": {},
+       "variant_id": 46840027775229
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/vp-grind-1-2inch-black-pair-pedal"
+    },
+    "type": "removed"
    }
   ],
   "Bike Mart_Tires": [
@@ -62,29 +1302,997 @@
     "item": {
      "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "Maxxis",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/593292.jpg?v=1763532798",
-     "length": 2.4,
-     "name": "Maxxis Minion DHF 24x2.4 Standard Tire",
+     "brand": "Pirelli",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4139.jpg?v=1762311714",
+     "name": "Pirelli P ZERO Race 4S Tire - 700, Clincher Folding, Black",
      "part": "Tires",
-     "price_new": "66.00",
-     "price_old": "72.00",
+     "price_new": "92.61",
+     "price_old": "102.90",
      "product_type": "Tires",
      "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 72.0,
-       "price": 66.0,
+       "compare": 102.9,
+       "price": 92.61,
        "specs": {},
-       "variant_id": 46886869336317
+       "variant_id": 46843407106301
+      },
+      {
+       "available": true,
+       "compare": 102.9,
+       "price": 92.61,
+       "specs": {},
+       "variant_id": 46843407171837
       }
      ],
      "technical_specs": {},
-     "url": "https://www.bikemart.com/products/maxxis-minion-dhf-24x2-4-standard-tire",
-     "width": 24.0
+     "url": "https://www.bikemart.com/products/pirelli-p-zero-race-4s-tire-700-clincher-folding-black"
     },
     "type": "new"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR2267.jpg?v=1763586533",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR2267.jpg?v=1763586533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma1065.jpg?v=1763586533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma1064.jpg?v=1763586534"
+     ],
+     "length": 29.0,
+     "name": "Maxxis Aspen Tire - 29\" Tubeless",
+     "part": "Tires",
+     "price_new": "83.00",
+     "price_old": "91.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 96.0,
+       "price": 88.0,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46891713429757
+      },
+      {
+       "available": true,
+       "compare": 91.0,
+       "price": 83.0,
+       "specs": {
+        "tire_width": [
+         "2.25"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46891713462525
+      },
+      {
+       "available": true,
+       "compare": 91.0,
+       "price": 83.0,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46891713495293
+      },
+      {
+       "available": true,
+       "compare": 101.0,
+       "price": 92.0,
+       "specs": {
+        "tire_width": [
+         "2.25"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46891713528061
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.25",
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/maxxis-aspen-tire-29-tubeless"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/wt1553.jpg?v=1762292758",
+     "length": 2.4,
+     "name": "WTB Judge TCS 27.5x2.4\" Tire",
+     "part": "Tires",
+     "price_new": "72.95",
+     "price_old": "80.95",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 93.95,
+       "price": 84.95,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46842335854845
+      },
+      {
+       "available": true,
+       "compare": 80.95,
+       "price": 72.95,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46842335887613
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/wtb-judge-tcs-27-5x2-4-tire",
+     "width": 27.5
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4961.jpg?v=1762329187"
+     ],
+     "name": "Schwalbe RapidRob Tire - Clincher Wire Black",
+     "part": "Tires",
+     "price_new": "28.83",
+     "price_old": "31.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 31.0,
+       "price": 28.83,
+       "specs": {
+        "tire_width": [
+         "2.1"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46844436283645
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.1"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/schwalbe-rapid-rob-tire-26-x-2-1-clincher-wire-black-k-guard-liteskin"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5411-02.jpg?v=1762259881",
+     "name": "Schwalbe Marathon Almotion Tire - Clincher Folding BLK V-Guard",
+     "part": "Tires",
+     "price_new": "84.63",
+     "price_old": "91.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 91.0,
+       "price": 84.63,
+       "specs": {
+        "tire_width": [
+         "2.15"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46839131177213
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.15"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/schwalbe-marathon-almotion-tire"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Pirelli",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/pv3515inset1.jpg?v=1762279323",
+     "length": 2.4,
+     "name": "Cast by Pirelli DH/Enduro Protagonist TL 29 Tire - 29x2.4 Evo",
+     "part": "Tires",
+     "price_new": "120.51",
+     "price_old": "133.90",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 133.9,
+       "price": 120.51,
+       "specs": {
+        "casing": [
+         "DH"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46840767611133
+      },
+      {
+       "available": true,
+       "compare": 133.9,
+       "price": 120.51,
+       "specs": {
+        "casing": [
+         "DH"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46840767643901
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "DH"
+      ],
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/cast-by-pirelli-dh-enduro-protagonist-tl-29-tire-29x2-4-evo",
+     "width": 29.0
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR0291.jpg?v=1762281232",
+     "name": "Schwalbe Energizer Plus Tire - Performance GreenGuard Addix E50",
+     "part": "Tires",
+     "price_new": "42.78",
+     "price_old": "46.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 46.0,
+       "price": 42.78,
+       "specs": {
+        "tire_width": [
+         "1.75"
+        ],
+        "wheel_size": [
+         "26"
+        ]
+       },
+       "variant_id": 46840874402045
+      },
+      {
+       "available": true,
+       "compare": 50.0,
+       "price": 46.5,
+       "specs": {},
+       "variant_id": 46840874565885
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "1.75"
+      ],
+      "wheel_size": [
+       "26"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/schwalbe-energizer-plus-tire-performance-greenguard-addix-e50"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5837.jpg?v=1762262320",
+     "length": 2.0,
+     "name": "Schwalbe Big Ben 27.5x2.0\" Tire",
+     "part": "Tires",
+     "price_new": "28.83",
+     "price_old": "31.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 54.0,
+       "price": 50.22,
+       "specs": {
+        "tire_width": [
+         "2"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46839461806333
+      },
+      {
+       "available": true,
+       "compare": 31.0,
+       "price": 28.83,
+       "specs": {
+        "tire_width": [
+         "2"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46839461839101
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/schwalbe-big-ben-27-5x2-0-tire",
+     "width": 27.5
+    },
+    "type": "removed"
+   }
+  ],
+  "Bike Mart_Wheels": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Bontrager",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-13-2.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-14-3.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-11-1_bf8ef4b9-147a-42a5-a4a7-757ad83084d1.jpg?v=1761060136"
+     ],
+     "name": "Bontrager Cross-Country Tubeless Rim Tape",
+     "part": "Wheels",
+     "price_new": "4.93",
+     "price_old": "21.99",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 21.99,
+       "diameter_mm": null,
+       "durometers": [],
+       "price": 4.93,
+       "variant_id": "46764081709309"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 21.99,
+       "price": 4.93,
+       "specs": {},
+       "variant_id": 46764081709309
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/cross-country-tubeless-rim-tape"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323102-1_207c4c95-e1ca-4047-a53f-2c0bc20cc06c.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323103-2_c0523351-bf95-4b8b-902a-b92b10c381b0.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323104-3_2006c4e8-7528-4221-821f-9995ec6d0ccc.png?v=1761060534"
+     ],
+     "name": "DT Swiss X 1900 Spline Rear Wheel - 29-inch / Centerlock",
+     "part": "Wheels",
+     "price_new": "329.62",
+     "price_old": "429.80",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 429.8,
+       "diameter_mm": null,
+       "durometers": [],
+       "price": 329.62,
+       "variant_id": "46764290474237"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 429.8,
+       "price": 329.62,
+       "specs": {},
+       "variant_id": 46764290474237
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/x-1900-spline-rear-wheel-29-inch-centerlock"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "diameter_mm": 12.0,
+     "diameters_mm": [
+      12.0
+     ],
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323108-2_7d0b1623-f947-4158-b1d5-7d90320782a5.png?v=1761060517"
+     ],
+     "name": "DT Swiss XMC 1501 SPLINE ONE Rear Wheel - 6-Bolt / 12mm Thru x 148mm",
+     "part": "Wheels",
+     "price_new": "799.62",
+     "price_old": "1099.90",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 1099.9,
+       "diameter_mm": 12.0,
+       "durometers": [],
+       "price": 799.62,
+       "variant_id": "46764290244861"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 1099.9,
+       "price": 799.62,
+       "specs": {},
+       "variant_id": 46764290244861
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/xmc-1501-spline-one-rear-wheel-6-bolt-12mm-thru-x-148mm"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "diameter_mm": 15.0,
+     "diameters_mm": [
+      15.0
+     ],
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323039-1_d1899562-5156-4bdb-8b42-116e00448ea6.png?v=1761060533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323040-2_d457824f-b053-41ff-a264-f5db1873f52f.png?v=1761060533"
+     ],
+     "name": "DT Swiss XMC 1501 SPLINE ONE Front Wheel - 110 x 15mm",
+     "part": "Wheels",
+     "price_new": "599.62",
+     "price_old": "931.88",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 931.88,
+       "diameter_mm": 15.0,
+       "durometers": [],
+       "price": 599.62,
+       "variant_id": "46764290965757"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 931.88,
+       "price": 599.62,
+       "specs": {},
+       "variant_id": 46764290965757
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/xmc-1501-spline-one-front-wheel-110-x-15mm"
+    },
+    "type": "removed"
+   }
+  ],
+  "Cambria_Bikes": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Santa Cruz",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HecklerSL_C_90_MatteDarkBlue_d80e8522-ea8a-4185-b7da-bfeaab938ed9.webp?v=1744114218",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HecklerSL_C_90_MatteDarkBlue_d80e8522-ea8a-4185-b7da-bfeaab938ed9.webp?v=1744114218",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_001_7384cebe-a133-4f60-9e77-0774623ee196.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_002_7fdbf58d-54e9-431e-9381-dd138813c536.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_003_bf07cae6-52cf-4dd5-9271-d5e56a694d89.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_004_78527c5a-e7be-4d4d-ba32-74c5a5e2f1fc.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_005_92d31ce4-1158-41d2-8461-30af89f86aa6.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_006_ee02f1f2-3023-4b73-bd23-932c9ad681fa.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Capture_64b7b95d-bb49-436e-b795-dafad1d35949.png?v=1744114323",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Capture2_a80ff5ea-4aeb-4198-8913-855ff58be6d7.png?v=1744114323"
+     ],
+     "name": "Santa Cruz Heckler SL Carbon MX - 90 Kit - Matt Dark Blue - 2026",
+     "part": "Bikes",
+     "price_new": "7399.00",
+     "price_old": "8699.00",
+     "product_type": "Electric Mountain Bikes",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 8699.0,
+       "price": 7399.0,
+       "specs": {
+        "frame_size": [
+         "M"
+        ],
+        "travel_mm": [
+         "160"
+        ]
+       },
+       "variant_id": 43811533881526
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "M"
+      ],
+      "travel_mm": [
+       "160"
+      ]
+     },
+     "url": "https://cambriabike.com/products/santa-cruz-heckler-sl-carbon-mx-90-kit-matt-dark-blue-2026"
+    },
+    "type": "removed"
+   }
+  ],
+  "Cambria_Cockpit": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Sunlite",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/sunlite-steel-1-inch-threaded-headset-219848-1-12-2.jpg?v=1670324234",
+     "name": "Sunlite Steel Threaded Headset - 1\"",
+     "part": "Cockpit",
+     "price_new": "17.99",
+     "price_old": "19.99",
+     "product_type": "MTB/Road Headsets",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 19.99,
+       "price": 17.99,
+       "specs": {},
+       "variant_id": 41995823349942
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://cambriabike.com/products/sunlite-steel-threaded-headset-1",
+     "width": 1.0
+    },
+    "type": "removed"
+   }
+  ],
+  "Cambria_Drivetrain": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/ShimanoAceraM30207-8SpdMTBRearDerailleur.jpg?v=1741617950",
+     "name": "Shimano Acera M3020 7/8 Spd MTB Rear Derailleur",
+     "part": "Drivetrain",
+     "price_new": "36.99",
+     "price_old": "41.00",
+     "product_type": "MTB Rear Derailleurs",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 41.0,
+       "price": 36.99,
+       "specs": {
+        "speed": [
+         "8-speed"
+        ]
+       },
+       "variant_id": 43833467666614
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "8-speed"
+      ]
+     },
+     "url": "https://cambriabike.com/products/shimano-acera-m3020-7-8-spd-mtb-rear-derailleur"
+    },
+    "type": "removed"
+   }
+  ],
+  "Cambria_Pedals": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "OneUp",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/OneUpRadianceAluminumPlatformPedals_Blue_af2082a8-9ea1-4927-a58f-ece195893582.jpg?v=1643184421",
+     "name": "OneUp Aluminum Platform Pedals - Blue",
+     "part": "Pedals",
+     "price_new": "112.49",
+     "price_old": "149.99",
+     "product_type": "Flat Pedals",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 149.99,
+       "price": 112.49,
+       "specs": {},
+       "variant_id": 41140265910454
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://cambriabike.com/products/oneup-aluminum-platform-pedals-blue"
+    },
+    "type": "removed"
+   }
+  ],
+  "Cambria_Tires": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis292.3020_16a9b7d2-a03c-4ed4-805c-4190ff4cf43a.jpg?v=1625214809",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis292.3020_16a9b7d2-a03c-4ed4-805c-4190ff4cf43a.jpg?v=1625214809",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Aggressor-DC-EXO-TR_Black_44c16ba3-1d2b-4fe4-b7bd-ccc9f7a24d5a.jpg?v=1625214809"
+     ],
+     "length": 29.0,
+     "name": "Maxxis Aggressor 29\" Folding MTB Tire",
+     "part": "Tires",
+     "price_new": "77.00",
+     "price_old": "85.00",
+     "product_type": "MTB Tires Folding",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 85.0,
+       "price": 77.0,
+       "specs": {
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 40066567405750
+      }
+     ],
+     "technical_specs": {
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://cambriabike.com/products/maxxis-aggressor-29-folding-mtb-tire"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/48512.jpg?v=1728380691",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/48512.jpg?v=1728380691",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/48512_1.jpg?v=1728380690",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/48512_2.jpg?v=1728380690"
+     ],
+     "length": 24.0,
+     "name": "Maxxis DTH 24\" Wire Dirt Jump Tire",
+     "part": "Tires",
+     "price_new": "39.99",
+     "price_old": "43.00",
+     "product_type": "MTB Tires Wire",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 43.0,
+       "price": 39.99,
+       "specs": {},
+       "variant_id": 43524571103414
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://cambriabike.com/products/maxxis-dth-24-wire-dirt-jump-tire"
+    },
+    "type": "removed"
+   }
+  ],
+  "Colorado Cyclist_Tires": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K4111_TR00364_46fa603f-cce6-4918-8ed9-a9b2d011e874.jpg?v=1794730060",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K4111_TR00364_46fa603f-cce6-4918-8ed9-a9b2d011e874.jpg?v=1794730060",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K4111_TR00364-01.jpg?v=1794730061"
+     ],
+     "length": 2.4,
+     "name": "Maxxis Forekaster Tire - 29 x 2.4, Tubeless, Folding, Black, MaxxTerra, EXO",
+     "part": "Tires",
+     "price_new": "78.00",
+     "price_old": "85.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 85.0,
+       "price": 78.0,
+       "specs": {
+        "casing": [
+         "EXO"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 49580041961712
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "EXO"
+      ],
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/maxxis-forekaster-tire-29-x-2-40-tubeless-folding-black-maxxterra-exo-1",
+     "width": 29.0
+    },
+    "type": "new"
+   }
+  ],
+  "Fanatik_Brakes": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "Hope",
+     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/Hope-Floating-Rotor-Black-180-01.jpg?v=1787859680",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/Hope-Floating-Rotor-Black-180-01.jpg?v=1787859680",
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/Hope-Floating-Rotor-Black-180-02.jpg?v=1787859680"
+     ],
+     "name": "Hope Floating Rotor - Black - 180mm - Fanatik Outlet",
+     "part": "Brakes",
+     "price_new": "40.00",
+     "price_old": "83.50",
+     "product_type": "Disc Brake Rotors",
+     "store": "Fanatik",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 83.5,
+       "price": 40.0,
+       "specs": {
+        "rotor_mm": [
+         "180"
+        ]
+       },
+       "variant_id": 42655126716462
+      }
+     ],
+     "technical_specs": {
+      "rotor_mm": [
+       "180"
+      ]
+     },
+     "url": "https://www.fanatikbike.com/products/hope-floating-rotor-black-180mm-fanatik-outlet"
+    },
+    "type": "removed"
+   }
+  ],
+  "Fanatik_Cockpit": [
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "RockShox",
+     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/B2-Reverb-316-150_7ea83bd9-f1fa-4eb0-b6a3-f1935e3f7782.jpg?v=1794334448",
+     "name": "RockShox Reverb AXS Dropper Seatpost - B2 - 31.6mm - 150mm - Fanatik Outlet",
+     "part": "Cockpit",
+     "price_new": "500.00",
+     "price_old": "599.00",
+     "product_type": "Dropper Seatposts",
+     "store": "Fanatik",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 599.0,
+       "price": 500.0,
+       "specs": {},
+       "variant_id": 42909775527982
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.fanatikbike.com/products/rockshox-reverb-axs-dropper-seatpost-b2-31-6mm-150mm-fanatik-outlet"
+    },
+    "type": "removed"
+   },
+   {
+    "item": {
+     "availability": "In stock",
+     "brand": "TranzX",
+     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/TranzX-Reverse-Dropper-180-316-01.jpg?v=1793734974",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/TranzX-Reverse-Dropper-180-316-01.jpg?v=1793734974",
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/TranzX-Reverse-Dropper-180-316-02.jpg?v=1793734974",
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/TranzX-Reverse-Dropper-180-316-03.jpg?v=1793734974"
+     ],
+     "name": "TranzX Reverse Dropper Post - 31.6mm - 180mm - Fanatik Outlet",
+     "part": "Cockpit",
+     "price_new": "60.00",
+     "price_old": "150.00",
+     "product_type": "Dropper Seatposts",
+     "store": "Fanatik",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 150.0,
+       "price": 60.0,
+       "specs": {},
+       "variant_id": 42891388911662
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.fanatikbike.com/products/tranzx-reverse-dropper-post-31-6mm-180mm-fanatik-outlet"
+    },
+    "type": "removed"
    }
   ],
   "The Lost Co._Cockpit": [
@@ -93,16 +2301,16 @@
      "at_all_time_low": false,
      "availability": "In stock",
      "brand": "Race Face",
-     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-673513.png?v=1741733428",
+     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-859363.png?v=1741733428",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-673513.png?v=1741733428",
-      "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-423187.png?v=1741733428",
-      "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-572584.png?v=1741733429",
-      "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-410127.png?v=1741733429"
+      "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-859363.png?v=1741733428",
+      "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-549915.png?v=1741733428",
+      "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-409766.png?v=1741733428",
+      "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-949387.png?v=1741733428"
      ],
-     "name": "Race Face Turbine SL Stem - 60mm - Black",
+     "name": "Race Face Turbine SL Stem - 50mm - Black",
      "part": "Cockpit",
-     "price_new": "92.00",
+     "price_new": "97.00",
      "price_old": "115.00",
      "product_type": "Stems",
      "store": "The Lost Co.",
@@ -110,63 +2318,13 @@
       {
        "available": true,
        "compare": 115.0,
-       "price": 92.0,
+       "price": 97.0,
        "specs": {},
-       "variant_id": 44482999943366
+       "variant_id": 44482999746758
       }
      ],
      "technical_specs": {},
-     "url": "https://www.thelostco.com/products/copy-of-race-face-turbine-sl-stem-50mm-black"
-    },
-    "type": "new"
-   }
-  ],
-  "The Lost Co._Tires": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Schwalbe",
-     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/schwalbe-albert-275x25-gravity-pro-radial-soft-schwalbe-the-lost-co-1165459401-4026495969109-7063067.jpg?v=1776939367",
-     "length": 2.5,
-     "name": "Schwalbe Albert Tire - 27.5x2.5 - Gravity Pro - Soft - Radial",
-     "part": "Tires",
-     "price_new": "100.44",
-     "price_old": "108.00",
-     "product_type": "Tires",
-     "store": "The Lost Co.",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 108.0,
-       "price": 100.44,
-       "specs": {
-        "casing": [
-         "Radial"
-        ],
-        "tire_width": [
-         "2.5"
-        ],
-        "wheel_size": [
-         "27.5"
-        ]
-       },
-       "variant_id": 45752623825094
-      }
-     ],
-     "technical_specs": {
-      "casing": [
-       "Radial"
-      ],
-      "tire_width": [
-       "2.5"
-      ],
-      "wheel_size": [
-       "27.5"
-      ]
-     },
-     "url": "https://www.thelostco.com/products/schwalbe-albert-gravity-pro-radial-27-5x2-5-soft-black",
-     "width": 27.5
+     "url": "https://www.thelostco.com/products/race-face-turbine-sl-stem-50mm-black"
     },
     "type": "new"
    }
@@ -568,15 +2726,9 @@
    },
    {
     "cheapest_price": 28.8,
-    "key": "sport|Cockpit|odi|1|length|lock|round|ruffian|shape|v2",
-    "label": "ODI ruffian v2 1 lock length round",
+    "key": "sport|Cockpit|odi|1|lock|ruffian|v2",
+    "label": "ODI ruffian v2 1 lock",
     "offers": [
-     {
-      "name": "ODI Ruffian v2.1 Lock-On Grips - Length 135mm, Round Shape",
-      "price": 28.8,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/odi-ruffian-v2-1-lock-on-grips"
-     },
      {
       "name": "ODI Ruffian v2.1 Lock-On Grips - Black",
       "price": 28.8,
@@ -720,26 +2872,6 @@
       "price": 76.5,
       "store": "The Lost Co.",
       "url": "https://www.thelostco.com/products/rear-derailleur-pulley-kit-xx-t-type-eagle-axs-includes-14t-upper-and-16t-lower-black-metal-spider-pulley-2-aluminum-pulley-screws"
-     }
-    ],
-    "part": "Drivetrain"
-   },
-   {
-    "cheapest_price": 29.62,
-    "key": "sport|Drivetrain|kmc|12|speed|x12",
-    "label": "KMC x12 12 speed",
-    "offers": [
-     {
-      "name": "KMC X12 12-Speed Chain",
-      "price": 29.62,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/x12-12-speed-chain"
-     },
-     {
-      "name": "KMC X12 12-Speed Chain",
-      "price": 36.0,
-      "store": "Fanatik",
-      "url": "https://www.fanatikbike.com/products/kmc-x12-12-speed-chain"
      }
     ],
     "part": "Drivetrain"
@@ -1150,26 +3282,6 @@
       "price": 180.0,
       "store": "Smith",
       "url": "https://www.smithoptics.com/products/forefront-3-mips-r-sale"
-     }
-    ],
-    "part": "Protection"
-   },
-   {
-    "cheapest_price": 69.99,
-    "key": "sport|Protection|fox|cocoa|flight|racing|solid",
-    "label": "Fox racing flight solid cocoa",
-    "offers": [
-     {
-      "name": "Fox Flight Helmet Solid",
-      "price": 79.99,
-      "store": "Bicycle Warehouse",
-      "url": "https://bicyclewarehouse.com/products/flight-helmet-solid"
-     },
-     {
-      "name": "Fox Racing Flight Dirt Jump Helmet - Solid - Cocoa",
-      "price": 69.99,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/fox-racing-flight-dirt-jump-helmet-solid-cocoa"
      }
     ],
     "part": "Protection"
@@ -3226,62 +5338,72 @@
    {
     "at_all_time_low": false,
     "availability": "In stock",
-    "brand": "Schwalbe",
-    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/schwalbe-albert-275x25-gravity-pro-radial-soft-schwalbe-the-lost-co-1165459401-4026495969109-7063067.jpg?v=1776939367",
-    "length": 2.5,
-    "name": "Schwalbe Albert Tire - 27.5x2.5 - Gravity Pro - Soft - Radial",
+    "brand": "Maxxis",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K4111_TR00364_46fa603f-cce6-4918-8ed9-a9b2d011e874.jpg?v=1794730060",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K4111_TR00364_46fa603f-cce6-4918-8ed9-a9b2d011e874.jpg?v=1794730060",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K4111_TR00364-01.jpg?v=1794730061"
+    ],
+    "length": 2.4,
+    "name": "Maxxis Forekaster Tire - 29 x 2.4, Tubeless, Folding, Black, MaxxTerra, EXO",
     "part": "Tires",
-    "price_new": "100.44",
-    "price_old": "108.00",
+    "price_new": "78.00",
+    "price_old": "85.00",
     "product_type": "Tires",
-    "store": "The Lost Co.",
+    "store": "Colorado Cyclist",
     "technical_offers": [
      {
       "available": true,
-      "compare": 108.0,
-      "price": 100.44,
+      "compare": 85.0,
+      "price": 78.0,
       "specs": {
        "casing": [
-        "Radial"
+        "EXO"
        ],
        "tire_width": [
-        "2.5"
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
        ],
        "wheel_size": [
-        "27.5"
+        "29"
        ]
       },
-      "variant_id": 45752623825094
+      "variant_id": 49580041961712
      }
     ],
     "technical_specs": {
      "casing": [
-      "Radial"
+      "EXO"
      ],
      "tire_width": [
-      "2.5"
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
      ],
      "wheel_size": [
-      "27.5"
+      "29"
      ]
     },
-    "url": "https://www.thelostco.com/products/schwalbe-albert-gravity-pro-radial-27-5x2-5-soft-black",
-    "width": 27.5
+    "url": "https://www.coloradocyclist.com/products/maxxis-forekaster-tire-29-x-2-40-tubeless-folding-black-maxxterra-exo-1",
+    "width": 29.0
    },
    {
     "at_all_time_low": false,
     "availability": "In stock",
     "brand": "Race Face",
-    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-673513.png?v=1741733428",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-859363.png?v=1741733428",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-673513.png?v=1741733428",
-     "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-423187.png?v=1741733428",
-     "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-572584.png?v=1741733429",
-     "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-60mm-black-race-face-the-lost-co-947-00-013-01-821973501307-410127.png?v=1741733429"
+     "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-859363.png?v=1741733428",
+     "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-549915.png?v=1741733428",
+     "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-409766.png?v=1741733428",
+     "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/race-face-turbine-sl-stem-50mm-black-race-face-the-lost-co-947-00-012-01-821973501383-949387.png?v=1741733428"
     ],
-    "name": "Race Face Turbine SL Stem - 60mm - Black",
+    "name": "Race Face Turbine SL Stem - 50mm - Black",
     "part": "Cockpit",
-    "price_new": "92.00",
+    "price_new": "97.00",
     "price_old": "115.00",
     "product_type": "Stems",
     "store": "The Lost Co.",
@@ -3289,100 +5411,2204 @@
      {
       "available": true,
       "compare": 115.0,
-      "price": 92.0,
+      "price": 97.0,
       "specs": {},
-      "variant_id": 44482999943366
+      "variant_id": 44482999746758
      }
     ],
     "technical_specs": {},
-    "url": "https://www.thelostco.com/products/copy-of-race-face-turbine-sl-stem-50mm-black"
+    "url": "https://www.thelostco.com/products/race-face-turbine-sl-stem-50mm-black"
    },
    {
     "at_all_time_low": false,
     "availability": "In stock",
-    "brand": "Maxxis",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/593292.jpg?v=1763532798",
-    "length": 2.4,
-    "name": "Maxxis Minion DHF 24x2.4 Standard Tire",
+    "brand": "Specialized",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-00_SJ-15-SW-DI2-DLMMET-SMKLQDMET_HERO_DARK-PDP.jpg?v=1762254543",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-00_SJ-15-SW-DI2-DLMMET-SMKLQDMET_HERO_DARK-PDP.jpg?v=1762254543",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-01_SJ-15-SW-DI2-SLDMET-REDSKY-BRSHCP_HERO_DARK-PDP.jpg?v=1762254544"
+    ],
+    "name": "Specialized S-Works Stumpjumper 15 EVO - Shimano XTR Di2, FOX Factory",
+    "part": "Bikes",
+    "price_new": "9499.99",
+    "price_old": "11300.00",
+    "product_type": "Mountain Bike",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S1"
+       ]
+      },
+      "variant_id": 46838541484285
+     },
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S2"
+       ]
+      },
+      "variant_id": 46838541517053
+     },
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S3"
+       ]
+      },
+      "variant_id": 46838541549821
+     },
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S4"
+       ]
+      },
+      "variant_id": 46838541582589
+     },
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S1"
+       ]
+      },
+      "variant_id": 46838541680893
+     },
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S3"
+       ]
+      },
+      "variant_id": 46838541746429
+     },
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S4"
+       ]
+      },
+      "variant_id": 46838541779197
+     },
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S5"
+       ]
+      },
+      "variant_id": 46838541811965
+     },
+     {
+      "available": true,
+      "compare": 11300.0,
+      "price": 9499.99,
+      "specs": {
+       "frame_size": [
+        "S6"
+       ]
+      },
+      "variant_id": 46838541844733
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2026-stumpjumper-15-s-works-di2"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Specialized",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-30_SJ-15-EXPERT-DI2-NBLMET-DLMMET_HERO-PDP.jpg?v=1762264578",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-30_SJ-15-EXPERT-DI2-NBLMET-DLMMET_HERO-PDP.jpg?v=1762264578",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-31_SJ-15-EXPERT-DI2-PST-DKMOS_HERO-PDP.jpg?v=1762264578"
+    ],
+    "name": "Specialized Stumpjumper 15 EVO Expert - Shimano XT Di2, FOX Performance Elite",
+    "part": "Bikes",
+    "price_new": "5299.99",
+    "price_old": "6200.00",
+    "product_type": "Mountain Bike",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 6200.0,
+      "price": 5299.99,
+      "specs": {
+       "frame_size": [
+        "S1"
+       ]
+      },
+      "variant_id": 46839643111677
+     },
+     {
+      "available": true,
+      "compare": 6200.0,
+      "price": 5299.99,
+      "specs": {
+       "frame_size": [
+        "S6"
+       ]
+      },
+      "variant_id": 46839643275517
+     },
+     {
+      "available": true,
+      "compare": 6200.0,
+      "price": 5299.99,
+      "specs": {
+       "frame_size": [
+        "S1"
+       ]
+      },
+      "variant_id": 46839643308285
+     },
+     {
+      "available": true,
+      "compare": 6200.0,
+      "price": 5299.99,
+      "specs": {
+       "frame_size": [
+        "S6"
+       ]
+      },
+      "variant_id": 46839643472125
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "S1",
+      "S6"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2026-stumpjumper-15-expert-di2"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Specialized",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/78026-00_KENEVO-SL-SW-CARBON-FRMSET-TLTNT-SMK-DUNEWHT_HERO-PDP.jpg?v=1762306007",
+    "name": "Specialized S-Works Turbo Kenevo SL 2 Frameset",
+    "part": "Frames",
+    "price_new": "5999.99",
+    "price_old": "7500.00",
+    "product_type": "Framesets",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 7500.0,
+      "price": 5999.99,
+      "specs": {
+       "frame_size": [
+        "S4"
+       ]
+      },
+      "variant_id": 46842970472701
+     },
+     {
+      "available": true,
+      "compare": 7500.0,
+      "price": 5999.99,
+      "specs": {
+       "frame_size": [
+        "S5"
+       ]
+      },
+      "variant_id": 46842970505469
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "S4",
+      "S5"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2026-kenevo-sl-s-works-carbon-frmset"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Specialized",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73326-00_SJ-15-SW-FRM-ASHGRY-SHDWSIL-BLKLQDMET_HERO-PDP.jpg?v=1762256069",
+    "name": "Specialized S-Works Stumpjumper 15 EVO Frameset - FOX FLOAT X GENIE Factory",
+    "part": "Frames",
+    "price_new": "3299.99",
+    "price_old": "3600.00",
+    "product_type": "Framesets",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 3600.0,
+      "price": 3299.99,
+      "specs": {
+       "frame_size": [
+        "S1"
+       ]
+      },
+      "variant_id": 46838592405757
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "S1"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2026-stumpjumper-15-s-works-frm"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Specialized",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-00_SJ-15-SW-FRM-NRBLK-BLK-CLGRY_HERO-PDP.jpg?v=1762328022",
+    "name": "Specialized S-Works Stumpjumper 15 Frameset - FOX FLOAT GENIE Factory",
+    "part": "Frames",
+    "price_new": "2899.99",
+    "price_old": "3600.00",
+    "product_type": "Framesets",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 3600.0,
+      "price": 2899.99,
+      "specs": {
+       "frame_size": [
+        "S1"
+       ]
+      },
+      "variant_id": 46844350890237
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "S1"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2025-stumpjumper-15-s-works-frm"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Specialized",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-70_SJ-15-ALLOY-FRM-OBSD-SILDST_HERO-PDP.jpg?v=1762326603",
+    "name": "Specialized Stumpjumper 15 Alloy Frameset - FOX FLOAT GENIE Performance",
+    "part": "Frames",
+    "price_new": "1699.99",
+    "price_old": "2100.00",
+    "product_type": "Framesets",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 2100.0,
+      "price": 1699.99,
+      "specs": {
+       "frame_size": [
+        "S1"
+       ]
+      },
+      "variant_id": 46844258451709
+     },
+     {
+      "available": true,
+      "compare": 2100.0,
+      "price": 1699.99,
+      "specs": {
+       "frame_size": [
+        "S6"
+       ]
+      },
+      "variant_id": 46844258517245
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "S1",
+      "S6"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2025-stumpjumper-15-alloy-frm"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Pirelli",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4139.jpg?v=1762311714",
+    "name": "Pirelli P ZERO Race 4S Tire - 700, Clincher Folding, Black",
     "part": "Tires",
-    "price_new": "66.00",
-    "price_old": "72.00",
+    "price_new": "92.61",
+    "price_old": "102.90",
     "product_type": "Tires",
     "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 72.0,
-      "price": 66.0,
+      "compare": 102.9,
+      "price": 92.61,
       "specs": {},
-      "variant_id": 46886869336317
+      "variant_id": 46843407106301
+     },
+     {
+      "available": true,
+      "compare": 102.9,
+      "price": 92.61,
+      "specs": {},
+      "variant_id": 46843407171837
      }
     ],
     "technical_specs": {},
-    "url": "https://www.bikemart.com/products/maxxis-minion-dhf-24x2-4-standard-tire",
-    "width": 24.0
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "TRP",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7489.jpg?v=1763528940",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7489.jpg?v=1763528940",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7490.jpg?v=1763528940"
-    ],
-    "name": "TRP-33 Disc Brake Rotor - 140mm 6-Bolt 1.8mm Silver/Black",
-    "part": "Brakes",
-    "price_new": "64.99",
-    "price_old": "94.76",
-    "product_type": "Disc Rotor",
-    "spec_warnings": [
-     "conflicting rotor_mm"
-    ],
-    "store": "Bike Mart",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 94.76,
-      "price": 64.99,
-      "specs": {
-       "rotor_mm": [
-        "140"
-       ]
-      },
-      "variant_id": 46886670041341
-     },
-     {
-      "available": true,
-      "compare": 92.92,
-      "price": 64.99,
-      "specs": {},
-      "variant_id": 46886670074109
-     },
-     {
-      "available": true,
-      "compare": 85.7,
-      "price": 69.99,
-      "specs": {},
-      "variant_id": 46886670106877
-     }
-    ],
-    "technical_specs": {
-     "rotor_mm": [
-      "140"
-     ]
-    },
-    "url": "https://www.bikemart.com/products/trp-33-disc-brake-rotor-6-bolt-1-8mm-silver-black"
+    "url": "https://www.bikemart.com/products/pirelli-p-zero-race-4s-tire-700-clincher-folding-black"
    }
   ],
-  "removed": []
+  "removed": [
+   [
+    "Fanatik_Brakes",
+    {
+     "availability": "In stock",
+     "brand": "Hope",
+     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/Hope-Floating-Rotor-Black-180-01.jpg?v=1787859680",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/Hope-Floating-Rotor-Black-180-01.jpg?v=1787859680",
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/Hope-Floating-Rotor-Black-180-02.jpg?v=1787859680"
+     ],
+     "name": "Hope Floating Rotor - Black - 180mm - Fanatik Outlet",
+     "part": "Brakes",
+     "price_new": "40.00",
+     "price_old": "83.50",
+     "product_type": "Disc Brake Rotors",
+     "store": "Fanatik",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 83.5,
+       "price": 40.0,
+       "specs": {
+        "rotor_mm": [
+         "180"
+        ]
+       },
+       "variant_id": 42655126716462
+      }
+     ],
+     "technical_specs": {
+      "rotor_mm": [
+       "180"
+      ]
+     },
+     "url": "https://www.fanatikbike.com/products/hope-floating-rotor-black-180mm-fanatik-outlet"
+    }
+   ],
+   [
+    "Fanatik_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "RockShox",
+     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/B2-Reverb-316-150_7ea83bd9-f1fa-4eb0-b6a3-f1935e3f7782.jpg?v=1794334448",
+     "name": "RockShox Reverb AXS Dropper Seatpost - B2 - 31.6mm - 150mm - Fanatik Outlet",
+     "part": "Cockpit",
+     "price_new": "500.00",
+     "price_old": "599.00",
+     "product_type": "Dropper Seatposts",
+     "store": "Fanatik",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 599.0,
+       "price": 500.0,
+       "specs": {},
+       "variant_id": 42909775527982
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.fanatikbike.com/products/rockshox-reverb-axs-dropper-seatpost-b2-31-6mm-150mm-fanatik-outlet"
+    }
+   ],
+   [
+    "Fanatik_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "TranzX",
+     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/TranzX-Reverse-Dropper-180-316-01.jpg?v=1793734974",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/TranzX-Reverse-Dropper-180-316-01.jpg?v=1793734974",
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/TranzX-Reverse-Dropper-180-316-02.jpg?v=1793734974",
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/TranzX-Reverse-Dropper-180-316-03.jpg?v=1793734974"
+     ],
+     "name": "TranzX Reverse Dropper Post - 31.6mm - 180mm - Fanatik Outlet",
+     "part": "Cockpit",
+     "price_new": "60.00",
+     "price_old": "150.00",
+     "product_type": "Dropper Seatposts",
+     "store": "Fanatik",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 150.0,
+       "price": 60.0,
+       "specs": {},
+       "variant_id": 42891388911662
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.fanatikbike.com/products/tranzx-reverse-dropper-post-31-6mm-180mm-fanatik-outlet"
+    }
+   ],
+   [
+    "Cambria_Bikes",
+    {
+     "availability": "In stock",
+     "brand": "Santa Cruz",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HecklerSL_C_90_MatteDarkBlue_d80e8522-ea8a-4185-b7da-bfeaab938ed9.webp?v=1744114218",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HecklerSL_C_90_MatteDarkBlue_d80e8522-ea8a-4185-b7da-bfeaab938ed9.webp?v=1744114218",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_001_7384cebe-a133-4f60-9e77-0774623ee196.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_002_7fdbf58d-54e9-431e-9381-dd138813c536.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_003_bf07cae6-52cf-4dd5-9271-d5e56a694d89.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_004_78527c5a-e7be-4d4d-ba32-74c5a5e2f1fc.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_005_92d31ce4-1158-41d2-8461-30af89f86aa6.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MY26_HeckSL_details_006_ee02f1f2-3023-4b73-bd23-932c9ad681fa.jpg?v=1744114231",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Capture_64b7b95d-bb49-436e-b795-dafad1d35949.png?v=1744114323",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Capture2_a80ff5ea-4aeb-4198-8913-855ff58be6d7.png?v=1744114323"
+     ],
+     "name": "Santa Cruz Heckler SL Carbon MX - 90 Kit - Matt Dark Blue - 2026",
+     "part": "Bikes",
+     "price_new": "7399.00",
+     "price_old": "8699.00",
+     "product_type": "Electric Mountain Bikes",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 8699.0,
+       "price": 7399.0,
+       "specs": {
+        "frame_size": [
+         "M"
+        ],
+        "travel_mm": [
+         "160"
+        ]
+       },
+       "variant_id": 43811533881526
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "M"
+      ],
+      "travel_mm": [
+       "160"
+      ]
+     },
+     "url": "https://cambriabike.com/products/santa-cruz-heckler-sl-carbon-mx-90-kit-matt-dark-blue-2026"
+    }
+   ],
+   [
+    "Cambria_Tires",
+    {
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis292.3020_16a9b7d2-a03c-4ed4-805c-4190ff4cf43a.jpg?v=1625214809",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis292.3020_16a9b7d2-a03c-4ed4-805c-4190ff4cf43a.jpg?v=1625214809",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Aggressor-DC-EXO-TR_Black_44c16ba3-1d2b-4fe4-b7bd-ccc9f7a24d5a.jpg?v=1625214809"
+     ],
+     "length": 29.0,
+     "name": "Maxxis Aggressor 29\" Folding MTB Tire",
+     "part": "Tires",
+     "price_new": "77.00",
+     "price_old": "85.00",
+     "product_type": "MTB Tires Folding",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 85.0,
+       "price": 77.0,
+       "specs": {
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 40066567405750
+      }
+     ],
+     "technical_specs": {
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://cambriabike.com/products/maxxis-aggressor-29-folding-mtb-tire"
+    }
+   ],
+   [
+    "Cambria_Tires",
+    {
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/48512.jpg?v=1728380691",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/48512.jpg?v=1728380691",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/48512_1.jpg?v=1728380690",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/48512_2.jpg?v=1728380690"
+     ],
+     "length": 24.0,
+     "name": "Maxxis DTH 24\" Wire Dirt Jump Tire",
+     "part": "Tires",
+     "price_new": "39.99",
+     "price_old": "43.00",
+     "product_type": "MTB Tires Wire",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 43.0,
+       "price": 39.99,
+       "specs": {},
+       "variant_id": 43524571103414
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://cambriabike.com/products/maxxis-dth-24-wire-dirt-jump-tire"
+    }
+   ],
+   [
+    "Cambria_Drivetrain",
+    {
+     "availability": "In stock",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/ShimanoAceraM30207-8SpdMTBRearDerailleur.jpg?v=1741617950",
+     "name": "Shimano Acera M3020 7/8 Spd MTB Rear Derailleur",
+     "part": "Drivetrain",
+     "price_new": "36.99",
+     "price_old": "41.00",
+     "product_type": "MTB Rear Derailleurs",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 41.0,
+       "price": 36.99,
+       "specs": {
+        "speed": [
+         "8-speed"
+        ]
+       },
+       "variant_id": 43833467666614
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "8-speed"
+      ]
+     },
+     "url": "https://cambriabike.com/products/shimano-acera-m3020-7-8-spd-mtb-rear-derailleur"
+    }
+   ],
+   [
+    "Cambria_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "Sunlite",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/sunlite-steel-1-inch-threaded-headset-219848-1-12-2.jpg?v=1670324234",
+     "name": "Sunlite Steel Threaded Headset - 1\"",
+     "part": "Cockpit",
+     "price_new": "17.99",
+     "price_old": "19.99",
+     "product_type": "MTB/Road Headsets",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 19.99,
+       "price": 17.99,
+       "specs": {},
+       "variant_id": 41995823349942
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://cambriabike.com/products/sunlite-steel-threaded-headset-1",
+     "width": 1.0
+    }
+   ],
+   [
+    "Cambria_Pedals",
+    {
+     "availability": "In stock",
+     "brand": "OneUp",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/OneUpRadianceAluminumPlatformPedals_Blue_af2082a8-9ea1-4927-a58f-ece195893582.jpg?v=1643184421",
+     "name": "OneUp Aluminum Platform Pedals - Blue",
+     "part": "Pedals",
+     "price_new": "112.49",
+     "price_old": "149.99",
+     "product_type": "Flat Pedals",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 149.99,
+       "price": 112.49,
+       "specs": {},
+       "variant_id": 41140265910454
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://cambriabike.com/products/oneup-aluminum-platform-pedals-blue"
+    }
+   ],
+   [
+    "Bicycle Warehouse_Bikes",
+    {
+     "availability": "In stock",
+     "brand": "Norco",
+     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/66a7f54b5c642f7c3621a6a323916ae3a81aa629.jpg?v=1787783633",
+     "name": "Norco 2024 Sight A1 MX",
+     "part": "Bikes",
+     "price_new": "4299.00",
+     "price_old": "5699.00",
+     "product_type": "Bikes - Full Suspension 27.5",
+     "store": "Bicycle Warehouse",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 5699.0,
+       "price": 4299.0,
+       "specs": {
+        "riding_type": [
+         "enduro"
+        ]
+       },
+       "variant_id": 46652926754918
+      },
+      {
+       "available": true,
+       "compare": 5699.0,
+       "price": 4299.0,
+       "specs": {
+        "riding_type": [
+         "enduro"
+        ]
+       },
+       "variant_id": 46652926787686
+      }
+     ],
+     "technical_specs": {
+      "riding_type": [
+       "enduro"
+      ]
+     },
+     "url": "https://bicyclewarehouse.com/products/2024-sight-a1-mx"
+    }
+   ],
+   [
+    "Bicycle Warehouse_Protection",
+    {
+     "availability": "In stock",
+     "brand": "Fox",
+     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_1.jpg?v=1772088450",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_1.jpg?v=1772088450",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_10.jpg?v=1772088452",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_3.jpg?v=1772088454",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_4.jpg?v=1772088455",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_6.jpg?v=1772088457"
+     ],
+     "name": "Fox Flight Helmet Solid",
+     "part": "Protection",
+     "price_new": "79.99",
+     "price_old": "84.95",
+     "product_type": "Helmets",
+     "protection_sizes": [
+      "S",
+      "L"
+     ],
+     "protection_type": "Helmet",
+     "store": "Bicycle Warehouse",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 84.95,
+       "price": 79.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Half shell (skate / BMX)"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 40740050665574
+      },
+      {
+       "available": true,
+       "compare": 84.95,
+       "price": 79.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "helmet_style": [
+         "Half shell (skate / BMX)"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 40740050731110
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "helmet_style": [
+       "Half shell (skate / BMX)"
+      ],
+      "prot_size": [
+       "L",
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://bicyclewarehouse.com/products/flight-helmet-solid"
+    }
+   ],
+   [
+    "Bike Mart_Bikes",
+    {
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Portrait.jpg?v=1764016762",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt1.jpg?v=1764008227",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt2.jpg?v=1764008228",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt3.jpg?v=1764008228",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt4.jpg?v=1764008229"
+     ],
+     "length": 0.0,
+     "name": "Trek 2026 Slash 9.9 X0 AXS T-Type Gen 6 Full Suspension Mountain Bike",
+     "part": "Bikes",
+     "price_new": "7799.93",
+     "price_old": "8699.99",
+     "product_type": "Full Suspension Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46906856407293
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "frame_size": [
+         "M"
+        ],
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46906856440061
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46906856472829
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "frame_size": [
+         "L"
+        ],
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46906856505597
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "L",
+       "M"
+      ],
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-slash-9-9-x0-axs-t-type-gen-6-full-suspension-mountain-bike",
+     "width": 9.9
+    }
+   ],
+   [
+    "Bike Mart_Bikes",
+    {
+     "availability": "In stock",
+     "brand": "Giant",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Front.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Rear.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-4.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-5.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-6.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-7.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-8.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-9.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamondMTB-10.jpg?v=1764025528"
+     ],
+     "name": "Giant 2023 Reign Advanced Pro 1 Full Suspension Mountain Bike",
+     "part": "Bikes",
+     "price_new": "4999.00",
+     "price_old": "6460.00",
+     "product_type": "Full Suspension Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 6460.0,
+       "price": 4999.0,
+       "specs": {
+        "frame_size": [
+         "S"
+        ]
+       },
+       "variant_id": 46907588673789
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "S"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2023-reign-advanced-pro-1-full-suspension-mountain-bike"
+    }
+   ],
+   [
+    "Bike Mart_Bikes",
+    {
+     "availability": "In stock",
+     "brand": "Liv",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond.jpg?v=1764000643",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-Front.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D2.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D3.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D4.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D5.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D6.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D7.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D8.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D9.jpg?v=1764000643",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY25Tempt291_ColorABlackDiamond-D10.jpg?v=1764000643"
+     ],
+     "name": "Liv 2025 Tempt 1 Hardtail Mountain Bike",
+     "part": "Bikes",
+     "price_new": "900.00",
+     "price_old": "1000.00",
+     "product_type": "Hardtail Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 1000.0,
+       "price": 900.0,
+       "specs": {},
+       "variant_id": 46906591314173
+      },
+      {
+       "available": true,
+       "compare": 1000.0,
+       "price": 900.0,
+       "specs": {},
+       "variant_id": 46906591346941
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/2025-tempt-1-hardtail-mountain-bike"
+    }
+   ],
+   [
+    "Bike Mart_Bikes",
+    {
+     "availability": "In stock",
+     "brand": "Unified Bike Co.",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0602.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0514.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0617.jpg?v=1764086745"
+     ],
+     "name": "Unified Bike Co. Racello Deore 12 Hardtail Mountain Bike",
+     "part": "Bikes",
+     "price_new": "599.62",
+     "price_old": "999.99",
+     "product_type": "Hardtail Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 999.99,
+       "price": 599.62,
+       "specs": {},
+       "variant_id": 46907848622333
+      },
+      {
+       "available": true,
+       "compare": 999.99,
+       "price": 599.62,
+       "specs": {
+        "frame_size": [
+         "L"
+        ]
+       },
+       "variant_id": 46907848655101
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "L"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/unified-bike-co-racello-deore-12-ship-to-your-door-hardtail"
+    }
+   ],
+   [
+    "Bike Mart_Forks & Shocks",
+    {
+     "availability": "In stock",
+     "brand": "RockShox",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/RS6816_68a78fea-6940-4d98-a3d5-af7bd91330eb.jpg?v=1762291836",
+     "length": 50.0,
+     "name": "RockShox Rear Shock Mounting Hardware - 3-Piece 1/2\" 10 x 50.0 Offset Trek Carbon",
+     "part": "Forks & Shocks",
+     "price_new": "4.93",
+     "price_old": "15.00",
+     "product_type": "Shock Mounting Hardware",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 15.0,
+       "price": 4.93,
+       "specs": {},
+       "variant_id": 46842302824701
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/rockshox-rear-shock-mounting-hardware-3-piece-1-2-10-x-50-0-offset-trek-carbon",
+     "width": 10.0
+    }
+   ],
+   [
+    "Bike Mart_Wheels",
+    {
+     "availability": "In stock",
+     "brand": "Bontrager",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-13-2.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-14-3.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-11-1_bf8ef4b9-147a-42a5-a4a7-757ad83084d1.jpg?v=1761060136"
+     ],
+     "name": "Bontrager Cross-Country Tubeless Rim Tape",
+     "part": "Wheels",
+     "price_new": "4.93",
+     "price_old": "21.99",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 21.99,
+       "diameter_mm": null,
+       "durometers": [],
+       "price": 4.93,
+       "variant_id": "46764081709309"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 21.99,
+       "price": 4.93,
+       "specs": {},
+       "variant_id": 46764081709309
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/cross-country-tubeless-rim-tape"
+    }
+   ],
+   [
+    "Bike Mart_Wheels",
+    {
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323102-1_207c4c95-e1ca-4047-a53f-2c0bc20cc06c.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323103-2_c0523351-bf95-4b8b-902a-b92b10c381b0.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323104-3_2006c4e8-7528-4221-821f-9995ec6d0ccc.png?v=1761060534"
+     ],
+     "name": "DT Swiss X 1900 Spline Rear Wheel - 29-inch / Centerlock",
+     "part": "Wheels",
+     "price_new": "329.62",
+     "price_old": "429.80",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 429.8,
+       "diameter_mm": null,
+       "durometers": [],
+       "price": 329.62,
+       "variant_id": "46764290474237"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 429.8,
+       "price": 329.62,
+       "specs": {},
+       "variant_id": 46764290474237
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/x-1900-spline-rear-wheel-29-inch-centerlock"
+    }
+   ],
+   [
+    "Bike Mart_Wheels",
+    {
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "diameter_mm": 12.0,
+     "diameters_mm": [
+      12.0
+     ],
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323108-2_7d0b1623-f947-4158-b1d5-7d90320782a5.png?v=1761060517"
+     ],
+     "name": "DT Swiss XMC 1501 SPLINE ONE Rear Wheel - 6-Bolt / 12mm Thru x 148mm",
+     "part": "Wheels",
+     "price_new": "799.62",
+     "price_old": "1099.90",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 1099.9,
+       "diameter_mm": 12.0,
+       "durometers": [],
+       "price": 799.62,
+       "variant_id": "46764290244861"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 1099.9,
+       "price": 799.62,
+       "specs": {},
+       "variant_id": 46764290244861
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/xmc-1501-spline-one-rear-wheel-6-bolt-12mm-thru-x-148mm"
+    }
+   ],
+   [
+    "Bike Mart_Wheels",
+    {
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "diameter_mm": 15.0,
+     "diameters_mm": [
+      15.0
+     ],
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323039-1_d1899562-5156-4bdb-8b42-116e00448ea6.png?v=1761060533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323040-2_d457824f-b053-41ff-a264-f5db1873f52f.png?v=1761060533"
+     ],
+     "name": "DT Swiss XMC 1501 SPLINE ONE Front Wheel - 110 x 15mm",
+     "part": "Wheels",
+     "price_new": "599.62",
+     "price_old": "931.88",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 931.88,
+       "diameter_mm": 15.0,
+       "durometers": [],
+       "price": 599.62,
+       "variant_id": "46764290965757"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 931.88,
+       "price": 599.62,
+       "specs": {},
+       "variant_id": 46764290965757
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/xmc-1501-spline-one-front-wheel-110-x-15mm"
+    }
+   ],
+   [
+    "Bike Mart_Tires",
+    {
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR2267.jpg?v=1763586533",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR2267.jpg?v=1763586533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma1065.jpg?v=1763586533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma1064.jpg?v=1763586534"
+     ],
+     "length": 29.0,
+     "name": "Maxxis Aspen Tire - 29\" Tubeless",
+     "part": "Tires",
+     "price_new": "83.00",
+     "price_old": "91.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 96.0,
+       "price": 88.0,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46891713429757
+      },
+      {
+       "available": true,
+       "compare": 91.0,
+       "price": 83.0,
+       "specs": {
+        "tire_width": [
+         "2.25"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46891713462525
+      },
+      {
+       "available": true,
+       "compare": 91.0,
+       "price": 83.0,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46891713495293
+      },
+      {
+       "available": true,
+       "compare": 101.0,
+       "price": 92.0,
+       "specs": {
+        "tire_width": [
+         "2.25"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46891713528061
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.25",
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/maxxis-aspen-tire-29-tubeless"
+    }
+   ],
+   [
+    "Bike Mart_Tires",
+    {
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/wt1553.jpg?v=1762292758",
+     "length": 2.4,
+     "name": "WTB Judge TCS 27.5x2.4\" Tire",
+     "part": "Tires",
+     "price_new": "72.95",
+     "price_old": "80.95",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 93.95,
+       "price": 84.95,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46842335854845
+      },
+      {
+       "available": true,
+       "compare": 80.95,
+       "price": 72.95,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46842335887613
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/wtb-judge-tcs-27-5x2-4-tire",
+     "width": 27.5
+    }
+   ],
+   [
+    "Bike Mart_Tires",
+    {
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5823.jpg?v=1762329187",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4961.jpg?v=1762329187"
+     ],
+     "name": "Schwalbe RapidRob Tire - Clincher Wire Black",
+     "part": "Tires",
+     "price_new": "28.83",
+     "price_old": "31.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 31.0,
+       "price": 28.83,
+       "specs": {
+        "tire_width": [
+         "2.1"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46844436283645
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.1"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/schwalbe-rapid-rob-tire-26-x-2-1-clincher-wire-black-k-guard-liteskin"
+    }
+   ],
+   [
+    "Bike Mart_Tires",
+    {
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5411-02.jpg?v=1762259881",
+     "name": "Schwalbe Marathon Almotion Tire - Clincher Folding BLK V-Guard",
+     "part": "Tires",
+     "price_new": "84.63",
+     "price_old": "91.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 91.0,
+       "price": 84.63,
+       "specs": {
+        "tire_width": [
+         "2.15"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46839131177213
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.15"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/schwalbe-marathon-almotion-tire"
+    }
+   ],
+   [
+    "Bike Mart_Tires",
+    {
+     "availability": "In stock",
+     "brand": "Pirelli",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/pv3515inset1.jpg?v=1762279323",
+     "length": 2.4,
+     "name": "Cast by Pirelli DH/Enduro Protagonist TL 29 Tire - 29x2.4 Evo",
+     "part": "Tires",
+     "price_new": "120.51",
+     "price_old": "133.90",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 133.9,
+       "price": 120.51,
+       "specs": {
+        "casing": [
+         "DH"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46840767611133
+      },
+      {
+       "available": true,
+       "compare": 133.9,
+       "price": 120.51,
+       "specs": {
+        "casing": [
+         "DH"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46840767643901
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "DH"
+      ],
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/cast-by-pirelli-dh-enduro-protagonist-tl-29-tire-29x2-4-evo",
+     "width": 29.0
+    }
+   ],
+   [
+    "Bike Mart_Tires",
+    {
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR0291.jpg?v=1762281232",
+     "name": "Schwalbe Energizer Plus Tire - Performance GreenGuard Addix E50",
+     "part": "Tires",
+     "price_new": "42.78",
+     "price_old": "46.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 46.0,
+       "price": 42.78,
+       "specs": {
+        "tire_width": [
+         "1.75"
+        ],
+        "wheel_size": [
+         "26"
+        ]
+       },
+       "variant_id": 46840874402045
+      },
+      {
+       "available": true,
+       "compare": 50.0,
+       "price": 46.5,
+       "specs": {},
+       "variant_id": 46840874565885
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "1.75"
+      ],
+      "wheel_size": [
+       "26"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/schwalbe-energizer-plus-tire-performance-greenguard-addix-e50"
+    }
+   ],
+   [
+    "Bike Mart_Tires",
+    {
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5837.jpg?v=1762262320",
+     "length": 2.0,
+     "name": "Schwalbe Big Ben 27.5x2.0\" Tire",
+     "part": "Tires",
+     "price_new": "28.83",
+     "price_old": "31.00",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 54.0,
+       "price": 50.22,
+       "specs": {
+        "tire_width": [
+         "2"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46839461806333
+      },
+      {
+       "available": true,
+       "compare": 31.0,
+       "price": 28.83,
+       "specs": {
+        "tire_width": [
+         "2"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46839461839101
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/schwalbe-big-ben-27-5x2-0-tire",
+     "width": 27.5
+    }
+   ],
+   [
+    "Bike Mart_Drivetrain",
+    {
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-1.jpg?v=1761060271"
+     ],
+     "name": "KMC X12EPT Eco Pro Teq Chain",
+     "part": "Drivetrain",
+     "price_new": "45.62",
+     "price_old": "66.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 66.0,
+       "price": 45.62,
+       "specs": {},
+       "variant_id": 46764155994365
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/x12ept-eco-pro-teq-chain"
+    }
+   ],
+   [
+    "Bike Mart_Drivetrain",
+    {
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-1.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-16.jpg?v=1761060266"
+     ],
+     "name": "KMC X12 12-Speed Chain",
+     "part": "Drivetrain",
+     "price_new": "29.62",
+     "price_old": "44.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 44.0,
+       "price": 29.62,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151374077
+      },
+      {
+       "available": true,
+       "compare": 154.0,
+       "price": 115.5,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151406845
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+    }
+   ],
+   [
+    "Bike Mart_Drivetrain",
+    {
+     "availability": "In stock",
+     "brand": "Odyssey",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9033.jpg?v=1762282102"
+     ],
+     "length": 1.0,
+     "name": "Odyssey Bluebird Chain - Single Speed 1/2\" x 1/8\"",
+     "part": "Drivetrain",
+     "price_new": "36.99",
+     "price_old": "39.99",
+     "product_type": "Chains",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 39.99,
+       "price": 36.99,
+       "specs": {},
+       "variant_id": 46840926667005
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/odyssey-bluebird-chain",
+     "width": 2.0
+    }
+   ],
+   [
+    "Bike Mart_Drivetrain",
+    {
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x11e-turbo-chain-335884-1.jpg?v=1761060214"
+     ],
+     "name": "KMC E11-EPT Eco ProteQ eBike Chain",
+     "part": "Drivetrain",
+     "price_new": "59.62",
+     "price_old": "88.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 88.0,
+       "price": 59.62,
+       "specs": {},
+       "variant_id": 46764131188989
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/e11-ept-eco-proteq-ebike-chain"
+    }
+   ],
+   [
+    "Bike Mart_Brakes",
+    {
+     "availability": "In stock",
+     "brand": "SRAM",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-4.png?v=1761060642",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair--fix-iv-776258-2.png?v=1761060642",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair-iv-776258-3.png?v=1761060642",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sram-fr-5-brake-lever--pair--fix-iv-776258-1.png?v=1761060642"
+     ],
+     "name": "SRAM FR-5 Brake Lever- Pair",
+     "part": "Brakes",
+     "price_new": "17.60",
+     "price_old": "25.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 25.0,
+       "price": 17.6,
+       "specs": {},
+       "variant_id": 46764363907325
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/fr-5-brake-lever-pair"
+    }
+   ],
+   [
+    "Bike Mart_Brakes",
+    {
+     "availability": "In stock",
+     "brand": "Avid",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-1.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-12.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-11.jpg?v=1761060041"
+     ],
+     "name": "Avid Disc Brake Pads (Juicy/BB7/BB5)",
+     "part": "Brakes",
+     "price_new": "10.93",
+     "price_old": "35.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 10.93,
+       "specs": {},
+       "variant_id": 46764026527997
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/disc-brake-pads-juicybb7bb5"
+    }
+   ],
+   [
+    "Bike Mart_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "ODI",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0339.jpg?v=1762290159",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0339.jpg?v=1762290159",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0340.jpg?v=1762290159",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0341.jpg?v=1762290159",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0338.jpg?v=1762290160"
+     ],
+     "name": "ODI Ruffian v2.1 Lock-On Grips - Length 135mm, Round Shape",
+     "part": "Cockpit",
+     "price_new": "28.80",
+     "price_old": "32.00",
+     "product_type": "Grips",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46842211926269
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46842211959037
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46842211991805
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/odi-ruffian-v2-1-lock-on-grips"
+    }
+   ],
+   [
+    "Bike Mart_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "ESI",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5308.jpg?v=1763591434",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5308.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT8019.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5305.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5307.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5309.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/eg1108.jpg?v=1763591434",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5311.jpg?v=1763591435",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5315.jpg?v=1763591434"
+     ],
+     "name": "ESI Racer's Edge Grips",
+     "part": "Cockpit",
+     "price_new": "18.99",
+     "price_old": "19.99",
+     "product_type": "Grips",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 19.99,
+       "price": 18.99,
+       "specs": {},
+       "variant_id": 46891832738045
+      },
+      {
+       "available": true,
+       "compare": 19.99,
+       "price": 18.99,
+       "specs": {},
+       "variant_id": 46891832770813
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/esi-racers-edge-grips"
+    }
+   ],
+   [
+    "Bike Mart_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1540.jpg?v=1762254886",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1540.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1541.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1542.jpg?v=1762254886",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1543.jpg?v=1762254886"
+     ],
+     "name": "WTB Solano SL Saddle - Black",
+     "part": "Cockpit",
+     "price_new": "116.95",
+     "price_old": "129.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 229.95,
+       "price": 206.95,
+       "specs": {},
+       "variant_id": 46838557868285
+      },
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46838557901053
+      },
+      {
+       "available": true,
+       "compare": 229.95,
+       "price": 206.95,
+       "specs": {},
+       "variant_id": 46838557933821
+      },
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46838557966589
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-solano-sl-saddle"
+    }
+   ],
+   [
+    "Bike Mart_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
+     ],
+     "name": "WTB Rocket Saddle - Black Medium Fusion Form",
+     "part": "Cockpit",
+     "price_new": "71.95",
+     "price_old": "89.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46839154934013
+      },
+      {
+       "available": true,
+       "compare": 119.95,
+       "price": 107.95,
+       "specs": {},
+       "variant_id": 46839154966781
+      },
+      {
+       "available": true,
+       "compare": 104.95,
+       "price": 94.95,
+       "specs": {},
+       "variant_id": 46839154999549
+      },
+      {
+       "available": true,
+       "compare": 89.95,
+       "price": 71.95,
+       "specs": {},
+       "variant_id": 46839155032317
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-rocket-saddle"
+    }
+   ],
+   [
+    "Bike Mart_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1191.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1192.jpg?v=1762331072",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1193.jpg?v=1762331072"
+     ],
+     "name": "WTB Gravelier Saddle - Black",
+     "part": "Cockpit",
+     "price_new": "94.95",
+     "price_old": "104.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 104.95,
+       "price": 94.95,
+       "specs": {},
+       "variant_id": 46844595208445
+      },
+      {
+       "available": true,
+       "compare": 119.95,
+       "price": 107.95,
+       "specs": {},
+       "variant_id": 46844595241213
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-gravelier-saddle"
+    }
+   ],
+   [
+    "Bike Mart_Cockpit",
+    {
+     "availability": "In stock",
+     "brand": "ODI",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0358.jpg?v=1762250170",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4111.jpg?v=1762250171",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4112.jpg?v=1762250170",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4113.jpg?v=1762250171",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4114.jpg?v=1762250170",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4115.jpg?v=1762250170",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/od4116.jpg?v=1762250171"
+     ],
+     "name": "ODI Reflex v2.1 XL Lock-On Grips - Round 135mm",
+     "part": "Cockpit",
+     "price_new": "28.80",
+     "price_old": "32.00",
+     "product_type": "Lock-On Grips",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322692349
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322725117
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322757885
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322790653
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322823421
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322856189
+      },
+      {
+       "available": true,
+       "compare": 32.0,
+       "price": 28.8,
+       "specs": {},
+       "variant_id": 46838322888957
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/odi-reflex-v2-1-xl-lock-on-grips-white-black"
+    }
+   ],
+   [
+    "Bike Mart_Pedals",
+    {
+     "availability": "In stock",
+     "brand": "VP Components",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/21714_A_1_VP_Grind_Black_Pedal.jpg?v=1762267757",
+     "name": "VP Grind 1/2inch Black Pair Pedal",
+     "part": "Pedals",
+     "price_new": "12.93",
+     "price_old": "19.99",
+     "product_type": "Pedal",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 19.99,
+       "price": 12.93,
+       "specs": {},
+       "variant_id": 46840027775229
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/vp-grind-1-2inch-black-pair-pedal"
+    }
+   ]
+  ]
  },
- "failed_keys": [],
+ "failed_keys": [
+  "The Lost Co._Wheels"
+ ],
  "fingerprints": {
-  "data": "a9bed5d5456fca85095cb620f5f47fdf10592ed4e5ae8e7fb56eb9ea3d1dd175",
-  "history": "7280b7aaa7b6afd356899972e0af28d3eb9b26f724d1c73887b5fccbb3389c02"
+  "data": "9aa5a4a4a0eff01eca442680b1e1db59bc71b38ff5bc173eb14f2958918c17cb",
+  "history": "7dedff473d1ba9497ec9c5cff5afb4e55d7863f33414bb4c36f1e276cffd412c"
  },
- "generated_at": "2026-11-15T06:54:12+00:00",
+ "generated_at": "2026-11-16T01:40:39+00:00",
  "history": "file",
  "version": 1
 }
