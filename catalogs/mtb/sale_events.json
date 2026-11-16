@@ -43,7 +43,34 @@
       "events": []
     },
     "Race Face": {
-      "events": []
+      "events": [
+        {
+          "cut": 29,
+          "cut_high": 38,
+          "cut_low": 14,
+          "deals": {
+            "deals": 38,
+            "high": 60,
+            "low": 30,
+            "max_off": 70,
+            "uniform": null
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-16",
+              "text": "up to 70% off (most 30-60%)"
+            }
+          ],
+          "kind": "sale",
+          "listings": 15,
+          "moment": "Black Friday / Cyber Week",
+          "start": "2026-11-16",
+          "steps": [],
+          "tracked": 34,
+          "uniform": false
+        }
+      ]
     },
     "Smith": {
       "events": []
