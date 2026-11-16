@@ -387,6 +387,19 @@ def _hit_item(hit):
     return item if isinstance(item, dict) else {}
 
 
+def _quiet_summary(hits):
+    """Watched deals with no change today, counted per watchlist rule
+    (owner, 2026-11-16: the same 26 decks were listed in every email).
+    Returns [(note, count)], biggest first."""
+    counts = {}
+    for hit in hits or []:
+        if hit.get("reasons"):
+            continue
+        note = hit.get("note") or "Watched deals"
+        counts[note] = counts.get(note, 0) + 1
+    return sorted(counts.items(), key=lambda pair: (-pair[1], pair[0]))
+
+
 def _plain_watch(digest):
     hits = getattr(digest, "watch_hits", None)
     alerts = _watch_alerts(digest)
@@ -409,16 +422,11 @@ def _plain_watch(digest):
             lines.append("  " + " · ".join(bit for bit in bits if bit))
     else:
         lines.append("No watchlist alerts today.")
-    quiet = [hit for hit in (hits or []) if not hit.get("reasons")]
+    quiet = _quiet_summary(hits)
     if quiet:
-        lines.append("Still on sale")
-        for hit in quiet:
-            item = _hit_item(hit)
-            note = hit.get("note") or ""
-            extra = f" · {note}" if note else ""
-            lines.append(
-                f"- {_store_name(item)}: {_display_name(item)} · {_money(item.get('price_new'), item.get('currency'))}{extra}"
-            )
+        lines.append("Still on sale, no change today")
+        for note, count in quiet:
+            lines.append(f"- {note}: {count}")
     lines.append("")
     return lines
 
@@ -486,30 +494,15 @@ def _html_watch(digest):
                 extra,
             )
         )
-    for hit in hits or []:
-        if hit.get("reasons"):
-            continue
-        item = _hit_item(hit)
-        note = hit.get("note") or "On sale"
-        extra = (
-            '<p style="margin:6px 0 0;font-size:13px;line-height:1.4;color:#78350f;">'
-            f"On sale · {escape(note)}</p>"
-        )
+    quiet = _quiet_summary(hits)
+    if quiet:
+        lines = "".join(
+            f'<li style="margin:2px 0;">{escape(note)}: <strong>{count}</strong></li>' for note, count in quiet)
         rows.append(
-            _html_card(
-                _store_name(item),
-                "Watch",
-                "#ffedd5",
-                "#9a3412",
-                _product_link(_display_name(item), _product_url(item)),
-                _price_line(
-                    item.get("price_new"),
-                    _money(item.get("price_old"), item.get("currency")) if item.get("price_old") else "N/A",
-                    calculate_percent_off(item.get("price_new"), item.get("price_old")),
-                    item.get("currency"),
-                ),
-                extra,
-            )
+            '<tr><td style="padding:12px 20px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;'
+            'line-height:1.5;color:#78350f;" data-watch="quiet">'
+            "Still on sale, no change today:"
+            f'<ul style="margin:4px 0 0;padding-left:18px;">{lines}</ul></td></tr>'
         )
     rows.append('<tr><td style="height:16px;font-size:0;line-height:0;">&nbsp;</td></tr>')
     return "\n".join(rows)
