@@ -32035,14 +32035,14 @@
           }
         },
         "Bicycle Warehouse_Bikes": {
-          "count": 28,
+          "count": 32,
           "failed": false,
           "diagnostics": {
             "expected_count": 25.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 28,
-            "percentage_change": 12.0,
+            "actual_count": 32,
+            "percentage_change": 28.0,
             "reason": "normal_variation"
           }
         },
@@ -32059,14 +32059,14 @@
           }
         },
         "Bicycle Warehouse_Cockpit": {
-          "count": 4,
+          "count": 5,
           "failed": false,
           "diagnostics": {
             "expected_count": 4.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 4,
-            "percentage_change": 0.0,
+            "actual_count": 5,
+            "percentage_change": 25.0,
             "reason": "normal_variation"
           }
         },
@@ -32095,14 +32095,14 @@
           }
         },
         "Bicycle Warehouse_Frames": {
-          "count": 2,
+          "count": 3,
           "failed": false,
           "diagnostics": {
             "expected_count": 2.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.0,
-            "actual_count": 2,
-            "percentage_change": 0.0,
+            "actual_count": 3,
+            "percentage_change": 50.0,
             "reason": "normal_variation"
           }
         },
@@ -32131,26 +32131,26 @@
           }
         },
         "Bicycle Warehouse_Protection": {
-          "count": 16,
+          "count": 17,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.0,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.5,
-            "actual_count": 16,
-            "percentage_change": 14.3,
+            "actual_count": 17,
+            "percentage_change": 21.4,
             "reason": "normal_variation"
           }
         },
         "Bicycle Warehouse_Tires": {
-          "count": 9,
+          "count": 18,
           "failed": false,
           "diagnostics": {
             "expected_count": 9.5,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.5,
-            "actual_count": 9,
-            "percentage_change": -5.3,
+            "actual_count": 18,
+            "percentage_change": 89.5,
             "reason": "normal_variation"
           }
         },
@@ -32443,14 +32443,14 @@
           }
         },
         "Cambria_Brakes": {
-          "count": 62,
+          "count": 60,
           "failed": false,
           "diagnostics": {
             "expected_count": 56.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 62,
-            "percentage_change": 10.7,
+            "actual_count": 60,
+            "percentage_change": 7.1,
             "reason": "normal_variation"
           }
         },
@@ -34279,7 +34279,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-17T04:27:25+00:00"
+      "scanned_at": "2026-11-17T08:17:07+00:00"
     }
   ],
   "baseline": {
@@ -34501,7 +34501,7 @@
     },
     "Cambria_Brakes": {
       "date": "2026-11-17",
-      "count": 62
+      "count": 60
     },
     "Cambria_Cockpit": {
       "date": "2026-11-17",
@@ -34561,7 +34561,7 @@
     },
     "Bicycle Warehouse_Bikes": {
       "date": "2026-11-17",
-      "count": 28
+      "count": 32
     },
     "Bicycle Warehouse_Brakes": {
       "date": "2026-11-17",
@@ -34569,11 +34569,11 @@
     },
     "Bicycle Warehouse_Cockpit": {
       "date": "2026-11-17",
-      "count": 4
+      "count": 5
     },
     "Bicycle Warehouse_Frames": {
       "date": "2026-11-17",
-      "count": 2
+      "count": 3
     },
     "Bicycle Warehouse_Pedals": {
       "date": "2026-11-17",
@@ -34581,11 +34581,11 @@
     },
     "Bicycle Warehouse_Protection": {
       "date": "2026-11-17",
-      "count": 16
+      "count": 17
     },
     "Bicycle Warehouse_Tires": {
       "date": "2026-11-17",
-      "count": 9
+      "count": 18
     },
     "Bicycle Warehouse_Wheels": {
       "date": "2026-11-17",
@@ -36494,7 +36494,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 28
+        "count": 32
       }
     ],
     "Bicycle Warehouse_Brakes": [
@@ -36554,7 +36554,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 4
+        "count": 5
       }
     ],
     "Bicycle Warehouse_Drivetrain": [
@@ -36644,7 +36644,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 2
+        "count": 3
       }
     ],
     "Bicycle Warehouse_Packs": [
@@ -36730,7 +36730,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 16
+        "count": 17
       }
     ],
     "Bicycle Warehouse_Tires": [
@@ -36760,7 +36760,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 9
+        "count": 18
       }
     ],
     "Bicycle Warehouse_Wheels": [
@@ -37798,7 +37798,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 62
+        "count": 60
       }
     ],
     "Cambria_Cockpit": [

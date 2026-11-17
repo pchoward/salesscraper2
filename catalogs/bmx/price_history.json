@@ -11815,6 +11815,8 @@
     "all_time_low": 144.95,
     "all_time_low_date": "2026-11-17",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-17",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/wheel_zxfreecoaster_cn7910blk_1800x1800_079860b6-3689-492d-af95-03ff648003c8.jpg?v=1597779723",
     "spec_offers": [
       {
@@ -11876,6 +11878,43 @@
       "2026-11-16": 80.0,
       "2026-11-17": 80.0
     }
+  },
+  "https://www.albes.com/products/cinema-zx-v2-rear-wheel": {
+    "name": "Cinema ZX V2 Cassette Wheel",
+    "store": "Albe's BMX",
+    "part": "Wheels",
+    "first_seen": "2026-11-17",
+    "last_seen": "2026-11-17",
+    "observation_count": 1,
+    "all_time_low": 119.95,
+    "all_time_low_date": "2026-11-17",
+    "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/cinema.zx.cassette.wheel.1.purple.png?v=1689027649",
+    "diameter_mm": 45.0,
+    "diameters_mm": [
+      45.0
+    ],
+    "spec_offers": [
+      {
+        "diameter_mm": 45.0,
+        "durometers": [],
+        "variant_id": "31766978592842",
+        "available": true,
+        "price": 119.95,
+        "compare_at_price": 169.95
+      },
+      {
+        "diameter_mm": 45.0,
+        "durometers": [],
+        "variant_id": "31766978429002",
+        "available": true,
+        "price": 124.95,
+        "compare_at_price": 169.95
+      }
+    ],
+    "prices": {
+      "2026-11-17": 119.95
+    },
+    "stage": "new"
   },
   "https://www.albes.com/products/comp-iii-type-tire": {
     "name": "Sunlite COMP III TYPE TIRE",
@@ -14034,8 +14073,8 @@
     "first_seen": "2026-11-01",
     "last_seen": "2026-11-17",
     "observation_count": 16,
-    "all_time_low": 22.95,
-    "all_time_low_date": "2026-11-01",
+    "all_time_low": 15.0,
+    "all_time_low_date": "2026-11-17",
     "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/16433_source_1490909057.jpg?v=1604334194",
     "prices": {
@@ -14054,7 +14093,7 @@
       "2026-11-14": 22.95,
       "2026-11-15": 22.95,
       "2026-11-16": 22.95,
-      "2026-11-17": 22.95
+      "2026-11-17": 15.0
     }
   },
   "https://www.albes.com/products/mission-impulse-pc-pedals": {

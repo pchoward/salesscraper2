@@ -4337,28 +4337,61 @@
       ]
     },
     {
-      "name": "Cinema ZX Freecoaster Wheel",
-      "url": "https://www.albes.com/products/cinema-zx-freecoaster-wheel",
-      "price_new": "144.95",
-      "price_old": "199.99",
+      "name": "Cinema ZX V2 Cassette Wheel",
+      "url": "https://www.albes.com/products/cinema-zx-v2-rear-wheel",
+      "price_new": "119.95",
+      "price_old": "169.95",
       "availability": "Check store",
       "part": "Wheels",
       "store": "Albe's BMX",
       "product_type": "Wheels",
       "brand": "Cinema",
       "kind": "Wheels",
+      "wheel_size": "20",
       "technical_offers": [
         {
-          "variant_id": 32424509046858,
-          "price": 144.95,
-          "compare": 199.99,
+          "variant_id": 31766978592842,
+          "price": 119.95,
+          "compare": 169.95,
           "available": true,
           "specs": {
             "kind": [
               "Wheels"
             ],
+            "wheel_size": [
+              "20"
+            ],
             "hub_type": [
-              "Freecoaster"
+              "Cassette"
+            ],
+            "axle": [
+              "14mm"
+            ],
+            "drive_side": [
+              "Left (LHD)"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        },
+        {
+          "variant_id": 31766978429002,
+          "price": 124.95,
+          "compare": 169.95,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Wheels"
+            ],
+            "wheel_size": [
+              "20"
+            ],
+            "hub_type": [
+              "Cassette"
+            ],
+            "axle": [
+              "14mm"
             ],
             "drive_side": [
               "Right (RHD)"
@@ -4373,25 +4406,51 @@
         "kind": [
           "Wheels"
         ],
+        "wheel_size": [
+          "20"
+        ],
         "hub_type": [
-          "Freecoaster"
+          "Cassette"
+        ],
+        "axle": [
+          "14mm"
         ],
         "drive_side": [
+          "Left (LHD)",
           "Right (RHD)"
         ],
         "color": [
           "Black"
         ]
       },
-      "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/wheel_zxfreecoaster_cn7910blk_1800x1800_079860b6-3689-492d-af95-03ff648003c8.jpg?v=1597779723",
+      "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/cinema.zx.cassette.wheel.1.purple.png?v=1689027649",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/2993/9672/files/cinema.zx.cassette.wheel.1.purple.png?v=1689027649",
+        "https://cdn.shopify.com/s/files/1/2993/9672/files/cinema.zx.cassette.wheel.1.black.png?v=1689027649",
+        "https://cdn.shopify.com/s/files/1/2993/9672/files/cinema.zx.cassette.wheel.1.blue.png?v=1689027649",
+        "https://cdn.shopify.com/s/files/1/2993/9672/files/cinema.zx.cassette.wheel.1.gold.png?v=1689027649",
+        "https://cdn.shopify.com/s/files/1/2993/9672/files/cinema.zx.cassette.wheel.1.red.png?v=1689027649"
+      ],
+      "diameters_mm": [
+        45.0
+      ],
+      "diameter_mm": 45.0,
       "spec_offers": [
         {
-          "diameter_mm": null,
+          "diameter_mm": 45.0,
           "durometers": [],
-          "variant_id": "32424509046858",
+          "variant_id": "31766978592842",
           "available": true,
-          "price": 144.95,
-          "compare_at_price": 199.99
+          "price": 119.95,
+          "compare_at_price": 169.95
+        },
+        {
+          "diameter_mm": 45.0,
+          "durometers": [],
+          "variant_id": "31766978429002",
+          "available": true,
+          "price": 124.95,
+          "compare_at_price": 169.95
         }
       ]
     },
@@ -5252,6 +5311,65 @@
           "available": true,
           "price": 169.95,
           "compare_at_price": 210.99
+        }
+      ]
+    },
+    {
+      "name": "Cinema ZX Freecoaster Wheel",
+      "url": "https://www.albes.com/products/cinema-zx-freecoaster-wheel",
+      "price_new": "144.95",
+      "price_old": "199.99",
+      "availability": "Check store",
+      "part": "Wheels",
+      "store": "Albe's BMX",
+      "product_type": "Wheels",
+      "brand": "Cinema",
+      "kind": "Wheels",
+      "technical_offers": [
+        {
+          "variant_id": 32424509046858,
+          "price": 144.95,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Wheels"
+            ],
+            "hub_type": [
+              "Freecoaster"
+            ],
+            "drive_side": [
+              "Right (RHD)"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "kind": [
+          "Wheels"
+        ],
+        "hub_type": [
+          "Freecoaster"
+        ],
+        "drive_side": [
+          "Right (RHD)"
+        ],
+        "color": [
+          "Black"
+        ]
+      },
+      "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/wheel_zxfreecoaster_cn7910blk_1800x1800_079860b6-3689-492d-af95-03ff648003c8.jpg?v=1597779723",
+      "spec_offers": [
+        {
+          "diameter_mm": null,
+          "durometers": [],
+          "variant_id": "32424509046858",
+          "available": true,
+          "price": 144.95,
+          "compare_at_price": 199.99
         }
       ]
     },
@@ -7555,7 +7673,7 @@
     {
       "name": "Mission Fleet Tire",
       "url": "https://www.albes.com/products/mission-fleet-tire",
-      "price_new": "22.95",
+      "price_new": "15.00",
       "price_old": "24.95",
       "availability": "Check store",
       "part": "Tires",
@@ -7585,6 +7703,40 @@
         {
           "variant_id": 31766744858698,
           "price": 22.95,
+          "compare": 24.95,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Tires"
+            ],
+            "wheel_size": [
+              "20"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        },
+        {
+          "variant_id": 31766744924234,
+          "price": 15.0,
+          "compare": 24.95,
+          "available": true,
+          "specs": {
+            "kind": [
+              "Tires"
+            ],
+            "wheel_size": [
+              "20"
+            ],
+            "color": [
+              "Black"
+            ]
+          }
+        },
+        {
+          "variant_id": 31766744989770,
+          "price": 16.0,
           "compare": 24.95,
           "available": true,
           "specs": {
