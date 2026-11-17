@@ -12940,6 +12940,8 @@
     "all_time_low": 419.95,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-17",
     "image": "https://cdn.shopify.com/s/files/1/0568/2020/3697/files/mav88cti.png?v=1755975819",
     "prices": {
       "2026-11-12": 419.95,
@@ -28785,11 +28787,11 @@
     "observation_count": 1,
     "all_time_low": 34.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1223272.jpg?v=1767738053",
     "prices": {
       "2026-11-17": 34.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/148413-thule-rail-12l-hydration-pack": {
     "name": "Thule Rail 12L Hydration Pack",
@@ -30348,11 +30350,11 @@
     "observation_count": 1,
     "all_time_low": 45.46,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1107626.jpg?v=1767733294",
     "prices": {
       "2026-11-17": 45.46
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/183330-evo-overland-carbon-ski-poles": {
     "name": "evo Overland Carbon Ski Poles",
@@ -30363,11 +30365,11 @@
     "observation_count": 1,
     "all_time_low": 69.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1107631.jpg?v=1767733291",
     "prices": {
       "2026-11-17": 69.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/183612-evo-enduro-ski-poles-2025": {
     "name": "evo Enduro Ski Poles 2025",
@@ -34028,16 +34030,15 @@
     "store": "evo",
     "part": "Boots",
     "first_seen": "2026-11-04",
-    "last_seen": "2026-11-04",
-    "observation_count": 1,
+    "last_seen": "2026-11-17",
+    "observation_count": 2,
     "all_time_low": 249.99,
     "all_time_low_date": "2026-11-04",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-05",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1013529.jpg?v=1767729721",
     "prices": {
-      "2026-11-04": 249.99
+      "2026-11-04": 249.99,
+      "2026-11-17": 249.99
     }
   },
   "https://www.evo.com/products/238254-atomic-hawx-ultra-xtd-95-boa-gw-alpine-touring-ski-boots-women-s-2025": {
@@ -36295,6 +36296,21 @@
       "2026-11-12": 248.49
     }
   },
+  "https://www.evo.com/products/242834-dalbello-cabrio-lv-85-ski-boots-women-s-2024": {
+    "name": "Dalbello Cabrio LV 85 Ski Boots - Women's 2024",
+    "store": "evo",
+    "part": "Boots",
+    "first_seen": "2026-11-17",
+    "last_seen": "2026-11-17",
+    "observation_count": 1,
+    "all_time_low": 179.99,
+    "all_time_low_date": "2026-11-17",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1015977.jpg?v=1767729851",
+    "prices": {
+      "2026-11-17": 179.99
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/243094-osprey-kitsuma-3-hydration-pack-women-s": {
     "name": "Osprey Kitsuma 3 Hydration Pack - Women's",
     "store": "evo",
@@ -36507,11 +36523,11 @@
     "observation_count": 1,
     "all_time_low": 69.95,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1080652.jpg?v=1767732301",
     "prices": {
       "2026-11-17": 69.95
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/247284-osprey-sopris-20-backpack": {
     "name": "Osprey Sopris 20 Backpack",
@@ -39873,13 +39889,11 @@
     "store": "evo",
     "part": "Boots",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-14",
-    "observation_count": 8,
+    "last_seen": "2026-11-17",
+    "observation_count": 9,
     "all_time_low": 497.65,
     "all_time_low_date": "2026-11-02",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-15",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1095789.jpg?v=1767732874",
     "prices": {
       "2026-11-02": 497.65,
@@ -39889,7 +39903,8 @@
       "2026-11-06": 497.65,
       "2026-11-12": 497.65,
       "2026-11-13": 497.65,
-      "2026-11-14": 497.65
+      "2026-11-14": 497.65,
+      "2026-11-17": 497.65
     }
   },
   "https://www.evo.com/products/254251-atomic-hawx-prime-xtd-110-boa-gw-alpine-touring-ski-boots-2026-used": {
@@ -42544,11 +42559,11 @@
     "observation_count": 1,
     "all_time_low": 76.94,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1127649.jpg?v=1767734157",
     "prices": {
       "2026-11-17": 76.94
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/257154-season-forma-skis-2026": {
     "name": "Season Forma Skis 2026",
@@ -42699,11 +42714,11 @@
     "observation_count": 1,
     "all_time_low": 87.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188774.jpg?v=1767736772",
     "prices": {
       "2026-11-17": 87.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/257163-season-carbon-ultralight-ski-poles-2026": {
     "name": "Season Carbon Ultralight Ski Poles",
@@ -42714,11 +42729,11 @@
     "observation_count": 1,
     "all_time_low": 71.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1188779.jpg?v=1767736769",
     "prices": {
       "2026-11-17": 71.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/257163-season-carbon-ultralight-ski-poles-2026-used": {
     "name": "Season Carbon Ultralight Ski Poles - Used",
@@ -43280,11 +43295,11 @@
     "observation_count": 1,
     "all_time_low": 76.94,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1223280.jpg?v=1767738056",
     "prices": {
       "2026-11-17": 76.94
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/262681-season-nexus-skis-blem-2026-used": {
     "name": "Season Nexus Skis - Blem 2026",
@@ -52333,11 +52348,11 @@
     "observation_count": 1,
     "all_time_low": 104.94,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1246401.jpg?v=1767739007",
     "prices": {
       "2026-11-17": 104.94
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/271943-phaenom-footwear-fs-01-120-capeesh-ski-boots-2026": {
     "name": "Phaenom Footwear fs 01 120 capeesh Ski Boots 2026",
@@ -53104,11 +53119,11 @@
     "observation_count": 1,
     "all_time_low": 479.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1336206.jpg?v=1786549649",
     "prices": {
       "2026-11-17": 479.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/279043-k2-k2000-at130-alpine-touring-ski-boots-2026": {
     "name": "K2 K2000 AT130 Alpine Touring Ski Boots 2026",
@@ -53140,11 +53155,11 @@
     "observation_count": 1,
     "all_time_low": 55.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355484.jpg?v=1790025940",
     "prices": {
       "2026-11-17": 55.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/279560-liberty-radian-100-skis-2026": {
     "name": "Liberty Radian 100 Skis 2026",
@@ -53185,11 +53200,11 @@
     "observation_count": 1,
     "all_time_low": 359.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1335388.jpg?v=1786400015",
     "prices": {
       "2026-11-17": 359.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/279815-season-forma-skis-2027": {
     "name": "Season Forma Skis 2027",
@@ -53200,11 +53215,11 @@
     "observation_count": 1,
     "all_time_low": 719.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1336073.jpg?v=1786488988",
     "prices": {
       "2026-11-17": 719.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/279819-season-nexus-skis-2027": {
     "name": "Season Nexus Skis 2027",
@@ -53215,11 +53230,11 @@
     "observation_count": 1,
     "all_time_low": 639.2,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348405.jpg?v=1788987801",
     "prices": {
       "2026-11-17": 639.2
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/279822-season-lolo-skis-2027": {
     "name": "Season Lolo Skis 2027",
@@ -53230,11 +53245,11 @@
     "observation_count": 1,
     "all_time_low": 679.96,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348413.jpg?v=1788987801",
     "prices": {
       "2026-11-17": 679.96
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/280147-atomic-remedy-130-ltd-ski-boots-2026": {
     "name": "Atomic Remedy 130 LTD Ski Boots 2026",
@@ -53888,11 +53903,11 @@
     "observation_count": 1,
     "all_time_low": 139.93,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1352230.jpg?v=1789423602",
     "prices": {
       "2026-11-17": 139.93
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/284222-marker-griffon-x-13-ski-bindings-2027-used": {
     "name": "Marker Griffon X 13 Ski Bindings 2027 - Used",
@@ -54336,11 +54351,11 @@
     "observation_count": 1,
     "all_time_low": 87.44,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1368899.jpg?v=1791221579",
     "prices": {
       "2026-11-17": 87.44
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/289318-atomic-backland-sport-sl-alpine-touring-ski-boots-2023": {
     "name": "Atomic Backland Sport SL Alpine Touring Ski Boots 2023",
@@ -55329,11 +55344,11 @@
     "observation_count": 1,
     "all_time_low": 639.2,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1393802.jpg?v=1794334229",
     "prices": {
       "2026-11-17": 639.2
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/297074-evo-felsen-goggles-evo-goggle-case": {
     "name": "evo Felsen Goggles + evo Goggle Case",
@@ -67339,9 +67354,9 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-17",
     "observation_count": 6,
-    "all_time_low": 554.0,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 444.95,
+    "all_time_low_date": "2026-11-17",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2024-blizzard-black-pearl-82-women-s-skis-w-salomon-warden-11-mnc-bindings-1-8a227700k-223b9a14325481abba9ebb287ae72f4125fd8bc9.jpg?v=1794603144",
     "prices": {
       "2026-11-12": 554.0,
@@ -67349,7 +67364,7 @@
       "2026-11-14": 554.0,
       "2026-11-15": 554.0,
       "2026-11-16": 554.0,
-      "2026-11-17": 554.0
+      "2026-11-17": 444.95
     }
   },
   "https://www.skiessentials.com/products/2024-head-kore-99-ski-315433": {
@@ -67379,9 +67394,9 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-17",
     "observation_count": 6,
-    "all_time_low": 474.95,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 424.0,
+    "all_time_low_date": "2026-11-17",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2024-head-kore-99-ski-w-marker-griffon-13-binding-9-315433k-q7llg3isesjtl5vrvumw.jpg?v=1776277557",
     "prices": {
       "2026-11-12": 474.95,
@@ -67389,7 +67404,7 @@
       "2026-11-14": 474.95,
       "2026-11-15": 474.95,
       "2026-11-16": 474.95,
-      "2026-11-17": 474.95
+      "2026-11-17": 424.0
     }
   },
   "https://www.skiessentials.com/products/2024-lange-lx-85-hv-women-s-ski-boots": {
@@ -67491,6 +67506,21 @@
       "2026-11-17": 279.0
     }
   },
+  "https://www.skiessentials.com/products/2024-rossignol-blackops-98-open-womens-skis-with-bindings": {
+    "name": "2024 Rossignol Blackops 98 Open Women's Skis with Marker Squire 11 Bindings",
+    "store": "Ski Essentials",
+    "part": "Skis",
+    "first_seen": "2026-11-17",
+    "last_seen": "2026-11-17",
+    "observation_count": 1,
+    "all_time_low": 474.0,
+    "all_time_low_date": "2026-11-17",
+    "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2024-rossignol-blackops-98-open-womens-skis-with-bindings-1-ralmf02k-8d931bd5f027ebf0c463547616147fa110c540fa.jpg?v=1776277556",
+    "prices": {
+      "2026-11-17": 474.0
+    },
+    "stage": "new"
+  },
   "https://www.skiessentials.com/products/2024-rossignol-rallybird-102-women-s-skis-w-salomon-warden-11-bindings": {
     "name": "2024 Rossignol Rallybird 102 Women's Skis with Marker Squire 11 Bindings",
     "store": "Ski Essentials",
@@ -67498,9 +67528,9 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-17",
     "observation_count": 6,
-    "all_time_low": 474.0,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 424.0,
+    "all_time_low_date": "2026-11-17",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2024-rossignol-rallybird-102-women-s-skis-w-salomon-warden-11-bindings-4-ralmj04k-s6c6umnrdtfqt7dukl7x.jpg?v=1776277557",
     "prices": {
       "2026-11-12": 474.0,
@@ -67508,7 +67538,7 @@
       "2026-11-14": 474.0,
       "2026-11-15": 474.0,
       "2026-11-16": 474.0,
-      "2026-11-17": 474.0
+      "2026-11-17": 424.0
     }
   },
   "https://www.skiessentials.com/products/2024-stockli-nela-88-women-s-skis": {
@@ -67614,9 +67644,9 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-17",
     "observation_count": 6,
-    "all_time_low": 424.95,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 384.95,
+    "all_time_low_date": "2026-11-17",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2025-armada-arw-84-skis-and-bindings-ra0000636k-1-ra0000636k-du5mxzhx8dfmma07grqo.jpg?v=1772550224",
     "prices": {
       "2026-11-12": 424.95,
@@ -67624,7 +67654,7 @@
       "2026-11-14": 424.95,
       "2026-11-15": 424.95,
       "2026-11-16": 424.95,
-      "2026-11-17": 424.95
+      "2026-11-17": 384.95
     }
   },
   "https://www.skiessentials.com/products/2025-armada-strive-14-gw-bindings-rd000096": {
@@ -68534,9 +68564,9 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-17",
     "observation_count": 6,
-    "all_time_low": 364.0,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 354.95,
+    "all_time_low_date": "2026-11-17",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2025-nordica-unleashed-90-skis-with-bindings-0a452600001k-1-0a452600001k-rpq5xmlqxtmx6nhqcw3f.jpg?v=1772550152",
     "prices": {
       "2026-11-12": 364.0,
@@ -68544,7 +68574,7 @@
       "2026-11-14": 364.0,
       "2026-11-15": 364.0,
       "2026-11-16": 364.0,
-      "2026-11-17": 364.0
+      "2026-11-17": 354.95
     }
   },
   "https://www.skiessentials.com/products/2025-rossignol-alltrack-90-hv-ski-boots-rbm3160": {
@@ -68710,9 +68740,9 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-17",
     "observation_count": 6,
-    "all_time_low": 524.0,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 454.95,
+    "all_time_low_date": "2026-11-17",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2025-rossignol-experience-82-ti-women-s-skis-w-sa-ramfr03k-2-ramfr03k-f8zlfo6trkzpn7e4wvi3.jpg?v=1794603144",
     "prices": {
       "2026-11-12": 524.0,
@@ -68720,7 +68750,7 @@
       "2026-11-14": 524.0,
       "2026-11-15": 524.0,
       "2026-11-16": 524.0,
-      "2026-11-17": 524.0
+      "2026-11-17": 454.95
     }
   },
   "https://www.skiessentials.com/products/2025-rossignol-experience-86-basalt-women-s-skis-w-nx-12-konect-gw-bindings-package-ramfq02p": {
@@ -68790,9 +68820,9 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-17",
     "observation_count": 6,
-    "all_time_low": 384.0,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 354.0,
+    "all_time_low_date": "2026-11-17",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2025-rossignol-rallybird-94-open-women-s-skis-and-bindings-ranml02k-1-ranml02k-q7aujigifrcaqemawp0l.jpg?v=1772550224",
     "prices": {
       "2026-11-12": 384.0,
@@ -68800,7 +68830,7 @@
       "2026-11-14": 384.0,
       "2026-11-15": 384.0,
       "2026-11-16": 384.0,
-      "2026-11-17": 384.0
+      "2026-11-17": 354.0
     }
   },
   "https://www.skiessentials.com/products/2025-rossignol-rallybird-94-open-women-s-skis-ranml02": {
@@ -69202,9 +69232,9 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-17",
     "observation_count": 6,
-    "all_time_low": 499.0,
-    "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "all_time_low": 494.95,
+    "all_time_low_date": "2026-11-17",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2026-atomic-bent-90-skis-with-bindings-aa0030696k-3-aa0030696k_00e545f7-8dee-4cca-bb5e-a283cab7e865.jpg?v=1790264564",
     "prices": {
       "2026-11-12": 499.0,
@@ -69212,7 +69242,7 @@
       "2026-11-14": 499.0,
       "2026-11-15": 499.0,
       "2026-11-16": 499.0,
-      "2026-11-17": 499.0
+      "2026-11-17": 494.95
     }
   },
   "https://www.skiessentials.com/products/2026-atomic-bent-chetler-mini-skis-w-m10-gw-bindings-package-aa0030774p": {
@@ -69320,19 +69350,18 @@
     "store": "Ski Essentials",
     "part": "Skis",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-15",
-    "observation_count": 4,
+    "last_seen": "2026-11-17",
+    "observation_count": 5,
     "all_time_low": 564.95,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2026-atomic-maven-88-cti-women-s-skis-with-bindings-aa0030666k-2-aa0030666k-fpvajjiejnyqfmnzqngq.jpg?v=1794603144",
     "prices": {
       "2026-11-12": 564.95,
       "2026-11-13": 564.95,
       "2026-11-14": 564.95,
-      "2026-11-15": 564.95
+      "2026-11-15": 564.95,
+      "2026-11-17": 564.95
     }
   },
   "https://www.skiessentials.com/products/2026-atomic-maverick-105-cti-skis-with-bindings-aa0030680k": {
@@ -70313,6 +70342,8 @@
     "all_time_low": 485.0,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-17",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2026-k2-mindbender-85-women-s-skis-with-bindings-ks250968k-ks250968k-dlvmjp9fb86fjvxildly.jpg?v=1775056608",
     "prices": {
       "2026-11-12": 485.0,
@@ -70769,6 +70800,8 @@
     "all_time_low": 874.99,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-17",
     "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2026-volkl-blaze-94-skis-with-bindings-v2510134k-v2510134k-l4c0jpzs21bp062bjgns.jpg?v=1774638492",
     "prices": {
       "2026-11-12": 874.99,
@@ -78094,9 +78127,39 @@
     "observation_count": 1,
     "all_time_low": 650.0,
     "all_time_low_date": "2026-11-17",
+    "stage": "new",
     "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwacdb7478/images/large/1166362_1.jpg?sw=400&sh=400",
     "prices": {
       "2026-11-17": 650.0
+    }
+  },
+  "https://www.the-house.com/1166366.html": {
+    "name": "Atomic Maven 84 Women's Skis with M10 GW Bindings",
+    "store": "The House",
+    "part": "Skis",
+    "first_seen": "2026-11-17",
+    "last_seen": "2026-11-17",
+    "observation_count": 1,
+    "all_time_low": 665.0,
+    "all_time_low_date": "2026-11-17",
+    "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwabf18f16/images/large/1166366_1.jpg?sw=400&sh=400",
+    "prices": {
+      "2026-11-17": 665.0
+    },
+    "stage": "new"
+  },
+  "https://www.the-house.com/1166370.html": {
+    "name": "Atomic Maverick Jr Skis with C5 GW Bindings",
+    "store": "The House",
+    "part": "Skis",
+    "first_seen": "2026-11-17",
+    "last_seen": "2026-11-17",
+    "observation_count": 1,
+    "all_time_low": 360.0,
+    "all_time_low_date": "2026-11-17",
+    "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dwb8b036ea/images/large/1166370_1.jpg?sw=400&sh=400",
+    "prices": {
+      "2026-11-17": 360.0
     },
     "stage": "new"
   },

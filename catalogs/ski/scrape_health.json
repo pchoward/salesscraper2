@@ -14012,14 +14012,14 @@
           }
         },
         "Skipro_Skis": {
-          "count": 193,
+          "count": 192,
           "failed": false,
           "diagnostics": {
             "expected_count": 195,
             "baseline_samples": 5,
             "median_absolute_deviation": 0,
-            "actual_count": 193,
-            "percentage_change": -1.0,
+            "actual_count": 192,
+            "percentage_change": -1.5,
             "reason": "normal_variation"
           }
         },
@@ -14180,14 +14180,14 @@
           }
         },
         "The House_Skis": {
-          "count": 61,
+          "count": 63,
           "failed": false,
           "diagnostics": {
             "expected_count": 62.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 61,
-            "percentage_change": -1.6,
+            "actual_count": 63,
+            "percentage_change": 1.6,
             "reason": "normal_variation"
           }
         },
@@ -14624,14 +14624,14 @@
           }
         },
         "evo_Boots": {
-          "count": 225,
+          "count": 228,
           "failed": false,
           "diagnostics": {
             "expected_count": 296,
             "baseline_samples": 11,
             "median_absolute_deviation": 4,
-            "actual_count": 225,
-            "percentage_change": -24.0,
+            "actual_count": 228,
+            "percentage_change": -23.0,
             "reason": "normal_variation"
           }
         },
@@ -14696,7 +14696,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-17T08:07:21+00:00"
+      "scanned_at": "2026-11-17T14:04:36+00:00"
     }
   ],
   "baseline": {
@@ -14774,7 +14774,7 @@
     },
     "The House_Skis": {
       "date": "2026-11-17",
-      "count": 61
+      "count": 63
     },
     "Gear West_Helmets": {
       "date": "2026-11-17",
@@ -14838,7 +14838,7 @@
     },
     "evo_Boots": {
       "date": "2026-11-17",
-      "count": 225
+      "count": 228
     },
     "Aspen Ski and Board_Bindings": {
       "date": "2026-11-17",
@@ -14902,7 +14902,7 @@
     },
     "Skipro_Skis": {
       "date": "2026-11-17",
-      "count": 193
+      "count": 192
     },
     "The Pro Ski and Ride_Bindings": {
       "date": "2026-11-17",
@@ -17259,7 +17259,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 193
+        "count": 192
       }
     ],
     "Smith_Bindings": [
@@ -17959,7 +17959,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 61
+        "count": 63
       }
     ],
     "The Pro Ski and Ride_Bindings": [
@@ -19481,7 +19481,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 225
+        "count": 228
       }
     ],
     "evo_Helmets": [
