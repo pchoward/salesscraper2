@@ -32395,14 +32395,14 @@
           }
         },
         "Bikes Online_Protection": {
-          "count": 40,
+          "count": 39,
           "failed": false,
           "diagnostics": {
             "expected_count": 39.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 40,
-            "percentage_change": 1.3,
+            "actual_count": 39,
+            "percentage_change": -1.3,
             "reason": "normal_variation"
           }
         },
@@ -34279,7 +34279,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-17T03:36:03+00:00"
+      "scanned_at": "2026-11-17T04:27:25+00:00"
     }
   ],
   "baseline": {
@@ -34385,7 +34385,7 @@
     },
     "Bikes Online_Protection": {
       "date": "2026-11-17",
-      "count": 40
+      "count": 39
     },
     "Bikes Online_Tires": {
       "date": "2026-11-17",
@@ -37566,7 +37566,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 40
+        "count": 39
       }
     ],
     "Bikes Online_Tires": [

@@ -35424,14 +35424,14 @@
           }
         },
         "Bikes Online_Protection": {
-          "count": 15,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 15,
-            "percentage_change": 3.4,
+            "actual_count": 14,
+            "percentage_change": -3.4,
             "reason": "normal_variation"
           }
         },
@@ -37849,7 +37849,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-17T03:15:54+00:00"
+      "scanned_at": "2026-11-17T04:09:04+00:00"
     }
   ],
   "baseline": {
@@ -38003,7 +38003,7 @@
     },
     "Bikes Online_Protection": {
       "date": "2026-11-17",
-      "count": 15
+      "count": 14
     },
     "Cambria_Protection": {
       "date": "2026-11-17",
@@ -40350,7 +40350,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 15
+        "count": 14
       }
     ],
     "Bikes Online_Seating": [
