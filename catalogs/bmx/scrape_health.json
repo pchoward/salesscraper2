@@ -35159,14 +35159,14 @@
           }
         },
         "7iDP_Protection": {
-          "count": 11,
+          "count": 10,
           "failed": false,
           "diagnostics": {
             "expected_count": 11.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 11,
-            "percentage_change": 0.0,
+            "actual_count": 10,
+            "percentage_change": -9.1,
             "reason": "normal_variation"
           }
         },
@@ -35424,14 +35424,14 @@
           }
         },
         "Bikes Online_Protection": {
-          "count": 14,
+          "count": 15,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 14,
-            "percentage_change": -3.4,
+            "actual_count": 15,
+            "percentage_change": 3.4,
             "reason": "normal_variation"
           }
         },
@@ -35976,14 +35976,14 @@
           }
         },
         "Demon_Protection": {
-          "count": 20,
+          "count": 18,
           "failed": false,
           "diagnostics": {
             "expected_count": 20,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 20,
-            "percentage_change": 0.0,
+            "actual_count": 18,
+            "percentage_change": -10.0,
             "reason": "normal_variation"
           }
         },
@@ -37008,15 +37008,15 @@
           }
         },
         "SkatePro_Protection": {
-          "count": 3,
-          "failed": false,
+          "count": 0,
+          "failed": true,
           "diagnostics": {
             "expected_count": 3.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 3,
-            "percentage_change": 0.0,
-            "reason": "normal_variation"
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "scrape_failed"
           }
         },
         "SoCal_Protection": {
@@ -37068,14 +37068,14 @@
           }
         },
         "Source BMX US_Frames & Forks": {
-          "count": 86,
+          "count": 87,
           "failed": false,
           "diagnostics": {
             "expected_count": 18.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 86,
-            "percentage_change": 377.8,
+            "actual_count": 87,
+            "percentage_change": 383.3,
             "reason": "normal_variation"
           }
         },
@@ -37849,7 +37849,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-17T13:53:33+00:00"
+      "scanned_at": "2026-11-17T22:45:07+00:00"
     }
   ],
   "baseline": {
@@ -37939,7 +37939,7 @@
     },
     "Source BMX US_Frames & Forks": {
       "date": "2026-11-17",
-      "count": 86
+      "count": 87
     },
     "Source BMX US_Seating": {
       "date": "2026-11-17",
@@ -37983,7 +37983,7 @@
     },
     "Demon_Protection": {
       "date": "2026-11-17",
-      "count": 20
+      "count": 18
     },
     "G-Form_Protection": {
       "date": "2026-11-17",
@@ -37999,11 +37999,11 @@
     },
     "7iDP_Protection": {
       "date": "2026-11-17",
-      "count": 11
+      "count": 10
     },
     "Bikes Online_Protection": {
       "date": "2026-11-17",
-      "count": 14
+      "count": 15
     },
     "Cambria_Protection": {
       "date": "2026-11-17",
@@ -38016,10 +38016,6 @@
     "Troy Lee Designs_Protection": {
       "date": "2026-11-17",
       "count": 4
-    },
-    "SkatePro_Protection": {
-      "date": "2026-11-17",
-      "count": 3
     },
     "CCS_Protection": {
       "date": "2026-11-17",
@@ -39082,7 +39078,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 11
+        "count": 10
       }
     ],
     "7iDP_Seating": [
@@ -40354,7 +40350,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 14
+        "count": 15
       }
     ],
     "Bikes Online_Seating": [
@@ -42894,7 +42890,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 20
+        "count": 18
       }
     ],
     "Demon_Seating": [
@@ -47285,6 +47281,10 @@
     ],
     "SkatePro_Protection": [
       {
+        "date": "2026-11-03",
+        "count": 3
+      },
+      {
         "date": "2026-11-04",
         "count": 4
       },
@@ -47334,10 +47334,6 @@
       },
       {
         "date": "2026-11-16",
-        "count": 3
-      },
-      {
-        "date": "2026-11-17",
         "count": 3
       }
     ],
@@ -47628,7 +47624,7 @@
       },
       {
         "date": "2026-11-17",
-        "count": 86
+        "count": 87
       }
     ],
     "Source BMX US_Packs": [
