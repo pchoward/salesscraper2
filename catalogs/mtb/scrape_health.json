@@ -34945,14 +34945,14 @@
           }
         },
         "Bikes Online_Bikes": {
-          "count": 56,
+          "count": 58,
           "failed": false,
           "diagnostics": {
             "expected_count": 58.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 56,
-            "percentage_change": -3.4,
+            "actual_count": 58,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -35185,14 +35185,14 @@
           }
         },
         "Cambria_Tires": {
-          "count": 98,
+          "count": 99,
           "failed": false,
           "diagnostics": {
             "expected_count": 91.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 98,
-            "percentage_change": 7.1,
+            "actual_count": 99,
+            "percentage_change": 8.2,
             "reason": "normal_variation"
           }
         },
@@ -36925,7 +36925,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-18T03:24:50+00:00"
+      "scanned_at": "2026-11-18T07:47:23+00:00"
     }
   ],
   "baseline": {
@@ -36967,7 +36967,7 @@
     },
     "Cambria_Tires": {
       "date": "2026-11-18",
-      "count": 98
+      "count": 99
     },
     "Mike's Bikes_Bikes": {
       "date": "2026-11-18",
@@ -37003,7 +37003,7 @@
     },
     "Bikes Online_Bikes": {
       "date": "2026-11-18",
-      "count": 56
+      "count": 58
     },
     "Bikes Online_Brakes": {
       "date": "2026-11-18",
@@ -39880,7 +39880,7 @@
       },
       {
         "date": "2026-11-18",
-        "count": 56
+        "count": 58
       }
     ],
     "Bikes Online_Brakes": [
@@ -40984,7 +40984,7 @@
       },
       {
         "date": "2026-11-18",
-        "count": 98
+        "count": 99
       }
     ],
     "Cambria_Wheels": [
