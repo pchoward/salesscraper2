@@ -15494,38 +15494,38 @@
           }
         },
         "The House_Boots": {
-          "count": 80,
+          "count": 78,
           "failed": false,
           "diagnostics": {
             "expected_count": 80.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 80,
-            "percentage_change": 0.0,
+            "actual_count": 78,
+            "percentage_change": -2.5,
             "reason": "normal_variation"
           }
         },
         "The House_Helmets": {
-          "count": 11,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 13.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 11,
-            "percentage_change": -15.4,
+            "actual_count": 14,
+            "percentage_change": 7.7,
             "reason": "normal_variation"
           }
         },
         "The House_Packs": {
-          "count": 12,
+          "count": 11,
           "failed": false,
           "diagnostics": {
             "expected_count": 12.5,
             "baseline_samples": 6,
             "median_absolute_deviation": 0.5,
-            "actual_count": 12,
-            "percentage_change": -4.0,
+            "actual_count": 11,
+            "percentage_change": -12.0,
             "reason": "normal_variation"
           }
         },
@@ -15542,26 +15542,26 @@
           }
         },
         "The House_Protection": {
-          "count": 15,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 15.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 15,
-            "percentage_change": 0.0,
+            "actual_count": 14,
+            "percentage_change": -6.7,
             "reason": "normal_variation"
           }
         },
         "The House_Skis": {
-          "count": 63,
+          "count": 60,
           "failed": false,
           "diagnostics": {
             "expected_count": 62.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 63,
-            "percentage_change": 1.6,
+            "actual_count": 60,
+            "percentage_change": -3.2,
             "reason": "normal_variation"
           }
         },
@@ -16070,7 +16070,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-18T07:41:02+00:00"
+      "scanned_at": "2026-11-18T08:10:45+00:00"
     }
   ],
   "baseline": {
@@ -16136,11 +16136,11 @@
     },
     "The House_Boots": {
       "date": "2026-11-18",
-      "count": 80
+      "count": 78
     },
     "The House_Helmets": {
       "date": "2026-11-18",
-      "count": 11
+      "count": 14
     },
     "The House_Poles": {
       "date": "2026-11-18",
@@ -16148,7 +16148,7 @@
     },
     "The House_Skis": {
       "date": "2026-11-18",
-      "count": 63
+      "count": 60
     },
     "Gear West_Helmets": {
       "date": "2026-11-18",
@@ -16160,7 +16160,7 @@
     },
     "The House_Protection": {
       "date": "2026-11-18",
-      "count": 15
+      "count": 14
     },
     "Utah Ski_Protection": {
       "date": "2026-11-18",
@@ -16328,7 +16328,7 @@
     },
     "The House_Packs": {
       "date": "2026-11-18",
-      "count": 12
+      "count": 11
     },
     "evo_Packs": {
       "date": "2026-11-18",
@@ -19223,7 +19223,7 @@
       },
       {
         "date": "2026-11-18",
-        "count": 80
+        "count": 78
       }
     ],
     "The House_Helmets": [
@@ -19281,7 +19281,7 @@
       },
       {
         "date": "2026-11-18",
-        "count": 11
+        "count": 14
       }
     ],
     "The House_Packs": [
@@ -19311,7 +19311,7 @@
       },
       {
         "date": "2026-11-18",
-        "count": 12
+        "count": 11
       }
     ],
     "The House_Poles": [
@@ -19427,7 +19427,7 @@
       },
       {
         "date": "2026-11-18",
-        "count": 15
+        "count": 14
       }
     ],
     "The House_Skis": [
@@ -19485,7 +19485,7 @@
       },
       {
         "date": "2026-11-18",
-        "count": 63
+        "count": 60
       }
     ],
     "The Pro Ski and Ride_Bindings": [
