@@ -492,6 +492,8 @@ def _html_watch(digest):
                     item.get("currency"),
                 ),
                 extra,
+                image=_image_url(item),
+                url=_product_url(item),
             )
         )
     quiet = _quiet_summary(hits)
@@ -628,8 +630,8 @@ def render_html(digest, report_url, when=None, banner=None):
         '<body style="margin:0;padding:0;background:#f1f5f9;">',
         f'<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">{escape(summary)}. View the full report.</div>',
         '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f1f5f9" style="background:#f1f5f9;margin:0;padding:0;">',
-        '<tr><td align="center" style="padding:24px 12px;">',
-        '<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="width:600px;max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;">',
+        '<tr><td align="center" style="padding:16px 8px;">',
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="width:100%;max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;">',
         _html_header(when, summary),
     ]
     if banner:
@@ -638,6 +640,7 @@ def render_html(digest, report_url, when=None, banner=None):
             'font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;border-bottom:1px solid #fdba74;">'
             f"{escape(banner)}</td></tr>"
         )
+    chunks.append(_html_hero(top_deal(digest.new_items)))
     chunks.append(_html_report_link(safe_report))
     watch_row = _html_watch(digest)
     if watch_row:
@@ -658,26 +661,102 @@ def render_html(digest, report_url, when=None, banner=None):
     return "\n".join(chunks)
 
 
+def _count_chips(summary):
+    """"39 new, 12 price drops" -> pill chips for the header."""
+    chips = []
+    for part in [bit.strip() for bit in str(summary or "").split(",") if bit.strip()]:
+        chips.append(
+            '<span style="display:inline-block;margin:0 6px 6px 0;background:#1e293b;color:#f8fafc;'
+            'font-size:13px;font-weight:700;padding:5px 11px;border-radius:999px;border:1px solid #334155;">'
+            f"{escape(part)}</span>")
+    return "".join(chips)
+
+
 def _html_header(when, summary, heading="Skate deals"):
+    # Owner, 2026-11-18: "spruce up the email". Dark header, the wordmark
+    # with an orange accent, and the day's counts as chips.
     return (
-        '<tr><td bgcolor="#1d4ed8" style="background:#1d4ed8;padding:28px 24px;'
+        '<tr><td bgcolor="#0f172a" style="background:#0f172a;padding:26px 24px 20px;'
         'font-family:Arial,Helvetica,sans-serif;">'
-        '<p style="margin:0;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#dbeafe;">'
-        f"{BRAND}</p>"
-        '<h1 style="margin:8px 0 0;font-size:26px;line-height:1.2;font-weight:700;color:#ffffff;">'
+        '<p style="margin:0;font-size:15px;font-weight:800;letter-spacing:0.14em;color:#f8fafc;">'
+        f'SHRED<span style="color:#fb923c;">DEALS</span></p>'
+        '<h1 style="margin:10px 0 0;font-size:28px;line-height:1.15;font-weight:800;color:#ffffff;">'
         f"{escape(heading)}</h1>"
-        f'<p style="margin:8px 0 0;font-size:15px;line-height:1.4;color:#dbeafe;">{escape(_long_date(when))}'
-        f" · {escape(summary)}</p>"
+        f'<p style="margin:6px 0 12px;font-size:14px;line-height:1.4;color:#94a3b8;">{escape(_long_date(when))}</p>'
+        f"{_count_chips(summary)}"
         "</td></tr>"
+    )
+
+
+SPORT_COLORS = {"skate": "#2563eb", "bmx": "#dc2626", "ski": "#0284c7", "mtb": "#16a34a"}
+SITE = "https://shreddeals.com/"
+
+
+def _percent_number(item):
+    try:
+        return float(str(calculate_percent_off(item.get("price_new"), item.get("price_old"))).rstrip("%"))
+    except (TypeError, ValueError, AttributeError):
+        return 0.0
+
+
+def top_deal(items):
+    """The biggest markdown among ``items`` that has a photo, or None."""
+    pictured = [item for item in items or [] if isinstance(item, dict) and _image_url(item)]
+    return max(pictured, key=_percent_number, default=None)
+
+
+def _html_hero(item, label="Top deal today"):
+    """The day's biggest markdown, large, under the header."""
+    if not item:
+        return ""
+    url = _product_url(item)
+    image = _image_url(item)
+    currency = item.get("currency")
+    percent = calculate_percent_off(item.get("price_new"), item.get("price_old"))
+    original = _money(item.get("price_old"), currency) if item.get("price_old") else "N/A"
+    photo = (f'<a href="{escape(url, quote=True)}"><img src="{escape(image, quote=True)}" width="220" alt="" '
+             'style="display:block;margin:0 auto;width:220px;max-width:100%;height:auto;border:0;"></a>')
+    return (
+        '<tr><td data-hero="1" style="padding:20px 20px 4px;font-family:Arial,Helvetica,sans-serif;">'
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
+        'style="border:2px solid #fb923c;border-radius:12px;background:#fff7ed;">'
+        '<tr><td style="padding:14px 16px 16px;text-align:center;">'
+        '<p style="margin:0 0 10px;font-size:11px;font-weight:800;letter-spacing:0.12em;color:#c2410c;'
+        f'text-transform:uppercase;">{escape(label)} · {escape(_store_name(item))}</p>'
+        f"{photo}"
+        '<div style="margin-top:12px;font-size:17px;line-height:1.35;font-weight:800;color:#0f172a;">'
+        f"{_product_link(_display_name(item), url)}</div>"
+        f'<p style="margin:8px 0 0;font-size:14px;line-height:1.5;">'
+        f"{_price_line(item.get('price_new'), original, percent, currency)}</p>"
+        f'<p style="margin:12px 0 0;"><a href="{escape(url, quote=True)}" style="display:inline-block;'
+        'background:#ea580c;color:#ffffff;text-decoration:none;font-size:14px;font-weight:800;'
+        'padding:10px 18px;border-radius:8px;">Grab it &rarr;</a></p>'
+        "</td></tr></table></td></tr>"
+    )
+
+
+def html_site_footer(note):
+    """Footer: the note, then a link to each sport's page."""
+    links = " &nbsp;·&nbsp; ".join(
+        f'<a href="{SITE}?sport={sport}" style="color:{color};font-weight:700;text-decoration:none;">'
+        f"{label}</a>"
+        for sport, label, color in (("skate", "Skate", SPORT_COLORS["skate"]), ("bmx", "BMX", SPORT_COLORS["bmx"]),
+                                    ("ski", "Ski", SPORT_COLORS["ski"]), ("mtb", "MTB", SPORT_COLORS["mtb"])))
+    return (
+        '<tr><td bgcolor="#f8fafc" style="background:#f8fafc;padding:20px 24px 26px;'
+        'font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#64748b;'
+        'border-top:1px solid #e2e8f0;">'
+        f'<p style="margin:0 0 10px;font-size:14px;">{links}</p>'
+        f"{note}</td></tr>"
     )
 
 
 def _html_report_link(safe_report):
     return (
         '<tr><td style="padding:20px 24px 8px;font-family:Arial,Helvetica,sans-serif;">'
-        f'<a href="{safe_report}" style="display:inline-block;background:#1d4ed8;color:#ffffff;'
-        'text-decoration:none;font-weight:700;font-size:14px;line-height:1;padding:12px 18px;border-radius:6px;">'
-        "View full report</a>"
+        f'<a href="{safe_report}" style="display:inline-block;background:#0f172a;color:#ffffff;'
+        'text-decoration:none;font-weight:700;font-size:14px;line-height:1;padding:12px 18px;border-radius:8px;">'
+        "View full report &rarr;</a>"
         f'<p style="margin:10px 0 0;font-size:12px;line-height:1.4;color:#64748b;">'
         f'<a href="{safe_report}" style="color:#1d4ed8;text-decoration:underline;">{safe_report}</a></p>'
         "</td></tr>"
@@ -687,11 +766,11 @@ def _html_report_link(safe_report):
 def _html_part(part, new_items, drops):
     summary = _section_summary(new_items, drops)
     rows = [
-        '<tr><td bgcolor="#0f172a" style="background:#0f172a;padding:10px 20px;'
-        'font-family:Arial,Helvetica,sans-serif;">'
-        f'<span data-part="{escape(part, quote=True)}" style="color:#ffffff;font-size:14px;font-weight:700;'
-        f'letter-spacing:0.04em;">{escape(part)}</span>'
-        f'<span style="color:#94a3b8;font-size:12px;">&nbsp;&nbsp;{escape(summary)}</span>'
+        '<tr><td style="padding:18px 20px 2px;font-family:Arial,Helvetica,sans-serif;'
+        'border-bottom:2px solid #e2e8f0;">'
+        f'<span data-part="{escape(part, quote=True)}" style="color:#0f172a;font-size:17px;font-weight:800;">'
+        f"{escape(part)}</span>"
+        f'<span style="color:#64748b;font-size:12px;">&nbsp;&nbsp;{escape(summary)}</span>'
         "</td></tr>"
     ]
     if new_items:
@@ -719,14 +798,14 @@ def _store_badge(store):
     bg, fg = _STORE_COLORS.get(key, ("#f1f5f9", "#334155"))
     return (
         f'<span style="display:inline-block;background:{bg};color:{fg};font-size:11px;font-weight:700;'
-        f'letter-spacing:0.03em;padding:3px 8px;border-radius:4px;">{escape(store)}</span>'
+        f'letter-spacing:0.03em;padding:3px 8px;border-radius:4px;margin:0 0 4px;">{escape(store)}</span>'
     )
 
 
 def _kind_badge(label, bg, fg):
     return (
         f'<span style="display:inline-block;background:{bg};color:{fg};font-size:11px;font-weight:700;'
-        f'letter-spacing:0.04em;text-transform:uppercase;padding:3px 8px;border-radius:4px;">{escape(label)}</span>'
+        f'letter-spacing:0.04em;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin:0 0 4px;">{escape(label)}</span>'
     )
 
 
@@ -754,6 +833,8 @@ def _html_new_row(item):
         _price_line(item.get("price_new"), original, percent, currency),
         "",
         atl=_is_atl(item),
+        image=_image_url(item),
+        url=url,
     )
 
 
@@ -780,58 +861,89 @@ def _html_drop_row(change):
         _price_line(sale, original, percent, currency),
         extra,
         atl=_is_atl(item, change),
+        image=_image_url(item),
+        url=url,
     )
 
 
 def _price_line(sale, original, percent, currency=None):
-    sale_html = f'<strong style="color:#15803d;font-size:18px;">{escape(_money(sale, currency))}</strong>'
+    sale_html = f'<strong style="color:#15803d;font-size:20px;">{escape(_money(sale, currency))}</strong>'
     if original and original != "N/A":
         original_html = (
-            '<span style="color:#64748b;font-size:14px;text-decoration:line-through;">'
-            f"&nbsp;&nbsp;{escape(original)}</span>"
+            ' <span style="color:#64748b;font-size:14px;text-decoration:line-through;margin-left:4px;">'
+            f"{escape(original)}</span>"
         )
     else:
-        original_html = '<span style="color:#64748b;font-size:14px;">&nbsp;&nbsp;Original N/A</span>'
+        original_html = ' <span style="color:#64748b;font-size:14px;margin-left:4px;">Original N/A</span>'
     if not percent or percent == "N/A":
         return sale_html + original_html
     badge = (
-        '&nbsp;<span style="display:inline-block;background:#ecfdf5;color:#166534;font-size:12px;'
-        f'font-weight:700;padding:2px 8px;border-radius:999px;">{escape(_off_label(percent))}</span>'
+        ' <span style="display:inline-block;margin-left:2px;background:#ea580c;color:#ffffff;font-size:12px;'
+        f'font-weight:800;padding:3px 9px;border-radius:999px;">{escape(_off_label(percent))}</span>'
     )
-    return sale_html + original_html + badge
+    save = ""
+    try:
+        amount = float(str(original).replace("$", "").replace("€", "")) - float(sale)
+        if amount >= 1:
+            symbol = "€" if str(currency or "USD").upper() == "EUR" else "$"
+            save = (f'<br><span style="color:#166534;font-size:12px;font-weight:700;">'
+                    f"Save {symbol}{amount:,.0f}</span>")
+    except (TypeError, ValueError):
+        pass
+    return sale_html + original_html + badge + save
 
 
 def _atl_email_badge():
     return (
-        '&nbsp;<span style="display:inline-block;background:#fef08a;color:#854d0e;font-size:11px;'
+        ' <span style="display:inline-block;background:#fef08a;color:#854d0e;font-size:11px;'
         'font-weight:700;letter-spacing:0.04em;padding:3px 8px;border-radius:4px;">ALL-TIME LOW</span>'
     )
 
 
-def _html_card(store, kind, kind_bg, kind_fg, link_html, price_html, extra_html, atl=False):
+def _image_url(item):
+    url = str((item or {}).get("image") or "").strip()
+    if url.startswith("//"):
+        url = "https:" + url
+    return url if url.startswith("https://") else ""
+
+
+def _html_card(store, kind, kind_bg, kind_fg, link_html, price_html, extra_html, atl=False, image="", url=""):
+    """One deal: photo on the left (when the store has one), badges, name,
+    price and a "View deal" button."""
     atl_html = _atl_email_badge() if atl else ""
+    photo = ""
+    if image:
+        photo_img = (f'<img src="{escape(image, quote=True)}" width="92" alt="" '
+                     'style="display:block;width:92px;max-width:92px;height:auto;border:0;border-radius:6px;">')
+        if url:
+            photo_img = f'<a href="{escape(url, quote=True)}">{photo_img}</a>'
+        photo = ('<td width="104" valign="top" style="width:104px;padding:12px 0 12px 12px;">'
+                 f"{photo_img}</td>")
+    button = ""
+    if url:
+        button = (f'<p style="margin:10px 0 0;"><a href="{escape(url, quote=True)}" style="display:inline-block;'
+                  'white-space:nowrap;background:#0f172a;color:#ffffff;text-decoration:none;font-size:12px;'
+                  'font-weight:700;padding:7px 12px;border-radius:6px;">View deal &rarr;</a></p>')
     return (
-        '<tr><td style="padding:8px 20px 0;font-family:Arial,Helvetica,sans-serif;">'
+        '<tr><td style="padding:10px 20px 0;font-family:Arial,Helvetica,sans-serif;">'
         '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
-        'style="border:1px solid #e2e8f0;border-radius:8px;">'
-        '<tr><td style="padding:12px 14px;">'
-        f"{_store_badge(store)}&nbsp;{_kind_badge(kind, kind_bg, kind_fg)}{atl_html}"
-        '<div style="margin-top:8px;font-size:15px;line-height:1.4;font-weight:700;color:#0f172a;">'
+        'style="border:1px solid #e2e8f0;border-radius:10px;background:#ffffff;">'
+        f"<tr>{photo}"
+        '<td valign="top" style="padding:12px 14px;">'
+        f"{_store_badge(store)} {_kind_badge(kind, kind_bg, kind_fg)}{atl_html}"
+        '<div style="margin-top:6px;font-size:15px;line-height:1.35;font-weight:700;color:#0f172a;">'
         f"{link_html}</div>"
-        f'<p style="margin:8px 0 0;font-size:14px;line-height:1.4;">{price_html}</p>'
-        f"{extra_html}"
+        f'<p style="margin:8px 0 0;font-size:14px;line-height:1.5;">{price_html}</p>'
+        f"{extra_html}{button}"
         "</td></tr></table></td></tr>"
     )
 
 
 def _html_footer(safe_report):
-    return (
-        '<tr><td style="padding:20px 24px 28px;font-family:Arial,Helvetica,sans-serif;'
-        'font-size:12px;line-height:1.5;color:#64748b;">'
+    return html_site_footer(
         "Price drops are at least $2 or 5% versus the previous tracked sale price, not versus the original price. "
         "Removals stay on the full report, and only after that store and part scraped successfully."
         f'<br><a href="{safe_report}" style="color:#1d4ed8;text-decoration:underline;">Open the full report</a>'
-        "</td></tr>"
     )
 
 

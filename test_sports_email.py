@@ -86,7 +86,7 @@ class SportsEmailTests(unittest.TestCase):
         digest = notify.Digest(new_items=[_item("Baker Deck", "Decks", "50", "70", "Tactics")])
         self.assertTrue(notify.subject_line(digest, WHEN).startswith("ShredDeals Skate: 1 new"))
         html = notify.render_html(digest, notify.DEFAULT_REPORT_URL, WHEN)
-        self.assertIn("ShredDeals</p>", html)
+        self.assertIn('SHRED<span style="color:#fb923c;">DEALS</span>', html)
         self.assertNotIn("Skateboard sale tracker", html)
 
     def test_workflow_sends_after_the_scrapes(self):

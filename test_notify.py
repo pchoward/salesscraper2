@@ -264,7 +264,10 @@ class ConfigAndDeliveryTests(unittest.TestCase):
                 text = handle.read()
         self.assertIn("Subject: ShredDeals Skate: 3 new, 1 price drop (Sep 28)", text)
         self.assertIn("https://example.com/deals.html", text)
-        self.assertNotIn(DEFAULT_REPORT_URL, text)
+        # The report buttons use REPORT_URL; the footer's sport links (one is
+        # the default Skate address) are site navigation, not the report.
+        self.assertIn('<a href="https://example.com/deals.html" style="display:inline-block', text)
+        self.assertNotIn(f'<a href="{DEFAULT_REPORT_URL}" style="display:inline-block', text)
         self.assertIn("Baker Team Deck 8.25", text)
 
     def test_dry_run_flag_skips_smtp_even_when_configured(self):
