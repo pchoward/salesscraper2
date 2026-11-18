@@ -166,14 +166,20 @@ def render_plain(sections, when=None):
 
 def _html_sport_band(section):
     url = escape(section.url, quote=True)
+    color = notify.SPORT_COLORS.get(section.sport.id, "#1e3a8a")
     return (
-        '<tr><td bgcolor="#1e3a8a" style="background:#1e3a8a;padding:16px 20px;font-family:Arial,Helvetica,sans-serif;">'
-        f'<span data-sport="{escape(section.sport.id, quote=True)}" style="color:#ffffff;font-size:20px;'
-        f'font-weight:700;">{escape(section.sport.label)}</span>'
-        f'<span style="color:#bfdbfe;font-size:13px;">&nbsp;&nbsp;'
-        f'{escape(_count_text(section.total_new, section.total_drops))}</span>'
-        f'<br><a href="{url}" style="color:#bfdbfe;font-size:12px;text-decoration:underline;">'
-        f"Open the {escape(section.sport.label)} page</a></td></tr>"
+        '<tr><td style="padding:22px 20px 0;font-family:Arial,Helvetica,sans-serif;">'
+        f'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="{color}" '
+        f'style="background:{color};border-radius:10px;"><tr>'
+        '<td style="padding:14px 16px;">'
+        f'<span data-sport="{escape(section.sport.id, quote=True)}" style="color:#ffffff;font-size:22px;'
+        f'font-weight:800;">{escape(section.sport.label)}</span>'
+        f'<span style="color:#ffffff;opacity:0.9;font-size:13px;">&nbsp;&nbsp;'
+        f'{escape(_count_text(section.total_new, section.total_drops))}</span></td>'
+        '<td align="right" style="padding:14px 16px;">'
+        f'<a href="{url}" style="display:inline-block;white-space:nowrap;background:#ffffff;color:{color};font-size:12px;'
+        f'font-weight:800;text-decoration:none;padding:7px 12px;border-radius:6px;">'
+        f"Open {escape(section.sport.label)} &rarr;</a></td></tr></table></td></tr>"
     )
 
 
@@ -197,10 +203,11 @@ def render_html(sections, when=None):
         f'<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">{escape(summary)}.</div>',
         '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f1f5f9" '
         'style="background:#f1f5f9;margin:0;padding:0;">',
-        '<tr><td align="center" style="padding:24px 12px;">',
-        '<table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" '
-        'style="width:600px;max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;">',
+        '<tr><td align="center" style="padding:16px 8px;">',
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" '
+        'style="width:100%;max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;">',
         notify._html_header(when, summary, heading=f"{_labels(sections)} deals"),
+        notify._html_hero(notify.top_deal([i for section in sections for i in section.new_items])),
     ]
     for section in sections:
         chunks.append(_html_sport_band(section))
@@ -209,11 +216,8 @@ def render_html(sections, when=None):
         more = _html_more(section)
         if more:
             chunks.append(more)
-    chunks.append(
-        '<tr><td style="padding:20px 24px 28px;font-family:Arial,Helvetica,sans-serif;font-size:12px;'
-        'line-height:1.5;color:#64748b;">Biggest markdowns first. Price drops are at least $2 or 5% versus the '
-        f'previous tracked sale price.<br><a href="{SITE}" style="color:#1d4ed8;text-decoration:underline;">'
-        "shreddeals.com</a></td></tr>")
+    chunks.append(notify.html_site_footer(
+        "Biggest markdowns first. Price drops are at least $2 or 5% versus the previous tracked sale price."))
     chunks.extend(["</table>", "</td></tr>", "</table>", "</body>", "</html>"])
     return "\n".join(chunks)
 
