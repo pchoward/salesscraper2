@@ -155,6 +155,11 @@ def _run(args, sport):
     demos = condition.label_items(curr_data)
     if demos:
         logging.info("Labelled %s demo listings", demos)
+    # Store "image coming soon" placeholders aren't photos (product_images.py).
+    import product_images
+    cleaned = product_images.clean_items(curr_data)
+    if cleaned:
+        logging.info("Dropped placeholder images from %s listings", cleaned)
     _log_filter_counts(scrapers, curr_data)
     if sport.is_default and os.environ.get("SALE_WATCH") == "1":
         # Sale sections no scraper reads (Black Friday collections, homepage

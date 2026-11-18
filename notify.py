@@ -901,7 +901,12 @@ def _atl_email_badge():
 
 
 def _image_url(item):
-    url = str((item or {}).get("image") or "").strip()
+    # A store's "image coming soon" placeholder isn't a photo; the next real
+    # one is used, or none (product_images.py).
+    import product_images
+    item = dict(item or {})
+    product_images.clean(item)
+    url = str(item.get("image") or "").strip()
     if url.startswith("//"):
         url = "https:" + url
     return url if url.startswith("https://") else ""
