@@ -4212,6 +4212,8 @@
     "all_time_low": 109.95,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0965/4642/files/RSJ50RTL.jpg?v=1785269952",
     "prices": {
       "2026-11-12": 109.95,
@@ -26902,7 +26904,7 @@
     "all_time_low": 450.97,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
-    "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw918d6c63/8201171_000_3.jpg?sw=600&sh=600",
+    "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw85825805/8201171_000_1.jpg?sw=600&sh=600",
     "prices": {
       "2026-11-13": 450.97,
       "2026-11-14": 450.97,
@@ -28565,6 +28567,8 @@
     "all_time_low": 419.97,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw30b4de6b/8201199_000_1.jpg?sw=600&sh=600",
     "prices": {
       "2026-11-19": 419.97
@@ -32230,7 +32234,7 @@
     "observation_count": 18,
     "all_time_low": 179.97,
     "all_time_low_date": "2026-11-03",
-    "stage": "all_time_low",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
     "prices": {
       "2026-11-02": 249.97,
@@ -32250,7 +32254,7 @@
       "2026-11-16": 249.97,
       "2026-11-17": 249.97,
       "2026-11-18": 249.97,
-      "2026-11-19": 179.97
+      "2026-11-19": 219.95
     }
   },
   "https://www.evo.com/products/178497-oakley-mod-1-round-fit-helmet": {
@@ -32691,13 +32695,11 @@
     "store": "evo",
     "part": "Helmets",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-16",
-    "observation_count": 14,
+    "last_seen": "2026-11-19",
+    "observation_count": 15,
     "all_time_low": 64.0,
     "all_time_low_date": "2026-11-03",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-18",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1348354.jpg?v=1788987260",
     "prices": {
       "2026-11-03": 64.0,
@@ -32713,7 +32715,8 @@
       "2026-11-13": 64.0,
       "2026-11-14": 64.0,
       "2026-11-15": 64.0,
-      "2026-11-16": 64.0
+      "2026-11-16": 64.0,
+      "2026-11-19": 64.0
     }
   },
   "https://www.evo.com/products/179300-smith-vida-mips-helmet-women-s": {
@@ -33013,11 +33016,11 @@
     "observation_count": 1,
     "all_time_low": 151.95,
     "all_time_low_date": "2026-11-19",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1094822.jpg?v=1767732846",
     "prices": {
       "2026-11-19": 151.95
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/189318-black-diamond-jetforce-25l-pro-airbag-pack": {
     "name": "Black Diamond JetForce 25L Pro Airbag Pack",
@@ -33606,7 +33609,7 @@
     "observation_count": 17,
     "all_time_low": 93.0,
     "all_time_low_date": "2026-11-03",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1286175.jpg?v=1774977116",
     "prices": {
       "2026-11-03": 93.0,
@@ -33625,7 +33628,7 @@
       "2026-11-16": 101.95,
       "2026-11-17": 93.0,
       "2026-11-18": 93.0,
-      "2026-11-19": 93.0
+      "2026-11-19": 101.95
     }
   },
   "https://www.evo.com/products/202288-zeal-lookout-goggles": {
@@ -34112,16 +34115,15 @@
     "store": "evo",
     "part": "Bindings",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-19",
+    "observation_count": 2,
     "all_time_low": 199.97,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1181489.jpg?v=1767736521",
     "prices": {
-      "2026-11-12": 199.97
+      "2026-11-12": 199.97,
+      "2026-11-19": 199.97
     }
   },
   "https://www.evo.com/products/213262-topo-designs-daypack-classic-backpack": {
@@ -36438,6 +36440,7 @@
     "stage": "unlisted",
     "miss_streak": 2,
     "miss_day": "2026-11-11",
+    "catalog_scope_reason": "catalog scope: catalog scope: used",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-917772.jpg?v=1767754051",
     "prices": {
       "2026-11-02": 539.97,
@@ -38137,13 +38140,11 @@
     "store": "evo",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-09",
-    "observation_count": 6,
+    "last_seen": "2026-11-19",
+    "observation_count": 7,
     "all_time_low": 125.95,
     "all_time_low_date": "2026-11-03",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-11",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1013702.jpg?v=1767729727",
     "prices": {
       "2026-11-03": 125.95,
@@ -38151,7 +38152,8 @@
       "2026-11-05": 125.95,
       "2026-11-06": 125.95,
       "2026-11-08": 125.95,
-      "2026-11-09": 125.95
+      "2026-11-09": 125.95,
+      "2026-11-19": 125.95
     }
   },
   "https://www.evo.com/products/241439-atomic-four-pro-l-hd-goggles": {
@@ -38602,9 +38604,9 @@
     "first_seen": "2026-11-02",
     "last_seen": "2026-11-19",
     "observation_count": 15,
-    "all_time_low": 329.95,
-    "all_time_low_date": "2026-11-02",
-    "stage": "new",
+    "all_time_low": 289.99,
+    "all_time_low_date": "2026-11-19",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1014359.jpg?v=1767729765",
     "prices": {
       "2026-11-02": 329.95,
@@ -38621,7 +38623,7 @@
       "2026-11-16": 329.95,
       "2026-11-17": 329.95,
       "2026-11-18": 369.95,
-      "2026-11-19": 369.95
+      "2026-11-19": 289.99
     }
   },
   "https://www.evo.com/products/242021-nordica-unlimited-105-w-dyn-ski-boots-women-s-2025": {
@@ -42036,6 +42038,8 @@
     "all_time_low": 158.4,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1136509.jpg?v=1767734603",
     "prices": {
       "2026-11-12": 158.4,
@@ -51262,11 +51266,11 @@
     "observation_count": 1,
     "all_time_low": 296.95,
     "all_time_low_date": "2026-11-19",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1186928.jpg?v=1767736707",
     "prices": {
       "2026-11-19": 296.95
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/267680-sweet-protection-daymaker-mips-helmet": {
     "name": "Sweet Protection Daymaker MIPS Helmet",
@@ -51509,6 +51513,8 @@
     "all_time_low": 116.99,
     "all_time_low_date": "2026-11-03",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1229849.jpg?v=1767738321",
     "prices": {
       "2026-11-03": 116.99,
@@ -55395,6 +55401,8 @@
     "all_time_low": 56.97,
     "all_time_low_date": "2026-11-11",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227647.jpg?v=1767738228",
     "prices": {
       "2026-11-11": 56.97,
@@ -56549,6 +56557,21 @@
       "2026-11-19": 102.95
     }
   },
+  "https://www.evo.com/products/270676-blenders-aura-goggles": {
+    "name": "Blenders Aura Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 49.5,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1385473.jpg?v=1792602917",
+    "prices": {
+      "2026-11-19": 49.5
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/270734-uswe-outlander-xc-2l-hydration-pack": {
     "name": "USWE Outlander XC 2L Hydration Pack",
     "store": "evo",
@@ -56890,6 +56913,51 @@
       "2026-11-18": 115.49,
       "2026-11-19": 115.49
     }
+  },
+  "https://www.evo.com/products/271131-fritschi-tecton-10-alpine-touring-bindings-2026": {
+    "name": "Fritschi Tecton 10 Alpine Touring Bindings 2027",
+    "store": "evo",
+    "part": "Bindings",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 519.96,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1245749.jpg?v=1767738981",
+    "prices": {
+      "2026-11-19": 519.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/271138-fritschi-vipec-evo-12-alpine-touring-ski-bindings-2026": {
+    "name": "Fritschi Vipec Evo 12 Alpine Touring Ski Bindings 2027",
+    "store": "evo",
+    "part": "Bindings",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 519.96,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1245754.jpg?v=1767738981",
+    "prices": {
+      "2026-11-19": 519.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/271182-fritschi-tecton-13-alpine-touring-bindings-2026": {
+    "name": "Fritschi Tecton 13 Alpine Touring Bindings 2027",
+    "store": "evo",
+    "part": "Bindings",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 559.96,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1245773.jpg?v=1767738983",
+    "prices": {
+      "2026-11-19": 559.96
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/271203-head-edge-120-hv-gw-ski-boots-2025": {
     "name": "Head Edge 120 HV GW Ski Boots 2025",
@@ -58766,6 +58834,21 @@
       "2026-11-19": 84.95
     }
   },
+  "https://www.evo.com/products/284832-nordica-speedmachine-3-110-x-boa-ski-boots-2027": {
+    "name": "Nordica Speedmachine 3 110 X BOA Ski Boots 2027",
+    "store": "evo",
+    "part": "Boots",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 519.95,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1376970.jpg?v=1794955884",
+    "prices": {
+      "2026-11-19": 519.95
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/284832-nordica-speedmachine-3-110-x-boa-ski-boots-2027-used": {
     "name": "Nordica Speedmachine 3 110 X BOA Ski Boots 2027 - Used",
     "store": "evo",
@@ -59194,6 +59277,21 @@
       "2026-11-19": 87.44
     }
   },
+  "https://www.evo.com/products/288075-blenders-lunar-goggles": {
+    "name": "Blenders Lunar Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 39.5,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1385480.jpg?v=1792602917",
+    "prices": {
+      "2026-11-19": 39.5
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/289318-atomic-backland-sport-sl-alpine-touring-ski-boots-2023": {
     "name": "Atomic Backland Sport SL Alpine Touring Ski Boots 2023",
     "store": "evo",
@@ -59485,6 +59583,21 @@
       "2026-11-18": 420.95,
       "2026-11-19": 420.95
     }
+  },
+  "https://www.evo.com/products/290222-k2-revolve-team-ski-boots-2025": {
+    "name": "K2 Revolve Team Ski Boots 2025",
+    "store": "evo",
+    "part": "Boots",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 367.5,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1317045.jpg?v=1782923539",
+    "prices": {
+      "2026-11-19": 367.5
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/290224-k2-anthem-rx-ski-boots-2025": {
     "name": "K2 Anthem RX Ski Boots - Women's",
@@ -60219,16 +60332,15 @@
     "store": "evo",
     "part": "Packs",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-19",
+    "observation_count": 2,
     "all_time_low": 138.95,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355873.jpg?v=1790101162",
     "prices": {
-      "2026-11-12": 138.95
+      "2026-11-12": 138.95,
+      "2026-11-19": 158.4
     }
   },
   "https://www.evo.com/products/296942-season-nexus-skis-blem-2027-used": {
@@ -78105,7 +78217,7 @@
     "observation_count": 14,
     "all_time_low": 208.8,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/4d-mag-xl-goggles_pacific-cpEverydayBlueMirror_3Q_3492f942-3a55-498c-803d-85a58da0fa3e.png?v=1792762999",
     "prices": {
       "2026-11-06": 213.0,
@@ -78121,7 +78233,7 @@
       "2026-11-16": 213.0,
       "2026-11-17": 208.8,
       "2026-11-18": 208.8,
-      "2026-11-19": 208.8
+      "2026-11-19": 213.0
     }
   },
   "https://www.smithoptics.com/products/altus-mips-r-sale": {
@@ -78353,6 +78465,8 @@
     "all_time_low": 169.8,
     "all_time_low_date": "2026-11-17",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/io-mag-xl-low-bridge-fit-goggles_killerBee-cpSunChromaPopSunBlack_3Q.png?v=1758220825",
     "prices": {
       "2026-11-17": 169.8,
@@ -80380,11 +80494,11 @@
     "observation_count": 1,
     "all_time_low": 150.0,
     "all_time_low_date": "2026-11-19",
+    "stage": "new",
     "image": "https://edge.disstg.commercecloud.salesforce.com/dw/image/v2/BCJK_STG/on/demandware.static/-/Sites-global-master-catalog/default/dw64f00b7d/images/large/1118189_silv_1.jpg?sw=400&sh=400",
     "prices": {
       "2026-11-19": 150.0
-    },
-    "stage": "new"
+    }
   },
   "https://www.the-house.com/1118191.html": {
     "name": "K2 Decoy Youth Ski Poles",

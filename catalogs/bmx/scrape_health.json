@@ -41606,14 +41606,14 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 98,
+          "count": 100,
           "failed": false,
           "diagnostics": {
             "expected_count": 101.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 98,
-            "percentage_change": -3.0,
+            "actual_count": 100,
+            "percentage_change": -1.0,
             "reason": "normal_variation"
           }
         },
@@ -42890,14 +42890,14 @@
           }
         },
         "Source BMX US_Steering": {
-          "count": 166,
+          "count": 165,
           "failed": false,
           "diagnostics": {
             "expected_count": 22.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 166,
-            "percentage_change": 654.5,
+            "actual_count": 165,
+            "percentage_change": 650.0,
             "reason": "normal_variation"
           }
         },
@@ -43622,7 +43622,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-19T02:46:02+00:00"
+      "scanned_at": "2026-11-19T07:28:22+00:00"
     }
   ],
   "baseline": {
@@ -43720,7 +43720,7 @@
     },
     "Source BMX US_Steering": {
       "date": "2026-11-19",
-      "count": 166
+      "count": 165
     },
     "Source BMX US_Tires": {
       "date": "2026-11-19",
@@ -43784,7 +43784,7 @@
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-19",
-      "count": 98
+      "count": 100
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-19",
@@ -48039,7 +48039,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 98
+        "count": 100
       }
     ],
     "Colorado Cyclist_Seating": [
@@ -53861,7 +53861,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 166
+        "count": 165
       }
     ],
     "Source BMX US_Tires": [

@@ -16088,14 +16088,14 @@
           }
         },
         "Aspen Ski and Board_Boots": {
-          "count": 148,
+          "count": 147,
           "failed": false,
           "diagnostics": {
             "expected_count": 151,
             "baseline_samples": 7,
             "median_absolute_deviation": 1,
-            "actual_count": 148,
-            "percentage_change": -2.0,
+            "actual_count": 147,
+            "percentage_change": -2.6,
             "reason": "normal_variation"
           }
         },
@@ -16316,14 +16316,14 @@
           }
         },
         "Christy Sports_Skis": {
-          "count": 100,
+          "count": 99,
           "failed": false,
           "diagnostics": {
             "expected_count": 96.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.0,
-            "actual_count": 100,
-            "percentage_change": 4.2,
+            "actual_count": 99,
+            "percentage_change": 3.1,
             "reason": "normal_variation"
           }
         },
@@ -16832,14 +16832,14 @@
           }
         },
         "Smith_Protection": {
-          "count": 22,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 23,
             "baseline_samples": 13,
             "median_absolute_deviation": 1,
-            "actual_count": 22,
-            "percentage_change": -4.3,
+            "actual_count": 21,
+            "percentage_change": -8.7,
             "reason": "normal_variation"
           }
         },
@@ -17360,26 +17360,26 @@
           }
         },
         "evo_Bindings": {
-          "count": 21,
+          "count": 25,
           "failed": false,
           "diagnostics": {
             "expected_count": 22.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.5,
-            "actual_count": 21,
-            "percentage_change": -6.7,
+            "actual_count": 25,
+            "percentage_change": 11.1,
             "reason": "normal_variation"
           }
         },
         "evo_Boots": {
-          "count": 216,
+          "count": 218,
           "failed": false,
           "diagnostics": {
             "expected_count": 276,
             "baseline_samples": 13,
             "median_absolute_deviation": 24,
-            "actual_count": 216,
-            "percentage_change": -21.7,
+            "actual_count": 218,
+            "percentage_change": -21.0,
             "reason": "normal_variation"
           }
         },
@@ -17420,14 +17420,14 @@
           }
         },
         "evo_Protection": {
-          "count": 149,
+          "count": 151,
           "failed": false,
           "diagnostics": {
             "expected_count": 129.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 7.0,
-            "actual_count": 149,
-            "percentage_change": 15.1,
+            "actual_count": 151,
+            "percentage_change": 16.6,
             "reason": "normal_variation"
           }
         },
@@ -17444,7 +17444,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-19T02:56:22+00:00"
+      "scanned_at": "2026-11-19T07:38:44+00:00"
     }
   ],
   "baseline": {
@@ -17478,7 +17478,7 @@
     },
     "evo_Bindings": {
       "date": "2026-11-19",
-      "count": 21
+      "count": 25
     },
     "evo_Poles": {
       "date": "2026-11-19",
@@ -17502,7 +17502,7 @@
     },
     "Christy Sports_Skis": {
       "date": "2026-11-19",
-      "count": 100
+      "count": 99
     },
     "The House_Bindings": {
       "date": "2026-11-19",
@@ -17546,7 +17546,7 @@
     },
     "evo_Protection": {
       "date": "2026-11-19",
-      "count": 149
+      "count": 151
     },
     "Bern_Helmets": {
       "date": "2026-11-19",
@@ -17574,11 +17574,11 @@
     },
     "Smith_Protection": {
       "date": "2026-11-19",
-      "count": 22
+      "count": 21
     },
     "evo_Boots": {
       "date": "2026-11-19",
-      "count": 216
+      "count": 218
     },
     "Aspen Ski and Board_Bindings": {
       "date": "2026-11-19",
@@ -17586,7 +17586,7 @@
     },
     "Aspen Ski and Board_Boots": {
       "date": "2026-11-19",
-      "count": 148
+      "count": 147
     },
     "Aspen Ski and Board_Helmets": {
       "date": "2026-11-19",
@@ -17783,7 +17783,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 148
+        "count": 147
       }
     ],
     "Aspen Ski and Board_Helmets": [
@@ -18717,7 +18717,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 100
+        "count": 99
       }
     ],
     "Demon_Bindings": [
@@ -20579,7 +20579,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 22
+        "count": 21
       }
     ],
     "Smith_Skis": [
@@ -22675,7 +22675,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 21
+        "count": 25
       }
     ],
     "evo_Boots": [
@@ -22733,7 +22733,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 216
+        "count": 218
       }
     ],
     "evo_Helmets": [
@@ -22941,7 +22941,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 149
+        "count": 151
       }
     ],
     "evo_Skis": [
