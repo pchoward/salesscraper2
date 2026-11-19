@@ -691,20 +691,19 @@
     "store": "Bicycle Warehouse",
     "part": "Tires",
     "first_seen": "2026-11-11",
-    "last_seen": "2026-11-14",
-    "observation_count": 4,
+    "last_seen": "2026-11-19",
+    "observation_count": 5,
     "all_time_low": 39.99,
     "all_time_low_date": "2026-11-11",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-15",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/00120-001_TIRE_BUTCHER-GRID-TRAIL-2BR-TIRE-29X26_HERO_c7a44314-da64-4aac-a50c-9daf0db8cbcc.jpg?v=1772080503",
     "length": 27.5,
     "prices": {
       "2026-11-11": 39.99,
       "2026-11-12": 39.99,
       "2026-11-13": 39.99,
-      "2026-11-14": 39.99
+      "2026-11-14": 39.99,
+      "2026-11-19": 39.99
     }
   },
   "https://bicyclewarehouse.com/products/camber": {
@@ -13738,22 +13737,36 @@
       "2026-11-19": 27.95
     }
   },
+  "https://cambriabike.com/products/oneup-aluminum-platform-pedals-black": {
+    "name": "OneUp Aluminum Platform Pedals - Black",
+    "store": "Cambria",
+    "part": "Pedals",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 112.49,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/OneUpRadianceAluminumPlatformPedals_Black_497142a7-4512-4cd6-bd81-1489e634ef00.jpg?v=1643184419",
+    "prices": {
+      "2026-11-19": 112.49
+    },
+    "stage": "new"
+  },
   "https://cambriabike.com/products/oneup-aluminum-platform-pedals-blue": {
     "name": "OneUp Aluminum Platform Pedals - Blue",
     "store": "Cambria",
     "part": "Pedals",
     "first_seen": "2026-11-13",
-    "last_seen": "2026-11-14",
-    "observation_count": 2,
+    "last_seen": "2026-11-19",
+    "observation_count": 3,
     "all_time_low": 112.49,
     "all_time_low_date": "2026-11-13",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-16",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/OneUpRadianceAluminumPlatformPedals_Blue_af2082a8-9ea1-4927-a58f-ece195893582.jpg?v=1643184421",
     "prices": {
       "2026-11-13": 112.49,
-      "2026-11-14": 112.49
+      "2026-11-14": 112.49,
+      "2026-11-19": 112.49
     }
   },
   "https://cambriabike.com/products/oneup-aluminum-platform-pedals-green": {
@@ -13776,6 +13789,21 @@
       "2026-11-18": 112.49,
       "2026-11-19": 112.49
     }
+  },
+  "https://cambriabike.com/products/oneup-aluminum-platform-pedals-orange": {
+    "name": "OneUp Aluminum Platform Pedals - Orange",
+    "store": "Cambria",
+    "part": "Pedals",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 112.49,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/OneUpAluminumPlatformPedals_Orange_609d7e8e-e665-46e8-a469-27d8de1f5528.jpg?v=1643184427",
+    "prices": {
+      "2026-11-19": 112.49
+    },
+    "stage": "new"
   },
   "https://cambriabike.com/products/oneup-clip-mtb-spd-pedals-black": {
     "name": "OneUp Clip MTB SPD Pedals - Black",
@@ -13818,6 +13846,21 @@
       "2026-11-18": 119.99,
       "2026-11-19": 119.99
     }
+  },
+  "https://cambriabike.com/products/oneup-clip-mtb-spd-pedals-dark-blue": {
+    "name": "OneUp Clip MTB SPD Pedals - Dark Blue",
+    "store": "Cambria",
+    "part": "Pedals",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Platform-SideA_1400x_c449d664-b966-4eda-a47d-983563e71061.webp?v=1742289361",
+    "prices": {
+      "2026-11-19": 119.99
+    },
+    "stage": "new"
   },
   "https://cambriabike.com/products/oneup-clip-mtb-spd-pedals-dark-green": {
     "name": "OneUp Clip MTB SPD Pedals - Dark Green",
@@ -13882,6 +13925,21 @@
       "2026-11-19": 119.99
     }
   },
+  "https://cambriabike.com/products/oneup-clip-mtb-spd-pedals-purple": {
+    "name": "OneUp Clip MTB SPD Pedals - Purple",
+    "store": "Cambria",
+    "part": "Pedals",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 119.99,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_PURPLE_Platform-SideA_1400x_398ad7d1-f366-49e8-8193-5e94f606f0d2.webp?v=1742290182",
+    "prices": {
+      "2026-11-19": 119.99
+    },
+    "stage": "new"
+  },
   "https://cambriabike.com/products/oneup-clip-mtb-spd-pedals-red": {
     "name": "OneUp Clip MTB SPD Pedals - Red",
     "store": "Cambria",
@@ -13902,6 +13960,21 @@
       "2026-11-18": 119.99,
       "2026-11-19": 119.99
     }
+  },
+  "https://cambriabike.com/products/oneup-comp-platform-pedal-small-black": {
+    "name": "OneUp Comp Platform Pedal - Small - Black",
+    "store": "Cambria",
+    "part": "Pedals",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 37.49,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/zm_20230417-125757.jpg?v=1682590782",
+    "prices": {
+      "2026-11-19": 37.49
+    },
+    "stage": "new"
   },
   "https://cambriabike.com/products/oneup-comp-platform-pedal-small-blue": {
     "name": "OneUp Comp Platform Pedal - Small - Blue",
@@ -14244,18 +14317,17 @@
     "store": "Cambria",
     "part": "Pedals",
     "first_seen": "2026-11-13",
-    "last_seen": "2026-11-15",
-    "observation_count": 3,
+    "last_seen": "2026-11-19",
+    "observation_count": 4,
     "all_time_low": 119.99,
     "all_time_low_date": "2026-11-13",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUpComponents_WavePedal_BRZ_Angle_1400x_daa03f8c-3335-4742-8b95-1346f735e82b.webp?v=1746519421",
     "prices": {
       "2026-11-13": 119.99,
       "2026-11-14": 119.99,
-      "2026-11-15": 119.99
+      "2026-11-15": 119.99,
+      "2026-11-19": 119.99
     }
   },
   "https://cambriabike.com/products/oneup-wave-pedals-dark-blue": {
@@ -25906,13 +25978,11 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-10",
-    "observation_count": 9,
+    "last_seen": "2026-11-19",
+    "observation_count": 10,
     "all_time_low": 34.99,
     "all_time_low_date": "2026-11-02",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-12",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SRAM-GX-10-Speed-Trigger-Shifter_Black_eb55f192-d9eb-44ea-bdd2-6e0ac61385e9.jpg?v=1642754974",
     "prices": {
       "2026-11-02": 34.99,
@@ -25923,7 +25993,8 @@
       "2026-11-07": 34.99,
       "2026-11-08": 34.99,
       "2026-11-09": 34.99,
-      "2026-11-10": 34.99
+      "2026-11-10": 34.99,
+      "2026-11-19": 34.99
     }
   },
   "https://cambriabike.com/products/sram-gx-11-spd-x-actuation-trigger-shifter": {
@@ -26394,13 +26465,11 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-12",
-    "observation_count": 11,
+    "last_seen": "2026-11-19",
+    "observation_count": 12,
     "all_time_low": 66.49,
     "all_time_low_date": "2026-11-02",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SRAMGXType2.110SpdRearDerailleur-ShortCage_Black_7b89db34-b7b5-4a0c-b4ed-9066990d5fb9.jpg?v=1643622093",
     "width": 2.1,
     "prices": {
@@ -26414,7 +26483,8 @@
       "2026-11-09": 66.49,
       "2026-11-10": 66.49,
       "2026-11-11": 66.49,
-      "2026-11-12": 66.49
+      "2026-11-12": 66.49,
+      "2026-11-19": 66.49
     }
   },
   "https://cambriabike.com/products/sram-gx-xg-1150-11-spd-mtb-cassette": {
@@ -26992,13 +27062,11 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-12",
-    "observation_count": 11,
+    "last_seen": "2026-11-19",
+    "observation_count": 12,
     "all_time_low": 28.49,
     "all_time_low_date": "2026-11-02",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SRAM_NX_11_Speed_Trigger_Shifter_Black_0ff0379e-8020-4292-a947-9353ac5ae277.jpg?v=1642754988",
     "prices": {
       "2026-11-02": 28.49,
@@ -27011,7 +27079,8 @@
       "2026-11-09": 28.49,
       "2026-11-10": 28.49,
       "2026-11-11": 28.49,
-      "2026-11-12": 28.49
+      "2026-11-12": 28.49,
+      "2026-11-19": 28.49
     }
   },
   "https://cambriabike.com/products/sram-nx-eagle-12-speed-trigger-shifter": {
@@ -27740,13 +27809,11 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-10",
-    "observation_count": 9,
+    "last_seen": "2026-11-19",
+    "observation_count": 10,
     "all_time_low": 16.49,
     "all_time_low_date": "2026-11-02",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-12",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SRAMX37SpeedTriggerShifter_Black_635eb2cf-9011-4315-81e9-6d2f0c09ff49.jpg?v=1642755017",
     "prices": {
       "2026-11-02": 16.49,
@@ -27757,7 +27824,8 @@
       "2026-11-07": 16.49,
       "2026-11-08": 16.49,
       "2026-11-09": 16.49,
-      "2026-11-10": 16.49
+      "2026-11-10": 16.49,
+      "2026-11-19": 16.49
     }
   },
   "https://cambriabike.com/products/sram-x4-3-spd-trigger-shifter": {
@@ -27922,13 +27990,11 @@
     "store": "Cambria",
     "part": "Drivetrain",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-09",
-    "observation_count": 8,
+    "last_seen": "2026-11-19",
+    "observation_count": 9,
     "all_time_low": 51.49,
     "all_time_low_date": "2026-11-02",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-11",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SRAMX53x9SpdTriggerShifterSet_Black.jpg?v=1621872045",
     "width": 3.0,
     "length": 9.0,
@@ -27940,7 +28006,8 @@
       "2026-11-06": 51.49,
       "2026-11-07": 51.49,
       "2026-11-08": 51.49,
-      "2026-11-09": 51.49
+      "2026-11-09": 51.49,
+      "2026-11-19": 51.49
     }
   },
   "https://cambriabike.com/products/sram-x5-9-spd-trigger-shifter": {
@@ -33323,6 +33390,8 @@
     "all_time_low": 181.77,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_1.jpg?v=1771627796",
     "prices": {
       "2026-11-03": 181.77,
@@ -42598,6 +42667,8 @@
     "all_time_low": 4999.0,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
     "prices": {
       "2026-11-12": 4999.0,
@@ -42638,6 +42709,8 @@
     "all_time_low": 1699.99,
     "all_time_low_date": "2026-11-16",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-70_SJ-15-ALLOY-FRM-OBSD-SILDST_HERO-PDP.jpg?v=1762326603",
     "prices": {
       "2026-11-16": 1699.99,
@@ -42655,6 +42728,8 @@
     "all_time_low": 2899.99,
     "all_time_low_date": "2026-11-16",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-00_SJ-15-SW-FRM-NRBLK-BLK-CLGRY_HERO-PDP.jpg?v=1762328022",
     "prices": {
       "2026-11-16": 2899.99,
@@ -42692,6 +42767,8 @@
     "all_time_low": 5999.99,
     "all_time_low_date": "2026-11-16",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/78026-00_KENEVO-SL-SW-CARBON-FRMSET-TLTNT-SMK-DUNEWHT_HERO-PDP.jpg?v=1762306007",
     "prices": {
       "2026-11-16": 5999.99,
@@ -42709,6 +42786,8 @@
     "all_time_low": 44.99,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/00319-511_TIRE_NIMBUS-2-ARMADILLO-REFLECT_HERO.jpg?v=1762322337",
     "prices": {
       "2026-11-19": 44.99
@@ -42746,6 +42825,8 @@
     "all_time_low": 3699.99,
     "all_time_low_date": "2026-11-17",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/77425-01_SHIV-TT-SW-MODULE-GCLMET-CMLNREDGLD-METWHTSIL_HERO-PDP.jpg?v=1762308004",
     "prices": {
       "2026-11-17": 3699.99,
@@ -42784,6 +42865,8 @@
     "all_time_low": 5299.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-30_SJ-15-EXPERT-DI2-NBLMET-DLMMET_HERO-PDP.jpg?v=1762264578",
     "prices": {
       "2026-11-12": 5299.99,
@@ -42802,6 +42885,8 @@
     "all_time_low": 8199.99,
     "all_time_low_date": "2026-11-19",
     "stage": "price_drop",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-00_SJ-15-SW-DI2-DLMMET-SMKLQDMET_HERO_DARK-PDP.jpg?v=1762254543",
     "prices": {
       "2026-11-16": 9499.99,
@@ -42819,6 +42904,8 @@
     "all_time_low": 3299.99,
     "all_time_low_date": "2026-11-16",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73326-00_SJ-15-SW-FRM-ASHGRY-SHDWSIL-BLKLQDMET_HERO-PDP.jpg?v=1762256069",
     "prices": {
       "2026-11-16": 3299.99,
@@ -42836,6 +42923,8 @@
     "all_time_low": 489.99,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/30124-950_WHL_TRAVERSE-HD-1-1-275-6B-REAR-XD-32H_HERO-PDP.jpg?v=1762283303",
     "diameter_mm": 40.0,
     "diameters_mm": [
@@ -43943,6 +44032,8 @@
     "all_time_low": 39.95,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4038.jpg?v=1762254189",
     "prices": {
       "2026-11-12": 39.95,
@@ -45854,6 +45945,8 @@
     "all_time_low": 44.0,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6380_ebe10000-85c5-41d6-8457-61be7eff09a0.jpg?v=1763584345",
     "length": 20.0,
     "prices": {
@@ -45942,6 +46035,8 @@
     "all_time_low": 95.0,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma3422inset1a.jpg?v=1763555397",
     "prices": {
       "2026-11-13": 95.0,
@@ -48116,6 +48211,8 @@
     "all_time_low": 44.0,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1385.jpg?v=1763533435",
     "prices": {
       "2026-11-13": 44.0,
@@ -48409,6 +48506,8 @@
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0364.jpg?v=1762297781",
     "prices": {
       "2026-11-12": 28.8,
@@ -48451,6 +48550,8 @@
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0335.jpg?v=1762306311",
     "prices": {
       "2026-11-12": 28.8,
@@ -48514,6 +48615,8 @@
     "all_time_low": 28.8,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0339.jpg?v=1762290159",
     "prices": {
       "2026-11-12": 28.8,
@@ -48680,6 +48783,8 @@
     "all_time_low": 36.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
     "width": 2.0,
     "length": 1.0,
@@ -51519,6 +51624,31 @@
       "2026-11-19": 134.99
     }
   },
+  "https://www.bikemart.com/products/origin8-fb-1110-elite-rear-skewer-front-rear-rear-skewer-qr-170mm-al6061-crmo-blk": {
+    "name": "Origin8 FB Elite Rear Skewer Front/Rear Rear Skewer QR 170mm AL6061/CrMo Blk",
+    "store": "Bike Mart",
+    "part": "Wheels",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 32.49,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/370187.jpg?v=1762292549",
+    "spec_offers": [
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "46842328514813",
+        "available": true,
+        "price": 32.49,
+        "compare_at_price": 36.49
+      }
+    ],
+    "prices": {
+      "2026-11-19": 32.49
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/origin8-fb-1110-elite-rear-skewer-front-rear-rear-skewer-qr-190mm-al6061-crmo-blk": {
     "name": "Origin8 FB Elite Rear Skewer Front/Rear Rear Skewer QR 190mm AL6061/CrMo Blk",
     "store": "Bike Mart",
@@ -53077,6 +53207,8 @@
     "all_time_low": 78.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/37060.jpg?v=1762268822",
     "spec_offers": [
       {
@@ -54632,6 +54764,8 @@
     "all_time_low": 32.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/370331.jpg?v=1762256211",
     "spec_offers": [
       {
@@ -54661,6 +54795,31 @@
       "2026-11-18": 32.99,
       "2026-11-19": 32.99
     }
+  },
+  "https://www.bikemart.com/products/origin8-origin8-hub-cassette-bodies-shi-8-11s-mtb-1": {
+    "name": "Origin8 Origin8 Hub Cassette Bodies SHI 8-11s MTB",
+    "store": "Bike Mart",
+    "part": "Wheels",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 32.99,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/370333.jpg?v=1762292080",
+    "spec_offers": [
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "46842313343229",
+        "available": true,
+        "price": 32.99,
+        "compare_at_price": 36.99
+      }
+    ],
+    "prices": {
+      "2026-11-19": 32.99
+    },
+    "stage": "new"
   },
   "https://www.bikemart.com/products/origin8-outpost-direct-gopro-mount-black-gopro": {
     "name": "Origin8 Outpost Direct GoPro Mount Black GoPro",
@@ -60320,6 +60479,8 @@
     "all_time_low": 92.61,
     "all_time_low_date": "2026-11-16",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4139.jpg?v=1762311714",
     "prices": {
       "2026-11-16": 92.61,
@@ -61305,6 +61466,8 @@
     "all_time_low": 28.83,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR5837.jpg?v=1762262320",
     "width": 27.5,
     "length": 2.0,
@@ -61539,6 +61702,8 @@
     "all_time_low": 42.78,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR0291.jpg?v=1762281232",
     "prices": {
       "2026-11-12": 42.78,
@@ -62059,6 +62224,8 @@
     "all_time_low": 50.22,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR8968.jpg?v=1762291087",
     "prices": {
       "2026-11-19": 50.22
@@ -62122,6 +62289,8 @@
     "all_time_low": 64.17,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6171.jpg?v=1762297268",
     "prices": {
       "2026-11-12": 64.17,
@@ -62464,6 +62633,8 @@
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR8978.jpg?v=1762255665",
     "length": 29.0,
     "prices": {
@@ -62576,6 +62747,8 @@
     "all_time_low": 37.2,
     "all_time_low_date": "2026-11-12",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/sw6168.jpg?v=1762314015",
     "prices": {
       "2026-11-12": 37.2,
@@ -62734,6 +62907,8 @@
     "all_time_low": 26.04,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR0907.jpg?v=1762314952",
     "prices": {
       "2026-11-12": 26.04,
@@ -63330,6 +63505,8 @@
     "all_time_low": 325.0,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1882.jpg?v=1762409592",
     "durometers": [
       "650B"
@@ -63493,6 +63670,8 @@
     "all_time_low": 325.0,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1894.jpg?v=1762538210",
     "durometers": [
       "650B"
@@ -64532,7 +64711,7 @@
     "observation_count": 8,
     "all_time_low": 16.49,
     "all_time_low_date": "2026-11-14",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/41346.jpg?v=1762293145",
     "prices": {
       "2026-11-12": 19.99,
@@ -64542,7 +64721,7 @@
       "2026-11-16": 16.49,
       "2026-11-17": 16.49,
       "2026-11-18": 16.49,
-      "2026-11-19": 16.49
+      "2026-11-19": 19.99
     }
   },
   "https://www.bikemart.com/products/sunlite-juvenile-9-16-black": {
@@ -65873,6 +66052,8 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR8023.jpg?v=1762312147",
     "prices": {
       "2026-11-12": 59.99,
@@ -65954,17 +66135,16 @@
     "store": "Bike Mart",
     "part": "Brakes",
     "first_seen": "2026-11-13",
-    "last_seen": "2026-11-14",
-    "observation_count": 2,
+    "last_seen": "2026-11-19",
+    "observation_count": 3,
     "all_time_low": 29.99,
     "all_time_low_date": "2026-11-13",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-15",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7545.jpg?v=1762255886",
     "prices": {
       "2026-11-13": 29.99,
-      "2026-11-14": 29.99
+      "2026-11-14": 29.99,
+      "2026-11-19": 29.99
     }
   },
   "https://www.bikemart.com/products/tektro-novela-replacement-disc-brake-pads": {
@@ -66065,6 +66245,8 @@
     "all_time_low": 29.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7223.jpg?v=1762279403",
     "prices": {
       "2026-11-12": 29.99,
@@ -66681,6 +66863,8 @@
     "all_time_low": 599.62,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
     "prices": {
       "2026-11-12": 599.62,
@@ -67389,6 +67573,8 @@
     "all_time_low": 29.95,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1594.jpg?v=1762256540",
     "prices": {
       "2026-11-12": 29.95,
@@ -67875,6 +68061,8 @@
     "all_time_low": 72.95,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR4484.jpg?v=1762309559",
     "width": 29.0,
     "length": 2.4,
@@ -67971,6 +68159,8 @@
     "all_time_low": 72.95,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR7993.jpg?v=1762250773",
     "width": 29.0,
     "length": 2.4,
@@ -69039,6 +69229,8 @@
     "all_time_low": 329.62,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
     "spec_offers": [
       {
@@ -69067,6 +69259,8 @@
     "all_time_low": 29.62,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
     "prices": {
       "2026-11-12": 29.62,
@@ -69086,6 +69280,8 @@
     "all_time_low": 45.62,
     "all_time_low_date": "2026-11-14",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
     "prices": {
       "2026-11-14": 45.62,
@@ -69103,6 +69299,8 @@
     "all_time_low": 599.62,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
     "diameter_mm": 15.0,
     "diameters_mm": [
@@ -69135,6 +69333,8 @@
     "all_time_low": 799.62,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
     "diameter_mm": 12.0,
     "diameters_mm": [
@@ -69795,6 +69995,8 @@
     "all_time_low": 39.99,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/products/Blocal_1.jpg?v=1792156863",
     "prices": {
       "2026-11-02": 39.99,
@@ -70461,6 +70663,8 @@
     "all_time_low": 1449.99,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/2022_SISKIU_T7_0a60a9c9-d987-432a-81f5-23728c1a3c74.jpg?v=1761178353",
     "prices": {
       "2026-11-19": 1449.99
@@ -70897,6 +71101,36 @@
       "2026-11-19": 189.95
     }
   },
+  "https://www.bikesonline.com/products/fox-enduro-knee-sleeve": {
+    "name": "Fox Enduro Knee Sleeve",
+    "store": "Bikes Online",
+    "part": "Protection",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 78.99,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/FoxEnduroKneeSleeve.webp?v=1772423086",
+    "prices": {
+      "2026-11-19": 78.99
+    },
+    "stage": "new"
+  },
+  "https://www.bikesonline.com/products/fox-launch-knee-shin-pads": {
+    "name": "Fox Launch Knee/Shin Pads",
+    "store": "Bikes Online",
+    "part": "Protection",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 89.99,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/FoxLaunchKneeShinPads_1.webp?v=1772203427",
+    "prices": {
+      "2026-11-19": 89.99
+    },
+    "stage": "new"
+  },
   "https://www.bikesonline.com/products/fox-mainframe-helmet-mips": {
     "name": "Fox MainFrame Helmet MIPS",
     "store": "Bikes Online",
@@ -71176,8 +71410,8 @@
     "first_seen": "2026-11-02",
     "last_seen": "2026-11-19",
     "observation_count": 18,
-    "all_time_low": 49.99,
-    "all_time_low_date": "2026-11-02",
+    "all_time_low": 39.99,
+    "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Giro_Agilis_Mips_Helmet_Metallic_Coal.jpg?v=1774911695",
     "prices": {
@@ -71198,7 +71432,7 @@
       "2026-11-16": 49.99,
       "2026-11-17": 49.99,
       "2026-11-18": 49.99,
-      "2026-11-19": 49.99
+      "2026-11-19": 39.99
     }
   },
   "https://www.bikesonline.com/products/giro-helios-spherical-helmet": {
@@ -71243,6 +71477,8 @@
     "all_time_low": 69.99,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Giro_Radix_Mips_Helmet.jpg?v=1750348179",
     "prices": {
       "2026-11-02": 69.99,
@@ -72065,8 +72301,8 @@
     "first_seen": "2026-11-02",
     "last_seen": "2026-11-19",
     "observation_count": 18,
-    "all_time_low": 149.99,
-    "all_time_low_date": "2026-11-02",
+    "all_time_low": 99.99,
+    "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ns-bikes-enigma-rock-29-rotary-cassette-157x12-rotary-110x20-wheelset.jpg_1.webp?v=1753476695",
     "spec_offers": [
@@ -72075,7 +72311,7 @@
         "durometers": [],
         "variant_id": "50899173146916",
         "available": true,
-        "price": 149.99,
+        "price": 99.99,
         "compare_at_price": 749.99
       }
     ],
@@ -72097,7 +72333,7 @@
       "2026-11-16": 149.99,
       "2026-11-17": 149.99,
       "2026-11-18": 149.99,
-      "2026-11-19": 149.99
+      "2026-11-19": 99.99
     }
   },
   "https://www.bikesonline.com/products/ns-bike-enigma-rock-roll-29-wheelset": {
@@ -74020,6 +74256,21 @@
       "2026-11-18": 149.99,
       "2026-11-19": 149.99
     }
+  },
+  "https://www.bikesonline.com/products/smith-mainline-mips-full-face-helmet": {
+    "name": "Smith Mainline MIPS Full Face Helmet",
+    "store": "Bikes Online",
+    "part": "Protection",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 199.99,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Smith_Mainline_MIPS_Full_Face_Helmet_White_Black.jpg?v=1756346576",
+    "prices": {
+      "2026-11-19": 199.99
+    },
+    "stage": "new"
   },
   "https://www.bikesonline.com/products/smith-network-mips-helmet": {
     "name": "Smith Network MIPS Helmet",
@@ -94886,9 +95137,9 @@
     "first_seen": "2026-11-13",
     "last_seen": "2026-11-19",
     "observation_count": 7,
-    "all_time_low": 89.99,
-    "all_time_low_date": "2026-11-13",
-    "stage": "new",
+    "all_time_low": 59.99,
+    "all_time_low_date": "2026-11-19",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/helmet_3.png?v=1772220999",
     "prices": {
       "2026-11-13": 89.99,
@@ -94897,7 +95148,7 @@
       "2026-11-16": 89.99,
       "2026-11-17": 89.99,
       "2026-11-18": 89.99,
-      "2026-11-19": 89.99
+      "2026-11-19": 59.99
     }
   },
   "https://www.demonunited.com/products/demon-tactic-knee-shin-guards-no-original-packaging-tags": {
@@ -96084,6 +96335,32 @@
       "2026-11-19": 4350.0
     }
   },
+  "https://www.fanatikbike.com/products/crank-brothers-synthesis-e-mtb-alloy-2-0-wheelset-xd-driver-mx-fanatik-outlet": {
+    "name": "Crank Brothers Synthesis E-MTB Alloy 2.0 Wheelset - XD Driver - MX - Fanatik Outlet",
+    "store": "Fanatik",
+    "part": "Wheels",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 525.0,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/Crank-Bros-Synthesis-Alloy-2-MX-Wheels.jpg?v=1795122507",
+    "width": 2.0,
+    "spec_offers": [
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "42935015243822",
+        "available": true,
+        "price": 525.0,
+        "compare_at_price": 700.0
+      }
+    ],
+    "prices": {
+      "2026-11-19": 525.0
+    },
+    "stage": "new"
+  },
   "https://www.fanatikbike.com/products/crankbrothers-synthesis-ms-freehub-body": {
     "name": "Crankbrothers Synthesis MS Freehub Body",
     "store": "Fanatik",
@@ -96164,6 +96441,8 @@
     "all_time_low": 320.0,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/DT350-157-hg.jpg?v=1783111463",
     "spec_offers": [
       {
@@ -96499,6 +96778,22 @@
       "2026-11-19": 15.0
     }
   },
+  "https://www.fanatikbike.com/products/fox-36-grip-x2-e-optimized-29-160mm-2027-fanatik-outlet": {
+    "name": "Fox 36 - Grip X2 - E-Optimized - 29\" - 160mm - 2027 - Fanatik Outlet",
+    "store": "Fanatik",
+    "part": "Forks & Shocks",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 1000.0,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/fox-36-grip-x2_0001_MY27-36__F-S_Black_GripX2_KaboltX__2_Hero_tif_d40ad6a6-cc80-451c-9997-f5bca6f2526e.jpg?v=1795115817",
+    "length": 29.0,
+    "prices": {
+      "2026-11-19": 1000.0
+    },
+    "stage": "new"
+  },
   "https://www.fanatikbike.com/products/fox-38-factory-fork-29-grip-x2-44mm-offset-2025": {
     "name": "Fox 38 Factory Fork - 29\" - GRIP-X2 - 44mm Offset - 2025",
     "store": "Fanatik",
@@ -96737,6 +97032,21 @@
       "2026-11-18": 786.95,
       "2026-11-19": 786.95
     }
+  },
+  "https://www.fanatikbike.com/products/fox-float-x2-factory-2-pos-230x65-santa-cruz-nomad-fanatik-outlet": {
+    "name": "Fox Float X2 Factory - 2-Pos - 230x65 - Santa Cruz Nomad - Fanatik Outlet",
+    "store": "Fanatik",
+    "part": "Forks & Shocks",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 560.0,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/Fox-Float-X2-Nomad-Outlet-01.jpg?v=1795113020",
+    "prices": {
+      "2026-11-19": 560.0
+    },
+    "stage": "new"
   },
   "https://www.fanatikbike.com/products/fox-float-x2-factory-climb-switch-metric-2026": {
     "name": "Fox Float X2 Factory - Climb Switch - Metric - 2026",
@@ -102110,6 +102420,8 @@
     "all_time_low": 2899.0,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/0003_RipleyV5-Color2-FrameOnly-Side-2143_jpg_374811d4-fa0d-48fd-9f76-04f79721f2cb.jpg?v=1720553551",
     "prices": {
       "2026-11-02": 2899.0,
@@ -102170,6 +102482,8 @@
     "all_time_low": 1199.0,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/RockShox-Boxxer-Select-Ultimate-01.jpg?v=1787864488",
     "length": 29.0,
     "prices": {
@@ -102975,6 +103289,8 @@
     "all_time_low": 40.0,
     "all_time_low_date": "2026-11-06",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/bg6010_176d424f-834f-427e-bb31-a33a779f80a7.jpg?v=1717625993",
     "prices": {
       "2026-11-06": 40.0,
@@ -105646,6 +105962,8 @@
     "all_time_low": 120.0,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/XTR-M9120-Chainring-01.jpg?v=1792176245",
     "width": 1.0,
     "length": 12.0,
@@ -110563,6 +110881,8 @@
     "all_time_low": 80.0,
     "all_time_low_date": "2026-11-13",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/Reverse-Dropper-210-316-remote.jpg?v=1794518243",
     "prices": {
       "2026-11-13": 80.0,
@@ -118476,6 +118796,8 @@
     "all_time_low": 106.0,
     "all_time_low_date": "2026-11-09",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/maxxis-minion-dhr-ii-275x26-doubledown-maxxterra-v2-maxxis-the-lost-co-tb00698900-4717784045887-6943833.jpg?v=1778811980",
     "width": 27.5,
     "length": 2.6,
@@ -123504,8 +123826,6 @@
     "all_time_low": 461.59,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/6b71796b3071e1bb4ebdd271109f9e552eec2da0.jpg?v=1785540102",
     "prices": {
       "2026-11-03": 549.99,
@@ -124599,6 +124919,21 @@
     "prices": {
       "2026-11-19": 83.99
     }
+  },
+  "https://www.thelostco.com/products/raceface-aeffect-r-ebike-crank-arm-set-170mm-for-bosch-gen-4-gen-5-drive-system-7050-aluminum-blk": {
+    "name": "Race Face Aeffect-R Ebike Crankset - 170mm - Bosch Gen 4/5",
+    "store": "The Lost Co.",
+    "part": "Drivetrain",
+    "first_seen": "2026-11-19",
+    "last_seen": "2026-11-19",
+    "observation_count": 1,
+    "all_time_low": 83.99,
+    "all_time_low_date": "2026-11-19",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/ee5d1b240870be7f08325c50212735d335d26f4b_6c267086-fc66-426a-8767-eacc0c9c1cee.jpg?v=1786751501",
+    "prices": {
+      "2026-11-19": 83.99
+    },
+    "stage": "new"
   },
   "https://www.thelostco.com/products/raceface-aeffect-r-handlebar-aluminum-800mm-20mm-35-0-8-deg-black": {
     "name": "Race Face Aeffect R Handlebar - 800mm Width - 20mm Rise - 35mm Clamp - Black",
@@ -125700,8 +126035,6 @@
     "all_time_low": 439.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/a0e690cecb7696d63cdfb4cb19955b523d8843f6.jpg?v=1786751490",
     "prices": {
       "2026-11-03": 523.99,
@@ -126203,6 +126536,8 @@
     "all_time_low": 727.19,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/4adfc4c5ac070b306644476fc5b84bac2d75f342.jpg?v=1786751398",
     "length": 27.5,
     "spec_offers": [
@@ -131475,6 +131810,8 @@
     "all_time_low": 164.0,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/sram-gx-eagle-derailleur-and-shifter-sram-the-lost-co-007018431000-007518137000-710845853548-710845853487-482657.jpg?v=1696642072",
     "prices": {
       "2026-11-03": 164.0,
@@ -131651,6 +131988,8 @@
     "all_time_low": 46.75,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/sram-gx-eagle-trigger-shifter-sram-the-lost-co-007018431000-710845853548-225570.jpg?v=1600118147",
     "prices": {
       "2026-11-03": 46.75,
@@ -134544,18 +134883,17 @@
     "store": "The Lost Co.",
     "part": "Cockpit",
     "first_seen": "2026-11-17",
-    "last_seen": "2026-11-18",
-    "observation_count": 2,
+    "last_seen": "2026-11-19",
+    "observation_count": 3,
     "all_time_low": 64.95,
     "all_time_low_date": "2026-11-17",
     "stage": "new",
-    "miss_streak": 1,
-    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/title-ap1-alloy-seatpost-316-x-300mm-chrome-title-the-lost-co-661317989992-661317989992-5666290.jpg?v=1784632153",
     "length": 31.6,
     "prices": {
       "2026-11-17": 64.95,
-      "2026-11-18": 64.95
+      "2026-11-18": 64.95,
+      "2026-11-19": 64.95
     }
   },
   "https://www.thelostco.com/products/title-ap1-alloy-seatpost-34-9-x-300mm-black": {
@@ -136840,6 +137178,8 @@
     "all_time_low": 80.0,
     "all_time_low_date": "2026-11-14",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-19",
     "image": "https://cdn.shopify.com/s/files/1/0349/7357/files/SM0932.jpg?v=1763414654",
     "width": 8.0,
     "prices": {
