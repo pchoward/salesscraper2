@@ -25325,14 +25325,14 @@
           }
         },
         "SkateWarehouse_Decks": {
-          "count": 74,
+          "count": 73,
           "failed": false,
           "diagnostics": {
             "expected_count": 71.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.5,
-            "actual_count": 74,
-            "percentage_change": 3.5,
+            "actual_count": 73,
+            "percentage_change": 2.1,
             "reason": "normal_variation"
           }
         },
@@ -25625,14 +25625,14 @@
           }
         },
         "TGM_Decks": {
-          "count": 163,
+          "count": 162,
           "failed": false,
           "diagnostics": {
             "expected_count": 141.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 4.5,
-            "actual_count": 163,
-            "percentage_change": 15.6,
+            "actual_count": 162,
+            "percentage_change": 14.9,
             "reason": "normal_variation"
           }
         },
@@ -25673,14 +25673,14 @@
           }
         },
         "TGM_Trucks": {
-          "count": 18,
+          "count": 19,
           "failed": false,
           "diagnostics": {
             "expected_count": 17.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 18,
-            "percentage_change": 5.9,
+            "actual_count": 19,
+            "percentage_change": 11.8,
             "reason": "normal_variation"
           }
         },
@@ -25925,13 +25925,13 @@
           }
         }
       },
-      "scanned_at": "2026-11-19T16:31:54+00:00"
+      "scanned_at": "2026-11-19T20:50:03+00:00"
     }
   ],
   "baseline": {
     "SkateWarehouse_Decks": {
       "date": "2026-11-19",
-      "count": 74
+      "count": 73
     },
     "SkateWarehouse_Wheels": {
       "date": "2026-11-19",
@@ -26011,11 +26011,11 @@
     },
     "TGM_Decks": {
       "date": "2026-11-19",
-      "count": 163
+      "count": 162
     },
     "TGM_Trucks": {
       "date": "2026-11-19",
-      "count": 18
+      "count": 19
     },
     "TGM_Wheels": {
       "date": "2026-11-19",
@@ -28984,7 +28984,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 74
+        "count": 73
       }
     ],
     "SkateWarehouse_Packs": [
@@ -30194,7 +30194,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 163
+        "count": 162
       }
     ],
     "TGM_Packs": [
@@ -30402,7 +30402,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 18
+        "count": 19
       }
     ],
     "TGM_Wheels": [
