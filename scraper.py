@@ -314,6 +314,13 @@ def _run(args, sport):
     # Logged SMTP problems stay here so the workflow can still commit.
     dry_run = True if args.email_dry_run else None
     send_admin_warnings(updates["warnings"], dry_run=dry_run)
+    # Store-wide promo codes (promos.py, checked by promo-check.yml).
+    try:
+        import promos
+        digest.promos = promos.for_sport(sport.id)
+        digest.new_promos = promos.new_today(digest.promos, datetime.date.fromisoformat(scanned_at[:10]))
+    except Exception as exc:
+        logging.error("Promo codes unavailable (continuing): %s", type(exc).__name__)
     if os.environ.get("NOTIFICATION_ENGINE_ENABLED", "").lower() in {"1", "true"}:
         stock_before.update({url: entry["stock"] for url, entry in updates["history"].items()
                              if isinstance(entry, dict) and entry.get("stock") == "out_of_stock"})

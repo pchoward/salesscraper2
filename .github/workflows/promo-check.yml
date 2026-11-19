@@ -1,0 +1,57 @@
+name: Promo codes
+
+# Store-wide promo codes ("20% off with code 2026-BFCM-20 at checkout"), which
+# change no listed price (promos.py, owner 2026-11-19). Twice a day, shortly
+# before the Skate (07:17 UTC) and BMX/Ski/MTB (21:37 UTC) scrapes, every
+# store any sport reads is checked once: its homepage and up to three sale
+# pages it links to, robots.txt respected. Only promos.json is committed; the
+# emails and pages read it. Nothing is emailed from here.
+on:
+  schedule:
+    - cron: '47 6 * * *'
+    - cron: '7 21 * * *'
+  workflow_dispatch:
+
+# The scrapes' lock: never pushes at the same time as a scrape or rebuild.
+concurrency:
+  group: scrape-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  promos:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check stores for promo codes
+        run: python promos.py
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add promos.json
+          git diff --quiet --cached && exit 0
+          git commit -m "Update promo codes $(date +'%Y-%m-%d %H:%M')"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main && git push && break
+            git rebase --abort 2>/dev/null || true
+            if [ "$attempt" = 4 ]; then exit 1; fi
+            sleep $((attempt * 5))
+          done
