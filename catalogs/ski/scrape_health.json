@@ -16904,14 +16904,14 @@
           }
         },
         "The House_Poles": {
-          "count": 14,
+          "count": 15,
           "failed": false,
           "diagnostics": {
             "expected_count": 14.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 14,
-            "percentage_change": 0.0,
+            "actual_count": 15,
+            "percentage_change": 7.1,
             "reason": "normal_variation"
           }
         },
@@ -17360,26 +17360,26 @@
           }
         },
         "evo_Bindings": {
-          "count": 20,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 22.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.5,
-            "actual_count": 20,
-            "percentage_change": -11.1,
+            "actual_count": 21,
+            "percentage_change": -6.7,
             "reason": "normal_variation"
           }
         },
         "evo_Boots": {
-          "count": 217,
+          "count": 216,
           "failed": false,
           "diagnostics": {
             "expected_count": 276,
             "baseline_samples": 13,
             "median_absolute_deviation": 24,
-            "actual_count": 217,
-            "percentage_change": -21.4,
+            "actual_count": 216,
+            "percentage_change": -21.7,
             "reason": "normal_variation"
           }
         },
@@ -17432,19 +17432,19 @@
           }
         },
         "evo_Skis": {
-          "count": 175,
+          "count": 174,
           "failed": false,
           "diagnostics": {
             "expected_count": 186.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 9.0,
-            "actual_count": 175,
-            "percentage_change": -5.9,
+            "actual_count": 174,
+            "percentage_change": -6.5,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-19T00:58:36+00:00"
+      "scanned_at": "2026-11-19T02:56:22+00:00"
     }
   ],
   "baseline": {
@@ -17478,7 +17478,7 @@
     },
     "evo_Bindings": {
       "date": "2026-11-19",
-      "count": 20
+      "count": 21
     },
     "evo_Poles": {
       "date": "2026-11-19",
@@ -17486,7 +17486,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-19",
-      "count": 175
+      "count": 174
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-19",
@@ -17518,7 +17518,7 @@
     },
     "The House_Poles": {
       "date": "2026-11-19",
-      "count": 14
+      "count": 15
     },
     "The House_Skis": {
       "date": "2026-11-19",
@@ -17578,7 +17578,7 @@
     },
     "evo_Boots": {
       "date": "2026-11-19",
-      "count": 217
+      "count": 216
     },
     "Aspen Ski and Board_Bindings": {
       "date": "2026-11-19",
@@ -20903,7 +20903,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 14
+        "count": 15
       }
     ],
     "The House_Protection": [
@@ -22675,7 +22675,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 20
+        "count": 21
       }
     ],
     "evo_Boots": [
@@ -22733,7 +22733,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 217
+        "count": 216
       }
     ],
     "evo_Helmets": [
@@ -22999,7 +22999,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 175
+        "count": 174
       }
     ]
   }

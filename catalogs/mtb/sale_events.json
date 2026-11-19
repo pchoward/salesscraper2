@@ -80,7 +80,34 @@
       "events": []
     },
     "The Lost Co.": {
-      "events": []
+      "events": [
+        {
+          "cut": 16,
+          "cut_high": 16,
+          "cut_low": 16,
+          "deals": {
+            "deals": 744,
+            "high": 20,
+            "low": 10,
+            "max_off": 60,
+            "uniform": null
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-19",
+              "text": "up to 60% off (most 10-20%)"
+            }
+          ],
+          "kind": "sale",
+          "listings": 130,
+          "moment": "Black Friday / Cyber Week",
+          "start": "2026-11-19",
+          "steps": [],
+          "tracked": 659,
+          "uniform": true
+        }
+      ]
     },
     "Troy Lee Designs": {
       "events": []
