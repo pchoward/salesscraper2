@@ -78,6 +78,8 @@ def should_send(digest):
         return False
     if digest.new_items or digest.drops:
         return True
+    if getattr(digest, "new_promos", None):
+        return True
     return bool(getattr(digest, "watch_alerts", None))
 
 
@@ -545,6 +547,7 @@ def render_plain(digest, report_url, when=None, banner=None):
     if banner:
         lines.extend([banner, ""])
     lines.extend([f"Full report: {report_url}", ""])
+    lines.extend(plain_promos(getattr(digest, "promos", None)))
     lines.extend(_plain_watch(digest))
     lines.extend(_plain_sales(digest))
     low_line = _all_time_low_line(digest)
@@ -641,6 +644,7 @@ def render_html(digest, report_url, when=None, banner=None):
             f"{escape(banner)}</td></tr>"
         )
     chunks.append(_html_hero(top_deal(digest.new_items)))
+    chunks.append(html_promos(getattr(digest, "promos", None)))
     chunks.append(_html_report_link(safe_report))
     watch_row = _html_watch(digest)
     if watch_row:
@@ -749,6 +753,47 @@ def html_site_footer(note):
         f'<p style="margin:0 0 10px;font-size:14px;">{links}</p>'
         f"{note}</td></tr>"
     )
+
+
+def html_promos(promos):
+    """Store-wide promo codes (promos.py): store, offer, code, end date."""
+    if not promos:
+        return ""
+    import promos as promo_codes
+    rows = []
+    for promo in promos:
+        url = str(promo.get("url") or "")
+        store = escape(str(promo.get("store") or ""))
+        store_html = (f'<a href="{escape(url, quote=True)}" style="color:#0f172a;font-weight:800;'
+                      f'text-decoration:underline;">{store}</a>') if url.startswith("https://") else (
+                          f'<strong style="color:#0f172a;">{store}</strong>')
+        rows.append(
+            '<tr><td style="padding:8px 0 0;font-size:14px;line-height:1.5;color:#334155;">'
+            f"{store_html}: {escape(promo_codes.describe(promo, code=False))}"
+            f' <span style="display:inline-block;background:#0f172a;color:#fde68a;font-family:Menlo,Consolas,monospace;'
+            f'font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">{escape(str(promo.get("code") or ""))}'
+            "</span></td></tr>")
+    return (
+        '<tr><td data-section="promos" style="padding:16px 20px 0;font-family:Arial,Helvetica,sans-serif;">'
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
+        'style="border:1px dashed #a855f7;border-radius:10px;background:#faf5ff;"><tr><td style="padding:12px 16px 14px;">'
+        '<p style="margin:0;font-size:11px;font-weight:800;letter-spacing:0.12em;color:#7e22ce;text-transform:uppercase;">'
+        "Promo codes · applied at checkout</p>"
+        '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">'
+        + "".join(rows) +
+        "</table>"
+        '<p style="margin:8px 0 0;font-size:12px;color:#6b21a8;">Listed prices don\'t include these. '
+        "Store restrictions may apply.</p></td></tr></table></td></tr>"
+    )
+
+
+def plain_promos(promos):
+    if not promos:
+        return []
+    import promos as promo_codes
+    lines = ["PROMO CODES (applied at checkout; listed prices don't include them)"]
+    lines += [f"- {promo.get('store')}: {promo_codes.describe(promo)}" for promo in promos]
+    return lines + [""]
 
 
 def _html_report_link(safe_report):

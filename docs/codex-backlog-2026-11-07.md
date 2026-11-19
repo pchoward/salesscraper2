@@ -248,3 +248,26 @@ See `docs/live-search-catalog.md`: a Worker route that calls Shopify's Global Ca
 **Tests:**
 - A unit check that every Skate heading in `PART_ORDER` round-trips (`slugType(typeSlug(part)) === part`).
 - A browser check that Skate › Packs from the menu shows pack cards and the "Packs" breadcrumb, on desktop and at 390 px.
+
+## 16. Promo-code notice on each sport page (owner, 2026-11-19)
+**Why:** some store sales are discount codes, not markdowns. Fanatik's Black Friday is "20% off eligible products with code 2026-BFCM-20 at checkout, until Dec 2". Product prices don't change, so no listing shows it. Claude's side (PR "Promo codes") detects these codes twice a day and saves them in **`promos.json`** at the repo root (`promos.py`, `promo-check.yml`). Both emails already show them.
+
+**Data:** `promos.json` holds `{"updated": "2026-11-19", "promos": [...]}`. Each promo:
+`{"store": "Fanatik", "code": "2026-BFCM-20", "percent": 20 | "amount": 25, "ends": "2026-12-02" or "", "url": "<the store page it was found on>", "sports": ["mtb"], "first_seen", "last_seen"}`.
+Use `promos.for_sport(sport_id)` for a sport's list, and `promos.describe(promo, code=False)` for the wording ("20% off, until Dec 2"). Every field is validated in `promos.py`; no store wording is passed through.
+
+**Wanted:**
+- Embed the sport's promos in its page when it's built (`page.py`), like the other page data.
+- Above the results, show a slim strip when there are any: **"Promo codes"**, then per store: the store name (linking to `url`), the offer, the code in a monospace chip with a **Copy** button, and "applied at checkout". Collapse to one line plus "+N more" past two codes. Hide codes whose `ends` has passed in the visitor's local date.
+- Don't change any listing's price, count or sort; codes never change deal math.
+- Phone: one line per code, wrapping cleanly at 320–390 px.
+- Let a visitor dismiss a code. Use a **new** `localStorage` key, and keep existing keys, URL parameters and saved views unchanged.
+- Add `promos.json` to `rebuild-page.yml`'s `paths`, so a promo update rebuilds the pages.
+
+**Tests:**
+- Python: embedding, and expired codes left out at build time.
+- Browser checks (pattern: `ci/check_category_navigation.cjs`) on MTB with a fixture promo, desktop and 390 px:
+  - the strip shows;
+  - Copy puts the code on the clipboard;
+  - dismiss persists across a reload;
+  - no strip when there are no promos.

@@ -141,8 +141,9 @@ def _more_line(section):
     return f"{' and '.join(bits)} on the {section.sport.label} page" if bits else ""
 
 
-def render_plain(sections, when=None):
+def render_plain(sections, when=None, promos=None):
     lines = [f"{notify.BRAND} · {_labels(sections)} deals — {notify._long_date(when)}", _counts(sections), ""]
+    lines += notify.plain_promos(promos)
     for section in sections:
         lines += [f"=== {section.sport.label.upper()} ===",
                   f"{_count_text(section.total_new, section.total_drops)} · {section.url}", ""]
@@ -192,7 +193,7 @@ def _html_more(section):
             f'<a href="{url}" style="color:#1d4ed8;text-decoration:underline;">{escape(more)}</a></td></tr>')
 
 
-def render_html(sections, when=None):
+def render_html(sections, when=None, promos=None):
     summary = _counts(sections)
     title = subject_line(sections, when)
     chunks = [
@@ -208,6 +209,7 @@ def render_html(sections, when=None):
         'style="width:100%;max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;">',
         notify._html_header(when, summary, heading=f"{_labels(sections)} deals"),
         notify._html_hero(notify.top_deal([i for section in sections for i in section.new_items])),
+        notify.html_promos(promos),
     ]
     for section in sections:
         chunks.append(_html_sport_band(section))
@@ -222,35 +224,51 @@ def render_html(sections, when=None):
     return "\n".join(chunks)
 
 
-def build_message(sections, config, when=None):
+def build_message(sections, config, when=None, promos=None):
     message = EmailMessage()
     message["Subject"] = subject_line(sections, when)
     message["From"] = config.sender
     message["To"] = ", ".join(config.recipients)
-    message.set_content(render_plain(sections, when))
-    message.add_alternative(render_html(sections, when), subtype="html")
+    message.set_content(render_plain(sections, when, promos))
+    message.add_alternative(render_html(sections, when, promos), subtype="html")
     return message
 
 
-def send(sport_ids, since=None, env=None, dry_run=None, preview_path=PREVIEW_PATH, when=None):
-    """Send one email for these sports. Returns True when sent or previewed. Never raises."""
+def _promos(sport_ids, promos_path=None):
+    """Current promo codes at these sports' stores, each once (promos.py)."""
+    import promos as promo_codes
+    current = promo_codes.load(promos_path) if promos_path else promo_codes.load()
+    return [promo for promo in current if set(promo.get("sports") or ()) & set(sport_ids)]
+
+
+def send(sport_ids, since=None, env=None, dry_run=None, preview_path=PREVIEW_PATH, when=None, promos_path=None):
+    """Send one email for these sports. Returns True when sent or previewed. Never raises.
+    A promo code first seen today sends it even without new listings."""
     try:
+        import promos as promo_codes
         sections = [section for section in (load_section(sports.get(sport_id), since) for sport_id in sport_ids)
                     if section]
+        promos = _promos(sport_ids, promos_path)
+        today = (when.date() if isinstance(when, datetime.datetime)
+                 else when if isinstance(when, datetime.date) else datetime.date.today())
+        fresh = promo_codes.new_today(promos, today)
+        if not sections and fresh:
+            sections = [Section(sports.get(sport_id), [], []) for sport_id in sport_ids
+                        if any(sport_id in (promo.get("sports") or ()) for promo in fresh)]
         if not sections:
-            logger.info("Sports email skipped: no new listings or price drops")
+            logger.info("Sports email skipped: no new listings, price drops or promo codes")
             return False
         config = notify.load_smtp_config(env)
         if dry_run is None:
             dry_run = config.dry_run
         if dry_run:
-            notify.write_preview(preview_path, subject_line(sections, when), render_html(sections, when))
+            notify.write_preview(preview_path, subject_line(sections, when), render_html(sections, when, promos))
             logger.info("Sports email dry run: wrote %s", preview_path)
             return True
         if config.missing:
             logger.warning("Sports email skipped: missing %s", ", ".join(config.missing))
             return False
-        notify._smtp_send(config, build_message(sections, config, when))
+        notify._smtp_send(config, build_message(sections, config, when, promos))
         logger.info("Sports email sent (%s)", _labels(sections))
         return True
     except Exception as exc:
