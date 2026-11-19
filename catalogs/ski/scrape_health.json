@@ -16928,14 +16928,14 @@
           }
         },
         "The House_Skis": {
-          "count": 63,
+          "count": 66,
           "failed": false,
           "diagnostics": {
             "expected_count": 62.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 63,
-            "percentage_change": 1.6,
+            "actual_count": 66,
+            "percentage_change": 6.5,
             "reason": "normal_variation"
           }
         },
@@ -17360,14 +17360,14 @@
           }
         },
         "evo_Bindings": {
-          "count": 25,
+          "count": 24,
           "failed": false,
           "diagnostics": {
             "expected_count": 22.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.5,
-            "actual_count": 25,
-            "percentage_change": 11.1,
+            "actual_count": 24,
+            "percentage_change": 6.7,
             "reason": "normal_variation"
           }
         },
@@ -17420,14 +17420,14 @@
           }
         },
         "evo_Protection": {
-          "count": 151,
+          "count": 152,
           "failed": false,
           "diagnostics": {
             "expected_count": 129.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 7.0,
-            "actual_count": 151,
-            "percentage_change": 16.6,
+            "actual_count": 152,
+            "percentage_change": 17.4,
             "reason": "normal_variation"
           }
         },
@@ -17444,7 +17444,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-19T07:38:44+00:00"
+      "scanned_at": "2026-11-19T10:55:50+00:00"
     }
   ],
   "baseline": {
@@ -17478,7 +17478,7 @@
     },
     "evo_Bindings": {
       "date": "2026-11-19",
-      "count": 25
+      "count": 24
     },
     "evo_Poles": {
       "date": "2026-11-19",
@@ -17522,7 +17522,7 @@
     },
     "The House_Skis": {
       "date": "2026-11-19",
-      "count": 63
+      "count": 66
     },
     "Gear West_Helmets": {
       "date": "2026-11-19",
@@ -17546,7 +17546,7 @@
     },
     "evo_Protection": {
       "date": "2026-11-19",
-      "count": 151
+      "count": 152
     },
     "Bern_Helmets": {
       "date": "2026-11-19",
@@ -21019,7 +21019,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 63
+        "count": 66
       }
     ],
     "The Pro Ski and Ride_Bindings": [
@@ -22675,7 +22675,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 25
+        "count": 24
       }
     ],
     "evo_Boots": [
@@ -22941,7 +22941,7 @@
       },
       {
         "date": "2026-11-19",
-        "count": 151
+        "count": 152
       }
     ],
     "evo_Skis": [
