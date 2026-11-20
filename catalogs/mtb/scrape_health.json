@@ -39997,25 +39997,25 @@
           }
         },
         "Bicycle Warehouse_Cockpit": {
-          "count": 7,
+          "count": 5,
           "failed": false,
           "diagnostics": {
             "expected_count": 4,
             "baseline_samples": 9,
             "median_absolute_deviation": 0,
-            "actual_count": 7,
-            "percentage_change": 75.0,
+            "actual_count": 5,
+            "percentage_change": 25.0,
             "reason": "normal_variation"
           }
         },
         "Bicycle Warehouse_Drivetrain": {
-          "count": 1,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 9,
             "median_absolute_deviation": 0,
-            "actual_count": 1,
+            "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
           }
@@ -40105,14 +40105,14 @@
           }
         },
         "Bike Mart_Bikes": {
-          "count": 14,
+          "count": 15,
           "failed": false,
           "diagnostics": {
             "expected_count": 11.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 1.0,
-            "actual_count": 14,
-            "percentage_change": 27.3,
+            "actual_count": 15,
+            "percentage_change": 36.4,
             "reason": "normal_variation"
           }
         },
@@ -40225,14 +40225,14 @@
           }
         },
         "Bike Mart_Wheels": {
-          "count": 171,
+          "count": 172,
           "failed": false,
           "diagnostics": {
             "expected_count": 170.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 1.0,
-            "actual_count": 171,
-            "percentage_change": 0.6,
+            "actual_count": 172,
+            "percentage_change": 1.2,
             "reason": "normal_variation"
           }
         },
@@ -40357,14 +40357,14 @@
           }
         },
         "Bikes Online_Wheels": {
-          "count": 10,
+          "count": 9,
           "failed": false,
           "diagnostics": {
             "expected_count": 9.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 10,
-            "percentage_change": 11.1,
+            "actual_count": 9,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -40405,14 +40405,14 @@
           }
         },
         "Cambria_Drivetrain": {
-          "count": 294,
+          "count": 291,
           "failed": false,
           "diagnostics": {
             "expected_count": 289.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.5,
-            "actual_count": 294,
-            "percentage_change": 1.6,
+            "actual_count": 291,
+            "percentage_change": 0.5,
             "reason": "normal_variation"
           }
         },
@@ -41713,14 +41713,14 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 244,
+          "count": 245,
           "failed": false,
           "diagnostics": {
             "expected_count": 148.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 17.5,
-            "actual_count": 244,
-            "percentage_change": 64.3,
+            "actual_count": 245,
+            "percentage_change": 65.0,
             "reason": "normal_variation"
           }
         },
@@ -42217,7 +42217,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-20T07:35:54+00:00"
+      "scanned_at": "2026-11-20T13:58:25+00:00"
     }
   ],
   "baseline": {
@@ -42331,7 +42331,7 @@
     },
     "Bikes Online_Wheels": {
       "date": "2026-11-20",
-      "count": 10
+      "count": 9
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-20",
@@ -42407,7 +42407,7 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-20",
-      "count": 244
+      "count": 245
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-20",
@@ -42447,7 +42447,7 @@
     },
     "Cambria_Drivetrain": {
       "date": "2026-11-20",
-      "count": 294
+      "count": 291
     },
     "Cambria_Forks & Shocks": {
       "date": "2026-11-20",
@@ -42507,7 +42507,7 @@
     },
     "Bicycle Warehouse_Cockpit": {
       "date": "2026-11-20",
-      "count": 7
+      "count": 5
     },
     "Bicycle Warehouse_Frames": {
       "date": "2026-11-20",
@@ -42531,7 +42531,7 @@
     },
     "Bike Mart_Bikes": {
       "date": "2026-11-20",
-      "count": 14
+      "count": 15
     },
     "Bike Mart_Brakes": {
       "date": "2026-11-20",
@@ -42559,7 +42559,7 @@
     },
     "Bike Mart_Wheels": {
       "date": "2026-11-20",
-      "count": 171
+      "count": 172
     },
     "Fanatik_Packs": {
       "date": "2026-11-20",
@@ -42582,10 +42582,6 @@
       "count": 5
     },
     "Bike Mart_Frames": {
-      "date": "2026-11-20",
-      "count": 1
-    },
-    "Bicycle Warehouse_Drivetrain": {
       "date": "2026-11-20",
       "count": 1
     }
@@ -44568,7 +44564,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 7
+        "count": 5
       }
     ],
     "Bicycle Warehouse_Drivetrain": [
@@ -44610,7 +44606,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 1
+        "count": 0
       }
     ],
     "Bicycle Warehouse_Forks & Shocks": [
@@ -44938,7 +44934,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 14
+        "count": 15
       }
     ],
     "Bike Mart_Brakes": [
@@ -45318,7 +45314,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 171
+        "count": 172
       }
     ],
     "Bikes Online_Bikes": [
@@ -45936,7 +45932,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 10
+        "count": 9
       }
     ],
     "Cambria_Bikes": [
@@ -46168,7 +46164,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 294
+        "count": 291
       }
     ],
     "Cambria_Forks & Shocks": [
@@ -52002,7 +51998,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 244
+        "count": 245
       }
     ],
     "The Lost Co._Drivetrain": [
