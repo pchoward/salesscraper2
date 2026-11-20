@@ -122,18 +122,41 @@ def _end_date(text, today):
     return end.isoformat()
 
 
-def _discount(window):
-    percent = _PERCENT.search(window)
-    if percent:
-        value = int(next(group for group in percent.groups() if group))
+def _discount(window, center=None):
+    """The discount nearest the code at ``center`` in ``window``. Promo pages
+    stack offers ("GET UP TO 60% OFF KNOG LOCKS ... Non Dealers: Get 25% Off
+    on KNOG products. Enter discount code: KNOG25"): the closest one is the
+    code's (Zeitbike, 2026-11-20)."""
+    center = len(window) // 2 if center is None else center
+    options = []
+    for match in _PERCENT.finditer(window):
+        value = int(next(group for group in match.groups() if group))
         if 5 <= value <= 80:
-            return {"percent": value}
-    amount = _AMOUNT.search(window)
-    if amount:
-        value = int(next(group for group in amount.groups() if group))
+            options.append((abs((match.start() + match.end()) // 2 - center), {"percent": value}))
+    for match in _AMOUNT.finditer(window):
+        value = int(next(group for group in match.groups() if group))
         if value >= 5:
-            return {"amount": value}
-    return None
+            options.append((abs((match.start() + match.end()) // 2 - center), {"amount": value}))
+    return min(options, key=lambda option: option[0])[1] if options else None
+
+
+# "on KNOG products", "on all Freetown helmets": a code limited to one brand
+# or line. Kept short and checked, so no store wording is passed through.
+_SCOPE = re.compile(
+    r"\b(?:on|for)\s+(?:all\s+|select\s+)?([A-Z][A-Za-z0-9&'.-]{1,20}(?:\s+[A-Z][A-Za-z0-9&'.-]{1,20})?)\s+"
+    r"(products|gear|items|helmets|locks|lights|apparel|parts|bikes|accessories|bags|packs|goggles|skis|boots)\b")
+_NOT_A_SCOPE = {"ALL", "SELECT", "SALE", "ELIGIBLE", "YOUR", "OUR", "THESE", "EVERY", "ANY", "REGULAR", "FULL", "NEW",
+                "THE", "MOST", "MANY", "CLEARANCE", "IN-STOCK"}
+
+
+def _scope(text):
+    match = _SCOPE.search(text)
+    if not match:
+        return ""
+    words = match.group(1).split()
+    if words[0].upper() in _NOT_A_SCOPE:
+        return ""
+    return f"{match.group(1)} {match.group(2).lower()}"
 
 
 def find(raw, today=None):
@@ -157,13 +180,14 @@ def find(raw, today=None):
         near = text[max(0, start - 90):end + 60]
         if _NOT_A_SALE.search(near):
             continue
-        discount = _discount(window)
+        discount = _discount(window, start - max(0, start - 180))
         if not discount:
             continue
+        scope = _scope(text[max(0, start - 140):end + 40])
         # The end date usually follows the code ("... code X. Ends Dec 2"); a
         # date before it may belong to the promo above on the same page.
         ends = _end_date(text[start:end + 180], today) or _end_date(text[max(0, start - 120):start], today)
-        found[code] = dict(code=code, ends=ends, **discount)
+        found[code] = dict(code=code, ends=ends, **discount, **({"applies_to": scope} if scope else {}))
     return list(found.values())
 
 
@@ -351,6 +375,8 @@ def describe(promo, code=True):
         offer = f"${promo['amount']} off"
     else:
         offer = "Discount"
+    if promo.get("applies_to"):
+        offer += f" {promo['applies_to']}"
     text = f"{offer} with code {promo.get('code')}" if code else offer
     if promo.get("ends"):
         try:
