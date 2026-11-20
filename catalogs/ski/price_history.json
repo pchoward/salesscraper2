@@ -1273,6 +1273,8 @@
     "all_time_low": 190.0,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-20",
     "image": "https://cdn.shopify.com/s/files/1/0965/4642/files/shopping_bdb4d84e-a095-4801-8b39-4715b64be38d.webp?v=1772551385",
     "prices": {
       "2026-11-12": 190.0,
@@ -27811,7 +27813,7 @@
     "all_time_low": 180.97,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
-    "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw51092f7d/0455829_020_1.jpg?sw=600&sh=600",
+    "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw3d08be24/0455829_000_1.jpg?sw=600&sh=600",
     "prices": {
       "2026-11-02": 180.97,
       "2026-11-03": 180.97,
@@ -32931,6 +32933,21 @@
       "2026-11-20": 81.0
     }
   },
+  "https://www.evo.com/products/158695-oakley-mod-1-helmet-kids": {
+    "name": "Oakley MOD 1 Helmet - Kids'",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 68.0,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1350183.jpg?v=1789142784",
+    "prices": {
+      "2026-11-20": 68.0
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/159016-giro-range-mips-helmet": {
     "name": "Giro Range MIPS Helmet",
     "store": "evo",
@@ -33368,13 +33385,11 @@
     "store": "evo",
     "part": "Helmets",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-19",
-    "observation_count": 17,
+    "last_seen": "2026-11-20",
+    "observation_count": 18,
     "all_time_low": 64.95,
     "all_time_low_date": "2026-11-06",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-20",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1322915.jpg?v=1784163908",
     "prices": {
       "2026-11-03": 81.0,
@@ -33393,7 +33408,8 @@
       "2026-11-16": 64.95,
       "2026-11-17": 64.95,
       "2026-11-18": 64.95,
-      "2026-11-19": 64.95
+      "2026-11-19": 64.95,
+      "2026-11-20": 108.0
     }
   },
   "https://www.evo.com/products/177198-oakley-mod-1-mips-helmet-kids": {
@@ -33492,6 +33508,21 @@
       "2026-11-20": 117.0
     }
   },
+  "https://www.evo.com/products/177477-oakley-flight-path-l-goggles": {
+    "name": "Oakley Flight Path L Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 174.4,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-764182.jpg?v=1767747908",
+    "prices": {
+      "2026-11-20": 174.4
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/177484-marker-griffon-13-id-ski-bindings": {
     "name": "Marker Griffon 13 ID Ski Bindings",
     "store": "evo",
@@ -33501,7 +33532,7 @@
     "observation_count": 19,
     "all_time_low": 179.97,
     "all_time_low_date": "2026-11-03",
-    "stage": "all_time_low",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1248710.jpg?v=1767739099",
     "prices": {
       "2026-11-02": 249.97,
@@ -33522,7 +33553,7 @@
       "2026-11-17": 249.97,
       "2026-11-18": 249.97,
       "2026-11-19": 219.95,
-      "2026-11-20": 179.97
+      "2026-11-20": 219.95
     }
   },
   "https://www.evo.com/products/178497-oakley-mod-1-round-fit-helmet": {
@@ -34513,6 +34544,21 @@
       "2026-11-20": 175.98
     }
   },
+  "https://www.evo.com/products/197238-sweet-protection-grimnir-2vi-mips-helmet": {
+    "name": "Sweet Protection Grimnir 2Vi MIPS Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 374.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-837936.jpg?v=1767750715",
+    "prices": {
+      "2026-11-20": 374.96
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/197899-atomic-redster-jr-60-rs-ski-boots-boys-2024": {
     "name": "Atomic Redster Jr 60 RS Ski Boots - Boys' 2024",
     "store": "evo",
@@ -34739,13 +34785,11 @@
     "store": "evo",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-08",
-    "observation_count": 6,
+    "last_seen": "2026-11-20",
+    "observation_count": 7,
     "all_time_low": 75.0,
     "all_time_low_date": "2026-11-03",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-10",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-843227.jpg?v=1767750925",
     "prices": {
       "2026-11-03": 75.0,
@@ -34753,7 +34797,8 @@
       "2026-11-05": 75.0,
       "2026-11-06": 75.0,
       "2026-11-07": 75.0,
-      "2026-11-08": 75.0
+      "2026-11-08": 75.0,
+      "2026-11-20": 91.2
     }
   },
   "https://www.evo.com/products/200630-oakley-target-line-m-goggles": {
@@ -36205,6 +36250,21 @@
       "2026-11-20": 131.23
     }
   },
+  "https://www.evo.com/products/219102-sweet-protection-looper-x-jesper-tjader-mips-helmet": {
+    "name": "Sweet Protection Looper x Jesper Tjader MIPS Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 164.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1261398.jpg?v=1767739592",
+    "prices": {
+      "2026-11-20": 164.96
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/219124-sweet-protection-winder-mips-helmet": {
     "name": "Sweet Protection Winder MIPS Helmet",
     "store": "evo",
@@ -36364,6 +36424,21 @@
       "2026-11-19": 86.37,
       "2026-11-20": 86.37
     }
+  },
+  "https://www.evo.com/products/219173-sweet-protection-interstellar-rig-reflect-goggles": {
+    "name": "Sweet Protection Interstellar RIG Reflect Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 185.46,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1135353.jpg?v=1767734550",
+    "prices": {
+      "2026-11-20": 185.46
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/219337-salomon-s-pro-alpha-130-ski-boots-2024": {
     "name": "Salomon S/Pro Alpha 130 Ski Boots 2024",
@@ -38718,6 +38793,21 @@
       "2026-11-12": 170.96
     }
   },
+  "https://www.evo.com/products/238864-sweet-protection-connor-rig-reflect-goggles": {
+    "name": "Sweet Protection Connor RIG Reflect Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 176.21,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1340960.jpg?v=1787863751",
+    "prices": {
+      "2026-11-20": 176.21
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/238994-oakley-mod-3-mips-helmet": {
     "name": "Oakley MOD 3 MIPS Helmet",
     "store": "evo",
@@ -39943,6 +40033,8 @@
     "all_time_low": 319.99,
     "all_time_low_date": "2026-11-18",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-20",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1025144.jpg?v=1767730206",
     "prices": {
       "2026-11-02": 431.97,
@@ -42810,6 +42902,8 @@
     "all_time_low": 61.74,
     "all_time_low_date": "2026-11-20",
     "stage": "price_drop",
+    "miss_streak": 1,
+    "miss_day": "2026-11-20",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1144408.jpg?v=1767734959",
     "prices": {
       "2026-11-17": 69.99,
@@ -43976,6 +44070,36 @@
       "2026-11-19": 497.95,
       "2026-11-20": 497.95
     }
+  },
+  "https://www.evo.com/products/253520-sweet-protection-interstellar-rig-reflect-bli-goggles": {
+    "name": "Sweet Protection Interstellar Rig Reflect BLI Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 241.46,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1135401.jpg?v=1767734552",
+    "prices": {
+      "2026-11-20": 241.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/253521-sweet-protection-connor-rig-reflect-bli-goggles": {
+    "name": "Sweet Protection Connor RIG Reflect BLI Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 236.21,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1135409.jpg?v=1767734553",
+    "prices": {
+      "2026-11-20": 236.21
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/253956-dps-wailer-100-skis-2026": {
     "name": "DPS Wailer 100 Skis 2026",
@@ -48607,6 +48731,36 @@
       "2026-11-20": 204.26
     }
   },
+  "https://www.evo.com/products/261870-the-north-face-borealis-backpack": {
+    "name": "The North Face Borealis Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 80.5,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1299952.jpg?v=1779477517",
+    "prices": {
+      "2026-11-20": 80.5
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/261871-the-north-face-borealis-backpack-women-s": {
+    "name": "The North Face Borealis Backpack - Women's",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 80.5,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1300059.jpg?v=1779477524",
+    "prices": {
+      "2026-11-20": 80.5
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/262414-evo-way-up-adjustable-ski-poles-2026": {
     "name": "evo Way Up Adjustable Ski Poles",
     "store": "evo",
@@ -48691,6 +48845,8 @@
     "all_time_low": 449.99,
     "all_time_low_date": "2026-11-02",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-20",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1159509.jpg?v=1767735615",
     "prices": {
       "2026-11-02": 449.99,
@@ -53169,6 +53325,86 @@
       "2026-11-09": 151.95
     }
   },
+  "https://www.evo.com/products/267689-sweet-protection-back-protector-vest-2-0": {
+    "name": "Sweet Protection Back Protector Vest 2.0",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 142.46,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1221892.jpg?v=1767737995",
+    "width": 2.0,
+    "prices": {
+      "2026-11-20": 142.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/267690-sweet-protection-back-protector-vest-2-0-women-s": {
+    "name": "Sweet Protection Back Protector Vest 2.0 - Women's",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 142.46,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1221894.jpg?v=1767737997",
+    "width": 2.0,
+    "prices": {
+      "2026-11-20": 142.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/267691-sweet-protection-back-protector-2-0": {
+    "name": "Sweet Protection Back Protector 2.0",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 119.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1221895.jpg?v=1767737998",
+    "width": 2.0,
+    "prices": {
+      "2026-11-20": 119.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/267692-sweet-protection-back-protector-vest-2-0-kids": {
+    "name": "Sweet Protection Back Protector Vest 2.0 - Kids'",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 112.46,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1221900.jpg?v=1767737996",
+    "width": 2.0,
+    "prices": {
+      "2026-11-20": 112.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/267693-sweet-protection-back-protector-2-0-kids": {
+    "name": "Sweet Protection Back Protector 2.0 - Kids'",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 104.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1221902.jpg?v=1767737998",
+    "width": 2.0,
+    "prices": {
+      "2026-11-20": 104.96
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/267697-anon-logan-wavecel-helmet": {
     "name": "Anon Logan WaveCel Helmet",
     "store": "evo",
@@ -53260,12 +53496,11 @@
     "store": "evo",
     "part": "Helmets",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-19",
-    "observation_count": 16,
+    "last_seen": "2026-11-20",
+    "observation_count": 17,
     "all_time_low": 132.27,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
-    "catalog_scope_reason": "catalog scope: another version of https://www.evo.com/products/252922-anon-oslo-wavecel-round-fit-helmet",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1229793.jpg?v=1767738317",
     "prices": {
       "2026-11-03": 132.27,
@@ -53283,7 +53518,8 @@
       "2026-11-15": 132.27,
       "2026-11-16": 132.27,
       "2026-11-18": 132.27,
-      "2026-11-19": 132.27
+      "2026-11-19": 132.27,
+      "2026-11-20": 132.27
     }
   },
   "https://www.evo.com/products/267701-anon-prime-mips-helmet": {
@@ -59592,6 +59828,36 @@
       "2026-11-20": 237.95
     }
   },
+  "https://www.evo.com/products/276567-cotopaxi-abierto-26l-daypack": {
+    "name": "Cotopaxi Abierto 26L Daypack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 78.75,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1266198.jpg?v=1767739775",
+    "prices": {
+      "2026-11-20": 78.75
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/276570-cotopaxi-tasra-16l-backpack": {
+    "name": "Cotopaxi Tasra 16L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 67.5,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1307571.jpg?v=1781296357",
+    "prices": {
+      "2026-11-20": 67.5
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/277078-faction-dancer-79-skis-2026": {
     "name": "Faction Dancer 79 Skis 2026",
     "store": "evo",
@@ -60109,6 +60375,21 @@
       "2026-11-20": 879.99
     }
   },
+  "https://www.evo.com/products/280210-cotopaxi-empacable-16l-daypack": {
+    "name": "Cotopaxi Empacable 16L Daypack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 56.25,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1307603.jpg?v=1781296356",
+    "prices": {
+      "2026-11-20": 56.25
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/280598-k2-method-team-ski-boots-2027-used": {
     "name": "K2 Method Team Ski Boots 2027 - Used",
     "store": "evo",
@@ -60125,6 +60406,21 @@
       "2026-11-11": 629.96,
       "2026-11-12": 629.96
     }
+  },
+  "https://www.evo.com/products/280745-oakley-flight-deck-pro-m-low-bridge-fit-goggles": {
+    "name": "Oakley Flight Deck Pro M Low Bridge Fit Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 300.8,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1324623.jpg?v=1784600441",
+    "prices": {
+      "2026-11-20": 300.8
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/280802-armada-whitewalker-121-skis-2026": {
     "name": "Armada Whitewalker 121 Skis 2026",
@@ -60391,6 +60687,81 @@
       "2026-11-19": 189.0,
       "2026-11-20": 189.0
     }
+  },
+  "https://www.evo.com/products/281889-sweet-protection-switcher-2vi-mips-helmet": {
+    "name": "Sweet Protection Switcher 2Vi MIPS Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 224.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1341077.jpg?v=1787864652",
+    "prices": {
+      "2026-11-20": 224.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/281892-sweet-protection-bueller-jr-goggles-kids": {
+    "name": "Sweet Protection Bueller JR Goggles - Kids'",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 44.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1341089.jpg?v=1787864891",
+    "prices": {
+      "2026-11-20": 44.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/281893-sweet-protection-bueller-l-goggles": {
+    "name": "Sweet Protection Bueller L Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 74.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1341099.jpg?v=1787864890",
+    "prices": {
+      "2026-11-20": 74.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/281894-sweet-protection-boondock-ii-m-rig-reflect-goggles": {
+    "name": "Sweet Protection Boondock II M RIG Reflect Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 149.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1341120.jpg?v=1787865132",
+    "prices": {
+      "2026-11-20": 149.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/281896-sweet-protection-boondock-ii-l-rig-reflect-goggles": {
+    "name": "Sweet Protection Boondock II L RIG Reflect Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 149.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1341128.jpg?v=1787865132",
+    "prices": {
+      "2026-11-20": 149.96
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/281964-salomon-depart-ten-skis-2027": {
     "name": "Salomon D\u00e9part. Ten Skis 2027",
@@ -60924,6 +61295,21 @@
       "2026-11-19": 84.95,
       "2026-11-20": 84.95
     }
+  },
+  "https://www.evo.com/products/284471-sweet-protection-groover-jr-mips-helmet-kids": {
+    "name": "Sweet Protection Groover Jr. MIPS Helmet - Kids'",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-20",
+    "last_seen": "2026-11-20",
+    "observation_count": 1,
+    "all_time_low": 104.96,
+    "all_time_low_date": "2026-11-20",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1354527.jpg?v=1789678281",
+    "prices": {
+      "2026-11-20": 104.96
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/284832-nordica-speedmachine-3-110-x-boa-ski-boots-2027": {
     "name": "Nordica Speedmachine 3 110 X BOA Ski Boots 2027",

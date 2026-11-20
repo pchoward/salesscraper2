@@ -44853,134 +44853,134 @@
         },
         "Fiend_Bikes": {
           "count": 0,
-          "failed": true,
+          "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
-            "reason": "scrape_failed"
+            "reason": "normal_variation"
           }
         },
         "Fiend_Braking": {
           "count": 0,
-          "failed": true,
+          "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
-            "reason": "scrape_failed"
+            "reason": "normal_variation"
           }
         },
         "Fiend_Drivetrain": {
-          "count": 0,
-          "failed": true,
+          "count": 1,
+          "failed": false,
           "diagnostics": {
             "expected_count": 1,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "scrape_failed"
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Fiend_Frames & Forks": {
-          "count": 0,
-          "failed": true,
+          "count": 1,
+          "failed": false,
           "diagnostics": {
             "expected_count": 1,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "scrape_failed"
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Fiend_Packs": {
           "count": 0,
-          "failed": true,
+          "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 7,
             "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
-            "reason": "scrape_failed"
+            "reason": "normal_variation"
           }
         },
         "Fiend_Protection": {
           "count": 0,
-          "failed": true,
+          "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
-            "reason": "scrape_failed"
+            "reason": "normal_variation"
           }
         },
         "Fiend_Seating": {
-          "count": 0,
-          "failed": true,
+          "count": 1,
+          "failed": false,
           "diagnostics": {
             "expected_count": 1,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "scrape_failed"
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Fiend_Steering": {
-          "count": 0,
-          "failed": true,
+          "count": 4,
+          "failed": false,
           "diagnostics": {
             "expected_count": 4,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "scrape_failed"
+            "actual_count": 4,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Fiend_Tires": {
           "count": 0,
-          "failed": true,
+          "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
-            "reason": "scrape_failed"
+            "reason": "normal_variation"
           }
         },
         "Fiend_Wheel Parts": {
-          "count": 0,
-          "failed": true,
+          "count": 1,
+          "failed": false,
           "diagnostics": {
             "expected_count": 1,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "scrape_failed"
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
           }
         },
         "Fiend_Wheels": {
           "count": 0,
-          "failed": true,
+          "failed": false,
           "diagnostics": {
             "expected_count": 0,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
-            "reason": "scrape_failed"
+            "reason": "normal_variation"
           }
         },
         "G-Form_Bikes": {
@@ -45740,14 +45740,14 @@
           }
         },
         "Source BMX US_Packs": {
-          "count": 19,
+          "count": 18,
           "failed": false,
           "diagnostics": {
             "expected_count": 5.5,
             "baseline_samples": 8,
             "median_absolute_deviation": 1.5,
-            "actual_count": 19,
-            "percentage_change": 245.5,
+            "actual_count": 18,
+            "percentage_change": 227.3,
             "reason": "normal_variation"
           }
         },
@@ -46508,7 +46508,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-20T03:47:04+00:00"
+      "scanned_at": "2026-11-20T07:18:04+00:00"
     }
   ],
   "baseline": {
@@ -46746,7 +46746,7 @@
     },
     "Source BMX US_Packs": {
       "date": "2026-11-20",
-      "count": 19
+      "count": 18
     },
     "Sparky's Brands_Braking": {
       "date": "2026-11-20",
@@ -46799,6 +46799,26 @@
     "Source BMX US_Bikes": {
       "date": "2026-11-20",
       "count": 8
+    },
+    "Fiend_Drivetrain": {
+      "date": "2026-11-20",
+      "count": 1
+    },
+    "Fiend_Frames & Forks": {
+      "date": "2026-11-20",
+      "count": 1
+    },
+    "Fiend_Seating": {
+      "date": "2026-11-20",
+      "count": 1
+    },
+    "Fiend_Steering": {
+      "date": "2026-11-20",
+      "count": 4
+    },
+    "Fiend_Wheel Parts": {
+      "date": "2026-11-20",
+      "count": 1
     }
   },
   "completeness_baseline": {
@@ -52610,6 +52630,10 @@
       {
         "date": "2026-11-19",
         "count": 0
+      },
+      {
+        "date": "2026-11-20",
+        "count": 0
       }
     ],
     "Fiend_Braking": [
@@ -52663,6 +52687,10 @@
       },
       {
         "date": "2026-11-19",
+        "count": 0
+      },
+      {
+        "date": "2026-11-20",
         "count": 0
       }
     ],
@@ -52718,6 +52746,10 @@
       {
         "date": "2026-11-19",
         "count": 1
+      },
+      {
+        "date": "2026-11-20",
+        "count": 1
       }
     ],
     "Fiend_Frames & Forks": [
@@ -52772,6 +52804,10 @@
       {
         "date": "2026-11-19",
         "count": 1
+      },
+      {
+        "date": "2026-11-20",
+        "count": 1
       }
     ],
     "Fiend_Packs": [
@@ -52801,6 +52837,10 @@
       },
       {
         "date": "2026-11-19",
+        "count": 0
+      },
+      {
+        "date": "2026-11-20",
         "count": 0
       }
     ],
@@ -52856,6 +52896,10 @@
       {
         "date": "2026-11-19",
         "count": 0
+      },
+      {
+        "date": "2026-11-20",
+        "count": 0
       }
     ],
     "Fiend_Seating": [
@@ -52909,6 +52953,10 @@
       },
       {
         "date": "2026-11-19",
+        "count": 1
+      },
+      {
+        "date": "2026-11-20",
         "count": 1
       }
     ],
@@ -52964,6 +53012,10 @@
       {
         "date": "2026-11-19",
         "count": 4
+      },
+      {
+        "date": "2026-11-20",
+        "count": 4
       }
     ],
     "Fiend_Tires": [
@@ -53017,6 +53069,10 @@
       },
       {
         "date": "2026-11-19",
+        "count": 0
+      },
+      {
+        "date": "2026-11-20",
         "count": 0
       }
     ],
@@ -53072,6 +53128,10 @@
       {
         "date": "2026-11-19",
         "count": 1
+      },
+      {
+        "date": "2026-11-20",
+        "count": 1
       }
     ],
     "Fiend_Wheels": [
@@ -53125,6 +53185,10 @@
       },
       {
         "date": "2026-11-19",
+        "count": 0
+      },
+      {
+        "date": "2026-11-20",
         "count": 0
       }
     ],
@@ -56717,7 +56781,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 19
+        "count": 18
       }
     ],
     "Source BMX US_Protection": [

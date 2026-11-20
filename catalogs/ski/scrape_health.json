@@ -17474,14 +17474,14 @@
           }
         },
         "Aspen Ski and Board_Helmets": {
-          "count": 21,
+          "count": 20,
           "failed": false,
           "diagnostics": {
             "expected_count": 23.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 1.0,
-            "actual_count": 21,
-            "percentage_change": -8.7,
+            "actual_count": 20,
+            "percentage_change": -13.0,
             "reason": "normal_variation"
           }
         },
@@ -18746,38 +18746,38 @@
           }
         },
         "evo_Boots": {
-          "count": 220,
+          "count": 218,
           "failed": false,
           "diagnostics": {
             "expected_count": 253.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 36.0,
-            "actual_count": 220,
-            "percentage_change": -13.0,
+            "actual_count": 218,
+            "percentage_change": -13.8,
             "reason": "normal_variation"
           }
         },
         "evo_Helmets": {
-          "count": 141,
+          "count": 146,
           "failed": false,
           "diagnostics": {
             "expected_count": 144.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 8.0,
-            "actual_count": 141,
-            "percentage_change": -2.1,
+            "actual_count": 146,
+            "percentage_change": 1.4,
             "reason": "normal_variation"
           }
         },
         "evo_Packs": {
-          "count": 106,
+          "count": 111,
           "failed": false,
           "diagnostics": {
             "expected_count": 86.5,
             "baseline_samples": 8,
             "median_absolute_deviation": 8.0,
-            "actual_count": 106,
-            "percentage_change": 22.5,
+            "actual_count": 111,
+            "percentage_change": 28.3,
             "reason": "normal_variation"
           }
         },
@@ -18794,14 +18794,14 @@
           }
         },
         "evo_Protection": {
-          "count": 152,
+          "count": 168,
           "failed": false,
           "diagnostics": {
             "expected_count": 132.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 12.5,
-            "actual_count": 152,
-            "percentage_change": 15.2,
+            "actual_count": 168,
+            "percentage_change": 27.3,
             "reason": "normal_variation"
           }
         },
@@ -18818,7 +18818,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-20T03:57:33+00:00"
+      "scanned_at": "2026-11-20T07:28:41+00:00"
     }
   ],
   "baseline": {
@@ -18916,11 +18916,11 @@
     },
     "evo_Helmets": {
       "date": "2026-11-20",
-      "count": 141
+      "count": 146
     },
     "evo_Protection": {
       "date": "2026-11-20",
-      "count": 152
+      "count": 168
     },
     "Bern_Helmets": {
       "date": "2026-11-20",
@@ -18952,7 +18952,7 @@
     },
     "evo_Boots": {
       "date": "2026-11-20",
-      "count": 220
+      "count": 218
     },
     "Aspen Ski and Board_Bindings": {
       "date": "2026-11-20",
@@ -18964,7 +18964,7 @@
     },
     "Aspen Ski and Board_Helmets": {
       "date": "2026-11-20",
-      "count": 21
+      "count": 20
     },
     "Aspen Ski and Board_Poles": {
       "date": "2026-11-20",
@@ -19080,7 +19080,7 @@
     },
     "evo_Packs": {
       "date": "2026-11-20",
-      "count": 106
+      "count": 111
     },
     "Triple 8_Protection": {
       "date": "2026-11-20",
@@ -19203,7 +19203,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 21
+        "count": 20
       }
     ],
     "Aspen Ski and Board_Packs": [
@@ -24335,7 +24335,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 220
+        "count": 218
       }
     ],
     "evo_Helmets": [
@@ -24393,7 +24393,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 141
+        "count": 146
       }
     ],
     "evo_Packs": [
@@ -24431,7 +24431,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 106
+        "count": 111
       }
     ],
     "evo_Poles": [
@@ -24547,7 +24547,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 152
+        "count": 168
       }
     ],
     "evo_Skis": [
