@@ -44228,14 +44228,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 96,
+          "count": 97,
           "failed": false,
           "diagnostics": {
             "expected_count": 94.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 96,
-            "percentage_change": 2.1,
+            "actual_count": 97,
+            "percentage_change": 3.2,
             "reason": "normal_variation"
           }
         },
@@ -45560,14 +45560,14 @@
           }
         },
         "Powers BMX_Frames & Forks": {
-          "count": 19,
+          "count": 18,
           "failed": false,
           "diagnostics": {
             "expected_count": 18.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 19,
-            "percentage_change": 5.6,
+            "actual_count": 18,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -45704,14 +45704,14 @@
           }
         },
         "Source BMX US_Braking": {
-          "count": 34,
+          "count": 35,
           "failed": false,
           "diagnostics": {
             "expected_count": 10.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 34,
-            "percentage_change": 223.8,
+            "actual_count": 35,
+            "percentage_change": 233.3,
             "reason": "normal_variation"
           }
         },
@@ -45776,14 +45776,14 @@
           }
         },
         "Source BMX US_Steering": {
-          "count": 167,
+          "count": 166,
           "failed": false,
           "diagnostics": {
             "expected_count": 22.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 167,
-            "percentage_change": 659.1,
+            "actual_count": 166,
+            "percentage_change": 654.5,
             "reason": "normal_variation"
           }
         },
@@ -45908,14 +45908,14 @@
           }
         },
         "Sparky's Brands_Steering": {
-          "count": 21,
+          "count": 20,
           "failed": false,
           "diagnostics": {
             "expected_count": 21.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.0,
-            "actual_count": 21,
-            "percentage_change": 0.0,
+            "actual_count": 20,
+            "percentage_change": -4.8,
             "reason": "normal_variation"
           }
         },
@@ -46100,14 +46100,14 @@
           }
         },
         "Tactics_Protection": {
-          "count": 20,
+          "count": 1,
           "failed": false,
           "diagnostics": {
             "expected_count": 4.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 20,
-            "percentage_change": 400.0,
+            "actual_count": 1,
+            "percentage_change": -75.0,
             "reason": "normal_variation"
           }
         },
@@ -46508,7 +46508,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-20T13:40:14+00:00"
+      "scanned_at": "2026-11-20T22:18:42+00:00"
     }
   ],
   "baseline": {
@@ -46566,7 +46566,7 @@
     },
     "Powers BMX_Frames & Forks": {
       "date": "2026-11-20",
-      "count": 19
+      "count": 18
     },
     "Powers BMX_Seating": {
       "date": "2026-11-20",
@@ -46590,7 +46590,7 @@
     },
     "Source BMX US_Braking": {
       "date": "2026-11-20",
-      "count": 34
+      "count": 35
     },
     "Source BMX US_Drivetrain": {
       "date": "2026-11-20",
@@ -46606,7 +46606,7 @@
     },
     "Source BMX US_Steering": {
       "date": "2026-11-20",
-      "count": 167
+      "count": 166
     },
     "Source BMX US_Tires": {
       "date": "2026-11-20",
@@ -46666,7 +46666,7 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-20",
-      "count": 96
+      "count": 97
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-20",
@@ -46690,7 +46690,7 @@
     },
     "Tactics_Protection": {
       "date": "2026-11-20",
-      "count": 20
+      "count": 1
     },
     "Haro_Frames & Forks": {
       "date": "2026-11-20",
@@ -46774,7 +46774,7 @@
     },
     "Sparky's Brands_Steering": {
       "date": "2026-11-20",
-      "count": 21
+      "count": 20
     },
     "Sparky's Brands_Tires": {
       "date": "2026-11-20",
@@ -49737,7 +49737,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 96
+        "count": 97
       }
     ],
     "Cambria_Seating": [
@@ -55951,7 +55951,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 19
+        "count": 18
       }
     ],
     "Powers BMX_Packs": [
@@ -56627,7 +56627,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 34
+        "count": 35
       }
     ],
     "Source BMX US_Drivetrain": [
@@ -56955,7 +56955,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 167
+        "count": 166
       }
     ],
     "Source BMX US_Tires": [
@@ -57433,7 +57433,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 21
+        "count": 20
       }
     ],
     "Sparky's Brands_Tires": [
@@ -57651,7 +57651,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 20
+        "count": 1
       }
     ],
     "Triple 8_Bikes": [

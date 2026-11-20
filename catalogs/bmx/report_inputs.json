@@ -1,52 +1,98 @@
 {
  "changes": {
-  "Source BMX US_Frames & Forks": [
+  "Cambria_Protection": [
    {
     "item": {
      "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "We The People",
-     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/48fc9bf1-9d73-40ff-bc29-fb97a500c445.jpg?v=1772810922",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/48fc9bf1-9d73-40ff-bc29-fb97a500c445.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bd734394-9ddc-4b57-8d90-0d33d1bb7847.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/5572ef88-1668-4549-b166-c1b13ad9d789.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/faad9486-a2e1-434f-bacc-8b6aa0d020a1.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ba1db11d-3503-460c-bbc9-de7126326a98.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/f4005735-1561-4774-b62a-16cd0c9d2683.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/35e2a615-989e-4ae7-ba2d-bf6360335c55.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/29e34485-bcc3-43df-8a3d-3438fc11301c.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/a9a19763-54ae-4695-89be-c1a91b7299e2.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9bfdc1a0-1ff4-407d-bf24-93fadb127b42.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/722bf1d5-d024-475a-8c84-d8e8c37ce284.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/c2829e40-bbf5-4d8f-a844-ec43096858ec.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/e5d0ce2e-3a25-4599-acff-e500842bab07.jpg?v=1772810922",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d8f4587c-81bf-41a9-b829-e86f71f28fe5.jpg?v=1772810922"
+     "brand": "iXS",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/iXS_Flow_Evo_Knee_Guard_Gray_ffd7fb2b-5501-4501-bf2c-5776b5749b40.jpg?v=1643185021",
+     "kind": "Pads & Guards",
+     "name": "iXS Flow Evo+ Knee Guard - Gray",
+     "part": "Protection",
+     "price_new": "79.88",
+     "price_old": "99.90",
+     "product_type": "Knee Pads",
+     "protection_sizes": [
+      "M"
      ],
-     "kind": "Frames",
-     "name": "Wethepeople Prodigy 18'' Frame",
-     "part": "Frames & Forks",
-     "price_new": "382.49",
-     "price_old": "424.99",
-     "product_type": "BMX Frames",
+     "protection_type": "Knee Pads",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 99.9,
+       "price": 79.88,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Grey"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 41140293173430
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "color": [
+       "Grey"
+      ],
+      "kind": [
+       "Pads & Guards"
+      ],
+      "prot_size": [
+       "M"
+      ],
+      "protects": [
+       "Knees"
+      ]
+     },
+     "url": "https://cambriabike.com/products/ixs-flow-evo-knee-guard-gray"
+    },
+    "type": "new"
+   }
+  ],
+  "Source BMX US_Braking": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Odyssey",
+     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/dd73958a-1cbd-4833-aeba-93773018db76.jpg?v=1771844872",
+     "kind": "Brakes & Accessories",
+     "name": "Odyssey Evo 2.5 CNC Brake Hanger",
+     "part": "Braking",
+     "price_new": "11.21",
+     "price_old": "12.46",
+     "product_type": "BMX Brakes",
      "store": "Source BMX US",
      "technical_offers": [
       {
        "available": true,
-       "compare": 424.99,
-       "price": 382.49,
+       "compare": 12.46,
+       "price": 11.21,
        "specs": {
         "color": [
          "Black"
         ],
         "kind": [
-         "Frames"
-        ],
-        "wheel_size": [
-         "18"
+         "Brakes & Accessories"
         ]
        },
-       "variant_id": 43029149745213
+       "variant_id": 43007785828413
       }
      ],
      "technical_specs": {
@@ -54,16 +100,96 @@
        "Black"
       ],
       "kind": [
-       "Frames"
-      ],
-      "wheel_size": [
-       "18"
+       "Brakes & Accessories"
       ]
      },
-     "url": "https://us.sourcebmx.com/products/wethepeople-prodigy-frame",
-     "wheel_size": "18"
+     "url": "https://us.sourcebmx.com/products/odyssey-evo-2-5-cnc-brake-hanger",
+     "width": 2.5
     },
     "type": "new"
+   },
+   {
+    "at_all_time_low": false,
+    "delta": 35.7,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Odyssey",
+     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b6579e14-1c5e-4ab8-a8fa-2772581a79c7.jpg?v=1771844217",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b6579e14-1c5e-4ab8-a8fa-2772581a79c7.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/c7f833b2-feca-4b09-bcb9-9a65903550f6.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/5a377675-2e7a-4f7d-99ce-69860d27cfad.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d2a9d63f-e3af-4a9b-8612-f52caa3ec202.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/6e810180-3362-4578-8d6a-b40920a06cd9.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/a43194f0-3b90-457a-92cd-2538ce284c01.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/8dd32791-96ec-4f8c-8cb1-5c4253b64747.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/731e4bbb-c495-4eb0-89c1-a6c83cffbcf4.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/cf9937cb-3df2-49cf-aaff-b659941d5b03.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/549fe663-0bf0-4dc3-88bc-ab4162558d84.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/fa17def2-97a7-4b25-b76a-e8c1374bd143.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/50c965a4-c287-49f4-af82-2a02651ba233.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/376591a1-4d1c-4ee6-9c9f-0133aa49c4c1.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b28579a5-2702-4853-863a-b298ae364f6e.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bc40ea08-1102-4bac-9b39-ff620314555f.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9bd6c2c8-6fb8-4bae-a5ae-9c3c894a5e95.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ff7112a0-5ff1-4d1f-8ffd-10ab238f4427.jpg?v=1771844217"
+     ],
+     "kind": "Brakes & Accessories",
+     "name": "Odyssey Evo 2.5 Brake Kit",
+     "part": "Braking",
+     "price_new": "86.69",
+     "price_old": "96.32",
+     "product_type": "BMX Brake Kits",
+     "store": "Source BMX US",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 96.32,
+       "price": 86.69,
+       "specs": {
+        "color": [
+         "Black"
+        ],
+        "kind": [
+         "Brakes & Accessories"
+        ]
+       },
+       "variant_id": 43007781961789
+      },
+      {
+       "available": true,
+       "compare": 135.99,
+       "price": 122.39,
+       "specs": {
+        "color": [
+         "Oil Slick"
+        ],
+        "kind": [
+         "Brakes & Accessories"
+        ]
+       },
+       "variant_id": 43007781994557
+      }
+     ],
+     "technical_specs": {
+      "color": [
+       "Black",
+       "Oil Slick"
+      ],
+      "kind": [
+       "Brakes & Accessories"
+      ]
+     },
+     "url": "https://us.sourcebmx.com/products/odyssey-evo-2-5-brake-kit",
+     "width": 2.5
+    },
+    "name": "Odyssey Evo 2.5 Brake Kit",
+    "new": "86.69",
+    "old": "122.39",
+    "percent_vs_prior": 29.2,
+    "type": "price_drop",
+    "url": "https://us.sourcebmx.com/products/odyssey-evo-2-5-brake-kit"
    }
   ]
  },
@@ -1866,53 +1992,118 @@
     "part": "Wheels"
    }
   ],
-  "drops": [],
+  "drops": [
+   {
+    "at_all_time_low": false,
+    "delta": 35.7,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Odyssey",
+     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b6579e14-1c5e-4ab8-a8fa-2772581a79c7.jpg?v=1771844217",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b6579e14-1c5e-4ab8-a8fa-2772581a79c7.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/c7f833b2-feca-4b09-bcb9-9a65903550f6.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/5a377675-2e7a-4f7d-99ce-69860d27cfad.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d2a9d63f-e3af-4a9b-8612-f52caa3ec202.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/6e810180-3362-4578-8d6a-b40920a06cd9.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/a43194f0-3b90-457a-92cd-2538ce284c01.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/8dd32791-96ec-4f8c-8cb1-5c4253b64747.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/731e4bbb-c495-4eb0-89c1-a6c83cffbcf4.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/cf9937cb-3df2-49cf-aaff-b659941d5b03.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/549fe663-0bf0-4dc3-88bc-ab4162558d84.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/fa17def2-97a7-4b25-b76a-e8c1374bd143.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/50c965a4-c287-49f4-af82-2a02651ba233.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/376591a1-4d1c-4ee6-9c9f-0133aa49c4c1.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b28579a5-2702-4853-863a-b298ae364f6e.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bc40ea08-1102-4bac-9b39-ff620314555f.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9bd6c2c8-6fb8-4bae-a5ae-9c3c894a5e95.jpg?v=1771844217",
+      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ff7112a0-5ff1-4d1f-8ffd-10ab238f4427.jpg?v=1771844217"
+     ],
+     "kind": "Brakes & Accessories",
+     "name": "Odyssey Evo 2.5 Brake Kit",
+     "part": "Braking",
+     "price_new": "86.69",
+     "price_old": "96.32",
+     "product_type": "BMX Brake Kits",
+     "store": "Source BMX US",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 96.32,
+       "price": 86.69,
+       "specs": {
+        "color": [
+         "Black"
+        ],
+        "kind": [
+         "Brakes & Accessories"
+        ]
+       },
+       "variant_id": 43007781961789
+      },
+      {
+       "available": true,
+       "compare": 135.99,
+       "price": 122.39,
+       "specs": {
+        "color": [
+         "Oil Slick"
+        ],
+        "kind": [
+         "Brakes & Accessories"
+        ]
+       },
+       "variant_id": 43007781994557
+      }
+     ],
+     "technical_specs": {
+      "color": [
+       "Black",
+       "Oil Slick"
+      ],
+      "kind": [
+       "Brakes & Accessories"
+      ]
+     },
+     "url": "https://us.sourcebmx.com/products/odyssey-evo-2-5-brake-kit",
+     "width": 2.5
+    },
+    "name": "Odyssey Evo 2.5 Brake Kit",
+    "new": "86.69",
+    "old": "122.39",
+    "percent_vs_prior": 29.2,
+    "type": "price_drop",
+    "url": "https://us.sourcebmx.com/products/odyssey-evo-2-5-brake-kit"
+   }
+  ],
   "new_items": [
    {
     "at_all_time_low": false,
     "availability": "Check store",
-    "brand": "We The People",
-    "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/48fc9bf1-9d73-40ff-bc29-fb97a500c445.jpg?v=1772810922",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/48fc9bf1-9d73-40ff-bc29-fb97a500c445.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bd734394-9ddc-4b57-8d90-0d33d1bb7847.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/5572ef88-1668-4549-b166-c1b13ad9d789.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/faad9486-a2e1-434f-bacc-8b6aa0d020a1.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ba1db11d-3503-460c-bbc9-de7126326a98.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/f4005735-1561-4774-b62a-16cd0c9d2683.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/35e2a615-989e-4ae7-ba2d-bf6360335c55.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/29e34485-bcc3-43df-8a3d-3438fc11301c.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/a9a19763-54ae-4695-89be-c1a91b7299e2.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9bfdc1a0-1ff4-407d-bf24-93fadb127b42.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/722bf1d5-d024-475a-8c84-d8e8c37ce284.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/c2829e40-bbf5-4d8f-a844-ec43096858ec.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/e5d0ce2e-3a25-4599-acff-e500842bab07.jpg?v=1772810922",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d8f4587c-81bf-41a9-b829-e86f71f28fe5.jpg?v=1772810922"
-    ],
-    "kind": "Frames",
-    "name": "Wethepeople Prodigy 18'' Frame",
-    "part": "Frames & Forks",
-    "price_new": "382.49",
-    "price_old": "424.99",
-    "product_type": "BMX Frames",
+    "brand": "Odyssey",
+    "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/dd73958a-1cbd-4833-aeba-93773018db76.jpg?v=1771844872",
+    "kind": "Brakes & Accessories",
+    "name": "Odyssey Evo 2.5 CNC Brake Hanger",
+    "part": "Braking",
+    "price_new": "11.21",
+    "price_old": "12.46",
+    "product_type": "BMX Brakes",
     "store": "Source BMX US",
     "technical_offers": [
      {
       "available": true,
-      "compare": 424.99,
-      "price": 382.49,
+      "compare": 12.46,
+      "price": 11.21,
       "specs": {
        "color": [
         "Black"
        ],
        "kind": [
-        "Frames"
-       ],
-       "wheel_size": [
-        "18"
+        "Brakes & Accessories"
        ]
       },
-      "variant_id": 43029149745213
+      "variant_id": 43007785828413
      }
     ],
     "technical_specs": {
@@ -1920,14 +2111,71 @@
       "Black"
      ],
      "kind": [
-      "Frames"
-     ],
-     "wheel_size": [
-      "18"
+      "Brakes & Accessories"
      ]
     },
-    "url": "https://us.sourcebmx.com/products/wethepeople-prodigy-frame",
-    "wheel_size": "18"
+    "url": "https://us.sourcebmx.com/products/odyssey-evo-2-5-cnc-brake-hanger",
+    "width": 2.5
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "iXS",
+    "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/iXS_Flow_Evo_Knee_Guard_Gray_ffd7fb2b-5501-4501-bf2c-5776b5749b40.jpg?v=1643185021",
+    "kind": "Pads & Guards",
+    "name": "iXS Flow Evo+ Knee Guard - Gray",
+    "part": "Protection",
+    "price_new": "79.88",
+    "price_old": "99.90",
+    "product_type": "Knee Pads",
+    "protection_sizes": [
+     "M"
+    ],
+    "protection_type": "Knee Pads",
+    "store": "Cambria",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 99.9,
+      "price": 79.88,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "color": [
+        "Grey"
+       ],
+       "kind": [
+        "Pads & Guards"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Knees"
+       ]
+      },
+      "variant_id": 41140293173430
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "color": [
+      "Grey"
+     ],
+     "kind": [
+      "Pads & Guards"
+     ],
+     "prot_size": [
+      "M"
+     ],
+     "protects": [
+      "Knees"
+     ]
+    },
+    "url": "https://cambriabike.com/products/ixs-flow-evo-knee-guard-gray"
    }
   ],
   "removed": []
@@ -1947,10 +2195,10 @@
   "Stacked BMX_Wheels"
  ],
  "fingerprints": {
-  "data": "3aed52a019fe883448b76a3b50c9ee2a0b78131693dd5da649d0115e3819591e",
-  "history": "52f512e2aca60bfe1af97df2dfaf5bc10a0d99fd3b82f6837d69c81ff678407d"
+  "data": "1ef997ec3cbc47464001ac65d9c10a5cc735b002453ebdef302f9ba596c6c05f",
+  "history": "264bf95caa852a5451583ff37454e04cb77dd2569ae33590bf52ba32415e338f"
  },
- "generated_at": "2026-11-20T13:40:14+00:00",
+ "generated_at": "2026-11-20T22:18:42+00:00",
  "history": "file",
  "version": 1
 }
