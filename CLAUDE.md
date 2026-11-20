@@ -32,7 +32,12 @@ ShredDeals (shreddeals.com) lists marked-down gear from many shops, on four spor
 - **Data:** Skate's files are at the repo root; other sports are in `catalogs/<sport>/`. Published pages are `sale_items_chart.html` and `<sport>/sale_items_chart.html`.
 - **Sale history:** `sale_events.py` finds a sale as many listings cut by the same percent on one day, until the prices go back up.
 
-## Open work as of 2026-11-07
-- Codex is on `docs/codex-backlog-2026-11-07.md` (tasks 1–2 done in PRs 235/236).
+## Open work as of 2026-11-20
+- Codex's queue is `docs/codex-backlog-2026-11-07.md`. Tasks 14 and 15 are done (PRs 286, 289); task 16, the promo-code strip on the pages, has been sent to Codex.
 - Task 10, trucks "Fits deck": data side in PR 238 (truck `spec_offers`); Codex builds the UI.
+- **Live Shopify search: parked, waiting on Shopify.** Shopify's Dev Dashboard (Agents) won't issue a Catalogs API key until the organization's identity is verified. It shows no way to start verification, so the owner is contacting Shopify Partner Support (2026-11-20). Done so far:
+  - The `ShredDeals` saved catalog exists.
+  - The Worker `skatedeals-alerts` exists: staging, D1 `0c3db810-…`, `TOKEN_PEPPER` set. The owner's private `worker/wrangler.toml` has `CATALOG_SEARCH_ENABLED = "true"`, `PUBLIC_ORIGIN` and `MANAGE_PAGE_URL` on shreddeals.com, and `EMAIL_FROM` `alerts@shreddeals.com`. Whether that config has been deployed with `./worker/deploy.sh` isn't confirmed.
+  - **To finish:** Agents → **New identity** → `wrangler secret put SHOPIFY_CATALOG_CLIENT_ID` and `SHOPIFY_CATALOG_CLIENT_SECRET` → test `/v1/catalog-search` → turn on `LIVE_CATALOG_UI_CONFIG` in `page.py` (`docs/live-search-implementation.md`).
+  - Don't use Shopify's anonymous tier; Shopify says it isn't for production. Commission and promoted placements stay off unless the owner asks.
 - **TSG** is read from Zeitbike (`sports/zeitbike.py`, filed by Zeitbike's tags). It shows up only when Zeitbike marks pieces down.
