@@ -25923,14 +25923,14 @@
           }
         },
         "Exodus_Trucks": {
-          "count": 10,
+          "count": 9,
           "failed": false,
           "diagnostics": {
             "expected_count": 10.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 10,
-            "percentage_change": 0.0,
+            "actual_count": 9,
+            "percentage_change": -10.0,
             "reason": "normal_variation"
           }
         },
@@ -26643,14 +26643,14 @@
           }
         },
         "Tactics_Packs": {
-          "count": 26,
+          "count": 27,
           "failed": false,
           "diagnostics": {
             "expected_count": 26.0,
             "baseline_samples": 8,
             "median_absolute_deviation": 0.0,
-            "actual_count": 26,
-            "percentage_change": 0.0,
+            "actual_count": 27,
+            "percentage_change": 3.8,
             "reason": "normal_variation"
           }
         },
@@ -26751,14 +26751,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 309,
+          "count": 331,
           "failed": false,
           "diagnostics": {
             "expected_count": 266.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 4.5,
-            "actual_count": 309,
-            "percentage_change": 15.9,
+            "actual_count": 331,
+            "percentage_change": 24.2,
             "reason": "normal_variation"
           }
         },
@@ -26823,7 +26823,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-20T13:14:04+00:00"
+      "scanned_at": "2026-11-20T16:06:32+00:00"
     }
   ],
   "baseline": {
@@ -26965,7 +26965,7 @@
     },
     "Exodus_Trucks": {
       "date": "2026-11-20",
-      "count": 10
+      "count": 9
     },
     "Exodus_Wheels": {
       "date": "2026-11-20",
@@ -27033,7 +27033,7 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-20",
-      "count": 309
+      "count": 331
     },
     "SkateWarehouse_Completes": {
       "date": "2026-11-20",
@@ -27065,7 +27065,7 @@
     },
     "Tactics_Packs": {
       "date": "2026-11-20",
-      "count": 26
+      "count": 27
     },
     "Zumiez_Packs": {
       "date": "2026-11-20",
@@ -28504,7 +28504,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 10
+        "count": 9
       }
     ],
     "Exodus_Wheels": [
@@ -31688,7 +31688,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 26
+        "count": 27
       }
     ],
     "Tactics_Protection": [
@@ -32210,7 +32210,7 @@
       },
       {
         "date": "2026-11-20",
-        "count": 309
+        "count": 331
       }
     ],
     "Zumiez_Packs": [
