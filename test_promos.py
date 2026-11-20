@@ -53,6 +53,18 @@ class FindTests(unittest.TestCase):
             got = [(p["code"], p.get("percent"), p.get("amount"), p["ends"]) for p in promos.find(f"<p>{text}</p>", TODAY)]
             self.assertEqual(got, expected, text)
 
+    def test_nearest_discount_and_brand_scope(self):
+        # Zeitbike's promotions page, 2026-11-20: a headline "up to 60%" for
+        # dealers above the public 25% code, limited to one brand.
+        page = ("<h2>GET UP TO 60% OFF KNOG BIKE LOCKS</h2><p>Dealers: Please log in using your wholesale account to "
+                "see volume discounts up to 60%! Non Dealers: Get 25% Off on KNOG products. Enter discount code: "
+                "KNOG25.</p><h2>GET UP TO 45% OFF FREETOWN HELMETS &amp; TRAILERS</h2>")
+        found = promos.find(page, TODAY)
+        self.assertEqual(found, [{"code": "KNOG25", "ends": "", "percent": 25, "applies_to": "KNOG products"}])
+        self.assertEqual(promos.describe(found[0], code=False), "25% off KNOG products")
+        # "on all eligible products" is store-wide, not a scope.
+        self.assertNotIn("applies_to", promos.find(FANATIK_BF, TODAY)[0])
+
     def test_end_date_follows_its_own_code(self):
         page = ("<p>Pedals 40% off. Hurry, sale ends December 01, 2026!</p>"
                 "<p>Fanatik Black Friday: 20% off. Enter Code: 2026-BFCM-20 at checkout. Hurry, sale ends December 02, 2026!</p>")
