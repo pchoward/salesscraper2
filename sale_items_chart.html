@@ -11455,7 +11455,29 @@ function syncTypeSections(expandSpec) {
         const id = section.getAttribute("data-section") || "";
         if (show && expandSpec && SPEC_OPEN[id]) paintFilterSection(section, true);
     });
+    if (context && document.querySelector("#contextSpecs > [data-technical-field][data-rank]")) {
+        orderTechnicalSections(context, part);
+    }
     rememberFilterSections();
+}
+
+const builtTechnicalSections = new WeakMap();
+
+function orderTechnicalSections(context, part) {
+    if (!builtTechnicalSections.has(context)) {
+        builtTechnicalSections.set(context, Array.from(context.children));
+    }
+    const sections = builtTechnicalSections.get(context);
+    const prefix = part + ":";
+    // Stable sort keeps equal and unranked sections in their built order.
+    const ordered = sections.map(section => {
+        const entry = (section.dataset.rank || "").split(" ").find(value => value.startsWith(prefix));
+        return { section, rank: part === "all" || !entry ? Infinity : Number(entry.slice(prefix.length)) };
+    }).sort((a, b) => a.rank - b.rank);
+    ordered.forEach(({ section }, index) => {
+        const current = context.children[index];
+        if (current !== section) context.insertBefore(section, current);
+    });
 }
 
 function adoptSpecPart(stateKey) {
