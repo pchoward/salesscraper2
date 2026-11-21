@@ -43,7 +43,9 @@ async function main() {
                     return {search:{width:search.width,height:search.height,bottom:search.bottom,right:search.right,center:search.top+search.height/2},logoCenter:logo.top+logo.height/2,sportsTop:sports.top,utilityRight:utility?.right};
                 });
                 assert(width > 800 ? layout.search.width >= 320 && layout.search.width <= 650 : layout.search.width >= width-30,'search width must remain compact on desktop and usable on mobile');
-                assert(layout.search.height >= 30 && layout.search.height <= (width > 800 ? 34 : 38),'search height must stay close to the wordmark');
+                const [minSearchHeight,maxSearchHeight] = width > 800 ? [30,34] : [40,44];
+                assert(layout.search.height >= minSearchHeight && layout.search.height <= maxSearchHeight,
+                    `search height ${layout.search.height}px at ${width}px must be within ${minSearchHeight}–${maxSearchHeight}px`);
                 assert(layout.sportsTop >= layout.search.bottom,'sports must be on a separate row');
                 if (width > 800) {
                     assert(layout.utilityRight >= width-30,'utility controls must be at the far right');
