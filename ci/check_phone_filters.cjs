@@ -45,6 +45,7 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
    const count=await frame.locator('#statusCounts').boundingBox();
    assert(filter&&filter.height>=44,'Filters keeps a comfortable touch target');
    assert(group&&group.height>=44,'Group keeps a comfortable touch target');
+   assert(sort.width<=109&&sort.height>=44,'Sort is compact and keeps its touch target');
    assert(Math.abs(sort.y-group.y)<=1&&Math.abs(sort.y-filter.y)<=1,'browse controls share one row');
    assert(count.y>=sort.y&&count.y+count.height<=sort.y+sort.height,'result count shares the toolbar row');
    const controls=[count,sort,group,filter];

@@ -683,3 +683,89 @@
     .promo-strip[data-open="true"] .promo-offer { align-items:center; }
     .promo-strip[data-open="true"] .promo-offer + .promo-offer { border-top:1px solid var(--grey-200); }
 }
+
+/* Keep the original desktop formatting boxes and image measurements. */
+.card-photo, .card-trend { display:contents; }
+
+@media (max-width:640px) {
+    #stickyBar .nav-row { padding-block:1px; }
+    #stickyBar .tool-line {
+        padding-bottom:3px;
+    }
+    #stickyBar .sort-field select {
+        max-width:108px;
+        margin-left:auto;
+        appearance:none;
+        padding:0 21px 0 7px;
+        background-image:linear-gradient(45deg, transparent 50%, currentColor 50%),
+                         linear-gradient(135deg, currentColor 50%, transparent 50%);
+        background-position:right 12px center, right 8px center;
+        background-size:4px 4px;
+        background-repeat:no-repeat;
+        text-overflow:ellipsis;
+    }
+
+    #cardGrid .deal-card { padding-top:40px; gap:5px; }
+    #cardGrid .deal-card .star, #cardGrid .deal-card .card-alert {
+        top:2px;
+        min-height:36px;
+        border-radius:4px;
+    }
+    #cardGrid .deal-card .star { right:5px; width:36px; height:36px; }
+    #cardGrid .deal-card .card-alert {
+        left:5px;
+        padding:0 6px;
+        border-color:transparent;
+        color:var(--text-secondary);
+        box-shadow:none;
+    }
+    #cardGrid .deal-card .media {
+        display:grid;
+        grid-template-columns:minmax(0,1fr) auto;
+        gap:2px 4px;
+        aspect-ratio:auto;
+    }
+    .deal-card .card-photo {
+        grid-column:1/-1;
+        position:relative;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        width:100%;
+        min-width:0;
+        aspect-ratio:1/1;
+    }
+    #cardGrid .deal-card .store-mark {
+        position:static;
+        max-width:none;
+        padding:0;
+        background:none;
+        white-space:normal;
+        overflow-wrap:anywhere;
+        line-height:1.2;
+    }
+    #cardGrid .deal-card .card-quick {
+        position:relative;
+        inset:auto;
+        transform:none;
+        min-height:36px;
+        padding:0 5px;
+        border-radius:4px;
+        box-shadow:none;
+        font-size:11px;
+        color:var(--text-secondary);
+    }
+    .deal-card .card-trend {
+        display:grid;
+        grid-template-columns:auto minmax(0,1fr);
+        align-items:center;
+        column-gap:6px;
+        min-height:26px;
+    }
+    .deal-card .card-trend .card-offer { grid-column:1; grid-row:1; }
+    .deal-card .card-trend .card-sparkline { grid-column:2; grid-row:1; min-width:0; }
+    .deal-card .card-prices { gap:2px 4px; }
+    .deal-card .card-prices .now-price { order:-1; flex-basis:100%; font-size:15px; }
+    .deal-card .card-prices .avg-price { color:var(--text-secondary); font-weight:500; }
+    .deal-card .card-prices .price-sep { display:none; }
+}
