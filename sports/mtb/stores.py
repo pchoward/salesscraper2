@@ -262,7 +262,38 @@ BIKE_MART=shopify.ShopifyStore('Bike Mart','Bike Mart','https://www.bikemart.com
     types={},brand_of=brands.for_sport(sports.MTB),own_vendor='bike mart',
     title_part=title_part,type_part=bike_mart_part,raw_type_part=True,track_exclusions=True)
 
-STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES+(LOST_CO,BICYCLE_WAREHOUSE,BIKE_MART)
+# evo (owner, 2026-11-21; also a Ski store). Its sale collections read empty,
+# so its bike category collections are read, as on Ski; only marked-down
+# variants are listed. Store probe 2026-11-21: ~340 marked-down complete
+# bikes and e-MTBs, ~1,200 marked-down components (10 pages), plus helmets,
+# bike body armor, goggles and gloves. evo's "Pads" are brake pads; its bike
+# knee and elbow pads are "Body Armor". Its "body-armor" collection is snow
+# armor ("Armor": Burton impact shorts, wrist guards), read by the Ski store,
+# so it is left out here. Packs come from evo's Ski scrape, pooled (sports/packs.py).
+# Small parts, sealant, valves, cables and bar tape stay out.
+EVO_TYPES={
+ 'mountain completes':'Bikes','emountain completes':'Bikes','mountain frames':'Frames',
+ 'forks':'Forks & Shocks','rear shocks':'Forks & Shocks',
+ 'wheels':'Wheels','hubs':'Wheels','rims':'Wheels',
+ 'tires':'Tires','tubes':'Tires',
+ 'crank sets':'Drivetrain','cassettes':'Drivetrain','chains':'Drivetrain','rear derailleurs':'Drivetrain',
+ 'front derailleurs':'Drivetrain','shifters':'Drivetrain','bottom bracket':'Drivetrain','chainrings':'Drivetrain',
+ 'groupset':'Drivetrain','chain guides':'Drivetrain','bashguards':'Drivetrain',
+ 'pads':'Brakes','brakes front and rear':'Brakes','rotors':'Brakes','calipers':'Brakes',
+ 'handlebars':'Cockpit','stems':'Cockpit','grips':'Cockpit','headsets':'Cockpit','saddles':'Cockpit',
+ 'seatposts':'Cockpit','dropper seatposts':'Cockpit',
+ 'pedals':'Pedals',
+ 'bike helmets':'Protection','body armor':'Protection','bike goggles':'Protection',
+ 'bike gloves':'Protection',
+}
+EVO=shopify.ShopifyStore('evo','evo','https://www.evo.com',
+    collection='mountain-bikes',
+    more_collections=('electric-mountain-bikes','bike-components','mountain-bike-helmets','bike-goggles',
+                      'bike-body-armor','bike-gloves'),
+    types=EVO_TYPES,brand_of=brands.for_sport(sports.MTB),own_vendor='evo',track_exclusions=True,
+    max_pages=60)
+
+STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES+(LOST_CO,BICYCLE_WAREHOUSE,BIKE_MART,EVO)
 
 
 def robots_policy(store):
