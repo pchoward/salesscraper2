@@ -1,4 +1,4 @@
-name: CI - Pull Request Tests
+name: CI - Task 18 Rerun Validation
 
 on:
   # Also test stacked PRs whose base is another feature branch.
@@ -17,6 +17,7 @@ permissions:
 
 jobs:
   tests:
+    if: github.event_name == 'pull_request'
     name: Python and JavaScript regression tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -70,7 +71,7 @@ jobs:
   # Build once; reuse this inert site and its prebuilt fixtures in every group.
   preview-build:
     name: Build browser preview
-    if: github.event_name == 'pull_request' && vars.PR_PREVIEWS != 'off'
+    if: github.event_name == 'workflow_dispatch' && vars.PR_PREVIEWS != 'off'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -97,8 +98,8 @@ jobs:
           python ci/build_truck_fixtures.py "${{ runner.temp }}/browser-fixtures"
       - name: Record the PR this preview belongs to
         env:
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: 300
+          HEAD_SHA: ${{ github.sha }}
         run: |
           printf '{"number": %s, "head_sha": "%s"}\n' "$PR_NUMBER" "$HEAD_SHA" > preview/pr.json
       - uses: actions/upload-artifact@v4
@@ -154,6 +155,18 @@ jobs:
           path: ${{ runner.temp }}/browser-fixtures
       - name: Run browser group and record per-suite timings
         run: node ci/run_browser_shard.cjs "${{ matrix.group }}" preview/site review "${{ runner.temp }}/browser-fixtures"
+      - name: Force a failed audit-phone report on attempt one
+        if: matrix.group == 'audit-phone' && github.run_attempt == 1
+        run: |
+          node - <<'JS'
+          const fs = require('node:fs');
+          const path = 'review/timings/audit-phone.json';
+          const report = JSON.parse(fs.readFileSync(path));
+          report.tasks[0].status = 'fail';
+          report.tasks[0].code = 1;
+          fs.writeFileSync(path, JSON.stringify(report));
+          JS
+          exit 1
       # Failed-job reruns keep successful groups' artifacts. Replace only
       # the report from the group that ran again, under its original name.
       - name: Keep screenshots and timings even on failure
@@ -172,7 +185,7 @@ jobs:
   preview:
     name: Preview build and browser checks
     needs: [preview-build, browser]
-    if: always() && github.event_name == 'pull_request' && vars.PR_PREVIEWS != 'off'
+    if: always() && github.event_name == 'workflow_dispatch' && vars.PR_PREVIEWS != 'off'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     permissions:
