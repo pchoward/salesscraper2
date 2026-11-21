@@ -11297,18 +11297,24 @@ function syncTypeSections(expandSpec) {
     // Brand stays first. The chosen type's spec sections follow it.
     // All types shows Brand and the generic sections only. A section with
     // data-for stays hidden until that type is picked: Skate's specs, and
-    // Ski's technical specs (page.py stamps each field's categories, or
-    // every Ski heading when the field applies to all of them). BMX and
-    // MTB technical sections have no data-for; SportSpecFilters.sync still
-    // shows their All list.
+    // Ski and BMX technical specs (page.py stamps each field's categories,
+    // or every heading of that sport when the field applies to all of them).
+    // BMX Product kind has no data-for, so All keeps it. MTB technical
+    // sections have no data-for; SportSpecFilters.sync still shows that All list.
     if (context && brand && brand.parentNode) brand.parentNode.insertBefore(context, brand.nextSibling);
     else if (context && specGroup) specGroup.insertBefore(context, specGroup.firstChild);
     if (specs) specs.hidden = true;
     document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
         const owner = section.getAttribute("data-for") || "";
         // A section can serve several types ("Protection Helmets": size).
+        // Single-word types stay a space-split match. BMX headings are
+        // several words ("Frames & Forks"); match the whole heading so
+        // "Wheels" and "Wheels & Hubs" stay distinct.
         const native = section.getAttribute("data-section") === "trucknative";
-        const show = part !== "all" && owner.split(" ").indexOf(part) >= 0 && (!native || state.brand !== "all");
+        const owns = part !== "all" && (part.indexOf(" ") < 0
+            ? owner.split(" ").indexOf(part) >= 0
+            : (" " + owner + " ").indexOf(" " + part + " ") >= 0);
+        const show = owns && (!native || state.brand !== "all");
         if (native) section.querySelectorAll(".spec-chip").forEach(button => {
             const key = (button.getAttribute("data-value") || "").split(":")[0];
             button.hidden = !brandSame(TruckFit.brands[key] || key, state.brand);
