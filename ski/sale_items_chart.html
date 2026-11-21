@@ -3499,7 +3499,16 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 .catalog-live-price strong { color:#16703b; }
 @media(max-width:640px) { .catalog-live-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .catalog-live-card { padding:9px; } }
 </style>
-<style>/* Phone layout. page.py inlines this after page.css, so these rules win over
+<style>.mtb-power-chips {
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding: 0.25rem 0 0.55rem;
+}
+.mtb-power-chips[hidden] { display: none; }
+.mtb-power-chips button { flex: 0 0 auto; white-space: nowrap; }
+
+/* Phone layout. page.py inlines this after page.css, so these rules win over
    the earlier max-width: 800px blocks without editing them. Keep phone-only
    rules here so desktop work in page.css does not collide with them.
 
@@ -13346,6 +13355,7 @@ SkateSearch.configure({"_about":"Ski search vocabulary, in search/aliases.json's
                     const key=chip.dataset.techKey;
                     const picked=new Set(selected[key]||[]);
                     if(chip.dataset.value==='')picked.clear();
+                    else if(chip.hasAttribute('data-exclusive')){picked.clear();picked.add(chip.dataset.value);}
                     else if(picked.has(chip.dataset.value))picked.delete(chip.dataset.value);
                     else picked.add(chip.dataset.value);
                     const next={...selected};
@@ -14731,6 +14741,14 @@ function paintTechnicalCounts() {
         node.setAttribute("data-count", String(count));
         markFacetOption(node, count, value === "" || node.getAttribute("aria-pressed") === "true");
     });
+    const powerChips = document.getElementById("mtbPowerChips");
+    if (powerChips) {
+        const power = tally.power || {};
+        powerChips.hidden = !["Bikes", "Frames"].includes(state.part) || !power["E-MTB"] || !power.Regular;
+        if (!powerChips.hidden) {
+            powerChips.firstElementChild.firstChild.textContent = state.part === "Frames" ? "All frames " : "All bikes ";
+        }
+    }
     // A field with nothing left under the other filters folds away (Ski boot
     // fields once only Blizzard skis remain); SportSpecFilters.sync still
     // decides which fields a type shows.
