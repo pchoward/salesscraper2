@@ -17,6 +17,14 @@ from ci.build_preview import mark_preview
 from report import build_report_html
 
 
+def _fixture_promos(sport_id):
+    if sport_id != 'mtb':
+        return []
+    return [{'store': 'AuditFixture', 'code': 'FIXTURE20', 'percent': 20,
+             'url': 'https://example.test/sale', 'ends': ''}]
+
+
+@patch('promos.for_sport', new=_fixture_promos)
 def build(output):
     output = Path(output).resolve()
     if output.is_relative_to(ROOT):
@@ -49,9 +57,7 @@ def build(output):
             else:
                 item['technical_offers'] = [offer('sold', target, 50, False), offer('available', other)]
             items.append(item)
-        promo = {'store': 'AuditFixture', 'code': 'FIXTURE20', 'percent': 20,
-                 'url': 'https://example.test/sale', 'ends': ''}
-        with sport.active(), patch('promos.for_sport', return_value=[promo] if sport is sports.MTB else []):
+        with sport.active():
             html = build_report_html({'AuditFixture_' + part: items}, {}, {}, sport=sport,
                                      generated_at='2026-11-02T00:00:00+00:00')
         path = output / 'audit-fixtures' / sport.id / 'sale_items_chart.html'

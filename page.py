@@ -2838,12 +2838,12 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             head.append(
                 f'<th data-sort="{key}" onclick="sortBy(\'{key}\')">{escape(label)}</th>'
             )
-    chunks.append(_promo_strip(sport.id))
     chunks.append(
         '<div class="section" id="dealsSection">'
         '<h2 class="sr-only">All Deals</h2>'
         + '<div class="section-content">'
-        '<div id="emptyState" class="empty-state" hidden></div>'
+        + _promo_strip(sport.id)
+        + '<div id="emptyState" class="empty-state" hidden></div>'
     )
     chunks.append(f'<div class="table-wrap"><table id="mainTable"><thead><tr>{"".join(head)}</tr></thead><tbody>')
     # Each table row is only its <tr> with the data-* attributes page.js
