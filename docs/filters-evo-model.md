@@ -4,7 +4,7 @@ Owner, 2026-11-21. House rule on every sport: **Brand first, then that heading's
 
 This file is the order and the category scope for Claude. Field definitions and extraction stay in `sports/<sport>/facets.py` (and `sports/protection.py` where a sport shares those fields). The page does not reorder sections and does not override a field's categories.
 
-What the page already does for Ski and BMX: each technical section gets `data-for` from the field's categories (every menu heading of that sport when the category list is empty). `syncTypeSections` then hides those sections on All, and shows them once a heading is selected. Brand, Stores, Price & discount, and the deal sections (Deal quality, Deal type, Price-drop window) stay up on All. BMX Product kind is left unmarked, so All keeps that filter. MTB sections are unmarked, so its All list is unchanged. When Claude edits a Ski or BMX field's categories, All-vs-heading visibility follows on the next page build. **Order:** `sports/ski/facets.py` `ORDER` lists each heading's sections in order. `sports/facets.py` `sidebar()` stamps each section with `data-rank="Skis:2 Boots:6 …"`, its position on each heading that ranks it. The page sorts by the chosen heading (Codex task 19 in `docs/codex-backlog-2026-11-07.md`). Until that lands, sections keep the `FIELDS` tuple order.
+What the page already does for Ski, BMX, and MTB: each technical section gets `data-for` from the field's categories (every menu heading of that sport when the category list is empty). `syncTypeSections` then hides those sections on All, and shows them once a heading is selected. Brand, Stores, Price & discount, and the deal sections (Deal quality, Deal type, Price-drop window) stay up on All. BMX Product kind is left unmarked, so All keeps that filter. MTB has no Product kind field, so All does not keep one. When Claude edits a Ski, BMX, or MTB field's categories, All-vs-heading visibility follows on the next page build. **Order:** `sports/ski/facets.py` `ORDER` lists each heading's sections in order. `sports/facets.py` `sidebar()` stamps each section with `data-rank="Skis:2 Boots:6 …"`, its position on each heading that ranks it. The page sorts by the chosen heading (Codex task 19 in `docs/codex-backlog-2026-11-07.md`). Until that lands, sections keep the `FIELDS` tuple order.
 
 Coverage below is `catalogs/ski/previous_data.json` on 2026-11-21, counted after `sports.headings.heading` (stored parts stay Protection; the page shows Goggles and Helmets). A listing counts when `technical_specs` has a non-empty value. The live page also drops anything under the 10% minimum, so its totals sit a little lower (3,216 deals that day). Counts will move with the next scrape.
 
@@ -317,4 +317,154 @@ This PR does not change that order, and it does not add coverage chips or Kind c
 
 ## MTB, modelled on evo
 
-Placeholder for Claude. Same house rule, with evo's bike filters as the model. MTB fields already live in `sports/mtb/facets.py` (wheel size, travel, frame size, tire width, Motor, and the rest). Motor chips above the results are Codex task 17 (PR #302) and stay out of this work. This PR does not change MTB order or MTB's All list.
+Menu headings today: Bikes, Frames, Suspension, Wheels, Tires, Drivetrain, Brakes, Cockpit, Pedals, Helmets, Goggles, Gloves, Protection, Packs.
+
+House rule here: **Brand, then that heading's size filter, then the popular specs, Condition last.** Gender is only on Protection. evo has no frames group; Frames below is the bike list with rear travel and axle instead of fork travel and riding type.
+
+The names are evo's, read from evo's Constructor.io browse API. The suspension heading is **Forks & Shocks** in that model and in the stored category. The page heading is **Suspension** (`sports/headings.py` renames Forks & Shocks). This PR does not rename it. Fields that already list both names keep showing under Suspension.
+
+Coverage is `catalogs/mtb/previous_data.json` on 2026-11-21, counted after `sports.headings.heading` (stored Protection splits into Helmets, Goggles, Gloves, and Protection; stored Forks & Shocks shows as Suspension). 4,656 listings. A listing counts when `technical_specs` has a non-empty value. The page also drops listings the MTB rules reject (frame-protection kits, and anything under the minimum markdown), so its totals sit a little lower (4,603 of these 4,656). Counts will move with the next scrape.
+
+What the page does now: each spec section gets `data-for`. All keeps Brand, Stores, Price & discount, and the deal sections. MTB has no Product kind field, so All does not keep one. Condition and Riding type have empty categories, so they hide on All and show under every heading (a heading with no values still folds that section away). Order is still the one `FIELDS` tuple, on every heading:
+
+Condition, Motor, Suspension, Frame material, Wheel size, Suspension travel, Frame size, Tire width, Axle / spacing, Rotor diameter, Speed, Casing, Tubeless, Riding type, then Protects, Helmet type, Certification, Rotational protection, Size, Age.
+
+Several category lists still name the stored part next to the heading (`Forks & Shocks` with `Suspension`). The menu heading is in the list, so the section shows. Claude can drop the stored name when editing scope.
+
+Per-heading order is not in this PR. One `FIELDS` tuple cannot hold it (Ski already needed `ORDER`). Claude adds an MTB `ORDER` in `sports/mtb/facets.py` on the same shape as Ski. `sidebar()` will stamp `data-rank` from that. Until then, sections stay in the tuple order above.
+
+Motor chips above the results are Codex task 17 (PR #302) and are not part of this list. The Motor section here is the sidebar field `power`.
+
+### Bikes (205)
+
+e-MTB vs Regular is the Motor field.
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Frame size | `frame_size` / `mtb_frame` | S, M, L, XL, and Santa Cruz S1–S6 | Frames | 184 / 205 | reorder only. This heading's size filter |
+| 3 | Wheel size | `wheel_size` / `mtb_wheel` | 29, 27.5 | Frames, Forks & Shocks, Suspension, Wheels, Tires | 33 / 205 | reorder only. Thin here |
+| 4 | Motor | `power` / `mtb_motor` | E-MTB, Regular | Frames | 0 / 205 | exists. Field and scope landed in #306. Empty until the next scrape |
+| 5 | Suspension | `suspension` / `mtb_suspension` | the bike's suspension layout | Frames | 0 / 205 | exists. Same as Motor: #306, empty until the next scrape |
+| 6 | Frame material | `frame_material` / `mtb_material` | carbon, aluminum | Frames | 0 / 205 | exists. Same as Motor: #306, empty until the next scrape |
+| 7 | Fork Travel | `travel_mm` / `mtb_travel` | one number today (130, 140, 150, 160, 170). Not split into fork vs rear | Frames, Forks & Shocks, Suspension. Label today is "Suspension travel (mm)" | 32 / 205 have the mixed number | needs new data field from Claude. Split `travel_mm` into Fork Travel and Rear Travel. Do not add a third key |
+| 8 | Rear Travel | `travel_mm` / `mtb_travel` | same mixed number | Frames, as Rear Travel | same 32 / 205 | needs new data field from Claude. The other half of the split |
+| 9 | Riding type | `riding_type` / `mtb_ride` | enduro. The other values in the file (trail, downhill, dirt jump) are on helmets and pads | no other heading in this list. Empty categories, so every heading today | 1 / 205 | needs new data field from Claude. The key exists (7 listings in the whole file). Fill `riding_type`, do not add a second key, and scope it to Bikes |
+| 10 | Condition | `condition` / `mtb_condition` | Demo | the other headings in this model that list it. Empty categories, so every heading today, including Cockpit and Packs | 18 / 205 | reorder only. Last. Claude scopes it to the headings that list it |
+
+Drivetrain Speed is on Bikes today (14 / 205, all 12-speed) because `speed` includes Bikes. This list does not put it here. Claude should drop Bikes from `speed`.
+
+### Frames (53)
+
+26 of the 53 rows are frame-protection kits the page drops, and one is a time-trial module. 26 frames remain, 22 of them with a frame size. The counts below are the file, before that drop.
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Frame size | `frame_size` / `mtb_frame` | S, M, L, XL, S1–S6 | Bikes | 41 / 53 in the file. 22 / 26 frames the page keeps | reorder only. This heading's size filter |
+| 3 | Wheel size | `wheel_size` / `mtb_wheel` | 29, 27.5 | Bikes, Forks & Shocks, Wheels, Tires | 6 / 53 | reorder only. Thin |
+| 4 | Motor | `power` / `mtb_motor` | E-MTB, Regular | Bikes | 0 / 53 | exists. Empty until the next scrape, as on Bikes |
+| 5 | Suspension | `suspension` / `mtb_suspension` | the frame's layout | Bikes | 0 / 53 | exists. Empty until the next scrape |
+| 6 | Frame material | `frame_material` / `mtb_material` | carbon, aluminum | Bikes | 0 / 53 | exists. Empty until the next scrape |
+| 7 | Rear Travel | `travel_mm` / `mtb_travel` | 150, 220 on the five frames that have the mixed number | Bikes, as one of the two travel filters | 5 / 53 | needs new data field from Claude. Rear half of the `travel_mm` split. Fork Travel is not on this heading |
+| 8 | Axle Configuration | `axle` / `mtb_axle` | 12x148mm and the other spacings, on wheels today. Label today is "Axle / spacing" | Forks & Shocks, Suspension, Wheels | 0 / 53 | needs new data field from Claude. The key exists. Fill `axle` on frames, do not add a second key |
+| 9 | Condition | `condition` / `mtb_condition` | Demo | see Bikes | 0 / 53 | reorder only. Last, once Claude scopes it here |
+
+### Forks & Shocks (188)
+
+The page calls this heading Suspension. Wheel size, travel, and axle already include both `Forks & Shocks` and `Suspension`, so they show here.
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Wheel size | `wheel_size` / `mtb_wheel` | 29, 27.5 | Bikes, Frames, Wheels, Tires | 16 / 188 | reorder only. Thin. This heading's size filter |
+| 3 | Fork Travel | `travel_mm` / `mtb_travel` | 100–190. All 20 values are on fork-named rows. Shocks have none | Bikes, Frames, as the mixed travel number | 20 / 188 | needs new data field from Claude. Fork half of the `travel_mm` split. Rear Travel is not on this heading |
+| 4 | Axle Configuration | `axle` / `mtb_axle` | 15x110mm and the other spacings, on wheels today | Frames, Wheels | 0 / 188 | needs new data field from Claude. Fill `axle`, as on Frames |
+| 5 | Condition | `condition` / `mtb_condition` | Demo | see Bikes | 0 / 188 | reorder only. Last, once Claude scopes it here |
+
+### Wheels (326)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Wheel size | `wheel_size` / `mtb_wheel` | 29, 27.5, 26 | Bikes, Frames, Forks & Shocks, Tires | 132 / 326 | reorder only. This heading's size filter |
+| 3 | Axle Configuration | `axle` / `mtb_axle` | 12x148mm, 15x110mm, 12x157mm, 12x142mm, 12x100mm | Frames, Forks & Shocks | 26 / 326 | reorder only. The only heading with values today. Claude still fills frames and forks on this key |
+| 4 | Condition | `condition` / `mtb_condition` | Demo | see Bikes | 0 / 326 | reorder only. Last, once Claude scopes it here |
+
+### Tires (1,009)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Wheel size | `wheel_size` / `mtb_wheel` | 29, 27.5, 26 | Bikes, Frames, Forks & Shocks, Wheels | 917 / 1,009 | reorder only. Strong. This heading's size filter |
+| 3 | Width | `tire_width` / `mtb_tirewidth` | 2.4, 2.5, 2.6, 2.25. Label today is "Tire width (in)" | Tires | 816 / 1,009 | reorder only |
+| 4 | Casing | `casing` / `mtb_casing` | EXO, DH, EXO+, DoubleDown, Radial | Tires | 571 / 1,009 | reorder only |
+| 5 | Tubeless | `tubeless` / `mtb_tubeless` | Tubeless ready | Tires | 500 / 1,009 | reorder only |
+| 6 | Condition | `condition` / `mtb_condition` | Demo | see Bikes | 0 / 1,009 | reorder only. Last, once Claude scopes it here |
+
+### Drivetrain (877)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Drivetrain Speed | `speed` / `mtb_speed` | 12-speed, 11-speed, 10-speed, down to 7-speed. Label today is "Speed" | Bikes today. This list keeps it on Drivetrain only | 429 / 877 | reorder only. About half the heading. Claude drops Bikes from `speed` |
+| 3 | Spindle | — | the spindle a crank states | Drivetrain | 0 | needs new data field from Claude |
+| 4 | BB Interface | — | the bottom-bracket interface | Drivetrain | 0 | needs new data field from Claude. The file has bottom brackets and no interface value |
+| 5 | Condition | `condition` / `mtb_condition` | Demo | see Bikes | 0 / 877 | reorder only. Last, once Claude scopes it here |
+
+### Brakes (346)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Rotor diameter | `rotor_mm` / `mtb_rotor` | 140, 160, 180, 200, 203, 220. Label today is "Rotor diameter (mm)" | Brakes | 30 / 346 | needs new data field from Claude. The key exists and is thin. Fill `rotor_mm`, do not add a second key. 10 bikes and 3 frames also store a diameter; the field does not show those because its categories are Brakes only |
+| 3 | Condition | `condition` / `mtb_condition` | Demo | see Bikes | 0 / 346 | reorder only. Last, once Claude scopes it here |
+
+### Cockpit (828)
+
+No spec field has a value on this heading. Brand stays up. The rest is by kind, and none of those keys exist yet. Rough counts from the name and the store type, not from a spec: grips about 262, bars about 157, stems about 130, seatposts about 84, droppers about 73, saddles about 64, headsets about 58. There is no Product kind field. These rows are the filters for that kind, not an All-view type filter. Grips, plain seatposts, and headsets have no filter in this list. Condition is not on this heading.
+
+| Kind | Filters | Status |
+| --- | --- | --- |
+| Bars | Width, Clamp Diameter | needs new data field from Claude |
+| Stems | Length | needs new data field from Claude |
+| Droppers | Diameter, travel | needs new data field from Claude |
+| Saddles | Width | needs new data field from Claude |
+
+### Pedals (216)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Pedal Style | — | Platform, Clipless. Store types already say Flat and Clipless; nothing is extracted | Pedals | 0 / 216 | needs new data field from Claude |
+| 3 | Condition | `condition` / `mtb_condition` | Demo | see Bikes | 0 / 216 | reorder only. Last, once Claude scopes it here |
+
+### Helmets, Goggles, Gloves, Protection
+
+One order for these four. The shared protection fields (`prot_size`, `helmet_style`, `rotational`, `certification`, `age`, `protects`) are scoped today to Protection, Helmets, Goggles, and Gloves. A heading with none of a field's values folds that section away.
+
+| # | Filter | Field | Examples | Coverage | Status |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | all listings | exists |
+| 2 | Size | `prot_size` / `mtb_psize` | XS, S, M, L, XL, XXL | Helmets 249 / 258, Protection 204 / 224, Gloves 77 / 81, Goggles 4 / 24 | reorder only |
+| 3 | Helmet type | `helmet_style` / `mtb_helmet` | Half shell (trail), Full face, Half shell (skate / BMX) | Helmets 235 / 258. Protection, Gloves, and Goggles 0 | reorder only. Hidden on a heading that has none |
+| 4 | MIPS/Rotational | `rotational` / `mtb_rotational` | MIPS, Spherical, FLAD / 6D ODS, SPIN, Kineticore. Label today is "Rotational protection" | Helmets 184 / 258. The other three 0 | reorder only |
+| 5 | Certification | `certification` / `mtb_cert` | CPSC, EN 1078, ASTM F1952, EN 1621 | Helmets 160 / 258, Protection 113 / 224, Goggles 13 / 24. Gloves 0 | reorder only |
+| 6 | Gender | — | the gender a piece states | 0 | needs new data field from Claude. MTB has no gender field. Protection only, not the bike headings |
+| 7 | Age | `age` / `mtb_age` | Adult, Youth, Kids | Helmets 258 / 258, Protection 219 / 224, Gloves 81 / 81, Goggles 24 / 24 | reorder only |
+| 8 | Protects | `protects` / `mtb_protects` | Helmets, Knees, Elbows, Gloves, Goggles, and the other body parts | Helmets 258 / 258, Protection 223 / 224, Gloves 81 / 81, Goggles 24 / 24 | reorder only |
+| 9 | Condition | `condition` / `mtb_condition` | Demo. The 18 demos are bikes, so these four headings are 0 today | Helmets 0 / 258, Protection 0 / 224, Gloves 0 / 81, Goggles 0 / 24 | reorder only. Last. Empty categories show it here until Claude scopes it to these headings |
+
+### Packs (21)
+
+No spec field has a value. The heading stays Brand. Condition is not on this heading.
+
+### Color
+
+One MTB color field, shared the way Skate's color sections are shared. No color key exists today (0 listings). It needs a new data field from Claude. It is not on the per-heading lists above until that field exists and Claude sets its categories. An empty category list would hide it on All and show it under every heading, the same way Condition works today.
+
+### What Claude still extracts
+
+Split `travel_mm` into Fork Travel and Rear Travel. Fill Axle (`axle`) on frames and forks, and Rotor diameter (`rotor_mm`). Riding type coverage, scoped to Bikes. Pedal Style (Platform / Clipless). Bar width and clamp diameter, stem length, dropper diameter and travel, saddle width. Spindle and BB interface. Gender on Protection. An MTB color field. Scope Condition to the headings that list it (not Cockpit, not Packs). Per-heading `ORDER` in `sports/mtb/facets.py`. Drop Bikes from `speed`. Do not add a second key when one of these fields already exists.
+
+Motor, Suspension, and Frame material already exist (#306) and are scoped to Bikes and Frames. They are empty until the next scrape. This PR does not change that order, and it does not add coverage chips or Motor chips above the results.

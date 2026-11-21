@@ -840,19 +840,21 @@ function syncTypeSections(expandSpec) {
     // Brand stays first. The chosen type's spec sections follow it.
     // All types shows Brand and the generic sections only. A section with
     // data-for stays hidden until that type is picked: Skate's specs, and
-    // Ski and BMX technical specs (page.py stamps each field's categories,
-    // or every heading of that sport when the field applies to all of them).
-    // BMX Product kind has no data-for, so All keeps it. MTB technical
-    // sections have no data-for; SportSpecFilters.sync still shows that All list.
+    // Ski, BMX, and MTB technical specs (page.py stamps each field's
+    // categories, or every heading of that sport when the field applies to
+    // all of them). BMX Product kind has no data-for, so All keeps it.
+    // MTB has no Product kind field. Empty MTB categories (Condition,
+    // Riding type) list every menu heading, so they hide on All too.
     if (context && brand && brand.parentNode) brand.parentNode.insertBefore(context, brand.nextSibling);
     else if (context && specGroup) specGroup.insertBefore(context, specGroup.firstChild);
     if (specs) specs.hidden = true;
     document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
         const owner = section.getAttribute("data-for") || "";
         // A section can serve several types ("Protection Helmets": size).
-        // Single-word types stay a space-split match. BMX headings are
-        // several words ("Frames & Forks"); match the whole heading so
-        // "Wheels" and "Wheels & Hubs" stay distinct.
+        // Single-word types stay a space-split match. Headings of several
+        // words ("Frames & Forks", and the MTB store category "Forks &
+        // Shocks") match as a whole phrase so "Wheels" and "Wheels & Hubs"
+        // stay distinct. MTB's menu heading for that category is Suspension.
         const native = section.getAttribute("data-section") === "trucknative";
         const owns = part !== "all" && (part.indexOf(" ") < 0
             ? owner.split(" ").indexOf(part) >= 0
