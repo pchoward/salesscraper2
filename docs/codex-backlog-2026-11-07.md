@@ -295,3 +295,15 @@ Use `promos.for_sport(sport_id)` for a sport's list, and `promos.describe(promo,
 - picking E-MTB shows only e-bikes, the URL holds `mtb_motor=E-MTB`, and the sidebar's Motor shows the same choice;
 - Back restores All;
 - desktop and 390 px.
+## 18. Flaky MTB browser audit, and a stale summary after re-runs (owner, 2026-11-21)
+**Seen:** the same MTB checks in `ci/audit_sports.cjs` fail on unrelated PRs: #293, #296 and #297 (2026-11-19 to 21), each at a different width (430, 768, 1024, 1440). A straight re-run usually passes.
+- `mtb <width> Category, store, brand, search, sort and ranges`: **`locator.selectOption: Timeout 5000ms exceeded`** on `#sortSelect`. The select is found but isn't "visible and enabled" within 5 s.
+- `mtb <width> Technical combinations and variant price oracle`: actual rows are a small subset of expected (on #297 at 1024: 1 row where the oracle wanted 10). This looks like a knock-on effect: the previous check timed out partway and left filters applied, and this one started from that state.
+- Skate, BMX and Ski pass the same checks. MTB is the biggest catalog (about 4,300 rows after the 2026-11-19 scrapes), so a slow render or a busy main thread is the likely cause.
+
+**Wanted:**
+1. Find why `#sortSelect` on MTB isn't usable within 5 s: disabled during a re-render, covered, or the page still busy. Fix it in the page if the shopper sees it too (a sort box that can't be used for seconds is a real bug). Otherwise make the check wait for the page's own "ready" state instead of a fixed timeout.
+2. Make each audit check start from a clean state (reload or reset the filters), so one failure can't leave filters applied for the next.
+3. **Stale summary on re-run:** re-running only the failed browser groups (Actions "Re-run failed jobs") let every group pass, but "Preview build and browser checks" still failed. It read the earlier attempt's `audit-phone` result ("Fail / incomplete"). Only a full re-run clears it. Make the summary read the latest attempt's results.
+
+**Tests:** run the full browser checks three times on one PR, all green. A re-run of only the failed jobs after a forced failure turns the summary green.
