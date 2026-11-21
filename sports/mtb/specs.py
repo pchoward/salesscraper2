@@ -9,7 +9,59 @@ FIELDS={
  'frame_size':'Frame size','tire_width':'Tire width (in)',
  'axle':'Axle / spacing','rotor_mm':'Rotor diameter (mm)','riding_type':'Riding type',
  'speed':'Drivetrain speed','casing':'Tire casing','tubeless':'Tubeless','power':'Motor',
+ 'suspension':'Suspension','frame_material':'Frame material',
 }
+
+# Bike filters modelled on evo's (owner, 2026-11-21): suspension and frame
+# material, plus wheel size and travel from stated sources only.
+FULL='Full suspension'
+HARDTAIL='Hardtail'
+_FULL=re.compile(r'\bfull[\s-]*susp(?:ension)?\b|\bdual[\s-]*susp(?:ension)?\b|\be-full\b|\bfull[\s-]*sus\b',re.I)
+_HARDTAIL=re.compile(r'(?i:\bhard\s*tails?\b|\be-hardtail\b)|\bHT\b')  # Cannondale "Scalpel HT", "Habit HT"
+MATERIALS=(('Carbon',re.compile(r'\bcarbon\b|\bfact\s*\d+m\b',re.I)),
+           ('Alloy',re.compile(r'\b(?:alloy|aluminum|aluminium|alu)\b|\b(?:6061|6066|7005|6069)\b',re.I)),
+           ('Steel',re.compile(r'\b(?:steel|chromoly|cro-?mo|cromo|4130|reynolds\s*\d{3})\b',re.I)),
+           ('Titanium',re.compile(r'\btitanium\b|\bti\b(?=\s+(?:frame|hardtail))',re.I)))
+
+
+def _labeled_tags(tags):
+    """{"wheelsize": ['29"'], ...} from "key:value" tags (Fanatik's)."""
+    if isinstance(tags,str):tags=tags.split(',')
+    found={}
+    for tag in tags or ():
+        key,sep,value=str(tag).partition(':')
+        if sep and value.strip():found.setdefault(key.strip().lower(),[]).append(value.strip())
+    return found
+
+
+def suspension(name,product_type='',tags=(),travel=None):
+    """'Full suspension', 'Hardtail' or None, from the store's category,
+    tags or name; a stated rear travel means full suspension."""
+    if isinstance(tags,str):tags=tags.split(',')
+    text=' '.join([str(product_type or ''),str(name or '')]+[str(t) for t in tags or () if ':' not in str(t)])
+    if _HARDTAIL.search(text):return HARDTAIL
+    if _FULL.search(text) or travel:return FULL
+    return None
+
+
+def frame_material(name,product_type='',tags=(),body='',vendor=''):
+    """'Carbon', 'Alloy', 'Steel', 'Titanium' or None: a material tag
+    (Fanatik), the description's "Frame:" line, or the name."""
+    labeled=_labeled_tags(tags).get('material') or []
+    candidates=[' '.join(labeled)]
+    frame_line=re.search(r'\bframe(?:set)?\s*(?:material)?\s*:\s*([^.;\n]{0,80})',text(body),re.I) if body else None
+    if frame_line:candidates.append(frame_line[1])
+    candidates.append(str(name or ''))
+    # Santa Cruz and Juliana name the material in the model: "Vala C S",
+    # "Megatower 2 CC X0", "Chameleon 8 AL D".
+    if re.match(r'\s*(?:santa\s+cruz|juliana)\b',str(vendor or '')+' '+str(name or ''),re.I):
+        if re.search(r'\bCC?\b',str(name)):candidates.append('carbon')
+        elif re.search(r'\bAL\b',str(name)):candidates.append('alloy')
+    for source in candidates:
+        hits=[label for label,pattern in MATERIALS if pattern.search(source)]
+        if len(hits)==1:return hits[0]
+        if len(hits)>1:return None
+    return None
 
 # E-MTB or not (owner, 2026-11-21: "separate eMTB from regular ... a filter
 # up top"). Bikes and frames only. Evidence, strongest first: the store's
@@ -118,6 +170,16 @@ def number(value):
     except (InvalidOperation,ValueError):return None
 
 
+def table_rows(product):
+    """(label, value) pairs from a description's two-cell table rows."""
+    soup=BeautifulSoup(str(product.get('body_html') or ''),'html.parser')
+    rows=[]
+    for row in soup.select('tr'):
+        cells=row.find_all(['th','td'],recursive=False)
+        if len(cells)==2:rows.append((cells[0].get_text(' ',strip=True),cells[1].get_text(' ',strip=True)))
+    return rows
+
+
 def extract(product,variant,part):
     name=text(product.get('title',''))
     body=text(product.get('body_html',''))
@@ -145,7 +207,53 @@ def extract(product,variant,part):
         for m in re.finditer(r'(?<![\d.])'+NUMBER+r'\s*mm\b',name,re.I):
             if 50<=float(m[1])<=250 and not re.search(r'\boffset\s*[:=]?\s*$',name[:m.start()],re.I) and not re.match(r'\s*offset\b',name[m.end():],re.I):add('travel_mm',[number(m[1])])
     if part in ('Drivetrain','Bikes'):add('speed',[s+'-speed' for s in speeds(name)])
-    if part in ('Bikes','Frames'):add('power',[power(name,product.get('product_type',''),product.get('tags') or (),body)])
+    if part in ('Bikes','Frames'):
+        add('power',[power(name,product.get('product_type',''),product.get('tags') or (),body)])
+        labeled_tags=_labeled_tags(product.get('tags') or ())
+        # Fanatik's labeled tags: wheelsize:29", susptravel:150mm, axlesize:12x148mm Boost.
+        for value in labeled_tags.get('wheelsize',[]):
+            m=re.fullmatch(NUMBER+r'\s*["″”]?',value.strip())
+            if m and number(m[1]) in WHEELS:add('wheel_size',[number(m[1])])
+        for value in labeled_tags.get('susptravel',[]):
+            m=re.fullmatch(NUMBER+r'\s*mm',value.strip(),re.I)
+            if m and 50<=float(m[1])<=250:add('travel_mm',[number(m[1])])
+        for value in labeled_tags.get('axlesize',[]):
+            m=re.match(r'(\d{1,2})\s*[x×]\s*(\d{3})',value)
+            if m and m[2] in ('142','148','150','157'):add('axle',[m[1]+'x'+m[2]+'mm'])
+        # A store category like "Bikes - Full Suspension 29" states the wheel size.
+        kind=str(product.get('product_type',''))
+        m=re.search(r'(?<![\d.])(27\.5|29|26)(?![\d.])',kind)
+        if m and re.search(r'bike|frame|suspension|hardtail',kind,re.I):add('wheel_size',[m[1]])
+        # "Rear travel: 150mm", "150mm of rear travel" in the description. A
+        # bare "160mm of travel" is often the fork's, so it isn't used.
+        for m in re.finditer(r'\brear\s+(?:wheel\s+)?travel\s*[:\-]?\s*'+NUMBER+r'\s*mm\b|'+NUMBER+r'\s*mm\s+(?:of\s+)?rear\s+(?:wheel\s+)?travel\b',body,re.I):
+            value=m[1] or m[2]
+            if 50<=float(value)<=250:add('travel_mm',[number(value)])
+        # Spec-table rows (Mike's Bikes): "Rear Shock | FOX Float X, 205x60",
+        # "Frame | ... carbon ...", "Tires | Maxxis ... 29 x 2.5".
+        rear_shock=frame_row=None
+        fork_row=False
+        for label,raw in table_rows(product):
+            low=' '.join(re.sub(r'[^a-z0-9 ]',' ',str(label).lower()).split())
+            value=text(raw).strip()
+            if low in ('rear shock','shock') and value and not re.fullmatch(r'(?i)n\s*/?\s*a|none|-+|rigid',value):
+                rear_shock=value
+                m=re.search(NUMBER+r'\s*mm\s+travel\b',value,re.I)
+                if m and 50<=float(m[1])<=250:add('travel_mm',[number(m[1])])
+            elif low in ('frame','frameset','frame material'):frame_row=value
+            elif low in ('fork','suspension fork','front suspension') and value:fork_row=True
+            elif low in ('tires','tire','front tire','rear tire','tyres'):
+                for m in re.finditer(r'(?<![\d.])'+NUMBER+r'\s*["″”]?\s*[x×]\s*'+NUMBER,value):
+                    if number(m[1]) in WHEELS:add('wheel_size',[number(m[1])])
+        kind_of=suspension(name,kind,product.get('tags') or (),specs.get('travel_mm') or rear_shock)
+        # A spec table with a fork and no rear shock is a hardtail's.
+        if kind_of is None and fork_row and not rear_shock:kind_of=HARDTAIL
+        add('suspension',[kind_of])
+        # Travel means rear-wheel travel; a hardtail's numbers are its fork's.
+        if kind_of==HARDTAIL:specs.pop('travel_mm',None)
+        add('frame_material',[frame_material(name,kind,product.get('tags') or (),
+                                             ('Frame: '+frame_row) if frame_row else product.get('body_html',''),
+                                             product.get('vendor',''))])
     if part=='Tires' and not _NOT_A_TIRE.search(name):
         add('casing',casings(name))
         if tubeless(name):add('tubeless',['Tubeless ready'])

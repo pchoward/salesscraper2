@@ -5,6 +5,9 @@ FIELDS = (
     {"key": "condition", "label": "Condition", "param": "mtb_condition", "categories": ()},  # Demo (2026-11-12)
     # E-MTB or Regular (owner, 2026-11-21), first among the bike filters.
     {"key": "power", "label": "Motor", "param": "mtb_motor", "categories": ("Bikes", "Frames")},
+    # Evo-style bike filters (owner, 2026-11-21).
+    {"key": "suspension", "label": "Suspension", "param": "mtb_suspension", "categories": ("Bikes", "Frames")},
+    {"key": "frame_material", "label": "Frame material", "param": "mtb_material", "categories": ("Bikes", "Frames")},
     {"key": "wheel_size", "label": "Wheel size (in)", "param": "mtb_wheel", "categories": ("Bikes", "Frames", "Forks & Shocks", "Suspension", "Wheels", "Tires")},
     {"key": "travel_mm", "label": "Suspension travel (mm)", "param": "mtb_travel", "categories": ("Bikes", "Frames", "Forks & Shocks", "Suspension")},
     {"key": "frame_size", "label": "Frame size", "param": "mtb_frame", "categories": ("Bikes", "Frames")},
