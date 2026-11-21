@@ -282,6 +282,20 @@ class CompletenessTests(unittest.TestCase):
                 self.assertFalse(result["failed"])
                 self.assertEqual(result["diagnostics"]["reason"], "normal_variation")
 
+    def test_drop_explained_by_a_rule_change_is_normal(self):
+        """Owner, 2026-11-21: 26 RideWrap kits left MTB Frames by rule (39 -> 13);
+        the guard kept the old rows every night until it knew the drop was meant."""
+        state = self.history([39, 39, 39, 39])
+        self.assertTrue(self.assess(state, 13)["suspect"])
+        result = assess_run({DECK: [{} for _ in range(13)]}, (), state, "2026-10-01", rule_excluded={DECK: 26})[DECK]
+        self.assertFalse(result["failed"])
+        self.assertEqual(result["diagnostics"]["reason"], "normal_variation")
+        self.assertEqual(result["diagnostics"]["expected_count"], 13)
+        self.assertEqual(result["diagnostics"]["rule_excluded"], 26)
+        # A real failed read on top of the rule change is still caught.
+        result = assess_run({DECK: [{} for _ in range(2)]}, (), state, "2026-10-01", rule_excluded={DECK: 26})[DECK]
+        self.assertTrue(result["suspect"])
+
     def test_partial_and_empty_category_drops_have_diagnostics_and_immediate_warnings(self):
         state = self.history([100, 98, 102, 100])
         for actual, reason in [(20, "partial_catalog_drop"), (0, "empty_catalog_drop")]:

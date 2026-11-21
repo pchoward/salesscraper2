@@ -23,5 +23,18 @@ class FrameTests(unittest.TestCase):
             self.assertIsNone(filter_reason(name, "Frames", product_type=kind), name)
 
 
+class GuardTests(unittest.TestCase):
+    def test_rule_excluded_counts_last_runs_frame_kits(self):
+        import pipeline
+        import sports
+        previous = {"Fanatik_Frames": [
+            {"name": "RideWrap Ripley Gen 4 Frame Protection Kit", "part": "Frames", "product_type": "Frame Protection",
+             "price_new": "60", "price_old": "100"},
+            {"name": "Transition Sentinel Carbon Frame - 2026", "part": "Frames", "product_type": "Trail/AM Frames",
+             "price_new": "2400", "price_old": "3800"}]}
+        with sports.MTB.active():
+            self.assertEqual(pipeline.rule_excluded_counts(previous), {"Fanatik_Frames": 1})
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -26,6 +26,29 @@ def _day(today):
     return str(today)
 
 
+def rule_excluded_counts(previous_data):
+    """{key: n} last run's listings that today's rules leave out (a rule
+    change, not a failed read). Uses the active sport's rules; never raises."""
+    from filters import filter_reason
+    counts = {}
+    for key, items in (previous_data or {}).items():
+        if not isinstance(items, list):
+            continue
+        n = 0
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+            try:
+                if filter_reason(item.get("name"), item.get("part"), item.get("url") or "", item.get("price_new"),
+                                 item.get("price_old"), "", item.get("product_type") or ""):
+                    n += 1
+            except Exception:
+                continue
+        if n:
+            counts[key] = n
+    return counts
+
+
 def prepare_run(current_data, failed_keys, previous_data, health, today=None):
     """Classify raw fetches and retain unsafe categories before any catalog diff.
 
@@ -37,7 +60,8 @@ def prepare_run(current_data, failed_keys, previous_data, health, today=None):
     failed_keys = set(failed_keys or [])
     suspect_keys = {key for key in empty_store_keys(current_data, failed_keys, health)
                     if key not in failed_keys and isinstance(current_data.get(key), list)}
-    results = assess_run(current_data, failed_keys, health, day, suspect_keys)
+    results = assess_run(current_data, failed_keys, health, day, suspect_keys,
+                         rule_excluded=rule_excluded_counts(previous_data))
     failed = {key for key, result in results.items() if result["failed"]}
     prepared = {key: list(items) if isinstance(items, list) else items
                 for key, items in (current_data or {}).items()}
