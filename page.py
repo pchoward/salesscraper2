@@ -16,6 +16,7 @@ from urllib.parse import parse_qs, quote, urlsplit
 from html import escape
 from zoneinfo import ZoneInfo
 
+import promos
 import sports
 from media import product_image_urls
 from badges import classify_badges
@@ -1489,6 +1490,37 @@ def _plural(count, singular, plural):
     return f"{count} {singular if count == 1 else plural}"
 
 
+def _promo_strip(sport_id):
+    today = datetime.date.today().isoformat()
+    rows = []
+    for promo in promos.for_sport(sport_id):
+        ends = promo.get("ends") or ""
+        if ends and ends < today:
+            continue
+        store, code, url = (promo.get(key) or "" for key in ("store", "code", "url"))
+        if not store or not code or urlsplit(url).scheme not in {"http", "https"}:
+            continue
+        identity = escape(json.dumps([store, code]), quote=True)
+        rows.append(
+            f'<div class="promo-offer" data-promo-id="{identity}" data-ends="{escape(ends, quote=True)}">'
+            f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{escape(store)}</a>'
+            f'<span>{escape(promos.describe(promo, code=False))} applied at checkout</span>'
+            f'<code>{escape(code)}</code>'
+            f'<button type="button" data-copy-promo aria-label="Copy {escape(code, quote=True)}">Copy</button>'
+            f'<button type="button" data-dismiss-promo aria-label="Dismiss {escape(code, quote=True)}">Dismiss</button>'
+            '</div>'
+        )
+    if not rows:
+        return ""
+    return (
+        '<section id="promoStrip" class="promo-strip" aria-labelledby="promoTitle" hidden>'
+        '<strong id="promoTitle">Promo codes</strong><div id="promoOffers">'
+        + "".join(rows) + '</div>'
+        '<button type="button" id="promoMore" aria-expanded="false" aria-controls="promoOffers" hidden></button>'
+        '<span class="sr-only" role="status" id="promoStatus"></span></section>'
+    )
+
+
 def render_page(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None, sport=None):
     from report import build_digest
 
@@ -2806,6 +2838,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             head.append(
                 f'<th data-sort="{key}" onclick="sortBy(\'{key}\')">{escape(label)}</th>'
             )
+    chunks.append(_promo_strip(sport.id))
     chunks.append(
         '<div class="section" id="dealsSection">'
         '<h2 class="sr-only">All Deals</h2>'

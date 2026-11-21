@@ -7,6 +7,7 @@ import copy
 import json
 from pathlib import Path
 import sys
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -48,7 +49,9 @@ def build(output):
             else:
                 item['technical_offers'] = [offer('sold', target, 50, False), offer('available', other)]
             items.append(item)
-        with sport.active():
+        promo = {'store': 'AuditFixture', 'code': 'FIXTURE20', 'percent': 20,
+                 'url': 'https://example.test/sale', 'ends': ''}
+        with sport.active(), patch('promos.for_sport', return_value=[promo] if sport is sports.MTB else []):
             html = build_report_html({'AuditFixture_' + part: items}, {}, {}, sport=sport,
                                      generated_at='2026-11-02T00:00:00+00:00')
         path = output / 'audit-fixtures' / sport.id / 'sale_items_chart.html'
