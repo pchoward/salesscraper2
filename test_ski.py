@@ -72,7 +72,8 @@ class GearWestTests(unittest.TestCase):
         bent = kept["Atomic Bent 110 Skis 2026"]
         self.assertEqual([(offer["variant_id"], offer["price"], offer["specs"]["length"]) for offer in bent["technical_offers"]],
                          [(1, 499.99, ["170–179 cm"]), (2, 499.99, ["180–189 cm"])], "one offer per buyable sale length, grouped")
-        self.assertEqual(bent["technical_specs"], {"gender": ["Men"], "length": ["170–179 cm", "180–189 cm"], "ski_type": ["Park & Freestyle"]})
+        self.assertEqual(bent["technical_specs"], {"gender": ["Men"], "length": ["170–179 cm", "180–189 cm"], "ski_type": ["Park & Freestyle"],
+                                                   "waist": ["105–114 mm"]})  # "Bent 110": model-number waist
         boots = kept["Nordica Speedmachine 3 110 Ski Boots"]
         self.assertEqual([offer["specs"]["mondo"] for offer in boots["technical_offers"]], [["26.5"], ["27.5"]])
         self.assertNotIn("ski_type", boots["technical_specs"], "no type unless the store states one")

@@ -6,7 +6,7 @@ FIELDS = (
     {"key": "condition", "label": "Condition", "param": "ski_condition", "categories": ()},  # Demo (2026-11-12)
     {"key": "ski_type", "label": "Type", "param": "ski_type", "categories": ("Skis", "Boots", "Bindings")},
     {"key": "length", "label": "Ski length", "param": "ski_length", "categories": ("Skis", "Poles")},
-    {"key": "waist", "label": "Waist width", "param": "ski_waist", "categories": ("Skis",)},
+    {"key": "waist", "label": "Waist width (stated or model number)", "param": "ski_waist", "categories": ("Skis",)},
     {"key": "radius", "label": "Turn radius", "param": "ski_radius", "categories": ("Skis",)},
     {"key": "rocker", "label": "Rocker profile", "param": "ski_rocker", "categories": ("Skis",)},
     {"key": "bindings", "label": "Bindings", "param": "ski_bindings", "categories": ("Skis",)},

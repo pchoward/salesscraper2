@@ -28,7 +28,7 @@ class TheHouseTests(unittest.TestCase):
         self.assertEqual((ski["url"], ski["price_new"], ski["price_old"], ski["brand"]),
                          ("https://www.the-house.com/11.html", "359.99", "599.98", "Line"))
         self.assertEqual(ski["image"], "https://img.example/11_1.jpg?sw=400")
-        self.assertEqual(ski["technical_specs"], {"ski_type": ["Park & Freestyle"]})
+        self.assertEqual(ski["technical_specs"], {"ski_type": ["Park & Freestyle"], "waist": ["95–104 mm"]})  # model-number waist
         boots = self.parse("Boots")
         self.assertEqual([item["name"] for item in boots], ["Atomic Hawx Prime 100 Womens Ski Boots"])
         self.assertEqual(boots[0]["technical_specs"], {"flex": ["Medium (80–100)"], "gender": ["Women"]})
