@@ -524,6 +524,8 @@
     #stickyBar .nav-cluster::-webkit-scrollbar, #stickyBar .lede.digest::-webkit-scrollbar { display:block; height:3px; }
     #stickyBar .nav-cluster::-webkit-scrollbar-thumb, #stickyBar .lede.digest::-webkit-scrollbar-thumb { background:#bac4d0; border-radius:3px; }
     #stickyBar .quick-chip, #stickyBar .change-btn { scroll-snap-align:start; }
+    #stickyBar #storeFilters { mask-image:linear-gradient(to right, #000 calc(100% - 16px), transparent); }
+    #stickyBar #storeFilters .quick-row::after { content:""; flex:0 0 16px; }
     #stickyBar .change-btn { min-height:34px; padding-inline:6px; }
     #stickyBar .crumbs {
         grid-column:1/3;
