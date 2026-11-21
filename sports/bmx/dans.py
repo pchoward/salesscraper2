@@ -181,3 +181,107 @@ def description_fields(text, part):
         if len(axles) == 1:
             fields["axle"] = axles
     return fields
+
+
+# ---- Dan's Comp filters by product kind (owner, 2026-11-21) ------------------
+# Sprocket teeth, crank length, tire size, hub holes and driver, seat style,
+# stem type and reach, fork offset. The same stated-only rule as above: the
+# title or a variant's option, or a description that names exactly one value.
+# The kind decides what a generic "Size" option means (25T on a sprocket,
+# 170mm on a crank, 20x2.35 on a tire, 50mm on a stem).
+
+SEAT_STYLES = (("Pivotal", re.compile(r"\bpivotal\b", re.I)), ("Tripod", re.compile(r"\btripod\b", re.I)),
+               ("Railed", re.compile(r"\brail(?:ed|s)?\b(?!\s*clamps?\b)", re.I)))
+STEM_TYPES = (("Front load", re.compile(r"\bfront[\s-]*load\b", re.I)), ("Top load", re.compile(r"\btop[\s-]*load\b", re.I)))
+_TEETH_TITLE = re.compile(r"(?<![\d.])(\d{2})\s?t(?:ooth|eeth)?\b", re.I)
+_TEETH_OPTION = re.compile(r"^\s*(\d{2})\s?(?:t(?:ooth|eeth)?\b|\s+\d/\d|$)", re.I)    # 25T, 37, 37 3/8
+_TIRE_SIZE = re.compile(r"(?<![\d.])(12|14|16|18|20|22|24|26)\s?[x×]\s?(\d\.\d{1,2})\b")
+_HOLES = re.compile(r"(?<![\d.])(20|28|32|36|48)\s?h(?:oles?)?\b", re.I)
+_DRIVER = (re.compile(r"(?<![\d.])(\d{1,2})\s?t\s*(?:driver|cog)\b", re.I),
+           re.compile(r"\bdriver\s*[:=\-]?\s*(\d{1,2})\s?t\b", re.I))
+_OFFSET = (re.compile(r"(?<![\d.])(\d{2})\s?mm\s+(?:of\s+)?offset\b", re.I),
+           re.compile(r"\boffset\s*[:=\-]?\s*(\d{2})\s?mm\b", re.I))
+_MM_OPTION = re.compile(r"^\s*(\d{2,3}(?:\.\d)?)\s?mm\s*$", re.I)
+
+
+def _one(labels):
+    labels = set(labels)
+    return labels.pop() if len(labels) == 1 else None
+
+
+def _width(value):
+    return f"{float(value):.2f}".rstrip("0").rstrip(".") + '"'
+
+
+def kind_fields(kind, title, text=""):
+    """Listing-wide Dan's filters for this kind of part."""
+    title, text = str(title or ""), " ".join(str(text or "").split())
+    fields = {}
+
+    def stated(found_in_title, found_in_text):
+        """The title's single value, else the description's single value."""
+        return _one(found_in_title) or (None if found_in_title else _one(found_in_text))
+
+    if kind == "Sprockets":
+        value = stated([m for m in _TEETH_TITLE.findall(title) if 15 <= int(m) <= 60],
+                       [m for m in _TEETH_TITLE.findall(text) if 15 <= int(m) <= 60])
+        if value:
+            fields["teeth"] = [f"{int(value)}T"]
+    elif kind == "Tires":
+        value = stated([w for _, w in _TIRE_SIZE.findall(title)], [w for _, w in _TIRE_SIZE.findall(text)])
+        if value:
+            fields["tire_width"] = [_width(value)]
+    elif kind == "Seats":
+        style = stated([label for label, p in SEAT_STYLES if p.search(title)],
+                       [label for label, p in SEAT_STYLES if p.search(text)])
+        if style:
+            fields["seat_style"] = [style]
+    elif kind == "Stems":
+        load = stated([label for label, p in STEM_TYPES if p.search(title)],
+                      [label for label, p in STEM_TYPES if p.search(text)])
+        if load:
+            fields["stem_type"] = [load]
+    elif kind in ("Hubs", "Wheels"):
+        holes = _one(_HOLES.findall(title))
+        if holes:
+            fields["hub_holes"] = [f"{holes}H"]
+        driver = stated([m for p in _DRIVER for m in p.findall(title) if 6 <= int(m) <= 12],
+                        [m for p in _DRIVER for m in p.findall(text) if 6 <= int(m) <= 12])
+        if driver:
+            fields["driver"] = [f"{int(driver)}T"]
+    elif kind == "Forks":
+        offset = stated([m for p in _OFFSET for m in p.findall(title) if 15 <= int(m) <= 35],
+                        [m for p in _OFFSET for m in p.findall(text) if 15 <= int(m) <= 35])
+        if offset:
+            fields["fork_offset"] = [f"{int(offset)} mm"]
+    return fields
+
+
+def kind_variant_fields(kind, product, variant):
+    """Dan's filters a variant's options state, read by this kind of part."""
+    fields = {}
+    for name, value in _options(product, variant):
+        if "colo" in name:
+            continue
+        if kind == "Sprockets" and name in ("size", "teeth", "tooth count", "gear", "options"):
+            match = _TEETH_OPTION.match(value)
+            if match and 15 <= int(match.group(1)) <= 60:
+                fields.setdefault("teeth", set()).add(f"{int(match.group(1))}T")
+        elif kind == "Cranks" and name in ("size", "length", "crank length", "arm length", "options"):
+            match = _MM_OPTION.match(value)
+            if match and 140 <= float(match.group(1)) <= 185:
+                fields.setdefault("crank_length", set()).add(match.group(1).rstrip("0").rstrip(".") + " mm"
+                                                             if "." in match.group(1) else match.group(1) + " mm")
+        elif kind == "Tires":
+            match = _TIRE_SIZE.search(value)
+            if match:
+                fields.setdefault("tire_width", set()).add(_width(match.group(2)))
+        elif kind in ("Hubs", "Wheels"):
+            holes = _HOLES.findall(value)
+            if len(set(holes)) == 1:
+                fields.setdefault("hub_holes", set()).add(f"{holes[0]}H")
+        elif kind == "Stems" and name in ("size", "reach", "length", "stem reach", "options"):
+            match = _MM_OPTION.match(value)
+            if match and 25 <= float(match.group(1)) <= 75:
+                fields.setdefault("stem_reach", set()).add(f"{int(float(match.group(1)))} mm")
+    return {key: sorted(values) for key, values in fields.items()}
