@@ -1521,6 +1521,24 @@ def _promo_strip(sport_id):
     )
 
 
+def ski_section_owners(key):
+    """Space-separated headings for one Ski spec section's ``data-for``.
+
+    The field's own categories, or every Ski menu heading when the field
+    applies to all of them. ``syncTypeSections`` hides a ``data-for`` section
+    while All is selected. An unknown key returns "" so the section is left
+    unmarked.
+    """
+    from sports.headings import headings
+    from sports.ski.facets import FIELDS
+
+    field = next((item for item in FIELDS if item.get("key") == key), None)
+    if field is None:
+        return ""
+    owners = tuple(field.get("categories") or ()) or headings(sports.SKI)
+    return " ".join(owners)
+
+
 def render_page(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None, sport=None):
     from report import build_digest
 
@@ -2586,7 +2604,16 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     )
     if sport.facets:
         from sports.facets import sidebar
-        context_specs = sidebar(data, _section, sport)
+
+        def _sidebar_section(section_id, label, body, open_default=False, for_part="", tip=""):
+            # Ski spec sections use the same data-for gate as Skate. All stays
+            # Brand plus the generic sections; a heading shows its own specs.
+            # BMX and MTB are left unmarked, so their All list stays as it is.
+            if sport.id == "ski" and str(section_id).startswith("tech-") and not for_part:
+                for_part = ski_section_owners(section_id[len("tech-"):])
+            return _section(section_id, label, body, open_default=open_default, for_part=for_part, tip=tip)
+
+        context_specs = sidebar(data, _sidebar_section, sport)
     store_facet = '<p class="section-note">Choose one or more stores.</p><div id="storeList" role="group" aria-label="Stores">' + ''.join(
         '<button type="button" class="facet-value store-choice" data-store="' + escape(store, quote=True) + '" '
         + 'aria-pressed="' + ('true' if store == 'all' else 'false') + '"><span class="store-check" aria-hidden="true"></span>'
