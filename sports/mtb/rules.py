@@ -20,7 +20,7 @@ _RULES=(
 # Road groups and tires named without the word "road" (2026-11-11, Bike Mart's
 # parts sale): Campagnolo and its groups, Shimano 105, GP5000, Schwalbe One.
 _NOT_MTB=(r'\b(?:campagnolo|campy|super\s+record|chorus|centaur|ekar|shimano\s+105|gp\s*5000|grand\s+prix|gatorskin|'
-          r'schwalbe\s+one|pro\s+one|corsa|aero\s+(?:bars?|wheels?)|time\s+trial|tt\s+bars?)\b|'
+          r'schwalbe\s+one|pro\s+one|corsa|aero\s+(?:bars?|wheels?)|time\s+trial|tt\s+bars?|shiv|tt\s+(?:disc\s+)?module)\b|'
           r'\b(?:road|gravel|cyclocross|triathlon|bmx|commuter|ultegra|dura[- ]?ace|tiagra|sora|claris|grx|'
           r'rival|(?:force|red)\s+(?:axs|etap|22)|xplr|sram\s+red)\b|\b700\s*(?:c\b|x\s*\d)|(?<![\d.])\d{2}(?:-\d{2})?c\b|\bdrop[- ]bars?\b|\b(?:bar|handlebar)\s+tape\b')
 
@@ -61,4 +61,13 @@ def filter_reason(name,part,url='',price_new=None,price_old=None,description='',
     if part=='Protection':text=re.sub(r'\bbmx\b',' ',text,flags=re.I)
     if re.search(_NOT_MTB,text,re.I):
         return 'explicit non-MTB equipment'
+    # Frame protection kits, number plates and other frame add-ons are filed
+    # under Frames by some shops (Fanatik's "Frame Protection" type, RideWrap
+    # kits; The Lost Co.'s ODI number plate). They aren't frames, and MTB has
+    # no accessories heading, so they stay out (owner, 2026-11-21).
+    if part=='Frames' and re.search(
+            r'\bframe\s+protection\b|\bridewrap\b|\bprotection\s+kit\b|\bnumber\s+plates?\b|\bframe\s+(?:guards?|tape|wraps?|'
+            r'decals?|stickers?)\b|\bdown\s*tube\s+(?:guards?|protectors?)\b|\bchain\s*stay\s+(?:guards?|protectors?)\b',
+            str(name)+' '+str(product_type),re.I):
+        return 'frame accessory, not a frame'
     return None
