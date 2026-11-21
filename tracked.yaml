@@ -19,6 +19,17 @@ sneakers:
       - PopCush
       - Pop Cush
       - Popcush
+  # Vans' skate line (Skate Classics, pro models), owner 2026-11-21.
+  # Most names start "Vans Skate"; the rest say so in the description.
+  - id: vans-skate
+    brand: Vans
+    all:
+      - Vans
+    any:
+      - Vans Skate
+      - Skate Classics
+      - Skate Shoe
+      - Skateboard Shoe
   - id: nike-sb-dunk
     brand: Nike
     all:

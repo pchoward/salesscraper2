@@ -23,8 +23,8 @@ class TrackedCatalogTests(unittest.TestCase):
     def test_yaml_file_loads_the_sneaker_rules(self):
         catalog = load_tracked()
         ids = [rule["id"] for rule in catalog["sneakers"]]
-        self.assertEqual(ids, ["vans-wafflecup", "vans-popcush", "nike-sb-dunk"])
-        self.assertEqual([rule["brand"] for rule in catalog["sneakers"]], ["Vans", "Vans", "Nike"])
+        self.assertEqual(ids, ["vans-wafflecup", "vans-popcush", "vans-skate", "nike-sb-dunk"])
+        self.assertEqual([rule["brand"] for rule in catalog["sneakers"]], ["Vans", "Vans", "Vans", "Nike"])
         self.assertIn("grip tape", catalog["phrases"])
         self.assertIn("Hardware", catalog["types"])
 
@@ -90,12 +90,16 @@ sneakers:
         self.assertIsNone(
             filter_reason("Vans Skate Old Skool popcush Shoes", "Sneakers", price_new="59", price_old="85")
         )
+        # Vans' whole skate line is tracked since 2026-11-21; other shoes still aren't.
+        self.assertIsNone(
+            filter_reason("Vans Skate Old Skool Shoes", "Sneakers", price_new="59", price_old="85")
+        )
         self.assertEqual(
-            filter_reason("Vans Skate Old Skool Shoes", "Sneakers", price_new="59", price_old="85"),
+            filter_reason("Vans Classic Old Skool Shoes", "Sneakers", price_new="59", price_old="85"),
             "not a tracked sneaker",
         )
         self.assertEqual(
-            filter_reason("Vans Skate Old Skool ComfyCush Shoes", "Sneakers", price_new="59", price_old="85"),
+            filter_reason("Vans Old Skool ComfyCush Shoes", "Sneakers", price_new="59", price_old="85"),
             "not a tracked sneaker",
         )
         self.assertEqual(filter_reason("Nike Dunk Low", "Sneakers", price_new="70", price_old="90"), "not a tracked sneaker")
