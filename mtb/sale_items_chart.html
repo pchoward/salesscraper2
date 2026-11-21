@@ -18902,8 +18902,10 @@ function orderRows() {
     const sorted = rows.slice().sort((a, b) =>
         compareSort(a, b, key, direction) || (parseFloat(a.dataset.rank) || 0) - (parseFloat(b.dataset.rank) || 0));
     if (sorted.every((row, index) => row === rows[index])) return false;
+    // Use the existing index instead of scanning the catalog once per row.
+    indexDeals();
     sorted.forEach(row => {
-        const detail = document.querySelector('.detail-row[data-for="' + row.dataset.id + '"]');
+        const detail = detailById.get(row.dataset.id);
         tbody.appendChild(row);
         if (detail) tbody.appendChild(detail);
     });
