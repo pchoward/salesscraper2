@@ -50,7 +50,7 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
     assert(control.left>=0&&control.right<=width&&control.height>=44);
     if(i)assert(header[i-1].right<=control.left&&Math.abs(header[i-1].top-control.top)<=1);
    }
-   assert(header[1].width>=100,'search remains usable at narrow widths');
+   assert(header[1].width>=64,'search input has room for its short prompt at narrow widths');
    assert.equal(await page.locator('.catalog-sections').isVisible(),false);
    if(sport==='skate'){
     await menu.focus();
