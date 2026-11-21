@@ -62,6 +62,20 @@ def build(output):
                 item['technical_offers'] = [offer('sold', target, 50, False), offer('available', other)]
             items.append(item)
         products = {'AuditFixture_' + part: items}
+        if sport is sports.SKI:
+            for heading, specs in (
+                ('Boots', {'mondo': ['26–26.5'], 'gender': ['Men'], 'flex': ['100'], 'last': ['100 mm']}),
+                ('Bindings', {'din': ['12'], 'brake': ['95 mm'], 'gender': ['Unisex']}),
+                ('Goggles', {'gender': ['Women'], 'goggle_size': ['Medium']}),
+            ):
+                stored_part = 'Protection' if heading == 'Goggles' else heading
+                products[f'AuditFixture_{stored_part}'] = [
+                    {'name': f'SYNTHETIC UI {heading}', 'part': stored_part, 'store': 'AuditFixture',
+                     'brand': 'Smith' if heading == 'Goggles' else 'Audit',
+                     'url': f'https://example.test/ski/{heading.lower()}',
+                     'price_new': '100.00', 'price_old': '400.00', 'availability': 'In stock',
+                     'technical_offers': [offer('item', specs)]}
+                ]
         if sport is sports.MTB:
             products['AuditFixture_Bikes'] = [
                 {'name': f'SYNTHETIC UI {power} Bike', 'part': 'Bikes', 'store': 'AuditFixture',
