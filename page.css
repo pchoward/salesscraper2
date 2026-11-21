@@ -3491,12 +3491,3 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 .catalog-live-price { display:flex; gap:8px; flex-wrap:wrap; font-size:12px; margin:0; }
 .catalog-live-price strong { color:#16703b; }
 @media(max-width:640px) { .catalog-live-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .catalog-live-card { padding:9px; } }
-
-.mtb-power-chips {
-    display: flex;
-    gap: 0.4rem;
-    overflow-x: auto;
-    padding: 0.25rem 0 0.55rem;
-}
-.mtb-power-chips[hidden] { display: none; }
-.mtb-power-chips button { flex: 0 0 auto; white-space: nowrap; }
