@@ -1558,6 +1558,26 @@ def bmx_section_owners(key):
     return " ".join(owners)
 
 
+def mtb_section_owners(key):
+    """Space-separated headings for one MTB spec section's ``data-for``.
+
+    The field's own categories, or every MTB menu heading when the category
+    list is empty (Condition, Riding type). Product kind stays unmarked so
+    All would keep that filter; MTB has no kind field today. An unknown key
+    returns "" so the section is left unmarked.
+    """
+    from sports.headings import headings
+    from sports.mtb.facets import FIELDS
+
+    if key == "kind":
+        return ""
+    field = next((item for item in FIELDS if item.get("key") == key), None)
+    if field is None:
+        return ""
+    owners = tuple(field.get("categories") or ()) or headings(sports.MTB)
+    return " ".join(owners)
+
+
 def render_page(data, changes, price_history=None, failed_keys=None, generated_at=None, digest=None, sport=None):
     from report import build_digest
 
@@ -2498,6 +2518,16 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         part_options.append(
             _option(part, f"{part} ({part_counts.get(part, 0)})", data_label=part)
         )
+    # The audit fixture and any old caller still set the select to the stored
+    # category. The option is not a menu chip. filterByPart maps it to Suspension.
+    if sport.id == "mtb" and ("Suspension" in part_counts or default_part == "Suspension"):
+        part_options.append(
+            _option(
+                "Forks & Shocks",
+                f"Forks & Shocks ({part_counts.get('Suspension', 0)})",
+                data_label="Forks & Shocks",
+            )
+        )
     part_more = [
         _quick_chip(
             "part", part, part, part_counts.get(part, 0),
@@ -2625,16 +2655,20 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         from sports.facets import sidebar
 
         def _sidebar_section(section_id, label, body, open_default=False, for_part="", tip=""):
-            # Ski and BMX spec sections use the same data-for gate as Skate.
-            # All stays Brand plus the generic sections; a heading shows its
-            # own specs. BMX Product kind is left unmarked so All keeps it.
-            # MTB is left unmarked, so its All list stays as it is.
+            # Ski, BMX, and MTB spec sections use the same data-for gate as
+            # Skate. All stays Brand plus the generic sections; a heading
+            # shows its own specs. BMX Product kind is left unmarked so All
+            # keeps it. MTB has no Product kind field. An empty category list
+            # (MTB Condition, Riding type) stamps every menu heading, so the
+            # section hides on All and shows under any heading.
             if str(section_id).startswith("tech-") and not for_part:
                 key = section_id[len("tech-"):]
                 if sport.id == "ski":
                     for_part = ski_section_owners(key)
                 elif sport.id == "bmx":
                     for_part = bmx_section_owners(key)
+                elif sport.id == "mtb":
+                    for_part = mtb_section_owners(key)
             return _section(section_id, label, body, open_default=open_default, for_part=for_part, tip=tip)
 
         context_specs = sidebar(data, _sidebar_section, sport)
@@ -3084,7 +3118,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             ""
             if sport.is_default
             else "const SPORT_SETTINGS = "
-            + json.dumps({"id": sport.id, "label": sport.label, "defaultPart": default_part, "parts": list(part_order_for_sport), "partAliases": sport_headings.ALIASES.get(sport.id, {}), "alerts": bool(sport.delivery)}).replace("<", "\\u003c")
+            + json.dumps({
+                "id": sport.id,
+                "label": sport.label,
+                "defaultPart": default_part,
+                "parts": list(part_order_for_sport),
+                "partAliases": sport_headings.ALIASES.get(sport.id, {}),
+                **({"partRenames": {"Forks & Shocks": "Suspension"}} if sport.id == "mtb" else {}),
+                "alerts": bool(sport.delivery),
+            }).replace("<", "\\u003c")
             + ";\n"
         )
         + f"const WIDTH_RANGES = {ranges_literal};\n"

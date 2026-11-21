@@ -90,18 +90,6 @@ class MarkupTests(unittest.TestCase):
         self.assertEqual(length["data-for"], "Skis Poles")
         self.assertIn('class="filter-section is-open is-type-hidden"', str(length))
 
-    def test_mtb_all_list_stays_unmarked(self):
-        # BMX is gated in test_bmx_all_types.py. MTB stays unmarked.
-        html = _page(sports.MTB, {
-            "Fixture_Forks": [_item("RockShox Audit Fork", "Forks & Shocks", "https://example.test/mtb",
-                                    {"wheel_size": ["29"]})],
-        })
-        sections = _tech(html)
-        self.assertGreaterEqual(len(sections), 1)
-        for section in sections:
-            self.assertIsNone(section.get("data-for"), section.get("data-section"))
-            self.assertNotIn("is-type-hidden", section["class"])
-
 
 if __name__ == "__main__":
     unittest.main()
