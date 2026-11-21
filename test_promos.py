@@ -36,7 +36,8 @@ FANATIK_HOME = """<html><body>
 
 class FindTests(unittest.TestCase):
     def test_fanatik_black_friday(self):
-        self.assertEqual(promos.find(FANATIK_BF, TODAY), [{"code": "2026-BFCM-20", "ends": "2026-12-02", "percent": 20}])
+        self.assertEqual(promos.find(FANATIK_BF, TODAY), [{"code": "2026-BFCM-20", "ends": "2026-12-02", "percent": 20,
+                                                            "reach": "eligible items"}])
 
     def test_sales_and_not_sales(self):
         cases = {
@@ -77,6 +78,29 @@ class FindTests(unittest.TestCase):
         self.assertEqual(links, ["https://www.fanatikbike.com/collections/fanatik-black-friday",
                                  "https://www.fanatikbike.com/pages/black-friday-cyber-monday-deals",
                                  "https://www.fanatikbike.com/pages/sales"])
+
+    def test_scope_words(self):
+        """Owner, 2026-11-21: say when it's "up to", sitewide, sale items..."""
+        cases = {"Up to 40% off everything with code BIG40": "Up to 40% off sitewide",
+                 "Take an extra 20% off sale items with code EXTRA20": "20% off sale items",
+                 "$25 off orders over $150 with code SAVE25": "$25 off, orders $150+",
+                 "20% off full-price gear, use code FULL20": "20% off full-price items",
+                 "Save 15% sitewide with code SITE15. Ends Nov 30": "15% off sitewide, until Nov 30",
+                 "Save 20% on eligible products with code ELIG20": "20% off eligible items",
+                 "Get 20% off with code SAVE20": "20% off"}
+        for text, shown in cases.items():
+            promo = promos.find(f"<p>{text}</p>", TODAY)[0]
+            self.assertEqual(promos.describe(promo, code=False), shown, text)
+
+    def test_pages_combine(self):
+        """The homepage banner says 'eligible products', the sale page has the end date."""
+        home = "<p>Save 20% on eligible products with code 2026-BFCM-20</p>"
+        sale = "<p>Use code 2026-BFCM-20 for 20% off. Ends December 2, 2026.</p>"
+        pages = {"https://f.example/robots.txt": "", "https://f.example/": home + '<a href="/collections/black-friday">BF</a>',
+                 "https://f.example/collections/black-friday": sale}
+        found, _ = promos.scan_store("Fanatik", "https://f.example", fetch=pages.__getitem__, sleep=lambda s: None,
+                                     today=TODAY)
+        self.assertEqual(promos.describe(found[0], code=False), "20% off eligible items, until Dec 2")
 
     def test_describe(self):
         self.assertEqual(promos.describe({"code": "2026-BFCM-20", "percent": 20, "ends": "2026-12-02"}),
