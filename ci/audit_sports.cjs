@@ -166,6 +166,19 @@ async function main(){
     });
     await scenario('Quick View, retailer-first links, chart and Watch',async()=>{
      const card=frame.locator('#cardGrid .deal-card:not(.filtered-out):not(.grouped-hide)').first();
+     if(width<=640){
+      const layout=await card.evaluate(node=>{
+       const rect=selector=>node.querySelector(selector)?.getBoundingClientRect();
+       const photo=rect('.card-photo'),quick=rect('.card-quick'),store=rect('.store-mark');
+       const alert=rect('.card-alert'),star=rect('.star');
+       return {photoBottom:photo.bottom,quickTop:quick.top,quickHeight:quick.height,
+        storeRight:store.right,quickLeft:quick.left,photoTop:photo.top,
+        alertBottom:alert?.height?alert.bottom:0,starBottom:star.bottom};
+      });
+      assert(layout.quickTop>=layout.photoBottom&&layout.quickHeight>=36);
+      assert(layout.quickLeft>=layout.storeRight,'Quick View does not cover the retailer');
+      assert(Math.max(layout.alertBottom,layout.starBottom)<=layout.photoTop);
+     }
      assert.equal(await frame.locator('#searchInput').getAttribute('aria-expanded'),'false');
      await card.hover();const dataset=await card.evaluate(n=>({...n.dataset}));
      const link=card.locator('.card-store-link');assert.equal(await link.getAttribute('href'),dataset.url);assert.equal(await link.getAttribute('target'),'_blank');

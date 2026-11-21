@@ -6774,8 +6774,12 @@ function measureContent(img) {
 }
 
 function layoutHeroWrap(wrap, ar) {
-    const media = wrap.parentElement;
-    const slot = media && media.getBoundingClientRect ? media.getBoundingClientRect() : null;
+    const parent = wrap.parentElement;
+    let slot = parent?.getBoundingClientRect?.();
+    // The photo wrapper has no box in the desktop layout.
+    if (!slot?.width && parent?.classList.contains("card-photo")) {
+        slot = parent.parentElement?.getBoundingClientRect();
+    }
     if (!slot) return false;
     const size = heroFitSize(ar, slot.width, slot.height);
     if (!size) return false;
