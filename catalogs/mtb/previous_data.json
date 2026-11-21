@@ -7486,14 +7486,6 @@
         {
           "diameter_mm": null,
           "durometers": [],
-          "variant_id": "40933846188078",
-          "available": true,
-          "price": 59.99,
-          "compare_at_price": 99.99
-        },
-        {
-          "diameter_mm": null,
-          "durometers": [],
           "variant_id": "40933846024238",
           "available": true,
           "price": 79.99,
@@ -7533,13 +7525,6 @@
         }
       ],
       "technical_offers": [
-        {
-          "variant_id": 40933846188078,
-          "price": 59.99,
-          "compare": 99.99,
-          "available": true,
-          "specs": {}
-        },
         {
           "variant_id": 40933846024238,
           "price": 79.99,
@@ -26931,6 +26916,40 @@
       }
     },
     {
+      "name": "Cannondale Habit 3",
+      "url": "https://mikesbikes.com/products/cannondale-habit-3",
+      "price_new": "2398.95",
+      "price_old": "3325.00",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Mike's Bikes",
+      "product_type": "BIKES AND FRAMES/BIKES - MOUNTAIN/TRAIL/HABIT",
+      "brand": "Cannondale",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Cannondale-Habit-3_Grey_1.jpg?v=1747270958",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Cannondale-Habit-3_Grey_1.jpg?v=1747270958",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Habit-3_Purple-Haze.jpg?v=1768431519"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44130479505477,
+          "price": 2398.95,
+          "compare": 3325.0,
+          "available": true,
+          "specs": {
+            "frame_size": [
+              "XL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "frame_size": [
+          "XL"
+        ]
+      }
+    },
+    {
       "name": "Cannondale Trail 2",
       "url": "https://mikesbikes.com/products/cannondale-trail-2",
       "price_new": "725.95",
@@ -27112,6 +27131,63 @@
           "variant_id": 44649480454213,
           "price": 2999.77,
           "compare": 7299.99,
+          "available": true,
+          "specs": {
+            "frame_size": [
+              "XXL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "frame_size": [
+          "XL",
+          "XXL"
+        ]
+      }
+    },
+    {
+      "name": "Santa Cruz Heckler SL C S",
+      "url": "https://mikesbikes.com/products/santa-cruz-heckler-sl-c-s-2024",
+      "price_new": "3499.77",
+      "price_old": "8699.99",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Mike's Bikes",
+      "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN LIGHT WEIGHT/HECKLER SL",
+      "brand": "Santa Cruz",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-C-S_Matte_Silver.png?v=1747271140",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-C-S_Matte_Silver.png?v=1747271140",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-C-S_Gloss_Magenta.png?v=1747271140"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44649505128517,
+          "price": 3499.77,
+          "compare": 8699.99,
+          "available": true,
+          "specs": {
+            "frame_size": [
+              "XXL"
+            ]
+          }
+        },
+        {
+          "variant_id": 44587831623749,
+          "price": 3499.77,
+          "compare": 8699.99,
+          "available": true,
+          "specs": {
+            "frame_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 40617095069765,
+          "price": 3499.77,
+          "compare": 8699.99,
           "available": true,
           "specs": {
             "frame_size": [
@@ -27339,6 +27415,40 @@
       }
     },
     {
+      "name": "Santa Cruz Tallboy 5 C S",
+      "url": "https://mikesbikes.com/products/santa-cruz-tallboy-5-c-s",
+      "price_new": "1999.77",
+      "price_old": "5499.99",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Mike's Bikes",
+      "product_type": "BIKES AND FRAMES/BIKES - MOUNTAIN/TRAIL/TALLBOY",
+      "brand": "Santa Cruz",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-C-S_Gloss_Melon.png?v=1747271006",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-C-S_Gloss_Melon.png?v=1747271006",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-C-S_Gloss_White.png?v=1747271007"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 40583181664325,
+          "price": 1999.77,
+          "compare": 5499.99,
+          "available": true,
+          "specs": {
+            "frame_size": [
+              "XXL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "frame_size": [
+          "XXL"
+        ]
+      }
+    },
+    {
       "name": "Santa Cruz Vala AL 70",
       "url": "https://mikesbikes.com/products/santa-cruz-vala-al-70",
       "price_new": "5299.00",
@@ -27369,6 +27479,94 @@
       "technical_specs": {
         "frame_size": [
           "XL"
+        ]
+      }
+    },
+    {
+      "name": "Santa Cruz Heckler SL CC X0 Transmission Reserve",
+      "url": "https://mikesbikes.com/products/santa-cruz-heckler-sl-cc-x0-transmission-reserve-2024",
+      "price_new": "4499.77",
+      "price_old": "11699.99",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Mike's Bikes",
+      "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN LIGHT WEIGHT/HECKLER SL",
+      "brand": "Santa Cruz",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-CC-X0-AXS-Reserve_Gloss_Magenta.png?v=1747270972",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-CC-X0-AXS-Reserve_Gloss_Magenta.png?v=1747270972",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Heckler-SL-CC-X0-Transmission-Reserve_Silver.jpg?v=1771368555"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44649480618053,
+          "price": 4499.77,
+          "compare": 11699.99,
+          "available": true,
+          "specs": {
+            "speed": [
+              "12-speed"
+            ],
+            "frame_size": [
+              "XXL"
+            ]
+          }
+        },
+        {
+          "variant_id": 44649480650821,
+          "price": 4499.77,
+          "compare": 11699.99,
+          "available": true,
+          "specs": {
+            "speed": [
+              "12-speed"
+            ],
+            "frame_size": [
+              "XXL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "speed": [
+          "12-speed"
+        ],
+        "frame_size": [
+          "XXL"
+        ]
+      }
+    },
+    {
+      "name": "Santa Cruz Tallboy 5 CC X0 AXS",
+      "url": "https://mikesbikes.com/products/santa-cruz-tallboy-5-cc-x0-axs-2024",
+      "price_new": "3499.77",
+      "price_old": "7899.99",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Mike's Bikes",
+      "product_type": "BIKES AND FRAMES/BIKES - MOUNTAIN/TRAIL/TALLBOY",
+      "brand": "Santa Cruz",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-CC-29-X0-AXS_Gloss_White.png?v=1759187995",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-CC-29-X0-AXS_Gloss_White.png?v=1759187995",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-CC-29-X0-AXS_Gloss_Melon.png?v=1759187994"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 43702994337861,
+          "price": 3499.77,
+          "compare": 7899.99,
+          "available": true,
+          "specs": {
+            "frame_size": [
+              "XXL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "frame_size": [
+          "XXL"
         ]
       }
     },
@@ -29425,6 +29623,118 @@
       }
     },
     {
+      "name": "Cannondale Moterra 2 Demo (Large)",
+      "url": "https://mikesbikes.com/products/cannondale-moterra-2-demo-large",
+      "price_new": "5999.77",
+      "price_old": "8299.00",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Mike's Bikes",
+      "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN FULL POWER/MOTERRA E",
+      "brand": "Cannondale",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/27-Moterra-2_-Moonrock_-LG--1-DEMO-C6505GU20LG-1.jpg?v=1794512431",
+      "technical_offers": [
+        {
+          "variant_id": 46174255644741,
+          "price": 5999.77,
+          "compare": 8299.0,
+          "available": true,
+          "specs": {
+            "condition": [
+              "Demo"
+            ]
+          }
+        },
+        {
+          "variant_id": 46174255808581,
+          "price": 5999.77,
+          "compare": 8299.0,
+          "available": true,
+          "specs": {
+            "condition": [
+              "Demo"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "condition": [
+          "Demo"
+        ]
+      },
+      "condition": "Demo",
+      "versions": [
+        {
+          "url": "https://mikesbikes.com/products/cannondale-moterra-2-demo-large-1",
+          "price_new": "5999.77",
+          "price_old": "8299.00",
+          "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/27-Moterra-2_-Moonrock_-LG--1-DEMO-C6505GU20LG-1_1.jpg?v=1794512459"
+        }
+      ]
+    },
+    {
+      "name": "Cannondale Moterra 2 Demo (Small)",
+      "url": "https://mikesbikes.com/products/sale-demo-27-moterra-2-moonrock-sm",
+      "price_new": "5999.77",
+      "price_old": "8299.00",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Mike's Bikes",
+      "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN FULL POWER/MOTERRA E",
+      "brand": "Cannondale",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/27-Moterra-2_-Moonrock_-SM-DEMO-C6505GU20SM.jpg?v=1794512177",
+      "technical_offers": [
+        {
+          "variant_id": 46174254399557,
+          "price": 5999.77,
+          "compare": 8299.0,
+          "available": true,
+          "specs": {
+            "condition": [
+              "Demo"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "condition": [
+          "Demo"
+        ]
+      },
+      "condition": "Demo"
+    },
+    {
+      "name": "Cannondale Moterra 2 Demo (Medium)",
+      "url": "https://mikesbikes.com/products/cannondale-moterra-2-demo-medium-1",
+      "price_new": "5999.77",
+      "price_old": "8299.00",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Mike's Bikes",
+      "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN FULL POWER/MOTERRA E",
+      "brand": "Cannondale",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/27-Moterra-2_-Moonrock_-MD-DEMO-C6505GU20MD_1.jpg?v=1794512270",
+      "technical_offers": [
+        {
+          "variant_id": 46174254760005,
+          "price": 5999.77,
+          "compare": 8299.0,
+          "available": true,
+          "specs": {
+            "condition": [
+              "Demo"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "condition": [
+          "Demo"
+        ]
+      },
+      "condition": "Demo"
+    },
+    {
       "name": "Pivot Cycles Trailcat LT Ride Eagle 70/90 Demo (X-Large)",
       "url": "https://mikesbikes.com/products/pivot-trailcat-lt-ride-eagle-70-90-demo-x-large",
       "price_new": "4499.77",
@@ -29586,219 +29896,6 @@
           "XL"
         ]
       }
-    },
-    {
-      "name": "Cannondale Habit 3",
-      "url": "https://mikesbikes.com/products/cannondale-habit-3",
-      "price_new": "2398.95",
-      "price_old": "3325.00",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Mike's Bikes",
-      "product_type": "BIKES AND FRAMES/BIKES - MOUNTAIN/TRAIL/HABIT",
-      "brand": "Cannondale",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Cannondale-Habit-3_Grey_1.jpg?v=1747270958",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Cannondale-Habit-3_Grey_1.jpg?v=1747270958",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Habit-3_Purple-Haze.jpg?v=1768431519"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 44130479505477,
-          "price": 2398.95,
-          "compare": 3325.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "XL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "frame_size": [
-          "XL"
-        ]
-      }
-    },
-    {
-      "name": "Santa Cruz Heckler SL C S",
-      "url": "https://mikesbikes.com/products/santa-cruz-heckler-sl-c-s-2024",
-      "price_new": "3499.77",
-      "price_old": "8699.99",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Mike's Bikes",
-      "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN LIGHT WEIGHT/HECKLER SL",
-      "brand": "Santa Cruz",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-C-S_Matte_Silver.png?v=1747271140",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-C-S_Matte_Silver.png?v=1747271140",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-C-S_Gloss_Magenta.png?v=1747271140"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 44649505128517,
-          "price": 3499.77,
-          "compare": 8699.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "XXL"
-            ]
-          }
-        },
-        {
-          "variant_id": 44587831623749,
-          "price": 3499.77,
-          "compare": 8699.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "XL"
-            ]
-          }
-        },
-        {
-          "variant_id": 40617095069765,
-          "price": 3499.77,
-          "compare": 8699.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "XXL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "frame_size": [
-          "XL",
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Santa Cruz Tallboy 5 C S",
-      "url": "https://mikesbikes.com/products/santa-cruz-tallboy-5-c-s",
-      "price_new": "1999.77",
-      "price_old": "5499.99",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Mike's Bikes",
-      "product_type": "BIKES AND FRAMES/BIKES - MOUNTAIN/TRAIL/TALLBOY",
-      "brand": "Santa Cruz",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-C-S_Gloss_Melon.png?v=1747271006",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-C-S_Gloss_Melon.png?v=1747271006",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-C-S_Gloss_White.png?v=1747271007"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40583181664325,
-          "price": 1999.77,
-          "compare": 5499.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "XXL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "frame_size": [
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Santa Cruz Heckler SL CC X0 Transmission Reserve",
-      "url": "https://mikesbikes.com/products/santa-cruz-heckler-sl-cc-x0-transmission-reserve-2024",
-      "price_new": "4499.77",
-      "price_old": "11699.99",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Mike's Bikes",
-      "product_type": "BIKES AND FRAMES/BIKES - ELECTRIC/ELECTRIC MOUNTAIN LIGHT WEIGHT/HECKLER SL",
-      "brand": "Santa Cruz",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-CC-X0-AXS-Reserve_Gloss_Magenta.png?v=1747270972",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Heckler-SL-CC-X0-AXS-Reserve_Gloss_Magenta.png?v=1747270972",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Heckler-SL-CC-X0-Transmission-Reserve_Silver.jpg?v=1771368555"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 44649480618053,
-          "price": 4499.77,
-          "compare": 11699.99,
-          "available": true,
-          "specs": {
-            "speed": [
-              "12-speed"
-            ],
-            "frame_size": [
-              "XXL"
-            ]
-          }
-        },
-        {
-          "variant_id": 44649480650821,
-          "price": 4499.77,
-          "compare": 11699.99,
-          "available": true,
-          "specs": {
-            "speed": [
-              "12-speed"
-            ],
-            "frame_size": [
-              "XXL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "speed": [
-          "12-speed"
-        ],
-        "frame_size": [
-          "XXL"
-        ]
-      }
-    },
-    {
-      "name": "Santa Cruz Tallboy 5 CC X0 AXS",
-      "url": "https://mikesbikes.com/products/santa-cruz-tallboy-5-cc-x0-axs-2024",
-      "price_new": "3499.77",
-      "price_old": "7899.99",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Mike's Bikes",
-      "product_type": "BIKES AND FRAMES/BIKES - MOUNTAIN/TRAIL/TALLBOY",
-      "brand": "Santa Cruz",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-CC-29-X0-AXS_Gloss_White.png?v=1759187995",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-CC-29-X0-AXS_Gloss_White.png?v=1759187995",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Santa-Cruz-Tallboy-5-CC-29-X0-AXS_Gloss_Melon.png?v=1759187994"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 43702994337861,
-          "price": 3499.77,
-          "compare": 7899.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "XXL"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "frame_size": [
-          "XXL"
-        ]
-      }
     }
   ],
   "Mike's Bikes_Frames": [],
@@ -29904,6 +30001,46 @@
           "variant_id": 42569786720325,
           "price": 26.13,
           "compare": 50.0,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
+      "name": "Zipp Speed Weaponry 353 NSW Tubeless Disc Wheels",
+      "url": "https://mikesbikes.com/products/zipp-353-disc",
+      "price_new": "1499.95",
+      "price_old": "2321.00",
+      "availability": "In stock",
+      "part": "Wheels",
+      "store": "Mike's Bikes",
+      "product_type": "COMPONENTS/WHEELS/PERFORMANCE WHEELS CARBON",
+      "brand": "Zipp Speed Weaponry",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Zipp-353-NSW-WheelsetF.png?v=1676396744",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Zipp-353-NSW-WheelsetF.png?v=1676396744",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Zipp-353-NSW-WheelsetR.png?v=1676396744"
+      ],
+      "diameters_mm": [
+        45.0
+      ],
+      "diameter_mm": 45.0,
+      "spec_offers": [
+        {
+          "diameter_mm": 45.0,
+          "durometers": [],
+          "variant_id": "39385945571397",
+          "available": true,
+          "price": 1499.95,
+          "compare_at_price": 2321.0
+        }
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 39385945571397,
+          "price": 1499.95,
+          "compare": 2321.0,
           "available": true,
           "specs": {}
         }
@@ -30284,46 +30421,6 @@
         }
       ],
       "technical_specs": {}
-    },
-    {
-      "name": "Zipp Speed Weaponry 353 NSW Tubeless Disc Wheels",
-      "url": "https://mikesbikes.com/products/zipp-353-disc",
-      "price_new": "1499.95",
-      "price_old": "2321.00",
-      "availability": "In stock",
-      "part": "Wheels",
-      "store": "Mike's Bikes",
-      "product_type": "COMPONENTS/WHEELS/PERFORMANCE WHEELS CARBON",
-      "brand": "Zipp Speed Weaponry",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Zipp-353-NSW-WheelsetF.png?v=1676396744",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Zipp-353-NSW-WheelsetF.png?v=1676396744",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Zipp-353-NSW-WheelsetR.png?v=1676396744"
-      ],
-      "diameters_mm": [
-        45.0
-      ],
-      "diameter_mm": 45.0,
-      "spec_offers": [
-        {
-          "diameter_mm": 45.0,
-          "durometers": [],
-          "variant_id": "39385945571397",
-          "available": true,
-          "price": 1499.95,
-          "compare_at_price": 2321.0
-        }
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 39385945571397,
-          "price": 1499.95,
-          "compare": 2321.0,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
     }
   ],
   "Mike's Bikes_Tires": [
@@ -30631,17 +30728,6 @@
         "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/cs201b01-10-52t-copper.jpg?v=1747270943"
       ],
       "technical_offers": [
-        {
-          "variant_id": 31758236844101,
-          "price": 397.5,
-          "compare": 530.0,
-          "available": true,
-          "specs": {
-            "speed": [
-              "12-speed"
-            ]
-          }
-        },
         {
           "variant_id": 39270574129221,
           "price": 397.5,
@@ -33393,36 +33479,6 @@
       "technical_specs": {
         "speed": [
           "7-speed"
-        ]
-      }
-    },
-    {
-      "name": "SRAM GX Trigger Rear: 10-Speed",
-      "url": "https://mikesbikes.com/products/gx-trigger-rear-10-speed",
-      "price_new": "38.25",
-      "price_old": "45.00",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "Mike's Bikes",
-      "product_type": "COMPONENTS/SHIFTERS/FLAT BAR RIGHT",
-      "brand": "SRAM",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/sram-gx-2x10-trigger-shifter-rear-234881-1a_8dc274ec-3445-4671-917b-a4826fa46e0a.jpg?v=1571714349",
-      "technical_offers": [
-        {
-          "variant_id": 19155393511491,
-          "price": 38.25,
-          "compare": 45.0,
-          "available": true,
-          "specs": {
-            "speed": [
-              "10-speed"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "speed": [
-          "10-speed"
         ]
       }
     },
@@ -38422,28 +38478,6 @@
         }
       ],
       "technical_specs": {}
-    },
-    {
-      "name": "BikeSmart Mash Platform Pedals",
-      "url": "https://mikesbikes.com/products/mash",
-      "price_new": "39.77",
-      "price_old": "49.99",
-      "availability": "In stock",
-      "part": "Pedals",
-      "store": "Mike's Bikes",
-      "product_type": "COMPONENTS/PEDALS/MTB FLAT",
-      "brand": "BikeSmart",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/Mashmain400X400_2048x2048_fdbfd802-17c8-4a41-a715-05fa10e6b54c.jpg?v=1747271093",
-      "technical_offers": [
-        {
-          "variant_id": 19158895722563,
-          "price": 39.77,
-          "compare": 49.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
     }
   ],
   "Mike's Bikes_Protection": [
@@ -41888,62 +41922,6 @@
       }
     },
     {
-      "name": "Thousand Helmets Jr. Helmet (Youth)",
-      "url": "https://mikesbikes.com/products/thousand-jr-kids-helmet",
-      "price_new": "44.99",
-      "price_old": "59.99",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Mike's Bikes",
-      "product_type": "APPAREL/HELMETS/KIDS HELMETS/THOUSAND JR",
-      "brand": "Thousand Helmets",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/ThsdJR-helmet-blazingblue-5_800x_d27cbf5b-bada-4420-b76a-e25c2adac6ba.webp?v=1755024189",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/ThsdJR-helmet-blazingblue-5_800x_d27cbf5b-bada-4420-b76a-e25c2adac6ba.webp?v=1755024189",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-jr-helmet-going-green-5_800x_782a1452-14fc-4d9e-9f57-579eda232cb4.webp?v=1755024380",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-jr-helmet-carbon-black-5_800x_a43e99d9-5900-47c0-b32e-fc9650cad8f0.webp?v=1755024380",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-jr-helmet-power-pink-5_800x_d8ff970e-5b26-4df9-8e38-337fb3b31109.webp?v=1755024380",
-        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thousand-jr_sparkle.jpg?v=1755024380"
-      ],
-      "protection_type": "Helmet",
-      "technical_offers": [
-        {
-          "variant_id": 41807711338565,
-          "price": 44.99,
-          "compare": 59.99,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Youth"
-            ],
-            "certification": [
-              "CPSC (US bike)"
-            ],
-            "helmet_style": [
-              "Road / commuter"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Youth"
-        ],
-        "certification": [
-          "CPSC (US bike)"
-        ],
-        "helmet_style": [
-          "Road / commuter"
-        ]
-      }
-    },
-    {
       "name": "Pearl Izumi AmFIB Lobster Gel Gloves",
       "url": "https://mikesbikes.com/products/pearl-izumi-amfib-lobster-gel-gloves",
       "price_new": "66.99",
@@ -45281,48 +45259,58 @@
       }
     },
     {
-      "name": "G-Form Pro Rugged 2 Elbow Guards",
-      "url": "https://mikesbikes.com/products/g-form-pro-rugged-2-elbow-guards",
-      "price_new": "39.95",
-      "price_old": "79.99",
+      "name": "Thousand Helmets Jr. Helmet (Youth)",
+      "url": "https://mikesbikes.com/products/thousand-jr-kids-helmet",
+      "price_new": "44.99",
+      "price_old": "59.99",
       "availability": "In stock",
       "part": "Protection",
       "store": "Mike's Bikes",
-      "product_type": "APPAREL/PROTECTIVE GEAR/ELBOW PADS",
-      "brand": "G-Form",
-      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/products/g-form-pro-rugged-elbow-guards-376963-1.jpg?v=1747270963",
-      "protection_type": "Elbow Pads",
-      "protection_sizes": [
-        "XL"
+      "product_type": "APPAREL/HELMETS/KIDS HELMETS/THOUSAND JR",
+      "brand": "Thousand Helmets",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/ThsdJR-helmet-blazingblue-5_800x_d27cbf5b-bada-4420-b76a-e25c2adac6ba.webp?v=1755024189",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/ThsdJR-helmet-blazingblue-5_800x_d27cbf5b-bada-4420-b76a-e25c2adac6ba.webp?v=1755024189",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-jr-helmet-going-green-5_800x_782a1452-14fc-4d9e-9f57-579eda232cb4.webp?v=1755024380",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-jr-helmet-carbon-black-5_800x_a43e99d9-5900-47c0-b32e-fc9650cad8f0.webp?v=1755024380",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-jr-helmet-power-pink-5_800x_d8ff970e-5b26-4df9-8e38-337fb3b31109.webp?v=1755024380",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thousand-jr_sparkle.jpg?v=1755024380"
       ],
+      "protection_type": "Helmet",
       "technical_offers": [
         {
-          "variant_id": 40300209438789,
-          "price": 39.95,
-          "compare": 79.99,
+          "variant_id": 41807711338565,
+          "price": 44.99,
+          "compare": 59.99,
           "available": true,
           "specs": {
             "protects": [
-              "Elbows"
+              "Helmets"
             ],
             "age": [
-              "Adult"
+              "Youth"
             ],
-            "prot_size": [
-              "XL"
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Road / commuter"
             ]
           }
         }
       ],
       "technical_specs": {
         "protects": [
-          "Elbows"
+          "Helmets"
         ],
         "age": [
-          "Adult"
+          "Youth"
         ],
-        "prot_size": [
-          "XL"
+        "certification": [
+          "CPSC (US bike)"
+        ],
+        "helmet_style": [
+          "Road / commuter"
         ]
       }
     }
@@ -49564,56 +49552,6 @@
           "27.5"
         ]
       }
-    },
-    {
-      "name": "Mavic Crossmax XL 29\" MTB Wheel - Rear",
-      "url": "https://cambriabike.com/products/mavic-crossmax-xl-29-mtb-wheel-rear",
-      "price_new": "334.99",
-      "price_old": "480.00",
-      "availability": "In stock",
-      "part": "Wheels",
-      "store": "Cambria",
-      "product_type": "MTB Wheels",
-      "brand": "Mavic",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MavicCrossmaxXL29MTBWheel-Front-6-Bolt_335854bc-0df7-4447-ad81-cb1ea3959936.jpg?v=1734603135",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MavicCrossmaxXL29MTBWheel-Front-6-Bolt_335854bc-0df7-4447-ad81-cb1ea3959936.jpg?v=1734603135",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MavicCrossmaxXL29MTBWheel-Front-6-Bolt2_bcef4e66-ffda-4148-b15c-6f832fd66556.jpg?v=1734603135",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MavicCrossmaxXL29MTBWheel-Front-6-Bolt3_55d39c5a-0eb2-4b0a-96a1-0456cc491476.jpg?v=1734603135",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/MavicCrossmaxXL29MTBWheel-Front-Centerlock_752cbd59-b786-4ae4-9435-b29d1a04ecf6.jpg?v=1734603135"
-      ],
-      "length": 29.0,
-      "spec_offers": [
-        {
-          "diameter_mm": null,
-          "durometers": [],
-          "variant_id": "43672584519862",
-          "available": true,
-          "price": 334.99,
-          "compare_at_price": 480.0
-        }
-      ],
-      "spec_conflicts": [
-        "ambiguous description size"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 43672584519862,
-          "price": 334.99,
-          "compare": 480.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ]
-      }
     }
   ],
   "Cambria_Tires": [
@@ -49781,6 +49719,52 @@
         ],
         "casing": [
           "EXO"
+        ]
+      }
+    },
+    {
+      "name": "Maxxis Aggressor 29\" Folding MTB Tire",
+      "url": "https://cambriabike.com/products/maxxis-aggressor-29-folding-mtb-tire",
+      "price_new": "64.00",
+      "price_old": "85.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Cambria",
+      "product_type": "MTB Tires Folding",
+      "brand": "Maxxis",
+      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis292.3020_16a9b7d2-a03c-4ed4-805c-4190ff4cf43a.jpg?v=1625214809",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis292.3020_16a9b7d2-a03c-4ed4-805c-4190ff4cf43a.jpg?v=1625214809",
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Aggressor-DC-EXO-TR_Black_44c16ba3-1d2b-4fe4-b7bd-ccc9f7a24d5a.jpg?v=1625214809"
+      ],
+      "length": 29.0,
+      "technical_offers": [
+        {
+          "variant_id": 40066567372982,
+          "price": 64.0,
+          "compare": 85.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "29"
+            ]
+          }
+        },
+        {
+          "variant_id": 40066567405750,
+          "price": 77.0,
+          "compare": 85.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "29"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "29"
         ]
       }
     },
@@ -60619,40 +60603,6 @@
       }
     },
     {
-      "name": "Shimano Tourney TY-501-2 Double 7/8 Spd Crankset - Black",
-      "url": "https://cambriabike.com/products/shimano-tourney-ty-501-2-double-7-8-spd-crankset-black",
-      "price_new": "26.99",
-      "price_old": "30.00",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "Cambria",
-      "product_type": "MTB Cranksets",
-      "brand": "Shimano",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Shimano-FC-TY-501-2-Crankset-175mm-78-Speed-46-30t.webp?v=1754551476",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Shimano-FC-TY-501-2-Crankset-175mm-78-Speed-46-30t.webp?v=1754551476",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/unnamed_a42fe572-85d7-4d54-b930-d5a945cbd13a.png?v=1754551482"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 43533464043702,
-          "price": 26.99,
-          "compare": 30.0,
-          "available": true,
-          "specs": {
-            "speed": [
-              "8-speed"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "speed": [
-          "8-speed"
-        ]
-      }
-    },
-    {
       "name": "Shimano Deore XT M8130 11 Spd MTB Rear Derailleur",
       "url": "https://cambriabike.com/products/shimano-deore-xt-m8130-11-spd-mtb-rear-derailleur",
       "price_new": "134.99",
@@ -63211,118 +63161,38 @@
       }
     },
     {
-      "name": "SRAM X3 7 Spd Trigger Shifter",
-      "url": "https://cambriabike.com/products/sram-x3-7-spd-trigger-shifter",
-      "price_new": "16.49",
-      "price_old": "20.00",
+      "name": "Shimano Tourney TY-501-2 Double 7/8 Spd Crankset - Black",
+      "url": "https://cambriabike.com/products/shimano-tourney-ty-501-2-double-7-8-spd-crankset-black",
+      "price_new": "26.99",
+      "price_old": "30.00",
       "availability": "In stock",
       "part": "Drivetrain",
       "store": "Cambria",
-      "product_type": "MTB Gear Shifters",
-      "brand": "SRAM",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SRAMX37SpeedTriggerShifter_Black_635eb2cf-9011-4315-81e9-6d2f0c09ff49.jpg?v=1642755017",
-      "technical_offers": [
-        {
-          "variant_id": 41116302475446,
-          "price": 16.49,
-          "compare": 20.0,
-          "available": true,
-          "specs": {
-            "speed": [
-              "7-speed"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "speed": [
-          "7-speed"
-        ]
-      }
-    },
-    {
-      "name": "SRAM X5 3x9 Spd Trigger Shifter Set",
-      "url": "https://cambriabike.com/products/sram-x5-3x9-spd-trigger-shifter-set",
-      "price_new": "51.49",
-      "price_old": "60.00",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "Cambria",
-      "product_type": "MTB Gear Shifters",
-      "brand": "SRAM",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SRAMX53x9SpdTriggerShifterSet_Black.jpg?v=1621872045",
-      "width": 3.0,
-      "length": 9.0,
-      "technical_offers": [
-        {
-          "variant_id": 32488756346954,
-          "price": 51.49,
-          "compare": 60.0,
-          "available": true,
-          "specs": {
-            "speed": [
-              "9-speed"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "speed": [
-          "9-speed"
-        ]
-      }
-    },
-    {
-      "name": "SRAM GX 10 Spd Trigger Shifter",
-      "url": "https://cambriabike.com/products/sram-gx-10-spd-trigger-shifter",
-      "price_new": "34.99",
-      "price_old": "45.00",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "Cambria",
-      "product_type": "MTB Gear Shifters",
-      "brand": "SRAM",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/SRAM-GX-10-Speed-Trigger-Shifter_Black_eb55f192-d9eb-44ea-bdd2-6e0ac61385e9.jpg?v=1642754974",
-      "technical_offers": [
-        {
-          "variant_id": 41116299329718,
-          "price": 34.99,
-          "compare": 45.0,
-          "available": true,
-          "specs": {
-            "speed": [
-              "10-speed"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "speed": [
-          "10-speed"
-        ]
-      }
-    },
-    {
-      "name": "Shimano CUES RD-U8000-GS Rear Derailleur",
-      "url": "https://cambriabike.com/products/shimano-cues-rd-u8000-gs-rear-derailleur",
-      "price_new": "79.99",
-      "price_old": "85.00",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "Cambria",
-      "product_type": "MTB Rear Derailleurs",
+      "product_type": "MTB Cranksets",
       "brand": "Shimano",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/113110.jpg?v=1690790925",
+      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Shimano-FC-TY-501-2-Crankset-175mm-78-Speed-46-30t.webp?v=1754551476",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/Shimano-FC-TY-501-2-Crankset-175mm-78-Speed-46-30t.webp?v=1754551476",
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/unnamed_a42fe572-85d7-4d54-b930-d5a945cbd13a.png?v=1754551482"
+      ],
       "technical_offers": [
         {
-          "variant_id": 42325443543222,
-          "price": 79.99,
-          "compare": 85.0,
+          "variant_id": 43533464043702,
+          "price": 26.99,
+          "compare": 30.0,
           "available": true,
-          "specs": {}
+          "specs": {
+            "speed": [
+              "8-speed"
+            ]
+          }
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {
+        "speed": [
+          "8-speed"
+        ]
+      }
     },
     {
       "name": "Shimano FD-6800 Derailleur Converter",
@@ -64793,28 +64663,6 @@
           "variant_id": 41140331249846,
           "price": 26.99,
           "compare": 30.0,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Shimano Deore M4100/MT410 Disc Brake & Lever - Front - Black",
-      "url": "https://cambriabike.com/products/shimano-deore-m4100-mt410-disc-brake-lever-front-black",
-      "price_new": "74.99",
-      "price_old": "80.00",
-      "availability": "In stock",
-      "part": "Brakes",
-      "store": "Cambria",
-      "product_type": "MTB Disc Brakes",
-      "brand": "Shimano",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/192790621296_e9f78d1e-d0d4-4620-875f-fc3d3fb478dd.jpg?v=1643185743",
-      "technical_offers": [
-        {
-          "variant_id": 41140331282614,
-          "price": 74.99,
-          "compare": 80.0,
           "available": true,
           "specs": {}
         }
@@ -66393,13 +66241,6 @@
       ],
       "technical_offers": [
         {
-          "variant_id": 42612085883062,
-          "price": 202.49,
-          "compare": 269.99,
-          "available": true,
-          "specs": {}
-        },
-        {
           "variant_id": 42612085915830,
           "price": 202.49,
           "compare": 269.99,
@@ -67277,6 +67118,29 @@
           "variant_id": 39947201904822,
           "price": 27.95,
           "compare": 32.95,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
+      "name": "Sunlite Steel Threaded Headset - 1\" - Black",
+      "url": "https://cambriabike.com/products/sunlite-steel-threaded-headset-1-black",
+      "price_new": "17.99",
+      "price_old": "19.99",
+      "availability": "In stock",
+      "part": "Cockpit",
+      "store": "Cambria",
+      "product_type": "MTB/Road Headsets",
+      "brand": "Sunlite",
+      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/sunlite-steel-1-inch-threaded-headset-219848-1-12-2.jpg?v=1670324234",
+      "width": 1.0,
+      "technical_offers": [
+        {
+          "variant_id": 41995823349942,
+          "price": 17.99,
+          "compare": 19.99,
           "available": true,
           "specs": {}
         }
@@ -69764,84 +69628,6 @@
       "technical_specs": {}
     },
     {
-      "name": "Wolf Tooth Components Resolve Dropper Post - 30.9mm",
-      "url": "https://cambriabike.com/products/wolf-tooth-components-resolve-dropper-post-30-9mm",
-      "price_new": "329.99",
-      "price_old": "379.95",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Cambria",
-      "product_type": "Dropper Adjustable Seatposts",
-      "brand": "Wolf Tooth Components",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RES-309-125_01_3e58b536-210e-485a-8f96-7e157b54cc59_590x_1.webp?v=1705587692",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RES-309-125_01_3e58b536-210e-485a-8f96-7e157b54cc59_590x_1.webp?v=1705587692",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RES-309-160_01_590x_92bd8fc0-7528-42ae-9782-63390905eb1c.webp?v=1705587705",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RES-309-200_01_590x_d23abff2-8f72-409f-af0f-9505e4372cb0.webp?v=1705587709",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RES-309-125_07-1_590x_dfadb1a6-f93b-443c-a882-4e60448ef0de.webp?v=1705587723",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RESOLVE_DROPPER_DETAIL_01_590x_76de1d94-f535-4f65-82c5-920ed282fb71.webp?v=1705587727",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RESOLVE_DROPPER_DETAIL_02_590x_bf2fcaaf-6ebe-41e5-ad32-d28a62049815.webp?v=1705587728",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RESOLVE_DROPPER_DETAIL_03_590x_4b770348-8a61-47bc-89d5-332b8e41da32.webp?v=1705587727",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WT_RESOLVE_DROPPER_DETAIL_04_590x_69ff8417-8ced-4b3a-9c8c-b68259f0ca94.webp?v=1705587727",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WolfTooth_ResolveDropperPost_3_590x_2a25063f-4d0e-4113-aa0c-c7cc1e18c82f.webp?v=1705587733",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WolfTooth_ResolveDropperPost_8_590x_c21e9810-c7a7-4d3e-8a44-2c4815c75f8a.webp?v=1705587732",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WolfTooth_ResolveDropperPost_11_590x_5e3e915d-a791-47f6-bbda-8e18b35d37e9.webp?v=1705587733",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/WolfTooth_ResolveDropperPost_13_590x_def4834c-d306-4a77-958c-7adc7a75dc69.webp?v=1705587733"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 42614067658934,
-          "price": 329.99,
-          "compare": 379.95,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Lizard Skins Peaty Lock-On Bonus Grips - CBO - Neon-Red",
-      "url": "https://cambriabike.com/products/lizard-skins-peaty-lock-on-bonus-grips-cbo-neon-red",
-      "price_new": "19.49",
-      "price_old": "29.99",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Cambria",
-      "product_type": "MTB Grips",
-      "brand": "Lizard Skins",
-      "technical_offers": [
-        {
-          "variant_id": 39947185258678,
-          "price": 19.49,
-          "compare": 29.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Lizard Skins Lock-On Bearclaw Grips - CBO - Black-Green",
-      "url": "https://cambriabike.com/products/lizard-skins-lock-on-bearclaw-grips-cbo-black-green",
-      "price_new": "19.49",
-      "price_old": "29.99",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Cambria",
-      "product_type": "MTB Grips",
-      "brand": "Lizard Skins",
-      "technical_offers": [
-        {
-          "variant_id": 39947180769462,
-          "price": 19.49,
-          "compare": 29.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
       "name": "Wheels Manufacturing Aluminum Headset Spacer - 1.1/8\" x 2mm - Black",
       "url": "https://cambriabike.com/products/wheels-manufacturing-aluminum-headset-spacer-1-1-8-x-2mm-black",
       "price_new": "1.00",
@@ -72027,84 +71813,6 @@
           "variant_id": 43639973478582,
           "price": 159.99,
           "compare": 188.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "OneUp Comp Platform Pedal - Small - Black",
-      "url": "https://cambriabike.com/products/oneup-comp-platform-pedal-small-black",
-      "price_new": "37.49",
-      "price_old": "49.99",
-      "availability": "In stock",
-      "part": "Pedals",
-      "store": "Cambria",
-      "product_type": "Flat Pedals",
-      "brand": "OneUp",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/zm_20230417-125757.jpg?v=1682590782",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/zm_20230417-125757.jpg?v=1682590782",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components-CompPedal-SideProfile-Black-966.webp?v=1682590786"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 42214072189110,
-          "price": 37.49,
-          "compare": 49.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Race Face Ride Flat Pedals - Green",
-      "url": "https://cambriabike.com/products/race-face-ride-flat-pedals-green",
-      "price_new": "35.49",
-      "price_old": "41.99",
-      "availability": "In stock",
-      "part": "Pedals",
-      "store": "Cambria",
-      "product_type": "Flat Pedals",
-      "brand": "Race Face",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/821973353135_906f0d3d-b4bc-4f34-aa52-82b4c10f7a86.jpg?v=1643184532",
-      "technical_offers": [
-        {
-          "variant_id": 41140268859574,
-          "price": 35.49,
-          "compare": 41.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "OneUp Clip MTB SPD Pedals - Black",
-      "url": "https://cambriabike.com/products/oneup-clip-mtb-spd-pedals-black",
-      "price_new": "119.99",
-      "price_old": "159.99",
-      "availability": "In stock",
-      "part": "Pedals",
-      "store": "Cambria",
-      "product_type": "MTB Clipless Pedals",
-      "brand": "OneUp",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_BLACK_Platform-SideA_1400x_834ff8df-7393-4a48-9ce1-447b68009ca0.webp?v=1742289236",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_BLACK_Platform-SideA_1400x_834ff8df-7393-4a48-9ce1-447b68009ca0.webp?v=1742289236",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_BLACK_Binding_1400x_e09c066e-9712-463a-8b50-c5c6761ef549.webp?v=1742289236",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_BLACK_SideProfile_1400x_ea7a9a36-0bd4-451a-b6de-980984e07575.webp?v=1742289236",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_BLACK_EndProfile_1400x_5cbe53aa-1c4a-420b-9119-393da12af105.webp?v=1742289236",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_BLACK_Angle_1400x_58cdebf4-4e56-42c9-a349-7bbbbb0481c1.webp?v=1742289236",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_BLACK_Platform-SideB_1400x_e640494c-a8ac-42fb-86db-d98e7fc8564c.webp?v=1742289236"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 43845383356598,
-          "price": 119.99,
-          "compare": 159.99,
           "available": true,
           "specs": {}
         }
@@ -80507,17 +80215,6 @@
           }
         },
         {
-          "variant_id": 50460966748452,
-          "price": 2499.99,
-          "compare": 2999.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "L"
-            ]
-          }
-        },
-        {
           "variant_id": 50460966781220,
           "price": 2499.99,
           "compare": 2999.99,
@@ -80531,7 +80228,6 @@
       ],
       "technical_specs": {
         "frame_size": [
-          "L",
           "M",
           "S",
           "XL"
@@ -80659,20 +80355,6 @@
           }
         },
         {
-          "variant_id": 50997036024100,
-          "price": 549.99,
-          "compare": 699.99,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "L"
-            ],
-            "wheel_size": [
-              "29"
-            ]
-          }
-        },
-        {
           "variant_id": 50997036056868,
           "price": 549.99,
           "compare": 699.99,
@@ -80689,7 +80371,6 @@
       ],
       "technical_specs": {
         "frame_size": [
-          "L",
           "M",
           "S",
           "XL"
@@ -83573,49 +83254,6 @@
           "XS"
         ]
       }
-    },
-    {
-      "name": "Marin Rift Zone XR - Mountain Bike",
-      "url": "https://www.bikesonline.com/products/marin-rift-zone-xr-mountain-bike",
-      "price_new": "2799.99",
-      "price_old": "3999.99",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Bikes Online",
-      "product_type": "Bikes",
-      "brand": "Marin",
-      "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/2025_MARIN_RIFT_ZONE_XR.jpg?v=1746646202",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/2025_MARIN_RIFT_ZONE_XR.jpg?v=1746646202",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/2025_MARIN_RIFT_ZONE_XR_3-4.jpg?v=1746646202",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/155.jpg?v=1746646202",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/147.jpg?v=1746646202",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/148.jpg?v=1746646202"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 50606539931940,
-          "price": 2799.99,
-          "compare": 3999.99,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "27.5"
-            ],
-            "frame_size": [
-              "S"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "27.5"
-        ],
-        "frame_size": [
-          "S"
-        ]
-      }
     }
   ],
   "Bikes Online_Frames": [
@@ -83854,34 +83492,6 @@
           "variant_id": 50276581605668,
           "price": 31.99,
           "compare": 49.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Ohlins TTX1 Air Shock Trunnion 205x65",
-      "url": "https://www.bikesonline.com/products/ohlins-ttx1-air-shock-205x65",
-      "price_new": "299.99",
-      "price_old": "729.99",
-      "availability": "In stock",
-      "part": "Forks & Shocks",
-      "store": "Bikes Online",
-      "product_type": "Parts",
-      "brand": "Ohlins",
-      "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/oh2436_700x_edc1029a-998e-49f7-add4-f9cf0a243593.webp?v=1741726377",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/oh2436_700x_edc1029a-998e-49f7-add4-f9cf0a243593.webp?v=1741726377",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Ohlins_TTX1_Air_Shock_210x55_-_3.jpg?v=1741726377",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Ohlins_TTX1_Air_Shock_210x55_cc906127-b97e-4be6-8e74-506617b41e91.jpg?v=1741726377",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Ohlins_TTX1_Air_Shock_210x55_-_2.jpg?v=1741726377"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 50276574495012,
-          "price": 299.99,
-          "compare": 729.99,
           "available": true,
           "specs": {}
         }
@@ -84656,51 +84266,6 @@
       "technical_specs": {
         "wheel_size": [
           "27.5",
-          "29"
-        ]
-      }
-    },
-    {
-      "name": "NS Bike Enigma Rock & Roll 29 Wheelset",
-      "url": "https://www.bikesonline.com/products/ns-bike-enigma-rock-roll-29-wheelset",
-      "price_new": "249.99",
-      "price_old": "729.99",
-      "availability": "In stock",
-      "part": "Wheels",
-      "store": "Bikes Online",
-      "product_type": "Parts",
-      "brand": "NS Bikes",
-      "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ns-bikes--enigma-rock-roll-27_5-rotary-boost-148x12-rotary-boost-110x15-wheelset-1_jpg.webp?v=1753735484",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ns-bikes--enigma-rock-roll-27_5-rotary-boost-148x12-rotary-boost-110x15-wheelset-1_jpg.webp?v=1753735484",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ns-bikes-enigma-rock-roll-27_5-rotary-boost-148x12-rotary-boost-110x15-wheelset_jpg.webp?v=1753735484",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/parts-stuff-enigma-rock-roll-27_5-rotary-boost-148x12-rotary-boost-110x15-wheelset-2_jpg.webp?v=1753735484"
-      ],
-      "spec_offers": [
-        {
-          "diameter_mm": null,
-          "durometers": [],
-          "variant_id": "50898987614500",
-          "available": true,
-          "price": 249.99,
-          "compare_at_price": 729.99
-        }
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 50898987614500,
-          "price": 249.99,
-          "compare": 729.99,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
           "29"
         ]
       }
@@ -86415,35 +85980,6 @@
           "variant_id": 51181542900004,
           "price": 139.99,
           "compare": 159.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Shimano PD-GR500 Pedal",
-      "url": "https://www.bikesonline.com/products/shimano-pd-gr500-pedal",
-      "price_new": "69.99",
-      "price_old": "80.00",
-      "availability": "In stock",
-      "part": "Pedals",
-      "store": "Bikes Online",
-      "product_type": "Parts",
-      "brand": "Shimano",
-      "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PG-GRPE.jpg?v=1711353309",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PG-GRPE.jpg?v=1711353309",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PG-GRPE_0db5426a-bef4-46c3-9859-fcbe7ec16537.jpg?v=1711353309",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PG-GRPE_2d5d65ed-9dc5-4213-8165-9df12b0cc158.jpg?v=1711353309",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PG-GRPE_3bfe2569-a059-4b82-ae4d-9e529422b6dc.jpg?v=1711353309",
-        "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/PG-GRPE_3d09dbc2-0c08-4e1a-a543-c278d393486e.jpg?v=1711353309"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 48333401227556,
-          "price": 69.99,
-          "compare": 80.0,
           "available": true,
           "specs": {}
         }
@@ -89320,29 +88856,6 @@
             ],
             "prot_size": [
               "S"
-            ]
-          }
-        },
-        {
-          "variant_id": 50783922028836,
-          "price": 49.99,
-          "compare": 89.95,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Half shell (trail)"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "M"
             ]
           }
         },
@@ -92839,6 +92352,60 @@
         ],
         "tire_width": [
           "2.4"
+        ],
+        "casing": [
+          "EXO"
+        ],
+        "tubeless": [
+          "Tubeless ready"
+        ]
+      }
+    },
+    {
+      "name": "Maxxis Ikon Tire - 26 x 2.2, Tubeless, Folding, Black/Dark Tan, Dual, EXO",
+      "url": "https://www.coloradocyclist.com/products/maxxis-ikon-tire-26-x-2-2-tubeless-folding-black-dark-tan-dual-exo",
+      "price_new": "66.00",
+      "price_old": "72.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Colorado Cyclist",
+      "product_type": "Tires",
+      "brand": "Maxxis",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/25512_TR0490_b6b2c705-638b-432a-aa22-9287a494b98b.jpg?v=1795135503",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/25512_TR0490_b6b2c705-638b-432a-aa22-9287a494b98b.jpg?v=1795135503",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/25512_TR0490-01_1abe0345-996d-4340-9ce3-2f19d2652e93.jpg?v=1795135503"
+      ],
+      "width": 26.0,
+      "length": 2.2,
+      "technical_offers": [
+        {
+          "variant_id": 48316865577200,
+          "price": 66.0,
+          "compare": 72.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "26"
+            ],
+            "tire_width": [
+              "2.2"
+            ],
+            "casing": [
+              "EXO"
+            ],
+            "tubeless": [
+              "Tubeless ready"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "26"
+        ],
+        "tire_width": [
+          "2.2"
         ],
         "casing": [
           "EXO"
@@ -103116,48 +102683,6 @@
       }
     },
     {
-      "name": "WTB Slick Tire - 29 x 2.2, Clincher, Steel, Black, 27tpi",
-      "url": "https://www.coloradocyclist.com/products/wtb-slick-tire-29-x-2-2-clincher-steel-black-27tpi",
-      "price_new": "32.95",
-      "price_old": "36.95",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "Colorado Cyclist",
-      "product_type": "Tires",
-      "brand": "WTB",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593.jpg?v=1795136473",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593.jpg?v=1795136473",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1589-01.jpg?v=1795136473"
-      ],
-      "width": 29.0,
-      "length": 2.2,
-      "technical_offers": [
-        {
-          "variant_id": 51171817685232,
-          "price": 32.95,
-          "compare": 36.95,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tire_width": [
-              "2.2"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ],
-        "tire_width": [
-          "2.2"
-        ]
-      }
-    },
-    {
       "name": "Schwalbe Romy Tire - 27.5 x 2.40, Tubeless, Folding, Black, Pro, Trail, Soft, E-50",
       "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-27-5-x-2-40-tubeless-folding-black-pro-trail-soft-e-50",
       "price_new": "94.86",
@@ -103764,60 +103289,6 @@
       }
     },
     {
-      "name": "Schwalbe Romy Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial, E-50",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50",
-      "price_new": "100.44",
-      "price_old": "108.00",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "Colorado Cyclist",
-      "product_type": "Tires",
-      "brand": "Schwalbe",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_63f70d8c-be77-4eb3-91cf-22682c26fc79.jpg?v=1795136404",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_63f70d8c-be77-4eb3-91cf-22682c26fc79.jpg?v=1795136404",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633-01_8f2218fb-21d8-42fa-8f4a-cc10c00e217e.jpg?v=1795136404"
-      ],
-      "width": 29.0,
-      "length": 2.5,
-      "technical_offers": [
-        {
-          "variant_id": 51171816702192,
-          "price": 100.44,
-          "compare": 108.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tire_width": [
-              "2.5"
-            ],
-            "casing": [
-              "Radial"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ],
-        "tire_width": [
-          "2.5"
-        ],
-        "casing": [
-          "Radial"
-        ],
-        "tubeless": [
-          "Tubeless ready"
-        ]
-      }
-    },
-    {
       "name": "Schwalbe Romy Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Trail, Soft, E-50",
       "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-40-tubeless-folding-black-pro-trail-soft-e-50",
       "price_new": "94.86",
@@ -104408,60 +103879,6 @@
         ],
         "casing": [
           "Tough"
-        ],
-        "tubeless": [
-          "Tubeless ready"
-        ]
-      }
-    },
-    {
-      "name": "Maxxis Aspen ST Tire - 29 x 2.4, Tubeless, Folding, Black, MaxxSpeed, EXO",
-      "url": "https://www.coloradocyclist.com/products/maxxis-aspen-st-tire-29-x-2-4-tubeless-folding-black-maxxspeed-exo",
-      "price_new": "88.00",
-      "price_old": "96.00",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "Colorado Cyclist",
-      "product_type": "Tires",
-      "brand": "Maxxis",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_436959f4-d549-4b3d-ae73-41de5bd19342.jpg?v=1795131714",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_436959f4-d549-4b3d-ae73-41de5bd19342.jpg?v=1795131714",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269-01_1204a472-3073-44d6-b17d-63aad5aa30e5.jpg?v=1795131714"
-      ],
-      "width": 29.0,
-      "length": 2.4,
-      "technical_offers": [
-        {
-          "variant_id": 51171707846896,
-          "price": 88.0,
-          "compare": 96.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tire_width": [
-              "2.4"
-            ],
-            "casing": [
-              "EXO"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ],
-        "tire_width": [
-          "2.4"
-        ],
-        "casing": [
-          "EXO"
         ],
         "tubeless": [
           "Tubeless ready"
@@ -108936,6 +108353,60 @@
       }
     },
     {
+      "name": "Maxxis Rekon Race Tire - 27.5 x 2.25, Tubeless, Folding, Black, Dual, EXO",
+      "url": "https://www.coloradocyclist.com/products/maxxis-rekon-race-tire-27-5-x-2-25-tubeless-folding-black-dual-exo",
+      "price_new": "83.00",
+      "price_old": "91.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Colorado Cyclist",
+      "product_type": "Tires",
+      "brand": "Maxxis",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K7239_TR0988_3b935aa0-2151-4fc5-92f4-7b45a0e5b6e1.jpg?v=1795141447",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K7239_TR0988_3b935aa0-2151-4fc5-92f4-7b45a0e5b6e1.jpg?v=1795141447",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/K7239_TR0988-01_2c5fc4bc-e95c-46f2-8ddd-cf02a04befdf.jpg?v=1795141448"
+      ],
+      "width": 27.5,
+      "length": 2.25,
+      "technical_offers": [
+        {
+          "variant_id": 48319285625072,
+          "price": 83.0,
+          "compare": 91.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "27.5"
+            ],
+            "tire_width": [
+              "2.25"
+            ],
+            "casing": [
+              "EXO"
+            ],
+            "tubeless": [
+              "Tubeless ready"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "27.5"
+        ],
+        "tire_width": [
+          "2.25"
+        ],
+        "casing": [
+          "EXO"
+        ],
+        "tubeless": [
+          "Tubeless ready"
+        ]
+      }
+    },
+    {
       "name": "Maxxis Rekon Race Tire - 29 x 2.25, Clincher, Wire, Black, EXO",
       "url": "https://www.coloradocyclist.com/products/maxxis-rekon-race-tire-29-x-2-25-clincher-wire-black-exo",
       "price_new": "45.00",
@@ -113379,87 +112850,152 @@
       }
     },
     {
-      "name": "Maxxis Hookworm Tire - 27.5 x 2.5, Clincher, Wire, Black, Single",
-      "url": "https://www.coloradocyclist.com/products/maxxis-hookworm-tire-27-5-x-2-5-clincher-wire-black-single",
-      "price_new": "44.00",
-      "price_old": "48.00",
+      "name": "WTB Slick Tire - 29 x 2.2, Clincher, Steel, Black, 27tpi",
+      "url": "https://www.coloradocyclist.com/products/wtb-slick-tire-29-x-2-2-clincher-steel-black-27tpi",
+      "price_new": "32.95",
+      "price_old": "36.95",
       "availability": "In stock",
       "part": "Tires",
       "store": "Colorado Cyclist",
       "product_type": "Tires",
-      "brand": "Maxxis",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/2230_TR1219_8b918d24-bba1-442a-bb2e-896b391bdc4d.jpg?v=1795135193",
+      "brand": "WTB",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593.jpg?v=1795136473",
       "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/2230_TR1219_8b918d24-bba1-442a-bb2e-896b391bdc4d.jpg?v=1795135193",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/2230_TR1219-01_7bcf38e9-3b5e-4c07-8223-27e8197cd81a.jpg?v=1795135193",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/2230_TR1219-02_29591c78-5470-493b-881c-d4b61dd32e2f.jpg?v=1795135193"
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593.jpg?v=1795136473",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1589-01.jpg?v=1795136473"
       ],
-      "width": 27.5,
-      "length": 2.5,
+      "width": 29.0,
+      "length": 2.2,
       "technical_offers": [
         {
-          "variant_id": 49638158106864,
-          "price": 44.0,
-          "compare": 48.0,
+          "variant_id": 51171817685232,
+          "price": 32.95,
+          "compare": 36.95,
           "available": true,
           "specs": {
             "wheel_size": [
-              "27.5"
+              "29"
             ],
             "tire_width": [
-              "2.5"
+              "2.2"
             ]
           }
         }
       ],
       "technical_specs": {
         "wheel_size": [
-          "27.5"
+          "29"
         ],
         "tire_width": [
-          "2.5"
+          "2.2"
         ]
       }
     },
     {
-      "name": "Maxxis DTH Tire - 26 x 2.3, Clincher, Wire, Black, Single",
-      "url": "https://www.coloradocyclist.com/products/maxxis-dth-tire-26-x-2-3-clincher-wire-black-single",
-      "price_new": "39.00",
-      "price_old": "42.00",
+      "name": "Schwalbe Romy Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial, E-50",
+      "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50",
+      "price_new": "100.44",
+      "price_old": "108.00",
       "availability": "In stock",
       "part": "Tires",
       "store": "Colorado Cyclist",
       "product_type": "Tires",
-      "brand": "Maxxis",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/13169_TR6178_fd6dd8a1-c8a0-4c77-bf2b-f73ee3a60850.jpg?v=1795037686",
+      "brand": "Schwalbe",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_63f70d8c-be77-4eb3-91cf-22682c26fc79.jpg?v=1795136404",
       "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/13169_TR6178_fd6dd8a1-c8a0-4c77-bf2b-f73ee3a60850.jpg?v=1795037686",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/13169_TR6178-01.jpg?v=1795037686"
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_63f70d8c-be77-4eb3-91cf-22682c26fc79.jpg?v=1795136404",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633-01_8f2218fb-21d8-42fa-8f4a-cc10c00e217e.jpg?v=1795136404"
       ],
-      "width": 26.0,
-      "length": 2.3,
+      "width": 29.0,
+      "length": 2.5,
       "technical_offers": [
         {
-          "variant_id": 49638178324720,
-          "price": 39.0,
-          "compare": 42.0,
+          "variant_id": 51171816702192,
+          "price": 100.44,
+          "compare": 108.0,
           "available": true,
           "specs": {
             "wheel_size": [
-              "26"
+              "29"
             ],
             "tire_width": [
-              "2.3"
+              "2.5"
+            ],
+            "casing": [
+              "Radial"
+            ],
+            "tubeless": [
+              "Tubeless ready"
             ]
           }
         }
       ],
       "technical_specs": {
         "wheel_size": [
-          "26"
+          "29"
         ],
         "tire_width": [
-          "2.3"
+          "2.5"
+        ],
+        "casing": [
+          "Radial"
+        ],
+        "tubeless": [
+          "Tubeless ready"
+        ]
+      }
+    },
+    {
+      "name": "Maxxis Aspen ST Tire - 29 x 2.4, Tubeless, Folding, Black, MaxxSpeed, EXO",
+      "url": "https://www.coloradocyclist.com/products/maxxis-aspen-st-tire-29-x-2-4-tubeless-folding-black-maxxspeed-exo",
+      "price_new": "88.00",
+      "price_old": "96.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Colorado Cyclist",
+      "product_type": "Tires",
+      "brand": "Maxxis",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_436959f4-d549-4b3d-ae73-41de5bd19342.jpg?v=1795131714",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_436959f4-d549-4b3d-ae73-41de5bd19342.jpg?v=1795131714",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269-01_1204a472-3073-44d6-b17d-63aad5aa30e5.jpg?v=1795131714"
+      ],
+      "width": 29.0,
+      "length": 2.4,
+      "technical_offers": [
+        {
+          "variant_id": 51171707846896,
+          "price": 88.0,
+          "compare": 96.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "29"
+            ],
+            "tire_width": [
+              "2.4"
+            ],
+            "casing": [
+              "EXO"
+            ],
+            "tubeless": [
+              "Tubeless ready"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "29"
+        ],
+        "tire_width": [
+          "2.4"
+        ],
+        "casing": [
+          "EXO"
+        ],
+        "tubeless": [
+          "Tubeless ready"
         ]
       }
     }
@@ -161766,13 +161302,6 @@
           "specs": {}
         },
         {
-          "variant_id": 42786319007942,
-          "price": 33.75,
-          "compare": 45.0,
-          "available": true,
-          "specs": {}
-        },
-        {
           "variant_id": 41805376585926,
           "price": 33.75,
           "compare": 45.0,
@@ -166423,88 +165952,6 @@
       "technical_specs": {
         "wheel_size": [
           "27.5"
-        ]
-      }
-    },
-    {
-      "name": "Race Face ERA Rear Wheel - 27.5\" - 28h - 12x148mm - 6-Bolt - XD",
-      "url": "https://www.thelostco.com/products/raceface-era-wheel-rear-27-5-584-holes-28-12x148mm-ta-148mm-disc-is-6-bolt-sram-xd",
-      "price_new": "727.19",
-      "price_old": "908.99",
-      "availability": "In stock",
-      "part": "Wheels",
-      "store": "The Lost Co.",
-      "product_type": "Wheels",
-      "brand": "Race Face",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/473a6d761dfe679de0089ad8e9f76da570085806.jpg?v=1786751429",
-      "length": 27.5,
-      "spec_offers": [
-        {
-          "diameter_mm": null,
-          "durometers": [],
-          "variant_id": "46938833486022",
-          "available": true,
-          "price": 727.19,
-          "compare_at_price": 908.99
-        }
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46938833486022,
-          "price": 727.19,
-          "compare": 908.99,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "27.5"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "27.5"
-        ]
-      }
-    },
-    {
-      "name": "Stan's NoTubes Flow MK4 Rear Wheel - 29\" - 12x148 - 6-Bolt - XD",
-      "url": "https://www.thelostco.com/products/stans-notubes-flow-mk4-rear-wheel-29-12-x-148mm-6-bolt-xdr-black",
-      "price_new": "543.00",
-      "price_old": "675.00",
-      "availability": "In stock",
-      "part": "Wheels",
-      "store": "The Lost Co.",
-      "product_type": "Wheels",
-      "brand": "Stan's NoTubes",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/stans-notubes-flow-mk4-rear-wheel-29-12x148-6-bolt-xd-stans-no-tubes-the-lost-co-h041847-06-29-847746059950-476777.jpg?v=1706442513",
-      "length": 29.0,
-      "spec_offers": [
-        {
-          "diameter_mm": null,
-          "durometers": [],
-          "variant_id": "43117462388934",
-          "available": true,
-          "price": 543.0,
-          "compare_at_price": 675.0
-        }
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 43117462388934,
-          "price": 543.0,
-          "compare": 675.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
         ]
       }
     }
@@ -171319,6 +170766,50 @@
       }
     },
     {
+      "name": "Maxxis Rekon Race Tire - 27.5x2.25 - Dual Compound / EXO",
+      "url": "https://www.thelostco.com/products/maxxis-rekon-race-tire-27-5-x-2-25-tubeless-folding-black-dual-exo",
+      "price_new": "83.00",
+      "price_old": "91.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "The Lost Co.",
+      "product_type": "Tires",
+      "brand": "Maxxis",
+      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/products/maxxis-rekon-race-tire-275-x-225-tubeless-folding-black-dual-exo-maxxis-the-lost-co-j592650-4717784038803-951004.jpg?v=1680352475",
+      "width": 27.5,
+      "length": 2.25,
+      "technical_offers": [
+        {
+          "variant_id": 42649318359238,
+          "price": 83.0,
+          "compare": 91.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "27.5"
+            ],
+            "tire_width": [
+              "2.25"
+            ],
+            "casing": [
+              "EXO"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "27.5"
+        ],
+        "tire_width": [
+          "2.25"
+        ],
+        "casing": [
+          "EXO"
+        ]
+      }
+    },
+    {
       "name": "Maxxis Minion DHF Tire - 27.5 x 2.6 - Dual Compound / EXO",
       "url": "https://www.thelostco.com/products/maxxis-minion-dhf-tire-27-5-x-2-6-tubeless-folding-black-dual-exo",
       "price_new": "83.00",
@@ -172880,56 +172371,6 @@
         ],
         "tire_width": [
           "2.6"
-        ],
-        "tubeless": [
-          "Tubeless ready"
-        ]
-      }
-    },
-    {
-      "name": "Maxxis Aspen AT Tire 29x2.4\" MS/EXO/TR",
-      "url": "https://www.thelostco.com/products/maxxis-aspen-at-tire-29x2-4-ms-exo-tr",
-      "price_new": "87.00",
-      "price_old": "96.00",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "The Lost Co.",
-      "product_type": "Tires",
-      "brand": "Maxxis",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/maxxis-aspen-at-tire-29x24-msexotr-maxxis-the-lost-co-tb00677600-b-ma1091-9698647.webp?v=1782966909",
-      "width": 29.0,
-      "length": 2.4,
-      "technical_offers": [
-        {
-          "variant_id": 45752621039814,
-          "price": 87.0,
-          "compare": 96.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tire_width": [
-              "2.4"
-            ],
-            "casing": [
-              "EXO"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ],
-        "tire_width": [
-          "2.4"
-        ],
-        "casing": [
-          "EXO"
         ],
         "tubeless": [
           "Tubeless ready"
@@ -175167,28 +174608,6 @@
       "technical_specs": {}
     },
     {
-      "name": "SRAM DUB Bottom Bracket Preload Adjuster Kit",
-      "url": "https://www.thelostco.com/products/sram-dub-bottom-bracket-preload-adjuster-kit",
-      "price_new": "5.10",
-      "price_old": "6.00",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "The Lost Co.",
-      "product_type": "Crank Bolts and Parts",
-      "brand": "SRAM",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/dfc4b2d57b1a244373d6b03ae9aad6a9e18c662a.jpg?v=1785972770",
-      "technical_offers": [
-        {
-          "variant_id": 46857507438790,
-          "price": 5.1,
-          "compare": 6.0,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
       "name": "Race Face Narrow Wide Chainring - 104 BCD - 34t - Black",
       "url": "https://www.thelostco.com/products/raceface-narrow-wide-chainring-104mm-bcd-34t-black",
       "price_new": "27.19",
@@ -176812,6 +176231,28 @@
       "technical_specs": {}
     },
     {
+      "name": "Race Face Era Crankset - 165mm - Red",
+      "url": "https://www.thelostco.com/products/raceface-era-crankset-165mm-direct-mount-136mm-spindle-cinch-interface-carbon-red",
+      "price_new": "439.99",
+      "price_old": "549.99",
+      "availability": "In stock",
+      "part": "Drivetrain",
+      "store": "The Lost Co.",
+      "product_type": "Cranksets and Arms",
+      "brand": "Race Face",
+      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/a0e690cecb7696d63cdfb4cb19955b523d8843f6.jpg?v=1786751490",
+      "technical_offers": [
+        {
+          "variant_id": 46938837352646,
+          "price": 439.99,
+          "compare": 549.99,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
       "name": "Race Face Era Crankset - 160mm - Blue",
       "url": "https://www.thelostco.com/products/raceface-era-crankset-160mm-direct-mount-136mm-spindle-cinch-interface-carbon-blue",
       "price_new": "439.99",
@@ -177054,6 +176495,28 @@
       "technical_specs": {}
     },
     {
+      "name": "Race Face Era SL Crank Arms - 136mm Spindle - 160mm Length - Kash Money",
+      "url": "https://www.thelostco.com/products/race-face-era-sl-crank-arms-no-bb-136-bb-160-kash-money",
+      "price_new": "461.59",
+      "price_old": "576.99",
+      "availability": "In stock",
+      "part": "Drivetrain",
+      "store": "The Lost Co.",
+      "product_type": "Cranksets and Arms",
+      "brand": "Race Face",
+      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/6b71796b3071e1bb4ebdd271109f9e552eec2da0.jpg?v=1785540102",
+      "technical_offers": [
+        {
+          "variant_id": 46640317759686,
+          "price": 461.59,
+          "compare": 576.99,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
       "name": "Race Face Era SL Crank Arms - 136mm Spindle - 170mm Length - Stealth",
       "url": "https://www.thelostco.com/products/race-face-era-sl-crank-arms-no-bb-136-bb-170mm-stealth",
       "price_new": "461.59",
@@ -177226,34 +176689,6 @@
       "technical_specs": {}
     },
     {
-      "name": "RaceFace ERA Carbon Crankset - 175mm Length - CINCH Interface - 136mm Spindle - Blue",
-      "url": "https://www.thelostco.com/products/raceface-era-crankset-175mm-direct-mount-136mm-spindle-cinch-interface-carbon-blue",
-      "price_new": "439.99",
-      "price_old": "549.99",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "The Lost Co.",
-      "product_type": "Cranksets",
-      "brand": "Race Face",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-868006.jpg?v=1730509647",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-868006.jpg?v=1730509647",
-        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-476869.jpg?v=1730509647",
-        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-999144.jpg?v=1730509647",
-        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-523680.jpg?v=1730509647"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 44212121567430,
-          "price": 439.99,
-          "compare": 549.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
       "name": "RaceFace ERA Carbon Crankset - 165mm Length - CINCH Interface - 136mm Spindle - Blue",
       "url": "https://www.thelostco.com/products/raceface-era-crankset-165mm-direct-mount-136mm-spindle-cinch-interface-carbon-blue",
       "price_new": "439.99",
@@ -177366,34 +176801,6 @@
       "technical_specs": {}
     },
     {
-      "name": "RaceFace ERA Carbon Crankset - 170mm Length - CINCH Interface - 136mm Spindle - Red",
-      "url": "https://www.thelostco.com/products/raceface-era-crankset-170mm-direct-mount-136mm-spindle-cinch-interface-carbon-red",
-      "price_new": "439.99",
-      "price_old": "549.99",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "The Lost Co.",
-      "product_type": "Cranksets",
-      "brand": "Race Face",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-486279.jpg?v=1730509646",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-486279.jpg?v=1730509646",
-        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-127697.jpg?v=1730509646",
-        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-831117.jpg?v=1730509646",
-        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-474328.jpg?v=1730509646"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 44212121338054,
-          "price": 439.99,
-          "compare": 549.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
       "name": "RaceFace ERA Carbon Crankset - 165mm Length - CINCH Interface - 136mm Spindle - Orange",
       "url": "https://www.thelostco.com/products/raceface-era-crankset-165mm-direct-mount-136mm-spindle-cinch-interface-carbon-orange",
       "price_new": "439.99",
@@ -177443,19 +176850,47 @@
       "technical_specs": {}
     },
     {
-      "name": "Race Face Era Crankset - 165mm - Red",
-      "url": "https://www.thelostco.com/products/raceface-era-crankset-165mm-direct-mount-136mm-spindle-cinch-interface-carbon-red",
+      "name": "SRAM DUB Bottom Bracket Preload Adjuster Kit",
+      "url": "https://www.thelostco.com/products/sram-dub-bottom-bracket-preload-adjuster-kit",
+      "price_new": "5.10",
+      "price_old": "6.00",
+      "availability": "In stock",
+      "part": "Drivetrain",
+      "store": "The Lost Co.",
+      "product_type": "Crank Bolts and Parts",
+      "brand": "SRAM",
+      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/dfc4b2d57b1a244373d6b03ae9aad6a9e18c662a.jpg?v=1785972770",
+      "technical_offers": [
+        {
+          "variant_id": 46857507438790,
+          "price": 5.1,
+          "compare": 6.0,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
+      "name": "RaceFace ERA Carbon Crankset - 175mm Length - CINCH Interface - 136mm Spindle - Blue",
+      "url": "https://www.thelostco.com/products/raceface-era-crankset-175mm-direct-mount-136mm-spindle-cinch-interface-carbon-blue",
       "price_new": "439.99",
       "price_old": "549.99",
       "availability": "In stock",
       "part": "Drivetrain",
       "store": "The Lost Co.",
-      "product_type": "Cranksets and Arms",
+      "product_type": "Cranksets",
       "brand": "Race Face",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/a0e690cecb7696d63cdfb4cb19955b523d8843f6.jpg?v=1786751490",
+      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-868006.jpg?v=1730509647",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-868006.jpg?v=1730509647",
+        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-476869.jpg?v=1730509647",
+        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-999144.jpg?v=1730509647",
+        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-523680.jpg?v=1730509647"
+      ],
       "technical_offers": [
         {
-          "variant_id": 46938837352646,
+          "variant_id": 44212121567430,
           "price": 439.99,
           "compare": 549.99,
           "available": true,
@@ -177465,21 +176900,27 @@
       "technical_specs": {}
     },
     {
-      "name": "Race Face Era SL Crank Arms - 136mm Spindle - 160mm Length - Kash Money",
-      "url": "https://www.thelostco.com/products/race-face-era-sl-crank-arms-no-bb-136-bb-160-kash-money",
-      "price_new": "461.59",
-      "price_old": "576.99",
+      "name": "RaceFace ERA Carbon Crankset - 170mm Length - CINCH Interface - 136mm Spindle - Red",
+      "url": "https://www.thelostco.com/products/raceface-era-crankset-170mm-direct-mount-136mm-spindle-cinch-interface-carbon-red",
+      "price_new": "439.99",
+      "price_old": "549.99",
       "availability": "In stock",
       "part": "Drivetrain",
       "store": "The Lost Co.",
-      "product_type": "Cranksets and Arms",
+      "product_type": "Cranksets",
       "brand": "Race Face",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/6b71796b3071e1bb4ebdd271109f9e552eec2da0.jpg?v=1785540102",
+      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-486279.jpg?v=1730509646",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-486279.jpg?v=1730509646",
+        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-127697.jpg?v=1730509646",
+        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-831117.jpg?v=1730509646",
+        "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-474328.jpg?v=1730509646"
+      ],
       "technical_offers": [
         {
-          "variant_id": 46640317759686,
-          "price": 461.59,
-          "compare": 576.99,
+          "variant_id": 44212121338054,
+          "price": 439.99,
+          "compare": 549.99,
           "available": true,
           "specs": {}
         }
@@ -183116,6 +182557,28 @@
       "technical_specs": {}
     },
     {
+      "name": "RaceFace ERA Carbon MTB Handlebar - 35mm Clamp - 760mm Width - 10mm Rise - Black",
+      "url": "https://www.thelostco.com/products/raceface-era-10-mtb-handlebar-diameter-35mm-760mm-rise-10mm-black",
+      "price_new": "143.19",
+      "price_old": "178.99",
+      "availability": "In stock",
+      "part": "Cockpit",
+      "store": "The Lost Co.",
+      "product_type": "Handlebars",
+      "brand": "Race Face",
+      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-mtb-handlebar-35mm-clamp-760mm-width-10mm-rise-black-race-face-the-lost-co-946-00-007-01-0821973481449-162834.jpg?v=1730509646",
+      "technical_offers": [
+        {
+          "variant_id": 44212121796806,
+          "price": 143.19,
+          "compare": 178.99,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
       "name": "Race Face Turbine Stem - 32mm Length - 35mm Clamp - Blue",
       "url": "https://www.thelostco.com/products/race-face-turbine-stem-35-0-0mm-x-32mm-blue",
       "price_new": "101.59",
@@ -185196,28 +184659,6 @@
         }
       ],
       "technical_specs": {}
-    },
-    {
-      "name": "RaceFace ERA Carbon MTB Handlebar - 35mm Clamp - 760mm Width - 10mm Rise - Black",
-      "url": "https://www.thelostco.com/products/raceface-era-10-mtb-handlebar-diameter-35mm-760mm-rise-10mm-black",
-      "price_new": "143.19",
-      "price_old": "178.99",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "The Lost Co.",
-      "product_type": "Handlebars",
-      "brand": "Race Face",
-      "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-mtb-handlebar-35mm-clamp-760mm-width-10mm-rise-black-race-face-the-lost-co-946-00-007-01-0821973481449-162834.jpg?v=1730509646",
-      "technical_offers": [
-        {
-          "variant_id": 44212121796806,
-          "price": 143.19,
-          "compare": 178.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
     }
   ],
   "The Lost Co._Pedals": [
@@ -185258,13 +184699,6 @@
         },
         {
           "variant_id": 13522411716708,
-          "price": 37.49,
-          "compare": 49.99,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 13522730647652,
           "price": 37.49,
           "compare": 49.99,
           "available": true,
@@ -187290,47 +186724,6 @@
       }
     },
     {
-      "name": "Norco 2024 Sight A1 MX",
-      "url": "https://bicyclewarehouse.com/products/2024-sight-a1-mx",
-      "price_new": "4299.00",
-      "price_old": "5699.00",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Bicycle Warehouse",
-      "product_type": "Bikes - Full Suspension 27.5",
-      "brand": "Norco",
-      "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/66a7f54b5c642f7c3621a6a323916ae3a81aa629.jpg?v=1787783633",
-      "technical_offers": [
-        {
-          "variant_id": 46652926754918,
-          "price": 4299.0,
-          "compare": 5699.0,
-          "available": true,
-          "specs": {
-            "riding_type": [
-              "enduro"
-            ]
-          }
-        },
-        {
-          "variant_id": 46652926787686,
-          "price": 4299.0,
-          "compare": 5699.0,
-          "available": true,
-          "specs": {
-            "riding_type": [
-              "enduro"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "riding_type": [
-          "enduro"
-        ]
-      }
-    },
-    {
       "name": "Specialized S-Works Epic 9",
       "url": "https://bicyclewarehouse.com/products/s-works-epic-9",
       "price_new": "13724.99",
@@ -189011,6 +188404,47 @@
       }
     },
     {
+      "name": "Norco 2024 Sight A1 MX",
+      "url": "https://bicyclewarehouse.com/products/2024-sight-a1-mx",
+      "price_new": "4299.00",
+      "price_old": "5699.00",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Bicycle Warehouse",
+      "product_type": "Bikes - Full Suspension 27.5",
+      "brand": "Norco",
+      "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/66a7f54b5c642f7c3621a6a323916ae3a81aa629.jpg?v=1787783633",
+      "technical_offers": [
+        {
+          "variant_id": 46652926754918,
+          "price": 4299.0,
+          "compare": 5699.0,
+          "available": true,
+          "specs": {
+            "riding_type": [
+              "enduro"
+            ]
+          }
+        },
+        {
+          "variant_id": 46652926787686,
+          "price": 4299.0,
+          "compare": 5699.0,
+          "available": true,
+          "specs": {
+            "riding_type": [
+              "enduro"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "riding_type": [
+          "enduro"
+        ]
+      }
+    },
+    {
       "name": "Specialized Stumpjumper 15 Alloy Frameset (2025)",
       "url": "https://bicyclewarehouse.com/products/stumpjumper-15-alloy-frameset-2025",
       "price_new": "1699.99",
@@ -190241,54 +189675,7 @@
       }
     }
   ],
-  "Bicycle Warehouse_Drivetrain": [
-    {
-      "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
-      "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
-      "price_new": "19.99",
-      "price_old": "23.60",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "Bicycle Warehouse",
-      "product_type": "Chains",
-      "brand": "KMC",
-      "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
-      ],
-      "width": 2.0,
-      "length": 1.0,
-      "technical_offers": [
-        {
-          "variant_id": 42413792624742,
-          "price": 19.99,
-          "compare": 23.6,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 42413792821350,
-          "price": 19.99,
-          "compare": 23.6,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    }
-  ],
+  "Bicycle Warehouse_Drivetrain": [],
   "Bicycle Warehouse_Brakes": [
     {
       "name": "Kool Stop Continental Brake Pads - 1 Pair 45.5mm",
@@ -190556,105 +189943,6 @@
         {
           "variant_id": 40210314133606,
           "price": 17.49,
-          "compare": 25.0,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Spank Spoon 350 35mm Stem",
-      "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem",
-      "price_new": "59.99",
-      "price_old": "69.99",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bicycle Warehouse",
-      "product_type": "Stems",
-      "brand": "Spank",
-      "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
-        "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40431254798438,
-          "price": 59.99,
-          "compare": 69.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Supacaz Grizips Bike Grips",
-      "url": "https://bicyclewarehouse.com/products/supacaz-grizips-mountain-bike-handlebar-grips",
-      "price_new": "19.99",
-      "price_old": "25.00",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bicycle Warehouse",
-      "product_type": "Grips",
-      "brand": "Supacaz",
-      "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-011_GRIP_GRIZIPS-GRIP-NEOBLUE_HEROEDIT.jpg?v=1772082435",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-013_GRIP_GRIZIPS-GRIP-RED_HEROEDIT.jpg?v=1772082437",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-014_GRIP_GRIZIPS-GRIP-NEON-YEL_HEROEDIT1.jpg?v=1772082439",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-010_GRIP_GRIZIP-GRIP_NEOGRN_HEROEDIT.jpg?v=1772082441",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/GR-10_20Grizips_20-_20Black.jpg?v=1772082443",
-        "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-011_GRIP_GRIZIP-GRIP-NEOORNGE_HEROEDIT_1.jpg?v=1772082445"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 40222305550438,
-          "price": 19.99,
-          "compare": 25.0,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 40222305583206,
-          "price": 19.99,
           "compare": 25.0,
           "available": true,
           "specs": {}
@@ -194264,164 +193552,6 @@
         "frame_size": [
           "S1",
           "S6"
-        ]
-      }
-    },
-    {
-      "name": "Specialized S-Works Stumpjumper 15 EVO - Shimano XTR Di2, FOX Factory",
-      "url": "https://www.bikemart.com/products/2026-stumpjumper-15-s-works-di2",
-      "price_new": "8199.99",
-      "price_old": "11300.00",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Bike Mart",
-      "product_type": "Mountain Bike",
-      "brand": "Specialized",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-00_SJ-15-SW-DI2-DLMMET-SMKLQDMET_HERO_DARK-PDP.jpg?v=1762254543",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-00_SJ-15-SW-DI2-DLMMET-SMKLQDMET_HERO_DARK-PDP.jpg?v=1762254543",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/93326-01_SJ-15-SW-DI2-SLDMET-REDSKY-BRSHCP_HERO_DARK-PDP.jpg?v=1762254544"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46838541484285,
-          "price": 8199.99,
-          "compare": 11300.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S1"
-            ]
-          }
-        },
-        {
-          "variant_id": 46838541517053,
-          "price": 8199.99,
-          "compare": 11300.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S2"
-            ]
-          }
-        },
-        {
-          "variant_id": 46838541549821,
-          "price": 8199.99,
-          "compare": 11300.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S3"
-            ]
-          }
-        },
-        {
-          "variant_id": 46838541680893,
-          "price": 8199.99,
-          "compare": 11300.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S1"
-            ]
-          }
-        },
-        {
-          "variant_id": 46838541746429,
-          "price": 8199.99,
-          "compare": 11300.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S3"
-            ]
-          }
-        },
-        {
-          "variant_id": 46838541779197,
-          "price": 8199.99,
-          "compare": 11300.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S4"
-            ]
-          }
-        },
-        {
-          "variant_id": 46838541811965,
-          "price": 8199.99,
-          "compare": 11300.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S5"
-            ]
-          }
-        },
-        {
-          "variant_id": 46838541844733,
-          "price": 8199.99,
-          "compare": 11300.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S6"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "frame_size": [
-          "S1",
-          "S2",
-          "S3",
-          "S4",
-          "S5",
-          "S6"
-        ]
-      }
-    },
-    {
-      "name": "Giant 2023 Reign Advanced Pro 1 Full Suspension Mountain Bike",
-      "url": "https://www.bikemart.com/products/2023-reign-advanced-pro-1-full-suspension-mountain-bike",
-      "price_new": "4999.00",
-      "price_old": "6460.00",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Bike Mart",
-      "product_type": "Full Suspension Mountain Bike",
-      "brand": "Giant",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Front.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Rear.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-4.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-5.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-6.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-7.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-8.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-9.jpg?v=1764025528",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamondMTB-10.jpg?v=1764025528"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46907588673789,
-          "price": 4999.0,
-          "compare": 6460.0,
-          "available": true,
-          "specs": {
-            "frame_size": [
-              "S"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "frame_size": [
-          "S"
         ]
       }
     }
@@ -200603,216 +199733,6 @@
         }
       ],
       "technical_specs": {}
-    },
-    {
-      "name": "Stan's Flow S2 Rear Wheel, 6 Bolt",
-      "url": "https://www.bikemart.com/products/stans-flow-s2-rear-wheel-6-bolt",
-      "price_new": "325.00",
-      "price_old": "400.00",
-      "availability": "In stock",
-      "part": "Wheels",
-      "store": "Bike Mart",
-      "product_type": "Rear Wheel",
-      "brand": "Stan's NoTubes",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1894.jpg?v=1762538210",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1894.jpg?v=1762538210",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1898.jpg?v=1762538210",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1890.jpg?v=1762538210",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1897.jpg?v=1762538210"
-      ],
-      "durometers": [
-        "650B"
-      ],
-      "spec_offers": [
-        {
-          "diameter_mm": null,
-          "durometers": [
-            "650B"
-          ],
-          "variant_id": "46852295688445",
-          "available": true,
-          "price": 325.0,
-          "compare_at_price": 400.0
-        },
-        {
-          "diameter_mm": null,
-          "durometers": [
-            "650B"
-          ],
-          "variant_id": "46852295721213",
-          "available": true,
-          "price": 325.0,
-          "compare_at_price": 400.0
-        },
-        {
-          "diameter_mm": null,
-          "durometers": [
-            "650B"
-          ],
-          "variant_id": "46852295753981",
-          "available": true,
-          "price": 325.0,
-          "compare_at_price": 400.0
-        },
-        {
-          "diameter_mm": null,
-          "durometers": [
-            "650B"
-          ],
-          "variant_id": "46852295786749",
-          "available": true,
-          "price": 325.0,
-          "compare_at_price": 400.0
-        },
-        {
-          "diameter_mm": null,
-          "durometers": [
-            "650B"
-          ],
-          "variant_id": "46852295819517",
-          "available": true,
-          "price": 325.0,
-          "compare_at_price": 400.0
-        },
-        {
-          "diameter_mm": null,
-          "durometers": [
-            "650B"
-          ],
-          "variant_id": "46852295852285",
-          "available": true,
-          "price": 325.0,
-          "compare_at_price": 400.0
-        },
-        {
-          "diameter_mm": null,
-          "durometers": [
-            "650B"
-          ],
-          "variant_id": "46852295885053",
-          "available": true,
-          "price": 325.0,
-          "compare_at_price": 400.0
-        }
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46852295688445,
-          "price": 325.0,
-          "compare": 400.0,
-          "available": true,
-          "specs": {
-            "axle": [
-              "12x142mm"
-            ]
-          }
-        },
-        {
-          "variant_id": 46852295721213,
-          "price": 325.0,
-          "compare": 400.0,
-          "available": true,
-          "specs": {
-            "axle": [
-              "12x142mm"
-            ]
-          }
-        },
-        {
-          "variant_id": 46852295753981,
-          "price": 325.0,
-          "compare": 400.0,
-          "available": true,
-          "specs": {
-            "axle": [
-              "12x148mm"
-            ]
-          }
-        },
-        {
-          "variant_id": 46852295786749,
-          "price": 325.0,
-          "compare": 400.0,
-          "available": true,
-          "specs": {
-            "axle": [
-              "12x148mm"
-            ]
-          }
-        },
-        {
-          "variant_id": 46852295819517,
-          "price": 325.0,
-          "compare": 400.0,
-          "available": true,
-          "specs": {
-            "axle": [
-              "12x148mm"
-            ]
-          }
-        },
-        {
-          "variant_id": 46852295852285,
-          "price": 325.0,
-          "compare": 400.0,
-          "available": true,
-          "specs": {
-            "axle": [
-              "12x142mm"
-            ]
-          }
-        },
-        {
-          "variant_id": 46852295885053,
-          "price": 325.0,
-          "compare": 400.0,
-          "available": true,
-          "specs": {
-            "axle": [
-              "12x142mm"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "axle": [
-          "12x142mm",
-          "12x148mm"
-        ]
-      }
-    },
-    {
-      "name": "Origin8 FB Elite Rear Skewer Front/Rear Rear Skewer QR 170mm AL6061/CrMo Blk",
-      "url": "https://www.bikemart.com/products/origin8-fb-1110-elite-rear-skewer-front-rear-rear-skewer-qr-170mm-al6061-crmo-blk",
-      "price_new": "32.49",
-      "price_old": "36.49",
-      "availability": "In stock",
-      "part": "Wheels",
-      "store": "Bike Mart",
-      "product_type": "Hubs",
-      "brand": "Origin8",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/370187.jpg?v=1762292549",
-      "spec_offers": [
-        {
-          "diameter_mm": null,
-          "durometers": [],
-          "variant_id": "46842328514813",
-          "available": true,
-          "price": 32.49,
-          "compare_at_price": 36.49
-        }
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46842328514813,
-          "price": 32.49,
-          "compare": 36.49,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
     }
   ],
   "Bike Mart_Tires": [
@@ -201913,6 +200833,237 @@
       "spec_warnings": [
         "conflicting tire_width"
       ]
+    },
+    {
+      "name": "Maxxis Grifter Tire - 20\"",
+      "url": "https://www.bikemart.com/products/maxxis-grifter-tire-20",
+      "price_new": "44.00",
+      "price_old": "48.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Bike Mart",
+      "product_type": "Tires",
+      "brand": "Maxxis",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6380_ebe10000-85c5-41d6-8457-61be7eff09a0.jpg?v=1763584345",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR6380_ebe10000-85c5-41d6-8457-61be7eff09a0.jpg?v=1763584345",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma1031a.jpg?v=1763584345"
+      ],
+      "length": 20.0,
+      "technical_offers": [
+        {
+          "variant_id": 46891640750333,
+          "price": 44.0,
+          "compare": 48.0,
+          "available": true,
+          "specs": {}
+        },
+        {
+          "variant_id": 46891640783101,
+          "price": 44.0,
+          "compare": 48.0,
+          "available": true,
+          "specs": {
+            "tire_width": [
+              "2.3"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "tire_width": [
+          "2.3"
+        ]
+      },
+      "spec_warnings": [
+        "conflicting tire_width"
+      ]
+    },
+    {
+      "name": "Maxxis High Roller III Tire - 3C Maxx Grip",
+      "url": "https://www.bikemart.com/products/maxxis-high-roller-iii-tire-3c-maxx-grip",
+      "price_new": "95.00",
+      "price_old": "104.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Bike Mart",
+      "product_type": "Tires",
+      "brand": "Maxxis",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma3422inset1a.jpg?v=1763555397",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma3422inset1a.jpg?v=1763555397",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR2383.jpg?v=1763555397",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma3422.jpg?v=1763555397"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46889409511677,
+          "price": 95.0,
+          "compare": 104.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "27.5"
+            ],
+            "tire_width": [
+              "2.4"
+            ]
+          }
+        },
+        {
+          "variant_id": 46889409544445,
+          "price": 106.0,
+          "compare": 116.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "27.5"
+            ],
+            "tire_width": [
+              "2.4"
+            ]
+          }
+        },
+        {
+          "variant_id": 46889409577213,
+          "price": 106.0,
+          "compare": 116.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "29"
+            ],
+            "tire_width": [
+              "2.4"
+            ]
+          }
+        },
+        {
+          "variant_id": 46889409609981,
+          "price": 106.0,
+          "compare": 116.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "27.5"
+            ],
+            "tire_width": [
+              "2.4"
+            ]
+          }
+        },
+        {
+          "variant_id": 46889409642749,
+          "price": 106.0,
+          "compare": 116.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "29"
+            ],
+            "tire_width": [
+              "2.4"
+            ]
+          }
+        },
+        {
+          "variant_id": 46889409675517,
+          "price": 95.0,
+          "compare": 104.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "29"
+            ],
+            "tire_width": [
+              "2.4"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "27.5",
+          "29"
+        ],
+        "tire_width": [
+          "2.4"
+        ]
+      }
+    },
+    {
+      "name": "Schwalbe Al Mighty Tire - 26 x 4.8\" Tubeless Folding BLK Evolution Line Addix Speed Grip Super Ground E-25",
+      "url": "https://www.bikemart.com/products/schwalbe-al-mighty-tire-26-x-4-8-tubeless-folding-blk-evolution-line-addix-speed-grip-super-ground-e-25",
+      "price_new": "138.57",
+      "price_old": "149.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Bike Mart",
+      "product_type": "Tires",
+      "brand": "Schwalbe",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1826.jpg?v=1762285337",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1826.jpg?v=1762285337",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1827.jpg?v=1762285338"
+      ],
+      "width": 26.0,
+      "length": 4.8,
+      "technical_offers": [
+        {
+          "variant_id": 46841054822653,
+          "price": 138.57,
+          "compare": 149.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "26"
+            ],
+            "tire_width": [
+              "4.8"
+            ],
+            "casing": [
+              "Super Ground"
+            ],
+            "tubeless": [
+              "Tubeless ready"
+            ]
+          }
+        },
+        {
+          "variant_id": 46841054855421,
+          "price": 172.05,
+          "compare": 185.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "26"
+            ],
+            "tire_width": [
+              "4.8"
+            ],
+            "casing": [
+              "Super Ground"
+            ],
+            "tubeless": [
+              "Tubeless ready"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "26"
+        ],
+        "tire_width": [
+          "4.8"
+        ],
+        "casing": [
+          "Super Ground"
+        ],
+        "tubeless": [
+          "Tubeless ready"
+        ]
+      }
     },
     {
       "name": "Schwalbe Big Ben 27.5x2.0\" Tire",
@@ -211623,199 +210774,6 @@
         }
       ],
       "technical_specs": {}
-    },
-    {
-      "name": "Maxxis Torch Tire - Black Clincher",
-      "url": "https://www.bikemart.com/products/maxxis-torch-tire",
-      "price_new": "44.00",
-      "price_old": "48.00",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "Bike Mart",
-      "product_type": "Tires",
-      "brand": "Maxxis",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR1385.jpg?v=1763533435",
-      "technical_offers": [
-        {
-          "variant_id": 46886884147453,
-          "price": 44.0,
-          "compare": 48.0,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46886884180221,
-          "price": 44.0,
-          "compare": 48.0,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46886884212989,
-          "price": 53.0,
-          "compare": 58.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tire_width": [
-              "2.1"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ],
-        "tire_width": [
-          "2.1"
-        ]
-      }
-    },
-    {
-      "name": "WTB Judge TCS 27.5x2.4\" Tire",
-      "url": "https://www.bikemart.com/products/wtb-judge-tcs-27-5x2-4-tire",
-      "price_new": "60.95",
-      "price_old": "80.95",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "Bike Mart",
-      "product_type": "Tires",
-      "brand": "WTB",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/wt1553.jpg?v=1762292758",
-      "width": 27.5,
-      "length": 2.4,
-      "technical_offers": [
-        {
-          "variant_id": 46842335854845,
-          "price": 69.95,
-          "compare": 93.95,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "27.5"
-            ],
-            "tire_width": [
-              "2.4"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ]
-          }
-        },
-        {
-          "variant_id": 46842335887613,
-          "price": 60.95,
-          "compare": 80.95,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "27.5"
-            ],
-            "tire_width": [
-              "2.4"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "27.5"
-        ],
-        "tire_width": [
-          "2.4"
-        ],
-        "tubeless": [
-          "Tubeless ready"
-        ]
-      }
-    },
-    {
-      "name": "Maxxis Aspen ST 29\" Tubeless Mountain Bike Tire - Black",
-      "url": "https://www.bikemart.com/products/maxxis-aspen-st-29x2-25-exo-tr-maxxspeed-silica",
-      "price_new": "85.00",
-      "price_old": "93.00",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "Bike Mart",
-      "product_type": "Tires",
-      "brand": "Maxxis",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma1079a.jpg?v=1763522783",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ma1079a.jpg?v=1763522783",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TR2269.jpg?v=1763522783"
-      ],
-      "length": 29.0,
-      "technical_offers": [
-        {
-          "variant_id": 46886589563133,
-          "price": 85.0,
-          "compare": 93.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ],
-            "tire_width": [
-              "2.25"
-            ]
-          }
-        },
-        {
-          "variant_id": 46886589595901,
-          "price": 85.0,
-          "compare": 93.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ],
-            "tire_width": [
-              "2.4"
-            ]
-          }
-        },
-        {
-          "variant_id": 46886589661437,
-          "price": 92.0,
-          "compare": 101.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ],
-            "tire_width": [
-              "2.25"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ],
-        "tubeless": [
-          "Tubeless ready"
-        ],
-        "tire_width": [
-          "2.25",
-          "2.4"
-        ]
-      }
     }
   ],
   "Bike Mart_Drivetrain": [
@@ -215048,34 +214006,6 @@
       "technical_specs": {}
     },
     {
-      "name": "Odyssey Bluebird Chain - Single Speed 1/2\" x 1/8\"",
-      "url": "https://www.bikemart.com/products/odyssey-bluebird-chain",
-      "price_new": "36.99",
-      "price_old": "39.99",
-      "availability": "In stock",
-      "part": "Drivetrain",
-      "store": "Bike Mart",
-      "product_type": "Chains",
-      "brand": "Odyssey",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9032.jpg?v=1762282102",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/CH9033.jpg?v=1762282102"
-      ],
-      "width": 2.0,
-      "length": 1.0,
-      "technical_offers": [
-        {
-          "variant_id": 46840926667005,
-          "price": 36.99,
-          "compare": 39.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
       "name": "RaceFace EXI Crank Bolt Washer - M15",
       "url": "https://www.bikemart.com/products/raceface-exi-crank-bolt-washer-m15",
       "price_new": "1.88",
@@ -215099,6 +214029,61 @@
     }
   ],
   "Bike Mart_Brakes": [
+    {
+      "name": "Tektro MT2.1 Eclipse Brake Lever Set",
+      "url": "https://www.bikemart.com/products/tektro-mt-2-1-eclipse-brake-lever-set",
+      "price_new": "29.99",
+      "price_old": "39.52",
+      "availability": "In stock",
+      "part": "Brakes",
+      "store": "Bike Mart",
+      "product_type": "Brake Levers",
+      "brand": "Tektro",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7545.jpg?v=1762255886",
+      "technical_offers": [
+        {
+          "variant_id": 46838587162877,
+          "price": 29.99,
+          "compare": 39.52,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
+      "name": "Tektro HD-T280 Disc Brake and Lever - Front Hydraulic Post Mount Black",
+      "url": "https://www.bikemart.com/products/tektro-hd-t280-disc-brake",
+      "price_new": "59.99",
+      "price_old": "82.60",
+      "availability": "In stock",
+      "part": "Brakes",
+      "store": "Bike Mart",
+      "product_type": "Disc Brake & Lever",
+      "brand": "Tektro",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR8023.jpg?v=1762312147",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR8023.jpg?v=1762312147",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR8024.jpg?v=1762312147"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46843414741245,
+          "price": 59.99,
+          "compare": 82.6,
+          "available": true,
+          "specs": {}
+        },
+        {
+          "variant_id": 46843414774013,
+          "price": 59.99,
+          "compare": 84.02,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
     {
       "name": "Tektro TR140-35 Disc Brake Rotor - 140mm Center-Lock 1.8mm Thickness",
       "url": "https://www.bikemart.com/products/tektro-tr-35-disc-brake-rotor",
@@ -217804,61 +216789,6 @@
         }
       ],
       "technical_specs": {}
-    },
-    {
-      "name": "Tektro MT2.1 Eclipse Brake Lever Set",
-      "url": "https://www.bikemart.com/products/tektro-mt-2-1-eclipse-brake-lever-set",
-      "price_new": "29.99",
-      "price_old": "39.52",
-      "availability": "In stock",
-      "part": "Brakes",
-      "store": "Bike Mart",
-      "product_type": "Brake Levers",
-      "brand": "Tektro",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7545.jpg?v=1762255886",
-      "technical_offers": [
-        {
-          "variant_id": 46838587162877,
-          "price": 29.99,
-          "compare": 39.52,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Tektro RL340 Ergo Brake Lever Set",
-      "url": "https://www.bikemart.com/products/tektro-rl340-ergo-brake-lever-set",
-      "price_new": "29.99",
-      "price_old": "45.68",
-      "availability": "In stock",
-      "part": "Brakes",
-      "store": "Bike Mart",
-      "product_type": "Brake Levers",
-      "brand": "Tektro",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7223.jpg?v=1762279403",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7223.jpg?v=1762279403",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR7224.jpg?v=1762279402"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46840773345533,
-          "price": 29.99,
-          "compare": 45.68,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46840773378301,
-          "price": 34.99,
-          "compare": 42.9,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
     }
   ],
   "Bike Mart_Cockpit": [
@@ -217991,6 +216921,48 @@
         },
         {
           "variant_id": 46842708295933,
+          "price": 28.8,
+          "compare": 32.0,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
+      "name": "ODI Rogue v2.1 Lock-On Grips",
+      "url": "https://www.bikemart.com/products/odi-rogue-v2-1-lock-on-grips",
+      "price_new": "28.80",
+      "price_old": "32.00",
+      "availability": "In stock",
+      "part": "Cockpit",
+      "store": "Bike Mart",
+      "product_type": "Grips",
+      "brand": "ODI",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0335.jpg?v=1762306311",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0335.jpg?v=1762306311",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0336.jpg?v=1762306311",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0337.jpg?v=1762306311",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0334.jpg?v=1762306311"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46842983907581,
+          "price": 28.8,
+          "compare": 32.0,
+          "available": true,
+          "specs": {}
+        },
+        {
+          "variant_id": 46842983940349,
+          "price": 28.8,
+          "compare": 32.0,
+          "available": true,
+          "specs": {}
+        },
+        {
+          "variant_id": 46842983973117,
           "price": 28.8,
           "compare": 32.0,
           "available": true,
@@ -218192,7 +217164,7 @@
     },
     {
       "name": "Origin8 Pro Fit 4-Bolt MTB Quill Stem 90 31.8 Black",
-      "url": "https://www.bikemart.com/products/origin8-pro-fit-4-bolt-mtb-quill-stem-90-31-8-black",
+      "url": "https://www.bikemart.com/products/origin8-pro-fit-4-bolt-mtb-quill-stem-90-31-8-black-1",
       "price_new": "44.99",
       "price_old": "49.99",
       "availability": "In stock",
@@ -218200,16 +217172,9 @@
       "store": "Bike Mart",
       "product_type": "Stems",
       "brand": "Origin8",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/58427.jpg?v=1762245645",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/570414.jpg?v=1762267769",
       "length": 31.8,
       "technical_offers": [
-        {
-          "variant_id": 46838105800957,
-          "price": 44.99,
-          "compare": 49.99,
-          "available": true,
-          "specs": {}
-        },
         {
           "variant_id": 46840029479165,
           "price": 44.99,
@@ -218218,15 +217183,7 @@
           "specs": {}
         }
       ],
-      "technical_specs": {},
-      "versions": [
-        {
-          "url": "https://www.bikemart.com/products/origin8-pro-fit-4-bolt-mtb-quill-stem-90-31-8-black-1",
-          "price_new": "44.99",
-          "price_old": "49.99",
-          "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/570414.jpg?v=1762267769"
-        }
-      ]
+      "technical_specs": {}
     },
     {
       "name": "Origin8 X-Tra Lift Stem Riser 105mm Rise Black",
@@ -218668,6 +217625,59 @@
           "variant_id": 46763974361341,
           "price": 269.99,
           "compare": 314.99,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
+      "name": "Wolf Tooth Premium Headset - Olive",
+      "url": "https://www.bikemart.com/products/wolf-tooth-premium-headset-olive",
+      "price_new": "119.90",
+      "price_old": "139.95",
+      "availability": "In stock",
+      "part": "Cockpit",
+      "store": "Bike Mart",
+      "product_type": "Headsets",
+      "brand": "Wolf Tooth",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HD0294.jpg?v=1762299984",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HD0294.jpg?v=1762299984",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HD0295.jpg?v=1762299984",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HD0296.jpg?v=1762299984"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46842806829309,
+          "price": 119.9,
+          "compare": 139.95,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
+      "name": "WTB Burr Clamp-On Grips",
+      "url": "https://www.bikemart.com/products/wtb-burr-clamp-on-grips",
+      "price_new": "26.95",
+      "price_old": "29.95",
+      "availability": "In stock",
+      "part": "Cockpit",
+      "store": "Bike Mart",
+      "product_type": "Grips",
+      "brand": "WTB",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0378.jpg?v=1762273841",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0378.jpg?v=1762273841",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/wt7014.jpg?v=1762273841"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46840546164989,
+          "price": 26.95,
+          "compare": 29.95,
           "available": true,
           "specs": {}
         }
@@ -223510,253 +222520,42 @@
       "technical_specs": {}
     },
     {
-      "name": "ODI Rogue v2.1 Lock-On Grips",
-      "url": "https://www.bikemart.com/products/odi-rogue-v2-1-lock-on-grips",
-      "price_new": "28.80",
-      "price_old": "32.00",
+      "name": "Origin8 Pro Fit 4-Bolt MTB Quill Stem 90 31.8 Black",
+      "url": "https://www.bikemart.com/products/origin8-pro-fit-4-bolt-mtb-quill-stem-90-31-8-black",
+      "price_new": "44.99",
+      "price_old": "49.99",
       "availability": "In stock",
       "part": "Cockpit",
       "store": "Bike Mart",
-      "product_type": "Grips",
-      "brand": "ODI",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0335.jpg?v=1762306311",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0335.jpg?v=1762306311",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0336.jpg?v=1762306311",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0337.jpg?v=1762306311",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0334.jpg?v=1762306311"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46842983907581,
-          "price": 28.8,
-          "compare": 32.0,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46842983940349,
-          "price": 28.8,
-          "compare": 32.0,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46842983973117,
-          "price": 28.8,
-          "compare": 32.0,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Selle Royal Lookin Stracciatella Saddle - Steel",
-      "url": "https://www.bikemart.com/products/selle-royal-lookin-stracciatella-saddle-steel",
-      "price_new": "74.99",
-      "price_old": "79.99",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bike Mart",
-      "product_type": "Saddles",
-      "brand": "Selle Royal",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1062.jpg?v=1763516097",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1062.jpg?v=1763516097",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1063.jpg?v=1763516097",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1064.jpg?v=1763516097"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46886382567677,
-          "price": 74.99,
-          "compare": 79.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "ESI Racer's Edge Grips",
-      "url": "https://www.bikemart.com/products/esi-racers-edge-grips",
-      "price_new": "18.99",
-      "price_old": "19.99",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bike Mart",
-      "product_type": "Grips",
-      "brand": "ESI",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5308.jpg?v=1763591434",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5308.jpg?v=1763591434",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT8019.jpg?v=1763591434",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5305.jpg?v=1763591434",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5307.jpg?v=1763591434",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5309.jpg?v=1763591434",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/eg1108.jpg?v=1763591434",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5311.jpg?v=1763591435",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT5315.jpg?v=1763591434"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46891832738045,
-          "price": 18.99,
-          "compare": 19.99,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46891832770813,
-          "price": 18.99,
-          "compare": 19.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "WTB Gravelier Saddle - Black",
-      "url": "https://www.bikemart.com/products/wtb-gravelier-saddle",
-      "price_new": "94.95",
-      "price_old": "104.95",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bike Mart",
-      "product_type": "Saddles",
-      "brand": "WTB",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1190.jpg?v=1762331072",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1191.jpg?v=1762331072",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1192.jpg?v=1762331072",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1193.jpg?v=1762331072"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46844595208445,
-          "price": 94.95,
-          "compare": 104.95,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46844595241213,
-          "price": 107.95,
-          "compare": 119.95,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "WTB Rocket Saddle - Black Medium Fusion Form",
-      "url": "https://www.bikemart.com/products/wtb-rocket-saddle",
-      "price_new": "71.95",
-      "price_old": "89.95",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bike Mart",
-      "product_type": "Saddles",
-      "brand": "WTB",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46839154934013,
-          "price": 116.95,
-          "compare": 129.95,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46839154966781,
-          "price": 107.95,
-          "compare": 119.95,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46839154999549,
-          "price": 94.95,
-          "compare": 104.95,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46839155032317,
-          "price": 71.95,
-          "compare": 89.95,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Hope Grip Doctor Bar End Plugs",
-      "url": "https://www.bikemart.com/products/hope-grip-doctor-bar-end-plugs",
-      "price_new": "30.80",
-      "price_old": "32.60",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bike Mart",
-      "product_type": "Bars Ends & Plugs",
-      "brand": "Hope",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0575.jpg?v=1762276454",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0575.jpg?v=1762276454",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0576.jpg?v=1762276454",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0577.jpg?v=1762276454",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0578.jpg?v=1762276454"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46840635851005,
-          "price": 30.8,
-          "compare": 32.6,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46840635916541,
-          "price": 30.8,
-          "compare": 32.6,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Origin8 Threadless Quill Adapter 1` Fork to 1-1/8` Stem Black",
-      "url": "https://www.bikemart.com/products/origin8-threadless-quill-adapter-1-fork-to-1-1-8-stem-black",
-      "price_new": "27.09",
-      "price_old": "29.99",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bike Mart",
-      "product_type": "Stem Accessories",
+      "product_type": "Stems",
       "brand": "Origin8",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/58565.jpg?v=1762306685",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/58427.jpg?v=1762245645",
+      "length": 31.8,
       "technical_offers": [
         {
-          "variant_id": 46842991182077,
-          "price": 27.09,
-          "compare": 29.99,
+          "variant_id": 46838105800957,
+          "price": 44.99,
+          "compare": 49.99,
+          "available": true,
+          "specs": {}
+        },
+        {
+          "variant_id": 46840029479165,
+          "price": 44.99,
+          "compare": 49.99,
           "available": true,
           "specs": {}
         }
       ],
-      "technical_specs": {}
+      "technical_specs": {},
+      "versions": [
+        {
+          "url": "https://www.bikemart.com/products/origin8-pro-fit-4-bolt-mtb-quill-stem-90-31-8-black-1",
+          "price_new": "44.99",
+          "price_old": "49.99",
+          "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/570414.jpg?v=1762267769"
+        }
+      ]
     },
     {
       "name": "Stem Part Trek Madone SLR Gen7 1x Blendr Mount Kit",

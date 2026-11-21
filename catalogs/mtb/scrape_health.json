@@ -42218,183 +42218,2829 @@
         }
       },
       "scanned_at": "2026-11-20T22:36:22+00:00"
+    },
+    {
+      "date": "2026-11-21",
+      "results": {
+        "7iDP_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Protection": {
+          "count": 14,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 14.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 14,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "7iDP_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Protection": {
+          "count": 37,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 32.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 37,
+            "percentage_change": 15.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Alpinestars_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Protection": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 4.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 4,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Bikes": {
+          "count": 28,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 25.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 28,
+            "percentage_change": 12.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Brakes": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 2,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Cockpit": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 4.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 5,
+            "percentage_change": 25.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Frames": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 4,
+            "percentage_change": 100.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Pedals": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Protection": {
+          "count": 17,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 14.5,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 1.5,
+            "actual_count": 17,
+            "percentage_change": 17.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Tires": {
+          "count": 19,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 11.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 2.0,
+            "actual_count": 19,
+            "percentage_change": 72.7,
+            "reason": "normal_variation"
+          }
+        },
+        "Bicycle Warehouse_Wheels": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 10,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 4,
+            "percentage_change": 300.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Bikes": {
+          "count": 13,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 11,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 1,
+            "actual_count": 13,
+            "percentage_change": 18.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Brakes": {
+          "count": 115,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 113,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 2,
+            "actual_count": 115,
+            "percentage_change": 1.8,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Cockpit": {
+          "count": 250,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 257,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 7,
+            "actual_count": 250,
+            "percentage_change": -2.7,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Drivetrain": {
+          "count": 151,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 146,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 2,
+            "actual_count": 151,
+            "percentage_change": 3.4,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Forks & Shocks": {
+          "count": 11,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 11,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 2,
+            "actual_count": 11,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Frames": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Pedals": {
+          "count": 47,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 48,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 1,
+            "actual_count": 47,
+            "percentage_change": -2.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Tires": {
+          "count": 264,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 260,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 4,
+            "actual_count": 264,
+            "percentage_change": 1.5,
+            "reason": "normal_variation"
+          }
+        },
+        "Bike Mart_Wheels": {
+          "count": 171,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 170,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 1,
+            "actual_count": 171,
+            "percentage_change": 0.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Bikes": {
+          "count": 61,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 58.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 61,
+            "percentage_change": 5.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Brakes": {
+          "count": 11,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 11.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 11,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Cockpit": {
+          "count": 12,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 12.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 12,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Drivetrain": {
+          "count": 14,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 14.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 14,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Forks & Shocks": {
+          "count": 7,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 7,
+            "percentage_change": -12.5,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Frames": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Pedals": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 4.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 4,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Protection": {
+          "count": 40,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 40.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 40,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Tires": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 6,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bikes Online_Wheels": {
+          "count": 9,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 9.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 9,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Bikes": {
+          "count": 31,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 33.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 31,
+            "percentage_change": -6.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Brakes": {
+          "count": 57,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 58.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 3.5,
+            "actual_count": 57,
+            "percentage_change": -2.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Cockpit": {
+          "count": 193,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 170.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 3.0,
+            "actual_count": 193,
+            "percentage_change": 13.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Drivetrain": {
+          "count": 290,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 289.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 3.0,
+            "actual_count": 290,
+            "percentage_change": 0.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Forks & Shocks": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 6,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Frames": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Pedals": {
+          "count": 81,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 52.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 28.5,
+            "actual_count": 81,
+            "percentage_change": 54.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Protection": {
+          "count": 94,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 93.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 94,
+            "percentage_change": 1.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Tires": {
+          "count": 102,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 92.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 2.0,
+            "actual_count": 102,
+            "percentage_change": 10.9,
+            "reason": "normal_variation"
+          }
+        },
+        "Cambria_Wheels": {
+          "count": 31,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 32.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 31,
+            "percentage_change": -4.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Protection": {
+          "count": 222,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 227.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 6.0,
+            "actual_count": 222,
+            "percentage_change": -2.4,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Tires": {
+          "count": 417,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 355.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.5,
+            "actual_count": 417,
+            "percentage_change": 17.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Colorado Cyclist_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Protection": {
+          "count": 19,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 20.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 19,
+            "percentage_change": -5.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Packs": {
+          "count": 17,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 17,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 17,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Protection": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 5,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 5,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 7,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Bikes": {
+          "count": 13,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 10.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 13,
+            "percentage_change": 30.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Brakes": {
+          "count": 53,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 53.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 53,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Cockpit": {
+          "count": 55,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 55.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 2.0,
+            "actual_count": 55,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Drivetrain": {
+          "count": 158,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 160.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 158,
+            "percentage_change": -1.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Forks & Shocks": {
+          "count": 88,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 85.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 88,
+            "percentage_change": 3.5,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Frames": {
+          "count": 38,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 39.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 38,
+            "percentage_change": -2.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Packs": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Pedals": {
+          "count": 13,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 11.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 2.0,
+            "actual_count": 13,
+            "percentage_change": 18.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Protection": {
+          "count": 15,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 14.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 15,
+            "percentage_change": 7.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Tires": {
+          "count": 71,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 78.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 71,
+            "percentage_change": -9.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Fanatik_Wheels": {
+          "count": 35,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 35.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 35,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Protection": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 5.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 5,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "G-Form_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Protection": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Kali_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Bikes": {
+          "count": 58,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 54.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 58,
+            "percentage_change": 7.4,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Brakes": {
+          "count": 67,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 33.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 67,
+            "percentage_change": 103.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Cockpit": {
+          "count": 48,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 43.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 48,
+            "percentage_change": 10.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Drivetrain": {
+          "count": 95,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 19.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 3.0,
+            "actual_count": 95,
+            "percentage_change": 400.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Packs": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 3,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Pedals": {
+          "count": 32,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 33.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 32,
+            "percentage_change": -3.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Protection": {
+          "count": 60,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 61.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.5,
+            "actual_count": 60,
+            "percentage_change": -2.4,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Tires": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 4.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 4,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Mike's Bikes_Wheels": {
+          "count": 13,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 12.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 13,
+            "percentage_change": 8.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Cockpit": {
+          "count": 10,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 10.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 10,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Drivetrain": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": 200.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Pedals": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": 200.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Protection": {
+          "count": 18,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 19.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 18,
+            "percentage_change": -5.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Race Face_Wheels": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 4,
+            "percentage_change": 14.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Protection": {
+          "count": 16,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 16.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 16,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Brakes": {
+          "count": 41,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 41.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 41,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Cockpit": {
+          "count": 253,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 148.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 18.0,
+            "actual_count": 253,
+            "percentage_change": 70.4,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Drivetrain": {
+          "count": 170,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 105.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 2.0,
+            "actual_count": 170,
+            "percentage_change": 61.9,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Forks & Shocks": {
+          "count": 72,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 68.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 3.5,
+            "actual_count": 72,
+            "percentage_change": 5.1,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Frames": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Pedals": {
+          "count": 36,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 14.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 8.5,
+            "actual_count": 36,
+            "percentage_change": 157.1,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Protection": {
+          "count": 7,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 7.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 7,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Tires": {
+          "count": 140,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 131.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 140,
+            "percentage_change": 6.9,
+            "reason": "normal_variation"
+          }
+        },
+        "The Lost Co._Wheels": {
+          "count": 45,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 23.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 7.0,
+            "actual_count": 45,
+            "percentage_change": 95.7,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Protection": {
+          "count": 28,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 27.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 28,
+            "percentage_change": 3.7,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Troy Lee Designs_Wheels": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Bikes": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Cockpit": {
+          "count": 7,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.5,
+            "actual_count": 7,
+            "percentage_change": -12.5,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Drivetrain": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 2,
+            "percentage_change": -33.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Forks & Shocks": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 2,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Protection": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Worldwide Cyclery_Wheels": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Bikes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Brakes": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Cockpit": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Drivetrain": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Forks & Shocks": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Frames": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Pedals": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Tires": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Wheels": {
+          "count": 26,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 26.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 26,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        }
+      },
+      "scanned_at": "2026-11-21T03:05:43+00:00"
     }
   ],
   "baseline": {
     "Fanatik_Brakes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 53
     },
     "Fanatik_Cockpit": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 55
     },
     "Fanatik_Drivetrain": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 158
     },
     "Fanatik_Forks & Shocks": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 88
     },
     "Fanatik_Frames": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 38
     },
     "Fanatik_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 15
     },
     "Fanatik_Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 35
     },
     "Worldwide Cyclery_Bikes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 3
     },
     "Worldwide Cyclery_Cockpit": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 7
     },
     "Cambria_Tires": {
-      "date": "2026-11-20",
-      "count": 101
+      "date": "2026-11-21",
+      "count": 102
     },
     "Mike's Bikes_Bikes": {
-      "date": "2026-11-20",
-      "count": 54
+      "date": "2026-11-21",
+      "count": 58
     },
     "Mike's Bikes_Brakes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 67
     },
     "Mike's Bikes_Cockpit": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 48
     },
     "Mike's Bikes_Drivetrain": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 95
     },
     "Mike's Bikes_Pedals": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 32
     },
     "Mike's Bikes_Protection": {
-      "date": "2026-11-20",
-      "count": 61
+      "date": "2026-11-21",
+      "count": 60
     },
     "Mike's Bikes_Tires": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 4
     },
     "Mike's Bikes_Wheels": {
-      "date": "2026-11-20",
-      "count": 12
+      "date": "2026-11-21",
+      "count": 13
     },
     "Bikes Online_Bikes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 61
     },
     "Bikes Online_Brakes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 11
     },
     "Bikes Online_Cockpit": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 12
     },
     "Bikes Online_Drivetrain": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 14
     },
     "Bikes Online_Forks & Shocks": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 7
     },
     "Bikes Online_Frames": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 1
     },
     "Bikes Online_Pedals": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 4
     },
     "Bikes Online_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 40
     },
     "Bikes Online_Tires": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 6
     },
     "Bikes Online_Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 9
     },
     "Colorado Cyclist_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 222
     },
     "Colorado Cyclist_Tires": {
-      "date": "2026-11-20",
-      "count": 418
+      "date": "2026-11-21",
+      "count": 417
     },
     "Cambria_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 94
     },
     "Worldwide Cyclery_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 3
     },
     "7iDP_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 14
     },
     "Alpinestars_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 37
     },
     "Bern_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 4
     },
     "Demon_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 19
     },
     "G-Form_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 5
     },
     "Kali_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 3
     },
     "Race Face_Cockpit": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 10
     },
     "Race Face_Drivetrain": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 3
     },
     "Race Face_Pedals": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 3
     },
     "Race Face_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 18
     },
     "Race Face_Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 4
     },
     "Smith_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 16
     },
     "The Lost Co._Bikes": {
@@ -42402,197 +45048,193 @@
       "count": 1
     },
     "The Lost Co._Brakes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 41
     },
     "The Lost Co._Cockpit": {
-      "date": "2026-11-20",
-      "count": 252
+      "date": "2026-11-21",
+      "count": 253
     },
     "The Lost Co._Drivetrain": {
-      "date": "2026-11-20",
-      "count": 171
+      "date": "2026-11-21",
+      "count": 170
     },
     "The Lost Co._Forks & Shocks": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 72
     },
     "The Lost Co._Frames": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 1
     },
     "The Lost Co._Pedals": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 36
     },
     "The Lost Co._Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 7
     },
     "The Lost Co._Tires": {
-      "date": "2026-11-20",
-      "count": 139
+      "date": "2026-11-21",
+      "count": 140
     },
     "Troy Lee Designs_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 28
     },
     "Cambria_Brakes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 57
     },
     "Cambria_Cockpit": {
-      "date": "2026-11-20",
-      "count": 192
+      "date": "2026-11-21",
+      "count": 193
     },
     "Cambria_Drivetrain": {
-      "date": "2026-11-20",
-      "count": 291
+      "date": "2026-11-21",
+      "count": 290
     },
     "Cambria_Forks & Shocks": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 6
     },
     "Cambria_Frames": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 8
     },
     "Cambria_Pedals": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 81
     },
     "Cambria_Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 31
     },
     "Fanatik_Bikes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 13
     },
     "Fanatik_Pedals": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 13
     },
     "Fanatik_Tires": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 71
     },
     "Worldwide Cyclery_Drivetrain": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 2
     },
     "Zeitbike_Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 26
     },
     "Worldwide Cyclery_Forks & Shocks": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 2
     },
     "Worldwide Cyclery_Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 1
     },
     "Cambria_Bikes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 31
     },
     "Bicycle Warehouse_Bikes": {
-      "date": "2026-11-20",
-      "count": 29
+      "date": "2026-11-21",
+      "count": 28
     },
     "Bicycle Warehouse_Brakes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 2
     },
     "Bicycle Warehouse_Cockpit": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 5
     },
     "Bicycle Warehouse_Frames": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 4
     },
     "Bicycle Warehouse_Pedals": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 1
     },
     "Bicycle Warehouse_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 17
     },
     "Bicycle Warehouse_Tires": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 19
     },
     "Bicycle Warehouse_Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 4
     },
     "Bike Mart_Bikes": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 13
     },
     "Bike Mart_Brakes": {
-      "date": "2026-11-20",
-      "count": 113
+      "date": "2026-11-21",
+      "count": 115
     },
     "Bike Mart_Cockpit": {
-      "date": "2026-11-20",
-      "count": 248
+      "date": "2026-11-21",
+      "count": 250
     },
     "Bike Mart_Drivetrain": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 151
     },
     "Bike Mart_Forks & Shocks": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 11
     },
     "Bike Mart_Pedals": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 47
     },
     "Bike Mart_Tires": {
-      "date": "2026-11-20",
-      "count": 261
+      "date": "2026-11-21",
+      "count": 264
     },
     "Bike Mart_Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 171
     },
     "Fanatik_Packs": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 1
     },
     "Mike's Bikes_Packs": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 3
     },
     "The Lost Co._Wheels": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 45
     },
     "EVOC_Packs": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 17
     },
     "EVOC_Protection": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 5
     },
     "Bike Mart_Frames": {
-      "date": "2026-11-20",
+      "date": "2026-11-21",
       "count": 1
     }
   },
   "completeness_baseline": {
     "7iDP_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -42642,15 +45284,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "7iDP_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -42700,15 +45342,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "7iDP_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -42758,15 +45400,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "7iDP_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -42816,15 +45458,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "7iDP_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -42874,15 +45516,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "7iDP_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -42932,6 +45574,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -42971,13 +45617,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "7iDP_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -43028,15 +45674,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "7iDP_Protection": [
       {
-        "date": "2026-11-07",
-        "count": 14
-      },
-      {
         "date": "2026-11-08",
         "count": 14
       },
@@ -43086,15 +45732,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 14
+      },
+      {
+        "date": "2026-11-21",
         "count": 14
       }
     ],
     "7iDP_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43144,15 +45790,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "7iDP_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43202,15 +45848,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Alpinestars_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43260,15 +45906,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Alpinestars_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43318,15 +45964,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Alpinestars_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43376,15 +46022,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Alpinestars_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43434,15 +46080,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Alpinestars_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43492,15 +46138,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Alpinestars_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43550,6 +46196,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -43589,13 +46239,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Alpinestars_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -43646,15 +46296,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Alpinestars_Protection": [
       {
-        "date": "2026-11-07",
-        "count": 32
-      },
-      {
         "date": "2026-11-08",
         "count": 32
       },
@@ -43704,15 +46354,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 37
+      },
+      {
+        "date": "2026-11-21",
         "count": 37
       }
     ],
     "Alpinestars_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43762,15 +46412,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Alpinestars_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43820,15 +46470,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Bern_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43878,15 +46528,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Bern_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43936,15 +46586,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Bern_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -43994,15 +46644,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Bern_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -44052,15 +46702,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Bern_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -44110,15 +46760,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Bern_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -44168,6 +46818,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -44207,13 +46861,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Bern_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -44264,15 +46918,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Bern_Protection": [
       {
-        "date": "2026-11-07",
-        "count": 5
-      },
-      {
         "date": "2026-11-08",
         "count": 5
       },
@@ -44322,15 +46976,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 4
+      },
+      {
+        "date": "2026-11-21",
         "count": 4
       }
     ],
     "Bern_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -44380,15 +47034,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Bern_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -44438,6 +47092,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -44481,6 +47139,10 @@
       {
         "date": "2026-11-20",
         "count": 29
+      },
+      {
+        "date": "2026-11-21",
+        "count": 28
       }
     ],
     "Bicycle Warehouse_Brakes": [
@@ -44522,6 +47184,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 2
+      },
+      {
+        "date": "2026-11-21",
         "count": 2
       }
     ],
@@ -44565,6 +47231,10 @@
       {
         "date": "2026-11-20",
         "count": 5
+      },
+      {
+        "date": "2026-11-21",
+        "count": 5
       }
     ],
     "Bicycle Warehouse_Drivetrain": [
@@ -44606,6 +47276,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -44649,6 +47323,10 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Bicycle Warehouse_Frames": [
@@ -44691,6 +47369,10 @@
       {
         "date": "2026-11-20",
         "count": 4
+      },
+      {
+        "date": "2026-11-21",
+        "count": 4
       }
     ],
     "Bicycle Warehouse_Packs": [
@@ -44728,6 +47410,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -44771,6 +47457,10 @@
       {
         "date": "2026-11-20",
         "count": 1
+      },
+      {
+        "date": "2026-11-21",
+        "count": 1
       }
     ],
     "Bicycle Warehouse_Protection": [
@@ -44812,6 +47502,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 17
+      },
+      {
+        "date": "2026-11-21",
         "count": 17
       }
     ],
@@ -44855,6 +47549,10 @@
       {
         "date": "2026-11-20",
         "count": 19
+      },
+      {
+        "date": "2026-11-21",
+        "count": 19
       }
     ],
     "Bicycle Warehouse_Wheels": [
@@ -44897,6 +47595,10 @@
       {
         "date": "2026-11-20",
         "count": 4
+      },
+      {
+        "date": "2026-11-21",
+        "count": 4
       }
     ],
     "Bike Mart_Bikes": [
@@ -44934,6 +47636,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 13
+      },
+      {
+        "date": "2026-11-21",
         "count": 13
       }
     ],
@@ -44973,6 +47679,10 @@
       {
         "date": "2026-11-20",
         "count": 113
+      },
+      {
+        "date": "2026-11-21",
+        "count": 115
       }
     ],
     "Bike Mart_Cockpit": [
@@ -45011,6 +47721,10 @@
       {
         "date": "2026-11-20",
         "count": 248
+      },
+      {
+        "date": "2026-11-21",
+        "count": 250
       }
     ],
     "Bike Mart_Drivetrain": [
@@ -45048,6 +47762,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 151
+      },
+      {
+        "date": "2026-11-21",
         "count": 151
       }
     ],
@@ -45087,6 +47805,10 @@
       {
         "date": "2026-11-20",
         "count": 11
+      },
+      {
+        "date": "2026-11-21",
+        "count": 11
       }
     ],
     "Bike Mart_Frames": [
@@ -45124,6 +47846,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 1
+      },
+      {
+        "date": "2026-11-21",
         "count": 1
       }
     ],
@@ -45163,6 +47889,10 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Bike Mart_Pedals": [
@@ -45200,6 +47930,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 47
+      },
+      {
+        "date": "2026-11-21",
         "count": 47
       }
     ],
@@ -45239,6 +47973,10 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Bike Mart_Tires": [
@@ -45277,6 +48015,10 @@
       {
         "date": "2026-11-20",
         "count": 261
+      },
+      {
+        "date": "2026-11-21",
+        "count": 264
       }
     ],
     "Bike Mart_Wheels": [
@@ -45315,13 +48057,13 @@
       {
         "date": "2026-11-20",
         "count": 171
+      },
+      {
+        "date": "2026-11-21",
+        "count": 171
       }
     ],
     "Bikes Online_Bikes": [
-      {
-        "date": "2026-11-07",
-        "count": 60
-      },
       {
         "date": "2026-11-08",
         "count": 59
@@ -45373,13 +48115,13 @@
       {
         "date": "2026-11-20",
         "count": 61
+      },
+      {
+        "date": "2026-11-21",
+        "count": 61
       }
     ],
     "Bikes Online_Brakes": [
-      {
-        "date": "2026-11-07",
-        "count": 11
-      },
       {
         "date": "2026-11-08",
         "count": 11
@@ -45430,15 +48172,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 11
+      },
+      {
+        "date": "2026-11-21",
         "count": 11
       }
     ],
     "Bikes Online_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 12
-      },
-      {
         "date": "2026-11-08",
         "count": 12
       },
@@ -45489,13 +48231,13 @@
       {
         "date": "2026-11-20",
         "count": 12
+      },
+      {
+        "date": "2026-11-21",
+        "count": 12
       }
     ],
     "Bikes Online_Drivetrain": [
-      {
-        "date": "2026-11-07",
-        "count": 15
-      },
       {
         "date": "2026-11-08",
         "count": 15
@@ -45547,13 +48289,13 @@
       {
         "date": "2026-11-20",
         "count": 14
+      },
+      {
+        "date": "2026-11-21",
+        "count": 14
       }
     ],
     "Bikes Online_Forks & Shocks": [
-      {
-        "date": "2026-11-07",
-        "count": 8
-      },
       {
         "date": "2026-11-08",
         "count": 8
@@ -45605,13 +48347,13 @@
       {
         "date": "2026-11-20",
         "count": 7
+      },
+      {
+        "date": "2026-11-21",
+        "count": 7
       }
     ],
     "Bikes Online_Frames": [
-      {
-        "date": "2026-11-07",
-        "count": 1
-      },
       {
         "date": "2026-11-08",
         "count": 1
@@ -45662,6 +48404,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 1
+      },
+      {
+        "date": "2026-11-21",
         "count": 1
       }
     ],
@@ -45701,13 +48447,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Bikes Online_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 3
-      },
       {
         "date": "2026-11-08",
         "count": 3
@@ -45758,15 +48504,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 4
+      },
+      {
+        "date": "2026-11-21",
         "count": 4
       }
     ],
     "Bikes Online_Protection": [
       {
-        "date": "2026-11-07",
-        "count": 39
-      },
-      {
         "date": "2026-11-08",
         "count": 39
       },
@@ -45816,15 +48562,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 40
+      },
+      {
+        "date": "2026-11-21",
         "count": 40
       }
     ],
     "Bikes Online_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 6
-      },
-      {
         "date": "2026-11-08",
         "count": 6
       },
@@ -45874,15 +48620,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 6
+      },
+      {
+        "date": "2026-11-21",
         "count": 6
       }
     ],
     "Bikes Online_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 9
-      },
-      {
         "date": "2026-11-08",
         "count": 9
       },
@@ -45932,15 +48678,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 9
+      },
+      {
+        "date": "2026-11-21",
         "count": 9
       }
     ],
     "Cambria_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 33
-      },
-      {
         "date": "2026-11-08",
         "count": 33
       },
@@ -45991,13 +48737,13 @@
       {
         "date": "2026-11-20",
         "count": 31
+      },
+      {
+        "date": "2026-11-21",
+        "count": 31
       }
     ],
     "Cambria_Brakes": [
-      {
-        "date": "2026-11-07",
-        "count": 56
-      },
       {
         "date": "2026-11-08",
         "count": 55
@@ -46049,13 +48795,13 @@
       {
         "date": "2026-11-20",
         "count": 57
+      },
+      {
+        "date": "2026-11-21",
+        "count": 57
       }
     ],
     "Cambria_Cockpit": [
-      {
-        "date": "2026-11-07",
-        "count": 165
-      },
       {
         "date": "2026-11-08",
         "count": 165
@@ -46107,13 +48853,13 @@
       {
         "date": "2026-11-20",
         "count": 192
+      },
+      {
+        "date": "2026-11-21",
+        "count": 193
       }
     ],
     "Cambria_Drivetrain": [
-      {
-        "date": "2026-11-07",
-        "count": 310
-      },
       {
         "date": "2026-11-08",
         "count": 307
@@ -46165,13 +48911,13 @@
       {
         "date": "2026-11-20",
         "count": 291
+      },
+      {
+        "date": "2026-11-21",
+        "count": 290
       }
     ],
     "Cambria_Forks & Shocks": [
-      {
-        "date": "2026-11-07",
-        "count": 8
-      },
       {
         "date": "2026-11-08",
         "count": 8
@@ -46223,13 +48969,13 @@
       {
         "date": "2026-11-20",
         "count": 6
+      },
+      {
+        "date": "2026-11-21",
+        "count": 6
       }
     ],
     "Cambria_Frames": [
-      {
-        "date": "2026-11-07",
-        "count": 7
-      },
       {
         "date": "2026-11-08",
         "count": 7
@@ -46281,6 +49027,10 @@
       {
         "date": "2026-11-20",
         "count": 8
+      },
+      {
+        "date": "2026-11-21",
+        "count": 8
       }
     ],
     "Cambria_Packs": [
@@ -46319,13 +49069,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Cambria_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 24
-      },
       {
         "date": "2026-11-08",
         "count": 24
@@ -46377,13 +49127,13 @@
       {
         "date": "2026-11-20",
         "count": 81
+      },
+      {
+        "date": "2026-11-21",
+        "count": 81
       }
     ],
     "Cambria_Protection": [
-      {
-        "date": "2026-11-07",
-        "count": 85
-      },
       {
         "date": "2026-11-08",
         "count": 84
@@ -46435,13 +49185,13 @@
       {
         "date": "2026-11-20",
         "count": 94
+      },
+      {
+        "date": "2026-11-21",
+        "count": 94
       }
     ],
     "Cambria_Tires": [
-      {
-        "date": "2026-11-06",
-        "count": 92
-      },
       {
         "date": "2026-11-07",
         "count": 92
@@ -46493,13 +49243,13 @@
       {
         "date": "2026-11-20",
         "count": 101
+      },
+      {
+        "date": "2026-11-21",
+        "count": 102
       }
     ],
     "Cambria_Wheels": [
-      {
-        "date": "2026-11-07",
-        "count": 34
-      },
       {
         "date": "2026-11-08",
         "count": 33
@@ -46551,13 +49301,13 @@
       {
         "date": "2026-11-20",
         "count": 31
+      },
+      {
+        "date": "2026-11-21",
+        "count": 31
       }
     ],
     "Colorado Cyclist_Bikes": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -46608,15 +49358,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Colorado Cyclist_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -46666,15 +49416,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Colorado Cyclist_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -46724,15 +49474,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Colorado Cyclist_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -46782,15 +49532,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Colorado Cyclist_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -46840,15 +49590,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Colorado Cyclist_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -46898,6 +49648,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -46937,13 +49691,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Colorado Cyclist_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -46995,13 +49749,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Colorado Cyclist_Protection": [
-      {
-        "date": "2026-11-07",
-        "count": 239
-      },
       {
         "date": "2026-11-08",
         "count": 238
@@ -47053,13 +49807,13 @@
       {
         "date": "2026-11-20",
         "count": 222
+      },
+      {
+        "date": "2026-11-21",
+        "count": 222
       }
     ],
     "Colorado Cyclist_Tires": [
-      {
-        "date": "2026-11-06",
-        "count": 357
-      },
       {
         "date": "2026-11-07",
         "count": 357
@@ -47111,13 +49865,13 @@
       {
         "date": "2026-11-20",
         "count": 418
+      },
+      {
+        "date": "2026-11-21",
+        "count": 417
       }
     ],
     "Colorado Cyclist_Wheels": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -47168,15 +49922,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Demon_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -47226,15 +49980,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Demon_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -47284,15 +50038,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Demon_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -47342,15 +50096,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Demon_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -47400,15 +50154,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Demon_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -47458,15 +50212,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Demon_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -47516,6 +50270,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -47555,13 +50313,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Demon_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -47612,15 +50370,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Demon_Protection": [
       {
-        "date": "2026-11-06",
-        "count": 20
-      },
-      {
         "date": "2026-11-07",
         "count": 20
       },
@@ -47670,15 +50428,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 19
+      },
+      {
+        "date": "2026-11-21",
         "count": 19
       }
     ],
     "Demon_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -47728,15 +50486,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Demon_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -47786,6 +50544,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -47817,6 +50579,10 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "EVOC_Brakes": [
@@ -47846,6 +50612,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -47877,6 +50647,10 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "EVOC_Drivetrain": [
@@ -47906,6 +50680,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -47937,6 +50715,10 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "EVOC_Frames": [
@@ -47966,6 +50748,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -47997,6 +50783,10 @@
       {
         "date": "2026-11-20",
         "count": 17
+      },
+      {
+        "date": "2026-11-21",
+        "count": 17
       }
     ],
     "EVOC_Pedals": [
@@ -48026,6 +50816,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -48057,6 +50851,10 @@
       {
         "date": "2026-11-20",
         "count": 5
+      },
+      {
+        "date": "2026-11-21",
+        "count": 5
       }
     ],
     "EVOC_Tires": [
@@ -48086,6 +50884,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -48117,13 +50919,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Fanatik_Bikes": [
-      {
-        "date": "2026-11-07",
-        "count": 10
-      },
       {
         "date": "2026-11-08",
         "count": 10
@@ -48175,13 +50977,13 @@
       {
         "date": "2026-11-20",
         "count": 13
+      },
+      {
+        "date": "2026-11-21",
+        "count": 13
       }
     ],
     "Fanatik_Brakes": [
-      {
-        "date": "2026-11-07",
-        "count": 53
-      },
       {
         "date": "2026-11-08",
         "count": 53
@@ -48233,13 +51035,13 @@
       {
         "date": "2026-11-20",
         "count": 53
+      },
+      {
+        "date": "2026-11-21",
+        "count": 53
       }
     ],
     "Fanatik_Cockpit": [
-      {
-        "date": "2026-11-07",
-        "count": 41
-      },
       {
         "date": "2026-11-08",
         "count": 41
@@ -48291,13 +51093,13 @@
       {
         "date": "2026-11-20",
         "count": 55
+      },
+      {
+        "date": "2026-11-21",
+        "count": 55
       }
     ],
     "Fanatik_Drivetrain": [
-      {
-        "date": "2026-11-07",
-        "count": 164
-      },
       {
         "date": "2026-11-08",
         "count": 163
@@ -48349,13 +51151,13 @@
       {
         "date": "2026-11-20",
         "count": 158
+      },
+      {
+        "date": "2026-11-21",
+        "count": 158
       }
     ],
     "Fanatik_Forks & Shocks": [
-      {
-        "date": "2026-11-07",
-        "count": 84
-      },
       {
         "date": "2026-11-08",
         "count": 84
@@ -48407,13 +51209,13 @@
       {
         "date": "2026-11-20",
         "count": 88
+      },
+      {
+        "date": "2026-11-21",
+        "count": 88
       }
     ],
     "Fanatik_Frames": [
-      {
-        "date": "2026-11-07",
-        "count": 39
-      },
       {
         "date": "2026-11-08",
         "count": 39
@@ -48465,6 +51267,10 @@
       {
         "date": "2026-11-20",
         "count": 38
+      },
+      {
+        "date": "2026-11-21",
+        "count": 38
       }
     ],
     "Fanatik_Packs": [
@@ -48503,13 +51309,13 @@
       {
         "date": "2026-11-20",
         "count": 1
+      },
+      {
+        "date": "2026-11-21",
+        "count": 1
       }
     ],
     "Fanatik_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 4
-      },
       {
         "date": "2026-11-08",
         "count": 4
@@ -48561,13 +51367,13 @@
       {
         "date": "2026-11-20",
         "count": 13
+      },
+      {
+        "date": "2026-11-21",
+        "count": 13
       }
     ],
     "Fanatik_Protection": [
-      {
-        "date": "2026-11-07",
-        "count": 12
-      },
       {
         "date": "2026-11-08",
         "count": 12
@@ -48619,13 +51425,13 @@
       {
         "date": "2026-11-20",
         "count": 15
+      },
+      {
+        "date": "2026-11-21",
+        "count": 15
       }
     ],
     "Fanatik_Tires": [
-      {
-        "date": "2026-11-07",
-        "count": 78
-      },
       {
         "date": "2026-11-08",
         "count": 78
@@ -48677,13 +51483,13 @@
       {
         "date": "2026-11-20",
         "count": 71
+      },
+      {
+        "date": "2026-11-21",
+        "count": 71
       }
     ],
     "Fanatik_Wheels": [
-      {
-        "date": "2026-11-07",
-        "count": 26
-      },
       {
         "date": "2026-11-08",
         "count": 26
@@ -48735,13 +51541,13 @@
       {
         "date": "2026-11-20",
         "count": 35
+      },
+      {
+        "date": "2026-11-21",
+        "count": 35
       }
     ],
     "G-Form_Bikes": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -48792,15 +51598,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "G-Form_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -48850,15 +51656,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "G-Form_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -48908,15 +51714,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "G-Form_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -48966,15 +51772,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "G-Form_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49024,15 +51830,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "G-Form_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49082,6 +51888,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -49121,13 +51931,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "G-Form_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -49178,15 +51988,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "G-Form_Protection": [
       {
-        "date": "2026-11-07",
-        "count": 5
-      },
-      {
         "date": "2026-11-08",
         "count": 5
       },
@@ -49236,15 +52046,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 5
+      },
+      {
+        "date": "2026-11-21",
         "count": 5
       }
     ],
     "G-Form_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49294,15 +52104,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "G-Form_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49352,15 +52162,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Kali_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49410,15 +52220,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Kali_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49468,15 +52278,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Kali_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49526,15 +52336,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Kali_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49584,15 +52394,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Kali_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49642,15 +52452,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Kali_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49700,6 +52510,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -49739,13 +52553,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Kali_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -49796,15 +52610,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Kali_Protection": [
       {
-        "date": "2026-11-07",
-        "count": 3
-      },
-      {
         "date": "2026-11-08",
         "count": 3
       },
@@ -49854,15 +52668,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 3
+      },
+      {
+        "date": "2026-11-21",
         "count": 3
       }
     ],
     "Kali_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49912,15 +52726,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Kali_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -49971,13 +52785,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Mike's Bikes_Bikes": [
-      {
-        "date": "2026-11-07",
-        "count": 56
-      },
       {
         "date": "2026-11-08",
         "count": 55
@@ -50029,13 +52843,13 @@
       {
         "date": "2026-11-20",
         "count": 54
+      },
+      {
+        "date": "2026-11-21",
+        "count": 58
       }
     ],
     "Mike's Bikes_Brakes": [
-      {
-        "date": "2026-11-07",
-        "count": 33
-      },
       {
         "date": "2026-11-08",
         "count": 33
@@ -50087,13 +52901,13 @@
       {
         "date": "2026-11-20",
         "count": 67
+      },
+      {
+        "date": "2026-11-21",
+        "count": 67
       }
     ],
     "Mike's Bikes_Cockpit": [
-      {
-        "date": "2026-11-07",
-        "count": 37
-      },
       {
         "date": "2026-11-08",
         "count": 37
@@ -50145,13 +52959,13 @@
       {
         "date": "2026-11-20",
         "count": 48
+      },
+      {
+        "date": "2026-11-21",
+        "count": 48
       }
     ],
     "Mike's Bikes_Drivetrain": [
-      {
-        "date": "2026-11-07",
-        "count": 21
-      },
       {
         "date": "2026-11-08",
         "count": 21
@@ -50203,13 +53017,13 @@
       {
         "date": "2026-11-20",
         "count": 95
+      },
+      {
+        "date": "2026-11-21",
+        "count": 95
       }
     ],
     "Mike's Bikes_Forks & Shocks": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -50260,15 +53074,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Mike's Bikes_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -50318,6 +53132,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -50357,13 +53175,13 @@
       {
         "date": "2026-11-20",
         "count": 3
+      },
+      {
+        "date": "2026-11-21",
+        "count": 3
       }
     ],
     "Mike's Bikes_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 28
-      },
       {
         "date": "2026-11-08",
         "count": 28
@@ -50415,13 +53233,13 @@
       {
         "date": "2026-11-20",
         "count": 32
+      },
+      {
+        "date": "2026-11-21",
+        "count": 32
       }
     ],
     "Mike's Bikes_Protection": [
-      {
-        "date": "2026-11-07",
-        "count": 40
-      },
       {
         "date": "2026-11-08",
         "count": 40
@@ -50473,13 +53291,13 @@
       {
         "date": "2026-11-20",
         "count": 61
+      },
+      {
+        "date": "2026-11-21",
+        "count": 60
       }
     ],
     "Mike's Bikes_Tires": [
-      {
-        "date": "2026-11-07",
-        "count": 4
-      },
       {
         "date": "2026-11-08",
         "count": 4
@@ -50530,15 +53348,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 4
+      },
+      {
+        "date": "2026-11-21",
         "count": 4
       }
     ],
     "Mike's Bikes_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 15
-      },
-      {
         "date": "2026-11-08",
         "count": 15
       },
@@ -50589,14 +53407,14 @@
       {
         "date": "2026-11-20",
         "count": 12
+      },
+      {
+        "date": "2026-11-21",
+        "count": 13
       }
     ],
     "Race Face_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -50646,15 +53464,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Race Face_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -50704,15 +53522,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Race Face_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 10
-      },
-      {
         "date": "2026-11-08",
         "count": 10
       },
@@ -50762,15 +53580,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 10
+      },
+      {
+        "date": "2026-11-21",
         "count": 10
       }
     ],
     "Race Face_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 1
-      },
-      {
         "date": "2026-11-08",
         "count": 1
       },
@@ -50820,15 +53638,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 3
+      },
+      {
+        "date": "2026-11-21",
         "count": 3
       }
     ],
     "Race Face_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -50878,15 +53696,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Race Face_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -50936,6 +53754,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -50975,13 +53797,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Race Face_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 1
-      },
       {
         "date": "2026-11-08",
         "count": 1
@@ -51033,13 +53855,13 @@
       {
         "date": "2026-11-20",
         "count": 3
+      },
+      {
+        "date": "2026-11-21",
+        "count": 3
       }
     ],
     "Race Face_Protection": [
-      {
-        "date": "2026-11-07",
-        "count": 19
-      },
       {
         "date": "2026-11-08",
         "count": 19
@@ -51090,15 +53912,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 18
+      },
+      {
+        "date": "2026-11-21",
         "count": 18
       }
     ],
     "Race Face_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -51148,15 +53970,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Race Face_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 4
-      },
-      {
         "date": "2026-11-08",
         "count": 4
       },
@@ -51206,15 +54028,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 4
+      },
+      {
+        "date": "2026-11-21",
         "count": 4
       }
     ],
     "Smith_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -51264,15 +54086,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Smith_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -51322,15 +54144,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Smith_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -51380,15 +54202,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Smith_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -51438,15 +54260,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Smith_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -51496,15 +54318,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Smith_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -51554,6 +54376,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -51593,13 +54419,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Smith_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -51651,13 +54477,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Smith_Protection": [
-      {
-        "date": "2026-11-07",
-        "count": 16
-      },
       {
         "date": "2026-11-08",
         "count": 16
@@ -51709,13 +54535,13 @@
       {
         "date": "2026-11-20",
         "count": 16
+      },
+      {
+        "date": "2026-11-21",
+        "count": 16
       }
     ],
     "Smith_Tires": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -51766,15 +54592,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Smith_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -51824,15 +54650,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "The Lost Co._Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 1
-      },
-      {
         "date": "2026-11-08",
         "count": 1
       },
@@ -51883,13 +54709,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "The Lost Co._Brakes": [
-      {
-        "date": "2026-11-07",
-        "count": 33
-      },
       {
         "date": "2026-11-08",
         "count": 33
@@ -51941,13 +54767,13 @@
       {
         "date": "2026-11-20",
         "count": 41
+      },
+      {
+        "date": "2026-11-21",
+        "count": 41
       }
     ],
     "The Lost Co._Cockpit": [
-      {
-        "date": "2026-11-06",
-        "count": 163
-      },
       {
         "date": "2026-11-07",
         "count": 162
@@ -51999,13 +54825,13 @@
       {
         "date": "2026-11-20",
         "count": 252
+      },
+      {
+        "date": "2026-11-21",
+        "count": 253
       }
     ],
     "The Lost Co._Drivetrain": [
-      {
-        "date": "2026-11-07",
-        "count": 132
-      },
       {
         "date": "2026-11-08",
         "count": 131
@@ -52057,13 +54883,13 @@
       {
         "date": "2026-11-20",
         "count": 171
+      },
+      {
+        "date": "2026-11-21",
+        "count": 170
       }
     ],
     "The Lost Co._Forks & Shocks": [
-      {
-        "date": "2026-11-07",
-        "count": 67
-      },
       {
         "date": "2026-11-08",
         "count": 67
@@ -52115,13 +54941,13 @@
       {
         "date": "2026-11-20",
         "count": 72
+      },
+      {
+        "date": "2026-11-21",
+        "count": 72
       }
     ],
     "The Lost Co._Frames": [
-      {
-        "date": "2026-11-07",
-        "count": 1
-      },
       {
         "date": "2026-11-08",
         "count": 1
@@ -52173,6 +54999,10 @@
       {
         "date": "2026-11-20",
         "count": 1
+      },
+      {
+        "date": "2026-11-21",
+        "count": 1
       }
     ],
     "The Lost Co._Packs": [
@@ -52211,13 +55041,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "The Lost Co._Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 1
-      },
       {
         "date": "2026-11-08",
         "count": 1
@@ -52269,13 +55099,13 @@
       {
         "date": "2026-11-20",
         "count": 36
+      },
+      {
+        "date": "2026-11-21",
+        "count": 36
       }
     ],
     "The Lost Co._Protection": [
-      {
-        "date": "2026-11-07",
-        "count": 7
-      },
       {
         "date": "2026-11-08",
         "count": 7
@@ -52327,13 +55157,13 @@
       {
         "date": "2026-11-20",
         "count": 7
+      },
+      {
+        "date": "2026-11-21",
+        "count": 7
       }
     ],
     "The Lost Co._Tires": [
-      {
-        "date": "2026-11-06",
-        "count": 120
-      },
       {
         "date": "2026-11-07",
         "count": 119
@@ -52385,13 +55215,13 @@
       {
         "date": "2026-11-20",
         "count": 139
+      },
+      {
+        "date": "2026-11-21",
+        "count": 140
       }
     ],
     "The Lost Co._Wheels": [
-      {
-        "date": "2026-11-05",
-        "count": 30
-      },
       {
         "date": "2026-11-06",
         "count": 30
@@ -52443,13 +55273,13 @@
       {
         "date": "2026-11-20",
         "count": 45
+      },
+      {
+        "date": "2026-11-21",
+        "count": 45
       }
     ],
     "Troy Lee Designs_Bikes": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -52500,15 +55330,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Troy Lee Designs_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -52558,15 +55388,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Troy Lee Designs_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -52616,15 +55446,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Troy Lee Designs_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -52674,15 +55504,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Troy Lee Designs_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -52732,15 +55562,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Troy Lee Designs_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -52790,6 +55620,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -52829,13 +55663,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Troy Lee Designs_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -52887,13 +55721,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Troy Lee Designs_Protection": [
-      {
-        "date": "2026-11-07",
-        "count": 27
-      },
       {
         "date": "2026-11-08",
         "count": 27
@@ -52945,13 +55779,13 @@
       {
         "date": "2026-11-20",
         "count": 28
+      },
+      {
+        "date": "2026-11-21",
+        "count": 28
       }
     ],
     "Troy Lee Designs_Tires": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -53002,15 +55836,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Troy Lee Designs_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53060,15 +55894,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Worldwide Cyclery_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 3
-      },
-      {
         "date": "2026-11-08",
         "count": 3
       },
@@ -53118,15 +55952,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 3
+      },
+      {
+        "date": "2026-11-21",
         "count": 3
       }
     ],
     "Worldwide Cyclery_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53176,15 +56010,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Worldwide Cyclery_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 7
-      },
-      {
         "date": "2026-11-08",
         "count": 9
       },
@@ -53234,15 +56068,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 7
+      },
+      {
+        "date": "2026-11-21",
         "count": 7
       }
     ],
     "Worldwide Cyclery_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 2
-      },
-      {
         "date": "2026-11-08",
         "count": 4
       },
@@ -53292,15 +56126,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 2
+      },
+      {
+        "date": "2026-11-21",
         "count": 2
       }
     ],
     "Worldwide Cyclery_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 2
       },
@@ -53350,15 +56184,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 2
+      },
+      {
+        "date": "2026-11-21",
         "count": 2
       }
     ],
     "Worldwide Cyclery_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53408,6 +56242,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -53447,13 +56285,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Worldwide Cyclery_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -53504,15 +56342,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Worldwide Cyclery_Protection": [
       {
-        "date": "2026-11-07",
-        "count": 3
-      },
-      {
         "date": "2026-11-08",
         "count": 3
       },
@@ -53562,15 +56400,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 3
+      },
+      {
+        "date": "2026-11-21",
         "count": 3
       }
     ],
     "Worldwide Cyclery_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53620,15 +56458,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Worldwide Cyclery_Wheels": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 2
       },
@@ -53678,15 +56516,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 1
+      },
+      {
+        "date": "2026-11-21",
         "count": 1
       }
     ],
     "Zeitbike_Bikes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53736,15 +56574,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Zeitbike_Brakes": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53794,15 +56632,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Zeitbike_Cockpit": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53852,15 +56690,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Zeitbike_Drivetrain": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53910,15 +56748,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Zeitbike_Forks & Shocks": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -53968,15 +56806,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Zeitbike_Frames": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -54026,6 +56864,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
@@ -54065,13 +56907,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Zeitbike_Pedals": [
-      {
-        "date": "2026-11-07",
-        "count": 0
-      },
       {
         "date": "2026-11-08",
         "count": 0
@@ -54122,15 +56964,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Zeitbike_Protection": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -54180,15 +57022,15 @@
       },
       {
         "date": "2026-11-20",
+        "count": 0
+      },
+      {
+        "date": "2026-11-21",
         "count": 0
       }
     ],
     "Zeitbike_Tires": [
       {
-        "date": "2026-11-07",
-        "count": 0
-      },
-      {
         "date": "2026-11-08",
         "count": 0
       },
@@ -54239,13 +57081,13 @@
       {
         "date": "2026-11-20",
         "count": 0
+      },
+      {
+        "date": "2026-11-21",
+        "count": 0
       }
     ],
     "Zeitbike_Wheels": [
-      {
-        "date": "2026-11-07",
-        "count": 26
-      },
       {
         "date": "2026-11-08",
         "count": 26
@@ -54296,6 +57138,10 @@
       },
       {
         "date": "2026-11-20",
+        "count": 26
+      },
+      {
+        "date": "2026-11-21",
         "count": 26
       }
     ]
