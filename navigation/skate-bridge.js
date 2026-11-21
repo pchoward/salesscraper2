@@ -76,7 +76,8 @@
                 }
             });
         }
-        host.prepend(nav);
+        if (parent.defaultView.matchMedia('(max-width: 640px)').matches) host.prepend(nav);
+        else host.append(nav);
         const sourceObserver = new MutationObserver(sync);
         sourceObserver.observe(links, {subtree:true, childList:true, attributes:true, characterData:true});
         const frameObserver = new MutationObserver(sync);

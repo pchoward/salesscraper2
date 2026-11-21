@@ -246,3 +246,7 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
  .browse-nav #sportTabs [role=tab] { flex:none; }
  #categoryNavigation { flex:1 0 95px; }
 }
+
+@media (max-width:350px) {
+ .top-row .shell-search-icon { display:none; }
+}

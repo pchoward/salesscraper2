@@ -119,6 +119,11 @@
         function syncHeaderWidth() {
             shellSearch.placeholder = phoneHeader.matches ? 'Search…' : 'Search deals, gear, brands or stores…';
             if (!phoneHeader.matches) closeHeaderMenu();
+            const sections = menu.querySelector('.catalog-sections');
+            if (sections) {
+                if (phoneHeader.matches) menu.prepend(sections);
+                else menu.append(sections);
+            }
         }
         phoneHeader.addEventListener('change', syncHeaderWidth);
         syncHeaderWidth();
