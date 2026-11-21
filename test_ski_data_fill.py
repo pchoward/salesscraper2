@@ -64,6 +64,9 @@ class NewFieldTests(unittest.TestCase):
         self.assertEqual(field["closure"]["categories"], ("Boots",))
         self.assertEqual(field["lens_shape"]["categories"], ("Goggles",))
         self.assertEqual(field["helmet_shell"]["categories"], ("Helmets",))
+        self.assertIn("closure", facets.ORDER["Boots"])
+        self.assertEqual(facets.ORDER["Boots"][-1], "condition")
+        self.assertIn("lens_shape", facets.ORDER["Goggles"])
 
 
 if __name__ == "__main__":

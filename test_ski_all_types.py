@@ -48,8 +48,9 @@ class OwnerTests(unittest.TestCase):
         # Empty categories apply to every Ski heading, including ones the
         # stored part list does not name (Goggles, Gloves).
         self.assertEqual(ski_section_owners("gender"), " ".join(headings(sports.SKI)))
-        self.assertEqual(ski_section_owners("ability"), ski_section_owners("gender"))
-        self.assertEqual(ski_section_owners("condition"), ski_section_owners("gender"))
+        # Ability and Condition: skis, boots and bindings only (docs/filters-evo-model.md).
+        self.assertEqual(ski_section_owners("ability"), "Skis Boots Bindings")
+        self.assertEqual(ski_section_owners("condition"), "Skis Boots Bindings")
         self.assertEqual(ski_section_owners("no-such-field"), "")
 
     def test_protection_scope_is_still_the_facet_list(self):
@@ -58,7 +59,8 @@ class OwnerTests(unittest.TestCase):
         for key in ("protects", "helmet_style", "certification", "rotational", "prot_size", "age"):
             field = next(item for item in FIELDS if item["key"] == key)
             self.assertEqual(ski_section_owners(key), " ".join(field["categories"]))
-            self.assertIn("Goggles", field["categories"])
+            # Goggles dropped (docs/filters-evo-model.md): helmet/armor fields only.
+            self.assertNotIn("Goggles", field["categories"])
 
 
 class MarkupTests(unittest.TestCase):
