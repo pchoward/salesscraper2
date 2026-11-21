@@ -272,6 +272,29 @@ Use `promos.for_sport(sport_id)` for a sport's list, and `promos.describe(promo,
   - dismiss persists across a reload;
   - no strip when there are no promos.
 
+## 17. MTB Bikes: "All · E-MTB · Regular" chips at the top (owner, 2026-11-21)
+**Why:** 81 of MTB's 205 bikes are e-bikes, mixed in with regular bikes. The owner wants them kept together under **Bikes**, with a filter **at the top** to split them.
+
+**Data (done, Claude's PR "E-MTB filter"):**
+- MTB bikes and frames carry the technical spec `power` = `"E-MTB"` or `"Regular"` (`sports/mtb/specs.py`).
+- It's a facet field in `sports/mtb/facets.py`: `{"key": "power", "label": "Motor", "param": "mtb_motor", "categories": ("Bikes", "Frames")}`.
+- So the shared spec filters already offer it in the sidebar as **Motor**, and the URL is `?sport=mtb&type=bikes&mtb_motor=E-MTB`.
+- Values arrive with the next MTB scrape after merge.
+
+**Wanted:**
+- When MTB's **Bikes** (or **Frames**) is the active category, show a segmented chip row above the results: **All bikes · E-MTB · Regular**, each with its count.
+- The chips drive the same `mtb_motor` filter as the sidebar's Motor facet: no second state, and the same URL parameter, so links and saved views work and match the sidebar.
+- Hide the row when every listing has the same value, or when `power` is missing (before the first scrape with it).
+- Phone: the row fits at 320–390 px and scrolls sideways if needed. Desktop layout otherwise unchanged.
+- Optional, for the owner to approve in the PR screenshots: **E-MTB** and **Regular** links under **Bikes** in the MTB menu, pointing to the same URLs.
+
+**Keep:** existing URL parameters, saved views and `localStorage` keys.
+
+**Tests:** in the `ci/` pattern, using an MTB fixture with both kinds of bike:
+- each chip's count matches the facet count;
+- picking E-MTB shows only e-bikes, the URL holds `mtb_motor=E-MTB`, and the sidebar's Motor shows the same choice;
+- Back restores All;
+- desktop and 390 px.
 ## 18. Flaky MTB browser audit, and a stale summary after re-runs (owner, 2026-11-21)
 **Seen:** the same MTB checks in `ci/audit_sports.cjs` fail on unrelated PRs: #293, #296 and #297 (2026-11-19 to 21), each at a different width (430, 768, 1024, 1440). A straight re-run usually passes.
 - `mtb <width> Category, store, brand, search, sort and ranges`: **`locator.selectOption: Timeout 5000ms exceeded`** on `#sortSelect`. The select is found but isn't "visible and enabled" within 5 s.
