@@ -526,3 +526,21 @@
     #filterDrawer #contextSpecs .spec-chip, #filterDrawer .spec-chip, #filterDrawer .width-chip, #filterDrawer .length-chip, #filterDrawer .wheelbase-chip { min-height:44px; min-width:0; white-space:normal; }
     .deal-card .product-name { -webkit-line-clamp:3; line-clamp:3; flex:0 0 calc(1.25em * 3); height:calc(1.25em * 3); min-height:calc(1.25em * 3); max-height:calc(1.25em * 3); }
 }
+
+.promo-strip {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.65rem;
+    margin-bottom: 0.6rem;
+    padding: 0.45rem 0.65rem;
+    border: 1px solid var(--grey-200);
+    border-radius: var(--radius);
+    background: var(--grey-0);
+    font-size: 0.85rem;
+}
+#promoOffers { min-width: 0; }
+.promo-offer { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.45rem; }
+.promo-offer code { background: var(--grey-100); padding: 0.1em 0.35em; overflow-wrap: anywhere; }
+.promo-strip button { font: inherit; cursor: pointer; }
+.promo-strip[hidden], .promo-strip [hidden] { display: none; }
