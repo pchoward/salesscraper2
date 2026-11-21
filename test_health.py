@@ -314,16 +314,18 @@ class CompletenessTests(unittest.TestCase):
             results.append(result)
         return state, results
 
-    def test_a_steady_smaller_catalog_is_accepted_on_the_third_run(self):
-        # Tactics, 2026-10-21: the deck sale really shrank from ~132 to 50-61.
+    def test_steady_partial_results_do_not_establish_a_new_baseline(self):
         state = self.history([136, 135, 134, 134, 132, 132, 132])
         state, results = self.walk(state, [58, 61, 60, 58, 55])
-        reasons = [result["diagnostics"]["reason"] for result in results]
-        self.assertEqual(reasons, ["partial_catalog_drop", "partial_catalog_drop",
-                                   "sustained_new_level", "sustained_new_level", "sustained_new_level"])
-        self.assertEqual([result["failed"] for result in results], [True, True, False, False, False])
-        self.assertEqual(results[2]["count"], 60, "the new listings are used, not the old ones")
-        self.assertEqual(broken_store_warnings(state), [], "an accepted new size does not warn")
+        self.assertTrue(all(result["failed"] and result["suspect"] for result in results))
+        self.assertEqual({result["diagnostics"]["reason"] for result in results},
+                         {"partial_catalog_drop"})
+        self.assertEqual([result["diagnostics"]["actual_count"] for result in results],
+                         [58, 61, 60, 58, 55])
+        self.assertEqual(rolling_baseline(state, DECK, "2026-10-15")["expected_count"], 134)
+        warning, = broken_store_warnings(state)
+        self.assertEqual(warning["kind"], "incomplete")
+        self.assertEqual(warning["actual_count"], 55)
 
     def test_unsteady_or_empty_drops_are_never_accepted(self):
         state = self.history([100, 100, 100, 100])

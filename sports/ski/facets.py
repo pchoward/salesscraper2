@@ -3,7 +3,7 @@ Offer extraction is owned by the Ski adapter (sports/ski/stores.py, evo.py)."""
 from sports import protection
 
 FIELDS = (
-    {"key": "condition", "label": "Condition", "param": "ski_condition", "categories": ()},  # Demo (2026-11-12)
+    {"key": "condition", "label": "Condition", "param": "ski_condition", "categories": ("Skis", "Boots", "Bindings")},  # Demo (2026-11-12)
     {"key": "ski_type", "label": "Type", "param": "ski_type", "categories": ("Skis", "Boots", "Bindings")},
     {"key": "length", "label": "Ski length", "param": "ski_length", "categories": ("Skis", "Poles")},
     {"key": "waist", "label": "Waist width (stated or model number)", "param": "ski_waist", "categories": ("Skis",)},
@@ -17,10 +17,33 @@ FIELDS = (
     {"key": "din", "label": "DIN (stated or model number)", "param": "ski_din", "categories": ("Bindings",)},
     {"key": "brake", "label": "Brake width", "param": "ski_brake", "categories": ("Bindings",)},
     {"key": "walk", "label": "Walk mode", "param": "ski_walk", "categories": ("Boots",)},
-    {"key": "goggle_size", "label": "Frame size", "param": "ski_gsize", "categories": ("Goggles", "Protection"),
+    {"key": "goggle_size", "label": "Frame size", "param": "ski_gsize", "categories": ("Goggles",),
      "order": ["Small", "Medium", "Large", "XL"]},
-    {"key": "goggle_fit", "label": "Fit", "param": "ski_gfit", "categories": ("Goggles", "Protection")},
-    {"key": "goggle_lens", "label": "Lens", "param": "ski_glens", "categories": ("Goggles", "Protection")},
-    {"key": "ability", "label": "Ability level", "param": "ski_ability", "categories": ()},
+    {"key": "goggle_fit", "label": "Fit", "param": "ski_gfit", "categories": ("Goggles",)},
+    {"key": "goggle_lens", "label": "Lens", "param": "ski_glens", "categories": ("Goggles",)},
+    # Ability and Condition: skis, boots and bindings only (Grok's list,
+    # docs/filters-evo-model.md, 2026-11-21).
+    {"key": "ability", "label": "Ability level", "param": "ski_ability", "categories": ("Skis", "Boots", "Bindings")},
     {"key": "gender", "label": "Gender", "param": "ski_gender", "categories": ()},
-) + protection.facet_fields("ski", ("Helmets", "Protection", "Goggles", "Gloves"))
+) + protection.facet_fields("ski", ("Helmets", "Protection", "Gloves"))  # not Goggles: helmet/armor fields
+
+# Section order per heading (docs/filters-evo-model.md): Brand comes first on
+# the page, then these, in this order; Condition last. A field not listed for
+# a heading keeps its place after the listed ones. Boots and Bindings need
+# opposite orders, so the order can't be one tuple.
+ORDER = {
+    "Skis": ("length", "gender", "waist", "ski_type", "ability", "rocker", "bindings", "radius", "condition"),
+    "Boots": ("mondo", "gender", "flex", "last", "ski_type", "ability", "sole", "walk", "condition"),
+    "Bindings": ("din", "brake", "gender", "sole", "ability", "ski_type", "condition"),
+    "Poles": ("length", "gender"),
+    "Goggles": ("gender", "goggle_size", "goggle_fit", "goggle_lens"),
+    "Helmets": ("prot_size", "gender", "rotational", "certification", "age", "helmet_style", "protects"),
+    "Protection": ("prot_size", "gender", "protects", "certification", "age", "helmet_style", "rotational"),
+    "Gloves": ("prot_size", "gender", "protects", "age", "certification", "helmet_style", "rotational"),
+}
+
+
+def rank(key):
+    """"Skis:2 Boots:6 Bindings:7": a field's position on each heading that
+    orders it, for the sidebar's data-rank."""
+    return " ".join(f"{heading}:{keys.index(key) + 1}" for heading, keys in ORDER.items() if key in keys)

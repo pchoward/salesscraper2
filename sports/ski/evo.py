@@ -55,11 +55,15 @@ SKI_TYPES = (
 )
 # Labelled fields and "a park ski" / "this all-mountain ski" phrases only.
 _TYPE_LABEL = re.compile(r"\b(?:category|best\s*use|terrain|ski\s*type|type)\s*[:\-–]\s*([a-z][a-z /&-]{2,40})", re.I)
+# Skipro's "Best For" heading and list: "Best For Freeride All Mountain".
+_BEST_FOR = re.compile(r"\bbest\s+for\s*[:\-–]?\s*((?:(?:all[- ]mountain|all[- ]terrain|freeride|big[- ]mountain|powder|park|"
+                       r"freestyle|carving|frontside|on[- ]piste|groomers?|backcountry|touring|race|racing)[\s,/&]*(?:and\s+)?){1,4})", re.I)
 
 
 def ski_types(product_type, tags, text):
     sources = [str(product_type or "")] + [str(tag) for tag in tags or ()]
     sources += [match.group(1) for match in _TYPE_LABEL.finditer(text)]
+    sources += [match.group(1) for match in _BEST_FOR.finditer(text)]
     found = []
     for label, words in SKI_TYPES:
         pattern = re.compile(r"\b(?:" + words + r")\b", re.I)
@@ -152,7 +156,7 @@ def radius_range(metres):
 
 ROCKER = (
     ("Full Rocker", r"full[- ]rocker|reverse[- ]camber|fully[- ]rockered"),
-    ("Rocker / Camber / Rocker", r"rocker[ /-]+camber[ /-]+rocker|tip(?:\s*(?:&|and)\s*|\s*/\s*)tail\s+rocker|rocker(?:ed)?\s+tip\s+(?:&|and)\s+tail|double\s+rocker|twin\s+rocker|(?:ar|all[- ]?mountain|freestyle|freeride)\s+rocker"),
+    ("Rocker / Camber / Rocker", r"rocker[ /-]+camber[ /-]+rocker|tip(?:\s*(?:&|and)\s*|\s*/\s*)tail\s+rocker|rocker(?:ed)?\s+tip\s+(?:&|and)\s+tail|double\s+rocker|twin\s+rocker|(?:ar|all[- ]?mountain|all[- ]?mtn|all[- ]terrain|freestyle|freeride)\s+rocker"),
     ("Tip Rocker / Camber", r"tip\s+rocker|rocker[ /-]+camber\b|early[- ]rise\s+tip"),
     ("Full Camber", r"full[- ]camber|traditional\s+camber|full\s+length\s+camber|camber\s+profile"),
 )
