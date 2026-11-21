@@ -46814,15 +46814,16 @@
           }
         },
         "Albe's BMX_Frames & Forks": {
-          "count": 5,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 16.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
             "actual_count": 5,
             "percentage_change": -68.8,
-            "reason": "sustained_new_level"
+            "reason": "partial_catalog_drop"
           }
         },
         "Albe's BMX_Packs": {
@@ -48314,14 +48315,14 @@
           }
         },
         "Kink_Frames & Forks": {
-          "count": 1,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 2.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 1,
-            "percentage_change": -50.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "normal_variation"
           }
         },
@@ -48614,14 +48615,14 @@
           }
         },
         "Source BMX US_Frames & Forks": {
-          "count": 89,
+          "count": 88,
           "failed": false,
           "diagnostics": {
             "expected_count": 20.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 89,
-            "percentage_change": 345.0,
+            "actual_count": 88,
+            "percentage_change": 340.0,
             "reason": "normal_variation"
           }
         },
@@ -48974,15 +48975,16 @@
           }
         },
         "TGM_Protection": {
-          "count": 3,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
             "expected_count": 8,
             "baseline_samples": 11,
             "median_absolute_deviation": 1,
             "actual_count": 3,
             "percentage_change": -62.5,
-            "reason": "sustained_new_level"
+            "reason": "partial_catalog_drop"
           }
         },
         "Tactics_Protection": {
@@ -49394,7 +49396,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-21T07:10:11+00:00"
+      "scanned_at": "2026-11-21T15:56:19+00:00"
     }
   ],
   "baseline": {
@@ -49405,10 +49407,6 @@
     "Albe's BMX_Drivetrain": {
       "date": "2026-11-21",
       "count": 12
-    },
-    "Albe's BMX_Frames & Forks": {
-      "date": "2026-11-21",
-      "count": 5
     },
     "Albe's BMX_Seating": {
       "date": "2026-11-21",
@@ -49484,7 +49482,7 @@
     },
     "Source BMX US_Frames & Forks": {
       "date": "2026-11-21",
-      "count": 89
+      "count": 88
     },
     "Source BMX US_Seating": {
       "date": "2026-11-21",
@@ -49602,10 +49600,6 @@
       "date": "2026-11-21",
       "count": 1
     },
-    "Kink_Frames & Forks": {
-      "date": "2026-11-21",
-      "count": 1
-    },
     "Kink_Seating": {
       "date": "2026-11-21",
       "count": 3
@@ -49673,10 +49667,6 @@
     "Sparky's Brands_Wheels": {
       "date": "2026-11-21",
       "count": 9
-    },
-    "TGM_Protection": {
-      "date": "2026-11-21",
-      "count": 3
     },
     "Kink_Drivetrain": {
       "date": "2026-11-21",
@@ -51128,6 +51118,10 @@
     ],
     "Albe's BMX_Frames & Forks": [
       {
+        "date": "2026-11-05",
+        "count": 4
+      },
+      {
         "date": "2026-11-06",
         "count": 17
       },
@@ -51177,10 +51171,6 @@
       },
       {
         "date": "2026-11-20",
-        "count": 5
-      },
-      {
-        "date": "2026-11-21",
         "count": 5
       }
     ],
@@ -58311,7 +58301,7 @@
       },
       {
         "date": "2026-11-21",
-        "count": 1
+        "count": 0
       }
     ],
     "Kink_Packs": [
@@ -59729,7 +59719,7 @@
       },
       {
         "date": "2026-11-21",
-        "count": 89
+        "count": 88
       }
     ],
     "Source BMX US_Packs": [
@@ -60627,10 +60617,6 @@
       },
       {
         "date": "2026-11-20",
-        "count": 3
-      },
-      {
-        "date": "2026-11-21",
         "count": 3
       }
     ],

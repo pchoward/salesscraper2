@@ -1,162 +1,449 @@
 {
  "changes": {
-  "Bicycle Warehouse_Cockpit": [
+  "Bike Mart_Bikes": [
    {
     "item": {
      "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Spank",
-     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
+     "brand": "Giant",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Front.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Rear.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-4.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-5.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-6.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-7.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-8.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-9.jpg?v=1764025528",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamondMTB-10.jpg?v=1764025528"
      ],
-     "name": "Spank Spoon 350 35mm Stem",
-     "part": "Cockpit",
-     "price_new": "59.99",
-     "price_old": "69.99",
-     "product_type": "Stems",
-     "store": "Bicycle Warehouse",
+     "name": "Giant 2023 Reign Advanced Pro 1 Full Suspension Mountain Bike",
+     "part": "Bikes",
+     "price_new": "4999.00",
+     "price_old": "6460.00",
+     "product_type": "Full Suspension Mountain Bike",
+     "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 69.99,
-       "price": 59.99,
-       "specs": {},
-       "variant_id": 40431254798438
+       "compare": 6460.0,
+       "price": 4999.0,
+       "specs": {
+        "frame_size": [
+         "S"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46907588673789
       }
      ],
-     "technical_specs": {},
-     "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem"
+     "technical_specs": {
+      "frame_size": [
+       "S"
+      ],
+      "power": [
+       "Regular"
+      ],
+      "suspension": [
+       "Full suspension"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2023-reign-advanced-pro-1-full-suspension-mountain-bike"
     },
     "type": "new"
    },
    {
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Supacaz",
-     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
+     "brand": "Unified Bike Co.",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-011_GRIP_GRIZIPS-GRIP-NEOBLUE_HEROEDIT.jpg?v=1772082435",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-013_GRIP_GRIZIPS-GRIP-RED_HEROEDIT.jpg?v=1772082437",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-014_GRIP_GRIZIPS-GRIP-NEON-YEL_HEROEDIT1.jpg?v=1772082439",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-010_GRIP_GRIZIP-GRIP_NEOGRN_HEROEDIT.jpg?v=1772082441",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/GR-10_20Grizips_20-_20Black.jpg?v=1772082443",
-      "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-011_GRIP_GRIZIP-GRIP-NEOORNGE_HEROEDIT_1.jpg?v=1772082445"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0602.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0514.jpg?v=1764086745",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0617.jpg?v=1764086745"
      ],
-     "name": "Supacaz Grizips Bike Grips",
-     "part": "Cockpit",
-     "price_new": "19.99",
-     "price_old": "25.00",
-     "product_type": "Grips",
-     "store": "Bicycle Warehouse",
+     "name": "Unified Bike Co. Racello Deore 12 Hardtail Mountain Bike",
+     "part": "Bikes",
+     "price_new": "599.62",
+     "price_old": "999.99",
+     "product_type": "Hardtail Mountain Bike",
+     "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 25.0,
-       "price": 19.99,
-       "specs": {},
-       "variant_id": 40222305550438
+       "compare": 999.99,
+       "price": 599.62,
+       "specs": {
+        "frame_material": [
+         "Alloy"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46907848622333
       },
       {
        "available": true,
-       "compare": 25.0,
-       "price": 19.99,
-       "specs": {},
-       "variant_id": 40222305583206
+       "compare": 999.99,
+       "price": 599.62,
+       "specs": {
+        "frame_material": [
+         "Alloy"
+        ],
+        "frame_size": [
+         "L"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46907848655101
       }
      ],
-     "technical_specs": {},
-     "url": "https://bicyclewarehouse.com/products/supacaz-grizips-mountain-bike-handlebar-grips"
+     "technical_specs": {
+      "frame_material": [
+       "Alloy"
+      ],
+      "frame_size": [
+       "L"
+      ],
+      "power": [
+       "Regular"
+      ],
+      "suspension": [
+       "Hardtail"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/unified-bike-co-racello-deore-12-ship-to-your-door-hardtail"
     },
     "type": "new"
    }
   ],
-  "Bicycle Warehouse_Drivetrain": [
+  "Bike Mart_Drivetrain": [
    {
     "item": {
      "at_all_time_low": true,
      "availability": "In stock",
      "brand": "KMC",
-     "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
-      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-1.jpg?v=1761060271"
      ],
-     "length": 1.0,
-     "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
+     "name": "KMC X12EPT Eco Pro Teq Chain",
      "part": "Drivetrain",
-     "price_new": "19.99",
-     "price_old": "23.60",
-     "product_type": "Chains",
-     "store": "Bicycle Warehouse",
+     "price_new": "45.62",
+     "price_old": "66.00",
+     "product_type": "",
+     "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 23.6,
-       "price": 19.99,
+       "compare": 66.0,
+       "price": 45.62,
        "specs": {},
-       "variant_id": 42413792624742
-      },
-      {
-       "available": true,
-       "compare": 23.6,
-       "price": 19.99,
-       "specs": {},
-       "variant_id": 42413792821350
+       "variant_id": 46764155994365
       }
      ],
      "technical_specs": {},
-     "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
-     "width": 2.0
+     "url": "https://www.bikemart.com/products/x12ept-eco-pro-teq-chain"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-1.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-16.jpg?v=1761060266"
+     ],
+     "name": "KMC X12 12-Speed Chain",
+     "part": "Drivetrain",
+     "price_new": "29.62",
+     "price_old": "44.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 44.0,
+       "price": 29.62,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151374077
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+    },
+    "type": "new"
+   }
+  ],
+  "Bike Mart_Tires": [
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Pirelli",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/pv3515inset1.jpg?v=1762279323",
+     "length": 2.4,
+     "name": "Cast by Pirelli DH/Enduro Protagonist TL 29 Tire - 29x2.4 Evo",
+     "part": "Tires",
+     "price_new": "120.51",
+     "price_old": "133.90",
+     "product_type": "Tires",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 133.9,
+       "price": 120.51,
+       "specs": {
+        "casing": [
+         "DH"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46840767611133
+      },
+      {
+       "available": true,
+       "compare": 133.9,
+       "price": 120.51,
+       "specs": {
+        "casing": [
+         "DH"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 46840767643901
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "DH"
+      ],
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/cast-by-pirelli-dh-enduro-protagonist-tl-29-tire-29x2-4-evo",
+     "width": 29.0
+    },
+    "type": "new"
+   }
+  ],
+  "Bike Mart_Wheels": [
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323102-1_207c4c95-e1ca-4047-a53f-2c0bc20cc06c.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323103-2_c0523351-bf95-4b8b-902a-b92b10c381b0.png?v=1761060534",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323104-3_2006c4e8-7528-4221-821f-9995ec6d0ccc.png?v=1761060534"
+     ],
+     "name": "DT Swiss X 1900 Spline Rear Wheel - 29-inch / Centerlock",
+     "part": "Wheels",
+     "price_new": "329.62",
+     "price_old": "429.80",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 429.8,
+       "diameter_mm": null,
+       "durometers": [],
+       "price": 329.62,
+       "variant_id": "46764290474237"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 429.8,
+       "price": 329.62,
+       "specs": {},
+       "variant_id": 46764290474237
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/x-1900-spline-rear-wheel-29-inch-centerlock"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "diameter_mm": 12.0,
+     "diameters_mm": [
+      12.0
+     ],
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323108-2_7d0b1623-f947-4158-b1d5-7d90320782a5.png?v=1761060517"
+     ],
+     "name": "DT Swiss XMC 1501 SPLINE ONE Rear Wheel - 6-Bolt / 12mm Thru x 148mm",
+     "part": "Wheels",
+     "price_new": "799.62",
+     "price_old": "1099.90",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 1099.9,
+       "diameter_mm": 12.0,
+       "durometers": [],
+       "price": 799.62,
+       "variant_id": "46764290244861"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 1099.9,
+       "price": 799.62,
+       "specs": {},
+       "variant_id": 46764290244861
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/xmc-1501-spline-one-rear-wheel-6-bolt-12mm-thru-x-148mm"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "DT Swiss",
+     "diameter_mm": 15.0,
+     "diameters_mm": [
+      15.0
+     ],
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323039-1_d1899562-5156-4bdb-8b42-116e00448ea6.png?v=1761060533",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323040-2_d457824f-b053-41ff-a264-f5db1873f52f.png?v=1761060533"
+     ],
+     "name": "DT Swiss XMC 1501 SPLINE ONE Front Wheel - 110 x 15mm",
+     "part": "Wheels",
+     "price_new": "599.62",
+     "price_old": "931.88",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 931.88,
+       "diameter_mm": 15.0,
+       "durometers": [],
+       "price": 599.62,
+       "variant_id": "46764290965757"
+      }
+     ],
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 931.88,
+       "price": 599.62,
+       "specs": {},
+       "variant_id": 46764290965757
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/xmc-1501-spline-one-front-wheel-110-x-15mm"
+    },
+    "type": "new"
+   }
+  ],
+  "Fanatik_Cockpit": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "OneUp Components",
+     "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/OneUpComponents_V2CarbonHandlebar_800W_35R_df008680-4aa5-4626-a220-805a7eacb97d_dc82d110-0a45-4fc8-9ddd-466d63fae762.jpg?v=1794425735",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/OneUpComponents_V2CarbonHandlebar_800W_35R_df008680-4aa5-4626-a220-805a7eacb97d_dc82d110-0a45-4fc8-9ddd-466d63fae762.jpg?v=1794425735",
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/OneUpBar-TakeOff-01.jpg?v=1794426533",
+      "https://cdn.shopify.com/s/files/1/0904/4132/files/OneUpBar-TakeOff-02.jpg?v=1794426533"
+     ],
+     "name": "OneUp Components V2 Carbon Handlebar - 35mm rise - 800mm wide - Fanatik Outlet",
+     "part": "Cockpit",
+     "price_new": "125.00",
+     "price_old": "159.99",
+     "product_type": "Handlebars",
+     "store": "Fanatik",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 159.99,
+       "price": 125.0,
+       "specs": {},
+       "variant_id": 42913003503662
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.fanatikbike.com/products/v2-carbon-handlebar-35mm-rise-800mm-wide-fanatik-outlet-open"
     },
     "type": "new"
    }
@@ -942,6 +1229,26 @@
       "price": 76.5,
       "store": "The Lost Co.",
       "url": "https://www.thelostco.com/products/rear-derailleur-pulley-kit-xx-t-type-eagle-axs-includes-14t-upper-and-16t-lower-black-metal-spider-pulley-2-aluminum-pulley-screws"
+     }
+    ],
+    "part": "Drivetrain"
+   },
+   {
+    "cheapest_price": 29.62,
+    "key": "sport|Drivetrain|kmc|12|speed|x12",
+    "label": "KMC x12 12 speed",
+    "offers": [
+     {
+      "name": "KMC X12 12-Speed Chain",
+      "price": 29.62,
+      "store": "Bike Mart",
+      "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+     },
+     {
+      "name": "KMC X12 12-Speed Chain",
+      "price": 36.0,
+      "store": "Fanatik",
+      "url": "https://www.fanatikbike.com/products/kmc-x12-12-speed-chain"
      }
     ],
     "part": "Drivetrain"
@@ -3730,162 +4037,427 @@
   "drops": [],
   "new_items": [
    {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "OneUp Components",
+    "image": "https://cdn.shopify.com/s/files/1/0904/4132/files/OneUpComponents_V2CarbonHandlebar_800W_35R_df008680-4aa5-4626-a220-805a7eacb97d_dc82d110-0a45-4fc8-9ddd-466d63fae762.jpg?v=1794425735",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0904/4132/files/OneUpComponents_V2CarbonHandlebar_800W_35R_df008680-4aa5-4626-a220-805a7eacb97d_dc82d110-0a45-4fc8-9ddd-466d63fae762.jpg?v=1794425735",
+     "https://cdn.shopify.com/s/files/1/0904/4132/files/OneUpBar-TakeOff-01.jpg?v=1794426533",
+     "https://cdn.shopify.com/s/files/1/0904/4132/files/OneUpBar-TakeOff-02.jpg?v=1794426533"
+    ],
+    "name": "OneUp Components V2 Carbon Handlebar - 35mm rise - 800mm wide - Fanatik Outlet",
+    "part": "Cockpit",
+    "price_new": "125.00",
+    "price_old": "159.99",
+    "product_type": "Handlebars",
+    "store": "Fanatik",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 159.99,
+      "price": 125.0,
+      "specs": {},
+      "variant_id": 42913003503662
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.fanatikbike.com/products/v2-carbon-handlebar-35mm-rise-800mm-wide-fanatik-outlet-open"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "Giant",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Front.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_Rear.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-4.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-5.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-6.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-7.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-8.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamond_MTB-9.jpg?v=1764025528",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/MY23ReignAdvancedPro1ColorA_BlackDiamondMTB-10.jpg?v=1764025528"
+    ],
+    "name": "Giant 2023 Reign Advanced Pro 1 Full Suspension Mountain Bike",
+    "part": "Bikes",
+    "price_new": "4999.00",
+    "price_old": "6460.00",
+    "product_type": "Full Suspension Mountain Bike",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 6460.0,
+      "price": 4999.0,
+      "specs": {
+       "frame_size": [
+        "S"
+       ],
+       "power": [
+        "Regular"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46907588673789
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "S"
+     ],
+     "power": [
+      "Regular"
+     ],
+     "suspension": [
+      "Full suspension"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2023-reign-advanced-pro-1-full-suspension-mountain-bike"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "Unified Bike Co.",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0524.jpg?v=1764086745",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0602.jpg?v=1764086745",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0514.jpg?v=1764086745",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/IMG_0617.jpg?v=1764086745"
+    ],
+    "name": "Unified Bike Co. Racello Deore 12 Hardtail Mountain Bike",
+    "part": "Bikes",
+    "price_new": "599.62",
+    "price_old": "999.99",
+    "product_type": "Hardtail Mountain Bike",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 999.99,
+      "price": 599.62,
+      "specs": {
+       "frame_material": [
+        "Alloy"
+       ],
+       "power": [
+        "Regular"
+       ],
+       "suspension": [
+        "Hardtail"
+       ]
+      },
+      "variant_id": 46907848622333
+     },
+     {
+      "available": true,
+      "compare": 999.99,
+      "price": 599.62,
+      "specs": {
+       "frame_material": [
+        "Alloy"
+       ],
+       "frame_size": [
+        "L"
+       ],
+       "power": [
+        "Regular"
+       ],
+       "suspension": [
+        "Hardtail"
+       ]
+      },
+      "variant_id": 46907848655101
+     }
+    ],
+    "technical_specs": {
+     "frame_material": [
+      "Alloy"
+     ],
+     "frame_size": [
+      "L"
+     ],
+     "power": [
+      "Regular"
+     ],
+     "suspension": [
+      "Hardtail"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/unified-bike-co-racello-deore-12-ship-to-your-door-hardtail"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "DT Swiss",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323105-4.png?v=1761060534",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323102-1_207c4c95-e1ca-4047-a53f-2c0bc20cc06c.png?v=1761060534",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323103-2_c0523351-bf95-4b8b-902a-b92b10c381b0.png?v=1761060534",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-x-1900-spline-rear-wheel-422362-3323104-3_2006c4e8-7528-4221-821f-9995ec6d0ccc.png?v=1761060534"
+    ],
+    "name": "DT Swiss X 1900 Spline Rear Wheel - 29-inch / Centerlock",
+    "part": "Wheels",
+    "price_new": "329.62",
+    "price_old": "429.80",
+    "product_type": "",
+    "spec_offers": [
+     {
+      "available": true,
+      "compare_at_price": 429.8,
+      "diameter_mm": null,
+      "durometers": [],
+      "price": 329.62,
+      "variant_id": "46764290474237"
+     }
+    ],
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 429.8,
+      "price": 329.62,
+      "specs": {},
+      "variant_id": 46764290474237
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/x-1900-spline-rear-wheel-29-inch-centerlock"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "DT Swiss",
+    "diameter_mm": 12.0,
+    "diameters_mm": [
+     12.0
+    ],
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323038-1.png?v=1761060518",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-rear-wheel-422332-3323108-2_7d0b1623-f947-4158-b1d5-7d90320782a5.png?v=1761060517"
+    ],
+    "name": "DT Swiss XMC 1501 SPLINE ONE Rear Wheel - 6-Bolt / 12mm Thru x 148mm",
+    "part": "Wheels",
+    "price_new": "799.62",
+    "price_old": "1099.90",
+    "product_type": "",
+    "spec_offers": [
+     {
+      "available": true,
+      "compare_at_price": 1099.9,
+      "diameter_mm": 12.0,
+      "durometers": [],
+      "price": 799.62,
+      "variant_id": "46764290244861"
+     }
+    ],
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 1099.9,
+      "price": 799.62,
+      "specs": {},
+      "variant_id": 46764290244861
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/xmc-1501-spline-one-rear-wheel-6-bolt-12mm-thru-x-148mm"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "DT Swiss",
+    "diameter_mm": 15.0,
+    "diameters_mm": [
+     15.0
+    ],
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-1.png?v=1761060533",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323039-1_d1899562-5156-4bdb-8b42-116e00448ea6.png?v=1761060533",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/dt-swiss-xmc-1501-spline-one-front-wheel-422333-3323040-2_d457824f-b053-41ff-a264-f5db1873f52f.png?v=1761060533"
+    ],
+    "name": "DT Swiss XMC 1501 SPLINE ONE Front Wheel - 110 x 15mm",
+    "part": "Wheels",
+    "price_new": "599.62",
+    "price_old": "931.88",
+    "product_type": "",
+    "spec_offers": [
+     {
+      "available": true,
+      "compare_at_price": 931.88,
+      "diameter_mm": 15.0,
+      "durometers": [],
+      "price": 599.62,
+      "variant_id": "46764290965757"
+     }
+    ],
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 931.88,
+      "price": 599.62,
+      "specs": {},
+      "variant_id": 46764290965757
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/xmc-1501-spline-one-front-wheel-110-x-15mm"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "Pirelli",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/pv3515inset1.jpg?v=1762279323",
+    "length": 2.4,
+    "name": "Cast by Pirelli DH/Enduro Protagonist TL 29 Tire - 29x2.4 Evo",
+    "part": "Tires",
+    "price_new": "120.51",
+    "price_old": "133.90",
+    "product_type": "Tires",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 133.9,
+      "price": 120.51,
+      "specs": {
+       "casing": [
+        "DH"
+       ],
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 46840767611133
+     },
+     {
+      "available": true,
+      "compare": 133.9,
+      "price": 120.51,
+      "specs": {
+       "casing": [
+        "DH"
+       ],
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 46840767643901
+     }
+    ],
+    "technical_specs": {
+     "casing": [
+      "DH"
+     ],
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/cast-by-pirelli-dh-enduro-protagonist-tl-29-tire-29x2-4-evo",
+    "width": 29.0
+   },
+   {
     "at_all_time_low": true,
     "availability": "In stock",
     "brand": "KMC",
-    "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-1.jpg?v=1761060271"
     ],
-    "length": 1.0,
-    "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
+    "name": "KMC X12EPT Eco Pro Teq Chain",
     "part": "Drivetrain",
-    "price_new": "19.99",
-    "price_old": "23.60",
-    "product_type": "Chains",
-    "store": "Bicycle Warehouse",
+    "price_new": "45.62",
+    "price_old": "66.00",
+    "product_type": "",
+    "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 23.6,
-      "price": 19.99,
+      "compare": 66.0,
+      "price": 45.62,
       "specs": {},
-      "variant_id": 42413792624742
-     },
-     {
-      "available": true,
-      "compare": 23.6,
-      "price": 19.99,
-      "specs": {},
-      "variant_id": 42413792821350
+      "variant_id": 46764155994365
      }
     ],
     "technical_specs": {},
-    "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
-    "width": 2.0
+    "url": "https://www.bikemart.com/products/x12ept-eco-pro-teq-chain"
    },
    {
     "at_all_time_low": true,
     "availability": "In stock",
-    "brand": "Spank",
-    "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
+    "brand": "KMC",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
-     "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-1.jpg?v=1761060266",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-16.jpg?v=1761060266"
     ],
-    "name": "Spank Spoon 350 35mm Stem",
-    "part": "Cockpit",
-    "price_new": "59.99",
-    "price_old": "69.99",
-    "product_type": "Stems",
-    "store": "Bicycle Warehouse",
+    "name": "KMC X12 12-Speed Chain",
+    "part": "Drivetrain",
+    "price_new": "29.62",
+    "price_old": "44.00",
+    "product_type": "",
+    "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 69.99,
-      "price": 59.99,
-      "specs": {},
-      "variant_id": 40431254798438
+      "compare": 44.0,
+      "price": 29.62,
+      "specs": {
+       "speed": [
+        "12-speed"
+       ]
+      },
+      "variant_id": 46764151374077
      }
     ],
-    "technical_specs": {},
-    "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Supacaz",
-    "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-011_GRIP_GRIZIPS-GRIP-NEOBLUE_HEROEDIT.jpg?v=1772082435",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-013_GRIP_GRIZIPS-GRIP-RED_HEROEDIT.jpg?v=1772082437",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-014_GRIP_GRIZIPS-GRIP-NEON-YEL_HEROEDIT1.jpg?v=1772082439",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-010_GRIP_GRIZIP-GRIP_NEOGRN_HEROEDIT.jpg?v=1772082441",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/GR-10_20Grizips_20-_20Black.jpg?v=1772082443",
-     "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-011_GRIP_GRIZIP-GRIP-NEOORNGE_HEROEDIT_1.jpg?v=1772082445"
-    ],
-    "name": "Supacaz Grizips Bike Grips",
-    "part": "Cockpit",
-    "price_new": "19.99",
-    "price_old": "25.00",
-    "product_type": "Grips",
-    "store": "Bicycle Warehouse",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 25.0,
-      "price": 19.99,
-      "specs": {},
-      "variant_id": 40222305550438
-     },
-     {
-      "available": true,
-      "compare": 25.0,
-      "price": 19.99,
-      "specs": {},
-      "variant_id": 40222305583206
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://bicyclewarehouse.com/products/supacaz-grizips-mountain-bike-handlebar-grips"
+    "technical_specs": {
+     "speed": [
+      "12-speed"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/x12-12-speed-chain"
    }
   ],
   "removed": []
  },
- "failed_keys": [],
+ "failed_keys": [
+  "Fanatik_Frames"
+ ],
  "fingerprints": {
-  "data": "49380644045199138b3fc8f74350d0f8f8060d105d69b701ca8bbbbd34903505",
-  "history": "c304ed0c8a6c6242781672f87ad1d5b70accf7b4fbaf5ef49f34118754d506c4"
+  "data": "ee6ebb0f6261c88939c013e81d3471bb9d642f6866582de06dfe340227082710",
+  "history": "aa456429ee3483437bc9abf7785336ff9416af9aeea1c782d226c76bfb07b7a1"
  },
- "generated_at": "2026-11-21T07:27:05+00:00",
+ "generated_at": "2026-11-21T16:13:59+00:00",
  "history": "file",
  "version": 1
 }
