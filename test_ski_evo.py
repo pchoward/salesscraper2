@@ -32,6 +32,20 @@ class SkiTests(unittest.TestCase):
         self.assertEqual(evo.turn_radii("Built for wide-radius turns in deep powder."), [])
 
 
+class SkiProWordingTests(unittest.TestCase):
+    """Skipro's spec headings (owner, 2026-11-21: evo-style filters)."""
+
+    def test_best_for_list_is_a_type(self):
+        text = "Product Details Rocker Type All-Terrain Rocker: tip and tail rise. Best For Freeride All Mountain Flex Rating: 4"
+        fields = evo.fields("Skis", "K2 Women's Mindbender 85 Skis 2024", "Skis", [], text)
+        self.assertEqual(fields["ski_type"], ["Freeride", "All-Mountain"])
+        self.assertEqual(fields["rocker"], ["Rocker / Camber / Rocker"])
+        self.assertEqual(evo.ski_types("Skis", [], "This ski is best for intermediate skiers."), [])
+
+    def test_all_mtn_rocker(self):
+        self.assertEqual(evo.rocker_profile("EST All MTN Rocker: Enhances versatility"), "Rocker / Camber / Rocker")
+
+
 class BootTests(unittest.TestCase):
     def test_gear_west_wording(self):
         fields = evo.fields("Boots", "Lange Shadow 120 MV", "Boots", ["All Mountain"],
