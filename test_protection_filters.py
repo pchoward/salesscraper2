@@ -54,7 +54,7 @@ class ProtectsTests(unittest.TestCase):
     def test_every_sport_has_the_fields(self):
         # The stores' Protection plus the menu headings it is shown under (sports/headings.py).
         for sport, categories in ((sports.BMX, ("Protection", "Helmets", "Goggles", "Gloves")), (sports.MTB, ("Protection", "Helmets", "Goggles", "Gloves")),
-                                  (sports.SKI, ("Helmets", "Protection", "Goggles", "Gloves"))):
+                                  (sports.SKI, ("Helmets", "Protection", "Gloves"))):  # Ski: not Goggles (2026-11-21)
             import importlib
             fields = {f["key"]: f for f in importlib.import_module(sport.facets).FIELDS}
             for key in protection.FIELD_KEYS:

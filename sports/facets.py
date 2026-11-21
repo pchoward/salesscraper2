@@ -59,6 +59,10 @@ def sidebar(data, section, sport):
     Deck Width / Deck Length sections; several values can be picked."""
     config = payload(data, sport)
     tally = counts(config)
+    # A sport can order its sections per heading (sports/ski/facets.py
+    # ORDER): each section carries data-rank="Skis:2 Boots:6", and the page
+    # sorts by the chosen heading. No ORDER, no attribute: order unchanged.
+    rank = getattr(importlib.import_module(sport.facets), 'rank', None)
     sections = []
     for field in config['fields']:
         key = escape(field['key'], quote=True)
@@ -75,7 +79,8 @@ def sidebar(data, section, sport):
                          f'<span class="spec-label">{escape(value)}</span><span class="spec-count">{count}</span></button>')
         body = (f'<div class="filter-group spec-ranges" id="tech-{key}" role="group" aria-label="{label}">'
                 + ''.join(chips) + '</div>')
-        sections.append(f'<div data-technical-field="{key}">'
+        rank_attr = f' data-rank="{escape(rank(field["key"]), quote=True)}"' if rank and rank(field['key']) else ''
+        sections.append(f'<div data-technical-field="{key}"{rank_attr}>'
                         + section('tech-' + field['key'], field['label'], body, open_default=True) + '</div>')
     if not sections:
         return '<div id="contextSpecs"></div>'
