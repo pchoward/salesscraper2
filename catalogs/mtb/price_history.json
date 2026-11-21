@@ -483,13 +483,11 @@
     "store": "Bicycle Warehouse",
     "part": "Bikes",
     "first_seen": "2026-11-11",
-    "last_seen": "2026-11-20",
-    "observation_count": 8,
+    "last_seen": "2026-11-21",
+    "observation_count": 9,
     "all_time_low": 4299.0,
     "all_time_low_date": "2026-11-11",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/66a7f54b5c642f7c3621a6a323916ae3a81aa629.jpg?v=1787783633",
     "prices": {
       "2026-11-11": 4299.0,
@@ -499,7 +497,8 @@
       "2026-11-17": 4299.0,
       "2026-11-18": 4299.0,
       "2026-11-19": 4299.0,
-      "2026-11-20": 4299.0
+      "2026-11-20": 4299.0,
+      "2026-11-21": 4299.0
     }
   },
   "https://bicyclewarehouse.com/products/2025-levo-expert-carbon-g4-bike-gloss-and-satin-metallic-finish": {
@@ -1792,13 +1791,11 @@
     "store": "Bicycle Warehouse",
     "part": "Drivetrain",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-20",
-    "observation_count": 4,
+    "last_seen": "2026-11-21",
+    "observation_count": 5,
     "all_time_low": 19.99,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-21",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
     "width": 2.0,
     "length": 1.0,
@@ -1806,7 +1803,8 @@
       "2026-11-12": 19.99,
       "2026-11-13": 19.99,
       "2026-11-14": 19.99,
-      "2026-11-20": 19.99
+      "2026-11-20": 19.99,
+      "2026-11-21": 19.99
     }
   },
   "https://bicyclewarehouse.com/products/serfas-var-2-variant-2-adjustable-flex-bike-saddle": {
@@ -1914,19 +1912,18 @@
     "store": "Bicycle Warehouse",
     "part": "Cockpit",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-20",
-    "observation_count": 4,
+    "last_seen": "2026-11-21",
+    "observation_count": 5,
     "all_time_low": 59.99,
     "all_time_low_date": "2026-11-12",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-21",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
     "prices": {
       "2026-11-12": 59.99,
       "2026-11-13": 59.99,
       "2026-11-14": 59.99,
-      "2026-11-20": 59.99
+      "2026-11-20": 59.99,
+      "2026-11-21": 59.99
     }
   },
   "https://bicyclewarehouse.com/products/specialized-2bliss-ready-tire-sealant": {
@@ -2398,16 +2395,15 @@
     "store": "Bicycle Warehouse",
     "part": "Cockpit",
     "first_seen": "2026-11-20",
-    "last_seen": "2026-11-20",
-    "observation_count": 1,
+    "last_seen": "2026-11-21",
+    "observation_count": 2,
     "all_time_low": 19.99,
     "all_time_low_date": "2026-11-20",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-21",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
     "prices": {
-      "2026-11-20": 19.99
+      "2026-11-20": 19.99,
+      "2026-11-21": 19.99
     }
   },
   "https://bicyclewarehouse.com/products/tumpjumper-15-s-works-di2-2026": {
@@ -27305,6 +27301,8 @@
     "all_time_low": 34.99,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/263741.jpg?v=1687176574",
     "prices": {
       "2026-11-02": 34.99,
@@ -88603,6 +88601,8 @@
     "all_time_low": 88.0,
     "all_time_low_date": "2026-11-20",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269.jpg?v=1795131711",
     "width": 29.0,
     "length": 2.25,
@@ -95778,6 +95778,8 @@
     "all_time_low": 99.81,
     "all_time_low_date": "2026-11-20",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007.jpg?v=1795142171",
     "width": 29.0,
     "length": 2.4,
@@ -95814,6 +95816,8 @@
     "all_time_low": 93.51,
     "all_time_low_date": "2026-11-20",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008.jpg?v=1795142162",
     "width": 29.0,
     "length": 2.4,
@@ -95850,6 +95854,8 @@
     "all_time_low": 81.81,
     "all_time_low_date": "2026-11-20",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009.jpg?v=1795142173",
     "width": 29.0,
     "length": 2.4,
@@ -123807,6 +123813,8 @@
     "all_time_low": 51.0,
     "all_time_low_date": "2026-11-17",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0751/8073/6750/files/squad-xl-mtb-goggles_zeroGravity-cpEverydayOpalMirror_3Q.png?v=1758117084",
     "prices": {
       "2026-11-17": 51.0,
@@ -133615,8 +133623,6 @@
     "all_time_low": 461.59,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/6b71796b3071e1bb4ebdd271109f9e552eec2da0.jpg?v=1785540102",
     "prices": {
       "2026-11-03": 549.99,
@@ -135913,8 +135919,6 @@
     "all_time_low": 143.19,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
-    "miss_streak": 1,
-    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-mtb-handlebar-35mm-clamp-760mm-width-10mm-rise-black-race-face-the-lost-co-946-00-007-01-0821973481449-162834.jpg?v=1730509646",
     "prices": {
       "2026-11-19": 143.19,
@@ -136141,8 +136145,6 @@
     "all_time_low": 439.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/a0e690cecb7696d63cdfb4cb19955b523d8843f6.jpg?v=1786751490",
     "prices": {
       "2026-11-03": 523.99,
@@ -136239,6 +136241,8 @@
     "all_time_low": 439.99,
     "all_time_low_date": "2026-11-20",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-486279.jpg?v=1730509646",
     "prices": {
       "2026-11-03": 523.99,
@@ -136278,6 +136282,8 @@
     "all_time_low": 439.99,
     "all_time_low_date": "2026-11-20",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-868006.jpg?v=1730509647",
     "prices": {
       "2026-11-03": 523.99,

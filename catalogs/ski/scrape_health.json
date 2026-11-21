@@ -19544,14 +19544,14 @@
           }
         },
         "Smith_Helmets": {
-          "count": 11,
+          "count": 10,
           "failed": false,
           "diagnostics": {
             "expected_count": 11.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 11,
-            "percentage_change": -4.3,
+            "actual_count": 10,
+            "percentage_change": -13.0,
             "reason": "normal_variation"
           }
         },
@@ -20108,26 +20108,26 @@
           }
         },
         "evo_Bindings": {
-          "count": 23,
+          "count": 22,
           "failed": false,
           "diagnostics": {
             "expected_count": 21.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.5,
-            "actual_count": 23,
-            "percentage_change": 7.0,
+            "actual_count": 22,
+            "percentage_change": 2.3,
             "reason": "normal_variation"
           }
         },
         "evo_Boots": {
-          "count": 216,
+          "count": 215,
           "failed": false,
           "diagnostics": {
             "expected_count": 230.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 13.0,
-            "actual_count": 216,
-            "percentage_change": -6.1,
+            "actual_count": 215,
+            "percentage_change": -6.5,
             "reason": "normal_variation"
           }
         },
@@ -20192,7 +20192,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-21T03:43:12+00:00"
+      "scanned_at": "2026-11-21T07:20:16+00:00"
     }
   ],
   "baseline": {
@@ -20226,7 +20226,7 @@
     },
     "evo_Bindings": {
       "date": "2026-11-21",
-      "count": 23
+      "count": 22
     },
     "evo_Poles": {
       "date": "2026-11-21",
@@ -20318,7 +20318,7 @@
     },
     "Smith_Helmets": {
       "date": "2026-11-21",
-      "count": 11
+      "count": 10
     },
     "Smith_Protection": {
       "date": "2026-11-21",
@@ -20326,7 +20326,7 @@
     },
     "evo_Boots": {
       "date": "2026-11-21",
-      "count": 216
+      "count": 215
     },
     "Aspen Ski and Board_Bindings": {
       "date": "2026-11-21",
@@ -23433,7 +23433,7 @@
       },
       {
         "date": "2026-11-21",
-        "count": 11
+        "count": 10
       }
     ],
     "Smith_Packs": [
@@ -25855,7 +25855,7 @@
       },
       {
         "date": "2026-11-21",
-        "count": 23
+        "count": 22
       }
     ],
     "evo_Boots": [
@@ -25913,7 +25913,7 @@
       },
       {
         "date": "2026-11-21",
-        "count": 216
+        "count": 215
       }
     ],
     "evo_Helmets": [
