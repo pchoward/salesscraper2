@@ -113,7 +113,10 @@ def apply_run_updates(
             if isinstance(history, dict):
                 history = apply_lifecycle(
                     history,
-                    current_data,
+                    # Retained products keep the catalog visible during a failure.
+                    # They are not evidence that the listing was seen today.
+                    {key: items for key, items in (current_data or {}).items()
+                     if key not in failed_keys},
                     today=day,
                     skip_keys=failed_keys,
                 )

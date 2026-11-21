@@ -166,6 +166,42 @@ class CompletenessPipelineTests(unittest.TestCase):
         self.assertEqual(recovered["history"][missing_url]["observation_count"], 2)
         self.assertEqual(recovered["health"]["baseline"][self.key]["date"], "2026-10-03")
 
+    def test_repeated_partial_scans_never_retire_missing_listings(self):
+        previous = self.catalog(100)
+        history = update_price_history(previous, {}, today="2026-09-30")
+        missing_url = previous[self.key][-1]["url"]
+        history[missing_url].update(miss_streak=1, stage="price_drop")
+        health = self.health()
+
+        for offset in range(1, 6):
+            day = f"2026-10-{offset:02}"
+            raw = self.catalog(20)
+            raw.update(self.catalog(10, "CCS"))
+            prepared = prepare_run(raw, set(), previous, health, today=day)
+            current = prepared["current_data"]
+            failed = prepared["failed_keys"]
+            self.assertEqual(failed, {self.key})
+            self.assertEqual(current[self.key], previous[self.key])
+            record_misses(previous, current, history, failed, today=day)
+            self.assertNotIn(self.key, compare_catalogs(previous, current, failed))
+            updated = apply_run_updates(current, failed, history, health, today=day,
+                                        health_results=prepared["health_results"])
+            previous, history, health = current, updated["history"], updated["health"]
+            self.assertEqual(history[missing_url]["miss_streak"], 1)
+            self.assertEqual(history[missing_url]["last_seen"], "2026-09-30")
+            self.assertEqual(history[missing_url]["stage"], "price_drop")
+
+        day = "2026-10-06"
+        prepared = prepare_run(self.catalog(100), set(), previous, health, today=day)
+        self.assertEqual(prepared["failed_keys"], set())
+        current = prepared["current_data"]
+        record_misses(previous, current, history, today=day)
+        recovered = apply_run_updates(current, set(), history, health, today=day,
+                                      health_results=prepared["health_results"])
+        self.assertEqual(recovered["warnings"], [])
+        self.assertNotIn("miss_streak", recovered["history"][missing_url])
+        self.assertEqual(recovered["history"][missing_url]["last_seen"], day)
+
     def test_counts_are_raw_not_inflated_by_first_miss_retention(self):
         previous = self.catalog(100)
         history = update_price_history(previous, {}, today="2026-09-30")
