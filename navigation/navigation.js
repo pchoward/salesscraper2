@@ -108,6 +108,43 @@
         const empty = doc.getElementById("comingSoon");
         const brand = doc.getElementById("brandHome");
         const shellSearch = doc.getElementById("shellSearch");
+        const menu = doc.getElementById('headerMenu');
+        const menuToggle = doc.getElementById('headerMenuToggle');
+        const phoneHeader = win.matchMedia('(max-width: 640px)');
+        function closeHeaderMenu(returnFocus = false) {
+            if (menuToggle.getAttribute('aria-expanded') !== 'true') return;
+            menuToggle.setAttribute('aria-expanded', 'false');
+            if (returnFocus) menuToggle.focus({ preventScroll:true });
+        }
+        function syncHeaderWidth() {
+            shellSearch.placeholder = phoneHeader.matches ? 'Search…' : 'Search deals, gear, brands or stores…';
+            if (!phoneHeader.matches) closeHeaderMenu();
+            const sections = menu.querySelector('.catalog-sections');
+            if (sections) {
+                if (phoneHeader.matches) menu.prepend(sections);
+                else menu.append(sections);
+            }
+        }
+        phoneHeader.addEventListener('change', syncHeaderWidth);
+        syncHeaderWidth();
+        menuToggle.addEventListener('click', () => {
+            if (menuToggle.getAttribute('aria-expanded') === 'true') closeHeaderMenu();
+            else menuToggle.setAttribute('aria-expanded', 'true');
+        });
+        menu.addEventListener('click', event => {
+            if (event.target.closest('[data-catalog-control]')) closeHeaderMenu(true);
+        }, { capture:true });
+        for (const eventType of ['pointerdown', 'focusin']) {
+            doc.addEventListener(eventType, event => {
+                if (!menu.contains(event.target) && !menuToggle.contains(event.target)) closeHeaderMenu();
+            });
+        }
+        doc.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+                event.preventDefault();
+                closeHeaderMenu(true);
+            }
+        });
         const stuffPanel = doc.getElementById('myStuffPanel');
         const stuffToggle = doc.getElementById('myStuffToggle');
         const stuffName = doc.getElementById('myStuffName');
@@ -159,7 +196,7 @@
             frame.inert = false;
             if (stuffReturnTabIndex == null) frame.removeAttribute('tabindex');
             else frame.setAttribute('tabindex',stuffReturnTabIndex);
-            if(focus)stuffToggle.focus({preventScroll:true});
+            if(focus)(phoneHeader.matches ? menuToggle : stuffToggle).focus({preventScroll:true});
         }
         function sendStuff(type,extra={}) {
             if(!stuffReady || frame.hidden)return;
@@ -168,7 +205,7 @@
         }
         stuffToggle.addEventListener('click',()=>{
             if(!stuffPanel.hidden){closeMyStuff(true);return;}
-            closeCategories();
+            closeCategories();closeHeaderMenu();
             stuffPanel.hidden=false;stuffToggle.setAttribute('aria-expanded','true');
             doc.getElementById('myStuffBackdrop').hidden=false;
             doc.body.classList.add('my-stuff-open');
@@ -560,7 +597,7 @@
             frame.contentWindow.postMessage({ type: "shreddeals:restore", href: expected.href, state: historyState && historyState.skateState || null }, win.location.origin);
         }
         function render(focusGroup) {
-            closeMyStuff();stuffReady=false;clearRename();
+            closeHeaderMenu();closeMyStuff();stuffReady=false;clearRename();
             doc.getElementById('myStuffViews').replaceChildren();
             doc.getElementById('myStuffSave').disabled=true;doc.getElementById('myStuffWatching').disabled=true;
             doc.getElementById('myStuffStars').textContent='';doc.getElementById('myStuffStatus').textContent='Loading catalog tools…';

@@ -42,15 +42,14 @@ async function main() {
                     const utility=document.querySelector('.catalog-sections')?.getBoundingClientRect();
                     return {search:{width:search.width,height:search.height,bottom:search.bottom,right:search.right,center:search.top+search.height/2},logoCenter:logo.top+logo.height/2,sportsTop:sports.top,utilityRight:utility?.right};
                 });
-                assert(width > 800 ? layout.search.width >= 320 && layout.search.width <= 650 : layout.search.width >= width-30,'search width must remain compact on desktop and usable on mobile');
-                const [minSearchHeight,maxSearchHeight] = width > 800 ? [30,34] : [40,44];
+                assert(width > 800 ? layout.search.width >= 320 && layout.search.width <= 650 : layout.search.width >= 100 && layout.search.width <= width-160,'search width must remain compact on desktop and usable on mobile');
+                const [minSearchHeight,maxSearchHeight] = width > 800 ? [30,34] : [40,46];
                 assert(layout.search.height >= minSearchHeight && layout.search.height <= maxSearchHeight,
                     `search height ${layout.search.height}px at ${width}px must be within ${minSearchHeight}–${maxSearchHeight}px`);
                 assert(layout.sportsTop >= layout.search.bottom,'sports must be on a separate row');
-                if (width > 800) {
-                    assert(layout.utilityRight >= width-30,'utility controls must be at the far right');
-                    assert(Math.abs(layout.search.center-layout.logoCenter) <= 1,'search and wordmark must be vertically centered');
-                }
+                assert(Math.abs(layout.search.center-layout.logoCenter) <= 1,'search and wordmark must be vertically centered');
+                if (width > 800) assert(layout.utilityRight >= width-30,'utility controls must be at the far right');
+                else assert.equal(await page.locator('.catalog-sections').isVisible(),false,'navigation starts collapsed');
                 await frame.evaluate(() => clearFilters()); await headerValue('');
                 const sample = await frame.locator('.deal-row:not(.filtered-out)').first().evaluate(row => ({store:row.dataset.store,part:row.dataset.part}));
                 await frame.evaluate(sample => {
@@ -103,6 +102,7 @@ async function main() {
             await frame.locator('button[type=reset]').click(); await headerValue('');
             await header.fill('complete 1'); await headerValue('complete 1');
             assert.equal(await frame.locator('.inventory-card').count(),2);
+            if (width<=640) await page.getByRole('button',{name:'Site navigation'}).click();
             await page.locator('[data-catalog-control=navDeals]').click();
             await frameInput('searchInput',''); await headerValue('');
             // A previous view cannot overwrite the active catalog's query.

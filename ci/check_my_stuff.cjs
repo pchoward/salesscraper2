@@ -3,23 +3,27 @@ const{chromium}=require('playwright'),{serve}=require('./check_topbar.cjs');cons
 (async()=>{const[site,out]=process.argv.slice(2);fs.mkdirSync(out,{recursive:true});const{server,base}=await serve(site);const browser=await chromium.launch({executablePath:process.env.BROWSER_BINARY,args:['--no-sandbox','--disable-dev-shm-usage']});const results=[];
 try{for(const width of[1440,390])for(const sport of['skate','ski','mtb','bmx']){
  console.log('My stuff',sport,width);const page=await browser.newPage({viewport:{width,height:950},isMobile:width===390,hasTouch:width===390,permissions:['clipboard-read','clipboard-write']});const errors=[];page.on('pageerror',e=>errors.push(String(e)));await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
+ async function openStuff(){
+  if(width<=640)await page.getByRole('button',{name:'Site navigation'}).click();
+  await page.locator('#myStuffToggle').click();
+ }
  async function ready(){await page.waitForSelector('#myStuffSave:not([disabled])',{state:'attached'});return(await page.locator('#skateFrame').elementHandle()).contentFrame();}
  await page.goto(base+'/?sport='+sport+'&utm_source=my-stuff-qa');let frame=await ready();
  for(const section of['views','watching','bookmarks'])assert.equal(await frame.locator('#filterDrawer [data-section="'+section+'"]').count(),0);
  const card=frame.locator('#cardGrid .deal-card:not(.filtered-out)').first();await card.hover();const star=card.locator('.star');await star.click();
- const name='QA '+sport;await page.locator('#myStuffToggle').click();assert(await page.locator('#skateFrame').evaluate(n=>n.inert));
+ const name='QA '+sport;await openStuff();assert(await page.locator('#skateFrame').evaluate(n=>n.inert));
  await page.locator('#myStuffName').fill(name);await page.locator('#myStuffSave').click();
  await page.getByRole('button',{name:name+' · Shared',exact:true}).waitFor();
  const views=await page.evaluate(()=>JSON.parse(localStorage.getItem('salesscraper2.views')));assert.equal(views.length,1);assert.deepEqual(Object.keys(views[0]).sort(),['id','name','query']);
  assert.equal(views[0].name,name);assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('salesscraper2.stars')).length),1);
  await page.evaluate(sport=>{const views=JSON.parse(localStorage.getItem('salesscraper2.views'));views.push({id:'current-sport',name:'This sport only',query:'sport='+sport+'&type=all'});views.push({id:'foreign-sport',name:'Other sport only',query:'sport='+(sport==='ski'?'bmx':'ski')+'&q=foreign'});localStorage.setItem('salesscraper2.views',JSON.stringify(views));},sport);
- await page.reload();frame=await ready();await page.locator('#myStuffToggle').click();await page.getByRole('button',{name:name+' · Shared',exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:/Other sport only/}).count(),0);await page.getByRole('button',{name:'This sport only · '+({skate:'Skate',ski:'Ski',mtb:'MTB',bmx:'BMX'})[sport],exact:true}).waitFor();if(sport!=='skate')assert.equal(await page.getByRole('button',{name:/Decks 8.25/}).count(),0);
+ await page.reload();frame=await ready();await openStuff();await page.getByRole('button',{name:name+' · Shared',exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:/Other sport only/}).count(),0);await page.getByRole('button',{name:'This sport only · '+({skate:'Skate',ski:'Ski',mtb:'MTB',bmx:'BMX'})[sport],exact:true}).waitFor();if(sport!=='skate')assert.equal(await page.getByRole('button',{name:/Decks 8.25/}).count(),0);
  // Close/focus then change search; applying the saved snapshot restores it.
- await page.keyboard.press('Escape');assert(await page.locator('#myStuffToggle').evaluate(n=>n===document.activeElement));assert.equal(await page.locator('#skateFrame').evaluate(n=>n.inert),false);
+ await page.keyboard.press('Escape');assert(await page.locator(width<=640?'#headerMenuToggle':'#myStuffToggle').evaluate(n=>n===document.activeElement));assert.equal(await page.locator('#skateFrame').evaluate(n=>n.inert),false);
  await page.locator('#shellSearch').fill('zzzz-my-stuff-no-result');await frame.waitForFunction(()=>document.querySelectorAll('.deal-row:not(.filtered-out)').length===0);
- await page.locator('#myStuffToggle').click();await page.getByRole('button',{name:name+' · Shared',exact:true}).click();
+ await openStuff();await page.getByRole('button',{name:name+' · Shared',exact:true}).click();
  await frame.waitForFunction(()=>document.getElementById('searchInput').value===''&&document.querySelectorAll('.deal-row:not(.filtered-out)').length>0);
- await page.locator('#myStuffToggle').click();await page.locator('#myStuffWatching').click();await page.waitForFunction(()=>document.getElementById('myStuffWatching').getAttribute('aria-pressed')==='true');
+ await openStuff();await page.locator('#myStuffWatching').click();await page.waitForFunction(()=>document.getElementById('myStuffWatching').getAttribute('aria-pressed')==='true');
  await frame.waitForFunction(()=>state.watching&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===1);
  assert.equal(await page.locator('#myStuffWatching').innerText(),'Show all deals');
  assert.match(await page.locator('#myStuffStars').innerText(),/^1 starred deal/);
@@ -30,10 +34,10 @@ try{for(const width of[1440,390])for(const sport of['skate','ski','mtb','bmx']){
  // Keyboard trap and outside tap both release the frame and return focus.
  await page.locator('#myStuffClose').focus();await page.keyboard.press('Shift+Tab');assert(await page.locator('#myStuffBookmark').evaluate(n=>n===document.activeElement));await page.keyboard.press('Tab');assert(await page.locator('#myStuffClose').evaluate(n=>n===document.activeElement));
  await page.keyboard.press('Escape');assert.equal(await page.locator('#myStuffPanel').isVisible(),false);
- await page.locator('#myStuffToggle').click();await page.locator('#myStuffBackdrop').click({position:{x:4,y:900}});assert.equal(await page.locator('#myStuffPanel').isVisible(),false);assert.equal(await page.locator('#skateFrame').evaluate(n=>n.inert),false);
- await page.locator('#myStuffToggle').click();await page.keyboard.press('/');assert.equal(await page.locator('#myStuffPanel').isVisible(),false);assert(await page.locator('#shellSearch').evaluate(n=>n===document.activeElement));
+ await openStuff();await page.locator('#myStuffBackdrop').click({position:{x:4,y:900}});assert.equal(await page.locator('#myStuffPanel').isVisible(),false);assert.equal(await page.locator('#skateFrame').evaluate(n=>n.inert),false);
+ await openStuff();await page.keyboard.press('/');assert.equal(await page.locator('#myStuffPanel').isVisible(),false);assert(await page.locator('#shellSearch').evaluate(n=>n===document.activeElement));
  // Rename/delete still use the original catalog functions and storage shape.
- await page.locator('#myStuffToggle').click();await page.getByRole('button',{name:'Rename '+name,exact:true}).click();await page.locator('#myStuffName').fill(name+' renamed');await page.locator('#myStuffSave').click();await page.getByRole('button',{name:name+' renamed · Shared',exact:true}).waitFor();
+ await openStuff();await page.getByRole('button',{name:'Rename '+name,exact:true}).click();await page.locator('#myStuffName').fill(name+' renamed');await page.locator('#myStuffSave').click();await page.getByRole('button',{name:name+' renamed · Shared',exact:true}).waitFor();
  await page.getByRole('button',{name:'Delete '+name+' renamed',exact:true}).click();await page.waitForFunction(()=>JSON.parse(localStorage.getItem('salesscraper2.views')).length===2);assert.deepEqual((await page.evaluate(()=>JSON.parse(localStorage.getItem('salesscraper2.views')).map(view=>view.id))).sort(),['current-sport','foreign-sport']);
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert.deepEqual(errors,[]);
  // Same artifact, no shell: all three personal sections remain in the drawer.

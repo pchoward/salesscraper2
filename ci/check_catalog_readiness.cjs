@@ -67,6 +67,14 @@ const path=require('node:path');
    assert(await page.locator('#categoryToggle').isDisabled());
    assert(await page.locator('#shellSearch').isDisabled(),'search waits for the catalog bridge');
    assert(await page.locator('#catalogLoading').isVisible(),'loading cards stay visible while the catalog is stalled');
+   const headerGeometry=()=>page.evaluate(()=>['brandHome','shellSearch','headerMenuToggle'].map(id=>{
+    const rect=document.getElementById(id).getBoundingClientRect();
+    return {x:rect.x,y:rect.y,width:rect.width,height:rect.height};
+   }));
+   const loadingHeader=await headerGeometry();
+   assert(loadingHeader.every(control=>control.height>=44),'phone header has full-size targets while loading');
+   assert.equal(await page.locator('.catalog-sections:visible').count(),0);
+
    assert(await page.locator('#skateFrame').evaluate(frame=>
     frame.inert && frame.tabIndex===-1 && frame.getAttribute('aria-hidden')==='true' && getComputedStyle(frame).opacity==='0'
    ),'progressively parsed catalog is hidden and cannot receive focus');
@@ -98,6 +106,7 @@ const path=require('node:path');
    await page.waitForFunction(()=>!document.getElementById('categoryToggle').disabled);
    await page.locator('#catalogLoading').waitFor({state:'hidden'});
    assert(await page.locator('#shellSearch').isEnabled());
+   assert.deepEqual(await headerGeometry(),loadingHeader,'header geometry stays fixed as the catalog loads');
    assert(await page.locator('#skateFrame').evaluate(frame=>!frame.inert&&getComputedStyle(frame).opacity==='1'));
    if(mode==='stale')assert.equal(await page.evaluate(()=>shredApp.registerCategories(oldCatalog.source,oldCatalog.child,oldCatalog.document)),false);
    const counts=await page.evaluate(()=>{

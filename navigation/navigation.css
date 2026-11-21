@@ -202,3 +202,51 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
 @media (scripting:none) {
  #catalogViewport, .catalog-loading .top-row::after { display:none; }
 }
+
+/* One set of catalog controls serves the desktop row and the phone disclosure. */
+#headerMenuToggle { display:none; }
+#headerMenu { display:contents; }
+@media (max-width:640px) {
+ .shell-header .top-row {
+  position:relative;
+  grid-template-columns:auto minmax(0,1fr) 44px;
+  grid-template-areas:"brand search menu";
+  gap:0 6px;
+  padding:3px 8px;
+ }
+ .top-row .brand { min-height:44px; padding:0; font-size:24px; white-space:nowrap; }
+ .top-row .shell-search { position:static; height:46px; padding:0 7px; gap:7px; margin:0; }
+ .shell-suggestions { top:100%; left:8px; right:8px; }
+ #headerMenuToggle {
+  grid-area:menu; display:grid; place-items:center; width:44px; height:44px;
+  border:0; border-radius:4px; background:transparent; color:inherit;
+ }
+ #headerMenuToggle span {
+  width:19px; height:12px; border-block:2px solid currentColor; border-radius:1px;
+  background:linear-gradient(currentColor,currentColor) center / 100% 2px no-repeat;
+ }
+ #headerMenuToggle[aria-expanded=true] { background:#35475a; }
+ #headerMenu > .catalog-sections, #myStuffToggle { display:none; }
+ #headerMenuToggle[aria-expanded=true] + #headerMenu > .catalog-sections,
+ #headerMenuToggle[aria-expanded=true] + #headerMenu #myStuffToggle { display:flex; }
+ #headerMenuToggle[aria-expanded=true] + #headerMenu {
+  display:block; position:absolute; z-index:120; top:100%; right:8px;
+  width:min(232px,calc(100% - 16px)); padding:4px;
+  border:1px solid #59697b; border-radius:6px; background:#1c2430; box-shadow:0 8px 20px #17212e40;
+ }
+ .top-row #headerMenu .catalog-sections { flex-direction:column; align-items:stretch; border:0; }
+ .top-row #headerMenu button[data-catalog-control], #headerMenu #myStuffToggle {
+  flex:auto; min-height:44px; width:100%; padding:0 10px; text-align:left; align-items:center;
+ }
+ .top-row #headerMenu button[aria-pressed=true] {
+  background:#293442; border-bottom-color:transparent; box-shadow:inset 3px 0 #6ca3db;
+ }
+ .top-row #headerMenu button[data-catalog-control] { border-radius:4px; }
+ .browse-nav #sportTabs { min-width:0; flex:0 1 auto; overflow-x:auto; }
+ .browse-nav #sportTabs [role=tab] { flex:none; }
+ #categoryNavigation { flex:1 0 95px; }
+}
+
+@media (max-width:350px) {
+ .top-row .shell-search-icon { display:none; }
+}
