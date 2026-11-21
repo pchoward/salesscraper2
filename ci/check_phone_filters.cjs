@@ -53,6 +53,14 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
     assert(controls.slice(i+1).every(other=>!overlaps(box,other)),'toolbar controls do not overlap');
    });
    assert(await frame.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'catalog does not scroll sideways');
+   if(width===375){
+    await frame.locator('#storeFilters[data-scroll-forward="true"]').waitFor();
+    await frame.locator('#storeFilters').evaluate(node=>{node.scrollLeft=node.scrollWidth});
+    const end=frame.locator('#storeFilters[data-scroll-forward="false"]');
+    await end.waitFor();
+    assert.equal(await end.evaluate(node=>getComputedStyle(node).maskImage),'none');
+    await end.evaluate(node=>{node.scrollLeft=0});
+   }
   }
   const browseBefore=page.url();
   const rowsBefore=await frame.locator('.deal-row:not(.filtered-out)').count();

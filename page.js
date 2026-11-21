@@ -2453,6 +2453,11 @@ function pullPressedNavChip(cluster) {
 let navFitLock = false;
 let navFitQueued = false;
 
+function paintRetailerScrollHint(node) {
+    const canScroll = node.scrollLeft + node.clientWidth < node.scrollWidth - 1;
+    node.setAttribute("data-scroll-forward", String(canScroll));
+}
+
 function scheduleNavFit() {
     if (navFitQueued) return;
     navFitQueued = true;
@@ -2476,6 +2481,7 @@ function fitNavPills() {
             clusters.forEach(cluster => {
                 cluster.list.querySelectorAll(":scope > .quick-chip").forEach(chip => cluster.row.insertBefore(chip, cluster.menu));
                 syncNavMore(cluster);
+                if (cluster.root.id === "storeFilters") paintRetailerScrollHint(cluster.root);
             });
             return;
         }
@@ -7014,6 +7020,7 @@ function init() {
     if (partSelect) partSelect.addEventListener("change", () => filterByPart(partSelect.value));
     const storeFilters = document.getElementById("storeFilters");
     if (storeFilters) {
+        storeFilters.addEventListener("scroll", () => paintRetailerScrollHint(storeFilters), {passive:true});
         storeFilters.addEventListener("click", event => {
             const button = event.target.closest(".quick-chip[data-store]");
             if (!button || !storeFilters.contains(button)) return;
