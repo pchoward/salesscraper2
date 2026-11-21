@@ -282,9 +282,23 @@ async function main(){
        return;
       }
       await strip.waitFor({state:'visible'});
+      const phone=width<640;
+      const more=strip.locator('#promoMore');
+      const offers=strip.locator('.promo-offer:visible');
+      assert.equal(await offers.count(),phone?1:2);
+      if(phone){
+       assert.match(await offers.first().textContent(),/FIXTURE20/);
+       assert.equal(await more.getAttribute('aria-expanded'),'false');
+      }
       await strip.getByRole('button',{name:'Copy FIXTURE20'}).click();
       await page.waitForFunction(async()=>await navigator.clipboard.readText()==='FIXTURE20');
+      if(phone){
+       await more.click();
+       assert.equal(await offers.count(),2);
+       assert.equal(await more.getAttribute('aria-expanded'),'true');
+      }
       await strip.getByRole('button',{name:'Dismiss FIXTURE20'}).click();
+      await strip.getByRole('button',{name:'Dismiss SPORTS10'}).click();
       await strip.waitFor({state:'hidden'});
       await page.reload();
       assert.equal(await strip.isVisible(),false);

@@ -6980,7 +6980,17 @@ function init() {
         filterDrawer.classList.toggle("is-open", open);
         document.body.classList.toggle("filters-open", open);
     }
-    if (filtersOpen) filtersOpen.addEventListener("click", () => setFilters(true));
+    if (filtersOpen) {
+        filtersOpen.addEventListener("click", () => setFilters(true));
+        const phoneToolbar = window.matchMedia("(max-width:640px)");
+        const moveFilters = () => {
+            if (document.documentElement.classList.contains("shred-embedded")) return;
+            const target = document.querySelector(phoneToolbar.matches ? ".tool-display" : ".topnav");
+            if (target && filtersOpen.parentElement !== target) target.appendChild(filtersOpen);
+        };
+        phoneToolbar.addEventListener("change", moveFilters);
+        moveFilters();
+    }
     if (filtersClose) filtersClose.addEventListener("click", () => setFilters(false));
     if (filterDrawer) {
         filterDrawer.addEventListener("click", event => {
@@ -7266,6 +7276,7 @@ function initPromoStrip() {
     const more = document.getElementById("promoMore");
     const status = document.getElementById("promoStatus");
     let expanded = false;
+    const phone = window.matchMedia("(max-width:640px)");
 
     function paint() {
         const now = new Date();
@@ -7273,15 +7284,25 @@ function initPromoStrip() {
             .map(value => String(value).padStart(2, "0")).join("-");
         const active = offers.filter(offer => !dismissed.has(offer.dataset.promoId)
             && (!offer.dataset.ends || offer.dataset.ends >= today));
-        const collapsible = active.length > 2;
+        if (phone.matches) {
+            active.sort((a, b) => Number(a.dataset.sportCount) - Number(b.dataset.sportCount));
+        }
+        const collapsible = active.length > (phone.matches ? 0 : 2);
+        const open = expanded && collapsible;
         strip.hidden = !active.length;
+        strip.dataset.open = String(open);
         offers.forEach(offer => {
             const index = active.indexOf(offer);
-            offer.hidden = index < 0 || (collapsible && !expanded && index > 0);
+            offer.hidden = index < 0 || (collapsible && !open && index > 0);
         });
         more.hidden = !collapsible;
-        more.textContent = expanded ? "Show less" : "+" + (active.length - 1) + " more";
-        more.setAttribute("aria-expanded", String(expanded && collapsible));
+        more.textContent = open ? "Show less" : active.length > 1 ? "+" + (active.length - 1) + " more" : "Details";
+        more.setAttribute("aria-expanded", String(open));
+        const ordered = phone.matches ? [...active, ...offers.filter(offer => !active.includes(offer))] : offers;
+        const list = document.getElementById("promoOffers");
+        if (ordered.some((offer, index) => list.children[index] !== offer)) {
+            ordered.forEach(offer => list.appendChild(offer));
+        }
     }
 
     more.addEventListener("click", () => {
@@ -7296,7 +7317,10 @@ function initPromoStrip() {
             dismissed.add(offer.dataset.promoId);
             try { localStorage.setItem(key, JSON.stringify([...dismissed])); } catch (_) {}
             paint();
-            strip.querySelector(".promo-offer:not([hidden]) [data-dismiss-promo]")?.focus();
+            const dismiss = strip.querySelector(".promo-offer:not([hidden]) [data-dismiss-promo]");
+            if (dismiss?.getClientRects().length) dismiss.focus();
+            else if (!more.hidden) more.focus();
+            else document.getElementById("sortSelect")?.focus();
         } else if (button.hasAttribute("data-copy-promo")) {
             const code = offer.querySelector("code").textContent;
             try {
@@ -7309,6 +7333,7 @@ function initPromoStrip() {
             }
         }
     });
+    phone.addEventListener("change", () => { expanded = false; paint(); });
     // Recheck the visitor's date when a tab is brought back after midnight.
     document.addEventListener("visibilitychange", () => { if (!document.hidden) paint(); });
     paint();

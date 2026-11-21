@@ -8,7 +8,8 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
  fs.mkdirSync(out,{recursive:true});const{server,base}=await serve(site);
  const browser=await chromium.launch({executablePath:process.env.BROWSER_BINARY,args:['--no-sandbox','--disable-dev-shm-usage']});const results=[];
  try{
- for(const [width,height] of [[390,844],[320,640],[1440,950]])for(const [sport,category] of Object.entries(sports)){
+ for(const [width,height] of [[390,844],[375,812],[320,640],[1440,950]])for(const [sport,category] of Object.entries(sports)){
+  if(width===375&&sport!=='skate')continue;
   console.log(capture?'Before phone filters':'Phone filters',sport,width);
   const page=await browser.newPage({viewport:{width,height},hasTouch:width<640,isMobile:width<640});
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));
@@ -39,7 +40,20 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
    assert.deepEqual(errors,[]);results.push({sport,width,status:'pass',desktopUnchanged:!capture&&!!before});await page.close();continue;
   }
   const sort=await frame.locator('#sortSelect').boundingBox(),group=await frame.locator('#groupToggle').boundingBox();
-  if(!capture){assert(!overlaps(sort,group),'sort and Group across stores must not overlap');assert(await frame.locator('#filtersOpen').isVisible());}
+  if(!capture){
+   const filter=await frame.locator('#filtersOpen').boundingBox();
+   const count=await frame.locator('#statusCounts').boundingBox();
+   assert(filter&&filter.height>=44,'Filters keeps a comfortable touch target');
+   assert(group&&group.height>=44,'Group keeps a comfortable touch target');
+   assert(Math.abs(sort.y-group.y)<=1&&Math.abs(sort.y-filter.y)<=1,'browse controls share one row');
+   assert(count.y>=sort.y&&count.y+count.height<=sort.y+sort.height,'result count shares the toolbar row');
+   const controls=[count,sort,group,filter];
+   controls.forEach((box,i)=>{
+    assert(box.x>=0&&box.x+box.width<=width+1,'toolbar stays inside the viewport');
+    assert(controls.slice(i+1).every(other=>!overlaps(box,other)),'toolbar controls do not overlap');
+   });
+   assert(await frame.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'catalog does not scroll sideways');
+  }
   const browseBefore=page.url();
   const rowsBefore=await frame.locator('.deal-row:not(.filtered-out)').count();
   await frame.locator('#filtersOpen').click();
