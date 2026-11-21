@@ -307,3 +307,23 @@ Use `promos.for_sport(sport_id)` for a sport's list, and `promos.describe(promo,
 3. **Stale summary on re-run:** re-running only the failed browser groups (Actions "Re-run failed jobs") let every group pass, but "Preview build and browser checks" still failed. It read the earlier attempt's `audit-phone` result ("Fail / incomplete"). Only a full re-run clears it. Make the summary read the latest attempt's results.
 
 **Tests:** run the full browser checks three times on one PR, all green. A re-run of only the failed jobs after a forced failure turns the summary green.
+
+## 19. Sort Ski filter sections by the chosen heading (owner, 2026-11-21)
+**Why:** Grok's `docs/filters-evo-model.md` gives each Ski heading its own filter order. Boots want Size, Gender, Flex, Last; Bindings want DIN, Brake, Gender. One `FIELDS` tuple can't do both.
+
+**Data (done, Claude's PR "Ski filter order"):** each technical section wrapper in `#contextSpecs` (`<div data-technical-field="…">`) carries `data-rank="Skis:2 Boots:2 Bindings:3 …"`: its 1-based position on every heading that orders it (`sports/ski/facets.py` `ORDER`). Sections a heading doesn't rank have no entry for it. Other sports have no `data-rank`.
+
+**Wanted:** in `page.js` `syncTypeSections`, after the `data-for` loop, reorder the `[data-technical-field]` children of `#contextSpecs` for the chosen `part`:
+- sections with a rank for `part` first, ascending;
+- then the rest in their built order (remember each section's built index once);
+- on "all", and on any heading with no ranks, restore the built order;
+- no `data-rank` anywhere: change nothing.
+
+Brand stays first, as it is today. Open/closed state and counts are unchanged.
+
+**Tests:** a browser check on Ski at desktop and 390 px:
+- Boots shows Boot size (Mondo), Gender, Flex, Last width in that order;
+- Bindings shows DIN, Brake width, Gender;
+- Goggles shows Gender, then Frame size;
+- All restores the built order;
+- MTB and BMX order are unchanged.
