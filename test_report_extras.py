@@ -243,9 +243,8 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn('data-brand="5boro"', html)
         self.assertNotIn('value="5boro"', html)
         self.assertIn('data-brand="5Boro"', html)
-        # Two table rows (each its <tr> and its cells waiting in #tableRows),
-        # two cards, and one brand facet button.
-        self.assertEqual(html.count('data-brand="5Boro"'), 7)
+        # Two filter rows, two cards, and one brand facet button.
+        self.assertEqual(html.count('data-brand="5Boro"'), 5)
         self.assertEqual(html.count('value="5Boro"'), 1)
         self.assertIn("const HISTORY_COLOR", html)
         self.assertIn("function brandSame(", html)
