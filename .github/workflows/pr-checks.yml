@@ -55,6 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: unified-header-preview
+          overwrite: true
           path: ${{ runner.temp }}/unified-header-preview/
           retention-days: 7
           if-no-files-found: error
@@ -103,6 +104,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: browser-preview-input
+          overwrite: true
           path: preview/
           include-hidden-files: true
           retention-days: 7
@@ -110,6 +112,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: browser-fixtures
+          overwrite: true
           path: ${{ runner.temp }}/browser-fixtures/
           retention-days: 7
           compression-level: 1
@@ -151,15 +154,18 @@ jobs:
           path: ${{ runner.temp }}/browser-fixtures
       - name: Run browser group and record per-suite timings
         run: node ci/run_browser_shard.cjs "${{ matrix.group }}" preview/site review "${{ runner.temp }}/browser-fixtures"
+      # Failed-job reruns keep successful groups' artifacts. Replace only
+      # the report from the group that ran again, under its original name.
       - name: Keep screenshots and timings even on failure
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: browser-review-${{ matrix.group }}
+          overwrite: true
           path: review/
           retention-days: 7
           compression-level: 0
-          if-no-files-found: warn
+          if-no-files-found: error
 
   # Preserve the existing required check name and the publisher's pr-preview
   # contract. A missing, cancelled or failing group can never make this green.
@@ -198,6 +204,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pr-preview
+          overwrite: true
           path: preview/
           # Preserve the existing main-only publisher whitelist. Live search
           # is off in previews, so the hidden agent profile is not required.
@@ -210,6 +217,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: browser-review
+          overwrite: true
           path: review/
           retention-days: 7
           compression-level: 0

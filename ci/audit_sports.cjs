@@ -15,8 +15,14 @@ async function check(sport,width,name,fn) {
 }
 const rows = frame => frame.evaluate(() => [...document.querySelectorAll('.deal-row:not(.filtered-out)')].map(n=>({...n.dataset,price:String(rowPrice(n)),discount:String(rowDiscount(n))})));
 async function control(frame,id,value) {
-    await frame.evaluate(({id,value})=>{const n=document.getElementById(id); n.value=value;n.dispatchEvent(new Event(n.tagName==='SELECT'?'change':'input',{bubbles:true}));}, {id,value});
-    await frame.waitForTimeout(180);
+    const isSelect=await frame.evaluate(({id,value})=>{
+        const node=document.getElementById(id);
+        node.value=value;
+        const isSelect=node.tagName==='SELECT';
+        node.dispatchEvent(new Event(isSelect?'change':'input',{bubbles:true}));
+        return isSelect;
+    },{id,value});
+    if(!isSelect) await frame.waitForFunction(({id,value})=>state[id]===(value===''?null:Number(value)),{id,value});
 }
 async function technical(frame,key,value,mobile) {
     if(mobile && !await frame.locator('#filterDrawer').evaluate(n=>n.classList.contains('is-open'))) await frame.locator('#filtersOpen').click();
@@ -32,16 +38,30 @@ async function main(){
  const browser=await chromium.launch({headless:true,...(process.env.BROWSER_BINARY?{executablePath:process.env.BROWSER_BINARY}:{}),args:['--no-sandbox','--disable-dev-shm-usage']});
  try{
   for(const width of (process.env.AUDIT_WIDTHS === 'fixtures' ? [] : (process.env.AUDIT_WIDTHS||'1440,1024,768,430,390').split(',').map(Number))) for(const sport of ['skate','bmx','ski','mtb']){
-   const page=await browser.newPage({viewport:{width,height:width>800?1000:900},isMobile:width<=800,hasTouch:width<=800});
-   page.setDefaultTimeout(5000);const errors=[];page.on('pageerror',e=>errors.push(e.stack || String(e)));
-   await page.route('**/*',r=>new URL(r.request().url()).hostname==='127.0.0.1'?r.continue():r.abort());
-   try{
-    await page.goto(base+'/?sport='+sport);let frame=await(await page.waitForSelector('#skateFrame')).contentFrame();
-    await frame.waitForSelector('.deal-row',{state:'attached'});await page.waitForSelector('.catalog-sections');
-    await page.waitForTimeout(300);
     const mobile=width<=800;
-    if(width===1440||width===390) await page.screenshot({path:path.join(output,`${sport}-${width===1440?'desktop':'mobile'}.png`),animations:'disabled'});
-    await check(sport,width,'Layout and active sport',async()=>{
+    const errors=[];
+    let page,frame;
+    // A failed assertion can leave URL, drawer, or watch state behind. Give
+    // each scenario a fresh document and storage, including after failures.
+    const scenario=(name,fn)=>check(sport,width,name,async()=>{
+     page=await browser.newPage({viewport:{width,height:mobile?900:1000},isMobile:mobile,hasTouch:mobile});
+     page.setDefaultTimeout(5000);
+     page.on('pageerror',e=>errors.push(e.stack || String(e)));
+     try{
+      await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
+      await page.goto(base+'/?sport='+sport,{waitUntil:'domcontentloaded'});
+      await page.waitForFunction(()=>{
+       const catalog=document.getElementById('skateFrame')?.contentDocument;
+       return catalog?.shredCatalogReady && document.getElementById('categoryToggle')?.disabled===false;
+      },undefined,{timeout:30000});
+      frame=await(await page.waitForSelector('#skateFrame')).contentFrame();
+      return await fn();
+     }finally{
+      await page.close();
+     }
+    });
+    await scenario('Layout and active sport',async()=>{
+     if(width===1440||width===390) await page.screenshot({path:path.join(output,`${sport}-${width===1440?'desktop':'mobile'}.png`),animations:'disabled'});
      assert.equal(await page.locator('#sport-'+sport).getAttribute('aria-selected'),'true');
      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
      assert(await frame.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
@@ -57,39 +77,41 @@ async function main(){
      assert(buttons.every((r,i)=>buttons.slice(i+1).every(b=>r.right<=b.x+1||r.bottom<=b.y+1||b.right<=r.x+1||b.bottom<=r.y+1)));
      return {rows:(await rows(frame)).length};
     });
-    await check(sport,width,'Capabilities are honest',async()=>{
+    await scenario('Capabilities are honest',async()=>{
      const supported=sport==='skate';
      assert.equal(await page.locator('[data-catalog-control="navAlerts"]').isDisabled(),!supported);
      const alerts=await frame.locator('.card-alert:visible').count();assert.equal(alerts>0,supported);
      assert(await frame.locator('.star:visible').count()>0,'local Watch remains usable');
     });
     const category={skate:'Decks',bmx:'Frames & Forks',ski:'Skis',mtb:'Suspension'}[sport];
-    await control(frame,'partSelect',category);
-    await check(sport,width,'Category, store, brand, search, sort and ranges',async()=>{
+    await scenario('Category, store, brand, search, sort and ranges',async()=>{
+     await control(frame,'partSelect',category);
      const baseRows=await rows(frame);assert(baseRows.length>0);assert(baseRows.every(r=>r.part===category));
      const sample=baseRows[0];
      await control(frame,'storeSelect',sample.store);await control(frame,'brandSelect',sample.brand);
-     await page.locator('#shellSearch').fill(sample.brand);await page.waitForTimeout(200);
-     let live=await rows(frame);assert(live.length>0);assert(live.every(r=>r.part===category&&r.store===sample.store&&r.brand.toLowerCase()===sample.brand.toLowerCase()));
+     await page.locator('#shellSearch').fill(sample.brand);
+     // The shell forwards search to the iframe, which filters on a debounce.
+     // Its URL update is sent back only after the results have been rendered.
+     await page.waitForURL(url=>url.searchParams.get('q')===sample.brand,{timeout:30000});
+     const live=await rows(frame);assert(live.length>0);assert(live.every(r=>r.part===category&&r.store===sample.store&&r.brand.toLowerCase()===sample.brand.toLowerCase()));
      await frame.locator('#sortSelect').selectOption('price');
      const prices=(await rows(frame)).map(r=>Number(r.price));assert.deepEqual(prices,[...prices].sort((a,b)=>a-b));
-     await control(frame,'priceMax','1');assert.equal((await rows(frame)).length,0);assert(await frame.locator('#emptyState').isVisible());
+     await control(frame,'priceMax','1');await frame.locator('#emptyState').waitFor({state:'visible'});assert.equal((await rows(frame)).length,0);
      await frame.evaluate(()=>clearFilters());
      await control(frame,'partSelect',category);await control(frame,'discountMin','99');
      assert((await rows(frame)).every(r=>Number(r.discount)>=99));
-     await frame.evaluate(()=>clearFilters());
     });
-    await control(frame,'partSelect',category);
-    if(sport==='skate') await check(sport,width,'Deck width plus independent brand/store choices',async()=>{
+    if(sport==='skate') await scenario('Deck width plus independent brand/store choices',async()=>{
+     await control(frame,'partSelect',category);
      if(mobile)await frame.locator('#filtersOpen').click();
      const chip=frame.locator('#sizeFilters .width-chip[data-buckets*="8.5-8.75"]').first();
      await chip.click();if(mobile)await frame.locator('#filtersClose').click();
      let live=await rows(frame);assert(live.length>0);assert(live.every(r=>r.part==='Decks'&&Number(r.size)>=8.5&&Number(r.size)<8.75));
      const sample=live[0];await control(frame,'storeSelect',sample.store);await control(frame,'brandSelect',sample.brand);
      live=await rows(frame);assert(live.length>0);assert(live.every(r=>r.store===sample.store&&r.brand===sample.brand&&Number(r.size)>=8.5&&Number(r.size)<8.75));
-     await frame.evaluate(()=>clearFilters());
     });
-    if(sport!=='skate') await check(sport,width,'Technical combinations and variant price oracle',async()=>{
+    if(sport!=='skate') await scenario('Technical combinations and variant price oracle',async()=>{
+     await control(frame,'partSelect',category);
      const config=await frame.locator('#technicalCatalog').evaluate(n=>JSON.parse(n.textContent));
      const preferred={bmx:['wheel_size','22'],ski:['length','170–179 cm'],mtb:['wheel_size','29']}[sport];
      const field=config.fields.find(f=>f.key===preferred[0]);assert(field&&field.values.includes(preferred[1]));
@@ -142,8 +164,7 @@ async function main(){
      if(second){await technical(frame,second.key,second.value,mobile);selection=await frame.evaluate(()=>SportSpecFilters.capture());expected=oracle(selection);actual=await rows(frame);assert.deepEqual(actual.map(r=>r.id).sort(),expected.map(r=>r.id).sort());}
      await frame.evaluate(()=>clearFilters());assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),{});
     });
-    await frame.evaluate(()=>clearFilters());
-    await check(sport,width,'Quick View, retailer-first links, chart and Watch',async()=>{
+    await scenario('Quick View, retailer-first links, chart and Watch',async()=>{
      const card=frame.locator('#cardGrid .deal-card:not(.filtered-out):not(.grouped-hide)').first();
      assert.equal(await frame.locator('#searchInput').getAttribute('aria-expanded'),'false');
      await card.hover();const dataset=await card.evaluate(n=>({...n.dataset}));
@@ -157,7 +178,7 @@ async function main(){
      await page.goBack();await frame.waitForSelector('#quickView[hidden]',{state:'attached'});
      await card.locator('.star').click();assert.equal(await card.locator('.star').getAttribute('aria-pressed'),'true');await card.locator('.star').click();
     });
-    await check(sport,width,'Grouping, layout, empty deal types and drawer',async()=>{
+    await scenario('Grouping, layout, empty deal types and drawer',async()=>{
      await frame.locator('#groupToggle').click();assert.equal(await frame.locator('#groupToggle').getAttribute('aria-pressed'),'true');await frame.locator('#groupToggle').click();
      if(mobile){await frame.locator('#filtersOpen').click();assert(await frame.locator('#filterDrawer').evaluate(n=>n.classList.contains('is-open')));await frame.waitForTimeout(300);
       const drawer=await frame.locator('#filterDrawer').evaluate(n=>{const r=n.getBoundingClientRect();return {left:r.left,right:r.right,width:innerWidth,small:[...n.querySelectorAll('button')].filter(b=>b.getClientRects().length&&b.getBoundingClientRect().height<24).map(b=>b.getAttribute('aria-label')||b.textContent.trim())};});
@@ -167,7 +188,7 @@ async function main(){
      else{await frame.locator('#layoutTable').click();assert(await frame.locator('.table-wrap').isVisible());await frame.locator('#layoutCards').click();}
      await frame.locator('#btnNew').click();assert((await rows(frame)).every(r=>r.added==='1'&&r.removed!=='1'));await frame.locator('#btnGone').click();assert((await rows(frame)).every(r=>r.removed==='1'));await frame.locator('#btnAll').click();assert((await rows(frame)).every(r=>r.removed!=='1'));
     });
-    await check(sport,width,'Back/Forward and cross-sport state isolation',async()=>{
+    await scenario('Back/Forward and cross-sport state isolation',async()=>{
      // Each step waits for its own result (URL, restored search, rows), not a
      // fixed delay: slower CI runners made the fixed 250-400 ms waits flaky.
      const until=async(test,what,limit=10000)=>{const end=Date.now()+limit;let last;
@@ -190,8 +211,6 @@ async function main(){
      await until(()=>new URL(page.url()).searchParams.get('sport')===next,'Forward to '+next);
     });
     await check(sport,width,'No browser errors',async()=>assert.deepEqual(errors,[]));
-   }catch(error){results.push({sport,width,name:'Catalog readiness',status:'fail',detail:error.message});}
-   await page.close();
   }
   const fixturePath=path.join(site,'audit-fixtures','manifest.json');
   if(process.env.AUDIT_FIXTURES!=='off'&&fs.existsSync(fixturePath)) {
