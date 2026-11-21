@@ -7,6 +7,7 @@ import copy
 import json
 from pathlib import Path
 import sys
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -16,6 +17,14 @@ from ci.build_preview import mark_preview
 from report import build_report_html
 
 
+def _fixture_promos(sport_id):
+    if sport_id != 'mtb':
+        return []
+    return [{'store': 'AuditFixture', 'code': 'FIXTURE20', 'percent': 20,
+             'url': 'https://example.test/sale', 'ends': ''}]
+
+
+@patch('promos.for_sport', new=_fixture_promos)
 def build(output):
     output = Path(output).resolve()
     if output.is_relative_to(ROOT):

@@ -13,6 +13,8 @@ import sports
 import sports_email
 from report import Digest
 
+from page import _promo_strip
+
 TODAY = datetime.date(2026, 11, 19)
 # Fanatik's Black Friday collection page, as served 2026-11-19 (trimmed).
 FANATIK_BF = """<html><head>
@@ -189,3 +191,22 @@ class WorkflowTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PromoStripTests(unittest.TestCase):
+    def test_sport_promo_markup_and_expired_offers(self):
+        offers = [
+            {"store": "Fanatik & Co", "code": "LIVE", "percent": 20,
+             "url": "https://example.test/", "ends": "2099-01-01"},
+            {"store": "Old", "code": "EXPIRED", "amount": 10,
+             "url": "https://example.test/", "ends": "2000-01-01"},
+        ]
+        with mock.patch("promos.for_sport", return_value=offers) as current:
+            markup = _promo_strip("mtb")
+        current.assert_called_once_with("mtb")
+        self.assertIn("Fanatik &amp; Co", markup)
+        self.assertIn("20% off", markup)
+        self.assertIn("<code>LIVE</code>", markup)
+        self.assertNotIn("EXPIRED", markup)
+        with mock.patch("promos.for_sport", return_value=[]):
+            self.assertEqual(_promo_strip("ski"), "")

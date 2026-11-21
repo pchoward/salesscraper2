@@ -7204,6 +7204,65 @@ function init() {
     document.dispatchEvent(new Event("shreddeals:catalog-ready"));
 }
 
+function initPromoStrip() {
+    const strip = document.getElementById("promoStrip");
+    if (!strip) return;
+    const key = "shreddeals.promo-dismissed";
+    const stored = readJson(key, []);
+    const dismissed = new Set(Array.isArray(stored) ? stored : []);
+    const offers = Array.from(strip.querySelectorAll(".promo-offer"));
+    const more = document.getElementById("promoMore");
+    const status = document.getElementById("promoStatus");
+    let expanded = false;
+
+    function paint() {
+        const now = new Date();
+        const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+            .map(value => String(value).padStart(2, "0")).join("-");
+        const active = offers.filter(offer => !dismissed.has(offer.dataset.promoId)
+            && (!offer.dataset.ends || offer.dataset.ends >= today));
+        const collapsible = active.length > 2;
+        strip.hidden = !active.length;
+        offers.forEach(offer => {
+            const index = active.indexOf(offer);
+            offer.hidden = index < 0 || (collapsible && !expanded && index > 0);
+        });
+        more.hidden = !collapsible;
+        more.textContent = expanded ? "Show less" : "+" + (active.length - 1) + " more";
+        more.setAttribute("aria-expanded", String(expanded && collapsible));
+    }
+
+    more.addEventListener("click", () => {
+        expanded = !expanded;
+        paint();
+    });
+    strip.addEventListener("click", async event => {
+        const button = event.target.closest("button");
+        const offer = button?.closest(".promo-offer");
+        if (!offer) return;
+        if (button.hasAttribute("data-dismiss-promo")) {
+            dismissed.add(offer.dataset.promoId);
+            try { localStorage.setItem(key, JSON.stringify([...dismissed])); } catch (_) {}
+            paint();
+            strip.querySelector(".promo-offer:not([hidden]) [data-dismiss-promo]")?.focus();
+        } else if (button.hasAttribute("data-copy-promo")) {
+            const code = offer.querySelector("code").textContent;
+            try {
+                await navigator.clipboard.writeText(code);
+                status.textContent = code + " copied";
+                button.textContent = "Copied";
+            } catch (_) {
+                status.textContent = "Could not copy. Select the code to copy it manually.";
+                button.textContent = "Copy unavailable";
+            }
+        }
+    });
+    // Recheck the visitor's date when a tab is brought back after midnight.
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) paint(); });
+    paint();
+}
+
+document.addEventListener("DOMContentLoaded", initPromoStrip);
 document.addEventListener("DOMContentLoaded", updateAgo);
 document.addEventListener("DOMContentLoaded", init);
 

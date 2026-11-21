@@ -259,6 +259,26 @@ async function main(){
       return 'Only one available variant matches all specifications and ranges; the card/Quick View agree';
      }finally{await page.close();}
     });
+    if(sport==='mtb'||sport==='bmx') await check(sport,width,'Promo visibility, copy and dismiss',async()=>{
+     const page=await browser.newPage({viewport:{width,height:900},isMobile:width<800,hasTouch:width<800});
+     try{
+      await page.context().grantPermissions(['clipboard-read','clipboard-write']);
+      await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
+      await page.goto(base+'/'+fixture.path);
+      const strip=page.locator('#promoStrip');
+      if(sport==='bmx'){
+       assert.equal(await strip.count(),0);
+       return;
+      }
+      await strip.waitFor({state:'visible'});
+      await strip.getByRole('button',{name:'Copy FIXTURE20'}).click();
+      await page.waitForFunction(async()=>await navigator.clipboard.readText()==='FIXTURE20');
+      await strip.getByRole('button',{name:'Dismiss FIXTURE20'}).click();
+      await strip.waitFor({state:'hidden'});
+      await page.reload();
+      assert.equal(await strip.isVisible(),false);
+     }finally{await page.close();}
+    });
    }
   }
  }finally{await browser.close();server.close();fs.writeFileSync(path.join(output,'results.json'),JSON.stringify(results,null,2)+'\n');}
