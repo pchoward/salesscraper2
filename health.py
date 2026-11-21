@@ -232,7 +232,7 @@ def rolling_baseline(state, key, day):
             "median_absolute_deviation": mad}
 
 
-def assess_run(current_data, failed_keys, health, day, suspect_keys=None):
+def assess_run(current_data, failed_keys, health, day, suspect_keys=None, rule_excluded=None):
     """Assess raw results before retention or first-miss rows inflate counts.
 
     A drop must be at least 50%, at least five items, and exceed three median
@@ -247,6 +247,10 @@ def assess_run(current_data, failed_keys, health, day, suspect_keys=None):
         actual = len(items) if isinstance(items, list) else 0
         baseline = rolling_baseline(health, key, day)
         expected = baseline["expected_count"]
+        explained = int((rule_excluded or {}).get(key) or 0)
+        if expected is not None and explained:
+            expected = max(0, expected - explained)
+            baseline = dict(baseline, expected_count=expected, rule_excluded=explained)
         change = round(100 * (actual - expected) / expected, 1) if expected else None
         suspect = key in whole_store
         is_failed = key in failed or not isinstance(items, list)
