@@ -137,6 +137,13 @@ jobs:
         if: steps.gate.outputs.scrape == 'true'
         run: python -m previews.publish
 
+      - name: Drift check
+        # What changed at the stores (drift.py): held listings, count drops,
+        # new uncategorized product types, filters gone blank. Shown in this
+        # run's summary and saved for the monitoring agent. Never fails the run.
+        if: steps.gate.outputs.scrape == 'true'
+        run: python drift.py skate || true
+
       - name: Save subscriber alert journal (not published)
         if: always() && steps.gate.outputs.scrape == 'true' && (vars.ALERTS_DELIVERY_ENABLED == '1' || vars.ALERTS_DELIVERY_ENABLED == 'true') && hashFiles('alerts_state/manifest.json') != ''
         uses: actions/cache/save@v4
@@ -161,6 +168,9 @@ jobs:
           git add index.html navigation discover
           if [ -e sale_sections.json ]; then git add sale_sections.json; fi
           if [ -e sale_events.json ]; then git add sale_events.json; fi
+          for f in feed_summary.json drift_report.json drift_history.json; do
+            if [ -e "$f" ]; then git add "$f"; fi
+          done
           # rebuild_page.py's inputs. The scrape removes the file when it could
           # not save the data it describes; record that removal too.
           if [ -e report_inputs.json ] || git ls-files --error-unmatch report_inputs.json >/dev/null 2>&1; then

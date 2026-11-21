@@ -95,6 +95,17 @@ jobs:
             echo "::endgroup::"
           done
 
+      - name: Drift check
+        # What changed at the stores (drift.py), saved in each sport's folder
+        # for the monitoring agent and shown in this run's summary. Never
+        # fails the run.
+        if: steps.gate.outputs.scrape == 'true'
+        env:
+          CHOICE: ${{ inputs.sport || 'all' }}
+        run: |
+          if [ "$CHOICE" = all ]; then set -- bmx ski mtb; else set -- "$CHOICE"; fi
+          python drift.py "$@" || true
+
       - name: Email BMX, Ski and MTB deals
         if: steps.gate.outputs.scrape == 'true'
         # One email for the sports scraped above (sports_email.py), with the
