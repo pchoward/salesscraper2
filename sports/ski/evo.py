@@ -103,6 +103,28 @@ def waist_widths(text):
     return sorted(width for width in found if 60 <= width <= 140)
 
 
+# Ski makers name most skis by waist width: "Volkl Mantra 102", "Armada
+# Reliance 82 Ti", "K2 Mindbender 85W", "Nordica Unleashed 120". Used only
+# when the store states no waist, like a boot's flex from its model name;
+# the filter's label says so (owner approved 2026-11-21: on stored skis the
+# model number matched the stated waist on 259 of 261).
+_NAME_WAIST = re.compile(r"(?<![\d./-])(\d{2,3})(?:\s?(?:ti|c|w|ct|cti|tm|ca)\b|w\b)?(?![\d.]|\s*(?:cm|mm|in|\"|-|/|x\b|m\b|%|\+))", re.I)
+_NOT_A_WAIST_NAME = re.compile(r"\b(?:kids?|junior|jr|youth|boys?|girls?|team|binding|bindings|pole|poles|boot|boots)\b", re.I)
+
+
+def name_waist(title):
+    """The waist a ski's model number gives ("Mantra 102" -> 102), or None.
+    Exactly one 2-3 digit number between 65 and 125 must be in the name
+    (years, lengths and bundled bindings' DINs are excluded); kids' and junior
+    skis are left out, since their numbers are often lengths."""
+    title = re.sub(r"\b(?:19|20)\d{2}\b", " ", str(title or ""))     # model years
+    title = re.split(r"\s+(?:w/|with)\s+", title, maxsplit=1, flags=re.I)[0]  # bundled bindings
+    if _NOT_A_WAIST_NAME.search(title):
+        return None
+    numbers = {int(m.group(1)) for m in _NAME_WAIST.finditer(title) if 65 <= int(m.group(1)) <= 125}
+    return numbers.pop() if len(numbers) == 1 else None
+
+
 def waist_range(mm):
     for top, label in ((84, "Under 85 mm"), (94, "85–94 mm"), (104, "95–104 mm"), (114, "105–114 mm")):
         if mm <= top:
@@ -378,6 +400,8 @@ def fields(part, title, product_type, tags, text):
     if part == "Skis":
         put("ski_type", ski_types(product_type, tags, text))
         put("waist", [waist_range(mm) for mm in waist_widths(text)])
+        if "waist" not in found and name_waist(title):
+            put("waist", waist_range(name_waist(title)))
         put("radius", [radius_range(metres) for metres in turn_radii(text)])
         put("rocker", rocker_profile(text))
         put("bindings", bindings(title, text))

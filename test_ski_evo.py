@@ -24,14 +24,31 @@ class SkiTests(unittest.TestCase):
         self.assertEqual(evo.rocker_profile("AR Freestyle Rocker Poplar Ash Core"), "Rocker / Camber / Rocker")
 
     def test_nothing_is_guessed(self):
-        self.assertEqual(evo.fields("Skis", "Atomic Bent 110", "Skis", [], "A fun ski."), {},
-                         "the model number 110 is not a stated waist")
+        # A waist read from the model number is allowed (owner, 2026-11-21) and
+        # labelled "(stated or model number)"; nothing else comes from a name.
+        self.assertEqual(evo.fields("Skis", "Atomic Bent 110", "Skis", [], "A fun ski."), {"waist": ["105–114 mm"]})
+        self.assertEqual(evo.fields("Skis", "Faction Studio 3", "Skis", [], "A fun ski."), {})
         self.assertEqual(evo.ski_types("Skis", [], "Race the lifts to first chair."), [], "'race' in prose is not a type")
         self.assertEqual(evo.ability("Last year at Gear West we tested it."), [])
         self.assertEqual(evo.waist_widths("Available in 172 and 180 cm."), [])
         self.assertEqual(evo.turn_radii("Built for wide-radius turns in deep powder."), [])
 
 
+class NameWaistTests(unittest.TestCase):
+    def test_model_numbers(self):
+        cases = {"Volkl Mantra 102 Skis 2025": 102, "Armada Reliance 82 Ti Skis - Women's 2026": 82,
+                 "K2 Women's Mindbender 85W Skis 2024": 85, "Nordica Unleashed 120 Skis 2026": 120,
+                 "Atomic Maverick 88 C Skis": 88, "Elan Wingman 82 CTI": 82, "K2 Disruption 82Ti": 82,
+                 "Head Kore 99 Skis 177cm": 99, "Rossignol Experience 86 Basalt Skis w/ SPX 12 Bindings": 86,
+                 "Faction Studio 3 Skis 2026": None, "Blizzard Rustler 9 Skis 2025": None, "Volkl Deacon 7.2 Skis": None,
+                 "Rossignol Experience Pro Kids Skis 100": None, "Volkl Racetiger SC with vMotion 10 GW": None,
+                 "Head V Shape V5 AMT Skis with PR 11 Ski Bindings 2025": None}
+        for title, waist in cases.items():
+            self.assertEqual(evo.name_waist(title), waist, title)
+
+    def test_stated_waist_wins(self):
+        self.assertEqual(evo.fields("Skis", "Volkl Mantra 102", "Skis", [], "Waist: 96 mm")["waist"], ["95–104 mm"])
+        self.assertEqual(evo.fields("Skis", "Salomon Stance 90", "Skis", [], "Waist width: 82 mm")["waist"], ["Under 85 mm"])
 class SkiProWordingTests(unittest.TestCase):
     """Skipro's spec headings (owner, 2026-11-21: evo-style filters)."""
 
