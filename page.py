@@ -2518,6 +2518,16 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         part_options.append(
             _option(part, f"{part} ({part_counts.get(part, 0)})", data_label=part)
         )
+    # The audit fixture and any old caller still set the select to the stored
+    # category. The option is not a menu chip. filterByPart maps it to Suspension.
+    if sport.id == "mtb" and ("Suspension" in part_counts or default_part == "Suspension"):
+        part_options.append(
+            _option(
+                "Forks & Shocks",
+                f"Forks & Shocks ({part_counts.get('Suspension', 0)})",
+                data_label="Suspension",
+            )
+        )
     part_more = [
         _quick_chip(
             "part", part, part, part_counts.get(part, 0),
@@ -3108,7 +3118,15 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             ""
             if sport.is_default
             else "const SPORT_SETTINGS = "
-            + json.dumps({"id": sport.id, "label": sport.label, "defaultPart": default_part, "parts": list(part_order_for_sport), "partAliases": sport_headings.ALIASES.get(sport.id, {}), "alerts": bool(sport.delivery)}).replace("<", "\\u003c")
+            + json.dumps({
+                "id": sport.id,
+                "label": sport.label,
+                "defaultPart": default_part,
+                "parts": list(part_order_for_sport),
+                "partAliases": sport_headings.ALIASES.get(sport.id, {}),
+                **({"partRenames": {"Forks & Shocks": "Suspension"}} if sport.id == "mtb" else {}),
+                "alerts": bool(sport.delivery),
+            }).replace("<", "\\u003c")
             + ";\n"
         )
         + f"const WIDTH_RANGES = {ranges_literal};\n"

@@ -7,7 +7,12 @@ under any heading. Order stays in the facet definitions
 (docs/filters-evo-model.md).
 """
 
+import json
+import re
+import subprocess
+import tempfile
 import unittest
+from pathlib import Path
 
 from bs4 import BeautifulSoup
 
@@ -16,6 +21,8 @@ from page import mtb_section_owners
 from report import build_report_html
 from sports.headings import headings
 from sports.mtb.facets import FIELDS
+
+ROOT = Path(__file__).resolve().parent
 
 
 def _offer(specs, price=100, compare=200):
@@ -135,6 +142,35 @@ class MarkupTests(unittest.TestCase):
         self.assertEqual(soup.select_one('[data-section="tech-riding_type"]')["data-for"], every)
         size = soup.select_one('[data-section="tech-prot_size"]')
         self.assertEqual(size["data-for"], "Protection Helmets Goggles Gloves")
+        # The menu chip stays Suspension. The stored category remains a select
+        # value so a caller that still sets Forks & Shocks opens that heading.
+        self.assertIsNotNone(soup.select_one('#partFilters [data-part="Suspension"]'))
+        self.assertIsNone(soup.select_one('#partFilters [data-part="Forks & Shocks"]'))
+        stored = soup.select_one('#partSelect option[value="Forks & Shocks"]')
+        self.assertIsNotNone(stored)
+        self.assertEqual(stored.get("data-label"), "Suspension")
+        settings = json.loads(re.search(r"const SPORT_SETTINGS = (\{.*?\});", html).group(1))
+        self.assertEqual(settings["partRenames"], {"Forks & Shocks": "Suspension"})
+
+    def test_stored_fork_name_opens_suspension(self):
+        source = (ROOT / "page.js").read_text(encoding="utf8")
+        match = re.search(r"function canonicalPart\(part\) \{.*?\n\}", source, re.S)
+        self.assertIsNotNone(match)
+        script = """
+const assert = require("node:assert/strict");
+const SPORT_SETTINGS = {partRenames: {"Forks & Shocks": "Suspension"}};
+__FN__
+assert.equal(canonicalPart("Forks & Shocks"), "Suspension");
+assert.equal(canonicalPart("Suspension"), "Suspension");
+assert.equal(canonicalPart("Bikes"), "Bikes");
+assert.equal(canonicalPart(""), "all");
+assert.equal(canonicalPart("all"), "all");
+""".replace("__FN__", match.group(0))
+        with tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf8") as handle:
+            handle.write(script)
+            path = handle.name
+        result = subprocess.run(["node", path], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr or result.stdout)
 
 
 if __name__ == "__main__":

@@ -321,7 +321,7 @@ Menu headings today: Bikes, Frames, Suspension, Wheels, Tires, Drivetrain, Brake
 
 House rule here: **Brand, then that heading's size filter, then the popular specs, Condition last.** Gender is only on Protection. evo has no frames group; Frames below is the bike list with rear travel and axle instead of fork travel and riding type.
 
-The names are evo's, read from evo's Constructor.io browse API. The suspension heading is **Forks & Shocks** in that model and in the stored category. The page heading is **Suspension** (`sports/headings.py` renames Forks & Shocks). This PR does not rename it. Fields that already list both names keep showing under Suspension.
+The names are evo's, read from evo's Constructor.io browse API. The suspension heading is **Forks & Shocks** in that model and in the stored category. The page heading is **Suspension** (`sports/headings.py` renames Forks & Shocks). This PR does not rename it. The product-type select still accepts the stored name and opens Suspension. That is not a second menu chip. Fields that already list both names keep showing under Suspension.
 
 Coverage is `catalogs/mtb/previous_data.json` on 2026-11-21, counted after `sports.headings.heading` (stored Protection splits into Helmets, Goggles, Gloves, and Protection; stored Forks & Shocks shows as Suspension). 4,656 listings. A listing counts when `technical_specs` has a non-empty value. The page also drops listings the MTB rules reject (frame-protection kits, and anything under the minimum markdown), so its totals sit a little lower (4,603 of these 4,656). Counts will move with the next scrape.
 

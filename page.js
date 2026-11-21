@@ -2553,8 +2553,16 @@ function filterByStore(store) {
     applyFilters();
 }
 
+function canonicalPart(part) {
+    // The menu heading can differ from the stored category (Forks & Shocks
+    // is Suspension). A select value that still uses the stored name opens
+    // the heading, the same way ?type=forks-shocks does.
+    const renames = (typeof SPORT_SETTINGS !== "undefined" && SPORT_SETTINGS.partRenames) || {};
+    return renames[part] || part || "all";
+}
+
 function filterByPart(part) {
-    const next = part || "all";
+    const next = canonicalPart(part);
     const changed = next !== (state.part || "all");
     if (changed) cardShown = cardPageSize();
     state.part = next;
