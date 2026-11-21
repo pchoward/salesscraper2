@@ -129,15 +129,52 @@ def _discount(window, center=None):
     code's (Zeitbike, 2026-11-20)."""
     center = len(window) // 2 if center is None else center
     options = []
+    def up_to(match):
+        # "up to 40% off", "save up to $50": a ceiling, not every item's discount.
+        return bool(re.search(r"\bup\s+to\s*$", window[max(0, match.start() - 12):match.start()], re.I)
+                    or re.match(r"save\s+up\s+to", match.group(0), re.I))
     for match in _PERCENT.finditer(window):
         value = int(next(group for group in match.groups() if group))
         if 5 <= value <= 80:
-            options.append((abs((match.start() + match.end()) // 2 - center), {"percent": value}))
+            options.append((abs((match.start() + match.end()) // 2 - center),
+                            dict({"percent": value}, **({"up_to": True} if up_to(match) else {}))))
     for match in _AMOUNT.finditer(window):
         value = int(next(group for group in match.groups() if group))
         if value >= 5:
-            options.append((abs((match.start() + match.end()) // 2 - center), {"amount": value}))
+            options.append((abs((match.start() + match.end()) // 2 - center),
+                            dict({"amount": value}, **({"up_to": True} if up_to(match) else {}))))
     return min(options, key=lambda option: option[0])[1] if options else None
+
+
+# What a code covers when the page says so (owner, 2026-11-21: "add if it's
+# up to or site wide"). One label per code, the most specific first; none
+# when the page doesn't say.
+_REACH = (
+    ("full-price items", re.compile(r"\bfull[- ]price(?:d)?\b|\bregular[- ]price(?:d)?\s+(?:items|products|gear)\b", re.I)),
+    ("sale items", re.compile(r"\b(?:on\s+)?(?:all\s+)?(?:sale|clearance|already[- ]reduced)\s+(?:items|products|gear|styles)\b|"
+                              r"\boff\s+(?:all\s+)?(?:sale|clearance)\b", re.I)),
+    ("eligible items", re.compile(r"\beligible\s+(?:[a-z]+\s+){0,3}(?:items|products|parts|gear|styles|orders?)\b|\bselect(?:ed)?\s+(?:items|products|"
+                                  r"gear|styles)\b|\bexclusions\s+apply\b", re.I)),
+    ("sitewide", re.compile(r"\bsite[\s-]?wide\b|\bstore[\s-]?wide\b|\beverything\b|\b(?:your\s+)?entire\s+(?:order|purchase|"
+                            r"store|site)\b|\ball\s+(?:orders|products|items)\b|\banything\b", re.I)),
+)
+_MINIMUM = re.compile(r"\b(?:orders?|purchases?|spend(?:ing)?|subtotals?)\s+(?:of\s+)?(?:over|above|of|\$)\s*\$?\s?(\d{2,4})\b|"
+                      r"\$\s?(\d{2,4})\s*\+?\s*(?:orders?|purchases?|or\s+more)\b", re.I)
+
+
+def _reach(near):
+    for label, pattern in _REACH:
+        if pattern.search(near):
+            return label
+    return None
+
+
+def _minimum(near):
+    match = _MINIMUM.search(near)
+    if not match:
+        return None
+    value = int(match.group(1) or match.group(2))
+    return value if 20 <= value <= 2000 else None
 
 
 # "on KNOG products", "on all Freetown helmets": a code limited to one brand
@@ -172,9 +209,15 @@ def find(raw, today=None):
         spot = text.upper().find(code)
         candidates.append((code, max(spot, 0), max(spot, 0) + len(code)))
     found = {}
-    for code, start, end in candidates:
-        if not _valid_code(code) or code in found:
+    mentions = set()
+    for code, start, end in sorted(candidates, key=lambda c: c[1]):
+        if not _valid_code(code):
             continue
+        # Two phrasings matching one mention ("discount code: X" and
+        # "code: X") are the same mention; the longer, earlier one counts.
+        if (code, end) in mentions:
+            continue
+        mentions.add((code, end))
         window = text[max(0, start - 180):end + 180]
         # The words right around the code decide whether it's a sign-up code.
         near = text[max(0, start - 90):end + 60]
@@ -187,7 +230,27 @@ def find(raw, today=None):
         # The end date usually follows the code ("... code X. Ends Dec 2"); a
         # date before it may belong to the promo above on the same page.
         ends = _end_date(text[start:end + 180], today) or _end_date(text[max(0, start - 120):start], today)
-        found[code] = dict(code=code, ends=ends, **discount, **({"applies_to": scope} if scope else {}))
+        near = text[max(0, start - 160):end + 120]
+        extra = {}
+        if scope:
+            extra["applies_to"] = scope
+        else:
+            reach = _reach(near)
+            if reach:
+                extra["reach"] = reach
+        minimum = _minimum(near)
+        if minimum:
+            extra["minimum"] = minimum
+        promo = dict(code=code, ends=ends, **discount, **extra)
+        if code in found:
+            # A second mention on the same page fills in what the first left
+            # out; "up to" only when it's the same discount.
+            same = all(promo.get(k) == found[code].get(k) for k in ("percent", "amount"))
+            for key in ("ends", "applies_to", "reach", "minimum") + (("up_to",) if same else ()):
+                if promo.get(key) and not found[code].get(key):
+                    found[code][key] = promo[key]
+            continue
+        found[code] = promo
     return list(found.values())
 
 
@@ -252,7 +315,16 @@ def scan_store(name, base, fetch=None, sleep=time.sleep, today=None):
             logger.info("%s: %s not read (%s)", name, url, type(exc).__name__)
             continue
         for promo in find(page, today):
-            promos.setdefault(promo["code"], dict(promo, url=url))
+            known = promos.get(promo["code"])
+            if known is None:
+                promos[promo["code"]] = dict(promo, url=url)
+                continue
+            # The same code on another page: keep what either page says (the
+            # homepage banner rarely has the end date the sale page has).
+            same = all(promo.get(k) == known.get(k) for k in ("percent", "amount"))
+            for key in ("ends", "applies_to", "reach", "minimum") + (("up_to",) if same else ()):
+                if promo.get(key) and not known.get(key):
+                    known[key] = promo[key]
     return [dict(promo, store=name) for promo in promos.values()], True
 
 
@@ -367,16 +439,23 @@ def new_today(promos, today=None):
 
 
 def describe(promo, code=True):
-    """"20% off with code 2026-BFCM-20, until Dec 2" ("20% off, until Dec 2"
-    with ``code=False``, when the code is shown on its own)."""
+    """"20% off eligible items with code 2026-BFCM-20, until Dec 2" ("20% off
+    eligible items, until Dec 2" with ``code=False``). "Up to 40% off
+    sitewide", "$25 off, orders $100+" when the page says so."""
     if promo.get("percent"):
         offer = f"{promo['percent']}% off"
     elif promo.get("amount"):
         offer = f"${promo['amount']} off"
     else:
         offer = "Discount"
+    if promo.get("up_to") and offer != "Discount":
+        offer = "Up to " + offer
     if promo.get("applies_to"):
         offer += f" {promo['applies_to']}"
+    elif promo.get("reach"):
+        offer += f" {promo['reach']}"
+    if promo.get("minimum"):
+        offer += f", orders ${promo['minimum']}+"
     text = f"{offer} with code {promo.get('code')}" if code else offer
     if promo.get("ends"):
         try:
