@@ -111,6 +111,48 @@ WHEELBASE_BOUNDARY_TIP = (
 )
 WHEELBASE_QUARTER = 0.25
 WHEELBASE_CHIP_CAP = 8
+# Deck outline words printed in the name. Ids are stable in ?deckshape=.
+# Popsicle is not the default: only the word itself sets it. A deck with no
+# shape word stays blank, including an ordinary street deck. Cruiser is not
+# a value; sale names do not use it. Bare "fish" is a graphic word ("Fish
+# Logo"), so only a fish-tail phrase counts. Outline words win over reissue
+# when a name says both. "egg" also matches a few graphic titles.
+DECK_SHAPE_ORDER = ("popsicle", "shaped", "twin", "reissue")
+DECK_SHAPE_LABELS = {
+    "popsicle": "Popsicle",
+    "shaped": "Shaped",
+    "twin": "Twin",
+    "reissue": "Reissue",
+}
+_DECK_TWIN_RE = re.compile(r"twin[\s\-]?tail|\btwin\b", re.IGNORECASE)
+_DECK_SHAPED_RE = re.compile(
+    r"\bshaped\b|\bshape\b|razor[\s\-]?egg|\begg\b|fish[\s\-]?tail",
+    re.IGNORECASE,
+)
+_DECK_REISSUE_RE = re.compile(r"re[\s\-]?issue|old[\s\-]?school|\bpool\b", re.IGNORECASE)
+_DECK_POPSICLE_RE = re.compile(r"\bpopsicle\b", re.IGNORECASE)
+
+
+def deck_shape(name):
+    """One deck-shape id from the product name, or "" when none is printed.
+
+    Conservative on purpose. Popsicle is assigned only when the name says
+    popsicle, never because the deck looks like a standard double-kick.
+    Twin, then shaped (shaped, shape, egg, razor-egg, fishtail), then
+    reissue (reissue, re-issue, old school, pool). The first class wins.
+    """
+    text = str(name or "")
+    if _DECK_TWIN_RE.search(text):
+        return "twin"
+    if _DECK_SHAPED_RE.search(text):
+        return "shaped"
+    if _DECK_REISSUE_RE.search(text):
+        return "reissue"
+    if _DECK_POPSICLE_RE.search(text):
+        return "popsicle"
+    return ""
+
+
 # Short palette for deck stain and wheel urethane. Ids are stable in the
 # URL. Swatches are the sidebar dots; clear and multi are drawn in CSS.
 COLOR_PALETTE = (
@@ -2440,10 +2482,35 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
         return _section(section_id, "Color", body, open_default=True, for_part=part)
 
-    # Brand is rendered ahead of this block. Inside it, each type's main size
-    # comes before that type's secondary specs (length, durometer, height, …).
-    # Color follows that type's size filters. Hidden types drop out, so a
-    # Trucks visit still reads Brand, Truck Size, Truck Height, Construction.
+    # Brand is rendered ahead of this block. Decks read Width, Shape, Length,
+    # Wheelbase, Color. Wheels read Diameter, Durometer, Shape, Color.
+    # Hidden types drop out, so a Trucks visit still reads Brand, Truck Size,
+    # Truck Height, Construction.
+    deck_shape_counts = {}
+    for record in records:
+        if record.get("part") != "Decks":
+            continue
+        token = deck_shape(record.get("name") or "")
+        if token:
+            deck_shape_counts[token] = deck_shape_counts.get(token, 0) + 1
+    deck_shape_buttons = [
+        _spec_button(
+            token,
+            DECK_SHAPE_LABELS[token],
+            deck_shape_counts[token],
+            f"{DECK_SHAPE_LABELS[token]} is named in the listing",
+        )
+        for token in DECK_SHAPE_ORDER
+        if deck_shape_counts.get(token)
+    ]
+    deck_shape_section = _gated(
+        "deckshape",
+        "Deck Shape",
+        "Decks",
+        deck_shape_buttons,
+        "Only a shape word in the name. Popsicle is not assumed.",
+        sum(deck_shape_counts.values()),
+    )
     context_specs = (
         '<div id="contextSpecs">'
         + _section(
@@ -2454,8 +2521,11 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             open_default=True,
             for_part="Decks",
         )
+        + deck_shape_section
         + truck_size_section
         + diameter_section
+        + duro_section
+        + shape_section
         + _color_section("wheelcolor", "wheelColorFilters", "Wheels", wheel_color_counts, wheel_color_hits)
         + shoe_section
         + prot_size_section
@@ -2479,8 +2549,6 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + _color_section("deckcolor", "deckColorFilters", "Decks", deck_color_counts, deck_color_hits)
         + truck_height_section
         + construction_section
-        + duro_section
-        + shape_section
         + prot_type_section
         + "</div>"
     )
@@ -3053,6 +3121,7 @@ def _deal_attrs(record):
         f'data-diameter="{_attr(record.get("diameter") or "")}" '
         f'data-duros="{_attr(",".join(record.get("duros") or []))}" '
         f'data-shape="{_attr(record.get("shape") or "")}" '
+        f'data-deckshape="{_attr(deck_shape(record.get("name") or "") if record.get("part") == "Decks" else "")}" '
         f'data-truck-offers="{_attr(json.dumps(record.get("truck_offers") or [], separators=(",", ":")))}" '
         f'data-trucksize="{_attr(record.get("truck_size") or "")}" '
         f'data-truckheight="{_attr(record.get("truck_height") or "")}" '

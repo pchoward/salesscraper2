@@ -191,8 +191,9 @@ class FilterOrderTests(unittest.TestCase):
         sections = _sections(html)
         canon = [
             "brand",
-            "width", "truckfit", "trucknative", "diameter", "wheelcolor", "shoesize", "protsize", "abec",
-            "length", "wheelbase", "deckcolor", "truckheight", "construction", "duro", "shape", "prottype",
+            "width", "deckshape", "truckfit", "trucknative", "diameter", "duro", "shape", "wheelcolor",
+            "shoesize", "protsize", "abec",
+            "length", "wheelbase", "deckcolor", "truckheight", "construction", "prottype",
             "store", "price", "more", "score", "deals", "interval",
         ]
         present = [item["id"] for item in sections if item["id"] in canon]
