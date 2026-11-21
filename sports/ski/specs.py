@@ -21,11 +21,14 @@ _STYLES = (
     ("Telemark", re.compile(r"\btelemark\b", re.I)),
     ("All Mountain", re.compile(r"\ball[ -]?mountain\b", re.I)),
 )
+# A word start that also counts after "_" (Skipro's "gender_mens" tags).
+_W = r"(?:\b|(?<=_))"
 _GENDERS = (
-    ("Kids", re.compile(r"\bkids?\b|\bkid's\b|\bjunior\b|\bjr\b|\byouth\b", re.I)),
-    ("Women", re.compile(r"\bwomen'?s?\b|\bwmn'?s\b|\bwomens\b", re.I)),
-    ("Men", re.compile(r"\bmen'?s?\b|\bmens\b", re.I)),
+    ("Kids", re.compile(_W + r"(?:kids?|kid's|junior|jr|youth)\b", re.I)),
+    ("Women", re.compile(_W + r"(?:women'?s?|womens|wmn'?s?|ladies|lady|ladies')\b", re.I)),
+    ("Men", re.compile(_W + r"(?:men'?s?|mens)\b", re.I)),
 )
+_UNISEX = re.compile(_W + r"unisex\b", re.I)
 
 
 def _option_values(product, variant, names):
@@ -49,6 +52,21 @@ def length_range(cm):
         return "Under 100 cm"
     low = value // 10 * 10
     return f"{low}–{low + 9} cm"
+
+
+_BRAKE_OPTION = re.compile(r"^\s*L?\s*(\d{2,3})\s*(?:mm)?\s*(?:\(.*\))?\s*$", re.I)
+
+
+def variant_brake(product, variant):
+    """A binding variant's brake width ("90 mm"), from an option named "Ski
+    Brake Width" (Willis), "Brake" (Aspen) or "Size" (evo, Skipro: "90 mm",
+    "100", Atomic's "L90"). Ski Essentials' "136 mm (No Screws)" counts."""
+    found = []
+    for value in _option_values(product, variant, {"ski brake width", "brake width", "brake", "brake size", "size"}):
+        match = _BRAKE_OPTION.match(value)
+        if match and 70 <= int(match.group(1)) <= 140:
+            found.append(f"{int(match.group(1))} mm")
+    return found
 
 
 def variant_length(product, variant):
@@ -96,9 +114,18 @@ def style(product_type, tags):
     return None
 
 
-def gender(product_type, tags):
-    for text in [str(product_type or "")] + [str(tag) for tag in tags or ()]:
-        for label, pattern in _GENDERS:
-            if pattern.search(text):
-                return label
+def gender(product_type, tags, title=""):
+    """"Kids", "Women", "Men" or "Unisex" (owner, 2026-11-21: Unisex value),
+    from the title, store category and tags. Unisex when the store says so
+    ("Unisex", Skipro's "gender_unisex") or tags it both Men's and Women's
+    (Aspen's "Mens", "Womens"). Kids wins over the rest."""
+    texts = [str(title or ""), str(product_type or "")] + [str(tag) for tag in tags or ()]
+    found = {label for text in texts for label, pattern in _GENDERS if pattern.search(text)}
+    if "Kids" in found:
+        return "Kids"
+    if any(_UNISEX.search(text) for text in texts) or {"Men", "Women"} <= found:
+        return "Unisex"
+    for label in ("Women", "Men"):
+        if label in found:
+            return label
     return None

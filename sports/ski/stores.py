@@ -56,7 +56,7 @@ def details(item, product, type_key):
     kind = specs.style(product.get("product_type"), tags)
     if kind:
         item["kind"] = kind
-    who = specs.gender(product.get("product_type"), tags)
+    who = specs.gender(product.get("product_type"), tags, product.get("title"))
     if who:
         item["gender"] = who
     # Per-variant offers for the sidebar spec filters (sports/offers.py; keys
@@ -71,6 +71,9 @@ def details(item, product, type_key):
                                           (specs.variant_length(product, variant) or title_cm)]}
     elif item.get("part") == "Boots":
         own = lambda variant: {"mondo": specs.variant_mondo(product, variant)}
+    elif item.get("part") == "Bindings":
+        # Brake width is the binding's variant (owner, 2026-11-21: 4 of 154 had one).
+        own = lambda variant: {"brake": specs.variant_brake(product, variant)}
     elif item.get("part") in ("Helmets", "Protection"):
         from sports import protection
         own = lambda variant: {"prot_size": protection.variant_size(product, variant)}

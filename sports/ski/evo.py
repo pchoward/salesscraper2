@@ -284,6 +284,39 @@ def goggle_fields(title):
     return found
 
 
+# Grok's evo list (docs/filters-evo-model.md, 2026-11-21): stated values only.
+LENS_SHAPES = (("Toric", re.compile(r"\btoric\b", re.I)),
+               ("Spherical", re.compile(r"\bspherical\b|\bsph\b", re.I)),
+               ("Cylindrical", re.compile(r"\bcylindrical\b|\bcyl\b|\bflat\s+lens\b", re.I)))
+HELMET_SHELLS = (("Hybrid", re.compile(r"\bhybrid\s+(?:shell|construction|in-?mold)\b|\bin-?mold\s+(?:and|&|\+)\s+hard\s*shell\b|"
+                                       r"\bhard\s*shell\s+(?:and|&|\+)\s+in-?mold\b", re.I)),
+                 ("In-mold", re.compile(r"\bin-?mold\b", re.I)),
+                 ("Hard shell", re.compile(r"\bhard\s*shell\b|\babs\s+shell\b|\binjection[- ]molded\s+(?:abs\s+)?shell\b", re.I)))
+
+
+def lens_shape(title, text):
+    """A goggle's stated lens shape; two different shapes say nothing."""
+    found = [label for label, pattern in LENS_SHAPES if pattern.search(str(title or "") + " " + str(text or ""))]
+    return found[0] if len(found) == 1 else None
+
+
+def helmet_shell(title, text):
+    """"Hybrid", "In-mold" or "Hard shell" when the store states it. A
+    hybrid's description names both, so Hybrid is checked first."""
+    source = str(title or "") + " " + str(text or "")
+    for label, pattern in HELMET_SHELLS:
+        if pattern.search(source):
+            if label == "In-mold" and HELMET_SHELLS[2][1].search(source):
+                return "Hybrid"  # in-mold and hard shell both named
+            return label
+    return None
+
+
+def boa(title, text):
+    """"BOA" when a boot names the BOA dial closure."""
+    return "BOA" if re.search(r"\bboa\b", str(title or "") + " " + str(text or ""), re.I) else None
+
+
 # ---- bindings -----------------------------------------------------------------
 
 _STATED_DIN = re.compile(r"\bdin(?:\s*range|\s*setting)?\s*[:=\-]?\s*(\d{1,2}(?:\.\d)?)\s*(?:-|–|to)\s*(\d{1,2}(?:\.\d)?)\b", re.I)
@@ -352,6 +385,7 @@ def fields(part, title, product_type, tags, text):
             put("flex", flex_range(value))
         put("sole", soles(title + " " + text))
         put("walk", walk_mode(text) or name_walks(title, found.get("ski_type")))
+        put("closure", boa(title, text))
         if "last" not in found:
             put("last", name_last(title))
     elif part == "Bindings":
@@ -368,5 +402,9 @@ def fields(part, title, product_type, tags, text):
             "Back & Spine" if "armor" in str(product_type or "").lower() else None)
         found.update(protection.fields(title, product_type, text, "ski", default=default))
         found.update(goggle_fields(title))
+        if _GOGGLE.search(str(title or "")):
+            put("lens_shape", lens_shape(title, text))
+        elif part == "Helmets" or re.search(r"\bhelmet\b", str(title or ""), re.I):
+            put("helmet_shell", helmet_shell(title, text))
     put("ability", ability(text))
     return found
