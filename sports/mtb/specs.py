@@ -8,8 +8,49 @@ FIELDS={
  'wheel_size':'Wheel size (in)', 'travel_mm':'Suspension travel (mm)',
  'frame_size':'Frame size','tire_width':'Tire width (in)',
  'axle':'Axle / spacing','rotor_mm':'Rotor diameter (mm)','riding_type':'Riding type',
- 'speed':'Drivetrain speed','casing':'Tire casing','tubeless':'Tubeless',
+ 'speed':'Drivetrain speed','casing':'Tire casing','tubeless':'Tubeless','power':'Motor',
 }
+
+# E-MTB or not (owner, 2026-11-21: "separate eMTB from regular ... a filter
+# up top"). Bikes and frames only. Evidence, strongest first: the store's
+# category or tags ("Electric Mountain Bikes", "Bikes - E-Full Suspension
+# 29"), the name ("E-Mountain Bike", "eMTB", "Siskiu T7E", "Turbo Levo",
+# "Habit Neo", "Trance X E+", "Fuel EXe", a motor brand), a battery size in
+# the description ("720Wh"), then e-only model names. Everything else is
+# "Regular" when the store files it as a bike or frame. Accessories filed under Frames (RideWrap protection kits,
+# number plates) get no value, and so does a listing the store doesn't file
+# as a bike or frame.
+EMTB='E-MTB'
+NOT_EMTB='Regular'
+_E_TYPE=re.compile(r'electric|\be-?bikes?\b|\be-?mtb\b|\be-\s?(?:full|hardtail|mountain|enduro|trail)|\bpedelec\b|\bpedal[- ]assist',re.I)
+_E_NAME=re.compile(
+ r'\be-?mtb\b|\be-?\s?mountain\s*bike|\be-?bike\b|\belectric\b|\bpedal[- ]assist|\bneo\b|\be\+|\bexe\b|\bturbo\b|'
+ r'\bbosch\b|\bshimano\s+(?:ep\s?\d|e\d{4}|steps)|\bsram\s+(?:eagle\s+)?powertrain\b|\bpowertrain\b|\bfazua\b|'
+ r'\btq[- ]?hpr|\bavinox\b|\bdyname\b|\bbrose\b|\b\d{3}\s?wh\b|'
+ # Model codes that end in E: "Siskiu T7E", "Collosus N8XE", "TE-N".
+ r'\b(?:siskiu|collosus)\s+(?:[a-z]{1,2}\d{0,2}x?e|te-n)\b',re.I)
+# Models sold only as e-bikes, for names that say nothing else.
+_E_MODELS=re.compile(
+ r'\b(?:levo|kenevo|heckler|vala|bullit|moterra|rail\s*\+?\s?\d|powerfly|decoy|amflow|wild\s+(?:fs|m-?\w+)|'
+ r'rise\s+(?:h|m)\d|orbea\s+(?:wild|rise)|shuttle\s+(?:am|sl|ht)|spectral:on|neuron:on|torque:on|stereo\s+hybrid|'
+ r'ransom\s+e|fathom\s+e|reign\s+e|stance\s+e|trance\s+x?\s?e|pivot\s+shuttle|ebb|e-?160|e-?170|sentinel\s+e)\b',re.I)
+_NOT_A_BIKE=re.compile(r'\bprotection\b|\bridewrap\b|\bnumber\s+plate\b|\bmodule\b|\bguard\b|\bdecals?\b|\bbattery\s+(?:cover|mount)',re.I)
+
+
+def power(name,product_type='',tags=(),body=''):
+    """'E-MTB', 'Regular', or None when the listing isn't a bike or frame."""
+    name=str(name or '')
+    if _NOT_A_BIKE.search(name):return None
+    if isinstance(tags,str):tags=tags.split(',')
+    labels=' '.join([str(product_type or '')]+[str(t) for t in tags or ()])
+    if _E_TYPE.search(labels) or _E_NAME.search(name) or _E_MODELS.search(name):return EMTB
+    body=str(body or '')
+    if re.search(r'\b\d{3}\s?wh\b',body,re.I) and re.search(r'\bmotor\b|\bbattery\b',body,re.I):return EMTB
+    # "Regular" needs evidence too: the store files it as a bike or frame.
+    # A listing with no such category gets no value rather than a guess.
+    if re.search(r'bikes?\b|frames?(?:ets?)?\b|hardtail|suspension|\bmtb\b|mountain|enduro|trail|downhill|\bxc\b|dirt',
+                 labels,re.I):return NOT_EMTB
+    return None
 
 # Owner, 2026-11-07 (menus and filters proposal): read from the name what
 # shops print there. Speed: "12-Speed", "12sp", and drivetrains that only
@@ -104,6 +145,7 @@ def extract(product,variant,part):
         for m in re.finditer(r'(?<![\d.])'+NUMBER+r'\s*mm\b',name,re.I):
             if 50<=float(m[1])<=250 and not re.search(r'\boffset\s*[:=]?\s*$',name[:m.start()],re.I) and not re.match(r'\s*offset\b',name[m.end():],re.I):add('travel_mm',[number(m[1])])
     if part in ('Drivetrain','Bikes'):add('speed',[s+'-speed' for s in speeds(name)])
+    if part in ('Bikes','Frames'):add('power',[power(name,product.get('product_type',''),product.get('tags') or (),body)])
     if part=='Tires' and not _NOT_A_TIRE.search(name):
         add('casing',casings(name))
         if tubeless(name):add('tubeless',['Tubeless ready'])
