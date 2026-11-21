@@ -122,12 +122,17 @@ def details(item, product, kind_key):
     # Labelled specs from the description: bar rise, crank length, axle, top tube.
     for key, values in dans.description_fields(shopify._plain(product.get("body_html") or ""), item.get("part")).items():
         shared.setdefault(key, values)
+    # Dan's filters by kind: teeth, tire size, seat style, stem type, hub
+    # holes and driver, fork offset (owner, 2026-11-21).
+    for key, values in dans.kind_fields(item.get("kind"), title, shopify._plain(product.get("body_html") or "")).items():
+        shared.setdefault(key, values)
     # What a piece protects, helmet style, rotational system (sports/protection.py).
     if item.get("part") == "Protection":
         shared.update(protection.fields(title, product.get("product_type") or "",
                                         shopify._plain(product.get("body_html") or ""), "bmx"))
     def own(variant):
         found = dans.variant_fields(product, variant, item.get("part"))
+        found.update(dans.kind_variant_fields(item.get("kind"), product, variant))
         if item.get("part") == "Protection":
             size = protection.variant_size(product, variant)  # XS-XXL per variant
             if size:
