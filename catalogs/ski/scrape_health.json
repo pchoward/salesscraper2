@@ -18896,14 +18896,14 @@
           }
         },
         "Aspen Ski and Board_Skis": {
-          "count": 102,
+          "count": 100,
           "failed": false,
           "diagnostics": {
             "expected_count": 111,
             "baseline_samples": 9,
             "median_absolute_deviation": 5,
-            "actual_count": 102,
-            "percentage_change": -8.1,
+            "actual_count": 100,
+            "percentage_change": -9.9,
             "reason": "normal_variation"
           }
         },
@@ -20180,19 +20180,19 @@
           }
         },
         "evo_Skis": {
-          "count": 172,
+          "count": 171,
           "failed": false,
           "diagnostics": {
             "expected_count": 177.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 7.0,
-            "actual_count": 172,
-            "percentage_change": -3.1,
+            "actual_count": 171,
+            "percentage_change": -3.7,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-21T02:57:53+00:00"
+      "scanned_at": "2026-11-21T03:43:12+00:00"
     }
   ],
   "baseline": {
@@ -20234,7 +20234,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-21",
-      "count": 172
+      "count": 171
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-21",
@@ -20350,7 +20350,7 @@
     },
     "Aspen Ski and Board_Skis": {
       "date": "2026-11-21",
-      "count": 102
+      "count": 100
     },
     "Ski Essentials_Bindings": {
       "date": "2026-11-21",
@@ -20757,7 +20757,7 @@
       },
       {
         "date": "2026-11-21",
-        "count": 102
+        "count": 100
       }
     ],
     "Bern_Bindings": [
@@ -26187,7 +26187,7 @@
       },
       {
         "date": "2026-11-21",
-        "count": 172
+        "count": 171
       }
     ]
   }
