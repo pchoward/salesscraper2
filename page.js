@@ -34,6 +34,7 @@ let state = {
     diameters: [],
     duros: [],
     shapes: [],
+    deckShapes: [],
     truckSizes: [],
         truckFits: [],
         truckNatives: [],
@@ -521,6 +522,10 @@ function toggleWidthGroup(node) {
 // Keep in sync with part_specs.DIAMETER_ORDER / SHAPES / HEIGHTS.
 const DIAMETER_ORDER = ["50-51", "52-53", "54-55", "56+"];
 const SHAPE_ORDER = ["conical", "radial", "sidecut"];
+// Keep in step with DECK_SHAPE_ORDER in page.py and query_state.py.
+// ?deckshape= is the deck outline. ?shape= stays the wheel outline.
+const DECK_SHAPE_ORDER = ["popsicle", "shaped", "twin", "reissue"];
+const DECK_SHAPE_LABELS = { popsicle: "Popsicle", shaped: "Shaped", twin: "Twin", reissue: "Reissue" };
 const HEIGHT_ORDER = ["low", "mid", "high"];
 const CONSTRUCTION_ORDER = ["hollow", "standard"];
 // Keep in sync with protection.SUBTYPE_TOKENS / SIZES.
@@ -532,6 +537,7 @@ const SPEC_FACETS = [
     { stateKey: "diameters", part: "Wheels", attr: "diameter", section: "diameterFilters" },
     { stateKey: "duros", part: "Wheels", attr: "duros", section: "duroFilters" },
     { stateKey: "shapes", part: "Wheels", attr: "shape", section: "shapeFilters" },
+    { stateKey: "deckShapes", part: "Decks", attr: "deckshape", section: "deckshapeFilters" },
     { stateKey: "truckFits", part: "Trucks", attr: "truckfits", section: "truckfitFilters" },
     { stateKey: "truckNatives", part: "Trucks", attr: "trucknatives", section: "trucknativeFilters" },
     { stateKey: "truckSizes", part: "Trucks", attr: "trucksize", section: "trucksizeFilters" },
@@ -542,7 +548,7 @@ const SPEC_FACETS = [
     { stateKey: "protTypes", part: "Protection", attr: "prottype", section: "prottypeFilters" },
     { stateKey: "protSizes", part: "Protection", attr: "protsize", section: "protsizeFilters" }
 ];
-const SPEC_OPEN = { width: 1, length: 1, wheelbase: 1, deckcolor: 1, wheelcolor: 1, diameter: 1, duro: 1, shape: 1, truckfit: 1, trucknative: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
+const SPEC_OPEN = { width: 1, length: 1, wheelbase: 1, deckcolor: 1, wheelcolor: 1, diameter: 1, duro: 1, shape: 1, deckshape: 1, truckfit: 1, trucknative: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
 
 function normalizeDuroToken(value) {
     const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
@@ -592,6 +598,7 @@ function orderSpecValues(stateKey, values) {
     const keys = Object.keys(chosen);
     if (stateKey === "diameters") return DIAMETER_ORDER.filter(id => chosen[id]);
     if (stateKey === "shapes") return SHAPE_ORDER.filter(id => chosen[id]);
+    if (stateKey === "deckShapes") return DECK_SHAPE_ORDER.filter(id => chosen[id]);
     if (stateKey === "truckHeights") return HEIGHT_ORDER.filter(id => chosen[id]);
     if (stateKey === "constructions") return CONSTRUCTION_ORDER.filter(id => chosen[id]);
     if (stateKey === "protTypes") return PROT_TYPE_ORDER.filter(id => chosen[id]);
@@ -611,8 +618,8 @@ function orderSpecValues(stateKey, values) {
 
 function activeSpecKeys(part) {
     const current = part || DEFAULT_PART;
-    if (current === "Decks") return ["widths", "length", "wheelbase", "colors"];
-    if (current === "Wheels") return ["diameters", "colors", "duros", "shapes"];
+    if (current === "Decks") return ["widths", "deckShapes", "length", "wheelbase", "colors"];
+    if (current === "Wheels") return ["diameters", "duros", "shapes", "colors"];
     if (current === "Trucks") return ["truckFits", "truckNatives", "truckSizes", "truckHeights", "constructions"];
     if (current === "Bearings") return ["abecs"];
     if (current === "Sneakers") return ["shoeSizes"];
@@ -803,32 +810,28 @@ function syncTypeSections(expandSpec) {
     if (typeof SportSpecFilters !== "undefined") SportSpecFilters.sync(part);
     const context = document.getElementById("contextSpecs");
     const specs = document.getElementById("productSpecs");
-    const specsBody = document.getElementById("productSpecsBody");
     const brand = document.querySelector('[data-section="brand"]');
     const specGroup = document.getElementById("specGroup");
-    // Skate tucks its per-category size filters away on "All". A sport with
-    // sidebar spec filters (BMX, Ski, MTB) keeps them open under Brand.
-    if (part === "all" && typeof SportSpecFilters === "undefined") {
-        if (specs && specsBody && context) specsBody.appendChild(context);
-        if (specs) specs.hidden = false;
-    } else {
-        // Brand stays first. This type's size and spec sections follow it.
-        if (context && brand && brand.parentNode) brand.parentNode.insertBefore(context, brand.nextSibling);
-        else if (context && specGroup) specGroup.insertBefore(context, specGroup.firstChild);
-        if (specs) specs.hidden = true;
-    }
+    // Brand stays first. The chosen type's spec sections follow it.
+    // All types shows Brand and the generic sections only: Skate's
+    // per-category specs stay hidden until a type is picked, instead of
+    // stacking under Product specifications. BMX, Ski, and MTB fields have
+    // no data-for; SportSpecFilters.sync still shows their All list.
+    if (context && brand && brand.parentNode) brand.parentNode.insertBefore(context, brand.nextSibling);
+    else if (context && specGroup) specGroup.insertBefore(context, specGroup.firstChild);
+    if (specs) specs.hidden = true;
     document.querySelectorAll("#contextSpecs .filter-section[data-for]").forEach(section => {
         const owner = section.getAttribute("data-for") || "";
         // A section can serve several types ("Protection Helmets": size).
         const native = section.getAttribute("data-section") === "trucknative";
-        const show = (part === "all" || owner.split(" ").indexOf(part) >= 0) && (!native || state.brand !== "all");
+        const show = part !== "all" && owner.split(" ").indexOf(part) >= 0 && (!native || state.brand !== "all");
         if (native) section.querySelectorAll(".spec-chip").forEach(button => {
             const key = (button.getAttribute("data-value") || "").split(":")[0];
             button.hidden = !brandSame(TruckFit.brands[key] || key, state.brand);
         });
         section.classList.toggle("is-type-hidden", !show);
         const id = section.getAttribute("data-section") || "";
-        if (show && part !== "all" && expandSpec && SPEC_OPEN[id]) paintFilterSection(section, true);
+        if (show && expandSpec && SPEC_OPEN[id]) paintFilterSection(section, true);
     });
     rememberFilterSections();
 }
@@ -3112,6 +3115,7 @@ function clearFilters() {
         diameters: [],
         duros: [],
         shapes: [],
+        deckShapes: [],
         truckSizes: [],
         truckFits: [],
         truckNatives: [],
@@ -3370,6 +3374,7 @@ function decodeQuery(query) {
         diameters: [],
         duros: [],
         shapes: [],
+        deckShapes: [],
         truckSizes: [],
         truckFits: [],
         truckNatives: [],
@@ -3426,6 +3431,7 @@ function decodeQuery(query) {
         else if (key === "diameter") stateOut.diameters = orderSpecValues("diameters", String(value || "").split(","));
         else if (key === "duro") stateOut.duros = orderSpecValues("duros", String(value || "").split(","));
         else if (key === "shape") stateOut.shapes = orderSpecValues("shapes", String(value || "").split(","));
+        else if (key === "deckshape") stateOut.deckShapes = orderSpecValues("deckShapes", String(value || "").split(","));
         else if (key === "truckfit") stateOut.truckFits = orderSpecValues("truckFits", String(value || "").split(","));
         else if (key === "trucknative") stateOut.truckNatives = orderSpecValues("truckNatives", String(value || "").split(","));
         else if (key === "trucksize") stateOut.truckSizes = orderSpecValues("truckSizes", String(value || "").split(","));
@@ -3493,6 +3499,8 @@ function encodeState(snapshot) {
     if (duros.length) add("duro", duros.join(","));
     const shapes = orderSpecValues("shapes", snapshot.shapes || []);
     if (shapes.length) add("shape", shapes.join(","));
+    const deckShapes = orderSpecValues("deckShapes", snapshot.deckShapes || []);
+    if (deckShapes.length) add("deckshape", deckShapes.join(","));
     const truckFits = orderSpecValues("truckFits", snapshot.truckFits || []);
     if (truckFits.length) add("truckfit", truckFits.join(","));
     const truckNatives = orderSpecValues("truckNatives", snapshot.truckNatives || []);
@@ -3547,6 +3555,7 @@ function captureState() {
         diameters: (state.diameters || []).slice(),
         duros: (state.duros || []).slice(),
         shapes: (state.shapes || []).slice(),
+        deckShapes: (state.deckShapes || []).slice(),
         truckSizes: (state.truckSizes || []).slice(),
         truckFits: (state.truckFits || []).slice(),
         truckNatives: (state.truckNatives || []).slice(),
@@ -3622,6 +3631,7 @@ function writeControls(snapshot) {
     state.diameters = orderSpecValues("diameters", snapshot.diameters || []);
     state.duros = orderSpecValues("duros", snapshot.duros || []);
     state.shapes = orderSpecValues("shapes", snapshot.shapes || []);
+    state.deckShapes = orderSpecValues("deckShapes", snapshot.deckShapes || []);
     state.truckFits = orderSpecValues("truckFits", snapshot.truckFits || []);
     state.truckNatives = orderSpecValues("truckNatives", snapshot.truckNatives || []);
     state.truckSizes = orderSpecValues("truckSizes", snapshot.truckSizes || []);
@@ -4240,6 +4250,7 @@ function collectFilterActions() {
         diameters: value => "Diameter " + value,
         duros: value => value,
         shapes: value => "Shape: " + value.charAt(0).toUpperCase() + value.slice(1),
+        deckShapes: value => "Deck shape: " + (DECK_SHAPE_LABELS[value] || value),
         truckSizes: value => "Legacy truck size " + value,
         truckFits: value => "Fits deck " + value + "″",
         truckNatives: value => TruckFit.nativeLabel(value),
@@ -5136,6 +5147,7 @@ function quickFacts(dataset, item, generated) {
         addSpec("In stock", String(dataset.shoesize).split(",").map(size => size.trim()).filter(Boolean).join(", "));
     }
     addSpec("Width", dataset.size, '"');
+    addSpec("Deck shape", ({ popsicle: "Popsicle", shaped: "Shaped", twin: "Twin", reissue: "Reissue" })[dataset.deckshape] || "");
     addSpec("Length", dataset.length, '"');
     addSpec("Wheelbase", String(dataset.wheelbase || "").split(",").filter(Boolean).join('" & '), '"');
     addSpec("Diameter", dataset.diameter);

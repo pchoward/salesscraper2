@@ -34,7 +34,9 @@ in any bucket, so it is hidden while any range is selected.
 Wheel, truck, and bearing specs are the same kind of list. They are omitted
 when empty. ``diameter`` is a band id (``50-51``, ``52-53``, ``54-55``,
 ``56+``). ``duro`` is a hardness token such as ``99a``. ``shape`` is
-``conical``, ``radial``, or ``sidecut``. ``truckfit`` selects deck-fit bands; ``trucknative`` selects brand-qualified
+``conical``, ``radial``, or ``sidecut``. ``deckshape`` is a deck outline
+word (``popsicle``, ``shaped``, ``twin``, ``reissue``) and does not reuse
+``shape``. ``truckfit`` selects deck-fit bands; ``trucknative`` selects brand-qualified
 native codes (e.g. ``ace:66``). ``trucksize`` is the legacy exact size printed
 in the name. ``truckheight`` is ``low``, ``mid``, or ``high``. ``construction`` is
 ``hollow`` or ``standard`` when that word is printed in the name. ``abec`` is
@@ -168,6 +170,8 @@ SORTS = (
 CHANGES = ("new", "drop", "lowest", "removed")
 INTERVALS = ("day", "week", "month", "quarter")
 DEAL_KINDS = ("new", "drop", "low", "back", "hot")
+# Keep in step with DECK_SHAPE_ORDER in page.py and page.js.
+DECK_SHAPE_ORDER = ("popsicle", "shaped", "twin", "reissue")
 # Retired last-visit comparison. Old links may still carry these. They are
 # ignored so the rest of the query keeps working, and they are never written
 # back out. The digest always uses the previous daily scrape.
@@ -225,6 +229,7 @@ def empty_state():
         "diameters": [],
         "duros": [],
         "shapes": [],
+        "deck_shapes": [],
         "truck_sizes": [],
         "truck_fit": [],
         "truck_native": [],
@@ -345,6 +350,16 @@ def _ordered_kinds(kinds):
     return [kind for kind in DEAL_KINDS if kind in chosen]
 
 
+def ordered_deck_shapes(values):
+    """Deck-shape ids in sidebar order. Unknown tokens are dropped."""
+    chosen = set()
+    for value in values or []:
+        token = str(value or "").strip().lower()
+        if token in DECK_SHAPE_ORDER:
+            chosen.add(token)
+    return [token for token in DECK_SHAPE_ORDER if token in chosen]
+
+
 def decode_query(query):
     """Return a full filter state. Unknown values are ignored."""
     state = empty_state()
@@ -413,6 +428,8 @@ def decode_query(query):
             state["duros"] = ordered_duros(str(value or "").split(","))
         elif key == "shape":
             state["shapes"] = ordered_shapes(str(value or "").split(","))
+        elif key == "deckshape":
+            state["deck_shapes"] = ordered_deck_shapes(str(value or "").split(","))
         elif key == "truckfit":
             state["truck_fit"] = ordered_fits(str(value or "").split(","))
         elif key == "trucknative":
@@ -509,6 +526,9 @@ def encode_state(state):
     shapes = ordered_shapes(state.get("shapes"))
     if shapes:
         add("shape", ",".join(shapes))
+    deck_shapes = ordered_deck_shapes(state.get("deck_shapes"))
+    if deck_shapes:
+        add("deckshape", ",".join(deck_shapes))
     for key, normalizer in (("truckfit", ordered_fits), ("trucknative", ordered_natives)):
         values = normalizer(state.get({"truckfit": "truck_fit", "trucknative": "truck_native"}[key]))
         if values:
