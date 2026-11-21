@@ -216,6 +216,24 @@ class WorkflowSafetyTests(unittest.TestCase):
         self.assertIs(preview_artifact['with']['include-hidden-files'], False)
         self.assertNotIn('python ci/build_audit_fixtures.py', str(checks['jobs']['browser']))
 
+    def test_reruns_replace_artifacts_without_renaming_them(self):
+        checks = _workflow("pr-checks.yml")
+        uploads = {
+            step["with"]["name"]: step["with"]
+            for job in checks["jobs"].values()
+            for step in job["steps"]
+            if step.get("uses") == "actions/upload-artifact@v4"
+        }
+        group_report = "browser-review-${{ matrix.group }}"
+        for name in ("unified-header-preview", "browser-preview-input",
+                     "browser-fixtures", group_report, "pr-preview", "browser-review"):
+            with self.subTest(artifact=name):
+                self.assertIs(uploads[name]["overwrite"], True)
+        self.assertEqual(uploads[group_report]["if-no-files-found"], "error")
+        gate = checks["jobs"]["preview"]
+        self.assertTrue(any(step.get("with", {}).get("pattern") == "browser-review-*"
+                            for step in gate["steps"]))
+
     def test_the_publisher_runs_main_code_on_data_only(self):
         publish = _workflow("pr-preview-publish.yml")
         text = (WORKFLOWS / "pr-preview-publish.yml").read_text(encoding="utf-8")
