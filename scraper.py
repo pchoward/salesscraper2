@@ -62,6 +62,17 @@ def save_health(health):
     safe_write_file(HEALTH_PATH, state_json(health))
 
 
+def save_feed_summary(scanned_at):
+    """What each Shopify store's sale feed held this run, including product
+    types with no category, for the drift check (drift.py). Never raises."""
+    try:
+        from stores import shopify
+        payload = {"scanned_at": scanned_at, "stores": shopify.FEED_SUMMARIES}
+        safe_write_file("feed_summary.json", json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    except Exception as exc:
+        logging.error("Could not save the feed summary (continuing): %s", exc)
+
+
 def save_sale_events(history, current_data, today):
     """Store sale log (dates, cut, holiday), rebuilt from the price history.
     Never raises."""
@@ -259,6 +270,7 @@ def _run(args, sport):
         save_health(updates["health"])
     except Exception as exc:
         logging.error("Could not save scrape health (continuing): %s", exc)
+    save_feed_summary(scanned_at)
     try:
         if updates.get("site_sales"):
             save_site_sales(updates["site_sales"])

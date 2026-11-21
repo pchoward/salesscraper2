@@ -336,12 +336,18 @@ def feed_summary(store, products):
             "unmapped_types": unmapped.most_common()}
 
 
+# This run's feed summaries by store, saved by scraper.py as
+# feed_summary.json for the drift check (drift.py).
+FEED_SUMMARIES = {}
+
+
 def log_feed_summary(store, products):
     try:
         summary = feed_summary(store, products)
     except Exception as exc:  # logging only; never fails a run
         logger.error("%s feed summary failed: %s", store.store, exc)
         return
+    FEED_SUMMARIES[store.store] = summary
     skipped = sum(count for _, count in summary["unmapped_types"])
     logger.info("%s sale feed: %s products, %s marked down and buyable, %s marked down but sold out, "
                 "%s in product types with no category", store.store, summary["products"], summary["marked_down"],
