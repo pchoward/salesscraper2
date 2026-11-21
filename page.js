@@ -1104,6 +1104,14 @@ function paintTechnicalCounts() {
         node.setAttribute("data-count", String(count));
         markFacetOption(node, count, value === "" || node.getAttribute("aria-pressed") === "true");
     });
+    const powerChips = document.getElementById("mtbPowerChips");
+    if (powerChips) {
+        const power = tally.power || {};
+        powerChips.hidden = !["Bikes", "Frames"].includes(state.part) || !power["E-MTB"] || !power.Regular;
+        if (!powerChips.hidden) {
+            powerChips.firstElementChild.firstChild.textContent = state.part === "Frames" ? "All frames " : "All bikes ";
+        }
+    }
     // A field with nothing left under the other filters folds away (Ski boot
     // fields once only Blizzard skis remain); SportSpecFilters.sync still
     // decides which fields a type shows.

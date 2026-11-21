@@ -121,6 +121,7 @@
                     const key=chip.dataset.techKey;
                     const picked=new Set(selected[key]||[]);
                     if(chip.dataset.value==='')picked.clear();
+                    else if(chip.hasAttribute('data-exclusive')){picked.clear();picked.add(chip.dataset.value);}
                     else if(picked.has(chip.dataset.value))picked.delete(chip.dataset.value);
                     else picked.add(chip.dataset.value);
                     const next={...selected};
