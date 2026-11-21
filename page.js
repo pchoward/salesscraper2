@@ -86,6 +86,7 @@ let catalogData = null;
 let rowList = null;
 let rowById = null;
 let cardById = null;
+let lazyCardMarkup = null;
 let detailById = null;
 let matchMemo = null;
 let scanDayValue = null;
@@ -189,9 +190,17 @@ function indexDeals() {
     document.querySelectorAll("#cardGrid .deal-card").forEach(card => {
         cardById.set(card.dataset.id, card);
     });
-    pooledCards().forEach(card => {
-        cardById.set(card.dataset.id, card);
-    });
+    const pool = cardPoolNode();
+    if (pool?.tagName === "SCRIPT") {
+        lazyCardMarkup = new Map();
+        for (const markup of pool.textContent.split("</article>")) {
+            const id = /\bdata-id="([^"]+)"/.exec(markup.slice(0, markup.indexOf(">")))?.[1];
+            if (id) lazyCardMarkup.set(id, markup + "</article>");
+        }
+        pool.textContent = "";
+    } else {
+        pooledCards().forEach(card => cardById.set(card.dataset.id, card));
+    }
     detailById = new Map();
     document.querySelectorAll("#mainTable .detail-row").forEach(detail => {
         detailById.set(detail.dataset.for, detail);
@@ -205,11 +214,27 @@ function dealRows() {
 
 function cardFor(id) {
     indexDeals();
-    return cardById.get(id) || null;
+    const existing = cardById.get(id);
+    if (existing) return existing;
+    const markup = lazyCardMarkup?.get(id);
+    if (!markup) return null;
+    const holder = document.createElement("template");
+    holder.innerHTML = unpackMarkup(markup);
+    const card = holder.content.firstElementChild;
+    const row = rowById.get(id);
+    card.classList.toggle("filtered-out", row.classList.contains("filtered-out"));
+    card.classList.toggle("grouped-hide", row.classList.contains("grouped-hide"));
+    paintStar(card, row.dataset.starred === "1");
+    cardById.set(id, card);
+    lazyCardMarkup.delete(id);
+    return card;
 }
 
-// Cards past the first page live in a <template>, so the browser parses them
-// without laying them out. A plain hidden div is the fallback for tests.
+function unpackMarkup(markup) {
+    return markup.replace(/<\\(\/script|!--)/gi, "<$1");
+}
+
+// Current pages store deferred markup as text. Older previews used a template.
 function cardPoolNode() {
     return document.getElementById("cardPool");
 }
@@ -2080,7 +2105,7 @@ function applyGroupVisibility() {
 
 function mirrorCardFlags() {
     dealRows().forEach(row => {
-        const card = cardFor(row.dataset.id);
+        const card = cardById?.get(row.dataset.id);
         if (!card) return;
         card.classList.toggle("filtered-out", row.classList.contains("filtered-out"));
         card.classList.toggle("grouped-hide", row.classList.contains("grouped-hide"));
@@ -2745,12 +2770,13 @@ function syncCardOrder() {
 }
 
 // Keep the first cardShown matching deals in the grid, in the table's order.
-// Filtered and later cards stay in #cardPool so the browser does not lay them out.
+// Deferred cards are parsed only when needed. Previously shown cards stay cached.
 function syncMountedCards() {
     const grid = document.getElementById("cardGrid");
     const pool = cardPoolNode();
     const sink = pool && (pool.content || pool);
     if (!grid || !sink || !cardById) return;
+    if (lazyCardMarkup && !document.documentElement.classList.contains("layout-cards")) return;
     const tbody = document.querySelector("#mainTable tbody");
     if (!tbody) return;
     const visible = [];
@@ -2763,10 +2789,13 @@ function syncMountedCards() {
     for (let i = 0; i < limit; i++) keep[visible[i]] = true;
     Array.from(grid.children).forEach(node => {
         if (!node.classList || !node.classList.contains("deal-card")) return;
-        if (!keep[node.dataset.id]) sink.appendChild(node);
+        if (!keep[node.dataset.id]) {
+            if (lazyCardMarkup) node.remove();
+            else sink.appendChild(node);
+        }
     });
     for (let i = 0; i < limit; i++) {
-        const card = cardById.get(visible[i]);
+        const card = cardFor(visible[i]);
         if (card) grid.appendChild(card);
     }
     const button = document.getElementById("showMoreCards");
@@ -2975,19 +3004,20 @@ function toggleDetail(row) {
     syncDetails();
 }
 
+function paintStar(node, on) {
+    node.dataset.starred = on ? "1" : "0";
+    const button = node.querySelector(".star");
+    if (!button) return;
+    button.classList.toggle("on", on);
+    button.setAttribute("aria-pressed", on ? "true" : "false");
+    button.textContent = on ? "★" : "☆";
+}
+
 function applyStars() {
+    indexDeals();
     const stars = starSet();
-    const nodes = Array.from(document.querySelectorAll(".deal-row, #cardGrid .deal-card"));
-    pooledCards().forEach(card => nodes.push(card));
-    nodes.forEach(row => {
-        const on = stars.has(row.dataset.url);
-        row.dataset.starred = on ? "1" : "0";
-        const button = row.querySelector(".star");
-        if (!button) return;
-        button.classList.toggle("on", on);
-        button.setAttribute("aria-pressed", on ? "true" : "false");
-        button.textContent = on ? "★" : "☆";
-    });
+    dealRows().forEach(row => paintStar(row, stars.has(row.dataset.url)));
+    cardById.forEach(card => paintStar(card, stars.has(card.dataset.url)));
 }
 
 function toggleStar(button) {
@@ -4116,9 +4146,9 @@ function fillTableRows() {
     if (!source) return;
     source.remove();
     const holder = document.createElement("template");
-    holder.innerHTML = "<table><tbody>" + source.textContent.replace(/<\\(\/script|!--)/gi, "<$1") + "</tbody></table>";
+    holder.innerHTML = "<table><tbody>" + unpackMarkup(source.textContent) + "</tbody></table>";
     indexDeals();
-    holder.content.querySelectorAll("tr.deal-row").forEach(full => {
+    holder.content.querySelectorAll("tr[data-id]").forEach(full => {
         const row = rowById.get(full.dataset.id);
         if (row && !row.firstChild) row.replaceChildren(...Array.from(full.childNodes));
     });
@@ -4131,6 +4161,7 @@ function applyLayout(mode) {
     const cards = mode === "cards";
     if (!cards) fillTableRows();
     document.documentElement.classList.toggle("layout-cards", cards);
+    if (cards && rowList) syncMountedCards();
     const tableBtn = document.getElementById("layoutTable");
     const cardBtn = document.getElementById("layoutCards");
     if (tableBtn) tableBtn.setAttribute("aria-pressed", cards ? "false" : "true");

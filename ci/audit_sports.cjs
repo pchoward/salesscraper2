@@ -179,13 +179,24 @@ async function main(){
      await card.locator('.star').click();assert.equal(await card.locator('.star').getAttribute('aria-pressed'),'true');await card.locator('.star').click();
     });
     await scenario('Grouping, layout, empty deal types and drawer',async()=>{
+     assert.equal(await frame.locator('#cardPool .deal-card').count(),0);
+     assert(await frame.evaluate(()=>lazyCardMarkup.size>0),'the catalog has unparsed cards');
+     assert.equal(await frame.locator('#mainTable tbody td').count(),0);
+
      await frame.locator('#groupToggle').click();assert.equal(await frame.locator('#groupToggle').getAttribute('aria-pressed'),'true');await frame.locator('#groupToggle').click();
      if(mobile){await frame.locator('#filtersOpen').click();assert(await frame.locator('#filterDrawer').evaluate(n=>n.classList.contains('is-open')));await frame.waitForTimeout(300);
       const drawer=await frame.locator('#filterDrawer').evaluate(n=>{const r=n.getBoundingClientRect();return {left:r.left,right:r.right,width:innerWidth,small:[...n.querySelectorAll('button')].filter(b=>b.getClientRects().length&&b.getBoundingClientRect().height<24).map(b=>b.getAttribute('aria-label')||b.textContent.trim())};});
       assert(drawer.left>=-1&&drawer.right<=drawer.width+1,'drawer must finish inside the phone viewport');
       assert.deepEqual(drawer.small,[],'visible drawer buttons must be at least 24px tall');
       if(width===390)await page.screenshot({path:path.join(output,sport+'-mobile-filters.png'),animations:'disabled'});await frame.locator('#filtersClose').click();}
-     else{await frame.locator('#layoutTable').click();assert(await frame.locator('.table-wrap').isVisible());await frame.locator('#layoutCards').click();}
+     else{
+      await frame.locator('#layoutTable').click();
+      assert(await frame.locator('.table-wrap').isVisible());
+      assert(await frame.locator('#mainTable tbody td').count()>0);
+      assert.equal(await frame.locator('#tableRows').count(),0);
+      await frame.locator('#layoutCards').click();
+      assert(await frame.locator('#cardGrid .deal-card:not(.filtered-out)').first().isVisible());
+     }
      await frame.locator('#btnNew').click();assert((await rows(frame)).every(r=>r.added==='1'&&r.removed!=='1'));await frame.locator('#btnGone').click();assert((await rows(frame)).every(r=>r.removed==='1'));await frame.locator('#btnAll').click();assert((await rows(frame)).every(r=>r.removed!=='1'));
     });
     await scenario('Back/Forward and cross-sport state isolation',async()=>{

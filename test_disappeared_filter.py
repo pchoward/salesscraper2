@@ -66,7 +66,7 @@ class DisappearedFeedTests(unittest.TestCase):
             digest=digest,
         )
         grid = html.split('id="cardGrid"', 1)[1].split('id="cardPool"', 1)[0]
-        pool = html.split('id="cardPool"', 1)[1].split("</template>", 1)[0]
+        pool = html.split('id="cardPool"', 1)[1].split("</script>", 1)[0]
         self.assertIn(live["url"], grid)
         self.assertNotIn('data-removed="1"', grid)
         self.assertEqual(pool.count('data-removed="1"'), 2)
