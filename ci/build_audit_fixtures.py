@@ -48,8 +48,17 @@ def build(output):
             else:
                 item['technical_offers'] = [offer('sold', target, 50, False), offer('available', other)]
             items.append(item)
+        products = {'AuditFixture_' + part: items}
+        if sport is sports.MTB:
+            products['AuditFixture_Bikes'] = [
+                {'name': f'SYNTHETIC UI {power} Bike', 'part': 'Bikes', 'store': 'AuditFixture',
+                 'brand': 'Audit', 'url': f'https://example.test/mtb/bike-{index}',
+                 'price_new': '100.00', 'price_old': '400.00', 'availability': 'In stock',
+                 'technical_offers': [offer('bike', {'power': [power]})]}
+                for index, power in enumerate(('E-MTB', 'Regular'))
+            ]
         with sport.active():
-            html = build_report_html({'AuditFixture_' + part: items}, {}, {}, sport=sport,
+            html = build_report_html(products, {}, {}, sport=sport,
                                      generated_at='2026-11-02T00:00:00+00:00')
         path = output / 'audit-fixtures' / sport.id / 'sale_items_chart.html'
         path.parent.mkdir(parents=True, exist_ok=True)

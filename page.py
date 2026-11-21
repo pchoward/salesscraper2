@@ -2806,6 +2806,17 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             head.append(
                 f'<th data-sort="{key}" onclick="sortBy(\'{key}\')">{escape(label)}</th>'
             )
+    if sport.id == "mtb":
+        chunks.append(
+            '<div id="mtbPowerChips" class="mtb-power-chips" role="group" aria-label="Motor" hidden>'
+            + "".join(
+                f'<button type="button" class="chip tech-chip" data-tech-key="power" '
+                f'data-value="{value}" data-exclusive aria-pressed="false">'
+                f'{label} <span class="spec-count"></span></button>'
+                for value, label in (("", "All bikes"), ("E-MTB", "E-MTB"), ("Regular", "Regular"))
+            )
+            + "</div>"
+        )
     chunks.append(
         '<div class="section" id="dealsSection">'
         '<h2 class="sr-only">All Deals</h2>'

@@ -216,6 +216,26 @@ async function main(){
   if(process.env.AUDIT_FIXTURES!=='off'&&fs.existsSync(fixturePath)) {
    const fixtures=JSON.parse(fs.readFileSync(fixturePath));
    for(const width of [1440,390]) for(const [sport,fixture] of Object.entries(fixtures)) {
+    if(sport==='mtb') await check(sport,width,'MTB Motor quick filters share facet counts and history',async()=>{
+     const page=await browser.newPage({viewport:{width,height:900},isMobile:width<800,hasTouch:width<800});
+     try{
+      await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
+      await page.goto(base+'/'+fixture.path+'?type=bikes');
+      const bar=page.locator('#mtbPowerChips');
+      await bar.waitFor({state:'visible'});
+      for(const [value,count] of [['',2],['E-MTB',1],['Regular',1]]){
+       assert.equal(await bar.locator(`[data-value="${value}"]`).getAttribute('data-count'),String(count));
+       assert.equal(await page.locator(`#tech-power [data-value="${value}"]`).getAttribute('data-count'),String(count));
+      }
+      await bar.locator('[data-value="E-MTB"]').click();
+      await page.waitForURL(url=>url.searchParams.get('mtb_motor')==='E-MTB');
+      assert.deepEqual((await rows(page)).map(row=>row.url),['https://example.test/mtb/bike-0']);
+      assert.equal(await page.locator('#tech-power [data-value="E-MTB"]').getAttribute('aria-pressed'),'true');
+      await page.goBack();
+      await page.waitForFunction(()=>document.querySelector('#mtbPowerChips [data-value=""]').getAttribute('aria-pressed')==='true');
+      assert.equal((await rows(page)).length,2);
+     }finally{await page.close();}
+    });
     await check(sport,width,'Synthetic same-variant, missing-spec, sold-out and price boundaries',async()=>{
      const page=await browser.newPage({viewport:{width,height:900},isMobile:width<800,hasTouch:width<800});
      try {
