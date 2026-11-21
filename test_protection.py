@@ -298,7 +298,9 @@ class SoldOutTests(unittest.TestCase):
         self.assertIn('class="pill pill-soldout"', card)
         self.assertEqual(html.count('class="deal-card sold-out"'), 1)
         cells = html.split('id="tableRows">', 1)[1].split("</script>", 1)[0]
-        row = re.search(r'<tr class="deal-row"[^>]*protec-checkered.*?</tr>', cells, re.S).group(0)
+        row_id = re.search(r'data-id="([^"]+)"', card).group(1)
+        row = re.search(fr'<tr data-id="{re.escape(row_id)}">.*?</tr>', cells, re.S).group(0)
+        self.assertIn("protec-checkered", row)
         self.assertIn("Sold out", row)
 
     def test_an_alert_watch_sees_the_listing_as_out_of_stock(self):
