@@ -232,7 +232,12 @@ class GridAndLoadTests(unittest.TestCase):
     def test_first_page_of_cards_is_mounted_and_images_wait(self):
         html = build_report_html(_catalog(), {}, generated_at="2026-10-11T21:46:35+00:00")
         grid = html.split('id="cardGrid">', 1)[1].split('id="showMoreCards"', 1)[0]
-        pool = html.split('id="cardPool"', 1)[1].split('id="groupBoard"', 1)[0]
+        pool = html.split('<script type="text/html" id="cardPool">', 1)[1].split("</script>", 1)[0]
+        table = html.split('<script type="text/html" id="tableRows">', 1)[1].split("</script>", 1)[0]
+        self.assertIn('<tr data-id=', table)
+        self.assertNotIn('data-url=', table)
+        live_table = html.split('id="mainTable"', 1)[1].split("</table>", 1)[0]
+        self.assertNotIn("<td>", live_table)
         self.assertEqual(grid.count("<article"), CARD_PAGE_SIZE)
         self.assertGreater(pool.count("<article"), 0)
         self.assertIn(">Show more<", html)

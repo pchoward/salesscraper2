@@ -89,7 +89,7 @@ class CardSortOrderTests(unittest.TestCase):
             "const DEFAULT_SORT = " + repr(DEFAULT_SORT).replace("'", '"') + ";\n"
             "const CARD_PAGE_SIZE = 24;\n"
             "let state = { sortKey: DEFAULT_SORT, sortDir: \"desc\" };\n"
-            "let rowList = null, rowById = null, cardById = null, detailById = null, chartObserver = null;\n"
+            "let rowList = null, rowById = null, cardById = null, lazyCardMarkup = null, detailById = null, chartObserver = null;\n"
             "function mirrorSort() {}\nfunction syncUrl() {}\nfunction paintOfferPrices() {}\nfunction fitCardPhotos() {}\n"
             + DOM
             + _slice(source, "function indexDeals(", "function readJson(")

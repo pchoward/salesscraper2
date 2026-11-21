@@ -2818,7 +2818,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     # parsed, so they cost no DOM) until the Table layout is first shown.
     cell_chunks = []
     card_chunks = ['<div class="card-grid" id="cardGrid">']
-    pool_chunks = ['<template id="cardPool">']
+    pool_chunks = []
     shown_decks = 0
     pooled_decks = 0
     # Built in the default sort (% off) so the first cards are right before
@@ -2828,8 +2828,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         try:
             row_html = _row_html(record)
             card_html = _card_html(record)
-            chunks.append(row_html[: row_html.index(">") + 1] + "</tr>")
-            cell_chunks.append(row_html)
+            opening, _, cells = row_html.partition(">")
+            chunks.append(opening + "></tr>")
+            cell_chunks.append(f'<tr data-id="{_attr(record["id"])}">{cells}')
             # The fresh visit is Decks, in this same rank order. The first
             # page of those cards is in the grid; everything else waits.
             if record["part"] == "Decks" and shown_decks < CARD_PAGE_SIZE:
@@ -2849,7 +2850,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     for index, removed in enumerate(removed_feed):
         row_id = f"g{index}"
         try:
-            chunks.append(_removed_row_html(removed, row_id))
+            opening, _, cells = _removed_row_html(removed, row_id).partition(">")
+            chunks.append(opening + "></tr>")
+            cell_chunks.append(f'<tr data-id="{row_id}">{cells}')
             pool_chunks.append(_removed_card_html(removed, row_id))
             catalog_json[row_id] = {
                 "name": removed["name"],
@@ -2871,9 +2874,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f'<button type="button" class="show-more-cards" id="showMoreCards"{more_hidden}>'
         "Show more</button>"
     )
-    card_chunks.extend(pool_chunks)
-    card_chunks.append("</template>")
     chunks.append("".join(card_chunks))
+    chunks.append(f'<script type="text/html" id="cardPool">{_script_text("".join(pool_chunks))}</script>')
     chunks.append(_group_board(records))
     chunks.append('<section id="liveCatalogDeals" class="catalog-live" aria-labelledby="liveCatalogTitle" hidden>'
                   '<h2 id="liveCatalogTitle">More deals from other shops</h2>'

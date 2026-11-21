@@ -703,6 +703,7 @@ let state = { sortKey: "rank", sortDir: "asc" };
 let rowList = null;
 let rowById = null;
 let cardById = null;
+let lazyCardMarkup = null;
 let detailById = null;
 function mirrorSort() {}
 function syncUrl() {}
