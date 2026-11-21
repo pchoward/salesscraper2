@@ -114,6 +114,7 @@ for (let rank = 0; rank < 70; rank++) {
                  soldout: rank % 17 === 3 ? "1" : "0", store: ["CCS", "Zumiez", "Tactics"][rank % 3] };
   deals.push(data);
   tbody.appendChild(el("tr", { className: "deal-row", dataset: data }));
+  if (rank % 10 === 0) tbody.appendChild(el("tr", { className: "detail-row", dataset: { for: data.id } }));
   (rank < 24 ? grid : pool).appendChild(el("article", { className: "deal-card", dataset: Object.assign({}, data) }));
 }
 
@@ -158,6 +159,11 @@ dealRows().forEach(row => row.classList.remove("filtered-out"));
   cardShown = cardPageSize();
   sortBy(key, dir);
   same(key + " " + dir, revealAll(), expected(key, dir));
+  tbody.children.forEach((node, index) => {
+    if (node.classList.contains("detail-row") && tbody.children[index - 1]?.dataset.id !== node.dataset.for) {
+      throw new Error("Detail row no longer follows its listing after sorting");
+    }
+  });
 });
 
 // Shoe-size offers rewrite % off on the rows: the next pass re-sorts.
