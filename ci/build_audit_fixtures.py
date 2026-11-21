@@ -20,8 +20,12 @@ from report import build_report_html
 def _fixture_promos(sport_id):
     if sport_id != 'mtb':
         return []
-    return [{'store': 'AuditFixture', 'code': 'FIXTURE20', 'percent': 20,
-             'url': 'https://example.test/sale', 'ends': ''}]
+    return [
+        {'store': 'GeneralFixture', 'code': 'SPORTS10', 'percent': 10,
+         'url': 'https://example.test/sale', 'ends': '', 'sports': ['skate', 'mtb']},
+        {'store': 'AuditFixture', 'code': 'FIXTURE20', 'percent': 20,
+         'url': 'https://example.test/sale', 'ends': '', 'sports': ['mtb']},
+    ]
 
 
 @patch('promos.for_sport', new=_fixture_promos)

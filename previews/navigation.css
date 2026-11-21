@@ -157,3 +157,15 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
  body.phone-filters-open #skateFrame { position:fixed; inset:0; z-index:220; width:100%; height:100vh; height:100dvh; flex:none; }
  body.phone-filters-open { overflow:hidden; }
 }
+
+
+@media (max-width:640px) {
+ .shell-header .top-row { padding:0 8px; }
+ .top-row .brand { min-height:38px; padding:4px 0; font-size:18px; }
+ .top-row .shell-search { height:40px; margin-bottom:4px; }
+ .top-row .catalog-sections button { min-height:34px; }
+ .browse-nav { gap:4px; padding-inline:8px; }
+ .browse-nav #sportTabs [role=tab], #categoryToggle { min-height:38px; }
+ #categoryNavigation { min-width:0; }
+ #categoryToggle > span:first-child { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+}

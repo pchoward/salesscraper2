@@ -1501,10 +1501,15 @@ def _promo_strip(sport_id):
         if not store or not code or urlsplit(url).scheme not in {"http", "https"}:
             continue
         identity = escape(json.dumps([store, code]), quote=True)
+        description = promos.describe(promo, code=False)
+        short = promos.describe({key: promo.get(key) for key in ("percent", "amount", "up_to")}, code=False)
+        sport_count = len(promo.get("sports") or ())
         rows.append(
-            f'<div class="promo-offer" data-promo-id="{identity}" data-ends="{escape(ends, quote=True)}">'
+            f'<div class="promo-offer" data-promo-id="{identity}" data-sport-count="{sport_count}" '
+            f'data-ends="{escape(ends, quote=True)}">'
             f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{escape(store)}</a>'
-            f'<span>{escape(promos.describe(promo, code=False))} applied at checkout</span>'
+            f'<span class="promo-description">{escape(description)} applied at checkout</span>'
+            f'<span class="promo-short" title="{escape(description, quote=True)}">{escape(short)}</span>'
             f'<code>{escape(code)}</code>'
             f'<button type="button" data-copy-promo aria-label="Copy {escape(code, quote=True)}">Copy</button>'
             f'<button type="button" data-dismiss-promo aria-label="Dismiss {escape(code, quote=True)}">Dismiss</button>'
@@ -2858,7 +2863,9 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" id="layoutCards" aria-pressed="true">Cards</button>'
         "</div>"
         '<button type="button" class="text-btn group-toggle" id="groupToggle" aria-pressed="false" '
-        'onclick="toggleGrouped()">Group across stores</button>'
+        'onclick="toggleGrouped()" aria-label="Group across stores">'
+        '<span class="group-full-label">Group across stores</span>'
+        '<span class="group-phone-label" aria-hidden="true">Group</span></button>'
         "</div>"
         '<div class="active-filters" id="activeFilters" hidden>'
         '<div class="active-row" id="activeChips"></div>'
