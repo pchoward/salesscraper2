@@ -227,6 +227,52 @@ async function main(){
   if(process.env.AUDIT_FIXTURES!=='off'&&fs.existsSync(fixturePath)) {
    const fixtures=JSON.parse(fs.readFileSync(fixturePath));
    for(const width of [1440,390]) for(const [sport,fixture] of Object.entries(fixtures)) {
+    await check(sport,width,'Technical sidebar order follows heading ranks when present',async()=>{
+     const phone=width===390;
+     const page=await browser.newPage({viewport:{width,height:900},isMobile:phone,hasTouch:phone});
+     try{
+      await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
+      await page.goto(base+'/'+fixture.path);
+      const fields='#contextSpecs > [data-technical-field]';
+      const order=selector=>page.locator(selector).evaluateAll(nodes=>nodes.map(node=>node.dataset.technicalField));
+      const built=await page.locator('#technicalCatalog').evaluate(node=>JSON.parse(node.textContent).fields.map(field=>field.key));
+      await page.evaluate(()=>filterByPart('all'));
+      assert.deepEqual(await order(fields),built);
+      if(sport!=='ski'){
+       await control(page, 'partSelect', fixture.part);
+       assert.equal(await page.locator(fields+'[data-rank]').count(),0);
+       assert.deepEqual(await order(fields),built);
+       return;
+      }
+      if(phone)await page.locator('#filtersOpen').click();
+      for(const [heading,wanted] of [
+       ['Boots',['mondo','gender','flex','last']],
+       ['Bindings',['din','brake','gender']],
+       ['Goggles',['gender','goggle_size']],
+      ]){
+       await control(page,'partSelect',heading);
+       assert.deepEqual((await order(fields+':visible')).slice(0,wanted.length),wanted);
+       assert.equal(await page.locator('#contextSpecs').evaluate(node=>node.previousElementSibling.dataset.section),'brand');
+      }
+      await page.evaluate(()=>filterByPart('Packs'));
+      assert.deepEqual(await order(fields),built);
+      await control(page,'partSelect','Boots');
+      assert.deepEqual((await order(fields+':visible')).slice(0,4),['mondo','gender','flex','last']);
+      const mondo=page.locator('[data-technical-field="mondo"]');
+      const toggle=mondo.locator('.section-toggle');
+      const count=await mondo.locator('.tech-chip[data-value=""]').getAttribute('data-count');
+      assert.equal(count,'1');
+      const nextExpanded=String(await toggle.getAttribute('aria-expanded')==='false');
+      await toggle.click();
+      assert.equal(await toggle.getAttribute('aria-expanded'),nextExpanded);
+      await control(page,'partSelect','Bindings');
+      await control(page,'partSelect','Boots');
+      assert.equal(await toggle.getAttribute('aria-expanded'),nextExpanded);
+      assert.equal(await mondo.locator('.tech-chip[data-value=""]').getAttribute('data-count'),count);
+      await page.evaluate(()=>filterByPart('all'));
+      assert.deepEqual(await order(fields),built);
+     }finally{await page.close();}
+    });
     if(sport==='mtb') await check(sport,width,'MTB Motor quick filters share facet counts and history',async()=>{
      const page=await browser.newPage({viewport:{width,height:900},isMobile:width<800,hasTouch:width<800});
      try{
