@@ -148,7 +148,7 @@ class MarkupTests(unittest.TestCase):
         self.assertIsNone(soup.select_one('#partFilters [data-part="Forks & Shocks"]'))
         stored = soup.select_one('#partSelect option[value="Forks & Shocks"]')
         self.assertIsNotNone(stored)
-        self.assertEqual(stored.get("data-label"), "Suspension")
+        self.assertEqual(stored.get("data-label"), "Forks & Shocks")
         settings = json.loads(re.search(r"const SPORT_SETTINGS = (\{.*?\});", html).group(1))
         self.assertEqual(settings["partRenames"], {"Forks & Shocks": "Suspension"})
 

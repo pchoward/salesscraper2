@@ -960,9 +960,12 @@ function paintSelectCounts(id, counts) {
     if (!select._facetPool) select._facetPool = Array.from(select.options).filter(option => !option.hasAttribute('data-multi-store'));
     const pool = select._facetPool;
     const current = select.value || "";
+    // A stored category (Forks & Shocks) shares the heading's count (Suspension).
+    // Otherwise a zero count drops the option and the old name cannot be selected.
+    const renames = id === "partSelect" && typeof SPORT_SETTINGS !== "undefined" ? (SPORT_SETTINGS.partRenames || {}) : {};
     pool.forEach(option => {
         if (!option.value || option.value === "all") return;
-        const count = counts[option.value] || 0;
+        const count = counts[renames[option.value] || option.value] || 0;
         let label = option.getAttribute("data-label");
         if (!label) {
             label = String(option.textContent || "").replace(/\s*\(\d+\)\s*$/, "");

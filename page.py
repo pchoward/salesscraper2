@@ -2525,7 +2525,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             _option(
                 "Forks & Shocks",
                 f"Forks & Shocks ({part_counts.get('Suspension', 0)})",
-                data_label="Suspension",
+                data_label="Forks & Shocks",
             )
         )
     part_more = [
