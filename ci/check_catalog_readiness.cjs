@@ -65,6 +65,7 @@ const path=require('node:path');
    // Route handlers are outside the page; wait until the held request arrived.
    await assertEventually(()=>held);
    assert(await page.locator('#categoryToggle').isDisabled());
+   assert(await page.locator('#shellSearch').isDisabled(),'search waits for the catalog bridge');
    assert(await page.locator('#catalogLoading').isVisible(),'loading cards stay visible while the catalog is stalled');
    assert(await page.locator('#skateFrame').evaluate(frame=>
     frame.inert && frame.tabIndex===-1 && frame.getAttribute('aria-hidden')==='true' && getComputedStyle(frame).opacity==='0'
@@ -96,6 +97,7 @@ const path=require('node:path');
    release();
    await page.waitForFunction(()=>!document.getElementById('categoryToggle').disabled);
    await page.locator('#catalogLoading').waitFor({state:'hidden'});
+   assert(await page.locator('#shellSearch').isEnabled());
    assert(await page.locator('#skateFrame').evaluate(frame=>!frame.inert&&getComputedStyle(frame).opacity==='1'));
    if(mode==='stale')assert.equal(await page.evaluate(()=>shredApp.registerCategories(oldCatalog.source,oldCatalog.child,oldCatalog.document)),false);
    const counts=await page.evaluate(()=>{

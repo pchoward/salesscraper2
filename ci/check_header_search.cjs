@@ -111,6 +111,7 @@ async function main() {
             });
             assert.equal(await header.inputValue(),'');
             await page.locator('#sport-ski').click(); await frameInput('searchInput',''); await headerValue('');
+            await page.waitForFunction(()=>!document.getElementById('shellSearch').disabled);
             await page.evaluate(() => document.getElementById('sportPanel').focus());
             await page.keyboard.press('/'); assert(await header.evaluate(node => document.activeElement === node));
             await page.goto(base + '/empty.html?sport=surf');
@@ -119,7 +120,7 @@ async function main() {
             assert.equal(await header.inputValue(),'');
             await page.locator('#sport-skate').click();
             await frameInput('searchInput',''); await headerValue('');
-            assert(await header.isEnabled());
+            await page.waitForFunction(()=>!document.getElementById('shellSearch').disabled);
             assert.deepEqual(errors,[]);
             // Direct catalog links retain their original standalone search UI.
             await page.goto(base + '/sale_items_chart.html');
