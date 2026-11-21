@@ -4,7 +4,7 @@ Owner, 2026-11-21. House rule on every sport: **Brand first, then that heading's
 
 This file is the order and the category scope for Claude. Field definitions and extraction stay in `sports/<sport>/facets.py` (and `sports/protection.py` where a sport shares those fields). The page does not reorder sections and does not override a field's categories.
 
-What the page already does for Ski: each technical section gets `data-for` from the field's categories (every Ski menu heading when the category list is empty). `syncTypeSections` then hides those sections on All, and shows them once a heading is selected. Brand, Stores, Price & discount, and the deal sections (Deal quality, Deal type, Price-drop window) stay up on All. BMX and MTB sections are unmarked, so their All list is unchanged. When Claude edits a Ski field's categories, All-vs-heading visibility follows on the next page build. **Order:** `sports/ski/facets.py` `ORDER` lists each heading's sections in order. `sports/facets.py` `sidebar()` stamps each section with `data-rank="Skis:2 Boots:6 …"`, its position on each heading that ranks it. The page sorts by the chosen heading (Codex task 19 in `docs/codex-backlog-2026-11-07.md`). Until that lands, sections keep the `FIELDS` tuple order.
+What the page already does for Ski and BMX: each technical section gets `data-for` from the field's categories (every menu heading of that sport when the category list is empty). `syncTypeSections` then hides those sections on All, and shows them once a heading is selected. Brand, Stores, Price & discount, and the deal sections (Deal quality, Deal type, Price-drop window) stay up on All. BMX Product kind is left unmarked, so All keeps that filter. MTB sections are unmarked, so its All list is unchanged. When Claude edits a Ski or BMX field's categories, All-vs-heading visibility follows on the next page build. **Order:** `sports/ski/facets.py` `ORDER` lists each heading's sections in order. `sports/facets.py` `sidebar()` stamps each section with `data-rank="Skis:2 Boots:6 …"`, its position on each heading that ranks it. The page sorts by the chosen heading (Codex task 19 in `docs/codex-backlog-2026-11-07.md`). Until that lands, sections keep the `FIELDS` tuple order.
 
 Coverage below is `catalogs/ski/previous_data.json` on 2026-11-21, counted after `sports.headings.heading` (stored parts stay Protection; the page shows Goggles and Helmets). A listing counts when `technical_specs` has a non-empty value. The live page also drops anything under the 10% minimum, so its totals sit a little lower (3,216 deals that day). Counts will move with the next scrape.
 
@@ -162,7 +162,158 @@ Color, wherever it is added, is one field shared by the headings above (Skis, Bo
 
 ## BMX, modelled on Dan's Comp
 
-Placeholder for Claude. Same house rule: Brand, then the heading's size filter, then the next most useful filters. Dan's Comp is the model (`docs/multi-sport-plan.md` §3). The BMX fields already live in `sports/bmx/facets.py` (`wheel_size`, `kind`, hub type, toptube, drive side, and the rest). This PR does not change their order or their All list.
+Menu headings: Bikes, Frames & Forks, Bars & Steering, Drivetrain, Wheels & Hubs, Tires & Tubes, Seats & Posts, Brakes, Helmets, Goggles, Gloves, Protection, Packs.
+
+House rule here: **Brand, then that heading's size filter, then the next most useful specs, Condition last.** No Gender on BMX.
+
+Names follow Dan's Comp. The live Dan's Comp sidebar could not be read (Cloudflare), so the names are the ones in `docs/multi-sport-plan.md` section 3.
+
+Coverage is `catalogs/bmx/previous_data.json` on 2026-11-21, counted after `sports.headings.heading` (stored parts stay Steering, Wheels, Wheel Parts, Tires, Seating, Braking; the page shows the headings above). 1,730 listings. A listing counts when `technical_specs` has a non-empty value. The live page also drops anything under the 10% minimum, so its totals sit a little lower. Counts will move with the next scrape.
+
+What the page does now: each spec section except Product kind gets `data-for`. All keeps Brand, Stores, Price & discount, the deal sections, and Product kind. A heading shows the sections whose categories include it. Material, Color, and Condition have empty categories, so they hide on All and show under every heading (a heading with no values still folds that section away). Order is still the one `FIELDS` tuple, on every heading:
+
+Product kind, Wheel size, Condition, Hub Type, Toptube Length, Drive Side, Bar Rise, Crank Length, Axle, Material, Color, then Protects, Helmet type, Certification, Rotational protection, Size, Age.
+
+Several category lists still name the old store parts next to the heading (`Steering` with `Bars & Steering`, `Wheels` and `Wheel Parts` with `Wheels & Hubs`, `Tires` with `Tires & Tubes`). The menu heading is in the list, so the section shows. Claude can drop the old names when editing scope.
+
+Per-heading order is not in this PR. One `FIELDS` tuple cannot hold it (Ski already needed `ORDER`). Claude adds a BMX `ORDER` in `sports/bmx/facets.py` on the same shape as Ski. `sidebar()` will stamp `data-rank` from that. Until then, sections stay in the tuple order above.
+
+Product kind (`kind` / `bmx_kind`, labelled "Product kind") stays on All and on every heading. That is the type filter. Chips for it above the results are Codex task 4 and are not part of this list.
+
+### Bikes (17)
+
+Toptube Length should show once a wheel size is chosen. The page does not do that yet: under Bikes it shows with the other Bikes sections as soon as the heading is selected.
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Wheel size | `wheel_size` / `bmx_wheel` | 12, 14, 16, 18, 20, 22, 24, 26, 29 | Frames & Forks, Wheels & Hubs, Tires & Tubes. Today also the old names Wheels and Tires | 15 / 17 | reorder only |
+| 3 | Toptube Length | `top_tube` / `bmx_tt` | 18"–22.13" in this catalog | Frames & Forks | 5 / 17 | reorder only. Youth lengths: needs new data field from Claude. `sports/bmx/dans.py` keeps only 18–22.5"; fill `top_tube`, do not add a second key. Show it only after a wheel size is chosen |
+| 4 | Hub Type | `hub_type` / `bmx_hub` | Cassette, Freecoaster | Wheels & Hubs. Today also Wheels and Wheel Parts | 0 / 17 | exists. The scope already includes Bikes. Hidden here while no bike states one |
+| 5 | Drive Side | `drive_side` / `bmx_drive` | Right (RHD), Left (LHD). Universal is not a value yet | Wheels & Hubs, Drivetrain. Today also Wheels and Wheel Parts | 0 / 17 | reorder only. Universal: needs new data field from Claude, on this key |
+| 6 | Material | `material` / `bmx_material` | Chromoly, Carbon, Aluminum, Titanium, Hi-Ten, Nylon / Plastic | Frames & Forks, Wheels & Hubs. Empty categories, so every heading today | 0 / 17 | reorder only. Claude limits it to the headings that list it |
+| 7 | Color | `color` / `bmx_color` | Black, Chrome / Polished, Red, Blue, and the rest of the colour list | every heading. Empty categories | 14 / 17 | reorder only. Stays on every heading. Claude can leave the category list empty |
+| 8 | Condition | `condition` / `bmx_condition` | Demo, Scratch & Dent | no other heading in this list. Empty categories, so every heading today | 0 / 17 | reorder only. Last. Claude limits it to Bikes. Hidden while nothing is a demo |
+
+Axle is on Bikes today (3 / 17: 14mm, 3/8") because `axle` includes Bikes. The desired lists do not put it here. Claude should drop Bikes from `axle`.
+
+### Frames & Forks (130)
+
+Kind is the existing Product kind field (Frames 62, Forks 68).
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Toptube Length | `top_tube` / `bmx_tt` | 20.5", 20.75", 21", 21.25" | Bikes | 49 / 130 | reorder only. Same youth-length gap as Bikes. This heading's size filter, so it leads |
+| 3 | Kind | `kind` / `bmx_kind` | Frames, Forks | every heading today, and All | 130 / 130 | exists. Stays on All |
+| 4 | Wheel size | `wheel_size` / `bmx_wheel` | 18, 20, 22, 24 | Bikes, Wheels & Hubs, Tires & Tubes | 88 / 130 | reorder only |
+| 5 | Offset | — | fork offset | Frames & Forks | 0 | needs new data field from Claude |
+| 6 | Dropouts/Axle | `axle` / `bmx_axle` | 10mm, 3/8". 14mm is on the same key, mostly hubs | Wheels & Hubs. Today also Bikes, Wheels, Wheel Parts | 4 / 130 | needs new data field from Claude. The key exists; 4 listings is too thin for a fork dropout filter. Fill `axle` (10mm / 3/8" on forks), do not add a second key |
+| 7 | Chainstay | — | chainstay length | Frames & Forks | 0 | needs new data field from Claude |
+| 8 | Bottom Bracket | — | Mid, Spanish, American | Frames & Forks | 0 | needs new data field from Claude |
+| 9 | Brake Mounts | — | the mounts a frame or fork states | Frames & Forks | 0 | needs new data field from Claude |
+| 10 | Material | `material` / `bmx_material` | Carbon, Aluminum | Bikes, Wheels & Hubs | 8 / 130 | reorder only. Scope as on Bikes |
+| 11 | Color | `color` / `bmx_color` | Black, Chrome / Polished, and the rest | every heading | 105 / 130 | reorder only |
+
+Condition is not on this heading. It leaves once Claude limits Condition to Bikes.
+
+### Bars & Steering (212)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Kind | `kind` / `bmx_kind` | Handlebars, Stems, Headsets, Grips & Bar Ends, Detanglers | every heading today, and All | 210 / 212 | exists. Stays on All |
+| 3 | Bar Rise | `bar_rise` / `bmx_rise` | 8", 8.5", 9", 9.5", 11" | Bars & Steering. Today also the old name Steering | 37 / 212 | reorder only |
+| 4 | Width | — | bar width | Bars & Steering | 0 | needs new data field from Claude |
+| 5 | Backsweep | — | backsweep | Bars & Steering | 0 | needs new data field from Claude |
+| 6 | 2-piece/4-piece | — | 2-piece, 4-piece | Bars & Steering | 0 | needs new data field from Claude |
+| 7 | Stem type & Reach | — | Top Load, Front Load, and reach | Bars & Steering | 0 | needs new data field from Claude |
+| 8 | Color | `color` / `bmx_color` | Black, Red, Chrome / Polished, and the rest | every heading | 194 / 212 | reorder only |
+
+### Drivetrain (182)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Kind | `kind` / `bmx_kind` | Cranks, Sprockets, Bottom Brackets, Chains, Pedals | every heading today, and All | 181 / 182 | exists. Stays on All. Kind is the splitter until the size filters below have data |
+| 3 | Crank Length | `crank_length` / `bmx_crank` | 175 mm, the only value in this catalog | Drivetrain | 1 / 182 | needs new data field from Claude. The key exists. `dans.py` only reads 150–185 mm, and one listing is too thin. Fill `crank_length`, do not add a second key. This is the size filter once it has data |
+| 4 | Spindle | — | 19mm, 22mm, 24mm | Drivetrain | 0 | needs new data field from Claude |
+| 5 | Drive Side | `drive_side` / `bmx_drive` | Right (RHD), Left (LHD). Universal is not a value yet | Bikes, Wheels & Hubs | 3 / 182 | reorder only. Universal on this key, as on Bikes |
+| 6 | Sprocket teeth | — | tooth count | Drivetrain | 0 | needs new data field from Claude |
+| 7 | Bolt/Spline | — | Bolt, Spline | Drivetrain | 0 | needs new data field from Claude |
+| 8 | Color | `color` / `bmx_color` | Black, Chrome / Polished, and the rest | every heading | 115 / 182 | reorder only |
+
+### Wheels & Hubs (416)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Wheel size | `wheel_size` / `bmx_wheel` | 12 through 29, mostly 20 | Bikes, Frames & Forks, Tires & Tubes | 79 / 416 | reorder only |
+| 3 | Kind | `kind` / `bmx_kind` | Hubs, Rims & Rim Strips, Spokes & Nipples, Pegs, Hub Guards, Wheels, Drivers & Freewheels | every heading today, and All | 416 / 416 | exists. Stays on All |
+| 4 | Hub Type | `hub_type` / `bmx_hub` | Freecoaster, Cassette | Bikes | 88 / 416 | reorder only |
+| 5 | Driver Teeth | — | 9t and the other counts | Wheels & Hubs | 0 | needs new data field from Claude |
+| 6 | Drive Side | `drive_side` / `bmx_drive` | Right (RHD), Left (LHD). Universal is not a value yet | Bikes, Drivetrain | 92 / 416 | reorder only. Universal on this key |
+| 7 | Axle | `axle` / `bmx_axle` | 14mm, 10mm, 3/8" | Frames & Forks, as Dropouts/Axle | 33 / 416 | reorder only |
+| 8 | Holes | — | rim hole count | Wheels & Hubs | 0 | needs new data field from Claude |
+| 9 | Material | `material` / `bmx_material` | Nylon / Plastic, Carbon, Titanium, Chromoly, Aluminum | Bikes, Frames & Forks | 51 / 416 | reorder only. Scope as on Bikes |
+| 10 | Color | `color` / `bmx_color` | Black, Chrome / Polished, Oil Slick, and the rest | every heading | 270 / 416 | reorder only |
+
+### Tires & Tubes (119)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Size (wheel x width) | `wheel_size` / `bmx_wheel` for the wheel inches | 12, 16, 18, 20, 24, 29. Width (20 × 2.3–2.5) is not read | Bikes, Frames & Forks, Wheels & Hubs, as Wheel size | 68 / 119 have a wheel inch. Width 0 | reorder only for the wheel inch. Width: needs new data field from Claude. Do not add a second wheel-size key |
+| 3 | Bead | — | bead | Tires & Tubes | 0 | needs new data field from Claude |
+| 4 | Tread | — | tread | Tires & Tubes | 0 | needs new data field from Claude |
+| 5 | PSI | — | pressure | Tires & Tubes | 0 | needs new data field from Claude |
+| 6 | Color | `color` / `bmx_color` | Black, and a few others | every heading | 47 / 119 | reorder only |
+
+Product kind still shows here (Tires, Tubes) because it is unscoped. This list does not add a Kind row. It stays until someone scopes `kind`.
+
+### Seats & Posts (113)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Kind | `kind` / `bmx_kind` | Seats, Seat Posts, Seat Post Clamps | every heading today, and All | 109 / 113 | exists. Stays on All |
+| 3 | Style | — | Pivotal, Tripod, Railed | Seats & Posts | 0 | needs new data field from Claude |
+| 4 | Color | `color` / `bmx_color` | Black, and the rest | every heading | 63 / 113 | reorder only |
+
+### Brakes (40)
+
+| # | Filter | Field | Examples | Also on | Coverage | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | every heading | all listings | exists |
+| 2 | Kind | `kind` / `bmx_kind` | Brakes & Accessories | every heading today, and All | 40 / 40 | exists. Stays on All |
+| 3 | Color | `color` / `bmx_color` | Black, and the rest | every heading | 23 / 40 | reorder only |
+
+### Helmets, Goggles, Gloves, Protection
+
+One order for these four. Helmet-only rows stay in the shared protection fields (`protects`, `helmet_style`, `certification`, `rotational`, `prot_size`, `age`), scoped today to Protection, Helmets, Goggles, and Gloves. A heading with none of a field's values folds that section away.
+
+| # | Filter | Field | Examples | Coverage | Status |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Brand | page Brand section | shop brands | all listings | exists |
+| 2 | Size | `prot_size` / `bmx_psize` | XS, S, M, L, XL, XXL | Helmets 117 / 129, Gloves 29 / 80, Protection 189 / 264, Goggles 0 / 6 | reorder only |
+| 3 | Age | `age` / `bmx_age` | Adult, Youth, Kids | Helmets 129 / 129, Gloves 80 / 80, Protection 264 / 264, Goggles 6 / 6 | reorder only |
+| 4 | Protects | `protects` / `bmx_protects` | Helmets, Knees, Elbows, Shins, and the other body parts | Helmets 129 / 129, Goggles 6 / 6, Gloves 80 / 80, Protection 264 / 264 | reorder only |
+| 5 | Helmet type | `helmet_style` / `bmx_helmet` | Full face, Half shell (skate / BMX) | Helmets 110 / 129. Goggles, Gloves, and Protection 0 | exists. Hidden on a heading that has none |
+| 6 | Certification | `certification` / `bmx_cert` | CPSC, EN 1078, ASTM F2032, EN 1621 | Helmets 77 / 129, Protection 89 / 264. Goggles and Gloves 0 | reorder only |
+| 7 | Rotational | `rotational` / `bmx_rotational` | MIPS, Spherical, Kineticore, SPIN | Helmets 51 / 129. The other three 0 | reorder only |
+| 8 | Color | `color` / `bmx_color` | Black, White, and the rest | Helmets 96 / 129, Gloves 11 / 80, Protection 125 / 264, Goggles 1 / 6 | reorder only |
+
+Goggles are 6 listings, all Adult, and Protects is Goggles or Goggle lenses. Size, Helmet type, Certification, and Rotational do not split that list. They stay in the shared scope; the empty fold hides them here.
+
+### Packs (22)
+
+No spec field has a value except Color on 2 listings. The heading stays Brand, then Color. Color is the shared `color` field, not a new key.
+
+### What Claude still extracts
+
+Width, Backsweep, piece count (2-piece/4-piece), Offset, Dropouts as the fork reading of `axle`, Chainstay, Bottom Bracket, Brake Mounts, Stem type and reach, Spindle, sprocket teeth, Bolt/Spline, driver teeth, rim holes, tire width plus bead, tread, and PSI, seat style, Universal on `drive_side`, broader crank lengths on `crank_length`, youth top tubes below the 18–22.5" `dans.py` keeps, scoping Material and Condition (Color stays on every heading), and per-heading order as a BMX `ORDER`. Do not add a second key when one of these fields already exists.
+
+This PR does not change that order, and it does not add coverage chips or Kind chips above the results.
 
 ## MTB, modelled on evo
 
