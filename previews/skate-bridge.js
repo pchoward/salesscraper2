@@ -264,3 +264,24 @@
     window.addEventListener('load',mount,{once:true});
     if(catalogDocument.readyState==='loading')catalogDocument.addEventListener('DOMContentLoaded',mount,{once:true});else mount();
 })();
+
+// Reveal the catalog only after the existing bridge and catalog UI are ready.
+(function () {
+    if (!window.shredBridgeInstalled) return;
+    const catalogDocument = document;
+    function reveal() {
+        if (!catalogDocument.documentElement.classList.contains("shred-embedded")) return;
+        const explore = catalogDocument.getElementById("inventory");
+        const legacyReady = catalogDocument.readyState === "complete" && typeof window.dealRows === "function";
+        if (catalogDocument.shredCatalogReady || explore?.firstElementChild || legacyReady) {
+            window.parent.shredApp?.catalogReady?.(window, catalogDocument);
+        }
+    }
+    catalogDocument.addEventListener("shreddeals:catalog-ready", reveal, {once:true});
+    window.addEventListener("load", reveal, {once:true});
+    if (catalogDocument.readyState === "loading") {
+        catalogDocument.addEventListener("DOMContentLoaded", reveal, {once:true});
+    } else {
+        reveal();
+    }
+})();

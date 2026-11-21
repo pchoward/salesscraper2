@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Security-Policy" content="script-src 'self'; connect-src 'self'; frame-src 'self'; form-action 'none'; object-src 'none'; base-uri 'none'">
 <title>ShredDeals development preview</title><link rel="stylesheet" href="navigation.css">
 <script type="application/json" id="sportConfig">__CONFIG__</script><script src="navigation.js" defer></script></head>
-<body><a class="skip" href="#sportPanel">Skip navigation</a>
+<body class="catalog-loading"><a class="skip" href="#sportPanel">Skip navigation</a>
 <header class="shell-header"><div class="top-row"><button id="brandHome" class="brand" type="button">ShredDeals</button>
 <div class="shell-search" role="search"><span class="shell-search-icon" aria-hidden="true"></span><input id="shellSearch" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="shellSuggestions" autocomplete="off" spellcheck="false" placeholder="Search deals, gear, brands or stores…" aria-label="Search current catalog"><div id="shellSuggestions" class="shell-suggestions" role="listbox" aria-label="Search suggestions" hidden></div></div>
 <div class="my-stuff"><button id="myStuffToggle" type="button" aria-expanded="false" aria-controls="myStuffPanel">My stuff</button>
@@ -20,7 +20,13 @@
 <div id="myStuffBackdrop" hidden></div>
 <main id="sportPanel" role="tabpanel" tabindex="-1"><section id="catalogPanel">
 <p id="contextNote" role="status" aria-live="polite"></p>
+<div id="catalogViewport">
+<div id="catalogLoading" role="status">
+<p>Loading catalog…</p>
+<div class="catalog-skeleton" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+</div>
 <iframe id="skateFrame" title="SkateDeals — existing catalog and controls" hidden></iframe>
+</div>
 <section id="comingSoon" hidden><span class="empty-kicker">CATALOG PREVIEW</span><h1 id="emptyTitle"></h1><p class="empty-lead">Coming soon / no catalog yet</p>
 <p id="emptyDescription"></p><p class="empty-detail">No products, price histories or alerts are active for this sport. Skate deals stay in Skate.</p>
 <button id="backToSkate" type="button">Browse Skate deals</button></section>

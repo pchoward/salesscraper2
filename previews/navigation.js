@@ -102,6 +102,9 @@
         const doc = win.document;
         const sportTabs = doc.getElementById("sportTabs");
         const frame = doc.getElementById("skateFrame");
+        const viewport = doc.getElementById("catalogViewport");
+        const loadingStatus = doc.getElementById("catalogLoading");
+        let departingDocument;
         const empty = doc.getElementById("comingSoon");
         const brand = doc.getElementById("brandHome");
         const shellSearch = doc.getElementById("shellSearch");
@@ -229,7 +232,7 @@
             const current = state(url, config);
             const params = new URL(url).searchParams;
             shellSearch.value = hasCatalog(current.sport) ? params.get(current.scope ? 'ex_query' : 'q') || '' : '';
-            shellSearch.disabled = !hasCatalog(current.sport);
+            shellSearch.disabled = !hasCatalog(current.sport) || frame.hasAttribute("data-loading");
         }
         function sendSearch() {
             if (frame.hidden || !frame.contentWindow) return;
@@ -527,6 +530,28 @@
                 return button;
             }));
         }
+        function paintCatalogLoading(loading) {
+            doc.body.classList.toggle("catalog-loading", loading);
+            if (loadingStatus) loadingStatus.hidden = !loading;
+            frame.toggleAttribute("data-loading", loading);
+            frame.inert = loading;
+            frame.setAttribute("aria-hidden", String(frame.hidden || loading));
+            frame.tabIndex = frame.hidden || loading ? -1 : 0;
+            shellSearch.disabled = frame.hidden || loading;
+        }
+        function catalogReady(child, catalogDocument) {
+            // Navigations reuse the iframe's WindowProxy. Only the active
+            // document may reveal the catalog behind the loading state.
+            if (frame.hidden || child !== frame.contentWindow || catalogDocument !== frame.contentDocument ||
+                catalogDocument === departingDocument || !frame.hasAttribute("data-loading")) return false;
+            const current = state(win.location.href, config);
+            const target = catalogURL(win.location.href, config, current.sport.id);
+            const actual = new URL(catalogDocument.URL);
+            if (actual.origin !== target.origin || actual.pathname !== target.pathname) return false;
+            departingDocument = null;
+            paintCatalogLoading(false);
+            return true;
+        }
         function restoreFrame(historyState) {
             const sport = state(win.location.href, config).sport;
             if (!hasCatalog(sport) || !frame.dataset.ready) return;
@@ -557,9 +582,8 @@
             doc.getElementById("sportPanel").setAttribute("aria-labelledby", "sport-" + current.sport.id);
             doc.title = config.brand.name + " · " + current.sport.label + (config.production ? "" : " preview");
             const skate = hasCatalog(current.sport);
+            if (viewport) viewport.hidden = !skate;
             frame.hidden = !skate;
-            frame.setAttribute("aria-hidden", String(!skate));
-            frame.tabIndex = skate ? 0 : -1;
             empty.hidden = skate;
             const note = doc.getElementById("contextNote");
             note.hidden = !!config.production;
@@ -569,7 +593,9 @@
                 if (frame.dataset.currentURL !== target) {
                     delete frame.dataset.ready;
                     const loaded = frame.dataset.currentURL;
+                    departingDocument = frame.contentDocument;
                     frame.dataset.currentURL = target;
+                    paintCatalogLoading(true);
                     // Swapping catalogs (Skate to BMX) must not add a history
                     // entry of its own, or Back would only change the frame.
                     let replaced = false;
@@ -577,8 +603,11 @@
                         try { frame.contentWindow.location.replace(target); replaced = true; } catch (_) { /* not loaded yet */ }
                     }
                     if (!replaced) frame.src = target;
+                } else {
+                    paintCatalogLoading(frame.hasAttribute("data-loading"));
                 }
             } else {
+                paintCatalogLoading(false);
                 note.textContent = config.production ? "" : current.sport.label + " · navigation prototype";
                 doc.getElementById("emptyTitle").textContent = current.sport.label;
                 doc.getElementById("emptyDescription").textContent = config.production ? "Explore Skate deals while we add " + current.sport.label + " deals." : "Inventory for " + current.sport.label + " has not been connected.";
@@ -641,7 +670,7 @@
         brand.addEventListener("click", () => choose("skate", "sport"));
         doc.getElementById("backToSkate").addEventListener("click", () => choose("skate", "sport"));
         render();
-        return { render, choose, chooseView, state: () => state(win.location.href, config), closeCategories, registerCategories, openPhoneFilters, closePhoneFilters, bridgeVersion: config.bridgeVersion };
+        return { render, choose, chooseView, state: () => state(win.location.href, config), closeCategories, registerCategories, catalogReady, openPhoneFilters, closePhoneFilters, bridgeVersion: config.bridgeVersion };
     }
     return { state, navigate, categoryURL, baseCategoryCounts, skateURL, catalogURL, mergeSkateURL, nextIndex, mount };
 });
