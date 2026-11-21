@@ -8,8 +8,8 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
  fs.mkdirSync(out,{recursive:true});const{server,base}=await serve(site);
  const browser=await chromium.launch({executablePath:process.env.BROWSER_BINARY,args:['--no-sandbox','--disable-dev-shm-usage']});const results=[];
  try{
- for(const [width,height] of [[390,844],[375,812],[320,640],[1440,950]])for(const [sport,category] of Object.entries(sports)){
-  if(width===375&&sport!=='skate')continue;
+ for(const [width,height] of [[430,932],[390,844],[375,812],[320,640],[1440,950]])for(const [sport,category] of Object.entries(sports)){
+  if([375,430].includes(width)&&sport!=='skate')continue;
   console.log(capture?'Before phone filters':'Phone filters',sport,width);
   const page=await browser.newPage({viewport:{width,height},hasTouch:width<640,isMobile:width<640});
   const errors=[];page.on('pageerror',e=>errors.push(String(e)));
@@ -39,6 +39,48 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
    if(!capture){assert.equal(metrics['#cardGrid .deal-card .product-name'].clamp,'2');assert.equal(await frame.locator('#brandList .phone-brand-hidden').count(),0);}
    assert.deepEqual(errors,[]);results.push({sport,width,status:'pass',desktopUnchanged:!capture&&!!before});await page.close();continue;
   }
+  if(!capture){
+   const menu=page.getByRole('button',{name:'Site navigation'});
+   assert(await menu.isVisible());
+   const header=await page.evaluate(()=>['brandHome','shellSearch','headerMenuToggle'].map(id=>{
+    const {left,right,top,bottom,height,width}=document.getElementById(id).getBoundingClientRect();
+    return {left,right,top,bottom,height,width};
+   }));
+   for(const [i,control] of header.entries()){
+    assert(control.left>=0&&control.right<=width&&control.height>=44);
+    if(i)assert(header[i-1].right<=control.left&&Math.abs(header[i-1].top-control.top)<=1);
+   }
+   assert(header[1].width>=100,'search remains usable at narrow widths');
+   assert.equal(await page.locator('.catalog-sections').isVisible(),false);
+   if(sport==='skate'){
+    await menu.focus();
+    await page.keyboard.press('Enter');
+    const sections=page.getByRole('navigation',{name:'Catalog sections'});
+    await sections.getByRole('button',{name:'Deals',exact:true}).waitFor();
+    assert.equal(await sections.getByRole('button',{name:'Deals',exact:true}).getAttribute('aria-pressed'),'true');
+    for(const name of ['Track','Insights','Subscribe'])assert(await sections.getByRole('button',{name}).isVisible());
+    await page.keyboard.press('Escape');
+    assert.equal(await menu.getAttribute('aria-expanded'),'false');
+    await menu.click();
+    await sections.getByRole('button',{name:'Track'}).click();
+    assert.equal(await menu.getAttribute('aria-expanded'),'false');
+    await menu.click();
+    await sections.getByRole('button',{name:'Track'}).and(page.locator('[aria-pressed=true]')).waitFor();
+    await sections.getByRole('button',{name:'Deals',exact:true}).click();
+    if(width===430){
+     await menu.click();
+     await sections.getByRole('button',{name:'Insights'}).click();
+     await menu.click();
+     await sections.getByRole('button',{name:'Insights'}).and(page.locator('[aria-pressed=true]')).waitFor();
+     await sections.getByRole('button',{name:'Deals',exact:true}).click();
+     await menu.click();
+     await sections.getByRole('button',{name:/^Subscribe/}).click();
+     await frame.locator('#alertsRoot').waitFor({state:'visible'});
+     assert.equal(await menu.getAttribute('aria-expanded'),'false');
+     await frame.locator('#alertsRoot .alerts-close').click();
+    }
+   }
+  }
   const sort=await frame.locator('#sortSelect').boundingBox(),group=await frame.locator('#groupToggle').boundingBox();
   if(!capture){
    const filter=await frame.locator('#filtersOpen').boundingBox();
@@ -46,6 +88,9 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
    assert(filter&&filter.height>=44,'Filters keeps a comfortable touch target');
    assert(group&&group.height>=44,'Group keeps a comfortable touch target');
    assert(sort.width<=109&&sort.height>=44,'Sort is compact and keeps its touch target');
+   const sortControl=frame.locator('#sortSelect');
+   assert.equal(await sortControl.locator('option').count(),12);
+   if(await sortControl.inputValue()==='discount')assert(sort.width<=72,'Short sort label does not reserve unused width');
    assert(Math.abs(sort.y-group.y)<=1&&Math.abs(sort.y-filter.y)<=1,'browse controls share one row');
    assert(count.y>=sort.y&&count.y+count.height<=sort.y+sort.height,'result count shares the toolbar row');
    const controls=[count,sort,group,filter];

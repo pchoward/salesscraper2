@@ -36,7 +36,7 @@
     if (!window.shredBridgeInstalled) return;
     function mountHeader() {
         const parent = window.parent.document;
-        const host = parent.querySelector('.top-row');
+        const host = parent.getElementById('headerMenu');
         const links = document.querySelector('.topnav-links');
         if (!host || !links) return;
         // Publication owns enabled scopes; rebuilt Deals pages need no injected markup.
@@ -76,7 +76,7 @@
                 }
             });
         }
-        host.appendChild(nav);
+        host.prepend(nav);
         const sourceObserver = new MutationObserver(sync);
         sourceObserver.observe(links, {subtree:true, childList:true, attributes:true, characterData:true});
         const frameObserver = new MutationObserver(sync);

@@ -20,8 +20,9 @@ async function main() {
             page.on('response', response => { if (response.url().startsWith(base) && response.status() >= 400) failures.push(response.url()); }); page.on('pageerror', e => errors.push(String(e)));
             await page.route('**/*', route => new URL(route.request().url()).origin === base ? route.continue() : route.abort());
             await page.goto(base + prefix + '/index.html?sport=' + sport);
-            await page.locator('[data-catalog-control="navExplore"]').waitFor();
+            await page.locator('[data-catalog-control="navExplore"]').waitFor({state:'attached'});
             assert(!page.url().includes('view=explore'), 'Deals is default');
+            if(width<=640) await page.getByRole('button',{name:'Site navigation'}).click();
             await page.locator('[data-catalog-control="navExplore"]').click();
             await page.waitForURL('**view=explore**');
             let frame = await (await page.waitForSelector('#skateFrame')).contentFrame();
@@ -68,9 +69,10 @@ async function main() {
             assert(await frame.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
             assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
             if (width === 1440 || width === 390) await page.screenshot({path:path.join(output, `${sport}-${width}.png`)});
+            if(width<=640) await page.getByRole('button',{name:'Site navigation'}).click();
             await page.locator('[data-catalog-control="navDeals"]').click();
             await page.waitForURL(url => !url.searchParams.has('view'));
-            await page.locator('[data-catalog-control="navExplore"]').waitFor();
+            await page.locator('[data-catalog-control="navExplore"]').waitFor({state:'attached'});
             await page.goBack();
             await page.waitForURL('**view=explore**');
             frame = await (await page.$('#skateFrame')).contentFrame();

@@ -172,12 +172,13 @@ async function main(){
        const photo=rect('.card-photo'),quick=rect('.card-quick'),store=rect('.store-mark');
        const alert=rect('.card-alert'),star=rect('.star');
        return {photoBottom:photo.bottom,quickTop:quick.top,quickHeight:quick.height,
-        storeRight:store.right,quickLeft:quick.left,photoTop:photo.top,
-        alertBottom:alert?.height?alert.bottom:0,starBottom:star.bottom};
+        storeBottom:store.bottom, quickLeft:quick.left, alertRight:alert?.right || 0,
+        alertTop:alert?.height?alert.top:quick.top, starTop:star.top, starRight:star.right};
       });
       assert(layout.quickTop>=layout.photoBottom&&layout.quickHeight>=36);
-      assert(layout.quickLeft>=layout.storeRight,'Quick View does not cover the retailer');
-      assert(Math.max(layout.alertBottom,layout.starBottom)<=layout.photoTop);
+      assert(layout.quickTop>=layout.storeBottom,'Quick View does not cover the retailer');
+      assert(layout.alertTop===layout.quickTop&&layout.starTop===layout.quickTop);
+      assert(Math.max(layout.alertRight,layout.starRight)<=layout.quickLeft);
      }
      assert.equal(await frame.locator('#searchInput').getAttribute('aria-expanded'),'false');
      await card.hover();const dataset=await card.evaluate(n=>({...n.dataset}));
