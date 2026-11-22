@@ -87,6 +87,16 @@ async function main(){
     await scenario('Category, store, brand, search, sort and ranges',async()=>{
      await control(frame,'partSelect',category);
      const baseRows=await rows(frame);assert(baseRows.length>0);assert(baseRows.every(r=>r.part===category));
+     if(sport==='skate'){
+      await page.waitForFunction(n=>Number(document.getElementById('categoryCount').textContent)===n,baseRows.length);
+      const stores=await frame.locator('#storeFilters button[data-store]').evaluateAll(nodes=>Object.fromEntries(nodes.map(node=>[node.dataset.store,Number(node.dataset.count)])));
+      const observed=Object.create(null);
+      for(const row of baseRows)observed[row.store]=(observed[row.store]||0)+1;
+      for(const [store,count] of Object.entries(observed))assert.equal(stores[store],count,store+' deck count');
+      await frame.locator('#sortSelect').selectOption('discount');
+      const discounts=(await rows(frame)).filter(row=>row.discount!=='null').map(row=>Number(row.discount));
+      assert.deepEqual(discounts,[...discounts].sort((a,b)=>b-a));
+     }
      const sample=baseRows[0];
      await control(frame,'storeSelect',sample.store);await control(frame,'brandSelect',sample.brand);
      await page.locator('#shellSearch').fill(sample.brand);
@@ -171,10 +181,18 @@ async function main(){
        const rect=selector=>node.querySelector(selector)?.getBoundingClientRect();
        const photo=rect('.card-photo'),quick=rect('.card-quick'),store=rect('.store-mark');
        const alert=rect('.card-alert'),star=rect('.star');
-       return {photoBottom:photo.bottom,quickTop:quick.top,quickHeight:quick.height,
+       const labels=[...node.querySelectorAll('.card-alert,.card-quick')].filter(button=>button.getClientRects().length).map(button=>{
+        const text=document.createRange();text.selectNodeContents(button);
+        return {lines:text.getClientRects().length, fits:text.getBoundingClientRect().width<=button.clientWidth};
+       });
+       const now=rect('.now-price'), offer=rect('.card-offer');
+       return {labels,priceTogether:now.top<offer.bottom&&offer.top<now.bottom,
+        photoBottom:photo.bottom,quickTop:quick.top,quickHeight:quick.height,
         storeBottom:store.bottom, quickLeft:quick.left, alertRight:alert?.right || 0,
         alertTop:alert?.height?alert.top:quick.top, starTop:star.top, starRight:star.right};
       });
+      assert(layout.labels.every(label=>label.lines===1&&label.fits),'action labels fit on a single line');
+      assert(layout.priceTogether,'current price and discount share the same row');
       assert(layout.quickTop>=layout.photoBottom&&layout.quickHeight>=36);
       assert(layout.quickTop>=layout.storeBottom,'Quick View does not cover the retailer');
       assert(layout.alertTop===layout.quickTop&&layout.starTop===layout.quickTop);
@@ -182,6 +200,13 @@ async function main(){
      }
      assert.equal(await frame.locator('#searchInput').getAttribute('aria-expanded'),'false');
      await card.hover();const dataset=await card.evaluate(n=>({...n.dataset}));
+     const current=await card.locator('.now-price').textContent();
+     assert.equal(Number(current.replace(/[^0-9.]/g,'')),Number(dataset.price));
+     if(sport==='skate'&&Number(dataset.original)>0){
+      const label=await card.locator('.card-offer .card-off').textContent();
+      const markdown=100*(Number(dataset.original)-Number(dataset.price))/Number(dataset.original);
+      assert(Math.abs(Number(label.match(/[-\d]+(?=%)/)?.[0])-markdown)<=0.51,'displayed discount matches the list and sale prices');
+     }
      const link=card.locator('.card-store-link');assert.equal(await link.getAttribute('href'),dataset.url);assert.equal(await link.getAttribute('target'),'_blank');
      await card.locator('.card-quick').click();await frame.waitForSelector('#quickView:not([hidden])');
      assert((await frame.locator('#quickView').textContent()).includes(dataset.name));
@@ -191,6 +216,13 @@ async function main(){
      assert(await frame.locator('#quickView .history-chart').count()>0||/No tracked|one tracked/i.test(await frame.locator('#quickView').textContent()));
      await page.goBack();await frame.waitForSelector('#quickView[hidden]',{state:'attached'});
      await card.locator('.star').click();assert.equal(await card.locator('.star').getAttribute('aria-pressed'),'true');await card.locator('.star').click();
+     if(sport==='skate'&&width<=640){
+      const alerts=frame.locator('#alertsRoot');
+      await card.locator('.card-alert').press('Enter');
+      await alerts.waitFor();
+      await alerts.locator('.alerts-close').click();
+     }
+     assert.equal(page.context().pages().length,1,'card actions do not open the retailer page');
     });
     await scenario('Grouping, layout, empty deal types and drawer',async()=>{
      assert.equal(await frame.locator('#cardPool .deal-card').count(),0);
