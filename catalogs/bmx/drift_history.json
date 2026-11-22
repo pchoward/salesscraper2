@@ -1,0 +1,796 @@
+{
+  "days": {
+    "2026-11-22": {
+      "fill": {
+        "187 Killer Pads_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.182,
+            "color": 0.818,
+            "image": 1.0,
+            "kind": 1.0,
+            "prot_size": 1.0,
+            "protection_sizes": 1.0,
+            "protection_type": 0.909,
+            "protects": 1.0
+          },
+          "items": 11
+        },
+        "7iDP_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.8,
+            "color": 0.1,
+            "helmet_style": 0.2,
+            "image": 1.0,
+            "kind": 0.5,
+            "material": 0.2,
+            "prot_size": 0.8,
+            "protection_sizes": 0.8,
+            "protection_type": 0.7,
+            "protects": 1.0
+          },
+          "items": 10
+        },
+        "Albe's BMX_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "color": 1.0,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.167,
+            "teeth": 0.25,
+            "width": 0.083
+          },
+          "items": 12
+        },
+        "Albe's BMX_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.429,
+            "color": 0.429,
+            "helmet_style": 0.143,
+            "image": 1.0,
+            "kind": 1.0,
+            "prot_size": 0.214,
+            "protection_sizes": 0.857,
+            "protection_type": 0.857,
+            "protects": 1.0,
+            "width": 0.071
+          },
+          "items": 14
+        },
+        "Albe's BMX_Seating": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.923,
+            "image": 1.0,
+            "kind": 1.0,
+            "seat_style": 0.846
+          },
+          "items": 13
+        },
+        "Albe's BMX_Steering": {
+          "fields": {
+            "bar_rise": 0.1,
+            "brand": 1.0,
+            "color": 0.9,
+            "image": 1.0,
+            "kind": 1.0,
+            "stem_type": 0.1
+          },
+          "items": 10
+        },
+        "Albe's BMX_Wheel Parts": {
+          "fields": {
+            "axle": 0.333,
+            "brand": 1.0,
+            "color": 1.0,
+            "drive_side": 0.333,
+            "hub_type": 0.417,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.167,
+            "wheel_size": 0.25
+          },
+          "items": 12
+        },
+        "Albe's BMX_Wheels": {
+          "fields": {
+            "axle": 0.455,
+            "brand": 1.0,
+            "color": 1.0,
+            "diameter_mm": 0.091,
+            "diameters_mm": 0.091,
+            "drive_side": 0.636,
+            "driver": 0.091,
+            "hub_type": 0.545,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.091,
+            "wheel_size": 1.0
+          },
+          "items": 11
+        },
+        "Bikes Online_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.526,
+            "color": 0.526,
+            "helmet_style": 0.105,
+            "image": 1.0,
+            "kind": 0.895,
+            "prot_size": 0.842,
+            "protection_sizes": 0.842,
+            "protection_type": 0.947,
+            "protects": 1.0,
+            "rotational": 0.105
+          },
+          "items": 19
+        },
+        "CCS_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "image": 1.0,
+            "kind": 1.0,
+            "protection_sizes": 1.0,
+            "protection_type": 1.0,
+            "protects": 1.0
+          },
+          "items": 11
+        },
+        "Cambria_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.598,
+            "color": 0.845,
+            "helmet_style": 0.485,
+            "image": 1.0,
+            "kind": 0.979,
+            "material": 0.052,
+            "prot_size": 0.969,
+            "protection_sizes": 0.969,
+            "protection_type": 1.0,
+            "protects": 1.0,
+            "rotational": 0.237,
+            "width": 0.072
+          },
+          "items": 97
+        },
+        "Colorado Cyclist_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.49,
+            "color": 0.92,
+            "helmet_style": 0.42,
+            "image": 1.0,
+            "kind": 0.93,
+            "material": 0.04,
+            "prot_size": 0.95,
+            "protection_sizes": 0.95,
+            "protection_type": 0.94,
+            "protects": 1.0,
+            "rotational": 0.22
+          },
+          "items": 100
+        },
+        "Demon_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.722,
+            "helmet_style": 0.056,
+            "image": 1.0,
+            "kind": 0.833,
+            "prot_size": 0.722,
+            "protection_sizes": 0.722,
+            "protection_type": 0.833,
+            "protects": 1.0,
+            "rotational": 0.111
+          },
+          "items": 18
+        },
+        "Haro_Seating": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.267,
+            "image": 1.0,
+            "kind": 0.933,
+            "seat_style": 0.4
+          },
+          "items": 15
+        },
+        "Powers BMX_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.37,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.111,
+            "teeth": 0.37,
+            "wheel_size": 0.074,
+            "width": 0.074
+          },
+          "items": 27
+        },
+        "Powers BMX_Frames & Forks": {
+          "fields": {
+            "axle": 0.056,
+            "brand": 1.0,
+            "color": 0.611,
+            "fork_offset": 0.167,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.278,
+            "top_tube": 0.167,
+            "wheel_size": 0.5
+          },
+          "items": 18
+        },
+        "Powers BMX_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "color": 0.435,
+            "image": 1.0,
+            "kind": 1.0,
+            "prot_size": 0.174,
+            "protection_sizes": 0.348,
+            "protection_type": 0.217,
+            "protects": 1.0
+          },
+          "items": 23
+        },
+        "Powers BMX_Seating": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.476,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.095,
+            "seat_style": 0.571
+          },
+          "items": 21
+        },
+        "Powers BMX_Steering": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.636,
+            "image": 1.0,
+            "kind": 1.0,
+            "stem_reach": 0.091,
+            "stem_type": 0.182
+          },
+          "items": 11
+        },
+        "Powers BMX_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.2,
+            "image": 1.0,
+            "kind": 1.0,
+            "tire_width": 0.933,
+            "wheel_size": 0.267,
+            "width": 0.267
+          },
+          "items": 15
+        },
+        "Powers BMX_Wheel Parts": {
+          "fields": {
+            "axle": 0.026,
+            "brand": 1.0,
+            "color": 0.359,
+            "drive_side": 0.128,
+            "driver": 0.026,
+            "hub_holes": 0.308,
+            "hub_type": 0.205,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.077,
+            "wheel_size": 0.026,
+            "width": 0.051
+          },
+          "items": 39
+        },
+        "SoCal_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "currency": 1.0,
+            "image": 1.0,
+            "kind": 1.0,
+            "protection_type": 1.0,
+            "protects": 1.0
+          },
+          "items": 14
+        },
+        "Source BMX US_Braking": {
+          "fields": {
+            "brand": 0.971,
+            "color": 0.543,
+            "drive_side": 0.114,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.057,
+            "width": 0.057
+          },
+          "items": 35
+        },
+        "Source BMX US_Drivetrain": {
+          "fields": {
+            "brand": 0.984,
+            "color": 0.659,
+            "crank_length": 0.106,
+            "drive_side": 0.024,
+            "image": 1.0,
+            "kind": 0.992,
+            "material": 0.098,
+            "teeth": 0.26,
+            "width": 0.024
+          },
+          "items": 123
+        },
+        "Source BMX US_Frames & Forks": {
+          "fields": {
+            "axle": 0.011,
+            "brand": 1.0,
+            "color": 0.886,
+            "fork_offset": 0.307,
+            "image": 0.989,
+            "kind": 1.0,
+            "material": 0.011,
+            "top_tube": 0.42,
+            "wheel_size": 0.761
+          },
+          "items": 88
+        },
+        "Source BMX US_Packs": {
+          "fields": {
+            "brand": 0.944,
+            "color": 0.056,
+            "image": 1.0
+          },
+          "items": 18
+        },
+        "Source BMX US_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.095,
+            "color": 0.095,
+            "helmet_style": 0.074,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.011,
+            "prot_size": 0.547,
+            "protection_sizes": 0.547,
+            "protection_type": 0.474,
+            "protects": 1.0
+          },
+          "items": 95
+        },
+        "Source BMX US_Seating": {
+          "fields": {
+            "brand": 0.98,
+            "color": 0.66,
+            "image": 1.0,
+            "kind": 0.94,
+            "material": 0.08,
+            "seat_style": 0.64
+          },
+          "items": 50
+        },
+        "Source BMX US_Steering": {
+          "fields": {
+            "bar_rise": 0.199,
+            "brand": 0.994,
+            "color": 0.916,
+            "image": 1.0,
+            "kind": 0.988,
+            "material": 0.036,
+            "stem_reach": 0.054,
+            "stem_type": 0.199,
+            "width": 0.084
+          },
+          "items": 166
+        },
+        "Source BMX US_Tires": {
+          "fields": {
+            "brand": 0.774,
+            "color": 0.345,
+            "image": 1.0,
+            "kind": 1.0,
+            "tire_width": 0.06,
+            "wheel_size": 0.631,
+            "width": 0.274
+          },
+          "items": 84
+        },
+        "Source BMX US_Wheel Parts": {
+          "fields": {
+            "axle": 0.045,
+            "brand": 0.607,
+            "color": 0.669,
+            "drive_side": 0.152,
+            "driver": 0.066,
+            "hub_holes": 0.021,
+            "hub_type": 0.148,
+            "image": 0.986,
+            "kind": 1.0,
+            "material": 0.134,
+            "wheel_size": 0.086,
+            "width": 0.031
+          },
+          "items": 290
+        },
+        "Source BMX US_Wheels": {
+          "fields": {
+            "axle": 0.276,
+            "brand": 1.0,
+            "color": 0.586,
+            "drive_side": 0.552,
+            "driver": 0.069,
+            "hub_type": 0.448,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.069,
+            "wheel_size": 0.931,
+            "width": 0.103
+          },
+          "items": 29
+        },
+        "Sparky's Brands_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.588,
+            "crank_length": 0.176,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.176,
+            "teeth": 0.176,
+            "width": 0.118
+          },
+          "items": 17
+        },
+        "Sparky's Brands_Frames & Forks": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.8,
+            "fork_offset": 0.3,
+            "image": 1.0,
+            "kind": 1.0,
+            "top_tube": 0.5,
+            "wheel_size": 0.7
+          },
+          "items": 10
+        },
+        "Sparky's Brands_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.258,
+            "color": 0.097,
+            "helmet_style": 0.065,
+            "image": 1.0,
+            "kind": 1.0,
+            "prot_size": 0.581,
+            "protection_sizes": 0.581,
+            "protection_type": 0.419,
+            "protects": 1.0
+          },
+          "items": 31
+        },
+        "Sparky's Brands_Seating": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.2,
+            "image": 1.0,
+            "kind": 1.0,
+            "seat_style": 0.8
+          },
+          "items": 10
+        },
+        "Sparky's Brands_Steering": {
+          "fields": {
+            "bar_rise": 0.15,
+            "brand": 1.0,
+            "color": 1.0,
+            "image": 1.0,
+            "kind": 1.0,
+            "stem_reach": 0.05,
+            "stem_type": 0.1
+          },
+          "items": 20
+        },
+        "Sparky's Brands_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "color": 0.727,
+            "image": 1.0,
+            "kind": 1.0,
+            "tire_width": 0.091,
+            "wheel_size": 0.455,
+            "width": 0.091
+          },
+          "items": 11
+        },
+        "Sparky's Brands_Wheel Parts": {
+          "fields": {
+            "axle": 0.1,
+            "brand": 1.0,
+            "color": 1.0,
+            "drive_side": 0.3,
+            "hub_type": 0.3,
+            "image": 1.0,
+            "kind": 1.0,
+            "material": 0.2,
+            "wheel_size": 0.3
+          },
+          "items": 10
+        },
+        "Triple 8_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.273,
+            "color": 0.091,
+            "helmet_style": 0.182,
+            "image": 1.0,
+            "kind": 0.818,
+            "prot_size": 0.909,
+            "protection_sizes": 0.909,
+            "protection_type": 0.909,
+            "protects": 1.0
+          },
+          "items": 11
+        }
+      }
+    }
+  },
+  "unmapped_seen": {
+    "187 Killer Pads": [],
+    "7iDP": [
+      "(none)",
+      "Gloves",
+      "M1",
+      "Open Face"
+    ],
+    "Albe's BMX": [
+      "Bags",
+      "CLOTHING & SHOES",
+      "OTHER SHIT",
+      "Tools",
+      "codes"
+    ],
+    "Bikes Online": [
+      "Clothing & Protective Gear"
+    ],
+    "Cambria": [],
+    "Circuit BMX": [],
+    "Colorado Cyclist": [
+      "Helmet Parts",
+      "Kids Helmets",
+      "MTB Helmets",
+      "Road Helmets"
+    ],
+    "Demon": [
+      "Accessories",
+      "Apparel",
+      "Bundle",
+      "MTB/BMX",
+      "SKI/SNOW",
+      "Sale"
+    ],
+    "Empire BMX": [],
+    "Exodus": [
+      "Base Layer",
+      "Beanies",
+      "Belts",
+      "Boots",
+      "Cargo Pants",
+      "Chino Pants",
+      "Facemasks",
+      "Fingerboard Trucks",
+      "Goggles",
+      "Hats",
+      "Hoodies & Sweatshirts",
+      "Jackets",
+      "Jeans",
+      "Kids Beanies",
+      "Kids Shoes",
+      "Kids Snowboard Bindings",
+      "Kids Snowboard Boots",
+      "Kids Snowboard Jackets",
+      "Kids Snowboard Pants",
+      "Kids Snowboards",
+      "Long Sleeve T-Shirts",
+      "Longboard Trucks",
+      "Longboard Wheels",
+      "Men's Snowboards",
+      "Random Stuff",
+      "Shirts",
+      "Shorts",
+      "Snowboard Bindings",
+      "Snowboard Boots",
+      "Snowboard Gloves",
+      "Snowboard Golves",
+      "Snowboard Helmets",
+      "Snowboard Jackets",
+      "Snowboard Mittens",
+      "Snowboard Pants",
+      "Socks",
+      "Stomp Pads",
+      "Sweatpants & Joggers",
+      "T-Shirts",
+      "Tank Tops",
+      "Tech Apparel",
+      "Toddler Shoes",
+      "Underwear",
+      "Wallets",
+      "Women's Bindings",
+      "Women's Snowboard Boots",
+      "Women's Snowboards",
+      "Youth Pants",
+      "Youth Tops"
+    ],
+    "Fiend": [
+      "T-Shirt"
+    ],
+    "G-Form": [
+      "(none)"
+    ],
+    "Haro": [
+      "Accessories"
+    ],
+    "Kali": [
+      "(none)",
+      "Bike - Enduro - Maya3.0",
+      "Bike - Full Face - Zoka",
+      "Bike - Full Face - Zoka Youth",
+      "Bike - Road",
+      "Bike - Road - Grit",
+      "Bike - Road - Therapy",
+      "Bike - Road - Uno",
+      "Bike - Trail - Pace",
+      "Bike - Urban - Cruz",
+      "Bike - Youth - ChakraChild",
+      "Moto-Parts"
+    ],
+    "Kinetic": [
+      "(none)",
+      "Accesories",
+      "Apparel",
+      "Bindings",
+      "Default",
+      "Denim",
+      "Footwear Low",
+      "Footwear Slip-on",
+      "Headwear",
+      "Hoodie",
+      "Jacket",
+      "Pant",
+      "Pants",
+      "Shirts",
+      "Shoes",
+      "Skateboards",
+      "Snowboard",
+      "Snowboards",
+      "Sweatshirt",
+      "Vest",
+      "limpies",
+      "shorts",
+      "trousers"
+    ],
+    "Kink": [
+      "Accessories",
+      "Jackets",
+      "Specialty",
+      "T-Shirts"
+    ],
+    "Powers BMX": [
+      "Apparel",
+      "DVD",
+      "DVD\u2019s",
+      "Footware",
+      "Other Stuff",
+      "Race Jerseys",
+      "Race Pants",
+      "Shoes",
+      "number plate",
+      "skateboard deck"
+    ],
+    "SPoT": [
+      "Beanie",
+      "Button Up",
+      "Hats",
+      "Jerseys",
+      "Pants",
+      "Shorts",
+      "Socks",
+      "Sticker",
+      "Sunglasses",
+      "Sweatshirt",
+      "T Shirt",
+      "Tank-Tops"
+    ],
+    "Source BMX US": [
+      "(none)",
+      "Accessories",
+      "BMX Brake Mounts",
+      "BMX Chain Tensioners",
+      "BMX DVDs",
+      "BMX Front Hub Guards",
+      "BMX Headset Spacers",
+      "BMX Pedal Spares",
+      "BMX Peg Sleeves",
+      "BMX Rear Hub Guards",
+      "Backpacks",
+      "Caps & Beanies",
+      "Flight Bags",
+      "Hoodies & Sweats",
+      "Jackets",
+      "Kids Hoodies & Sweats",
+      "Kids T-shirts",
+      "Locks & Lights",
+      "Miscellaneous",
+      "Race Number Plates",
+      "Race Pants",
+      "Race Tops",
+      "Shirts",
+      "Shoes",
+      "Shorts",
+      "Socks",
+      "Sticker Packs",
+      "T-shirts",
+      "Tools",
+      "Wax"
+    ],
+    "Sparky's Brands": [
+      "BMX Front Hub Guards",
+      "Backpacks",
+      "Caps & Beanies",
+      "Floor Mat",
+      "Race Tops",
+      "Ramps & Rails",
+      "T-shirts",
+      "Tools"
+    ],
+    "TGM": [
+      "Bags and Carts",
+      "Beanies",
+      "Coats and Jackets",
+      "Disc",
+      "Hats",
+      "Hoodies and Sweatshirts",
+      "Kids Shoes",
+      "Pants and Shorts",
+      "Rail",
+      "Roller Hockey and Inline",
+      "Shirts",
+      "Socks",
+      "Starter Sets",
+      "Stickers Patches Pins",
+      "Womens Shoes",
+      "Youth Clothing"
+    ],
+    "Triple 8": [
+      "(none)",
+      "Helmets"
+    ],
+    "Troy Lee Designs": [
+      "GLOVES",
+      "JERSEYS",
+      "PANTS",
+      "SHORTS",
+      "TECHNICAL SOFT GOODS"
+    ],
+    "Zeitbike": []
+  }
+}
