@@ -10,7 +10,7 @@
           "cut_high": 17,
           "cut_low": 14,
           "deals": {
-            "deals": 376,
+            "deals": 393,
             "high": 30,
             "low": 12,
             "max_off": 64,
@@ -91,7 +91,7 @@
               "text": "up to 50% off (most 18-30%)"
             }
           ],
-          "kind": "sale",
+          "kind": "markdown",
           "listings": 24,
           "moment": "",
           "start": "2026-10-07",
@@ -183,10 +183,10 @@
           "cut_high": 21,
           "cut_low": 17,
           "deals": {
-            "deals": 458,
+            "deals": 467,
             "high": 33,
             "low": 20,
-            "max_off": 73,
+            "max_off": 93,
             "uniform": null
           },
           "end": null,
@@ -206,6 +206,10 @@
             {
               "from": "2026-11-17",
               "text": "up to 73% off (most 20-33%)"
+            },
+            {
+              "from": "2026-11-22",
+              "text": "up to 93% off (most 20-33%)"
             }
           ],
           "kind": "sale",
@@ -219,5 +223,5 @@
       ]
     }
   },
-  "updated": "2026-11-21"
+  "updated": "2026-11-22"
 }
