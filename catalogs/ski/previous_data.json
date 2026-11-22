@@ -54201,39 +54201,9 @@
       "product_type": "Skis",
       "brand": "Faction",
       "lengths": [
-        "172",
-        "177",
         "182"
       ],
       "technical_offers": [
-        {
-          "variant_id": 46265220399254,
-          "price": 380.95,
-          "compare": 679.0,
-          "available": true,
-          "specs": {
-            "waist": [
-              "Under 85 mm"
-            ],
-            "length": [
-              "170\u2013179 cm"
-            ]
-          }
-        },
-        {
-          "variant_id": 46265220432022,
-          "price": 380.95,
-          "compare": 679.0,
-          "available": true,
-          "specs": {
-            "waist": [
-              "Under 85 mm"
-            ],
-            "length": [
-              "170\u2013179 cm"
-            ]
-          }
-        },
         {
           "variant_id": 46265220464790,
           "price": 380.95,
@@ -54254,7 +54224,6 @@
           "Under 85 mm"
         ],
         "length": [
-          "170\u2013179 cm",
           "180\u2013189 cm"
         ]
       },
@@ -84038,13 +84007,6 @@
         },
         {
           "variant_id": 46111930253462,
-          "price": 18.95,
-          "compare": 49.95,
-          "available": true,
-          "specs": {}
-        },
-        {
-          "variant_id": 46111930286230,
           "price": 18.95,
           "compare": 49.95,
           "available": true,
@@ -274183,34 +274145,6 @@
               "120 mm"
             ]
           }
-        },
-        {
-          "variant_id": 50790697664808,
-          "price": 199.95,
-          "compare": 299.99,
-          "available": true,
-          "specs": {
-            "din": [
-              "11\u201313"
-            ],
-            "sole": [
-              "Alpine (ISO 5355)",
-              "GripWalk",
-              "Touring (ISO 9523)",
-              "WTR"
-            ],
-            "ability": [
-              "Advanced",
-              "Expert",
-              "Intermediate"
-            ],
-            "gender": [
-              "Unisex"
-            ],
-            "brake": [
-              "90 mm"
-            ]
-          }
         }
       ],
       "technical_specs": {
@@ -274233,8 +274167,7 @@
         ],
         "brake": [
           "110 mm",
-          "120 mm",
-          "90 mm"
+          "120 mm"
         ]
       },
       "image": "https://cdn.shopify.com/s/files/1/0670/5135/6456/files/2024-marker-griffon-13-id-bindings-2-7524u1-black.jpg?v=1794235973"
@@ -288653,71 +288586,6 @@
       }
     },
     {
-      "name": "K2 Mindbender 90C Skis",
-      "url": "https://www.christysports.com/product/k2-mindbender-90c-skis/8202266.html",
-      "price_new": "359.97",
-      "price_old": "599.95",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwb1d6fae8/8202266_000_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8202266",
-          "price": 359.97,
-          "compare": 599.95,
-          "available": null,
-          "specs": {
-            "waist": [
-              "85\u201394 mm"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "waist": [
-          "85\u201394 mm"
-        ]
-      },
-      "brand": "K2"
-    },
-    {
-      "name": "K2 Mindbender 90C Skis Womens",
-      "url": "https://www.christysports.com/product/k2-mindbender-90c-skis-womens/8202270.html",
-      "price_new": "359.97",
-      "price_old": "599.95",
-      "availability": "Check store",
-      "part": "Skis",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwcec780e6/8202270_000_1.jpg?sw=600&sh=600",
-      "gender": "Women",
-      "technical_offers": [
-        {
-          "variant_id": "8202270",
-          "price": 359.97,
-          "compare": 599.95,
-          "available": null,
-          "specs": {
-            "waist": [
-              "85\u201394 mm"
-            ],
-            "gender": [
-              "Women"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "waist": [
-          "85\u201394 mm"
-        ],
-        "gender": [
-          "Women"
-        ]
-      },
-      "brand": "K2"
-    },
-    {
       "name": "K2 Mindbender 96C Skis Womens",
       "url": "https://www.christysports.com/product/k2-mindbender-96c-skis-womens/8202269.html",
       "price_new": "419.97",
@@ -288936,6 +288804,42 @@
       "brand": "Dynafit"
     },
     {
+      "name": "K2 Mindbender 90C Skis Womens",
+      "url": "https://www.christysports.com/product/k2-mindbender-90c-skis-womens/8202270.html",
+      "price_new": "359.97",
+      "price_old": "599.95",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwcec780e6/8202270_000_1.jpg?sw=600&sh=600",
+      "gender": "Women",
+      "technical_offers": [
+        {
+          "variant_id": "8202270",
+          "price": 359.97,
+          "compare": 599.95,
+          "available": null,
+          "specs": {
+            "waist": [
+              "85\u201394 mm"
+            ],
+            "gender": [
+              "Women"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "waist": [
+          "85\u201394 mm"
+        ],
+        "gender": [
+          "Women"
+        ]
+      },
+      "brand": "K2"
+    },
+    {
       "name": "Line Optic 96 Skis",
       "url": "https://www.christysports.com/product/line-optic-96-skis/8202196.html",
       "price_new": "452.97",
@@ -288963,6 +288867,35 @@
         ]
       },
       "brand": "Line"
+    },
+    {
+      "name": "K2 Mindbender 90C Skis",
+      "url": "https://www.christysports.com/product/k2-mindbender-90c-skis/8202266.html",
+      "price_new": "359.97",
+      "price_old": "599.95",
+      "availability": "Check store",
+      "part": "Skis",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwb1d6fae8/8202266_000_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8202266",
+          "price": 359.97,
+          "compare": 599.95,
+          "available": null,
+          "specs": {
+            "waist": [
+              "85\u201394 mm"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "waist": [
+          "85\u201394 mm"
+        ]
+      },
+      "brand": "K2"
     },
     {
       "name": "Volkl Secret 88 Skis Womens",
@@ -295708,41 +295641,6 @@
       "brand": "Dynafit"
     },
     {
-      "name": "Atomic Strive 14 GW Ski Bindings",
-      "url": "https://www.christysports.com/product/atomic-strive-14-gw-ski-bindings/8201499.html",
-      "price_new": "167.97",
-      "price_old": "279.95",
-      "availability": "Check store",
-      "part": "Bindings",
-      "store": "Christy Sports",
-      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwc7a56ae6/8201499_321_1.jpg?sw=600&sh=600",
-      "technical_offers": [
-        {
-          "variant_id": "8201499",
-          "price": 167.97,
-          "compare": 279.95,
-          "available": null,
-          "specs": {
-            "din": [
-              "14 and up"
-            ],
-            "sole": [
-              "GripWalk"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "din": [
-          "14 and up"
-        ],
-        "sole": [
-          "GripWalk"
-        ]
-      },
-      "brand": "Atomic"
-    },
-    {
       "name": "Salomon Stage 11 GW Ski Bindings",
       "url": "https://www.christysports.com/product/salomon-stage-11-gw-ski-bindings/8105834.html",
       "price_new": "113.97",
@@ -295776,6 +295674,41 @@
         ]
       },
       "brand": "Salomon"
+    },
+    {
+      "name": "Atomic Strive 14 GW Ski Bindings",
+      "url": "https://www.christysports.com/product/atomic-strive-14-gw-ski-bindings/8201499.html",
+      "price_new": "167.97",
+      "price_old": "279.95",
+      "availability": "Check store",
+      "part": "Bindings",
+      "store": "Christy Sports",
+      "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwc7a56ae6/8201499_321_1.jpg?sw=600&sh=600",
+      "technical_offers": [
+        {
+          "variant_id": "8201499",
+          "price": 167.97,
+          "compare": 279.95,
+          "available": null,
+          "specs": {
+            "din": [
+              "14 and up"
+            ],
+            "sole": [
+              "GripWalk"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "din": [
+          "14 and up"
+        ],
+        "sole": [
+          "GripWalk"
+        ]
+      },
+      "brand": "Atomic"
     }
   ],
   "Christy Sports_Poles": [

@@ -45510,26 +45510,26 @@
           }
         },
         "Bike Mart_Tires": {
-          "count": 262,
+          "count": 263,
           "failed": false,
           "diagnostics": {
             "expected_count": 260.5,
             "baseline_samples": 10,
             "median_absolute_deviation": 4.5,
-            "actual_count": 262,
-            "percentage_change": 0.6,
+            "actual_count": 263,
+            "percentage_change": 1.0,
             "reason": "normal_variation"
           }
         },
         "Bike Mart_Wheels": {
-          "count": 170,
+          "count": 171,
           "failed": false,
           "diagnostics": {
             "expected_count": 170.5,
             "baseline_samples": 10,
             "median_absolute_deviation": 1.0,
-            "actual_count": 170,
-            "percentage_change": -0.3,
+            "actual_count": 171,
+            "percentage_change": 0.3,
             "reason": "normal_variation"
           }
         },
@@ -47018,14 +47018,14 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 251,
+          "count": 252,
           "failed": false,
           "diagnostics": {
             "expected_count": 148.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 18.5,
-            "actual_count": 251,
-            "percentage_change": 69.0,
+            "actual_count": 252,
+            "percentage_change": 69.7,
             "reason": "normal_variation"
           }
         },
@@ -47103,14 +47103,14 @@
           }
         },
         "The Lost Co._Tires": {
-          "count": 141,
+          "count": 140,
           "failed": false,
           "diagnostics": {
             "expected_count": 131.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 141,
-            "percentage_change": 7.2,
+            "actual_count": 140,
+            "percentage_change": 6.5,
             "reason": "normal_variation"
           }
         },
@@ -47657,7 +47657,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-22T01:49:10+00:00"
+      "scanned_at": "2026-11-22T02:53:08+00:00"
     }
   ],
   "baseline": {
@@ -47843,7 +47843,7 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-22",
-      "count": 251
+      "count": 252
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-22",
@@ -47863,7 +47863,7 @@
     },
     "The Lost Co._Tires": {
       "date": "2026-11-22",
-      "count": 141
+      "count": 140
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-22",
@@ -47987,11 +47987,11 @@
     },
     "Bike Mart_Tires": {
       "date": "2026-11-22",
-      "count": 262
+      "count": 263
     },
     "Bike Mart_Wheels": {
       "date": "2026-11-22",
-      "count": 170
+      "count": 171
     },
     "Fanatik_Packs": {
       "date": "2026-11-22",
@@ -50944,7 +50944,7 @@
       },
       {
         "date": "2026-11-22",
-        "count": 262
+        "count": 263
       }
     ],
     "Bike Mart_Wheels": [
@@ -50990,7 +50990,7 @@
       },
       {
         "date": "2026-11-22",
-        "count": 170
+        "count": 171
       }
     ],
     "Bikes Online_Bikes": [
@@ -57842,7 +57842,7 @@
       },
       {
         "date": "2026-11-22",
-        "count": 251
+        "count": 252
       }
     ],
     "The Lost Co._Drivetrain": [
@@ -58236,7 +58236,7 @@
       },
       {
         "date": "2026-11-22",
-        "count": 141
+        "count": 140
       }
     ],
     "The Lost Co._Wheels": [
