@@ -3439,6 +3439,45 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 #stickyBar .tool-deals .scan-wrap { margin-left:auto; color:#687382; font-size:10px; }
 #stickyBar .tool-deals .fresh-note { color:#687382; font-size:10px; }
 
+/* The embedded desktop catalog already has search in the shell. Give that
+   space to the deal controls, including longer breadcrumbs and scan notes. */
+@media (min-width:801px) and (min-height:501px), (min-width:801px) and (pointer:fine) {
+    .shred-embedded #stickyBar .tool-line {
+        grid-template-columns:minmax(0,1fr) auto auto;
+        gap:2px 10px;
+        padding-block:4px;
+    }
+    .shred-embedded #stickyBar .tool-deals {
+        grid-column:1;
+        grid-row:1;
+        gap:2px 8px;
+    }
+    .shred-embedded #stickyBar .crumbs {
+        flex:0 1 auto;
+        min-width:0;
+        margin:0;
+    }
+    .shred-embedded #stickyBar .tool-deals .scan-wrap { margin-left:0; }
+    .shred-embedded #stickyBar .active-filters,
+    .shred-embedded #stickyBar .search-chips {
+        grid-column:1/-1;
+        grid-row:auto;
+    }
+    .shred-embedded #stickyBar .search-chips[hidden] { display:none; }
+    .shred-embedded #stickyBar .active-filters { padding:0; }
+    .shred-embedded #stickyBar .active-chip,
+    .shred-embedded #stickyBar .active-filters > button { padding-block:3px; }
+}
+
+@media (min-width:801px) and (max-width:1279px) and (min-height:501px),
+       (min-width:801px) and (max-width:1279px) and (pointer:fine) {
+    .shred-embedded #stickyBar .tool-deals { grid-column:1/-1; }
+    .shred-embedded #stickyBar .sort-field,
+    .shred-embedded #stickyBar .tool-display { grid-row:2; }
+    .shred-embedded #stickyBar .active-filters { grid-column:1; grid-row:2; }
+}
+
+
 /* Local Watch remains available; delivery is explicitly opted in per sport. */
 .alerts-unavailable .card-alert { display:none; }
 

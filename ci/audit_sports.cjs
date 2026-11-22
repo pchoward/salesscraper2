@@ -66,6 +66,22 @@ async function main(){
      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
      assert(await frame.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
      assert.equal(await frame.locator('.topnav').isVisible(),false);
+     if(sport==='skate'&&width===1440){
+      await page.setViewportSize({width:1920,height:1000});
+      await frame.waitForFunction(()=>innerWidth===1920);
+      const desktop=await frame.evaluate(()=>{
+       const bounds=selector=>document.querySelector(selector).getBoundingClientRect();
+       const deals=bounds('#stickyBar .tool-deals'), sort=bounds('#stickyBar .sort-field');
+       return {
+        columns:getComputedStyle(document.getElementById('cardGrid')).gridTemplateColumns.split(' ').length,
+        toolbarAligned:sort.top>=deals.top-4&&sort.bottom<=deals.bottom+4,
+        sidebarAligned:Math.abs(bounds('.rail').top-bounds('.board').top)<=1,
+       };
+      });
+      assert.deepEqual(desktop,{columns:8,toolbarAligned:true,sidebarAligned:true});
+      await page.setViewportSize({width,height:1000});
+      await frame.waitForFunction(expected=>innerWidth===expected,width);
+     }
      const stores=await frame.evaluate(()=>({
       options:[...document.querySelectorAll('#storeSelect option')].map(n=>n.value).sort(),
       inline:[...document.querySelectorAll('#storeFilters .quick-row > button[data-store]')].map(n=>n.dataset.store).sort()
