@@ -3647,11 +3647,11 @@ def _card_html(record):
         f'{_card_quick_button(name)}</div>'
         f'<h3 class="product-name">{escape(name)}</h3>'
         f'{truck_label_html}'
-        '<div class="card-trend">'
+        '<div class="card-pricing"><div class="card-trend">'
         f'<div class="card-sparkline">{_spark_html(record, width=156, defer=True)}</div>'
         f'<p class="card-offer">{off_html}{_sold_out_pill(record)}</p></div>'
         '<p class="card-prices">'
-        f'{avg_html}<span class="now-price">Now {_money(item.get("price_new"), currency)}</span></p>'
+        f'{avg_html}<span class="now-price">Now {_money(item.get("price_new"), currency)}</span></p></div>'
         f'<p class="card-meta">{escape(meta)}</p>'
         f'<div class="card-score" hidden>{_why_html(record, dom_id="why-card-" + str(record["id"]))}</div>'
         "</article>"

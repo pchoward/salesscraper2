@@ -706,7 +706,7 @@
 }
 
 /* Keep the original desktop formatting boxes and image measurements. */
-.card-photo, .card-trend { display:contents; }
+.card-photo, .card-trend, .card-pricing { display:contents; }
 
 @media (max-width:640px) {
     #stickyBar .nav-row { padding-block:0; }
@@ -736,7 +736,7 @@
     }
     #cardGrid .deal-card {
         display:grid;
-        grid-template-columns:36px minmax(0,1fr) minmax(0,1fr);
+        grid-template-columns:36px minmax(0,0.88fr) minmax(0,1.12fr);
         align-content:start;
         align-items:center;
         gap:3px 2px;
@@ -753,7 +753,7 @@
         justify-content:center;
         width:100%;
         min-width:0;
-        aspect-ratio:1/1;
+        aspect-ratio:1.11;
     }
     #cardGrid .deal-card .store-mark {
         grid-row:2;
@@ -782,26 +782,44 @@
     #cardGrid .deal-card .card-alert, #cardGrid .deal-card .card-quick {
         border-color:transparent;
         color:var(--text-secondary);
+        padding-inline:0;
         font-size:11px;
         line-height:1.1;
-        white-space:normal;
+        white-space:nowrap;
     }
     #cardGrid .deal-card .card-alert { grid-column:2; }
     #cardGrid .deal-card .card-quick { grid-column:3; }
     #cardGrid .deal-card .card-alert:hover, #cardGrid .deal-card .card-quick:hover {
         background:var(--grey-100);
     }
-    .deal-card .card-trend {
+    .deal-card .card-pricing {
         display:grid;
-        grid-template-columns:auto minmax(0,1fr);
+        grid-template-columns:max-content minmax(0,1fr);
         align-items:center;
-        column-gap:6px;
-        min-height:26px;
+        gap:2px 5px;
     }
-    .deal-card .card-trend .card-offer { grid-column:1; grid-row:1; }
-    .deal-card .card-trend .card-sparkline { grid-column:2; grid-row:1; min-width:0; }
-    .deal-card .card-prices { gap:2px 4px; }
-    .deal-card .card-prices .now-price { order:-1; flex-basis:100%; font-size:15px; }
-    .deal-card .card-prices .avg-price { color:var(--text-secondary); font-weight:500; }
+    .deal-card .card-pricing .card-prices { display:contents; }
+    .deal-card .card-pricing .now-price { grid-column:1; grid-row:1; font-size:15px; }
+    .deal-card .card-pricing .card-offer { grid-column:2; grid-row:1; justify-self:start; }
+    .deal-card .card-pricing .avg-price {
+        grid-column:1;
+        grid-row:2;
+        color:var(--text-secondary);
+        font-weight:500;
+    }
+    .deal-card .card-pricing .card-sparkline { grid-column:2; grid-row:2; min-width:0; }
     .deal-card .card-prices .price-sep { display:none; }
+}
+
+/* The narrowest layout has one wider card per row. */
+@media (max-width:350px) {
+    #cardGrid .deal-card .card-photo { aspect-ratio:1.065; }
+}
+
+/* Give both labels room on the smallest two-column cards. */
+@media (min-width:351px) and (max-width:374px) {
+    #cardGrid .deal-card :is(.card-alert, .card-quick) {
+        font-size:10.5px;
+        font-weight:600;
+    }
 }
