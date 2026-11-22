@@ -17,6 +17,8 @@
         const clear=doc.getElementById('clearAll'), clearHome=clear.parentNode;
         const show=drawer.querySelector('.show-results'), filters=doc.getElementById('filtersOpen');
         const filterHome={parent:filters.parentNode,next:filters.nextSibling};
+        const group=doc.getElementById('groupToggle');
+        const groupHome={parent:group.parentNode,next:group.nextSibling,label:group.getAttribute('aria-label')};
         const body=doc.createElement('div');body.className='phone-filter-body';
         [...drawer.children].filter(node=>node!==head&&node!==show).forEach(node=>body.appendChild(node));
         const footer=doc.createElement('div');footer.className='phone-filter-footer';
@@ -71,6 +73,10 @@
             const phone=media.matches;
             if(!phone&&opened&&!closing)requestClose(false);
             if(phone){
+                if(group.parentNode!==body){
+                    body.prepend(group);
+                    group.setAttribute('aria-label',group.querySelector('.group-phone-label').textContent);
+                }
                 if(clear.parentNode!==head)head.appendChild(clear);
                 close.textContent='←';
                 const tools=doc.querySelector('.tool-display');if(tools&&filters.parentNode!==tools)tools.appendChild(filters);
@@ -81,6 +87,10 @@
                     link.title=link.closest('.deal-card').dataset.name||link.textContent.trim();
                 });
             }else{
+                if(group.parentNode!==groupHome.parent){
+                    groupHome.parent.insertBefore(group,groupHome.next);
+                    group.setAttribute('aria-label',groupHome.label);
+                }
                 if(clear.parentNode!==clearHome)clearHome.appendChild(clear);
                 close.textContent='×';more.hidden=true;show.disabled=false;show.textContent='Show results';hint.hidden=true;
                 if(filters.parentNode!==filterHome.parent)filterHome.parent.insertBefore(filters,filterHome.next?.parentNode===filterHome.parent?filterHome.next:null);

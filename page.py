@@ -2865,7 +2865,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         '<button type="button" class="text-btn group-toggle" id="groupToggle" aria-pressed="false" '
         'onclick="toggleGrouped()" aria-label="Group across stores">'
         '<span class="group-full-label">Group across stores</span>'
-        '<span class="group-phone-label" aria-hidden="true">Group</span></button>'
+        '<span class="group-phone-label" aria-hidden="true">Group matching products across stores</span></button>'
         "</div>"
         '<div class="active-filters" id="activeFilters" hidden>'
         '<div class="active-row" id="activeChips"></div>'
