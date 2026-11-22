@@ -197,8 +197,9 @@ async function main(){
      assert(await frame.evaluate(()=>lazyCardMarkup.size>0),'the catalog has unparsed cards');
      assert.equal(await frame.locator('#mainTable tbody td').count(),0);
 
+     if(width<=640)await frame.locator('#filtersOpen').click();
      await frame.locator('#groupToggle').click();assert.equal(await frame.locator('#groupToggle').getAttribute('aria-pressed'),'true');await frame.locator('#groupToggle').click();
-     if(mobile){await frame.locator('#filtersOpen').click();assert(await frame.locator('#filterDrawer').evaluate(n=>n.classList.contains('is-open')));await frame.waitForTimeout(300);
+     if(mobile){if(width>640)await frame.locator('#filtersOpen').click();assert(await frame.locator('#filterDrawer').evaluate(n=>n.classList.contains('is-open')));await frame.waitForTimeout(300);
       const drawer=await frame.locator('#filterDrawer').evaluate(n=>{const r=n.getBoundingClientRect();return {left:r.left,right:r.right,width:innerWidth,small:[...n.querySelectorAll('button')].filter(b=>b.getClientRects().length&&b.getBoundingClientRect().height<24).map(b=>b.getAttribute('aria-label')||b.textContent.trim())};});
       assert(drawer.left>=-1&&drawer.right<=drawer.width+1,'drawer must finish inside the phone viewport');
       assert.deepEqual(drawer.small,[],'visible drawer buttons must be at least 24px tall');

@@ -19,7 +19,7 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
   await frame.waitForFunction(()=>typeof state!=='undefined'&&typeof captureState==='function');
   await page.waitForFunction(()=>!document.getElementById('categoryToggle').disabled);
   if(!capture)await frame.waitForFunction(()=>typeof phoneFilterSheet!=='undefined'&&phoneFilterSheet!==null);
-  await frame.locator('#statusCounts').waitFor();
+  await frame.locator('#statusCounts').waitFor({state:'attached'});
   await page.screenshot({path:path.join(out,`${sport}-${width}-results.png`)});
   if(width===1440){
    const metrics=await frame.evaluate(()=>{
@@ -36,7 +36,13 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
      assert.equal(metrics[selector].display,previous[selector].display);assert.equal(metrics[selector].clamp,previous[selector].clamp);
     }
    }
-   if(!capture){assert.equal(metrics['#cardGrid .deal-card .product-name'].clamp,'2');assert.equal(await frame.locator('#brandList .phone-brand-hidden').count(),0);}
+   if(!capture){
+    assert.equal(metrics['#cardGrid .deal-card .product-name'].clamp,'2');
+    assert.equal(await frame.locator('#brandList .phone-brand-hidden').count(),0);
+    assert(await frame.locator('#stickyBar #groupToggle').isVisible());
+    assert.equal(await frame.locator('#groupToggle').getAttribute('aria-label'),'Group across stores');
+    assert(await frame.locator('#statusCounts').isVisible());
+   }
    assert.deepEqual(errors,[]);results.push({sport,width,status:'pass',desktopUnchanged:!capture&&!!before});await page.close();continue;
   }
   if(!capture){
@@ -81,19 +87,21 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
     }
    }
   }
-  const sort=await frame.locator('#sortSelect').boundingBox(),group=await frame.locator('#groupToggle').boundingBox();
+  const sort=await frame.locator('#sortSelect').boundingBox();
   if(!capture){
    const filter=await frame.locator('#filtersOpen').boundingBox();
-   const count=await frame.locator('#statusCounts').boundingBox();
-   assert(filter&&filter.height>=44,'Filters keeps a comfortable touch target');
-   assert(group&&group.height>=44,'Group keeps a comfortable touch target');
+   assert.equal(await frame.locator('#statusCounts').isVisible(),false);
+   assert.equal(await frame.locator('#stickyBar #groupToggle').count(),0);
+   const initialChips=await frame.locator('#activeChips .active-chip').count();
+   assert.equal(await frame.locator('#filtersOpen').getAttribute('data-count'),initialChips?String(initialChips):null);
+   assert(filter&&filter.height===44,'Filters keeps a comfortable touch target');
    assert(sort.width<=109&&sort.height>=44,'Sort is compact and keeps its touch target');
    const sortControl=frame.locator('#sortSelect');
    assert.equal(await sortControl.locator('option').count(),12);
    if(await sortControl.inputValue()==='discount')assert(sort.width<=72,'Short sort label does not reserve unused width');
-   assert(Math.abs(sort.y-group.y)<=1&&Math.abs(sort.y-filter.y)<=1,'browse controls share one row');
-   assert(count.y>=sort.y&&count.y+count.height<=sort.y+sort.height,'result count shares the toolbar row');
-   const controls=[count,sort,group,filter];
+   assert(Math.abs(sort.y-filter.y)<=1,'browse controls share one row');
+   assert(sort.x<=12&&filter.x-sort.x-sort.width<=8&&filter.width<=100,'toolbar controls are compact and left-aligned');
+   const controls=[sort,filter];
    controls.forEach((box,i)=>{
     assert(box.x>=0&&box.x+box.width<=width+1,'toolbar stays inside the viewport');
     assert(controls.slice(i+1).every(other=>!overlaps(box,other)),'toolbar controls do not overlap');
@@ -108,6 +116,7 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
     await end.evaluate(node=>{node.scrollLeft=0});
    }
   }
+  const chipsBefore=await frame.locator('#activeChips .active-chip').count();
   const browseBefore=page.url();
   const rowsBefore=await frame.locator('.deal-row:not(.filtered-out)').count();
   await frame.locator('#filtersOpen').click();
@@ -126,6 +135,11 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
    return document.querySelector('#filterDrawer .show-results').textContent==='Show '+n+' '+(n===1?'deal':'deals');
   });}
   await countMatches();
+  const group=frame.getByRole('button',{name:'Group matching products across stores'});
+  assert(await group.isVisible());
+  assert.equal(await group.getAttribute('aria-pressed'),'false');
+  await group.click();await countMatches();
+  assert.equal(await group.getAttribute('aria-pressed'),'true');
   const firstSections=await frame.locator('#filterDrawer .filter-section:visible').evaluateAll(nodes=>nodes.slice(0,2).map(n=>n.classList.contains('is-open')));assert(firstSections.every(Boolean),'first two sections open by default');
   await page.screenshot({path:path.join(out,`${sport}-${width}-sheet.png`)});
   if(await frame.locator('.phone-brands-more').getAttribute('hidden')!==null)assert.equal(await frame.locator('.phone-brands-more').isVisible(),false,'More must not appear with zero hidden brands');
@@ -138,25 +152,39 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
   const rowsChosen=await frame.locator('.deal-row:not(.filtered-out)').count();
   await sheetButton.click();
   await frame.waitForFunction(()=>!phoneFilterSheet.isOpen());
-  assert.equal(await frame.locator('#statusCounts').innerText(),expected.replace(/^Show /,''));
+  assert.equal(await frame.locator('#statusCounts').textContent(),expected.replace(/^Show /,''));
   assert.equal(await frame.evaluate(()=>state.brand),chosen,'closing preserves live brand');
+  const chips=frame.locator('#activeChips .active-chip');
+  const filterBadge=frame.locator('#filtersOpen');
+  const expectedCount=chipsBefore+1;
+  assert.equal(await chips.count(),expectedCount);
+  assert.equal(await filterBadge.getAttribute('data-count'),String(expectedCount));
+  assert.equal(await filterBadge.getAttribute('aria-label'),'Filters, '+expectedCount+' active');
+  const chipBox=await frame.locator('#activeFilters').boundingBox(), filterBox=await filterBadge.boundingBox();
+  assert(chipBox.y>=filterBox.y+filterBox.height&&chipBox.y-filterBox.y-filterBox.height<=8);
+  assert(await frame.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  assert.equal(new URL(page.url()).searchParams.get('group'),'1');
   assert(!await page.locator('.shell-header').evaluate(n=>n.inert));
   // Closing changed picks must preserve the pre-sheet browse, not replace it.
   const browseChosen=page.url();
   await page.goBack();
   await frame.waitForFunction(n=>typeof state!=='undefined'&&state.brand==='all'&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===n,rowsBefore);
   assert.equal(page.url(),browseBefore);assert(!await frame.evaluate(()=>phoneFilterSheet.isOpen()));
+  assert.equal(await frame.evaluate(()=>state.grouped),false);
   await page.goForward();
   await frame.waitForFunction(({brand,n})=>typeof state!=='undefined'&&state.brand===brand&&document.querySelectorAll('.deal-row:not(.filtered-out)').length===n,{brand:chosen,n:rowsChosen});
   assert.equal(page.url(),browseChosen);assert(!await frame.evaluate(()=>phoneFilterSheet.isOpen()));
+  assert.equal(await frame.evaluate(()=>state.grouped),true);
 
   await frame.locator('#filtersOpen').scrollIntoViewIfNeeded();await frame.locator('#filtersOpen').click();
   await frame.waitForFunction(()=>phoneFilterSheet.isOpen());
+  assert.equal(await group.getAttribute('aria-pressed'),'true');
   const address=page.url();await page.goBack();await frame.waitForFunction(()=>!phoneFilterSheet.isOpen());
   assert.equal(page.url(),address,'Back closes sheet without leaving catalog');assert.equal(await frame.evaluate(()=>state.brand),chosen);
   // Clear, top-eight ranking/More/search, zero state, and tap targets.
   await frame.locator('#filtersOpen').click();await frame.waitForFunction(()=>phoneFilterSheet.isOpen());await frame.locator('#clearAll').click();
   await countMatches();
+  assert.equal(await group.getAttribute('aria-pressed'),'false');
   await frame.evaluate(()=>{const list=document.querySelectorAll('#brandList .facet-value:not([data-brand="all"])');window._phoneAuditBrands=[...list].filter(n=>Number(n.dataset.count)>0).map(n=>({brand:n.dataset.brand,count:Number(n.dataset.count)}));});
   const available=await frame.evaluate(()=>_phoneAuditBrands.length);
   if(available>8){
@@ -174,6 +202,9 @@ function overlaps(a,b){return a.x<b.x+b.width&&b.x<a.x+a.width&&a.y<b.y+b.height
   await frame.locator('#clearAll').click();await countMatches();assert(!await sheetButton.isDisabled());
   const targets=await frame.locator('#filterDrawer .spec-chip:visible,#filterDrawer .width-chip:visible').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().height));assert(targets.every(h=>h>=44));
   await sheetButton.click();await frame.waitForFunction(()=>!phoneFilterSheet.isOpen());
+  assert.equal(await filterBadge.getAttribute('data-count'),null);
+  assert.equal(await frame.locator('#activeFilters').isVisible(),false);
+  assert(await frame.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   // Standalone pages use the same sheet without the shell history owner.
   if(sport==='skate'){
    if(width===390){
