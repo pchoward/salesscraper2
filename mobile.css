@@ -819,6 +819,7 @@
 /* Give both labels room on the smallest two-column cards. */
 @media (min-width:351px) and (max-width:374px) {
     #cardGrid .deal-card :is(.card-alert, .card-quick) {
+        border-inline-width:0;
         font-size:10.5px;
         font-weight:600;
     }
