@@ -26,6 +26,8 @@ import logging
 import re
 import time
 import urllib.request
+from urllib import robotparser
+from urllib.error import HTTPError
 from urllib.parse import quote
 
 from filters import extract_deck_dimensions, extract_deck_size, filter_reason, normalize_product_name, normalize_url
@@ -208,6 +210,76 @@ def _fetch_json(url, timeout=30):
         return None
 
 
+ROBOTS_MAX_BYTES = 256_000
+
+
+def robots_policy(base):
+    """``(parser, delay)`` from the store's robots.txt, read once per run, or
+    None when it can't be read (fail closed: the store counts as a failed
+    read and the scrape guard keeps its previous listings). A missing
+    robots.txt (404) allows everything. ``delay`` is at least PAGE_DELAY and
+    honours Crawl-delay / Request-rate for our user agent."""
+    try:
+        request = urllib.request.Request(base.rstrip("/") + "/robots.txt", headers={"User-Agent": _USER_AGENT})
+        with urllib.request.urlopen(request, timeout=20) as response:
+            raw = response.read(ROBOTS_MAX_BYTES + 1)
+        if len(raw) > ROBOTS_MAX_BYTES:
+            return None
+        body = raw.decode("utf-8", "replace")
+        # A store's error or bot-wall page served as robots.txt is not a policy.
+        if "user-agent:" not in body.lower():
+            return None
+    except HTTPError as exc:
+        if exc.code != 404:
+            logger.warning("%s: robots.txt unavailable (HTTP %s)", base, exc.code)
+            return None
+        body = ""
+    except Exception as exc:
+        logger.warning("%s: robots.txt unavailable (%s)", base, type(exc).__name__)
+        return None
+    parser = robotparser.RobotFileParser()
+    parser.parse(body.splitlines())
+    delay = max(PAGE_DELAY, parser.crawl_delay(_USER_AGENT) or 0)
+    rate = parser.request_rate(_USER_AGENT)
+    if rate and rate.requests:
+        delay = max(delay, rate.seconds / rate.requests)
+    return parser, delay
+
+
+def polite_fetch(store, fetch=None, read_policy=None):
+    """A fetch for this store that checks robots.txt before every request
+    (owner, 2026-11-22: Stacked BMX kept being read after its robots.txt
+    disallowed everyone). Returns None when robots.txt can't be read or
+    disallows the URL; that URL is then not requested."""
+    fetch = fetch or _fetch_json
+    if "robots" not in store.cache:
+        store.cache["robots"] = (read_policy or robots_policy)(store.base)
+        if store.cache["robots"] is None:
+            logger.error("%s: robots.txt could not be read; not scraping this run", store.store)
+    policy = store.cache["robots"]
+
+    def guarded(url):
+        if policy is None:
+            return None
+        if not policy[0].can_fetch(_USER_AGENT, url):
+            logger.error("%s: robots.txt disallows %s; not requested", store.store, url.split("?")[0])
+            return None
+        return fetch(url)
+
+    return guarded
+
+
+def _polite_sleep(store, sleep):
+    """``sleep`` stretched to the store's Crawl-delay when that is longer."""
+    policy = store.cache.get("robots")
+    delay = policy[1] if policy else 0
+
+    def wait(seconds):
+        sleep(max(seconds, delay))
+
+    return wait
+
+
 def load_sale_products(store, fetch=None, sleep=time.sleep):
     """Every product in the store's sale collection, or None when any page fails.
 
@@ -230,7 +302,10 @@ def load_sale_products(store, fetch=None, sleep=time.sleep):
             if getattr(store, "track_exclusions", False):
                 store.cache["exclusions"] = exclusions(store, products)
         return products
-    fetch = fetch or _fetch_json
+    if own_fetch:
+        # robots.txt is checked on every run, not only when a store is added.
+        fetch = polite_fetch(store)
+        sleep = _polite_sleep(store, sleep)
     sale_jsons = getattr(store, "sale_jsons", None) or [store.sale_json]
     products = []
     seen = set()
@@ -366,7 +441,8 @@ def enrich_stock(store, products, part, fetch=None, sleep=time.sleep, limit=MAX_
     filters would keep are read, with a short pause between reads. An
     unreadable product leaves its sizes unknown.
     """
-    fetch = fetch or _fetch_json
+    if fetch is None:
+        fetch = polite_fetch(store)
     reads = 0
     for product in products or []:
         if not isinstance(product, dict) or _stock_known(_variants_of(product)):
