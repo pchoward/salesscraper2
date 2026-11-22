@@ -175,7 +175,31 @@ async function main(){
      await frame.evaluate(()=>clearFilters());assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),{});
     });
     await scenario('Quick View, retailer-first links, chart and Watch',async()=>{
-     const card=frame.locator('#cardGrid .deal-card:not(.filtered-out):not(.grouped-hide)').first();
+     const cards=frame.locator('#cardGrid .deal-card:not(.filtered-out):not(.grouped-hide)');
+     const card=cards.first();
+     if(sport==='skate'&&width===390){
+      // Preview banners aren't part of the live 560px content viewport.
+      for(const document of [page,frame])await document.addStyleTag({content:'#previewBanner{display:none!important}'});
+      await page.setViewportSize({width:375,height:560});
+      await frame.waitForFunction(()=>innerWidth===375);
+      for(const part of ['Decks','Completes']){
+       await control(frame,'partSelect',part);
+       for(let i=0;i<2;i++){
+        const product=cards.nth(i);
+        assert.equal(await product.getAttribute('data-part'),part);
+        const price=await product.locator('.now-price').boundingBox();
+        assert(price&&price.y>=0&&price.y+price.height<=560,part+' prices fit in the short mobile viewport');
+        const fits=await product.locator('.card-quick').evaluate(button=>{
+         const label=document.createRange();label.selectNodeContents(button);
+         return label.getClientRects().length===1&&label.getBoundingClientRect().width<=button.clientWidth;
+        });
+        assert(fits,'both Quick View labels fit on one line in the short viewport');
+       }
+      }
+      await control(frame,'partSelect','Decks');
+      await page.setViewportSize({width,height:900});
+      await frame.waitForFunction(expected=>innerWidth===expected,width);
+     }
      if(width<=640){
       const layout=await card.evaluate(node=>{
        const rect=selector=>node.querySelector(selector)?.getBoundingClientRect();
