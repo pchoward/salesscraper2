@@ -20306,14 +20306,14 @@
           }
         },
         "Bern_Helmets": {
-          "count": 2,
+          "count": 1,
           "failed": false,
           "diagnostics": {
             "expected_count": 2.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 2,
-            "percentage_change": 0.0,
+            "actual_count": 1,
+            "percentage_change": -50.0,
             "reason": "normal_variation"
           }
         },
@@ -20630,14 +20630,14 @@
           }
         },
         "Gear West_Boots": {
-          "count": 165,
+          "count": 164,
           "failed": false,
           "diagnostics": {
             "expected_count": 165.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 165,
-            "percentage_change": 0.0,
+            "actual_count": 164,
+            "percentage_change": -0.6,
             "reason": "normal_variation"
           }
         },
@@ -21518,14 +21518,14 @@
           }
         },
         "evo_Packs": {
-          "count": 113,
+          "count": 112,
           "failed": false,
           "diagnostics": {
             "expected_count": 94.0,
             "baseline_samples": 10,
             "median_absolute_deviation": 11.0,
-            "actual_count": 113,
-            "percentage_change": 20.2,
+            "actual_count": 112,
+            "percentage_change": 19.1,
             "reason": "normal_variation"
           }
         },
@@ -21566,13 +21566,13 @@
           }
         }
       },
-      "scanned_at": "2026-11-22T02:47:02+00:00"
+      "scanned_at": "2026-11-22T06:59:48+00:00"
     }
   ],
   "baseline": {
     "Gear West_Boots": {
       "date": "2026-11-22",
-      "count": 165
+      "count": 164
     },
     "Gear West_Skis": {
       "date": "2026-11-22",
@@ -21672,7 +21672,7 @@
     },
     "Bern_Helmets": {
       "date": "2026-11-22",
-      "count": 2
+      "count": 1
     },
     "Demon_Helmets": {
       "date": "2026-11-22",
@@ -21828,7 +21828,7 @@
     },
     "evo_Packs": {
       "date": "2026-11-22",
-      "count": 113
+      "count": 112
     },
     "Triple 8_Protection": {
       "date": "2026-11-22",
@@ -22333,7 +22333,7 @@
       },
       {
         "date": "2026-11-22",
-        "count": 2
+        "count": 1
       }
     ],
     "Bern_Packs": [
@@ -23723,7 +23723,7 @@
       },
       {
         "date": "2026-11-22",
-        "count": 165
+        "count": 164
       }
     ],
     "Gear West_Helmets": [
@@ -27595,7 +27595,7 @@
       },
       {
         "date": "2026-11-22",
-        "count": 113
+        "count": 112
       }
     ],
     "evo_Poles": [

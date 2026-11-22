@@ -1,299 +1,959 @@
 {
  "changes": {
-  "Bike Mart_Tires": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Crank Brothers",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1102.jpg?v=1762296257",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1102.jpg?v=1762296257",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1104.jpg?v=1762296257"
-     ],
-     "name": "Crankbrothers Speedier Lever",
-     "part": "Tires",
-     "price_new": "145.30",
-     "price_old": "200.42",
-     "product_type": "Tire Lever",
-     "store": "Bike Mart",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 200.42,
-       "price": 145.3,
-       "specs": {},
-       "variant_id": 46842660028669
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://www.bikemart.com/products/crankbrothers-speedier-lever"
-    },
-    "type": "new"
-   }
-  ],
-  "Bike Mart_Wheels": [
+  "Bicycle Warehouse_Cockpit": [
    {
     "item": {
      "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Stan's NoTubes",
-     "durometers": [
-      "650B"
-     ],
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1894.jpg?v=1762538210",
+     "brand": "Spank",
+     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1894.jpg?v=1762538210",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1898.jpg?v=1762538210",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1890.jpg?v=1762538210",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1897.jpg?v=1762538210"
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
      ],
-     "name": "Stan's Flow S2 Rear Wheel, 6 Bolt",
-     "part": "Wheels",
-     "price_new": "325.00",
-     "price_old": "400.00",
-     "product_type": "Rear Wheel",
-     "spec_offers": [
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46852295688445"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46852295721213"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46852295753981"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46852295786749"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46852295819517"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46852295852285"
-      },
-      {
-       "available": true,
-       "compare_at_price": 400.0,
-       "diameter_mm": null,
-       "durometers": [
-        "650B"
-       ],
-       "price": 325.0,
-       "variant_id": "46852295885053"
-      }
-     ],
-     "store": "Bike Mart",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x142mm"
-        ]
-       },
-       "variant_id": 46852295688445
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x142mm"
-        ]
-       },
-       "variant_id": 46852295721213
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x148mm"
-        ]
-       },
-       "variant_id": 46852295753981
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x148mm"
-        ]
-       },
-       "variant_id": 46852295786749
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x148mm"
-        ]
-       },
-       "variant_id": 46852295819517
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x142mm"
-        ]
-       },
-       "variant_id": 46852295852285
-      },
-      {
-       "available": true,
-       "compare": 400.0,
-       "price": 325.0,
-       "specs": {
-        "axle": [
-         "12x142mm"
-        ]
-       },
-       "variant_id": 46852295885053
-      }
-     ],
-     "technical_specs": {
-      "axle": [
-       "12x142mm",
-       "12x148mm"
-      ]
-     },
-     "url": "https://www.bikemart.com/products/stans-flow-s2-rear-wheel-6-bolt"
-    },
-    "type": "new"
-   }
-  ],
-  "The Lost Co._Cockpit": [
-   {
-    "item": {
-     "at_all_time_low": false,
-     "availability": "In stock",
-     "brand": "Race Face",
-     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-mtb-handlebar-35mm-clamp-760mm-width-10mm-rise-black-race-face-the-lost-co-946-00-007-01-0821973481449-162834.jpg?v=1730509646",
-     "name": "RaceFace ERA Carbon MTB Handlebar - 35mm Clamp - 760mm Width - 10mm Rise - Black",
+     "name": "Spank Spoon 350 35mm Stem",
      "part": "Cockpit",
-     "price_new": "143.19",
-     "price_old": "178.99",
-     "product_type": "Handlebars",
-     "store": "The Lost Co.",
+     "price_new": "59.99",
+     "price_old": "69.99",
+     "product_type": "Stems",
+     "store": "Bicycle Warehouse",
      "technical_offers": [
       {
        "available": true,
-       "compare": 178.99,
-       "price": 143.19,
+       "compare": 69.99,
+       "price": 59.99,
        "specs": {},
-       "variant_id": 44212121796806
+       "variant_id": 40431254798438
       }
      ],
      "technical_specs": {},
-     "url": "https://www.thelostco.com/products/raceface-era-10-mtb-handlebar-diameter-35mm-760mm-rise-10mm-black"
-    },
-    "type": "new"
-   }
-  ],
-  "The Lost Co._Drivetrain": [
-   {
-    "item": {
-     "at_all_time_low": true,
-     "availability": "In stock",
-     "brand": "Race Face",
-     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/a0e690cecb7696d63cdfb4cb19955b523d8843f6.jpg?v=1786751490",
-     "name": "Race Face Era Crankset - 165mm - Red",
-     "part": "Drivetrain",
-     "price_new": "439.99",
-     "price_old": "549.99",
-     "product_type": "Cranksets and Arms",
-     "store": "The Lost Co.",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 549.99,
-       "price": 439.99,
-       "specs": {},
-       "variant_id": 46938837352646
-      }
-     ],
-     "technical_specs": {},
-     "url": "https://www.thelostco.com/products/raceface-era-crankset-165mm-direct-mount-136mm-spindle-cinch-interface-carbon-red"
+     "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem"
     },
     "type": "new"
    },
    {
     "item": {
-     "at_all_time_low": true,
+     "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "Race Face",
-     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/6b71796b3071e1bb4ebdd271109f9e552eec2da0.jpg?v=1785540102",
-     "name": "Race Face Era SL Crank Arms - 136mm Spindle - 160mm Length - Kash Money",
-     "part": "Drivetrain",
-     "price_new": "461.59",
-     "price_old": "576.99",
-     "product_type": "Cranksets and Arms",
-     "store": "The Lost Co.",
+     "brand": "Supacaz",
+     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-011_GRIP_GRIZIPS-GRIP-NEOBLUE_HEROEDIT.jpg?v=1772082435",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-013_GRIP_GRIZIPS-GRIP-RED_HEROEDIT.jpg?v=1772082437",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-014_GRIP_GRIZIPS-GRIP-NEON-YEL_HEROEDIT1.jpg?v=1772082439",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-010_GRIP_GRIZIP-GRIP_NEOGRN_HEROEDIT.jpg?v=1772082441",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/GR-10_20Grizips_20-_20Black.jpg?v=1772082443",
+      "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-011_GRIP_GRIZIP-GRIP-NEOORNGE_HEROEDIT_1.jpg?v=1772082445"
+     ],
+     "name": "Supacaz Grizips Bike Grips",
+     "part": "Cockpit",
+     "price_new": "19.99",
+     "price_old": "25.00",
+     "product_type": "Grips",
+     "store": "Bicycle Warehouse",
      "technical_offers": [
       {
        "available": true,
-       "compare": 576.99,
-       "price": 461.59,
+       "compare": 25.0,
+       "price": 19.99,
        "specs": {},
-       "variant_id": 46640317759686
+       "variant_id": 40222305550438
+      },
+      {
+       "available": true,
+       "compare": 25.0,
+       "price": 19.99,
+       "specs": {},
+       "variant_id": 40222305583206
       }
      ],
      "technical_specs": {},
-     "url": "https://www.thelostco.com/products/race-face-era-sl-crank-arms-no-bb-136-bb-160-kash-money"
+     "url": "https://bicyclewarehouse.com/products/supacaz-grizips-mountain-bike-handlebar-grips"
+    },
+    "type": "new"
+   }
+  ],
+  "Bicycle Warehouse_Drivetrain": [
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
+      "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
+     ],
+     "length": 1.0,
+     "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
+     "part": "Drivetrain",
+     "price_new": "19.99",
+     "price_old": "23.60",
+     "product_type": "Chains",
+     "store": "Bicycle Warehouse",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 23.6,
+       "price": 19.99,
+       "specs": {},
+       "variant_id": 42413792624742
+      },
+      {
+       "available": true,
+       "compare": 23.6,
+       "price": 19.99,
+       "specs": {},
+       "variant_id": 42413792821350
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
+     "width": 2.0
+    },
+    "type": "new"
+   }
+  ],
+  "Colorado Cyclist_Tires": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Pirelli",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007_53f54eb8-bd2b-4604-b6ff-1f78653c2242.jpg?v=1795329613",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007_53f54eb8-bd2b-4604-b6ff-1f78653c2242.jpg?v=1795329613",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007-01_a2dcfcc7-eaa9-485f-a84b-7e6727b0a809.jpg?v=1795329614",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007-02_6d603cd4-331b-4cda-933a-109daaf8c0f5.jpg?v=1795329613",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007-03_8c837796-d694-473f-814d-3951fb25b319.jpg?v=1795329613"
+     ],
+     "length": 2.4,
+     "name": "Pirelli Scorpion Emperor Tire - 29 x 2.4, Tubeless, Folding, Black/Silver, DualWall",
+     "part": "Tires",
+     "price_new": "99.81",
+     "price_old": "110.90",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 110.9,
+       "price": 99.81,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51172851548400
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-emperor-tire-29-x-2-4-tubeless-folding-black-silver-dualwall-supersoft",
+     "width": 29.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Pirelli",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010_2b7d9b0a-06f9-402b-ac95-88dbf25ab43b.jpg?v=1795329605",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010_2b7d9b0a-06f9-402b-ac95-88dbf25ab43b.jpg?v=1795329605",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010-01_5991e500-4415-4404-be93-ed0f43662280.jpg?v=1795329605",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010-02_6f166c81-93d9-47d7-9694-869db5a0b8de.jpg?v=1795329605",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010-03_2431283f-d1ef-448e-aecd-c50211ab6743.jpg?v=1795329605"
+     ],
+     "length": 2.4,
+     "name": "Pirelli Scorpion Emperor Tire - 27.5 x 2.4, Tubeless, Folding, Black/Silver, DualWall",
+     "part": "Tires",
+     "price_new": "93.51",
+     "price_old": "103.90",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 103.9,
+       "price": 93.51,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 51172850008304
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-emperor-tire-27-5-x-2-4-tubeless-folding-black-silver-dualwall-soft",
+     "width": 27.5
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Pirelli",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009_cff0a101-58a5-4bf5-aff1-739fb7adc695.jpg?v=1795329604",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009_cff0a101-58a5-4bf5-aff1-739fb7adc695.jpg?v=1795329604",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009-01_99a2a73d-48a5-4e3c-9e30-d4f61c90b52f.jpg?v=1795329604",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009-02_f310fd66-5e00-4668-a407-adbf1319aba5.jpg?v=1795329603",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009-03_192b6d77-6008-42f5-96ac-fccd0c6e446a.jpg?v=1795329604"
+     ],
+     "length": 2.4,
+     "name": "Pirelli Scorpion Emperor Tire - 29 x 2.4, Tubeless, Folding, Black/Silver, ProWall",
+     "part": "Tires",
+     "price_new": "81.81",
+     "price_old": "90.90",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 90.9,
+       "price": 81.81,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51172851646704
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-emperor-tire-29-x-2-4-tubeless-folding-black-silver-prowall-supersoft",
+     "width": 29.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Pirelli",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008_f24f8c97-cf32-40dc-97c1-5eb51bcba4bf.jpg?v=1795329610",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008_f24f8c97-cf32-40dc-97c1-5eb51bcba4bf.jpg?v=1795329610",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008-01_29fb5bfb-6b58-4692-a618-184939999a27.jpg?v=1795329610",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008-02_1ce52ff1-5645-4277-8b1a-38be34f739a7.jpg?v=1795329610",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008-03_03b1acc7-a690-439d-be91-c385d42bfd03.jpg?v=1795329610"
+     ],
+     "length": 2.4,
+     "name": "Pirelli Scorpion Emperor Tire - 29 x 2.4, Tubeless, Folding, Black/Silver, HardWall",
+     "part": "Tires",
+     "price_new": "93.51",
+     "price_old": "103.90",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 103.9,
+       "price": 93.51,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51172849942768
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-emperor-tire-29-x-2-4-tubeless-folding-black-silver-hardwall-supersoft",
+     "width": 29.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804_eabbdc2a-8e3b-48e8-a103-34d6347fd689.jpg?v=1795322119",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804_eabbdc2a-8e3b-48e8-a103-34d6347fd689.jpg?v=1795322119",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804-01_28fff085-be99-425a-ab62-1a7462a8417c.jpg?v=1795322119"
+     ],
+     "length": 2.5,
+     "name": "Maxxis Minion DHX Tire - 29 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, New DH, E-50",
+     "part": "Tires",
+     "price_new": "106.00",
+     "price_old": "116.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 116.0,
+       "price": 106.0,
+       "specs": {
+        "casing": [
+         "DH"
+        ],
+        "tire_width": [
+         "2.5"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51171869196528
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "DH"
+      ],
+      "tire_width": [
+       "2.5"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhx-tire-29-x-2-5-tubeless-folding-black-3c-maxxgrip-new-dh-e-50",
+     "width": 29.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804_8d9a2881-0457-459d-82c7-2cf843a4279d.jpg?v=1795322125",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804_8d9a2881-0457-459d-82c7-2cf843a4279d.jpg?v=1795322125",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804-01_7166750b-6ee8-49ac-b518-cbcb13fd6980.jpg?v=1795322125"
+     ],
+     "length": 2.5,
+     "name": "Maxxis Minion DHX Tire - 27.5 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, New DH, E-50",
+     "part": "Tires",
+     "price_new": "106.00",
+     "price_old": "116.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 116.0,
+       "price": 106.0,
+       "specs": {
+        "casing": [
+         "DH"
+        ],
+        "tire_width": [
+         "2.5"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 51171869360368
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "DH"
+      ],
+      "tire_width": [
+       "2.5"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhx-tire-27-5-x-2-5-tubeless-folding-black-3c-maxxgrip-new-dh-e-50",
+     "width": 27.5
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593_b1ebb5ea-d588-4327-916f-886641b7b463.jpg?v=1795331002",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593_b1ebb5ea-d588-4327-916f-886641b7b463.jpg?v=1795331002",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1589-01_df2610c7-13a4-47da-ae39-414ec090031e.jpg?v=1795331001"
+     ],
+     "length": 2.2,
+     "name": "WTB Slick Tire - 29 x 2.2, Clincher, Steel, Black, 27tpi",
+     "part": "Tires",
+     "price_new": "32.95",
+     "price_old": "36.95",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 36.95,
+       "price": 32.95,
+       "specs": {
+        "tire_width": [
+         "2.2"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51171817685232
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.2"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/wtb-slick-tire-29-x-2-2-clincher-steel-black-27tpi",
+     "width": 29.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_d019e986-192b-4b48-9a1c-e60fc67ed458.jpg?v=1795327855",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_d019e986-192b-4b48-9a1c-e60fc67ed458.jpg?v=1795327855",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633-01_55fba189-118d-4ac6-a4f3-902af5661001.jpg?v=1795327855"
+     ],
+     "length": 2.4,
+     "name": "Schwalbe Romy Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Trail, Soft, Radial, E-50",
+     "part": "Tires",
+     "price_new": "94.86",
+     "price_old": "102.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 102.0,
+       "price": 94.86,
+       "specs": {
+        "casing": [
+         "Radial"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51171817193712
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "Radial"
+      ],
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-40-tubeless-folding-black-pro-trail-soft-radial-e-50",
+     "width": 29.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_036a055e-4fbe-45a6-a120-938d1e9fa196.jpg?v=1795327852",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_036a055e-4fbe-45a6-a120-938d1e9fa196.jpg?v=1795327852",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633-01_67319e78-67df-4084-95b9-9fa21426318a.jpg?v=1795327852"
+     ],
+     "length": 2.5,
+     "name": "Schwalbe Romy Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial, E-50",
+     "part": "Tires",
+     "price_new": "100.44",
+     "price_old": "108.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 108.0,
+       "price": 100.44,
+       "specs": {
+        "casing": [
+         "Radial"
+        ],
+        "tire_width": [
+         "2.5"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51171816702192
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "Radial"
+      ],
+      "tire_width": [
+       "2.5"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50",
+     "width": 29.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_41677889-590d-4336-82a8-07964ad322e2.jpg?v=1795329796",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_41677889-590d-4336-82a8-07964ad322e2.jpg?v=1795329796",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532-01_c95c14de-d462-4f84-8c0c-49f85c826575.jpg?v=1795329796"
+     ],
+     "length": 2.6,
+     "name": "Schwalbe Motion Pick-Up Tire - 650b x 65 / 27.5 x 2.60, Clincher, Wire, Black/Reflex",
+     "part": "Tires",
+     "price_new": "54.87",
+     "price_old": "59.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 59.0,
+       "price": 54.87,
+       "specs": {
+        "tire_width": [
+         "2.6"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 51171786096880
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.6"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/schwalbe-motion-pick-up-tire-650b-x-65-27-5-x-2-60-clincher-wire-black-reflex-standard-super-defense-addix-e-50",
+     "width": 27.5
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_849ab8cf-cd1e-4348-80d4-1e77520811ad.jpg?v=1795329785",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_849ab8cf-cd1e-4348-80d4-1e77520811ad.jpg?v=1795329785",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532-01_c699d315-e8d9-4ed3-a5a3-2c473bf21b68.jpg?v=1795329786"
+     ],
+     "length": 2.35,
+     "name": "Schwalbe Motion Pick-Up Tire - 650b x 57 / 27.5 x 2.35, Clincher, Wire, Black/Reflex",
+     "part": "Tires",
+     "price_new": "54.87",
+     "price_old": "59.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 59.0,
+       "price": 54.87,
+       "specs": {
+        "tire_width": [
+         "2.35"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 51171785769200
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.35"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/schwalbe-motion-pick-up-tire-650b-x-57-27-5-x-2-35-clincher-wire-black-reflex-standard-super-defense-addix-e-50",
+     "width": 27.5
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Schwalbe",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_25069fd0-dea8-43da-a541-41fe0ee82292.jpg?v=1795329790",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_25069fd0-dea8-43da-a541-41fe0ee82292.jpg?v=1795329790",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532-01_d65e7c4c-e0cf-4d30-af31-a6a2108a8bc4.jpg?v=1795329790"
+     ],
+     "length": 2.15,
+     "name": "Schwalbe Motion Pick-Up Tire - 26 x 2.15, Clincher, Wire, Black/Reflex, Standard",
+     "part": "Tires",
+     "price_new": "54.87",
+     "price_old": "59.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 59.0,
+       "price": 54.87,
+       "specs": {
+        "tire_width": [
+         "2.15"
+        ],
+        "wheel_size": [
+         "26"
+        ]
+       },
+       "variant_id": 51171785801968
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.15"
+      ],
+      "wheel_size": [
+       "26"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/schwalbe-motion-pick-up-tire-26-x-2-15-clincher-wire-black-reflex-standard-super-defense-addix-e-50",
+     "width": 26.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2241_TR1806.jpg?v=1795329601",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2241_TR1806.jpg?v=1795329601",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2241_TR1806-01.jpg?v=1795329601",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2241_TR1806-02.jpg?v=1795329601"
+     ],
+     "length": 2.4,
+     "name": "WTB Groov-E Tire - 27.5 x 2.4, Clincher, Wire, Comp DNA, FG w/ Reflective",
+     "part": "Tires",
+     "price_new": "48.95",
+     "price_old": "54.95",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 54.95,
+       "price": 48.95,
+       "specs": {
+        "tire_width": [
+         "2.4"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 51171742613744
+      }
+     ],
+     "technical_specs": {
+      "tire_width": [
+       "2.4"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/wtb-groov-e-tire-27-5-x-2-4-clincher-wire-comp-dna-fg-w-reflective",
+     "width": 27.5
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_0613fff8-0dd4-470c-a5be-b9f47f7fbbe0.jpg?v=1795322152",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_0613fff8-0dd4-470c-a5be-b9f47f7fbbe0.jpg?v=1795322152",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269-01_262edabf-4d39-4678-9a7f-12f7ee04b668.jpg?v=1795322152"
+     ],
+     "length": 2.4,
+     "name": "Maxxis Aspen ST Tire - 29 x 2.4, Tubeless, Folding, Black, MaxxSpeed, EXO",
+     "part": "Tires",
+     "price_new": "88.00",
+     "price_old": "96.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 96.0,
+       "price": 88.0,
+       "specs": {
+        "casing": [
+         "EXO"
+        ],
+        "tire_width": [
+         "2.4"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51171707846896
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "EXO"
+      ],
+      "tire_width": [
+       "2.4"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/maxxis-aspen-st-tire-29-x-2-4-tubeless-folding-black-maxxspeed-exo",
+     "width": 29.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_256f8b53-1e83-4dcc-810b-9c815be6ebdd.jpg?v=1795322147",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_256f8b53-1e83-4dcc-810b-9c815be6ebdd.jpg?v=1795322147",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269-01_cd4435c5-2ca9-42b3-b031-144ea4907b12.jpg?v=1795322147"
+     ],
+     "length": 2.25,
+     "name": "Maxxis Aspen ST Tire - 29 x 2.25, Tubeless, Folding, Black, MaxxSpeed, EXO",
+     "part": "Tires",
+     "price_new": "88.00",
+     "price_old": "96.00",
+     "product_type": "Tires",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 96.0,
+       "price": 88.0,
+       "specs": {
+        "casing": [
+         "EXO"
+        ],
+        "tire_width": [
+         "2.25"
+        ],
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 51171707748592
+      }
+     ],
+     "technical_specs": {
+      "casing": [
+       "EXO"
+      ],
+      "tire_width": [
+       "2.25"
+      ],
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/maxxis-aspen-st-tire-29-x-2-25-tubeless-folding-black-maxxspeed-exo",
+     "width": 29.0
     },
     "type": "new"
    }
@@ -1821,6 +2481,26 @@
       "price": 4.95,
       "store": "evo",
       "url": "https://www.evo.com/products/95761-sram-powerlink-8-speed-chain-link"
+     }
+    ],
+    "part": "Drivetrain"
+   },
+   {
+    "cheapest_price": 19.99,
+    "key": "sport|Drivetrain|kmc|1|s1|single|speed",
+    "label": "KMC s1 single speed 1",
+    "offers": [
+     {
+      "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
+      "price": 19.99,
+      "store": "Bicycle Warehouse",
+      "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9"
+     },
+     {
+      "name": "Kmc S1 1 Speed Chain",
+      "price": 20.6,
+      "store": "Bike Mart",
+      "url": "https://www.bikemart.com/products/kmc-s1-1-speed-chain"
      }
     ],
     "part": "Drivetrain"
@@ -4838,6 +5518,26 @@
     "part": "Tires"
    },
    {
+    "cheapest_price": 32.95,
+    "key": "sport|Tires|wtb|27tpi|clincher|slick|steel",
+    "label": "WTB slick clincher steel 27tpi",
+    "offers": [
+     {
+      "name": "WTB Slick Tire - 29 x 2.2 Clincher Steel Black 27tpi",
+      "price": 32.95,
+      "store": "Bike Mart",
+      "url": "https://www.bikemart.com/products/wtb-slick-tire-29-x-2-2-clincher-steel-black-27tpi"
+     },
+     {
+      "name": "WTB Slick Tire - 29 x 2.2, Clincher, Steel, Black, 27tpi",
+      "price": 32.95,
+      "store": "Colorado Cyclist",
+      "url": "https://www.coloradocyclist.com/products/wtb-slick-tire-29-x-2-2-clincher-steel-black-27tpi"
+     }
+    ],
+    "part": "Tires"
+   },
+   {
     "cheapest_price": 39.95,
     "key": "sport|Tires|wtb|plug|rocket|tcs",
     "label": "WTB tcs rocket plug",
@@ -4941,289 +5641,912 @@
   "drops": [],
   "new_items": [
    {
-    "at_all_time_low": true,
-    "availability": "In stock",
-    "brand": "Race Face",
-    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/a0e690cecb7696d63cdfb4cb19955b523d8843f6.jpg?v=1786751490",
-    "name": "Race Face Era Crankset - 165mm - Red",
-    "part": "Drivetrain",
-    "price_new": "439.99",
-    "price_old": "549.99",
-    "product_type": "Cranksets and Arms",
-    "store": "The Lost Co.",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 549.99,
-      "price": 439.99,
-      "specs": {},
-      "variant_id": 46938837352646
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://www.thelostco.com/products/raceface-era-crankset-165mm-direct-mount-136mm-spindle-cinch-interface-carbon-red"
-   },
-   {
-    "at_all_time_low": true,
-    "availability": "In stock",
-    "brand": "Race Face",
-    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/6b71796b3071e1bb4ebdd271109f9e552eec2da0.jpg?v=1785540102",
-    "name": "Race Face Era SL Crank Arms - 136mm Spindle - 160mm Length - Kash Money",
-    "part": "Drivetrain",
-    "price_new": "461.59",
-    "price_old": "576.99",
-    "product_type": "Cranksets and Arms",
-    "store": "The Lost Co.",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 576.99,
-      "price": 461.59,
-      "specs": {},
-      "variant_id": 46640317759686
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://www.thelostco.com/products/race-face-era-sl-crank-arms-no-bb-136-bb-160-kash-money"
-   },
-   {
     "at_all_time_low": false,
     "availability": "In stock",
-    "brand": "Race Face",
-    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-mtb-handlebar-35mm-clamp-760mm-width-10mm-rise-black-race-face-the-lost-co-946-00-007-01-0821973481449-162834.jpg?v=1730509646",
-    "name": "RaceFace ERA Carbon MTB Handlebar - 35mm Clamp - 760mm Width - 10mm Rise - Black",
-    "part": "Cockpit",
-    "price_new": "143.19",
-    "price_old": "178.99",
-    "product_type": "Handlebars",
-    "store": "The Lost Co.",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 178.99,
-      "price": 143.19,
-      "specs": {},
-      "variant_id": 44212121796806
-     }
-    ],
-    "technical_specs": {},
-    "url": "https://www.thelostco.com/products/raceface-era-10-mtb-handlebar-diameter-35mm-760mm-rise-10mm-black"
-   },
-   {
-    "at_all_time_low": true,
-    "availability": "In stock",
-    "brand": "Stan's NoTubes",
-    "durometers": [
-     "650B"
-    ],
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1894.jpg?v=1762538210",
+    "brand": "Pirelli",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007_53f54eb8-bd2b-4604-b6ff-1f78653c2242.jpg?v=1795329613",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1894.jpg?v=1762538210",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1898.jpg?v=1762538210",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1890.jpg?v=1762538210",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/WE1897.jpg?v=1762538210"
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007_53f54eb8-bd2b-4604-b6ff-1f78653c2242.jpg?v=1795329613",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007-01_a2dcfcc7-eaa9-485f-a84b-7e6727b0a809.jpg?v=1795329614",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007-02_6d603cd4-331b-4cda-933a-109daaf8c0f5.jpg?v=1795329613",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9007-03_8c837796-d694-473f-814d-3951fb25b319.jpg?v=1795329613"
     ],
-    "name": "Stan's Flow S2 Rear Wheel, 6 Bolt",
-    "part": "Wheels",
-    "price_new": "325.00",
-    "price_old": "400.00",
-    "product_type": "Rear Wheel",
-    "spec_offers": [
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46852295688445"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46852295721213"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46852295753981"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46852295786749"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46852295819517"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46852295852285"
-     },
-     {
-      "available": true,
-      "compare_at_price": 400.0,
-      "diameter_mm": null,
-      "durometers": [
-       "650B"
-      ],
-      "price": 325.0,
-      "variant_id": "46852295885053"
-     }
-    ],
-    "store": "Bike Mart",
+    "length": 2.4,
+    "name": "Pirelli Scorpion Emperor Tire - 29 x 2.4, Tubeless, Folding, Black/Silver, DualWall",
+    "part": "Tires",
+    "price_new": "99.81",
+    "price_old": "110.90",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
     "technical_offers": [
      {
       "available": true,
-      "compare": 400.0,
-      "price": 325.0,
+      "compare": 110.9,
+      "price": 99.81,
       "specs": {
-       "axle": [
-        "12x142mm"
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
        ]
       },
-      "variant_id": 46852295688445
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x142mm"
-       ]
-      },
-      "variant_id": 46852295721213
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x148mm"
-       ]
-      },
-      "variant_id": 46852295753981
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x148mm"
-       ]
-      },
-      "variant_id": 46852295786749
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x148mm"
-       ]
-      },
-      "variant_id": 46852295819517
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x142mm"
-       ]
-      },
-      "variant_id": 46852295852285
-     },
-     {
-      "available": true,
-      "compare": 400.0,
-      "price": 325.0,
-      "specs": {
-       "axle": [
-        "12x142mm"
-       ]
-      },
-      "variant_id": 46852295885053
+      "variant_id": 51172851548400
      }
     ],
     "technical_specs": {
-     "axle": [
-      "12x142mm",
-      "12x148mm"
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
      ]
     },
-    "url": "https://www.bikemart.com/products/stans-flow-s2-rear-wheel-6-bolt"
+    "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-emperor-tire-29-x-2-4-tubeless-folding-black-silver-dualwall-supersoft",
+    "width": 29.0
    },
    {
     "at_all_time_low": false,
     "availability": "In stock",
-    "brand": "Crank Brothers",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1102.jpg?v=1762296257",
+    "brand": "Pirelli",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010_2b7d9b0a-06f9-402b-ac95-88dbf25ab43b.jpg?v=1795329605",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1102.jpg?v=1762296257",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1104.jpg?v=1762296257"
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010_2b7d9b0a-06f9-402b-ac95-88dbf25ab43b.jpg?v=1795329605",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010-01_5991e500-4415-4404-be93-ed0f43662280.jpg?v=1795329605",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010-02_6f166c81-93d9-47d7-9694-869db5a0b8de.jpg?v=1795329605",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9010-03_2431283f-d1ef-448e-aecd-c50211ab6743.jpg?v=1795329605"
     ],
-    "name": "Crankbrothers Speedier Lever",
+    "length": 2.4,
+    "name": "Pirelli Scorpion Emperor Tire - 27.5 x 2.4, Tubeless, Folding, Black/Silver, DualWall",
     "part": "Tires",
-    "price_new": "145.30",
-    "price_old": "200.42",
-    "product_type": "Tire Lever",
-    "store": "Bike Mart",
+    "price_new": "93.51",
+    "price_old": "103.90",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
     "technical_offers": [
      {
       "available": true,
-      "compare": 200.42,
-      "price": 145.3,
+      "compare": 103.9,
+      "price": 93.51,
+      "specs": {
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "27.5"
+       ]
+      },
+      "variant_id": 51172850008304
+     }
+    ],
+    "technical_specs": {
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "27.5"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-emperor-tire-27-5-x-2-4-tubeless-folding-black-silver-dualwall-soft",
+    "width": 27.5
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Pirelli",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009_cff0a101-58a5-4bf5-aff1-739fb7adc695.jpg?v=1795329604",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009_cff0a101-58a5-4bf5-aff1-739fb7adc695.jpg?v=1795329604",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009-01_99a2a73d-48a5-4e3c-9e30-d4f61c90b52f.jpg?v=1795329604",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009-02_f310fd66-5e00-4668-a407-adbf1319aba5.jpg?v=1795329603",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9009-03_192b6d77-6008-42f5-96ac-fccd0c6e446a.jpg?v=1795329604"
+    ],
+    "length": 2.4,
+    "name": "Pirelli Scorpion Emperor Tire - 29 x 2.4, Tubeless, Folding, Black/Silver, ProWall",
+    "part": "Tires",
+    "price_new": "81.81",
+    "price_old": "90.90",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 90.9,
+      "price": 81.81,
+      "specs": {
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 51172851646704
+     }
+    ],
+    "technical_specs": {
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-emperor-tire-29-x-2-4-tubeless-folding-black-silver-prowall-supersoft",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Pirelli",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008_f24f8c97-cf32-40dc-97c1-5eb51bcba4bf.jpg?v=1795329610",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008_f24f8c97-cf32-40dc-97c1-5eb51bcba4bf.jpg?v=1795329610",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008-01_29fb5bfb-6b58-4692-a618-184939999a27.jpg?v=1795329610",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008-02_1ce52ff1-5645-4277-8b1a-38be34f739a7.jpg?v=1795329610",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3395_TR9008-03_03b1acc7-a690-439d-be91-c385d42bfd03.jpg?v=1795329610"
+    ],
+    "length": 2.4,
+    "name": "Pirelli Scorpion Emperor Tire - 29 x 2.4, Tubeless, Folding, Black/Silver, HardWall",
+    "part": "Tires",
+    "price_new": "93.51",
+    "price_old": "103.90",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 103.9,
+      "price": 93.51,
+      "specs": {
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 51172849942768
+     }
+    ],
+    "technical_specs": {
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/pirelli-scorpion-emperor-tire-29-x-2-4-tubeless-folding-black-silver-hardwall-supersoft",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Maxxis",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804_eabbdc2a-8e3b-48e8-a103-34d6347fd689.jpg?v=1795322119",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804_eabbdc2a-8e3b-48e8-a103-34d6347fd689.jpg?v=1795322119",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804-01_28fff085-be99-425a-ab62-1a7462a8417c.jpg?v=1795322119"
+    ],
+    "length": 2.5,
+    "name": "Maxxis Minion DHX Tire - 29 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, New DH, E-50",
+    "part": "Tires",
+    "price_new": "106.00",
+    "price_old": "116.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 116.0,
+      "price": 106.0,
+      "specs": {
+       "casing": [
+        "DH"
+       ],
+       "tire_width": [
+        "2.5"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 51171869196528
+     }
+    ],
+    "technical_specs": {
+     "casing": [
+      "DH"
+     ],
+     "tire_width": [
+      "2.5"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhx-tire-29-x-2-5-tubeless-folding-black-3c-maxxgrip-new-dh-e-50",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Maxxis",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804_8d9a2881-0457-459d-82c7-2cf843a4279d.jpg?v=1795322125",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804_8d9a2881-0457-459d-82c7-2cf843a4279d.jpg?v=1795322125",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3239_TR00804-01_7166750b-6ee8-49ac-b518-cbcb13fd6980.jpg?v=1795322125"
+    ],
+    "length": 2.5,
+    "name": "Maxxis Minion DHX Tire - 27.5 x 2.5, Tubeless, Folding, Black, 3C MaxxGrip, New DH, E-50",
+    "part": "Tires",
+    "price_new": "106.00",
+    "price_old": "116.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 116.0,
+      "price": 106.0,
+      "specs": {
+       "casing": [
+        "DH"
+       ],
+       "tire_width": [
+        "2.5"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "27.5"
+       ]
+      },
+      "variant_id": 51171869360368
+     }
+    ],
+    "technical_specs": {
+     "casing": [
+      "DH"
+     ],
+     "tire_width": [
+      "2.5"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "27.5"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/maxxis-minion-dhx-tire-27-5-x-2-5-tubeless-folding-black-3c-maxxgrip-new-dh-e-50",
+    "width": 27.5
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "WTB",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593_b1ebb5ea-d588-4327-916f-886641b7b463.jpg?v=1795331002",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593_b1ebb5ea-d588-4327-916f-886641b7b463.jpg?v=1795331002",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1589-01_df2610c7-13a4-47da-ae39-414ec090031e.jpg?v=1795331001"
+    ],
+    "length": 2.2,
+    "name": "WTB Slick Tire - 29 x 2.2, Clincher, Steel, Black, 27tpi",
+    "part": "Tires",
+    "price_new": "32.95",
+    "price_old": "36.95",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 36.95,
+      "price": 32.95,
+      "specs": {
+       "tire_width": [
+        "2.2"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 51171817685232
+     }
+    ],
+    "technical_specs": {
+     "tire_width": [
+      "2.2"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/wtb-slick-tire-29-x-2-2-clincher-steel-black-27tpi",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Schwalbe",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_d019e986-192b-4b48-9a1c-e60fc67ed458.jpg?v=1795327855",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_d019e986-192b-4b48-9a1c-e60fc67ed458.jpg?v=1795327855",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633-01_55fba189-118d-4ac6-a4f3-902af5661001.jpg?v=1795327855"
+    ],
+    "length": 2.4,
+    "name": "Schwalbe Romy Tire - 29 x 2.40, Tubeless, Folding, Black, Pro, Trail, Soft, Radial, E-50",
+    "part": "Tires",
+    "price_new": "94.86",
+    "price_old": "102.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 102.0,
+      "price": 94.86,
+      "specs": {
+       "casing": [
+        "Radial"
+       ],
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 51171817193712
+     }
+    ],
+    "technical_specs": {
+     "casing": [
+      "Radial"
+     ],
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-40-tubeless-folding-black-pro-trail-soft-radial-e-50",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Schwalbe",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_036a055e-4fbe-45a6-a120-938d1e9fa196.jpg?v=1795327852",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633_036a055e-4fbe-45a6-a120-938d1e9fa196.jpg?v=1795327852",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00633-01_67319e78-67df-4084-95b9-9fa21426318a.jpg?v=1795327852"
+    ],
+    "length": 2.5,
+    "name": "Schwalbe Romy Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial, E-50",
+    "part": "Tires",
+    "price_new": "100.44",
+    "price_old": "108.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 108.0,
+      "price": 100.44,
+      "specs": {
+       "casing": [
+        "Radial"
+       ],
+       "tire_width": [
+        "2.5"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 51171816702192
+     }
+    ],
+    "technical_specs": {
+     "casing": [
+      "Radial"
+     ],
+     "tire_width": [
+      "2.5"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Schwalbe",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_41677889-590d-4336-82a8-07964ad322e2.jpg?v=1795329796",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_41677889-590d-4336-82a8-07964ad322e2.jpg?v=1795329796",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532-01_c95c14de-d462-4f84-8c0c-49f85c826575.jpg?v=1795329796"
+    ],
+    "length": 2.6,
+    "name": "Schwalbe Motion Pick-Up Tire - 650b x 65 / 27.5 x 2.60, Clincher, Wire, Black/Reflex",
+    "part": "Tires",
+    "price_new": "54.87",
+    "price_old": "59.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 59.0,
+      "price": 54.87,
+      "specs": {
+       "tire_width": [
+        "2.6"
+       ],
+       "wheel_size": [
+        "27.5"
+       ]
+      },
+      "variant_id": 51171786096880
+     }
+    ],
+    "technical_specs": {
+     "tire_width": [
+      "2.6"
+     ],
+     "wheel_size": [
+      "27.5"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/schwalbe-motion-pick-up-tire-650b-x-65-27-5-x-2-60-clincher-wire-black-reflex-standard-super-defense-addix-e-50",
+    "width": 27.5
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Schwalbe",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_849ab8cf-cd1e-4348-80d4-1e77520811ad.jpg?v=1795329785",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_849ab8cf-cd1e-4348-80d4-1e77520811ad.jpg?v=1795329785",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532-01_c699d315-e8d9-4ed3-a5a3-2c473bf21b68.jpg?v=1795329786"
+    ],
+    "length": 2.35,
+    "name": "Schwalbe Motion Pick-Up Tire - 650b x 57 / 27.5 x 2.35, Clincher, Wire, Black/Reflex",
+    "part": "Tires",
+    "price_new": "54.87",
+    "price_old": "59.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 59.0,
+      "price": 54.87,
+      "specs": {
+       "tire_width": [
+        "2.35"
+       ],
+       "wheel_size": [
+        "27.5"
+       ]
+      },
+      "variant_id": 51171785769200
+     }
+    ],
+    "technical_specs": {
+     "tire_width": [
+      "2.35"
+     ],
+     "wheel_size": [
+      "27.5"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/schwalbe-motion-pick-up-tire-650b-x-57-27-5-x-2-35-clincher-wire-black-reflex-standard-super-defense-addix-e-50",
+    "width": 27.5
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Schwalbe",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_25069fd0-dea8-43da-a541-41fe0ee82292.jpg?v=1795329790",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_25069fd0-dea8-43da-a541-41fe0ee82292.jpg?v=1795329790",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532-01_d65e7c4c-e0cf-4d30-af31-a6a2108a8bc4.jpg?v=1795329790"
+    ],
+    "length": 2.15,
+    "name": "Schwalbe Motion Pick-Up Tire - 26 x 2.15, Clincher, Wire, Black/Reflex, Standard",
+    "part": "Tires",
+    "price_new": "54.87",
+    "price_old": "59.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 59.0,
+      "price": 54.87,
+      "specs": {
+       "tire_width": [
+        "2.15"
+       ],
+       "wheel_size": [
+        "26"
+       ]
+      },
+      "variant_id": 51171785801968
+     }
+    ],
+    "technical_specs": {
+     "tire_width": [
+      "2.15"
+     ],
+     "wheel_size": [
+      "26"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/schwalbe-motion-pick-up-tire-26-x-2-15-clincher-wire-black-reflex-standard-super-defense-addix-e-50",
+    "width": 26.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "WTB",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2241_TR1806.jpg?v=1795329601",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2241_TR1806.jpg?v=1795329601",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2241_TR1806-01.jpg?v=1795329601",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2241_TR1806-02.jpg?v=1795329601"
+    ],
+    "length": 2.4,
+    "name": "WTB Groov-E Tire - 27.5 x 2.4, Clincher, Wire, Comp DNA, FG w/ Reflective",
+    "part": "Tires",
+    "price_new": "48.95",
+    "price_old": "54.95",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 54.95,
+      "price": 48.95,
+      "specs": {
+       "tire_width": [
+        "2.4"
+       ],
+       "wheel_size": [
+        "27.5"
+       ]
+      },
+      "variant_id": 51171742613744
+     }
+    ],
+    "technical_specs": {
+     "tire_width": [
+      "2.4"
+     ],
+     "wheel_size": [
+      "27.5"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/wtb-groov-e-tire-27-5-x-2-4-clincher-wire-comp-dna-fg-w-reflective",
+    "width": 27.5
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Maxxis",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_0613fff8-0dd4-470c-a5be-b9f47f7fbbe0.jpg?v=1795322152",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_0613fff8-0dd4-470c-a5be-b9f47f7fbbe0.jpg?v=1795322152",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269-01_262edabf-4d39-4678-9a7f-12f7ee04b668.jpg?v=1795322152"
+    ],
+    "length": 2.4,
+    "name": "Maxxis Aspen ST Tire - 29 x 2.4, Tubeless, Folding, Black, MaxxSpeed, EXO",
+    "part": "Tires",
+    "price_new": "88.00",
+    "price_old": "96.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 96.0,
+      "price": 88.0,
+      "specs": {
+       "casing": [
+        "EXO"
+       ],
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 51171707846896
+     }
+    ],
+    "technical_specs": {
+     "casing": [
+      "EXO"
+     ],
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/maxxis-aspen-st-tire-29-x-2-4-tubeless-folding-black-maxxspeed-exo",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Maxxis",
+    "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_256f8b53-1e83-4dcc-810b-9c815be6ebdd.jpg?v=1795322147",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269_256f8b53-1e83-4dcc-810b-9c815be6ebdd.jpg?v=1795322147",
+     "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2653_TR2269-01_cd4435c5-2ca9-42b3-b031-144ea4907b12.jpg?v=1795322147"
+    ],
+    "length": 2.25,
+    "name": "Maxxis Aspen ST Tire - 29 x 2.25, Tubeless, Folding, Black, MaxxSpeed, EXO",
+    "part": "Tires",
+    "price_new": "88.00",
+    "price_old": "96.00",
+    "product_type": "Tires",
+    "store": "Colorado Cyclist",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 96.0,
+      "price": 88.0,
+      "specs": {
+       "casing": [
+        "EXO"
+       ],
+       "tire_width": [
+        "2.25"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 51171707748592
+     }
+    ],
+    "technical_specs": {
+     "casing": [
+      "EXO"
+     ],
+     "tire_width": [
+      "2.25"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.coloradocyclist.com/products/maxxis-aspen-st-tire-29-x-2-25-tubeless-folding-black-maxxspeed-exo",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "KMC",
+    "image": "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851229093990.jpg?v=1772100778",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-dark-blue-13850735280230.jpg?v=1772100779",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-orange-13850735444070.jpg?v=1772100784",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-painted-black-13850735476838.jpg?v=1772100785",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-red-13850735706214.jpg?v=1772100786",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-blue-13850735935590.jpg?v=1772100787",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-pink-13850736230502.jpg?v=1772100788",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-yellow-13850736623718.jpg?v=1772100789",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-green-13850736787558.jpg?v=1772100791",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-gold-13850734821478.jpg?v=1772100792",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-purple-13850736296038.jpg?v=1772100792",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-s1-chain-single-speed-1-2-x-1-8-112-links-white-13850736328806.jpg?v=1772100794",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/kmc-kmc-s1-chain-single-speed-1-2-x-1-8-13851046281318.jpg?v=1772100795"
+    ],
+    "length": 1.0,
+    "name": "KMC S1 Bike Chain - Single Speed 1/2\" x 1/8\"",
+    "part": "Drivetrain",
+    "price_new": "19.99",
+    "price_old": "23.60",
+    "product_type": "Chains",
+    "store": "Bicycle Warehouse",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 23.6,
+      "price": 19.99,
       "specs": {},
-      "variant_id": 46842660028669
+      "variant_id": 42413792624742
+     },
+     {
+      "available": true,
+      "compare": 23.6,
+      "price": 19.99,
+      "specs": {},
+      "variant_id": 42413792821350
      }
     ],
     "technical_specs": {},
-    "url": "https://www.bikemart.com/products/crankbrothers-speedier-lever"
+    "url": "https://bicyclewarehouse.com/products/s1-bike-chain-single-speed-1-2-x-1-9",
+    "width": 2.0
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "Spank",
+    "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/spoonie350.jpg?v=1772085395",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back-Angle.jpg?v=1772085396",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Back.jpg?v=1772085397",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front-Angle.jpg?v=1772085399",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Front.jpg?v=1772085401",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Side.jpg?v=1772085402",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968211_Spoon_350_stem_45mm_Black_Side.jpg?v=1772085404",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968136_Spoon_350_stem_35mm_Black_Top.jpg?v=1772085406",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLUE.jpg?v=1772085412",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968143_SPOON_350_35mm_BLU_1.jpg?v=1772085414",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968228_SPOON_350_45mm_BLU.jpg?v=1772085419",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Front-Angle.jpg?v=1772085420",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968150_Spoon_350_stem_35mm_Red_Back-Angle_ecf673e1-7691-492d-b5e7-e4c23c8702e3.jpg?v=1772085422",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/rsz_14710155968235_spoon_350_45mm_red_side.jpg?v=1772085425",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN.jpg?v=1772085429",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968167_SPOON_350_35mm_GREEN_SIDE.jpg?v=1772085436",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968242_SPOON_350_45mm_GRE.jpg?v=1772085444",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE.jpg?v=1772085448",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968174_SPOON_350_35mm_ORANGE_SIDE_af703937-60f5-4637-8e02-13cebbe66129.jpg?v=1772085451",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968259_SPOON_350_45mm_ORA.jpg?v=1772085456",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE.jpg?v=1772085460",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968181_SPOON_350_35mm_PURPLE_SIDE.jpg?v=1772085467",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968266_SPOON_350_45mm_PUR.jpg?v=1772085471",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVER.jpg?v=1772085475",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968198_SPOON_350_STEM_35mm_RAW-SILVERE_SIDE.jpg?v=1772085482",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968273_SPOON_350_STEM_45m.jpg?v=1772085483",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD.jpg?v=1772085488",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968280_SPOON_350_45mm_GOL.jpg?v=1772085492",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968204_SPOON_350_35mm_GOLD_SIDE.jpg?v=1772085496",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Front-Angle.jpg?v=1772085498",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Side.jpg?v=1772085500",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35mm_Rasta_Top.jpg?v=1772085502",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA_FRONT.jpg?v=1772085506",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RASTA.jpg?v=1772085511",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968730_Spoon_350_stem_35m_1.jpg?v=1772085512",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/4710155968747_SPOON_350_45mm_RAS.jpg?v=1772085517",
+     "https://cdn.shopify.com/s/files/1/0286/1214/products/750x939_SPANK_DJ-SPOON350STEM-PURPLE_2.jpg?v=1772085525"
+    ],
+    "name": "Spank Spoon 350 35mm Stem",
+    "part": "Cockpit",
+    "price_new": "59.99",
+    "price_old": "69.99",
+    "product_type": "Stems",
+    "store": "Bicycle Warehouse",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 69.99,
+      "price": 59.99,
+      "specs": {},
+      "variant_id": 40431254798438
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://bicyclewarehouse.com/products/spank-spoon-350-35mm-mountain-bike-stem"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Supacaz",
+    "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-010_GRIP_GRIZIPS-GRIP-BLK_HEROEDIT.jpg?v=1772082433",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-011_GRIP_GRIZIPS-GRIP-NEOBLUE_HEROEDIT.jpg?v=1772082435",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-013_GRIP_GRIZIPS-GRIP-RED_HEROEDIT.jpg?v=1772082437",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/25522-014_GRIP_GRIZIPS-GRIP-NEON-YEL_HEROEDIT1.jpg?v=1772082439",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-010_GRIP_GRIZIP-GRIP_NEOGRN_HEROEDIT.jpg?v=1772082441",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/GR-10_20Grizips_20-_20Black.jpg?v=1772082443",
+     "https://cdn.shopify.com/s/files/1/0286/1214/files/25523-011_GRIP_GRIZIP-GRIP-NEOORNGE_HEROEDIT_1.jpg?v=1772082445"
+    ],
+    "name": "Supacaz Grizips Bike Grips",
+    "part": "Cockpit",
+    "price_new": "19.99",
+    "price_old": "25.00",
+    "product_type": "Grips",
+    "store": "Bicycle Warehouse",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 25.0,
+      "price": 19.99,
+      "specs": {},
+      "variant_id": 40222305550438
+     },
+     {
+      "available": true,
+      "compare": 25.0,
+      "price": 19.99,
+      "specs": {},
+      "variant_id": 40222305583206
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://bicyclewarehouse.com/products/supacaz-grizips-mountain-bike-handlebar-grips"
    }
   ],
   "removed": []
  },
  "failed_keys": [],
  "fingerprints": {
-  "data": "aa5e8c4ae61c0d6d0ad1f514007718792048c58596e86b5310431700054f8c68",
-  "history": "7dba84c93b7209dc4abde6932d32e7cd0209492b814facb14e78fb4de7ed13f0"
+  "data": "252540b01ecb8fd56fbbdebed3bd5375620cbfcd6b4bcb8e41f900dfeba4d1cb",
+  "history": "0f9b3cb50efe293407afb9017c037d78a60a4ed15c49f02e821e37fabbc1d06a"
  },
- "generated_at": "2026-11-22T02:53:08+00:00",
+ "generated_at": "2026-11-22T07:06:06+00:00",
  "history": "file",
  "version": 1
 }
