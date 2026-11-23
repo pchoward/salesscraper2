@@ -66,6 +66,27 @@ async function main(){
      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
      assert(await frame.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
      assert.equal(await frame.locator('.topnav').isVisible(),false);
+     if(sport==='skate'&&width===1440){
+      for(const targetWidth of [1280,1440,1920]){
+       await page.setViewportSize({width:targetWidth,height:1000});
+       await frame.waitForFunction(expected=>innerWidth===expected,targetWidth);
+       const desktop=await frame.evaluate(()=>{
+        const bounds=selector=>document.querySelector(selector).getBoundingClientRect();
+        const deals=bounds('#stickyBar .tool-deals'), sort=bounds('#stickyBar .sort-field');
+        const media=bounds('#cardGrid .deal-card:not(.filtered-out) .media');
+        const card=bounds('#cardGrid .deal-card:not(.filtered-out)');
+        return {
+         columns:getComputedStyle(document.getElementById('cardGrid')).gridTemplateColumns.split(' ').length,
+         toolbarAligned:sort.top>=deals.top-4&&sort.bottom<=deals.bottom+4,
+         sidebarAligned:Math.abs(bounds('.rail').top-bounds('.board').top)<=1,
+         imageFits:media.left>=card.left&&media.right<=card.right,
+        };
+       });
+       assert.deepEqual(desktop,{columns:8,toolbarAligned:true,sidebarAligned:true,imageFits:true});
+      }
+      await page.setViewportSize({width,height:1000});
+      await frame.waitForFunction(expected=>innerWidth===expected,width);
+     }
      const stores=await frame.evaluate(()=>({
       options:[...document.querySelectorAll('#storeSelect option')].map(n=>n.value).sort(),
       inline:[...document.querySelectorAll('#storeFilters .quick-row > button[data-store]')].map(n=>n.dataset.store).sort()

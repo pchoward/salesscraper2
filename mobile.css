@@ -653,6 +653,23 @@
 .promo-strip button { font: inherit; cursor: pointer; }
 .promo-strip[hidden], .promo-strip [hidden] { display: none; }
 
+@media (min-width:801px) and (min-height:501px), (min-width:801px) and (pointer:fine) {
+    .shred-embedded .promo-strip:not([hidden]) {
+        display:grid;
+        grid-template-columns:auto minmax(0,1fr) auto;
+        align-items:start;
+        gap:2px 10px;
+        margin-bottom:4px;
+        padding:3px 8px;
+        font-size:12px;
+    }
+    .shred-embedded #promoTitle { padding-block:4px; }
+    .shred-embedded #promoOffers { display:flex; flex-wrap:wrap; gap:2px 14px; }
+    .shred-embedded .promo-offer { align-items:center; }
+    .shred-embedded .promo-strip button { min-height:24px; }
+}
+
+
 
 @media (max-width:640px) {
     .promo-strip {
