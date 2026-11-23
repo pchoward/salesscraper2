@@ -783,12 +783,12 @@
         "Christy Sports_Skis": {
           "fields": {
             "brand": 1.0,
-            "gender": 0.489,
+            "gender": 0.495,
             "image": 1.0,
             "versions": 0.021,
-            "waist": 0.766
+            "waist": 0.768
           },
-          "items": 94
+          "items": 95
         },
         "Gear West_Boots": {
           "fields": {
@@ -855,21 +855,21 @@
         },
         "Ski Essentials_Boots": {
           "fields": {
-            "ability": 0.792,
+            "ability": 0.776,
             "brand": 1.0,
-            "closure": 0.229,
+            "closure": 0.224,
             "flex": 1.0,
             "gender": 1.0,
             "image": 1.0,
-            "kind": 0.979,
-            "last": 0.938,
+            "kind": 0.98,
+            "last": 0.939,
             "mondo": 1.0,
             "sizes": 1.0,
-            "ski_type": 0.979,
-            "sole": 0.438,
-            "walk": 0.083
+            "ski_type": 0.98,
+            "sole": 0.429,
+            "walk": 0.082
           },
-          "items": 48
+          "items": 49
         },
         "Ski Essentials_Helmets": {
           "fields": {
@@ -888,19 +888,19 @@
         },
         "Ski Essentials_Skis": {
           "fields": {
-            "ability": 0.828,
-            "bindings": 0.688,
+            "ability": 0.838,
+            "bindings": 0.691,
             "brand": 1.0,
             "gender": 1.0,
             "image": 1.0,
-            "kind": 0.898,
-            "length": 0.008,
-            "lengths": 0.008,
-            "rocker": 0.266,
-            "ski_type": 0.992,
-            "waist": 0.984
+            "kind": 0.89,
+            "length": 0.007,
+            "lengths": 0.007,
+            "rocker": 0.272,
+            "ski_type": 0.993,
+            "waist": 0.985
           },
-          "items": 128
+          "items": 136
         },
         "Skipro_Bindings": {
           "fields": {
@@ -1040,12 +1040,12 @@
           "fields": {
             "age": 1.0,
             "brand": 1.0,
-            "goggle_size": 0.467,
-            "image": 0.8,
+            "goggle_size": 0.438,
+            "image": 0.812,
             "protects": 1.0,
-            "versions": 0.2
+            "versions": 0.188
           },
-          "items": 15
+          "items": 16
         },
         "The House_Skis": {
           "fields": {
@@ -1280,58 +1280,58 @@
             "brand": 1.0,
             "din": 1.0,
             "image": 1.0,
-            "kind": 0.143,
-            "ski_type": 0.143,
-            "sole": 0.714
+            "kind": 0.182,
+            "ski_type": 0.182,
+            "sole": 0.682
           },
-          "items": 21
+          "items": 22
         },
         "evo_Boots": {
           "fields": {
-            "ability": 0.085,
+            "ability": 0.084,
             "brand": 1.0,
-            "closure": 0.282,
-            "flex": 0.854,
-            "gender": 0.601,
+            "closure": 0.284,
+            "flex": 0.856,
+            "gender": 0.595,
             "image": 1.0,
-            "kind": 0.235,
-            "last": 0.394,
+            "kind": 0.233,
+            "last": 0.391,
             "mondo": 1.0,
             "sizes": 1.0,
-            "ski_type": 0.235,
-            "sole": 0.399,
+            "ski_type": 0.233,
+            "sole": 0.395,
             "versions": 0.005,
-            "walk": 0.263,
+            "walk": 0.26,
             "width": 0.005
           },
-          "items": 213
+          "items": 215
         },
         "evo_Helmets": {
           "fields": {
             "age": 1.0,
             "brand": 0.986,
-            "certification": 0.042,
-            "gender": 0.222,
-            "helmet_shell": 0.396,
+            "certification": 0.041,
+            "gender": 0.226,
+            "helmet_shell": 0.39,
             "helmet_style": 1.0,
             "image": 1.0,
             "prot_size": 0.986,
             "protects": 1.0,
-            "rotational": 0.722,
-            "versions": 0.049,
-            "width": 0.042
+            "rotational": 0.726,
+            "versions": 0.048,
+            "width": 0.041
           },
-          "items": 144
+          "items": 146
         },
         "evo_Packs": {
           "fields": {
             "brand": 0.983,
-            "gender": 0.138,
+            "gender": 0.142,
             "image": 1.0,
-            "versions": 0.009,
-            "width": 0.06
+            "versions": 0.008,
+            "width": 0.058
           },
-          "items": 116
+          "items": 120
         },
         "evo_Poles": {
           "fields": {
@@ -1347,20 +1347,20 @@
             "age": 1.0,
             "brand": 0.988,
             "certification": 0.029,
-            "gender": 0.135,
-            "goggle_fit": 0.3,
-            "goggle_lens": 0.124,
-            "goggle_size": 0.329,
+            "gender": 0.14,
+            "goggle_fit": 0.304,
+            "goggle_lens": 0.123,
+            "goggle_size": 0.327,
             "image": 1.0,
-            "lens_shape": 0.341,
+            "lens_shape": 0.345,
             "prot_size": 0.094,
-            "protection_sizes": 0.165,
+            "protection_sizes": 0.164,
             "protection_type": 0.041,
             "protects": 1.0,
             "versions": 0.018,
-            "width": 0.065
+            "width": 0.064
           },
-          "items": 170
+          "items": 171
         },
         "evo_Skis": {
           "fields": {
@@ -1476,6 +1476,7 @@
       "Jackets & Vests",
       "Pants",
       "Shirts",
+      "Shirts & Tops",
       "Shorts"
     ],
     "Ski Essentials": [
@@ -1597,6 +1598,7 @@
       "A X J",
       "A X M",
       "A X W",
+      "C B B",
       "C B G",
       "C B J",
       "C B M",
@@ -1628,6 +1630,7 @@
       "C P T",
       "C P W",
       "C R W",
+      "C S B",
       "C S M",
       "C S T",
       "C S W",
