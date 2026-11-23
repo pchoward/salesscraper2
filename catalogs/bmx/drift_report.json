@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-22T10:37:46+00:00",
+  "checked_at": "2026-11-23T02:21:33+00:00",
   "counts": {
-    "action": 14,
+    "action": 2,
     "watch": 0
   },
-  "date": "2026-11-22",
+  "date": "2026-11-23",
   "findings": [
     {
       "key": "Albe's BMX_Frames & Forks",
       "kind": "held",
       "level": "action",
       "reason": "partial_catalog_drop",
-      "runs": 2,
+      "runs": 3,
       "store": "Albe's BMX"
     },
     {
@@ -19,105 +19,9 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 6,
+      "runs": 7,
       "store": "SkatePro"
-    },
-    {
-      "key": "Stacked BMX_Bikes",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Braking",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Drivetrain",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Frames & Forks",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Packs",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Protection",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Seating",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Steering",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Tires",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Wheel Parts",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "key": "Stacked BMX_Wheels",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 11,
-      "store": "Stacked BMX"
-    },
-    {
-      "change": "drop",
-      "count": 1,
-      "kind": "volume",
-      "level": "action",
-      "median": 20,
-      "store": "Tactics"
     }
   ],
-  "last_scrape": "2026-11-22T10:13:04+00:00"
+  "last_scrape": "2026-11-23T01:56:45+00:00"
 }

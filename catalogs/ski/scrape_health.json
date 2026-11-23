@@ -21567,275 +21567,1649 @@
         }
       },
       "scanned_at": "2026-11-22T10:23:36+00:00"
+    },
+    {
+      "date": "2026-11-23",
+      "results": {
+        "Aspen Ski and Board_Bindings": {
+          "count": 9,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 9,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 9,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Aspen Ski and Board_Boots": {
+          "count": 141,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 149,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 3,
+            "actual_count": 141,
+            "percentage_change": -5.4,
+            "reason": "normal_variation"
+          }
+        },
+        "Aspen Ski and Board_Helmets": {
+          "count": 20,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 21,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 1,
+            "actual_count": 20,
+            "percentage_change": -4.8,
+            "reason": "normal_variation"
+          }
+        },
+        "Aspen Ski and Board_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Aspen Ski and Board_Poles": {
+          "count": 23,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 23,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 23,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Aspen Ski and Board_Protection": {
+          "count": 34,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 36,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 1,
+            "actual_count": 34,
+            "percentage_change": -5.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Aspen Ski and Board_Skis": {
+          "count": 95,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 107,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 7,
+            "actual_count": 95,
+            "percentage_change": -11.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Boots": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Helmets": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": -50.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Bern_Skis": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Christy Sports_Bindings": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 9.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 8,
+            "percentage_change": -11.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Christy Sports_Boots": {
+          "count": 144,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 150.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 6.0,
+            "actual_count": 144,
+            "percentage_change": -4.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Christy Sports_Helmets": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Christy Sports_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Christy Sports_Poles": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 4.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": -25.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Christy Sports_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Christy Sports_Skis": {
+          "count": 95,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 98.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 4.5,
+            "actual_count": 95,
+            "percentage_change": -3.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Boots": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Helmets": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Protection": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 4.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 3,
+            "percentage_change": -25.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Demon_Skis": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Boots": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Helmets": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Packs": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 3,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "EVOC_Skis": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 9,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Gear West_Bindings": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Gear West_Boots": {
+          "count": 164,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 165.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 164,
+            "percentage_change": -0.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Gear West_Helmets": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 5.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 6,
+            "percentage_change": 20.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Gear West_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Gear West_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Gear West_Protection": {
+          "count": 6,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 6.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 6,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Gear West_Skis": {
+          "count": 134,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 132.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.5,
+            "actual_count": 134,
+            "percentage_change": 1.1,
+            "reason": "normal_variation"
+          }
+        },
+        "SkatePro_Helmets": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": 30.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "scrape_failed"
+          }
+        },
+        "SkatePro_Protection": {
+          "count": 0,
+          "failed": true,
+          "diagnostics": {
+            "expected_count": 8.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "scrape_failed"
+          }
+        },
+        "Ski Essentials_Bindings": {
+          "count": 20,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 22,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 1,
+            "actual_count": 20,
+            "percentage_change": -9.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Ski Essentials_Boots": {
+          "count": 46,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 47,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 46,
+            "percentage_change": -2.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Ski Essentials_Helmets": {
+          "count": 31,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 33,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 31,
+            "percentage_change": -6.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Ski Essentials_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Ski Essentials_Poles": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 3,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Ski Essentials_Protection": {
+          "count": 8,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 8,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 8,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Ski Essentials_Skis": {
+          "count": 128,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 128,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 1,
+            "actual_count": 128,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Skipro_Bindings": {
+          "count": 54,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 54,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 54,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Skipro_Boots": {
+          "count": 239,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 243,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 2,
+            "actual_count": 239,
+            "percentage_change": -1.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Skipro_Helmets": {
+          "count": 28,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 28,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 28,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Skipro_Packs": {
+          "count": 1,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 1,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 1,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Skipro_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Skipro_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Skipro_Skis": {
+          "count": 186,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 193,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 2,
+            "actual_count": 186,
+            "percentage_change": -3.6,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Boots": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Helmets": {
+          "count": 9,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 11.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 9,
+            "percentage_change": -18.2,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Protection": {
+          "count": 19,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 20.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.5,
+            "actual_count": 19,
+            "percentage_change": -7.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Smith_Skis": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "The House_Bindings": {
+          "count": 9,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 9.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 9,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The House_Boots": {
+          "count": 80,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 80.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 80,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The House_Helmets": {
+          "count": 15,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 13.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 2.0,
+            "actual_count": 15,
+            "percentage_change": 15.4,
+            "reason": "normal_variation"
+          }
+        },
+        "The House_Packs": {
+          "count": 12,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 12,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 12,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The House_Poles": {
+          "count": 14,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 14.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 14,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The House_Protection": {
+          "count": 25,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 15.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 25,
+            "percentage_change": 66.7,
+            "reason": "normal_variation"
+          }
+        },
+        "The House_Skis": {
+          "count": 66,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 62.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 66,
+            "percentage_change": 6.5,
+            "reason": "normal_variation"
+          }
+        },
+        "The Pro Ski and Ride_Bindings": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 2,
+            "percentage_change": -33.3,
+            "reason": "normal_variation"
+          }
+        },
+        "The Pro Ski and Ride_Boots": {
+          "count": 33,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 34,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 1,
+            "actual_count": 33,
+            "percentage_change": -2.9,
+            "reason": "normal_variation"
+          }
+        },
+        "The Pro Ski and Ride_Helmets": {
+          "count": 11,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 11,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 11,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The Pro Ski and Ride_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "The Pro Ski and Ride_Poles": {
+          "count": 5,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 5,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 1,
+            "actual_count": 5,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "The Pro Ski and Ride_Protection": {
+          "count": 15,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 16,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 15,
+            "percentage_change": -6.2,
+            "reason": "normal_variation"
+          }
+        },
+        "The Pro Ski and Ride_Skis": {
+          "count": 27,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 29,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 1,
+            "actual_count": 27,
+            "percentage_change": -6.9,
+            "reason": "normal_variation"
+          }
+        },
+        "Triple 8_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Triple 8_Boots": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Triple 8_Helmets": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 2,
+            "percentage_change": -33.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Triple 8_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Triple 8_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Triple 8_Protection": {
+          "count": 2,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 2.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 2,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Triple 8_Skis": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Utah Ski_Bindings": {
+          "count": 3,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 3.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Utah Ski_Boots": {
+          "count": 26,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 28.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 26,
+            "percentage_change": -7.1,
+            "reason": "normal_variation"
+          }
+        },
+        "Utah Ski_Helmets": {
+          "count": 25,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 26.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 25,
+            "percentage_change": -3.8,
+            "reason": "normal_variation"
+          }
+        },
+        "Utah Ski_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Utah Ski_Poles": {
+          "count": 25,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 25.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 25,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Utah Ski_Protection": {
+          "count": 39,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 45.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 2.5,
+            "actual_count": 39,
+            "percentage_change": -13.3,
+            "reason": "normal_variation"
+          }
+        },
+        "Utah Ski_Skis": {
+          "count": 47,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 47.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 47,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Willis Ski and Board_Bindings": {
+          "count": 25,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 26,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 25,
+            "percentage_change": -3.8,
+            "reason": "normal_variation"
+          }
+        },
+        "Willis Ski and Board_Boots": {
+          "count": 96,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 96,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 96,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Willis Ski and Board_Helmets": {
+          "count": 22,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 22,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 22,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Willis Ski and Board_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Willis Ski and Board_Poles": {
+          "count": 4,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 4,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 4,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Willis Ski and Board_Protection": {
+          "count": 15,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 15,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 15,
+            "percentage_change": 0.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Willis Ski and Board_Skis": {
+          "count": 48,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 49,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 3,
+            "actual_count": 48,
+            "percentage_change": -2.0,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Bindings": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Boots": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Helmets": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Packs": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Poles": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Protection": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "Zeitbike_Skis": {
+          "count": 0,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 0.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 0,
+            "percentage_change": null,
+            "reason": "normal_variation"
+          }
+        },
+        "evo_Bindings": {
+          "count": 21,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 20.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 3.0,
+            "actual_count": 21,
+            "percentage_change": 2.4,
+            "reason": "normal_variation"
+          }
+        },
+        "evo_Boots": {
+          "count": 210,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 227.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 10.5,
+            "actual_count": 210,
+            "percentage_change": -7.7,
+            "reason": "normal_variation"
+          }
+        },
+        "evo_Helmets": {
+          "count": 147,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 143.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 6.5,
+            "actual_count": 147,
+            "percentage_change": 2.4,
+            "reason": "normal_variation"
+          }
+        },
+        "evo_Packs": {
+          "count": 110,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 100,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 13,
+            "actual_count": 110,
+            "percentage_change": 10.0,
+            "reason": "normal_variation"
+          }
+        },
+        "evo_Poles": {
+          "count": 27,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 18.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 2.5,
+            "actual_count": 27,
+            "percentage_change": 50.0,
+            "reason": "normal_variation"
+          }
+        },
+        "evo_Protection": {
+          "count": 166,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 132.0,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 15.5,
+            "actual_count": 166,
+            "percentage_change": 25.8,
+            "reason": "normal_variation"
+          }
+        },
+        "evo_Skis": {
+          "count": 174,
+          "failed": false,
+          "diagnostics": {
+            "expected_count": 174.5,
+            "baseline_samples": 14,
+            "median_absolute_deviation": 4.5,
+            "actual_count": 174,
+            "percentage_change": -0.3,
+            "reason": "normal_variation"
+          }
+        }
+      },
+      "scanned_at": "2026-11-23T02:07:14+00:00"
     }
   ],
   "baseline": {
     "Gear West_Boots": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 164
     },
     "Gear West_Skis": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 134
     },
     "Utah Ski_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 3
     },
     "Utah Ski_Boots": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 26
     },
     "Utah Ski_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 25
     },
     "Utah Ski_Poles": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 25
     },
     "Utah Ski_Skis": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 47
     },
     "evo_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 21
     },
     "evo_Poles": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 27
     },
     "evo_Skis": {
-      "date": "2026-11-22",
-      "count": 170
+      "date": "2026-11-23",
+      "count": 174
     },
     "Christy Sports_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 8
     },
     "Christy Sports_Boots": {
-      "date": "2026-11-22",
-      "count": 143
+      "date": "2026-11-23",
+      "count": 144
     },
     "Christy Sports_Poles": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 3
     },
     "Christy Sports_Skis": {
-      "date": "2026-11-22",
-      "count": 96
+      "date": "2026-11-23",
+      "count": 95
     },
     "The House_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 9
     },
     "The House_Boots": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 80
     },
     "The House_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 15
     },
     "The House_Poles": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 14
     },
     "The House_Skis": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 66
     },
     "Gear West_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 6
     },
     "Gear West_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 6
     },
     "The House_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 25
     },
     "Utah Ski_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 39
     },
     "evo_Helmets": {
-      "date": "2026-11-22",
-      "count": 144
+      "date": "2026-11-23",
+      "count": 147
     },
     "evo_Protection": {
-      "date": "2026-11-22",
-      "count": 164
+      "date": "2026-11-23",
+      "count": 166
     },
     "Bern_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 1
     },
     "Demon_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 1
     },
     "Demon_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 3
     },
     "Triple 8_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 2
     },
     "Gear West_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 3
     },
     "Smith_Helmets": {
-      "date": "2026-11-22",
-      "count": 10
+      "date": "2026-11-23",
+      "count": 9
     },
     "Smith_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 19
     },
     "evo_Boots": {
-      "date": "2026-11-22",
-      "count": 213
+      "date": "2026-11-23",
+      "count": 210
     },
     "Aspen Ski and Board_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 9
     },
     "Aspen Ski and Board_Boots": {
-      "date": "2026-11-22",
-      "count": 143
+      "date": "2026-11-23",
+      "count": 141
     },
     "Aspen Ski and Board_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 20
     },
     "Aspen Ski and Board_Poles": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 23
     },
     "Aspen Ski and Board_Protection": {
-      "date": "2026-11-22",
-      "count": 35
+      "date": "2026-11-23",
+      "count": 34
     },
     "Aspen Ski and Board_Skis": {
-      "date": "2026-11-22",
-      "count": 99
+      "date": "2026-11-23",
+      "count": 95
     },
     "Ski Essentials_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 20
     },
     "Ski Essentials_Boots": {
-      "date": "2026-11-22",
-      "count": 47
+      "date": "2026-11-23",
+      "count": 46
     },
     "Ski Essentials_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 31
     },
     "Ski Essentials_Poles": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 3
     },
     "Ski Essentials_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 8
     },
     "Ski Essentials_Skis": {
-      "date": "2026-11-22",
-      "count": 127
+      "date": "2026-11-23",
+      "count": 128
     },
     "Skipro_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 54
     },
     "Skipro_Boots": {
-      "date": "2026-11-22",
-      "count": 241
+      "date": "2026-11-23",
+      "count": 239
     },
     "Skipro_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 28
     },
     "Skipro_Skis": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 186
     },
     "The Pro Ski and Ride_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 2
     },
     "The Pro Ski and Ride_Boots": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 33
     },
     "The Pro Ski and Ride_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 11
     },
     "The Pro Ski and Ride_Poles": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 5
     },
     "The Pro Ski and Ride_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 15
     },
     "The Pro Ski and Ride_Skis": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 27
     },
     "Willis Ski and Board_Bindings": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 25
     },
     "Willis Ski and Board_Boots": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 96
     },
     "Willis Ski and Board_Helmets": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 22
     },
     "Willis Ski and Board_Poles": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 4
     },
     "Willis Ski and Board_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 15
     },
     "Willis Ski and Board_Skis": {
-      "date": "2026-11-22",
-      "count": 49
+      "date": "2026-11-23",
+      "count": 48
     },
     "Aspen Ski and Board_Packs": {
       "date": "2026-11-14",
       "count": 1
     },
     "Skipro_Packs": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 1
     },
     "The House_Packs": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 12
     },
     "evo_Packs": {
-      "date": "2026-11-22",
-      "count": 112
+      "date": "2026-11-23",
+      "count": 110
     },
     "Triple 8_Protection": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 2
     },
     "EVOC_Packs": {
-      "date": "2026-11-22",
+      "date": "2026-11-23",
       "count": 3
     }
   },
@@ -21884,6 +23258,10 @@
       {
         "date": "2026-11-22",
         "count": 9
+      },
+      {
+        "date": "2026-11-23",
+        "count": 9
       }
     ],
     "Aspen Ski and Board_Boots": [
@@ -21930,6 +23308,10 @@
       {
         "date": "2026-11-22",
         "count": 143
+      },
+      {
+        "date": "2026-11-23",
+        "count": 141
       }
     ],
     "Aspen Ski and Board_Helmets": [
@@ -21975,6 +23357,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 20
+      },
+      {
+        "date": "2026-11-23",
         "count": 20
       }
     ],
@@ -22022,6 +23408,10 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Aspen Ski and Board_Poles": [
@@ -22067,6 +23457,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 23
+      },
+      {
+        "date": "2026-11-23",
         "count": 23
       }
     ],
@@ -22114,6 +23508,10 @@
       {
         "date": "2026-11-22",
         "count": 35
+      },
+      {
+        "date": "2026-11-23",
+        "count": 34
       }
     ],
     "Aspen Ski and Board_Skis": [
@@ -22160,13 +23558,13 @@
       {
         "date": "2026-11-22",
         "count": 99
+      },
+      {
+        "date": "2026-11-23",
+        "count": 95
       }
     ],
     "Bern_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -22217,15 +23615,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Bern_Boots": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -22276,13 +23674,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Bern_Helmets": [
-      {
-        "date": "2026-11-09",
-        "count": 2
-      },
       {
         "date": "2026-11-10",
         "count": 2
@@ -22334,6 +23732,10 @@
       {
         "date": "2026-11-22",
         "count": 1
+      },
+      {
+        "date": "2026-11-23",
+        "count": 1
       }
     ],
     "Bern_Packs": [
@@ -22380,13 +23782,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Bern_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -22437,15 +23839,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Bern_Protection": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -22495,15 +23897,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Bern_Skis": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -22554,13 +23956,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Christy Sports_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 9
-      },
       {
         "date": "2026-11-10",
         "count": 9
@@ -22612,13 +24014,13 @@
       {
         "date": "2026-11-22",
         "count": 8
+      },
+      {
+        "date": "2026-11-23",
+        "count": 8
       }
     ],
     "Christy Sports_Boots": [
-      {
-        "date": "2026-11-09",
-        "count": 157
-      },
       {
         "date": "2026-11-10",
         "count": 157
@@ -22670,13 +24072,13 @@
       {
         "date": "2026-11-22",
         "count": 143
+      },
+      {
+        "date": "2026-11-23",
+        "count": 144
       }
     ],
     "Christy Sports_Helmets": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -22728,6 +24130,10 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Christy Sports_Packs": [
@@ -22774,13 +24180,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Christy Sports_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 5
-      },
       {
         "date": "2026-11-10",
         "count": 5
@@ -22832,13 +24238,13 @@
       {
         "date": "2026-11-22",
         "count": 3
+      },
+      {
+        "date": "2026-11-23",
+        "count": 3
       }
     ],
     "Christy Sports_Protection": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -22890,13 +24296,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Christy Sports_Skis": [
-      {
-        "date": "2026-11-09",
-        "count": 93
-      },
       {
         "date": "2026-11-10",
         "count": 93
@@ -22948,13 +24354,13 @@
       {
         "date": "2026-11-22",
         "count": 96
+      },
+      {
+        "date": "2026-11-23",
+        "count": 95
       }
     ],
     "Demon_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -23005,15 +24411,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Demon_Boots": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -23063,15 +24469,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Demon_Helmets": [
       {
-        "date": "2026-11-09",
-        "count": 1
-      },
-      {
         "date": "2026-11-10",
         "count": 1
       },
@@ -23121,6 +24527,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 1
+      },
+      {
+        "date": "2026-11-23",
         "count": 1
       }
     ],
@@ -23168,13 +24578,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Demon_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -23226,13 +24636,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Demon_Protection": [
-      {
-        "date": "2026-11-09",
-        "count": 5
-      },
       {
         "date": "2026-11-10",
         "count": 1
@@ -23284,13 +24694,13 @@
       {
         "date": "2026-11-22",
         "count": 3
+      },
+      {
+        "date": "2026-11-23",
+        "count": 3
       }
     ],
     "Demon_Skis": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -23342,6 +24752,10 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "EVOC_Bindings": [
@@ -23379,6 +24793,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
@@ -23418,6 +24836,10 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "EVOC_Helmets": [
@@ -23455,6 +24877,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
@@ -23494,6 +24920,10 @@
       {
         "date": "2026-11-22",
         "count": 3
+      },
+      {
+        "date": "2026-11-23",
+        "count": 3
       }
     ],
     "EVOC_Poles": [
@@ -23531,6 +24961,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
@@ -23570,6 +25004,10 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "EVOC_Skis": [
@@ -23608,13 +25046,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Gear West_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 3
-      },
       {
         "date": "2026-11-10",
         "count": 5
@@ -23666,13 +25104,13 @@
       {
         "date": "2026-11-22",
         "count": 3
+      },
+      {
+        "date": "2026-11-23",
+        "count": 3
       }
     ],
     "Gear West_Boots": [
-      {
-        "date": "2026-11-09",
-        "count": 169
-      },
       {
         "date": "2026-11-10",
         "count": 162
@@ -23724,13 +25162,13 @@
       {
         "date": "2026-11-22",
         "count": 164
+      },
+      {
+        "date": "2026-11-23",
+        "count": 164
       }
     ],
     "Gear West_Helmets": [
-      {
-        "date": "2026-11-09",
-        "count": 5
-      },
       {
         "date": "2026-11-10",
         "count": 5
@@ -23781,6 +25219,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 6
+      },
+      {
+        "date": "2026-11-23",
         "count": 6
       }
     ],
@@ -23828,13 +25270,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Gear West_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -23885,15 +25327,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Gear West_Protection": [
       {
-        "date": "2026-11-09",
-        "count": 6
-      },
-      {
         "date": "2026-11-10",
         "count": 6
       },
@@ -23944,13 +25386,13 @@
       {
         "date": "2026-11-22",
         "count": 6
+      },
+      {
+        "date": "2026-11-23",
+        "count": 6
       }
     ],
     "Gear West_Skis": [
-      {
-        "date": "2026-11-09",
-        "count": 136
-      },
       {
         "date": "2026-11-10",
         "count": 122
@@ -24001,6 +25443,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 134
+      },
+      {
+        "date": "2026-11-23",
         "count": 134
       }
     ],
@@ -24164,6 +25610,10 @@
       {
         "date": "2026-11-22",
         "count": 20
+      },
+      {
+        "date": "2026-11-23",
+        "count": 20
       }
     ],
     "Ski Essentials_Boots": [
@@ -24210,6 +25660,10 @@
       {
         "date": "2026-11-22",
         "count": 47
+      },
+      {
+        "date": "2026-11-23",
+        "count": 46
       }
     ],
     "Ski Essentials_Helmets": [
@@ -24255,6 +25709,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 31
+      },
+      {
+        "date": "2026-11-23",
         "count": 31
       }
     ],
@@ -24302,6 +25760,10 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Ski Essentials_Poles": [
@@ -24347,6 +25809,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 3
+      },
+      {
+        "date": "2026-11-23",
         "count": 3
       }
     ],
@@ -24394,6 +25860,10 @@
       {
         "date": "2026-11-22",
         "count": 8
+      },
+      {
+        "date": "2026-11-23",
+        "count": 8
       }
     ],
     "Ski Essentials_Skis": [
@@ -24440,6 +25910,10 @@
       {
         "date": "2026-11-22",
         "count": 127
+      },
+      {
+        "date": "2026-11-23",
+        "count": 128
       }
     ],
     "Skipro_Bindings": [
@@ -24485,6 +25959,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 54
+      },
+      {
+        "date": "2026-11-23",
         "count": 54
       }
     ],
@@ -24532,6 +26010,10 @@
       {
         "date": "2026-11-22",
         "count": 241
+      },
+      {
+        "date": "2026-11-23",
+        "count": 239
       }
     ],
     "Skipro_Helmets": [
@@ -24577,6 +26059,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 28
+      },
+      {
+        "date": "2026-11-23",
         "count": 28
       }
     ],
@@ -24624,6 +26110,10 @@
       {
         "date": "2026-11-22",
         "count": 1
+      },
+      {
+        "date": "2026-11-23",
+        "count": 1
       }
     ],
     "Skipro_Poles": [
@@ -24669,6 +26159,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
@@ -24716,6 +26210,10 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Skipro_Skis": [
@@ -24762,13 +26260,13 @@
       {
         "date": "2026-11-22",
         "count": 186
+      },
+      {
+        "date": "2026-11-23",
+        "count": 186
       }
     ],
     "Smith_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -24819,15 +26317,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Smith_Boots": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -24878,13 +26376,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Smith_Helmets": [
-      {
-        "date": "2026-11-09",
-        "count": 12
-      },
       {
         "date": "2026-11-10",
         "count": 13
@@ -24936,6 +26434,10 @@
       {
         "date": "2026-11-22",
         "count": 10
+      },
+      {
+        "date": "2026-11-23",
+        "count": 9
       }
     ],
     "Smith_Packs": [
@@ -24982,13 +26484,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Smith_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -25040,13 +26542,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Smith_Protection": [
-      {
-        "date": "2026-11-09",
-        "count": 23
-      },
       {
         "date": "2026-11-10",
         "count": 23
@@ -25098,13 +26600,13 @@
       {
         "date": "2026-11-22",
         "count": 19
+      },
+      {
+        "date": "2026-11-23",
+        "count": 19
       }
     ],
     "Smith_Skis": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -25156,13 +26658,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "The House_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 9
-      },
       {
         "date": "2026-11-10",
         "count": 8
@@ -25214,13 +26716,13 @@
       {
         "date": "2026-11-22",
         "count": 9
+      },
+      {
+        "date": "2026-11-23",
+        "count": 9
       }
     ],
     "The House_Boots": [
-      {
-        "date": "2026-11-09",
-        "count": 80
-      },
       {
         "date": "2026-11-10",
         "count": 80
@@ -25272,13 +26774,13 @@
       {
         "date": "2026-11-22",
         "count": 80
+      },
+      {
+        "date": "2026-11-23",
+        "count": 80
       }
     ],
     "The House_Helmets": [
-      {
-        "date": "2026-11-09",
-        "count": 13
-      },
       {
         "date": "2026-11-10",
         "count": 13
@@ -25329,6 +26831,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 15
+      },
+      {
+        "date": "2026-11-23",
         "count": 15
       }
     ],
@@ -25376,13 +26882,13 @@
       {
         "date": "2026-11-22",
         "count": 12
+      },
+      {
+        "date": "2026-11-23",
+        "count": 12
       }
     ],
     "The House_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 14
-      },
       {
         "date": "2026-11-10",
         "count": 14
@@ -25434,13 +26940,13 @@
       {
         "date": "2026-11-22",
         "count": 14
+      },
+      {
+        "date": "2026-11-23",
+        "count": 14
       }
     ],
     "The House_Protection": [
-      {
-        "date": "2026-11-09",
-        "count": 15
-      },
       {
         "date": "2026-11-10",
         "count": 15
@@ -25492,13 +26998,13 @@
       {
         "date": "2026-11-22",
         "count": 25
+      },
+      {
+        "date": "2026-11-23",
+        "count": 25
       }
     ],
     "The House_Skis": [
-      {
-        "date": "2026-11-09",
-        "count": 62
-      },
       {
         "date": "2026-11-10",
         "count": 61
@@ -25549,6 +27055,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 66
+      },
+      {
+        "date": "2026-11-23",
         "count": 66
       }
     ],
@@ -25596,6 +27106,10 @@
       {
         "date": "2026-11-22",
         "count": 2
+      },
+      {
+        "date": "2026-11-23",
+        "count": 2
       }
     ],
     "The Pro Ski and Ride_Boots": [
@@ -25641,6 +27155,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 33
+      },
+      {
+        "date": "2026-11-23",
         "count": 33
       }
     ],
@@ -25688,6 +27206,10 @@
       {
         "date": "2026-11-22",
         "count": 11
+      },
+      {
+        "date": "2026-11-23",
+        "count": 11
       }
     ],
     "The Pro Ski and Ride_Packs": [
@@ -25733,6 +27255,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
@@ -25780,6 +27306,10 @@
       {
         "date": "2026-11-22",
         "count": 5
+      },
+      {
+        "date": "2026-11-23",
+        "count": 5
       }
     ],
     "The Pro Ski and Ride_Protection": [
@@ -25825,6 +27355,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 15
+      },
+      {
+        "date": "2026-11-23",
         "count": 15
       }
     ],
@@ -25872,13 +27406,13 @@
       {
         "date": "2026-11-22",
         "count": 27
+      },
+      {
+        "date": "2026-11-23",
+        "count": 27
       }
     ],
     "Triple 8_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -25929,15 +27463,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Triple 8_Boots": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -25987,15 +27521,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Triple 8_Helmets": [
       {
-        "date": "2026-11-09",
-        "count": 3
-      },
-      {
         "date": "2026-11-10",
         "count": 3
       },
@@ -26045,6 +27579,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 2
+      },
+      {
+        "date": "2026-11-23",
         "count": 2
       }
     ],
@@ -26092,13 +27630,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Triple 8_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -26149,15 +27687,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Triple 8_Protection": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -26207,15 +27745,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 2
+      },
+      {
+        "date": "2026-11-23",
         "count": 2
       }
     ],
     "Triple 8_Skis": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -26265,15 +27803,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Utah Ski_Bindings": [
       {
-        "date": "2026-11-09",
-        "count": 3
-      },
-      {
         "date": "2026-11-10",
         "count": 3
       },
@@ -26324,13 +27862,13 @@
       {
         "date": "2026-11-22",
         "count": 3
+      },
+      {
+        "date": "2026-11-23",
+        "count": 3
       }
     ],
     "Utah Ski_Boots": [
-      {
-        "date": "2026-11-09",
-        "count": 28
-      },
       {
         "date": "2026-11-10",
         "count": 28
@@ -26382,13 +27920,13 @@
       {
         "date": "2026-11-22",
         "count": 26
+      },
+      {
+        "date": "2026-11-23",
+        "count": 26
       }
     ],
     "Utah Ski_Helmets": [
-      {
-        "date": "2026-11-09",
-        "count": 24
-      },
       {
         "date": "2026-11-10",
         "count": 24
@@ -26440,6 +27978,10 @@
       {
         "date": "2026-11-22",
         "count": 25
+      },
+      {
+        "date": "2026-11-23",
+        "count": 25
       }
     ],
     "Utah Ski_Packs": [
@@ -26486,13 +28028,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Utah Ski_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 25
-      },
       {
         "date": "2026-11-10",
         "count": 24
@@ -26544,13 +28086,13 @@
       {
         "date": "2026-11-22",
         "count": 25
+      },
+      {
+        "date": "2026-11-23",
+        "count": 25
       }
     ],
     "Utah Ski_Protection": [
-      {
-        "date": "2026-11-09",
-        "count": 48
-      },
       {
         "date": "2026-11-10",
         "count": 47
@@ -26602,13 +28144,13 @@
       {
         "date": "2026-11-22",
         "count": 39
+      },
+      {
+        "date": "2026-11-23",
+        "count": 39
       }
     ],
     "Utah Ski_Skis": [
-      {
-        "date": "2026-11-09",
-        "count": 48
-      },
       {
         "date": "2026-11-10",
         "count": 46
@@ -26659,6 +28201,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 47
+      },
+      {
+        "date": "2026-11-23",
         "count": 47
       }
     ],
@@ -26706,6 +28252,10 @@
       {
         "date": "2026-11-22",
         "count": 25
+      },
+      {
+        "date": "2026-11-23",
+        "count": 25
       }
     ],
     "Willis Ski and Board_Boots": [
@@ -26751,6 +28301,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 96
+      },
+      {
+        "date": "2026-11-23",
         "count": 96
       }
     ],
@@ -26798,6 +28352,10 @@
       {
         "date": "2026-11-22",
         "count": 22
+      },
+      {
+        "date": "2026-11-23",
+        "count": 22
       }
     ],
     "Willis Ski and Board_Packs": [
@@ -26843,6 +28401,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
@@ -26890,6 +28452,10 @@
       {
         "date": "2026-11-22",
         "count": 4
+      },
+      {
+        "date": "2026-11-23",
+        "count": 4
       }
     ],
     "Willis Ski and Board_Protection": [
@@ -26935,6 +28501,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 15
+      },
+      {
+        "date": "2026-11-23",
         "count": 15
       }
     ],
@@ -26982,13 +28552,13 @@
       {
         "date": "2026-11-22",
         "count": 49
+      },
+      {
+        "date": "2026-11-23",
+        "count": 48
       }
     ],
     "Zeitbike_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -27039,15 +28609,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Zeitbike_Boots": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -27097,15 +28667,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Zeitbike_Helmets": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -27155,6 +28725,10 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
@@ -27202,13 +28776,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "Zeitbike_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 0
-      },
       {
         "date": "2026-11-10",
         "count": 0
@@ -27259,15 +28833,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Zeitbike_Protection": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -27317,15 +28891,15 @@
       },
       {
         "date": "2026-11-22",
+        "count": 0
+      },
+      {
+        "date": "2026-11-23",
         "count": 0
       }
     ],
     "Zeitbike_Skis": [
       {
-        "date": "2026-11-09",
-        "count": 0
-      },
-      {
         "date": "2026-11-10",
         "count": 0
       },
@@ -27376,13 +28950,13 @@
       {
         "date": "2026-11-22",
         "count": 0
+      },
+      {
+        "date": "2026-11-23",
+        "count": 0
       }
     ],
     "evo_Bindings": [
-      {
-        "date": "2026-11-09",
-        "count": 25
-      },
       {
         "date": "2026-11-10",
         "count": 19
@@ -27434,13 +29008,13 @@
       {
         "date": "2026-11-22",
         "count": 21
+      },
+      {
+        "date": "2026-11-23",
+        "count": 21
       }
     ],
     "evo_Boots": [
-      {
-        "date": "2026-11-05",
-        "count": 300
-      },
       {
         "date": "2026-11-10",
         "count": 276
@@ -27492,13 +29066,13 @@
       {
         "date": "2026-11-22",
         "count": 213
+      },
+      {
+        "date": "2026-11-23",
+        "count": 210
       }
     ],
     "evo_Helmets": [
-      {
-        "date": "2026-11-09",
-        "count": 152
-      },
       {
         "date": "2026-11-10",
         "count": 145
@@ -27550,6 +29124,10 @@
       {
         "date": "2026-11-22",
         "count": 144
+      },
+      {
+        "date": "2026-11-23",
+        "count": 147
       }
     ],
     "evo_Packs": [
@@ -27596,13 +29174,13 @@
       {
         "date": "2026-11-22",
         "count": 112
+      },
+      {
+        "date": "2026-11-23",
+        "count": 110
       }
     ],
     "evo_Poles": [
-      {
-        "date": "2026-11-09",
-        "count": 19
-      },
       {
         "date": "2026-11-10",
         "count": 17
@@ -27654,13 +29232,13 @@
       {
         "date": "2026-11-22",
         "count": 27
+      },
+      {
+        "date": "2026-11-23",
+        "count": 27
       }
     ],
     "evo_Protection": [
-      {
-        "date": "2026-11-09",
-        "count": 131
-      },
       {
         "date": "2026-11-10",
         "count": 121
@@ -27712,13 +29290,13 @@
       {
         "date": "2026-11-22",
         "count": 164
+      },
+      {
+        "date": "2026-11-23",
+        "count": 166
       }
     ],
     "evo_Skis": [
-      {
-        "date": "2026-11-09",
-        "count": 194
-      },
       {
         "date": "2026-11-10",
         "count": 187
@@ -27770,6 +29348,10 @@
       {
         "date": "2026-11-22",
         "count": 170
+      },
+      {
+        "date": "2026-11-23",
+        "count": 174
       }
     ]
   }

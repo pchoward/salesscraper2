@@ -64,7 +64,21 @@
       "events": []
     },
     "Tactics": {
-      "events": []
+      "events": [
+        {
+          "cut": 15,
+          "cut_high": 19,
+          "cut_low": 10,
+          "end": "2026-11-23",
+          "kind": "sale",
+          "listings": 19,
+          "moment": "",
+          "start": null,
+          "steps": [],
+          "tracked": 19,
+          "uniform": false
+        }
+      ]
     },
     "Triple 8": {
       "events": []
@@ -73,5 +87,5 @@
       "events": []
     }
   },
-  "updated": "2026-11-22"
+  "updated": "2026-11-23"
 }
