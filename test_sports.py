@@ -11,6 +11,8 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
+from bs4 import BeautifulSoup
+
 import page
 import rebuild_page
 import scraper
@@ -70,7 +72,7 @@ class RenderTests(unittest.TestCase):
         self.assertTrue('data-part="all" data-count="2" aria-pressed="true"' in html, "opens on every category")
         for part in ("Frames &amp; Forks", "Wheels &amp; Hubs"):
             self.assertTrue(f'data-part="{part}" data-count="1" aria-pressed="false"' in html, part)
-        self.assertNotIn('data-part="Decks"', html)
+        self.assertIsNone(BeautifulSoup(html, 'html.parser').select_one('[data-part="Decks"]'))
         self.assertIn("freecoaster", html.lower(), "BMX aliases are inlined")
         self.assertNotIn("Gravity Pro", html)
         self.assertIn("Deals from Albe&#x27;s BMX.", html)

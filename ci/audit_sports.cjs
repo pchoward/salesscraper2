@@ -189,11 +189,12 @@ async function main(){
         assert.equal(await product.getAttribute('data-part'),part);
         const price=await product.locator('.now-price').boundingBox();
         assert(price&&price.y>=0&&price.y+price.height<=560,part+' prices fit in the short mobile viewport');
-        const fits=await product.locator('.card-quick').evaluate(button=>{
+        const labelFit=await product.locator('.card-quick').evaluate(button=>{
          const label=document.createRange();label.selectNodeContents(button);
-         return label.getClientRects().length===1&&label.getBoundingClientRect().width<=button.clientWidth;
+         return {lines:label.getClientRects().length,text:label.getBoundingClientRect().width,space:button.clientWidth};
         });
-        assert(fits,'both Quick View labels fit on one line in the short viewport');
+        assert(labelFit.lines===1&&labelFit.text<=labelFit.space,
+         part+' Quick View must fit on one line: '+JSON.stringify(labelFit));
        }
       }
       await control(frame,'partSelect','Decks');
