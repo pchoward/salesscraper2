@@ -28375,14 +28375,14 @@
           }
         },
         "CCS_Completes": {
-          "count": 255,
+          "count": 253,
           "failed": false,
           "diagnostics": {
-            "expected_count": 271.5,
+            "expected_count": 267.5,
             "baseline_samples": 14,
-            "median_absolute_deviation": 6.5,
-            "actual_count": 255,
-            "percentage_change": -6.1,
+            "median_absolute_deviation": 7.5,
+            "actual_count": 253,
+            "percentage_change": -5.4,
             "reason": "normal_variation"
           }
         },
@@ -28416,7 +28416,7 @@
           "diagnostics": {
             "expected_count": 36.5,
             "baseline_samples": 14,
-            "median_absolute_deviation": 1.5,
+            "median_absolute_deviation": 2.0,
             "rule_excluded": 7,
             "actual_count": 58,
             "percentage_change": 58.9,
@@ -28595,9 +28595,9 @@
           "count": 2,
           "failed": false,
           "diagnostics": {
-            "expected_count": 2.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 2,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 2,
             "percentage_change": 0.0,
             "reason": "normal_variation"
@@ -28640,14 +28640,14 @@
           }
         },
         "Exodus_Wheels": {
-          "count": 8,
+          "count": 5,
           "failed": false,
           "diagnostics": {
             "expected_count": 8.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 8,
-            "percentage_change": 0.0,
+            "actual_count": 5,
+            "percentage_change": -37.5,
             "reason": "normal_variation"
           }
         },
@@ -28715,9 +28715,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -28814,7 +28814,7 @@
           "diagnostics": {
             "expected_count": 4.0,
             "baseline_samples": 14,
-            "median_absolute_deviation": 0.5,
+            "median_absolute_deviation": 0.0,
             "actual_count": 4,
             "percentage_change": 0.0,
             "reason": "normal_variation"
@@ -28824,9 +28824,9 @@
           "count": 1,
           "failed": false,
           "diagnostics": {
-            "expected_count": 1.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 1,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 1,
             "percentage_change": 0.0,
             "reason": "normal_variation"
@@ -28898,47 +28898,48 @@
           "count": 8,
           "failed": false,
           "diagnostics": {
-            "expected_count": 6.0,
+            "expected_count": 6.5,
             "baseline_samples": 14,
-            "median_absolute_deviation": 0.0,
+            "median_absolute_deviation": 0.5,
             "actual_count": 8,
-            "percentage_change": 33.3,
+            "percentage_change": 23.1,
             "reason": "normal_variation"
           }
         },
         "SkateWarehouse_Bearings": {
-          "count": 4,
+          "count": 3,
           "failed": false,
           "diagnostics": {
-            "expected_count": 4.5,
+            "expected_count": 4.0,
             "baseline_samples": 14,
-            "median_absolute_deviation": 0.5,
-            "actual_count": 4,
-            "percentage_change": -11.1,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 3,
+            "percentage_change": -25.0,
             "reason": "normal_variation"
           }
         },
         "SkateWarehouse_Completes": {
-          "count": 33,
-          "failed": false,
+          "count": 0,
+          "failed": true,
+          "suspect": true,
           "diagnostics": {
-            "expected_count": 33,
-            "baseline_samples": 11,
-            "median_absolute_deviation": 0,
-            "actual_count": 33,
-            "percentage_change": 0.0,
-            "reason": "normal_variation"
+            "expected_count": 33.0,
+            "baseline_samples": 12,
+            "median_absolute_deviation": 0.0,
+            "actual_count": 9,
+            "percentage_change": -72.7,
+            "reason": "partial_catalog_drop"
           }
         },
         "SkateWarehouse_Decks": {
-          "count": 69,
+          "count": 65,
           "failed": false,
           "diagnostics": {
             "expected_count": 71.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 3.5,
-            "actual_count": 69,
-            "percentage_change": -2.8,
+            "actual_count": 65,
+            "percentage_change": -8.5,
             "reason": "normal_variation"
           }
         },
@@ -28946,9 +28947,9 @@
           "count": 4,
           "failed": false,
           "diagnostics": {
-            "expected_count": 2.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 2,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 4,
             "percentage_change": 100.0,
             "reason": "normal_variation"
@@ -28979,14 +28980,14 @@
           }
         },
         "SkateWarehouse_Trucks": {
-          "count": 19,
+          "count": 18,
           "failed": false,
           "diagnostics": {
-            "expected_count": 17.5,
+            "expected_count": 18.0,
             "baseline_samples": 14,
-            "median_absolute_deviation": 1.5,
-            "actual_count": 19,
-            "percentage_change": 8.6,
+            "median_absolute_deviation": 1.0,
+            "actual_count": 18,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -29090,9 +29091,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -29102,9 +29103,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -29114,9 +29115,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -29126,11 +29127,11 @@
           "count": 59,
           "failed": false,
           "diagnostics": {
-            "expected_count": 50.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 10.5,
+            "expected_count": 59,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 2,
             "actual_count": 59,
-            "percentage_change": 18.0,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -29138,9 +29139,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -29150,9 +29151,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -29162,9 +29163,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -29174,9 +29175,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -29186,9 +29187,9 @@
           "count": 0,
           "failed": false,
           "diagnostics": {
-            "expected_count": 0.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "expected_count": 0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "actual_count": 0,
             "percentage_change": null,
             "reason": "normal_variation"
@@ -29247,8 +29248,8 @@
           "failed": false,
           "diagnostics": {
             "expected_count": 0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
             "rule_excluded": 3,
             "actual_count": 0,
             "percentage_change": null,
@@ -29259,11 +29260,11 @@
           "count": 8,
           "failed": false,
           "diagnostics": {
-            "expected_count": 9.0,
+            "expected_count": 8.5,
             "baseline_samples": 14,
-            "median_absolute_deviation": 0.0,
+            "median_absolute_deviation": 0.5,
             "actual_count": 8,
-            "percentage_change": -11.1,
+            "percentage_change": -5.9,
             "reason": "normal_variation"
           }
         },
@@ -29285,7 +29286,7 @@
           "diagnostics": {
             "expected_count": 18.0,
             "baseline_samples": 14,
-            "median_absolute_deviation": 1.0,
+            "median_absolute_deviation": 0.5,
             "actual_count": 18,
             "percentage_change": 0.0,
             "reason": "normal_variation"
@@ -29295,11 +29296,11 @@
           "count": 32,
           "failed": false,
           "diagnostics": {
-            "expected_count": 31.5,
+            "expected_count": 32.0,
             "baseline_samples": 14,
-            "median_absolute_deviation": 0.5,
+            "median_absolute_deviation": 0.0,
             "actual_count": 32,
-            "percentage_change": 1.6,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -29353,14 +29354,14 @@
           }
         },
         "Tactics_Packs": {
-          "count": 26,
+          "count": 24,
           "failed": false,
           "diagnostics": {
-            "expected_count": 26.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 0.0,
-            "actual_count": 26,
-            "percentage_change": 0.0,
+            "expected_count": 26,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 0,
+            "actual_count": 24,
+            "percentage_change": -7.7,
             "reason": "normal_variation"
           }
         },
@@ -29392,11 +29393,11 @@
           "count": 124,
           "failed": false,
           "diagnostics": {
-            "expected_count": 19.0,
+            "expected_count": 20.0,
             "baseline_samples": 14,
-            "median_absolute_deviation": 8.0,
+            "median_absolute_deviation": 9.0,
             "actual_count": 124,
-            "percentage_change": 552.6,
+            "percentage_change": 520.0,
             "reason": "normal_variation"
           }
         },
@@ -29461,14 +29462,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 295,
+          "count": 308,
           "failed": false,
           "diagnostics": {
-            "expected_count": 266.5,
+            "expected_count": 267.0,
             "baseline_samples": 14,
-            "median_absolute_deviation": 4.5,
-            "actual_count": 295,
-            "percentage_change": 10.7,
+            "median_absolute_deviation": 7.5,
+            "actual_count": 308,
+            "percentage_change": 15.4,
             "reason": "normal_variation"
           }
         },
@@ -29476,9 +29477,9 @@
           "count": 46,
           "failed": false,
           "diagnostics": {
-            "expected_count": 47.0,
-            "baseline_samples": 10,
-            "median_absolute_deviation": 1.0,
+            "expected_count": 47,
+            "baseline_samples": 11,
+            "median_absolute_deviation": 1,
             "actual_count": 46,
             "percentage_change": -2.1,
             "reason": "normal_variation"
@@ -29533,13 +29534,13 @@
           }
         }
       },
-      "scanned_at": "2026-11-22T23:41:40+00:00"
+      "scanned_at": "2026-11-23T08:05:43+00:00"
     }
   ],
   "baseline": {
     "SkateWarehouse_Decks": {
       "date": "2026-11-23",
-      "count": 69
+      "count": 65
     },
     "SkateWarehouse_Wheels": {
       "date": "2026-11-23",
@@ -29547,7 +29548,7 @@
     },
     "SkateWarehouse_Trucks": {
       "date": "2026-11-23",
-      "count": 19
+      "count": 18
     },
     "Tactics_Trucks": {
       "date": "2026-11-23",
@@ -29555,7 +29556,7 @@
     },
     "SkateWarehouse_Bearings": {
       "date": "2026-11-23",
-      "count": 4
+      "count": 3
     },
     "SkateWarehouse_Sneakers": {
       "date": "2026-11-01",
@@ -29659,7 +29660,7 @@
     },
     "Exodus_Wheels": {
       "date": "2026-11-23",
-      "count": 8
+      "count": 5
     },
     "SoCal_Decks": {
       "date": "2026-11-23",
@@ -29715,7 +29716,7 @@
     },
     "CCS_Completes": {
       "date": "2026-11-23",
-      "count": 255
+      "count": 253
     },
     "Tactics_Completes": {
       "date": "2026-11-23",
@@ -29723,11 +29724,7 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-23",
-      "count": 295
-    },
-    "SkateWarehouse_Completes": {
-      "date": "2026-11-23",
-      "count": 33
+      "count": 308
     },
     "Exodus_Bearings": {
       "date": "2026-11-23",
@@ -29755,7 +29752,7 @@
     },
     "Tactics_Packs": {
       "date": "2026-11-23",
-      "count": 26
+      "count": 24
     },
     "Zumiez_Packs": {
       "date": "2026-11-23",
@@ -30012,7 +30009,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 255
+        "count": 253
       }
     ],
     "CCS_Decks": [
@@ -31280,7 +31277,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 8
+        "count": 5
       }
     ],
     "G-Form_Protection": [
@@ -32540,7 +32537,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 4
+        "count": 3
       }
     ],
     "SkateWarehouse_Completes": [
@@ -32590,10 +32587,6 @@
       },
       {
         "date": "2026-11-22",
-        "count": 33
-      },
-      {
-        "date": "2026-11-23",
         "count": 33
       }
     ],
@@ -32652,7 +32645,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 69
+        "count": 65
       }
     ],
     "SkateWarehouse_Packs": [
@@ -32876,7 +32869,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 19
+        "count": 18
       }
     ],
     "SkateWarehouse_Wheels": [
@@ -34586,7 +34579,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 26
+        "count": 24
       }
     ],
     "Tactics_Protection": [
@@ -35108,7 +35101,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 295
+        "count": 308
       }
     ],
     "Zumiez_Packs": [
