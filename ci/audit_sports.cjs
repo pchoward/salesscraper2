@@ -196,7 +196,32 @@ async function main(){
      await frame.evaluate(()=>clearFilters());assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),{});
     });
     await scenario('Quick View, retailer-first links, chart and Watch',async()=>{
-     const card=frame.locator('#cardGrid .deal-card:not(.filtered-out):not(.grouped-hide)').first();
+     const cards=frame.locator('#cardGrid .deal-card:not(.filtered-out):not(.grouped-hide)');
+     const card=cards.first();
+     if(sport==='skate'&&width===390){
+      // Preview banners aren't part of the live 560px content viewport.
+      for(const document of [page,frame])await document.addStyleTag({content:'#previewBanner{display:none!important}'});
+      await page.setViewportSize({width:375,height:560});
+      await frame.waitForFunction(()=>innerWidth===375);
+      for(const part of ['Decks','Completes']){
+       await control(frame,'partSelect',part);
+       for(let i=0;i<2;i++){
+        const product=cards.nth(i);
+        assert.equal(await product.getAttribute('data-part'),part);
+        const price=await product.locator('.now-price').boundingBox();
+        assert(price&&price.y>=0&&price.y+price.height<=560,part+' prices fit in the short mobile viewport');
+        const labelFit=await product.locator('.card-quick').evaluate(button=>{
+         const label=document.createRange();label.selectNodeContents(button);
+         return {lines:label.getClientRects().length,text:label.getBoundingClientRect().width,space:button.clientWidth};
+        });
+        assert(labelFit.lines===1&&labelFit.text<=labelFit.space,
+         part+' Quick View must fit on one line: '+JSON.stringify(labelFit));
+       }
+      }
+      await control(frame,'partSelect','Decks');
+      await page.setViewportSize({width,height:900});
+      await frame.waitForFunction(expected=>innerWidth===expected,width);
+     }
      if(width<=640){
       const layout=await card.evaluate(node=>{
        const rect=selector=>node.querySelector(selector)?.getBoundingClientRect();
@@ -265,7 +290,31 @@ async function main(){
       await frame.locator('#layoutCards').click();
       assert(await frame.locator('#cardGrid .deal-card:not(.filtered-out)').first().isVisible());
      }
-     await frame.locator('#btnNew').click();assert((await rows(frame)).every(r=>r.added==='1'&&r.removed!=='1'));await frame.locator('#btnGone').click();assert((await rows(frame)).every(r=>r.removed==='1'));await frame.locator('#btnAll').click();assert((await rows(frame)).every(r=>r.removed!=='1'));
+     if(width<=640){
+      assert.equal(await frame.locator('#stickyBar #changeLine').count(),0);
+      assert(await frame.locator('#storeFilters').isVisible());
+      await frame.locator('#filtersOpen').click();
+      assert(await frame.getByRole('group',{name:'Deal status',exact:true}).isVisible());
+     }else assert(await frame.locator('#stickyBar #changeLine').isVisible());
+     await frame.locator('#btnNew').click();
+     assert((await rows(frame)).every(r=>r.added==='1'&&r.removed!=='1'));
+     if(width<=640){
+      await frame.locator('#filtersClose').click();
+      await page.waitForURL(url=>url.searchParams.get('change')==='new');
+      const chip=frame.locator('#activeFilters').getByRole('button',{name:'Remove New since the previous scrape'});
+      assert(await chip.isVisible());
+      await page.goBack();
+      await chip.waitFor({state:'hidden'});
+      await page.goForward();
+      await chip.waitFor();
+      await frame.locator('#filtersOpen').click();
+      assert.equal(await frame.locator('#btnNew').getAttribute('aria-pressed'),'true');
+     }
+     await frame.locator('#btnGone').click();
+     assert((await rows(frame)).every(r=>r.removed==='1'));
+     await frame.locator('#btnAll').click();
+     assert((await rows(frame)).every(r=>r.removed!=='1'));
+     if(width<=640)await frame.locator('#filtersClose').click();
     });
     await scenario('Back/Forward and cross-sport state isolation',async()=>{
      // Each step waits for its own result (URL, restored search, rows), not a

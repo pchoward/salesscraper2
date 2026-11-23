@@ -19,6 +19,14 @@
         const filterHome={parent:filters.parentNode,next:filters.nextSibling};
         const group=doc.getElementById('groupToggle');
         const groupHome={parent:group.parentNode,next:group.nextSibling,label:group.getAttribute('aria-label')};
+        const dealStatus=doc.getElementById('changeLine');
+        const dealStatusHome=dealStatus.parentNode;
+        const dealStatusNext=dealStatus.nextSibling;
+        const dealStatusSection=doc.createElement('fieldset');
+        dealStatusSection.className='phone-deal-status';
+        const dealStatusLabel=doc.createElement('legend');
+        dealStatusLabel.textContent='Deal status';
+        dealStatusSection.append(dealStatusLabel);
         const body=doc.createElement('div');body.className='phone-filter-body';
         [...drawer.children].filter(node=>node!==head&&node!==show).forEach(node=>body.appendChild(node));
         const footer=doc.createElement('div');footer.className='phone-filter-footer';
@@ -77,6 +85,10 @@
                     body.prepend(group);
                     group.setAttribute('aria-label',group.querySelector('.group-phone-label').textContent);
                 }
+                if(dealStatus.parentNode!==dealStatusSection){
+                    group.after(dealStatusSection);
+                    dealStatusSection.append(dealStatus);
+                }
                 if(clear.parentNode!==head)head.appendChild(clear);
                 close.textContent='←';
                 const tools=doc.querySelector('.tool-display');if(tools&&filters.parentNode!==tools)tools.appendChild(filters);
@@ -90,6 +102,10 @@
                 if(group.parentNode!==groupHome.parent){
                     groupHome.parent.insertBefore(group,groupHome.next);
                     group.setAttribute('aria-label',groupHome.label);
+                }
+                if(dealStatus.parentNode!==dealStatusHome){
+                    dealStatusHome.insertBefore(dealStatus,dealStatusNext);
+                    dealStatusSection.remove();
                 }
                 if(clear.parentNode!==clearHome)clearHome.appendChild(clear);
                 close.textContent='×';more.hidden=true;show.disabled=false;show.textContent='Show results';hint.hidden=true;
