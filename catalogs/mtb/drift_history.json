@@ -763,18 +763,18 @@
           "fields": {
             "age": 1.0,
             "brand": 1.0,
-            "certification": 0.053,
-            "helmet_style": 0.105,
+            "certification": 0.062,
+            "helmet_style": 0.062,
             "image": 1.0,
             "prot_size": 1.0,
             "protection_sizes": 1.0,
-            "protection_type": 0.211,
+            "protection_type": 0.156,
             "protects": 1.0,
-            "rotational": 0.105,
-            "versions": 0.526,
-            "width": 0.105
+            "rotational": 0.062,
+            "versions": 0.719,
+            "width": 0.062
           },
-          "items": 19
+          "items": 32
         },
         "Bicycle Warehouse_Bikes": {
           "fields": {
@@ -1493,10 +1493,12 @@
       "Open Face"
     ],
     "Alpinestars": [
+      "Accessories",
       "Base Layers",
       "Jackets",
       "Jerseys",
       "Pants",
+      "Shirts",
       "Shorts",
       "Tees",
       "Textile Pants",

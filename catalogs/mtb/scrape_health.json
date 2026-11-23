@@ -47891,14 +47891,14 @@
           }
         },
         "Alpinestars_Protection": {
-          "count": 37,
+          "count": 70,
           "failed": false,
           "diagnostics": {
             "expected_count": 32.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 37,
-            "percentage_change": 15.6,
+            "actual_count": 70,
+            "percentage_change": 118.8,
             "reason": "normal_variation"
           }
         },
@@ -49811,14 +49811,14 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 252,
+          "count": 251,
           "failed": false,
           "diagnostics": {
             "expected_count": 148.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 19.0,
-            "actual_count": 252,
-            "percentage_change": 69.7,
+            "actual_count": 251,
+            "percentage_change": 69.0,
             "reason": "normal_variation"
           }
         },
@@ -50450,7 +50450,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-23T07:57:23+00:00"
+      "scanned_at": "2026-11-23T08:50:13+00:00"
     }
   ],
   "baseline": {
@@ -50584,7 +50584,7 @@
     },
     "Alpinestars_Protection": {
       "date": "2026-11-23",
-      "count": 37
+      "count": 70
     },
     "Bern_Protection": {
       "date": "2026-11-23",
@@ -50636,7 +50636,7 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-23",
-      "count": 252
+      "count": 251
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-23",
@@ -51997,7 +51997,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 37
+        "count": 70
       }
     ],
     "Alpinestars_Tires": [
@@ -60819,7 +60819,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 252
+        "count": 251
       }
     ],
     "The Lost Co._Drivetrain": [
