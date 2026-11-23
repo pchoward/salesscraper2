@@ -71,7 +71,7 @@ def publish_categories(output, config):
         sport['categoriesURL'] = relative + '?v=' + hashlib.sha256(payload.encode()).hexdigest()[:12]
 
 
-def publish(output=SOURCE, catalogs=None):
+def publish(output=SOURCE, catalogs=None, *, publisher_pages=True):
     """``catalogs`` maps other sports to their pages ({'bmx': 'bmx/sale_items_chart.html'}). Without it, the
     sports whose catalog has listings in the repository (sports.published_catalogs) get their tab."""
     if catalogs is None:
@@ -103,7 +103,7 @@ def publish(output=SOURCE, catalogs=None):
     if any(sport['id'] == 'mtb' and sport.get('catalog') for sport in config['sports']):
         from explore.public import publish_demo
         config['exploreScopes'] = [publish_demo(output)]
-    (output/'index.html').write_text(render_shell(config,asset_prefix='navigation/'))
+    (output/'index.html').write_text(render_shell(config, asset_prefix='navigation/', publisher_pages=publisher_pages))
     return output/'index.html'
 
 

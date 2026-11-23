@@ -119,7 +119,7 @@ def build(out_dir, label="", data_root=None):
     page.write_page(mark_preview(html, label), str(out / "sale_items_chart.html"))
     catalogs = build_sport_pages(out, label, data_root)
     from previews.publish import publish
-    publish(out, catalogs=catalogs)
+    publish(out, catalogs=catalogs, publisher_pages=False)
     homepage = out / "index.html"
     homepage.write_text(mark_preview(homepage.read_text(encoding="utf-8"), label), encoding="utf-8")
     (out / "_headers").write_text("/*\n  X-Robots-Tag: noindex, nofollow\n", encoding="utf-8")

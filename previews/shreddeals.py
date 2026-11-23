@@ -44,17 +44,37 @@ def asset_version(name):
     return hashlib.sha256((HERE/name).read_bytes()).hexdigest()[:12]
 
 
-def render_shell(config, asset_prefix=''):
+def render_shell(config, asset_prefix='', *, publisher_pages=True):
     config = dict(config, bridgeVersion=asset_version('skate-bridge.js'))
     template = (HERE/'shell.html').read_text()
     template = template.replace('href="navigation.css"', f'href="{asset_prefix}navigation.css?v={asset_version("navigation.css")}"')
     template = template.replace('src="navigation.js"', f'src="{asset_prefix}navigation.js?v={asset_version("navigation.js")}"')
     if config.get('production'):
-        template = template.replace('<title>ShredDeals development preview</title>', '<title>ShredDeals</title>')
+        description = "Compare skateboarding, ski and snowboard, mountain bike, and BMX deals across retailers using tracked prices."
+        template = template.replace(
+            '<title>ShredDeals development preview</title>',
+            '<title>ShredDeals | Action sports deals and price history</title>\n'
+            f'<meta name="description" content="{description}">\n'
+            '<link rel="canonical" href="https://shreddeals.com/">\n'
+            '<meta property="og:type" content="website">\n'
+            '<meta property="og:title" content="ShredDeals">\n'
+            f'<meta property="og:description" content="{description}">\n'
+            '<meta property="og:url" content="https://shreddeals.com/">\n'
+            '<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite",'
+            '"name":"ShredDeals","url":"https://shreddeals.com/"}</script>'
+        )
+        if publisher_pages:
+            template = template.replace(
+                '<!-- publisher-navigation -->',
+                '<footer><nav class="publisher-links" aria-label="About ShredDeals">'
+                '<a href="/about/">About</a><a href="/how-it-works/">How it works</a>'
+                '<a href="/guides/">Guides</a><a href="/contact/">Contact</a></nav></footer>'
+            )
         template = template.replace('<span class="preview-badge">Development prototype</span>', '')
         template = template.replace('CATALOG PREVIEW', 'SHREDDEALS')
         template = template.replace('No products, price histories or alerts are active for this sport. Skate deals stay in Skate.', 'Skate deals are available now while we add more sports.')
         template = template.replace('This prototype needs JavaScript for navigation. The original SkateDeals page remains available separately.', 'Sport navigation needs JavaScript. <a href="sale_items_chart.html">Open SkateDeals</a>.')
+    template = template.replace('<!-- publisher-navigation -->', '')
     payload = json.dumps(config).replace('<', '\\u003c')
     return template.replace('__CONFIG__', payload)
 
