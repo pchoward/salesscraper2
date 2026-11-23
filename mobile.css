@@ -515,17 +515,16 @@
     #stickyBar .tool-search, #stickyBar .tool-deals, #stickyBar .tool-display { display:contents; }
     #stickyBar .search-field { grid-column:1/-1; grid-row:1; margin:4px 0; }
     #stickyBar #searchChips { grid-column:1/-1; grid-row:2; }
-    #stickyBar .lede.digest { grid-column:1/-1; grid-row:3; width:auto; margin:0; }
-    #stickyBar .lede.digest, #stickyBar .nav-cluster {
+    #stickyBar #searchChips[hidden], #stickyBar #changeLine { display:none; }
+    #stickyBar .nav-cluster {
         scroll-snap-type:x proximity;
         scrollbar-width:thin;
         scrollbar-color:#bac4d0 transparent;
     }
-    #stickyBar .nav-cluster::-webkit-scrollbar, #stickyBar .lede.digest::-webkit-scrollbar { display:block; height:3px; }
-    #stickyBar .nav-cluster::-webkit-scrollbar-thumb, #stickyBar .lede.digest::-webkit-scrollbar-thumb { background:#bac4d0; border-radius:3px; }
-    #stickyBar .quick-chip, #stickyBar .change-btn { scroll-snap-align:start; }
+    #stickyBar .nav-cluster::-webkit-scrollbar { display:block; height:3px; }
+    #stickyBar .nav-cluster::-webkit-scrollbar-thumb { background:#bac4d0; border-radius:3px; }
+    #stickyBar .quick-chip { scroll-snap-align:start; }
     #stickyBar #storeFilters[data-scroll-forward="true"] { mask-image:linear-gradient(to right, #000 calc(100% - 16px), transparent); }
-    #stickyBar .change-btn { min-height:34px; padding-inline:6px; }
     #stickyBar .crumbs {
         grid-column:1/4;
         grid-row:4;
@@ -534,6 +533,13 @@
         font-size:12px;
     }
     #stickyBar .crumbs ol { gap:0; }
+    #stickyBar .crumbs li { min-width:0; max-width:100%; }
+    #stickyBar .crumbs :is(.crumb-link, [aria-current]) {
+        min-width:0;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+    }
     #stickyBar .crumb-link { min-height:28px; }
     #stickyBar .tool-deals .scan-wrap { grid-column:4; grid-row:4; justify-self:end; }
     #stickyBar .tool-deals .fresh-note { grid-column:1/-1; grid-row:7; justify-self:end; }
@@ -618,6 +624,17 @@
         text-align:center;
         line-height:16px;
     }
+    #filterDrawer .phone-deal-status {
+        min-width:0;
+        margin:4px 12px 10px;
+        padding:4px 0 0;
+        border:0;
+    }
+    #filterDrawer .phone-deal-status legend { padding:0; font-size:13px; font-weight:700; }
+    #filterDrawer #changeLine { margin:0; }
+    #filterDrawer #changeLine .segment { display:flex; flex-wrap:wrap; gap:4px; border:0; padding:0; background:none; }
+    #filterDrawer #changeLine .change-btn { padding:0 8px; border-radius:4px; }
+    #filterDrawer #changeLine .change-btn[aria-pressed="true"] { background:#dde5ee; color:#243c56; }
     #filterDrawer .phone-filter-body > .filter-head { display:none; }
     #filterDrawer .phone-filter-footer { display:block; flex:none; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:white; border-top:1px solid var(--border); }
     .rail .sidebar#filterDrawer button { min-height:44px; }

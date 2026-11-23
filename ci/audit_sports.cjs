@@ -268,7 +268,31 @@ async function main(){
       await frame.locator('#layoutCards').click();
       assert(await frame.locator('#cardGrid .deal-card:not(.filtered-out)').first().isVisible());
      }
-     await frame.locator('#btnNew').click();assert((await rows(frame)).every(r=>r.added==='1'&&r.removed!=='1'));await frame.locator('#btnGone').click();assert((await rows(frame)).every(r=>r.removed==='1'));await frame.locator('#btnAll').click();assert((await rows(frame)).every(r=>r.removed!=='1'));
+     if(width<=640){
+      assert.equal(await frame.locator('#stickyBar #changeLine').count(),0);
+      assert(await frame.locator('#storeFilters').isVisible());
+      await frame.locator('#filtersOpen').click();
+      assert(await frame.getByRole('group',{name:'Deal status',exact:true}).isVisible());
+     }else assert(await frame.locator('#stickyBar #changeLine').isVisible());
+     await frame.locator('#btnNew').click();
+     assert((await rows(frame)).every(r=>r.added==='1'&&r.removed!=='1'));
+     if(width<=640){
+      await frame.locator('#filtersClose').click();
+      await page.waitForURL(url=>url.searchParams.get('change')==='new');
+      const chip=frame.locator('#activeFilters').getByRole('button',{name:'Remove New since the previous scrape'});
+      assert(await chip.isVisible());
+      await page.goBack();
+      await chip.waitFor({state:'hidden'});
+      await page.goForward();
+      await chip.waitFor();
+      await frame.locator('#filtersOpen').click();
+      assert.equal(await frame.locator('#btnNew').getAttribute('aria-pressed'),'true');
+     }
+     await frame.locator('#btnGone').click();
+     assert((await rows(frame)).every(r=>r.removed==='1'));
+     await frame.locator('#btnAll').click();
+     assert((await rows(frame)).every(r=>r.removed!=='1'));
+     if(width<=640)await frame.locator('#filtersClose').click();
     });
     await scenario('Back/Forward and cross-sport state isolation',async()=>{
      // Each step waits for its own result (URL, restored search, rows), not a
