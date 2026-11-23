@@ -4060,17 +4060,16 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
     #stickyBar .tool-search, #stickyBar .tool-deals, #stickyBar .tool-display { display:contents; }
     #stickyBar .search-field { grid-column:1/-1; grid-row:1; margin:4px 0; }
     #stickyBar #searchChips { grid-column:1/-1; grid-row:2; }
-    #stickyBar .lede.digest { grid-column:1/-1; grid-row:3; width:auto; margin:0; }
-    #stickyBar .lede.digest, #stickyBar .nav-cluster {
+    #stickyBar #searchChips[hidden], #stickyBar #changeLine { display:none; }
+    #stickyBar .nav-cluster {
         scroll-snap-type:x proximity;
         scrollbar-width:thin;
         scrollbar-color:#bac4d0 transparent;
     }
-    #stickyBar .nav-cluster::-webkit-scrollbar, #stickyBar .lede.digest::-webkit-scrollbar { display:block; height:3px; }
-    #stickyBar .nav-cluster::-webkit-scrollbar-thumb, #stickyBar .lede.digest::-webkit-scrollbar-thumb { background:#bac4d0; border-radius:3px; }
-    #stickyBar .quick-chip, #stickyBar .change-btn { scroll-snap-align:start; }
+    #stickyBar .nav-cluster::-webkit-scrollbar { display:block; height:3px; }
+    #stickyBar .nav-cluster::-webkit-scrollbar-thumb { background:#bac4d0; border-radius:3px; }
+    #stickyBar .quick-chip { scroll-snap-align:start; }
     #stickyBar #storeFilters[data-scroll-forward="true"] { mask-image:linear-gradient(to right, #000 calc(100% - 16px), transparent); }
-    #stickyBar .change-btn { min-height:34px; padding-inline:6px; }
     #stickyBar .crumbs {
         grid-column:1/4;
         grid-row:4;
@@ -4079,6 +4078,13 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
         font-size:12px;
     }
     #stickyBar .crumbs ol { gap:0; }
+    #stickyBar .crumbs li { min-width:0; max-width:100%; }
+    #stickyBar .crumbs :is(.crumb-link, [aria-current]) {
+        min-width:0;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+    }
     #stickyBar .crumb-link { min-height:28px; }
     #stickyBar .tool-deals .scan-wrap { grid-column:4; grid-row:4; justify-self:end; }
     #stickyBar .tool-deals .fresh-note { grid-column:1/-1; grid-row:7; justify-self:end; }
@@ -4163,6 +4169,17 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
         text-align:center;
         line-height:16px;
     }
+    #filterDrawer .phone-deal-status {
+        min-width:0;
+        margin:4px 12px 10px;
+        padding:4px 0 0;
+        border:0;
+    }
+    #filterDrawer .phone-deal-status legend { padding:0; font-size:13px; font-weight:700; }
+    #filterDrawer #changeLine { margin:0; }
+    #filterDrawer #changeLine .segment { display:flex; flex-wrap:wrap; gap:4px; border:0; padding:0; background:none; }
+    #filterDrawer #changeLine .change-btn { padding:0 8px; border-radius:4px; }
+    #filterDrawer #changeLine .change-btn[aria-pressed="true"] { background:#dde5ee; color:#243c56; }
     #filterDrawer .phone-filter-body > .filter-head { display:none; }
     #filterDrawer .phone-filter-footer { display:block; flex:none; padding:10px 12px calc(10px + env(safe-area-inset-bottom)); background:white; border-top:1px solid var(--border); }
     .rail .sidebar#filterDrawer button { min-height:44px; }
@@ -4315,10 +4332,10 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
         justify-content:center;
         width:100%;
         min-width:0;
-        aspect-ratio:1.11;
+        aspect-ratio:var(--card-photo-ratio, 1.11);
     }
     #cardGrid .deal-card .store-mark {
-        grid-row:2;
+        grid-row:var(--card-store-row, 2);
         position:static;
         max-width:none;
         padding:0;
@@ -4328,7 +4345,7 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
         line-height:1.2;
     }
     #cardGrid .deal-card :is(.star, .card-alert, .card-quick) {
-        grid-row:3;
+        grid-row:var(--card-action-row, 3);
         position:relative;
         inset:auto;
         transform:none;
@@ -4379,11 +4396,24 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 }
 
 /* Give both labels room on the smallest two-column cards. */
-@media (min-width:351px) and (max-width:374px) {
+@media (min-width:351px) and (max-width:390px) {
     #cardGrid .deal-card :is(.card-alert, .card-quick) {
         border-inline-width:0;
         font-size:10.5px;
         font-weight:600;
+    }
+}
+
+/* Give skateboard prices priority on short, narrow phone viewports. */
+@media (min-width:351px) and (max-width:390px) and (max-height:600px) {
+    #cardGrid .deal-card:is([data-part="Decks"], [data-part="Completes"]):has(.card-pricing) {
+        --card-action-row:5;
+        --card-photo-ratio:1.16;
+    }
+    /* Completes also has a category chip above the grid. */
+    #cardGrid .deal-card[data-part="Completes"]:has(.card-pricing) {
+        --card-store-row:4;
+        --card-photo-ratio:1.21;
     }
 }
 </style>
@@ -10162,6 +10192,14 @@ const CARD_PAGE_SIZE = 24;
         const filterHome={parent:filters.parentNode,next:filters.nextSibling};
         const group=doc.getElementById('groupToggle');
         const groupHome={parent:group.parentNode,next:group.nextSibling,label:group.getAttribute('aria-label')};
+        const dealStatus=doc.getElementById('changeLine');
+        const dealStatusHome=dealStatus.parentNode;
+        const dealStatusNext=dealStatus.nextSibling;
+        const dealStatusSection=doc.createElement('fieldset');
+        dealStatusSection.className='phone-deal-status';
+        const dealStatusLabel=doc.createElement('legend');
+        dealStatusLabel.textContent='Deal status';
+        dealStatusSection.append(dealStatusLabel);
         const body=doc.createElement('div');body.className='phone-filter-body';
         [...drawer.children].filter(node=>node!==head&&node!==show).forEach(node=>body.appendChild(node));
         const footer=doc.createElement('div');footer.className='phone-filter-footer';
@@ -10220,6 +10258,10 @@ const CARD_PAGE_SIZE = 24;
                     body.prepend(group);
                     group.setAttribute('aria-label',group.querySelector('.group-phone-label').textContent);
                 }
+                if(dealStatus.parentNode!==dealStatusSection){
+                    group.after(dealStatusSection);
+                    dealStatusSection.append(dealStatus);
+                }
                 if(clear.parentNode!==head)head.appendChild(clear);
                 close.textContent='←';
                 const tools=doc.querySelector('.tool-display');if(tools&&filters.parentNode!==tools)tools.appendChild(filters);
@@ -10233,6 +10275,10 @@ const CARD_PAGE_SIZE = 24;
                 if(group.parentNode!==groupHome.parent){
                     groupHome.parent.insertBefore(group,groupHome.next);
                     group.setAttribute('aria-label',groupHome.label);
+                }
+                if(dealStatus.parentNode!==dealStatusHome){
+                    dealStatusHome.insertBefore(dealStatus,dealStatusNext);
+                    dealStatusSection.remove();
                 }
                 if(clear.parentNode!==clearHome)clearHome.appendChild(clear);
                 close.textContent='×';more.hidden=true;show.disabled=false;show.textContent='Show results';hint.hidden=true;
