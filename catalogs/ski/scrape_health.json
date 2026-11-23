@@ -22616,14 +22616,14 @@
           }
         },
         "Utah Ski_Boots": {
-          "count": 26,
+          "count": 25,
           "failed": false,
           "diagnostics": {
             "expected_count": 28.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 26,
-            "percentage_change": -7.1,
+            "actual_count": 25,
+            "percentage_change": -10.7,
             "reason": "normal_variation"
           }
         },
@@ -22880,26 +22880,26 @@
           }
         },
         "evo_Helmets": {
-          "count": 147,
+          "count": 149,
           "failed": false,
           "diagnostics": {
             "expected_count": 143.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 6.5,
-            "actual_count": 147,
-            "percentage_change": 2.4,
+            "actual_count": 149,
+            "percentage_change": 3.8,
             "reason": "normal_variation"
           }
         },
         "evo_Packs": {
-          "count": 110,
+          "count": 114,
           "failed": false,
           "diagnostics": {
             "expected_count": 100,
             "baseline_samples": 11,
             "median_absolute_deviation": 13,
-            "actual_count": 110,
-            "percentage_change": 10.0,
+            "actual_count": 114,
+            "percentage_change": 14.0,
             "reason": "normal_variation"
           }
         },
@@ -22916,31 +22916,31 @@
           }
         },
         "evo_Protection": {
-          "count": 166,
+          "count": 172,
           "failed": false,
           "diagnostics": {
             "expected_count": 132.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 15.5,
-            "actual_count": 166,
-            "percentage_change": 25.8,
+            "actual_count": 172,
+            "percentage_change": 30.3,
             "reason": "normal_variation"
           }
         },
         "evo_Skis": {
-          "count": 174,
+          "count": 185,
           "failed": false,
           "diagnostics": {
             "expected_count": 174.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 4.5,
-            "actual_count": 174,
-            "percentage_change": -0.3,
+            "actual_count": 185,
+            "percentage_change": 6.0,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-23T02:07:14+00:00"
+      "scanned_at": "2026-11-23T07:51:13+00:00"
     }
   ],
   "baseline": {
@@ -22958,7 +22958,7 @@
     },
     "Utah Ski_Boots": {
       "date": "2026-11-23",
-      "count": 26
+      "count": 25
     },
     "Utah Ski_Helmets": {
       "date": "2026-11-23",
@@ -22982,7 +22982,7 @@
     },
     "evo_Skis": {
       "date": "2026-11-23",
-      "count": 174
+      "count": 185
     },
     "Christy Sports_Bindings": {
       "date": "2026-11-23",
@@ -23038,11 +23038,11 @@
     },
     "evo_Helmets": {
       "date": "2026-11-23",
-      "count": 147
+      "count": 149
     },
     "evo_Protection": {
       "date": "2026-11-23",
-      "count": 166
+      "count": 172
     },
     "Bern_Helmets": {
       "date": "2026-11-23",
@@ -23202,7 +23202,7 @@
     },
     "evo_Packs": {
       "date": "2026-11-23",
-      "count": 110
+      "count": 114
     },
     "Triple 8_Protection": {
       "date": "2026-11-23",
@@ -27923,7 +27923,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 26
+        "count": 25
       }
     ],
     "Utah Ski_Helmets": [
@@ -29127,7 +29127,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 147
+        "count": 149
       }
     ],
     "evo_Packs": [
@@ -29177,7 +29177,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 110
+        "count": 114
       }
     ],
     "evo_Poles": [
@@ -29293,7 +29293,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 166
+        "count": 172
       }
     ],
     "evo_Skis": [
@@ -29351,7 +29351,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 174
+        "count": 185
       }
     ]
   }

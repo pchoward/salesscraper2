@@ -1310,28 +1310,28 @@
           "fields": {
             "age": 1.0,
             "brand": 0.986,
-            "certification": 0.035,
-            "gender": 0.227,
-            "helmet_shell": 0.39,
+            "certification": 0.042,
+            "gender": 0.222,
+            "helmet_shell": 0.396,
             "helmet_style": 1.0,
             "image": 1.0,
             "prot_size": 0.986,
             "protects": 1.0,
-            "rotational": 0.73,
-            "versions": 0.043,
-            "width": 0.035
+            "rotational": 0.722,
+            "versions": 0.049,
+            "width": 0.042
           },
-          "items": 141
+          "items": 144
         },
         "evo_Packs": {
           "fields": {
-            "brand": 0.982,
-            "gender": 0.144,
+            "brand": 0.983,
+            "gender": 0.138,
             "image": 1.0,
             "versions": 0.009,
-            "width": 0.063
+            "width": 0.06
           },
-          "items": 111
+          "items": 116
         },
         "evo_Poles": {
           "fields": {
@@ -1346,35 +1346,35 @@
           "fields": {
             "age": 1.0,
             "brand": 0.988,
-            "certification": 0.03,
-            "gender": 0.134,
-            "goggle_fit": 0.305,
-            "goggle_lens": 0.122,
-            "goggle_size": 0.341,
+            "certification": 0.029,
+            "gender": 0.135,
+            "goggle_fit": 0.3,
+            "goggle_lens": 0.124,
+            "goggle_size": 0.329,
             "image": 1.0,
-            "lens_shape": 0.354,
-            "prot_size": 0.085,
-            "protection_sizes": 0.159,
-            "protection_type": 0.03,
+            "lens_shape": 0.341,
+            "prot_size": 0.094,
+            "protection_sizes": 0.165,
+            "protection_type": 0.041,
             "protects": 1.0,
             "versions": 0.018,
-            "width": 0.061
+            "width": 0.065
           },
-          "items": 164
+          "items": 170
         },
         "evo_Skis": {
           "fields": {
-            "bindings": 0.023,
+            "bindings": 0.022,
             "brand": 1.0,
-            "gender": 0.264,
+            "gender": 0.258,
             "image": 1.0,
             "length": 1.0,
             "lengths": 1.0,
-            "rocker": 0.103,
-            "ski_type": 0.046,
-            "waist": 0.782
+            "rocker": 0.124,
+            "ski_type": 0.043,
+            "waist": 0.747
           },
-          "items": 174
+          "items": 186
         }
       }
     }
@@ -1701,6 +1701,7 @@
       "Day Packs",
       "Goggle Accessories",
       "Hydration Packs",
+      "Ski Backpacks",
       "Travel Backpacks",
       "Travel Bags",
       "Wrist Guards"

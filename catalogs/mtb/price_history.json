@@ -511,13 +511,11 @@
     "store": "Bicycle Warehouse",
     "part": "Bikes",
     "first_seen": "2026-11-11",
-    "last_seen": "2026-11-22",
-    "observation_count": 10,
+    "last_seen": "2026-11-23",
+    "observation_count": 11,
     "all_time_low": 4299.0,
     "all_time_low_date": "2026-11-11",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-23",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/66a7f54b5c642f7c3621a6a323916ae3a81aa629.jpg?v=1787783633",
     "prices": {
       "2026-11-11": 4299.0,
@@ -529,7 +527,8 @@
       "2026-11-19": 4299.0,
       "2026-11-20": 4299.0,
       "2026-11-21": 4299.0,
-      "2026-11-22": 4299.0
+      "2026-11-22": 4299.0,
+      "2026-11-23": 4299.0
     }
   },
   "https://bicyclewarehouse.com/products/2025-levo-expert-carbon-g4-bike-gloss-and-satin-metallic-finish": {
@@ -962,13 +961,11 @@
     "store": "Bicycle Warehouse",
     "part": "Protection",
     "first_seen": "2026-11-11",
-    "last_seen": "2026-11-22",
-    "observation_count": 11,
+    "last_seen": "2026-11-23",
+    "observation_count": 12,
     "all_time_low": 79.99,
     "all_time_low_date": "2026-11-11",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-23",
     "image": "https://cdn.shopify.com/s/files/1/0286/1214/files/E_31174_001_1.jpg?v=1772088450",
     "prices": {
       "2026-11-11": 79.99,
@@ -981,7 +978,8 @@
       "2026-11-19": 79.99,
       "2026-11-20": 79.99,
       "2026-11-21": 79.99,
-      "2026-11-22": 79.99
+      "2026-11-22": 79.99,
+      "2026-11-23": 79.99
     }
   },
   "https://bicyclewarehouse.com/products/fox-launch-elbow-pads": {
@@ -11839,6 +11837,8 @@
     "all_time_low": 64.0,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-23",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Maxxis-Aggressor-EXO-TR_Black_f2c89db4-dc4d-4b09-b5df-204015257636.jpg?v=1625214806",
     "length": 27.5,
     "prices": {
@@ -17476,11 +17476,11 @@
     "observation_count": 1,
     "all_time_low": 94.99,
     "all_time_low_date": "2026-11-23",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/RaceFaceCinchBB92DoubleRow30mmBottomBracket.jpg?v=1621867078",
     "prices": {
       "2026-11-23": 94.99
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/race-face-indy-knee-pads-black": {
     "name": "Race Face Indy Knee Pads - Black",
@@ -50151,16 +50151,15 @@
     "store": "Bike Mart",
     "part": "Cockpit",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-23",
+    "observation_count": 2,
     "all_time_low": 13.0,
     "all_time_low_date": "2026-11-12",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-14",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ST0461_a8b1fa20-21d5-472e-934c-4387d896e6f7.jpg?v=1762256071",
     "prices": {
-      "2026-11-12": 13.0
+      "2026-11-12": 13.0,
+      "2026-11-23": 13.0
     }
   },
   "https://www.bikemart.com/products/fr-5-brake-lever-pair": {
@@ -55738,16 +55737,15 @@
     "store": "Bike Mart",
     "part": "Cockpit",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-12",
-    "observation_count": 1,
+    "last_seen": "2026-11-23",
+    "observation_count": 2,
     "all_time_low": 19.99,
     "all_time_low_date": "2026-11-12",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-13",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ou8800.jpg?v=1762279598",
     "prices": {
-      "2026-11-12": 19.99
+      "2026-11-12": 19.99,
+      "2026-11-23": 19.99
     }
   },
   "https://www.bikemart.com/products/origin8-3k-carbon-fiber-headset-spacers-shis-spacer-1-1-8-x-20mm-carbon-5-spacers-carbon": {
@@ -64425,6 +64423,31 @@
       "2026-11-23": 22.49
     }
   },
+  "https://www.bikemart.com/products/origin8-rd-1200-axles-front-rear-qa1f-m9x100x108-qr-aly-rd-1200-sealed": {
+    "name": "Origin8 RD-1200 Axles Front/Rear QA1F M9x100x108 QR Aly RD-1200 Sealed",
+    "store": "Bike Mart",
+    "part": "Wheels",
+    "first_seen": "2026-11-23",
+    "last_seen": "2026-11-23",
+    "observation_count": 1,
+    "all_time_low": 23.49,
+    "all_time_low_date": "2026-11-23",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/371559.jpg?v=1762316913",
+    "spec_offers": [
+      {
+        "diameter_mm": null,
+        "durometers": [],
+        "variant_id": "46843645657341",
+        "available": true,
+        "price": 23.49,
+        "compare_at_price": 26.49
+      }
+    ],
+    "prices": {
+      "2026-11-23": 23.49
+    },
+    "stage": "new"
+  },
   "https://www.bikemart.com/products/origin8-rd-1200-axles-front-rear-qa1r-m10x130x140-qr-aly-rd-1200-sealed": {
     "name": "Origin8 RD-1200 Axles Front/Rear QA1R M10x130x140 QR Aly RD-1200 Sealed",
     "store": "Bike Mart",
@@ -69693,16 +69716,15 @@
     "store": "Bike Mart",
     "part": "Brakes",
     "first_seen": "2026-11-15",
-    "last_seen": "2026-11-15",
-    "observation_count": 1,
+    "last_seen": "2026-11-23",
+    "observation_count": 2,
     "all_time_low": 5.0,
     "all_time_low_date": "2026-11-15",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-17",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/BR9616.jpg?v=1762264702",
     "prices": {
-      "2026-11-15": 5.0
+      "2026-11-15": 5.0,
+      "2026-11-23": 5.0
     }
   },
   "https://www.bikemart.com/products/quality-wheels-105-dt-r500-disc-rear-wheel-700-12-x-142mm-center-lock-hg-11-mtn-blk-32h": {
@@ -77401,18 +77423,17 @@
     "store": "Bike Mart",
     "part": "Cockpit",
     "first_seen": "2026-11-17",
-    "last_seen": "2026-11-21",
-    "observation_count": 3,
+    "last_seen": "2026-11-23",
+    "observation_count": 4,
     "all_time_low": 21.95,
     "all_time_low_date": "2026-11-17",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-23",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/HT0378.jpg?v=1762273841",
     "prices": {
       "2026-11-17": 21.95,
       "2026-11-18": 26.95,
-      "2026-11-21": 26.95
+      "2026-11-21": 26.95,
+      "2026-11-23": 26.95
     }
   },
   "https://www.bikemart.com/products/wtb-byway-tire-650b-x-47-tcs-tubeless-folding-blk-tan-light-fast-rolling-dual-dna-sg": {
@@ -104479,6 +104500,8 @@
     "all_time_low": 54.87,
     "all_time_low_date": "2026-11-20",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-23",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3250_TR00532_480e991b-1154-482e-bf1a-b8288b14c57e.jpg?v=1795329797",
     "width": 26.0,
     "length": 2.6,
@@ -108904,6 +108927,8 @@
     "all_time_low": 32.95,
     "all_time_low_date": "2026-11-20",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-23",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/19002_TR1593_b1ebb5ea-d588-4327-916f-886641b7b463.jpg?v=1795331002",
     "width": 29.0,
     "length": 2.2,
@@ -113787,12 +113812,12 @@
     "observation_count": 1,
     "all_time_low": 49.99,
     "all_time_low_date": "2026-11-23",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1086037.jpg?v=1767732505",
     "length": 29.0,
     "prices": {
       "2026-11-23": 49.99
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/253752-specialized-hillbilly-grid-gravity-2bliss-ready-t9-tire-29": {
     "name": "Specialized Hillbilly Grid Gravity 2Bliss Ready T9 Tire - 29\"",
@@ -113803,12 +113828,12 @@
     "observation_count": 1,
     "all_time_low": 49.99,
     "all_time_low_date": "2026-11-23",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1093522.jpg?v=1767732806",
     "length": 29.0,
     "prices": {
       "2026-11-23": 49.99
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/253762-specialized-purgatory-grid-2bliss-ready-t7-tire-27-5": {
     "name": "Specialized Purgatory Grid 2Bliss Ready T7 Tire - 27.5\"",
@@ -114028,6 +114053,21 @@
       "2026-11-23": 37.4
     }
   },
+  "https://www.evo.com/products/257198-outdoor-research-freewheel-leather-palm-bike-gloves": {
+    "name": "Outdoor Research Freewheel Leather Palm Bike Gloves",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-23",
+    "last_seen": "2026-11-23",
+    "observation_count": 1,
+    "all_time_low": 45.0,
+    "all_time_low_date": "2026-11-23",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1167530.jpg?v=1767735949",
+    "prices": {
+      "2026-11-23": 45.0
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/257491-pnw-components-range-dropper-post": {
     "name": "PNW Components Range Dropper Post",
     "store": "evo",
@@ -114230,11 +114270,11 @@
     "observation_count": 1,
     "all_time_low": 7299.0,
     "all_time_low_date": "2026-11-23",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1260158.jpg?v=1767739545",
     "prices": {
       "2026-11-23": 7299.0
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/258103-pnw-components-loam-stem": {
     "name": "PNW Components Loam Stem",
@@ -114299,6 +114339,21 @@
       "2026-11-22": 12.82,
       "2026-11-23": 12.82
     }
+  },
+  "https://www.evo.com/products/258534-outdoor-research-freewheel-bike-gloves": {
+    "name": "Outdoor Research Freewheel Bike Gloves",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-23",
+    "last_seen": "2026-11-23",
+    "observation_count": 1,
+    "all_time_low": 30.0,
+    "all_time_low_date": "2026-11-23",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1276434.jpg?v=1773071614",
+    "prices": {
+      "2026-11-23": 30.0
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/258535-outdoor-research-freewheel-bike-gloves-women-s": {
     "name": "Outdoor Research Freewheel Bike Gloves - Women's",
@@ -115838,6 +115893,21 @@
       "2026-11-22": 10349.0,
       "2026-11-23": 10349.0
     }
+  },
+  "https://www.evo.com/products/275988-outdoor-research-freewheel-mtb-xt-bike-gloves": {
+    "name": "Outdoor Research Freewheel MTB XT Bike Gloves",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-23",
+    "last_seen": "2026-11-23",
+    "observation_count": 1,
+    "all_time_low": 33.75,
+    "all_time_low_date": "2026-11-23",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1276446.jpg?v=1773071614",
+    "prices": {
+      "2026-11-23": 33.75
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/276516-industry-nine-hydra-classic-iso-cl-boost-front-hub": {
     "name": "Industry Nine Hydra Classic ISO CL Boost Front Hub",
@@ -148307,13 +148377,11 @@
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-22",
-    "observation_count": 11,
+    "last_seen": "2026-11-23",
+    "observation_count": 12,
     "all_time_low": 461.59,
     "all_time_low_date": "2026-11-19",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-23",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/6b71796b3071e1bb4ebdd271109f9e552eec2da0.jpg?v=1785540102",
     "prices": {
       "2026-11-03": 549.99,
@@ -148326,7 +148394,8 @@
       "2026-11-19": 461.59,
       "2026-11-20": 461.59,
       "2026-11-21": 461.59,
-      "2026-11-22": 461.59
+      "2026-11-22": 461.59,
+      "2026-11-23": 461.59
     }
   },
   "https://www.thelostco.com/products/race-face-era-sl-crank-arms-no-bb-136-bb-160mm-black": {
@@ -150822,19 +150891,18 @@
     "store": "The Lost Co.",
     "part": "Cockpit",
     "first_seen": "2026-11-19",
-    "last_seen": "2026-11-22",
-    "observation_count": 4,
+    "last_seen": "2026-11-23",
+    "observation_count": 5,
     "all_time_low": 143.19,
     "all_time_low_date": "2026-11-19",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-23",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-mtb-handlebar-35mm-clamp-760mm-width-10mm-rise-black-race-face-the-lost-co-946-00-007-01-0821973481449-162834.jpg?v=1730509646",
     "prices": {
       "2026-11-19": 143.19,
       "2026-11-20": 143.19,
       "2026-11-21": 143.19,
-      "2026-11-22": 143.19
+      "2026-11-22": 143.19,
+      "2026-11-23": 143.19
     }
   },
   "https://www.thelostco.com/products/raceface-era-20-mtb-handlebar-diameter-35mm-760mm-rise-20mm-black": {
@@ -151069,13 +151137,11 @@
     "store": "The Lost Co.",
     "part": "Drivetrain",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-22",
-    "observation_count": 11,
+    "last_seen": "2026-11-23",
+    "observation_count": 12,
     "all_time_low": 439.99,
     "all_time_low_date": "2026-11-19",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-23",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/a0e690cecb7696d63cdfb4cb19955b523d8843f6.jpg?v=1786751490",
     "prices": {
       "2026-11-03": 523.99,
@@ -151088,7 +151154,8 @@
       "2026-11-19": 439.99,
       "2026-11-20": 439.99,
       "2026-11-21": 439.99,
-      "2026-11-22": 439.99
+      "2026-11-22": 439.99,
+      "2026-11-23": 439.99
     }
   },
   "https://www.thelostco.com/products/raceface-era-crankset-170mm-direct-mount-136mm-spindle-cinch-interface-carbon-blue": {
@@ -151179,6 +151246,8 @@
     "all_time_low": 439.99,
     "all_time_low_date": "2026-11-20",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-23",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-170mm-length-cinch-interface-136mm-spindle-red-race-face-the-lost-co-ck23era136arm170p185-821973462271-486279.jpg?v=1730509646",
     "prices": {
       "2026-11-03": 523.99,
@@ -151222,6 +151291,8 @@
     "all_time_low": 439.99,
     "all_time_low_date": "2026-11-20",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-23",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/raceface-era-carbon-crankset-175mm-length-cinch-interface-136mm-spindle-blue-race-face-the-lost-co-ck23era136arm175p801-821973462349-868006.jpg?v=1730509647",
     "prices": {
       "2026-11-03": 523.99,
@@ -156526,6 +156597,8 @@
     "all_time_low": 100.44,
     "all_time_low_date": "2026-11-09",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-23",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/schwalbe-tacky-chan-275x25-gravity-pro-radial-soft-schwalbe-the-lost-co-11654694-4026495969987-8911302.jpg?v=1776939373",
     "width": 27.5,
     "length": 2.5,
