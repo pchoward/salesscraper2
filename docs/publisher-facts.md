@@ -81,7 +81,7 @@ Verify each item against the code before publishing; this is a summary.
   - the collapsed state of filter sections
   - dismissed promo notices (Codex, task 16)
   - All of this stays in that browser and isn't sent to ShredDeals.
-- **Analytics:** none found in `page.py`, `page.js` or `index.html` on 2026-11-23 (no gtag, GTM or Plausible).
+- **Analytics:** **Cloudflare Web Analytics** runs on the generated catalog pages (`page.py`, the `static.cloudflareinsights.com` beacon). The homepage shell has none, and CI strips it from previews. There is no Google Analytics, GTM or Plausible. Cloudflare's beacon is cookie-free and doesn't store personal data on the device, but it processes request data such as IP address and browser.
 - **Hosting:** GitHub Pages (shreddeals.com). Pages and Cloudflare (DNS, Worker) keep their own server logs.
 - **Product photos** are shown from each store's own image addresses (hotlinked) and aren't copied to ShredDeals. Product names, prices and photos belong to the stores and brands.
 
