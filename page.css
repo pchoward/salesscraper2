@@ -2951,6 +2951,7 @@ body.alerts-open { overflow: hidden; }
     align-items: center;
     justify-content: center;
     width: 132px;
+    max-width: 100%;
     height: 132px;
     min-height: 0;
     max-height: 132px;
@@ -2962,7 +2963,6 @@ body.alerts-open { overflow: hidden; }
 /* Keep eight columns across the desktop widths even when the sidebar is open. */
 @media (min-width:1280px) and (min-height:501px), (min-width:1280px) and (pointer:fine) {
     .shred-embedded #cardGrid { grid-template-columns:repeat(8,minmax(0,1fr)); }
-    .shred-embedded #cardGrid .deal-card .media { max-width:100%; }
 }
 .deal-card .media .hero-wrap,
 .deal-card .hero,
