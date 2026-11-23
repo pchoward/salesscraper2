@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-22T15:40:48+00:00",
+  "checked_at": "2026-11-23T00:07:05+00:00",
   "counts": {
     "action": 2,
     "watch": 0
   },
-  "date": "2026-11-22",
+  "date": "2026-11-23",
   "findings": [
     {
       "key": "SkatePro_Protection",
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 5,
+      "runs": 6,
       "store": "SkatePro"
     },
     {
@@ -19,9 +19,9 @@
       "kind": "held",
       "level": "action",
       "reason": "partial_catalog_drop",
-      "runs": 3,
+      "runs": 4,
       "store": "Tactics"
     }
   ],
-  "last_scrape": "2026-11-22T15:15:55+00:00"
+  "last_scrape": "2026-11-22T23:41:40+00:00"
 }
