@@ -28351,14 +28351,14 @@
           }
         },
         "CCS_Accessories": {
-          "count": 38,
+          "count": 37,
           "failed": false,
           "diagnostics": {
             "expected_count": 39.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 38,
-            "percentage_change": -2.6,
+            "actual_count": 37,
+            "percentage_change": -5.1,
             "reason": "normal_variation"
           }
         },
@@ -29232,14 +29232,14 @@
           }
         },
         "TGM_Decks": {
-          "count": 173,
+          "count": 172,
           "failed": false,
           "diagnostics": {
             "expected_count": 145.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 5.0,
-            "actual_count": 173,
-            "percentage_change": 19.3,
+            "actual_count": 172,
+            "percentage_change": 18.6,
             "reason": "normal_variation"
           }
         },
@@ -29462,14 +29462,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 223,
+          "count": 320,
           "failed": false,
           "diagnostics": {
             "expected_count": 267.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 7.5,
-            "actual_count": 223,
-            "percentage_change": -16.5,
+            "actual_count": 320,
+            "percentage_change": 19.9,
             "reason": "normal_variation"
           }
         },
@@ -29534,7 +29534,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-23T19:13:08+00:00"
+      "scanned_at": "2026-11-23T20:22:42+00:00"
     }
   ],
   "baseline": {
@@ -29572,7 +29572,7 @@
     },
     "CCS_Accessories": {
       "date": "2026-11-23",
-      "count": 38
+      "count": 37
     },
     "Tactics_Sneakers": {
       "date": "2026-11-23",
@@ -29600,7 +29600,7 @@
     },
     "TGM_Decks": {
       "date": "2026-11-23",
-      "count": 173
+      "count": 172
     },
     "TGM_Trucks": {
       "date": "2026-11-23",
@@ -29724,7 +29724,7 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-23",
-      "count": 223
+      "count": 320
     },
     "Exodus_Bearings": {
       "date": "2026-11-23",
@@ -29893,7 +29893,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 38
+        "count": 37
       }
     ],
     "CCS_Bearings": [
@@ -34015,7 +34015,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 173
+        "count": 172
       }
     ],
     "TGM_Packs": [
@@ -35101,7 +35101,7 @@
       },
       {
         "date": "2026-11-23",
-        "count": 223
+        "count": 320
       }
     ],
     "Zumiez_Packs": [
