@@ -52,7 +52,34 @@
       "events": []
     },
     "SoCal": {
-      "events": []
+      "events": [
+        {
+          "cut": 15,
+          "cut_high": 15,
+          "cut_low": 15,
+          "deals": {
+            "deals": 14,
+            "high": 32,
+            "low": 32,
+            "max_off": 32,
+            "uniform": 32
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-24",
+              "text": "most deals 32% off"
+            }
+          ],
+          "kind": "sale",
+          "listings": 11,
+          "moment": "Black Friday / Cyber Week",
+          "start": "2026-11-24",
+          "steps": [],
+          "tracked": 11,
+          "uniform": true
+        }
+      ]
     },
     "Source BMX US": {
       "events": []
@@ -87,5 +114,5 @@
       "events": []
     }
   },
-  "updated": "2026-11-23"
+  "updated": "2026-11-24"
 }

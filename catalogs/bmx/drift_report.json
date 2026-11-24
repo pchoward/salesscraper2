@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-23T21:14:41+00:00",
+  "checked_at": "2026-11-24T05:31:55+00:00",
   "counts": {
     "action": 2,
     "watch": 0
   },
-  "date": "2026-11-23",
+  "date": "2026-11-24",
   "findings": [
     {
       "key": "Albe's BMX_Frames & Forks",
       "kind": "held",
       "level": "action",
       "reason": "partial_catalog_drop",
-      "runs": 3,
+      "runs": 4,
       "store": "Albe's BMX"
     },
     {
@@ -19,9 +19,9 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 7,
+      "runs": 8,
       "store": "SkatePro"
     }
   ],
-  "last_scrape": "2026-11-23T20:48:53+00:00"
+  "last_scrape": "2026-11-24T05:07:32+00:00"
 }
