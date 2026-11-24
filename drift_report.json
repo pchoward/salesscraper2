@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-24T18:22:39+00:00",
+  "checked_at": "2026-11-24T19:15:55+00:00",
   "counts": {
     "action": 3,
-    "watch": 1
+    "watch": 0
   },
   "date": "2026-11-24",
   "findings": [
@@ -29,14 +29,7 @@
       "reason": "partial_catalog_drop",
       "runs": 5,
       "store": "Tactics"
-    },
-    {
-      "count": 3,
-      "kind": "new_unmapped",
-      "level": "watch",
-      "product_type": "Jackets",
-      "store": "SPoT"
     }
   ],
-  "last_scrape": "2026-11-24T17:58:56+00:00"
+  "last_scrape": "2026-11-24T18:51:47+00:00"
 }

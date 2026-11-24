@@ -29292,14 +29292,14 @@
           }
         },
         "CCS_Decks": {
-          "count": 22,
+          "count": 20,
           "failed": false,
           "diagnostics": {
             "expected_count": 32.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 22,
-            "percentage_change": -31.2,
+            "actual_count": 20,
+            "percentage_change": -37.5,
             "reason": "normal_variation"
           }
         },
@@ -29437,14 +29437,14 @@
           }
         },
         "Demon_Protection": {
-          "count": 15,
+          "count": 17,
           "failed": false,
           "diagnostics": {
             "expected_count": 16.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 15,
-            "percentage_change": -6.2,
+            "actual_count": 17,
+            "percentage_change": 6.2,
             "reason": "normal_variation"
           }
         },
@@ -30137,14 +30137,14 @@
           }
         },
         "TGM_Decks": {
-          "count": 171,
+          "count": 170,
           "failed": false,
           "diagnostics": {
             "expected_count": 145.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 5.0,
-            "actual_count": 171,
-            "percentage_change": 17.5,
+            "actual_count": 170,
+            "percentage_change": 16.8,
             "reason": "normal_variation"
           }
         },
@@ -30367,14 +30367,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 316,
+          "count": 313,
           "failed": false,
           "diagnostics": {
             "expected_count": 267.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 11.0,
-            "actual_count": 316,
-            "percentage_change": 18.4,
+            "actual_count": 313,
+            "percentage_change": 17.2,
             "reason": "normal_variation"
           }
         },
@@ -30439,7 +30439,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-24T17:58:56+00:00"
+      "scanned_at": "2026-11-24T18:51:47+00:00"
     }
   ],
   "baseline": {
@@ -30505,7 +30505,7 @@
     },
     "TGM_Decks": {
       "date": "2026-11-24",
-      "count": 171
+      "count": 170
     },
     "TGM_Trucks": {
       "date": "2026-11-24",
@@ -30589,7 +30589,7 @@
     },
     "Demon_Protection": {
       "date": "2026-11-24",
-      "count": 15
+      "count": 17
     },
     "Triple 8_Protection": {
       "date": "2026-11-24",
@@ -30629,7 +30629,7 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-24",
-      "count": 316
+      "count": 313
     },
     "Exodus_Bearings": {
       "date": "2026-11-24",
@@ -30669,7 +30669,7 @@
     },
     "CCS_Decks": {
       "date": "2026-11-24",
-      "count": 22
+      "count": 20
     },
     "CCS_Trucks": {
       "date": "2026-11-24",
@@ -30972,7 +30972,7 @@
       },
       {
         "date": "2026-11-24",
-        "count": 22
+        "count": 20
       }
     ],
     "CCS_Protection": [
@@ -31668,7 +31668,7 @@
       },
       {
         "date": "2026-11-24",
-        "count": 15
+        "count": 17
       }
     ],
     "Exodus_Accessories": [
@@ -34972,7 +34972,7 @@
       },
       {
         "date": "2026-11-24",
-        "count": 171
+        "count": 170
       }
     ],
     "TGM_Packs": [
@@ -36066,7 +36066,7 @@
       },
       {
         "date": "2026-11-24",
-        "count": 316
+        "count": 313
       }
     ],
     "Zumiez_Packs": [

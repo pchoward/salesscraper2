@@ -4235,11 +4235,11 @@
     "observation_count": 1,
     "all_time_low": 49.0,
     "all_time_low_date": "2026-11-24",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0267/3063/files/Vans_Skate_Authentic_Mid_Blackout.png?v=1788883100",
     "prices": {
       "2026-11-24": 49.0
-    },
-    "stage": "new"
+    }
   },
   "https://kineticskateboarding.com/products/vans-skate-authentic-mid-pewter": {
     "name": "Vans Skate Authentic Mid (Pewter)",
@@ -5282,6 +5282,8 @@
     "all_time_low": 49.0,
     "all_time_low_date": "2026-10-23",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-10-31",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/AWS-Owliad-8_5-1_600x600.jpg?v=1784663988&width=600",
     "width": 8.25,
@@ -5469,6 +5471,8 @@
     "all_time_low": 52.5,
     "all_time_low_date": "2026-10-23",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-10-31",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/AWS-D-TM-Scanner-8.25T-Black-1_600x600.jpg?v=1776560530&width=600",
     "width": 8.25,
@@ -5645,13 +5649,11 @@
     "store": "CCS",
     "part": "Decks",
     "first_seen": "2026-10-23",
-    "last_seen": "2026-11-23",
-    "observation_count": 26,
+    "last_seen": "2026-11-24",
+    "observation_count": 27,
     "all_time_low": 52.5,
     "all_time_low_date": "2026-10-23",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-10-31",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/AWS-D-TM-Self-8.125-Red-1_600x600.jpg?v=1776560524&width=600",
     "width": 8.0,
@@ -5682,7 +5684,8 @@
       "2026-11-20": 52.5,
       "2026-11-21": 52.5,
       "2026-11-22": 52.5,
-      "2026-11-23": 52.5
+      "2026-11-23": 52.5,
+      "2026-11-24": 52.5
     }
   },
   "https://shop.ccs.com/collections/clearance/products/alien-workshop-self-exalt-skateboard-deck-assorted-8-51": {
@@ -5862,13 +5865,11 @@
     "store": "CCS",
     "part": "Decks",
     "first_seen": "2026-10-21",
-    "last_seen": "2026-11-23",
-    "observation_count": 34,
+    "last_seen": "2026-11-24",
+    "observation_count": 35,
     "all_time_low": 70.88,
     "all_time_low_date": "2026-10-21",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-10-31",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/BQ907A0-1_600x600.jpg?v=1774638635&width=600",
     "width": 8.06,
@@ -5907,7 +5908,8 @@
       "2026-11-20": 70.88,
       "2026-11-21": 70.88,
       "2026-11-22": 70.88,
-      "2026-11-23": 70.88
+      "2026-11-23": 70.88,
+      "2026-11-24": 70.88
     }
   },
   "https://shop.ccs.com/collections/clearance/products/habitat-apex-twin-textile-skateboard-deck-assorted-8-376": {
@@ -6007,6 +6009,8 @@
     "all_time_low": 45.0,
     "all_time_low_date": "2026-10-16",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-10-31",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/HAB-D-TM-Artisan-8.125-Blue-1_600x600.jpg?v=1776560540&width=600",
     "width": 8.125,
@@ -6239,6 +6243,8 @@
     "all_time_low": 52.5,
     "all_time_low_date": "2026-11-10",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-11-10",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/HAB-D-BD-Textile-8-Blue-1_600x600.jpg?v=1776560543&width=600",
     "width": 8.0,
@@ -6267,6 +6273,8 @@
     "all_time_low": 52.5,
     "all_time_low_date": "2026-10-23",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-10-31",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/HAB-D-SJ-Saber-8.125-1_600x600.jpg?v=1776560542&width=600",
     "width": 8.125,
@@ -7608,6 +7616,23 @@
       "2026-10-20": 66.5
     }
   },
+  "https://shop.ccs.com/collections/clearance/products/welcome-x-harry-potter-seeker-on-nimbus-5000-skateboard-deck-gold-foil-8-75": {
+    "name": "Welcome x Harry Potter Seeker On Nimbus 5000 Skateboard Deck",
+    "store": "CCS",
+    "part": "Decks",
+    "first_seen": "2026-11-24",
+    "last_seen": "2026-11-24",
+    "observation_count": 1,
+    "all_time_low": 67.38,
+    "all_time_low_date": "2026-11-24",
+    "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/8129649836215-1_600x600.jpg?v=1758850291&width=600",
+    "prices": {
+      "2026-11-24": 67.38
+    },
+    "stage": "new",
+    "wheelbase_checked": "2026-11-24",
+    "wheelbase": 14.25
+  },
   "https://shop.ccs.com/collections/clearance/products/welcome-x-harry-potter-voldemort-on-a-dark-lord-skateboard-deck-dark-green-stain-9-75": {
     "name": "Welcome x Harry Potter Voldemort On A Dark Lord Skateboard Deck",
     "store": "CCS",
@@ -7679,6 +7704,8 @@
     "all_time_low": 64.75,
     "all_time_low_date": "2026-10-30",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-10-31",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/BQ6C314-1_600x600.jpg?v=1767067532&width=600",
     "width": 8.5,
@@ -7703,13 +7730,11 @@
     "store": "CCS",
     "part": "Decks",
     "first_seen": "2026-11-21",
-    "last_seen": "2026-11-23",
-    "observation_count": 3,
+    "last_seen": "2026-11-24",
+    "observation_count": 4,
     "all_time_low": 64.75,
     "all_time_low_date": "2026-11-21",
     "stage": "new",
-    "miss_streak": 1,
-    "miss_day": "2026-11-24",
     "wheelbase_checked": "2026-11-21",
     "image": "https://cdn.shopify.com/s/files/1/0519/1388/3831/files/BQ6C316-1_600x600.jpg?v=1767067535&width=600",
     "width": 8.25,
@@ -7720,7 +7745,8 @@
     "prices": {
       "2026-11-21": 64.75,
       "2026-11-22": 64.75,
-      "2026-11-23": 64.75
+      "2026-11-23": 64.75,
+      "2026-11-24": 64.75
     }
   },
   "https://shop.ccs.com/products/187-combo-pack-pads-camo": {
@@ -23378,11 +23404,11 @@
     "observation_count": 1,
     "all_time_low": 80.0,
     "all_time_low_date": "2026-11-24",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0783/8856/0145/files/Skate2WayveeShoe.jpg?v=1785419025",
     "prices": {
       "2026-11-24": 80.0
-    },
-    "stage": "new"
+    }
   },
   "https://skateparkoftampa.com/products/vans-skate-2-wayvee-shoes": {
     "name": "Vans Skate 2 Wayvee Shoes",
@@ -23477,12 +23503,12 @@
     "observation_count": 1,
     "all_time_low": 95.0,
     "all_time_low_date": "2026-11-24",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0783/8856/0145/files/SkateAVE2.0Shoe.jpg?v=1785419263",
     "width": 2.0,
     "prices": {
       "2026-11-24": 95.0
-    },
-    "stage": "new"
+    }
   },
   "https://skateparkoftampa.com/products/vans-skate-curren-caples-fluro-lime-shoes": {
     "name": "Vans Skate Curren Caples Fluro Lime Shoes",
@@ -23493,11 +23519,11 @@
     "observation_count": 1,
     "all_time_low": 65.0,
     "all_time_low_date": "2026-11-24",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0783/8856/0145/files/SkateCurrenCaplesShoe_97b99811-fb9f-4fb6-b923-94691dd3ecae.jpg?v=1785419549",
     "prices": {
       "2026-11-24": 65.0
-    },
-    "stage": "new"
+    }
   },
   "https://skateparkoftampa.com/products/vans-skate-era-mauve-mist-shoes": {
     "name": "Vans Skate Era Mauve Mist Shoes",
@@ -23651,11 +23677,11 @@
     "observation_count": 1,
     "all_time_low": 68.0,
     "all_time_low_date": "2026-11-24",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0783/8856/0145/files/SkateOldSkool36_Shoe.jpg?v=1787838693",
     "prices": {
       "2026-11-24": 68.0
-    },
-    "stage": "new"
+    }
   },
   "https://skateparkoftampa.com/products/vans-skate-old-skool-36-marshmallow-gum-shoes": {
     "name": "Vans Skate Old Skool 36 + Marshmallow Gum Shoes",
@@ -23666,11 +23692,11 @@
     "observation_count": 1,
     "all_time_low": 68.0,
     "all_time_low_date": "2026-11-24",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0783/8856/0145/files/VansSkateOldSkool36_Shoes-Marshmallow_Gum.jpg?v=1784655222",
     "prices": {
       "2026-11-24": 68.0
-    },
-    "stage": "new"
+    }
   },
   "https://skateparkoftampa.com/products/vans-skate-old-skool-light-olive-shoes": {
     "name": "Vans Skate Old Skool Light Olive Shoes",
@@ -23681,11 +23707,11 @@
     "observation_count": 1,
     "all_time_low": 65.0,
     "all_time_low_date": "2026-11-24",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0783/8856/0145/files/LOKSkateOldSkoolShoes.jpg?v=1784656143",
     "prices": {
       "2026-11-24": 65.0
-    },
-    "stage": "new"
+    }
   },
   "https://skateparkoftampa.com/products/vans-skate-old-skool-soft-slate-blue-shoes": {
     "name": "Vans Skate Old Skool Soft Slate Blue Shoes",
@@ -23780,11 +23806,11 @@
     "observation_count": 1,
     "all_time_low": 72.0,
     "all_time_low_date": "2026-11-24",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0783/8856/0145/files/SkateRowanZ3Shoe_02466b36-43c8-4b7d-aff6-a1e85ee86623.jpg?v=1785419456",
     "prices": {
       "2026-11-24": 72.0
-    },
-    "stage": "new"
+    }
   },
   "https://skateparkoftampa.com/products/vans-skate-rowley-shoes-1": {
     "name": "Vans Skate Rowley Shoes",
@@ -32666,6 +32692,8 @@
     "all_time_low": 69.95,
     "all_time_low_date": "2026-10-31",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "image": "https://cdn.shopify.com/s/files/1/0660/4170/8586/files/HE130-1.jpg?v=1775503366",
     "width": 10.4,
     "length": 32.4,
@@ -46403,13 +46431,11 @@
     "store": "Demon",
     "part": "Protection",
     "first_seen": "2026-11-11",
-    "last_seen": "2026-11-23",
-    "observation_count": 13,
+    "last_seen": "2026-11-24",
+    "observation_count": 14,
     "all_time_low": 447.99,
     "all_time_low_date": "2026-11-11",
     "stage": "new",
-    "miss_streak": 1,
-    "miss_day": "2026-11-24",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/apex-womens-hero.png?v=1791905786",
     "prices": {
       "2026-11-11": 447.99,
@@ -46424,7 +46450,8 @@
       "2026-11-20": 464.99,
       "2026-11-21": 464.99,
       "2026-11-22": 464.99,
-      "2026-11-23": 464.99
+      "2026-11-23": 464.99,
+      "2026-11-24": 464.99
     }
   },
   "https://www.demonunited.com/products/crossover-kit-x-v7-shorts-zero-rf-knee-pads": {
@@ -46611,7 +46638,7 @@
     "observation_count": 11,
     "all_time_low": 59.99,
     "all_time_low_date": "2026-11-20",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/helmet_3.png?v=1772220999",
     "prices": {
       "2026-11-14": 89.99,
@@ -46624,7 +46651,7 @@
       "2026-11-21": 59.99,
       "2026-11-22": 59.99,
       "2026-11-23": 59.99,
-      "2026-11-24": 59.99
+      "2026-11-24": 89.99
     }
   },
   "https://www.demonunited.com/products/demon-tactic-knee-shin-guards-no-original-packaging-tags": {
@@ -46689,6 +46716,21 @@
       "2026-11-23": 464.99,
       "2026-11-24": 464.99
     }
+  },
+  "https://www.demonunited.com/products/demon-zero-rf-complete-kit-top-shorts-knee-pads": {
+    "name": "Demon United Send & Survive Kit \u2014 Top, Shorts & Knee Pads",
+    "store": "Demon",
+    "part": "Protection",
+    "first_seen": "2026-11-24",
+    "last_seen": "2026-11-24",
+    "observation_count": 1,
+    "all_time_low": 283.99,
+    "all_time_low_date": "2026-11-24",
+    "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/files/hf_20260720_194610_766c8619-c4b8-4ff9-983b-c48396ebf2f2_1.png?v=1784579318",
+    "prices": {
+      "2026-11-24": 283.99
+    },
+    "stage": "new"
   },
   "https://www.demonunited.com/products/full-metal-loadout-zero-plus-top-shorts-knee-pads": {
     "name": "Demon United Full Metal Loadout \u2014 Zero PLUS Top, Shorts + Knee Pads",
@@ -63399,7 +63441,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Krooked-Sam-Green-Sam-Deck.jpg?v=1753128059",
     "width": 8.5,
     "wheelbase": 14.25,
@@ -63412,7 +63454,7 @@
         "durometers": [],
         "variant_id": "41234584928336",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 77.0
       }
     ],
@@ -63424,7 +63466,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/anti-hero-taylor-fueled-up-deck": {
@@ -63549,7 +63591,7 @@
     "observation_count": 13,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Black-Label-John-_-Jeff-Forever-Asst-Deck-10_4e6e00bd-853a-4813-aea7-e820075ae9e4.jpg?v=1722455058",
     "width": 10.0,
     "wheelbase": 14.5,
@@ -63562,7 +63604,7 @@
         "durometers": [],
         "variant_id": "40865379680336",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 112.0
       }
     ],
@@ -63579,7 +63621,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/frog-air-head-chris-milic-deck": {
@@ -64214,7 +64256,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Jacuzzi-Berry-Ko-Ex7-Deck_5eab6d87-0afd-48b8-a42e-6ae519b2a3c3.jpg?v=1759177048",
     "width": 8.25,
     "wheelbase": 14.25,
@@ -64227,7 +64269,7 @@
         "durometers": [],
         "variant_id": "41364063354960",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 70.0
       }
     ],
@@ -64239,7 +64281,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/jacuzzi-unlimited-dilo-safe-word-ex7-deck": {
@@ -64941,7 +64983,7 @@
     "observation_count": 13,
     "all_time_low": 112.0,
     "all_time_low_date": "2026-11-16",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Powell-Peralta-Bones-Brigade-17-Cabalerro-Deck.jpg?v=1774299129",
     "width": 9.95,
     "wheelbase": 15.0,
@@ -64954,7 +64996,7 @@
         "durometers": [],
         "variant_id": "42139703869520",
         "available": true,
-        "price": 112.0,
+        "price": 113.0,
         "compare_at_price": 150.0
       }
     ],
@@ -64971,7 +65013,7 @@
       "2026-11-21": 112.0,
       "2026-11-22": 112.0,
       "2026-11-23": 112.0,
-      "2026-11-24": 112.0
+      "2026-11-24": 113.0
     }
   },
   "https://www.sourceboards.com/en-us/products/quasi-de-keyzer-image-world-deck": {
@@ -65166,7 +65208,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Real-Manderson-Raptors-Deck.jpg?v=1748276445",
     "width": 8.38,
     "wheelbase": 14.25,
@@ -65179,7 +65221,7 @@
         "durometers": [],
         "variant_id": "41188031660112",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 78.0
       }
     ],
@@ -65191,7 +65233,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/real-nicole-ember-deck": {
@@ -65245,7 +65287,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Santa-Cruz-Classic-Dot-Deck-8.375_b7715a8b-faa2-4a71-9782-8c51c8ead50b.jpg?v=1751055473",
     "width": 8.375,
     "wheelbase": 14.25,
@@ -65258,7 +65300,7 @@
         "durometers": [],
         "variant_id": "41216581468240",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 65.0
       }
     ],
@@ -65270,7 +65312,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/santa-cruz-classic-dot-deck?variant=41359229157456": {
@@ -65282,7 +65324,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Santa-Cruz-Classic-Dot-Deck-7.75_9fd19637-84bc-4c15-a9ea-e5cb561be990.jpg?v=1758652928",
     "width": 8.5,
     "widths": [
@@ -65294,7 +65336,7 @@
         "durometers": [],
         "variant_id": "41359229157456",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 65.0
       }
     ],
@@ -65306,7 +65348,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/santa-cruz-classic-dot-deck?variant=41359229190224": {
@@ -65318,7 +65360,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Santa-Cruz-Classic-Dot-Deck-7.75_9fd19637-84bc-4c15-a9ea-e5cb561be990.jpg?v=1758652928",
     "width": 8.0,
     "widths": [
@@ -65330,7 +65372,7 @@
         "durometers": [],
         "variant_id": "41359229190224",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 65.0
       }
     ],
@@ -65342,7 +65384,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/santa-cruz-reissue-salba-baby-stomper-deck": {
@@ -65354,7 +65396,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Santa-Cruz-Reissue-Salba-Baby-Stomper-Deck-10.09.jpg?v=1743021635",
     "width": 10.09,
     "wheelbase": 14.63,
@@ -65371,7 +65413,7 @@
         "durometers": [],
         "variant_id": "41132970836048",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 79.0
       }
     ],
@@ -65383,7 +65425,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/santa-cruz-screaming-hand-deck-8-375": {
@@ -65395,7 +65437,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Santa-Cruz-Screaming-Hand-Deck-8.375.jpg?v=1751052004",
     "width": 8.375,
     "wheelbase": 14.5,
@@ -65408,7 +65450,7 @@
         "durometers": [],
         "variant_id": "41216581828688",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 65.0
       }
     ],
@@ -65420,7 +65462,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/sci-fi-fantasy-endless-beauty-2-deck": {
@@ -65878,7 +65920,7 @@
     "observation_count": 8,
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-17",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Welcome-Full-Moon-Nora-Deck.jpg?v=1747763068",
     "width": 8.25,
     "wheelbase": 14.25,
@@ -65891,7 +65933,7 @@
         "durometers": [],
         "variant_id": "41172262125648",
         "available": true,
-        "price": 50.0,
+        "price": 51.0,
         "compare_at_price": 83.0
       }
     ],
@@ -65903,7 +65945,7 @@
       "2026-11-21": 50.0,
       "2026-11-22": 50.0,
       "2026-11-23": 50.0,
-      "2026-11-24": 50.0
+      "2026-11-24": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/welcome-mace-deck": {
@@ -98078,6 +98120,8 @@
     "all_time_low": 39.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "image": "https://scene7.zumiez.com/is/image/zumiez/409187-US",
     "width": 8.0,
     "widths": [
@@ -100834,6 +100878,8 @@
     "all_time_low": 39.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "image": "https://scene7.zumiez.com/is/image/zumiez/405080-US",
     "width": 7.5,
     "widths": [
@@ -103592,6 +103638,8 @@
     "all_time_low": 64.99,
     "all_time_low_date": "2026-11-19",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-24",
     "image": "https://scene7.zumiez.com/is/image/zumiez/412521-US",
     "width": 9.125,
     "widths": [

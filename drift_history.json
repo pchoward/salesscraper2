@@ -595,9 +595,10 @@
         "CCS_Decks": {
           "fields": {
             "image": 1.0,
-            "versions": 0.182
+            "versions": 0.13,
+            "wheelbase": 0.043
           },
-          "items": 22
+          "items": 23
         },
         "CCS_Protection": {
           "fields": {
@@ -630,10 +631,10 @@
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "protection_sizes": 0.688,
+            "protection_sizes": 0.706,
             "protection_type": 1.0
           },
-          "items": 16
+          "items": 17
         },
         "Exodus_Decks": {
           "fields": {
@@ -963,6 +964,7 @@
       "Hats",
       "Jackets",
       "Jerseys",
+      "Longsleeves",
       "Pants",
       "Shorts",
       "Socks",
