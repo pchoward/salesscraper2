@@ -1,10 +1,25 @@
 {
-  "checked_at": "2026-11-24T05:57:20+00:00",
+  "checked_at": "2026-11-25T03:17:05+00:00",
   "counts": {
     "action": 0,
-    "watch": 0
+    "watch": 2
   },
-  "date": "2026-11-24",
-  "findings": [],
-  "last_scrape": "2026-11-24T05:49:35+00:00"
+  "date": "2026-11-25",
+  "findings": [
+    {
+      "count": 9,
+      "kind": "new_unmapped",
+      "level": "watch",
+      "product_type": "Gear Sets",
+      "store": "Alpinestars"
+    },
+    {
+      "count": 3,
+      "kind": "new_unmapped",
+      "level": "watch",
+      "product_type": "Drop Bars",
+      "store": "Bike Mart"
+    }
+  ],
+  "last_scrape": "2026-11-25T03:09:31+00:00"
 }

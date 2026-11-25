@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-24T05:57:20+00:00",
+  "checked_at": "2026-11-25T03:17:05+00:00",
   "counts": {
     "action": 2,
-    "watch": 0
+    "watch": 1
   },
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "findings": [
     {
       "key": "Albe's BMX_Frames & Forks",
       "kind": "held",
       "level": "action",
       "reason": "partial_catalog_drop",
-      "runs": 4,
+      "runs": 5,
       "store": "Albe's BMX"
     },
     {
@@ -19,9 +19,16 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 8,
+      "runs": 9,
       "store": "SkatePro"
+    },
+    {
+      "count": 5,
+      "kind": "new_unmapped",
+      "level": "watch",
+      "product_type": "Jackets",
+      "store": "SPoT"
     }
   ],
-  "last_scrape": "2026-11-24T05:32:39+00:00"
+  "last_scrape": "2026-11-25T02:53:02+00:00"
 }

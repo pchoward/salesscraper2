@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-24T05:57:20+00:00",
+  "checked_at": "2026-11-25T03:17:05+00:00",
   "counts": {
     "action": 2,
-    "watch": 0
+    "watch": 1
   },
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "findings": [
     {
       "key": "SkatePro_Helmets",
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 8,
+      "runs": 9,
       "store": "SkatePro"
     },
     {
@@ -19,9 +19,16 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 8,
+      "runs": 9,
       "store": "SkatePro"
+    },
+    {
+      "count": 3,
+      "kind": "new_unmapped",
+      "level": "watch",
+      "product_type": "APPAREL - NORDIC APPAREL - HATS - Winter Hats",
+      "store": "Gear West"
     }
   ],
-  "last_scrape": "2026-11-24T05:42:50+00:00"
+  "last_scrape": "2026-11-25T03:03:05+00:00"
 }
