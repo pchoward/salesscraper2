@@ -1,4 +1,4 @@
-# Only the deal page and its assets belong on GitHub Pages.
+# Only the public deal and publisher pages and their assets belong on GitHub Pages.
 # Keep new internal roots excluded; regression tests enforce this boundary.
 include:
   - ".well-known"

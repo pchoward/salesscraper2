@@ -83,7 +83,12 @@ class AudienceTests(unittest.TestCase):
         self.assertFalse(Path('.nojekyll').exists(), 'Pages must honor Jekyll exclusions')
         # CNAME: the custom domain (shreddeals.com, 2026-11-03); Pages must serve it.
         public = {'.well-known', '_config.yml', 'CNAME', 'index.html', 'navigation', 'discover', 'bmx', 'ski', 'mtb', 'sale_items_chart.html', 'history.json', 'page.css', 'mobile.css', 'page.js'}
-        roots = {path.split('/')[0] for path in subprocess.check_output(['git','ls-files'], text=True).splitlines()}
+        publisher_pages = {"about", "how-it-works", "guides", "contact"}
+        public.update(publisher_pages | {"404.html", "publisher.css", "robots.txt", "sitemap.xml"})
+        tracked_files = subprocess.check_output(["git", "ls-files"], text=True).splitlines()
+        roots = {path.split("/")[0] for path in tracked_files}
+        self.assertEqual({path for path in tracked_files if path.split("/")[0] in publisher_pages},
+                         {f"{path}/index.html" for path in publisher_pages})
         self.assertEqual(roots - excluded - public, set())
         for path in ('scrape_health.json', 'previous_data.json', 'price_history.json',
                      'site_sales.json', 'report_inputs.json', 'email_preview.html', 'notification_state.json', 'worker',

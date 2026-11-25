@@ -219,7 +219,7 @@
             if(event.key==='/'&&!event.target.closest('input,textarea,select'))closeMyStuff();
             if(event.key==='Escape'){event.preventDefault();event.stopPropagation();closeMyStuff(true);}
             if(event.key==='Tab'){
-                const stops=[...stuffPanel.querySelectorAll('button,input')].filter(node=>!node.disabled&&!node.hidden);
+                const stops=[...stuffPanel.querySelectorAll('button,input,a[href]')].filter(node=>!node.disabled&&!node.hidden);
                 const first=stops[0],last=stops[stops.length-1];
                 if(event.shiftKey&&doc.activeElement===first){event.preventDefault();last?.focus();}
                 else if(!event.shiftKey&&doc.activeElement===last){event.preventDefault();first?.focus();}

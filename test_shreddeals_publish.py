@@ -35,6 +35,34 @@ class ProductionNavigationTests(unittest.TestCase):
             for name in ('navigation.js','navigation.css','skate-bridge.js'):
                 self.assertEqual((root/'navigation'/name).read_bytes(),(HERE/name).read_bytes())
 
+    def test_publisher_links_match_canonical_sitemap_and_keep_drafts_private(self):
+        from urllib.parse import urlsplit
+        from xml.etree import ElementTree
+
+        pages = {"/", "/about/", "/how-it-works/", "/guides/", "/contact/"}
+        urls = ElementTree.parse(SOURCE / "sitemap.xml").findall(".//{*}loc")
+        self.assertEqual({node.text for node in urls},
+                         {"https://shreddeals.com" + path for path in pages})
+        titles = set()
+        for path in pages:
+            soup = BeautifulSoup((SOURCE / path.strip("/") / "index.html").read_text(), "html.parser")
+            self.assertEqual(soup.select_one('link[rel="canonical"]')["href"],
+                             "https://shreddeals.com" + path)
+            self.assertTrue(soup.select_one('meta[name="description"]')["content"])
+            titles.add(soup.title.string)
+            selector = ".publisher-links a" if path == "/" else "footer nav a"
+            self.assertTrue(pages - {"/"} <= {a["href"] for a in soup.select(selector)})
+            if path != "/":
+                self.assertEqual(len(soup.select("main h1")), 1)
+                for link in soup.select("a[href]"):
+                    self.assertIn(urlsplit(link["href"]).path, pages)
+        self.assertEqual(len(titles), len(pages))
+        robots = (SOURCE / "robots.txt").read_text()
+        self.assertIn("Sitemap: https://shreddeals.com/sitemap.xml", robots)
+        missing = BeautifulSoup((SOURCE / "404.html").read_text(), "html.parser")
+        self.assertIn("noindex", missing.select_one('meta[name="robots"]')["content"])
+        self.assertIn('  - "docs"', (SOURCE / "_config.yml").read_text())
+
     def test_category_metadata_uses_published_taxonomy_order_counts_and_versions(self):
         import hashlib
         with tempfile.TemporaryDirectory() as directory:

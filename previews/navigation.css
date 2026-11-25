@@ -250,3 +250,6 @@ h1 { font-size:30px; margin:10px 0 20px; letter-spacing:-.7px; }
 @media (max-width:350px) {
  .top-row .shell-search-icon { display:none; }
 }
+
+.publisher-links { display:flex; flex-wrap:wrap; column-gap:14px; margin-top:12px; border-top:1px solid #d5dbe3; }
+.publisher-links a { display:inline-flex; align-items:center; min-height:44px; color:#17476d; }
