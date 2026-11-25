@@ -340,3 +340,15 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - the "applied at checkout" wording still fits.
 
 **Tests:** extend `test_promos.py` `NoCodeTests.test_kept_with_the_codes_and_shown_in_emails` (it now asserts the strip is empty for a no-code entry) to the new markup, and a browser check at desktop and 390 px that Dismiss works on a no-code row and the copy button only appears on code rows.
+
+## 21. Store links in Quick View and group rows: use the sale variant (owner, 2026-11-25)
+**Why:** evo's Fox Racing PureVue Goggles were listed at $80.95 (a sale color), but the link opened the product page on Black/Clear at $159.95. A Shopify product page opens on its first variant, which often isn't the one on sale.
+
+**Data and server-built links (done, Claude's PR "Store links open on the sale variant"):** Shopify listings now carry `link` (`<url>?variant=<id>`) when the page would open on another variant. `url` stays the listing's identity (history, watchlists, `data-url`, matching); don't change it. The page's catalog JSON items and matched-group offers include `link` only when it differs from `url`. The card link, the table's product link, the detail rows and the emails already use it (`page.py` `shop_href`).
+
+**Wanted, `page.js`, `href`s only:**
+- Quick View "Open product page" (`#drawerLink`): `item.link || item.url`.
+- Group rows' "View at <store>" (`.group-store-link`): `offer.link || offer.url`. Carry `link` through the offer clean-up near `url: offer.url || ""` (around line 1718).
+- Never use `link` for stars/watchlists, `dataset.url`, or any lookup.
+
+**Tests:** a browser check that a listing with `link` opens it from Quick View and from its group row, and that one without `link` still opens `url`.
