@@ -18,6 +18,13 @@ FIELDS = (
      "order": ["13-speed", "12-speed", "11-speed", "10-speed", "9-speed", "8-speed", "7-speed"]},
     {"key": "casing", "label": "Casing", "param": "mtb_casing", "categories": ("Tires",)},
     {"key": "tubeless", "label": "Tubeless", "param": "mtb_tubeless", "categories": ("Tires",)},
+    # Pedal filters like Jenson's menu (owner, 2026-11-25).
+    {"key": "pedal_type", "label": "Pedal type", "param": "mtb_pedal", "categories": ("Pedals",),
+     "order": ["Flat", "Clipless (MTB)", "Hybrid (flat + clip)", "Clipless (road)", "Cleats", "Parts & accessories"]},
+    {"key": "pedal_material", "label": "Material", "param": "mtb_pedalmat", "categories": ("Pedals",),
+     "order": ["Aluminum", "Composite", "Magnesium", "Titanium"]},
+    {"key": "pedal_thread", "label": "Thread", "param": "mtb_pedalthread", "categories": ("Pedals",),
+     "order": ['9/16"', '1/2"']},
     {"key": "riding_type", "label": "Riding type", "param": "mtb_ride", "categories": ()},
 ) + protection.facet_fields("mtb", ("Protection", "Helmets", "Goggles", "Gloves"))
 

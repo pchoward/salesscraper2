@@ -10,6 +10,7 @@ FIELDS={
  'axle':'Axle / spacing','rotor_mm':'Rotor diameter (mm)','riding_type':'Riding type',
  'speed':'Drivetrain speed','casing':'Tire casing','tubeless':'Tubeless','power':'Motor',
  'suspension':'Suspension','frame_material':'Frame material',
+ 'pedal_type':'Pedal type','pedal_material':'Pedal material','pedal_thread':'Pedal thread',
 }
 
 # Bike filters modelled on evo's (owner, 2026-11-21): suspension and frame
@@ -180,6 +181,103 @@ def table_rows(product):
     return rows
 
 
+# Pedal filters like Jenson's menu (owner, 2026-11-25): flat, clipless MTB,
+# clipless road, hybrid, cleats, parts. From the title and the store's own
+# category first ("Flat Pedals", "COMPONENTS/PEDALS/MTB CLIPLESS"). A title
+# that only names a model ("Crankbrothers Mallet E", "Shimano PD-M520") uses
+# that model family's type, a labeled convention like ski waist from the
+# model number: descriptions call clipless pedals "platform" too, so body
+# text isn't used.
+PEDAL_FLAT='Flat'
+PEDAL_CLIP='Clipless (MTB)'
+PEDAL_ROAD='Clipless (road)'
+PEDAL_HYBRID='Hybrid (flat + clip)'
+PEDAL_CLEATS='Cleats'
+PEDAL_PARTS='Parts & accessories'
+PEDAL_TYPES=(PEDAL_FLAT,PEDAL_CLIP,PEDAL_HYBRID,PEDAL_ROAD,PEDAL_CLEATS,PEDAL_PARTS)
+_PEDALS=re.compile(r'\bpedals\b',re.I)
+_PEDAL=re.compile(r'\bpedals?\b',re.I)
+_TOE_CLIPS=re.compile(r'\btoe[\s-]*clips?\b|\bclips\s+and\s+straps\b',re.I)
+_PEDAL_PARTS=re.compile(
+ r'\bcleat\s+covers?\b|\brebuild\b|\bservice\s+kit\b|\bpin\s+kit\b|\bpins?\b(?!\s+pedals?)|'
+ r'\b(?:axle|spindle)\s+(?:kit|assembly)\b|(?<!loose\s)(?<!sealed\s)\bbearings?\b|\bbushings?\b|'
+ r'\btoe[\s-]*clips?\b|\bstraps?\b|\breflectors?\b|\bextenders?\b|\bshims?\b|\bwrench\b',re.I)
+_CLEAT=re.compile(r'\bcleats?\b',re.I)
+_PEDAL_HYBRID=re.compile(
+ r'\bdual[\s-]*(?:sided|function|purpose)\b|\bdouble\s*shot\b|\bhybrid\b|\bone[\s-]*sided\b|'
+ r'\bsingle[\s-]*side(?:d)?\s+clipless\b|\bPD-?(?:EH500|M324|T421|EF205)\b|\bmulti[\s-]*use\b',re.I)
+_PEDAL_ROAD=re.compile(
+ r'\bSPD[\s-]*SL\b|\bkeo\b|\blook\s+delta\b|\bspeedplay\b|\bxpresso\b|\bPD-?RS?\d|\brally\s+RS\d|'
+ r'\broad\s+(?:clipless\s+)?pedals?\b|\bultegra\b|\bdura[\s-]*ace\b|\b105\b|\b3[\s-]*bolt\b',re.I)
+# Shimano's flat XT and Saint pedals share the PD-M numbering: PD-M8040,
+# PD-M8140, PD-MX80.
+_SHIMANO_FLAT=re.compile(r'\bPD-?M8[01]40\b|\bPD-?MX\d{2}\b|\bPD-?GR\d{3}\b',re.I)
+_PEDAL_CLIP=re.compile(
+ r'\bclipless\b|\bclip[\s-]*in\b|\bSPD\b|(?<!toe\s)\bclip\s+pedals?\b|\bxc\s+clip\b|\b2[\s-]*bolt\b|'
+ r'\begg\s*beater\b|\bcandy\b|\bmallet\b|\batac\b|\bspeciale\b|\bPD-?M\d{3,4}|\bPD-?9\d{3}\b|\bPD-?ME\d|'
+ r'\bPD-?T\d|\bPD-?E[DS]\d{3}\b|\bGRX\b.*\bpedals?\b|\brally\s+XC\d|\bw/\s*\(?\s*(?:CL-|SM-)?\w*\)?\s*cleat|'
+ r'\bHT\b.*\b(?:T[12]T?|X[12]|M[12]|GT1)\b',re.I)
+_PEDAL_FLAT=re.compile(
+ r'\bflats?\b|\bplatform\b|\bstamp\b|\bchester\b|\batlas\b|\bturbine\b|\bspoon\b|\bspike\b|\boozy\b|\bvault\b|'
+ r'\bAE0?\d\b|\bANS\s?\d|\bwave\b|\bpnw\b.*\b(?:range|loam)\b|\bkrypto\b|\blinx\b|\bgrabber\b|'
+ r'\bdeity\b.*\b(?:tmac|deftrap|bladerunner|compound|black\s*kat|supervillain)\b|\bchromag\b|\bcatalyst\b|'
+ r'\b5050\b|\banvl\b|\bAN\d{2}A?\b|\bPA0\dA?\b|\bME0\dT?\b|\b(?:æ|ae)ffect\b|\brace\s*face\b.*\bride\b|'
+ r'\bSDG\b.*\b(?:comp|slater)\b|\btwisted\s+PC\b|\btag\s+metals\b|\btenet\b|\bnon[\s-]*slip\b|\bmtn\s+sport\b|'
+ r'\bjuvenile\b|\bcruiser\b.*\bloose\s+ball\b|\boneup\b.*\b(?:aluminum|composite)\s+pedals?\b',re.I)
+
+
+def pedal_type(name,product_type=''):
+    """One of PEDAL_TYPES, or None when neither the title nor the store's
+    category says (track pedals, bundles)."""
+    name=str(name or '');kind=str(product_type or '')
+    if re.search(r'/CLEATS\b|\bcleats?$',kind,re.I) and not _PEDAL.search(name):return PEDAL_CLEATS
+    if re.search(r'pedal\s+parts|/ACCESSORIES\b',kind,re.I):return PEDAL_PARTS
+    if _TOE_CLIPS.search(name) and _PEDALS.search(name):return PEDAL_FLAT  # pedals sold with toe clips
+    if _PEDAL_PARTS.search(name):return PEDAL_PARTS
+    if _CLEAT.search(name) and not _PEDAL.search(name):return PEDAL_CLEATS
+    if _PEDAL_HYBRID.search(name):return PEDAL_HYBRID
+    if _PEDAL_ROAD.search(name):return PEDAL_ROAD
+    if _SHIMANO_FLAT.search(name):return PEDAL_FLAT
+    if _PEDAL_CLIP.search(name):return PEDAL_CLIP
+    if re.search(r'clipless',kind,re.I):return PEDAL_ROAD if re.search(r'\broad\b',kind,re.I) else PEDAL_CLIP
+    if _PEDAL_FLAT.search(name) or re.search(r'\bflat\b|platform',kind,re.I):return PEDAL_FLAT
+    return None
+
+
+_PEDAL_MATERIALS=(
+ ('Composite',re.compile(r'\bcomposite\b|\bnylon\b|\bresin\b|\bplastic\b|\bpolycarbonate\b|\bPC\b',re.I)),
+ ('Magnesium',re.compile(r'\bmagnesium\b',re.I)),
+ ('Titanium',re.compile(r'\btitanium\b',re.I)),
+ ('Aluminum',re.compile(r'\balumin(?:um|ium)\b|\balloy\b|\bCNC\b',re.I)),
+)
+
+
+_BODY_MATERIAL=re.compile(
+ r'\b(?:body|platform)\s*(?:material)?\s*[:\-–]\s*(?:[\w-]+\s+){0,2}?(composite|nylon|resin|alumin(?:um|ium)|alloy|magnesium|titanium)\b|'
+ r'\b(composite|nylon|resin|alumin(?:um|ium)|alloy|magnesium|titanium)\s+(?:body|platform)\b',re.I)
+
+
+def pedal_material(name,body=''):
+    """A flat or hybrid pedal body's material: the title's, else a
+    description that names the body's ("Body: aluminum", "composite body")."""
+    def one(text):
+        found=[label for label,pattern in _PEDAL_MATERIALS if pattern.search(text)]
+        return found[0] if len(found)==1 else None
+    titled=one(str(name or ''))
+    if titled:return titled
+    stated={one(m.group(1) or m.group(2)) for m in _BODY_MATERIAL.finditer(str(body or ''))}
+    stated.discard(None)
+    return stated.pop() if len(stated)==1 else None
+
+
+def pedal_thread(name):
+    """'9/16"' (adult cranks) or '1/2"' (one-piece cranks, kids'), when stated."""
+    name=str(name or '')
+    if re.search(r'(?<![\d/])9\s*/\s*16\b',name):return '9/16"'
+    if re.search(r'(?<![\d/])1\s*/\s*2\s*(?:["`″”]|in\b|inch)',name):return '1/2"'
+    return None
+
+
 def extract(product,variant,part):
     name=text(product.get('title',''))
     body=text(product.get('body_html',''))
@@ -262,6 +360,12 @@ def extract(product,variant,part):
         for m in re.finditer(r'(?<![\d.\-/])(27\.5|29)(?:er)?(?![\d.]|\s*(?:mm|t\b|x\b|tooth))',name,re.I):
             if not re.search(r'(?:frame size|top tube|seat tube|size|width|reach)\s*[:=]?\s*$',name[:m.start()],re.I):
                 add('wheel_size',[m[1]])
+    if part=='Pedals':
+        titled=' '.join(t for t in (str(product.get('vendor') or ''),name) if t)
+        kind_of=pedal_type(titled,product.get('product_type',''))
+        add('pedal_type',[kind_of])
+        if kind_of in (PEDAL_FLAT,PEDAL_HYBRID):add('pedal_material',[pedal_material(name,body)])
+        if kind_of in (PEDAL_FLAT,PEDAL_CLIP,PEDAL_HYBRID,PEDAL_ROAD):add('pedal_thread',[pedal_thread(name)])
     if part=='Brakes' and re.search(r'\brotors?\b',name,re.I):
         add('rotor_mm',[number(v) for v in re.findall(NUMBER+r'\s*mm\b',name,re.I) if 140<=float(v)<=240])
     axes=option_text(product,variant)
