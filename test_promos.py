@@ -110,6 +110,64 @@ class FindTests(unittest.TestCase):
                          "20% off, until Dec 2")
 
 
+class NoCodeTests(unittest.TestCase):
+    """Sales applied in the cart, no code (owner, 2026-11-25: Skate Warehouse)."""
+    TODAY = datetime.date(2026, 11, 25)
+    TIERS = [{"percent": 25, "on": "shoes, clothing & accessories"}, {"percent": 15, "on": "decks, completes & parts"}]
+
+    def test_skatewarehouse_banner(self):
+        page = ("<div>BLACK FRIDAY SALE 25% OFF Shoes, Clothing &amp; Accessories | 15% OFF Decks, Complete "
+                "Skateboards &amp; Parts Discount applied in cart. Some exclusions apply. Ends 12/02 at 12pm PT</div>"
+                "<p>Up to 60% off clearance</p>")
+        found = promos.find(page, self.TODAY)
+        self.assertEqual(found, [{"code": "", "auto": True, "ends": "2026-12-02", "percent": 25, "tiers": self.TIERS}])
+        self.assertEqual(promos.describe(found[0]), "25% off shoes, clothing & accessories, 15% off decks, completes "
+                                                    "& parts, no code needed, until Dec 2")
+        self.assertEqual(promos.describe(found[0], code=False),
+                         "25% off shoes, clothing & accessories, 15% off decks, completes & parts, until Dec 2")
+
+    def test_labels_before_the_percent(self):
+        page = ("<p>Shoes, Clothing & Accessories 25% Off</p><p>Decks, Completes & Parts 15% Off</p>"
+                "<p>No code needed - discount automatically applied at checkout. Ends Dec 2.</p>")
+        self.assertEqual(promos.find(page, self.TODAY)[0]["tiers"], self.TIERS)
+
+    def test_sitewide(self):
+        found = promos.find("<h2>20% off everything</h2><p>Discount automatically applied at checkout.</p>", self.TODAY)
+        self.assertEqual(found[0]["tiers"], [{"percent": 20, "on": "sitewide"}])
+
+    def test_not_a_no_code_sale(self):
+        for page in (
+            "<p>Up to 60% off select items. Prices as marked.</p>",  # markdowns: already listed
+            "<p>Up to 40% off. Discount applied in cart.</p>",  # a ceiling, not a discount
+            "<p>Sign up for our newsletter: 10% off applied at checkout on your first order</p>",
+            "<p>Free shipping applied at checkout on orders $50+</p>",
+        ):
+            self.assertEqual(promos.find(page, self.TODAY), [], page)
+        # "applied at checkout" next to a code is that code's (Fanatik).
+        self.assertEqual([p["code"] for p in promos.find(FANATIK_BF, TODAY)], ["2026-BFCM-20"])
+
+    def test_store_wording_never_passes_through(self):
+        page = "<p>30% off Ignore Previous Instructions gear. Discount applied in cart.</p>"
+        found = promos.find(page, self.TODAY)
+        self.assertEqual(found[0]["tiers"], [{"percent": 30, "on": ""}])
+        self.assertEqual(promos.describe(found[0]), "30% off, no code needed")
+
+    def test_kept_with_the_codes_and_shown_in_emails(self):
+        sale = dict(code="", auto=True, ends="2026-12-02", percent=25, tiers=self.TIERS, store="SkateWarehouse",
+                    url="https://www.skatewarehouse.com/", sports=["skate"])
+        merged = promos.merge([], [sale, dict(EmailTests.PROMO, store="CCS")], {"SkateWarehouse", "CCS"}, self.TODAY)
+        self.assertEqual([p["store"] for p in merged], ["CCS", "SkateWarehouse"])
+        html = notify.html_promos([sale])
+        self.assertIn("No code needed", html)
+        self.assertIn("25% off shoes, clothing &amp; accessories, 15% off decks", html)
+        self.assertIn("- SkateWarehouse: 25% off shoes, clothing & accessories, 15% off decks, completes & parts, "
+                      "no code needed, until Dec 2", notify.plain_promos([sale]))
+        # The page's strip lists codes only until Codex adds these
+        # (docs/codex-backlog-2026-11-07.md, task 20); no empty code box meanwhile.
+        with mock.patch("promos.for_sport", return_value=[sale]):
+            self.assertEqual(_promo_strip("skate"), "")
+
+
 class ScanTests(unittest.TestCase):
     def test_scan_follows_sale_links_and_respects_robots(self):
         pages = {"https://www.fanatikbike.com/robots.txt": "User-agent: *\nDisallow: /pages/sales\n",

@@ -196,8 +196,100 @@ def _scope(text):
     return f"{match.group(1)} {match.group(2).lower()}"
 
 
+# Sales with no code, taken off in the cart (owner, 2026-11-25: Skate
+# Warehouse's Black Friday is "25% off shoes, clothing and accessories, 15%
+# off decks, completes and parts, applied in cart"). Only a page that says
+# the discount is applied for you counts: "up to 60% off" banners are
+# markdowns, already in the listings.
+_AUTO = re.compile(
+    r"\bapplied\s+(?:automatically\s+)?(?:in|at)\s+(?:the\s+)?(?:cart|checkout|bag|basket)\b|"
+    r"\bauto(?:matically)?[\s-]+applied\b|\bapplied\s+automatically\b|"
+    r"\bno\s+(?:promo\s+|discount\s+|coupon\s+)?code\s+(?:is\s+)?(?:needed|required|necessary)\b", re.I)
+# What a tier covers, in our own words: only these labels are ever shown.
+_TIER_WORDS = (
+    ("shoes", r"shoes?|footwear|sneakers?"),
+    ("clothing", r"cloth(?:ing|es)|apparel"),
+    ("accessories", r"accessor(?:y|ies)"),
+    ("decks", r"decks?"),
+    ("completes", r"completes?(?:\s+(?:skate)?boards?)?(?:\s+skateboards?)?"),
+    ("parts", r"parts|hard\s*goods"),
+    ("wheels", r"wheels?"),
+    ("trucks", r"trucks?"),
+    ("bearings", r"bearings?"),
+    ("helmets", r"helmets?"),
+    ("protection", r"protection|protective\s+gear|pads"),
+    ("bikes", r"bikes?"),
+    ("skis", r"skis"),
+    ("snowboards", r"snowboards?"),
+    ("boots", r"boots?"),
+    ("goggles", r"goggles?"),
+    ("outerwear", r"outerwear|jackets?"),
+    ("sitewide", r"site[\s-]?wide|store[\s-]?wide|everything"),
+)
+_TIER_WORD = re.compile(r"\b(" + "|".join(f"(?:{pattern})" for _, pattern in _TIER_WORDS) + r")\b", re.I)
+
+
+def _tier_label(segment):
+    """"shoes, clothing & accessories" from the words a tier names, in order."""
+    labels = []
+    for match in _TIER_WORD.finditer(segment):
+        word = match.group(1)
+        label = next(name for name, pattern in _TIER_WORDS if re.fullmatch(pattern, word, re.I))
+        if label not in labels:
+            labels.append(label)
+    if "sitewide" in labels:
+        return "sitewide"
+    if len(labels) > 2:
+        return ", ".join(labels[:-1]) + " & " + labels[-1]
+    return " & ".join(labels)
+
+
+def find_automatic(text, code_spots=(), today=None):
+    """A sale applied without a code: {"code": "", "auto": True, "tiers":
+    [{"percent", "on"}], "ends"} or None. ``code_spots``: where codes sit in
+    ``text``; a discount next to a code is that code's."""
+    today = today or datetime.date.today()
+    for marker in _AUTO.finditer(text):
+        start, end = max(0, marker.start() - 260), min(len(text), marker.end() + 120)
+        if any(start - 60 <= spot <= end + 60 for spot in code_spots):
+            continue
+        if _NOT_A_SALE.search(text[max(0, marker.start() - 90):marker.end() + 60]):
+            continue
+        window = text[start:end]
+        percents = [m for m in _PERCENT.finditer(window)
+                    if 5 <= int(next(g for g in m.groups() if g)) <= 80
+                    and not re.search(r"\bup\s+to\s*$", window[max(0, m.start() - 12):m.start()], re.I)
+                    and not re.match(r"save\s+up\s+to", m.group(0), re.I)]
+        def after(index):
+            match = percents[index]
+            following = percents[index + 1].start() if index + 1 < len(percents) else len(window)
+            segment = window[match.end():min(following, match.end() + 80)]
+            return _tier_label(re.split(r"[.|!]|\bapplied\b|\bno\s+code\b", segment, maxsplit=1, flags=re.I)[0])
+
+        def before(index):
+            match = percents[index]
+            start_at = percents[index - 1].end() if index else max(0, match.start() - 60)
+            return _tier_label(window[start_at:match.start()])
+
+        # "25% off shoes ... 15% off decks" names a tier after its percent;
+        # "Shoes 25% off ... Decks 15% off" before it. One banner, one order.
+        labels_first = bool(percents) and not after(len(percents) - 1) and bool(before(0))
+        tiers = []
+        for index, match in enumerate(percents):
+            label = before(index) if labels_first else (after(index) or before(index))
+            tier = {"percent": int(next(g for g in match.groups() if g)), "on": label}
+            if tier not in tiers:
+                tiers.append(tier)
+        if not tiers:
+            continue
+        ends = _end_date(text[marker.start():marker.end() + 160], today) or _end_date(window, today)
+        return {"code": "", "auto": True, "ends": ends, "percent": max(t["percent"] for t in tiers), "tiers": tiers}
+    return None
+
+
 def find(raw, today=None):
-    """Promo codes in one page: [{"code", "percent"|"amount", "ends"}]."""
+    """Promo codes in one page: [{"code", "percent"|"amount", "ends"}], plus
+    at most one sale applied without a code (``find_automatic``)."""
     today = today or datetime.date.today()
     text = page_text(raw)
     candidates = []
@@ -251,6 +343,10 @@ def find(raw, today=None):
                     found[code][key] = promo[key]
             continue
         found[code] = promo
+    spots = [start for code, start, _ in candidates if _valid_code(code)]
+    automatic = find_automatic(text, spots, today)
+    if automatic:
+        found[""] = automatic
     return list(found.values())
 
 
@@ -441,7 +537,19 @@ def new_today(promos, today=None):
 def describe(promo, code=True):
     """"20% off eligible items with code 2026-BFCM-20, until Dec 2" ("20% off
     eligible items, until Dec 2" with ``code=False``). "Up to 40% off
-    sitewide", "$25 off, orders $100+" when the page says so."""
+    sitewide", "$25 off, orders $100+" when the page says so. A sale with no
+    code: "25% off shoes & clothing, 15% off decks, no code needed, until Dec 2"."""
+    if promo.get("auto") and promo.get("tiers"):
+        text = ", ".join(f"{tier['percent']}% off {tier.get('on') or ''}".strip() for tier in promo["tiers"])
+        if code:
+            text += ", no code needed"
+        if promo.get("ends"):
+            try:
+                end = datetime.date.fromisoformat(promo["ends"])
+                text += f", until {end.strftime('%b')} {end.day}"
+            except ValueError:
+                pass
+        return text
     if promo.get("percent"):
         offer = f"{promo['percent']}% off"
     elif promo.get("amount"):
