@@ -59891,26 +59891,26 @@
           }
         },
         "Source BMX US_Braking": {
-          "count": 36,
+          "count": 35,
           "failed": false,
           "diagnostics": {
             "expected_count": 34.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 36,
-            "percentage_change": 5.9,
+            "actual_count": 35,
+            "percentage_change": 2.9,
             "reason": "normal_variation"
           }
         },
         "Source BMX US_Drivetrain": {
-          "count": 123,
+          "count": 124,
           "failed": false,
           "diagnostics": {
             "expected_count": 120.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.5,
-            "actual_count": 123,
-            "percentage_change": 2.1,
+            "actual_count": 124,
+            "percentage_change": 2.9,
             "reason": "normal_variation"
           }
         },
@@ -59987,14 +59987,14 @@
           }
         },
         "Source BMX US_Wheel Parts": {
-          "count": 287,
+          "count": 288,
           "failed": false,
           "diagnostics": {
             "expected_count": 287.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.5,
-            "actual_count": 287,
-            "percentage_change": -0.2,
+            "actual_count": 288,
+            "percentage_change": 0.2,
             "reason": "normal_variation"
           }
         },
@@ -60564,7 +60564,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-25T08:36:31+00:00"
+      "scanned_at": "2026-11-25T13:56:23+00:00"
     }
   ],
   "baseline": {
@@ -60642,11 +60642,11 @@
     },
     "Source BMX US_Braking": {
       "date": "2026-11-25",
-      "count": 36
+      "count": 35
     },
     "Source BMX US_Drivetrain": {
       "date": "2026-11-25",
-      "count": 123
+      "count": 124
     },
     "Source BMX US_Frames & Forks": {
       "date": "2026-11-25",
@@ -60666,7 +60666,7 @@
     },
     "Source BMX US_Wheel Parts": {
       "date": "2026-11-25",
-      "count": 287
+      "count": 288
     },
     "Source BMX US_Wheels": {
       "date": "2026-11-25",
@@ -71015,7 +71015,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 36
+        "count": 35
       }
     ],
     "Source BMX US_Drivetrain": [
@@ -71073,7 +71073,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 123
+        "count": 124
       }
     ],
     "Source BMX US_Frames & Forks": [
@@ -71479,7 +71479,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 287
+        "count": 288
       }
     ],
     "Source BMX US_Wheels": [

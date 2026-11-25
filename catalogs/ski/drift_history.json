@@ -2090,7 +2090,8 @@
           "fields": {
             "brand": 1.0,
             "gender": 0.826,
-            "image": 1.0
+            "image": 1.0,
+            "link": 0.043
           },
           "items": 23
         },
@@ -2161,6 +2162,7 @@
             "image": 1.0,
             "kind": 0.405,
             "last": 0.742,
+            "link": 0.025,
             "mondo": 0.994,
             "sizes": 0.994,
             "ski_type": 0.436,
@@ -2179,6 +2181,7 @@
             "kind": 0.289,
             "length": 0.978,
             "lengths": 0.978,
+            "link": 0.007,
             "radius": 0.111,
             "rocker": 0.267,
             "ski_type": 0.437,
@@ -2209,6 +2212,7 @@
             "gender": 1.0,
             "image": 1.0,
             "kind": 0.15,
+            "link": 0.05,
             "ski_type": 0.15,
             "sole": 0.9
           },
@@ -2240,6 +2244,7 @@
             "helmet_shell": 0.552,
             "helmet_style": 1.0,
             "image": 1.0,
+            "link": 0.31,
             "prot_size": 0.966,
             "protects": 1.0,
             "rotational": 0.862,
@@ -2257,6 +2262,7 @@
             "kind": 0.884,
             "length": 0.008,
             "lengths": 0.008,
+            "link": 0.008,
             "rocker": 0.271,
             "ski_type": 0.992,
             "waist": 0.984
@@ -2272,6 +2278,7 @@
             "din": 0.981,
             "gender": 0.296,
             "image": 1.0,
+            "link": 0.037,
             "ski_type": 0.074,
             "sole": 0.796,
             "width": 0.093
@@ -2287,6 +2294,7 @@
             "gender": 0.618,
             "image": 1.0,
             "last": 0.63,
+            "link": 0.008,
             "mondo": 0.996,
             "sizes": 0.996,
             "ski_type": 0.017,
@@ -2336,6 +2344,7 @@
             "brand": 1.0,
             "gender": 0.053,
             "image": 1.0,
+            "link": 0.368,
             "protection_sizes": 0.263,
             "protects": 1.0
           },
@@ -2518,6 +2527,7 @@
             "goggle_size": 0.421,
             "image": 1.0,
             "lens_shape": 0.737,
+            "link": 0.079,
             "protection_sizes": 0.079,
             "protects": 1.0,
             "versions": 0.026
@@ -2628,6 +2638,7 @@
             "gender": 0.045,
             "image": 1.0,
             "kind": 0.182,
+            "link": 0.455,
             "ski_type": 0.182,
             "sole": 0.682
           },
@@ -2643,6 +2654,7 @@
             "image": 1.0,
             "kind": 0.226,
             "last": 0.394,
+            "link": 0.068,
             "mondo": 1.0,
             "sizes": 1.0,
             "ski_type": 0.226,
@@ -2662,6 +2674,7 @@
             "helmet_shell": 0.447,
             "helmet_style": 1.0,
             "image": 1.0,
+            "link": 0.324,
             "prot_size": 0.989,
             "protects": 1.0,
             "rotational": 0.693,
@@ -2673,18 +2686,20 @@
         "evo_Packs": {
           "fields": {
             "brand": 0.987,
-            "gender": 0.131,
+            "gender": 0.13,
             "image": 1.0,
+            "link": 0.149,
             "versions": 0.013,
             "width": 0.078
           },
-          "items": 153
+          "items": 154
         },
         "evo_Poles": {
           "fields": {
             "brand": 0.808,
             "gender": 0.077,
             "image": 1.0,
+            "link": 0.192,
             "versions": 0.038
           },
           "items": 26
@@ -2700,6 +2715,7 @@
             "goggle_size": 0.285,
             "image": 1.0,
             "lens_shape": 0.396,
+            "link": 0.353,
             "prot_size": 0.077,
             "protection_sizes": 0.145,
             "protection_type": 0.034,
@@ -2717,6 +2733,7 @@
             "image": 1.0,
             "length": 1.0,
             "lengths": 1.0,
+            "link": 0.061,
             "rocker": 0.122,
             "ski_type": 0.044,
             "waist": 0.757
@@ -2746,6 +2763,7 @@
       "Hand/Toe Warmers",
       "Hats",
       "Headbands",
+      "Helmet/Goggle Accessories",
       "Hoodies and Sweatshirts",
       "Hoods",
       "Insulated Bibs",

@@ -1,56 +1,489 @@
 {
  "changes": {
-  "Bike Mart_Cockpit": [
+  "Bike Mart_Bikes": [
    {
     "item": {
-     "at_all_time_low": true,
+     "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "WTB",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
-      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Portrait.jpg?v=1764016046",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt1.jpg?v=1764009237",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt2.jpg?v=1764009238",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt3.jpg?v=1764009239",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt4.jpg?v=1764009240"
      ],
-     "name": "WTB Rocket Saddle - Black Medium Fusion Form",
-     "part": "Cockpit",
-     "price_new": "71.95",
-     "price_old": "89.95",
-     "product_type": "Saddles",
+     "name": "Trek 2026 Slash+ 9.9 Electric Full Suspension Mountain Bike",
+     "part": "Bikes",
+     "price_new": "10499.93",
+     "price_old": "12499.99",
+     "product_type": "Electric Full Suspension Mountain Bike",
      "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 129.95,
-       "price": 116.95,
-       "specs": {},
-       "variant_id": 46839154934013
+       "compare": 12499.99,
+       "price": 10499.93,
+       "specs": {
+        "frame_size": [
+         "S"
+        ],
+        "power": [
+         "E-MTB"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906909360381
       },
       {
        "available": true,
-       "compare": 119.95,
-       "price": 107.95,
-       "specs": {},
-       "variant_id": 46839154966781
+       "compare": 12499.99,
+       "price": 10499.93,
+       "specs": {
+        "frame_size": [
+         "M"
+        ],
+        "power": [
+         "E-MTB"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906909393149
       },
       {
        "available": true,
-       "compare": 104.95,
-       "price": 94.95,
-       "specs": {},
-       "variant_id": 46839154999549
+       "compare": 12499.99,
+       "price": 10499.93,
+       "specs": {
+        "frame_size": [
+         "L"
+        ],
+        "power": [
+         "E-MTB"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906909425917
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "L",
+       "M",
+       "S"
+      ],
+      "power": [
+       "E-MTB"
+      ],
+      "suspension": [
+       "Full suspension"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-slash-9-9-full-suspension-electric-mountain-bike",
+     "width": 9.9
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Portrait.jpg?v=1764016762",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt1.jpg?v=1764008227",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt2.jpg?v=1764008228",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt3.jpg?v=1764008228",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt4.jpg?v=1764008229"
+     ],
+     "length": 0.0,
+     "name": "Trek 2026 Slash 9.9 X0 AXS T-Type Gen 6 Full Suspension Mountain Bike",
+     "part": "Bikes",
+     "price_new": "7799.93",
+     "price_old": "8699.99",
+     "product_type": "Full Suspension Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "power": [
+         "Regular"
+        ],
+        "speed": [
+         "12-speed"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906856407293
       },
       {
        "available": true,
-       "compare": 89.95,
-       "price": 71.95,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "frame_size": [
+         "M"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "speed": [
+         "12-speed"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906856440061
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "power": [
+         "Regular"
+        ],
+        "speed": [
+         "12-speed"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906856472829
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 7799.93,
+       "specs": {
+        "frame_size": [
+         "L"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "speed": [
+         "12-speed"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906856505597
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "L",
+       "M"
+      ],
+      "power": [
+       "Regular"
+      ],
+      "speed": [
+       "12-speed"
+      ],
+      "suspension": [
+       "Full suspension"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-slash-9-9-x0-axs-t-type-gen-6-full-suspension-mountain-bike",
+     "width": 9.9
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Primary.jpg?v=1764009734",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Primary.jpg?v=1764009734",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Alt1.jpg?v=1764009735",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Alt2.jpg?v=1764009735",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Alt3.jpg?v=1764009736",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-A-Primary_1df6be91-3cc9-482c-b7cb-a6bb68ce1a88.jpg?v=1764009737",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-A-Alt1.jpg?v=1764009738",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-A-Alt2.jpg?v=1764009739",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-A-Alt3.jpg?v=1764009739"
+     ],
+     "name": "Trek 2026 Fuel+ EX 9.7 Gen 2 Electric Full Suspension Mountain Bike",
+     "part": "Bikes",
+     "price_new": "5999.93",
+     "price_old": "8699.99",
+     "product_type": "Electric Full Suspension Mountain Bike",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 5999.93,
+       "specs": {
+        "frame_size": [
+         "XXL"
+        ],
+        "power": [
+         "E-MTB"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906929578237
+      },
+      {
+       "available": true,
+       "compare": 8699.99,
+       "price": 5999.93,
+       "specs": {
+        "frame_size": [
+         "XXL"
+        ],
+        "power": [
+         "E-MTB"
+        ],
+        "suspension": [
+         "Full suspension"
+        ]
+       },
+       "variant_id": 46906929742077
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "XXL"
+      ],
+      "power": [
+       "E-MTB"
+      ],
+      "suspension": [
+       "Full suspension"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-fuel-ex-9-7-gen-2-full-suspension-electric-mountain-bike",
+     "width": 9.7
+    },
+    "type": "new"
+   }
+  ],
+  "Bike Mart_Brakes": [
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Avid",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-1.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-12.jpg?v=1761060041",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-11.jpg?v=1761060041"
+     ],
+     "link": "https://www.bikemart.com/products/disc-brake-pads-juicybb7bb5?variant=46764026527997",
+     "name": "Avid Disc Brake Pads (Juicy/BB7/BB5)",
+     "part": "Brakes",
+     "price_new": "10.93",
+     "price_old": "35.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 10.93,
        "specs": {},
-       "variant_id": 46839155032317
+       "variant_id": 46764026527997
       }
      ],
      "technical_specs": {},
-     "url": "https://www.bikemart.com/products/wtb-rocket-saddle"
+     "url": "https://www.bikemart.com/products/disc-brake-pads-juicybb7bb5"
+    },
+    "type": "new"
+   }
+  ],
+  "Bike Mart_Cockpit": [
+   {
+    "at_all_time_low": true,
+    "delta": 2.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Bontrager",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-line-dropper-seatpost-cartridge-585442-1.png?v=1761060607",
+     "link": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge?variant=46764334743805",
+     "name": "Bontrager Line Dropper Seatpost Cartridge",
+     "part": "Cockpit",
+     "price_new": "14.93",
+     "price_old": "59.99",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 65.99,
+       "price": 16.93,
+       "specs": {},
+       "variant_id": 46764334678269
+      },
+      {
+       "available": true,
+       "compare": 65.99,
+       "price": 16.93,
+       "specs": {},
+       "variant_id": 46764334711037
+      },
+      {
+       "available": true,
+       "compare": 59.99,
+       "price": 14.93,
+       "specs": {},
+       "variant_id": 46764334743805
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge"
+    },
+    "name": "Bontrager Line Dropper Seatpost Cartridge",
+    "new": "14.93",
+    "old": "16.93",
+    "percent_vs_prior": 11.8,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge"
+   }
+  ],
+  "Bike Mart_Drivetrain": [
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-1.jpg?v=1761060271"
+     ],
+     "name": "KMC X12EPT Eco Pro Teq Chain",
+     "part": "Drivetrain",
+     "price_new": "45.62",
+     "price_old": "66.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 66.0,
+       "price": 45.62,
+       "specs": {},
+       "variant_id": 46764155994365
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/x12ept-eco-pro-teq-chain"
+    },
+    "type": "new"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 85.88,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-1.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-16.jpg?v=1761060266"
+     ],
+     "name": "KMC X12 12-Speed Chain",
+     "part": "Drivetrain",
+     "price_new": "29.62",
+     "price_old": "44.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 44.0,
+       "price": 29.62,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151374077
+      },
+      {
+       "available": true,
+       "compare": 154.0,
+       "price": 115.5,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151406845
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+    },
+    "name": "KMC X12 12-Speed Chain",
+    "new": "29.62",
+    "old": "115.50",
+    "percent_vs_prior": 74.4,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+   },
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x11e-turbo-chain-335884-1.jpg?v=1761060214"
+     ],
+     "name": "KMC E11-EPT Eco ProteQ eBike Chain",
+     "part": "Drivetrain",
+     "price_new": "59.62",
+     "price_old": "88.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 88.0,
+       "price": 59.62,
+       "specs": {},
+       "variant_id": 46764131188989
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/e11-ept-eco-proteq-ebike-chain"
     },
     "type": "new"
    }
@@ -58,71 +491,88 @@
   "Bike Mart_Frames": [
    {
     "item": {
-     "at_all_time_low": true,
+     "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "Specialized",
-     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-70_SJ-15-ALLOY-FRM-OBSD-SILDST_HERO-PDP.jpg?v=1762326603",
-     "name": "Specialized 2025 Stumpjumper 15 Alloy Frameset - FOX FLOAT GENIE Performance",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashALFrameset_21_33071_A_Primary.png?v=1764008186",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashALFrameset_21_33071_A_Primary.png?v=1764008186",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashALFrameset-21-33071-A-Alt1.jpg?v=1764008186"
+     ],
+     "name": "Trek 2023 Slash AL Gen 5 Full Suspension Mountain Frameset",
      "part": "Frames",
-     "price_new": "1699.99",
-     "price_old": "2100.00",
-     "product_type": "Framesets",
+     "price_new": "1499.93",
+     "price_old": "2599.99",
+     "product_type": "Full Suspension Mountain Frameset",
      "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 2100.0,
-       "price": 1699.99,
+       "compare": 2599.99,
+       "price": 1499.93,
        "specs": {
-        "frame_material": [
-         "Alloy"
-        ],
-        "frame_size": [
-         "S1"
-        ],
         "power": [
          "Regular"
         ],
         "suspension": [
          "Full suspension"
-        ],
-        "travel_mm": [
-         "145"
         ]
        },
-       "variant_id": 46844258451709
-      },
-      {
-       "available": true,
-       "compare": 2100.0,
-       "price": 1699.99,
-       "specs": {
-        "frame_material": [
-         "Alloy"
-        ],
-        "frame_size": [
-         "S6"
-        ],
-        "power": [
-         "Regular"
-        ],
-        "suspension": [
-         "Full suspension"
-        ],
-        "travel_mm": [
-         "145"
-        ]
-       },
-       "variant_id": 46844258517245
+       "variant_id": 46906855784701
       }
      ],
      "technical_specs": {
-      "frame_material": [
-       "Alloy"
+      "power": [
+       "Regular"
       ],
+      "suspension": [
+       "Full suspension"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2023-slash-al-gen-5-full-suspension-mountain-frameset"
+    },
+    "type": "new"
+   },
+   {
+    "at_all_time_low": false,
+    "delta": 1500.04,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Remedy275CFrameset_22_35214_A_Primary.jpg?v=1764008467",
+     "length": 27.5,
+     "name": "Trek 2024 Remedy 27.5 C Full Suspension Mountain Frameset",
+     "part": "Frames",
+     "price_new": "1499.93",
+     "price_old": "3799.99",
+     "product_type": "Full Suspension Mountain Frameset",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 3799.99,
+       "price": 1499.93,
+       "specs": {
+        "frame_size": [
+         "XL"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Full suspension"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46906865418493
+      }
+     ],
+     "technical_specs": {
       "frame_size": [
-       "S1",
-       "S6"
+       "XL"
       ],
       "power": [
        "Regular"
@@ -130,1032 +580,541 @@
       "suspension": [
        "Full suspension"
       ],
-      "travel_mm": [
-       "145"
+      "wheel_size": [
+       "27.5"
       ]
      },
-     "url": "https://www.bikemart.com/products/2025-stumpjumper-15-alloy-frm"
+     "url": "https://www.bikemart.com/products/2024-remedy-27-5-c-full-suspension-mountain-frameset"
+    },
+    "name": "Trek 2024 Remedy 27.5 C Full Suspension Mountain Frameset",
+    "new": "1499.93",
+    "old": "2999.97",
+    "percent_vs_prior": 50.0,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/2024-remedy-27-5-c-full-suspension-mountain-frameset"
+   },
+   {
+    "at_all_time_low": false,
+    "delta": 700.04,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ProcaliberSLFS_19_24503_A_Primary.jpg?v=1764010244",
+     "name": "Trek 2024 Procaliber SL Gen 1 Hardtail Mountain Frameset",
+     "part": "Frames",
+     "price_new": "999.93",
+     "price_old": "2969.99",
+     "product_type": "Hardtail Mountain Frameset",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "frame_size": [
+         "S"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945208573
+      },
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "frame_size": [
+         "M"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945241341
+      },
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945274109
+      },
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "frame_size": [
+         "L"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945306877
+      },
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "frame_size": [
+         "XL"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945339645
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "L",
+       "M",
+       "S",
+       "XL"
+      ],
+      "power": [
+       "Regular"
+      ],
+      "suspension": [
+       "Hardtail"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2024-procaliber-sl-gen-1-hardtail-mountain-frameset"
+    },
+    "name": "Trek 2024 Procaliber SL Gen 1 Hardtail Mountain Frameset",
+    "new": "999.93",
+    "old": "1699.97",
+    "percent_vs_prior": 41.2,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/2024-procaliber-sl-gen-1-hardtail-mountain-frameset"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ProcaliberFrameset_21_33241_A_Primary.png?v=1764010252",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ProcaliberFrameset_21_33241_A_Primary.png?v=1764010252",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ProcaliberFrameset_21_33241_A_Alt1.jpg?v=1764010253"
+     ],
+     "name": "Trek 2026 Procaliber Gen 2 Hardtail Mountain Frameset",
+     "part": "Frames",
+     "price_new": "849.93",
+     "price_old": "1849.99",
+     "product_type": "Hardtail Mountain Frameset",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 1849.99,
+       "price": 849.93,
+       "specs": {
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945503485
+      }
+     ],
+     "technical_specs": {
+      "power": [
+       "Regular"
+      ],
+      "suspension": [
+       "Hardtail"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2026-procaliber-gen-2-hardtail-mountain-frameset"
     },
     "type": "new"
    }
   ],
-  "Mike's Bikes_Protection": [
+  "Bike Mart_Pedals": [
    {
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Woom",
-     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-01.jpg?v=1785261436",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-01.jpg?v=1785261436",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-02.jpg?v=1785261559",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-03_f3bbd80b-14c0-497c-9423-324b6a922526.jpg?v=1785262222",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-04.jpg?v=1785261860",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-05.jpg?v=1785261937",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Buckle.jpg?v=1785262080",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Inside.jpg?v=1785262341",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Charcoal.jpg?v=1785262445",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Red.jpg?v=1785262504",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Grey.jpg?v=1785262556",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Lilac.jpg?v=1785262611"
-     ],
-     "name": "Woom READY Kids' Helmet",
-     "part": "Protection",
-     "price_new": "69.95",
-     "price_old": "89.99",
-     "product_type": "APPAREL/HELMETS/KIDS HELMETS/READY",
-     "protection_sizes": [
-      "XS",
-      "S",
-      "M"
-     ],
-     "protection_type": "Helmet",
-     "store": "Mike's Bikes",
+     "brand": "VP Components",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/21714_A_1_VP_Grind_Black_Pedal.jpg?v=1762267757",
+     "name": "VP Grind 1/2inch Black Pair Pedal",
+     "part": "Pedals",
+     "price_new": "12.93",
+     "price_old": "19.99",
+     "product_type": "Pedal",
+     "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "XS"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119299092549
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119299223621
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119299354693
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119299321925
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119298961477
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "XS"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119299125317
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119299190853
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119298994245
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "XS"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119299059781
-      },
-      {
-       "available": true,
-       "compare": 89.99,
-       "price": 69.95,
-       "specs": {
-        "age": [
-         "Kids"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45119299256389
+       "compare": 19.99,
+       "price": 12.93,
+       "specs": {},
+       "variant_id": 46840027775229
       }
      ],
-     "technical_specs": {
-      "age": [
-       "Kids"
-      ],
-      "prot_size": [
-       "M",
-       "S",
-       "XS"
-      ],
-      "protects": [
-       "Helmets"
-      ]
-     },
-     "url": "https://mikesbikes.com/products/woom-ready-kids-helmet"
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/vp-grind-1-2inch-black-pair-pedal"
     },
     "type": "new"
    }
   ],
-  "evo_Protection": [
+  "Bike Mart_Tires": [
    {
     "item": {
      "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "Dakine",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379241.jpg?v=1791927513",
+     "brand": "Crankbrothers",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1102.jpg?v=1762296257",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379241.jpg?v=1791927513",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379244.jpg?v=1791927515",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379248.jpg?v=1791927513",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379246.jpg?v=1791927513",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379242.jpg?v=1791927514",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379240.jpg?v=1791927513",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257245.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257243.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257244.jpg?v=1767739438",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257242.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257247.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257246.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257225.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257231.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257223.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257220.jpg?v=1767739434",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257226.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257224.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257240.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257236.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257241.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257239.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257235.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257237.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257228.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257229.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257227.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257233.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257234.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257230.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257232.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257238.jpg?v=1767739436"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1102.jpg?v=1762296257",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1104.jpg?v=1762296257"
      ],
-     "name": "Dakine Slayer MIPS Bike Helmet",
-     "part": "Protection",
-     "price_new": "108.00",
-     "price_old": "144.00",
-     "product_type": "Bike Helmets",
-     "protection_sizes": [
-      "L",
-      "XL"
-     ],
-     "protection_type": "Helmet",
-     "store": "evo",
+     "link": "https://www.bikemart.com/products/crankbrothers-speedier-lever?variant=46842660028669",
+     "name": "Crankbrothers Speedier Lever",
+     "part": "Tires",
+     "price_new": "145.30",
+     "price_old": "200.42",
+     "product_type": "Tire Lever",
+     "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 144.0,
-       "price": 108.0,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L",
-         "XL"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 46153428435094
-      },
-      {
-       "available": true,
-       "compare": 144.0,
-       "price": 108.0,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L",
-         "XL"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 46153428566166
-      },
-      {
-       "available": true,
-       "compare": 144.0,
-       "price": 108.0,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L",
-         "XL"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 46153428500630
+       "compare": 200.42,
+       "price": 145.3,
+       "specs": {},
+       "variant_id": 46842660028669
       }
      ],
-     "technical_specs": {
-      "age": [
-       "Adult"
-      ],
-      "prot_size": [
-       "L",
-       "XL"
-      ],
-      "protects": [
-       "Helmets"
-      ],
-      "rotational": [
-       "MIPS"
-      ]
-     },
-     "url": "https://www.evo.com/products/274053-dakine-slayer-mips-bike-helmet"
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/crankbrothers-speedier-lever"
     },
     "type": "new"
-   },
+   }
+  ],
+  "Bike Mart_Wheels": [
    {
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Dakine",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257218.jpg?v=1767739435",
+     "brand": "Bontrager",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257218.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257216.jpg?v=1767739434",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257222.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257219.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257221.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257217.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257204.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257198.jpg?v=1767739433",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257203.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257207.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257208.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257205.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257206.jpg?v=1767739438",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257209.jpg?v=1767739434",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257211.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257215.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257210.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257213.jpg?v=1767739437",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257214.jpg?v=1767739436",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257212.jpg?v=1767739435"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-13-2.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-14-3.jpg?v=1761060135",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-11-1_bf8ef4b9-147a-42a5-a4a7-757ad83084d1.jpg?v=1761060136"
      ],
-     "name": "Dakine Slayer Bike Helmet",
-     "part": "Protection",
-     "price_new": "76.50",
-     "price_old": "102.00",
-     "product_type": "Bike Helmets",
-     "protection_sizes": [
-      "L",
-      "XL"
+     "name": "Bontrager Cross-Country Tubeless Rim Tape",
+     "part": "Wheels",
+     "price_new": "4.93",
+     "price_old": "21.99",
+     "product_type": "",
+     "spec_offers": [
+      {
+       "available": true,
+       "compare_at_price": 21.99,
+       "diameter_mm": null,
+       "durometers": [],
+       "price": 4.93,
+       "variant_id": "46764081709309"
+      }
      ],
-     "protection_type": "Helmet",
-     "store": "evo",
+     "store": "Bike Mart",
      "technical_offers": [
       {
        "available": true,
-       "compare": 102.0,
-       "price": 76.5,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L",
-         "XL"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 46153428271254
-      },
-      {
-       "available": true,
-       "compare": 102.0,
-       "price": 76.5,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L",
-         "XL"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 46153428336790
+       "compare": 21.99,
+       "price": 4.93,
+       "specs": {},
+       "variant_id": 46764081709309
       }
      ],
-     "technical_specs": {
-      "age": [
-       "Adult"
-      ],
-      "prot_size": [
-       "L",
-       "XL"
-      ],
-      "protects": [
-       "Helmets"
-      ],
-      "rotational": [
-       "MIPS"
-      ]
-     },
-     "url": "https://www.evo.com/products/274052-dakine-slayer-bike-helmet"
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/cross-country-tubeless-rim-tape"
     },
     "type": "new"
-   },
+   }
+  ],
+  "Cambria_Drivetrain": [
    {
+    "at_all_time_low": true,
+    "delta": 30.0,
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Dakine",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379007.jpg?v=1791902368",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379007.jpg?v=1791902368",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379003.jpg?v=1791902368",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379006.jpg?v=1791902368",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257142.jpg?v=1767739434",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257141.jpg?v=1767739433",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257138.jpg?v=1767739434",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187678.jpg?v=1767736733",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187679.jpg?v=1767736732",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-789184.jpg?v=1767748780",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-789183.jpg?v=1767748777",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-990215.jpg?v=1767757012",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-990212.jpg?v=1767757013",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187681.jpg?v=1767736733",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187680.jpg?v=1767736733"
-     ],
-     "name": "Dakine Covert Bike Gloves - Women's",
-     "part": "Protection",
-     "price_new": "26.25",
-     "price_old": "35.00",
-     "product_type": "Bike Gloves",
-     "protection_sizes": [
-      "XS",
-      "S",
-      "M",
-      "L",
-      "XL"
-     ],
-     "protection_type": null,
-     "store": "evo",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/image_8e55a46e-b399-48ca-91b6-f2ab89b2f3bf.png?v=1655109833",
+     "name": "Shimano XTR M9100-1 12 Spd Crank Arms - Gray",
+     "part": "Drivetrain",
+     "price_new": "369.99",
+     "price_old": "565.00",
+     "product_type": "MTB Cranksets",
+     "store": "Cambria",
      "technical_offers": [
       {
        "available": true,
-       "compare": 35.0,
-       "price": 26.25,
+       "compare": 565.0,
+       "price": 369.99,
        "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "XS"
-        ],
-        "protects": [
-         "Gloves"
+        "speed": [
+         "12-speed"
         ]
        },
-       "variant_id": 46115590373526
+       "variant_id": 41116269445302
       },
       {
        "available": true,
-       "compare": 35.0,
-       "price": 26.25,
+       "compare": 565.0,
+       "price": 369.99,
        "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Gloves"
+        "speed": [
+         "12-speed"
         ]
        },
-       "variant_id": 46115590406294
-      },
-      {
-       "available": true,
-       "compare": 35.0,
-       "price": 26.25,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46115590439062
-      },
-      {
-       "available": true,
-       "compare": 35.0,
-       "price": 26.25,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46115590471830
-      },
-      {
-       "available": true,
-       "compare": 35.0,
-       "price": 26.25,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "XS"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46115589554326
-      },
-      {
-       "available": true,
-       "compare": 35.0,
-       "price": 26.25,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46115589587094
-      },
-      {
-       "available": true,
-       "compare": 35.0,
-       "price": 26.25,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46115589619862
-      },
-      {
-       "available": true,
-       "compare": 35.0,
-       "price": 26.25,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46115589652630
-      },
-      {
-       "available": true,
-       "compare": 35.0,
-       "price": 26.25,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "XL"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46115589685398
+       "variant_id": 41116269478070
       }
      ],
      "technical_specs": {
-      "age": [
-       "Adult"
-      ],
-      "prot_size": [
-       "L",
-       "M",
-       "S",
-       "XL",
-       "XS"
-      ],
-      "protects": [
-       "Gloves"
+      "speed": [
+       "12-speed"
       ]
      },
-     "url": "https://www.evo.com/products/194619-dakine-covert-bike-gloves-women-s"
+     "url": "https://cambriabike.com/products/shimano-xtr-m9100-1-12-spd-crank-arm-gray"
     },
-    "type": "new"
+    "name": "Shimano XTR M9100-1 12 Spd Crank Arms - Gray",
+    "new": "369.99",
+    "old": "399.99",
+    "percent_vs_prior": 7.5,
+    "type": "price_drop",
+    "url": "https://cambriabike.com/products/shimano-xtr-m9100-1-12-spd-crank-arm-gray"
    },
    {
+    "at_all_time_low": true,
+    "delta": 30.0,
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Dakine",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379002.jpg?v=1791902368",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379002.jpg?v=1791902368",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379013.jpg?v=1791902368",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379010.jpg?v=1791902368",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-786140.jpg?v=1767748692",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-786139.jpg?v=1767748692",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166008.jpg?v=1767735887",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166010.jpg?v=1767735883",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355032.jpg?v=1789750177",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355026.jpg?v=1789750177",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355023.jpg?v=1789750177",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355027.jpg?v=1789750177",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355024.jpg?v=1789750177",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355025.jpg?v=1789750177"
-     ],
-     "name": "Dakine Syncline Gel Bike Gloves",
-     "part": "Protection",
-     "price_new": "30.00",
-     "price_old": "40.00",
-     "product_type": "Bike Gloves",
-     "protection_sizes": [
-      "S",
-      "M"
-     ],
-     "protection_type": null,
-     "store": "evo",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ShimanoXTRM9130-112SpeedCrankArm_Gray_fc1f57a6-7a54-4424-bb23-6ba5c0a5898c.jpg?v=1642754683",
+     "name": "Shimano XTR M9130-1 12 Spd Crank Arm - Gray",
+     "part": "Drivetrain",
+     "price_new": "389.99",
+     "price_old": "605.00",
+     "product_type": "MTB Cranksets",
+     "store": "Cambria",
      "technical_offers": [
       {
        "available": true,
-       "compare": 40.0,
-       "price": 30.0,
+       "compare": 605.0,
+       "price": 389.99,
        "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Gloves"
+        "speed": [
+         "12-speed"
         ]
        },
-       "variant_id": 46118127501462
-      },
-      {
-       "available": true,
-       "compare": 40.0,
-       "price": 30.0,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46118127534230
+       "variant_id": 41116270100662
       }
      ],
      "technical_specs": {
-      "age": [
-       "Adult"
-      ],
-      "prot_size": [
-       "M",
-       "S"
-      ],
-      "protects": [
-       "Gloves"
+      "speed": [
+       "12-speed"
       ]
      },
-     "url": "https://www.evo.com/products/198245-dakine-syncline-gel-bike-gloves"
+     "url": "https://cambriabike.com/products/shimano-xtr-m9130-1-12-spd-crank-arm-gray"
     },
-    "type": "new"
+    "name": "Shimano XTR M9130-1 12 Spd Crank Arm - Gray",
+    "new": "389.99",
+    "old": "419.99",
+    "percent_vs_prior": 7.1,
+    "type": "price_drop",
+    "url": "https://cambriabike.com/products/shimano-xtr-m9130-1-12-spd-crank-arm-gray"
    },
    {
+    "at_all_time_low": true,
+    "delta": 30.0,
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Dakine",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166037.jpg?v=1767735885",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166037.jpg?v=1767735885",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166036.jpg?v=1767735886",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166038.jpg?v=1767735885"
-     ],
-     "name": "Dakine Slayer Pro D3O Bike Gloves",
-     "part": "Protection",
-     "price_new": "45.75",
-     "price_old": "61.00",
-     "product_type": "Bike Gloves",
-     "protection_sizes": [
-      "M",
-      "L"
-     ],
-     "protection_type": null,
-     "store": "evo",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Shimano_XTR_M9120_12_Speed_1X_Crankarms_Gray_5cd6258b-f4ca-46f5-8738-ba0cf4d74435.jpg?v=1642754678",
+     "name": "Shimano XTR M9120 12 Spd 1X Crankarms - Gray",
+     "part": "Drivetrain",
+     "price_new": "369.99",
+     "price_old": "565.00",
+     "product_type": "MTB Cranksets",
+     "store": "Cambria",
      "technical_offers": [
       {
        "available": true,
-       "compare": 61.0,
-       "price": 45.75,
+       "compare": 565.0,
+       "price": 369.99,
        "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Gloves"
+        "speed": [
+         "12-speed"
         ]
        },
-       "variant_id": 46149772279958
+       "variant_id": 41116269609142
       },
       {
        "available": true,
-       "compare": 61.0,
-       "price": 45.75,
+       "compare": 565.0,
+       "price": 369.99,
        "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Gloves"
+        "speed": [
+         "12-speed"
         ]
        },
-       "variant_id": 46149772312726
+       "variant_id": 41116269641910
       }
      ],
      "technical_specs": {
-      "age": [
-       "Adult"
-      ],
-      "prot_size": [
-       "L",
-       "M"
-      ],
-      "protects": [
-       "Gloves"
+      "speed": [
+       "12-speed"
       ]
      },
-     "url": "https://www.evo.com/products/258404-dakine-slayer-pro-d3o-bike-gloves"
+     "url": "https://cambriabike.com/products/shimano-xtr-m9120-12-spd-1x-crankarms-gray"
     },
-    "type": "new"
+    "name": "Shimano XTR M9120 12 Spd 1X Crankarms - Gray",
+    "new": "369.99",
+    "old": "399.99",
+    "percent_vs_prior": 7.5,
+    "type": "price_drop",
+    "url": "https://cambriabike.com/products/shimano-xtr-m9120-12-spd-1x-crankarms-gray"
    },
    {
+    "at_all_time_low": true,
+    "delta": 30.0,
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Dakine",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257168.jpg?v=1767739433",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257168.jpg?v=1767739433",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257167.jpg?v=1767739434",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257170.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257164.jpg?v=1767739433",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257165.jpg?v=1767739431",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257163.jpg?v=1767739435",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257169.jpg?v=1767739434"
-     ],
-     "name": "Dakine Sentinel 2.0 Bike Gloves",
-     "part": "Protection",
-     "price_new": "49.50",
-     "price_old": "66.00",
-     "product_type": "Bike Gloves",
-     "protection_sizes": [
-      "M",
-      "L",
-      "XL"
-     ],
-     "protection_type": null,
-     "store": "evo",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ShimanoXTRM9125-112Speed1XCrankarms_9d205c59-1363-47d3-88e2-4c3ff9fbdab6.jpg?v=1642754681",
+     "name": "Shimano XTR M9125-1 12 Spd 1X Crankarms - Gray",
+     "part": "Drivetrain",
+     "price_new": "389.99",
+     "price_old": "605.00",
+     "product_type": "MTB Cranksets",
+     "store": "Cambria",
      "technical_offers": [
       {
        "available": true,
-       "compare": 66.0,
-       "price": 49.5,
+       "compare": 605.0,
+       "price": 389.99,
        "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Gloves"
+        "speed": [
+         "12-speed"
         ]
        },
-       "variant_id": 46153427091606
+       "variant_id": 41116269936822
       },
       {
        "available": true,
-       "compare": 66.0,
-       "price": 49.5,
+       "compare": 605.0,
+       "price": 389.99,
        "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Gloves"
+        "speed": [
+         "12-speed"
         ]
        },
-       "variant_id": 46153427124374
-      },
-      {
-       "available": true,
-       "compare": 66.0,
-       "price": 49.5,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "XL"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46153427157142
+       "variant_id": 41116269969590
       }
      ],
      "technical_specs": {
-      "age": [
-       "Adult"
-      ],
-      "prot_size": [
-       "L",
-       "M",
-       "XL"
-      ],
-      "protects": [
-       "Gloves"
+      "speed": [
+       "12-speed"
       ]
      },
-     "url": "https://www.evo.com/products/274045-dakine-sentinel-2-0-bike-gloves",
-     "width": 2.0
+     "url": "https://cambriabike.com/products/shimano-xtr-m9125-1-12-spd-1x-crankarms-gray"
     },
-    "type": "new"
-   },
+    "name": "Shimano XTR M9125-1 12 Spd 1X Crankarms - Gray",
+    "new": "389.99",
+    "old": "419.99",
+    "percent_vs_prior": 7.1,
+    "type": "price_drop",
+    "url": "https://cambriabike.com/products/shimano-xtr-m9125-1-12-spd-1x-crankarms-gray"
+   }
+  ],
+  "The Lost Co._Tires": [
    {
     "item": {
-     "at_all_time_low": false,
+     "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Dakine",
-     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257174.jpg?v=1767739433",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257174.jpg?v=1767739433",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257173.jpg?v=1767739433",
-      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257175.jpg?v=1767739435"
-     ],
-     "name": "Dakine Team Cross-X 2.0 Bike Gloves Graham Agassiz",
-     "part": "Protection",
-     "price_new": "34.50",
-     "price_old": "46.00",
-     "product_type": "Bike Gloves",
-     "protection_sizes": [
-      "S",
-      "M",
-      "XL"
-     ],
-     "protection_type": null,
-     "store": "evo",
+     "brand": "Maxxis",
+     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/maxxis-aspen-at-tire-29x24-msexotr-maxxis-the-lost-co-tb00677600-b-ma1091-9698647.webp?v=1782966909",
+     "length": 2.4,
+     "name": "Maxxis Aspen AT Tire 29x2.4\" MS/EXO/TR",
+     "part": "Tires",
+     "price_new": "87.00",
+     "price_old": "96.00",
+     "product_type": "Tires",
+     "store": "The Lost Co.",
      "technical_offers": [
       {
        "available": true,
-       "compare": 46.0,
-       "price": 34.5,
+       "compare": 96.0,
+       "price": 87.0,
        "specs": {
-        "age": [
-         "Adult"
+        "casing": [
+         "EXO"
         ],
-        "prot_size": [
-         "S"
+        "tire_width": [
+         "2.4"
         ],
-        "protects": [
-         "Gloves"
+        "tubeless": [
+         "Tubeless ready"
+        ],
+        "wheel_size": [
+         "29"
         ]
        },
-       "variant_id": 46079047893142
-      },
-      {
-       "available": true,
-       "compare": 46.0,
-       "price": 34.5,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46153427189910
-      },
-      {
-       "available": true,
-       "compare": 46.0,
-       "price": 34.5,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "prot_size": [
-         "XL"
-        ],
-        "protects": [
-         "Gloves"
-        ]
-       },
-       "variant_id": 46153427255446
+       "variant_id": 45752621039814
       }
      ],
      "technical_specs": {
-      "age": [
-       "Adult"
+      "casing": [
+       "EXO"
       ],
-      "prot_size": [
-       "M",
-       "S",
-       "XL"
+      "tire_width": [
+       "2.4"
       ],
-      "protects": [
-       "Gloves"
+      "tubeless": [
+       "Tubeless ready"
+      ],
+      "wheel_size": [
+       "29"
       ]
      },
-     "url": "https://www.evo.com/products/274046-dakine-team-cross-x-2-0-bike-gloves-graham-agassiz",
-     "width": 2.0
+     "url": "https://www.thelostco.com/products/maxxis-aspen-at-tire-29x2-4-ms-exo-tr",
+     "width": 29.0
     },
     "type": "new"
    }
@@ -1295,6 +1254,7 @@
       "url": "https://bicyclewarehouse.com/products/epic-9-expert"
      },
      {
+      "link": "https://www.bikemart.com/products/epic-9-expert?variant=47474281349373",
       "name": "Specialized 2027 Epic 9 Expert Full Suspension Mountain Bike",
       "price": 6749.99,
       "store": "Bike Mart",
@@ -1485,6 +1445,7 @@
       "url": "https://bicyclewarehouse.com/products/s-works-epic-9"
      },
      {
+      "link": "https://www.bikemart.com/products/s-works-epic-9?variant=47474279055613",
       "name": "Specialized 2027 S-Works Epic 9 Full Suspension Mountain Bike",
       "price": 13724.99,
       "store": "Bike Mart",
@@ -1817,6 +1778,7 @@
     "label": "KS lev integra",
     "offers": [
      {
+      "link": "https://mikesbikes.com/products/ks-lev-integra-dropper-seatpost?variant=40484268605509",
       "name": "KS Lev Integra Dropper Seatpost",
       "price": 209.5,
       "store": "Mike's Bikes",
@@ -1943,6 +1905,7 @@
       "url": "https://cambriabike.com/products/ergon-ge1-evo-grips-black"
      },
      {
+      "link": "https://www.fanatikbike.com/products/ergon-ge1-evo-grips?variant=32494173650990",
       "name": "Ergon GE1 Evo Grips",
       "price": 34.95,
       "store": "Fanatik",
@@ -2135,6 +2098,7 @@
     "label": "ODI vans v2 1 lock",
     "offers": [
      {
+      "link": "https://www.bikemart.com/products/odi-vans-v2-1-lock-on-grips?variant=46842900021501",
       "name": "ODI Vans v2.1 Lock-On Grips",
       "price": 30.56,
       "store": "Bike Mart",
@@ -2302,26 +2266,6 @@
     "part": "Drivetrain"
    },
    {
-    "cheapest_price": 36.0,
-    "key": "sport|Drivetrain|kmc|12|speed|x12",
-    "label": "KMC x12 12 speed",
-    "offers": [
-     {
-      "name": "KMC X12 12-Speed Chain",
-      "price": 115.5,
-      "store": "Bike Mart",
-      "url": "https://www.bikemart.com/products/x12-12-speed-chain"
-     },
-     {
-      "name": "KMC X12 12-Speed Chain",
-      "price": 36.0,
-      "store": "Fanatik",
-      "url": "https://www.fanatikbike.com/products/kmc-x12-12-speed-chain"
-     }
-    ],
-    "part": "Drivetrain"
-   },
-   {
     "cheapest_price": 795.0,
     "key": "sport|Drivetrain|sram|axs|brose|eagle|groupset|gx|transmission|type",
     "label": "SRAM gx type eagle transmission axs groupset",
@@ -2333,6 +2277,7 @@
       "url": "https://www.thelostco.com/products/copy-of-sram-gx-t-type-eagle-transmission-axs-groupset-165mm"
      },
      {
+      "link": "https://www.evo.com/products/245369-sram-gx-eagle-axs-transmission-groupset?variant=46143546720406",
       "name": "SRAM GX Eagle AXS Transmission Groupset",
       "price": 795.0,
       "store": "evo",
@@ -2463,6 +2408,26 @@
       "price": 39.95,
       "store": "evo",
       "url": "https://www.evo.com/products/123097-sram-pressfit-30-68-92mm-bottom-bracket"
+     }
+    ],
+    "part": "Drivetrain"
+   },
+   {
+    "cheapest_price": 29.62,
+    "key": "sport|Drivetrain|kmc|12|speed|x12",
+    "label": "KMC x12 12 speed",
+    "offers": [
+     {
+      "name": "KMC X12 12-Speed Chain",
+      "price": 29.62,
+      "store": "Bike Mart",
+      "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+     },
+     {
+      "name": "KMC X12 12-Speed Chain",
+      "price": 36.0,
+      "store": "Fanatik",
+      "url": "https://www.fanatikbike.com/products/kmc-x12-12-speed-chain"
      }
     ],
     "part": "Drivetrain"
@@ -2894,6 +2859,68 @@
     "part": "Forks & Shocks"
    },
    {
+    "cheapest_price": 103.99,
+    "key": "sport|Pedals|oneupcomponents|clip|dark|xc",
+    "label": "OneUp Components xc clip dark",
+    "offers": [
+     {
+      "name": "OneUp XC Clip Pedals - Dark Blue",
+      "price": 119.99,
+      "store": "Cambria",
+      "url": "https://cambriabike.com/products/oneup-xc-clip-pedals-dark-blue"
+     },
+     {
+      "name": "OneUp Components XC Clip Pedals - Dark Blue",
+      "price": 103.99,
+      "store": "The Lost Co.",
+      "url": "https://www.thelostco.com/products/copy-of-oneup-components-xc-clip-pedals-black"
+     }
+    ],
+    "part": "Pedals"
+   },
+   {
+    "cheapest_price": 149.99,
+    "key": "sport|Pedals|crankbrothers|mallet|trail",
+    "label": "Crankbrothers mallet trail",
+    "offers": [
+     {
+      "name": "Crankbrothers Mallet Trail Pedals",
+      "price": 149.99,
+      "store": "Mike's Bikes",
+      "url": "https://mikesbikes.com/products/crank-brothers-mallet-trail-pedals"
+     },
+     {
+      "link": "https://www.evo.com/products/242339-crank-brothers-mallet-trail-pedals?variant=46143010209942",
+      "name": "Crankbrothers Mallet Trail Pedals",
+      "price": 159.99,
+      "store": "evo",
+      "url": "https://www.evo.com/products/242339-crank-brothers-mallet-trail-pedals"
+     }
+    ],
+    "part": "Pedals"
+   },
+   {
+    "cheapest_price": 82.49,
+    "key": "sport|Pedals|crankbrothers|2|double|shot",
+    "label": "Crankbrothers double shot 2",
+    "offers": [
+     {
+      "name": "Crankbrothers Double Shot 2 Pedals",
+      "price": 82.49,
+      "store": "Mike's Bikes",
+      "url": "https://mikesbikes.com/products/crank-brothers-double-shot-2-pedals-orange"
+     },
+     {
+      "link": "https://www.evo.com/products/193427-crank-brothers-double-shot-2-pedals?variant=46115086860438",
+      "name": "Crankbrothers Double Shot 2 Pedals",
+      "price": 87.99,
+      "store": "evo",
+      "url": "https://www.evo.com/products/193427-crank-brothers-double-shot-2-pedals"
+     }
+    ],
+    "part": "Pedals"
+   },
+   {
     "cheapest_price": 169.99,
     "key": "sport|Pedals|shimano|saint|spd",
     "label": "Shimano saint spd",
@@ -2945,6 +2972,7 @@
       "url": "https://www.coloradocyclist.com/products/troy-lee-designs-d4-carbon-full-face-helmet-frames-black-gold"
      },
      {
+      "link": "https://www.evo.com/products/172481-troy-lee-designs-d4-carbon-mips-bike-helmet?variant=46375150813334",
       "name": "Troy Lee Designs D4 Carbon MIPS Bike Helmet",
       "price": 612.0,
       "store": "evo",
@@ -2985,6 +3013,7 @@
       "url": "https://www.fanatikbike.com/products/troy-lee-stage-mips-helmet-2025"
      },
      {
+      "link": "https://www.evo.com/products/145465-troy-lee-designs-stage-mips-bike-helmet?variant=46242624635030",
       "name": "Troy Lee Designs Stage MIPS Bike Helmet",
       "price": 195.0,
       "store": "evo",
@@ -3083,6 +3112,7 @@
     "label": "Smith ignite mips",
     "offers": [
      {
+      "link": "https://www.bikesonline.com/products/smith-ignite-mips-helmet-1?variant=50534543884580",
       "name": "Smith Ignite MIPS Helmet",
       "price": 112.49,
       "store": "Bikes Online",
@@ -3103,6 +3133,7 @@
     "label": "Smith session mips",
     "offers": [
      {
+      "link": "https://www.bikesonline.com/products/smith-session-mips-helmet?variant=50624788463908",
       "name": "Smith Session MIPS Helmet",
       "price": 79.99,
       "store": "Bikes Online",
@@ -3147,6 +3178,7 @@
       "url": "https://www.coloradocyclist.com/products/bell-full-9-fusion-mips-full-face-helmet-matt-gray-red"
      },
      {
+      "link": "https://www.evo.com/products/227001-bell-full-9-fusion-mips-bike-helmet?variant=46136054218902",
       "name": "Bell Full-9 Fusion MIPS Bike Helmet",
       "price": 149.95,
       "store": "evo",
@@ -3167,6 +3199,7 @@
       "url": "https://www.coloradocyclist.com/products/troy-lee-designs-a3-mips-mtb-helmet-sram-red"
      },
      {
+      "link": "https://www.evo.com/products/195198-troy-lee-designs-a3-mips-bike-helmet?variant=46115903668374",
       "name": "Troy Lee Designs A3 MIPS Bike Helmet",
       "price": 128.24,
       "store": "evo",
@@ -3227,6 +3260,7 @@
     "label": "Smith triad mips",
     "offers": [
      {
+      "link": "https://www.bikesonline.com/products/smith-triad-mips-helmet-1?variant=50534765822244",
       "name": "Smith Triad MIPS Helmet",
       "price": 99.99,
       "store": "Bikes Online",
@@ -3267,6 +3301,7 @@
     "label": "Smith trace mips",
     "offers": [
      {
+      "link": "https://www.bikesonline.com/products/smith-trace-mips-helmet?variant=56057261457700",
       "name": "Smith Trace MIPS Helmet",
       "price": 199.99,
       "store": "Bikes Online",
@@ -3313,6 +3348,7 @@
       "url": "https://www.coloradocyclist.com/products/fox-racing-dropframe-pro-mtb-helmet-grid-black"
      },
      {
+      "link": "https://www.evo.com/products/242149-fox-racing-dropframe-pro-bike-helmet?variant=46142934712470",
       "name": "Fox Racing Dropframe Pro Bike Helmet",
       "price": 179.99,
       "store": "evo",
@@ -3373,6 +3409,7 @@
     "label": "Smith network mips",
     "offers": [
      {
+      "link": "https://www.bikesonline.com/products/smith-network-mips-helmet?variant=50534064914724",
       "name": "Smith Network MIPS Helmet",
       "price": 99.99,
       "store": "Bikes Online",
@@ -3399,6 +3436,7 @@
       "url": "https://www.thelostco.com/products/poc-resistance-enduro-adjustable-glove-calcite-blue"
      },
      {
+      "link": "https://www.evo.com/products/133363-poc-resistance-enduro-bike-gloves?variant=46088237121686",
       "name": "POC Resistance Enduro Bike Gloves",
       "price": 32.4,
       "store": "evo",
@@ -3419,6 +3457,7 @@
       "url": "https://www.thelostco.com/products/poc-kortal-race-mips-helmet-pargasite-green-hydrogen-white"
      },
      {
+      "link": "https://www.evo.com/products/194600-poc-kortal-race-mips-bike-helmet?variant=46115546366102",
       "name": "POC Kortal Race MIPS Bike Helmet",
       "price": 195.0,
       "store": "evo",
@@ -3439,6 +3478,7 @@
       "url": "https://www.coloradocyclist.com/products/smith-forefront-3-mips-mtb-helmet-matt-slate"
      },
      {
+      "link": "https://mikesbikes.com/products/smith-forefront-3-mips?variant=43684143202373",
       "name": "Smith Forefront 3 MIPS",
       "price": 180.77,
       "store": "Mike's Bikes",
@@ -3451,6 +3491,7 @@
       "url": "https://www.smithoptics.com/products/forefront-3-mips-r-sale"
      },
      {
+      "link": "https://www.evo.com/products/269244-smith-forefront-3-mips-bike-helmet?variant=46153034924182",
       "name": "Smith Forefront 3 MIPS Bike Helmet",
       "price": 180.0,
       "store": "evo",
@@ -3585,12 +3626,14 @@
     "label": "Fox ranger fire",
     "offers": [
      {
+      "link": "https://www.fanatikbike.com/products/fox-ranger-fire-glove-1?variant=41133275938862",
       "name": "Fox Ranger Fire Glove",
       "price": 39.95,
       "store": "Fanatik",
       "url": "https://www.fanatikbike.com/products/fox-ranger-fire-glove-1"
      },
      {
+      "link": "https://mikesbikes.com/products/fox-ranger-mtb-fire-gloves?variant=42052608458821",
       "name": "Fox Ranger Fire Gloves",
       "price": 32.77,
       "store": "Mike's Bikes",
@@ -4185,12 +4228,14 @@
     "label": "Maxxis minion dhf folding exo",
     "offers": [
      {
+      "link": "https://cambriabike.com/products/maxxis-minion-dhf-27-5-folding-mtb-tire-exo-prior-season?variant=40066375811254",
       "name": "Maxxis Minion DHF 27.5\" Folding MTB Tire - EXO - Prior Season",
       "price": 79.99,
       "store": "Cambria",
       "url": "https://cambriabike.com/products/maxxis-minion-dhf-27-5-folding-mtb-tire-exo-prior-season"
      },
      {
+      "link": "https://www.evo.com/products/103186-maxxis-minion-dhf-tire-27-5?variant=46081434583190",
       "name": "Maxxis Minion DHF Tire - 27.5\"",
       "price": 39.0,
       "store": "evo",
@@ -4245,6 +4290,7 @@
     "label": "Maxxis minion dhr ii folding exo",
     "offers": [
      {
+      "link": "https://cambriabike.com/products/maxxis-minion-dhr-ii-27-5-folding-mtb-tire-exo?variant=45098939252918",
       "name": "Maxxis Minion DHR II 27.5\" Folding MTB Tire - EXO",
       "price": 78.0,
       "store": "Cambria",
@@ -4945,6 +4991,7 @@
     "label": "Maxxis minion dhf folding exo",
     "offers": [
      {
+      "link": "https://cambriabike.com/products/maxxis-minion-dhf-26-folding-mtb-tire-exo?variant=40066374860982",
       "name": "Maxxis Minion DHF 26\" Folding MTB Tire - EXO",
       "price": 65.0,
       "store": "Cambria",
@@ -5846,1139 +5893,1081 @@
     "part": "Tires"
    }
   ],
-  "drops": [],
-  "new_items": [
+  "drops": [
    {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Woom",
-    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-01.jpg?v=1785261436",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-01.jpg?v=1785261436",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-02.jpg?v=1785261559",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-03_f3bbd80b-14c0-497c-9423-324b6a922526.jpg?v=1785262222",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-04.jpg?v=1785261860",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-05.jpg?v=1785261937",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Buckle.jpg?v=1785262080",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Inside.jpg?v=1785262341",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Charcoal.jpg?v=1785262445",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Red.jpg?v=1785262504",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Grey.jpg?v=1785262556",
-     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Lilac.jpg?v=1785262611"
-    ],
-    "name": "Woom READY Kids' Helmet",
-    "part": "Protection",
-    "price_new": "69.95",
-    "price_old": "89.99",
-    "product_type": "APPAREL/HELMETS/KIDS HELMETS/READY",
-    "protection_sizes": [
-     "XS",
-     "S",
-     "M"
-    ],
-    "protection_type": "Helmet",
-    "store": "Mike's Bikes",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "XS"
-       ],
-       "protects": [
-        "Helmets"
-       ]
+    "at_all_time_low": true,
+    "delta": 30.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/image_8e55a46e-b399-48ca-91b6-f2ab89b2f3bf.png?v=1655109833",
+     "name": "Shimano XTR M9100-1 12 Spd Crank Arms - Gray",
+     "part": "Drivetrain",
+     "price_new": "369.99",
+     "price_old": "565.00",
+     "product_type": "MTB Cranksets",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 565.0,
+       "price": 369.99,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 41116269445302
       },
-      "variant_id": 45119299092549
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "S"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119299223621
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119299354693
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "S"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119299321925
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119298961477
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "XS"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119299125317
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "S"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119299190853
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119298994245
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "XS"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119299059781
-     },
-     {
-      "available": true,
-      "compare": 89.99,
-      "price": 69.95,
-      "specs": {
-       "age": [
-        "Kids"
-       ],
-       "prot_size": [
-        "S"
-       ],
-       "protects": [
-        "Helmets"
-       ]
-      },
-      "variant_id": 45119299256389
-     }
-    ],
-    "technical_specs": {
-     "age": [
-      "Kids"
+      {
+       "available": true,
+       "compare": 565.0,
+       "price": 369.99,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 41116269478070
+      }
      ],
-     "prot_size": [
-      "M",
-      "S",
-      "XS"
-     ],
-     "protects": [
-      "Helmets"
-     ]
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://cambriabike.com/products/shimano-xtr-m9100-1-12-spd-crank-arm-gray"
     },
-    "url": "https://mikesbikes.com/products/woom-ready-kids-helmet"
+    "name": "Shimano XTR M9100-1 12 Spd Crank Arms - Gray",
+    "new": "369.99",
+    "old": "399.99",
+    "percent_vs_prior": 7.5,
+    "type": "price_drop",
+    "url": "https://cambriabike.com/products/shimano-xtr-m9100-1-12-spd-crank-arm-gray"
    },
    {
     "at_all_time_low": true,
+    "delta": 30.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ShimanoXTRM9130-112SpeedCrankArm_Gray_fc1f57a6-7a54-4424-bb23-6ba5c0a5898c.jpg?v=1642754683",
+     "name": "Shimano XTR M9130-1 12 Spd Crank Arm - Gray",
+     "part": "Drivetrain",
+     "price_new": "389.99",
+     "price_old": "605.00",
+     "product_type": "MTB Cranksets",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 605.0,
+       "price": 389.99,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 41116270100662
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://cambriabike.com/products/shimano-xtr-m9130-1-12-spd-crank-arm-gray"
+    },
+    "name": "Shimano XTR M9130-1 12 Spd Crank Arm - Gray",
+    "new": "389.99",
+    "old": "419.99",
+    "percent_vs_prior": 7.1,
+    "type": "price_drop",
+    "url": "https://cambriabike.com/products/shimano-xtr-m9130-1-12-spd-crank-arm-gray"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 30.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/Shimano_XTR_M9120_12_Speed_1X_Crankarms_Gray_5cd6258b-f4ca-46f5-8738-ba0cf4d74435.jpg?v=1642754678",
+     "name": "Shimano XTR M9120 12 Spd 1X Crankarms - Gray",
+     "part": "Drivetrain",
+     "price_new": "369.99",
+     "price_old": "565.00",
+     "product_type": "MTB Cranksets",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 565.0,
+       "price": 369.99,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 41116269609142
+      },
+      {
+       "available": true,
+       "compare": 565.0,
+       "price": 369.99,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 41116269641910
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://cambriabike.com/products/shimano-xtr-m9120-12-spd-1x-crankarms-gray"
+    },
+    "name": "Shimano XTR M9120 12 Spd 1X Crankarms - Gray",
+    "new": "369.99",
+    "old": "399.99",
+    "percent_vs_prior": 7.5,
+    "type": "price_drop",
+    "url": "https://cambriabike.com/products/shimano-xtr-m9120-12-spd-1x-crankarms-gray"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 30.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Shimano",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/ShimanoXTRM9125-112Speed1XCrankarms_9d205c59-1363-47d3-88e2-4c3ff9fbdab6.jpg?v=1642754681",
+     "name": "Shimano XTR M9125-1 12 Spd 1X Crankarms - Gray",
+     "part": "Drivetrain",
+     "price_new": "389.99",
+     "price_old": "605.00",
+     "product_type": "MTB Cranksets",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 605.0,
+       "price": 389.99,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 41116269936822
+      },
+      {
+       "available": true,
+       "compare": 605.0,
+       "price": 389.99,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 41116269969590
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://cambriabike.com/products/shimano-xtr-m9125-1-12-spd-1x-crankarms-gray"
+    },
+    "name": "Shimano XTR M9125-1 12 Spd 1X Crankarms - Gray",
+    "new": "389.99",
+    "old": "419.99",
+    "percent_vs_prior": 7.1,
+    "type": "price_drop",
+    "url": "https://cambriabike.com/products/shimano-xtr-m9125-1-12-spd-1x-crankarms-gray"
+   },
+   {
+    "at_all_time_low": false,
+    "delta": 1500.04,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Remedy275CFrameset_22_35214_A_Primary.jpg?v=1764008467",
+     "length": 27.5,
+     "name": "Trek 2024 Remedy 27.5 C Full Suspension Mountain Frameset",
+     "part": "Frames",
+     "price_new": "1499.93",
+     "price_old": "3799.99",
+     "product_type": "Full Suspension Mountain Frameset",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 3799.99,
+       "price": 1499.93,
+       "specs": {
+        "frame_size": [
+         "XL"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Full suspension"
+        ],
+        "wheel_size": [
+         "27.5"
+        ]
+       },
+       "variant_id": 46906865418493
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "XL"
+      ],
+      "power": [
+       "Regular"
+      ],
+      "suspension": [
+       "Full suspension"
+      ],
+      "wheel_size": [
+       "27.5"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2024-remedy-27-5-c-full-suspension-mountain-frameset"
+    },
+    "name": "Trek 2024 Remedy 27.5 C Full Suspension Mountain Frameset",
+    "new": "1499.93",
+    "old": "2999.97",
+    "percent_vs_prior": 50.0,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/2024-remedy-27-5-c-full-suspension-mountain-frameset"
+   },
+   {
+    "at_all_time_low": false,
+    "delta": 700.04,
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Trek",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ProcaliberSLFS_19_24503_A_Primary.jpg?v=1764010244",
+     "name": "Trek 2024 Procaliber SL Gen 1 Hardtail Mountain Frameset",
+     "part": "Frames",
+     "price_new": "999.93",
+     "price_old": "2969.99",
+     "product_type": "Hardtail Mountain Frameset",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "frame_size": [
+         "S"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945208573
+      },
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "frame_size": [
+         "M"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945241341
+      },
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945274109
+      },
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "frame_size": [
+         "L"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945306877
+      },
+      {
+       "available": true,
+       "compare": 2969.99,
+       "price": 999.93,
+       "specs": {
+        "frame_size": [
+         "XL"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Hardtail"
+        ]
+       },
+       "variant_id": 46906945339645
+      }
+     ],
+     "technical_specs": {
+      "frame_size": [
+       "L",
+       "M",
+       "S",
+       "XL"
+      ],
+      "power": [
+       "Regular"
+      ],
+      "suspension": [
+       "Hardtail"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2024-procaliber-sl-gen-1-hardtail-mountain-frameset"
+    },
+    "name": "Trek 2024 Procaliber SL Gen 1 Hardtail Mountain Frameset",
+    "new": "999.93",
+    "old": "1699.97",
+    "percent_vs_prior": 41.2,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/2024-procaliber-sl-gen-1-hardtail-mountain-frameset"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 85.88,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "KMC",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-14.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-1.jpg?v=1761060266",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-360623-16.jpg?v=1761060266"
+     ],
+     "name": "KMC X12 12-Speed Chain",
+     "part": "Drivetrain",
+     "price_new": "29.62",
+     "price_old": "44.00",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 44.0,
+       "price": 29.62,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151374077
+      },
+      {
+       "available": true,
+       "compare": 154.0,
+       "price": 115.5,
+       "specs": {
+        "speed": [
+         "12-speed"
+        ]
+       },
+       "variant_id": 46764151406845
+      }
+     ],
+     "technical_specs": {
+      "speed": [
+       "12-speed"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+    },
+    "name": "KMC X12 12-Speed Chain",
+    "new": "29.62",
+    "old": "115.50",
+    "percent_vs_prior": 74.4,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/x12-12-speed-chain"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 2.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Bontrager",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-line-dropper-seatpost-cartridge-585442-1.png?v=1761060607",
+     "link": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge?variant=46764334743805",
+     "name": "Bontrager Line Dropper Seatpost Cartridge",
+     "part": "Cockpit",
+     "price_new": "14.93",
+     "price_old": "59.99",
+     "product_type": "",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 65.99,
+       "price": 16.93,
+       "specs": {},
+       "variant_id": 46764334678269
+      },
+      {
+       "available": true,
+       "compare": 65.99,
+       "price": 16.93,
+       "specs": {},
+       "variant_id": 46764334711037
+      },
+      {
+       "available": true,
+       "compare": 59.99,
+       "price": 14.93,
+       "specs": {},
+       "variant_id": 46764334743805
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge"
+    },
+    "name": "Bontrager Line Dropper Seatpost Cartridge",
+    "new": "14.93",
+    "old": "16.93",
+    "percent_vs_prior": 11.8,
+    "type": "price_drop",
+    "url": "https://www.bikemart.com/products/line-dropper-seatpost-cartridge"
+   }
+  ],
+  "new_items": [
+   {
+    "at_all_time_low": true,
     "availability": "In stock",
-    "brand": "Specialized",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-70_SJ-15-ALLOY-FRM-OBSD-SILDST_HERO-PDP.jpg?v=1762326603",
-    "name": "Specialized 2025 Stumpjumper 15 Alloy Frameset - FOX FLOAT GENIE Performance",
-    "part": "Frames",
-    "price_new": "1699.99",
-    "price_old": "2100.00",
-    "product_type": "Framesets",
+    "brand": "Maxxis",
+    "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/maxxis-aspen-at-tire-29x24-msexotr-maxxis-the-lost-co-tb00677600-b-ma1091-9698647.webp?v=1782966909",
+    "length": 2.4,
+    "name": "Maxxis Aspen AT Tire 29x2.4\" MS/EXO/TR",
+    "part": "Tires",
+    "price_new": "87.00",
+    "price_old": "96.00",
+    "product_type": "Tires",
+    "store": "The Lost Co.",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 96.0,
+      "price": 87.0,
+      "specs": {
+       "casing": [
+        "EXO"
+       ],
+       "tire_width": [
+        "2.4"
+       ],
+       "tubeless": [
+        "Tubeless ready"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 45752621039814
+     }
+    ],
+    "technical_specs": {
+     "casing": [
+      "EXO"
+     ],
+     "tire_width": [
+      "2.4"
+     ],
+     "tubeless": [
+      "Tubeless ready"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.thelostco.com/products/maxxis-aspen-at-tire-29x2-4-ms-exo-tr",
+    "width": 29.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Trek",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Portrait.jpg?v=1764016046",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt1.jpg?v=1764009237",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt2.jpg?v=1764009238",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt3.jpg?v=1764009239",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt4.jpg?v=1764009240"
+    ],
+    "name": "Trek 2026 Slash+ 9.9 Electric Full Suspension Mountain Bike",
+    "part": "Bikes",
+    "price_new": "10499.93",
+    "price_old": "12499.99",
+    "product_type": "Electric Full Suspension Mountain Bike",
     "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 2100.0,
-      "price": 1699.99,
+      "compare": 12499.99,
+      "price": 10499.93,
       "specs": {
-       "frame_material": [
-        "Alloy"
-       ],
        "frame_size": [
-        "S1"
+        "S"
        ],
        "power": [
-        "Regular"
+        "E-MTB"
        ],
        "suspension": [
         "Full suspension"
-       ],
-       "travel_mm": [
-        "145"
        ]
       },
-      "variant_id": 46844258451709
+      "variant_id": 46906909360381
      },
      {
       "available": true,
-      "compare": 2100.0,
-      "price": 1699.99,
+      "compare": 12499.99,
+      "price": 10499.93,
       "specs": {
-       "frame_material": [
-        "Alloy"
-       ],
        "frame_size": [
-        "S6"
+        "M"
        ],
+       "power": [
+        "E-MTB"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46906909393149
+     },
+     {
+      "available": true,
+      "compare": 12499.99,
+      "price": 10499.93,
+      "specs": {
+       "frame_size": [
+        "L"
+       ],
+       "power": [
+        "E-MTB"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46906909425917
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "L",
+      "M",
+      "S"
+     ],
+     "power": [
+      "E-MTB"
+     ],
+     "suspension": [
+      "Full suspension"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2026-slash-9-9-full-suspension-electric-mountain-bike",
+    "width": 9.9
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "Trek",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Portrait.jpg?v=1764016762",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt1.jpg?v=1764008227",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt2.jpg?v=1764008228",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt3.jpg?v=1764008228",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt4.jpg?v=1764008229"
+    ],
+    "length": 0.0,
+    "name": "Trek 2026 Slash 9.9 X0 AXS T-Type Gen 6 Full Suspension Mountain Bike",
+    "part": "Bikes",
+    "price_new": "7799.93",
+    "price_old": "8699.99",
+    "product_type": "Full Suspension Mountain Bike",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 8699.99,
+      "price": 7799.93,
+      "specs": {
+       "power": [
+        "Regular"
+       ],
+       "speed": [
+        "12-speed"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46906856407293
+     },
+     {
+      "available": true,
+      "compare": 8699.99,
+      "price": 7799.93,
+      "specs": {
+       "frame_size": [
+        "M"
+       ],
+       "power": [
+        "Regular"
+       ],
+       "speed": [
+        "12-speed"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46906856440061
+     },
+     {
+      "available": true,
+      "compare": 8699.99,
+      "price": 7799.93,
+      "specs": {
+       "power": [
+        "Regular"
+       ],
+       "speed": [
+        "12-speed"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46906856472829
+     },
+     {
+      "available": true,
+      "compare": 8699.99,
+      "price": 7799.93,
+      "specs": {
+       "frame_size": [
+        "L"
+       ],
+       "power": [
+        "Regular"
+       ],
+       "speed": [
+        "12-speed"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46906856505597
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "L",
+      "M"
+     ],
+     "power": [
+      "Regular"
+     ],
+     "speed": [
+      "12-speed"
+     ],
+     "suspension": [
+      "Full suspension"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2026-slash-9-9-x0-axs-t-type-gen-6-full-suspension-mountain-bike",
+    "width": 9.9
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Trek",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Primary.jpg?v=1764009734",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Primary.jpg?v=1764009734",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Alt1.jpg?v=1764009735",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Alt2.jpg?v=1764009735",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-B-Alt3.jpg?v=1764009736",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-A-Primary_1df6be91-3cc9-482c-b7cb-a6bb68ce1a88.jpg?v=1764009737",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-A-Alt1.jpg?v=1764009738",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-A-Alt2.jpg?v=1764009739",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/FuelPlusEX97-26-56291-A-Alt3.jpg?v=1764009739"
+    ],
+    "name": "Trek 2026 Fuel+ EX 9.7 Gen 2 Electric Full Suspension Mountain Bike",
+    "part": "Bikes",
+    "price_new": "5999.93",
+    "price_old": "8699.99",
+    "product_type": "Electric Full Suspension Mountain Bike",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 8699.99,
+      "price": 5999.93,
+      "specs": {
+       "frame_size": [
+        "XXL"
+       ],
+       "power": [
+        "E-MTB"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46906929578237
+     },
+     {
+      "available": true,
+      "compare": 8699.99,
+      "price": 5999.93,
+      "specs": {
+       "frame_size": [
+        "XXL"
+       ],
+       "power": [
+        "E-MTB"
+       ],
+       "suspension": [
+        "Full suspension"
+       ]
+      },
+      "variant_id": 46906929742077
+     }
+    ],
+    "technical_specs": {
+     "frame_size": [
+      "XXL"
+     ],
+     "power": [
+      "E-MTB"
+     ],
+     "suspension": [
+      "Full suspension"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2026-fuel-ex-9-7-gen-2-full-suspension-electric-mountain-bike",
+    "width": 9.7
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Trek",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashALFrameset_21_33071_A_Primary.png?v=1764008186",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashALFrameset_21_33071_A_Primary.png?v=1764008186",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashALFrameset-21-33071-A-Alt1.jpg?v=1764008186"
+    ],
+    "name": "Trek 2023 Slash AL Gen 5 Full Suspension Mountain Frameset",
+    "part": "Frames",
+    "price_new": "1499.93",
+    "price_old": "2599.99",
+    "product_type": "Full Suspension Mountain Frameset",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 2599.99,
+      "price": 1499.93,
+      "specs": {
        "power": [
         "Regular"
        ],
        "suspension": [
         "Full suspension"
-       ],
-       "travel_mm": [
-        "145"
        ]
       },
-      "variant_id": 46844258517245
+      "variant_id": 46906855784701
      }
     ],
     "technical_specs": {
-     "frame_material": [
-      "Alloy"
-     ],
-     "frame_size": [
-      "S1",
-      "S6"
-     ],
      "power": [
       "Regular"
      ],
      "suspension": [
       "Full suspension"
-     ],
-     "travel_mm": [
-      "145"
      ]
     },
-    "url": "https://www.bikemart.com/products/2025-stumpjumper-15-alloy-frm"
+    "url": "https://www.bikemart.com/products/2023-slash-al-gen-5-full-suspension-mountain-frameset"
    },
    {
-    "at_all_time_low": true,
+    "at_all_time_low": false,
     "availability": "In stock",
-    "brand": "WTB",
-    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+    "brand": "Trek",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ProcaliberFrameset_21_33241_A_Primary.png?v=1764010252",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
-     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ProcaliberFrameset_21_33241_A_Primary.png?v=1764010252",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/ProcaliberFrameset_21_33241_A_Alt1.jpg?v=1764010253"
     ],
-    "name": "WTB Rocket Saddle - Black Medium Fusion Form",
-    "part": "Cockpit",
-    "price_new": "71.95",
-    "price_old": "89.95",
-    "product_type": "Saddles",
+    "name": "Trek 2026 Procaliber Gen 2 Hardtail Mountain Frameset",
+    "part": "Frames",
+    "price_new": "849.93",
+    "price_old": "1849.99",
+    "product_type": "Hardtail Mountain Frameset",
     "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 129.95,
-      "price": 116.95,
-      "specs": {},
-      "variant_id": 46839154934013
-     },
+      "compare": 1849.99,
+      "price": 849.93,
+      "specs": {
+       "power": [
+        "Regular"
+       ],
+       "suspension": [
+        "Hardtail"
+       ]
+      },
+      "variant_id": 46906945503485
+     }
+    ],
+    "technical_specs": {
+     "power": [
+      "Regular"
+     ],
+     "suspension": [
+      "Hardtail"
+     ]
+    },
+    "url": "https://www.bikemart.com/products/2026-procaliber-gen-2-hardtail-mountain-frameset"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "Bontrager",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-12-4.jpg?v=1761060135",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-13-2.jpg?v=1761060135",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-14-3.jpg?v=1761060135",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/bontrager-cross-country-tubeless-rim-tape-54142-1-11-1_bf8ef4b9-147a-42a5-a4a7-757ad83084d1.jpg?v=1761060136"
+    ],
+    "name": "Bontrager Cross-Country Tubeless Rim Tape",
+    "part": "Wheels",
+    "price_new": "4.93",
+    "price_old": "21.99",
+    "product_type": "",
+    "spec_offers": [
      {
       "available": true,
-      "compare": 119.95,
-      "price": 107.95,
-      "specs": {},
-      "variant_id": 46839154966781
-     },
+      "compare_at_price": 21.99,
+      "diameter_mm": null,
+      "durometers": [],
+      "price": 4.93,
+      "variant_id": "46764081709309"
+     }
+    ],
+    "store": "Bike Mart",
+    "technical_offers": [
      {
       "available": true,
-      "compare": 104.95,
-      "price": 94.95,
+      "compare": 21.99,
+      "price": 4.93,
       "specs": {},
-      "variant_id": 46839154999549
-     },
-     {
-      "available": true,
-      "compare": 89.95,
-      "price": 71.95,
-      "specs": {},
-      "variant_id": 46839155032317
+      "variant_id": 46764081709309
      }
     ],
     "technical_specs": {},
-    "url": "https://www.bikemart.com/products/wtb-rocket-saddle"
+    "url": "https://www.bikemart.com/products/cross-country-tubeless-rim-tape"
    },
    {
     "at_all_time_low": false,
     "availability": "In stock",
-    "brand": "Dakine",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379241.jpg?v=1791927513",
+    "brand": "Crankbrothers",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1102.jpg?v=1762296257",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379241.jpg?v=1791927513",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379244.jpg?v=1791927515",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379248.jpg?v=1791927513",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379246.jpg?v=1791927513",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379242.jpg?v=1791927514",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379240.jpg?v=1791927513",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257245.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257243.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257244.jpg?v=1767739438",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257242.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257247.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257246.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257225.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257231.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257223.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257220.jpg?v=1767739434",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257226.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257224.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257240.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257236.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257241.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257239.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257235.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257237.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257228.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257229.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257227.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257233.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257234.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257230.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257232.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257238.jpg?v=1767739436"
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1102.jpg?v=1762296257",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/TL1104.jpg?v=1762296257"
     ],
-    "name": "Dakine Slayer MIPS Bike Helmet",
-    "part": "Protection",
-    "price_new": "108.00",
-    "price_old": "144.00",
-    "product_type": "Bike Helmets",
-    "protection_sizes": [
-     "L",
-     "XL"
-    ],
-    "protection_type": "Helmet",
-    "store": "evo",
+    "link": "https://www.bikemart.com/products/crankbrothers-speedier-lever?variant=46842660028669",
+    "name": "Crankbrothers Speedier Lever",
+    "part": "Tires",
+    "price_new": "145.30",
+    "price_old": "200.42",
+    "product_type": "Tire Lever",
+    "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 144.0,
-      "price": 108.0,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L",
-        "XL"
-       ],
-       "protects": [
-        "Helmets"
-       ],
-       "rotational": [
-        "MIPS"
-       ]
-      },
-      "variant_id": 46153428435094
-     },
-     {
-      "available": true,
-      "compare": 144.0,
-      "price": 108.0,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L",
-        "XL"
-       ],
-       "protects": [
-        "Helmets"
-       ],
-       "rotational": [
-        "MIPS"
-       ]
-      },
-      "variant_id": 46153428566166
-     },
-     {
-      "available": true,
-      "compare": 144.0,
-      "price": 108.0,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L",
-        "XL"
-       ],
-       "protects": [
-        "Helmets"
-       ],
-       "rotational": [
-        "MIPS"
-       ]
-      },
-      "variant_id": 46153428500630
+      "compare": 200.42,
+      "price": 145.3,
+      "specs": {},
+      "variant_id": 46842660028669
      }
     ],
-    "technical_specs": {
-     "age": [
-      "Adult"
-     ],
-     "prot_size": [
-      "L",
-      "XL"
-     ],
-     "protects": [
-      "Helmets"
-     ],
-     "rotational": [
-      "MIPS"
-     ]
-    },
-    "url": "https://www.evo.com/products/274053-dakine-slayer-mips-bike-helmet"
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/crankbrothers-speedier-lever"
    },
    {
-    "at_all_time_low": false,
+    "at_all_time_low": true,
     "availability": "In stock",
-    "brand": "Dakine",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257218.jpg?v=1767739435",
+    "brand": "KMC",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257218.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257216.jpg?v=1767739434",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257222.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257219.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257221.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257217.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257204.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257198.jpg?v=1767739433",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257203.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257207.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257208.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257205.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257206.jpg?v=1767739438",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257209.jpg?v=1767739434",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257211.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257215.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257210.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257213.jpg?v=1767739437",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257214.jpg?v=1767739436",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257212.jpg?v=1767739435"
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-11.jpg?v=1761060271",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x12-12-speed-chain-copy-360624-1.jpg?v=1761060271"
     ],
-    "name": "Dakine Slayer Bike Helmet",
-    "part": "Protection",
-    "price_new": "76.50",
-    "price_old": "102.00",
-    "product_type": "Bike Helmets",
-    "protection_sizes": [
-     "L",
-     "XL"
-    ],
-    "protection_type": "Helmet",
-    "store": "evo",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 102.0,
-      "price": 76.5,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L",
-        "XL"
-       ],
-       "protects": [
-        "Helmets"
-       ],
-       "rotational": [
-        "MIPS"
-       ]
-      },
-      "variant_id": 46153428271254
-     },
-     {
-      "available": true,
-      "compare": 102.0,
-      "price": 76.5,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L",
-        "XL"
-       ],
-       "protects": [
-        "Helmets"
-       ],
-       "rotational": [
-        "MIPS"
-       ]
-      },
-      "variant_id": 46153428336790
-     }
-    ],
-    "technical_specs": {
-     "age": [
-      "Adult"
-     ],
-     "prot_size": [
-      "L",
-      "XL"
-     ],
-     "protects": [
-      "Helmets"
-     ],
-     "rotational": [
-      "MIPS"
-     ]
-    },
-    "url": "https://www.evo.com/products/274052-dakine-slayer-bike-helmet"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Dakine",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379007.jpg?v=1791902368",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379007.jpg?v=1791902368",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379003.jpg?v=1791902368",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379006.jpg?v=1791902368",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257142.jpg?v=1767739434",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257141.jpg?v=1767739433",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257138.jpg?v=1767739434",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187678.jpg?v=1767736733",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187679.jpg?v=1767736732",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-789184.jpg?v=1767748780",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-789183.jpg?v=1767748777",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-990215.jpg?v=1767757012",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-990212.jpg?v=1767757013",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187681.jpg?v=1767736733",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187680.jpg?v=1767736733"
-    ],
-    "name": "Dakine Covert Bike Gloves - Women's",
-    "part": "Protection",
-    "price_new": "26.25",
-    "price_old": "35.00",
-    "product_type": "Bike Gloves",
-    "protection_sizes": [
-     "XS",
-     "S",
-     "M",
-     "L",
-     "XL"
-    ],
-    "protection_type": null,
-    "store": "evo",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "XS"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115590373526
-     },
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "S"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115590406294
-     },
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115590439062
-     },
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115590471830
-     },
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "XS"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115589554326
-     },
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "S"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115589587094
-     },
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115589619862
-     },
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115589652630
-     },
-     {
-      "available": true,
-      "compare": 35.0,
-      "price": 26.25,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "XL"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46115589685398
-     }
-    ],
-    "technical_specs": {
-     "age": [
-      "Adult"
-     ],
-     "prot_size": [
-      "L",
-      "M",
-      "S",
-      "XL",
-      "XS"
-     ],
-     "protects": [
-      "Gloves"
-     ]
-    },
-    "url": "https://www.evo.com/products/194619-dakine-covert-bike-gloves-women-s"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Dakine",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379002.jpg?v=1791902368",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379002.jpg?v=1791902368",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379013.jpg?v=1791902368",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379010.jpg?v=1791902368",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-786140.jpg?v=1767748692",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-786139.jpg?v=1767748692",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166008.jpg?v=1767735887",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166010.jpg?v=1767735883",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355032.jpg?v=1789750177",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355026.jpg?v=1789750177",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355023.jpg?v=1789750177",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355027.jpg?v=1789750177",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355024.jpg?v=1789750177",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355025.jpg?v=1789750177"
-    ],
-    "name": "Dakine Syncline Gel Bike Gloves",
-    "part": "Protection",
-    "price_new": "30.00",
-    "price_old": "40.00",
-    "product_type": "Bike Gloves",
-    "protection_sizes": [
-     "S",
-     "M"
-    ],
-    "protection_type": null,
-    "store": "evo",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 40.0,
-      "price": 30.0,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "S"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46118127501462
-     },
-     {
-      "available": true,
-      "compare": 40.0,
-      "price": 30.0,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46118127534230
-     }
-    ],
-    "technical_specs": {
-     "age": [
-      "Adult"
-     ],
-     "prot_size": [
-      "M",
-      "S"
-     ],
-     "protects": [
-      "Gloves"
-     ]
-    },
-    "url": "https://www.evo.com/products/198245-dakine-syncline-gel-bike-gloves"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Dakine",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166037.jpg?v=1767735885",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166037.jpg?v=1767735885",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166036.jpg?v=1767735886",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166038.jpg?v=1767735885"
-    ],
-    "name": "Dakine Slayer Pro D3O Bike Gloves",
-    "part": "Protection",
-    "price_new": "45.75",
-    "price_old": "61.00",
-    "product_type": "Bike Gloves",
-    "protection_sizes": [
-     "M",
-     "L"
-    ],
-    "protection_type": null,
-    "store": "evo",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 61.0,
-      "price": 45.75,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46149772279958
-     },
-     {
-      "available": true,
-      "compare": 61.0,
-      "price": 45.75,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46149772312726
-     }
-    ],
-    "technical_specs": {
-     "age": [
-      "Adult"
-     ],
-     "prot_size": [
-      "L",
-      "M"
-     ],
-     "protects": [
-      "Gloves"
-     ]
-    },
-    "url": "https://www.evo.com/products/258404-dakine-slayer-pro-d3o-bike-gloves"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "In stock",
-    "brand": "Dakine",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257168.jpg?v=1767739433",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257168.jpg?v=1767739433",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257167.jpg?v=1767739434",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257170.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257164.jpg?v=1767739433",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257165.jpg?v=1767739431",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257163.jpg?v=1767739435",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257169.jpg?v=1767739434"
-    ],
-    "name": "Dakine Sentinel 2.0 Bike Gloves",
-    "part": "Protection",
-    "price_new": "49.50",
+    "name": "KMC X12EPT Eco Pro Teq Chain",
+    "part": "Drivetrain",
+    "price_new": "45.62",
     "price_old": "66.00",
-    "product_type": "Bike Gloves",
-    "protection_sizes": [
-     "M",
-     "L",
-     "XL"
-    ],
-    "protection_type": null,
-    "store": "evo",
+    "product_type": "",
+    "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
       "compare": 66.0,
-      "price": 49.5,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46153427091606
-     },
-     {
-      "available": true,
-      "compare": 66.0,
-      "price": 49.5,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "L"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46153427124374
-     },
-     {
-      "available": true,
-      "compare": 66.0,
-      "price": 49.5,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "XL"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46153427157142
+      "price": 45.62,
+      "specs": {},
+      "variant_id": 46764155994365
      }
     ],
-    "technical_specs": {
-     "age": [
-      "Adult"
-     ],
-     "prot_size": [
-      "L",
-      "M",
-      "XL"
-     ],
-     "protects": [
-      "Gloves"
-     ]
-    },
-    "url": "https://www.evo.com/products/274045-dakine-sentinel-2-0-bike-gloves",
-    "width": 2.0
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/x12ept-eco-pro-teq-chain"
    },
    {
-    "at_all_time_low": false,
+    "at_all_time_low": true,
     "availability": "In stock",
-    "brand": "Dakine",
-    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257174.jpg?v=1767739433",
+    "brand": "KMC",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257174.jpg?v=1767739433",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257173.jpg?v=1767739433",
-     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257175.jpg?v=1767739435"
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-e11-ept-ebike-chain-335884-1.jpg?v=1761060215",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/kmc-x11e-turbo-chain-335884-1.jpg?v=1761060214"
     ],
-    "name": "Dakine Team Cross-X 2.0 Bike Gloves Graham Agassiz",
-    "part": "Protection",
-    "price_new": "34.50",
-    "price_old": "46.00",
-    "product_type": "Bike Gloves",
-    "protection_sizes": [
-     "S",
-     "M",
-     "XL"
-    ],
-    "protection_type": null,
-    "store": "evo",
+    "name": "KMC E11-EPT Eco ProteQ eBike Chain",
+    "part": "Drivetrain",
+    "price_new": "59.62",
+    "price_old": "88.00",
+    "product_type": "",
+    "store": "Bike Mart",
     "technical_offers": [
      {
       "available": true,
-      "compare": 46.0,
-      "price": 34.5,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "S"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46079047893142
-     },
-     {
-      "available": true,
-      "compare": 46.0,
-      "price": 34.5,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "M"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46153427189910
-     },
-     {
-      "available": true,
-      "compare": 46.0,
-      "price": 34.5,
-      "specs": {
-       "age": [
-        "Adult"
-       ],
-       "prot_size": [
-        "XL"
-       ],
-       "protects": [
-        "Gloves"
-       ]
-      },
-      "variant_id": 46153427255446
+      "compare": 88.0,
+      "price": 59.62,
+      "specs": {},
+      "variant_id": 46764131188989
      }
     ],
-    "technical_specs": {
-     "age": [
-      "Adult"
-     ],
-     "prot_size": [
-      "M",
-      "S",
-      "XL"
-     ],
-     "protects": [
-      "Gloves"
-     ]
-    },
-    "url": "https://www.evo.com/products/274046-dakine-team-cross-x-2-0-bike-gloves-graham-agassiz",
-    "width": 2.0
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/e11-ept-eco-proteq-ebike-chain"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "Avid",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-13.jpg?v=1761060041",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-1.jpg?v=1761060041",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-12.jpg?v=1761060041",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/avid-disc-brake-pads-juicy-bb7-bb5-165076-11.jpg?v=1761060041"
+    ],
+    "link": "https://www.bikemart.com/products/disc-brake-pads-juicybb7bb5?variant=46764026527997",
+    "name": "Avid Disc Brake Pads (Juicy/BB7/BB5)",
+    "part": "Brakes",
+    "price_new": "10.93",
+    "price_old": "35.00",
+    "product_type": "",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 10.93,
+      "specs": {},
+      "variant_id": 46764026527997
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/disc-brake-pads-juicybb7bb5"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "VP Components",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/21714_A_1_VP_Grind_Black_Pedal.jpg?v=1762267757",
+    "name": "VP Grind 1/2inch Black Pair Pedal",
+    "part": "Pedals",
+    "price_new": "12.93",
+    "price_old": "19.99",
+    "product_type": "Pedal",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 19.99,
+      "price": 12.93,
+      "specs": {},
+      "variant_id": 46840027775229
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/vp-grind-1-2inch-black-pair-pedal"
    }
   ],
   "removed": []
  },
  "failed_keys": [],
  "fingerprints": {
-  "data": "5514fb9fa540749cdf7f5744147ea6f83ec79e55f73d3068a018bf9dd409460f",
-  "history": "01c8cbb8c9dbe5faa7c5cf8b2ddbf6cc4a8c825b0fadd7336997b93672b4112c"
+  "data": "a6f06a32c846436e1e1f00e3b5290efcb3364db5fc90aabdeff195eeddb2809f",
+  "history": "d964562a5051d92eae70979136a40deb2e2743c27fd29ddbdcbe21e20eb6a84c"
  },
- "generated_at": "2026-11-25T08:53:49+00:00",
+ "generated_at": "2026-11-25T14:14:40+00:00",
  "history": "file",
  "version": 1
 }
