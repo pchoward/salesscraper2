@@ -162,10 +162,18 @@ class NoCodeTests(unittest.TestCase):
         self.assertIn("25% off shoes, clothing &amp; accessories, 15% off decks", html)
         self.assertIn("- SkateWarehouse: 25% off shoes, clothing & accessories, 15% off decks, completes & parts, "
                       "no code needed, until Dec 2", notify.plain_promos([sale]))
-        # The page's strip lists codes only until Codex adds these
-        # (docs/codex-backlog-2026-11-07.md, task 20); no empty code box meanwhile.
-        with mock.patch("promos.for_sport", return_value=[sale]):
-            self.assertEqual(_promo_strip("skate"), "")
+        # Use an open-ended copy so this markup assertion does not expire.
+        with mock.patch("promos.for_sport", return_value=[dict(sale, ends="")]):
+            strip = _promo_strip("skate")
+        self.assertIn('data-promo-id="[&quot;SkateWarehouse&quot;, &quot;&quot;]"', strip)
+        self.assertIn('class="promo-no-code">No code needed</span>', strip)
+        self.assertIn('>Up to 25% off</span>', strip)
+        self.assertIn("applied at checkout", strip)
+        self.assertIn("data-dismiss-promo", strip)
+        self.assertNotIn("<code>", strip)
+        self.assertNotIn("data-copy-promo", strip)
+        with mock.patch("promos.for_sport", return_value=[dict(sale, ends="", tiers=self.TIERS[:1])]):
+            self.assertIn('>25% off</span>', _promo_strip("skate"))
 
 
 class ScanTests(unittest.TestCase):

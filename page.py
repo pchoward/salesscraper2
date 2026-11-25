@@ -1507,11 +1507,23 @@ def _promo_strip(sport_id):
         if ends and ends < today:
             continue
         store, code, url = (promo.get(key) or "" for key in ("store", "code", "url"))
-        if not store or not code or urlsplit(url).scheme not in {"http", "https"}:
+        automatic = not code and promo.get("auto")
+        if not store or not (code or automatic) or urlsplit(url).scheme not in {"http", "https"}:
             continue
         identity = escape(json.dumps([store, code]), quote=True)
         description = promos.describe(promo, code=False)
-        short = promos.describe({key: promo.get(key) for key in ("percent", "amount", "up_to")}, code=False)
+        short_offer = {key: promo.get(key) for key in ("percent", "amount", "up_to")}
+        if automatic:
+            short_offer["up_to"] = len(promo.get("tiers") or ()) > 1
+        short = promos.describe(short_offer, code=False)
+        dismiss_label = code or f"{store} promotion"
+        if automatic:
+            redemption = '<span class="promo-no-code">No code needed</span>'
+        else:
+            redemption = (
+                f'<code>{escape(code)}</code>'
+                f'<button type="button" data-copy-promo aria-label="Copy {escape(code, quote=True)}">Copy</button>'
+            )
         sport_count = len(promo.get("sports") or ())
         rows.append(
             f'<div class="promo-offer" data-promo-id="{identity}" data-sport-count="{sport_count}" '
@@ -1519,9 +1531,8 @@ def _promo_strip(sport_id):
             f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{escape(store)}</a>'
             f'<span class="promo-description">{escape(description)} applied at checkout</span>'
             f'<span class="promo-short" title="{escape(description, quote=True)}">{escape(short)}</span>'
-            f'<code>{escape(code)}</code>'
-            f'<button type="button" data-copy-promo aria-label="Copy {escape(code, quote=True)}">Copy</button>'
-            f'<button type="button" data-dismiss-promo aria-label="Dismiss {escape(code, quote=True)}">Dismiss</button>'
+            f'{redemption}'
+            f'<button type="button" data-dismiss-promo aria-label="Dismiss {escape(dismiss_label, quote=True)}">Dismiss</button>'
             '</div>'
         )
     if not rows:

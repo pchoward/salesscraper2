@@ -666,7 +666,7 @@
 }
 #promoOffers { min-width: 0; }
 .promo-offer { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.45rem; }
-.promo-offer code { background: var(--grey-100); padding: 0.1em 0.35em; overflow-wrap: anywhere; }
+.promo-offer :is(code, .promo-no-code) { background: var(--grey-100); padding: 0.1em 0.35em; overflow-wrap: anywhere; }
 .promo-strip button { font: inherit; cursor: pointer; }
 .promo-strip[hidden], .promo-strip [hidden] { display: none; }
 
