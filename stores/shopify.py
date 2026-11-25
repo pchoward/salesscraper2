@@ -488,6 +488,25 @@ def sale_variants(product):
     return sale
 
 
+def variant_link(product, url, variant):
+    """The store link that opens on the variant we list, or "".
+
+    A product page opens on its first buyable variant. When that one isn't
+    the sale variant we list, the shopper lands on a full price (owner,
+    2026-11-25: evo's PureVue opens on Black/Clear at $159.95, the listing is
+    a sale color at $80.95). ``url`` stays the listing's identity (price
+    history, watchlists); only the link out changes.
+    """
+    variant_id = str((variant or {}).get("id") or "").strip()
+    if not variant_id.isdigit() or "?" in str(url or ""):
+        return ""
+    variants = _variants_of(product)
+    default = next((v for v in variants if v.get("available") is not False), None)
+    if default is None or str(default.get("id")) == variant_id:
+        return ""
+    return f"{url}?variant={variant_id}"
+
+
 def _starts_with_brand_word(title, vendor):
     """True when the title opens with the brand's first word, a shorter or
     different spelling of the same brand (audit 2026-11-12, 85 listings):
@@ -628,6 +647,9 @@ class ShopifyScraper(Scraper):
             "store": self.shop.store,
             "product_type": product_type,
         }
+        link = variant_link(product, url, cheapest)
+        if link:
+            item["link"] = link
         if self.shop.brand_of:
             vendor = normalize_product_name(product.get("vendor") or "")
             brand = self.shop.brand_of(vendor) if vendor else ""

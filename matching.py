@@ -896,6 +896,8 @@ def sport_groups(items, explain=False, apply_filters=True):
             item, _, price, store = entries[index]
             offer = {"store": store, "price": price, "url": item.get("url") or "",
                      "name": normalize_product_name(item.get("name") or "")}
+            if item.get("link"):
+                offer["link"] = item["link"]
             current = by_store.get(store)
             if current is None or (price, offer["url"]) < (current["price"], current["url"]):
                 by_store[store] = offer
@@ -947,6 +949,8 @@ def cross_store_groups(items, explain=False, apply_filters=True, sport=None):
             "url": item.get("url") or "",
             "name": normalize_product_name(item.get("name") or ""),
         }
+        if item.get("link"):
+            offer["link"] = item["link"]
         currency = item.get("currency")
         if currency and str(currency).upper() != "USD":
             offer["currency"] = currency
