@@ -425,7 +425,7 @@ class ReportExtraTests(unittest.TestCase):
             if "https://example.com/drop" in part
         )
         self.assertIn("Now $40.00", card)
-        self.assertIn("Average $47.50", card)
+        self.assertIn("Avg $47.50 (we've seen)", card)
         self.assertNotIn("Dropped from $50.00 on Oct 4", card)
         self.assertNotIn("Price since Oct 4", card)
         self.assertIn('data-dropday="2026-10-04"', card)
@@ -446,8 +446,7 @@ class ReportExtraTests(unittest.TestCase):
         self.assertNotIn("At lowest tracked price", flat)
         self.assertNotIn("Verified low", flat)
         self.assertNotIn("New low", flat)
-        self.assertIn('class="avg-price" data-symbol="$"', flat)
-        self.assertNotIn('class="avg-price" data-symbol="$" hidden', flat)
+        self.assertIn('class="avg-price" data-symbol="$" hidden', flat)
         flat_spark = flat.split('class="spark-hit', 1)[1].split("</button>", 1)[0]
         self.assertNotIn("<svg", flat_spark)
         self.assertIn("flat ? 12 : 30", html)

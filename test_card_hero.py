@@ -105,7 +105,7 @@ class CardHeroTests(unittest.TestCase):
         slot = css.split(".deal-card .product-name {")[-1].split("}", 1)[0]
         self.assertIn("flex: 0 0 calc(1.25em * 2)", slot)
         self.assertIn("height: calc(1.25em * 2)", slot)
-        self.assertIn("Average ", card)
+        self.assertIn("Avg $", card)
         self.assertIn("Now ", card)
         self.assertIn('class="card-meta"', card)
         self.assertIn("Zumiez", card)
@@ -139,7 +139,7 @@ class CardHeroTests(unittest.TestCase):
         card = _article(html, "https://example.com/deck-0")
         self.assertIn('class="hero', card)
         self.assertIn("↓ ", card)
-        self.assertIn("Average ", card)
+        self.assertIn("Avg $", card)
         self.assertIn("Now ", card)
         self.assertIn('class="card-quick"', card)
         self.assertIn(">Alert me</button>", card)

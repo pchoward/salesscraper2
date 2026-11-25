@@ -3581,42 +3581,13 @@ def _removed_card_html(row, row_id):
 
 
 def _card_price_stat(record, symbol):
-    """Comparison next to the sale price.
-
-    Two or more tracked days use their average. Fewer than that is not an
-    average (a first day would print the sale price twice), so the store's
-    list price is shown instead: "Was $27.95 · Now $2.50". The percent off
-    stays the store's claimed discount versus that list price. Days that all
-    sat at one price are no average either ("Average $7.49 / Now $7.49"):
-    they keep the list price too.
-    """
+    """Render the secondary tracked average for the default chart window."""
     points = clip_daily_prices(record.get("prices"), 90, record.get("spark_end"))
-    flat = bool(points) and all(abs(price - points[0][1]) < 0.005 for _, price in points)
-    list_price = _price((record.get("item") or {}).get("price_old"))
-    has_list = list_price is not None and list_price > 0
-    if len(points) >= 2 and not (flat and has_list):
-        average = record.get("average")
-        if average is None:
-            return ""
-        return (
-            f'<span class="avg-price" data-symbol="{symbol}">'
-            f"Average {symbol}{float(average):.2f}</span>"
-            '<span class="price-sep" aria-hidden="true">/</span>'
-        )
-    if has_list:
-        return (
-            f'<span class="avg-price" data-symbol="{symbol}">'
-            f"Was {symbol}{list_price:.2f}</span>"
-            '<span class="price-sep" aria-hidden="true">\u00b7</span>'
-        )
-    if points:
-        # Nothing honest to show yet. The slot stays so a wider chart window
-        # can fill in an average once a second day is inside it.
-        return (
-            f'<span class="avg-price" data-symbol="{symbol}" hidden></span>'
-            '<span class="price-sep" aria-hidden="true" hidden>/</span>'
-        )
-    return ""
+    moving = len(points) >= 2 and any(abs(price - points[0][1]) >= 0.005 for _, price in points)
+    average = record.get("average")
+    if moving and average is not None:
+        return f'<span class="avg-price" data-symbol="{symbol}">Avg {symbol}{float(average):.2f} (we\'ve seen)</span>'
+    return f'<span class="avg-price" data-symbol="{symbol}" hidden></span>'
 
 
 def _card_html(record):
@@ -3641,6 +3612,12 @@ def _card_html(record):
             'title="Store\'s claimed discount versus its list price, not a tracked market price.">'
             f"↓ {escape(percent)}</span>"
         )
+    list_price = _price(item.get("price_old"))
+    was_html = (
+        f'<span class="was-price">Was {symbol}{list_price:.2f}</span>'
+        '<span class="price-sep" aria-hidden="true">·</span>'
+        if list_price is not None and list_price > 0 else ""
+    )
     avg_html = _card_price_stat(record, symbol)
     found = _month_day(record.get("first") or record.get("spark_end") or "")
     store = record.get("store") or ""
@@ -3662,7 +3639,8 @@ def _card_html(record):
         f'<div class="card-sparkline">{_spark_html(record, width=156, defer=True)}</div>'
         f'<p class="card-offer">{off_html}{_sold_out_pill(record)}</p></div>'
         '<p class="card-prices">'
-        f'{avg_html}<span class="now-price">Now {_money(item.get("price_new"), currency)}</span></p></div>'
+        f'{was_html}<span class="now-price">Now {_money(item.get("price_new"), currency)}</span></p>'
+        f'<p class="card-average">{avg_html}</p></div>'
         f'<p class="card-meta">{escape(meta)}</p>'
         f'<div class="card-score" hidden>{_why_html(record, dom_id="why-card-" + str(record["id"]))}</div>'
         "</article>"
