@@ -1114,9 +1114,18 @@ def _thumb(image, alt, large=False):
     )
 
 
+def shop_href(entry):
+    """Where a link to the store goes: the variant we list when the plain
+    product page would open on another, full-price one (``link``, Shopify);
+    else the listing URL. ``url`` stays the listing's identity everywhere else
+    (history, watchlists, matching)."""
+    entry = entry or {}
+    return normalize_url(entry.get("link") or entry.get("url") or "")
+
+
 def _product_link(item):
     name = escape(_display_name(item))
-    url = escape(normalize_url(item.get("url", "")), quote=True)
+    url = escape(shop_href(item), quote=True)
     if not url:
         return name
     return f'<a class="product-link" href="{url}" target="_blank" rel="noopener">{name}</a>'
@@ -1277,7 +1286,7 @@ def _compare_section(groups):
             klass = "offer cheapest" if cheapest else "offer"
             store = offer.get("store") or ""
             name = escape(offer.get("name") or "")
-            url = offer.get("url") or ""
+            url = shop_href(offer)
             if url:
                 name_html = (
                     f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{name}</a>'
@@ -1779,6 +1788,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             record = {
                 "item": item,
                 "url": url,
+                "link": shop_href(dict(item, url=url)),
                 "name": _display_name(item),
                 "store": item.get("store") or "Unknown",
                 "part": item.get("part") or "",
@@ -1864,6 +1874,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         catalog_json[record["id"]] = {
             "name": record["name"],
             "url": record["url"],
+            **({"link": record["link"]} if record.get("link") and record["link"] != record["url"] else {}),
             "store": record["store"],
             "part": record["part"],
             "size": record["width_key"],
@@ -3639,7 +3650,7 @@ def _card_html(record):
     truck_label_html = '<p class="truck-fit-label">' + escape('; '.join(truck_labels)) + '</p>' if truck_labels else ''
     return (
         f'<article class="deal-card{listed}" {_deal_attrs(record)}>'
-        f'{_card_store_link(record["url"], name, store)}'
+        f'{_card_store_link(record.get("link") or record["url"], name, store)}'
         '<button type="button" class="star" aria-pressed="false" aria-label="Watch this item">☆</button>'
         '<button type="button" class="card-alert">Alert me</button>'
         f'<div class="media"><div class="card-photo">{_thumb(record["image"], name, large=True)}</div>'
@@ -3680,7 +3691,7 @@ def _detail_html(record):
             price = offer.get("price")
             cheap = price is not None and cheapest is not None and abs(float(price) - float(cheapest)) < 0.001
             klass = "mini-offer g-cheap" if cheap else "mini-offer"
-            url = offer.get("url") or ""
+            url = shop_href(offer)
             label = f'{escape(offer.get("store") or "")} {_money(price, offer.get("currency"))}'
             if url:
                 inner = f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
@@ -3689,7 +3700,7 @@ def _detail_html(record):
             offers.append(f'<div class="{klass}">{inner}</div>')
     else:
         offers.append('<div class="mini-offer">No other tracked store has this exact product.</div>')
-    url = record["url"]
+    url = record.get("link") or record["url"]
     retailer = ""
     if url:
         retailer = (
@@ -3721,7 +3732,7 @@ def _offer_link(offer):
     price = _money(offer.get("price"), offer.get("currency"))
     store = escape(offer.get("store") or "")
     label = f"{store} {price}"
-    url = offer.get("url") or ""
+    url = shop_href(offer)
     if not url:
         return label
     return f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
@@ -3733,7 +3744,7 @@ def _member_line(record):
     price = _money(item.get("price_new"), item.get("currency"))
     store = escape(record["store"])
     label = f"{store} {price} · {avail}"
-    url = record["url"]
+    url = record.get("link") or record["url"]
     if not url:
         return label
     return f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{label}</a>'
