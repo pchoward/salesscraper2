@@ -54289,14 +54289,14 @@
           }
         },
         "Colorado Cyclist_Tires": {
-          "count": 416,
+          "count": 415,
           "failed": false,
           "diagnostics": {
             "expected_count": 355.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 416,
-            "percentage_change": 17.0,
+            "actual_count": 415,
+            "percentage_change": 16.7,
             "reason": "normal_variation"
           }
         },
@@ -55397,14 +55397,14 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 253,
+          "count": 254,
           "failed": false,
           "diagnostics": {
             "expected_count": 148.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 29.0,
-            "actual_count": 253,
-            "percentage_change": 70.4,
+            "actual_count": 254,
+            "percentage_change": 71.0,
             "reason": "normal_variation"
           }
         },
@@ -55482,14 +55482,14 @@
           }
         },
         "The Lost Co._Tires": {
-          "count": 215,
+          "count": 213,
           "failed": false,
           "diagnostics": {
             "expected_count": 132.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 215,
-            "percentage_change": 62.9,
+            "actual_count": 213,
+            "percentage_change": 61.4,
             "reason": "normal_variation"
           }
         },
@@ -56036,7 +56036,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-25T03:09:31+00:00"
+      "scanned_at": "2026-11-25T04:49:37+00:00"
     }
   ],
   "baseline": {
@@ -56154,7 +56154,7 @@
     },
     "Colorado Cyclist_Tires": {
       "date": "2026-11-25",
-      "count": 416
+      "count": 415
     },
     "Cambria_Protection": {
       "date": "2026-11-25",
@@ -56222,7 +56222,7 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-25",
-      "count": 253
+      "count": 254
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-25",
@@ -56242,7 +56242,7 @@
     },
     "The Lost Co._Tires": {
       "date": "2026-11-25",
-      "count": 215
+      "count": 213
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-25",
@@ -61485,7 +61485,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 416
+        "count": 415
       }
     ],
     "Colorado Cyclist_Wheels": [
@@ -66733,7 +66733,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 253
+        "count": 254
       }
     ],
     "The Lost Co._Drivetrain": [
@@ -67139,7 +67139,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 215
+        "count": 213
       }
     ],
     "The Lost Co._Wheels": [

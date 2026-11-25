@@ -58125,14 +58125,14 @@
           }
         },
         "Albe's BMX_Packs": {
-          "count": 1,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": 1,
             "baseline_samples": 13,
             "median_absolute_deviation": 0,
-            "actual_count": 1,
-            "percentage_change": 0.0,
+            "actual_count": 0,
+            "percentage_change": -100.0,
             "reason": "normal_variation"
           }
         },
@@ -60564,7 +60564,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-25T02:53:02+00:00"
+      "scanned_at": "2026-11-25T04:32:21+00:00"
     }
   ],
   "baseline": {
@@ -60783,10 +60783,6 @@
     "187 Killer Pads_Protection": {
       "date": "2026-11-25",
       "count": 5
-    },
-    "Albe's BMX_Packs": {
-      "date": "2026-11-25",
-      "count": 1
     },
     "Powers BMX_Packs": {
       "date": "2026-11-25",
@@ -62437,7 +62433,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 1
+        "count": 0
       }
     ],
     "Albe's BMX_Protection": [
