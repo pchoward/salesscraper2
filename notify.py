@@ -198,7 +198,10 @@ def _display_name(item):
 
 
 def _product_url(item):
-    return normalize_url((item or {}).get("url", ""))
+    """The store link for an email: the sale variant's page when the plain one
+    would open on a full price (Shopify ``link``), else the listing URL."""
+    item = item or {}
+    return normalize_url(item.get("link") or item.get("url", ""))
 
 
 def _store_name(item):
@@ -314,7 +317,7 @@ def _plain_cross_store(group):
             mark = ""
         lines.append(f"- {offer.get('store') or 'Unknown'}: {_money(price, offer.get('currency'))}{mark}")
         if offer.get("url"):
-            lines.append(f"  {offer['url']}")
+            lines.append(f"  {offer.get('link') or offer['url']}")
     lines.append("")
     return lines
 
@@ -357,7 +360,7 @@ def _html_cross_store(digest):
             weight = "700" if is_low else "400"
             color = "#166534" if is_low else "#0f172a"
             mark = " · lowest" if is_low else ""
-            url = offer.get("url") or ""
+            url = offer.get("link") or offer.get("url") or ""
             store = escape(offer.get("store") or "Unknown")
             amount = escape(_money(price, offer.get("currency")) + mark)
             if url:
