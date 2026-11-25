@@ -352,3 +352,22 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - Never use `link` for stars/watchlists, `dataset.url`, or any lookup.
 
 **Tests:** a browser check that a listing with `link` opens it from Quick View and from its group row, and that one without `link` still opens `url`.
+
+## 22. Cards: always "Was · Now" next to the percent; the average goes secondary (owner, 2026-11-25)
+**Why:** a card shows the store's percent off (from its own "Was" price), but once a listing has 2+ tracked days at different prices, the comparison switches to our average. evo's Fox Racing PureVue Goggles read "↓49% · Average $74.20 / Now $80.95": the price is above the average, yet the card says 49% off, and the "Was" price ($159.95) the 49% comes from isn't shown. Owner: "always show Was … · Now … next to the percent … Move the average somewhere secondary."
+
+**Today:** `page.py` `_card_price_stat` and `page.js` `paintOneCardStat` show "Average $X / Now $Y" when there are 2+ tracked days that aren't all one price, else "Was $X · Now $Y".
+
+**Wanted:**
+1. The price line is always "Was $<price_old> · Now $<price_new>" when the store gives a regular price. With none, show "Now $Y" alone, as today.
+2. The average moves to a small secondary line under it, only when there are 2+ tracked days that aren't all one price: "Avg $74.20 (we've seen)". Same chart-window rule as today, so it still follows the 30/90/365 setting. With no average, show no line.
+3. Change both places together (server-rendered card and `paintOneCardStat`) so the first paint and the repaint agree.
+4. Card height stays stable. Keep the line's slot or match the current card height, so cards in a row still line up on desktop (8 columns) and phones.
+
+**Wording:** "we've seen", never "all-time" or "market average" (`docs/publisher-facts.md`).
+
+**Tests:** update the card-stat tests for the new markup. A browser check at 390 px and desktop that:
+- a listing with moving history shows Was · Now plus the Avg line;
+- a new listing shows Was · Now with no Avg line;
+- changing the chart window updates the Avg line;
+- card rows still line up.
