@@ -13,6 +13,12 @@ Required sizes by part:
   missing durometer is not treated as a match.
 - Trucks: one hanger number (149, 55) or one axle width (8.25).
 - Bearings: no size; the model words carry the identity.
+- Protection: the subtype (Helmet, Knee Pads, Pad Set...) and adult or
+  youth stand in for a size. Letter sizes are variants and are ignored.
+  Colours stay in the key, so a colourway only matches the same colourway.
+  "Certified" and signature-edition words are model words: Pro-Tec's
+  Classic and Classic Certified are different helmets. Open-box and
+  no-original-packaging listings are not matched.
 
 Brand spellings fold together (Indy and Independent, Death Wish and
 Deathwish, Powell-Peralta and Powell, Jacuzzi Unlimited and Jacuzzi). Generic words (team, logo, formula,
@@ -32,6 +38,7 @@ for that summary on ``previous_data.json`` and ``price_history.json``.
 import re
 import unicodedata
 
+import protection
 from filters import (
     BEARING_BRANDS,
     DECK_BRANDS,
@@ -45,7 +52,51 @@ from filters import (
     normalize_product_name,
 )
 
-PART_ORDER = ("Decks", "Wheels", "Trucks", "Bearings")
+PART_ORDER = ("Decks", "Wheels", "Trucks", "Bearings", "Protection")
+
+# Skate protective-gear makers. Spellings of one company fold through
+# ``_BRAND_ALIASES`` (Triple 8 / Triple Eight, 187 / 187 Killer Pads).
+# ``_phrase_pattern`` already joins "Pro Tec", "ProTec" and "Pro-Tec".
+PROTECTION_BRANDS = (
+    "Pro-Tec",
+    "Triple Eight",
+    "Triple 8",
+    "187 Killer Pads",
+    "187",
+    "S-One",
+    "Smith Scabs",
+    "TSG",
+    "Destroyer",
+    "Yepa",
+    "DNA",
+    "Demon",
+    "SFR",
+    "Impala",
+    "Bell",
+    "REKD",
+    "USA Skateboarding",
+)
+# Labels use the full name whichever spelling the store wrote.
+_PROTECTION_BRAND_NAMES = {"Triple 8": "Triple Eight", "187": "187 Killer Pads"}
+# Words that say which gear it is. The subtype carries that, so they are
+# dropped ("Pad Set" / "Set of Pads" / "Pads 3-Pack").
+_PROTECTION_DROPPED = frozenset(
+    "helmet helmets pad pads knee knees elbow elbows wrist wrists guard guards set sets of pack packs pair "
+    "protective protection gear skate skateboard skateboarding the and with adult adults eps size w".split()
+)
+_PROTECTION_SIZES = frozenset("xs sm md lg xl xxl xxxl small medium large".split())
+_PROTECTION_WORDS = {"glossy": "gloss", "matt": "matte", "gray": "grey", "cpsc": "certified",
+                     "two": "2", "three": "3", "four": "4", "six": "6"}
+_PROTECTION_YOUTH_RE = re.compile(r"\b(?:kids?|youth|junior|jr|toddler)\b", re.IGNORECASE)
+# A name made only of colours and numbers is too vague: "Knee Pads - Black".
+_PROTECTION_COLORS = frozenset(
+    "black white grey silver gold red blue green yellow orange pink purple brown natural clear navy mint "
+    "camo carbon matte gloss satin stone speckled dark light mirror tan olive cream charcoal checker "
+    "checkered rainbow leopard multi".split()
+)
+# Model codes written as two capitals and a number: "EP 55", "KP 22".
+_PROTECTION_CODE_RE = re.compile(r"\b([A-Z]{2})[\s\-]?(\d{2,3})\b")
+_OPEN_BOX_RE = re.compile(r"\bno\s+original\s+packaging\b|\bopen[\s\-]*box\b", re.IGNORECASE)
 STORE_ORDER = ("Zumiez", "SkateWarehouse", "CCS", "Tactics", "TGM", "Deathgear", "Kinetic", "SPoT", "Exodus", "SoCal", "Skate Deluxe", "Muir Skate")
 
 # Words that describe a line, a color, or a category. They are kept when a
@@ -152,7 +203,8 @@ _ABBREVIATIONS = {"frgd": "forged", "blk": "black", "wht": "white"}
 
 # Brand spellings that are the same company. Keys are folded with spaces
 # and hyphens removed.
-_BRAND_ALIASES = {"indy": "independent", "powellperalta": "powell"}
+_BRAND_ALIASES = {"indy": "independent", "powellperalta": "powell", "triple8": "tripleeight",
+                  "187": "187killerpads"}
 
 _MM_RE = re.compile(r"\b(\d{2}(?:\.\d{1,2})?)\s*mm\b", re.IGNORECASE)
 _DURO_RE = re.compile(r"\b(\d{2,3})\s*([abd])\b", re.IGNORECASE)
@@ -383,6 +435,8 @@ def describe_item(item):
     part = (item.get("part") or "").strip()
     part_key = part.casefold()
     info["part"] = part
+    if part_key == "protection":
+        return _describe_protection(item, info)
     if part_key not in {"decks", "wheels", "trucks", "bearings"}:
         problems.append(f"{part or 'this part'} is not matched across stores")
         return info
@@ -471,6 +525,59 @@ def describe_item(item):
     if problems:
         return info
     info["key"] = "|".join([part_key, info["brand_key"], size_key, *tokens])
+    return info
+
+
+def _describe_protection(item, info):
+    """``describe_item`` for protective gear. See the module docstring."""
+    problems = info["problems"]
+    name = item.get("name") or ""
+    if _OPEN_BOX_RE.search(name) or _USED_RE.search(name):
+        problems.append("open-box or used listing")
+        return info
+    text = _PROTECTION_CODE_RE.sub(r"\1\2", _prepare_text(name, "protection"))
+    if not text:
+        problems.append("no product name")
+        return info
+    subtype = protection.classify(name) or item.get("subtype")
+    if not subtype or subtype == "Other":
+        problems.append("protective gear type not recognized")
+        return info
+    age = "youth" if _PROTECTION_YOUTH_RE.search(text) else "adult"
+    info["sizes"] += [("type", subtype), ("age", age)]
+
+    brand = find_brand(text, PROTECTION_BRANDS)
+    if brand is None:
+        problems.append("brand not recognized")
+        return info
+    written, brand = brand, _PROTECTION_BRAND_NAMES.get(brand, brand)
+    info["brand"] = brand
+    info["brand_key"] = brand_key(brand)
+
+    display, folded, seen = [], [], set()
+    for raw in re.findall(r"[A-Za-z0-9]+", _strip_brand(text, written)):
+        token = _fold(raw)
+        token = _PROTECTION_WORDS.get(token, _ABBREVIATIONS.get(token, token))
+        if token.isdigit():
+            token = str(int(token))
+        elif len(token) < 2:
+            continue
+        if (token in _PROTECTION_DROPPED or token in _PROTECTION_SIZES or token in seen
+                or _PROTECTION_YOUTH_RE.fullmatch(token)):
+            continue
+        seen.add(token)
+        display.append(raw)
+        folded.append(token)
+    tokens = tuple(sorted(folded))
+    info["model"] = tokens
+    info["model_words"] = display
+    youth = " youth" if age == "youth" else ""
+    info["label"] = f"{brand} {' '.join(display)} {subtype}{youth}".replace("  ", " ").strip()
+    if all(token.isdigit() or token in _PROTECTION_COLORS for token in tokens):
+        problems.append(f"model words are too generic to match on ({', '.join(display) or 'none'})")
+        return info
+    size_key = f"{subtype.casefold()}+{age}"
+    info["key"] = "|".join(["protection", info["brand_key"], size_key, *tokens])
     return info
 
 
