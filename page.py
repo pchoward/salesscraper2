@@ -3616,7 +3616,8 @@ def _card_html(record):
     was_html = (
         f'<span class="was-price">Was {symbol}{list_price:.2f}</span>'
         '<span class="price-sep" aria-hidden="true">·</span>'
-        if list_price is not None and list_price > 0 else ""
+        if list_price is not None and list_price > 0 else
+        '<span class="was-price" hidden></span><span class="price-sep" aria-hidden="true" hidden>·</span>'
     )
     avg_html = _card_price_stat(record, symbol)
     found = _month_day(record.get("first") or record.get("spark_end") or "")

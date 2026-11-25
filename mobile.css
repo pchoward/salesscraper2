@@ -826,8 +826,32 @@
     #cardGrid .deal-card .card-alert:hover, #cardGrid .deal-card .card-quick:hover {
         background:var(--grey-100);
     }
+    .deal-card .card-pricing { grid-template-columns:minmax(0,1fr) auto; }
+    .deal-card .card-pricing .card-prices {
+        grid-column:1;
+        grid-row:1;
+        gap:0 3px;
+    }
     .deal-card .card-pricing .was-price { font-weight:500; }
     .deal-card .card-pricing .now-price { font-size:13px; }
+    .deal-card .card-pricing .card-offer {
+        grid-column:2;
+        grid-row:1;
+        align-self:end;
+        justify-self:end;
+    }
+    .deal-card .card-pricing .card-average {
+        grid-row:2;
+        align-self:start;
+        min-height:2.4em;
+        font-size:10px;
+    }
+    .deal-card .card-pricing .avg-price { white-space:normal; }
+    .deal-card .card-pricing .card-sparkline {
+        grid-row:2;
+        min-width:0;
+        contain:inline-size;
+    }
 }
 
 /* The narrowest layout has one wider card per row. */

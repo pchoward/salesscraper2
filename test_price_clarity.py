@@ -313,7 +313,7 @@ const card = new Element('article');
 card.className = 'deal-card';
 card.dataset = {
     part:'Sneakers', price:'70.00', discount:'30', original:'100',
-    shoeprices:'8:60,9:80', shoecompares:'8:100,9:100', shoesize:'8,9', priceSaved:''
+    shoeprices:'8:60,9:80', shoecompares:'8:100,9:120', shoesize:'8,9', priceSaved:''
 };
 const now = new Element('span');
 now.className = 'now-price';
@@ -322,18 +322,27 @@ const off = new Element('span');
 off.className = 'discount card-off medium';
 off.textContent = '↓ 30%';
 off.title = "Store's claimed discount versus its list price, not a tracked market price.";
+const was = new Element('span');
+was.className = 'was-price';
+was.textContent = 'Was $100.00';
+const separator = new Element('span');
+separator.className = 'price-sep';
+card.appendChild(was);
+card.appendChild(separator);
 card.appendChild(now);
 card.appendChild(off);
 const document = {querySelectorAll: () => [card]};
 const state = {shoeSizes: ['9']};
 ''' + chunk + r'''
 paintOfferPrices();
-assert.equal(off.textContent, '↓ 20%');
+assert.equal(off.textContent, '↓ 33%');
+assert.equal(was.textContent, 'Was $120.00');
 assert.match(off.title, /claimed discount/);
-assert.equal(off.className.split(/\s+/).includes('low'), true);
+assert.equal(off.className.split(/\s+/).includes('medium'), true);
 state.shoeSizes = [];
 paintOfferPrices();
 assert.equal(off.textContent, '↓ 30%');
+assert.equal(was.textContent, 'Was $100.00');
 assert.match(off.title, /not a tracked market price/);
 '''
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)

@@ -3148,6 +3148,7 @@ body.alerts-open { overflow: hidden; }
     white-space: nowrap;
 }
 .deal-card .price-sep { color: var(--grey-400); }
+.deal-card :is(.was-price, .price-sep)[hidden] { display: none; }
 .deal-card .card-average {
     margin: 0;
     min-height: 1.2em;

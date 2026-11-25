@@ -731,6 +731,11 @@ function rowPrice(row, technical, ranges, overrides) {
     return Number.isFinite(price) ? price : null;
 }
 
+function offerReferencePrice(row, offer) {
+    if (offer && Number.isFinite(offer.compare)) return offer.compare;
+    return offer?.truck ? NaN : parseFloat(row.dataset.original);
+}
+
 function rowDiscount(row, technical, ranges, overrides) {
     const offer = selectedShoePrice(row, technical, ranges, overrides);
     if (!offer) {
@@ -738,8 +743,7 @@ function rowDiscount(row, technical, ranges, overrides) {
         const parsed = parseFloat(technical !== undefined && row.dataset.priceSaved ? row.dataset.baseDiscount : row.dataset.discount);
         return Number.isFinite(parsed) ? parsed : null;
     }
-    if (offer.truck && !Number.isFinite(offer.compare)) return null;
-    const compare = Number.isFinite(offer.compare) ? offer.compare : parseFloat(row.dataset.original);
+    const compare = offerReferencePrice(row, offer);
     if (!Number.isFinite(compare) || compare <= 0) return null;
     return ((compare - offer.price) / compare) * 100;
 }
@@ -788,6 +792,15 @@ function paintOfferPrices() {
             const symbol = (oldNode.dataset.baseText || "").indexOf("€") >= 0 ? "€" : "$";
             oldNode.textContent = symbol + offer.compare.toFixed(2);
         });
+        const wasNode = node.querySelector(".was-price");
+        if (wasNode) {
+            const compare = offerReferencePrice(node, offer);
+            const hasCompare = Number.isFinite(compare) && compare > 0;
+            const symbol = priceNode.dataset.baseText.includes("€") ? "€" : "$";
+            wasNode.textContent = hasCompare ? "Was " + symbol + compare.toFixed(2) : "";
+            wasNode.hidden = !hasCompare;
+            node.querySelector(".price-sep").hidden = !hasCompare;
+        }
         if (typeof SportSpecFilters !== "undefined") SportSpecFilters.paintCompare(node, offer);
         node.querySelectorAll(".discount").forEach(discountNode => {
             if (!discountNode.dataset.baseText) discountNode.dataset.baseText = discountNode.textContent;
