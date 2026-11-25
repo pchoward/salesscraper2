@@ -96,6 +96,94 @@ def is_pack(title, product_type="", tags=()):
     return any(_TYPE.search(label) and not _NOT_PACK.search(label) for label in labels)
 
 
+# Pack size (owner, 2026-11-25: "add size when it's available, many are 28L,
+# smaller or larger"), from the litres the title or description states. A
+# hydration pack's reservoir ("12L pack with 3L reservoir") isn't the pack.
+VOLUME_SIZES = ("Under 15L", "15–24L", "25–34L", "35L+")
+_LITRES = re.compile(r"(?<![\d.])(\d{1,2}(?:\.\d)?)\s*(?:l|liters?|litres?|ltr)\b", re.I)
+_RESERVOIR_AFTER = re.compile(r"^\W{0,3}(?:\w+\W+){0,2}?(?:reservoir|bladder|water|hydration\s+(?:bladder|reservoir))\b",
+                              re.I)
+_RESERVOIR_BEFORE = re.compile(r"(?:\bwith|\+|\band|\bincl(?:udes|uding|\.)?)\s*(?:an?\s+)?$", re.I)
+
+
+# Brands whose model names carry the litres as a bare number: Osprey
+# "Sopris 32", CamelBak "M.U.L.E. 12 100oz", EVOC "Stage 6 + 2L Bladder",
+# Deuter "Trans Alpine 30", Gregory "Targhee 32". A labeled convention, like
+# a ski's waist width read from its model number.
+_LITRE_NAMED = re.compile(r"^\s*(?:osprey|camelbak|camel\s*bak|evoc|deuter|gregory)\b", re.I)
+_BARE_NUMBER = re.compile(r"(?<![\w.\-/+])(\d{1,2})(?![\w.%°/-])(?!\s*(?:(?:oz|l|liters?|litres?|mm|in)\b(?!-)|\"|”))", re.I)
+
+
+def _named_litres(name):
+    if not _LITRE_NAMED.search(name):
+        return None
+    head = re.split(r"\s+[-–]\s+|\s\+\s|\bwith\b", name, maxsplit=1)[0]  # not "+ 2L Bladder", "- Kids'"
+    found = {int(m.group(1)) for m in _BARE_NUMBER.finditer(head) if 4 <= int(m.group(1)) <= 80}
+    return found.pop() if len(found) == 1 else None
+
+
+def volume_litres(name, description=""):
+    """The pack's own volume in litres (4-80), or None when it isn't stated
+    once and clearly. The title wins over the description."""
+    named = _named_litres(str(name or ""))
+    if named and not _LITRES.search(str(name or "").split("+")[0]):
+        return named
+    for text in (str(name or ""), str(description or "")):
+        found = set()
+        for match in _LITRES.finditer(text):
+            value = float(match.group(1))
+            if not 4 <= value <= 80:
+                continue
+            if _RESERVOIR_AFTER.search(text[match.end():match.end() + 30]):
+                continue
+            if _RESERVOIR_BEFORE.search(text[max(0, match.start() - 14):match.start()]):
+                continue
+            found.add(int(value) if value.is_integer() else value)
+        if len(found) == 1:
+            return found.pop()
+        if found:
+            return None  # "20L S/M, 22L M/L": two sizes in one listing
+    return None
+
+
+def volume_size(litres):
+    """The Size filter's range for a volume: "Under 15L" .. "35L+"."""
+    if litres is None:
+        return None
+    if litres < 15:
+        return VOLUME_SIZES[0]
+    if litres < 25:
+        return VOLUME_SIZES[1]
+    if litres < 35:
+        return VOLUME_SIZES[2]
+    return VOLUME_SIZES[3]
+
+
+def facet_field(prefix):
+    """The Packs heading's Size filter for one sport's sidebar."""
+    return {"key": "pack_volume", "label": "Size (liters)", "param": f"{prefix}_packsize", "categories": (PART,),
+            "order": list(VOLUME_SIZES)}
+
+
+def technical_offers(item):
+    """``item``'s spec offers with its pack size added, built from the
+    listing itself when the store gave none (a skate shop's pack pooled onto
+    BMX). Read when a page is built; stored data is unchanged."""
+    size = volume_size(volume_litres(item.get("name"), item.get("description")))
+    offers = [offer for offer in item.get("technical_offers") or [] if isinstance(offer, dict)]
+    if not size:
+        return offers
+    if not offers:
+        def amount(value):
+            try:
+                return float(str(value).replace("$", "").replace(",", ""))
+            except (TypeError, ValueError):
+                return None
+        offers = [{"price": amount(item.get("price_new")), "compare": amount(item.get("price_old")),
+                   "available": None, "specs": {}}]
+    return [dict(offer, specs=dict(offer.get("specs") or {}, pack_volume=[size])) for offer in offers]
+
+
 def sport_of(title, brand="", product_type=""):
     """"bmx", "skate" or "ski" for a sport's own pack, or None for a general one.
     A store type that says snow ("Snow Backpacks", EVOC) makes it Ski's."""

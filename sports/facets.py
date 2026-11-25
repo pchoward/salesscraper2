@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from filters import item_passes_filters
+from sports import packs
 
 
 def applies(field, part):
@@ -20,8 +21,10 @@ def payload(data, sport):
             if not item_passes_filters(item):
                 continue
             part = item.get('part', '')
-            offers = [offer for offer in item.get('technical_offers', [])
-                      if offer.get('available') is not False]
+            raw = item.get('technical_offers', [])
+            if part == packs.PART:
+                raw = packs.technical_offers(item)  # pack size from the title (owner, 2026-11-25)
+            offers = [offer for offer in raw if offer.get('available') is not False]
             if not offers:
                 continue
             items[item['url']] = {'part': part, 'offers': offers}

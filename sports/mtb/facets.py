@@ -1,5 +1,5 @@
 """MTB-owned specification field definitions; rendering is shared."""
-from sports import protection
+from sports import packs, protection
 
 FIELDS = (
     {"key": "condition", "label": "Condition", "param": "mtb_condition", "categories": ()},  # Demo (2026-11-12)
@@ -26,7 +26,7 @@ FIELDS = (
     {"key": "pedal_thread", "label": "Thread", "param": "mtb_pedalthread", "categories": ("Pedals",),
      "order": ['9/16"', '1/2"']},
     {"key": "riding_type", "label": "Riding type", "param": "mtb_ride", "categories": ()},
-) + protection.facet_fields("mtb", ("Protection", "Helmets", "Goggles", "Gloves"))
+) + protection.facet_fields("mtb", ("Protection", "Helmets", "Goggles", "Gloves")) + (packs.facet_field("mtb"),)
 
 # Compatibility for callers on the original MTB branch.
 def payload(data):
