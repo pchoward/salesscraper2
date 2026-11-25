@@ -1,9 +1,4 @@
-"""Card price line: list price until the tracked price moves, then the average.
-
-A first-day card used to read "Average $2.50 / Now $2.50". The percent off is
-still the store's claimed discount versus its list price. The client repaint
-in page.js follows the same rule as the server markup.
-"""
+"""Cards keep the store comparison separate from the tracked average."""
 
 import subprocess
 import unittest
@@ -66,23 +61,24 @@ class CardWasPriceTests(unittest.TestCase):
         self.assertIn("Was $27.95", card)
         self.assertIn("Now $2.50", card)
         self.assertIn(">·</span>", card)
-        self.assertNotIn("Average ", card)
+        self.assertNotIn("Avg $", card)
         self.assertNotIn(">/</span>", card)
         # (27.95 - 2.50) / 27.95 is 91%, not a comparison against the one tracked price.
         self.assertIn("↓ 91%", card)
         self.assertIn("not a tracked market price", card)
 
-    def test_two_days_keep_the_tracked_average(self):
+    def test_two_days_add_an_average_below_the_store_prices(self):
         item = _deck("2.50", "https://example.com/two-days", "Baker Two Days 8.0 Deck")
         html = _page(
             [item],
             {item["url"]: _history(item, {"2026-10-30": 10.00, "2026-11-01": 2.50})},
         )
         card = _card(html, "two-days")
-        self.assertIn("Average $6.25", card)
+        self.assertIn("Was $27.95", card)
         self.assertIn("Now $2.50", card)
-        self.assertIn(">/</span>", card)
-        self.assertNotIn("Was ", card)
+        self.assertIn(">·</span>", card)
+        self.assertIn("Avg $6.25 (we've seen)", card)
+        self.assertLess(card.index("Now $2.50"), card.index("Avg $6.25"))
         self.assertIn("↓ 91%", card)
 
     def test_days_at_one_price_are_not_an_average(self):
@@ -91,10 +87,10 @@ class CardWasPriceTests(unittest.TestCase):
         html = _page([item], {item["url"]: _history(item, {"2026-10-31": 7.49, "2026-11-01": 7.49})})
         card = _card(html, "flat")
         self.assertIn("Was $24.99", card)
-        self.assertNotIn("Average ", card)
+        self.assertNotIn("Avg $", card)
         flat_no_list = _deck("7.49", "https://example.com/flat-bare", "Bones Reds Bearings", old=None, part="Bearings")
         html = _page([flat_no_list], {flat_no_list["url"]: _history(flat_no_list, {"2026-10-31": 7.49, "2026-11-01": 7.49})})
-        self.assertIn("Average $7.49", _card(html, "flat-bare"), "no list price: the tracked average is all there is")
+        self.assertNotIn("Avg $", _card(html, "flat-bare"))
 
     def test_missing_list_price_has_no_was_line(self):
         one = _deck("2.50", "https://example.com/no-list", "Bones Reds Bearings", old=None, part="Bearings")
@@ -112,10 +108,10 @@ class CardWasPriceTests(unittest.TestCase):
         self.assertIn("Now $2.50", short)
         self.assertIn("No list price", short)
         self.assertNotIn("Was ", short)
-        self.assertNotIn("Average ", short)
+        self.assertNotIn("Avg $", short)
         self.assertIn('class="avg-price" data-symbol="$" hidden', short)
         tracked = _card(html, "no-list-history")
-        self.assertIn("Average $3.25", tracked)
+        self.assertIn("Avg $3.25 (we've seen)", tracked)
         self.assertIn("No list price", tracked)
         self.assertNotIn("Was ", tracked)
 
@@ -124,7 +120,8 @@ class CardWasPriceTests(unittest.TestCase):
         script = "\n".join([
             source[source.index("function addDays("):source.index("function markerColor(")],
             source[source.index("function clipDailyPrices("):source.index("function sparkDirection(")],
-            source[source.index("function paintOneCardStat("):source.index("function paintCardStats(")],
+            source[source.index("function paintOneCardStat("):source.index("function paintResultCount(")],
+            source[source.index("function setChartWindow("):source.index("function dealNode(")],
         ])
         script += r"""
 const assert = require("node:assert/strict");
@@ -150,57 +147,51 @@ class Node {
     }
 }
 
-function card(id, original, stat, sep) {
+function card(id, original, stat) {
     const root = new Node("deal-card");
-    root.dataset = { id: id, original: original, price: "2.50" };
+    root.dataset = { id: id };
     const avg = new Node("avg-price", stat);
     avg.dataset.symbol = "$";
-    const slash = new Node("price-sep", sep);
+    const was = new Node("was-price", original);
     const now = new Node("now-price", "Now $2.50");
-    root.children = [avg, slash, now];
+    root.children = [was, now, avg];
     return root;
 }
 
 catalogData.items["1"] = { daily: [["2026-11-01", 2.5]] };
-const first = card("1", "27.95", "Average $2.50", "/");
+const first = card("1", "Was $27.95", "");
 paintOneCardStat(first);
-assert.equal(first.querySelector(".avg-price").textContent, "Was $27.95");
-assert.equal(first.querySelector(".avg-price").hidden, false);
-assert.equal(first.querySelector(".price-sep").textContent, "\u00b7");
-assert.equal(first.querySelector(".price-sep").hidden, false);
+assert.equal(first.querySelector(".avg-price").hidden, true);
+assert.equal(first.querySelector(".was-price").textContent, "Was $27.95");
 
-catalogData.items["2"] = { daily: [["2026-10-30", 10], ["2026-11-01", 2.5]] };
-const older = card("2", "27.95", "Was $27.95", "\u00b7");
+catalogData.items["2"] = { daily: [["2026-08-01", 30], ["2026-09-25", 10], ["2026-10-30", 4], ["2026-11-01", 2.5]] };
+const older = card("2", "Was $27.95", "Avg $5.50 (we've seen)");
+const document = { querySelectorAll: selector => selector === "#cardGrid .deal-card" ? [first, older] : [] };
+const chartId = null;
+function refreshCharts() {}
+const avg = older.querySelector(".avg-price");
 paintOneCardStat(older);
-assert.equal(older.querySelector(".avg-price").textContent, "Average $6.25");
-assert.equal(older.querySelector(".price-sep").textContent, "/");
+assert.equal(avg.hidden, false);
+assert.equal(avg.textContent, "Avg $5.50 (we've seen)");
+setChartWindow(30);
+assert.equal(avg.textContent, "Avg $3.25 (we've seen)");
+setChartWindow(365);
+assert.equal(avg.textContent, "Avg $11.63 (we've seen)");
+assert.equal(older.querySelector(".was-price").textContent, "Was $27.95");
+assert.equal(older.querySelector(".now-price").textContent, "Now $2.50");
+setChartWindow(90);
+assert.equal(avg.textContent, "Avg $5.50 (we've seen)");
 
-catalogData.items["3"] = { daily: [["2026-11-01", 2.5]] };
-const bare = card("3", "", "Average $2.50", "/");
-paintOneCardStat(bare);
-assert.equal(bare.querySelector(".avg-price").hidden, true);
-assert.equal(bare.querySelector(".price-sep").hidden, true);
-assert.equal(bare.querySelector(".avg-price").textContent.includes("Was"), false);
-assert.equal(bare.querySelector(".avg-price").textContent.includes("Average"), true);
-
-chartWindow = 1;
-catalogData.items["4"] = { daily: [["2026-10-30", 10], ["2026-11-01", 2.5]] };
-const narrowed = card("4", "27.95", "Average $6.25", "/");
-paintOneCardStat(narrowed);
-assert.equal(narrowed.querySelector(".avg-price").textContent, "Was $27.95");
-assert.equal(narrowed.querySelector(".price-sep").textContent, "\u00b7");
-
-chartWindow = 90;
-catalogData.items["6"] = { daily: [["2026-10-31", 2.5], ["2026-11-01", 2.5]] };
-const flat = card("6", "27.95", "Average $2.50", "/");
+catalogData.items["3"] = { daily: [["2026-10-31", 2.5], ["2026-11-01", 2.5]] };
+const flat = card("3", "", "");
 paintOneCardStat(flat);
-assert.equal(flat.querySelector(".avg-price").textContent, "Was $27.95");
-assert.equal(flat.querySelector(".price-sep").textContent, "\u00b7");
+assert.equal(flat.querySelector(".avg-price").hidden, true);
+assert.equal(flat.querySelector(".avg-price").textContent, "");
 
 historyLoaded = false;
-const waiting = card("5", "27.95", "Was $27.95", "\u00b7");
-paintOneCardStat(waiting);
-assert.equal(waiting.querySelector(".avg-price").textContent, "Was $27.95");
+chartWindow = 30;
+paintOneCardStat(older);
+assert.equal(avg.textContent, "Avg $5.50 (we've seen)");
 assert.equal(waited, 1);
 """
         result = subprocess.run(["node", "-e", script], capture_output=True, text=True)

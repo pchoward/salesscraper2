@@ -739,8 +739,8 @@
     .promo-strip[data-open="true"] .promo-offer + .promo-offer { border-top:1px solid var(--grey-200); }
 }
 
-/* Keep the original desktop formatting boxes and image measurements. */
-.card-photo, .card-trend, .card-pricing { display:contents; }
+/* The media and trend wrappers do not create layout boxes. */
+.card-photo, .card-trend { display:contents; }
 
 @media (max-width:640px) {
     #stickyBar .nav-row { padding-block:0; }
@@ -826,23 +826,32 @@
     #cardGrid .deal-card .card-alert:hover, #cardGrid .deal-card .card-quick:hover {
         background:var(--grey-100);
     }
-    .deal-card .card-pricing {
-        display:grid;
-        grid-template-columns:max-content minmax(0,1fr);
-        align-items:center;
-        gap:2px 5px;
-    }
-    .deal-card .card-pricing .card-prices { display:contents; }
-    .deal-card .card-pricing .now-price { grid-column:1; grid-row:1; font-size:15px; }
-    .deal-card .card-pricing .card-offer { grid-column:2; grid-row:1; justify-self:start; }
-    .deal-card .card-pricing .avg-price {
+    .deal-card .card-pricing { grid-template-columns:minmax(0,1fr) auto; }
+    .deal-card .card-pricing .card-prices {
         grid-column:1;
-        grid-row:2;
-        color:var(--text-secondary);
-        font-weight:500;
+        grid-row:1;
+        gap:0 3px;
     }
-    .deal-card .card-pricing .card-sparkline { grid-column:2; grid-row:2; min-width:0; }
-    .deal-card .card-prices .price-sep { display:none; }
+    .deal-card .card-pricing .was-price { font-weight:500; }
+    .deal-card .card-pricing .now-price { font-size:13px; }
+    .deal-card .card-pricing .card-offer {
+        grid-column:2;
+        grid-row:1;
+        align-self:end;
+        justify-self:end;
+    }
+    .deal-card .card-pricing .card-average {
+        grid-row:2;
+        align-self:start;
+        min-height:2.4em;
+        font-size:10px;
+    }
+    .deal-card .card-pricing .avg-price { white-space:normal; }
+    .deal-card .card-pricing .card-sparkline {
+        grid-row:2;
+        min-width:0;
+        contain:inline-size;
+    }
 }
 
 /* The narrowest layout has one wider card per row. */

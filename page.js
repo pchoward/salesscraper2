@@ -731,6 +731,11 @@ function rowPrice(row, technical, ranges, overrides) {
     return Number.isFinite(price) ? price : null;
 }
 
+function offerReferencePrice(row, offer) {
+    if (offer && Number.isFinite(offer.compare)) return offer.compare;
+    return offer?.truck ? NaN : parseFloat(row.dataset.original);
+}
+
 function rowDiscount(row, technical, ranges, overrides) {
     const offer = selectedShoePrice(row, technical, ranges, overrides);
     if (!offer) {
@@ -738,8 +743,7 @@ function rowDiscount(row, technical, ranges, overrides) {
         const parsed = parseFloat(technical !== undefined && row.dataset.priceSaved ? row.dataset.baseDiscount : row.dataset.discount);
         return Number.isFinite(parsed) ? parsed : null;
     }
-    if (offer.truck && !Number.isFinite(offer.compare)) return null;
-    const compare = Number.isFinite(offer.compare) ? offer.compare : parseFloat(row.dataset.original);
+    const compare = offerReferencePrice(row, offer);
     if (!Number.isFinite(compare) || compare <= 0) return null;
     return ((compare - offer.price) / compare) * 100;
 }
@@ -788,6 +792,15 @@ function paintOfferPrices() {
             const symbol = (oldNode.dataset.baseText || "").indexOf("€") >= 0 ? "€" : "$";
             oldNode.textContent = symbol + offer.compare.toFixed(2);
         });
+        const wasNode = node.querySelector(".was-price");
+        if (wasNode) {
+            const compare = offerReferencePrice(node, offer);
+            const hasCompare = Number.isFinite(compare) && compare > 0;
+            const symbol = priceNode.dataset.baseText.includes("€") ? "€" : "$";
+            wasNode.textContent = hasCompare ? "Was " + symbol + compare.toFixed(2) : "";
+            wasNode.hidden = !hasCompare;
+            node.querySelector(".price-sep").hidden = !hasCompare;
+        }
         if (typeof SportSpecFilters !== "undefined") SportSpecFilters.paintCompare(node, offer);
         node.querySelectorAll(".discount").forEach(discountNode => {
             if (!discountNode.dataset.baseText) discountNode.dataset.baseText = discountNode.textContent;
@@ -2344,46 +2357,30 @@ function wireDuals() {
 function paintOneCardStat(card) {
     const node = card ? card.querySelector(".avg-price") : null;
     if (!node) return;
-    const sep = card.querySelector(".price-sep");
+    const days = typeof chartWindow === "number" ? chartWindow : 90;
+    // Reuse the server's default window text to keep its rounding on repaint.
+    node.dataset.defaultAverage ??= node.textContent;
+    if (days === 90) {
+        node.textContent = node.dataset.defaultAverage;
+        node.hidden = !node.textContent;
+        return;
+    }
     if (!historyReady()) {
         whenHistory(() => paintOneCardStat(card));
         return;
     }
-    const days = typeof chartWindow === "number" ? chartWindow : 90;
     const item = (catalog().items || {})[card.dataset.id];
     const daily = item && Array.isArray(item.daily) ? item.daily : [];
     const points = clipDailyPrices(daily, days);
-    const symbol = node.dataset.symbol || "$";
-    const list = parseFloat(card.dataset.original);
-    const hasList = Number.isFinite(list) && list > 0;
-    // One tracked day is not an average, nor are days that all sat at one
-    // price ("Average $7.49 / Now $7.49"). Show the store's list price until
-    // the tracked price moves, matching the server-rendered card.
     const flat = points.length > 0 && points.every(point => Math.abs(Number(point[1]) - Number(points[0][1])) < 0.005);
-    if (points.length < 2 || (flat && hasList)) {
-        if (!hasList) {
-            node.hidden = true;
-            if (sep) sep.hidden = true;
-            return;
-        }
-        node.hidden = false;
-        node.textContent = "Was " + symbol + list.toFixed(2);
-        if (sep) {
-            sep.hidden = false;
-            sep.textContent = "\u00b7";
-        }
-        node.dataset.statWindow = String(chartWindow);
+    node.hidden = points.length < 2 || flat;
+    if (node.hidden) {
+        node.textContent = "";
         return;
     }
-    const sum = points.reduce((total, point) => total + Number(point[1]), 0);
-    const average = sum / points.length;
-    node.hidden = false;
-    node.textContent = "Average " + symbol + average.toFixed(2);
-    if (sep) {
-        sep.hidden = false;
-        sep.textContent = "/";
-    }
-    node.dataset.statWindow = String(chartWindow);
+    const average = points.reduce((total, point) => total + Number(point[1]), 0) / points.length;
+    const symbol = node.dataset.symbol || "$";
+    node.textContent = "Avg " + symbol + average.toFixed(2) + " (we've seen)";
 }
 
 function paintCardStats() {
@@ -5045,7 +5042,10 @@ function setChartWindow(days) {
         const on = String(button.getAttribute("data-window")) === String(chartWindow);
         button.setAttribute("aria-pressed", on ? "true" : "false");
     });
-    if (changed) refreshCharts();
+    if (changed) {
+        paintCardStats();
+        refreshCharts();
+    }
     if (chartId) drawChart(chartId);
 }
 

@@ -3116,6 +3116,20 @@ body.alerts-open { overflow: hidden; }
     color: inherit;
     text-decoration: none;
 }
+.deal-card .card-pricing {
+    display: grid;
+    grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+    align-items: center;
+    gap: 2px 5px;
+}
+.deal-card .card-pricing .card-offer { grid-column: 1 / -1; grid-row: 1; }
+.deal-card .card-pricing .card-prices {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: flex-start;
+}
+.deal-card .card-pricing .card-average { grid-column: 1; grid-row: 3; }
+.deal-card .card-pricing .card-sparkline { grid-column: 2; grid-row: 3; }
 .deal-card .card-prices {
     display: flex;
     flex-wrap: wrap;
@@ -3126,7 +3140,7 @@ body.alerts-open { overflow: hidden; }
     font-size: var(--font-xs);
 }
 .deal-card .now-price,
-.deal-card .avg-price {
+.deal-card .was-price {
     display: inline;
     color: var(--grey-800);
     font-size: var(--font-xs);
@@ -3134,6 +3148,19 @@ body.alerts-open { overflow: hidden; }
     white-space: nowrap;
 }
 .deal-card .price-sep { color: var(--grey-400); }
+.deal-card :is(.was-price, .price-sep)[hidden] { display: none; }
+.deal-card .card-average {
+    margin: 0;
+    min-height: 1.2em;
+    font-size: var(--font-xs);
+    line-height: 1.2;
+}
+.deal-card .card-average .avg-price {
+    display: inline;
+    color: var(--grey-600);
+    font-size: inherit;
+    font-weight: 500;
+}
 .deal-card .card-meta {
     margin: 0;
     color: var(--grey-600);
