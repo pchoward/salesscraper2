@@ -1,55 +1,201 @@
 {
  "changes": {
-  "Mike's Bikes_Protection": [
+  "Bike Mart_Cockpit": [
    {
-    "at_all_time_low": true,
-    "delta": 5.0,
     "item": {
      "at_all_time_low": true,
      "availability": "In stock",
-     "brand": "Thousand Helmets",
-     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Floating_British-Racing-Green_230608_800x_23fd2178-e046-405c-b840-98719003ed07.webp?v=1785887615",
+     "brand": "WTB",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Floating_British-Racing-Green_230608_800x_23fd2178-e046-405c-b840-98719003ed07.webp?v=1785887615",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Back_British-Racing-Green_230608_800x_844f063a-6509-4656-835a-7619e9e1b0c8.webp?v=1785887627",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Profile_British-Racing-Green_POP_230608_800x_8e6b5898-636d-49aa-aec5-cd02e6b7d4c2.webp?v=1785887641",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Interior_British-Racing-Green_230608_800x_e9a1b7e5-e85a-4166-82fd-5e599b45e5df.webp?v=1785887655",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_CarbonBlack-2301_800x_4965be84-e94f-425d-9c3b-9891ffe6b851.webp?v=1785887668",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_StealthBlack-2301_800x_c06da738-cfbe-4800-b27b-0393318933cd.webp?v=1785887681",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_WillowbrookMint-2301_800x_45377d4f-71c4-4053-812e-820478ec2304.webp?v=1785887696",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Floating_Dove-Grey_800x_f59f67c9-695f-47bc-ab26-812ae13739a5.webp?v=1785887759",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_VibrantOrchid-2301_800x_5cbfb607-e06a-4019-824a-94eb5a954b77.webp?v=1785887774",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_Sosilver-2301_800x_6261f955-819a-4883-9eba-5199f28b73cb.webp?v=1785887809",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Heritage-2-Chic-a-cherry-cola.jpg?v=1785887839",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thsd-helm-h2-KH-Pop-45frnt_800x_863e4a5e-2778-4dfe-9416-6f9d60268e55.webp?v=1785887534",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thsd-helm-h2-KH-TF-45frnt_800x_18de3a42-c4e0-4711-8228-572d172f1da7.webp?v=1785887522"
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
+      "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
      ],
-     "name": "Thousand Helmets Heritage 2.0 Helmet",
+     "name": "WTB Rocket Saddle - Black Medium Fusion Form",
+     "part": "Cockpit",
+     "price_new": "71.95",
+     "price_old": "89.95",
+     "product_type": "Saddles",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 129.95,
+       "price": 116.95,
+       "specs": {},
+       "variant_id": 46839154934013
+      },
+      {
+       "available": true,
+       "compare": 119.95,
+       "price": 107.95,
+       "specs": {},
+       "variant_id": 46839154966781
+      },
+      {
+       "available": true,
+       "compare": 104.95,
+       "price": 94.95,
+       "specs": {},
+       "variant_id": 46839154999549
+      },
+      {
+       "available": true,
+       "compare": 89.95,
+       "price": 71.95,
+       "specs": {},
+       "variant_id": 46839155032317
+      }
+     ],
+     "technical_specs": {},
+     "url": "https://www.bikemart.com/products/wtb-rocket-saddle"
+    },
+    "type": "new"
+   }
+  ],
+  "Bike Mart_Frames": [
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "In stock",
+     "brand": "Specialized",
+     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-70_SJ-15-ALLOY-FRM-OBSD-SILDST_HERO-PDP.jpg?v=1762326603",
+     "name": "Specialized 2025 Stumpjumper 15 Alloy Frameset - FOX FLOAT GENIE Performance",
+     "part": "Frames",
+     "price_new": "1699.99",
+     "price_old": "2100.00",
+     "product_type": "Framesets",
+     "store": "Bike Mart",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 2100.0,
+       "price": 1699.99,
+       "specs": {
+        "frame_material": [
+         "Alloy"
+        ],
+        "frame_size": [
+         "S1"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Full suspension"
+        ],
+        "travel_mm": [
+         "145"
+        ]
+       },
+       "variant_id": 46844258451709
+      },
+      {
+       "available": true,
+       "compare": 2100.0,
+       "price": 1699.99,
+       "specs": {
+        "frame_material": [
+         "Alloy"
+        ],
+        "frame_size": [
+         "S6"
+        ],
+        "power": [
+         "Regular"
+        ],
+        "suspension": [
+         "Full suspension"
+        ],
+        "travel_mm": [
+         "145"
+        ]
+       },
+       "variant_id": 46844258517245
+      }
+     ],
+     "technical_specs": {
+      "frame_material": [
+       "Alloy"
+      ],
+      "frame_size": [
+       "S1",
+       "S6"
+      ],
+      "power": [
+       "Regular"
+      ],
+      "suspension": [
+       "Full suspension"
+      ],
+      "travel_mm": [
+       "145"
+      ]
+     },
+     "url": "https://www.bikemart.com/products/2025-stumpjumper-15-alloy-frm"
+    },
+    "type": "new"
+   }
+  ],
+  "Mike's Bikes_Protection": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Woom",
+     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-01.jpg?v=1785261436",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-01.jpg?v=1785261436",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-02.jpg?v=1785261559",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-03_f3bbd80b-14c0-497c-9423-324b6a922526.jpg?v=1785262222",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-04.jpg?v=1785261860",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-05.jpg?v=1785261937",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Buckle.jpg?v=1785262080",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Inside.jpg?v=1785262341",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Charcoal.jpg?v=1785262445",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Red.jpg?v=1785262504",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Grey.jpg?v=1785262556",
+      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Lilac.jpg?v=1785262611"
+     ],
+     "name": "Woom READY Kids' Helmet",
      "part": "Protection",
-     "price_new": "69.99",
-     "price_old": "98.99",
-     "product_type": "APPAREL/HELMETS/RECREATION HELMETS/THOUSAND HERITAGE 2.0",
+     "price_new": "69.95",
+     "price_old": "89.99",
+     "product_type": "APPAREL/HELMETS/KIDS HELMETS/READY",
      "protection_sizes": [
+      "XS",
       "S",
-      "M",
-      "L"
+      "M"
      ],
      "protection_type": "Helmet",
      "store": "Mike's Bikes",
      "technical_offers": [
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
+         "Kids"
         ],
-        "certification": [
-         "CPSC (US bike)"
+        "prot_size": [
+         "XS"
         ],
-        "helmet_style": [
-         "Road / commuter"
+        "protects": [
+         "Helmets"
+        ]
+       },
+       "variant_id": 45119299092549
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 69.95,
+       "specs": {
+        "age": [
+         "Kids"
         ],
         "prot_size": [
          "S"
@@ -58,21 +204,15 @@
          "Helmets"
         ]
        },
-       "variant_id": 41807726018629
+       "variant_id": 45119299223621
       },
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
+         "Kids"
         ],
         "prot_size": [
          "M"
@@ -81,21 +221,15 @@
          "Helmets"
         ]
        },
-       "variant_id": 41807726149701
+       "variant_id": 45119299354693
       },
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
+         "Kids"
         ],
         "prot_size": [
          "S"
@@ -104,21 +238,15 @@
          "Helmets"
         ]
        },
-       "variant_id": 44680870920261
+       "variant_id": 45119299321925
       },
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
+         "Kids"
         ],
         "prot_size": [
          "M"
@@ -127,44 +255,32 @@
          "Helmets"
         ]
        },
-       "variant_id": 44680870953029
+       "variant_id": 45119298961477
       },
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
+         "Kids"
         ],
         "prot_size": [
-         "L"
+         "XS"
         ],
         "protects": [
          "Helmets"
         ]
        },
-       "variant_id": 44680870985797
+       "variant_id": 45119299125317
       },
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
+         "Kids"
         ],
         "prot_size": [
          "S"
@@ -173,21 +289,15 @@
          "Helmets"
         ]
        },
-       "variant_id": 44680871018565
+       "variant_id": 45119299190853
       },
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
+         "Kids"
         ],
         "prot_size": [
          "M"
@@ -196,44 +306,32 @@
          "Helmets"
         ]
        },
-       "variant_id": 41807726477381
+       "variant_id": 45119298994245
       },
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
+         "Kids"
         ],
         "prot_size": [
-         "L"
+         "XS"
         ],
         "protects": [
          "Helmets"
         ]
        },
-       "variant_id": 41807726608453
+       "variant_id": 45119299059781
       },
       {
        "available": true,
-       "compare": 98.99,
-       "price": 69.99,
+       "compare": 89.99,
+       "price": 69.95,
        "specs": {
         "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
+         "Kids"
         ],
         "prot_size": [
          "S"
@@ -242,245 +340,91 @@
          "Helmets"
         ]
        },
-       "variant_id": 42679538450501
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 42679538516037
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056175685
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056208453
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056241221
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056273989
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056306757
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056339525
+       "variant_id": 45119299256389
       }
      ],
      "technical_specs": {
       "age": [
-       "Adult"
-      ],
-      "certification": [
-       "CPSC (US bike)"
-      ],
-      "helmet_style": [
-       "Road / commuter"
+       "Kids"
       ],
       "prot_size": [
-       "L",
        "M",
-       "S"
+       "S",
+       "XS"
       ],
       "protects": [
        "Helmets"
       ]
      },
-     "url": "https://mikesbikes.com/products/thousand-heritage-2-0-helmet",
-     "width": 2.0
+     "url": "https://mikesbikes.com/products/woom-ready-kids-helmet"
     },
-    "name": "Thousand Helmets Heritage 2.0 Helmet",
-    "new": "69.99",
-    "old": "74.99",
-    "percent_vs_prior": 6.7,
-    "type": "price_drop",
-    "url": "https://mikesbikes.com/products/thousand-heritage-2-0-helmet"
-   },
+    "type": "new"
+   }
+  ],
+  "evo_Protection": [
    {
-    "at_all_time_low": true,
-    "delta": 7.0,
     "item": {
-     "at_all_time_low": true,
+     "at_all_time_low": false,
      "availability": "In stock",
-     "brand": "Thousand Helmets",
-     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_001_800x_bc70761c-ceb9-4b2c-8377-20e23f9fc34d.webp?v=1773087299",
+     "brand": "Dakine",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379241.jpg?v=1791927513",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_001_800x_bc70761c-ceb9-4b2c-8377-20e23f9fc34d.webp?v=1773087299",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_002_800x_ae40e8e5-8c37-4295-a6ca-7a6427b6578c.webp?v=1773087339",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_009_800x_92ec3983-5dd2-4e3b-909d-dab28ccad645.webp?v=1773087444",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_006_800x_3ef0991a-c139-4d0b-bf29-e1bd23316e44.webp?v=1773087484",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_003_800x_fd429fae-1708-4ff5-b8f9-d924a9a2c803.webp?v=1773087499",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_007_800x_3a648365-a52b-455d-a03c-cbb13041e7de.webp?v=1773087514",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Blue_MIPS_Helmet_001_800x_dcde6637-4116-4277-ac00-25f34aeef8d6.webp?v=1773087567",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/bike-helmet-visor-racer-black-matte-black_800x_df9625e3-bf44-4c56-921d-35dad79fcd3f.webp?v=1773087622",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-helmet-chapter-studio-metro-white-3_800x_49d6779b-d072-4a57-9463-6708e803e6e3.webp?v=1773087689",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-helmet-chapter-studio-desert-sage-3_800x_43cbfb3b-2110-4da3-b367-5263c4d252fd.webp?v=1773087739"
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379241.jpg?v=1791927513",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379244.jpg?v=1791927515",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379248.jpg?v=1791927513",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379246.jpg?v=1791927513",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379242.jpg?v=1791927514",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379240.jpg?v=1791927513",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257245.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257243.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257244.jpg?v=1767739438",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257242.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257247.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257246.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257225.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257231.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257223.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257220.jpg?v=1767739434",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257226.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257224.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257240.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257236.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257241.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257239.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257235.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257237.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257228.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257229.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257227.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257233.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257234.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257230.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257232.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257238.jpg?v=1767739436"
      ],
-     "name": "Thousand Helmets Chapter MiPS Helmet",
+     "name": "Dakine Slayer MIPS Bike Helmet",
      "part": "Protection",
-     "price_new": "101.99",
-     "price_old": "144.99",
-     "product_type": "APPAREL/HELMETS/RECREATION HELMETS/THOUSAND CHAPTER",
+     "price_new": "108.00",
+     "price_old": "144.00",
+     "product_type": "Bike Helmets",
      "protection_sizes": [
-      "S",
-      "M",
-      "L"
+      "L",
+      "XL"
      ],
      "protection_type": "Helmet",
-     "store": "Mike's Bikes",
+     "store": "evo",
      "technical_offers": [
       {
        "available": true,
-       "compare": 144.99,
-       "price": 101.99,
+       "compare": 144.0,
+       "price": 108.0,
        "specs": {
         "age": [
          "Adult"
         ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
         "prot_size": [
-         "M"
+         "L",
+         "XL"
         ],
         "protects": [
          "Helmets"
@@ -489,21 +433,19 @@
          "MIPS"
         ]
        },
-       "variant_id": 40566148792389
+       "variant_id": 46153428435094
       },
       {
        "available": true,
-       "compare": 144.99,
-       "price": 101.99,
+       "compare": 144.0,
+       "price": 108.0,
        "specs": {
         "age": [
          "Adult"
         ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
         "prot_size": [
-         "M"
+         "L",
+         "XL"
         ],
         "protects": [
          "Helmets"
@@ -512,21 +454,19 @@
          "MIPS"
         ]
        },
-       "variant_id": 41807710322757
+       "variant_id": 46153428566166
       },
       {
        "available": true,
-       "compare": 144.99,
-       "price": 101.99,
+       "compare": 144.0,
+       "price": 108.0,
        "specs": {
         "age": [
          "Adult"
         ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
         "prot_size": [
-         "S"
+         "L",
+         "XL"
         ],
         "protects": [
          "Helmets"
@@ -535,89 +475,16 @@
          "MIPS"
         ]
        },
-       "variant_id": 44680849489989
-      },
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 44680849522757
-      },
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 44680849555525
-      },
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 44680849621061
+       "variant_id": 46153428500630
       }
      ],
      "technical_specs": {
       "age": [
        "Adult"
       ],
-      "helmet_style": [
-       "Road / commuter"
-      ],
       "prot_size": [
        "L",
-       "M",
-       "S"
+       "XL"
       ],
       "protects": [
        "Helmets"
@@ -626,14 +493,671 @@
        "MIPS"
       ]
      },
-     "url": "https://mikesbikes.com/products/thousand-chapter-mips-helmet"
+     "url": "https://www.evo.com/products/274053-dakine-slayer-mips-bike-helmet"
     },
-    "name": "Thousand Helmets Chapter MiPS Helmet",
-    "new": "101.99",
-    "old": "108.99",
-    "percent_vs_prior": 6.4,
-    "type": "price_drop",
-    "url": "https://mikesbikes.com/products/thousand-chapter-mips-helmet"
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Dakine",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257218.jpg?v=1767739435",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257218.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257216.jpg?v=1767739434",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257222.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257219.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257221.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257217.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257204.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257198.jpg?v=1767739433",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257203.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257207.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257208.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257205.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257206.jpg?v=1767739438",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257209.jpg?v=1767739434",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257211.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257215.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257210.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257213.jpg?v=1767739437",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257214.jpg?v=1767739436",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257212.jpg?v=1767739435"
+     ],
+     "name": "Dakine Slayer Bike Helmet",
+     "part": "Protection",
+     "price_new": "76.50",
+     "price_old": "102.00",
+     "product_type": "Bike Helmets",
+     "protection_sizes": [
+      "L",
+      "XL"
+     ],
+     "protection_type": "Helmet",
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 102.0,
+       "price": 76.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "L",
+         "XL"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46153428271254
+      },
+      {
+       "available": true,
+       "compare": 102.0,
+       "price": 76.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "L",
+         "XL"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 46153428336790
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "prot_size": [
+       "L",
+       "XL"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.evo.com/products/274052-dakine-slayer-bike-helmet"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Dakine",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379007.jpg?v=1791902368",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379007.jpg?v=1791902368",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379003.jpg?v=1791902368",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379006.jpg?v=1791902368",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257142.jpg?v=1767739434",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257141.jpg?v=1767739433",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257138.jpg?v=1767739434",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187678.jpg?v=1767736733",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187679.jpg?v=1767736732",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-789184.jpg?v=1767748780",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-789183.jpg?v=1767748777",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-990215.jpg?v=1767757012",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-990212.jpg?v=1767757013",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187681.jpg?v=1767736733",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187680.jpg?v=1767736733"
+     ],
+     "name": "Dakine Covert Bike Gloves - Women's",
+     "part": "Protection",
+     "price_new": "26.25",
+     "price_old": "35.00",
+     "product_type": "Bike Gloves",
+     "protection_sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+     ],
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "XS"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115590373526
+      },
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115590406294
+      },
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115590439062
+      },
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115590471830
+      },
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "XS"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115589554326
+      },
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115589587094
+      },
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115589619862
+      },
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115589652630
+      },
+      {
+       "available": true,
+       "compare": 35.0,
+       "price": 26.25,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "XL"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46115589685398
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "prot_size": [
+       "L",
+       "M",
+       "S",
+       "XL",
+       "XS"
+      ],
+      "protects": [
+       "Gloves"
+      ]
+     },
+     "url": "https://www.evo.com/products/194619-dakine-covert-bike-gloves-women-s"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Dakine",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379002.jpg?v=1791902368",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379002.jpg?v=1791902368",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379013.jpg?v=1791902368",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379010.jpg?v=1791902368",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-786140.jpg?v=1767748692",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-786139.jpg?v=1767748692",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166008.jpg?v=1767735887",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166010.jpg?v=1767735883",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355032.jpg?v=1789750177",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355026.jpg?v=1789750177",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355023.jpg?v=1789750177",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355027.jpg?v=1789750177",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355024.jpg?v=1789750177",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355025.jpg?v=1789750177"
+     ],
+     "name": "Dakine Syncline Gel Bike Gloves",
+     "part": "Protection",
+     "price_new": "30.00",
+     "price_old": "40.00",
+     "product_type": "Bike Gloves",
+     "protection_sizes": [
+      "S",
+      "M"
+     ],
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 40.0,
+       "price": 30.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46118127501462
+      },
+      {
+       "available": true,
+       "compare": 40.0,
+       "price": 30.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46118127534230
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "prot_size": [
+       "M",
+       "S"
+      ],
+      "protects": [
+       "Gloves"
+      ]
+     },
+     "url": "https://www.evo.com/products/198245-dakine-syncline-gel-bike-gloves"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Dakine",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166037.jpg?v=1767735885",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166037.jpg?v=1767735885",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166036.jpg?v=1767735886",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166038.jpg?v=1767735885"
+     ],
+     "name": "Dakine Slayer Pro D3O Bike Gloves",
+     "part": "Protection",
+     "price_new": "45.75",
+     "price_old": "61.00",
+     "product_type": "Bike Gloves",
+     "protection_sizes": [
+      "M",
+      "L"
+     ],
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 61.0,
+       "price": 45.75,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46149772279958
+      },
+      {
+       "available": true,
+       "compare": 61.0,
+       "price": 45.75,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46149772312726
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "prot_size": [
+       "L",
+       "M"
+      ],
+      "protects": [
+       "Gloves"
+      ]
+     },
+     "url": "https://www.evo.com/products/258404-dakine-slayer-pro-d3o-bike-gloves"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Dakine",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257168.jpg?v=1767739433",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257168.jpg?v=1767739433",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257167.jpg?v=1767739434",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257170.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257164.jpg?v=1767739433",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257165.jpg?v=1767739431",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257163.jpg?v=1767739435",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257169.jpg?v=1767739434"
+     ],
+     "name": "Dakine Sentinel 2.0 Bike Gloves",
+     "part": "Protection",
+     "price_new": "49.50",
+     "price_old": "66.00",
+     "product_type": "Bike Gloves",
+     "protection_sizes": [
+      "M",
+      "L",
+      "XL"
+     ],
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 66.0,
+       "price": 49.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46153427091606
+      },
+      {
+       "available": true,
+       "compare": 66.0,
+       "price": 49.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46153427124374
+      },
+      {
+       "available": true,
+       "compare": 66.0,
+       "price": 49.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "XL"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46153427157142
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "prot_size": [
+       "L",
+       "M",
+       "XL"
+      ],
+      "protects": [
+       "Gloves"
+      ]
+     },
+     "url": "https://www.evo.com/products/274045-dakine-sentinel-2-0-bike-gloves",
+     "width": 2.0
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "In stock",
+     "brand": "Dakine",
+     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257174.jpg?v=1767739433",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257174.jpg?v=1767739433",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257173.jpg?v=1767739433",
+      "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257175.jpg?v=1767739435"
+     ],
+     "name": "Dakine Team Cross-X 2.0 Bike Gloves Graham Agassiz",
+     "part": "Protection",
+     "price_new": "34.50",
+     "price_old": "46.00",
+     "product_type": "Bike Gloves",
+     "protection_sizes": [
+      "S",
+      "M",
+      "XL"
+     ],
+     "protection_type": null,
+     "store": "evo",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 46.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46079047893142
+      },
+      {
+       "available": true,
+       "compare": 46.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46153427189910
+      },
+      {
+       "available": true,
+       "compare": 46.0,
+       "price": 34.5,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "prot_size": [
+         "XL"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 46153427255446
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "prot_size": [
+       "M",
+       "S",
+       "XL"
+      ],
+      "protects": [
+       "Gloves"
+      ]
+     },
+     "url": "https://www.evo.com/products/274046-dakine-team-cross-x-2-0-bike-gloves-graham-agassiz",
+     "width": 2.0
+    },
+    "type": "new"
    }
   ]
  },
@@ -5322,651 +5846,1139 @@
     "part": "Tires"
    }
   ],
-  "drops": [
+  "drops": [],
+  "new_items": [
    {
-    "at_all_time_low": true,
-    "delta": 5.0,
-    "item": {
-     "at_all_time_low": true,
-     "availability": "In stock",
-     "brand": "Thousand Helmets",
-     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Floating_British-Racing-Green_230608_800x_23fd2178-e046-405c-b840-98719003ed07.webp?v=1785887615",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Floating_British-Racing-Green_230608_800x_23fd2178-e046-405c-b840-98719003ed07.webp?v=1785887615",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Back_British-Racing-Green_230608_800x_844f063a-6509-4656-835a-7619e9e1b0c8.webp?v=1785887627",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Profile_British-Racing-Green_POP_230608_800x_8e6b5898-636d-49aa-aec5-cd02e6b7d4c2.webp?v=1785887641",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Interior_British-Racing-Green_230608_800x_e9a1b7e5-e85a-4166-82fd-5e599b45e5df.webp?v=1785887655",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_CarbonBlack-2301_800x_4965be84-e94f-425d-9c3b-9891ffe6b851.webp?v=1785887668",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_StealthBlack-2301_800x_c06da738-cfbe-4800-b27b-0393318933cd.webp?v=1785887681",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_WillowbrookMint-2301_800x_45377d4f-71c4-4053-812e-820478ec2304.webp?v=1785887696",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Thsd_H2_Floating_Dove-Grey_800x_f59f67c9-695f-47bc-ab26-812ae13739a5.webp?v=1785887759",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_VibrantOrchid-2301_800x_5cbfb607-e06a-4019-824a-94eb5a954b77.webp?v=1785887774",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/7Thsd_H2_Floating_Sosilver-2301_800x_6261f955-819a-4883-9eba-5199f28b73cb.webp?v=1785887809",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Heritage-2-Chic-a-cherry-cola.jpg?v=1785887839",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thsd-helm-h2-KH-Pop-45frnt_800x_863e4a5e-2778-4dfe-9416-6f9d60268e55.webp?v=1785887534",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thsd-helm-h2-KH-TF-45frnt_800x_18de3a42-c4e0-4711-8228-572d172f1da7.webp?v=1785887522"
-     ],
-     "name": "Thousand Helmets Heritage 2.0 Helmet",
-     "part": "Protection",
-     "price_new": "69.99",
-     "price_old": "98.99",
-     "product_type": "APPAREL/HELMETS/RECREATION HELMETS/THOUSAND HERITAGE 2.0",
-     "protection_sizes": [
-      "S",
-      "M",
-      "L"
-     ],
-     "protection_type": "Helmet",
-     "store": "Mike's Bikes",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 41807726018629
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Woom",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-01.jpg?v=1785261436",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-01.jpg?v=1785261436",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-02.jpg?v=1785261559",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-03_f3bbd80b-14c0-497c-9423-324b6a922526.jpg?v=1785262222",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-04.jpg?v=1785261860",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Mint-05.jpg?v=1785261937",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Buckle.jpg?v=1785262080",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Inside.jpg?v=1785262341",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Charcoal.jpg?v=1785262445",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Red.jpg?v=1785262504",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Grey.jpg?v=1785262556",
+     "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/READY-Kids-Helmet_Lilac.jpg?v=1785262611"
+    ],
+    "name": "Woom READY Kids' Helmet",
+    "part": "Protection",
+    "price_new": "69.95",
+    "price_old": "89.99",
+    "product_type": "APPAREL/HELMETS/KIDS HELMETS/READY",
+    "protection_sizes": [
+     "XS",
+     "S",
+     "M"
+    ],
+    "protection_type": "Helmet",
+    "store": "Mike's Bikes",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "XS"
+       ],
+       "protects": [
+        "Helmets"
+       ]
       },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 41807726149701
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 44680870920261
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 44680870953029
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 44680870985797
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 44680871018565
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 41807726477381
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 41807726608453
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 42679538450501
-      },
-      {
-       "available": true,
-       "compare": 98.99,
-       "price": 69.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 42679538516037
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056175685
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056208453
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056241221
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056273989
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056306757
-      },
-      {
-       "available": true,
-       "compare": 104.99,
-       "price": 73.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "certification": [
-         "CPSC (US bike)"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ]
-       },
-       "variant_id": 45410056339525
-      }
-     ],
-     "technical_specs": {
-      "age": [
-       "Adult"
-      ],
-      "certification": [
-       "CPSC (US bike)"
-      ],
-      "helmet_style": [
-       "Road / commuter"
-      ],
-      "prot_size": [
-       "L",
-       "M",
-       "S"
-      ],
-      "protects": [
-       "Helmets"
-      ]
+      "variant_id": 45119299092549
      },
-     "url": "https://mikesbikes.com/products/thousand-heritage-2-0-helmet",
-     "width": 2.0
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119299223621
+     },
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119299354693
+     },
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119299321925
+     },
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119298961477
+     },
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "XS"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119299125317
+     },
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119299190853
+     },
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119298994245
+     },
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "XS"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119299059781
+     },
+     {
+      "available": true,
+      "compare": 89.99,
+      "price": 69.95,
+      "specs": {
+       "age": [
+        "Kids"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Helmets"
+       ]
+      },
+      "variant_id": 45119299256389
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Kids"
+     ],
+     "prot_size": [
+      "M",
+      "S",
+      "XS"
+     ],
+     "protects": [
+      "Helmets"
+     ]
     },
-    "name": "Thousand Helmets Heritage 2.0 Helmet",
-    "new": "69.99",
-    "old": "74.99",
-    "percent_vs_prior": 6.7,
-    "type": "price_drop",
-    "url": "https://mikesbikes.com/products/thousand-heritage-2-0-helmet"
+    "url": "https://mikesbikes.com/products/woom-ready-kids-helmet"
    },
    {
     "at_all_time_low": true,
-    "delta": 7.0,
-    "item": {
-     "at_all_time_low": true,
-     "availability": "In stock",
-     "brand": "Thousand Helmets",
-     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_001_800x_bc70761c-ceb9-4b2c-8377-20e23f9fc34d.webp?v=1773087299",
-     "images": [
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_001_800x_bc70761c-ceb9-4b2c-8377-20e23f9fc34d.webp?v=1773087299",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_002_800x_ae40e8e5-8c37-4295-a6ca-7a6427b6578c.webp?v=1773087339",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_009_800x_92ec3983-5dd2-4e3b-909d-dab28ccad645.webp?v=1773087444",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_006_800x_3ef0991a-c139-4d0b-bf29-e1bd23316e44.webp?v=1773087484",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_003_800x_fd429fae-1708-4ff5-b8f9-d924a9a2c803.webp?v=1773087499",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/White_MIPS_Helmet_007_800x_3a648365-a52b-455d-a03c-cbb13041e7de.webp?v=1773087514",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Blue_MIPS_Helmet_001_800x_dcde6637-4116-4277-ac00-25f34aeef8d6.webp?v=1773087567",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/bike-helmet-visor-racer-black-matte-black_800x_df9625e3-bf44-4c56-921d-35dad79fcd3f.webp?v=1773087622",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-helmet-chapter-studio-metro-white-3_800x_49d6779b-d072-4a57-9463-6708e803e6e3.webp?v=1773087689",
-      "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/thousand-helmet-chapter-studio-desert-sage-3_800x_43cbfb3b-2110-4da3-b367-5263c4d252fd.webp?v=1773087739"
-     ],
-     "name": "Thousand Helmets Chapter MiPS Helmet",
-     "part": "Protection",
-     "price_new": "101.99",
-     "price_old": "144.99",
-     "product_type": "APPAREL/HELMETS/RECREATION HELMETS/THOUSAND CHAPTER",
-     "protection_sizes": [
-      "S",
-      "M",
-      "L"
-     ],
-     "protection_type": "Helmet",
-     "store": "Mike's Bikes",
-     "technical_offers": [
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 40566148792389
+    "availability": "In stock",
+    "brand": "Specialized",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/73325-70_SJ-15-ALLOY-FRM-OBSD-SILDST_HERO-PDP.jpg?v=1762326603",
+    "name": "Specialized 2025 Stumpjumper 15 Alloy Frameset - FOX FLOAT GENIE Performance",
+    "part": "Frames",
+    "price_new": "1699.99",
+    "price_old": "2100.00",
+    "product_type": "Framesets",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 2100.0,
+      "price": 1699.99,
+      "specs": {
+       "frame_material": [
+        "Alloy"
+       ],
+       "frame_size": [
+        "S1"
+       ],
+       "power": [
+        "Regular"
+       ],
+       "suspension": [
+        "Full suspension"
+       ],
+       "travel_mm": [
+        "145"
+       ]
       },
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "M"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 41807710322757
-      },
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 44680849489989
-      },
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 44680849522757
-      },
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "S"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 44680849555525
-      },
-      {
-       "available": true,
-       "compare": 144.99,
-       "price": 101.99,
-       "specs": {
-        "age": [
-         "Adult"
-        ],
-        "helmet_style": [
-         "Road / commuter"
-        ],
-        "prot_size": [
-         "L"
-        ],
-        "protects": [
-         "Helmets"
-        ],
-        "rotational": [
-         "MIPS"
-        ]
-       },
-       "variant_id": 44680849621061
-      }
-     ],
-     "technical_specs": {
-      "age": [
-       "Adult"
-      ],
-      "helmet_style": [
-       "Road / commuter"
-      ],
-      "prot_size": [
-       "L",
-       "M",
-       "S"
-      ],
-      "protects": [
-       "Helmets"
-      ],
-      "rotational": [
-       "MIPS"
-      ]
+      "variant_id": 46844258451709
      },
-     "url": "https://mikesbikes.com/products/thousand-chapter-mips-helmet"
+     {
+      "available": true,
+      "compare": 2100.0,
+      "price": 1699.99,
+      "specs": {
+       "frame_material": [
+        "Alloy"
+       ],
+       "frame_size": [
+        "S6"
+       ],
+       "power": [
+        "Regular"
+       ],
+       "suspension": [
+        "Full suspension"
+       ],
+       "travel_mm": [
+        "145"
+       ]
+      },
+      "variant_id": 46844258517245
+     }
+    ],
+    "technical_specs": {
+     "frame_material": [
+      "Alloy"
+     ],
+     "frame_size": [
+      "S1",
+      "S6"
+     ],
+     "power": [
+      "Regular"
+     ],
+     "suspension": [
+      "Full suspension"
+     ],
+     "travel_mm": [
+      "145"
+     ]
     },
-    "name": "Thousand Helmets Chapter MiPS Helmet",
-    "new": "101.99",
-    "old": "108.99",
-    "percent_vs_prior": 6.4,
-    "type": "price_drop",
-    "url": "https://mikesbikes.com/products/thousand-chapter-mips-helmet"
+    "url": "https://www.bikemart.com/products/2025-stumpjumper-15-alloy-frm"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "In stock",
+    "brand": "WTB",
+    "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1550.jpg?v=1762260246",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1551.jpg?v=1762260246",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1552.jpg?v=1762260245",
+     "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SA1553.jpg?v=1762260246"
+    ],
+    "name": "WTB Rocket Saddle - Black Medium Fusion Form",
+    "part": "Cockpit",
+    "price_new": "71.95",
+    "price_old": "89.95",
+    "product_type": "Saddles",
+    "store": "Bike Mart",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 129.95,
+      "price": 116.95,
+      "specs": {},
+      "variant_id": 46839154934013
+     },
+     {
+      "available": true,
+      "compare": 119.95,
+      "price": 107.95,
+      "specs": {},
+      "variant_id": 46839154966781
+     },
+     {
+      "available": true,
+      "compare": 104.95,
+      "price": 94.95,
+      "specs": {},
+      "variant_id": 46839154999549
+     },
+     {
+      "available": true,
+      "compare": 89.95,
+      "price": 71.95,
+      "specs": {},
+      "variant_id": 46839155032317
+     }
+    ],
+    "technical_specs": {},
+    "url": "https://www.bikemart.com/products/wtb-rocket-saddle"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Dakine",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379241.jpg?v=1791927513",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379241.jpg?v=1791927513",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379244.jpg?v=1791927515",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379248.jpg?v=1791927513",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379246.jpg?v=1791927513",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379242.jpg?v=1791927514",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379240.jpg?v=1791927513",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257245.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257243.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257244.jpg?v=1767739438",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257242.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257247.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257246.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257225.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257231.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257223.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257220.jpg?v=1767739434",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257226.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257224.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257240.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257236.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257241.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257239.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257235.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257237.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257228.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257229.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257227.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257233.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257234.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257230.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257232.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257238.jpg?v=1767739436"
+    ],
+    "name": "Dakine Slayer MIPS Bike Helmet",
+    "part": "Protection",
+    "price_new": "108.00",
+    "price_old": "144.00",
+    "product_type": "Bike Helmets",
+    "protection_sizes": [
+     "L",
+     "XL"
+    ],
+    "protection_type": "Helmet",
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 144.0,
+      "price": 108.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L",
+        "XL"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46153428435094
+     },
+     {
+      "available": true,
+      "compare": 144.0,
+      "price": 108.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L",
+        "XL"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46153428566166
+     },
+     {
+      "available": true,
+      "compare": 144.0,
+      "price": 108.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L",
+        "XL"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46153428500630
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "prot_size": [
+      "L",
+      "XL"
+     ],
+     "protects": [
+      "Helmets"
+     ],
+     "rotational": [
+      "MIPS"
+     ]
+    },
+    "url": "https://www.evo.com/products/274053-dakine-slayer-mips-bike-helmet"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Dakine",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257218.jpg?v=1767739435",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257218.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257216.jpg?v=1767739434",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257222.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257219.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257221.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257217.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257204.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257198.jpg?v=1767739433",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257203.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257207.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257208.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257205.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257206.jpg?v=1767739438",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257209.jpg?v=1767739434",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257211.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257215.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257210.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257213.jpg?v=1767739437",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257214.jpg?v=1767739436",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257212.jpg?v=1767739435"
+    ],
+    "name": "Dakine Slayer Bike Helmet",
+    "part": "Protection",
+    "price_new": "76.50",
+    "price_old": "102.00",
+    "product_type": "Bike Helmets",
+    "protection_sizes": [
+     "L",
+     "XL"
+    ],
+    "protection_type": "Helmet",
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 102.0,
+      "price": 76.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L",
+        "XL"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46153428271254
+     },
+     {
+      "available": true,
+      "compare": 102.0,
+      "price": 76.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L",
+        "XL"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 46153428336790
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "prot_size": [
+      "L",
+      "XL"
+     ],
+     "protects": [
+      "Helmets"
+     ],
+     "rotational": [
+      "MIPS"
+     ]
+    },
+    "url": "https://www.evo.com/products/274052-dakine-slayer-bike-helmet"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Dakine",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379007.jpg?v=1791902368",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379007.jpg?v=1791902368",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379003.jpg?v=1791902368",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379006.jpg?v=1791902368",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257142.jpg?v=1767739434",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257141.jpg?v=1767739433",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257138.jpg?v=1767739434",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187678.jpg?v=1767736733",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187679.jpg?v=1767736732",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-789184.jpg?v=1767748780",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-789183.jpg?v=1767748777",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-990215.jpg?v=1767757012",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-990212.jpg?v=1767757013",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187681.jpg?v=1767736733",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187680.jpg?v=1767736733"
+    ],
+    "name": "Dakine Covert Bike Gloves - Women's",
+    "part": "Protection",
+    "price_new": "26.25",
+    "price_old": "35.00",
+    "product_type": "Bike Gloves",
+    "protection_sizes": [
+     "XS",
+     "S",
+     "M",
+     "L",
+     "XL"
+    ],
+    "protection_type": null,
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "XS"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115590373526
+     },
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115590406294
+     },
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115590439062
+     },
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115590471830
+     },
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "XS"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115589554326
+     },
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115589587094
+     },
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115589619862
+     },
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115589652630
+     },
+     {
+      "available": true,
+      "compare": 35.0,
+      "price": 26.25,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "XL"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46115589685398
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "prot_size": [
+      "L",
+      "M",
+      "S",
+      "XL",
+      "XS"
+     ],
+     "protects": [
+      "Gloves"
+     ]
+    },
+    "url": "https://www.evo.com/products/194619-dakine-covert-bike-gloves-women-s"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Dakine",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379002.jpg?v=1791902368",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379002.jpg?v=1791902368",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379013.jpg?v=1791902368",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1379010.jpg?v=1791902368",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-786140.jpg?v=1767748692",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-786139.jpg?v=1767748692",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166008.jpg?v=1767735887",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166010.jpg?v=1767735883",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355032.jpg?v=1789750177",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355026.jpg?v=1789750177",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355023.jpg?v=1789750177",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355027.jpg?v=1789750177",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355024.jpg?v=1789750177",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1355025.jpg?v=1789750177"
+    ],
+    "name": "Dakine Syncline Gel Bike Gloves",
+    "part": "Protection",
+    "price_new": "30.00",
+    "price_old": "40.00",
+    "product_type": "Bike Gloves",
+    "protection_sizes": [
+     "S",
+     "M"
+    ],
+    "protection_type": null,
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 40.0,
+      "price": 30.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46118127501462
+     },
+     {
+      "available": true,
+      "compare": 40.0,
+      "price": 30.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46118127534230
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "prot_size": [
+      "M",
+      "S"
+     ],
+     "protects": [
+      "Gloves"
+     ]
+    },
+    "url": "https://www.evo.com/products/198245-dakine-syncline-gel-bike-gloves"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Dakine",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166037.jpg?v=1767735885",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166037.jpg?v=1767735885",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166036.jpg?v=1767735886",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1166038.jpg?v=1767735885"
+    ],
+    "name": "Dakine Slayer Pro D3O Bike Gloves",
+    "part": "Protection",
+    "price_new": "45.75",
+    "price_old": "61.00",
+    "product_type": "Bike Gloves",
+    "protection_sizes": [
+     "M",
+     "L"
+    ],
+    "protection_type": null,
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 61.0,
+      "price": 45.75,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46149772279958
+     },
+     {
+      "available": true,
+      "compare": 61.0,
+      "price": 45.75,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46149772312726
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "prot_size": [
+      "L",
+      "M"
+     ],
+     "protects": [
+      "Gloves"
+     ]
+    },
+    "url": "https://www.evo.com/products/258404-dakine-slayer-pro-d3o-bike-gloves"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Dakine",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257168.jpg?v=1767739433",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257168.jpg?v=1767739433",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257167.jpg?v=1767739434",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257170.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257164.jpg?v=1767739433",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257165.jpg?v=1767739431",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257163.jpg?v=1767739435",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257169.jpg?v=1767739434"
+    ],
+    "name": "Dakine Sentinel 2.0 Bike Gloves",
+    "part": "Protection",
+    "price_new": "49.50",
+    "price_old": "66.00",
+    "product_type": "Bike Gloves",
+    "protection_sizes": [
+     "M",
+     "L",
+     "XL"
+    ],
+    "protection_type": null,
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 66.0,
+      "price": 49.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46153427091606
+     },
+     {
+      "available": true,
+      "compare": 66.0,
+      "price": 49.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "L"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46153427124374
+     },
+     {
+      "available": true,
+      "compare": 66.0,
+      "price": 49.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "XL"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46153427157142
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "prot_size": [
+      "L",
+      "M",
+      "XL"
+     ],
+     "protects": [
+      "Gloves"
+     ]
+    },
+    "url": "https://www.evo.com/products/274045-dakine-sentinel-2-0-bike-gloves",
+    "width": 2.0
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "In stock",
+    "brand": "Dakine",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257174.jpg?v=1767739433",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257174.jpg?v=1767739433",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257173.jpg?v=1767739433",
+     "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1257175.jpg?v=1767739435"
+    ],
+    "name": "Dakine Team Cross-X 2.0 Bike Gloves Graham Agassiz",
+    "part": "Protection",
+    "price_new": "34.50",
+    "price_old": "46.00",
+    "product_type": "Bike Gloves",
+    "protection_sizes": [
+     "S",
+     "M",
+     "XL"
+    ],
+    "protection_type": null,
+    "store": "evo",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 46.0,
+      "price": 34.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46079047893142
+     },
+     {
+      "available": true,
+      "compare": 46.0,
+      "price": 34.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "M"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46153427189910
+     },
+     {
+      "available": true,
+      "compare": 46.0,
+      "price": 34.5,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "prot_size": [
+        "XL"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 46153427255446
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "prot_size": [
+      "M",
+      "S",
+      "XL"
+     ],
+     "protects": [
+      "Gloves"
+     ]
+    },
+    "url": "https://www.evo.com/products/274046-dakine-team-cross-x-2-0-bike-gloves-graham-agassiz",
+    "width": 2.0
    }
   ],
-  "new_items": [],
   "removed": []
  },
  "failed_keys": [],
  "fingerprints": {
-  "data": "8f5d14b48748c03939fd618f755c88bff7855e0e235d30ab7f3c95febfa8b319",
-  "history": "d7ca4dff7b70134bb93f8fb8727bfe8ce404d876917c4484311e49b3c454489e"
+  "data": "5514fb9fa540749cdf7f5744147ea6f83ec79e55f73d3068a018bf9dd409460f",
+  "history": "01c8cbb8c9dbe5faa7c5cf8b2ddbf6cc4a8c825b0fadd7336997b93672b4112c"
  },
- "generated_at": "2026-11-25T04:49:37+00:00",
+ "generated_at": "2026-11-25T08:53:49+00:00",
  "history": "file",
  "version": 1
 }

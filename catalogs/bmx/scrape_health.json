@@ -58414,14 +58414,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 101,
+          "count": 100,
           "failed": false,
           "diagnostics": {
             "expected_count": 95.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 101,
-            "percentage_change": 6.3,
+            "actual_count": 100,
+            "percentage_change": 5.3,
             "reason": "normal_variation"
           }
         },
@@ -58678,14 +58678,14 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 103,
+          "count": 102,
           "failed": false,
           "diagnostics": {
             "expected_count": 100.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 103,
-            "percentage_change": 2.5,
+            "actual_count": 102,
+            "percentage_change": 1.5,
             "reason": "normal_variation"
           }
         },
@@ -60564,7 +60564,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-25T04:32:21+00:00"
+      "scanned_at": "2026-11-25T08:36:31+00:00"
     }
   ],
   "baseline": {
@@ -60718,11 +60718,11 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-25",
-      "count": 101
+      "count": 100
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-25",
-      "count": 103
+      "count": 102
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-25",
@@ -63885,7 +63885,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 101
+        "count": 100
       }
     ],
     "Cambria_Seating": [
@@ -65161,7 +65161,7 @@
       },
       {
         "date": "2026-11-25",
-        "count": 103
+        "count": 102
       }
     ],
     "Colorado Cyclist_Seating": [
