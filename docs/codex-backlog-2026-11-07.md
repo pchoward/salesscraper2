@@ -327,3 +327,16 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - Goggles shows Gender, then Frame size;
 - All restores the built order;
 - MTB and BMX order are unchanged.
+
+## 20. Promo strip: sales with no code (owner, 2026-11-25)
+**Why:** Skate Warehouse's Black Friday is "25% off shoes, clothing & accessories, 15% off decks, completes & parts", taken off in the cart with no code. The strip (task 16) shows codes only, so it's missing.
+
+**Data (done, Claude's PR "Promo codes: sales applied with no code"):** `promos.json` can now hold an entry with `"code": ""` and `"auto": true`, plus `"tiers": [{"percent": 25, "on": "shoes, clothing & accessories"}, ...]` (`on` may be empty). `promos.describe(promo, code=False)` gives the full line ("25% off shoes, clothing & accessories, 15% off decks, completes & parts, until Dec 2"). `percent` holds the biggest tier, for the short form. At most one such entry per store. The emails already show them, with a "No code needed" chip.
+
+**Wanted:** in `page.py` `_promo_strip`, stop skipping these entries:
+- same row as a code offer, but no `<code>` and no Copy button; show a "No code needed" label in the code's place;
+- `data-promo-id` stays `json.dumps([store, code])` (so `["SkateWarehouse", ""]`). Don't change the `shreddeals.promo-dismissed` key or its format; existing dismissals must keep working;
+- the short form on phones: "Up to 25% off" when there are several tiers, else "25% off";
+- the "applied at checkout" wording still fits.
+
+**Tests:** extend `test_promos.py` `NoCodeTests.test_kept_with_the_codes_and_shown_in_emails` (it now asserts the strip is empty for a no-code entry) to the new markup, and a browser check at desktop and 390 px that Dismiss works on a no-code row and the copy button only appears on code rows.

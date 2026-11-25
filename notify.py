@@ -771,7 +771,8 @@ def html_promos(promos):
             '<tr><td style="padding:8px 0 0;font-size:14px;line-height:1.5;color:#334155;">'
             f"{store_html}: {escape(promo_codes.describe(promo, code=False))}"
             f' <span style="display:inline-block;background:#0f172a;color:#fde68a;font-family:Menlo,Consolas,monospace;'
-            f'font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">{escape(str(promo.get("code") or ""))}'
+            f'font-size:12px;font-weight:700;padding:2px 8px;border-radius:4px;">'
+            f'{"No code needed" if promo.get("auto") else escape(str(promo.get("code") or ""))}'
             "</span></td></tr>")
     return (
         '<tr><td data-section="promos" style="padding:16px 20px 0;font-family:Arial,Helvetica,sans-serif;">'
