@@ -1716,6 +1716,7 @@ function rankGroupOffers(offers) {
             store: offer.store || "Store",
             price: price,
             url: offer.url || "",
+            link: offer.link || "",
             name: offer.name || "",
             part: offer.part || "",
             availability: offer.availability || "On sale",
@@ -1805,6 +1806,7 @@ function rowGroupOffer(row) {
         store: row.dataset.store || item.store || "Store",
         price: price,
         url: url,
+        link: item.link || "",
         name: row.dataset.name || item.name || "",
         part: row.dataset.part || item.part || "",
         availability: availability,
@@ -1883,6 +1885,7 @@ function renderGroupOffer(offer, ranked, selected, noteId, panelId, index) {
     button.className = "group-offer" + (offer.featured ? " is-featured" : "");
     button.dataset.id = offer.id;
     button.dataset.url = offer.url;
+    button.dataset.link = offer.link || "";
     button.dataset.store = offer.store;
     button.dataset.name = offer.name;
     button.dataset.price = String(offer.price);
@@ -1958,7 +1961,7 @@ function fillGroupPanel(panel, offer) {
     if (offer.url) {
         const link = document.createElement("a");
         link.className = "group-store-link";
-        link.href = offer.url;
+        link.href = offer.link || offer.url;
         link.target = "_blank";
         link.rel = "noopener";
         link.textContent = "View at " + offer.store;
@@ -1974,6 +1977,7 @@ function offerFromButton(button, card) {
         store: button.dataset.store || "",
         price: Number(button.dataset.price),
         url: button.dataset.url || "",
+        link: button.dataset.link || "",
         name: button.dataset.name || (title ? title.textContent : ""),
         availability: button.dataset.availability || "On sale",
         currency: button.dataset.currency || "USD"
@@ -3144,7 +3148,7 @@ function openDrawer(id) {
     const link = document.getElementById("drawerLink");
     if (item.url) {
         link.hidden = false;
-        link.href = item.url;
+        link.href = item.link || item.url;
         link.textContent = "Open product page";
     } else {
         link.hidden = true;
@@ -5277,7 +5281,7 @@ function quickFacts(dataset, item, generated) {
         if (windowEnd && day > windowEnd) return false;
         return Number.isFinite(Number(marker.price));
     });
-    const viewUrl = item.url || "";
+    const viewUrl = item.link || item.url || "";
     const storeName = item.store || dataset.store || "the store";
     return {
         symbol: symbol,
