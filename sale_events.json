@@ -10,7 +10,7 @@
           "cut_high": 17,
           "cut_low": 14,
           "deals": {
-            "deals": 389,
+            "deals": 394,
             "high": 30,
             "low": 12,
             "max_off": 64,
@@ -121,6 +121,32 @@
           "steps": [],
           "tracked": 20,
           "uniform": true
+        },
+        {
+          "cut": 15,
+          "cut_high": 15,
+          "cut_low": 15,
+          "deals": {
+            "deals": 15,
+            "high": 32,
+            "low": 32,
+            "max_off": 32,
+            "uniform": 32
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-24",
+              "text": "most deals 32% off"
+            }
+          ],
+          "kind": "sale",
+          "listings": 15,
+          "moment": "Black Friday / Cyber Week",
+          "start": "2026-11-24",
+          "steps": [],
+          "tracked": 15,
+          "uniform": true
         }
       ]
     },
@@ -151,7 +177,7 @@
           "cut_low": 19,
           "end": "2026-09-11",
           "kind": "sale",
-          "listings": 54,
+          "listings": 53,
           "moment": "Labor Day",
           "start": "2026-09-03",
           "steps": [],
@@ -183,7 +209,7 @@
           "cut_high": 21,
           "cut_low": 17,
           "deals": {
-            "deals": 465,
+            "deals": 458,
             "high": 33,
             "low": 20,
             "max_off": 93,
@@ -223,5 +249,5 @@
       ]
     }
   },
-  "updated": "2026-11-23"
+  "updated": "2026-11-24"
 }

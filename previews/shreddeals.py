@@ -50,7 +50,7 @@ def render_shell(config, asset_prefix='', *, publisher_pages=True):
     template = template.replace('href="navigation.css"', f'href="{asset_prefix}navigation.css?v={asset_version("navigation.css")}"')
     template = template.replace('src="navigation.js"', f'src="{asset_prefix}navigation.js?v={asset_version("navigation.js")}"')
     if config.get('production'):
-        description = "Compare skateboarding, ski and snowboard, mountain bike, and BMX deals across retailers using tracked prices."
+        description = "Compare skateboarding, ski, mountain bike, and BMX deals across retailers using tracked prices."
         template = template.replace(
             '<title>ShredDeals development preview</title>',
             '<title>ShredDeals | Action sports deals and price history</title>\n'

@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-23T08:58:23+00:00",
+  "checked_at": "2026-11-25T09:01:23+00:00",
   "counts": {
     "action": 2,
     "watch": 0
   },
-  "date": "2026-11-23",
+  "date": "2026-11-25",
   "findings": [
     {
       "key": "SkatePro_Helmets",
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 7,
+      "runs": 9,
       "store": "SkatePro"
     },
     {
@@ -19,9 +19,9 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 7,
+      "runs": 9,
       "store": "SkatePro"
     }
   ],
-  "last_scrape": "2026-11-23T08:42:15+00:00"
+  "last_scrape": "2026-11-25T08:46:26+00:00"
 }
