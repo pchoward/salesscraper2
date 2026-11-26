@@ -17,6 +17,10 @@ agent:
 - ``fill``: a filter field (or brand, or photo) whose share of a store's
   listings fell to under half its recent median.
 - ``stale``: a sport whose last scrape is more than a day old.
+- ``new_unclassified``: listings one of our rules couldn't place (owner,
+  2026-11-26: "flag what rules don't recognise"): MTB pedals with no pedal
+  type, BMX parts with no Type, protection that doesn't say what it
+  protects. Each listing once, the first run it shows up, with examples.
 
 For each sport it writes ``drift_report.json`` and keeps a short history in
 ``drift_history.json`` next to that sport's data (the repository root for
@@ -182,6 +186,70 @@ def new_unmapped(feed, seen):
     return found
 
 
+UNCLASSIFIED_EXAMPLES = 5
+UNCLASSIFIED_KEEP = 5000  # listing URLs remembered per field
+
+
+def _pedal_type(item):
+    return (item.get("technical_specs") or {}).get("pedal_type")
+
+
+def _bmx_kind(item):
+    return item.get("kind")
+
+
+def _protects(item):
+    from sports.protection import protects
+    return protects(item.get("name") or "", item.get("product_type") or "")
+
+
+# (field, label, sports, the store categories it applies to, skipped
+# categories, the value). Categories None: every category but the skipped.
+UNCLASSIFIED = (
+    ("pedal_type", "pedal type", ("mtb",), ("Pedals",), (), _pedal_type),
+    ("kind", "Type", ("bmx",), None, ("Protection", "Packs", "Bikes", "Tools & Care"), _bmx_kind),
+    ("protects", "protection type", ("skate", "bmx", "ski", "mtb"), ("Protection",), (), _protects),
+)
+
+
+def unclassified(current_data, sport_id):
+    """{field: [listing, ...]} for listings a rule couldn't place."""
+    found = {}
+    for field, _label, sport_ids, parts, skip, value in UNCLASSIFIED:
+        if sport_id not in sport_ids:
+            continue
+        for items in (current_data or {}).values():
+            for item in items if isinstance(items, list) else ():
+                if not isinstance(item, dict) or not item.get("url"):
+                    continue
+                part = item.get("part") or ""
+                if (parts is not None and part not in parts) or part in skip:
+                    continue
+                try:
+                    placed = value(item)
+                except Exception:
+                    placed = None
+                if not _filled(placed):
+                    found.setdefault(field, []).append(item)
+    return found
+
+
+def new_unclassified(missing, seen):
+    """One finding per field with listings not reported before."""
+    labels = {field: label for field, label, *_ in UNCLASSIFIED}
+    found = []
+    for field, items in sorted(missing.items()):
+        known = set(seen.get(field) or [])
+        fresh = [item for item in items if item["url"] not in known]
+        if not fresh:
+            continue
+        examples = [{"store": item.get("store") or "", "part": item.get("part") or "", "name": item.get("name") or ""}
+                    for item in fresh[:UNCLASSIFIED_EXAMPLES]]
+        found.append({"kind": "new_unclassified", "field": field, "label": labels[field], "count": len(fresh),
+                      "examples": examples, "level": "action"})
+    return found
+
+
 def fill_drops(rates, past):
     """Fields whose share of a store/part's listings fell below half its
     recent median."""
@@ -215,7 +283,7 @@ def stale(health, today):
     return []
 
 
-def check(folder, today):
+def check(folder, today, sport_id=""):
     """The drift report for the sport data in ``folder``; updates its history."""
     folder = Path(folder)
     health = _read(folder / "scrape_health.json", {})
@@ -227,8 +295,10 @@ def check(folder, today):
     seen = history.get("unmapped_seen") or {}
 
     rates = fill_rates(current)
+    missing = unclassified(current, sport_id)
+    unplaced_seen = history.get("unclassified_seen") or {}
     findings = (stale(health, today) + held(health) + volume(health)
-                + new_unmapped(feed, seen) + fill_drops(rates, past))
+                + new_unmapped(feed, seen) + new_unclassified(missing, unplaced_seen) + fill_drops(rates, past))
 
     # Remember today's fill rates and every uncategorized type seen so far
     # (a type is "new" once). The first run only records: with no history,
@@ -237,12 +307,19 @@ def check(folder, today):
     for store, summary in ((feed or {}).get("stores") or {}).items():
         names = set(seen.get(store) or []) | {kind for kind, _ in (summary or {}).get("unmapped_types") or []}
         seen[store] = sorted(names)
+    # A listing is reported once. The first run reports today's backlog too:
+    # it's small, and worth seeing once.
+    for field, items in missing.items():
+        urls = list(unplaced_seen.get(field) or [])
+        known = set(urls)
+        urls += [item["url"] for item in items if item["url"] not in known]
+        unplaced_seen[field] = urls[-UNCLASSIFIED_KEEP:]
     if first:
         findings = [f for f in findings if f["kind"] != "new_unmapped"]
     days[today.isoformat()] = {"fill": rates}
     cutoff = (today - datetime.timedelta(days=KEEP_DAYS)).isoformat()
     days = {d: v for d, v in days.items() if d >= cutoff}
-    _write(folder / HISTORY, {"days": days, "unmapped_seen": seen})
+    _write(folder / HISTORY, {"days": days, "unmapped_seen": seen, "unclassified_seen": unplaced_seen})
 
     report = {
         "checked_at": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
@@ -266,6 +343,10 @@ def _line(finding):
         return f"{finding['store']}: {finding['count']} listings, {word} from a median of {finding['median']:g}"
     if kind == "new_unmapped":
         return f"{finding['store']}: new product type with no category, \"{finding['product_type']}\" ({finding['count']} marked down)"
+    if kind == "new_unclassified":
+        names = "; ".join(f"{e['store']}: {e['name']}" for e in finding["examples"])
+        more = finding["count"] - len(finding["examples"])
+        return f"{finding['count']} new listing(s) with no {finding['label']}: {names}" + (f" (+{more} more)" if more > 0 else "")
     if kind == "fill":
         return (f"`{finding['key']}`: `{finding['field']}` on {finding['share']:.0%} of {finding['items']} listings,"
                 f" median {finding['median']:.0%}")
@@ -294,7 +375,7 @@ def run(sport_ids, today=None):
         try:
             sport = sports.get(sport_id)
             folder = Path(".") if sport.is_default else sport.data_path()
-            reports.append((sport.label, check(folder, today)))
+            reports.append((sport.label, check(folder, today, sport.id)))
         except Exception as exc:  # reporting only; never fails a run
             logger.error("Drift check failed for %s (%s: %s)", sport_id, type(exc).__name__, exc)
     text = markdown(reports)

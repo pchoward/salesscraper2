@@ -81,6 +81,48 @@ class DriftChecks(unittest.TestCase):
             self.assertEqual([f["product_type"] for f in second["findings"]], ["Snowboards"])
             self.assertTrue((folder / "drift_report.json").exists())
 
+    def test_unclassified_listings_are_reported_once_with_examples(self):
+        # Owner, 2026-11-26: flag what our rules don't recognise.
+        data = {
+            "Bike Mart_Pedals": [
+                {"name": "Origin8 Pro Lite Track 9/16 Pedals", "url": "u1", "part": "Pedals", "store": "Bike Mart"},
+                {"name": "Race Face Chester Pedals", "url": "u2", "part": "Pedals", "store": "Bike Mart",
+                 "technical_specs": {"pedal_type": ["Flat"]}},
+            ],
+            "Fanatik_Protection": [
+                {"name": "Gloworm Universal Helmet Mount", "url": "u3", "part": "Protection", "store": "Fanatik"},
+                {"name": "Fox Launch Pro Knee Pads", "url": "u4", "part": "Protection", "store": "Fanatik"},
+            ],
+        }
+        missing = drift.unclassified(data, "mtb")
+        self.assertEqual({field: [i["url"] for i in items] for field, items in missing.items()},
+                         {"pedal_type": ["u1"], "protects": ["u3"]})
+        found = {f["field"]: f for f in drift.new_unclassified(missing, {})}
+        self.assertEqual(found["pedal_type"]["examples"][0]["name"], "Origin8 Pro Lite Track 9/16 Pedals")
+        self.assertEqual(found["protects"]["level"], "action")
+        self.assertIn("1 new listing(s) with no protection type: Fanatik: Gloworm Universal Helmet Mount",
+                      drift._line(found["protects"]))
+        self.assertEqual(drift.new_unclassified(missing, {"pedal_type": ["u1"], "protects": ["u3"]}), [])
+        # BMX: Type everywhere but gear and Tools & Care; Skate has no pedal rule.
+        bmx = {"S_Steering": [{"name": "Odyssey GTX S gyro", "url": "b1", "part": "Steering", "store": "Source"},
+                              {"name": "Cult bars", "url": "b2", "part": "Steering", "store": "Source", "kind": "Bars"}],
+               "S_Tools": [{"name": "Rant tool kit", "url": "b3", "part": "Tools & Care", "store": "Source"}]}
+        self.assertEqual([i["url"] for i in drift.unclassified(bmx, "bmx")["kind"]], ["b1"])
+        self.assertEqual(drift.unclassified(data, "skate").get("pedal_type"), None)
+
+    def test_check_remembers_unclassified_listings(self):
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            item = {"name": "Origin8 Pro Lite Track Pedals", "url": "u1", "part": "Pedals", "store": "Bike Mart"}
+            (folder / "previous_data.json").write_text(json.dumps({"Bike Mart_Pedals": [item]}))
+            first = drift.check(folder, DAY, "mtb")
+            self.assertEqual([f["kind"] for f in first["findings"] if f["kind"] == "new_unclassified"],
+                             ["new_unclassified"])  # today's backlog, once
+            second = drift.check(folder, DAY + datetime.timedelta(days=1), "mtb")
+            self.assertFalse([f for f in second["findings"] if f["kind"] == "new_unclassified"])
+            history = json.loads((folder / drift.HISTORY).read_text())
+            self.assertEqual(history["unclassified_seen"], {"pedal_type": ["u1"]})
+
     def test_markdown_lists_actions_first(self):
         text = drift.markdown([("Skate", {"findings": [
             {"kind": "stale", "last": "2026-11-18", "days": 3, "level": "action"}],
