@@ -1568,7 +1568,7 @@ def bmx_section_owners(key):
     """Space-separated headings for one BMX spec section's ``data-for``.
 
     The field's own categories, or every BMX menu heading when the category
-    list is empty. Product kind stays unmarked so All keeps that filter.
+    list is empty. Type (`kind`) stays unmarked so All keeps that filter.
     An unknown key returns "" so the section is left unmarked.
     """
     from sports.headings import headings
@@ -2682,8 +2682,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         def _sidebar_section(section_id, label, body, open_default=False, for_part="", tip=""):
             # Ski, BMX, and MTB spec sections use the same data-for gate as
             # Skate. All stays Brand plus the generic sections; a heading
-            # shows its own specs. BMX Product kind is left unmarked so All
-            # keeps it. MTB has no Product kind field. An empty category list
+            # shows its own specs. BMX Type (`kind`) is left unmarked so All
+            # keeps it. MTB Type lists its parts headings. An empty category list
             # (MTB Condition, Riding type) stamps every menu heading, so the
             # section hides on All and shows under any heading.
             if str(section_id).startswith("tech-") and not for_part:

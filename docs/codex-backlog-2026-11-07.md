@@ -396,7 +396,7 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - **MTB:** every listing under Suspension, Wheels, Tires, Drivetrain, Brakes and Cockpit carries the spec `kind`. It's a sidebar facet in `sports/mtb/facets.py`: `{"key": "kind", "label": "Type", "param": "mtb_type", …}`, with `order` = `sports/mtb/kinds.VALUES`.
   - Example values for Suspension: Forks · Rear Shocks · Coil Springs · Fork Parts · Shock Parts.
   - Each heading's full list is `sports/mtb/kinds.ORDER[<store category>]`. Forks & Shocks is the Suspension heading.
-- **BMX:** the existing Product kind (`bmx_kind`) gains Fork Parts, Crank Parts, Headset Parts, Stem Parts and Pedal Parts. Brakes splits into Brakes, Brake Kits, Brake Levers, Brake Cables, Brake Pads and Brake Parts.
+- **BMX:** the existing Type filter (`bmx_kind`, formerly labelled "Product kind") gains Fork Parts, Crank Parts, Headset Parts, Stem Parts and Pedal Parts. Brakes splits into Brakes, Brake Kits, Brake Levers, Brake Cables, Brake Pads and Brake Parts.
 - **Values are set when the page is built** (`sports/headings.py` `regroup`), on each offer's specs like any other facet. Nothing waits for a scrape.
 - **New heading, Tools & Care,** on MTB and BMX, after the parts headings and before the gear. It needs no UI work beyond what any heading gets. Check its slug opens it, e.g. `?sport=mtb&type=tools-care`.
 

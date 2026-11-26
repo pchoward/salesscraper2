@@ -2,7 +2,9 @@
 from sports import packs, protection
 
 FIELDS = (
-    {"key": "kind", "label": "Product kind", "param": "bmx_kind", "categories": (),
+    # "Type" (owner, 2026-11-26: shops say Type, not "Product kind"). The key
+    # and the bmx_kind URL parameter stay, so old links keep working.
+    {"key": "kind", "label": "Type", "param": "bmx_kind", "categories": (),
      "order": ("Brakes", "Brake Kits", "Brake Levers", "Brake Cables", "Brake Pads", "Brake Parts")},
     {"key": "wheel_size", "label": "Wheel size (in)", "param": "bmx_wheel", "categories": ("Bikes", "Frames & Forks", "Wheels", "Tires", "Wheels & Hubs", "Tires & Tubes")},
     {"key": "condition", "label": "Condition", "param": "bmx_condition", "categories": ()},
