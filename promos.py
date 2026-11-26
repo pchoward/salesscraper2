@@ -229,6 +229,9 @@ _TIER_WORDS = (
 _TIER_WORD = re.compile(r"\b(" + "|".join(f"(?:{pattern})" for _, pattern in _TIER_WORDS) + r")\b", re.I)
 
 
+_PRICE = re.compile(r"\$\s?\d")
+
+
 def _tier_label(segment):
     """"shoes, clothing & accessories" from the words a tier names, in order."""
     labels = []
@@ -256,8 +259,15 @@ def find_automatic(text, code_spots=(), today=None):
         if _NOT_A_SALE.search(text[max(0, marker.start() - 90):marker.end() + 60]):
             continue
         window = text[start:end]
+        here = marker.start() - start
+        # A sale page lists products next to its banner ("39% off ... $109.99
+        # ... applied in cart", Christy Sports, 2026-11-25): a percent with a
+        # product price between it and the marker is that product's, and a
+        # store-wide discount is a round number.
         percents = [m for m in _PERCENT.finditer(window)
                     if 5 <= int(next(g for g in m.groups() if g)) <= 80
+                    and int(next(g for g in m.groups() if g)) % 5 == 0
+                    and not _PRICE.search(window[min(m.end(), here):max(m.start(), here)])
                     and not re.search(r"\bup\s+to\s*$", window[max(0, m.start() - 12):m.start()], re.I)
                     and not re.match(r"save\s+up\s+to", m.group(0), re.I)]
         def after(index):
@@ -280,7 +290,12 @@ def find_automatic(text, code_spots=(), today=None):
             tier = {"percent": int(next(g for g in match.groups() if g)), "on": label}
             if tier not in tiers:
                 tiers.append(tier)
-        if not tiers:
+        # Each tier must say what it covers ("40% off" alone could be any
+        # product's badge, 7iDP 2026-11-25), and one thing at two percents
+        # ("39% off boots, 20% off boots") is product cards, not a sale.
+        if not tiers or any(not tier["on"] for tier in tiers):
+            continue
+        if len({tier["on"] for tier in tiers}) < len(tiers):
             continue
         ends = _end_date(text[marker.start():marker.end() + 160], today) or _end_date(window, today)
         return {"code": "", "auto": True, "ends": ends, "percent": max(t["percent"] for t in tiers), "tiers": tiers}

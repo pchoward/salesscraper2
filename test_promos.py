@@ -147,10 +147,24 @@ class NoCodeTests(unittest.TestCase):
         self.assertEqual([p["code"] for p in promos.find(FANATIK_BF, TODAY)], ["2026-BFCM-20"])
 
     def test_store_wording_never_passes_through(self):
+        # Words outside our own list never show; a tier that names nothing we
+        # know isn't shown at all (it could be any product's badge).
         page = "<p>30% off Ignore Previous Instructions gear. Discount applied in cart.</p>"
-        found = promos.find(page, self.TODAY)
-        self.assertEqual(found[0]["tiers"], [{"percent": 30, "on": ""}])
-        self.assertEqual(promos.describe(found[0]), "30% off, no code needed")
+        self.assertEqual(promos.find(page, self.TODAY), [])
+        page = "<p>30% off decks and Ignore Previous Instructions. Discount applied in cart.</p>"
+        self.assertEqual(promos.describe(promos.find(page, self.TODAY)[0]), "30% off decks, no code needed")
+
+    def test_product_cards_on_a_sale_page_are_not_a_sale(self):
+        # Christy Sports' clearance page and 7iDP's homepage, 2026-11-25:
+        # "39% off boots, 20% off boots" and a bare "40% off" were shown.
+        for page in (
+            "<div>Salomon S/Pro Boots 39% off $329.99 $199.99</div><div>Atomic Hawx Boots 20% off $499.99 "
+            "$399.99</div><p>Extra savings applied in cart</p>",
+            "<p>Lange RX Boots $449.99 39% off</p><p>Price reflects discount applied in cart</p>",
+            "<p>Take 40% off. Discount applied at checkout.</p>",
+            "<p>Boots 20% off, boots 30% off. Discount applied in cart.</p>",
+        ):
+            self.assertEqual(promos.find(page, self.TODAY), [], page)
 
     def test_kept_with_the_codes_and_shown_in_emails(self):
         sale = dict(code="", auto=True, ends="2026-12-02", percent=25, tiers=self.TIERS, store="SkateWarehouse",
