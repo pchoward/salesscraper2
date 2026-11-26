@@ -3404,6 +3404,8 @@
     "all_time_low": 49.0,
     "all_time_low_date": "2026-11-22",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0018/1832/9147/files/kylewalker.png?v=1784930359",
     "prices": {
       "2026-10-30": 69.95,
@@ -36815,6 +36817,8 @@
     "all_time_low": 24.95,
     "all_time_low_date": "2026-11-25",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0660/4170/8586/files/OJ_MiniCombo_58_Set.jpg?v=1746827183",
     "diameter_mm": 58.0,
     "diameters_mm": [
@@ -36897,6 +36901,8 @@
     "all_time_low": 37.95,
     "all_time_low_date": "2026-11-25",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0660/4170/8586/files/OJ909INDY804.jpg?v=1756827234",
     "diameter_mm": 58.0,
     "diameters_mm": [
@@ -48803,6 +48809,8 @@
     "all_time_low": 44.0,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0071/6593/5673/products/Flexmeter-single_a7476f4f-80f2-4b88-b450-40ffbb0d93da.png?v=1640799421",
     "prices": {
       "2026-11-03": 44.0,
@@ -71019,7 +71027,7 @@
     "observation_count": 15,
     "all_time_low": 51.0,
     "all_time_low_date": "2026-11-12",
-    "stage": "new",
+    "stage": "all_time_low",
     "image": "https://cdn.shopify.com/s/files/1/0238/9304/9424/files/Jacuzzi-Unlimited-Dilo-Safe-Word-EX7-Deck.jpg?v=1784586399",
     "width": 8.5,
     "wheelbase": 14.25,
@@ -71032,8 +71040,8 @@
         "durometers": [],
         "variant_id": "42788629676112",
         "available": true,
-        "price": 52.0,
-        "compare_at_price": 69.0
+        "price": 51.0,
+        "compare_at_price": 68.0
       }
     ],
     "prices": {
@@ -71051,7 +71059,7 @@
       "2026-11-23": 51.0,
       "2026-11-24": 51.0,
       "2026-11-25": 52.0,
-      "2026-11-26": 52.0
+      "2026-11-26": 51.0
     }
   },
   "https://www.sourceboards.com/en-us/products/jacuzzi-unlimited-latham-smooshed-ex7-deck": {
@@ -73644,8 +73652,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 59.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 49.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/g57d/1a/adidas-skate-backpack-black.jpg",
     "length": 59.95,
@@ -73664,7 +73672,7 @@
       "2026-11-23": 59.95,
       "2026-11-24": 59.95,
       "2026-11-25": 59.95,
-      "2026-11-26": 59.95
+      "2026-11-26": 49.95
     }
   },
   "https://www.tactics.com/alien-workshop/og-burst-7875-skateboard-deck/blue": {
@@ -73785,7 +73793,9 @@
     ],
     "prices": {
       "2026-11-26": 92.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.6
   },
   "https://www.tactics.com/anti-hero/chapman-homers-832-skateboard-deck/yellow": {
     "name": "Anti-Hero Chapman Homers 8.32 Skateboard Deck - yellow",
@@ -73797,17 +73807,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gudl/1a/anti-hero-chapman-homers-832-skateboard-deck-yellow.jpg",
     "width": 8.32,
     "length": 92.95,
+    "wheelbase": 14.18,
     "widths": [
       8.32
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.18
+    }
   },
   "https://www.tactics.com/anti-hero/classic-eagle-825-skateboard-deck/grey": {
     "name": "Anti-Hero Classic Eagle 8.25 Skateboard Deck - grey",
@@ -73827,7 +73837,8 @@
     ],
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/anti-hero/classic-eagle-838-skateboard-deck/olive": {
     "name": "Anti-Hero Classic Eagle 8.38 Skateboard Deck - olive",
@@ -73847,7 +73858,9 @@
     ],
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/anti-hero/classic-eagle-90-skateboard-deck/orange": {
     "name": "Anti-Hero Classic Eagle 9.0 Skateboard Deck - orange",
@@ -73917,17 +73930,17 @@
     "all_time_low": 84.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guuu/1a/anti-hero-classic-eagle-easy-rider-skateboard-deck-85.jpg",
     "width": 8.5,
     "length": 84.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 84.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/anti-hero/classic-eagle-easy-rider-skateboard-deck/olive-838": {
     "name": "Anti-Hero Classic Eagle Easy Rider Skateboard Deck - olive 8.38",
@@ -73947,7 +73960,9 @@
     ],
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/anti-hero/classic-eagle-mini-skateboard-deck/orange": {
     "name": "Anti-Hero Classic Eagle Mini Skateboard Deck - orange",
@@ -73963,7 +73978,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.9
   },
   "https://www.tactics.com/anti-hero/classic-eagle-skateboard-deck/black": {
     "name": "Anti-Hero Classic Eagle Skateboard Deck - black",
@@ -73979,7 +73996,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/anti-hero/classic-eagle-skateboard-deck/brown": {
     "name": "Anti-Hero Classic Eagle Skateboard Deck - brown",
@@ -74009,13 +74028,13 @@
     "all_time_low": 84.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gur7/1a/anti-hero-classic-eagle-skateboard-deck-green.jpg",
     "length": 84.95,
+    "wheelbase": 14.0,
     "prices": {
       "2026-11-26": 84.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/anti-hero/classic-eagle-skateboard-deck/light-blue": {
     "name": "Anti-Hero Classic Eagle Skateboard Deck - light blue",
@@ -74031,7 +74050,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/anti-hero/daan-dutch-belted-828-skateboard-deck/yellow": {
     "name": "Anti-Hero Daan Dutch Belted 8.28 Skateboard Deck - yellow",
@@ -74051,7 +74072,9 @@
     ],
     "prices": {
       "2026-11-26": 92.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.12
   },
   "https://www.tactics.com/anti-hero/daan-expressions-828-skateboard-deck": {
     "name": "Anti-Hero Daan Expressions 8.28 Skateboard Deck",
@@ -74071,7 +74094,9 @@
     ],
     "prices": {
       "2026-11-26": 92.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.12
   },
   "https://www.tactics.com/anti-hero/dbx-eagle-skateboard-deck/greenish": {
     "name": "Anti-Hero DBX Eagle Skateboard Deck - greenish",
@@ -74130,7 +74155,9 @@
     "image": "https://www.tactics.com/a/gur5/1a/anti-hero-deluxe-hellhounds-complete-skateboard-yellow.jpg",
     "prices": {
       "2026-11-26": 149.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.77
   },
   "https://www.tactics.com/anti-hero/doobie-expressions-875-skateboard-deck": {
     "name": "Anti-Hero Doobie Expressions 8.75 Skateboard Deck",
@@ -74172,8 +74199,10 @@
     "all_time_low": 111.95,
     "all_time_low_date": "2026-08-09",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gtsg/1a/anti-hero-gerwer-grimplestix-dbx-grimplenator-825-skateboard-deck-red.jpg",
     "width": 8.25,
+    "wheelbase": 14.38,
     "widths": [
       8.25
     ],
@@ -74182,9 +74211,7 @@
       "2026-09-07": 111.95,
       "2026-09-12": 111.95,
       "2026-11-26": 139.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/anti-hero/grant-expressions-85-skateboard-deck": {
     "name": "Anti-Hero Grant Expressions 8.5 Skateboard Deck",
@@ -74246,7 +74273,9 @@
     ],
     "prices": {
       "2026-11-26": 132.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/anti-hero/jalopi-freeloader-1014-skateboard-deck/orange": {
     "name": "Anti-Hero Jalopi Freeloader 10.14 Skateboard Deck - orange",
@@ -74266,7 +74295,9 @@
     ],
     "prices": {
       "2026-11-26": 94.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 15.3
   },
   "https://www.tactics.com/anti-hero/jalopi-shop-lurker-ssd-26-918-skateboard-deck": {
     "name": "Anti-Hero Jalopi Shop Lurker SSD '26 9.18 Skateboard Deck",
@@ -74301,6 +74332,7 @@
     "all_time_low": 94.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gtt0/1a/anti-hero-jalopi-yardbird-981-skateboard-deck-teal.jpg",
     "width": 9.81,
     "length": 94.95,
@@ -74309,8 +74341,7 @@
     ],
     "prices": {
       "2026-11-26": 94.95
-    },
-    "wheelbase_checked": "2026-11-26"
+    }
   },
   "https://www.tactics.com/anti-hero/kanfoush-anti-intelligence-84-skateboard-deck": {
     "name": "Anti-Hero Kanfoush Anti-Intelligence 8.4 Skateboard Deck",
@@ -74363,9 +74394,11 @@
     "all_time_low": 65.95,
     "all_time_low_date": "2026-02-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gk72/1a/anti-hero-kanfoush-customs-825-skateboard-deck-black.jpg",
     "width": 8.25,
     "length": 81.95,
+    "wheelbase": 14.38,
     "widths": [
       8.25
     ],
@@ -74373,9 +74406,7 @@
       "2026-09-06": 65.95,
       "2026-09-08": 65.95,
       "2026-11-26": 81.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/anti-hero/matthews-grimplestix-grimplenator-85-skateboard-deck/purple": {
     "name": "Anti-Hero Matthews Grimplestix Grimplenator 8.5 Skateboard Deck - purple",
@@ -74439,17 +74470,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guds/1a/anti-hero-taylor-fueled-up-838-skateboard-deck-yellow.jpg",
     "width": 8.38,
     "length": 92.95,
+    "wheelbase": 14.5,
     "widths": [
       8.38
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/april/dashawn-cage-skateboard-deck": {
     "name": "April Dashawn Cage Skateboard Deck",
@@ -74461,13 +74492,13 @@
     "all_time_low": 75.0,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv5y/1a/april-dashawn-cage-skateboard-deck.jpg",
     "length": 75.0,
+    "wheelbase": 14.0,
     "prices": {
       "2026-11-26": 75.0
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/april/dashawn-character-85-skateboard-deck": {
     "name": "April Dashawn Character 8.5 Skateboard Deck",
@@ -74496,7 +74527,9 @@
     "length": 74.0,
     "prices": {
       "2026-11-26": 74.0
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.75
   },
   "https://www.tactics.com/april/kessner-biolume-skateboard-deck": {
     "name": "April Kessner Biolume Skateboard Deck",
@@ -74550,7 +74583,9 @@
     "length": 75.0,
     "prices": {
       "2026-11-26": 75.0
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.18
   },
   "https://www.tactics.com/april/mariano-knockout-shape-skateboard-deck": {
     "name": "April Mariano Knockout Shape Skateboard Deck",
@@ -74566,7 +74601,9 @@
     "length": 76.0,
     "prices": {
       "2026-11-26": 76.0
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.7
   },
   "https://www.tactics.com/april/mariano-knockout-skateboard-deck": {
     "name": "April Mariano Knockout Skateboard Deck",
@@ -74578,13 +74615,13 @@
     "all_time_low": 75.0,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv6b/1a/april-mariano-knockout-skateboard-deck.jpg",
     "length": 75.0,
+    "wheelbase": 14.0,
     "prices": {
       "2026-11-26": 75.0
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/april/og-logo-skateboard-deck/foil": {
     "name": "April OG Logo Skateboard Deck - foil",
@@ -74600,7 +74637,9 @@
     "length": 75.0,
     "prices": {
       "2026-11-26": 75.0
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.18
   },
   "https://www.tactics.com/april/og-logo-skateboard-deck/night": {
     "name": "April OG Logo Skateboard Deck - night",
@@ -74616,7 +74655,9 @@
     "length": 75.0,
     "prices": {
       "2026-11-26": 75.0
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.18
   },
   "https://www.tactics.com/april/og-logo-skateboard-deck/purple": {
     "name": "April OG Logo Skateboard Deck - purple",
@@ -74628,13 +74669,13 @@
     "all_time_low": 75.0,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv68/1a/april-og-logo-skateboard-deck-purple.jpg",
     "length": 75.0,
+    "wheelbase": 14.18,
     "prices": {
       "2026-11-26": 75.0
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.18
+    }
   },
   "https://www.tactics.com/april/rayssa-night-skateboard-deck": {
     "name": "April Rayssa Night Skateboard Deck",
@@ -74650,7 +74691,9 @@
     "length": 75.0,
     "prices": {
       "2026-11-26": 75.0
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.18
   },
   "https://www.tactics.com/april/shane-blue-flow-skateboard-deck": {
     "name": "April Shane Blue Flow Skateboard Deck",
@@ -74693,13 +74736,13 @@
     "all_time_low": 74.0,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv6d/1a/april-shane-sharp-mini-skateboard-deck.jpg",
     "length": 74.0,
+    "wheelbase": 12.5,
     "prices": {
       "2026-11-26": 74.0
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 12.5
+    }
   },
   "https://www.tactics.com/april/shane-sharp-skateboard-deck": {
     "name": "April Shane Sharp Skateboard Deck",
@@ -74715,7 +74758,9 @@
     "length": 75.0,
     "prices": {
       "2026-11-26": 75.0
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/april/twin-og-logo-skateboard-deck/green": {
     "name": "April Twin OG Logo Skateboard Deck - green",
@@ -74745,13 +74790,13 @@
     "all_time_low": 74.0,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv6g/1a/april-yuto-misty-mini-skateboard-deck.jpg",
     "length": 74.0,
+    "wheelbase": 12.75,
     "prices": {
       "2026-11-26": 74.0
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 12.75
+    }
   },
   "https://www.tactics.com/april/yuto-misty-skateboard-deck": {
     "name": "April Yuto Misty Skateboard Deck",
@@ -74763,13 +74808,13 @@
     "all_time_low": 75.0,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv69/1a/april-yuto-misty-skateboard-deck.jpg",
     "length": 75.0,
+    "wheelbase": 14.18,
     "prices": {
       "2026-11-26": 75.0
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.18
+    }
   },
   "https://www.tactics.com/april/yuto-stamp-skateboard-deck/orange": {
     "name": "April Yuto Stamp Skateboard Deck - orange",
@@ -74799,13 +74844,13 @@
     "all_time_low": 75.0,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv64/1a/april-yuto-stamp-skateboard-deck-red.jpg",
     "length": 75.0,
+    "wheelbase": 14.18,
     "prices": {
       "2026-11-26": 75.0
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.18
+    }
   },
   "https://www.tactics.com/arbor/amelia-underground-825-skateboard-deck": {
     "name": "Arbor Amelia Underground 8.25 Skateboard Deck",
@@ -74879,9 +74924,11 @@
     "all_time_low": 48.95,
     "all_time_low_date": "2026-04-05",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gkv6/1a/arbor-logo-surplus-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 51.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
@@ -74917,9 +74964,7 @@
       "2026-10-19": 51.95,
       "2026-10-20": 51.95,
       "2026-11-26": 64.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/arbor/logo-surplus-90-skateboard-deck": {
     "name": "Arbor Logo Surplus 9.0 Skateboard Deck",
@@ -75191,17 +75236,17 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-02-15",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gilo/1a/baker-baca-cerberus-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 78.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 78.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/baker/casper-brain-rabies-83875-skateboard-deck": {
     "name": "Baker Casper Brain Rabies 8.3875 Skateboard Deck",
@@ -75340,9 +75385,11 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-02-13",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gina/1a/baker-sully-cactus-eaters-838-skateboard-deck.jpg",
     "width": 8.38,
     "length": 63.95,
+    "wheelbase": 14.5,
     "widths": [
       8.38
     ],
@@ -75371,9 +75418,7 @@
       "2026-10-19": 63.95,
       "2026-10-20": 63.95,
       "2026-11-26": 78.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/baker/t-funk-whizz-kid-825-skateboard-deck": {
     "name": "Baker T-Funk Whizz Kid 8.25 Skateboard Deck",
@@ -75448,9 +75493,11 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-09-20",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/ginw/1a/baker-tyson-brain-rabies-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 63.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
@@ -75478,9 +75525,7 @@
       "2026-10-19": 63.95,
       "2026-10-20": 63.95,
       "2026-11-26": 78.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/birdhouse/lizzie-sewn-825-skateboard-deck": {
     "name": "Birdhouse Lizzie Sewn 8.25 Skateboard Deck",
@@ -75771,7 +75816,9 @@
     "prices": {
       "2026-09-11": 58.95,
       "2026-11-26": 72.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/blood-wizard/flying-wizard-galactic-838-skateboard-deck": {
     "name": "Blood Wizard Flying Wizard Galactic 8.38 Skateboard Deck",
@@ -75836,9 +75883,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-14",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gjw0/1a/blood-wizard-gregson-majestic-86-skateboard-deck.jpg",
     "width": 8.6,
     "length": 61.95,
+    "wheelbase": 14.25,
     "widths": [
       8.6
     ],
@@ -75872,9 +75921,7 @@
       "2026-10-19": 61.95,
       "2026-10-20": 61.95,
       "2026-11-26": 76.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/blood-wizard/heretics-dance-86-skateboard-deck": {
     "name": "Blood Wizard Heretics Dance 8.6 Skateboard Deck",
@@ -75909,17 +75956,17 @@
     "all_time_low": 72.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gb3q/1a/blood-wizard-knight-on-beard-mountain-90-skateboard-deck.jpg",
     "width": 9.0,
     "length": 72.95,
+    "wheelbase": 14.5,
     "widths": [
       9.0
     ],
     "prices": {
       "2026-11-26": 72.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/blood-wizard/kowalski-frost-85-skateboard-deck": {
     "name": "Blood Wizard Kowalski Frost 8.5 Skateboard Deck",
@@ -75931,9 +75978,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gjw5/1a/blood-wizard-kowalski-frost-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 76.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
@@ -75942,9 +75991,7 @@
       "2026-09-05": 61.95,
       "2026-09-07": 61.95,
       "2026-11-26": 76.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/blood-wizard/miskell-abyss-83-skateboard-deck": {
     "name": "Blood Wizard Miskell Abyss 8.3 Skateboard Deck",
@@ -75956,9 +76003,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-12",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gjw9/1a/blood-wizard-miskell-abyss-83-skateboard-deck.jpg",
     "width": 8.3,
     "length": 61.95,
+    "wheelbase": 14.25,
     "widths": [
       8.3
     ],
@@ -75993,9 +76042,7 @@
       "2026-10-19": 61.95,
       "2026-10-20": 61.95,
       "2026-11-26": 76.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/blood-wizard/pestilent-symphony-825-skateboard-deck": {
     "name": "Blood Wizard Pestilent Symphony 8.25 Skateboard Deck",
@@ -76053,9 +76100,11 @@
     "all_time_low": 54.95,
     "all_time_low_date": "2026-04-06",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gb3y/1a/blood-wizard-skullcracker-suite-838-skateboard-deck.jpg",
     "width": 8.38,
     "length": 58.95,
+    "wheelbase": 14.25,
     "widths": [
       8.38
     ],
@@ -76082,9 +76131,7 @@
       "2026-10-19": 58.95,
       "2026-10-20": 58.95,
       "2026-11-26": 72.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/blood-wizard/sorcerers-demise-85-skateboard-deck": {
     "name": "Blood Wizard Sorcerer's Demise 8.5 Skateboard Deck",
@@ -76104,7 +76151,9 @@
     ],
     "prices": {
       "2026-11-26": 72.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/blood-wizard/vulcan-sicle-925-skateboard-deck": {
     "name": "Blood Wizard Vulcan Sicle 9.25 Skateboard Deck",
@@ -77378,8 +77427,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 53.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 44.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/g6u2/1a/burton-day-hiker-22l-backpack-soft-sage.jpg",
     "length": 53.95,
@@ -77398,7 +77447,7 @@
       "2026-11-23": 53.95,
       "2026-11-24": 53.95,
       "2026-11-25": 53.95,
-      "2026-11-26": 53.95
+      "2026-11-26": 44.95
     }
   },
   "https://www.tactics.com/burton/day-hiker-22l-backpack/sunrise-coral": {
@@ -77408,8 +77457,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 53.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 44.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/g6u3/1a/burton-day-hiker-22l-backpack-sunrise-coral.jpg",
     "length": 53.95,
@@ -77428,7 +77477,7 @@
       "2026-11-23": 53.95,
       "2026-11-24": 53.95,
       "2026-11-25": 53.95,
-      "2026-11-26": 53.95
+      "2026-11-26": 44.95
     }
   },
   "https://www.tactics.com/burton/day-hiker-30l-backpack/jake-blue": {
@@ -77465,8 +77514,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 35.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 29.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/eltb/1a/burton-kids-distortion-18l-backpack-true-black.jpg",
     "length": 35.95,
@@ -77485,7 +77534,7 @@
       "2026-11-23": 35.95,
       "2026-11-24": 35.95,
       "2026-11-25": 35.95,
-      "2026-11-26": 35.95
+      "2026-11-26": 29.95
     }
   },
   "https://www.tactics.com/chocolate/alvarez-know-your-rights-8125-skateboard-deck": {
@@ -77554,18 +77603,18 @@
     "all_time_low": 61.95,
     "all_time_low_date": "2026-09-11",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpfr/1a/chocolate-anderson-jazz-lovers-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 76.95,
+    "wheelbase": 14.0,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-09-11": 61.95,
       "2026-11-26": 76.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/chocolate/anderson-know-your-rights-80-skateboard-deck": {
     "name": "Chocolate Anderson Know Your Rights 8.0 Skateboard Deck",
@@ -77619,8 +77668,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 78.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 48.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gk9l/1a/chocolate-chocolate-backpack.jpg",
     "length": 78.95,
@@ -77639,7 +77688,7 @@
       "2026-11-23": 78.95,
       "2026-11-24": 78.95,
       "2026-11-25": 78.95,
-      "2026-11-26": 78.95
+      "2026-11-26": 48.95
     }
   },
   "https://www.tactics.com/chocolate/herrera-know-your-rights-8375-skateboard-deck": {
@@ -77767,17 +77816,17 @@
     "all_time_low": 61.95,
     "all_time_low_date": "2026-08-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpgn/1a/chocolate-perez-flacos-84-skateboard-deck.jpg",
     "width": 8.4,
     "length": 76.95,
+    "wheelbase": 14.25,
     "widths": [
       8.4
     ],
     "prices": {
       "2026-11-26": 76.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/chocolate/perez-know-your-rights-80-skateboard-deck": {
     "name": "Chocolate Perez Know Your Rights! 8.0 Skateboard Deck",
@@ -77789,9 +77838,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-16",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gmuv/1a/chocolate-perez-know-your-rights-80-skateboard-deck.jpg",
     "width": 8.0,
     "length": 61.95,
+    "wheelbase": 14.0,
     "widths": [
       8.0
     ],
@@ -77826,9 +77877,7 @@
       "2026-10-19": 61.95,
       "2026-10-20": 61.95,
       "2026-11-26": 76.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/chocolate/perez-know-your-rights-84-skateboard-deck": {
     "name": "Chocolate Perez Know Your Rights 8.4 Skateboard Deck",
@@ -77840,9 +77889,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-12",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpgr/1a/chocolate-perez-know-your-rights-84-skateboard-deck.jpg",
     "width": 8.4,
     "length": 61.95,
+    "wheelbase": 14.25,
     "widths": [
       8.4
     ],
@@ -77868,9 +77919,7 @@
       "2026-10-19": 61.95,
       "2026-10-20": 61.95,
       "2026-11-26": 76.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/creature/baekkel-torch-86-skateboard-deck": {
     "name": "Creature Baekkel Torch 8.6 Skateboard Deck",
@@ -78156,6 +78205,7 @@
     "all_time_low": 79.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/fxsn/1a/creature-hotrod-reaper-xx-1025-skateboard-deck.jpg",
     "width": 10.25,
     "length": 79.95,
@@ -78164,8 +78214,7 @@
     ],
     "prices": {
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26"
+    }
   },
   "https://www.tactics.com/creature/imp-relic-stumps-813-skateboard-deck": {
     "name": "Creature Imp Relic Stumps 8.13 Skateboard Deck",
@@ -78177,17 +78226,17 @@
     "all_time_low": 62.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gumx/1a/creature-imp-relic-stumps-7-ply-birch-813in-x-3145in-creature-decks.jpg",
     "width": 8.13,
     "length": 62.95,
+    "wheelbase": 14.0,
     "widths": [
       8.13
     ],
     "prices": {
       "2026-11-26": 62.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/creature/kimbel-sideshow-90-skateboard-deck": {
     "name": "Creature Kimbel Sideshow 9.0 Skateboard Deck",
@@ -78298,9 +78347,11 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-09-13",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpca/1a/creature-logo-spray-atv-90-skateboard-deck.jpg",
     "width": 9.0,
     "length": 63.95,
+    "wheelbase": 14.25,
     "widths": [
       9.0
     ],
@@ -78328,9 +78379,7 @@
       "2026-10-19": 63.95,
       "2026-10-20": 63.95,
       "2026-11-26": 78.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/creature/logo-stumps-80-skateboard-deck/assorted": {
     "name": "Creature Logo Stumps 8.0 Skateboard Deck - (assorted)",
@@ -78411,17 +78460,17 @@
     "all_time_low": 79.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gujt/1a/creature-logo-stumps-880-skateboard-deck-assorted.jpg",
     "width": 8.8,
     "length": 79.95,
+    "wheelbase": 14.25,
     "widths": [
       8.8
     ],
     "prices": {
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/creature/logo-stumps-90-skateboard-deck/assorted": {
     "name": "Creature Logo Stumps 9.0 Skateboard Deck - (assorted)",
@@ -78527,17 +78576,17 @@
     "all_time_low": 83.95,
     "all_time_low_date": "2025-12-28",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/g9xl/1a/creature-messenger-925-vx-skateboard-deck.jpg",
     "width": 9.25,
+    "wheelbase": 14.0,
     "widths": [
       9.25
     ],
     "prices": {
       "2026-09-11": 86.95,
       "2026-11-26": 107.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/creature/navarrette-feeding-time-xx-90-skateboard-deck": {
     "name": "Creature Navarrette Feeding Time XX 9.0 Skateboard Deck",
@@ -78562,9 +78611,11 @@
     "all_time_low": 71.95,
     "all_time_low_date": "2026-07-04",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/g9xt/1a/creature-partanen-feeding-time-xx-88-skateboard-deck.jpg",
     "width": 8.8,
     "length": 71.95,
+    "wheelbase": 14.5,
     "widths": [
       8.8
     ],
@@ -78594,9 +78645,7 @@
       "2026-10-19": 71.95,
       "2026-10-20": 71.95,
       "2026-11-26": 89.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/creature/possessed-stumps-87-skateboard-deck": {
     "name": "Creature Possessed Stumps 8.7 Skateboard Deck",
@@ -78643,9 +78692,11 @@
     "all_time_low": 55.95,
     "all_time_low_date": "2026-02-13",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/g4xy/1a/creature-provost-blade-88-skateboard-deck.jpg",
     "width": 8.8,
     "length": 55.95,
+    "wheelbase": 14.25,
     "widths": [
       8.8
     ],
@@ -78673,9 +78724,7 @@
       "2026-10-19": 55.95,
       "2026-10-20": 55.95,
       "2026-11-26": 68.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/creature/provost-flash-stumps-88-skateboard-deck": {
     "name": "Creature Provost Flash Stumps 8.8 Skateboard Deck",
@@ -78812,8 +78861,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 34.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 28.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/eel5/1a/dakine-kids-mission-18l-backpack-bear-games.jpg",
     "length": 34.95,
@@ -78832,7 +78881,7 @@
       "2026-11-23": 34.95,
       "2026-11-24": 34.95,
       "2026-11-25": 34.95,
-      "2026-11-26": 34.95
+      "2026-11-26": 28.95
     }
   },
   "https://www.tactics.com/dakine/mission-25l-backpack/griffin": {
@@ -78896,8 +78945,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 172.95,
-    "all_time_low_date": "2026-11-20",
+    "all_time_low": 143.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/fkml/1a/dakine-poacher-ras-vest-backpack-black.jpg",
     "prices": {
@@ -78915,7 +78964,7 @@
       "2026-11-23": 172.95,
       "2026-11-24": 172.95,
       "2026-11-25": 172.95,
-      "2026-11-26": 172.95
+      "2026-11-26": 143.95
     }
   },
   "https://www.tactics.com/dakine/womens-heli-12l-backpack/pinebark": {
@@ -78925,8 +78974,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 71.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 59.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gflc/1a/dakine-womens-heli-12l-backpack-pinebark.jpg",
     "length": 71.95,
@@ -78945,7 +78994,7 @@
       "2026-11-23": 71.95,
       "2026-11-24": 71.95,
       "2026-11-25": 71.95,
-      "2026-11-26": 71.95
+      "2026-11-26": 59.95
     }
   },
   "https://www.tactics.com/deathwish/deathspray-backpack/navy": {
@@ -78955,8 +79004,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 39.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 32.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/g5z8/1a/deathwish-deathspray-backpack-navy.jpg",
     "length": 39.95,
@@ -78975,7 +79024,7 @@
       "2026-11-23": 39.95,
       "2026-11-24": 39.95,
       "2026-11-25": 39.95,
-      "2026-11-26": 39.95
+      "2026-11-26": 32.95
     }
   },
   "https://www.tactics.com/deathwish/hayes-mindfulness-8475-skateboard-deck": {
@@ -79639,9 +79688,11 @@
     "all_time_low": 46.95,
     "all_time_low_date": "2026-05-30",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gj9h/1a/doom-sayers-club-lil-kool-stomp-out-9125-skateboard-deck.jpg",
     "width": 9.125,
     "length": 53.95,
+    "wheelbase": 14.75,
     "widths": [
       9.125
     ],
@@ -79669,9 +79720,7 @@
       "2026-10-19": 53.95,
       "2026-10-20": 53.95,
       "2026-11-26": 66.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.75
+    }
   },
   "https://www.tactics.com/doom-sayers-club/never-bite-80-skateboard-deck": {
     "name": "Doom Sayers Club Never Bite 8.0 Skateboard Deck",
@@ -80035,9 +80084,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpwd/1a/fancy-lad-box-logo-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 69.95,
+    "wheelbase": 14.3,
     "widths": [
       8.25
     ],
@@ -80045,9 +80096,7 @@
       "2026-09-05": 55.95,
       "2026-09-07": 55.95,
       "2026-11-26": 69.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.3
+    }
   },
   "https://www.tactics.com/fancy-lad/box-logo-85-skateboard-deck": {
     "name": "Fancy Lad Box Logo 8.5 Skateboard Deck",
@@ -80117,7 +80166,9 @@
       "2026-10-19": 55.95,
       "2026-10-20": 55.95,
       "2026-11-26": 69.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.38
   },
   "https://www.tactics.com/fancy-lad/cat-treats-825-skateboard-deck/brown": {
     "name": "Fancy Lad Cat Treats 8.25 Skateboard Deck - brown",
@@ -80142,18 +80193,18 @@
     "all_time_low": 55.95,
     "all_time_low_date": "2026-09-14",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpv8/1a/fancy-lad-cat-treats-825-skateboard-deck-green.jpg",
     "width": 8.25,
     "length": 69.95,
+    "wheelbase": 14.38,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-09-14": 55.95,
       "2026-11-26": 69.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/fancy-lad/cats-feeding-81-skateboard-deck/black": {
     "name": "Fancy Lad Cats Feeding 8.1 Skateboard Deck - black",
@@ -80221,9 +80272,11 @@
     "all_time_low": 48.95,
     "all_time_low_date": "2026-05-30",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpvf/1a/fancy-lad-cats-feeding-81-skateboard-deck-blue.jpg",
     "width": 8.1,
     "length": 48.95,
+    "wheelbase": 14.5,
     "widths": [
       8.1
     ],
@@ -80249,9 +80302,7 @@
       "2026-10-19": 48.95,
       "2026-10-20": 48.95,
       "2026-11-26": 69.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/fancy-lad/cats-feeding-81-skateboard-deck/green": {
     "name": "Fancy Lad Cats Feeding 8.1 Skateboard Deck - green",
@@ -80428,9 +80479,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-18",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpwt/1a/fancy-lad-dubin-pro-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 69.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
@@ -80441,9 +80494,7 @@
       "2026-09-28": 55.95,
       "2026-09-30": 55.95,
       "2026-11-26": 69.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/fancy-lad/joker-85-skateboard-deck": {
     "name": "Fancy Lad Joker 8.5 Skateboard Deck",
@@ -80466,7 +80517,9 @@
       "2026-09-22": 55.95,
       "2026-09-26": 55.95,
       "2026-11-26": 69.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/fancy-lad/mask-85-skateboard-deck/black": {
     "name": "Fancy Lad Mask 8.5 Skateboard Deck - black",
@@ -80505,7 +80558,9 @@
       "2026-10-19": 48.95,
       "2026-10-20": 48.95,
       "2026-11-26": 69.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/fancy-lad/mask-85-skateboard-deck/blue": {
     "name": "Fancy Lad Mask 8.5 Skateboard Deck - blue",
@@ -80517,17 +80572,17 @@
     "all_time_low": 69.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpx5/1a/fancy-lad-mask-85-skateboard-deck-blue.jpg",
     "width": 8.5,
     "length": 69.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 69.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/fancy-lad/mask-85-skateboard-deck/brown": {
     "name": "Fancy Lad Mask 8.5 Skateboard Deck - brown",
@@ -80698,7 +80753,9 @@
       "2026-10-19": 55.95,
       "2026-10-20": 55.95,
       "2026-11-26": 69.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/fancy-lad/snowman-837-skateboard-deck": {
     "name": "Fancy Lad Snowman 8.37 Skateboard Deck",
@@ -80710,9 +80767,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-22",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpxi/1a/fancy-lad-snowman-837-skateboard-deck.jpg",
     "width": 8.37,
     "length": 55.95,
+    "wheelbase": 14.25,
     "widths": [
       8.37
     ],
@@ -80720,9 +80779,7 @@
       "2026-09-23": 55.95,
       "2026-10-01": 55.95,
       "2026-11-26": 69.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/fancy-lad/strode-825-skateboard-deck": {
     "name": "Fancy Lad Strode 8.25 Skateboard Deck",
@@ -80786,7 +80843,9 @@
     ],
     "prices": {
       "2026-11-26": 69.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.3
   },
   "https://www.tactics.com/fancy-lad/tomasello-pro-837-skateboard-deck/black": {
     "name": "Fancy Lad Tomasello Pro 8.37 Skateboard Deck - black",
@@ -80902,9 +80961,11 @@
     "all_time_low": 48.95,
     "all_time_low_date": "2026-06-01",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpxr/1a/fancy-lad-tomasello-pro-837-skateboard-deck-yellow.jpg",
     "width": 8.37,
     "length": 55.95,
+    "wheelbase": 14.25,
     "widths": [
       8.37
     ],
@@ -80930,9 +80991,7 @@
       "2026-10-19": 55.95,
       "2026-10-20": 55.95,
       "2026-11-26": 69.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/fixer/aloha-95-egg-skateboard-deck/white": {
     "name": "Fixer Aloha 9.5 Egg Skateboard Deck - white",
@@ -81037,7 +81096,9 @@
     ],
     "prices": {
       "2026-11-26": 134.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.2
   },
   "https://www.tactics.com/flip/majerus-optical-84-skateboard-deck": {
     "name": "Flip Majerus Optical 8.4 Skateboard Deck",
@@ -81509,9 +81570,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-12",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gjzb/1a/frog-milic-bat-brain-80-skateboard-deck.jpg",
     "width": 8.0,
     "length": 79.95,
+    "wheelbase": 14.25,
     "widths": [
       8.0
     ],
@@ -81519,9 +81582,7 @@
       "2026-09-11": 63.95,
       "2026-09-14": 63.95,
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/frog/milic-bat-brain-838-skateboard-deck": {
     "name": "Frog Milic Bat Brain 8.38 Skateboard Deck",
@@ -81599,9 +81660,11 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-07-07",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/goua/1a/fucking-awesome-beatrice-by-john-818-skateboard-deck.jpg",
     "width": 8.18,
     "length": 78.95,
+    "wheelbase": 14.0,
     "widths": [
       8.18
     ],
@@ -81609,9 +81672,7 @@
       "2026-09-05": 63.95,
       "2026-09-13": 63.95,
       "2026-11-26": 78.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/fucking-awesome/berle-world-85-skateboard-deck/holographic": {
     "name": "Fucking Awesome Berle World 8.5 Skateboard Deck - holographic",
@@ -82654,9 +82715,11 @@
     "all_time_low": 55.95,
     "all_time_low_date": "2026-05-31",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gqzz/1a/heritage-zero-sophisto-head-logo-80-skateboard-deck.jpg",
     "width": 8.0,
     "length": 63.95,
+    "wheelbase": 14.25,
     "widths": [
       8.0
     ],
@@ -82681,9 +82744,7 @@
       "2026-10-19": 63.95,
       "2026-10-20": 63.95,
       "2026-11-26": 78.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/heritage/zero-sophisto-knife-kid-825-skateboard-deck": {
     "name": "Heritage Zero Sophisto Knife Kid 8.25 Skateboard Deck",
@@ -82763,9 +82824,11 @@
     "all_time_low": 55.95,
     "all_time_low_date": "2026-05-30",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gr07/1a/heritage-zero-sophisto-suzie-spraycan-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 63.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
@@ -82794,9 +82857,7 @@
       "2026-10-19": 63.95,
       "2026-10-20": 63.95,
       "2026-11-26": 78.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/heroin/100th-egg-9125-skateboard-deck/multi": {
     "name": "Heroin 100th Egg 9.125 Skateboard Deck - multi",
@@ -82808,9 +82869,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/giuq/1a/heroin-100th-egg-9125-skateboard-deck.jpg",
     "width": 9.125,
     "length": 80.95,
+    "wheelbase": 14.5,
     "widths": [
       9.125
     ],
@@ -82824,9 +82887,7 @@
       "2026-09-09": 64.95,
       "2026-09-10": 64.95,
       "2026-11-26": 80.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/heroin/dead-dave-knock-off-101-skateboard-deck/green": {
     "name": "Heroin Dead Dave Knock Off 10.1 Skateboard Deck - green",
@@ -83019,8 +83080,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 47.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 39.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/fdcj/1a/herschel-supply-heritage-v2-backpack-rubber-chicory-coffee.jpg",
     "length": 47.95,
@@ -83039,7 +83100,7 @@
       "2026-11-23": 47.95,
       "2026-11-24": 47.95,
       "2026-11-25": 47.95,
-      "2026-11-26": 47.95
+      "2026-11-26": 39.95
     }
   },
   "https://www.tactics.com/herschel-supply/kaine-backpack/black": {
@@ -83049,8 +83110,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 59.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 42.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/g5fw/1a/herschel-supply-kaine-backpack-black.jpg",
     "length": 59.95,
@@ -83069,7 +83130,7 @@
       "2026-11-23": 59.95,
       "2026-11-24": 59.95,
       "2026-11-25": 59.95,
-      "2026-11-26": 59.95
+      "2026-11-26": 42.95
     }
   },
   "https://www.tactics.com/herschel-supply/pop-quiz-v2-backpack/bronze-brown-tan": {
@@ -83109,8 +83170,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 66.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 47.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/fdcq/1a/herschel-supply-pop-quiz-v2-backpack-navy-tan.jpg",
     "length": 66.95,
@@ -83129,7 +83190,7 @@
       "2026-11-23": 66.95,
       "2026-11-24": 66.95,
       "2026-11-25": 66.95,
-      "2026-11-26": 66.95
+      "2026-11-26": 47.95
     }
   },
   "https://www.tactics.com/herschel-supply/thrasher-gonz-x-herschel-classic-xl-backpack/woodland-camo": {
@@ -83139,8 +83200,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 48.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 34.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/g5g1/1a/herschel-supply-thrasher-gonz-x-herschel-classic-xl-backpack-woodland.jpg",
     "length": 48.95,
@@ -83159,7 +83220,7 @@
       "2026-11-23": 48.95,
       "2026-11-24": 48.95,
       "2026-11-25": 48.95,
-      "2026-11-26": 48.95
+      "2026-11-26": 34.95
     }
   },
   "https://www.tactics.com/hockey/allen-nobody-818-skateboard-deck": {
@@ -83377,7 +83438,8 @@
     ],
     "prices": {
       "2026-11-26": 131.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/hopps-skateboards/bighopps-80-complete-skateboard/orange": {
     "name": "Hopps BigHopps 8.0 Complete Skateboard - orange",
@@ -83444,7 +83506,8 @@
     ],
     "prices": {
       "2026-11-26": 131.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/hopps-skateboards/saturn-7875-complete-skateboard/green": {
     "name": "Hopps Saturn 7.875 Complete Skateboard - green",
@@ -83463,7 +83526,8 @@
     ],
     "prices": {
       "2026-11-26": 131.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/independent/baekkel-pro-hollow-stage-11-skateboard-trucks/transparent-black-159": {
     "name": "Independent Baekkel Pro Hollow Stage 11 Skateboard Trucks - transparent black 159",
@@ -84666,17 +84730,17 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-08-09",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gucg/1a/killing-floor-skateboards-alby-finish-line-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 79.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/killing-floor-skateboards/anderson-persuasion-838-skateboard-deck": {
     "name": "The Killing Floor Anderson Persuasion 8.38 Skateboard Deck",
@@ -84697,7 +84761,9 @@
     "prices": {
       "2026-09-11": 63.95,
       "2026-11-26": 79.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.375
   },
   "https://www.tactics.com/killing-floor-skateboards/boil-the-ocean-825-skateboard-deck": {
     "name": "The Killing Floor Boil The Ocean 8.25 Skateboard Deck",
@@ -84775,7 +84841,9 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/killing-floor-skateboards/higher-ground-825-skateboard-deck": {
     "name": "The Killing Floor Higher Ground 8.25 Skateboard Deck",
@@ -84880,9 +84948,11 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-08-09",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guci/1a/killing-floor-skateboards-love-fake-news-838-skateboard-deck.jpg",
     "width": 8.38,
     "length": 79.95,
+    "wheelbase": 14.375,
     "widths": [
       8.38
     ],
@@ -84890,9 +84960,7 @@
       "2026-09-12": 63.95,
       "2026-09-13": 63.95,
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.375
+    }
   },
   "https://www.tactics.com/killing-floor-skateboards/love-rock-shop-838-skateboard-deck": {
     "name": "The Killing Floor Love Rock Shop 8.38 Skateboard Deck",
@@ -84917,17 +84985,17 @@
     "all_time_low": 79.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guck/1a/killing-floor-skateboards-mayday-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 79.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/killing-floor-skateboards/nickoshie-resources-85-skateboard-deck": {
     "name": "The Killing Floor Nickoshie Resources 8.5 Skateboard Deck",
@@ -84939,9 +85007,11 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-08-07",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gucm/1a/killing-floor-skateboards-nickoshie-resources-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 79.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
@@ -84949,9 +85019,7 @@
       "2026-09-05": 63.95,
       "2026-09-07": 63.95,
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/killing-floor-skateboards/recalibrate-825-skateboard-deck": {
     "name": "The Killing Floor Recalibrate 8.25 Skateboard Deck",
@@ -84963,17 +85031,17 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-08-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guch/1a/killing-floor-skateboards-recalibrate-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 79.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/killing-floor-skateboards/sun-ra-ltd-hand-printed-825-skateboard-deck": {
     "name": "The Killing Floor Sun Ra LTD Hand Printed 8.25 Skateboard Deck",
@@ -85007,9 +85075,11 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-08-08",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gucl/1a/killing-floor-skateboards-the-angels-forgot-to-pray-818-skateboard.jpg",
     "width": 8.125,
     "length": 79.95,
+    "wheelbase": 14.25,
     "widths": [
       8.125
     ],
@@ -85018,9 +85088,7 @@
       "2026-09-12": 63.95,
       "2026-09-14": 63.95,
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/killing-floor-skateboards/valverde-surrealistic-80-skateboard-deck/assorted": {
     "name": "The Killing Floor Valverde Surrealistic 8.0 Skateboard Deck - assorted",
@@ -85032,18 +85100,18 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-08-08",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gubd/1a/killing-floor-skateboards-valverde-surrealistic-80-skateboard-deck.jpg",
     "width": 8.0,
     "length": 79.95,
+    "wheelbase": 14.0,
     "widths": [
       8.0
     ],
     "prices": {
       "2026-09-03": 63.95,
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/killing-floor-skateboards/whole-earth-ii-80-skateboard-deck": {
     "name": "The Killing Floor Whole Earth II 8.0 Skateboard Deck",
@@ -85055,18 +85123,18 @@
     "all_time_low": 63.95,
     "all_time_low_date": "2026-09-11",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guca/1a/killing-floor-skateboards-whole-earth-ii-80-skateboard-deck.jpg",
     "width": 8.0,
     "length": 79.95,
+    "wheelbase": 14.125,
     "widths": [
       8.0
     ],
     "prices": {
       "2026-09-11": 63.95,
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.125
+    }
   },
   "https://www.tactics.com/killing-floor-skateboards/whole-earth-ii-85-skateboard-deck": {
     "name": "The Killing Floor Whole Earth II 8.5 Skateboard Deck",
@@ -85198,7 +85266,8 @@
     ],
     "prices": {
       "2026-11-26": 82.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/krooked/knox-angel-85-skateboard-deck/assorted": {
     "name": "Krooked Knox Angel 8.5 Skateboard Deck - assorted",
@@ -85210,17 +85279,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gud6/1a/krooked-knox-angel-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 92.95,
+    "wheelbase": 14.38,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/krooked/manderson-skulling-838-skateboard-deck/assorted": {
     "name": "Krooked Manderson Skulling 8.38 Skateboard Deck - assorted",
@@ -85232,17 +85301,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gucz/1a/krooked-manderson-skulling-838-skateboard-deck.jpg",
     "width": 8.38,
     "length": 92.95,
+    "wheelbase": 14.25,
     "widths": [
       8.38
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/krooked/navarez-off-838-skateboard-deck/assorted": {
     "name": "Krooked Navarez Off 8.38 Skateboard Deck - assorted",
@@ -85254,17 +85323,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gucr/1a/krooked-navarez-off-838-skateboard-deck.jpg",
     "width": 8.38,
     "length": 92.95,
+    "wheelbase": 14.5,
     "widths": [
       8.38
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/krooked/quarter-snacks-get-high-825-skateboard-deck/olive": {
     "name": "Krooked Quarter Snacks Get High 8.25 Skateboard Deck - olive",
@@ -85358,7 +85427,9 @@
       "2026-09-13": 64.95,
       "2026-09-14": 64.95,
       "2026-11-26": 80.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/krooked/quarter-snacks-snackman-90-skateboard-deck": {
     "name": "Krooked Quarter Snacks Snackman 9.0 Skateboard Deck",
@@ -85370,9 +85441,11 @@
     "all_time_low": 67.95,
     "all_time_low_date": "2026-02-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gk7r/1a/krooked-quarter-snacks-snackman-90-skateboard-deck.jpg",
     "width": 9.0,
     "length": 83.95,
+    "wheelbase": 14.25,
     "widths": [
       9.0
     ],
@@ -85380,9 +85453,7 @@
       "2026-09-06": 67.95,
       "2026-09-08": 67.95,
       "2026-11-26": 83.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/krooked/team-eyes-806-skateboard-deck/white": {
     "name": "Krooked Team Eyes 8.06 Skateboard Deck - white",
@@ -85394,17 +85465,17 @@
     "all_time_low": 84.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gdx7/1a/krooked-team-eyes-806-skateboard-deck-white.jpg",
     "width": 8.06,
     "length": 84.95,
+    "wheelbase": 14.38,
     "widths": [
       8.06
     ],
     "prices": {
       "2026-11-26": 84.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/krooked/team-eyes-825-easy-rider-skateboard-deck/green": {
     "name": "Krooked Team Eyes 8.25 Easy Rider Skateboard Deck - green",
@@ -85438,17 +85509,17 @@
     "all_time_low": 84.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/efmm/1a/krooked-team-eyes-825-skateboard-deck-orange.jpg",
     "width": 8.25,
     "length": 84.95,
+    "wheelbase": 14.38,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 84.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/krooked/team-eyes-838-easy-rider-skateboard-deck/blue": {
     "name": "Krooked Team Eyes 8.38 Easy Rider Skateboard Deck - blue",
@@ -85460,17 +85531,17 @@
     "all_time_low": 84.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/fnnz/1a/krooked-team-eyes-838-easy-rider-skateboard-deck-blue.jpg",
     "width": 8.38,
     "length": 84.95,
+    "wheelbase": 14.5,
     "widths": [
       8.38
     ],
     "prices": {
       "2026-11-26": 84.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/krooked/team-eyes-85-skateboard-deck/black": {
     "name": "Krooked Team Eyes 8.5 Skateboard Deck - black",
@@ -86427,17 +86498,17 @@
     "all_time_low": 89.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv3f/1a/magenta-jones-home-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 89.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 89.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/magenta/shogo-zama-home-80-skateboard-deck": {
     "name": "Magenta Shogo Zama Home 8.0 Skateboard Deck",
@@ -86449,6 +86520,7 @@
     "all_time_low": 89.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv8o/1a/magenta-shogo-zama-home-80-skateboard-deck.jpg",
     "width": 8.0,
     "length": 89.95,
@@ -86457,8 +86529,7 @@
     ],
     "prices": {
       "2026-11-26": 89.95
-    },
-    "wheelbase_checked": "2026-11-26"
+    }
   },
   "https://www.tactics.com/magenta/spelta-home-84-skateboard-deck": {
     "name": "Magenta Spelta Home 8.4 Skateboard Deck",
@@ -86514,17 +86585,17 @@
     "all_time_low": 89.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv3h/1a/magenta-valls-home-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 89.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 89.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/metal-skateboards/inauguration-85-skateboard-deck": {
     "name": "Metal Inauguration 8.5 Skateboard Deck",
@@ -86625,9 +86696,11 @@
     "all_time_low": 30.95,
     "all_time_low_date": "2026-05-21",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gc8a/1a/mini-logo-peacock-feather-75-255-shape-skateboard-deck.jpg",
     "width": 7.5,
     "length": 30.95,
+    "wheelbase": 13.75,
     "widths": [
       7.5
     ],
@@ -86660,9 +86733,7 @@
       "2026-10-19": 30.95,
       "2026-10-20": 30.95,
       "2026-11-26": 37.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 13.75
+    }
   },
   "https://www.tactics.com/mini-logo/peacock-feather-775-291-shape-skateboard-deck": {
     "name": "Mini Logo Peacock Feather 7.75 291 Shape Skateboard Deck",
@@ -86824,16 +86895,32 @@
     "all_time_low": 119.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gm9f/1a/misc-artists-devo-oh-no-its-devo-975-skateboard-deck.jpg",
     "width": 9.75,
+    "wheelbase": 15.2,
     "widths": [
       9.75
     ],
     "prices": {
       "2026-11-26": 119.95
+    }
+  },
+  "https://www.tactics.com/nike-acg/acg-daymax-backpack/black-college-grey-college-grey": {
+    "name": "Nike ACG ACG DAYMAX Backpack - black/college grey/college grey",
+    "store": "Tactics",
+    "part": "Packs",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 72.95,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://www.tactics.com/a/gu44/1a/nike-acg-acg-daymax-backpack-black-college-grey.jpg",
+    "length": 72.95,
+    "prices": {
+      "2026-11-26": 72.95
     },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 15.2
+    "stage": "new"
   },
   "https://www.tactics.com/nike-sb/dunk-high-pro-sb-quickstrike-skate-shoes/beyond-white-ivory-sand-dune-blue-void": {
     "name": "Nike SB Dunk High Pro SB - Quickstrike Skate Shoes - (beyond) white/ivory-sand dune-blue void",
@@ -86842,8 +86929,8 @@
     "first_seen": "2026-10-17",
     "last_seen": "2026-11-26",
     "observation_count": 41,
-    "all_time_low": 84.0,
-    "all_time_low_date": "2026-10-31",
+    "all_time_low": 70.0,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/guf4/1a/nike-sb-dunk-high-pro-sb-quickstrike-skate-shoes-beyond-white-ivory.jpg",
     "length": 98.0,
@@ -86888,7 +86975,7 @@
       "2026-11-23": 84.0,
       "2026-11-24": 84.0,
       "2026-11-25": 84.0,
-      "2026-11-26": 84.0
+      "2026-11-26": 70.0
     }
   },
   "https://www.tactics.com/nike-sb/dunk-low-pro-sb-skate-shoes/lightening-wolf-grey-denim-turq-iron-grey-black": {
@@ -86898,8 +86985,8 @@
     "first_seen": "2026-10-17",
     "last_seen": "2026-11-26",
     "observation_count": 41,
-    "all_time_low": 90.95,
-    "all_time_low_date": "2026-10-17",
+    "all_time_low": 64.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gt48/1a/nike-sb-dunk-low-pro-sb-skate-shoes-lightening-wolf-grey-denim-turq.jpg",
     "length": 90.95,
@@ -86944,7 +87031,7 @@
       "2026-11-23": 90.95,
       "2026-11-24": 90.95,
       "2026-11-25": 90.95,
-      "2026-11-26": 90.95
+      "2026-11-26": 64.95
     }
   },
   "https://www.tactics.com/nike-sb/dunk-low-pro-sb-skate-shoes/mineral-slate-dark-raisin-particle-rose-silt-red": {
@@ -86954,8 +87041,8 @@
     "first_seen": "2026-10-17",
     "last_seen": "2026-11-26",
     "observation_count": 35,
-    "all_time_low": 83.95,
-    "all_time_low_date": "2026-10-17",
+    "all_time_low": 59.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gsak/1a/nike-sb-dunk-low-pro-sb-skate-shoes-mineral-slate-dark-raisin.jpg",
     "length": 83.95,
@@ -86994,7 +87081,7 @@
       "2026-11-23": 83.95,
       "2026-11-24": 83.95,
       "2026-11-25": 83.95,
-      "2026-11-26": 83.95
+      "2026-11-26": 59.95
     }
   },
   "https://www.tactics.com/nike-sb/heritage-20-backpack/black-black-white": {
@@ -87004,8 +87091,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 23.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 19.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gt94/1a/nike-sb-heritage-20-backpack-black-white.jpg",
     "width": 2.0,
@@ -87025,8 +87112,58 @@
       "2026-11-23": 23.95,
       "2026-11-24": 23.95,
       "2026-11-25": 23.95,
-      "2026-11-26": 23.95
+      "2026-11-26": 19.95
     }
+  },
+  "https://www.tactics.com/nike-sb/heritage-20-backpack/light-army": {
+    "name": "Nike SB Heritage 2.0 Backpack - light army",
+    "store": "Tactics",
+    "part": "Packs",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 19.95,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://www.tactics.com/a/grzf/1a/nike-sb-heritage-20-backpack-light-army.jpg",
+    "width": 2.0,
+    "length": 19.95,
+    "prices": {
+      "2026-11-26": 19.95
+    },
+    "stage": "new"
+  },
+  "https://www.tactics.com/nike-sb/heritage-20-backpack/tattoo": {
+    "name": "Nike SB Heritage 2.0 Backpack - tattoo",
+    "store": "Tactics",
+    "part": "Packs",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 19.95,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://www.tactics.com/a/gt97/1a/nike-sb-heritage-20-backpack-tattoo.jpg",
+    "width": 2.0,
+    "length": 19.95,
+    "prices": {
+      "2026-11-26": 19.95
+    },
+    "stage": "new"
+  },
+  "https://www.tactics.com/nike-sb/rpm-backpack/tattoo-black": {
+    "name": "Nike SB RPM Backpack - tattoo/black",
+    "store": "Tactics",
+    "part": "Packs",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 53.95,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://www.tactics.com/a/gn13/1a/nike-sb-rpm-backpack-tattoo-black.jpg",
+    "length": 53.95,
+    "prices": {
+      "2026-11-26": 53.95
+    },
+    "stage": "new"
   },
   "https://www.tactics.com/oj/akerley-pro-chrysalis-chubbies-skateboard-wheels/white-99a": {
     "name": "OJ Akerley Pro Chrysalis Chubbies Skateboard Wheels - white (99a)",
@@ -87211,7 +87348,9 @@
     ],
     "prices": {
       "2026-11-26": 134.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/plan-b/giraud-rooster-8125-skateboard-deck": {
     "name": "Plan B Giraud Rooster 8.125 Skateboard Deck",
@@ -87223,9 +87362,11 @@
     "all_time_low": 50.95,
     "all_time_low_date": "2026-02-09",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/giw2/1a/plan-b-giraud-rooster-8125-skateboard-deck.jpg",
     "width": 8.125,
     "length": 50.95,
+    "wheelbase": 14.2,
     "widths": [
       8.125
     ],
@@ -87251,9 +87392,7 @@
       "2026-10-19": 50.95,
       "2026-10-20": 50.95,
       "2026-11-26": 62.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.2
+    }
   },
   "https://www.tactics.com/plan-b/gustavo-trill-80-skateboard-deck/multi": {
     "name": "Plan B Gustavo Trill 8.0 Skateboard Deck - multi",
@@ -87285,7 +87424,9 @@
     ],
     "prices": {
       "2026-11-26": 134.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.2
   },
   "https://www.tactics.com/plan-b/houston-80-complete-skateboard": {
     "name": "Plan B Houston 8.0 Complete Skateboard",
@@ -87304,7 +87445,9 @@
     ],
     "prices": {
       "2026-11-26": 134.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.2
   },
   "https://www.tactics.com/plan-b/joslin-el-toro-825-skateboard-deck": {
     "name": "Plan B Joslin El Toro 8.25 Skateboard Deck",
@@ -87316,9 +87459,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gr1j/1a/plan-b-joslin-el-toro-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 55.95,
+    "wheelbase": 14.2,
     "widths": [
       8.25
     ],
@@ -87347,9 +87492,7 @@
       "2026-10-19": 55.95,
       "2026-10-20": 55.95,
       "2026-11-26": 68.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.2
+    }
   },
   "https://www.tactics.com/plan-b/joslin-g-ma-80-skateboard-deck": {
     "name": "Plan B Joslin G-Ma 8.0 Skateboard Deck",
@@ -87386,9 +87529,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-25",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gr1r/1a/plan-b-joslin-g-ma-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 55.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
@@ -87421,9 +87566,7 @@
       "2026-10-19": 55.95,
       "2026-10-20": 55.95,
       "2026-11-26": 68.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/plan-b/joslin-g-ma-tre-85-skateboard-deck": {
     "name": "Plan B Joslin G-Ma Tre 8.5 Skateboard Deck",
@@ -87435,9 +87578,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gr1v/1a/plan-b-joslin-g-ma-tre-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 55.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
@@ -87469,9 +87614,7 @@
       "2026-10-19": 55.95,
       "2026-10-20": 55.95,
       "2026-11-26": 68.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/plan-b/joslin-lew-holographic-8375-skateboard-deck": {
     "name": "Plan B Joslin Lew Holographic 8.375 Skateboard Deck",
@@ -87586,7 +87729,9 @@
     ],
     "prices": {
       "2026-11-26": 134.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.2
   },
   "https://www.tactics.com/plan-b/og-skulls-80-complete-skateboard": {
     "name": "Plan B OG Skulls 8.0 Complete Skateboard",
@@ -87637,9 +87782,11 @@
     "all_time_low": 50.95,
     "all_time_low_date": "2026-02-15",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gix7/1a/plan-b-one-love-metallic-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 50.95,
+    "wheelbase": 14.2,
     "widths": [
       8.25
     ],
@@ -87666,9 +87813,7 @@
       "2026-10-19": 50.95,
       "2026-10-20": 50.95,
       "2026-11-26": 62.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.2
+    }
   },
   "https://www.tactics.com/polar-skate-co/in-search-of-the-miraculous-eyeball-885-skateboard-deck": {
     "name": "Polar Skate Co. In Search Of The Miraculous - Eyeball 8.85 Skateboard Deck",
@@ -87700,7 +87845,9 @@
     ],
     "prices": {
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/powell-peralta/andy-anderson-heron-skull-913-flight-skateboard-deck/multi": {
     "name": "Powell Peralta Andy Anderson Heron Skull 9.13 Flight Skateboard Deck - multi",
@@ -87791,9 +87938,11 @@
     "all_time_low": 46.95,
     "all_time_low_date": "2026-10-02",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gc7m/1a/powell-peralta-caballero-dragon-825-248-shape-skateboard-deck-yellow.jpg",
     "width": 8.25,
     "length": 46.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
@@ -87818,9 +87967,7 @@
       "2026-10-19": 46.95,
       "2026-10-20": 46.95,
       "2026-11-26": 57.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/powell-peralta/caballero-dragon-875-245-shape-skateboard-deck/green-fade": {
     "name": "Powell Peralta Caballero Dragon 8.75 245 Shape Skateboard Deck - green fade",
@@ -87847,9 +87994,11 @@
     "all_time_low": 46.95,
     "all_time_low_date": "2026-09-04",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gc7j/1a/powell-peralta-caballero-gundam-825-243-shape-skateboard-deck-white.jpg",
     "width": 8.25,
     "length": 46.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
@@ -87881,9 +88030,7 @@
       "2026-10-19": 46.95,
       "2026-10-20": 46.95,
       "2026-11-26": 57.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/powell-peralta/caballero-gundam-825-flight-243-shape-skateboard-deck/burgundy-gold-foil": {
     "name": "Powell Peralta Caballero Gundam 8.25 Flight 243 Shape Skateboard Deck - burgundy/gold foil",
@@ -87971,8 +88118,10 @@
     "all_time_low": 90.95,
     "all_time_low_date": "2026-05-15",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/ga3z/1a/powell-peralta-caballero-gundam-85-flight-244-shape-skateboard-deck.jpg",
     "width": 8.5,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
@@ -87982,9 +88131,7 @@
       "2026-09-07": 95.95,
       "2026-09-10": 95.95,
       "2026-11-26": 119.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/powell-peralta/chris-hiett-skull-95-skateboard-deck/green": {
     "name": "Powell Peralta Chris Hiett Skull 9.5 Skateboard Deck - green",
@@ -87996,16 +88143,16 @@
     "all_time_low": 103.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpcw/1a/powell-peralta-chris-hiett-skull-95-skateboard-deck-green.jpg",
     "width": 9.5,
+    "wheelbase": 14.63,
     "widths": [
       9.5
     ],
     "prices": {
       "2026-11-26": 103.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.63
+    }
   },
   "https://www.tactics.com/powell-peralta/chris-senn-cop-913-reissue-skateboard-deck/multi": {
     "name": "Powell Peralta Chris Senn Cop 9.13 Reissue Skateboard Deck - multi",
@@ -88130,7 +88277,9 @@
     ],
     "prices": {
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/powell-peralta/hoefler-nano-rats-av1-narrow-ride-patch-skateboard-wheels/off-white-97a": {
     "name": "Powell Peralta Hoefler Nano Rats AV1 Narrow Ride Patch Skateboard Wheels - off white (97a)",
@@ -88212,17 +88361,17 @@
     "all_time_low": 57.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/g98z/1a/powell-peralta-isamu-yamamoto-skull-80-skateboard-deck.jpg",
     "width": 8.0,
     "length": 57.95,
+    "wheelbase": 14.0,
     "widths": [
       8.0
     ],
     "prices": {
       "2026-11-26": 57.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/powell-peralta/mcgill-skull-snake-85-244-shape-skateboard-deck/yellow-fade": {
     "name": "Powell Peralta McGill Skull & Snake 8.5 244 Shape Skateboard Deck - yellow fade",
@@ -88690,16 +88839,16 @@
     "all_time_low": 119.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/dvg6/1a/powell-peralta-retro-black-825-flight-243-shape-skateboard-deck.jpg",
     "width": 8.25,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 119.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/powell-peralta/retro-black-85-flight-244-shape-skateboard-deck/multi": {
     "name": "Powell Peralta Retro Black 8.5 Flight 244 Shape Skateboard Deck - multi",
@@ -88718,7 +88867,9 @@
     ],
     "prices": {
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.375
   },
   "https://www.tactics.com/powell-peralta/semien-pro-nano-rats-av5-medium-ride-patch-skateboard-wheels/off-white-93a": {
     "name": "Powell Peralta Semien Pro Nano Rats AV5 Medium Ride Patch Skateboard Wheels - off white (93a)",
@@ -88795,7 +88946,9 @@
     ],
     "prices": {
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/powell-peralta/skeleton-838-flight-243w-shape-skateboard-deck/red-foil": {
     "name": "Powell Peralta Skeleton 8.38 Flight 243W Shape Skateboard Deck - red foil",
@@ -88883,7 +89036,9 @@
     ],
     "prices": {
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.375
   },
   "https://www.tactics.com/powell-peralta/skeleton-875-flight-308-shape-skateboard-deck/blue-foil": {
     "name": "Powell Peralta Skeleton 8.75 Flight 308 Shape Skateboard Deck - blue foil",
@@ -89025,7 +89180,9 @@
       "2026-10-19": 95.95,
       "2026-10-20": 95.95,
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/powell-peralta/vallely-elephant-863-flight-skateboard-deck/silver-foil": {
     "name": "Powell Peralta Vallely Elephant 8.63 Flight Skateboard Deck - silver foil",
@@ -89160,7 +89317,9 @@
       "2026-10-19": 46.95,
       "2026-10-20": 46.95,
       "2026-11-26": 57.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/powell-peralta/yosozumi-onna-bugeisha-flight-825-skateboard-deck/white-gold-foil": {
     "name": "Powell Peralta Yosozumi Onna-Bugeisha Flight 8.25 Skateboard Deck - white/gold foil",
@@ -89172,9 +89331,11 @@
     "all_time_low": 90.95,
     "all_time_low_date": "2026-05-15",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gpdp/1a/powell-peralta-yosozumi-onna-bugeisha-flight-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 95.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
@@ -89207,9 +89368,7 @@
       "2026-10-19": 95.95,
       "2026-10-20": 95.95,
       "2026-11-26": 119.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/protec/classic-certified-eps-skate-helmet/gloss-white": {
     "name": "ProTec Classic Certified EPS Skate Helmet - gloss white",
@@ -89587,7 +89746,9 @@
     ],
     "prices": {
       "2026-11-26": 114.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 13.88
   },
   "https://www.tactics.com/push/bee-zombie-incomplete-80-complete-skateboard/peach": {
     "name": "Push Bee Zombie Incomplete 8.0 Complete Skateboard - peach",
@@ -89606,7 +89767,8 @@
     ],
     "prices": {
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/push/big-rag-doll-incomplete-75-complete-skateboard/purple": {
     "name": "Push Big Rag Doll Incomplete 7.5 Complete Skateboard - purple",
@@ -89625,7 +89787,8 @@
     ],
     "prices": {
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/push/bluey-incomplete-825-complete-skateboard/blue": {
     "name": "Push Bluey Incomplete 8.25 Complete Skateboard - blue",
@@ -89644,7 +89807,8 @@
     ],
     "prices": {
       "2026-11-26": 114.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/push/frogster-incomplete-775-complete-skateboard/teal": {
     "name": "Push Frogster Incomplete 7.75 Complete Skateboard - teal",
@@ -89663,7 +89827,8 @@
     ],
     "prices": {
       "2026-11-26": 119.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/push/lizard-guy-incomplete-75-complete-skateboard/green": {
     "name": "Push Lizard Guy Incomplete 7.5 Complete Skateboard - green",
@@ -89701,7 +89866,9 @@
     ],
     "prices": {
       "2026-11-26": 104.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 13.88
   },
   "https://www.tactics.com/pylon/burn-up-the-night-80-skateboard-deck/black-pipeline": {
     "name": "Pylon Burn Up The Night 8.0 Skateboard Deck - black (pipeline)",
@@ -89726,15 +89893,15 @@
     "all_time_low": 60.95,
     "all_time_low_date": "2026-09-27",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/grft/1a/pylon-burn-up-the-night-80-skateboard-deck-black-pipeline.jpg",
     "length": 75.95,
+    "wheelbase": 14.5,
     "prices": {
       "2026-09-27": 60.95,
       "2026-09-28": 60.95,
       "2026-11-26": 75.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/pylon/chalmers-half-half-825-skateboard-deck": {
     "name": "Pylon Chalmers Half & Half 8.25 Skateboard Deck",
@@ -89790,17 +89957,17 @@
     "all_time_low": 53.95,
     "all_time_low_date": "2026-06-04",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/grfp/1a/pylon-chalmers-half-half-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 75.95,
+    "wheelbase": 15.0,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 75.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 15.0
+    }
   },
   "https://www.tactics.com/pylon/chalmers-price-is-wrong-825-skateboard-deck/pipeline": {
     "name": "Pylon Chalmers Price Is Wrong 8.25 Skateboard Deck - pipeline",
@@ -89838,8 +90005,10 @@
     "all_time_low": 60.95,
     "all_time_low_date": "2026-08-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/grg5/1a/pylon-chalmers-price-is-wrong-80-skateboard-deck-pipeline.jpg",
     "length": 75.95,
+    "wheelbase": 14.5,
     "prices": {
       "2026-09-18": 60.95,
       "2026-09-19": 60.95,
@@ -89852,9 +90021,7 @@
       "2026-09-29": 60.95,
       "2026-09-30": 60.95,
       "2026-11-26": 75.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/pylon/ecstasy-and-danger-skateboard-deck/black-nullifier": {
     "name": "Pylon Ecstasy And Danger Skateboard Deck - black (nullifier)",
@@ -89886,17 +90053,17 @@
     "all_time_low": 60.95,
     "all_time_low_date": "2026-04-29",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/grgt/1a/pylon-future-warriors-825-skateboard-deck-black-flat-earth.jpg",
     "width": 8.25,
     "length": 75.95,
+    "wheelbase": 14.0,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 75.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/pylon/future-warriors-825-twin-skateboard-deck/black-twin-pipeline": {
     "name": "Pylon Future Warriors 8.25 Twin Skateboard Deck - black (twin pipeline)",
@@ -90055,18 +90222,18 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-10",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gdd6/1a/quasi-skateboards-oriole-8625-skateboard-deck.jpg",
     "width": 8.625,
     "length": 80.95,
+    "wheelbase": 14.75,
     "widths": [
       8.625
     ],
     "prices": {
       "2026-09-03": 64.95,
       "2026-11-26": 80.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.75
+    }
   },
   "https://www.tactics.com/quasi-skateboards/ply-logo-8625-skateboard-deck": {
     "name": "Quasi Ply Logo 8.625 Skateboard Deck",
@@ -90096,9 +90263,11 @@
     "all_time_low": 64.95,
     "all_time_low_date": "2026-07-01",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/g847/1a/quasi-skateboards-rowe-exhibition-80-skateboard-deck.jpg",
     "width": 8.0,
     "length": 80.95,
+    "wheelbase": 14.25,
     "widths": [
       8.0
     ],
@@ -90106,9 +90275,7 @@
       "2026-09-05": 64.95,
       "2026-09-07": 64.95,
       "2026-11-26": 80.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/quasi-skateboards/technicolor-90-skateboard-deck": {
     "name": "Quasi Technicolor 9.0 Skateboard Deck",
@@ -90120,18 +90287,18 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-14",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/fnxd/1a/quasi-skateboards-technicolor-90-skateboard-deck.jpg",
     "width": 9.0,
     "length": 77.95,
+    "wheelbase": 14.375,
     "widths": [
       9.0
     ],
     "prices": {
       "2026-09-11": 62.95,
       "2026-11-26": 77.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.375
+    }
   },
   "https://www.tactics.com/real/be-free-806-complete-skateboard": {
     "name": "Real Be Free 8.06 Complete Skateboard",
@@ -90150,7 +90317,9 @@
     ],
     "prices": {
       "2026-11-26": 159.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/real/bubble-letters-85-complete-skateboard": {
     "name": "Real Bubble Letters 8.5 Complete Skateboard",
@@ -90184,7 +90353,9 @@
     "image": "https://www.tactics.com/a/guss/1a/real-dbx-oval-full-shape-skateboard-deck-green.jpg",
     "prices": {
       "2026-11-26": 132.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.62
   },
   "https://www.tactics.com/real/dbx-oval-full-shape-skateboard-deck/yellow": {
     "name": "Real DBX Oval Full Shape Skateboard Deck - yellow",
@@ -90199,7 +90370,9 @@
     "image": "https://www.tactics.com/a/gust/1a/real-dbx-oval-full-shape-skateboard-deck-yellow.jpg",
     "prices": {
       "2026-11-26": 132.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.62
   },
   "https://www.tactics.com/real/dbx-oval-skateboard-deck/red-foil": {
     "name": "Real DBX Oval Skateboard Deck - red foil",
@@ -90214,7 +90387,9 @@
     "image": "https://www.tactics.com/a/gut6/1a/real-dbx-oval-skateboard-deck-red-foil.jpg",
     "prices": {
       "2026-11-26": 132.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.62
   },
   "https://www.tactics.com/real/dlx-ssd-26-shop-keepers-806-skateboard-deck": {
     "name": "Real DLX - SSD '26 Shop Keepers 8.06 Skateboard Deck",
@@ -90294,7 +90469,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/real/emb-skateboard-deck": {
     "name": "Real EMB Skateboard Deck",
@@ -90310,7 +90487,9 @@
     "length": 92.95,
     "prices": {
       "2026-11-26": 92.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.38
   },
   "https://www.tactics.com/real/hause-ember-85-skateboard-deck/white": {
     "name": "Real Hause Ember 8.5 Skateboard Deck - white",
@@ -90322,17 +90501,17 @@
     "all_time_low": 94.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gtr6/1a/real-hause-ember-85-skateboard-deck-white.jpg",
     "width": 8.5,
     "length": 94.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 94.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/real/hayley-wilson-stained-85-skateboard-deck/purple": {
     "name": "Real Hayley Wilson Stained 8.5 Skateboard Deck - purple",
@@ -90344,17 +90523,17 @@
     "all_time_low": 84.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gk8d/1a/real-hayley-wilson-stained-85-skateboard-deck-purple.jpg",
     "width": 8.5,
     "length": 84.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 84.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/real/hayley-wilson-threadline-838-skateboard-deck/purple": {
     "name": "Real Hayley Wilson Threadline 8.38 Skateboard Deck - purple",
@@ -90421,7 +90600,9 @@
     ],
     "prices": {
       "2026-11-26": 92.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 13.88
   },
   "https://www.tactics.com/real/huf-cathedral-825-skateboard-deck/holographic-cathedral": {
     "name": "Real Huf Cathedral 8.25 Skateboard Deck - holographic cathedral",
@@ -90441,7 +90622,9 @@
     ],
     "prices": {
       "2026-11-26": 94.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.38
   },
   "https://www.tactics.com/real/huf-cathedral-85-skateboard-deck": {
     "name": "Real Huf Cathedral 8.5 Skateboard Deck",
@@ -90461,7 +90644,9 @@
     ],
     "prices": {
       "2026-11-26": 83.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.375
   },
   "https://www.tactics.com/real/ishod-cathedral-ii-twin-tail-skateboard-deck": {
     "name": "Real Ishod Cathedral II Twin Tail Skateboard Deck",
@@ -90477,7 +90662,9 @@
     "length": 92.95,
     "prices": {
       "2026-11-26": 92.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.33
   },
   "https://www.tactics.com/real/ishod-catscratch-twin-dbx-skateboard-deck/tie-dye": {
     "name": "Real Ishod Catscratch Twin DBX Skateboard Deck - tie-dye",
@@ -90489,12 +90676,12 @@
     "all_time_low": 137.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gusx/1a/real-ishod-catscratch-twin-dbx-skateboard-deck-tie-dye.jpg",
+    "wheelbase": 14.33,
     "prices": {
       "2026-11-26": 137.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.33
+    }
   },
   "https://www.tactics.com/real/ishod-cerebrus-dbx-838-skateboard-deck/black": {
     "name": "Real Ishod Cerebrus DBX 8.38 Skateboard Deck - black",
@@ -90552,7 +90739,9 @@
     "length": 92.95,
     "prices": {
       "2026-11-26": 92.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 13.88
   },
   "https://www.tactics.com/real/ishod-peace-ltd-foil-825-skateboard-deck/gold-foil": {
     "name": "Real Ishod Peace LTD Foil 8.25 Skateboard Deck - gold foil",
@@ -90572,7 +90761,9 @@
     ],
     "prices": {
       "2026-11-26": 81.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.38
   },
   "https://www.tactics.com/real/ishod-peace-ltd-foil-dbx-85-skateboard-deck/gold-foil": {
     "name": "Real Ishod Peace LTD Foil DBX 8.5 Skateboard Deck - gold foil",
@@ -90591,7 +90782,9 @@
     ],
     "prices": {
       "2026-11-26": 137.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/real/ishod-shape-code-85-skateboard-deck/red": {
     "name": "Real Ishod Shape Code 8.5 Skateboard Deck - red",
@@ -90633,7 +90826,9 @@
     ],
     "prices": {
       "2026-11-26": 92.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/real/mason-shape-code-828-skateboard-deck/yellow": {
     "name": "Real Mason Shape Code 8.28 Skateboard Deck - yellow",
@@ -90655,7 +90850,9 @@
       "2026-09-05": 75.95,
       "2026-09-07": 75.95,
       "2026-11-26": 94.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.12
   },
   "https://www.tactics.com/real/mason-volcano-dbx-825-skateboard-deck/assorted": {
     "name": "Real Mason Volcano DBX 8.25 Skateboard Deck - assorted",
@@ -90707,18 +90904,18 @@
     "all_time_low": 75.95,
     "all_time_low_date": "2026-08-08",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gtra/1a/real-praman-favorite-skater-85-skateboard-deck-red-yellow-stain.jpg",
     "width": 8.5,
     "length": 94.95,
+    "wheelbase": 14.38,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-09-10": 75.95,
       "2026-11-26": 94.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/real/rose-oval-775-complete-skateboard": {
     "name": "Real Rose Oval 7.75 Complete Skateboard",
@@ -90768,17 +90965,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guv8/1a/real-schaff-4q-cathedral-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 92.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/real/stene-holographic-cathedral-838-full-se-shape-skateboard-deck": {
     "name": "Real Stene Holographic Cathedral 8.38 Full SE Shape Skateboard Deck",
@@ -90818,7 +91015,9 @@
       "2026-10-19": 67.95,
       "2026-10-20": 67.95,
       "2026-11-26": 83.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/real/synthetic-peace-85-skateboard-deck/purple": {
     "name": "Real Synthetic Peace 8.5 Skateboard Deck - purple",
@@ -90838,7 +91037,9 @@
     ],
     "prices": {
       "2026-11-26": 79.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/real/team-825-slick-skateboard-deck/yellow": {
     "name": "Real Team 8.25 Slick Skateboard Deck - yellow",
@@ -90858,7 +91059,9 @@
     ],
     "prices": {
       "2026-11-26": 94.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.38
   },
   "https://www.tactics.com/real/team-85-slick-skateboard-deck/blue": {
     "name": "Real Team 8.5 Slick Skateboard Deck - blue",
@@ -90879,7 +91082,9 @@
     "prices": {
       "2026-09-03": 75.95,
       "2026-11-26": 94.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/real/team-classic-oval-75-true-mid-shape-skateboard-deck/orange": {
     "name": "Real Team Classic Oval 7.5 True Mid Shape Skateboard Deck - orange",
@@ -90908,7 +91113,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.75
   },
   "https://www.tactics.com/real/team-classic-oval-skateboard-deck/blue": {
     "name": "Real Team Classic Oval Skateboard Deck - blue",
@@ -90924,7 +91131,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.75
   },
   "https://www.tactics.com/real/team-classic-oval-skateboard-deck/grey": {
     "name": "Real Team Classic Oval Skateboard Deck - grey",
@@ -90940,7 +91149,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.75
   },
   "https://www.tactics.com/real/team-classic-oval-skateboard-deck/orange": {
     "name": "Real Team Classic Oval Skateboard Deck - orange",
@@ -90952,13 +91163,13 @@
     "all_time_low": 84.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guvc/1a/real-team-classic-oval-skateboard-deck-orange.jpg",
     "length": 84.95,
+    "wheelbase": 12.75,
     "prices": {
       "2026-11-26": 84.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 12.75
+    }
   },
   "https://www.tactics.com/real/team-classic-oval-skateboard-deck/red": {
     "name": "Real Team Classic Oval Skateboard Deck - red",
@@ -90974,7 +91185,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.75
   },
   "https://www.tactics.com/real/team-classic-oval-skateboard-deck/white": {
     "name": "Real Team Classic Oval Skateboard Deck - white",
@@ -90990,7 +91203,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.75
   },
   "https://www.tactics.com/real/team-classic-oval-skateboard-deck/yellow": {
     "name": "Real Team Classic Oval Skateboard Deck - yellow",
@@ -91006,7 +91221,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.75
   },
   "https://www.tactics.com/real/team-non-fiction-skateboard-deck/brown": {
     "name": "Real Team Non-Fiction Skateboard Deck - brown",
@@ -91022,7 +91239,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/real/team-non-fiction-skateboard-deck/teal": {
     "name": "Real Team Non-Fiction Skateboard Deck - teal",
@@ -91038,7 +91257,9 @@
     "length": 84.95,
     "prices": {
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/real/walker-flock-838-easy-rider-skateboard-deck": {
     "name": "Real Walker Flock 8.38 Easy Rider Skateboard Deck",
@@ -91088,7 +91309,9 @@
       "2026-10-19": 75.95,
       "2026-10-20": 75.95,
       "2026-11-26": 94.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/real/wilkins-mascot-85-skateboard-deck": {
     "name": "Real Wilkins Mascot 8.5 Skateboard Deck",
@@ -91100,17 +91323,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guv0/1a/real-wilkins-mascot-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 92.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/real/zion-pack-85-heavy-weight-skateboard-deck/green": {
     "name": "Real Zion Pack 8.5 Heavy Weight Skateboard Deck - green",
@@ -91122,9 +91345,11 @@
     "all_time_low": 75.95,
     "all_time_low_date": "2026-09-04",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gts6/1a/real-zion-pack-85-heavy-weight-skateboard-deck-green.jpg",
     "width": 8.5,
     "length": 94.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
@@ -91132,9 +91357,7 @@
       "2026-09-04": 75.95,
       "2026-09-09": 75.95,
       "2026-11-26": 94.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/real/zion-power-of-threes-85-easy-rider-skateboard-deck": {
     "name": "Real Zion Power of Threes 8.5 Easy Rider Skateboard Deck",
@@ -91157,7 +91380,9 @@
       "2026-09-14": 67.95,
       "2026-09-15": 67.95,
       "2026-11-26": 84.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.38
   },
   "https://www.tactics.com/rvca/edc-backpack/black": {
     "name": "RVCA EDC Backpack - black",
@@ -91166,8 +91391,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 41.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 34.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/fw05/1a/rvca-edc-backpack-black.jpg",
     "length": 41.95,
@@ -91186,7 +91411,7 @@
       "2026-11-23": 41.95,
       "2026-11-24": 41.95,
       "2026-11-25": 41.95,
-      "2026-11-26": 41.95
+      "2026-11-26": 34.95
     }
   },
   "https://www.tactics.com/s-one/gen-4-s1-pro-knee-pads/black-matte": {
@@ -91359,7 +91584,9 @@
     ],
     "prices": {
       "2026-11-26": 64.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.375
   },
   "https://www.tactics.com/santa-cruz/classic-dot-80-skateboard-deck/assorted": {
     "name": "Santa Cruz Classic Dot 8.0 Skateboard Deck - (assorted)",
@@ -91379,7 +91606,9 @@
     ],
     "prices": {
       "2026-11-26": 59.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/santa-cruz/classic-dot-825-skateboard-deck/assorted": {
     "name": "Santa Cruz Classic Dot 8.25 Skateboard Deck - (assorted)",
@@ -91421,7 +91650,9 @@
     ],
     "prices": {
       "2026-11-26": 59.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.375
   },
   "https://www.tactics.com/santa-cruz/crowded-hand-90-skateboard-deck/black": {
     "name": "Santa Cruz Crowded Hand 9.0 Skateboard Deck - black",
@@ -91441,7 +91672,9 @@
     ],
     "prices": {
       "2026-11-26": 79.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/santa-cruz/crowded-hand-skateboard-deck-85": {
     "name": "Santa Cruz Crowded Hand Skateboard Deck 8.5",
@@ -91461,7 +91694,9 @@
     ],
     "prices": {
       "2026-11-26": 79.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.375
   },
   "https://www.tactics.com/santa-cruz/delfino-pinball-914-wheel-wells-skateboard-deck/red": {
     "name": "Santa Cruz Delfino Pinball 9.14 Wheel Wells Skateboard Deck - red",
@@ -91528,7 +91763,9 @@
     ],
     "prices": {
       "2026-11-26": 86.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/santa-cruz/delfino-scribble-feelbase-825-skateboard-deck": {
     "name": "Santa Cruz Delfino Scribble FeelBase 8.25 Skateboard Deck",
@@ -91548,7 +91785,9 @@
     ],
     "prices": {
       "2026-11-26": 75.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 13.5
   },
   "https://www.tactics.com/santa-cruz/dot-guy-80-feelbase-skateboard-deck": {
     "name": "Santa Cruz Dot Guy 8.0 FeelBase Skateboard Deck",
@@ -91568,7 +91807,9 @@
     ],
     "prices": {
       "2026-11-26": 79.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/santa-cruz/dot-guy-8375-skateboard-deck/assorted": {
     "name": "Santa Cruz Dot Guy 8.375 Skateboard Deck - (assorted)",
@@ -91588,7 +91829,9 @@
     ],
     "prices": {
       "2026-11-26": 79.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/santa-cruz/dot-guy-88-skateboard-deck/assorted": {
     "name": "Santa Cruz Dot Guy 8.8 Skateboard Deck - (assorted)",
@@ -91600,17 +91843,17 @@
     "all_time_low": 79.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gunv/1a/santa-cruz-dot-guy-88-skateboard-deck-assorted.jpg",
     "width": 8.8,
     "length": 79.95,
+    "wheelbase": 14.25,
     "widths": [
       8.8
     ],
     "prices": {
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/santa-cruz/dressen-skull-rose-pro-925-skateboard-deck": {
     "name": "Santa Cruz Dressen Skull Rose Pro 9.25 Skateboard Deck",
@@ -91622,16 +91865,16 @@
     "all_time_low": 108.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guo9/1a/santa-cruz-dressen-skull-rose-pro-shaped-925in-x-3195in-santa-cruz.jpg",
     "width": 9.25,
+    "wheelbase": 14.0,
     "widths": [
       9.25
     ],
     "prices": {
       "2026-11-26": 108.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/santa-cruz/dressen-sword-925-skateboard-deck": {
     "name": "Santa Cruz Dressen Sword 9.25 Skateboard Deck",
@@ -91673,7 +91916,9 @@
     ],
     "prices": {
       "2026-11-26": 79.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/santa-cruz/knibbs-cryptic-85-skateboard-deck/black-red": {
     "name": "Santa Cruz Knibbs Cryptic 8.5 Skateboard Deck - black/red",
@@ -91693,7 +91938,9 @@
     ],
     "prices": {
       "2026-11-26": 77.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/santa-cruz/malba-crash-test-1003-screenprinted-ltd-reissue-skateboard-deck": {
     "name": "Santa Cruz Malba Crash Test 10.03 Screenprinted LTD Reissue Skateboard Deck",
@@ -91712,7 +91959,9 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 16.35
   },
   "https://www.tactics.com/santa-cruz/oops-mucus-1032-ltd-reissue-skateboard-deck": {
     "name": "Santa Cruz Oops Mucus 10.32 LTD Reissue Skateboard Deck",
@@ -91732,7 +91981,9 @@
     ],
     "prices": {
       "2026-11-26": 86.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 15.187
   },
   "https://www.tactics.com/santa-cruz/pace-dungeon-87-skateboard-deck": {
     "name": "Santa Cruz Pace Dungeon 8.7 Skateboard Deck",
@@ -91752,7 +92003,9 @@
     ],
     "prices": {
       "2026-11-26": 77.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/santa-cruz/pace-necromancer-87-skateboard-deck": {
     "name": "Santa Cruz Pace Necromancer 8.7 Skateboard Deck",
@@ -91774,7 +92027,9 @@
       "2026-09-12": 62.95,
       "2026-09-13": 62.95,
       "2026-11-26": 77.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/santa-cruz/possessed-head-85-skateboard-deck": {
     "name": "Santa Cruz Possessed Head 8.5 Skateboard Deck",
@@ -91816,7 +92071,9 @@
     ],
     "prices": {
       "2026-11-26": 77.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 13.0
   },
   "https://www.tactics.com/santa-cruz/roskopp-screaming-arm-90-skateboard-deck": {
     "name": "Santa Cruz Roskopp Screaming Arm 9.0 Skateboard Deck",
@@ -91836,7 +92093,8 @@
     ],
     "prices": {
       "2026-11-26": 77.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/santa-cruz/salba-baby-stomper-1009-ltd-reissue-skateboard-deck": {
     "name": "Santa Cruz Salba Baby Stomper 10.09 LTD Reissue Skateboard Deck",
@@ -91855,7 +92113,9 @@
     ],
     "prices": {
       "2026-11-26": 105.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.63
   },
   "https://www.tactics.com/santa-cruz/screaming-hand-80-skateboard-deck/assorted": {
     "name": "Santa Cruz Screaming Hand 8.0 Skateboard Deck - (assorted)",
@@ -91875,7 +92135,9 @@
     ],
     "prices": {
       "2026-11-26": 59.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.22
   },
   "https://www.tactics.com/santa-cruz/screaming-hand-825-skateboard-deck/assorted": {
     "name": "Santa Cruz Screaming Hand 8.25 Skateboard Deck - (assorted)",
@@ -91887,17 +92149,17 @@
     "all_time_low": 59.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gum3/1a/santa-cruz-screaming-hand-825-skateboard-deck-assorted.jpg",
     "width": 8.25,
     "length": 59.95,
+    "wheelbase": 14.188,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 59.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.188
+    }
   },
   "https://www.tactics.com/santa-cruz/screaming-hand-85-skateboard-deck/assorted": {
     "name": "Santa Cruz Screaming Hand 8.5 Skateboard Deck - (assorted)",
@@ -91909,17 +92171,17 @@
     "all_time_low": 71.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gum7/1a/santa-cruz-screaming-hand-85-skateboard-deck-assorted.jpg",
     "width": 8.5,
     "length": 71.95,
+    "wheelbase": 14.375,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 71.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.375
+    }
   },
   "https://www.tactics.com/santa-cruz/scribble-flash-80-feelbase-skateboard-deck": {
     "name": "Santa Cruz Scribble Flash 8.0 FeelBase Skateboard Deck",
@@ -91939,7 +92201,9 @@
     ],
     "prices": {
       "2026-11-26": 75.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 13.0
   },
   "https://www.tactics.com/santa-cruz/scribble-head-775-skateboard-deck": {
     "name": "Santa Cruz Scribble Head 7.75 Skateboard Deck",
@@ -91976,17 +92240,17 @@
     "all_time_low": 75.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guo3/1a/santa-cruz-self-destruct-birch-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 75.95,
+    "wheelbase": 14.1875,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 75.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.1875
+    }
   },
   "https://www.tactics.com/santa-cruz/stranger-things-hellfire-club-825-skateboard-deck": {
     "name": "Santa Cruz Stranger Things Hellfire Club 8.25 Skateboard Deck",
@@ -91998,9 +92262,11 @@
     "all_time_low": 79.95,
     "all_time_low_date": "2026-07-02",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gfuh/1a/santa-cruz-stranger-things-hellfire-club-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 79.95,
+    "wheelbase": 14.187,
     "widths": [
       8.25
     ],
@@ -92031,9 +92297,7 @@
       "2026-10-19": 79.95,
       "2026-10-20": 79.95,
       "2026-11-26": 99.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.187
+    }
   },
   "https://www.tactics.com/santa-cruz/stranger-things-hellfire-club-flames-90-skateboard-deck": {
     "name": "Santa Cruz Stranger Things Hellfire Club Flames 9.0 Skateboard Deck",
@@ -92045,18 +92309,18 @@
     "all_time_low": 79.95,
     "all_time_low_date": "2026-07-02",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gfua/1a/santa-cruz-stranger-things-hellfire-club-flames-90-skateboard-deck.jpg",
     "width": 9.0,
     "length": 99.95,
+    "wheelbase": 13.875,
     "widths": [
       9.0
     ],
     "prices": {
       "2026-09-06": 79.95,
       "2026-11-26": 99.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 13.875
+    }
   },
   "https://www.tactics.com/santa-cruz/stranger-things-knox-hellfire-pit-1007-skateboard-deck": {
     "name": "Santa Cruz Stranger Things Knox Hellfire Pit 10.07 Skateboard Deck",
@@ -92089,9 +92353,11 @@
     "all_time_low": 95.95,
     "all_time_low_date": "2026-10-02",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gftz/1a/santa-cruz-stranger-things-meek-slasher-eddie-101-skateboard-deck.jpg",
     "width": 10.1,
     "length": 95.95,
+    "wheelbase": 15.4,
     "widths": [
       10.1
     ],
@@ -92116,9 +92382,7 @@
       "2026-10-19": 95.95,
       "2026-10-20": 95.95,
       "2026-11-26": 119.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 15.4
+    }
   },
   "https://www.tactics.com/santa-cruz/winkowski-agave-snake-pro-shaped-1035-skateboard-deck": {
     "name": "Santa Cruz Winkowski Agave Snake Pro Shaped 10.35 Skateboard Deck",
@@ -92137,7 +92401,9 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 15.0
   },
   "https://www.tactics.com/santa-cruz/winkowski-cosmic-1035-skateboard-deck/prismatic": {
     "name": "Santa Cruz Winkowski Cosmic 10.35 Skateboard Deck - prismatic",
@@ -92359,8 +92625,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 76.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 63.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/fikb/1a/sci-fi-fantasy-global-backpack-black.jpg",
     "length": 76.95,
@@ -92379,7 +92645,7 @@
       "2026-11-23": 76.95,
       "2026-11-24": 76.95,
       "2026-11-25": 76.95,
-      "2026-11-26": 76.95
+      "2026-11-26": 63.95
     }
   },
   "https://www.tactics.com/sci-fi-fantasy/neoliberal-beauty-825-skateboard-deck": {
@@ -92497,7 +92763,9 @@
     ],
     "prices": {
       "2026-11-26": 112.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.2
   },
   "https://www.tactics.com/sk8mafia/surrey-sprayers-825-skateboard-deck": {
     "name": "SK8MAFIA Surrey Sprayers 8.25 Skateboard Deck",
@@ -93829,6 +94097,8 @@
     "all_time_low": 48.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://www.tactics.com/a/bh91/1a/spitfire-formula-four-classic-skateboard-wheels-white-green-swirl-99d.jpg",
     "length": 48.95,
     "durometers": [
@@ -94439,8 +94709,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 44.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 37.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/g94e/1a/spitfire-hellfire-backpack-black.jpg",
     "length": 44.95,
@@ -94459,7 +94729,7 @@
       "2026-11-23": 44.95,
       "2026-11-24": 44.95,
       "2026-11-25": 44.95,
-      "2026-11-26": 44.95
+      "2026-11-26": 37.95
     }
   },
   "https://www.tactics.com/spitfire/ishod-pro-formula-four-lock-in-classic-skateboard-wheels/natural-52-99d": {
@@ -94496,6 +94766,8 @@
     "all_time_low": 39.95,
     "all_time_low_date": "2026-11-14",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://www.tactics.com/a/guq8/1a/spitfire-ishod-pro-formula-four-lock-in-classic-skateboard-wheels.jpg",
     "length": 39.95,
     "durometers": [
@@ -96262,8 +96534,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 94.0,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 63.0,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gnhw/1a/the-north-face-recon-backpack-gravel-tnf-black-npf.jpg",
     "length": 94.0,
@@ -96282,7 +96554,7 @@
       "2026-11-23": 94.0,
       "2026-11-24": 94.0,
       "2026-11-25": 94.0,
-      "2026-11-26": 94.0
+      "2026-11-26": 63.0
     }
   },
   "https://www.tactics.com/theories-of-atlantis/fixate-825-complete-skateboard": {
@@ -96302,7 +96574,8 @@
     ],
     "prices": {
       "2026-11-26": 131.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/theories-of-atlantis/lovett-inside-your-head-85-skateboard-deck": {
     "name": "Theories Lovett Inside Your Head 8.5 Skateboard Deck",
@@ -96438,9 +96711,11 @@
     "all_time_low": 48.95,
     "all_time_low_date": "2026-06-04",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gi20/1a/theories-of-atlantis-rasputin-v3-80-skateboard-deck-orange.jpg",
     "width": 8.0,
     "length": 48.95,
+    "wheelbase": 14.25,
     "widths": [
       8.0
     ],
@@ -96468,9 +96743,7 @@
       "2026-10-19": 48.95,
       "2026-10-20": 48.95,
       "2026-11-26": 69.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/theories-of-atlantis/rasputin-v3-80-skateboard-deck/yellow": {
     "name": "Theories Rasputin V3 8.0 Skateboard Deck - yellow",
@@ -96602,7 +96875,8 @@
     ],
     "prices": {
       "2026-11-26": 131.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/there/chandler-13-85-skateboard-deck": {
     "name": "There Chandler 13 8.5 Skateboard Deck",
@@ -96657,9 +96931,11 @@
     "all_time_low": 50.95,
     "all_time_low_date": "2026-04-02",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/eajl/1a/there-jessyka-beginnings-806-skateboard-deck.jpg",
     "width": 8.06,
     "length": 53.95,
+    "wheelbase": 14.38,
     "widths": [
       8.06
     ],
@@ -96695,9 +96971,7 @@
       "2026-10-19": 53.95,
       "2026-10-20": 53.95,
       "2026-11-26": 66.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/there/jessyka-bev-break-812-skateboard-deck": {
     "name": "There Jessyka Bev Break 8.12 Skateboard Deck",
@@ -96709,17 +96983,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guwc/1a/there-jessyka-bev-break-812-skateboard-deck.jpg",
     "width": 8.12,
     "length": 92.95,
+    "wheelbase": 14.25,
     "widths": [
       8.12
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/there/kien-withering-away-825-skateboard-deck": {
     "name": "There Kien Withering Away 8.25 Skateboard Deck",
@@ -96753,17 +97027,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guwn/1a/there-marie-delivery-812-skateboard-deck.jpg",
     "width": 8.12,
     "length": 92.95,
+    "wheelbase": 14.25,
     "widths": [
       8.12
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/there/moth-825-skateboard-deck": {
     "name": "There Moth 8.25 Skateboard Deck",
@@ -96775,17 +97049,17 @@
     "all_time_low": 76.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guwh/1a/there-moth-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 76.95,
+    "wheelbase": 14.0,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 76.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/there/poe-free-thinker-806-true-fit-skateboard-deck": {
     "name": "There Poe Free Thinker 8.06 True Fit Skateboard Deck",
@@ -96797,17 +97071,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guwa/1a/there-poe-free-thinker-806-true-fit-skateboard-deck.jpg",
     "width": 8.06,
     "length": 92.95,
+    "wheelbase": 13.88,
     "widths": [
       8.06
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 13.88
+    }
   },
   "https://www.tactics.com/there/shag-sees-all-825-skateboard-deck": {
     "name": "There Shag See's All 8.25 Skateboard Deck",
@@ -96819,17 +97093,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/guw8/1a/there-shag-sees-all-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 92.95,
+    "wheelbase": 14.38,
     "widths": [
       8.25
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.38
+    }
   },
   "https://www.tactics.com/there/sneakdiss-battleships-85-skateboard-deck": {
     "name": "There Sneakdiss Battleships 8.5 Skateboard Deck",
@@ -96863,6 +97137,7 @@
     "all_time_low": 58.95,
     "all_time_low_date": "2026-03-28",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/f984/1a/there-team-mask-925-double-driller-skateboard-deck.jpg",
     "width": 9.25,
     "length": 72.95,
@@ -96872,8 +97147,7 @@
     "prices": {
       "2026-09-15": 58.95,
       "2026-11-26": 72.95
-    },
-    "wheelbase_checked": "2026-11-26"
+    }
   },
   "https://www.tactics.com/thunder/flash-hollow-lights-skateboard-trucks/white-red-147": {
     "name": "Thunder Flash Hollow Lights Skateboard Trucks - white/red (147)",
@@ -97912,7 +98186,9 @@
     ],
     "prices": {
       "2026-11-26": 122.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/toy-machine/fists-001-775-complete-skateboard/blue": {
     "name": "Toy Machine Fists 001 7.75 Complete Skateboard - blue",
@@ -97931,7 +98207,9 @@
     ],
     "prices": {
       "2026-11-26": 122.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/toy-machine/fists-001-775-complete-skateboard/green": {
     "name": "Toy Machine Fists 001 7.75 Complete Skateboard - green",
@@ -97950,7 +98228,9 @@
     ],
     "prices": {
       "2026-11-26": 122.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/toy-machine/fists-001-775-complete-skateboard/orange": {
     "name": "Toy Machine Fists 001 7.75 Complete Skateboard - orange",
@@ -97969,7 +98249,9 @@
     ],
     "prices": {
       "2026-11-26": 122.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.0
   },
   "https://www.tactics.com/toy-machine/fists-001-775-complete-skateboard/yellow": {
     "name": "Toy Machine Fists 001 7.75 Complete Skateboard - yellow",
@@ -98072,9 +98354,11 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-04-14",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/g0i4/1a/toy-machine-romero-fence-series-813-skateboard-deck.jpg",
     "width": 8.13,
     "length": 63.95,
+    "wheelbase": 14.0,
     "widths": [
       8.13
     ],
@@ -98103,9 +98387,7 @@
       "2026-10-19": 63.95,
       "2026-10-20": 63.95,
       "2026-11-26": 79.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.0
+    }
   },
   "https://www.tactics.com/toy-machine/russell-pegasus-80-skateboard-deck": {
     "name": "Toy Machine Russell Pegasus 8.0 Skateboard Deck",
@@ -98284,7 +98566,9 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.21
   },
   "https://www.tactics.com/tricks/cosmic-foam-top-825-complete-skateboard": {
     "name": "Tricks Cosmic Foam Top 8.25 Complete Skateboard",
@@ -98303,7 +98587,9 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.0
   },
   "https://www.tactics.com/tricks/rainbow-cork-top-825-complete-skateboard": {
     "name": "Tricks Rainbow Cork Top 8.25 Complete Skateboard",
@@ -98322,7 +98608,9 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.0
   },
   "https://www.tactics.com/tricks/spinner-foam-top-825-complete-skateboard": {
     "name": "Tricks Spinner Foam Top 8.25 Complete Skateboard",
@@ -98341,7 +98629,9 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.0
   },
   "https://www.tactics.com/tricks/vintage-825-complete-skateboard": {
     "name": "Tricks Vintage 8.25 Complete Skateboard",
@@ -98360,7 +98650,9 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 12.9
   },
   "https://www.tactics.com/tricks/vision-825-complete-skateboard/blue": {
     "name": "Tricks Vision 8.25 Complete Skateboard - blue",
@@ -98379,7 +98671,9 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.21
   },
   "https://www.tactics.com/tricks/yin-yang-cork-top-787-complete-skateboard": {
     "name": "Tricks Yin Yang Cork Top 7.87 Complete Skateboard",
@@ -98398,7 +98692,8 @@
     ],
     "prices": {
       "2026-11-26": 108.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26"
   },
   "https://www.tactics.com/triple-8/deep-cover-skate-helmet/matte-black": {
     "name": "Triple Eight Deep Cover Skate Helmet - matte black",
@@ -98665,17 +98960,17 @@
     "all_time_low": 92.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gv00/1a/unity-with-you-85-slick-skateboard-deck-yellow.jpg",
     "width": 8.5,
     "length": 92.95,
+    "wheelbase": 14.25,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 92.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/usa-skateboarding/haroshi-x-usa-skateboarding-deck/white": {
     "name": "USA Skateboarding Haroshi x USA Skateboarding Deck - white",
@@ -98722,8 +99017,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 67.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 42.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gpzo/1a/vans-divert-backpack-black.jpg",
     "length": 67.95,
@@ -98742,7 +99037,7 @@
       "2026-11-23": 67.95,
       "2026-11-24": 67.95,
       "2026-11-25": 67.95,
-      "2026-11-26": 67.95
+      "2026-11-26": 42.95
     }
   },
   "https://www.tactics.com/vans/obstacle-backpack/black-ripstop": {
@@ -98752,8 +99047,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 51.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 32.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/cwms/1a/vans-obstacle-backpack-black-ripstop.jpg",
     "length": 51.95,
@@ -98772,7 +99067,7 @@
       "2026-11-23": 51.95,
       "2026-11-24": 51.95,
       "2026-11-25": 51.95,
-      "2026-11-26": 51.95
+      "2026-11-26": 32.95
     }
   },
   "https://www.tactics.com/vans/scatter-backpack/black-black": {
@@ -98782,8 +99077,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 43.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 27.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gpzu/1a/vans-scatter-backpack-black.jpg",
     "length": 43.95,
@@ -98802,7 +99097,7 @@
       "2026-11-23": 43.95,
       "2026-11-24": 43.95,
       "2026-11-25": 43.95,
-      "2026-11-26": 43.95
+      "2026-11-26": 27.95
     }
   },
   "https://www.tactics.com/vans/scurry-rucksack-backpack/mossy-olive": {
@@ -98812,8 +99107,8 @@
     "first_seen": "2026-11-12",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 59.95,
-    "all_time_low_date": "2026-11-12",
+    "all_time_low": 37.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/grkq/1a/vans-scurry-rucksack-backpack-mossy-olive.jpg",
     "length": 59.95,
@@ -98832,7 +99127,7 @@
       "2026-11-23": 59.95,
       "2026-11-24": 59.95,
       "2026-11-25": 59.95,
-      "2026-11-26": 59.95
+      "2026-11-26": 37.95
     }
   },
   "https://www.tactics.com/vans/skate-authentic-mid-shoes/black-white": {
@@ -98922,9 +99217,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 95.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 59.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gly2/1a/vans-skate-ave-20-shoes-blanc-black.jpg",
     "width": 2.0,
     "length": 95.95,
@@ -98933,7 +99228,7 @@
       "2026-11-23": 95.95,
       "2026-11-24": 95.95,
       "2026-11-25": 95.95,
-      "2026-11-26": 95.95
+      "2026-11-26": 59.95
     }
   },
   "https://www.tactics.com/vans/skate-ave-20-shoes/gold": {
@@ -98964,9 +99259,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 55.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 39.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gtlj/1a/vans-skate-curren-caples-shoes-2-tone-blue.jpg",
     "length": 55.95,
     "prices": {
@@ -98974,7 +99269,7 @@
       "2026-11-23": 55.95,
       "2026-11-24": 55.95,
       "2026-11-25": 55.95,
-      "2026-11-26": 55.95
+      "2026-11-26": 39.95
     }
   },
   "https://www.tactics.com/vans/skate-curren-caples-shoes/charcoal-black": {
@@ -99004,9 +99299,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 47.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 39.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gspb/1a/vans-skate-curren-caples-shoes-crepe-green-gum.jpg",
     "length": 47.95,
     "prices": {
@@ -99014,7 +99309,7 @@
       "2026-11-23": 47.95,
       "2026-11-24": 47.95,
       "2026-11-25": 47.95,
-      "2026-11-26": 47.95
+      "2026-11-26": 39.95
     }
   },
   "https://www.tactics.com/vans/skate-curren-caples-shoes/gum-black-white": {
@@ -99024,9 +99319,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 47.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 39.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/g79e/1a/vans-skate-curren-caples-shoes-gum-black-white.jpg",
     "length": 47.95,
     "prices": {
@@ -99034,7 +99329,7 @@
       "2026-11-23": 47.95,
       "2026-11-24": 47.95,
       "2026-11-25": 47.95,
-      "2026-11-26": 47.95
+      "2026-11-26": 39.95
     }
   },
   "https://www.tactics.com/vans/skate-curren-caples-shoes/red-white": {
@@ -99044,9 +99339,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 55.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 39.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/g3pn/1a/vans-skate-curren-caples-shoes-red-white.jpg",
     "length": 55.95,
     "prices": {
@@ -99054,7 +99349,7 @@
       "2026-11-23": 55.95,
       "2026-11-24": 55.95,
       "2026-11-25": 55.95,
-      "2026-11-26": 55.95
+      "2026-11-26": 39.95
     }
   },
   "https://www.tactics.com/vans/skate-era-shoes/blue-red": {
@@ -99084,9 +99379,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 45.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 32.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gtlk/1a/vans-skate-era-shoes-mauve-mist.jpg",
     "length": 45.95,
     "prices": {
@@ -99094,7 +99389,7 @@
       "2026-11-23": 45.95,
       "2026-11-24": 45.95,
       "2026-11-25": 45.95,
-      "2026-11-26": 45.95
+      "2026-11-26": 32.95
     }
   },
   "https://www.tactics.com/vans/skate-era-stub-shoes/black-black": {
@@ -99104,9 +99399,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 52.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 37.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gskv/1a/vans-skate-era-stub-shoes-black.jpg",
     "length": 52.95,
     "prices": {
@@ -99114,7 +99409,7 @@
       "2026-11-23": 52.95,
       "2026-11-24": 52.95,
       "2026-11-25": 52.95,
-      "2026-11-26": 52.95
+      "2026-11-26": 37.95
     }
   },
   "https://www.tactics.com/vans/skate-era-stub-shoes/brown-tan": {
@@ -99124,13 +99419,13 @@
     "first_seen": "2026-11-26",
     "last_seen": "2026-11-26",
     "observation_count": 1,
-    "all_time_low": 74.95,
+    "all_time_low": 37.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
     "image": "https://www.tactics.com/a/gtll/1a/vans-skate-era-stub-shoes-brown-tan.jpg",
     "length": 74.95,
     "prices": {
-      "2026-11-26": 74.95
+      "2026-11-26": 37.95
     }
   },
   "https://www.tactics.com/vans/skate-half-cab-wafflecup-shoes/black-peyote": {
@@ -99228,9 +99523,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 59.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 42.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gqp7/1a/vans-skate-old-skool-36-shoes-blackout.jpg",
     "length": 59.95,
     "prices": {
@@ -99238,7 +99533,7 @@
       "2026-11-23": 59.95,
       "2026-11-24": 59.95,
       "2026-11-25": 59.95,
-      "2026-11-26": 59.95
+      "2026-11-26": 42.95
     }
   },
   "https://www.tactics.com/vans/skate-old-skool-36-shoes/contrast-stitch-pink-fizz": {
@@ -99248,9 +99543,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 67.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 42.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gspf/1a/vans-skate-old-skool-36-shoes-contrast-stitch-pink-fizz.jpg",
     "length": 67.95,
     "prices": {
@@ -99258,7 +99553,7 @@
       "2026-11-23": 67.95,
       "2026-11-24": 67.95,
       "2026-11-25": 67.95,
-      "2026-11-26": 67.95
+      "2026-11-26": 42.95
     }
   },
   "https://www.tactics.com/vans/skate-old-skool-shoes/black-black": {
@@ -99268,9 +99563,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 52.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 37.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/cuso/1a/vans-skate-old-skool-shoes-black.jpg",
     "length": 52.95,
     "prices": {
@@ -99278,7 +99573,7 @@
       "2026-11-23": 52.95,
       "2026-11-24": 52.95,
       "2026-11-25": 52.95,
-      "2026-11-26": 52.95
+      "2026-11-26": 37.95
     }
   },
   "https://www.tactics.com/vans/skate-old-skool-shoes/black-black-green": {
@@ -99288,9 +99583,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 44.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 37.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gspg/1a/vans-skate-old-skool-shoes-black-green.jpg",
     "length": 44.95,
     "prices": {
@@ -99298,7 +99593,7 @@
       "2026-11-23": 44.95,
       "2026-11-24": 44.95,
       "2026-11-25": 44.95,
-      "2026-11-26": 44.95
+      "2026-11-26": 37.95
     }
   },
   "https://www.tactics.com/vans/skate-old-skool-shoes/black-gum": {
@@ -99308,9 +99603,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 47.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 39.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/cq1o/1a/vans-skate-old-skool-shoes-black-gum.jpg",
     "length": 47.95,
     "prices": {
@@ -99318,7 +99613,7 @@
       "2026-11-23": 47.95,
       "2026-11-24": 47.95,
       "2026-11-25": 47.95,
-      "2026-11-26": 47.95
+      "2026-11-26": 39.95
     }
   },
   "https://www.tactics.com/vans/skate-old-skool-shoes/black-gum-white": {
@@ -99348,9 +99643,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 67.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 42.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gsph/1a/vans-skate-old-skool-shoes-cracked-leather-black-purple.jpg",
     "length": 67.95,
     "prices": {
@@ -99358,7 +99653,7 @@
       "2026-11-23": 67.95,
       "2026-11-24": 67.95,
       "2026-11-25": 67.95,
-      "2026-11-26": 67.95
+      "2026-11-26": 42.95
     }
   },
   "https://www.tactics.com/vans/skate-old-skool-shoes/navy-white": {
@@ -99388,8 +99683,8 @@
     "first_seen": "2026-10-17",
     "last_seen": "2026-11-26",
     "observation_count": 41,
-    "all_time_low": 50.95,
-    "all_time_low_date": "2026-10-17",
+    "all_time_low": 42.95,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gmqm/1a/vans-skate-old-skool-wafflecup-shoes-black-white.jpg",
     "length": 50.95,
@@ -99434,7 +99729,7 @@
       "2026-11-23": 50.95,
       "2026-11-24": 50.95,
       "2026-11-25": 50.95,
-      "2026-11-26": 50.95
+      "2026-11-26": 42.95
     }
   },
   "https://www.tactics.com/vans/skate-old-skool-wafflecup-shoes/white-green": {
@@ -99444,9 +99739,9 @@
     "first_seen": "2026-10-17",
     "last_seen": "2026-11-26",
     "observation_count": 15,
-    "all_time_low": 59.95,
-    "all_time_low_date": "2026-10-17",
-    "stage": "new",
+    "all_time_low": 42.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "all_time_low",
     "image": "https://www.tactics.com/a/gtlo/1a/vans-skate-old-skool-wafflecup-shoes-white-green.jpg",
     "length": 59.95,
     "prices": {
@@ -99464,7 +99759,7 @@
       "2026-10-28": 59.95,
       "2026-10-29": 59.95,
       "2026-10-30": 59.95,
-      "2026-11-26": 84.95
+      "2026-11-26": 42.95
     }
   },
   "https://www.tactics.com/vans/skate-safe-low-shoes/black-black": {
@@ -99474,9 +99769,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 79.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 49.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/g77o/1a/vans-skate-safe-low-shoes-black.jpg",
     "length": 79.95,
     "prices": {
@@ -99484,7 +99779,7 @@
       "2026-11-23": 79.95,
       "2026-11-24": 79.95,
       "2026-11-25": 79.95,
-      "2026-11-26": 79.95
+      "2026-11-26": 49.95
     }
   },
   "https://www.tactics.com/vans/skate-safe-low-shoes/blanc-de-blanc": {
@@ -99494,9 +99789,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 79.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 49.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gspl/1a/vans-skate-safe-low-shoes-blanc-de.jpg",
     "length": 79.95,
     "prices": {
@@ -99504,7 +99799,7 @@
       "2026-11-23": 79.95,
       "2026-11-24": 79.95,
       "2026-11-25": 79.95,
-      "2026-11-26": 79.95
+      "2026-11-26": 49.95
     }
   },
   "https://www.tactics.com/vans/skate-safe-low-shoes/navy-marshmallow": {
@@ -99514,9 +99809,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 79.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 49.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gfs4/1a/vans-skate-safe-low-shoes-navy-marshmallow.jpg",
     "length": 79.95,
     "prices": {
@@ -99524,7 +99819,7 @@
       "2026-11-23": 79.95,
       "2026-11-24": 79.95,
       "2026-11-25": 79.95,
-      "2026-11-26": 79.95
+      "2026-11-26": 49.95
     }
   },
   "https://www.tactics.com/vans/skate-sk8-hi-shoes/black-gum-white": {
@@ -99574,9 +99869,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 69.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 49.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gspk/1a/vans-skate-wayvee-2-shoes-black-flame.jpg",
     "length": 69.95,
     "prices": {
@@ -99584,7 +99879,7 @@
       "2026-11-23": 69.95,
       "2026-11-24": 69.95,
       "2026-11-25": 69.95,
-      "2026-11-26": 69.95
+      "2026-11-26": 49.95
     }
   },
   "https://www.tactics.com/vans/the-skate-slip-on-shoes/cracked-leather-black-green": {
@@ -99594,9 +99889,9 @@
     "first_seen": "2026-11-22",
     "last_seen": "2026-11-26",
     "observation_count": 5,
-    "all_time_low": 48.95,
-    "all_time_low_date": "2026-11-22",
-    "stage": "new",
+    "all_time_low": 34.95,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://www.tactics.com/a/gspj/1a/vans-the-skate-slip-on-shoes-cracked-leather-black-green.jpg",
     "length": 48.95,
     "prices": {
@@ -99604,7 +99899,7 @@
       "2026-11-23": 48.95,
       "2026-11-24": 48.95,
       "2026-11-25": 48.95,
-      "2026-11-26": 48.95
+      "2026-11-26": 34.95
     }
   },
   "https://www.tactics.com/venture/green-machine-v-forged-skateboard-trucks/green-56": {
@@ -100623,9 +100918,15 @@
     "all_time_low": 67.95,
     "all_time_low_date": "2026-10-02",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/fh5x/1a/welcome-bauhaus-portrait-975-dark-lord-shape-skateboard-deck.jpg",
     "width": 9.75,
     "length": 67.95,
+    "wheelbase": 14.25,
+    "wheelbases": [
+      14.25,
+      15.0
+    ],
     "widths": [
       9.75
     ],
@@ -100650,13 +100951,7 @@
       "2026-10-19": 67.95,
       "2026-10-20": 67.95,
       "2026-11-26": 84.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25,
-    "wheelbases": [
-      14.25,
-      15.0
-    ]
+    }
   },
   "https://www.tactics.com/welcome/nora-fairy-tale-88-sphynx-shape-skateboard-deck/glitter-prism-foil": {
     "name": "Welcome Nora Fairy Tale 8.8 Sphynx Shape Skateboard Deck - glitter prism foil",
@@ -101036,8 +101331,10 @@
     "all_time_low": 59.95,
     "all_time_low_date": "2026-08-07",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gtcw/1a/zero-3-skull-blood-85-skateboard-deck.jpg",
     "length": 59.95,
+    "wheelbase": 14.5,
     "prices": {
       "2026-09-05": 59.95,
       "2026-09-07": 59.95,
@@ -101064,9 +101361,7 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/zero/american-punk-825-skateboard-deck": {
     "name": "Zero American Punk 8.25 Skateboard Deck",
@@ -101104,13 +101399,13 @@
     "all_time_low": 74.95,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/glbt/1a/zero-american-punk-85-skateboard-deck.jpg",
     "length": 74.95,
+    "wheelbase": 14.5,
     "prices": {
       "2026-11-26": 74.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/zero/arunski-lewandowski-3-fragility-of-life-825-skateboard-deck": {
     "name": "Zero Arunski Lewandowski 3 Fragility of Life 8.25 Skateboard Deck",
@@ -101158,7 +101453,9 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/zero/blood-skull-skateboard-deck/red-foil": {
     "name": "Zero Blood Skull Skateboard Deck - red foil",
@@ -101193,7 +101490,9 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/zero/burleigh-black-sheep-85-skateboard-deck": {
     "name": "Zero Burleigh Black Sheep 8.5 Skateboard Deck",
@@ -101273,9 +101572,11 @@
     "all_time_low": 58.95,
     "all_time_low_date": "2026-09-18",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gtd3/1a/zero-edwards-living-dead-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 58.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
@@ -101307,9 +101608,7 @@
       "2026-10-19": 58.95,
       "2026-10-20": 58.95,
       "2026-11-26": 72.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/zero/graveyard-self-titled-825-skateboard-deck": {
     "name": "Zero Graveyard Self Titled 8.25 Skateboard Deck",
@@ -101379,7 +101678,9 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/zero/pleasures-skulls-skateboard-deck": {
     "name": "Zero Pleasures Skulls Skateboard Deck",
@@ -101391,8 +101692,10 @@
     "all_time_low": 59.95,
     "all_time_low_date": "2026-10-02",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gtdn/1a/zero-pleasures-skulls-85-skateboard-deck.jpg",
     "length": 59.95,
+    "wheelbase": 14.5,
     "prices": {
       "2026-10-02": 59.95,
       "2026-10-03": 59.95,
@@ -101414,9 +101717,7 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.tactics.com/zero/pleasures-stars-85-skateboard-deck": {
     "name": "Zero Pleasures Stars 8.5 Skateboard Deck",
@@ -101470,9 +101771,11 @@
     "all_time_low": 59.95,
     "all_time_low_date": "2026-09-23",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gtdu/1a/zero-reyes-lewandowski-3-har-meggon-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 59.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
@@ -101500,9 +101803,7 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/zero/scheckler-lewandowski-3-85-skateboard-deck": {
     "name": "Zero Scheckler Lewandowski 3 8.5 Skateboard Deck",
@@ -101542,7 +101843,9 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.5
   },
   "https://www.tactics.com/zero/single-skull-85-skateboard-deck/black-white": {
     "name": "Zero Single Skull 8.5 Skateboard Deck - black/white",
@@ -101621,7 +101924,9 @@
       "2026-10-19": 58.95,
       "2026-10-20": 58.95,
       "2026-11-26": 72.95
-    }
+    },
+    "wheelbase_checked": "2026-11-26",
+    "wheelbase": 14.25
   },
   "https://www.tactics.com/zero/team-bold-875-skateboard-deck": {
     "name": "Zero Team Bold 8.75 Skateboard Deck",
@@ -101672,9 +101977,11 @@
     "all_time_low": 59.95,
     "all_time_low_date": "2026-07-04",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gted/1a/zero-thomas-lewandowski-3-faulty-knight-825-skateboard-deck.jpg",
     "width": 8.25,
     "length": 59.95,
+    "wheelbase": 14.25,
     "widths": [
       8.25
     ],
@@ -101702,9 +102009,7 @@
       "2026-10-19": 59.95,
       "2026-10-20": 59.95,
       "2026-11-26": 74.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.25
+    }
   },
   "https://www.tactics.com/zero/thomas-wolves-825-skateboard-deck": {
     "name": "Zero Thomas Wolves 8.25 Skateboard Deck",
@@ -101735,17 +102040,17 @@
     "all_time_low": 59.95,
     "all_time_low_date": "2026-07-01",
     "stage": "new",
+    "wheelbase_checked": "2026-11-26",
     "image": "https://www.tactics.com/a/gteh/1a/zero-wimer-lewandowski-3-eternal-walker-85-skateboard-deck.jpg",
     "width": 8.5,
     "length": 74.95,
+    "wheelbase": 14.5,
     "widths": [
       8.5
     ],
     "prices": {
       "2026-11-26": 74.95
-    },
-    "wheelbase_checked": "2026-11-26",
-    "wheelbase": 14.5
+    }
   },
   "https://www.triple8.com/products/bike-bumsaver-padded-shorts": {
     "name": "Triple 8 Bike Bumsaver Padded Shorts",
@@ -102055,6 +102360,8 @@
     "all_time_low": 8.99,
     "all_time_low_date": "2026-11-26",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0279/0277/1337/products/Triple8-StreetKnee-Sinlge-GreyBlack-1000w-1.jpg?v=1581528648",
     "prices": {
       "2026-11-26": 8.99
@@ -103322,6 +103629,8 @@
     "all_time_low": 19.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/384353-US",
     "length": 19.99,
     "prices": {
@@ -103382,6 +103691,8 @@
     "all_time_low": 17.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/397334-US",
     "length": 17.99,
     "prices": {
@@ -103696,8 +104007,6 @@
     "all_time_low": 69.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/415482-US",
     "width": 10.125,
     "widths": [
@@ -103749,8 +104058,6 @@
     "all_time_low": 69.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/411986-US",
     "width": 8.28,
     "widths": [
@@ -104908,8 +105215,6 @@
     "all_time_low": 64.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/414877-US",
     "width": 8.25,
     "widths": [
@@ -107230,8 +107535,6 @@
     "all_time_low": 49.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/407506-US",
     "width": 8.5,
     "widths": [
@@ -108275,6 +108578,8 @@
     "all_time_low": 31.99,
     "all_time_low_date": "2026-11-17",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/355150-US",
     "length": 41.99,
     "prices": {
@@ -110407,8 +110712,6 @@
     "all_time_low": 49.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/412850-US",
     "width": 8.25,
     "widths": [
@@ -111977,8 +112280,6 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-10-02",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/389270-US",
     "width": 8.25,
     "widths": [
@@ -112107,8 +112408,6 @@
     "all_time_low": 29.99,
     "all_time_low_date": "2026-09-25",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/408660-US",
     "width": 7.88,
     "widths": [
@@ -112849,8 +113148,6 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/413552-US",
     "width": 8.5,
     "widths": [
@@ -114048,8 +114345,6 @@
     "all_time_low": 74.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/404223-US",
     "width": 10.125,
     "widths": [
@@ -114250,8 +114545,6 @@
     "all_time_low": 69.99,
     "all_time_low_date": "2026-10-02",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/404227-US",
     "width": 10.0,
     "widths": [
@@ -114537,6 +114830,8 @@
     "all_time_low": 24.99,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/400495-US",
     "length": 24.99,
     "prices": {
@@ -117053,6 +117348,8 @@
     "all_time_low": 44.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/389276-US",
     "width": 8.25,
     "widths": [
@@ -117844,8 +118141,6 @@
     "all_time_low": 49.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/409909-US",
     "width": 8.28,
     "widths": [
@@ -118999,8 +119294,6 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/413672-US",
     "width": 8.25,
     "widths": [
@@ -123363,8 +123656,6 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/414157-US",
     "width": 8.25,
     "widths": [
@@ -124608,8 +124899,6 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/408469-US",
     "width": 8.375,
     "widths": [
@@ -124974,8 +125263,6 @@
     "all_time_low": 49.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/409915-US",
     "width": 8.5,
     "widths": [
@@ -125565,8 +125852,6 @@
     "all_time_low": 44.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/409517-US",
     "width": 8.25,
     "widths": [
@@ -126615,8 +126900,6 @@
     "all_time_low": 54.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/408742-US",
     "width": 8.5,
     "widths": [
@@ -129471,8 +129754,6 @@
     "all_time_low": 64.99,
     "all_time_low_date": "2026-10-22",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/415488-US",
     "width": 8.25,
     "widths": [
@@ -131917,8 +132198,6 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/379245-US",
     "width": 8.25,
     "widths": [
@@ -133484,8 +133763,6 @@
     "all_time_low": 59.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://scene7.zumiez.com/is/image/zumiez/415409-US",
     "width": 8.0,
     "widths": [

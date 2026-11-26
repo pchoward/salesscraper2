@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-26T18:13:43+00:00",
+  "checked_at": "2026-11-26T22:14:37+00:00",
   "counts": {
-    "action": 1,
+    "action": 2,
     "watch": 1
   },
   "date": "2026-11-26",
@@ -16,12 +16,31 @@
     },
     {
       "change": "rise",
-      "count": 734,
+      "count": 736,
       "kind": "volume",
       "level": "watch",
       "median": 221,
       "store": "Tactics"
+    },
+    {
+      "count": 2,
+      "examples": [
+        {
+          "name": "Jason Markk Quick Wipes 3 Pack",
+          "part": "Protection",
+          "store": "CCS"
+        },
+        {
+          "name": "Triple 8 Sweatsaver Liner Skateboard Helmet",
+          "part": "Protection",
+          "store": "evo"
+        }
+      ],
+      "field": "protects",
+      "kind": "new_unclassified",
+      "label": "protection type",
+      "level": "action"
     }
   ],
-  "last_scrape": "2026-11-26T17:43:06+00:00"
+  "last_scrape": "2026-11-26T21:45:51+00:00"
 }

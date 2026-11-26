@@ -1354,6 +1354,7 @@
         "Tactics_Completes": {
           "fields": {
             "image": 1.0,
+            "wheelbase": 0.312,
             "width": 0.984,
             "widths": 0.984
           },
@@ -1363,8 +1364,7 @@
           "fields": {
             "image": 1.0,
             "size": 0.826,
-            "wheelbase": 0.301,
-            "wheelbases": 0.003,
+            "wheelbase": 0.225,
             "width": 0.826,
             "widths": 0.826
           },
@@ -1373,9 +1373,9 @@
         "Tactics_Packs": {
           "fields": {
             "image": 1.0,
-            "width": 0.042
+            "width": 0.107
           },
-          "items": 24
+          "items": 28
         },
         "Tactics_Protection": {
           "fields": {
@@ -1506,6 +1506,12 @@
         }
       }
     }
+  },
+  "unclassified_seen": {
+    "protects": [
+      "https://shop.ccs.com/products/jason-markk-quick-wipes-3-pack",
+      "https://www.evo.com/products/88884-triple-8-sweatsaver-liner-skateboard-helmet"
+    ]
   },
   "unmapped_seen": {
     "187 Killer Pads": [],

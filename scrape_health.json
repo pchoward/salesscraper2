@@ -31163,14 +31163,14 @@
           }
         },
         "Demon_Protection": {
-          "count": 14,
+          "count": 13,
           "failed": false,
           "diagnostics": {
             "expected_count": 16.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 14,
-            "percentage_change": -12.5,
+            "actual_count": 13,
+            "percentage_change": -18.8,
             "reason": "normal_variation"
           }
         },
@@ -31247,14 +31247,14 @@
           }
         },
         "Exodus_Sneakers": {
-          "count": 36,
+          "count": 35,
           "failed": false,
           "diagnostics": {
             "expected_count": 34.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 36,
-            "percentage_change": 5.9,
+            "actual_count": 35,
+            "percentage_change": 2.9,
             "reason": "normal_variation"
           }
         },
@@ -31911,14 +31911,14 @@
           }
         },
         "TGM_Wheels": {
-          "count": 36,
+          "count": 34,
           "failed": false,
           "diagnostics": {
             "expected_count": 32.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 36,
-            "percentage_change": 12.5,
+            "actual_count": 34,
+            "percentage_change": 6.2,
             "reason": "normal_variation"
           }
         },
@@ -31971,14 +31971,14 @@
           }
         },
         "Tactics_Packs": {
-          "count": 24,
+          "count": 28,
           "failed": false,
           "diagnostics": {
             "expected_count": 26.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 24,
-            "percentage_change": -7.7,
+            "actual_count": 28,
+            "percentage_change": 7.7,
             "reason": "normal_variation"
           }
         },
@@ -32019,26 +32019,26 @@
           }
         },
         "Tactics_Wheels": {
-          "count": 86,
+          "count": 84,
           "failed": false,
           "diagnostics": {
             "expected_count": 2.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 86,
-            "percentage_change": 4200.0,
+            "actual_count": 84,
+            "percentage_change": 4100.0,
             "reason": "normal_variation"
           }
         },
         "Triple 8_Protection": {
-          "count": 13,
+          "count": 12,
           "failed": false,
           "diagnostics": {
             "expected_count": 12.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 13,
-            "percentage_change": 8.3,
+            "actual_count": 12,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -32079,26 +32079,26 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 294,
+          "count": 313,
           "failed": false,
           "diagnostics": {
             "expected_count": 285.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 28.0,
-            "actual_count": 294,
-            "percentage_change": 3.0,
+            "actual_count": 313,
+            "percentage_change": 9.6,
             "reason": "normal_variation"
           }
         },
         "Zumiez_Packs": {
-          "count": 46,
+          "count": 42,
           "failed": false,
           "diagnostics": {
             "expected_count": 46.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 46,
-            "percentage_change": 0.0,
+            "actual_count": 42,
+            "percentage_change": -8.7,
             "reason": "normal_variation"
           }
         },
@@ -32259,7 +32259,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-26T17:43:06+00:00"
+      "scanned_at": "2026-11-26T21:45:51+00:00"
     }
   ],
   "baseline": {
@@ -32333,7 +32333,7 @@
     },
     "TGM_Wheels": {
       "date": "2026-11-26",
-      "count": 36
+      "count": 34
     },
     "CCS_Protection": {
       "date": "2026-11-26",
@@ -32377,7 +32377,7 @@
     },
     "Exodus_Sneakers": {
       "date": "2026-11-26",
-      "count": 36
+      "count": 35
     },
     "Exodus_Trucks": {
       "date": "2026-11-26",
@@ -32409,11 +32409,11 @@
     },
     "Demon_Protection": {
       "date": "2026-11-26",
-      "count": 14
+      "count": 13
     },
     "Triple 8_Protection": {
       "date": "2026-11-26",
-      "count": 13
+      "count": 12
     },
     "Exodus_Decks": {
       "date": "2026-11-26",
@@ -32449,7 +32449,7 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-26",
-      "count": 294
+      "count": 313
     },
     "Exodus_Bearings": {
       "date": "2026-11-26",
@@ -32477,11 +32477,11 @@
     },
     "Tactics_Packs": {
       "date": "2026-11-26",
-      "count": 24
+      "count": 28
     },
     "Zumiez_Packs": {
       "date": "2026-11-26",
-      "count": 46
+      "count": 42
     },
     "Kinetic_Decks": {
       "date": "2026-11-26",
@@ -32509,7 +32509,7 @@
     },
     "Tactics_Wheels": {
       "date": "2026-11-26",
-      "count": 86
+      "count": 84
     },
     "evo_Accessories": {
       "date": "2026-11-26",
@@ -33528,7 +33528,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 14
+        "count": 13
       }
     ],
     "Exodus_Accessories": [
@@ -33934,7 +33934,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 36
+        "count": 35
       }
     ],
     "Exodus_Trucks": [
@@ -37174,7 +37174,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 36
+        "count": 34
       }
     ],
     "Tactics_Accessories": [
@@ -37412,7 +37412,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 24
+        "count": 28
       }
     ],
     "Tactics_Protection": [
@@ -37644,7 +37644,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 86
+        "count": 84
       }
     ],
     "Triple 8_Protection": [
@@ -37702,7 +37702,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 13
+        "count": 12
       }
     ],
     "Zeitbike_Protection": [
@@ -37934,7 +37934,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 294
+        "count": 313
       }
     ],
     "Zumiez_Packs": [
@@ -37992,7 +37992,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 46
+        "count": 42
       }
     ],
     "Zumiez_Protection": [
