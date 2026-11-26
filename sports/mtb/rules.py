@@ -25,6 +25,24 @@ _NOT_MTB=(r'\b(?:campagnolo|campy|super\s+record|chorus|centaur|ekar|shimano\s+1
           r'rival|(?:force|red)\s+(?:axs|etap|22)|xplr|sram\s+red)\b|\b700\s*(?:c\b|x\s*\d)|(?<![\d.])\d{2}(?:-\d{2})?c\b|\bdrop[- ]bars?\b|\b(?:bar|handlebar)\s+tape\b')
 
 
+_FRONT_SHIFTING=r'\bfront\s+derail+eurs?\b|\bfront\s+shifters?\b|\bE-?type\b.*\bderail+eur|\bderail+eur\b.*\bE-?type\b'
+_SHIFT=re.compile(r'\bshift(?:er|ers|ing)?\b|\bshift\s*/\s*brake\b|\bdual\s+control\b|\btriggers?\b|\btwist\b',re.I)
+# Mounts, AXS pods (dropper or shifting on 1x bikes) and e-bike switches
+# aren't front shifters, and a set or pair holds the rear one too.
+_NOT_A_LEFT_SHIFTER=re.compile(r'\bclamps?\b|\bbrackets?\b|\bmounts?\b|\bmatch\s*maker\b|\bpods?\b|\bcontrollers?\b|'
+                               r'\bswitch(?:es)?\b|\bremotes?\b|\bdropper\b|\bpairs?\b|\bsets?\b|\bright\b|\bcables?\b|\bhousing\b',re.I)
+
+
+def _left_shifter(name,product_type=''):
+    """A left-hand (front) shifter alone: "Saint M800 Shift/Brake Dual Control
+    - Left Hand", "Alivio M4050 Brake/Shift Lever (Left)", a store's "FLAT BAR
+    LEFT" shifter type."""
+    if not _SHIFT.search(name) or _NOT_A_LEFT_SHIFTER.search(name):
+        return False
+    return bool(re.search(r'\bleft\b',name,re.I) or re.search(r'\bleft\b',product_type,re.I) and
+                re.search(r'shifter',product_type,re.I))
+
+
 def title_part(title):
     value=normalize_product_name(title)
     # Helmets, pads, armor, gloves, goggles, neck braces (sports/protection.py).
@@ -61,6 +79,11 @@ def filter_reason(name,part,url='',price_new=None,price_old=None,description='',
     if part=='Protection':text=re.sub(r'\bbmx\b',' ',text,flags=re.I)
     if re.search(_NOT_MTB,text,re.I):
         return 'explicit non-MTB equipment'
+    # Front shifting (owner, 2026-11-26): mountain bikes are 1x now, and
+    # Fanatik, an MTB-only shop, carries no front derailleur at all. The old
+    # 2x/3x stock is deep clearance, so it filled the top of "% off".
+    if re.search(_FRONT_SHIFTING,str(name)+' '+str(product_type),re.I) or _left_shifter(str(name),str(product_type)):
+        return 'front derailleur or front shifter'
     # Frame protection kits, number plates and other frame add-ons are filed
     # under Frames by some shops (Fanatik's "Frame Protection" type, RideWrap
     # kits; The Lost Co.'s ODI number plate). They aren't frames, and MTB has
