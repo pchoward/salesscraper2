@@ -220,6 +220,10 @@ async function main(){
       for(const document of [page,frame])await document.addStyleTag({content:'#previewBanner{display:none!important}'});
       await page.setViewportSize({width:375,height:560});
       await frame.waitForFunction(()=>innerWidth===375);
+      // Check the card layout after using Dismiss. Active promotions now
+      // stack at full tap height and can use more of this short viewport.
+      const dismiss=frame.locator('.promo-offer:visible [data-dismiss-promo]');
+      while(await dismiss.count())await dismiss.first().click();
       for(const part of ['Decks','Completes']){
        await control(frame,'partSelect',part);
        for(let i=0;i<2;i++){
