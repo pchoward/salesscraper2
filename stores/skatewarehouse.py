@@ -1,5 +1,6 @@
 """Skate Warehouse clearance listings."""
 
+import datetime
 import logging
 import re
 import time
@@ -131,14 +132,26 @@ class SkateWarehouseScraper(Scraper):
 # each card's own category decides. Seasonal: a page that is gone is skipped,
 # never a failed part. Only a sale price under a crossed-out price is kept.
 BLACK_NOVEMBER = "https://www.skatewarehouse.com/Black_November_Sale__Up_To_60_Off/catpage-BNSALE.html"
+# Black Friday (owner, 2026-11-26): read while the sale lasts (the banner
+# says it ends 12/02), then not at all.
+BLACK_FRIDAY = "https://www.skatewarehouse.com/Black_Friday_Sale/catpage-BFCM26PORT.html"
+BLACK_FRIDAY_UNTIL = datetime.date(2026, 12, 3)
+
+
+def seasonal(today=None):
+    """Sale pages read only while their sale lasts."""
+    return (BLACK_FRIDAY,) if (today or datetime.date.today()) < BLACK_FRIDAY_UNTIL else ()
+
+
+_SALE = (BLACK_NOVEMBER,) + seasonal()
 PROMO_URLS = {
-    "Decks": (BLACK_NOVEMBER, "https://www.skatewarehouse.com/Jacuzzi_Decks_Only_5998/catpage-DECKDEAL.html"),
-    "Completes": (BLACK_NOVEMBER, "https://www.skatewarehouse.com/30_Off_Complete_Skateboards/catpage-COMPLETES30.html"),
-    "Wheels": (BLACK_NOVEMBER, "https://www.skatewarehouse.com/Select_Wheels_40_Off/catpage-WHEELS40.html"),
-    "Trucks": (BLACK_NOVEMBER,),
-    "Bearings": (BLACK_NOVEMBER,),
-    "Accessories": (BLACK_NOVEMBER,),
-    "Packs": (BLACK_NOVEMBER,),
+    "Decks": _SALE + ("https://www.skatewarehouse.com/Jacuzzi_Decks_Only_5998/catpage-DECKDEAL.html",),
+    "Completes": _SALE + ("https://www.skatewarehouse.com/30_Off_Complete_Skateboards/catpage-COMPLETES30.html",),
+    "Wheels": _SALE + ("https://www.skatewarehouse.com/Select_Wheels_40_Off/catpage-WHEELS40.html",),
+    "Trucks": _SALE,
+    "Bearings": _SALE,
+    "Accessories": _SALE,
+    "Packs": _SALE,
 }
 # A card's category (data-gtm_impression_category, first part) -> part.
 CARD_PARTS = {"decks": "Decks", "complete decks": "Completes", "wheels": "Wheels", "trucks": "Trucks",

@@ -5,6 +5,7 @@ Sale decks are server-rendered, 48 to a page, with a ``pagination-next`` link
 dropped anything further down and the report called those decks sold out.
 """
 
+import datetime
 import logging
 import re
 import urllib.request
@@ -98,11 +99,41 @@ DEAL_SECTIONS = {"skate": DEALS_HOME + "/skate", "shoes": DEALS_HOME + "/mens-sh
 DEAL_URLS = (DEALS_HOME,) + tuple(DEAL_SECTIONS.values())
 _deal_pages = {}
 
+# Black Friday (owner, 2026-11-26): read while the sale lasts, then not at
+# all. /info/black-friday links the sale grids (/black-friday-sale/...);
+# its skate and shoe sections are read like the deal sections above.
+BLACK_FRIDAY_INFO = "https://www.tactics.com/info/black-friday"
+BLACK_FRIDAY_UNTIL = datetime.date(2026, 12, 3)
+_BLACK_FRIDAY_LINK = re.compile(r'href="((?:https://(?:www\.)?tactics\.com)?/(?:tactics/)?black-friday-sale/[^"#?]+)"', re.I)
+_black_friday = {}
+
+
+def black_friday_urls(section="skate", fetch=fetch_html, today=None):
+    """The Black Friday sale grids for ``section`` ("skate" or "shoes"), from
+    the info page's links; none once the sale is over or the page is gone."""
+    if (today or datetime.date.today()) >= BLACK_FRIDAY_UNTIL:
+        return []
+    if "links" not in _black_friday:
+        _final, html = fetch(BLACK_FRIDAY_INFO)
+        links = []
+        for href in _BLACK_FRIDAY_LINK.findall(html or ""):
+            url = href if href.startswith("http") else "https://www.tactics.com" + href
+            url = url.rstrip("/")
+            if url not in links:
+                links.append(url)
+        _black_friday["links"] = links
+    wanted = {"skate": r"skate(?!r)|skateboard", "shoes": r"shoe|sneaker"}[section]
+    return [url for url in _black_friday["links"]
+            if re.search(wanted, url.rsplit("black-friday-sale/", 1)[1], re.I) and not re.search(r"snow", url, re.I)]
+
 
 def deal_pages(section="skate", fetch=fetch_html):
     url = DEAL_SECTIONS[section]
     if url not in _deal_pages:
-        _deal_pages[url] = collect_sale_pages(url, fetch=fetch) or []
+        pages = list(collect_sale_pages(url, fetch=fetch) or [])
+        for extra in black_friday_urls(section, fetch=fetch):
+            pages.extend(collect_sale_pages(extra, fetch=fetch) or [])
+        _deal_pages[url] = pages
     return _deal_pages[url]
 
 

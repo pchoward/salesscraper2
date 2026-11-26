@@ -50,6 +50,14 @@ ALERT_STREAK = 2
 # Median item count below this is a normally small category. An empty streak
 # there is not a drop. Failed fetches still warn.
 MIN_TYPICAL_COUNT = 5
+# Drops the owner confirmed are real (store/part key -> date confirmed). A
+# key's baseline starts again on that date, so the new, lower count is listed
+# instead of the guard holding the old listings (Store monitor, #326,
+# 2026-11-26: Tactics' deck sale ended; Albe's has fewer frames on sale).
+ACCEPTED_DROPS = {
+    "Tactics_Decks": "2026-11-26",
+    "Albe's BMX_Frames & Forks": "2026-11-26",
+}
 # The morning scrape is daily. A page older than a day and a half is stale.
 STALE_AFTER_HOURS = 36
 
@@ -216,9 +224,10 @@ def _successful_samples(state, key, before=None):
             continue
         if count >= 0 and not result.get("failed") and not result.get("suspect"):
             by_day[day] = count
+    accepted = ACCEPTED_DROPS.get(key, "")
     return [
         {"date": day, "count": by_day[day]}
-        for day in sorted(by_day) if before is None or day < str(before)
+        for day in sorted(by_day) if (before is None or day < str(before)) and day >= accepted
     ][-COMPLETENESS_WINDOW:]
 
 

@@ -435,10 +435,10 @@ def skate_shop_scrapers():
 
 
 def scrapers():
-    from stores import skatepro
+    # SkatePro was dropped 2026-11-26 (owner: it turned us away for 8+ runs);
+    # skatepro.bmx_extra still tidies skate shops' protection (above).
     shops = [scraper for store in STORES for scraper in shopify.scrapers_for(store, PARTS)]
-    return (shops + skatepro.scrapers("bmx", skatepro.bmx_extra)  # BMX helmets, pads, padded shorts
-            + skate_shop_scrapers())
+    return shops + skate_shop_scrapers()
 
 
 def preview(store=ALBES):

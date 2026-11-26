@@ -11,7 +11,6 @@ from stores.muirskate import DISABLED_REASON as MUIR_REASON
 from stores.muirskate import ENABLED as MUIR_ENABLED
 from stores.muirskate import scrapers as muir_scrapers
 from stores.protection_brands import scrapers as protection_brand_scrapers
-from stores.skatepro import scrapers as skatepro_scrapers
 from stores.skatedeluxe import DISABLED_REASON as DELUXE_REASON
 from stores.skatedeluxe import ENABLED as DELUXE_ENABLED
 from stores.skatedeluxe import scrapers as skatedeluxe_scrapers
@@ -44,8 +43,8 @@ def build_scrapers():
     scrapers.extend(sourceboards_scrapers())
     # Multisport protection brands, Protection only (2026-11-03).
     scrapers.extend(protection_brand_scrapers())
-    # SkatePro's skate helmets, pads and impact shorts (2026-11-03).
-    scrapers.extend(skatepro_scrapers("skate"))
+    # SkatePro (added 2026-11-03) was dropped 2026-11-26 (owner): it answered
+    # 429, 403 and refused connections for 8+ runs in a row. Never worked around.
     if DELUXE_ENABLED:
         scrapers.extend(skatedeluxe_scrapers())
     else:
