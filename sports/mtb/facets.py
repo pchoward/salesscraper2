@@ -1,7 +1,13 @@
 """MTB-owned specification field definitions; rendering is shared."""
 from sports import packs, protection
 
+from sports.mtb import kinds
+
 FIELDS = (
+    # Type inside each parts heading: the thing itself, then its parts
+    # (owner, 2026-11-26: how Powers, Source and Circuit file spares).
+    {"key": "kind", "label": "Type", "param": "mtb_type",
+     "categories": ("Suspension", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit"), "order": list(kinds.VALUES)},
     {"key": "condition", "label": "Condition", "param": "mtb_condition", "categories": ()},  # Demo (2026-11-12)
     # E-MTB or Regular (owner, 2026-11-21), first among the bike filters.
     {"key": "power", "label": "Motor", "param": "mtb_motor", "categories": ("Bikes", "Frames")},

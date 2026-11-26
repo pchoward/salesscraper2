@@ -1587,15 +1587,13 @@ def mtb_section_owners(key):
     """Space-separated headings for one MTB spec section's ``data-for``.
 
     The field's own categories, or every MTB menu heading when the category
-    list is empty (Condition, Riding type). Product kind stays unmarked so
-    All would keep that filter; MTB has no kind field today. An unknown key
-    returns "" so the section is left unmarked.
+    list is empty (Condition, Riding type). Type (``kind``, owner 2026-11-26)
+    lists the parts headings, so it shows inside each of them and not on All.
+    An unknown key returns "" so the section is left unmarked.
     """
     from sports.headings import headings
     from sports.mtb.facets import FIELDS
 
-    if key == "kind":
-        return ""
     field = next((item for item in FIELDS if item.get("key") == key), None)
     if field is None:
         return ""
