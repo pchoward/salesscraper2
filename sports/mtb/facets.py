@@ -32,7 +32,7 @@ FIELDS = (
     {"key": "pedal_thread", "label": "Thread", "param": "mtb_pedalthread", "categories": ("Pedals",),
      "order": ['9/16"', '1/2"']},
     {"key": "riding_type", "label": "Riding type", "param": "mtb_ride", "categories": ()},
-) + protection.facet_fields("mtb", ("Protection", "Helmets", "Goggles", "Gloves")) + (packs.facet_field("mtb"),)
+) + protection.facet_fields("mtb", ("Protection", "Helmets", "Goggles", "Gloves")) + packs.facet_fields("mtb")
 
 # Compatibility for callers on the original MTB branch.
 def payload(data):

@@ -18,7 +18,9 @@ filters. **Change the wireframe first, then the code.**
    packs. MTB calls it **Packs & Hydration**, as bike shops do (Fanatik: "Packs &
    Hydration"; evo: "Hydration Packs & Bags"); Skate, Ski and BMX shops say
    "Backpacks". The store category stays Packs, and `?type=packs` links still
-   open it. It has a **Size (liters)** filter: Under 15L, 15–24L, 25–34L, 35L+. Each pack shows where it's used (owner,
+   open it. Its filters: **Type** (Backpack, Hydration pack, Hip pack, Protector pack,
+   Avalanche airbag pack, Parts & refills: the stores' own words) and **Size
+   (liters)** (Under 15L, 15–24L, 25–34L, 35L+). Each pack shows where it's used (owner,
    2026-11-14): ski, snowboard and avalanche packs on Ski; hydration, hip,
    lumbar and protector packs on MTB; a sport's own brands (Shadow for BMX,
    Spitfire for Skate) on that sport. Everyday packs are shared within two

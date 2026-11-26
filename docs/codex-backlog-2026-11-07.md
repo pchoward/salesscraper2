@@ -373,6 +373,7 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - card rows still line up.
 
 ## 23. Skate › Packs: a Size (liters) filter (owner, 2026-11-25)
+**Added 2026-11-26:** a **Type** filter too (`sports/packs.py` `pack_type(name, product_type)`, values in `PACK_TYPES` order: Backpack, Hydration pack, Hip pack, Protector pack, Avalanche airbag pack, Parts & refills). It works like Size, with the URL parameter `packtype` and `data-packtype` on rows. Every pack has a type.
 **Why:** "for all backpacks across all sports we should add size when it's available. Many are 28L, smaller or larger." BMX, Ski and MTB now have it through the shared spec filters. Skate's sidebar is built separately (`page.py` sections plus `page.js`), so Skate needs its own section.
 
 **Data (done, Claude's PR "Packs: a Size filter on every sport"):** `sports/packs.py`:

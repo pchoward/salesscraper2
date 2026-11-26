@@ -82,14 +82,51 @@ class FilterTests(unittest.TestCase):
             config = payload(pooled, sport)
         items = config["items"]
         mission = items["https://t.example/mission"]["offers"][0]
-        self.assertEqual(mission["specs"], {"pack_volume": ["25–34L"]})
+        self.assertEqual(mission["specs"], {"pack_type": ["Backpack"], "pack_volume": ["25–34L"]})
         self.assertEqual((mission["price"], mission["compare"]), (59.95, 84.95))  # price and % ranges still work
-        self.assertNotIn("https://t.example/divert", items)  # no size, no spec data: unchanged
+        # No size stated: it still joins with its type, so the Type filter finds it.
+        self.assertEqual(items["https://t.example/divert"]["offers"][0]["specs"], {"pack_type": ["Backpack"]})
         sopris = items["https://e.example/sopris"]["offers"][0]["specs"]
-        self.assertEqual(sopris, {"gender": ["Women's"], "pack_volume": ["25–34L"]})
+        self.assertEqual(sopris, {"gender": ["Women's"], "pack_type": ["Backpack"], "pack_volume": ["25–34L"]})
         field = next(f for f in config["fields"] if f["key"] == "pack_volume")
         self.assertEqual(field["values"], ["25–34L"])
         self.assertNotIn("pack_volume", pooled["Evo_Packs"][0]["technical_offers"][0]["specs"])  # stored data unchanged
+
+
+class PackTypeTests(unittest.TestCase):
+    """Pack type (owner, 2026-11-26): the store words found when naming the heading."""
+
+    def test_types(self):
+        cases = {
+            ("Dakine Heli Pro 20L Backpack", "Day Packs"): "Backpack",
+            ("Dakine Session 8L Hydration Pack", "Hydration Packs"): "Hydration pack",
+            ("CamelBak M.U.L.E. 12 100oz Hydration Pack", ""): "Hydration pack",
+            ("EVOC RIDE 12", "Hydration Bags"): "Hydration pack",
+            ("EVOC Stage 6 + 2L Bladder", "Backpacks"): "Hydration pack",
+            ("Dakine Hot Laps 5L Hip Pack", "Fanny Packs"): "Hip pack",
+            ("Osprey Seral 7 Lumbar Pack", ""): "Hip pack",
+            ("CamelBak Podium Flow 2 Waist Pack", "Hydration Packs"): "Hip pack",
+            ("EVOC FR Enduro Blackline", "Protector Backpacks"): "Protector pack",
+            ("Ortovox LiTRIC Tour 30L Avabag Airbag Pack", "Airbags"): "Avalanche airbag pack",
+            ("Black Diamond JetForce 25L Pro Airbag Pack", ""): "Avalanche airbag pack",
+            ("Dakine Poacher RAS 26L Backpack", "Ski Snowboard Backpacks"): "Avalanche airbag pack",
+            ("Mammut Cartridge Refillable 207 Bar Alu (Empty)", "Airbags"): "Parts & refills",
+            ("Ortovox LiTRIC Tour 40L Avabag Expansion Zip-On", "Airbags"): "Parts & refills",
+            # A brand named Avalanche, and a vest with no hydration, are backpacks.
+            ("Avalanche 14L Lightweight Waterproof Hiking Backpack - Blue", ""): "Backpack",
+            ("Dakine Poacher LT x NST Vest", "Ski Snowboard Backpacks"): "Backpack",
+        }
+        for (name, kind), expected in cases.items():
+            self.assertEqual(packs.pack_type(name, kind), expected, name)
+
+    def test_type_then_size_on_every_sport_but_skate(self):
+        for sport_id in ("bmx", "ski", "mtb"):
+            module = __import__(f"sports.{sport_id}.facets", fromlist=["FIELDS"])
+            keys = [f["key"] for f in module.FIELDS]
+            self.assertEqual(keys[-2:], ["pack_type", "pack_volume"], sport_id)
+            field = next(f for f in module.FIELDS if f["key"] == "pack_type")
+            self.assertEqual(field["param"], f"{sport_id}_packtype")
+            self.assertEqual(field["order"], list(packs.PACK_TYPES))
 
 
 if __name__ == "__main__":
