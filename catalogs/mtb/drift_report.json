@@ -1,10 +1,18 @@
 {
-  "checked_at": "2026-11-26T11:46:33+00:00",
+  "checked_at": "2026-11-26T17:03:15+00:00",
   "counts": {
     "action": 0,
-    "watch": 0
+    "watch": 1
   },
   "date": "2026-11-26",
-  "findings": [],
-  "last_scrape": "2026-11-26T11:38:29+00:00"
+  "findings": [
+    {
+      "count": 3,
+      "kind": "new_unmapped",
+      "level": "watch",
+      "product_type": "Suspension Bearings",
+      "store": "evo"
+    }
+  ],
+  "last_scrape": "2026-11-26T16:54:43+00:00"
 }

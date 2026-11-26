@@ -1,27 +1,18 @@
 {
-  "checked_at": "2026-11-26T11:46:33+00:00",
+  "checked_at": "2026-11-26T17:03:14+00:00",
   "counts": {
-    "action": 2,
-    "watch": 0
+    "action": 0,
+    "watch": 1
   },
   "date": "2026-11-26",
   "findings": [
     {
-      "key": "Albe's BMX_Frames & Forks",
-      "kind": "held",
-      "level": "action",
-      "reason": "partial_catalog_drop",
-      "runs": 6,
-      "store": "Albe's BMX"
-    },
-    {
-      "key": "SkatePro_Protection",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 10,
-      "store": "SkatePro"
+      "count": 7,
+      "kind": "new_unmapped",
+      "level": "watch",
+      "product_type": "Snowboard Boots",
+      "store": "Kinetic"
     }
   ],
-  "last_scrape": "2026-11-26T11:21:12+00:00"
+  "last_scrape": "2026-11-26T16:33:07+00:00"
 }

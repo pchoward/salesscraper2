@@ -2266,12 +2266,28 @@
             "color": 1.0,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.286,
-            "material": 0.143,
-            "teeth": 0.357,
-            "width": 0.071
+            "link": 0.368,
+            "material": 0.158,
+            "teeth": 0.263,
+            "width": 0.053
           },
-          "items": 14
+          "items": 19
+        },
+        "Albe's BMX_Frames & Forks": {
+          "fields": {
+            "axle": 0.158,
+            "brand": 1.0,
+            "color": 0.842,
+            "fork_offset": 0.053,
+            "image": 1.0,
+            "kind": 1.0,
+            "link": 0.053,
+            "material": 0.263,
+            "top_tube": 0.368,
+            "wheel_size": 0.368,
+            "width": 0.053
+          },
+          "items": 19
         },
         "Albe's BMX_Protection": {
           "fields": {
@@ -2294,68 +2310,70 @@
         "Albe's BMX_Seating": {
           "fields": {
             "brand": 1.0,
-            "color": 0.923,
+            "color": 0.941,
             "image": 1.0,
             "kind": 1.0,
-            "seat_style": 0.769
+            "link": 0.059,
+            "seat_style": 0.765
           },
-          "items": 13
+          "items": 17
         },
         "Albe's BMX_Steering": {
           "fields": {
-            "bar_rise": 0.154,
+            "bar_rise": 0.143,
             "brand": 1.0,
-            "color": 0.923,
+            "color": 0.929,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.154,
-            "stem_type": 0.077
+            "link": 0.143,
+            "stem_type": 0.071
           },
-          "items": 13
+          "items": 14
         },
         "Albe's BMX_Tires": {
           "fields": {
             "brand": 1.0,
-            "color": 0.833,
+            "color": 0.875,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.333,
+            "link": 0.375,
             "wheel_size": 0.75
           },
-          "items": 12
+          "items": 16
         },
         "Albe's BMX_Wheel Parts": {
           "fields": {
-            "axle": 0.286,
+            "axle": 0.19,
             "brand": 1.0,
-            "color": 1.0,
-            "drive_side": 0.286,
-            "hub_type": 0.357,
+            "color": 0.905,
+            "drive_side": 0.333,
+            "hub_type": 0.381,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.071,
+            "link": 0.143,
             "material": 0.143,
-            "wheel_size": 0.286
+            "wheel_size": 0.238
           },
-          "items": 14
+          "items": 21
         },
         "Albe's BMX_Wheels": {
           "fields": {
-            "axle": 0.455,
+            "axle": 0.318,
             "brand": 1.0,
             "color": 1.0,
-            "diameter_mm": 0.091,
-            "diameters_mm": 0.091,
+            "diameter_mm": 0.045,
+            "diameters_mm": 0.045,
             "drive_side": 0.636,
-            "driver": 0.091,
-            "hub_type": 0.545,
+            "driver": 0.136,
+            "hub_type": 0.591,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.182,
-            "material": 0.091,
-            "wheel_size": 1.0
+            "link": 0.136,
+            "material": 0.045,
+            "wheel_size": 1.0,
+            "width": 0.045
           },
-          "items": 11
+          "items": 22
         },
         "Bikes Online_Protection": {
           "fields": {
@@ -2925,7 +2943,9 @@
       "(none)",
       "Accesories",
       "Apparel",
+      "Apparel & Accessories",
       "Bindings",
+      "Boots",
       "Default",
       "Denim",
       "Footwear Low",
@@ -2939,11 +2959,15 @@
       "Shoes",
       "Skateboards",
       "Snowboard",
+      "Snowboard Boots",
       "Snowboards",
       "Sweatshirt",
       "Vest",
+      "glo",
+      "gloves",
       "limpies",
       "shorts",
+      "snow gloves",
       "trousers"
     ],
     "Kink": [

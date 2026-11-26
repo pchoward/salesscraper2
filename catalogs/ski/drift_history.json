@@ -2843,56 +2843,107 @@
           },
           "items": 88
         },
-        "Gear West_Boots": {
+        "Gear West_Bindings": {
           "fields": {
-            "ability": 0.146,
+            "ability": 0.011,
+            "brake": 0.122,
             "brand": 1.0,
-            "closure": 0.159,
-            "flex": 0.933,
-            "gender": 0.872,
-            "image": 1.0,
-            "kind": 0.402,
-            "last": 0.738,
-            "link": 0.024,
-            "mondo": 0.988,
-            "sizes": 0.988,
-            "ski_type": 0.433,
-            "sole": 0.524,
-            "walk": 0.061
-          },
-          "items": 164
-        },
-        "Gear West_Skis": {
-          "fields": {
-            "ability": 0.126,
-            "bindings": 0.222,
-            "brand": 1.0,
-            "gender": 0.859,
+            "din": 0.578,
+            "gender": 0.333,
             "image": 1.0,
             "kind": 0.289,
-            "length": 0.978,
-            "lengths": 0.978,
-            "link": 0.007,
-            "radius": 0.111,
-            "rocker": 0.267,
-            "ski_type": 0.437,
-            "versions": 0.007,
-            "waist": 0.615,
-            "width": 0.067
+            "link": 0.033,
+            "ski_type": 0.289,
+            "sole": 0.256,
+            "width": 0.044
           },
-          "items": 135
+          "items": 90
         },
-        "SkatePro_Helmets": {
+        "Gear West_Boots": {
+          "fields": {
+            "ability": 0.127,
+            "brand": 1.0,
+            "closure": 0.25,
+            "flex": 0.643,
+            "gender": 0.794,
+            "image": 1.0,
+            "kind": 0.365,
+            "last": 0.52,
+            "link": 0.028,
+            "mondo": 0.702,
+            "sizes": 0.702,
+            "ski_type": 0.417,
+            "sole": 0.365,
+            "versions": 0.004,
+            "walk": 0.06,
+            "width": 0.004
+          },
+          "items": 252
+        },
+        "Gear West_Helmets": {
           "fields": {
             "age": 1.0,
             "brand": 1.0,
+            "certification": 0.6,
+            "gender": 0.4,
+            "helmet_shell": 0.2,
             "helmet_style": 1.0,
             "image": 1.0,
+            "kind": 0.133,
+            "link": 0.267,
+            "prot_size": 0.867,
             "protects": 1.0,
-            "rotational": 0.31,
-            "versions": 0.034
+            "rotational": 0.933
           },
-          "items": 29
+          "items": 15
+        },
+        "Gear West_Poles": {
+          "fields": {
+            "brand": 1.0,
+            "gender": 0.222,
+            "image": 1.0,
+            "kind": 0.444,
+            "link": 0.167,
+            "width": 0.056
+          },
+          "items": 18
+        },
+        "Gear West_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "gender": 0.222,
+            "goggle_fit": 0.167,
+            "goggle_lens": 0.278,
+            "goggle_size": 0.167,
+            "image": 1.0,
+            "lens_shape": 0.611,
+            "link": 0.056,
+            "protection_sizes": 0.111,
+            "protection_type": 0.333,
+            "protects": 1.0
+          },
+          "items": 18
+        },
+        "Gear West_Skis": {
+          "fields": {
+            "ability": 0.139,
+            "bindings": 0.222,
+            "brand": 0.956,
+            "gender": 0.785,
+            "image": 0.956,
+            "kind": 0.272,
+            "length": 0.886,
+            "lengths": 0.886,
+            "link": 0.013,
+            "radius": 0.101,
+            "rocker": 0.234,
+            "ski_type": 0.424,
+            "versions": 0.006,
+            "waist": 0.551,
+            "width": 0.057
+          },
+          "items": 158
         },
         "Ski Essentials_Bindings": {
           "fields": {
@@ -2945,20 +2996,20 @@
         },
         "Ski Essentials_Skis": {
           "fields": {
-            "ability": 0.85,
-            "bindings": 0.685,
+            "ability": 0.844,
+            "bindings": 0.688,
             "brand": 1.0,
             "gender": 1.0,
             "image": 1.0,
-            "kind": 0.89,
+            "kind": 0.891,
             "length": 0.008,
             "lengths": 0.008,
             "link": 0.008,
-            "rocker": 0.268,
+            "rocker": 0.266,
             "ski_type": 0.992,
             "waist": 0.984
           },
-          "items": 127
+          "items": 128
         },
         "Skipro_Bindings": {
           "fields": {
@@ -3060,7 +3111,7 @@
             "brand": 1.0,
             "gender": 0.231,
             "helmet_style": 1.0,
-            "image": 0.923,
+            "image": 1.0,
             "protects": 1.0,
             "rotational": 0.462,
             "versions": 0.077
@@ -3095,13 +3146,13 @@
         },
         "The House_Skis": {
           "fields": {
-            "bindings": 0.667,
+            "bindings": 0.657,
             "brand": 1.0,
-            "gender": 0.515,
+            "gender": 0.522,
             "image": 1.0,
-            "waist": 0.591
+            "waist": 0.597
           },
-          "items": 66
+          "items": 67
         },
         "The Pro Ski and Ride_Boots": {
           "fields": {
@@ -3183,20 +3234,21 @@
         },
         "Utah Ski_Helmets": {
           "fields": {
-            "ability": 0.026,
+            "ability": 0.073,
             "age": 1.0,
             "brand": 1.0,
-            "certification": 0.436,
-            "gender": 0.974,
-            "helmet_shell": 0.795,
+            "certification": 0.463,
+            "gender": 0.976,
+            "helmet_shell": 0.805,
             "helmet_style": 1.0,
             "image": 1.0,
-            "prot_size": 0.974,
+            "link": 0.024,
+            "prot_size": 0.927,
             "protects": 1.0,
-            "rotational": 0.769,
-            "versions": 0.026
+            "rotational": 0.732,
+            "versions": 0.024
           },
-          "items": 39
+          "items": 41
         },
         "Utah Ski_Poles": {
           "fields": {
@@ -3210,21 +3262,23 @@
         },
         "Utah Ski_Protection": {
           "fields": {
+            "ability": 0.017,
             "age": 1.0,
             "brand": 1.0,
-            "gender": 0.891,
-            "goggle_fit": 0.109,
-            "goggle_lens": 0.273,
-            "goggle_size": 0.364,
+            "gender": 0.898,
+            "goggle_fit": 0.102,
+            "goggle_lens": 0.254,
+            "goggle_size": 0.373,
             "image": 1.0,
-            "lens_shape": 0.782,
-            "link": 0.073,
-            "protection_sizes": 0.109,
+            "lens_shape": 0.797,
+            "link": 0.068,
+            "prot_size": 0.034,
+            "protection_sizes": 0.136,
             "protects": 1.0,
-            "versions": 0.018,
-            "width": 0.018
+            "versions": 0.017,
+            "width": 0.017
           },
-          "items": 55
+          "items": 59
         },
         "Utah Ski_Skis": {
           "fields": {
@@ -3324,67 +3378,67 @@
         },
         "evo_Bindings": {
           "fields": {
-            "brake": 0.964,
+            "brake": 0.967,
             "brand": 1.0,
-            "din": 0.857,
-            "gender": 0.036,
+            "din": 0.833,
+            "gender": 0.033,
             "image": 1.0,
-            "kind": 0.357,
-            "link": 0.357,
-            "ski_type": 0.357,
-            "sole": 0.536
+            "kind": 0.4,
+            "link": 0.333,
+            "ski_type": 0.4,
+            "sole": 0.5
           },
-          "items": 28
+          "items": 30
         },
         "evo_Boots": {
           "fields": {
-            "ability": 0.09,
+            "ability": 0.088,
             "brand": 1.0,
-            "closure": 0.271,
+            "closure": 0.264,
             "flex": 0.846,
-            "gender": 0.593,
+            "gender": 0.599,
             "image": 1.0,
-            "kind": 0.226,
-            "last": 0.385,
-            "link": 0.063,
+            "kind": 0.225,
+            "last": 0.379,
+            "link": 0.062,
             "mondo": 1.0,
             "sizes": 1.0,
-            "ski_type": 0.226,
-            "sole": 0.403,
-            "versions": 0.005,
-            "walk": 0.258,
-            "width": 0.005
+            "ski_type": 0.225,
+            "sole": 0.401,
+            "versions": 0.013,
+            "walk": 0.256,
+            "width": 0.004
           },
-          "items": 221
+          "items": 227
         },
         "evo_Helmets": {
           "fields": {
             "age": 1.0,
             "brand": 0.989,
             "certification": 0.039,
-            "gender": 0.24,
-            "helmet_shell": 0.453,
+            "gender": 0.238,
+            "helmet_shell": 0.448,
             "helmet_style": 1.0,
             "image": 1.0,
-            "link": 0.318,
+            "link": 0.315,
             "prot_size": 0.989,
             "protects": 1.0,
-            "rotational": 0.687,
+            "rotational": 0.685,
             "versions": 0.039,
-            "width": 0.034
+            "width": 0.033
           },
-          "items": 179
+          "items": 181
         },
         "evo_Packs": {
           "fields": {
-            "brand": 0.987,
-            "gender": 0.132,
+            "brand": 0.989,
+            "gender": 0.13,
             "image": 1.0,
-            "link": 0.151,
-            "versions": 0.013,
-            "width": 0.072
+            "link": 0.141,
+            "versions": 0.016,
+            "width": 0.087
           },
-          "items": 152
+          "items": 184
         },
         "evo_Poles": {
           "fields": {
@@ -3401,37 +3455,37 @@
             "age": 1.0,
             "brand": 0.99,
             "certification": 0.024,
-            "gender": 0.131,
-            "goggle_fit": 0.306,
-            "goggle_lens": 0.117,
-            "goggle_size": 0.286,
+            "gender": 0.13,
+            "goggle_fit": 0.312,
+            "goggle_lens": 0.115,
+            "goggle_size": 0.284,
             "image": 1.0,
-            "lens_shape": 0.393,
-            "link": 0.359,
-            "prot_size": 0.078,
-            "protection_sizes": 0.146,
+            "lens_shape": 0.389,
+            "link": 0.365,
+            "prot_size": 0.077,
+            "protection_sizes": 0.144,
             "protection_type": 0.034,
             "protects": 1.0,
             "versions": 0.053,
             "width": 0.053
           },
-          "items": 206
+          "items": 208
         },
         "evo_Skis": {
           "fields": {
             "ability": 0.005,
             "bindings": 0.021,
             "brand": 1.0,
-            "gender": 0.262,
+            "gender": 0.258,
             "image": 1.0,
             "length": 1.0,
             "lengths": 1.0,
-            "link": 0.058,
-            "rocker": 0.115,
-            "ski_type": 0.042,
-            "waist": 0.77
+            "link": 0.057,
+            "rocker": 0.119,
+            "ski_type": 0.041,
+            "waist": 0.768
           },
-          "items": 191
+          "items": 194
         }
       }
     }
@@ -3522,23 +3576,149 @@
       "Tailgate Pads"
     ],
     "Gear West": [
+      "(none)",
+      "24\" Bikes",
       "ACCESSORIES & MISCELLANEOUS - RUN ACCESSORIES - Misc Run Accessories",
+      "ALPINE - SNOWBOARD - Accessories",
+      "ALPINE - SNOWBOARD - Bindings",
       "ALPINE - SNOWBOARD - Boards",
+      "APPAREL - ALPINE APPAREL - KIDS APPAREL - Pants & Tights",
+      "APPAREL - ALPINE APPAREL - MENS APPAREL - Jackets & Vests",
+      "APPAREL - ALPINE APPAREL - MENS APPAREL - Pants & Tights",
+      "APPAREL - ALPINE APPAREL - WOMENS APPAREL - Baselayers",
       "APPAREL - ALPINE APPAREL - WOMENS APPAREL - Jackets & Vests",
       "APPAREL - ALPINE APPAREL - WOMENS APPAREL - Tops",
+      "APPAREL - BIKE APPAREL - HATS & WARMERS",
+      "APPAREL - BIKE APPAREL - MENS APPAREL - JERSEYS",
+      "APPAREL - BIKE APPAREL - MENS APPAREL - TOPS",
+      "APPAREL - BIKE APPAREL - WOMENS APPAREL - JERSEYS",
+      "APPAREL - BIKE APPAREL - WOMENS APPAREL - SHORTS & SKIRTS",
+      "APPAREL - BIKE APPAREL - WOMENS APPAREL - TOPS",
       "APPAREL - NORDIC APPAREL - HATS - Winter Hats",
+      "APPAREL - NORDIC APPAREL - MENS CLOTHING - Pants & Tights",
+      "APPAREL - NORDIC APPAREL - MENS CLOTHING - Shorts",
       "APPAREL - NORDIC APPAREL - WOMENS CLOTHING - Jackets & Vests",
       "APPAREL - NORDIC APPAREL - WOMENS CLOTHING - Pants & Tights",
+      "APPAREL - NORDIC APPAREL - WOMENS CLOTHING - Shorts & Skirts",
       "APPAREL - NORDIC APPAREL - WOMENS CLOTHING - Tops",
+      "Accessories",
+      "Apparel",
+      "BIKE - BIKE ACCESSORIES - ACCESSORIES - COMPUTERS",
+      "BIKE - BIKE ACCESSORIES - ACCESSORIES - LIGHTS",
+      "BIKE - BIKE ACCESSORIES - ACCESSORIES - PEDALS & CLEATS",
       "BIKE - BIKE ACCESSORIES - CAR RACKS & TRAINERS - CAR RACKS",
+      "BIKE - BIKE ACCESSORIES - HELMETS - ADULT",
+      "BIKE - BIKES - YOUTH",
       "BIKE - SERVICE PARTS - TIRES - MTB",
+      "BIKE - SWIM & TRIATHLON - WETSUITS",
+      "Balaclavas",
+      "Baselayers",
+      "Bike & Tri",
+      "Bras",
+      "Buffs & Scarves",
+      "Car Racks",
+      "Coats & Jackets",
       "Default",
+      "Dresses",
+      "Drivetrain",
+      "E-Bikes",
+      "Electronics",
+      "Eyewear",
+      "Fat Bike Tires",
+      "Fat Bikes",
+      "Fitness",
+      "Fitness/Performance",
+      "Fleece",
+      "Gloves",
+      "Gloves & Mittens",
+      "Gravel Bikes",
+      "Hard Kick Wax",
+      "Hardtail Mountain Bikes",
+      "Hats",
+      "Headbands",
+      "Hoodies",
+      "Hybrid Bikes",
+      "Hydrocarbon",
+      "Indoor Trainers",
+      "Insulated Jackets",
+      "Irons",
       "Jackets",
       "Jackets & Vests",
+      "Kids",
+      "Klister & Liquid Grip",
+      "Lights",
+      "Liquid & Easy Apply",
+      "Men",
+      "Men's Clothing",
+      "Men's Shoes",
+      "Mountain Bikes",
+      "NORDIC - XC SKI BOOTS - Skate",
+      "Neutral",
+      "Nordic Ski Pants & Tights",
+      "Nordic Training Pants",
+      "Offroad Cycling Shoes",
+      "Outerwear",
+      "Overboots",
       "Pants",
+      "Pants & Tights",
+      "Pants, Tights & Shorts",
+      "Pedals and Cleats",
+      "Performance",
+      "Performance/Race",
+      "Pole Parts",
+      "Race",
+      "Race Bindings",
+      "Race Gravel Bikes",
+      "Racing Flats",
+      "Recreational",
+      "Road Bike Shoes",
+      "Road Bike Tires",
+      "Road Bikes",
+      "Road Cycling Shoes",
+      "Running Shirts & Singlets",
+      "Running Shoes",
+      "Running Shorts",
+      "Running Tops",
+      "Saddles",
       "Shirts",
       "Shirts & Tops",
-      "Shorts"
+      "Shirts, Jerseys & Midlayers",
+      "Shoes",
+      "Shorts",
+      "Shorts & Skirts",
+      "Skateboards & Longboards",
+      "Skateboards & Longboards& Longboards",
+      "Ski Packages",
+      "Snowboard",
+      "Snowboards",
+      "Snowpants",
+      "Snowshoes",
+      "Socks",
+      "Spikes & Flats",
+      "Stability",
+      "Structure Tools",
+      "Sweaters",
+      "Sweaters & Midlayers",
+      "Tights",
+      "Tights & Leggings",
+      "Tires",
+      "Tools",
+      "Tools & Benches",
+      "Tops",
+      "Touring",
+      "Track Spikes",
+      "Trail & Winter",
+      "Trail Shoes",
+      "Triathlon Bikes",
+      "Triathlon Shoes",
+      "Vests",
+      "Wax & Base Prep",
+      "Wax Brushes",
+      "Wax Remover & Cleaning",
+      "Wax Service",
+      "Wetsuits",
+      "Wheels, Ferrules & Accessories",
+      "Women's Clothing"
     ],
     "Ski Essentials": [
       "Alpine Ski > Sock > Over The Calf",
@@ -3640,6 +3820,7 @@
       "A B J",
       "A B M",
       "A B W",
+      "A C M",
       "A C W",
       "A G J",
       "A G L",
@@ -3647,6 +3828,7 @@
       "A G W",
       "A H A",
       "A H H",
+      "A H K",
       "A H N",
       "A M J",
       "A M M",
