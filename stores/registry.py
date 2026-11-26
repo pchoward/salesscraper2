@@ -4,6 +4,7 @@ import logging
 
 from stores.ccs import scrapers as ccs_scrapers
 from stores.deathgear import scrapers as deathgear_scrapers
+from stores.evo_skate import scrapers as evo_skate_scrapers
 from stores.exodus import scrapers as exodus_scrapers
 from stores.kinetic import scrapers as kinetic_scrapers
 from stores.muirskate import DISABLED_REASON as MUIR_REASON
@@ -36,6 +37,8 @@ def build_scrapers():
     scrapers.extend(kinetic_scrapers())
     scrapers.extend(spot_scrapers())
     scrapers.extend(exodus_scrapers())
+    # evo's skate sale (owner, 2026-11-26); evo was on MTB and Ski only.
+    scrapers.extend(evo_skate_scrapers())
     scrapers.extend(socal_scrapers())
     # Sourceboards' US storefront, skate sale collections (2026-11-11).
     scrapers.extend(sourceboards_scrapers())

@@ -31,7 +31,7 @@ FIELDS = (
     {"key": "ability", "label": "Ability level", "param": "ski_ability", "categories": ("Skis", "Boots", "Bindings")},
     {"key": "gender", "label": "Gender", "param": "ski_gender", "categories": (),
      "order": ["Men", "Women", "Unisex", "Kids"]},
-) + protection.facet_fields("ski", ("Helmets", "Protection", "Gloves")) + (packs.facet_field("ski"),)  # not Goggles: helmet/armor fields
+) + protection.facet_fields("ski", ("Helmets", "Protection", "Gloves")) + packs.facet_fields("ski")  # not Goggles: helmet/armor fields
 
 # Section order per heading (docs/filters-evo-model.md): Brand comes first on
 # the page, then these, in this order; Condition last. A field not listed for

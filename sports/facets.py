@@ -22,7 +22,7 @@ def payload(data, sport):
                 continue
             part = item.get('part', '')
             raw = item.get('technical_offers', [])
-            if part == packs.PART:
+            if packs.PART in (part, item.get('store_part')):
                 raw = packs.technical_offers(item)  # pack size from the title (owner, 2026-11-25)
             offers = [offer for offer in raw if offer.get('available') is not False]
             if not offers:

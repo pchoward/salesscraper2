@@ -60,7 +60,7 @@ class Page(unittest.TestCase):
             self.assertEqual(headings.heading("bmx", self.item(part, name, "Chains")), "Tools & Care", name)
         self.assertEqual(headings.heading("bmx", self.item("Drivetrain", "KMC Z410 Chain", "Chains")), "Drivetrain")
         self.assertEqual(headings.HEADINGS["bmx"][8], "Tools & Care")
-        self.assertEqual(headings.HEADINGS["bmx"][9:], headings.GEAR)
+        self.assertEqual(headings.HEADINGS["bmx"][9:], headings._gear("bmx"))
 
     def test_gear_untouched(self):
         lid = self.item("Protection", "Shadow Classic Helmet", "Helmets")
