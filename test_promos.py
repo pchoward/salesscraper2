@@ -314,3 +314,21 @@ class PromoStripTests(unittest.TestCase):
         self.assertNotIn("EXPIRED", markup)
         with mock.patch("promos.for_sport", return_value=[]):
             self.assertEqual(_promo_strip("ski"), "")
+
+    def test_strip_orders_every_offer_by_redemption_then_discount_then_store(self):
+        base = {"url": "https://example.test/"}
+        offers = [
+            dict(base, store="Z Zebra", code="", auto=True, percent=25),
+            dict(base, store="Code Low", code="LOW", percent=10),
+            dict(base, store="Code High", code="HIGH", percent=40),
+            dict(base, store="A Alpine", code="", auto=True, percent=25),
+        ]
+        with mock.patch("promos.for_sport", return_value=offers):
+            markup = _promo_strip("mtb")
+        self.assertEqual(markup.count('class="promo-offer"'), 4)
+        self.assertEqual(markup.count("data-copy-promo"), 2)
+        self.assertNotIn("promoMore", markup)
+        self.assertEqual(
+            sorted(("A Alpine", "Z Zebra", "Code High", "Code Low"), key=markup.index),
+            ["A Alpine", "Z Zebra", "Code High", "Code Low"],
+        )

@@ -7333,42 +7333,19 @@ function initPromoStrip() {
     const stored = readJson(key, []);
     const dismissed = new Set(Array.isArray(stored) ? stored : []);
     const offers = Array.from(strip.querySelectorAll(".promo-offer"));
-    const more = document.getElementById("promoMore");
     const status = document.getElementById("promoStatus");
-    let expanded = false;
-    const phone = window.matchMedia("(max-width:640px)");
 
     function paint() {
         const now = new Date();
         const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
             .map(value => String(value).padStart(2, "0")).join("-");
-        const active = offers.filter(offer => !dismissed.has(offer.dataset.promoId)
-            && (!offer.dataset.ends || offer.dataset.ends >= today));
-        if (phone.matches) {
-            active.sort((a, b) => Number(a.dataset.sportCount) - Number(b.dataset.sportCount));
-        }
-        const collapsible = active.length > (phone.matches ? 0 : 2);
-        const open = expanded && collapsible;
-        strip.hidden = !active.length;
-        strip.dataset.open = String(open);
         offers.forEach(offer => {
-            const index = active.indexOf(offer);
-            offer.hidden = index < 0 || (collapsible && !open && index > 0);
+            offer.hidden = dismissed.has(offer.dataset.promoId)
+                || (!!offer.dataset.ends && offer.dataset.ends < today);
         });
-        more.hidden = !collapsible;
-        more.textContent = open ? "Show less" : active.length > 1 ? "+" + (active.length - 1) + " more" : "Details";
-        more.setAttribute("aria-expanded", String(open));
-        const ordered = phone.matches ? [...active, ...offers.filter(offer => !active.includes(offer))] : offers;
-        const list = document.getElementById("promoOffers");
-        if (ordered.some((offer, index) => list.children[index] !== offer)) {
-            ordered.forEach(offer => list.appendChild(offer));
-        }
+        strip.hidden = offers.every(offer => offer.hidden);
     }
 
-    more.addEventListener("click", () => {
-        expanded = !expanded;
-        paint();
-    });
     strip.addEventListener("click", async event => {
         const button = event.target.closest("button");
         const offer = button?.closest(".promo-offer");
@@ -7379,7 +7356,6 @@ function initPromoStrip() {
             paint();
             const dismiss = strip.querySelector(".promo-offer:not([hidden]) [data-dismiss-promo]");
             if (dismiss?.getClientRects().length) dismiss.focus();
-            else if (!more.hidden) more.focus();
             else document.getElementById("sortSelect")?.focus();
         } else if (button.hasAttribute("data-copy-promo")) {
             const code = offer.querySelector("code").textContent;
@@ -7393,7 +7369,6 @@ function initPromoStrip() {
             }
         }
     });
-    phone.addEventListener("change", () => { expanded = false; paint(); });
     // Recheck the visitor's date when a tab is brought back after midnight.
     document.addEventListener("visibilitychange", () => { if (!document.hidden) paint(); });
     paint();
