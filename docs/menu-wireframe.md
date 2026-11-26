@@ -12,9 +12,15 @@ filters. **Change the wireframe first, then the code.**
 1. A heading is a thing to shop for. Types inside it (ski type, hub vs rim)
    are filters or chips, not more headings, so the menu stays short on a phone.
 2. The gear at the bottom of every menu uses the same names on every sport, in
-   this order: **Helmets · Goggles · Gloves · Protection · Packs**. Protection
-   is pads, armor, impact shorts and wrist guards. Packs (owner, 2026-11-12) is
-   backpacks and hydration packs. Each pack shows where it's used (owner,
+   this order: **Helmets · Goggles · Gloves · Protection · Backpacks**. Protection
+   is pads, armor, impact shorts and wrist guards. Backpacks (owner, 2026-11-12;
+   named 2026-11-26 the way the stores name it) is backpacks and hydration
+   packs. MTB calls it **Packs & Hydration**, as bike shops do (Fanatik: "Packs &
+   Hydration"; evo: "Hydration Packs & Bags"); Skate, Ski and BMX shops say
+   "Backpacks". The store category stays Packs, and `?type=packs` links still
+   open it. Its filters: **Type** (Backpack, Hydration pack, Hip pack, Protector pack,
+   Avalanche airbag pack, Parts & refills: the stores' own words) and **Size
+   (liters)** (Under 15L, 15–24L, 25–34L, 35L+). Each pack shows where it's used (owner,
    2026-11-14): ski, snowboard and avalanche packs on Ski; hydration, hip,
    lumbar and protector packs on MTB; a sport's own brands (Shadow for BMX,
    Spitfire for Skate) on that sport. Everyday packs are shared within two

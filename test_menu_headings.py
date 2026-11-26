@@ -36,7 +36,7 @@ class HeadingTest(unittest.TestCase):
         self.assertEqual(headings.heading("skate", _item("187 Pro Knee Pads", "Protection")), "Protection")
         for sport_id, menu in headings.HEADINGS.items():
             size = len(headings.GEAR)
-            self.assertEqual(menu[-size:] if sport_id != "skate" else menu[-size - 1:-1], headings.GEAR, sport_id)
+            self.assertEqual(menu[-size:] if sport_id != "skate" else menu[-size - 1:-1], headings._gear(sport_id), sport_id)
 
     def test_renames_and_merges(self):
         self.assertEqual(headings.heading("mtb", _item("RockShox ZEB", "Forks & Shocks")), "Suspension")
@@ -44,6 +44,35 @@ class HeadingTest(unittest.TestCase):
         self.assertEqual(headings.heading("bmx", _item("Odyssey Hazard Lite Wheel", "Wheels")), "Wheels & Hubs")
         self.assertEqual(headings.heading("bmx", _item("Odyssey Path Pro Tire", "Tires")), "Tires & Tubes")
         self.assertEqual(headings.heading("skate", _item("Baker Deck", "Decks")), "Decks")
+
+    def test_packs_read_the_way_the_stores_say_it(self):
+        # Owner, 2026-11-26: Backpacks on Ski and BMX, Packs & Hydration on
+        # MTB; Skate's menu is Codex's task 25. Old ?type=packs links work.
+        pack = _item("Osprey Sopris 32 Backpack", "Packs")
+        self.assertEqual(headings.heading("ski", pack), "Backpacks")
+        self.assertEqual(headings.heading("bmx", pack), "Backpacks")
+        self.assertEqual(headings.heading("mtb", pack), "Packs & Hydration")
+        self.assertEqual(headings.heading("skate", pack), "Packs")
+        for sport_id, name in (("ski", "Backpacks"), ("bmx", "Backpacks"), ("mtb", "Packs & Hydration")):
+            self.assertEqual(headings.ALIASES[sport_id]["packs"], name)
+            self.assertEqual(headings.ALIASES[sport_id]["pack"], name)
+            self.assertIn(name, headings.HEADINGS[sport_id])
+            self.assertNotIn("Packs", headings.HEADINGS[sport_id])
+        shown = headings.regroup({"evo_Packs": [pack]}, "mtb")["evo_Packs"][0]
+        self.assertEqual((shown["part"], shown["store_part"]), ("Packs & Hydration", "Packs"))
+        self.assertEqual(pack["part"], "Packs")  # stored data keeps the store's category
+
+    def test_pack_size_filter_follows_the_new_names(self):
+        import sports
+        from sports.facets import payload
+        pack = dict(_item("Dakine Heli Pro 20L Backpack", "Packs"), url="https://e.example/heli",
+                    price_new="80", price_old="100")
+        for sport_id in ("ski", "mtb"):
+            sport = sports.SPORTS[sport_id]
+            with sport.session():
+                config = payload(headings.regroup({"evo_Packs": [pack]}, sport_id), sport)
+            offers = config["items"]["https://e.example/heli"]["offers"]
+            self.assertEqual(offers[0]["specs"]["pack_volume"], ["15–24L"], sport_id)
 
     def test_regroup_copies_and_keeps_the_store_category(self):
         data = {"Shop_Protection": [_item("Smith Squad Goggles", "Protection")]}
@@ -75,7 +104,7 @@ class PageTest(unittest.TestCase):
         self.assertEqual(menu["Goggles"]["count"], 2)
         self.assertEqual(menu["Protection"]["count"], 1)
         self.assertNotIn("Body Armor", menu)
-        self.assertIn('"partAliases": {"body-armor": "Protection"}', html)
+        self.assertIn('"partAliases": {"body-armor": "Protection", "packs": "Backpacks", "pack": "Backpacks"}', html)
 
     def test_mtb_helmets_pass_the_catalog_rules_under_their_heading(self):
         # MTB's rules drop "BMX" words except in Protection; a BMX-style lid

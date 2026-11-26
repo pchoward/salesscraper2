@@ -159,20 +159,55 @@ def volume_size(litres):
     return VOLUME_SIZES[3]
 
 
+# Pack type (owner, 2026-11-26), from the store words found when naming the
+# heading: evo's "Hydration Packs", "Avalanche Airbag Backpacks"; Fanatik's
+# "Hip Packs"; EVOC's "Protector Backpacks". The first that fits wins.
+PACK_TYPES = ("Backpack", "Hydration pack", "Hip pack", "Protector pack", "Avalanche airbag pack", "Parts & refills")
+_PACK_PARTS = re.compile(r"\bcartridges?\b|\bcanisters?\b|\brefill(?:able)?\b|\bexpansion\b|\bzip[\s-]*on\b", re.I)
+_AIRBAG = re.compile(r"\bair\s*bags?\b|\bavabag\b|\bjet\s*force\b|\balpride\b|\bsnowpulse\b|\bRAS\b", re.I)
+_PROTECTOR = re.compile(r"\bprotector\b|\bback\s*protect|\bspine\s*protect", re.I)
+_HIP = re.compile(r"\bhip\b|\blumbar\b|\bwaist\b|\bbelt\b|\bfanny\s*packs?\b", re.I)
+_HYDRATION = re.compile(r"\bhydration\b|\breservoirs?\b|\bbladders?\b|\bhydro\b|\b\d+\s*oz\b", re.I)
+
+
+def pack_type(name, product_type=""):
+    """One of PACK_TYPES, from the title and the store's own category."""
+    text = f"{name or ''} | {product_type or ''}"
+    if _PACK_PARTS.search(str(name or "")):
+        return PACK_TYPES[5]
+    for label, pattern in ((PACK_TYPES[4], _AIRBAG), (PACK_TYPES[3], _PROTECTOR), (PACK_TYPES[2], _HIP),
+                           (PACK_TYPES[1], _HYDRATION)):
+        if pattern.search(text):
+            return label
+    return PACK_TYPES[0]
+
+
+def facet_fields(prefix):
+    """The pack heading's Type and Size filters for one sport's sidebar."""
+    # The heading reads Backpacks, or Packs & Hydration on MTB (sports/headings.py).
+    from sports.headings import PACKS_HEADINGS
+    return (
+        {"key": "pack_type", "label": "Type", "param": f"{prefix}_packtype", "categories": PACKS_HEADINGS,
+         "order": list(PACK_TYPES)},
+        {"key": "pack_volume", "label": "Size (liters)", "param": f"{prefix}_packsize", "categories": PACKS_HEADINGS,
+         "order": list(VOLUME_SIZES)},
+    )
+
+
 def facet_field(prefix):
-    """The Packs heading's Size filter for one sport's sidebar."""
-    return {"key": "pack_volume", "label": "Size (liters)", "param": f"{prefix}_packsize", "categories": (PART,),
-            "order": list(VOLUME_SIZES)}
+    """The Size filter alone (kept for callers that add one field)."""
+    return facet_fields(prefix)[1]
 
 
 def technical_offers(item):
-    """``item``'s spec offers with its pack size added, built from the
-    listing itself when the store gave none (a skate shop's pack pooled onto
-    BMX). Read when a page is built; stored data is unchanged."""
+    """``item``'s spec offers with its pack type and size added, built from
+    the listing itself when the store gave none (a skate shop's pack pooled
+    onto BMX). Read when a page is built; stored data is unchanged."""
+    added = {"pack_type": [pack_type(item.get("name"), item.get("product_type"))]}
     size = volume_size(volume_litres(item.get("name"), item.get("description")))
+    if size:
+        added["pack_volume"] = [size]
     offers = [offer for offer in item.get("technical_offers") or [] if isinstance(offer, dict)]
-    if not size:
-        return offers
     if not offers:
         def amount(value):
             try:
@@ -181,7 +216,7 @@ def technical_offers(item):
                 return None
         offers = [{"price": amount(item.get("price_new")), "compare": amount(item.get("price_old")),
                    "available": None, "specs": {}}]
-    return [dict(offer, specs=dict(offer.get("specs") or {}, pack_volume=[size])) for offer in offers]
+    return [dict(offer, specs=dict(offer.get("specs") or {}, **added)) for offer in offers]
 
 
 def sport_of(title, brand="", product_type=""):

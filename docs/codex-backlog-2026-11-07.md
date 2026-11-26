@@ -373,6 +373,7 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - card rows still line up.
 
 ## 23. Skate › Packs: a Size (liters) filter (owner, 2026-11-25)
+**Added 2026-11-26:** a **Type** filter too (`sports/packs.py` `pack_type(name, product_type)`, values in `PACK_TYPES` order: Backpack, Hydration pack, Hip pack, Protector pack, Avalanche airbag pack, Parts & refills). It works like Size, with the URL parameter `packtype` and `data-packtype` on rows. Every pack has a type.
 **Why:** "for all backpacks across all sports we should add size when it's available. Many are 28L, smaller or larger." BMX, Ski and MTB now have it through the shared spec filters. Skate's sidebar is built separately (`page.py` sections plus `page.js`), so Skate needs its own section.
 
 **Data (done, Claude's PR "Packs: a Size filter on every sport"):** `sports/packs.py`:
@@ -416,3 +417,17 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - Back restores All;
 - a BMX Brakes fixture shows Brake Kits · Levers · Cables · Pads · Brake Parts;
 - desktop and 390 px.
+
+## 25. Skate: the Packs heading reads "Backpacks" (owner, 2026-11-26)
+**Why:** stores name the category "Backpacks" (Skate Warehouse "Backpacks + Bags", Exodus "Backpacks", Source BMX "Backpacks", evo "Backpacks"). Bike shops lead with hydration (Fanatik "Packs & Hydration"). The wireframe (`docs/menu-wireframe.md`, rule 2) now says Backpacks, or Packs & Hydration on MTB.
+
+**Done (Claude's PR "Packs heading: Backpacks, or Packs & Hydration on MTB"):** Ski and BMX show **Backpacks** and MTB shows **Packs & Hydration**, through `sports/headings.py` (`PACKS_HEADING`, `_RENAMED`, `ALIASES` "packs"/"pack"). Stored data keeps the store category "Packs". `sports/facets.py` and the pack Size filter follow the new names.
+
+**Wanted for Skate**, whose menu is built from `page.py` `PART_ORDER` and `page.js`:
+- The menu, the chips and the heading show **Backpacks** for the store category `Packs`. Stored data, `data-part` values used for filtering, and alerts stay `Packs`.
+- `?type=packs` and `?type=pack` keep opening it (`page.js` slug map near `pack: "Packs"`, `typeSlug`; `query_state.py`). A new `?type=backpacks` opens it too. Saved views and the `localStorage` format don't change.
+- The navigation categories JSON (`navigation/skate-categories.json`, built from the page) shows "Backpacks".
+
+**Tests:**
+- Python: Skate's menu lists Backpacks and no longer Packs; `?type=packs` decodes to it.
+- A browser check: an old `?type=packs` link and a saved view with Packs both open Backpacks at desktop and 390 px.
