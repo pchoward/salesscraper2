@@ -7,7 +7,11 @@ the same deals under headings people shop by:
 
 * Every sport: Helmets, Goggles and Gloves come out of Protection, which
   keeps pads, armor, impact shorts and wrist guards (GEAR, below).
-* MTB: Forks & Shocks reads Suspension.
+* MTB: Forks & Shocks reads Suspension. Each heading's own parts stay in it
+  as a Type value (Fork Parts, Hub Parts, Brake Parts: sports/mtb/kinds.py);
+  tools, pumps, lubes and cleaners from any heading show under Tools & Care,
+  and brake items a store filed under Wheels or Cockpit show under Brakes
+  (owner, 2026-11-26).
 * BMX: Wheels and Wheel Parts are one Wheels & Hubs; BMX shop words for the rest.
 * Skate: shop order, Helmets out of Protection.
 
@@ -29,7 +33,8 @@ GEAR = ("Helmets", "Goggles", "Gloves", "Protection", "Packs")
 HEADINGS = {
     "skate": ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories") + GEAR + ("Sneakers",),
     "ski": ("Skis", "Boots", "Bindings", "Poles") + GEAR,
-    "mtb": ("Bikes", "Frames", "Suspension", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals") + GEAR,
+    "mtb": ("Bikes", "Frames", "Suspension", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals",
+            "Tools & Care") + GEAR,
     "bmx": ("Bikes", "Frames & Forks", "Bars & Steering", "Drivetrain", "Wheels & Hubs", "Tires & Tubes",
             "Seats & Posts", "Brakes") + GEAR,
 }
@@ -64,9 +69,30 @@ def _protected(item):
     return set(_protects(item.get("name") or "", item.get("product_type") or ""))
 
 
+TOOLS_AND_CARE = "Tools & Care"
+# MTB store categories whose listings get a Type (sports/mtb/kinds.py).
+_MTB_TYPED = ("Forks & Shocks", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals")
+
+
+def _mtb_place(item):
+    """(store category shown, type) for an MTB listing: tools and care
+    items, and brake items filed elsewhere, move; parts keep their heading."""
+    from sports.mtb import kinds
+    part = item.get("part") or ""
+    if part not in _MTB_TYPED:
+        return part, None
+    name, kind = item.get("name") or "", item.get("product_type") or ""
+    if kinds.is_tools_and_care(name, kind):
+        return TOOLS_AND_CARE, None
+    shown = kinds.heading_part(part, name, kind)
+    return shown, kinds.kind(part, name, kind)
+
+
 def heading(sport_id, item):
     """The heading a deal (or price-history row) is shown under."""
     part = (item or {}).get("part") or ""
+    if sport_id == "mtb" and part in _MTB_TYPED:
+        part = _mtb_place(item)[0]
     if part == "Protection":
         kinds = _protected(item)
         if "Helmets" in kinds:
@@ -79,12 +105,29 @@ def heading(sport_id, item):
     return _RENAMED.get(sport_id, {}).get(part, part)
 
 
+def _with_kind(item, kind):
+    """A copy of an MTB listing with its Type on every offer, so the
+    sidebar's Type filter (``kind``) reads it like any other spec."""
+    if not kind:
+        return item
+    offers = [dict(offer, specs=dict(offer.get("specs") or {}, kind=[kind])) if isinstance(offer, dict) else offer
+              for offer in item.get("technical_offers") or []]
+    specs = dict(item.get("technical_specs") or {}, kind=[kind])
+    return dict(item, technical_offers=offers, technical_specs=specs)
+
+
+def _regrouped(item, sport_id):
+    shown = dict(item, part=heading(sport_id, item), store_part=item.get("part"))
+    if sport_id == "mtb":
+        shown = _with_kind(shown, _mtb_place(item)[1])
+    return shown
+
+
 def regroup(data, sport_id):
     """A copy of a run's {key: [items]} with each item under its heading."""
     if sport_id not in HEADINGS:
         return data
-    return {key: [dict(item, part=heading(sport_id, item), store_part=item.get("part")) if isinstance(item, dict) else item
-                  for item in items or []]
+    return {key: [_regrouped(item, sport_id) if isinstance(item, dict) else item for item in items or []]
             for key, items in (data or {}).items()}
 
 
