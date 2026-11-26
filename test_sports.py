@@ -277,6 +277,17 @@ class BmxSpecTests(unittest.TestCase):
             self.assertEqual(wheel_size(title), size, title)
         self.assertEqual(wheel_size("Cult Frame", ['Wsize_20"', "frames"]), "20", "a store tag wins")
 
+    def test_source_bmx_types(self):
+        # Drift check, 2026-11-26: Source BMX US types with no kind.
+        from sports.bmx.specs import kind_for
+        from stores.shopify import type_key
+
+        for kind, title, category, wanted in (("BMX Gyros", "Odyssey GTX S gyro", "Steering", "Detanglers"),
+                                              ("BMX Chain Tensioners", "S&M Drop-Out Tensioner Parts", "Drivetrain",
+                                               "Chain Tensioners"),
+                                              ("BMX Seat Posts", "S&M Long Johnson Pivotal Post", "Seating", "Seat Posts")):
+            self.assertEqual(kind_for(type_key(kind), title, category), wanted, title)
+
     def test_kind_and_vague_types_from_the_title(self):
         from sports.bmx import stores
 
