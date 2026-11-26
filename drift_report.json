@@ -1,35 +1,34 @@
 {
-  "checked_at": "2026-11-25T18:23:27+00:00",
+  "checked_at": "2026-11-26T17:36:10+00:00",
   "counts": {
-    "action": 3,
-    "watch": 0
+    "action": 1,
+    "watch": 2
   },
-  "date": "2026-11-25",
+  "date": "2026-11-26",
   "findings": [
-    {
-      "key": "SkatePro_Protection",
-      "kind": "held",
-      "level": "action",
-      "reason": "scrape_failed",
-      "runs": 8,
-      "store": "SkatePro"
-    },
     {
       "key": "SkateWarehouse_Completes",
       "kind": "held",
       "level": "action",
       "reason": "partial_catalog_drop",
-      "runs": 3,
+      "runs": 4,
       "store": "SkateWarehouse"
     },
     {
-      "key": "Tactics_Decks",
-      "kind": "held",
-      "level": "action",
-      "reason": "partial_catalog_drop",
-      "runs": 6,
+      "change": "rise",
+      "count": 734,
+      "kind": "volume",
+      "level": "watch",
+      "median": 221,
       "store": "Tactics"
+    },
+    {
+      "count": 7,
+      "kind": "new_unmapped",
+      "level": "watch",
+      "product_type": "Snowboard Boots",
+      "store": "Kinetic"
     }
   ],
-  "last_scrape": "2026-11-25T17:56:50+00:00"
+  "last_scrape": "2026-11-26T17:06:00+00:00"
 }

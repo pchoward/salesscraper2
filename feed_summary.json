@@ -1,5 +1,5 @@
 {
-  "scanned_at": "2026-11-25T17:56:50+00:00",
+  "scanned_at": "2026-11-26T17:06:00+00:00",
   "stores": {
     "187 Killer Pads": {
       "marked_down": 11,
@@ -14,7 +14,7 @@
       "unmapped_types": [
         [
           "Bundle",
-          6
+          7
         ],
         [
           "SKI/SNOW",
@@ -26,22 +26,22 @@
         ],
         [
           "MTB/BMX",
-          3
+          4
+        ],
+        [
+          "Sale",
+          2
         ],
         [
           "Accessories",
           2
-        ],
-        [
-          "Sale",
-          1
         ]
       ]
     },
     "Exodus": {
-      "marked_down": 693,
-      "products": 13732,
-      "sold_out": 4157,
+      "marked_down": 685,
+      "products": 13738,
+      "sold_out": 4168,
       "unmapped_types": [
         [
           "T-Shirts",
@@ -49,7 +49,7 @@
         ],
         [
           "Hoodies & Sweatshirts",
-          60
+          57
         ],
         [
           "Beanies",
@@ -80,19 +80,19 @@
           12
         ],
         [
-          "Jackets",
-          10
-        ],
-        [
           "Chino Pants",
           10
         ],
         [
-          "Snowboard Jackets",
-          10
+          "Jackets",
+          9
         ],
         [
           "Snowboard Pants",
+          9
+        ],
+        [
+          "Snowboard Jackets",
           9
         ],
         [
@@ -128,16 +128,16 @@
           5
         ],
         [
-          "Sweatpants & Joggers",
-          4
-        ],
-        [
           "Women's Snowboard Boots",
           4
         ],
         [
           "Goggles",
           4
+        ],
+        [
+          "Sweatpants & Joggers",
+          3
         ],
         [
           "Toddler Shoes",
@@ -180,10 +180,6 @@
           2
         ],
         [
-          "Socks",
-          2
-        ],
-        [
           "Longboard Trucks",
           2
         ],
@@ -213,6 +209,10 @@
         ],
         [
           "Kids Snowboards",
+          1
+        ],
+        [
+          "Socks",
           1
         ],
         [
@@ -248,26 +248,34 @@
       "unmapped_types": [
         [
           "(none)",
-          35
+          36
         ]
       ]
     },
     "Kinetic": {
-      "marked_down": 245,
-      "products": 491,
-      "sold_out": 5,
+      "marked_down": 297,
+      "products": 2171,
+      "sold_out": 8,
       "unmapped_types": [
         [
           "Apparel",
           68
         ],
         [
-          "(none)",
-          6
+          "Snowboards",
+          34
         ],
         [
-          "Snowboards",
-          5
+          "Bindings",
+          10
+        ],
+        [
+          "Snowboard Boots",
+          7
+        ],
+        [
+          "(none)",
+          6
         ],
         [
           "Pants",
@@ -306,11 +314,11 @@
           2
         ],
         [
-          "Bindings",
+          "trousers",
           2
         ],
         [
-          "trousers",
+          "gloves",
           2
         ],
         [
@@ -348,13 +356,29 @@
         [
           "Footwear Low",
           1
+        ],
+        [
+          "glo",
+          1
+        ],
+        [
+          "Boots",
+          1
+        ],
+        [
+          "snow gloves",
+          1
+        ],
+        [
+          "Apparel & Accessories",
+          1
         ]
       ]
     },
     "SPoT": {
-      "marked_down": 212,
+      "marked_down": 211,
       "products": 10696,
-      "sold_out": 3535,
+      "sold_out": 3537,
       "unmapped_types": [
         [
           "T Shirt",
@@ -381,12 +405,12 @@
           6
         ],
         [
-          "Jackets",
+          "Sweatshirt",
           5
         ],
         [
-          "Sweatshirt",
-          5
+          "Jackets",
+          4
         ],
         [
           "Socks",
@@ -401,8 +425,12 @@
           2
         ],
         [
+          "Bags",
+          1
+        ],
+        [
           "Beanie",
-          2
+          1
         ],
         [
           "Tank-Tops",
@@ -421,9 +449,9 @@
       "unmapped_types": []
     },
     "TGM": {
-      "marked_down": 1234,
-      "products": 25053,
-      "sold_out": 1260,
+      "marked_down": 1230,
+      "products": 25055,
+      "sold_out": 1265,
       "unmapped_types": [
         [
           "Disc",
@@ -435,7 +463,7 @@
         ],
         [
           "Hoodies and Sweatshirts",
-          77
+          75
         ],
         [
           "Womens Shoes",
@@ -450,12 +478,12 @@
           8
         ],
         [
-          "Starter Sets",
-          6
-        ],
-        [
           "Kids Shoes",
           4
+        ],
+        [
+          "Roller Hockey and Inline",
+          3
         ],
         [
           "Socks",
@@ -466,15 +494,15 @@
           3
         ],
         [
+          "Starter Sets",
+          3
+        ],
+        [
           "Coats and Jackets",
           3
         ],
         [
           "Rail",
-          2
-        ],
-        [
-          "Roller Hockey and Inline",
           2
         ],
         [
@@ -488,12 +516,16 @@
         [
           "Pants and Shorts",
           1
+        ],
+        [
+          "Ankle Support",
+          1
         ]
       ]
     },
     "Triple 8": {
-      "marked_down": 26,
-      "products": 51,
+      "marked_down": 27,
+      "products": 52,
       "sold_out": 2,
       "unmapped_types": [
         [
@@ -510,6 +542,12 @@
       "marked_down": 0,
       "products": 101,
       "sold_out": 2,
+      "unmapped_types": []
+    },
+    "evo": {
+      "marked_down": 199,
+      "products": 4239,
+      "sold_out": 1873,
       "unmapped_types": []
     }
   }
