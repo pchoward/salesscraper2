@@ -2836,12 +2836,12 @@
         "Christy Sports_Skis": {
           "fields": {
             "brand": 1.0,
-            "gender": 0.54,
+            "gender": 0.534,
             "image": 1.0,
             "versions": 0.011,
-            "waist": 0.77
+            "waist": 0.761
           },
-          "items": 87
+          "items": 88
         },
         "Gear West_Boots": {
           "fields": {
@@ -3324,17 +3324,17 @@
         },
         "evo_Bindings": {
           "fields": {
-            "brake": 1.0,
+            "brake": 0.964,
             "brand": 1.0,
-            "din": 1.0,
-            "gender": 0.045,
+            "din": 0.857,
+            "gender": 0.036,
             "image": 1.0,
-            "kind": 0.182,
-            "link": 0.455,
-            "ski_type": 0.182,
-            "sole": 0.682
+            "kind": 0.357,
+            "link": 0.357,
+            "ski_type": 0.357,
+            "sole": 0.536
           },
-          "items": 22
+          "items": 28
         },
         "evo_Boots": {
           "fields": {
@@ -3366,7 +3366,7 @@
             "helmet_shell": 0.453,
             "helmet_style": 1.0,
             "image": 1.0,
-            "link": 0.324,
+            "link": 0.318,
             "prot_size": 0.989,
             "protects": 1.0,
             "rotational": 0.687,
@@ -3388,13 +3388,13 @@
         },
         "evo_Poles": {
           "fields": {
-            "brand": 0.808,
-            "gender": 0.077,
+            "brand": 0.815,
+            "gender": 0.074,
             "image": 1.0,
-            "link": 0.192,
-            "versions": 0.038
+            "link": 0.185,
+            "versions": 0.037
           },
-          "items": 26
+          "items": 27
         },
         "evo_Protection": {
           "fields": {
@@ -3419,19 +3419,19 @@
         },
         "evo_Skis": {
           "fields": {
-            "ability": 0.006,
-            "bindings": 0.022,
+            "ability": 0.005,
+            "bindings": 0.021,
             "brand": 1.0,
-            "gender": 0.265,
+            "gender": 0.262,
             "image": 1.0,
             "length": 1.0,
             "lengths": 1.0,
-            "link": 0.061,
-            "rocker": 0.116,
-            "ski_type": 0.044,
-            "waist": 0.762
+            "link": 0.058,
+            "rocker": 0.115,
+            "ski_type": 0.042,
+            "waist": 0.77
           },
-          "items": 181
+          "items": 191
         }
       }
     }
