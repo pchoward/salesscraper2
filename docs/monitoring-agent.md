@@ -19,6 +19,7 @@ Where they are: Skate's files are at the repository root; BMX, Ski and MTB's are
 | `new_unmapped` | A store sells marked-down items under a product type we have no category for, seen for the first time. |
 | `fill` | A filter value, brand or photo went missing on most of a store's listings. The store likely changed its format. |
 | `stale` | A sport's last scrape is more than a day old. |
+| `new_unclassified` | Listings a rule couldn't place, reported once each with up to 5 examples: MTB pedals with no pedal type, BMX parts with no Type, protection with no protection type. Fix the rule when the cause is clear (a new model name, a store's new wording); ask the owner when it's a judgment call (is this item protection at all?). |
 
 ## Daily run (about 23:00 UTC, after the evening scrapes)
 1. Pull `main`. Read the four `drift_report.json` files.
