@@ -66,8 +66,7 @@ class OwnerTests(unittest.TestCase):
         self.assertEqual(mtb_section_owners("rotor_mm"), "Brakes")
         self.assertEqual(mtb_section_owners("speed"), "Drivetrain Bikes")
         # Empty categories apply to every MTB heading, so All hides them and
-        # any heading shows them. Product kind is not a field; it stays
-        # unmarked if one is added, the same way BMX leaves kind open.
+        # any heading shows them. Type (`kind`) lists the parts headings.
         every = " ".join(headings(sports.MTB))
         self.assertEqual(mtb_section_owners("condition"), every)
         self.assertEqual(mtb_section_owners("riding_type"), every)

@@ -1,4 +1,4 @@
-"""BMX Product kind, with spares split out (owner, 2026-11-26).
+"""BMX Type (the `kind` field), with spares split out (owner, 2026-11-26).
 
 The scrape stores a Dan's Comp-style kind for every listing
 (``sports/bmx/specs.py``: Forks, Cranks, Headsets, Brakes & Accessories).

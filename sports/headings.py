@@ -13,7 +13,7 @@ the same deals under headings people shop by:
   and brake items a store filed under Wheels or Cockpit show under Brakes
   (owner, 2026-11-26).
 * BMX: Wheels and Wheel Parts are one Wheels & Hubs; BMX shop words for the rest.
-  Spares get their own Product kind (Fork Parts, Crank Parts, Brake Pads:
+  Spares get their own Type (Fork Parts, Crank Parts, Brake Pads:
   sports/bmx/kinds.py) and tools and lubes show under Tools & Care
   (owner, 2026-11-26).
 * Skate: shop order, Helmets out of Protection.

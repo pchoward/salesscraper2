@@ -1,6 +1,6 @@
 """BMX All hides category spec sections until a heading is picked.
 
-Same data-for / syncTypeSections path as Ski. Product kind stays unmarked
+Same data-for / syncTypeSections path as Ski. Type (`kind`) stays unmarked
 so All keeps it. Order stays in the facet definitions
 (docs/filters-evo-model.md). Headings with spaces ("Frames & Forks") match
 as a phrase.
@@ -56,7 +56,7 @@ class OwnerTests(unittest.TestCase):
         self.assertEqual(bmx_section_owners("hub_type"), "Bikes Wheels Wheel Parts Wheels & Hubs")
         self.assertEqual(bmx_section_owners("bar_rise"), "Steering Bars & Steering")
         self.assertEqual(bmx_section_owners("crank_length"), "Drivetrain")
-        # Empty categories apply to every BMX heading. Product kind is the
+        # Empty categories apply to every BMX heading. Type (`kind`) is the
         # exception: All keeps that filter, so it stays unmarked.
         every = " ".join(headings(sports.BMX))
         self.assertEqual(bmx_section_owners("material"), every)
