@@ -40,6 +40,8 @@ from stores.ccs import _amount, _money, _plain, _shoe_offers, _stock_known, _var
 logger = logging.getLogger("stores.shopify")
 
 PAGE_LIMIT = 250
+# A page this short is the feed's last; a nearly full one may not be (evo).
+LAST_PAGE_UNDER = PAGE_LIMIT * 4 // 5
 MAX_PAGES = 20
 # A store's whole catalog (``whole_site``) is bigger than a sale collection.
 # Shopify serves at most 100 pages (25,000 products); a bigger catalog keeps
@@ -377,6 +379,14 @@ def exclusions(store, products):
 
 
 def _read_collection(store, sale_json, fetch, sleep):
+    """Every product in one collection feed, page by page.
+
+    A nearly full page isn't the last one: evo hides a few products per page
+    (247, 240, 237 of 250; 2026-11-26), and stopping at the first page short
+    of 250 read only page 1 of each of its collections. A page under
+    ``LAST_PAGE_UNDER`` ends the feed, as a real last page does; otherwise the
+    next page is read, and an empty one ends it. A feed that never ends still
+    fails at the page limit."""
     products = []
     whole = "/collections/" not in sale_json
     limit = WHOLE_SITE_MAX_PAGES if whole else getattr(store, "max_pages", MAX_PAGES)
@@ -387,8 +397,10 @@ def _read_collection(store, sale_json, fetch, sleep):
         if not isinstance(payload, dict) or not isinstance(payload.get("products"), list):
             return None
         batch = payload["products"]
+        if not batch:
+            return products
         products.extend(batch)
-        if len(batch) < PAGE_LIMIT:
+        if len(batch) < LAST_PAGE_UNDER:
             return products
     if whole:
         logger.warning("%s catalog has more than %s pages; using the first %s products", store.store, limit, len(products))
