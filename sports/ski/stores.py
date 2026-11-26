@@ -294,9 +294,8 @@ def scrapers():
     from sports.ski import christy, the_house
 
     shopify_scrapers = [scraper for store in STORES for scraper in shopify.scrapers_for(store, PARTS)]
-    from stores import skatepro
-    return (shopify_scrapers + the_house.scrapers() + christy.scrapers()
-            + skatepro.scrapers("ski", skatepro.ski_extra))  # snow helmets, back protectors, impact shorts
+    # SkatePro was dropped 2026-11-26 (owner: it turned us away for 8+ runs).
+    return shopify_scrapers + the_house.scrapers() + christy.scrapers()
 
 
 def preview(store=GEAR_WEST):

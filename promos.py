@@ -374,7 +374,8 @@ def sale_links(raw, base):
         parts = urllib.parse.urlsplit(url)
         if parts.scheme != "https" or parts.netloc.lower() != host or parts.query:
             continue
-        if not re.match(r"^/(?:[a-z]{2}(?:-[a-z]{2})?/)?(?:collections|pages|sale|deals|promotions?|black)", parts.path, re.I):
+        # /info/: Tactics links its Black Friday page there (2026-11-26).
+        if not re.match(r"^/(?:[a-z]{2}(?:-[a-z]{2})?/)?(?:collections|pages|sale|deals|promotions?|black|info/)", parts.path, re.I):
             continue
         if parts.path.rstrip("/").endswith("/products.json") or "/products/" in parts.path:
             continue

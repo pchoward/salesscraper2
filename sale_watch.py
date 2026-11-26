@@ -128,15 +128,24 @@ def homepage_links(home, read_urls, fetch=_get):
     if not html:
         return []
     read = {_clean(url) for url in read_urls}
+    # Skate Warehouse links one page by two paths (/catpage-BFCM26PORT.html and
+    # /Black_Friday_Sale/catpage-BFCM26PORT.html): a catpage is its file name.
+    read |= {_page_name(url) for url in read if _page_name(url)}
     found, seen = [], set()
     for href, text in re.findall(r'<a[^>]+href="([^"#]+)"[^>]*>(.*?)</a>', html, re.S | re.I):
         label = " ".join(re.sub(r"<[^>]+>", " ", text).split())[:80]
         url = urllib.parse.urljoin(home, href)
-        if not SALE_LINK.search(href + " " + label) or _clean(url) in read or _clean(url) in seen:
+        if not SALE_LINK.search(href + " " + label) or _clean(url) in read or _page_name(url) in read or _clean(url) in seen:
             continue
         seen.add(_clean(url))
         found.append({"label": label or href, "url": url})
     return found
+
+
+def _page_name(url):
+    """"catpage-bfcm26port.html" for a catalog page addressed by file name, else ""."""
+    name = _clean(url).rsplit("/", 1)[-1]
+    return name if re.fullmatch(r"catpage-[a-z0-9_-]+\.html", name) else ""
 
 
 def _clean(url):
@@ -165,8 +174,11 @@ def _homepages():
     from stores.registry import build_scrapers
     urls = {}
     for scraper in build_scrapers():
-        urls.setdefault(scraper.name, set()).add(getattr(scraper, "url", "") or "")
-    urls.setdefault("Tactics", set()).update(tactics.DEAL_URLS)
+        # A scraper's promo pages are read too (Skate Warehouse's BNSALE was
+        # reported "not read" while it was, 2026-11-24).
+        urls.setdefault(scraper.name, set()).update(
+            [getattr(scraper, "url", "") or ""] + list(getattr(scraper, "promo_urls", ()) or ()))
+    urls.setdefault("Tactics", set()).update(tactics.DEAL_URLS + (tactics.BLACK_FRIDAY_INFO,))
     pages = (("Zumiez", "https://www.zumiez.com/"), ("Tactics", "https://www.tactics.com/"),
              ("SkateWarehouse", "https://www.skatewarehouse.com/"), ("SoCal", "https://socalskateshop.com/"))
     return [(name, home, urls.get(name, set())) for name, home in pages]
