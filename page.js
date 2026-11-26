@@ -1165,11 +1165,34 @@ function paintFacetCounts() {
     paintKeepaCounts();
 }
 
+function syncKindChips() {
+    const bar = document.getElementById("kindChips");
+    if (!bar || bar.dataset.part === state.part) return;
+    bar.dataset.part = state.part;
+    const values = SportSpecFilters.kindValues(state.part);
+    bar.replaceChildren();
+    bar.hidden = values.length < 2;
+    if (bar.hidden) return;
+    const sidebar = document.getElementById("tech-kind");
+    const secondary = value => value.endsWith(" Parts") || ["Rim Tape & Valves", "Tubeless & Repair"].includes(value);
+    const ordered = ["", ...values.filter(value => !secondary(value)), ...values.filter(secondary)];
+    const source = new Map(Array.from(sidebar.querySelectorAll(".tech-chip"), chip => [chip.dataset.value, chip]));
+    ordered.forEach(value => {
+        const chip = source.get(value).cloneNode(true);
+        chip.classList.remove("spec-chip");
+        chip.classList.toggle("kind-secondary", secondary(value));
+        chip.setAttribute("data-exclusive", "");
+        bar.appendChild(chip);
+    });
+    bar.scrollLeft = 0;
+}
+
 // BMX/Ski/MTB spec chips narrow with the other filters, as Skate's do.
 function paintTechnicalCounts() {
     if (typeof SportSpecFilters === "undefined" || !SportSpecFilters.counts) return;
     const rows = dealRows().map(node => ({ node, url: node.dataset.url, part: node.dataset.part || "" }));
     const tally = SportSpecFilters.counts(rows, (row, technical) => rowMatches(row.node, { technical }), technicalPriceConstraints());
+    syncKindChips();
     document.querySelectorAll(".tech-chip").forEach(node => {
         const counts = tally[node.dataset.techKey];
         if (!counts) return;

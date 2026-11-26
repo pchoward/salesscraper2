@@ -2,7 +2,8 @@
 from sports import packs, protection
 
 FIELDS = (
-    {"key": "kind", "label": "Product kind", "param": "bmx_kind", "categories": ()},
+    {"key": "kind", "label": "Product kind", "param": "bmx_kind", "categories": (),
+     "order": ("Brakes", "Brake Kits", "Brake Levers", "Brake Cables", "Brake Pads", "Brake Parts")},
     {"key": "wheel_size", "label": "Wheel size (in)", "param": "bmx_wheel", "categories": ("Bikes", "Frames & Forks", "Wheels", "Tires", "Wheels & Hubs", "Tires & Tubes")},
     {"key": "condition", "label": "Condition", "param": "bmx_condition", "categories": ()},
     # Dan's Comp-style filters (docs/multi-sport-plan.md section 3; sports/bmx/dans.py).

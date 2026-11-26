@@ -1,11 +1,19 @@
-.mtb-power-chips {
+.technical-quick-chips {
     display: flex;
     gap: 0.4rem;
     overflow-x: auto;
+    min-width: 0;
     padding: 0.25rem 0 0.55rem;
 }
-.mtb-power-chips[hidden] { display: none; }
-.mtb-power-chips button { flex: 0 0 auto; white-space: nowrap; }
+.technical-quick-chips[hidden] { display: none; }
+.technical-quick-chips button { flex: 0 0 auto; white-space: nowrap; }
+#kindChips .kind-secondary:not(.active) {
+    background: transparent;
+    color: var(--grey-600);
+}
+@media (max-width:640px) {
+    #kindChips button { min-height:36px; }
+}
 
 /* Phone layout. page.py inlines this after page.css, so these rules win over
    the earlier max-width: 800px blocks without editing them. Keep phone-only
