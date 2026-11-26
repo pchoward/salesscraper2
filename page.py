@@ -1502,7 +1502,15 @@ def _plural(count, singular, plural):
 def _promo_strip(sport_id):
     today = datetime.date.today().isoformat()
     rows = []
-    for promo in promos.for_sport(sport_id):
+    ordered = sorted(
+        promos.for_sport(sport_id),
+        key=lambda promo: (
+            not (promo.get("auto") and not promo.get("code")),
+            -(promo.get("percent") or 0),
+            (promo.get("store") or "").casefold(),
+        ),
+    )
+    for promo in ordered:
         ends = promo.get("ends") or ""
         if ends and ends < today:
             continue
@@ -1524,9 +1532,8 @@ def _promo_strip(sport_id):
                 f'<code>{escape(code)}</code>'
                 f'<button type="button" data-copy-promo aria-label="Copy {escape(code, quote=True)}">Copy</button>'
             )
-        sport_count = len(promo.get("sports") or ())
         rows.append(
-            f'<div class="promo-offer" data-promo-id="{identity}" data-sport-count="{sport_count}" '
+            f'<div class="promo-offer" data-promo-id="{identity}" '
             f'data-ends="{escape(ends, quote=True)}">'
             f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{escape(store)}</a>'
             f'<span class="promo-description">{escape(description)} applied at checkout</span>'
@@ -1539,9 +1546,8 @@ def _promo_strip(sport_id):
         return ""
     return (
         '<section id="promoStrip" class="promo-strip" aria-labelledby="promoTitle" hidden>'
-        '<strong id="promoTitle">Promo codes</strong><div id="promoOffers">'
+        '<strong id="promoTitle">Sales &amp; promos</strong><div id="promoOffers">'
         + "".join(rows) + '</div>'
-        '<button type="button" id="promoMore" aria-expanded="false" aria-controls="promoOffers" hidden></button>'
         '<span class="sr-only" role="status" id="promoStatus"></span></section>'
     )
 

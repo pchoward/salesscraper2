@@ -479,41 +479,52 @@ async function main(){
       return 'Only one available variant matches all specifications and ranges; the card/Quick View agree';
      }finally{await page.close();}
     });
-    if(sport==='mtb'||sport==='bmx') await check(sport,width,'Promo visibility, copy and dismiss',async()=>{
-     const page=await browser.newPage({viewport:{width,height:900},isMobile:width<800,hasTouch:width<800});
-     try{
-      await page.context().grantPermissions(['clipboard-read','clipboard-write']);
-      await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
-      await page.goto(base+'/'+fixture.path);
-      const strip=page.locator('#promoStrip');
-      if(sport==='bmx'){
-       assert.equal(await strip.count(),0);
-       return;
-      }
-      await strip.waitFor({state:'visible'});
-      const phone=width<640;
-      const more=strip.locator('#promoMore');
-      const offers=strip.locator('.promo-offer:visible');
-      assert.equal(await offers.count(),phone?1:2);
-      if(phone){
-       assert.match(await offers.first().textContent(),/FIXTURE20/);
-       assert.equal(await more.getAttribute('aria-expanded'),'false');
-      }
-      await strip.getByRole('button',{name:'Copy FIXTURE20'}).click();
-      await page.waitForFunction(async()=>await navigator.clipboard.readText()==='FIXTURE20');
-      if(phone){
-       await more.click();
-       assert.equal(await offers.count(),2);
-       assert.equal(await more.getAttribute('aria-expanded'),'true');
-      }
-      await strip.getByRole('button',{name:'Dismiss FIXTURE20'}).click();
-      await strip.getByRole('button',{name:'Dismiss SPORTS10'}).click();
-      await strip.waitFor({state:'hidden'});
-      await page.reload();
-      assert.equal(await strip.isVisible(),false);
-     }finally{await page.close();}
-    });
    }
+   for(const width of [1366,1920,390]) await check('mtb',width,'All promos show, copy and dismiss',async()=>{
+    const phone=width===390;
+    const page=await browser.newPage({viewport:{width,height:phone?844:768},isMobile:phone,hasTouch:phone});
+    try{
+     await page.context().grantPermissions(['clipboard-read','clipboard-write']);
+     await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
+     if(phone){
+      await page.goto(base+'/'+fixtures.bmx.path);
+      assert.equal(await page.locator('#promoStrip').count(),0);
+     }
+     await page.goto(base+'/'+fixtures.mtb.path+'?type=bikes');
+     const strip=page.locator('#promoStrip');
+     const offers=strip.locator('.promo-offer:visible');
+     const stores=()=>offers.locator('a').allTextContents();
+     await strip.waitFor({state:'visible'});
+     assert.deepEqual(await stores(),['Alpine','Zebra','AuditFixture','GeneralFixture']);
+     assert.equal(await strip.locator('#promoMore').count(),0);
+     assert.equal(await strip.locator('[data-copy-promo]:visible').count(),2);
+     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+     if(phone){
+      const rows=await offers.evaluateAll(visible=>visible.map(offer=>{
+       const row=offer.getBoundingClientRect();
+       const button=offer.querySelector('[data-dismiss-promo]').getBoundingClientRect();
+       return {left:row.left,top:row.top,height:row.height,dismissRight:button.right};
+      }));
+      assert(rows.every((row,i)=>row.left===rows[0].left&&row.height<=41&&row.dismissRight<=width
+       &&(!i||row.top>=rows[i-1].top+rows[i-1].height)), 'one compact phone row per offer');
+     }else if(width===1366){
+      const first=await page.locator('.deal-card:visible').first().boundingBox();
+      assert(first&&first.y+first.height<=768,'first deal card remains above the fold');
+     }
+     await strip.getByRole('button',{name:'Copy FIXTURE40'}).click();
+     await page.waitForFunction(async()=>await navigator.clipboard.readText()==='FIXTURE40');
+     await strip.getByRole('button',{name:'Dismiss Alpine promotion'}).click();
+     assert.deepEqual(await stores(),['Zebra','AuditFixture','GeneralFixture']);
+     await page.reload();
+     await strip.waitFor({state:'visible'});
+     assert.deepEqual(await stores(),['Zebra','AuditFixture','GeneralFixture']);
+     await offers.first().evaluate(offer=>{
+      offer.dataset.ends='2000-01-01';
+      document.dispatchEvent(new Event('visibilitychange'));
+     });
+     assert.deepEqual(await stores(),['AuditFixture','GeneralFixture']);
+    }finally{await page.close();}
+   });
   }
  }finally{await browser.close();server.close();fs.writeFileSync(path.join(output,'results.json'),JSON.stringify(results,null,2)+'\n');}
  const failed=results.filter(r=>r.status==='fail');console.log(JSON.stringify({passed:results.length-failed.length,failed},null,2));if(failed.length)process.exitCode=1;
