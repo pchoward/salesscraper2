@@ -1,18 +1,25 @@
 {
-  "checked_at": "2026-11-25T14:22:12+00:00",
+  "checked_at": "2026-11-26T01:11:21+00:00",
   "counts": {
     "action": 0,
-    "watch": 1
+    "watch": 2
   },
-  "date": "2026-11-25",
+  "date": "2026-11-26",
   "findings": [
     {
-      "count": 3,
+      "count": 5,
       "kind": "new_unmapped",
       "level": "watch",
-      "product_type": "Performance Road Frameset",
-      "store": "Bike Mart"
+      "product_type": "Light Parts and Accessories",
+      "store": "The Lost Co."
+    },
+    {
+      "count": 5,
+      "kind": "new_unmapped",
+      "level": "watch",
+      "product_type": "Lights",
+      "store": "The Lost Co."
     }
   ],
-  "last_scrape": "2026-11-25T14:14:40+00:00"
+  "last_scrape": "2026-11-26T01:03:58+00:00"
 }

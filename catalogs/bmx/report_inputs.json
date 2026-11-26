@@ -1,40 +1,469 @@
 {
  "changes": {
-  "Source BMX US_Drivetrain": [
+  "Albe's BMX_Protection": [
    {
     "item": {
      "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "Eclat",
-     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b4042f83-aef4-4147-9341-a7bb75aafd0a.jpg?v=1772473988",
+     "brand": "Shadow Conspiracy",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Shadow.Invisalite.Knee.pads__03326.1509655919.1280.1280.jpg?v=1582039909",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b4042f83-aef4-4147-9341-a7bb75aafd0a.jpg?v=1772473988",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9be5bc61-6383-4939-8949-4f5cf0ec89d4.jpg?v=1772473988",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/e69cc16b-3a3d-4336-bb51-b555bd28aad5.jpg?v=1772473988",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9ce4a792-4682-47f5-a5ce-218b322b343b.jpg?v=1772473988",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9dbc2730-958b-4e83-82fe-7e04dd61e399.jpg?v=1772473988"
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/Shadow.Invisalite.Knee.pads__03326.1509655919.1280.1280.jpg?v=1582039909",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.invisa.lite.sizing__03290.1509655919.1280.1280.jpg?v=1582039909"
      ],
-     "kind": "Chains",
-     "name": "Eclat 4 Stroke Half Link Chain",
-     "part": "Drivetrain",
-     "price_new": "32.63",
-     "price_old": "36.26",
-     "product_type": "BMX Chains",
-     "store": "Source BMX US",
+     "kind": "Pads & Guards",
+     "link": "https://www.albes.com/products/shadow-invisa-lite-knee-pads?variant=31766772547658",
+     "name": "Shadow Invisa Lite Knee Pads",
+     "part": "Protection",
+     "price_new": "30.00",
+     "price_old": "39.95",
+     "product_type": "SAFETY GEAR",
+     "protection_sizes": [
+      "L",
+      "XL"
+     ],
+     "protection_type": "Knee Pads",
+     "store": "Albe's BMX",
      "technical_offers": [
       {
        "available": true,
-       "compare": 36.26,
-       "price": 32.63,
+       "compare": 39.95,
+       "price": 30.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 31766772547658
+      },
+      {
+       "available": true,
+       "compare": 39.95,
+       "price": 30.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 31766772580426
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "kind": [
+       "Pads & Guards"
+      ],
+      "protects": [
+       "Knees"
+      ]
+     },
+     "url": "https://www.albes.com/products/shadow-invisa-lite-knee-pads"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Shadow Conspiracy",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.revive.wrist.support.1.png?v=1620240666",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.revive.wrist.support.1.png?v=1620240666",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.revive.wrist.support.2.png?v=1620240666",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.revive.wrist.support..png?v=1620240666"
+     ],
+     "name": "Shadow Revive Wrist Support",
+     "part": "Protection",
+     "price_new": "14.00",
+     "price_old": "20.95",
+     "product_type": "SAFETY GEAR",
+     "protection_type": null,
+     "store": "Albe's BMX",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 20.95,
+       "price": 14.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "protects": [
+         "Wrists"
+        ]
+       },
+       "variant_id": 39297815085130
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "protects": [
+       "Wrists"
+      ]
+     },
+     "url": "https://www.albes.com/products/shadow-revive-wrist-support"
+    },
+    "type": "new"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 20.95,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "Shadow Conspiracy",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.super.slim.v2.knee.1.png?v=1604680049",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.super.slim.v2.knee.1.png?v=1604680049",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.super.slim.knee.v2.png?v=1604680049"
+     ],
+     "kind": "Pads & Guards",
+     "link": "https://www.albes.com/products/shadow-super-slim-v2-knee-pads?variant=32573876895818",
+     "name": "Shadow Super Slim V2 Knee Pads",
+     "part": "Protection",
+     "price_new": "35.00",
+     "price_old": "59.95",
+     "product_type": "SAFETY GEAR",
+     "protection_sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+     ],
+     "protection_type": "Knee Pads",
+     "store": "Albe's BMX",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 58.95,
+       "price": 55.95,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876830282
+      },
+      {
+       "available": true,
+       "compare": 58.95,
+       "price": 55.95,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876863050
+      },
+      {
+       "available": true,
+       "compare": 59.95,
+       "price": 35.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876895818
+      },
+      {
+       "available": true,
+       "compare": 59.95,
+       "price": 35.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876928586
+      },
+      {
+       "available": true,
+       "compare": 59.95,
+       "price": 35.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876961354
+      },
+      {
+       "available": true,
+       "compare": 58.95,
+       "price": 55.95,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 39297712586826
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "EN 1621 (CE impact armor)"
+      ],
+      "kind": [
+       "Pads & Guards"
+      ],
+      "protects": [
+       "Knees"
+      ]
+     },
+     "url": "https://www.albes.com/products/shadow-super-slim-v2-knee-pads"
+    },
+    "name": "Shadow Super Slim V2 Knee Pads",
+    "new": "35.00",
+    "old": "55.95",
+    "percent_vs_prior": 37.4,
+    "type": "price_drop",
+    "url": "https://www.albes.com/products/shadow-super-slim-v2-knee-pads"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Shadow Conspiracy",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.transmission.conspire.gloves..png?v=1620165453",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.transmission.conspire.gloves..png?v=1620165453",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.transmission.conspire.gloves.back.png?v=1620165453"
+     ],
+     "kind": "Gloves",
+     "name": "Shadow Transmission Conspire Youth Gloves",
+     "part": "Protection",
+     "price_new": "15.00",
+     "price_old": "29.95",
+     "product_type": "gloves",
+     "protection_type": null,
+     "store": "Albe's BMX",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 29.95,
+       "price": 15.0,
+       "specs": {
+        "age": [
+         "Youth"
+        ],
+        "color": [
+         "Black"
+        ],
+        "kind": [
+         "Gloves"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 39297232306250
+      },
+      {
+       "available": true,
+       "compare": 29.95,
+       "price": 15.0,
+       "specs": {
+        "age": [
+         "Youth"
+        ],
+        "color": [
+         "Black"
+        ],
+        "kind": [
+         "Gloves"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 39297232339018
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Youth"
+      ],
+      "color": [
+       "Black"
+      ],
+      "kind": [
+       "Gloves"
+      ],
+      "protects": [
+       "Gloves"
+      ]
+     },
+     "url": "https://www.albes.com/products/shadow-transmission-conspire-youth-gloves"
+    },
+    "type": "new"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Shadow Conspiracy",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.subrosa.conpsire.speedwolf.glove.white.black.png?v=1614100423",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.subrosa.conpsire.speedwolf.glove.white.black.png?v=1614100423",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.subrosa.conspire.speedwolf.glove.white.black.bottom.png?v=1614100423"
+     ],
+     "kind": "Gloves",
+     "link": "https://www.albes.com/products/shadow-x-subrosa-speedwolf-conspire-gloves?variant=32673690386506",
+     "name": "Shadow x Subrosa Speedwolf Conspire Gloves",
+     "part": "Protection",
+     "price_new": "18.00",
+     "price_old": "29.95",
+     "product_type": "gloves",
+     "protection_sizes": [
+      "M"
+     ],
+     "protection_type": null,
+     "store": "Albe's BMX",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 29.95,
+       "price": 18.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Black"
+        ],
+        "kind": [
+         "Gloves"
+        ],
+        "protects": [
+         "Gloves"
+        ]
+       },
+       "variant_id": 32673690386506
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "color": [
+       "Black"
+      ],
+      "kind": [
+       "Gloves"
+      ],
+      "protects": [
+       "Gloves"
+      ]
+     },
+     "url": "https://www.albes.com/products/shadow-x-subrosa-speedwolf-conspire-gloves"
+    },
+    "type": "new"
+   }
+  ],
+  "Albe's BMX_Seating": [
+   {
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "S&M",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/SANDM.TRIPOD.POST.BLACK.jpg?v=1741363714",
+     "kind": "Seat Posts",
+     "name": "S&M Tripod Post",
+     "part": "Seating",
+     "price_new": "29.95",
+     "price_old": "34.95",
+     "product_type": "Seat Posts",
+     "store": "Albe's BMX",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 34.95,
+       "price": 29.95,
        "specs": {
         "color": [
          "Black"
         ],
         "kind": [
-         "Chains"
+         "Seat Posts"
         ]
        },
-       "variant_id": 43020220596285
+       "variant_id": 41972367392842
       }
      ],
      "technical_specs": {
@@ -42,96 +471,139 @@
        "Black"
       ],
       "kind": [
-       "Chains"
+       "Seat Posts"
       ]
      },
-     "url": "https://us.sourcebmx.com/products/eclat-stroke-half-link-chain"
+     "url": "https://www.albes.com/products/s-m-tripod-post"
     },
     "type": "new"
    }
   ],
-  "Source BMX US_Tires": [
+  "Albe's BMX_Tires": [
    {
     "item": {
      "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "Odyssey",
-     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ce83533b-cc3d-4479-9086-7a25bb50369f.jpg?v=1777286388",
+     "brand": "Rant",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.black.2_3f6595ac-3db6-4cb2-a237-c7455391ba38.png?v=1626289338",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ce83533b-cc3d-4479-9086-7a25bb50369f.jpg?v=1777286388",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/df0df480-d493-42c0-871b-70fac9da82fc.jpg?v=1777286388"
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.black.2_3f6595ac-3db6-4cb2-a237-c7455391ba38.png?v=1626289338",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.black_f81aadad-b13c-4470-9205-11c7aa70c5f4.png?v=1626289338",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.sky.blue.tan._d450a5cd-b39a-4f3a-a130-5d3cdc12beae.png?v=1626289338",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.pink.2.png?v=1626289338",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/image_ceac42a6-997b-4a53-97aa-f61463a50ce0.jpg?v=1626289338"
      ],
      "kind": "Tires",
-     "name": "Odyssey Path Pro OEM Tire",
+     "length": 29.0,
+     "link": "https://www.albes.com/products/rant-squad-29-tire?variant=39332149329994",
+     "name": "Rant Squad 29\" Tire",
      "part": "Tires",
-     "price_new": "26.51",
-     "price_old": "29.46",
-     "product_type": "BMX Tyres",
-     "store": "Source BMX US",
+     "price_new": "22.50",
+     "price_old": "39.95",
+     "product_type": "Tires",
+     "store": "Albe's BMX",
      "technical_offers": [
       {
        "available": true,
-       "compare": 29.46,
-       "price": 26.51,
+       "compare": 39.95,
+       "price": 25.0,
        "specs": {
         "color": [
          "Black"
         ],
         "kind": [
          "Tires"
+        ],
+        "wheel_size": [
+         "29"
         ]
        },
-       "variant_id": 43008026968125
+       "variant_id": 39270167380042
+      },
+      {
+       "available": true,
+       "compare": 39.95,
+       "price": 22.5,
+       "specs": {
+        "color": [
+         "Blue"
+        ],
+        "kind": [
+         "Tires"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 39332149329994
+      },
+      {
+       "available": true,
+       "compare": 39.95,
+       "price": 25.0,
+       "specs": {
+        "color": [
+         "Pink"
+        ],
+        "kind": [
+         "Tires"
+        ],
+        "wheel_size": [
+         "29"
+        ]
+       },
+       "variant_id": 39339690852426
       }
      ],
      "technical_specs": {
       "color": [
-       "Black"
+       "Black",
+       "Blue",
+       "Pink"
       ],
       "kind": [
        "Tires"
+      ],
+      "wheel_size": [
+       "29"
       ]
      },
-     "url": "https://us.sourcebmx.com/products/odyssey-path-pro-oem-tyre"
+     "url": "https://www.albes.com/products/rant-squad-29-tire",
+     "wheel_size": "29"
     },
     "type": "new"
    }
   ],
-  "Source BMX US_Wheel Parts": [
+  "Albe's BMX_Wheel Parts": [
    {
     "item": {
      "at_all_time_low": false,
      "availability": "Check store",
-     "brand": "Odyssey",
-     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bd3fc985-6426-42b3-81fe-685890c30b65.jpg?v=1771853614",
+     "brand": "Shadow Conspiracy",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.crimsonrain.png?v=1678813041",
      "images": [
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bd3fc985-6426-42b3-81fe-685890c30b65.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/1c907f9a-8a2f-448c-ae08-d8c46ba44c4a.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/01f0e036-7740-4196-a89d-55450377afd3.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d33fd10b-b659-4b5d-b677-e94eaa3af229.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/32c0c571-2941-4f3a-afd7-becfcdf5c23d.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/723b569c-a95a-4147-a012-9ac7d06f008c.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bc4b787a-785c-4c5c-8648-27603cf7bf18.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/644ed759-7ba3-4eda-bc48-a3d9a941f877.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/22ba3e41-7deb-48ee-8031-2b8f9bfc8fda.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/27abd355-47fe-498b-9eb4-faab1b8d7ed6.jpg?v=1771853614",
-      "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/5098fe65-af12-4272-b978-6335105bd015.jpg?v=1786383554"
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.crimsonrain.png?v=1678813041",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.purps.png?v=1678813040",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.polished.png?v=1678813040",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.black.png?v=1678813040",
+      "https://cdn.shopify.com/s/files/1/2993/9672/files/shadow.calle.rim.blast.pop.png?v=1761682781"
      ],
      "kind": "Rims & Rim Strips",
-     "name": "Odyssey Hazardlite Rim",
+     "link": "https://www.albes.com/products/shadow-calle-rim?variant=40277105442890",
+     "name": "Shadow Calle Rim",
      "part": "Wheel Parts",
-     "price_new": "96.89",
-     "price_old": "107.66",
-     "product_type": "BMX Rims",
-     "store": "Source BMX US",
+     "price_new": "70.00",
+     "price_old": "98.95",
+     "product_type": "Rims",
+     "store": "Albe's BMX",
      "technical_offers": [
       {
        "available": true,
-       "compare": 107.66,
-       "price": 96.89,
+       "compare": 98.95,
+       "price": 70.0,
        "specs": {
         "color": [
-         "Black"
+         "Chrome / Polished"
         ],
         "kind": [
          "Rims & Rim Strips"
@@ -140,12 +612,12 @@
          "20"
         ]
        },
-       "variant_id": 43007916277821
+       "variant_id": 40277105442890
       }
      ],
      "technical_specs": {
       "color": [
-       "Black"
+       "Chrome / Polished"
       ],
       "kind": [
        "Rims & Rim Strips"
@@ -154,10 +626,815 @@
        "20"
       ]
      },
-     "url": "https://us.sourcebmx.com/products/odyssey-hazardlite-rim",
+     "url": "https://www.albes.com/products/shadow-calle-rim",
      "wheel_size": "20"
     },
     "type": "new"
+   }
+  ],
+  "Bikes Online_Protection": [
+   {
+    "at_all_time_low": true,
+    "delta": 30.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "iXS",
+     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_White.jpg?v=1744945698",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_White.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/IXS_Trigger_FF_Helmet.jpg?v=1792419266",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Black.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Marine.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Graphite.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Black2.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_White2.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Black3.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Graphite2.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Marine2.jpg?v=1744945639",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_MB4.jpg?v=1744945639"
+     ],
+     "kind": "Helmets",
+     "name": "iXS Trigger Full Face Helmet - Non MIPS",
+     "part": "Protection",
+     "price_new": "99.99",
+     "price_old": "269.99",
+     "product_type": "Clothing & Protective Gear",
+     "protection_sizes": [
+      "S"
+     ],
+     "protection_type": "Helmet",
+     "store": "Bikes Online",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 269.99,
+       "price": 99.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "CPSC (US bike)",
+         "EN 1078 (EU bike / skate)"
+        ],
+        "color": [
+         "Grey"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 50576255451428
+      },
+      {
+       "available": true,
+       "compare": 269.99,
+       "price": 99.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "CPSC (US bike)",
+         "EN 1078 (EU bike / skate)"
+        ],
+        "color": [
+         "Grey"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 50576255484196
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "CPSC (US bike)",
+       "EN 1078 (EU bike / skate)"
+      ],
+      "color": [
+       "Grey"
+      ],
+      "helmet_style": [
+       "Full face"
+      ],
+      "kind": [
+       "Helmets"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.bikesonline.com/products/ixs-trigger-full-face-helmet-non-mips"
+    },
+    "name": "iXS Trigger Full Face Helmet - Non MIPS",
+    "new": "99.99",
+    "old": "129.99",
+    "percent_vs_prior": 23.1,
+    "type": "price_drop",
+    "url": "https://www.bikesonline.com/products/ixs-trigger-full-face-helmet-non-mips"
+   },
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Fox",
+     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_2_d3c9fcec-d112-46a8-9855-a895ce1321c0.webp?v=1792119264",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_2_d3c9fcec-d112-46a8-9855-a895ce1321c0.webp?v=1792119264",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Fox_Proframe_Matte_Black_Helmet_MIPS__Size_Chart_a6268fc1-4734-433a-9d3b-da43f897df4c.jpg?v=1792121334",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_1_882b1a5c-8f3c-45d9-a76e-efb9a688e03c.webp?v=1792119283",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_1.webp?v=1792119296",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_2.webp?v=1792119434",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_3.webp?v=1792119445",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_4.webp?v=1792119456",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_5.webp?v=1792119470",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_6.webp?v=1792119489",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_7.webp?v=1792119504",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_10.webp?v=1756361221",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_8.webp?v=1756361221",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_9.webp?v=1756361221"
+     ],
+     "kind": "Helmets",
+     "name": "Fox Proframe Matte Black Helmet MIPS",
+     "part": "Protection",
+     "price_new": "249.99",
+     "price_old": "329.95",
+     "product_type": "Clothing & Protective Gear",
+     "protection_sizes": [
+      "S"
+     ],
+     "protection_type": "Helmet",
+     "store": "Bikes Online",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 329.95,
+       "price": 249.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Black"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 50783919309092
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "color": [
+       "Black"
+      ],
+      "helmet_style": [
+       "Full face"
+      ],
+      "kind": [
+       "Helmets"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.bikesonline.com/products/fox-proframe-matte-black-helmet-mips"
+    },
+    "type": "new"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 10.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "iXS",
+     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ixs-hammer-evo-protection-jacket-liquid-life.jpg?v=1767211366",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ixs-hammer-evo-protection-jacket-liquid-life.jpg?v=1767211366",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/5d4054a4-3b3b-4285-bad5-ba21248c40b6.jpg?v=1767211366"
+     ],
+     "name": "iXS Hammer Evo Upper Protective",
+     "part": "Protection",
+     "price_new": "39.99",
+     "price_old": "199.99",
+     "product_type": "Clothing & Protective Gear",
+     "protection_sizes": [
+      "S",
+      "M",
+      "L"
+     ],
+     "protection_type": "Other",
+     "store": "Bikes Online",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 199.99,
+       "price": 39.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Black"
+        ],
+        "prot_size": [
+         "M",
+         "S"
+        ],
+        "protects": [
+         "Chest & Ribs"
+        ]
+       },
+       "variant_id": 51133401497892
+      },
+      {
+       "available": true,
+       "compare": 199.99,
+       "price": 39.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Black"
+        ],
+        "prot_size": [
+         "L",
+         "M"
+        ],
+        "protects": [
+         "Chest & Ribs"
+        ]
+       },
+       "variant_id": 51133401465124
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "color": [
+       "Black"
+      ],
+      "prot_size": [
+       "L",
+       "M",
+       "S"
+      ],
+      "protects": [
+       "Chest & Ribs"
+      ]
+     },
+     "url": "https://www.bikesonline.com/products/ixs-hammer-evo-upper-protective"
+    },
+    "name": "iXS Hammer Evo Upper Protective",
+    "new": "39.99",
+    "old": "49.99",
+    "percent_vs_prior": 20.0,
+    "type": "price_drop",
+    "url": "https://www.bikesonline.com/products/ixs-hammer-evo-upper-protective"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 5.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "iXS",
+     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSFlowEVO_ElbowGuards_1.webp?v=1760065973",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSFlowEVO_ElbowGuards_1.webp?v=1760065973",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSFlowEVO_ElbowGuards_3.webp?v=1760065978",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSFlowEVO_ElbowGuards_2.webp?v=1760065978"
+     ],
+     "kind": "Pads & Guards",
+     "name": "iXS Flow EVO+ Elbow Guards - Closeout",
+     "part": "Protection",
+     "price_new": "4.99",
+     "price_old": "89.99",
+     "product_type": "Clothing & Protective Gear",
+     "protection_sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+     ],
+     "protection_type": "Elbow Pads",
+     "store": "Bikes Online",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394682148
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394649380
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394616612
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "XL"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394714916
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "XXL"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394747684
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "color": [
+       "Green"
+      ],
+      "kind": [
+       "Pads & Guards"
+      ],
+      "prot_size": [
+       "L",
+       "M",
+       "S",
+       "XL",
+       "XXL"
+      ],
+      "protects": [
+       "Elbows"
+      ]
+     },
+     "url": "https://www.bikesonline.com/products/ixs-flow-evo-elbow-guards"
+    },
+    "name": "iXS Flow EVO+ Elbow Guards - Closeout",
+    "new": "4.99",
+    "old": "9.99",
+    "percent_vs_prior": 50.1,
+    "type": "price_drop",
+    "url": "https://www.bikesonline.com/products/ixs-flow-evo-elbow-guards"
+   }
+  ],
+  "Cambria_Protection": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "7iDP",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0000_PROJECTABSCAMO-010.jpg?v=1677669047",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0000_PROJECTABSCAMO-010.jpg?v=1677669047",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0012_PROJECTABSCAMO-013.jpg?v=1677669062",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0007_PROJECTABSCAMO-034.jpg?v=1677669062",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0016_PROJECTABSCAMO-004.jpg?v=1677669062",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0008_PROJECTABSCAMO-022.jpg?v=1677669062"
+     ],
+     "kind": "Helmets",
+     "name": "7 iDP Project 23 ABS Full Face Helmet - Matt Urban Camo-Black",
+     "part": "Protection",
+     "price_new": "79.99",
+     "price_old": "169.99",
+     "product_type": "Full Face Helmets",
+     "protection_sizes": [
+      "L"
+     ],
+     "protection_type": "Helmet",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 169.99,
+       "price": 79.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F1952 (downhill)",
+         "CPSC (US bike)"
+        ],
+        "color": [
+         "Black"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Helmets"
+        ]
+       },
+       "variant_id": 42134160638134
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F1952 (downhill)",
+       "CPSC (US bike)"
+      ],
+      "color": [
+       "Black"
+      ],
+      "helmet_style": [
+       "Full face"
+      ],
+      "kind": [
+       "Helmets"
+      ],
+      "prot_size": [
+       "L"
+      ],
+      "protects": [
+       "Helmets"
+      ]
+     },
+     "url": "https://cambriabike.com/products/7-idp-project-23-abs-full-face-helmet-matt-urban-camo-black"
+    },
+    "type": "removed"
+   }
+  ],
+  "Colorado Cyclist_Protection": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "7iDP",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0000_PROJECTABSCAMO-010_9a573d80-fd28-4e48-a05b-b3b9b031fee5.jpg?v=1765388499",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0000_PROJECTABSCAMO-010_9a573d80-fd28-4e48-a05b-b3b9b031fee5.jpg?v=1765388499",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0012_PROJECTABSCAMO-013_58e5e835-cb92-478e-8971-61d73aa04976.jpg?v=1765388499",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0007_PROJECTABSCAMO-034_cbb151b5-8096-46ae-957a-f856ac906b57.jpg?v=1765388499",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0016_PROJECTABSCAMO-004_6fa38dc2-fd40-4bac-8405-62dddcd28856.jpg?v=1765388499",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0008_PROJECTABSCAMO-022_89f83b2a-8fa4-4efd-b9f0-42398afa8d1e.jpg?v=1765388499"
+     ],
+     "kind": "Helmets",
+     "name": "7 iDP Project 23 ABS Full Face Helmet - Matt Urban Camo-Black",
+     "part": "Protection",
+     "price_new": "79.99",
+     "price_old": "169.99",
+     "product_type": "Full Face Helmets",
+     "protection_sizes": [
+      "L"
+     ],
+     "protection_type": "Helmet",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 169.99,
+       "price": 79.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F1952 (downhill)",
+         "CPSC (US bike)"
+        ],
+        "color": [
+         "Black"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Helmets"
+        ]
+       },
+       "variant_id": 48466052546800
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F1952 (downhill)",
+       "CPSC (US bike)"
+      ],
+      "color": [
+       "Black"
+      ],
+      "helmet_style": [
+       "Full face"
+      ],
+      "kind": [
+       "Helmets"
+      ],
+      "prot_size": [
+       "L"
+      ],
+      "protects": [
+       "Helmets"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/7-idp-project-23-abs-full-face-helmet-matt-urban-camo-black"
+    },
+    "type": "removed"
+   }
+  ],
+  "Powers BMX_Bikes": [
+   {
+    "item": {
+     "at_all_time_low": false,
+     "availability": "Check store",
+     "brand": "Rixin",
+     "image": "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-3Q-1500.webp?v=1787664208",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-3Q-1500.webp?v=1787664208",
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-3Q-1000.webp?v=1787664263",
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-RIGHT-1000.webp?v=1787664270",
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-LEFT-1000.webp?v=1787664276",
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-STEM-1000.webp?v=1787664281",
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-BARS-1000.webp?v=1787664286",
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-DT-1000.webp?v=1787664291",
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-SPROCKET-1000.webp?v=1787664302",
+      "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-XL-RAW-TIRE2-1000.webp?v=1787664310"
+     ],
+     "kind": "Complete Bikes",
+     "length": 20.0,
+     "name": "Rixin express complete bike 20\"",
+     "part": "Bikes",
+     "price_new": "440.00",
+     "price_old": "549.99",
+     "product_type": "Complete Bikes",
+     "store": "Powers BMX",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 549.99,
+       "price": 440.0,
+       "specs": {
+        "kind": [
+         "Complete Bikes"
+        ],
+        "top_tube": [
+         "20.5\""
+        ],
+        "wheel_size": [
+         "20"
+        ]
+       },
+       "variant_id": 48932631150745
+      }
+     ],
+     "technical_specs": {
+      "kind": [
+       "Complete Bikes"
+      ],
+      "top_tube": [
+       "20.5\""
+      ],
+      "wheel_size": [
+       "20"
+      ]
+     },
+     "url": "https://www.powersbmx.com/products/rixin-express-complete-bike-20",
+     "wheel_size": "20"
+    },
+    "type": "new"
+   }
+  ],
+  "Source BMX US_Braking": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "Jet BMX",
+     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/8870cfdb-1dd2-4e3a-81c9-1554d2abe14a.jpg?v=1771844104",
+     "kind": "Brakes & Accessories",
+     "name": "Jet BMX Race Linear Cable",
+     "part": "Braking",
+     "price_new": "4.53",
+     "price_old": "11.32",
+     "product_type": "BMX Brake Cables",
+     "store": "Source BMX US",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 11.32,
+       "price": 4.53,
+       "specs": {
+        "kind": [
+         "Brakes & Accessories"
+        ]
+       },
+       "variant_id": 43007781109821
+      }
+     ],
+     "technical_specs": {
+      "kind": [
+       "Brakes & Accessories"
+      ]
+     },
+     "url": "https://us.sourcebmx.com/products/jet-bmx-race-linear-cable"
+    },
+    "type": "removed"
+   }
+  ],
+  "Source BMX US_Tires": [
+   {
+    "item": {
+     "availability": "Check store",
+     "brand": "S&M",
+     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d1e7394d-65e9-4a37-bd1a-3b856ff20be8.jpg?v=1771850524",
+     "kind": "Tubes",
+     "length": 16.0,
+     "name": "S&M 16\" Innertube",
+     "part": "Tires",
+     "price_new": "7.13",
+     "price_old": "7.92",
+     "product_type": "BMX Innertubes",
+     "store": "Source BMX US",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 7.92,
+       "price": 7.13,
+       "specs": {
+        "kind": [
+         "Tubes"
+        ],
+        "wheel_size": [
+         "16"
+        ]
+       },
+       "variant_id": 43007880200253
+      }
+     ],
+     "technical_specs": {
+      "kind": [
+       "Tubes"
+      ],
+      "wheel_size": [
+       "16"
+      ]
+     },
+     "url": "https://us.sourcebmx.com/products/s-m-16-innertube",
+     "wheel_size": "16"
+    },
+    "type": "removed"
    }
   ]
  },
@@ -250,8 +1527,9 @@
     "label": "Shadow Conspiracy super slim v2",
     "offers": [
      {
+      "link": "https://www.albes.com/products/shadow-super-slim-v2-knee-pads?variant=32573876895818",
       "name": "Shadow Super Slim V2 Knee Pads",
-      "price": 55.95,
+      "price": 35.0,
       "store": "Albe's BMX",
       "url": "https://www.albes.com/products/shadow-super-slim-v2-knee-pads"
      },
@@ -403,6 +1681,13 @@
     "key": "sport|Protection|shadowconspiracy|invisa|lite",
     "label": "Shadow Conspiracy invisa lite",
     "offers": [
+     {
+      "link": "https://www.albes.com/products/shadow-invisa-lite-knee-pads?variant=31766772547658",
+      "name": "Shadow Invisa Lite Knee Pads",
+      "price": 30.0,
+      "store": "Albe's BMX",
+      "url": "https://www.albes.com/products/shadow-invisa-lite-knee-pads"
+     },
      {
       "name": "Shadow Invisa-Lite Knee Pads",
       "price": 44.99,
@@ -594,6 +1879,26 @@
     "part": "Protection"
    },
    {
+    "cheapest_price": 14.0,
+    "key": "sport|Protection|shadowconspiracy|revive|support",
+    "label": "Shadow Conspiracy revive support",
+    "offers": [
+     {
+      "name": "Shadow Revive Wrist Support",
+      "price": 14.0,
+      "store": "Albe's BMX",
+      "url": "https://www.albes.com/products/shadow-revive-wrist-support"
+     },
+     {
+      "name": "Shadow Revive Wrist Support",
+      "price": 14.69,
+      "store": "Sparky's Brands",
+      "url": "https://www.sparkysbrands.com/products/shadow-revive-wrist-support"
+     }
+    ],
+    "part": "Protection"
+   },
+   {
     "cheapest_price": 27.99,
     "key": "sport|Protection|shadowconspiracy|slim|super|v2",
     "label": "Shadow Conspiracy super slim v2",
@@ -649,6 +1954,26 @@
       "price": 14.99,
       "store": "Sparky's Brands",
       "url": "https://www.sparkysbrands.com/products/shadow-jr-conspire-registered-gloves"
+     }
+    ],
+    "part": "Protection"
+   },
+   {
+    "cheapest_price": 14.99,
+    "key": "sport|Protection|shadowconspiracy|conspire|transmission",
+    "label": "Shadow Conspiracy transmission conspire",
+    "offers": [
+     {
+      "name": "Shadow Transmission Conspire Youth Gloves",
+      "price": 15.0,
+      "store": "Albe's BMX",
+      "url": "https://www.albes.com/products/shadow-transmission-conspire-youth-gloves"
+     },
+     {
+      "name": "Shadow Jr. Conspire Gloves - Transmission",
+      "price": 14.99,
+      "store": "Sparky's Brands",
+      "url": "https://www.sparkysbrands.com/products/shadow-jr-conspire-gloves-transmission"
      }
     ],
     "part": "Protection"
@@ -749,26 +2074,6 @@
       "price": 79.99,
       "store": "Colorado Cyclist",
       "url": "https://www.coloradocyclist.com/products/7-idp-project-23-abs-full-face-helmet-matt-ocean-blue-black"
-     }
-    ],
-    "part": "Protection"
-   },
-   {
-    "cheapest_price": 79.99,
-    "key": "sport|Protection|7idp|23|7|abs|idp|project|urban",
-    "label": "7iDP 7 idp project 23 abs urban",
-    "offers": [
-     {
-      "name": "7 iDP Project 23 ABS Full Face Helmet - Matt Urban Camo-Black",
-      "price": 79.99,
-      "store": "Cambria",
-      "url": "https://cambriabike.com/products/7-idp-project-23-abs-full-face-helmet-matt-urban-camo-black"
-     },
-     {
-      "name": "7 iDP Project 23 ABS Full Face Helmet - Matt Urban Camo-Black",
-      "price": 79.99,
-      "store": "Colorado Cyclist",
-      "url": "https://www.coloradocyclist.com/products/7-idp-project-23-abs-full-face-helmet-matt-urban-camo-black"
      }
     ],
     "part": "Protection"
@@ -2000,6 +3305,7 @@
     "label": "Rant party v2 front",
     "offers": [
      {
+      "link": "https://www.albes.com/products/rant-party-on-v2-front-wheel?variant=31766746595402",
       "name": "Rant Party on V2 Front Wheel",
       "price": 89.95,
       "store": "Albe's BMX",
@@ -2015,86 +3321,612 @@
     "part": "Wheels"
    }
   ],
-  "drops": [],
+  "drops": [
+   {
+    "at_all_time_low": true,
+    "delta": 20.95,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "Shadow Conspiracy",
+     "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.super.slim.v2.knee.1.png?v=1604680049",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.super.slim.v2.knee.1.png?v=1604680049",
+      "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.super.slim.knee.v2.png?v=1604680049"
+     ],
+     "kind": "Pads & Guards",
+     "link": "https://www.albes.com/products/shadow-super-slim-v2-knee-pads?variant=32573876895818",
+     "name": "Shadow Super Slim V2 Knee Pads",
+     "part": "Protection",
+     "price_new": "35.00",
+     "price_old": "59.95",
+     "product_type": "SAFETY GEAR",
+     "protection_sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+     ],
+     "protection_type": "Knee Pads",
+     "store": "Albe's BMX",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 58.95,
+       "price": 55.95,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876830282
+      },
+      {
+       "available": true,
+       "compare": 58.95,
+       "price": 55.95,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876863050
+      },
+      {
+       "available": true,
+       "compare": 59.95,
+       "price": 35.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876895818
+      },
+      {
+       "available": true,
+       "compare": 59.95,
+       "price": 35.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876928586
+      },
+      {
+       "available": true,
+       "compare": 59.95,
+       "price": 35.0,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 32573876961354
+      },
+      {
+       "available": true,
+       "compare": 58.95,
+       "price": 55.95,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "EN 1621 (CE impact armor)"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "protects": [
+         "Knees"
+        ]
+       },
+       "variant_id": 39297712586826
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "EN 1621 (CE impact armor)"
+      ],
+      "kind": [
+       "Pads & Guards"
+      ],
+      "protects": [
+       "Knees"
+      ]
+     },
+     "url": "https://www.albes.com/products/shadow-super-slim-v2-knee-pads"
+    },
+    "name": "Shadow Super Slim V2 Knee Pads",
+    "new": "35.00",
+    "old": "55.95",
+    "percent_vs_prior": 37.4,
+    "type": "price_drop",
+    "url": "https://www.albes.com/products/shadow-super-slim-v2-knee-pads"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 30.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "iXS",
+     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_White.jpg?v=1744945698",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_White.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/IXS_Trigger_FF_Helmet.jpg?v=1792419266",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Black.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Marine.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Graphite.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Black2.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_White2.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Black3.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Graphite2.jpg?v=1744945698",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_Marine2.jpg?v=1744945639",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSTriggerFullFaceHelmet-NonMIPS_MB4.jpg?v=1744945639"
+     ],
+     "kind": "Helmets",
+     "name": "iXS Trigger Full Face Helmet - Non MIPS",
+     "part": "Protection",
+     "price_new": "99.99",
+     "price_old": "269.99",
+     "product_type": "Clothing & Protective Gear",
+     "protection_sizes": [
+      "S"
+     ],
+     "protection_type": "Helmet",
+     "store": "Bikes Online",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 269.99,
+       "price": 99.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "CPSC (US bike)",
+         "EN 1078 (EU bike / skate)"
+        ],
+        "color": [
+         "Grey"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 50576255451428
+      },
+      {
+       "available": true,
+       "compare": 269.99,
+       "price": 99.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "CPSC (US bike)",
+         "EN 1078 (EU bike / skate)"
+        ],
+        "color": [
+         "Grey"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "protects": [
+         "Helmets"
+        ],
+        "rotational": [
+         "MIPS"
+        ]
+       },
+       "variant_id": 50576255484196
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "CPSC (US bike)",
+       "EN 1078 (EU bike / skate)"
+      ],
+      "color": [
+       "Grey"
+      ],
+      "helmet_style": [
+       "Full face"
+      ],
+      "kind": [
+       "Helmets"
+      ],
+      "prot_size": [
+       "S"
+      ],
+      "protects": [
+       "Helmets"
+      ],
+      "rotational": [
+       "MIPS"
+      ]
+     },
+     "url": "https://www.bikesonline.com/products/ixs-trigger-full-face-helmet-non-mips"
+    },
+    "name": "iXS Trigger Full Face Helmet - Non MIPS",
+    "new": "99.99",
+    "old": "129.99",
+    "percent_vs_prior": 23.1,
+    "type": "price_drop",
+    "url": "https://www.bikesonline.com/products/ixs-trigger-full-face-helmet-non-mips"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 10.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "iXS",
+     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ixs-hammer-evo-protection-jacket-liquid-life.jpg?v=1767211366",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/ixs-hammer-evo-protection-jacket-liquid-life.jpg?v=1767211366",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/5d4054a4-3b3b-4285-bad5-ba21248c40b6.jpg?v=1767211366"
+     ],
+     "name": "iXS Hammer Evo Upper Protective",
+     "part": "Protection",
+     "price_new": "39.99",
+     "price_old": "199.99",
+     "product_type": "Clothing & Protective Gear",
+     "protection_sizes": [
+      "S",
+      "M",
+      "L"
+     ],
+     "protection_type": "Other",
+     "store": "Bikes Online",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 199.99,
+       "price": 39.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Black"
+        ],
+        "prot_size": [
+         "M",
+         "S"
+        ],
+        "protects": [
+         "Chest & Ribs"
+        ]
+       },
+       "variant_id": 51133401497892
+      },
+      {
+       "available": true,
+       "compare": 199.99,
+       "price": 39.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Black"
+        ],
+        "prot_size": [
+         "L",
+         "M"
+        ],
+        "protects": [
+         "Chest & Ribs"
+        ]
+       },
+       "variant_id": 51133401465124
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "color": [
+       "Black"
+      ],
+      "prot_size": [
+       "L",
+       "M",
+       "S"
+      ],
+      "protects": [
+       "Chest & Ribs"
+      ]
+     },
+     "url": "https://www.bikesonline.com/products/ixs-hammer-evo-upper-protective"
+    },
+    "name": "iXS Hammer Evo Upper Protective",
+    "new": "39.99",
+    "old": "49.99",
+    "percent_vs_prior": 20.0,
+    "type": "price_drop",
+    "url": "https://www.bikesonline.com/products/ixs-hammer-evo-upper-protective"
+   },
+   {
+    "at_all_time_low": true,
+    "delta": 5.0,
+    "item": {
+     "at_all_time_low": true,
+     "availability": "Check store",
+     "brand": "iXS",
+     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSFlowEVO_ElbowGuards_1.webp?v=1760065973",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSFlowEVO_ElbowGuards_1.webp?v=1760065973",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSFlowEVO_ElbowGuards_3.webp?v=1760065978",
+      "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/iXSFlowEVO_ElbowGuards_2.webp?v=1760065978"
+     ],
+     "kind": "Pads & Guards",
+     "name": "iXS Flow EVO+ Elbow Guards - Closeout",
+     "part": "Protection",
+     "price_new": "4.99",
+     "price_old": "89.99",
+     "product_type": "Clothing & Protective Gear",
+     "protection_sizes": [
+      "S",
+      "M",
+      "L",
+      "XL",
+      "XXL"
+     ],
+     "protection_type": "Elbow Pads",
+     "store": "Bikes Online",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "S"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394682148
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "M"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394649380
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394616612
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "XL"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394714916
+      },
+      {
+       "available": true,
+       "compare": 89.99,
+       "price": 4.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "color": [
+         "Green"
+        ],
+        "kind": [
+         "Pads & Guards"
+        ],
+        "prot_size": [
+         "XXL"
+        ],
+        "protects": [
+         "Elbows"
+        ]
+       },
+       "variant_id": 51133394747684
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "color": [
+       "Green"
+      ],
+      "kind": [
+       "Pads & Guards"
+      ],
+      "prot_size": [
+       "L",
+       "M",
+       "S",
+       "XL",
+       "XXL"
+      ],
+      "protects": [
+       "Elbows"
+      ]
+     },
+     "url": "https://www.bikesonline.com/products/ixs-flow-evo-elbow-guards"
+    },
+    "name": "iXS Flow EVO+ Elbow Guards - Closeout",
+    "new": "4.99",
+    "old": "9.99",
+    "percent_vs_prior": 50.1,
+    "type": "price_drop",
+    "url": "https://www.bikesonline.com/products/ixs-flow-evo-elbow-guards"
+   }
+  ],
   "new_items": [
    {
     "at_all_time_low": false,
     "availability": "Check store",
-    "brand": "Eclat",
-    "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b4042f83-aef4-4147-9341-a7bb75aafd0a.jpg?v=1772473988",
+    "brand": "Shadow Conspiracy",
+    "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.crimsonrain.png?v=1678813041",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/b4042f83-aef4-4147-9341-a7bb75aafd0a.jpg?v=1772473988",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9be5bc61-6383-4939-8949-4f5cf0ec89d4.jpg?v=1772473988",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/e69cc16b-3a3d-4336-bb51-b555bd28aad5.jpg?v=1772473988",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9ce4a792-4682-47f5-a5ce-218b322b343b.jpg?v=1772473988",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/9dbc2730-958b-4e83-82fe-7e04dd61e399.jpg?v=1772473988"
-    ],
-    "kind": "Chains",
-    "name": "Eclat 4 Stroke Half Link Chain",
-    "part": "Drivetrain",
-    "price_new": "32.63",
-    "price_old": "36.26",
-    "product_type": "BMX Chains",
-    "store": "Source BMX US",
-    "technical_offers": [
-     {
-      "available": true,
-      "compare": 36.26,
-      "price": 32.63,
-      "specs": {
-       "color": [
-        "Black"
-       ],
-       "kind": [
-        "Chains"
-       ]
-      },
-      "variant_id": 43020220596285
-     }
-    ],
-    "technical_specs": {
-     "color": [
-      "Black"
-     ],
-     "kind": [
-      "Chains"
-     ]
-    },
-    "url": "https://us.sourcebmx.com/products/eclat-stroke-half-link-chain"
-   },
-   {
-    "at_all_time_low": false,
-    "availability": "Check store",
-    "brand": "Odyssey",
-    "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bd3fc985-6426-42b3-81fe-685890c30b65.jpg?v=1771853614",
-    "images": [
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bd3fc985-6426-42b3-81fe-685890c30b65.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/1c907f9a-8a2f-448c-ae08-d8c46ba44c4a.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/01f0e036-7740-4196-a89d-55450377afd3.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d33fd10b-b659-4b5d-b677-e94eaa3af229.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/32c0c571-2941-4f3a-afd7-becfcdf5c23d.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/723b569c-a95a-4147-a012-9ac7d06f008c.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/bc4b787a-785c-4c5c-8648-27603cf7bf18.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/644ed759-7ba3-4eda-bc48-a3d9a941f877.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/22ba3e41-7deb-48ee-8031-2b8f9bfc8fda.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/27abd355-47fe-498b-9eb4-faab1b8d7ed6.jpg?v=1771853614",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/5098fe65-af12-4272-b978-6335105bd015.jpg?v=1786383554"
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.crimsonrain.png?v=1678813041",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.purps.png?v=1678813040",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.polished.png?v=1678813040",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.calle.rim.black.png?v=1678813040",
+     "https://cdn.shopify.com/s/files/1/2993/9672/files/shadow.calle.rim.blast.pop.png?v=1761682781"
     ],
     "kind": "Rims & Rim Strips",
-    "name": "Odyssey Hazardlite Rim",
+    "link": "https://www.albes.com/products/shadow-calle-rim?variant=40277105442890",
+    "name": "Shadow Calle Rim",
     "part": "Wheel Parts",
-    "price_new": "96.89",
-    "price_old": "107.66",
-    "product_type": "BMX Rims",
-    "store": "Source BMX US",
+    "price_new": "70.00",
+    "price_old": "98.95",
+    "product_type": "Rims",
+    "store": "Albe's BMX",
     "technical_offers": [
      {
       "available": true,
-      "compare": 107.66,
-      "price": 96.89,
+      "compare": 98.95,
+      "price": 70.0,
       "specs": {
        "color": [
-        "Black"
+        "Chrome / Polished"
        ],
        "kind": [
         "Rims & Rim Strips"
@@ -2103,12 +3935,12 @@
         "20"
        ]
       },
-      "variant_id": 43007916277821
+      "variant_id": 40277105442890
      }
     ],
     "technical_specs": {
      "color": [
-      "Black"
+      "Chrome / Polished"
      ],
      "kind": [
       "Rims & Rim Strips"
@@ -2117,39 +3949,125 @@
       "20"
      ]
     },
-    "url": "https://us.sourcebmx.com/products/odyssey-hazardlite-rim",
+    "url": "https://www.albes.com/products/shadow-calle-rim",
     "wheel_size": "20"
    },
    {
     "at_all_time_low": false,
     "availability": "Check store",
-    "brand": "Odyssey",
-    "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ce83533b-cc3d-4479-9086-7a25bb50369f.jpg?v=1777286388",
+    "brand": "Rant",
+    "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.black.2_3f6595ac-3db6-4cb2-a237-c7455391ba38.png?v=1626289338",
     "images": [
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/ce83533b-cc3d-4479-9086-7a25bb50369f.jpg?v=1777286388",
-     "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/df0df480-d493-42c0-871b-70fac9da82fc.jpg?v=1777286388"
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.black.2_3f6595ac-3db6-4cb2-a237-c7455391ba38.png?v=1626289338",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.black_f81aadad-b13c-4470-9205-11c7aa70c5f4.png?v=1626289338",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.sky.blue.tan._d450a5cd-b39a-4f3a-a130-5d3cdc12beae.png?v=1626289338",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/rant.squad.tire.pink.2.png?v=1626289338",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/image_ceac42a6-997b-4a53-97aa-f61463a50ce0.jpg?v=1626289338"
     ],
     "kind": "Tires",
-    "name": "Odyssey Path Pro OEM Tire",
+    "length": 29.0,
+    "link": "https://www.albes.com/products/rant-squad-29-tire?variant=39332149329994",
+    "name": "Rant Squad 29\" Tire",
     "part": "Tires",
-    "price_new": "26.51",
-    "price_old": "29.46",
-    "product_type": "BMX Tyres",
-    "store": "Source BMX US",
+    "price_new": "22.50",
+    "price_old": "39.95",
+    "product_type": "Tires",
+    "store": "Albe's BMX",
     "technical_offers": [
      {
       "available": true,
-      "compare": 29.46,
-      "price": 26.51,
+      "compare": 39.95,
+      "price": 25.0,
       "specs": {
        "color": [
         "Black"
        ],
        "kind": [
         "Tires"
+       ],
+       "wheel_size": [
+        "29"
        ]
       },
-      "variant_id": 43008026968125
+      "variant_id": 39270167380042
+     },
+     {
+      "available": true,
+      "compare": 39.95,
+      "price": 22.5,
+      "specs": {
+       "color": [
+        "Blue"
+       ],
+       "kind": [
+        "Tires"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 39332149329994
+     },
+     {
+      "available": true,
+      "compare": 39.95,
+      "price": 25.0,
+      "specs": {
+       "color": [
+        "Pink"
+       ],
+       "kind": [
+        "Tires"
+       ],
+       "wheel_size": [
+        "29"
+       ]
+      },
+      "variant_id": 39339690852426
+     }
+    ],
+    "technical_specs": {
+     "color": [
+      "Black",
+      "Blue",
+      "Pink"
+     ],
+     "kind": [
+      "Tires"
+     ],
+     "wheel_size": [
+      "29"
+     ]
+    },
+    "url": "https://www.albes.com/products/rant-squad-29-tire",
+    "wheel_size": "29"
+   },
+   {
+    "at_all_time_low": true,
+    "availability": "Check store",
+    "brand": "S&M",
+    "image": "https://cdn.shopify.com/s/files/1/2993/9672/files/SANDM.TRIPOD.POST.BLACK.jpg?v=1741363714",
+    "kind": "Seat Posts",
+    "name": "S&M Tripod Post",
+    "part": "Seating",
+    "price_new": "29.95",
+    "price_old": "34.95",
+    "product_type": "Seat Posts",
+    "store": "Albe's BMX",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 34.95,
+      "price": 29.95,
+      "specs": {
+       "color": [
+        "Black"
+       ],
+       "kind": [
+        "Seat Posts"
+       ]
+      },
+      "variant_id": 41972367392842
      }
     ],
     "technical_specs": {
@@ -2157,23 +4075,658 @@
       "Black"
      ],
      "kind": [
-      "Tires"
+      "Seat Posts"
      ]
     },
-    "url": "https://us.sourcebmx.com/products/odyssey-path-pro-oem-tyre"
+    "url": "https://www.albes.com/products/s-m-tripod-post"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Shadow Conspiracy",
+    "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/Shadow.Invisalite.Knee.pads__03326.1509655919.1280.1280.jpg?v=1582039909",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/Shadow.Invisalite.Knee.pads__03326.1509655919.1280.1280.jpg?v=1582039909",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.invisa.lite.sizing__03290.1509655919.1280.1280.jpg?v=1582039909"
+    ],
+    "kind": "Pads & Guards",
+    "link": "https://www.albes.com/products/shadow-invisa-lite-knee-pads?variant=31766772547658",
+    "name": "Shadow Invisa Lite Knee Pads",
+    "part": "Protection",
+    "price_new": "30.00",
+    "price_old": "39.95",
+    "product_type": "SAFETY GEAR",
+    "protection_sizes": [
+     "L",
+     "XL"
+    ],
+    "protection_type": "Knee Pads",
+    "store": "Albe's BMX",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 39.95,
+      "price": 30.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "kind": [
+        "Pads & Guards"
+       ],
+       "protects": [
+        "Knees"
+       ]
+      },
+      "variant_id": 31766772547658
+     },
+     {
+      "available": true,
+      "compare": 39.95,
+      "price": 30.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "kind": [
+        "Pads & Guards"
+       ],
+       "protects": [
+        "Knees"
+       ]
+      },
+      "variant_id": 31766772580426
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "kind": [
+      "Pads & Guards"
+     ],
+     "protects": [
+      "Knees"
+     ]
+    },
+    "url": "https://www.albes.com/products/shadow-invisa-lite-knee-pads"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Shadow Conspiracy",
+    "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.revive.wrist.support.1.png?v=1620240666",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.revive.wrist.support.1.png?v=1620240666",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.revive.wrist.support.2.png?v=1620240666",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.revive.wrist.support..png?v=1620240666"
+    ],
+    "name": "Shadow Revive Wrist Support",
+    "part": "Protection",
+    "price_new": "14.00",
+    "price_old": "20.95",
+    "product_type": "SAFETY GEAR",
+    "protection_type": null,
+    "store": "Albe's BMX",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 20.95,
+      "price": 14.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "protects": [
+        "Wrists"
+       ]
+      },
+      "variant_id": 39297815085130
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "protects": [
+      "Wrists"
+     ]
+    },
+    "url": "https://www.albes.com/products/shadow-revive-wrist-support"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Shadow Conspiracy",
+    "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.transmission.conspire.gloves..png?v=1620165453",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.transmission.conspire.gloves..png?v=1620165453",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.transmission.conspire.gloves.back.png?v=1620165453"
+    ],
+    "kind": "Gloves",
+    "name": "Shadow Transmission Conspire Youth Gloves",
+    "part": "Protection",
+    "price_new": "15.00",
+    "price_old": "29.95",
+    "product_type": "gloves",
+    "protection_type": null,
+    "store": "Albe's BMX",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 29.95,
+      "price": 15.0,
+      "specs": {
+       "age": [
+        "Youth"
+       ],
+       "color": [
+        "Black"
+       ],
+       "kind": [
+        "Gloves"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 39297232306250
+     },
+     {
+      "available": true,
+      "compare": 29.95,
+      "price": 15.0,
+      "specs": {
+       "age": [
+        "Youth"
+       ],
+       "color": [
+        "Black"
+       ],
+       "kind": [
+        "Gloves"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 39297232339018
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Youth"
+     ],
+     "color": [
+      "Black"
+     ],
+     "kind": [
+      "Gloves"
+     ],
+     "protects": [
+      "Gloves"
+     ]
+    },
+    "url": "https://www.albes.com/products/shadow-transmission-conspire-youth-gloves"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Shadow Conspiracy",
+    "image": "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.subrosa.conpsire.speedwolf.glove.white.black.png?v=1614100423",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.subrosa.conpsire.speedwolf.glove.white.black.png?v=1614100423",
+     "https://cdn.shopify.com/s/files/1/2993/9672/products/shadow.subrosa.conspire.speedwolf.glove.white.black.bottom.png?v=1614100423"
+    ],
+    "kind": "Gloves",
+    "link": "https://www.albes.com/products/shadow-x-subrosa-speedwolf-conspire-gloves?variant=32673690386506",
+    "name": "Shadow x Subrosa Speedwolf Conspire Gloves",
+    "part": "Protection",
+    "price_new": "18.00",
+    "price_old": "29.95",
+    "product_type": "gloves",
+    "protection_sizes": [
+     "M"
+    ],
+    "protection_type": null,
+    "store": "Albe's BMX",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 29.95,
+      "price": 18.0,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "color": [
+        "Black"
+       ],
+       "kind": [
+        "Gloves"
+       ],
+       "protects": [
+        "Gloves"
+       ]
+      },
+      "variant_id": 32673690386506
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "color": [
+      "Black"
+     ],
+     "kind": [
+      "Gloves"
+     ],
+     "protects": [
+      "Gloves"
+     ]
+    },
+    "url": "https://www.albes.com/products/shadow-x-subrosa-speedwolf-conspire-gloves"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Rixin",
+    "image": "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-3Q-1500.webp?v=1787664208",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-3Q-1500.webp?v=1787664208",
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-3Q-1000.webp?v=1787664263",
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-RIGHT-1000.webp?v=1787664270",
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-LEFT-1000.webp?v=1787664276",
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-STEM-1000.webp?v=1787664281",
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-BARS-1000.webp?v=1787664286",
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-DT-1000.webp?v=1787664291",
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-BLACK-SPROCKET-1000.webp?v=1787664302",
+     "https://cdn.shopify.com/s/files/1/0689/7043/files/RIXIN-EXPRESS-XL-RAW-TIRE2-1000.webp?v=1787664310"
+    ],
+    "kind": "Complete Bikes",
+    "length": 20.0,
+    "name": "Rixin express complete bike 20\"",
+    "part": "Bikes",
+    "price_new": "440.00",
+    "price_old": "549.99",
+    "product_type": "Complete Bikes",
+    "store": "Powers BMX",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 549.99,
+      "price": 440.0,
+      "specs": {
+       "kind": [
+        "Complete Bikes"
+       ],
+       "top_tube": [
+        "20.5\""
+       ],
+       "wheel_size": [
+        "20"
+       ]
+      },
+      "variant_id": 48932631150745
+     }
+    ],
+    "technical_specs": {
+     "kind": [
+      "Complete Bikes"
+     ],
+     "top_tube": [
+      "20.5\""
+     ],
+     "wheel_size": [
+      "20"
+     ]
+    },
+    "url": "https://www.powersbmx.com/products/rixin-express-complete-bike-20",
+    "wheel_size": "20"
+   },
+   {
+    "at_all_time_low": false,
+    "availability": "Check store",
+    "brand": "Fox",
+    "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_2_d3c9fcec-d112-46a8-9855-a895ce1321c0.webp?v=1792119264",
+    "images": [
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_2_d3c9fcec-d112-46a8-9855-a895ce1321c0.webp?v=1792119264",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/Fox_Proframe_Matte_Black_Helmet_MIPS__Size_Chart_a6268fc1-4734-433a-9d3b-da43f897df4c.jpg?v=1792121334",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_1_882b1a5c-8f3c-45d9-a76e-efb9a688e03c.webp?v=1792119283",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_1.webp?v=1792119296",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_2.webp?v=1792119434",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_3.webp?v=1792119445",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_4.webp?v=1792119456",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_5.webp?v=1792119470",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_6.webp?v=1792119489",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_7.webp?v=1792119504",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_10.webp?v=1756361221",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_8.webp?v=1756361221",
+     "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_9.webp?v=1756361221"
+    ],
+    "kind": "Helmets",
+    "name": "Fox Proframe Matte Black Helmet MIPS",
+    "part": "Protection",
+    "price_new": "249.99",
+    "price_old": "329.95",
+    "product_type": "Clothing & Protective Gear",
+    "protection_sizes": [
+     "S"
+    ],
+    "protection_type": "Helmet",
+    "store": "Bikes Online",
+    "technical_offers": [
+     {
+      "available": true,
+      "compare": 329.95,
+      "price": 249.99,
+      "specs": {
+       "age": [
+        "Adult"
+       ],
+       "color": [
+        "Black"
+       ],
+       "helmet_style": [
+        "Full face"
+       ],
+       "kind": [
+        "Helmets"
+       ],
+       "prot_size": [
+        "S"
+       ],
+       "protects": [
+        "Helmets"
+       ],
+       "rotational": [
+        "MIPS"
+       ]
+      },
+      "variant_id": 50783919309092
+     }
+    ],
+    "technical_specs": {
+     "age": [
+      "Adult"
+     ],
+     "color": [
+      "Black"
+     ],
+     "helmet_style": [
+      "Full face"
+     ],
+     "kind": [
+      "Helmets"
+     ],
+     "prot_size": [
+      "S"
+     ],
+     "protects": [
+      "Helmets"
+     ],
+     "rotational": [
+      "MIPS"
+     ]
+    },
+    "url": "https://www.bikesonline.com/products/fox-proframe-matte-black-helmet-mips"
    }
   ],
-  "removed": []
+  "removed": [
+   [
+    "Source BMX US_Tires",
+    {
+     "availability": "Check store",
+     "brand": "S&M",
+     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/d1e7394d-65e9-4a37-bd1a-3b856ff20be8.jpg?v=1771850524",
+     "kind": "Tubes",
+     "length": 16.0,
+     "name": "S&M 16\" Innertube",
+     "part": "Tires",
+     "price_new": "7.13",
+     "price_old": "7.92",
+     "product_type": "BMX Innertubes",
+     "store": "Source BMX US",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 7.92,
+       "price": 7.13,
+       "specs": {
+        "kind": [
+         "Tubes"
+        ],
+        "wheel_size": [
+         "16"
+        ]
+       },
+       "variant_id": 43007880200253
+      }
+     ],
+     "technical_specs": {
+      "kind": [
+       "Tubes"
+      ],
+      "wheel_size": [
+       "16"
+      ]
+     },
+     "url": "https://us.sourcebmx.com/products/s-m-16-innertube",
+     "wheel_size": "16"
+    }
+   ],
+   [
+    "Source BMX US_Braking",
+    {
+     "availability": "Check store",
+     "brand": "Jet BMX",
+     "image": "https://cdn.shopify.com/s/files/1/0222/8328/8640/files/8870cfdb-1dd2-4e3a-81c9-1554d2abe14a.jpg?v=1771844104",
+     "kind": "Brakes & Accessories",
+     "name": "Jet BMX Race Linear Cable",
+     "part": "Braking",
+     "price_new": "4.53",
+     "price_old": "11.32",
+     "product_type": "BMX Brake Cables",
+     "store": "Source BMX US",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 11.32,
+       "price": 4.53,
+       "specs": {
+        "kind": [
+         "Brakes & Accessories"
+        ]
+       },
+       "variant_id": 43007781109821
+      }
+     ],
+     "technical_specs": {
+      "kind": [
+       "Brakes & Accessories"
+      ]
+     },
+     "url": "https://us.sourcebmx.com/products/jet-bmx-race-linear-cable"
+    }
+   ],
+   [
+    "Colorado Cyclist_Protection",
+    {
+     "availability": "Check store",
+     "brand": "7iDP",
+     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0000_PROJECTABSCAMO-010_9a573d80-fd28-4e48-a05b-b3b9b031fee5.jpg?v=1765388499",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0000_PROJECTABSCAMO-010_9a573d80-fd28-4e48-a05b-b3b9b031fee5.jpg?v=1765388499",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0012_PROJECTABSCAMO-013_58e5e835-cb92-478e-8971-61d73aa04976.jpg?v=1765388499",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0007_PROJECTABSCAMO-034_cbb151b5-8096-46ae-957a-f856ac906b57.jpg?v=1765388499",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0016_PROJECTABSCAMO-004_6fa38dc2-fd40-4bac-8405-62dddcd28856.jpg?v=1765388499",
+      "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/0008_PROJECTABSCAMO-022_89f83b2a-8fa4-4efd-b9f0-42398afa8d1e.jpg?v=1765388499"
+     ],
+     "kind": "Helmets",
+     "name": "7 iDP Project 23 ABS Full Face Helmet - Matt Urban Camo-Black",
+     "part": "Protection",
+     "price_new": "79.99",
+     "price_old": "169.99",
+     "product_type": "Full Face Helmets",
+     "protection_sizes": [
+      "L"
+     ],
+     "protection_type": "Helmet",
+     "store": "Colorado Cyclist",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 169.99,
+       "price": 79.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F1952 (downhill)",
+         "CPSC (US bike)"
+        ],
+        "color": [
+         "Black"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Helmets"
+        ]
+       },
+       "variant_id": 48466052546800
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F1952 (downhill)",
+       "CPSC (US bike)"
+      ],
+      "color": [
+       "Black"
+      ],
+      "helmet_style": [
+       "Full face"
+      ],
+      "kind": [
+       "Helmets"
+      ],
+      "prot_size": [
+       "L"
+      ],
+      "protects": [
+       "Helmets"
+      ]
+     },
+     "url": "https://www.coloradocyclist.com/products/7-idp-project-23-abs-full-face-helmet-matt-urban-camo-black"
+    }
+   ],
+   [
+    "Cambria_Protection",
+    {
+     "availability": "Check store",
+     "brand": "7iDP",
+     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0000_PROJECTABSCAMO-010.jpg?v=1677669047",
+     "images": [
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0000_PROJECTABSCAMO-010.jpg?v=1677669047",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0012_PROJECTABSCAMO-013.jpg?v=1677669062",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0007_PROJECTABSCAMO-034.jpg?v=1677669062",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0016_PROJECTABSCAMO-004.jpg?v=1677669062",
+      "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/0008_PROJECTABSCAMO-022.jpg?v=1677669062"
+     ],
+     "kind": "Helmets",
+     "name": "7 iDP Project 23 ABS Full Face Helmet - Matt Urban Camo-Black",
+     "part": "Protection",
+     "price_new": "79.99",
+     "price_old": "169.99",
+     "product_type": "Full Face Helmets",
+     "protection_sizes": [
+      "L"
+     ],
+     "protection_type": "Helmet",
+     "store": "Cambria",
+     "technical_offers": [
+      {
+       "available": true,
+       "compare": 169.99,
+       "price": 79.99,
+       "specs": {
+        "age": [
+         "Adult"
+        ],
+        "certification": [
+         "ASTM F1952 (downhill)",
+         "CPSC (US bike)"
+        ],
+        "color": [
+         "Black"
+        ],
+        "helmet_style": [
+         "Full face"
+        ],
+        "kind": [
+         "Helmets"
+        ],
+        "prot_size": [
+         "L"
+        ],
+        "protects": [
+         "Helmets"
+        ]
+       },
+       "variant_id": 42134160638134
+      }
+     ],
+     "technical_specs": {
+      "age": [
+       "Adult"
+      ],
+      "certification": [
+       "ASTM F1952 (downhill)",
+       "CPSC (US bike)"
+      ],
+      "color": [
+       "Black"
+      ],
+      "helmet_style": [
+       "Full face"
+      ],
+      "kind": [
+       "Helmets"
+      ],
+      "prot_size": [
+       "L"
+      ],
+      "protects": [
+       "Helmets"
+      ]
+     },
+     "url": "https://cambriabike.com/products/7-idp-project-23-abs-full-face-helmet-matt-urban-camo-black"
+    }
+   ]
+  ]
  },
  "failed_keys": [
   "Albe's BMX_Frames & Forks",
   "SkatePro_Protection"
  ],
  "fingerprints": {
-  "data": "0559fe7c00a050ed205049e209f399fba3988f3342ccaa42f198a072330413dc",
-  "history": "1b7060ee79a54bea7e6cf2d1eb4df6bc63979fba5f6c99d7fb6d21e2af53528f"
+  "data": "4266a923bded10a9a59f5b65e275aee33c4d9d3c6faf22e333700ced1d821c40",
+  "history": "6afa16504694b78494caaefdfb2e8d8bc47e1bd03e1b75640d9d7b6dd7628169"
  },
- "generated_at": "2026-11-25T13:56:23+00:00",
+ "generated_at": "2026-11-26T00:47:11+00:00",
  "history": "file",
  "version": 1
 }
