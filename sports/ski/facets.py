@@ -1,6 +1,6 @@
 """Ski UI configuration, modelled on evo's ski filters (owner, 2026-11-02).
 Offer extraction is owned by the Ski adapter (sports/ski/stores.py, evo.py)."""
-from sports import protection
+from sports import packs, protection
 
 FIELDS = (
     {"key": "condition", "label": "Condition", "param": "ski_condition", "categories": ("Skis", "Boots", "Bindings")},  # Demo (2026-11-12)
@@ -31,7 +31,7 @@ FIELDS = (
     {"key": "ability", "label": "Ability level", "param": "ski_ability", "categories": ("Skis", "Boots", "Bindings")},
     {"key": "gender", "label": "Gender", "param": "ski_gender", "categories": (),
      "order": ["Men", "Women", "Unisex", "Kids"]},
-) + protection.facet_fields("ski", ("Helmets", "Protection", "Gloves"))  # not Goggles: helmet/armor fields
+) + protection.facet_fields("ski", ("Helmets", "Protection", "Gloves")) + (packs.facet_field("ski"),)  # not Goggles: helmet/armor fields
 
 # Section order per heading (docs/filters-evo-model.md): Brand comes first on
 # the page, then these, in this order; Condition last. A field not listed for

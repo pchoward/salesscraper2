@@ -371,3 +371,20 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - a new listing shows Was · Now with no Avg line;
 - changing the chart window updates the Avg line;
 - card rows still line up.
+
+## 23. Skate › Packs: a Size (liters) filter (owner, 2026-11-25)
+**Why:** "for all backpacks across all sports we should add size when it's available. Many are 28L, smaller or larger." BMX, Ski and MTB now have it through the shared spec filters. Skate's sidebar is built separately (`page.py` sections plus `page.js`), so Skate needs its own section.
+
+**Data (done, Claude's PR "Packs: a Size filter on every sport"):** `sports/packs.py`:
+- `volume_litres(name, description)` gives a pack's litres or `None`. The title wins; a reservoir ("with 3L reservoir") isn't counted; Osprey, CamelBak, EVOC, Deuter and Gregory name the litres in the model ("Sopris 32").
+- `volume_size(litres)` gives one of `VOLUME_SIZES`: "Under 15L", "15–24L", "25–34L", "35L+".
+- About half of Skate's packs state a size today; streetwear packs (Vans, Nike SB, Herschel) often don't.
+
+**Wanted:**
+- In `page.py`, compute the size for each Skate pack row (as for `protection_type`) and stamp it on the row, e.g. `data-packsize="25–34L"`.
+- A "Size (liters)" sidebar section on Skate › Packs with count chips in `VOLUME_SIZES` order and multi-select, like Protection type. Rows without a size hide while a size is picked.
+- A new URL parameter `packsize`, added to `skateQueryKeys`. Don't rename any existing parameter, and keep old saved views working.
+
+**Tests:**
+- A Python test that a pack row carries `data-packsize`.
+- A browser check on Skate › Packs at desktop and 390 px: picking 25–34L shows only those packs; the URL gets `packsize`; a reload keeps the pick.
