@@ -61,7 +61,7 @@ class FilterTests(unittest.TestCase):
         for sport_id in ("bmx", "ski", "mtb"):
             module = __import__(f"sports.{sport_id}.facets", fromlist=["FIELDS"])
             field = next(f for f in module.FIELDS if f["key"] == "pack_volume")
-            self.assertEqual(field["categories"], ("Packs",))
+            self.assertEqual(field["categories"], ("Packs", "Backpacks", "Packs & Hydration"))
             self.assertEqual(field["param"], f"{sport_id}_packsize")
             self.assertEqual(len({f["param"] for f in module.FIELDS}), len(module.FIELDS))
 

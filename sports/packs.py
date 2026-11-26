@@ -161,7 +161,9 @@ def volume_size(litres):
 
 def facet_field(prefix):
     """The Packs heading's Size filter for one sport's sidebar."""
-    return {"key": "pack_volume", "label": "Size (liters)", "param": f"{prefix}_packsize", "categories": (PART,),
+    # The heading reads Backpacks, or Packs & Hydration on MTB (sports/headings.py).
+    from sports.headings import PACKS_HEADINGS
+    return {"key": "pack_volume", "label": "Size (liters)", "param": f"{prefix}_packsize", "categories": PACKS_HEADINGS,
             "order": list(VOLUME_SIZES)}
 
 

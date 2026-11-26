@@ -96,7 +96,7 @@ class Placement(unittest.TestCase):
 
     def test_heading_order(self):
         self.assertEqual(headings.HEADINGS["mtb"][9], "Tools & Care")
-        self.assertEqual(headings.HEADINGS["mtb"][10:], headings.GEAR)
+        self.assertEqual(headings.HEADINGS["mtb"][10:], headings._gear("mtb"))
 
     def test_other_sports_unchanged(self):
         item = self.item("Wheels", "Odyssey Hazard Lite Rim", "BMX Rims")

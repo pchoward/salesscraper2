@@ -33,28 +33,43 @@ from sports.protection import protects as _protects
 # Packs (owner, 2026-11-12): backpacks and hydration packs, after Protection.
 GEAR = ("Helmets", "Goggles", "Gloves", "Protection", "Packs")
 
+# Packs reads the way the stores say it (owner, 2026-11-26): ski, skate and
+# BMX shops say "Backpacks"; bike shops lead with hydration (Fanatik's "Packs
+# & Hydration", evo's "Hydration Packs & Bags"). The store category stays
+# Packs. Skate's menu is built in page.py/page.js (Codex's task 25).
+PACKS = "Packs"
+PACKS_HEADING = {"ski": "Backpacks", "bmx": "Backpacks", "mtb": "Packs & Hydration"}
+PACKS_HEADINGS = (PACKS,) + tuple(sorted(set(PACKS_HEADING.values())))
+
+
+def _gear(sport_id):
+    return tuple(PACKS_HEADING.get(sport_id, PACKS) if name == PACKS else name for name in GEAR)
+
+
 HEADINGS = {
     "skate": ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories") + GEAR + ("Sneakers",),
-    "ski": ("Skis", "Boots", "Bindings", "Poles") + GEAR,
+    "ski": ("Skis", "Boots", "Bindings", "Poles") + _gear("ski"),
     "mtb": ("Bikes", "Frames", "Suspension", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals",
-            "Tools & Care") + GEAR,
+            "Tools & Care") + _gear("mtb"),
     "bmx": ("Bikes", "Frames & Forks", "Bars & Steering", "Drivetrain", "Wheels & Hubs", "Tires & Tubes",
-            "Seats & Posts", "Brakes", "Tools & Care") + GEAR,
+            "Seats & Posts", "Brakes", "Tools & Care") + _gear("bmx"),
 }
 
 # Store category -> heading, where it is a plain rename or merge.
 _RENAMED = {
-    "mtb": {"Forks & Shocks": "Suspension"},
+    "ski": {PACKS: PACKS_HEADING["ski"]},
+    "mtb": {"Forks & Shocks": "Suspension", PACKS: PACKS_HEADING["mtb"]},
     "bmx": {"Steering": "Bars & Steering", "Wheels": "Wheels & Hubs", "Wheel Parts": "Wheels & Hubs",
-            "Tires": "Tires & Tubes", "Seating": "Seats & Posts", "Braking": "Brakes"},
+            "Tires": "Tires & Tubes", "Seating": "Seats & Posts", "Braking": "Brakes", PACKS: PACKS_HEADING["bmx"]},
 }
 
 # Old ?type= links keep working: the old category's slug opens its heading.
 ALIASES = {
-    "ski": {"body-armor": "Protection"},
-    "mtb": {"forks-shocks": "Suspension"},
+    "ski": {"body-armor": "Protection", "packs": PACKS_HEADING["ski"], "pack": PACKS_HEADING["ski"]},
+    "mtb": {"forks-shocks": "Suspension", "packs": PACKS_HEADING["mtb"], "pack": PACKS_HEADING["mtb"]},
     "bmx": {"steering": "Bars & Steering", "wheels": "Wheels & Hubs", "wheel-parts": "Wheels & Hubs",
-            "tires": "Tires & Tubes", "seating": "Seats & Posts", "braking": "Brakes", "pads-gloves": "Protection"},
+            "tires": "Tires & Tubes", "seating": "Seats & Posts", "braking": "Brakes", "pads-gloves": "Protection",
+            "packs": PACKS_HEADING["bmx"], "pack": PACKS_HEADING["bmx"]},
 }
 
 
