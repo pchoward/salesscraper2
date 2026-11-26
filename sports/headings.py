@@ -13,6 +13,9 @@ the same deals under headings people shop by:
   and brake items a store filed under Wheels or Cockpit show under Brakes
   (owner, 2026-11-26).
 * BMX: Wheels and Wheel Parts are one Wheels & Hubs; BMX shop words for the rest.
+  Spares get their own Product kind (Fork Parts, Crank Parts, Brake Pads:
+  sports/bmx/kinds.py) and tools and lubes show under Tools & Care
+  (owner, 2026-11-26).
 * Skate: shop order, Helmets out of Protection.
 
 A heading is a thing to shop for. Types within it (ski type, hub vs rim)
@@ -36,7 +39,7 @@ HEADINGS = {
     "mtb": ("Bikes", "Frames", "Suspension", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals",
             "Tools & Care") + GEAR,
     "bmx": ("Bikes", "Frames & Forks", "Bars & Steering", "Drivetrain", "Wheels & Hubs", "Tires & Tubes",
-            "Seats & Posts", "Brakes") + GEAR,
+            "Seats & Posts", "Brakes", "Tools & Care") + GEAR,
 }
 
 # Store category -> heading, where it is a plain rename or merge.
@@ -88,11 +91,32 @@ def _mtb_place(item):
     return shown, kinds.kind(part, name, kind)
 
 
+_GEAR_PARTS = ("Protection", "Packs", "Bikes", "Frames")
+
+
+def _bmx_place(item):
+    """(store category shown, kind) for a BMX listing: tools and lubes move
+    to Tools & Care; spares keep their heading under their own kind."""
+    from sports.bmx import kinds as bmx_kinds
+    from sports.mtb import kinds
+    part = item.get("part") or ""
+    if part in _GEAR_PARTS:
+        return part, None
+    name, kind = item.get("name") or "", item.get("product_type") or ""
+    if kinds.is_tools_and_care(name, kind):
+        return TOOLS_AND_CARE, None
+    stored = item.get("kind")
+    refined = bmx_kinds.refine(stored, name, kind) if stored else None
+    return part, refined if refined != stored else None
+
+
 def heading(sport_id, item):
     """The heading a deal (or price-history row) is shown under."""
     part = (item or {}).get("part") or ""
     if sport_id == "mtb" and part in _MTB_TYPED:
         part = _mtb_place(item)[0]
+    elif sport_id == "bmx" and part not in _GEAR_PARTS:
+        part = _bmx_place(item)[0]
     if part == "Protection":
         kinds = _protected(item)
         if "Helmets" in kinds:
@@ -120,6 +144,10 @@ def _regrouped(item, sport_id):
     shown = dict(item, part=heading(sport_id, item), store_part=item.get("part"))
     if sport_id == "mtb":
         shown = _with_kind(shown, _mtb_place(item)[1])
+    elif sport_id == "bmx" and shown["part"] != TOOLS_AND_CARE:
+        refined = _bmx_place(item)[1]
+        if refined:
+            shown = dict(_with_kind(shown, refined), kind=refined)
     return shown
 
 

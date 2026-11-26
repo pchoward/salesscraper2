@@ -34,6 +34,10 @@ filters. **Change the wireframe first, then the code.**
    next to Pads). On MTB every parts heading has a Type filter: the thing itself
    first (Forks, Hubs, Cranks), then its parts (Fork parts, Hub parts,
    Drivetrain parts). Rules: `sports/mtb/kinds.py`. Pedals keeps its own Pedal
-   type filter instead.
+   type filter instead. On BMX, Product kind gains the spares the shops list
+   separately (Fork parts, Crank parts, Headset parts, Stem parts, Pedal parts)
+   and Brakes splits into Brakes, Brake kits, Levers, Cables, Pads and Brake
+   parts (`sports/bmx/kinds.py`).
 7. **Tools & Care** (owner, 2026-11-26) holds tools, pumps, bleed kits, lubes and
-   cleaners from any heading, after the parts headings and before the gear.
+   cleaners from any heading, after the parts headings and before the gear, on
+   MTB and BMX.
