@@ -20,11 +20,14 @@ from report import build_report_html
 def _fixture_promos(sport_id):
     if sport_id != 'mtb':
         return []
+    base = {'url': 'https://example.test/sale', 'ends': '', 'sports': ['mtb']}
     return [
-        {'store': 'GeneralFixture', 'code': 'SPORTS10', 'percent': 10,
-         'url': 'https://example.test/sale', 'ends': '', 'sports': ['skate', 'mtb']},
-        {'store': 'AuditFixture', 'code': 'FIXTURE20', 'percent': 20,
-         'url': 'https://example.test/sale', 'ends': '', 'sports': ['mtb']},
+        dict(base, store='GeneralFixture', code='SPORTS10', percent=10),
+        dict(base, store='Zebra', code='', auto=True, percent=25,
+             tiers=[{'percent': 25, 'on': 'gear'}]),
+        dict(base, store='AuditFixture', code='FIXTURE40', percent=40),
+        dict(base, store='Alpine', code='', auto=True, percent=25,
+             tiers=[{'percent': 25, 'on': 'gear'}]),
     ]
 
 
