@@ -184,6 +184,14 @@ def part_for(store, product_type, title="", tags=None):
         return None
     if packs.is_pack(title, product_type, tags):
         return packs.PART
+    # MTB and BMX (owner, 2026-11-26): tools, pumps, lubes and cleaners are
+    # their own category; tubeless sealant goes with tires.
+    if getattr(store, "tools_and_care", False):
+        from sports.mtb import kinds
+        if kinds.is_tools_and_care(title, product_type):
+            return kinds.TOOLS_AND_CARE
+        if re.search(r"\bsealants?\b", f"{title or ''} {product_type or ''}", re.I):
+            return "Tires"
     if getattr(store, "product_part", None):
         return store.product_part(product_type, title, tags)
     if getattr(store, "tag_part", None) and tags is not None:

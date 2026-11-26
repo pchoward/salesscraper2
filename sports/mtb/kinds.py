@@ -21,8 +21,8 @@ TOOLS_AND_CARE = "Tools & Care"
 
 # Tools, pumps, lubes and cleaners, from any heading. A rebuild, service or
 # tune kit that mentions oil or a tool is still a part.
-_CARE_TYPE = re.compile(r"\b(?:tools?|pumps?|lubes?|lubricants?|greases?|cleaners?|degreasers?|bleed\s*kits?"
-                        r"|fluids?|work\s*stands?|repair\s*stands?|tire\s*levers?|maintenance)\b", re.I)
+_CARE_TYPE = re.compile(r"\b(?:tools?|pumps?|lubes?|lubricants?|greases?|cleaners?|degreasers?|polish|wax|oil|bleed\s*kits?"
+                        r"|fluids?|work\s*stands?|workstands?|repair\s*stands?|tire\s*levers?|maintenance)\b", re.I)
 _CARE_NAME = re.compile(r"\b(?:tools?|tool\s*kit|multi-?tools?|pumps?|floor\s*pump|shock\s*pump|inflators?|co2"
                         r"|lubes?|lubricants?|greases?|degreasers?|cleaners?|wash|chain\s*(?:checker|wear|breaker|brute)"
                         r"|bleed\s*kit|brake\s*fluid|dot\s*[345](?:\.1)?\b|torque\s*(?:wrench|driver|key)"

@@ -26,7 +26,8 @@ class EmpireBmxTests(unittest.TestCase):
                  ("Fit Bikes Aitken stem", ("Fit Bikes", "Parts", "Stems")): "Steering",
                  ("Fuse Omega knee pads", ("Fuse", "Kneepads", "Safety Gear", "Sale Items")): "Protection",
                  ("Sunday t-shirt - Stairs", ("Shirts", "Softgoods", "Sunday")): None,
-                 ("Park Tool PW-4 pedal wrench", ("Park Tool", "Tools")): None}
+                 # Tools & Care (owner, 2026-11-26).
+                 ("Park Tool PW-4 pedal wrench", ("Park Tool", "Tools")): "Tools & Care"}
         for (title, tags), part in cases.items():
             self.assertEqual(shopify.part_for(stores.EMPIRE, "", title, list(tags)), part, title)
 

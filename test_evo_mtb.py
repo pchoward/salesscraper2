@@ -25,9 +25,14 @@ class EvoMtb(unittest.TestCase):
     def test_snow_armor_and_small_parts_stay_out(self):
         self.assertIsNone(self.part("Armor", "Burton Impact Short"))
         self.assertIsNone(self.part("Wrist Guards", "Burton Wrist Guards"))
-        for kind in ("Sealant", "Valves", "Bar Tape", "Brake Small Parts", "Cables"):
+        for kind in ("Valves", "Bar Tape", "Brake Small Parts", "Cables"):
             self.assertIsNone(self.part(kind), kind)
         self.assertFalse(any("/collections/body-armor/" in url for url in stores.EVO.sale_jsons))
+
+    def test_tools_and_sealant(self):
+        # Owner, 2026-11-26: tools and fluids are Tools & Care; sealant goes with tires.
+        self.assertEqual(self.part("Brake Fluid", "SRAM DOT 5.1 Brake Fluid - 4oz"), "Tools & Care")
+        self.assertEqual(self.part("Sealant", "Stan's NoTubes Tire Sealant"), "Tires")
 
     def test_collections_are_allowed_by_evos_robots_rules(self):
         rules = robotparser.RobotFileParser()

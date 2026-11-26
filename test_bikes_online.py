@@ -50,6 +50,9 @@ class BikesOnlineTests(unittest.TestCase):
             "5x Entity Inner Tube 27.5x1.5-2.5 Presta Valve 650b Mountain Bike": "Tires",
             "IXS Trigger AM Helmet - Mips": "Protection",
             "Fox 34 Float Performance SC GRIP 29 - OEM": "Forks & Shocks",
+            # Tools & Care (owner, 2026-11-26).
+            "Entity Chain Whip Tool": "Tools & Care",
+            "Muc-Off C3 Wet Ceramic Bike Chain Lube - 120ml": "Tools & Care",
         }, "road/gravel parts (700 x 28, 32-48c, XPLR, Tambora, 'Raod') stay out")
 
     def test_collections(self):

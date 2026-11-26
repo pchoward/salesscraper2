@@ -2,7 +2,7 @@
 import re
 from filters import normalize_product_name
 
-PARTS=('Bikes','Frames','Forks & Shocks','Wheels','Tires','Drivetrain','Brakes','Cockpit','Pedals','Protection','Packs')
+PARTS=('Bikes','Frames','Forks & Shocks','Wheels','Tires','Drivetrain','Brakes','Cockpit','Pedals','Tools & Care','Protection','Packs')
 _RULES=(
  ('Protection',r'\b(?:helmets?|knee\s*(?:pads?|guards?)|elbow\s*(?:pads?|guards?)|body\s*(?:armor|armour)|chest\s*protectors?)\b'),
  ('Forks & Shocks',r'\b(?:suspension\s+forks?|forks?|rear\s+shocks?|shocks?|shock\s+springs?)\b'),
