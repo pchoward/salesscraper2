@@ -1,18 +1,141 @@
 {
-  "checked_at": "2026-11-26T17:03:14+00:00",
+  "checked_at": "2026-11-26T22:44:41+00:00",
   "counts": {
-    "action": 0,
-    "watch": 1
+    "action": 1,
+    "watch": 12
   },
   "date": "2026-11-26",
   "findings": [
     {
-      "count": 7,
-      "kind": "new_unmapped",
+      "key": "Fiend_Bikes",
+      "kind": "held",
       "level": "watch",
-      "product_type": "Snowboard Boots",
-      "store": "Kinetic"
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Braking",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Drivetrain",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Frames & Forks",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Packs",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Protection",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Seating",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Steering",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Tires",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Tools & Care",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Wheel Parts",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "key": "Fiend_Wheels",
+      "kind": "held",
+      "level": "watch",
+      "reason": "scrape_failed",
+      "runs": 1,
+      "store": "Fiend"
+    },
+    {
+      "count": 7,
+      "examples": [
+        {
+          "name": "Odyssey GTX S gyro",
+          "part": "Steering",
+          "store": "Source BMX US"
+        },
+        {
+          "name": "Jet BMX Gyro Plate",
+          "part": "Steering",
+          "store": "Source BMX US"
+        },
+        {
+          "name": "S&M Drop-Out Tensioner Parts",
+          "part": "Drivetrain",
+          "store": "Source BMX US"
+        },
+        {
+          "name": "Stay Strong Race Warmdown Seatpost Extender",
+          "part": "Seating",
+          "store": "Source BMX US"
+        },
+        {
+          "name": "S&M Long Johnson Pivotal Post",
+          "part": "Seating",
+          "store": "Source BMX US"
+        }
+      ],
+      "field": "kind",
+      "kind": "new_unclassified",
+      "label": "Type",
+      "level": "action"
     }
   ],
-  "last_scrape": "2026-11-26T16:33:07+00:00"
+  "last_scrape": "2026-11-26T22:15:23+00:00"
 }
