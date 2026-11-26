@@ -1,0 +1,56 @@
+name: Specialist shop check
+
+# Monthly MTB audit (specialist_check.py, owner 2026-11-26): lists the product
+# types we show on MTB that no MTB-only shop (Fanatik, Worldwide Cyclery,
+# The Lost Co.) sells, like front derailleurs. It only reads their public
+# catalogs, robots.txt respected, and commits catalogs/mtb/specialist_report.json.
+# Nothing on the page changes; the store monitor triages the report and asks
+# the owner on the "Store monitor" issue. Nothing is emailed from here.
+on:
+  schedule:
+    - cron: '23 4 2 * *'
+  workflow_dispatch:
+
+# The scrapes' lock: never pushes at the same time as a scrape or rebuild.
+concurrency:
+  group: scrape-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  specialists:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compare MTB types with the specialist shops
+        run: python specialist_check.py | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit and push
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add catalogs/mtb/specialist_report.json
+          git diff --quiet --cached && exit 0
+          git commit -m "Specialist shop check $(date +'%Y-%m-%d')"
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main && git push && break
+            git rebase --abort 2>/dev/null || true
+            if [ "$attempt" = 4 ]; then exit 1; fi
+            sleep $((attempt * 5))
+          done
