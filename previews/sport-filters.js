@@ -14,6 +14,7 @@
     'use strict';
     return function(config){
         const fields=config.fields||[];
+        const kindByPart=new Map();
         let selected={};
         let doc=null;
         function list(value){
@@ -73,6 +74,20 @@
                 return {key:'technical:'+f.key+':'+value,label:f.label+': '+value,remaining};
             }));},
             sync,
+            kindValues(part){
+                const kind=fields.find(field=>field.key==='kind');
+                if(!kind||part==='all'||!applies(kind,part))return [];
+                if(!kindByPart.has(part)){
+                    const values=new Set();
+                    Object.values(config.items||{}).forEach(item=>{
+                        if(item.part!==part)return;
+                        (item.offers||[]).forEach(offer=>
+                            ((offer.specs||{}).kind||[]).forEach(value=>values.add(String(value))));
+                    });
+                    kindByPart.set(part,kind.values.filter(value=>values.has(value)));
+                }
+                return kindByPart.get(part);
+            },
             // Live chip counts, like Skate's: each field counts the listings
             // that pass every other filter (brand, store, type, price and the
             // other spec picks), by the values of their matching offers.

@@ -2952,7 +2952,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             )
     if sport.id == "mtb":
         chunks.append(
-            '<div id="mtbPowerChips" class="mtb-power-chips" role="group" aria-label="Motor" hidden>'
+            '<div id="mtbPowerChips" class="technical-quick-chips mtb-power-chips" role="group" aria-label="Motor" hidden>'
             + "".join(
                 f'<button type="button" class="chip tech-chip" data-tech-key="power" '
                 f'data-value="{value}" data-exclusive aria-pressed="false">'
@@ -2961,6 +2961,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
             )
             + "</div>"
         )
+    if sport.id in {"mtb", "bmx"}:
+        chunks.append('<div id="kindChips" class="technical-quick-chips" role="group" aria-label="Type" hidden></div>')
     chunks.append(
         '<div class="section" id="dealsSection">'
         '<h2 class="sr-only">All Deals</h2>'
