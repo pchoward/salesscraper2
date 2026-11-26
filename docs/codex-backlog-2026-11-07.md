@@ -388,3 +388,31 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 **Tests:**
 - A Python test that a pack row carries `data-packsize`.
 - A browser check on Skate › Packs at desktop and 390 px: picking 25–34L shows only those packs; the URL gets `packsize`; a reload keeps the pick.
+
+## 24. Type chips at the top of MTB and BMX parts headings (owner, 2026-11-26)
+**Why:** MTB headings had more parts than products ("under Suspension you see more suspension parts than suspension"). Like Powers, Source and Circuit, spares now stay in their heading as their own type. The owner wants the main items first, with parts one tap away.
+
+**Data (Claude's PRs "MTB: a Type inside each parts heading, and Tools & Care" and "BMX: spares get their own kind"):**
+- **MTB:** every listing under Suspension, Wheels, Tires, Drivetrain, Brakes and Cockpit carries the spec `kind`. It's a sidebar facet in `sports/mtb/facets.py`: `{"key": "kind", "label": "Type", "param": "mtb_type", …}`, with `order` = `sports/mtb/kinds.VALUES`.
+  - Example values for Suspension: Forks · Rear Shocks · Coil Springs · Fork Parts · Shock Parts.
+  - Each heading's full list is `sports/mtb/kinds.ORDER[<store category>]`. Forks & Shocks is the Suspension heading.
+- **BMX:** the existing Product kind (`bmx_kind`) gains Fork Parts, Crank Parts, Headset Parts, Stem Parts and Pedal Parts. Brakes splits into Brakes, Brake Kits, Brake Levers, Brake Cables, Brake Pads and Brake Parts.
+- **Values are set when the page is built** (`sports/headings.py` `regroup`), on each offer's specs like any other facet. Nothing waits for a scrape.
+- **New heading, Tools & Care,** on MTB and BMX, after the parts headings and before the gear. It needs no UI work beyond what any heading gets. Check its slug opens it, e.g. `?sport=mtb&type=tools-care`.
+
+**Wanted:** the same pattern as task 17 (E-MTB chips).
+- **The row:** when an MTB parts heading (Suspension, Wheels, Tires, Drivetrain, Brakes, Cockpit) or any BMX heading is active, show a chip row above the results. It reads **All · <each type in `order`>**, each with its count.
+- **Main items lead:** values ending in "Parts", plus "Rim Tape & Valves" and "Tubeless & Repair", sit at the end of the row and look secondary (lighter, or after a divider).
+- **One state:** the chips drive the existing facet (`mtb_type` / `bmx_kind`). There's no second state and no new URL parameter, so links and saved views work and match the sidebar.
+- **When to hide:** hide the row when a heading has only one type.
+- **Phone:** fits at 320–390 px and scrolls sideways if needed. Desktop layout otherwise unchanged.
+- **Optional, for the owner to approve in the PR screenshots:** default each MTB parts heading to "main items" (everything except the parts values) on first open, with "All" one tap away.
+
+**Keep:** existing URL parameters, saved views and `localStorage` keys. Task 4's general chip row can reuse this.
+
+**Tests:** in the `ci/` pattern, with an MTB Suspension fixture (forks, shocks, fork parts):
+- each chip's count matches the facet count;
+- picking Forks shows only forks, the URL holds `mtb_type=Forks`, and the sidebar's Type shows the same;
+- Back restores All;
+- a BMX Brakes fixture shows Brake Kits · Levers · Cables · Pads · Brake Parts;
+- desktop and 390 px.
