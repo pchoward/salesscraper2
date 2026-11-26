@@ -416,3 +416,22 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 - Back restores All;
 - a BMX Brakes fixture shows Brake Kits · Levers · Cables · Pads · Brake Parts;
 - desktop and 390 px.
+
+## 26. Promo strip: show every sale, none folded away (owner, 2026-11-26)
+**Why:** on desktop, when a sport has more than 2 offers, the strip (tasks 16 and 20) shows the first one and folds the rest behind "+N more" at the far right of the row. The owner didn't see Skate Warehouse's store-wide Black Friday sale until finding that button: "no need to hide those, they are all important… I want to see all sales there." The emails list every offer; the pages should too.
+
+**Today (2026-11-26):** Skate has 3 offers (CCS, Deathgear, Skate Warehouse), BMX 3, Ski 2, MTB 2. Black Friday week can bring more.
+
+**Wanted (`page.py` `_promo_strip`, `page.js` `initPromoStrip`, CSS):**
+1. **Every active offer is visible on every width, with nothing folded.** Remove the "+N more" / "Show less" / "Details" collapse.
+   - Desktop: offers wrap onto more lines as needed.
+   - Phones: one compact row per offer (store, offer, code or "No code needed", Copy, Dismiss), stacked.
+2. **Order:** store-wide sales with no code first (they apply without doing anything), then code offers. Within each group, the biggest percent first, then store A–Z.
+3. **Dismiss still works per offer.** Keep the `shreddeals.promo-dismissed` key and its `[store, code]` format, so earlier dismissals stay dismissed. Expired offers (`data-ends`) still hide.
+4. Keep it compact. One offer per line on desktop is fine. The strip shouldn't push the first row of deals below the fold on a 1366×768 screen with 4 offers. If it would, use two columns rather than hiding any.
+
+**Data:** unchanged (`promos.json`, `promos.describe`).
+
+**Tests:**
+- Update `test_promos.py` and the strip's browser checks for the removed collapse.
+- A browser check at 1366 px, 1920 px and 390 px with 4 offers: all 4 are visible without clicking; Dismiss on one leaves 3; a reload keeps that dismissal.
