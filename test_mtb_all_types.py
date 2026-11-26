@@ -73,7 +73,8 @@ class OwnerTests(unittest.TestCase):
         self.assertEqual(mtb_section_owners("riding_type"), every)
         self.assertNotIn("Forks & Shocks", headings(sports.MTB))
         self.assertIn("Suspension", headings(sports.MTB))
-        self.assertEqual(mtb_section_owners("kind"), "")
+        # Type (owner, 2026-11-26) belongs to the parts headings.
+        self.assertEqual(mtb_section_owners("kind"), "Suspension Wheels Tires Drivetrain Brakes Cockpit")
         self.assertEqual(mtb_section_owners("no-such-field"), "")
 
     def test_protection_scope_is_still_the_facet_list(self):
@@ -125,7 +126,10 @@ class MarkupTests(unittest.TestCase):
             self.assertEqual(section.get("data-for"), expected, key)
             self.assertTrue(expected, key)
             self.assertIn("is-type-hidden", section["class"])
-        self.assertIsNone(soup.select_one('[data-section="tech-kind"]'))
+        # Type (owner, 2026-11-26) shows inside the parts headings only.
+        kind = soup.select_one('[data-section="tech-kind"]')
+        self.assertIsNotNone(kind)
+        self.assertEqual(kind.get("data-for"), "Suspension Wheels Tires Drivetrain Brakes Cockpit")
         brand = soup.select_one('[data-section="brand"]')
         self.assertNotIn("is-type-hidden", brand["class"])
         self.assertIsNone(brand.get("data-for"))
