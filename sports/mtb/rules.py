@@ -25,6 +25,9 @@ _NOT_MTB=(r'\b(?:campagnolo|campy|super\s+record|chorus|centaur|ekar|shimano\s+1
           r'rival|(?:force|red)\s+(?:axs|etap|22)|xplr|sram\s+red)\b|\b700\s*(?:c\b|x\s*\d)|(?<![\d.])\d{2}(?:-\d{2})?c\b|\bdrop[- ]bars?\b|\b(?:bar|handlebar)\s+tape\b')
 
 
+_TRIPLE=r'\btriple\b|\bmiddle\s+chainring\b|\b3\s*x\s*\d{1,2}\b|\b(?:22|24)/(?:32|34)/(?:42|44)\b'
+_RIM_BRAKE=(r'\bv-?\s?brakes?\b|\blinear[\s-]+pull\b|\bcantilevers?\b|\brim\s+(?:brakes?|pads?)\b|\brim\s+brake\s+parts\b|'
+            r'\bBR-?T\d{3}\b|\btangente\b')
 _FRONT_SHIFTING=r'\bfront\s+derail+eurs?\b|\bfront\s+shifters?\b|\bE-?type\b.*\bderail+eur|\bderail+eur\b.*\bE-?type\b'
 _SHIFT=re.compile(r'\bshift(?:er|ers|ing)?\b|\bshift\s*/\s*brake\b|\bdual\s+control\b|\btriggers?\b|\btwist\b',re.I)
 # Mounts, AXS pods (dropper or shifting on 1x bikes) and e-bike switches
@@ -84,6 +87,14 @@ def filter_reason(name,part,url='',price_new=None,price_old=None,description='',
     # 2x/3x stock is deep clearance, so it filled the top of "% off".
     if re.search(_FRONT_SHIFTING,str(name)+' '+str(product_type),re.I) or _left_shifter(str(name),str(product_type)):
         return 'front derailleur or front shifter'
+    # Triples and rim brakes (owner, 2026-11-26), the same story: modern
+    # mountain bikes are 1x and disc. Triple cranks, a triple's middle ring
+    # and 3x shifter sets; V-brakes, cantilevers, their levers and rim pads.
+    both=str(name)+' '+str(product_type)
+    if part in ('Drivetrain','Brakes') and re.search(_TRIPLE,both,re.I):
+        return 'triple crankset or 3x part'
+    if part!='Bikes' and re.search(_RIM_BRAKE,both,re.I) and not re.search(r'\bdisc\b',str(name),re.I):
+        return 'V-brake or rim brake part'
     # Frame protection kits, number plates and other frame add-ons are filed
     # under Frames by some shops (Fanatik's "Frame Protection" type, RideWrap
     # kits; The Lost Co.'s ODI number plate). They aren't frames, and MTB has
