@@ -32079,14 +32079,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 314,
+          "count": 294,
           "failed": false,
           "diagnostics": {
             "expected_count": 285.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 28.0,
-            "actual_count": 314,
-            "percentage_change": 10.0,
+            "actual_count": 294,
+            "percentage_change": 3.0,
             "reason": "normal_variation"
           }
         },
@@ -32187,13 +32187,13 @@
           }
         },
         "evo_Decks": {
-          "count": 49,
+          "count": 48,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 49,
+            "actual_count": 48,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -32259,7 +32259,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-26T17:06:00+00:00"
+      "scanned_at": "2026-11-26T17:43:06+00:00"
     }
   ],
   "baseline": {
@@ -32449,7 +32449,7 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-26",
-      "count": 314
+      "count": 294
     },
     "Exodus_Bearings": {
       "date": "2026-11-26",
@@ -32525,7 +32525,7 @@
     },
     "evo_Decks": {
       "date": "2026-11-26",
-      "count": 49
+      "count": 48
     },
     "evo_Packs": {
       "date": "2026-11-26",
@@ -37934,7 +37934,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 314
+        "count": 294
       }
     ],
     "Zumiez_Packs": [
@@ -38248,7 +38248,7 @@
     "evo_Decks": [
       {
         "date": "2026-11-26",
-        "count": 49
+        "count": 48
       }
     ],
     "evo_Packs": [
