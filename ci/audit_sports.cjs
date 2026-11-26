@@ -29,7 +29,7 @@ async function technical(frame,key,value,mobile) {
     const section=frame.locator(`[data-technical-field="${key}"] .section-toggle`);
     if(await section.getAttribute('aria-expanded')!=='true') await section.click();
 
-    await frame.locator(`.tech-chip[data-tech-key="${key}"]`).filter({has:frame.locator('span.spec-label',{hasText:new RegExp('^'+value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'$')})}).click();
+    await frame.locator(`#contextSpecs .tech-chip[data-tech-key="${key}"]`).filter({has:frame.locator('span.spec-label',{hasText:new RegExp('^'+value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'$')})}).click();
     await frame.waitForTimeout(180);
     if(mobile) await frame.locator('#filtersClose').click();
 }
@@ -195,6 +195,23 @@ async function main(){
      if(second){await technical(frame,second.key,second.value,mobile);selection=await frame.evaluate(()=>SportSpecFilters.capture());expected=oracle(selection);actual=await rows(frame);assert.deepEqual(actual.map(r=>r.id).sort(),expected.map(r=>r.id).sort());}
      await frame.evaluate(()=>clearFilters());assert.deepEqual(await frame.evaluate(()=>SportSpecFilters.capture()),{});
     });
+    if((sport==='mtb'||sport==='bmx')&&(width===1440||width===390)){
+     await scenario('Tools & Care opens from the category menu',async()=>{
+      await page.locator('#categoryToggle').click();
+      await page.locator('#categoryChoices [data-part="Tools & Care"]').click();
+      await page.waitForURL(url=>url.searchParams.get('type')==='tools-care'&&url.searchParams.get('sport')===sport);
+      await frame.waitForFunction(()=>document.getElementById('partSelect').value==='Tools & Care');
+      const shown=await rows(frame);
+      assert(shown.length>0&&shown.every(row=>row.part==='Tools & Care'));
+     });
+     await scenario('Parts heading displays type chips',async()=>{
+      const slug=sport==='mtb'?'suspension':'brakes';
+      await page.goto(base+'/?sport='+sport+'&type='+slug);
+      frame=await(await page.waitForSelector('#skateFrame')).contentFrame();
+      await frame.locator('#kindChips').waitFor({state:'visible'});
+      await page.screenshot({path:path.join(output,`${sport}-${slug}-${width===390?'mobile':'desktop'}.png`)});
+     });
+    }
     await scenario('Quick View, retailer-first links, chart and Watch',async()=>{
      const cards=frame.locator('#cardGrid .deal-card:not(.filtered-out):not(.grouped-hide)');
      const card=cards.first();
@@ -408,6 +425,35 @@ async function main(){
       await page.goBack();
       await page.waitForFunction(()=>document.querySelector('#mtbPowerChips [data-value=""]').getAttribute('aria-pressed')==='true');
       assert.equal((await rows(page)).length,2);
+     }finally{await page.close();}
+    });
+    if(fixture.types) await check(sport,width,'Heading type chips share facet counts and browser history',async()=>{
+     const {path:report,slug,param,values}=fixture.types;
+     const page=await browser.newPage({viewport:{width,height:900},isMobile:width===390,hasTouch:width===390});
+     try{
+      await page.route('**/*',r=>new URL(r.request().url()).origin===base?r.continue():r.abort());
+      await page.goto(base+'/'+report+'?type='+slug);
+      const bar=page.locator('#kindChips');
+      await bar.waitFor({state:'visible'});
+      assert.deepEqual(await bar.locator('.tech-chip:visible').evaluateAll(chips=>
+       chips.map(chip=>[chip.dataset.value,Number(chip.dataset.count)])),
+       [['',values.length],...values.map(value=>[value,1])]);
+      for(const value of ['',...values]){
+       const count=await bar.locator(`[data-value="${value}"]`).getAttribute('data-count');
+       assert.equal(await page.locator(`#tech-kind [data-value="${value}"]`).getAttribute('data-count'),count);
+      }
+      assert.deepEqual(await bar.locator('.kind-secondary').evaluateAll(chips=>chips.map(chip=>chip.dataset.value)),
+       values.filter(value=>value.endsWith(' Parts')));
+      await bar.locator(`[data-value="${values[0]}"]`).click();
+      await page.waitForURL(url=>url.searchParams.get(param)===values[0]);
+      assert.deepEqual((await rows(page)).map(row=>row.url),[`https://example.test/${sport}/kind-0`]);
+      assert.equal(await page.locator(`#tech-kind [data-value="${values[0]}"]`).getAttribute('aria-pressed'),'true');
+      await page.goBack();
+      await page.waitForFunction(()=>document.querySelector('#kindChips [data-value=""]').getAttribute('aria-pressed')==='true');
+      assert.equal((await rows(page)).length,values.length);
+      await control(page,'partSelect','Helmets');
+      assert.equal(await bar.isVisible(),false);
+      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
      }finally{await page.close();}
     });
     await check(sport,width,'Synthetic same-variant, missing-spec, sold-out and price boundaries',async()=>{

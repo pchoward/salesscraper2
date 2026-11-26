@@ -60878,8 +60878,8 @@
             "expected_count": 16.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 5,
-            "percentage_change": -68.8,
+            "actual_count": 6,
+            "percentage_change": -62.5,
             "reason": "partial_catalog_drop"
           }
         },
@@ -61173,14 +61173,14 @@
           }
         },
         "Cambria_Protection": {
-          "count": 100,
+          "count": 99,
           "failed": false,
           "diagnostics": {
             "expected_count": 96.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 100,
-            "percentage_change": 4.2,
+            "actual_count": 99,
+            "percentage_change": 3.1,
             "reason": "normal_variation"
           }
         },
@@ -61437,14 +61437,14 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 101,
+          "count": 100,
           "failed": false,
           "diagnostics": {
             "expected_count": 100.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 101,
-            "percentage_change": 0.5,
+            "actual_count": 100,
+            "percentage_change": -0.5,
             "reason": "normal_variation"
           }
         },
@@ -62686,14 +62686,14 @@
           }
         },
         "Source BMX US_Packs": {
-          "count": 18,
+          "count": 17,
           "failed": false,
           "diagnostics": {
             "expected_count": 18.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 18,
-            "percentage_change": 0.0,
+            "actual_count": 17,
+            "percentage_change": -5.6,
             "reason": "normal_variation"
           }
         },
@@ -63323,7 +63323,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-26T00:47:11+00:00"
+      "scanned_at": "2026-11-26T08:19:15+00:00"
     }
   ],
   "baseline": {
@@ -63477,11 +63477,11 @@
     },
     "Cambria_Protection": {
       "date": "2026-11-26",
-      "count": 100
+      "count": 99
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-26",
-      "count": 101
+      "count": 100
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-26",
@@ -63549,7 +63549,7 @@
     },
     "Source BMX US_Packs": {
       "date": "2026-11-26",
-      "count": 18
+      "count": 17
     },
     "Sparky's Brands_Braking": {
       "date": "2026-11-26",
@@ -66648,7 +66648,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 100
+        "count": 99
       }
     ],
     "Cambria_Seating": [
@@ -67924,7 +67924,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 101
+        "count": 100
       }
     ],
     "Colorado Cyclist_Seating": [
@@ -73956,7 +73956,7 @@
       },
       {
         "date": "2026-11-26",
-        "count": 18
+        "count": 17
       }
     ],
     "Source BMX US_Protection": [

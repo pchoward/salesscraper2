@@ -291,6 +291,10 @@ EVO=shopify.ShopifyStore('evo','evo','https://www.evo.com',
     max_pages=60)
 
 STORES=(WORLDWIDE,FANATIK,MIKES,CAMBRIA,BIKES_ONLINE,COLORADO,)+BRAND_STORES+(LOST_CO,BICYCLE_WAREHOUSE,BIKE_MART,EVO)
+# Tools & Care (owner, 2026-11-26): every MTB store files tools, pumps,
+# lubes and cleaners there (stores/shopify.py part_for).
+for _store in STORES:
+    _store.tools_and_care=True
 
 
 def robots_policy(store):

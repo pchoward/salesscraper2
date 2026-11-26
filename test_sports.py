@@ -225,7 +225,7 @@ class BmxBrandTests(unittest.TestCase):
          "variants": [{"id": 2, "price": "74.95", "compare_at_price": "129.99"}]},
         {"title": "DefendR Fork", "vendor": "Black Ops", "handle": "defendr", "product_type": "Forks",
          "variants": [{"id": 3, "price": "79.95", "compare_at_price": "159.99"}]},
-        {"title": "Shop Tool", "vendor": "Albes", "handle": "tool", "product_type": "Tools",
+        {"title": "Shop Gift Card", "vendor": "Albes", "handle": "gift-card", "product_type": "Gift Cards",
          "variants": [{"id": 4, "price": "5", "compare_at_price": "10"}]},
         {"title": "Sold Out Bars", "vendor": "S&M", "handle": "bars", "product_type": "Bars",
          "variants": [{"id": 5, "price": "50", "compare_at_price": "90", "available": False}]},
@@ -257,7 +257,7 @@ class BmxBrandTests(unittest.TestCase):
 
         summary = shopify.feed_summary(stores.ALBES, self.FEED["products"])
         self.assertEqual((summary["products"], summary["marked_down"], summary["sold_out"]), (5, 4, 1))
-        self.assertEqual(summary["unmapped_types"], [("Tools", 1)])
+        self.assertEqual(summary["unmapped_types"], [("Gift Cards", 1)])
 
     def test_skate_titles_are_unchanged(self):
         from stores import shopify

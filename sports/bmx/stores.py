@@ -385,6 +385,10 @@ BMX_BRANDS = (
 )
 
 STORES = (ALBES, CIRCUIT, POWERS, SOURCE_US, EMPIRE) + BRAND_STORES + BIKE_SHOPS + BMX_BRANDS
+# Tools & Care (owner, 2026-11-26): tools, wax, lubes and cleaners
+# (stores/shopify.py part_for).
+for _store in STORES:
+    _store.tools_and_care = True
 
 PARTS = sports.BMX.parts
 

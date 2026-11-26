@@ -131,8 +131,9 @@ BMX = Sport(
     facets="sports.bmx.facets",
     label="BMX",
     brand="ShredDeals BMX",
+    # Tools & Care (owner, 2026-11-26): tools, pumps, lubes and cleaners.
     parts=("Bikes", "Frames & Forks", "Steering", "Drivetrain", "Wheels", "Wheel Parts", "Tires", "Seating", "Braking",
-           "Protection", "Packs"),
+           "Tools & Care", "Protection", "Packs"),
     default_part="all",
     data_dir="catalogs/bmx",
     page_path="bmx/sale_items_chart.html",
@@ -164,8 +165,9 @@ MTB = Sport(
     facets="sports.mtb.facets",
     label="MTB",
     brand="ShredDeals MTB",
+    # Tools & Care (owner, 2026-11-26): tools, pumps, lubes and cleaners.
     parts=("Bikes", "Frames", "Forks & Shocks", "Wheels", "Tires", "Drivetrain", "Brakes", "Cockpit", "Pedals",
-           "Protection", "Packs"),
+           "Tools & Care", "Protection", "Packs"),
     default_part="all",
     data_dir="catalogs/mtb",
     page_path="mtb/sale_items_chart.html",

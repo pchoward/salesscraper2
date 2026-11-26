@@ -3163,11 +3163,11 @@
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "link": 0.031,
+            "link": 0.03,
             "versions": 0.034,
             "width": 0.019
           },
-          "items": 262
+          "items": 263
         },
         "Bike Mart_Drivetrain": {
           "fields": {
@@ -3194,7 +3194,6 @@
             "pedal_material": 0.542,
             "pedal_thread": 0.583,
             "pedal_type": 0.938,
-            "versions": 0.021,
             "width": 0.25
           },
           "items": 48
@@ -3322,7 +3321,7 @@
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "link": 0.1,
+            "link": 0.096,
             "speed": 0.584,
             "width": 0.082
           },
@@ -3588,19 +3587,19 @@
           "fields": {
             "age": 1.0,
             "brand": 1.0,
-            "certification": 0.415,
-            "helmet_style": 0.34,
+            "certification": 0.425,
+            "helmet_style": 0.425,
             "image": 1.0,
-            "link": 0.132,
-            "prot_size": 1.0,
-            "protection_sizes": 1.0,
-            "protection_type": 0.566,
+            "link": 0.178,
+            "prot_size": 0.959,
+            "protection_sizes": 0.959,
+            "protection_type": 0.644,
             "protects": 1.0,
-            "rotational": 0.321,
-            "versions": 0.094,
-            "width": 0.019
+            "rotational": 0.438,
+            "versions": 0.068,
+            "width": 0.014
           },
-          "items": 53
+          "items": 73
         },
         "Mike's Bikes_Tires": {
           "fields": {
@@ -3815,20 +3814,20 @@
         "evo_Protection": {
           "fields": {
             "age": 1.0,
-            "brand": 0.972,
-            "certification": 0.057,
-            "helmet_style": 0.318,
+            "brand": 0.976,
+            "certification": 0.052,
+            "helmet_style": 0.308,
             "image": 1.0,
-            "link": 0.33,
-            "prot_size": 0.784,
-            "protection_sizes": 0.79,
-            "protection_type": 0.5,
+            "link": 0.313,
+            "prot_size": 0.768,
+            "protection_sizes": 0.773,
+            "protection_type": 0.493,
             "protects": 1.0,
-            "rotational": 0.369,
-            "versions": 0.045,
-            "width": 0.148
+            "rotational": 0.36,
+            "versions": 0.043,
+            "width": 0.123
           },
-          "items": 176
+          "items": 211
         },
         "evo_Tires": {
           "fields": {
@@ -4120,18 +4119,23 @@
       "APPAREL/HEADWEAR/CAP",
       "APPAREL/HEADWEAR/HEADWEAR ACCESSORIES",
       "APPAREL/HELMETS/ROAD HELMETS",
+      "APPAREL/HELMETS/ROAD HELMETS/AGILIS",
       "APPAREL/HELMETS/ROAD HELMETS/ARIES",
+      "APPAREL/HELMETS/ROAD HELMETS/CERRO",
       "APPAREL/HELMETS/ROAD HELMETS/CIELO",
       "APPAREL/HELMETS/ROAD HELMETS/ECLIPSE",
       "APPAREL/HELMETS/ROAD HELMETS/HELIOS",
       "APPAREL/HELMETS/ROAD HELMETS/NETWORK",
       "APPAREL/HELMETS/ROAD HELMETS/OMNE AIR",
       "APPAREL/HELMETS/ROAD HELMETS/PROTONE ICON",
+      "APPAREL/HELMETS/ROAD HELMETS/SPHERE",
+      "APPAREL/HELMETS/ROAD HELMETS/TONIC",
       "APPAREL/HELMETS/ROAD HELMETS/TRACE",
       "APPAREL/HELMETS/ROAD HELMETS/UTOPIA",
       "APPAREL/HELMETS/ROAD HELMETS/VALEGRO",
       "APPAREL/HELMETS/ROAD HELMETS/VENTRAL AIR",
       "APPAREL/HELMETS/ROAD HELMETS/VENTRAL LITE",
+      "APPAREL/HELMETS/ROAD HELMETS/Z1",
       "APPAREL/SHOE COVERS/SHOE COVERS",
       "APPAREL/SHOES/FOOTBEDS",
       "APPAREL/SHOES/MOUNTAIN SHOES",
@@ -4143,6 +4147,7 @@
       "APPAREL/SWIM",
       "APPAREL/TOPS/BASELAYERS",
       "APPAREL/TOPS/JACKETS",
+      "APPAREL/TOPS/JERSEY",
       "APPAREL/TOPS/JERSEYS",
       "APPAREL/TOPS/VESTS",
       "APPAREL/WARMERS",
