@@ -1,5 +1,6 @@
-"""MTB drops front derailleurs and left-only shifters (owner, 2026-11-26:
-mountain bikes are 1x; Fanatik, an MTB-only shop, carries none)."""
+"""MTB drops front derailleurs and left-only shifters, triples and rim
+brakes (owner, 2026-11-26: mountain bikes are 1x and disc; Fanatik, an
+MTB-only shop, carries no front derailleur)."""
 
 import unittest
 
@@ -41,6 +42,42 @@ class FrontShiftingTests(unittest.TestCase):
             ("Wheels Manufacturing Derailleur Hanger", "Derailleur Hangers"),
         ):
             self.assertIsNone(filter_reason(name, "Drivetrain", product_type=kind), name)
+
+
+class TriplesAndRimBrakesTests(unittest.TestCase):
+    """Owner, 2026-11-26: triples, V-brakes and road leftovers go too."""
+
+    def test_triples_go(self):
+        for name, part, kind in (
+            ("Shimano Acera M361 Square Taper Triple Crankset - Black", "Drivetrain", "MTB Cranksets"),
+            ("Origin8 Alloy Triple Crank Arm Set 165mm 113.5mm Square Taper JIS crankset", "Drivetrain", "Cranksets and Arms"),
+            ("Shimano SLX M665/M660 36T 9-speed Middle Chainring - 104BCD", "Drivetrain", "Chainrings"),
+            ("SRAM X4 3x8 Spd Trigger Shifter Set", "Drivetrain", "MTB Gear Shifters"),
+            ("SunRace M406 ST Trigger Brake/Shift Lever Set - 3x7-Speed For V-Brakes Black", "Brakes", "Brake/Shift Lever"),
+        ):
+            self.assertIsNotNone(filter_reason(name, part, product_type=kind), name)
+
+    def test_rim_brakes_go(self):
+        for name, part, kind in (
+            ("Shimano BR-T610 V-Brake - Front - Black", "Brakes", "MTB V-Brakes"),
+            ("Tektro 855AL Linear Pull Brake - Front or Rear Black", "Brakes", "Linear Pull Brakes"),
+            ("Origin8 Pro Force Cantilever Frt or Rr Black", "Brakes", "Brakes"),
+            ("Shimano T4000 MTB Brake Levers - Pair - Black", "Brakes", "MTB V-Brake Levers"),
+            ("Avid 20R V-Brake Pads", "Wheels", "Rim Brake Parts"),
+            ("Zipp Speed Weaponry Tangente Platinum Pro Evo Brake Pad Inserts", "Wheels", "COMPONENTS/BRAKES/RIM PADS"),
+        ):
+            self.assertEqual(filter_reason(name, part, product_type=kind), "V-brake or rim brake part", name)
+
+    def test_modern_parts_stay(self):
+        for name, part, kind in (
+            ("Race Face Turbine Cinch 30 2x11 Crankset", "Drivetrain", "MTB Cranksets"),
+            ("SRAM Eagle 1x12 Trigger", "Drivetrain", "Shifters"),
+            ("Shimano Deore M6100 Disc Brake", "Brakes", "Disc Brakes"),
+            ("Origin8 Alloy braze-on Insert Mech. Disc or V-Brake Black", "Brakes", "Cables and Housing"),
+            ("VP Components VP-S1 Triple Trainer Exercise Pedal Kit - Black", "Pedals", "Flat Pedals"),
+            ("Shimano Deore M6100 Brake Pads - Resin", "Brakes", "Disc Brake Pads"),
+        ):
+            self.assertIsNone(filter_reason(name, part, product_type=kind), name)
 
 
 if __name__ == "__main__":
