@@ -450,3 +450,35 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
 **Tests:**
 - Update `test_promos.py` and the strip's browser checks for the removed collapse.
 - A browser check at 1366 px, 1920 px and 390 px with 4 offers: all 4 are visible without clicking; Dismiss on one leaves 3; a reload keeps that dismissal.
+
+## 27. Promo strip as one row of compact chips (owner, 2026-11-26)
+**Supersedes the layout in task 26** (its "nothing folded behind +N more" goal stays). If 26 isn't built yet, build this instead.
+
+**Why:** the strip (tasks 16, 20, 26) is a grid of uneven boxes. Skate Warehouse's tiered sale wraps to three lines while CCS's code takes one, so the spacing is jagged and the first row of deals is pushed down the page (owner's screenshot, Skate, 2026-11-26: four offers take about 90 px on desktop).
+
+**Wanted (`page.py` `_promo_strip`, `page.js` `initPromoStrip`, CSS):**
+1. **One horizontal row of chips**, directly above the cards. It scrolls sideways (`overflow-x: auto; white-space: nowrap`, scroll-snap per chip), the same on desktop and phones. Each chip is one line:
+   - Code offer: `CCS · 20% off · [BFCM26] ×`
+   - No-code sale: `SkateWarehouse · Up to 25% off · No code ⓘ ×`
+   - Headline: "Up to N% off" when `tiers` has more than one entry, else "N% off" (or "$N off" from `amount`). `percent` already holds the biggest tier.
+   - Store name links to the promo's `url`, as now.
+2. **The code chip copies on click.** Remove the separate Copy button. The code is the button (`<button>` holding a `<code>`, `aria-label="Copy code BFCM26"`). On click, show a short "Copied!" tooltip for about 1.5 s, and announce it through an `aria-live="polite"` region.
+3. **Details go in a popover.** Put the full `promos.describe(promo, code=False)` line plus "applied at checkout" behind an `ⓘ` button on the chip, e.g. "25% off shoes, clothing & accessories, 15% off decks, completes & parts · Until Dec 2 · Applied at checkout". It opens on hover and focus on desktop and on tap on phones; Esc closes it. Show it only when it adds something beyond the headline (tiers, `reach`, or an end date).
+4. **Dismiss becomes a subtle `×`** at the chip's right end (`aria-label="Hide CCS offer"`). Keep the `shreddeals.promo-dismissed` key and its `[store, code]` format, so earlier dismissals stay.
+5. **One toggle for the whole strip.** The label reads "Sales & promos (4)", followed by a "Hide ▴" / "Show ▾" button that collapses the row to just the label line. Store the choice under a **new** `localStorage` key (for example `shreddeals.promo-strip-collapsed`). Don't change existing keys, URL parameters or the saved-view format.
+6. **Follow the store filter.** When the visitor's store filter (the `store` state in `query_state.py` and the STORES pills) names one or more stores, show only those stores' offers, and hide the strip when none have one. "All stores" shows every offer. Match on the store name (`data-store`) the same way cards do. Update live when the filter changes, with no reload.
+7. **Nothing hidden by accident (task 26's point).** Order stays: no-code sales first, then codes, biggest percent first, then store A–Z. When chips overflow the row, show a right-edge fade and a small "→ N more" button that scrolls the row. On desktop, offers that fit must all be visible without scrolling.
+8. **Look:** each chip has a 1px border in the card border colour, a light tint (amber for no-code sales, blue for codes), and the same radius as the cards. The code sits in a dashed-border monospace pill, so it reads as a coupon. Define the colours as tokens with dark-mode values, like the rest of `page.css`. The page doesn't use Tailwind, so translate the owner's `border-slate-200` / `bg-blue-50/60` / `border-dashed border-blue-400` into tokens. The strip should be one chip high (about 36–40 px plus the label) at every width.
+
+**Data:** unchanged (`promos.json`, `promos.describe`). Expired offers (`data-ends`) still hide.
+
+**Tests:**
+- Update `test_promos.py` for the new markup (no Copy button; the code is a button; the `ⓘ` details hold the describe() line).
+- Browser checks at 1366 px, 1920 px and 390 px with 4 fixture offers:
+  - the strip is one row high;
+  - clicking a code puts it on the clipboard and shows "Copied!";
+  - the `ⓘ` popover shows the tiers and the end date;
+  - `×` hides one offer and a reload keeps it hidden;
+  - Hide collapses the strip and a reload keeps it collapsed;
+  - picking a store with no offer hides the strip, and picking CCS shows only CCS;
+  - the overflow cue appears when the chips don't fit at 390 px.
