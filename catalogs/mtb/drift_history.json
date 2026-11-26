@@ -3520,6 +3520,14 @@
           },
           "items": 70
         },
+        "Fanatik_Tools & Care": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "width": 0.042
+          },
+          "items": 24
+        },
         "Fanatik_Wheels": {
           "fields": {
             "brand": 1.0,
@@ -3604,14 +3612,21 @@
         "Mike's Bikes_Tires": {
           "fields": {
             "brand": 1.0,
-            "casing": 0.231,
+            "casing": 0.214,
             "image": 1.0,
-            "tire_width": 0.692,
-            "tubeless": 0.077,
-            "wheel_size": 0.692,
-            "width": 0.077
+            "tire_width": 0.643,
+            "tubeless": 0.071,
+            "wheel_size": 0.643,
+            "width": 0.071
           },
-          "items": 13
+          "items": 14
+        },
+        "Mike's Bikes_Tools & Care": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0
+          },
+          "items": 53
         },
         "Mike's Bikes_Wheels": {
           "fields": {
@@ -3710,16 +3725,25 @@
         "The Lost Co._Tires": {
           "fields": {
             "brand": 1.0,
-            "casing": 0.771,
+            "casing": 0.753,
             "image": 1.0,
             "link": 0.009,
-            "tire_width": 0.953,
+            "tire_width": 0.932,
             "tubeless": 0.037,
             "versions": 0.009,
-            "wheel_size": 0.949,
-            "width": 0.953
+            "wheel_size": 0.927,
+            "width": 0.932
           },
-          "items": 214
+          "items": 219
+        },
+        "The Lost Co._Tools & Care": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.07,
+            "width": 0.174
+          },
+          "items": 86
         },
         "The Lost Co._Wheels": {
           "fields": {
@@ -3832,15 +3856,15 @@
         "evo_Tires": {
           "fields": {
             "brand": 1.0,
-            "casing": 0.19,
+            "casing": 0.178,
             "image": 1.0,
-            "link": 0.405,
-            "tire_width": 0.738,
-            "tubeless": 0.19,
-            "versions": 0.048,
-            "wheel_size": 0.952
+            "link": 0.378,
+            "tire_width": 0.689,
+            "tubeless": 0.2,
+            "versions": 0.044,
+            "wheel_size": 0.889
           },
-          "items": 42
+          "items": 45
         },
         "evo_Wheels": {
           "fields": {
