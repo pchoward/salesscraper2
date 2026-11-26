@@ -17139,6 +17139,8 @@
     "all_time_low": 119.99,
     "all_time_low_date": "2026-11-19",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Platform-SideA_1400x_c449d664-b966-4eda-a47d-983563e71061.webp?v=1742289361",
     "prices": {
       "2026-11-19": 119.99,
@@ -38236,11 +38238,11 @@
     "observation_count": 1,
     "all_time_low": 20.95,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/products/WTB-Wafel-Clamp-On-Grip_Black_2520-_2520Black_5a8e28f9-c50b-4dca-ae40-b13733119102.jpg?v=1623831265",
     "prices": {
       "2026-11-26": 20.95
-    },
-    "stage": "new"
+    }
   },
   "https://cambriabike.com/products/wtb-wavelength-mtb-grip-black": {
     "name": "WTB Wavelength MTB Grip - Black",
@@ -39689,11 +39691,11 @@
     "observation_count": 1,
     "all_time_low": 5999.77,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/SALE-DEMO-27-Moterra--2_-XL-DEMO-C6505GU20XL.jpg?v=1795635989",
     "prices": {
       "2026-11-26": 5999.77
-    },
-    "stage": "new"
+    }
   },
   "https://mikesbikes.com/products/cannondale-moterra-4": {
     "name": "Cannondale Moterra 4",
@@ -41460,6 +41462,36 @@
       "2026-11-26": 146.77
     }
   },
+  "https://mikesbikes.com/products/fox-crossframe-pro-mips-helmet": {
+    "name": "Fox Crossframe Pro MIPS Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 183.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31446_008_1.jpg?v=1792390498",
+    "prices": {
+      "2026-11-26": 183.99
+    },
+    "stage": "new"
+  },
+  "https://mikesbikes.com/products/fox-dropframe-pro-v2-helmet": {
+    "name": "Fox Dropframe Pro V2 Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 271.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31456255_2.webp?v=1747270960",
+    "prices": {
+      "2026-11-26": 271.99
+    },
+    "stage": "new"
+  },
   "https://mikesbikes.com/products/fox-enduro-d30-elbow-pads": {
     "name": "Fox Enduro D30 Elbow Pads",
     "store": "Mike's Bikes",
@@ -41498,6 +41530,21 @@
       "2026-11-25": 50.77,
       "2026-11-26": 50.77
     }
+  },
+  "https://mikesbikes.com/products/fox-enduro-knee-sleeve": {
+    "name": "Fox Enduro Knee Sleeve",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 78.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38043001_1.webp?v=1769726762",
+    "prices": {
+      "2026-11-26": 78.99
+    },
+    "stage": "new"
   },
   "https://mikesbikes.com/products/fox-enduro-pro-elbow-guards": {
     "name": "Fox Enduro Pro Elbow Guards",
@@ -41538,6 +41585,21 @@
       "2026-11-26": 49.77
     }
   },
+  "https://mikesbikes.com/products/fox-flexair-glove-2026": {
+    "name": "Fox Flexair Glove",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 43.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Flexair_Glove_Black_1.webp?v=1775591054",
+    "prices": {
+      "2026-11-26": 43.99
+    },
+    "stage": "new"
+  },
   "https://mikesbikes.com/products/fox-launch-elbow-pads": {
     "name": "Fox Launch Elbow Pads",
     "store": "Mike's Bikes",
@@ -41547,7 +41609,7 @@
     "observation_count": 25,
     "all_time_low": 71.99,
     "all_time_low_date": "2026-11-02",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33834001_1.webp?v=1747271141",
     "prices": {
       "2026-11-02": 71.99,
@@ -41574,8 +41636,23 @@
       "2026-11-23": 71.99,
       "2026-11-24": 71.99,
       "2026-11-25": 71.99,
-      "2026-11-26": 71.99
+      "2026-11-26": 79.99
     }
+  },
+  "https://mikesbikes.com/products/fox-launch-elite-knee-pads": {
+    "name": "Fox Launch Elite Knee Pads",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 159.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Launch_Elite_Knee_Pads_1.webp?v=1747345939",
+    "prices": {
+      "2026-11-26": 159.99
+    },
+    "stage": "new"
   },
   "https://mikesbikes.com/products/fox-peewee-titan-elbow-guards": {
     "name": "Fox Peewee Titan Elbow Guards",
@@ -41615,18 +41692,46 @@
       "2026-11-23": 15.99
     }
   },
+  "https://mikesbikes.com/products/fox-proframe": {
+    "name": "Fox Proframe",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 271.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_1.webp?v=1788904134",
+    "prices": {
+      "2026-11-26": 271.99
+    },
+    "stage": "new"
+  },
+  "https://mikesbikes.com/products/fox-proframe-rs-helmet-1": {
+    "name": "Fox Proframe RS Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 327.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Fox-Raicing-Proframe-Full-Face-Helmet_Black_01.jpg?v=1747270973",
+    "prices": {
+      "2026-11-26": 327.99
+    },
+    "stage": "new"
+  },
   "https://mikesbikes.com/products/fox-rampage-helmet-2026": {
     "name": "Fox Rampage Helmet",
     "store": "Mike's Bikes",
     "part": "Protection",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-19",
-    "observation_count": 17,
+    "last_seen": "2026-11-26",
+    "observation_count": 18,
     "all_time_low": 181.77,
     "all_time_low_date": "2026-11-03",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-20",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_1.jpg?v=1771627796",
     "prices": {
       "2026-11-03": 181.77,
@@ -41645,7 +41750,8 @@
       "2026-11-16": 181.77,
       "2026-11-17": 181.77,
       "2026-11-18": 181.77,
-      "2026-11-19": 181.77
+      "2026-11-19": 181.77,
+      "2026-11-26": 215.99
     }
   },
   "https://mikesbikes.com/products/fox-rampage-rs-helmet-2026": {
@@ -41722,6 +41828,21 @@
       "2026-11-26": 23.77
     }
   },
+  "https://mikesbikes.com/products/fox-ranger-gloves-2026": {
+    "name": "Fox Ranger Gloves",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 31.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33603_089_1.webp?v=1770245675",
+    "prices": {
+      "2026-11-26": 31.99
+    },
+    "stage": "new"
+  },
   "https://mikesbikes.com/products/fox-ranger-mtb-fire-gloves": {
     "name": "Fox Ranger Fire Gloves",
     "store": "Mike's Bikes",
@@ -41797,6 +41918,66 @@
       "2026-11-25": 19.77,
       "2026-11-26": 19.77
     }
+  },
+  "https://mikesbikes.com/products/fox-speedframe": {
+    "name": "Fox Speedframe",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 103.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_008_1.webp?v=1788911273",
+    "prices": {
+      "2026-11-26": 103.99
+    },
+    "stage": "new"
+  },
+  "https://mikesbikes.com/products/fox-speedframe-pro-helmet": {
+    "name": "Fox Speedframe Pro Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 179.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/fox-speedframe-pro-helmet-hero_frost.jpg?v=1776055972",
+    "prices": {
+      "2026-11-26": 179.99
+    },
+    "stage": "new"
+  },
+  "https://mikesbikes.com/products/fox-speedframe-rs-helmet": {
+    "name": "Fox Speedframe RS Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 263.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/35962067_1.webp?v=1763093745",
+    "prices": {
+      "2026-11-26": 263.99
+    },
+    "stage": "new"
+  },
+  "https://mikesbikes.com/products/fox-youth-ranger-gloves-2026": {
+    "name": "Fox Youth Ranger Gloves",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 27.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33614_001_1.webp?v=1788374293",
+    "prices": {
+      "2026-11-26": 27.99
+    },
+    "stage": "new"
   },
   "https://mikesbikes.com/products/g-form-pro-rugged-2-elbow-guards": {
     "name": "G-Form Pro Rugged 2 Elbow Guards",
@@ -41989,6 +42170,21 @@
       "2026-11-26": 95.95
     }
   },
+  "https://mikesbikes.com/products/giro-coalition-spherical-helmet": {
+    "name": "Giro Coalition Spherical Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 279.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38938_255_2.jpg?v=1769727907",
+    "prices": {
+      "2026-11-26": 279.99
+    },
+    "stage": "new"
+  },
   "https://mikesbikes.com/products/giro-dime-mips-helmet-youth": {
     "name": "Giro Dime MIPS Helmet (Youth)",
     "store": "Mike's Bikes",
@@ -42072,13 +42268,11 @@
     "store": "Mike's Bikes",
     "part": "Protection",
     "first_seen": "2026-11-13",
-    "last_seen": "2026-11-24",
-    "observation_count": 12,
+    "last_seen": "2026-11-26",
+    "observation_count": 13,
     "all_time_low": 63.99,
     "all_time_low_date": "2026-11-13",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_256_2.webp?v=1780513538",
     "prices": {
       "2026-11-13": 63.99,
@@ -42092,7 +42286,8 @@
       "2026-11-21": 63.99,
       "2026-11-22": 63.99,
       "2026-11-23": 63.99,
-      "2026-11-24": 63.99
+      "2026-11-24": 63.99,
+      "2026-11-26": 67.99
     }
   },
   "https://mikesbikes.com/products/giro-havoc-glove": {
@@ -42172,6 +42367,36 @@
       "2026-11-26": 149.95
     }
   },
+  "https://mikesbikes.com/products/giro-montaro-mips-iii": {
+    "name": "Giro Montaro Mips III",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 159.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_245_1.webp?v=1762282153",
+    "prices": {
+      "2026-11-26": 159.99
+    },
+    "stage": "new"
+  },
+  "https://mikesbikes.com/products/giro-montaro-pro-helmet": {
+    "name": "Giro Montaro Pro Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 239.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_255_2.webp?v=1786485542",
+    "prices": {
+      "2026-11-26": 239.99
+    },
+    "stage": "new"
+  },
   "https://mikesbikes.com/products/giro-scamp-mips-ii-helmet-2026": {
     "name": "Giro Scamp Mips II Helmet",
     "store": "Mike's Bikes",
@@ -42238,6 +42463,21 @@
       "2026-11-25": 119.95,
       "2026-11-26": 119.95
     }
+  },
+  "https://mikesbikes.com/products/giro-tremor-mips-child-helmet-2026": {
+    "name": "Giro Tremor Mips Child Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 59.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38949_151_2.jpg?v=1771630337",
+    "prices": {
+      "2026-11-26": 59.99
+    },
+    "stage": "new"
   },
   "https://mikesbikes.com/products/gx-eagle-rear-derailleur-lunar-long-cage": {
     "name": "SRAM GX Eagle Rear Derailleur (12-Speed)",
@@ -42956,6 +43196,36 @@
       "2026-11-25": 64.95,
       "2026-11-26": 64.95
     }
+  },
+  "https://mikesbikes.com/products/lazer-coyote-kineticore-helmet": {
+    "name": "Lazer Coyote KinetiCore Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 89.99,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/pvpqtkshg84gliqanin9_1800x1800_c0c654a5-bcf6-4ad6-8750-c7325e329220.webp?v=1772149930",
+    "prices": {
+      "2026-11-26": 89.99
+    },
+    "stage": "new"
+  },
+  "https://mikesbikes.com/products/lazer-finch-kineticore-kids-helmet": {
+    "name": "Lazer Finch Kineticore Kids Helmet",
+    "store": "Mike's Bikes",
+    "part": "Protection",
+    "first_seen": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 1,
+    "all_time_low": 63.74,
+    "all_time_low_date": "2026-11-26",
+    "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/objmilhrsudm0io33j0f_1800x1800_7876aaed-6754-4e72-8253-7e0f3adcf86c.webp?v=1779823145",
+    "prices": {
+      "2026-11-26": 63.74
+    },
+    "stage": "new"
   },
   "https://mikesbikes.com/products/m53-shifter-set-black-7x3-speed": {
     "name": "SunRace M53 7 Speed Shifter Set (7-Speed)",
@@ -51284,11 +51554,11 @@
     "observation_count": 1,
     "all_time_low": 81.95,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/STeKyDCU.jpg?v=1794262710",
     "prices": {
       "2026-11-26": 81.95
-    },
-    "stage": "new"
+    }
   },
   "https://mikesbikes.com/products/uswe-waist-2l-hip-pack": {
     "name": "Uswe Waist 2L Hip Pack",
@@ -51299,11 +51569,11 @@
     "observation_count": 1,
     "all_time_low": 49.49,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/USWE-WAIST-2-HIP-PACK-Red-FLANNEL_003.webp?v=1794262411",
     "prices": {
       "2026-11-26": 49.49
-    },
-    "stage": "new"
+    }
   },
   "https://mikesbikes.com/products/vice-grips-sl": {
     "name": "BikeSmart Vice Grip SL",
@@ -53795,17 +54065,16 @@
     "store": "Bike Mart",
     "part": "Bikes",
     "first_seen": "2026-11-25",
-    "last_seen": "2026-11-25",
-    "observation_count": 1,
-    "all_time_low": 10499.93,
-    "all_time_low_date": "2026-11-25",
-    "stage": "new",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
+    "last_seen": "2026-11-26",
+    "observation_count": 2,
+    "all_time_low": 9499.93,
+    "all_time_low_date": "2026-11-26",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
     "width": 9.9,
     "prices": {
-      "2026-11-25": 10499.93
+      "2026-11-25": 10499.93,
+      "2026-11-26": 9499.93
     }
   },
   "https://www.bikemart.com/products/2026-slash-9-9-x0-axs-t-type-gen-6-full-suspension-mountain-bike": {
@@ -53813,13 +54082,11 @@
     "store": "Bike Mart",
     "part": "Bikes",
     "first_seen": "2026-11-12",
-    "last_seen": "2026-11-25",
-    "observation_count": 4,
-    "all_time_low": 7799.93,
-    "all_time_low_date": "2026-11-12",
+    "last_seen": "2026-11-26",
+    "observation_count": 5,
+    "all_time_low": 6999.93,
+    "all_time_low_date": "2026-11-26",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
     "width": 9.9,
     "length": 0.0,
@@ -53827,7 +54094,8 @@
       "2026-11-12": 7799.93,
       "2026-11-13": 7799.93,
       "2026-11-14": 7799.93,
-      "2026-11-25": 7799.93
+      "2026-11-25": 7799.93,
+      "2026-11-26": 6999.93
     }
   },
   "https://www.bikemart.com/products/2026-stumpjumper-15-expert-di2": {
@@ -54228,13 +54496,11 @@
     "store": "Bike Mart",
     "part": "Cockpit",
     "first_seen": "2026-11-13",
-    "last_seen": "2026-11-25",
-    "observation_count": 11,
+    "last_seen": "2026-11-26",
+    "observation_count": 12,
     "all_time_low": 69.99,
     "all_time_low_date": "2026-11-13",
     "stage": "all_time_low",
-    "miss_streak": 1,
-    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SM0844.jpg?v=1762333023",
     "prices": {
       "2026-11-13": 69.99,
@@ -54247,7 +54513,8 @@
       "2026-11-21": 69.99,
       "2026-11-23": 69.99,
       "2026-11-24": 69.99,
-      "2026-11-25": 69.99
+      "2026-11-25": 69.99,
+      "2026-11-26": 69.99
     }
   },
   "https://www.bikemart.com/products/cane-creek-seatpost-shim-30-9-to-34-9mm": {
@@ -55280,11 +55547,11 @@
     "observation_count": 1,
     "all_time_low": 15.93,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/14211_A_1_Kovee_Silicone_Grip.jpg?v=1762252768",
     "prices": {
       "2026-11-26": 15.93
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikemart.com/products/grip-bontrager-xr-trail-comp-recycled-plastic-volt": {
     "name": "Grip Bontrager XR Trail Comp Recycled Plastic Volt",
@@ -76206,11 +76473,11 @@
     "observation_count": 1,
     "all_time_low": 27.59,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/180204.jpg?v=1762278091",
     "prices": {
       "2026-11-26": 27.59
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikemart.com/products/origin8-track-cog-16t-x-1-8": {
     "name": "Origin8 Track Cog 16T x 1/8`",
@@ -91280,11 +91547,11 @@
     "observation_count": 1,
     "all_time_low": 249.99,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/33842255_2_d3c9fcec-d112-46a8-9855-a895ce1321c0.webp?v=1792119264",
     "prices": {
       "2026-11-26": 249.99
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikesonline.com/products/fox-purevue-goggles": {
     "name": "Fox Purevue Goggles",
@@ -91333,11 +91600,11 @@
     "observation_count": 1,
     "all_time_low": 199.99,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/FoxSpeedframeRSHelmet_1.webp?v=1792157520",
     "prices": {
       "2026-11-26": 199.99
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikesonline.com/products/fox-transfer-sl-factory-seatpost": {
     "name": "Fox Transfer SL Factory Seatpost",
@@ -94947,11 +95214,11 @@
     "observation_count": 1,
     "all_time_low": 99.99,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0847/4066/9732/files/engage-helmet_matteBlack_3Q_c0f15646-ee46-43f6-8632-e45c710d5dba-Photoroom.jpg?v=1792043144",
     "prices": {
       "2026-11-26": 99.99
-    },
-    "stage": "new"
+    }
   },
   "https://www.bikesonline.com/products/smith-forefront-2-mips-helmet": {
     "name": "Smith Forefront 2 MIPS Helmet",
@@ -118293,6 +118560,8 @@
     "all_time_low": 94.86,
     "all_time_low_date": "2026-11-20",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00635.jpg?v=1795327841",
     "width": 29.0,
     "length": 2.5,
@@ -120556,6 +120825,8 @@
     "all_time_low": 249.0,
     "all_time_low_date": "2026-11-03",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_01_90c5d87f-420f-422a-a924-499806a3386b.webp?v=1765389124",
     "prices": {
       "2026-11-03": 249.0,
@@ -121119,6 +121390,8 @@
     "all_time_low": 72.95,
     "all_time_low_date": "2026-11-20",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111_ac175932-a6f5-414a-9bca-fba7c08414ef.jpg?v=1795331319",
     "width": 29.0,
     "length": 2.4,
@@ -125870,11 +126143,11 @@
     "observation_count": 1,
     "all_time_low": 17.99,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-996572.jpg?v=1767757207",
     "prices": {
       "2026-11-26": 17.99
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/236305-troy-lee-designs-ace-bike-gloves": {
     "name": "Troy Lee Designs Ace Bike Gloves",
@@ -126454,11 +126727,11 @@
     "observation_count": 1,
     "all_time_low": 44.98,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1137039.jpg?v=1767734624",
     "prices": {
       "2026-11-26": 44.98
-    },
-    "stage": "new"
+    }
   },
   "https://www.evo.com/products/245713-pro-stealth-offroad-saddle": {
     "name": "PRO Stealth Offroad Saddle",
@@ -129731,6 +130004,8 @@
     "all_time_low": 60.95,
     "all_time_low_date": "2026-11-22",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-26",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187036.jpg?v=1767736711",
     "prices": {
       "2026-11-22": 60.95,
@@ -176933,11 +177208,11 @@
     "observation_count": 1,
     "all_time_low": 34.0,
     "all_time_low_date": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0018/1374/1668/files/sram-eagle-70-t-type-flattop-chain-12-speed-includes-powerlock-sram-the-lost-co-002518067011-710845904691-243386.jpg?v=1743199611",
     "prices": {
       "2026-11-26": 34.0
-    },
-    "stage": "new"
+    }
   },
   "https://www.thelostco.com/products/sram-eagle-axs-rear-derailleur-battery-cover": {
     "name": "SRAM Eagle AXS Rear Derailleur Battery Cover",

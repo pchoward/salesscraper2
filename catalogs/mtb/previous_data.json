@@ -45298,6 +45298,8 @@
       "protection_sizes": [
         "S",
         "M",
+        "L",
+        "XL",
         "XXL"
       ],
       "technical_offers": [
@@ -45351,6 +45353,91 @@
               "XXL"
             ]
           }
+        },
+        {
+          "variant_id": 43193159778373,
+          "price": 47.99,
+          "compare": 54.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XXL"
+            ]
+          }
+        },
+        {
+          "variant_id": 43193159811141,
+          "price": 47.99,
+          "compare": 54.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 43193159843909,
+          "price": 47.99,
+          "compare": 54.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43193159876677,
+          "price": 47.99,
+          "compare": 54.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43193159909445,
+          "price": 47.99,
+          "compare": 54.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
         }
       ],
       "technical_specs": {
@@ -45361,8 +45448,10 @@
           "Adult"
         ],
         "prot_size": [
+          "L",
           "M",
           "S",
+          "XL",
           "XXL"
         ]
       }
@@ -46304,6 +46393,7 @@
       "protection_type": "Helmet",
       "protection_sizes": [
         "S",
+        "M",
         "L"
       ],
       "technical_offers": [
@@ -46358,6 +46448,162 @@
               "L"
             ]
           }
+        },
+        {
+          "variant_id": 43765018755141,
+          "price": 95.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Road / commuter"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765018787909,
+          "price": 95.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Road / commuter"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765018820677,
+          "price": 95.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Road / commuter"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765018656837,
+          "price": 95.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Road / commuter"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765018689605,
+          "price": 95.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Road / commuter"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765018722373,
+          "price": 95.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Road / commuter"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
         }
       ],
       "technical_specs": {
@@ -46378,6 +46624,7 @@
         ],
         "prot_size": [
           "L",
+          "M",
           "S"
         ]
       }
@@ -47712,6 +47959,230 @@
         "XL"
       ],
       "technical_offers": [
+        {
+          "variant_id": 43734097592389,
+          "price": 575.99,
+          "compare": 699.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "ASTM F1952 (downhill)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097625157,
+          "price": 575.99,
+          "compare": 699.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "ASTM F1952 (downhill)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097657925,
+          "price": 575.99,
+          "compare": 699.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "ASTM F1952 (downhill)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097690693,
+          "price": 575.99,
+          "compare": 699.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "ASTM F1952 (downhill)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097723461,
+          "price": 575.99,
+          "compare": 699.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "ASTM F1952 (downhill)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097756229,
+          "price": 575.99,
+          "compare": 699.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "ASTM F1952 (downhill)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097788997,
+          "price": 575.99,
+          "compare": 699.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "ASTM F1952 (downhill)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097821765,
+          "price": 575.99,
+          "compare": 699.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "ASTM F1952 (downhill)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
         {
           "variant_id": 43734097854533,
           "price": 489.77,
@@ -50465,7 +50936,7 @@
     {
       "name": "Fox Launch Elbow Pads",
       "url": "https://mikesbikes.com/products/fox-launch-elbow-pads",
-      "price_new": "71.99",
+      "price_new": "79.99",
       "price_old": "89.99",
       "availability": "In stock",
       "part": "Protection",
@@ -50485,7 +50956,7 @@
       "technical_offers": [
         {
           "variant_id": 41963030839365,
-          "price": 71.99,
+          "price": 79.99,
           "compare": 89.99,
           "available": true,
           "specs": {
@@ -50505,7 +50976,7 @@
         },
         {
           "variant_id": 41963031035973,
-          "price": 71.99,
+          "price": 79.99,
           "compare": 89.99,
           "available": true,
           "specs": {
@@ -50541,6 +51012,3324 @@
       }
     },
     {
+      "name": "Fox Enduro Knee Sleeve",
+      "url": "https://mikesbikes.com/products/fox-enduro-knee-sleeve",
+      "price_new": "78.99",
+      "price_old": "94.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/PROTECTIVE GEAR/KNEE PADS",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38043001_1.webp?v=1769726762",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38043001_1.webp?v=1769726762",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38043001_2.webp?v=1769726785"
+      ],
+      "protection_type": "Knee Pads",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 43734092447813,
+          "price": 78.99,
+          "compare": 94.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734092480581,
+          "price": 78.99,
+          "compare": 94.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734092513349,
+          "price": 78.99,
+          "compare": 94.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734092546117,
+          "price": 78.99,
+          "compare": 94.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Knees"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S",
+          "XL"
+        ]
+      }
+    },
+    {
+      "name": "Fox Launch Elite Knee Pads",
+      "url": "https://mikesbikes.com/products/fox-launch-elite-knee-pads",
+      "price_new": "159.99",
+      "price_old": "184.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/PROTECTIVE GEAR/KNEE PADS",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Launch_Elite_Knee_Pads_1.webp?v=1747345939",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Launch_Elite_Knee_Pads_1.webp?v=1747345939",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Launch_Elite_Knee_Pads_2.webp?v=1747345950",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Launch_Elite_Knee_Pads_4.webp?v=1747345962",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Launch_Elite_Knee_Pads_3.webp?v=1747345973"
+      ],
+      "protection_type": "Knee Pads",
+      "protection_sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 43734096511045,
+          "price": 159.99,
+          "compare": 184.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1621 (CE impact armor)"
+            ],
+            "prot_size": [
+              "XS"
+            ]
+          }
+        },
+        {
+          "variant_id": 42326986653765,
+          "price": 159.99,
+          "compare": 184.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1621 (CE impact armor)"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 42750884544581,
+          "price": 159.99,
+          "compare": 184.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1621 (CE impact armor)"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 42750884577349,
+          "price": 159.99,
+          "compare": 184.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1621 (CE impact armor)"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 42750884610117,
+          "price": 159.99,
+          "compare": 184.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1621 (CE impact armor)"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Knees"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "EN 1621 (CE impact armor)"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S",
+          "XL",
+          "XS"
+        ]
+      }
+    },
+    {
+      "name": "Giro Fixture Mips II Helmet",
+      "url": "https://mikesbikes.com/products/giro-fixture-mips-ii-helmet-2026",
+      "price_new": "67.99",
+      "price_old": "84.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/FIXTURE",
+      "link": "https://mikesbikes.com/products/giro-fixture-mips-ii-helmet-2026?variant=45090289582149",
+      "brand": "Giro",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_256_2.webp?v=1780513538",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_256_2.webp?v=1780513538",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_256_3.webp?v=1780514195",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_256_1.webp?v=1780514194",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_256_4.webp?v=1780514194",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_060_2.webp?v=1780513420",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_245_2.webp?v=1780513478",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_A22_2.webp?v=1780513617",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38931_E21_2.webp?v=1780513715",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38934_148_2.webp?v=1780513788",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38934_151_2.webp?v=1780513849",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38934_A07_2.webp?v=1792796307",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38934_E08_2.webp?v=1792796296",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38934_211_2.webp?v=1792796287",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38934_E06_2.webp?v=1792796275",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38934_224_2.webp?v=1792796264",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38934_E05_2.webp?v=1792796252",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38933_D67_2.webp?v=1792796240"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "XL"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 45090289582149,
+          "price": 67.99,
+          "compare": 84.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "SPIN"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 45090289778757,
+          "price": 67.99,
+          "compare": 84.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "SPIN"
+            ]
+          }
+        },
+        {
+          "variant_id": 45090289811525,
+          "price": 67.99,
+          "compare": 84.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "SPIN"
+            ]
+          }
+        },
+        {
+          "variant_id": 46108894593093,
+          "price": 67.99,
+          "compare": 84.95,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "SPIN"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "EN 1078 (EU bike / skate)"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS",
+          "SPIN"
+        ],
+        "prot_size": [
+          "XL"
+        ]
+      }
+    },
+    {
+      "name": "Fox Speedframe",
+      "url": "https://mikesbikes.com/products/fox-speedframe",
+      "price_new": "103.99",
+      "price_old": "129.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/SPEEDFRAME",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_008_1.webp?v=1788911273",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_008_1.webp?v=1788911273",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_008_2.webp?v=1788911429",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_008_4.webp?v=1788911440",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_008_3.webp?v=1788911461",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_008_5.webp?v=1788911477",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_001_1.webp?v=1788911491",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33349_F07_1.webp?v=1788911514",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/40238_001_1_1.jpg?v=1792388716"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44567181623365,
+          "price": 103.99,
+          "compare": 129.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567181656133,
+          "price": 103.99,
+          "compare": 129.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567181688901,
+          "price": 103.99,
+          "compare": 129.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Fox Proframe",
+      "url": "https://mikesbikes.com/products/fox-proframe",
+      "price_new": "271.99",
+      "price_old": "339.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/PROFRAME",
+      "link": "https://mikesbikes.com/products/fox-proframe?variant=44567172415557",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_1.webp?v=1788904134",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_1.webp?v=1788904134",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_2.webp?v=1788904158",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_3.webp?v=1788904173",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_5.webp?v=1788904189",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_4.webp?v=1788904203",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_6.webp?v=1788904216",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_9.webp?v=1788904254",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_8.webp?v=1788904270",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_7.webp?v=1788904283",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33842_255_10.webp?v=1788904297",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38341_512_1.webp?v=1788904309"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44567172415557,
+          "price": 271.99,
+          "compare": 339.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "ASTM F1952 (downhill)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567172448325,
+          "price": 271.99,
+          "compare": 339.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "ASTM F1952 (downhill)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567172481093,
+          "price": 271.99,
+          "compare": 339.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "ASTM F1952 (downhill)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "ASTM F1952 (downhill)"
+        ],
+        "helmet_style": [
+          "Full face"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Lazer Coyote KinetiCore Helmet",
+      "url": "https://mikesbikes.com/products/lazer-coyote-kineticore-helmet",
+      "price_new": "89.99",
+      "price_old": "119.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/COYOTE",
+      "brand": "Lazer",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/pvpqtkshg84gliqanin9_1800x1800_c0c654a5-bcf6-4ad6-8750-c7325e329220.webp?v=1772149930",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/pvpqtkshg84gliqanin9_1800x1800_c0c654a5-bcf6-4ad6-8750-c7325e329220.webp?v=1772149930",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/wxifxuxtebvcdvqv9xv0_1800x1800_c70be3ef-0477-4976-89d6-dfbcdb01c3fb.webp?v=1772149930",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/x96olgo5fbvvdeo0hexr_1800x1800_9274ba6d-fc9b-4ea3-bcc0-d2a12b48d2eb.webp?v=1772149930",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/fd55xveddo8pnmj5qdql_1800x1800_78966046-eb48-4413-be5e-172d63e3f4a3.webp?v=1772149930",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/mqhqzb1ensrkailqap5l_1800x1800_ace4e500-41c4-4bd4-8a7b-bed9f5fc270a.webp?v=1772149930",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/bovlo4luu7z2yjbjhmmq_1800x1800_01c934a6-dedf-4a4a-8ff9-befa98b263dd.webp?v=1772149930",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/jgzyctibtpgtc3a6fj5d_1800x1800_19593fce-bbdf-4ebe-ad2a-80cfa96336e2.webp?v=1772149930"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44414721228869,
+          "price": 89.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "Kineticore"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 44414721261637,
+          "price": 89.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "Kineticore"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 44414721294405,
+          "price": 89.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "Kineticore"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 44615229210693,
+          "price": 89.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "Kineticore"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 44615229243461,
+          "price": 89.99,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "Kineticore"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "CPSC (US bike)",
+          "EN 1078 (EU bike / skate)"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "Kineticore"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Giro Montaro Mips III",
+      "url": "https://mikesbikes.com/products/giro-montaro-mips-iii",
+      "price_new": "159.99",
+      "price_old": "199.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/MONTARO",
+      "brand": "Giro",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_245_1.webp?v=1762282153",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_245_1.webp?v=1762282153",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_245_2.webp?v=1762282153",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_245_3.webp?v=1762282153",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_245_4.webp?v=1762282153",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/giro-montaro-III-specs.jpg?v=1762282384",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_255_1.webp?v=1762282384",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_255_2_c11bf8c6-d3c9-4006-9ff1-db4b56a48a21.jpg?v=1792391050",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_067_1.webp?v=1762282434",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_067_2.jpg?v=1792391004",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_D99_1.jpg?v=1792391004",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/34687_D99_2.jpg?v=1792391004"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 43765057454149,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057486917,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057519685,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057552453,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057585221,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057617989,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057355845,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057388613,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057421381,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057650757,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057683525,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765057716293,
+          "price": 159.99,
+          "compare": 199.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "CPSC (US bike)"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Giro Montaro Pro Helmet",
+      "url": "https://mikesbikes.com/products/giro-montaro-pro-helmet",
+      "price_new": "239.99",
+      "price_old": "299.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/MONTARO",
+      "link": "https://mikesbikes.com/products/giro-montaro-pro-helmet?variant=43765054767173",
+      "brand": "Giro",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_255_2.webp?v=1786485542",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_255_2.webp?v=1786485542",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_255_3.webp?v=1786485975",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_255_1.webp?v=1786485989",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_255_4.webp?v=1786485997",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_067_2.webp?v=1786486008",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_D67_2.webp?v=1786486022",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38939_D97_2.webp?v=1786486031"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 43765054767173,
+          "price": 239.99,
+          "compare": 299.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "Spherical"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765054799941,
+          "price": 239.99,
+          "compare": 299.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "Spherical"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765054832709,
+          "price": 239.99,
+          "compare": 299.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "Spherical"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "Certified (standard not named)"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS",
+          "Spherical"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Fox Rampage Helmet",
+      "url": "https://mikesbikes.com/products/fox-rampage-helmet-2026",
+      "price_new": "215.99",
+      "price_old": "259.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/RAMPAGE",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_1.jpg?v=1771627796",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_1.jpg?v=1771627796",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_2.jpg?v=1771627828",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_3.jpg?v=1771627828",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_4.jpg?v=1771627828",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_5.jpg?v=1771627828",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/39689_008_6.jpg?v=1771627828",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/32212_255_1.jpg?v=1771627828",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38327_209_1.jpg?v=1771627828"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44567179395141,
+          "price": 215.99,
+          "compare": 259.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "XS"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734098640965,
+          "price": 215.99,
+          "compare": 259.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734098673733,
+          "price": 215.99,
+          "compare": 259.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734098706501,
+          "price": 215.99,
+          "compare": 259.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734098739269,
+          "price": 215.99,
+          "compare": 259.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567179231301,
+          "price": 215.99,
+          "compare": 269.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "XS"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567179264069,
+          "price": 215.99,
+          "compare": 269.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567179296837,
+          "price": 215.99,
+          "compare": 269.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567179329605,
+          "price": 215.99,
+          "compare": 269.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 44567179362373,
+          "price": 215.99,
+          "compare": 269.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "Certified (standard not named)"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "Certified (standard not named)"
+        ],
+        "helmet_style": [
+          "Full face"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S",
+          "XL",
+          "XS"
+        ]
+      }
+    },
+    {
+      "name": "Fox Speedframe Pro Helmet",
+      "url": "https://mikesbikes.com/products/fox-speedframe-pro-helmet",
+      "price_new": "179.99",
+      "price_old": "219.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/SPEEDFRAME",
+      "link": "https://mikesbikes.com/products/fox-speedframe-pro-helmet?variant=43734097035333",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/fox-speedframe-pro-helmet-hero_frost.jpg?v=1776055972",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/fox-speedframe-pro-helmet-hero_frost.jpg?v=1776055972",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Speedframe_Pro_Helmet_Frost_2.webp?v=1782496532",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Speedframe_Pro_Helmet_Frost_3.webp?v=1782496541",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Speedframe_Pro_Helmet_Frost_4.webp?v=1782496551",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Speedframe_Pro_Helmet_Frost_5.webp?v=1782496565",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33504255_1.webp?v=1776055716",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/fox-speedframe-pro-helmet-hero_bronze.jpg?v=1776056169",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38362_D17_1.webp?v=1782495194",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38362_008_1.webp?v=1782495359"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 43734096937029,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096969797,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097002565,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096740421,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096773189,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096805957,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097035333,
+          "price": 179.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097068101,
+          "price": 179.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734097100869,
+          "price": 179.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096838725,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096871493,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096904261,
+          "price": 191.99,
+          "compare": 219.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Fox Speedframe RS Helmet",
+      "url": "https://mikesbikes.com/products/fox-speedframe-rs-helmet",
+      "price_new": "263.99",
+      "price_old": "319.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/SPEEDFRAME",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/35962067_1.webp?v=1763093745",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/35962067_1.webp?v=1763093745",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/35962067_2.webp?v=1763093745",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/32237255_1.webp?v=1763093745",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/32237255_2.webp?v=1763093745",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/32237255_4.webp?v=1763093745",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/32237255_3.webp?v=1763093745",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/32237255_5.webp?v=1763093745"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 42321239408709,
+          "price": 263.99,
+          "compare": 319.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 42321239441477,
+          "price": 263.99,
+          "compare": 319.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 42321239474245,
+          "price": 263.99,
+          "compare": 319.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096248901,
+          "price": 263.99,
+          "compare": 319.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096281669,
+          "price": 263.99,
+          "compare": 319.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734096314437,
+          "price": 263.99,
+          "compare": 319.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Giro Coalition Spherical Helmet",
+      "url": "https://mikesbikes.com/products/giro-coalition-spherical-helmet",
+      "price_new": "279.99",
+      "price_old": "349.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS",
+      "brand": "Giro",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38938_255_2.jpg?v=1769727907",
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44566151954501,
+          "price": 279.99,
+          "compare": 349.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "Spherical"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 44566151987269,
+          "price": 279.99,
+          "compare": 349.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "Spherical"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 44566152020037,
+          "price": 279.99,
+          "compare": 349.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS",
+              "Spherical"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "CPSC (US bike)",
+          "EN 1078 (EU bike / skate)"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS",
+          "Spherical"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Fox Dropframe Pro V2 Helmet",
+      "url": "https://mikesbikes.com/products/fox-dropframe-pro-v2-helmet",
+      "price_new": "271.99",
+      "price_old": "314.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/DROPFRAME",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31456255_2.webp?v=1747270960",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31456255_2.webp?v=1747270960",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31456255_1.webp?v=1747270961",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31456255_3.webp?v=1747270962",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31456255_5.webp?v=1747270962"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 41043899613253,
+          "price": 271.99,
+          "compare": 314.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 41043899678789,
+          "price": 271.99,
+          "compare": 314.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 41043899711557,
+          "price": 271.99,
+          "compare": 314.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Fox Crossframe Pro MIPS Helmet",
+      "url": "https://mikesbikes.com/products/fox-crossframe-pro-mips-helmet",
+      "price_new": "183.99",
+      "price_old": "239.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/CROSSFRAME",
+      "link": "https://mikesbikes.com/products/fox-crossframe-pro-mips-helmet?variant=43734093103173",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31446_008_1.jpg?v=1792390498",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31446_008_1.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31446_008_2.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31446_008_3.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31446_008_5.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31446_008_4.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31446_008_6.jpg?v=1792390499",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31936_255_1.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31936_255_2.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31449_579_1.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/31447_579_2.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38356_512_1.jpg?v=1792390498",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38356_512_2.jpg?v=1792390498"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 40833283981381,
+          "price": 195.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 41109118648389,
+          "price": 195.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 40833283948613,
+          "price": 195.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 40628168785989,
+          "price": 195.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 40628168687685,
+          "price": 195.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 40628168654917,
+          "price": 195.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734093103173,
+          "price": 183.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734093135941,
+          "price": 183.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 43734093168709,
+          "price": 183.99,
+          "compare": 239.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Half shell (trail)"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Half shell (trail)"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Fox Proframe RS Helmet",
+      "url": "https://mikesbikes.com/products/fox-proframe-rs-helmet-1",
+      "price_new": "327.99",
+      "price_old": "399.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/MOUNTAIN HELMETS/PROFRAME",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Fox-Raicing-Proframe-Full-Face-Helmet_Black_01.jpg?v=1747270973",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Fox-Raicing-Proframe-Full-Face-Helmet_Black_01.jpg?v=1747270973",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Fox-Raicing-Proframe-Full-Face-Helmet_Black_02.jpg?v=1747270973",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Fox-Raicing-Proframe-Full-Face-Helmet_Black_03.jpg?v=1747270974",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Fox-Raicing-Proframe-Full-Face-Helmet_Black_04.jpg?v=1747270974"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "S",
+        "M",
+        "L"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 40627743129669,
+          "price": 327.99,
+          "compare": 399.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 40627743064133,
+          "price": 327.99,
+          "compare": 399.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 40627742998597,
+          "price": 327.99,
+          "compare": 399.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Full face"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "Fox Youth Ranger Gloves",
+      "url": "https://mikesbikes.com/products/fox-youth-ranger-gloves-2026",
+      "price_new": "27.99",
+      "price_old": "34.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/GLOVES/LONG FINGER",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33614_001_1.webp?v=1788374293",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33614_001_1.webp?v=1788374293",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33614_001_2.webp?v=1788374309"
+      ],
+      "protection_type": null,
+      "technical_offers": [
+        {
+          "variant_id": 45584676978757,
+          "price": 27.99,
+          "compare": 34.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Youth"
+            ]
+          }
+        },
+        {
+          "variant_id": 45584676945989,
+          "price": 27.99,
+          "compare": 34.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Youth"
+            ]
+          }
+        },
+        {
+          "variant_id": 45584676913221,
+          "price": 27.99,
+          "compare": 34.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Youth"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Gloves"
+        ],
+        "age": [
+          "Youth"
+        ]
+      }
+    },
+    {
+      "name": "Lazer Finch Kineticore Kids Helmet",
+      "url": "https://mikesbikes.com/products/lazer-finch-kineticore-kids-helmet",
+      "price_new": "63.74",
+      "price_old": "84.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/KIDS HELMETS/FINCH",
+      "brand": "Lazer",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/objmilhrsudm0io33j0f_1800x1800_7876aaed-6754-4e72-8253-7e0f3adcf86c.webp?v=1779823145",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/objmilhrsudm0io33j0f_1800x1800_7876aaed-6754-4e72-8253-7e0f3adcf86c.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/hmriiqcgv4xi9idlzqo5_1800x1800_eaedd148-7a00-4c9d-8d66-dd7262662340.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/xwj8pgup9975zc5x3is7_1800x1800_f9d684d2-4fe3-46f6-8fff-009225c62d84.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/t1fo3iovqsaqlr55morm_1800x1800_ffb2cdcb-ded8-4dd4-8fed-baf266577a05.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/kdxs9kot6rhgpckgjd1c_1800x1800_b0cb2ef7-2db4-48d8-a1d7-17f339366055.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/oifq6x9ngstkbkxmrpbe_1800x1800_09ddea6e-ea3d-441c-bed0-f98d9bf3ee60.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/klziutmbzfkhvbmh9qq8_1800x1800_31fe58c2-bb75-4ffc-8d7e-7ec7625a89d8.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/arzkusk1tcumlx7veax3_1800x1800_647af510-959b-4b25-8a47-092f8a483b31.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/o6ldhoappvlpnovpalng_1800x1800_e5944b28-0449-4c26-b19d-4dad2e12d69d.webp?v=1779823145",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/xxr9nakn2jwlecrg9o3z_1800x1800_3cedc7a4-c99b-403c-a859-2b6863cf579d.webp?v=1780080781",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/zzdhfvcbvhj14czslrsn_1800x1800_e3b686d0-7bb1-496f-9965-b7f4cc846750.webp?v=1780080782"
+      ],
+      "protection_type": "Helmet",
+      "technical_offers": [
+        {
+          "variant_id": 44766956879941,
+          "price": 63.74,
+          "compare": 84.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Kids"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "rotational": [
+              "Kineticore",
+              "SPIN"
+            ]
+          }
+        },
+        {
+          "variant_id": 44766956912709,
+          "price": 63.74,
+          "compare": 84.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Kids"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "rotational": [
+              "Kineticore",
+              "SPIN"
+            ]
+          }
+        },
+        {
+          "variant_id": 44766956847173,
+          "price": 63.74,
+          "compare": 84.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Kids"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "rotational": [
+              "Kineticore",
+              "SPIN"
+            ]
+          }
+        },
+        {
+          "variant_id": 45067748343877,
+          "price": 63.74,
+          "compare": 84.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Kids"
+            ],
+            "certification": [
+              "CPSC (US bike)",
+              "EN 1078 (EU bike / skate)"
+            ],
+            "rotational": [
+              "Kineticore",
+              "SPIN"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Kids"
+        ],
+        "certification": [
+          "CPSC (US bike)",
+          "EN 1078 (EU bike / skate)"
+        ],
+        "rotational": [
+          "Kineticore",
+          "SPIN"
+        ]
+      }
+    },
+    {
+      "name": "Fox Flexair Glove",
+      "url": "https://mikesbikes.com/products/fox-flexair-glove-2026",
+      "price_new": "43.99",
+      "price_old": "49.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/GLOVES/LONG FINGER",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Flexair_Glove_Black_1.webp?v=1775591054",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Flexair_Glove_Black_1.webp?v=1775591054",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Flexair_Glove_Black_2.webp?v=1775591107",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Flexair_Glove_Black_3.webp?v=1775591127",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Flexair_Glove_Black_4.webp?v=1775591134",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Flexair_Glove_Black_5.webp?v=1775591144",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/Flexair_Glove_-_Chalk.webp?v=1775591087"
+      ],
+      "protection_type": null,
+      "protection_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44580618076229,
+          "price": 43.99,
+          "compare": 49.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 44580618108997,
+          "price": 43.99,
+          "compare": 49.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 44580618141765,
+          "price": 43.99,
+          "compare": 49.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 44580618174533,
+          "price": 43.99,
+          "compare": 49.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
+        {
+          "variant_id": 44580617945157,
+          "price": 43.99,
+          "compare": 49.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 44580618010693,
+          "price": 43.99,
+          "compare": 49.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 44580618043461,
+          "price": 43.99,
+          "compare": 49.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Gloves"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "prot_size": [
+          "L",
+          "M",
+          "S",
+          "XL"
+        ]
+      }
+    },
+    {
+      "name": "Giro Tremor Mips Child Helmet",
+      "url": "https://mikesbikes.com/products/giro-tremor-mips-child-helmet-2026",
+      "price_new": "59.99",
+      "price_old": "74.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/HELMETS/KIDS HELMETS/TREMOR",
+      "link": "https://mikesbikes.com/products/giro-tremor-mips-child-helmet-2026?variant=43765014069317",
+      "brand": "Giro",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38949_151_2.jpg?v=1771630337",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38949_151_2.jpg?v=1771630337",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38949_151_1.jpg?v=1771630337",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38949_151_4.jpg?v=1771630337",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38949_364_2.jpg?v=1771630337",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38949_E10_2.jpg?v=1771630337",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/38949_E11_2.jpg?v=1771630317"
+      ],
+      "protection_type": "Helmet",
+      "technical_offers": [
+        {
+          "variant_id": 43765014069317,
+          "price": 59.99,
+          "compare": 74.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Kids"
+            ],
+            "rotational": [
+              "MIPS"
+            ]
+          }
+        },
+        {
+          "variant_id": 43765014102085,
+          "price": 59.99,
+          "compare": 74.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Kids"
+            ],
+            "rotational": [
+              "MIPS"
+            ]
+          }
+        },
+        {
+          "variant_id": 44563921928261,
+          "price": 59.99,
+          "compare": 74.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Kids"
+            ],
+            "rotational": [
+              "MIPS"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Kids"
+        ],
+        "rotational": [
+          "MIPS"
+        ]
+      }
+    },
+    {
+      "name": "Fox Ranger Gloves",
+      "url": "https://mikesbikes.com/products/fox-ranger-gloves-2026",
+      "price_new": "31.99",
+      "price_old": "34.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Mike's Bikes",
+      "product_type": "APPAREL/GLOVES/LONG FINGER",
+      "brand": "Fox",
+      "image": "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33603_089_1.webp?v=1770245675",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33603_089_1.webp?v=1770245675",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33603_089_2.webp?v=1770245675",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33603_089_4.webp?v=1770245675",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33603_089_5.webp?v=1770245675",
+        "https://cdn.shopify.com/s/files/1/0016/3856/3907/files/33603_089_3.webp?v=1770245675"
+      ],
+      "protection_type": null,
+      "protection_sizes": [
+        "S",
+        "M"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 44580620075077,
+          "price": 31.99,
+          "compare": 34.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 44580620107845,
+          "price": 31.99,
+          "compare": 34.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Gloves"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "prot_size": [
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
       "name": "Fox Ranger Gel Gloves",
       "url": "https://mikesbikes.com/products/fox-ranger-gel-gloves-new",
       "price_new": "23.77",
@@ -50563,9 +54352,80 @@
       ],
       "protection_type": null,
       "protection_sizes": [
-        "S"
+        "S",
+        "M",
+        "L",
+        "XL"
       ],
       "technical_offers": [
+        {
+          "variant_id": 42491787411525,
+          "price": 35.99,
+          "compare": 39.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 42491787444293,
+          "price": 35.99,
+          "compare": 39.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 42491787477061,
+          "price": 35.99,
+          "compare": 39.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 42491787509829,
+          "price": 35.99,
+          "compare": 39.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Gloves"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "prot_size": [
+              "XL"
+            ]
+          }
+        },
         {
           "variant_id": 40914998132805,
           "price": 23.77,
@@ -50592,7 +54452,10 @@
           "Adult"
         ],
         "prot_size": [
-          "S"
+          "L",
+          "M",
+          "S",
+          "XL"
         ]
       }
     },
@@ -64288,7 +68151,6 @@
       "part": "Drivetrain",
       "store": "Cambria",
       "product_type": "MTB Cassettes",
-      "link": "https://cambriabike.com/products/shimano-hg400-8-spd-cassette?variant=42891271536822",
       "brand": "Shimano",
       "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/61dgoE4NRjL._AC_SL1050.jpg?v=1712152682",
       "technical_offers": [
@@ -77743,44 +81605,6 @@
       }
     },
     {
-      "name": "OneUp Clip MTB SPD Pedals - Dark Blue",
-      "url": "https://cambriabike.com/products/oneup-clip-mtb-spd-pedals-dark-blue",
-      "price_new": "119.99",
-      "price_old": "159.99",
-      "availability": "In stock",
-      "part": "Pedals",
-      "store": "Cambria",
-      "product_type": "MTB Clipless Pedals",
-      "brand": "OneUp Components",
-      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Platform-SideA_1400x_c449d664-b966-4eda-a47d-983563e71061.webp?v=1742289361",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Platform-SideA_1400x_c449d664-b966-4eda-a47d-983563e71061.webp?v=1742289361",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Platform-SideB_1400x_98b7f8bc-c9e3-42d3-86e2-f606f521554f.webp?v=1742289361",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Angle_1400x_e28f0c9f-3c5e-4d4b-95b6-6377e685280b.webp?v=1742289361",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Binding_1400x_088a569e-8a7e-447d-98f4-a6078d2bdcda.webp?v=1742289361",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_SideProfile_1400x_13221e40-ef50-442e-9821-b2ea1d25cfd7.webp?v=1742289361",
-        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_EndProfile_1400x_f9e5af18-535b-4340-a508-c0d7295e1708.webp?v=1742289361"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 43845383323830,
-          "price": 119.99,
-          "compare": 159.99,
-          "available": true,
-          "specs": {
-            "pedal_type": [
-              "Clipless (MTB)"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "pedal_type": [
-          "Clipless (MTB)"
-        ]
-      }
-    },
-    {
       "name": "Race Face Chester Flat Pedals - Large - Red",
       "url": "https://cambriabike.com/products/race-face-chester-flat-pedals-large-red",
       "price_new": "49.49",
@@ -78445,6 +82269,44 @@
         ],
         "pedal_material": [
           "Aluminum"
+        ]
+      }
+    },
+    {
+      "name": "OneUp Clip MTB SPD Pedals - Dark Blue",
+      "url": "https://cambriabike.com/products/oneup-clip-mtb-spd-pedals-dark-blue",
+      "price_new": "119.99",
+      "price_old": "159.99",
+      "availability": "In stock",
+      "part": "Pedals",
+      "store": "Cambria",
+      "product_type": "MTB Clipless Pedals",
+      "brand": "OneUp Components",
+      "image": "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Platform-SideA_1400x_c449d664-b966-4eda-a47d-983563e71061.webp?v=1742289361",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Platform-SideA_1400x_c449d664-b966-4eda-a47d-983563e71061.webp?v=1742289361",
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Platform-SideB_1400x_98b7f8bc-c9e3-42d3-86e2-f606f521554f.webp?v=1742289361",
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Angle_1400x_e28f0c9f-3c5e-4d4b-95b6-6377e685280b.webp?v=1742289361",
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_Binding_1400x_088a569e-8a7e-447d-98f4-a6078d2bdcda.webp?v=1742289361",
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_SideProfile_1400x_13221e40-ef50-442e-9821-b2ea1d25cfd7.webp?v=1742289361",
+        "https://cdn.shopify.com/s/files/1/0032/9023/4992/files/OneUp-Components_ClipPedal_DARKBLUE_EndProfile_1400x_f9e5af18-535b-4340-a508-c0d7295e1708.webp?v=1742289361"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 43845383323830,
+          "price": 119.99,
+          "compare": 159.99,
+          "available": true,
+          "specs": {
+            "pedal_type": [
+              "Clipless (MTB)"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "pedal_type": [
+          "Clipless (MTB)"
         ]
       }
     },
@@ -86035,6 +89897,20 @@
             ],
             "frame_size": [
               "L"
+            ]
+          }
+        },
+        {
+          "variant_id": 50632487174436,
+          "price": 1899.99,
+          "compare": 2199.99,
+          "available": true,
+          "specs": {
+            "power": [
+              "Regular"
+            ],
+            "frame_size": [
+              "S"
             ]
           }
         },
@@ -110765,60 +114641,6 @@
       }
     },
     {
-      "name": "Schwalbe Romy Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Trail, MID, Radial, E-50",
-      "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-50-tubeless-folding-black-pro-trail-mid-radial-e-50",
-      "price_new": "94.86",
-      "price_old": "102.00",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "Colorado Cyclist",
-      "product_type": "Tires",
-      "brand": "Schwalbe",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00635.jpg?v=1795327841",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00635.jpg?v=1795327841",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00635-01.jpg?v=1795327841"
-      ],
-      "width": 29.0,
-      "length": 2.5,
-      "technical_offers": [
-        {
-          "variant_id": 51171816866032,
-          "price": 94.86,
-          "compare": 102.0,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tire_width": [
-              "2.5"
-            ],
-            "casing": [
-              "Radial"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ],
-        "tire_width": [
-          "2.5"
-        ],
-        "casing": [
-          "Radial"
-        ],
-        "tubeless": [
-          "Tubeless ready"
-        ]
-      }
-    },
-    {
       "name": "Schwalbe Romy Tire - 27.5 x 2.50, Tubeless, Folding, Black, Pro, Gravity, Soft, Radial",
       "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-27-5-x-2-50-tubeless-folding-black-pro-gravity-soft-radial-e-50",
       "price_new": "100.44",
@@ -111795,55 +115617,6 @@
       "technical_offers": [
         {
           "variant_id": 51171688775920,
-          "price": 72.95,
-          "compare": 80.95,
-          "available": true,
-          "specs": {
-            "wheel_size": [
-              "29"
-            ],
-            "tire_width": [
-              "2.4"
-            ],
-            "tubeless": [
-              "Tubeless ready"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "wheel_size": [
-          "29"
-        ],
-        "tire_width": [
-          "2.4"
-        ],
-        "tubeless": [
-          "Tubeless ready"
-        ]
-      }
-    },
-    {
-      "name": "WTB Macro Tire - 29 x 2.4, TCS Tubeless, Folding, Black/Tan, Light/Fast Rolling, TriTec",
-      "url": "https://www.coloradocyclist.com/products/wtb-macro-tire-29-x-2-4-tcs-tubeless-folding-black-tan-light-fast-rolling-tritec-sg",
-      "price_new": "72.95",
-      "price_old": "80.95",
-      "availability": "In stock",
-      "part": "Tires",
-      "store": "Colorado Cyclist",
-      "product_type": "Tires",
-      "brand": "WTB",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111_ac175932-a6f5-414a-9bca-fba7c08414ef.jpg?v=1795331319",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111_ac175932-a6f5-414a-9bca-fba7c08414ef.jpg?v=1795331319",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111-01_1c14f79b-42da-478a-b3b3-efa83e5e4c36.jpg?v=1795331319",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111-02_71e4dd48-f35c-47db-a3f5-97e55c887eec.jpg?v=1795331319"
-      ],
-      "width": 29.0,
-      "length": 2.4,
-      "technical_offers": [
-        {
-          "variant_id": 51171688743152,
           "price": 72.95,
           "compare": 80.95,
           "available": true,
@@ -120659,6 +124432,109 @@
         ],
         "casing": [
           "DoubleDown"
+        ],
+        "tubeless": [
+          "Tubeless ready"
+        ]
+      }
+    },
+    {
+      "name": "Schwalbe Romy Tire - 29 x 2.50, Tubeless, Folding, Black, Pro, Trail, MID, Radial, E-50",
+      "url": "https://www.coloradocyclist.com/products/schwalbe-romy-tire-29-x-2-50-tubeless-folding-black-pro-trail-mid-radial-e-50",
+      "price_new": "94.86",
+      "price_old": "102.00",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Colorado Cyclist",
+      "product_type": "Tires",
+      "brand": "Schwalbe",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00635.jpg?v=1795327841",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00635.jpg?v=1795327841",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J3180_TR00635-01.jpg?v=1795327841"
+      ],
+      "width": 29.0,
+      "length": 2.5,
+      "technical_offers": [
+        {
+          "variant_id": 51171816866032,
+          "price": 94.86,
+          "compare": 102.0,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "29"
+            ],
+            "tire_width": [
+              "2.5"
+            ],
+            "casing": [
+              "Radial"
+            ],
+            "tubeless": [
+              "Tubeless ready"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "29"
+        ],
+        "tire_width": [
+          "2.5"
+        ],
+        "casing": [
+          "Radial"
+        ],
+        "tubeless": [
+          "Tubeless ready"
+        ]
+      }
+    },
+    {
+      "name": "WTB Macro Tire - 29 x 2.4, TCS Tubeless, Folding, Black/Tan, Light/Fast Rolling, TriTec",
+      "url": "https://www.coloradocyclist.com/products/wtb-macro-tire-29-x-2-4-tcs-tubeless-folding-black-tan-light-fast-rolling-tritec-sg",
+      "price_new": "72.95",
+      "price_old": "80.95",
+      "availability": "In stock",
+      "part": "Tires",
+      "store": "Colorado Cyclist",
+      "product_type": "Tires",
+      "brand": "WTB",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111_ac175932-a6f5-414a-9bca-fba7c08414ef.jpg?v=1795331319",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111_ac175932-a6f5-414a-9bca-fba7c08414ef.jpg?v=1795331319",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111-01_1c14f79b-42da-478a-b3b3-efa83e5e4c36.jpg?v=1795331319",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/J2692_TR00111-02_71e4dd48-f35c-47db-a3f5-97e55c887eec.jpg?v=1795331319"
+      ],
+      "width": 29.0,
+      "length": 2.4,
+      "technical_offers": [
+        {
+          "variant_id": 51171688743152,
+          "price": 72.95,
+          "compare": 80.95,
+          "available": true,
+          "specs": {
+            "wheel_size": [
+              "29"
+            ],
+            "tire_width": [
+              "2.4"
+            ],
+            "tubeless": [
+              "Tubeless ready"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "wheel_size": [
+          "29"
+        ],
+        "tire_width": [
+          "2.4"
         ],
         "tubeless": [
           "Tubeless ready"
@@ -131171,72 +135047,6 @@
       }
     },
     {
-      "name": "Troy Lee Designs D4 Polyacrylite Full Face Helmet - Fifty-50 - Navy-Glo Yellow",
-      "url": "https://www.coloradocyclist.com/products/troy-lee-designs-d4-polyacrylite-full-face-helmet-fifty-50-navy-glo-yellow",
-      "price_new": "249.00",
-      "price_old": "415.00",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "Colorado Cyclist",
-      "product_type": "Full Face Helmets",
-      "brand": "Troy Lee Designs",
-      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_01_90c5d87f-420f-422a-a924-499806a3386b.webp?v=1765389124",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_01_90c5d87f-420f-422a-a924-499806a3386b.webp?v=1765389124",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_02_70fd5739-3281-4e5b-b253-559e14f37ecb.webp?v=1765389124",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_03_6ad93682-3c57-432c-906e-c3b07d9260fa.webp?v=1765389124",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_04_55e6d415-f662-4ddd-839e-2172ef6a1eff.webp?v=1765389124",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_05_fa37ff93-673f-44a1-8e11-83276b8e4d2e.webp?v=1765389124",
-        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_06_aaf44d05-abc7-4f63-bc0b-cc70dae3b418.webp?v=1765389124"
-      ],
-      "protection_type": "Helmet",
-      "protection_sizes": [
-        "M"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 48466519654640,
-          "price": 249.0,
-          "compare": 415.0,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Helmets"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "helmet_style": [
-              "Full face"
-            ],
-            "rotational": [
-              "MIPS"
-            ],
-            "prot_size": [
-              "M"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Helmets"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "helmet_style": [
-          "Full face"
-        ],
-        "rotational": [
-          "MIPS"
-        ],
-        "prot_size": [
-          "M"
-        ]
-      }
-    },
-    {
       "name": "Bell Local BMX Helmet - Matt Yellow",
       "url": "https://www.coloradocyclist.com/products/bell-local-bmx-helmet-matt-yellow",
       "price_new": "39.99",
@@ -138396,6 +142206,72 @@
         "prot_size": [
           "L",
           "S"
+        ]
+      }
+    },
+    {
+      "name": "Troy Lee Designs D4 Polyacrylite Full Face Helmet - Fifty-50 - Navy-Glo Yellow",
+      "url": "https://www.coloradocyclist.com/products/troy-lee-designs-d4-polyacrylite-full-face-helmet-fifty-50-navy-glo-yellow",
+      "price_new": "249.00",
+      "price_old": "415.00",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "Colorado Cyclist",
+      "product_type": "Full Face Helmets",
+      "brand": "Troy Lee Designs",
+      "image": "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_01_90c5d87f-420f-422a-a924-499806a3386b.webp?v=1765389124",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_01_90c5d87f-420f-422a-a924-499806a3386b.webp?v=1765389124",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_02_70fd5739-3281-4e5b-b253-559e14f37ecb.webp?v=1765389124",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_03_6ad93682-3c57-432c-906e-c3b07d9260fa.webp?v=1765389124",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_04_55e6d415-f662-4ddd-839e-2172ef6a1eff.webp?v=1765389124",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_05_fa37ff93-673f-44a1-8e11-83276b8e4d2e.webp?v=1765389124",
+        "https://cdn.shopify.com/s/files/1/0761/3592/3952/files/tld_b25d1_d4pa_fifty50_nvygloyel_06_aaf44d05-abc7-4f63-bc0b-cc70dae3b418.webp?v=1765389124"
+      ],
+      "protection_type": "Helmet",
+      "protection_sizes": [
+        "M"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 48466519654640,
+          "price": 249.0,
+          "compare": 415.0,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Helmets"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "helmet_style": [
+              "Full face"
+            ],
+            "rotational": [
+              "MIPS"
+            ],
+            "prot_size": [
+              "M"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Helmets"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "helmet_style": [
+          "Full face"
+        ],
+        "rotational": [
+          "MIPS"
+        ],
+        "prot_size": [
+          "M"
         ]
       }
     },
@@ -211764,6 +215640,93 @@
       }
     },
     {
+      "name": "Trek 2026 Slash+ 9.9 Electric Full Suspension Mountain Bike",
+      "url": "https://www.bikemart.com/products/2026-slash-9-9-full-suspension-electric-mountain-bike",
+      "price_new": "9499.93",
+      "price_old": "12499.99",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Bike Mart",
+      "product_type": "Electric Full Suspension Mountain Bike",
+      "brand": "Trek",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Portrait.jpg?v=1764016046",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt1.jpg?v=1764009237",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt2.jpg?v=1764009238",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt3.jpg?v=1764009239",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt4.jpg?v=1764009240"
+      ],
+      "width": 9.9,
+      "technical_offers": [
+        {
+          "variant_id": 46906909360381,
+          "price": 9499.93,
+          "compare": 12499.99,
+          "available": true,
+          "specs": {
+            "power": [
+              "E-MTB"
+            ],
+            "suspension": [
+              "Full suspension"
+            ],
+            "frame_size": [
+              "S"
+            ]
+          }
+        },
+        {
+          "variant_id": 46906909393149,
+          "price": 9499.93,
+          "compare": 12499.99,
+          "available": true,
+          "specs": {
+            "power": [
+              "E-MTB"
+            ],
+            "suspension": [
+              "Full suspension"
+            ],
+            "frame_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 46906909425917,
+          "price": 9499.93,
+          "compare": 12499.99,
+          "available": true,
+          "specs": {
+            "power": [
+              "E-MTB"
+            ],
+            "suspension": [
+              "Full suspension"
+            ],
+            "frame_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "power": [
+          "E-MTB"
+        ],
+        "suspension": [
+          "Full suspension"
+        ],
+        "frame_size": [
+          "L",
+          "M",
+          "S"
+        ]
+      }
+    },
+    {
       "name": "Specialized 2026 S-Works Turbo Levo 4 Electric Full Suspension Mountain Bike",
       "url": "https://www.bikemart.com/products/s-works-turbo-levo-4-1",
       "price_new": "9099.99",
@@ -212321,6 +216284,119 @@
         ],
         "wheel_size": [
           "29"
+        ]
+      }
+    },
+    {
+      "name": "Trek 2026 Slash 9.9 X0 AXS T-Type Gen 6 Full Suspension Mountain Bike",
+      "url": "https://www.bikemart.com/products/2026-slash-9-9-x0-axs-t-type-gen-6-full-suspension-mountain-bike",
+      "price_new": "6999.93",
+      "price_old": "8699.99",
+      "availability": "In stock",
+      "part": "Bikes",
+      "store": "Bike Mart",
+      "product_type": "Full Suspension Mountain Bike",
+      "brand": "Trek",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Portrait.jpg?v=1764016762",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt1.jpg?v=1764008227",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt2.jpg?v=1764008228",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt3.jpg?v=1764008228",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt4.jpg?v=1764008229"
+      ],
+      "width": 9.9,
+      "length": 0.0,
+      "technical_offers": [
+        {
+          "variant_id": 46906856407293,
+          "price": 6999.93,
+          "compare": 8699.99,
+          "available": true,
+          "specs": {
+            "speed": [
+              "12-speed"
+            ],
+            "power": [
+              "Regular"
+            ],
+            "suspension": [
+              "Full suspension"
+            ]
+          }
+        },
+        {
+          "variant_id": 46906856440061,
+          "price": 6999.93,
+          "compare": 8699.99,
+          "available": true,
+          "specs": {
+            "speed": [
+              "12-speed"
+            ],
+            "power": [
+              "Regular"
+            ],
+            "suspension": [
+              "Full suspension"
+            ],
+            "frame_size": [
+              "M"
+            ]
+          }
+        },
+        {
+          "variant_id": 46906856472829,
+          "price": 6999.93,
+          "compare": 8699.99,
+          "available": true,
+          "specs": {
+            "speed": [
+              "12-speed"
+            ],
+            "power": [
+              "Regular"
+            ],
+            "suspension": [
+              "Full suspension"
+            ]
+          }
+        },
+        {
+          "variant_id": 46906856505597,
+          "price": 6999.93,
+          "compare": 8699.99,
+          "available": true,
+          "specs": {
+            "speed": [
+              "12-speed"
+            ],
+            "power": [
+              "Regular"
+            ],
+            "suspension": [
+              "Full suspension"
+            ],
+            "frame_size": [
+              "L"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "speed": [
+          "12-speed"
+        ],
+        "power": [
+          "Regular"
+        ],
+        "suspension": [
+          "Full suspension"
+        ],
+        "frame_size": [
+          "L",
+          "M"
         ]
       }
     },
@@ -213045,206 +217121,6 @@
         "frame_size": [
           "S1",
           "S6"
-        ]
-      }
-    },
-    {
-      "name": "Trek 2026 Slash+ 9.9 Electric Full Suspension Mountain Bike",
-      "url": "https://www.bikemart.com/products/2026-slash-9-9-full-suspension-electric-mountain-bike",
-      "price_new": "10499.93",
-      "price_old": "12499.99",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Bike Mart",
-      "product_type": "Electric Full Suspension Mountain Bike",
-      "brand": "Trek",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Primary.jpg?v=1764016046",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Portrait.jpg?v=1764016046",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt1.jpg?v=1764009237",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt2.jpg?v=1764009238",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt3.jpg?v=1764009239",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SlashPlus99-26-57635-A-Alt4.jpg?v=1764009240"
-      ],
-      "width": 9.9,
-      "technical_offers": [
-        {
-          "variant_id": 46906909360381,
-          "price": 10499.93,
-          "compare": 12499.99,
-          "available": true,
-          "specs": {
-            "power": [
-              "E-MTB"
-            ],
-            "suspension": [
-              "Full suspension"
-            ],
-            "frame_size": [
-              "S"
-            ]
-          }
-        },
-        {
-          "variant_id": 46906909393149,
-          "price": 10499.93,
-          "compare": 12499.99,
-          "available": true,
-          "specs": {
-            "power": [
-              "E-MTB"
-            ],
-            "suspension": [
-              "Full suspension"
-            ],
-            "frame_size": [
-              "M"
-            ]
-          }
-        },
-        {
-          "variant_id": 46906909425917,
-          "price": 10499.93,
-          "compare": 12499.99,
-          "available": true,
-          "specs": {
-            "power": [
-              "E-MTB"
-            ],
-            "suspension": [
-              "Full suspension"
-            ],
-            "frame_size": [
-              "L"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "power": [
-          "E-MTB"
-        ],
-        "suspension": [
-          "Full suspension"
-        ],
-        "frame_size": [
-          "L",
-          "M",
-          "S"
-        ]
-      }
-    },
-    {
-      "name": "Trek 2026 Slash 9.9 X0 AXS T-Type Gen 6 Full Suspension Mountain Bike",
-      "url": "https://www.bikemart.com/products/2026-slash-9-9-x0-axs-t-type-gen-6-full-suspension-mountain-bike",
-      "price_new": "7799.93",
-      "price_old": "8699.99",
-      "availability": "In stock",
-      "part": "Bikes",
-      "store": "Bike Mart",
-      "product_type": "Full Suspension Mountain Bike",
-      "brand": "Trek",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Primary.jpg?v=1764016762",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Portrait.jpg?v=1764016762",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt1.jpg?v=1764008227",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt2.jpg?v=1764008228",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt3.jpg?v=1764008228",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/Slash99-26-52939-B-Alt4.jpg?v=1764008229"
-      ],
-      "width": 9.9,
-      "length": 0.0,
-      "technical_offers": [
-        {
-          "variant_id": 46906856407293,
-          "price": 7799.93,
-          "compare": 8699.99,
-          "available": true,
-          "specs": {
-            "speed": [
-              "12-speed"
-            ],
-            "power": [
-              "Regular"
-            ],
-            "suspension": [
-              "Full suspension"
-            ]
-          }
-        },
-        {
-          "variant_id": 46906856440061,
-          "price": 7799.93,
-          "compare": 8699.99,
-          "available": true,
-          "specs": {
-            "speed": [
-              "12-speed"
-            ],
-            "power": [
-              "Regular"
-            ],
-            "suspension": [
-              "Full suspension"
-            ],
-            "frame_size": [
-              "M"
-            ]
-          }
-        },
-        {
-          "variant_id": 46906856472829,
-          "price": 7799.93,
-          "compare": 8699.99,
-          "available": true,
-          "specs": {
-            "speed": [
-              "12-speed"
-            ],
-            "power": [
-              "Regular"
-            ],
-            "suspension": [
-              "Full suspension"
-            ]
-          }
-        },
-        {
-          "variant_id": 46906856505597,
-          "price": 7799.93,
-          "compare": 8699.99,
-          "available": true,
-          "specs": {
-            "speed": [
-              "12-speed"
-            ],
-            "power": [
-              "Regular"
-            ],
-            "suspension": [
-              "Full suspension"
-            ],
-            "frame_size": [
-              "L"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "speed": [
-          "12-speed"
-        ],
-        "power": [
-          "Regular"
-        ],
-        "suspension": [
-          "Full suspension"
-        ],
-        "frame_size": [
-          "L",
-          "M"
         ]
       }
     },
@@ -239338,6 +243214,32 @@
   ],
   "Bike Mart_Cockpit": [
     {
+      "name": "Cane Creek GXC Stem - Polished",
+      "url": "https://www.bikemart.com/products/cane-creek-gxc-stem",
+      "price_new": "69.99",
+      "price_old": "79.99",
+      "availability": "In stock",
+      "part": "Cockpit",
+      "store": "Bike Mart",
+      "product_type": "Stems",
+      "brand": "Cane Creek",
+      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SM0844.jpg?v=1762333023",
+      "images": [
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SM0844.jpg?v=1762333023",
+        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SM0849.jpg?v=1762333024"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46844740927741,
+          "price": 69.99,
+          "compare": 79.99,
+          "available": true,
+          "specs": {}
+        }
+      ],
+      "technical_specs": {}
+    },
+    {
       "name": "Origin8 Fusion Extra-Long Compression Plug SHIS",
       "url": "https://www.bikemart.com/products/origin8-fusion-extra-long-compression-plug-shis",
       "price_new": "30.09",
@@ -245499,32 +249401,6 @@
           "variant_id": 46764126699773,
           "price": 87.99,
           "compare": 109.99,
-          "available": true,
-          "specs": {}
-        }
-      ],
-      "technical_specs": {}
-    },
-    {
-      "name": "Cane Creek GXC Stem - Polished",
-      "url": "https://www.bikemart.com/products/cane-creek-gxc-stem",
-      "price_new": "69.99",
-      "price_old": "79.99",
-      "availability": "In stock",
-      "part": "Cockpit",
-      "store": "Bike Mart",
-      "product_type": "Stems",
-      "brand": "Cane Creek",
-      "image": "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SM0844.jpg?v=1762333023",
-      "images": [
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SM0844.jpg?v=1762333023",
-        "https://cdn.shopify.com/s/files/1/0705/8928/4605/files/SM0849.jpg?v=1762333024"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46844740927741,
-          "price": 69.99,
-          "compare": 79.99,
           "available": true,
           "specs": {}
         }
@@ -282938,58 +286814,6 @@
       }
     },
     {
-      "name": "ION K-Pact Zip Knee Pads",
-      "url": "https://www.evo.com/products/270386-ion-k-pact-zip-knee-pads",
-      "price_new": "60.95",
-      "price_old": "119.99",
-      "availability": "In stock",
-      "part": "Protection",
-      "store": "evo",
-      "product_type": "Body Armor",
-      "brand": "ION",
-      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187036.jpg?v=1767736711",
-      "protection_type": "Knee Pads",
-      "protection_sizes": [
-        "S"
-      ],
-      "technical_offers": [
-        {
-          "variant_id": 46078975606934,
-          "price": 60.95,
-          "compare": 119.99,
-          "available": true,
-          "specs": {
-            "protects": [
-              "Knees"
-            ],
-            "age": [
-              "Adult"
-            ],
-            "certification": [
-              "EN 1621 (CE impact armor)"
-            ],
-            "prot_size": [
-              "S"
-            ]
-          }
-        }
-      ],
-      "technical_specs": {
-        "protects": [
-          "Knees"
-        ],
-        "age": [
-          "Adult"
-        ],
-        "certification": [
-          "EN 1621 (CE impact armor)"
-        ],
-        "prot_size": [
-          "S"
-        ]
-      }
-    },
-    {
       "name": "IXS Hex Pull-Over Upper Body Protective",
       "url": "https://www.evo.com/products/266140-ixs-hex-pull-over-upper-body-protective",
       "price_new": "147.92",
@@ -293171,6 +296995,58 @@
         "prot_size": [
           "L",
           "M",
+          "S"
+        ]
+      }
+    },
+    {
+      "name": "ION K-Pact Zip Knee Pads",
+      "url": "https://www.evo.com/products/270386-ion-k-pact-zip-knee-pads",
+      "price_new": "60.95",
+      "price_old": "119.99",
+      "availability": "In stock",
+      "part": "Protection",
+      "store": "evo",
+      "product_type": "Body Armor",
+      "brand": "ION",
+      "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187036.jpg?v=1767736711",
+      "protection_type": "Knee Pads",
+      "protection_sizes": [
+        "S"
+      ],
+      "technical_offers": [
+        {
+          "variant_id": 46078975606934,
+          "price": 60.95,
+          "compare": 119.99,
+          "available": true,
+          "specs": {
+            "protects": [
+              "Knees"
+            ],
+            "age": [
+              "Adult"
+            ],
+            "certification": [
+              "EN 1621 (CE impact armor)"
+            ],
+            "prot_size": [
+              "S"
+            ]
+          }
+        }
+      ],
+      "technical_specs": {
+        "protects": [
+          "Knees"
+        ],
+        "age": [
+          "Adult"
+        ],
+        "certification": [
+          "EN 1621 (CE impact armor)"
+        ],
+        "prot_size": [
           "S"
         ]
       }
