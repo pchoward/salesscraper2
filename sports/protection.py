@@ -22,14 +22,14 @@ PARTS = (
                      r"|\bbody\s*protectors?\b|\bprotection\s+jackets?\b"
                      r"|\b(?:d3o|armou?red|protective|padded)\b[^;]*\b(?:jackets?|shirts?|vests?|tops?|jerseys?)\b"),
     ("Back & Spine", r"\bback\s*(?:protectors?|guards?|plates?|pads?|armou?r)\b|\bspine\s*(?:protectors?|guards?|pads?)\b"
-                     r"|\bprotector\s+vests?\b|\bprotective\s+vests?\b|\bspine\b|\bbody\s*protectors?\b"),
+                     r"|\bprotector\s+vests?\b|\bprotective\s+vests?\b|\bprotection\s+vests?\b|\blive\s*shield\b[^;]*\bvests?\b|\bspine\b|\bbody\s*protectors?\b"),
     ("Elbows", r"\belbows?\b|\barm\s*(?:pads?|guards?|protectors?)\b"),
     ("Forearms", r"\bforearms?\b"),
     ("Wrists", r"\bwrists?\s*(?:guards?|braces?|pads?|protectors?|wraps?|supports?)\b|\bwristguards?\b"),
     ("Gloves", r"\bgloves?\b|\bmitts?\b|\bmittens?\b"),
-    ("Hips & Tailbone", r"\bhips?\s*(?:pads?|guards?|protectors?)\b|\btailbone\b|\bcrash\s*(?:pants|shorts)\b"
-                        r"|\bimpact\s*(?:shorts|pants|liners?|underwear)\b|\barmou?r\s*(?:underwear|shorts|pants)\b"
-                        r"|\bprotective\s*(?:shorts|pants|underwear)\b|\bbum\s*(?:pads?|savers?)\b|\bbumsavers?\b"),
+    ("Hips & Tailbone", r"\bhips?\s*(?:pads?|guards?|protectors?)\b|\btailbone\b|\bcrash\s*(?:pants|shorts?)\b"
+                        r"|\bimpact\s*(?:shorts?|pants|liners?|underwear)\b|\barmou?r\s*(?:underwear|shorts?|pants)\b"
+                        r"|\bprotective\s*(?:shorts?|pants|underwear)\b|\bbum\s*(?:pads?|savers?)\b|\bbumsavers?\b"),
     ("Knees", r"\bknees?\b"),
     ("Shins", r"\bshins?\b"),
     ("Ankles", r"\bankles?\b"),

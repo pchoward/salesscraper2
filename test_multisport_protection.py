@@ -43,5 +43,24 @@ class SuitsTests(unittest.TestCase):
         self.assertIsNone(ski.multisport_part("The Certified Sweatsaver Helmet"))
 
 
+
+class DriftUnclassifiedTests(unittest.TestCase):
+    """The drift check's first unclassified report (2026-11-26)."""
+
+    def test_impact_shorts_and_protection_vests(self):
+        from sports.protection import protects
+        for name, wanted in (("Burton Impact Short", ["Hips & Tailbone"]),
+                             ("Burton Total Impact Short - Women's", ["Hips & Tailbone"]),
+                             ("Atomic Live Shield Amid M Protection Vest", ["Back & Spine"]),
+                             ("Atomic Live Shield Amid Lite Jr. Vest - Kids'", ["Back & Spine"]),
+                             ("Pearl Izumi Short Sleeve Jersey", [])):
+            self.assertEqual(protects(name, "Protection"), wanted, name)
+
+    def test_a_helmet_light_mount_is_not_mtb_protection(self):
+        from sports.mtb.rules import filter_reason
+        self.assertEqual(filter_reason("Gloworm Universal Helmet Mount", "Protection"), "spare or accessory")
+        self.assertIsNone(filter_reason("Fox Speedframe Pro Helmet", "Protection"))
+
+
 if __name__ == "__main__":
     unittest.main()
