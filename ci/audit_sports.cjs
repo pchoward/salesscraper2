@@ -484,7 +484,7 @@ async function main(){
      }finally{await page.close();}
     });
    }
-   for(const width of [1366,1920,390]) await check('mtb',width,'All promos show, copy and dismiss',async()=>{
+   for(const width of [1366,1920,390]) await check('mtb',width,'Promo chips, store filters and persistence',async()=>{
     const phone=width===390;
     const page=await browser.newPage({viewport:{width,height:phone?844:768},isMobile:phone,hasTouch:phone});
     try{
@@ -498,35 +498,70 @@ async function main(){
      const strip=page.locator('#promoStrip');
      const offers=strip.locator('.promo-offer:visible');
      const stores=()=>offers.locator('a').allTextContents();
+     const advance=strip.locator('#promoAdvance');
+     const rail=strip.locator('#promoOffers');
      await strip.waitFor({state:'visible'});
-     assert.deepEqual(await stores(),['Alpine','Zebra','AuditFixture','GeneralFixture']);
-     assert.equal(await strip.locator('#promoMore').count(),0);
-     assert.equal(await strip.locator('[data-copy-promo]:visible').count(),2);
+     assert.deepEqual(await stores(),['Alpine','Zebra','CCS','GeneralFixture']);
+     assert.equal(await strip.locator('#promoTitle').textContent(),'Sales & promos (4)');
+     const positions=await offers.evaluateAll(nodes=>nodes.map(node=>{
+      const {top,height}=node.getBoundingClientRect();return {top,height};
+     }));
+     assert(positions.every(node=>node.top===positions[0].top&&node.height>=36&&node.height<=40));
      assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+     const info=strip.getByRole('button',{name:'Alpine offer details'});
+     const details=strip.locator('#promoDetails');
      if(phone){
-      const rows=await offers.evaluateAll(visible=>visible.map(offer=>{
-       const row=offer.getBoundingClientRect();
-       const button=offer.querySelector('[data-dismiss-promo]').getBoundingClientRect();
-       return {left:row.left,top:row.top,height:row.height,dismissRight:button.right};
-      }));
-      assert(rows.every((row,i)=>row.left===rows[0].left&&row.height<=41&&row.dismissRight<=width
-       &&(!i||row.top>=rows[i-1].top+rows[i-1].height)), 'one compact phone row per offer');
-     }else if(width===1366){
-      const first=await page.locator('.deal-card:visible').first().boundingBox();
-      assert(first&&first.y+first.height<=768,'first deal card remains above the fold');
+      assert(await advance.isVisible());
+      await advance.click();
+      await page.waitForFunction(()=>document.getElementById('promoOffers').scrollLeft>0);
+      await rail.evaluate(node=>node.scrollLeft=0);
+      await page.waitForFunction(()=>document.getElementById('promoOffers').scrollLeft===0);
+      await info.tap();
+     }else{
+      assert.equal(await advance.isVisible(),false);
+      assert(await rail.evaluate(node=>node.scrollWidth<=node.clientWidth));
+      await info.hover();
      }
-     await strip.getByRole('button',{name:'Copy FIXTURE40'}).click();
+     await details.waitFor({state:'visible'});
+     assert.match(await details.textContent(),/25% off gear, 15% off parts, until Dec 2 · Applied at checkout/);
+     await page.keyboard.press('Escape');
+     await details.waitFor({state:'hidden'});
+     if(!phone){
+      await info.focus();
+      await details.waitFor({state:'visible'});
+      await page.keyboard.press('Escape');
+     }
+     await strip.getByRole('button',{name:'Copy code FIXTURE40'}).click();
      await page.waitForFunction(async()=>await navigator.clipboard.readText()==='FIXTURE40');
-     await strip.getByRole('button',{name:'Dismiss Alpine promotion'}).click();
-     assert.deepEqual(await stores(),['Zebra','AuditFixture','GeneralFixture']);
+     const copied=strip.locator('#promoCopied');
+     await copied.waitFor({state:'visible'});
+     assert.equal(await copied.textContent(),'Copied!');
+     assert.equal(await strip.locator('#promoStatus').textContent(),'FIXTURE40 copied');
+     await copied.waitFor({state:'hidden'});
+     const toggle=strip.locator('#promoToggle');
+     await toggle.click();
      await page.reload();
      await strip.waitFor({state:'visible'});
-     assert.deepEqual(await stores(),['Zebra','AuditFixture','GeneralFixture']);
+     assert.equal(await toggle.getAttribute('aria-expanded'),'false');
+     assert.equal(await offers.count(),0);
+     await toggle.click();
+     await strip.getByRole('button',{name:'Hide Alpine offer'}).click();
+     assert.deepEqual(await stores(),['Zebra','CCS','GeneralFixture']);
+     await page.reload();
+     await strip.waitFor({state:'visible'});
+     assert.deepEqual(await stores(),['Zebra','CCS','GeneralFixture']);
+     await page.evaluate(()=>filterByStore('AuditFixture'));
+     assert.equal(await strip.isVisible(),false);
+     await page.evaluate(()=>filterByStore('CCS'));
+     assert.deepEqual(await stores(),['CCS']);
+     await page.evaluate(()=>filterByStore('CCS,AuditFixture'));
+     assert.deepEqual(await stores(),['CCS']);
+     await page.evaluate(()=>filterByStore('all'));
      await offers.first().evaluate(offer=>{
       offer.dataset.ends='2000-01-01';
       document.dispatchEvent(new Event('visibilitychange'));
      });
-     assert.deepEqual(await stores(),['AuditFixture','GeneralFixture']);
+     assert.deepEqual(await stores(),['CCS','GeneralFixture']);
     }finally{await page.close();}
    });
   }
