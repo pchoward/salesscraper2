@@ -1520,35 +1520,46 @@ def _promo_strip(sport_id):
             continue
         identity = escape(json.dumps([store, code]), quote=True)
         description = promos.describe(promo, code=False)
-        short_offer = {key: promo.get(key) for key in ("percent", "amount", "up_to")}
+        headline = promos.describe(
+            dict(percent=promo.get("percent"), amount=promo.get("amount"),
+                 up_to=promo.get("up_to") or len(promo.get("tiers") or ()) > 1),
+            code=False,
+        )
+        store_attr = escape(store, quote=True)
         if automatic:
-            short_offer["up_to"] = len(promo.get("tiers") or ()) > 1
-        short = promos.describe(short_offer, code=False)
-        dismiss_label = code or f"{store} promotion"
-        if automatic:
-            redemption = '<span class="promo-no-code">No code needed</span>'
+            redemption = '<span class="promo-no-code">No code</span>'
         else:
             redemption = (
-                f'<code>{escape(code)}</code>'
-                f'<button type="button" data-copy-promo aria-label="Copy {escape(code, quote=True)}">Copy</button>'
+                f'<button type="button" data-copy-promo aria-label="Copy code {escape(code, quote=True)}">'
+                f'<code>{escape(code)}</code></button>'
             )
+        details = ""
+        if description != headline:
+            details = (
+                f'<button type="button" data-promo-details="{escape(description + " · Applied at checkout", quote=True)}" '
+                f'aria-label="{store_attr} offer details" aria-expanded="false" aria-controls="promoDetails">ⓘ</button>'
+            )
+        tone = "automatic" if automatic else "code"
         rows.append(
-            f'<div class="promo-offer" data-promo-id="{identity}" '
-            f'data-ends="{escape(ends, quote=True)}">'
+            f'<div class="promo-offer promo-{tone}" data-promo-id="{identity}" '
+            f'data-store="{store_attr}" data-ends="{escape(ends, quote=True)}">'
             f'<a href="{escape(url, quote=True)}" target="_blank" rel="noopener">{escape(store)}</a>'
-            f'<span class="promo-description">{escape(description)} applied at checkout</span>'
-            f'<span class="promo-short" title="{escape(description, quote=True)}">{escape(short)}</span>'
-            f'{redemption}'
-            f'<button type="button" data-dismiss-promo aria-label="Dismiss {escape(dismiss_label, quote=True)}">Dismiss</button>'
+            f'<span class="promo-headline">{escape(headline)}</span>'
+            f'{redemption}{details}'
+            f'<button type="button" data-dismiss-promo aria-label="Hide {store_attr} offer">×</button>'
             '</div>'
         )
     if not rows:
         return ""
     return (
         '<section id="promoStrip" class="promo-strip" aria-labelledby="promoTitle" hidden>'
-        '<strong id="promoTitle">Sales &amp; promos</strong><div id="promoOffers">'
-        + "".join(rows) + '</div>'
-        '<span class="sr-only" role="status" id="promoStatus"></span></section>'
+        '<div class="promo-heading"><strong id="promoTitle">Sales &amp; promos</strong>'
+        '<button id="promoToggle" type="button" aria-expanded="true" aria-controls="promoRow">Hide ▴</button></div>'
+        '<div id="promoRow"><div id="promoOffers" tabindex="0" role="group" aria-label="Active offers">' + "".join(rows) + '</div>'
+        '<button type="button" id="promoAdvance" aria-controls="promoOffers" hidden></button></div>'
+        '<div id="promoDetails" class="promo-popover" popover="manual" hidden></div>'
+        '<div id="promoCopied" class="promo-popover" popover="manual" hidden>Copied!</div>'
+        '<span class="sr-only" role="status" aria-live="polite" id="promoStatus"></span></section>'
     )
 
 

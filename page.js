@@ -2223,6 +2223,7 @@ function applyFilters() {
     paintBreadcrumbs();
     paintResultCount();
     paintEmptyState();
+    if (typeof repaintPromoStrip === "function") repaintPromoStrip();
     syncUrl();
     paintViews();
     paintNav();
@@ -7326,52 +7327,176 @@ function init() {
     document.dispatchEvent(new Event("shreddeals:catalog-ready"));
 }
 
+let repaintPromoStrip;
+
 function initPromoStrip() {
     const strip = document.getElementById("promoStrip");
     if (!strip) return;
-    const key = "shreddeals.promo-dismissed";
-    const stored = readJson(key, []);
+    const dismissKey = "shreddeals.promo-dismissed";
+    const collapseKey = "shreddeals.promo-strip-collapsed";
+    const stored = readJson(dismissKey, []);
     const dismissed = new Set(Array.isArray(stored) ? stored : []);
-    const offers = Array.from(strip.querySelectorAll(".promo-offer"));
+    let collapsed = readJson(collapseKey, false) === true;
+    const title = document.getElementById("promoTitle");
+    const toggle = document.getElementById("promoToggle");
+    const row = document.getElementById("promoRow");
+    const rail = document.getElementById("promoOffers");
+    const advance = document.getElementById("promoAdvance");
     const status = document.getElementById("promoStatus");
+    const details = document.getElementById("promoDetails");
+    const copied = document.getElementById("promoCopied");
+    const offers = Array.from(rail.children);
+    const hover = window.matchMedia("(hover: hover)");
+    let active = [];
+    let detailButton = null;
+    let copyTimer;
+    let closeTimer;
 
-    function paint() {
+    function hidePopup(popup) {
+        popup.hidePopover?.();
+        popup.hidden = true;
+    }
+
+    function positionPopup(popup, anchor) {
+        popup.hidden = false;
+        popup.showPopover?.();
+        const button = anchor.getBoundingClientRect();
+        const left = Math.max(8, Math.min(button.left, document.documentElement.clientWidth - popup.offsetWidth - 8));
+        const below = button.bottom + 4;
+        popup.style.left = left + "px";
+        popup.style.top = (below + popup.offsetHeight <= window.innerHeight
+            ? below : Math.max(8, button.top - popup.offsetHeight - 4)) + "px";
+    }
+
+    function closeDetails() {
+        clearTimeout(closeTimer);
+        detailButton?.setAttribute("aria-expanded", "false");
+        detailButton = null;
+        hidePopup(details);
+    }
+
+    function openDetails(button) {
+        closeDetails();
+        hidePopup(copied);
+        detailButton = button;
+        button.setAttribute("aria-expanded", "true");
+        details.textContent = button.dataset.promoDetails;
+        positionPopup(details, button);
+    }
+
+    function overflow() {
+        const edge = rail.getBoundingClientRect().right + 1;
+        const remaining = row.hidden ? 0 : active.filter(offer => offer.getBoundingClientRect().right > edge).length;
+        if (!remaining && document.activeElement === advance) rail.focus({ preventScroll: true });
+        advance.hidden = remaining === 0;
+        advance.textContent = "→ " + remaining + " more";
+        advance.setAttribute("aria-label", "Scroll to " + remaining + " more offers");
+    }
+
+    repaintPromoStrip = function () {
         const now = new Date();
         const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
             .map(value => String(value).padStart(2, "0")).join("-");
-        offers.forEach(offer => {
-            offer.hidden = dismissed.has(offer.dataset.promoId)
-                || (!!offer.dataset.ends && offer.dataset.ends < today);
+        const next = offers.filter(offer => !dismissed.has(offer.dataset.promoId)
+            && (!offer.dataset.ends || offer.dataset.ends >= today)
+            && (state.store === "all" || storeSelected(offer.dataset.store)));
+        if (next.length !== active.length || next.some((offer, i) => offer !== active[i])) {
+            rail.scrollLeft = 0;
+            closeDetails();
+            hidePopup(copied);
+        }
+        active = next;
+        offers.forEach(offer => { offer.hidden = !active.includes(offer); });
+        strip.hidden = !active.length;
+        title.textContent = "Sales & promos (" + active.length + ")";
+        row.hidden = collapsed;
+        toggle.textContent = collapsed ? "Show ▾" : "Hide ▴";
+        toggle.setAttribute("aria-expanded", String(!collapsed));
+        overflow();
+    };
+
+    toggle.addEventListener("click", () => {
+        collapsed = !collapsed;
+        closeDetails();
+        hidePopup(copied);
+        writeJson(collapseKey, collapsed);
+        repaintPromoStrip();
+    });
+    advance.addEventListener("click", () => {
+        const edge = rail.getBoundingClientRect();
+        const next = active.find(offer => offer.getBoundingClientRect().right > edge.right + 1);
+        if (!next) return;
+        const offset = next.getBoundingClientRect().left - edge.left;
+        rail.scrollBy({ left: offset > 1 ? offset : edge.width, behavior: "smooth" });
+    });
+    window.addEventListener("scroll", event => {
+        closeDetails();
+        hidePopup(copied);
+        if (event.target === rail) overflow();
+    }, { capture: true, passive: true });
+    new ResizeObserver(overflow).observe(rail);
+
+    strip.querySelectorAll("[data-promo-details]").forEach(button => {
+        button.addEventListener("pointerenter", event => {
+            if (hover.matches && event.pointerType === "mouse") openDetails(button);
         });
-        strip.hidden = offers.every(offer => offer.hidden);
-    }
+        button.addEventListener("pointerleave", () => {
+            if (hover.matches && detailButton === button && document.activeElement !== button) {
+                closeTimer = setTimeout(closeDetails, 120);
+            }
+        });
+        button.addEventListener("focus", () => {
+            if (button.matches(":focus-visible")) openDetails(button);
+        });
+        button.addEventListener("blur", closeDetails);
+        button.addEventListener("click", event => {
+            if (detailButton !== button) openDetails(button);
+            else if (!hover.matches || event.detail === 0) closeDetails();
+        });
+    });
+    details.addEventListener("pointerenter", () => clearTimeout(closeTimer));
+    details.addEventListener("pointerleave", () => {
+        if (document.activeElement !== detailButton) closeDetails();
+    });
+    document.addEventListener("pointerdown", event => {
+        if (detailButton && !details.contains(event.target) && !detailButton.contains(event.target)) closeDetails();
+    });
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && detailButton) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeDetails();
+        }
+    }, true);
 
     strip.addEventListener("click", async event => {
         const button = event.target.closest("button");
         const offer = button?.closest(".promo-offer");
         if (!offer) return;
         if (button.hasAttribute("data-dismiss-promo")) {
+            const index = active.indexOf(offer);
             dismissed.add(offer.dataset.promoId);
-            try { localStorage.setItem(key, JSON.stringify([...dismissed])); } catch (_) {}
-            paint();
-            const dismiss = strip.querySelector(".promo-offer:not([hidden]) [data-dismiss-promo]");
-            if (dismiss?.getClientRects().length) dismiss.focus();
-            else document.getElementById("sortSelect")?.focus();
+            writeJson(dismissKey, [...dismissed]);
+            repaintPromoStrip();
+            const next = active[index] || active[index - 1];
+            (next?.querySelector("[data-dismiss-promo]") || document.getElementById("sortSelect"))?.focus();
         } else if (button.hasAttribute("data-copy-promo")) {
-            const code = offer.querySelector("code").textContent;
+            const code = button.querySelector("code").textContent;
+            status.textContent = "";
             try {
                 await navigator.clipboard.writeText(code);
                 status.textContent = code + " copied";
-                button.textContent = "Copied";
+                closeDetails();
+                clearTimeout(copyTimer);
+                positionPopup(copied, button);
+                copyTimer = setTimeout(() => hidePopup(copied), 1500);
             } catch (_) {
-                status.textContent = "Could not copy. Select the code to copy it manually.";
-                button.textContent = "Copy unavailable";
+                status.textContent = "Could not copy code " + code;
             }
         }
     });
-    // Recheck the visitor's date when a tab is brought back after midnight.
-    document.addEventListener("visibilitychange", () => { if (!document.hidden) paint(); });
-    paint();
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) repaintPromoStrip(); });
+    repaintPromoStrip();
 }
 
 document.addEventListener("DOMContentLoaded", initPromoStrip);

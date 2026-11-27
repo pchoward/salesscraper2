@@ -180,9 +180,10 @@ class NoCodeTests(unittest.TestCase):
         with mock.patch("promos.for_sport", return_value=[dict(sale, ends="")]):
             strip = _promo_strip("skate")
         self.assertIn('data-promo-id="[&quot;SkateWarehouse&quot;, &quot;&quot;]"', strip)
-        self.assertIn('class="promo-no-code">No code needed</span>', strip)
+        self.assertIn('class="promo-no-code">No code</span>', strip)
         self.assertIn('>Up to 25% off</span>', strip)
-        self.assertIn("applied at checkout", strip)
+        self.assertIn("Applied at checkout", strip)
+        self.assertIn("25% off shoes, clothing &amp; accessories, 15% off decks", strip)
         self.assertIn("data-dismiss-promo", strip)
         self.assertNotIn("<code>", strip)
         self.assertNotIn("data-copy-promo", strip)
@@ -310,7 +311,10 @@ class PromoStripTests(unittest.TestCase):
         current.assert_called_once_with("mtb")
         self.assertIn("Fanatik &amp; Co", markup)
         self.assertIn("20% off", markup)
-        self.assertIn("<code>LIVE</code>", markup)
+        self.assertIn('aria-label="Copy code LIVE"><code>LIVE</code></button>', markup)
+        self.assertIn('data-promo-details="20% off, until Jan 1 · Applied at checkout"', markup)
+        self.assertIn('aria-label="Hide Fanatik &amp; Co offer">×</button>', markup)
+        self.assertNotIn('>Copy</button>', markup)
         self.assertNotIn("EXPIRED", markup)
         with mock.patch("promos.for_sport", return_value=[]):
             self.assertEqual(_promo_strip("ski"), "")
@@ -325,9 +329,10 @@ class PromoStripTests(unittest.TestCase):
         ]
         with mock.patch("promos.for_sport", return_value=offers):
             markup = _promo_strip("mtb")
-        self.assertEqual(markup.count('class="promo-offer"'), 4)
+        self.assertEqual(markup.count('class="promo-offer '), 4)
         self.assertEqual(markup.count("data-copy-promo"), 2)
-        self.assertNotIn("promoMore", markup)
+        self.assertIn('aria-controls="promoRow">Hide ▴</button>', markup)
+        self.assertNotIn("data-promo-details", markup)
         self.assertEqual(
             sorted(("A Alpine", "Z Zebra", "Code High", "Code Low"), key=markup.index),
             ["A Alpine", "Z Zebra", "Code High", "Code Low"],

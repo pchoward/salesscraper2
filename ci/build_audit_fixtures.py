@@ -25,9 +25,9 @@ def _fixture_promos(sport_id):
         dict(base, store='GeneralFixture', code='SPORTS10', percent=10),
         dict(base, store='Zebra', code='', auto=True, percent=25,
              tiers=[{'percent': 25, 'on': 'gear'}]),
-        dict(base, store='AuditFixture', code='FIXTURE40', percent=40),
-        dict(base, store='Alpine', code='', auto=True, percent=25,
-             tiers=[{'percent': 25, 'on': 'gear'}]),
+        dict(base, store='CCS', code='FIXTURE40', percent=40),
+        dict(base, store='Alpine', code='', auto=True, percent=25, ends='2099-12-02',
+             tiers=[{'percent': 25, 'on': 'gear'}, {'percent': 15, 'on': 'parts'}]),
     ]
 
 
@@ -81,7 +81,7 @@ def build(output):
                 ]
         if sport is sports.MTB:
             products['AuditFixture_Bikes'] = [
-                {'name': f'SYNTHETIC UI {power} Bike', 'part': 'Bikes', 'store': 'AuditFixture',
+                {'name': f'SYNTHETIC UI {power} Bike', 'part': 'Bikes', 'store': 'CCS' if index else 'AuditFixture',
                  'brand': 'Audit', 'url': f'https://example.test/mtb/bike-{index}',
                  'price_new': '100.00', 'price_old': '400.00', 'availability': 'In stock',
                  'technical_offers': [offer('bike', {'power': [power]})]}
