@@ -71,6 +71,10 @@ _NOT_A_SALE = re.compile(
     r"first\s+(?:order|purchase|time)|sign\s*-?\s*up|subscribe|newsletter|e-?mail|\bsms\b|\btexts?\b|"
     r"\bapp\b|member|student|military|teacher|nurse|first\s+responder|birthday|refer|loyalty|rewards?|"
     r"gift\s*card|free\s+shipping|shipping\s+code", re.I)
+# In store mail "View this email in your browser" is everywhere; the other
+# sign-up words still rule a code out.
+_NOT_A_SALE_MAIL = re.compile(_NOT_A_SALE.pattern.replace(r"e-?mail|", ""), re.I)
+_ENDS_TODAY = re.compile(r"\b(?:ends?|expires?)\s+(?:tonight|today|at\s+midnight)\b|\btoday\s+only\b|\bone\s+day\s+only\b", re.I)
 _STOPWORDS = {"CODE", "HERE", "BELOW", "ABOVE", "AT", "CHECKOUT", "THE", "AND", "FOR", "OFF", "SALE", "NOW", "SHOP",
               "SAVE", "APPLY", "APPLIED", "AUTOMATICALLY", "DISCOUNT", "PROMO", "COUPON", "TODAY", "ONLY", "ALL",
               "YOUR", "ORDER", "ORDERS", "USD", "SHIPPING"}
@@ -302,9 +306,24 @@ def find_automatic(text, code_spots=(), today=None):
     return None
 
 
-def find(raw, today=None):
+_SENTENCE_END = re.compile(r"[.!?](?=\s)|\s\|\s")
+
+
+def _sentences_around(text, start, end):
+    """The text from the start of the sentence before the code's through the
+    end of the code's own sentence (newsletters: one line per offer)."""
+    ends = [m.end() for m in _SENTENCE_END.finditer(text)]
+    before = [e for e in ends if e <= start]
+    lead = before[-2] if len(before) >= 2 else 0
+    after = [e for e in ends if e >= end]
+    return text[lead:after[0] if after else len(text)]
+
+
+def find(raw, today=None, sentences=False):
     """Promo codes in one page: [{"code", "percent"|"amount", "ends"}], plus
-    at most one sale applied without a code (``find_automatic``)."""
+    at most one sale applied without a code (``find_automatic``).
+    ``sentences``: judge sign-up wording by the code's sentence and the one
+    before it, not a fixed window (store mail, where offers sit close)."""
     today = today or datetime.date.today()
     text = page_text(raw)
     candidates = []
@@ -327,8 +346,8 @@ def find(raw, today=None):
         mentions.add((code, end))
         window = text[max(0, start - 180):end + 180]
         # The words right around the code decide whether it's a sign-up code.
-        near = text[max(0, start - 90):end + 60]
-        if _NOT_A_SALE.search(near):
+        near = _sentences_around(text, start, end) if sentences else text[max(0, start - 90):end + 60]
+        if (_NOT_A_SALE_MAIL if sentences else _NOT_A_SALE).search(near):
             continue
         discount = _discount(window, start - max(0, start - 180))
         if not discount:
@@ -337,6 +356,8 @@ def find(raw, today=None):
         # The end date usually follows the code ("... code X. Ends Dec 2"); a
         # date before it may belong to the promo above on the same page.
         ends = _end_date(text[start:end + 180], today) or _end_date(text[max(0, start - 120):start], today)
+        if not ends and sentences and _ENDS_TODAY.search(text[max(0, start - 120):end + 180]):
+            ends = today.isoformat()  # mail: "ends tonight" is the day it was sent
         near = text[max(0, start - 160):end + 120]
         extra = {}
         if scope:
@@ -477,6 +498,69 @@ def merge(previous, found, read, today):
                   key=lambda p: (p.get("store") or "", p.get("code") or ""))
 
 
+# Store newsletters (owner, 2026-11-27): stores we can't scrape email their
+# codes. Cloudflare routes the deals inbox to the alerts Worker, which keeps
+# mail only from these stores' DMARC-verified domains
+# (worker/src/newsletters.js); this reads it with a signed request and finds
+# codes with the same rules as store pages. The chip links to the store's
+# homepage; their items aren't listed. Off unless NEWSLETTERS_ENABLED is 1.
+NEWSLETTER_STORES = {
+    "Jenson USA": ("https://www.jensonusa.com/", ["mtb"]),
+    "Dan's Comp": ("https://www.danscomp.com/", ["bmx"]),
+    "Competitive Cyclist": ("https://www.competitivecyclist.com/", ["mtb"]),
+}
+NEWSLETTER_DAYS = 7  # a mailed code with no end date shows this long
+NEWSLETTER_LOOKBACK = 45  # days of mail read (the Worker keeps 45)
+
+
+def fetch_newsletters(env=None, transport=None, now=None):
+    """Stored store mail from the Worker, or None when not set up or unreachable."""
+    env = _os.environ if env is None else env
+    if str(env.get("NEWSLETTERS_ENABLED") or "").strip().lower() not in {"1", "true"}:
+        return None
+    api_url = str(env.get("ALERTS_API_URL") or "").strip().rstrip("/")
+    secret = str(env.get("ALERTS_HMAC_SECRET") or "").strip()
+    if not api_url.startswith("https://") or len(secret) < 32:
+        logger.warning("Newsletters: ALERTS_API_URL or ALERTS_HMAC_SECRET missing; skipped")
+        return None
+    import types
+    import alerts_delivery
+    now = int(now if now is not None else time.time())
+    config = types.SimpleNamespace(api_url=api_url, secret=secret)
+    try:
+        data = alerts_delivery._call(config, "GET", f"/v1/internal/newsletters?since={now - NEWSLETTER_LOOKBACK * 86400}",
+                                     transport=transport, now=now)
+    except Exception as exc:
+        logger.warning("Newsletters not read (%s)", exc)
+        return None
+    mail = data.get("newsletters") if isinstance(data, dict) else None
+    return [entry for entry in mail or [] if isinstance(entry, dict)]
+
+
+def newsletter_promos(mail, today=None):
+    """Current promos from stored store mail, newest mail first per code."""
+    today = today or datetime.date.today()
+    current = {}
+    for entry in sorted(mail or [], key=lambda e: e.get("received_at") or 0):
+        store = entry.get("store")
+        if store not in NEWSLETTER_STORES:
+            continue
+        try:
+            received = datetime.datetime.fromtimestamp(int(entry.get("received_at")), datetime.timezone.utc).date()
+        except (TypeError, ValueError, OverflowError, OSError):
+            continue
+        home, sport_ids = NEWSLETTER_STORES[store]
+        text = html_lib.escape(f"{entry.get('subject') or ''}\n{entry.get('text') or ''}", quote=False)
+        for promo in find(text, received, sentences=True):
+            ends = promo.get("ends") or ""
+            if ends and ends < today.isoformat():
+                continue
+            if not ends and (today - received).days > NEWSLETTER_DAYS:
+                continue
+            current[(store, promo["code"])] = dict(promo, store=store, url=home, sports=list(sport_ids), source="email")
+    return list(current.values())
+
+
 def load(path=PATH):
     try:
         with open(path, encoding="utf-8") as handle:
@@ -528,6 +612,11 @@ def run(stores=None, today=None, path=PATH, fetch=None, sleep=time.sleep):
             if ok:
                 read.add(name)
             found.extend(dict(promo, sports=sorted(sport_ids)) for promo in promos)
+        mail = saved_newsletters()
+        if mail is not None:
+            mailed = newsletter_promos(mail, today)
+            logger.info("Newsletters: %s mails, %s current offers", len(mail), len(mailed))
+            found.extend(mailed)
         current = merge(previous, found, read, today)
         with open(path, "w", encoding="utf-8") as handle:
             json.dump({"updated": today.isoformat(), "promos": current}, handle, indent=1, ensure_ascii=False)
@@ -590,7 +679,36 @@ def describe(promo, code=True):
     return text
 
 
+MAIL_FILE = "newsletter_mail.json"  # handed from the newsletter job to the promo job (not committed)
+
+
+def save_newsletters(path=MAIL_FILE, env=None):
+    """The newsletter job: fetch stored mail and write it for the promo job.
+    Reads no store pages. Writes nothing when not set up."""
+    mail = fetch_newsletters(env)
+    if mail is None:
+        return False
+    with open(path, "w", encoding="utf-8") as handle:
+        json.dump({"newsletters": mail}, handle)
+    logger.info("Newsletters: %s mails saved for the promo check", len(mail))
+    return True
+
+
+def saved_newsletters(path=MAIL_FILE):
+    """Mail the newsletter job saved, or None."""
+    try:
+        with open(path, encoding="utf-8") as handle:
+            mail = json.load(handle).get("newsletters")
+    except (OSError, ValueError, AttributeError):
+        return None
+    return [entry for entry in mail or [] if isinstance(entry, dict)]
+
+
 if __name__ == "__main__":
+    import sys
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
+    if sys.argv[1:] == ["--fetch-newsletters"]:
+        save_newsletters()
+        sys.exit(0)
     for promo in run():
         print(f"{promo['store']}: {describe(promo)} ({', '.join(promo.get('sports') or [])})")

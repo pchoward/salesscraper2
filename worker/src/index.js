@@ -18,6 +18,7 @@ import {
 } from "./subscribers.js";
 import { resendWebhook } from "./webhooks.js";
 import { catalogSearch, pruneCatalogLimits } from "./catalog.js";
+import { listNewsletters, newslettersEnabled, pruneNewsletters, receiveEmail } from "./newsletters.js";
 
 const PUBLIC = {
   "/v1/subscribe": { POST: subscribe },
@@ -93,6 +94,11 @@ function health(request, config) {
 export async function handle(request, env, deps = {}) {
   const url = new URL(request.url);
   if (url.pathname === "/v1/catalog-search") return catalogSearch(request, env, deps);
+  // Store newsletters stand alone, like Catalog search: they need only
+  // HMAC_SECRET, DB and NEWSLETTER_INBOX, not the email-alert settings.
+  if (url.pathname === "/v1/internal/newsletters") {
+    return listNewsletters(request, env, deps.now ? deps.now() : undefined);
+  }
   const config = loadConfig(env);
   if (url.pathname === "/v1/health") return health(request, config);
   // Email-alert routes fail closed while their settings are incomplete.
@@ -150,7 +156,12 @@ export default {
   fetch(request, env) {
     return handle(request, env);
   },
+  // Cloudflare Email Routing: store newsletters for the promo strip.
+  async email(message, env) {
+    await receiveEmail(message, env);
+  },
   async scheduled(_event, env, ctx) {
+    if (newslettersEnabled(env)) ctx.waitUntil(pruneNewsletters(env.DB));
     if (loadConfig(env).ok) ctx.waitUntil(runMaintenance(env.DB));
     else if (env.CATALOG_SEARCH_ENABLED === 'true' && env.DB?.prepare) {
       // Catalog-only configuration still retires its opaque rate counters.

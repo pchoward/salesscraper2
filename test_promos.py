@@ -291,7 +291,15 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("group: scrape-${{ github.ref }}", text)
         adds = [line.strip() for line in text.splitlines() if "git add" in line]
         self.assertEqual(adds, ["git add promos.json"])
-        self.assertNotIn("${{ secrets.", text)
+        # Store pages are untrusted: the job that reads them holds no secret.
+        # Only the newsletter job has one, and it reads no store pages.
+        import yaml
+        jobs = yaml.safe_load(text)["jobs"]
+        self.assertNotIn("${{ secrets.", yaml.safe_dump(jobs["promos"]))
+        newsletters = yaml.safe_dump(jobs["newsletters"])
+        self.assertIn("secrets.ALERTS_HMAC_SECRET", newsletters)
+        self.assertIn("python promos.py --fetch-newsletters", newsletters)
+        self.assertNotIn("run: python promos.py\n", newsletters)
 
 
 if __name__ == "__main__":
