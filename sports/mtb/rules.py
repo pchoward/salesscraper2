@@ -21,6 +21,12 @@ _RULES=(
 # parts sale): Campagnolo and its groups, Shimano 105, GP5000, Schwalbe One.
 _NOT_MTB=(r'\b(?:campagnolo|campy|super\s+record|chorus|centaur|ekar|shimano\s+105|gp\s*5000|grand\s+prix|gatorskin|'
           r'schwalbe\s+one|pro\s+one|corsa|aero\s+(?:bars?|wheels?)|time\s+trial|tt\s+bars?|shiv|tt\s+(?:disc\s+)?module)\b|'
+          # Road and gravel leftovers the specialist check found (owner, 2026-11-27):
+          # Zipp road wheels, Reserve's gravel (GR) and aero wheels, eTap Blips,
+          # Shimano's road series (R610 Sprinter, RS910 junction, PD-R550). AXS/eTap
+          # batteries and chargers fit MTB AXS too, so they stay.
+          r'\bzipp\b[^;]*\b(?:202|303|353|404|454|808|858)\b|\bnsw\b|\bturbulent\b|\b\d{2}\|\d{2}\s+gr\b|'
+          r'\bblips?\b|\bsprinter\b|(?<!alfine )\bR[S]?\d{3,4}\b|'
           r'\b(?:road|gravel|cyclocross|triathlon|bmx|commuter|ultegra|dura[- ]?ace|tiagra|sora|claris|grx|'
           r'rival|(?:force|red)\s+(?:axs|etap|22)|xplr|sram\s+red)\b|\b700\s*(?:c\b|x\s*\d)|(?<![\d.])\d{2}(?:-\d{2})?c\b|\bdrop[- ]bars?\b|\b(?:bar|handlebar)\s+tape\b')
 

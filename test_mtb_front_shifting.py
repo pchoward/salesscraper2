@@ -80,5 +80,34 @@ class TriplesAndRimBrakesTests(unittest.TestCase):
             self.assertIsNone(filter_reason(name, part, product_type=kind), name)
 
 
+
+class RoadLeftoversTests(unittest.TestCase):
+    """The first specialist shop check (owner, 2026-11-27): road and gravel
+    wheels and road Di2/eTap parts under MTB."""
+
+    def test_road_and_gravel_parts_go(self):
+        for name, part, kind in (
+            ("Zipp Speed Weaponry 353 NSW Tubeless Disc Wheels", "Wheels", "COMPONENTS/WHEELS/PERFORMANCE WHEELS CARBON"),
+            ("Reserve 40|44 GR Wheelset + Vittoria Terreno T40 Tire Bundle", "Wheels", "PERFORMANCE WHEELS CARBON"),
+            ("Reserve 34|37 SL Turbulent Aero Wheelset", "Wheels", "PERFORMANCE WHEELS CARBON"),
+            ("SRAM eTap Blip Shift Buttons", "Drivetrain", "Electronic Gear Shifting"),
+            ("Shimano Di2 R610 Sprinter Shifter Set", "Drivetrain", "Electronic Gear Shifting"),
+            ("Shimano RS910 Bar End Junction-A Box", "Drivetrain", "Electronic Gear Shifting"),
+            ("Shimano SPD-SL Pedals PD-R550", "Pedals", "Pedals"),
+        ):
+            self.assertEqual(filter_reason(name, part, product_type=kind), "explicit non-MTB equipment", name)
+
+    def test_mtb_parts_stay(self):
+        for name, part, kind in (
+            ("Reserve 30|HD Wheelset", "Wheels", "PERFORMANCE WHEELS CARBON"),
+            ("Reserve E 30|HD 31|DH Wheelset (XD)", "Wheels", "PERFORMANCE WHEELS CARBON"),
+            ("SRAM eTap and eTap AXS Battery", "Drivetrain", "Electronic Gear Shifting"),  # MTB AXS uses it
+            ("Shimano XT MT800 Di2 Digital Display Unit", "Drivetrain", "Electronic Gear Shifting"),
+            ("Origin8 SM-20 brake pad Origin8 Vise Hyd-Mech / Shimano Alfine R505- Deore M535-", "Brakes", "Brake Pads"),
+            ("Zipp 3ZERO MOTO Carbon Wheelset", "Wheels", "Wheels"),
+        ):
+            self.assertIsNone(filter_reason(name, part, product_type=kind), name)
+
+
 if __name__ == "__main__":
     unittest.main()
