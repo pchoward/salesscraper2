@@ -10,7 +10,7 @@
           "cut_high": 17,
           "cut_low": 14,
           "deals": {
-            "deals": 383,
+            "deals": 376,
             "high": 30,
             "low": 12,
             "max_off": 64,
@@ -177,11 +177,11 @@
           "cut_low": 19,
           "end": "2026-09-11",
           "kind": "sale",
-          "listings": 33,
+          "listings": 28,
           "moment": "Labor Day",
           "start": "2026-09-03",
           "steps": [],
-          "tracked": 35,
+          "tracked": 30,
           "uniform": true
         },
         {
@@ -209,8 +209,8 @@
           "cut_high": 21,
           "cut_low": 17,
           "deals": {
-            "deals": 452,
-            "high": 33,
+            "deals": 444,
+            "high": 32,
             "low": 20,
             "max_off": 93,
             "uniform": null
@@ -236,6 +236,10 @@
             {
               "from": "2026-11-22",
               "text": "up to 93% off (most 20-33%)"
+            },
+            {
+              "from": "2026-11-27",
+              "text": "up to 93% off (most 20-32%)"
             }
           ],
           "kind": "sale",
@@ -247,7 +251,10 @@
           "uniform": false
         }
       ]
+    },
+    "evo": {
+      "events": []
     }
   },
-  "updated": "2026-11-26"
+  "updated": "2026-11-27"
 }
