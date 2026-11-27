@@ -1,10 +1,30 @@
 {
-  "checked_at": "2026-11-27T05:04:49+00:00",
+  "checked_at": "2026-11-27T09:07:15+00:00",
   "counts": {
-    "action": 0,
+    "action": 1,
     "watch": 0
   },
   "date": "2026-11-27",
-  "findings": [],
-  "last_scrape": "2026-11-27T04:46:44+00:00"
+  "findings": [
+    {
+      "count": 2,
+      "examples": [
+        {
+          "name": "POC Oseus VPD Shorts",
+          "part": "Protection",
+          "store": "evo"
+        },
+        {
+          "name": "POC POCito VPD Air Vest - Kids'",
+          "part": "Protection",
+          "store": "evo"
+        }
+      ],
+      "field": "protects",
+      "kind": "new_unclassified",
+      "label": "protection type",
+      "level": "action"
+    }
+  ],
+  "last_scrape": "2026-11-27T08:47:19+00:00"
 }

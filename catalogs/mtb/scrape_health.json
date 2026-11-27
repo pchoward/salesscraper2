@@ -59524,14 +59524,14 @@
           }
         },
         "Bicycle Warehouse_Bikes": {
-          "count": 26,
+          "count": 27,
           "failed": false,
           "diagnostics": {
             "expected_count": 28.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 26,
-            "percentage_change": -8.8,
+            "actual_count": 27,
+            "percentage_change": -5.3,
             "reason": "normal_variation"
           }
         },
@@ -59620,14 +59620,14 @@
           }
         },
         "Bicycle Warehouse_Protection": {
-          "count": 16,
+          "count": 17,
           "failed": false,
           "diagnostics": {
             "expected_count": 17.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 16,
-            "percentage_change": -5.9,
+            "actual_count": 17,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -59865,14 +59865,14 @@
           }
         },
         "Bikes Online_Forks & Shocks": {
-          "count": 11,
+          "count": 10,
           "failed": false,
           "diagnostics": {
             "expected_count": 8.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 11,
-            "percentage_change": 37.5,
+            "actual_count": 10,
+            "percentage_change": 25.0,
             "reason": "normal_variation"
           }
         },
@@ -59913,14 +59913,14 @@
           }
         },
         "Bikes Online_Protection": {
-          "count": 42,
+          "count": 41,
           "failed": false,
           "diagnostics": {
             "expected_count": 40.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 42,
-            "percentage_change": 5.0,
+            "actual_count": 41,
+            "percentage_change": 2.5,
             "reason": "normal_variation"
           }
         },
@@ -59999,15 +59999,15 @@
           }
         },
         "Cambria_Drivetrain": {
-          "count": 253,
+          "count": 252,
           "failed": false,
           "diagnostics": {
             "expected_count": 256.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
             "rule_excluded": 33,
-            "actual_count": 253,
-            "percentage_change": -1.4,
+            "actual_count": 252,
+            "percentage_change": -1.8,
             "reason": "normal_variation"
           }
         },
@@ -60218,14 +60218,14 @@
           }
         },
         "Colorado Cyclist_Tires": {
-          "count": 403,
+          "count": 402,
           "failed": false,
           "diagnostics": {
             "expected_count": 380.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 26.0,
-            "actual_count": 403,
-            "percentage_change": 6.1,
+            "actual_count": 402,
+            "percentage_change": 5.8,
             "reason": "normal_variation"
           }
         },
@@ -61654,14 +61654,14 @@
           }
         },
         "Troy Lee Designs_Protection": {
-          "count": 27,
+          "count": 32,
           "failed": false,
           "diagnostics": {
             "expected_count": 27.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 27,
-            "percentage_change": 0.0,
+            "actual_count": 32,
+            "percentage_change": 18.5,
             "reason": "normal_variation"
           }
         },
@@ -62004,38 +62004,38 @@
           }
         },
         "evo_Brakes": {
-          "count": 60,
+          "count": 62,
           "failed": false,
           "diagnostics": {
             "expected_count": 56,
             "baseline_samples": 5,
             "median_absolute_deviation": 0,
-            "actual_count": 60,
-            "percentage_change": 7.1,
+            "actual_count": 62,
+            "percentage_change": 10.7,
             "reason": "normal_variation"
           }
         },
         "evo_Cockpit": {
-          "count": 43,
+          "count": 53,
           "failed": false,
           "diagnostics": {
             "expected_count": 29,
             "baseline_samples": 5,
             "median_absolute_deviation": 0,
-            "actual_count": 43,
-            "percentage_change": 48.3,
+            "actual_count": 53,
+            "percentage_change": 82.8,
             "reason": "normal_variation"
           }
         },
         "evo_Drivetrain": {
-          "count": 95,
+          "count": 104,
           "failed": false,
           "diagnostics": {
             "expected_count": 64,
             "baseline_samples": 5,
             "median_absolute_deviation": 1,
-            "actual_count": 95,
-            "percentage_change": 48.4,
+            "actual_count": 104,
+            "percentage_change": 62.5,
             "reason": "normal_variation"
           }
         },
@@ -62076,26 +62076,26 @@
           }
         },
         "evo_Pedals": {
-          "count": 32,
+          "count": 49,
           "failed": false,
           "diagnostics": {
             "expected_count": 28,
             "baseline_samples": 5,
             "median_absolute_deviation": 0,
-            "actual_count": 32,
-            "percentage_change": 14.3,
+            "actual_count": 49,
+            "percentage_change": 75.0,
             "reason": "normal_variation"
           }
         },
         "evo_Protection": {
-          "count": 219,
+          "count": 286,
           "failed": false,
           "diagnostics": {
             "expected_count": 165,
             "baseline_samples": 5,
             "median_absolute_deviation": 3,
-            "actual_count": 219,
-            "percentage_change": 32.7,
+            "actual_count": 286,
+            "percentage_change": 73.3,
             "reason": "normal_variation"
           }
         },
@@ -62124,19 +62124,19 @@
           }
         },
         "evo_Wheels": {
-          "count": 20,
+          "count": 24,
           "failed": false,
           "diagnostics": {
             "expected_count": 12,
             "baseline_samples": 5,
             "median_absolute_deviation": 0,
-            "actual_count": 20,
-            "percentage_change": 66.7,
+            "actual_count": 24,
+            "percentage_change": 100.0,
             "reason": "normal_variation"
           }
         }
       },
-      "scanned_at": "2026-11-27T04:56:13+00:00"
+      "scanned_at": "2026-11-27T08:58:08+00:00"
     }
   ],
   "baseline": {
@@ -62226,7 +62226,7 @@
     },
     "Bikes Online_Forks & Shocks": {
       "date": "2026-11-27",
-      "count": 11
+      "count": 10
     },
     "Bikes Online_Frames": {
       "date": "2026-11-27",
@@ -62238,7 +62238,7 @@
     },
     "Bikes Online_Protection": {
       "date": "2026-11-27",
-      "count": 42
+      "count": 41
     },
     "Bikes Online_Tires": {
       "date": "2026-11-27",
@@ -62254,7 +62254,7 @@
     },
     "Colorado Cyclist_Tires": {
       "date": "2026-11-27",
-      "count": 403
+      "count": 402
     },
     "Cambria_Protection": {
       "date": "2026-11-27",
@@ -62346,7 +62346,7 @@
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-27",
-      "count": 27
+      "count": 32
     },
     "Cambria_Brakes": {
       "date": "2026-11-27",
@@ -62358,7 +62358,7 @@
     },
     "Cambria_Drivetrain": {
       "date": "2026-11-27",
-      "count": 253
+      "count": 252
     },
     "Cambria_Forks & Shocks": {
       "date": "2026-11-27",
@@ -62410,7 +62410,7 @@
     },
     "Bicycle Warehouse_Bikes": {
       "date": "2026-11-27",
-      "count": 26
+      "count": 27
     },
     "Bicycle Warehouse_Brakes": {
       "date": "2026-11-27",
@@ -62430,7 +62430,7 @@
     },
     "Bicycle Warehouse_Protection": {
       "date": "2026-11-27",
-      "count": 16
+      "count": 17
     },
     "Bicycle Warehouse_Tires": {
       "date": "2026-11-27",
@@ -62506,15 +62506,15 @@
     },
     "evo_Brakes": {
       "date": "2026-11-27",
-      "count": 60
+      "count": 62
     },
     "evo_Cockpit": {
       "date": "2026-11-27",
-      "count": 43
+      "count": 53
     },
     "evo_Drivetrain": {
       "date": "2026-11-27",
-      "count": 95
+      "count": 104
     },
     "evo_Forks & Shocks": {
       "date": "2026-11-27",
@@ -62526,11 +62526,11 @@
     },
     "evo_Pedals": {
       "date": "2026-11-27",
-      "count": 32
+      "count": 49
     },
     "evo_Protection": {
       "date": "2026-11-27",
-      "count": 219
+      "count": 286
     },
     "evo_Tires": {
       "date": "2026-11-27",
@@ -62538,7 +62538,7 @@
     },
     "evo_Wheels": {
       "date": "2026-11-27",
-      "count": 20
+      "count": 24
     },
     "Bike Mart_Tools & Care": {
       "date": "2026-11-27",
@@ -64573,7 +64573,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 26
+        "count": 27
       }
     ],
     "Bicycle Warehouse_Brakes": [
@@ -65037,7 +65037,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 16
+        "count": 17
       }
     ],
     "Bicycle Warehouse_Tires": [
@@ -66101,7 +66101,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 11
+        "count": 10
       }
     ],
     "Bikes Online_Frames": [
@@ -66333,7 +66333,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 42
+        "count": 41
       }
     ],
     "Bikes Online_Tires": [
@@ -66691,7 +66691,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 253
+        "count": 252
       }
     ],
     "Cambria_Forks & Shocks": [
@@ -67687,7 +67687,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 403
+        "count": 402
       }
     ],
     "Colorado Cyclist_Tools & Care": [
@@ -74109,7 +74109,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 27
+        "count": 32
       }
     ],
     "Troy Lee Designs_Tires": [
@@ -75583,7 +75583,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 60
+        "count": 62
       }
     ],
     "evo_Cockpit": [
@@ -75609,7 +75609,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 43
+        "count": 53
       }
     ],
     "evo_Drivetrain": [
@@ -75635,7 +75635,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 95
+        "count": 104
       }
     ],
     "evo_Forks & Shocks": [
@@ -75739,7 +75739,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 32
+        "count": 49
       }
     ],
     "evo_Protection": [
@@ -75765,7 +75765,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 219
+        "count": 286
       }
     ],
     "evo_Tires": [
@@ -75827,7 +75827,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 20
+        "count": 24
       }
     ]
   }

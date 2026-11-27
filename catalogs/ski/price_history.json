@@ -3910,6 +3910,8 @@
     "all_time_low": 159.93,
     "all_time_low_date": "2026-11-21",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-27",
     "image": "https://cdn.shopify.com/s/files/1/0965/4642/files/Dalbello_2000x_745a80a2-ba8e-42a5-b96b-25a749b5474e.jpg?v=1741130760",
     "prices": {
       "2026-11-12": 159.94,
@@ -21351,6 +21353,8 @@
     "all_time_low": 329.98,
     "all_time_low_date": "2026-11-12",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-27",
     "image": "https://cdn.shopify.com/s/files/1/0568/2020/3697/files/700_242027_1074830.webp?v=1722385513",
     "prices": {
       "2026-11-12": 329.98,
@@ -32226,6 +32230,8 @@
     "all_time_low": 240.97,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-27",
     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwfeecac5f/8106942_010_1.jpg?sw=600&sh=600",
     "prices": {
       "2026-11-02": 240.97,
@@ -33894,6 +33900,8 @@
     "all_time_low": 349.97,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-27",
     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw80e04375/8111518_000_1.jpg?sw=600&sh=600",
     "prices": {
       "2026-11-02": 349.97,
@@ -38061,6 +38069,8 @@
     "all_time_low": 260.97,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-27",
     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dw83f9703f/1045425_010_1.jpg?sw=600&sh=600",
     "prices": {
       "2026-11-02": 260.97,
@@ -38531,6 +38541,8 @@
     "all_time_low": 374.97,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-27",
     "image": "https://www.christysports.com/dw/image/v2/BGBB_PRD/on/demandware.static/-/Sites-master-winter/default/dwae5763c0/8105822_320_1.jpg?sw=600&sh=600",
     "prices": {
       "2026-11-02": 374.97,
@@ -41023,6 +41035,22 @@
       "2026-11-27": 59.99
     }
   },
+  "https://www.evo.com/products/122022-bca-float-2-0-cylinder-empty": {
+    "name": "BCA Float 2.0 Cylinder (Empty)",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 183.56,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-527512.jpg?v=1767741044",
+    "width": 2.0,
+    "prices": {
+      "2026-11-27": 183.56
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/133151-oakley-line-miner-m-goggles": {
     "name": "Oakley Line Miner M Goggles",
     "store": "evo",
@@ -41939,13 +41967,11 @@
     "store": "evo",
     "part": "Poles",
     "first_seen": "2026-11-02",
-    "last_seen": "2026-11-13",
-    "observation_count": 12,
+    "last_seen": "2026-11-27",
+    "observation_count": 13,
     "all_time_low": 66.15,
     "all_time_low_date": "2026-11-02",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-15",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-668548.jpg?v=1767744549",
     "prices": {
       "2026-11-02": 66.15,
@@ -41959,7 +41985,8 @@
       "2026-11-10": 66.15,
       "2026-11-11": 66.15,
       "2026-11-12": 66.15,
-      "2026-11-13": 66.15
+      "2026-11-13": 66.15,
+      "2026-11-27": 95.2
     }
   },
   "https://www.evo.com/products/162543-dragon-dx3-otg-goggles": {
@@ -43562,6 +43589,51 @@
       "2026-11-27": 99.95
     }
   },
+  "https://www.evo.com/products/185613-bca-scepter-adjustable-carbon-aluminum-ski-poles": {
+    "name": "BCA Scepter Adjustable Carbon/Aluminum Ski Poles",
+    "store": "evo",
+    "part": "Poles",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 118.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-743016.jpg?v=1767747214",
+    "prices": {
+      "2026-11-27": 118.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/185614-bca-scepter-adjustable-aluminum-ski-poles": {
+    "name": "BCA Scepter Adjustable Aluminum Ski Poles",
+    "store": "evo",
+    "part": "Poles",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 93.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-957328.jpg?v=1767755702",
+    "prices": {
+      "2026-11-27": 93.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/185615-bca-scepter-4s-collapsible-ski-poles": {
+    "name": "BCA Scepter 4S Collapsible Ski Poles",
+    "store": "evo",
+    "part": "Poles",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 110.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-742916.jpg?v=1767747212",
+    "prices": {
+      "2026-11-27": 110.46
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/188093-julbo-shadow-goggles": {
     "name": "Julbo Shadow Goggles",
     "store": "evo",
@@ -44705,13 +44777,11 @@
     "store": "evo",
     "part": "Helmets",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-22",
-    "observation_count": 20,
+    "last_seen": "2026-11-27",
+    "observation_count": 21,
     "all_time_low": 150.0,
     "all_time_low_date": "2026-11-03",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-23",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-928687.jpg?v=1767754475",
     "prices": {
       "2026-11-03": 150.0,
@@ -44733,7 +44803,8 @@
       "2026-11-19": 150.0,
       "2026-11-20": 150.0,
       "2026-11-21": 150.0,
-      "2026-11-22": 150.0
+      "2026-11-22": 150.0,
+      "2026-11-27": 225.0
     }
   },
   "https://www.evo.com/products/202831-poc-obex-mips-helmet": {
@@ -45012,6 +45083,21 @@
       "2026-11-12": 237.49
     }
   },
+  "https://www.evo.com/products/208674-faction-prodigy-ski-poles-2026": {
+    "name": "Faction Prodigy Ski Poles 2026",
+    "store": "evo",
+    "part": "Poles",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 47.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391838.jpg?v=1793831081",
+    "prices": {
+      "2026-11-27": 47.2
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/208973-dynafit-radical-alpine-touring-ski-bindings": {
     "name": "Dynafit Radical Alpine Touring Ski Bindings",
     "store": "evo",
@@ -45105,6 +45191,8 @@
     "all_time_low": 50.0,
     "all_time_low_date": "2026-11-03",
     "stage": "new",
+    "miss_streak": 1,
+    "miss_day": "2026-11-27",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387188.jpg?v=1792702017",
     "prices": {
       "2026-11-03": 50.0,
@@ -47929,6 +48017,36 @@
       "2026-11-27": 343.95
     }
   },
+  "https://www.evo.com/products/226996-bca-float-e2-25-airbag-pack": {
+    "name": "BCA Float E2-25 Airbag Pack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 1147.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-928325.jpg?v=1767754459",
+    "prices": {
+      "2026-11-27": 1147.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/226997-bca-float-e2-35-airbag-pack": {
+    "name": "BCA Float E2-35 Airbag Pack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 1189.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-928333.jpg?v=1767754461",
+    "prices": {
+      "2026-11-27": 1189.96
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/226999-rmu-core-pack-42l": {
     "name": "RMU Core Pack 42L",
     "store": "evo",
@@ -50355,7 +50473,7 @@
     "observation_count": 25,
     "all_time_low": 123.95,
     "all_time_low_date": "2026-11-06",
-    "stage": "all_time_low",
+    "stage": "price_drop",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1227345.jpg?v=1767738216",
     "prices": {
       "2026-11-03": 176.97,
@@ -50382,7 +50500,7 @@
       "2026-11-24": 123.95,
       "2026-11-25": 123.95,
       "2026-11-26": 123.95,
-      "2026-11-27": 123.95
+      "2026-11-27": 165.95
     }
   },
   "https://www.evo.com/products/241370-salomon-sentry-prime-sigma-goggles": {
@@ -51627,6 +51745,21 @@
       "2026-11-21": 292.49
     }
   },
+  "https://www.evo.com/products/242342-bca-float-e2-45-airbag-pack": {
+    "name": "BCA Float E2-45 Airbag Pack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 1274.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1054396.jpg?v=1767731340",
+    "prices": {
+      "2026-11-27": 1274.96
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/242345-leki-peak-vario-3d-ski-poles-2026": {
     "name": "LEKI Peak Vario 3D Ski Poles 2026",
     "store": "evo",
@@ -51941,6 +52074,36 @@
       "2026-11-27": 599.25
     }
   },
+  "https://www.evo.com/products/242754-db-equipment-hugger-20l-backpack": {
+    "name": "DB Equipment Hugger 20L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 149.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1344694.jpg?v=1788293554",
+    "prices": {
+      "2026-11-27": 149.25
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/242756-db-equipment-hugger-25l-backpack": {
+    "name": "DB Equipment Hugger 25L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 164.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1344708.jpg?v=1788293549",
+    "prices": {
+      "2026-11-27": 164.25
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/242757-db-equipment-hugger-30l-backpack": {
     "name": "DB Equipment Hugger 30L Backpack",
     "store": "evo",
@@ -51970,6 +52133,36 @@
       "2026-11-26": 126.95,
       "2026-11-27": 126.95
     }
+  },
+  "https://www.evo.com/products/242786-db-equipment-essential-12l-backpack": {
+    "name": "DB Equipment Essential 12L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 74.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268384.jpg?v=1768335158",
+    "prices": {
+      "2026-11-27": 74.25
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/242798-db-equipment-snow-pro-32l-backpack": {
+    "name": "DB Equipment Snow Pro 32L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 224.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1344720.jpg?v=1788293550",
+    "prices": {
+      "2026-11-27": 224.25
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/242803-dalbello-veloce-95-w-gw-ski-boots-women-s-2024-used": {
     "name": "Dalbello Veloce 95 W GW Ski Boots - Women's 2024 - Used",
@@ -57534,6 +57727,21 @@
       "2026-11-17": 419.98
     }
   },
+  "https://www.evo.com/products/254334-faction-le-mogul-skis-2026": {
+    "name": "Faction Le Mogul Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 519.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1149755.jpg?v=1767735202",
+    "prices": {
+      "2026-11-27": 519.2
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/254516-herschel-supply-co-nova-crossbody": {
     "name": "Herschel Supply Co. Nova\u2122 Crossbody",
     "store": "evo",
@@ -58507,6 +58715,66 @@
       "2026-11-26": 98.95,
       "2026-11-27": 98.95
     }
+  },
+  "https://www.evo.com/products/255143-bca-float-12-airbag-pack": {
+    "name": "BCA Float 12 Airbag Pack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 458.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119934.jpg?v=1767733818",
+    "prices": {
+      "2026-11-27": 458.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/255144-bca-float-22-airbag-pack": {
+    "name": "BCA Float 22 Airbag Pack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 501.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119943.jpg?v=1767733818",
+    "prices": {
+      "2026-11-27": 501.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/255145-bca-float-32-airbag-pack": {
+    "name": "BCA Float 32 Airbag Pack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 543.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1119950.jpg?v=1767733818",
+    "prices": {
+      "2026-11-27": 543.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/255146-bca-float-42-airbag-pack": {
+    "name": "BCA Float 42 Airbag Pack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 671.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1102921.jpg?v=1767733140",
+    "prices": {
+      "2026-11-27": 671.46
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/255337-dynastar-m-free-90-skis-2026": {
     "name": "Dynastar M-Free 90 Skis 2026",
@@ -60105,13 +60373,11 @@
     "store": "evo",
     "part": "Helmets",
     "first_seen": "2026-11-03",
-    "last_seen": "2026-11-24",
-    "observation_count": 22,
+    "last_seen": "2026-11-27",
+    "observation_count": 23,
     "all_time_low": 140.0,
     "all_time_low_date": "2026-11-03",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-26",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1115726.jpg?v=1767733652",
     "prices": {
       "2026-11-03": 140.0,
@@ -60135,8 +60401,24 @@
       "2026-11-21": 140.0,
       "2026-11-22": 140.0,
       "2026-11-23": 140.0,
-      "2026-11-24": 140.0
+      "2026-11-24": 140.0,
+      "2026-11-27": 210.0
     }
+  },
+  "https://www.evo.com/products/255701-poc-oseus-vpd-shorts": {
+    "name": "POC Oseus VPD Shorts",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 105.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1114980.jpg?v=1767733620",
+    "prices": {
+      "2026-11-27": 105.0
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/255729-mammut-tour-40-airbag-3-0-backpack-set-with-airbag": {
     "name": "Mammut Tour 40 Airbag 3.0 Backpack (Set with Airbag)",
@@ -60461,6 +60743,36 @@
       "2026-11-26": 104.98,
       "2026-11-27": 104.98
     }
+  },
+  "https://www.evo.com/products/256512-db-equipment-snow-pro-25l-backpack": {
+    "name": "DB Equipment Snow Pro 25L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 201.75,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1344722.jpg?v=1788293549",
+    "prices": {
+      "2026-11-27": 201.75
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/256516-db-equipment-backcountry-20l-backpack": {
+    "name": "DB Equipment Backcountry 20L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 134.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1234471.jpg?v=1767738512",
+    "prices": {
+      "2026-11-27": 134.25
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/256749-evo-silver-fir-mips-helmet": {
     "name": "evo Silver Fir MIPS Helmet",
@@ -61208,6 +61520,21 @@
       "2026-11-27": 52.5
     }
   },
+  "https://www.evo.com/products/260253-poc-spine-vpd-air-vest": {
+    "name": "POC Spine VPD Air Vest",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 127.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1151141.jpg?v=1767735269",
+    "prices": {
+      "2026-11-27": 127.5
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/260954-lange-rsj-50-ski-boots-kids-2026": {
     "name": "Lange RSJ 50 Ski Boots - Kids' 2026",
     "store": "evo",
@@ -61827,6 +62154,21 @@
       "2026-11-26": 369.95,
       "2026-11-27": 369.95
     }
+  },
+  "https://www.evo.com/products/263310-volcom-peakstone-mountain-backpack": {
+    "name": "Volcom Peakstone Mountain Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 96.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1366797.jpg?v=1790883616",
+    "prices": {
+      "2026-11-27": 96.0
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/263612-burton-sidehill-25l-backpack": {
     "name": "Burton Sidehill 25L Backpack",
@@ -63695,7 +64037,7 @@
     "observation_count": 26,
     "all_time_low": 449.97,
     "all_time_low_date": "2026-11-02",
-    "stage": "all_time_low",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1184487.jpg?v=1767736625",
     "prices": {
       "2026-11-02": 449.97,
@@ -63723,7 +64065,7 @@
       "2026-11-24": 449.97,
       "2026-11-25": 449.97,
       "2026-11-26": 449.97,
-      "2026-11-27": 449.97
+      "2026-11-27": 485.97
     }
   },
   "https://www.evo.com/products/266126-line-skis-optic-114-skis-2026": {
@@ -72000,24 +72342,68 @@
       "2026-11-27": 462.39
     }
   },
+  "https://www.evo.com/products/268584-poc-obex-connect-mips-helmet": {
+    "name": "POC Obex Connect MIPS Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 450.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1324946.jpg?v=1784600451",
+    "prices": {
+      "2026-11-27": 450.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268586-poc-obex-wf-mips-helmet": {
+    "name": "POC Obex WF MIPS Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 187.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1226936.jpg?v=1767738199",
+    "prices": {
+      "2026-11-27": 187.5
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/268588-poc-fornix-bc-mips-helmet": {
     "name": "POC Fornix BC MIPS Helmet",
     "store": "evo",
     "part": "Helmets",
     "first_seen": "2026-11-23",
-    "last_seen": "2026-11-25",
-    "observation_count": 3,
+    "last_seen": "2026-11-27",
+    "observation_count": 4,
     "all_time_low": 140.0,
     "all_time_low_date": "2026-11-23",
-    "stage": "unlisted",
-    "miss_streak": 2,
-    "miss_day": "2026-11-27",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1324950.jpg?v=1784600451",
     "prices": {
       "2026-11-23": 140.0,
       "2026-11-24": 140.0,
-      "2026-11-25": 140.0
+      "2026-11-25": 140.0,
+      "2026-11-27": 210.0
     }
+  },
+  "https://www.evo.com/products/268589-poc-fornix-mips-helmet": {
+    "name": "POC Fornix MIPS Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 172.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187182.jpg?v=1767736713",
+    "prices": {
+      "2026-11-27": 172.5
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/268589-poc-fornix-mips-helmet-used": {
     "name": "POC Fornix MIPS Helmet - Used",
@@ -72043,6 +72429,36 @@
       "2026-11-11": 109.25,
       "2026-11-12": 109.25
     }
+  },
+  "https://www.evo.com/products/268590-poc-fornix-mips-pow-jj-helmet": {
+    "name": "POC Fornix MIPS POW JJ Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 187.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1226942.jpg?v=1767738201",
+    "prices": {
+      "2026-11-27": 187.5
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268592-poc-auric-cut-bc-mips-helmet": {
+    "name": "POC Auric Cut BC MIPS Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 195.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1187205.jpg?v=1767736714",
+    "prices": {
+      "2026-11-27": 195.0
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/268593-dynastar-m-free-100-skis-2026": {
     "name": "Dynastar M-Free 100 Skis 2026",
@@ -72124,23 +72540,187 @@
       "2026-11-27": 426.95
     }
   },
+  "https://www.evo.com/products/268610-poc-pocito-fornix-mips-helmet-kids": {
+    "name": "POC POCito Fornix MIPS Helmet - Kids'",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 150.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1215334.jpg?v=1767737746",
+    "prices": {
+      "2026-11-27": 150.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268612-poc-pocito-retina-goggles-kids": {
+    "name": "POC POCito Retina Goggles - Kids'",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 97.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207374.jpg?v=1767737425",
+    "prices": {
+      "2026-11-27": 97.5
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268613-poc-pocito-opsin-goggles-kids": {
+    "name": "POC POCito Opsin Goggles - Kids'",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 67.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325095.jpg?v=1784600455",
+    "prices": {
+      "2026-11-27": 67.5
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268616-poc-pocito-vpd-air-vest-kids": {
+    "name": "POC POCito VPD Air Vest - Kids'",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 105.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207520.jpg?v=1767737430",
+    "prices": {
+      "2026-11-27": 105.0
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/268617-poc-nexal-goggles": {
     "name": "POC Nexal Goggles",
     "store": "evo",
     "part": "Protection",
     "first_seen": "2026-11-13",
-    "last_seen": "2026-11-14",
-    "observation_count": 2,
+    "last_seen": "2026-11-27",
+    "observation_count": 3,
     "all_time_low": 135.0,
     "all_time_low_date": "2026-11-13",
-    "stage": "gone",
-    "miss_streak": 2,
-    "miss_day": "2026-11-15",
+    "stage": "new",
     "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325109.jpg?v=1784600456",
     "prices": {
       "2026-11-13": 135.0,
-      "2026-11-14": 135.0
+      "2026-11-14": 135.0,
+      "2026-11-27": 202.5
     }
+  },
+  "https://www.evo.com/products/268620-poc-nexal-mid-goggles": {
+    "name": "POC Nexal Mid Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 202.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325133.jpg?v=1784600459",
+    "prices": {
+      "2026-11-27": 202.5
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268630-poc-fovea-goggles": {
+    "name": "POC Fovea Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 142.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1226930.jpg?v=1767738200",
+    "prices": {
+      "2026-11-27": 142.5
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268631-poc-fovea-clarity-pow-jj-goggles": {
+    "name": "POC Fovea Clarity POW JJ Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 157.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207486.jpg?v=1767737428",
+    "prices": {
+      "2026-11-27": 157.5
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268647-poc-retina-goggles": {
+    "name": "POC Retina Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 150.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207492.jpg?v=1767737429",
+    "prices": {
+      "2026-11-27": 150.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268649-poc-retina-mid-goggles": {
+    "name": "POC Retina Mid Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 150.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207501.jpg?v=1767737429",
+    "prices": {
+      "2026-11-27": 150.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268652-poc-opsin-goggles": {
+    "name": "POC Opsin Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 120.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325190.jpg?v=1784600457",
+    "prices": {
+      "2026-11-27": 120.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/268671-poc-vpd-spine-vest-women-s": {
+    "name": "POC VPD Spine Vest - Women's",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 127.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325360.jpg?v=1784600464",
+    "prices": {
+      "2026-11-27": 127.5
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/268780-smith-vantage-2-helmet": {
     "name": "Smith Vantage 2 Helmet",
@@ -72197,6 +72777,21 @@
       "2026-11-26": 177.0,
       "2026-11-27": 177.0
     }
+  },
+  "https://www.evo.com/products/269000-db-equipment-backcountry-25l-backpack": {
+    "name": "DB Equipment Backcountry 25L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 149.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1234487.jpg?v=1767738511",
+    "prices": {
+      "2026-11-27": 149.25
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/269060-lange-shadow-130-lv-gw-ski-boots-2026-used": {
     "name": "Lange Shadow 130 LV GW Ski Boots 2027 - Used",
@@ -74130,6 +74725,81 @@
       "2026-11-27": 44.99
     }
   },
+  "https://www.evo.com/products/270152-bca-stash-12-backpack": {
+    "name": "BCA Stash 12 Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 93.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1205533.jpg?v=1767737359",
+    "prices": {
+      "2026-11-27": 93.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/270153-bca-stash-20-s-backpack": {
+    "name": "BCA Stash 20 S Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 110.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1205555.jpg?v=1767737360",
+    "prices": {
+      "2026-11-27": 110.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/270154-bca-stash-25-backpack": {
+    "name": "BCA Stash 25 Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 152.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207564.jpg?v=1767737433",
+    "prices": {
+      "2026-11-27": 152.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/270155-bca-stash-35-backpack": {
+    "name": "BCA Stash 35 Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 161.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1207570.jpg?v=1767737432",
+    "prices": {
+      "2026-11-27": 161.46
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/270156-bca-stash-throttle-25-backpack": {
+    "name": "BCA Stash Throttle 25 Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 161.46,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1205563.jpg?v=1767737360",
+    "prices": {
+      "2026-11-27": 161.46
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/270160-dynafit-blacklight-pro-alpine-touring-ski-bindings-2026": {
     "name": "Dynafit Blacklight Pro Alpine Touring Ski Bindings 2027",
     "store": "evo",
@@ -75811,6 +76481,21 @@
       "2026-11-27": 237.95
     }
   },
+  "https://www.evo.com/products/276562-cotopaxi-allpa-18l-daypack": {
+    "name": "Cotopaxi Allpa 18L Daypack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 97.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1256454.jpg?v=1767739404",
+    "prices": {
+      "2026-11-27": 97.5
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/276567-cotopaxi-abierto-26l-daypack": {
     "name": "Cotopaxi Abierto 26L Daypack",
     "store": "evo",
@@ -75854,6 +76539,51 @@
       "2026-11-26": 67.5,
       "2026-11-27": 67.5
     }
+  },
+  "https://www.evo.com/products/276637-db-equipment-daypack-17l-backpack": {
+    "name": "DB Equipment Daypack 17L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 104.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268409.jpg?v=1768335129",
+    "prices": {
+      "2026-11-27": 104.25
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/276638-db-equipment-essential-backpack-24l-backpack": {
+    "name": "DB Equipment Essential 24L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 104.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268423.jpg?v=1768335219",
+    "prices": {
+      "2026-11-27": 104.25
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/276639-db-equipment-essential-rolltop-backpack-32l-backpack": {
+    "name": "DB Equipment Essential Rolltop 32L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 261.75,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1268432.jpg?v=1768335097",
+    "prices": {
+      "2026-11-27": 261.75
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/277078-faction-dancer-79-skis-2026": {
     "name": "Faction Dancer 79 Skis 2026",
@@ -76543,6 +77273,21 @@
       "2026-11-27": 56.25
     }
   },
+  "https://www.evo.com/products/280216-cotopaxi-allpa-26l-daypack": {
+    "name": "Cotopaxi Allpa 26L Daypack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 112.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1297718.jpg?v=1776979607",
+    "prices": {
+      "2026-11-27": 112.5
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/280598-k2-method-team-ski-boots-2027-used": {
     "name": "K2 Method Team Ski Boots 2027 - Used",
     "store": "evo",
@@ -77007,6 +77752,36 @@
       "2026-11-26": 107.96,
       "2026-11-27": 107.96
     }
+  },
+  "https://www.evo.com/products/281186-bca-stash-40-ul-backpack": {
+    "name": "BCA Stash 40 UL Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 276.21,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1338112.jpg?v=1787691798",
+    "prices": {
+      "2026-11-27": 276.21
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/281187-bca-stash-30-ul-backpack": {
+    "name": "BCA Stash 30 UL Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 254.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1338120.jpg?v=1787691798",
+    "prices": {
+      "2026-11-27": 254.96
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/281212-tecnica-mach-boa-mv-110-ski-boots-2026": {
     "name": "Tecnica Mach Boa MV 110 Ski Boots 2026",
@@ -77926,6 +78701,411 @@
       "2026-11-27": 84.0
     }
   },
+  "https://www.evo.com/products/283491-faction-studio-1-skis-2027": {
+    "name": "Faction Studio 1 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 639.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309004.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 639.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283492-faction-studio-2-skis-2027": {
+    "name": "Faction Studio 2 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 679.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309010.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 679.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283493-faction-studio-3-skis-2027": {
+    "name": "Faction Studio 3 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 759.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309019.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 759.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283496-faction-prodigy-1-skis-2027": {
+    "name": "Faction Prodigy 1 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 543.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309026.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 543.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283497-faction-prodigy-2-skis-2027": {
+    "name": "Faction Prodigy 2 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 583.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309031.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 583.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283498-faction-prodigy-3-skis-2027": {
+    "name": "Faction Prodigy 3 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 663.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309037.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 663.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283499-faction-prodigy-4-skis-2027": {
+    "name": "Faction Prodigy 4 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 719.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309044.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 719.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283500-faction-prodigy-grom-skis-kids-2027": {
+    "name": "Faction Prodigy Grom Skis - Kids' 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 319.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1340449.jpg?v=1787854030",
+    "prices": {
+      "2026-11-27": 319.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283501-faction-prodigy-1-capsule-skis-2027": {
+    "name": "Faction Prodigy 1 Capsule Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 543.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309047.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 543.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283502-faction-prodigy-2-capsule-skis-2027": {
+    "name": "Faction Prodigy 2 Capsule Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 583.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309053.jpg?v=1781624491",
+    "prices": {
+      "2026-11-27": 583.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283503-faction-prodigy-3-capsule-skis-2027": {
+    "name": "Faction Prodigy 3 Capsule Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 663.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309097.jpg?v=1781624790",
+    "prices": {
+      "2026-11-27": 663.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283504-faction-dancer-79-skis-2027": {
+    "name": "Faction Dancer 79 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 583.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309098.jpg?v=1781624790",
+    "prices": {
+      "2026-11-27": 583.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283505-faction-dancer-79-ti-skis-2027": {
+    "name": "Faction Dancer 79 TI Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 623.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309101.jpg?v=1781624790",
+    "prices": {
+      "2026-11-27": 623.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283506-faction-dancer-89-skis-2027": {
+    "name": "Faction Dancer 89 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 623.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309109.jpg?v=1781625031",
+    "prices": {
+      "2026-11-27": 623.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283530-faction-dancer-89-ti-skis-2027": {
+    "name": "Faction Dancer 89 Ti Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 663.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309111.jpg?v=1781625031",
+    "prices": {
+      "2026-11-27": 663.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283532-faction-dancer-99-skis-2027": {
+    "name": "Faction Dancer 99 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 663.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309116.jpg?v=1781625030",
+    "prices": {
+      "2026-11-27": 663.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283533-faction-dancer-99-ti-skis-2027": {
+    "name": "Faction Dancer 99 TI Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 703.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309118.jpg?v=1781625031",
+    "prices": {
+      "2026-11-27": 703.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283534-faction-dancer-106-ti-skis-2027": {
+    "name": "Faction Dancer 106 TI Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 799.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309128.jpg?v=1781625031",
+    "prices": {
+      "2026-11-27": 799.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283535-faction-le-mono-skis-2027": {
+    "name": "Faction Le Mono Ski 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 719.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1309135.jpg?v=1781625031",
+    "prices": {
+      "2026-11-27": 719.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283601-faction-la-machine-2-skis-2027": {
+    "name": "Faction La Machine 2 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 719.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1340450.jpg?v=1787854030",
+    "prices": {
+      "2026-11-27": 719.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283602-faction-la-machine-3-skis-2027": {
+    "name": "Faction La Machine 3 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 759.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1340457.jpg?v=1787854270",
+    "prices": {
+      "2026-11-27": 759.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283603-faction-la-machine-5-skis-2027": {
+    "name": "Faction La Machine 5 Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 799.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1340462.jpg?v=1787854270",
+    "prices": {
+      "2026-11-27": 799.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283604-faction-lite-poles-2027": {
+    "name": "Faction Lite Poles 2027",
+    "store": "evo",
+    "part": "Poles",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 47.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1387225.jpg?v=1792702317",
+    "prices": {
+      "2026-11-27": 47.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283607-phaenom-footwear-fr-02-130-ski-boots-2027": {
+    "name": "Phaenom Footwear fr 02 130 Ski Boots 2027",
+    "store": "evo",
+    "part": "Boots",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 639.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346438.jpg?v=1788544994",
+    "prices": {
+      "2026-11-27": 639.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283608-phaenom-footwear-fr-02-110-ski-boots-2027": {
+    "name": "Phaenom Footwear fr 02 110 Ski Boots 2027",
+    "store": "evo",
+    "part": "Boots",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 599.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346445.jpg?v=1788544994",
+    "prices": {
+      "2026-11-27": 599.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283609-phaenom-footwear-fs-02-130-ski-boots-2027": {
+    "name": "Phaenom Footwear fs 02 130 Ski Boots 2027",
+    "store": "evo",
+    "part": "Boots",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 599.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1304001.jpg?v=1780942710",
+    "prices": {
+      "2026-11-27": 599.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/283610-phaenom-footwear-fs-02-110-ski-boots-2027": {
+    "name": "Phaenom Footwear fs 02 110 Ski Boots 2027",
+    "store": "evo",
+    "part": "Boots",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 519.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346449.jpg?v=1788544994",
+    "prices": {
+      "2026-11-27": 519.2
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/283610-phaenom-footwear-fs-02-110-ski-boots-2027-used": {
     "name": "Phaenom Footwear fs 02 110 Ski Boots 2027 - Used",
     "store": "evo",
@@ -78809,6 +79989,111 @@
       "2026-11-21": 84.95
     }
   },
+  "https://www.evo.com/products/284399-pret-prophet-photochromic-goggles": {
+    "name": "Pret Prophet Photochromic Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 223.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1318555.jpg?v=1783366137",
+    "prices": {
+      "2026-11-27": 223.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284401-pret-prophet-goggles": {
+    "name": "Pret Prophet Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 199.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1375064.jpg?v=1791479804",
+    "prices": {
+      "2026-11-27": 199.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284403-pret-effect-photochromic-goggles": {
+    "name": "Pret Effect Photochromic Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 183.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1375073.jpg?v=1791479803",
+    "prices": {
+      "2026-11-27": 183.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284404-pret-effect-goggles": {
+    "name": "Pret Effect Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 159.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1318616.jpg?v=1783366437",
+    "prices": {
+      "2026-11-27": 159.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284407-pret-cynic-2-mips-helmet": {
+    "name": "Pret Cynic 2 MIPS Helmet",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 151.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1318630.jpg?v=1783366437",
+    "prices": {
+      "2026-11-27": 151.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284408-pret-lyric-2-mips-helmet-women-s": {
+    "name": "Pret Lyric 2 MIPS Helmet - Women's",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 151.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1318642.jpg?v=1783366437",
+    "prices": {
+      "2026-11-27": 151.96
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284411-pret-sol-mips-helmet-women-s": {
+    "name": "Pret Sol MIPS Helmet - Women's",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 111.96,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1318743.jpg?v=1783366797",
+    "prices": {
+      "2026-11-27": 111.96
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/284470-sweet-protection-groover-mips-helmet": {
     "name": "Sweet Protection Groover MIPS Helmet",
     "store": "evo",
@@ -78846,6 +80131,96 @@
       "2026-11-26": 104.96,
       "2026-11-27": 104.96
     }
+  },
+  "https://www.evo.com/products/284520-poc-pocito-obex-mips-helmet-kids": {
+    "name": "POC POCito Obex MIPS Helmet - Kids'",
+    "store": "evo",
+    "part": "Helmets",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 120.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325022.jpg?v=1784600454",
+    "prices": {
+      "2026-11-27": 120.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284523-poc-vitrea-goggles": {
+    "name": "POC Vitrea Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 210.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346039.jpg?v=1788534076",
+    "prices": {
+      "2026-11-27": 210.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284525-poc-vitrea-mid-goggles": {
+    "name": "POC Vitrea Mid Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 210.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325241.jpg?v=1784600460",
+    "prices": {
+      "2026-11-27": 210.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284532-poc-tarsal-goggles": {
+    "name": "POC Tarsal Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 150.0,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1325300.jpg?v=1784600461",
+    "prices": {
+      "2026-11-27": 150.0
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284535-poc-fovea-marco-odermatt-ed-goggles": {
+    "name": "POC Fovea Marco Odermatt Ed. Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 157.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346051.jpg?v=1788534076",
+    "prices": {
+      "2026-11-27": 157.5
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/284536-poc-fovea-mid-marco-odermatt-ed-goggles": {
+    "name": "POC Fovea Mid Marco Odermatt Ed. Goggles",
+    "store": "evo",
+    "part": "Protection",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 157.5,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1346055.jpg?v=1788534076",
+    "prices": {
+      "2026-11-27": 157.5
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/284832-nordica-speedmachine-3-110-x-boa-ski-boots-2027": {
     "name": "Nordica Speedmachine 3 110 X BOA Ski Boots 2027",
@@ -79229,6 +80604,51 @@
       "2026-11-27": 380.95
     }
   },
+  "https://www.evo.com/products/285359-faction-prodigy-1-gu-skis-women-s-2027": {
+    "name": "Faction Prodigy 1 Gu Skis - Women's 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 623.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391047.jpg?v=1793744002",
+    "prices": {
+      "2026-11-27": 623.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/285360-faction-prodigy-1-matej-skis-2027": {
+    "name": "Faction Prodigy 1 Matej Skis 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 623.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1389048.jpg?v=1793215290",
+    "prices": {
+      "2026-11-27": 623.2
+    },
+    "stage": "new"
+  },
+  "https://www.evo.com/products/285361-faction-studio-0-gu-skis-women-s-2027": {
+    "name": "Faction Studio 0 Gu Skis - Women's 2027",
+    "store": "evo",
+    "part": "Skis",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 639.2,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1391054.jpg?v=1793744002",
+    "prices": {
+      "2026-11-27": 639.2
+    },
+    "stage": "new"
+  },
   "https://www.evo.com/products/285803-lib-tech-backwards-skis-2025": {
     "name": "Lib Tech Backwards Skis 2026",
     "store": "evo",
@@ -79400,6 +80820,21 @@
       "2026-11-26": 102.4,
       "2026-11-27": 102.4
     }
+  },
+  "https://www.evo.com/products/286061-db-equipment-snow-pro-racing-80l-backpack": {
+    "name": "DB Equipment Snow Pro Racing 80L Backpack",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 224.25,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-1344748.jpg?v=1788293550",
+    "prices": {
+      "2026-11-27": 224.25
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/286137-tecnica-mach1-hv-95-w-ski-boots-women-s-2024": {
     "name": "Tecnica Mach1 HV 95 W Ski Boots - Women's 2024",
@@ -81317,6 +82752,21 @@
       "2026-11-26": 186.75,
       "2026-11-27": 186.75
     }
+  },
+  "https://www.evo.com/products/67769-bca-extra-consumer-refill-kit": {
+    "name": "BCA Extra Consumer Refill Kit",
+    "store": "evo",
+    "part": "Packs",
+    "first_seen": "2026-11-27",
+    "last_seen": "2026-11-27",
+    "observation_count": 1,
+    "all_time_low": 7.61,
+    "all_time_low_date": "2026-11-27",
+    "image": "https://cdn.shopify.com/s/files/1/0679/7882/1782/files/product-image-346865.jpg?v=1767739939",
+    "prices": {
+      "2026-11-27": 7.61
+    },
+    "stage": "new"
   },
   "https://www.evo.com/products/83182-oakley-flight-deck-l-goggles": {
     "name": "Oakley Flight Deck L Goggles",
@@ -123174,6 +124624,8 @@
     "all_time_low": 89.95,
     "all_time_low_date": "2026-11-02",
     "stage": "all_time_low",
+    "miss_streak": 1,
+    "miss_day": "2026-11-27",
     "image": "https://cdn.shopify.com/s/files/1/0580/7410/3867/files/L47324800_0_VIR_BRIGADE_MIPS_EVENING_HAZE.jpg?v=1763403198",
     "prices": {
       "2026-11-02": 89.95,

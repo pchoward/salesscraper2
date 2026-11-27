@@ -118,7 +118,34 @@
       ]
     },
     "Troy Lee Designs": {
-      "events": []
+      "events": [
+        {
+          "cut": 20,
+          "cut_high": 20,
+          "cut_low": 20,
+          "deals": {
+            "deals": 31,
+            "high": 52,
+            "low": 52,
+            "max_off": 52,
+            "uniform": 52
+          },
+          "end": null,
+          "headlines": [
+            {
+              "from": "2026-11-27",
+              "text": "most deals 52% off"
+            }
+          ],
+          "kind": "sale",
+          "listings": 26,
+          "moment": "Black Friday / Cyber Week",
+          "start": "2026-11-27",
+          "steps": [],
+          "tracked": 26,
+          "uniform": true
+        }
+      ]
     },
     "Worldwide Cyclery": {
       "events": []

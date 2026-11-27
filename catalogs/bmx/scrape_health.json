@@ -64049,14 +64049,14 @@
           }
         },
         "Bikes Online_Protection": {
-          "count": 20,
+          "count": 19,
           "failed": false,
           "diagnostics": {
             "expected_count": 19.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.5,
-            "actual_count": 20,
-            "percentage_change": 5.3,
+            "actual_count": 19,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -66092,15 +66092,15 @@
           }
         },
         "Tactics_Protection": {
-          "count": 40,
-          "failed": false,
+          "count": 0,
+          "failed": true,
           "diagnostics": {
             "expected_count": 20.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 17.5,
-            "actual_count": 40,
-            "percentage_change": 100.0,
-            "reason": "normal_variation"
+            "actual_count": 0,
+            "percentage_change": -100.0,
+            "reason": "scrape_failed"
           }
         },
         "Triple 8_Bikes": {
@@ -66536,7 +66536,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-27T04:35:26+00:00"
+      "scanned_at": "2026-11-27T08:36:06+00:00"
     }
   ],
   "baseline": {
@@ -66686,7 +66686,7 @@
     },
     "Bikes Online_Protection": {
       "date": "2026-11-27",
-      "count": 20
+      "count": 19
     },
     "Cambria_Protection": {
       "date": "2026-11-27",
@@ -66711,10 +66711,6 @@
     "SoCal_Protection": {
       "date": "2026-11-27",
       "count": 11
-    },
-    "Tactics_Protection": {
-      "date": "2026-11-27",
-      "count": 40
     },
     "Haro_Frames & Forks": {
       "date": "2026-11-27",
@@ -69147,7 +69143,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 20
+        "count": 19
       }
     ],
     "Bikes Online_Seating": [
@@ -78326,6 +78322,10 @@
     ],
     "Tactics_Protection": [
       {
+        "date": "2026-11-13",
+        "count": 4
+      },
+      {
         "date": "2026-11-14",
         "count": 20
       },
@@ -78375,10 +78375,6 @@
       },
       {
         "date": "2026-11-26",
-        "count": 40
-      },
-      {
-        "date": "2026-11-27",
         "count": 40
       }
     ],
