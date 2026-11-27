@@ -37,6 +37,9 @@ KINDS = {
     "chainring": "Sprockets", "bmx crank spindles etc": "Cranks", "bmx bottom brackets": "Bottom Brackets",
     "bmx chains": "Chains", "bmx grips": "Grips & Bar Ends", "bmx bar ends": "Grips & Bar Ends", "bar end": "Grips & Bar Ends",
     "bmx gyro kits": "Detanglers", "bmx gyro cables": "Detanglers", "bmx spokes": "Spokes & Nipples",
+    # Source BMX US (drift check, 2026-11-26).
+    "bmx gyros": "Detanglers", "bmx chain tensioners": "Chain Tensioners", "bmx seat posts": "Seat Posts",
+    "bmx seatposts": "Seat Posts",
     "freewheel cogs": "Drivers & Freewheels", "bmx brake spares": "Brakes & Accessories", "bmx disc brakes": "Brakes & Accessories",
     "race bmx mini": "Complete Bikes", "race bmx": "Complete Bikes",
     "bottom brackets": "Bottom Brackets", "bottom bracket": "Bottom Brackets", "bb": "Bottom Brackets",
