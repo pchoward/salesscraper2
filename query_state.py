@@ -135,6 +135,7 @@ TYPE_SLUGS = {
     "protection": "Protection",
     "pack": "Packs",
     "packs": "Packs",
+    "backpacks": "Packs",
     "helmet": "Helmets",
     "helmets": "Helmets",
 }

@@ -7,6 +7,29 @@ from stores import skatewarehouse as sw
 from stores import tactics, zumiez
 
 
+class SkateBackpacksLabelTests(unittest.TestCase):
+    def test_menu_label_preserves_packs_identity_and_query_aliases(self):
+        from bs4 import BeautifulSoup
+        from previews.publish import CategoryParser
+        from query_state import decode_query
+        from report import build_report_html
+
+        pack = {"name": "Burton Day Hiker 22L Backpack", "part": "Packs", "store": "Tactics",
+                "url": "https://example.test/pack", "price_new": "62.95", "price_old": "90.00"}
+        html = build_report_html({"Tactics_Packs": [pack]}, {}, {})
+        soup = BeautifulSoup(html, "html.parser")
+        self.assertEqual(soup.select_one('#partFilters [data-part="Packs"] .quick-name').text, "Backpacks")
+        self.assertEqual(soup.select_one('#partSelect option[value="Packs"]')["data-label"], "Backpacks")
+        self.assertIsNotNone(soup.select_one('.deal-row[data-part="Packs"]'))
+        parser = CategoryParser()
+        parser.feed(html)
+        self.assertEqual(parser.categories["Packs"]["label"], "Backpacks")
+        self.assertEqual(parser.categories["Packs"]["slug"], "packs")
+        for slug in ("pack", "packs", "backpacks"):
+            with self.subTest(slug=slug):
+                self.assertEqual(decode_query("type=" + slug)["part"], "Packs")
+
+
 def tactics_card(slug, name, price, off):
     return (f'<div class="browse-grid-item"><a href="/{slug}"><img alt="{name}"></a>'
             f'<span class="browse-grid-item-sale-price">${price}</span>'

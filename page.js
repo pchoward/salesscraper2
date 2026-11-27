@@ -3404,6 +3404,7 @@ function slugType(value) {
         protection: "Protection",
         pack: "Packs",
         packs: "Packs",
+        backpacks: "Packs",
         helmet: "Helmets",
         helmets: "Helmets"
     }[key];
@@ -4290,7 +4291,8 @@ function collectFilterActions() {
     if (state.part === DEFAULT_PART && DEFAULT_PART !== "all") {
         add("part", DEFAULT_PART, () => filterByPart("all"), { part: "all" }, false);
     } else if (state.part && state.part !== DEFAULT_PART) {
-        const typeLabel = state.part === "all" ? "Type: All types" : "Type: " + state.part;
+        const partLabel = document.getElementById("partSelect")?.selectedOptions?.[0]?.dataset.label || state.part;
+        const typeLabel = state.part === "all" ? "Type: All types" : "Type: " + partLabel;
         add("part", typeLabel, () => filterByPart(DEFAULT_PART), { part: DEFAULT_PART });
     }
     if (state.brand !== "all") {
