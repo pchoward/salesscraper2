@@ -2863,18 +2863,34 @@
           },
           "items": 10
         },
+        "Albe's BMX_Bikes": {
+          "fields": {
+            "axle": 0.256,
+            "brand": 1.0,
+            "color": 0.538,
+            "hub_type": 0.026,
+            "image": 1.0,
+            "kind": 1.0,
+            "link": 0.103,
+            "material": 0.077,
+            "top_tube": 0.513,
+            "wheel_size": 0.744,
+            "width": 0.026
+          },
+          "items": 39
+        },
         "Albe's BMX_Drivetrain": {
           "fields": {
             "brand": 1.0,
             "color": 1.0,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.368,
-            "material": 0.158,
-            "teeth": 0.263,
-            "width": 0.053
+            "link": 0.35,
+            "material": 0.15,
+            "teeth": 0.25,
+            "width": 0.05
           },
-          "items": 19
+          "items": 20
         },
         "Albe's BMX_Frames & Forks": {
           "fields": {
@@ -2913,25 +2929,25 @@
         "Albe's BMX_Seating": {
           "fields": {
             "brand": 1.0,
-            "color": 0.938,
+            "color": 0.882,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.062,
-            "seat_style": 0.812
+            "link": 0.059,
+            "seat_style": 0.824
           },
-          "items": 16
+          "items": 17
         },
         "Albe's BMX_Steering": {
           "fields": {
-            "bar_rise": 0.143,
+            "bar_rise": 0.133,
             "brand": 1.0,
-            "color": 0.929,
+            "color": 0.933,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.143,
-            "stem_type": 0.071
+            "link": 0.133,
+            "stem_type": 0.067
           },
-          "items": 14
+          "items": 15
         },
         "Albe's BMX_Tires": {
           "fields": {
@@ -2961,22 +2977,22 @@
         },
         "Albe's BMX_Wheels": {
           "fields": {
-            "axle": 0.318,
+            "axle": 0.348,
             "brand": 1.0,
             "color": 1.0,
-            "diameter_mm": 0.045,
-            "diameters_mm": 0.045,
-            "drive_side": 0.636,
-            "driver": 0.136,
-            "hub_type": 0.591,
+            "diameter_mm": 0.043,
+            "diameters_mm": 0.043,
+            "drive_side": 0.652,
+            "driver": 0.13,
+            "hub_type": 0.565,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.136,
-            "material": 0.045,
+            "link": 0.13,
+            "material": 0.043,
             "wheel_size": 1.0,
-            "width": 0.045
+            "width": 0.043
           },
-          "items": 22
+          "items": 23
         },
         "Bikes Online_Protection": {
           "fields": {
@@ -3224,7 +3240,8 @@
         "Source BMX US_Packs": {
           "fields": {
             "brand": 0.941,
-            "image": 1.0
+            "image": 1.0,
+            "pack_features": 0.118
           },
           "items": 17
         },
@@ -3249,14 +3266,14 @@
         "Source BMX US_Seating": {
           "fields": {
             "brand": 0.98,
-            "color": 0.673,
+            "color": 0.68,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.041,
-            "material": 0.082,
-            "seat_style": 0.633
+            "link": 0.04,
+            "material": 0.08,
+            "seat_style": 0.64
           },
-          "items": 49
+          "items": 50
         },
         "Source BMX US_Steering": {
           "fields": {
@@ -3265,7 +3282,7 @@
             "color": 0.916,
             "image": 1.0,
             "kind": 1.0,
-            "link": 0.133,
+            "link": 0.12,
             "material": 0.036,
             "stem_reach": 0.06,
             "stem_type": 0.199,
@@ -3298,8 +3315,8 @@
         "Source BMX US_Wheel Parts": {
           "fields": {
             "axle": 0.045,
-            "brand": 0.603,
-            "color": 0.672,
+            "brand": 0.604,
+            "color": 0.674,
             "drive_side": 0.153,
             "driver": 0.066,
             "hub_holes": 0.021,
@@ -3308,10 +3325,10 @@
             "kind": 1.0,
             "link": 0.028,
             "material": 0.122,
-            "wheel_size": 0.091,
+            "wheel_size": 0.09,
             "width": 0.031
           },
-          "items": 287
+          "items": 288
         },
         "Source BMX US_Wheels": {
           "fields": {

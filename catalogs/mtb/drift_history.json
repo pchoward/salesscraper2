@@ -4008,45 +4008,48 @@
         "Bike Mart_Bikes": {
           "fields": {
             "brand": 1.0,
-            "frame_material": 0.714,
+            "frame_material": 0.579,
             "frame_size": 1.0,
             "image": 1.0,
-            "link": 0.214,
+            "link": 0.158,
             "power": 1.0,
-            "suspension": 1.0,
-            "travel_mm": 0.071,
-            "wheel_size": 0.143
+            "speed": 0.053,
+            "suspension": 0.947,
+            "travel_mm": 0.053,
+            "wheel_size": 0.105,
+            "width": 0.158
           },
-          "items": 14
+          "items": 19
         },
         "Bike Mart_Brakes": {
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "rotor_mm": 0.179,
-            "width": 0.018
+            "link": 0.017,
+            "rotor_mm": 0.174,
+            "width": 0.017
           },
-          "items": 112
+          "items": 115
         },
         "Bike Mart_Cockpit": {
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "link": 0.023,
-            "versions": 0.034,
+            "link": 0.026,
+            "versions": 0.038,
             "width": 0.019
           },
-          "items": 263
+          "items": 265
         },
         "Bike Mart_Drivetrain": {
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "speed": 0.037,
-            "versions": 0.132,
-            "width": 0.015
+            "speed": 0.043,
+            "versions": 0.128,
+            "width": 0.014
           },
-          "items": 136
+          "items": 141
         },
         "Bike Mart_Forks & Shocks": {
           "fields": {
@@ -4060,41 +4063,41 @@
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "pedal_material": 0.553,
-            "pedal_thread": 0.596,
-            "pedal_type": 0.957,
-            "width": 0.255
+            "pedal_material": 0.542,
+            "pedal_thread": 0.583,
+            "pedal_type": 0.938,
+            "width": 0.25
           },
-          "items": 47
+          "items": 48
         },
         "Bike Mart_Tires": {
           "fields": {
             "brand": 1.0,
-            "casing": 0.429,
+            "casing": 0.423,
             "image": 1.0,
-            "link": 0.023,
-            "tire_width": 0.757,
-            "tubeless": 0.494,
-            "versions": 0.008,
-            "wheel_size": 0.764,
-            "width": 0.876
+            "link": 0.03,
+            "tire_width": 0.764,
+            "tubeless": 0.491,
+            "versions": 0.007,
+            "wheel_size": 0.772,
+            "width": 0.861
           },
-          "items": 259
+          "items": 267
         },
         "Bike Mart_Wheels": {
           "fields": {
-            "axle": 0.029,
+            "axle": 0.028,
             "brand": 1.0,
-            "diameter_mm": 0.145,
-            "diameters_mm": 0.145,
-            "durometers": 0.039,
+            "diameter_mm": 0.152,
+            "diameters_mm": 0.152,
+            "durometers": 0.038,
             "image": 0.995,
-            "link": 0.005,
-            "versions": 0.063,
-            "wheel_size": 0.106,
+            "link": 0.009,
+            "versions": 0.062,
+            "wheel_size": 0.104,
             "width": 0.005
           },
-          "items": 207
+          "items": 211
         },
         "Bikes Online_Bikes": {
           "fields": {
@@ -4229,11 +4232,11 @@
         "Cambria_Cockpit": {
           "fields": {
             "brand": 1.0,
-            "image": 0.985,
-            "link": 0.045,
-            "width": 0.05
+            "image": 0.988,
+            "link": 0.035,
+            "width": 0.039
           },
-          "items": 199
+          "items": 257
         },
         "Cambria_Drivetrain": {
           "fields": {
@@ -4249,10 +4252,10 @@
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "pedal_material": 0.647,
+            "pedal_material": 0.679,
             "pedal_type": 1.0
           },
-          "items": 68
+          "items": 78
         },
         "Cambria_Protection": {
           "fields": {
@@ -4272,14 +4275,14 @@
         "Cambria_Tires": {
           "fields": {
             "brand": 1.0,
-            "casing": 0.598,
+            "casing": 0.592,
             "image": 1.0,
-            "link": 0.147,
+            "link": 0.146,
             "tire_width": 0.01,
-            "tubeless": 0.059,
+            "tubeless": 0.058,
             "wheel_size": 0.951
           },
-          "items": 102
+          "items": 103
         },
         "Cambria_Wheels": {
           "fields": {
@@ -4341,7 +4344,8 @@
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "link": 0.235
+            "link": 0.235,
+            "pack_features": 0.882
           },
           "items": 17
         },
@@ -4358,7 +4362,7 @@
           "fields": {
             "brand": 1.0,
             "image": 1.0,
-            "link": 0.17,
+            "link": 0.151,
             "versions": 0.019,
             "width": 0.075
           },
@@ -4495,10 +4499,10 @@
             "brand": 1.0,
             "image": 1.0,
             "link": 0.03,
-            "speed": 0.717,
+            "speed": 0.71,
             "width": 0.02
           },
-          "items": 99
+          "items": 100
         },
         "Mike's Bikes_Pedals": {
           "fields": {
@@ -4530,14 +4534,14 @@
         "Mike's Bikes_Tires": {
           "fields": {
             "brand": 1.0,
-            "casing": 0.214,
+            "casing": 0.15,
             "image": 1.0,
-            "tire_width": 0.643,
-            "tubeless": 0.071,
-            "wheel_size": 0.643,
-            "width": 0.071
+            "tire_width": 0.65,
+            "tubeless": 0.1,
+            "wheel_size": 0.65,
+            "width": 0.05
           },
-          "items": 14
+          "items": 20
         },
         "Mike's Bikes_Tools & Care": {
           "fields": {
@@ -4615,21 +4619,21 @@
           "fields": {
             "brand": 1.0,
             "image": 0.988,
-            "speed": 0.357,
+            "speed": 0.361,
             "versions": 0.006
           },
-          "items": 168
+          "items": 169
         },
         "The Lost Co._Forks & Shocks": {
           "fields": {
             "brand": 1.0,
             "image": 1.0,
             "link": 0.014,
-            "travel_mm": 0.085,
+            "travel_mm": 0.083,
             "wheel_size": 0.042,
-            "width": 0.127
+            "width": 0.125
           },
-          "items": 71
+          "items": 72
         },
         "The Lost Co._Pedals": {
           "fields": {
@@ -4643,16 +4647,16 @@
         "The Lost Co._Tires": {
           "fields": {
             "brand": 1.0,
-            "casing": 0.753,
+            "casing": 0.756,
             "image": 1.0,
             "link": 0.009,
             "tire_width": 0.932,
             "tubeless": 0.032,
             "versions": 0.009,
-            "wheel_size": 0.927,
+            "wheel_size": 0.928,
             "width": 0.932
           },
-          "items": 219
+          "items": 221
         },
         "The Lost Co._Tools & Care": {
           "fields": {
@@ -5034,11 +5038,13 @@
     ],
     "Mike's Bikes": [
       "ACCESSORIES",
+      "ACCESSORIES/BAGS/FRAME BAGS",
       "ACCESSORIES/BAGS/HANDLEBAR BAGS",
       "ACCESSORIES/BAGS/HYDRATION ACCESSORIES",
       "ACCESSORIES/BAGS/HYDRATION PACKS",
       "ACCESSORIES/BAGS/PANNIERS",
       "ACCESSORIES/BAGS/SEAT PACKS",
+      "ACCESSORIES/BAGS/TOP TUBE BAGS",
       "ACCESSORIES/BASKETS/FRONT BASKETS",
       "ACCESSORIES/BELLS AND HORNS",
       "ACCESSORIES/BOTTLES AND CAGES/BOTTLES",
