@@ -93,7 +93,7 @@ PART_ORDER = ("Decks", "Completes", "Trucks", "Wheels", "Bearings", "Accessories
 # Protection's type and size filters.
 PROTECTIVE_PARTS = ("Protection", "Helmets")
 # What the menu calls a store category; filters and links keep the category.
-PART_LABELS = {"Sneakers": "Shoes", "Accessories": "Grip, Hardware & Tools"}
+PART_LABELS = {"Sneakers": "Shoes", "Accessories": "Grip, Hardware & Tools", "Packs": "Backpacks"}
 # First screen of cards. The rest stay out of the grid until the reader scrolls
 # or asks for more, so a wide catalog does not lay out every card on load.
 CARD_PAGE_SIZE = 24
@@ -2106,12 +2106,13 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
     part_options = ['<option value="all"' + (" selected" if default_part == "all" else "") + ">All types</option>"]
     for part in part_order_for_sport:
         if part in part_counts or part == default_part:
+            label = PART_LABELS["Packs"] if sport.is_default and part == "Packs" else part
             part_options.append(
                 _option(
                     part,
-                    f"{part} ({part_counts.get(part, 0)})",
+                    f"{label} ({part_counts.get(part, 0)})",
                     selected=(part == default_part),
-                    data_label=part,
+                    data_label=label,
                 )
             )
     sorted_brands = sorted(brands, key=str.casefold)

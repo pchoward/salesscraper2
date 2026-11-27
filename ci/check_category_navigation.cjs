@@ -81,8 +81,30 @@ async function main(){
      assert.equal(await child.evaluate(()=>state.part),part,'deep link: '+part);
      const rows=await child.locator('.deal-row:not(.filtered-out)').evaluateAll(nodes=>nodes.map(node=>node.dataset.part));
      assert(rows.length>0&&rows.every(value=>value===part),part+' results');
-     assert((await child.locator('#breadcrumbs').innerText()).includes(part),part+' breadcrumb');
-     if(part==='Packs')await page.screenshot({path:path.join(output,`packs-${width}.png`)});
+     const displayPart=part==='Packs'?'Backpacks':part;
+     assert((await child.locator('#breadcrumbs').innerText()).includes(displayPart),part+' breadcrumb');
+     if(part==='Packs'){
+      assert.equal(label,'Backpacks');
+      assert.equal(await page.locator('#categoryLabel').textContent(),'Backpacks');
+      await page.screenshot({path:path.join(output,`packs-${width}.png`)});
+      for(const alias of ['pack','backpacks']){
+       await page.goto(base+'/?sport=skate&type='+alias);await ready();
+       child=await frame();
+       assert.equal(await child.evaluate(()=>state.part),'Packs');
+       assert.equal(await page.locator('#categoryLabel').textContent(),'Backpacks');
+      }
+      await page.evaluate(()=>localStorage.setItem('salesscraper2.views',JSON.stringify([
+       {id:'legacy-packs',name:'Legacy packs',query:'type=packs'}
+      ])));
+      await page.goto(base+'/?sport=skate');await ready();
+      if(width<=640)await page.locator('#headerMenuToggle').click();
+      await page.locator('#myStuffToggle').click();
+      await page.getByRole('button',{name:'Legacy packs · Shared',exact:true}).click();
+      await page.waitForFunction(()=>document.getElementById('categoryLabel').textContent==='Backpacks');
+      child=await frame();
+      assert.equal(await child.evaluate(()=>state.part),'Packs');
+      assert((await child.locator('#breadcrumbs').innerText()).includes('Backpacks'));
+     }
      await counts();
     }
     await page.goto(base+'/?sport=skate');await ready();child=await frame();
