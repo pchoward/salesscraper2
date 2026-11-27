@@ -692,6 +692,13 @@ class ShopifyScraper(Scraper):
             set_wheelbase(item, description)
         if self.part == "Protection":
             set_protection_fields(item, name, product_type, variants)
+        if self.part == "Packs":
+            # Skateboard straps, water resistance... from the feed's own
+            # description (sports/packs.py; owner, 2026-11-27).
+            from sports import packs
+            tags = product.get("tags")
+            tags = " ".join(tags) if isinstance(tags, list) else str(tags or "")
+            item["pack_features"] = packs.features(name, description + " " + tags, product_type)
         if self.part == "Sneakers":
             item["description"] = description
             if _stock_known(_variants_of(product)):

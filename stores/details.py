@@ -142,3 +142,111 @@ def fill_wheelbases(current_data, history, skip_keys=(), today=None, fetch=_get,
     if queue:
         logger.info("Wheelbase: read %s of %s deck pages, %s stated one", read, len(queue), found)
     return read, found
+
+
+# ---- Pack features from product pages (owner, 2026-11-27) -----------------
+# Skateboard straps, water resistance, hydration, waist and chest straps, like
+# Tactics' pack sidebar (sports/packs.py PACK_FEATURES). Shopify stores get
+# them from the feed's description; these stores' grids give none, so each
+# pack's page is read once, like wheelbase above. Zumiez pages need a browser
+# (stores/stock.py). A read that finds nothing is tried again after
+# RECHECK_DAYS; an unreadable page is tried next run.
+PACK_STORES = {"Tactics": 1.5, "SkateWarehouse": 1.5, "CCS": 1.0, "Zumiez": 0}
+RENDERED = ("Zumiez",)
+MAX_PACK_PAGES = 80
+
+
+def description_text(html):
+    """The product description's text: JSON-LD, then description-like
+    elements, then the page without its header, menus and footer."""
+    if not html:
+        return ""
+    soup = BeautifulSoup(html, "html.parser")
+    found = []
+    for node in soup.select('script[type="application/ld+json"]'):
+        try:
+            data = json.loads(node.string or "")
+        except (ValueError, TypeError):
+            continue
+        for entry in data if isinstance(data, list) else [data]:
+            if isinstance(entry, dict) and str(entry.get("@type", "")).lower() == "product" and entry.get("description"):
+                found.append(BeautifulSoup(str(entry["description"]), "html.parser").get_text(" ", strip=True))
+    for node in soup.select('[itemprop="description"], [class*="description" i], [id*="description" i], '
+                            '[class*="product-details" i], [class*="features" i]'):
+        found.append(node.get_text(" ", strip=True))
+    if found:
+        return " ".join(found)
+    for node in soup(["script", "style", "noscript", "header", "nav", "footer"]):
+        node.decompose()
+    return soup.get_text(" ", strip=True)
+
+
+def _pack_due(entry, today):
+    checked = str(entry.get("pack_features_checked") or "")[:10]
+    try:
+        last = datetime.date.fromisoformat(checked)
+    except ValueError:
+        return True
+    return not entry.get("pack_features") and (today - last).days >= RECHECK_DAYS
+
+
+def fill_pack_features(current_data, history, skip_keys=(), today=None, fetch=_get, fetch_rendered=None,
+                       sleep=time.sleep, limit=MAX_PACK_PAGES):
+    """Give packs their saved features, and read pages for packs not yet
+    checked. Returns ``(read, found)``."""
+    from sports import packs
+    today = today or datetime.date.today()
+    if isinstance(today, str):
+        today = datetime.date.fromisoformat(today[:10])
+    skip = {str(key) for key in skip_keys or ()}
+    queues = {}
+    for key, items in (current_data or {}).items():
+        if key in skip or not isinstance(items, list):
+            continue
+        for item in items:
+            if not isinstance(item, dict) or packs.PART not in (item.get("part"), item.get("store_part")):
+                continue
+            if item.get("store") not in PACK_STORES or item.get("pack_features") is not None:
+                continue
+            url = normalize_url(item.get("url"))
+            entry = history.get(url) if url else None
+            if not isinstance(entry, dict):
+                continue
+            if entry.get("pack_features_checked"):
+                item["pack_features"] = list(entry.get("pack_features") or [])
+            if _pack_due(entry, today):
+                queues.setdefault(item["store"], []).append((item["store"], url, item, entry))
+    queue = []
+    while any(queues.values()):
+        for store in list(queues):
+            if queues[store]:
+                queue.append(queues[store].pop(0))
+    queue = queue[:limit]
+    rendered = {}
+    wanted = [url for store, url, _item, _entry in queue if store in RENDERED]
+    if wanted:
+        if fetch_rendered is None:
+            from stores.stock import _fetch_rendered as fetch_rendered
+        rendered = fetch_rendered(wanted) or {}
+    last_request = {}
+    read = found = 0
+    for store, url, item, entry in queue:
+        if store in RENDERED:
+            html = rendered.get(url)
+        else:
+            wait = PACK_STORES[store] - (time.monotonic() - last_request.get(store, -1e9))
+            if wait > 0:
+                sleep(wait)
+            html = fetch(url, "text/html")
+            last_request[store] = time.monotonic()
+        if html is None:
+            continue  # try again next run
+        read += 1
+        features = packs.features(item.get("name"), description_text(html), item.get("product_type"))
+        entry["pack_features_checked"] = today.isoformat()
+        entry["pack_features"] = features
+        item["pack_features"] = list(features)
+        found += bool(features)
+    if queue:
+        logger.info("Pack features: read %s of %s pack pages, %s named a feature", read, len(queue), found)
+    return read, found
