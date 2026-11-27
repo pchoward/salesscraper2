@@ -3927,6 +3927,875 @@
           "items": 20
         }
       }
+    },
+    "2026-11-27": {
+      "fill": {
+        "7iDP_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.714,
+            "helmet_style": 0.286,
+            "image": 1.0,
+            "prot_size": 0.857,
+            "protection_sizes": 0.857,
+            "protection_type": 0.643,
+            "protects": 1.0
+          },
+          "items": 14
+        },
+        "Alpinestars_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.062,
+            "helmet_style": 0.062,
+            "image": 1.0,
+            "prot_size": 1.0,
+            "protection_sizes": 1.0,
+            "protection_type": 0.156,
+            "protects": 1.0,
+            "rotational": 0.062,
+            "versions": 0.719,
+            "width": 0.062
+          },
+          "items": 32
+        },
+        "Bicycle Warehouse_Bikes": {
+          "fields": {
+            "brand": 1.0,
+            "frame_material": 0.429,
+            "frame_size": 0.929,
+            "image": 1.0,
+            "power": 0.964,
+            "riding_type": 0.036,
+            "suspension": 0.964,
+            "travel_mm": 0.071,
+            "wheel_size": 0.964,
+            "width": 0.036
+          },
+          "items": 28
+        },
+        "Bicycle Warehouse_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.875,
+            "helmet_style": 0.312,
+            "image": 1.0,
+            "link": 0.125,
+            "prot_size": 0.875,
+            "protection_sizes": 0.875,
+            "protection_type": 1.0,
+            "protects": 1.0,
+            "rotational": 0.312,
+            "versions": 0.062
+          },
+          "items": 16
+        },
+        "Bicycle Warehouse_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "casing": 0.421,
+            "image": 1.0,
+            "tire_width": 0.789,
+            "tubeless": 0.474,
+            "wheel_size": 0.842,
+            "width": 0.526
+          },
+          "items": 19
+        },
+        "Bike Mart_Bikes": {
+          "fields": {
+            "brand": 1.0,
+            "frame_material": 0.714,
+            "frame_size": 1.0,
+            "image": 1.0,
+            "link": 0.214,
+            "power": 1.0,
+            "suspension": 1.0,
+            "travel_mm": 0.071,
+            "wheel_size": 0.143
+          },
+          "items": 14
+        },
+        "Bike Mart_Brakes": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "rotor_mm": 0.179,
+            "width": 0.018
+          },
+          "items": 112
+        },
+        "Bike Mart_Cockpit": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.023,
+            "versions": 0.034,
+            "width": 0.019
+          },
+          "items": 263
+        },
+        "Bike Mart_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "speed": 0.037,
+            "versions": 0.132,
+            "width": 0.015
+          },
+          "items": 136
+        },
+        "Bike Mart_Forks & Shocks": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "width": 0.333
+          },
+          "items": 15
+        },
+        "Bike Mart_Pedals": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "pedal_material": 0.553,
+            "pedal_thread": 0.596,
+            "pedal_type": 0.957,
+            "width": 0.255
+          },
+          "items": 47
+        },
+        "Bike Mart_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "casing": 0.429,
+            "image": 1.0,
+            "link": 0.023,
+            "tire_width": 0.757,
+            "tubeless": 0.494,
+            "versions": 0.008,
+            "wheel_size": 0.764,
+            "width": 0.876
+          },
+          "items": 259
+        },
+        "Bike Mart_Wheels": {
+          "fields": {
+            "axle": 0.029,
+            "brand": 1.0,
+            "diameter_mm": 0.145,
+            "diameters_mm": 0.145,
+            "durometers": 0.039,
+            "image": 0.995,
+            "link": 0.005,
+            "versions": 0.063,
+            "wheel_size": 0.106,
+            "width": 0.005
+          },
+          "items": 207
+        },
+        "Bikes Online_Bikes": {
+          "fields": {
+            "brand": 1.0,
+            "condition": 0.138,
+            "frame_material": 0.345,
+            "frame_size": 0.948,
+            "image": 1.0,
+            "link": 0.017,
+            "power": 1.0,
+            "suspension": 0.034,
+            "versions": 0.017,
+            "wheel_size": 0.155,
+            "width": 0.155
+          },
+          "items": 58
+        },
+        "Bikes Online_Brakes": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "rotor_mm": 0.083
+          },
+          "items": 12
+        },
+        "Bikes Online_Cockpit": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0
+          },
+          "items": 17
+        },
+        "Bikes Online_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "speed": 0.4
+          },
+          "items": 15
+        },
+        "Bikes Online_Forks & Shocks": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "travel_mm": 0.364,
+            "wheel_size": 0.364
+          },
+          "items": 11
+        },
+        "Bikes Online_Frames": {
+          "fields": {
+            "brand": 1.0,
+            "frame_material": 0.611,
+            "frame_size": 0.778,
+            "image": 1.0,
+            "power": 1.0,
+            "suspension": 0.389,
+            "travel_mm": 0.333,
+            "wheel_size": 0.111
+          },
+          "items": 18
+        },
+        "Bikes Online_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.548,
+            "helmet_style": 0.381,
+            "image": 1.0,
+            "link": 0.167,
+            "prot_size": 0.905,
+            "protection_sizes": 0.905,
+            "protection_type": 0.857,
+            "protects": 1.0,
+            "rotational": 0.524,
+            "width": 0.048
+          },
+          "items": 42
+        },
+        "Bikes Online_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "tire_width": 1.0,
+            "wheel_size": 1.0,
+            "width": 0.545
+          },
+          "items": 11
+        },
+        "Bikes Online_Tools & Care": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0
+          },
+          "items": 10
+        },
+        "Bikes Online_Wheels": {
+          "fields": {
+            "axle": 0.167,
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.083,
+            "wheel_size": 0.333
+          },
+          "items": 12
+        },
+        "Cambria_Bikes": {
+          "fields": {
+            "brand": 1.0,
+            "condition": 0.032,
+            "frame_material": 0.968,
+            "frame_size": 0.968,
+            "image": 1.0,
+            "link": 0.065,
+            "power": 1.0,
+            "rotor_mm": 0.323,
+            "speed": 0.065,
+            "suspension": 0.774,
+            "travel_mm": 0.968,
+            "wheel_size": 0.71,
+            "width": 0.032
+          },
+          "items": 31
+        },
+        "Cambria_Brakes": {
+          "fields": {
+            "brand": 1.0,
+            "image": 0.98
+          },
+          "items": 51
+        },
+        "Cambria_Cockpit": {
+          "fields": {
+            "brand": 1.0,
+            "image": 0.985,
+            "link": 0.045,
+            "width": 0.05
+          },
+          "items": 199
+        },
+        "Cambria_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.097,
+            "speed": 0.583,
+            "width": 0.083
+          },
+          "items": 288
+        },
+        "Cambria_Pedals": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "pedal_material": 0.647,
+            "pedal_type": 1.0
+          },
+          "items": 68
+        },
+        "Cambria_Protection": {
+          "fields": {
+            "age": 0.979,
+            "brand": 1.0,
+            "certification": 0.557,
+            "image": 1.0,
+            "link": 0.01,
+            "prot_size": 0.814,
+            "protection_sizes": 0.814,
+            "protection_type": 0.784,
+            "protects": 1.0,
+            "width": 0.196
+          },
+          "items": 97
+        },
+        "Cambria_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "casing": 0.598,
+            "image": 1.0,
+            "link": 0.147,
+            "tire_width": 0.01,
+            "tubeless": 0.059,
+            "wheel_size": 0.951
+          },
+          "items": 102
+        },
+        "Cambria_Wheels": {
+          "fields": {
+            "brand": 1.0,
+            "diameter_mm": 0.067,
+            "diameters_mm": 0.067,
+            "durometers": 0.167,
+            "image": 0.967,
+            "spec_conflicts": 0.033,
+            "wheel_size": 0.967
+          },
+          "items": 30
+        },
+        "Colorado Cyclist_Protection": {
+          "fields": {
+            "age": 0.991,
+            "brand": 1.0,
+            "certification": 0.548,
+            "helmet_style": 0.715,
+            "image": 1.0,
+            "link": 0.005,
+            "prot_size": 0.968,
+            "protection_sizes": 0.968,
+            "protection_type": 0.959,
+            "protects": 1.0,
+            "rotational": 0.484
+          },
+          "items": 221
+        },
+        "Colorado Cyclist_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "casing": 0.693,
+            "image": 1.0,
+            "tire_width": 1.0,
+            "tubeless": 0.866,
+            "versions": 0.026,
+            "wheel_size": 1.0,
+            "width": 1.0
+          },
+          "items": 388
+        },
+        "Demon_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.85,
+            "helmet_style": 0.1,
+            "image": 1.0,
+            "prot_size": 0.75,
+            "protection_sizes": 0.75,
+            "protection_type": 0.8,
+            "protects": 1.0,
+            "rotational": 0.15
+          },
+          "items": 20
+        },
+        "EVOC_Packs": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.235
+          },
+          "items": 17
+        },
+        "Fanatik_Brakes": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.135,
+            "width": 0.019
+          },
+          "items": 52
+        },
+        "Fanatik_Cockpit": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.17,
+            "versions": 0.019,
+            "width": 0.075
+          },
+          "items": 53
+        },
+        "Fanatik_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.176,
+            "speed": 0.717,
+            "width": 0.031
+          },
+          "items": 159
+        },
+        "Fanatik_Forks & Shocks": {
+          "fields": {
+            "brand": 1.0,
+            "image": 0.989,
+            "link": 0.068,
+            "travel_mm": 0.057,
+            "wheel_size": 0.068,
+            "width": 0.114
+          },
+          "items": 88
+        },
+        "Fanatik_Frames": {
+          "fields": {
+            "axle": 0.278,
+            "brand": 1.0,
+            "frame_material": 0.306,
+            "frame_size": 0.75,
+            "image": 1.0,
+            "link": 0.056,
+            "power": 0.306,
+            "suspension": 0.306,
+            "travel_mm": 0.306,
+            "wheel_size": 0.222
+          },
+          "items": 36
+        },
+        "Fanatik_Pedals": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "pedal_material": 0.231,
+            "pedal_type": 1.0
+          },
+          "items": 13
+        },
+        "Fanatik_Protection": {
+          "fields": {
+            "age": 0.938,
+            "brand": 1.0,
+            "certification": 0.062,
+            "helmet_style": 0.438,
+            "image": 1.0,
+            "link": 0.125,
+            "prot_size": 0.625,
+            "protection_sizes": 0.75,
+            "protection_type": 0.562,
+            "protects": 0.938,
+            "rotational": 0.25
+          },
+          "items": 16
+        },
+        "Fanatik_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "casing": 0.243,
+            "image": 1.0,
+            "link": 0.257,
+            "tire_width": 0.843,
+            "tubeless": 0.014,
+            "wheel_size": 0.9,
+            "width": 0.957
+          },
+          "items": 70
+        },
+        "Fanatik_Tools & Care": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "width": 0.042
+          },
+          "items": 24
+        },
+        "Fanatik_Wheels": {
+          "fields": {
+            "brand": 1.0,
+            "durometers": 0.03,
+            "image": 1.0,
+            "link": 0.152,
+            "wheel_size": 0.121,
+            "width": 0.03
+          },
+          "items": 33
+        },
+        "Mike's Bikes_Bikes": {
+          "fields": {
+            "brand": 1.0,
+            "condition": 0.132,
+            "frame_material": 0.868,
+            "frame_size": 0.849,
+            "image": 1.0,
+            "power": 1.0,
+            "speed": 0.17,
+            "suspension": 1.0,
+            "travel_mm": 0.208,
+            "versions": 0.038,
+            "wheel_size": 0.887
+          },
+          "items": 53
+        },
+        "Mike's Bikes_Brakes": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.09,
+            "rotor_mm": 0.075
+          },
+          "items": 67
+        },
+        "Mike's Bikes_Cockpit": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.104
+          },
+          "items": 48
+        },
+        "Mike's Bikes_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.03,
+            "speed": 0.717,
+            "width": 0.02
+          },
+          "items": 99
+        },
+        "Mike's Bikes_Pedals": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "pedal_material": 0.273,
+            "pedal_type": 1.0
+          },
+          "items": 33
+        },
+        "Mike's Bikes_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.417,
+            "helmet_style": 0.431,
+            "image": 1.0,
+            "link": 0.181,
+            "prot_size": 0.958,
+            "protection_sizes": 0.958,
+            "protection_type": 0.639,
+            "protects": 1.0,
+            "rotational": 0.444,
+            "versions": 0.069,
+            "width": 0.014
+          },
+          "items": 72
+        },
+        "Mike's Bikes_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "casing": 0.214,
+            "image": 1.0,
+            "tire_width": 0.643,
+            "tubeless": 0.071,
+            "wheel_size": 0.643,
+            "width": 0.071
+          },
+          "items": 14
+        },
+        "Mike's Bikes_Tools & Care": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0
+          },
+          "items": 53
+        },
+        "Mike's Bikes_Wheels": {
+          "fields": {
+            "brand": 1.0,
+            "diameter_mm": 0.077,
+            "diameters_mm": 0.077,
+            "image": 1.0,
+            "link": 0.154,
+            "spec_conflicts": 0.077,
+            "wheel_size": 0.308
+          },
+          "items": 13
+        },
+        "Race Face_Cockpit": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.1
+          },
+          "items": 10
+        },
+        "Race Face_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.333,
+            "image": 1.0,
+            "prot_size": 1.0,
+            "protection_sizes": 1.0,
+            "protection_type": 0.722,
+            "protects": 1.0
+          },
+          "items": 18
+        },
+        "Smith_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "certification": 0.867,
+            "helmet_style": 0.6,
+            "image": 1.0,
+            "link": 0.067,
+            "prot_size": 0.867,
+            "protection_sizes": 0.867,
+            "protection_type": 0.867,
+            "protects": 1.0,
+            "rotational": 0.8
+          },
+          "items": 15
+        },
+        "The Lost Co._Brakes": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "rotor_mm": 0.075
+          },
+          "items": 40
+        },
+        "The Lost Co._Cockpit": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.004
+          },
+          "items": 253
+        },
+        "The Lost Co._Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "image": 0.988,
+            "speed": 0.357,
+            "versions": 0.006
+          },
+          "items": 168
+        },
+        "The Lost Co._Forks & Shocks": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.014,
+            "travel_mm": 0.085,
+            "wheel_size": 0.042,
+            "width": 0.127
+          },
+          "items": 71
+        },
+        "The Lost Co._Pedals": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "pedal_material": 0.056,
+            "pedal_type": 1.0
+          },
+          "items": 36
+        },
+        "The Lost Co._Tires": {
+          "fields": {
+            "brand": 1.0,
+            "casing": 0.753,
+            "image": 1.0,
+            "link": 0.009,
+            "tire_width": 0.932,
+            "tubeless": 0.032,
+            "versions": 0.009,
+            "wheel_size": 0.927,
+            "width": 0.932
+          },
+          "items": 219
+        },
+        "The Lost Co._Tools & Care": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.07,
+            "width": 0.174
+          },
+          "items": 86
+        },
+        "The Lost Co._Wheels": {
+          "fields": {
+            "axle": 0.432,
+            "brand": 1.0,
+            "durometers": 0.182,
+            "image": 1.0,
+            "wheel_size": 0.977
+          },
+          "items": 44
+        },
+        "Troy Lee Designs_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 1.0,
+            "helmet_style": 0.038,
+            "image": 1.0,
+            "prot_size": 1.0,
+            "protection_sizes": 1.0,
+            "protection_type": 0.077,
+            "protects": 1.0,
+            "riding_type": 0.154,
+            "rotational": 0.038,
+            "versions": 0.038,
+            "width": 0.154
+          },
+          "items": 26
+        },
+        "Zeitbike_Wheels": {
+          "fields": {
+            "axle": 0.077,
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.038,
+            "wheel_size": 1.0
+          },
+          "items": 26
+        },
+        "evo_Bikes": {
+          "fields": {
+            "brand": 1.0,
+            "frame_material": 0.64,
+            "frame_size": 0.907,
+            "image": 1.0,
+            "link": 0.027,
+            "power": 1.0,
+            "speed": 0.227,
+            "suspension": 0.2,
+            "travel_mm": 0.2,
+            "wheel_size": 0.04,
+            "width": 0.027
+          },
+          "items": 75
+        },
+        "evo_Brakes": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.05
+          },
+          "items": 60
+        },
+        "evo_Cockpit": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.068,
+            "width": 0.136
+          },
+          "items": 44
+        },
+        "evo_Drivetrain": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.043,
+            "speed": 0.766,
+            "versions": 0.011
+          },
+          "items": 94
+        },
+        "evo_Pedals": {
+          "fields": {
+            "brand": 1.0,
+            "image": 1.0,
+            "link": 0.29,
+            "pedal_material": 0.226,
+            "pedal_type": 1.0,
+            "versions": 0.032
+          },
+          "items": 31
+        },
+        "evo_Protection": {
+          "fields": {
+            "age": 1.0,
+            "brand": 0.976,
+            "certification": 0.048,
+            "helmet_style": 0.31,
+            "image": 1.0,
+            "link": 0.314,
+            "prot_size": 0.767,
+            "protection_sizes": 0.771,
+            "protection_type": 0.495,
+            "protects": 1.0,
+            "rotational": 0.367,
+            "versions": 0.038,
+            "width": 0.124
+          },
+          "items": 210
+        },
+        "evo_Tires": {
+          "fields": {
+            "brand": 1.0,
+            "casing": 0.16,
+            "image": 1.0,
+            "link": 0.34,
+            "tire_width": 0.7,
+            "tubeless": 0.18,
+            "versions": 0.04,
+            "wheel_size": 0.9
+          },
+          "items": 50
+        },
+        "evo_Wheels": {
+          "fields": {
+            "brand": 1.0,
+            "durometers": 0.25,
+            "image": 1.0,
+            "link": 0.2,
+            "wheel_size": 0.5
+          },
+          "items": 20
+        }
+      }
     }
   },
   "unclassified_seen": {

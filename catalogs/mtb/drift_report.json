@@ -1,64 +1,10 @@
 {
-  "checked_at": "2026-11-26T22:44:41+00:00",
+  "checked_at": "2026-11-27T04:14:21+00:00",
   "counts": {
-    "action": 2,
+    "action": 0,
     "watch": 0
   },
-  "date": "2026-11-26",
-  "findings": [
-    {
-      "count": 5,
-      "examples": [
-        {
-          "name": "Shimano Deore PD-DR400 Pedal",
-          "part": "Pedals",
-          "store": "Bikes Online"
-        },
-        {
-          "name": "Race Face Pedal and Stem Bundle",
-          "part": "Pedals",
-          "store": "Race Face"
-        },
-        {
-          "name": "Origin8 Pro Lite Track 9/16` Loose Ball PC-Black Alloy",
-          "part": "Pedals",
-          "store": "Bike Mart"
-        },
-        {
-          "name": "Origin8 Pro Lite Track 9/16` Loose Ball Ano-Silver Alloy",
-          "part": "Pedals",
-          "store": "Bike Mart"
-        },
-        {
-          "name": "VP Grind 1/2inch Black Pair Pedal",
-          "part": "Pedals",
-          "store": "Bike Mart"
-        }
-      ],
-      "field": "pedal_type",
-      "kind": "new_unclassified",
-      "label": "pedal type",
-      "level": "action"
-    },
-    {
-      "count": 2,
-      "examples": [
-        {
-          "name": "Gloworm Universal Helmet Mount",
-          "part": "Protection",
-          "store": "Fanatik"
-        },
-        {
-          "name": "Troy Lee Designs D3 Headliner",
-          "part": "Protection",
-          "store": "Fanatik"
-        }
-      ],
-      "field": "protects",
-      "kind": "new_unclassified",
-      "label": "protection type",
-      "level": "action"
-    }
-  ],
-  "last_scrape": "2026-11-26T22:36:12+00:00"
+  "date": "2026-11-27",
+  "findings": [],
+  "last_scrape": "2026-11-27T04:05:38+00:00"
 }
