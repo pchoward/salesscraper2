@@ -1532,10 +1532,10 @@
         "CCS_Protection": {
           "fields": {
             "image": 1.0,
-            "protection_sizes": 0.917,
+            "protection_sizes": 0.929,
             "protection_type": 1.0
           },
-          "items": 12
+          "items": 14
         },
         "CCS_Sneakers": {
           "fields": {
@@ -1592,9 +1592,9 @@
           "fields": {
             "image": 1.0,
             "shoe_sizes": 1.0,
-            "width": 0.056
+            "width": 0.053
           },
-          "items": 18
+          "items": 19
         },
         "SkateWarehouse_Completes": {
           "fields": {
@@ -1719,6 +1719,7 @@
         "Tactics_Packs": {
           "fields": {
             "image": 1.0,
+            "pack_features": 0.429,
             "width": 0.107
           },
           "items": 28
@@ -1781,6 +1782,7 @@
         "Zumiez_Packs": {
           "fields": {
             "image": 1.0,
+            "pack_features": 0.024,
             "width": 0.048
           },
           "items": 42

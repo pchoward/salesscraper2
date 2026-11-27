@@ -31430,14 +31430,14 @@
           }
         },
         "CCS_Protection": {
-          "count": 12,
+          "count": 14,
           "failed": false,
           "diagnostics": {
             "expected_count": 12.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 12,
-            "percentage_change": 0.0,
+            "actual_count": 14,
+            "percentage_change": 16.7,
             "reason": "normal_variation"
           }
         },
@@ -31876,15 +31876,15 @@
           }
         },
         "SPoT_Sneakers": {
-          "count": 18,
+          "count": 19,
           "failed": false,
           "diagnostics": {
             "expected_count": 7.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
             "rule_excluded": 1,
-            "actual_count": 18,
-            "percentage_change": 157.1,
+            "actual_count": 19,
+            "percentage_change": 171.4,
             "reason": "normal_variation"
           }
         },
@@ -32142,14 +32142,14 @@
           }
         },
         "Sourceboards_Decks": {
-          "count": 300,
+          "count": 299,
           "failed": false,
           "diagnostics": {
             "expected_count": 60.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.0,
-            "actual_count": 300,
-            "percentage_change": 400.0,
+            "actual_count": 299,
+            "percentage_change": 398.3,
             "reason": "normal_variation"
           }
         },
@@ -32335,13 +32335,13 @@
           }
         },
         "Tactics_Bearings": {
-          "count": 8,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 8,
+            "actual_count": 0,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -32383,13 +32383,13 @@
           }
         },
         "Tactics_Protection": {
-          "count": 37,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 37,
+            "actual_count": 0,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -32407,13 +32407,13 @@
           }
         },
         "Tactics_Trucks": {
-          "count": 122,
+          "count": 0,
           "failed": false,
           "diagnostics": {
             "expected_count": null,
             "baseline_samples": 0,
             "median_absolute_deviation": null,
-            "actual_count": 122,
+            "actual_count": 0,
             "percentage_change": null,
             "reason": "insufficient_history"
           }
@@ -32479,14 +32479,14 @@
           }
         },
         "Zumiez_Decks": {
-          "count": 314,
+          "count": 271,
           "failed": false,
           "diagnostics": {
             "expected_count": 308.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 24.0,
-            "actual_count": 314,
-            "percentage_change": 1.9,
+            "actual_count": 271,
+            "percentage_change": -12.0,
             "reason": "normal_variation"
           }
         },
@@ -32539,26 +32539,26 @@
           }
         },
         "Zumiez_Wheels": {
-          "count": 16,
+          "count": 13,
           "failed": false,
           "diagnostics": {
             "expected_count": 16.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 16,
-            "percentage_change": 0.0,
+            "actual_count": 13,
+            "percentage_change": -18.8,
             "reason": "normal_variation"
           }
         },
         "evo_Accessories": {
-          "count": 22,
+          "count": 21,
           "failed": false,
           "diagnostics": {
             "expected_count": 22,
             "baseline_samples": 1,
             "median_absolute_deviation": 0,
-            "actual_count": 22,
-            "percentage_change": 0.0,
+            "actual_count": 21,
+            "percentage_change": -4.5,
             "reason": "insufficient_history"
           }
         },
@@ -32659,7 +32659,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-27T10:05:29+00:00"
+      "scanned_at": "2026-11-27T14:03:34+00:00"
     }
   ],
   "baseline": {
@@ -32674,10 +32674,6 @@
     "SkateWarehouse_Trucks": {
       "date": "2026-11-27",
       "count": 16
-    },
-    "Tactics_Trucks": {
-      "date": "2026-11-27",
-      "count": 122
     },
     "SkateWarehouse_Bearings": {
       "date": "2026-11-27",
@@ -32737,15 +32733,11 @@
     },
     "CCS_Protection": {
       "date": "2026-11-27",
-      "count": 12
+      "count": 14
     },
     "TGM_Protection": {
       "date": "2026-11-27",
       "count": 8
-    },
-    "Tactics_Protection": {
-      "date": "2026-11-27",
-      "count": 37
     },
     "SkateWarehouse_Protection": {
       "date": "2026-11-27",
@@ -32765,7 +32757,7 @@
     },
     "SPoT_Sneakers": {
       "date": "2026-11-27",
-      "count": 18
+      "count": 19
     },
     "Exodus_Accessories": {
       "date": "2026-11-27",
@@ -32798,10 +32790,6 @@
     "SoCal_Trucks": {
       "date": "2026-11-01",
       "count": 2
-    },
-    "Tactics_Bearings": {
-      "date": "2026-11-27",
-      "count": 8
     },
     "187 Killer Pads_Protection": {
       "date": "2026-11-27",
@@ -32837,7 +32825,7 @@
     },
     "Zumiez_Wheels": {
       "date": "2026-11-27",
-      "count": 16
+      "count": 13
     },
     "CCS_Completes": {
       "date": "2026-11-27",
@@ -32849,7 +32837,7 @@
     },
     "Zumiez_Decks": {
       "date": "2026-11-27",
-      "count": 314
+      "count": 271
     },
     "Exodus_Bearings": {
       "date": "2026-11-27",
@@ -32865,7 +32853,7 @@
     },
     "Sourceboards_Decks": {
       "date": "2026-11-27",
-      "count": 300
+      "count": 299
     },
     "TGM_Packs": {
       "date": "2026-11-14",
@@ -32913,7 +32901,7 @@
     },
     "evo_Accessories": {
       "date": "2026-11-27",
-      "count": 22
+      "count": 21
     },
     "evo_Bearings": {
       "date": "2026-11-27",
@@ -33290,7 +33278,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 12
+        "count": 14
       }
     ],
     "CCS_Sneakers": [
@@ -35436,7 +35424,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 18
+        "count": 19
       }
     ],
     "SPoT_Trucks": [
@@ -36762,7 +36750,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 300
+        "count": 299
       }
     ],
     "Sourceboards_Packs": [
@@ -38038,7 +38026,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 314
+        "count": 271
       }
     ],
     "Zumiez_Packs": [
@@ -38328,7 +38316,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 16
+        "count": 13
       }
     ],
     "evo_Accessories": [
@@ -38338,7 +38326,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 22
+        "count": 21
       }
     ],
     "evo_Bearings": [

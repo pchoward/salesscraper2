@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-27T10:32:51+00:00",
+  "checked_at": "2026-11-27T14:34:42+00:00",
   "counts": {
     "action": 1,
-    "watch": 1
+    "watch": 2
   },
   "date": "2026-11-27",
   "findings": [
@@ -16,12 +16,20 @@
     },
     {
       "change": "rise",
-      "count": 300,
+      "count": 299,
       "kind": "volume",
       "level": "watch",
       "median": 60,
       "store": "Sourceboards"
+    },
+    {
+      "change": "drop",
+      "count": 93,
+      "kind": "volume",
+      "level": "watch",
+      "median": 263,
+      "store": "Tactics"
     }
   ],
-  "last_scrape": "2026-11-27T10:05:29+00:00"
+  "last_scrape": "2026-11-27T14:03:34+00:00"
 }
