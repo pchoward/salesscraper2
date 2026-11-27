@@ -42,5 +42,25 @@ class BrandAliasTests(unittest.TestCase):
         self.assertEqual(canonical("Treviso Design", ski), "Treviso")
 
 
+
+class TradeWordTests(unittest.TestCase):
+    """Owner, 2026-11-27: "Osprey" and "Osprey Packs" both in MTB's Brand list."""
+
+    def merged(self, labels):
+        import page
+        records = [{"brand": label, "search": label, "item": {}} for label in labels]
+        page._canonicalize_brands(records)
+        return [record["brand"] for record in records]
+
+    def test_a_trade_word_merges_into_the_bare_name(self):
+        self.assertEqual(self.merged(["Osprey Packs", "Osprey", "Salomon Skis", "Salomon", "MTX Braking", "MTX"]),
+                         ["Osprey", "Osprey", "Salomon", "Salomon", "MTX", "MTX"])
+
+    def test_alone_it_keeps_its_name(self):
+        # Nothing to merge with; different brands that share a first word stay apart.
+        self.assertEqual(self.merged(["Osprey Packs", "Profile Design", "Profile", "Formula 100", "Formula"]),
+                         ["Osprey Packs", "Profile Design", "Profile", "Formula 100", "Formula"])
+
+
 if __name__ == "__main__":
     unittest.main()
