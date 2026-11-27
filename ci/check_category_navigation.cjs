@@ -104,6 +104,35 @@ async function main(){
       child=await frame();
       assert.equal(await child.evaluate(()=>state.part),'Packs');
       assert((await child.locator('#breadcrumbs').innerText()).includes('Backpacks'));
+      if(width===390)await child.locator('#filtersOpen').click();
+      const sizes=child.locator('#packsizeFilters');
+      const types=child.locator('#packtypeFilters');
+      const sizeToggle=child.locator('[data-section="packsize"] .section-toggle');
+      if(await sizeToggle.getAttribute('aria-expanded')==='false')await sizeToggle.click();
+      assert.equal(await sizes.locator('input[type="range"]').count(),0);
+      const preferred=sizes.locator('[data-value="25–34L"]:visible');
+      const size=await preferred.count()?preferred:sizes.locator('.spec-chip:visible').first();
+      const bucket=await size.getAttribute('data-value');
+      const expected=Number(await size.getAttribute('data-count'));
+      assert(expected>0);
+      await size.click();
+      await page.waitForURL(url=>url.searchParams.get('packsize')===bucket);
+      const visible=()=>child.locator('.deal-row:not(.filtered-out)').evaluateAll(nodes=>
+       nodes.map(node=>({size:node.dataset.packsize,type:node.dataset.packtype})));
+      let shown=await visible();
+      assert(shown.length===expected&&shown.every(row=>row.size===bucket));
+      const typeToggle=child.locator('[data-section="packtype"] .section-toggle');
+      if(await typeToggle.getAttribute('aria-expanded')==='false')await typeToggle.click();
+      const kind=shown.find(row=>row.type==='Backpack')?.type||shown[0].type;
+      await types.locator('[data-value='+JSON.stringify(kind)+']').click();
+      await page.waitForURL(url=>url.searchParams.get('packtype')===kind);
+      shown=await visible();
+      assert(shown.length&&shown.every(row=>row.size===bucket&&row.type===kind));
+      const filteredURL=page.url();
+      await page.goto(filteredURL);await ready();child=await frame();
+      await child.waitForFunction(({bucket,kind})=>document.shredCatalogReady&&state.packSizes.includes(bucket)&&state.packTypes.includes(kind),{bucket,kind});
+      assert.deepEqual(await visible(),shown);
+
      }
      await counts();
     }

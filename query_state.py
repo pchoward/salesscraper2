@@ -60,6 +60,7 @@ from part_specs import (
 )
 from truck_fit import ordered_fits, ordered_natives
 from protection import ordered_size_tokens, ordered_type_tokens
+from sports.packs import PACK_TYPES, VOLUME_SIZES
 
 
 class WidthRange(object):
@@ -241,6 +242,8 @@ def empty_state():
         "shoe_sizes": [],
         "prot_types": [],
         "prot_sizes": [],
+        "pack_sizes": [],
+        "pack_types": [],
     }
 
 
@@ -362,6 +365,11 @@ def ordered_deck_shapes(values):
     return [token for token in DECK_SHAPE_ORDER if token in chosen]
 
 
+def _ordered_pack_values(values, order):
+    picked = {str(value).strip().casefold() for value in values or ()}
+    return [value for value in order if value.casefold() in picked]
+
+
 def decode_query(query):
     """Return a full filter state. Unknown values are ignored."""
     state = empty_state()
@@ -448,6 +456,10 @@ def decode_query(query):
             state["shoe_sizes"] = ordered_shoe_sizes(str(value or "").split(","))
         elif key == "prottype":
             state["prot_types"] = ordered_type_tokens(str(value or "").split(","))
+        elif key == "packsize":
+            state["pack_sizes"] = _ordered_pack_values(value.split(","), VOLUME_SIZES)
+        elif key == "packtype":
+            state["pack_types"] = _ordered_pack_values(value.split(","), PACK_TYPES)
         elif key == "protsize":
             state["prot_sizes"] = ordered_size_tokens(str(value or "").split(","))
     return state
@@ -556,4 +568,10 @@ def encode_state(state):
     prot_sizes = ordered_size_tokens(state.get("prot_sizes"))
     if prot_sizes:
         add("protsize", ",".join(prot_sizes))
+    pack_sizes = _ordered_pack_values(state.get("pack_sizes"), VOLUME_SIZES)
+    pack_types = _ordered_pack_values(state.get("pack_types"), PACK_TYPES)
+    if pack_sizes:
+        add("packsize", ",".join(pack_sizes))
+    if pack_types:
+        add("packtype", ",".join(pack_types))
     return urlencode(pairs)
