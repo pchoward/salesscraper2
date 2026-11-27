@@ -182,8 +182,44 @@ def pack_type(name, product_type=""):
     return PACK_TYPES[0]
 
 
+# Features, like Tactics' pack sidebar (owner, 2026-11-27). Read from the
+# title and the store's description; a pack whose description we never saw
+# has none rather than a guess. DWR and waterproof count as water resistant.
+PACK_FEATURES = ("Skateboard straps", "Water resistant", "Hydration compatible", "Waist strap", "Chest strap")
+_FEATURES = (
+    ("Skateboard straps", re.compile(
+        r"\bskate(?:board)?[\s-]*(?:carry|carrier|straps?|holder|loops?)\b|\bdeck[\s-]*(?:carry|carrier|straps?|holder)\b"
+        r"|\bcarr(?:y|ies|ying)\s+(?:a\s+|your\s+)?skateboards?\b|\bskate[\s-]*carry\b", re.I)),
+    ("Water resistant", re.compile(
+        r"\bwater[\s-]*(?:resistant|repellent|repelling|proof)\b|\bweather[\s-]*(?:resistant|proof)\b|\bdwr\b"
+        r"|\bwaterproof\b|\btarpaulin\b", re.I)),
+    ("Hydration compatible", re.compile(
+        r"\bhydration[\s-]*(?:compatible|ready|sleeve|port|reservoir|bladder|system|pocket)\b|\breservoir\s+(?:sleeve|pocket|compatible)\b"
+        r"|\bbladder\s+(?:sleeve|pocket|compatible)\b|\bhose\s+(?:port|routing|clip)\b|\b\d(?:\.\d)?\s*l\s+(?:reservoir|bladder)\b", re.I)),
+    ("Waist strap", re.compile(r"\b(?:waist|hip)[\s-]*(?:straps?|belts?)\b|\bhip[\s-]*fins?\b", re.I)),
+    ("Chest strap", re.compile(r"\b(?:chest|sternum)[\s-]*straps?\b", re.I)),
+)
+
+
+_BOARD_CARRY = re.compile(r"\bboard[\s-]*(?:carry|carrier|straps?|holder)\b|\bcarr(?:y|ies|ying)\s+(?:a\s+|your\s+)?boards?\b", re.I)
+_SNOW_WORDS = re.compile(r"\bsnow|\bskis?\b|\bsplitboard|\bavalanche\b", re.I)
+
+
+def features(name, description="", product_type=""):
+    """The pack's features in ``PACK_FEATURES`` order, from its title and description."""
+    text = " ".join(str(part or "") for part in (name, product_type, description))
+    found = [label for label, pattern in _FEATURES if pattern.search(text)]
+    # A plain "board carry" is a skateboard's only when nothing says snow or skis.
+    if ("Skateboard straps" not in found and _BOARD_CARRY.search(text) and not _SNOW_WORDS.search(text)):
+        found.insert(0, "Skateboard straps")
+    if "Hydration compatible" not in found and pack_type(name, product_type) == "Hydration pack":
+        found.insert(min(2, len(found)), "Hydration compatible")
+        found.sort(key=PACK_FEATURES.index)
+    return found
+
+
 def facet_fields(prefix):
-    """The pack heading's Type and Size filters for one sport's sidebar."""
+    """The pack heading's Type, Size and Features filters for one sport's sidebar."""
     # The heading reads Backpacks, or Packs & Hydration on MTB (sports/headings.py).
     from sports.headings import PACKS_HEADINGS
     return (
@@ -191,6 +227,8 @@ def facet_fields(prefix):
          "order": list(PACK_TYPES)},
         {"key": "pack_volume", "label": "Size (liters)", "param": f"{prefix}_packsize", "categories": PACKS_HEADINGS,
          "order": list(VOLUME_SIZES)},
+        {"key": "pack_features", "label": "Features", "param": f"{prefix}_packfeat", "categories": PACKS_HEADINGS,
+         "order": list(PACK_FEATURES)},
     )
 
 
@@ -207,6 +245,11 @@ def technical_offers(item):
     size = volume_size(volume_litres(item.get("name"), item.get("description")))
     if size:
         added["pack_volume"] = [size]
+    found = item.get("pack_features")
+    if found is None:
+        found = features(item.get("name"), item.get("description"), item.get("product_type")) if item.get("description") else []
+    if found:
+        added["pack_features"] = list(found)
     offers = [offer for offer in item.get("technical_offers") or [] if isinstance(offer, dict)]
     if not offers:
         def amount(value):

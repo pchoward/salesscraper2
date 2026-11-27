@@ -123,7 +123,7 @@ class PackTypeTests(unittest.TestCase):
         for sport_id in ("bmx", "ski", "mtb"):
             module = __import__(f"sports.{sport_id}.facets", fromlist=["FIELDS"])
             keys = [f["key"] for f in module.FIELDS]
-            self.assertEqual(keys[-2:], ["pack_type", "pack_volume"], sport_id)
+            self.assertEqual(keys[-3:], ["pack_type", "pack_volume", "pack_features"], sport_id)
             field = next(f for f in module.FIELDS if f["key"] == "pack_type")
             self.assertEqual(field["param"], f"{sport_id}_packtype")
             self.assertEqual(field["order"], list(packs.PACK_TYPES))
