@@ -55,8 +55,12 @@ MIN_TYPICAL_COUNT = 5
 # instead of the guard holding the old listings (Store monitor, #326,
 # 2026-11-26: Tactics' deck sale ended; Albe's has fewer frames on sale).
 ACCEPTED_DROPS = {
-    "Tactics_Decks": "2026-11-26",
     "Albe's BMX_Frames & Forks": "2026-11-26",
+    # Owner, 2026-11-27: Tactics' Black Friday skate grids listed ~600
+    # full-price items as 20% off (the code, not a markdown). They are no
+    # longer read; the counts fall back, so the baselines restart cleanly.
+    **{f"Tactics_{part}": "2026-11-28"
+       for part in ("Decks", "Wheels", "Trucks", "Bearings", "Completes", "Protection")},
 }
 # The morning scrape is daily. A page older than a day and a half is stale.
 STALE_AFTER_HOURS = 36

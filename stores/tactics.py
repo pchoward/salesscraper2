@@ -101,7 +101,8 @@ _deal_pages = {}
 
 # Black Friday (owner, 2026-11-26): read while the sale lasts, then not at
 # all. /info/black-friday links the sale grids (/black-friday-sale/...);
-# its skate and shoe sections are read like the deal sections above.
+# its shoe sections are read like the deal sections above (skate dropped
+# 2026-11-27, see black_friday_urls).
 BLACK_FRIDAY_INFO = "https://www.tactics.com/info/black-friday"
 BLACK_FRIDAY_UNTIL = datetime.date(2026, 12, 3)
 _BLACK_FRIDAY_LINK = re.compile(r'href="((?:https://(?:www\.)?tactics\.com)?/(?:tactics/)?black-friday-sale/[^"#?]+)"', re.I)
@@ -122,7 +123,14 @@ def black_friday_urls(section="skate", fetch=fetch_html, today=None):
             if url not in links:
                 links.append(url)
         _black_friday["links"] = links
-    wanted = {"skate": r"skate(?!r)|skateboard", "shoes": r"shoe|sneaker"}[section]
+    # Not the skate grids (owner, 2026-11-27): their "20% off" bug is code
+    # BFCM26 on full-price items ("Full Price Items Only"), not a markdown,
+    # and ~600 listings got a made-up "was" price. The code is in the promo
+    # strip; the real skate markdowns stay in the normal sale section. The
+    # shoe grids hold real 50%+ markdowns.
+    if section != "shoes":
+        return []
+    wanted = r"shoe|sneaker"
     return [url for url in _black_friday["links"]
             if re.search(wanted, url.rsplit("black-friday-sale/", 1)[1], re.I) and not re.search(r"snow", url, re.I)]
 
