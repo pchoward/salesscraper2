@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-27T04:14:21+00:00",
+  "checked_at": "2026-11-27T05:04:49+00:00",
   "counts": {
     "action": 12,
-    "watch": 1
+    "watch": 0
   },
   "date": "2026-11-27",
   "findings": [
@@ -101,15 +101,7 @@
       "reason": "scrape_failed",
       "runs": 2,
       "store": "Fiend"
-    },
-    {
-      "key": "Tactics_Protection",
-      "kind": "held",
-      "level": "watch",
-      "reason": "scrape_failed",
-      "runs": 1,
-      "store": "Tactics"
     }
   ],
-  "last_scrape": "2026-11-27T03:45:07+00:00"
+  "last_scrape": "2026-11-27T04:35:26+00:00"
 }

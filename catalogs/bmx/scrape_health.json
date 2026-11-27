@@ -66092,15 +66092,15 @@
           }
         },
         "Tactics_Protection": {
-          "count": 0,
-          "failed": true,
+          "count": 40,
+          "failed": false,
           "diagnostics": {
             "expected_count": 20.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 17.5,
-            "actual_count": 0,
-            "percentage_change": -100.0,
-            "reason": "scrape_failed"
+            "actual_count": 40,
+            "percentage_change": 100.0,
+            "reason": "normal_variation"
           }
         },
         "Triple 8_Bikes": {
@@ -66536,7 +66536,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-27T03:45:07+00:00"
+      "scanned_at": "2026-11-27T04:35:26+00:00"
     }
   ],
   "baseline": {
@@ -66713,7 +66713,7 @@
       "count": 11
     },
     "Tactics_Protection": {
-      "date": "2026-11-26",
+      "date": "2026-11-27",
       "count": 40
     },
     "Haro_Frames & Forks": {
@@ -78326,10 +78326,6 @@
     ],
     "Tactics_Protection": [
       {
-        "date": "2026-11-13",
-        "count": 4
-      },
-      {
         "date": "2026-11-14",
         "count": 20
       },
@@ -78379,6 +78375,10 @@
       },
       {
         "date": "2026-11-26",
+        "count": 40
+      },
+      {
+        "date": "2026-11-27",
         "count": 40
       }
     ],

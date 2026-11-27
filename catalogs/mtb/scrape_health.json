@@ -59976,12 +59976,12 @@
           "count": 49,
           "failed": false,
           "diagnostics": {
-            "expected_count": 49.5,
+            "expected_count": 55.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "rule_excluded": 8,
+            "rule_excluded": 2,
             "actual_count": 49,
-            "percentage_change": -1.0,
+            "percentage_change": -11.7,
             "reason": "normal_variation"
           }
         },
@@ -61437,14 +61437,14 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 252,
+          "count": 253,
           "failed": false,
           "diagnostics": {
             "expected_count": 248.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 5.0,
-            "actual_count": 252,
-            "percentage_change": 1.6,
+            "actual_count": 253,
+            "percentage_change": 2.0,
             "reason": "normal_variation"
           }
         },
@@ -61522,14 +61522,14 @@
           }
         },
         "The Lost Co._Tires": {
-          "count": 221,
+          "count": 219,
           "failed": false,
           "diagnostics": {
             "expected_count": 138.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 6.0,
-            "actual_count": 221,
-            "percentage_change": 60.1,
+            "actual_count": 219,
+            "percentage_change": 58.7,
             "reason": "normal_variation"
           }
         },
@@ -62136,7 +62136,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-27T04:05:38+00:00"
+      "scanned_at": "2026-11-27T04:56:13+00:00"
     }
   ],
   "baseline": {
@@ -62322,7 +62322,7 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-27",
-      "count": 252
+      "count": 253
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-27",
@@ -62342,7 +62342,7 @@
     },
     "The Lost Co._Tires": {
       "date": "2026-11-27",
-      "count": 221
+      "count": 219
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-27",
@@ -73113,7 +73113,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 252
+        "count": 253
       }
     ],
     "The Lost Co._Drivetrain": [
@@ -73519,7 +73519,7 @@
       },
       {
         "date": "2026-11-27",
-        "count": 221
+        "count": 219
       }
     ],
     "The Lost Co._Tools & Care": [
