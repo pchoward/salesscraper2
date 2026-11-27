@@ -4078,7 +4078,7 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
     .rail .sidebar#filterDrawer button { min-height:24px; min-width:24px; }
 }
 
-.group-phone-label, .promo-short { display:none; }
+.group-phone-label { display:none; }
 
 /* Wrappers are layout-neutral outside task 12's <=640px phone scope. */
 .phone-filter-body, .phone-filter-footer { display:contents; }
@@ -4233,73 +4233,120 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 }
 
 .promo-strip {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: start;
-    gap: 4px 10px;
-    margin-bottom: 4px;
-    padding: 3px 8px;
-    border: 1px solid var(--grey-200);
-    border-radius: var(--radius);
-    background: var(--grey-0);
+    --promo-border: var(--grey-200);
+    --promo-surface: #fff;
+    --promo-code-bg: #eff6ff;
+    --promo-auto-bg: #fffbeb;
+    --promo-coupon-border: #60a5fa;
+    --promo-text: #1e293b;
+    --promo-link: #1d4f91;
+    --promo-muted: #475569;
+    margin-bottom: 6px;
+    color: var(--promo-text);
     font-size: 12px;
 }
-#promoTitle { padding-block: 4px; }
-#promoOffers {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 410px), 1fr));
-    gap: 2px 14px;
-    min-width: 0;
+@media (prefers-color-scheme: dark) {
+    .promo-strip {
+        --promo-border: #475569;
+        --promo-surface: #1e293b;
+        --promo-code-bg: #172e4a;
+        --promo-auto-bg: #39301e;
+        --promo-coupon-border: #93c5fd;
+        --promo-text: #f1f5f9;
+        --promo-link: #bfdbfe;
+        --promo-muted: #cbd5e1;
+        background: var(--promo-surface);
+    }
 }
-.promo-offer {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0 6px;
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
-.promo-offer :is(code, .promo-no-code) {
-    background: var(--grey-100);
-    padding: 0.1em 0.35em;
-}
+.promo-heading { display: flex; align-items: center; gap: 10px; }
 .promo-strip button {
-    min-height: 24px;
+    border: 0;
+    padding: 0 4px;
+    background: transparent;
+    color: inherit;
     font: inherit;
     cursor: pointer;
 }
-.promo-strip[hidden], .promo-strip [hidden] { display: none; }
+.promo-strip button:focus-visible, #promoOffers:focus-visible {
+    outline: 2px solid var(--promo-coupon-border);
+    outline-offset: -2px;
+}
+#promoToggle { min-height: 28px; color: var(--promo-muted); }
+#promoRow { display: flex; min-width: 0; }
+#promoOffers {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    white-space: nowrap;
+}
+.promo-offer {
+    display: flex;
+    align-items: center;
+    flex: none;
+    gap: 4px;
+    min-height: 38px;
+    padding: 0 6px;
+    border: 1px solid var(--promo-border);
+    border-radius: var(--radius);
+    background: var(--promo-code-bg);
+    scroll-snap-align: start;
+}
+.promo-offer.promo-automatic { background: var(--promo-auto-bg); }
+.promo-offer a { color: var(--promo-link); }
+.promo-headline::before, .promo-headline::after { content: " · "; }
+.promo-headline::before { margin-right: 3px; }
+.promo-headline::after { margin-left: 3px; }
+.promo-strip .promo-offer button { align-self: stretch; min-width: 24px; }
+.promo-offer code {
+    padding: 2px 4px;
+    border: 1px dashed var(--promo-coupon-border);
+    border-radius: 3px;
+    font-family: ui-monospace, monospace;
+}
+.promo-offer [data-dismiss-promo] { color: var(--promo-muted); font-size: 16px; }
+#promoAdvance {
+    position: relative;
+    flex: none;
+    white-space: nowrap;
+    color: var(--promo-link);
+    background: var(--promo-surface);
+}
+#promoAdvance::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    width: 14px;
+    background: linear-gradient(to right, transparent, var(--promo-surface));
+    pointer-events: none;
+}
+.promo-popover {
+    position: fixed;
+    z-index: 1000;
+    inset: auto;
+    margin: 0;
+    max-width: min(25rem, calc(100vw - 16px));
+    padding: 6px 9px;
+    border: 1px solid var(--promo-border);
+    border-radius: var(--radius);
+    background: var(--promo-surface);
+    color: var(--promo-text);
+    font: inherit;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+#promoCopied { pointer-events: none; }
+.promo-strip[hidden], #promoRow[hidden], .promo-strip [hidden] { display: none; }
 
-@media (max-width:640px) {
-    .promo-strip {
-        display: block;
-        margin-bottom: 6px;
-        padding: 0 6px;
-        line-height: 1.25;
-    }
-    .promo-strip #promoTitle {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip-path: inset(50%);
-    }
-    #promoOffers { grid-template-columns: minmax(0, 1fr); gap: 0; }
-    .promo-offer { gap: 0 5px; }
-    .promo-offer:not([hidden]) ~ .promo-offer:not([hidden]) { border-top: 1px solid var(--grey-200); }
-    .promo-offer > a { color: #244b78; }
-    .promo-offer .promo-description { display: none; }
-    .promo-offer .promo-short { display: inline; }
-    .promo-strip button {
-        min-height: 40px;
-        padding: 0 4px;
-        color: #244b78;
-        border: 0;
-        background: transparent;
-        font-weight: 600;
-        white-space: nowrap;
-    }
-    .promo-strip button:focus-visible { outline: 2px solid #2563eb; outline-offset: -2px; }
+@media (max-width:640px) and (max-height:600px) {
+    .promo-strip { margin-bottom: 0; }
+    #promoToggle { min-height: 24px; }
+    .promo-offer { min-height: 36px; }
 }
 
 /* The media and trend wrappers do not create layout boxes. */
@@ -4451,7 +4498,7 @@ mark.search-hit { background: #fef08a; color: inherit; border-radius: 2px; paddi
 </div><div class="board"><div class="stats-grid" hidden><button type="button" class="stat-card" data-card="store" data-store="7iDP" aria-pressed="false" onclick="toggleCard('store', '7iDP')"><span class="number">14</span><span class="label">7iDP</span></button><button type="button" class="stat-card" data-card="store" data-store="Alpinestars" aria-pressed="false" onclick="toggleCard('store', 'Alpinestars')"><span class="number">32</span><span class="label">Alpinestars</span></button><button type="button" class="stat-card" data-card="store" data-store="Bern" aria-pressed="false" onclick="toggleCard('store', 'Bern')"><span class="number">3</span><span class="label">Bern</span></button><button type="button" class="stat-card" data-card="store" data-store="Bicycle Warehouse" aria-pressed="false" onclick="toggleCard('store', 'Bicycle Warehouse')"><span class="number">80</span><span class="label">Bicycle Warehouse</span></button><button type="button" class="stat-card" data-card="store" data-store="Bike Mart" aria-pressed="false" onclick="toggleCard('store', 'Bike Mart')"><span class="number">1077</span><span class="label">Bike Mart</span></button><button type="button" class="stat-card" data-card="store" data-store="Bikes Online" aria-pressed="false" onclick="toggleCard('store', 'Bikes Online')"><span class="number">213</span><span class="label">Bikes Online</span></button><button type="button" class="stat-card" data-card="store" data-store="Cambria" aria-pressed="false" onclick="toggleCard('store', 'Cambria')"><span class="number">841</span><span class="label">Cambria</span></button><button type="button" class="stat-card" data-card="store" data-store="Colorado Cyclist" aria-pressed="false" onclick="toggleCard('store', 'Colorado Cyclist')"><span class="number">618</span><span class="label">Colorado Cyclist</span></button><button type="button" class="stat-card" data-card="store" data-store="Demon" aria-pressed="false" onclick="toggleCard('store', 'Demon')"><span class="number">21</span><span class="label">Demon</span></button><button type="button" class="stat-card" data-card="store" data-store="EVOC" aria-pressed="false" onclick="toggleCard('store', 'EVOC')"><span class="number">22</span><span class="label">EVOC</span></button><button type="button" class="stat-card" data-card="store" data-store="Fanatik" aria-pressed="false" onclick="toggleCard('store', 'Fanatik')"><span class="number">525</span><span class="label">Fanatik</span></button><button type="button" class="stat-card" data-card="store" data-store="G-Form" aria-pressed="false" onclick="toggleCard('store', 'G-Form')"><span class="number">5</span><span class="label">G-Form</span></button><button type="button" class="stat-card" data-card="store" data-store="Gear West" aria-pressed="false" onclick="toggleCard('store', 'Gear West')"><span class="number">5</span><span class="label">Gear West</span></button><button type="button" class="stat-card" data-card="store" data-store="Kali" aria-pressed="false" onclick="toggleCard('store', 'Kali')"><span class="number">3</span><span class="label">Kali</span></button><button type="button" class="stat-card" data-card="store" data-store="Mike&#x27;s Bikes" aria-pressed="false" onclick="toggleCard('store', 'Mike&#x27;s Bikes')"><span class="number">450</span><span class="label">Mike&#x27;s Bikes</span></button><button type="button" class="stat-card" data-card="store" data-store="Race Face" aria-pressed="false" onclick="toggleCard('store', 'Race Face')"><span class="number">39</span><span class="label">Race Face</span></button><button type="button" class="stat-card" data-card="store" data-store="Skipro" aria-pressed="false" onclick="toggleCard('store', 'Skipro')"><span class="number">1</span><span class="label">Skipro</span></button><button type="button" class="stat-card" data-card="store" data-store="Smith" aria-pressed="false" onclick="toggleCard('store', 'Smith')"><span class="number">16</span><span class="label">Smith</span></button><button type="button" class="stat-card" data-card="store" data-store="The House" aria-pressed="false" onclick="toggleCard('store', 'The House')"><span class="number">10</span><span class="label">The House</span></button><button type="button" class="stat-card" data-card="store" data-store="The Lost Co." aria-pressed="false" onclick="toggleCard('store', 'The Lost Co.')"><span class="number">933</span><span class="label">The Lost Co.</span></button><button type="button" class="stat-card" data-card="store" data-store="Troy Lee Designs" aria-pressed="false" onclick="toggleCard('store', 'Troy Lee Designs')"><span class="number">26</span><span class="label">Troy Lee Designs</span></button><button type="button" class="stat-card" data-card="store" data-store="Utah Ski" aria-pressed="false" onclick="toggleCard('store', 'Utah Ski')"><span class="number">2</span><span class="label">Utah Ski</span></button><button type="button" class="stat-card" data-card="store" data-store="Worldwide Cyclery" aria-pressed="false" onclick="toggleCard('store', 'Worldwide Cyclery')"><span class="number">19</span><span class="label">Worldwide Cyclery</span></button><button type="button" class="stat-card" data-card="store" data-store="Zeitbike" aria-pressed="false" onclick="toggleCard('store', 'Zeitbike')"><span class="number">26</span><span class="label">Zeitbike</span></button><button type="button" class="stat-card" data-card="store" data-store="evo" aria-pressed="false" onclick="toggleCard('store', 'evo')"><span class="number">689</span><span class="label">evo</span></button></div>
 <div id="mtbPowerChips" class="technical-quick-chips mtb-power-chips" role="group" aria-label="Motor" hidden><button type="button" class="chip tech-chip" data-tech-key="power" data-value="" data-exclusive aria-pressed="false">All bikes <span class="spec-count"></span></button><button type="button" class="chip tech-chip" data-tech-key="power" data-value="E-MTB" data-exclusive aria-pressed="false">E-MTB <span class="spec-count"></span></button><button type="button" class="chip tech-chip" data-tech-key="power" data-value="Regular" data-exclusive aria-pressed="false">Regular <span class="spec-count"></span></button></div>
 <div id="kindChips" class="technical-quick-chips" role="group" aria-label="Type" hidden></div>
-<div class="section" id="dealsSection"><h2 class="sr-only">All Deals</h2><div class="section-content"><section id="promoStrip" class="promo-strip" aria-labelledby="promoTitle" hidden><strong id="promoTitle">Sales &amp; promos</strong><div id="promoOffers"><div class="promo-offer" data-promo-id="[&quot;7iDP&quot;, &quot;&quot;]" data-ends=""><a href="https://7idp.com/" target="_blank" rel="noopener">7iDP</a><span class="promo-description">40% off helmets &amp; protection applied at checkout</span><span class="promo-short" title="40% off helmets &amp; protection">40% off</span><span class="promo-no-code">No code needed</span><button type="button" data-dismiss-promo aria-label="Dismiss 7iDP promotion">Dismiss</button></div><div class="promo-offer" data-promo-id="[&quot;Fanatik&quot;, &quot;2026-BFCM-20&quot;]" data-ends="2026-12-02"><a href="https://www.fanatikbike.com/" target="_blank" rel="noopener">Fanatik</a><span class="promo-description">20% off eligible items, until Dec 2 applied at checkout</span><span class="promo-short" title="20% off eligible items, until Dec 2">20% off</span><code>2026-BFCM-20</code><button type="button" data-copy-promo aria-label="Copy 2026-BFCM-20">Copy</button><button type="button" data-dismiss-promo aria-label="Dismiss 2026-BFCM-20">Dismiss</button></div></div><span class="sr-only" role="status" id="promoStatus"></span></section><div id="emptyState" class="empty-state" hidden></div>
+<div class="section" id="dealsSection"><h2 class="sr-only">All Deals</h2><div class="section-content"><section id="promoStrip" class="promo-strip" aria-labelledby="promoTitle" hidden><div class="promo-heading"><strong id="promoTitle">Sales &amp; promos</strong><button id="promoToggle" type="button" aria-expanded="true" aria-controls="promoRow">Hide ▴</button></div><div id="promoRow"><div id="promoOffers" tabindex="0" role="group" aria-label="Active offers"><div class="promo-offer promo-automatic" data-promo-id="[&quot;7iDP&quot;, &quot;&quot;]" data-store="7iDP" data-ends=""><a href="https://7idp.com/" target="_blank" rel="noopener">7iDP</a><span class="promo-headline">40% off</span><span class="promo-no-code">No code</span><button type="button" data-promo-details="40% off helmets &amp; protection · Applied at checkout" aria-label="7iDP offer details" aria-expanded="false" aria-controls="promoDetails">ⓘ</button><button type="button" data-dismiss-promo aria-label="Hide 7iDP offer">×</button></div><div class="promo-offer promo-code" data-promo-id="[&quot;Fanatik&quot;, &quot;2026-BFCM-20&quot;]" data-store="Fanatik" data-ends="2026-12-02"><a href="https://www.fanatikbike.com/" target="_blank" rel="noopener">Fanatik</a><span class="promo-headline">20% off</span><button type="button" data-copy-promo aria-label="Copy code 2026-BFCM-20"><code>2026-BFCM-20</code></button><button type="button" data-promo-details="20% off eligible items, until Dec 2 · Applied at checkout" aria-label="Fanatik offer details" aria-expanded="false" aria-controls="promoDetails">ⓘ</button><button type="button" data-dismiss-promo aria-label="Hide Fanatik offer">×</button></div></div><button type="button" id="promoAdvance" aria-controls="promoOffers" hidden></button></div><div id="promoDetails" class="promo-popover" popover="manual" hidden></div><div id="promoCopied" class="promo-popover" popover="manual" hidden>Copied!</div><span class="sr-only" role="status" aria-live="polite" id="promoStatus"></span></section><div id="emptyState" class="empty-state" hidden></div>
 <div class="table-wrap"><table id="mainTable"><thead><tr><th></th><th></th><th data-sort="store" onclick="sortBy('store')">Store</th><th data-sort="brand" onclick="sortBy('brand')">Brand</th><th data-sort="part" onclick="sortBy('part')">Type</th><th data-sort="size" onclick="sortBy('size')">Size</th><th data-sort="name" onclick="sortBy('name')">Product</th><th data-sort="price" onclick="sortBy('price')">Sale price</th><th data-sort="original" onclick="sortBy('original')">Original</th><th data-sort="discount" onclick="sortBy('discount')">% off</th><th class="days-head"><button type="button" data-sort="days" onclick="sortBy('days')">Tracked</button><button type="button" data-sort="daysat" onclick="sortBy('daysat')">At price</button></th><th data-sort="score" onclick="sortBy('score')">Score <button type="button" class="info-dot" id="scoreInfo">?</button><span class="tip" id="scoreTip" role="tooltip">Score = discount depth (percent off, max 50) + closeness to the lowest tracked price (25 at the low, 18 within $1 or 3%, 10 within $2 or 5%, else 0 until 3 observations span 7 days) + recent drop (8 plus 1 per 5% of a $2 or 5% drop, max 15; a smaller dip is 4) + width fit (10 when the deck is 8.25–8.75 inches). 70 or above is hot. Days tracked are shown for context and are not added.</span></th></tr></thead><tbody>
 <tr class="deal-row" tabindex="0" data-id="8" data-url="https://www.bikesonline.com/products/ixs-flow-evo-elbow-guards" data-soldout="0" data-store="Bikes Online" data-part="Protection" data-size="" data-brand="iXS" data-name="iXS Flow EVO+ Elbow Guards - Closeout" data-search="iXS Flow EVO+ Elbow Guards - Closeout Bikes Online Protection iXS " data-price="4.99" data-original="89.99" data-discount="94.5" data-days="24" data-daysat="0" data-score="79" data-rank="8" data-stage="all_time_low" data-length="" data-wheelbase="" data-color="" data-diameters="" data-widths="" data-spec-offers="[]" data-diameter="" data-duros="" data-shape="" data-deckshape="" data-truck-offers="[]" data-trucksize="" data-truckheight="" data-construction="" data-abec="" data-shoesize="" data-prottype="elbow" data-protsize="s,m,l,xl,xxl" data-added="0" data-drop="0" data-lowest="1" data-hitlow="1" data-fresh="0" data-back="0" data-hot="1" data-dropday="2026-11-26" data-highlight="0" data-group=""></tr>
 <tr class="deal-row" tabindex="0" data-id="0" data-url="https://www.bikesonline.com/products/ixs-trigger-am-helmet" data-soldout="0" data-store="Bikes Online" data-part="Helmets" data-size="" data-brand="iXS" data-name="IXS Trigger AM Helmet - Closeout" data-search="IXS Trigger AM Helmet - Closeout Bikes Online Helmets iXS " data-price="12.99" data-original="159.99" data-discount="91.9" data-days="24" data-daysat="0" data-score="79" data-rank="0" data-stage="all_time_low" data-length="" data-wheelbase="" data-color="" data-diameters="" data-widths="" data-spec-offers="[]" data-diameter="" data-duros="" data-shape="" data-deckshape="" data-truck-offers="[]" data-trucksize="" data-truckheight="" data-construction="" data-abec="" data-shoesize="" data-prottype="helmet" data-protsize="s,m,l" data-added="0" data-drop="0" data-lowest="1" data-hitlow="1" data-fresh="0" data-back="0" data-hot="1" data-dropday="2026-11-26" data-highlight="0" data-group=""></tr>
@@ -20355,6 +20402,7 @@ function applyFilters() {
     paintBreadcrumbs();
     paintResultCount();
     paintEmptyState();
+    if (typeof repaintPromoStrip === "function") repaintPromoStrip();
     syncUrl();
     paintViews();
     paintNav();
@@ -25458,52 +25506,176 @@ function init() {
     document.dispatchEvent(new Event("shreddeals:catalog-ready"));
 }
 
+let repaintPromoStrip;
+
 function initPromoStrip() {
     const strip = document.getElementById("promoStrip");
     if (!strip) return;
-    const key = "shreddeals.promo-dismissed";
-    const stored = readJson(key, []);
+    const dismissKey = "shreddeals.promo-dismissed";
+    const collapseKey = "shreddeals.promo-strip-collapsed";
+    const stored = readJson(dismissKey, []);
     const dismissed = new Set(Array.isArray(stored) ? stored : []);
-    const offers = Array.from(strip.querySelectorAll(".promo-offer"));
+    let collapsed = readJson(collapseKey, false) === true;
+    const title = document.getElementById("promoTitle");
+    const toggle = document.getElementById("promoToggle");
+    const row = document.getElementById("promoRow");
+    const rail = document.getElementById("promoOffers");
+    const advance = document.getElementById("promoAdvance");
     const status = document.getElementById("promoStatus");
+    const details = document.getElementById("promoDetails");
+    const copied = document.getElementById("promoCopied");
+    const offers = Array.from(rail.children);
+    const hover = window.matchMedia("(hover: hover)");
+    let active = [];
+    let detailButton = null;
+    let copyTimer;
+    let closeTimer;
 
-    function paint() {
+    function hidePopup(popup) {
+        popup.hidePopover?.();
+        popup.hidden = true;
+    }
+
+    function positionPopup(popup, anchor) {
+        popup.hidden = false;
+        popup.showPopover?.();
+        const button = anchor.getBoundingClientRect();
+        const left = Math.max(8, Math.min(button.left, document.documentElement.clientWidth - popup.offsetWidth - 8));
+        const below = button.bottom + 4;
+        popup.style.left = left + "px";
+        popup.style.top = (below + popup.offsetHeight <= window.innerHeight
+            ? below : Math.max(8, button.top - popup.offsetHeight - 4)) + "px";
+    }
+
+    function closeDetails() {
+        clearTimeout(closeTimer);
+        detailButton?.setAttribute("aria-expanded", "false");
+        detailButton = null;
+        hidePopup(details);
+    }
+
+    function openDetails(button) {
+        closeDetails();
+        hidePopup(copied);
+        detailButton = button;
+        button.setAttribute("aria-expanded", "true");
+        details.textContent = button.dataset.promoDetails;
+        positionPopup(details, button);
+    }
+
+    function overflow() {
+        const edge = rail.getBoundingClientRect().right + 1;
+        const remaining = row.hidden ? 0 : active.filter(offer => offer.getBoundingClientRect().right > edge).length;
+        if (!remaining && document.activeElement === advance) rail.focus({ preventScroll: true });
+        advance.hidden = remaining === 0;
+        advance.textContent = "→ " + remaining + " more";
+        advance.setAttribute("aria-label", "Scroll to " + remaining + " more offers");
+    }
+
+    repaintPromoStrip = function () {
         const now = new Date();
         const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
             .map(value => String(value).padStart(2, "0")).join("-");
-        offers.forEach(offer => {
-            offer.hidden = dismissed.has(offer.dataset.promoId)
-                || (!!offer.dataset.ends && offer.dataset.ends < today);
+        const next = offers.filter(offer => !dismissed.has(offer.dataset.promoId)
+            && (!offer.dataset.ends || offer.dataset.ends >= today)
+            && (state.store === "all" || storeSelected(offer.dataset.store)));
+        if (next.length !== active.length || next.some((offer, i) => offer !== active[i])) {
+            rail.scrollLeft = 0;
+            closeDetails();
+            hidePopup(copied);
+        }
+        active = next;
+        offers.forEach(offer => { offer.hidden = !active.includes(offer); });
+        strip.hidden = !active.length;
+        title.textContent = "Sales & promos (" + active.length + ")";
+        row.hidden = collapsed;
+        toggle.textContent = collapsed ? "Show ▾" : "Hide ▴";
+        toggle.setAttribute("aria-expanded", String(!collapsed));
+        overflow();
+    };
+
+    toggle.addEventListener("click", () => {
+        collapsed = !collapsed;
+        closeDetails();
+        hidePopup(copied);
+        writeJson(collapseKey, collapsed);
+        repaintPromoStrip();
+    });
+    advance.addEventListener("click", () => {
+        const edge = rail.getBoundingClientRect();
+        const next = active.find(offer => offer.getBoundingClientRect().right > edge.right + 1);
+        if (!next) return;
+        const offset = next.getBoundingClientRect().left - edge.left;
+        rail.scrollBy({ left: offset > 1 ? offset : edge.width, behavior: "smooth" });
+    });
+    window.addEventListener("scroll", event => {
+        closeDetails();
+        hidePopup(copied);
+        if (event.target === rail) overflow();
+    }, { capture: true, passive: true });
+    new ResizeObserver(overflow).observe(rail);
+
+    strip.querySelectorAll("[data-promo-details]").forEach(button => {
+        button.addEventListener("pointerenter", event => {
+            if (hover.matches && event.pointerType === "mouse") openDetails(button);
         });
-        strip.hidden = offers.every(offer => offer.hidden);
-    }
+        button.addEventListener("pointerleave", () => {
+            if (hover.matches && detailButton === button && document.activeElement !== button) {
+                closeTimer = setTimeout(closeDetails, 120);
+            }
+        });
+        button.addEventListener("focus", () => {
+            if (button.matches(":focus-visible")) openDetails(button);
+        });
+        button.addEventListener("blur", closeDetails);
+        button.addEventListener("click", event => {
+            if (detailButton !== button) openDetails(button);
+            else if (!hover.matches || event.detail === 0) closeDetails();
+        });
+    });
+    details.addEventListener("pointerenter", () => clearTimeout(closeTimer));
+    details.addEventListener("pointerleave", () => {
+        if (document.activeElement !== detailButton) closeDetails();
+    });
+    document.addEventListener("pointerdown", event => {
+        if (detailButton && !details.contains(event.target) && !detailButton.contains(event.target)) closeDetails();
+    });
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && detailButton) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeDetails();
+        }
+    }, true);
 
     strip.addEventListener("click", async event => {
         const button = event.target.closest("button");
         const offer = button?.closest(".promo-offer");
         if (!offer) return;
         if (button.hasAttribute("data-dismiss-promo")) {
+            const index = active.indexOf(offer);
             dismissed.add(offer.dataset.promoId);
-            try { localStorage.setItem(key, JSON.stringify([...dismissed])); } catch (_) {}
-            paint();
-            const dismiss = strip.querySelector(".promo-offer:not([hidden]) [data-dismiss-promo]");
-            if (dismiss?.getClientRects().length) dismiss.focus();
-            else document.getElementById("sortSelect")?.focus();
+            writeJson(dismissKey, [...dismissed]);
+            repaintPromoStrip();
+            const next = active[index] || active[index - 1];
+            (next?.querySelector("[data-dismiss-promo]") || document.getElementById("sortSelect"))?.focus();
         } else if (button.hasAttribute("data-copy-promo")) {
-            const code = offer.querySelector("code").textContent;
+            const code = button.querySelector("code").textContent;
+            status.textContent = "";
             try {
                 await navigator.clipboard.writeText(code);
                 status.textContent = code + " copied";
-                button.textContent = "Copied";
+                closeDetails();
+                clearTimeout(copyTimer);
+                positionPopup(copied, button);
+                copyTimer = setTimeout(() => hidePopup(copied), 1500);
             } catch (_) {
-                status.textContent = "Could not copy. Select the code to copy it manually.";
-                button.textContent = "Copy unavailable";
+                status.textContent = "Could not copy code " + code;
             }
         }
     });
-    // Recheck the visitor's date when a tab is brought back after midnight.
-    document.addEventListener("visibilitychange", () => { if (!document.hidden) paint(); });
-    paint();
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) repaintPromoStrip(); });
+    repaintPromoStrip();
 }
 
 document.addEventListener("DOMContentLoaded", initPromoStrip);
