@@ -767,18 +767,39 @@ def _prefer_brand_label(labels):
     return sorted(labels, key=rank)[0]
 
 
-def _canonicalize_brands(records):
-    """Merge brand labels that are the same ignoring case.
+# A trailing trade word a store adds to a brand ("Osprey Packs", "Salomon
+# Skis", "MTX Braking"): when the bare name is on the same page, the two are
+# one brand (owner, 2026-11-27).
+_TRADE_WORD = re.compile(
+    r"\s+(?:packs?|snowboards?|skis?|skates?|skateboards?|tires?|tyres?|components?|sports?|braking|shox|"
+    r"united|inc\.?|co\.?|company|usa|bikes?|bmx|clothing|apparel|racing)$", re.I)
 
-    Filtering stays an exact match on the chosen spelling. Only the case
-    of the label changes.
+
+def _brand_key(label, keys):
+    """The casefold key a label groups under: its bare name when that is
+    also a brand on the page."""
+    key = label.casefold()
+    bare = _TRADE_WORD.sub("", key).strip()
+    return bare if bare != key and bare in keys else key
+
+
+def _canonicalize_brands(records):
+    """Merge brand labels that are the same ignoring case, or that differ
+    only by a trailing trade word ("Osprey Packs" -> "Osprey").
+
+    Filtering stays an exact match on the chosen spelling.
     """
+    labels = {record.get("brand") for record in records if record.get("brand")}
+    keys = {label.casefold() for label in labels}
     groups = {}
-    for record in records:
-        brand = record.get("brand") or ""
-        if brand:
-            groups.setdefault(brand.casefold(), set()).add(brand)
-    chosen = {key: _prefer_brand_label(labels) for key, labels in groups.items()}
+    for label in labels:
+        groups.setdefault(_brand_key(label, keys), set()).add(label)
+    # The bare name wins; among its spellings, the usual preference.
+    chosen = {}
+    for key, group in groups.items():
+        bare = {label for label in group if label.casefold() == key}
+        winner = _prefer_brand_label(bare or group)
+        chosen.update({label.casefold(): winner for label in group})
     for record in records:
         brand = record.get("brand") or ""
         if not brand:
