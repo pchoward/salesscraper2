@@ -226,7 +226,7 @@ async function main(){
         const product=cards.nth(i);
         assert.equal(await product.getAttribute('data-part'),part);
         const price=await product.locator('.now-price').boundingBox();
-        assert(price&&price.y>=0&&price.y+price.height<=560,part+' prices fit in the short mobile viewport');
+        assert(price&&price.y>=0&&price.y+price.height<=560,part+' prices fit in the short mobile viewport: '+JSON.stringify(price));
         const labelFit=await product.locator('.card-quick').evaluate(button=>{
          const label=document.createRange();label.selectNodeContents(button);
          return {lines:label.getClientRects().length,text:label.getBoundingClientRect().width,space:button.clientWidth};

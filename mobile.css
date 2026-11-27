@@ -771,6 +771,12 @@
 #promoCopied { pointer-events: none; }
 .promo-strip[hidden], #promoRow[hidden], .promo-strip [hidden] { display: none; }
 
+@media (max-width:640px) and (max-height:600px) {
+    .promo-strip { margin-bottom: 0; }
+    #promoToggle { min-height: 24px; }
+    .promo-offer { min-height: 36px; }
+}
+
 /* The media and trend wrappers do not create layout boxes. */
 .card-photo, .card-trend { display:contents; }
 
