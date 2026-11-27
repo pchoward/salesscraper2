@@ -8,6 +8,43 @@ from sports import packs
 from sports.facets import payload
 
 
+class SkatePackFacetTests(unittest.TestCase):
+    def test_skate_sidebar_chips_and_pack_attributes(self):
+        from bs4 import BeautifulSoup
+        from report import build_report_html
+
+        products = [
+            {"name": name, "url": "https://example.test/" + slug, "part": "Packs",
+             "store": "Tactics", "price_new": "35", "price_old": "70"}
+            for slug, name in (("large", "Herschel Field Day 28L Backpack"),
+                               ("small", "Dakine Session 8L Hydration Pack"),
+                               ("unknown", "Deathwish Deathspray Backpack"))
+        ]
+        html = build_report_html({"Tactics_Packs": products}, {}, {})
+        page = BeautifulSoup(html, "html.parser")
+        for attributes in ('data-packsize="25–34L" data-packtype="Backpack"',
+                           'data-packsize="" data-packtype="Backpack"'):
+            # The attributes are shared by the cards and deferred table rows.
+            self.assertGreaterEqual(html.count(attributes), 2)
+        for key, values in (("packsize", ["Under 15L", "25–34L"]),
+                            ("packtype", ["Backpack", "Hydration pack"])):
+            group = page.select_one("#" + key + "Filters")
+            self.assertEqual([button["data-value"] for button in group.select("button[data-value]")], values)
+            self.assertEqual(group.find_parent("section")["data-for"], "Packs")
+            self.assertIsNone(group.select_one('input[type="range"]'))
+
+    def test_pack_filters_round_trip_and_are_forwarded_by_the_shell(self):
+        from previews.shreddeals import skate_query_keys
+        from query_state import decode_query, encode_state
+
+        state = decode_query("type=packs&packsize=35L%2B,25–34L,unknown&packtype=Hip+pack,Backpack")
+        self.assertEqual(state["pack_sizes"], ["25–34L", "35L+"])
+        self.assertEqual(state["pack_types"], ["Backpack", "Hip pack"])
+        self.assertEqual(decode_query(encode_state(state)), state)
+        self.assertEqual(decode_query("type=packs")["pack_sizes"], [])
+        self.assertTrue({"packtype", "packsize"}.issubset(skate_query_keys()))
+
+
 class VolumeTests(unittest.TestCase):
     def test_litres_in_the_title(self):
         cases = {

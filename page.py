@@ -5,6 +5,7 @@ drawer run in the browser. A problem in one section is logged and skipped.
 """
 
 import truck_fit
+from collections import Counter
 import datetime
 import json
 import logging
@@ -73,7 +74,7 @@ from query_state import STARTER_VIEWS, WIDTH_RANGES, bucket_for_width
 from score import FORMULA, SCORE_LEGEND, deal_score, score_band
 from site_sales import activity_line, describe_sales, display_name, load_state
 import sale_events
-from sports import headings as sport_headings
+from sports import headings as sport_headings, packs
 from watchlist import load_watchlist, rule_matches
 
 logger = logging.getLogger("page")
@@ -1823,6 +1824,10 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 # A store's size list is what it sells; else sizes printed in the name.
                 sizes = item.get("protection_sizes") if "protection_sizes" in item else protection_sizes_in(raw_name)
                 prot_sizes = [size.casefold() for size in ordered_protection_sizes(sizes)]
+            pack_size = pack_kind = ""
+            if sport.is_default and item.get("part") == packs.PART:
+                pack_size = packs.volume_size(packs.volume_litres(raw_name, item.get("description"))) or ""
+                pack_kind = packs.pack_type(raw_name, item.get("product_type"))
             current_price = _price(item.get("price_new"))
             tracked_low = status.get("low")
             at_tracked_low = False
@@ -1892,6 +1897,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
                 "shoe_sizes": shoe_sizes,
                 "prot_type": prot_type,
                 "prot_sizes": prot_sizes,
+                "pack_size": pack_size,
+                "pack_kind": pack_kind,
                 "percent": percent,
                 "search": " ".join(
                     bit
@@ -2514,6 +2521,20 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         sum(construction_counts.values()),
     )
 
+    pack_sections = []
+    if sport.is_default:
+        for key, field, label, order, note in (
+            ("packsize", "pack_size", "Size (liters)", packs.VOLUME_SIZES, "Sizes listed by the retailer."),
+            ("packtype", "pack_kind", "Type", packs.PACK_TYPES, ""),
+        ):
+            counts = Counter(record[field] for record in records if record[field])
+            buttons = [_spec_button(value, value, counts[value], value) for value in order if counts[value]]
+            if buttons:
+                pack_sections.append(_section(
+                    key, label, _spec_body(key + "Filters", label, buttons, note),
+                    open_default=True, for_part=packs.PART,
+                ))
+
     def _quick_chip(attr, value, label, count, pressed=False, order=0, home="row"):
         on = "true" if pressed else "false"
         active = " active" if pressed else ""
@@ -2692,6 +2713,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         + _color_section("wheelcolor", "wheelColorFilters", "Wheels", wheel_color_counts, wheel_color_hits)
         + shoe_section
         + prot_size_section
+        + "".join(pack_sections)
         + abec_section
         + _section(
             "length",
@@ -3201,6 +3223,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         f"const LENGTH_BUCKETS = {length_literal};\n"
         f"const WHEELBASE_BUCKETS = {json.dumps([{key: bucket[key] for key in ('id', 'label', 'min', 'max')} for bucket in wheel_buckets])};\n"
         f"const CARD_PAGE_SIZE = {CARD_PAGE_SIZE};\n"
+        f"const PACK_FILTER_VALUES = {json.dumps({'packSizes': packs.VOLUME_SIZES, 'packTypes': packs.PACK_TYPES})};\n"
         f"{_read_asset('phone-filters.js')}\n{_read_asset('catalog-search.js')}\n{_read_asset('page.js')}</script>"
     )
     chunks.append(f"<script>{_read_asset('search/search-ui.js')}</script>")
@@ -3308,6 +3331,12 @@ def _deal_attrs(record):
     group_key = ""
     if record["group"]:
         group_key = record["group"].get("key") or ""
+    pack_attrs = ""
+    if record.get("pack_kind"):
+        pack_attrs = (
+            f'data-packsize="{_attr(record["pack_size"])}" '
+            f'data-packtype="{_attr(record["pack_kind"])}" '
+        )
     return (
         f'data-id="{record["id"]}" data-url="{_attr(record["url"])}" '
         f'data-soldout="{1 if record.get("sold_out") else 0}" '
@@ -3336,6 +3365,7 @@ def _deal_attrs(record):
         f'data-abec="{_attr(record.get("abec") or "")}" '
         f'data-shoesize="{_attr(",".join(record.get("shoe_sizes") or []))}"{_offer_gap(record)} '
         f'data-prottype="{_attr(record.get("prot_type") or "")}" '
+        f'{pack_attrs}'
         f'data-protsize="{_attr(",".join(record.get("prot_sizes") or []))}" '
         f'data-added="{1 if record["added"] else 0}" data-drop="{1 if record["drop"] is not None else 0}" '
         f'data-lowest="{1 if record["lowest"] else 0}" data-hitlow="{1 if record["hit_low"] else 0}" '

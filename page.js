@@ -44,6 +44,8 @@ let state = {
     shoeSizes: [],
     protTypes: [],
     protSizes: [],
+    packSizes: [],
+    packTypes: [],
     sortKey: DEFAULT_SORT,
     sortDir: "desc",
     search: ""
@@ -571,9 +573,11 @@ const SPEC_FACETS = [
     { stateKey: "abecs", part: "Bearings", attr: "abec", section: "abecFilters" },
     { stateKey: "shoeSizes", part: "Sneakers", attr: "shoesize", section: "shoesizeFilters" },
     { stateKey: "protTypes", part: "Protection", attr: "prottype", section: "prottypeFilters" },
-    { stateKey: "protSizes", part: "Protection", attr: "protsize", section: "protsizeFilters" }
+    { stateKey: "protSizes", part: "Protection", attr: "protsize", section: "protsizeFilters" },
+    { stateKey: "packSizes", part: "Packs", attr: "packsize", section: "packsizeFilters" },
+    { stateKey: "packTypes", part: "Packs", attr: "packtype", section: "packtypeFilters" }
 ];
-const SPEC_OPEN = { width: 1, length: 1, wheelbase: 1, deckcolor: 1, wheelcolor: 1, diameter: 1, duro: 1, shape: 1, deckshape: 1, truckfit: 1, trucknative: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1 };
+const SPEC_OPEN = { width: 1, length: 1, wheelbase: 1, deckcolor: 1, wheelcolor: 1, diameter: 1, duro: 1, shape: 1, deckshape: 1, truckfit: 1, trucknative: 1, trucksize: 1, truckheight: 1, construction: 1, abec: 1, shoesize: 1, prottype: 1, protsize: 1, packsize: 1, packtype: 1 };
 
 function normalizeDuroToken(value) {
     const match = String(value || "").trim().toLowerCase().match(/^(\d{2,3})([abd])$/);
@@ -628,6 +632,9 @@ function orderSpecValues(stateKey, values) {
     if (stateKey === "constructions") return CONSTRUCTION_ORDER.filter(id => chosen[id]);
     if (stateKey === "protTypes") return PROT_TYPE_ORDER.filter(id => chosen[id]);
     if (stateKey === "protSizes") return PROT_SIZE_ORDER.filter(id => chosen[id]);
+    if (stateKey === "packSizes" || stateKey === "packTypes") {
+        return keys.length ? PACK_FILTER_VALUES[stateKey].filter(value => chosen[value.toLowerCase()]) : [];
+    }
     if (stateKey === "duros") {
         return keys.sort((a, b) => {
             const delta = parseInt(a, 10) - parseInt(b, 10);
@@ -650,6 +657,7 @@ function activeSpecKeys(part) {
     if (current === "Sneakers") return ["shoeSizes"];
     if (current === "Protection") return ["protTypes", "protSizes"];
     if (current === "Helmets") return ["protSizes"];
+    if (current === "Packs") return ["packSizes", "packTypes"];
     return [];
 }
 
@@ -3237,6 +3245,8 @@ function clearFilters() {
         shoeSizes: [],
         protTypes: [],
         protSizes: [],
+        packSizes: [],
+        packTypes: [],
         sortKey: DEFAULT_SORT,
         sortDir: "desc",
         search: "",
@@ -3496,7 +3506,9 @@ function decodeQuery(query) {
         abecs: [],
         shoeSizes: [],
         protTypes: [],
-        protSizes: []
+        protSizes: [],
+        packSizes: [],
+        packTypes: []
     };
     const text = String(query || "").replace(/^\?/, "");
     if (typeof SportSpecFilters !== "undefined") stateOut.technical = SportSpecFilters.decode(new URLSearchParams(text));
@@ -3553,6 +3565,8 @@ function decodeQuery(query) {
         else if (key === "abec") stateOut.abecs = orderSpecValues("abecs", String(value || "").split(","));
         else if (key === "shoesize") stateOut.shoeSizes = orderSpecValues("shoeSizes", String(value || "").split(","));
         else if (key === "prottype") stateOut.protTypes = orderSpecValues("protTypes", String(value || "").split(","));
+        else if (key === "packsize") stateOut.packSizes = orderSpecValues("packSizes", value.split(","));
+        else if (key === "packtype") stateOut.packTypes = orderSpecValues("packTypes", value.split(","));
         else if (key === "protsize") stateOut.protSizes = orderSpecValues("protSizes", String(value || "").split(","));
         else if (RETIRED_VISIT_PARAMS[key]) {
             /* Old last-visit links. Ignore the param and keep the rest. */
@@ -3632,6 +3646,10 @@ function encodeState(snapshot) {
     if (protTypes.length) add("prottype", protTypes.join(","));
     const protSizes = orderSpecValues("protSizes", snapshot.protSizes || []);
     if (protSizes.length) add("protsize", protSizes.join(","));
+    const packSizes = orderSpecValues("packSizes", snapshot.packSizes);
+    const packTypes = orderSpecValues("packTypes", snapshot.packTypes);
+    if (packSizes.length) add("packsize", packSizes.join(","));
+    if (packTypes.length) add("packtype", packTypes.join(","));
     if (typeof SportSpecFilters !== "undefined") SportSpecFilters.encode(params, snapshot.technical);
     return params.toString();
 }
@@ -3677,7 +3695,9 @@ function captureState() {
         abecs: (state.abecs || []).slice(),
         shoeSizes: (state.shoeSizes || []).slice(),
         protTypes: (state.protTypes || []).slice(),
-        protSizes: (state.protSizes || []).slice()
+        protSizes: (state.protSizes || []).slice(),
+        packSizes: (state.packSizes || []).slice(),
+        packTypes: (state.packTypes || []).slice()
     };
 }
 
@@ -3754,6 +3774,8 @@ function writeControls(snapshot) {
     state.shoeSizes = orderSpecValues("shoeSizes", snapshot.shoeSizes || []);
     state.protTypes = orderSpecValues("protTypes", snapshot.protTypes || []);
     state.protSizes = orderSpecValues("protSizes", snapshot.protSizes || []);
+    state.packSizes = orderSpecValues("packSizes", snapshot.packSizes);
+    state.packTypes = orderSpecValues("packTypes", snapshot.packTypes);
     if (partChanged) syncTypeSections(true);
     const watching = document.getElementById("watchingToggle");
     if (watching) watching.setAttribute("aria-pressed", state.watching ? "true" : "false");
@@ -4374,7 +4396,9 @@ function collectFilterActions() {
         abecs: value => "ABEC " + value,
         shoeSizes: value => "Size " + value,
         protTypes: value => PROT_TYPE_LABELS[value] || value,
-        protSizes: value => "Size " + value.toUpperCase()
+        protSizes: value => "Size " + value.toUpperCase(),
+        packSizes: value => value,
+        packTypes: value => value
     };
     SPEC_FACETS.forEach(facet => {
         if (!specKeyActive(facet.stateKey)) return;
