@@ -34,6 +34,19 @@ Where they are: Skate's files are at the repository root; BMX, Ski and MTB's are
 
    A quiet day gets no comment. If the issue doesn't exist, open it once.
 
+## Monthly: specialist shop check (2nd of the month)
+The "Specialist shop check" workflow (`specialist_check.py`) reads the whole
+catalogs of three MTB-only shops (Fanatik, Worldwide Cyclery and The Lost Co.)
+and lists our MTB product types that none of them sells. Front derailleurs
+were the first case (owner, 2026-11-26). It writes
+`catalogs/mtb/specialist_report.json` and changes nothing else.
+
+On the first daily run after it:
+1. Read the report's `flagged` entries marked `"new": true`. Earlier ones were already triaged.
+2. Most are noise: a type worded differently from the specialists' ("Clothing & Protective Gear"), or bikes and helmets these parts-heavy shops don't stock. Skip them.
+3. For a real one (an outdated standard or a non-MTB part that only general shops still clear out), ask the owner in one line under **Needs you**, with two sample listings. A new `filter_reason` rule in `sports/mtb/rules.py` waits for their yes.
+4. If `unread` names a shop, its catalog couldn't be read (robots.txt, a block or an error). Report it; don't work around it.
+
 ## Limits
 - No merging, force-pushing, new stores, affiliate signups or notifications beyond the "Store monitor" issue without the owner's OK.
 - Skate output doesn't change unless the owner asks.
