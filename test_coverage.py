@@ -2,6 +2,7 @@
 
 import os
 import unittest
+from unittest import mock
 
 from health import broken_store_warnings, record_run
 from query_state import decode_query, encode_state
@@ -35,6 +36,10 @@ class StoreFixtureTests(unittest.TestCase):
             ["Nike SB Dunk Low Pro US 10", "Vans Skate Half Cab Wafflecup Shoes"],
         )
         self.assertEqual(accessories, ["Mob Grip Tape"])
+
+    # Fixture badges at 20%: pin "no live Tactics code" (promos.json changes daily).
+
+    @mock.patch("stores.tactics.live_code_percent", new=lambda *args, **kwargs: None)
 
     def test_tactics_cards(self):
         html = _read("tactics_sale_cards.html")

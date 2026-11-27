@@ -48,6 +48,8 @@ DAYPACKS = "<div class='browse-grid'>" + "".join([
 
 
 class SkatePackTests(unittest.TestCase):
+    # Fixture badges at 20%: pin "no live Tactics code" (promos.json changes daily).
+    @mock.patch("stores.tactics.live_code_percent", new=lambda *args, **kwargs: None)
     def test_tactics_reads_both_pages_once_and_keeps_only_packs(self):
         pages = {tactics.PACK_URLS[0]: [BACKPACKS], tactics.PACK_URLS[1]: [DAYPACKS]}
         scraper = [s for s in tactics.scrapers() if s.part == "Packs"][0]

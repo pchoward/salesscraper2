@@ -6,6 +6,8 @@ dropped anything further down and the report called those decks sold out.
 """
 
 import datetime
+import json
+import os
 import logging
 import re
 import urllib.request
@@ -135,6 +137,37 @@ def black_friday_urls(section="skate", fetch=fetch_html, today=None):
             if re.search(wanted, url.rsplit("black-friday-sale/", 1)[1], re.I) and not re.search(r"snow", url, re.I)]
 
 
+# A store-wide code shown as a tile badge (owner's cart test, 2026-11-27):
+# from Nov 20 Tactics put BFCM26's "20% off" on full-price skate items in its
+# sale grids too ("Full Price Items Only"), and the tile gives no way to tell
+# them from a real 20% markdown. Before the code, 20% was a small share of
+# Tactics' markdowns (5 of 23 trucks, 0 wheels), so while a Tactics code is
+# live a tile whose badge equals its percent is skipped. Completes keep it:
+# Tactics' own-brand completes were 20% off before the code. Follows
+# promos.json, so it ends with the code.
+PROMOS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "promos.json")
+CODE_BADGE_EXEMPT = ("Completes",)
+_live_code = {}
+
+
+def live_code_percent(path=PROMOS, today=None):
+    """The percent of Tactics' live promo code, or None."""
+    today_s = (today or datetime.date.today()).isoformat()
+    if (path, today_s) not in _live_code:
+        try:
+            with open(path, encoding="utf-8") as handle:
+                promos = json.load(handle).get("promos") or []
+        except (OSError, ValueError, AttributeError):
+            promos = []
+        found = None
+        for promo in promos:
+            if (isinstance(promo, dict) and promo.get("store") == "Tactics" and promo.get("code")
+                    and promo.get("percent") and (not promo.get("ends") or promo["ends"] >= today_s)):
+                found = int(promo["percent"])
+        _live_code[(path, today_s)] = found
+    return _live_code[(path, today_s)]
+
+
 def deal_pages(section="skate", fetch=fetch_html):
     url = DEAL_SECTIONS[section]
     if url not in _deal_pages:
@@ -177,6 +210,9 @@ class TacticsScraper(Scraper):
                     products.append(item)
         logging.info("Tactics %s: %s items across %s sale pages, %s more from deal pages",
                      self.part, sale_count, len(pages), len(products) - sale_count)
+        if getattr(self, "code_badges", 0):
+            logging.info("Tactics %s: skipped %s tiles whose only discount is the live code's %s%%",
+                         self.part, self.code_badges, live_code_percent())
         return products
 
     def parse(self, html):
@@ -238,6 +274,9 @@ class TacticsScraper(Scraper):
                     discount_match = re.search(r"(\d+)%", promo_text)
                     if discount_match and price_new:
                         percent_off_value = int(discount_match.group(1))
+                        if (percent_off_value == live_code_percent() and self.part not in CODE_BADGE_EXEMPT):
+                            self.code_badges = getattr(self, "code_badges", 0) + 1
+                            continue
                         try:
                             price_old = str(round(float(price_new) / (1 - percent_off_value / 100), 2))
                         except (ValueError, ZeroDivisionError, TypeError):

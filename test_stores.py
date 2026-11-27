@@ -6,6 +6,7 @@ import os
 import tempfile
 import time
 import unittest
+from unittest import mock
 from zoneinfo import ZoneInfo
 
 from report import Digest, build_report_html
@@ -307,6 +308,10 @@ class SalePageTests(unittest.TestCase):
     LUCKY = "https://www.tactics.com/5boro/lucky-candle-brooklyn-825-skateboard-deck"
     SANTA = "https://www.tactics.com/santa-monica-airlines/skater-hall-of-fame-110-ltd-skateboard-deck"
     WELCOME = "https://www.zumiez.com/welcome-opps-8-5-skateboard-deck.html"
+
+    # Fixture badges at 20%: pin "no live Tactics code" (promos.json changes daily).
+
+    @mock.patch("stores.tactics.live_code_percent", new=lambda *args, **kwargs: None)
 
     def test_tactics_reads_past_the_first_sale_page(self):
         from stores.tactics import TacticsDecksScraper, collect_sale_pages
