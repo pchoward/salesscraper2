@@ -35,17 +35,17 @@ class AcceptedDropTests(unittest.TestCase):
         return {"runs": runs}
 
     def test_a_confirmed_drop_restarts_the_baseline(self):
-        for key in ("Tactics_Decks", "Albe's BMX_Frames & Forks"):
+        for key, day, samples in (("Albe's BMX_Frames & Forks", "2026-11-27", 1), ("Tactics_Decks", "2026-11-28", 0)):
             self.assertIn(key, health.ACCEPTED_DROPS)
             state = self.state(key)
-            self.assertEqual(health.rolling_baseline(state, key, "2026-11-27")["baseline_samples"], 1)
-            result = health.assess_run({key: [{}] * 4}, [], state, "2026-11-27")[key]
+            self.assertEqual(health.rolling_baseline(state, key, day)["baseline_samples"], samples)
+            result = health.assess_run({key: [{}] * 4}, [], state, day)[key]
             self.assertFalse(result["failed"])  # listed, not held
             self.assertEqual(result["count"], 4)
 
     def test_other_keys_are_still_guarded(self):
-        state = self.state("Tactics_Wheels")
-        result = health.assess_run({"Tactics_Wheels": [{}] * 4}, [], state, "2026-11-27")["Tactics_Wheels"]
+        state = self.state("Zumiez_Wheels")
+        result = health.assess_run({"Zumiez_Wheels": [{}] * 4}, [], state, "2026-11-27")["Zumiez_Wheels"]
         self.assertTrue(result["failed"])
         self.assertEqual(result["diagnostics"]["reason"], "partial_catalog_drop")
 
@@ -61,14 +61,13 @@ class BlackFridayPageTests(unittest.TestCase):
     def tearDown(self):
         tactics._black_friday.clear()
 
-    def test_tactics_reads_its_skate_and_shoe_grids_while_the_sale_lasts(self):
+    def test_tactics_reads_only_its_shoe_grids_while_the_sale_lasts(self):
         fetch = lambda url: (url, self.INFO)
-        self.assertEqual(tactics.black_friday_urls("skate", fetch, TODAY),
-                         ["https://www.tactics.com/black-friday-sale/skate",
-                          "https://www.tactics.com/tactics/black-friday-sale/skateboard-decks"])
+        # Skate grids aren't read (2026-11-27): their 20% is the code on full-price items.
+        self.assertEqual(tactics.black_friday_urls("skate", fetch, TODAY), [])
         self.assertEqual(tactics.black_friday_urls("shoes", fetch, TODAY),
                          ["https://www.tactics.com/black-friday-sale/mens-shoes"])
-        self.assertEqual(tactics.black_friday_urls("skate", fetch, tactics.BLACK_FRIDAY_UNTIL), [])
+        self.assertEqual(tactics.black_friday_urls("shoes", fetch, tactics.BLACK_FRIDAY_UNTIL), [])
 
     def test_a_gone_info_page_adds_nothing(self):
         self.assertEqual(tactics.black_friday_urls("skate", lambda url: (None, None), TODAY), [])
