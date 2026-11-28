@@ -62577,14 +62577,14 @@
           }
         },
         "Bicycle Warehouse_Bikes": {
-          "count": 26,
+          "count": 27,
           "failed": false,
           "diagnostics": {
             "expected_count": 28.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 26,
-            "percentage_change": -8.8,
+            "actual_count": 27,
+            "percentage_change": -5.3,
             "reason": "normal_variation"
           }
         },
@@ -62673,14 +62673,14 @@
           }
         },
         "Bicycle Warehouse_Protection": {
-          "count": 16,
+          "count": 17,
           "failed": false,
           "diagnostics": {
             "expected_count": 17.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 0.0,
-            "actual_count": 16,
-            "percentage_change": -5.9,
+            "actual_count": 17,
+            "percentage_change": 0.0,
             "reason": "normal_variation"
           }
         },
@@ -62746,15 +62746,15 @@
           }
         },
         "Bike Mart_Cockpit": {
-          "count": 276,
+          "count": 277,
           "failed": false,
           "diagnostics": {
             "expected_count": 256.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 8.5,
             "rule_excluded": 1,
-            "actual_count": 276,
-            "percentage_change": 7.8,
+            "actual_count": 277,
+            "percentage_change": 8.2,
             "reason": "normal_variation"
           }
         },
@@ -62871,14 +62871,14 @@
           }
         },
         "Bikes Online_Bikes": {
-          "count": 58,
+          "count": 57,
           "failed": false,
           "diagnostics": {
             "expected_count": 59.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 58,
-            "percentage_change": -1.7,
+            "actual_count": 57,
+            "percentage_change": -3.4,
             "reason": "normal_variation"
           }
         },
@@ -63054,15 +63054,15 @@
           }
         },
         "Cambria_Drivetrain": {
-          "count": 238,
+          "count": 237,
           "failed": false,
           "diagnostics": {
             "expected_count": 249.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
             "rule_excluded": 40,
-            "actual_count": 238,
-            "percentage_change": -4.6,
+            "actual_count": 237,
+            "percentage_change": -5.0,
             "reason": "normal_variation"
           }
         },
@@ -63103,14 +63103,14 @@
           }
         },
         "Cambria_Pedals": {
-          "count": 74,
+          "count": 72,
           "failed": false,
           "diagnostics": {
             "expected_count": 73.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 6.0,
-            "actual_count": 74,
-            "percentage_change": 1.4,
+            "actual_count": 72,
+            "percentage_change": -1.4,
             "reason": "normal_variation"
           }
         },
@@ -63260,27 +63260,27 @@
           }
         },
         "Colorado Cyclist_Protection": {
-          "count": 216,
+          "count": 215,
           "failed": false,
           "diagnostics": {
             "expected_count": 219.5,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
             "rule_excluded": 2,
-            "actual_count": 216,
-            "percentage_change": -1.6,
+            "actual_count": 215,
+            "percentage_change": -2.1,
             "reason": "normal_variation"
           }
         },
         "Colorado Cyclist_Tires": {
-          "count": 400,
+          "count": 395,
           "failed": false,
           "diagnostics": {
             "expected_count": 402.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 19.5,
-            "actual_count": 400,
-            "percentage_change": -0.5,
+            "actual_count": 395,
+            "percentage_change": -1.7,
             "reason": "normal_variation"
           }
         },
@@ -64492,26 +64492,26 @@
           }
         },
         "The Lost Co._Cockpit": {
-          "count": 252,
+          "count": 250,
           "failed": false,
           "diagnostics": {
             "expected_count": 251.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 2.0,
-            "actual_count": 252,
-            "percentage_change": 0.4,
+            "actual_count": 250,
+            "percentage_change": -0.4,
             "reason": "normal_variation"
           }
         },
         "The Lost Co._Drivetrain": {
-          "count": 169,
+          "count": 167,
           "failed": false,
           "diagnostics": {
             "expected_count": 169.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 1.5,
-            "actual_count": 169,
-            "percentage_change": 0.0,
+            "actual_count": 167,
+            "percentage_change": -1.2,
             "reason": "normal_variation"
           }
         },
@@ -64577,14 +64577,14 @@
           }
         },
         "The Lost Co._Tires": {
-          "count": 219,
+          "count": 217,
           "failed": false,
           "diagnostics": {
             "expected_count": 139.0,
             "baseline_samples": 14,
             "median_absolute_deviation": 7.0,
-            "actual_count": 219,
-            "percentage_change": 57.6,
+            "actual_count": 217,
+            "percentage_change": 56.1,
             "reason": "normal_variation"
           }
         },
@@ -65047,14 +65047,14 @@
           }
         },
         "evo_Bikes": {
-          "count": 75,
+          "count": 74,
           "failed": false,
           "diagnostics": {
             "expected_count": 66,
             "baseline_samples": 5,
             "median_absolute_deviation": 0,
-            "actual_count": 75,
-            "percentage_change": 13.6,
+            "actual_count": 74,
+            "percentage_change": 12.1,
             "reason": "normal_variation"
           }
         },
@@ -65083,14 +65083,14 @@
           }
         },
         "evo_Drivetrain": {
-          "count": 103,
+          "count": 102,
           "failed": false,
           "diagnostics": {
             "expected_count": 64,
             "baseline_samples": 5,
             "median_absolute_deviation": 1,
-            "actual_count": 103,
-            "percentage_change": 60.9,
+            "actual_count": 102,
+            "percentage_change": 59.4,
             "reason": "normal_variation"
           }
         },
@@ -65144,14 +65144,14 @@
           }
         },
         "evo_Protection": {
-          "count": 284,
+          "count": 255,
           "failed": false,
           "diagnostics": {
             "expected_count": 165,
             "baseline_samples": 5,
             "median_absolute_deviation": 3,
-            "actual_count": 284,
-            "percentage_change": 72.1,
+            "actual_count": 255,
+            "percentage_change": 54.5,
             "reason": "normal_variation"
           }
         },
@@ -65192,7 +65192,7 @@
           }
         }
       },
-      "scanned_at": "2026-11-28T03:50:18+00:00"
+      "scanned_at": "2026-11-28T08:13:07+00:00"
     }
   ],
   "baseline": {
@@ -65266,7 +65266,7 @@
     },
     "Bikes Online_Bikes": {
       "date": "2026-11-28",
-      "count": 58
+      "count": 57
     },
     "Bikes Online_Brakes": {
       "date": "2026-11-28",
@@ -65306,11 +65306,11 @@
     },
     "Colorado Cyclist_Protection": {
       "date": "2026-11-28",
-      "count": 216
+      "count": 215
     },
     "Colorado Cyclist_Tires": {
       "date": "2026-11-28",
-      "count": 400
+      "count": 395
     },
     "Cambria_Protection": {
       "date": "2026-11-28",
@@ -65378,11 +65378,11 @@
     },
     "The Lost Co._Cockpit": {
       "date": "2026-11-28",
-      "count": 252
+      "count": 250
     },
     "The Lost Co._Drivetrain": {
       "date": "2026-11-28",
-      "count": 169
+      "count": 167
     },
     "The Lost Co._Forks & Shocks": {
       "date": "2026-11-28",
@@ -65398,7 +65398,7 @@
     },
     "The Lost Co._Tires": {
       "date": "2026-11-28",
-      "count": 219
+      "count": 217
     },
     "Troy Lee Designs_Protection": {
       "date": "2026-11-28",
@@ -65414,7 +65414,7 @@
     },
     "Cambria_Drivetrain": {
       "date": "2026-11-28",
-      "count": 238
+      "count": 237
     },
     "Cambria_Forks & Shocks": {
       "date": "2026-11-28",
@@ -65426,7 +65426,7 @@
     },
     "Cambria_Pedals": {
       "date": "2026-11-28",
-      "count": 74
+      "count": 72
     },
     "Cambria_Wheels": {
       "date": "2026-11-28",
@@ -65466,7 +65466,7 @@
     },
     "Bicycle Warehouse_Bikes": {
       "date": "2026-11-28",
-      "count": 26
+      "count": 27
     },
     "Bicycle Warehouse_Brakes": {
       "date": "2026-11-28",
@@ -65486,7 +65486,7 @@
     },
     "Bicycle Warehouse_Protection": {
       "date": "2026-11-28",
-      "count": 16
+      "count": 17
     },
     "Bicycle Warehouse_Tires": {
       "date": "2026-11-28",
@@ -65506,7 +65506,7 @@
     },
     "Bike Mart_Cockpit": {
       "date": "2026-11-28",
-      "count": 276
+      "count": 277
     },
     "Bike Mart_Drivetrain": {
       "date": "2026-11-28",
@@ -65586,7 +65586,7 @@
     },
     "evo_Bikes": {
       "date": "2026-11-28",
-      "count": 75
+      "count": 74
     },
     "evo_Brakes": {
       "date": "2026-11-28",
@@ -65598,7 +65598,7 @@
     },
     "evo_Drivetrain": {
       "date": "2026-11-28",
-      "count": 103
+      "count": 102
     },
     "evo_Forks & Shocks": {
       "date": "2026-11-28",
@@ -65614,7 +65614,7 @@
     },
     "evo_Protection": {
       "date": "2026-11-28",
-      "count": 284
+      "count": 255
     },
     "evo_Tires": {
       "date": "2026-11-28",
@@ -67641,7 +67641,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 26
+        "count": 27
       }
     ],
     "Bicycle Warehouse_Brakes": [
@@ -68105,7 +68105,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 16
+        "count": 17
       }
     ],
     "Bicycle Warehouse_Tires": [
@@ -68409,7 +68409,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 276
+        "count": 277
       }
     ],
     "Bike Mart_Drivetrain": [
@@ -68945,7 +68945,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 58
+        "count": 57
       }
     ],
     "Bikes Online_Brakes": [
@@ -69771,7 +69771,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 238
+        "count": 237
       }
     ],
     "Cambria_Forks & Shocks": [
@@ -70003,7 +70003,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 74
+        "count": 72
       }
     ],
     "Cambria_Protection": [
@@ -70713,7 +70713,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 216
+        "count": 215
       }
     ],
     "Colorado Cyclist_Tires": [
@@ -70771,7 +70771,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 400
+        "count": 395
       }
     ],
     "Colorado Cyclist_Tools & Care": [
@@ -76233,7 +76233,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 252
+        "count": 250
       }
     ],
     "The Lost Co._Drivetrain": [
@@ -76291,7 +76291,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 169
+        "count": 167
       }
     ],
     "The Lost Co._Forks & Shocks": [
@@ -76639,7 +76639,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 219
+        "count": 217
       }
     ],
     "The Lost Co._Tools & Care": [
@@ -78693,7 +78693,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 75
+        "count": 74
       }
     ],
     "evo_Brakes": [
@@ -78771,7 +78771,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 103
+        "count": 102
       }
     ],
     "evo_Forks & Shocks": [
@@ -78901,7 +78901,7 @@
       },
       {
         "date": "2026-11-28",
-        "count": 284
+        "count": 255
       }
     ],
     "evo_Tires": [
