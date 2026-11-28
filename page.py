@@ -19,6 +19,7 @@ from zoneinfo import ZoneInfo
 
 import promos
 import sports
+from sports.site import catalog_sport_nav, metadata
 from media import product_image_urls
 from badges import classify_badges
 from charts import CHART_NOTE, listing_series
@@ -2120,7 +2121,7 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         'bridge.async=false;document.head.appendChild(bridge);}</script>',
         '<meta charset="UTF-8">',
         '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-        f"<title>{escape(sport.brand)} | {escape(today)}</title>",
+        metadata(sport),
         f"<style>{_read_asset('page.css')}</style>",
         f"<style>{_read_asset('mobile.css')}</style>",
         "<script>try{if(localStorage.getItem('salesscraper2.layout')!=='table')document.documentElement.classList.add('layout-cards')}catch(e){document.documentElement.classList.add('layout-cards')}</script>",
@@ -2880,7 +2881,8 @@ def render_page(data, changes, price_history=None, failed_keys=None, generated_a
         )
     store_cards.append("</div>")
     chunks.append(
-        '<header id="stickyBar">'
+        catalog_sport_nav(sport, asset_prefix)
+        + '<header id="stickyBar">'
         '<div class="topnav">'
         '<h1 class="brand"><button type="button" class="brand-home" id="homeReset" title="Back to default view">'
         '<svg class="brand-mark" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">'

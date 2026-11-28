@@ -58,12 +58,12 @@ class RenderTests(unittest.TestCase):
         default = render(data=data)
         self.assertEqual(default, render(sports.SKATE, data=data))
         self.assertNotIn("const SPORT_SETTINGS =", default)
-        self.assertIn("<title>SkateDeals |", default)
+        self.assertIn("<title>ShredDeals · Skate deals</title>", default)
         self.assertIn('bridge.src="navigation/skate-bridge.js"', default)
 
     def test_bmx_page_has_its_own_chips_branding_and_vocabulary(self):
         html = render(sports.BMX)
-        self.assertIn("<title>ShredDeals BMX |", html)
+        self.assertIn("<title>ShredDeals · BMX deals</title>", html)
         settings = json.loads(re.search(r"const SPORT_SETTINGS = (\{.*?\});", html).group(1))
         self.assertEqual(settings["defaultPart"], "all")
         from sports.headings import headings

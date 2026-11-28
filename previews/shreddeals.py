@@ -3,10 +3,13 @@ import argparse
 import ast
 import hashlib
 import inspect
+from html import escape
 import json
 from pathlib import Path
 import re
 import shutil
+
+from sports.site import TAGLINE, metadata, sport_link
 
 SOURCE = Path(__file__).resolve().parents[1]
 HERE = Path(__file__).resolve().parent
@@ -49,12 +52,20 @@ def render_shell(config, asset_prefix=''):
     template = (HERE/'shell.html').read_text()
     template = template.replace('href="navigation.css"', f'href="{asset_prefix}navigation.css?v={asset_version("navigation.css")}"')
     template = template.replace('src="navigation.js"', f'src="{asset_prefix}navigation.js?v={asset_version("navigation.js")}"')
-    if config.get('production'):
-        template = template.replace('<title>ShredDeals development preview</title>', '<title>ShredDeals</title>')
+    production = config.get('production')
+    links = [
+        (sport['id'], sport['label'],
+         sport.get('catalog') or f"?sport={sport['id']}")
+        for sport in config['sports']
+    ]
+    current = config['defaultSport']
+    template = template.replace('__SPORT_LINKS__', ''.join(
+        sport_link(*link, current, tab=True) for link in links
+    )).replace('__NOSCRIPT_LINKS__', ' · '.join(sport_link(*link, current) for link in links))
+    if production:
         template = template.replace('<span class="preview-badge">Development prototype</span>', '')
-        template = template.replace('CATALOG PREVIEW', 'SHREDDEALS')
-        template = template.replace('No products, price histories or alerts are active for this sport. Skate deals stay in Skate.', 'Skate deals are available now while we add more sports.')
-        template = template.replace('This prototype needs JavaScript for navigation. The original SkateDeals page remains available separately.', 'Sport navigation needs JavaScript. <a href="sale_items_chart.html">Open SkateDeals</a>.')
+    template = template.replace('__TAGLINE__', f'<p class="site-tagline">{escape(TAGLINE)}</p>' if production else '')
+    template = template.replace('__METADATA__', metadata() if production else '<title>ShredDeals development preview</title>')
     payload = json.dumps(config).replace('<', '\\u003c')
     return template.replace('__CONFIG__', payload)
 

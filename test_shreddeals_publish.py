@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 from previews.publish import publish
 from previews.shreddeals import HERE, SOURCE
 from report import build_report_html
+import sports
 
 
 class ProductionNavigationTests(unittest.TestCase):
@@ -35,6 +36,40 @@ class ProductionNavigationTests(unittest.TestCase):
             for name in ('navigation.js','navigation.css','skate-bridge.js'):
                 self.assertEqual((root/'navigation'/name).read_bytes(),(HERE/name).read_bytes())
 
+    def test_shared_link_metadata_and_static_navigation(self):
+        from urllib.parse import urljoin
+
+        def check_page(html, title, page_path, selector, current):
+            soup = BeautifulSoup(html, 'html.parser')
+            url = 'https://shreddeals.com/' + page_path
+            self.assertEqual(soup.title.string, title)
+            description = soup.select_one('meta[name="description"]')['content']
+            self.assertTrue(description)
+            for key, value in {
+                'title': title, 'description': description, 'type': 'website', 'url': url,
+            }.items():
+                self.assertEqual(soup.select_one(f'meta[property="og:{key}"]')['content'], value)
+            self.assertIsNone(soup.select_one('meta[property="og:image"]'))
+            links = soup.select(selector)
+            self.assertEqual([link.text for link in links], ['Skate', 'Ski', 'MTB', 'BMX'])
+            self.assertEqual([urljoin(url, link['href']) for link in links],
+                             ['https://shreddeals.com/' + sport.page_path for sport in sports.SPORTS.values()])
+            self.assertEqual([link.text for link in links if link.get('aria-current') == 'page'], [current])
+            self.assertNotIn('Coming soon', html)
+            return soup
+
+        with tempfile.TemporaryDirectory() as directory:
+            soup = check_page(publish(Path(directory)).read_text(), 'ShredDeals · Gear on sale', '',
+                              '#sportTabs a', 'Skate')
+            self.assertEqual(len(soup.select('noscript a')), 4)
+            self.assertEqual(soup.select_one('#myStuffStatus').text, '')
+            self.assertEqual(soup.select_one('#catalogLoadingStatus').text, '')
+        for sport in sports.SPORTS.values():
+            with self.subTest(sport=sport.id):
+                html = build_report_html({}, {}, sport=sport, generated_at='2026-10-31T10:00:00+00:00')
+                check_page(html, f'ShredDeals · {sport.label} deals', sport.page_path,
+                           '.catalog-sport-links a', sport.label)
+
     def test_category_metadata_uses_published_taxonomy_order_counts_and_versions(self):
         import hashlib
         with tempfile.TemporaryDirectory() as directory:
@@ -59,7 +94,7 @@ class ProductionNavigationTests(unittest.TestCase):
         html=build_report_html({}, {}, generated_at='2026-10-31T10:00:00+00:00')
         self.assertIn('window.parent!==window&&!window.shredBridgeInstalled',html)
         self.assertIn('bridge.src="navigation/skate-bridge.js"',html)
-        self.assertNotIn('sportTabs',html)
+        self.assertNotIn('id="sportTabs"',html)
         bridge=(HERE/'skate-bridge.js').read_text()
         self.assertIn('if (window.parent === window || window.shredBridgeInstalled) return;',bridge)
         self.assertIn('else send("replace")',bridge)

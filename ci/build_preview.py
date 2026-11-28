@@ -57,7 +57,7 @@ def build_sport_pages(out, label="", data_root=None):
     """Pages for the other sports that have scraped listings, from their
     catalogs/<id>/ data under ``data_root`` (the repository by default).
     Returns {sport id: page path} for the homepage; a sport with no
-    listings yet is left out, so its tab keeps saying "coming soon"."""
+    listings is left out of the embedded preview."""
     import rebuild_page
     import sports
     from report import build_report_html

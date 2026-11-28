@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parent.parent
 class Sport:
     id: str
     label: str
-    # Shown in the page title and header.
+    # Shown in the catalog header.
     brand: str
     # Category chips, in order.
     parts: tuple
