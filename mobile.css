@@ -912,9 +912,9 @@
         --card-action-row:5;
         --card-photo-ratio:1.16;
     }
-    /* Completes also has a category chip above the grid. */
+    /* Leave room for the tagline and the Completes category chip above the grid. */
     #cardGrid .deal-card[data-part="Completes"]:has(.card-pricing) {
         --card-store-row:4;
-        --card-photo-ratio:1.21;
+        --card-photo-ratio:1.38;
     }
 }
