@@ -256,10 +256,10 @@ async function runHomepage(browser, base, view, options) {
                 seen.push(`${sport}: ${count} deals`);
             } else {
                 expect(!(await page.locator("#skateFrame").isVisible()), `${sport} still shows the Skate catalog`);
-                expect(await page.locator("#comingSoon").isVisible(), `${sport} shows no empty state`);
+                expect(await page.locator("#catalogUnavailable").isVisible(), `${sport} shows no empty state`);
                 if (!emptyShot) await shot("sport");
                 emptyShot = true;
-                seen.push(`${sport}: coming soon`);
+                seen.push(`${sport}: unavailable`);
             }
         }
         return seen.join(", ");

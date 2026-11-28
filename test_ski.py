@@ -98,7 +98,7 @@ class GearWestTests(unittest.TestCase):
         html = build_report_html({"Gear West_Skis": [i for i in kept.values() if i["part"] == "Skis"],
                                   "Gear West_Boots": [i for i in kept.values() if i["part"] == "Boots"]},
                                  {}, {}, set(), generated_at="2026-11-02T12:00:00+00:00", sport=sports.SKI)
-        self.assertIn("<title>ShredDeals Ski |", html)
+        self.assertIn("<title>ShredDeals · Ski deals</title>", html)
         self.assertIn('data-part="Skis" data-count="3"', html)
         self.assertIn('data-part="Boots" data-count="1"', html)
         catalog = json.loads(html.split('id="catalogJson"', 1)[1].split(">", 1)[1].split("</script>", 1)[0])

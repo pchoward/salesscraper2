@@ -30,7 +30,7 @@
         const next = new URL(url);
         const sport = config.sports.find(item => item.id === sportId) || config.sports.find(item => item.id === config.defaultSport);
         // Filters belong to one catalog: moving to another sport's catalog
-        // starts fresh. A "coming soon" sport keeps them for the way back.
+        // starts fresh. A sport without a catalog keeps them for the way back.
         const current = state(url, config).sport;
         if ((current.id !== sport.id || state(url, config).scope) && hasCatalog(current) && hasCatalog(sport)) clearCatalogQuery(next.searchParams, config);
         next.searchParams.set("sport", sport.id);
@@ -58,7 +58,7 @@
         }
         return counts;
     }
-    // A sport with a catalog page shows it in the frame; the rest say "coming soon".
+    // A sport with a catalog page shows it in the frame; the rest show an unavailable message.
     function catalogURL(url, config, sportId) {
         const parent = new URL(url);
         const sport = config.sports.find(item => item.id === sportId);
@@ -105,7 +105,8 @@
         const viewport = doc.getElementById("catalogViewport");
         const loadingStatus = doc.getElementById("catalogLoading");
         let departingDocument;
-        const empty = doc.getElementById("comingSoon");
+        const unavailable = doc.getElementById("catalogUnavailable");
+        const loadingAnnouncement = doc.getElementById("catalogLoadingStatus");
         const brand = doc.getElementById("brandHome");
         const shellSearch = doc.getElementById("shellSearch");
         const menu = doc.getElementById('headerMenu');
@@ -249,7 +250,6 @@
             stuffReady=true;doc.getElementById('myStuffSave').disabled=false;
             const watching=doc.getElementById('myStuffWatching');watching.disabled=false;watching.setAttribute('aria-pressed',String(!!data.watching));watching.textContent=data.watching?'Show all deals':'Show watching';
             doc.getElementById('myStuffStars').textContent=data.stars+' starred deal'+(data.stars===1?'':'s')+' · '+data.matching+' matching this selection';
-            if(doc.getElementById('myStuffStatus').textContent==='Loading catalog tools…')doc.getElementById('myStuffStatus').textContent='';
             const focused=doc.activeElement?.dataset?.viewKey;
             const list=doc.getElementById('myStuffViews');list.replaceChildren();
             for(const view of data.views||[]) {
@@ -306,7 +306,7 @@
         function closeCategories(focus=false) {
             win.clearTimeout(dismissTimer);
             panel.hidden = true; pendingMenuFocus = null;
-            sportTabs.querySelectorAll('button').forEach(button => button.setAttribute('aria-expanded','false'));
+            sportTabs.querySelectorAll('a').forEach(button => button.setAttribute('aria-expanded','false'));
             doc.getElementById('categoryToggle').setAttribute('aria-expanded','false');
             if (focus && opener?.isConnected) {
                 suppressFocus = true; opener.focus({preventScroll:true}); suppressFocus = false;
@@ -441,7 +441,7 @@
         function openSportMenu(id,button) {
             win.clearTimeout(dismissTimer);
             menuSport = id; opener = button; panel.hidden = false;
-            sportTabs.querySelectorAll('button').forEach(node=>node.setAttribute('aria-expanded',String(node === button)));
+            sportTabs.querySelectorAll('a').forEach(node=>node.setAttribute('aria-expanded',String(node === button)));
             doc.getElementById('categoryToggle').setAttribute('aria-expanded',String(button.id === 'categoryToggle'));
             const sport = config.sports.find(item=>item.id===id);
             const current = state(win.location.href,config);
@@ -478,7 +478,7 @@
         doc.addEventListener('pointermove',event=>{
             if (!hoverBlockPoint || event.pointerType === 'touch' || Math.hypot(event.clientX-hoverBlockPoint.x,event.clientY-hoverBlockPoint.y)<3) return;
             hoverBlockPoint = null;
-            const button = event.target.closest('#sportTabs button');
+            const button = event.target.closest('#sportTabs a');
             if (button) openSportMenu(button.id.slice(6),button);
         });
         region.addEventListener('pointerleave',event=>{
@@ -524,52 +524,44 @@
             win.history.pushState({}, "", next);
             render();
         }
-        function tabs(container, items, selected, prefix, panel, chooseItem) {
-            if (items.every(item => doc.getElementById(prefix+item.id))) {
-                items.forEach(item => {
-                    const button = doc.getElementById(prefix+item.id);
-                    button.setAttribute('aria-selected',String(item.id===selected));
-                    button.tabIndex = item.id===selected ? 0 : -1;
-                });
-                return;
-            }
-            container.replaceChildren(...items.map(item => {
-                const button = doc.createElement("button");
-                button.type = "button";
-                button.id = prefix + item.id;
-                button.setAttribute("role", "tab");
-                button.setAttribute("aria-selected", String(item.id === selected));
-                button.setAttribute("aria-controls", panel);
-                button.tabIndex = item.id === selected ? 0 : -1;
-                button.textContent = item.label;
-                button.setAttribute('aria-haspopup','true');
-                button.setAttribute('aria-expanded','false');
-                button.setAttribute('aria-controls','categoryPanel sportPanel');
-                button.addEventListener('pointerenter',event=>{if(event.pointerType !== 'touch' && !hoverBlockPoint)openSportMenu(item.id,button);});
-                button.addEventListener('focus',()=>{if(!suppressFocus)openSportMenu(item.id,button);});
-                let touch = false;
-                button.addEventListener('pointerdown',event=>{touch = event.pointerType === 'touch';});
-                button.addEventListener("click", event => {
-                    if(touch){touch=false;openSportMenu(item.id,button);return;}
-                    hoverBlockPoint = {x:event.clientX,y:event.clientY};
-                    const next = navigate(win.location.href,config,item.id);
-                    clearCatalogQuery(next.searchParams,config);
-                    next.searchParams.delete('type');
-                    next.searchParams.set('type','all');
-                    win.history.pushState({},'',next);render();closeCategories();
-                });
-                button.addEventListener("keydown", event => {
-                    const index = nextIndex(items.findIndex(value => value.id === item.id), event.key, items.length);
-                    if (index == null) return;
+        sportTabs.setAttribute('role', 'tablist');
+        for (const item of config.sports) {
+            const link = doc.getElementById('sport-' + item.id);
+            link.setAttribute('role', 'tab');
+            link.setAttribute('aria-haspopup', 'true');
+            link.setAttribute('aria-expanded', 'false');
+            link.setAttribute('aria-controls', 'categoryPanel sportPanel');
+            link.addEventListener('pointerenter',event=>{if(event.pointerType !== 'touch' && !hoverBlockPoint)openSportMenu(item.id,link);});
+            link.addEventListener('focus',()=>{if(!suppressFocus)openSportMenu(item.id,link);});
+            let touch = false;
+            link.addEventListener('pointerdown',event=>{touch = event.pointerType === 'touch';});
+            link.addEventListener("click", event => {
+                if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+                event.preventDefault();
+                if(touch){touch=false;openSportMenu(item.id,link);return;}
+                hoverBlockPoint = {x:event.clientX,y:event.clientY};
+                const next = navigate(win.location.href,config,item.id);
+                clearCatalogQuery(next.searchParams,config);
+                next.searchParams.delete('type');
+                next.searchParams.set('type','all');
+                win.history.pushState({},'',next);render();closeCategories();
+            });
+            link.addEventListener("keydown", event => {
+                if (event.key === ' ') {
                     event.preventDefault();
-                    doc.getElementById(prefix+items[index].id).focus();
-                });
-                return button;
-            }));
+                    link.click();
+                    return;
+                }
+                const index = nextIndex(config.sports.indexOf(item), event.key, config.sports.length);
+                if (index == null) return;
+                event.preventDefault();
+                doc.getElementById('sport-' + config.sports[index].id).focus();
+            });
         }
         function paintCatalogLoading(loading) {
             doc.body.classList.toggle("catalog-loading", loading);
-            if (loadingStatus) loadingStatus.hidden = !loading;
+            loadingStatus.hidden = !loading;
+            loadingAnnouncement.textContent = loading ? "Loading catalog…" : "";
             frame.toggleAttribute("data-loading", loading);
             frame.inert = loading;
             frame.setAttribute("aria-hidden", String(frame.hidden || loading));
@@ -600,7 +592,7 @@
             closeHeaderMenu();closeMyStuff();stuffReady=false;clearRename();
             doc.getElementById('myStuffViews').replaceChildren();
             doc.getElementById('myStuffSave').disabled=true;doc.getElementById('myStuffWatching').disabled=true;
-            doc.getElementById('myStuffStars').textContent='';doc.getElementById('myStuffStatus').textContent='Loading catalog tools…';
+            doc.getElementById('myStuffStars').textContent='';doc.getElementById('myStuffStatus').textContent='';
             const current = state(win.location.href, config);
             if(current.scope || !hasCatalog(current.sport))doc.getElementById('myStuffStatus').textContent='Personal tools are available in Deals. You can still bookmark this selection.';
             closeCategories();
@@ -615,13 +607,20 @@
                 categories.hidden = false;
                 doc.getElementById('categoryToggle').disabled = false;
             }
-            tabs(sportTabs, config.sports, current.sport.id, "sport-", "sportPanel", id => choose(id, "sport"));
+            for (const link of sportTabs.querySelectorAll('a')) {
+                const selected = link.id === 'sport-' + current.sport.id;
+                link.setAttribute('aria-selected', String(selected));
+                if (selected) link.setAttribute('aria-current', 'page');
+                else link.removeAttribute('aria-current');
+                link.tabIndex = selected ? 0 : -1;
+            }
             doc.getElementById("sportPanel").setAttribute("aria-labelledby", "sport-" + current.sport.id);
-            doc.title = config.brand.name + " · " + current.sport.label + (config.production ? "" : " preview");
+            if (!config.production) doc.title = config.brand.name + " · " + current.sport.label + " preview";
             const skate = hasCatalog(current.sport);
             if (viewport) viewport.hidden = !skate;
             frame.hidden = !skate;
-            empty.hidden = skate;
+            unavailable.hidden = skate;
+            unavailable.textContent = skate ? "" : current.sport.label + " catalog is unavailable. Choose another sport.";
             const note = doc.getElementById("contextNote");
             note.hidden = !!config.production;
             if (skate) {
@@ -646,8 +645,6 @@
             } else {
                 paintCatalogLoading(false);
                 note.textContent = config.production ? "" : current.sport.label + " · navigation prototype";
-                doc.getElementById("emptyTitle").textContent = current.sport.label;
-                doc.getElementById("emptyDescription").textContent = config.production ? "Explore Skate deals while we add " + current.sport.label + " deals." : "Inventory for " + current.sport.label + " has not been connected.";
             }
             if (focusGroup) {
                 const target = doc.getElementById("sport-" + current.sport.id);
@@ -705,7 +702,6 @@
             } catch (_) { /* Ignore foreign paths and malformed messages. */ }
         });
         brand.addEventListener("click", () => choose("skate", "sport"));
-        doc.getElementById("backToSkate").addEventListener("click", () => choose("skate", "sport"));
         render();
         return { render, choose, chooseView, state: () => state(win.location.href, config), closeCategories, registerCategories, catalogReady, openPhoneFilters, closePhoneFilters, bridgeVersion: config.bridgeVersion };
     }

@@ -136,9 +136,9 @@ def run(preview, screenshots, firefox, geckodriver):
         wait_state('skate')
         passed.append('Keyboard arrows/Home/End, focus/roving tabindex, sport-only Back/Forward restoration')
         driver.find_element(By.ID, 'sport-bmx').click()
-        assert driver.find_element(By.ID, 'comingSoon').is_displayed()
+        assert driver.find_element(By.ID, 'catalogUnavailable').is_displayed()
         assert not driver.find_element(By.ID, 'skateFrame').is_displayed()
-        assert 'no catalog yet' in driver.find_element(By.ID, 'comingSoon').text
+        assert 'catalog is unavailable' in driver.find_element(By.ID, 'catalogUnavailable').text
         driver.save_screenshot(str(screenshots/'desktop-bmx.png'))
         driver.get(base)
         frame()

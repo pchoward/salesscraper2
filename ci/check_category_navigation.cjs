@@ -4,6 +4,31 @@ const {serve}=require('./check_topbar.cjs');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
+const sportPaths = {
+ skate: '/sale_items_chart.html', ski: '/ski/sale_items_chart.html',
+ mtb: '/mtb/sale_items_chart.html', bmx: '/bmx/sale_items_chart.html',
+};
+async function checkStaticSportLinks(browser, base, site) {
+ const page = await browser.newPage({javaScriptEnabled:false, viewport:{width:390,height:844}});
+ await page.route('**/*', route => new URL(route.request().url()).origin === base ? route.continue() : route.abort());
+ try {
+  for (const [source, selector, current] of [
+   ['/', '#sportTabs', 'Skate'], [sportPaths.mtb, '.catalog-sport-links', 'MTB'],
+  ]) {
+   assert.doesNotMatch(fs.readFileSync(path.join(site, source === '/' ? 'index.html' : source.slice(1)), 'utf8'), /Coming soon \/ no catalog yet|Skate deals are available now while we add more sports/);
+   for (const [sport, destination] of Object.entries(sportPaths)) {
+    const response = await page.goto(base + source);
+    assert(response.ok());
+    const links = page.locator(selector).getByRole('link');
+    assert.equal(await links.count(), 4);
+    assert.equal(await page.locator(selector + ' a[aria-current="page"]').innerText(), current);
+    const link = page.locator(selector + ' a').nth(Object.keys(sportPaths).indexOf(sport));
+    await Promise.all([page.waitForURL(base + destination), link.click()]);
+   }
+  }
+ } finally { await page.close(); }
+}
+
 async function main(){
  const [site,output,before]=process.argv.slice(2);fs.mkdirSync(output,{recursive:true});
  const {server,base}=await serve(site);
@@ -12,6 +37,7 @@ async function main(){
  const results=[];
  const widths=(process.env.CATEGORY_WIDTHS||'1440,1024,768,430,390,320').split(',').map(Number);
  try{
+  await checkStaticSportLinks(browser, base, site);
   for(const width of widths)for(const sport of ['skate','ski','mtb','bmx']){
    console.log('Category navigation',sport,width);
    const page=await browser.newPage({viewport:{width,height:width===320?640:width===390?844:950}});const errors=[];
@@ -67,6 +93,14 @@ async function main(){
     await page.locator('#categoryToggle').click();await page.screenshot({path:path.join(output,`before-menu-${width}.png`)});
    }
    await page.goto(base+'/?sport='+sport);await ready();let child=await frame();await counts();
+   assert.equal(await page.locator('#sportTabs a[role="tab"]').count(),4);
+   assert.equal(await page.locator('#sport-'+sport).getAttribute('aria-current'),'page');
+   if(width===390){
+    const lines=await page.locator('.site-tagline').evaluate(node=>{
+     const range=document.createRange();range.selectNodeContents(node);return range.getClientRects().length;
+    });
+    assert.equal(lines,1,'tagline must fit on one line at 390px');
+   }
    // Every published Skate heading must survive both a menu pick and a fresh
    // deep link; in-page clicks alone can hide a broken URL decoder (#287).
    if(sport==='skate'&&[1440,390].includes(width)){
@@ -264,6 +298,7 @@ async function main(){
    await page.locator('#sport-'+next).click();await ready();await counts();
    assert(!(new URL(page.url())).searchParams.has('type'),'sport changes clear the category');
    assert.equal(await page.locator('#categoryPanel').isVisible(),false);
+   assert.equal(await page.locator('#sport-'+next).getAttribute('aria-current'),'page');
    assert.match(await page.locator('#categoryTitle').innerText(),new RegExp(next==='mtb'?'MTB':'Ski'));
    assert.deepEqual(errors,[]);
    results.push({sport,width,status:'pass'});fs.writeFileSync(path.join(output,'results.json'),JSON.stringify(results,null,2));await page.close();

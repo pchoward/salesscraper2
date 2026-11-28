@@ -22,7 +22,8 @@ async function main() {
                 const config = JSON.parse(json);
                 config.sports.push({id:'surf',label:'Surf',catalog:null,categories:[],facets:{}});
                 return open + JSON.stringify(config) + close;
-            });
+            }).replace('<div id="sportTabs" role="group" aria-label="Sports">',
+                '<div id="sportTabs" role="group" aria-label="Sports"><a id="sport-surf" href="?sport=surf">Surf</a>');
             await page.route('**/empty.html*', route => route.fulfill({contentType:'text/html',body:emptyHome}));
             async function frameInput(id, query) {
                 await page.waitForFunction(({id,query}) => document.getElementById('skateFrame').contentDocument?.getElementById(id)?.value === query, {id,query});
@@ -117,7 +118,7 @@ async function main() {
             await page.evaluate(() => document.getElementById('sportPanel').focus());
             await page.keyboard.press('/'); assert(await header.evaluate(node => document.activeElement === node));
             await page.goto(base + '/empty.html?sport=surf');
-            await page.locator('#comingSoon').waitFor();
+            await page.locator('#catalogUnavailable').waitFor();
             assert(await header.isDisabled());
             assert.equal(await header.inputValue(),'');
             await page.locator('#sport-skate').click();
