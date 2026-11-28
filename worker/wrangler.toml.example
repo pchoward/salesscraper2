@@ -29,6 +29,8 @@ MAX_ACTIVE_SUBSCRIBERS = "200"
 MAX_RULES_PER_SUBSCRIBER = "10"
 DAILY_EMAILS_PER_SUBSCRIBER = "3"
 CATALOG_SEARCH_ENABLED = "false"                     # opt-in live Catalog route; independent of alerts mode
+NEWSLETTER_INBOX = ""                                # e.g. "deals@shreddeals.com": store newsletters for the promo strip
+                                                     # (docs/newsletter-inbox.md); empty = off
 
 [[d1_databases]]
 binding = "DB"

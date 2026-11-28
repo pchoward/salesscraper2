@@ -21,7 +21,46 @@ permissions:
   contents: write
 
 jobs:
+  # Store newsletters (docs/newsletter-inbox.md): the only job holding the
+  # alerts secret. It downloads stored store mail from the Worker and hands it
+  # to the promo job as a file; it reads no store pages. Off until the
+  # repository variable NEWSLETTERS_ENABLED is 1.
+  newsletters:
+    if: vars.NEWSLETTERS_ENABLED == '1' || vars.NEWSLETTERS_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch store newsletters
+        run: python promos.py --fetch-newsletters
+        env:
+          NEWSLETTERS_ENABLED: ${{ vars.NEWSLETTERS_ENABLED }}
+          ALERTS_API_URL: ${{ vars.ALERTS_API_URL }}
+          ALERTS_HMAC_SECRET: ${{ secrets.ALERTS_HMAC_SECRET }}
+
+      - name: Hand the mail to the promo check
+        uses: actions/upload-artifact@v4
+        with:
+          name: newsletter-mail
+          path: newsletter_mail.json
+          retention-days: 1
+          if-no-files-found: ignore
+
   promos:
+    needs: newsletters
+    # Runs whether the newsletter job ran, was skipped or failed.
+    if: always()
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -38,6 +77,13 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Get the newsletter job's mail
+        if: needs.newsletters.result == 'success'
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: newsletter-mail
 
       - name: Check stores for promo codes
         run: python promos.py
