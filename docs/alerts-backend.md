@@ -235,3 +235,27 @@ No test sends email or touches the network. CI runs both.
 - **Resolving held deliveries:** a small owner CLI to review and resolve `uncertain` subscriber deliveries, on both the Worker rows and the route journal. Until it exists, a held delivery stays held. That is safe (no duplicates), but that watch stays quiet.
 - **Sneaker size rules** for subscribers, on searches and watches. The engine supports them; the subscriber schema leaves them out for now.
 - **Privacy note:** a short privacy page, linked from the form and the emails, written from the retention table above.
+
+
+## Deploying from GitHub Actions (2026-11-28)
+The **"Alerts - Deploy Worker"** workflow (`.github/workflows/deploy-worker.yml`)
+does what `./worker/deploy.sh` does, without a codespace. Run it by hand from
+main: Actions → Alerts - Deploy Worker → Run workflow.
+- **`dry_run` on (the default):** writes and shows `wrangler.toml` and checks
+  the build. It deploys nothing.
+- **`dry_run` off:** applies new D1 migrations, then deploys main, stamping
+  the commit into `/v1/health`.
+
+One-time setup:
+- **Secret `CLOUDFLARE_API_TOKEN`:** Cloudflare → My Profile → API Tokens →
+  template "Edit Cloudflare Workers", plus Account → D1 → Edit.
+- **Variable `CLOUDFLARE_ACCOUNT_ID`:** shown on the Workers overview page.
+- **Variable `ALERTS_API_URL`:** the Worker's `workers.dev` URL.
+- **Variable `WORKER_D1_ID`:** Cloudflare → D1 → `skatedeals-alerts` → Database ID.
+
+`wrangler.toml` is written by `worker/write_wrangler_toml.py` from those
+variables and its defaults. A deploy **replaces the Worker's plain variables**
+with these values, so any setting that differs from a default needs a
+repository variable `WORKER_<NAME>` (e.g. `WORKER_MODE=production`). Worker
+secrets (`HMAC_SECRET`, `TOKEN_PEPPER`, `RESEND_API_KEY`, ...) live on the
+Worker and a deploy keeps them.

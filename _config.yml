@@ -194,6 +194,7 @@ exclude:
   - "test_pack_features.py"
   - "test_newsletter_promos.py"
   - "test_stock_pacing.py"
+  - "test_deploy_worker.py"
   - "test_store_monitor_decisions.py"
   - "test_evo_skate.py"
   - "test_pack_size.py"
