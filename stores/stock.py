@@ -6,6 +6,7 @@ missing page, unreadble page) stays "no longer listed".
 """
 
 import logging
+import urllib.error
 import urllib.request
 
 from bs4 import BeautifulSoup
@@ -154,7 +155,80 @@ def mark_sold_out(items, store, rendered=False, fetch_static=None, fetch_rendere
     return items
 
 
-def confirm_stock(history, current_data, skip_keys=None):
+# Pacing for the stock check (store monitor, 2026-11-27): evo answered 429
+# "Too Many Requests" to product pages read ~75 ms apart, then refused the
+# MTB run's robots.txt (403), so all of evo's MTB listings were held. Each
+# store's pages are now spaced, capped per run and checked against its
+# robots.txt, and a store that says "slow down" (429/403) isn't asked again
+# this run.
+STOCK_DELAY = 1.5  # seconds between one store's product pages
+MAX_PER_STORE = 40  # product pages per store per run
+STOP_STATUSES = (403, 429)
+
+
+class _Refused(Exception):
+    pass
+
+
+def _fetch_checked(url, timeout=25):
+    """Page HTML, None when unreadable; raises _Refused on 429/403."""
+    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return response.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as exc:
+        if exc.code in STOP_STATUSES:
+            raise _Refused(exc.code) from None
+        logger.info("Stock page unavailable for %s: %s", url, exc)
+        return None
+    except Exception as exc:
+        logger.info("Stock page unavailable for %s: %s", url, exc)
+        return None
+
+
+def _host(url):
+    from urllib.parse import urlsplit
+    parts = urlsplit(url)
+    return f"{parts.scheme}://{parts.netloc}" if parts.scheme and parts.netloc else ""
+
+
+def polite_pages(urls, fetch=None, policy=None, sleep=None, delay=STOCK_DELAY, per_store=MAX_PER_STORE):
+    """{url: html or None} for ``urls``, store by store: robots.txt checked,
+    pages spaced and capped, and a store that refuses is left alone."""
+    import time as _time
+    from stores.shopify import _USER_AGENT as SHOP_AGENT, robots_policy
+    fetch = fetch or _fetch_checked
+    policy = policy or robots_policy
+    sleep = sleep or _time.sleep
+    by_host = {}
+    for url in urls:
+        by_host.setdefault(_host(url), []).append(url)
+    pages = {}
+    for host, wanted in by_host.items():
+        rules = policy(host) if host else None
+        if rules is None:
+            logger.info("Stock check: %s robots.txt unreadable; its pages not read", host or "(no host)")
+            continue
+        parser, crawl_delay = rules
+        read = 0
+        for url in wanted:
+            if read >= per_store:
+                logger.info("Stock check: %s capped at %s pages this run", host, per_store)
+                break
+            if not parser.can_fetch(SHOP_AGENT, url):
+                continue
+            if read:
+                sleep(max(delay, crawl_delay or 0))
+            try:
+                pages[url] = fetch(url)
+            except _Refused as refused:
+                logger.warning("Stock check: %s answered %s; no more of its pages this run", host, refused)
+                break
+            read += 1
+    return pages
+
+
+def confirm_stock(history, current_data, skip_keys=None, fetch=None, policy=None, sleep=None):
     """Set ``stock`` to ``out_of_stock`` only when the product page says so.
 
     Listings still in the catalog, under the two-miss line, or on a failed
@@ -197,15 +271,17 @@ def confirm_stock(history, current_data, skip_keys=None):
         return history
     logger.info("Checking product pages for %s listings missing twice", len(pending))
     rendered = []
+    static = []
     for url, entry in pending:
         store = entry.get("store") or ""
-        if "zumiez" in store.casefold():
-            rendered.append(url)
-            continue
-        status = stock_from_html(store, _fetch_static(url))
-        if status == "out_of_stock":
-            entry["stock"] = "out_of_stock"
-    pages = _fetch_rendered(rendered)
+        (rendered if "zumiez" in store.casefold() else static).append(url)
+    static_pages = polite_pages(static, fetch=fetch, policy=policy, sleep=sleep)
+    for url, entry in pending:
+        if url in static_pages:
+            status = stock_from_html(entry.get("store") or "", static_pages[url])
+            if status == "out_of_stock":
+                entry["stock"] = "out_of_stock"
+    pages = _fetch_rendered(rendered[:MAX_PER_STORE]) if rendered else {}
     for url, entry in pending:
         if url not in pages:
             continue

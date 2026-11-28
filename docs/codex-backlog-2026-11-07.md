@@ -483,3 +483,31 @@ Brand stays first, as it is today. Open/closed state and counts are unchanged.
   - Hide collapses the strip and a reload keeps it collapsed;
   - picking a store with no offer hides the strip, and picking CCS shows only CCS;
   - the overflow cue appears when the chips don't fit at 390 px.
+
+## 28. First impressions: real sport links, a tagline, link previews, no stale text (owner, 2026-11-28)
+**Why:** an outside review of shreddeals.com read the pages without running JavaScript, the way link previews and search bots do. It found:
+- the homepage's hidden "Coming soon / no catalog yet" section, whose wording ("Skate deals are available now while we add more sports") is out of date now that all four sports are live;
+- sport tabs that exist only after JavaScript runs (`<div id="sportTabs">` is empty in the HTML, and the `<noscript>` offers only "Open SkateDeals");
+- scaffolding text in the markup ("Loading catalog tools…", "Loading catalog…");
+- nothing that says what the site is: no tagline, and no meta description or link-preview tags on any page. The Skate page's title still says **"SkateDeals | <date>"** (old name); Ski, MTB and BMX say "ShredDeals <Sport> | <date>".
+
+**The owner wants to stay low-key for now.** Fix how the site reads to a first-time visitor and in a shared link, but add nothing that invites indexing: no sitemap, no structured data, no robots.txt changes.
+
+**Wanted:**
+1. **Sport tabs as real links.** `index.html` and each sport page carry the four sport tabs as plain `<a href>` links in the HTML (Skate → `sale_items_chart.html`, Ski → `ski/sale_items_chart.html`, and so on, relative to the page), with the current sport marked `aria-current="page"`. The existing JavaScript enhances them in place (same look, same behaviour, same URL parameters). Without JavaScript they still navigate.
+2. **Remove the stale "Coming soon" section** (`#comingSoon`, `#backToSkate`) and the JavaScript that shows it, or rewrite it as a neutral "This sport's catalog couldn't load. Try again" error state, if the code still needs a fallback. Replace the `<noscript>` text with links to all four sports.
+3. **A one-line tagline** on the homepage, above the catalog, small and quiet: *"Every shop's sale rack for skate, ski, bike and BMX, in one place."* One line on phones at 390 px; it must not push the first row of deals down noticeably.
+4. **Link previews:** on `index.html` and every sport page, add `<meta name="description">` plus `og:title`, `og:description`, `og:type=website` and `og:url`. Example for the Skate page: description "Skate decks, wheels, trucks, shoes and more on sale at skate shops, updated daily." Write a matching line per sport. No `og:image` yet (the owner can add one later).
+5. **Titles:** `page.py` line ~2123 builds `<title>{sport.brand} | {date}</title>`. Make every page read **"ShredDeals · Skate deals"**, "ShredDeals · Ski deals", "ShredDeals · MTB deals", "ShredDeals · BMX deals", and the homepage "ShredDeals · Gear on sale". Drop the date from the title (the page already shows "last scan"). Titles are not part of any URL, `localStorage` key or saved view, so old links are unaffected. Change only the visible title text; leave `sport.brand` wherever else it's used.
+6. **Status labels start empty.** `#myStuffStatus` ("Loading catalog tools…") and `#catalogLoading` text start empty or visually hidden, and JavaScript sets them when there's something to say. The loading skeleton itself can stay.
+
+**Not now (owner, 2026-11-28):** rendering the catalog directly on the homepage instead of in the `#skateFrame` iframe. That's what search traffic would need, and the owner will come back to it. Lazy-loading the My stuff drawer isn't worth it either (the homepage is ~6 KB).
+
+**Don't change:** URL parameters, `localStorage` keys, the saved-view format, or anything the existing navigation tests rely on.
+
+**Tests:**
+- **Python:** each built page has a `<meta name="description">`, the `og:` tags and the new title; Skate's title no longer contains "SkateDeals".
+- **Browser checks** (pattern: `ci/check_category_navigation.cjs`):
+  - with JavaScript disabled, the homepage and the MTB page show four working sport links;
+  - with JavaScript, tabs look and behave as today at desktop and 390 px;
+  - the "Coming soon" text appears nowhere in the HTML.

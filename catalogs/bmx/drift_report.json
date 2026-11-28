@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-27T09:07:15+00:00",
+  "checked_at": "2026-11-28T08:22:56+00:00",
   "counts": {
-    "action": 12,
+    "action": 13,
     "watch": 1
   },
-  "date": "2026-11-27",
+  "date": "2026-11-28",
   "findings": [
     {
       "key": "Fiend_Bikes",
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -19,7 +19,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -27,7 +27,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -35,7 +35,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -43,7 +43,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -51,7 +51,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -59,7 +59,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -67,7 +67,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -75,7 +75,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -83,7 +83,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -91,7 +91,7 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
@@ -99,17 +99,25 @@
       "kind": "held",
       "level": "action",
       "reason": "scrape_failed",
-      "runs": 2,
+      "runs": 3,
       "store": "Fiend"
     },
     {
       "key": "Tactics_Protection",
       "kind": "held",
-      "level": "watch",
+      "level": "action",
       "reason": "scrape_failed",
-      "runs": 1,
+      "runs": 2,
       "store": "Tactics"
+    },
+    {
+      "change": "rise",
+      "count": 190,
+      "kind": "volume",
+      "level": "watch",
+      "median": 90,
+      "store": "Albe's BMX"
     }
   ],
-  "last_scrape": "2026-11-27T08:36:06+00:00"
+  "last_scrape": "2026-11-28T07:50:39+00:00"
 }
