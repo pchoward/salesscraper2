@@ -33,26 +33,25 @@ conditions ("sale items", "full price") are taken from it, each checked
 against a strict pattern.
 
 ## Setup (owner)
-1. **Cloudflare dashboard** → shreddeals.com → **Email** → **Email Routing**:
-   enable it. Cloudflare adds the MX and SPF records. Then **Routing rules** →
-   **Create address**: `deals@shreddeals.com`, action **Send to a Worker**,
-   Worker `skatedeals-alerts`.
-2. **Worker settings:** in your private `worker/wrangler.toml`, under `[vars]`,
-   set `NEWSLETTER_INBOX = "deals@shreddeals.com"`. `HMAC_SECRET` must
-   already be set (`wrangler secret put HMAC_SECRET`, the same value as the
-   GitHub secret `ALERTS_HMAC_SECRET`).
-3. **Database:** `wrangler d1 migrations apply skatedeals-alerts --remote`
-   adds the `newsletters` table.
-4. **Deploy:** `./worker/deploy.sh`.
-5. **GitHub** → Settings → Secrets and variables → Actions:
-   - variable `NEWSLETTERS_ENABLED` = `1`
-   - variable `ALERTS_API_URL` = the Worker's URL (it may already be set)
-   - secret `ALERTS_HMAC_SECRET` (it may already be set)
+1. **Cloudflare Email Routing** (done 2026-11-28): enabled on shreddeals.com.
+   The old Resend receiving MX record was removed, since nothing used it;
+   Resend's sending records are unchanged. A catch-all forwards every other
+   address (alerts@ included) to the owner's inbox.
+2. **Routing rule:** `deals@shreddeals.com` first goes to **Send to an
+   email** (the owner's inbox), for the newsletter sign-ups and their
+   confirmation links. Then switch it to **Send to a Worker** →
+   `skatedeals-alerts`.
+3. **Worker secret:** Cloudflare → Workers & Pages → `skatedeals-alerts` →
+   Settings → Variables and Secrets → add secret `HMAC_SECRET` (32+ random
+   characters). Save the same value as the GitHub secret `ALERTS_HMAC_SECRET`.
+4. **Deploy** with the **"Alerts - Deploy Worker"** workflow (see
+   `docs/alerts-backend.md`). It writes `NEWSLETTER_INBOX` (default
+   `deals@shreddeals.com`), applies the `newsletters` migration and deploys.
+5. **GitHub variables:** `NEWSLETTERS_ENABLED` = `1`, and `ALERTS_API_URL`
+   = the Worker URL.
 6. **Sign `deals@shreddeals.com` up** for the newsletters of Jenson USA, Dan's
-   Comp and Competitive Cyclist. Owner-approved subscriptions only
-   (CLAUDE.md). Confirm each sign-up email: open the link from your normal
-   mail by forwarding a copy, or temporarily add a second routing rule to
-   your own address.
+   Comp and Competitive Cyclist. These are owner-approved subscriptions only
+   (CLAUDE.md).
 
 ## Adding a store
 Add its sending domain to `SENDERS` in `worker/src/newsletters.js` (redeploy),

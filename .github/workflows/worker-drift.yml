@@ -39,11 +39,11 @@ jobs:
           echo "Newest worker change on main: ${needed:0:12}"
           echo "Live Worker commit: ${live:-none}"
           if [ -z "$live" ]; then
-            echo "::error::The live Worker reports no commit. Redeploy with ./worker/deploy.sh."
+            echo "::error::The live Worker reports no commit. Redeploy: Actions -> \"Alerts - Deploy Worker\" (or ./worker/deploy.sh)."
             exit 1
           fi
           if ! git cat-file -e "${live}^{commit}" 2>/dev/null || ! git merge-base --is-ancestor "$needed" "$live"; then
-            echo "::error::The live Worker (${live}) is missing worker/ changes from main (${needed:0:12}). Redeploy with ./worker/deploy.sh."
+            echo "::error::The live Worker (${live}) is missing worker/ changes from main (${needed:0:12}). Redeploy: Actions -> \"Alerts - Deploy Worker\" (or ./worker/deploy.sh)."
             exit 1
           fi
           echo "The live Worker includes every worker/ change on main."
